@@ -1232,9 +1232,9 @@
         <div class="form-group">
           <label>图片生成模型</label>
           <select id="settings-model" class="form-control">
-            <option value="gemini-2.0-flash-exp">gemini-2.0-flash-exp（推荐）</option>
-            <option value="gemini-2.0-flash">gemini-2.0-flash</option>
-            <option value="gemini-1.5-flash">gemini-1.5-flash</option>
+            <option value="gemini-2.5-flash">gemini-2.5-flash（推荐）</option>
+            <option value="gemini-2.5-pro">gemini-2.5-pro</option>
+            <option value="gemini-2.0-flash-lite">gemini-2.0-flash-lite</option>
           </select>
         </div>
         <div class="form-group">
@@ -1270,7 +1270,7 @@
 
     // Gemini 设置
     function getGeminiKey() { return localStorage.getItem('xhs_gemini_key') || ''; }
-    function getGeminiModel() { return localStorage.getItem('xhs_gemini_model') || 'gemini-2.0-flash-exp'; }
+    function getGeminiModel() { return localStorage.getItem('xhs_gemini_model') || 'gemini-2.5-flash'; }
     function getImageStyle() { return localStorage.getItem('xhs_image_style') || 'xiaohongshu'; }
 
     const categoryColors = {

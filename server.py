@@ -9,10 +9,17 @@ import http.server
 import json
 import sqlite3
 import os
+import sys
 import random
 import urllib.parse
 from datetime import datetime, timedelta
 from pathlib import Path
+
+# Fix Windows GBK console encoding for emoji
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 # ============ 配置 ============
 PORT = 3000
@@ -827,15 +834,15 @@ def main():
     
     server = http.server.HTTPServer(('0.0.0.0', PORT), APIHandler)
     
-    print(f"\n🌸 小红书情感账号管理平台已启动")
-    print(f"📍 访问地址: http://localhost:{PORT}")
-    print(f"📊 API地址: http://localhost:{PORT}/api")
-    print(f"💡 按 Ctrl+C 停止服务\n")
+    print(f"\n[*] XHS Emotion Platform started")
+    print(f"[*] URL: http://localhost:{PORT}")
+    print(f"[*] API: http://localhost:{PORT}/api")
+    print(f"[*] Press Ctrl+C to stop\n")
     
     try:
         server.serve_forever()
     except KeyboardInterrupt:
-        print("\n👋 服务已停止")
+        print("\n[*] Server stopped")
         server.server_close()
 
 if __name__ == '__main__':
