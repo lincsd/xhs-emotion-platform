@@ -414,6 +414,137 @@
     .preview-info .preview-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; }
     .preview-info .preview-tags { font-size: 12px; color: var(--info); }
 
+    /* ===== 账号包装 ===== */
+    .branding-preview-card {
+      width: 320px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .branding-banner {
+      height: 140px;
+      position: relative;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      overflow: hidden;
+    }
+
+    .branding-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .branding-avatar-wrap {
+      position: relative;
+      margin-top: -40px;
+      padding: 0 18px;
+    }
+
+    .branding-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 4px solid white;
+      background: linear-gradient(135deg, #ffd1dc 0%, #fff1f3 100%);
+      overflow: hidden;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+
+    .branding-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .branding-profile-body {
+      padding: 12px 18px 18px;
+    }
+
+    .branding-name {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .branding-bio {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.7;
+      white-space: pre-wrap;
+      margin-bottom: 12px;
+    }
+
+    .branding-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .branding-metrics > div {
+      background: #fafafa;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .branding-chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .branding-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #fff1f3;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .branding-image-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .branding-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .branding-gallery-item {
+      background: #fafafa;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .branding-gallery-item img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
     /* ===== 配图画廊 ===== */
     .content-images-gallery {
       display: grid;
@@ -721,6 +852,9 @@
       </div>
       <div class="nav-group">
         <div class="nav-group-title">工具</div>
+        <div class="nav-item" data-page="branding">
+          <span class="icon">🎀</span> 账号包装
+        </div>
         <div class="nav-item" data-page="account">
           <span class="icon">📈</span> 账号数据
         </div>
@@ -1009,6 +1143,157 @@
 
         <h3 style="margin-bottom:16px;">💡 变现策略</h3>
         <div class="strategy-grid" id="strategy-grid"></div>
+      </section>
+
+      <!-- ===== 账号数据 ===== -->
+      <section id="page-branding" class="page hidden">
+        <div class="page-header">
+          <div>
+            <h2>🎀 账号包装</h2>
+            <p class="subtitle">一键生成小红书账号名称、简介、头像和首页封面图</p>
+          </div>
+        </div>
+
+        <div class="content-split">
+          <div>
+            <div class="card">
+              <h3 style="margin-bottom:16px;">生成设置</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>账号定位</label>
+                  <input type="text" id="branding-niche" class="form-control" placeholder="例如：治愈系情感 / 女性成长 / 清醒恋爱观">
+                </div>
+                <div class="form-group">
+                  <label>目标人群</label>
+                  <input type="text" id="branding-audience" class="form-control" placeholder="例如：20-35岁女生、失恋恢复期、想提升内核的人群">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>人设气质</label>
+                  <input type="text" id="branding-persona" class="form-control" placeholder="例如：温柔知性、清醒通透、像深夜陪伴型朋友">
+                </div>
+                <div class="form-group">
+                  <label>核心关键词</label>
+                  <input type="text" id="branding-keywords" class="form-control" placeholder="例如：治愈,清醒,边界感,成长,温柔坚定">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>名称风格</label>
+                  <select id="branding-name-style" class="form-control">
+                    <option value="温柔治愈">温柔治愈</option>
+                    <option value="高级故事感">高级故事感</option>
+                    <option value="简短好记">简短好记</option>
+                    <option value="有记忆点" selected>有记忆点</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>视觉风格</label>
+                  <select id="branding-image-style" class="form-control">
+                    <option value="xiaohongshu">小红书情感风格</option>
+                    <option value="minimalist">极简文艺风</option>
+                    <option value="watercolor">水彩插画风</option>
+                    <option value="gradient">渐变文字风</option>
+                    <option value="photo">治愈摄影风</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="btn-group">
+                <button class="btn btn-primary" id="branding-generate-btn" onclick="generateBrandingPackage()">✨ 生成账号包装</button>
+                <button class="btn btn-outline" onclick="loadBrandingPage()">↻ 读取上次结果</button>
+              </div>
+              <div id="branding-progress" style="display:none; margin-top:12px;"></div>
+              <div style="margin-top:10px; font-size:12px; color:var(--text-light);">会生成：账号名称、备选名称、简介、定位、内容栏目、头像图、首页封面图。</div>
+            </div>
+
+            <div class="card" id="branding-results" style="display:none;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; gap:12px; flex-wrap:wrap;">
+                <h3>📦 生成结果</h3>
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-outline" onclick="copyBrandingText('all')">📋 复制整套文案</button>
+                  <button class="btn btn-sm btn-outline" onclick="downloadBrandingAsset('avatar')">🖼️ 下载头像</button>
+                  <button class="btn btn-sm btn-outline" onclick="downloadBrandingAsset('banner')">🌄 下载封面</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>账号名称</label>
+                <div id="branding-result-name" style="font-size:22px; font-weight:700; color:var(--primary);"></div>
+              </div>
+
+              <div class="form-group">
+                <label>备选名称</label>
+                <div class="branding-chip-list" id="branding-alt-names"></div>
+              </div>
+
+              <div class="form-group">
+                <label>账号简介</label>
+                <div id="branding-result-bio" style="white-space:pre-wrap; line-height:1.8; font-size:14px;"></div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>账号定位</label>
+                  <div id="branding-result-positioning" style="line-height:1.8;"></div>
+                </div>
+                <div class="form-group">
+                  <label>主页封面文案</label>
+                  <div id="branding-result-cover-text" style="line-height:1.8;"></div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>内容栏目建议</label>
+                <div class="branding-chip-list" id="branding-content-columns"></div>
+              </div>
+
+              <div class="branding-gallery">
+                <div class="branding-gallery-item">
+                  <div style="font-size:13px; font-weight:600;">头像图</div>
+                  <img id="branding-avatar-result" style="display:none; aspect-ratio:1/1;" alt="账号头像图">
+                  <div id="branding-avatar-empty" style="margin-top:8px; font-size:12px; color:var(--text-light);">等待生成头像</div>
+                </div>
+                <div class="branding-gallery-item">
+                  <div style="font-size:13px; font-weight:600;">首页封面图</div>
+                  <img id="branding-banner-result" style="display:none; aspect-ratio:16/9;" alt="账号封面图">
+                  <div id="branding-banner-empty" style="margin-top:8px; font-size:12px; color:var(--text-light);">等待生成封面</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="position:sticky; top:24px; align-self:start;">
+            <h3 style="margin-bottom:12px;">📱 账号主页预览</h3>
+            <div class="branding-preview-card">
+              <div class="branding-banner" id="branding-preview-banner">
+                <img id="branding-preview-banner-img" style="display:none;" alt="主页封面预览">
+              </div>
+              <div class="branding-avatar-wrap">
+                <div class="branding-avatar" id="branding-preview-avatar"><span id="branding-preview-avatar-fallback">🌸</span><img id="branding-preview-avatar-img" style="display:none;" alt="头像预览"></div>
+              </div>
+              <div class="branding-profile-body">
+                <div class="branding-name" id="branding-preview-name">你的账号名称</div>
+                <div class="branding-bio" id="branding-preview-bio">这里会展示账号简介、价值主张和吸引粉丝关注的话术。</div>
+                <div class="branding-metrics">
+                  <div><div style="font-size:18px; font-weight:700;">128</div><div style="font-size:11px; color:var(--text-light);">关注</div></div>
+                  <div><div style="font-size:18px; font-weight:700;">8.6w</div><div style="font-size:11px; color:var(--text-light);">粉丝</div></div>
+                  <div><div style="font-size:18px; font-weight:700;">32.8w</div><div style="font-size:11px; color:var(--text-light);">获赞收藏</div></div>
+                </div>
+                <div class="branding-chip-list" id="branding-preview-columns">
+                  <span class="branding-chip">治愈语录</span>
+                  <span class="branding-chip">清醒成长</span>
+                  <span class="branding-chip">关系边界</span>
+                </div>
+                <div class="branding-image-actions">
+                  <button class="btn btn-sm btn-outline" onclick="copyBrandingText('bio')">复制简介</button>
+                  <button class="btn btn-sm btn-outline" onclick="copyBrandingText('name')">复制名称</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ===== 账号数据 ===== -->
@@ -2261,6 +2546,18 @@ Style: ${stylePrompt}
       } catch { return []; }
     }
 
+    function getBrandingPack() {
+      try {
+        return JSON.parse(localStorage.getItem('xhs_branding_pack') || 'null');
+      } catch {
+        return null;
+      }
+    }
+
+    function saveBrandingPack(pack) {
+      localStorage.setItem('xhs_branding_pack', JSON.stringify(pack));
+    }
+
     function savePostContentImages(postId, images) {
       try {
         const store = JSON.parse(localStorage.getItem('xhs_post_content_images') || '{}');
@@ -2345,6 +2642,210 @@ Style: ${stylePrompt}
       } catch (e) {
         const errMsg = e.data?.error?.message || e.message || '图片生成失败';
         statusEl.innerHTML = `<span style="color:#ff4d4f;">❌ ${errMsg}</span>`;
+      }
+    }
+
+    function renderBrandingPackage(pack) {
+      if (!pack) return;
+
+      document.getElementById('branding-results').style.display = 'block';
+      document.getElementById('branding-result-name').textContent = pack.account_name || '-';
+      document.getElementById('branding-result-bio').textContent = pack.bio || '-';
+      document.getElementById('branding-result-positioning').textContent = pack.positioning || '-';
+      document.getElementById('branding-result-cover-text').textContent = pack.home_cover_text || '-';
+
+      const altNames = Array.isArray(pack.alt_names) ? pack.alt_names : [];
+      document.getElementById('branding-alt-names').innerHTML = altNames.length
+        ? altNames.map(name => `<span class="branding-chip">${_escapeHtml(name)}</span>`).join('')
+        : '<span style="font-size:12px; color:var(--text-light);">暂无备选名称</span>';
+
+      const columns = Array.isArray(pack.content_columns) ? pack.content_columns : [];
+      document.getElementById('branding-content-columns').innerHTML = columns.length
+        ? columns.map(name => `<span class="branding-chip">${_escapeHtml(name)}</span>`).join('')
+        : '<span style="font-size:12px; color:var(--text-light);">暂无栏目建议</span>';
+
+      document.getElementById('branding-preview-name').textContent = pack.account_name || '你的账号名称';
+      document.getElementById('branding-preview-bio').textContent = pack.bio || '这里会展示账号简介、价值主张和吸引粉丝关注的话术。';
+      document.getElementById('branding-preview-columns').innerHTML = columns.length
+        ? columns.slice(0, 3).map(name => `<span class="branding-chip">${_escapeHtml(name)}</span>`).join('')
+        : '<span class="branding-chip">治愈表达</span>';
+
+      const avatarImg = document.getElementById('branding-preview-avatar-img');
+      const avatarFallback = document.getElementById('branding-preview-avatar-fallback');
+      const avatarResult = document.getElementById('branding-avatar-result');
+      const avatarEmpty = document.getElementById('branding-avatar-empty');
+      if (pack.avatar_image) {
+        avatarImg.src = pack.avatar_image;
+        avatarImg.style.display = 'block';
+        avatarFallback.style.display = 'none';
+        avatarImg.onclick = function() { openImageLightbox(this.src); };
+        avatarResult.src = pack.avatar_image;
+        avatarResult.style.display = 'block';
+        avatarResult.onclick = function() { openImageLightbox(this.src); };
+        avatarEmpty.style.display = 'none';
+      } else {
+        avatarImg.style.display = 'none';
+        avatarFallback.style.display = 'inline';
+        avatarResult.style.display = 'none';
+        avatarEmpty.style.display = 'block';
+      }
+
+      const bannerImg = document.getElementById('branding-preview-banner-img');
+      const bannerResult = document.getElementById('branding-banner-result');
+      const bannerEmpty = document.getElementById('branding-banner-empty');
+      if (pack.banner_image) {
+        bannerImg.src = pack.banner_image;
+        bannerImg.style.display = 'block';
+        bannerImg.onclick = function() { openImageLightbox(this.src); };
+        bannerResult.src = pack.banner_image;
+        bannerResult.style.display = 'block';
+        bannerResult.onclick = function() { openImageLightbox(this.src); };
+        bannerEmpty.style.display = 'none';
+      } else {
+        bannerImg.style.display = 'none';
+        bannerResult.style.display = 'none';
+        bannerEmpty.style.display = 'block';
+      }
+    }
+
+    function loadBrandingPage() {
+      const pack = getBrandingPack();
+      if (pack) renderBrandingPackage(pack);
+      const styleEl = document.getElementById('branding-image-style');
+      if (styleEl) styleEl.value = getImageStyle();
+    }
+
+    function _downloadDataUrl(dataUrl, filename) {
+      if (!dataUrl) return;
+      const a = document.createElement('a');
+      a.href = dataUrl;
+      a.download = filename;
+      a.click();
+    }
+
+    function downloadBrandingAsset(type) {
+      const pack = getBrandingPack();
+      if (!pack) { toast('暂无可下载内容', 'error'); return; }
+      if (type === 'avatar') {
+        if (!pack.avatar_image) return toast('暂无头像图', 'error');
+        _downloadDataUrl(pack.avatar_image, `avatar_${(pack.account_name || 'xhs').replace(/\s+/g, '_')}.png`);
+      } else {
+        if (!pack.banner_image) return toast('暂无封面图', 'error');
+        _downloadDataUrl(pack.banner_image, `banner_${(pack.account_name || 'xhs').replace(/\s+/g, '_')}.png`);
+      }
+    }
+
+    async function copyBrandingText(type) {
+      const pack = getBrandingPack();
+      if (!pack) { toast('暂无可复制内容', 'error'); return; }
+
+      let text = '';
+      if (type === 'name') {
+        text = pack.account_name || '';
+      } else if (type === 'bio') {
+        text = pack.bio || '';
+      } else {
+        text = `【账号名称】${pack.account_name || ''}\n\n【备选名称】${(pack.alt_names || []).join(' / ')}\n\n【账号简介】\n${pack.bio || ''}\n\n【账号定位】${pack.positioning || ''}\n\n【主页封面文案】${pack.home_cover_text || ''}\n\n【内容栏目】${(pack.content_columns || []).join('、')}`;
+      }
+
+      await navigator.clipboard.writeText(text);
+      toast('已复制', 'success');
+    }
+
+    async function generateBrandingPackage() {
+      if (!canUseAI()) {
+        toast('请先在 API 设置中配置代理地址或 API Key', 'error');
+        return;
+      }
+
+      const niche = document.getElementById('branding-niche').value.trim() || '小红书情感成长账号';
+      const audience = document.getElementById('branding-audience').value.trim() || '20-35岁希望被治愈、获得情绪价值和成长启发的女生';
+      const persona = document.getElementById('branding-persona').value.trim() || '温柔但有边界感，像一个清醒又会共情的朋友';
+      const keywords = document.getElementById('branding-keywords').value.trim() || '治愈,成长,边界感,清醒,温柔坚定';
+      const nameStyle = document.getElementById('branding-name-style').value;
+      const imageStyle = document.getElementById('branding-image-style').value;
+      const stylePrompt = IMAGE_STYLE_PROMPTS[imageStyle] || IMAGE_STYLE_PROMPTS.xiaohongshu;
+
+      const btn = document.getElementById('branding-generate-btn');
+      const progressEl = document.getElementById('branding-progress');
+      btn.disabled = true;
+
+      try {
+        updateGenProgress(progressEl, '✍️ 正在生成账号名称、简介和定位...', 15);
+        btn.textContent = '✍️ 生成文案中...';
+
+        const prompt = `你是一位顶级小红书账号操盘手，专门给情感成长类账号做包装定位。
+
+请基于以下信息，生成一套完整的小红书账号包装方案：
+
+账号定位：${niche}
+目标人群：${audience}
+人设气质：${persona}
+核心关键词：${keywords}
+名称风格：${nameStyle}
+
+要求：
+1. 账号名称必须适合小红书，简洁、有记忆点、有点击感，不能土
+2. 简介必须像真实小红书博主主页简介，精炼、有温度、有关注理由
+3. 输出 4 个备选名称
+4. 提供明确的定位描述
+5. 给出 4 个适合长期更新的内容栏目
+6. 给出一句适合首页封面的短文案（6-14字）
+7. 额外给出头像图提示词和首页封面图提示词，用于 AI 生图
+
+请严格输出合法 JSON，不要输出其他内容：
+{
+  "account_name": "主账号名称",
+  "alt_names": ["备选1", "备选2", "备选3", "备选4"],
+  "bio": "主页简介",
+  "positioning": "一句话定位",
+  "content_columns": ["栏目1", "栏目2", "栏目3", "栏目4"],
+  "home_cover_text": "首页封面短句",
+  "avatar_prompt": "头像图提示词",
+  "banner_prompt": "首页封面图提示词"
+}`;
+
+        const payload = {
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { temperature: 0.9, topP: 0.95, maxOutputTokens: 4096 }
+        };
+
+        const result = await callGeminiAPI(getGeminiKey(), getGeminiModel(), payload);
+        let pack = _extractJsonFromText(result.data.candidates?.[0]?.content?.parts?.[0]?.text || '{}');
+
+        updateGenProgress(progressEl, '🖼️ 正在生成头像图...', 45);
+        btn.textContent = '🖼️ 生成头像中...';
+        const avatarPrompt = `${pack.avatar_prompt || ''}\n风格要求：${stylePrompt}\n小红书情感成长账号头像，正方形构图，适合女性情感成长赛道，高级、干净、有记忆点，无文字，适合做账号头像。`;
+        const avatarImage = await generateSingleImage(avatarPrompt);
+
+        updateGenProgress(progressEl, '🌄 正在生成首页封面图...', 75);
+        btn.textContent = '🌄 生成封面中...';
+        const bannerPrompt = `${pack.banner_prompt || ''}\n风格要求：${stylePrompt}\n为小红书个人主页顶部封面生成横版视觉图，宽屏构图，治愈、高级、统一审美，无文字，适合作为情感成长类账号主页封面。`;
+        const bannerImage = await generateSingleImage(bannerPrompt);
+
+        pack = {
+          ...pack,
+          niche,
+          audience,
+          persona,
+          keywords,
+          image_style: imageStyle,
+          avatar_image: avatarImage,
+          banner_image: bannerImage,
+          updated_at: new Date().toISOString()
+        };
+
+        saveBrandingPack(pack);
+        renderBrandingPackage(pack);
+        updateGenProgress(progressEl, '✅ 账号包装生成完成！', 100);
+        toast('账号包装已生成', 'success');
+      } catch (e) {
+        const err = e.data?.error?.message || e.message || '生成失败';
+        updateGenProgress(progressEl, '❌ ' + err, 0);
+        toast('账号包装生成失败: ' + err, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '✨ 生成账号包装';
       }
     }
 
@@ -2436,6 +2937,7 @@ Style: ${stylePrompt}
       
       switch(page) {
         case 'dashboard': loadDashboard(); break;
+        case 'branding': loadBrandingPage(); break;
         case 'posts': loadPosts(); break;
         case 'calendar': loadCalendar(); break;
         case 'income': loadIncome(); break;
@@ -2445,7 +2947,9 @@ Style: ${stylePrompt}
     }
 
     document.querySelectorAll('.nav-item').forEach(item => {
-      item.addEventListener('click', () => switchPage(item.dataset.page));
+      if (item.dataset.page) {
+        item.addEventListener('click', () => switchPage(item.dataset.page));
+      }
     });
 
     // ============ 模态框 ============
