@@ -693,6 +693,11 @@
           <span class="icon">📈</span> 账号数据
         </div>
       </div>
+      <div class="nav-group" style="margin-top:auto; border-top:1px solid rgba(255,255,255,0.1); padding-top:12px;">
+        <div class="nav-item" onclick="openModal('modal-settings')" style="cursor:pointer;">
+          <span class="icon">⚙️</span> API 设置
+        </div>
+      </div>
     </aside>
 
     <!-- ===== 主内容区 ===== -->
@@ -798,6 +803,12 @@
                 <label>
                   <input type="checkbox" id="gen-auto-save" checked style="accent-color: var(--primary);">
                   自动保存到草稿箱
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" id="gen-with-image" checked style="accent-color: var(--primary);">
+                  🎨 AI 生成封面图（需配置 Gemini API Key）
                 </label>
               </div>
               <button class="btn btn-primary" onclick="generatePosts()" id="gen-btn">
@@ -1188,13 +1199,56 @@
               <div class="preview-cover cover-bg-1" id="view-cover" style="height:200px; font-size:18px;">
                 <span id="view-cover-text"></span>
               </div>
+              <img id="view-cover-img" style="display:none; width:200px; height:200px; object-fit:cover; border-radius:12px;">
             </div>
             <div style="margin-top:16px;">
               <button class="btn btn-sm btn-outline" onclick="copyPostContent()" style="width:100%; margin-bottom:6px;">📋 复制内容</button>
+              <button class="btn btn-sm btn-outline" onclick="downloadPostImage()" style="width:100%; margin-bottom:6px;">🖼️ 下载封面图</button>
               <button class="btn btn-sm btn-outline" onclick="exportCurrentPost()" style="width:100%;">📥 导出文件</button>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 模态框：API设置 ===== -->
+  <div class="modal-overlay" id="modal-settings">
+    <div class="modal" style="max-width:520px;">
+      <div class="modal-header">
+        <h3>⚙️ API 设置</h3>
+        <button class="modal-close" onclick="closeModal('modal-settings')">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom:16px; color:var(--text-light); font-size:13px;">配置 Gemini API Key 后可使用 AI 自动生成封面图片。API Key 仅保存在浏览器本地，不会上传到任何服务器。</p>
+        <div class="form-group">
+          <label>Gemini API Key</label>
+          <input type="password" id="settings-api-key" class="form-control" placeholder="输入你的 Gemini API Key">
+          <small style="color:var(--text-light);display:block;margin-top:4px;">获取地址: <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--info);">aistudio.google.com/apikey</a></small>
+        </div>
+        <div class="form-group">
+          <label>图片生成模型</label>
+          <select id="settings-model" class="form-control">
+            <option value="gemini-2.0-flash-exp">gemini-2.0-flash-exp（推荐）</option>
+            <option value="gemini-2.0-flash">gemini-2.0-flash</option>
+            <option value="gemini-1.5-flash">gemini-1.5-flash</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>图片风格</label>
+          <select id="settings-style" class="form-control">
+            <option value="xiaohongshu">小红书情感风格（默认）</option>
+            <option value="minimalist">极简文艺风</option>
+            <option value="watercolor">水彩插画风</option>
+            <option value="gradient">渐变文字风</option>
+            <option value="photo">治愈摄影风</option>
+          </select>
+        </div>
+        <div id="settings-status" style="margin-top:12px;"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="testGeminiKey()">🔍 测试连接</button>
+        <button class="btn btn-primary" onclick="saveSettings()">保存设置</button>
       </div>
     </div>
   </div>
@@ -1210,6 +1264,11 @@
     let currentMonth = new Date();
     let generatedPostIds = [];
     let currentViewPost = null;
+
+    // Gemini 设置
+    function getGeminiKey() { return localStorage.getItem('xhs_gemini_key') || ''; }
+    function getGeminiModel() { return localStorage.getItem('xhs_gemini_model') || 'gemini-2.0-flash-exp'; }
+    function getImageStyle() { return localStorage.getItem('xhs_image_style') || 'xiaohongshu'; }
 
     const categoryColors = {
       '治愈': '#FFB6C1', '成长': '#90EE90', '爱情': '#FF69B4',
@@ -1497,6 +1556,157 @@
       return { error: 'Unknown route' };
     }
 
+    // ============ Gemini 图片生成 ============
+    const IMAGE_STYLE_PROMPTS = {
+      xiaohongshu: '小红书风格封面图，柔和的色调，文艺感，适合情感类账号，干净简约的背景，有质感的排版',
+      minimalist: '极简主义风格，大面积留白，简约线条，高级感，文艺气息',
+      watercolor: '水彩风格插画，柔和的色彩晕染，梦幻感，温暖治愈',
+      gradient: '渐变色背景，现代设计感，文字居中，简约大气',
+      photo: '治愈系摄影风格，自然光线，温暖色调，生活感'
+    };
+
+    async function generateCoverImage(post) {
+      const apiKey = getGeminiKey();
+      if (!apiKey) return null;
+
+      const model = getGeminiModel();
+      const style = getImageStyle();
+      const stylePrompt = IMAGE_STYLE_PROMPTS[style] || IMAGE_STYLE_PROMPTS.xiaohongshu;
+
+      const prompt = `Generate a beautiful cover image for a Chinese social media post (Xiaohongshu/小红书 style).
+
+Category: ${post.category}
+Cover text: ${post.cover_text}
+Title: ${post.title}
+
+Style requirements: ${stylePrompt}
+
+Important: 
+- The image should be vertical/portrait orientation (3:4 ratio), suitable for a phone screen
+- Include the Chinese text "${post.cover_text}" as the main visual text element on the image, rendered beautifully
+- The overall mood should match the "${post.category}" (emotional) category
+- Make it visually appealing and Instagram/Xiaohongshu worthy
+- Clean, high-quality design`;
+
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { responseModalities: ['TEXT', 'IMAGE'] }
+          })
+        });
+
+        if (!response.ok) {
+          const err = await response.json();
+          console.warn('Gemini API error:', err);
+          return null;
+        }
+
+        const data = await response.json();
+        // Extract image from response
+        if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+          const parts = data.candidates[0].content.parts || [];
+          for (const part of parts) {
+            if (part.inlineData && part.inlineData.mimeType && part.inlineData.data) {
+              return `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
+            }
+          }
+        }
+        return null;
+      } catch (e) {
+        console.warn('Image generation failed:', e);
+        return null;
+      }
+    }
+
+    // 批量生成图片（带进度回调）
+    async function generateImagesForPosts(posts, onProgress) {
+      const results = [];
+      for (let i = 0; i < posts.length; i++) {
+        if (onProgress) onProgress(i + 1, posts.length);
+        try {
+          const imageUrl = await generateCoverImage(posts[i]);
+          results.push(imageUrl);
+          if (imageUrl && posts[i].id) {
+            // 保存图片到 post
+            const imgStore = JSON.parse(localStorage.getItem('xhs_post_images') || '{}');
+            imgStore[posts[i].id] = imageUrl;
+            localStorage.setItem('xhs_post_images', JSON.stringify(imgStore));
+          }
+        } catch {
+          results.push(null);
+        }
+        // 避免 API 限流，间隔 1 秒
+        if (i < posts.length - 1) await new Promise(r => setTimeout(r, 1000));
+      }
+      return results;
+    }
+
+    function getPostImage(postId) {
+      try {
+        const store = JSON.parse(localStorage.getItem('xhs_post_images') || '{}');
+        return store[postId] || null;
+      } catch { return null; }
+    }
+
+    function savePostImage(postId, dataUrl) {
+      try {
+        const store = JSON.parse(localStorage.getItem('xhs_post_images') || '{}');
+        store[postId] = dataUrl;
+        localStorage.setItem('xhs_post_images', JSON.stringify(store));
+      } catch {}
+    }
+
+    // ============ 设置功能 ============
+    function openSettingsModal() {
+      document.getElementById('settings-api-key').value = getGeminiKey();
+      document.getElementById('settings-model').value = getGeminiModel();
+      document.getElementById('settings-style').value = getImageStyle();
+      document.getElementById('settings-status').innerHTML = '';
+      openModal('modal-settings');
+    }
+
+    function saveSettings() {
+      const key = document.getElementById('settings-api-key').value.trim();
+      const model = document.getElementById('settings-model').value;
+      const style = document.getElementById('settings-style').value;
+      if (key) localStorage.setItem('xhs_gemini_key', key);
+      else localStorage.removeItem('xhs_gemini_key');
+      localStorage.setItem('xhs_gemini_model', model);
+      localStorage.setItem('xhs_image_style', style);
+      toast('设置已保存', 'success');
+      closeModal('modal-settings');
+    }
+
+    async function testGeminiKey() {
+      const key = document.getElementById('settings-api-key').value.trim();
+      const model = document.getElementById('settings-model').value;
+      const statusEl = document.getElementById('settings-status');
+      if (!key) { statusEl.innerHTML = '<span style="color:#ff4d4f;">❌ 请先输入 API Key</span>'; return; }
+      statusEl.innerHTML = '<span style="color:var(--info);">⏳ 测试中...</span>';
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: 'Say hello in one word' }] }]
+          })
+        });
+        if (res.ok) {
+          statusEl.innerHTML = '<span style="color:var(--success);">✅ 连接成功！API Key 有效</span>';
+        } else {
+          const err = await res.json();
+          statusEl.innerHTML = `<span style="color:#ff4d4f;">❌ ${err.error?.message || '连接失败'}</span>`;
+        }
+      } catch (e) {
+        statusEl.innerHTML = `<span style="color:#ff4d4f;">❌ 网络错误: ${e.message}</span>`;
+      }
+    }
+
     function formatDate(d) {
       if (!d) return '-';
       return d.replace('T', ' ').slice(0, 16);
@@ -1588,10 +1798,11 @@
       const category = document.getElementById('gen-category').value;
       const count = document.getElementById('gen-count').value;
       const autoSave = document.getElementById('gen-auto-save').checked;
+      const withImage = document.getElementById('gen-with-image').checked;
 
       const btn = document.getElementById('gen-btn');
       btn.disabled = true;
-      btn.textContent = '⏳ 生成中...';
+      btn.textContent = '⏳ 生成文案中...';
 
       try {
         const data = await api('/api/generate', {
@@ -1601,46 +1812,96 @@
 
         generatedPostIds = data.posts.map(p => p.id).filter(Boolean);
 
-        const listHtml = data.posts.map((p, i) => `
-          <div class="post-list-item" onclick="previewPost(${JSON.stringify(p).replace(/"/g, '&quot;')})" style="cursor:pointer;">
-            <div class="post-info">
-              <div class="post-title">${p.title}</div>
-              <div class="post-meta">
-                ${catTag(p.category)}
-                <span>${p.tags}</span>
-              </div>
-              <div style="margin-top:8px; font-size:13px; color:#666; white-space:pre-wrap; max-height:60px; overflow:hidden;">
-                ${p.content.slice(0, 100)}...
-              </div>
-            </div>
-            <div class="post-actions">
-              ${p.id ? `
-                <button class="btn btn-sm btn-outline" onclick="event.stopPropagation(); openEditPost(${p.id})">✏️</button>
-                <button class="btn btn-sm btn-outline" onclick="event.stopPropagation(); viewPost(${p.id})">👁️</button>
-              ` : ''}
-            </div>
-          </div>
-        `).join('');
-
-        document.getElementById('gen-list').innerHTML = listHtml;
+        // 先显示文案结果
+        renderGeneratedList(data.posts);
         document.getElementById('gen-results').style.display = 'block';
-
         if (data.posts.length > 0) previewPost(data.posts[0]);
+        toast(`成功生成 ${data.posts.length} 条笔记文案！`, 'success');
 
-        toast(`成功生成 ${data.posts.length} 条笔记！`, 'success');
+        // 如果启用了图片生成
+        if (withImage && getGeminiKey()) {
+          btn.textContent = '🎨 生成封面图中...';
+          const images = await generateImagesForPosts(data.posts, (current, total) => {
+            btn.textContent = `🎨 生成封面图 ${current}/${total}...`;
+          });
+
+          // 更新帖子数据中的图片
+          data.posts.forEach((p, i) => {
+            if (images[i]) {
+              p.cover_image = images[i];
+              if (p.id) savePostImage(p.id, images[i]);
+            }
+          });
+
+          // 重新渲染列表
+          renderGeneratedList(data.posts);
+          if (data.posts.length > 0) previewPost(data.posts[0]);
+          toast(`🎨 ${images.filter(Boolean).length}/${images.length} 张封面图生成成功！`, 'success');
+        } else if (withImage && !getGeminiKey()) {
+          toast('未配置 Gemini API Key，请在侧边栏「API 设置」中配置', 'warning');
+        }
+
       } catch (e) {
-        toast('生成失败', 'error');
+        toast('生成失败: ' + e.message, 'error');
       } finally {
         btn.disabled = false;
         btn.textContent = '✨ 一键生成';
       }
     }
 
+    function renderGeneratedList(posts) {
+      const listHtml = posts.map((p, i) => `
+        <div class="post-list-item" onclick="previewPost(${JSON.stringify(p).replace(/"/g, '&quot;')})" style="cursor:pointer;">
+          <div style="display:flex; gap:12px; align-items:center; flex:1;">
+            ${p.cover_image ? `<img src="${p.cover_image}" style="width:48px; height:48px; border-radius:8px; object-fit:cover; flex-shrink:0;">` : `<div style="width:48px; height:48px; border-radius:8px; background:${categoryColors[p.category] || '#eee'}33; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:20px;">${categoryEmojis[p.category] || '📝'}</div>`}
+            <div class="post-info" style="min-width:0;">
+              <div class="post-title">${p.title}</div>
+              <div class="post-meta">
+                ${catTag(p.category)}
+                <span>${p.tags}</span>
+              </div>
+              <div style="margin-top:4px; font-size:12px; color:#999;">
+                ${p.cover_image ? '🎨 已生成封面图' : '📝 纯文案'}
+              </div>
+            </div>
+          </div>
+          <div class="post-actions">
+            ${p.id ? `
+              <button class="btn btn-sm btn-outline" onclick="event.stopPropagation(); openEditPost(${p.id})">✏️</button>
+              <button class="btn btn-sm btn-outline" onclick="event.stopPropagation(); viewPost(${p.id})">👁️</button>
+            ` : ''}
+          </div>
+        </div>
+      `).join('');
+      document.getElementById('gen-list').innerHTML = listHtml;
+    }
+
     function previewPost(post) {
-      const bgIndex = Math.floor(Math.random() * 8) + 1;
       const cover = document.getElementById('preview-cover');
-      cover.className = `preview-cover cover-bg-${bgIndex}`;
-      document.getElementById('preview-cover-text').textContent = post.cover_text || post.title.slice(0, 10);
+      const coverText = document.getElementById('preview-cover-text');
+      const img = post.cover_image || getPostImage(post.id);
+
+      if (img) {
+        cover.style.display = 'none';
+        // 检查是否已存在预览图片
+        let previewImg = document.getElementById('preview-img');
+        if (!previewImg) {
+          previewImg = document.createElement('img');
+          previewImg.id = 'preview-img';
+          previewImg.style.cssText = 'width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:12px 12px 0 0;';
+          cover.parentNode.insertBefore(previewImg, cover);
+        }
+        previewImg.src = img;
+        previewImg.style.display = 'block';
+      } else {
+        const bgIndex = Math.floor(Math.random() * 8) + 1;
+        cover.className = `preview-cover cover-bg-${bgIndex}`;
+        cover.style.display = '';
+        coverText.textContent = post.cover_text || post.title.slice(0, 10);
+        const previewImg = document.getElementById('preview-img');
+        if (previewImg) previewImg.style.display = 'none';
+      }
+
       document.getElementById('preview-title').textContent = post.title;
       document.getElementById('preview-tags').textContent = post.tags ? post.tags.split(',').map(t => '#' + t).join(' ') : '';
     }
@@ -1805,8 +2066,20 @@
       document.getElementById('view-tags').textContent = post.tags ? post.tags.split(',').map(t => '#' + t).join(' ') : '';
       document.getElementById('view-cover-text').textContent = post.cover_text || '';
       
-      const bgIndex = Math.floor(Math.random() * 8) + 1;
-      document.getElementById('view-cover').className = `preview-cover cover-bg-${bgIndex}`;
+      // 检查是否有生成的图片
+      const img = getPostImage(id);
+      const viewCover = document.getElementById('view-cover');
+      const viewCoverImg = document.getElementById('view-cover-img');
+      if (img) {
+        viewCover.style.display = 'none';
+        viewCoverImg.src = img;
+        viewCoverImg.style.display = 'block';
+      } else {
+        const bgIndex = Math.floor(Math.random() * 8) + 1;
+        viewCover.className = `preview-cover cover-bg-${bgIndex}`;
+        viewCover.style.display = '';
+        viewCoverImg.style.display = 'none';
+      }
       
       openModal('modal-view');
     }
@@ -1819,17 +2092,40 @@
 
     function exportCurrentPost() {
       if (!currentViewPost) return;
+      // 导出图片
+      const img = getPostImage(currentViewPost.id);
+      if (img) {
+        const a = document.createElement('a');
+        a.href = img;
+        a.download = `cover_${currentViewPost.id}.png`;
+        a.click();
+      }
+      // 导出文本
       if (useLocalMode) {
         const p = currentViewPost;
         const text = `【标题】${p.title}\n\n【正文】\n${p.content}\n\n【标签】${p.tags}\n\n【封面文字】${p.cover_text}\n\n【分类】${p.category}`;
         const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `note_${p.id}.txt`;
-        a.click();
-        URL.revokeObjectURL(a.href);
+        const a2 = document.createElement('a');
+        a2.href = URL.createObjectURL(blob);
+        a2.download = `note_${p.id}.txt`;
+        a2.click();
+        URL.revokeObjectURL(a2.href);
       } else {
         window.open(`/api/export/${currentViewPost.id}`);
+      }
+    }
+
+    function downloadPostImage() {
+      if (!currentViewPost) return;
+      const img = getPostImage(currentViewPost.id);
+      if (img) {
+        const a = document.createElement('a');
+        a.href = img;
+        a.download = `cover_${currentViewPost.id}.png`;
+        a.click();
+        toast('封面图已下载', 'success');
+      } else {
+        toast('该笔记没有生成封面图', 'error');
       }
     }
 
@@ -2137,6 +2433,12 @@
     // ============ 初始化 ============
     // 检测是否有后端可用，否则使用本地模式
     async function init() {
+      // 初始化设置 checkbox 状态
+      if (!getGeminiKey()) {
+        const cb = document.getElementById('gen-with-image');
+        if (cb) cb.checked = false;
+      }
+
       try {
         const res = await fetch('/api/stats', { signal: AbortSignal.timeout(2000) });
         if (res.ok) {
@@ -2149,6 +2451,12 @@
         useLocalMode = true;
         console.log('📱 使用本地存储模式（GitHub Pages 模式）');
       }
+
+      // Gemini Key 状态提示
+      if (getGeminiKey()) {
+        console.log('🎨 已配置 Gemini API Key，图片生成可用');
+      }
+
       loadDashboard();
     }
     init();
