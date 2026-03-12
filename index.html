@@ -816,6 +816,135 @@
     .tab-item.active { color: var(--primary); border-bottom-color: var(--primary); }
 
     .hidden { display: none !important; }
+
+    /* ===== 发布时间推荐 ===== */
+    .time-heatmap {
+      display: flex;
+      gap: 2px;
+      align-items: flex-end;
+      height: 80px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 8px;
+    }
+    .time-slot {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 4px 4px 0 0;
+      position: relative;
+    }
+    .time-slot:hover { transform: scaleY(1.1); }
+    .time-slot-time {
+      font-size: 10px;
+      color: var(--text-light);
+      line-height: 1;
+    }
+    .time-slot-bar {
+      width: 100%;
+      min-height: 4px;
+      border-radius: 3px 3px 0 0;
+      transition: height 0.3s ease;
+    }
+    .time-slot.fire .time-slot-bar { background: linear-gradient(180deg, #ff2442, #ff6b81); }
+    .time-slot.hot .time-slot-bar { background: linear-gradient(180deg, #ff6b81, #ffa07a); }
+    .time-slot.warm .time-slot-bar { background: linear-gradient(180deg, #ffa07a, #ffd700); }
+    .time-slot.mild .time-slot-bar { background: linear-gradient(180deg, #ffd700, #87ceeb); }
+    .time-slot.cold .time-slot-bar { background: #ddd; }
+    .time-slot.selected { background: var(--primary-light); }
+    .time-slot.selected .time-slot-time { color: var(--primary); font-weight: 700; }
+
+    .schedule-time-guide {
+      background: linear-gradient(135deg, #fff5f7 0%, #fff0f3 100%);
+      border: 1px solid #ffe0e6;
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+    .schedule-time-guide h4 {
+      font-size: 13px;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+    .best-time-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .best-time-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+    .best-time-tag.rank-1 { background: #fff0f0; color: #ff2442; border-color: #ffcdd2; }
+    .best-time-tag.rank-2 { background: #fff8e1; color: #ff8f00; border-color: #ffe082; }
+    .best-time-tag.rank-3 { background: #e8f5e9; color: #2e7d32; border-color: #a5d6a7; }
+    .best-time-tag:hover { transform: scale(1.05); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+
+    .posting-time-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 11px;
+      background: #fff5f7;
+      color: var(--primary);
+      border: 1px solid #ffe0e6;
+    }
+
+    .schedule-preview-list {
+      margin-top: 12px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .schedule-preview-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px dashed #f0f0f0;
+      font-size: 13px;
+    }
+    .schedule-preview-item:last-child { border-bottom: none; }
+    .schedule-preview-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* 笔记详情弹窗增强 */
+    .post-detail-section {
+      background: #f9f9f9;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 12px;
+    }
+    .post-detail-section h4 {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
   </style>
 </head>
 <body>
@@ -1391,31 +1520,70 @@
 
   <!-- ===== 模态框：批量排期 ===== -->
   <div class="modal-overlay" id="modal-schedule">
-    <div class="modal">
+    <div class="modal" style="max-width:560px;">
       <div class="modal-header">
-        <h3>📅 批量排期</h3>
+        <h3>📅 智能排期</h3>
         <button class="modal-close" onclick="closeModal('modal-schedule')">✕</button>
       </div>
       <div class="modal-body">
-        <p style="margin-bottom:16px; color: var(--text-light);">为选中的笔记设置发布排期</p>
+        <p style="margin-bottom:16px; color: var(--text-light);">为选中的笔记设置发布排期，系统会自动推荐最佳发布时间</p>
+
+        <!-- 最佳发布时间推荐 -->
+        <div class="schedule-time-guide" id="schedule-time-guide">
+          <h4>🔥 小红书最佳发布时间</h4>
+          <div id="schedule-time-heatmap" class="time-heatmap"></div>
+          <div id="schedule-best-times" class="best-time-tags"></div>
+        </div>
+
         <div class="form-group">
           <label>起始日期</label>
-          <input type="date" id="schedule-start" class="form-control">
+          <input type="date" id="schedule-start" class="form-control" onchange="updateSchedulePreview()">
         </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>首条发布时间</label>
+            <select id="schedule-time" class="form-control" onchange="updateSchedulePreview()">
+              <option value="07:00">07:00 早起通勤</option>
+              <option value="08:00">08:00 上班前</option>
+              <option value="11:30">11:30 午休前</option>
+              <option value="12:00">12:00 🔥午休黄金</option>
+              <option value="12:30">12:30 午休</option>
+              <option value="17:30">17:30 下班前</option>
+              <option value="18:00">18:00 🔥晚高峰</option>
+              <option value="18:30">18:30 下班通勤</option>
+              <option value="19:00">19:00 🔥晚餐后</option>
+              <option value="19:30">19:30 🔥黄金时段</option>
+              <option value="20:00" selected>20:00 🔥🔥晚间最高峰</option>
+              <option value="20:30">20:30 🔥🔥黄金时段</option>
+              <option value="21:00">21:00 🔥睡前高峰</option>
+              <option value="21:30">21:30 睡前</option>
+              <option value="22:00">22:00 深夜时段</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>发布间隔</label>
+            <select id="schedule-interval" class="form-control" onchange="updateSchedulePreview()">
+              <option value="8">每8小时（一天3条）</option>
+              <option value="12">每12小时（一天2条）</option>
+              <option value="24" selected>每天1条</option>
+              <option value="48">每两天1条</option>
+            </select>
+          </div>
+        </div>
+
         <div class="form-group">
-          <label>发布间隔</label>
-          <select id="schedule-interval" class="form-control">
-            <option value="8">每8小时（一天3条）</option>
-            <option value="12">每12小时（一天2条）</option>
-            <option value="24" selected>每天1条</option>
-            <option value="48">每两天1条</option>
-          </select>
+          <label>
+            <input type="checkbox" id="schedule-smart-time" checked style="accent-color: var(--primary);">
+            🧠 智能分配时段（自动按最优时间微调每条笔记的发布时间）
+          </label>
         </div>
-        <div id="schedule-preview" style="font-size:13px; color:var(--text-light); margin-top:8px;"></div>
+
+        <!-- 排期预览 -->
+        <div id="schedule-preview" class="schedule-preview-list"></div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-outline" onclick="closeModal('modal-schedule')">取消</button>
-        <button class="btn btn-primary" onclick="confirmSchedule()">确认排期</button>
+        <button class="btn btn-primary" onclick="confirmSchedule()">✅ 确认排期</button>
       </div>
     </div>
   </div>
@@ -1526,6 +1694,12 @@
             <div id="view-content-images" style="margin-top:16px; display:none;">
               <h4 style="font-size:14px; margin-bottom:8px;">🎨 笔记配图</h4>
               <div class="content-images-gallery" id="view-content-images-gallery"></div>
+            </div>
+            <!-- 建议发布时间 -->
+            <div class="post-detail-section" id="view-posting-time">
+              <h4>⏰ 建议发布时间</h4>
+              <div id="view-best-times" class="best-time-tags"></div>
+              <div id="view-time-tip" style="margin-top:8px; font-size:12px; color:var(--text-light);"></div>
             </div>
           </div>
           <div style="width:200px; flex-shrink:0;">
@@ -1726,6 +1900,217 @@
       '治愈': '🌸', '成长': '🌱', '爱情': '💕', '友情': '🤝',
       '自我': '✨', '离别': '🍂', '温暖': '☀️', '释怀': '🕊️'
     };
+
+    // ============ 小红书最佳发布时间指南 ============
+    const POSTING_TIME_GUIDE = {
+      timeSlots: {
+        '07:00': { score: 7, label: '早起通勤', desc: '通勤族刷手机高峰' },
+        '08:00': { score: 6, label: '上班前', desc: '到公司前碎片时间' },
+        '09:00': { score: 4, label: '上午工作', desc: '工作专注期' },
+        '10:00': { score: 3, label: '上午低谷', desc: '工作深度期' },
+        '11:00': { score: 5, label: '午前', desc: '临近午休' },
+        '12:00': { score: 8, label: '午休黄金', desc: '🔥 午休刷手机高峰' },
+        '13:00': { score: 7, label: '午后', desc: '午休延续期' },
+        '14:00': { score: 4, label: '下午工作', desc: '回归工作' },
+        '15:00': { score: 3, label: '下午低谷', desc: '工作专注期' },
+        '16:00': { score: 4, label: '下午茶', desc: '摸鱼时间' },
+        '17:00': { score: 6, label: '下班前', desc: '快下班了开始刷' },
+        '18:00': { score: 8, label: '晚高峰', desc: '🔥 下班通勤高峰' },
+        '19:00': { score: 9, label: '晚餐后', desc: '🔥🔥 晚间流量开始' },
+        '20:00': { score: 10, label: '晚间黄金', desc: '🔥🔥🔥 全天最高峰' },
+        '21:00': { score: 9, label: '睡前高峰', desc: '🔥🔥 睡前刷手机' },
+        '22:00': { score: 7, label: '深夜时段', desc: '夜猫子活跃期' },
+        '23:00': { score: 5, label: '深夜', desc: '流量逐渐下滑' },
+      },
+      categoryBonus: {
+        '治愈': { '07:00': 2, '22:00': 3, '23:00': 2 },
+        '成长': { '07:00': 3, '08:00': 2, '21:00': 1 },
+        '爱情': { '20:00': 2, '21:00': 3, '22:00': 2 },
+        '友情': { '12:00': 2, '19:00': 2, '20:00': 1 },
+        '自我': { '07:00': 2, '21:00': 2, '22:00': 2 },
+        '离别': { '21:00': 2, '22:00': 3, '23:00': 2 },
+        '温暖': { '07:00': 2, '12:00': 1, '20:00': 2 },
+        '释怀': { '18:00': 1, '21:00': 2, '22:00': 2 },
+      },
+      weekdayBonus: { 0: 1.2, 1: 0.9, 2: 0.9, 3: 1.0, 4: 1.0, 5: 1.1, 6: 1.2 },
+      tips: {
+        '治愈': '💡 治愈类内容在深夜和清晨效果最佳，此时用户情感最细腻',
+        '成长': '💡 成长类内容适合早起时段，用户在新的一天开始时更容易受到激励',
+        '爱情': '💡 爱情类内容在晚间 20:00-22:00 互动率最高，这是情侣和单身群体最活跃的时段',
+        '友情': '💡 友情类内容在午休和晚间效果好，此时大家容易想起朋友',
+        '自我': '💡 自我类内容在独处时段（早晨/深夜）更能引发共鸣',
+        '离别': '💡 离别类内容适合深夜发布，夜深人静时情感共鸣更强',
+        '温暖': '💡 温暖类内容在一天开始和结束时效果最好，给人力量',
+        '释怀': '💡 释怀类内容适合傍晚后发布，下班后人们更愿意思考人生',
+      }
+    };
+
+    function getRecommendedPostingTimes(category) {
+      const guide = POSTING_TIME_GUIDE;
+      const bonus = guide.categoryBonus[category] || {};
+      const slots = Object.entries(guide.timeSlots).map(([time, info]) => {
+        const totalScore = info.score + (bonus[time] || 0);
+        return { time, score: totalScore, label: info.label, desc: info.desc };
+      });
+      slots.sort((a, b) => b.score - a.score);
+      return slots;
+    }
+
+    function getBestPostingTimes(category, count = 3) {
+      return getRecommendedPostingTimes(category).slice(0, count);
+    }
+
+    function renderTimeHeatmap(category, containerId) {
+      const guide = POSTING_TIME_GUIDE;
+      const bonus = guide.categoryBonus[category] || {};
+      const maxScore = 13;
+      const html = Object.entries(guide.timeSlots).map(([time, info]) => {
+        const totalScore = info.score + (bonus[time] || 0);
+        let level = 'cold';
+        if (totalScore >= 11) level = 'fire';
+        else if (totalScore >= 8) level = 'hot';
+        else if (totalScore >= 6) level = 'warm';
+        else if (totalScore >= 4) level = 'mild';
+        const barHeight = Math.round((totalScore / maxScore) * 100);
+        return `<div class="time-slot ${level}" title="${time} ${info.desc}（热度 ${totalScore}）" onclick="selectScheduleTime('${time}')">
+          <div class="time-slot-bar" style="height:${barHeight}%"></div>
+          <span class="time-slot-time">${time.slice(0, 2)}</span>
+        </div>`;
+      }).join('');
+      const container = document.getElementById(containerId);
+      if (container) container.innerHTML = html;
+    }
+
+    function renderBestTimeTags(category, containerId) {
+      const bestTimes = getBestPostingTimes(category, 5);
+      const html = bestTimes.map((t, i) => {
+        const rank = i < 3 ? `rank-${i + 1}` : '';
+        const medal = ['🥇', '🥈', '🥉'][i] || '⏰';
+        return `<span class="best-time-tag ${rank}" onclick="selectScheduleTime('${t.time}')" title="${t.desc}">
+          ${medal} ${t.time} ${t.label}
+        </span>`;
+      }).join('');
+      const container = document.getElementById(containerId);
+      if (container) container.innerHTML = html;
+    }
+
+    function selectScheduleTime(time) {
+      const sel = document.getElementById('schedule-time');
+      if (sel) {
+        // 寻找最接近的选项
+        let bestOption = null;
+        let bestDiff = Infinity;
+        const targetMin = parseInt(time.split(':')[0]) * 60 + parseInt(time.split(':')[1]);
+        for (const opt of sel.options) {
+          const [h, m] = opt.value.split(':').map(Number);
+          const optMin = h * 60 + m;
+          const diff = Math.abs(optMin - targetMin);
+          if (diff < bestDiff) { bestDiff = diff; bestOption = opt; }
+        }
+        if (bestOption) { sel.value = bestOption.value; updateSchedulePreview(); }
+      }
+    }
+
+    function getSmartScheduleTimes(count, startDate, startTime, intervalHours, categories) {
+      const bestTimesByHour = {};
+      // 计算所有分类的综合最优时间
+      const allCats = categories && categories.length ? categories : ['治愈'];
+      allCats.forEach(cat => {
+        const slots = getRecommendedPostingTimes(cat);
+        slots.forEach(s => {
+          const h = parseInt(s.time.split(':')[0]);
+          bestTimesByHour[h] = (bestTimesByHour[h] || 0) + s.score;
+        });
+      });
+
+      // 黄金时段列表 (按分数排序的小时)
+      const goldenHours = Object.entries(bestTimesByHour)
+        .sort((a, b) => b[1] - a[1])
+        .map(([h]) => parseInt(h));
+
+      const results = [];
+      const baseDate = new Date(startDate + 'T' + startTime + ':00');
+      const [startH, startM] = startTime.split(':').map(Number);
+
+      for (let i = 0; i < count; i++) {
+        const dt = new Date(baseDate.getTime() + i * intervalHours * 3600000);
+        // 智能微调：在同一天内选择最优时段
+        const dayOfWeek = dt.getDay();
+        const weekMul = POSTING_TIME_GUIDE.weekdayBonus[dayOfWeek] || 1.0;
+
+        // 如果间隔>=24h, 微调当天发布时间到最优时段
+        if (intervalHours >= 24) {
+          const bestHour = goldenHours[i % goldenHours.length];
+          // 加入随机分钟偏移(0-15分), 避免整点发布
+          const randomMinutes = Math.floor(Math.random() * 15);
+          dt.setHours(bestHour, randomMinutes, 0, 0);
+        }
+
+        results.push({
+          date: dt,
+          dateStr: dt.toISOString().slice(0, 19).replace('T', ' '),
+          dayOfWeek: ['日', '一', '二', '三', '四', '五', '六'][dayOfWeek],
+          weekMul,
+          timeLabel: POSTING_TIME_GUIDE.timeSlots[`${String(dt.getHours()).padStart(2, '0')}:00`]?.label || ''
+        });
+      }
+      return results;
+    }
+
+    function updateSchedulePreview() {
+      const start = document.getElementById('schedule-start').value;
+      const time = document.getElementById('schedule-time').value;
+      const interval = parseInt(document.getElementById('schedule-interval').value);
+      const smart = document.getElementById('schedule-smart-time').checked;
+      const count = selectedPosts.size || generatedPostIds.length || 1;
+
+      if (!start) {
+        document.getElementById('schedule-preview').innerHTML = '';
+        return;
+      }
+
+      // 获取选中笔记的分类
+      const categories = [];
+      selectedPosts.forEach(id => {
+        const post = LocalDB.getPost(id);
+        if (post && post.category) categories.push(post.category);
+      });
+
+      let schedules;
+      if (smart) {
+        schedules = getSmartScheduleTimes(count, start, time, interval, categories);
+      } else {
+        const baseDate = new Date(start + 'T' + time + ':00');
+        schedules = [];
+        for (let i = 0; i < count; i++) {
+          const dt = new Date(baseDate.getTime() + i * interval * 3600000);
+          const dayOfWeek = dt.getDay();
+          schedules.push({
+            date: dt,
+            dateStr: dt.toISOString().slice(0, 19).replace('T', ' '),
+            dayOfWeek: ['日', '一', '二', '三', '四', '五', '六'][dayOfWeek],
+            weekMul: POSTING_TIME_GUIDE.weekdayBonus[dayOfWeek] || 1.0,
+            timeLabel: POSTING_TIME_GUIDE.timeSlots[`${String(dt.getHours()).padStart(2, '0')}:00`]?.label || ''
+          });
+        }
+      }
+
+      const html = schedules.map((s, i) => {
+        const hotLevel = s.weekMul >= 1.1 ? '🔥' : '';
+        const dateFormatted = `${s.dateStr.slice(0, 10)} 周${s.dayOfWeek}`;
+        const timeFormatted = s.dateStr.slice(11, 16);
+        return `<div class="schedule-preview-item">
+          <span class="schedule-preview-num">${i + 1}</span>
+          <span style="flex:1;">${dateFormatted} <strong>${timeFormatted}</strong></span>
+          <span class="posting-time-badge">${hotLevel} ${s.timeLabel}</span>
+        </div>`;
+      }).join('');
+
+      document.getElementById('schedule-preview').innerHTML = `
+        <div style="font-size:12px; color:var(--text-light); margin-bottom:6px;">📋 排期预览（共 ${count} 条）</div>
+        ${html}
+      `;
+    }
 
     // ============ 前端内容生成引擎（离线模式使用） ============
     const ContentEngine = {
@@ -3016,14 +3401,15 @@ Style: ${stylePrompt}
       document.getElementById('stat-month-income').textContent = `¥${data.monthIncome.toFixed(2)}`;
 
       const recentHtml = data.recentPosts.length ? data.recentPosts.map(p => `
-        <div class="post-list-item" style="padding:10px 0;">
-          <div class="post-info">
-            <div class="post-title">${p.title}</div>
+        <div class="post-list-item" style="padding:10px 0; cursor:pointer;" onclick="viewPost(${p.id})">
+          <div class="post-info" style="flex:1;">
+            <div class="post-title" style="color:var(--text);">${p.title}</div>
             <div class="post-meta">
               ${catTag(p.category)} ${statusTag(p.status)}
               <span>${formatDate(p.created_at)}</span>
             </div>
           </div>
+          <span style="color:var(--text-light); font-size:18px;">›</span>
         </div>
       `).join('') : '<div class="empty-state"><p>暂无笔记，去生成一些吧！</p></div>';
       document.getElementById('recent-posts').innerHTML = recentHtml;
@@ -3208,6 +3594,10 @@ Style: ${stylePrompt}
         if (contentImgCount > 0) imgInfo.push(`🖼️ ${contentImgCount}张配图`);
         if (!imgInfo.length) imgInfo.push('📝 纯文案');
 
+        // 推荐发布时间
+        const bestTimes = getBestPostingTimes(p.category, 1);
+        const bestTime = bestTimes[0] || { time: '20:00', label: '晚间黄金' };
+
         return `
         <div class="post-list-item" onclick="previewPost(${_safePostJson(p)})" style="cursor:pointer;">
           <div style="display:flex; gap:12px; align-items:center; flex:1;">
@@ -3216,6 +3606,7 @@ Style: ${stylePrompt}
               <div class="post-title">${p.title}</div>
               <div class="post-meta">
                 ${catTag(p.category)}
+                <span class="posting-time-badge">⏰ 建议 ${bestTime.time} ${bestTime.label}</span>
                 <span style="font-size:11px; color:var(--text-light);">${(p.tags || '').split(',').slice(0, 3).map(t => '#' + t).join(' ')}</span>
               </div>
               <div style="margin-top:4px; font-size:12px; color:#999;">
@@ -3288,6 +3679,16 @@ Style: ${stylePrompt}
       if (!generatedPostIds.length) { toast('没有可排期的笔记', 'error'); return; }
       selectedPosts = new Set(generatedPostIds);
       document.getElementById('schedule-start').value = new Date().toISOString().slice(0, 10);
+      // 获取生成笔记的分类，渲染时间推荐
+      const categories = [];
+      generatedPostIds.forEach(id => {
+        const post = LocalDB.getPost(id);
+        if (post && post.category) categories.push(post.category);
+      });
+      const mainCategory = categories[0] || '治愈';
+      renderTimeHeatmap(mainCategory, 'schedule-time-heatmap');
+      renderBestTimeTags(mainCategory, 'schedule-best-times');
+      updateSchedulePreview();
       openModal('modal-schedule');
     }
 
@@ -3309,11 +3710,15 @@ Style: ${stylePrompt}
         return;
       }
 
-      tbody.innerHTML = data.posts.map(p => `
-        <tr>
-          <td><input type="checkbox" value="${p.id}" onchange="toggleSelect(${p.id})" ${selectedPosts.has(p.id) ? 'checked' : ''}></td>
+      tbody.innerHTML = data.posts.map(p => {
+        const bestTime = getBestPostingTimes(p.category, 1)[0];
+        const timeHint = p.status === 'draft' && bestTime ? `<div class="posting-time-badge" style="margin-top:4px;">⏰ 建议 ${bestTime.time}</div>` : '';
+        return `
+        <tr style="cursor:pointer;" onclick="viewPost(${p.id})">
+          <td onclick="event.stopPropagation();"><input type="checkbox" value="${p.id}" onchange="toggleSelect(${p.id})" ${selectedPosts.has(p.id) ? 'checked' : ''}></td>
           <td>
-            <div class="post-title" style="cursor:pointer;" onclick="viewPost(${p.id})">${p.title}</div>
+            <div class="post-title" style="color:var(--text);">${p.title}</div>
+            ${timeHint}
           </td>
           <td>${catTag(p.category)}</td>
           <td>${statusTag(p.status)}</td>
@@ -3321,7 +3726,7 @@ Style: ${stylePrompt}
           <td style="font-size:12px;">
             ❤️${p.likes||0} ⭐${p.collects||0} 💬${p.comments||0} 👁️${p.views||0}
           </td>
-          <td>
+          <td onclick="event.stopPropagation();">
             <div class="btn-group">
               <button class="btn btn-sm btn-outline" onclick="viewPost(${p.id})" title="查看">👁️</button>
               <button class="btn btn-sm btn-outline" onclick="openEditPost(${p.id})" title="编辑">✏️</button>
@@ -3329,7 +3734,7 @@ Style: ${stylePrompt}
             </div>
           </td>
         </tr>
-      `).join('');
+      `}).join('');
 
       const totalPages = Math.ceil(data.total / 20);
       const pag = document.getElementById('posts-pagination');
@@ -3473,6 +3878,21 @@ Style: ${stylePrompt}
       } else {
         galleryContainer.style.display = 'none';
       }
+
+      // 显示建议发布时间
+      const viewBestTimes = document.getElementById('view-best-times');
+      const viewTimeTip = document.getElementById('view-time-tip');
+      if (viewBestTimes) {
+        const bestTimes = getBestPostingTimes(post.category, 3);
+        viewBestTimes.innerHTML = bestTimes.map((t, i) => {
+          const rank = `rank-${i + 1}`;
+          const medal = ['🥇', '🥈', '🥉'][i];
+          return `<span class="best-time-tag ${rank}" title="${t.desc}">${medal} ${t.time} ${t.label}</span>`;
+        }).join('');
+      }
+      if (viewTimeTip) {
+        viewTimeTip.textContent = POSTING_TIME_GUIDE.tips[post.category] || '💡 建议在晚间 19:00-21:00 发布，此时段小红书用户最活跃';
+      }
       
       openModal('modal-view');
     }
@@ -3526,20 +3946,55 @@ Style: ${stylePrompt}
     function batchSchedule() {
       if (!selectedPosts.size) { toast('请先选择笔记', 'error'); return; }
       document.getElementById('schedule-start').value = new Date().toISOString().slice(0, 10);
+      // 获取选中笔记的分类，渲染时间推荐
+      const categories = [];
+      selectedPosts.forEach(id => {
+        const post = LocalDB.getPost(id);
+        if (post && post.category) categories.push(post.category);
+      });
+      const mainCategory = categories[0] || '治愈';
+      renderTimeHeatmap(mainCategory, 'schedule-time-heatmap');
+      renderBestTimeTags(mainCategory, 'schedule-best-times');
+      updateSchedulePreview();
       openModal('modal-schedule');
     }
 
     async function confirmSchedule() {
       const ids = Array.from(selectedPosts);
       const start = document.getElementById('schedule-start').value;
-      const interval = document.getElementById('schedule-interval').value;
+      const time = document.getElementById('schedule-time').value;
+      const interval = parseInt(document.getElementById('schedule-interval').value);
+      const smart = document.getElementById('schedule-smart-time').checked;
 
-      await api('/api/schedule', {
-        method: 'POST',
-        body: { post_ids: ids, start_date: start, interval_hours: parseInt(interval) }
+      if (!start) { toast('请选择起始日期', 'error'); return; }
+
+      // 获取选中笔记的分类
+      const categories = [];
+      ids.forEach(id => {
+        const post = LocalDB.getPost(id);
+        if (post && post.category) categories.push(post.category);
       });
 
-      toast(`已为 ${ids.length} 条笔记设置排期`, 'success');
+      let schedules;
+      if (smart) {
+        schedules = getSmartScheduleTimes(ids.length, start, time, interval, categories);
+      } else {
+        const baseDate = new Date(start + 'T' + time + ':00');
+        schedules = ids.map((_, i) => {
+          const dt = new Date(baseDate.getTime() + i * interval * 3600000);
+          return { dateStr: dt.toISOString().slice(0, 19).replace('T', ' ') };
+        });
+      }
+
+      // 逐条更新排期时间
+      for (let i = 0; i < ids.length; i++) {
+        await api(`/api/posts/${ids[i]}`, {
+          method: 'PUT',
+          body: { status: 'scheduled', scheduled_date: schedules[i].dateStr }
+        });
+      }
+
+      toast(`已为 ${ids.length} 条笔记智能排期`, 'success');
       closeModal('modal-schedule');
       selectedPosts.clear();
       updateSelectionBar();
