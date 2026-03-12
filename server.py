@@ -30,6 +30,25 @@ PUBLIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'public')
 
 # Gemini API Proxy 配置
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com'
+
+def _load_server_gemini_key():
+    env_key = (os.environ.get('GEMINI_API_KEY') or '').strip()
+    if env_key:
+        return env_key
+    key_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'api_key.txt')
+    if os.path.exists(key_file):
+        try:
+            raw = Path(key_file).read_text(encoding='utf-8').strip()
+            if not raw:
+                return ''
+            if raw.startswith('GEMINI_API_KEY='):
+                return raw.split('=', 1)[1].strip()
+            return raw
+        except Exception:
+            return ''
+    return ''
+
+SERVER_GEMINI_API_KEY = _load_server_gemini_key()
 # 自动检测系统代理
 _PROXY_URL = os.environ.get('HTTPS_PROXY') or os.environ.get('https_proxy') or os.environ.get('HTTP_PROXY') or os.environ.get('http_proxy') or ''
 _SSL_CTX = ssl.create_default_context()
@@ -851,13 +870,13 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     # ---- Gemini API 代理 ----
     def _gemini_proxy(self, body):
         """代理转发 Gemini API 请求，解决浏览器无法直接访问 Google API 的问题"""
-        api_key = body.get('apiKey', '')
+        api_key = SERVER_GEMINI_API_KEY or body.get('apiKey', '')
         model = body.get('model', 'gemini-2.5-flash')
         payload = body.get('payload', {})
         action = body.get('action', 'generateContent')  # generateContent or listModels
 
         if not api_key:
-            return self._send_json({'error': 'Missing apiKey'}, 400)
+            return self._send_json({'error': 'Missing apiKey and server GEMINI_API_KEY'}, 400)
 
         try:
             if action == 'listModels':

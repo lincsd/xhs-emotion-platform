@@ -38,12 +38,19 @@ python server.py
 2. 连接本仓库并创建服务（自动读取 `render.yaml`）
 3. 部署完成后获得代理地址，例如：`https://xhs-gemini-proxy.onrender.com`
 
+建议在 Render 服务中设置环境变量（更安全）：
+
+- Key: `GEMINI_API_KEY`
+- Value: 你的 Gemini API Key
+
+设置后，前端可不再填写 API Key，仅填写代理地址即可调用。
+
 ### 2) 在前端配置代理地址
 
 打开你的 GitHub Pages 页面后：
 
 1. 进入「⚙️ API 设置」
-2. 填写 `Gemini API Key`
+2. `Gemini API Key` 可留空（若 Render 已配置 `GEMINI_API_KEY`）
 3. 在「Gemini 代理地址（可选）」填写你的 Render HTTPS 域名
 4. 点击「测试连接」和「保存设置」
 

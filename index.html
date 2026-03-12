@@ -1223,10 +1223,10 @@
         <button class="modal-close" onclick="closeModal('modal-settings')">✕</button>
       </div>
       <div class="modal-body">
-        <p style="margin-bottom:16px; color:var(--text-light); font-size:13px;">配置 Gemini API Key 后可使用 AI 自动生成封面图片。API Key 仅保存在浏览器本地，不会上传到任何服务器。</p>
+        <p style="margin-bottom:16px; color:var(--text-light); font-size:13px;">推荐使用后端托管 Key（更安全）：仅填写代理地址即可。若你的代理未配置服务器端 Key，再在此填写 Gemini API Key。</p>
         <div class="form-group">
-          <label>Gemini API Key</label>
-          <input type="password" id="settings-api-key" class="form-control" placeholder="输入你的 Gemini API Key">
+          <label>Gemini API Key（可选）</label>
+          <input type="password" id="settings-api-key" class="form-control" placeholder="可留空（使用服务器端 Key）">
           <small style="color:var(--text-light);display:block;margin-top:4px;">获取地址: <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--info);">aistudio.google.com/apikey</a></small>
         </div>
         <div class="form-group">
@@ -1274,6 +1274,8 @@
     let currentViewPost = null;
 
     // Gemini 设置
+    const DEFAULT_GEMINI_PROXY_BASE = 'https://xhs-gemini-proxy.onrender.com';
+
     function getGeminiKey() { return localStorage.getItem('xhs_gemini_key') || ''; }
     function getGeminiModel() { return localStorage.getItem('xhs_gemini_model') || 'gemini-2.5-flash'; }
     function getImageStyle() { return localStorage.getItem('xhs_image_style') || 'xiaohongshu'; }
@@ -1284,7 +1286,11 @@
       return value;
     }
     function getGeminiProxyBase() {
-      return normalizeGeminiProxyBase(localStorage.getItem('xhs_gemini_proxy_base') || '');
+      const fromStorage = normalizeGeminiProxyBase(localStorage.getItem('xhs_gemini_proxy_base') || '');
+      return fromStorage || DEFAULT_GEMINI_PROXY_BASE;
+    }
+    function canUseAI() {
+      return !!getGeminiKey() || !!getGeminiProxyBase();
     }
     function getGeminiProxyAPIUrl() {
       const base = getGeminiProxyBase();
@@ -1653,7 +1659,6 @@
     // ============ AI 内容生成（基于 Gemini） ============
     async function generatePostsViaAI(category, count) {
       const apiKey = getGeminiKey();
-      if (!apiKey) throw new Error('请先在侧边栏「API 设置」中配置 Gemini API Key');
       const model = getGeminiModel();
       const allCategories = ['治愈','成长','爱情','友情','自我','离别','温暖','释怀'];
       const BATCH_SIZE = 5;
@@ -1990,7 +1995,6 @@ ${sourceInfo}
 
     async function generateCoverImage(post) {
       const apiKey = getGeminiKey();
-      if (!apiKey) return null;
 
       const model = getGeminiModel();
       const style = getImageStyle();
@@ -2099,17 +2103,17 @@ Important:
       // 刷新模式提示
       const hintEl = document.getElementById('gen-mode-hint');
       if (hintEl) {
-        if (key) {
+        if (key || proxyBase) {
           hintEl.innerHTML = '🤖 <strong>AI 智能模式</strong>：将联网搜索小红书爆款笔记 → 分析流量密码 → 生成高质量内容';
           hintEl.style.color = 'var(--success)';
         } else {
-          hintEl.innerHTML = '⚠️ <strong>本地模板模式</strong>：请在「API 设置」中配置 Gemini Key 以启用 AI 智能生成';
+          hintEl.innerHTML = '⚠️ <strong>本地模板模式</strong>：请在「API 设置」中配置 Gemini 代理地址或 API Key 以启用 AI 智能生成';
           hintEl.style.color = 'var(--warning)';
         }
       }
       // 更新图片生成 checkbox
       const cb = document.getElementById('gen-with-image');
-      if (cb && !key) cb.checked = false;
+      if (cb && !(key || proxyBase)) cb.checked = false;
     }
 
     async function testGeminiKey() {
@@ -2117,7 +2121,7 @@ Important:
       const model = document.getElementById('settings-model').value;
       const proxyBase = normalizeGeminiProxyBase(document.getElementById('settings-proxy-base').value);
       const statusEl = document.getElementById('settings-status');
-      if (!key) { statusEl.innerHTML = '<span style="color:#ff4d4f;">❌ 请先输入 API Key</span>'; return; }
+      if (!key && !proxyBase) { statusEl.innerHTML = '<span style="color:#ff4d4f;">❌ 请至少配置代理地址，或填写 API Key</span>'; return; }
       if (proxyBase) localStorage.setItem('xhs_gemini_proxy_base', proxyBase);
       else localStorage.removeItem('xhs_gemini_proxy_base');
       _serverProxyAvailable = null;
@@ -2125,7 +2129,7 @@ Important:
       try {
         const payload = { contents: [{ parts: [{ text: 'Say hello in one word' }] }] };
         const result = await callGeminiAPI(key, model, payload);
-        statusEl.innerHTML = '<span style="color:var(--success);">✅ 连接成功！API Key 有效</span>';
+        statusEl.innerHTML = `<span style="color:var(--success);">✅ 连接成功！${key ? 'API Key 可用' : '服务器端 Key 可用'}</span>`;
       } catch (e) {
         const err = e.data?.error || {};
         const msg = err.message || e.message || '连接失败';
@@ -2225,7 +2229,7 @@ Important:
       const count = parseInt(document.getElementById('gen-count').value);
       const autoSave = document.getElementById('gen-auto-save').checked;
       const withImage = document.getElementById('gen-with-image').checked;
-      const hasApiKey = !!getGeminiKey();
+      const hasApiKey = canUseAI();
 
       const btn = document.getElementById('gen-btn');
       const progressEl = document.getElementById('gen-progress');
@@ -2281,7 +2285,7 @@ Important:
           btn.textContent = '⏳ 生成文案中...';
           updateGenProgress(progressEl, '📝 使用本地模板生成...', 50);
           posts = ContentEngine.generateBatch(count, category || null);
-          updateGenProgress(progressEl, '⚠️ 提示：配置 Gemini API Key 可启用 AI 联网搜索 + 智能生成', 80);
+          updateGenProgress(progressEl, '⚠️ 提示：配置 Gemini 代理地址或 API Key 可启用 AI 联网搜索 + 智能生成', 80);
         }
 
         // 自动保存到草稿箱
@@ -2326,7 +2330,7 @@ Important:
           if (posts.length > 0) previewPost(posts[0]);
           toast(`🎨 ${images.filter(Boolean).length}/${images.length} 张封面图生成成功！`, 'success');
         } else if (withImage && !hasApiKey) {
-          toast('未配置 Gemini API Key，请在侧边栏「API 设置」中配置', 'warning');
+          toast('未配置 Gemini 代理地址/API Key，请在侧边栏「API 设置」中配置', 'warning');
         }
 
         updateGenProgress(progressEl, '🎉 全部完成！', 100);
@@ -2943,7 +2947,7 @@ Important:
     // 检测是否有后端可用，否则使用本地模式
     async function init() {
       // 初始化设置 checkbox 状态
-      const hasKey = !!getGeminiKey();
+      const hasKey = canUseAI();
       const cb = document.getElementById('gen-with-image');
       if (cb && !hasKey) cb.checked = false;
 
@@ -2954,7 +2958,7 @@ Important:
           hintEl.innerHTML = '🤖 <strong>AI 智能模式</strong>：将联网搜索小红书爆款笔记 → 分析流量密码 → 生成高质量内容';
           hintEl.style.color = 'var(--success)';
         } else {
-          hintEl.innerHTML = '⚠️ <strong>本地模板模式</strong>：请在「API 设置」中配置 Gemini Key 以启用 AI 智能生成';
+          hintEl.innerHTML = '⚠️ <strong>本地模板模式</strong>：请在「API 设置」中配置 Gemini 代理地址或 API Key 以启用 AI 智能生成';
           hintEl.style.color = 'var(--warning)';
         }
       }
@@ -2973,8 +2977,8 @@ Important:
       }
 
       // Gemini Key 状态提示
-      if (getGeminiKey()) {
-        console.log('🎨 已配置 Gemini API Key，图片生成可用');
+      if (getGeminiKey() || getGeminiProxyBase()) {
+        console.log('🎨 已配置 Gemini 能力（代理/Key），图片生成可用');
       }
 
       loadDashboard();
