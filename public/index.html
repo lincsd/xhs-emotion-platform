@@ -1273,6 +1273,69 @@
     function getGeminiModel() { return localStorage.getItem('xhs_gemini_model') || 'gemini-2.5-flash'; }
     function getImageStyle() { return localStorage.getItem('xhs_image_style') || 'xiaohongshu'; }
 
+    // ============ Gemini API 调用封装（优先走服务器代理） ============
+    // 服务器代理地址（本地服务器运行时可用）
+    let _serverProxyAvailable = null; // null=未检测, true/false
+
+    async function _checkServerProxy() {
+      if (_serverProxyAvailable !== null) return _serverProxyAvailable;
+      try {
+        const r = await fetch('/api/stats', { signal: AbortSignal.timeout(2000) });
+        _serverProxyAvailable = r.ok;
+      } catch {
+        _serverProxyAvailable = false;
+      }
+      console.log('[Gemini] Server proxy available:', _serverProxyAvailable);
+      return _serverProxyAvailable;
+    }
+
+    /**
+     * 统一的 Gemini API 调用：优先走服务器代理，失败则直连
+     * @param {string} apiKey
+     * @param {string} model
+     * @param {object} payload - Gemini API 的请求体
+     * @param {string} action - 默认 'generateContent'
+     * @returns {object} Gemini API 响应 JSON
+     */
+    async function callGeminiAPI(apiKey, model, payload, action = 'generateContent') {
+      const useProxy = await _checkServerProxy();
+
+      if (useProxy) {
+        // 走服务器代理
+        try {
+          const res = await fetch('/api/gemini-proxy', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ apiKey, model, payload, action })
+          });
+          const data = await res.json();
+          if (!res.ok) {
+            // 服务器代理返回了 Gemini 的错误
+            throw { fromProxy: true, status: res.status, data };
+          }
+          return { ok: true, data };
+        } catch (e) {
+          if (e.fromProxy) throw e; // Gemini 本身的错误，不重试
+          console.warn('[Gemini] Server proxy failed, trying direct:', e.message);
+          // 代理网络错误，降级为直连
+        }
+      }
+
+      // 直连 Gemini API
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:${action}?key=${apiKey}`;
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        throw { fromProxy: false, status: res.status, data: err };
+      }
+      const data = await res.json();
+      return { ok: true, data };
+    }
+
     const categoryColors = {
       '治愈': '#FFB6C1', '成长': '#90EE90', '爱情': '#FF69B4',
       '友情': '#87CEEB', '自我': '#FFD700', '离别': '#DEB887',
@@ -1622,32 +1685,29 @@
 ## 流量密码总结
 综合分析这些爆款笔记能获得高流量的核心原因（至少5点）`;
 
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: searchPrompt }] }],
-          tools: [{ google_search: {} }],
-          generationConfig: {
-            temperature: 0.7,
-            topP: 0.9,
-            maxOutputTokens: 8192
-          }
-        })
-      });
+      const payload = {
+        contents: [{ parts: [{ text: searchPrompt }] }],
+        tools: [{ google_search: {} }],
+        generationConfig: {
+          temperature: 0.7,
+          topP: 0.9,
+          maxOutputTokens: 8192
+        }
+      };
 
-      if (!response.ok) {
-        const err = await response.json();
+      let data;
+      try {
+        const result = await callGeminiAPI(apiKey, model, payload);
+        data = result.data;
+      } catch (e) {
+        const err = e.data || {};
         // 如果 google_search 工具不可用，降级为不带搜索的分析
         if (err.error?.code === 400 || err.error?.message?.includes('tool')) {
           console.warn('Google Search grounding 不可用，降级为知识库分析');
           return await _analyzeWithoutSearch(apiKey, model, category);
         }
-        throw new Error(err.error?.message || `Gemini API 错误 (${response.status})`);
+        throw new Error(err.error?.message || e.message || `Gemini API 错误`);
       }
-
-      const data = await response.json();
       // 提取所有文本部分（搜索结果+分析）
       const parts = data.candidates?.[0]?.content?.parts || [];
       let analysisText = '';
@@ -1698,22 +1758,20 @@
 ## 流量密码
 核心的流量获取策略`;
 
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.8, topP: 0.9, maxOutputTokens: 4096 }
-        })
-      });
+      const payload = {
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.8, topP: 0.9, maxOutputTokens: 4096 }
+      };
 
-      if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.error?.message || `Gemini API 错误 (${response.status})`);
+      let data;
+      try {
+        const result = await callGeminiAPI(apiKey, model, payload);
+        data = result.data;
+      } catch (e) {
+        const err = e.data || {};
+        throw new Error(err.error?.message || e.message || `Gemini API 错误`);
       }
 
-      const data = await response.json();
       const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
       return { analysisText: text, sources: [], searchUsed: false };
     }
@@ -1771,26 +1829,24 @@ ${sourceInfo}
 
 请确保输出是合法的 JSON，content字段中的换行请用 \\n 表示。不要在JSON前后添加任何其他文字。`;
 
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            temperature: 0.95,
-            topP: 0.95,
-            maxOutputTokens: 8192
-          }
-        })
-      });
+      const payload = {
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: {
+          temperature: 0.95,
+          topP: 0.95,
+          maxOutputTokens: 8192
+        }
+      };
 
-      if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.error?.message || `Gemini API 错误 (${response.status})`);
+      let data;
+      try {
+        const result = await callGeminiAPI(apiKey, model, payload);
+        data = result.data;
+      } catch (e) {
+        const err = e.data || {};
+        throw new Error(err.error?.message || e.message || `Gemini API 错误`);
       }
 
-      const data = await response.json();
       const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
 
       // 从返回文本中提取 JSON
@@ -1928,23 +1984,12 @@ Important:
 - Clean, high-quality design`;
 
       try {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: { responseModalities: ['TEXT', 'IMAGE'] }
-          })
-        });
-
-        if (!response.ok) {
-          const err = await response.json();
-          console.warn('Gemini API error:', err);
-          return null;
-        }
-
-        const data = await response.json();
+        const payload = {
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { responseModalities: ['TEXT', 'IMAGE'] }
+        };
+        const result = await callGeminiAPI(apiKey, model, payload);
+        const data = result.data;
         // Extract image from response
         if (data.candidates && data.candidates[0] && data.candidates[0].content) {
           const parts = data.candidates[0].content.parts || [];
@@ -2041,22 +2086,13 @@ Important:
       if (!key) { statusEl.innerHTML = '<span style="color:#ff4d4f;">❌ 请先输入 API Key</span>'; return; }
       statusEl.innerHTML = '<span style="color:var(--info);">⏳ 测试中...</span>';
       try {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
-        const res = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: 'Say hello in one word' }] }]
-          })
-        });
-        if (res.ok) {
-          statusEl.innerHTML = '<span style="color:var(--success);">✅ 连接成功！API Key 有效</span>';
-        } else {
-          const err = await res.json();
-          statusEl.innerHTML = `<span style="color:#ff4d4f;">❌ ${err.error?.message || '连接失败'}</span>`;
-        }
+        const payload = { contents: [{ parts: [{ text: 'Say hello in one word' }] }] };
+        const result = await callGeminiAPI(key, model, payload);
+        statusEl.innerHTML = '<span style="color:var(--success);">✅ 连接成功！API Key 有效</span>';
       } catch (e) {
-        statusEl.innerHTML = `<span style="color:#ff4d4f;">❌ 网络错误: ${e.message}</span>`;
+        const err = e.data?.error || {};
+        const msg = err.message || e.message || '连接失败';
+        statusEl.innerHTML = `<span style="color:#ff4d4f;">❌ ${msg}</span>`;
       }
     }
 

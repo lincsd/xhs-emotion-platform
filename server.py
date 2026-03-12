@@ -12,6 +12,8 @@ import os
 import sys
 import random
 import urllib.parse
+import urllib.request
+import ssl
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -25,6 +27,22 @@ if sys.platform == 'win32':
 PORT = 3000
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data.db')
 PUBLIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'public')
+
+# Gemini API Proxy 配置
+GEMINI_API_BASE = 'https://generativelanguage.googleapis.com'
+# 自动检测系统代理
+_PROXY_URL = os.environ.get('HTTPS_PROXY') or os.environ.get('https_proxy') or os.environ.get('HTTP_PROXY') or os.environ.get('http_proxy') or ''
+_SSL_CTX = ssl.create_default_context()
+_SSL_CTX.check_hostname = False
+_SSL_CTX.verify_mode = ssl.CERT_NONE
+
+def _build_opener():
+    handlers = [urllib.request.HTTPSHandler(context=_SSL_CTX)]
+    if _PROXY_URL:
+        handlers.insert(0, urllib.request.ProxyHandler({'https': _PROXY_URL, 'http': _PROXY_URL}))
+    return urllib.request.build_opener(*handlers)
+
+_OPENER = _build_opener()
 
 # ============ 数据库初始化 ============
 def init_db():
@@ -535,6 +553,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._save_account_stats(body)
         elif path == '/api/export-batch':
             return self._export_batch(body)
+        elif path == '/api/gemini-proxy':
+            return self._gemini_proxy(body)
         else:
             self._send_json({'error': 'Not found'}, 404)
 
@@ -828,6 +848,40 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         self.wfile.write('\n\n'.join(texts).encode('utf-8'))
 
 
+    # ---- Gemini API 代理 ----
+    def _gemini_proxy(self, body):
+        """代理转发 Gemini API 请求，解决浏览器无法直接访问 Google API 的问题"""
+        api_key = body.get('apiKey', '')
+        model = body.get('model', 'gemini-2.5-flash')
+        payload = body.get('payload', {})
+        action = body.get('action', 'generateContent')  # generateContent or listModels
+
+        if not api_key:
+            return self._send_json({'error': 'Missing apiKey'}, 400)
+
+        try:
+            if action == 'listModels':
+                url = f'{GEMINI_API_BASE}/v1beta/models?key={api_key}'
+                req = urllib.request.Request(url)
+            else:
+                url = f'{GEMINI_API_BASE}/v1beta/models/{model}:{action}?key={api_key}'
+                data = json.dumps(payload).encode('utf-8')
+                req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'})
+
+            resp = _OPENER.open(req, timeout=120)
+            result = json.loads(resp.read().decode('utf-8'))
+            self._send_json(result)
+        except urllib.error.HTTPError as e:
+            err_body = e.read().decode('utf-8', errors='replace')
+            try:
+                err_json = json.loads(err_body)
+            except:
+                err_json = {'error': {'code': e.code, 'message': err_body[:500]}}
+            self._send_json(err_json, e.code)
+        except Exception as e:
+            self._send_json({'error': {'code': 500, 'message': str(e)}}, 500)
+
+
 # ============ 启动服务器 ============
 def main():
     init_db()
@@ -837,6 +891,10 @@ def main():
     print(f"\n[*] XHS Emotion Platform started")
     print(f"[*] URL: http://localhost:{PORT}")
     print(f"[*] API: http://localhost:{PORT}/api")
+    if _PROXY_URL:
+        print(f"[*] Gemini Proxy: enabled (via {_PROXY_URL})")
+    else:
+        print(f"[*] Gemini Proxy: enabled (direct)")
     print(f"[*] Press Ctrl+C to stop\n")
     
     try:
