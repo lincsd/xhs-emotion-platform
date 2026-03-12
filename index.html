@@ -2581,6 +2581,26 @@ Style: ${stylePrompt}
       }
     }
 
+    function migrateLegacyBrandingPack() {
+      try {
+        const raw = localStorage.getItem('xhs_branding_pack');
+        if (!raw) return;
+        const pack = JSON.parse(raw);
+        if (!pack || typeof pack !== 'object') return;
+
+        const hasHeavyFields = typeof pack.avatar_image === 'string' || typeof pack.banner_image === 'string';
+        if (!hasHeavyFields) return;
+
+        localStorage.setItem('xhs_branding_pack', JSON.stringify(_stripBrandingHeavyFields(pack)));
+        console.log('✅ 已清理旧版账号包装缓存中的大图片数据');
+      } catch (e) {
+        console.warn('Failed to migrate legacy branding pack:', e);
+        try {
+          localStorage.removeItem('xhs_branding_pack');
+        } catch {}
+      }
+    }
+
     function savePostContentImages(postId, images) {
       try {
         const store = JSON.parse(localStorage.getItem('xhs_post_content_images') || '{}');
@@ -3806,6 +3826,8 @@ Style: ${stylePrompt}
     // ============ 初始化 ============
     // 检测是否有后端可用，否则使用本地模式
     async function init() {
+      migrateLegacyBrandingPack();
+
       // 初始化设置 checkbox 状态
       const hasKey = canUseAI();
       const cb = document.getElementById('gen-with-image');
