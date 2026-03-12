@@ -945,6 +945,10 @@
       color: var(--text-light);
       margin-bottom: 8px;
     }
+    #skill-switcher option {
+      background: #333;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
@@ -954,6 +958,15 @@
       <div class="sidebar-header">
         <h1>🌸 情感运营台</h1>
         <p>小红书自动化管理</p>
+        <select id="skill-switcher" class="form-control" onchange="switchSkill(this.value)" style="margin-top:8px; font-size:13px; padding:6px 8px; background:rgba(255,255,255,0.15); color:#fff; border:1px solid rgba(255,255,255,0.25); border-radius:8px; cursor:pointer;">
+          <option value="情感">🌸 情感账号</option>
+          <option value="美食">🍜 美食账号</option>
+          <option value="旅行">✈️ 旅行账号</option>
+          <option value="健身">💪 健身账号</option>
+          <option value="科技">📱 科技账号</option>
+          <option value="母婴">👶 母婴账号</option>
+          <option value="穿搭">👗 穿搭账号</option>
+        </select>
       </div>
       <div class="nav-group">
         <div class="nav-group-title">核心功能</div>
@@ -1794,6 +1807,591 @@
     let currentViewPost = null;
     let _brandingPackMemory = null;
 
+    // ============ Skill 系统 — 多账号类型复用 ============
+    const SKILL_TEMPLATES = {
+      '情感': {
+        id: 'emotion', name: '情感', icon: '🌸', color: '#ff2442',
+        title: '小红书情感账号 · 运营管理平台',
+        sidebarTitle: '🌸 情感运营台',
+        subtitle: '一键自动生成小红书情感笔记',
+        monetizationSubtitle: '情感账号系统化变现策略',
+        categoryLabel: '情感分类',
+        categories: ['治愈','成长','爱情','友情','自我','离别','温暖','释怀'],
+        categoryColors: { '治愈':'#FFB6C1','成长':'#90EE90','爱情':'#FF69B4','友情':'#87CEEB','自我':'#FFD700','离别':'#DEB887','温暖':'#FFA500','释怀':'#E6E6FA' },
+        categoryEmojis: { '治愈':'🌸','成长':'🌱','爱情':'💕','友情':'🤝','自我':'✨','离别':'🍂','温暖':'☀️','释怀':'🕊️' },
+        defaultCategory: '治愈',
+        imageStyles: { xiaohongshu:'小红书情感风格', minimalist:'极简文艺风', watercolor:'水彩插画风', gradient:'渐变文字风', photo:'治愈摄影风' },
+        imageStylePrompts: {
+          xiaohongshu: '小红书风格，柔和的色调，文艺感，适合情感类账号，干净的排版，高级感',
+          minimalist: '极简设计，大面积留白，一两个视觉元素，精致排版，高端感',
+          watercolor: '水彩画风格，柔和渐变，艺术感，手绘质感，唯美梦幻',
+          gradient: '现代渐变背景，霓虹色彩，文字艺术，潮流设计感',
+          photo: '高清摄影风格，自然光线，温暖色调，治愈系场景，生活气息'
+        },
+        branding: {
+          niche: '小红书情感成长账号', audience: '20-35岁希望被治愈、获得情绪价值和成长启发的女生',
+          persona: '温柔但有边界感，像一个清醒又会共情的朋友', keywords: '治愈,成长,边界感,清醒,温柔坚定',
+          nichePlaceholder: '例如：治愈系情感 / 女性成长 / 清醒恋爱观',
+          audiencePlaceholder: '例如：20-35岁女生、失恋恢复期、想提升内核的人群',
+          personaPlaceholder: '例如：温柔知性、清醒通透、像深夜陪伴型朋友',
+          keywordsPlaceholder: '例如：治愈,清醒,边界感,成长,温柔坚定',
+          tagsPlaceholder: '治愈文字,情感语录,正能量',
+          previewChips: ['治愈语录','清醒成长','关系边界'],
+          avatarFallback: '🌸',
+          nameStyles: ['温柔治愈','高级故事感','简短好记','有记忆点'],
+          promptPrefix: '情感成长类账号',
+          avatarSuffix: '小红书情感成长账号头像，正方形构图，适合女性情感成长赛道，高级、干净、有记忆点，无文字，适合做账号头像。',
+          bannerSuffix: '为小红书个人主页顶部封面生成横版视觉图，宽屏构图，治愈、高级、统一审美，无文字，适合作为情感成长类账号主页封面。',
+        },
+        aiRole: '资深小红书情感类博主',
+        aiNiche: '情感类',
+        searchKeywords: (cat) => [`小红书 ${cat} 情感文案 爆款`, `小红书 ${cat} 语录 点赞高`, `xiaohongshu ${cat} 情感 热门笔记`, `小红书 情感赛道 ${cat} 流量`],
+        postingTimeTips: {
+          '治愈': '💡 治愈类内容在深夜和清晨效果最佳，此时用户情感最细腻',
+          '成长': '💡 成长类内容适合早起时段，用户在新的一天开始时更容易受到激励',
+          '爱情': '💡 爱情类内容在晚间 20:00-22:00 互动率最高，这是情侣和单身群体最活跃的时段',
+          '友情': '💡 友情类内容在午休和晚间效果好，此时大家容易想起朋友',
+          '自我': '💡 自我类内容在独处时段（早晨/深夜）更能引发共鸣',
+          '离别': '💡 离别类内容适合深夜发布，夜深人静时情感共鸣更强',
+          '温暖': '💡 温暖类内容在一天开始和结束时效果最好，给人力量',
+          '释怀': '💡 释怀类内容适合傍晚后发布，下班后人们更愿意思考人生',
+        },
+        postingTimeBonus: {
+          '治愈': { '07:00': 2, '22:00': 3, '23:00': 2 },
+          '成长': { '07:00': 3, '08:00': 2, '21:00': 1 },
+          '爱情': { '20:00': 2, '21:00': 3, '22:00': 2 },
+          '友情': { '12:00': 2, '19:00': 2, '20:00': 1 },
+          '自我': { '07:00': 2, '21:00': 2, '22:00': 2 },
+          '离别': { '21:00': 2, '22:00': 3, '23:00': 2 },
+          '温暖': { '07:00': 2, '12:00': 1, '20:00': 2 },
+          '释怀': { '18:00': 1, '21:00': 2, '22:00': 2 },
+        },
+        monetization: {
+          strategies: [
+            { name:'广告合作', icon:'📢', threshold:'1000粉丝起', income:'200-2000元/条', description:'品牌方找你投放情感类软文，融入产品推荐', tips:['保持内容调性一致','选择与情感相关的品牌','报价参考: 粉丝数×0.1-0.3'] },
+            { name:'蒲公英平台', icon:'🌻', threshold:'1000粉丝+', income:'100-5000元/单', description:'小红书官方创作者平台，接品牌推广单', tips:['完善创作者资料','保持稳定更新频率','专注情感垂类提高报价'] },
+            { name:'付费咨询', icon:'💬', threshold:'5000粉丝+', income:'50-200元/次', description:'提供情感咨询、恋爱建议等付费服务', tips:['需要一定的专业背景','可以从免费问答开始积累口碑','逐步转化为付费'] },
+            { name:'课程/电子书', icon:'📚', threshold:'10000粉丝+', income:'被动收入', description:'出品情感类课程、恋爱指南等知识付费产品', tips:['整理热门内容成体系','定价29-199元','通过笔记引流至付费内容'] },
+            { name:'表情包/壁纸', icon:'🎨', threshold:'3000粉丝+', income:'1-10元/份', description:'设计情感主题壁纸、文字表情包等数字产品', tips:['利用封面文字风格延展','在笔记中自然引流','薄利多销策略'] },
+            { name:'直播打赏', icon:'🎙️', threshold:'1000粉丝+', income:'不定', description:'开设情感电台、深夜谈心等直播', tips:['固定时间直播培养用户习惯','可读粉丝投稿故事','搭配文字背景增强氛围'] },
+            { name:'账号矩阵', icon:'📱', threshold:'积累经验后', income:'倍增收益', description:'用相同模式批量运营多个情感子账号', tips:['每个号定位稍有差异','共享内容库提高效率','本系统支持多账号管理'] },
+          ],
+          roadmap: [
+            { phase:'冷启动期', duration:'1-2个月', followers:'0-1000', tasks:['每天发2-3条优质笔记','选好4-5个核心标签','研究爆款笔记套路','积极互动回复评论'] },
+            { phase:'成长期', duration:'2-4个月', followers:'1000-5000', tasks:['入驻蒲公英平台','开始接广告合作','优化内容形式','建立粉丝社群'] },
+            { phase:'变现期', duration:'4-6个月', followers:'5000-20000', tasks:['稳定广告收入','开发付费产品','尝试直播','考虑账号矩阵'] },
+            { phase:'规模化', duration:'6个月+', followers:'20000+', tasks:['团队化运营','多渠道变现','品牌化发展','IP打造'] },
+          ]
+        },
+        contentEngine: null // 将在下方定义完整的 ContentEngine
+      },
+      '美食': {
+        id: 'food', name: '美食', icon: '🍜', color: '#ff6b35',
+        title: '小红书美食账号 · 运营管理平台',
+        sidebarTitle: '🍜 美食运营台',
+        subtitle: '一键自动生成小红书美食笔记',
+        monetizationSubtitle: '美食账号系统化变现策略',
+        categoryLabel: '美食分类',
+        categories: ['家常菜','烘焙','探店','减脂餐','甜品','早餐','宵夜','饮品'],
+        categoryColors: { '家常菜':'#FF8C00','烘焙':'#DEB887','探店':'#FF4500','减脂餐':'#90EE90','甜品':'#FFB6C1','早餐':'#FFD700','宵夜':'#8B4513','饮品':'#87CEEB' },
+        categoryEmojis: { '家常菜':'🍳','烘焙':'🧁','探店':'📍','减脂餐':'🥗','甜品':'🍰','早餐':'🥞','宵夜':'🌙','饮品':'🧋' },
+        defaultCategory: '家常菜',
+        imageStyles: { xiaohongshu:'小红书美食风格', minimalist:'极简摆盘风', watercolor:'手绘菜谱风', gradient:'时尚美食风', photo:'美食摄影风' },
+        imageStylePrompts: {
+          xiaohongshu: '小红书美食风格，暖色调，诱人的食物特写，精致摆盘，高级感',
+          minimalist: '极简美食摆盘，干净背景，留白构图，ins风格',
+          watercolor: '手绘美食插画风格，温馨菜谱感，水彩质感',
+          gradient: '时尚美食风，明亮色彩，现代食物造型，潮流设计',
+          photo: '美食摄影风格，暖光打光，景深虚化，让人食欲大增'
+        },
+        branding: {
+          niche: '小红书美食分享账号', audience: '20-40岁爱做饭、爱吃的年轻人，上班族、宝妈',
+          persona: '像邻家姐姐一样亲切，做菜简单易学有创意', keywords: '美食,做饭,食谱,家常菜,好吃',
+          nichePlaceholder: '例如：家常菜教程 / 探店达人 / 减脂餐分享',
+          audiencePlaceholder: '例如：20-40岁上班族、爱做饭的年轻人',
+          personaPlaceholder: '例如：邻家姐姐风、专业大厨感、减脂教练风',
+          keywordsPlaceholder: '例如：美食,食谱,家常菜,好吃,做饭',
+          tagsPlaceholder: '美食分享,家常菜,食谱',
+          previewChips: ['家常菜谱','探店日记','减脂食谱'],
+          avatarFallback: '🍳',
+          nameStyles: ['温暖烟火气','专业大厨范','简短好记','有记忆点'],
+          promptPrefix: '美食分享类账号',
+          avatarSuffix: '小红书美食账号头像，正方形构图，适合美食博主，温暖、有烟火气、有记忆点，无文字。',
+          bannerSuffix: '小红书个人主页顶部封面，横版构图，美食主题，暖色调，诱人，无文字，适合美食账号。',
+        },
+        aiRole: '资深小红书美食类博主',
+        aiNiche: '美食类',
+        searchKeywords: (cat) => [`小红书 ${cat} 美食 爆款`, `小红书 ${cat} 食谱 点赞高`, `xiaohongshu ${cat} 美食 热门笔记`, `小红书 美食赛道 ${cat} 流量`],
+        postingTimeTips: {
+          '家常菜': '💡 家常菜内容适合午餐前和晚餐前发布，此时用户最想看做菜',
+          '烘焙': '💡 烘焙类内容在下午茶和周末效果最佳',
+          '探店': '💡 探店内容适合饭点前1-2小时发布',
+          '减脂餐': '💡 减脂餐内容在早上和晚间效果好，健身人群活跃',
+          '甜品': '💡 甜品内容在下午和晚间发布互动率最高',
+          '早餐': '💡 早餐内容适合前一天晚上或当天早上发布',
+          '宵夜': '💡 宵夜内容在21:00-23:00发布效果最佳',
+          '饮品': '💡 饮品内容在下午茶时段最受关注',
+        },
+        postingTimeBonus: {
+          '家常菜': { '11:00': 2, '17:00': 3, '18:00': 2 },
+          '烘焙': { '14:00': 2, '15:00': 2, '20:00': 1 },
+          '探店': { '11:00': 2, '17:00': 2, '19:00': 2 },
+          '减脂餐': { '07:00': 3, '18:00': 2, '20:00': 1 },
+          '甜品': { '14:00': 2, '15:00': 2, '20:00': 2 },
+          '早餐': { '07:00': 3, '08:00': 2, '22:00': 1 },
+          '宵夜': { '21:00': 3, '22:00': 3, '23:00': 2 },
+          '饮品': { '14:00': 2, '15:00': 3, '16:00': 2 },
+        },
+        monetization: {
+          strategies: [
+            { name:'品牌推广', icon:'📢', threshold:'1000粉丝起', income:'300-5000元/条', description:'食品品牌、厨具品牌找你做产品植入', tips:['保持内容风格一致','选择匹配的品牌','真实体验更有说服力'] },
+            { name:'蒲公英平台', icon:'🌻', threshold:'1000粉丝+', income:'200-8000元/单', description:'小红书官方创作者平台接推广单', tips:['完善创作者资料','保持稳定更新','专注美食垂类'] },
+            { name:'食谱电子书', icon:'📚', threshold:'5000粉丝+', income:'被动收入', description:'整理热门食谱出电子书/课程', tips:['按主题分类整理','定价19-99元','笔记引流'] },
+            { name:'团购带货', icon:'🛒', threshold:'3000粉丝+', income:'佣金提成', description:'推荐厨具、食材、调味品等', tips:['只推荐自己用过的','附上真实使用感受','开通小红书店铺'] },
+            { name:'探店合作', icon:'🏪', threshold:'2000粉丝+', income:'免费+200-2000元', description:'餐厅邀请免费试吃+拍摄推广', tips:['本地化运营','真实评价','积累餐厅资源'] },
+            { name:'直播做饭', icon:'🎙️', threshold:'5000粉丝+', income:'打赏+带货', description:'直播做菜过程，边做边卖食材厨具', tips:['固定直播时间','互动教学','准备充分'] },
+            { name:'账号矩阵', icon:'📱', threshold:'积累经验后', income:'倍增收益', description:'不同菜系/风格批量运营', tips:['每个号定位不同菜系','共享内容库','本系统支持多账号'] },
+          ],
+          roadmap: [
+            { phase:'冷启动期', duration:'1-2个月', followers:'0-1000', tasks:['每天发1-2条美食笔记','拍摄技巧提升','研究爆款美食笔记','互动回复评论'] },
+            { phase:'成长期', duration:'2-4个月', followers:'1000-5000', tasks:['开始接探店合作','入驻蒲公英','优化拍摄和排版','积累粉丝社群'] },
+            { phase:'变现期', duration:'4-6个月', followers:'5000-20000', tasks:['稳定品牌合作','开通带货','尝试直播做饭','出食谱电子书'] },
+            { phase:'规模化', duration:'6个月+', followers:'20000+', tasks:['团队化运营','多平台分发','品牌化发展','IP打造'] },
+          ]
+        },
+        contentEngine: null
+      },
+      '旅行': {
+        id: 'travel', name: '旅行', icon: '✈️', color: '#1da1f2',
+        title: '小红书旅行账号 · 运营管理平台',
+        sidebarTitle: '✈️ 旅行运营台',
+        subtitle: '一键自动生成小红书旅行笔记',
+        monetizationSubtitle: '旅行账号系统化变现策略',
+        categoryLabel: '旅行分类',
+        categories: ['城市探索','Nature徒步','住宿推荐','穷游攻略','亲子游','摄影旅拍','自驾游','美食旅行'],
+        categoryColors: { '城市探索':'#4A90D9','Nature徒步':'#27AE60','住宿推荐':'#E74C3C','穷游攻略':'#F39C12','亲子游':'#FFB6C1','摄影旅拍':'#9B59B6','自驾游':'#E67E22','美食旅行':'#FF6B35' },
+        categoryEmojis: { '城市探索':'🏙️','Nature徒步':'🏔️','住宿推荐':'🏨','穷游攻略':'💰','亲子游':'👨‍👩‍👧','摄影旅拍':'📸','自驾游':'🚗','美食旅行':'🍜' },
+        defaultCategory: '城市探索',
+        imageStyles: { xiaohongshu:'小红书旅行风格', minimalist:'极简旅行风', watercolor:'水彩地图风', gradient:'潮流旅行风', photo:'旅行摄影风' },
+        imageStylePrompts: {
+          xiaohongshu: '小红书旅行风格，明亮通透，广角风景，让人想出发',
+          minimalist: '极简旅行构图，天空和地平线，干净辽阔',
+          watercolor: '水彩手绘旅行插画，地图元素，温馨浪漫',
+          gradient: '现代旅行海报风，渐变天空，时尚旅拍',
+          photo: '旅行摄影大片，黄金时刻光线，壮美风光'
+        },
+        branding: {
+          niche: '小红书旅行攻略账号', audience: '20-35岁爱旅行的年轻人、自由职业者',
+          persona: '像朋友一样分享旅途的人，真实不做作', keywords: '旅行,攻略,出行,探索,风景',
+          nichePlaceholder: '例如：城市探索 / 穷游攻略 / 亲子旅行',
+          audiencePlaceholder: '例如：20-35岁爱旅行的年轻人',
+          personaPlaceholder: '例如：资深旅行者、摄影爱好者、背包客',
+          keywordsPlaceholder: '例如：旅行,攻略,探索,风景,出行',
+          tagsPlaceholder: '旅行攻略,旅拍,出行推荐',
+          previewChips: ['旅行攻略','城市探索','旅拍分享'],
+          avatarFallback: '✈️',
+          nameStyles: ['文艺旅行','极简干货','简短好记','有记忆点'],
+          promptPrefix: '旅行探索类账号',
+          avatarSuffix: '小红书旅行账号头像，正方形构图，适合旅行博主，阳光、自由、有记忆点，无文字。',
+          bannerSuffix: '小红书个人主页顶部封面，横版构图，旅行主题，蓝天白云风景，无文字，适合旅行账号。',
+        },
+        aiRole: '资深小红书旅行类博主',
+        aiNiche: '旅行类',
+        searchKeywords: (cat) => [`小红书 ${cat} 旅行攻略 爆款`, `小红书 ${cat} 旅行 点赞高`, `xiaohongshu ${cat} 旅行 热门`, `小红书 旅行赛道 ${cat}`],
+        postingTimeTips: {
+          '城市探索': '💡 城市探索在晚间发布效果好，大家下班后畅想周末出行',
+          'Nature徒步': '💡 徒步内容在周末和早晨效果最佳',
+          '住宿推荐': '💡 住宿推荐在晚间20:00-22:00发布，用户规划行程时间',
+          '穷游攻略': '💡 穷游攻略适合午休和晚间发布',
+          '亲子游': '💡 亲子游在傍晚和周末效果好，家长有时间浏览',
+          '摄影旅拍': '💡 旅拍内容在傍晚和深夜发布视觉冲击力更强',
+          '自驾游': '💡 自驾游内容在周五晚上最受关注',
+          '美食旅行': '💡 美食旅行在饭点前发布效果最佳',
+        },
+        postingTimeBonus: {
+          '城市探索': { '19:00': 2, '20:00': 2, '21:00': 2 },
+          'Nature徒步': { '07:00': 2, '08:00': 2, '20:00': 1 },
+          '住宿推荐': { '20:00': 3, '21:00': 2, '22:00': 2 },
+          '穷游攻略': { '12:00': 2, '20:00': 2, '21:00': 2 },
+          '亲子游': { '18:00': 2, '20:00': 2, '21:00': 1 },
+          '摄影旅拍': { '18:00': 2, '21:00': 2, '22:00': 2 },
+          '自驾游': { '17:00': 2, '19:00': 2, '20:00': 2 },
+          '美食旅行': { '11:00': 2, '17:00': 2, '19:00': 2 },
+        },
+        monetization: {
+          strategies: [
+            { name:'酒店/民宿合作', icon:'🏨', threshold:'2000粉丝起', income:'免费住+500-5000元', description:'酒店民宿邀请体验+推广笔记', tips:['真实入住体验','拍摄高质量图片','标注地点和价格'] },
+            { name:'旅游品牌推广', icon:'📢', threshold:'3000粉丝+', income:'500-8000元/条', description:'旅游平台、航空公司、景区合作', tips:['保持旅行风格','真实推荐','专注垂类'] },
+            { name:'蒲公英平台', icon:'🌻', threshold:'1000粉丝+', income:'200-5000元/单', description:'小红书官方创作者平台接旅行推广', tips:['完善创作者资料','稳定更新','标签旅行垂类'] },
+            { name:'旅行攻略付费', icon:'📚', threshold:'5000粉丝+', income:'被动收入', description:'整理精品攻略出电子书/小程序', tips:['按城市/主题分类','定价19-99元','笔记引流'] },
+            { name:'旅拍约拍', icon:'📸', threshold:'3000粉丝+', income:'500-3000元/次', description:'为游客提供旅行跟拍服务', tips:['展示摄影作品','本地化运营','口碑传播'] },
+            { name:'直播旅行', icon:'🎙️', threshold:'5000粉丝+', income:'打赏+带货', description:'直播旅途所见所闻', tips:['固定直播时间','互动分享','变现旅行装备'] },
+            { name:'账号矩阵', icon:'📱', threshold:'积累经验后', income:'倍增收益', description:'不同地区/风格批量运营旅行号', tips:['每个号定位不同地区','共享素材库','本系统支持'] },
+          ],
+          roadmap: [
+            { phase:'冷启动期', duration:'1-2个月', followers:'0-1000', tasks:['每周发3-5条旅行笔记','提升拍摄技巧','研究爆款攻略','积极互动'] },
+            { phase:'成长期', duration:'2-4个月', followers:'1000-5000', tasks:['开始接酒店合作','入驻蒲公英','优化内容形式','积攒粉丝'] },
+            { phase:'变现期', duration:'4-6个月', followers:'5000-20000', tasks:['稳定品牌合作','出攻略付费内容','尝试旅拍约拍','考虑直播'] },
+            { phase:'规模化', duration:'6个月+', followers:'20000+', tasks:['团队化运营','多平台分发','品牌化','IP打造'] },
+          ]
+        },
+        contentEngine: null
+      },
+      '健身': {
+        id: 'fitness', name: '健身', icon: '💪', color: '#27ae60',
+        title: '小红书健身账号 · 运营管理平台',
+        sidebarTitle: '💪 健身运营台',
+        subtitle: '一键自动生成小红书健身笔记',
+        monetizationSubtitle: '健身账号系统化变现策略',
+        categoryLabel: '健身分类',
+        categories: ['减脂','增肌','瑜伽','跑步','居家健身','饮食搭配','体态矫正','健身穿搭'],
+        categoryColors: { '减脂':'#FF6B6B','增肌':'#4ECDC4','瑜伽':'#C39BD3','跑步':'#5DADE2','居家健身':'#F39C12','饮食搭配':'#90EE90','体态矫正':'#E74C3C','健身穿搭':'#FFB6C1' },
+        categoryEmojis: { '减脂':'🔥','增肌':'💪','瑜伽':'🧘','跑步':'🏃','居家健身':'🏠','饮食搭配':'🥗','体态矫正':'🩺','健身穿搭':'👟' },
+        defaultCategory: '减脂',
+        imageStyles: { xiaohongshu:'小红书健身风格', minimalist:'极简运动风', watercolor:'手绘教程风', gradient:'运动海报风', photo:'健身摄影风' },
+        imageStylePrompts: {
+          xiaohongshu: '小红书健身风格，阳光积极，运动感，清晰的动作展示',
+          minimalist: '极简运动风格，干净背景，人物剪影，高级感',
+          watercolor: '手绘运动教程风格，动作分解示意图，清晰易懂',
+          gradient: '运动海报风格，活力渐变，力量感，现代设计',
+          photo: '健身摄影风格，肌肉线条，光影质感，激励人心'
+        },
+        branding: {
+          niche: '小红书健身减脂账号', audience: '20-35岁想减肥塑形、改善体态的年轻人',
+          persona: '像健身教练朋友，专业但亲切', keywords: '健身,减脂,塑形,自律,蜕变',
+          nichePlaceholder: '例如：女生减脂 / 居家健身 / 瑜伽教学',
+          audiencePlaceholder: '例如：20-35岁想减肥塑形的年轻人',
+          personaPlaceholder: '例如：专业教练风、励志蜕变党、温柔督导',
+          keywordsPlaceholder: '例如：健身,减脂,塑形,自律,蜕变',
+          tagsPlaceholder: '健身打卡,减脂,运动',
+          previewChips: ['减脂教程','居家健身','饮食搭配'],
+          avatarFallback: '💪',
+          nameStyles: ['活力运动','专业教练范','简短好记','有记忆点'],
+          promptPrefix: '健身运动类账号',
+          avatarSuffix: '小红书健身账号头像，正方形构图，运动感、阳光、有活力，无文字。',
+          bannerSuffix: '小红书个人主页顶部封面，横版构图，健身运动主题，活力、阳光，无文字。',
+        },
+        aiRole: '资深小红书健身类博主',
+        aiNiche: '健身类',
+        searchKeywords: (cat) => [`小红书 ${cat} 健身 爆款`, `小红书 ${cat} 运动 点赞高`, `xiaohongshu ${cat} fitness`, `小红书 健身赛道 ${cat}`],
+        postingTimeTips: {
+          '减脂': '💡 减脂内容在早晨和晚间效果好，用户有运动动力',
+          '增肌': '💡 增肌内容适合下午和晚间发布',
+          '瑜伽': '💡 瑜伽内容在早晨和睡前发布效果最佳',
+          '跑步': '💡 跑步内容在清晨和傍晚发布互动率高',
+          '居家健身': '💡 居家健身在晚间20:00-22:00最受关注',
+          '饮食搭配': '💡 饮食搭配在饭点前发布效果最好',
+          '体态矫正': '💡 体态矫正内容在午休和晚间效果好',
+          '健身穿搭': '💡 健身穿搭在傍晚和周末发布互动高',
+        },
+        postingTimeBonus: {
+          '减脂': { '07:00': 3, '20:00': 2, '21:00': 2 },
+          '增肌': { '17:00': 2, '20:00': 2, '21:00': 2 },
+          '瑜伽': { '07:00': 3, '22:00': 2, '08:00': 2 },
+          '跑步': { '07:00': 3, '18:00': 2, '19:00': 1 },
+          '居家健身': { '20:00': 3, '21:00': 2, '22:00': 1 },
+          '饮食搭配': { '11:00': 2, '17:00': 2, '19:00': 2 },
+          '体态矫正': { '12:00': 2, '20:00': 2, '21:00': 2 },
+          '健身穿搭': { '18:00': 2, '20:00': 2, '21:00': 1 },
+        },
+        monetization: {
+          strategies: [
+            { name:'运动品牌推广', icon:'📢', threshold:'2000粉丝起', income:'500-5000元/条', description:'运动品牌、健身器材合作推广', tips:['真实使用体验','展示效果对比','保持运动风格'] },
+            { name:'蒲公英平台', icon:'🌻', threshold:'1000粉丝+', income:'200-5000元/单', description:'小红书官方平台接推广', tips:['完善资料','稳定更新','专注健身垂类'] },
+            { name:'私教课程', icon:'📚', threshold:'5000粉丝+', income:'99-999元/期', description:'线上训练计划、健身课程', tips:['系统化课程设计','提供答疑','阶梯定价'] },
+            { name:'健身食品带货', icon:'🛒', threshold:'3000粉丝+', income:'佣金提成', description:'蛋白粉、健身餐、运动装备带货', tips:['只推荐自己用过的','展示效果','开通店铺'] },
+            { name:'体态评估', icon:'💬', threshold:'5000粉丝+', income:'50-200元/次', description:'在线体态评估和训练建议', tips:['专业背景加持','从免费开始','积累口碑'] },
+            { name:'直播健身', icon:'🎙️', threshold:'3000粉丝+', income:'打赏+带货', description:'直播带练，边运动边卖货', tips:['固定时间','准备充分','互动带练'] },
+            { name:'账号矩阵', icon:'📱', threshold:'积累经验后', income:'倍增收益', description:'不同运动方向批量运营', tips:['每个号定位不同方向','共享内容库','本系统支持'] },
+          ],
+          roadmap: [
+            { phase:'冷启动期', duration:'1-2个月', followers:'0-1000', tasks:['每天发1-2条健身笔记','记录自身变化','研究爆款内容','积极互动'] },
+            { phase:'成长期', duration:'2-4个月', followers:'1000-5000', tasks:['开始品牌合作','入驻蒲公英','出教程内容','建粉丝群'] },
+            { phase:'变现期', duration:'4-6个月', followers:'5000-20000', tasks:['出付费课程','稳定带货','开始直播','考虑矩阵'] },
+            { phase:'规模化', duration:'6个月+', followers:'20000+', tasks:['团队化','多平台','品牌化','IP打造'] },
+          ]
+        },
+        contentEngine: null
+      },
+      '穿搭': {
+        id: 'fashion', name: '穿搭', icon: '👗', color: '#9b59b6',
+        title: '小红书穿搭账号 · 运营管理平台',
+        sidebarTitle: '👗 穿搭运营台',
+        subtitle: '一键自动生成小红书穿搭笔记',
+        monetizationSubtitle: '穿搭账号系统化变现策略',
+        categoryLabel: '穿搭分类',
+        categories: ['日常穿搭','通勤OL','约会穿搭','季节穿搭','小个子','微胖穿搭','大牌平替','配饰搭配'],
+        categoryColors: { '日常穿搭':'#E8D5B7','通勤OL':'#5B7DB1','约会穿搭':'#FF69B4','季节穿搭':'#90EE90','小个子':'#FFD700','微胖穿搭':'#DDA0DD','大牌平替':'#FF6347','配饰搭配':'#87CEEB' },
+        categoryEmojis: { '日常穿搭':'👕','通勤OL':'💼','约会穿搭':'💃','季节穿搭':'🍂','小个子':'👧','微胖穿搭':'💖','大牌平替':'💎','配饰搭配':'👜' },
+        defaultCategory: '日常穿搭',
+        imageStyles: { xiaohongshu:'小红书穿搭风格', minimalist:'极简时尚风', watercolor:'时尚插画风', gradient:'潮流街拍风', photo:'穿搭摄影风' },
+        imageStylePrompts: {
+          xiaohongshu: '小红书穿搭风格，时尚感，全身穿搭展示，高级配色',
+          minimalist: '极简时尚风，干净背景，穿搭单品特写',
+          watercolor: '时尚手绘插画，穿搭灵感图，文艺浪漫',
+          gradient: '潮流街拍风，城市背景，时尚态度',
+          photo: '穿搭摄影风格，自然光，全身搭配展示，杂志感'
+        },
+        branding: {
+          niche: '小红书穿搭分享账号', audience: '18-35岁爱美的女生，学生/上班族',
+          persona: '时尚但平价，同事/闺蜜type的穿搭博主', keywords: '穿搭,搭配,时尚,OOTD,显瘦',
+          nichePlaceholder: '例如：通勤穿搭 / 小个子穿搭 / 大牌平替',
+          audiencePlaceholder: '例如：18-35岁爱美女生、学生/上班族',
+          personaPlaceholder: '例如：闺蜜型博主、高冷时尚、甜美少女风',
+          keywordsPlaceholder: '例如：穿搭,搭配,OOTD,时尚,显瘦',
+          tagsPlaceholder: '每日穿搭,OOTD,搭配灵感',
+          previewChips: ['每日OOTD','通勤穿搭','搭配灵感'],
+          avatarFallback: '👗',
+          nameStyles: ['时尚达人','甜美少女','简短好记','有记忆点'],
+          promptPrefix: '穿搭时尚类账号',
+          avatarSuffix: '小红书穿搭账号头像，正方形构图，时尚感，无文字，适合穿搭博主。',
+          bannerSuffix: '小红书个人主页顶部封面，横版构图，时尚穿搭主题，高级配色，无文字。',
+        },
+        aiRole: '资深小红书穿搭时尚博主',
+        aiNiche: '穿搭类',
+        searchKeywords: (cat) => [`小红书 ${cat} 穿搭 爆款`, `小红书 ${cat} OOTD 点赞高`, `xiaohongshu ${cat} fashion`, `小红书 穿搭赛道 ${cat}`],
+        postingTimeTips: {
+          '日常穿搭': '💡 日常穿搭在早晨和晚间发布效果好',
+          '通勤OL': '💡 通勤穿搭适合早上7-8点和晚间发布',
+          '约会穿搭': '💡 约会穿搭在周五晚上和周末效果最佳',
+          '季节穿搭': '💡 换季穿搭在季节交替时流量最高',
+          '小个子': '💡 小个子穿搭全天都有需求，晚间互动最高',
+          '微胖穿搭': '💡 微胖穿搭在晚间20:00-22:00互动率最高',
+          '大牌平替': '💡 平替推荐在午休和晚间发布效果好',
+          '配饰搭配': '💡 配饰搭配在下午茶时段和晚间效果好',
+        },
+        postingTimeBonus: {
+          '日常穿搭': { '07:00': 2, '20:00': 2, '21:00': 2 },
+          '通勤OL': { '07:00': 3, '08:00': 2, '20:00': 1 },
+          '约会穿搭': { '18:00': 2, '19:00': 2, '20:00': 2 },
+          '季节穿搭': { '12:00': 2, '20:00': 2, '21:00': 2 },
+          '小个子': { '20:00': 2, '21:00': 2, '22:00': 1 },
+          '微胖穿搭': { '20:00': 3, '21:00': 2, '22:00': 1 },
+          '大牌平替': { '12:00': 2, '20:00': 2, '21:00': 2 },
+          '配饰搭配': { '15:00': 2, '20:00': 2, '21:00': 1 },
+        },
+        monetization: {
+          strategies: [
+            { name:'服装品牌推广', icon:'📢', threshold:'2000粉丝起', income:'300-8000元/条', description:'服装品牌、电商合作推广', tips:['保持穿搭风格一致','真实试穿展示','标注尺码和链接'] },
+            { name:'蒲公英平台', icon:'🌻', threshold:'1000粉丝+', income:'200-5000元/单', description:'小红书官方接推广单', tips:['完善创作者资料','稳定更新','专注穿搭'] },
+            { name:'好物带货', icon:'🛒', threshold:'1000粉丝+', income:'佣金提成', description:'推荐平价好穿的衣服和配饰', tips:['只推荐自己穿过的','展示上身效果','开通店铺'] },
+            { name:'穿搭咨询', icon:'💬', threshold:'5000粉丝+', income:'50-300元/次', description:'提供个人形象搭配建议', tips:['展示搭配能力','从免费开始','逐步付费'] },
+            { name:'穿搭课程', icon:'📚', threshold:'10000粉丝+', income:'被动收入', description:'出搭配公式课程/穿搭指南', tips:['体系化内容','定价29-199元','笔记引流'] },
+            { name:'直播试穿', icon:'🎙️', threshold:'3000粉丝+', income:'佣金+坑位费', description:'直播试穿带货', tips:['固定直播时间','准备充足衣服','互动很重要'] },
+            { name:'账号矩阵', icon:'📱', threshold:'积累经验后', income:'倍增收益', description:'不同风格/人群批量运营穿搭号', tips:['每个号定位不同风格','共享内容库','本系统支持'] },
+          ],
+          roadmap: [
+            { phase:'冷启动期', duration:'1-2个月', followers:'0-1000', tasks:['每天发1-2条穿搭笔记','提升拍照技巧','研究爆款穿搭','互动回复'] },
+            { phase:'成长期', duration:'2-4个月', followers:'1000-5000', tasks:['开始接品牌合作','入驻蒲公英','开通带货','积累粉丝'] },
+            { phase:'变现期', duration:'4-6个月', followers:'5000-20000', tasks:['稳定品牌收入','出穿搭课程','尝试直播','扩大影响'] },
+            { phase:'规模化', duration:'6个月+', followers:'20000+', tasks:['团队化','多平台','品牌化','IP打造'] },
+          ]
+        },
+        contentEngine: null
+      },
+      '科技数码': {
+        id: 'tech', name: '科技数码', icon: '📱', color: '#2c3e50',
+        title: '小红书科技数码账号 · 运营管理平台',
+        sidebarTitle: '📱 科技运营台',
+        subtitle: '一键自动生成小红书科技数码笔记',
+        monetizationSubtitle: '科技数码账号系统化变现策略',
+        categoryLabel: '科技分类',
+        categories: ['手机评测','电脑数码','好物推荐','App推荐','摄影技巧','智能家居','游戏','效率工具'],
+        categoryColors: { '手机评测':'#34495E','电脑数码':'#2980B9','好物推荐':'#E74C3C','App推荐':'#27AE60','摄影技巧':'#F39C12','智能家居':'#8E44AD','游戏':'#E74C3C','效率工具':'#1ABC9C' },
+        categoryEmojis: { '手机评测':'📱','电脑数码':'💻','好物推荐':'🎁','App推荐':'📲','摄影技巧':'📷','智能家居':'🏠','游戏':'🎮','效率工具':'⚡' },
+        defaultCategory: '手机评测',
+        imageStyles: { xiaohongshu:'小红书科技风格', minimalist:'极简科技风', watercolor:'手绘科技风', gradient:'潮流科技风', photo:'产品摄影风' },
+        imageStylePrompts: {
+          xiaohongshu: '小红书科技风格，产品展示，干净背景，科技感',
+          minimalist: '极简科技风，产品悬浮，纯色背景，高级质感',
+          watercolor: '手绘科技插画，产品示意图，简约可爱',
+          gradient: '潮流科技海报风，渐变背景，赛博朋克',
+          photo: '产品摄影风格，专业打光，质感特写'
+        },
+        branding: {
+          niche: '小红书科技数码账号', audience: '18-35岁数码爱好者、学生、上班族',
+          persona: '数码极客但说人话，不搞参数堆砌', keywords: '数码,科技,好物,评测,推荐',
+          nichePlaceholder: '例如：手机评测 / 好物推荐 / 效率工具',
+          audiencePlaceholder: '例如：18-35岁数码爱好者、学生',
+          personaPlaceholder: '例如：数码极客、生活科技达人、效率控',
+          keywordsPlaceholder: '例如：数码,科技,评测,好物,推荐',
+          tagsPlaceholder: '数码好物,科技分享,开箱评测',
+          previewChips: ['数码评测','好物推荐','效率工具'],
+          avatarFallback: '📱',
+          nameStyles: ['科技极客','实用干货','简短好记','有记忆点'],
+          promptPrefix: '科技数码类账号',
+          avatarSuffix: '小红书科技账号头像，正方形构图，科技感，无文字，适合数码博主。',
+          bannerSuffix: '小红书个人主页顶部封面，横版构图，科技数码主题，酷炫，无文字。',
+        },
+        aiRole: '资深小红书科技数码博主',
+        aiNiche: '科技数码类',
+        searchKeywords: (cat) => [`小红书 ${cat} 数码 爆款`, `小红书 ${cat} 评测 点赞高`, `xiaohongshu ${cat} tech`, `小红书 科技赛道 ${cat}`],
+        postingTimeTips: {
+          '手机评测': '💡 手机评测在晚间发布效果最佳，大家有时间研究',
+          '电脑数码': '💡 电脑内容在午休和晚间效果好',
+          '好物推荐': '💡 好物推荐在20:00-22:00发布互动最高',
+          'App推荐': '💡 App推荐在午休时段和晚间效果好',
+          '摄影技巧': '💡 摄影技巧在傍晚和周末效果最佳',
+          '智能家居': '💡 智能家居在晚间效果好，回家后才关注',
+          '游戏': '💡 游戏内容在晚间和周末流量最大',
+          '效率工具': '💡 效率工具在工作日午休和早晨效果好',
+        },
+        postingTimeBonus: {
+          '手机评测': { '20:00': 3, '21:00': 2, '22:00': 1 },
+          '电脑数码': { '12:00': 2, '20:00': 2, '21:00': 2 },
+          '好物推荐': { '20:00': 3, '21:00': 2, '22:00': 1 },
+          'App推荐': { '12:00': 2, '20:00': 2, '21:00': 1 },
+          '摄影技巧': { '18:00': 2, '20:00': 2, '21:00': 2 },
+          '智能家居': { '20:00': 3, '21:00': 2, '22:00': 1 },
+          '游戏': { '20:00': 2, '21:00': 3, '22:00': 2 },
+          '效率工具': { '07:00': 2, '12:00': 2, '20:00': 2 },
+        },
+        monetization: {
+          strategies: [
+            { name:'品牌推广', icon:'📢', threshold:'2000粉丝起', income:'500-10000元/条', description:'数码品牌评测推广合作', tips:['真实使用体验','对比评测更有价值','保持客观'] },
+            { name:'蒲公英平台', icon:'🌻', threshold:'1000粉丝+', income:'300-8000元/单', description:'小红书官方接推广', tips:['完善资料','稳定更新','专注垂类'] },
+            { name:'好物带货', icon:'🛒', threshold:'1000粉丝+', income:'佣金提成', description:'推荐数码好物赚取佣金', tips:['只推荐自己用过的','提供购买链接','开通店铺'] },
+            { name:'付费教程', icon:'📚', threshold:'5000粉丝+', income:'被动收入', description:'摄影教程、效率课程等知识付费', tips:['系统化内容','阶梯定价','笔记引流'] },
+            { name:'技术咨询', icon:'💬', threshold:'3000粉丝+', income:'50-200元/次', description:'提供选购建议、技术问题解答', tips:['展示专业度','从免费开始','积累口碑'] },
+            { name:'直播评测', icon:'🎙️', threshold:'5000粉丝+', income:'打赏+带货', description:'直播开箱评测，边看边买', tips:['准备充分','互动解答','变现带货'] },
+            { name:'账号矩阵', icon:'📱', threshold:'积累经验后', income:'倍增收益', description:'不同方向批量运营科技号', tips:['定位细分','共享内容库','本系统支持'] },
+          ],
+          roadmap: [
+            { phase:'冷启动期', duration:'1-2个月', followers:'0-1000', tasks:['每周发3-5条笔记','研究爆款数码内容','互动回复','提升拍摄'] },
+            { phase:'成长期', duration:'2-4个月', followers:'1000-5000', tasks:['开始品牌合作','入驻蒲公英','出带货内容','积攒粉丝'] },
+            { phase:'变现期', duration:'4-6个月', followers:'5000-20000', tasks:['稳定品牌收入','出教程课程','开始直播','扩大矩阵'] },
+            { phase:'规模化', duration:'6个月+', followers:'20000+', tasks:['团队化','多平台','品牌化','IP打造'] },
+          ]
+        },
+        contentEngine: null
+      },
+    };
+
+    // 当前激活的 Skill
+    let currentSkillName = localStorage.getItem('xhs_current_skill') || '情感';
+    function getCurrentSkill() { return SKILL_TEMPLATES[currentSkillName] || SKILL_TEMPLATES['情感']; }
+
+    // 动态引用（让旧代码兼容）
+    function _s() { return getCurrentSkill(); }
+    let categoryColors = _s().categoryColors;
+    let categoryEmojis = _s().categoryEmojis;
+
+    // 切换 Skill
+    function switchSkill(skillName) {
+      if (!SKILL_TEMPLATES[skillName]) return;
+      currentSkillName = skillName;
+      localStorage.setItem('xhs_current_skill', skillName);
+      const sk = getCurrentSkill();
+      categoryColors = sk.categoryColors;
+      categoryEmojis = sk.categoryEmojis;
+      applySkillToUI();
+      toast(`已切换到「${sk.icon} ${sk.name}」账号模式`, 'success');
+      // 重新加载当前页面
+      showPage(currentPage);
+    }
+
+    // 将 Skill 配置应用到 UI
+    function applySkillToUI() {
+      const sk = getCurrentSkill();
+      // 页面标题
+      document.title = sk.title;
+      // 侧边栏标题
+      const sideHeader = document.querySelector('.sidebar-header h1');
+      if (sideHeader) sideHeader.textContent = sk.sidebarTitle;
+      // 生成器副标题
+      const genSub = document.querySelector('#page-generator .subtitle');
+      if (genSub) genSub.textContent = sk.subtitle;
+      // 变现副标题
+      const monSub = document.querySelector('#page-monetization .subtitle');
+      if (monSub) monSub.textContent = sk.monetizationSubtitle;
+      // 分类标签
+      const catLabel = document.querySelector('label[for="gen-category"], #gen-category')?.parentElement?.querySelector('label');
+      if (catLabel) catLabel.textContent = sk.categoryLabel;
+      // 动态填充所有分类下拉
+      _fillCategorySelect('gen-category', true);
+      _fillCategorySelect('filter-category', true);
+      _fillCategorySelect('edit-category', false);
+      // 品牌化表单
+      _applyBrandingDefaults();
+      // 图片风格下拉
+      _fillImageStyleSelect('settings-style');
+      _fillImageStyleSelect('branding-image-style');
+      // 名称风格
+      _fillNameStyleSelect('branding-name-style');
+      // 品牌化表单 placeholder
+      _applyBrandingPlaceholders();
+      // 预览 chips
+      _applyPreviewChips();
+      // Skill 切换器高亮
+      const switcher = document.getElementById('skill-switcher');
+      if (switcher) switcher.value = currentSkillName;
+    }
+
+    function _fillCategorySelect(id, withAll) {
+      const sel = document.getElementById(id);
+      if (!sel) return;
+      const sk = getCurrentSkill();
+      const val = sel.value;
+      sel.innerHTML = '';
+      if (withAll) sel.innerHTML += `<option value="">全部${sk.categoryLabel.replace('分类','')}</option>`;
+      sk.categories.forEach(cat => {
+        const emoji = sk.categoryEmojis[cat] || '';
+        sel.innerHTML += `<option value="${cat}">${emoji} ${cat}</option>`;
+      });
+      // 恢复之前选中的值（如果仍有效）
+      if ([...sel.options].some(o => o.value === val)) sel.value = val;
+    }
+
+    function _fillImageStyleSelect(id) {
+      const sel = document.getElementById(id);
+      if (!sel) return;
+      const sk = getCurrentSkill();
+      const val = sel.value;
+      sel.innerHTML = '';
+      Object.entries(sk.imageStyles).forEach(([key, label]) => {
+        sel.innerHTML += `<option value="${key}">${label}</option>`;
+      });
+      if ([...sel.options].some(o => o.value === val)) sel.value = val;
+    }
+
+    function _fillNameStyleSelect(id) {
+      const sel = document.getElementById(id);
+      if (!sel) return;
+      const sk = getCurrentSkill();
+      sel.innerHTML = '';
+      sk.branding.nameStyles.forEach(s => {
+        sel.innerHTML += `<option value="${s}">${s}</option>`;
+      });
+    }
+
+    function _applyBrandingDefaults() {
+      const sk = getCurrentSkill();
+      const niche = document.getElementById('branding-niche');
+      const audience = document.getElementById('branding-audience');
+      const persona = document.getElementById('branding-persona');
+      const keywords = document.getElementById('branding-keywords');
+      if (niche) niche.placeholder = sk.branding.nichePlaceholder;
+      if (audience) audience.placeholder = sk.branding.audiencePlaceholder;
+      if (persona) persona.placeholder = sk.branding.personaPlaceholder;
+      if (keywords) keywords.placeholder = sk.branding.keywordsPlaceholder;
+    }
+
+    function _applyBrandingPlaceholders() {
+      const sk = getCurrentSkill();
+      const tags = document.getElementById('edit-tags');
+      if (tags) tags.placeholder = sk.branding.tagsPlaceholder;
+    }
+
+    function _applyPreviewChips() {
+      const sk = getCurrentSkill();
+      const container = document.getElementById('branding-preview-columns');
+      if (container && !getBrandingPack()) {
+        container.innerHTML = sk.branding.previewChips.map(c => `<span class="branding-chip">${c}</span>`).join('');
+      }
+      const fallback = document.getElementById('branding-preview-avatar-fallback');
+      if (fallback) fallback.textContent = sk.branding.avatarFallback;
+    }
+
     // ============ 图片存储 (IndexedDB + 内存缓存) ============
     const _imageMemoryCache = { covers: {}, contents: {} };
     let _imageDB = null;
@@ -1969,18 +2567,9 @@
       return { ok: true, data };
     }
 
-    const categoryColors = {
-      '治愈': '#FFB6C1', '成长': '#90EE90', '爱情': '#FF69B4',
-      '友情': '#87CEEB', '自我': '#FFD700', '离别': '#DEB887',
-      '温暖': '#FFA500', '释怀': '#E6E6FA'
-    };
+    // categoryColors 和 categoryEmojis 由 Skill 系统动态设置（见上方 switchSkill / applySkillToUI）
 
-    const categoryEmojis = {
-      '治愈': '🌸', '成长': '🌱', '爱情': '💕', '友情': '🤝',
-      '自我': '✨', '离别': '🍂', '温暖': '☀️', '释怀': '🕊️'
-    };
-
-    // ============ 小红书最佳发布时间指南 ============
+    // ============ 小红书最佳发布时间指南（动态引用 Skill） ============
     const POSTING_TIME_GUIDE = {
       timeSlots: {
         '07:00': { score: 7, label: '早起通勤', desc: '通勤族刷手机高峰' },
@@ -2001,27 +2590,9 @@
         '22:00': { score: 7, label: '深夜时段', desc: '夜猫子活跃期' },
         '23:00': { score: 5, label: '深夜', desc: '流量逐渐下滑' },
       },
-      categoryBonus: {
-        '治愈': { '07:00': 2, '22:00': 3, '23:00': 2 },
-        '成长': { '07:00': 3, '08:00': 2, '21:00': 1 },
-        '爱情': { '20:00': 2, '21:00': 3, '22:00': 2 },
-        '友情': { '12:00': 2, '19:00': 2, '20:00': 1 },
-        '自我': { '07:00': 2, '21:00': 2, '22:00': 2 },
-        '离别': { '21:00': 2, '22:00': 3, '23:00': 2 },
-        '温暖': { '07:00': 2, '12:00': 1, '20:00': 2 },
-        '释怀': { '18:00': 1, '21:00': 2, '22:00': 2 },
-      },
+      get categoryBonus() { return _s().postingTimeBonus; },
       weekdayBonus: { 0: 1.2, 1: 0.9, 2: 0.9, 3: 1.0, 4: 1.0, 5: 1.1, 6: 1.2 },
-      tips: {
-        '治愈': '💡 治愈类内容在深夜和清晨效果最佳，此时用户情感最细腻',
-        '成长': '💡 成长类内容适合早起时段，用户在新的一天开始时更容易受到激励',
-        '爱情': '💡 爱情类内容在晚间 20:00-22:00 互动率最高，这是情侣和单身群体最活跃的时段',
-        '友情': '💡 友情类内容在午休和晚间效果好，此时大家容易想起朋友',
-        '自我': '💡 自我类内容在独处时段（早晨/深夜）更能引发共鸣',
-        '离别': '💡 离别类内容适合深夜发布，夜深人静时情感共鸣更强',
-        '温暖': '💡 温暖类内容在一天开始和结束时效果最好，给人力量',
-        '释怀': '💡 释怀类内容适合傍晚后发布，下班后人们更愿意思考人生',
-      }
+      get tips() { return _s().postingTimeTips; }
     };
 
     function getRecommendedPostingTimes(category) {
@@ -2093,7 +2664,7 @@
     function getSmartScheduleTimes(count, startDate, startTime, intervalHours, categories) {
       const bestTimesByHour = {};
       // 计算所有分类的综合最优时间
-      const allCats = categories && categories.length ? categories : ['治愈'];
+      const allCats = categories && categories.length ? categories : [_s().defaultCategory];
       allCats.forEach(cat => {
         const slots = getRecommendedPostingTimes(cat);
         slots.forEach(s => {
@@ -2248,12 +2819,13 @@
       generate(category) {
         const cats = Object.keys(this.hooks);
         if (!category) category = this.pick(cats);
-        const title = this.pick(this.titleTemplates[category] || this.titleTemplates['治愈']);
-        const hook = this.pick(this.hooks[category] || this.hooks['治愈']);
-        const body = this.pick(this.bodyTemplates[category] || this.bodyTemplates['治愈']);
+        const defCat = _s().defaultCategory;
+        const title = this.pick(this.titleTemplates[category] || this.titleTemplates[defCat]);
+        const hook = this.pick(this.hooks[category] || this.hooks[defCat]);
+        const body = this.pick(this.bodyTemplates[category] || this.bodyTemplates[defCat]);
         const ending = this.pick(this.endings);
-        const coverText = this.pick(this.coverTexts[category] || this.coverTexts['治愈']);
-        const allTags = (this.tagSets[category] || this.tagSets['治愈']).slice();
+        const coverText = this.pick(this.coverTexts[category] || this.coverTexts[defCat]);
+        const allTags = (this.tagSets[category] || this.tagSets[defCat]).slice();
         allTags.sort(() => Math.random() - 0.5);
         const tags = allTags.slice(0, 5).join(',');
         return { title, content: `${hook}\n\n${body}${ending}`, category, tags, cover_text: coverText };
@@ -2265,23 +2837,10 @@
       }
     };
 
-    // ============ 变现方案数据（内嵌，离线可用） ============
+    // ============ 变现方案数据（动态引用 Skill） ============
     const MONETIZATION_DATA = {
-      strategies: [
-        { name: '广告合作', icon: '📢', threshold: '1000粉丝起', income: '200-2000元/条', description: '品牌方找你投放情感类软文，融入产品推荐', tips: ['保持内容调性一致', '选择与情感相关的品牌', '报价参考: 粉丝数×0.1-0.3'] },
-        { name: '蒲公英平台', icon: '🌻', threshold: '1000粉丝+', income: '100-5000元/单', description: '小红书官方创作者平台，接品牌推广单', tips: ['完善创作者资料', '保持稳定更新频率', '专注情感垂类提高报价'] },
-        { name: '付费咨询', icon: '💬', threshold: '5000粉丝+', income: '50-200元/次', description: '提供情感咨询、恋爱建议等付费服务', tips: ['需要一定的专业背景', '可以从免费问答开始积累口碑', '逐步转化为付费'] },
-        { name: '课程/电子书', icon: '📚', threshold: '10000粉丝+', income: '被动收入', description: '出品情感类课程、恋爱指南等知识付费产品', tips: ['整理热门内容成体系', '定价29-199元', '通过笔记引流至付费内容'] },
-        { name: '表情包/壁纸', icon: '🎨', threshold: '3000粉丝+', income: '1-10元/份', description: '设计情感主题壁纸、文字表情包等数字产品', tips: ['利用封面文字风格延展', '在笔记中自然引流', '薄利多销策略'] },
-        { name: '直播打赏', icon: '🎙️', threshold: '1000粉丝+', income: '不定', description: '开设情感电台、深夜谈心等直播', tips: ['固定时间直播培养用户习惯', '可读粉丝投稿故事', '搭配文字背景增强氛围'] },
-        { name: '账号矩阵', icon: '📱', threshold: '积累经验后', income: '倍增收益', description: '用相同模式批量运营多个情感子账号', tips: ['每个号定位稍有差异', '共享内容库提高效率', '本系统支持多账号管理'] },
-      ],
-      roadmap: [
-        { phase: '冷启动期', duration: '1-2个月', followers: '0-1000', tasks: ['每天发2-3条优质笔记', '选好4-5个核心标签', '研究爆款笔记套路', '积极互动回复评论'] },
-        { phase: '成长期', duration: '2-4个月', followers: '1000-5000', tasks: ['入驻蒲公英平台', '开始接广告合作', '优化内容形式', '建立粉丝社群'] },
-        { phase: '变现期', duration: '4-6个月', followers: '5000-20000', tasks: ['稳定广告收入', '开发付费产品', '尝试直播', '考虑账号矩阵'] },
-        { phase: '规模化', duration: '6个月+', followers: '20000+', tasks: ['团队化运营', '多渠道变现', '品牌化发展', 'IP打造'] },
-      ]
+      get strategies() { return _s().monetization.strategies; },
+      get roadmap() { return _s().monetization.roadmap; },
     };
 
     // ============ LocalDB - localStorage 数据存储 ============
@@ -2470,7 +3029,7 @@
     async function generatePostsViaAI(category, count) {
       const apiKey = getGeminiKey();
       const model = getGeminiModel();
-      const allCategories = ['治愈','成长','爱情','友情','自我','离别','温暖','释怀'];
+      const allCategories = _s().categories;
       const BATCH_SIZE = 5;
       const allPosts = [];
       let remaining = count;
@@ -2494,18 +3053,17 @@
 
     // ========== 第一步：联网搜索+分析小红书爆款笔记 ==========
     async function _searchAndAnalyzeXHS(apiKey, model, category) {
-      const searchPrompt = `请你搜索小红书平台上「${category}」分类的情感类热门笔记/爆款笔记。
+      const sk = _s();
+      const keywords = sk.searchKeywords(category);
+      const searchPrompt = `请你搜索小红书平台上「${category}」分类的${sk.aiNiche}热门笔记/爆款笔记。
 
 请搜索以下关键词，获取真实的小红书热门内容数据：
-- "小红书 ${category} 情感文案 爆款"
-- "小红书 ${category} 语录 点赞高"
-- "xiaohongshu ${category} 情感 热门笔记"
-- "小红书 情感赛道 ${category} 流量"
+${keywords.map(k => `- "${k}"`).join('\n')}
 
 搜索完成后，请基于搜索到的真实数据，输出详细的分析报告，格式如下：
 
 ## 搜索到的真实爆款笔记案例
-列出你搜索找到的5-10个真实的小红书「${category}」情感类高赞笔记，包括：
+列出你搜索找到的5-10个真实的小红书「${category}」${sk.aiNiche}高赞笔记，包括：
 - 笔记标题（原文）
 - 大致点赞/收藏量级
 - 内容特点摘要
@@ -2576,12 +3134,13 @@
 
     // 降级方案：不带搜索的分析
     async function _analyzeWithoutSearch(apiKey, model, category) {
-      const prompt = `你是一位拥有百万粉丝的资深小红书情感类博主，精通平台算法和爆款内容创作。
+      const sk = _s();
+      const prompt = `你是一位拥有百万粉丝的${sk.aiRole}，精通平台算法和爆款内容创作。
 
-请基于你对小红书平台的深入了解，详细分析「${category}」分类情感类爆款笔记的规律：
+请基于你对小红书平台的深入了解，详细分析「${category}」分类${sk.aiNiche}爆款笔记的规律：
 
 ## 典型爆款笔记案例
-列出5-8个典型的「${category}」情感类高赞笔记标题示例及内容特点
+列出5-8个典型的「${category}」${sk.aiNiche}高赞笔记标题示例及内容特点
 
 ## 标题规律
 爆款标题的句式结构、字数范围、emoji使用、分隔符选择
@@ -2622,16 +3181,17 @@
     // ========== 第二步：基于分析结果生成笔记 ==========
     async function _generateFromAnalysis(apiKey, model, category, count, analysis) {
       const { analysisText, sources, searchUsed } = analysis;
+      const sk = _s();
 
       const sourceInfo = sources.length > 0
         ? `\n\n## 参考来源\n${sources.map((s, i) => `${i + 1}. ${s.title} (${s.uri})`).join('\n')}`
         : '';
 
-      const prompt = `你是一位拥有百万粉丝的资深小红书情感类博主。
+      const prompt = `你是一位拥有百万粉丝的${sk.aiRole}。
 
 ## 背景：真实爆款笔记分析
 
-以下是${searchUsed ? '通过搜索获取的' : '基于经验总结的'}小红书「${category}」分类情感类爆款笔记的分析报告：
+以下是${searchUsed ? '通过搜索获取的' : '基于经验总结的'}小红书「${category}」分类${sk.aiNiche}爆款笔记的分析报告：
 
 ---
 ${analysisText}
@@ -2640,7 +3200,7 @@ ${sourceInfo}
 
 ## 你的任务
 
-基于以上真实的爆款笔记分析，请生成 ${count} 条高质量小红书情感笔记。
+基于以上真实的爆款笔记分析，请生成 ${count} 条高质量小红书${sk.aiNiche}笔记。
 
 ### 核心要求
 1. **标题**：必须参考分析中发现的爆款标题规律来创作，使用相同的句式结构和情绪节奏
@@ -2795,13 +3355,10 @@ ${sourceInfo}
     }
 
     // ============ Gemini 图片生成（Nano Banana 模型）============
-    const IMAGE_STYLE_PROMPTS = {
-      xiaohongshu: '小红书风格，柔和的色调，文艺感，适合情感类账号，干净简约的背景，有质感',
-      minimalist: '极简主义风格，大面积留白，简约线条，高级感，文艺气息',
-      watercolor: '水彩风格插画，柔和的色彩晕染，梦幻感，温暖治愈',
-      gradient: '渐变色背景，现代设计感，简约大气',
-      photo: '治愈系摄影风格，自然光线，温暖色调，生活感'
-    };
+    // IMAGE_STYLE_PROMPTS 动态引用当前 Skill
+    const IMAGE_STYLE_PROMPTS = new Proxy({}, {
+      get(target, key) { return _s().imageStylePrompts[key] || _s().imageStylePrompts.xiaohongshu; }
+    });
 
     /**
      * 从 Gemini 图片模型响应中提取图片
@@ -2857,7 +3414,7 @@ Style requirements: ${stylePrompt}
 Important: 
 - The image should be vertical/portrait orientation (3:4 ratio), suitable for a phone screen
 - Include the Chinese text "${post.cover_text}" as the main visual text element on the image, rendered beautifully
-- The overall mood should match the "${post.category}" (emotional) category
+- The overall mood should match the "${post.category}" (${_s().aiNiche}) category
 - Make it visually appealing and Instagram/Xiaohongshu worthy
 - Clean, high-quality design`;
 
@@ -2875,18 +3432,19 @@ Important:
       const tags = (post.tags || '').split(',').slice(0, 3).join('、');
 
       // 根据笔记内容构建不同角度的图片提示词
+      const nicheEn = _s().aiNiche;
       const imagePrompts = [
-        // 第一张：情感氛围图
+        // 第一张：主题氛围图
         `Create a beautiful aesthetic image for a Chinese social media post.
 Theme: "${post.title}"
-Category: ${post.category} (emotion/feeling)
+Category: ${post.category} (${nicheEn})
 Style: ${stylePrompt}
 Requirements:
 - Vertical portrait orientation (3:4 ratio)
-- Convey the emotion of "${post.category}" through composition, color and atmosphere
+- Convey the theme of "${post.category}" through composition, color and atmosphere
 - NO text overlay on the image
 - Artistic, dreamy, suitable for Xiaohongshu (小红书)
-- Should evoke feelings of ${post.category}`,
+- Should evoke the feeling of ${post.category}`,
 
         // 第二张：场景意境图
         `Create an artistic scene illustration inspired by this text:
@@ -2906,27 +3464,27 @@ Style: ${stylePrompt}
 Requirements:
 - Vertical 3:4 ratio, NO text
 - Abstract or symbolic representation of the theme
-- Harmonious color palette matching ${post.category} emotion
+- Harmonious color palette matching ${post.category} theme
 - High quality, aesthetic, Xiaohongshu style`,
 
-        // 第四张：温暖细节图
-        `Create a warm, detailed close-up aesthetic photo.
+        // 第四张：细节图
+        `Create a beautiful, detailed close-up aesthetic photo.
 Theme: ${post.category} - ${post.cover_text || post.title}
 Style: ${stylePrompt}
 - Vertical 3:4 ratio, NO text
 - Focus on textural details, soft lighting
-- Cozy, intimate feeling
-- Suitable for emotional content on Xiaohongshu`,
+- Appealing, inviting feeling
+- Suitable for ${nicheEn} content on Xiaohongshu`,
 
-        // 第五张：治愈风景图
-        `Create a healing landscape/scenery image.
+        // 第五张：风景/场景图
+        `Create a beautiful landscape/scenery image.
 Inspired by: "${post.title}"
-Emotion: ${post.category}
+Category: ${post.category}
 Style: ${stylePrompt}
 - Vertical 3:4 ratio, NO text
-- Natural scenery matching the emotional tone
+- Natural scenery matching the content tone
 - Dreamy, ethereal quality
-- Visually calming and beautiful`
+- Visually appealing and beautiful`
       ];
 
       const images = [];
@@ -3133,7 +3691,7 @@ Style: ${stylePrompt}
 
       try {
         const payload = {
-          contents: [{ parts: [{ text: `Generate a beautiful small red book (Xiaohongshu) style image. Theme: healing and warmth. Style: ${stylePrompt}. Vertical 3:4 ratio. No text. Aesthetic, emotional.` }] }],
+          contents: [{ parts: [{ text: `Generate a beautiful small red book (Xiaohongshu) style image. Theme: ${_s().aiNiche} content, aesthetic vibes. Style: ${stylePrompt}. Vertical 3:4 ratio. No text. Aesthetic, emotional.` }] }],
           generationConfig: { responseModalities: ['IMAGE'] }
         };
 
@@ -3178,7 +3736,7 @@ Style: ${stylePrompt}
       document.getElementById('branding-preview-bio').textContent = pack.bio || '这里会展示账号简介、价值主张和吸引粉丝关注的话术。';
       document.getElementById('branding-preview-columns').innerHTML = columns.length
         ? columns.slice(0, 3).map(name => `<span class="branding-chip">${_escapeHtml(name)}</span>`).join('')
-        : '<span class="branding-chip">治愈表达</span>';
+        : `<span class="branding-chip">${_s().branding.previewChips[0] || '内容创作'}</span>`;
 
       const avatarImg = document.getElementById('branding-preview-avatar-img');
       const avatarFallback = document.getElementById('branding-preview-avatar-fallback');
@@ -3268,10 +3826,11 @@ Style: ${stylePrompt}
         return;
       }
 
-      const niche = document.getElementById('branding-niche').value.trim() || '小红书情感成长账号';
-      const audience = document.getElementById('branding-audience').value.trim() || '20-35岁希望被治愈、获得情绪价值和成长启发的女生';
-      const persona = document.getElementById('branding-persona').value.trim() || '温柔但有边界感，像一个清醒又会共情的朋友';
-      const keywords = document.getElementById('branding-keywords').value.trim() || '治愈,成长,边界感,清醒,温柔坚定';
+      const sk = _s();
+      const niche = document.getElementById('branding-niche').value.trim() || sk.branding.niche;
+      const audience = document.getElementById('branding-audience').value.trim() || sk.branding.audience;
+      const persona = document.getElementById('branding-persona').value.trim() || sk.branding.persona;
+      const keywords = document.getElementById('branding-keywords').value.trim() || sk.branding.keywords;
       const nameStyle = document.getElementById('branding-name-style').value;
       const imageStyle = document.getElementById('branding-image-style').value;
       const stylePrompt = IMAGE_STYLE_PROMPTS[imageStyle] || IMAGE_STYLE_PROMPTS.xiaohongshu;
@@ -3284,7 +3843,7 @@ Style: ${stylePrompt}
         updateGenProgress(progressEl, '✍️ 正在生成账号名称、简介和定位...', 15);
         btn.textContent = '✍️ 生成文案中...';
 
-        const prompt = `你是一位顶级小红书账号操盘手，专门给情感成长类账号做包装定位。
+        const prompt = `你是一位顶级小红书账号操盘手，专门给${sk.branding.promptPrefix}做包装定位。
 
 请基于以下信息，生成一套完整的小红书账号包装方案：
 
@@ -3325,12 +3884,12 @@ Style: ${stylePrompt}
 
         updateGenProgress(progressEl, '🖼️ 正在生成头像图...', 45);
         btn.textContent = '🖼️ 生成头像中...';
-        const avatarPrompt = `${pack.avatar_prompt || ''}\n风格要求：${stylePrompt}\n小红书情感成长账号头像，正方形构图，适合女性情感成长赛道，高级、干净、有记忆点，无文字，适合做账号头像。`;
+        const avatarPrompt = `${pack.avatar_prompt || ''}\n风格要求：${stylePrompt}\n${sk.branding.avatarSuffix}`;
         const avatarImage = await generateSingleImage(avatarPrompt);
 
         updateGenProgress(progressEl, '🌄 正在生成首页封面图...', 75);
         btn.textContent = '🌄 生成封面中...';
-        const bannerPrompt = `${pack.banner_prompt || ''}\n风格要求：${stylePrompt}\n为小红书个人主页顶部封面生成横版视觉图，宽屏构图，治愈、高级、统一审美，无文字，适合作为情感成长类账号主页封面。`;
+        const bannerPrompt = `${pack.banner_prompt || ''}\n风格要求：${stylePrompt}\n${sk.branding.bannerSuffix}`;
         const bannerImage = await generateSingleImage(bannerPrompt);
 
         pack = {
@@ -3534,7 +4093,7 @@ Style: ${stylePrompt}
           btn.textContent = '🌐 联网搜索小红书...';
           updateGenProgress(progressEl, '🌐 正在联网搜索小红书同类型爆款笔记...', 5);
 
-          const allCategories = ['治愈','成长','爱情','友情','自我','离别','温暖','释怀'];
+          const allCategories = _s().categories;
           const totalBatches = Math.ceil(count / 5);
           let batchesDone = 0;
           const allPosts = [];
@@ -3767,7 +4326,7 @@ Style: ${stylePrompt}
         const post = LocalDB.getPost(id);
         if (post && post.category) categories.push(post.category);
       });
-      const mainCategory = categories[0] || '治愈';
+      const mainCategory = categories[0] || _s().defaultCategory;
       renderTimeHeatmap(mainCategory, 'schedule-time-heatmap');
       renderBestTimeTags(mainCategory, 'schedule-best-times');
       updateSchedulePreview();
@@ -3863,7 +4422,7 @@ Style: ${stylePrompt}
       document.getElementById('edit-post-id').value = '';
       document.getElementById('edit-title').value = '';
       document.getElementById('edit-content').value = '';
-      document.getElementById('edit-category').value = '治愈';
+      document.getElementById('edit-category').value = _s().defaultCategory;
       document.getElementById('edit-status').value = 'draft';
       document.getElementById('edit-tags').value = '';
       document.getElementById('edit-cover-text').value = '';
@@ -4033,7 +4592,7 @@ Style: ${stylePrompt}
         const post = LocalDB.getPost(id);
         if (post && post.category) categories.push(post.category);
       });
-      const mainCategory = categories[0] || '治愈';
+      const mainCategory = categories[0] || _s().defaultCategory;
       renderTimeHeatmap(mainCategory, 'schedule-time-heatmap');
       renderBestTimeTags(mainCategory, 'schedule-best-times');
       updateSchedulePreview();
@@ -4362,6 +4921,7 @@ Style: ${stylePrompt}
     // ============ 初始化 ============
     // 检测是否有后端可用，否则使用本地模式
     async function init() {
+      applySkillToUI();
       migrateLegacyBrandingPack();
 
       // 初始化 IndexedDB 并迁移 localStorage 图片
