@@ -822,6 +822,7 @@
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                 <h3>📝 生成结果</h3>
                 <div class="btn-group">
+                  <button class="btn btn-sm btn-outline" onclick="viewAnalysisReport()" id="btn-analysis-report" style="display:none;">📊 查看分析报告</button>
                   <button class="btn btn-sm btn-outline" onclick="batchScheduleGenerated()">📅 批量排期</button>
                 </div>
               </div>
@@ -1585,55 +1586,178 @@
       return allPosts;
     }
 
-    async function _callGeminiForContent(apiKey, model, category, count) {
-      const prompt = `你是一位拥有百万粉丝的资深小红书情感类博主，精通平台算法和爆款内容创作。请严格按以下流程完成任务。
+    // ========== 第一步：联网搜索+分析小红书爆款笔记 ==========
+    async function _searchAndAnalyzeXHS(apiKey, model, category) {
+      const searchPrompt = `请你搜索小红书平台上「${category}」分类的情感类热门笔记/爆款笔记。
 
-## 第一步：同类型爆款笔记深度分析
+请搜索以下关键词，获取真实的小红书热门内容数据：
+- "小红书 ${category} 情感文案 爆款"
+- "小红书 ${category} 语录 点赞高"
+- "xiaohongshu ${category} 情感 热门笔记"
+- "小红书 情感赛道 ${category} 流量"
 
-请先深入分析小红书平台「${category}」分类情感类爆款笔记（点赞过万）的规律：
+搜索完成后，请基于搜索到的真实数据，输出详细的分析报告，格式如下：
 
-### 标题分析
-- 爆款标题通常使用「情绪词+分隔符+悬念」结构，如「别哭了｜这些话说到心坎里了」
-- 善用emoji增加视觉吸引力，但不超过2个
-- 常用分隔符：｜、·、//、→
-- 高点击率标题特征：引发好奇心、制造共情、暗示有干货
-- 标题字数控制在15-25字之间
+## 搜索到的真实爆款笔记案例
+列出你搜索找到的5-10个真实的小红书「${category}」情感类高赞笔记，包括：
+- 笔记标题（原文）
+- 大致点赞/收藏量级
+- 内容特点摘要
 
-### 内容结构分析
-- 开头hook：前两行决定是否被展开阅读，必须直击痛点或引发强烈共鸣
-- 正文叙述：采用「痛点共鸣→情感转折→正向引导」三段式结构
-- 善用换行和空行增强阅读节奏感
-- 每段控制在2-3句话，避免大段文字
-- 金句结尾：最后一句要有记忆点，让人想截图保存
-- 互动引导：结尾加引导关注/评论/收藏的话术
+## 标题规律总结
+从真实案例中提炼标题特征、常用句式、字数范围、emoji使用模式
 
-### 流量密码分析
-- 情感共鸣是第一驱动力：用户看完想转发给特定的人
-- 「代入感」至关重要：用「你」而非「我」叙述，让读者觉得是在对自己说
-- 「反差感」制造传播：先说痛点再给希望
-- 「金句密度」决定收藏率：平均每2-3段要有一句值得收藏的话
-- 发布时间影响曝光：晚上9-11点是情感类内容黄金发布时间
-- 标签精准度影响推荐：混合使用大标签（百万级）和精准小标签
+## 内容结构规律
+从真实案例中总结正文的结构模式、开头hook手法、叙述节奏、金句位置
 
-### 封面文字分析
-- 封面文字是第一视觉焦点，必须简短有力（4-10字）
-- 要能独立表达完整情绪，不依赖正文理解
-- 优先使用反问句或感叹句增强冲击力
+## 当前热门话题/趋势
+当前小红书情感赛道「${category}」子分类的热点话题、流行关键词、用户讨论焦点
 
-## 第二步：基于分析结果，生成 ${count} 条高质量笔记
+## 标签使用规律
+热门笔记常用的标签组合，区分大标签和精准小标签
 
-请为「${category}」分类生成 ${count} 条差异化的小红书情感笔记。每条笔记都要：
-1. 标题：运用爆款标题公式，有吸引力
-2. 正文：300-500字，结构清晰，有hook→转折→升华，有金句，末尾有互动引导（用emoji装饰）
-3. 标签：5个，混合大小标签，用逗号分隔
-4. 封面文字：4-10字的核心情绪短句
-5. 分类：${category}
+## 封面文字规律
+爆款笔记的封面文字特征，字数、句式、情绪表达方式
 
-每条笔记之间要有差异化，覆盖「${category}」下不同的子主题和场景。
+## 流量密码总结
+综合分析这些爆款笔记能获得高流量的核心原因（至少5点）`;
+
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: searchPrompt }] }],
+          tools: [{ google_search: {} }],
+          generationConfig: {
+            temperature: 0.7,
+            topP: 0.9,
+            maxOutputTokens: 8192
+          }
+        })
+      });
+
+      if (!response.ok) {
+        const err = await response.json();
+        // 如果 google_search 工具不可用，降级为不带搜索的分析
+        if (err.error?.code === 400 || err.error?.message?.includes('tool')) {
+          console.warn('Google Search grounding 不可用，降级为知识库分析');
+          return await _analyzeWithoutSearch(apiKey, model, category);
+        }
+        throw new Error(err.error?.message || `Gemini API 错误 (${response.status})`);
+      }
+
+      const data = await response.json();
+      // 提取所有文本部分（搜索结果+分析）
+      const parts = data.candidates?.[0]?.content?.parts || [];
+      let analysisText = '';
+      for (const part of parts) {
+        if (part.text) analysisText += part.text + '\n';
+      }
+
+      // 提取 grounding 来源信息
+      const groundingMeta = data.candidates?.[0]?.groundingMetadata;
+      let sources = [];
+      if (groundingMeta?.groundingChunks) {
+        sources = groundingMeta.groundingChunks
+          .filter(c => c.web)
+          .map(c => ({ title: c.web.title || '', uri: c.web.uri || '' }))
+          .slice(0, 10);
+      }
+      if (groundingMeta?.searchEntryPoint?.renderedContent) {
+        analysisText += '\n\n[搜索来源可用]';
+      }
+
+      return { analysisText, sources, searchUsed: true };
+    }
+
+    // 降级方案：不带搜索的分析
+    async function _analyzeWithoutSearch(apiKey, model, category) {
+      const prompt = `你是一位拥有百万粉丝的资深小红书情感类博主，精通平台算法和爆款内容创作。
+
+请基于你对小红书平台的深入了解，详细分析「${category}」分类情感类爆款笔记的规律：
+
+## 典型爆款笔记案例
+列出5-8个典型的「${category}」情感类高赞笔记标题示例及内容特点
+
+## 标题规律
+爆款标题的句式结构、字数范围、emoji使用、分隔符选择
+
+## 内容结构规律
+正文的开头hook、叙述结构、金句密度、互动引导方式
+
+## 热门话题方向
+「${category}」分类当前最受欢迎的子话题和切入角度
+
+## 标签策略
+常用的标签组合方式
+
+## 封面文字规律
+高点击封面文字的特征
+
+## 流量密码
+核心的流量获取策略`;
+
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { temperature: 0.8, topP: 0.9, maxOutputTokens: 4096 }
+        })
+      });
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error?.message || `Gemini API 错误 (${response.status})`);
+      }
+
+      const data = await response.json();
+      const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      return { analysisText: text, sources: [], searchUsed: false };
+    }
+
+    // ========== 第二步：基于分析结果生成笔记 ==========
+    async function _generateFromAnalysis(apiKey, model, category, count, analysis) {
+      const { analysisText, sources, searchUsed } = analysis;
+
+      const sourceInfo = sources.length > 0
+        ? `\n\n## 参考来源\n${sources.map((s, i) => `${i + 1}. ${s.title} (${s.uri})`).join('\n')}`
+        : '';
+
+      const prompt = `你是一位拥有百万粉丝的资深小红书情感类博主。
+
+## 背景：真实爆款笔记分析
+
+以下是${searchUsed ? '通过搜索获取的' : '基于经验总结的'}小红书「${category}」分类情感类爆款笔记的分析报告：
+
+---
+${analysisText}
+---
+${sourceInfo}
+
+## 你的任务
+
+基于以上真实的爆款笔记分析，请生成 ${count} 条高质量小红书情感笔记。
+
+### 核心要求
+1. **标题**：必须参考分析中发现的爆款标题规律来创作，使用相同的句式结构和情绪节奏
+2. **正文**：300-500字，严格套用分析中总结的内容结构（hook→转折→升华），金句密度要高
+3. **标签**：5个，参考分析中的标签策略，混合大标签和精准小标签，用逗号分隔
+4. **封面文字**：4-10字，参考分析中的封面文字规律
+5. **差异化**：${count} 条笔记必须覆盖不同的子主题/场景/切入角度
+6. **风格**：必须贴近真实用户的语气，像是一个真实的人在诉说，避免说教感
+7. **互动**：结尾必须有引导点赞/收藏/评论的话术（搭配emoji）
+
+### 特别注意
+- 直接参考搜索到的爆款笔记的成功要素来创作
+- 融入当前热门话题和流行表达
+- 每条笔记的 ai_analysis 字段要说明借鉴了哪个爆款笔记的什么策略
 
 ## 输出格式
 
-请严格输出如下 JSON 数组格式（不要输出其他任何内容）：
+请严格输出如下 JSON 数组格式（不要输出任何其他内容，不要输出 markdown 代码块标记）：
 [
   {
     "title": "笔记标题",
@@ -1641,11 +1765,11 @@
     "tags": "标签1,标签2,标签3,标签4,标签5",
     "cover_text": "封面短句",
     "category": "${category}",
-    "ai_analysis": "简要说明这条笔记运用了什么流量策略（一句话）"
+    "ai_analysis": "借鉴了[某爆款笔记特点]，运用了[具体流量策略]"
   }
 ]
 
-请确保输出是合法的 JSON，content字段中的换行请用 \\n 表示。`;
+请确保输出是合法的 JSON，content字段中的换行请用 \\n 表示。不要在JSON前后添加任何其他文字。`;
 
       const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
       const response = await fetch(url, {
@@ -1670,26 +1794,7 @@
       const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
 
       // 从返回文本中提取 JSON
-      let posts = [];
-      try {
-        // 尝试直接解析
-        posts = JSON.parse(text);
-      } catch {
-        // 尝试从 markdown code block 中提取
-        const jsonMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/);
-        if (jsonMatch) {
-          posts = JSON.parse(jsonMatch[1].trim());
-        } else {
-          // 尝试找到 JSON 数组
-          const arrMatch = text.match(/(\[\s*\{[\s\S]*\}\s*\])/);
-          if (arrMatch) {
-            posts = JSON.parse(arrMatch[1]);
-          } else {
-            throw new Error('AI 返回格式异常，无法解析内容');
-          }
-        }
-      }
-
+      let posts = _extractJsonFromText(text);
       if (!Array.isArray(posts)) posts = [posts];
 
       // 规范化返回数据
@@ -1699,8 +1804,95 @@
         tags: p.tags || '',
         cover_text: p.cover_text || p.title?.slice(0, 10) || '',
         category: p.category || category,
-        ai_analysis: p.ai_analysis || ''
+        ai_analysis: (p.ai_analysis || '') + (searchUsed ? ' [基于联网搜索]' : '')
       }));
+    }
+
+    // ========== JSON 提取工具 ==========
+    function _extractJsonFromText(text) {
+      try {
+        return JSON.parse(text);
+      } catch {
+        // 尝试从 markdown code block 中提取
+        const jsonMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+        if (jsonMatch) {
+          return JSON.parse(jsonMatch[1].trim());
+        }
+        // 尝试找到 JSON 数组
+        const arrMatch = text.match(/(\[\s*\{[\s\S]*\}\s*\])/);
+        if (arrMatch) {
+          return JSON.parse(arrMatch[1]);
+        }
+        throw new Error('AI 返回格式异常，无法解析内容');
+      }
+    }
+
+    // ========== 组合调用：搜索分析 + 生成 ==========
+    async function _callGeminiForContent(apiKey, model, category, count, onProgress) {
+      // 第一步：联网搜索+分析
+      if (onProgress) onProgress('search', `🌐 正在搜索小红书「${category}」爆款笔记...`);
+      const analysis = await _searchAndAnalyzeXHS(apiKey, model, category);
+
+      if (onProgress) {
+        const statusMsg = analysis.searchUsed
+          ? `✅ 已检索到 ${analysis.sources.length} 个相关来源，分析完成`
+          : '📊 已完成知识库分析（未使用联网搜索）';
+        onProgress('analyzed', statusMsg);
+      }
+
+      // 缓存分析结果供用户查看
+      _lastAnalysis = analysis;
+
+      // 第二步：基于分析结果生成
+      if (onProgress) onProgress('generate', `✍️ 基于分析结果创作 ${count} 条笔记...`);
+      const posts = await _generateFromAnalysis(apiKey, model, category, count, analysis);
+
+      return posts;
+    }
+
+    // 存储最近一次的分析报告
+    let _lastAnalysis = null;
+
+    function viewAnalysisReport() {
+      if (!_lastAnalysis) {
+        toast('暂无分析报告，请先生成笔记', 'error');
+        return;
+      }
+      const { analysisText, sources, searchUsed } = _lastAnalysis;
+      let html = `<div style="max-height:70vh; overflow-y:auto; padding:16px;">`;
+      html += `<div style="margin-bottom:12px; padding:8px 12px; border-radius:8px; background:${searchUsed ? '#e8f5e9' : '#fff3e0'}; font-size:13px;">`;
+      html += searchUsed
+        ? `🌐 <strong>已联网搜索</strong>：本次分析基于 Google 搜索到的真实小红书数据`
+        : `📊 <strong>知识库分析</strong>：本次分析基于 AI 内置知识`;
+      html += `</div>`;
+      html += `<div style="white-space:pre-wrap; font-size:13px; line-height:1.8; color:var(--text);">${_escapeHtml(analysisText)}</div>`;
+      if (sources.length > 0) {
+        html += `<div style="margin-top:16px; border-top:1px solid var(--border); padding-top:12px;"><h4 style="font-size:14px; margin-bottom:8px;">🔗 参考来源（${sources.length}个）</h4>`;
+        sources.forEach((s, i) => {
+          html += `<div style="font-size:12px; margin-bottom:4px;"><a href="${_escapeHtml(s.uri)}" target="_blank" style="color:var(--info); text-decoration:none;">${i + 1}. ${_escapeHtml(s.title || s.uri)}</a></div>`;
+        });
+        html += `</div>`;
+      }
+      html += `</div>`;
+
+      // 使用一个临时 modal 展示
+      let modal = document.getElementById('modal-analysis');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'modal-analysis';
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `<div class="modal" style="max-width:700px;"><div class="modal-header"><h3>📊 AI 爆款笔记分析报告</h3><button class="modal-close" onclick="closeModal('modal-analysis')">&times;</button></div><div class="modal-body" id="analysis-body"></div></div>`;
+        modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('active'); });
+        document.body.appendChild(modal);
+      }
+      document.getElementById('analysis-body').innerHTML = html;
+      modal.classList.add('active');
+    }
+
+    function _escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
     }
 
     // ============ Gemini 图片生成 ============
@@ -1830,7 +2022,7 @@ Important:
       const hintEl = document.getElementById('gen-mode-hint');
       if (hintEl) {
         if (key) {
-          hintEl.innerHTML = '🤖 <strong>AI 智能模式</strong>：将调用 Gemini API 分析爆款笔记并生成高质量内容';
+          hintEl.innerHTML = '🤖 <strong>AI 智能模式</strong>：将联网搜索小红书爆款笔记 → 分析流量密码 → 生成高质量内容';
           hintEl.style.color = 'var(--success)';
         } else {
           hintEl.innerHTML = '⚠️ <strong>本地模板模式</strong>：请在「API 设置」中配置 Gemini Key 以启用 AI 智能生成';
@@ -1971,44 +2163,52 @@ Important:
 
         if (hasApiKey) {
           // ====== AI 智能生成模式（调用 Gemini API）======
-          updateGenProgress(progressEl, '🔍 分析同类型爆款笔记...', 10);
-          await new Promise(r => setTimeout(r, 300));
+          btn.textContent = '🌐 联网搜索小红书...';
+          updateGenProgress(progressEl, '🌐 正在联网搜索小红书同类型爆款笔记...', 5);
 
-          updateGenProgress(progressEl, '💡 提取流量密码 & 内容策略...', 20);
-          btn.textContent = '🤖 AI 分析 & 创作中...';
-
+          const allCategories = ['治愈','成长','爱情','友情','自我','离别','温暖','释怀'];
           const totalBatches = Math.ceil(count / 5);
           let batchesDone = 0;
+          const allPosts = [];
+          let remaining = count;
 
-          // 拦截生成过程显示进度
-          const origCall = _callGeminiForContent;
-          const wrappedGenerate = async () => {
-            const allPosts = [];
-            const allCategories = ['治愈','成长','爱情','友情','自我','离别','温暖','释怀'];
-            let remaining = count;
-            while (remaining > 0) {
-              const batchCount = Math.min(remaining, 5);
-              const batchCat = category || allCategories[Math.floor(Math.random() * allCategories.length)];
-              batchesDone++;
-              const pct = 20 + Math.round((batchesDone / totalBatches) * 50);
-              updateGenProgress(progressEl, `✍️ AI 创作中...（第 ${batchesDone}/${totalBatches} 批）`, pct);
-              const batchPosts = await origCall(getGeminiKey(), getGeminiModel(), batchCat, batchCount);
-              allPosts.push(...batchPosts);
-              remaining -= batchCount;
-              if (remaining > 0) await new Promise(r => setTimeout(r, 1500));
-            }
-            return allPosts;
-          };
+          while (remaining > 0) {
+            const batchCount = Math.min(remaining, 5);
+            const batchCat = category || allCategories[Math.floor(Math.random() * allCategories.length)];
+            batchesDone++;
 
-          posts = await wrappedGenerate();
-          updateGenProgress(progressEl, '✅ AI 内容生成完成！', 70);
+            const batchPosts = await _callGeminiForContent(
+              getGeminiKey(), getGeminiModel(), batchCat, batchCount,
+              (stage, msg) => {
+                let pct = 0;
+                const batchBase = ((batchesDone - 1) / totalBatches) * 80;
+                if (stage === 'search') {
+                  pct = Math.round(batchBase + 5);
+                  btn.textContent = `🌐 搜索小红书「${batchCat}」爆款...`;
+                } else if (stage === 'analyzed') {
+                  pct = Math.round(batchBase + 35);
+                  btn.textContent = `📊 分析完成，开始创作...`;
+                } else if (stage === 'generate') {
+                  pct = Math.round(batchBase + 50);
+                  btn.textContent = `✍️ AI 创作中 (${batchesDone}/${totalBatches})...`;
+                }
+                updateGenProgress(progressEl, msg, pct);
+              }
+            );
+            allPosts.push(...batchPosts);
+            remaining -= batchCount;
+            if (remaining > 0) await new Promise(r => setTimeout(r, 1500));
+          }
+
+          posts = allPosts;
+          updateGenProgress(progressEl, '✅ AI 内容生成完成！<button onclick="viewAnalysisReport()" style="margin-left:8px; padding:2px 10px; border:1px solid var(--info); background:white; color:var(--info); border-radius:4px; cursor:pointer; font-size:12px;">📊 查看分析报告</button>', 80);
 
         } else {
           // ====== 本地模板模式（无 API Key 时的降级方案）======
           btn.textContent = '⏳ 生成文案中...';
           updateGenProgress(progressEl, '📝 使用本地模板生成...', 50);
           posts = ContentEngine.generateBatch(count, category || null);
-          updateGenProgress(progressEl, '⚠️ 提示：配置 Gemini API Key 可启用 AI 智能生成', 70);
+          updateGenProgress(progressEl, '⚠️ 提示：配置 Gemini API Key 可启用 AI 联网搜索 + 智能生成', 80);
         }
 
         // 自动保存到草稿箱
@@ -2024,8 +2224,11 @@ Important:
         // 先显示文案结果
         renderGeneratedList(posts);
         document.getElementById('gen-results').style.display = 'block';
+        // 显示/隐藏分析报告按钮
+        const reportBtn = document.getElementById('btn-analysis-report');
+        if (reportBtn) reportBtn.style.display = (hasApiKey && _lastAnalysis) ? '' : 'none';
         if (posts.length > 0) previewPost(posts[0]);
-        toast(`成功生成 ${posts.length} 条笔记${hasApiKey ? '（AI 智能生成）' : '（本地模板）'}！`, 'success');
+        toast(`成功生成 ${posts.length} 条笔记${hasApiKey ? '（AI 联网搜索+智能生成）' : '（本地模板）'}！`, 'success');
 
         // 如果启用了图片生成
         if (withImage && hasApiKey) {
@@ -2675,7 +2878,7 @@ Important:
       const hintEl = document.getElementById('gen-mode-hint');
       if (hintEl) {
         if (hasKey) {
-          hintEl.innerHTML = '🤖 <strong>AI 智能模式</strong>：将调用 Gemini API 分析爆款笔记并生成高质量内容';
+          hintEl.innerHTML = '🤖 <strong>AI 智能模式</strong>：将联网搜索小红书爆款笔记 → 分析流量密码 → 生成高质量内容';
           hintEl.style.color = 'var(--success)';
         } else {
           hintEl.innerHTML = '⚠️ <strong>本地模板模式</strong>：请在「API 设置」中配置 Gemini Key 以启用 AI 智能生成';
