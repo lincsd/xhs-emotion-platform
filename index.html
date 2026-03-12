@@ -1791,6 +1791,82 @@
     let currentViewPost = null;
     let _brandingPackMemory = null;
 
+    // ============ 图片存储 (IndexedDB + 内存缓存) ============
+    const _imageMemoryCache = { covers: {}, contents: {} };
+    let _imageDB = null;
+
+    function _openImageDB() {
+      return new Promise((resolve, reject) => {
+        if (_imageDB) { resolve(_imageDB); return; }
+        const req = indexedDB.open('xhs_images_db', 1);
+        req.onupgradeneeded = (e) => {
+          const db = e.target.result;
+          if (!db.objectStoreNames.contains('covers')) db.createObjectStore('covers');
+          if (!db.objectStoreNames.contains('contents')) db.createObjectStore('contents');
+        };
+        req.onsuccess = (e) => { _imageDB = e.target.result; resolve(_imageDB); };
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function _idbPut(storeName, key, value) {
+      try {
+        const db = await _openImageDB();
+        return new Promise((resolve, reject) => {
+          const tx = db.transaction(storeName, 'readwrite');
+          tx.objectStore(storeName).put(value, String(key));
+          tx.oncomplete = () => resolve();
+          tx.onerror = () => reject(tx.error);
+        });
+      } catch (e) { console.warn('IDB put failed:', e); }
+    }
+
+    async function _idbGet(storeName, key) {
+      try {
+        const db = await _openImageDB();
+        return new Promise((resolve, reject) => {
+          const tx = db.transaction(storeName, 'readonly');
+          const req = tx.objectStore(storeName).get(String(key));
+          req.onsuccess = () => resolve(req.result || null);
+          req.onerror = () => reject(req.error);
+        });
+      } catch (e) { console.warn('IDB get failed:', e); return null; }
+    }
+
+    // 迁移 localStorage 图片到 IndexedDB
+    async function migrateLocalStorageImages() {
+      try {
+        const coverRaw = localStorage.getItem('xhs_post_images');
+        if (coverRaw) {
+          const covers = JSON.parse(coverRaw);
+          for (const [id, data] of Object.entries(covers)) {
+            _imageMemoryCache.covers[id] = data;
+            await _idbPut('covers', id, data);
+          }
+          localStorage.removeItem('xhs_post_images');
+          console.log('✅ 封面图已迁移到 IndexedDB');
+        }
+      } catch (e) {
+        console.warn('封面图迁移失败:', e);
+        try { localStorage.removeItem('xhs_post_images'); } catch {}
+      }
+      try {
+        const contentRaw = localStorage.getItem('xhs_post_content_images');
+        if (contentRaw) {
+          const contents = JSON.parse(contentRaw);
+          for (const [id, data] of Object.entries(contents)) {
+            _imageMemoryCache.contents[id] = data;
+            await _idbPut('contents', id, data);
+          }
+          localStorage.removeItem('xhs_post_content_images');
+          console.log('✅ 配图已迁移到 IndexedDB');
+        }
+      } catch (e) {
+        console.warn('配图迁移失败:', e);
+        try { localStorage.removeItem('xhs_post_content_images'); } catch {}
+      }
+    }
+
     // Gemini 设置
     const DEFAULT_GEMINI_PROXY_BASE = 'https://xhs-gemini-proxy.onrender.com';
 
@@ -2910,26 +2986,34 @@ Style: ${stylePrompt}
     }
 
     function getPostImage(postId) {
-      try {
-        const store = JSON.parse(localStorage.getItem('xhs_post_images') || '{}');
-        return store[postId] || null;
-      } catch { return null; }
+      // 优先内存缓存
+      if (_imageMemoryCache.covers[postId]) return _imageMemoryCache.covers[postId];
+      return null; // 异步加载见 getPostImageAsync
+    }
+
+    async function getPostImageAsync(postId) {
+      if (_imageMemoryCache.covers[postId]) return _imageMemoryCache.covers[postId];
+      const data = await _idbGet('covers', postId);
+      if (data) _imageMemoryCache.covers[postId] = data;
+      return data;
     }
 
     function savePostImage(postId, dataUrl) {
-      try {
-        const store = JSON.parse(localStorage.getItem('xhs_post_images') || '{}');
-        store[postId] = dataUrl;
-        localStorage.setItem('xhs_post_images', JSON.stringify(store));
-      } catch {}
+      _imageMemoryCache.covers[postId] = dataUrl;
+      _idbPut('covers', postId, dataUrl).catch(e => console.warn('保存封面图失败:', e));
     }
 
     // 配图存储（内容图片，区别于封面图）
     function getPostContentImages(postId) {
-      try {
-        const store = JSON.parse(localStorage.getItem('xhs_post_content_images') || '{}');
-        return store[postId] || [];
-      } catch { return []; }
+      if (_imageMemoryCache.contents[postId]) return _imageMemoryCache.contents[postId];
+      return []; // 异步加载见 getPostContentImagesAsync
+    }
+
+    async function getPostContentImagesAsync(postId) {
+      if (_imageMemoryCache.contents[postId]) return _imageMemoryCache.contents[postId];
+      const data = await _idbGet('contents', postId);
+      if (data) _imageMemoryCache.contents[postId] = data;
+      return data || [];
     }
 
     function getBrandingPack() {
@@ -2987,13 +3071,8 @@ Style: ${stylePrompt}
     }
 
     function savePostContentImages(postId, images) {
-      try {
-        const store = JSON.parse(localStorage.getItem('xhs_post_content_images') || '{}');
-        store[postId] = images;
-        localStorage.setItem('xhs_post_content_images', JSON.stringify(store));
-      } catch (e) {
-        console.warn('Failed to save content images (storage might be full):', e);
-      }
+      _imageMemoryCache.contents[postId] = images;
+      _idbPut('contents', postId, images).catch(e => console.warn('保存配图失败:', e));
     }
 
     // 图片灯箱
@@ -3006,10 +3085,10 @@ Style: ${stylePrompt}
     }
 
     // 下载全部配图
-    function downloadContentImages() {
+    async function downloadContentImages() {
       if (!currentViewPost) return;
-      const images = getPostContentImages(currentViewPost.id);
-      const cover = getPostImage(currentViewPost.id);
+      const images = await getPostContentImagesAsync(currentViewPost.id);
+      const cover = await getPostImageAsync(currentViewPost.id);
       const allImages = [];
       if (cover) allImages.push({ data: cover, name: `cover_${currentViewPost.id}.png` });
       images.forEach((img, i) => allImages.push({ data: img, name: `content_${currentViewPost.id}_${i + 1}.png` }));
@@ -3849,8 +3928,8 @@ Style: ${stylePrompt}
       document.getElementById('view-tags').textContent = post.tags ? post.tags.split(',').map(t => '#' + t).join(' ') : '';
       document.getElementById('view-cover-text').textContent = post.cover_text || '';
       
-      // 检查是否有生成的封面图
-      const img = getPostImage(id);
+      // 检查是否有生成的封面图（异步从 IndexedDB 加载）
+      const img = await getPostImageAsync(id);
       const viewCover = document.getElementById('view-cover');
       const viewCoverImg = document.getElementById('view-cover-img');
       if (img) {
@@ -3866,8 +3945,8 @@ Style: ${stylePrompt}
         viewCoverImg.style.display = 'none';
       }
 
-      // 显示配图画廊
-      const contentImages = getPostContentImages(id);
+      // 显示配图画廊（异步从 IndexedDB 加载）
+      const contentImages = await getPostContentImagesAsync(id);
       const galleryContainer = document.getElementById('view-content-images');
       const gallery = document.getElementById('view-content-images-gallery');
       if (contentImages.length > 0) {
@@ -3903,10 +3982,10 @@ Style: ${stylePrompt}
       navigator.clipboard.writeText(text).then(() => toast('已复制到剪贴板', 'success'));
     }
 
-    function exportCurrentPost() {
+    async function exportCurrentPost() {
       if (!currentViewPost) return;
       // 导出图片
-      const img = getPostImage(currentViewPost.id);
+      const img = await getPostImageAsync(currentViewPost.id);
       if (img) {
         const a = document.createElement('a');
         a.href = img;
@@ -3928,9 +4007,9 @@ Style: ${stylePrompt}
       }
     }
 
-    function downloadPostImage() {
+    async function downloadPostImage() {
       if (!currentViewPost) return;
-      const img = getPostImage(currentViewPost.id);
+      const img = await getPostImageAsync(currentViewPost.id);
       if (img) {
         const a = document.createElement('a');
         a.href = img;
@@ -4282,6 +4361,12 @@ Style: ${stylePrompt}
     // 检测是否有后端可用，否则使用本地模式
     async function init() {
       migrateLegacyBrandingPack();
+
+      // 初始化 IndexedDB 并迁移 localStorage 图片
+      try {
+        await _openImageDB();
+        await migrateLocalStorageImages();
+      } catch (e) { console.warn('IndexedDB 初始化:', e); }
 
       // 初始化设置 checkbox 状态
       const hasKey = canUseAI();
