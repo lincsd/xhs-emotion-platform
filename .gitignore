@@ -11,3 +11,6 @@ api_key.txt
 models.json
 test_gemini_ai.py
 test_gen.py
+
+test_proxy.py
+deployed.html
