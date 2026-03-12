@@ -1277,8 +1277,14 @@
     function getGeminiKey() { return localStorage.getItem('xhs_gemini_key') || ''; }
     function getGeminiModel() { return localStorage.getItem('xhs_gemini_model') || 'gemini-2.5-flash'; }
     function getImageStyle() { return localStorage.getItem('xhs_image_style') || 'xiaohongshu'; }
+    function normalizeGeminiProxyBase(raw) {
+      let value = (raw || '').trim().replace(/\/+$/, '');
+      value = value.replace(/\/api\/gemini-proxy$/i, '');
+      value = value.replace(/\/api\/stats$/i, '');
+      return value;
+    }
     function getGeminiProxyBase() {
-      return (localStorage.getItem('xhs_gemini_proxy_base') || '').trim().replace(/\/+$/, '');
+      return normalizeGeminiProxyBase(localStorage.getItem('xhs_gemini_proxy_base') || '');
     }
     function getGeminiProxyAPIUrl() {
       const base = getGeminiProxyBase();
@@ -1296,7 +1302,7 @@
     async function _checkServerProxy() {
       if (_serverProxyAvailable !== null) return _serverProxyAvailable;
       try {
-        const r = await fetch(getGeminiProxyHealthUrl(), { signal: AbortSignal.timeout(3000) });
+        const r = await fetch(getGeminiProxyHealthUrl(), { signal: AbortSignal.timeout(8000) });
         _serverProxyAvailable = r.ok;
       } catch {
         _serverProxyAvailable = false;
@@ -1314,7 +1320,9 @@
      * @returns {object} Gemini API 响应 JSON
      */
     async function callGeminiAPI(apiKey, model, payload, action = 'generateContent') {
-      const useProxy = await _checkServerProxy();
+      const proxyBase = getGeminiProxyBase();
+      const forceProxy = !!proxyBase;
+      const useProxy = forceProxy ? true : await _checkServerProxy();
 
       if (useProxy) {
         // 走服务器代理
@@ -1322,6 +1330,7 @@
           const res = await fetch(getGeminiProxyAPIUrl(), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            signal: AbortSignal.timeout(forceProxy ? 70000 : 30000),
             body: JSON.stringify({ apiKey, model, payload, action })
           });
           const data = await res.json();
@@ -1332,6 +1341,9 @@
           return { ok: true, data };
         } catch (e) {
           if (e.fromProxy) throw e; // Gemini 本身的错误，不重试
+          if (forceProxy) {
+            throw new Error('代理服务连接失败，请稍后重试（Render 免费实例可能正在冷启动 30-60 秒）');
+          }
           console.warn('[Gemini] Server proxy failed, trying direct:', e.message);
           // 代理网络错误，降级为直连
         }
@@ -2073,7 +2085,7 @@ Important:
     function saveSettings() {
       const key = document.getElementById('settings-api-key').value.trim();
       const model = document.getElementById('settings-model').value;
-      const proxyBase = document.getElementById('settings-proxy-base').value.trim().replace(/\/+$/, '');
+      const proxyBase = normalizeGeminiProxyBase(document.getElementById('settings-proxy-base').value);
       const style = document.getElementById('settings-style').value;
       if (key) localStorage.setItem('xhs_gemini_key', key);
       else localStorage.removeItem('xhs_gemini_key');
@@ -2103,7 +2115,7 @@ Important:
     async function testGeminiKey() {
       const key = document.getElementById('settings-api-key').value.trim();
       const model = document.getElementById('settings-model').value;
-      const proxyBase = document.getElementById('settings-proxy-base').value.trim().replace(/\/+$/, '');
+      const proxyBase = normalizeGeminiProxyBase(document.getElementById('settings-proxy-base').value);
       const statusEl = document.getElementById('settings-status');
       if (!key) { statusEl.innerHTML = '<span style="color:#ff4d4f;">❌ 请先输入 API Key</span>'; return; }
       if (proxyBase) localStorage.setItem('xhs_gemini_proxy_base', proxyBase);
