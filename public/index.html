@@ -414,6 +414,38 @@
     .preview-info .preview-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; }
     .preview-info .preview-tags { font-size: 12px; color: var(--info); }
 
+    /* ===== 配图画廊 ===== */
+    .content-images-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .content-images-gallery img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 2px solid transparent;
+    }
+    .content-images-gallery img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      border-color: var(--primary);
+    }
+    .image-lightbox {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85); z-index: 10000;
+      display: flex; align-items: center; justify-content: center;
+      cursor: zoom-out;
+    }
+    .image-lightbox img {
+      max-width: 90vw; max-height: 90vh;
+      object-fit: contain; border-radius: 8px;
+    }
+
     /* ===== 变现路线图 ===== */
     .roadmap { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 8px; }
     .roadmap-step {
@@ -808,8 +840,17 @@
               <div class="form-group">
                 <label>
                   <input type="checkbox" id="gen-with-image" checked style="accent-color: var(--primary);">
-                  🎨 AI 生成封面图（需配置 Gemini API Key）
+                  🎨 AI 生成配图（使用 Nano Banana 模型）
                 </label>
+              </div>
+              <div class="form-group" id="gen-image-count-group">
+                <label>每条笔记配图数量</label>
+                <select id="gen-image-count" class="form-control" style="width:auto; display:inline-block; margin-left:8px;">
+                  <option value="1">1 张</option>
+                  <option value="2" selected>2 张</option>
+                  <option value="3">3 张（推荐）</option>
+                  <option value="5">5 张</option>
+                </select>
               </div>
               <button class="btn btn-primary" onclick="generatePosts()" id="gen-btn">
                 ✨ 一键生成
@@ -1196,6 +1237,11 @@
             </div>
             <div id="view-content" style="white-space:pre-wrap; line-height:1.8; font-size:14px;"></div>
             <div id="view-tags" style="margin-top:16px; font-size:13px; color: var(--info);"></div>
+            <!-- 配图画廊 -->
+            <div id="view-content-images" style="margin-top:16px; display:none;">
+              <h4 style="font-size:14px; margin-bottom:8px;">🎨 笔记配图</h4>
+              <div class="content-images-gallery" id="view-content-images-gallery"></div>
+            </div>
           </div>
           <div style="width:200px; flex-shrink:0;">
             <div class="preview-card" style="width:200px;">
@@ -1207,6 +1253,7 @@
             <div style="margin-top:16px;">
               <button class="btn btn-sm btn-outline" onclick="copyPostContent()" style="width:100%; margin-bottom:6px;">📋 复制内容</button>
               <button class="btn btn-sm btn-outline" onclick="downloadPostImage()" style="width:100%; margin-bottom:6px;">🖼️ 下载封面图</button>
+              <button class="btn btn-sm btn-outline" onclick="downloadContentImages()" style="width:100%; margin-bottom:6px;">📥 下载全部配图</button>
               <button class="btn btn-sm btn-outline" onclick="exportCurrentPost()" style="width:100%;">📥 导出文件</button>
             </div>
           </div>
@@ -1230,12 +1277,22 @@
           <small style="color:var(--text-light);display:block;margin-top:4px;">获取地址: <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--info);">aistudio.google.com/apikey</a></small>
         </div>
         <div class="form-group">
-          <label>图片生成模型</label>
+          <label>AI 文本模型</label>
           <select id="settings-model" class="form-control">
             <option value="gemini-2.5-flash">gemini-2.5-flash（推荐）</option>
             <option value="gemini-2.5-pro">gemini-2.5-pro</option>
             <option value="gemini-2.0-flash-lite">gemini-2.0-flash-lite</option>
           </select>
+        </div>
+        <div class="form-group">
+          <label>🎨 配图生成模型</label>
+          <select id="settings-image-model" class="form-control">
+            <option value="gemini-2.5-flash-image">Nano Banana（推荐）</option>
+            <option value="nano-banana-pro-preview">Nano Banana Pro（更精细）</option>
+            <option value="gemini-3.1-flash-image-preview">Nano Banana 2（最新）</option>
+            <option value="gemini-2.0-flash">Gemini 2.0 Flash（备选）</option>
+          </select>
+          <small style="color:var(--text-light);display:block;margin-top:4px;">用于生成笔记配图的 AI 图片模型，Nano Banana 系列专为图片生成优化</small>
         </div>
         <div class="form-group">
           <label>Gemini 代理地址（可选）</label>
@@ -1256,6 +1313,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-outline" onclick="testGeminiKey()">🔍 测试连接</button>
+        <button class="btn btn-outline" onclick="testImageGeneration()">🖼️ 测试配图</button>
         <button class="btn btn-primary" onclick="saveSettings()">保存设置</button>
       </div>
     </div>
@@ -1279,6 +1337,8 @@
     function getGeminiKey() { return localStorage.getItem('xhs_gemini_key') || ''; }
     function getGeminiModel() { return localStorage.getItem('xhs_gemini_model') || 'gemini-2.5-flash'; }
     function getImageStyle() { return localStorage.getItem('xhs_image_style') || 'xiaohongshu'; }
+    function getImageModel() { return localStorage.getItem('xhs_image_model') || 'gemini-2.5-flash-image'; }
+    function getContentImageCount() { return parseInt(localStorage.getItem('xhs_content_image_count') || '2'); }
     function normalizeGeminiProxyBase(raw) {
       let value = (raw || '').trim().replace(/\/+$/, '');
       value = value.replace(/\/api\/gemini-proxy$/i, '');
@@ -1984,19 +2044,55 @@ ${sourceInfo}
       return div.innerHTML;
     }
 
-    // ============ Gemini 图片生成 ============
+    // ============ Gemini 图片生成（Nano Banana 模型）============
     const IMAGE_STYLE_PROMPTS = {
-      xiaohongshu: '小红书风格封面图，柔和的色调，文艺感，适合情感类账号，干净简约的背景，有质感的排版',
+      xiaohongshu: '小红书风格，柔和的色调，文艺感，适合情感类账号，干净简约的背景，有质感',
       minimalist: '极简主义风格，大面积留白，简约线条，高级感，文艺气息',
       watercolor: '水彩风格插画，柔和的色彩晕染，梦幻感，温暖治愈',
-      gradient: '渐变色背景，现代设计感，文字居中，简约大气',
+      gradient: '渐变色背景，现代设计感，简约大气',
       photo: '治愈系摄影风格，自然光线，温暖色调，生活感'
     };
 
-    async function generateCoverImage(post) {
-      const apiKey = getGeminiKey();
+    /**
+     * 从 Gemini 图片模型响应中提取图片
+     */
+    function _extractImageFromResponse(data) {
+      if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+        const parts = data.candidates[0].content.parts || [];
+        for (const part of parts) {
+          if (part.inlineData && part.inlineData.mimeType && part.inlineData.data) {
+            return `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
+          }
+        }
+      }
+      return null;
+    }
 
-      const model = getGeminiModel();
+    /**
+     * 使用 Nano Banana（或指定图片模型）生成单张图片
+     */
+    async function generateSingleImage(prompt) {
+      const apiKey = getGeminiKey();
+      const imageModel = getImageModel();
+
+      const payload = {
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { responseModalities: ['IMAGE'] }
+      };
+
+      try {
+        const result = await callGeminiAPI(apiKey, imageModel, payload);
+        return _extractImageFromResponse(result.data);
+      } catch (e) {
+        console.warn('[ImageGen] Failed with model', imageModel, ':', e.message || e);
+        return null;
+      }
+    }
+
+    /**
+     * 生成封面图（带封面文字）
+     */
+    async function generateCoverImage(post) {
       const style = getImageStyle();
       const stylePrompt = IMAGE_STYLE_PROMPTS[style] || IMAGE_STYLE_PROMPTS.xiaohongshu;
 
@@ -2015,47 +2111,128 @@ Important:
 - Make it visually appealing and Instagram/Xiaohongshu worthy
 - Clean, high-quality design`;
 
-      try {
-        const payload = {
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { responseModalities: ['TEXT', 'IMAGE'] }
-        };
-        const result = await callGeminiAPI(apiKey, model, payload);
-        const data = result.data;
-        // Extract image from response
-        if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-          const parts = data.candidates[0].content.parts || [];
-          for (const part of parts) {
-            if (part.inlineData && part.inlineData.mimeType && part.inlineData.data) {
-              return `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
-            }
-          }
-        }
-        return null;
-      } catch (e) {
-        console.warn('Image generation failed:', e);
-        return null;
-      }
+      return await generateSingleImage(prompt);
     }
 
-    // 批量生成图片（带进度回调）
-    async function generateImagesForPosts(posts, onProgress) {
+    /**
+     * 为笔记生成配图（2-3张内容图片）
+     * 根据笔记内容、分类和情感主题生成风格一致的配图
+     */
+    async function generateContentImagesForPost(post, count = 2) {
+      const style = getImageStyle();
+      const stylePrompt = IMAGE_STYLE_PROMPTS[style] || IMAGE_STYLE_PROMPTS.xiaohongshu;
+      const contentSnippet = (post.content || '').substring(0, 300);
+      const tags = (post.tags || '').split(',').slice(0, 3).join('、');
+
+      // 根据笔记内容构建不同角度的图片提示词
+      const imagePrompts = [
+        // 第一张：情感氛围图
+        `Create a beautiful aesthetic image for a Chinese social media post.
+Theme: "${post.title}"
+Category: ${post.category} (emotion/feeling)
+Style: ${stylePrompt}
+Requirements:
+- Vertical portrait orientation (3:4 ratio)
+- Convey the emotion of "${post.category}" through composition, color and atmosphere
+- NO text overlay on the image
+- Artistic, dreamy, suitable for Xiaohongshu (小红书)
+- Should evoke feelings of ${post.category}`,
+
+        // 第二张：场景意境图
+        `Create an artistic scene illustration inspired by this text:
+"${contentSnippet.substring(0, 150)}"
+Style: ${stylePrompt}
+Requirements:
+- Vertical 3:4 ratio
+- NO text on the image
+- Create a scene/atmosphere that matches the mood
+- Soft, aesthetic, emotionally resonant
+- Suitable for Chinese social media (Xiaohongshu)`,
+
+        // 第三张：关键词意象图
+        `Create a visually stunning image for these keywords: ${tags || post.category}
+Category mood: ${post.category}
+Style: ${stylePrompt}
+Requirements:
+- Vertical 3:4 ratio, NO text
+- Abstract or symbolic representation of the theme
+- Harmonious color palette matching ${post.category} emotion
+- High quality, aesthetic, Xiaohongshu style`,
+
+        // 第四张：温暖细节图
+        `Create a warm, detailed close-up aesthetic photo.
+Theme: ${post.category} - ${post.cover_text || post.title}
+Style: ${stylePrompt}
+- Vertical 3:4 ratio, NO text
+- Focus on textural details, soft lighting
+- Cozy, intimate feeling
+- Suitable for emotional content on Xiaohongshu`,
+
+        // 第五张：治愈风景图
+        `Create a healing landscape/scenery image.
+Inspired by: "${post.title}"
+Emotion: ${post.category}
+Style: ${stylePrompt}
+- Vertical 3:4 ratio, NO text
+- Natural scenery matching the emotional tone
+- Dreamy, ethereal quality
+- Visually calming and beautiful`
+      ];
+
+      const images = [];
+      const promptsToUse = imagePrompts.slice(0, count);
+
+      for (let i = 0; i < promptsToUse.length; i++) {
+        try {
+          const img = await generateSingleImage(promptsToUse[i]);
+          if (img) images.push(img);
+        } catch (e) {
+          console.warn(`Content image ${i + 1}/${count} failed:`, e);
+        }
+        // 避免 API 限流
+        if (i < promptsToUse.length - 1) await new Promise(r => setTimeout(r, 1200));
+      }
+
+      return images;
+    }
+
+    // 批量为笔记生成配图（封面 + 内容图）
+    async function generateImagesForPosts(posts, imageCount, onProgress) {
       const results = [];
       for (let i = 0; i < posts.length; i++) {
-        if (onProgress) onProgress(i + 1, posts.length);
+        if (onProgress) onProgress(i + 1, posts.length, 'cover');
+
+        const postResult = { cover: null, contentImages: [] };
+
         try {
-          const imageUrl = await generateCoverImage(posts[i]);
-          results.push(imageUrl);
-          if (imageUrl && posts[i].id) {
-            // 保存图片到 post
-            const imgStore = JSON.parse(localStorage.getItem('xhs_post_images') || '{}');
-            imgStore[posts[i].id] = imageUrl;
-            localStorage.setItem('xhs_post_images', JSON.stringify(imgStore));
+          // 1) 生成封面图
+          const coverUrl = await generateCoverImage(posts[i]);
+          postResult.cover = coverUrl;
+          if (coverUrl && posts[i].id) {
+            savePostImage(posts[i].id, coverUrl);
           }
-        } catch {
-          results.push(null);
+        } catch (e) {
+          console.warn(`Post ${i + 1} cover failed:`, e);
         }
-        // 避免 API 限流，间隔 1 秒
+
+        // 避免限流
+        await new Promise(r => setTimeout(r, 800));
+
+        try {
+          // 2) 生成内容配图
+          if (onProgress) onProgress(i + 1, posts.length, 'content');
+          const contentImages = await generateContentImagesForPost(posts[i], imageCount);
+          postResult.contentImages = contentImages;
+          if (contentImages.length > 0 && posts[i].id) {
+            savePostContentImages(posts[i].id, contentImages);
+          }
+        } catch (e) {
+          console.warn(`Post ${i + 1} content images failed:`, e);
+        }
+
+        results.push(postResult);
+
+        // 笔记间间隔
         if (i < posts.length - 1) await new Promise(r => setTimeout(r, 1000));
       }
       return results;
@@ -2076,10 +2253,106 @@ Important:
       } catch {}
     }
 
+    // 配图存储（内容图片，区别于封面图）
+    function getPostContentImages(postId) {
+      try {
+        const store = JSON.parse(localStorage.getItem('xhs_post_content_images') || '{}');
+        return store[postId] || [];
+      } catch { return []; }
+    }
+
+    function savePostContentImages(postId, images) {
+      try {
+        const store = JSON.parse(localStorage.getItem('xhs_post_content_images') || '{}');
+        store[postId] = images;
+        localStorage.setItem('xhs_post_content_images', JSON.stringify(store));
+      } catch (e) {
+        console.warn('Failed to save content images (storage might be full):', e);
+      }
+    }
+
+    // 图片灯箱
+    function openImageLightbox(src) {
+      const lb = document.createElement('div');
+      lb.className = 'image-lightbox';
+      lb.onclick = () => lb.remove();
+      lb.innerHTML = `<img src="${src}" alt="配图预览">`;
+      document.body.appendChild(lb);
+    }
+
+    // 下载全部配图
+    function downloadContentImages() {
+      if (!currentViewPost) return;
+      const images = getPostContentImages(currentViewPost.id);
+      const cover = getPostImage(currentViewPost.id);
+      const allImages = [];
+      if (cover) allImages.push({ data: cover, name: `cover_${currentViewPost.id}.png` });
+      images.forEach((img, i) => allImages.push({ data: img, name: `content_${currentViewPost.id}_${i + 1}.png` }));
+
+      if (!allImages.length) {
+        toast('该笔记没有配图', 'error');
+        return;
+      }
+
+      allImages.forEach(({ data, name }) => {
+        const a = document.createElement('a');
+        a.href = data;
+        a.download = name;
+        a.click();
+      });
+      toast(`已下载 ${allImages.length} 张图片`, 'success');
+    }
+
+    // 测试图片生成
+    async function testImageGeneration() {
+      const statusEl = document.getElementById('settings-status');
+      const imageModel = document.getElementById('settings-image-model').value;
+      const style = document.getElementById('settings-style').value;
+      const key = document.getElementById('settings-api-key').value.trim();
+      const proxyBase = normalizeGeminiProxyBase(document.getElementById('settings-proxy-base').value);
+
+      if (!key && !proxyBase) {
+        statusEl.innerHTML = '<span style="color:#ff4d4f;">❌ 请至少配置代理地址或 API Key</span>';
+        return;
+      }
+
+      // 临时保存设置以便测试
+      if (proxyBase) localStorage.setItem('xhs_gemini_proxy_base', proxyBase);
+      _serverProxyAvailable = null;
+
+      statusEl.innerHTML = '<span style="color:var(--info);">⏳ 正在测试图片生成（可能需要 10-30 秒）...</span>';
+
+      const stylePrompt = IMAGE_STYLE_PROMPTS[style] || IMAGE_STYLE_PROMPTS.xiaohongshu;
+
+      try {
+        const payload = {
+          contents: [{ parts: [{ text: `Generate a beautiful small red book (Xiaohongshu) style image. Theme: healing and warmth. Style: ${stylePrompt}. Vertical 3:4 ratio. No text. Aesthetic, emotional.` }] }],
+          generationConfig: { responseModalities: ['IMAGE'] }
+        };
+
+        const result = await callGeminiAPI(key, imageModel, payload);
+        const imgUrl = _extractImageFromResponse(result.data);
+
+        if (imgUrl) {
+          statusEl.innerHTML = `
+            <div style="color:var(--success); margin-bottom:8px;">✅ 图片生成成功！模型: ${imageModel}</div>
+            <img src="${imgUrl}" style="width:150px; height:200px; object-fit:cover; border-radius:8px; border:2px solid var(--success); cursor:pointer;" onclick="openImageLightbox(this.src)">
+            <div style="font-size:11px; color:var(--text-light); margin-top:4px;">点击图片可放大预览</div>
+          `;
+        } else {
+          statusEl.innerHTML = '<span style="color:#ff4d4f;">❌ 模型返回成功但未包含图片数据，请更换模型</span>';
+        }
+      } catch (e) {
+        const errMsg = e.data?.error?.message || e.message || '图片生成失败';
+        statusEl.innerHTML = `<span style="color:#ff4d4f;">❌ ${errMsg}</span>`;
+      }
+    }
+
     // ============ 设置功能 ============
     function openSettingsModal() {
       document.getElementById('settings-api-key').value = getGeminiKey();
       document.getElementById('settings-model').value = getGeminiModel();
+      document.getElementById('settings-image-model').value = getImageModel();
       document.getElementById('settings-proxy-base').value = getGeminiProxyBase();
       document.getElementById('settings-style').value = getImageStyle();
       document.getElementById('settings-status').innerHTML = '';
@@ -2089,11 +2362,13 @@ Important:
     function saveSettings() {
       const key = document.getElementById('settings-api-key').value.trim();
       const model = document.getElementById('settings-model').value;
+      const imageModel = document.getElementById('settings-image-model').value;
       const proxyBase = normalizeGeminiProxyBase(document.getElementById('settings-proxy-base').value);
       const style = document.getElementById('settings-style').value;
       if (key) localStorage.setItem('xhs_gemini_key', key);
       else localStorage.removeItem('xhs_gemini_key');
       localStorage.setItem('xhs_gemini_model', model);
+      localStorage.setItem('xhs_image_model', imageModel);
       if (proxyBase) localStorage.setItem('xhs_gemini_proxy_base', proxyBase);
       else localStorage.removeItem('xhs_gemini_proxy_base');
       localStorage.setItem('xhs_image_style', style);
@@ -2229,6 +2504,7 @@ Important:
       const count = parseInt(document.getElementById('gen-count').value);
       const autoSave = document.getElementById('gen-auto-save').checked;
       const withImage = document.getElementById('gen-with-image').checked;
+      const imageCount = parseInt(document.getElementById('gen-image-count')?.value || '2');
       const hasApiKey = canUseAI();
 
       const btn = document.getElementById('gen-btn');
@@ -2258,15 +2534,15 @@ Important:
               getGeminiKey(), getGeminiModel(), batchCat, batchCount,
               (stage, msg) => {
                 let pct = 0;
-                const batchBase = ((batchesDone - 1) / totalBatches) * 80;
+                const batchBase = ((batchesDone - 1) / totalBatches) * 50;
                 if (stage === 'search') {
                   pct = Math.round(batchBase + 5);
                   btn.textContent = `🌐 搜索小红书「${batchCat}」爆款...`;
                 } else if (stage === 'analyzed') {
-                  pct = Math.round(batchBase + 35);
+                  pct = Math.round(batchBase + 20);
                   btn.textContent = `📊 分析完成，开始创作...`;
                 } else if (stage === 'generate') {
-                  pct = Math.round(batchBase + 50);
+                  pct = Math.round(batchBase + 30);
                   btn.textContent = `✍️ AI 创作中 (${batchesDone}/${totalBatches})...`;
                 }
                 updateGenProgress(progressEl, msg, pct);
@@ -2278,14 +2554,14 @@ Important:
           }
 
           posts = allPosts;
-          updateGenProgress(progressEl, '✅ AI 内容生成完成！<button onclick="viewAnalysisReport()" style="margin-left:8px; padding:2px 10px; border:1px solid var(--info); background:white; color:var(--info); border-radius:4px; cursor:pointer; font-size:12px;">📊 查看分析报告</button>', 80);
+          updateGenProgress(progressEl, '✅ AI 内容生成完成！<button onclick="viewAnalysisReport()" style="margin-left:8px; padding:2px 10px; border:1px solid var(--info); background:white; color:var(--info); border-radius:4px; cursor:pointer; font-size:12px;">📊 查看分析报告</button>', 50);
 
         } else {
           // ====== 本地模板模式（无 API Key 时的降级方案）======
           btn.textContent = '⏳ 生成文案中...';
           updateGenProgress(progressEl, '📝 使用本地模板生成...', 50);
           posts = ContentEngine.generateBatch(count, category || null);
-          updateGenProgress(progressEl, '⚠️ 提示：配置 Gemini 代理地址或 API Key 可启用 AI 联网搜索 + 智能生成', 80);
+          updateGenProgress(progressEl, '⚠️ 提示：配置 Gemini 代理地址或 API Key 可启用 AI 联网搜索 + 智能生成', 50);
         }
 
         // 自动保存到草稿箱
@@ -2307,28 +2583,44 @@ Important:
         if (posts.length > 0) previewPost(posts[0]);
         toast(`成功生成 ${posts.length} 条笔记${hasApiKey ? '（AI 联网搜索+智能生成）' : '（本地模板）'}！`, 'success');
 
-        // 如果启用了图片生成
+        // 如果启用了图片生成（封面图 + 配图）
         if (withImage && hasApiKey) {
-          updateGenProgress(progressEl, '🎨 AI 生成封面图...', 75);
-          btn.textContent = '🎨 生成封面图中...';
-          const images = await generateImagesForPosts(posts, (current, total) => {
-            const pct = 75 + Math.round((current / total) * 20);
-            updateGenProgress(progressEl, `🎨 生成封面图 ${current}/${total}...`, pct);
-            btn.textContent = `🎨 生成封面图 ${current}/${total}...`;
+          const totalImages = count * (1 + imageCount); // 封面 + 配图
+          let completedImages = 0;
+
+          updateGenProgress(progressEl, `🎨 使用 Nano Banana 生成配图（封面 + ${imageCount} 张/篇）...`, 55);
+          btn.textContent = '🎨 生成配图中...';
+
+          const imageResults = await generateImagesForPosts(posts, imageCount, (current, total, stage) => {
+            const baseProgress = 55;
+            const imgProgress = Math.round((current / total) * 40);
+            const stageText = stage === 'cover' ? '封面图' : '内容配图';
+            updateGenProgress(progressEl, `🎨 笔记 ${current}/${total} - 生成${stageText}...`, baseProgress + imgProgress);
+            btn.textContent = `🎨 生成配图 ${current}/${total}...`;
           });
 
           // 更新帖子数据中的图片
+          let coverCount = 0;
+          let contentImgCount = 0;
           posts.forEach((p, i) => {
-            if (images[i]) {
-              p.cover_image = images[i];
-              if (p.id) savePostImage(p.id, images[i]);
+            if (imageResults[i]) {
+              if (imageResults[i].cover) {
+                p.cover_image = imageResults[i].cover;
+                if (p.id) savePostImage(p.id, imageResults[i].cover);
+                coverCount++;
+              }
+              if (imageResults[i].contentImages && imageResults[i].contentImages.length > 0) {
+                p.content_images = imageResults[i].contentImages;
+                if (p.id) savePostContentImages(p.id, imageResults[i].contentImages);
+                contentImgCount += imageResults[i].contentImages.length;
+              }
             }
           });
 
           // 重新渲染列表
           renderGeneratedList(posts);
           if (posts.length > 0) previewPost(posts[0]);
-          toast(`🎨 ${images.filter(Boolean).length}/${images.length} 张封面图生成成功！`, 'success');
+          toast(`🎨 ${coverCount} 张封面图 + ${contentImgCount} 张配图生成成功！`, 'success');
         } else if (withImage && !hasApiKey) {
           toast('未配置 Gemini 代理地址/API Key，请在侧边栏「API 设置」中配置', 'warning');
         }
@@ -2362,7 +2654,14 @@ Important:
     }
 
     function renderGeneratedList(posts) {
-      const listHtml = posts.map((p, i) => `
+      const listHtml = posts.map((p, i) => {
+        const contentImgCount = (p.content_images || []).length || (p.id ? getPostContentImages(p.id).length : 0);
+        const imgInfo = [];
+        if (p.cover_image) imgInfo.push('🎨 封面图');
+        if (contentImgCount > 0) imgInfo.push(`🖼️ ${contentImgCount}张配图`);
+        if (!imgInfo.length) imgInfo.push('📝 纯文案');
+
+        return `
         <div class="post-list-item" onclick="previewPost(${_safePostJson(p)})" style="cursor:pointer;">
           <div style="display:flex; gap:12px; align-items:center; flex:1;">
             ${p.cover_image ? `<img src="${p.cover_image}" style="width:48px; height:48px; border-radius:8px; object-fit:cover; flex-shrink:0;">` : `<div style="width:48px; height:48px; border-radius:8px; background:${categoryColors[p.category] || '#eee'}33; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:20px;">${categoryEmojis[p.category] || '📝'}</div>`}
@@ -2373,9 +2672,10 @@ Important:
                 <span style="font-size:11px; color:var(--text-light);">${(p.tags || '').split(',').slice(0, 3).map(t => '#' + t).join(' ')}</span>
               </div>
               <div style="margin-top:4px; font-size:12px; color:#999;">
-                ${p.cover_image ? '🎨 已生成封面图' : '📝 纯文案'}
+                ${imgInfo.join(' · ')}
                 ${p.ai_analysis ? ` · 💡 ${p.ai_analysis}` : ''}
               </div>
+              ${contentImgCount > 0 ? `<div style="margin-top:4px; display:flex; gap:4px;">${(p.content_images || getPostContentImages(p.id) || []).slice(0, 3).map(img => `<img src="${img}" style="width:32px; height:42px; object-fit:cover; border-radius:4px;">`).join('')}</div>` : ''}
             </div>
           </div>
           <div class="post-actions">
@@ -2385,7 +2685,7 @@ Important:
             ` : ''}
           </div>
         </div>
-      `).join('');
+      `}).join('');
       document.getElementById('gen-list').innerHTML = listHtml;
     }
 
@@ -2396,12 +2696,12 @@ Important:
 
       if (img) {
         cover.style.display = 'none';
-        // 检查是否已存在预览图片
         let previewImg = document.getElementById('preview-img');
         if (!previewImg) {
           previewImg = document.createElement('img');
           previewImg.id = 'preview-img';
-          previewImg.style.cssText = 'width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:12px 12px 0 0;';
+          previewImg.style.cssText = 'width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:12px 12px 0 0; cursor:pointer;';
+          previewImg.onclick = function() { openImageLightbox(this.src); };
           cover.parentNode.insertBefore(previewImg, cover);
         }
         previewImg.src = img;
@@ -2417,6 +2717,24 @@ Important:
 
       document.getElementById('preview-title').textContent = post.title;
       document.getElementById('preview-tags').textContent = post.tags ? post.tags.split(',').map(t => '#' + t).join(' ') : '';
+
+      // 显示配图缩略图
+      const contentImages = post.content_images || (post.id ? getPostContentImages(post.id) : []);
+      let thumbContainer = document.getElementById('preview-content-thumbs');
+      if (!thumbContainer) {
+        thumbContainer = document.createElement('div');
+        thumbContainer.id = 'preview-content-thumbs';
+        thumbContainer.style.cssText = 'padding:8px 12px; display:flex; gap:6px; flex-wrap:wrap;';
+        document.getElementById('gen-preview').querySelector('.preview-card').appendChild(thumbContainer);
+      }
+      if (contentImages.length > 0) {
+        thumbContainer.innerHTML = contentImages.map(imgSrc =>
+          `<img src="${imgSrc}" style="width:50px; height:66px; object-fit:cover; border-radius:6px; cursor:pointer; border:1px solid var(--border);" onclick="openImageLightbox(this.src)">`
+        ).join('');
+        thumbContainer.style.display = 'flex';
+      } else {
+        thumbContainer.style.display = 'none';
+      }
     }
 
     function batchScheduleGenerated() {
@@ -2579,7 +2897,7 @@ Important:
       document.getElementById('view-tags').textContent = post.tags ? post.tags.split(',').map(t => '#' + t).join(' ') : '';
       document.getElementById('view-cover-text').textContent = post.cover_text || '';
       
-      // 检查是否有生成的图片
+      // 检查是否有生成的封面图
       const img = getPostImage(id);
       const viewCover = document.getElementById('view-cover');
       const viewCoverImg = document.getElementById('view-cover-img');
@@ -2587,11 +2905,26 @@ Important:
         viewCover.style.display = 'none';
         viewCoverImg.src = img;
         viewCoverImg.style.display = 'block';
+        viewCoverImg.style.cursor = 'pointer';
+        viewCoverImg.onclick = function() { openImageLightbox(this.src); };
       } else {
         const bgIndex = Math.floor(Math.random() * 8) + 1;
         viewCover.className = `preview-cover cover-bg-${bgIndex}`;
         viewCover.style.display = '';
         viewCoverImg.style.display = 'none';
+      }
+
+      // 显示配图画廊
+      const contentImages = getPostContentImages(id);
+      const galleryContainer = document.getElementById('view-content-images');
+      const gallery = document.getElementById('view-content-images-gallery');
+      if (contentImages.length > 0) {
+        gallery.innerHTML = contentImages.map((imgSrc, i) =>
+          `<img src="${imgSrc}" alt="配图 ${i + 1}" onclick="openImageLightbox(this.src)" title="点击放大">`
+        ).join('');
+        galleryContainer.style.display = 'block';
+      } else {
+        galleryContainer.style.display = 'none';
       }
       
       openModal('modal-view');

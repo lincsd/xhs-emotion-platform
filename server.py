@@ -878,6 +878,10 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         if not api_key:
             return self._send_json({'error': 'Missing apiKey and server GEMINI_API_KEY'}, 400)
 
+        # 图片生成模型需要更长的超时时间
+        is_image_model = 'image' in model or 'banana' in model or 'imagen' in model
+        timeout = 180 if is_image_model else 120
+
         try:
             if action == 'listModels':
                 url = f'{GEMINI_API_BASE}/v1beta/models?key={api_key}'
@@ -887,7 +891,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 data = json.dumps(payload).encode('utf-8')
                 req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'})
 
-            resp = _OPENER.open(req, timeout=120)
+            resp = _OPENER.open(req, timeout=timeout)
             result = json.loads(resp.read().decode('utf-8'))
             self._send_json(result)
         except urllib.error.HTTPError as e:
