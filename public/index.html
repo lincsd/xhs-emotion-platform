@@ -548,15 +548,15 @@
     /* ===== 配图画廊 ===== */
     .content-images-gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 8px;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
       margin-top: 12px;
     }
     .content-images-gallery img {
       width: 100%;
       aspect-ratio: 3/4;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
       border: 2px solid transparent;
@@ -1676,46 +1676,49 @@
 
   <!-- ===== 模态框：查看笔记 ===== -->
   <div class="modal-overlay" id="modal-view">
-    <div class="modal" style="max-width:780px;">
+    <div class="modal" style="max-width:860px;">
       <div class="modal-header">
         <h3 id="view-title">笔记详情</h3>
         <button class="modal-close" onclick="closeModal('modal-view')">✕</button>
       </div>
-      <div class="modal-body">
-        <div style="display:flex; gap:24px;">
-          <div style="flex:1;">
-            <div style="margin-bottom:12px;">
-              <span class="category-tag" id="view-category" style="margin-right:8px;"></span>
-              <span class="tag" id="view-status"></span>
-            </div>
-            <div id="view-content" style="white-space:pre-wrap; line-height:1.8; font-size:14px;"></div>
-            <div id="view-tags" style="margin-top:16px; font-size:13px; color: var(--info);"></div>
-            <!-- 配图画廊 -->
-            <div id="view-content-images" style="margin-top:16px; display:none;">
-              <h4 style="font-size:14px; margin-bottom:8px;">🎨 笔记配图</h4>
-              <div class="content-images-gallery" id="view-content-images-gallery"></div>
-            </div>
-            <!-- 建议发布时间 -->
-            <div class="post-detail-section" id="view-posting-time">
-              <h4>⏰ 建议发布时间</h4>
-              <div id="view-best-times" class="best-time-tags"></div>
-              <div id="view-time-tip" style="margin-top:8px; font-size:12px; color:var(--text-light);"></div>
-            </div>
+      <div class="modal-body" style="max-height:75vh; overflow-y:auto;">
+        <!-- 封面图展示区 -->
+        <div id="view-cover-section" style="margin-bottom:16px; border-radius:12px; overflow:hidden; position:relative;">
+          <div class="preview-cover cover-bg-1" id="view-cover" style="height:280px; font-size:24px;">
+            <span id="view-cover-text"></span>
           </div>
-          <div style="width:200px; flex-shrink:0;">
-            <div class="preview-card" style="width:200px;">
-              <div class="preview-cover cover-bg-1" id="view-cover" style="height:200px; font-size:18px;">
-                <span id="view-cover-text"></span>
-              </div>
-              <img id="view-cover-img" style="display:none; width:200px; height:200px; object-fit:cover; border-radius:12px;">
-            </div>
-            <div style="margin-top:16px;">
-              <button class="btn btn-sm btn-outline" onclick="copyPostContent()" style="width:100%; margin-bottom:6px;">📋 复制内容</button>
-              <button class="btn btn-sm btn-outline" onclick="downloadPostImage()" style="width:100%; margin-bottom:6px;">🖼️ 下载封面图</button>
-              <button class="btn btn-sm btn-outline" onclick="downloadContentImages()" style="width:100%; margin-bottom:6px;">📥 下载全部配图</button>
-              <button class="btn btn-sm btn-outline" onclick="exportCurrentPost()" style="width:100%;">📥 导出文件</button>
-            </div>
-          </div>
+          <img id="view-cover-img" style="display:none; width:100%; max-height:360px; object-fit:cover; border-radius:12px; cursor:pointer;">
+        </div>
+
+        <!-- 笔记信息 -->
+        <div style="display:flex; gap:8px; align-items:center; margin-bottom:12px; flex-wrap:wrap;">
+          <span class="category-tag" id="view-category" style="margin-right:4px;"></span>
+          <span class="tag" id="view-status"></span>
+          <span id="view-tags" style="font-size:13px; color: var(--info);"></span>
+        </div>
+
+        <!-- 正文内容 -->
+        <div id="view-content" style="white-space:pre-wrap; line-height:1.8; font-size:14px; background:#fafafa; border-radius:10px; padding:16px; margin-bottom:16px;"></div>
+
+        <!-- 配图画廊（大图直接显示） -->
+        <div id="view-content-images" style="margin-bottom:16px; display:none;">
+          <h4 style="font-size:14px; margin-bottom:10px;">🎨 笔记配图（点击放大）</h4>
+          <div class="content-images-gallery" id="view-content-images-gallery"></div>
+        </div>
+
+        <!-- 建议发布时间 -->
+        <div class="post-detail-section" id="view-posting-time">
+          <h4>⏰ 建议发布时间</h4>
+          <div id="view-best-times" class="best-time-tags"></div>
+          <div id="view-time-tip" style="margin-top:8px; font-size:12px; color:var(--text-light);"></div>
+        </div>
+
+        <!-- 操作栏 -->
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; padding-top:16px; border-top:1px solid var(--border);">
+          <button class="btn btn-sm btn-outline" onclick="copyPostContent()">📋 复制内容</button>
+          <button class="btn btn-sm btn-outline" onclick="downloadPostImage()">🖼️ 下载封面图</button>
+          <button class="btn btn-sm btn-outline" onclick="downloadContentImages()">📥 下载全部配图</button>
+          <button class="btn btn-sm btn-outline" onclick="exportCurrentPost()">📥 导出文件</button>
         </div>
       </div>
     </div>
@@ -3928,7 +3931,7 @@ Style: ${stylePrompt}
       document.getElementById('view-tags').textContent = post.tags ? post.tags.split(',').map(t => '#' + t).join(' ') : '';
       document.getElementById('view-cover-text').textContent = post.cover_text || '';
       
-      // 检查是否有生成的封面图（异步从 IndexedDB 加载）
+      // 封面图：全宽展示在顶部
       const img = await getPostImageAsync(id);
       const viewCover = document.getElementById('view-cover');
       const viewCoverImg = document.getElementById('view-cover-img');
@@ -3936,7 +3939,6 @@ Style: ${stylePrompt}
         viewCover.style.display = 'none';
         viewCoverImg.src = img;
         viewCoverImg.style.display = 'block';
-        viewCoverImg.style.cursor = 'pointer';
         viewCoverImg.onclick = function() { openImageLightbox(this.src); };
       } else {
         const bgIndex = Math.floor(Math.random() * 8) + 1;
@@ -3945,7 +3947,7 @@ Style: ${stylePrompt}
         viewCoverImg.style.display = 'none';
       }
 
-      // 显示配图画廊（异步从 IndexedDB 加载）
+      // 配图：大图网格直接显示
       const contentImages = await getPostContentImagesAsync(id);
       const galleryContainer = document.getElementById('view-content-images');
       const gallery = document.getElementById('view-content-images-gallery');
