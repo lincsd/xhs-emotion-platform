@@ -1615,6 +1615,7 @@
     let currentMonth = new Date();
     let generatedPostIds = [];
     let currentViewPost = null;
+    let _brandingPackMemory = null;
 
     // Gemini 设置
     const DEFAULT_GEMINI_PROXY_BASE = 'https://xhs-gemini-proxy.onrender.com';
@@ -2547,6 +2548,7 @@ Style: ${stylePrompt}
     }
 
     function getBrandingPack() {
+      if (_brandingPackMemory) return _brandingPackMemory;
       try {
         return JSON.parse(localStorage.getItem('xhs_branding_pack') || 'null');
       } catch {
@@ -2554,8 +2556,29 @@ Style: ${stylePrompt}
       }
     }
 
+    function _stripBrandingHeavyFields(pack) {
+      if (!pack) return null;
+      const {
+        avatar_image,
+        banner_image,
+        ...lightPack
+      } = pack;
+      return lightPack;
+    }
+
     function saveBrandingPack(pack) {
-      localStorage.setItem('xhs_branding_pack', JSON.stringify(pack));
+      _brandingPackMemory = pack;
+      try {
+        localStorage.setItem('xhs_branding_pack', JSON.stringify(_stripBrandingHeavyFields(pack)));
+      } catch (e) {
+        console.warn('Failed to persist branding pack to localStorage:', e);
+        try {
+          localStorage.removeItem('xhs_branding_pack');
+          localStorage.setItem('xhs_branding_pack', JSON.stringify(_stripBrandingHeavyFields(pack)));
+        } catch (e2) {
+          console.warn('Branding text persistence skipped due to storage quota:', e2);
+        }
+      }
     }
 
     function savePostContentImages(postId, images) {
