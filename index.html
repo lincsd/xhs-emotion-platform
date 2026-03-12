@@ -1238,6 +1238,11 @@
           </select>
         </div>
         <div class="form-group">
+          <label>Gemini 代理地址（可选）</label>
+          <input type="text" id="settings-proxy-base" class="form-control" placeholder="例如：https://xhs-gemini-proxy.onrender.com">
+          <small style="color:var(--text-light);display:block;margin-top:4px;">GitHub Pages 场景建议填写你的 HTTPS 代理域名；留空则优先尝试本地同源 /api。</small>
+        </div>
+        <div class="form-group">
           <label>图片风格</label>
           <select id="settings-style" class="form-control">
             <option value="xiaohongshu">小红书情感风格（默认）</option>
@@ -1272,6 +1277,17 @@
     function getGeminiKey() { return localStorage.getItem('xhs_gemini_key') || ''; }
     function getGeminiModel() { return localStorage.getItem('xhs_gemini_model') || 'gemini-2.5-flash'; }
     function getImageStyle() { return localStorage.getItem('xhs_image_style') || 'xiaohongshu'; }
+    function getGeminiProxyBase() {
+      return (localStorage.getItem('xhs_gemini_proxy_base') || '').trim().replace(/\/+$/, '');
+    }
+    function getGeminiProxyAPIUrl() {
+      const base = getGeminiProxyBase();
+      return base ? `${base}/api/gemini-proxy` : '/api/gemini-proxy';
+    }
+    function getGeminiProxyHealthUrl() {
+      const base = getGeminiProxyBase();
+      return base ? `${base}/api/stats` : '/api/stats';
+    }
 
     // ============ Gemini API 调用封装（优先走服务器代理） ============
     // 服务器代理地址（本地服务器运行时可用）
@@ -1280,7 +1296,7 @@
     async function _checkServerProxy() {
       if (_serverProxyAvailable !== null) return _serverProxyAvailable;
       try {
-        const r = await fetch('/api/stats', { signal: AbortSignal.timeout(2000) });
+        const r = await fetch(getGeminiProxyHealthUrl(), { signal: AbortSignal.timeout(3000) });
         _serverProxyAvailable = r.ok;
       } catch {
         _serverProxyAvailable = false;
@@ -1303,7 +1319,7 @@
       if (useProxy) {
         // 走服务器代理
         try {
-          const res = await fetch('/api/gemini-proxy', {
+          const res = await fetch(getGeminiProxyAPIUrl(), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ apiKey, model, payload, action })
@@ -2048,6 +2064,7 @@ Important:
     function openSettingsModal() {
       document.getElementById('settings-api-key').value = getGeminiKey();
       document.getElementById('settings-model').value = getGeminiModel();
+      document.getElementById('settings-proxy-base').value = getGeminiProxyBase();
       document.getElementById('settings-style').value = getImageStyle();
       document.getElementById('settings-status').innerHTML = '';
       openModal('modal-settings');
@@ -2056,11 +2073,15 @@ Important:
     function saveSettings() {
       const key = document.getElementById('settings-api-key').value.trim();
       const model = document.getElementById('settings-model').value;
+      const proxyBase = document.getElementById('settings-proxy-base').value.trim().replace(/\/+$/, '');
       const style = document.getElementById('settings-style').value;
       if (key) localStorage.setItem('xhs_gemini_key', key);
       else localStorage.removeItem('xhs_gemini_key');
       localStorage.setItem('xhs_gemini_model', model);
+      if (proxyBase) localStorage.setItem('xhs_gemini_proxy_base', proxyBase);
+      else localStorage.removeItem('xhs_gemini_proxy_base');
       localStorage.setItem('xhs_image_style', style);
+      _serverProxyAvailable = null;
       toast('设置已保存', 'success');
       closeModal('modal-settings');
       // 刷新模式提示
@@ -2082,8 +2103,12 @@ Important:
     async function testGeminiKey() {
       const key = document.getElementById('settings-api-key').value.trim();
       const model = document.getElementById('settings-model').value;
+      const proxyBase = document.getElementById('settings-proxy-base').value.trim().replace(/\/+$/, '');
       const statusEl = document.getElementById('settings-status');
       if (!key) { statusEl.innerHTML = '<span style="color:#ff4d4f;">❌ 请先输入 API Key</span>'; return; }
+      if (proxyBase) localStorage.setItem('xhs_gemini_proxy_base', proxyBase);
+      else localStorage.removeItem('xhs_gemini_proxy_base');
+      _serverProxyAvailable = null;
       statusEl.innerHTML = '<span style="color:var(--info);">⏳ 测试中...</span>';
       try {
         const payload = { contents: [{ parts: [{ text: 'Say hello in one word' }] }] };

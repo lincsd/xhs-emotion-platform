@@ -26,6 +26,29 @@ python server.py
 # 访问 http://localhost:3000
 ```
 
+## 🌍 无梯子可用方案（GitHub Pages + 云端 Gemini 代理）
+
+如果本地浏览器无法直连 Google API，可将 `server.py` 部署到海外云（如 Render），让前端通过 HTTPS 代理调用 Gemini。
+
+### 1) 一键部署代理（Render）
+
+本仓库已内置 [render.yaml](render.yaml)，可直接使用 Blueprint 部署：
+
+1. 打开 Render → New → Blueprint
+2. 连接本仓库并创建服务（自动读取 `render.yaml`）
+3. 部署完成后获得代理地址，例如：`https://xhs-gemini-proxy.onrender.com`
+
+### 2) 在前端配置代理地址
+
+打开你的 GitHub Pages 页面后：
+
+1. 进入「⚙️ API 设置」
+2. 填写 `Gemini API Key`
+3. 在「Gemini 代理地址（可选）」填写你的 Render HTTPS 域名
+4. 点击「测试连接」和「保存设置」
+
+完成后，前端会优先通过 `https://你的代理域名/api/gemini-proxy` 调用 Gemini，无需本地开梯子。
+
 ## 📁 项目结构
 
 ```
@@ -45,6 +68,8 @@ python server.py
 4. 保存后等待部署，访问 `https://你的用户名.github.io/仓库名/`
 
 > GitHub Pages 模式下数据存储在浏览器 localStorage 中，所有功能均可正常使用（内容生成、排期、收入记录等）。
+
+> 注意：请勿将 API Key 提交到 Git 仓库；如有泄露请立即在 Google AI Studio 里删除并重建。
 
 ## 💰 变现路线
 

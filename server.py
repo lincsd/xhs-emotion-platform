@@ -24,7 +24,7 @@ if sys.platform == 'win32':
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 # ============ 配置 ============
-PORT = 3000
+PORT = int(os.environ.get('PORT', '3000'))
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data.db')
 PUBLIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'public')
 
