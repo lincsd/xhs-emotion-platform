@@ -32,21 +32,8 @@ PUBLIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'public')
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com'
 
 def _load_server_gemini_key():
-    env_key = (os.environ.get('GEMINI_API_KEY') or '').strip()
-    if env_key:
-        return env_key
-    key_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'api_key.txt')
-    if os.path.exists(key_file):
-        try:
-            raw = Path(key_file).read_text(encoding='utf-8').strip()
-            if not raw:
-                return ''
-            if raw.startswith('GEMINI_API_KEY='):
-                return raw.split('=', 1)[1].strip()
-            return raw
-        except Exception:
-            return ''
-    return ''
+    """只从环境变量读取 API Key，绝不从文件读取（防止 Key 泄露到 Git）"""
+    return (os.environ.get('GEMINI_API_KEY') or '').strip()
 
 SERVER_GEMINI_API_KEY = _load_server_gemini_key()
 # 自动检测系统代理

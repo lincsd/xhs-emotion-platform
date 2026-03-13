@@ -4,13 +4,19 @@ data.db
 node_modules/
 __pycache__/
 *.pyc
-.env
 *.log
 
+# === 安全：绝不提交密钥 ===
+.env
+*.env
 api_key.txt
+*api_key*
+*secret*
+*credential*
+
+# === 测试/临时文件 ===
 models.json
 test_gemini_ai.py
 test_gen.py
-
 test_proxy.py
 deployed.html
