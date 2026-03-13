@@ -6351,18 +6351,18 @@ Style: ${stylePrompt}
         document.body.appendChild(modal);
       }
 
-      const categories = ['治愈','成长','爱情','友情','自我','离别','温暖','释怀'];
-      modal.innerHTML = `<div class="modal" style="max-width:600px;">
+      const cats = (typeof categories !== 'undefined' && categories.length) ? categories : ['治愈','成长','爱情','友情','自我','离别','温暖','释怀'];
+      modal.innerHTML = `<div class="modal" style="max-width:640px;">
         <div class="modal-header"><h3>🧪 A/B 测试</h3><button class="modal-close" onclick="document.getElementById('modal-ab-test').classList.remove('active')">✕</button></div>
         <div class="modal-body">
           <p style="margin-bottom:12px;color:var(--text-light);">同一主题生成多个版本，对比选择最优内容</p>
           <div class="form-group">
             <label>主题/关键词</label>
-            <input type="text" id="ab-topic" class="form-control" placeholder="输入想要测试的主题，如：春天穿搭">
+            <input type="text" id="ab-topic" class="form-control" placeholder="输入想要测试的主题，如：春天穿搭、深夜emo文案">
           </div>
           <div class="form-row">
             <div class="form-group"><label>分类</label>
-              <select id="ab-category" class="form-control">${categories.map(c => `<option value="${c}">${c}</option>`).join('')}</select>
+              <select id="ab-category" class="form-control">${cats.map(c => `<option value="${c}">${categoryEmojis[c]||''} ${c}</option>`).join('')}</select>
             </div>
             <div class="form-group"><label>版本数量</label>
               <select id="ab-versions" class="form-control">
@@ -6372,7 +6372,7 @@ Style: ${stylePrompt}
               </select>
             </div>
           </div>
-          <button class="btn btn-primary" onclick="runABTest()" style="width:100%;">🚀 开始 A/B 测试</button>
+          <button class="btn btn-primary" onclick="runABTest()" id="btn-ab-run" style="width:100%;">🚀 开始 A/B 测试</button>
           <div id="ab-test-result" style="margin-top:16px;"></div>
         </div>
       </div>`;
@@ -6382,58 +6382,86 @@ Style: ${stylePrompt}
     async function runABTest() {
       const topic = document.getElementById('ab-topic').value.trim();
       if (!topic) { toast('请输入主题', 'error'); return; }
-      if (!canUseAI()) { toast('请先配置 API Key', 'error'); return; }
+      if (!canUseAI()) { toast('请先配置 API Key 或代理地址', 'error'); return; }
       const category = document.getElementById('ab-category').value;
       const versions = parseInt(document.getElementById('ab-versions').value);
       const resultEl = document.getElementById('ab-test-result');
-      resultEl.innerHTML = '<div class="empty-state"><p>🧪 正在生成 ' + versions + ' 个对比版本...</p></div>';
+      const btn = document.getElementById('btn-ab-run');
+      resultEl.innerHTML = '<div class="loading">🧪 正在生成 ' + versions + ' 个对比版本，请稍候（约15-30秒）...</div>';
+      if (btn) { btn.disabled = true; btn.textContent = '⏳ 生成中...'; }
 
       try {
         const key = getGeminiKey();
+        const skillName = currentSkillName || '情感';
+        const prompt = `你是小红书爆款内容创作专家。请围绕主题"${topic}"（${skillName}领域，${category}分类）生成${versions}个不同版本的小红书笔记。\n\n要求：\n1. 每个版本切入角度、标题策略、风格完全不同\n2. 标题要有小红书爆款标题的特点（数字、emoji、悬念、对比等）\n3. 正文200-400字，符合小红书调性\n4. 每个版本包含5-8个标签\n\n请严格返回以下JSON数组格式（不要包含markdown代码块标记）：\n[{"version":"A","title":"标题","content":"完整正文","tags":"标签1,标签2,标签3","style":"风格描述","angle":"切入角度"}]`;
         const payload = {
-          contents: [{ parts: [{ text: `你是小红书爆款内容创作专家。请围绕主题"${topic}"（${category}分类）生成${versions}个不同版本的小红书笔记。每个版本应有不同的角度、风格和标题策略。\n\n返回JSON数组：[{"version":"A","title":"标题","content":"正文内容","tags":"标签1,标签2","style":"风格描述","angle":"切入角度"}]\n\n要求每个版本差异明显，方便对比选择。` }] }],
-          tools: [{ googleSearch: {} }],
-          generationConfig: { temperature: 0.9, maxOutputTokens: 4096 }
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { temperature: 0.95, maxOutputTokens: 8192 }
         };
-        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'A/B测试生成');
-        const text = result?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('') || '';
-        const arr = JSON.parse(text.match(/\[[\s\S]*\]/)?.[0] || '[]');
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent');
+        const resData = result.data || result;
+        const text = resData?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('') || '';
+        
+        // 健壮的 JSON 提取：去掉 markdown 代码块标记
+        let jsonStr = text;
+        const codeBlockMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+        if (codeBlockMatch) jsonStr = codeBlockMatch[1];
+        const arrMatch = jsonStr.match(/\[[\s\S]*\]/);
+        const arr = JSON.parse(arrMatch?.[0] || '[]');
 
-        if (!arr.length) { resultEl.innerHTML = '<div class="forbidden-tip">未能生成对比版本，请重试</div>'; return; }
+        if (!arr.length) { resultEl.innerHTML = '<div class="forbidden-tip">⚠️ 未能生成对比版本，请检查网络连接后重试</div>'; return; }
+
+        // 存储生成结果供按钮引用
+        window._abTestResults = arr;
 
         let html = '<div style="display:grid;gap:12px;">';
+        const colors = ['#e74c3c','#3498db','#2ecc71','#9b59b6','#f39c12'];
         arr.forEach((v, i) => {
-          const score = scorePost(v.title, v.content, v.tags, category, 0);
-          html += `<div class="card" style="border-left:4px solid ${['#e74c3c','#3498db','#2ecc71','#9b59b6','#f39c12'][i]};">
+          const score = scorePost(v.title || '', v.content || '', v.tags || '', category, 0);
+          const versionLabel = v.version || String.fromCharCode(65 + i);
+          html += `<div class="card" style="border-left:4px solid ${colors[i % 5]};">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-              <h4>版本 ${v.version || String.fromCharCode(65 + i)}</h4>
+              <h4 style="margin:0;">🔤 版本 ${versionLabel}</h4>
               <div>
-                <span class="trending-badge" style="background:${score.total >= 70 ? '#2ecc7133' : '#f39c1233'};color:${score.total >= 70 ? '#27ae60' : '#f39c12'};">评分 ${score.total}/100</span>
+                <span class="trending-badge" style="background:${score.total >= 70 ? '#2ecc7133' : '#f39c1233'};color:${score.total >= 70 ? '#27ae60' : '#f39c12'};">
+                  评分 ${score.total}/100
+                </span>
                 <span style="font-size:11px;color:var(--text-light);margin-left:8px;">${v.style || ''}</span>
               </div>
             </div>
-            <div style="font-weight:600;font-size:15px;margin-bottom:6px;">${v.title}</div>
-            <div style="font-size:13px;color:var(--text-light);margin-bottom:8px;max-height:100px;overflow:hidden;">${(v.content || '').substring(0, 200)}...</div>
-            <div style="font-size:12px;margin-bottom:8px;"><strong>角度：</strong>${v.angle || '—'}</div>
-            <div style="font-size:12px;color:var(--primary);">${(v.tags || '').split(',').map(t => '#' + t.trim()).join(' ')}</div>
-            <div style="margin-top:8px;display:flex;gap:8px;">
-              <button class="btn btn-sm btn-primary" onclick="selectABVersion(${JSON.stringify(JSON.stringify(v))})">✅ 选用此版本</button>
-              <button class="btn btn-sm btn-outline" onclick="navigator.clipboard.writeText(${JSON.stringify(JSON.stringify(v.title + '\\n\\n' + v.content + '\\n\\n' + (v.tags||'').split(',').map(t=>'#'+t).join(' ')))}).then(()=>toast('已复制','success'))">📋 复制</button>
+            <div style="font-weight:600;font-size:15px;margin-bottom:6px;">${v.title || ''}</div>
+            <div style="font-size:13px;color:#555;margin-bottom:8px;white-space:pre-wrap;max-height:120px;overflow-y:auto;line-height:1.6;">${(v.content || '').substring(0, 400)}</div>
+            <div style="font-size:12px;margin-bottom:6px;"><strong>🎯 角度：</strong>${v.angle || '—'}</div>
+            <div style="font-size:12px;color:var(--primary);margin-bottom:8px;">${(v.tags || '').split(',').map(t => '#' + t.trim()).join(' ')}</div>
+            <div style="display:flex;gap:8px;">
+              <button class="btn btn-sm btn-primary" onclick="selectABVersion(${i})">✅ 选用此版本</button>
+              <button class="btn btn-sm btn-outline" onclick="copyABVersion(${i})">📋 复制</button>
             </div>
           </div>`;
         });
         html += '</div>';
         resultEl.innerHTML = html;
       } catch (e) {
-        resultEl.innerHTML = `<div class="forbidden-hit">生成失败: ${e.message}</div>`;
+        const msg = e.data?.error?.message || e.message || '未知错误';
+        resultEl.innerHTML = `<div class="forbidden-hit">❌ 生成失败: ${msg}</div>`;
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = '🚀 开始 A/B 测试'; }
       }
     }
 
-    async function selectABVersion(jsonStr) {
-      const v = JSON.parse(jsonStr);
+    function copyABVersion(idx) {
+      const v = window._abTestResults?.[idx];
+      if (!v) return;
+      const text = v.title + '\n\n' + v.content + '\n\n' + (v.tags || '').split(',').map(t => '#' + t.trim()).join(' ');
+      navigator.clipboard.writeText(text).then(() => toast('已复制到剪贴板', 'success'));
+    }
+
+    async function selectABVersion(idx) {
+      const v = window._abTestResults?.[idx];
+      if (!v) return;
       const body = { title: v.title, content: v.content, category: document.getElementById('ab-category')?.value || '治愈', status: 'draft', tags: v.tags || '', cover_text: '' };
       await api('/api/posts', { method: 'POST', body });
-      toast('已保存为草稿', 'success');
+      toast('已保存为草稿 ✅', 'success');
       document.getElementById('modal-ab-test')?.classList.remove('active');
     }
 
