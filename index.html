@@ -975,6 +975,9 @@
     .comment-tpl-card .scene { font-size:11px; color:var(--primary); background:var(--primary-light); padding:2px 8px; border-radius:10px; }
     .festival-card { display:flex; align-items:center; gap:12px; padding:10px 14px; border-radius:10px; background:#fff8f0; margin-bottom:6px; }
     .festival-card .days { font-size:22px; font-weight:700; color:var(--primary); min-width:40px; text-align:center; }
+    .inline-metric { font-variant-numeric: tabular-nums; font-weight:500; }
+    #post-metrics-summary-table tr:hover { background:#f5f5ff; }
+    #post-metrics-summary-table input[type=number] { text-align:right; }
 
     /* ===== 登录页面 ===== */
     .login-page {
@@ -1628,7 +1631,41 @@
             <h2>📈 账号数据</h2>
             <p class="subtitle">记录账号成长数据</p>
           </div>
-          <button class="btn btn-primary" onclick="openAccountStatsModal()">+ 记录今日数据</button>
+          <div class="btn-group">
+            <button class="btn btn-primary" onclick="openAccountStatsModal()">+ 记录今日数据</button>
+            <button class="btn btn-info" onclick="openBatchMetricsModal()">📋 批量录入笔记数据</button>
+          </div>
+        </div>
+
+        <!-- 快速录入卡片 -->
+        <div class="card" id="quick-stats-card">
+          <h3 style="margin-bottom:12px;">⚡ 快速录入</h3>
+          <p style="font-size:13px;color:var(--text-light);margin-bottom:12px;">从小红书创作者中心复制数据，快速填入：</p>
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap:10px; margin-bottom:12px;">
+            <div class="form-group" style="margin:0;">
+              <label style="font-size:11px;">今日粉丝数</label>
+              <input type="number" id="quick-followers" class="form-control" placeholder="0" min="0">
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label style="font-size:11px;">总点赞</label>
+              <input type="number" id="quick-likes" class="form-control" placeholder="0" min="0">
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label style="font-size:11px;">总收藏</label>
+              <input type="number" id="quick-collects" class="form-control" placeholder="0" min="0">
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label style="font-size:11px;">总浏览</label>
+              <input type="number" id="quick-views" class="form-control" placeholder="0" min="0">
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label style="font-size:11px;">笔记数</label>
+              <input type="number" id="quick-notes" class="form-control" placeholder="0" min="0">
+            </div>
+            <div style="display:flex;align-items:flex-end;">
+              <button class="btn btn-success btn-sm" onclick="quickSaveStats()" style="width:100%;">💾 保存</button>
+            </div>
+          </div>
         </div>
 
         <div class="card">
@@ -1646,6 +1683,27 @@
               </tr>
             </thead>
             <tbody id="account-stats-table"></tbody>
+          </table>
+        </div>
+
+        <!-- 笔记数据回录卡片 -->
+        <div class="card">
+          <h3 style="margin-bottom:12px;">📝 笔记数据概览</h3>
+          <p style="font-size:13px;color:var(--text-light);margin-bottom:12px;">已发布笔记的数据表现（点击行可编辑）</p>
+          <table style="width:100%;">
+            <thead>
+              <tr>
+                <th>标题</th>
+                <th>阅读</th>
+                <th>点赞</th>
+                <th>收藏</th>
+                <th>评论</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="post-metrics-summary-table">
+              <tr><td colspan="6"><div class="empty-state" style="padding:20px;"><p>加载中...</p></div></td></tr>
+            </tbody>
           </table>
         </div>
       </section>
@@ -5277,6 +5335,191 @@ Style: ${stylePrompt}
       closeModal('modal-account');
       loadAccountStats();
     }
+
+    // 快速录入今日数据
+    async function quickSaveStats() {
+      const body = {
+        date: new Date().toISOString().slice(0, 10),
+        followers: parseInt(document.getElementById('quick-followers').value) || 0,
+        total_likes: parseInt(document.getElementById('quick-likes').value) || 0,
+        total_collects: parseInt(document.getElementById('quick-collects').value) || 0,
+        total_views: parseInt(document.getElementById('quick-views').value) || 0,
+        notes_count: parseInt(document.getElementById('quick-notes').value) || 0
+      };
+      if (!body.followers && !body.total_likes && !body.total_views) {
+        toast('请至少填写一项数据', 'error'); return;
+      }
+      await api('/api/account-stats', { method: 'POST', body });
+      toast('今日数据已保存 ✅', 'success');
+      // 清空输入
+      ['quick-followers','quick-likes','quick-collects','quick-views','quick-notes'].forEach(id => document.getElementById(id).value = '');
+      loadAccountStats();
+    }
+
+    // 笔记列表数据概览
+    async function loadPostMetricsSummary() {
+      const data = await api('/api/posts?limit=50');
+      const posts = data.posts || [];
+      const tbody = document.getElementById('post-metrics-summary-table');
+      if (!posts.length) {
+        tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state" style="padding:20px;"><p>暂无笔记</p></div></td></tr>';
+        return;
+      }
+      tbody.innerHTML = posts.map(p => `
+        <tr style="cursor:pointer;" ondblclick="openInlineEdit(this, ${p.id})">
+          <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${p.title}">${p.title}</td>
+          <td><span class="inline-metric" id="im-views-${p.id}">${p.views || 0}</span></td>
+          <td><span class="inline-metric" id="im-likes-${p.id}">${p.likes || 0}</span></td>
+          <td><span class="inline-metric" id="im-collects-${p.id}">${p.collects || 0}</span></td>
+          <td><span class="inline-metric" id="im-comments-${p.id}">${p.comments || 0}</span></td>
+          <td>
+            <button class="btn btn-outline btn-sm" onclick="openInlineEdit(this.closest('tr'), ${p.id})" title="快速编辑">✏️</button>
+            <button class="btn btn-outline btn-sm" onclick="openPostMetricsModal(${p.id})" title="详细录入">📊</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // 行内快速编辑笔记数据
+    function openInlineEdit(tr, postId) {
+      if (tr.dataset.editing === '1') return;
+      tr.dataset.editing = '1';
+      const fields = ['views', 'likes', 'collects', 'comments'];
+      fields.forEach(f => {
+        const span = document.getElementById(`im-${f}-${postId}`);
+        if (!span) return;
+        const val = span.textContent;
+        span.innerHTML = `<input type="number" value="${val}" min="0" style="width:70px;padding:2px 6px;border:1px solid var(--primary);border-radius:4px;font-size:13px;" id="ie-${f}-${postId}">`;
+      });
+      // 把编辑按钮换成保存
+      const actionTd = tr.querySelector('td:last-child');
+      const origHtml = actionTd.innerHTML;
+      actionTd.innerHTML = `<button class="btn btn-success btn-sm" onclick="saveInlineEdit(${postId}, this.closest('tr'))">💾</button>
+        <button class="btn btn-outline btn-sm" onclick="cancelInlineEdit(${postId}, this.closest('tr'))">✖</button>`;
+    }
+
+    async function saveInlineEdit(postId, tr) {
+      const body = {};
+      ['views', 'likes', 'collects', 'comments'].forEach(f => {
+        const inp = document.getElementById(`ie-${f}-${postId}`);
+        if (inp) body[f] = parseInt(inp.value) || 0;
+      });
+      await api(`/api/posts/${postId}`, { method: 'PUT', body });
+      toast('数据已更新', 'success');
+      tr.dataset.editing = '';
+      loadPostMetricsSummary();
+    }
+
+    function cancelInlineEdit(postId, tr) {
+      tr.dataset.editing = '';
+      loadPostMetricsSummary();
+    }
+
+    // 批量录入笔记数据
+    async function openBatchMetricsModal() {
+      const data = await api('/api/posts?limit=100');
+      const posts = data.posts || [];
+      let html = `<div class="modal-header"><h3>📋 批量录入笔记数据</h3><button class="modal-close" onclick="closeModal('modal-batch-metrics')">×</button></div>
+      <div class="modal-body">
+        <div style="background:#f6f8fa;border-radius:8px;padding:12px;margin-bottom:16px;">
+          <p style="font-size:13px;color:var(--text-light);margin-bottom:8px;">💡 <strong>使用方法</strong>：打开小红书创作者中心 → 数据中心 → 笔记分析，依次填入每条笔记的数据</p>
+          <p style="font-size:12px;color:var(--text-light);">也可以粘贴文本到下方文本框，格式：<code>标题 阅读 点赞 收藏 评论</code>（每行一条，用空格/Tab分隔）</p>
+        </div>
+        <div style="margin-bottom:16px;">
+          <label style="font-size:13px;font-weight:600;">📝 从文本粘贴批量导入</label>
+          <textarea id="batch-paste-area" class="form-control" rows="4" placeholder="粘贴格式：笔记标题  阅读数  点赞数  收藏数  评论数&#10;例如：&#10;治愈语录分享  1520  89  45  12&#10;成长干货合集  3200  156  78  25" style="margin-top:6px;font-size:12px;font-family:monospace;"></textarea>
+          <button class="btn btn-outline btn-sm" style="margin-top:6px;" onclick="parseBatchPaste()">📥 解析并填入下方表格</button>
+        </div>
+        <div style="max-height:400px;overflow-y:auto;">
+        <table style="width:100%;font-size:13px;">
+          <thead><tr><th>标题</th><th>阅读</th><th>点赞</th><th>收藏</th><th>评论</th></tr></thead>
+          <tbody>`;
+      if (!posts.length) {
+        html += '<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--text-light);">暂无笔记</td></tr>';
+      } else {
+        posts.forEach(p => {
+          html += `<tr data-post-id="${p.id}">
+            <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${p.title}">${p.title}</td>
+            <td><input type="number" class="form-control bm-views" value="${p.views||0}" min="0" style="width:70px;padding:3px 6px;"></td>
+            <td><input type="number" class="form-control bm-likes" value="${p.likes||0}" min="0" style="width:70px;padding:3px 6px;"></td>
+            <td><input type="number" class="form-control bm-collects" value="${p.collects||0}" min="0" style="width:70px;padding:3px 6px;"></td>
+            <td><input type="number" class="form-control bm-comments" value="${p.comments||0}" min="0" style="width:70px;padding:3px 6px;"></td>
+          </tr>`;
+        });
+      }
+      html += `</tbody></table></div></div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" onclick="closeModal('modal-batch-metrics')">取消</button>
+          <button class="btn btn-primary" onclick="saveBatchMetrics()">💾 批量保存</button>
+        </div>`;
+
+      let modal = document.getElementById('modal-batch-metrics');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.className = 'modal-overlay';
+        modal.id = 'modal-batch-metrics';
+        modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('active'); });
+        document.body.appendChild(modal);
+      }
+      modal.innerHTML = `<div class="modal" style="max-width:760px;">${html}</div>`;
+      modal.classList.add('active');
+    }
+
+    function parseBatchPaste() {
+      const text = document.getElementById('batch-paste-area').value.trim();
+      if (!text) { toast('请先粘贴数据', 'error'); return; }
+      const lines = text.split('\n').filter(l => l.trim());
+      const rows = document.querySelectorAll('#modal-batch-metrics tr[data-post-id]');
+      let matched = 0;
+      lines.forEach((line, i) => {
+        // 用Tab或多个空格分割
+        const parts = line.split(/\t+|\s{2,}/).map(s => s.trim()).filter(Boolean);
+        if (parts.length < 2) return;
+        const title = parts[0];
+        const nums = parts.slice(1).map(n => parseInt(n.replace(/,/g, '')) || 0);
+        // 尝试匹配标题
+        let targetRow = null;
+        rows.forEach(row => {
+          const rowTitle = row.querySelector('td').textContent.trim();
+          if (rowTitle.includes(title) || title.includes(rowTitle)) targetRow = row;
+        });
+        // 如果没匹配到标题，按行序号填入
+        if (!targetRow && i < rows.length) targetRow = rows[i];
+        if (targetRow) {
+          const inputs = targetRow.querySelectorAll('input');
+          nums.forEach((n, j) => { if (j < inputs.length) inputs[j].value = n; });
+          matched++;
+        }
+      });
+      toast(`已解析 ${matched} 条数据`, 'success');
+    }
+
+    async function saveBatchMetrics() {
+      const rows = document.querySelectorAll('#modal-batch-metrics tr[data-post-id]');
+      let count = 0;
+      for (const row of rows) {
+        const postId = row.dataset.postId;
+        const inputs = row.querySelectorAll('input');
+        const body = {
+          views: parseInt(inputs[0]?.value) || 0,
+          likes: parseInt(inputs[1]?.value) || 0,
+          collects: parseInt(inputs[2]?.value) || 0,
+          comments: parseInt(inputs[3]?.value) || 0
+        };
+        await api(`/api/posts/${postId}`, { method: 'PUT', body });
+        count++;
+      }
+      toast(`已更新 ${count} 条笔记数据 ✅`, 'success');
+      closeModal('modal-batch-metrics');
+      loadPostMetricsSummary();
+    }
+
+    // 增强 loadAccountStats：加载笔记概览
+    const _origLoadAccountStats = loadAccountStats;
+    loadAccountStats = async function() {
+      await _origLoadAccountStats();
+      loadPostMetricsSummary();
+    };
 
     // ============ 功能1: 违禁词检测 ============
     const FORBIDDEN_WORDS = {
