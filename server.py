@@ -11,6 +11,8 @@ import sqlite3
 import os
 import sys
 import random
+import hashlib
+import secrets
 import urllib.parse
 import urllib.request
 import ssl
@@ -90,9 +92,34 @@ def init_db():
             total_likes INTEGER DEFAULT 0,
             total_collects INTEGER DEFAULT 0,
             total_views INTEGER DEFAULT 0,
-            notes_count INTEGER DEFAULT 0
+            notes_count INTEGER DEFAULT 0,
+            user_id INTEGER DEFAULT 0
+        );
+
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT UNIQUE NOT NULL,
+            password_hash TEXT NOT NULL,
+            nickname TEXT DEFAULT '',
+            avatar TEXT DEFAULT '',
+            created_at TEXT DEFAULT (datetime('now','localtime'))
+        );
+
+        CREATE TABLE IF NOT EXISTS sessions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            token TEXT UNIQUE NOT NULL,
+            created_at TEXT DEFAULT (datetime('now','localtime')),
+            expires_at TEXT NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES users(id)
         );
     """)
+    # 迁移：给已有表添加 user_id 列（忽略已存在错误）
+    for tbl in ('posts', 'income', 'account_stats'):
+        try:
+            conn.execute(f'ALTER TABLE {tbl} ADD COLUMN user_id INTEGER DEFAULT 0')
+        except:
+            pass
     conn.commit()
     conn.close()
 
@@ -489,8 +516,48 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header('Content-Type', 'application/json; charset=utf-8')
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
         self.end_headers()
+
+    # ---- 用户认证工具方法 ----
+    @staticmethod
+    def _hash_password(password, salt=None):
+        if salt is None:
+            salt = secrets.token_hex(16)
+        h = hashlib.sha256((salt + password).encode('utf-8')).hexdigest()
+        return f'{salt}:{h}'
+
+    @staticmethod
+    def _verify_password(password, stored):
+        if ':' not in stored:
+            return False
+        salt, _ = stored.split(':', 1)
+        return APIHandler._hash_password(password, salt) == stored
+
+    def _get_current_user(self):
+        """从 Authorization header 获取当前登录用户，返回 user dict 或 None"""
+        auth = self.headers.get('Authorization', '')
+        if not auth.startswith('Bearer '):
+            return None
+        token = auth[7:].strip()
+        if not token:
+            return None
+        conn = self._get_db()
+        row = conn.execute(
+            'SELECT u.id, u.username, u.nickname, u.avatar, u.created_at '
+            'FROM sessions s JOIN users u ON s.user_id = u.id '
+            'WHERE s.token = ? AND s.expires_at > datetime("now","localtime")',
+            (token,)
+        ).fetchone()
+        conn.close()
+        return dict(row) if row else None
+
+    def _require_auth(self):
+        """要求登录，返回 user dict 或发送 401 并返回 None"""
+        user = self._get_current_user()
+        if not user:
+            self._send_json({'error': '请先登录', 'code': 'AUTH_REQUIRED'}, 401)
+        return user
 
     def _send_json(self, data, code=200):
         self._set_json_headers(code)
@@ -519,21 +586,25 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         path, query = self._parse_path()
 
-        if path == '/api/posts':
-            return self._get_posts(query)
-        elif path.startswith('/api/posts/') and path.count('/') == 3:
-            post_id = path.split('/')[-1]
-            return self._get_post(post_id)
+        # --- 公开路由 ---
+        if path == '/api/auth/me':
+            return self._auth_me()
         elif path == '/api/stats':
             return self._get_stats()
-        elif path == '/api/calendar':
-            return self._get_calendar(query)
-        elif path == '/api/income':
-            return self._get_income(query)
         elif path == '/api/monetization-guide':
             return self._send_json(MONETIZATION_GUIDE)
         elif path == '/api/categories':
             return self._send_json(ContentEngine.categories)
+        # --- 需要登录的路由 ---
+        elif path == '/api/posts':
+            return self._get_posts(query)
+        elif path.startswith('/api/posts/') and path.count('/') == 3:
+            post_id = path.split('/')[-1]
+            return self._get_post(post_id)
+        elif path == '/api/calendar':
+            return self._get_calendar(query)
+        elif path == '/api/income':
+            return self._get_income(query)
         elif path == '/api/account-stats':
             return self._get_account_stats()
         elif path.startswith('/api/export/'):
@@ -547,7 +618,17 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         path, query = self._parse_path()
         body = self._read_body()
 
-        if path == '/api/posts':
+        # --- 公开路由 ---
+        if path == '/api/auth/register':
+            return self._auth_register(body)
+        elif path == '/api/auth/login':
+            return self._auth_login(body)
+        elif path == '/api/auth/logout':
+            return self._auth_logout()
+        elif path == '/api/gemini-proxy':
+            return self._gemini_proxy(body)
+        # --- 需要登录的路由 ---
+        elif path == '/api/posts':
             return self._create_post(body)
         elif path == '/api/generate':
             return self._generate_posts(body)
@@ -559,8 +640,6 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._save_account_stats(body)
         elif path == '/api/export-batch':
             return self._export_batch(body)
-        elif path == '/api/gemini-proxy':
-            return self._gemini_proxy(body)
         else:
             self._send_json({'error': 'Not found'}, 404)
 
@@ -586,11 +665,80 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         else:
             self._send_json({'error': 'Not found'}, 404)
 
+    # ---- 用户认证 ----
+    def _auth_register(self, body):
+        username = (body.get('username') or '').strip()
+        password = body.get('password') or ''
+        nickname = (body.get('nickname') or '').strip()
+        if len(username) < 2 or len(username) > 20:
+            return self._send_json({'error': '用户名长度需2-20个字符'}, 400)
+        if len(password) < 6:
+            return self._send_json({'error': '密码至少6位'}, 400)
+        conn = self._get_db()
+        exists = conn.execute('SELECT id FROM users WHERE username = ?', (username,)).fetchone()
+        if exists:
+            conn.close()
+            return self._send_json({'error': '用户名已存在'}, 409)
+        pw_hash = self._hash_password(password)
+        conn.execute('INSERT INTO users (username, password_hash, nickname) VALUES (?,?,?)',
+                     (username, pw_hash, nickname or username))
+        conn.commit()
+        uid = conn.execute('SELECT last_insert_rowid() as id').fetchone()['id']
+        # 自动登录：创建 session
+        token = secrets.token_urlsafe(48)
+        expires = (datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d %H:%M:%S')
+        conn.execute('INSERT INTO sessions (user_id, token, expires_at) VALUES (?,?,?)',
+                     (uid, token, expires))
+        conn.commit()
+        conn.close()
+        self._send_json({'token': token, 'user': {'id': uid, 'username': username, 'nickname': nickname or username, 'avatar': ''}})
+
+    def _auth_login(self, body):
+        username = (body.get('username') or '').strip()
+        password = body.get('password') or ''
+        if not username or not password:
+            return self._send_json({'error': '请输入用户名和密码'}, 400)
+        conn = self._get_db()
+        user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+        if not user or not self._verify_password(password, user['password_hash']):
+            conn.close()
+            return self._send_json({'error': '用户名或密码错误'}, 401)
+        # 清理该用户的过期 session
+        conn.execute('DELETE FROM sessions WHERE user_id = ? AND expires_at <= datetime("now","localtime")', (user['id'],))
+        # 创建新 session
+        token = secrets.token_urlsafe(48)
+        expires = (datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d %H:%M:%S')
+        conn.execute('INSERT INTO sessions (user_id, token, expires_at) VALUES (?,?,?)',
+                     (user['id'], token, expires))
+        conn.commit()
+        conn.close()
+        self._send_json({'token': token, 'user': {'id': user['id'], 'username': user['username'], 'nickname': user['nickname'], 'avatar': user['avatar']}})
+
+    def _auth_logout(self):
+        auth = self.headers.get('Authorization', '')
+        if auth.startswith('Bearer '):
+            token = auth[7:].strip()
+            conn = self._get_db()
+            conn.execute('DELETE FROM sessions WHERE token = ?', (token,))
+            conn.commit()
+            conn.close()
+        self._send_json({'message': '已退出登录'})
+
+    def _auth_me(self):
+        user = self._get_current_user()
+        if not user:
+            return self._send_json({'error': '未登录', 'code': 'AUTH_REQUIRED'}, 401)
+        self._send_json({'user': user})
+
     # ---- 笔记管理 ----
     def _get_posts(self, query):
+        user = self._get_current_user()
         conn = self._get_db()
         sql = 'SELECT * FROM posts WHERE 1=1'
         params = []
+        if user:
+            sql += ' AND user_id = ?'
+            params.append(user['id'])
         
         if query.get('status'):
             sql += ' AND status = ?'
@@ -624,12 +772,14 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             self._send_json({'error': '笔记不存在'}, 404)
 
     def _create_post(self, body):
+        user = self._get_current_user()
+        uid = user['id'] if user else 0
         conn = self._get_db()
         conn.execute(
-            'INSERT INTO posts (title, content, category, tags, cover_text, status, scheduled_date) VALUES (?,?,?,?,?,?,?)',
+            'INSERT INTO posts (title, content, category, tags, cover_text, status, scheduled_date, user_id) VALUES (?,?,?,?,?,?,?,?)',
             (body.get('title', ''), body.get('content', ''), body.get('category', '治愈'),
              body.get('tags', ''), body.get('cover_text', ''), body.get('status', 'draft'),
-             body.get('scheduled_date'))
+             body.get('scheduled_date'), uid)
         )
         conn.commit()
         last_id = conn.execute('SELECT last_insert_rowid() as id').fetchone()['id']
@@ -722,11 +872,15 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
     # ---- 收入管理 ----
     def _get_income(self, query):
+        user = self._get_current_user()
         conn = self._get_db()
         month = query.get('month', '')
         
         sql = 'SELECT * FROM income WHERE 1=1'
         params = []
+        if user:
+            sql += ' AND user_id = ?'
+            params.append(user['id'])
         if month:
             sql += ' AND date LIKE ?'
             params.append(f'{month}%')
@@ -734,26 +888,31 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         
         records = [dict(r) for r in conn.execute(sql, params).fetchall()]
         
-        total_sql = 'SELECT COALESCE(SUM(amount),0) as total FROM income'
+        # 构造总收入和分来源查询 (共享 WHERE)
+        where_parts = ['1=1']
+        t_params = []
+        if user:
+            where_parts.append('user_id = ?')
+            t_params.append(user['id'])
         if month:
-            total_sql += ' WHERE date LIKE ?'
-        total = conn.execute(total_sql, params[:1] if month else []).fetchone()['total']
+            where_parts.append('date LIKE ?')
+            t_params.append(f'{month}%')
+        where_clause = ' AND '.join(where_parts)
         
-        by_src_sql = 'SELECT source, SUM(amount) as total FROM income'
-        if month:
-            by_src_sql += ' WHERE date LIKE ?'
-        by_src_sql += ' GROUP BY source'
-        by_source = [dict(r) for r in conn.execute(by_src_sql, params[:1] if month else []).fetchall()]
+        total = conn.execute(f'SELECT COALESCE(SUM(amount),0) as total FROM income WHERE {where_clause}', t_params).fetchone()['total']
+        by_source = [dict(r) for r in conn.execute(f'SELECT source, SUM(amount) as total FROM income WHERE {where_clause} GROUP BY source', t_params).fetchall()]
         
         conn.close()
         self._send_json({'records': records, 'total': total, 'bySource': by_source})
 
     def _create_income(self, body):
+        user = self._get_current_user()
+        uid = user['id'] if user else 0
         conn = self._get_db()
         conn.execute(
-            'INSERT INTO income (source, amount, description, post_id, date) VALUES (?,?,?,?,?)',
+            'INSERT INTO income (source, amount, description, post_id, date, user_id) VALUES (?,?,?,?,?,?)',
             (body['source'], body['amount'], body.get('description', ''),
-             body.get('post_id'), body.get('date', datetime.now().strftime('%Y-%m-%d')))
+             body.get('post_id'), body.get('date', datetime.now().strftime('%Y-%m-%d')), uid)
         )
         conn.commit()
         last_id = conn.execute('SELECT last_insert_rowid() as id').fetchone()['id']
@@ -769,23 +928,27 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
     # ---- 数据统计 ----
     def _get_stats(self):
+        user = self._get_current_user()
         conn = self._get_db()
+        uid_clause = 'WHERE user_id = ?' if user else 'WHERE 1=1'
+        uid_params = [user['id']] if user else []
         
-        total = conn.execute('SELECT COUNT(*) as c FROM posts').fetchone()['c']
-        draft = conn.execute("SELECT COUNT(*) as c FROM posts WHERE status='draft'").fetchone()['c']
-        scheduled = conn.execute("SELECT COUNT(*) as c FROM posts WHERE status='scheduled'").fetchone()['c']
-        published = conn.execute("SELECT COUNT(*) as c FROM posts WHERE status='published'").fetchone()['c']
-        total_income = conn.execute('SELECT COALESCE(SUM(amount),0) as t FROM income').fetchone()['t']
+        total = conn.execute(f'SELECT COUNT(*) as c FROM posts {uid_clause}', uid_params).fetchone()['c']
+        draft = conn.execute(f"SELECT COUNT(*) as c FROM posts {uid_clause} AND status='draft'", uid_params).fetchone()['c']
+        scheduled = conn.execute(f"SELECT COUNT(*) as c FROM posts {uid_clause} AND status='scheduled'", uid_params).fetchone()['c']
+        published = conn.execute(f"SELECT COUNT(*) as c FROM posts {uid_clause} AND status='published'", uid_params).fetchone()['c']
+        total_income = conn.execute(f'SELECT COALESCE(SUM(amount),0) as t FROM income {uid_clause}', uid_params).fetchone()['t']
         
         current_month = datetime.now().strftime('%Y-%m')
-        month_income = conn.execute('SELECT COALESCE(SUM(amount),0) as t FROM income WHERE date LIKE ?', (f'{current_month}%',)).fetchone()['t']
+        month_params = uid_params + [f'{current_month}%']
+        month_income = conn.execute(f'SELECT COALESCE(SUM(amount),0) as t FROM income {uid_clause} AND date LIKE ?', month_params).fetchone()['t']
         
-        cat_dist = [dict(r) for r in conn.execute('SELECT category, COUNT(*) as count FROM posts GROUP BY category').fetchall()]
-        recent = [dict(r) for r in conn.execute('SELECT id, title, category, status, created_at FROM posts ORDER BY created_at DESC LIMIT 5').fetchall()]
+        cat_dist = [dict(r) for r in conn.execute(f'SELECT category, COUNT(*) as count FROM posts {uid_clause} GROUP BY category', uid_params).fetchall()]
+        recent = [dict(r) for r in conn.execute(f'SELECT id, title, category, status, created_at FROM posts {uid_clause} ORDER BY created_at DESC LIMIT 5', uid_params).fetchall()]
         
-        total_likes = conn.execute('SELECT COALESCE(SUM(likes),0) as t FROM posts').fetchone()['t']
-        total_collects = conn.execute('SELECT COALESCE(SUM(collects),0) as t FROM posts').fetchone()['t']
-        total_views = conn.execute('SELECT COALESCE(SUM(views),0) as t FROM posts').fetchone()['t']
+        total_likes = conn.execute(f'SELECT COALESCE(SUM(likes),0) as t FROM posts {uid_clause}', uid_params).fetchone()['t']
+        total_collects = conn.execute(f'SELECT COALESCE(SUM(collects),0) as t FROM posts {uid_clause}', uid_params).fetchone()['t']
+        total_views = conn.execute(f'SELECT COALESCE(SUM(views),0) as t FROM posts {uid_clause}', uid_params).fetchone()['t']
         
         conn.close()
         
@@ -798,18 +961,27 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
     # ---- 账号数据 ----
     def _get_account_stats(self):
+        user = self._get_current_user()
         conn = self._get_db()
-        stats = [dict(r) for r in conn.execute('SELECT * FROM account_stats ORDER BY date DESC LIMIT 30').fetchall()]
+        sql = 'SELECT * FROM account_stats'
+        params = []
+        if user:
+            sql += ' WHERE user_id = ?'
+            params.append(user['id'])
+        sql += ' ORDER BY date DESC LIMIT 30'
+        stats = [dict(r) for r in conn.execute(sql, params).fetchall()]
         conn.close()
         self._send_json(stats)
 
     def _save_account_stats(self, body):
+        user = self._get_current_user()
+        uid = user['id'] if user else 0
         conn = self._get_db()
         d = body.get('date', datetime.now().strftime('%Y-%m-%d'))
         conn.execute(
-            'INSERT OR REPLACE INTO account_stats (date, followers, total_likes, total_collects, total_views, notes_count) VALUES (?,?,?,?,?,?)',
+            'INSERT OR REPLACE INTO account_stats (date, followers, total_likes, total_collects, total_views, notes_count, user_id) VALUES (?,?,?,?,?,?,?)',
             (d, body.get('followers', 0), body.get('total_likes', 0), body.get('total_collects', 0),
-             body.get('total_views', 0), body.get('notes_count', 0))
+             body.get('total_views', 0), body.get('notes_count', 0), uid)
         )
         conn.commit()
         conn.close()

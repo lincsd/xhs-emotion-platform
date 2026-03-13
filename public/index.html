@@ -975,10 +975,118 @@
     .comment-tpl-card .scene { font-size:11px; color:var(--primary); background:var(--primary-light); padding:2px 8px; border-radius:10px; }
     .festival-card { display:flex; align-items:center; gap:12px; padding:10px 14px; border-radius:10px; background:#fff8f0; margin-bottom:6px; }
     .festival-card .days { font-size:22px; font-weight:700; color:var(--primary); min-width:40px; text-align:center; }
+
+    /* ===== 登录页面 ===== */
+    .login-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fdfcfb 100%);
+      padding: 20px;
+    }
+    .login-box {
+      width: 100%;
+      max-width: 400px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+    .login-box-header {
+      text-align: center;
+      padding: 36px 24px 20px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: white;
+    }
+    .login-box-header h1 { font-size: 26px; margin-bottom: 4px; }
+    .login-box-header p { font-size: 13px; opacity: 0.7; }
+    .login-box-body { padding: 28px 24px; }
+    .login-box-body .form-group { margin-bottom: 18px; }
+    .login-box-body .form-group label { font-size: 13px; font-weight: 600; margin-bottom: 6px; display: block; }
+    .login-box-body .form-control { padding: 10px 14px; font-size: 15px; border-radius: 10px; }
+    .login-box-body .btn { width: 100%; padding: 12px; font-size: 16px; border-radius: 10px; justify-content: center; }
+    .login-tabs { display: flex; margin-bottom: 20px; border-bottom: 2px solid var(--border); }
+    .login-tab {
+      flex: 1; text-align: center; padding: 10px; cursor: pointer;
+      font-size: 15px; font-weight: 500; color: var(--text-light);
+      border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s;
+    }
+    .login-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+    .login-error { color: #ff4d4f; font-size: 13px; margin-bottom: 12px; display: none; text-align: center; }
+    .login-footer { text-align: center; padding: 0 24px 24px; font-size: 12px; color: var(--text-light); }
+    /* 用户信息 sidebar */
+    .sidebar-user {
+      padding: 12px 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sidebar-user .user-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: white; flex-shrink: 0;
+    }
+    .sidebar-user .user-info { flex: 1; min-width: 0; }
+    .sidebar-user .user-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .sidebar-user .user-logout { font-size: 11px; color: rgba(255,255,255,0.5); cursor: pointer; }
+    .sidebar-user .user-logout:hover { color: #ff6b81; }
   </style>
 </head>
 <body>
-  <div class="app">
+  <!-- ===== 登录页 ===== -->
+  <div id="login-page" class="login-page">
+    <div class="login-box">
+      <div class="login-box-header">
+        <h1>🌸 情感运营台</h1>
+        <p>小红书多技能账号管理平台</p>
+      </div>
+      <div class="login-box-body">
+        <div class="login-tabs">
+          <div class="login-tab active" onclick="switchLoginTab('login')">登 录</div>
+          <div class="login-tab" onclick="switchLoginTab('register')">注 册</div>
+        </div>
+        <div class="login-error" id="login-error"></div>
+        <!-- 登录表单 -->
+        <div id="login-form">
+          <div class="form-group">
+            <label>用户名</label>
+            <input type="text" class="form-control" id="login-username" placeholder="请输入用户名" autocomplete="username">
+          </div>
+          <div class="form-group">
+            <label>密码</label>
+            <input type="password" class="form-control" id="login-password" placeholder="请输入密码" autocomplete="current-password">
+          </div>
+          <button class="btn btn-primary" onclick="doLogin()" id="btn-login">🔐 登 录</button>
+        </div>
+        <!-- 注册表单 -->
+        <div id="register-form" style="display:none;">
+          <div class="form-group">
+            <label>用户名</label>
+            <input type="text" class="form-control" id="reg-username" placeholder="2-20个字符" autocomplete="username">
+          </div>
+          <div class="form-group">
+            <label>昵称（可选）</label>
+            <input type="text" class="form-control" id="reg-nickname" placeholder="设置一个昵称">
+          </div>
+          <div class="form-group">
+            <label>密码</label>
+            <input type="password" class="form-control" id="reg-password" placeholder="至少6位" autocomplete="new-password">
+          </div>
+          <div class="form-group">
+            <label>确认密码</label>
+            <input type="password" class="form-control" id="reg-password2" placeholder="再次输入密码" autocomplete="new-password">
+          </div>
+          <button class="btn btn-primary" onclick="doRegister()" id="btn-register">✨ 注 册</button>
+        </div>
+      </div>
+      <div class="login-footer">数据安全存储 · 支持多端同步</div>
+    </div>
+  </div>
+
+  <div class="app" id="main-app" style="display:none;">
     <!-- ===== 侧边栏 ===== -->
     <aside class="sidebar">
       <div class="sidebar-header">
@@ -1063,6 +1171,13 @@
       <div class="nav-group" style="margin-top:auto; border-top:1px solid rgba(255,255,255,0.1); padding-top:12px;">
         <div class="nav-item" onclick="openModal('modal-settings')" style="cursor:pointer;">
           <span class="icon">⚙️</span> API 设置
+        </div>
+      </div>
+      <div class="sidebar-user" id="sidebar-user" style="display:none;">
+        <div class="user-avatar" id="user-avatar-icon">👤</div>
+        <div class="user-info">
+          <div class="user-name" id="user-display-name">用户</div>
+          <div class="user-logout" onclick="doLogout()">退出登录</div>
         </div>
       </div>
     </aside>
@@ -2002,6 +2117,12 @@
     let generatedPostIds = [];
     let currentViewPost = null;
     let _brandingPackMemory = null;
+
+    // ============ API 基础地址 ============
+    // GitHub Pages 或其他静态托管时，使用 Render 后端；本地开发时用相对路径
+    const RENDER_BACKEND = 'https://xhs-gemini-proxy.onrender.com';
+    const IS_GITHUB_PAGES = location.hostname.endsWith('.github.io') || location.hostname.endsWith('.pages.dev');
+    let API_BASE = IS_GITHUB_PAGES ? RENDER_BACKEND : '';
 
     // ============ Skill 系统 — 多账号类型复用 ============
     const SKILL_TEMPLATES = {
@@ -3163,13 +3284,26 @@
     async function api(url, options = {}) {
       if (useLocalMode) return localApi(url, options);
       try {
-        const res = await fetch(url, {
+        const authHeaders = {};
+        const authToken = localStorage.getItem('xhs_auth_token');
+        if (authToken) authHeaders['Authorization'] = 'Bearer ' + authToken;
+        const fullUrl = API_BASE + url;
+        const res = await fetch(fullUrl, {
           ...options,
-          headers: { 'Content-Type': 'application/json', ...options.headers },
+          headers: { 'Content-Type': 'application/json', ...authHeaders, ...options.headers },
           body: options.body ? JSON.stringify(options.body) : undefined
         });
+        // 如果收到 401 且有 AUTH_REQUIRED code，跳到登录
+        if (res.status === 401) {
+          const errData = await res.json().catch(() => ({}));
+          if (errData.code === 'AUTH_REQUIRED') {
+            showLoginPage();
+            throw new Error('请先登录');
+          }
+        }
         return await res.json();
       } catch (e) {
+        if (e.message === '请先登录') throw e;
         // 如果API调用失败，自动切换到本地模式
         console.warn('API不可用，自动切换到本地模式:', e.message);
         useLocalMode = true;
@@ -4893,9 +5027,12 @@ Style: ${stylePrompt}
         URL.revokeObjectURL(a.href);
         toast('导出成功', 'success');
       } else {
-        const res = await fetch('/api/export-batch', {
+        const authToken = localStorage.getItem('xhs_auth_token');
+        const hdrs = { 'Content-Type': 'application/json' };
+        if (authToken) hdrs['Authorization'] = 'Bearer ' + authToken;
+        const res = await fetch(API_BASE + '/api/export-batch', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: hdrs,
           body: JSON.stringify({ ids })
         });
         const blob = await res.blob();
@@ -6059,6 +6196,146 @@ Style: ${stylePrompt}
 
     // ============ 初始化 ============
     // 检测是否有后端可用，否则使用本地模式
+    // ============ 用户认证 ============
+    let currentUser = null;
+
+    function getAuthToken() {
+      return localStorage.getItem('xhs_auth_token') || '';
+    }
+
+    function showLoginPage() {
+      document.getElementById('login-page').style.display = 'flex';
+      document.getElementById('main-app').style.display = 'none';
+      document.getElementById('login-error').style.display = 'none';
+    }
+
+    function showApp() {
+      document.getElementById('login-page').style.display = 'none';
+      document.getElementById('main-app').style.display = 'flex';
+      // 显示用户信息
+      const userEl = document.getElementById('sidebar-user');
+      if (currentUser && userEl) {
+        userEl.style.display = 'flex';
+        document.getElementById('user-display-name').textContent = currentUser.nickname || currentUser.username;
+        document.getElementById('user-avatar-icon').textContent = (currentUser.nickname || currentUser.username || '👤').charAt(0);
+      }
+    }
+
+    function switchLoginTab(tab) {
+      document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('login-error').style.display = 'none';
+      if (tab === 'login') {
+        document.querySelectorAll('.login-tab')[0].classList.add('active');
+        document.getElementById('login-form').style.display = 'block';
+        document.getElementById('register-form').style.display = 'none';
+      } else {
+        document.querySelectorAll('.login-tab')[1].classList.add('active');
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('register-form').style.display = 'block';
+      }
+    }
+
+    function showLoginError(msg) {
+      const el = document.getElementById('login-error');
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+
+    async function doLogin() {
+      const username = document.getElementById('login-username').value.trim();
+      const password = document.getElementById('login-password').value;
+      if (!username || !password) return showLoginError('请输入用户名和密码');
+      const btn = document.getElementById('btn-login');
+      btn.disabled = true; btn.textContent = '登录中...';
+      try {
+        const res = await fetch(API_BASE + '/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+        if (!res.ok) { showLoginError(data.error || '登录失败'); return; }
+        localStorage.setItem('xhs_auth_token', data.token);
+        currentUser = data.user;
+        showApp();
+        loadDashboard();
+      } catch (e) {
+        showLoginError('网络错误，请重试');
+      } finally {
+        btn.disabled = false; btn.textContent = '🔐 登 录';
+      }
+    }
+
+    async function doRegister() {
+      const username = document.getElementById('reg-username').value.trim();
+      const nickname = document.getElementById('reg-nickname').value.trim();
+      const password = document.getElementById('reg-password').value;
+      const password2 = document.getElementById('reg-password2').value;
+      if (!username || !password) return showLoginError('请填写用户名和密码');
+      if (password !== password2) return showLoginError('两次密码不一致');
+      if (password.length < 6) return showLoginError('密码至少6位');
+      const btn = document.getElementById('btn-register');
+      btn.disabled = true; btn.textContent = '注册中...';
+      try {
+        const res = await fetch(API_BASE + '/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password, nickname })
+        });
+        const data = await res.json();
+        if (!res.ok) { showLoginError(data.error || '注册失败'); return; }
+        localStorage.setItem('xhs_auth_token', data.token);
+        currentUser = data.user;
+        showApp();
+        toast('注册成功，欢迎加入！', 'success');
+        loadDashboard();
+      } catch (e) {
+        showLoginError('网络错误，请重试');
+      } finally {
+        btn.disabled = false; btn.textContent = '✨ 注 册';
+      }
+    }
+
+    async function doLogout() {
+      const token = getAuthToken();
+      if (token) {
+        try {
+          await fetch(API_BASE + '/api/auth/logout', {
+            method: 'POST',
+            headers: { 'Authorization': 'Bearer ' + token }
+          });
+        } catch {}
+      }
+      localStorage.removeItem('xhs_auth_token');
+      currentUser = null;
+      showLoginPage();
+    }
+
+    async function checkAuth() {
+      const token = getAuthToken();
+      if (!token) return false;
+      try {
+        const res = await fetch(API_BASE + '/api/auth/me', {
+          headers: { 'Authorization': 'Bearer ' + token },
+          signal: AbortSignal.timeout(5000)
+        });
+        if (!res.ok) return false;
+        const data = await res.json();
+        currentUser = data.user;
+        return true;
+      } catch {
+        return false;
+      }
+    }
+
+    // 回车键支持
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginPw = document.getElementById('login-password');
+      if (loginPw) loginPw.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+      const regPw2 = document.getElementById('reg-password2');
+      if (regPw2) regPw2.addEventListener('keydown', e => { if (e.key === 'Enter') doRegister(); });
+    });
+
     async function init() {
       applySkillToUI();
       migrateLegacyBrandingPack();
@@ -6086,17 +6363,42 @@ Style: ${stylePrompt}
         }
       }
 
+      // 尝试连接后端（本地或 Render）
+      let backendOk = false;
       try {
-        const res = await fetch('/api/stats', { signal: AbortSignal.timeout(2000) });
+        const probeUrl = API_BASE + '/api/stats';
+        const res = await fetch(probeUrl, { signal: AbortSignal.timeout(IS_GITHUB_PAGES ? 8000 : 2000) });
         if (res.ok) {
+          backendOk = true;
           useLocalMode = false;
-          console.log('✅ 已连接后端服务器');
+          console.log('✅ 已连接后端服务器' + (IS_GITHUB_PAGES ? '（Render）' : '（本地）'));
         } else {
           throw new Error('Server error');
         }
       } catch {
-        useLocalMode = true;
-        console.log('📱 使用本地存储模式（GitHub Pages 模式）');
+        if (!IS_GITHUB_PAGES) {
+          useLocalMode = true;
+          console.log('📱 使用本地存储模式（GitHub Pages 模式）');
+        }
+      }
+
+      if (backendOk) {
+        // 有后端时检查登录状态
+        const loggedIn = await checkAuth();
+        if (!loggedIn) {
+          showLoginPage();
+          return; // 等用户登录后再加载数据
+        }
+        showApp();
+      } else if (IS_GITHUB_PAGES) {
+        // GitHub Pages 且 Render 后端不可用：提示 Render 正在启动
+        useLocalMode = false;
+        showLoginPage();
+        showLoginError('后端正在启动中（Render 免费版首次启动约需30秒），请稍后刷新重试');
+        return;
+      } else {
+        // 纯本地模式，不需要登录
+        showApp();
       }
 
       // Gemini Key 状态提示
