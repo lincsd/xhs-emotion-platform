@@ -1191,6 +1191,13 @@
               <button class="btn btn-primary" onclick="generatePosts()" id="gen-btn">
                 ✨ 一键生成
               </button>
+              <button class="btn btn-outline" onclick="openABTestModal()" style="margin-left:8px;">
+                🧪 A/B 测试
+              </button>
+              <div class="form-group" style="margin-top:12px;">
+                <label>自定义 Prompt（选填）</label>
+                <textarea id="gen-custom-prompt" class="form-control" rows="2" placeholder="输入自定义创作指令，AI 会优先参考"></textarea>
+              </div>
               <div id="gen-progress" style="display:none; margin-top:12px;"></div>
               <div id="gen-mode-hint" style="margin-top:8px; font-size:12px; color:var(--text-light);"></div>
             </div>
@@ -1201,6 +1208,7 @@
                 <div class="btn-group">
                   <button class="btn btn-sm btn-outline" onclick="viewAnalysisReport()" id="btn-analysis-report" style="display:none;">📊 查看分析报告</button>
                   <button class="btn btn-sm btn-outline" onclick="batchScheduleGenerated()">📅 批量排期</button>
+                  <button class="btn btn-sm btn-outline" onclick="openImageUploadForAssign()">🖼️ 上传图片分配</button>
                 </div>
               </div>
               <div id="gen-list"></div>
@@ -4452,6 +4460,7 @@ Style: ${stylePrompt}
               <div style="margin-top:4px; font-size:12px; color:#999;">
                 ${imgInfo.join(' · ')}
                 ${p.ai_analysis ? ` · 💡 ${p.ai_analysis}` : ''}
+                ${(() => { const hits = checkForbiddenInText((p.title||'') + '\n' + (p.content||'')); return hits.ban.length ? ' <span style="color:#e74c3c;font-size:11px;">🚫 违禁</span>' : (hits.high.length ? ' <span style="color:#f39c12;font-size:11px;">⚠️ 高危</span>' : ''); })()}
               </div>
               ${contentImgCount > 0 ? `<div style="margin-top:4px; display:flex; gap:4px;">${(p.content_images || getPostContentImages(p.id) || []).slice(0, 3).map(img => `<img src="${img}" style="width:32px; height:42px; object-fit:cover; border-radius:4px;">`).join('')}</div>` : ''}
             </div>
@@ -4557,7 +4566,9 @@ Style: ${stylePrompt}
         <tr style="cursor:pointer;" onclick="viewPost(${p.id})">
           <td onclick="event.stopPropagation();"><input type="checkbox" value="${p.id}" onchange="toggleSelect(${p.id})" ${selectedPosts.has(p.id) ? 'checked' : ''}></td>
           <td>
-            <div class="post-title" style="color:var(--text);">${p.title}</div>
+            <div class="post-title" style="color:var(--text);">
+              ${(() => { const hits = checkForbiddenInText((p.title||'')); return hits.ban.length ? '<span style="color:#e74c3c;" title="含封禁词">🚫</span> ' : (hits.high.length ? '<span style="color:#f39c12;" title="含高危词">⚠️</span> ' : ''); })()}${p.title}
+            </div>
             ${timeHint}
           </td>
           <td>${catTag(p.category)}</td>
@@ -5842,6 +5853,206 @@ Style: ${stylePrompt}
       const body = { title, content, category: document.getElementById('skill-switcher')?.value?.split(' ')[0] || '其他', status: 'draft', tags: '', cover_text: '' };
       await api('/api/posts', { method: 'POST', body });
       toast('已保存为草稿', 'success');
+    }
+
+    // ============ 图片手动分配 ============
+    function openImageUploadForAssign() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.multiple = true;
+      input.onchange = async (e) => {
+        const files = Array.from(e.target.files);
+        if (!files.length) return;
+        const images = [];
+        for (const f of files) {
+          const reader = new FileReader();
+          const dataUrl = await new Promise(res => { reader.onload = () => res(reader.result); reader.readAsDataURL(f); });
+          images.push({ name: f.name, data: dataUrl });
+        }
+        openImageAssignModal(images);
+      };
+      input.click();
+    }
+
+    function openImageAssignModal(images) {
+      // 获取当前生成的笔记或全部草稿
+      let posts = [];
+      if (window._lastGeneratedPosts?.length) {
+        posts = window._lastGeneratedPosts;
+      } else {
+        posts = JSON.parse(localStorage.getItem(`xhs_${currentSkillName}_posts`) || '[]').filter(p => p.status === 'draft').slice(0, 20);
+      }
+      if (!posts.length) { toast('没有可分配的笔记', 'error'); return; }
+
+      let modal = document.getElementById('modal-image-assign');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.className = 'modal-overlay';
+        modal.id = 'modal-image-assign';
+        modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('active'); });
+        document.body.appendChild(modal);
+      }
+
+      let html = '<div class="modal" style="max-width:800px;"><div class="modal-header"><h3>🖼️ 图片手动分配</h3><button class="modal-close" onclick="document.getElementById(\'modal-image-assign\').classList.remove(\'active\')">✕</button></div><div class="modal-body">';
+      html += '<p style="margin-bottom:12px;color:var(--text-light);">为每张图片选择要分配到的笔记（封面或配图）</p>';
+
+      images.forEach((img, i) => {
+        html += `<div style="display:flex;gap:12px;padding:12px;border:1px solid #eee;border-radius:8px;margin-bottom:8px;align-items:center;">
+          <img src="${img.data}" style="width:80px;height:80px;object-fit:cover;border-radius:8px;flex-shrink:0;">
+          <div style="flex:1;">
+            <div style="font-size:13px;margin-bottom:4px;">${img.name}</div>
+            <select id="assign-post-${i}" class="form-control" style="margin-bottom:4px;">
+              ${posts.map((p, j) => `<option value="${j}">${p.title?.substring(0, 30) || '笔记' + (j + 1)}</option>`).join('')}
+            </select>
+            <select id="assign-type-${i}" class="form-control">
+              <option value="cover">作为封面图</option>
+              <option value="content">作为配图</option>
+            </select>
+          </div>
+        </div>`;
+      });
+
+      html += `</div><div class="modal-footer"><button class="btn btn-outline" onclick="document.getElementById('modal-image-assign').classList.remove('active')">取消</button>`;
+      html += `<button class="btn btn-primary" onclick="executeImageAssign(${images.length})">✅ 确认分配</button></div></div>`;
+
+      // Store images data for later use
+      window._pendingAssignImages = images;
+      window._pendingAssignPosts = posts;
+      modal.innerHTML = html;
+      modal.classList.add('active');
+    }
+
+    async function executeImageAssign(count) {
+      const images = window._pendingAssignImages || [];
+      const posts = window._pendingAssignPosts || [];
+      let assigned = 0;
+
+      for (let i = 0; i < count; i++) {
+        const postIdx = parseInt(document.getElementById(`assign-post-${i}`).value);
+        const type = document.getElementById(`assign-type-${i}`).value;
+        const post = posts[postIdx];
+        if (!post || !images[i]) continue;
+
+        if (post.id) {
+          if (type === 'cover') {
+            await savePostImage(post.id, images[i].data);
+          } else {
+            const existing = await getPostContentImagesAsync(post.id);
+            existing.push(images[i].data);
+            await savePostContentImages(post.id, existing);
+          }
+          assigned++;
+        } else if (type === 'cover') {
+          post.cover_image = images[i].data;
+          assigned++;
+        } else {
+          post.content_images = post.content_images || [];
+          post.content_images.push(images[i].data);
+          assigned++;
+        }
+      }
+
+      document.getElementById('modal-image-assign').classList.remove('active');
+      toast(`已分配 ${assigned} 张图片`, 'success');
+      if (window._lastGeneratedPosts?.length) renderGeneratedList(window._lastGeneratedPosts);
+    }
+
+    // ============ A/B 测试 ============
+    function openABTestModal() {
+      let modal = document.getElementById('modal-ab-test');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.className = 'modal-overlay';
+        modal.id = 'modal-ab-test';
+        modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('active'); });
+        document.body.appendChild(modal);
+      }
+
+      const categories = ['治愈','成长','爱情','友情','自我','离别','温暖','释怀'];
+      modal.innerHTML = `<div class="modal" style="max-width:600px;">
+        <div class="modal-header"><h3>🧪 A/B 测试</h3><button class="modal-close" onclick="document.getElementById('modal-ab-test').classList.remove('active')">✕</button></div>
+        <div class="modal-body">
+          <p style="margin-bottom:12px;color:var(--text-light);">同一主题生成多个版本，对比选择最优内容</p>
+          <div class="form-group">
+            <label>主题/关键词</label>
+            <input type="text" id="ab-topic" class="form-control" placeholder="输入想要测试的主题，如：春天穿搭">
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>分类</label>
+              <select id="ab-category" class="form-control">${categories.map(c => `<option value="${c}">${c}</option>`).join('')}</select>
+            </div>
+            <div class="form-group"><label>版本数量</label>
+              <select id="ab-versions" class="form-control">
+                <option value="2">2 个版本</option>
+                <option value="3" selected>3 个版本</option>
+                <option value="5">5 个版本</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="runABTest()" style="width:100%;">🚀 开始 A/B 测试</button>
+          <div id="ab-test-result" style="margin-top:16px;"></div>
+        </div>
+      </div>`;
+      modal.classList.add('active');
+    }
+
+    async function runABTest() {
+      const topic = document.getElementById('ab-topic').value.trim();
+      if (!topic) { toast('请输入主题', 'error'); return; }
+      if (!canUseAI()) { toast('请先配置 API Key', 'error'); return; }
+      const category = document.getElementById('ab-category').value;
+      const versions = parseInt(document.getElementById('ab-versions').value);
+      const resultEl = document.getElementById('ab-test-result');
+      resultEl.innerHTML = '<div class="empty-state"><p>🧪 正在生成 ' + versions + ' 个对比版本...</p></div>';
+
+      try {
+        const key = getGeminiKey();
+        const payload = {
+          contents: [{ parts: [{ text: `你是小红书爆款内容创作专家。请围绕主题"${topic}"（${category}分类）生成${versions}个不同版本的小红书笔记。每个版本应有不同的角度、风格和标题策略。\n\n返回JSON数组：[{"version":"A","title":"标题","content":"正文内容","tags":"标签1,标签2","style":"风格描述","angle":"切入角度"}]\n\n要求每个版本差异明显，方便对比选择。` }] }],
+          tools: [{ googleSearch: {} }],
+          generationConfig: { temperature: 0.9, maxOutputTokens: 4096 }
+        };
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'A/B测试生成');
+        const text = result?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('') || '';
+        const arr = JSON.parse(text.match(/\[[\s\S]*\]/)?.[0] || '[]');
+
+        if (!arr.length) { resultEl.innerHTML = '<div class="forbidden-tip">未能生成对比版本，请重试</div>'; return; }
+
+        let html = '<div style="display:grid;gap:12px;">';
+        arr.forEach((v, i) => {
+          const score = scorePost(v.title, v.content, v.tags, category, 0);
+          html += `<div class="card" style="border-left:4px solid ${['#e74c3c','#3498db','#2ecc71','#9b59b6','#f39c12'][i]};">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <h4>版本 ${v.version || String.fromCharCode(65 + i)}</h4>
+              <div>
+                <span class="trending-badge" style="background:${score.total >= 70 ? '#2ecc7133' : '#f39c1233'};color:${score.total >= 70 ? '#27ae60' : '#f39c12'};">评分 ${score.total}/100</span>
+                <span style="font-size:11px;color:var(--text-light);margin-left:8px;">${v.style || ''}</span>
+              </div>
+            </div>
+            <div style="font-weight:600;font-size:15px;margin-bottom:6px;">${v.title}</div>
+            <div style="font-size:13px;color:var(--text-light);margin-bottom:8px;max-height:100px;overflow:hidden;">${(v.content || '').substring(0, 200)}...</div>
+            <div style="font-size:12px;margin-bottom:8px;"><strong>角度：</strong>${v.angle || '—'}</div>
+            <div style="font-size:12px;color:var(--primary);">${(v.tags || '').split(',').map(t => '#' + t.trim()).join(' ')}</div>
+            <div style="margin-top:8px;display:flex;gap:8px;">
+              <button class="btn btn-sm btn-primary" onclick="selectABVersion(${JSON.stringify(JSON.stringify(v))})">✅ 选用此版本</button>
+              <button class="btn btn-sm btn-outline" onclick="navigator.clipboard.writeText(${JSON.stringify(JSON.stringify(v.title + '\\n\\n' + v.content + '\\n\\n' + (v.tags||'').split(',').map(t=>'#'+t).join(' ')))}).then(()=>toast('已复制','success'))">📋 复制</button>
+            </div>
+          </div>`;
+        });
+        html += '</div>';
+        resultEl.innerHTML = html;
+      } catch (e) {
+        resultEl.innerHTML = `<div class="forbidden-hit">生成失败: ${e.message}</div>`;
+      }
+    }
+
+    async function selectABVersion(jsonStr) {
+      const v = JSON.parse(jsonStr);
+      const body = { title: v.title, content: v.content, category: document.getElementById('ab-category')?.value || '治愈', status: 'draft', tags: v.tags || '', cover_text: '' };
+      await api('/api/posts', { method: 'POST', body });
+      toast('已保存为草稿', 'success');
+      document.getElementById('modal-ab-test')?.classList.remove('active');
     }
 
     // ============ 初始化 ============
