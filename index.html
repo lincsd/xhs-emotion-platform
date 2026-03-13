@@ -949,6 +949,32 @@
       background: #333;
       color: #fff;
     }
+    /* ===== 新功能样式 ===== */
+    .forbidden-hit { background:#ff000022; border-left:3px solid #e74c3c; padding:8px 12px; margin:4px 0; border-radius:4px; }
+    .forbidden-warn { background:#ff990022; border-left:3px solid #f39c12; padding:8px 12px; margin:4px 0; border-radius:4px; }
+    .forbidden-tip { background:#00ff0022; border-left:3px solid #27ae60; padding:8px 12px; margin:4px 0; border-radius:4px; }
+    .score-gauge { width:120px; height:120px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:28px; font-weight:700; }
+    .score-bar { height:8px; border-radius:4px; background:#f0f0f0; overflow:hidden; margin:4px 0 12px; }
+    .score-bar>div { height:100%; border-radius:4px; transition:width .5s; }
+    .score-item { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+    .score-item label { width:60px; font-size:13px; color:var(--text-light); }
+    .score-item span { font-size:13px; font-weight:600; min-width:36px; text-align:right; }
+    .trending-card { border:1px solid #eee; border-radius:12px; padding:16px; cursor:pointer; transition:all .2s; }
+    .trending-card:hover { border-color:var(--primary); box-shadow:0 4px 12px rgba(0,0,0,.08); transform:translateY(-2px); }
+    .trending-badge { display:inline-block; padding:2px 8px; border-radius:10px; font-size:11px; font-weight:600; }
+    .tag-rec { display:inline-flex; align-items:center; gap:4px; padding:6px 14px; border-radius:20px; font-size:13px; margin:4px; cursor:pointer; border:1px solid #eee; transition:all .2s; }
+    .tag-rec:hover { border-color:var(--primary); background:var(--primary-light); }
+    .tag-big { background:#ff634733; border-color:#ff6347; color:#d63031; font-weight:700; font-size:15px; }
+    .tag-mid { background:#1e90ff22; border-color:#1e90ff; color:#0984e3; }
+    .tag-small { background:#2ecc7122; border-color:#2ecc71; color:#00b894; font-size:12px; }
+    .competitor-card { border:1px solid #eee; border-radius:12px; padding:16px; display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+    .account-card { border:1px solid #eee; border-radius:12px; padding:16px; display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; transition:all .2s; }
+    .account-card:hover { border-color:var(--primary); }
+    .account-card.active { border-color:var(--primary); background:var(--primary-light); }
+    .comment-tpl-card { border:1px solid #eee; border-radius:10px; padding:12px 16px; margin-bottom:8px; }
+    .comment-tpl-card .scene { font-size:11px; color:var(--primary); background:var(--primary-light); padding:2px 8px; border-radius:10px; }
+    .festival-card { display:flex; align-items:center; gap:12px; padding:10px 14px; border-radius:10px; background:#fff8f0; margin-bottom:6px; }
+    .festival-card .days { font-size:22px; font-weight:700; color:var(--primary); min-width:40px; text-align:center; }
   </style>
 </head>
 <body>
@@ -993,12 +1019,45 @@
         </div>
       </div>
       <div class="nav-group">
-        <div class="nav-group-title">工具</div>
+        <div class="nav-group-title">智能工具</div>
+        <div class="nav-item" data-page="forbidden">
+          <span class="icon">🚫</span> 违禁词检测
+        </div>
+        <div class="nav-item" data-page="score">
+          <span class="icon">💯</span> 笔记评分
+        </div>
+        <div class="nav-item" data-page="trending">
+          <span class="icon">🔥</span> 热门话题
+        </div>
+        <div class="nav-item" data-page="tags">
+          <span class="icon">🏷️</span> 标签引擎
+        </div>
+        <div class="nav-item" data-page="rewrite">
+          <span class="icon">🔄</span> 笔记改写
+        </div>
+        <div class="nav-item" data-page="comments">
+          <span class="icon">💬</span> 评论话术
+        </div>
+        <div class="nav-item" data-page="competitor">
+          <span class="icon">🔍</span> 竞品分析
+        </div>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-title">账号管理</div>
         <div class="nav-item" data-page="branding">
           <span class="icon">🎀</span> 账号包装
         </div>
         <div class="nav-item" data-page="account">
           <span class="icon">📈</span> 账号数据
+        </div>
+        <div class="nav-item" data-page="multi-account">
+          <span class="icon">👥</span> 多账号管理
+        </div>
+        <div class="nav-item" onclick="openModal('modal-templates')" style="cursor:pointer;">
+          <span class="icon">⭐</span> 模板库
+        </div>
+        <div class="nav-item" onclick="openModal('modal-export')" style="cursor:pointer;">
+          <span class="icon">📥</span> 数据导出
         </div>
       </div>
       <div class="nav-group" style="margin-top:auto; border-top:1px solid rgba(255,255,255,0.1); padding-top:12px;">
@@ -1065,6 +1124,7 @@
             <div id="category-chart"></div>
           </div>
         </div>
+        <div id="dashboard-festivals" style="margin-top:16px;"></div>
       </section>
 
       <!-- ===== 内容生成 ===== -->
@@ -1466,6 +1526,134 @@
           </table>
         </div>
       </section>
+
+      <!-- ===== 违禁词检测 ===== -->
+      <section id="page-forbidden" class="page hidden">
+        <div class="page-header"><div><h2>🚫 违禁词检测</h2><p class="subtitle">检测笔记中的敏感词和违规内容</p></div></div>
+        <div class="card">
+          <div class="form-group">
+            <label>输入标题</label>
+            <input type="text" id="forbidden-title" class="form-control" placeholder="输入笔记标题" oninput="liveCheckForbidden()">
+          </div>
+          <div class="form-group">
+            <label>输入正文</label>
+            <textarea id="forbidden-content" class="form-control" rows="8" placeholder="粘贴或输入笔记正文内容" oninput="liveCheckForbidden()"></textarea>
+          </div>
+          <div style="display:flex;gap:8px;margin-bottom:16px;">
+            <button class="btn btn-primary" onclick="checkForbiddenWords()">🔍 立即检测</button>
+            <button class="btn btn-outline" onclick="scanAllDraftPosts()">📋 批量扫描草稿</button>
+          </div>
+          <div id="forbidden-result"></div>
+        </div>
+      </section>
+
+      <!-- ===== 笔记评分 ===== -->
+      <section id="page-score" class="page hidden">
+        <div class="page-header"><div><h2>💯 笔记评分</h2><p class="subtitle">多维度评估笔记质量</p></div></div>
+        <div class="card">
+          <div class="form-group">
+            <label>标题</label>
+            <input type="text" id="score-title" class="form-control" placeholder="笔记标题" oninput="liveScorePost()">
+          </div>
+          <div class="form-group">
+            <label>正文</label>
+            <textarea id="score-content" class="form-control" rows="6" placeholder="笔记正文" oninput="liveScorePost()"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>标签</label><input type="text" id="score-tags" class="form-control" placeholder="标签,逗号分隔" oninput="liveScorePost()"></div>
+            <div class="form-group"><label>分类</label><input type="text" id="score-category" class="form-control" placeholder="分类"></div>
+          </div>
+          <div style="display:flex;gap:8px;margin-bottom:16px;">
+            <button class="btn btn-primary" onclick="liveScorePost()">💯 评分</button>
+            <button class="btn btn-outline" onclick="aiOptimizeScore()">🤖 AI 优化建议</button>
+          </div>
+          <div id="score-result"></div>
+        </div>
+      </section>
+
+      <!-- ===== 热门话题 ===== -->
+      <section id="page-trending" class="page hidden">
+        <div class="page-header"><div><h2>🔥 热门话题</h2><p class="subtitle">追踪当前赛道热点</p></div><button class="btn btn-primary" onclick="initTrendingPage()">🔄 刷新话题</button></div>
+        <div id="trending-container"><div class="empty-state"><p>点击「刷新话题」获取最新热门话题</p></div></div>
+      </section>
+
+      <!-- ===== 标签引擎 ===== -->
+      <section id="page-tags" class="page hidden">
+        <div class="page-header"><div><h2>🏷️ 标签引擎</h2><p class="subtitle">AI 智能标签推荐</p></div></div>
+        <div class="card">
+          <div class="form-group">
+            <label>笔记主题 / 关键词</label>
+            <input type="text" id="tags-keyword" class="form-control" placeholder="输入笔记主题，如：春季穿搭、家常菜做法">
+          </div>
+          <button class="btn btn-primary" onclick="generateSmartTags()" style="margin-bottom:16px;">🏷️ 生成标签</button>
+          <div id="tags-result"></div>
+        </div>
+      </section>
+
+      <!-- ===== 笔记改写 ===== -->
+      <section id="page-rewrite" class="page hidden">
+        <div class="page-header"><div><h2>🔄 笔记改写</h2><p class="subtitle">多模式智能改写</p></div></div>
+        <div class="card">
+          <div class="form-group">
+            <label>原始内容</label>
+            <textarea id="rewrite-input" class="form-control" rows="6" placeholder="粘贴需要改写的笔记内容"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>改写模式</label>
+              <select id="rewrite-mode" class="form-control">
+                <option value="angle">🔄 换角度</option>
+                <option value="tone">🎭 换语气</option>
+                <option value="expand">📝 扩写</option>
+                <option value="shorten">✂️ 缩写</option>
+                <option value="viral">🔥 爆款化</option>
+              </select>
+            </div>
+            <div class="form-group"><label>文风</label>
+              <select id="rewrite-style" class="form-control">
+                <option value="casual">轻松口语</option>
+                <option value="professional">专业权威</option>
+                <option value="cute">可爱卖萌</option>
+                <option value="story">故事叙述</option>
+                <option value="list">干货清单</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;margin-bottom:16px;">
+            <button class="btn btn-primary" onclick="rewritePost()">✨ 开始改写</button>
+            <button class="btn btn-outline" onclick="copyRewriteResult()">📋 复制结果</button>
+            <button class="btn btn-outline" onclick="saveRewriteAsDraft()">💾 存为草稿</button>
+          </div>
+          <div id="rewrite-result"></div>
+        </div>
+      </section>
+
+      <!-- ===== 评论话术 ===== -->
+      <section id="page-comments" class="page hidden">
+        <div class="page-header"><div><h2>💬 评论话术库</h2><p class="subtitle">热评回复模板</p></div><button class="btn btn-primary" onclick="generateCommentTemplates()">🤖 AI 生成话术</button></div>
+        <div id="comments-container"></div>
+      </section>
+
+      <!-- ===== 竞品分析 ===== -->
+      <section id="page-competitor" class="page hidden">
+        <div class="page-header"><div><h2>🔍 竞品分析</h2><p class="subtitle">对标分析竞品账号</p></div></div>
+        <div class="card" style="margin-bottom:16px;">
+          <div style="display:flex;gap:8px;">
+            <input type="text" id="competitor-name" class="form-control" placeholder="竞品账号名称" style="flex:1;">
+            <input type="text" id="competitor-note" class="form-control" placeholder="备注（选填）" style="flex:1;">
+            <button class="btn btn-primary" onclick="addCompetitor()">+ 添加</button>
+          </div>
+        </div>
+        <div id="competitor-list"></div>
+        <div style="margin-top:16px;"><button class="btn btn-primary" onclick="aiAnalyzeCompetitors()" style="width:100%;">🤖 AI 综合分析竞品</button></div>
+        <div id="competitor-analysis" style="margin-top:16px;"></div>
+      </section>
+
+      <!-- ===== 多账号管理 ===== -->
+      <section id="page-multi-account" class="page hidden">
+        <div class="page-header"><div><h2>👥 多账号管理</h2><p class="subtitle">管理多个小红书运营账号</p></div><button class="btn btn-primary" onclick="openAddAccountModal()">+ 新建账号</button></div>
+        <div id="multi-account-list"></div>
+      </section>
+
     </main>
   </div>
 
@@ -4012,6 +4200,14 @@ Style: ${stylePrompt}
         case 'income': loadIncome(); break;
         case 'monetization': loadMonetization(); break;
         case 'account': loadAccountStats(); break;
+        case 'forbidden': initForbiddenPage(); break;
+        case 'score': initScorePage(); break;
+        case 'trending': initTrendingPage(); break;
+        case 'tags': break;
+        case 'rewrite': break;
+        case 'comments': loadCommentTemplates(); break;
+        case 'competitor': loadCompetitors(); break;
+        case 'multi-account': loadMultiAccounts(); break;
       }
     }
 
@@ -4070,6 +4266,9 @@ Style: ${stylePrompt}
         `;
       }).join('') : '<div class="empty-state"><p>暂无数据</p></div>';
       document.getElementById('category-chart').innerHTML = catHtml;
+
+      // 节日营销提醒
+      renderFestivalReminders('dashboard-festivals');
     }
 
     // ============ 内容生成 ============
@@ -4533,6 +4732,17 @@ Style: ${stylePrompt}
       if (viewTimeTip) {
         viewTimeTip.textContent = POSTING_TIME_GUIDE.tips[post.category] || '💡 建议在晚间 19:00-21:00 发布，此时段小红书用户最活跃';
       }
+
+      // 数据回录面板
+      let metricsContainer = document.getElementById('view-post-metrics');
+      if (!metricsContainer) {
+        metricsContainer = document.createElement('div');
+        metricsContainer.id = 'view-post-metrics';
+        metricsContainer.style.cssText = 'margin-top:16px;border-top:1px solid #eee;padding-top:12px;';
+        const modalBody = document.querySelector('#modal-view .modal-body');
+        if (modalBody) modalBody.appendChild(metricsContainer);
+      }
+      metricsContainer.innerHTML = `<h4 style="margin-bottom:8px;">📊 数据表现</h4>${renderPostMetrics(post.id)}`;
       
       openModal('modal-view');
     }
@@ -4916,6 +5126,722 @@ Style: ${stylePrompt}
       toast('数据已记录', 'success');
       closeModal('modal-account');
       loadAccountStats();
+    }
+
+    // ============ 功能1: 违禁词检测 ============
+    const FORBIDDEN_WORDS = {
+      ban: ['微信','wx','WX','vx','VX','加我','私聊','转账','付款','下单','购买链接','淘宝','拼多多','京东','抖音','快手','B站','bilibili','代购','原单','A货','仿品','高仿','莆田','外挂','刷单','返利','兼职','日赚','躺赚','暴富','零投入','免费领','扫码','点击链接','短链接'],
+      high: ['最好','第一','最便宜','全网最低','独家','绝对','100%','纯天然','无副作用','药到病除','根治','永久','祖传秘方','央视推荐','明星同款','官方正品','假一赔十','限时抢购','仅剩','名额有限','不买后悔','错过再等','史上最低','跳楼价','亏本卖'],
+      low: ['必买','强烈推荐','安利','种草','回购','无限回购','yyds','绝绝子','天花板','封神','吹爆','好用到哭','相见恨晚','平替','大牌','贵妇']
+    };
+
+    function checkForbiddenInText(text) {
+      const res = { ban: [], high: [], low: [] };
+      if (!text) return res;
+      const t = text.toLowerCase();
+      for (const [level, words] of Object.entries(FORBIDDEN_WORDS)) {
+        for (const w of words) {
+          if (t.includes(w.toLowerCase())) res[level].push(w);
+        }
+      }
+      return res;
+    }
+
+    function highlightForbidden(text, hits) {
+      let r = text;
+      const all = [...hits.ban, ...hits.high, ...hits.low];
+      for (const w of all) {
+        const cls = hits.ban.includes(w) ? 'forbidden-hit' : hits.high.includes(w) ? 'forbidden-warn' : 'forbidden-tip';
+        r = r.replace(new RegExp(w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), `<mark class="${cls}" style="padding:1px 4px;border-radius:3px;">${w}</mark>`);
+      }
+      return r;
+    }
+
+    function checkForbiddenWords() {
+      const title = document.getElementById('forbidden-title').value;
+      const content = document.getElementById('forbidden-content').value;
+      const full = title + '\n' + content;
+      const hits = checkForbiddenInText(full);
+      const total = hits.ban.length + hits.high.length + hits.low.length;
+
+      let html = '';
+      if (total === 0) {
+        html = '<div class="forbidden-tip">✅ 恭喜！未检测到违禁词，内容安全。</div>';
+      } else {
+        if (hits.ban.length) html += `<div class="forbidden-hit">🚫 <strong>封禁级（${hits.ban.length}个）</strong>：${hits.ban.join('、')}<br><small>这些词会导致笔记被删除或账号限流，必须删除！</small></div>`;
+        if (hits.high.length) html += `<div class="forbidden-warn">⚠️ <strong>高危级（${hits.high.length}个）</strong>：${hits.high.join('、')}<br><small>广告法违规用语，建议替换为更温和的表达</small></div>`;
+        if (hits.low.length) html += `<div class="forbidden-tip">💡 <strong>提醒级（${hits.low.length}个）</strong>：${hits.low.join('、')}<br><small>不一定违规但过度使用可能降权</small></div>`;
+        html += '<h4 style="margin:16px 0 8px;">高亮预览：</h4>';
+        html += `<div class="card" style="background:#fafafa; white-space:pre-wrap; line-height:1.8;">${highlightForbidden(full, hits)}</div>`;
+      }
+      document.getElementById('forbidden-result').innerHTML = html;
+    }
+
+    let _forbiddenTimer;
+    function liveCheckForbidden() {
+      clearTimeout(_forbiddenTimer);
+      _forbiddenTimer = setTimeout(checkForbiddenWords, 500);
+    }
+
+    async function scanAllDraftPosts() {
+      let posts;
+      if (useLocalMode) {
+        posts = JSON.parse(localStorage.getItem(`xhs_${currentSkillName}_posts`) || '[]').filter(p => p.status === 'draft');
+      } else {
+        const data = await api('/api/posts?status=draft');
+        posts = data.posts || data || [];
+      }
+      if (!posts.length) { document.getElementById('forbidden-result').innerHTML = '<div class="forbidden-tip">📋 暂无草稿</div>'; return; }
+      let html = `<h4>扫描 ${posts.length} 篇草稿：</h4>`;
+      let clean = 0;
+      for (const p of posts) {
+        const hits = checkForbiddenInText((p.title || '') + '\n' + (p.content || ''));
+        const total = hits.ban.length + hits.high.length + hits.low.length;
+        if (total === 0) { clean++; continue; }
+        html += `<div class="competitor-card"><div><strong>${p.title || '无标题'}</strong><div style="margin-top:4px;">`;
+        if (hits.ban.length) html += `<span style="color:#e74c3c;">🚫 ${hits.ban.join('、')}</span> `;
+        if (hits.high.length) html += `<span style="color:#f39c12;">⚠️ ${hits.high.join('、')}</span> `;
+        if (hits.low.length) html += `<span style="color:#27ae60;">💡 ${hits.low.join('、')}</span>`;
+        html += `</div></div><button class="btn btn-outline" onclick="loadPostForCheck(${JSON.stringify(p.title).replace(/"/g, '&quot;')}, ${JSON.stringify(p.content).replace(/"/g, '&quot;')})">检查</button></div>`;
+      }
+      html += `<div class="forbidden-tip" style="margin-top:8px;">✅ ${clean} 篇草稿安全无违禁词</div>`;
+      document.getElementById('forbidden-result').innerHTML = html;
+    }
+
+    function loadPostForCheck(title, content) {
+      document.getElementById('forbidden-title').value = title || '';
+      document.getElementById('forbidden-content').value = content || '';
+      checkForbiddenWords();
+    }
+
+    function initForbiddenPage() {}
+
+    // ============ 功能2: 笔记评分 ============
+    function scorePost(title, content, tags, category, imgCount) {
+      const scores = { title: 0, content: 0, tags: 0, visual: 0, structure: 0 };
+      const suggestions = [];
+
+      // 标题评分 (25分)
+      const tl = (title || '').length;
+      if (tl >= 10 && tl <= 20) scores.title = 25;
+      else if (tl >= 6 && tl <= 25) scores.title = 18;
+      else if (tl > 0) scores.title = 10;
+      if (tl === 0) suggestions.push('❌ 标题不能为空');
+      else if (tl < 6) suggestions.push('⚠️ 标题太短，建议10-20字');
+      else if (tl > 25) suggestions.push('⚠️ 标题过长，建议精简到20字以内');
+      if (/[!！?？]/.test(title)) scores.title = Math.min(25, scores.title + 2);
+      if (/[0-9]/.test(title)) scores.title = Math.min(25, scores.title + 2);
+      if (/[\u4e00-\u9fa5].*[|｜\/]/.test(title)) scores.title = Math.min(25, scores.title + 1);
+
+      // 正文评分 (30分)
+      const cl = (content || '').length;
+      if (cl >= 300 && cl <= 800) scores.content = 30;
+      else if (cl >= 150 && cl <= 1200) scores.content = 22;
+      else if (cl > 0) scores.content = 12;
+      if (cl === 0) suggestions.push('❌ 正文不能为空');
+      else if (cl < 150) suggestions.push('⚠️ 正文太短，建议300-800字');
+      else if (cl > 1200) suggestions.push('⚠️ 正文过长，建议精简');
+      const emojiCount = ((content || '').match(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}]/gu) || []).length;
+      if (emojiCount >= 3 && emojiCount <= 15) scores.content = Math.min(30, scores.content + 3);
+      else if (emojiCount === 0) suggestions.push('💡 建议添加emoji表情增加可读性');
+
+      // 标签评分 (15分)
+      const tagList = (tags || '').split(/[,，]/).filter(t => t.trim());
+      if (tagList.length >= 5 && tagList.length <= 10) scores.tags = 15;
+      else if (tagList.length >= 3) scores.tags = 10;
+      else if (tagList.length >= 1) scores.tags = 5;
+      if (tagList.length === 0) suggestions.push('❌ 请添加标签');
+      else if (tagList.length < 5) suggestions.push('💡 建议至少5个标签');
+
+      // 视觉评分 (15分) — 根据封面文字/图片情况
+      const ic = imgCount || 0;
+      if (ic >= 3) scores.visual = 15;
+      else if (ic >= 1) scores.visual = 10;
+      else scores.visual = 5;
+      if (ic === 0) suggestions.push('💡 建议添加封面图和配图');
+
+      // 结构评分 (15分) — 段落、换行
+      const lines = (content || '').split('\n').filter(l => l.trim());
+      if (lines.length >= 4 && lines.length <= 12) scores.structure = 15;
+      else if (lines.length >= 2) scores.structure = 10;
+      else scores.structure = 5;
+      if (lines.length < 3) suggestions.push('💡 建议分段排版，增加空行');
+
+      const total = scores.title + scores.content + scores.tags + scores.visual + scores.structure;
+      const level = total >= 85 ? '🏆 优秀' : total >= 70 ? '👍 良好' : total >= 50 ? '⚡ 还行' : '⚠️ 需改进';
+      return { total, scores, suggestions, level };
+    }
+
+    let _scoreTimer;
+    function liveScorePost() {
+      clearTimeout(_scoreTimer);
+      _scoreTimer = setTimeout(() => {
+        const t = document.getElementById('score-title').value;
+        const c = document.getElementById('score-content').value;
+        const tags = document.getElementById('score-tags').value;
+        const cat = document.getElementById('score-category').value;
+        const r = scorePost(t, c, tags, cat, 0);
+        renderScoreResult(r);
+      }, 300);
+    }
+
+    function renderScoreResult(r) {
+      const color = r.total >= 85 ? '#27ae60' : r.total >= 70 ? '#2ecc71' : r.total >= 50 ? '#f39c12' : '#e74c3c';
+      let html = `
+        <div style="text-align:center; margin-bottom:20px;">
+          <div class="score-gauge" style="background:conic-gradient(${color} ${r.total * 3.6}deg, #f0f0f0 0);">
+            <div style="width:90px;height:90px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+              <div style="font-size:32px;font-weight:700;color:${color};">${r.total}</div>
+              <div style="font-size:12px;color:var(--text-light);">${r.level}</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      `;
+      const dims = [
+        { key: 'title', label: '标题', max: 25, color: '#e74c3c' },
+        { key: 'content', label: '正文', max: 30, color: '#3498db' },
+        { key: 'tags', label: '标签', max: 15, color: '#2ecc71' },
+        { key: 'visual', label: '视觉', max: 15, color: '#9b59b6' },
+        { key: 'structure', label: '结构', max: 15, color: '#f39c12' }
+      ];
+      for (const d of dims) {
+        const pct = (r.scores[d.key] / d.max * 100).toFixed(0);
+        html += `<div class="score-item"><label>${d.label}</label><div style="flex:1;"><div class="score-bar"><div style="width:${pct}%;background:${d.color};"></div></div></div><span style="color:${d.color};">${r.scores[d.key]}/${d.max}</span></div>`;
+      }
+      html += '</div>';
+      if (r.suggestions.length) {
+        html += '<div style="margin-top:16px;"><h4 style="margin-bottom:8px;">改进建议：</h4>';
+        html += r.suggestions.map(s => `<div style="padding:4px 0;font-size:13px;">${s}</div>`).join('');
+        html += '</div>';
+      }
+      document.getElementById('score-result').innerHTML = html;
+    }
+
+    function initScorePage() {}
+
+    async function aiOptimizeScore() {
+      if (!canUseAI()) { toast('请先配置 API Key', 'error'); return; }
+      const title = document.getElementById('score-title').value;
+      const content = document.getElementById('score-content').value;
+      if (!title && !content) { toast('请先输入内容', 'error'); return; }
+      document.getElementById('score-result').innerHTML = '<div class="empty-state"><p>🤖 AI 正在分析优化方案...</p></div>';
+      try {
+        const key = getGeminiKey();
+        const proxyBase = getGeminiProxyBase();
+        const payload = {
+          contents: [{ parts: [{ text: `你是小红书运营专家。请分析以下笔记并给出具体优化建议，返回JSON格式：{"titleSuggestion":"优化后的标题","contentTips":["建议1","建议2"],"tagSuggestion":"推荐标签,逗号分隔","overallTip":"总评"}\n\n标题：${title}\n正文：${content}` }] }],
+          generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
+        };
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'AI评分优化');
+        const text = result?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        const json = _extractJsonFromText(text);
+        let html = '<div class="card" style="background:#f0f8ff; margin-top:16px;">';
+        html += '<h4>🤖 AI 优化建议</h4>';
+        if (json.titleSuggestion) html += `<p><strong>标题优化：</strong>${json.titleSuggestion}</p>`;
+        if (json.contentTips) html += `<p><strong>内容建议：</strong></p><ul>${json.contentTips.map(t => `<li>${t}</li>`).join('')}</ul>`;
+        if (json.tagSuggestion) html += `<p><strong>推荐标签：</strong>${json.tagSuggestion}</p>`;
+        if (json.overallTip) html += `<p><strong>总评：</strong>${json.overallTip}</p>`;
+        html += '</div>';
+        document.getElementById('score-result').innerHTML += html;
+      } catch (e) {
+        document.getElementById('score-result').innerHTML += `<div class="forbidden-hit">AI 分析失败: ${e.message}</div>`;
+      }
+    }
+
+    // ============ 功能3: 热门话题 ============
+    async function fetchTrendingTopics() {
+      if (!canUseAI()) { toast('请先配置 API Key', 'error'); return []; }
+      const skill = currentSkillName;
+      const key = getGeminiKey();
+      const payload = {
+        contents: [{ parts: [{ text: `你是小红书运营专家。请搜索当前小红书"${skill}"赛道的10个热门话题/趋势。返回JSON数组：[{"topic":"话题名","heat":"高/中","trend":"上升/稳定/新兴","desc":"简短描述","suggestedTitle":"建议的笔记标题"}]` }] }],
+        tools: [{ googleSearch: {} }],
+        generationConfig: { temperature: 0.7, maxOutputTokens: 2048 }
+      };
+      const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '热门话题搜索');
+      const text = result?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('') || '';
+      try { return JSON.parse(text.match(/\[[\s\S]*\]/)?.[0] || '[]'); } catch { return []; }
+    }
+
+    function renderTrendingTopics(topics) {
+      const c = document.getElementById('trending-container');
+      if (!topics.length) { c.innerHTML = '<div class="empty-state"><p>未获取到话题，请稍后重试</p></div>'; return; }
+      c.innerHTML = `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;">` +
+        topics.map((t, i) => {
+          const heatColor = t.heat === '高' ? '#e74c3c' : '#f39c12';
+          const trendIcon = t.trend === '上升' ? '📈' : t.trend === '新兴' ? '🆕' : '📊';
+          return `<div class="trending-card" onclick="createPostFromTrend('${(t.suggestedTitle || t.topic).replace(/'/g, "\\'")}')">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <span class="trending-badge" style="background:${heatColor}22;color:${heatColor};">🔥 ${t.heat || '中'}热度</span>
+              <span style="font-size:12px;">${trendIcon} ${t.trend || '稳定'}</span>
+            </div>
+            <div style="font-weight:600;font-size:15px;margin-bottom:6px;">${t.topic}</div>
+            <div style="font-size:12px;color:var(--text-light);margin-bottom:8px;">${t.desc || ''}</div>
+            <div style="font-size:12px;color:var(--primary);">💡 ${t.suggestedTitle || '点击创作'}</div>
+          </div>`;
+        }).join('') + '</div>';
+    }
+
+    function createPostFromTrend(title) {
+      switchPage('generator');
+      const el = document.getElementById('gen-custom-prompt');
+      if (el) el.value = `围绕"${title}"这个热门话题创作小红书笔记`;
+      toast('已填入话题，点击生成即可', 'success');
+    }
+
+    async function initTrendingPage() {
+      document.getElementById('trending-container').innerHTML = '<div class="empty-state"><p>🔍 正在搜索热门话题...</p></div>';
+      try {
+        const topics = await fetchTrendingTopics();
+        renderTrendingTopics(topics);
+      } catch (e) {
+        document.getElementById('trending-container').innerHTML = `<div class="forbidden-hit">获取话题失败: ${e.message}</div>`;
+      }
+    }
+
+    // ============ 功能4: 标签引擎 ============
+    async function generateSmartTags() {
+      const keyword = document.getElementById('tags-keyword').value.trim();
+      if (!keyword) { toast('请输入主题关键词', 'error'); return; }
+      if (!canUseAI()) { toast('请先配置 API Key', 'error'); return; }
+      document.getElementById('tags-result').innerHTML = '<div class="empty-state"><p>🏷️ AI 正在生成标签策略...</p></div>';
+      try {
+        const key = getGeminiKey();
+        const payload = {
+          contents: [{ parts: [{ text: `你是小红书标签策略专家。为"${keyword}"（${currentSkillName}赛道）推荐标签策略。返回JSON：{"bigTags":["大标签1","大标签2"],"midTags":["中标签1","中标签2","中标签3"],"longTailTags":["长尾标签1","长尾标签2","长尾标签3","长尾标签4"],"strategy":"标签使用策略说明"}\n\n大标签=搜索量大的热门标签；中标签=精准垂直标签；长尾标签=竞争小的细分标签。` }] }],
+          tools: [{ googleSearch: {} }],
+          generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
+        };
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '标签生成');
+        const text = result?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('') || '';
+        const json = _extractJsonFromText(text);
+        let html = '';
+        const allTags = [];
+        if (json.bigTags?.length) {
+          html += '<h4 style="margin:12px 0 8px;">🔥 大标签（高搜索量）</h4><div>';
+          json.bigTags.forEach(t => { allTags.push(t); html += `<span class="tag-rec tag-big" onclick="copyTagToClipboard('#${t}')">#${t}</span>`; });
+          html += '</div>';
+        }
+        if (json.midTags?.length) {
+          html += '<h4 style="margin:12px 0 8px;">🎯 中标签（精准垂直）</h4><div>';
+          json.midTags.forEach(t => { allTags.push(t); html += `<span class="tag-rec tag-mid" onclick="copyTagToClipboard('#${t}')">#${t}</span>`; });
+          html += '</div>';
+        }
+        if (json.longTailTags?.length) {
+          html += '<h4 style="margin:12px 0 8px;">🌿 长尾标签（低竞争）</h4><div>';
+          json.longTailTags.forEach(t => { allTags.push(t); html += `<span class="tag-rec tag-small" onclick="copyTagToClipboard('#${t}')">#${t}</span>`; });
+          html += '</div>';
+        }
+        if (json.strategy) html += `<div class="card" style="background:#f0fff0; margin-top:16px;"><p>📝 ${json.strategy}</p></div>`;
+        if (allTags.length) html += `<button class="btn btn-primary" style="margin-top:12px;" onclick="copyAllTags()">📋 一键复制全部标签</button>`;
+        document.getElementById('tags-result').innerHTML = html;
+        window._lastGeneratedTags = allTags;
+      } catch (e) {
+        document.getElementById('tags-result').innerHTML = `<div class="forbidden-hit">标签生成失败: ${e.message}</div>`;
+      }
+    }
+
+    function copyTagToClipboard(tag) {
+      navigator.clipboard.writeText(tag).then(() => toast(`已复制 ${tag}`, 'success'));
+    }
+
+    function copyAllTags() {
+      if (window._lastGeneratedTags?.length) {
+        navigator.clipboard.writeText(window._lastGeneratedTags.map(t => '#' + t).join(' ')).then(() => toast('已复制全部标签', 'success'));
+      }
+    }
+
+    // ============ 功能5: 数据回录 ============
+    function openPostMetricsModal(postId) {
+      const existing = getPostMetrics(postId);
+      const periods = ['24h', '48h', '7d', '30d'];
+      const metrics = ['views', 'likes', 'collects', 'comments', 'shares'];
+      const labels = { views: '阅读', likes: '点赞', collects: '收藏', comments: '评论', shares: '分享' };
+      let html = `<div class="card"><h4 style="margin-bottom:12px;">📊 数据回录 - 笔记 #${postId}</h4>`;
+      html += '<table style="width:100%;"><thead><tr><th>时段</th>';
+      metrics.forEach(m => html += `<th>${labels[m]}</th>`);
+      html += '</tr></thead><tbody>';
+      for (const p of periods) {
+        html += `<tr><td><strong>${p}</strong></td>`;
+        metrics.forEach(m => {
+          const val = existing?.[p]?.[m] || '';
+          html += `<td><input type="number" id="pm-${postId}-${p}-${m}" value="${val}" class="form-control" style="width:80px;" min="0"></td>`;
+        });
+        html += '</tr>';
+      }
+      html += '</tbody></table>';
+      html += `<button class="btn btn-primary" style="margin-top:12px;" onclick="savePostMetrics(${postId})">💾 保存数据</button></div>`;
+
+      let modal = document.getElementById('modal-post-metrics');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.className = 'modal-overlay';
+        modal.id = 'modal-post-metrics';
+        modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('active'); });
+        document.body.appendChild(modal);
+      }
+      modal.innerHTML = `<div class="modal" style="max-width:700px;">${html}</div>`;
+      modal.classList.add('active');
+    }
+
+    function savePostMetrics(postId) {
+      const periods = ['24h', '48h', '7d', '30d'];
+      const metrics = ['views', 'likes', 'collects', 'comments', 'shares'];
+      const data = {};
+      for (const p of periods) {
+        data[p] = {};
+        metrics.forEach(m => {
+          data[p][m] = parseInt(document.getElementById(`pm-${postId}-${p}-${m}`).value) || 0;
+        });
+      }
+      const key = `xhs_${currentSkillName}_post_metrics`;
+      const all = JSON.parse(localStorage.getItem(key) || '{}');
+      all[postId] = data;
+      localStorage.setItem(key, JSON.stringify(all));
+      toast('数据已保存', 'success');
+      const modal = document.getElementById('modal-post-metrics');
+      if (modal) modal.classList.remove('active');
+    }
+
+    function getPostMetrics(postId) {
+      const key = `xhs_${currentSkillName}_post_metrics`;
+      const all = JSON.parse(localStorage.getItem(key) || '{}');
+      return all[postId] || null;
+    }
+
+    function renderPostMetrics(postId) {
+      const m = getPostMetrics(postId);
+      if (!m) return '<div style="color:var(--text-light);font-size:13px;">暂无数据回录，<a href="javascript:void(0)" onclick="openPostMetricsModal(' + postId + ')" style="color:var(--primary);">点击录入</a></div>';
+      const labels = { views: '阅读', likes: '点赞', collects: '收藏', comments: '评论', shares: '分享' };
+      let html = '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-size:12px;">';
+      for (const p of ['24h', '48h', '7d', '30d']) {
+        html += `<div class="card" style="padding:8px;text-align:center;"><strong>${p}</strong>`;
+        for (const [k, v] of Object.entries(labels)) {
+          html += `<div>${v}: ${m[p]?.[k] || 0}</div>`;
+        }
+        html += '</div>';
+      }
+      html += '</div>';
+      html += `<button class="btn btn-outline" style="margin-top:8px;font-size:12px;" onclick="openPostMetricsModal(${postId})">✏️ 编辑数据</button>`;
+      return html;
+    }
+
+    // ============ 功能6: 评论话术库 ============
+    const DEFAULT_COMMENT_TEMPLATES = [
+      { scene: '感谢', text: '谢谢宝子的喜欢！关注我获取更多好内容哦～ 💕' },
+      { scene: '感谢', text: '你的支持是我更新的动力！❤️' },
+      { scene: '求助', text: '亲可以看看我之前的笔记哦，里面有详细教程～' },
+      { scene: '求助', text: '宝子私信我，我单独给你说哈～ 😊' },
+      { scene: '质疑', text: '感谢关注！每个人体验不同，这是我的真实感受哦～' },
+      { scene: '质疑', text: '谢谢提醒！我会继续改进的 🙏' },
+      { scene: '合作', text: '合作请私信联系，期待和优质品牌合作！' },
+      { scene: '互动', text: '哈哈你说的太对了！我也是这么想的～' },
+      { scene: '互动', text: '宝子们觉得呢？评论区聊聊！' },
+      { scene: '引流', text: '想了解更多可以关注我，每天更新干货！✨' }
+    ];
+
+    function getCommentTemplates() {
+      return JSON.parse(localStorage.getItem(`xhs_${currentSkillName}_comment_templates`) || 'null') || [...DEFAULT_COMMENT_TEMPLATES];
+    }
+
+    function saveCommentTemplatesList(list) {
+      localStorage.setItem(`xhs_${currentSkillName}_comment_templates`, JSON.stringify(list));
+    }
+
+    function loadCommentTemplates() {
+      renderCommentTemplatesList();
+    }
+
+    function renderCommentTemplatesList() {
+      const templates = getCommentTemplates();
+      const scenes = [...new Set(templates.map(t => t.scene))];
+      let html = '';
+      for (const scene of scenes) {
+        html += `<div class="card" style="margin-bottom:12px;"><h4 style="margin-bottom:8px;">${scene}</h4>`;
+        templates.filter(t => t.scene === scene).forEach((t, i) => {
+          const idx = templates.indexOf(t);
+          html += `<div class="comment-tpl-card"><div style="display:flex;justify-content:space-between;align-items:center;">
+            <div style="flex:1;">${t.text}</div>
+            <div style="display:flex;gap:4px;">
+              <button class="btn btn-outline" style="font-size:11px;padding:2px 8px;" onclick="navigator.clipboard.writeText('${t.text.replace(/'/g, "\\'")}').then(()=>toast('已复制','success'))">📋</button>
+              <button class="btn btn-outline" style="font-size:11px;padding:2px 8px;color:#e74c3c;" onclick="deleteCommentTemplate(${idx})">🗑️</button>
+            </div>
+          </div></div>`;
+        });
+        html += '</div>';
+      }
+      html += `<div class="card"><h4 style="margin-bottom:8px;">➕ 添加话术</h4>
+        <div style="display:flex;gap:8px;">
+          <select id="new-comment-scene" class="form-control" style="width:100px;">
+            <option value="感谢">感谢</option><option value="求助">求助</option><option value="质疑">质疑</option>
+            <option value="合作">合作</option><option value="互动">互动</option><option value="引流">引流</option>
+          </select>
+          <input type="text" id="new-comment-text" class="form-control" placeholder="输入话术内容" style="flex:1;">
+          <button class="btn btn-primary" onclick="saveCommentTemplate()">添加</button>
+        </div></div>`;
+      document.getElementById('comments-container').innerHTML = html;
+    }
+
+    function saveCommentTemplate() {
+      const scene = document.getElementById('new-comment-scene').value;
+      const text = document.getElementById('new-comment-text').value.trim();
+      if (!text) { toast('请输入话术内容', 'error'); return; }
+      const list = getCommentTemplates();
+      list.push({ scene, text });
+      saveCommentTemplatesList(list);
+      renderCommentTemplatesList();
+      toast('话术已添加', 'success');
+    }
+
+    function deleteCommentTemplate(idx) {
+      const list = getCommentTemplates();
+      list.splice(idx, 1);
+      saveCommentTemplatesList(list);
+      renderCommentTemplatesList();
+    }
+
+    async function generateCommentTemplates() {
+      if (!canUseAI()) { toast('请先配置 API Key', 'error'); return; }
+      document.getElementById('comments-container').innerHTML = '<div class="empty-state"><p>🤖 AI 正在生成话术...</p></div>';
+      try {
+        const key = getGeminiKey();
+        const payload = {
+          contents: [{ parts: [{ text: `你是小红书运营专家。为"${currentSkillName}"赛道生成12条评论回复话术。返回JSON数组：[{"scene":"场景(感谢/求助/质疑/合作/互动/引流之一)","text":"话术内容"}]。要求：语气亲切自然，适合小红书风格，每个场景2条。` }] }],
+          generationConfig: { temperature: 0.8, maxOutputTokens: 1024 }
+        };
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '生成评论话术');
+        const text = result?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        const arr = JSON.parse(text.match(/\[[\s\S]*\]/)?.[0] || '[]');
+        if (arr.length) {
+          saveCommentTemplatesList(arr);
+          toast('已生成并保存', 'success');
+        }
+        renderCommentTemplatesList();
+      } catch (e) {
+        toast('生成失败: ' + e.message, 'error');
+        renderCommentTemplatesList();
+      }
+    }
+
+    // ============ 功能7: 节日营销提醒 ============
+    const FESTIVALS = [
+      { name: '元旦', date: '01-01', emoji: '🎉' }, { name: '情人节', date: '02-14', emoji: '💕' },
+      { name: '妇女节', date: '03-08', emoji: '👩' }, { name: '植树节', date: '03-12', emoji: '🌳' },
+      { name: '愚人节', date: '04-01', emoji: '🤡' }, { name: '清明节', date: '04-05', emoji: '🌿' },
+      { name: '劳动节', date: '05-01', emoji: '💪' }, { name: '母亲节', date: '05-11', emoji: '💐' },
+      { name: '520', date: '05-20', emoji: '💗' }, { name: '儿童节', date: '06-01', emoji: '🧒' },
+      { name: '父亲节', date: '06-15', emoji: '👨' }, { name: '端午节', date: '06-01', emoji: '🐉' },
+      { name: '七夕', date: '08-04', emoji: '🌌' }, { name: '教师节', date: '09-10', emoji: '📚' },
+      { name: '国庆节', date: '10-01', emoji: '🇨🇳' }, { name: '万圣节', date: '10-31', emoji: '🎃' },
+      { name: '双11', date: '11-11', emoji: '🛒' }, { name: '双12', date: '12-12', emoji: '🎁' },
+      { name: '平安夜', date: '12-24', emoji: '🎄' }, { name: '跨年', date: '12-31', emoji: '✨' }
+    ];
+
+    function getUpcomingFestivals(days = 30) {
+      const now = new Date();
+      const year = now.getFullYear();
+      const upcoming = [];
+      for (const f of FESTIVALS) {
+        let d = new Date(`${year}-${f.date}`);
+        if (d < now) d = new Date(`${year + 1}-${f.date}`);
+        const diff = Math.ceil((d - now) / 86400000);
+        if (diff >= 0 && diff <= days) upcoming.push({ ...f, daysLeft: diff, fullDate: d });
+      }
+      return upcoming.sort((a, b) => a.daysLeft - b.daysLeft);
+    }
+
+    function renderFestivalReminders(containerId) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      const upcoming = getUpcomingFestivals(30);
+      if (!upcoming.length) { el.innerHTML = ''; return; }
+      let html = '<div class="card" style="margin-top:0;"><h3 style="margin-bottom:12px;">🎉 近期节日营销提醒</h3>';
+      for (const f of upcoming) {
+        const urgency = f.daysLeft <= 3 ? 'color:#e74c3c;font-weight:700;' : f.daysLeft <= 7 ? 'color:#f39c12;' : '';
+        html += `<div class="festival-card">
+          <div class="days" style="${urgency}">${f.daysLeft === 0 ? '今天' : f.daysLeft + '天'}</div>
+          <div><strong>${f.emoji} ${f.name}</strong><div style="font-size:12px;color:var(--text-light);">${f.fullDate.toLocaleDateString('zh-CN')}</div></div>
+          <button class="btn btn-outline" style="margin-left:auto;font-size:12px;" onclick="createPostFromTrend('${f.name}营销')">✨ 创作</button>
+        </div>`;
+      }
+      html += '</div>';
+      el.innerHTML = html;
+    }
+
+    // ============ 功能8: 竞品分析 ============
+    function getCompetitors() {
+      return JSON.parse(localStorage.getItem(`xhs_${currentSkillName}_competitors`) || '[]');
+    }
+    function saveCompetitors(list) {
+      localStorage.setItem(`xhs_${currentSkillName}_competitors`, JSON.stringify(list));
+    }
+
+    function loadCompetitors() {
+      renderCompetitorList();
+    }
+
+    function renderCompetitorList() {
+      const list = getCompetitors();
+      const el = document.getElementById('competitor-list');
+      if (!list.length) { el.innerHTML = '<div class="empty-state"><p>暂无竞品，添加一些吧</p></div>'; return; }
+      el.innerHTML = list.map((c, i) => `
+        <div class="competitor-card">
+          <div><strong>${c.name}</strong>${c.note ? `<span style="font-size:12px;color:var(--text-light);margin-left:8px;">${c.note}</span>` : ''}</div>
+          <button class="btn btn-outline" style="color:#e74c3c;font-size:12px;" onclick="removeCompetitor(${i})">删除</button>
+        </div>
+      `).join('');
+    }
+
+    function addCompetitor() {
+      const name = document.getElementById('competitor-name').value.trim();
+      if (!name) { toast('请输入账号名称', 'error'); return; }
+      const note = document.getElementById('competitor-note').value.trim();
+      const list = getCompetitors();
+      list.push({ name, note });
+      saveCompetitors(list);
+      document.getElementById('competitor-name').value = '';
+      document.getElementById('competitor-note').value = '';
+      renderCompetitorList();
+      toast('已添加竞品', 'success');
+    }
+
+    function removeCompetitor(idx) {
+      const list = getCompetitors();
+      list.splice(idx, 1);
+      saveCompetitors(list);
+      renderCompetitorList();
+    }
+
+    async function aiAnalyzeCompetitors() {
+      const list = getCompetitors();
+      if (!list.length) { toast('请先添加竞品账号', 'error'); return; }
+      if (!canUseAI()) { toast('请先配置 API Key', 'error'); return; }
+      document.getElementById('competitor-analysis').innerHTML = '<div class="empty-state"><p>🤖 AI 正在分析竞品...</p></div>';
+      try {
+        const key = getGeminiKey();
+        const names = list.map(c => c.name).join('、');
+        const payload = {
+          contents: [{ parts: [{ text: `你是小红书运营分析专家。请搜索并分析以下小红书"${currentSkillName}"赛道的竞品账号：${names}。\n\n请分析：1.各账号的内容策略特点 2.发布频率和时间 3.爆款内容共性 4.标签使用策略 5.可以借鉴的地方 6.差异化竞争建议\n\n用中文详细回答，格式清晰，给出可落地的行动建议。` }] }],
+          tools: [{ googleSearch: {} }],
+          generationConfig: { temperature: 0.7, maxOutputTokens: 4096 }
+        };
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '竞品分析');
+        const text = result?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('\n') || '未获取到分析结果';
+        document.getElementById('competitor-analysis').innerHTML = `<div class="card" style="white-space:pre-wrap;line-height:1.8;">${text}</div>`;
+      } catch (e) {
+        document.getElementById('competitor-analysis').innerHTML = `<div class="forbidden-hit">分析失败: ${e.message}</div>`;
+      }
+    }
+
+    // ============ 功能9: 多账号管理 ============
+    function getAccounts() {
+      return JSON.parse(localStorage.getItem('xhs_multi_accounts') || '[]');
+    }
+    function saveAccounts(list) {
+      localStorage.setItem('xhs_multi_accounts', JSON.stringify(list));
+    }
+    function getCurrentAccountId() {
+      return localStorage.getItem('xhs_current_account_id') || 'default';
+    }
+    function setCurrentAccountId(id) {
+      localStorage.setItem('xhs_current_account_id', id);
+    }
+
+    function loadMultiAccounts() {
+      const accounts = getAccounts();
+      const currentId = getCurrentAccountId();
+      const el = document.getElementById('multi-account-list');
+      if (!accounts.length) {
+        el.innerHTML = '<div class="card"><div class="empty-state"><p>暂无额外账号。当前使用默认账号。</p><p style="font-size:13px;color:var(--text-light);">点击「新建账号」创建多账号管理</p></div></div>';
+        return;
+      }
+      let html = `<div class="account-card ${currentId === 'default' ? 'active' : ''}">
+        <div><strong>🏠 默认账号</strong><div style="font-size:12px;color:var(--text-light);">主账号</div></div>
+        <button class="btn btn-outline" onclick="switchAccount('default')" ${currentId === 'default' ? 'disabled' : ''}>
+          ${currentId === 'default' ? '✅ 当前' : '切换'}
+        </button>
+      </div>`;
+      for (const acc of accounts) {
+        const isActive = currentId === acc.id;
+        html += `<div class="account-card ${isActive ? 'active' : ''}">
+          <div><strong>${acc.name}</strong><div style="font-size:12px;color:var(--text-light);">${acc.desc || '小红书账号'}</div></div>
+          <div style="display:flex;gap:4px;">
+            <button class="btn btn-outline" onclick="switchAccount('${acc.id}')" ${isActive ? 'disabled' : ''}>${isActive ? '✅ 当前' : '切换'}</button>
+            <button class="btn btn-outline" style="color:#e74c3c;" onclick="deleteAccount('${acc.id}')">删除</button>
+          </div>
+        </div>`;
+      }
+      el.innerHTML = html;
+    }
+
+    function openAddAccountModal() {
+      const name = prompt('账号名称：');
+      if (!name) return;
+      const desc = prompt('账号描述（选填）：') || '';
+      const accounts = getAccounts();
+      const id = 'acc_' + Date.now();
+      accounts.push({ id, name, desc, createdAt: new Date().toISOString() });
+      saveAccounts(accounts);
+      loadMultiAccounts();
+      toast('账号已创建', 'success');
+    }
+
+    function switchAccount(id) {
+      setCurrentAccountId(id);
+      loadMultiAccounts();
+      toast('已切换账号', 'success');
+    }
+
+    function deleteAccount(id) {
+      if (!confirm('确定删除该账号？')) return;
+      const accounts = getAccounts().filter(a => a.id !== id);
+      saveAccounts(accounts);
+      if (getCurrentAccountId() === id) setCurrentAccountId('default');
+      loadMultiAccounts();
+      toast('已删除', 'success');
+    }
+
+    // ============ 功能10: 笔记改写 ============
+    async function rewritePost() {
+      const input = document.getElementById('rewrite-input').value.trim();
+      if (!input) { toast('请输入需要改写的内容', 'error'); return; }
+      if (!canUseAI()) { toast('请先配置 API Key', 'error'); return; }
+      const mode = document.getElementById('rewrite-mode').value;
+      const style = document.getElementById('rewrite-style').value;
+      const modeMap = { angle: '换一个全新角度重写', tone: '换语气和表达方式', expand: '扩写，增加细节和案例', shorten: '缩写精简，保留核心信息', viral: '改写为小红书爆款风格' };
+      const styleMap = { casual: '轻松口语化', professional: '专业权威', cute: '可爱卖萌', story: '故事叙述', list: '干货清单体' };
+
+      document.getElementById('rewrite-result').innerHTML = '<div class="empty-state"><p>✨ AI 正在改写...</p></div>';
+      try {
+        const key = getGeminiKey();
+        const payload = {
+          contents: [{ parts: [{ text: `你是小红书内容创作专家。请按要求改写以下内容：\n\n改写模式：${modeMap[mode]}\n文风要求：${styleMap[style]}\n\n原文：\n${input}\n\n要求：\n1. 保持原文核心信息\n2. 适合小红书平台风格\n3. 直接输出改写后的完整内容（标题+正文+标签）\n4. 不要解释改写思路` }] }],
+          generationConfig: { temperature: 0.8, maxOutputTokens: 2048 }
+        };
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '笔记改写');
+        const text = result?.candidates?.[0]?.content?.parts?.[0]?.text || '改写失败';
+        window._lastRewriteResult = text;
+        document.getElementById('rewrite-result').innerHTML = `<div class="card" style="background:#f8f9ff;white-space:pre-wrap;line-height:1.8;">${text}</div>`;
+      } catch (e) {
+        document.getElementById('rewrite-result').innerHTML = `<div class="forbidden-hit">改写失败: ${e.message}</div>`;
+      }
+    }
+
+    function copyRewriteResult() {
+      if (window._lastRewriteResult) {
+        navigator.clipboard.writeText(window._lastRewriteResult).then(() => toast('已复制', 'success'));
+      } else { toast('暂无改写结果', 'error'); }
+    }
+
+    async function saveRewriteAsDraft() {
+      if (!window._lastRewriteResult) { toast('暂无改写结果', 'error'); return; }
+      const lines = window._lastRewriteResult.split('\n').filter(l => l.trim());
+      const title = lines[0]?.replace(/^[#\s*]+/, '').trim() || '改写笔记';
+      const content = lines.slice(1).join('\n').trim();
+      const body = { title, content, category: document.getElementById('skill-switcher')?.value?.split(' ')[0] || '其他', status: 'draft', tags: '', cover_text: '' };
+      await api('/api/posts', { method: 'POST', body });
+      toast('已保存为草稿', 'success');
     }
 
     // ============ 初始化 ============
