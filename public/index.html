@@ -2725,11 +2725,13 @@
 
       if (useProxy) {
         // 走服务器代理
+        const isImageModel = model && (model.includes('image') || model.includes('banana') || model.includes('imagen'));
+        const proxyTimeout = isImageModel ? 200000 : (forceProxy ? 70000 : 30000);
         try {
           const res = await fetch(getGeminiProxyAPIUrl(), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            signal: AbortSignal.timeout(forceProxy ? 70000 : 30000),
+            signal: AbortSignal.timeout(proxyTimeout),
             body: JSON.stringify({ apiKey, model, payload, action })
           });
           const data = await res.json();
