@@ -2942,7 +2942,7 @@
               return { ok: true, data: data2 };
             } catch (e2) {
               if (e2.fromProxy) throw e2;
-              throw new Error('代理服务连接失败，请稍后重试（服务可能在启动中或网络波动）');
+              throw new Error('代理连接失败: ' + (e2.name || '') + ' ' + (e2.message || '') + ' | 首次: ' + (e.name || '') + ' ' + (e.message || ''));
             }
           }
           console.warn('[Gemini] Server proxy failed, trying direct:', e.message);
