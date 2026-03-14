@@ -1689,6 +1689,10 @@
                 <label>自定义 Prompt（选填）</label>
                 <textarea id="gen-custom-prompt" class="form-control" rows="2" placeholder="输入自定义创作指令，AI 会优先参考"></textarea>
               </div>
+              <div class="form-group" style="margin-top:12px;">
+                <label>📌 参考笔记（选填）<span style="font-size:11px;color:var(--text-light);margin-left:6px;">粘贴你看到的爆款笔记标题/正文，AI 会参考真实案例来创作</span></label>
+                <textarea id="gen-ref-notes" class="form-control" rows="4" placeholder="粘贴 1-3 条小红书爆款笔记的标题和正文内容，每条之间用空行分隔。&#10;&#10;示例：&#10;标题：熬过最难的日子，你会感谢自己｜治愈文案&#10;正文：有些路，只能一个人走……"></textarea>
+              </div>
               <div id="gen-progress" style="display:none; margin-top:12px;"></div>
               <div id="gen-mode-hint" style="margin-top:8px; font-size:12px; color:var(--text-light);"></div>
             </div>
@@ -3982,9 +3986,9 @@
     }
 
     // ========== 第一步：联网搜索+分析小红书爆款笔记 ==========
-    async function _searchAndAnalyzeXHS(apiKey, model, category) {
+    async function _searchAndAnalyzeXHS(apiKey, model, category, refNotes) {
       if (IS_LIGHT_AI_MODE) {
-        return await _analyzeWithoutSearch(apiKey, model, category);
+        return await _analyzeWithoutSearch(apiKey, model, category, refNotes);
       }
       const sk = _s();
       const keywords = sk.searchKeywords(category);
@@ -4064,13 +4068,22 @@ ${keywords.map(k => `- "${k}"`).join('\n')}
         });
       }
 
-      // ---- 步骤3: 合并两个搜索来源 ----
+      // ---- 步骤3: 用户粘贴的参考笔记 ----
+      let userRefText = '';
+      if (refNotes && refNotes.trim()) {
+        userRefText = '\n\n## 用户提供的真实爆款笔记参考\n以下是用户从小红书平台手动收集的爆款笔记内容，请重点分析其标题规律、内容结构、语气风格：\n\n' + refNotes.trim() + '\n';
+      }
+
+      // ---- 步骤4: 合并所有搜索来源 ----
       let analysisText = '';
       if (googleAnalysisText) {
         analysisText = googleAnalysisText;
       }
       if (baiduText) {
         analysisText += baiduText;
+      }
+      if (userRefText) {
+        analysisText += userRefText;
       }
 
       // 如果两个搜索都失败了，降级为纯知识库分析
@@ -4099,17 +4112,21 @@ ${keywords.map(k => `- "${k}"`).join('\n')}
         sources,
         searchUsed: googleSearchUsed,
         baiduUsed: baiduResults.length > 0,
-        baiduCount: baiduResults.length
+        baiduCount: baiduResults.length,
+        userRefUsed: !!(refNotes && refNotes.trim())
       };
     }
 
     // 降级方案：不带搜索的分析
-    async function _analyzeWithoutSearch(apiKey, model, category) {
+    async function _analyzeWithoutSearch(apiKey, model, category, refNotes) {
       const sk = _s();
+      const refBlock = (refNotes && refNotes.trim())
+        ? `\n\n## 用户提供的真实爆款笔记参考\n以下是用户从小红书平台手动收集的爆款笔记内容，请重点分析其标题规律、内容结构、语气风格：\n\n${refNotes.trim()}\n`
+        : '';
       const prompt = `你是一位拥有百万粉丝的${sk.aiRole}，精通平台算法和爆款内容创作。
 
 请基于你对小红书平台的深入了解，详细分析「${category}」分类${sk.aiNiche}爆款笔记的规律：
-
+${refBlock}
 ## 典型爆款笔记案例
 列出5-8个典型的「${category}」${sk.aiNiche}高赞笔记标题示例及内容特点
 
@@ -4146,7 +4163,7 @@ ${keywords.map(k => `- "${k}"`).join('\n')}
       }
 
       const text = _extractGeminiText(data);
-      return { analysisText: text, sources: [], searchUsed: false };
+      return { analysisText: text, sources: [], searchUsed: false, userRefUsed: !!(refNotes && refNotes.trim()) };
     }
 
     // ========== 第二步：基于分析结果生成笔记 ==========
@@ -4291,15 +4308,16 @@ ${sourceInfo}
     }
 
     // ========== 组合调用：搜索分析 + 生成 ==========
-    async function _callGeminiForContent(apiKey, model, category, count, onProgress) {
-      // 第一步：联网搜索+分析（Google + 百度双引擎）
+    async function _callGeminiForContent(apiKey, model, category, count, onProgress, refNotes) {
+      // 第一步：联网搜索+分析（Google + 百度双引擎 + 用户参考笔记）
       if (onProgress) onProgress('search', `🌐 正在搜索小红书「${category}」爆款笔记（Google + 百度双引擎）...`);
-      const analysis = await _searchAndAnalyzeXHS(apiKey, model, category);
+      const analysis = await _searchAndAnalyzeXHS(apiKey, model, category, refNotes);
 
       if (onProgress) {
         const parts = [];
         if (analysis.searchUsed) parts.push(`Google ${analysis.sources.filter(s => !s.source).length} 条`);
         if (analysis.baiduUsed) parts.push(`百度小红书 ${analysis.baiduCount} 条`);
+        if (analysis.userRefUsed) parts.push('📌 用户参考笔记');
         const statusMsg = parts.length
           ? `✅ 已检索到 ${parts.join(' + ')}，分析完成`
           : '📊 已完成知识库分析（未使用联网搜索）';
@@ -5237,6 +5255,7 @@ Style: ${stylePrompt}
       const autoSave = document.getElementById('gen-auto-save').checked;
       const withImage = document.getElementById('gen-with-image').checked;
       const imageCount = parseInt(document.getElementById('gen-image-count')?.value || '2');
+      const refNotes = (document.getElementById('gen-ref-notes')?.value || '').trim();
       const hasApiKey = canUseAI();
       let usedAI = hasApiKey;
 
@@ -5280,7 +5299,8 @@ Style: ${stylePrompt}
                     btn.textContent = `✍️ AI 创作中 (${batchesDone}/${totalBatches})...`;
                   }
                   updateGenProgress(progressEl, msg, pct);
-                }
+                },
+                refNotes
               );
               allPosts.push(...batchPosts);
               remaining -= batchCount;
