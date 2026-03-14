@@ -4184,23 +4184,37 @@ ${sourceInfo}
     // ========== JSON 提取工具 ==========
     function _extractJsonFromText(text) {
       if (!text || !text.trim()) throw new Error('AI 返回内容为空');
+      // 去掉 markdown code block 标记
+      let cleaned = text.replace(/```(?:json)?\s*/g, '').replace(/```/g, '').trim();
       try {
-        return JSON.parse(text);
+        return JSON.parse(cleaned);
       } catch {
-        // 尝试从 markdown code block 中提取
-        const jsonMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/);
-        if (jsonMatch) {
-          try { return JSON.parse(jsonMatch[1].trim()); } catch {}
-        }
         // 尝试找到 JSON 数组
-        const arrMatch = text.match(/(\[\s*\{[\s\S]*\}\s*\])/);
+        const arrMatch = cleaned.match(/(\[\s*\{[\s\S]*\}\s*\])/);
         if (arrMatch) {
           try { return JSON.parse(arrMatch[1]); } catch {}
         }
         // 尝试找到 JSON 对象
-        const objMatch = text.match(/(\{[\s\S]*\})/);
+        const objMatch = cleaned.match(/(\{[\s\S]*\})/);
         if (objMatch) {
           try { return JSON.parse(objMatch[1]); } catch {}
+          // JSON 可能被截断，尝试修复：补全括号
+          let partial = objMatch[1];
+          // 补全缺少的引号和括号
+          const opens = (partial.match(/\{/g) || []).length;
+          const closes = (partial.match(/\}/g) || []).length;
+          if (opens > closes) {
+            // 截断到最后一个完整的值后面
+            partial = partial.replace(/,\s*"[^"]*$/, '');  // 去掉不完整的最后一个key
+            partial = partial.replace(/,\s*$/, '');  // 去掉尾部逗号
+            for (let i = 0; i < opens - closes; i++) partial += '}';
+            try { return JSON.parse(partial); } catch {}
+            // 尝试修复截断的字符串值
+            partial = objMatch[1].replace(/,\s*"[^"]*"?\s*:\s*"?[^"}\]]*$/, '');
+            partial = partial.replace(/,\s*$/, '');
+            for (let i = 0; i < opens - (partial.match(/\}/g) || []).length; i++) partial += '}';
+            try { return JSON.parse(partial); } catch {}
+          }
         }
         throw new Error('AI 返回格式异常，无法解析内容。原文: ' + text.slice(0, 200));
       }
