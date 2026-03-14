@@ -6535,17 +6535,17 @@ Style: ${stylePrompt}
         const allTags = [];
         if (json.bigTags?.length) {
           html += '<h4 style="margin:12px 0 8px;">🔥 大标签（高搜索量）</h4><div>';
-          json.bigTags.forEach(t => { allTags.push(t); html += `<span class="tag-rec tag-big" onclick="copyTagToClipboard('#${t}')">#${t}</span>`; });
+          json.bigTags.forEach(t => { t = t.replace(/^#*/, ''); allTags.push(t); html += `<span class="tag-rec tag-big" onclick="copyTagToClipboard('#${t}')">#${t}</span>`; });
           html += '</div>';
         }
         if (json.midTags?.length) {
           html += '<h4 style="margin:12px 0 8px;">🎯 中标签（精准垂直）</h4><div>';
-          json.midTags.forEach(t => { allTags.push(t); html += `<span class="tag-rec tag-mid" onclick="copyTagToClipboard('#${t}')">#${t}</span>`; });
+          json.midTags.forEach(t => { t = t.replace(/^#*/, ''); allTags.push(t); html += `<span class="tag-rec tag-mid" onclick="copyTagToClipboard('#${t}')">#${t}</span>`; });
           html += '</div>';
         }
         if (json.longTailTags?.length) {
           html += '<h4 style="margin:12px 0 8px;">🌿 长尾标签（低竞争）</h4><div>';
-          json.longTailTags.forEach(t => { allTags.push(t); html += `<span class="tag-rec tag-small" onclick="copyTagToClipboard('#${t}')">#${t}</span>`; });
+          json.longTailTags.forEach(t => { t = t.replace(/^#*/, ''); allTags.push(t); html += `<span class="tag-rec tag-small" onclick="copyTagToClipboard('#${t}')">#${t}</span>`; });
           html += '</div>';
         }
         if (json.strategy) html += `<div class="card" style="background:#f0fff0; margin-top:16px;"><p>📝 ${json.strategy}</p></div>`;
