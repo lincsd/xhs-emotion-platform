@@ -4183,21 +4183,37 @@ ${sourceInfo}
 
     // ========== JSON 提取工具 ==========
     function _extractJsonFromText(text) {
+      if (!text || !text.trim()) throw new Error('AI 返回内容为空');
       try {
         return JSON.parse(text);
       } catch {
         // 尝试从 markdown code block 中提取
         const jsonMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/);
         if (jsonMatch) {
-          return JSON.parse(jsonMatch[1].trim());
+          try { return JSON.parse(jsonMatch[1].trim()); } catch {}
         }
         // 尝试找到 JSON 数组
         const arrMatch = text.match(/(\[\s*\{[\s\S]*\}\s*\])/);
         if (arrMatch) {
-          return JSON.parse(arrMatch[1]);
+          try { return JSON.parse(arrMatch[1]); } catch {}
         }
-        throw new Error('AI 返回格式异常，无法解析内容');
+        // 尝试找到 JSON 对象
+        const objMatch = text.match(/(\{[\s\S]*\})/);
+        if (objMatch) {
+          try { return JSON.parse(objMatch[1]); } catch {}
+        }
+        throw new Error('AI 返回格式异常，无法解析内容。原文: ' + text.slice(0, 200));
       }
+    }
+
+    /** 从 Gemini 响应 parts 中提取非 thinking 的文本 */
+    function _extractGeminiText(resData) {
+      const parts = resData?.candidates?.[0]?.content?.parts || [];
+      // 过滤掉 thought 部分，拼接所有非 thought 的 text
+      const textParts = parts.filter(p => !p.thought && p.text).map(p => p.text);
+      if (textParts.length) return textParts.join('');
+      // fallback: 取所有 text
+      return parts.map(p => p.text).filter(Boolean).join('') || '';
     }
 
     // ========== 组合调用：搜索分析 + 生成 ==========
@@ -6417,7 +6433,7 @@ Style: ${stylePrompt}
         };
         const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'AI评分优化');
         const resData = result?.data || result;
-        const text = resData?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        const text = _extractGeminiText(resData);
         const json = _extractJsonFromText(text);
         let html = '<div class="card" style="background:#f0f8ff; margin-top:16px;">';
         html += '<h4>🤖 AI 优化建议</h4>';
@@ -6444,7 +6460,7 @@ Style: ${stylePrompt}
       };
       const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '热门话题搜索');
       const resData = result?.data || result;
-      const text = resData?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('') || '';
+      const text = _extractGeminiText(resData);
       try { return JSON.parse(text.match(/\[[\s\S]*\]/)?.[0] || '[]'); } catch { return []; }
     }
 
@@ -6499,7 +6515,7 @@ Style: ${stylePrompt}
         };
         const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '标签生成');
         const resData = result?.data || result;
-        const text = resData?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('') || '';
+        const text = _extractGeminiText(resData);
         const json = _extractJsonFromText(text);
         let html = '';
         const allTags = [];
@@ -6697,7 +6713,7 @@ Style: ${stylePrompt}
         };
         const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '生成评论话术');
         const resData = result?.data || result;
-        const text = resData?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        const text = _extractGeminiText(resData);
         const arr = JSON.parse(text.match(/\[[\s\S]*\]/)?.[0] || '[]');
         if (arr.length) {
           saveCommentTemplatesList(arr);
@@ -6814,7 +6830,7 @@ Style: ${stylePrompt}
         };
         const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '竞品分析');
         const resData = result?.data || result;
-        const text = resData?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('\n') || '未获取到分析结果';
+        const text = _extractGeminiText(resData) || '未获取到分析结果';
         document.getElementById('competitor-analysis').innerHTML = `<div class="card" style="white-space:pre-wrap;line-height:1.8;">${text}</div>`;
       } catch (e) {
         document.getElementById('competitor-analysis').innerHTML = `<div class="forbidden-hit">分析失败: ${_extractAIError(e)}</div>`;
@@ -6908,7 +6924,7 @@ Style: ${stylePrompt}
         };
         const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '笔记改写');
         const resData = result?.data || result;
-        const text = resData?.candidates?.[0]?.content?.parts?.[0]?.text || '改写失败';
+        const text = _extractGeminiText(resData) || '改写失败';
         window._lastRewriteResult = text;
         document.getElementById('rewrite-result').innerHTML = `<div class="card" style="background:#f8f9ff;white-space:pre-wrap;line-height:1.8;">${text}</div>`;
       } catch (e) {
@@ -7095,7 +7111,7 @@ Style: ${stylePrompt}
         };
         const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent');
         const resData = result.data || result;
-        const text = resData?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('') || '';
+        const text = _extractGeminiText(resData);
         
         // 健壮的 JSON 提取：去掉 markdown 代码块标记
         let jsonStr = text;
