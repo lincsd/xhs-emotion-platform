@@ -1680,11 +1680,12 @@
                 </select>
               </div>
               <button class="btn btn-primary" onclick="generatePosts()" id="gen-btn">
-                ✨ 一键生成
+                ✨ 一键生成 <span style="font-size:11px;opacity:0.8;">(~4积分)</span>
               </button>
               <button class="btn btn-outline" onclick="openABTestModal()" style="margin-left:8px;">
-                🧪 A/B 测试
+                🧪 A/B 测试 <span style="font-size:11px;opacity:0.7;">(2积分)</span>
               </button>
+              <div style="margin-top:6px; font-size:11px; color:var(--text-light);">💡 内容生成 = 搜索分析(2) + 内容创作(2)，含配图另加3积分/张 · 每日前3次免费</div>
               <div class="form-group" style="margin-top:12px;">
                 <label>自定义 Prompt（选填）</label>
                 <textarea id="gen-custom-prompt" class="form-control" rows="2" placeholder="输入自定义创作指令，AI 会优先参考"></textarea>
@@ -1906,7 +1907,7 @@
               </div>
 
               <div class="btn-group">
-                <button class="btn btn-primary" id="branding-generate-btn" onclick="generateBrandingPackage()">✨ 生成账号包装</button>
+                <button class="btn btn-primary" id="branding-generate-btn" onclick="generateBrandingPackage()">✨ 生成账号包装 <span style="font-size:11px;opacity:0.8;">(~8积分)</span></button>
                 <button class="btn btn-outline" onclick="loadBrandingPage()">↻ 读取上次结果</button>
               </div>
               <div id="branding-progress" style="display:none; margin-top:12px;"></div>
@@ -2123,7 +2124,7 @@
           </div>
           <div style="display:flex;gap:8px;margin-bottom:16px;">
             <button class="btn btn-primary" onclick="liveScorePost()">💯 评分</button>
-            <button class="btn btn-outline" onclick="aiOptimizeScore()">🤖 AI 优化建议</button>
+            <button class="btn btn-outline" onclick="aiOptimizeScore()">🤖 AI 优化建议 <span style="font-size:11px;opacity:0.7;">(1积分)</span></button>
           </div>
           <div id="score-result"></div>
         </div>
@@ -2131,7 +2132,7 @@
 
       <!-- ===== 热门话题 ===== -->
       <section id="page-trending" class="page hidden">
-        <div class="page-header"><div><h2>🔥 热门话题</h2><p class="subtitle">追踪当前赛道热点</p></div><button class="btn btn-primary" onclick="initTrendingPage()">🔄 刷新话题</button></div>
+        <div class="page-header"><div><h2>🔥 热门话题</h2><p class="subtitle">追踪当前赛道热点</p></div><button class="btn btn-primary" onclick="initTrendingPage()">🔄 刷新话题 <span style="font-size:11px;opacity:0.8;">(1积分)</span></button></div>
         <div id="trending-container"><div class="empty-state"><p>点击「刷新话题」获取最新热门话题</p></div></div>
       </section>
 
@@ -2143,7 +2144,7 @@
             <label>笔记主题 / 关键词</label>
             <input type="text" id="tags-keyword" class="form-control" placeholder="输入笔记主题，如：春季穿搭、家常菜做法">
           </div>
-          <button class="btn btn-primary" onclick="generateSmartTags()" style="margin-bottom:16px;">🏷️ 生成标签</button>
+          <button class="btn btn-primary" onclick="generateSmartTags()" style="margin-bottom:16px;">🏷️ 生成标签 <span style="font-size:11px;opacity:0.8;">(1积分)</span></button>
           <div id="tags-result"></div>
         </div>
       </section>
@@ -2177,7 +2178,7 @@
             </div>
           </div>
           <div style="display:flex;gap:8px;margin-bottom:16px;">
-            <button class="btn btn-primary" onclick="rewritePost()">✨ 开始改写</button>
+            <button class="btn btn-primary" onclick="rewritePost()">✨ 开始改写 <span style="font-size:11px;opacity:0.8;">(1积分)</span></button>
             <button class="btn btn-outline" onclick="copyRewriteResult()">📋 复制结果</button>
             <button class="btn btn-outline" onclick="saveRewriteAsDraft()">💾 存为草稿</button>
           </div>
@@ -2187,7 +2188,7 @@
 
       <!-- ===== 评论话术 ===== -->
       <section id="page-comments" class="page hidden">
-        <div class="page-header"><div><h2>💬 评论话术库</h2><p class="subtitle">热评回复模板</p></div><button class="btn btn-primary" onclick="generateCommentTemplates()">🤖 AI 生成话术</button></div>
+        <div class="page-header"><div><h2>💬 评论话术库</h2><p class="subtitle">热评回复模板</p></div><button class="btn btn-primary" onclick="generateCommentTemplates()">🤖 AI 生成话术 <span style="font-size:11px;opacity:0.8;">(1积分)</span></button></div>
         <div id="comments-container"></div>
       </section>
 
@@ -2202,7 +2203,7 @@
           </div>
         </div>
         <div id="competitor-list"></div>
-        <div style="margin-top:16px;"><button class="btn btn-primary" onclick="aiAnalyzeCompetitors()" style="width:100%;">🤖 AI 综合分析竞品</button></div>
+        <div style="margin-top:16px;"><button class="btn btn-primary" onclick="aiAnalyzeCompetitors()" style="width:100%;">🤖 AI 综合分析竞品 <span style="font-size:11px;opacity:0.8;">(2积分)</span></button></div>
         <div id="competitor-analysis" style="margin-top:16px;"></div>
       </section>
 
@@ -7285,7 +7286,7 @@ Style: ${stylePrompt}
               </select>
             </div>
           </div>
-          <button class="btn btn-primary" onclick="runABTest()" id="btn-ab-run" style="width:100%;">🚀 开始 A/B 测试</button>
+          <button class="btn btn-primary" onclick="runABTest()" id="btn-ab-run" style="width:100%;">🚀 开始 A/B 测试 <span style="font-size:11px;opacity:0.8;">(2积分)</span></button>
           <div id="ab-test-result" style="margin-top:16px;"></div>
         </div>
       </div>`;
