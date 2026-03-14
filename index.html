@@ -2863,8 +2863,14 @@
     function getContentImageCount() { return parseInt(localStorage.getItem('xhs_content_image_count') || '2'); }
     function normalizeGeminiProxyBase(raw) {
       let value = (raw || '').trim().replace(/\/+$/, '');
+      if (!value) return '';
+      try {
+        const u = new URL(value);
+        value = `${u.protocol}//${u.host}`;
+      } catch {}
       value = value.replace(/\/api\/gemini-proxy$/i, '');
       value = value.replace(/\/api\/stats$/i, '');
+      value = value.replace(/\/$/, '');
       return value;
     }
     function getGeminiProxyBase() {
@@ -2920,6 +2926,21 @@
      * @returns {object} Gemini API 响应 JSON
      */
     async function callGeminiAPI(apiKey, model, payload, action = 'generateContent') {
+      const parseProxyJson = async (res, sourceUrl) => {
+        const text = await res.text();
+        let data;
+        try {
+          data = text ? JSON.parse(text) : {};
+        } catch {
+          const snippet = (text || '').slice(0, 120).replace(/\s+/g, ' ');
+          throw new Error(`代理返回非JSON（${res.status}）${snippet ? ': ' + snippet : ''} @ ${sourceUrl}`);
+        }
+        if (!res.ok) {
+          throw { fromProxy: true, status: res.status, data };
+        }
+        return data;
+      };
+
       const proxyBase = getGeminiProxyBase();
       const forceProxy = !!proxyBase;
       const useProxy = forceProxy ? true : await _checkServerProxy();
@@ -2940,10 +2961,7 @@
               signal: _abortSignalTimeout(proxyTimeout),
               body: reqBody
             });
-            const data = await res.json();
-            if (!res.ok) {
-              throw { fromProxy: true, status: res.status, data };
-            }
+            const data = await parseProxyJson(res, proxyUrl);
             return { ok: true, data };
           } catch (e) {
             if (e.fromProxy) throw e;
@@ -2955,8 +2973,7 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: reqBody
               });
-              const data2 = await res2.json();
-              if (!res2.ok) throw { fromProxy: true, status: res2.status, data: data2 };
+              const data2 = await parseProxyJson(res2, proxyUrl);
               return { ok: true, data: data2 };
             } catch (e2) {
               if (e2.fromProxy) throw e2;
