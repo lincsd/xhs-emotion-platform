@@ -144,6 +144,12 @@ def init_db():
             conn.execute(f'ALTER TABLE {tbl} ADD COLUMN user_id INTEGER DEFAULT 0')
         except:
             pass
+    # 迁移：给 posts 表添加图片列
+    for col in ('cover_image TEXT', 'content_images TEXT'):
+        try:
+            conn.execute(f'ALTER TABLE posts ADD COLUMN {col}')
+        except:
+            pass
     # 迁移：给 users 表添加 ai_credits 列
     try:
         conn.execute('ALTER TABLE users ADD COLUMN ai_credits INTEGER DEFAULT 0')
@@ -950,6 +956,18 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         
         posts = [dict(r) for r in conn.execute(sql, params).fetchall()]
         conn.close()
+        # 列表接口不返回完整图片数据（太大），只返回标记
+        for p in posts:
+            p['has_cover_image'] = bool(p.get('cover_image'))
+            ci = p.get('content_images')
+            try:
+                import json as _json
+                ci_list = _json.loads(ci) if ci else []
+            except:
+                ci_list = []
+            p['content_images_count'] = len(ci_list)
+            p.pop('cover_image', None)
+            p.pop('content_images', None)
         
         self._send_json({'posts': posts, 'total': total, 'page': page, 'limit': limit})
 
@@ -958,19 +976,29 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         row = conn.execute('SELECT * FROM posts WHERE id = ?', (post_id,)).fetchone()
         conn.close()
         if row:
-            self._send_json(dict(row))
+            d = dict(row)
+            # 解析 content_images JSON
+            ci = d.get('content_images')
+            try:
+                d['content_images'] = json.loads(ci) if ci else []
+            except:
+                d['content_images'] = []
+            self._send_json(d)
         else:
             self._send_json({'error': '笔记不存在'}, 404)
 
     def _create_post(self, body):
         user = self._get_current_user()
         uid = user['id'] if user else 0
+        cover_img = body.get('cover_image') or None
+        content_imgs = body.get('content_images')
+        content_imgs_json = json.dumps(content_imgs) if content_imgs else None
         conn = self._get_db()
         conn.execute(
-            'INSERT INTO posts (title, content, category, tags, cover_text, status, scheduled_date, user_id) VALUES (?,?,?,?,?,?,?,?)',
+            'INSERT INTO posts (title, content, category, tags, cover_text, status, scheduled_date, user_id, cover_image, content_images) VALUES (?,?,?,?,?,?,?,?,?,?)',
             (body.get('title', ''), body.get('content', ''), body.get('category', '治愈'),
              body.get('tags', ''), body.get('cover_text', ''), body.get('status', 'draft'),
-             body.get('scheduled_date'), uid)
+             body.get('scheduled_date'), uid, cover_img, content_imgs_json)
         )
         conn.commit()
         last_id = conn.execute('SELECT last_insert_rowid() as id').fetchone()['id']
@@ -986,6 +1014,13 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             if key in body and body[key] is not None:
                 fields.append(f'{key} = ?')
                 params.append(body[key])
+        # 图片字段
+        if 'cover_image' in body:
+            fields.append('cover_image = ?')
+            params.append(body['cover_image'])
+        if 'content_images' in body:
+            fields.append('content_images = ?')
+            params.append(json.dumps(body['content_images']) if body['content_images'] else None)
         
         if fields:
             fields.append("updated_at = datetime('now','localtime')")

@@ -4468,6 +4468,54 @@ Style: ${stylePrompt}
       return results;
     }
 
+    /**
+     * 压缩图片 dataUrl（缩小尺寸 + JPEG 压缩），用于上传到后端
+     */
+    function compressImageDataUrl(dataUrl, maxWidth = 600, quality = 0.6) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let w = img.width, h = img.height;
+          if (w > maxWidth) {
+            h = Math.round(h * maxWidth / w);
+            w = maxWidth;
+          }
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          resolve(canvas.toDataURL('image/jpeg', quality));
+        };
+        img.onerror = () => resolve(dataUrl);
+        img.src = dataUrl;
+      });
+    }
+
+    /**
+     * 上传笔记图片到后端（压缩后）
+     */
+    async function uploadPostImages(postId, coverImage, contentImages) {
+      if (!postId) return;
+      const body = {};
+      try {
+        if (coverImage) {
+          body.cover_image = await compressImageDataUrl(coverImage, 800, 0.65);
+        }
+        if (contentImages && contentImages.length > 0) {
+          body.content_images = [];
+          for (const img of contentImages) {
+            body.content_images.push(await compressImageDataUrl(img, 800, 0.65));
+          }
+        }
+        if (Object.keys(body).length > 0) {
+          await api(`/api/posts/${postId}`, { method: 'PUT', body });
+        }
+      } catch (e) {
+        console.warn('上传图片到后端失败:', e);
+      }
+    }
+
     function getPostImage(postId) {
       // 优先内存缓存
       if (_imageMemoryCache.covers[postId]) return _imageMemoryCache.covers[postId];
@@ -4570,8 +4618,10 @@ Style: ${stylePrompt}
     // 下载全部配图
     async function downloadContentImages() {
       if (!currentViewPost) return;
-      const images = await getPostContentImagesAsync(currentViewPost.id);
-      const cover = await getPostImageAsync(currentViewPost.id);
+      const images = (Array.isArray(currentViewPost.content_images) && currentViewPost.content_images.length > 0)
+        ? currentViewPost.content_images
+        : await getPostContentImagesAsync(currentViewPost.id);
+      const cover = currentViewPost.cover_image || await getPostImageAsync(currentViewPost.id);
       const allImages = [];
       if (cover) allImages.push({ data: cover, name: `cover_${currentViewPost.id}.png` });
       images.forEach((img, i) => allImages.push({ data: img, name: `content_${currentViewPost.id}_${i + 1}.png` }));
@@ -5196,6 +5246,13 @@ Style: ${stylePrompt}
             }
           });
 
+          // 压缩并上传图片到后端（后台执行，不阻塞UI）
+          posts.forEach((p) => {
+            if (p.id && (p.cover_image || (p.content_images && p.content_images.length))) {
+              uploadPostImages(p.id, p.cover_image || null, p.content_images || []);
+            }
+          });
+
           // 重新渲染列表
           renderGeneratedList(posts);
           if (posts.length > 0) previewPost(posts[0]);
@@ -5365,12 +5422,17 @@ Style: ${stylePrompt}
       tbody.innerHTML = data.posts.map(p => {
         const bestTime = getBestPostingTimes(p.category, 1)[0];
         const timeHint = p.status === 'draft' && bestTime ? `<div class="posting-time-badge" style="margin-top:4px;">⏰ 建议 ${bestTime.time}</div>` : '';
+        // 图片指示器
+        const imgCount = (p.has_cover_image ? 1 : 0) + (p.content_images_count || 0);
+        const imgBadge = imgCount > 0
+          ? `<span style="display:inline-block; font-size:11px; color:#ff6b81; margin-left:6px; vertical-align:middle;" title="${p.has_cover_image ? '有封面图' : ''}${p.content_images_count ? (' + ' + p.content_images_count + '张配图') : ''}">🎨${imgCount}图</span>`
+          : '';
         return `
         <tr style="cursor:pointer;" onclick="viewPost(${p.id})">
           <td onclick="event.stopPropagation();"><input type="checkbox" value="${p.id}" onchange="toggleSelect(${p.id})" ${selectedPosts.has(p.id) ? 'checked' : ''}></td>
           <td>
             <div class="post-title" style="color:var(--text);">
-              ${(() => { const hits = checkForbiddenInText((p.title||'')); return hits.ban.length ? '<span style="color:#e74c3c;" title="含封禁词">🚫</span> ' : (hits.high.length ? '<span style="color:#f39c12;" title="含高危词">⚠️</span> ' : ''); })()}${p.title}
+              ${(() => { const hits = checkForbiddenInText((p.title||'')); return hits.ban.length ? '<span style="color:#e74c3c;" title="含封禁词">🚫</span> ' : (hits.high.length ? '<span style="color:#f39c12;" title="含高危词">⚠️</span> ' : ''); })()}${p.title}${imgBadge}
             </div>
             ${timeHint}
           </td>
@@ -5503,8 +5565,11 @@ Style: ${stylePrompt}
       document.getElementById('view-tags').textContent = post.tags ? post.tags.split(',').map(t => '#' + t).join(' ') : '';
       document.getElementById('view-cover-text').textContent = post.cover_text || '';
       
-      // 封面图：全宽展示在顶部
-      const img = await getPostImageAsync(id);
+      // 封面图：优先后端数据，回退 IndexedDB
+      let img = post.cover_image || await getPostImageAsync(id);
+      if (post.cover_image) {
+        _imageMemoryCache.covers[id] = post.cover_image;
+      }
       const viewCover = document.getElementById('view-cover');
       const viewCoverImg = document.getElementById('view-cover-img');
       if (img) {
@@ -5519,8 +5584,13 @@ Style: ${stylePrompt}
         viewCoverImg.style.display = 'none';
       }
 
-      // 配图：大图网格直接显示
-      const contentImages = await getPostContentImagesAsync(id);
+      // 配图：优先后端数据，回退 IndexedDB
+      let contentImages = (Array.isArray(post.content_images) && post.content_images.length > 0)
+        ? post.content_images
+        : await getPostContentImagesAsync(id);
+      if (Array.isArray(post.content_images) && post.content_images.length > 0) {
+        _imageMemoryCache.contents[id] = post.content_images;
+      }
       const galleryContainer = document.getElementById('view-content-images');
       const gallery = document.getElementById('view-content-images-gallery');
       if (contentImages.length > 0) {
@@ -5569,8 +5639,8 @@ Style: ${stylePrompt}
 
     async function exportCurrentPost() {
       if (!currentViewPost) return;
-      // 导出图片
-      const img = await getPostImageAsync(currentViewPost.id);
+      // 导出图片：优先后端数据
+      const img = currentViewPost.cover_image || await getPostImageAsync(currentViewPost.id);
       if (img) {
         const a = document.createElement('a');
         a.href = img;
@@ -5594,7 +5664,7 @@ Style: ${stylePrompt}
 
     async function downloadPostImage() {
       if (!currentViewPost) return;
-      const img = await getPostImageAsync(currentViewPost.id);
+      const img = currentViewPost.cover_image || await getPostImageAsync(currentViewPost.id);
       if (img) {
         const a = document.createElement('a');
         a.href = img;
