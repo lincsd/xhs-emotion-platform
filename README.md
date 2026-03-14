@@ -38,6 +38,10 @@ python server.py
 2. 连接本仓库并创建服务（自动读取 `render.yaml`）
 3. 部署完成后获得代理地址，例如：`https://xhs-gemini-proxy.onrender.com`
 
+> 当前 Blueprint 已切换为持久化版本：会在 Render Web Service 上挂载持久化磁盘，并将 SQLite 数据库写入 `/var/data/xhsqg/data.db`。
+
+> 注意：Render 的持久化磁盘仅支持付费 Web Service，因此实例类型需至少为 `starter`，不能继续使用 `free`。
+
 建议在 Render 服务中设置环境变量（更安全）：
 
 - Key: `GEMINI_API_KEY`
@@ -55,6 +59,26 @@ python server.py
 4. 点击「测试连接」和「保存设置」
 
 完成后，前端会优先通过 `https://你的代理域名/api/gemini-proxy` 调用 Gemini，无需本地开梯子。
+
+### 3) 持久化数据说明（账号长期有效）
+
+此版本已将账号、会话、笔记、收入、统计数据统一存入 SQLite。
+
+- 本地运行：默认写入项目根目录的 `data.db`
+- Render 运行：若设置 `DATA_DIR` 或 `DB_PATH`，数据库将写入指定持久化目录
+- 默认 Blueprint 已设置 `DATA_DIR=/var/data/xhsqg`
+
+这意味着：
+
+- 重启服务后，账号和业务数据会保留
+- 重新部署代码后，账号和业务数据会保留
+- 只有你主动清空磁盘、删除服务或更换存储位置，数据才会丢失
+
+如果你已经在 Render 控制台手动建好了服务，也可以手动补齐这两项：
+
+1. 在 Render 服务的 Disks 页面添加一个磁盘，挂载路径设为 `/var/data`
+2. 在 Environment 中添加 `DATA_DIR=/var/data/xhsqg`
+3. 重新部署服务
 
 ## 📁 项目结构
 

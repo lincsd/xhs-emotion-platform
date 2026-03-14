@@ -2,7 +2,17 @@ services:
   - type: web
     name: xhs-gemini-proxy
     env: python
-    plan: free
+    plan: starter
     autoDeploy: true
     buildCommand: python -m pip install --upgrade pip
     startCommand: python server.py
+    healthCheckPath: /api/stats
+    disk:
+      name: xhs-data
+      mountPath: /var/data
+      sizeGB: 5
+    envVars:
+      - key: DATA_DIR
+        value: /var/data/xhsqg
+      - key: GEMINI_API_KEY
+        sync: false

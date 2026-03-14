@@ -11,6 +11,7 @@ import sqlite3
 import os
 import sys
 import random
+import shutil
 import hashlib
 import secrets
 import urllib.parse
@@ -27,8 +28,31 @@ if sys.platform == 'win32':
 
 # ============ 配置 ============
 PORT = int(os.environ.get('PORT', '3000'))
-DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data.db')
-PUBLIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'public')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+LEGACY_DB_PATH = os.path.join(BASE_DIR, 'data.db')
+
+
+def _resolve_db_path():
+    """优先使用环境变量指定数据库路径，便于云端挂载持久化磁盘。"""
+    explicit_db_path = (os.environ.get('DB_PATH') or '').strip()
+    data_dir = (os.environ.get('DATA_DIR') or '').strip()
+
+    if explicit_db_path:
+        db_path = os.path.abspath(os.path.expanduser(explicit_db_path))
+    elif data_dir:
+        db_path = os.path.join(os.path.abspath(os.path.expanduser(data_dir)), 'data.db')
+    else:
+        db_path = LEGACY_DB_PATH
+
+    db_dir = os.path.dirname(db_path)
+    if db_dir:
+        os.makedirs(db_dir, exist_ok=True)
+
+    return db_path
+
+
+DB_PATH = _resolve_db_path()
+PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
 
 # Gemini API Proxy 配置
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com'
@@ -122,6 +146,19 @@ def init_db():
             pass
     conn.commit()
     conn.close()
+
+
+def bootstrap_db_if_needed():
+    """首次切换到持久化目录时，尽量从旧位置复制数据库。"""
+    if DB_PATH == LEGACY_DB_PATH:
+        return
+    if os.path.exists(DB_PATH):
+        return
+    if not os.path.exists(LEGACY_DB_PATH):
+        return
+
+    shutil.copy2(LEGACY_DB_PATH, DB_PATH)
+    print(f"[*] Bootstrapped database to persistent path: {DB_PATH}")
 
 # ============ 内容生成引擎 ============
 class ContentEngine:
@@ -1066,6 +1103,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
 # ============ 启动服务器 ============
 def main():
+    bootstrap_db_if_needed()
     init_db()
     
     server = http.server.HTTPServer(('0.0.0.0', PORT), APIHandler)
@@ -1073,6 +1111,7 @@ def main():
     print(f"\n[*] XHS Emotion Platform started")
     print(f"[*] URL: http://localhost:{PORT}")
     print(f"[*] API: http://localhost:{PORT}/api")
+    print(f"[*] DB Path: {DB_PATH}")
     if _PROXY_URL:
         print(f"[*] Gemini Proxy: enabled (via {_PROXY_URL})")
     else:
