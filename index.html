@@ -2578,15 +2578,26 @@
 
   <!-- ===== 模态框：配额超限 ===== -->
   <div class="modal-overlay" id="modal-quota-exceeded">
-    <div class="modal" style="max-width:400px;">
+    <div class="modal" style="max-width:440px;">
       <div class="modal-header">
-        <h3>⚡ AI 次数用尽</h3>
+        <h3>⚡ AI 积分不足</h3>
         <button class="modal-close" onclick="closeModal('modal-quota-exceeded')">✕</button>
       </div>
       <div class="quota-modal-body">
         <div class="qm-icon">💎</div>
         <div class="qm-title">今日免费次数已用完</div>
         <div class="qm-desc">您今天的 3 次免费 AI 调用已用完。<br>充值积分即可继续使用所有 AI 功能。</div>
+        <div style="margin:12px 0; padding:10px; background:var(--bg); border-radius:8px; font-size:12px;">
+          <div style="font-weight:600; margin-bottom:6px; font-size:13px;">💰 各功能积分消耗</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:3px 12px;">
+            <span>✨ 内容生成(5条)</span><span style="text-align:right; color:var(--info);">~4分</span>
+            <span>🖼️ AI图片生成</span><span style="text-align:right; color:var(--info);">3分</span>
+            <span>🎯 品牌定位生成</span><span style="text-align:right; color:var(--info);">~8分</span>
+            <span>🔍 竞品分析</span><span style="text-align:right; color:var(--info);">2分</span>
+            <span>🏷️ 标签/评分/改写</span><span style="text-align:right; color:var(--info);">1分</span>
+            <span>🔥 热门话题/评论</span><span style="text-align:right; color:var(--info);">1分</span>
+          </div>
+        </div>
         <div class="qm-input-row">
           <input type="text" id="quota-redeem-input" class="form-control" placeholder="输入兑换码" style="text-transform:uppercase;">
           <button class="btn btn-primary" onclick="redeemFromQuotaModal()">兑换</button>
@@ -3442,7 +3453,7 @@
       return String(e || '未知错误');
     }
 
-    async function callGeminiAPI(apiKey, model, payload, action = 'generateContent') {
+    async function callGeminiAPI(apiKey, model, payload, action = 'generateContent', feature = null) {
       const parseProxyJson = async (res, sourceUrl) => {
         const text = await res.text();
         let data;
@@ -3467,7 +3478,7 @@
         const isImageModel = model && (model.includes('image') || model.includes('banana') || model.includes('imagen'));
         const proxyTimeout = isImageModel ? 200000 : (forceProxy ? 120000 : 30000);
         const proxyUrls = getGeminiProxyAPIUrls();
-        const reqBody = JSON.stringify({ apiKey, model, payload, action, feature: action });
+        const reqBody = JSON.stringify({ apiKey, model, payload, action, feature: feature || action });
         const authToken = getAuthToken();
         const headers = { 'Content-Type': 'application/json' };
         if (authToken) headers['Authorization'] = 'Bearer ' + authToken;
@@ -4118,7 +4129,7 @@ ${keywords.map(k => `- "${k}"`).join('\n')}
       };
 
       try {
-        const result = await callGeminiAPI(apiKey, model, payload);
+        const result = await callGeminiAPI(apiKey, model, payload, 'generateContent', '内容搜索分析');
         googleData = result.data;
         googleAnalysisText = _extractGeminiText(googleData);
         googleSearchUsed = true;
@@ -4233,7 +4244,7 @@ ${refBlock}
 
       let data;
       try {
-        const result = await callGeminiAPI(apiKey, model, payload);
+        const result = await callGeminiAPI(apiKey, model, payload, 'generateContent', '内容分析');
         data = result.data;
       } catch (e) {
         const err = e.data || {};
@@ -4312,7 +4323,7 @@ ${sourceInfo}
 
       let data;
       try {
-        const result = await callGeminiAPI(apiKey, model, payload);
+        const result = await callGeminiAPI(apiKey, model, payload, 'generateContent', '内容生成');
         data = result.data;
       } catch (e) {
         const err = e.data || {};
@@ -4516,7 +4527,7 @@ ${sourceInfo}
       let lastErr = null;
       for (const modelName of candidates) {
         try {
-          const result = await callGeminiAPI(apiKey, modelName, payload);
+          const result = await callGeminiAPI(apiKey, modelName, payload, 'generateContent', '图片生成');
           const img = _extractImageFromResponse(result.data);
           if (img) {
             _lastImageGenErrorMsg = '';
@@ -4882,7 +4893,7 @@ Style: ${stylePrompt}
           generationConfig: { responseModalities: ['IMAGE'] }
         };
 
-        const result = await callGeminiAPI(key, imageModel, payload);
+        const result = await callGeminiAPI(key, imageModel, payload, 'generateContent', '图片测试');
         const imgUrl = _extractImageFromResponse(result.data);
 
         if (imgUrl) {
@@ -5066,7 +5077,7 @@ Style: ${stylePrompt}
           generationConfig: { temperature: 0.9, topP: 0.95, maxOutputTokens: 4096 }
         };
 
-        const result = await callGeminiAPI(getGeminiKey(), getGeminiModel(), payload);
+        const result = await callGeminiAPI(getGeminiKey(), getGeminiModel(), payload, 'generateContent', '品牌定位');
         let pack = _extractJsonFromText(_extractGeminiText(result.data) || '{}');
 
         updateGenProgress(progressEl, '🖼️ 正在生成头像图...', 45);
@@ -6622,7 +6633,7 @@ Style: ${stylePrompt}
           contents: [{ parts: [{ text: `你是小红书运营专家。请分析以下笔记并给出具体优化建议，返回JSON格式：{"titleSuggestion":"优化后的标题","contentTips":["建议1","建议2"],"tagSuggestion":"推荐标签,逗号分隔","overallTip":"总评"}\n\n标题：${title}\n正文：${content}` }] }],
           generationConfig: { temperature: 0.7, maxOutputTokens: 8192 }
         };
-        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'AI评分优化');
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', 'AI评分优化');
         const resData = result?.data || result;
         const text = _extractGeminiText(resData);
         const json = _extractJsonFromText(text);
@@ -6649,7 +6660,7 @@ Style: ${stylePrompt}
         tools: [{ googleSearch: {} }],
         generationConfig: { temperature: 0.7, maxOutputTokens: 8192 }
       };
-      const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '热门话题搜索');
+      const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', '热门话题搜索');
       const resData = result?.data || result;
       const text = _extractGeminiText(resData);
       try { return JSON.parse(text.match(/\[[\s\S]*\]/)?.[0] || '[]'); } catch { return []; }
@@ -6704,7 +6715,7 @@ Style: ${stylePrompt}
           tools: [{ googleSearch: {} }],
           generationConfig: { temperature: 0.7, maxOutputTokens: 8192 }
         };
-        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '标签生成');
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', '标签生成');
         const resData = result?.data || result;
         const text = _extractGeminiText(resData);
         const json = _extractJsonFromText(text);
@@ -6902,7 +6913,7 @@ Style: ${stylePrompt}
           contents: [{ parts: [{ text: `你是小红书运营专家。为"${currentSkillName}"赛道生成12条评论回复话术。返回JSON数组：[{"scene":"场景(感谢/求助/质疑/合作/互动/引流之一)","text":"话术内容"}]。要求：语气亲切自然，适合小红书风格，每个场景2条。` }] }],
           generationConfig: { temperature: 0.8, maxOutputTokens: 8192 }
         };
-        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '生成评论话术');
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', '生成评论话术');
         const resData = result?.data || result;
         const text = _extractGeminiText(resData);
         const arr = JSON.parse(text.match(/\[[\s\S]*\]/)?.[0] || '[]');
@@ -7019,7 +7030,7 @@ Style: ${stylePrompt}
           tools: [{ googleSearch: {} }],
           generationConfig: { temperature: 0.7, maxOutputTokens: 8192 }
         };
-        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '竞品分析');
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', '竞品分析');
         const resData = result?.data || result;
         const text = _extractGeminiText(resData) || '未获取到分析结果';
         document.getElementById('competitor-analysis').innerHTML = `<div class="card" style="white-space:pre-wrap;line-height:1.8;">${text}</div>`;
@@ -7113,7 +7124,7 @@ Style: ${stylePrompt}
           contents: [{ parts: [{ text: `你是小红书内容创作专家。请按要求改写以下内容：\n\n改写模式：${modeMap[mode]}\n文风要求：${styleMap[style]}\n\n原文：\n${input}\n\n要求：\n1. 保持原文核心信息\n2. 适合小红书平台风格\n3. 直接输出改写后的完整内容（标题+正文+标签）\n4. 不要解释改写思路` }] }],
           generationConfig: { temperature: 0.8, maxOutputTokens: 8192 }
         };
-        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '笔记改写');
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', '笔记改写');
         const resData = result?.data || result;
         const text = _extractGeminiText(resData) || '改写失败';
         window._lastRewriteResult = text;
@@ -7300,7 +7311,7 @@ Style: ${stylePrompt}
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: { temperature: 0.95, maxOutputTokens: 8192 }
         };
-        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent');
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', 'AB测试');
         const resData = result.data || result;
         const text = _extractGeminiText(resData);
         
@@ -7533,6 +7544,7 @@ Style: ${stylePrompt}
         const data = await api('/api/user/credits');
         if (data && typeof data.credits !== 'undefined') {
           userCreditsInfo = data;
+          if (data.featureCosts) window._featureCosts = data.featureCosts;
           updateCreditsUI();
         }
       } catch {}

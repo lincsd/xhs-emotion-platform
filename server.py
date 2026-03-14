@@ -53,7 +53,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260314x'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260314y'  # 更新此版本号以追踪部署
 
 # Gemini API Proxy 配置
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com'
@@ -633,7 +633,34 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         return user
 
     # ---- AI 配额系统 ----
-    FREE_DAILY_AI_LIMIT = 3   # 免费用户每天3次
+    FREE_DAILY_AI_LIMIT = 3   # 免费用户每天3次免费调用（按次数，不区分积分）
+
+    # 各功能积分消耗映射（基于真实 Gemini API 成本 + 合理毛利）
+    FEATURE_COSTS = {
+        # 内容生成链路（搜索+分析+生成，最贵）
+        '内容搜索分析':  2,   # Google grounding $0.035 + tokens ~¥0.33
+        '内容分析':      1,   # 无 grounding，纯文本分析
+        '内容生成':      2,   # 大量输出 tokens + thinking
+        # 图片生成（Imagen模型）
+        '图片生成':      3,   # Imagen 单独计价 ~¥0.2
+        '图片测试':      0,   # 测试不扣费
+        # 品牌定位（文本生成，中等）
+        '品牌定位':      2,
+        # 轻量功能（纯文本，便宜）
+        'AI评分优化':    1,
+        '热门话题搜索':  1,   # grounding 但输出少
+        '标签生成':      1,
+        '生成评论话术':  1,
+        '竞品分析':      2,   # grounding + 较多输出
+        '笔记改写':      1,
+        'AB测试':        2,   # 多版本输出，tokens 较多
+        # 默认（未标记的功能）
+        'generateContent': 1,
+    }
+
+    def _get_feature_cost(self, feature):
+        """获取某功能的积分消耗"""
+        return self.FEATURE_COSTS.get(feature, 1)
 
     def _get_today_ai_usage(self, user_id):
         """获取用户今日AI使用次数"""
@@ -648,43 +675,57 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
     def _record_ai_usage(self, user_id, feature='ai'):
         """记录一次AI使用，并扣减积分（如果超出免费额度）"""
+        cost = self._get_feature_cost(feature)
         conn = self._get_db()
         today = datetime.now().strftime('%Y-%m-%d')
         conn.execute('INSERT INTO ai_usage(user_id, date, feature) VALUES(?,?,?)',
                      (user_id, today, feature))
-        # 检查是否超出免费额度，超出则扣积分
+        # 检查是否超出免费额度，超出则按功能扣积分
         usage_today = conn.execute(
             'SELECT COUNT(*) as cnt FROM ai_usage WHERE user_id=? AND date=?',
             (user_id, today)
         ).fetchone()['cnt']
-        if usage_today > self.FREE_DAILY_AI_LIMIT:
-            conn.execute('UPDATE users SET ai_credits = MAX(0, ai_credits - 1) WHERE id=?', (user_id,))
+        if usage_today > self.FREE_DAILY_AI_LIMIT and cost > 0:
+            conn.execute('UPDATE users SET ai_credits = MAX(0, ai_credits - ?) WHERE id=?', (cost, user_id))
         conn.commit()
         conn.close()
 
-    def _check_ai_quota(self, user):
+    def _check_ai_quota(self, user, feature='generateContent'):
         """检查用户是否还有AI调用额度。返回 (allowed, info_dict)"""
         user_id = user['id']
         today_usage = self._get_today_ai_usage(user_id)
         credits = user.get('ai_credits', 0) or 0
+        cost = self._get_feature_cost(feature)
 
         if today_usage < self.FREE_DAILY_AI_LIMIT:
             return True, {
                 'freeRemaining': self.FREE_DAILY_AI_LIMIT - today_usage,
                 'credits': credits,
-                'todayUsed': today_usage
+                'todayUsed': today_usage,
+                'cost': cost
             }
-        elif credits > 0:
+        elif cost == 0:
+            # 免费功能（如图片测试）无条件允许
             return True, {
                 'freeRemaining': 0,
                 'credits': credits,
-                'todayUsed': today_usage
+                'todayUsed': today_usage,
+                'cost': 0
+            }
+        elif credits >= cost:
+            return True, {
+                'freeRemaining': 0,
+                'credits': credits,
+                'todayUsed': today_usage,
+                'cost': cost
             }
         else:
             return False, {
                 'freeRemaining': 0,
-                'credits': 0,
-                'todayUsed': today_usage
+                'credits': credits,
+                'todayUsed': today_usage,
+                'cost': cost,
+                'needed': cost - credits
             }
 
     def _get_user_credits_info(self):
@@ -700,7 +741,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             'todayUsed': today_usage,
             'freeLimit': self.FREE_DAILY_AI_LIMIT,
             'freeRemaining': max(0, self.FREE_DAILY_AI_LIMIT - today_usage),
-            'tier': user.get('tier', 'free')
+            'tier': user.get('tier', 'free'),
+            'featureCosts': self.FEATURE_COSTS
         })
 
     def _redeem_code(self, body):
@@ -1342,22 +1384,23 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     # ---- Gemini API 代理 ----
     def _gemini_proxy(self, body):
         """代理转发 Gemini API 请求，解决浏览器无法直接访问 Google API 的问题"""
-        # AI 配额检查
-        user = self._get_current_user()
-        if user:
-            allowed, info = self._check_ai_quota(user)
-            if not allowed:
-                return self._send_json({
-                    'error': {'code': 429, 'message': '今日免费次数已用完，请充值AI积分继续使用'},
-                    'quotaExceeded': True,
-                    'usage': info
-                }, 429)
-
         api_key = SERVER_GEMINI_API_KEY or body.get('apiKey', '')
         model = body.get('model', 'gemini-2.5-flash')
         payload = body.get('payload', {})
         action = body.get('action', 'generateContent')  # generateContent or listModels
         feature = body.get('feature', action)  # 用于追踪功能类型
+
+        # AI 配额检查（传入 feature 以判断所需积分）
+        user = self._get_current_user()
+        if user:
+            allowed, info = self._check_ai_quota(user, feature)
+            if not allowed:
+                cost = self._get_feature_cost(feature)
+                return self._send_json({
+                    'error': {'code': 429, 'message': f'积分不足（需要{cost}积分），请充值AI积分继续使用'},
+                    'quotaExceeded': True,
+                    'usage': info
+                }, 429)
 
         # action 只允许合法的 Gemini API 动作，中文标签归入 feature
         VALID_ACTIONS = ('generateContent', 'streamGenerateContent', 'listModels', 'countTokens')
