@@ -2922,7 +2922,7 @@
         } catch (e) {
           if (e.fromProxy) throw e; // Gemini 本身的错误，不重试
           if (forceProxy) {
-            throw new Error('代理服务连接失败，请稍后重试（Render 免费实例可能正在冷启动 30-60 秒）');
+            throw new Error('代理服务连接失败，请稍后重试（服务可能在启动中或网络波动）');
           }
           console.warn('[Gemini] Server proxy failed, trying direct:', e.message);
           // 代理网络错误，降级为直连
