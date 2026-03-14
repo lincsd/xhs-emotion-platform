@@ -53,6 +53,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
+BUILD_VERSION = '20260314p'  # 更新此版本号以追踪部署
 
 # Gemini API Proxy 配置
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com'
@@ -784,6 +785,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._send_json(MONETIZATION_GUIDE)
         elif path == '/api/categories':
             return self._send_json(ContentEngine.categories)
+        elif path == '/api/version':
+            return self._send_json({'version': BUILD_VERSION})
         # --- 需要登录的路由 ---
         elif path == '/api/posts':
             return self._get_posts(query)
