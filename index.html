@@ -6443,8 +6443,7 @@ Style: ${stylePrompt}
         const proxyBase = getGeminiProxyBase();
         const payload = {
           contents: [{ parts: [{ text: `你是小红书运营专家。请分析以下笔记并给出具体优化建议，返回JSON格式：{"titleSuggestion":"优化后的标题","contentTips":["建议1","建议2"],"tagSuggestion":"推荐标签,逗号分隔","overallTip":"总评"}\n\n标题：${title}\n正文：${content}` }] }],
-          generationConfig: { temperature: 0.7, maxOutputTokens: 8192 },
-          thinkingConfig: { thinkingBudget: 1024 }
+          generationConfig: { temperature: 0.7, maxOutputTokens: 8192 }
         };
         const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'AI评分优化');
         const resData = result?.data || result;
@@ -6471,8 +6470,7 @@ Style: ${stylePrompt}
       const payload = {
         contents: [{ parts: [{ text: `你是小红书运营专家。请搜索当前小红书"${skill}"赛道的10个热门话题/趋势。返回JSON数组：[{"topic":"话题名","heat":"高/中","trend":"上升/稳定/新兴","desc":"简短描述","suggestedTitle":"建议的笔记标题"}]` }] }],
         tools: [{ googleSearch: {} }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 8192 },
-        thinkingConfig: { thinkingBudget: 1024 }
+        generationConfig: { temperature: 0.7, maxOutputTokens: 8192 }
       };
       const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '热门话题搜索');
       const resData = result?.data || result;
@@ -6527,8 +6525,7 @@ Style: ${stylePrompt}
         const payload = {
           contents: [{ parts: [{ text: `你是小红书标签策略专家。为"${keyword}"（${currentSkillName}赛道）推荐标签策略。返回JSON：{"bigTags":["大标签1","大标签2"],"midTags":["中标签1","中标签2","中标签3"],"longTailTags":["长尾标签1","长尾标签2","长尾标签3","长尾标签4"],"strategy":"标签使用策略说明"}\n\n大标签=搜索量大的热门标签；中标签=精准垂直标签；长尾标签=竞争小的细分标签。` }] }],
           tools: [{ googleSearch: {} }],
-          generationConfig: { temperature: 0.7, maxOutputTokens: 8192 },
-          thinkingConfig: { thinkingBudget: 1024 }
+          generationConfig: { temperature: 0.7, maxOutputTokens: 8192 }
         };
         const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '标签生成');
         const resData = result?.data || result;
@@ -6726,8 +6723,7 @@ Style: ${stylePrompt}
         const key = getGeminiKey();
         const payload = {
           contents: [{ parts: [{ text: `你是小红书运营专家。为"${currentSkillName}"赛道生成12条评论回复话术。返回JSON数组：[{"scene":"场景(感谢/求助/质疑/合作/互动/引流之一)","text":"话术内容"}]。要求：语气亲切自然，适合小红书风格，每个场景2条。` }] }],
-          generationConfig: { temperature: 0.8, maxOutputTokens: 8192 },
-          thinkingConfig: { thinkingBudget: 1024 }
+          generationConfig: { temperature: 0.8, maxOutputTokens: 8192 }
         };
         const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '生成评论话术');
         const resData = result?.data || result;
@@ -6844,8 +6840,7 @@ Style: ${stylePrompt}
         const payload = {
           contents: [{ parts: [{ text: `你是小红书运营分析专家。请搜索并分析以下小红书"${currentSkillName}"赛道的竞品账号：${names}。\n\n请分析：1.各账号的内容策略特点 2.发布频率和时间 3.爆款内容共性 4.标签使用策略 5.可以借鉴的地方 6.差异化竞争建议\n\n用中文详细回答，格式清晰，给出可落地的行动建议。` }] }],
           tools: [{ googleSearch: {} }],
-          generationConfig: { temperature: 0.7, maxOutputTokens: 8192 },
-          thinkingConfig: { thinkingBudget: 1024 }
+          generationConfig: { temperature: 0.7, maxOutputTokens: 8192 }
         };
         const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '竞品分析');
         const resData = result?.data || result;
@@ -6939,8 +6934,7 @@ Style: ${stylePrompt}
         const key = getGeminiKey();
         const payload = {
           contents: [{ parts: [{ text: `你是小红书内容创作专家。请按要求改写以下内容：\n\n改写模式：${modeMap[mode]}\n文风要求：${styleMap[style]}\n\n原文：\n${input}\n\n要求：\n1. 保持原文核心信息\n2. 适合小红书平台风格\n3. 直接输出改写后的完整内容（标题+正文+标签）\n4. 不要解释改写思路` }] }],
-          generationConfig: { temperature: 0.8, maxOutputTokens: 8192 },
-          thinkingConfig: { thinkingBudget: 1024 }
+          generationConfig: { temperature: 0.8, maxOutputTokens: 8192 }
         };
         const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '笔记改写');
         const resData = result?.data || result;
