@@ -2185,6 +2185,7 @@
     const IS_GITHUB_PAGES = location.hostname.endsWith('.github.io') || location.hostname.endsWith('.pages.dev');
     const UA = navigator.userAgent || '';
     const IS_CN_EMBEDDED_BROWSER = /baiduboxapp|baidubrowser|quark|qqbrowser|mqqbrowser|micromessenger/i.test(UA);
+    const IS_LIGHT_AI_MODE = IS_CN_EMBEDDED_BROWSER;
     if (IS_GITHUB_PAGES && IS_CN_EMBEDDED_BROWSER) {
       const target = `${RENDER_BACKEND}/?from=github-pages`;
       if (location.href !== target) location.replace(target);
@@ -3485,6 +3486,9 @@
 
     // ========== 第一步：联网搜索+分析小红书爆款笔记 ==========
     async function _searchAndAnalyzeXHS(apiKey, model, category) {
+      if (IS_LIGHT_AI_MODE) {
+        return await _analyzeWithoutSearch(apiKey, model, category);
+      }
       const sk = _s();
       const keywords = sk.searchKeywords(category);
       const searchPrompt = `请你搜索小红书平台上「${category}」分类的${sk.aiNiche}热门笔记/爆款笔记。
@@ -3614,9 +3618,11 @@ ${keywords.map(k => `- "${k}"`).join('\n')}
     async function _generateFromAnalysis(apiKey, model, category, count, analysis) {
       const { analysisText, sources, searchUsed } = analysis;
       const sk = _s();
+      const compactAnalysisText = (analysisText || '').slice(0, 3200);
+      const compactSources = (sources || []).slice(0, 5);
 
-      const sourceInfo = sources.length > 0
-        ? `\n\n## 参考来源\n${sources.map((s, i) => `${i + 1}. ${s.title} (${s.uri})`).join('\n')}`
+      const sourceInfo = compactSources.length > 0
+        ? `\n\n## 参考来源\n${compactSources.map((s, i) => `${i + 1}. ${s.title} (${s.uri})`).join('\n')}`
         : '';
 
       const prompt = `你是一位拥有百万粉丝的${sk.aiRole}。
@@ -3626,7 +3632,7 @@ ${keywords.map(k => `- "${k}"`).join('\n')}
 以下是${searchUsed ? '通过搜索获取的' : '基于经验总结的'}小红书「${category}」分类${sk.aiNiche}爆款笔记的分析报告：
 
 ---
-${analysisText}
+${compactAnalysisText}
 ---
 ${sourceInfo}
 
@@ -3669,7 +3675,7 @@ ${sourceInfo}
         generationConfig: {
           temperature: 0.95,
           topP: 0.95,
-          maxOutputTokens: 8192
+          maxOutputTokens: 4096
         }
       };
 
@@ -4523,6 +4529,7 @@ Style: ${stylePrompt}
       const withImage = document.getElementById('gen-with-image').checked;
       const imageCount = parseInt(document.getElementById('gen-image-count')?.value || '2');
       const hasApiKey = canUseAI();
+      let usedAI = hasApiKey;
 
       const btn = document.getElementById('gen-btn');
       const progressEl = document.getElementById('gen-progress');
@@ -4532,46 +4539,54 @@ Style: ${stylePrompt}
         let posts = [];
 
         if (hasApiKey) {
-          // ====== AI 智能生成模式（调用 Gemini API）======
-          btn.textContent = '🌐 联网搜索小红书...';
-          updateGenProgress(progressEl, '🌐 正在联网搜索小红书同类型爆款笔记...', 5);
+          try {
+            // ====== AI 智能生成模式（调用 Gemini API）======
+            btn.textContent = IS_LIGHT_AI_MODE ? '✍️ AI 生成中...' : '🌐 联网搜索小红书...';
+            updateGenProgress(progressEl, IS_LIGHT_AI_MODE ? '✍️ 正在生成高质量内容（轻量模式）...' : '🌐 正在联网搜索小红书同类型爆款笔记...', 5);
 
-          const allCategories = _s().categories;
-          const totalBatches = Math.ceil(count / 5);
-          let batchesDone = 0;
-          const allPosts = [];
-          let remaining = count;
+            const allCategories = _s().categories;
+            const totalBatches = Math.ceil(count / 5);
+            let batchesDone = 0;
+            const allPosts = [];
+            let remaining = count;
 
-          while (remaining > 0) {
-            const batchCount = Math.min(remaining, 5);
-            const batchCat = category || allCategories[Math.floor(Math.random() * allCategories.length)];
-            batchesDone++;
+            while (remaining > 0) {
+              const batchCount = Math.min(remaining, 5);
+              const batchCat = category || allCategories[Math.floor(Math.random() * allCategories.length)];
+              batchesDone++;
 
-            const batchPosts = await _callGeminiForContent(
-              getGeminiKey(), getGeminiModel(), batchCat, batchCount,
-              (stage, msg) => {
-                let pct = 0;
-                const batchBase = ((batchesDone - 1) / totalBatches) * 50;
-                if (stage === 'search') {
-                  pct = Math.round(batchBase + 5);
-                  btn.textContent = `🌐 搜索小红书「${batchCat}」爆款...`;
-                } else if (stage === 'analyzed') {
-                  pct = Math.round(batchBase + 20);
-                  btn.textContent = `📊 分析完成，开始创作...`;
-                } else if (stage === 'generate') {
-                  pct = Math.round(batchBase + 30);
-                  btn.textContent = `✍️ AI 创作中 (${batchesDone}/${totalBatches})...`;
+              const batchPosts = await _callGeminiForContent(
+                getGeminiKey(), getGeminiModel(), batchCat, batchCount,
+                (stage, msg) => {
+                  let pct = 0;
+                  const batchBase = ((batchesDone - 1) / totalBatches) * 50;
+                  if (stage === 'search') {
+                    pct = Math.round(batchBase + 5);
+                    btn.textContent = IS_LIGHT_AI_MODE ? `✍️ 生成中 (${batchesDone}/${totalBatches})...` : `🌐 搜索小红书「${batchCat}」爆款...`;
+                  } else if (stage === 'analyzed') {
+                    pct = Math.round(batchBase + 20);
+                    btn.textContent = `📊 分析完成，开始创作...`;
+                  } else if (stage === 'generate') {
+                    pct = Math.round(batchBase + 30);
+                    btn.textContent = `✍️ AI 创作中 (${batchesDone}/${totalBatches})...`;
+                  }
+                  updateGenProgress(progressEl, msg, pct);
                 }
-                updateGenProgress(progressEl, msg, pct);
-              }
-            );
-            allPosts.push(...batchPosts);
-            remaining -= batchCount;
-            if (remaining > 0) await new Promise(r => setTimeout(r, 1500));
-          }
+              );
+              allPosts.push(...batchPosts);
+              remaining -= batchCount;
+              if (remaining > 0) await new Promise(r => setTimeout(r, 1500));
+            }
 
-          posts = allPosts;
-          updateGenProgress(progressEl, '✅ AI 内容生成完成！<button onclick="viewAnalysisReport()" style="margin-left:8px; padding:2px 10px; border:1px solid var(--info); background:white; color:var(--info); border-radius:4px; cursor:pointer; font-size:12px;">📊 查看分析报告</button>', 50);
+            posts = allPosts;
+            updateGenProgress(progressEl, '✅ AI 内容生成完成！<button onclick="viewAnalysisReport()" style="margin-left:8px; padding:2px 10px; border:1px solid var(--info); background:white; color:var(--info); border-radius:4px; cursor:pointer; font-size:12px;">📊 查看分析报告</button>', 50);
+          } catch (aiErr) {
+            console.warn('AI generation failed, fallback to local templates:', aiErr);
+            usedAI = false;
+            btn.textContent = '⏳ 切换本地模板生成...';
+            updateGenProgress(progressEl, '⚠️ AI 网络波动，已自动切换本地模板继续生成...', 40);
+            posts = ContentEngine.generateBatch(count, category || null);
+          }
 
         } else {
           // ====== 本地模板模式（无 API Key 时的降级方案）======
@@ -4596,12 +4611,12 @@ Style: ${stylePrompt}
         document.getElementById('gen-results').style.display = 'block';
         // 显示/隐藏分析报告按钮
         const reportBtn = document.getElementById('btn-analysis-report');
-        if (reportBtn) reportBtn.style.display = (hasApiKey && _lastAnalysis) ? '' : 'none';
+        if (reportBtn) reportBtn.style.display = (usedAI && _lastAnalysis) ? '' : 'none';
         if (posts.length > 0) previewPost(posts[0]);
-        toast(`成功生成 ${posts.length} 条笔记${hasApiKey ? '（AI 联网搜索+智能生成）' : '（本地模板）'}！`, 'success');
+        toast(`成功生成 ${posts.length} 条笔记${usedAI ? (IS_LIGHT_AI_MODE ? '（AI 轻量模式）' : '（AI 联网搜索+智能生成）') : '（本地模板）'}！`, 'success');
 
         // 如果启用了图片生成（封面图 + 配图）
-        if (withImage && hasApiKey) {
+        if (withImage && usedAI) {
           const totalImages = count * (1 + imageCount); // 封面 + 配图
           let completedImages = 0;
 
