@@ -53,7 +53,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260314w'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260314x'  # 更新此版本号以追踪部署
 
 # Gemini API Proxy 配置
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com'
@@ -823,6 +823,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._gemini_proxy(body)
         elif path == '/api/ai-proxy':
             return self._gemini_proxy(body)
+        elif path == '/api/baidu-search':
+            return self._baidu_search(body)
         # --- 需要登录的路由 ---
         elif path == '/api/posts':
             return self._create_post(body)
@@ -1253,6 +1255,88 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header('Content-Disposition', 'attachment; filename="notes_export.txt"')
         self.end_headers()
         self.wfile.write('\n\n'.join(texts).encode('utf-8'))
+
+
+    # ---- 百度搜索小红书笔记 ----
+    def _baidu_search(self, body):
+        """搜索百度 site:xiaohongshu.com 获取真实小红书笔记标题和摘要"""
+        import re as _re
+        import html as _html
+
+        keyword = (body.get('keyword', '') or '').strip()
+        if not keyword:
+            return self._send_json({'error': 'Missing keyword'}, 400)
+
+        count = min(int(body.get('count', 10)), 20)
+        query = f'site:xiaohongshu.com {keyword}'
+        encoded_query = urllib.parse.quote(query)
+        url = f'https://www.baidu.com/s?wd={encoded_query}&rn={count}'
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+        }
+
+        try:
+            req = urllib.request.Request(url, headers=headers)
+            # 百度不走代理（国内网站无需翻墙）
+            no_proxy_opener = urllib.request.build_opener(
+                urllib.request.HTTPSHandler(context=_SSL_CTX)
+            )
+            resp = no_proxy_opener.open(req, timeout=15)
+            html_text = resp.read().decode('utf-8', errors='replace')
+
+            results = []
+            # 提取百度搜索结果：标题和摘要
+            # 百度搜索结果在 class="result" 的 div 中
+            blocks = _re.findall(
+                r'<div[^>]*class="result[^"]*"[^>]*>[\s\S]*?(?=<div[^>]*class="result|$)',
+                html_text
+            )
+            if not blocks:
+                # 备用：尝试提取 <h3> 标签
+                blocks = _re.findall(r'<h3[^>]*>[\s\S]*?</h3>[\s\S]*?(?=<h3|$)', html_text)
+
+            for block in blocks[:count]:
+                # 提取标题
+                title_match = _re.search(r'<h3[^>]*>([\s\S]*?)</h3>', block)
+                title = ''
+                link = ''
+                if title_match:
+                    title_html = title_match.group(1)
+                    # 提取链接
+                    link_match = _re.search(r'href="([^"]*)"', title_html)
+                    if link_match:
+                        link = link_match.group(1)
+                    # 去掉 HTML 标签
+                    title = _re.sub(r'<[^>]+>', '', title_html).strip()
+                    title = _html.unescape(title)
+
+                # 提取摘要
+                abstract = ''
+                abs_match = _re.search(
+                    r'<span[^>]*class="content-right_[^"]*"[^>]*>([\s\S]*?)</span>',
+                    block
+                )
+                if not abs_match:
+                    abs_match = _re.search(r'<div[^>]*class="c-abstract[^"]*"[^>]*>([\s\S]*?)</div>', block)
+                if not abs_match:
+                    abs_match = _re.search(r'<span[^>]*class=".*?abstract.*?"[^>]*>([\s\S]*?)</span>', block)
+                if abs_match:
+                    abstract = _re.sub(r'<[^>]+>', '', abs_match.group(1)).strip()
+                    abstract = _html.unescape(abstract)
+
+                if title:
+                    results.append({
+                        'title': title,
+                        'abstract': abstract,
+                        'link': link,
+                    })
+
+            self._send_json({'results': results, 'query': query, 'count': len(results)})
+        except Exception as e:
+            self._send_json({'error': f'百度搜索失败: {str(e)}', 'results': []}, 200)
 
 
     # ---- Gemini API 代理 ----
