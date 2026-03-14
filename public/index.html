@@ -3814,6 +3814,7 @@ ${sourceInfo}
     const IMAGE_STYLE_PROMPTS = new Proxy({}, {
       get(target, key) { return _s().imageStylePrompts[key] || _s().imageStylePrompts.xiaohongshu; }
     });
+    let _lastImageGenErrorMsg = '';
 
     /**
      * 从 Gemini 图片模型响应中提取图片
@@ -3836,19 +3837,35 @@ ${sourceInfo}
     async function generateSingleImage(prompt) {
       const apiKey = getGeminiKey();
       const imageModel = getImageModel();
+      const candidates = [
+        imageModel,
+        'gemini-2.5-flash-image',
+        'nano-banana-pro-preview',
+        'gemini-3.1-flash-image-preview'
+      ].filter((m, i, arr) => m && arr.indexOf(m) === i);
 
       const payload = {
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: { responseModalities: ['IMAGE'] }
       };
 
-      try {
-        const result = await callGeminiAPI(apiKey, imageModel, payload);
-        return _extractImageFromResponse(result.data);
-      } catch (e) {
-        console.warn('[ImageGen] Failed with model', imageModel, ':', e.message || e);
-        return null;
+      let lastErr = null;
+      for (const modelName of candidates) {
+        try {
+          const result = await callGeminiAPI(apiKey, modelName, payload);
+          const img = _extractImageFromResponse(result.data);
+          if (img) {
+            _lastImageGenErrorMsg = '';
+            return img;
+          }
+          lastErr = new Error(`模型 ${modelName} 未返回图片数据`);
+        } catch (e) {
+          lastErr = e;
+          console.warn('[ImageGen] Failed with model', modelName, ':', e.message || e);
+        }
       }
+      _lastImageGenErrorMsg = (lastErr && (lastErr.message || String(lastErr))) || '图片模型不可用';
+      return null;
     }
 
     /**
@@ -4669,7 +4686,12 @@ Style: ${stylePrompt}
           // 重新渲染列表
           renderGeneratedList(posts);
           if (posts.length > 0) previewPost(posts[0]);
-          toast(`🎨 ${coverCount} 张封面图 + ${contentImgCount} 张配图生成成功！`, 'success');
+          if (coverCount + contentImgCount > 0) {
+            toast(`🎨 ${coverCount} 张封面图 + ${contentImgCount} 张配图生成成功！`, 'success');
+          } else {
+            const brief = (_lastImageGenErrorMsg || '图片服务暂不可用').slice(0, 80);
+            toast(`文案已生成，配图失败：${brief}`, 'warning');
+          }
         } else if (withImage && !hasApiKey) {
           toast('未配置 Gemini 代理地址/API Key，请在侧边栏「API 设置」中配置', 'warning');
         }
