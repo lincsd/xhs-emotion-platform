@@ -670,6 +670,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._auth_logout()
         elif path == '/api/gemini-proxy':
             return self._gemini_proxy(body)
+        elif path == '/api/ai-proxy':
+            return self._gemini_proxy(body)
         # --- 需要登录的路由 ---
         elif path == '/api/posts':
             return self._create_post(body)

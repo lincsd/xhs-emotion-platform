@@ -2871,6 +2871,11 @@
       const base = getGeminiProxyBase();
       return base ? `${base}/api/gemini-proxy` : '/api/gemini-proxy';
     }
+    function getGeminiProxyAPIUrls() {
+      const base = getGeminiProxyBase();
+      if (!base) return ['/api/gemini-proxy', '/api/ai-proxy'];
+      return [`${base}/api/gemini-proxy`, `${base}/api/ai-proxy`];
+    }
     function getGeminiProxyHealthUrl() {
       const base = getGeminiProxyBase();
       return base ? `${base}/api/stats` : '/api/stats';
@@ -2916,41 +2921,48 @@
         // 走服务器代理
         const isImageModel = model && (model.includes('image') || model.includes('banana') || model.includes('imagen'));
         const proxyTimeout = isImageModel ? 200000 : (forceProxy ? 120000 : 30000);
-        try {
-          const res = await fetch(getGeminiProxyAPIUrl(), {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            signal: _abortSignalTimeout(proxyTimeout),
-            body: JSON.stringify({ apiKey, model, payload, action })
-          });
-          const data = await res.json();
-          if (!res.ok) {
-            // 服务器代理返回了 Gemini 的错误
-            throw { fromProxy: true, status: res.status, data };
-          }
-          return { ok: true, data };
-        } catch (e) {
-          if (e.fromProxy) throw e; // Gemini 本身的错误，不重试
-          if (forceProxy) {
-            // 自动重试一次
+        const proxyUrls = getGeminiProxyAPIUrls();
+        const reqBody = JSON.stringify({ apiKey, model, payload, action });
+        let lastNetworkError = null;
+
+        for (const proxyUrl of proxyUrls) {
+          try {
+            const res = await fetch(proxyUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              signal: _abortSignalTimeout(proxyTimeout),
+              body: reqBody
+            });
+            const data = await res.json();
+            if (!res.ok) {
+              throw { fromProxy: true, status: res.status, data };
+            }
+            return { ok: true, data };
+          } catch (e) {
+            if (e.fromProxy) throw e;
+            lastNetworkError = e;
+
             try {
-              const res2 = await fetch(getGeminiProxyAPIUrl(), {
+              const res2 = await fetch(proxyUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                signal: _abortSignalTimeout(proxyTimeout),
-                body: JSON.stringify({ apiKey, model, payload, action })
+                body: reqBody
               });
               const data2 = await res2.json();
               if (!res2.ok) throw { fromProxy: true, status: res2.status, data: data2 };
               return { ok: true, data: data2 };
             } catch (e2) {
               if (e2.fromProxy) throw e2;
-              throw new Error('代理连接失败: ' + (e2.name || '') + ' ' + (e2.message || '') + ' | 首次: ' + (e.name || '') + ' ' + (e.message || ''));
+              lastNetworkError = e2;
             }
           }
-          console.warn('[Gemini] Server proxy failed, trying direct:', e.message);
-          // 代理网络错误，降级为直连
         }
+
+        if (forceProxy) {
+          throw new Error('代理连接失败: ' + (lastNetworkError?.name || '') + ' ' + (lastNetworkError?.message || 'Failed to fetch'));
+        }
+        console.warn('[Gemini] Server proxy failed, trying direct:', lastNetworkError?.message || 'network error');
+        // 代理网络错误，降级为直连
       }
 
       // 直连 Gemini API
