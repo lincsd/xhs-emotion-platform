@@ -1040,6 +1040,66 @@
     .sidebar-user .user-logout { font-size: 11px; color: rgba(255,255,255,0.5); cursor: pointer; }
     .sidebar-user .user-logout:hover { color: #ff6b81; }
 
+    /* ===== AI 积分徽章 ===== */
+    .credits-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      margin: 8px 12px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .credits-badge:hover { background: rgba(255,255,255,0.15); }
+    .credits-badge .cb-icon { font-size: 16px; }
+    .credits-badge .cb-info { flex: 1; min-width: 0; }
+    .credits-badge .cb-label { font-size: 11px; color: rgba(255,255,255,0.5); }
+    .credits-badge .cb-value { font-size: 14px; font-weight: 700; color: #ffd700; }
+    .credits-badge .cb-free { font-size: 10px; color: rgba(255,255,255,0.4); }
+    .credits-badge .cb-btn {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .mob-credits-bar {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: #fff8e1;
+      font-size: 12px;
+      color: #8d6e00;
+      border-bottom: 1px solid #ffe082;
+    }
+    .mob-credits-bar .mcb-value { font-weight: 700; color: var(--primary); }
+    .mob-credits-bar .mcb-btn {
+      margin-left: auto;
+      font-size: 11px;
+      padding: 2px 10px;
+      border-radius: 10px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .mob-credits-bar { display: flex; }
+    }
+
+    /* ===== 配额超限弹窗 ===== */
+    .quota-modal-body { text-align: center; padding: 30px 20px; }
+    .quota-modal-body .qm-icon { font-size: 48px; margin-bottom: 12px; }
+    .quota-modal-body .qm-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .quota-modal-body .qm-desc { font-size: 14px; color: var(--text-light); margin-bottom: 20px; line-height: 1.6; }
+    .quota-modal-body .qm-input-row { display: flex; gap: 8px; max-width: 320px; margin: 0 auto; }
+    .quota-modal-body .qm-input-row input { flex: 1; }
+
     /* ===== 手机端底部导航 ===== */
     .mobile-bottom-nav {
       display: none;
@@ -1403,6 +1463,14 @@
           <span class="icon">⚙️</span> API 设置
         </div>
       </div>
+      <div class="credits-badge" id="sidebar-credits" onclick="openModal('modal-redeem')" style="display:none;" title="点击充值">
+        <span class="cb-icon">💎</span>
+        <div class="cb-info">
+          <div class="cb-label">AI 积分</div>
+          <div><span class="cb-value" id="sidebar-credits-val">0</span> <span class="cb-free" id="sidebar-credits-free">今日免费 3/3</span></div>
+        </div>
+        <button class="cb-btn" onclick="event.stopPropagation(); openModal('modal-redeem')">充值</button>
+      </div>
       <div class="sidebar-user" id="sidebar-user" style="display:none;">
         <div class="user-avatar" id="user-avatar-icon">👤</div>
         <div class="user-info">
@@ -1411,6 +1479,13 @@
         </div>
       </div>
     </aside>
+
+    <!-- ===== 手机端积分栏 ===== -->
+    <div class="mob-credits-bar" id="mob-credits-bar">
+      💎 今日免费 <span class="mcb-value" id="mob-free-remain">3/3</span>
+      &nbsp;|&nbsp; 积分 <span class="mcb-value" id="mob-credits-val">0</span>
+      <button class="mcb-btn" onclick="openModal('modal-redeem')">充值</button>
+    </div>
 
     <!-- ===== 手机端顶部栏 ===== -->
     <div class="mobile-top-bar" id="mobile-top-bar">
@@ -2464,6 +2539,62 @@
     </div>
   </div>
 
+  <!-- ===== 模态框：充值/兑换码 ===== -->
+  <div class="modal-overlay" id="modal-redeem">
+    <div class="modal" style="max-width:440px;">
+      <div class="modal-header">
+        <h3>💎 AI 积分</h3>
+        <button class="modal-close" onclick="closeModal('modal-redeem')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="text-align:center; margin-bottom:20px;">
+          <div style="font-size:14px; color:var(--text-light); margin-bottom:4px;">当前积分</div>
+          <div style="font-size:36px; font-weight:700; color:var(--primary);" id="redeem-credits-display">0</div>
+          <div style="font-size:12px; color:var(--text-light); margin-top:4px;" id="redeem-usage-info">今日已用 0/3 次免费额度</div>
+        </div>
+        <div style="background:#f9f9f9; border-radius:10px; padding:14px; margin-bottom:16px;">
+          <h4 style="font-size:13px; margin-bottom:8px;">📋 计费规则</h4>
+          <ul style="font-size:12px; color:var(--text-light); padding-left:16px; line-height:1.8;">
+            <li>每天免费 <strong>3次</strong> AI 调用（含内容生成、配图、评分等所有AI功能）</li>
+            <li>免费次数用完后，每次 AI 调用消耗 <strong>1积分</strong></li>
+            <li>积分永久有效，不会过期</li>
+          </ul>
+        </div>
+        <div class="form-group">
+          <label>🎟️ 输入兑换码</label>
+          <div style="display:flex; gap:8px;">
+            <input type="text" id="redeem-code-input" class="form-control" placeholder="请输入兑换码" style="flex:1; text-transform:uppercase;">
+            <button class="btn btn-primary" onclick="redeemCode()">兑换</button>
+          </div>
+          <div id="redeem-result" style="margin-top:8px; font-size:13px;"></div>
+        </div>
+        <div style="margin-top:16px; padding:12px; background:#fff5f7; border-radius:8px; text-align:center;">
+          <p style="font-size:13px; color:var(--text-light);">💬 获取兑换码请联系管理员</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 模态框：配额超限 ===== -->
+  <div class="modal-overlay" id="modal-quota-exceeded">
+    <div class="modal" style="max-width:400px;">
+      <div class="modal-header">
+        <h3>⚡ AI 次数用尽</h3>
+        <button class="modal-close" onclick="closeModal('modal-quota-exceeded')">✕</button>
+      </div>
+      <div class="quota-modal-body">
+        <div class="qm-icon">💎</div>
+        <div class="qm-title">今日免费次数已用完</div>
+        <div class="qm-desc">您今天的 3 次免费 AI 调用已用完。<br>充值积分即可继续使用所有 AI 功能。</div>
+        <div class="qm-input-row">
+          <input type="text" id="quota-redeem-input" class="form-control" placeholder="输入兑换码" style="text-transform:uppercase;">
+          <button class="btn btn-primary" onclick="redeemFromQuotaModal()">兑换</button>
+        </div>
+        <div id="quota-redeem-result" style="margin-top:8px; font-size:13px;"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== Toast容器 ===== -->
   <div class="toast-container" id="toast-container"></div>
 
@@ -3249,18 +3380,32 @@
         const isImageModel = model && (model.includes('image') || model.includes('banana') || model.includes('imagen'));
         const proxyTimeout = isImageModel ? 200000 : (forceProxy ? 120000 : 30000);
         const proxyUrls = getGeminiProxyAPIUrls();
-        const reqBody = JSON.stringify({ apiKey, model, payload, action });
+        const reqBody = JSON.stringify({ apiKey, model, payload, action, feature: action });
+        const authToken = getAuthToken();
+        const headers = { 'Content-Type': 'application/json' };
+        if (authToken) headers['Authorization'] = 'Bearer ' + authToken;
         let lastNetworkError = null;
 
         for (const proxyUrl of proxyUrls) {
           try {
             const res = await fetch(proxyUrl, {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers,
               signal: _abortSignalTimeout(proxyTimeout),
               body: reqBody
             });
+            // 处理 429 配额超限
+            if (res.status === 429) {
+              const errData = await res.json().catch(() => ({}));
+              if (errData.quotaExceeded) {
+                loadCreditsInfo(); // 刷新积分显示
+                showQuotaExceeded();
+                throw { fromProxy: true, status: 429, data: errData, quotaExceeded: true };
+              }
+            }
             const data = await parseProxyJson(res, proxyUrl);
+            // 成功后刷新积分（异步，不阻塞）
+            loadCreditsInfo();
             return { ok: true, data };
           } catch (e) {
             if (e.fromProxy) throw e;
@@ -3269,10 +3414,19 @@
             try {
               const res2 = await fetch(proxyUrl, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers,
                 body: reqBody
               });
+              if (res2.status === 429) {
+                const errData = await res2.json().catch(() => ({}));
+                if (errData.quotaExceeded) {
+                  loadCreditsInfo();
+                  showQuotaExceeded();
+                  throw { fromProxy: true, status: 429, data: errData, quotaExceeded: true };
+                }
+              }
               const data2 = await parseProxyJson(res2, proxyUrl);
+              loadCreditsInfo();
               return { ok: true, data: data2 };
             } catch (e2) {
               if (e2.fromProxy) throw e2;
@@ -6950,6 +7104,8 @@ Style: ${stylePrompt}
         document.getElementById('user-display-name').textContent = currentUser.nickname || currentUser.username;
         document.getElementById('user-avatar-icon').textContent = (currentUser.nickname || currentUser.username || '👤').charAt(0);
       }
+      // 加载AI积分信息
+      loadCreditsInfo();
     }
 
     function switchLoginTab(tab) {
@@ -7066,6 +7222,105 @@ Style: ${stylePrompt}
       const regPw2 = document.getElementById('reg-password2');
       if (regPw2) regPw2.addEventListener('keydown', e => { if (e.key === 'Enter') doRegister(); });
     });
+
+    // ============ AI 积分系统 ============
+    let userCreditsInfo = { credits: 0, todayUsed: 0, freeLimit: 3, freeRemaining: 3, tier: 'free' };
+
+    async function loadCreditsInfo() {
+      try {
+        const data = await api('/api/user/credits');
+        if (data && typeof data.credits !== 'undefined') {
+          userCreditsInfo = data;
+          updateCreditsUI();
+        }
+      } catch {}
+    }
+
+    function updateCreditsUI() {
+      const { credits, todayUsed, freeLimit, freeRemaining } = userCreditsInfo;
+      // Sidebar
+      const sbc = document.getElementById('sidebar-credits');
+      if (sbc) {
+        sbc.style.display = 'flex';
+        document.getElementById('sidebar-credits-val').textContent = credits;
+        document.getElementById('sidebar-credits-free').textContent = `今日免费 ${freeRemaining}/${freeLimit}`;
+      }
+      // Mobile bar
+      const mfr = document.getElementById('mob-free-remain');
+      if (mfr) mfr.textContent = `${freeRemaining}/${freeLimit}`;
+      const mcv = document.getElementById('mob-credits-val');
+      if (mcv) mcv.textContent = credits;
+      // Redeem modal
+      const rcd = document.getElementById('redeem-credits-display');
+      if (rcd) rcd.textContent = credits;
+      const rui = document.getElementById('redeem-usage-info');
+      if (rui) rui.textContent = `今日已用 ${todayUsed}/${freeLimit} 次免费额度`;
+    }
+
+    async function redeemCode() {
+      const input = document.getElementById('redeem-code-input');
+      const code = (input.value || '').trim();
+      if (!code) return;
+      const resultEl = document.getElementById('redeem-result');
+      resultEl.innerHTML = '<span style="color:var(--info);">兑换中...</span>';
+      try {
+        const res = await fetch(API_BASE + '/api/redeem', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + getAuthToken()
+          },
+          body: JSON.stringify({ code })
+        });
+        const data = await res.json();
+        if (data.success) {
+          resultEl.innerHTML = `<span style="color:var(--success);">✅ 充值成功！+${data.added} 积分，当前余额：${data.credits}</span>`;
+          input.value = '';
+          userCreditsInfo.credits = data.credits;
+          updateCreditsUI();
+          toast(`充值成功！+${data.added} AI积分`, 'success');
+        } else {
+          resultEl.innerHTML = `<span style="color:#ff4d4f;">${data.error || '兑换失败'}</span>`;
+        }
+      } catch (e) {
+        resultEl.innerHTML = '<span style="color:#ff4d4f;">网络错误，请重试</span>';
+      }
+    }
+
+    async function redeemFromQuotaModal() {
+      const input = document.getElementById('quota-redeem-input');
+      const code = (input.value || '').trim();
+      if (!code) return;
+      const resultEl = document.getElementById('quota-redeem-result');
+      resultEl.innerHTML = '<span style="color:var(--info);">兑换中...</span>';
+      try {
+        const res = await fetch(API_BASE + '/api/redeem', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + getAuthToken()
+          },
+          body: JSON.stringify({ code })
+        });
+        const data = await res.json();
+        if (data.success) {
+          resultEl.innerHTML = `<span style="color:var(--success);">✅ +${data.added} 积分！可以继续使用了</span>`;
+          input.value = '';
+          userCreditsInfo.credits = data.credits;
+          updateCreditsUI();
+          toast(`充值成功！+${data.added} AI积分`, 'success');
+          setTimeout(() => closeModal('modal-quota-exceeded'), 1500);
+        } else {
+          resultEl.innerHTML = `<span style="color:#ff4d4f;">${data.error || '兑换失败'}</span>`;
+        }
+      } catch (e) {
+        resultEl.innerHTML = '<span style="color:#ff4d4f;">网络错误</span>';
+      }
+    }
+
+    function showQuotaExceeded() {
+      openModal('modal-quota-exceeded');
+    }
 
     async function init() {
       applySkillToUI();

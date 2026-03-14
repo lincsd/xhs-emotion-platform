@@ -144,6 +144,35 @@ def init_db():
             conn.execute(f'ALTER TABLE {tbl} ADD COLUMN user_id INTEGER DEFAULT 0')
         except:
             pass
+    # 迁移：给 users 表添加 ai_credits 列
+    try:
+        conn.execute('ALTER TABLE users ADD COLUMN ai_credits INTEGER DEFAULT 0')
+    except:
+        pass
+    try:
+        conn.execute('ALTER TABLE users ADD COLUMN tier TEXT DEFAULT "free"')
+    except:
+        pass
+    # AI 使用量追踪表
+    conn.executescript("""
+        CREATE TABLE IF NOT EXISTS ai_usage (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            date TEXT NOT NULL,
+            feature TEXT NOT NULL,
+            created_at TEXT DEFAULT (datetime('now','localtime'))
+        );
+        CREATE INDEX IF NOT EXISTS idx_ai_usage_user_date ON ai_usage(user_id, date);
+
+        CREATE TABLE IF NOT EXISTS redeem_codes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            code TEXT UNIQUE NOT NULL,
+            credits INTEGER NOT NULL DEFAULT 100,
+            used_by INTEGER,
+            created_at TEXT DEFAULT (datetime('now','localtime')),
+            used_at TEXT
+        );
+    """)
     conn.commit()
     conn.close()
 
@@ -581,7 +610,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return None
         conn = self._get_db()
         row = conn.execute(
-            'SELECT u.id, u.username, u.nickname, u.avatar, u.created_at '
+            'SELECT u.id, u.username, u.nickname, u.avatar, u.created_at, u.ai_credits, u.tier '
             'FROM sessions s JOIN users u ON s.user_id = u.id '
             'WHERE s.token = ? AND s.expires_at > datetime("now","localtime")',
             (token,)
@@ -595,6 +624,117 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         if not user:
             self._send_json({'error': '请先登录', 'code': 'AUTH_REQUIRED'}, 401)
         return user
+
+    # ---- AI 配额系统 ----
+    FREE_DAILY_AI_LIMIT = 3   # 免费用户每天3次
+
+    def _get_today_ai_usage(self, user_id):
+        """获取用户今日AI使用次数"""
+        conn = self._get_db()
+        today = datetime.now().strftime('%Y-%m-%d')
+        row = conn.execute(
+            'SELECT COUNT(*) as cnt FROM ai_usage WHERE user_id=? AND date=?',
+            (user_id, today)
+        ).fetchone()
+        conn.close()
+        return row['cnt'] if row else 0
+
+    def _record_ai_usage(self, user_id, feature='ai'):
+        """记录一次AI使用，并扣减积分（如果超出免费额度）"""
+        conn = self._get_db()
+        today = datetime.now().strftime('%Y-%m-%d')
+        conn.execute('INSERT INTO ai_usage(user_id, date, feature) VALUES(?,?,?)',
+                     (user_id, today, feature))
+        # 检查是否超出免费额度，超出则扣积分
+        usage_today = conn.execute(
+            'SELECT COUNT(*) as cnt FROM ai_usage WHERE user_id=? AND date=?',
+            (user_id, today)
+        ).fetchone()['cnt']
+        if usage_today > self.FREE_DAILY_AI_LIMIT:
+            conn.execute('UPDATE users SET ai_credits = MAX(0, ai_credits - 1) WHERE id=?', (user_id,))
+        conn.commit()
+        conn.close()
+
+    def _check_ai_quota(self, user):
+        """检查用户是否还有AI调用额度。返回 (allowed, info_dict)"""
+        user_id = user['id']
+        today_usage = self._get_today_ai_usage(user_id)
+        credits = user.get('ai_credits', 0) or 0
+
+        if today_usage < self.FREE_DAILY_AI_LIMIT:
+            return True, {
+                'freeRemaining': self.FREE_DAILY_AI_LIMIT - today_usage,
+                'credits': credits,
+                'todayUsed': today_usage
+            }
+        elif credits > 0:
+            return True, {
+                'freeRemaining': 0,
+                'credits': credits,
+                'todayUsed': today_usage
+            }
+        else:
+            return False, {
+                'freeRemaining': 0,
+                'credits': 0,
+                'todayUsed': today_usage
+            }
+
+    def _get_user_credits_info(self):
+        """API: 获取当前用户AI积分与使用情况"""
+        user = self._get_current_user()
+        if not user:
+            return self._send_json({'error': '未登录', 'code': 'AUTH_REQUIRED'}, 401)
+        user_id = user['id']
+        today_usage = self._get_today_ai_usage(user_id)
+        credits = user.get('ai_credits', 0) or 0
+        return self._send_json({
+            'credits': credits,
+            'todayUsed': today_usage,
+            'freeLimit': self.FREE_DAILY_AI_LIMIT,
+            'freeRemaining': max(0, self.FREE_DAILY_AI_LIMIT - today_usage),
+            'tier': user.get('tier', 'free')
+        })
+
+    def _redeem_code(self, body):
+        """API: 兑换卡密充值AI积分"""
+        user = self._require_auth()
+        if not user:
+            return
+        code = (body.get('code') or '').strip().upper()
+        if not code:
+            return self._send_json({'error': '请输入兑换码'}, 400)
+        conn = self._get_db()
+        row = conn.execute('SELECT * FROM redeem_codes WHERE code=? AND used_by IS NULL', (code,)).fetchone()
+        if not row:
+            conn.close()
+            return self._send_json({'error': '兑换码无效或已使用'}, 400)
+        credits = row['credits']
+        conn.execute('UPDATE redeem_codes SET used_by=?, used_at=datetime("now","localtime") WHERE id=?',
+                     (user['id'], row['id']))
+        conn.execute('UPDATE users SET ai_credits = ai_credits + ? WHERE id=?',
+                     (credits, user['id']))
+        conn.commit()
+        new_credits = conn.execute('SELECT ai_credits FROM users WHERE id=?', (user['id'],)).fetchone()['ai_credits']
+        conn.close()
+        return self._send_json({'success': True, 'added': credits, 'credits': new_credits})
+
+    def _admin_gen_codes(self, body):
+        """API: 管理员生成兑换码（简单密码验证）"""
+        admin_key = body.get('adminKey', '')
+        if admin_key != os.environ.get('ADMIN_KEY', 'xhs-admin-2026'):
+            return self._send_json({'error': '无权限'}, 403)
+        count = min(int(body.get('count', 1)), 100)
+        credits = int(body.get('credits', 100))
+        conn = self._get_db()
+        codes = []
+        for _ in range(count):
+            code = secrets.token_hex(6).upper()
+            conn.execute('INSERT INTO redeem_codes(code, credits) VALUES(?,?)', (code, credits))
+            codes.append(code)
+        conn.commit()
+        conn.close()
+        return self._send_json({'codes': codes, 'credits': credits})
 
     def _send_json(self, data, code=200):
         self._set_json_headers(code)
@@ -650,6 +790,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._get_income(query)
         elif path == '/api/account-stats':
             return self._get_account_stats()
+        elif path == '/api/user/credits':
+            return self._get_user_credits_info()
         elif path.startswith('/api/export/'):
             post_id = path.split('/')[-1]
             return self._export_post(post_id)
@@ -685,6 +827,10 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._save_account_stats(body)
         elif path == '/api/export-batch':
             return self._export_batch(body)
+        elif path == '/api/redeem':
+            return self._redeem_code(body)
+        elif path == '/api/admin/gen-codes':
+            return self._admin_gen_codes(body)
         else:
             self._send_json({'error': 'Not found'}, 404)
 
@@ -1074,10 +1220,22 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     # ---- Gemini API 代理 ----
     def _gemini_proxy(self, body):
         """代理转发 Gemini API 请求，解决浏览器无法直接访问 Google API 的问题"""
+        # AI 配额检查
+        user = self._get_current_user()
+        if user:
+            allowed, info = self._check_ai_quota(user)
+            if not allowed:
+                return self._send_json({
+                    'error': {'code': 429, 'message': '今日免费次数已用完，请充值AI积分继续使用'},
+                    'quotaExceeded': True,
+                    'usage': info
+                }, 429)
+
         api_key = SERVER_GEMINI_API_KEY or body.get('apiKey', '')
         model = body.get('model', 'gemini-2.5-flash')
         payload = body.get('payload', {})
         action = body.get('action', 'generateContent')  # generateContent or listModels
+        feature = body.get('feature', 'ai')  # 用于追踪功能类型
 
         if not api_key:
             return self._send_json({'error': 'Missing apiKey and server GEMINI_API_KEY'}, 400)
@@ -1097,6 +1255,11 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
             resp = _OPENER.open(req, timeout=timeout)
             result = json.loads(resp.read().decode('utf-8'))
+
+            # 成功后记录AI用量
+            if user and action != 'listModels':
+                self._record_ai_usage(user['id'], feature)
+
             self._send_json(result)
         except urllib.error.HTTPError as e:
             err_body = e.read().decode('utf-8', errors='replace')
