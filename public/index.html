@@ -4634,10 +4634,17 @@ Style: ${stylePrompt}
 
         // 自动保存到草稿箱
         if (autoSave) {
-          posts.forEach(p => {
-            const saved = LocalDB.createPost(p);
-            p.id = saved.id;
-          });
+          for (const p of posts) {
+            try {
+              const saved = await api('/api/posts', { method: 'POST', body: p });
+              if (saved && saved.id) p.id = saved.id;
+            } catch (saveErr) {
+              console.warn('自动保存到后端失败，回退本地保存:', saveErr);
+              const localSaved = LocalDB.createPost(p);
+              p.id = localSaved.id;
+              useLocalMode = true;
+            }
+          }
         }
 
         generatedPostIds = posts.map(p => p.id).filter(Boolean);
