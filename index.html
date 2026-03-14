@@ -3350,6 +3350,14 @@
      * @param {string} action - 默认 'generateContent'
      * @returns {object} Gemini API 响应 JSON
      */
+    function _extractAIError(e) {
+      if (e?.quotaExceeded) return '今日免费次数已用完，请充值积分';
+      if (e?.data?.error?.message) return e.data.error.message;
+      if (e?.message) return e.message;
+      if (e?.status) return `API错误 (${e.status})`;
+      return String(e || '未知错误');
+    }
+
     async function callGeminiAPI(apiKey, model, payload, action = 'generateContent') {
       const parseProxyJson = async (res, sourceUrl) => {
         const text = await res.text();
@@ -6418,7 +6426,7 @@ Style: ${stylePrompt}
         html += '</div>';
         document.getElementById('score-result').innerHTML += html;
       } catch (e) {
-        document.getElementById('score-result').innerHTML += `<div class="forbidden-hit">AI 分析失败: ${e.message}</div>`;
+        document.getElementById('score-result').innerHTML += `<div class="forbidden-hit">AI 分析失败: ${_extractAIError(e)}</div>`;
       }
     }
 
@@ -6470,7 +6478,7 @@ Style: ${stylePrompt}
         const topics = await fetchTrendingTopics();
         renderTrendingTopics(topics);
       } catch (e) {
-        document.getElementById('trending-container').innerHTML = `<div class="forbidden-hit">获取话题失败: ${e.message}</div>`;
+        document.getElementById('trending-container').innerHTML = `<div class="forbidden-hit">获取话题失败: ${_extractAIError(e)}</div>`;
       }
     }
 
@@ -6513,7 +6521,7 @@ Style: ${stylePrompt}
         document.getElementById('tags-result').innerHTML = html;
         window._lastGeneratedTags = allTags;
       } catch (e) {
-        document.getElementById('tags-result').innerHTML = `<div class="forbidden-hit">标签生成失败: ${e.message}</div>`;
+        document.getElementById('tags-result').innerHTML = `<div class="forbidden-hit">标签生成失败: ${_extractAIError(e)}</div>`;
       }
     }
 
@@ -6695,7 +6703,7 @@ Style: ${stylePrompt}
         }
         renderCommentTemplatesList();
       } catch (e) {
-        toast('生成失败: ' + e.message, 'error');
+        toast('生成失败: ' + _extractAIError(e), 'error');
         renderCommentTemplatesList();
       }
     }
@@ -6807,7 +6815,7 @@ Style: ${stylePrompt}
         const text = resData?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('\n') || '未获取到分析结果';
         document.getElementById('competitor-analysis').innerHTML = `<div class="card" style="white-space:pre-wrap;line-height:1.8;">${text}</div>`;
       } catch (e) {
-        document.getElementById('competitor-analysis').innerHTML = `<div class="forbidden-hit">分析失败: ${e.message}</div>`;
+        document.getElementById('competitor-analysis').innerHTML = `<div class="forbidden-hit">分析失败: ${_extractAIError(e)}</div>`;
       }
     }
 
@@ -6902,7 +6910,7 @@ Style: ${stylePrompt}
         window._lastRewriteResult = text;
         document.getElementById('rewrite-result').innerHTML = `<div class="card" style="background:#f8f9ff;white-space:pre-wrap;line-height:1.8;">${text}</div>`;
       } catch (e) {
-        document.getElementById('rewrite-result').innerHTML = `<div class="forbidden-hit">改写失败: ${e.message}</div>`;
+        document.getElementById('rewrite-result').innerHTML = `<div class="forbidden-hit">改写失败: ${_extractAIError(e)}</div>`;
       }
     }
 
