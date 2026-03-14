@@ -1285,8 +1285,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 req = urllib.request.Request(url)
             else:
                 url = f'{GEMINI_API_BASE}/v1beta/models/{model}:{action}?key={api_key}'
-                data = json.dumps(payload).encode('utf-8')
-                req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'})
+                data = json.dumps(payload, ensure_ascii=False).encode('utf-8')
+                req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json; charset=utf-8'})
 
             resp = _OPENER.open(req, timeout=timeout)
             result = json.loads(resp.read().decode('utf-8'))
