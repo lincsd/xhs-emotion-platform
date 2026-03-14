@@ -1340,8 +1340,8 @@
         <!-- 登录表单 -->
         <div id="login-form">
           <div class="form-group">
-            <label>用户名</label>
-            <input type="text" class="form-control" id="login-username" placeholder="请输入用户名" autocomplete="username">
+            <label>用户名 / 手机号</label>
+            <input type="text" class="form-control" id="login-username" placeholder="请输入用户名或手机号" autocomplete="username">
           </div>
           <div class="form-group">
             <label>密码</label>
@@ -1352,7 +1352,11 @@
         <!-- 注册表单 -->
         <div id="register-form" style="display:none;">
           <div class="form-group">
-            <label>用户名</label>
+            <label>手机号 <span style="color:#e74c3c">*</span></label>
+            <input type="tel" class="form-control" id="reg-phone" placeholder="请输入11位手机号" maxlength="11" autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label>用户名 <span style="color:#e74c3c">*</span></label>
             <input type="text" class="form-control" id="reg-username" placeholder="2-20个字符" autocomplete="username">
           </div>
           <div class="form-group">
@@ -7454,10 +7458,12 @@ Style: ${stylePrompt}
     }
 
     async function doRegister() {
+      const phone = document.getElementById('reg-phone').value.trim();
       const username = document.getElementById('reg-username').value.trim();
       const nickname = document.getElementById('reg-nickname').value.trim();
       const password = document.getElementById('reg-password').value;
       const password2 = document.getElementById('reg-password2').value;
+      if (!phone || !/^1[3-9]\d{9}$/.test(phone)) return showLoginError('请输入正确的11位手机号');
       if (!username || !password) return showLoginError('请填写用户名和密码');
       if (password !== password2) return showLoginError('两次密码不一致');
       if (password.length < 6) return showLoginError('密码至少6位');
@@ -7467,7 +7473,7 @@ Style: ${stylePrompt}
         const res = await fetch(API_BASE + '/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password, nickname })
+          body: JSON.stringify({ phone, username, password, nickname })
         });
         const data = await res.json();
         if (!res.ok) { showLoginError(data.error || '注册失败'); return; }

@@ -53,7 +53,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260314y'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260315a'  # 更新此版本号以追踪部署
 
 # Gemini API Proxy 配置
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com'
@@ -158,6 +158,11 @@ def init_db():
         pass
     try:
         conn.execute('ALTER TABLE users ADD COLUMN tier TEXT DEFAULT "free"')
+    except:
+        pass
+    # 迁移：给 users 表添加 phone 列（手机号注册）
+    try:
+        conn.execute('ALTER TABLE users ADD COLUMN phone TEXT UNIQUE')
     except:
         pass
     # AI 使用量追踪表
@@ -911,21 +916,31 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
     # ---- 用户认证 ----
     def _auth_register(self, body):
+        phone = (body.get('phone') or '').strip()
         username = (body.get('username') or '').strip()
         password = body.get('password') or ''
         nickname = (body.get('nickname') or '').strip()
+        # 手机号必填且格式校验
+        import re as _re
+        if not _re.match(r'^1[3-9]\d{9}$', phone):
+            return self._send_json({'error': '请输入正确的11位手机号'}, 400)
         if len(username) < 2 or len(username) > 20:
             return self._send_json({'error': '用户名长度需2-20个字符'}, 400)
         if len(password) < 6:
             return self._send_json({'error': '密码至少6位'}, 400)
         conn = self._get_db()
+        # 检查手机号唯一性
+        phone_exists = conn.execute('SELECT id FROM users WHERE phone = ?', (phone,)).fetchone()
+        if phone_exists:
+            conn.close()
+            return self._send_json({'error': '该手机号已注册'}, 409)
         exists = conn.execute('SELECT id FROM users WHERE username = ?', (username,)).fetchone()
         if exists:
             conn.close()
             return self._send_json({'error': '用户名已存在'}, 409)
         pw_hash = self._hash_password(password)
-        conn.execute('INSERT INTO users (username, password_hash, nickname) VALUES (?,?,?)',
-                     (username, pw_hash, nickname or username))
+        conn.execute('INSERT INTO users (username, password_hash, nickname, phone) VALUES (?,?,?,?)',
+                     (username, pw_hash, nickname or username, phone))
         conn.commit()
         uid = conn.execute('SELECT last_insert_rowid() as id').fetchone()['id']
         # 自动登录：创建 session
@@ -941,9 +956,10 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         username = (body.get('username') or '').strip()
         password = body.get('password') or ''
         if not username or not password:
-            return self._send_json({'error': '请输入用户名和密码'}, 400)
+            return self._send_json({'error': '请输入用户名/手机号和密码'}, 400)
         conn = self._get_db()
-        user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+        # 支持用户名或手机号登录
+        user = conn.execute('SELECT * FROM users WHERE username = ? OR phone = ?', (username, username)).fetchone()
         if not user or not self._verify_password(password, user['password_hash']):
             conn.close()
             return self._send_json({'error': '用户名或密码错误'}, 401)
