@@ -2905,7 +2905,7 @@
       if (useProxy) {
         // 走服务器代理
         const isImageModel = model && (model.includes('image') || model.includes('banana') || model.includes('imagen'));
-        const proxyTimeout = isImageModel ? 200000 : (forceProxy ? 70000 : 30000);
+        const proxyTimeout = isImageModel ? 200000 : (forceProxy ? 120000 : 30000);
         try {
           const res = await fetch(getGeminiProxyAPIUrl(), {
             method: 'POST',
@@ -2922,7 +2922,21 @@
         } catch (e) {
           if (e.fromProxy) throw e; // Gemini 本身的错误，不重试
           if (forceProxy) {
-            throw new Error('代理服务连接失败，请稍后重试（服务可能在启动中或网络波动）');
+            // 自动重试一次
+            try {
+              const res2 = await fetch(getGeminiProxyAPIUrl(), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                signal: AbortSignal.timeout(proxyTimeout),
+                body: JSON.stringify({ apiKey, model, payload, action })
+              });
+              const data2 = await res2.json();
+              if (!res2.ok) throw { fromProxy: true, status: res2.status, data: data2 };
+              return { ok: true, data: data2 };
+            } catch (e2) {
+              if (e2.fromProxy) throw e2;
+              throw new Error('代理服务连接失败，请稍后重试（服务可能在启动中或网络波动）');
+            }
           }
           console.warn('[Gemini] Server proxy failed, trying direct:', e.message);
           // 代理网络错误，降级为直连
@@ -4605,7 +4619,7 @@ Style: ${stylePrompt}
 
       } catch (e) {
         toast('生成失败: ' + e.message, 'error');
-        updateGenProgress(progressEl, '❌ ' + e.message, 0);
+        updateGenProgress(progressEl, `❌ ${e.message} &nbsp;<button onclick="generatePosts()" style="padding:3px 12px; border:1px solid #ff4d6a; background:white; color:#ff4d6a; border-radius:4px; cursor:pointer; font-size:12px; vertical-align:middle;">🔄 重试</button>`, 0);
       } finally {
         btn.disabled = false;
         btn.textContent = '✨ 一键生成';
