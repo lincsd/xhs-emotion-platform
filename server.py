@@ -53,7 +53,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260314p'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260314q'  # 更新此版本号以追踪部署
 
 # Gemini API Proxy 配置
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com'
@@ -1273,7 +1273,13 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         model = body.get('model', 'gemini-2.5-flash')
         payload = body.get('payload', {})
         action = body.get('action', 'generateContent')  # generateContent or listModels
-        feature = body.get('feature', 'ai')  # 用于追踪功能类型
+        feature = body.get('feature', action)  # 用于追踪功能类型
+
+        # action 只允许合法的 Gemini API 动作，中文标签归入 feature
+        VALID_ACTIONS = ('generateContent', 'streamGenerateContent', 'listModels', 'countTokens')
+        if action not in VALID_ACTIONS:
+            feature = action  # 保留中文标签用于追踪
+            action = 'generateContent'
 
         if not api_key:
             return self._send_json({'error': 'Missing apiKey and server GEMINI_API_KEY'}, 400)
