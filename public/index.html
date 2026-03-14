@@ -1040,57 +1040,55 @@
     .sidebar-user .user-logout { font-size: 11px; color: rgba(255,255,255,0.5); cursor: pointer; }
     .sidebar-user .user-logout:hover { color: #ff6b81; }
 
-    /* ===== AI 积分徽章 ===== */
-    .credits-badge {
+    /* ===== AI 积分（融入用户区域） ===== */
+    .user-credits-line {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      cursor: pointer;
+    }
+    .user-credits-line:hover { color: rgba(255,255,255,0.7); }
+    .user-credits-line .ucl-gem { font-size: 10px; }
+    .user-credits-line .ucl-val { color: #ffd700; font-weight: 600; }
+    .user-credits-line .ucl-sep { margin: 0 2px; }
+    .user-credits-line .ucl-recharge {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.6);
+      border: none;
+      cursor: pointer;
+      margin-left: 2px;
+    }
+    .user-credits-line .ucl-recharge:hover { background: var(--primary); color: white; }
+
+    /* 手机端抽屉底部积分 */
+    .drawer-credits-line {
       display: flex;
       align-items: center;
       gap: 6px;
-      padding: 8px 12px;
-      margin: 8px 12px;
-      background: rgba(255,255,255,0.08);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .credits-badge:hover { background: rgba(255,255,255,0.15); }
-    .credits-badge .cb-icon { font-size: 16px; }
-    .credits-badge .cb-info { flex: 1; min-width: 0; }
-    .credits-badge .cb-label { font-size: 11px; color: rgba(255,255,255,0.5); }
-    .credits-badge .cb-value { font-size: 14px; font-weight: 700; color: #ffd700; }
-    .credits-badge .cb-free { font-size: 10px; color: rgba(255,255,255,0.4); }
-    .credits-badge .cb-btn {
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 10px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .mob-credits-bar {
-      display: none;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      background: #fff8e1;
+      padding: 10px 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
       font-size: 12px;
-      color: #8d6e00;
-      border-bottom: 1px solid #ffe082;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
     }
-    .mob-credits-bar .mcb-value { font-weight: 700; color: var(--primary); }
-    .mob-credits-bar .mcb-btn {
+    .drawer-credits-line:hover { color: rgba(255,255,255,0.8); }
+    .drawer-credits-line .dcl-val { color: #ffd700; font-weight: 600; }
+    .drawer-credits-line .dcl-btn {
       margin-left: auto;
       font-size: 11px;
       padding: 2px 10px;
       border-radius: 10px;
-      background: var(--primary);
-      color: white;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.7);
       border: none;
       cursor: pointer;
     }
-    @media (max-width: 768px) {
-      .mob-credits-bar { display: flex; }
-    }
+    .drawer-credits-line .dcl-btn:hover { background: var(--primary); color: white; }
 
     /* ===== 配额超限弹窗 ===== */
     .quota-modal-body { text-align: center; padding: 30px 20px; }
@@ -1463,29 +1461,21 @@
           <span class="icon">⚙️</span> API 设置
         </div>
       </div>
-      <div class="credits-badge" id="sidebar-credits" onclick="openModal('modal-redeem')" style="display:none;" title="点击充值">
-        <span class="cb-icon">💎</span>
-        <div class="cb-info">
-          <div class="cb-label">AI 积分</div>
-          <div><span class="cb-value" id="sidebar-credits-val">0</span> <span class="cb-free" id="sidebar-credits-free">今日免费 3/3</span></div>
-        </div>
-        <button class="cb-btn" onclick="event.stopPropagation(); openModal('modal-redeem')">充值</button>
-      </div>
       <div class="sidebar-user" id="sidebar-user" style="display:none;">
         <div class="user-avatar" id="user-avatar-icon">👤</div>
         <div class="user-info">
           <div class="user-name" id="user-display-name">用户</div>
+          <div class="user-credits-line" id="sidebar-credits" onclick="openModal('modal-redeem')" style="display:none;">
+            <span class="ucl-gem">💎</span>
+            <span class="ucl-val" id="sidebar-credits-val">0</span>
+            <span class="ucl-sep">·</span>
+            <span>免费<span id="sidebar-credits-free">3/3</span></span>
+            <button class="ucl-recharge" onclick="event.stopPropagation(); openModal('modal-redeem')">充值</button>
+          </div>
           <div class="user-logout" onclick="doLogout()">退出登录</div>
         </div>
       </div>
     </aside>
-
-    <!-- ===== 手机端积分栏 ===== -->
-    <div class="mob-credits-bar" id="mob-credits-bar">
-      💎 今日免费 <span class="mcb-value" id="mob-free-remain">3/3</span>
-      &nbsp;|&nbsp; 积分 <span class="mcb-value" id="mob-credits-val">0</span>
-      <button class="mcb-btn" onclick="openModal('modal-redeem')">充值</button>
-    </div>
 
     <!-- ===== 手机端顶部栏 ===== -->
     <div class="mobile-top-bar" id="mobile-top-bar">
@@ -1537,6 +1527,11 @@
         <div class="nav-item mob-nav" data-page="account" onclick="mobileSwitchPage('account')"><span class="icon">📈</span> 账号数据</div>
         <div class="nav-item mob-nav" data-page="multi-account" onclick="mobileSwitchPage('multi-account')"><span class="icon">👥</span> 多账号管理</div>
         <div class="nav-item mob-nav" onclick="openModal('modal-settings'); toggleMobileDrawer();"><span class="icon">⚙️</span> API 设置</div>
+      </div>
+      <div class="drawer-credits-line" id="drawer-credits" onclick="openModal('modal-redeem'); toggleMobileDrawer();" style="display:none;">
+        💎 积分 <span class="dcl-val" id="drawer-credits-val">0</span>
+        &nbsp;·&nbsp; 免费 <span id="drawer-free-remain">3/3</span>
+        <button class="dcl-btn" onclick="event.stopPropagation(); openModal('modal-redeem'); toggleMobileDrawer();">充值</button>
       </div>
     </nav>
 
@@ -7238,18 +7233,22 @@ Style: ${stylePrompt}
 
     function updateCreditsUI() {
       const { credits, todayUsed, freeLimit, freeRemaining } = userCreditsInfo;
-      // Sidebar
+      // Sidebar user area (desktop)
       const sbc = document.getElementById('sidebar-credits');
       if (sbc) {
         sbc.style.display = 'flex';
         document.getElementById('sidebar-credits-val').textContent = credits;
-        document.getElementById('sidebar-credits-free').textContent = `今日免费 ${freeRemaining}/${freeLimit}`;
+        document.getElementById('sidebar-credits-free').textContent = `${freeRemaining}/${freeLimit}`;
       }
-      // Mobile bar
-      const mfr = document.getElementById('mob-free-remain');
-      if (mfr) mfr.textContent = `${freeRemaining}/${freeLimit}`;
-      const mcv = document.getElementById('mob-credits-val');
-      if (mcv) mcv.textContent = credits;
+      // Mobile drawer bottom
+      const dcl = document.getElementById('drawer-credits');
+      if (dcl) {
+        dcl.style.display = 'flex';
+        const dv = document.getElementById('drawer-credits-val');
+        if (dv) dv.textContent = credits;
+        const dfr = document.getElementById('drawer-free-remain');
+        if (dfr) dfr.textContent = `${freeRemaining}/${freeLimit}`;
+      }
       // Redeem modal
       const rcd = document.getElementById('redeem-credits-display');
       if (rcd) rcd.textContent = credits;
