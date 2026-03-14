@@ -2134,9 +2134,9 @@
         <div class="form-group">
           <label>🎨 配图生成模型</label>
           <select id="settings-image-model" class="form-control">
-            <option value="gemini-2.5-flash-image">Nano Banana（推荐）</option>
-            <option value="nano-banana-pro-preview">Nano Banana Pro（更精细）</option>
-            <option value="gemini-3.1-flash-image-preview">Nano Banana 2（最新）</option>
+            <option value="gemini-3.1-flash-image-preview">Nano Banana 2（优先）</option>
+            <option value="nano-banana-pro-preview">Nano Banana Pro（第二优先）</option>
+            <option value="gemini-2.5-flash-image">Nano Banana（第三优先）</option>
             <option value="gemini-2.0-flash">Gemini 2.0 Flash（备选）</option>
           </select>
           <small style="color:var(--text-light);display:block;margin-top:4px;">用于生成笔记配图的 AI 图片模型，Nano Banana 系列专为图片生成优化</small>
@@ -2859,7 +2859,7 @@
     function getGeminiKey() { return localStorage.getItem('xhs_gemini_key') || ''; }
     function getGeminiModel() { return localStorage.getItem('xhs_gemini_model') || 'gemini-2.5-flash'; }
     function getImageStyle() { return localStorage.getItem('xhs_image_style') || 'xiaohongshu'; }
-    function getImageModel() { return localStorage.getItem('xhs_image_model') || 'gemini-2.5-flash-image'; }
+    function getImageModel() { return localStorage.getItem('xhs_image_model') || 'gemini-3.1-flash-image-preview'; }
     function getContentImageCount() { return parseInt(localStorage.getItem('xhs_content_image_count') || '2'); }
     function normalizeGeminiProxyBase(raw) {
       let value = (raw || '').trim().replace(/\/+$/, '');
@@ -3839,10 +3839,10 @@ ${sourceInfo}
       const apiKey = getGeminiKey();
       const imageModel = getImageModel();
       const candidates = [
-        imageModel,
-        'gemini-2.5-flash-image',
+        'gemini-3.1-flash-image-preview',
         'nano-banana-pro-preview',
-        'gemini-3.1-flash-image-preview'
+        'gemini-2.5-flash-image',
+        imageModel
       ].filter((m, i, arr) => m && arr.indexOf(m) === i);
 
       const payload = {
