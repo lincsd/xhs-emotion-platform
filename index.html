@@ -1039,6 +1039,230 @@
     .sidebar-user .user-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .sidebar-user .user-logout { font-size: 11px; color: rgba(255,255,255,0.5); cursor: pointer; }
     .sidebar-user .user-logout:hover { color: #ff6b81; }
+
+    /* ===== 手机端底部导航 ===== */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: white;
+      border-top: 1px solid var(--border);
+      z-index: 200;
+      padding: 4px 0 env(safe-area-inset-bottom, 0);
+    }
+    .mobile-bottom-nav-inner {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .mobile-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding: 6px 4px;
+      font-size: 10px;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: color 0.2s;
+      border: none;
+      background: none;
+      min-width: 0;
+      flex: 1;
+    }
+    .mobile-tab .mob-icon { font-size: 20px; line-height: 1; }
+    .mobile-tab.active { color: var(--primary); }
+    .mobile-tab.active .mob-label { font-weight: 600; }
+
+    /* 手机端侧边栏抽屉 */
+    .mobile-drawer-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 300;
+    }
+    .mobile-drawer-overlay.active { display: block; }
+    .mobile-drawer {
+      position: fixed;
+      top: 0; left: -280px; bottom: 0;
+      width: 280px;
+      background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+      z-index: 301;
+      overflow-y: auto;
+      transition: transform 0.3s ease;
+      padding-bottom: env(safe-area-inset-bottom, 20px);
+    }
+    .mobile-drawer.active { transform: translateX(280px); }
+
+    /* ===== 手机端顶部栏 ===== */
+    .mobile-top-bar {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 50px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: white;
+      z-index: 199;
+      align-items: center;
+      padding: 0 12px;
+      gap: 10px;
+    }
+    .mobile-top-bar .mob-hamburger {
+      background: none; border: none; color: white;
+      font-size: 22px; cursor: pointer; padding: 4px 8px;
+    }
+    .mobile-top-bar .mob-title {
+      flex: 1;
+      font-size: 15px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .mobile-top-bar .mob-skill-sw {
+      font-size: 12px;
+      padding: 4px 8px;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* ===== 响应式：手机端 ≤768px ===== */
+    @media (max-width: 768px) {
+      /* 隐藏桌面侧边栏，显示手机导航 */
+      .sidebar { display: none; }
+      .mobile-bottom-nav { display: block; }
+      .mobile-top-bar { display: flex; }
+
+      .main {
+        margin-left: 0;
+        padding: 58px 10px 68px 10px;
+        max-width: 100vw;
+      }
+
+      /* 页面标题 */
+      .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .page-header h2 { font-size: 18px; }
+
+      /* 统计卡片 */
+      .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .stat-card { padding: 12px; }
+      .stat-card .stat-value { font-size: 20px; }
+      .stat-card .stat-icon { font-size: 22px; }
+
+      /* 通用卡片 */
+      .card { padding: 12px; margin-bottom: 10px; }
+
+      /* 按钮组 */
+      .btn-group { flex-wrap: wrap; }
+      .btn { padding: 8px 12px; font-size: 13px; }
+
+      /* 表单行 */
+      .form-row { grid-template-columns: 1fr; }
+
+      /* 表格横向滚动 */
+      .card:has(table) { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      table { min-width: 500px; }
+      table th, table td { padding: 8px 6px; font-size: 12px; }
+
+      /* 内容生成：从两栏变单栏 */
+      .content-split { grid-template-columns: 1fr; }
+
+      /* 筛选栏堆叠 */
+      .filter-bar { flex-direction: column; align-items: stretch; }
+      .filter-bar .form-control { width: 100%; min-width: 0; }
+
+      /* 模态框全屏 */
+      .modal-overlay { padding: 0; align-items: flex-end; }
+      .modal {
+        max-width: 100%;
+        border-radius: 16px 16px 0 0;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      .modal-header { padding: 14px 16px; }
+      .modal-header h3 { font-size: 16px; }
+      .modal-body { padding: 14px 16px; }
+      .modal-footer { padding: 12px 16px; }
+
+      /* 日历紧凑 */
+      .calendar-cell { min-height: 48px; padding: 2px; }
+      .calendar-cell .day-num { font-size: 11px; }
+      .calendar-event { font-size: 9px; }
+      .calendar-header-cell { font-size: 10px; padding: 4px; }
+
+      /* 预览卡片 */
+      .preview-card { width: 100%; max-width: 280px; }
+
+      /* 账号包装 */
+      .branding-preview-card { width: 100%; max-width: 320px; }
+      .branding-gallery { grid-template-columns: 1fr; }
+
+      /* 变现路线图 */
+      .roadmap { flex-direction: column; }
+      .roadmap-step { min-width: auto; }
+      .roadmap-step::after { display: none; }
+
+      /* 策略卡片 */
+      .strategy-grid { grid-template-columns: 1fr; }
+
+      /* 收入统计 */
+      .income-summary { grid-template-columns: repeat(2, 1fr); }
+      .income-summary-card .inc-value { font-size: 18px; }
+
+      /* 配图画廊 */
+      .content-images-gallery { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+
+      /* 笔记列表 */
+      .post-list-item { flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 10px; }
+      .post-list-item .post-actions { width: 100%; justify-content: flex-end; }
+
+      /* 发布时间热力图 */
+      .time-heatmap { height: 60px; }
+      .time-slot-time { font-size: 8px; }
+
+      /* Tab栏 */
+      .tab-bar { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .tab-item { padding: 8px 12px; font-size: 13px; white-space: nowrap; }
+
+      /* 竞品/评论/标签页卡片 */
+      .competitor-card, .account-card { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .trending-card { padding: 12px; }
+      .tag-rec { padding: 4px 10px; font-size: 12px; }
+
+      /* 登录页手机端 */
+      .login-page { padding: 16px; }
+      .login-box { border-radius: 16px; }
+      .login-box-header { padding: 24px 16px 16px; }
+      .login-box-header h1 { font-size: 22px; }
+      .login-box-body { padding: 20px 16px; }
+
+      /* Toast */
+      .toast-container { top: 56px; right: 10px; left: 10px; }
+      .toast { font-size: 13px; padding: 10px 14px; }
+
+      /* 选中计数栏 */
+      .selection-bar { flex-wrap: wrap; }
+    }
+
+    /* ===== 平板中间尺寸 ===== */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .sidebar { width: 200px; }
+      .main { margin-left: 200px; max-width: calc(100vw - 200px); padding: 20px; }
+      .sidebar-header h1 { font-size: 16px; }
+      .nav-item { font-size: 13px; padding: 8px 10px; }
+      .stat-grid { grid-template-columns: repeat(3, 1fr); }
+    }
   </style>
 </head>
 <body>
@@ -1187,6 +1411,80 @@
         </div>
       </div>
     </aside>
+
+    <!-- ===== 手机端顶部栏 ===== -->
+    <div class="mobile-top-bar" id="mobile-top-bar">
+      <button class="mob-hamburger" onclick="toggleMobileDrawer()">☰</button>
+      <div class="mob-title" id="mob-page-title">📊 数据看板</div>
+      <select class="mob-skill-sw" id="mob-skill-switcher" onchange="switchSkill(this.value)">
+        <option value="情感">🌸 情感</option>
+        <option value="美食">🍜 美食</option>
+        <option value="旅行">✈️ 旅行</option>
+        <option value="健身">💪 健身</option>
+        <option value="科技">📱 科技</option>
+        <option value="母婴">👶 母婴</option>
+        <option value="穿搭">👗 穿搭</option>
+      </select>
+    </div>
+
+    <!-- ===== 手机端侧边栏抽屉 ===== -->
+    <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" onclick="toggleMobileDrawer()"></div>
+    <nav class="mobile-drawer" id="mobile-drawer">
+      <div class="sidebar-header">
+        <h1>🌸 情感运营台</h1>
+        <p>小红书自动化管理</p>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-title">核心功能</div>
+        <div class="nav-item mob-nav active" data-page="dashboard" onclick="mobileSwitchPage('dashboard')"><span class="icon">📊</span> 数据看板</div>
+        <div class="nav-item mob-nav" data-page="generator" onclick="mobileSwitchPage('generator')"><span class="icon">✨</span> 内容生成</div>
+        <div class="nav-item mob-nav" data-page="posts" onclick="mobileSwitchPage('posts')"><span class="icon">📝</span> 笔记管理</div>
+        <div class="nav-item mob-nav" data-page="calendar" onclick="mobileSwitchPage('calendar')"><span class="icon">📅</span> 发布日历</div>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-title">变现管理</div>
+        <div class="nav-item mob-nav" data-page="income" onclick="mobileSwitchPage('income')"><span class="icon">💰</span> 收入追踪</div>
+        <div class="nav-item mob-nav" data-page="monetization" onclick="mobileSwitchPage('monetization')"><span class="icon">🚀</span> 变现方案</div>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-title">智能工具</div>
+        <div class="nav-item mob-nav" data-page="forbidden" onclick="mobileSwitchPage('forbidden')"><span class="icon">🚫</span> 违禁词检测</div>
+        <div class="nav-item mob-nav" data-page="score" onclick="mobileSwitchPage('score')"><span class="icon">💯</span> 笔记评分</div>
+        <div class="nav-item mob-nav" data-page="trending" onclick="mobileSwitchPage('trending')"><span class="icon">🔥</span> 热门话题</div>
+        <div class="nav-item mob-nav" data-page="tags" onclick="mobileSwitchPage('tags')"><span class="icon">🏷️</span> 标签引擎</div>
+        <div class="nav-item mob-nav" data-page="rewrite" onclick="mobileSwitchPage('rewrite')"><span class="icon">🔄</span> 笔记改写</div>
+        <div class="nav-item mob-nav" data-page="comments" onclick="mobileSwitchPage('comments')"><span class="icon">💬</span> 评论话术</div>
+        <div class="nav-item mob-nav" data-page="competitor" onclick="mobileSwitchPage('competitor')"><span class="icon">🔍</span> 竞品分析</div>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-title">账号管理</div>
+        <div class="nav-item mob-nav" data-page="branding" onclick="mobileSwitchPage('branding')"><span class="icon">🎀</span> 账号包装</div>
+        <div class="nav-item mob-nav" data-page="account" onclick="mobileSwitchPage('account')"><span class="icon">📈</span> 账号数据</div>
+        <div class="nav-item mob-nav" data-page="multi-account" onclick="mobileSwitchPage('multi-account')"><span class="icon">👥</span> 多账号管理</div>
+        <div class="nav-item mob-nav" onclick="openModal('modal-settings'); toggleMobileDrawer();"><span class="icon">⚙️</span> API 设置</div>
+      </div>
+    </nav>
+
+    <!-- ===== 手机端底部导航 ===== -->
+    <div class="mobile-bottom-nav" id="mobile-bottom-nav">
+      <div class="mobile-bottom-nav-inner">
+        <div class="mobile-tab active" data-page="dashboard" onclick="mobileSwitchPage('dashboard')">
+          <span class="mob-icon">📊</span><span class="mob-label">看板</span>
+        </div>
+        <div class="mobile-tab" data-page="generator" onclick="mobileSwitchPage('generator')">
+          <span class="mob-icon">✨</span><span class="mob-label">生成</span>
+        </div>
+        <div class="mobile-tab" data-page="posts" onclick="mobileSwitchPage('posts')">
+          <span class="mob-icon">📝</span><span class="mob-label">笔记</span>
+        </div>
+        <div class="mobile-tab" data-page="calendar" onclick="mobileSwitchPage('calendar')">
+          <span class="mob-icon">📅</span><span class="mob-label">日历</span>
+        </div>
+        <div class="mobile-tab" data-page="more" onclick="toggleMobileDrawer()">
+          <span class="mob-icon">☰</span><span class="mob-label">更多</span>
+        </div>
+      </div>
+    </div>
 
     <!-- ===== 主内容区 ===== -->
     <main class="main">
@@ -2666,6 +2964,7 @@
       if (!SKILL_TEMPLATES[skillName]) return;
       currentSkillName = skillName;
       localStorage.setItem('xhs_current_skill', skillName);
+      syncMobileSkillSwitcher(skillName);
       const sk = getCurrentSkill();
       categoryColors = sk.categoryColors;
       categoryEmojis = sk.categoryEmojis;
@@ -4475,9 +4774,21 @@ Style: ${stylePrompt}
       currentPage = page;
       document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
       document.getElementById(`page-${page}`).classList.remove('hidden');
-      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-      document.querySelector(`.nav-item[data-page="${page}"]`).classList.add('active');
-      
+      document.querySelectorAll('.sidebar .nav-item').forEach(n => n.classList.remove('active'));
+      const sidebarActive = document.querySelector(`.sidebar .nav-item[data-page="${page}"]`);
+      if (sidebarActive) sidebarActive.classList.add('active');
+
+      // 同步手机端底部导航 & 抽屉导航高亮
+      document.querySelectorAll('.mobile-tab').forEach(t => t.classList.remove('active'));
+      const mobTab = document.querySelector(`.mobile-tab[data-page="${page}"]`);
+      if (mobTab) mobTab.classList.add('active');
+      document.querySelectorAll('.mob-nav').forEach(n => n.classList.remove('active'));
+      const mobDrawerItem = document.querySelector(`.mob-nav[data-page="${page}"]`);
+      if (mobDrawerItem) mobDrawerItem.classList.add('active');
+
+      // 更新手机顶部标题
+      updateMobileTitle(page);
+
       switch(page) {
         case 'dashboard': loadDashboard(); break;
         case 'branding': loadBrandingPage(); break;
@@ -4497,7 +4808,51 @@ Style: ${stylePrompt}
       }
     }
 
-    document.querySelectorAll('.nav-item').forEach(item => {
+    // ============ 手机端导航逻辑 ============
+    const PAGE_TITLES = {
+      dashboard: '📊 数据看板', generator: '✨ 内容生成', posts: '📝 笔记管理',
+      calendar: '📅 发布日历', income: '💰 收入追踪', monetization: '🚀 变现方案',
+      forbidden: '🚫 违禁词检测', score: '💯 笔记评分', trending: '🔥 热门话题',
+      tags: '🏷️ 标签引擎', rewrite: '🔄 笔记改写', comments: '💬 评论话术',
+      competitor: '🔍 竞品分析', branding: '🎀 账号包装', account: '📈 账号数据',
+      'multi-account': '👥 多账号管理'
+    };
+
+    function updateMobileTitle(page) {
+      const el = document.getElementById('mob-page-title');
+      if (el) el.textContent = PAGE_TITLES[page] || page;
+    }
+
+    function toggleMobileDrawer() {
+      const overlay = document.getElementById('mobile-drawer-overlay');
+      const drawer = document.getElementById('mobile-drawer');
+      if (overlay && drawer) {
+        overlay.classList.toggle('active');
+        drawer.classList.toggle('active');
+      }
+    }
+
+    function mobileSwitchPage(page) {
+      // 关闭抽屉
+      const overlay = document.getElementById('mobile-drawer-overlay');
+      const drawer = document.getElementById('mobile-drawer');
+      if (overlay) overlay.classList.remove('active');
+      if (drawer) drawer.classList.remove('active');
+      // 切换页面
+      switchPage(page);
+      // 滚动到顶部
+      window.scrollTo(0, 0);
+    }
+
+    // 同步手机 skill-switcher
+    function syncMobileSkillSwitcher(value) {
+      const mob = document.getElementById('mob-skill-switcher');
+      const desk = document.getElementById('skill-switcher');
+      if (mob) mob.value = value;
+      if (desk) desk.value = value;
+    }
+
+    document.querySelectorAll('.sidebar .nav-item').forEach(item => {
       if (item.dataset.page) {
         item.addEventListener('click', () => switchPage(item.dataset.page));
       }
