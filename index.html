@@ -6406,7 +6406,8 @@ Style: ${stylePrompt}
           generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
         };
         const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'AI评分优化');
-        const text = result?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        const resData = result?.data || result;
+        const text = resData?.candidates?.[0]?.content?.parts?.[0]?.text || '';
         const json = _extractJsonFromText(text);
         let html = '<div class="card" style="background:#f0f8ff; margin-top:16px;">';
         html += '<h4>🤖 AI 优化建议</h4>';
@@ -6432,7 +6433,8 @@ Style: ${stylePrompt}
         generationConfig: { temperature: 0.7, maxOutputTokens: 2048 }
       };
       const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '热门话题搜索');
-      const text = result?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('') || '';
+      const resData = result?.data || result;
+      const text = resData?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('') || '';
       try { return JSON.parse(text.match(/\[[\s\S]*\]/)?.[0] || '[]'); } catch { return []; }
     }
 
@@ -6486,7 +6488,8 @@ Style: ${stylePrompt}
           generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
         };
         const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '标签生成');
-        const text = result?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('') || '';
+        const resData = result?.data || result;
+        const text = resData?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('') || '';
         const json = _extractJsonFromText(text);
         let html = '';
         const allTags = [];
@@ -6683,7 +6686,8 @@ Style: ${stylePrompt}
           generationConfig: { temperature: 0.8, maxOutputTokens: 1024 }
         };
         const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '生成评论话术');
-        const text = result?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        const resData = result?.data || result;
+        const text = resData?.candidates?.[0]?.content?.parts?.[0]?.text || '';
         const arr = JSON.parse(text.match(/\[[\s\S]*\]/)?.[0] || '[]');
         if (arr.length) {
           saveCommentTemplatesList(arr);
@@ -6799,7 +6803,8 @@ Style: ${stylePrompt}
           generationConfig: { temperature: 0.7, maxOutputTokens: 4096 }
         };
         const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '竞品分析');
-        const text = result?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('\n') || '未获取到分析结果';
+        const resData = result?.data || result;
+        const text = resData?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('\n') || '未获取到分析结果';
         document.getElementById('competitor-analysis').innerHTML = `<div class="card" style="white-space:pre-wrap;line-height:1.8;">${text}</div>`;
       } catch (e) {
         document.getElementById('competitor-analysis').innerHTML = `<div class="forbidden-hit">分析失败: ${e.message}</div>`;
@@ -6892,7 +6897,8 @@ Style: ${stylePrompt}
           generationConfig: { temperature: 0.8, maxOutputTokens: 2048 }
         };
         const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, '笔记改写');
-        const text = result?.candidates?.[0]?.content?.parts?.[0]?.text || '改写失败';
+        const resData = result?.data || result;
+        const text = resData?.candidates?.[0]?.content?.parts?.[0]?.text || '改写失败';
         window._lastRewriteResult = text;
         document.getElementById('rewrite-result').innerHTML = `<div class="card" style="background:#f8f9ff;white-space:pre-wrap;line-height:1.8;">${text}</div>`;
       } catch (e) {
