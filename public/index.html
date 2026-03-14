@@ -2183,6 +2183,12 @@
     // GitHub Pages 或其他静态托管时，使用 Render 后端；本地开发时用相对路径
     const RENDER_BACKEND = 'https://xhs-gemini-proxy.onrender.com';
     const IS_GITHUB_PAGES = location.hostname.endsWith('.github.io') || location.hostname.endsWith('.pages.dev');
+    const UA = navigator.userAgent || '';
+    const IS_CN_EMBEDDED_BROWSER = /baiduboxapp|baidubrowser|quark|qqbrowser|mqqbrowser|micromessenger/i.test(UA);
+    if (IS_GITHUB_PAGES && IS_CN_EMBEDDED_BROWSER) {
+      const target = `${RENDER_BACKEND}/?from=github-pages`;
+      if (location.href !== target) location.replace(target);
+    }
     let API_BASE = IS_GITHUB_PAGES ? RENDER_BACKEND : '';
 
     // ============ Skill 系统 — 多账号类型复用 ============
