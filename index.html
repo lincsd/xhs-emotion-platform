@@ -3710,17 +3710,19 @@
         '温暖': ['世界很美好','小确幸','今天也要开心','被温暖了'],
         '释怀': ['放下了','不再执着','想通了','轻装前行'],
       },
-      pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; },
+      pick(arr) { if (!arr || !arr.length) return ''; return arr[Math.floor(Math.random() * arr.length)]; },
       generate(category) {
         const cats = Object.keys(this.hooks);
         if (!category) category = this.pick(cats);
         const defCat = _s().defaultCategory;
-        const title = this.pick(this.titleTemplates[category] || this.titleTemplates[defCat]);
-        const hook = this.pick(this.hooks[category] || this.hooks[defCat]);
-        const body = this.pick(this.bodyTemplates[category] || this.bodyTemplates[defCat]);
+        // If neither category nor defCat has templates, fall back to first available template category
+        const fallbackCat = this.hooks[category] ? category : (this.hooks[defCat] ? defCat : cats[0]);
+        const title = this.pick(this.titleTemplates[fallbackCat]);
+        const hook = this.pick(this.hooks[fallbackCat]);
+        const body = this.pick(this.bodyTemplates[fallbackCat]);
         const ending = this.pick(this.endings);
-        const coverText = this.pick(this.coverTexts[category] || this.coverTexts[defCat]);
-        const allTags = (this.tagSets[category] || this.tagSets[defCat]).slice();
+        const coverText = this.pick(this.coverTexts[fallbackCat]);
+        const allTags = (this.tagSets[fallbackCat] || []).slice();
         allTags.sort(() => Math.random() - 0.5);
         const tags = allTags.slice(0, 5).join(',');
         return { title, content: `${hook}\n\n${body}${ending}`, category, tags, cover_text: coverText };
@@ -4020,12 +4022,8 @@ ${keywords.map(k => `- "${k}"`).join('\n')}
         }
         throw new Error(err.error?.message || e.message || `Gemini API 错误`);
       }
-      // 提取所有文本部分（搜索结果+分析）
-      const parts = data.candidates?.[0]?.content?.parts || [];
-      let analysisText = '';
-      for (const part of parts) {
-        if (part.text) analysisText += part.text + '\n';
-      }
+      // 提取所有文本部分（过滤掉 thinking 部分）
+      const analysisText = _extractGeminiText(data);
 
       // 提取 grounding 来源信息
       const groundingMeta = data.candidates?.[0]?.groundingMetadata;
@@ -4085,7 +4083,7 @@ ${keywords.map(k => `- "${k}"`).join('\n')}
         throw new Error(err.error?.message || e.message || `Gemini API 错误`);
       }
 
-      const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      const text = _extractGeminiText(data);
       return { analysisText: text, sources: [], searchUsed: false };
     }
 
@@ -4164,7 +4162,7 @@ ${sourceInfo}
         throw new Error(err.error?.message || e.message || `Gemini API 错误`);
       }
 
-      const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      const text = _extractGeminiText(data);
 
       // 从返回文本中提取 JSON
       let posts = _extractJsonFromText(text);
@@ -4892,7 +4890,7 @@ Style: ${stylePrompt}
         };
 
         const result = await callGeminiAPI(getGeminiKey(), getGeminiModel(), payload);
-        let pack = _extractJsonFromText(result.data.candidates?.[0]?.content?.parts?.[0]?.text || '{}');
+        let pack = _extractJsonFromText(_extractGeminiText(result.data) || '{}');
 
         updateGenProgress(progressEl, '🖼️ 正在生成头像图...', 45);
         btn.textContent = '🖼️ 生成头像中...';
