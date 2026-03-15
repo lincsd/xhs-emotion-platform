@@ -1371,6 +1371,10 @@
             <label>确认密码</label>
             <input type="password" class="form-control" id="reg-password2" placeholder="再次输入密码" autocomplete="new-password">
           </div>
+          <div class="form-group">
+            <label>邀请码（可选）</label>
+            <input type="text" class="form-control" id="reg-invite-code" placeholder="有邀请码可填写，双方得积分" style="text-transform:uppercase;">
+          </div>
           <button class="btn btn-primary" onclick="doRegister()" id="btn-register">✨ 注 册</button>
         </div>
       </div>
@@ -1416,6 +1420,12 @@
         </div>
         <div class="nav-item" data-page="monetization">
           <span class="icon">🚀</span> 变现方案
+        </div>
+        <div class="nav-item" data-page="purchase">
+          <span class="icon">💎</span> 积分商城
+        </div>
+        <div class="nav-item" data-page="invite">
+          <span class="icon">🎁</span> 邀请赚钱
         </div>
       </div>
       <div class="nav-group">
@@ -1474,7 +1484,7 @@
             <span class="ucl-val" id="sidebar-credits-val">0</span>
             <span class="ucl-sep">·</span>
             <span>免费<span id="sidebar-credits-free">3/3</span></span>
-            <button class="ucl-recharge" onclick="event.stopPropagation(); openModal('modal-redeem')">充值</button>
+            <button class="ucl-recharge" onclick="event.stopPropagation(); switchPage('purchase')">充值</button>
           </div>
           <div class="user-logout" onclick="doLogout()">退出登录</div>
         </div>
@@ -1515,6 +1525,8 @@
         <div class="nav-group-title">变现管理</div>
         <div class="nav-item mob-nav" data-page="income" onclick="mobileSwitchPage('income')"><span class="icon">💰</span> 收入追踪</div>
         <div class="nav-item mob-nav" data-page="monetization" onclick="mobileSwitchPage('monetization')"><span class="icon">🚀</span> 变现方案</div>
+        <div class="nav-item mob-nav" data-page="purchase" onclick="mobileSwitchPage('purchase')"><span class="icon">💎</span> 积分商城</div>
+        <div class="nav-item mob-nav" data-page="invite" onclick="mobileSwitchPage('invite')"><span class="icon">🎁</span> 邀请赚钱</div>
       </div>
       <div class="nav-group">
         <div class="nav-group-title">智能工具</div>
@@ -1536,7 +1548,7 @@
       <div class="drawer-credits-line" id="drawer-credits" onclick="openModal('modal-redeem'); toggleMobileDrawer();" style="display:none;">
         💎 积分 <span class="dcl-val" id="drawer-credits-val">0</span>
         &nbsp;·&nbsp; 免费 <span id="drawer-free-remain">3/3</span>
-        <button class="dcl-btn" onclick="event.stopPropagation(); openModal('modal-redeem'); toggleMobileDrawer();">充值</button>
+        <button class="dcl-btn" onclick="event.stopPropagation(); switchPage('purchase'); toggleMobileDrawer();">充值</button>
       </div>
       <div style="padding:6px 16px;font-size:10px;color:rgba(255,255,255,0.3);text-align:center;" id="drawer-version"></div>
     </nav>
@@ -1853,6 +1865,175 @@
 
         <h3 style="margin-bottom:16px;">💡 变现策略</h3>
         <div class="strategy-grid" id="strategy-grid"></div>
+      </section>
+
+      <!-- ===== 积分商城 ===== -->
+      <section id="page-purchase" class="page hidden">
+        <div class="page-header">
+          <div>
+            <h2>💎 积分商城</h2>
+            <p class="subtitle">选择套餐充值积分，解锁全部 AI 功能</p>
+          </div>
+        </div>
+
+        <!-- 当前积分 -->
+        <div class="card" style="text-align:center; margin-bottom:24px; background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); color:#fff;">
+          <div style="font-size:14px; opacity:.8;">当前积分余额</div>
+          <div style="font-size:48px; font-weight:700;" id="purchase-credits-display">0</div>
+          <div style="font-size:13px; opacity:.7;">今日免费 <span id="purchase-free-info">3/3</span> · 积分永久有效</div>
+        </div>
+
+        <!-- 套餐选择 -->
+        <h3 style="margin-bottom:16px;">🛒 选择套餐</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:16px; margin-bottom:24px;" id="packages-grid"></div>
+
+        <!-- 兑换码区域 -->
+        <div class="card" style="margin-bottom:24px;">
+          <h3 style="margin-bottom:12px;">🎟️ 兑换码充值</h3>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <input type="text" id="purchase-redeem-input" class="form-control" placeholder="请输入兑换码" style="flex:1; text-transform:uppercase; max-width:300px;">
+            <button class="btn btn-primary" onclick="redeemCodeFromPurchase()">兑换</button>
+          </div>
+          <div id="purchase-redeem-result" style="margin-top:8px; font-size:13px;"></div>
+        </div>
+
+        <!-- 支付说明 -->
+        <div class="card" id="payment-instruction" style="display:none;">
+          <h3 style="margin-bottom:12px;">📱 支付方式</h3>
+          <div style="background:#fff9e6; border:1px solid #ffd700; border-radius:8px; padding:16px; margin-bottom:12px;">
+            <div style="font-weight:600; margin-bottom:8px;">订单号：<span id="pay-order-no" style="color:var(--primary); user-select:all;"></span></div>
+            <div style="font-size:14px; margin-bottom:8px;">应付金额：<strong style="font-size:24px; color:#e74c3c;">¥<span id="pay-amount"></span></strong></div>
+            <div style="font-size:13px; color:var(--text-light);">套餐：<span id="pay-pkg-name"></span> · <span id="pay-pkg-credits"></span> 积分</div>
+          </div>
+          <div style="background:#f0f8ff; border-radius:8px; padding:16px;">
+            <div style="font-weight:600; margin-bottom:8px;">💳 请按以下步骤完成支付：</div>
+            <ol style="font-size:13px; color:var(--text-light); padding-left:18px; line-height:2;">
+              <li>使用 <strong>微信</strong> 或 <strong>支付宝</strong> 转账至管理员</li>
+              <li>转账备注填写订单号：<strong id="pay-order-no2" style="color:var(--primary);"></strong></li>
+              <li>转账完成后等待管理员确认（通常 5-30 分钟）</li>
+              <li>确认后积分自动到账，可在此页面刷新查看</li>
+            </ol>
+          </div>
+          <div style="text-align:center; margin-top:16px;">
+            <button class="btn" onclick="document.getElementById('payment-instruction').style.display='none'">关闭</button>
+          </div>
+        </div>
+
+        <!-- 订单历史 -->
+        <div class="card">
+          <h3 style="margin-bottom:12px;">📋 我的订单</h3>
+          <div id="my-orders-list" style="font-size:13px; color:var(--text-light);">加载中...</div>
+        </div>
+      </section>
+
+      <!-- ===== 邀请赚钱 ===== -->
+      <section id="page-invite" class="page hidden">
+        <div class="page-header">
+          <div>
+            <h2>🎁 邀请赚钱</h2>
+            <p class="subtitle">分享邀请码，好友注册双方得积分 · 好友充值你赚佣金</p>
+          </div>
+        </div>
+
+        <!-- 邀请码卡片 -->
+        <div class="card" style="text-align:center; margin-bottom:24px; background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%); color:#fff;">
+          <div style="font-size:14px; opacity:.8; margin-bottom:4px;">我的邀请码</div>
+          <div style="font-size:36px; font-weight:700; letter-spacing:4px; user-select:all; margin-bottom:8px;" id="my-invite-code">---</div>
+          <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+            <button class="btn" style="background:rgba(255,255,255,.2); color:#fff; border:1px solid rgba(255,255,255,.4);" onclick="copyInviteCode()">📋 复制邀请码</button>
+            <button class="btn" style="background:rgba(255,255,255,.2); color:#fff; border:1px solid rgba(255,255,255,.4);" onclick="copyInviteLink()">🔗 复制邀请链接</button>
+          </div>
+        </div>
+
+        <!-- 奖励规则 -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:16px; margin-bottom:24px;">
+          <div class="card" style="text-align:center; background:#fff0f5;">
+            <div style="font-size:32px;">🎉</div>
+            <div style="font-weight:600; margin:8px 0 4px;">邀请奖励</div>
+            <div style="font-size:13px; color:var(--text-light);">每邀请1人注册</div>
+            <div style="font-size:24px; font-weight:700; color:var(--primary); margin-top:4px;" id="invite-reward-per">+20 积分</div>
+          </div>
+          <div class="card" style="text-align:center; background:#f0f8ff;">
+            <div style="font-size:32px;">🎊</div>
+            <div style="font-weight:600; margin:8px 0 4px;">好友也得</div>
+            <div style="font-size:13px; color:var(--text-light);">新用户注册即得</div>
+            <div style="font-size:24px; font-weight:700; color:#369bff; margin-top:4px;" id="invite-reward-invitee">+10 积分</div>
+          </div>
+          <div class="card" style="text-align:center; background:#f0fff0;">
+            <div style="font-size:32px;">💰</div>
+            <div style="font-weight:600; margin:8px 0 4px;">充值返佣</div>
+            <div style="font-size:13px; color:var(--text-light);">好友每次充值</div>
+            <div style="font-size:24px; font-weight:700; color:#2ecc71; margin-top:4px;" id="invite-commission-rate">15% 现金</div>
+          </div>
+          <div class="card" style="text-align:center; background:#fffff0;">
+            <div style="font-size:32px;">🏆</div>
+            <div style="font-weight:600; margin:8px 0 4px;">邀请上限</div>
+            <div style="font-size:13px; color:var(--text-light);">奖励积分上限</div>
+            <div style="font-size:24px; font-weight:700; color:#f0ad4e; margin-top:4px;" id="invite-max-rewards">50 人</div>
+          </div>
+        </div>
+
+        <!-- 我的数据 -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:16px; margin-bottom:24px;">
+          <div class="card" style="text-align:center;">
+            <div style="font-size:13px; color:var(--text-light);">已邀请人数</div>
+            <div style="font-size:28px; font-weight:700; color:var(--primary);" id="invite-total-count">0</div>
+          </div>
+          <div class="card" style="text-align:center;">
+            <div style="font-size:13px; color:var(--text-light);">获得积分奖励</div>
+            <div style="font-size:28px; font-weight:700; color:#f0ad4e;" id="invite-total-reward">0</div>
+          </div>
+          <div class="card" style="text-align:center;">
+            <div style="font-size:13px; color:var(--text-light);">累计佣金</div>
+            <div style="font-size:28px; font-weight:700; color:#2ecc71;" id="invite-total-commission">¥0</div>
+          </div>
+          <div class="card" style="text-align:center;">
+            <div style="font-size:13px; color:var(--text-light);">可提现余额</div>
+            <div style="font-size:28px; font-weight:700; color:#e74c3c;" id="invite-balance">¥0</div>
+          </div>
+        </div>
+
+        <!-- 提现区域 -->
+        <div class="card" style="margin-bottom:24px;">
+          <h3 style="margin-bottom:12px;">💳 申请提现</h3>
+          <div style="display:grid; grid-template-columns:1fr 1fr 2fr auto; gap:10px; align-items:end;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label style="font-size:12px;">提现金额</label>
+              <input type="number" id="withdraw-amount" class="form-control" placeholder="≥1元" min="1" step="0.01">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label style="font-size:12px;">提现方式</label>
+              <select id="withdraw-method" class="form-control">
+                <option value="wechat">微信</option>
+                <option value="alipay">支付宝</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label style="font-size:12px;">收款账号</label>
+              <input type="text" id="withdraw-account" class="form-control" placeholder="微信号或支付宝账号">
+            </div>
+            <button class="btn btn-primary" onclick="requestWithdrawal()" style="white-space:nowrap;">申请提现</button>
+          </div>
+          <div id="withdraw-result" style="margin-top:8px; font-size:13px;"></div>
+        </div>
+
+        <!-- 邀请排行榜 -->
+        <div class="card" style="margin-bottom:24px;">
+          <h3 style="margin-bottom:12px;">🏅 邀请排行榜</h3>
+          <div id="invite-leaderboard" style="font-size:13px;">加载中...</div>
+        </div>
+
+        <!-- 邀请记录 + 佣金明细 -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div class="card">
+            <h3 style="margin-bottom:12px;">📋 邀请记录</h3>
+            <div id="invite-records-list" style="font-size:13px; max-height:300px; overflow-y:auto;">加载中...</div>
+          </div>
+          <div class="card">
+            <h3 style="margin-bottom:12px;">💰 佣金明细</h3>
+            <div id="commission-records-list" style="font-size:13px; max-height:300px; overflow-y:auto;">加载中...</div>
+          </div>
+        </div>
       </section>
 
       <!-- ===== 账号数据 ===== -->
@@ -2575,7 +2756,8 @@
           <div id="redeem-result" style="margin-top:8px; font-size:13px;"></div>
         </div>
         <div style="margin-top:16px; padding:12px; background:#fff5f7; border-radius:8px; text-align:center;">
-          <p style="font-size:13px; color:var(--text-light);">💬 获取兑换码请联系管理员</p>
+          <p style="font-size:13px; color:var(--text-light); margin-bottom:8px;">💬 获取兑换码请联系管理员</p>
+          <button class="btn btn-primary" style="font-size:13px;" onclick="closeModal('modal-redeem'); switchPage('purchase');">💎 前往积分商城购买</button>
         </div>
       </div>
     </div>
@@ -5235,6 +5417,8 @@ Style: ${stylePrompt}
         case 'comments': loadCommentTemplates(); break;
         case 'competitor': loadCompetitors(); break;
         case 'multi-account': loadMultiAccounts(); break;
+        case 'purchase': loadPurchasePage(); break;
+        case 'invite': loadInvitePage(); break;
       }
     }
 
@@ -5245,7 +5429,7 @@ Style: ${stylePrompt}
       forbidden: '🚫 违禁词检测', score: '💯 笔记评分', trending: '🔥 热门话题',
       tags: '🏷️ 标签引擎', rewrite: '🔄 笔记改写', comments: '💬 评论话术',
       competitor: '🔍 竞品分析', branding: '🎀 账号包装', account: '📈 账号数据',
-      'multi-account': '👥 多账号管理'
+      'multi-account': '👥 多账号管理', purchase: '💎 积分商城', invite: '🎁 邀请赚钱'
     };
 
     function updateMobileTitle(page) {
@@ -7463,6 +7647,7 @@ Style: ${stylePrompt}
       const nickname = document.getElementById('reg-nickname').value.trim();
       const password = document.getElementById('reg-password').value;
       const password2 = document.getElementById('reg-password2').value;
+      const inviteCode = (document.getElementById('reg-invite-code')?.value || '').trim();
       if (!phone || !/^1[3-9]\d{9}$/.test(phone)) return showLoginError('请输入正确的11位手机号');
       if (!username || !password) return showLoginError('请填写用户名和密码');
       if (password !== password2) return showLoginError('两次密码不一致');
@@ -7473,7 +7658,7 @@ Style: ${stylePrompt}
         const res = await fetch(API_BASE + '/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ phone, username, password, nickname })
+          body: JSON.stringify({ phone, username, password, nickname, inviteCode })
         });
         const data = await res.json();
         if (!res.ok) { showLoginError(data.error || '注册失败'); return; }
@@ -7528,6 +7713,240 @@ Style: ${stylePrompt}
       const regPw2 = document.getElementById('reg-password2');
       if (regPw2) regPw2.addEventListener('keydown', e => { if (e.key === 'Enter') doRegister(); });
     });
+
+    // ============ 积分商城 ============
+    async function loadPurchasePage() {
+      // 加载积分信息
+      try {
+        const res = await fetch(API_BASE + '/api/user/credits', {
+          headers: { 'Authorization': 'Bearer ' + getAuthToken() }
+        });
+        const data = await res.json();
+        document.getElementById('purchase-credits-display').textContent = data.credits || 0;
+        document.getElementById('purchase-free-info').textContent =
+          `${data.freeRemaining || 0}/${data.freeLimit || 3}`;
+      } catch {}
+      // 加载套餐
+      try {
+        const res = await fetch(API_BASE + '/api/packages');
+        const data = await res.json();
+        const grid = document.getElementById('packages-grid');
+        grid.innerHTML = (data.packages || []).map(p => {
+          const perCredit = (p.price / p.credits).toFixed(2);
+          const badge = p.badge ? `<span style="position:absolute;top:-8px;right:-8px;background:#e74c3c;color:#fff;font-size:11px;padding:2px 8px;border-radius:10px;">${p.badge}</span>` : '';
+          return `<div class="card" style="position:relative;cursor:pointer;border:2px solid transparent;transition:all .2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='transparent'" onclick="createOrder('${p.id}')">
+            ${badge}
+            <div style="font-size:18px;font-weight:700;margin-bottom:4px;">${p.name}</div>
+            <div style="font-size:32px;font-weight:700;color:var(--primary);">${p.credits} <span style="font-size:14px;font-weight:400;">积分</span></div>
+            <div style="font-size:24px;font-weight:700;color:#e74c3c;margin:8px 0;">¥${p.price}</div>
+            <div style="font-size:12px;color:var(--text-light);">约 ¥${perCredit}/积分</div>
+          </div>`;
+        }).join('');
+      } catch {}
+      // 加载订单
+      loadMyOrders();
+    }
+
+    async function createOrder(packageId) {
+      try {
+        const res = await fetch(API_BASE + '/api/orders/create', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getAuthToken() },
+          body: JSON.stringify({ packageId })
+        });
+        const data = await res.json();
+        if (!res.ok) { toast(data.error || '创建订单失败', 'error'); return; }
+        // 显示支付说明
+        document.getElementById('pay-order-no').textContent = data.orderNo;
+        document.getElementById('pay-order-no2').textContent = data.orderNo;
+        document.getElementById('pay-amount').textContent = data.amount;
+        document.getElementById('pay-pkg-name').textContent = data.packageName;
+        document.getElementById('pay-pkg-credits').textContent = data.credits;
+        document.getElementById('payment-instruction').style.display = 'block';
+        document.getElementById('payment-instruction').scrollIntoView({ behavior: 'smooth' });
+        toast('订单已创建，请按提示完成支付', 'success');
+        loadMyOrders();
+      } catch {
+        toast('网络错误', 'error');
+      }
+    }
+
+    async function loadMyOrders() {
+      try {
+        const res = await fetch(API_BASE + '/api/orders/my', {
+          headers: { 'Authorization': 'Bearer ' + getAuthToken() }
+        });
+        const data = await res.json();
+        const el = document.getElementById('my-orders-list');
+        const orders = data.orders || [];
+        if (!orders.length) { el.innerHTML = '<p style="color:var(--text-light);">暂无订单</p>'; return; }
+        const statusMap = { pending: '⏳ 待支付', paid: '✅ 已完成', cancelled: '❌ 已取消' };
+        const statusColor = { pending: '#f0ad4e', paid: '#2ecc71', cancelled: '#999' };
+        el.innerHTML = `<table style="width:100%;border-collapse:collapse;">
+          <tr style="border-bottom:1px solid #eee;"><th style="text-align:left;padding:6px;">订单号</th><th>金额</th><th>积分</th><th>状态</th><th>时间</th></tr>
+          ${orders.map(o => `<tr style="border-bottom:1px solid #f5f5f5;">
+            <td style="padding:6px;font-family:monospace;font-size:12px;">${o.order_no}</td>
+            <td style="text-align:center;">¥${o.amount}</td>
+            <td style="text-align:center;">${o.credits}</td>
+            <td style="text-align:center;color:${statusColor[o.status] || '#999'};">${statusMap[o.status] || o.status}</td>
+            <td style="text-align:center;font-size:12px;">${(o.created_at||'').slice(5,16)}</td>
+          </tr>`).join('')}
+        </table>`;
+      } catch {}
+    }
+
+    async function redeemCodeFromPurchase() {
+      const input = document.getElementById('purchase-redeem-input');
+      const code = input.value.trim().toUpperCase();
+      if (!code) return;
+      const resultEl = document.getElementById('purchase-redeem-result');
+      try {
+        const res = await fetch(API_BASE + '/api/redeem', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getAuthToken() },
+          body: JSON.stringify({ code })
+        });
+        const data = await res.json();
+        if (!res.ok) { resultEl.innerHTML = `<span style="color:#e74c3c;">${data.error}</span>`; return; }
+        resultEl.innerHTML = `<span style="color:#2ecc71;">✅ 兑换成功！+${data.added} 积分，当前 ${data.credits} 积分</span>`;
+        input.value = '';
+        document.getElementById('purchase-credits-display').textContent = data.credits;
+        loadCreditsInfo();
+      } catch {
+        resultEl.innerHTML = '<span style="color:#e74c3c;">网络错误</span>';
+      }
+    }
+
+    // ============ 邀请赚钱 ============
+    async function loadInvitePage() {
+      // 邀请信息
+      try {
+        const res = await fetch(API_BASE + '/api/invite/info', {
+          headers: { 'Authorization': 'Bearer ' + getAuthToken() }
+        });
+        const data = await res.json();
+        document.getElementById('my-invite-code').textContent = data.inviteCode || '---';
+        document.getElementById('invite-reward-per').textContent = `+${data.rewardPerInvite} 积分`;
+        document.getElementById('invite-reward-invitee').textContent = `+${data.rewardForInvitee} 积分`;
+        document.getElementById('invite-commission-rate').textContent = `${Math.round(data.commissionRate * 100)}% 现金`;
+        document.getElementById('invite-max-rewards').textContent = `${data.maxRewards} 人`;
+        document.getElementById('invite-total-count').textContent = data.totalInvited;
+        document.getElementById('invite-total-reward').textContent = data.rewardCredits;
+        document.getElementById('invite-total-commission').textContent = `¥${data.totalCommission.toFixed(2)}`;
+        document.getElementById('invite-balance').textContent = `¥${data.commissionBalance.toFixed(2)}`;
+        // 邀请记录
+        const recordsEl = document.getElementById('invite-records-list');
+        if (data.records && data.records.length) {
+          recordsEl.innerHTML = data.records.map(r =>
+            `<div style="padding:6px 0;border-bottom:1px solid #f5f5f5;display:flex;justify-content:space-between;">
+              <span>${r.nickname || r.username}</span>
+              <span style="color:#2ecc71;">+${r.reward_inviter} 积分</span>
+              <span style="color:var(--text-light);">${(r.created_at||'').slice(0,16)}</span>
+            </div>`
+          ).join('');
+        } else {
+          recordsEl.innerHTML = '<p style="color:var(--text-light);">暂无邀请记录，快去分享吧！</p>';
+        }
+      } catch {}
+      // 排行榜
+      loadInviteLeaderboard();
+      // 佣金明细
+      loadCommissions();
+    }
+
+    async function loadInviteLeaderboard() {
+      try {
+        const res = await fetch(API_BASE + '/api/invite/leaderboard');
+        const data = await res.json();
+        const el = document.getElementById('invite-leaderboard');
+        const list = data.leaderboard || [];
+        if (!list.length) { el.innerHTML = '<p style="color:var(--text-light);">暂无数据</p>'; return; }
+        const medals = ['🥇', '🥈', '🥉'];
+        el.innerHTML = `<table style="width:100%;border-collapse:collapse;">
+          <tr style="border-bottom:1px solid #eee;"><th style="text-align:left;padding:6px;width:40px;">排名</th><th style="text-align:left;">用户</th><th>邀请人数</th><th>获得积分</th></tr>
+          ${list.map((r, i) => `<tr style="border-bottom:1px solid #f5f5f5;">
+            <td style="padding:6px;">${medals[i] || (i + 1)}</td>
+            <td>${r.name}</td>
+            <td style="text-align:center;font-weight:600;color:var(--primary);">${r.inviteCount}</td>
+            <td style="text-align:center;color:#f0ad4e;">${r.totalReward}</td>
+          </tr>`).join('')}
+        </table>`;
+      } catch {}
+    }
+
+    async function loadCommissions() {
+      try {
+        const res = await fetch(API_BASE + '/api/invite/commissions', {
+          headers: { 'Authorization': 'Bearer ' + getAuthToken() }
+        });
+        const data = await res.json();
+        const el = document.getElementById('commission-records-list');
+        const list = data.commissions || [];
+        if (!list.length) { el.innerHTML = '<p style="color:var(--text-light);">暂无佣金记录</p>'; return; }
+        el.innerHTML = list.map(c =>
+          `<div style="padding:6px 0;border-bottom:1px solid #f5f5f5;display:flex;justify-content:space-between;">
+            <span>${c.nickname || c.username} 充值 ¥${c.order_amount}</span>
+            <span style="color:#2ecc71;font-weight:600;">+¥${c.amount.toFixed(2)}</span>
+            <span style="font-size:12px;color:var(--text-light);">${(c.created_at||'').slice(0,16)}</span>
+          </div>`
+        ).join('');
+      } catch {}
+    }
+
+    async function requestWithdrawal() {
+      const amount = parseFloat(document.getElementById('withdraw-amount').value);
+      const method = document.getElementById('withdraw-method').value;
+      const accountInfo = document.getElementById('withdraw-account').value.trim();
+      const resultEl = document.getElementById('withdraw-result');
+      if (!amount || amount < 1) { resultEl.innerHTML = '<span style="color:#e74c3c;">最低提现 1 元</span>'; return; }
+      if (!accountInfo) { resultEl.innerHTML = '<span style="color:#e74c3c;">请填写收款账号</span>'; return; }
+      try {
+        const res = await fetch(API_BASE + '/api/invite/withdraw', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getAuthToken() },
+          body: JSON.stringify({ amount, method, accountInfo })
+        });
+        const data = await res.json();
+        if (!res.ok) { resultEl.innerHTML = `<span style="color:#e74c3c;">${data.error}</span>`; return; }
+        resultEl.innerHTML = `<span style="color:#2ecc71;">✅ 提现申请已提交，等待管理员审核</span>`;
+        document.getElementById('withdraw-amount').value = '';
+        document.getElementById('withdraw-account').value = '';
+        document.getElementById('invite-balance').textContent = `¥${data.newBalance.toFixed(2)}`;
+        toast('提现申请已提交', 'success');
+      } catch {
+        resultEl.innerHTML = '<span style="color:#e74c3c;">网络错误</span>';
+      }
+    }
+
+    function copyInviteCode() {
+      const code = document.getElementById('my-invite-code').textContent;
+      if (code && code !== '---') {
+        navigator.clipboard.writeText(code).then(() => toast('邀请码已复制', 'success'));
+      }
+    }
+
+    function copyInviteLink() {
+      const code = document.getElementById('my-invite-code').textContent;
+      if (code && code !== '---') {
+        const link = `${window.location.origin}?invite=${code}`;
+        navigator.clipboard.writeText(link).then(() => toast('邀请链接已复制', 'success'));
+      }
+    }
+
+    // 自动填充邀请码（从URL参数）
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const inviteCode = params.get('invite');
+      if (inviteCode) {
+        // 等待 DOM 就绪后填充
+        document.addEventListener('DOMContentLoaded', () => {
+          const el = document.getElementById('reg-invite-code');
+          if (el) el.value = inviteCode;
+          // 自动切换到注册 tab
+          setTimeout(() => { if (typeof switchLoginTab === 'function') switchLoginTab('register'); }, 300);
+        });
+      }
+    })();
 
     // ============ 版本检查 ============
     async function loadVersionInfo() {

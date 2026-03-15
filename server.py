@@ -53,7 +53,21 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260315a'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260315b'  # 更新此版本号以追踪部署
+
+# 积分套餐配置
+CREDIT_PACKAGES = [
+    {'id': 'pkg_50',   'name': '体验包',  'credits': 50,   'price': 9.9,   'badge': ''},
+    {'id': 'pkg_200',  'name': '标准包',  'credits': 200,  'price': 29.9,  'badge': '热门'},
+    {'id': 'pkg_500',  'name': '专业包',  'credits': 500,  'price': 59.9,  'badge': '超值'},
+    {'id': 'pkg_2000', 'name': '团队包',  'credits': 2000, 'price': 199,   'badge': '最划算'},
+]
+
+# 邀请奖励配置
+INVITE_REWARD_INVITER = 20    # 邀请人获得积分
+INVITE_REWARD_INVITEE = 10    # 被邀请人获得积分
+INVITE_MAX_REWARDS = 50       # 每人最多获得邀请奖励次数
+COMMISSION_RATE = 0.15        # 分销返现比例 15%
 
 # Gemini API Proxy 配置
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com'
@@ -165,6 +179,12 @@ def init_db():
         conn.execute('ALTER TABLE users ADD COLUMN phone TEXT UNIQUE')
     except:
         pass
+    # 迁移：给 users 表添加邀请码 & 邀请人字段
+    for col in ('invite_code TEXT UNIQUE', 'invited_by INTEGER DEFAULT 0', 'commission_balance REAL DEFAULT 0'):
+        try:
+            conn.execute(f'ALTER TABLE users ADD COLUMN {col}')
+        except:
+            pass
     # AI 使用量追踪表
     conn.executescript("""
         CREATE TABLE IF NOT EXISTS ai_usage (
@@ -184,7 +204,64 @@ def init_db():
             created_at TEXT DEFAULT (datetime('now','localtime')),
             used_at TEXT
         );
+
+        CREATE TABLE IF NOT EXISTS orders (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            order_no TEXT UNIQUE NOT NULL,
+            user_id INTEGER NOT NULL,
+            package_id TEXT NOT NULL,
+            credits INTEGER NOT NULL,
+            amount REAL NOT NULL,
+            status TEXT DEFAULT 'pending',
+            created_at TEXT DEFAULT (datetime('now','localtime')),
+            paid_at TEXT,
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        );
+        CREATE INDEX IF NOT EXISTS idx_orders_user ON orders(user_id);
+        CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);
+
+        CREATE TABLE IF NOT EXISTS invite_records (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            inviter_id INTEGER NOT NULL,
+            invitee_id INTEGER NOT NULL,
+            reward_inviter INTEGER DEFAULT 0,
+            reward_invitee INTEGER DEFAULT 0,
+            created_at TEXT DEFAULT (datetime('now','localtime')),
+            FOREIGN KEY (inviter_id) REFERENCES users(id),
+            FOREIGN KEY (invitee_id) REFERENCES users(id)
+        );
+
+        CREATE TABLE IF NOT EXISTS commissions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            from_user_id INTEGER NOT NULL,
+            order_id INTEGER NOT NULL,
+            amount REAL NOT NULL,
+            status TEXT DEFAULT 'pending',
+            created_at TEXT DEFAULT (datetime('now','localtime')),
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        );
+
+        CREATE TABLE IF NOT EXISTS withdrawals (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            amount REAL NOT NULL,
+            method TEXT DEFAULT '',
+            account_info TEXT DEFAULT '',
+            status TEXT DEFAULT 'pending',
+            created_at TEXT DEFAULT (datetime('now','localtime')),
+            processed_at TEXT,
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        );
     """)
+    # 为所有老用户生成邀请码（如果没有）
+    rows = conn.execute('SELECT id FROM users WHERE invite_code IS NULL').fetchall()
+    for r in rows:
+        code = 'INV' + secrets.token_hex(4).upper()
+        try:
+            conn.execute('UPDATE users SET invite_code=? WHERE id=?', (code, r['id']))
+        except:
+            pass
     conn.commit()
     conn.close()
 
@@ -790,6 +867,268 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         conn.close()
         return self._send_json({'codes': codes, 'credits': credits})
 
+    # ---- 积分套餐 & 订单 ----
+    def _get_packages(self):
+        """API: 获取积分套餐列表"""
+        return self._send_json({'packages': CREDIT_PACKAGES})
+
+    def _create_order(self, body):
+        """API: 创建购买订单"""
+        user = self._require_auth()
+        if not user:
+            return
+        pkg_id = body.get('packageId', '')
+        pkg = next((p for p in CREDIT_PACKAGES if p['id'] == pkg_id), None)
+        if not pkg:
+            return self._send_json({'error': '无效的套餐'}, 400)
+        order_no = 'ORD' + datetime.now().strftime('%Y%m%d%H%M%S') + secrets.token_hex(3).upper()
+        conn = self._get_db()
+        conn.execute(
+            'INSERT INTO orders (order_no, user_id, package_id, credits, amount) VALUES (?,?,?,?,?)',
+            (order_no, user['id'], pkg_id, pkg['credits'], pkg['price'])
+        )
+        conn.commit()
+        conn.close()
+        return self._send_json({
+            'orderNo': order_no,
+            'amount': pkg['price'],
+            'credits': pkg['credits'],
+            'packageName': pkg['name']
+        })
+
+    def _get_my_orders(self):
+        """API: 获取当前用户订单列表"""
+        user = self._get_current_user()
+        if not user:
+            return self._send_json({'error': '未登录'}, 401)
+        conn = self._get_db()
+        rows = conn.execute(
+            'SELECT order_no, package_id, credits, amount, status, created_at, paid_at FROM orders WHERE user_id=? ORDER BY id DESC LIMIT 50',
+            (user['id'],)
+        ).fetchall()
+        conn.close()
+        return self._send_json({'orders': [dict(r) for r in rows]})
+
+    def _admin_confirm_order(self, body):
+        """API: 管理员确认订单已支付"""
+        admin_key = body.get('adminKey', '')
+        if admin_key != os.environ.get('ADMIN_KEY', 'xhs-admin-2026'):
+            return self._send_json({'error': '无权限'}, 403)
+        order_no = (body.get('orderNo') or '').strip()
+        if not order_no:
+            return self._send_json({'error': '缺少订单号'}, 400)
+        conn = self._get_db()
+        order = conn.execute('SELECT * FROM orders WHERE order_no=?', (order_no,)).fetchone()
+        if not order:
+            conn.close()
+            return self._send_json({'error': '订单不存在'}, 404)
+        if order['status'] == 'paid':
+            conn.close()
+            return self._send_json({'error': '该订单已确认'}, 400)
+        # 更新订单状态
+        conn.execute("UPDATE orders SET status='paid', paid_at=datetime('now','localtime') WHERE id=?", (order['id'],))
+        # 增加积分
+        conn.execute('UPDATE users SET ai_credits = ai_credits + ? WHERE id=?',
+                     (order['credits'], order['user_id']))
+        conn.commit()
+        # 处理分销佣金：查看该用户是否有邀请人
+        inviter_id = conn.execute('SELECT invited_by FROM users WHERE id=?', (order['user_id'],)).fetchone()
+        if inviter_id and inviter_id['invited_by'] and inviter_id['invited_by'] > 0:
+            commission_amount = round(order['amount'] * COMMISSION_RATE, 2)
+            if commission_amount > 0:
+                conn.execute(
+                    'INSERT INTO commissions (user_id, from_user_id, order_id, amount, status) VALUES (?,?,?,?,?)',
+                    (inviter_id['invited_by'], order['user_id'], order['id'], commission_amount, 'confirmed')
+                )
+                conn.execute(
+                    'UPDATE users SET commission_balance = commission_balance + ? WHERE id=?',
+                    (commission_amount, inviter_id['invited_by'])
+                )
+                conn.commit()
+        conn.close()
+        return self._send_json({'success': True, 'orderNo': order_no, 'credits': order['credits']})
+
+    # ---- 邀请系统 ----
+    def _get_invite_info(self):
+        """API: 获取当前用户的邀请信息"""
+        user = self._get_current_user()
+        if not user:
+            return self._send_json({'error': '未登录'}, 401)
+        conn = self._get_db()
+        invite_code = user.get('invite_code') or ''
+        # 邀请统计
+        stats = conn.execute(
+            'SELECT COUNT(*) as total FROM invite_records WHERE inviter_id=?', (user['id'],)
+        ).fetchone()
+        total_invited = stats['total'] if stats else 0
+        # 邀请获得的积分
+        reward_sum = conn.execute(
+            'SELECT COALESCE(SUM(reward_inviter), 0) as total FROM invite_records WHERE inviter_id=?', (user['id'],)
+        ).fetchone()['total']
+        # 佣金信息
+        commission_balance = user.get('commission_balance', 0) or 0
+        total_commission = conn.execute(
+            'SELECT COALESCE(SUM(amount), 0) as total FROM commissions WHERE user_id=? AND status IN ("confirmed","withdrawn")',
+            (user['id'],)
+        ).fetchone()['total']
+        withdrawn = conn.execute(
+            'SELECT COALESCE(SUM(amount), 0) as total FROM withdrawals WHERE user_id=? AND status IN ("approved","completed")',
+            (user['id'],)
+        ).fetchone()['total']
+        # 邀请记录
+        records = conn.execute(
+            '''SELECT ir.created_at, u.username, u.nickname, ir.reward_inviter
+               FROM invite_records ir JOIN users u ON ir.invitee_id = u.id
+               WHERE ir.inviter_id=? ORDER BY ir.id DESC LIMIT 50''',
+            (user['id'],)
+        ).fetchall()
+        conn.close()
+        return self._send_json({
+            'inviteCode': invite_code,
+            'totalInvited': total_invited,
+            'rewardCredits': reward_sum,
+            'maxRewards': INVITE_MAX_REWARDS,
+            'rewardPerInvite': INVITE_REWARD_INVITER,
+            'rewardForInvitee': INVITE_REWARD_INVITEE,
+            'commissionRate': COMMISSION_RATE,
+            'commissionBalance': round(commission_balance, 2),
+            'totalCommission': round(total_commission, 2),
+            'totalWithdrawn': round(withdrawn, 2),
+            'records': [dict(r) for r in records]
+        })
+
+    def _get_invite_leaderboard(self):
+        """API: 获取邀请排行榜"""
+        conn = self._get_db()
+        rows = conn.execute(
+            '''SELECT u.nickname, u.username, COUNT(ir.id) as invite_count,
+                      COALESCE(SUM(ir.reward_inviter), 0) as total_reward
+               FROM invite_records ir JOIN users u ON ir.inviter_id = u.id
+               GROUP BY ir.inviter_id
+               ORDER BY invite_count DESC LIMIT 20'''
+        ).fetchall()
+        conn.close()
+        leaderboard = []
+        for r in rows:
+            name = r['nickname'] or r['username']
+            # 脱敏处理
+            if len(name) > 2:
+                masked = name[0] + '*' * (len(name) - 2) + name[-1]
+            else:
+                masked = name[0] + '*'
+            leaderboard.append({
+                'name': masked,
+                'inviteCount': r['invite_count'],
+                'totalReward': r['total_reward']
+            })
+        return self._send_json({'leaderboard': leaderboard})
+
+    def _get_commissions(self):
+        """API: 获取佣金明细"""
+        user = self._get_current_user()
+        if not user:
+            return self._send_json({'error': '未登录'}, 401)
+        conn = self._get_db()
+        rows = conn.execute(
+            '''SELECT c.amount, c.status, c.created_at, u.nickname, u.username, o.order_no, o.amount as order_amount
+               FROM commissions c
+               JOIN users u ON c.from_user_id = u.id
+               JOIN orders o ON c.order_id = o.id
+               WHERE c.user_id=? ORDER BY c.id DESC LIMIT 50''',
+            (user['id'],)
+        ).fetchall()
+        conn.close()
+        return self._send_json({'commissions': [dict(r) for r in rows]})
+
+    def _request_withdrawal(self, body):
+        """API: 申请提现"""
+        user = self._require_auth()
+        if not user:
+            return
+        amount = float(body.get('amount', 0))
+        method = (body.get('method') or '').strip()  # wechat / alipay
+        account_info = (body.get('accountInfo') or '').strip()
+        if amount < 1:
+            return self._send_json({'error': '最低提现金额为1元'}, 400)
+        if not method or not account_info:
+            return self._send_json({'error': '请填写提现方式和账号'}, 400)
+        balance = user.get('commission_balance', 0) or 0
+        if amount > balance:
+            return self._send_json({'error': f'可提现余额不足，当前余额 ¥{balance:.2f}'}, 400)
+        conn = self._get_db()
+        conn.execute(
+            'INSERT INTO withdrawals (user_id, amount, method, account_info) VALUES (?,?,?,?)',
+            (user['id'], amount, method, account_info)
+        )
+        conn.execute(
+            'UPDATE users SET commission_balance = commission_balance - ? WHERE id=?',
+            (amount, user['id'])
+        )
+        conn.commit()
+        new_balance = conn.execute('SELECT commission_balance FROM users WHERE id=?', (user['id'],)).fetchone()['commission_balance']
+        conn.close()
+        return self._send_json({'success': True, 'newBalance': round(new_balance, 2)})
+
+    def _get_withdrawals(self):
+        """API: 获取提现记录"""
+        user = self._get_current_user()
+        if not user:
+            return self._send_json({'error': '未登录'}, 401)
+        conn = self._get_db()
+        rows = conn.execute(
+            'SELECT amount, method, account_info, status, created_at, processed_at FROM withdrawals WHERE user_id=? ORDER BY id DESC LIMIT 50',
+            (user['id'],)
+        ).fetchall()
+        conn.close()
+        return self._send_json({'withdrawals': [dict(r) for r in rows]})
+
+    def _admin_process_withdrawal(self, body):
+        """API: 管理员处理提现"""
+        admin_key = body.get('adminKey', '')
+        if admin_key != os.environ.get('ADMIN_KEY', 'xhs-admin-2026'):
+            return self._send_json({'error': '无权限'}, 403)
+        wid = int(body.get('id', 0))
+        action = body.get('action', '')  # approve / reject
+        if not wid or action not in ('approve', 'reject'):
+            return self._send_json({'error': '参数错误'}, 400)
+        conn = self._get_db()
+        w = conn.execute('SELECT * FROM withdrawals WHERE id=?', (wid,)).fetchone()
+        if not w or w['status'] != 'pending':
+            conn.close()
+            return self._send_json({'error': '提现记录不存在或已处理'}, 400)
+        if action == 'approve':
+            conn.execute("UPDATE withdrawals SET status='completed', processed_at=datetime('now','localtime') WHERE id=?", (wid,))
+        else:
+            conn.execute("UPDATE withdrawals SET status='rejected', processed_at=datetime('now','localtime') WHERE id=?", (wid,))
+            # 退回余额
+            conn.execute('UPDATE users SET commission_balance = commission_balance + ? WHERE id=?',
+                         (w['amount'], w['user_id']))
+        conn.commit()
+        conn.close()
+        return self._send_json({'success': True})
+
+    def _admin_list_orders(self, query):
+        """API: 管理员查看所有订单"""
+        # 简单通过 query 参数验证
+        admin_key = query.get('adminKey', [''])[0]
+        if admin_key != os.environ.get('ADMIN_KEY', 'xhs-admin-2026'):
+            return self._send_json({'error': '无权限'}, 403)
+        status = query.get('status', [''])[0]
+        conn = self._get_db()
+        if status:
+            rows = conn.execute(
+                '''SELECT o.*, u.username, u.nickname, u.phone FROM orders o
+                   JOIN users u ON o.user_id = u.id WHERE o.status=? ORDER BY o.id DESC LIMIT 100''',
+                (status,)
+            ).fetchall()
+        else:
+            rows = conn.execute(
+                '''SELECT o.*, u.username, u.nickname, u.phone FROM orders o
+                   JOIN users u ON o.user_id = u.id ORDER BY o.id DESC LIMIT 100'''
+            ).fetchall()
+        conn.close()
+        return self._send_json({'orders': [dict(r) for r in rows]})
+
     def _send_json(self, data, code=200):
         self._set_json_headers(code)
         self.wfile.write(json.dumps(data, ensure_ascii=False).encode('utf-8'))
@@ -848,6 +1187,20 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._get_account_stats()
         elif path == '/api/user/credits':
             return self._get_user_credits_info()
+        elif path == '/api/packages':
+            return self._get_packages()
+        elif path == '/api/orders/my':
+            return self._get_my_orders()
+        elif path == '/api/invite/info':
+            return self._get_invite_info()
+        elif path == '/api/invite/leaderboard':
+            return self._get_invite_leaderboard()
+        elif path == '/api/invite/commissions':
+            return self._get_commissions()
+        elif path == '/api/invite/withdrawals':
+            return self._get_withdrawals()
+        elif path == '/api/admin/orders':
+            return self._admin_list_orders(query)
         elif path.startswith('/api/export/'):
             post_id = path.split('/')[-1]
             return self._export_post(post_id)
@@ -889,6 +1242,14 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._redeem_code(body)
         elif path == '/api/admin/gen-codes':
             return self._admin_gen_codes(body)
+        elif path == '/api/orders/create':
+            return self._create_order(body)
+        elif path == '/api/admin/orders/confirm':
+            return self._admin_confirm_order(body)
+        elif path == '/api/invite/withdraw':
+            return self._request_withdrawal(body)
+        elif path == '/api/admin/withdrawal':
+            return self._admin_process_withdrawal(body)
         else:
             self._send_json({'error': 'Not found'}, 404)
 
@@ -920,6 +1281,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         username = (body.get('username') or '').strip()
         password = body.get('password') or ''
         nickname = (body.get('nickname') or '').strip()
+        invite_code_input = (body.get('inviteCode') or '').strip().upper()
         # 手机号必填且格式校验
         import re as _re
         if not _re.match(r'^1[3-9]\d{9}$', phone):
@@ -938,11 +1300,35 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         if exists:
             conn.close()
             return self._send_json({'error': '用户名已存在'}, 409)
+        # 检查邀请码是否有效
+        inviter_id = 0
+        if invite_code_input:
+            inviter = conn.execute('SELECT id FROM users WHERE invite_code = ?', (invite_code_input,)).fetchone()
+            if inviter:
+                inviter_id = inviter['id']
         pw_hash = self._hash_password(password)
-        conn.execute('INSERT INTO users (username, password_hash, nickname, phone) VALUES (?,?,?,?)',
-                     (username, pw_hash, nickname or username, phone))
+        my_invite_code = 'INV' + secrets.token_hex(4).upper()
+        conn.execute('INSERT INTO users (username, password_hash, nickname, phone, invite_code, invited_by) VALUES (?,?,?,?,?,?)',
+                     (username, pw_hash, nickname or username, phone, my_invite_code, inviter_id))
         conn.commit()
         uid = conn.execute('SELECT last_insert_rowid() as id').fetchone()['id']
+        # 处理邀请奖励
+        if inviter_id > 0:
+            # 检查邀请人是否还有奖励额度
+            invite_count = conn.execute(
+                'SELECT COUNT(*) as cnt FROM invite_records WHERE inviter_id=?', (inviter_id,)
+            ).fetchone()['cnt']
+            if invite_count < INVITE_MAX_REWARDS:
+                # 发放奖励
+                conn.execute(
+                    'INSERT INTO invite_records (inviter_id, invitee_id, reward_inviter, reward_invitee) VALUES (?,?,?,?)',
+                    (inviter_id, uid, INVITE_REWARD_INVITER, INVITE_REWARD_INVITEE)
+                )
+                conn.execute('UPDATE users SET ai_credits = ai_credits + ? WHERE id=?',
+                             (INVITE_REWARD_INVITER, inviter_id))
+                conn.execute('UPDATE users SET ai_credits = ai_credits + ? WHERE id=?',
+                             (INVITE_REWARD_INVITEE, uid))
+                conn.commit()
         # 自动登录：创建 session
         token = secrets.token_urlsafe(48)
         expires = (datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d %H:%M:%S')
