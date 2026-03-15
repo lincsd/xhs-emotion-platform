@@ -56,7 +56,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260315u'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260315v'  # 更新此版本号以追踪部署
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -1749,21 +1749,12 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             conn_ip2.close()
             if ip_reg_count >= REGISTER_IP_DAILY_LIMIT:
                 return self._send_json({'error': f'该网络今日注册账号已达上限（{REGISTER_IP_DAILY_LIMIT}个），请明天再试'}, 429)
-        # 短信验证码（可选，配置了短信服务时才强制）
-        sms_configured = bool((os.environ.get('SMS_PROVIDER') or '').strip())
-        if sms_configured:
-            if not self._is_valid_sms_code(sms_code):
-                return self._send_json({'error': '请输入6位短信验证码'}, 400)
+        # 注册不再需要短信验证码，仅图形验证码即可
         if len(username) < 2 or len(username) > 20:
             return self._send_json({'error': '用户名长度需2-20个字符'}, 400)
         if len(password) < 6:
             return self._send_json({'error': '密码至少6位'}, 400)
         conn = self._get_db()
-        # 短信验证码校验（只在配置了短信时）
-        if sms_configured:
-            if not self._consume_sms_code(conn, phone, 'register', sms_code):
-                conn.close()
-                return self._send_json({'error': '短信验证码错误或已过期'}, 400)
         # 检查手机号唯一性
         try:
             phone_exists = conn.execute('SELECT id FROM users WHERE phone = ?', (phone,)).fetchone()
