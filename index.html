@@ -4395,6 +4395,54 @@
           titleSize: 48, notebook: true,
           endText: '全文总结',
           ctaText: '💾 收藏备用 · ❤️ 点赞支持', ctaBg: '#4a90d9'
+        },
+        {
+          id: 'ocean_fresh', name: '海洋清凉', icon: '🌊',
+          bestFor: ['夏日','海边','旅行','游泳','度假','防晒','清凉','沙滩','海岛'],
+          palette: { bg:'#e8f4f8', bgAlt:'#d4eef6', text:'#1a3a4a', accent:'#0099cc', light:'#4a7a8c', muted:'#8ab4c4', border:'#b0d8e8', extra1:'#00bcd4', extra2:'#4dd0e1', extra3:'#80deea' },
+          titleSize: 48,
+          endText: '一起去看海吧', endEmoji: '🌊🐚🏄',
+          ctaText: '点赞收藏 感受清凉 🌊', ctaBg: '#0099cc'
+        },
+        {
+          id: 'forest_nature', name: '森系自然', icon: '🌿',
+          bestFor: ['自然','植物','养生','冥想','瑜伽','绿色','环保','健康','花园','露营'],
+          palette: { bg:'#f0f5ed', bgAlt:'#e4ede0', text:'#2d3e2d', accent:'#5a8c5a', light:'#6b8b6b', muted:'#9ab39a', border:'#c4d8c4', extra1:'#7cb342', extra2:'#a5d6a7' },
+          serif: true, titleSize: 48,
+          endText: '与自然同行', endEmoji: '🌿🍃🌱',
+          ctaText: '关注我 一起亲近自然 🍀', ctaBorder: '#5a8c5a'
+        },
+        {
+          id: 'magazine_editorial', name: '杂志大片', icon: '🎬',
+          bestFor: ['时尚','大片','封面','杂志','造型','高级','质感','妆容','超模'],
+          palette: { bg:'#f2f2f2', bgAlt:'#e8e8e8', text:'#111111', accent:'#e63946', light:'#555555', muted:'#999999', border:'#cccccc', extra1:'#1d3557' },
+          titleSize: 56, titleAlign: 'left', boldTitle: true,
+          endText: 'MORE ON NEXT', endSubText: '追求极致美学',
+          ctaText: 'SUBSCRIBE · 关注获取更多灵感', ctaBg: '#111111'
+        },
+        {
+          id: 'handwritten_diary', name: '手写日记', icon: '✍️',
+          bestFor: ['日记','心情','记录','碎碎念','随笔','生活','感悟','独白','随想'],
+          palette: { bg:'#fefcf0', bgAlt:'#f8f4e0', text:'#3a3520', accent:'#c0a060', light:'#7a7050', muted:'#b0a580', border:'#d8d0b0', extra1:'#e8d4a0' },
+          serif: true, titleSize: 44, handwrite: true,
+          endText: '今天就写到这里', endEmoji: '📝✨',
+          ctaText: '喜欢日记分享就关注我吧', ctaBorder: '#c0a060'
+        },
+        {
+          id: 'candy_rainbow', name: '糖果彩虹', icon: '🍬',
+          bestFor: ['彩虹','糖果','派对','生日','快乐','开心','活力','青春','色彩'],
+          palette: { bg:'#fff8fc', bgAlt:'#ffeef8', text:'#4a2040', accent:'#e040a0', light:'#8060a0', muted:'#c0a0cc', border:'#f0c0e0', extra1:'#ff6090', extra2:'#ffc040', extra3:'#60d0ff', extra4:'#80e080', extra5:'#c080ff' },
+          titleSize: 50,
+          endText: '快乐要和大家分享', endEmoji: '🍬🌈🎉',
+          ctaText: '点赞 = 今天也要开心鸭 🦆', ctaBg: 'rainbow'
+        },
+        {
+          id: 'festival_joy', name: '节日喜庆', icon: '🎄',
+          bestFor: ['春节','新年','中秋','圣诞','节日','庆祝','祝福','红包','过年','元旦'],
+          palette: { bg:'#fef8f0', bgAlt:'#fcf0e0', text:'#5a1a08', accent:'#d4380d', light:'#8b4513', muted:'#cc9966', border:'#e8c8a0', extra1:'#faad14', extra2:'#cf1322' },
+          titleSize: 50, hasSeal: true,
+          endText: '祝大家节日快乐', endEmoji: '🎉🧧🎊',
+          ctaText: '转发好运 · 收藏祝福 🧧', ctaBg: '#d4380d'
         }
       ],
 
@@ -4459,6 +4507,18 @@
           const g = ctx.createLinearGradient(0,0,0,H);
           g.addColorStop(0,'#f5e6d3'); g.addColorStop(0.6,'#ede0d0'); g.addColorStop(1,'#e8d8c4');
           ctx.fillStyle = g;
+        } else if (tmpl.id==='ocean_fresh') {
+          const g = ctx.createLinearGradient(0,0,0,H);
+          g.addColorStop(0,'#e8f4f8'); g.addColorStop(0.5,'#d4eef6'); g.addColorStop(1,'#c0e4f0');
+          ctx.fillStyle = g;
+        } else if (tmpl.id==='candy_rainbow') {
+          const g = ctx.createLinearGradient(0,0,0,H);
+          g.addColorStop(0,'#fff8fc'); g.addColorStop(0.5,'#ffeef8'); g.addColorStop(1,'#f8e8ff');
+          ctx.fillStyle = g;
+        } else if (tmpl.id==='festival_joy') {
+          const g = ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,900);
+          g.addColorStop(0,'#fef8f0'); g.addColorStop(0.6,'#fcf0e0'); g.addColorStop(1,'#f8e8d0');
+          ctx.fillStyle = g;
         } else { ctx.fillStyle = p.bg; }
         ctx.fillRect(0,0,W,H);
         if (this['_decor_'+tmpl.id]) this['_decor_'+tmpl.id](ctx, tmpl);
@@ -4512,6 +4572,71 @@
         ctx.strokeStyle='rgba(255,107,107,0.15)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(70,0);ctx.lineTo(70,H);ctx.stroke();
         [200,500,800,1100].forEach(y=>{ctx.beginPath();ctx.arc(35,y,10,0,Math.PI*2);ctx.strokeStyle='#d0dae8';ctx.lineWidth=1.5;ctx.stroke();ctx.fillStyle='#f0f4fa';ctx.fill();});
       },
+      _decor_ocean_fresh(ctx) {
+        const W=this.W,H=this.H;
+        // 波纹
+        ctx.strokeStyle='rgba(0,153,204,0.08)';ctx.lineWidth=2;
+        for(let i=0;i<6;i++){const y=200+i*220;ctx.beginPath();for(let x=0;x<W;x+=4){ctx.lineTo(x,y+Math.sin(x/60+i)*15);}ctx.stroke();}
+        // 气泡
+        ['rgba(0,188,212,0.06)','rgba(77,208,225,0.05)','rgba(128,222,234,0.07)'].forEach((c,i)=>{
+          ctx.beginPath();ctx.arc(150+i*380,300+i*350,80+i*30,0,Math.PI*2);ctx.fillStyle=c;ctx.fill();
+        });
+      },
+      _decor_forest_nature(ctx) {
+        const W=this.W,H=this.H;
+        // 浅绿色噪点纸纹
+        for(let i=0;i<4000;i++){ctx.fillStyle=`rgba(${100+Math.random()*40},${140+Math.random()*40},${80+Math.random()*40},${Math.random()*0.03})`;ctx.fillRect(Math.random()*W,Math.random()*H,1,1);}
+        // 叶子形状装饰
+        ctx.fillStyle='rgba(90,140,90,0.04)';
+        [[-30,100,180],[W-120,60,150],[W-80,H-200,120],[-20,H-300,160]].forEach(([x,y,r])=>{
+          ctx.beginPath();ctx.ellipse(x+r/2,y+r/2,r/2,r/3,Math.PI/6,0,Math.PI*2);ctx.fill();
+        });
+      },
+      _decor_magazine_editorial(ctx) {
+        const W=this.W,H=this.H;
+        // 粗黑边框
+        ctx.strokeStyle='#111';ctx.lineWidth=6;ctx.strokeRect(40,40,W-80,H-80);
+        ctx.strokeStyle='#111';ctx.lineWidth=1;ctx.strokeRect(50,50,W-100,H-100);
+        // 网格
+        ctx.strokeStyle='rgba(0,0,0,0.03)';ctx.lineWidth=0.5;
+        for(let x=50;x<W;x+=W/4){ctx.beginPath();ctx.moveTo(x,50);ctx.lineTo(x,H-50);ctx.stroke();}
+      },
+      _decor_handwritten_diary(ctx) {
+        const W=this.W,H=this.H;
+        // 老旧纸张纹理
+        for(let i=0;i<8000;i++){ctx.fillStyle=`rgba(${180+Math.random()*40},${170+Math.random()*40},${140+Math.random()*40},${Math.random()*0.04})`;ctx.fillRect(Math.random()*W,Math.random()*H,1,1);}
+        // 横线（日记本）
+        ctx.strokeStyle='rgba(192,160,96,0.15)';ctx.lineWidth=0.8;
+        for(let y=200;y<H-80;y+=52){ctx.beginPath();ctx.moveTo(80,y);ctx.lineTo(W-80,y);ctx.stroke();}
+        // 装订线
+        ctx.strokeStyle='rgba(192,160,96,0.25)';ctx.lineWidth=1;ctx.setLineDash([8,6]);
+        ctx.beginPath();ctx.moveTo(100,60);ctx.lineTo(100,H-60);ctx.stroke();ctx.setLineDash([]);
+      },
+      _decor_candy_rainbow(ctx) {
+        const W=this.W,H=this.H;
+        // 彩虹条纹装饰
+        const colors=['rgba(255,96,144,0.08)','rgba(255,192,64,0.08)','rgba(96,208,255,0.08)','rgba(128,224,128,0.08)','rgba(192,128,255,0.08)'];
+        colors.forEach((c,i)=>{ctx.fillStyle=c;ctx.fillRect(0,i*(H/5),W,H/5);});
+        // 大圆点装饰
+        const dotCs=['rgba(255,96,144,0.1)','rgba(255,192,64,0.1)','rgba(96,208,255,0.1)','rgba(192,128,255,0.1)','rgba(128,224,128,0.1)'];
+        for(let i=0;i<20;i++){ctx.beginPath();ctx.arc(Math.random()*W,Math.random()*H,10+Math.random()*40,0,Math.PI*2);ctx.fillStyle=dotCs[i%5];ctx.fill();}
+      },
+      _decor_festival_joy(ctx) {
+        const W=this.W,H=this.H;
+        // 暖色纸纹
+        for(let i=0;i<5000;i++){ctx.fillStyle=`rgba(${210+Math.random()*30},${180+Math.random()*30},${140+Math.random()*30},${Math.random()*0.03})`;ctx.fillRect(Math.random()*W,Math.random()*H,1,1);}
+        // 祥云装饰
+        ctx.fillStyle='rgba(212,56,13,0.04)';
+        [[100,100],[W-150,150],[150,H-200],[W-200,H-150]].forEach(([x,y])=>{
+          for(let j=0;j<3;j++){ctx.beginPath();ctx.arc(x+j*25,y,30-j*5,0,Math.PI,true);ctx.fill();}
+        });
+        // 金色角装饰
+        ctx.fillStyle='rgba(250,173,20,0.12)';
+        ctx.fillRect(30,30,80,6);ctx.fillRect(30,30,6,80);
+        ctx.fillRect(W-110,30,80,6);ctx.fillRect(W-36,30,6,80);
+        ctx.fillRect(30,H-36,80,6);ctx.fillRect(30,H-110,6,80);
+        ctx.fillRect(W-110,H-36,80,6);ctx.fillRect(W-36,H-110,6,80);
+      },
 
       // -- Cover Card --
       _drawCover(ctx, post, tmpl) {
@@ -4550,6 +4675,22 @@
           ctx.fillStyle='#fff';ctx.textAlign='center';ctx.fillText(cat,cx,277);
         } else if (tmpl.id==='minimalist_literary') {
           ctx.fillStyle=p.accent;ctx.fillRect(cx-60,400,120,1.5);
+        } else if (tmpl.id==='ocean_fresh') {
+          ctx.font='64px sans-serif';ctx.textAlign='center';ctx.fillText('🌊',cx,340);
+        } else if (tmpl.id==='forest_nature') {
+          ctx.font='56px sans-serif';ctx.textAlign='center';ctx.fillText('🌿',cx-40,340);ctx.fillText('🍃',cx+40,320);
+        } else if (tmpl.id==='magazine_editorial') {
+          ctx.font='bold 22px sans-serif';ctx.fillStyle=p.accent;ctx.textAlign='left';
+          ctx.fillText('EDITORIAL',100,260);ctx.fillStyle=p.accent;ctx.fillRect(100,280,50,4);
+        } else if (tmpl.id==='handwritten_diary') {
+          ctx.font=this._font(20,'400',tmpl);ctx.fillStyle=p.muted;ctx.textAlign='center';
+          ctx.fillText(`📅 ${new Date().toLocaleDateString('zh-CN',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}`,cx,350);
+          ctx.fillStyle=p.accent;ctx.fillRect(cx-80,380,160,1);
+        } else if (tmpl.id==='candy_rainbow') {
+          ctx.font='72px sans-serif';ctx.textAlign='center';ctx.fillText('🍬',cx-60,350);ctx.fillText('🌈',cx+60,330);
+        } else if (tmpl.id==='festival_joy') {
+          ctx.font='72px sans-serif';ctx.textAlign='center';ctx.fillText('🧧',cx,340);
+          ctx.fillStyle=p.extra1;ctx.fillRect(cx-140,380,280,3);
         }
 
         // Title
@@ -4558,7 +4699,7 @@
         if (tmpl.neon){ctx.shadowColor='rgba(0,212,255,0.5)';ctx.shadowBlur=20;}
         const mxW=isL?880:840;
         const tLines=this.wrapText(ctx,post.title||'无标题',mxW);
-        const tY=({'premium_business':440,'dark_cool':500,'fresh_cute':540})[tmpl.id]||580;
+        const tY=({'premium_business':440,'dark_cool':500,'fresh_cute':540,'magazine_editorial':400,'handwritten_diary':480,'ocean_fresh':460,'candy_rainbow':480,'festival_joy':480})[tmpl.id]||580;
         const tLH=tmpl.titleSize*1.5;
         tLines.forEach((l,i)=>ctx.fillText(l,bx,tY+i*tLH));
         ctx.shadowBlur=0;ctx.shadowColor='transparent';
@@ -4595,6 +4736,11 @@
         if (tmpl.id==='warm_healing'){const g=ctx.createLinearGradient(380,0,700,0);g.addColorStop(0,'transparent');g.addColorStop(0.3,p.extra1);g.addColorStop(0.7,p.extra2);g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fillRect(380,700,320,3);}
         if (tmpl.id==='study_knowledge'){ctx.font=this._font(18,'400',tmpl);ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.fillText('📖 干货分享  ·  ⏱ 5分钟阅读  ·  💾 建议收藏',cx,1260);}
         if (tmpl.id==='ins_aesthetic'&&post.tags){ctx.font=this._font(18,'400',tmpl);ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.fillText(post.tags.split(',').slice(0,3).map(t=>'#'+t).join('  '),cx,1280);}
+        if (tmpl.id==='ocean_fresh'){ctx.strokeStyle='rgba(0,153,204,0.15)';ctx.lineWidth=2;ctx.beginPath();for(let x=0;x<W;x+=4)ctx.lineTo(x,1340+Math.sin(x/50)*8);ctx.stroke();}
+        if (tmpl.id==='magazine_editorial'){ctx.fillStyle=p.text;ctx.fillRect(100,1340,W-200,1);ctx.font='bold 14px sans-serif';ctx.fillStyle=p.muted;ctx.textAlign='right';ctx.fillText(`ISSUE ${new Date().getMonth()+1} · ${new Date().getFullYear()}`,W-100,1380);}
+        if (tmpl.id==='handwritten_diary'){ctx.fillStyle=p.border;ctx.fillRect(200,1300,W-400,0.5);ctx.font=this._font(16,'400',tmpl);ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.fillText('— 我的生活记录 —',cx,1340);}
+        if (tmpl.id==='candy_rainbow'){const rc=['#ff6090','#ffc040','#60d0ff','#80e080','#c080ff'];rc.forEach((c,i)=>{ctx.fillStyle=c+'20';ctx.fillRect(i*(W/5),H-10,W/5,10);});}
+        if (tmpl.id==='festival_joy'){ctx.fillStyle=p.extra1+'30';ctx.fillRect(80,1300,W-160,4);ctx.fillRect(80,1310,W-160,2);}
       },
 
       // -- Content Page --
@@ -4615,7 +4761,7 @@
         const bodyF=this._font(28,'400',tmpl);ctx.font=bodyF;ctx.fillStyle=p.text;ctx.textAlign='left';
         const margin=tmpl.id==='fresh_cute'?100:(tmpl.titleAlign==='left'?100:90);
         const mxW=W-margin*2, lineH=52, startY=140;
-        const indent=(tmpl.id==='minimalist_literary'||tmpl.id==='chinese_retro')?56:0;
+        const indent=(tmpl.id==='minimalist_literary'||tmpl.id==='chinese_retro'||tmpl.id==='handwritten_diary')?56:0;
         const paras=text.split(/\n+/).filter(t=>t.trim());
         const bullets=['🌸','✨','💕','🎀','🍰'];
         let y=startY;
@@ -4632,6 +4778,8 @@
         // Bottom decoration
         if (tmpl.id==='minimalist_literary'){ctx.fillStyle=p.border;ctx.fillRect(100,H-60,W-200,0.5);}
         if (tmpl.id==='dark_cool'){const g=ctx.createLinearGradient(80,0,W-80,0);g.addColorStop(0,'#ff336644');g.addColorStop(0.5,'#b44dff44');g.addColorStop(1,'#00d4ff44');ctx.fillStyle=g;ctx.fillRect(80,H-60,W-160,1);}
+        if (tmpl.id==='ocean_fresh'){ctx.strokeStyle='rgba(0,153,204,0.1)';ctx.lineWidth=1.5;ctx.beginPath();for(let x=0;x<W;x+=4)ctx.lineTo(x,H-50+Math.sin(x/40)*6);ctx.stroke();}
+        if (tmpl.id==='candy_rainbow'){const rc=['#ff6090','#ffc040','#60d0ff','#80e080','#c080ff'];rc.forEach((c,i)=>{ctx.fillStyle=c+'15';ctx.fillRect(i*(W/5),H-8,W/5,8);});}
       },
 
       // -- Ending Card --
@@ -4667,6 +4815,7 @@
         const bw=ctx.measureText(tmpl.ctaText).width+64, bh=48, bx=cx-bw/2;
         if (tmpl.ctaBg) {
           if (tmpl.ctaBg==='gradient'){const g=ctx.createLinearGradient(bx,0,bx+bw,0);g.addColorStop(0,p.extra1);g.addColorStop(1,p.accent);ctx.fillStyle=g;}
+          else if (tmpl.ctaBg==='rainbow'){const g=ctx.createLinearGradient(bx,0,bx+bw,0);g.addColorStop(0,'#ff6090');g.addColorStop(0.25,'#ffc040');g.addColorStop(0.5,'#60d0ff');g.addColorStop(0.75,'#80e080');g.addColorStop(1,'#c080ff');ctx.fillStyle=g;}
           else ctx.fillStyle=tmpl.ctaBg;
           this._roundRect(ctx,bx,ctaY-bh/2,bw,bh,tmpl.id==='premium_business'?4:28);ctx.fill();
           ctx.fillStyle='#fff';
@@ -4704,6 +4853,12 @@
           {kw:['国风','传统','文化','汉服','书法','茶道','诗词','古典'],id:'chinese_retro'},
           {kw:['摄影','音乐','潮流','电影','深夜','赛博','暗黑'],id:'dark_cool'},
           {kw:['美食','甜品','探店','手帐','萌宠','少女','可爱'],id:'fresh_cute'},
+          {kw:['海边','夏日','旅行','度假','游泳','海岛','沙滩','冲浪','防晒'],id:'ocean_fresh'},
+          {kw:['植物','自然','养生','冥想','瑜伽','绿色','环保','露营','花园'],id:'forest_nature'},
+          {kw:['时尚','杂志','大片','造型','超模','妆容','质感','封面'],id:'magazine_editorial'},
+          {kw:['日记','心情','碎碎念','随笔','记录','独白','随想'],id:'handwritten_diary'},
+          {kw:['彩虹','糖果','派对','生日','快乐','活力','青春'],id:'candy_rainbow'},
+          {kw:['春节','新年','中秋','圣诞','节日','庆祝','祝福','过年','红包'],id:'festival_joy'},
         ];
         for(const km of kwMap){if(km.kw.filter(k=>txt.includes(k)).length>=2) return this.getTemplate(km.id);}
         const catMap={'治愈':'warm_healing','成长':'minimalist_literary','爱情':'fresh_cute','友情':'warm_healing','自我':'ins_aesthetic','离别':'minimalist_literary','温暖':'warm_healing','释怀':'ins_aesthetic'};
