@@ -1434,20 +1434,6 @@
             <input type="password" class="form-control" id="login-password" placeholder="请输入密码" autocomplete="current-password">
           </div>
           <button class="btn btn-primary" onclick="doLogin()" id="btn-login">🔐 登 录</button>
-
-          <div class="login-divider">或使用手机号验证码登录</div>
-          <div class="form-group">
-            <label>手机号</label>
-            <input type="tel" class="form-control" id="login-phone" placeholder="请输入11位手机号" maxlength="11" autocomplete="tel">
-          </div>
-          <div class="form-group">
-            <label>短信验证码</label>
-            <div class="verify-row">
-              <input type="text" class="form-control" id="login-sms-code" placeholder="请输入6位验证码" maxlength="6" inputmode="numeric" pattern="\\d*">
-              <button class="btn btn-verify" onclick="sendLoginCode()" id="btn-send-login-code" type="button">发送验证码</button>
-            </div>
-          </div>
-          <button class="btn btn-outline" onclick="doLoginByCode()" id="btn-login-sms">📱 验证码登录</button>
         </div>
         <!-- 注册表单 -->
         <div id="register-form" style="display:none;">
@@ -10093,31 +10079,7 @@ Style: ${stylePrompt}
       }
     }
 
-    async function doLoginByCode() {
-      const phone = document.getElementById('login-phone').value.trim();
-      const smsCode = document.getElementById('login-sms-code').value.trim();
-      if (!isValidPhone(phone)) return showLoginError('请输入正确的11位手机号');
-      if (!isValidSmsCode(smsCode)) return showLoginError('请输入6位短信验证码');
-      const btn = document.getElementById('btn-login-sms');
-      btn.disabled = true; btn.textContent = '登录中...';
-      try {
-        const res = await fetch(API_BASE + '/api/auth/login-sms', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ phone, smsCode })
-        });
-        const data = await res.json();
-        if (!res.ok) { showLoginError(data.error || '登录失败'); return; }
-        localStorage.setItem('xhs_auth_token', data.token);
-        currentUser = data.user;
-        showApp();
-        loadDashboard();
-      } catch (e) {
-        showLoginError('网络错误，请重试');
-      } finally {
-        btn.disabled = false; btn.textContent = '📱 验证码登录';
-      }
-    }
+
 
     async function doLogout() {
       const token = getAuthToken();
@@ -10155,8 +10117,7 @@ Style: ${stylePrompt}
     document.addEventListener('DOMContentLoaded', () => {
       const loginPw = document.getElementById('login-password');
       if (loginPw) loginPw.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
-      const loginSms = document.getElementById('login-sms-code');
-      if (loginSms) loginSms.addEventListener('keydown', e => { if (e.key === 'Enter') doLoginByCode(); });
+
       const regPw2 = document.getElementById('reg-password2');
       if (regPw2) regPw2.addEventListener('keydown', e => { if (e.key === 'Enter') doRegister(); });
       const regSms = document.getElementById('reg-sms-code');
