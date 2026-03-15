@@ -1948,34 +1948,90 @@
           <div id="purchase-redeem-result" style="margin-top:8px; font-size:13px;"></div>
         </div>
 
-        <!-- 支付说明 -->
-        <div class="card" id="payment-instruction" style="display:none;">
-          <h3 style="margin-bottom:12px;">📱 支付方式</h3>
-          <div style="background:#fff9e6; border:1px solid #ffd700; border-radius:8px; padding:16px; margin-bottom:12px;">
-            <div style="font-weight:600; margin-bottom:8px;">订单号：<span id="pay-order-no" style="color:var(--primary); user-select:all;"></span></div>
-            <div style="font-size:14px; margin-bottom:8px;">应付金额：<strong style="font-size:24px; color:#e74c3c;">¥<span id="pay-amount"></span></strong></div>
-            <div style="font-size:13px; color:var(--text-light);">套餐：<span id="pay-pkg-name"></span> · <span id="pay-pkg-credits"></span> 积分</div>
-          </div>
-          <div style="background:#f0f8ff; border-radius:8px; padding:16px;">
-            <div style="font-weight:600; margin-bottom:8px;">💳 请按以下步骤完成支付：</div>
-            <ol style="font-size:13px; color:var(--text-light); padding-left:18px; line-height:2;">
-              <li>使用 <strong>微信</strong> 或 <strong>支付宝</strong> 转账至管理员</li>
-              <li>转账备注填写订单号：<strong id="pay-order-no2" style="color:var(--primary);"></strong></li>
-              <li>转账完成后等待管理员确认（通常 5-30 分钟）</li>
-              <li>确认后积分自动到账，可在此页面刷新查看</li>
-            </ol>
-          </div>
-          <div style="text-align:center; margin-top:16px;">
-            <button class="btn" onclick="document.getElementById('payment-instruction').style.display='none'">关闭</button>
-          </div>
-        </div>
-
         <!-- 订单历史 -->
         <div class="card">
           <h3 style="margin-bottom:12px;">📋 我的订单</h3>
           <div id="my-orders-list" style="font-size:13px; color:var(--text-light);">加载中...</div>
         </div>
+
+        <!-- 管理员订单管理（输入管理密钥展开） -->
+        <div class="card" style="margin-top:16px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+            <h3>🔧 管理员确认订单</h3>
+            <span style="font-size:12px; color:var(--text-light);">（仅管理员可用）</span>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            <input type="password" id="admin-key-input" class="form-control" placeholder="输入管理密钥" style="max-width:200px;">
+            <button class="btn btn-outline" onclick="loadAdminOrders()">查看全部订单</button>
+          </div>
+          <div id="admin-orders-panel" style="margin-top:12px; display:none;">
+            <div style="display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+              <button class="btn btn-sm btn-outline" onclick="loadAdminOrders('')" style="font-size:12px;">全部</button>
+              <button class="btn btn-sm btn-outline" onclick="loadAdminOrders('notified')" style="font-size:12px; color:#e67e22;">⏳ 已转账待确认</button>
+              <button class="btn btn-sm btn-outline" onclick="loadAdminOrders('pending')" style="font-size:12px; color:#f0ad4e;">🕐 待支付</button>
+              <button class="btn btn-sm btn-outline" onclick="loadAdminOrders('paid')" style="font-size:12px; color:#2ecc71;">✅ 已完成</button>
+            </div>
+            <div id="admin-orders-list" style="font-size:13px;">加载中...</div>
+          </div>
+        </div>
       </section>
+
+      <!-- ===== 支付弹窗（全局模态框） ===== -->
+      <div class="modal-overlay" id="modal-payment" style="display:none;" onclick="if(event.target===this)closePaymentModal()">
+        <div class="modal" style="max-width:480px;">
+          <div class="modal-header">
+            <h3>💳 订单支付</h3>
+            <button class="modal-close" onclick="closePaymentModal()">&times;</button>
+          </div>
+          <div class="modal-body" style="padding:20px;">
+            <!-- 订单信息 -->
+            <div style="background:#fff9e6; border:1px solid #ffd700; border-radius:8px; padding:14px; margin-bottom:16px;">
+              <div style="font-weight:600; margin-bottom:6px;">订单号：<span id="pay-order-no" style="color:var(--primary); user-select:all; font-family:monospace;"></span></div>
+              <div style="font-size:14px; margin-bottom:6px;">应付金额：<strong style="font-size:28px; color:#e74c3c;">¥<span id="pay-amount"></span></strong></div>
+              <div style="font-size:13px; color:var(--text-light);">套餐：<span id="pay-pkg-name"></span> · <span id="pay-pkg-credits"></span> 积分</div>
+            </div>
+            <!-- 支付方式Tab -->
+            <div style="display:flex; border-bottom:2px solid var(--border); margin-bottom:16px;">
+              <div class="pay-tab active" data-method="wechat" onclick="switchPayTab('wechat')" style="flex:1; text-align:center; padding:10px; cursor:pointer; font-weight:600; border-bottom:2px solid var(--primary); margin-bottom:-2px; color:var(--primary);">💚 微信支付</div>
+              <div class="pay-tab" data-method="alipay" onclick="switchPayTab('alipay')" style="flex:1; text-align:center; padding:10px; cursor:pointer; font-weight:500; border-bottom:2px solid transparent; margin-bottom:-2px; color:var(--text-light);">💙 支付宝</div>
+            </div>
+            <!-- 付款码区域 -->
+            <div id="pay-qr-area" style="text-align:center; margin-bottom:16px;">
+              <div id="pay-qr-wechat" style="display:block;">
+                <img id="pay-qr-wechat-img" src="" alt="微信收款码" style="max-width:220px; max-height:220px; border-radius:8px; border:1px solid #eee; display:none;">
+                <div id="pay-qr-wechat-empty" style="padding:30px; background:#f9f9f9; border-radius:8px; color:var(--text-light); font-size:13px;">
+                  管理员尚未配置微信收款码<br><span style="font-size:12px;">请联系管理员设置 WECHAT_PAY_QR 环境变量</span>
+                </div>
+              </div>
+              <div id="pay-qr-alipay" style="display:none;">
+                <img id="pay-qr-alipay-img" src="" alt="支付宝收款码" style="max-width:220px; max-height:220px; border-radius:8px; border:1px solid #eee; display:none;">
+                <div id="pay-qr-alipay-empty" style="padding:30px; background:#f9f9f9; border-radius:8px; color:var(--text-light); font-size:13px;">
+                  管理员尚未配置支付宝收款码<br><span style="font-size:12px;">请联系管理员设置 ALIPAY_PAY_QR 环境变量</span>
+                </div>
+              </div>
+              <div id="pay-account-info" style="margin-top:8px; font-size:12px; color:var(--text-light);"></div>
+            </div>
+            <!-- 支付步骤 -->
+            <div style="background:#f0f8ff; border-radius:8px; padding:14px; margin-bottom:16px;">
+              <div style="font-weight:600; font-size:13px; margin-bottom:6px;">📝 支付步骤：</div>
+              <ol style="font-size:12px; color:var(--text-light); padding-left:16px; line-height:1.8; margin:0;">
+                <li>扫描上方收款码（或手动转账）</li>
+                <li>转账金额：<strong style="color:#e74c3c;">¥<span class="pay-amount-copy"></span></strong></li>
+                <li>备注填写订单号：<strong id="pay-order-no2" style="color:var(--primary); user-select:all;"></strong></li>
+                <li>转账完成后点击下方<strong>"我已付款"</strong>按钮</li>
+              </ol>
+            </div>
+            <!-- 操作按钮 -->
+            <div style="display:flex; gap:10px;">
+              <button class="btn btn-primary" style="flex:1; justify-content:center;" onclick="notifyPaid()">✅ 我已付款</button>
+              <button class="btn btn-outline" style="flex:1; justify-content:center;" onclick="cancelCurrentOrder()">取消订单</button>
+            </div>
+            <div style="text-align:center; margin-top:10px; font-size:11px; color:var(--text-light);">
+              付款后管理员会在 5-30 分钟内确认，积分自动到账
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- ===== 邀请赚钱 ===== -->
       <section id="page-invite" class="page hidden">
@@ -7871,6 +7927,9 @@ Style: ${stylePrompt}
     });
 
     // ============ 积分商城 ============
+    let _paymentConfig = null;
+    let _currentPayOrderNo = '';
+
     async function loadPurchasePage() {
       // 加载积分信息
       try {
@@ -7882,6 +7941,11 @@ Style: ${stylePrompt}
         document.getElementById('purchase-free-info').textContent =
           `${data.freeRemaining || 0}/${data.freeLimit || 3}`;
       } catch {}
+      // 加载支付配置
+      try {
+        const res = await fetch(API_BASE + '/api/payment-config');
+        _paymentConfig = await res.json();
+      } catch { _paymentConfig = {}; }
       // 加载套餐
       try {
         const res = await fetch(API_BASE + '/api/packages');
@@ -7912,19 +7976,101 @@ Style: ${stylePrompt}
         });
         const data = await res.json();
         if (!res.ok) { toast(data.error || '创建订单失败', 'error'); return; }
-        // 显示支付说明
-        document.getElementById('pay-order-no').textContent = data.orderNo;
-        document.getElementById('pay-order-no2').textContent = data.orderNo;
-        document.getElementById('pay-amount').textContent = data.amount;
-        document.getElementById('pay-pkg-name').textContent = data.packageName;
-        document.getElementById('pay-pkg-credits').textContent = data.credits;
-        document.getElementById('payment-instruction').style.display = 'block';
-        document.getElementById('payment-instruction').scrollIntoView({ behavior: 'smooth' });
-        toast('订单已创建，请按提示完成支付', 'success');
+        // 打开支付弹窗
+        openPaymentModal(data.orderNo, data.amount, data.packageName, data.credits);
+        toast('订单已创建，请完成支付', 'success');
         loadMyOrders();
       } catch {
         toast('网络错误', 'error');
       }
+    }
+
+    function openPaymentModal(orderNo, amount, pkgName, credits) {
+      _currentPayOrderNo = orderNo;
+      document.getElementById('pay-order-no').textContent = orderNo;
+      document.getElementById('pay-order-no2').textContent = orderNo;
+      document.getElementById('pay-amount').textContent = amount;
+      document.querySelectorAll('.pay-amount-copy').forEach(el => el.textContent = amount);
+      document.getElementById('pay-pkg-name').textContent = pkgName;
+      document.getElementById('pay-pkg-credits').textContent = credits;
+      // 设置收款码
+      const cfg = _paymentConfig || {};
+      const wechatImg = document.getElementById('pay-qr-wechat-img');
+      const wechatEmpty = document.getElementById('pay-qr-wechat-empty');
+      if (cfg.wechatQr) {
+        wechatImg.src = cfg.wechatQr; wechatImg.style.display = 'block'; wechatEmpty.style.display = 'none';
+      } else {
+        wechatImg.style.display = 'none'; wechatEmpty.style.display = 'block';
+      }
+      const alipayImg = document.getElementById('pay-qr-alipay-img');
+      const alipayEmpty = document.getElementById('pay-qr-alipay-empty');
+      if (cfg.alipayQr) {
+        alipayImg.src = cfg.alipayQr; alipayImg.style.display = 'block'; alipayEmpty.style.display = 'none';
+      } else {
+        alipayImg.style.display = 'none'; alipayEmpty.style.display = 'block';
+      }
+      const accountInfo = document.getElementById('pay-account-info');
+      if (cfg.account) { accountInfo.textContent = cfg.account; accountInfo.style.display = 'block'; }
+      else { accountInfo.style.display = 'none'; }
+      // 默认显示微信Tab
+      switchPayTab('wechat');
+      document.getElementById('modal-payment').style.display = 'flex';
+    }
+
+    function closePaymentModal() {
+      document.getElementById('modal-payment').style.display = 'none';
+      _currentPayOrderNo = '';
+    }
+
+    function switchPayTab(method) {
+      document.querySelectorAll('.pay-tab').forEach(tab => {
+        const isActive = tab.dataset.method === method;
+        tab.style.borderBottomColor = isActive ? 'var(--primary)' : 'transparent';
+        tab.style.color = isActive ? 'var(--primary)' : 'var(--text-light)';
+        tab.style.fontWeight = isActive ? '600' : '500';
+      });
+      document.getElementById('pay-qr-wechat').style.display = method === 'wechat' ? 'block' : 'none';
+      document.getElementById('pay-qr-alipay').style.display = method === 'alipay' ? 'block' : 'none';
+      // 记住选择
+      document.getElementById('modal-payment').dataset.payMethod = method;
+    }
+
+    async function notifyPaid() {
+      if (!_currentPayOrderNo) return;
+      const method = document.getElementById('modal-payment').dataset.payMethod || 'wechat';
+      try {
+        const res = await fetch(API_BASE + '/api/orders/notify-paid', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getAuthToken() },
+          body: JSON.stringify({ orderNo: _currentPayOrderNo, payMethod: method })
+        });
+        const data = await res.json();
+        if (!res.ok) { toast(data.error || '操作失败', 'error'); return; }
+        toast('已通知管理员，请等待确认（约5-30分钟）', 'success');
+        closePaymentModal();
+        loadMyOrders();
+      } catch { toast('网络错误', 'error'); }
+    }
+
+    async function cancelCurrentOrder() {
+      if (!_currentPayOrderNo) return;
+      if (!confirm('确定取消此订单？')) return;
+      await cancelOrder(_currentPayOrderNo);
+      closePaymentModal();
+    }
+
+    async function cancelOrder(orderNo) {
+      try {
+        const res = await fetch(API_BASE + '/api/orders/cancel', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getAuthToken() },
+          body: JSON.stringify({ orderNo })
+        });
+        const data = await res.json();
+        if (!res.ok) { toast(data.error || '取消失败', 'error'); return; }
+        toast('订单已取消', 'info');
+        loadMyOrders();
+      } catch { toast('网络错误', 'error'); }
     }
 
     async function loadMyOrders() {
@@ -7936,19 +8082,98 @@ Style: ${stylePrompt}
         const el = document.getElementById('my-orders-list');
         const orders = data.orders || [];
         if (!orders.length) { el.innerHTML = '<p style="color:var(--text-light);">暂无订单</p>'; return; }
-        const statusMap = { pending: '⏳ 待支付', paid: '✅ 已完成', cancelled: '❌ 已取消' };
-        const statusColor = { pending: '#f0ad4e', paid: '#2ecc71', cancelled: '#999' };
+        const statusMap = { pending: '🕐 待支付', notified: '⏳ 已转账待确认', paid: '✅ 已完成', cancelled: '❌ 已取消' };
+        const statusColor = { pending: '#f0ad4e', notified: '#e67e22', paid: '#2ecc71', cancelled: '#999' };
         el.innerHTML = `<table style="width:100%;border-collapse:collapse;">
-          <tr style="border-bottom:1px solid #eee;"><th style="text-align:left;padding:6px;">订单号</th><th>金额</th><th>积分</th><th>状态</th><th>时间</th></tr>
-          ${orders.map(o => `<tr style="border-bottom:1px solid #f5f5f5;">
-            <td style="padding:6px;font-family:monospace;font-size:12px;">${o.order_no}</td>
-            <td style="text-align:center;">¥${o.amount}</td>
-            <td style="text-align:center;">${o.credits}</td>
-            <td style="text-align:center;color:${statusColor[o.status] || '#999'};">${statusMap[o.status] || o.status}</td>
-            <td style="text-align:center;font-size:12px;">${(o.created_at||'').slice(5,16)}</td>
-          </tr>`).join('')}
+          <tr style="border-bottom:1px solid #eee;">
+            <th style="text-align:left;padding:6px;">订单号</th><th>金额</th><th>积分</th><th>状态</th><th>时间</th><th>操作</th>
+          </tr>
+          ${orders.map(o => {
+            let actions = '';
+            if (o.status === 'pending') {
+              actions = `<button class="btn btn-sm btn-primary" style="font-size:11px;padding:3px 8px;" onclick="reopenPayment('${o.order_no}',${o.amount},'${o.package_id}',${o.credits})">去支付</button>
+                <button class="btn btn-sm btn-outline" style="font-size:11px;padding:3px 6px;" onclick="cancelOrder('${o.order_no}')">取消</button>`;
+            } else if (o.status === 'notified') {
+              actions = `<span style="font-size:11px;color:#e67e22;">等待确认</span>`;
+            }
+            return `<tr style="border-bottom:1px solid #f5f5f5;">
+              <td style="padding:6px;font-family:monospace;font-size:12px;">${o.order_no}</td>
+              <td style="text-align:center;">¥${o.amount}</td>
+              <td style="text-align:center;">${o.credits}</td>
+              <td style="text-align:center;color:${statusColor[o.status] || '#999'};">${statusMap[o.status] || o.status}</td>
+              <td style="text-align:center;font-size:12px;">${(o.created_at||'').slice(5,16)}</td>
+              <td style="text-align:center;">${actions}</td>
+            </tr>`;
+          }).join('')}
         </table>`;
       } catch {}
+    }
+
+    function reopenPayment(orderNo, amount, pkgId, credits) {
+      const pkg = { pkg_50:'体验包', pkg_200:'标准包', pkg_500:'专业包', pkg_2000:'团队包' };
+      openPaymentModal(orderNo, amount, pkg[pkgId] || pkgId, credits);
+    }
+
+    // ============ 管理员订单管理 ============
+    async function loadAdminOrders(statusFilter) {
+      const key = document.getElementById('admin-key-input').value.trim();
+      if (!key) { toast('请输入管理密钥', 'error'); return; }
+      const panel = document.getElementById('admin-orders-panel');
+      panel.style.display = 'block';
+      const el = document.getElementById('admin-orders-list');
+      el.innerHTML = '加载中...';
+      let url = API_BASE + '/api/admin/orders?adminKey=' + encodeURIComponent(key);
+      if (statusFilter) url += '&status=' + statusFilter;
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        if (!res.ok) { el.innerHTML = `<span style="color:#e74c3c;">${data.error || '加载失败'}</span>`; return; }
+        const orders = data.orders || [];
+        if (!orders.length) { el.innerHTML = '<p style="color:var(--text-light);">无订单记录</p>'; return; }
+        const statusMap = { pending: '🕐 待支付', notified: '⏳ 已转账', paid: '✅ 已完成', cancelled: '❌ 已取消' };
+        const statusColor = { pending: '#f0ad4e', notified: '#e67e22', paid: '#2ecc71', cancelled: '#999' };
+        const methodMap = { wechat: '微信', alipay: '支付宝', '': '-' };
+        el.innerHTML = `<table style="width:100%;border-collapse:collapse;font-size:12px;">
+          <tr style="border-bottom:1px solid #ddd; background:#f9f9f9;">
+            <th style="padding:6px;text-align:left;">订单号</th>
+            <th>用户</th><th>手机</th><th>金额</th><th>积分</th>
+            <th>支付方式</th><th>状态</th><th>时间</th><th>操作</th>
+          </tr>
+          ${orders.map(o => {
+            let actions = '';
+            if (o.status === 'notified' || o.status === 'pending') {
+              actions = `<button class="btn btn-sm btn-success" style="font-size:11px;padding:2px 8px;" onclick="adminConfirmOrder('${o.order_no}')">确认收款</button>`;
+            }
+            return `<tr style="border-bottom:1px solid #f0f0f0;${o.status === 'notified' ? 'background:#fff8f0;' : ''}">
+              <td style="padding:5px;font-family:monospace;">${o.order_no}</td>
+              <td style="text-align:center;">${o.nickname || o.username || '-'}</td>
+              <td style="text-align:center;">${o.phone || '-'}</td>
+              <td style="text-align:center;font-weight:600;">¥${o.amount}</td>
+              <td style="text-align:center;">${o.credits}</td>
+              <td style="text-align:center;">${methodMap[o.pay_method] || o.pay_method || '-'}</td>
+              <td style="text-align:center;color:${statusColor[o.status] || '#999'};">${statusMap[o.status] || o.status}</td>
+              <td style="text-align:center;font-size:11px;">${(o.created_at||'').slice(5,16)}</td>
+              <td style="text-align:center;">${actions}</td>
+            </tr>`;
+          }).join('')}
+        </table>`;
+      } catch { el.innerHTML = '<span style="color:#e74c3c;">网络错误</span>'; }
+    }
+
+    async function adminConfirmOrder(orderNo) {
+      if (!confirm(`确认订单 ${orderNo} 已收到款项？确认后积分将自动发放。`)) return;
+      const key = document.getElementById('admin-key-input').value.trim();
+      try {
+        const res = await fetch(API_BASE + '/api/admin/orders/confirm', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ adminKey: key, orderNo })
+        });
+        const data = await res.json();
+        if (!res.ok) { toast(data.error || '确认失败', 'error'); return; }
+        toast(`✅ 订单 ${orderNo} 已确认，已发放 ${data.credits} 积分`, 'success');
+        loadAdminOrders(document.getElementById('admin-orders-panel').dataset.lastFilter || '');
+      } catch { toast('网络错误', 'error'); }
     }
 
     async function redeemCodeFromPurchase() {

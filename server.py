@@ -56,7 +56,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260315h'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260315i'  # 更新此版本号以追踪部署
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -71,6 +71,12 @@ INVITE_REWARD_INVITER = 20    # 邀请人获得积分
 INVITE_REWARD_INVITEE = 10    # 被邀请人获得积分
 INVITE_MAX_REWARDS = 50       # 每人最多获得邀请奖励次数
 COMMISSION_RATE = 0.15        # 分销返现比例 15%
+
+# 支付配置
+WECHAT_PAY_QR = os.environ.get('WECHAT_PAY_QR', '')       # 微信收款二维码图片 URL
+ALIPAY_PAY_QR = os.environ.get('ALIPAY_PAY_QR', '')       # 支付宝收款二维码图片 URL
+PAYMENT_ACCOUNT = os.environ.get('PAYMENT_ACCOUNT', '')    # 收款账号说明(可选)
+ORDER_EXPIRE_HOURS = 24  # 订单超时小时数
 
 # 短信验证码配置
 SMS_CODE_TTL_MINUTES = 10
@@ -218,6 +224,12 @@ def init_db():
         conn.execute('CREATE UNIQUE INDEX IF NOT EXISTS idx_users_invite_code ON users(invite_code)')
     except:
         pass
+    # 迁移：给 orders 表添加 pay_method 字段
+    try:
+        conn.execute("ALTER TABLE orders ADD COLUMN pay_method TEXT DEFAULT ''")
+        conn.commit()
+    except:
+        pass
     # AI 使用量追踪表
     conn.executescript("""
         CREATE TABLE IF NOT EXISTS ai_usage (
@@ -246,6 +258,7 @@ def init_db():
             credits INTEGER NOT NULL,
             amount REAL NOT NULL,
             status TEXT DEFAULT 'pending',
+            pay_method TEXT DEFAULT '',
             created_at TEXT DEFAULT (datetime('now','localtime')),
             paid_at TEXT,
             FOREIGN KEY (user_id) REFERENCES users(id)
@@ -1124,6 +1137,16 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         conn.close()
         return self._send_json({'codes': codes, 'credits': credits})
 
+    # ---- 支付配置 ----
+    def _get_payment_config(self):
+        """API: 获取支付配置（QR码地址等）"""
+        return self._send_json({
+            'wechatQr': WECHAT_PAY_QR,
+            'alipayQr': ALIPAY_PAY_QR,
+            'account': PAYMENT_ACCOUNT,
+            'expireHours': ORDER_EXPIRE_HOURS,
+        })
+
     # ---- 积分套餐 & 订单 ----
     def _get_packages(self):
         """API: 获取积分套餐列表"""
@@ -1160,11 +1183,57 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._send_json({'error': '未登录'}, 401)
         conn = self._get_db()
         rows = conn.execute(
-            'SELECT order_no, package_id, credits, amount, status, created_at, paid_at FROM orders WHERE user_id=? ORDER BY id DESC LIMIT 50',
+            'SELECT order_no, package_id, credits, amount, status, pay_method, created_at, paid_at FROM orders WHERE user_id=? ORDER BY id DESC LIMIT 50',
             (user['id'],)
         ).fetchall()
         conn.close()
         return self._send_json({'orders': [dict(r) for r in rows]})
+
+    def _notify_paid(self, body):
+        """API: 用户标记订单为'已转账'"""
+        user = self._require_auth()
+        if not user:
+            return
+        order_no = (body.get('orderNo') or '').strip()
+        pay_method = (body.get('payMethod') or '').strip()  # wechat / alipay / other
+        if not order_no:
+            return self._send_json({'error': '缺少订单号'}, 400)
+        conn = self._get_db()
+        order = conn.execute('SELECT * FROM orders WHERE order_no=? AND user_id=?', (order_no, user['id'])).fetchone()
+        if not order:
+            conn.close()
+            return self._send_json({'error': '订单不存在'}, 404)
+        if order['status'] != 'pending':
+            conn.close()
+            return self._send_json({'error': '该订单状态无法操作'}, 400)
+        conn.execute(
+            "UPDATE orders SET status='notified', pay_method=? WHERE id=?",
+            (pay_method, order['id'])
+        )
+        conn.commit()
+        conn.close()
+        return self._send_json({'success': True, 'orderNo': order_no, 'status': 'notified'})
+
+    def _cancel_order(self, body):
+        """API: 用户取消自己的待支付订单"""
+        user = self._require_auth()
+        if not user:
+            return
+        order_no = (body.get('orderNo') or '').strip()
+        if not order_no:
+            return self._send_json({'error': '缺少订单号'}, 400)
+        conn = self._get_db()
+        order = conn.execute('SELECT * FROM orders WHERE order_no=? AND user_id=?', (order_no, user['id'])).fetchone()
+        if not order:
+            conn.close()
+            return self._send_json({'error': '订单不存在'}, 404)
+        if order['status'] not in ('pending', 'notified'):
+            conn.close()
+            return self._send_json({'error': '该订单状态无法取消'}, 400)
+        conn.execute("UPDATE orders SET status='cancelled' WHERE id=?", (order['id'],))
+        conn.commit()
+        conn.close()
+        return self._send_json({'success': True, 'orderNo': order_no})
 
     def _admin_confirm_order(self, body):
         """API: 管理员确认订单已支付"""
@@ -1374,11 +1443,10 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
     def _admin_list_orders(self, query):
         """API: 管理员查看所有订单"""
-        # 简单通过 query 参数验证
-        admin_key = query.get('adminKey', [''])[0]
+        admin_key = query.get('adminKey', '')
         if admin_key != os.environ.get('ADMIN_KEY', 'xhs-admin-2026'):
             return self._send_json({'error': '无权限'}, 403)
-        status = query.get('status', [''])[0]
+        status = query.get('status', '')
         conn = self._get_db()
         if status:
             rows = conn.execute(
@@ -1454,6 +1522,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._get_user_credits_info()
         elif path == '/api/packages':
             return self._get_packages()
+        elif path == '/api/payment-config':
+            return self._get_payment_config()
         elif path == '/api/orders/my':
             return self._get_my_orders()
         elif path == '/api/invite/info':
@@ -1513,6 +1583,10 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._admin_gen_codes(body)
         elif path == '/api/orders/create':
             return self._create_order(body)
+        elif path == '/api/orders/notify-paid':
+            return self._notify_paid(body)
+        elif path == '/api/orders/cancel':
+            return self._cancel_order(body)
         elif path == '/api/admin/orders/confirm':
             return self._admin_confirm_order(body)
         elif path == '/api/invite/withdraw':
