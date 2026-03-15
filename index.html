@@ -1976,62 +1976,7 @@
         </div>
       </section>
 
-      <!-- ===== 支付弹窗（全局模态框） ===== -->
-      <div class="modal-overlay" id="modal-payment" style="display:none;" onclick="if(event.target===this)closePaymentModal()">
-        <div class="modal" style="max-width:480px;">
-          <div class="modal-header">
-            <h3>💳 订单支付</h3>
-            <button class="modal-close" onclick="closePaymentModal()">&times;</button>
-          </div>
-          <div class="modal-body" style="padding:20px;">
-            <!-- 订单信息 -->
-            <div style="background:#fff9e6; border:1px solid #ffd700; border-radius:8px; padding:14px; margin-bottom:16px;">
-              <div style="font-weight:600; margin-bottom:6px;">订单号：<span id="pay-order-no" style="color:var(--primary); user-select:all; font-family:monospace;"></span></div>
-              <div style="font-size:14px; margin-bottom:6px;">应付金额：<strong style="font-size:28px; color:#e74c3c;">¥<span id="pay-amount"></span></strong></div>
-              <div style="font-size:13px; color:var(--text-light);">套餐：<span id="pay-pkg-name"></span> · <span id="pay-pkg-credits"></span> 积分</div>
-            </div>
-            <!-- 支付方式Tab -->
-            <div style="display:flex; border-bottom:2px solid var(--border); margin-bottom:16px;">
-              <div class="pay-tab active" data-method="wechat" onclick="switchPayTab('wechat')" style="flex:1; text-align:center; padding:10px; cursor:pointer; font-weight:600; border-bottom:2px solid var(--primary); margin-bottom:-2px; color:var(--primary);">💚 微信支付</div>
-              <div class="pay-tab" data-method="alipay" onclick="switchPayTab('alipay')" style="flex:1; text-align:center; padding:10px; cursor:pointer; font-weight:500; border-bottom:2px solid transparent; margin-bottom:-2px; color:var(--text-light);">💙 支付宝</div>
-            </div>
-            <!-- 付款码区域 -->
-            <div id="pay-qr-area" style="text-align:center; margin-bottom:16px;">
-              <div id="pay-qr-wechat" style="display:block;">
-                <img id="pay-qr-wechat-img" src="" alt="微信收款码" style="max-width:220px; max-height:220px; border-radius:8px; border:1px solid #eee; display:none;">
-                <div id="pay-qr-wechat-empty" style="padding:30px; background:#f9f9f9; border-radius:8px; color:var(--text-light); font-size:13px;">
-                  管理员尚未配置微信收款码<br><span style="font-size:12px;">请联系管理员设置 WECHAT_PAY_QR 环境变量</span>
-                </div>
-              </div>
-              <div id="pay-qr-alipay" style="display:none;">
-                <img id="pay-qr-alipay-img" src="" alt="支付宝收款码" style="max-width:220px; max-height:220px; border-radius:8px; border:1px solid #eee; display:none;">
-                <div id="pay-qr-alipay-empty" style="padding:30px; background:#f9f9f9; border-radius:8px; color:var(--text-light); font-size:13px;">
-                  管理员尚未配置支付宝收款码<br><span style="font-size:12px;">请联系管理员设置 ALIPAY_PAY_QR 环境变量</span>
-                </div>
-              </div>
-              <div id="pay-account-info" style="margin-top:8px; font-size:12px; color:var(--text-light);"></div>
-            </div>
-            <!-- 支付步骤 -->
-            <div style="background:#f0f8ff; border-radius:8px; padding:14px; margin-bottom:16px;">
-              <div style="font-weight:600; font-size:13px; margin-bottom:6px;">📝 支付步骤：</div>
-              <ol style="font-size:12px; color:var(--text-light); padding-left:16px; line-height:1.8; margin:0;">
-                <li>扫描上方收款码（或手动转账）</li>
-                <li>转账金额：<strong style="color:#e74c3c;">¥<span class="pay-amount-copy"></span></strong></li>
-                <li>备注填写订单号：<strong id="pay-order-no2" style="color:var(--primary); user-select:all;"></strong></li>
-                <li>转账完成后点击下方<strong>"我已付款"</strong>按钮</li>
-              </ol>
-            </div>
-            <!-- 操作按钮 -->
-            <div style="display:flex; gap:10px;">
-              <button class="btn btn-primary" style="flex:1; justify-content:center;" onclick="notifyPaid()">✅ 我已付款</button>
-              <button class="btn btn-outline" style="flex:1; justify-content:center;" onclick="cancelCurrentOrder()">取消订单</button>
-            </div>
-            <div style="text-align:center; margin-top:10px; font-size:11px; color:var(--text-light);">
-              付款后管理员会在 5-30 分钟内确认，积分自动到账
-            </div>
-          </div>
-        </div>
-      </div>
+      </section>
 
       <!-- ===== 邀请赚钱 ===== -->
       <section id="page-invite" class="page hidden">
@@ -2506,6 +2451,63 @@
       </section>
 
     </main>
+  </div>
+
+  <!-- ===== 支付弹窗（全局模态框） ===== -->
+  <div class="modal-overlay" id="modal-payment" style="display:none;" onclick="if(event.target===this)closePaymentModal()">
+    <div class="modal" style="max-width:480px;">
+      <div class="modal-header">
+        <h3>💳 订单支付</h3>
+        <button class="modal-close" onclick="closePaymentModal()">&times;</button>
+      </div>
+      <div class="modal-body" style="padding:20px;">
+        <!-- 订单信息 -->
+        <div style="background:#fff9e6; border:1px solid #ffd700; border-radius:8px; padding:14px; margin-bottom:16px;">
+          <div style="font-weight:600; margin-bottom:6px;">订单号：<span id="pay-order-no" style="color:var(--primary); user-select:all; font-family:monospace;"></span></div>
+          <div style="font-size:14px; margin-bottom:6px;">应付金额：<strong style="font-size:28px; color:#e74c3c;">¥<span id="pay-amount"></span></strong></div>
+          <div style="font-size:13px; color:var(--text-light);">套餐：<span id="pay-pkg-name"></span> · <span id="pay-pkg-credits"></span> 积分</div>
+        </div>
+        <!-- 支付方式Tab -->
+        <div style="display:flex; border-bottom:2px solid var(--border); margin-bottom:16px;">
+          <div class="pay-tab active" data-method="wechat" onclick="switchPayTab('wechat')" style="flex:1; text-align:center; padding:10px; cursor:pointer; font-weight:600; border-bottom:2px solid var(--primary); margin-bottom:-2px; color:var(--primary);">💚 微信支付</div>
+          <div class="pay-tab" data-method="alipay" onclick="switchPayTab('alipay')" style="flex:1; text-align:center; padding:10px; cursor:pointer; font-weight:500; border-bottom:2px solid transparent; margin-bottom:-2px; color:var(--text-light);">💙 支付宝</div>
+        </div>
+        <!-- 付款码区域 -->
+        <div id="pay-qr-area" style="text-align:center; margin-bottom:16px;">
+          <div id="pay-qr-wechat" style="display:block;">
+            <img id="pay-qr-wechat-img" src="" alt="微信收款码" style="max-width:220px; max-height:220px; border-radius:8px; border:1px solid #eee; display:none;">
+            <div id="pay-qr-wechat-empty" style="padding:30px; background:#f9f9f9; border-radius:8px; color:var(--text-light); font-size:13px;">
+              管理员尚未配置微信收款码<br><span style="font-size:12px;">请联系管理员设置 WECHAT_PAY_QR 环境变量</span>
+            </div>
+          </div>
+          <div id="pay-qr-alipay" style="display:none;">
+            <img id="pay-qr-alipay-img" src="" alt="支付宝收款码" style="max-width:220px; max-height:220px; border-radius:8px; border:1px solid #eee; display:none;">
+            <div id="pay-qr-alipay-empty" style="padding:30px; background:#f9f9f9; border-radius:8px; color:var(--text-light); font-size:13px;">
+              管理员尚未配置支付宝收款码<br><span style="font-size:12px;">请联系管理员设置 ALIPAY_PAY_QR 环境变量</span>
+            </div>
+          </div>
+          <div id="pay-account-info" style="margin-top:8px; font-size:12px; color:var(--text-light);"></div>
+        </div>
+        <!-- 支付步骤 -->
+        <div style="background:#f0f8ff; border-radius:8px; padding:14px; margin-bottom:16px;">
+          <div style="font-weight:600; font-size:13px; margin-bottom:6px;">📝 支付步骤：</div>
+          <ol style="font-size:12px; color:var(--text-light); padding-left:16px; line-height:1.8; margin:0;">
+            <li>扫描上方收款码（或手动转账）</li>
+            <li>转账金额：<strong style="color:#e74c3c;">¥<span class="pay-amount-copy"></span></strong></li>
+            <li>备注填写订单号：<strong id="pay-order-no2" style="color:var(--primary); user-select:all;"></strong></li>
+            <li>转账完成后点击下方<strong>"我已付款"</strong>按钮</li>
+          </ol>
+        </div>
+        <!-- 操作按钮 -->
+        <div style="display:flex; gap:10px;">
+          <button class="btn btn-primary" style="flex:1; justify-content:center;" onclick="notifyPaid()">✅ 我已付款</button>
+          <button class="btn btn-outline" style="flex:1; justify-content:center;" onclick="cancelCurrentOrder()">取消订单</button>
+        </div>
+        <div style="text-align:center; margin-top:10px; font-size:11px; color:var(--text-light);">
+          付款后管理员会在 5-30 分钟内确认，积分自动到账
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ===== 模态框：编辑笔记 ===== -->
