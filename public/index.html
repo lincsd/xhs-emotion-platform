@@ -4458,6 +4458,41 @@
           dark: true, serif: false, titleSize: 50,
           endText: '持续关注', endSub: '以上为个人观点，仅供参考',
           ctaText: '🔔 关注我 · 第一时间获取热点', ctaStyle: 'filled', ctaColor: '#d32f2f'
+        },
+        // ── 带货/图文混排模板 ──
+        {
+          id: 'product_showcase', name: '种草带货', icon: '🛍️',
+          bestFor: ['种草','带货','好物','推荐','测评','开箱','安利','平价','合集','必买'],
+          skill: '粉白渐变背景+产品图网格+色卡色块+价格标签+购买引导。适合好物推荐/种草清单/产品测评/开箱分享，以产品图为核心驱动购买欲',
+          accountTypes: ['种草带货','好物推荐','美妆护肤'],
+          palette: { bg:'#fff5f7', card:'#ffffff', text:'#2d2d2d', accent:'#ff4d6d', sub:'#8b8b8b' },
+          serif: false, titleSize: 46, hasPhotos: true,
+          photoLayout: 'grid', // grid | hero | collage
+          endText: '喜欢就冲吧！', endEmoji: '🛒💕',
+          ctaText: '点赞收藏 = 不迷路 🛍️', ctaStyle: 'filled', ctaColor: '#ff4d6d'
+        },
+        {
+          id: 'ootd_collage', name: '穿搭拼图', icon: '👗',
+          bestFor: ['穿搭','ootd','搭配','衣服','时装','春装','秋装','冬装','夏装','显瘦','显高'],
+          skill: '杂志感拼贴布局+多图网格+渐变色带+英文装饰。适合穿搭OOTD/搭配灵感/季节穿搭推荐，图片为主文字为辅',
+          accountTypes: ['时尚穿搭','生活方式'],
+          palette: { bg:'#faf5f0', card:'#ffffff', text:'#1a1a1a', accent:'#c9a87c', sub:'#888888' },
+          serif: false, italic: true, titleSize: 44, titleAlign: 'left', hasPhotos: true,
+          photoLayout: 'collage',
+          headerLabel: 'OOTD',
+          endText: '你最喜欢哪套?', endSub: 'TELL ME IN COMMENTS',
+          ctaText: '关注看更多穿搭 👗', ctaStyle: 'border'
+        },
+        {
+          id: 'color_palette', name: '配色灵感', icon: '🎨',
+          bestFor: ['配色','色彩','调色','滤镜','美学','色系','撞色','同色','莫兰迪','高级感'],
+          skill: '色卡提取+色块矩阵展示+配色方案命名+图片与色卡对比。适合配色推荐/色彩搭配/滤镜调色/美学灵感分享',
+          accountTypes: ['时尚美学','设计灵感','摄影艺术'],
+          palette: { bg:'#f8f6ff', card:'#ffffff', text:'#2a2a3d', accent:'#7c5cbf', sub:'#9e9eb0' },
+          serif: false, titleSize: 46, hasPhotos: true,
+          photoLayout: 'hero',
+          endText: '这组配色你爱了吗？', endEmoji: '🎨✨',
+          ctaText: '收藏这组配色 🎨', ctaStyle: 'gradient'
         }
       ],
 
@@ -4503,6 +4538,202 @@
         ctx.beginPath();
         for (let i = 0; i < 5; i++) { const a = Math.PI/2*3 + i*Math.PI*2/5; ctx.lineTo(cx+Math.cos(a)*r, cy+Math.sin(a)*r); const b=a+Math.PI/5; ctx.lineTo(cx+Math.cos(b)*r*0.4, cy+Math.sin(b)*r*0.4); }
         ctx.closePath(); ctx.fillStyle = fill; ctx.fill();
+      },
+
+      // ══════════════ 用户照片管理 ══════════════
+      _userPhotos: [],      // [{dataUrl, img (HTMLImageElement), colors}]
+      _loadedImages: [],     // loaded Image objects
+
+      setUserPhotos(dataUrls) {
+        this._userPhotos = dataUrls.map(url => ({ dataUrl: url, img: null, colors: [] }));
+        this._loadedImages = [];
+        return Promise.all(dataUrls.map((url, i) => new Promise(resolve => {
+          const img = new Image();
+          img.onload = () => {
+            this._userPhotos[i].img = img;
+            this._userPhotos[i].colors = this._extractColors(img);
+            this._loadedImages.push(img);
+            resolve();
+          };
+          img.onerror = resolve;
+          img.src = url;
+        })));
+      },
+
+      _extractColors(img) {
+        const c = document.createElement('canvas');
+        const sz = 50;
+        c.width = sz; c.height = sz;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0, sz, sz);
+        const data = ctx.getImageData(0, 0, sz, sz).data;
+        const buckets = {};
+        for (let i = 0; i < data.length; i += 16) {
+          const r = Math.round(data[i] / 32) * 32;
+          const g = Math.round(data[i+1] / 32) * 32;
+          const b = Math.round(data[i+2] / 32) * 32;
+          const key = `${r},${g},${b}`;
+          buckets[key] = (buckets[key] || 0) + 1;
+        }
+        return Object.entries(buckets)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 8)
+          .map(([k]) => { const [r,g,b] = k.split(','); return `rgb(${r},${g},${b})`; });
+      },
+
+      // Draw image into rounded rect area with cover-fit
+      _drawImageCover(ctx, img, x, y, w, h, r) {
+        if (!img) return;
+        ctx.save();
+        this._roundRect(ctx, x, y, w, h, r || 0);
+        ctx.clip();
+        const iw = img.width, ih = img.height;
+        const scale = Math.max(w / iw, h / ih);
+        const sw = iw * scale, sh = ih * scale;
+        ctx.drawImage(img, x + (w - sw) / 2, y + (h - sh) / 2, sw, sh);
+        ctx.restore();
+      },
+
+      // ══════════════ 照片网格页渲染 ══════════════
+      _drawPhotoPage(ctx, tmpl, pageType) {
+        const W = this.W, H = this.H, p = tmpl.palette;
+        const photos = this._userPhotos.filter(ph => ph.img);
+        if (!photos.length) return;
+        this._drawBg(ctx, tmpl);
+        const tid = tmpl.id;
+        const layout = tmpl.photoLayout || 'grid';
+
+        if (layout === 'hero' && pageType === 'cover-photo') {
+          // Hero: one large photo at top + color palette below
+          const img = photos[0].img;
+          this._drawImageCover(ctx, img, 60, 80, W - 120, 680, 16);
+          // Color palette extracted from image
+          const colors = photos[0].colors || [];
+          if (colors.length >= 4) {
+            const swatchY = 790;
+            const swatchSize = 72;
+            const gap = 16;
+            const totalW = colors.length * (swatchSize + gap) - gap;
+            const startX = (W - totalW) / 2;
+            colors.forEach((c, i) => {
+              const sx = startX + i * (swatchSize + gap);
+              this._roundRect(ctx, sx, swatchY, swatchSize, swatchSize, 12);
+              ctx.fillStyle = c; ctx.fill();
+              ctx.strokeStyle = '#fff'; ctx.lineWidth = 2;
+              this._roundRect(ctx, sx, swatchY, swatchSize, swatchSize, 12); ctx.stroke();
+            });
+            // Label
+            ctx.font = this._font(18, '500', tmpl); ctx.fillStyle = p.sub;
+            ctx.textAlign = 'center';
+            ctx.fillText('▼ 提取配色方案 ▼', W / 2, swatchY - 16);
+            ctx.textAlign = 'left';
+          }
+        }
+        else if (layout === 'collage') {
+          // Magazine-style collage
+          const n = Math.min(photos.length, 6);
+          if (n === 1) {
+            this._drawImageCover(ctx, photos[0].img, 60, 100, W - 120, H - 200, 16);
+          } else if (n === 2) {
+            const gw = (W - 140) / 2;
+            this._drawImageCover(ctx, photos[0].img, 60, 100, gw, H - 200, 12);
+            this._drawImageCover(ctx, photos[1].img, 80 + gw, 100, gw, H - 200, 12);
+          } else if (n === 3) {
+            // 1 big left + 2 small right
+            const bigW = (W - 140) * 0.6;
+            const smallW = W - 140 - bigW - 10;
+            const halfH = (H - 210) / 2;
+            this._drawImageCover(ctx, photos[0].img, 60, 100, bigW, H - 200, 12);
+            this._drawImageCover(ctx, photos[1].img, 70 + bigW, 100, smallW, halfH - 5, 12);
+            this._drawImageCover(ctx, photos[2].img, 70 + bigW, 105 + halfH, smallW, halfH - 5, 12);
+          } else if (n === 4) {
+            const gw = (W - 150) / 2;
+            const gh = (H - 220) / 2;
+            photos.slice(0, 4).forEach((ph, i) => {
+              const col = i % 2, row = Math.floor(i / 2);
+              this._drawImageCover(ctx, ph.img, 60 + col * (gw + 10), 100 + row * (gh + 10), gw, gh, 12);
+            });
+          } else {
+            // 2 rows: top 3, bottom 3 (or less)
+            const topCount = Math.ceil(n / 2);
+            const botCount = n - topCount;
+            const rowH = (H - 220) / 2;
+            // Top row
+            const tw = (W - 120 - (topCount - 1) * 10) / topCount;
+            photos.slice(0, topCount).forEach((ph, i) => {
+              this._drawImageCover(ctx, ph.img, 60 + i * (tw + 10), 100, tw, rowH - 5, 10);
+            });
+            // Bottom row
+            if (botCount > 0) {
+              const bw = (W - 120 - (botCount - 1) * 10) / botCount;
+              photos.slice(topCount, topCount + botCount).forEach((ph, i) => {
+                this._drawImageCover(ctx, ph.img, 60 + i * (bw + 10), 105 + rowH, bw, rowH - 5, 10);
+              });
+            }
+          }
+          // Decorative overlay label
+          if (tid === 'ootd_collage') {
+            ctx.globalAlpha = 0.7;
+            this._roundRect(ctx, 60, H - 120, W - 120, 50, 0);
+            ctx.fillStyle = '#000'; ctx.fill();
+            ctx.globalAlpha = 1;
+            ctx.font = this._font(18, '500', tmpl); ctx.fillStyle = '#fff';
+            ctx.textAlign = 'center';
+            ctx.fillText(`OUTFIT OF THE DAY · ${n} LOOKS`, W / 2, H - 90);
+            ctx.textAlign = 'left';
+          }
+        }
+        else {
+          // Grid layout (product_showcase default)
+          const n = Math.min(photos.length, 6);
+          const margin = 60, gap = 12;
+          const innerW = W - margin * 2;
+          const titleAreaH = 160;
+          const gridAreaH = H - titleAreaH - 100;
+
+          // Title bar
+          ctx.font = this._font(32, '700', tmpl); ctx.fillStyle = p.text;
+          ctx.textAlign = 'center';
+          ctx.fillText('— 好物推荐 —', W / 2, margin + 50);
+          ctx.font = this._font(16, '400', tmpl); ctx.fillStyle = p.sub;
+          ctx.fillText(`共 ${n} 件好物`, W / 2, margin + 80);
+          ctx.textAlign = 'left';
+
+          // Product grid
+          let cols, rows;
+          if (n <= 2) { cols = n; rows = 1; }
+          else if (n <= 4) { cols = 2; rows = 2; }
+          else { cols = 3; rows = 2; }
+
+          const cellW = (innerW - (cols - 1) * gap) / cols;
+          const cellH = (gridAreaH - (rows - 1) * gap) / rows;
+          photos.slice(0, n).forEach((ph, i) => {
+            const col = i % cols, row = Math.floor(i / cols);
+            const cx = margin + col * (cellW + gap);
+            const cy = titleAreaH + row * (cellH + gap);
+            // Shadow
+            ctx.shadowColor = 'rgba(0,0,0,0.08)'; ctx.shadowBlur = 12; ctx.shadowOffsetY = 4;
+            this._roundRect(ctx, cx, cy, cellW, cellH, 14);
+            ctx.fillStyle = '#fff'; ctx.fill();
+            ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+            // Photo
+            this._drawImageCover(ctx, ph.img, cx + 4, cy + 4, cellW - 8, cellH - 8, 10);
+          });
+
+          // Color swatches at bottom if available
+          const allColors = photos.flatMap(ph => ph.colors || []).slice(0, 10);
+          if (allColors.length >= 3) {
+            const swY = H - 75;
+            const swSz = 28, swGap = 8;
+            const swTotal = allColors.length * (swSz + swGap) - swGap;
+            allColors.forEach((c, i) => {
+              ctx.beginPath();
+              ctx.arc((W - swTotal) / 2 + i * (swSz + swGap) + swSz/2, swY, swSz/2, 0, Math.PI * 2);
+              ctx.fillStyle = c; ctx.fill();
+              ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+            });
+          }
+        }
       },
 
       // ══════════════ 段落智能解析器 ══════════════
@@ -4716,6 +4947,46 @@
           ctx.fillStyle = p.accent; ctx.fillRect(38, 90, 4, H-130);
           // Bottom separator
           ctx.fillStyle = '#e0e0e0'; ctx.fillRect(40, H-80, W-80, 1);
+        }
+        // ── 带货图文模板背景 ──
+        else if (tid === 'product_showcase') {
+          const g = ctx.createLinearGradient(0, 0, W, H);
+          g.addColorStop(0, '#fff5f7'); g.addColorStop(0.5, '#ffe8ee'); g.addColorStop(1, '#fff0f3');
+          ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+          // Soft bokeh circles
+          [{ x:120, y:150, r:90, c:'rgba(255,77,109,0.06)' },
+           { x:W-100, y:400, r:110, c:'rgba(255,150,180,0.06)' },
+           { x:200, y:H-200, r:80, c:'rgba(255,200,210,0.05)' }].forEach(ci => {
+            ctx.beginPath(); ctx.arc(ci.x, ci.y, ci.r, 0, Math.PI*2);
+            ctx.fillStyle = ci.c; ctx.fill();
+          });
+          // Top accent bar
+          const tg = ctx.createLinearGradient(0, 0, W, 0);
+          tg.addColorStop(0, '#ff4d6d'); tg.addColorStop(1, '#ff8fa3');
+          ctx.fillStyle = tg; ctx.fillRect(0, 0, W, 5);
+        }
+        else if (tid === 'ootd_collage') {
+          ctx.fillStyle = '#faf5f0'; ctx.fillRect(0, 0, W, H);
+          // Left/Right color strips (magazine feel)
+          const lg = ctx.createLinearGradient(0, 0, 0, H);
+          lg.addColorStop(0, '#c9a87c33'); lg.addColorStop(1, '#c9a87c08');
+          ctx.fillStyle = lg; ctx.fillRect(0, 0, 8, H);
+          ctx.fillRect(W-8, 0, 8, H);
+          // Fine grid
+          ctx.strokeStyle = 'rgba(0,0,0,0.02)'; ctx.lineWidth = 0.5;
+          for (let x = 0; x < W; x += 80) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+          for (let y = 0; y < H; y += 80) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+        }
+        else if (tid === 'color_palette') {
+          const g = ctx.createLinearGradient(0, 0, W, H);
+          g.addColorStop(0, '#f8f6ff'); g.addColorStop(0.4, '#f0ecff'); g.addColorStop(1, '#faf5ff');
+          ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+          // Soft gradient circles as decor
+          [{ x:100, y:120, r:120, c:'rgba(124,92,191,0.04)' },
+           { x:W-80, y:H-300, r:150, c:'rgba(180,140,255,0.04)' }].forEach(ci => {
+            ctx.beginPath(); ctx.arc(ci.x, ci.y, ci.r, 0, Math.PI*2);
+            ctx.fillStyle = ci.c; ctx.fill();
+          });
         }
       },
 
@@ -5258,6 +5529,9 @@
           { kw: ['派对','生日','庆祝','搞笑','节日','彩虹','活力'], id: 'candy_pop' },
           { kw: ['治愈','温暖','正能量','晚安','养生','冥想','植物'], id: 'nature_healing' },
           { kw: ['情感','成长','感悟','读书','文艺','散文','离别'], id: 'minimal_literary' },
+          { kw: ['种草','带货','好物','推荐','测评','开箱','安利','必买','合集'], id: 'product_showcase' },
+          { kw: ['穿搭','ootd','搭配','衣服','时装','春装','秋装','显瘦','显高'], id: 'ootd_collage' },
+          { kw: ['配色','色彩','调色','滤镜','色系','撞色','莫兰迪','高级感'], id: 'color_palette' },
         ];
         for (const { kw, id } of kwMap) {
           if (kw.some(k => text.includes(k))) return this.getTemplate(id);
@@ -5337,9 +5611,22 @@ ${postList}
         const tmpl = templateId ? this.getTemplate(templateId) : this.matchTemplate(post);
         let c = document.createElement('canvas'); c.width = this.W; c.height = this.H;
         const cards = [];
+        const hasUserPhotos = tmpl.hasPhotos && this._userPhotos.some(ph => ph.img);
+
         // Cover
         this._drawCover(c.getContext('2d'), post, tmpl);
         cards.push({ type: 'cover', label: '封面', dataUrl: c.toDataURL('image/png') });
+
+        // Photo page (for templates with hasPhotos + user uploaded photos)
+        if (hasUserPhotos) {
+          c = document.createElement('canvas'); c.width = this.W; c.height = this.H;
+          this._drawPhotoPage(c.getContext('2d'), tmpl, tmpl.photoLayout === 'hero' ? 'cover-photo' : 'photo-grid');
+          cards.push({ type: 'photos', label: '图片页', dataUrl: c.toDataURL('image/png') });
+        } else if (tmpl.hasPhotos) {
+          // Placeholder — user can click to generate AI photos or upload
+          cards.push({ type: 'ai-photos-placeholder', label: '📸 上传/AI生成', dataUrl: '' });
+        }
+
         // Content pages
         const pages = this.splitContent(post.content || '', 260);
         pages.forEach((pg, i) => {
@@ -5371,6 +5658,20 @@ ${postList}
         <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap;">
           <select id="card-post-select" onchange="onCardPostChange()" style="flex:1;min-width:200px;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;">${selectHtml}</select>
           <button class="btn btn-primary btn-sm" onclick="_aiPreMatchAll()" title="AI智能匹配所有笔记的最佳模板">🤖 AI匹配</button>
+        </div>
+        <div id="card-photo-upload" style="margin-bottom:12px;padding:12px;border:1px dashed var(--border);border-radius:10px;background:var(--bg);display:none;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <span style="font-size:14px;font-weight:600;">📸 上传产品/穿搭照片</span>
+            <span style="font-size:12px;color:var(--text-light);">（支持1-6张，用于图片页）</span>
+          </div>
+          <div id="card-photo-preview" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;min-height:0;"></div>
+          <div style="display:flex;gap:8px;">
+            <label class="btn btn-sm btn-outline" style="cursor:pointer;">
+              📎 选择图片
+              <input type="file" id="card-photo-input" accept="image/*" multiple style="display:none;" onchange="handleCardPhotoUpload(this)">
+            </label>
+            <button class="btn btn-sm btn-outline" onclick="clearCardPhotos()" style="display:none;" id="btn-clear-photos">🗑️ 清空</button>
+          </div>
         </div>
         <div id="card-template-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;margin-bottom:12px;"></div>
         <div id="card-preview-area"></div>
@@ -5436,22 +5737,42 @@ ${postList}
       CardEngine._currentTmplId = tmplId;
       const post = CardEngine._currentPost;
       if (!post) return;
+
+      // Show/hide photo upload panel based on template
+      const tmpl = CardEngine.getTemplate(tmplId);
+      const photoPanel = document.getElementById('card-photo-upload');
+      if (photoPanel) {
+        photoPanel.style.display = (tmpl && tmpl.hasPhotos) ? 'block' : 'none';
+      }
+
       const result = CardEngine.generateCards(post, tmplId);
       CardEngine._currentCards = result.cards;
       const area = document.getElementById('card-preview-area');
       if (!area) return;
+
+      // Check if there's an AI-generated photo page placeholder
+      const hasAiPlaceholder = result.cards.some(c => c.type === 'ai-photos-placeholder');
+
       area.innerHTML = `
         <div style="display:flex;gap:8px;overflow-x:auto;padding:8px 0;">
           ${result.cards.map((card, i) => `
             <div style="flex-shrink:0;text-align:center;">
-              <img src="${card.dataUrl}" style="width:135px;height:180px;object-fit:cover;border-radius:8px;border:1px solid var(--border);cursor:pointer;" onclick="openCardLightbox(${i})">
+              ${card.type === 'ai-photos-placeholder' ? `
+                <div style="width:135px;height:180px;border-radius:8px;border:1px dashed var(--primary);display:flex;align-items:center;justify-content:center;background:var(--bg);cursor:pointer;flex-direction:column;gap:4px;" onclick="generateAiProductPhotos()">
+                  <span style="font-size:28px;">🤖</span>
+                  <span style="font-size:10px;color:var(--primary);text-align:center;line-height:1.3;">点击AI生成<br>产品图片</span>
+                </div>
+              ` : `
+                <img src="${card.dataUrl}" style="width:135px;height:180px;object-fit:cover;border-radius:8px;border:1px solid var(--border);cursor:pointer;" onclick="openCardLightbox(${i})">
+              `}
               <div style="font-size:11px;color:var(--text-light);margin-top:4px;">${card.label}</div>
             </div>
           `).join('')}
         </div>
-        <div style="display:flex;gap:8px;margin-top:8px;">
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
           <button class="btn btn-sm btn-outline" onclick="downloadAllCards()">📥 下载全部</button>
           <button class="btn btn-sm btn-outline" onclick="downloadSingleCard(0)">📥 仅封面</button>
+          ${(tmpl && tmpl.hasPhotos) ? `<button class="btn btn-sm btn-primary" onclick="generateAiProductPhotos()" title="让Gemini AI生成产品图片页">🤖 AI生成图片页</button>` : ''}
         </div>
       `;
       // Highlight selected template in grid
@@ -5512,6 +5833,164 @@ ${postList}
         }, i * 300);
       });
       toast(`📥 正在下载 ${cards.length} 张卡片...`, 'success');
+    }
+
+    // ══════════════ 照片上传 + AI 增强 ══════════════
+    async function handleCardPhotoUpload(input) {
+      const files = Array.from(input.files || []).slice(0, 6);
+      if (!files.length) return;
+
+      const preview = document.getElementById('card-photo-preview');
+      const clearBtn = document.getElementById('btn-clear-photos');
+      if (clearBtn) clearBtn.style.display = 'inline-block';
+
+      // Show loading state
+      preview.innerHTML = '<div style="font-size:13px;color:var(--text-light);padding:8px;">⏳ 正在处理图片...</div>';
+
+      const dataUrls = [];
+      for (const file of files) {
+        const url = await new Promise(resolve => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.readAsDataURL(file);
+        });
+        dataUrls.push(url);
+      }
+
+      // Try AI enhancement via Gemini (optional, non-blocking)
+      const enhancedUrls = await _tryGeminiPhotoEnhance(dataUrls);
+
+      // Load into CardEngine
+      await CardEngine.setUserPhotos(enhancedUrls.length ? enhancedUrls : dataUrls);
+
+      // Render preview thumbnails
+      const finalUrls = enhancedUrls.length ? enhancedUrls : dataUrls;
+      preview.innerHTML = finalUrls.map((url, i) => `
+        <div style="position:relative;display:inline-block;">
+          <img src="${url}" style="width:60px;height:60px;object-fit:cover;border-radius:6px;border:1px solid var(--border);">
+          ${enhancedUrls.length ? '<span style="position:absolute;bottom:2px;right:2px;font-size:10px;background:rgba(0,0,0,0.6);color:#fff;padding:1px 3px;border-radius:3px;">✨AI</span>' : ''}
+        </div>
+      `).join('');
+
+      toast(`📸 已加载 ${finalUrls.length} 张照片${enhancedUrls.length ? '（AI增强）' : ''}`, 'success');
+
+      // Refresh card preview
+      if (CardEngine._currentTmplId) switchCardTemplate(CardEngine._currentTmplId);
+      input.value = '';
+    }
+
+    function clearCardPhotos() {
+      CardEngine._userPhotos = [];
+      CardEngine._loadedImages = [];
+      const preview = document.getElementById('card-photo-preview');
+      if (preview) preview.innerHTML = '';
+      const clearBtn = document.getElementById('btn-clear-photos');
+      if (clearBtn) clearBtn.style.display = 'none';
+      if (CardEngine._currentTmplId) switchCardTemplate(CardEngine._currentTmplId);
+    }
+
+    async function _tryGeminiPhotoEnhance(dataUrls) {
+      const apiKey = getGeminiKey();
+      if (!apiKey) return [];
+
+      try {
+        toast('🤖 AI 正在优化图片...', 'info');
+        const enhanced = [];
+        for (const url of dataUrls) {
+          try {
+            const base64 = url.split(',')[1];
+            const mimeType = url.match(/data:([^;]+)/)?.[1] || 'image/jpeg';
+
+            const payload = {
+              contents: [{
+                parts: [
+                  { text: '请对这张产品/穿搭照片进行专业优化处理：1) 提升画质和清晰度 2) 优化色彩和亮度,使其更适合小红书/社交媒体风格 3) 轻微美化、让产品/人物更突出 4) 保持原图的主体和构图不变。直接输出优化后的图片。' },
+                  { inlineData: { mimeType, data: base64 } }
+                ]
+              }],
+              generationConfig: { responseModalities: ['TEXT', 'IMAGE'] }
+            };
+
+            const imageModel = getImageModel();
+            const candidates = [
+              'gemini-3.1-flash-image-preview',
+              'gemini-3-pro-image-preview',
+              imageModel
+            ].filter((m, i, arr) => m && arr.indexOf(m) === i);
+
+            let img = null;
+            for (const modelName of candidates) {
+              try {
+                const result = await callGeminiAPI(apiKey, modelName, payload, 'generateContent', 'AI修图');
+                img = _extractImageFromResponse(result.data);
+                if (img) break;
+              } catch (e) {
+                console.warn('[PhotoEnhance] Model', modelName, 'failed:', e.message);
+              }
+            }
+            enhanced.push(img || url);
+          } catch (e) {
+            console.warn('[PhotoEnhance] Failed for image:', e.message);
+            enhanced.push(url);
+          }
+          // Anti rate-limit
+          if (dataUrls.indexOf(url) < dataUrls.length - 1) await new Promise(r => setTimeout(r, 1500));
+        }
+        const aiCount = enhanced.filter((u, i) => u !== dataUrls[i]).length;
+        if (aiCount > 0) toast(`✨ AI优化了 ${aiCount}/${dataUrls.length} 张图片`, 'success');
+        return enhanced;
+      } catch (e) {
+        console.warn('[PhotoEnhance] Overall failed:', e);
+        return [];
+      }
+    }
+
+    async function generateAiProductPhotos() {
+      const post = CardEngine._currentPost;
+      const tmpl = CardEngine.getTemplate(CardEngine._currentTmplId);
+      if (!post || !tmpl || !tmpl.hasPhotos) return;
+
+      toast('🤖 AI 正在生成产品图片...', 'info');
+
+      const category = post.category || '种草';
+      const title = post.title || '好物推荐';
+      const nicheEn = typeof _s === 'function' ? _s().aiNiche : 'lifestyle';
+      const layout = tmpl.photoLayout || 'grid';
+      const count = layout === 'hero' ? 1 : (layout === 'collage' ? 3 : 4);
+
+      const prompts = [];
+      if (layout === 'hero') {
+        prompts.push(`创建一张精美的产品展示图。主题："${title}"，类别：${category}。要求：竖版3:4比例，产品/物体居中，干净的背景（白色或浅渐变），专业的产品摄影风格光影，适合小红书种草帖。不要加文字。`);
+      } else if (layout === 'collage') {
+        for (let i = 0; i < count; i++) {
+          const angles = ['正面全身穿搭效果', '侧面/背面穿搭细节', '搭配配饰特写'];
+          prompts.push(`创建一张${angles[i] || '时尚穿搭'}照片。主题："${title}"，风格：小红书穿搭博主风格。要求：竖版3:4比例，${angles[i]}，时尚杂志质感，真实自然的穿搭效果。不要加文字。`);
+        }
+      } else {
+        for (let i = 0; i < count; i++) {
+          const views = ['产品正面主图', '产品使用场景', '产品细节特写', '整体搭配效果'];
+          prompts.push(`创建一张${views[i]}展示图。主题："${title}"，类别：${category}。要求：竖版3:4比例，小红书种草风格，高清质感，干净背景。不要加文字。`);
+        }
+      }
+
+      const dataUrls = [];
+      for (let i = 0; i < prompts.length; i++) {
+        try {
+          const img = await generateSingleImage(prompts[i]);
+          if (img) dataUrls.push(img);
+        } catch (e) {
+          console.warn(`AI product photo ${i+1} failed:`, e);
+        }
+        if (i < prompts.length - 1) await new Promise(r => setTimeout(r, 1200));
+      }
+
+      if (dataUrls.length) {
+        await CardEngine.setUserPhotos(dataUrls);
+        toast(`✅ AI生成了 ${dataUrls.length} 张产品图片`, 'success');
+        switchCardTemplate(CardEngine._currentTmplId);
+      } else {
+        toast('❌ AI图片生成失败，请检查API配置', 'error');
+      }
     }
 
     function quickCardForPost(idx) {
