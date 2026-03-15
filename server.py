@@ -53,7 +53,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260315b'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260315c'  # 更新此版本号以追踪部署
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -180,11 +180,18 @@ def init_db():
     except:
         pass
     # 迁移：给 users 表添加邀请码 & 邀请人字段
-    for col in ('invite_code TEXT UNIQUE', 'invited_by INTEGER DEFAULT 0', 'commission_balance REAL DEFAULT 0'):
+    for col in ('invite_code TEXT', 'invited_by INTEGER DEFAULT 0', 'commission_balance REAL DEFAULT 0'):
         try:
             conn.execute(f'ALTER TABLE users ADD COLUMN {col}')
         except:
             pass
+    # 提交 ALTER 确保列生效
+    conn.commit()
+    # 为 invite_code 列创建唯一索引（ALTER TABLE 不支持 UNIQUE 约束）
+    try:
+        conn.execute('CREATE UNIQUE INDEX IF NOT EXISTS idx_users_invite_code ON users(invite_code)')
+    except:
+        pass
     # AI 使用量追踪表
     conn.executescript("""
         CREATE TABLE IF NOT EXISTS ai_usage (
@@ -255,13 +262,16 @@ def init_db():
         );
     """)
     # 为所有老用户生成邀请码（如果没有）
-    rows = conn.execute('SELECT id FROM users WHERE invite_code IS NULL').fetchall()
-    for r in rows:
-        code = 'INV' + secrets.token_hex(4).upper()
-        try:
-            conn.execute('UPDATE users SET invite_code=? WHERE id=?', (code, r['id']))
-        except:
-            pass
+    try:
+        rows = conn.execute('SELECT id FROM users WHERE invite_code IS NULL').fetchall()
+        for r in rows:
+            code = 'INV' + secrets.token_hex(4).upper()
+            try:
+                conn.execute('UPDATE users SET invite_code=? WHERE id=?', (code, r['id']))
+            except:
+                pass
+    except Exception as e:
+        print(f"[init_db] 跳过邀请码回填: {e}")
     conn.commit()
     conn.close()
 
