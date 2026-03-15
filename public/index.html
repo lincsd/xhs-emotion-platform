@@ -7923,10 +7923,10 @@ Style: ${stylePrompt}
       try {
         const key = getGeminiKey();
         const payload = {
-          contents: [{ parts: [{ text: `你是小红书运营规划专家。请为"${niche}"赛道生成未来7天的发布计划。\n\n日期范围：${dates[0]} 到 ${dates[6]}\n\n返回JSON格式：\n{"plans":[{"date":"${dates[0]}","time":"10:00","title":"笔记标题","topic":"主题词","notes":"简要说明"}]}\n\n要求：\n1. 每天1-2篇内容\n2. 内容类型要多样化（干货、种草、互动、故事等混搭）\n3. 发布时间推荐最优时段（早8-9点、中午12-13点、晚7-9点）\n4. 周末可以安排轻松互动型内容\n5. 标题要具体、有吸引力` }] }],
-          generationConfig: { temperature: 0.9, maxOutputTokens: 4096 }
+          contents: [{ parts: [{ text: `你是小红书运营规划专家。请为"${niche}"赛道生成未来7天的发布计划。\n\n日期范围：${dates[0]} 到 ${dates[6]}\n\n请严格只返回JSON，不要有任何解释文字，格式如下：\n{"plans":[{"date":"2026-03-15","time":"10:00","title":"笔记标题","topic":"主题词","notes":"简要说明"}]}\n\n要求：\n1. 每天1-2篇内容\n2. 内容类型多样化（干货、种草、互动、故事混搭）\n3. 发布时间推荐最优时段（早8-9点、中午12-13点、晚7-9点）\n4. 周末安排轻松互动型内容\n5. 标题具体有吸引力\n\n再次强调：直接输出JSON，不要任何前言后语。` }] }],
+          generationConfig: { temperature: 0.9, maxOutputTokens: 8192, responseMimeType: 'application/json' }
         };
-        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', '一键润色');
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', '内容规划');
         const resData = result?.data || result;
         const text = _extractGeminiText(resData);
         const json = _extractJsonFromText(text);
