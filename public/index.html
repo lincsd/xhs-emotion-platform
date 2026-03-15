@@ -974,6 +974,12 @@
     .account-card { border:1px solid #eee; border-radius:12px; padding:16px; display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; transition:all .2s; }
     .account-card:hover { border-color:var(--primary); }
     .account-card.active { border-color:var(--primary); background:var(--primary-light); }
+    .img-slider-row { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+    .img-slider-row label { min-width:70px; font-size:13px; }
+    .img-slider-row input[type=range] { flex:1; accent-color:var(--primary); }
+    .img-slider-row span { min-width:32px; text-align:right; font-size:13px; font-weight:600; color:var(--primary); }
+    .img-crop-btn.active { background:var(--primary) !important; color:#fff !important; border-color:var(--primary) !important; }
+    @media (max-width:768px) { #img-tool-layout { grid-template-columns:1fr !important; } }
     .comment-tpl-card { border:1px solid #eee; border-radius:10px; padding:12px 16px; margin-bottom:8px; }
     .comment-tpl-card .scene { font-size:11px; color:var(--primary); background:var(--primary-light); padding:2px 8px; border-radius:10px; }
     .festival-card { display:flex; align-items:center; gap:12px; padding:10px 14px; border-radius:10px; background:#fff8f0; margin-bottom:6px; }
@@ -1514,6 +1520,9 @@
         <div class="nav-item" data-page="content-plan">
           <span class="icon">📋</span> 内容规划
         </div>
+        <div class="nav-item" data-page="img-tool">
+          <span class="icon">🖼️</span> 图片优化
+        </div>
       </div>
       <div class="nav-group">
         <div class="nav-group-title">账号管理</div>
@@ -1604,6 +1613,7 @@
         <div class="nav-item mob-nav" data-page="title-gen" onclick="mobileSwitchPage('title-gen')"><span class="icon">📰</span> 爆款标题</div>
         <div class="nav-item mob-nav" data-page="keywords" onclick="mobileSwitchPage('keywords')"><span class="icon">🔑</span> 热词分析</div>
         <div class="nav-item mob-nav" data-page="content-plan" onclick="mobileSwitchPage('content-plan')"><span class="icon">📋</span> 内容规划</div>
+        <div class="nav-item mob-nav" data-page="img-tool" onclick="mobileSwitchPage('img-tool')"><span class="icon">🖼️</span> 图片优化</div>
       </div>
       <div class="nav-group">
         <div class="nav-group-title">账号管理</div>
@@ -2569,6 +2579,85 @@
           <div id="plan-week-view"></div>
         </div>
         <div id="plan-list"></div>
+      </section>
+
+      <!-- ===== 图片优化工具 ===== -->
+      <section id="page-img-tool" class="page hidden">
+        <div class="page-header"><div><h2>🖼️ 图片优化工具</h2><p class="subtitle">裁剪、调色、压缩、水印、AI 配文一站式搞定</p></div></div>
+        <!-- 上传区 -->
+        <div class="card" id="img-upload-area" style="text-align:center;padding:40px;border:2px dashed #ddd;border-radius:12px;cursor:pointer;transition:all 0.2s;" onclick="document.getElementById('img-file-input').click()" ondragover="event.preventDefault();this.style.borderColor='var(--primary)';this.style.background='#f0f4ff';" ondragleave="this.style.borderColor='#ddd';this.style.background='';" ondrop="event.preventDefault();this.style.borderColor='#ddd';this.style.background='';handleImageDrop(event);">
+          <input type="file" id="img-file-input" accept="image/*" style="display:none;" onchange="handleImageUpload(this)">
+          <div style="font-size:48px;margin-bottom:12px;">📷</div>
+          <div style="font-size:16px;font-weight:600;margin-bottom:4px;">点击或拖拽上传图片</div>
+          <div style="font-size:13px;color:var(--text-light);">JPG / PNG / WebP，推荐小红书 3:4 比例</div>
+        </div>
+
+        <!-- 工具区（上传后显示） -->
+        <div id="img-tool-panel" style="display:none;">
+          <!-- 预览 + 控件 -->
+          <div style="display:grid;grid-template-columns:1fr 320px;gap:16px;margin-top:16px;" id="img-tool-layout">
+            <!-- 左侧预览 -->
+            <div class="card" style="text-align:center;overflow:hidden;">
+              <div style="position:relative;display:inline-block;max-width:100%;">
+                <canvas id="img-canvas" style="max-width:100%;max-height:500px;border-radius:8px;background:#f0f0f0;"></canvas>
+              </div>
+              <div style="margin-top:10px;font-size:13px;color:var(--text-light);" id="img-info"></div>
+              <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+                <button class="btn btn-primary" onclick="downloadImage()">💾 下载图片</button>
+                <button class="btn btn-outline" onclick="resetImageEdits()">↩️ 重置</button>
+                <button class="btn btn-outline" onclick="document.getElementById('img-file-input').click()">📷 重新上传</button>
+              </div>
+            </div>
+            <!-- 右侧控件 -->
+            <div>
+              <!-- 裁剪比例 -->
+              <div class="card" style="margin-bottom:12px;">
+                <h4 style="margin:0 0 10px;">✂️ 裁剪比例</h4>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                  <button class="btn btn-outline img-crop-btn" onclick="setCropRatio(3,4)" style="flex:1;min-width:60px;">3:4</button>
+                  <button class="btn btn-outline img-crop-btn" onclick="setCropRatio(1,1)" style="flex:1;min-width:60px;">1:1</button>
+                  <button class="btn btn-outline img-crop-btn" onclick="setCropRatio(4,3)" style="flex:1;min-width:60px;">4:3</button>
+                  <button class="btn btn-outline img-crop-btn" onclick="setCropRatio(16,9)" style="flex:1;min-width:60px;">16:9</button>
+                  <button class="btn btn-outline img-crop-btn active" onclick="setCropRatio(0,0)" style="flex:1;min-width:60px;">原图</button>
+                </div>
+              </div>
+              <!-- 画质调节 -->
+              <div class="card" style="margin-bottom:12px;">
+                <h4 style="margin:0 0 10px;">🎨 画质调节</h4>
+                <div class="img-slider-row"><label>☀️ 亮度</label><input type="range" id="img-brightness" min="50" max="150" value="100" oninput="applyImageFilters()"><span id="img-brightness-val">100</span></div>
+                <div class="img-slider-row"><label>🌓 对比度</label><input type="range" id="img-contrast" min="50" max="200" value="100" oninput="applyImageFilters()"><span id="img-contrast-val">100</span></div>
+                <div class="img-slider-row"><label>🎨 饱和度</label><input type="range" id="img-saturate" min="0" max="200" value="100" oninput="applyImageFilters()"><span id="img-saturate-val">100</span></div>
+                <div class="img-slider-row"><label>🔮 锐化</label><input type="range" id="img-sharpen" min="0" max="100" value="0" oninput="applyImageFilters()"><span id="img-sharpen-val">0</span></div>
+              </div>
+              <!-- 压缩质量 -->
+              <div class="card" style="margin-bottom:12px;">
+                <h4 style="margin:0 0 10px;">📀 压缩质量</h4>
+                <div class="img-slider-row"><label>质量</label><input type="range" id="img-quality" min="10" max="100" value="90" oninput="updateQualityLabel()"><span id="img-quality-val">90%</span></div>
+                <div style="font-size:12px;color:var(--text-light);margin-top:4px;" id="img-size-info"></div>
+              </div>
+              <!-- 水印 -->
+              <div class="card" style="margin-bottom:12px;">
+                <h4 style="margin:0 0 10px;">💧 水印</h4>
+                <input type="text" id="img-watermark" class="form-control" placeholder="输入水印文字（留空不加）" oninput="applyImageFilters()" style="margin-bottom:8px;">
+                <div style="display:flex;gap:6px;">
+                  <select id="img-wm-pos" class="form-control" onchange="applyImageFilters()" style="flex:1;">
+                    <option value="br">右下角</option>
+                    <option value="bl">左下角</option>
+                    <option value="center">居中平铺</option>
+                    <option value="tr">右上角</option>
+                  </select>
+                  <input type="number" id="img-wm-size" class="form-control" value="24" min="10" max="80" oninput="applyImageFilters()" style="width:70px;" title="字体大小">
+                </div>
+              </div>
+              <!-- AI 配文 -->
+              <div class="card">
+                <h4 style="margin:0 0 10px;">🤖 AI 图片配文</h4>
+                <button class="btn btn-primary" onclick="aiDescribeImage()" style="width:100%;margin-bottom:8px;">✨ AI 生成配文 <span style="font-size:11px;opacity:0.8;">(1积分)</span></button>
+                <div id="img-ai-desc" style="font-size:13px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
     </main>
@@ -5653,6 +5742,7 @@ Style: ${stylePrompt}
         case 'title-gen': break;
         case 'keywords': break;
         case 'content-plan': loadContentPlans(); break;
+        case 'img-tool': break;
       }
     }
 
@@ -5665,7 +5755,8 @@ Style: ${stylePrompt}
       competitor: '🔍 竞品分析', branding: '🎀 账号包装', account: '📈 账号数据',
       'multi-account': '👥 多账号管理', purchase: '💎 积分商城', invite: '🎁 邀请赚钱',
       polish: '🪄 一键润色', 'title-gen': '📰 爆款标题',
-      keywords: '🔑 热词分析', 'content-plan': '📋 内容规划'
+      keywords: '🔑 热词分析', 'content-plan': '📋 内容规划',
+      'img-tool': '🖼️ 图片优化'
     };
 
     function updateMobileTitle(page) {
@@ -7945,6 +8036,238 @@ Style: ${stylePrompt}
         }
       } catch (e) {
         toast('生成失败: ' + _extractAIError(e), 'error');
+      }
+    }
+
+    // ============ 图片优化工具 ============
+    let _imgOriginal = null; // 原始 Image 对象
+    let _imgOriginalDataUrl = null; // 原始 base64
+    let _imgCropRatio = null; // null = 原图
+
+    function handleImageUpload(input) {
+      const file = input.files?.[0];
+      if (!file) return;
+      loadImageFile(file);
+    }
+
+    function handleImageDrop(e) {
+      const file = e.dataTransfer?.files?.[0];
+      if (file && file.type.startsWith('image/')) loadImageFile(file);
+    }
+
+    function loadImageFile(file) {
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const img = new Image();
+        img.onload = () => {
+          _imgOriginal = img;
+          _imgOriginalDataUrl = ev.target.result;
+          _imgCropRatio = null;
+          // 重置所有滑块
+          document.getElementById('img-brightness').value = 100;
+          document.getElementById('img-contrast').value = 100;
+          document.getElementById('img-saturate').value = 100;
+          document.getElementById('img-sharpen').value = 0;
+          document.getElementById('img-quality').value = 90;
+          document.getElementById('img-watermark').value = '';
+          document.getElementById('img-tool-panel').style.display = 'block';
+          document.getElementById('img-upload-area').style.display = 'none';
+          // 重置 crop 按钮
+          document.querySelectorAll('.img-crop-btn').forEach(b => b.classList.remove('active'));
+          document.querySelector('.img-crop-btn:last-child').classList.add('active');
+          applyImageFilters();
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function setCropRatio(w, h) {
+      document.querySelectorAll('.img-crop-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      _imgCropRatio = (w && h) ? { w, h } : null;
+      applyImageFilters();
+    }
+
+    function applyImageFilters() {
+      if (!_imgOriginal) return;
+      const canvas = document.getElementById('img-canvas');
+      const ctx = canvas.getContext('2d');
+      let sw = _imgOriginal.width, sh = _imgOriginal.height;
+      let sx = 0, sy = 0;
+
+      // 裁剪
+      if (_imgCropRatio) {
+        const targetRatio = _imgCropRatio.w / _imgCropRatio.h;
+        const origRatio = sw / sh;
+        if (origRatio > targetRatio) {
+          // 原图更宽，裁两侧
+          const newW = sh * targetRatio;
+          sx = (sw - newW) / 2;
+          sw = newW;
+        } else {
+          // 原图更高，裁上下
+          const newH = sw / targetRatio;
+          sy = (sh - newH) / 2;
+          sh = newH;
+        }
+      }
+
+      canvas.width = sw;
+      canvas.height = sh;
+
+      // 应用滤镜
+      const brightness = document.getElementById('img-brightness').value;
+      const contrast = document.getElementById('img-contrast').value;
+      const saturate = document.getElementById('img-saturate').value;
+      document.getElementById('img-brightness-val').textContent = brightness;
+      document.getElementById('img-contrast-val').textContent = contrast;
+      document.getElementById('img-saturate-val').textContent = saturate;
+      document.getElementById('img-sharpen-val').textContent = document.getElementById('img-sharpen').value;
+
+      ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%)`;
+      ctx.drawImage(_imgOriginal, sx, sy, sw, sh, 0, 0, sw, sh);
+      ctx.filter = 'none';
+
+      // 锐化（简化版本：用 unsharp mask 原理）
+      const sharpen = parseInt(document.getElementById('img-sharpen').value);
+      if (sharpen > 0) {
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = sw; tempCanvas.height = sh;
+        const tctx = tempCanvas.getContext('2d');
+        tctx.filter = `blur(${Math.max(1, sharpen / 25)}px)`;
+        tctx.drawImage(canvas, 0, 0);
+        tctx.filter = 'none';
+        const imgData = ctx.getImageData(0, 0, sw, sh);
+        const blurData = tctx.getImageData(0, 0, sw, sh);
+        const amount = sharpen / 50;
+        for (let i = 0; i < imgData.data.length; i += 4) {
+          imgData.data[i] = Math.min(255, Math.max(0, imgData.data[i] + (imgData.data[i] - blurData.data[i]) * amount));
+          imgData.data[i+1] = Math.min(255, Math.max(0, imgData.data[i+1] + (imgData.data[i+1] - blurData.data[i+1]) * amount));
+          imgData.data[i+2] = Math.min(255, Math.max(0, imgData.data[i+2] + (imgData.data[i+2] - blurData.data[i+2]) * amount));
+        }
+        ctx.putImageData(imgData, 0, 0);
+      }
+
+      // 水印
+      const wmText = document.getElementById('img-watermark').value.trim();
+      if (wmText) {
+        const wmSize = parseInt(document.getElementById('img-wm-size').value) || 24;
+        const wmPos = document.getElementById('img-wm-pos').value;
+        ctx.save();
+        ctx.font = `${wmSize}px Arial, sans-serif`;
+        ctx.fillStyle = 'rgba(255,255,255,0.5)';
+        ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+        ctx.lineWidth = 1;
+        if (wmPos === 'center') {
+          // 平铺水印
+          ctx.font = `${wmSize * 1.5}px Arial, sans-serif`;
+          ctx.translate(sw / 2, sh / 2);
+          ctx.rotate(-Math.PI / 6);
+          ctx.textAlign = 'center';
+          ctx.fillStyle = 'rgba(255,255,255,0.15)';
+          for (let y = -sh; y < sh; y += wmSize * 5) {
+            for (let x = -sw; x < sw; x += ctx.measureText(wmText).width + wmSize * 3) {
+              ctx.fillText(wmText, x, y);
+            }
+          }
+        } else {
+          const margin = 20;
+          const tw = ctx.measureText(wmText).width;
+          let x, y;
+          if (wmPos === 'br') { x = sw - tw - margin; y = sh - margin; }
+          else if (wmPos === 'bl') { x = margin; y = sh - margin; }
+          else { x = sw - tw - margin; y = wmSize + margin; } // tr
+          ctx.fillText(wmText, x, y);
+          ctx.strokeText(wmText, x, y);
+        }
+        ctx.restore();
+      }
+
+      // 更新信息
+      updateQualityLabel();
+      document.getElementById('img-info').textContent = `尺寸: ${Math.round(sw)} × ${Math.round(sh)} px`;
+    }
+
+    function updateQualityLabel() {
+      const q = document.getElementById('img-quality').value;
+      document.getElementById('img-quality-val').textContent = q + '%';
+      // 估算压缩后大小
+      const canvas = document.getElementById('img-canvas');
+      if (canvas.width > 0) {
+        canvas.toBlob(blob => {
+          if (blob) {
+            const kb = (blob.size / 1024).toFixed(0);
+            document.getElementById('img-size-info').textContent = `预估大小: ${kb} KB`;
+          }
+        }, 'image/jpeg', parseInt(q) / 100);
+      }
+    }
+
+    function resetImageEdits() {
+      if (!_imgOriginal) return;
+      document.getElementById('img-brightness').value = 100;
+      document.getElementById('img-contrast').value = 100;
+      document.getElementById('img-saturate').value = 100;
+      document.getElementById('img-sharpen').value = 0;
+      document.getElementById('img-quality').value = 90;
+      document.getElementById('img-watermark').value = '';
+      _imgCropRatio = null;
+      document.querySelectorAll('.img-crop-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.img-crop-btn:last-child').classList.add('active');
+      applyImageFilters();
+      toast('已重置所有调整', 'success');
+    }
+
+    function downloadImage() {
+      const canvas = document.getElementById('img-canvas');
+      if (!canvas.width) return;
+      const quality = parseInt(document.getElementById('img-quality').value) / 100;
+      canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `xhs_optimized_${Date.now()}.jpg`;
+        a.click();
+        URL.revokeObjectURL(url);
+        toast('图片已下载', 'success');
+      }, 'image/jpeg', quality);
+    }
+
+    async function aiDescribeImage() {
+      if (!_imgOriginal) { toast('请先上传图片', 'error'); return; }
+      if (!canUseAI()) { toast('请先配置 API Key', 'error'); return; }
+      document.getElementById('img-ai-desc').innerHTML = '<span style="color:var(--text-light);">\u2728 AI 正在分析图片...</span>';
+      try {
+        // 压缩图片到合理大小发送给 Gemini Vision
+        const smallCanvas = document.createElement('canvas');
+        const maxDim = 800;
+        let w = _imgOriginal.width, h = _imgOriginal.height;
+        if (w > maxDim || h > maxDim) {
+          const scale = maxDim / Math.max(w, h);
+          w = Math.round(w * scale); h = Math.round(h * scale);
+        }
+        smallCanvas.width = w; smallCanvas.height = h;
+        smallCanvas.getContext('2d').drawImage(_imgOriginal, 0, 0, w, h);
+        const base64 = smallCanvas.toDataURL('image/jpeg', 0.8).split(',')[1];
+
+        const key = getGeminiKey();
+        const payload = {
+          contents: [{
+            parts: [
+              { inlineData: { mimeType: 'image/jpeg', data: base64 } },
+              { text: '你是小红书爆款文案写手。请为这张图片生成一段小红书配文，包括：\n1. 一个吸引人的标题（带emoji）\n2. 正文（口语化、有感染力、分段、带emoji）\n3. 5个相关标签（#开头）\n\n直接输出内容，不要解释。' }
+            ]
+          }],
+          generationConfig: { temperature: 0.8, maxOutputTokens: 4096 }
+        };
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', '图片配文');
+        const resData = result?.data || result;
+        const text = _extractGeminiText(resData) || '生成失败';
+        window._lastImgDesc = text;
+        document.getElementById('img-ai-desc').innerHTML = `<div style="white-space:pre-wrap;line-height:1.7;font-size:13px;">${text}</div><button class="btn btn-outline" style="margin-top:8px;font-size:12px;" onclick="navigator.clipboard.writeText(window._lastImgDesc).then(()=>toast('已复制配文','success'))">📋 复制配文</button>`;
+      } catch (e) {
+        document.getElementById('img-ai-desc').innerHTML = `<span style="color:#e74c3c;">生成失败: ${_extractAIError(e)}</span>`;
       }
     }
 

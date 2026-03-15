@@ -1026,6 +1026,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         '一键润色':      1,   # 纯文本优化
         '爆款标题':      1,   # 批量标题生成
         '热词分析':      2,   # grounding 搜索当前热词
+        '图片配文':      1,   # Vision 分析 + 文案生成
         # 默认（未标记的功能）
         'generateContent': 1,
     }
