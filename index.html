@@ -4549,7 +4549,7 @@
         const batchPosts = await _callGeminiForContent(apiKey, model, batchCategory, batchCount);
         allPosts.push(...batchPosts);
         remaining -= batchCount;
-        if (remaining > 0) await new Promise(r => setTimeout(r, 1500));
+        if (remaining > 0) await new Promise(r => setTimeout(r, 500));
       }
       // 如果没指定分类且需要多条，给不同分类
       if (!category && count > 1) {
@@ -4588,7 +4588,7 @@
       const sk = _s();
       const keywords = sk.searchKeywords(category);
 
-      // ---- 步骤1: Gemini + Google Search grounding 全网分析 ----
+      // ---- 并行执行: Google grounding + 百度搜索 同时进行 ----
       let googleAnalysisText = '';
       let googleData = null;
       let googleSearchUsed = false;
@@ -4634,24 +4634,30 @@ ${keywords.map(k => `- "${k}"`).join('\n')}
         }
       };
 
-      try {
-        const result = await callGeminiAPI(apiKey, model, payload, 'generateContent', '内容搜索分析');
-        googleData = result.data;
+      // 🚀 并行发起 Google + 百度搜索，节省 3-5 秒
+      const baiduKeyword = `${sk.aiNiche} ${category} 爆款`;
+      const [googleResult, baiduResult] = await Promise.allSettled([
+        callGeminiAPI(apiKey, model, payload, 'generateContent', '内容搜索分析'),
+        _baiduSearchXHS(baiduKeyword, 10)
+      ]);
+
+      // 处理 Google 搜索结果
+      if (googleResult.status === 'fulfilled') {
+        googleData = googleResult.value.data;
         googleAnalysisText = _extractGeminiText(googleData);
         googleSearchUsed = true;
-      } catch (e) {
-        const err = e.data || {};
+      } else {
+        const e = googleResult.reason;
+        const err = e?.data || {};
         if (err.error?.code === 400 || err.error?.message?.includes('tool')) {
           console.warn('Google Search grounding 不可用，跳过');
         } else {
-          // 非工具问题的错误，仍然继续百度搜索
-          console.warn('Gemini Google Search 失败:', err.error?.message || e.message);
+          console.warn('Gemini Google Search 失败:', err.error?.message || e?.message);
         }
       }
 
-      // ---- 步骤2: 百度搜索 site:xiaohongshu.com 获取真实笔记 ----
-      const baiduKeyword = `${sk.aiNiche} ${category} 爆款`;
-      const baiduResults = await _baiduSearchXHS(baiduKeyword, 10);
+      // 处理百度搜索结果
+      const baiduResults = baiduResult.status === 'fulfilled' ? (baiduResult.value || []) : [];
 
       let baiduText = '';
       if (baiduResults.length > 0) {
@@ -5909,7 +5915,7 @@ Style: ${stylePrompt}
               );
               allPosts.push(...batchPosts);
               remaining -= batchCount;
-              if (remaining > 0) await new Promise(r => setTimeout(r, 1500));
+              if (remaining > 0) await new Promise(r => setTimeout(r, 500));
             }
 
             posts = allPosts;
