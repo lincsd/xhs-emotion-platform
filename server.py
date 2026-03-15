@@ -53,7 +53,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260315d'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260315e'  # 更新此版本号以追踪部署
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -714,12 +714,22 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         if not token:
             return None
         conn = self._get_db()
-        row = conn.execute(
-            'SELECT u.id, u.username, u.nickname, u.avatar, u.created_at, u.ai_credits, u.tier '
-            'FROM sessions s JOIN users u ON s.user_id = u.id '
-            'WHERE s.token = ? AND s.expires_at > datetime("now","localtime")',
-            (token,)
-        ).fetchone()
+        try:
+            row = conn.execute(
+                'SELECT u.id, u.username, u.nickname, u.avatar, u.created_at, '
+                'u.ai_credits, u.tier, u.invite_code, u.invited_by, u.commission_balance, u.phone '
+                'FROM sessions s JOIN users u ON s.user_id = u.id '
+                'WHERE s.token = ? AND s.expires_at > datetime("now","localtime")',
+                (token,)
+            ).fetchone()
+        except Exception:
+            # 如果新列还不存在，退回到旧查询
+            row = conn.execute(
+                'SELECT u.id, u.username, u.nickname, u.avatar, u.created_at, u.ai_credits, u.tier '
+                'FROM sessions s JOIN users u ON s.user_id = u.id '
+                'WHERE s.token = ? AND s.expires_at > datetime("now","localtime")',
+                (token,)
+            ).fetchone()
         conn.close()
         return dict(row) if row else None
 
@@ -1308,7 +1318,10 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._send_json({'error': '密码至少6位'}, 400)
         conn = self._get_db()
         # 检查手机号唯一性
-        phone_exists = conn.execute('SELECT id FROM users WHERE phone = ?', (phone,)).fetchone()
+        try:
+            phone_exists = conn.execute('SELECT id FROM users WHERE phone = ?', (phone,)).fetchone()
+        except Exception:
+            phone_exists = None
         if phone_exists:
             conn.close()
             return self._send_json({'error': '该手机号已注册'}, 409)
@@ -1361,7 +1374,11 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._send_json({'error': '请输入用户名/手机号和密码'}, 400)
         conn = self._get_db()
         # 支持用户名或手机号登录
-        user = conn.execute('SELECT * FROM users WHERE username = ? OR phone = ?', (username, username)).fetchone()
+        try:
+            user = conn.execute('SELECT * FROM users WHERE username = ? OR phone = ?', (username, username)).fetchone()
+        except Exception:
+            # phone 列可能不存在，回退到仅用户名
+            user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
         if not user or not self._verify_password(password, user['password_hash']):
             conn.close()
             return self._send_json({'error': '用户名或密码错误'}, 401)
