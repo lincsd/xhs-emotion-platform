@@ -56,7 +56,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260315j'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260315k'  # 更新此版本号以追踪部署
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
