@@ -56,7 +56,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260315p'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260315q'  # 更新此版本号以追踪部署
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -1079,6 +1079,9 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         '爆款标题':      1,   # 批量标题生成
         '热词分析':      2,   # grounding 搜索当前热词
         '图片配文':      1,   # Vision 分析 + 文案生成
+        '模板匹配':      1,   # AI模板智能匹配
+        'template_match': 1,  # 单篇模板匹配
+        'template_match_batch': 1,  # 批量模板匹配
         # 默认（未标记的功能）
         'generateContent': 1,
     }
