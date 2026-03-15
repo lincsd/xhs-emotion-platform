@@ -53,7 +53,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260315c'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260315d'  # 更新此版本号以追踪部署
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -93,6 +93,7 @@ _OPENER = _build_opener()
 
 # ============ 数据库初始化 ============
 def init_db():
+    print(f"[init_db] Starting... DB_PATH={DB_PATH}")
     conn = sqlite3.connect(DB_PATH)
     conn.execute("PRAGMA journal_mode=WAL")
     conn.executescript("""
@@ -176,7 +177,11 @@ def init_db():
         pass
     # 迁移：给 users 表添加 phone 列（手机号注册）
     try:
-        conn.execute('ALTER TABLE users ADD COLUMN phone TEXT UNIQUE')
+        conn.execute('ALTER TABLE users ADD COLUMN phone TEXT')
+    except:
+        pass
+    try:
+        conn.execute('CREATE UNIQUE INDEX IF NOT EXISTS idx_users_phone ON users(phone)')
     except:
         pass
     # 迁移：给 users 表添加邀请码 & 邀请人字段
@@ -274,6 +279,7 @@ def init_db():
         print(f"[init_db] 跳过邀请码回填: {e}")
     conn.commit()
     conn.close()
+    print(f"[init_db] Done. Version={BUILD_VERSION}")
 
 
 def bootstrap_db_if_needed():
