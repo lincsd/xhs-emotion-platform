@@ -53,7 +53,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260315e'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260315f'  # 更新此版本号以追踪部署
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -982,6 +982,14 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._send_json({'error': '未登录'}, 401)
         conn = self._get_db()
         invite_code = user.get('invite_code') or ''
+        # 如果用户还没有邀请码（旧用户迁移场景），自动生成
+        if not invite_code:
+            invite_code = 'INV' + secrets.token_hex(4).upper()
+            try:
+                conn.execute('UPDATE users SET invite_code=? WHERE id=?', (invite_code, user['id']))
+                conn.commit()
+            except Exception:
+                invite_code = ''
         # 邀请统计
         stats = conn.execute(
             'SELECT COUNT(*) as total FROM invite_records WHERE inviter_id=?', (user['id'],)
