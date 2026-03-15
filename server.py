@@ -73,8 +73,8 @@ INVITE_MAX_REWARDS = 50       # 每人最多获得邀请奖励次数
 COMMISSION_RATE = 0.15        # 分销返现比例 15%
 
 # 支付配置
-WECHAT_PAY_QR = os.environ.get('WECHAT_PAY_QR', '')       # 微信收款二维码图片 URL
-ALIPAY_PAY_QR = os.environ.get('ALIPAY_PAY_QR', '')       # 支付宝收款二维码图片 URL
+WECHAT_PAY_QR = os.environ.get('WECHAT_PAY_QR', '/wechat_pay.jpg')   # 微信收款二维码图片 URL
+ALIPAY_PAY_QR = os.environ.get('ALIPAY_PAY_QR', '/alipay_pay.jpg')   # 支付宝收款二维码图片 URL
 PAYMENT_ACCOUNT = os.environ.get('PAYMENT_ACCOUNT', '')    # 收款账号说明(可选)
 ORDER_EXPIRE_HOURS = 24  # 订单超时小时数
 
