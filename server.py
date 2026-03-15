@@ -56,7 +56,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260315i'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260315j'  # 更新此版本号以追踪部署
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -299,6 +299,22 @@ def init_db():
             processed_at TEXT,
             FOREIGN KEY (user_id) REFERENCES users(id)
         );
+
+        CREATE TABLE IF NOT EXISTS content_plans (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            title TEXT NOT NULL,
+            topic TEXT DEFAULT '',
+            plan_date TEXT NOT NULL,
+            plan_time TEXT DEFAULT '10:00',
+            status TEXT DEFAULT 'planned',
+            notes TEXT DEFAULT '',
+            category TEXT DEFAULT '',
+            created_at TEXT DEFAULT (datetime('now','localtime')),
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        );
+        CREATE INDEX IF NOT EXISTS idx_content_plans_user ON content_plans(user_id);
+        CREATE INDEX IF NOT EXISTS idx_content_plans_date ON content_plans(plan_date);
     """)
     # 为所有老用户生成邀请码（如果没有）
     try:
@@ -1006,6 +1022,10 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         '竞品分析':      2,   # grounding + 较多输出
         '笔记改写':      1,
         'AB测试':        2,   # 多版本输出，tokens 较多
+        # 新增智能工具
+        '一键润色':      1,   # 纯文本优化
+        '爆款标题':      1,   # 批量标题生成
+        '热词分析':      2,   # grounding 搜索当前热词
         # 默认（未标记的功能）
         'generateContent': 1,
     }
@@ -1536,6 +1556,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._get_withdrawals()
         elif path == '/api/admin/orders':
             return self._admin_list_orders(query)
+        elif path == '/api/content-plans':
+            return self._get_content_plans(query)
         elif path.startswith('/api/export/'):
             post_id = path.split('/')[-1]
             return self._export_post(post_id)
@@ -1593,6 +1615,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._request_withdrawal(body)
         elif path == '/api/admin/withdrawal':
             return self._admin_process_withdrawal(body)
+        elif path == '/api/content-plans':
+            return self._create_content_plan(body)
         else:
             self._send_json({'error': 'Not found'}, 404)
 
@@ -1603,6 +1627,9 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         if path.startswith('/api/posts/'):
             post_id = path.split('/')[-1]
             return self._update_post(post_id, body)
+        elif path.startswith('/api/content-plans/'):
+            plan_id = path.split('/')[-1]
+            return self._update_content_plan(plan_id, body)
         else:
             self._send_json({'error': 'Not found'}, 404)
 
@@ -1615,6 +1642,9 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         elif path.startswith('/api/income/'):
             inc_id = path.split('/')[-1]
             return self._delete_income(inc_id)
+        elif path.startswith('/api/content-plans/'):
+            plan_id = path.split('/')[-1]
+            return self._delete_content_plan(plan_id)
         else:
             self._send_json({'error': 'Not found'}, 404)
 
@@ -2163,6 +2193,72 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         except Exception as e:
             self._send_json({'error': f'百度搜索失败: {str(e)}', 'results': []}, 200)
 
+
+    # ---- 内容规划 CRUD ----
+    def _get_content_plans(self, query):
+        user = self._require_auth()
+        if not user: return
+        month = query.get('month', '')  # 格式 2026-03
+        conn = self._get_db()
+        if month:
+            rows = conn.execute(
+                "SELECT * FROM content_plans WHERE user_id=? AND plan_date LIKE ? ORDER BY plan_date, plan_time",
+                (user['id'], month + '%')
+            ).fetchall()
+        else:
+            rows = conn.execute(
+                "SELECT * FROM content_plans WHERE user_id=? ORDER BY plan_date DESC, plan_time LIMIT 100",
+                (user['id'],)
+            ).fetchall()
+        conn.close()
+        self._send_json([dict(r) for r in rows])
+
+    def _create_content_plan(self, body):
+        user = self._require_auth()
+        if not user: return
+        title = (body.get('title') or '').strip()
+        plan_date = (body.get('plan_date') or '').strip()
+        if not title or not plan_date:
+            return self._send_json({'error': '标题和日期不能为空'}, 400)
+        conn = self._get_db()
+        conn.execute(
+            'INSERT INTO content_plans(user_id, title, topic, plan_date, plan_time, notes, category) VALUES(?,?,?,?,?,?,?)',
+            (user['id'], title, body.get('topic', ''), plan_date,
+             body.get('plan_time', '10:00'), body.get('notes', ''), body.get('category', ''))
+        )
+        conn.commit()
+        plan_id = conn.execute('SELECT last_insert_rowid()').fetchone()[0]
+        conn.close()
+        self._send_json({'id': plan_id, 'ok': True})
+
+    def _update_content_plan(self, plan_id, body):
+        user = self._require_auth()
+        if not user: return
+        conn = self._get_db()
+        plan = conn.execute('SELECT * FROM content_plans WHERE id=? AND user_id=?', (plan_id, user['id'])).fetchone()
+        if not plan:
+            conn.close()
+            return self._send_json({'error': '计划不存在'}, 404)
+        fields, vals = [], []
+        for key in ['title', 'topic', 'plan_date', 'plan_time', 'status', 'notes', 'category']:
+            if key in body:
+                fields.append(f'{key}=?')
+                vals.append(body[key])
+        if fields:
+            vals.append(plan_id)
+            conn.execute(f"UPDATE content_plans SET {','.join(fields)} WHERE id=?", vals)
+            conn.commit()
+        conn.close()
+        self._send_json({'ok': True})
+
+    def _delete_content_plan(self, plan_id):
+        user = self._require_auth()
+        if not user: return
+        conn = self._get_db()
+        conn.execute('DELETE FROM content_plans WHERE id=? AND user_id=?', (plan_id, user['id']))
+        conn.commit()
+        conn.close()
+        self._send_json({'ok': True})
 
     # ---- Gemini API 代理 ----
     def _gemini_proxy(self, body):

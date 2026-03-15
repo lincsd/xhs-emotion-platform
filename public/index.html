@@ -1502,6 +1502,18 @@
         <div class="nav-item" data-page="competitor">
           <span class="icon">🔍</span> 竞品分析
         </div>
+        <div class="nav-item" data-page="polish">
+          <span class="icon">🪄</span> 一键润色
+        </div>
+        <div class="nav-item" data-page="title-gen">
+          <span class="icon">📰</span> 爆款标题
+        </div>
+        <div class="nav-item" data-page="keywords">
+          <span class="icon">🔑</span> 热词分析
+        </div>
+        <div class="nav-item" data-page="content-plan">
+          <span class="icon">📋</span> 内容规划
+        </div>
       </div>
       <div class="nav-group">
         <div class="nav-group-title">账号管理</div>
@@ -1588,6 +1600,10 @@
         <div class="nav-item mob-nav" data-page="rewrite" onclick="mobileSwitchPage('rewrite')"><span class="icon">🔄</span> 笔记改写</div>
         <div class="nav-item mob-nav" data-page="comments" onclick="mobileSwitchPage('comments')"><span class="icon">💬</span> 评论话术</div>
         <div class="nav-item mob-nav" data-page="competitor" onclick="mobileSwitchPage('competitor')"><span class="icon">🔍</span> 竞品分析</div>
+        <div class="nav-item mob-nav" data-page="polish" onclick="mobileSwitchPage('polish')"><span class="icon">🪄</span> 一键润色</div>
+        <div class="nav-item mob-nav" data-page="title-gen" onclick="mobileSwitchPage('title-gen')"><span class="icon">📰</span> 爆款标题</div>
+        <div class="nav-item mob-nav" data-page="keywords" onclick="mobileSwitchPage('keywords')"><span class="icon">🔑</span> 热词分析</div>
+        <div class="nav-item mob-nav" data-page="content-plan" onclick="mobileSwitchPage('content-plan')"><span class="icon">📋</span> 内容规划</div>
       </div>
       <div class="nav-group">
         <div class="nav-group-title">账号管理</div>
@@ -2448,6 +2464,111 @@
       <section id="page-multi-account" class="page hidden">
         <div class="page-header"><div><h2>👥 多账号管理</h2><p class="subtitle">管理多个小红书运营账号</p></div><button class="btn btn-primary" onclick="openAddAccountModal()">+ 新建账号</button></div>
         <div id="multi-account-list"></div>
+      </section>
+
+      <!-- ===== 一键润色 ===== -->
+      <section id="page-polish" class="page hidden">
+        <div class="page-header"><div><h2>🪄 一键润色</h2><p class="subtitle">粘贴草稿，AI 自动优化为小红书爆款风格</p></div></div>
+        <div class="card">
+          <div class="form-group">
+            <label>草稿内容</label>
+            <textarea id="polish-input" class="form-control" rows="8" placeholder="粘贴你的草稿内容，AI 将自动优化为小红书爆款风格：\n• 口语化表达\n• 智能加 emoji\n• 合理分段\n• 爪子号结尾设计"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>润色强度</label>
+              <select id="polish-level" class="form-control">
+                <option value="light">轻度 — 保留原文风格，微调优化</option>
+                <option value="medium" selected>中度 — 小红书风格化，口语化+emoji</option>
+                <option value="strong">强力 — 全面爆款改造，极致吸引力</option>
+              </select>
+            </div>
+            <div class="form-group"><label>目标赛道</label>
+              <select id="polish-niche" class="form-control">
+                <option value="general">通用</option>
+                <option value="beauty">美妆护肤</option>
+                <option value="food">美食探店</option>
+                <option value="travel">旅行攻略</option>
+                <option value="fashion">穿搭时尚</option>
+                <option value="fitness">健身运动</option>
+                <option value="home">家居好物</option>
+                <option value="study">学习成长</option>
+                <option value="baby">母婴育儿</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;margin-bottom:16px;">
+            <button class="btn btn-primary" onclick="polishContent()">🪄 一键润色 <span style="font-size:11px;opacity:0.8;">(1积分)</span></button>
+            <button class="btn btn-outline" onclick="copyPolishResult()">📋 复制结果</button>
+            <button class="btn btn-outline" onclick="savePolishAsDraft()">💾 存为草稿</button>
+          </div>
+          <div id="polish-result"></div>
+        </div>
+      </section>
+
+      <!-- ===== 爆款标题生成器 ===== -->
+      <section id="page-title-gen" class="page hidden">
+        <div class="page-header"><div><h2>📰 爆款标题生成器</h2><p class="subtitle">输入主题，AI 批量生成 10 个高点击标题</p></div></div>
+        <div class="card">
+          <div class="form-row">
+            <div class="form-group" style="flex:2;"><label>内容主题 / 关键词</label>
+              <input type="text" id="titlegen-topic" class="form-control" placeholder="如：春季穿搭、平价护肤、日本旅行攻略">
+            </div>
+            <div class="form-group" style="flex:1;"><label>标题风格</label>
+              <select id="titlegen-style" class="form-control">
+                <option value="viral">🔥 爆款悬念</option>
+                <option value="list">📝 干货清单</option>
+                <option value="story">📖 故事引入</option>
+                <option value="question">❓ 提问互动</option>
+                <option value="emotional">💗 情感共鸣</option>
+                <option value="contrast">⚡ 反差冲击</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="generateViralTitles()" style="margin-bottom:16px;">📰 生成 10 个爆款标题 <span style="font-size:11px;opacity:0.8;">(1积分)</span></button>
+          <div id="titlegen-result"></div>
+        </div>
+      </section>
+
+      <!-- ===== 热词分析 ===== -->
+      <section id="page-keywords" class="page hidden">
+        <div class="page-header"><div><h2>🔑 热词分析</h2><p class="subtitle">AI 分析行业热搜关键词，助力选题策略</p></div></div>
+        <div class="card">
+          <div class="form-row">
+            <div class="form-group" style="flex:2;"><label>行业 / 赛道</label>
+              <input type="text" id="keywords-niche" class="form-control" placeholder="如：护肤、家居收纳、健身减脂、副业赚钱">
+            </div>
+            <div class="form-group" style="flex:1;"><label>分析维度</label>
+              <select id="keywords-dimension" class="form-control">
+                <option value="trending">🔥 当前热搜</option>
+                <option value="seasonal">🌸 季节热点</option>
+                <option value="longtail">🎯 长尾蓝海</option>
+                <option value="rising">📈 上升趋势</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="analyzeKeywords()" style="margin-bottom:16px;">🔑 AI 热词分析 <span style="font-size:11px;opacity:0.8;">(2积分)</span></button>
+          <div id="keywords-result"></div>
+        </div>
+      </section>
+
+      <!-- ===== 内容规划 ===== -->
+      <section id="page-content-plan" class="page hidden">
+        <div class="page-header">
+          <div><h2>📋 内容规划</h2><p class="subtitle">规划每周发布计划，保持稳定输出节奏</p></div>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-primary" onclick="openAddPlanModal()">➕ 新增计划</button>
+            <button class="btn btn-outline" onclick="aiGenerateWeekPlan()">🤖 AI 生成周计划 <span style="font-size:11px;opacity:0.8;">(1积分)</span></button>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+            <button class="btn btn-outline" onclick="planMonthNav(-1)">◀ 上月</button>
+            <h3 id="plan-month-title" style="margin:0;"></h3>
+            <button class="btn btn-outline" onclick="planMonthNav(1)">下月 ▶</button>
+          </div>
+          <div id="plan-week-view"></div>
+        </div>
+        <div id="plan-list"></div>
       </section>
 
     </main>
@@ -5528,6 +5649,10 @@ Style: ${stylePrompt}
         case 'multi-account': loadMultiAccounts(); break;
         case 'purchase': loadPurchasePage(); break;
         case 'invite': loadInvitePage(); break;
+        case 'polish': break;
+        case 'title-gen': break;
+        case 'keywords': break;
+        case 'content-plan': loadContentPlans(); break;
       }
     }
 
@@ -5538,7 +5663,9 @@ Style: ${stylePrompt}
       forbidden: '🚫 违禁词检测', score: '💯 笔记评分', trending: '🔥 热门话题',
       tags: '🏷️ 标签引擎', rewrite: '🔄 笔记改写', comments: '💬 评论话术',
       competitor: '🔍 竞品分析', branding: '🎀 账号包装', account: '📈 账号数据',
-      'multi-account': '👥 多账号管理', purchase: '💎 积分商城', invite: '🎁 邀请赚钱'
+      'multi-account': '👥 多账号管理', purchase: '💎 积分商城', invite: '🎁 邀请赚钱',
+      polish: '🪄 一键润色', 'title-gen': '📰 爆款标题',
+      keywords: '🔑 热词分析', 'content-plan': '📋 内容规划'
     };
 
     function updateMobileTitle(page) {
@@ -7446,6 +7573,379 @@ Style: ${stylePrompt}
       const body = { title, content, category: document.getElementById('skill-switcher')?.value?.split(' ')[0] || '其他', status: 'draft', tags: '', cover_text: '' };
       await api('/api/posts', { method: 'POST', body });
       toast('已保存为草稿', 'success');
+    }
+
+    // ============ 功能: 一键润色 ============
+    async function polishContent() {
+      const input = document.getElementById('polish-input').value.trim();
+      if (!input) { toast('请输入草稿内容', 'error'); return; }
+      if (!canUseAI()) { toast('请先配置 API Key', 'error'); return; }
+      const level = document.getElementById('polish-level').value;
+      const niche = document.getElementById('polish-niche').value;
+      const levelMap = {
+        light: '轻度润色：保留原文风格和结构，仅修正语句不通顺处，适当加入1-2个emoji',
+        medium: '中度润色：改为小红书口语化风格，加入适量emoji表情，合理分段，结尾加爪子号互动引导',
+        strong: '强力改造：全面改写为小红书爆款风格，使用强吸引力的开头，大量emoji，设置悬念和共鸣点，加入互动话术'
+      };
+      const nicheMap = {
+        general: '通用', beauty: '美妆护肤', food: '美食探店', travel: '旅行攻略',
+        fashion: '穿搭时尚', fitness: '健身运动', home: '家居好物', study: '学习成长', baby: '母婴育儿'
+      };
+      document.getElementById('polish-result').innerHTML = '<div class="empty-state"><p>🪄 AI 正在润色优化...</p></div>';
+      try {
+        const key = getGeminiKey();
+        const payload = {
+          contents: [{ parts: [{ text: `你是小红书顶级内容运营专家。请对以下草稿进行一键润色：\n\n润色要求：${levelMap[level]}\n内容赛道：${nicheMap[niche]}\n\n原始草稿：\n${input}\n\n请直接输出润色后的完整内容，包含：\n1. 优化后的标题（如果原文有标题的话）\n2. 润色后的正文（保持核心信息不变）\n3. 推荐的标签（3-5个，用 # 开头）\n\n注意：\n- 不要解释润色思路\n- 不要使用"亲"、"宝子"等过度卖萌词汇（除非原文有）\n- emoji要自然融入，不要堆砌\n- 保证语句流畅，有节奏感` }] }],
+          generationConfig: { temperature: 0.8, maxOutputTokens: 8192 }
+        };
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', '一键润色');
+        const resData = result?.data || result;
+        const text = _extractGeminiText(resData) || '润色失败';
+        window._lastPolishResult = text;
+        document.getElementById('polish-result').innerHTML = `
+          <div class="card" style="background:#f0f8ff;border:1px solid #b3d9ff;white-space:pre-wrap;line-height:1.8;">${text}</div>
+          <div style="margin-top:8px;font-size:12px;color:var(--text-light);">💡 点击"复制结果"可直接粘贴到小红书发布</div>`;
+      } catch (e) {
+        document.getElementById('polish-result').innerHTML = `<div class="forbidden-hit">润色失败: ${_extractAIError(e)}</div>`;
+      }
+    }
+
+    function copyPolishResult() {
+      if (window._lastPolishResult) {
+        navigator.clipboard.writeText(window._lastPolishResult).then(() => toast('已复制润色结果', 'success'));
+      } else { toast('暂无润色结果', 'error'); }
+    }
+
+    async function savePolishAsDraft() {
+      if (!window._lastPolishResult) { toast('暂无润色结果', 'error'); return; }
+      const lines = window._lastPolishResult.split('\n').filter(l => l.trim());
+      const title = lines[0]?.replace(/^[#\s*]+/, '').trim() || '润色笔记';
+      const content = lines.slice(1).join('\n').trim();
+      const body = { title, content, category: document.getElementById('skill-switcher')?.value?.split(' ')[0] || '其他', status: 'draft', tags: '', cover_text: '' };
+      await api('/api/posts', { method: 'POST', body });
+      toast('已保存为草稿', 'success');
+    }
+
+    // ============ 功能: 爆款标题生成器 ============
+    async function generateViralTitles() {
+      const topic = document.getElementById('titlegen-topic').value.trim();
+      if (!topic) { toast('请输入内容主题', 'error'); return; }
+      if (!canUseAI()) { toast('请先配置 API Key', 'error'); return; }
+      const style = document.getElementById('titlegen-style').value;
+      const styleMap = {
+        viral: '悬念反转型：制造好奇心，让人忍不住点进来看',
+        list: '干货清单型：数字+干货清单，如"5个方法"、"10件好物"',
+        story: '故事引入型：以个人经历或故事开头，有代入感',
+        question: '提问互动型：用问题引发读者思考和共鸣',
+        emotional: '情感共鸣型：触动情绪，引发转发收藏',
+        contrast: '反差冲击型：颠覆认知，用对比制造冲击力'
+      };
+      document.getElementById('titlegen-result').innerHTML = '<div class="empty-state"><p>📰 AI 正在生成爆款标题...</p></div>';
+      try {
+        const key = getGeminiKey();
+        const payload = {
+          contents: [{ parts: [{ text: `你是小红书爆款标题策划专家，熟悉平台算法和用户心理。\n\n主题：${topic}\n标题风格：${styleMap[style]}\n\n请生成10个小红书爆款标题。返回JSON格式：\n{"titles":[{"title":"标题内容","ctr":"预估点击率(如8.5)","reason":"标题亮点说明(15字内)"}]}\n\n要求：\n1. 标题长度15-25字，不超过30字\n2. 遵循小红书标题公式（数字+痛点+解决方案 / 反差+结果 / 情绪+共鸣）\n3. 点击率评估基于标题吸引力（满分10分）\n4. 不要使用"震惊"、"速看"等低质量词\n5. 每个标题风格要有差异\n6. 适当使用emoji但不过度` }] }],
+          generationConfig: { temperature: 0.9, maxOutputTokens: 4096 }
+        };
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', '爆款标题');
+        const resData = result?.data || result;
+        const text = _extractGeminiText(resData);
+        const json = _extractJsonFromText(text);
+        if (json.titles?.length) {
+          // 按CTR排序
+          json.titles.sort((a, b) => parseFloat(b.ctr) - parseFloat(a.ctr));
+          let html = '<div style="display:flex;flex-direction:column;gap:10px;">';
+          json.titles.forEach((item, idx) => {
+            const ctr = parseFloat(item.ctr) || 5;
+            const barColor = ctr >= 8 ? '#e74c3c' : ctr >= 6 ? '#f39c12' : '#27ae60';
+            const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `${idx + 1}.`;
+            html += `<div class="card" style="padding:12px 16px;margin:0;cursor:pointer;transition:all 0.2s;" onclick="copyTitleItem(this, '${item.title.replace(/'/g, "\\'")}')">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span style="font-size:18px;min-width:28px;">${medal}</span>
+                <div style="flex:1;">
+                  <div style="font-size:15px;font-weight:600;margin-bottom:4px;">${item.title}</div>
+                  <div style="font-size:12px;color:var(--text-light);">${item.reason || ''}</div>
+                </div>
+                <div style="text-align:right;min-width:70px;">
+                  <div style="font-size:18px;font-weight:700;color:${barColor};">${ctr}</div>
+                  <div style="font-size:10px;color:var(--text-light);">预估CTR</div>
+                </div>
+              </div>
+              <div style="margin-top:6px;height:4px;background:#eee;border-radius:2px;overflow:hidden;">
+                <div style="height:100%;width:${ctr * 10}%;background:${barColor};border-radius:2px;"></div>
+              </div>
+            </div>`;
+          });
+          html += '</div><div style="margin-top:12px;text-align:center;font-size:12px;color:var(--text-light);">💡 点击任意标题可复制</div>';
+          document.getElementById('titlegen-result').innerHTML = html;
+        } else {
+          document.getElementById('titlegen-result').innerHTML = `<div class="card" style="white-space:pre-wrap;line-height:1.8;">${text}</div>`;
+        }
+      } catch (e) {
+        document.getElementById('titlegen-result').innerHTML = `<div class="forbidden-hit">标题生成失败: ${_extractAIError(e)}</div>`;
+      }
+    }
+
+    function copyTitleItem(el, title) {
+      navigator.clipboard.writeText(title).then(() => {
+        el.style.background = '#f0fff0';
+        el.style.borderColor = '#27ae60';
+        setTimeout(() => { el.style.background = ''; el.style.borderColor = ''; }, 1200);
+        toast('已复制: ' + title.slice(0, 20) + '...', 'success');
+      });
+    }
+
+    // ============ 功能: 热词分析 ============
+    async function analyzeKeywords() {
+      const niche = document.getElementById('keywords-niche').value.trim();
+      if (!niche) { toast('请输入行业或赛道', 'error'); return; }
+      if (!canUseAI()) { toast('请先配置 API Key', 'error'); return; }
+      const dimension = document.getElementById('keywords-dimension').value;
+      const dimMap = {
+        trending: '当前小红书平台的热搜关键词和热门话题',
+        seasonal: '当前季节/时间段相关的热门内容方向和关键词',
+        longtail: '搜索量适中但竞争较小的长尾蓝海关键词',
+        rising: '近期搜索量快速上升的新兴趋势关键词'
+      };
+      document.getElementById('keywords-result').innerHTML = '<div class="empty-state"><p>🔑 AI 正在分析热门关键词...</p></div>';
+      try {
+        const key = getGeminiKey();
+        const today = new Date().toISOString().slice(0, 10);
+        const payload = {
+          contents: [{ parts: [{ text: `你是小红书SEO和内容策略专家。请搜索分析"${niche}"行业在小红书平台的关键词情况。\n\n分析维度：${dimMap[dimension]}\n当前日期：${today}\n\n返回JSON格式：\n{\n  "hotKeywords": [{"word":"关键词","heat":"热度(高/中/低)","trend":"趋势(上升/稳定/下降)","competition":"竞争度(高/中/低)"}],\n  "contentIdeas": [{"keyword":"关联关键词","idea":"选题创意","reason":"推荐理由"}],\n  "strategy": "综合关键词布局策略建议（100字左右）",\n  "avoidWords": ["应避免的过时/违禁关键词"]\n}\n\n每个数组至少8-10项。基于真实搜索数据分析，不要编造。` }] }],
+          tools: [{ googleSearch: {} }],
+          generationConfig: { temperature: 0.7, maxOutputTokens: 8192 }
+        };
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', '热词分析');
+        const resData = result?.data || result;
+        const text = _extractGeminiText(resData);
+        const json = _extractJsonFromText(text);
+        let html = '';
+        if (json.hotKeywords?.length) {
+          html += '<h4 style="margin:0 0 12px;">🔥 热门关键词</h4><div class="card" style="padding:0;overflow:hidden;margin-bottom:16px;">';
+          html += '<table style="width:100%;border-collapse:collapse;font-size:14px;">';
+          html += '<tr style="background:#f8f9fa;"><th style="padding:10px 12px;text-align:left;">关键词</th><th style="padding:10px 8px;text-align:center;">热度</th><th style="padding:10px 8px;text-align:center;">趋势</th><th style="padding:10px 8px;text-align:center;">竞争</th></tr>';
+          json.hotKeywords.forEach(kw => {
+            const heatBadge = kw.heat === '高' ? '🔴' : kw.heat === '中' ? '🟡' : '🟢';
+            const trendIcon = kw.trend === '上升' ? '📈' : kw.trend === '下降' ? '📉' : '➡️';
+            const compBadge = kw.competition === '高' ? '🔴' : kw.competition === '中' ? '🟡' : '🟢';
+            html += `<tr style="border-top:1px solid #eee;cursor:pointer;" onclick="navigator.clipboard.writeText('${kw.word}').then(()=>toast('已复制: ${kw.word}','success'))">
+              <td style="padding:10px 12px;font-weight:500;">${kw.word}</td>
+              <td style="padding:10px 8px;text-align:center;">${heatBadge} ${kw.heat}</td>
+              <td style="padding:10px 8px;text-align:center;">${trendIcon} ${kw.trend}</td>
+              <td style="padding:10px 8px;text-align:center;">${compBadge} ${kw.competition}</td>
+            </tr>`;
+          });
+          html += '</table></div>';
+        }
+        if (json.contentIdeas?.length) {
+          html += '<h4 style="margin:0 0 12px;">💡 选题创意推荐</h4><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-bottom:16px;">';
+          json.contentIdeas.forEach(idea => {
+            html += `<div class="card" style="padding:12px;margin:0;"><div style="font-weight:600;color:var(--primary);margin-bottom:4px;">🏷️ ${idea.keyword}</div><div style="font-size:14px;margin-bottom:4px;">${idea.idea}</div><div style="font-size:12px;color:var(--text-light);">${idea.reason}</div></div>`;
+          });
+          html += '</div>';
+        }
+        if (json.strategy) {
+          html += `<div class="card" style="background:#f0fff0;border:1px solid #b3e6b3;margin-bottom:16px;"><h4 style="margin:0 0 8px;">📋 关键词布局策略</h4><p style="margin:0;line-height:1.8;">${json.strategy}</p></div>`;
+        }
+        if (json.avoidWords?.length) {
+          html += `<div class="card" style="background:#fff5f5;border:1px solid #ffb3b3;"><h4 style="margin:0 0 8px;">⚠️ 应避免的关键词</h4><div>${json.avoidWords.map(w => `<span style="display:inline-block;padding:4px 10px;margin:3px;background:#ffe0e0;border-radius:12px;font-size:13px;">🚫 ${w}</span>`).join('')}</div></div>`;
+        }
+        if (!html) html = `<div class="card" style="white-space:pre-wrap;line-height:1.8;">${text}</div>`;
+        html += '<div style="margin-top:12px;text-align:center;font-size:12px;color:var(--text-light);">💡 点击关键词可复制</div>';
+        document.getElementById('keywords-result').innerHTML = html;
+      } catch (e) {
+        document.getElementById('keywords-result').innerHTML = `<div class="forbidden-hit">分析失败: ${_extractAIError(e)}</div>`;
+      }
+    }
+
+    // ============ 功能: 内容规划 ============
+    let _planCurrentMonth = new Date().toISOString().slice(0, 7); // 2026-03
+    let _planData = [];
+
+    async function loadContentPlans() {
+      document.getElementById('plan-month-title').textContent = _planCurrentMonth.replace('-', '年') + '月';
+      try {
+        const data = await api(`/api/content-plans?month=${_planCurrentMonth}`);
+        _planData = Array.isArray(data) ? data : [];
+      } catch { _planData = []; }
+      renderPlanWeekView();
+      renderPlanList();
+    }
+
+    function planMonthNav(delta) {
+      const [y, m] = _planCurrentMonth.split('-').map(Number);
+      const d = new Date(y, m - 1 + delta, 1);
+      _planCurrentMonth = d.toISOString().slice(0, 7);
+      loadContentPlans();
+    }
+
+    function renderPlanWeekView() {
+      const [year, month] = _planCurrentMonth.split('-').map(Number);
+      const firstDay = new Date(year, month - 1, 1);
+      const lastDay = new Date(year, month, 0);
+      const today = new Date().toISOString().slice(0, 10);
+      const dayNames = ['日', '一', '二', '三', '四', '五', '六'];
+      let html = '<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center;">';
+      dayNames.forEach(d => { html += `<div style="padding:6px;font-size:12px;font-weight:600;color:var(--text-light);">${d}</div>`; });
+      // 补空格
+      for (let i = 0; i < firstDay.getDay(); i++) html += '<div></div>';
+      for (let d = 1; d <= lastDay.getDate(); d++) {
+        const dateStr = `${year}-${String(month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const plans = _planData.filter(p => p.plan_date === dateStr);
+        const isToday = dateStr === today;
+        const hasPlan = plans.length > 0;
+        const completed = plans.filter(p => p.status === 'completed').length;
+        const total = plans.length;
+        let bg = 'transparent';
+        if (hasPlan && completed === total) bg = '#e8f5e9';
+        else if (hasPlan) bg = '#fff3e0';
+        html += `<div onclick="showDayPlans('${dateStr}')" style="padding:4px;min-height:44px;border-radius:8px;cursor:pointer;background:${bg};border:${isToday ? '2px solid var(--primary)' : '1px solid #eee'};transition:all 0.15s;" onmouseover="this.style.background='#f0f4ff'" onmouseout="this.style.background='${bg}'">
+          <div style="font-size:13px;${isToday ? 'font-weight:700;color:var(--primary);' : ''}">${d}</div>
+          ${hasPlan ? `<div style="font-size:10px;color:${completed === total ? '#27ae60' : '#f39c12'};">${completed}/${total}</div>` : ''}
+        </div>`;
+      }
+      html += '</div>';
+      document.getElementById('plan-week-view').innerHTML = html;
+    }
+
+    function renderPlanList() {
+      const el = document.getElementById('plan-list');
+      if (!_planData.length) {
+        el.innerHTML = '<div class="card"><div class="empty-state"><p>本月暂无内容计划</p><p style="font-size:13px;color:var(--text-light);">点击「新增计划」或「AI 生成周计划」开始规划</p></div></div>';
+        return;
+      }
+      // 按日期分组
+      const grouped = {};
+      _planData.forEach(p => {
+        if (!grouped[p.plan_date]) grouped[p.plan_date] = [];
+        grouped[p.plan_date].push(p);
+      });
+      let html = '';
+      const today = new Date().toISOString().slice(0, 10);
+      Object.keys(grouped).sort().forEach(date => {
+        const isToday = date === today;
+        const isPast = date < today;
+        const dayLabel = isToday ? '📌 今天' : new Date(date + 'T00:00:00').toLocaleDateString('zh-CN', { month: 'long', day: 'numeric', weekday: 'short' });
+        html += `<div class="card" style="margin-bottom:10px;${isToday ? 'border:2px solid var(--primary);' : ''}">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <h4 style="margin:0;${isPast && !isToday ? 'color:var(--text-light);' : ''}">${dayLabel}</h4>
+            <span style="font-size:12px;color:var(--text-light);">${date}</span>
+          </div>`;
+        grouped[date].forEach(plan => {
+          const statusIcon = plan.status === 'completed' ? '✅' : plan.status === 'skipped' ? '⏭️' : '⏳';
+          const statusColor = plan.status === 'completed' ? '#27ae60' : plan.status === 'skipped' ? '#95a5a6' : '#f39c12';
+          html += `<div style="display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;background:#f8f9fa;margin-bottom:6px;">
+            <span style="font-size:18px;cursor:pointer;" onclick="togglePlanStatus(${plan.id})" title="切换状态">${statusIcon}</span>
+            <div style="flex:1;">
+              <div style="font-weight:500;${plan.status === 'completed' ? 'text-decoration:line-through;color:var(--text-light);' : ''}">${plan.title}</div>
+              ${plan.topic ? `<div style="font-size:12px;color:var(--text-light);">主题: ${plan.topic}</div>` : ''}
+              ${plan.notes ? `<div style="font-size:12px;color:var(--text-light);">📝 ${plan.notes}</div>` : ''}
+            </div>
+            <span style="font-size:12px;color:var(--text-light);">${plan.plan_time || ''}</span>
+            <button class="btn btn-outline" style="padding:2px 8px;font-size:11px;" onclick="deletePlan(${plan.id})">🗑️</button>
+          </div>`;
+        });
+        html += '</div>';
+      });
+      el.innerHTML = html;
+    }
+
+    function showDayPlans(dateStr) {
+      // 滚动到列表中对应日期
+      toast(`查看 ${dateStr} 的计划`, 'info');
+    }
+
+    async function togglePlanStatus(planId) {
+      const plan = _planData.find(p => p.id === planId);
+      if (!plan) return;
+      const nextStatus = plan.status === 'planned' ? 'completed' : plan.status === 'completed' ? 'skipped' : 'planned';
+      try {
+        await api(`/api/content-plans/${planId}`, { method: 'PUT', body: { status: nextStatus } });
+        plan.status = nextStatus;
+        renderPlanWeekView();
+        renderPlanList();
+      } catch (e) { toast('更新失败', 'error'); }
+    }
+
+    async function deletePlan(planId) {
+      if (!confirm('确定删除这条计划？')) return;
+      try {
+        await api(`/api/content-plans/${planId}`, { method: 'DELETE' });
+        _planData = _planData.filter(p => p.id !== planId);
+        renderPlanWeekView();
+        renderPlanList();
+        toast('已删除', 'success');
+      } catch (e) { toast('删除失败', 'error'); }
+    }
+
+    function openAddPlanModal() {
+      const today = new Date().toISOString().slice(0, 10);
+      const html = `<div class="modal" style="max-width:460px;"><div class="modal-header"><h3>➕ 新增内容计划</h3><button class="modal-close" onclick="closeModal('modal-add-plan')">✕</button></div><div class="modal-body" style="padding:20px;">
+        <div class="form-group"><label>标题 *</label><input type="text" id="plan-title-input" class="form-control" placeholder="今天要发什么内容？"></div>
+        <div class="form-row"><div class="form-group"><label>日期 *</label><input type="date" id="plan-date-input" class="form-control" value="${today}"></div><div class="form-group"><label>时间</label><input type="time" id="plan-time-input" class="form-control" value="10:00"></div></div>
+        <div class="form-group"><label>主题词</label><input type="text" id="plan-topic-input" class="form-control" placeholder="可选，如：春季穿搭"></div>
+        <div class="form-group"><label>备注</label><input type="text" id="plan-notes-input" class="form-control" placeholder="可选备注"></div>
+        <button class="btn btn-primary" style="width:100%;" onclick="submitNewPlan()">✅ 添加计划</button>
+      </div></div>`;
+      let m = document.getElementById('modal-add-plan');
+      if (!m) { m = document.createElement('div'); m.className = 'modal-overlay'; m.id = 'modal-add-plan'; m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); }); document.body.appendChild(m); }
+      m.innerHTML = html;
+      m.classList.add('active');
+    }
+
+    async function submitNewPlan() {
+      const title = document.getElementById('plan-title-input').value.trim();
+      const planDate = document.getElementById('plan-date-input').value;
+      const planTime = document.getElementById('plan-time-input').value || '10:00';
+      const topic = document.getElementById('plan-topic-input').value.trim();
+      const notes = document.getElementById('plan-notes-input').value.trim();
+      if (!title || !planDate) { toast('标题和日期不能为空', 'error'); return; }
+      try {
+        await api('/api/content-plans', { method: 'POST', body: { title, plan_date: planDate, plan_time: planTime, topic, notes } });
+        closeModal('modal-add-plan');
+        toast('计划已添加', 'success');
+        loadContentPlans();
+      } catch (e) { toast('添加失败: ' + (e.message || e), 'error'); }
+    }
+
+    async function aiGenerateWeekPlan() {
+      if (!canUseAI()) { toast('请先配置 API Key', 'error'); return; }
+      const niche = currentSkillName || '通用';
+      const today = new Date();
+      const dates = [];
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(today);
+        d.setDate(today.getDate() + i);
+        dates.push(d.toISOString().slice(0, 10));
+      }
+      toast('🤖 AI 正在生成一周发布计划...', 'info');
+      try {
+        const key = getGeminiKey();
+        const payload = {
+          contents: [{ parts: [{ text: `你是小红书运营规划专家。请为"${niche}"赛道生成未来7天的发布计划。\n\n日期范围：${dates[0]} 到 ${dates[6]}\n\n返回JSON格式：\n{"plans":[{"date":"${dates[0]}","time":"10:00","title":"笔记标题","topic":"主题词","notes":"简要说明"}]}\n\n要求：\n1. 每天1-2篇内容\n2. 内容类型要多样化（干货、种草、互动、故事等混搭）\n3. 发布时间推荐最优时段（早8-9点、中午12-13点、晚7-9点）\n4. 周末可以安排轻松互动型内容\n5. 标题要具体、有吸引力` }] }],
+          generationConfig: { temperature: 0.9, maxOutputTokens: 4096 }
+        };
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', '一键润色');
+        const resData = result?.data || result;
+        const text = _extractGeminiText(resData);
+        const json = _extractJsonFromText(text);
+        if (json.plans?.length) {
+          let added = 0;
+          for (const p of json.plans) {
+            try {
+              await api('/api/content-plans', { method: 'POST', body: { title: p.title, plan_date: p.date, plan_time: p.time || '10:00', topic: p.topic || '', notes: p.notes || '' } });
+              added++;
+            } catch {}
+          }
+          toast(`已生成 ${added} 条发布计划`, 'success');
+          loadContentPlans();
+        } else {
+          toast('计划生成失败，请重试', 'error');
+        }
+      } catch (e) {
+        toast('生成失败: ' + _extractAIError(e), 'error');
+      }
     }
 
     // ============ 图片手动分配 ============
