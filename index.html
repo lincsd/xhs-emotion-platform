@@ -1426,11 +1426,13 @@
             <input type="text" class="form-control" id="reg-invite-code" placeholder="有邀请码可填写，双方得积分" style="text-transform:uppercase;">
           </div>
           <div class="form-group">
-            <label>短信验证码 <span style="color:#e74c3c">*</span></label>
-            <div class="verify-row">
-              <input type="text" class="form-control" id="reg-sms-code" placeholder="请输入6位验证码" maxlength="6" inputmode="numeric" pattern="\\d*">
-              <button class="btn btn-verify" onclick="sendRegisterCode()" id="btn-send-register-code" type="button">发送验证码</button>
+            <label>验证码 <span style="color:#e74c3c">*</span></label>
+            <div class="verify-row" style="gap:8px;">
+              <span id="reg-captcha-question" style="font-size:18px;font-weight:700;color:var(--primary);min-width:110px;text-align:center;background:var(--bg);padding:6px 12px;border-radius:8px;border:1px solid var(--border);letter-spacing:2px;">...</span>
+              <input type="number" class="form-control" id="reg-captcha-answer" placeholder="输入答案" style="flex:1;" inputmode="numeric">
+              <button class="btn btn-verify" onclick="loadRegCaptcha()" type="button" style="min-width:60px;">🔄</button>
             </div>
+            <input type="hidden" id="reg-captcha-token">
           </div>
           <button class="btn btn-primary" onclick="doRegister()" id="btn-register">✨ 注 册</button>
         </div>
@@ -8546,6 +8548,19 @@ Style: ${stylePrompt}
         document.querySelectorAll('.login-tab')[1].classList.add('active');
         document.getElementById('login-form').style.display = 'none';
         document.getElementById('register-form').style.display = 'block';
+        loadRegCaptcha();
+      }
+    }
+
+    async function loadRegCaptcha() {
+      try {
+        const res = await fetch(API_BASE + '/api/captcha');
+        const data = await res.json();
+        document.getElementById('reg-captcha-token').value = data.token;
+        document.getElementById('reg-captcha-question').textContent = data.question;
+        document.getElementById('reg-captcha-answer').value = '';
+      } catch (e) {
+        document.getElementById('reg-captcha-question').textContent = '加载失败';
       }
     }
 
@@ -8655,14 +8670,15 @@ Style: ${stylePrompt}
 
     async function doRegister() {
       const phone = document.getElementById('reg-phone').value.trim();
-      const smsCode = document.getElementById('reg-sms-code').value.trim();
+      const captchaToken = document.getElementById('reg-captcha-token').value;
+      const captchaAnswer = document.getElementById('reg-captcha-answer').value.trim();
       const username = document.getElementById('reg-username').value.trim();
       const nickname = document.getElementById('reg-nickname').value.trim();
       const password = document.getElementById('reg-password').value;
       const password2 = document.getElementById('reg-password2').value;
       const inviteCode = (document.getElementById('reg-invite-code')?.value || '').trim();
       if (!isValidPhone(phone)) return showLoginError('请输入正确的11位手机号');
-      if (!isValidSmsCode(smsCode)) return showLoginError('请输入6位短信验证码');
+      if (!captchaAnswer) return showLoginError('请输入验证码答案');
       if (!username || !password) return showLoginError('请填写用户名和密码');
       if (password !== password2) return showLoginError('两次密码不一致');
       if (password.length < 6) return showLoginError('密码至少6位');
@@ -8672,10 +8688,14 @@ Style: ${stylePrompt}
         const res = await fetch(API_BASE + '/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ phone, smsCode, username, password, nickname, inviteCode })
+          body: JSON.stringify({ phone, username, password, nickname, inviteCode, captchaToken, captchaAnswer })
         });
         const data = await res.json();
-        if (!res.ok) { showLoginError(data.error || '注册失败'); return; }
+        if (!res.ok) {
+          showLoginError(data.error || '注册失败');
+          loadRegCaptcha(); // 失败后刷新验证码
+          return;
+        }
         localStorage.setItem('xhs_auth_token', data.token);
         currentUser = data.user;
         showApp();
@@ -8683,6 +8703,7 @@ Style: ${stylePrompt}
         loadDashboard();
       } catch (e) {
         showLoginError('网络错误，请重试');
+        loadRegCaptcha();
       } finally {
         btn.disabled = false; btn.textContent = '✨ 注 册';
       }

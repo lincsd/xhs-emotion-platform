@@ -56,7 +56,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260315m'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260315n'  # 更新此版本号以追踪部署
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -82,6 +82,11 @@ ORDER_EXPIRE_HOURS = 24  # 订单超时小时数
 SMS_CODE_TTL_MINUTES = 10
 SMS_SEND_COOLDOWN_SECONDS = 60
 SMS_DAILY_LIMIT_PER_PHONE = 20
+
+# 图形验证码配置
+CAPTCHA_TTL_SECONDS = 300  # 5分钟有效
+REGISTER_IP_DAILY_LIMIT = 3  # 同一 IP 每天最多注册几个账号
+_captcha_store = {}  # {token: {'answer': int, 'expires': float}}
 
 # Gemini API Proxy 配置
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com'
@@ -778,6 +783,53 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     @staticmethod
     def _generate_sms_code():
         return f'{random.randint(0, 999999):06d}'
+
+    # ---- 图形验证码 ----
+    @staticmethod
+    def _generate_captcha():
+        """生成数学验证码，返回 (token, question_text, answer)"""
+        import time as _time
+        # 清理过期验证码
+        now = _time.time()
+        expired = [k for k, v in _captcha_store.items() if v['expires'] < now]
+        for k in expired:
+            del _captcha_store[k]
+        # 生成随机数学题
+        ops = [('+', lambda a, b: a + b), ('-', lambda a, b: a - b), ('×', lambda a, b: a * b)]
+        op_sym, op_fn = random.choice(ops)
+        if op_sym == '-':
+            a, b = random.randint(10, 99), random.randint(1, 50)
+            if a < b: a, b = b, a
+        elif op_sym == '×':
+            a, b = random.randint(2, 12), random.randint(2, 9)
+        else:
+            a, b = random.randint(10, 80), random.randint(1, 50)
+        answer = op_fn(a, b)
+        question = f'{a} {op_sym} {b} = ?'
+        token = secrets.token_urlsafe(16)
+        _captcha_store[token] = {'answer': answer, 'expires': now + CAPTCHA_TTL_SECONDS}
+        return token, question, answer
+
+    @staticmethod
+    def _verify_captcha(token, user_answer):
+        """验证图形验证码，验证后立即失效"""
+        import time as _time
+        if not token or user_answer is None:
+            return False
+        entry = _captcha_store.pop(token, None)
+        if not entry:
+            return False
+        if entry['expires'] < _time.time():
+            return False
+        try:
+            return int(user_answer) == entry['answer']
+        except (ValueError, TypeError):
+            return False
+
+    def _get_captcha(self):
+        """GET /api/captcha - 返回一个新的图形验证码"""
+        token, question, _ = self._generate_captcha()
+        return self._send_json({'token': token, 'question': question})
 
     @staticmethod
     def _aliyun_percent_encode(value):
@@ -1527,6 +1579,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._send_json(ContentEngine.categories)
         elif path == '/api/version':
             return self._send_json({'version': BUILD_VERSION})
+        elif path == '/api/captcha':
+            return self._get_captcha()
         # --- 需要登录的路由 ---
         elif path == '/api/posts':
             return self._get_posts(query)
@@ -1657,19 +1711,55 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         password = body.get('password') or ''
         nickname = (body.get('nickname') or '').strip()
         invite_code_input = (body.get('inviteCode') or '').strip().upper()
+        captcha_token = (body.get('captchaToken') or '').strip()
+        captcha_answer = body.get('captchaAnswer')
         # 手机号必填且格式校验
         if not self._is_valid_phone(phone):
             return self._send_json({'error': '请输入正确的11位手机号'}, 400)
-        if not self._is_valid_sms_code(sms_code):
-            return self._send_json({'error': '请输入6位短信验证码'}, 400)
+        # 图形验证码校验（必填）
+        if not self._verify_captcha(captcha_token, captcha_answer):
+            return self._send_json({'error': '验证码错误或已过期，请重新获取'}, 400)
+        # IP 注册频率限制
+        ip = self._client_ip(self.headers)
+        if ip:
+            conn_ip = self._get_db()
+            try:
+                today_reg = conn_ip.execute(
+                    "SELECT COUNT(*) as cnt FROM users WHERE created_at >= date('now','localtime') "
+                    "AND id IN (SELECT user_id FROM sessions WHERE "
+                    "SUBSTR(token,1,0)='' AND created_at >= date('now','localtime'))",
+                    ()
+                ).fetchone()['cnt']
+            except Exception:
+                today_reg = 0
+            conn_ip.close()
+            # 简单 IP 限制：检查 sms_codes 表中的注册记录
+            conn_ip2 = self._get_db()
+            try:
+                ip_reg_count = conn_ip2.execute(
+                    "SELECT COUNT(*) as cnt FROM sms_codes WHERE ip=? AND purpose='register_ok' AND date(created_at)=date('now','localtime')",
+                    (ip,)
+                ).fetchone()['cnt']
+            except Exception:
+                ip_reg_count = 0
+            conn_ip2.close()
+            if ip_reg_count >= REGISTER_IP_DAILY_LIMIT:
+                return self._send_json({'error': f'该网络今日注册账号已达上限（{REGISTER_IP_DAILY_LIMIT}个），请明天再试'}, 429)
+        # 短信验证码（可选，配置了短信服务时才强制）
+        sms_configured = bool((os.environ.get('SMS_PROVIDER') or '').strip())
+        if sms_configured:
+            if not self._is_valid_sms_code(sms_code):
+                return self._send_json({'error': '请输入6位短信验证码'}, 400)
         if len(username) < 2 or len(username) > 20:
             return self._send_json({'error': '用户名长度需2-20个字符'}, 400)
         if len(password) < 6:
             return self._send_json({'error': '密码至少6位'}, 400)
         conn = self._get_db()
-        if not self._consume_sms_code(conn, phone, 'register', sms_code):
-            conn.close()
-            return self._send_json({'error': '验证码错误或已过期'}, 400)
+        # 短信验证码校验（只在配置了短信时）
+        if sms_configured:
+            if not self._consume_sms_code(conn, phone, 'register', sms_code):
+                conn.close()
+                return self._send_json({'error': '短信验证码错误或已过期'}, 400)
         # 检查手机号唯一性
         try:
             phone_exists = conn.execute('SELECT id FROM users WHERE phone = ?', (phone,)).fetchone()
@@ -1719,6 +1809,16 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         conn.commit()
         conn.close()
         self._send_json({'token': token, 'user': {'id': uid, 'username': username, 'nickname': nickname or username, 'avatar': ''}})
+        # 记录注册 IP（用于限流）
+        try:
+            ip = self._client_ip(self.headers)
+            conn2 = self._get_db()
+            conn2.execute("INSERT INTO sms_codes (phone, purpose, code_hash, ip, expires_at) VALUES (?,?,?,?,datetime('now','localtime'))",
+                         (phone, 'register_ok', 'n/a', ip))
+            conn2.commit()
+            conn2.close()
+        except Exception:
+            pass
 
     def _auth_login(self, body):
         username = (body.get('username') or '').strip()
