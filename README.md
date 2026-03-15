@@ -99,11 +99,32 @@ python server.py
 - 验证码有效期 10 分钟
 - 同手机号发送冷却 60 秒
 
-可选环境变量（接入你自己的短信网关）：
+短信通道模式：
+
+- `SMS_PROVIDER=aliyun`：使用阿里云短信直连
+- 未设置 `SMS_PROVIDER`：使用通用网关（`SMS_API_URL`）
+- 两者都未配置：mock 模式（仅日志打印验证码）
+
+通用网关模式环境变量：
 
 - `SMS_API_URL`：短信网关地址（POST JSON）
 - `SMS_API_TOKEN`：短信网关 Bearer Token（可选）
 - `SMS_SIGN`：短信签名（可选，默认“小红书智能运营台”）
+
+阿里云短信模式环境变量：
+
+- `SMS_PROVIDER=aliyun`
+- `ALIYUN_SMS_ACCESS_KEY_ID`
+- `ALIYUN_SMS_ACCESS_KEY_SECRET`
+- `ALIYUN_SMS_SIGN_NAME`
+- `ALIYUN_SMS_TEMPLATE_CODE_REGISTER`（注册模板）
+- `ALIYUN_SMS_TEMPLATE_CODE_LOGIN`（登录模板）
+
+可选：
+
+- `ALIYUN_SMS_TEMPLATE_CODE`（通用模板，若未设置上面两个分用途模板则回退到它）
+- `ALIYUN_SMS_REGION_ID`（默认 `cn-hangzhou`）
+- `ALIYUN_SMS_ENDPOINT`（默认 `dysmsapi.aliyuncs.com`）
 
 ## 📁 项目结构
 

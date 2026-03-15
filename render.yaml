@@ -16,3 +16,19 @@ services:
         value: /var/data/xhsqg
       - key: GEMINI_API_KEY
         sync: false
+      - key: SMS_PROVIDER
+        value: aliyun
+      - key: ALIYUN_SMS_ACCESS_KEY_ID
+        sync: false
+      - key: ALIYUN_SMS_ACCESS_KEY_SECRET
+        sync: false
+      - key: ALIYUN_SMS_SIGN_NAME
+        sync: false
+      - key: ALIYUN_SMS_TEMPLATE_CODE_REGISTER
+        sync: false
+      - key: ALIYUN_SMS_TEMPLATE_CODE_LOGIN
+        sync: false
+      - key: ALIYUN_SMS_REGION_ID
+        value: cn-hangzhou
+      - key: ALIYUN_SMS_ENDPOINT
+        value: dysmsapi.aliyuncs.com

@@ -13,6 +13,8 @@ import sys
 import random
 import shutil
 import hashlib
+import hmac
+import base64
 import secrets
 import urllib.parse
 import urllib.request
@@ -54,7 +56,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260315g'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260315h'  # 更新此版本号以追踪部署
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -748,9 +750,88 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     def _generate_sms_code():
         return f'{random.randint(0, 999999):06d}'
 
+    @staticmethod
+    def _aliyun_percent_encode(value):
+        return urllib.parse.quote(str(value), safe='~')
+
+    def _send_sms_via_aliyun(self, phone, code, purpose):
+        access_key_id = (os.environ.get('ALIYUN_SMS_ACCESS_KEY_ID') or '').strip()
+        access_key_secret = (os.environ.get('ALIYUN_SMS_ACCESS_KEY_SECRET') or '').strip()
+        sign_name = (os.environ.get('ALIYUN_SMS_SIGN_NAME') or '').strip()
+        template_code_common = (os.environ.get('ALIYUN_SMS_TEMPLATE_CODE') or '').strip()
+        template_code_register = (os.environ.get('ALIYUN_SMS_TEMPLATE_CODE_REGISTER') or '').strip()
+        template_code_login = (os.environ.get('ALIYUN_SMS_TEMPLATE_CODE_LOGIN') or '').strip()
+        region_id = (os.environ.get('ALIYUN_SMS_REGION_ID') or 'cn-hangzhou').strip()
+        endpoint = (os.environ.get('ALIYUN_SMS_ENDPOINT') or 'dysmsapi.aliyuncs.com').strip()
+
+        template_code = template_code_register if purpose == 'register' else template_code_login
+        if not template_code:
+            template_code = template_code_common
+
+        if not (access_key_id and access_key_secret and sign_name and template_code):
+            print('[sms][aliyun] missing required env: ALIYUN_SMS_ACCESS_KEY_ID/SECRET/SIGN_NAME/TEMPLATE_CODE')
+            return False
+
+        timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+        nonce = secrets.token_hex(16)
+        params = {
+            'AccessKeyId': access_key_id,
+            'Action': 'SendSms',
+            'Format': 'JSON',
+            'PhoneNumbers': phone,
+            'RegionId': region_id,
+            'SignName': sign_name,
+            'SignatureMethod': 'HMAC-SHA1',
+            'SignatureNonce': nonce,
+            'SignatureVersion': '1.0',
+            'TemplateCode': template_code,
+            'TemplateParam': json.dumps({'code': code}, ensure_ascii=False, separators=(',', ':')),
+            'Timestamp': timestamp,
+            'Version': '2017-05-25',
+        }
+
+        sorted_items = sorted(params.items(), key=lambda item: item[0])
+        canonicalized_query = '&'.join(
+            f'{self._aliyun_percent_encode(key)}={self._aliyun_percent_encode(value)}'
+            for key, value in sorted_items
+        )
+        string_to_sign = 'POST&%2F&' + self._aliyun_percent_encode(canonicalized_query)
+        sign_key = (access_key_secret + '&').encode('utf-8')
+        signature = base64.b64encode(
+            hmac.new(sign_key, string_to_sign.encode('utf-8'), hashlib.sha1).digest()
+        ).decode('utf-8')
+        params['Signature'] = signature
+
+        body = urllib.parse.urlencode(params).encode('utf-8')
+        req = urllib.request.Request(
+            f'https://{endpoint}/',
+            data=body,
+            headers={'Content-Type': 'application/x-www-form-urlencoded'},
+            method='POST'
+        )
+        try:
+            with _OPENER.open(req, timeout=10) as resp:
+                text = resp.read().decode('utf-8', errors='ignore')
+                try:
+                    result = json.loads(text)
+                except Exception:
+                    print(f'[sms][aliyun] invalid json response: {text[:200]}')
+                    return False
+                if result.get('Code') == 'OK':
+                    return True
+                print(f"[sms][aliyun] send failed code={result.get('Code')} message={result.get('Message')}")
+                return False
+        except Exception as e:
+            print(f'[sms][aliyun] request failed: {e}')
+            return False
+
     def _send_sms_message(self, phone, code, purpose):
+        sms_provider = (os.environ.get('SMS_PROVIDER') or '').strip().lower()
         sms_api_url = (os.environ.get('SMS_API_URL') or '').strip()
         sms_api_token = (os.environ.get('SMS_API_TOKEN') or '').strip()
+
+        if sms_provider == 'aliyun':
+            return self._send_sms_via_aliyun(phone, code, purpose)
 
         if not sms_api_url:
             print(f'[sms] mock send phone={phone} purpose={purpose} code={code}')
