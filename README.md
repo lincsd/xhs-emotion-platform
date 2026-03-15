@@ -80,6 +80,31 @@ python server.py
 2. 在 Environment 中添加 `DATA_DIR=/var/data/xhsqg`
 3. 重新部署服务
 
+## 🔐 手机号验证码注册/登录
+
+已支持：
+
+- 注册：手机号 + 短信验证码 + 用户名 + 密码
+- 登录：用户名/手机号 + 密码，或手机号 + 短信验证码
+
+后端接口：
+
+- `POST /api/auth/send-code`：发送验证码（`purpose` 为 `register` 或 `login`）
+- `POST /api/auth/register`：注册（新增 `smsCode` 字段）
+- `POST /api/auth/login-sms`：手机号验证码登录
+
+默认行为：
+
+- 未配置短信通道时，后端会使用 mock 发送（仅服务端日志打印验证码）
+- 验证码有效期 10 分钟
+- 同手机号发送冷却 60 秒
+
+可选环境变量（接入你自己的短信网关）：
+
+- `SMS_API_URL`：短信网关地址（POST JSON）
+- `SMS_API_TOKEN`：短信网关 Bearer Token（可选）
+- `SMS_SIGN`：短信签名（可选，默认“小红书智能运营台”）
+
 ## 📁 项目结构
 
 ```

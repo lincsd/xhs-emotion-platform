@@ -17,6 +17,7 @@ import secrets
 import urllib.parse
 import urllib.request
 import ssl
+import re
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -53,7 +54,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260315f'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260315g'  # 更新此版本号以追踪部署
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -68,6 +69,11 @@ INVITE_REWARD_INVITER = 20    # 邀请人获得积分
 INVITE_REWARD_INVITEE = 10    # 被邀请人获得积分
 INVITE_MAX_REWARDS = 50       # 每人最多获得邀请奖励次数
 COMMISSION_RATE = 0.15        # 分销返现比例 15%
+
+# 短信验证码配置
+SMS_CODE_TTL_MINUTES = 10
+SMS_SEND_COOLDOWN_SECONDS = 60
+SMS_DAILY_LIMIT_PER_PHONE = 20
 
 # Gemini API Proxy 配置
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com'
@@ -153,6 +159,19 @@ def init_db():
             expires_at TEXT NOT NULL,
             FOREIGN KEY (user_id) REFERENCES users(id)
         );
+
+        CREATE TABLE IF NOT EXISTS sms_codes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            phone TEXT NOT NULL,
+            purpose TEXT NOT NULL,
+            code_hash TEXT NOT NULL,
+            ip TEXT DEFAULT '',
+            created_at TEXT DEFAULT (datetime('now','localtime')),
+            expires_at TEXT NOT NULL,
+            used_at TEXT
+        );
+        CREATE INDEX IF NOT EXISTS idx_sms_codes_phone_purpose ON sms_codes(phone, purpose);
+        CREATE INDEX IF NOT EXISTS idx_sms_codes_created_at ON sms_codes(created_at);
     """)
     # 迁移：给已有表添加 user_id 列（忽略已存在错误）
     for tbl in ('posts', 'income', 'account_stats'):
@@ -705,6 +724,137 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         salt, _ = stored.split(':', 1)
         return APIHandler._hash_password(password, salt) == stored
 
+    @staticmethod
+    def _is_valid_phone(phone):
+        return bool(re.match(r'^1[3-9]\d{9}$', phone or ''))
+
+    @staticmethod
+    def _is_valid_sms_code(code):
+        return bool(re.match(r'^\d{6}$', code or ''))
+
+    @staticmethod
+    def _hash_sms_code(phone, purpose, code):
+        raw = f'{phone}|{purpose}|{code}|xhs_sms_v1'
+        return hashlib.sha256(raw.encode('utf-8')).hexdigest()
+
+    @staticmethod
+    def _client_ip(headers):
+        xff = (headers.get('X-Forwarded-For') or '').strip()
+        if xff:
+            return xff.split(',')[0].strip()
+        return (headers.get('X-Real-IP') or '').strip()
+
+    @staticmethod
+    def _generate_sms_code():
+        return f'{random.randint(0, 999999):06d}'
+
+    def _send_sms_message(self, phone, code, purpose):
+        sms_api_url = (os.environ.get('SMS_API_URL') or '').strip()
+        sms_api_token = (os.environ.get('SMS_API_TOKEN') or '').strip()
+
+        if not sms_api_url:
+            print(f'[sms] mock send phone={phone} purpose={purpose} code={code}')
+            return True
+
+        payload = {
+            'phone': phone,
+            'code': code,
+            'purpose': purpose,
+            'sign': (os.environ.get('SMS_SIGN') or '小红书智能运营台').strip()
+        }
+        data = json.dumps(payload).encode('utf-8')
+        headers = {'Content-Type': 'application/json'}
+        if sms_api_token:
+            headers['Authorization'] = f'Bearer {sms_api_token}'
+        req = urllib.request.Request(
+            sms_api_url,
+            data=data,
+            headers=headers,
+            method='POST'
+        )
+        try:
+            with _OPENER.open(req, timeout=10) as resp:
+                return 200 <= resp.getcode() < 300
+        except Exception as e:
+            print(f'[sms] send failed: {e}')
+            return False
+
+    def _consume_sms_code(self, conn, phone, purpose, code):
+        code_hash = self._hash_sms_code(phone, purpose, code)
+        row = conn.execute(
+            '''SELECT id FROM sms_codes
+               WHERE phone=? AND purpose=? AND code_hash=?
+                 AND used_at IS NULL
+                 AND expires_at > datetime("now","localtime")
+               ORDER BY id DESC LIMIT 1''',
+            (phone, purpose, code_hash)
+        ).fetchone()
+        if not row:
+            return False
+        conn.execute('UPDATE sms_codes SET used_at=datetime("now","localtime") WHERE id=?', (row['id'],))
+        return True
+
+    def _auth_send_code(self, body):
+        phone = (body.get('phone') or '').strip()
+        purpose = (body.get('purpose') or '').strip().lower()
+        if purpose not in ('register', 'login'):
+            return self._send_json({'error': '验证码用途不正确'}, 400)
+        if not self._is_valid_phone(phone):
+            return self._send_json({'error': '请输入正确的11位手机号'}, 400)
+
+        conn = self._get_db()
+        try:
+            user = conn.execute('SELECT id FROM users WHERE phone=?', (phone,)).fetchone()
+        except Exception:
+            user = None
+
+        if purpose == 'register' and user:
+            conn.close()
+            return self._send_json({'error': '该手机号已注册'}, 409)
+        if purpose == 'login' and not user:
+            conn.close()
+            return self._send_json({'error': '该手机号未注册'}, 404)
+
+        cooldown = conn.execute(
+            '''SELECT created_at FROM sms_codes
+               WHERE phone=? AND purpose=?
+               ORDER BY id DESC LIMIT 1''',
+            (phone, purpose)
+        ).fetchone()
+        if cooldown:
+            delta = conn.execute(
+                'SELECT CAST((julianday("now","localtime") - julianday(?)) * 86400 AS INTEGER) as s',
+                (cooldown['created_at'],)
+            ).fetchone()['s']
+            if delta is not None and delta < SMS_SEND_COOLDOWN_SECONDS:
+                conn.close()
+                return self._send_json({'error': f'发送太频繁，请{SMS_SEND_COOLDOWN_SECONDS - max(delta, 0)}秒后再试'}, 429)
+
+        today_cnt = conn.execute(
+            '''SELECT COUNT(*) as cnt FROM sms_codes
+               WHERE phone=? AND date(created_at)=date("now","localtime")''',
+            (phone,)
+        ).fetchone()['cnt']
+        if today_cnt >= SMS_DAILY_LIMIT_PER_PHONE:
+            conn.close()
+            return self._send_json({'error': '该手机号今日验证码发送次数已达上限'}, 429)
+
+        code = self._generate_sms_code()
+        if not self._send_sms_message(phone, code, purpose):
+            conn.close()
+            return self._send_json({'error': '验证码发送失败，请稍后重试'}, 502)
+
+        expires = (datetime.now() + timedelta(minutes=SMS_CODE_TTL_MINUTES)).strftime('%Y-%m-%d %H:%M:%S')
+        ip = self._client_ip(self.headers)
+        code_hash = self._hash_sms_code(phone, purpose, code)
+        conn.execute(
+            'INSERT INTO sms_codes (phone, purpose, code_hash, ip, expires_at) VALUES (?,?,?,?,?)',
+            (phone, purpose, code_hash, ip, expires)
+        )
+        conn.commit()
+        conn.close()
+        return self._send_json({'success': True, 'message': '验证码已发送', 'ttl': SMS_CODE_TTL_MINUTES * 60})
+
     def _get_current_user(self):
         """从 Authorization header 获取当前登录用户，返回 user dict 或 None"""
         auth = self.headers.get('Authorization', '')
@@ -1249,8 +1399,12 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         # --- 公开路由 ---
         if path == '/api/auth/register':
             return self._auth_register(body)
+        elif path == '/api/auth/send-code':
+            return self._auth_send_code(body)
         elif path == '/api/auth/login':
             return self._auth_login(body)
+        elif path == '/api/auth/login-sms':
+            return self._auth_login_sms(body)
         elif path == '/api/auth/logout':
             return self._auth_logout()
         elif path == '/api/gemini-proxy':
@@ -1312,19 +1466,24 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     # ---- 用户认证 ----
     def _auth_register(self, body):
         phone = (body.get('phone') or '').strip()
+        sms_code = (body.get('smsCode') or '').strip()
         username = (body.get('username') or '').strip()
         password = body.get('password') or ''
         nickname = (body.get('nickname') or '').strip()
         invite_code_input = (body.get('inviteCode') or '').strip().upper()
         # 手机号必填且格式校验
-        import re as _re
-        if not _re.match(r'^1[3-9]\d{9}$', phone):
+        if not self._is_valid_phone(phone):
             return self._send_json({'error': '请输入正确的11位手机号'}, 400)
+        if not self._is_valid_sms_code(sms_code):
+            return self._send_json({'error': '请输入6位短信验证码'}, 400)
         if len(username) < 2 or len(username) > 20:
             return self._send_json({'error': '用户名长度需2-20个字符'}, 400)
         if len(password) < 6:
             return self._send_json({'error': '密码至少6位'}, 400)
         conn = self._get_db()
+        if not self._consume_sms_code(conn, phone, 'register', sms_code):
+            conn.close()
+            return self._send_json({'error': '验证码错误或已过期'}, 400)
         # 检查手机号唯一性
         try:
             phone_exists = conn.execute('SELECT id FROM users WHERE phone = ?', (phone,)).fetchone()
@@ -1393,6 +1552,32 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         # 清理该用户的过期 session
         conn.execute('DELETE FROM sessions WHERE user_id = ? AND expires_at <= datetime("now","localtime")', (user['id'],))
         # 创建新 session
+        token = secrets.token_urlsafe(48)
+        expires = (datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d %H:%M:%S')
+        conn.execute('INSERT INTO sessions (user_id, token, expires_at) VALUES (?,?,?)',
+                     (user['id'], token, expires))
+        conn.commit()
+        conn.close()
+        self._send_json({'token': token, 'user': {'id': user['id'], 'username': user['username'], 'nickname': user['nickname'], 'avatar': user['avatar']}})
+
+    def _auth_login_sms(self, body):
+        phone = (body.get('phone') or '').strip()
+        sms_code = (body.get('smsCode') or '').strip()
+        if not self._is_valid_phone(phone):
+            return self._send_json({'error': '请输入正确的11位手机号'}, 400)
+        if not self._is_valid_sms_code(sms_code):
+            return self._send_json({'error': '请输入6位短信验证码'}, 400)
+
+        conn = self._get_db()
+        user = conn.execute('SELECT * FROM users WHERE phone = ?', (phone,)).fetchone()
+        if not user:
+            conn.close()
+            return self._send_json({'error': '该手机号未注册'}, 404)
+        if not self._consume_sms_code(conn, phone, 'login', sms_code):
+            conn.close()
+            return self._send_json({'error': '验证码错误或已过期'}, 400)
+
+        conn.execute('DELETE FROM sessions WHERE user_id = ? AND expires_at <= datetime("now","localtime")', (user['id'],))
         token = secrets.token_urlsafe(48)
         expires = (datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d %H:%M:%S')
         conn.execute('INSERT INTO sessions (user_id, token, expires_at) VALUES (?,?,?)',
