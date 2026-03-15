@@ -737,6 +737,15 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         # 简化日志
         pass
 
+    def end_headers(self):
+        # 防止浏览器缓存 HTML，确保用户总是加载最新版
+        path = getattr(self, 'path', '') or ''
+        if path == '/' or path.endswith('.html'):
+            self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
+            self.send_header('Pragma', 'no-cache')
+            self.send_header('Expires', '0')
+        super().end_headers()
+
     def _set_json_headers(self, code=200):
         self.send_response(code)
         self.send_header('Content-Type', 'application/json; charset=utf-8')
