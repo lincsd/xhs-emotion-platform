@@ -56,7 +56,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260315s'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260315t'  # 更新此版本号以追踪部署
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -1064,6 +1064,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         # 图片生成（Imagen模型）
         '图片生成':      3,   # Imagen 单独计价 ~¥0.2
         '图片测试':      0,   # 测试不扣费
+        'AI修图':        3,   # 图片模型编辑 ~¥0.2
         # 品牌定位（文本生成，中等）
         '品牌定位':      2,
         # 轻量功能（纯文本，便宜）

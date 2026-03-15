@@ -2715,6 +2715,24 @@
                   <input type="number" id="img-wm-size" class="form-control" value="24" min="10" max="80" oninput="applyImageFilters()" style="width:70px;" title="字体大小">
                 </div>
               </div>
+              <!-- AI 修图 -->
+              <div class="card" style="margin-bottom:12px;">
+                <h4 style="margin:0 0 10px;">🪄 AI 修图</h4>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
+                  <button class="btn btn-outline" style="font-size:12px;" onclick="aiEditImage('提升画质，让图片更清晰锐利，色彩更鲜艳')">✨ 高清修复</button>
+                  <button class="btn btn-outline" style="font-size:12px;" onclick="aiEditImage('将这张图片调整为小红书风格：柔和暖色调、轻微过曝、奶油感色彩')">🌸 小红书风</button>
+                  <button class="btn btn-outline" style="font-size:12px;" onclick="aiEditImage('将图片调整为胶片质感：加入颗粒感、低饱和度、复古色调')">📷 胶片感</button>
+                  <button class="btn btn-outline" style="font-size:12px;" onclick="aiEditImage('移除图片中的背景杂物，让主体更突出，背景更干净')">🧹 清理背景</button>
+                  <button class="btn btn-outline" style="font-size:12px;" onclick="aiEditImage('为图片添加柔和的光晕效果和梦幻感')">💫 梦幻光效</button>
+                  <button class="btn btn-outline" style="font-size:12px;" onclick="aiEditImage('将图片风格转换为日系清新风格：高亮度、低对比度、偏青绿色调')">🍃 日系清新</button>
+                </div>
+                <div style="display:flex;gap:6px;">
+                  <input type="text" id="ai-edit-prompt" class="form-control" placeholder="输入自定义修图指令，如：去除水印、换背景为蓝天..." style="flex:1;font-size:13px;">
+                  <button class="btn btn-primary" onclick="aiEditImage(document.getElementById('ai-edit-prompt').value)" style="white-space:nowrap;">🪄 修图</button>
+                </div>
+                <div style="font-size:11px;color:var(--text-light);margin-top:4px;">💡 3积分/次 · 使用 Gemini 图片模型进行 AI 修图</div>
+                <div id="ai-edit-result" style="margin-top:8px;"></div>
+              </div>
               <!-- AI 配文 -->
               <div class="card">
                 <h4 style="margin:0 0 10px;">🤖 AI 图片配文</h4>
@@ -3164,6 +3182,7 @@
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:3px 12px;">
             <span>✨ 内容生成(5条)</span><span style="text-align:right; color:var(--info);">~4分</span>
             <span>🖼️ AI图片生成</span><span style="text-align:right; color:var(--info);">3分</span>
+            <span>🪄 AI修图</span><span style="text-align:right; color:var(--info);">3分</span>
             <span>🎯 品牌定位生成</span><span style="text-align:right; color:var(--info);">~8分</span>
             <span>🔍 竞品分析</span><span style="text-align:right; color:var(--info);">2分</span>
             <span>🏷️ 标签/评分/改写</span><span style="text-align:right; color:var(--info);">1分</span>
@@ -9201,6 +9220,110 @@ Style: ${stylePrompt}
       } catch (e) {
         document.getElementById('img-ai-desc').innerHTML = `<span style="color:#e74c3c;">生成失败: ${_extractAIError(e)}</span><br><button class="btn btn-outline" style="margin-top:8px;font-size:12px;" onclick="aiDescribeImage()">🔄 重试</button>`;
       }
+    }
+
+    // ============ AI 修图 ============
+    async function aiEditImage(instruction) {
+      if (!instruction || !instruction.trim()) { toast('请输入修图指令', 'error'); return; }
+      if (!_imgOriginal) { toast('请先上传图片', 'error'); return; }
+      if (!canUseAI()) { toast('请先配置 API Key', 'error'); return; }
+
+      const resultEl = document.getElementById('ai-edit-result');
+      resultEl.innerHTML = '<div style="display:flex;align-items:center;gap:8px;color:var(--text-light);"><div class="spinner" style="width:16px;height:16px;"></div> AI 正在修图，请稍候（约10-30秒）...</div>';
+
+      try {
+        // 压缩原图到合理尺寸（max 1024px）以减少传输量
+        const smallCanvas = document.createElement('canvas');
+        const maxDim = 1024;
+        let w = _imgOriginal.width, h = _imgOriginal.height;
+        if (w > maxDim || h > maxDim) {
+          const scale = maxDim / Math.max(w, h);
+          w = Math.round(w * scale); h = Math.round(h * scale);
+        }
+        smallCanvas.width = w; smallCanvas.height = h;
+        smallCanvas.getContext('2d').drawImage(_imgOriginal, 0, 0, w, h);
+        const base64 = smallCanvas.toDataURL('image/jpeg', 0.85).split(',')[1];
+
+        const apiKey = getGeminiKey();
+        const imageModel = getImageModel();
+        const candidates = [
+          'gemini-3.1-flash-image-preview',
+          'gemini-3-pro-image-preview',
+          'gemini-2.5-flash-image',
+          imageModel
+        ].filter((m, i, arr) => m && arr.indexOf(m) === i);
+
+        const payload = {
+          contents: [{
+            parts: [
+              { inlineData: { mimeType: 'image/jpeg', data: base64 } },
+              { text: `请根据以下指令编辑这张图片：\n${instruction.trim()}\n\n要求：\n- 保持图片的原始构图和主体\n- 输出修改后的完整图片\n- 图片尺寸和比例保持不变` }
+            ]
+          }],
+          generationConfig: { responseModalities: ['TEXT', 'IMAGE'] }
+        };
+
+        let editedImg = null;
+        let lastErr = null;
+        for (const modelName of candidates) {
+          try {
+            const result = await callGeminiAPI(apiKey, modelName, payload, 'generateContent', 'AI修图');
+            editedImg = _extractImageFromResponse(result.data);
+            if (editedImg) break;
+            lastErr = new Error(`模型 ${modelName} 未返回图片`);
+          } catch (e) {
+            lastErr = e;
+            console.warn('[AI Edit] Failed with model', modelName, ':', e.message || e);
+          }
+        }
+
+        if (!editedImg) {
+          throw lastErr || new Error('AI修图失败，未返回图片');
+        }
+
+        // 显示结果
+        resultEl.innerHTML = `
+          <div style="border:1px solid var(--border);border-radius:8px;padding:12px;background:var(--bg-light);">
+            <div style="display:flex;gap:12px;align-items:start;flex-wrap:wrap;">
+              <div style="text-align:center;">
+                <div style="font-size:11px;color:var(--text-light);margin-bottom:4px;">修图结果</div>
+                <img src="${editedImg}" style="max-width:240px;max-height:320px;border-radius:8px;cursor:pointer;" onclick="window.open(this.src)">
+              </div>
+              <div style="flex:1;min-width:150px;">
+                <div style="font-size:12px;color:var(--text-light);margin-bottom:8px;">指令：${instruction.trim().substring(0, 50)}</div>
+                <button class="btn btn-primary btn-sm" onclick="applyAiEditResult()" style="margin-bottom:6px;width:100%;">✅ 应用到编辑区</button>
+                <button class="btn btn-outline btn-sm" onclick="downloadAiEditResult()" style="margin-bottom:6px;width:100%;">💾 直接下载</button>
+                <button class="btn btn-outline btn-sm" onclick="document.getElementById('ai-edit-result').innerHTML=''" style="width:100%;">✕ 关闭</button>
+              </div>
+            </div>
+          </div>
+        `;
+        // Store for later use
+        window._aiEditedImage = editedImg;
+      } catch (e) {
+        resultEl.innerHTML = `<span style="color:#e74c3c;">修图失败: ${_extractAIError(e)}</span><br><button class="btn btn-outline" style="margin-top:6px;font-size:12px;" onclick="aiEditImage('${instruction.replace(/'/g, "\\'").substring(0, 50)}')">🔄 重试</button>`;
+      }
+    }
+
+    function applyAiEditResult() {
+      if (!window._aiEditedImage) { toast('没有可应用的修图结果', 'error'); return; }
+      const img = new Image();
+      img.onload = () => {
+        _imgOriginal = img;
+        _imgOriginalDataUrl = window._aiEditedImage;
+        applyImageFilters();
+        toast('已应用 AI 修图结果', 'success');
+      };
+      img.src = window._aiEditedImage;
+    }
+
+    function downloadAiEditResult() {
+      if (!window._aiEditedImage) { toast('没有可下载的修图结果', 'error'); return; }
+      const a = document.createElement('a');
+      a.href = window._aiEditedImage;
+      a.download = `ai_edited_${Date.now()}.png`;
+      a.click();
+      toast('图片已下载', 'success');
     }
 
     // ============ 图片手动分配 ============
