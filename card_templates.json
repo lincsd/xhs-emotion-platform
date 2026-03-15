@@ -1,0 +1,514 @@
+{
+  "version": "1.0",
+  "canvas": { "width": 1080, "height": 1440 },
+  "templates": [
+    {
+      "id": "minimalist_literary",
+      "name": "简约文艺",
+      "nameEn": "Minimalist Literary",
+      "icon": "📖",
+      "bestFor": ["情感语录", "读书笔记", "人生感悟", "文艺日常", "成长日记"],
+      "mood": "安静、克制、有留白感",
+      "palette": {
+        "primary": "#2c2c2c",
+        "secondary": "#8a7f72",
+        "accent": "#c4a882",
+        "bg": "#f7f3ee",
+        "bgAlt": "#eee8df",
+        "text": "#2c2c2c",
+        "textLight": "#6b6560",
+        "textMuted": "#a09890",
+        "border": "#d8d0c4"
+      },
+      "bg": {
+        "type": "solid",
+        "color": "#f7f3ee",
+        "texture": { "type": "paper_noise", "density": 8000, "alphaMax": 0.04, "colorBase": [120, 110, 100] }
+      },
+      "cover": {
+        "padding": [280, 120, 200, 120],
+        "elements": [
+          { "type": "line", "x": 480, "y": 320, "w": 120, "h": 1.5, "color": "#c4a882" },
+          { "type": "title", "font": "bold 52px 'Noto Serif SC', serif", "color": "#2c2c2c", "align": "center", "y": 580, "lineH": 78, "maxW": 840, "spacing": 4 },
+          { "type": "subtitle", "font": "300 28px 'Noto Sans SC', sans-serif", "color": "#8a7f72", "align": "center", "y": 750, "maxW": 700 },
+          { "type": "text", "font": "24px 'Noto Sans SC', sans-serif", "color": "#a09890", "align": "center", "y": 1250, "prefix": "✦ ", "suffix": " ✦", "field": "author" },
+          { "type": "line", "x": 440, "y": 1320, "w": 200, "h": 1, "color": "#d8d0c4" }
+        ]
+      },
+      "content": {
+        "padding": [100, 100, 120, 100],
+        "elements": [
+          { "type": "pageNum", "font": "italic 22px 'Noto Serif SC', serif", "color": "#c4a882", "align": "center", "y": 60, "fmt": "— {n} —" },
+          { "type": "body", "font": "28px 'Noto Sans SC', sans-serif", "color": "#2c2c2c", "lineH": 52, "paraGap": 32, "maxW": 880, "indent": 56, "startY": 160 },
+          { "type": "line", "x": 100, "y": 1380, "w": 880, "h": 0.5, "color": "#d8d0c4" }
+        ],
+        "quote": { "borderX": 90, "borderW": 3, "borderColor": "#c4a882", "font": "italic 26px 'Noto Serif SC', serif", "color": "#6b6560", "indent": 30 }
+      },
+      "ending": {
+        "elements": [
+          { "type": "text", "text": "感谢阅读", "font": "bold 44px 'Noto Serif SC', serif", "color": "#2c2c2c", "align": "center", "y": 600 },
+          { "type": "text", "text": "🤍", "font": "36px sans-serif", "align": "center", "y": 680 },
+          { "type": "cta", "text": "点赞 ❤️ 收藏 ⭐ 关注我", "font": "26px 'Noto Sans SC', sans-serif", "color": "#c4a882", "y": 780, "border": { "w": 1.5, "color": "#c4a882", "radius": 30 }, "pad": [20, 14] }
+        ]
+      }
+    },
+    {
+      "id": "fresh_cute",
+      "name": "清新可爱",
+      "nameEn": "Fresh & Cute",
+      "icon": "🌸",
+      "bestFor": ["日常分享", "美食探店", "手帐", "少女心", "萌宠", "好物推荐"],
+      "mood": "甜甜的、粉嫩的、有活力",
+      "palette": {
+        "primary": "#ff85a2",
+        "secondary": "#ffc3d4",
+        "accent": "#ffb347",
+        "bg": "#fff5f7",
+        "bgAlt": "#ffeef2",
+        "text": "#4a3540",
+        "textLight": "#8b6f7f",
+        "textMuted": "#c4a0b0",
+        "border": "#ffd6e0",
+        "green": "#7ecba1",
+        "blue": "#87ceeb",
+        "purple": "#c9a0dc"
+      },
+      "bg": {
+        "type": "linear_gradient",
+        "stops": [
+          [0, "#fff5f7"], [0.5, "#ffeef2"], [1, "#fff0e6"]
+        ],
+        "direction": "vertical",
+        "decor": [
+          { "type": "circle", "x": 980, "y": -60, "r": 200, "color": "rgba(255,179,71,0.08)" },
+          { "type": "circle", "x": 50, "y": 1380, "r": 160, "color": "rgba(255,133,162,0.06)" },
+          { "type": "dots", "count": 15, "rRange": [3, 8], "colors": ["rgba(255,133,162,0.12)", "rgba(255,179,71,0.12)", "rgba(126,203,161,0.12)"] }
+        ]
+      },
+      "cover": {
+        "padding": [180, 80, 160, 80],
+        "elements": [
+          { "type": "roundRect", "x": 60, "y": 160, "w": 960, "h": 1120, "r": 32, "fill": "rgba(255,255,255,0.85)", "shadow": { "color": "rgba(255,133,162,0.15)", "blur": 30, "oy": 8 } },
+          { "type": "emoji", "font": "72px sans-serif", "align": "center", "y": 350, "field": "emoji" },
+          { "type": "title", "font": "bold 48px 'Noto Sans SC', sans-serif", "color": "#ff85a2", "align": "center", "y": 540, "lineH": 72, "maxW": 800, "spacing": 2 },
+          { "type": "subtitle", "font": "26px 'Noto Sans SC', sans-serif", "color": "#8b6f7f", "align": "center", "y": 720, "maxW": 700 },
+          { "type": "tags", "y": 860, "font": "22px 'Noto Sans SC', sans-serif", "color": "#ff85a2", "bg": "rgba(255,133,162,0.1)", "border": "rgba(255,133,162,0.3)", "radius": 20, "pad": [18, 8], "gap": 12 },
+          { "type": "wavy", "y": 1200, "color": "#ffd6e0", "amp": 8, "wl": 60, "sw": 2 }
+        ]
+      },
+      "content": {
+        "padding": [80, 80, 100, 80],
+        "elements": [
+          { "type": "roundRect", "x": 50, "y": 50, "w": 980, "h": 1340, "r": 24, "fill": "rgba(255,255,255,0.9)", "shadow": { "color": "rgba(255,133,162,0.1)", "blur": 20, "oy": 4 } },
+          { "type": "body", "font": "27px 'Noto Sans SC', sans-serif", "color": "#4a3540", "lineH": 50, "paraGap": 28, "maxW": 860, "startY": 140 }
+        ],
+        "bullets": { "type": "emoji", "list": ["🌸", "✨", "💕", "🎀", "🍰"], "indent": 40 },
+        "numBadge": { "r": 18, "bg": "#ff85a2", "color": "#fff", "font": "bold 20px sans-serif" }
+      },
+      "ending": {
+        "elements": [
+          { "type": "text", "text": "看到这里的都是小可爱", "font": "bold 42px 'Noto Sans SC', sans-serif", "color": "#ff85a2", "align": "center", "y": 550 },
+          { "type": "text", "text": "🌸✨💕✨🌸", "font": "32px sans-serif", "align": "center", "y": 650 },
+          { "type": "cta", "text": "喜欢就点赞收藏吧 ～", "font": "28px 'Noto Sans SC', sans-serif", "color": "#fff", "y": 760, "bg": "#ff85a2", "radius": 30, "pad": [36, 16], "shadow": { "color": "rgba(255,133,162,0.3)", "blur": 12, "oy": 4 } },
+          { "type": "icons", "y": 880, "gap": 100, "items": [
+            { "emoji": "❤️", "label": "点赞", "color": "#ff85a2" },
+            { "emoji": "⭐", "label": "收藏", "color": "#ffb347" },
+            { "emoji": "💬", "label": "评论", "color": "#7ecba1" },
+            { "emoji": "➕", "label": "关注", "color": "#87ceeb" }
+          ]}
+        ]
+      }
+    },
+    {
+      "id": "premium_business",
+      "name": "高级感商务",
+      "nameEn": "Premium Business",
+      "icon": "💎",
+      "bestFor": ["职场干货", "商业分析", "理财投资", "科技资讯", "行业报告"],
+      "mood": "专业、有质感、克制的奢华感",
+      "palette": {
+        "primary": "#1a1a2e",
+        "secondary": "#16213e",
+        "accent": "#c9a96e",
+        "accentLight": "#dfc08a",
+        "bg": "#1a1a2e",
+        "bgAlt": "#16213e",
+        "text": "#f0ece4",
+        "textLight": "#b8b0a0",
+        "textMuted": "#7a7468",
+        "border": "#c9a96e",
+        "surface": "rgba(255,255,255,0.05)"
+      },
+      "bg": {
+        "type": "linear_gradient",
+        "stops": [
+          [0, "#1a1a2e"], [0.4, "#16213e"], [1, "#0f0f1e"]
+        ],
+        "direction": "diagonal",
+        "decor": [
+          { "type": "cornerL", "pos": "tl", "len": 140, "sw": 2, "color": "#c9a96e", "x": 60, "y": 60 },
+          { "type": "cornerL", "pos": "br", "len": 140, "sw": 2, "color": "#c9a96e", "x": 1020, "y": 1380 },
+          { "type": "grid", "spacing": 80, "sw": 0.3, "color": "rgba(201,169,110,0.06)" }
+        ]
+      },
+      "cover": {
+        "padding": [200, 100, 200, 100],
+        "elements": [
+          { "type": "text", "text": "BUSINESS INSIGHT", "font": "500 22px 'Noto Sans SC', sans-serif", "color": "#c9a96e", "align": "left", "x": 100, "y": 280, "spacing": 6 },
+          { "type": "line", "x": 100, "y": 340, "w": 60, "h": 3, "color": "#c9a96e" },
+          { "type": "title", "font": "bold 50px 'Noto Sans SC', sans-serif", "color": "#f0ece4", "align": "left", "x": 100, "y": 440, "lineH": 75, "maxW": 880, "spacing": 3 },
+          { "type": "subtitle", "font": "300 26px 'Noto Sans SC', sans-serif", "color": "#b8b0a0", "align": "left", "x": 100, "y": 680, "maxW": 750 },
+          { "type": "infoBar", "y": 1280, "x": 100, "font": "20px 'Noto Sans SC', sans-serif", "color": "#7a7468", "sep": "#c9a96e" }
+        ]
+      },
+      "content": {
+        "padding": [80, 100, 100, 100],
+        "elements": [
+          { "type": "body", "font": "26px 'Noto Sans SC', sans-serif", "color": "#f0ece4", "lineH": 48, "paraGap": 30, "maxW": 880, "startY": 140 }
+        ],
+        "sectionTitle": { "font": "bold 30px 'Noto Sans SC', sans-serif", "color": "#c9a96e", "bar": { "w": 4, "h": 28, "color": "#c9a96e", "mr": 16 } },
+        "keyPoint": { "bg": "rgba(201,169,110,0.08)", "borderL": { "w": 3, "color": "#c9a96e" }, "radius": 8, "pad": [24, 20], "font": "26px 'Noto Sans SC', sans-serif", "color": "#dfc08a" },
+        "divider": { "type": "dots", "r": 3, "color": "#c9a96e", "gap": 20, "count": 3 }
+      },
+      "ending": {
+        "elements": [
+          { "type": "text", "text": "感谢阅读", "font": "300 40px 'Noto Sans SC', sans-serif", "color": "#f0ece4", "align": "center", "y": 580, "spacing": 8 },
+          { "type": "text", "text": "THANKS FOR READING", "font": "300 18px sans-serif", "color": "#7a7468", "align": "center", "y": 640, "spacing": 6 },
+          { "type": "line", "x": 460, "y": 700, "w": 160, "h": 1.5, "color": "#c9a96e" },
+          { "type": "cta", "text": "关注获取更多干货", "font": "24px 'Noto Sans SC', sans-serif", "color": "#c9a96e", "y": 770, "border": { "w": 1, "color": "#c9a96e", "radius": 4 }, "pad": [32, 14] }
+        ]
+      }
+    },
+    {
+      "id": "ins_aesthetic",
+      "name": "INS风",
+      "nameEn": "Instagram Aesthetic",
+      "icon": "📷",
+      "bestFor": ["穿搭OOTD", "生活方式", "旅行日记", "咖啡下午茶", "家居美学"],
+      "mood": "慵懒、高级感、大片留白",
+      "palette": {
+        "primary": "#3d3d3d",
+        "secondary": "#7c7c7c",
+        "accent": "#c2a278",
+        "bg": "#f5e6d3",
+        "bgAlt": "#ede0d0",
+        "text": "#3d3d3d",
+        "textLight": "#7c7c7c",
+        "textMuted": "#aaa094",
+        "border": "#d4c4ae",
+        "sage": "#b5c4a8",
+        "dustyRose": "#d4a0a0"
+      },
+      "bg": {
+        "type": "linear_gradient",
+        "stops": [
+          [0, "#f5e6d3"], [0.6, "#ede0d0"], [1, "#e8d8c4"]
+        ],
+        "direction": "vertical",
+        "decor": [
+          { "type": "filmBorder", "topY": 40, "btmY": 1400, "x1": 60, "x2": 1020, "sw": 0.5, "color": "#d4c4ae" },
+          { "type": "grain", "density": 5000, "alphaMax": 0.03, "colorBase": [180, 160, 140] }
+        ]
+      },
+      "cover": {
+        "padding": [300, 140, 250, 140],
+        "elements": [
+          { "type": "text", "font": "italic 20px Georgia, serif", "color": "#aaa094", "align": "center", "y": 200, "fmt": "Vol.{n} · {date}", "field": "volDate" },
+          { "type": "title", "font": "300 46px 'Noto Serif SC', serif", "color": "#3d3d3d", "align": "center", "y": 580, "lineH": 70, "maxW": 800, "spacing": 6 },
+          { "type": "dot", "x": 540, "y": 720, "r": 4, "color": "#c2a278" },
+          { "type": "subtitle", "font": "italic 24px Georgia, serif", "color": "#7c7c7c", "align": "center", "y": 790, "maxW": 650 },
+          { "type": "text", "font": "18px 'Noto Sans SC', sans-serif", "color": "#aaa094", "align": "center", "y": 1280, "spacing": 4, "field": "tag" }
+        ]
+      },
+      "content": {
+        "padding": [100, 120, 120, 120],
+        "elements": [
+          { "type": "body", "font": "26px 'Noto Sans SC', sans-serif", "color": "#3d3d3d", "lineH": 50, "paraGap": 36, "maxW": 840, "startY": 140 }
+        ],
+        "pullQuote": { "font": "italic 30px 'Noto Serif SC', serif", "color": "#7c7c7c", "align": "center", "topLine": { "w": 40, "color": "#c2a278" }, "btmLine": { "w": 40, "color": "#c2a278" }, "my": 40 },
+        "dropCap": { "font": "italic 80px Georgia, serif", "color": "#c2a278" }
+      },
+      "ending": {
+        "elements": [
+          { "type": "text", "text": "ᐟ", "font": "300 36px 'Noto Serif SC', serif", "color": "#3d3d3d", "align": "center", "y": 600, "spacing": 4 },
+          { "type": "filmStrip", "y": 700, "holes": 12, "hw": 28, "hh": 20, "hr": 4, "color": "rgba(0,0,0,0.04)", "gap": 56 },
+          { "type": "text", "text": "follow for more", "font": "italic 22px Georgia, serif", "color": "#7c7c7c", "align": "center", "y": 800 },
+          { "type": "text", "font": "italic 28px Georgia, serif", "color": "#c2a278", "align": "center", "y": 900, "field": "signature" }
+        ]
+      }
+    },
+    {
+      "id": "warm_healing",
+      "name": "暖色治愈",
+      "nameEn": "Warm Healing",
+      "icon": "🌅",
+      "bestFor": ["情感治愈", "心理疏导", "正能量语录", "晚安问候", "自我关怀"],
+      "mood": "温暖的、柔软的、被拥抱的感觉",
+      "palette": {
+        "primary": "#ff6b35",
+        "secondary": "#ff9a5c",
+        "accent": "#ffd166",
+        "bg": "#fff8f0",
+        "bgAlt": "#fff0e0",
+        "text": "#5c3d2e",
+        "textLight": "#8b6754",
+        "textMuted": "#c49a82",
+        "border": "#ffd6b8",
+        "peach": "#ffb89a",
+        "coral": "#ff8a80"
+      },
+      "bg": {
+        "type": "radial_gradient",
+        "cx": 540, "cy": 720, "r": 900,
+        "stops": [
+          [0, "#fff8f0"], [0.4, "#fff0e0"], [0.8, "#ffe8d0"], [1, "#ffddc0"]
+        ],
+        "decor": [
+          { "type": "glow", "circles": [
+            { "x": 200, "y": 200, "r": 300, "color": "rgba(255,209,102,0.06)" },
+            { "x": 900, "y": 400, "r": 250, "color": "rgba(255,107,53,0.04)" },
+            { "x": 400, "y": 1200, "r": 350, "color": "rgba(255,154,92,0.05)" }
+          ]},
+          { "type": "stars", "count": 8, "rRange": [4, 10], "color": "rgba(255,209,102,0.2)" }
+        ]
+      },
+      "cover": {
+        "padding": [250, 100, 200, 100],
+        "elements": [
+          { "type": "emoji", "text": "☀️", "font": "64px sans-serif", "align": "center", "y": 300 },
+          { "type": "title", "font": "bold 48px 'Noto Sans SC', sans-serif", "color": "#5c3d2e", "align": "center", "y": 540, "lineH": 72, "maxW": 840, "spacing": 2 },
+          { "type": "gradientLine", "y": 700, "x1": 380, "x2": 700, "h": 3, "stops": ["transparent", "#ff9a5c", "#ffd166", "transparent"] },
+          { "type": "subtitle", "font": "26px 'Noto Sans SC', sans-serif", "color": "#8b6754", "align": "center", "y": 770, "maxW": 700 },
+          { "type": "gradientRect", "y": 1200, "h": 240, "stops": ["rgba(255,221,192,0)", "rgba(255,221,192,0.3)"] }
+        ]
+      },
+      "content": {
+        "padding": [80, 90, 100, 90],
+        "elements": [
+          { "type": "body", "font": "28px 'Noto Sans SC', sans-serif", "color": "#5c3d2e", "lineH": 52, "paraGap": 32, "maxW": 900, "startY": 120 }
+        ],
+        "warmQuote": { "bgStops": ["rgba(255,209,102,0.12)", "rgba(255,154,92,0.08)"], "radius": 16, "pad": [28, 24], "emoji": "🧡", "font": "italic 27px 'Noto Serif SC', serif", "color": "#5c3d2e" },
+        "bullets": { "symbol": "🧡", "indent": 40 }
+      },
+      "ending": {
+        "elements": [
+          { "type": "text", "text": "愿你被世界温柔以待", "font": "bold 40px 'Noto Sans SC', sans-serif", "color": "#5c3d2e", "align": "center", "y": 560 },
+          { "type": "text", "text": "每天一点暖，治愈每一天", "font": "26px 'Noto Sans SC', sans-serif", "color": "#8b6754", "align": "center", "y": 640 },
+          { "type": "cta", "text": "点赞传递温暖 🧡", "font": "26px 'Noto Sans SC', sans-serif", "color": "#fff", "y": 760, "bgGrad": ["#ff9a5c", "#ff6b35"], "radius": 30, "pad": [36, 16], "shadow": { "color": "rgba(255,107,53,0.3)", "blur": 16, "oy": 6 } }
+        ]
+      }
+    },
+    {
+      "id": "dark_cool",
+      "name": "暗黑酷炫",
+      "nameEn": "Dark Cool",
+      "icon": "🖤",
+      "bestFor": ["摄影作品", "音乐推荐", "潮流文化", "电影推荐", "深夜电台"],
+      "mood": "冷酷、神秘、有态度",
+      "palette": {
+        "primary": "#0f0f0f",
+        "secondary": "#1a1a1a",
+        "accent": "#00d4ff",
+        "accentPurple": "#b44dff",
+        "accentPink": "#ff3366",
+        "bg": "#0f0f0f",
+        "text": "#e8e8e8",
+        "textLight": "#999999",
+        "textMuted": "#555555",
+        "border": "#333333"
+      },
+      "bg": {
+        "type": "solid",
+        "color": "#0f0f0f",
+        "decor": [
+          { "type": "radialGlow", "cx": 0, "cy": 0, "r": 600, "color": "rgba(180,77,255,0.08)" },
+          { "type": "radialGlow", "cx": 1080, "cy": 1440, "r": 600, "color": "rgba(0,212,255,0.06)" },
+          { "type": "scanlines", "spacing": 4, "color": "rgba(255,255,255,0.01)" },
+          { "type": "noise", "density": 6000, "alphaMax": 0.05, "colorBase": [20, 20, 30] }
+        ]
+      },
+      "cover": {
+        "padding": [200, 80, 200, 80],
+        "elements": [
+          { "type": "glitchLine", "y": 360, "x": 80, "w": 200, "h": 3, "layers": [
+            { "color": "#ff3366", "dx": -2, "dy": -1 },
+            { "color": "#00d4ff", "dx": 2, "dy": 1 },
+            { "color": "#ffffff", "dx": 0, "dy": 0 }
+          ]},
+          { "type": "title", "font": "900 56px 'Noto Sans SC', sans-serif", "color": "#ffffff", "align": "left", "x": 80, "y": 500, "lineH": 80, "maxW": 920, "spacing": 2, "shadow": [
+            { "color": "rgba(0,212,255,0.5)", "blur": 20 },
+            { "color": "rgba(180,77,255,0.3)", "dx": 2, "dy": 2, "blur": 10 }
+          ]},
+          { "type": "subtitle", "font": "300 24px 'Noto Sans SC', sans-serif", "color": "#999999", "align": "left", "x": 80, "y": 720, "maxW": 700 },
+          { "type": "neonTag", "font": "bold 20px 'Noto Sans SC', sans-serif", "color": "#00d4ff", "y": 850, "x": 80, "bg": "rgba(0,212,255,0.1)", "border": "#00d4ff", "radius": 4, "pad": [16, 8], "glow": { "color": "rgba(0,212,255,0.3)", "blur": 10 } },
+          { "type": "gradientLine", "y": 1340, "x1": 80, "x2": 1000, "h": 2, "stops": ["#ff3366", "#b44dff", "#00d4ff"] }
+        ]
+      },
+      "content": {
+        "padding": [80, 80, 100, 80],
+        "elements": [
+          { "type": "body", "font": "26px 'Noto Sans SC', sans-serif", "color": "#e8e8e8", "lineH": 48, "paraGap": 28, "maxW": 920, "startY": 130 }
+        ],
+        "sectionTitle": { "font": "bold 30px 'Noto Sans SC', sans-serif", "color": "#00d4ff", "glow": { "color": "rgba(0,212,255,0.4)", "blur": 8 } },
+        "codeBlock": { "bg": "rgba(255,255,255,0.04)", "borderL": { "w": 3, "color": "#00d4ff" }, "radius": 4, "pad": [20, 16], "font": "24px Consolas, monospace", "color": "#00d4ff" },
+        "bullets": { "symbol": "▸", "color": "#00d4ff", "indent": 36 }
+      },
+      "ending": {
+        "elements": [
+          { "type": "text", "text": "THE END", "font": "900 48px sans-serif", "color": "#ffffff", "align": "center", "y": 580, "spacing": 12, "shadow": [
+            { "color": "rgba(0,212,255,0.6)", "blur": 30 },
+            { "color": "rgba(180,77,255,0.4)", "blur": 60 }
+          ]},
+          { "type": "gradientLine", "y": 680, "x1": 340, "x2": 740, "h": 2, "stops": ["#ff3366", "#b44dff", "#00d4ff"], "glow": { "blur": 8 } },
+          { "type": "cta", "text": "FOLLOW ME", "font": "bold 22px sans-serif", "color": "#00d4ff", "y": 760, "spacing": 6, "border": { "w": 1, "color": "#00d4ff", "radius": 0 }, "pad": [32, 12], "glow": { "color": "rgba(0,212,255,0.3)", "blur": 10 } }
+        ]
+      }
+    },
+    {
+      "id": "chinese_retro",
+      "name": "国潮复古",
+      "nameEn": "Chinese Retro",
+      "icon": "🏮",
+      "bestFor": ["国风文化", "传统节日", "汉服", "书法", "茶道", "诗词"],
+      "mood": "古典韵味、文化自信、浓烈但不庸俗",
+      "palette": {
+        "primary": "#c41e3a",
+        "secondary": "#8b0000",
+        "accent": "#d4a840",
+        "bg": "#f5f0e8",
+        "bgAlt": "#ece5d8",
+        "text": "#2d1810",
+        "textLight": "#5a4030",
+        "textMuted": "#8b7355",
+        "border": "#c41e3a",
+        "gold": "#d4a840",
+        "ink": "#1a1008"
+      },
+      "bg": {
+        "type": "solid",
+        "color": "#f5f0e8",
+        "decor": [
+          { "type": "dblBorder", "outer": { "x": 30, "y": 30, "w": 1020, "h": 1380, "sw": 3, "color": "#c41e3a" }, "inner": { "x": 40, "y": 40, "w": 1000, "h": 1360, "sw": 1, "color": "#c41e3a" } },
+          { "type": "cornerOrnament", "size": 40, "color": "#c41e3a", "corners": ["tl", "tr", "bl", "br"] },
+          { "type": "paper_noise", "density": 10000, "alphaMax": 0.03, "colorBase": [200, 185, 160] }
+        ]
+      },
+      "cover": {
+        "padding": [180, 100, 160, 100],
+        "elements": [
+          { "type": "seal", "x": 480, "y": 200, "size": 120, "bg": "#c41e3a", "textFont": "bold 60px SimSun, serif", "textColor": "#f5f0e8", "rotation": -0.05, "field": "sealChar" },
+          { "type": "title", "font": "bold 54px 'Noto Serif SC', serif", "color": "#2d1810", "align": "center", "y": 550, "lineH": 82, "maxW": 800, "spacing": 6 },
+          { "type": "verticalText", "font": "24px 'Noto Serif SC', serif", "color": "#8b7355", "x": 960, "startY": 400, "charGap": 36, "field": "sideText" },
+          { "type": "line", "x": 400, "y": 740, "w": 280, "h": 2, "color": "#d4a840" },
+          { "type": "subtitle", "font": "26px 'Noto Serif SC', serif", "color": "#5a4030", "align": "center", "y": 810, "maxW": 650 },
+          { "type": "ovalSeal", "x": 490, "y": 1200, "w": 100, "h": 50, "bg": "#c41e3a", "textFont": "20px SimSun, serif", "textColor": "#f5f0e8", "field": "bottomSeal" }
+        ]
+      },
+      "content": {
+        "padding": [100, 100, 120, 100],
+        "elements": [
+          { "type": "body", "font": "27px 'Noto Serif SC', serif", "color": "#2d1810", "lineH": 52, "paraGap": 32, "maxW": 860, "indent": 54, "startY": 160 }
+        ],
+        "sectionTitle": { "font": "bold 32px 'Noto Serif SC', serif", "color": "#c41e3a", "seal": { "size": 24, "color": "#c41e3a", "mr": 12 } },
+        "poem": { "font": "30px 'Noto Serif SC', serif", "color": "#2d1810", "align": "center", "lineH": 56, "bg": "rgba(212,168,64,0.06)", "radius": 8, "pad": [40, 30] },
+        "divider": { "type": "redDot", "r": 5, "color": "#c41e3a" }
+      },
+      "ending": {
+        "elements": [
+          { "type": "sealCircle", "text": "完", "font": "bold 80px 'Noto Serif SC', serif", "color": "#c41e3a", "y": 600, "circleR": 70, "circleSW": 3 },
+          { "type": "text", "text": "- 品读经典 · 传承文化 -", "font": "24px 'Noto Serif SC', serif", "color": "#5a4030", "align": "center", "y": 740 },
+          { "type": "text", "text": "关注 · 收藏 · 转发", "font": "24px 'Noto Serif SC', serif", "color": "#c41e3a", "align": "center", "y": 840, "spacing": 4 },
+          { "type": "cloudPattern", "y": 1200, "color": "rgba(196,30,58,0.1)", "count": 3 }
+        ]
+      }
+    },
+    {
+      "id": "study_knowledge",
+      "name": "学习干货",
+      "nameEn": "Study/Knowledge",
+      "icon": "📚",
+      "bestFor": ["学习方法", "考试攻略", "知识科普", "效率工具", "技能分享"],
+      "mood": "清晰、有条理、实用至上",
+      "palette": {
+        "primary": "#4a90d9",
+        "secondary": "#2c6fbd",
+        "accent": "#ff6b6b",
+        "accentYellow": "#ffd93d",
+        "accentGreen": "#6bcb77",
+        "bg": "#f8f9fc",
+        "bgAlt": "#eef2f9",
+        "text": "#2d3748",
+        "textLight": "#5a6577",
+        "textMuted": "#8e99a4",
+        "border": "#d0dae8",
+        "surface": "#ffffff"
+      },
+      "bg": {
+        "type": "solid",
+        "color": "#f8f9fc",
+        "decor": [
+          { "type": "hLines", "startY": 0, "spacing": 48, "sw": 0.3, "color": "rgba(74,144,217,0.08)" },
+          { "type": "vLine", "x": 70, "sw": 1.5, "color": "rgba(255,107,107,0.15)" },
+          { "type": "holes", "x": 35, "positions": [200, 500, 800, 1100], "r": 10, "sw": 1.5, "stroke": "#d0dae8", "fill": "#f0f4fa" }
+        ]
+      },
+      "cover": {
+        "padding": [200, 100, 180, 80],
+        "elements": [
+          { "type": "badge", "font": "bold 22px 'Noto Sans SC', sans-serif", "color": "#fff", "bg": "#4a90d9", "y": 260, "x": 540, "pad": [24, 10], "radius": 20, "field": "category" },
+          { "type": "title", "font": "bold 48px 'Noto Sans SC', sans-serif", "color": "#2d3748", "align": "center", "y": 500, "lineH": 72, "maxW": 860, "spacing": 2 },
+          { "type": "highlight", "color": "rgba(255,217,61,0.4)", "h": 14, "offsetY": -8, "target": "title" },
+          { "type": "subtitle", "font": "26px 'Noto Sans SC', sans-serif", "color": "#5a6577", "align": "center", "y": 700, "maxW": 700 },
+          { "type": "keyTags", "y": 860, "font": "22px 'Noto Sans SC', sans-serif", "items": [
+            { "emoji": "📌", "bg": "rgba(255,107,107,0.1)", "color": "#ff6b6b" },
+            { "emoji": "💡", "bg": "rgba(255,217,61,0.15)", "color": "#d4a800" },
+            { "emoji": "✅", "bg": "rgba(107,203,119,0.1)", "color": "#6bcb77" }
+          ], "radius": 12, "pad": [16, 8], "gap": 16 },
+          { "type": "infoRow", "y": 1260, "font": "20px 'Noto Sans SC', sans-serif", "color": "#8e99a4", "items": ["📖 干货分享", "⏱ 5分钟阅读", "💾 建议收藏"] }
+        ]
+      },
+      "content": {
+        "padding": [60, 90, 80, 80],
+        "elements": [
+          { "type": "body", "font": "26px 'Noto Sans SC', sans-serif", "color": "#2d3748", "lineH": 48, "paraGap": 24, "maxW": 880, "startY": 120 }
+        ],
+        "sectionTitle": { "font": "bold 30px 'Noto Sans SC', sans-serif", "color": "#2d3748", "badge": { "r": 20, "bg": "#4a90d9", "color": "#fff", "font": "bold 22px sans-serif", "mr": 14 }, "underline": { "color": "rgba(74,144,217,0.2)", "h": 8, "offsetY": 2 } },
+        "tipBox": {
+          "radius": 8, "pad": [20, 16], "font": "25px 'Noto Sans SC', sans-serif",
+          "variants": {
+            "important": { "bg": "rgba(255,107,107,0.08)", "borderL": { "w": 4, "color": "#ff6b6b" }, "icon": "🔴", "titleColor": "#ff6b6b" },
+            "tip": { "bg": "rgba(74,144,217,0.08)", "borderL": { "w": 4, "color": "#4a90d9" }, "icon": "💡", "titleColor": "#4a90d9" },
+            "success": { "bg": "rgba(107,203,119,0.08)", "borderL": { "w": 4, "color": "#6bcb77" }, "icon": "✅", "titleColor": "#6bcb77" },
+            "warning": { "bg": "rgba(255,217,61,0.1)", "borderL": { "w": 4, "color": "#ffd93d" }, "icon": "⚠️", "titleColor": "#d4a800" }
+          }
+        },
+        "checkList": { "checked": "☑", "unchecked": "☐", "checkedColor": "#6bcb77", "uncheckedColor": "#8e99a4", "font": "25px 'Noto Sans SC', sans-serif", "indent": 40, "lineGap": 44 },
+        "stepFlow": { "circleR": 16, "circleBg": "#4a90d9", "lineColor": "#d0dae8", "lineW": 2, "numFont": "bold 18px sans-serif", "numColor": "#fff", "labelFont": "24px 'Noto Sans SC', sans-serif", "labelColor": "#2d3748" },
+        "progressBar": { "h": 12, "bg": "#eef2f9", "fill": "#4a90d9", "radius": 6 }
+      },
+      "ending": {
+        "elements": [
+          { "type": "text", "text": "全文总结", "font": "bold 38px 'Noto Sans SC', sans-serif", "color": "#2d3748", "align": "center", "y": 300 },
+          { "type": "summaryBox", "x": 80, "y": 380, "w": 920, "bg": "#fff", "radius": 16, "border": { "w": 2, "color": "#4a90d9" }, "shadow": { "color": "rgba(74,144,217,0.15)", "blur": 20, "oy": 6 }, "pad": [32, 28], "itemFont": "25px 'Noto Sans SC', sans-serif", "itemColor": "#2d3748", "bullet": "✅", "itemGap": 40 },
+          { "type": "cta", "text": "💾 收藏备用 · ❤️ 点赞支持", "font": "26px 'Noto Sans SC', sans-serif", "color": "#fff", "bg": "#4a90d9", "y": 1000, "radius": 28, "pad": [36, 14], "shadow": { "color": "rgba(74,144,217,0.3)", "blur": 12, "oy": 4 } },
+          { "type": "text", "text": "关注我，获取更多干货笔记 📚", "font": "20px 'Noto Sans SC', sans-serif", "color": "#8e99a4", "align": "center", "y": 1100 }
+        ]
+      }
+    }
+  ],
+
+  "fonts": {
+    "serif_cn": { "family": "'Noto Serif SC', SimSun, STSong, serif", "src": "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&display=swap" },
+    "sans_cn": { "family": "'Noto Sans SC', 'Microsoft YaHei', 'PingFang SC', sans-serif", "src": "https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" },
+    "serif_en": { "family": "Georgia, 'Times New Roman', serif", "src": "system" },
+    "mono": { "family": "Consolas, 'Courier New', monospace", "src": "system" }
+  },
+
+  "textRules": {
+    "noBreasBefore": "。，、！？；：）》」』】…—～·",
+    "noBreakAfter": "（《「『【",
+    "maxCharsPerCard": 280,
+    "maxLinesPerCard": 18,
+    "splitBy": "paragraph"
+  }
+}

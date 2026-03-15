@@ -417,6 +417,56 @@
     .preview-info .preview-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; }
     .preview-info .preview-tags { font-size: 12px; color: var(--info); }
 
+    /* ===== 图文卡片模板 ===== */
+    .card-template-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px; background: #f8f9fa; border-radius: 8px;
+      margin-bottom: 12px; flex-wrap: wrap;
+    }
+    .card-template-bar .tmpl-chip {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 5px 12px; border-radius: 20px; font-size: 12px;
+      border: 1.5px solid #e0e0e0; background: white; cursor: pointer;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .card-template-bar .tmpl-chip:hover { border-color: var(--primary); color: var(--primary); }
+    .card-template-bar .tmpl-chip.active { border-color: var(--primary); background: var(--primary); color: white; }
+    .card-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 14px; margin-top: 8px;
+    }
+    .card-grid-item {
+      position: relative; border-radius: 10px; overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1); cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card-grid-item:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+    .card-grid-item img { width: 100%; display: block; aspect-ratio: 3/4; object-fit: cover; }
+    .card-grid-item .card-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 4px 8px; font-size: 11px; color: white;
+      background: linear-gradient(transparent, rgba(0,0,0,0.6));
+      text-align: center;
+    }
+    .card-grid-item .card-dl-btn {
+      position: absolute; top: 6px; right: 6px;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: rgba(255,255,255,0.9); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; opacity: 0; transition: opacity 0.2s;
+    }
+    .card-grid-item:hover .card-dl-btn { opacity: 1; }
+    .card-lightbox {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.88); z-index: 3000;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px; cursor: pointer;
+    }
+    .card-lightbox img {
+      max-height: 92vh; max-width: 92vw; border-radius: 8px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    }
+
     /* ===== 账号包装 ===== */
     .branding-preview-card {
       width: 320px;
@@ -1803,6 +1853,20 @@
                 </div>
               </div>
               <div id="gen-list"></div>
+            </div>
+
+            <!-- 图文排版卡片 -->
+            <div class="card" id="card-template-section" style="display:none;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+                <h3>🎴 图文排版卡片</h3>
+                <div style="display:flex; gap:8px; align-items:center;">
+                  <select id="card-post-select" class="form-control" style="width:auto; font-size:12px; max-width:200px;" onchange="onCardPostChange()"></select>
+                  <button class="btn btn-sm btn-primary" onclick="downloadAllCards()">📥 下载全部</button>
+                </div>
+              </div>
+              <div class="card-template-bar" id="card-template-bar"></div>
+              <div style="font-size:12px; color:var(--text-light); margin-bottom:8px;" id="card-match-hint"></div>
+              <div class="card-grid" id="card-grid"></div>
             </div>
           </div>
 
@@ -4259,6 +4323,514 @@
       `;
     }
 
+    // ====== 图文卡片模板引擎 ======
+    const CardEngine = {
+      W: 1080, H: 1440,
+      _currentCards: null,
+      _currentPost: null,
+      _currentTmplId: null,
+      _allPosts: [],
+
+      templates: [
+        {
+          id: 'minimalist_literary', name: '简约文艺', icon: '📖',
+          bestFor: ['情感','成长','读书','感悟','文艺','日记'],
+          palette: { bg:'#f7f3ee', bgAlt:'#eee8df', text:'#2c2c2c', accent:'#c4a882', light:'#8a7f72', muted:'#a09890', border:'#d8d0c4' },
+          serif: true, titleSize: 52,
+          endText: '感谢阅读', endEmoji: '🤍',
+          ctaText: '点赞 ❤️ 收藏 ⭐ 关注我', ctaBorder: '#c4a882'
+        },
+        {
+          id: 'fresh_cute', name: '清新可爱', icon: '🌸',
+          bestFor: ['日常','美食','手帐','少女','萌宠','好物','可爱'],
+          palette: { bg:'#fff5f7', bgAlt:'#ffeef2', text:'#4a3540', accent:'#ff85a2', light:'#8b6f7f', muted:'#c4a0b0', border:'#ffd6e0', extra1:'#ffb347', extra2:'#7ecba1' },
+          titleSize: 48,
+          endText: '看到这里的都是小可爱', endEmoji: '🌸✨💕✨🌸',
+          ctaText: '喜欢就点赞收藏吧 ～', ctaBg: '#ff85a2'
+        },
+        {
+          id: 'premium_business', name: '高级感商务', icon: '💎',
+          bestFor: ['职场','商业','投资','理财','科技','行业','报告'],
+          palette: { bg:'#1a1a2e', bgAlt:'#16213e', text:'#f0ece4', accent:'#c9a96e', light:'#b8b0a0', muted:'#7a7468', border:'#c9a96e' },
+          dark: true, titleSize: 50, titleAlign: 'left', headerLabel: 'BUSINESS INSIGHT',
+          endText: '感谢阅读', endSubText: 'THANKS FOR READING',
+          ctaText: '关注获取更多干货', ctaBorder: '#c9a96e'
+        },
+        {
+          id: 'ins_aesthetic', name: 'INS风', icon: '📷',
+          bestFor: ['穿搭','生活','旅行','咖啡','家居','美学','ootd'],
+          palette: { bg:'#f5e6d3', bgAlt:'#ede0d0', text:'#3d3d3d', accent:'#c2a278', light:'#7c7c7c', muted:'#aaa094', border:'#d4c4ae' },
+          serif: true, italic: true, titleSize: 46,
+          endText: 'fin ᐟ',
+          ctaText: 'follow for more', ctaBorder: '#c2a278'
+        },
+        {
+          id: 'warm_healing', name: '暖色治愈', icon: '🌅',
+          bestFor: ['治愈','心理','正能量','晚安','温暖','关怀','情感'],
+          palette: { bg:'#fff8f0', bgAlt:'#fff0e0', text:'#5c3d2e', accent:'#ff6b35', light:'#8b6754', muted:'#c49a82', border:'#ffd6b8', extra1:'#ff9a5c', extra2:'#ffd166' },
+          titleSize: 48,
+          endText: '愿你被世界温柔以待', endSubText: '每天一点暖，治愈每一天',
+          ctaText: '点赞传递温暖 🧡', ctaBg: 'gradient'
+        },
+        {
+          id: 'dark_cool', name: '暗黑酷炫', icon: '🖤',
+          bestFor: ['摄影','音乐','潮流','电影','深夜','赛博','暗黑'],
+          palette: { bg:'#0f0f0f', bgAlt:'#1a1a1a', text:'#e8e8e8', accent:'#00d4ff', light:'#999999', muted:'#555555', border:'#333333', extra1:'#b44dff', extra2:'#ff3366' },
+          dark: true, titleSize: 56, titleAlign: 'left', neon: true,
+          endText: 'THE END',
+          ctaText: 'FOLLOW ME', ctaBorder: '#00d4ff'
+        },
+        {
+          id: 'chinese_retro', name: '国潮复古', icon: '🏮',
+          bestFor: ['国风','传统','文化','汉服','书法','茶','诗词','古典'],
+          palette: { bg:'#f5f0e8', bgAlt:'#ece5d8', text:'#2d1810', accent:'#c41e3a', light:'#5a4030', muted:'#8b7355', border:'#c41e3a', extra1:'#d4a840' },
+          serif: true, titleSize: 54, hasSeal: true,
+          endText: '完', endSubText: '品读经典 · 传承文化',
+          ctaText: '关注 · 收藏 · 转发', ctaBorder: '#c41e3a'
+        },
+        {
+          id: 'study_knowledge', name: '学习干货', icon: '📚',
+          bestFor: ['学习','考试','干货','方法','效率','技巧','分享','知识','攻略'],
+          palette: { bg:'#f8f9fc', bgAlt:'#eef2f9', text:'#2d3748', accent:'#4a90d9', light:'#5a6577', muted:'#8e99a4', border:'#d0dae8', extra1:'#ff6b6b', extra2:'#ffd93d', extra3:'#6bcb77' },
+          titleSize: 48, notebook: true,
+          endText: '全文总结',
+          ctaText: '💾 收藏备用 · ❤️ 点赞支持', ctaBg: '#4a90d9'
+        }
+      ],
+
+      // -- Utilities --
+      _font(sz, wt, tmpl) {
+        const f = (tmpl && tmpl.serif) ? "'Noto Serif SC',SimSun,'Songti SC',serif" : "'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif";
+        const it = (tmpl && tmpl.italic) ? 'italic ' : '';
+        return `${it}${wt||''} ${sz}px ${f}`.replace(/\s+/g,' ').trim();
+      },
+      wrapText(ctx, text, maxW) {
+        const lines = []; let line = '';
+        for (const ch of [...text]) {
+          if (ctx.measureText(line + ch).width > maxW && line) { lines.push(line); line = ch; }
+          else line += ch;
+        }
+        if (line) lines.push(line);
+        return lines;
+      },
+      splitContent(content, max = 260) {
+        const paras = (content||'').split(/\n+/).filter(p => p.trim());
+        const pages = []; let cur = '';
+        for (const p of paras) {
+          if (cur.length + p.length > max && cur) { pages.push(cur.trim()); cur = p + '\n\n'; }
+          else cur += p + '\n\n';
+        }
+        if (cur.trim()) pages.push(cur.trim());
+        return pages.length ? pages : [''];
+      },
+      _roundRect(ctx, x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+        ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+        ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+        ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
+        ctx.closePath();
+      },
+      _catEmoji(cat) {
+        return {'治愈':'🌸','成长':'🌱','爱情':'💕','友情':'🤝','自我':'✨','离别':'🍂','温暖':'☀️','释怀':'🕊️'}[cat]||'✨';
+      },
+      _drawStar(ctx, cx, cy, r) {
+        ctx.beginPath();
+        for (let i=0;i<5;i++){const a=(i*4*Math.PI/5)-Math.PI/2;const x=cx+r*Math.cos(a);const y=cy+r*Math.sin(a);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
+        ctx.closePath(); ctx.fill();
+      },
+
+      // -- Background Renderers --
+      _drawBg(ctx, tmpl) {
+        const p = tmpl.palette, W = this.W, H = this.H;
+        if (tmpl.dark) {
+          const g = ctx.createLinearGradient(0,0,W*0.4,H);
+          g.addColorStop(0, p.bg); g.addColorStop(0.4, p.bgAlt); g.addColorStop(1, tmpl.id==='dark_cool'?'#080810':'#0f0f1e');
+          ctx.fillStyle = g;
+        } else if (tmpl.id==='warm_healing') {
+          const g = ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,900);
+          g.addColorStop(0,'#fff8f0'); g.addColorStop(0.4,'#fff0e0'); g.addColorStop(0.8,'#ffe8d0'); g.addColorStop(1,'#ffddc0');
+          ctx.fillStyle = g;
+        } else if (tmpl.id==='fresh_cute') {
+          const g = ctx.createLinearGradient(0,0,0,H);
+          g.addColorStop(0,'#fff5f7'); g.addColorStop(0.5,'#ffeef2'); g.addColorStop(1,'#fff0e6');
+          ctx.fillStyle = g;
+        } else if (tmpl.id==='ins_aesthetic') {
+          const g = ctx.createLinearGradient(0,0,0,H);
+          g.addColorStop(0,'#f5e6d3'); g.addColorStop(0.6,'#ede0d0'); g.addColorStop(1,'#e8d8c4');
+          ctx.fillStyle = g;
+        } else { ctx.fillStyle = p.bg; }
+        ctx.fillRect(0,0,W,H);
+        if (this['_decor_'+tmpl.id]) this['_decor_'+tmpl.id](ctx, tmpl);
+      },
+      _decor_minimalist_literary(ctx) {
+        for(let i=0;i<5000;i++){ctx.fillStyle=`rgba(${120+Math.random()*40},${110+Math.random()*40},${100+Math.random()*40},${Math.random()*0.04})`;ctx.fillRect(Math.random()*1080,Math.random()*1440,1,1);}
+      },
+      _decor_fresh_cute(ctx) {
+        ctx.beginPath();ctx.arc(980,-60,200,0,Math.PI*2);ctx.fillStyle='rgba(255,179,71,0.08)';ctx.fill();
+        ctx.beginPath();ctx.arc(50,1380,160,0,Math.PI*2);ctx.fillStyle='rgba(255,133,162,0.06)';ctx.fill();
+        const cs=['rgba(255,133,162,0.12)','rgba(255,179,71,0.12)','rgba(126,203,161,0.12)'];
+        for(let i=0;i<12;i++){ctx.beginPath();ctx.arc(Math.random()*1080,Math.random()*1440,3+Math.random()*6,0,Math.PI*2);ctx.fillStyle=cs[i%3];ctx.fill();}
+      },
+      _decor_premium_business(ctx, tmpl) {
+        const W=this.W,H=this.H,g=tmpl.palette.accent;
+        ctx.strokeStyle=g;ctx.lineWidth=2;
+        ctx.beginPath();ctx.moveTo(60,200);ctx.lineTo(60,60);ctx.lineTo(200,60);ctx.stroke();
+        ctx.beginPath();ctx.moveTo(W-200,H-60);ctx.lineTo(W-60,H-60);ctx.lineTo(W-60,H-200);ctx.stroke();
+        ctx.strokeStyle='rgba(201,169,110,0.06)';ctx.lineWidth=0.3;
+        for(let x=0;x<W;x+=80){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+        for(let y=0;y<H;y+=80){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+      },
+      _decor_ins_aesthetic(ctx) {
+        ctx.strokeStyle='#d4c4ae';ctx.lineWidth=0.5;ctx.strokeRect(60,40,1080-120,1440-80);
+        for(let i=0;i<3000;i++){ctx.fillStyle=`rgba(${180+Math.random()*30},${160+Math.random()*30},${140+Math.random()*30},${Math.random()*0.03})`;ctx.fillRect(Math.random()*1080,Math.random()*1440,1,1);}
+      },
+      _decor_warm_healing(ctx) {
+        [{x:200,y:200,r:300,c:'rgba(255,209,102,0.06)'},{x:900,y:400,r:250,c:'rgba(255,107,53,0.04)'},{x:400,y:1200,r:350,c:'rgba(255,154,92,0.05)'}].forEach(ci=>{
+          const g=ctx.createRadialGradient(ci.x,ci.y,0,ci.x,ci.y,ci.r);g.addColorStop(0,ci.c);g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fillRect(ci.x-ci.r,ci.y-ci.r,ci.r*2,ci.r*2);
+        });
+        ctx.fillStyle='rgba(255,209,102,0.2)';
+        for(let i=0;i<8;i++){this._drawStar(ctx,100+Math.random()*880,100+Math.random()*1240,4+Math.random()*6);}
+      },
+      _decor_dark_cool(ctx) {
+        const W=this.W,H=this.H;
+        let g=ctx.createRadialGradient(0,0,0,0,0,600);g.addColorStop(0,'rgba(180,77,255,0.08)');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fillRect(0,0,600,600);
+        g=ctx.createRadialGradient(W,H,0,W,H,600);g.addColorStop(0,'rgba(0,212,255,0.06)');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fillRect(W-600,H-600,600,600);
+        ctx.fillStyle='rgba(255,255,255,0.01)';for(let y=0;y<H;y+=4)ctx.fillRect(0,y,W,1);
+        for(let i=0;i<4000;i++){ctx.fillStyle=`rgba(${20+Math.random()*20},${20+Math.random()*20},${30+Math.random()*20},${Math.random()*0.05})`;ctx.fillRect(Math.random()*W,Math.random()*H,1,1);}
+      },
+      _decor_chinese_retro(ctx, tmpl) {
+        const W=this.W,H=this.H,c=tmpl.palette.accent;
+        for(let i=0;i<6000;i++){ctx.fillStyle=`rgba(${200+Math.random()*30},${185+Math.random()*30},${160+Math.random()*30},${Math.random()*0.03})`;ctx.fillRect(Math.random()*W,Math.random()*H,1,1);}
+        ctx.strokeStyle=c;ctx.lineWidth=3;ctx.strokeRect(30,30,W-60,H-60);ctx.lineWidth=1;ctx.strokeRect(42,42,W-84,H-84);
+        ctx.fillStyle=c;[[30,30],[W-70,30],[30,H-70],[W-70,H-70]].forEach(([x,y])=>{ctx.fillRect(x,y,40,40);});
+      },
+      _decor_study_knowledge(ctx) {
+        const W=this.W,H=this.H;
+        ctx.strokeStyle='rgba(74,144,217,0.08)';ctx.lineWidth=0.3;
+        for(let y=0;y<H;y+=48){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+        ctx.strokeStyle='rgba(255,107,107,0.15)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(70,0);ctx.lineTo(70,H);ctx.stroke();
+        [200,500,800,1100].forEach(y=>{ctx.beginPath();ctx.arc(35,y,10,0,Math.PI*2);ctx.strokeStyle='#d0dae8';ctx.lineWidth=1.5;ctx.stroke();ctx.fillStyle='#f0f4fa';ctx.fill();});
+      },
+
+      // -- Cover Card --
+      _drawCover(ctx, post, tmpl) {
+        const W=this.W, p=tmpl.palette, cx=W/2;
+        const isL = tmpl.titleAlign==='left', bx = isL?100:cx;
+        this._drawBg(ctx, tmpl);
+        ctx.textBaseline = 'alphabetic';
+
+        // Template-specific header decorations
+        if (tmpl.id==='premium_business') {
+          ctx.font=this._font(22,'500',tmpl);ctx.fillStyle=p.accent;ctx.textAlign='left';ctx.fillText('BUSINESS INSIGHT',100,280);
+          ctx.fillStyle=p.accent;ctx.fillRect(100,320,60,3);
+        } else if (tmpl.id==='fresh_cute') {
+          ctx.save();ctx.shadowColor='rgba(255,133,162,0.15)';ctx.shadowBlur=30;ctx.shadowOffsetY=8;
+          this._roundRect(ctx,60,160,W-120,1120,32);ctx.fillStyle='rgba(255,255,255,0.85)';ctx.fill();ctx.restore();
+          ctx.font='72px sans-serif';ctx.textAlign='center';ctx.fillText(this._catEmoji(post.category),cx,370);
+        } else if (tmpl.id==='ins_aesthetic') {
+          ctx.font=this._font(20,'300',{serif:true,italic:true});ctx.fillStyle=p.muted;ctx.textAlign='center';
+          ctx.fillText(`Vol.${Math.floor(Math.random()*99+1)} · ${new Date().toLocaleDateString('zh-CN')}`,cx,300);
+        } else if (tmpl.id==='warm_healing') {
+          ctx.font='64px sans-serif';ctx.textAlign='center';ctx.fillText('☀️',cx,320);
+        } else if (tmpl.id==='dark_cool') {
+          ctx.fillStyle='#ff3366';ctx.fillRect(78,359,200,3);
+          ctx.fillStyle='#00d4ff';ctx.fillRect(82,361,200,3);
+          ctx.fillStyle='#ffffff';ctx.fillRect(80,360,200,3);
+        } else if (tmpl.id==='chinese_retro') {
+          const ch=post.title?post.title[0]:'文';
+          ctx.save();ctx.translate(cx,240);ctx.rotate(-0.05);
+          ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.fillStyle=p.accent;ctx.fill();
+          ctx.font=`bold 60px SimSun,serif`;ctx.fillStyle=p.bg;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(ch,0,2);
+          ctx.restore();ctx.textBaseline='alphabetic';
+        } else if (tmpl.id==='study_knowledge') {
+          const cat=post.category||'干货分享';
+          ctx.font=this._font(22,'bold',tmpl);const bw=ctx.measureText(cat).width+48;
+          this._roundRect(ctx,cx-bw/2,250,bw,40,20);ctx.fillStyle=p.accent;ctx.fill();
+          ctx.fillStyle='#fff';ctx.textAlign='center';ctx.fillText(cat,cx,277);
+        } else if (tmpl.id==='minimalist_literary') {
+          ctx.fillStyle=p.accent;ctx.fillRect(cx-60,400,120,1.5);
+        }
+
+        // Title
+        ctx.textAlign=isL?'left':'center';
+        ctx.font=this._font(tmpl.titleSize,'bold',tmpl);ctx.fillStyle=p.text;
+        if (tmpl.neon){ctx.shadowColor='rgba(0,212,255,0.5)';ctx.shadowBlur=20;}
+        const mxW=isL?880:840;
+        const tLines=this.wrapText(ctx,post.title||'无标题',mxW);
+        const tY=({'premium_business':440,'dark_cool':500,'fresh_cute':540})[tmpl.id]||580;
+        const tLH=tmpl.titleSize*1.5;
+        tLines.forEach((l,i)=>ctx.fillText(l,bx,tY+i*tLH));
+        ctx.shadowBlur=0;ctx.shadowColor='transparent';
+
+        // Subtitle / cover_text
+        if (post.cover_text) {
+          const sY=tY+tLines.length*tLH+50;
+          ctx.font=this._font(26,'300',tmpl);ctx.fillStyle=p.light;ctx.textAlign=isL?'left':'center';
+          ctx.fillText(post.cover_text,bx,sY);
+        }
+
+        // INS dot accent
+        if (tmpl.id==='ins_aesthetic'){ctx.beginPath();ctx.arc(cx,tY+tLines.length*tLH+20,4,0,Math.PI*2);ctx.fillStyle=p.accent;ctx.fill();}
+
+        // Tags
+        if (post.tags) {
+          const tags=post.tags.split(',').slice(0,5);
+          if (tmpl.id==='fresh_cute') {
+            const tagY=1000; ctx.font=this._font(20,'400',tmpl);ctx.textAlign='center';
+            let tw=0;const tws=tags.map(t=>{const w=ctx.measureText('#'+t).width+32;tw+=w+10;return w;});
+            let tx=cx-(tw-10)/2;
+            tags.forEach((t,i)=>{this._roundRect(ctx,tx,tagY-14,tws[i],32,16);ctx.fillStyle='rgba(255,133,162,0.1)';ctx.fill();ctx.strokeStyle='rgba(255,133,162,0.3)';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle=p.accent;ctx.textAlign='center';ctx.fillText('#'+t,tx+tws[i]/2,tagY+6);tx+=tws[i]+10;});
+          } else {
+            ctx.font=this._font(20,'400',tmpl);ctx.fillStyle=p.muted;ctx.textAlign='center';
+            ctx.fillText(tags.map(t=>'#'+t).join('  '),cx,1250);
+          }
+        }
+
+        // Template-specific bottom decorations
+        if (tmpl.id==='premium_business'){ctx.font=this._font(20,'400',tmpl);ctx.fillStyle=p.muted;ctx.textAlign='left';ctx.fillText(`${post.category||'商业洞察'}  ·  ${new Date().toLocaleDateString('zh-CN')}  ·  小红书`,100,1280);}
+        if (tmpl.id==='dark_cool'){const g=ctx.createLinearGradient(80,0,1000,0);g.addColorStop(0,'#ff3366');g.addColorStop(0.5,'#b44dff');g.addColorStop(1,'#00d4ff');ctx.fillStyle=g;ctx.fillRect(80,1340,920,2);}
+        if (tmpl.id==='minimalist_literary'){ctx.fillStyle=p.border;ctx.fillRect(440,1320,200,1);}
+        if (tmpl.id==='chinese_retro'){ctx.fillStyle=tmpl.palette.extra1;ctx.fillRect(400,740,280,2);}
+        if (tmpl.id==='warm_healing'){const g=ctx.createLinearGradient(380,0,700,0);g.addColorStop(0,'transparent');g.addColorStop(0.3,p.extra1);g.addColorStop(0.7,p.extra2);g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fillRect(380,700,320,3);}
+        if (tmpl.id==='study_knowledge'){ctx.font=this._font(18,'400',tmpl);ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.fillText('📖 干货分享  ·  ⏱ 5分钟阅读  ·  💾 建议收藏',cx,1260);}
+        if (tmpl.id==='ins_aesthetic'&&post.tags){ctx.font=this._font(18,'400',tmpl);ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.fillText(post.tags.split(',').slice(0,3).map(t=>'#'+t).join('  '),cx,1280);}
+      },
+
+      // -- Content Page --
+      _drawContentPage(ctx, text, pageNum, total, tmpl) {
+        const W=this.W, H=this.H, p=tmpl.palette;
+        this._drawBg(ctx, tmpl);
+        ctx.textBaseline='alphabetic';
+
+        // Page number
+        if (tmpl.id==='minimalist_literary'){ctx.font=this._font(22,'400',{serif:true,italic:true});ctx.fillStyle=p.accent;ctx.textAlign='center';ctx.fillText(`— ${pageNum} —`,W/2,70);}
+        else if (tmpl.id==='study_knowledge'){ctx.beginPath();ctx.arc(W/2,50,22,0,Math.PI*2);ctx.fillStyle=p.accent;ctx.fill();ctx.font='bold 20px sans-serif';ctx.fillStyle='#fff';ctx.textAlign='center';ctx.fillText(String(pageNum),W/2,57);}
+        else{ctx.font=this._font(20,'400',tmpl);ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.fillText(`${pageNum} / ${total}`,W/2,60);}
+
+        // Fresh cute: white card inset
+        if (tmpl.id==='fresh_cute'){ctx.save();ctx.shadowColor='rgba(255,133,162,0.1)';ctx.shadowBlur=20;ctx.shadowOffsetY=4;this._roundRect(ctx,50,90,W-100,H-180,24);ctx.fillStyle='rgba(255,255,255,0.9)';ctx.fill();ctx.restore();}
+
+        // Body text
+        const bodyF=this._font(28,'400',tmpl);ctx.font=bodyF;ctx.fillStyle=p.text;ctx.textAlign='left';
+        const margin=tmpl.id==='fresh_cute'?100:(tmpl.titleAlign==='left'?100:90);
+        const mxW=W-margin*2, lineH=52, startY=140;
+        const indent=(tmpl.id==='minimalist_literary'||tmpl.id==='chinese_retro')?56:0;
+        const paras=text.split(/\n+/).filter(t=>t.trim());
+        const bullets=['🌸','✨','💕','🎀','🍰'];
+        let y=startY;
+        paras.forEach((para,pi)=>{
+          const pText=indent?'\u3000\u3000'+para:para;
+          ctx.font=bodyF;
+          if (tmpl.id==='fresh_cute'&&pi>0){ctx.font='24px sans-serif';ctx.fillText(bullets[pi%5],margin-30,y+6);ctx.font=bodyF;}
+          const lines=this.wrapText(ctx,pText,mxW);
+          ctx.fillStyle=p.text;
+          lines.forEach(line=>{if(y>H-120)return;ctx.fillText(line,margin,y);y+=lineH;});
+          y+=24;
+        });
+
+        // Bottom decoration
+        if (tmpl.id==='minimalist_literary'){ctx.fillStyle=p.border;ctx.fillRect(100,H-60,W-200,0.5);}
+        if (tmpl.id==='dark_cool'){const g=ctx.createLinearGradient(80,0,W-80,0);g.addColorStop(0,'#ff336644');g.addColorStop(0.5,'#b44dff44');g.addColorStop(1,'#00d4ff44');ctx.fillStyle=g;ctx.fillRect(80,H-60,W-160,1);}
+      },
+
+      // -- Ending Card --
+      _drawEnding(ctx, post, tmpl) {
+        const W=this.W, H=this.H, p=tmpl.palette, cx=W/2;
+        this._drawBg(ctx, tmpl);
+        ctx.textBaseline='alphabetic';
+
+        // Main end text
+        if (tmpl.id==='chinese_retro') {
+          ctx.strokeStyle=p.accent;ctx.lineWidth=3;ctx.beginPath();ctx.arc(cx,600,70,0,Math.PI*2);ctx.stroke();
+          ctx.font=this._font(80,'bold',tmpl);ctx.fillStyle=p.accent;ctx.textAlign='center';ctx.fillText('完',cx,630);
+        } else if (tmpl.id==='dark_cool') {
+          ctx.font='900 48px sans-serif';ctx.fillStyle='#fff';ctx.textAlign='center';
+          ctx.shadowColor='rgba(0,212,255,0.6)';ctx.shadowBlur=30;ctx.fillText('THE END',cx,600);
+          ctx.shadowColor='rgba(180,77,255,0.4)';ctx.shadowBlur=60;ctx.fillText('THE END',cx,600);
+          ctx.shadowBlur=0;ctx.shadowColor='transparent';
+          const g=ctx.createLinearGradient(340,0,740,0);g.addColorStop(0,'#ff3366');g.addColorStop(0.5,'#b44dff');g.addColorStop(1,'#00d4ff');ctx.fillStyle=g;ctx.fillRect(340,660,400,2);
+        } else {
+          ctx.font=this._font(tmpl.id==='study_knowledge'?38:42,'bold',tmpl);ctx.fillStyle=p.text;ctx.textAlign='center';
+          ctx.fillText(tmpl.endText,cx,600);
+        }
+
+        // Emoji
+        if (tmpl.endEmoji&&tmpl.id!=='dark_cool'&&tmpl.id!=='chinese_retro'){ctx.font='36px sans-serif';ctx.textAlign='center';ctx.fillText(tmpl.endEmoji,cx,680);}
+
+        // Sub text
+        if (tmpl.endSubText){ctx.font=this._font(24,'300',tmpl);ctx.fillStyle=p.light||p.muted;ctx.textAlign='center';ctx.fillText(tmpl.endSubText,cx,tmpl.id==='chinese_retro'?740:650);}
+
+        // CTA button
+        const ctaY = tmpl.id==='chinese_retro'?840:(tmpl.id==='dark_cool'?760:780);
+        ctx.font=this._font(24,'400',tmpl);
+        const bw=ctx.measureText(tmpl.ctaText).width+64, bh=48, bx=cx-bw/2;
+        if (tmpl.ctaBg) {
+          if (tmpl.ctaBg==='gradient'){const g=ctx.createLinearGradient(bx,0,bx+bw,0);g.addColorStop(0,p.extra1);g.addColorStop(1,p.accent);ctx.fillStyle=g;}
+          else ctx.fillStyle=tmpl.ctaBg;
+          this._roundRect(ctx,bx,ctaY-bh/2,bw,bh,tmpl.id==='premium_business'?4:28);ctx.fill();
+          ctx.fillStyle='#fff';
+        } else if (tmpl.ctaBorder) {
+          this._roundRect(ctx,bx,ctaY-bh/2,bw,bh,tmpl.id==='dark_cool'?0:28);
+          ctx.strokeStyle=tmpl.ctaBorder;ctx.lineWidth=1.5;ctx.stroke();
+          if (tmpl.neon){ctx.shadowColor='rgba(0,212,255,0.3)';ctx.shadowBlur=10;ctx.stroke();ctx.shadowBlur=0;ctx.shadowColor='transparent';}
+          ctx.fillStyle=tmpl.ctaBorder;
+        }
+        ctx.textAlign='center';ctx.fillText(tmpl.ctaText,cx,ctaY+8);
+
+        // Tags
+        if (post.tags&&tmpl.id!=='dark_cool'){ctx.font=this._font(18,'400',tmpl);ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.fillText(post.tags.split(',').slice(0,5).map(t=>'#'+t).join('  '),cx,ctaY+100);}
+
+        // Study knowledge summary box
+        if (tmpl.id==='study_knowledge'&&post.content) {
+          const sums=post.content.split(/\n+/).filter(t=>t.trim()).slice(0,5);
+          const boxX=80,boxY=660,boxW=W-160,boxH=sums.length*44+48;
+          ctx.save();ctx.shadowColor='rgba(74,144,217,0.15)';ctx.shadowBlur=20;ctx.shadowOffsetY=6;
+          this._roundRect(ctx,boxX,boxY,boxW,boxH,16);ctx.fillStyle='#fff';ctx.fill();
+          ctx.strokeStyle=p.accent;ctx.lineWidth=2;ctx.stroke();ctx.restore();
+          ctx.font=this._font(24,'400',tmpl);ctx.fillStyle=p.text;ctx.textAlign='left';
+          sums.forEach((l,i)=>ctx.fillText(`✅  ${l.trim().slice(0,35)}`,boxX+28,boxY+40+i*44));
+        }
+      },
+
+      // -- Smart Template Matching --
+      matchTemplate(post) {
+        const txt=((post.title||'')+(post.content||'')+(post.tags||'')).toLowerCase();
+        const cat=post.category||'';
+        const kwMap=[
+          {kw:['职场','商业','投资','理财','科技','行业','数据','分析'],id:'premium_business'},
+          {kw:['穿搭','ootd','日常','咖啡','旅行','生活方式','家居'],id:'ins_aesthetic'},
+          {kw:['学习','考试','干货','方法','效率','技巧','攻略','知识'],id:'study_knowledge'},
+          {kw:['国风','传统','文化','汉服','书法','茶道','诗词','古典'],id:'chinese_retro'},
+          {kw:['摄影','音乐','潮流','电影','深夜','赛博','暗黑'],id:'dark_cool'},
+          {kw:['美食','甜品','探店','手帐','萌宠','少女','可爱'],id:'fresh_cute'},
+        ];
+        for(const km of kwMap){if(km.kw.filter(k=>txt.includes(k)).length>=2) return this.getTemplate(km.id);}
+        const catMap={'治愈':'warm_healing','成长':'minimalist_literary','爱情':'fresh_cute','友情':'warm_healing','自我':'ins_aesthetic','离别':'minimalist_literary','温暖':'warm_healing','释怀':'ins_aesthetic'};
+        if(catMap[cat]) return this.getTemplate(catMap[cat]);
+        return this.getTemplate('minimalist_literary');
+      },
+      getTemplate(id) { return this.templates.find(t=>t.id===id)||this.templates[0]; },
+
+      // -- Main Entry --
+      generateCards(post, templateId) {
+        const tmpl = templateId ? this.getTemplate(templateId) : this.matchTemplate(post);
+        const cards = [];
+        // Cover
+        let c = document.createElement('canvas'); c.width=this.W; c.height=this.H;
+        this._drawCover(c.getContext('2d'), post, tmpl);
+        cards.push({type:'cover',label:'封面',dataUrl:c.toDataURL('image/png')});
+        // Content pages
+        const pages = this.splitContent(post.content||'', 260);
+        pages.forEach((pg,i)=>{
+          c=document.createElement('canvas');c.width=this.W;c.height=this.H;
+          this._drawContentPage(c.getContext('2d'),pg,i+1,pages.length,tmpl);
+          cards.push({type:'content',label:`正文 ${i+1}`,dataUrl:c.toDataURL('image/png')});
+        });
+        // Ending
+        c=document.createElement('canvas');c.width=this.W;c.height=this.H;
+        this._drawEnding(c.getContext('2d'), post, tmpl);
+        cards.push({type:'ending',label:'结尾',dataUrl:c.toDataURL('image/png')});
+        return { template: tmpl, cards };
+      }
+    };
+
+    // -- Card Template UI Functions --
+    function showCardTemplates(posts) {
+      CardEngine._allPosts = posts;
+      if (!posts||!posts.length) return;
+      const sec = document.getElementById('card-template-section');
+      sec.style.display = 'block';
+      // Populate post selector
+      const sel = document.getElementById('card-post-select');
+      sel.innerHTML = posts.map((p,i)=>`<option value="${i}">${(i+1)}. ${(p.title||'').slice(0,20)}</option>`).join('');
+      // Render template chips
+      const bar = document.getElementById('card-template-bar');
+      bar.innerHTML = '<span style="font-size:12px;color:var(--text-light);white-space:nowrap;">模板：</span>' +
+        CardEngine.templates.map(t=>`<span class="tmpl-chip" data-id="${t.id}" onclick="switchCardTemplate('${t.id}')">${t.icon} ${t.name}</span>`).join('');
+      // Generate for first post with auto-matched template
+      generateCardsForPost(0);
+    }
+
+    function generateCardsForPost(idx) {
+      const post = CardEngine._allPosts[idx];
+      if (!post) return;
+      CardEngine._currentPost = post;
+      const result = CardEngine.generateCards(post);
+      CardEngine._currentCards = result.cards;
+      CardEngine._currentTmplId = result.template.id;
+      // Update active chip
+      document.querySelectorAll('.tmpl-chip').forEach(el=>el.classList.toggle('active',el.dataset.id===result.template.id));
+      // Hint
+      document.getElementById('card-match-hint').textContent = `🤖 AI 智能匹配：「${result.template.icon} ${result.template.name}」模板（基于笔记内容分析）`;
+      renderCardGrid(result.cards);
+    }
+
+    function switchCardTemplate(tmplId) {
+      if (!CardEngine._currentPost) return;
+      const result = CardEngine.generateCards(CardEngine._currentPost, tmplId);
+      CardEngine._currentCards = result.cards;
+      CardEngine._currentTmplId = tmplId;
+      document.querySelectorAll('.tmpl-chip').forEach(el=>el.classList.toggle('active',el.dataset.id===tmplId));
+      const tmpl = CardEngine.getTemplate(tmplId);
+      document.getElementById('card-match-hint').textContent = `已切换至「${tmpl.icon} ${tmpl.name}」模板`;
+      renderCardGrid(result.cards);
+    }
+
+    function onCardPostChange() {
+      const idx = parseInt(document.getElementById('card-post-select').value);
+      generateCardsForPost(idx);
+    }
+
+    function renderCardGrid(cards) {
+      const grid = document.getElementById('card-grid');
+      grid.innerHTML = cards.map((c,i)=>`
+        <div class="card-grid-item" onclick="openCardLightbox(${i})">
+          <img src="${c.dataUrl}" alt="${c.label}">
+          <div class="card-label">${c.label}</div>
+          <button class="card-dl-btn" onclick="event.stopPropagation();downloadSingleCard(${i})" title="下载">⬇</button>
+        </div>
+      `).join('');
+    }
+
+    function openCardLightbox(idx) {
+      const card = CardEngine._currentCards[idx];
+      if (!card) return;
+      const overlay = document.createElement('div');
+      overlay.className = 'card-lightbox';
+      overlay.onclick = ()=>overlay.remove();
+      overlay.innerHTML = `<img src="${card.dataUrl}" onclick="event.stopPropagation()">`;
+      document.body.appendChild(overlay);
+    }
+
+    function downloadSingleCard(idx) {
+      const card = CardEngine._currentCards[idx];
+      if (!card) return;
+      const a = document.createElement('a');
+      a.href = card.dataUrl;
+      a.download = `xhs_card_${card.type}_${idx+1}.png`;
+      a.click();
+    }
+
+    function downloadAllCards() {
+      if (!CardEngine._currentCards||!CardEngine._currentCards.length) return;
+      CardEngine._currentCards.forEach((c,i)=>{
+        setTimeout(()=>{
+          const a=document.createElement('a');a.href=c.dataUrl;
+          a.download=`xhs_${CardEngine._currentTmplId}_${i+1}_${c.type}.png`;a.click();
+        }, i*300);
+      });
+      toast(`📥 正在下载 ${CardEngine._currentCards.length} 张卡片...`, 'success');
+    }
+
+    function quickCardForPost(idx) {
+      const posts = CardEngine._allPosts;
+      if (!posts||!posts[idx]) return;
+      document.getElementById('card-post-select').value = String(idx);
+      generateCardsForPost(idx);
+      document.getElementById('card-template-section').scrollIntoView({ behavior:'smooth', block:'start' });
+    }
+
     // ============ 前端内容生成引擎（离线模式使用） ============
     const ContentEngine = {
       hooks: {
@@ -5965,6 +6537,9 @@ Style: ${stylePrompt}
         if (posts.length > 0) previewPost(posts[0]);
         toast(`成功生成 ${posts.length} 条笔记${usedAI ? (IS_LIGHT_AI_MODE ? '（AI 轻量模式）' : '（AI 联网搜索+智能生成）') : '（本地模板）'}！`, 'success');
 
+        // 自动生成图文排版卡片
+        try { showCardTemplates(posts); } catch(e) { console.warn('图文卡片生成失败:', e); }
+
         // 如果启用了图片生成（封面图 + 配图）
         if (withImage && usedAI) {
           const totalImages = count * (1 + imageCount); // 封面 + 配图
@@ -6079,6 +6654,7 @@ Style: ${stylePrompt}
             </div>
           </div>
           <div class="post-actions">
+            <button class="btn btn-sm btn-outline" onclick="event.stopPropagation(); quickCardForPost(${i})" title="生成图文卡片">🎴</button>
             ${p.id ? `
               <button class="btn btn-sm btn-outline" onclick="event.stopPropagation(); openEditPost(${p.id})">✏️</button>
               <button class="btn btn-sm btn-outline" onclick="event.stopPropagation(); viewPost(${p.id})">👁️</button>
