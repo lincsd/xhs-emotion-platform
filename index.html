@@ -3982,7 +3982,8 @@
       if (useProxy) {
         // 走服务器代理
         const isImageModel = model && (model.includes('image') || model.includes('banana') || model.includes('imagen'));
-        const proxyTimeout = isImageModel ? 200000 : (forceProxy ? 120000 : 30000);
+        const hasVisionData = JSON.stringify(payload).includes('"inlineData"');
+        const proxyTimeout = isImageModel ? 200000 : hasVisionData ? 90000 : (forceProxy ? 120000 : 30000);
         const proxyUrls = getGeminiProxyAPIUrls();
         const reqBody = JSON.stringify({ apiKey, model, payload, action, feature: feature || action });
         const authToken = getAuthToken();
@@ -8245,9 +8246,9 @@ Style: ${stylePrompt}
       if (!canUseAI()) { toast('请先配置 API Key', 'error'); return; }
       document.getElementById('img-ai-desc').innerHTML = '<span style="color:var(--text-light);">\u2728 AI 正在分析图片...</span>';
       try {
-        // 压缩图片到合理大小发送给 Gemini Vision
+        // 压缩图片到较小尺寸以减少代理传输量
         const smallCanvas = document.createElement('canvas');
-        const maxDim = 800;
+        const maxDim = 512;
         let w = _imgOriginal.width, h = _imgOriginal.height;
         if (w > maxDim || h > maxDim) {
           const scale = maxDim / Math.max(w, h);
@@ -8255,7 +8256,7 @@ Style: ${stylePrompt}
         }
         smallCanvas.width = w; smallCanvas.height = h;
         smallCanvas.getContext('2d').drawImage(_imgOriginal, 0, 0, w, h);
-        const base64 = smallCanvas.toDataURL('image/jpeg', 0.8).split(',')[1];
+        const base64 = smallCanvas.toDataURL('image/jpeg', 0.5).split(',')[1];
 
         const key = getGeminiKey();
         const payload = {
@@ -8273,7 +8274,7 @@ Style: ${stylePrompt}
         window._lastImgDesc = text;
         document.getElementById('img-ai-desc').innerHTML = `<div style="white-space:pre-wrap;line-height:1.7;font-size:13px;">${text}</div><button class="btn btn-outline" style="margin-top:8px;font-size:12px;" onclick="navigator.clipboard.writeText(window._lastImgDesc).then(()=>toast('已复制配文','success'))">📋 复制配文</button>`;
       } catch (e) {
-        document.getElementById('img-ai-desc').innerHTML = `<span style="color:#e74c3c;">生成失败: ${_extractAIError(e)}</span>`;
+        document.getElementById('img-ai-desc').innerHTML = `<span style="color:#e74c3c;">生成失败: ${_extractAIError(e)}</span><br><button class="btn btn-outline" style="margin-top:8px;font-size:12px;" onclick="aiDescribeImage()">🔄 重试</button>`;
       }
     }
 
