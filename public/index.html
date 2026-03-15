@@ -4519,6 +4519,28 @@
         ctx.closePath(); ctx.fillStyle = fill; ctx.fill();
       },
 
+      // ══════════════ 段落智能解析器 ══════════════
+      _parseParagraphs(text) {
+        const lines = text.split(/\n/).filter(l => l.trim());
+        return lines.map(line => {
+          const t = line.trim();
+          // Numbered: "1. xxx", "1、xxx", "1) xxx", "1] xxx"
+          const numM = t.match(/^(\d+)[.、．)\]】]\s*(.+)/);
+          if (numM) return { type: 'numbered', num: parseInt(numM[1]), text: numM[2] };
+          // Circle numbers ①②③…
+          const circleM = t.match(/^([①②③④⑤⑥⑦⑧⑨⑩])\s*(.+)/);
+          if (circleM) return { type: 'numbered', num: '①②③④⑤⑥⑦⑧⑨⑩'.indexOf(circleM[1]) + 1, text: circleM[2] };
+          // Emoji-prefixed
+          const emojiM = t.match(/^([\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}][\u{FE0F}\u{200D}]*)\s*(.+)/u);
+          if (emojiM) return { type: 'emoji', emoji: emojiM[1], text: emojiM[2] };
+          // Quote: 「…」 "…" "…" >…
+          if (/^[「""\u{300C}>]/.test(t)) return { type: 'quote', text: t.replace(/^[「""\u{300C}>]\s*/, '').replace(/[」""\u{300D}]$/, '') };
+          // Bullet: - • · ✦ ✧ ★ ▸ ► etc
+          if (/^[-•·✦✧★☆▸▹►▻]\s+/.test(t)) return { type: 'bullet', text: t.replace(/^[-•·✦✧★☆▸▹►▻]\s+/, '') };
+          return { type: 'plain', text: t };
+        });
+      },
+
       // ══════════════ 背景渲染器 ══════════════
       _drawBg(ctx, tmpl) {
         const W = this.W, H = this.H, p = tmpl.palette;
@@ -4711,73 +4733,125 @@
         }
       },
 
-      // ══════════════ 封面渲染 ══════════════
+      // ══════════════ 封面渲染（增强版 v2）══════════════
       _drawCover(ctx, post, tmpl) {
         const W = this.W, H = this.H, p = tmpl.palette;
         this._drawBg(ctx, tmpl);
-
+        const tid = tmpl.id;
         const cx = W / 2;
+        const isLeft = tmpl.titleAlign === 'left';
 
-        // Header label (AESTHETIC, EDITORIAL, etc.)
-        if (tmpl.headerLabel && tmpl.id !== 'breaking_news') {
+        // ── Header label with accent underline ──
+        if (tmpl.headerLabel && tid !== 'breaking_news') {
           ctx.font = this._font(18, '600', tmpl); ctx.fillStyle = p.accent;
-          ctx.textAlign = tmpl.titleAlign === 'left' ? 'left' : 'center';
-          ctx.fillText(tmpl.headerLabel, tmpl.titleAlign === 'left' ? 80 : cx, 120);
+          ctx.textAlign = isLeft ? 'left' : 'center';
+          const hlX = isLeft ? 80 : cx;
+          ctx.fillText(tmpl.headerLabel, hlX, 120);
+          // Small underline
+          const hlW = ctx.measureText(tmpl.headerLabel).width;
+          ctx.fillStyle = p.accent + '40';
+          ctx.fillRect(isLeft ? 80 : cx - hlW/2, 126, hlW, 2);
         }
 
-        // Category emoji
+        // ── Category emoji + tag ──
         const catEmoji = this._catEmoji(post.category);
-
-        // Title
-        const titleY = tmpl.id === 'breaking_news' ? 160 : 200;
+        const titleY = tid === 'breaking_news' ? 160 : 200;
         if (post.category) {
-          ctx.font = this._font(20, '500', tmpl);
+          ctx.font = this._font(20, '500', tmpl); ctx.fillStyle = p.sub;
+          ctx.textAlign = isLeft ? 'left' : 'center';
+          const catX = isLeft ? 80 : cx;
+          // Category tag with pill background
+          const catText = `${catEmoji} ${post.category}`;
+          const catTW = ctx.measureText(catText).width;
+          this._roundRect(ctx, (isLeft ? 80 : cx - catTW/2) - 12, titleY - 45, catTW + 24, 28, 14);
+          ctx.fillStyle = p.accent + '15'; ctx.fill();
           ctx.fillStyle = p.sub;
-          ctx.textAlign = tmpl.titleAlign === 'left' ? 'left' : 'center';
-          const catX = tmpl.titleAlign === 'left' ? 80 : cx;
-          ctx.fillText(`${catEmoji} ${post.category}`, catX, titleY - 30);
+          ctx.fillText(catText, catX, titleY - 26);
         }
 
+        // ── Title with accent highlight block ──
         ctx.font = this._font(tmpl.titleSize || 48, tmpl.boldTitle ? '800' : '700', tmpl);
-        ctx.fillStyle = p.text;
-        ctx.textAlign = tmpl.titleAlign === 'left' ? 'left' : 'center';
-        const titleX = tmpl.titleAlign === 'left' ? 80 : cx;
-        const maxTitleW = tmpl.titleAlign === 'left' ? W - 160 : W - 140;
+        const titleX = isLeft ? 80 : cx;
+        const maxTitleW = isLeft ? W - 160 : W - 140;
         const titleLines = this.wrapText(ctx, post.title || '无标题', maxTitleW);
-        titleLines.forEach((ln, i) => ctx.fillText(ln, titleX, titleY + 10 + i * (tmpl.titleSize + 12)));
+        ctx.textAlign = isLeft ? 'left' : 'center';
 
-        const startY = tmpl.id === 'breaking_news' ? 180 : (titleY + 40);
-        const contentY = startY + titleLines.length * (tmpl.titleSize + 12) + 30;
-
-        // Cover text / preview in card
-        if (post.cover_text || post.content) {
-          const previewText = post.cover_text || (post.content || '').slice(0, 150);
-          ctx.font = this._font(26, '400', tmpl); ctx.fillStyle = p.sub;
-          ctx.textAlign = tmpl.titleAlign === 'left' ? 'left' : 'center';
-          const previewLines = this.wrapText(ctx, previewText, W - 200);
-          previewLines.slice(0, 4).forEach((ln, i) => {
-            ctx.fillText(ln, tmpl.titleAlign === 'left' ? 80 : cx, contentY + i * 40);
+        // Draw accent highlight behind title lines
+        const tFontSz = tmpl.titleSize || 48;
+        const tLineH = tFontSz + 12;
+        if (tid !== 'breaking_news') {
+          titleLines.forEach((ln, i) => {
+            const lnW = ctx.measureText(ln).width;
+            const lnX = isLeft ? 80 : cx - lnW / 2;
+            const lnY = titleY + i * tLineH - 4;
+            // Subtle accent block behind title
+            this._roundRect(ctx, lnX - 10, lnY, lnW + 20, tFontSz + 6, 6);
+            ctx.fillStyle = p.accent + '10'; ctx.fill();
           });
         }
 
+        // Render title text
+        ctx.fillStyle = p.text;
+        ctx.font = this._font(tFontSz, tmpl.boldTitle ? '800' : '700', tmpl);
+        titleLines.forEach((ln, i) => ctx.fillText(ln, titleX, titleY + 10 + i * tLineH));
+
+        // ── Decorative accent bar below title ──
+        const afterTitleY = titleY + titleLines.length * tLineH + 16;
+        if (tid === 'magazine_edit') {
+          ctx.fillStyle = p.accent; ctx.fillRect(80, afterTitleY, 60, 4);
+          ctx.fillStyle = p.text; ctx.fillRect(150, afterTitleY, 20, 4);
+        } else if (tid === 'minimal_literary') {
+          ctx.fillStyle = p.accent + '60';
+          ctx.fillRect(isLeft ? 80 : cx - 50, afterTitleY, 100, 1);
+          ctx.fillRect(isLeft ? 80 : cx - 30, afterTitleY + 5, 60, 0.5);
+        } else if (!tmpl.dark && tid !== 'breaking_news') {
+          const barW = 80;
+          ctx.fillStyle = p.accent + '50';
+          ctx.fillRect(isLeft ? 80 : cx - barW/2, afterTitleY, barW, 3);
+        } else if (tmpl.dark) {
+          const g = ctx.createLinearGradient(cx - 60, 0, cx + 60, 0);
+          g.addColorStop(0, 'transparent'); g.addColorStop(0.5, p.accent); g.addColorStop(1, 'transparent');
+          ctx.fillStyle = g; ctx.fillRect(cx - 60, afterTitleY, 120, 2);
+        }
+
+        const contentY = afterTitleY + 30;
+
+        // ── Cover preview text with better styling ──
+        if (post.cover_text || post.content) {
+          const previewText = post.cover_text || (post.content || '').slice(0, 150);
+          ctx.font = this._font(26, '400', tmpl); ctx.fillStyle = p.sub;
+          ctx.textAlign = isLeft ? 'left' : 'center';
+          const previewLines = this.wrapText(ctx, previewText, W - 200);
+          const maxPreview = Math.min(previewLines.length, 4);
+          // Light preview area background for non-dark themes
+          if (!tmpl.dark && maxPreview > 0) {
+            const pvX = isLeft ? 70 : 90;
+            this._roundRect(ctx, pvX, contentY - 14, W - pvX * 2, maxPreview * 40 + 24, 10);
+            ctx.fillStyle = p.accent + '06'; ctx.fill();
+          }
+          previewLines.slice(0, 4).forEach((ln, i) => {
+            ctx.fillStyle = p.sub;
+            ctx.fillText(ln, isLeft ? 80 : cx, contentY + i * 40);
+          });
+        }
+
+        // ── Template-specific decorations ──
+
         // Neon glow for dark_cyber
-        if (tmpl.id === 'dark_cyber') {
+        if (tid === 'dark_cyber') {
           ctx.shadowColor = p.accent; ctx.shadowBlur = 20;
           ctx.strokeStyle = p.accent; ctx.lineWidth = 1;
           ctx.strokeRect(60, 60, W-120, H-120);
           ctx.shadowBlur = 0;
+          // Corner dots
+          [[80, 80], [W-80, 80], [80, H-80], [W-80, H-80]].forEach(([x, y]) => {
+            ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI*2);
+            ctx.fillStyle = p.accent; ctx.fill();
+          });
         }
 
-        // Magazine column line
-        if (tmpl.id === 'magazine_edit') {
-          ctx.fillStyle = p.accent; ctx.fillRect(70, contentY + 180, 60, 4);
-        } else if (!tmpl.dark && tmpl.id !== 'breaking_news') {
-          // Decorative line
-          ctx.fillStyle = p.accent + '40'; ctx.fillRect(cx - 40, contentY + 180, 80, 2);
-        }
-
-        // Chinese retro seal
-        if (tmpl.id === 'chinese_retro') {
+        // Chinese retro seal + border
+        if (tid === 'chinese_retro') {
           ctx.save();
           ctx.translate(W - 140, H - 180);
           ctx.rotate(-0.15);
@@ -4786,26 +4860,37 @@
           ctx.font = "bold 28px 'SimSun', serif"; ctx.fillStyle = p.accent;
           ctx.textAlign = 'center'; ctx.fillText('雅', 0, 8);
           ctx.restore();
+          // Top-left corner ornament
+          ctx.strokeStyle = p.accent + '40'; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(60, 80); ctx.lineTo(60, 50); ctx.lineTo(90, 50); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(W-60, 80); ctx.lineTo(W-60, 50); ctx.lineTo(W-90, 50); ctx.stroke();
         }
 
-        // Note knowledge: summary box
-        if (tmpl.id === 'note_knowledge' && post.content) {
+        // Note knowledge: enhanced summary box
+        if (tid === 'note_knowledge' && post.content) {
           const sums = (post.content || '').split(/\n+/).filter(l => l.trim()).slice(0, 5);
           if (sums.length) {
-            const boxY = contentY + 200;
-            const boxX = 100;
-            this._roundRect(ctx, boxX, boxY, W - 200, sums.length * 44 + 30, 12);
+            const boxY = contentY + 180;
+            const boxX = 90;
+            this._roundRect(ctx, boxX, boxY, W - 180, sums.length * 44 + 36, 12);
             ctx.fillStyle = '#fff8e1'; ctx.fill();
-            ctx.strokeStyle = p.accent; ctx.lineWidth = 2; ctx.stroke();
-            ctx.font = this._font(22, '500', tmpl); ctx.fillStyle = p.text; ctx.textAlign = 'left';
-            sums.forEach((l, i) => ctx.fillText(`✦ ${l.trim().slice(0, 35)}`, boxX + 28, boxY + 40 + i * 44));
+            ctx.strokeStyle = p.accent + '60'; ctx.lineWidth = 1.5; ctx.stroke();
+            // Header bar
+            this._roundRect(ctx, boxX, boxY, W - 180, 36, 12);
+            ctx.save(); ctx.clip();
+            ctx.fillStyle = p.accent + '20'; ctx.fillRect(boxX, boxY, W - 180, 36);
+            ctx.restore();
+            ctx.font = this._font(16, '600', tmpl); ctx.fillStyle = p.accent; ctx.textAlign = 'left';
+            ctx.fillText('📋 内容速览', boxX + 16, boxY + 24);
+            ctx.font = this._font(22, '500', tmpl); ctx.fillStyle = p.text;
+            sums.forEach((l, i) => ctx.fillText(`✦ ${l.trim().slice(0, 35)}`, boxX + 28, boxY + 68 + i * 44));
           }
         }
 
         // Breaking news: top stories
-        if (tmpl.id === 'breaking_news' && post.content) {
+        if (tid === 'breaking_news' && post.content) {
           const items = (post.content || '').split(/\n+/).filter(l => l.trim()).slice(0, 6);
-          const startItemY = contentY + 200;
+          const startItemY = contentY + 180;
           items.forEach((item, i) => {
             ctx.fillStyle = i === 0 ? '#ff0000' : '#444';
             this._roundRect(ctx, 60, startItemY + i*70, 50, 44, 6);
@@ -4815,6 +4900,49 @@
             ctx.font = this._font(24, '500', tmpl); ctx.fillStyle = p.text; ctx.textAlign = 'left';
             ctx.fillText(item.trim().slice(0, 30), 130, startItemY + i*70 + 30);
           });
+        }
+
+        // Sweet fresh: scattered emoji accents
+        if (tid === 'sweet_fresh') {
+          ctx.globalAlpha = 0.12; ctx.font = '28px sans-serif';
+          ctx.fillText('💕', W - 120, 160);
+          ctx.fillText('🌸', 70, H - 260);
+          ctx.globalAlpha = 1;
+        }
+
+        // Handwrite diary: date stamp
+        if (tid === 'handwrite_diary') {
+          const now = new Date();
+          const dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;
+          ctx.font = this._font(16, '400', tmpl); ctx.fillStyle = p.sub + '80';
+          ctx.textAlign = 'right';
+          ctx.fillText(dateStr, W - 80, 90);
+          ctx.textAlign = 'left';
+        }
+
+        // Nature healing: leaf corner decor
+        if (tid === 'nature_healing') {
+          ctx.globalAlpha = 0.1; ctx.font = '40px sans-serif';
+          ctx.fillText('🍃', W - 100, 100);
+          ctx.fillText('🌿', 60, H - 240);
+          ctx.globalAlpha = 1;
+        }
+
+        // Candy pop: rainbow corner dots
+        if (tid === 'candy_pop') {
+          const colors = ['#ff6b6b', '#ffd93d', '#6bcb77', '#4d96ff', '#9775fa'];
+          colors.forEach((c, i) => {
+            ctx.beginPath(); ctx.arc(W - 80 + (i%3)*16 - 16, 80 + Math.floor(i/3)*16, 6, 0, Math.PI*2);
+            ctx.fillStyle = c + '40'; ctx.fill();
+          });
+        }
+
+        // Ins aesthetic: "ISSUE No." decoration
+        if (tid === 'ins_aesthetic') {
+          ctx.font = this._font(13, '400', tmpl); ctx.fillStyle = p.sub + '60';
+          ctx.textAlign = 'right';
+          ctx.fillText('ISSUE No.' + String(Math.floor(Math.random()*90)+10), W - 80, H - 250);
+          ctx.textAlign = 'left';
         }
 
         // CTA
@@ -4859,61 +4987,271 @@
         ctx.textAlign = 'left';
       },
 
-      // ══════════════ 正文页渲染 ══════════════
+      // ══════════════ 正文页渲染（智能排版 v2）══════════════
       _drawContentPage(ctx, text, pageNum, totalPages, tmpl) {
         const W = this.W, H = this.H, p = tmpl.palette;
         this._drawBg(ctx, tmpl);
-        const startY = tmpl.id === 'breaking_news' ? 120 : 100;
+        const tid = tmpl.id;
+        const startY = tid === 'breaking_news' ? 120 : 100;
 
         // Card background
         if (!tmpl.dark) {
           this._roundRect(ctx, 60, startY, W-120, H-startY-80, 16);
           ctx.fillStyle = p.card; ctx.fill();
+          // Top accent stripe
+          ctx.save();
+          this._roundRect(ctx, 60, startY, W-120, H-startY-80, 16);
+          ctx.clip();
+          ctx.fillStyle = p.accent + '18';
+          ctx.fillRect(60, startY, W-120, 5);
+          ctx.restore();
+        } else {
+          // Dark theme: subtle top glow
+          const tg = ctx.createLinearGradient(0, startY, 0, startY + 30);
+          tg.addColorStop(0, p.accent + '18'); tg.addColorStop(1, 'transparent');
+          ctx.fillStyle = tg; ctx.fillRect(60, startY, W-120, 30);
         }
 
-        // Page number
-        ctx.font = this._font(16, '400', tmpl); ctx.fillStyle = p.sub;
+        // Page indicator with decorative dashes
+        ctx.font = this._font(15, '500', tmpl); ctx.fillStyle = p.sub + 'aa';
         ctx.textAlign = 'right';
-        ctx.fillText(`${pageNum} / ${totalPages}`, W - 90, startY + 40);
+        ctx.fillText(`— ${pageNum} / ${totalPages} —`, W - 88, startY + 36);
         ctx.textAlign = 'left';
 
-        // Content text
-        ctx.font = this._font(28, '400', tmpl); ctx.fillStyle = p.text;
-        const lines = this.wrapText(ctx, text, W - 200);
-        lines.forEach((ln, i) => {
-          if (startY + 70 + i * 44 < H - 100) {
-            ctx.fillText(ln, 100, startY + 70 + i * 44);
+        // Parse and render paragraphs with smart layout
+        const paras = this._parseParagraphs(text);
+        const mx = 100, contentW = W - 200;
+        let y = startY + 66;
+        const maxY = H - 110;
+
+        paras.forEach((para, idx) => {
+          if (y >= maxY - 20) return;
+
+          if (para.type === 'numbered') {
+            // Accent shape with number
+            const cr = 17;
+            const useSquare = tid === 'breaking_news' || tid === 'magazine_edit';
+            if (useSquare) {
+              this._roundRect(ctx, mx, y - cr + 4, cr*2, cr*2, 5);
+              ctx.fillStyle = (tid === 'breaking_news' && para.num === 1) ? '#ff0000' : p.accent; ctx.fill();
+            } else {
+              ctx.beginPath(); ctx.arc(mx + cr, y + 4, cr, 0, Math.PI*2);
+              ctx.fillStyle = p.accent; ctx.fill();
+            }
+            ctx.font = this._font(16, '700', tmpl); ctx.fillStyle = '#ffffff';
+            ctx.textAlign = 'center';
+            ctx.fillText(String(para.num), mx + cr, y + 10);
+            ctx.textAlign = 'left';
+            ctx.font = this._font(26, '500', tmpl); ctx.fillStyle = p.text;
+            const lines = this.wrapText(ctx, para.text, contentW - 56);
+            lines.forEach((ln, i) => {
+              if (y + i * 40 < maxY) ctx.fillText(ln, mx + cr*2 + 16, y + 6 + i * 40);
+            });
+            y += Math.max(lines.length, 1) * 40 + 16;
+          }
+          else if (para.type === 'emoji') {
+            // Emoji highlight card
+            ctx.font = this._font(26, '400', tmpl);
+            const lines = this.wrapText(ctx, para.text, contentW - 58);
+            const blockH = lines.length * 40 + 18;
+            this._roundRect(ctx, mx, y - 8, contentW, blockH, 10);
+            ctx.fillStyle = p.accent + '0c'; ctx.fill();
+            ctx.strokeStyle = p.accent + '20'; ctx.lineWidth = 1;
+            this._roundRect(ctx, mx, y - 8, contentW, blockH, 10); ctx.stroke();
+            ctx.font = '34px sans-serif';
+            ctx.fillText(para.emoji, mx + 14, y + 20);
+            ctx.font = this._font(26, '400', tmpl); ctx.fillStyle = p.text;
+            lines.forEach((ln, i) => {
+              if (y + i * 40 < maxY) ctx.fillText(ln, mx + 54, y + 6 + i * 40);
+            });
+            y += blockH + 12;
+          }
+          else if (para.type === 'quote') {
+            ctx.font = this._font(25, '400', tmpl);
+            const lines = this.wrapText(ctx, para.text, contentW - 40);
+            const blockH = lines.length * 38 + 26;
+            // Quote background
+            this._roundRect(ctx, mx, y - 10, contentW, blockH, 10);
+            ctx.fillStyle = p.accent + '10'; ctx.fill();
+            // Left accent bar
+            this._roundRect(ctx, mx, y - 10, 5, blockH, 3);
+            ctx.fillStyle = p.accent; ctx.fill();
+            // Quote mark
+            ctx.font = this._font(44, '700', tmpl); ctx.fillStyle = p.accent + '30';
+            ctx.fillText('\u201C', mx + 14, y + 16);
+            // Text
+            ctx.font = this._font(25, '400', tmpl); ctx.fillStyle = p.text;
+            lines.forEach((ln, i) => {
+              if (y + i * 38 < maxY) ctx.fillText(ln, mx + 24, y + 8 + i * 38);
+            });
+            y += blockH + 12;
+          }
+          else if (para.type === 'bullet') {
+            // Decorative bullet point
+            const dotR = 5;
+            ctx.beginPath(); ctx.arc(mx + dotR + 4, y + 5, dotR, 0, Math.PI*2);
+            ctx.fillStyle = p.accent; ctx.fill();
+            ctx.font = this._font(26, '400', tmpl); ctx.fillStyle = p.text;
+            const lines = this.wrapText(ctx, para.text, contentW - 32);
+            lines.forEach((ln, i) => {
+              if (y + i * 40 < maxY) ctx.fillText(ln, mx + 26, y + 6 + i * 40);
+            });
+            y += Math.max(lines.length, 1) * 40 + 12;
+          }
+          else {
+            // Plain text — subtle accent sidebar for long paragraphs
+            ctx.font = this._font(28, '400', tmpl); ctx.fillStyle = p.text;
+            const lines = this.wrapText(ctx, para.text, contentW);
+            if (lines.length > 2) {
+              this._roundRect(ctx, mx - 10, y - 4, 3, lines.length * 44 + 6, 2);
+              ctx.fillStyle = p.accent + '25'; ctx.fill();
+            }
+            ctx.fillStyle = p.text;
+            lines.forEach((ln, i) => {
+              if (y + i * 44 < maxY) ctx.fillText(ln, mx, y + i * 44);
+            });
+            y += lines.length * 44 + 10;
+          }
+
+          // Paragraph separator
+          if (idx < paras.length - 1 && y < maxY - 40) {
+            y += 6;
+            ctx.fillStyle = p.accent + '30';
+            if (tid === 'candy_pop') {
+              ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+              ctx.fillText('✦   ✦   ✦', W/2, y + 3); ctx.textAlign = 'left';
+            } else if (tid === 'chinese_retro') {
+              ctx.font = '12px serif'; ctx.fillStyle = p.accent + '50'; ctx.textAlign = 'center';
+              ctx.fillText('◇  ◆  ◇', W/2, y + 3); ctx.textAlign = 'left';
+            } else if (tid === 'nature_healing') {
+              ctx.font = '12px sans-serif'; ctx.textAlign = 'center';
+              ctx.fillText('🌿', W/2, y + 4); ctx.textAlign = 'left';
+            } else if (tid === 'handwrite_diary') {
+              ctx.strokeStyle = p.accent + '30'; ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
+              ctx.beginPath(); ctx.moveTo(mx + 40, y + 2); ctx.lineTo(W - mx - 40, y + 2); ctx.stroke();
+              ctx.setLineDash([]);
+            } else {
+              for (let d = 0; d < 3; d++) {
+                ctx.beginPath(); ctx.arc(W/2 - 16 + d * 16, y + 2, 2, 0, Math.PI*2); ctx.fill();
+              }
+            }
+            y += 18;
           }
         });
+
+        // Bottom decorative element
+        if (!tmpl.dark) {
+          ctx.fillStyle = p.accent + '18';
+          ctx.fillRect(mx, H - 98, contentW, 1);
+        }
       },
 
-      // ══════════════ 结尾页渲染 ══════════════
+      // ══════════════ 结尾页渲染（增强版 v2）══════════════
       _drawEnding(ctx, post, tmpl) {
         const W = this.W, H = this.H, p = tmpl.palette;
         this._drawBg(ctx, tmpl);
-
+        const tid = tmpl.id;
         const cx = W / 2;
+        const cy = H / 2;
 
-        // Big emoji
-        ctx.font = '80px sans-serif'; ctx.textAlign = 'center';
-        ctx.fillText(tmpl.endEmoji || this._catEmoji(post.category), cx, H/2 - 80);
-
-        // End text
-        ctx.font = this._font(36, '600', tmpl); ctx.fillStyle = p.text;
-        ctx.fillText(tmpl.endText || '感谢阅读', cx, H/2);
-
-        // Sub text
-        if (tmpl.endSub) {
-          ctx.font = this._font(20, '400', tmpl); ctx.fillStyle = p.sub;
-          ctx.fillText(tmpl.endSub, cx, H/2 + 40);
+        // ── Decorative border frame ──
+        if (tid === 'biz_premium' || tid === 'dark_cyber') {
+          // Double-line frame for dark themes
+          ctx.strokeStyle = p.accent + '30'; ctx.lineWidth = 1;
+          ctx.strokeRect(50, 50, W-100, H-100);
+          ctx.strokeStyle = p.accent + '15'; ctx.lineWidth = 0.5;
+          ctx.strokeRect(60, 60, W-120, H-120);
+        } else if (tid === 'chinese_retro') {
+          // Traditional double border
+          ctx.strokeStyle = p.accent + '40'; ctx.lineWidth = 2;
+          ctx.strokeRect(55, 55, W-110, H-110);
+          ctx.strokeStyle = p.accent + '20'; ctx.lineWidth = 1;
+          ctx.strokeRect(65, 65, W-130, H-130);
+        } else if (tid === 'magazine_edit') {
+          // Bold frame
+          ctx.strokeStyle = p.text; ctx.lineWidth = 4;
+          ctx.strokeRect(45, 45, W-90, H-90);
+        } else if (!tmpl.dark) {
+          // Elegant rounded frame
+          this._roundRect(ctx, 60, 60, W-120, H-120, 20);
+          ctx.strokeStyle = p.accent + '20'; ctx.lineWidth = 1; ctx.stroke();
         }
 
-        // Decorative line
-        ctx.fillStyle = p.accent + '60';
-        ctx.fillRect(cx - 40, H/2 + 60, 80, 2);
+        // ── Scattered decorative emojis ──
+        ctx.globalAlpha = 0.08; ctx.font = '36px sans-serif';
+        const endEmoji = tmpl.endEmoji || this._catEmoji(post.category);
+        const scatterEmojis = endEmoji.length > 2 ? [...endEmoji].filter(c => c.trim()) : [endEmoji, '✨', '💫'];
+        const scatterPoints = [[120, 180], [W-140, 220], [100, H-280], [W-120, H-240], [200, 300], [W-200, H-350]];
+        scatterPoints.forEach((pt, i) => {
+          if (i < scatterEmojis.length) {
+            ctx.font = `${20 + Math.random()*16}px sans-serif`;
+            ctx.fillText(scatterEmojis[i % scatterEmojis.length], pt[0], pt[1]);
+          }
+        });
+        ctx.globalAlpha = 1;
 
-        // CTA
-        this._drawCTA(ctx, tmpl, H - 220, W);
+        // ── Central emoji with glow ──
+        if (tmpl.dark) {
+          // Glow effect for dark themes
+          ctx.shadowColor = p.accent; ctx.shadowBlur = 30;
+        }
+        ctx.font = '88px sans-serif'; ctx.textAlign = 'center';
+        ctx.fillText(endEmoji, cx, cy - 90);
+        ctx.shadowBlur = 0;
+
+        // ── End text with accent background ──
+        ctx.font = this._font(38, '700', tmpl);
+        const endTextStr = tmpl.endText || '感谢阅读';
+        const etW = ctx.measureText(endTextStr).width;
+        // Accent pill behind end text
+        this._roundRect(ctx, cx - etW/2 - 20, cy - 22, etW + 40, 52, 26);
+        ctx.fillStyle = p.accent + '12'; ctx.fill();
+        // Text
+        ctx.fillStyle = p.text;
+        ctx.fillText(endTextStr, cx, cy + 10);
+
+        // ── Sub text ──
+        if (tmpl.endSub) {
+          ctx.font = this._font(20, '400', tmpl); ctx.fillStyle = p.sub;
+          ctx.fillText(tmpl.endSub, cx, cy + 52);
+        }
+
+        // ── Decorative divider ──
+        const divY = cy + (tmpl.endSub ? 76 : 50);
+        if (tid === 'candy_pop') {
+          const rainbowColors = ['#ff6b6b', '#ffd93d', '#6bcb77', '#4d96ff', '#9775fa'];
+          rainbowColors.forEach((c, i) => {
+            ctx.beginPath(); ctx.arc(cx - 40 + i*20, divY, 4, 0, Math.PI*2);
+            ctx.fillStyle = c; ctx.fill();
+          });
+        } else if (tid === 'chinese_retro') {
+          ctx.font = '16px serif'; ctx.fillStyle = p.accent + '60';
+          ctx.fillText('◇  ◆  ◇', cx, divY + 4);
+        } else if (tid === 'nature_healing') {
+          ctx.font = '18px sans-serif'; ctx.fillStyle = p.accent;
+          ctx.fillText('🌿  ·  🌿', cx, divY + 5);
+        } else {
+          // Gradient line
+          const g = ctx.createLinearGradient(cx - 60, 0, cx + 60, 0);
+          g.addColorStop(0, 'transparent'); g.addColorStop(0.3, p.accent + '60');
+          g.addColorStop(0.7, p.accent + '60'); g.addColorStop(1, 'transparent');
+          ctx.fillStyle = g; ctx.fillRect(cx - 60, divY, 120, 2);
+        }
+
+        // ── Social guidance row ──
+        const socialY = H - 290;
+        ctx.font = this._font(17, '400', tmpl); ctx.fillStyle = p.sub + '90';
+        const socialItems = ['❤️ 点赞', '⭐ 收藏', '💬 评论', '↗️ 分享'];
+        const totalSocialW = socialItems.length * 120;
+        socialItems.forEach((item, i) => {
+          ctx.fillText(item, cx - totalSocialW/2 + i * 120 + 20, socialY);
+        });
+        // Thin line above social
+        ctx.fillStyle = p.accent + '15';
+        ctx.fillRect(cx - totalSocialW/2 + 10, socialY - 18, totalSocialW - 20, 1);
+
+        // ── CTA ──
+        this._drawCTA(ctx, tmpl, H - 230, W);
 
         ctx.textAlign = 'left';
       },
