@@ -9472,7 +9472,7 @@ Style: ${stylePrompt}
 
       if (parallelCount > 1 && promptsToUse.length > 1) {
         // 🚀 并行生成：前端多 Key 或服务器端多 Key
-        console.log(`[ImageGen] 🚀 并行模式: ${promptsToUse.length} 张图, 并行数 ${parallelCount} (前端${clientKeys.length}+服务器${_serverImageKeyCount})`);
+        console.log(`[ImageGen] 🚀 并行模式: ${promptsToUse.length} 张图, 并行数 ${parallelCount} (前端${clientKeys.length}+服务器${_serverKeyCount})`);
         const t0 = Date.now();
         const tasks = promptsToUse.map((prompt, idx) => {
           // 前端有多 Key 时用前端 Key，否则不传 Key（让服务器轮询）
@@ -10004,7 +10004,7 @@ Style: ${stylePrompt}
       if (!el) return;
       const keysTA = document.getElementById('settings-image-keys');
       const clientCount = keysTA ? keysTA.value.split('\n').map(k => k.trim()).filter(k => k.length > 10).length : 0;
-      const serverCount = _serverImageKeyCount || 0;
+      const serverCount = _serverKeyCount || 0;
       const effectiveCount = Math.max(clientCount, serverCount, 1);
       let html = '';
       if (serverCount > 1) {
@@ -13667,7 +13667,7 @@ Style: ${stylePrompt}
     })();
 
     // ============ 版本检查 & 服务器能力探测 ============
-    let _serverImageKeyCount = 1; // 服务器端图片生成 Key 数量
+    let _serverKeyCount = 1; // 服务器端 Gemini Key 数量（用于所有模型轮询）
     let _serverHasKey = false;
 
     async function loadVersionInfo() {
@@ -13680,9 +13680,10 @@ Style: ${stylePrompt}
         if (el1) el1.textContent = 'v' + v;
         if (el2) el2.textContent = 'v' + v;
         // 服务器端多 Key 能力
-        if (data.imageKeyCount) _serverImageKeyCount = data.imageKeyCount;
+        if (data.keyCount) _serverKeyCount = data.keyCount;
+        else if (data.imageKeyCount) _serverKeyCount = data.imageKeyCount;
         if (data.hasServerKey) _serverHasKey = data.hasServerKey;
-        console.log(`[Server] version=${v}, imageKeys=${_serverImageKeyCount}, hasKey=${_serverHasKey}`);
+        console.log(`[Server] version=${v}, keys=${_serverKeyCount}, hasKey=${_serverHasKey}`);
       } catch (e) { /* ignore */ }
     }
     loadVersionInfo();
@@ -13691,7 +13692,7 @@ Style: ${stylePrompt}
     function getEffectiveParallelCount() {
       const clientKeys = getImageApiKeys().length;
       // 前端配了多 Key → 用前端并行; 否则用服务器端 Key 数
-      return Math.max(clientKeys, _serverImageKeyCount, 1);
+      return Math.max(clientKeys, _serverKeyCount, 1);
     }
 
     // ============ AI 积分系统 ============

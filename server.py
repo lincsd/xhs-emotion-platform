@@ -104,19 +104,25 @@ LOGIN_LOCKOUT_SECONDS = 300  # 锁定5分钟
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com'
 
 def _load_server_gemini_key():
-    """只从环境变量读取 API Key，绝不从文件读取（防止 Key 泄露到 Git）"""
-    return (os.environ.get('GEMINI_API_KEY') or '').strip()
+    """只从环境变量读取 API Key，绝不从文件读取（防止 Key 泄露到 Git）
+    如果 GEMINI_API_KEY 包含逗号（多 Key 模式），只返回第一个 Key"""
+    raw = (os.environ.get('GEMINI_API_KEY') or '').strip()
+    if ',' in raw:
+        return raw.split(',')[0].strip()
+    return raw
 
 SERVER_GEMINI_API_KEY = _load_server_gemini_key()
 
-# 多 API Key 轮询（环境变量 GEMINI_API_KEYS 用逗号分隔多个 Key）
+# 多 API Key 轮询（支持 GEMINI_API_KEYS 或 GEMINI_API_KEY 用逗号分隔多个 Key）
 def _load_server_gemini_keys():
-    """加载多个 Gemini API Key，用于图片生成等高负载场景的轮询"""
+    """加载多个 Gemini API Key，支持所有 Gemini 调用的轮询
+    优先读 GEMINI_API_KEYS，若为空则从 GEMINI_API_KEY 按逗号拆分"""
     raw = (os.environ.get('GEMINI_API_KEYS') or '').strip()
     if not raw:
-        # 回退到单 Key
-        single = _load_server_gemini_key()
-        return [single] if single else []
+        # 从 GEMINI_API_KEY 按逗号拆分（支持单 Key 或多 Key）
+        raw = (os.environ.get('GEMINI_API_KEY') or '').strip()
+    if not raw:
+        return []
     return [k.strip() for k in raw.split(',') if k.strip()]
 
 SERVER_GEMINI_API_KEYS = _load_server_gemini_keys()
@@ -1651,7 +1657,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         elif path == '/api/version':
             return self._send_json({
                 'version': BUILD_VERSION,
-                'imageKeyCount': len(SERVER_GEMINI_API_KEYS),
+                'keyCount': len(SERVER_GEMINI_API_KEYS),
                 'hasServerKey': bool(SERVER_GEMINI_API_KEY),
             })
         elif path == '/api/captcha':
@@ -2475,13 +2481,10 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     # ---- Gemini API 代理 ----
     def _gemini_proxy(self, body):
         """代理转发 Gemini API 请求，解决浏览器无法直接访问 Google API 的问题"""
-        # 图片生成模型使用多 Key 轮询，文本模型使用主 Key
+        # 所有模型统一使用多 Key 轮询
         model = body.get('model', 'gemini-2.5-flash')
         is_image_model = 'image' in model or 'banana' in model or 'imagen' in model
-        if is_image_model and len(SERVER_GEMINI_API_KEYS) > 1:
-            api_key = _get_next_server_key()
-        else:
-            api_key = SERVER_GEMINI_API_KEY or body.get('apiKey', '')
+        api_key = _get_next_server_key() or body.get('apiKey', '')
         payload = body.get('payload', {})
         action = body.get('action', 'generateContent')  # generateContent or listModels
         feature = body.get('feature', action)  # 用于追踪功能类型
