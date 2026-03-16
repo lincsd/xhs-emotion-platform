@@ -7178,14 +7178,16 @@ ${hasPhotos ? '注意：用户有配图，优先选择支持图片的模板（�
       _renderMiniPreview(tmpl) {
         const container = document.getElementById('tmpl-prev-' + tmpl.id);
         if (!container) return;
-        const scale = 0.14;
-        const w = Math.round(CardEngine.W * scale);
-        const h = Math.round(CardEngine.H * scale);
+        // 用缩小分辨率渲染缩略图，避免 50 个 1080×1440 Canvas 占用 ~300MB 内存
+        const thumbW = 270, thumbH = 360;
+        const scaleX = thumbW / CardEngine.W, scaleY = thumbH / CardEngine.H;
         const canvas = document.createElement('canvas');
-        canvas.width = CardEngine.W; canvas.height = CardEngine.H;
-        canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+        canvas.width = thumbW; canvas.height = thumbH;
+        canvas.style.width = Math.round(thumbW * 0.56) + 'px'; canvas.style.height = Math.round(thumbH * 0.56) + 'px';
         const ctx = canvas.getContext('2d');
         try {
+          ctx.save();
+          ctx.scale(scaleX, scaleY);
           // 画背景
           CardEngine._drawBg(ctx, tmpl);
           // 画模拟标题
@@ -7201,6 +7203,7 @@ ${hasPhotos ? '注意：用户有配图，优先选择支持图片的模板（�
           ctx.fillStyle = tmpl.palette.sub || tmpl.palette.text;
           ctx.font = CardEngine._font(28, '400', tmpl);
           ctx.fillText('这是卡片内容预览...', 100, yStart + tLines.length * 80 + 60);
+          ctx.restore();
         } catch(e) {}
         container.innerHTML = '';
         container.appendChild(canvas);
@@ -8122,13 +8125,25 @@ ${track ? '参考赛道: ' + track : ''}
         if (!hash.startsWith('#tmpl=')) return;
         try {
           const encoded = hash.slice(6);
+          // 防DoS: 限制编码数据大小（50KB）
+          if (encoded.length > 50000) throw new Error('数据过大');
           const json = decodeURIComponent(escape(atob(encoded)));
           const tmpl = JSON.parse(json);
+          // Schema 白名单验证
+          const ALLOWED_KEYS = new Set(['id','name','palette','icon','titleSize','bodySize','font','shape','dark','emotion','_style','_form','_track','layout','deco','overlayOpacity']);
           if (!tmpl.id || !tmpl.name || !tmpl.palette) throw new Error('无效模板');
-          tmpl._source = 'custom';
-          tmpl.id = 'shared_' + tmpl.id + '_' + Date.now();
-          this.saveCustom(tmpl);
-          showToast(`已导入分享模板「${tmpl.name}」`, 'success');
+          if (typeof tmpl.name !== 'string' || tmpl.name.length > 100) throw new Error('名称无效');
+          if (typeof tmpl.palette !== 'object') throw new Error('配色无效');
+          // 只保留白名单字段
+          const safe = {};
+          for (const k of Object.keys(tmpl)) {
+            if (ALLOWED_KEYS.has(k)) safe[k] = tmpl[k];
+          }
+          safe._source = 'custom';
+          safe.id = 'shared_' + safe.id + '_' + Date.now();
+          safe.name = safe.name.replace(/[<>"'&]/g, ''); // 去除HTML特殊字符
+          this.saveCustom(safe);
+          showToast(`已导入分享模板「${safe.name}」`, 'success');
           location.hash = '';
           this.render();
         } catch(e) { /* 不是有效的分享链接 */ }
@@ -8753,6 +8768,7 @@ ${track ? '参考赛道: ' + track : ''}
       container.appendChild(el);
       setTimeout(() => el.remove(), 3000);
     }
+    const showToast = toast; // TemplateLibrary 兼容别名
 
     async function api(url, options = {}) {
       if (useLocalMode) return localApi(url, options);
@@ -12137,12 +12153,12 @@ Style: ${stylePrompt}
             const ctr = parseFloat(item.ctr) || 5;
             const barColor = ctr >= 8 ? '#e74c3c' : ctr >= 6 ? '#f39c12' : '#27ae60';
             const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `${idx + 1}.`;
-            html += `<div class="card" style="padding:12px 16px;margin:0;cursor:pointer;transition:all 0.2s;" onclick="copyTitleItem(this, '${item.title.replace(/'/g, "\\'")}')">
+            html += `<div class="card viral-title-item" style="padding:12px 16px;margin:0;cursor:pointer;transition:all 0.2s;" data-title="${_escapeHtml(item.title)}">
               <div style="display:flex;align-items:center;gap:10px;">
                 <span style="font-size:18px;min-width:28px;">${medal}</span>
                 <div style="flex:1;">
-                  <div style="font-size:15px;font-weight:600;margin-bottom:4px;">${item.title}</div>
-                  <div style="font-size:12px;color:var(--text-light);">${item.reason || ''}</div>
+                  <div style="font-size:15px;font-weight:600;margin-bottom:4px;">${_escapeHtml(item.title)}</div>
+                  <div style="font-size:12px;color:var(--text-light);">${_escapeHtml(item.reason || '')}</div>
                 </div>
                 <div style="text-align:right;min-width:70px;">
                   <div style="font-size:18px;font-weight:700;color:${barColor};">${ctr}</div>
@@ -12156,6 +12172,10 @@ Style: ${stylePrompt}
           });
           html += '</div><div style="margin-top:12px;text-align:center;font-size:12px;color:var(--text-light);">💡 点击任意标题可复制</div>';
           document.getElementById('titlegen-result').innerHTML = html;
+          // 使用事件代理绑定点击，避免 onclick 注入
+          document.getElementById('titlegen-result').querySelectorAll('.viral-title-item').forEach(el => {
+            el.addEventListener('click', () => copyTitleItem(el, el.dataset.title));
+          });
         } else {
           document.getElementById('titlegen-result').innerHTML = `<div class="card" style="white-space:pre-wrap;line-height:1.8;">${text}</div>`;
         }
@@ -12207,11 +12227,11 @@ Style: ${stylePrompt}
             const heatBadge = kw.heat === '高' ? '🔴' : kw.heat === '中' ? '🟡' : '🟢';
             const trendIcon = kw.trend === '上升' ? '📈' : kw.trend === '下降' ? '📉' : '➡️';
             const compBadge = kw.competition === '高' ? '🔴' : kw.competition === '中' ? '🟡' : '🟢';
-            html += `<tr style="border-top:1px solid #eee;cursor:pointer;" onclick="navigator.clipboard.writeText('${kw.word}').then(()=>toast('已复制: ${kw.word}','success'))">
-              <td style="padding:10px 12px;font-weight:500;">${kw.word}</td>
-              <td style="padding:10px 8px;text-align:center;">${heatBadge} ${kw.heat}</td>
-              <td style="padding:10px 8px;text-align:center;">${trendIcon} ${kw.trend}</td>
-              <td style="padding:10px 8px;text-align:center;">${compBadge} ${kw.competition}</td>
+            html += `<tr style="border-top:1px solid #eee;cursor:pointer;" class="kw-copy-row" data-word="${_escapeHtml(kw.word)}">
+              <td style="padding:10px 12px;font-weight:500;">${_escapeHtml(kw.word)}</td>
+              <td style="padding:10px 8px;text-align:center;">${heatBadge} ${_escapeHtml(kw.heat)}</td>
+              <td style="padding:10px 8px;text-align:center;">${trendIcon} ${_escapeHtml(kw.trend)}</td>
+              <td style="padding:10px 8px;text-align:center;">${compBadge} ${_escapeHtml(kw.competition)}</td>
             </tr>`;
           });
           html += '</table></div>';
@@ -12232,6 +12252,13 @@ Style: ${stylePrompt}
         if (!html) html = `<div class="card" style="white-space:pre-wrap;line-height:1.8;">${text}</div>`;
         html += '<div style="margin-top:12px;text-align:center;font-size:12px;color:var(--text-light);">💡 点击关键词可复制</div>';
         document.getElementById('keywords-result').innerHTML = html;
+        // 事件代理：关键词行点击复制
+        document.getElementById('keywords-result').querySelectorAll('.kw-copy-row').forEach(tr => {
+          tr.addEventListener('click', () => {
+            const w = tr.dataset.word;
+            navigator.clipboard.writeText(w).then(() => toast('已复制: ' + w, 'success'));
+          });
+        });
       } catch (e) {
         document.getElementById('keywords-result').innerHTML = `<div class="forbidden-hit">分析失败: ${_extractAIError(e)}</div>`;
       }

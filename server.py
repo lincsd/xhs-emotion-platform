@@ -89,6 +89,17 @@ CAPTCHA_TTL_SECONDS = 300  # 5分钟有效
 REGISTER_IP_DAILY_LIMIT = 3  # 同一 IP 每天最多注册几个账号
 _captcha_store = {}  # {token: {'answer': int, 'expires': float}}
 
+# 管理员密钥 — 必须通过环境变量ADMIN_KEY设置
+ADMIN_KEY = os.environ.get('ADMIN_KEY', '')
+if not ADMIN_KEY:
+    ADMIN_KEY = secrets.token_hex(16)
+    print(f'[WARNING] ADMIN_KEY not set in environment, generated temporary key: {ADMIN_KEY}')
+
+# 登录失败频率限制
+_login_fail_tracker = {}  # {ip_or_username: {'count': int, 'first_fail': float}}
+LOGIN_MAX_FAILS = 5       # 5次失败后锁定
+LOGIN_LOCKOUT_SECONDS = 300  # 锁定5分钟
+
 # Gemini API Proxy 配置
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com'
 
@@ -775,9 +786,14 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     def _set_json_headers(self, code=200):
         self.send_response(code)
         self.send_header('Content-Type', 'application/json; charset=utf-8')
-        self.send_header('Access-Control-Allow-Origin', '*')
+        # CORS: 允许前端请求（生产环境应限制为具体域名）
+        origin = self.headers.get('Origin', '*')
+        self.send_header('Access-Control-Allow-Origin', origin)
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+        # 安全响应头
+        self.send_header('X-Content-Type-Options', 'nosniff')
+        self.send_header('X-Frame-Options', 'DENY')
         self.end_headers()
 
     # ---- 用户认证工具方法 ----
@@ -1223,8 +1239,12 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             conn.close()
             return self._send_json({'error': '兑换码无效或已使用'}, 400)
         credits = row['credits']
-        conn.execute('UPDATE redeem_codes SET used_by=?, used_at=datetime("now","localtime") WHERE id=?',
+        # 原子操作：仅在 used_by 仍为 NULL 时才更新，防止双重兑换
+        cur = conn.execute('UPDATE redeem_codes SET used_by=?, used_at=datetime("now","localtime") WHERE id=? AND used_by IS NULL',
                      (user['id'], row['id']))
+        if cur.rowcount == 0:
+            conn.close()
+            return self._send_json({'error': '兑换码已被使用'}, 400)
         conn.execute('UPDATE users SET ai_credits = ai_credits + ? WHERE id=?',
                      (credits, user['id']))
         conn.commit()
@@ -1235,7 +1255,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     def _admin_gen_codes(self, body):
         """API: 管理员生成兑换码（简单密码验证）"""
         admin_key = body.get('adminKey', '')
-        if admin_key != os.environ.get('ADMIN_KEY', 'xhs-admin-2026'):
+        if admin_key != ADMIN_KEY:
             return self._send_json({'error': '无权限'}, 403)
         count = min(int(body.get('count', 1)), 100)
         credits = int(body.get('credits', 100))
@@ -1350,7 +1370,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     def _admin_confirm_order(self, body):
         """API: 管理员确认订单已支付"""
         admin_key = body.get('adminKey', '')
-        if admin_key != os.environ.get('ADMIN_KEY', 'xhs-admin-2026'):
+        if admin_key != ADMIN_KEY:
             return self._send_json({'error': '无权限'}, 403)
         order_no = (body.get('orderNo') or '').strip()
         if not order_no:
@@ -1363,8 +1383,11 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         if order['status'] == 'paid':
             conn.close()
             return self._send_json({'error': '该订单已确认'}, 400)
-        # 更新订单状态
-        conn.execute("UPDATE orders SET status='paid', paid_at=datetime('now','localtime') WHERE id=?", (order['id'],))
+        # 原子操作：仅在状态仍为pending时更新，防止双重确认
+        cur = conn.execute("UPDATE orders SET status='paid', paid_at=datetime('now','localtime') WHERE id=? AND status != 'paid'", (order['id'],))
+        if cur.rowcount == 0:
+            conn.close()
+            return self._send_json({'error': '该订单状态已变更'}, 400)
         # 增加积分
         conn.execute('UPDATE users SET ai_credits = ai_credits + ? WHERE id=?',
                      (order['credits'], order['user_id']))
@@ -1502,13 +1525,17 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         if amount > balance:
             return self._send_json({'error': f'可提现余额不足，当前余额 ¥{balance:.2f}'}, 400)
         conn = self._get_db()
+        # 原子操作：直接用 WHERE 条件检查余额，防止并发超额提现
+        cur = conn.execute(
+            'UPDATE users SET commission_balance = commission_balance - ? WHERE id=? AND commission_balance >= ?',
+            (amount, user['id'], amount)
+        )
+        if cur.rowcount == 0:
+            conn.close()
+            return self._send_json({'error': '可提现余额不足'}, 400)
         conn.execute(
             'INSERT INTO withdrawals (user_id, amount, method, account_info) VALUES (?,?,?,?)',
             (user['id'], amount, method, account_info)
-        )
-        conn.execute(
-            'UPDATE users SET commission_balance = commission_balance - ? WHERE id=?',
-            (amount, user['id'])
         )
         conn.commit()
         new_balance = conn.execute('SELECT commission_balance FROM users WHERE id=?', (user['id'],)).fetchone()['commission_balance']
@@ -1531,7 +1558,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     def _admin_process_withdrawal(self, body):
         """API: 管理员处理提现"""
         admin_key = body.get('adminKey', '')
-        if admin_key != os.environ.get('ADMIN_KEY', 'xhs-admin-2026'):
+        if admin_key != ADMIN_KEY:
             return self._send_json({'error': '无权限'}, 403)
         wid = int(body.get('id', 0))
         action = body.get('action', '')  # approve / reject
@@ -1556,7 +1583,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     def _admin_list_orders(self, query):
         """API: 管理员查看所有订单"""
         admin_key = query.get('adminKey', '')
-        if admin_key != os.environ.get('ADMIN_KEY', 'xhs-admin-2026'):
+        if admin_key != ADMIN_KEY:
             return self._send_json({'error': '无权限'}, 403)
         status = query.get('status', '')
         conn = self._get_db()
@@ -1578,8 +1605,13 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         self._set_json_headers(code)
         self.wfile.write(json.dumps(data, ensure_ascii=False).encode('utf-8'))
 
+    MAX_BODY_SIZE = 10 * 1024 * 1024  # 10MB 请求体上限
+
     def _read_body(self):
         length = int(self.headers.get('Content-Length', 0))
+        if length > self.MAX_BODY_SIZE:
+            self._send_json({'error': '请求体过大'}, 413)
+            return None
         if length:
             return json.loads(self.rfile.read(length).decode('utf-8'))
         return {}
@@ -1859,6 +1891,18 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         password = body.get('password') or ''
         if not username or not password:
             return self._send_json({'error': '请输入用户名/手机号和密码'}, 400)
+        # 登录频率限制
+        client_ip = self._get_client_ip()
+        rate_key = f'{client_ip}:{username}'
+        now = time.time()
+        fail_info = _login_fail_tracker.get(rate_key)
+        if fail_info:
+            elapsed = now - fail_info['first_fail']
+            if elapsed > LOGIN_LOCKOUT_SECONDS:
+                del _login_fail_tracker[rate_key]
+            elif fail_info['count'] >= LOGIN_MAX_FAILS:
+                remaining = int(LOGIN_LOCKOUT_SECONDS - elapsed)
+                return self._send_json({'error': f'登录尝试过多，请{remaining}秒后重试'}, 429)
         conn = self._get_db()
         # 支持用户名或手机号登录
         try:
@@ -1868,7 +1912,14 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
         if not user or not self._verify_password(password, user['password_hash']):
             conn.close()
+            # 记录登录失败
+            if rate_key in _login_fail_tracker:
+                _login_fail_tracker[rate_key]['count'] += 1
+            else:
+                _login_fail_tracker[rate_key] = {'count': 1, 'first_fail': now}
             return self._send_json({'error': '用户名或密码错误'}, 401)
+        # 登录成功，清除失败记录
+        _login_fail_tracker.pop(rate_key, None)
         # 清理该用户的过期 session
         conn.execute('DELETE FROM sessions WHERE user_id = ? AND expires_at <= datetime("now","localtime")', (user['id'],))
         # 创建新 session
@@ -1967,8 +2018,10 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         self._send_json({'posts': posts, 'total': total, 'page': page, 'limit': limit})
 
     def _get_post(self, post_id):
+        user = self._get_current_user()
+        uid = user['id'] if user else 0
         conn = self._get_db()
-        row = conn.execute('SELECT * FROM posts WHERE id = ?', (post_id,)).fetchone()
+        row = conn.execute('SELECT * FROM posts WHERE id = ? AND (user_id = ? OR user_id = 0)', (post_id, uid)).fetchone()
         conn.close()
         if row:
             d = dict(row)
@@ -2001,7 +2054,15 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         self._send_json({'id': last_id, 'message': '创建成功'})
 
     def _update_post(self, post_id, body):
+        user = self._get_current_user()
+        uid = user['id'] if user else 0
         conn = self._get_db()
+        # 所有权检查
+        row = conn.execute('SELECT user_id FROM posts WHERE id = ?', (post_id,)).fetchone()
+        if row and row['user_id'] != 0 and row['user_id'] != uid:
+            conn.close()
+            self._send_json({'error': '无权操作此笔记'}, 403)
+            return
         fields = []
         params = []
         
@@ -2027,8 +2088,16 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         self._send_json({'message': '更新成功'})
 
     def _delete_post(self, post_id):
+        user = self._get_current_user()
+        uid = user['id'] if user else 0
         conn = self._get_db()
-        conn.execute('DELETE FROM posts WHERE id = ?', (post_id,))
+        # 所有权检查
+        row = conn.execute('SELECT user_id FROM posts WHERE id = ?', (post_id,)).fetchone()
+        if row and row['user_id'] != 0 and row['user_id'] != uid:
+            conn.close()
+            self._send_json({'error': '无权删除此笔记'}, 403)
+            return
+        conn.execute('DELETE FROM posts WHERE id = ? AND (user_id = ? OR user_id = 0)', (post_id, uid))
         conn.commit()
         conn.close()
         self._send_json({'message': '删除成功'})
@@ -2141,8 +2210,16 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         self._send_json({'id': last_id, 'message': '添加成功'})
 
     def _delete_income(self, inc_id):
+        user = self._get_current_user()
+        uid = user['id'] if user else 0
         conn = self._get_db()
-        conn.execute('DELETE FROM income WHERE id = ?', (inc_id,))
+        # 所有权检查
+        row = conn.execute('SELECT user_id FROM income WHERE id = ?', (inc_id,)).fetchone()
+        if row and row['user_id'] != 0 and row['user_id'] != uid:
+            conn.close()
+            self._send_json({'error': '无权删除此记录'}, 403)
+            return
+        conn.execute('DELETE FROM income WHERE id = ? AND (user_id = ? OR user_id = 0)', (inc_id, uid))
         conn.commit()
         conn.close()
         self._send_json({'message': '删除成功'})
