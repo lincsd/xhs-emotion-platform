@@ -6,7 +6,7 @@ services:
     autoDeploy: true
     buildCommand: python -m pip install --upgrade pip
     startCommand: python -u server.py
-    healthCheckPath: /api/stats
+    healthCheckPath: /healthz
     disk:
       name: xhs-data
       mountPath: /var/data

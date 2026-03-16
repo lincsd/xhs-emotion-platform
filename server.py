@@ -1646,6 +1646,14 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         path, query = self._parse_path()
 
+        # --- 健康检查（零数据库操作，确保 < 1s 响应）---
+        if path == '/healthz':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(b'{"status":"ok"}')
+            return
+
         # --- 公开路由 ---
         if path == '/api/auth/me':
             return self._auth_me()
