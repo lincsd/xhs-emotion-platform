@@ -2,7 +2,7 @@ services:
   - type: web
     name: xhs-gemini-proxy
     env: python
-    plan: starter
+    plan: standard
     autoDeploy: true
     buildCommand: python -m pip install --upgrade pip
     startCommand: python -u server.py

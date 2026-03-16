@@ -2511,10 +2511,9 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         if not api_key:
             return self._send_json({'error': 'Missing apiKey and server GEMINI_API_KEY'}, 400)
 
-        # Render 网关超时约 52 秒，服务器端超时必须小于此值，否则 Render 会直接切断连接返回 502
-        # 图片模型需要更长时间，但仍需在 Render 限制内
+        # Render Standard 方案网关超时约 300 秒
         is_image_model = 'image' in model or 'banana' in model or 'imagen' in model
-        timeout = 48 if is_image_model else 45
+        timeout = 180 if is_image_model else 120
 
         # 多 Key 自动重试：429/500/503 时切换下一个 Key 重试
         max_retries = min(len(SERVER_GEMINI_API_KEYS), 3) if len(SERVER_GEMINI_API_KEYS) > 1 else 1
