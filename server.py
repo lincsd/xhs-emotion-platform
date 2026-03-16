@@ -20,6 +20,7 @@ import urllib.parse
 import urllib.request
 import ssl
 import re
+import threading
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -96,6 +97,31 @@ def _load_server_gemini_key():
     return (os.environ.get('GEMINI_API_KEY') or '').strip()
 
 SERVER_GEMINI_API_KEY = _load_server_gemini_key()
+
+# 多 API Key 轮询（环境变量 GEMINI_API_KEYS 用逗号分隔多个 Key）
+def _load_server_gemini_keys():
+    """加载多个 Gemini API Key，用于图片生成等高负载场景的轮询"""
+    raw = (os.environ.get('GEMINI_API_KEYS') or '').strip()
+    if not raw:
+        # 回退到单 Key
+        single = _load_server_gemini_key()
+        return [single] if single else []
+    return [k.strip() for k in raw.split(',') if k.strip()]
+
+SERVER_GEMINI_API_KEYS = _load_server_gemini_keys()
+_server_key_index = 0
+_server_key_lock = threading.Lock()
+
+def _get_next_server_key():
+    """轮询获取下一个服务器端 API Key"""
+    global _server_key_index
+    if not SERVER_GEMINI_API_KEYS:
+        return ''
+    if len(SERVER_GEMINI_API_KEYS) == 1:
+        return SERVER_GEMINI_API_KEYS[0]
+    idx = _server_key_index
+    _server_key_index = (_server_key_index + 1) % len(SERVER_GEMINI_API_KEYS)
+    return SERVER_GEMINI_API_KEYS[idx]
 # 自动检测系统代理
 _PROXY_URL = os.environ.get('HTTPS_PROXY') or os.environ.get('https_proxy') or os.environ.get('HTTP_PROXY') or os.environ.get('http_proxy') or ''
 _SSL_CTX = ssl.create_default_context()
@@ -1591,7 +1617,11 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         elif path == '/api/categories':
             return self._send_json(ContentEngine.categories)
         elif path == '/api/version':
-            return self._send_json({'version': BUILD_VERSION})
+            return self._send_json({
+                'version': BUILD_VERSION,
+                'imageKeyCount': len(SERVER_GEMINI_API_KEYS),
+                'hasServerKey': bool(SERVER_GEMINI_API_KEY),
+            })
         elif path == '/api/captcha':
             return self._get_captcha()
         # --- 需要登录的路由 ---
@@ -2368,8 +2398,13 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     # ---- Gemini API 代理 ----
     def _gemini_proxy(self, body):
         """代理转发 Gemini API 请求，解决浏览器无法直接访问 Google API 的问题"""
-        api_key = SERVER_GEMINI_API_KEY or body.get('apiKey', '')
+        # 图片生成模型使用多 Key 轮询，文本模型使用主 Key
         model = body.get('model', 'gemini-2.5-flash')
+        is_image_model = 'image' in model or 'banana' in model or 'imagen' in model
+        if is_image_model and len(SERVER_GEMINI_API_KEYS) > 1:
+            api_key = _get_next_server_key()
+        else:
+            api_key = SERVER_GEMINI_API_KEY or body.get('apiKey', '')
         payload = body.get('payload', {})
         action = body.get('action', 'generateContent')  # generateContent or listModels
         feature = body.get('feature', action)  # 用于追踪功能类型
@@ -2442,6 +2477,7 @@ def main():
         print(f"[*] Gemini Proxy: enabled (via {_PROXY_URL})")
     else:
         print(f"[*] Gemini Proxy: enabled (direct)")
+    print(f"[*] Gemini API Keys: {len(SERVER_GEMINI_API_KEYS)} key(s) loaded" + (" (multi-key rotation enabled)" if len(SERVER_GEMINI_API_KEYS) > 1 else ""))
     print(f"[*] Press Ctrl+C to stop\n")
     
     try:
