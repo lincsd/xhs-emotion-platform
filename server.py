@@ -130,14 +130,15 @@ _server_key_index = 0
 _server_key_lock = threading.Lock()
 
 def _get_next_server_key():
-    """轮询获取下一个服务器端 API Key"""
+    """轮询获取下一个服务器端 API Key（线程安全）"""
     global _server_key_index
     if not SERVER_GEMINI_API_KEYS:
         return ''
     if len(SERVER_GEMINI_API_KEYS) == 1:
         return SERVER_GEMINI_API_KEYS[0]
-    idx = _server_key_index
-    _server_key_index = (_server_key_index + 1) % len(SERVER_GEMINI_API_KEYS)
+    with _server_key_lock:
+        idx = _server_key_index
+        _server_key_index = (_server_key_index + 1) % len(SERVER_GEMINI_API_KEYS)
     return SERVER_GEMINI_API_KEYS[idx]
 # 自动检测系统代理
 _PROXY_URL = os.environ.get('HTTPS_PROXY') or os.environ.get('https_proxy') or os.environ.get('HTTP_PROXY') or os.environ.get('http_proxy') or ''
@@ -2514,32 +2515,53 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         is_image_model = 'image' in model or 'banana' in model or 'imagen' in model
         timeout = 180 if is_image_model else 120
 
-        try:
-            if action == 'listModels':
-                url = f'{GEMINI_API_BASE}/v1beta/models?key={api_key}'
-                req = urllib.request.Request(url)
-            else:
-                url = f'{GEMINI_API_BASE}/v1beta/models/{model}:{action}?key={api_key}'
-                data = json.dumps(payload, ensure_ascii=False).encode('utf-8')
-                req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json; charset=utf-8'})
+        # 多 Key 自动重试：429/500/503 时切换下一个 Key 重试
+        max_retries = min(len(SERVER_GEMINI_API_KEYS), 3) if len(SERVER_GEMINI_API_KEYS) > 1 else 1
+        last_err_json, last_err_code = None, 500
 
-            resp = _OPENER.open(req, timeout=timeout)
-            result = json.loads(resp.read().decode('utf-8'))
+        for attempt in range(max_retries):
+            if attempt > 0:
+                api_key = _get_next_server_key()
+                if not api_key:
+                    break
 
-            # 成功后记录AI用量
-            if user and action != 'listModels':
-                self._record_ai_usage(user['id'], feature)
-
-            self._send_json(result)
-        except urllib.error.HTTPError as e:
-            err_body = e.read().decode('utf-8', errors='replace')
             try:
-                err_json = json.loads(err_body)
-            except:
-                err_json = {'error': {'code': e.code, 'message': err_body[:500]}}
-            self._send_json(err_json, e.code)
-        except Exception as e:
-            self._send_json({'error': {'code': 500, 'message': str(e)}}, 500)
+                if action == 'listModels':
+                    url = f'{GEMINI_API_BASE}/v1beta/models?key={api_key}'
+                    req = urllib.request.Request(url)
+                else:
+                    url = f'{GEMINI_API_BASE}/v1beta/models/{model}:{action}?key={api_key}'
+                    data = json.dumps(payload, ensure_ascii=False).encode('utf-8')
+                    req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json; charset=utf-8'})
+
+                resp = _OPENER.open(req, timeout=timeout)
+                result = json.loads(resp.read().decode('utf-8'))
+
+                # 成功后记录AI用量
+                if user and action != 'listModels':
+                    self._record_ai_usage(user['id'], feature)
+
+                return self._send_json(result)
+            except urllib.error.HTTPError as e:
+                err_body = e.read().decode('utf-8', errors='replace')
+                try:
+                    err_json = json.loads(err_body)
+                except:
+                    err_json = {'error': {'code': e.code, 'message': err_body[:500]}}
+                last_err_json, last_err_code = err_json, e.code
+                # 可重试的错误码：429 限频 / 500 服务器错误 / 503 过载
+                if e.code in (429, 500, 503) and attempt < max_retries - 1:
+                    continue
+                return self._send_json(err_json, e.code)
+            except Exception as e:
+                last_err_json = {'error': {'code': 500, 'message': str(e)}}
+                last_err_code = 500
+                if attempt < max_retries - 1:
+                    continue
+                return self._send_json(last_err_json, 500)
+
+        # 所有重试都失败
+        self._send_json(last_err_json or {'error': {'code': 500, 'message': 'All API keys exhausted'}}, last_err_code)
 
 
 # ============ 启动服务器 ============

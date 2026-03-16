@@ -8851,18 +8851,44 @@ ${track ? '参考赛道: ' + track : ''}
       const apiKey = getGeminiKey();
       const model = getGeminiModel();
       const allCategories = _s().categories;
-      const BATCH_SIZE = 5;
-      const allPosts = [];
-      let remaining = count;
+      const BATCH_SIZE = 8;
+      const MAX_PARALLEL = 3;
 
+      // 构建批次
+      const batches = [];
+      let remaining = count;
       while (remaining > 0) {
         const batchCount = Math.min(remaining, BATCH_SIZE);
         const batchCategory = category || allCategories[Math.floor(Math.random() * allCategories.length)];
-        const batchPosts = await _callGeminiForContent(apiKey, model, batchCategory, batchCount);
-        allPosts.push(...batchPosts);
+        batches.push({ count: batchCount, category: batchCategory });
         remaining -= batchCount;
-        if (remaining > 0) await new Promise(r => setTimeout(r, 500));
       }
+
+      const allPosts = [];
+
+      if (category && batches.length > 1) {
+        // 同分类：共享分析 + 并行生成
+        let analysis = _getCachedAnalysis(category);
+        if (!analysis) {
+          analysis = await _searchAndAnalyzeXHS(apiKey, model, category);
+          _analysisCache.set(category, { data: analysis, ts: Date.now() });
+        }
+        _lastAnalysis = analysis;
+        const results = await Promise.all(
+          batches.map(b => _generateFromAnalysis(apiKey, model, b.category, b.count, analysis))
+        );
+        allPosts.push(...results.flat());
+      } else {
+        // 不同分类：分组并行
+        for (let i = 0; i < batches.length; i += MAX_PARALLEL) {
+          const chunk = batches.slice(i, i + MAX_PARALLEL);
+          const chunkResults = await Promise.all(
+            chunk.map(b => _callGeminiForContent(apiKey, model, b.category, b.count))
+          );
+          allPosts.push(...chunkResults.flat());
+        }
+      }
+
       // 如果没指定分类且需要多条，给不同分类
       if (!category && count > 1) {
         allPosts.forEach((p, i) => {
@@ -9220,21 +9246,37 @@ ${sourceInfo}
       return parts.map(p => p.text).filter(Boolean).join('') || '';
     }
 
-    // ========== 组合调用：搜索分析 + 生成 ==========
-    async function _callGeminiForContent(apiKey, model, category, count, onProgress, refNotes) {
-      // 第一步：联网搜索+分析（Google + 百度双引擎 + 用户参考笔记）
-      if (onProgress) onProgress('search', `🌐 正在搜索小红书「${category}」爆款笔记（Google + 百度双引擎）...`);
-      const analysis = await _searchAndAnalyzeXHS(apiKey, model, category, refNotes);
+    // ========== 分析结果缓存（5分钟TTL，避免重复搜索，大幅提速） ==========
+    const _analysisCache = new Map();
+    const ANALYSIS_CACHE_TTL = 5 * 60 * 1000;
+    function _getCachedAnalysis(category) {
+      const e = _analysisCache.get(category);
+      if (e && Date.now() - e.ts < ANALYSIS_CACHE_TTL) return e.data;
+      _analysisCache.delete(category);
+      return null;
+    }
 
-      if (onProgress) {
-        const parts = [];
-        if (analysis.searchUsed) parts.push(`Google ${analysis.sources.filter(s => !s.source).length} 条`);
-        if (analysis.baiduUsed) parts.push(`百度小红书 ${analysis.baiduCount} 条`);
-        if (analysis.userRefUsed) parts.push('📌 用户参考笔记');
-        const statusMsg = parts.length
-          ? `✅ 已检索到 ${parts.join(' + ')}，分析完成`
-          : '📊 已完成知识库分析（未使用联网搜索）';
-        onProgress('analyzed', statusMsg);
+    // ========== 组合调用：搜索分析 + 生成（支持缓存加速） ==========
+    async function _callGeminiForContent(apiKey, model, category, count, onProgress, refNotes) {
+      // 第一步：检查缓存 or 联网搜索+分析
+      let analysis = (!refNotes) ? _getCachedAnalysis(category) : null;
+      if (analysis) {
+        if (onProgress) onProgress('analyzed', `⚡ 使用缓存分析结果（${category}），跳过搜索`);
+      } else {
+        if (onProgress) onProgress('search', `🌐 正在搜索小红书「${category}」爆款笔记（Google + 百度双引擎）...`);
+        analysis = await _searchAndAnalyzeXHS(apiKey, model, category, refNotes);
+        if (!refNotes) _analysisCache.set(category, { data: analysis, ts: Date.now() });
+
+        if (onProgress) {
+          const parts = [];
+          if (analysis.searchUsed) parts.push(`Google ${analysis.sources.filter(s => !s.source).length} 条`);
+          if (analysis.baiduUsed) parts.push(`百度小红书 ${analysis.baiduCount} 条`);
+          if (analysis.userRefUsed) parts.push('📌 用户参考笔记');
+          const statusMsg = parts.length
+            ? `✅ 已检索到 ${parts.join(' + ')}，分析完成`
+            : '📊 已完成知识库分析（未使用联网搜索）';
+          onProgress('analyzed', statusMsg);
+        }
       }
 
       // 缓存分析结果供用户查看
@@ -10273,42 +10315,91 @@ Style: ${stylePrompt}
         if (hasApiKey) {
           try {
             // ====== AI 智能生成模式（调用 Gemini API）======
-            btn.textContent = IS_LIGHT_AI_MODE ? '✍️ AI 生成中...' : '🌐 联网搜索小红书...';
-            updateGenProgress(progressEl, IS_LIGHT_AI_MODE ? '✍️ 正在生成高质量内容（轻量模式）...' : '🌐 正在联网搜索小红书同类型爆款笔记...', 5);
-
             const allCategories = _s().categories;
-            const totalBatches = Math.ceil(count / 5);
-            let batchesDone = 0;
-            const allPosts = [];
+            const BATCH_SIZE = 8;  // 每批最多8条（比之前5条减少API调用次数）
+            const MAX_PARALLEL = 3; // 最大并行数（匹配服务器3个Key）
+
+            // 构建批次计划
+            const batches = [];
             let remaining = count;
-
             while (remaining > 0) {
-              const batchCount = Math.min(remaining, 5);
+              const batchCount = Math.min(remaining, BATCH_SIZE);
               const batchCat = category || allCategories[Math.floor(Math.random() * allCategories.length)];
-              batchesDone++;
+              batches.push({ count: batchCount, category: batchCat });
+              remaining -= batchCount;
+            }
 
+            const allPosts = [];
+
+            if (category && batches.length > 1) {
+              // ====== 同分类优化：共享搜索分析 + 并行生成 ======
+              btn.textContent = IS_LIGHT_AI_MODE ? '✍️ AI 生成中...' : `🌐 搜索「${category}」爆款...`;
+              updateGenProgress(progressEl, IS_LIGHT_AI_MODE ? '✍️ 正在生成高质量内容...' : `🌐 正在搜索小红书「${category}」爆款笔记...`, 5);
+
+              // Step 1: 一次搜索分析（优先使用缓存）
+              let analysis = (!refNotes) ? _getCachedAnalysis(category) : null;
+              if (analysis) {
+                updateGenProgress(progressEl, `⚡ 使用缓存分析结果，跳过搜索`, 20);
+              } else {
+                analysis = await _searchAndAnalyzeXHS(getGeminiKey(), getGeminiModel(), category, refNotes);
+                if (!refNotes) _analysisCache.set(category, { data: analysis, ts: Date.now() });
+                const parts = [];
+                if (analysis.searchUsed) parts.push(`Google ${analysis.sources.filter(s => !s.source).length} 条`);
+                if (analysis.baiduUsed) parts.push(`百度小红书 ${analysis.baiduCount} 条`);
+                updateGenProgress(progressEl, parts.length ? `✅ 已检索到 ${parts.join(' + ')}` : '📊 知识库分析完成', 20);
+              }
+              _lastAnalysis = analysis;
+
+              // Step 2: 并行生成所有批次（服务器端3个Key自动轮询，互不冲突）
+              btn.textContent = `✍️ 并行创作 ${batches.length} 批共 ${count} 条...`;
+              updateGenProgress(progressEl, `✍️ AI 并行创作中（${batches.length} 批 × 多Key轮询）...`, 30);
+
+              const results = await Promise.all(
+                batches.map(b => _generateFromAnalysis(getGeminiKey(), getGeminiModel(), b.category, b.count, analysis))
+              );
+              allPosts.push(...results.flat());
+
+            } else if (batches.length > 1) {
+              // ====== 混合分类：分组并行（每组最多 MAX_PARALLEL 个并行调用）======
+              for (let i = 0; i < batches.length; i += MAX_PARALLEL) {
+                const chunk = batches.slice(i, i + MAX_PARALLEL);
+                const chunkIdx = Math.floor(i / MAX_PARALLEL) + 1;
+                const totalChunks = Math.ceil(batches.length / MAX_PARALLEL);
+
+                btn.textContent = `✍️ 并行生成 (${chunkIdx}/${totalChunks})...`;
+                updateGenProgress(progressEl,
+                  `✍️ 正在并行生成第 ${i + 1}-${Math.min(i + MAX_PARALLEL, batches.length)} 批...`,
+                  Math.round((i / batches.length) * 40 + 10)
+                );
+
+                const chunkResults = await Promise.all(
+                  chunk.map(b => _callGeminiForContent(
+                    getGeminiKey(), getGeminiModel(), b.category, b.count, null, refNotes
+                  ))
+                );
+                allPosts.push(...chunkResults.flat());
+              }
+
+            } else {
+              // ====== 单批次：标准流程 ======
+              const b = batches[0];
               const batchPosts = await _callGeminiForContent(
-                getGeminiKey(), getGeminiModel(), batchCat, batchCount,
+                getGeminiKey(), getGeminiModel(), b.category, b.count,
                 (stage, msg) => {
-                  let pct = 0;
-                  const batchBase = ((batchesDone - 1) / totalBatches) * 50;
                   if (stage === 'search') {
-                    pct = Math.round(batchBase + 5);
-                    btn.textContent = IS_LIGHT_AI_MODE ? `✍️ 生成中 (${batchesDone}/${totalBatches})...` : `🌐 搜索小红书「${batchCat}」爆款...`;
+                    btn.textContent = IS_LIGHT_AI_MODE ? '✍️ AI 生成中...' : `🌐 搜索小红书「${b.category}」爆款...`;
+                    updateGenProgress(progressEl, msg, 5);
                   } else if (stage === 'analyzed') {
-                    pct = Math.round(batchBase + 20);
-                    btn.textContent = `📊 分析完成，开始创作...`;
+                    btn.textContent = '📊 分析完成，开始创作...';
+                    updateGenProgress(progressEl, msg, 25);
                   } else if (stage === 'generate') {
-                    pct = Math.round(batchBase + 30);
-                    btn.textContent = `✍️ AI 创作中 (${batchesDone}/${totalBatches})...`;
+                    btn.textContent = '✍️ AI 创作中...';
+                    updateGenProgress(progressEl, msg, 35);
                   }
-                  updateGenProgress(progressEl, msg, pct);
                 },
                 refNotes
               );
               allPosts.push(...batchPosts);
-              remaining -= batchCount;
-              if (remaining > 0) await new Promise(r => setTimeout(r, 500));
             }
 
             posts = allPosts;
