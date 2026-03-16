@@ -1653,6 +1653,9 @@
         <div class="nav-item" data-page="card-lib">
           <span class="icon">🎴</span> 卡片模板库
         </div>
+        <div class="nav-item" data-page="ai-card">
+          <span class="icon">🃏</span> AI智能卡片
+        </div>
       </div>
       <div class="nav-group">
         <div class="nav-group-title">账号管理</div>
@@ -1745,6 +1748,7 @@
         <div class="nav-item mob-nav" data-page="content-plan" onclick="mobileSwitchPage('content-plan')"><span class="icon">📋</span> 内容规划</div>
         <div class="nav-item mob-nav" data-page="img-tool" onclick="mobileSwitchPage('img-tool')"><span class="icon">🖼️</span> 图片优化</div>
         <div class="nav-item mob-nav" data-page="card-lib" onclick="mobileSwitchPage('card-lib')"><span class="icon">🎴</span> 卡片模板库</div>
+        <div class="nav-item mob-nav" data-page="ai-card" onclick="mobileSwitchPage('ai-card')"><span class="icon">🃏</span> AI智能卡片</div>
       </div>
       <div class="nav-group">
         <div class="nav-group-title">账号管理</div>
@@ -2823,7 +2827,87 @@
         </div>
       </section>
 
-      <!-- ===== 🎴 卡片模板库页面 ===== -->
+      <!-- ===== � AI智能卡片生成页面 ===== -->
+      <section id="page-ai-card" class="page hidden">
+        <div class="page-header">
+          <div><h2>🃏 AI 智能卡片生成</h2><p class="subtitle">输入笔记内容，AI 自动匹配最佳模板并生成精美卡片</p></div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <!-- 左侧：输入区 -->
+          <div class="card" style="padding:20px;" id="ai-card-input-panel">
+            <h3 style="margin:0 0 12px;font-size:16px;">📝 笔记内容</h3>
+            <div style="margin-bottom:12px;">
+              <label style="font-size:12px;color:var(--text-light);display:block;margin-bottom:4px;">标题</label>
+              <input type="text" id="aicard-title" class="form-control" placeholder="输入笔记标题..." style="width:100%;">
+            </div>
+            <div style="margin-bottom:12px;">
+              <label style="font-size:12px;color:var(--text-light);display:block;margin-bottom:4px;">正文内容</label>
+              <textarea id="aicard-content" class="form-control" rows="8" placeholder="输入笔记正文内容...\n支持多段落，AI 会根据内容智能匹配最合适的卡片模板"></textarea>
+            </div>
+            <div style="margin-bottom:12px;">
+              <label style="font-size:12px;color:var(--text-light);display:block;margin-bottom:4px;">分类（可选，帮助 AI 更精准匹配）</label>
+              <select id="aicard-category" class="form-control" style="width:100%;">
+                <option value="">自动识别</option>
+                <option value="情感">情感</option>
+                <option value="美食">美食</option>
+                <option value="穿搭">穿搭</option>
+                <option value="旅行">旅行</option>
+                <option value="职场">职场</option>
+                <option value="学习">学习</option>
+                <option value="健康">健康</option>
+                <option value="科技">科技</option>
+                <option value="摄影">摄影</option>
+                <option value="生活">生活</option>
+                <option value="娱乐">娱乐</option>
+                <option value="文化">文化</option>
+                <option value="种草">种草</option>
+                <option value="干货">干货</option>
+              </select>
+            </div>
+
+            <!-- 图片上传区 -->
+            <div style="margin-bottom:16px;">
+              <label style="font-size:12px;color:var(--text-light);display:block;margin-bottom:4px;">📸 配图（可选，支持 1-6 张）</label>
+              <div id="aicard-photo-preview" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;min-height:0;"></div>
+              <div style="display:flex;gap:8px;">
+                <label class="btn btn-sm btn-outline" style="cursor:pointer;">
+                  📎 选择图片
+                  <input type="file" id="aicard-photo-input" accept="image/*" multiple style="display:none;" onchange="handleAICardPhotoUpload(this)">
+                </label>
+                <button class="btn btn-sm btn-outline" id="aicard-clear-photos" onclick="clearAICardPhotos()" style="display:none;">🗑️ 清空图片</button>
+              </div>
+            </div>
+
+            <!-- 生成按钮 -->
+            <button class="btn btn-primary" id="aicard-gen-btn" onclick="doAICardGenerate()" style="width:100%;padding:12px;font-size:15px;">
+              🤖 AI 智能匹配 & 生成卡片
+            </button>
+            <div style="font-size:11px;color:var(--text-light);margin-top:6px;text-align:center;">
+              AI 将从 <span id="aicard-tmpl-count">50</span> 个模板中智能选择最匹配的模板
+            </div>
+          </div>
+
+          <!-- 右侧：结果区 -->
+          <div id="ai-card-result-panel">
+            <div class="card" style="padding:20px;text-align:center;color:var(--text-light);" id="aicard-placeholder">
+              <div style="font-size:48px;margin-bottom:12px;">🃏</div>
+              <div style="font-size:14px;">在左侧输入笔记内容</div>
+              <div style="font-size:12px;margin-top:4px;">AI 将自动匹配最佳模板并生成卡片</div>
+            </div>
+            <div id="aicard-result" style="display:none;"></div>
+          </div>
+        </div>
+
+        <!-- 移动端自适应样式 -->
+        <style>
+          @media(max-width:768px) {
+            #page-ai-card > div { grid-template-columns: 1fr !important; }
+          }
+        </style>
+      </section>
+
+      <!-- ===== �🎴 卡片模板库页面 ===== -->
       <section id="page-card-lib" class="page hidden">
         <div class="page-header">
           <div><h2>🎴 卡片模板库</h2><p class="subtitle">浏览、预览、自定义卡片模板，打造专属视觉风格</p></div>
@@ -6176,6 +6260,355 @@ ${postList}
       document.getElementById('card-template-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
+    // ============ 🃏 AI 智能卡片生成 ============
+    let _aiCardPhotos = []; // [{dataUrl, img}]
+
+    async function handleAICardPhotoUpload(input) {
+      const files = Array.from(input.files || []).slice(0, 6);
+      if (!files.length) return;
+      const preview = document.getElementById('aicard-photo-preview');
+      const clearBtn = document.getElementById('aicard-clear-photos');
+      if (clearBtn) clearBtn.style.display = 'inline-block';
+      preview.innerHTML = '<div style="font-size:12px;color:var(--text-light);padding:4px;">⏳ 处理中...</div>';
+
+      _aiCardPhotos = [];
+      for (const file of files) {
+        const url = await new Promise(resolve => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.readAsDataURL(file);
+        });
+        _aiCardPhotos.push({ dataUrl: url, img: null });
+      }
+      // Load images
+      await Promise.all(_aiCardPhotos.map((ph, i) => new Promise(resolve => {
+        const img = new Image();
+        img.onload = () => { _aiCardPhotos[i].img = img; resolve(); };
+        img.onerror = resolve;
+        img.src = ph.dataUrl;
+      })));
+
+      preview.innerHTML = _aiCardPhotos.map(ph =>
+        `<img src="${ph.dataUrl}" style="width:60px;height:60px;object-fit:cover;border-radius:6px;border:1px solid var(--border);">`
+      ).join('');
+      toast(`📸 已加载 ${_aiCardPhotos.length} 张图片`, 'success');
+      input.value = '';
+    }
+
+    function clearAICardPhotos() {
+      _aiCardPhotos = [];
+      const preview = document.getElementById('aicard-photo-preview');
+      if (preview) preview.innerHTML = '';
+      const clearBtn = document.getElementById('aicard-clear-photos');
+      if (clearBtn) clearBtn.style.display = 'none';
+    }
+
+    async function doAICardGenerate() {
+      const title = document.getElementById('aicard-title')?.value?.trim();
+      const content = document.getElementById('aicard-content')?.value?.trim();
+      if (!content) { toast('请输入笔记正文内容', 'error'); return; }
+
+      const category = document.getElementById('aicard-category')?.value || '';
+      const btn = document.getElementById('aicard-gen-btn');
+      const resultDiv = document.getElementById('aicard-result');
+      const placeholder = document.getElementById('aicard-placeholder');
+
+      if (btn) { btn.disabled = true; btn.innerHTML = '⏳ AI 正在分析内容并匹配模板...'; }
+      if (placeholder) placeholder.style.display = 'none';
+      if (resultDiv) { resultDiv.style.display = 'block'; resultDiv.innerHTML = '<div class="card" style="padding:40px;text-align:center;"><div style="font-size:36px;margin-bottom:12px;animation:pulse 1s infinite;">🤖</div><div>AI 正在分析内容，智能匹配最佳模板...</div></div>'; }
+
+      // Build the post object
+      const post = { title: title || '未命名笔记', content, category };
+
+      // Gather ALL templates (CardEngine 15 + extra presets + custom)
+      const allTemplates = (typeof TemplateLibrary !== 'undefined' && TemplateLibrary.getAllTemplates)
+        ? TemplateLibrary.getAllTemplates()
+        : CardEngine.templates;
+
+      // Ensure all templates are in CardEngine for rendering
+      allTemplates.forEach(t => {
+        if (!CardEngine.templates.find(ct => ct.id === t.id)) {
+          const clean = { ...t };
+          delete clean._source; delete clean._style; delete clean._form; delete clean._tracks;
+          CardEngine.templates.push(clean);
+        }
+      });
+
+      let matchedTmplId = null;
+      let matchReason = '';
+      let matchScores = [];
+
+      try {
+        const apiKey = getGeminiKey();
+        if (!apiKey) throw new Error('未配置 Gemini API Key');
+
+        // Build template list for AI — include full info for better matching
+        const tmplList = allTemplates.map(t =>
+          `${t.id}: ${t.icon}${t.name} — ${(t.skill||'').slice(0,50)} [适合: ${(t.bestFor||[]).join(',')}]`
+        ).join('\n');
+
+        const hasPhotos = _aiCardPhotos.length > 0;
+
+        const prompt = `你是小红书图文排版设计专家。根据以下笔记内容，从模板列表中选择最合适的前3个模板，并说明原因。
+
+笔记标题: ${post.title}
+${category ? '笔记分类: ' + category : ''}
+笔记内容: ${content.slice(0, 500)}
+${hasPhotos ? '用户上传了' + _aiCardPhotos.length + '张配图' : '无配图'}
+
+可选模板列表:
+${tmplList}
+
+${hasPhotos ? '注意：用户有配图，优先选择支持图片的模板（如种草带货、穿搭拼图、配色灵感等有 hasPhotos 属性的）' : ''}
+
+严格返回JSON（不要markdown代码块）:
+{"matches":[{"id":"模板id","score":90,"reason":"选择原因(15字内)"},{"id":"","score":80,"reason":""},{"id":"","score":70,"reason":""}]}`;
+
+        const payload = {
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { responseMimeType: 'application/json', temperature: 0.3, maxOutputTokens: 512 }
+        };
+        const result = await callGeminiAPI(apiKey, getGeminiModel(), payload, 'generateContent', 'ai_card_match');
+        const text = result.data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        const jsonMatch = text.match(/\{[\s\S]*\}/);
+        if (!jsonMatch) throw new Error('AI 返回格式错误');
+        const parsed = JSON.parse(jsonMatch[0]);
+        matchScores = (parsed.matches || []).filter(m => m.id);
+        if (matchScores.length > 0) {
+          matchedTmplId = matchScores[0].id;
+          matchReason = matchScores[0].reason || 'AI推荐';
+        }
+      } catch (e) {
+        console.warn('[AICard] AI match failed, falling back:', e);
+        // Fallback to keyword matching
+        const fallback = CardEngine.matchTemplate(post);
+        matchedTmplId = fallback.id;
+        matchReason = '关键词匹配（AI暂不可用: ' + (e.message || '') + '）';
+        matchScores = [{ id: fallback.id, score: 70, reason: matchReason }];
+      }
+
+      if (!matchedTmplId) {
+        matchedTmplId = CardEngine.templates[0].id;
+        matchReason = '默认模板';
+      }
+
+      // Load user photos into CardEngine
+      if (_aiCardPhotos.length > 0) {
+        const urls = _aiCardPhotos.map(p => p.dataUrl);
+        await CardEngine.setUserPhotos(urls);
+      } else {
+        CardEngine._userPhotos = [];
+      }
+
+      // Generate cards
+      const result = CardEngine.generateCards(post, matchedTmplId);
+      const tmpl = result.template;
+
+      // Track usage
+      if (typeof TemplateLibrary !== 'undefined' && TemplateLibrary.trackUsage) {
+        TemplateLibrary.trackUsage(matchedTmplId);
+      }
+
+      // Render results
+      _renderAICardResult(result, post, matchScores, matchedTmplId, allTemplates);
+
+      if (btn) { btn.disabled = false; btn.innerHTML = '🤖 AI 智能匹配 & 生成卡片'; }
+    }
+
+    function _renderAICardResult(result, post, matchScores, selectedId, allTemplates) {
+      const resultDiv = document.getElementById('aicard-result');
+      if (!resultDiv) return;
+
+      const tmpl = result.template;
+      const cards = result.cards;
+
+      // AI match info
+      const matchHtml = matchScores.map((m, i) => {
+        const t = allTemplates.find(at => at.id === m.id) || { icon: '❓', name: m.id };
+        const isSelected = m.id === selectedId;
+        return `<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;transition:all 0.2s;${isSelected ? 'background:var(--primary-light);border:1px solid var(--primary);' : 'background:var(--bg);border:1px solid var(--border);'}" onclick="regenAICardWithTemplate('${m.id}')" title="点击使用此模板重新生成">
+          <span style="font-size:14px;font-weight:700;color:${i===0?'#f59e0b':i===1?'#94a3b8':'#cbd5e1'};width:20px;">${i+1}</span>
+          <span style="font-size:18px;">${t.icon}</span>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:13px;font-weight:600;${isSelected?'color:var(--primary);':''}">${t.name}</div>
+            <div style="font-size:11px;color:var(--text-light);">${m.reason} · ${m.score}分</div>
+          </div>
+          ${isSelected ? '<span style="font-size:11px;color:var(--primary);font-weight:600;">✓ 当前</span>' : '<span style="font-size:11px;color:var(--text-light);">点击切换</span>'}
+        </div>`;
+      }).join('');
+
+      // Card previews
+      const cardHtml = cards.map((card, i) => {
+        if (card.type === 'ai-photos-placeholder') {
+          return `<div style="flex-shrink:0;text-align:center;">
+            <div style="width:162px;height:216px;border-radius:10px;border:1px dashed var(--primary);display:flex;align-items:center;justify-content:center;background:var(--bg);cursor:pointer;flex-direction:column;gap:4px;" onclick="aiCardGenPhotos()">
+              <span style="font-size:28px;">🤖</span>
+              <span style="font-size:11px;color:var(--primary);text-align:center;">AI生成配图</span>
+            </div>
+            <div style="font-size:11px;color:var(--text-light);margin-top:4px;">${card.label}</div>
+          </div>`;
+        }
+        return `<div style="flex-shrink:0;text-align:center;">
+          <img src="${card.dataUrl}" style="width:162px;height:216px;object-fit:cover;border-radius:10px;border:1px solid var(--border);cursor:pointer;transition:transform 0.2s;" onclick="openAICardLightbox(${i})" onmouseenter="this.style.transform='scale(1.03)'" onmouseleave="this.style.transform='scale(1)'">
+          <div style="font-size:11px;color:var(--text-light);margin-top:4px;">${card.label}</div>
+        </div>`;
+      }).join('');
+
+      // All templates grid for manual switch
+      const quickGrid = allTemplates.slice(0, 20).map(t =>
+        `<div style="display:flex;flex-direction:column;align-items:center;padding:6px;border-radius:8px;cursor:pointer;border:1px solid ${t.id===selectedId?'var(--primary)':'var(--border)'};background:${t.id===selectedId?'var(--primary-light)':'var(--bg)'};transition:all 0.2s;" onclick="regenAICardWithTemplate('${t.id}')" title="${t.name}: ${(t.skill||'').slice(0,40)}">
+          <span style="font-size:18px;">${t.icon}</span>
+          <span style="font-size:10px;color:var(--text-light);text-align:center;line-height:1.2;margin-top:2px;">${t.name}</span>
+        </div>`
+      ).join('');
+
+      resultDiv.innerHTML = `
+        <div class="card" style="padding:16px;margin-bottom:12px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+            <span style="font-size:24px;">${tmpl.icon}</span>
+            <div>
+              <div style="font-size:15px;font-weight:700;">AI 推荐: ${tmpl.name}</div>
+              <div style="font-size:12px;color:var(--text-light);">${matchScores[0]?.reason || ''} · 匹配度 ${matchScores[0]?.score || '-'}%</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">${matchHtml}</div>
+        </div>
+
+        <div class="card" style="padding:16px;margin-bottom:12px;">
+          <h4 style="margin:0 0 10px;font-size:14px;">🎴 生成的卡片 (${cards.filter(c=>c.dataUrl).length} 页)</h4>
+          <div style="display:flex;gap:10px;overflow-x:auto;padding:4px 0;">${cardHtml}</div>
+          <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+            <button class="btn btn-sm btn-primary" onclick="downloadAllAICards()">📥 下载全部</button>
+            <button class="btn btn-sm btn-outline" onclick="downloadSingleAICard(0)">📥 仅封面</button>
+            ${_aiCardPhotos.length===0 && tmpl.hasPhotos ? '<button class="btn btn-sm btn-outline" onclick="aiCardGenPhotos()">🤖 AI生成配图</button>' : ''}
+          </div>
+        </div>
+
+        <div class="card" style="padding:12px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+            <h4 style="margin:0;font-size:13px;">🔄 手动切换模板</h4>
+            <span style="font-size:11px;color:var(--text-light);">点击即可重新生成</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px;">${quickGrid}</div>
+        </div>
+      `;
+
+      // Store current state for downloads
+      window._aiCardCurrentResult = result;
+      window._aiCardCurrentPost = post;
+    }
+
+    function regenAICardWithTemplate(tmplId) {
+      const post = window._aiCardCurrentPost;
+      if (!post) return;
+
+      // Ensure template is in CardEngine
+      if (typeof TemplateLibrary !== 'undefined') {
+        const allTemplates = TemplateLibrary.getAllTemplates();
+        const tmpl = allTemplates.find(t => t.id === tmplId);
+        if (tmpl && !CardEngine.templates.find(ct => ct.id === tmplId)) {
+          const clean = { ...tmpl };
+          delete clean._source; delete clean._style; delete clean._form; delete clean._tracks;
+          CardEngine.templates.push(clean);
+        }
+      }
+
+      const result = CardEngine.generateCards(post, tmplId);
+      if (typeof TemplateLibrary !== 'undefined' && TemplateLibrary.trackUsage) {
+        TemplateLibrary.trackUsage(tmplId);
+      }
+
+      const allTemplates = (typeof TemplateLibrary !== 'undefined') ? TemplateLibrary.getAllTemplates() : CardEngine.templates;
+      // Update matchScores to show the newly selected one
+      const tmpl = result.template;
+      const scores = [{ id: tmplId, score: 100, reason: '手动选择' }];
+      _renderAICardResult(result, post, scores, tmplId, allTemplates);
+      toast(`已切换到模板「${tmpl.name}」`, 'success');
+    }
+
+    function openAICardLightbox(idx) {
+      const result = window._aiCardCurrentResult;
+      if (!result || !result.cards[idx]) return;
+
+      const card = result.cards[idx];
+      if (!card.dataUrl) return;
+
+      const overlay = document.createElement('div');
+      overlay.className = 'modal-overlay';
+      overlay.style.cssText = 'display:flex;z-index:10001;cursor:pointer;';
+      overlay.onclick = () => overlay.remove();
+      overlay.innerHTML = `<img src="${card.dataUrl}" style="max-width:90vw;max-height:90vh;object-fit:contain;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5);">`;
+      document.body.appendChild(overlay);
+    }
+
+    function downloadAllAICards() {
+      const result = window._aiCardCurrentResult;
+      if (!result) return;
+      result.cards.forEach((card, i) => {
+        if (!card.dataUrl) return;
+        setTimeout(() => {
+          const a = document.createElement('a');
+          a.href = card.dataUrl;
+          a.download = `card_${card.type}_${i + 1}.png`;
+          a.click();
+        }, i * 300);
+      });
+      toast(`📥 正在下载 ${result.cards.filter(c=>c.dataUrl).length} 张卡片`, 'success');
+    }
+
+    function downloadSingleAICard(idx) {
+      const result = window._aiCardCurrentResult;
+      if (!result || !result.cards[idx] || !result.cards[idx].dataUrl) return;
+      const card = result.cards[idx];
+      const a = document.createElement('a');
+      a.href = card.dataUrl;
+      a.download = `card_${card.type}.png`;
+      a.click();
+    }
+
+    async function aiCardGenPhotos() {
+      const post = window._aiCardCurrentPost;
+      const result = window._aiCardCurrentResult;
+      if (!post || !result) return;
+      const tmpl = result.template;
+      toast('🤖 AI 正在为您生成配图...', 'info');
+
+      const layout = tmpl.photoLayout || 'grid';
+      const count = layout === 'hero' ? 1 : (layout === 'collage' ? 3 : 4);
+
+      const prompts = [];
+      for (let i = 0; i < count; i++) {
+        prompts.push(`创建一张精美的产品/场景展示图。标题："${post.title}"，内容主题：${(post.content || '').slice(0, 100)}。要求：竖版3:4比例，干净美观，小红书风格，不要加文字。`);
+      }
+
+      const dataUrls = [];
+      for (let i = 0; i < prompts.length; i++) {
+        try {
+          const img = await generateSingleImage(prompts[i]);
+          if (img) dataUrls.push(img);
+        } catch (e) { console.warn('AI photo gen failed:', e); }
+        if (i < prompts.length - 1) await new Promise(r => setTimeout(r, 1200));
+      }
+
+      if (dataUrls.length) {
+        _aiCardPhotos = dataUrls.map(url => ({ dataUrl: url, img: null }));
+        await CardEngine.setUserPhotos(dataUrls);
+        toast(`✅ AI 生成了 ${dataUrls.length} 张配图`, 'success');
+        // Re-generate cards with photos
+        regenAICardWithTemplate(tmpl.id);
+      } else {
+        toast('❌ AI 配图生成失败', 'error');
+      }
+    }
+
+    // Update template count on page switch
+    function _updateAICardTmplCount() {
+      const el = document.getElementById('aicard-tmpl-count');
+      if (el && typeof TemplateLibrary !== 'undefined') {
+        el.textContent = TemplateLibrary.getAllTemplates().length;
+      }
+    }
+
     // ============ 卡片模板库系统 ============
     const TemplateLibrary = {
       // ── 分类维度 ──
@@ -7359,8 +7792,8 @@ ${track ? '参考赛道: ' + track : ''}
 注意配色要协调美观，适合小红书卡片。`;
 
         try {
-          const apiKey = _s().geminiApiKey;
-          const model = _s().geminiModel || 'gemini-2.5-flash';
+          const apiKey = getGeminiKey();
+          const model = getGeminiModel();
           const payload = { contents: [{ parts: [{ text: prompt }] }] };
           const result = await callGeminiAPI(apiKey, model, payload, 'generateContent', 'tmpl_ai_gen');
           const text = result?.data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
@@ -7409,8 +7842,8 @@ ${track ? '参考赛道: ' + track : ''}
 返回JSON数组（不要markdown代码块）：
 [{"name":"配色名","palette":{"bg":"#hex","card":"#hex","text":"#hex","accent":"#hex","sub":"#hex"}}]`;
         try {
-          const apiKey = _s().geminiApiKey;
-          const model = _s().geminiModel || 'gemini-2.5-flash';
+          const apiKey = getGeminiKey();
+          const model = getGeminiModel();
           const payload = { contents: [{ parts: [{ text: prompt }] }] };
           const result = await callGeminiAPI(apiKey, model, payload, 'generateContent', 'tmpl_palette');
           const text = result?.data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
@@ -7521,8 +7954,8 @@ ${track ? '参考赛道: ' + track : ''}
 {"name":"新模板名","icon":"emoji","palette":{"bg":"#hex","card":"#hex","text":"#hex","accent":"#hex","sub":"#hex"},"serif":bool,"titleSize":数字,"dark":bool,"italic":bool,"boldTitle":bool,"endText":"结尾文字","endEmoji":"emoji","ctaText":"CTA文字","ctaStyle":"border/filled/gradient","_style":"风格分类","_form":"${srcTmpl._form||'语录卡'}","_tracks":["赛道"],"skill":"设计说明"}`;
 
         try {
-          const apiKey = _s().geminiApiKey;
-          const model = _s().geminiModel || 'gemini-2.5-flash';
+          const apiKey = getGeminiKey();
+          const model = getGeminiModel();
           const payload = { contents: [{ parts: [{ text: prompt }] }] };
           const result = await callGeminiAPI(apiKey, model, payload, 'generateContent', 'tmpl_transfer');
           const text = result?.data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
@@ -9691,6 +10124,7 @@ Style: ${stylePrompt}
         case 'content-plan': loadContentPlans(); break;
         case 'img-tool': break;
         case 'card-lib': TemplateLibrary.render(); break;
+        case 'ai-card': _updateAICardTmplCount(); break;
       }
     }
 
@@ -9704,7 +10138,8 @@ Style: ${stylePrompt}
       'multi-account': '👥 多账号管理', purchase: '💎 积分商城', invite: '🎁 邀请赚钱',
       polish: '🪄 一键润色', 'title-gen': '📰 爆款标题',
       keywords: '🔑 热词分析', 'content-plan': '📋 内容规划',
-      'img-tool': '🖼️ 图片优化', 'card-lib': '🎴 卡片模板库'
+      'img-tool': '🖼️ 图片优化', 'card-lib': '🎴 卡片模板库',
+      'ai-card': '🃏 AI智能卡片'
     };
 
     function updateMobileTitle(page) {
