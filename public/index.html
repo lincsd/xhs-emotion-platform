@@ -9356,6 +9356,9 @@ ${sourceInfo}
       get(target, key) { return _s().imageStylePrompts[key] || _s().imageStylePrompts.xiaohongshu; }
     });
     let _lastImageGenErrorMsg = '';
+    let _lastWorkingImageModel = ''; // 记住上次成功的模型，跳过失败模型
+    const _failedImageModels = new Map(); // model → failTime, 5分钟内不重试
+    const IMAGE_MODEL_FAIL_TTL = 5 * 60 * 1000;
 
     /**
      * 从 Gemini 图片模型响应中提取图片
@@ -9373,18 +9376,34 @@ ${sourceInfo}
     }
 
     /**
-     * 使用 Nano Banana（或指定图片模型）生成单张图片
-     * 支持多 API Key 轮询，apiKeyOverride 可指定特定 Key
+     * 使用图片模型生成单张图片
+     * - 优先使用上次成功的模型（跳过近期失败的模型）
+     * - 服务器端 3 Key 自动轮询，不需要前端指定 Key
      */
     async function generateSingleImage(prompt, apiKeyOverride) {
       const apiKey = apiKeyOverride || getNextImageKey();
       const imageModel = getImageModel();
-      const candidates = [
+      const now = Date.now();
+
+      // 构建候选模型列表：上次成功的放最前面，过滤掉近期失败的
+      let candidates = [
         'gemini-3.1-flash-image-preview',
         'gemini-3-pro-image-preview',
         'gemini-2.5-flash-image',
         imageModel
       ].filter((m, i, arr) => m && arr.indexOf(m) === i);
+
+      // 过滤掉5分钟内失败的模型（但至少保留1个）
+      const available = candidates.filter(m => {
+        const ft = _failedImageModels.get(m);
+        return !ft || (now - ft > IMAGE_MODEL_FAIL_TTL);
+      });
+      if (available.length > 0) candidates = available;
+
+      // 上次成功的模型排最前
+      if (_lastWorkingImageModel && candidates.includes(_lastWorkingImageModel)) {
+        candidates = [_lastWorkingImageModel, ...candidates.filter(m => m !== _lastWorkingImageModel)];
+      }
 
       const payload = {
         contents: [{ parts: [{ text: prompt }] }],
@@ -9399,14 +9418,17 @@ ${sourceInfo}
           const img = _extractImageFromResponse(result.data);
           if (img) {
             const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
-            console.log(`[ImageGen] ✅ ${modelName} 成功, 耗时 ${elapsed}s, Key:...${apiKey.slice(-6)}`);
+            console.log(`[ImageGen] ✅ ${modelName} 成功, 耗时 ${elapsed}s`);
+            _lastWorkingImageModel = modelName;
+            _failedImageModels.delete(modelName);
             _lastImageGenErrorMsg = '';
             return img;
           }
           lastErr = new Error(`模型 ${modelName} 未返回图片数据`);
         } catch (e) {
           lastErr = e;
-          console.warn('[ImageGen] Failed with model', modelName, ':', e.message || e);
+          _failedImageModels.set(modelName, Date.now());
+          console.warn(`[ImageGen] ${modelName} 失败:`, e.message || e);
         }
       }
       const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
@@ -9510,87 +9532,70 @@ Style: ${stylePrompt}
       const images = [];
       const promptsToUse = imagePrompts.slice(0, count);
       const clientKeys = getImageApiKeys();
-      const parallelCount = getEffectiveParallelCount();
 
-      if (parallelCount > 1 && promptsToUse.length > 1) {
-        // 🚀 并行生成：前端多 Key 或服务器端多 Key
-        console.log(`[ImageGen] 🚀 并行模式: ${promptsToUse.length} 张图, 并行数 ${parallelCount} (前端${clientKeys.length}+服务器${_serverKeyCount})`);
-        const t0 = Date.now();
-        const tasks = promptsToUse.map((prompt, idx) => {
-          // 前端有多 Key 时用前端 Key，否则不传 Key（让服务器轮询）
-          const keyOverride = clientKeys.length > 1 ? clientKeys[idx % clientKeys.length] : undefined;
-          return generateSingleImage(prompt, keyOverride).catch(e => {
-            console.warn(`Content image ${idx + 1}/${count} failed:`, e);
-            return null;
-          });
+      // 🚀 总是并行：服务器端 3 Key 轮询 + 自动重试，无需前端控制节流
+      console.log(`[ImageGen] 🚀 并行生成 ${promptsToUse.length} 张配图`);
+      const t0 = Date.now();
+      const tasks = promptsToUse.map((prompt, idx) => {
+        const keyOverride = clientKeys.length > 1 ? clientKeys[idx % clientKeys.length] : undefined;
+        return generateSingleImage(prompt, keyOverride).catch(e => {
+          console.warn(`配图 ${idx + 1}/${count} 失败:`, e);
+          return null;
         });
-        const results = await Promise.all(tasks);
-        results.forEach(img => { if (img) images.push(img); });
-        console.log(`[ImageGen] 并行完成: ${images.length}/${promptsToUse.length} 成功, 总耗时 ${((Date.now() - t0) / 1000).toFixed(1)}s`);
-      } else {
-        // 串行模式（单 Key）
-        for (let i = 0; i < promptsToUse.length; i++) {
-          try {
-            const img = await generateSingleImage(promptsToUse[i]);
-            if (img) images.push(img);
-          } catch (e) {
-            console.warn(`Content image ${i + 1}/${count} failed:`, e);
-          }
-          // 避免 API 限流
-          if (i < promptsToUse.length - 1) await new Promise(r => setTimeout(r, 1200));
-        }
-      }
+      });
+      const results = await Promise.all(tasks);
+      results.forEach(img => { if (img) images.push(img); });
+      console.log(`[ImageGen] 配图完成: ${images.length}/${promptsToUse.length} 成功, ${((Date.now() - t0) / 1000).toFixed(1)}s`);
 
       return images;
     }
 
-    // 批量为笔记生成配图（封面 + 内容图）
+    // 批量为笔记生成配图（封面 + 内容图）—— 全面并行优化
     async function generateImagesForPosts(posts, imageCount, onProgress) {
-      const results = [];
-      const parallelCount = getEffectiveParallelCount();
       const totalT0 = Date.now();
+      const MAX_CONCURRENT_POSTS = 3; // 最多3篇笔记同时生成(匹配3个Key)
 
-      console.log(`[ImageGen] 批量生图开始: ${posts.length} 篇笔记, 每篇 1封面+${imageCount}配图, ${parallelCount} 个 Key`);
+      console.log(`[ImageGen] 批量生图: ${posts.length} 篇, 每篇 1封面+${imageCount}配图, 最大并行 ${MAX_CONCURRENT_POSTS}`);
 
-      for (let i = 0; i < posts.length; i++) {
-        if (onProgress) onProgress(i + 1, posts.length, 'cover');
-
+      // 单篇笔记生成函数：封面和配图并行
+      async function genForPost(post, idx) {
+        if (onProgress) onProgress(idx + 1, posts.length, 'cover');
         const postResult = { cover: null, contentImages: [] };
 
-        try {
-          // 1) 生成封面图
-          const coverUrl = await generateCoverImage(posts[i]);
+        // 🚀 封面 + 配图并行发起
+        const [coverResult, contentResult] = await Promise.allSettled([
+          generateCoverImage(post).catch(e => { console.warn(`笔记${idx + 1} 封面失败:`, e); return null; }),
+          generateContentImagesForPost(post, imageCount)
+        ]);
+
+        // 处理封面
+        const coverUrl = coverResult.status === 'fulfilled' ? coverResult.value : null;
+        if (coverUrl) {
           postResult.cover = coverUrl;
-          if (coverUrl && posts[i].id) {
-            savePostImage(posts[i].id, coverUrl);
-          }
-        } catch (e) {
-          console.warn(`Post ${i + 1} cover failed:`, e);
+          if (post.id) savePostImage(post.id, coverUrl);
         }
 
-        // 多 Key 时减少间隔
-        await new Promise(r => setTimeout(r, parallelCount > 1 ? 200 : 800));
+        // 处理配图
+        const contentImages = contentResult.status === 'fulfilled' ? (contentResult.value || []) : [];
+        postResult.contentImages = contentImages;
+        if (contentImages.length > 0 && post.id) savePostContentImages(post.id, contentImages);
 
-        try {
-          // 2) 生成内容配图（多Key时内部已并行）
-          if (onProgress) onProgress(i + 1, posts.length, 'content');
-          const contentImages = await generateContentImagesForPost(posts[i], imageCount);
-          postResult.contentImages = contentImages;
-          if (contentImages.length > 0 && posts[i].id) {
-            savePostContentImages(posts[i].id, contentImages);
-          }
-        } catch (e) {
-          console.warn(`Post ${i + 1} content images failed:`, e);
-        }
+        if (onProgress) onProgress(idx + 1, posts.length, 'done');
+        return postResult;
+      }
 
-        results.push(postResult);
-
-        // 笔记间间隔
-        if (i < posts.length - 1) await new Promise(r => setTimeout(r, parallelCount > 1 ? 300 : 1000));
+      // 分组并行处理多篇笔记
+      const results = [];
+      for (let i = 0; i < posts.length; i += MAX_CONCURRENT_POSTS) {
+        const chunk = posts.slice(i, i + MAX_CONCURRENT_POSTS);
+        const chunkResults = await Promise.all(
+          chunk.map((post, j) => genForPost(post, i + j))
+        );
+        results.push(...chunkResults);
       }
 
       const totalSec = ((Date.now() - totalT0) / 1000).toFixed(1);
-      console.log(`[ImageGen] 批量生图完成: ${totalSec}s, ${results.filter(r => r.cover).length}/${posts.length} 封面, ${results.reduce((s, r) => s + r.contentImages.length, 0)} 配图`);
+      console.log(`[ImageGen] 批量完成: ${totalSec}s, ${results.filter(r => r.cover).length}/${posts.length} 封面, ${results.reduce((s, r) => s + r.contentImages.length, 0)} 配图`);
 
       return results;
     }
