@@ -10636,7 +10636,8 @@ ${sourceInfo}
         generationConfig: {
           temperature: 0.95,
           topP: 0.95,
-          maxOutputTokens: 4096
+          maxOutputTokens: 8192,
+          responseMimeType: 'application/json'
         }
       };
 
@@ -10700,6 +10701,23 @@ ${sourceInfo}
             for (let i = 0; i < opens - (partial.match(/\}/g) || []).length; i++) partial += '}';
             try { return JSON.parse(partial); } catch {}
           }
+        }
+        // 最后手段：用正则直接提取 title/content（处理严重截断的JSON）
+        const titleMatch = cleaned.match(/"title"\s*:\s*"((?:[^"\\]|\\.)*)"/); 
+        const contentMatch = cleaned.match(/"content"\s*:\s*"((?:[^"\\]|\\.)*)"/); 
+        if (titleMatch) {
+          console.warn('[JSON Recovery] 从截断的JSON中用正则提取了 title/content');
+          const recovered = {
+            title: titleMatch[1],
+            content: contentMatch ? contentMatch[1].replace(/\\n/g, '\n') : '',
+            tags: '',
+            cover_text: titleMatch[1].slice(0, 10),
+            ai_analysis: '(AI输出被截断，已自动恢复部分内容)'
+          };
+          // 尝试提取 tags
+          const tagsMatch = cleaned.match(/"tags"\s*:\s*"((?:[^"\\]|\\.)*)"/); 
+          if (tagsMatch) recovered.tags = tagsMatch[1];
+          return [recovered];
         }
         throw new Error('AI 返回格式异常，无法解析内容。原文: ' + text.slice(0, 200));
       }
