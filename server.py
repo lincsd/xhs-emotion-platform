@@ -2598,12 +2598,14 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 last_err_json, last_err_code = err_json, e.code
                 # 可重试的错误码：429 限频 / 500 服务器错误 / 503 过载
                 if e.code in (429, 500, 503) and attempt < max_retries - 1:
+                    time.sleep(1.5)  # 重试间隔避免连续打满
                     continue
                 return self._send_json(err_json, e.code)
             except Exception as e:
                 last_err_json = {'error': {'code': 500, 'message': str(e)}}
                 last_err_code = 500
                 if attempt < max_retries - 1:
+                    time.sleep(1)  # 网络错误重试间隔
                     continue
                 return self._send_json(last_err_json, 500)
 

@@ -173,9 +173,12 @@ Requirements: Vertical 3:4 ratio, NO text, abstract or symbolic, harmonious colo
             print(f"   ❌ 配图{i+1} 失败(HTTP {status}) | {elapsed:.1f}s")
         results[f'image_{i+1}'] = {'ok': has_image, 'time': elapsed}
 
-    # ── Step 5: AI 卡片模板匹配 ──
+    # ── Step 5: AI 卡片模板匹配（带重试） ──
+    # 图片生成后等待5秒，让服务器恢复
+    print(f"\n⏳ 等待5秒让服务器冷却...")
+    time.sleep(5)
+
     print(f"\n🤖 Step 5: AI 卡片模板匹配...")
-    t0 = time.time()
 
     match_prompt = f"""你是小红书卡片模板匹配专家。根据笔记内容选择最合适的卡片模板。
 
@@ -195,29 +198,59 @@ Requirements: Vertical 3:4 ratio, NO text, abstract or symbolic, harmonious colo
 [{{"id":"模板id","reason":"推荐理由(15字内)"}}]
 最多返回3个推荐，按匹配度排序。"""
 
-    ok, r, elapsed = gemini(match_prompt, feature="ai_card_match", max_tokens=8192)
+    MAX_MATCH_RETRIES = 3
     matched_templates = []
-    if ok:
-        text = r.get('candidates', [{}])[0].get('content', {}).get('parts', [{}])[0].get('text', '')
-        clean = text.replace('```json', '').replace('```', '').strip()
-        try:
-            jm = re.search(r'\[[\s\S]*\]', clean)
-            if jm:
-                matched_templates = json.loads(jm.group(0))
+    match_ok = False
+    match_elapsed = 0
+
+    for attempt in range(1, MAX_MATCH_RETRIES + 1):
+        if attempt > 1:
+            wait = attempt * 3  # 6s, 9s
+            print(f"   🔄 第{attempt}次重试，等待{wait}秒...")
+            time.sleep(wait)
+
+        t0 = time.time()
+        ok, r, elapsed = gemini(match_prompt, feature="ai_card_match", max_tokens=8192)
+        match_elapsed += elapsed
+
+        if ok:
+            text = r.get('candidates', [{}])[0].get('content', {}).get('parts', [{}])[0].get('text', '')
+            clean = text.replace('```json', '').replace('```', '').strip()
+            try:
+                jm = re.search(r'\[[\s\S]*\]', clean)
+                if jm:
+                    matched_templates = json.loads(jm.group(0))
+                else:
+                    matched_templates = json.loads(clean)
+                print(f"   ✅ AI匹配完成 | {elapsed:.1f}s (总{match_elapsed:.1f}s)" + (f" [第{attempt}次尝试]" if attempt > 1 else ""))
+                for j, m in enumerate(matched_templates):
+                    star = '⭐' if j == 0 else '  '
+                    print(f"   {star} {j+1}. {m.get('id', '?')} - {m.get('reason', '?')}")
+                match_ok = True
+                break
+            except Exception as e:
+                print(f"   ⚠️ JSON解析失败 | {elapsed:.1f}s | {str(e)[:100]}")
+                print(f"   原始回复: {clean[:200]}")
+                # JSON解析失败不需重试
+                break
+        else:
+            status = r.get('status', 0)
+            print(f"   ❌ AI匹配失败(HTTP {status}) | {elapsed:.1f}s" + (f" [第{attempt}次尝试]" if attempt > 1 else ""))
+            # 仅对502/503重试，429配额耗尽不重试
+            if status in (502, 503):
+                if attempt < MAX_MATCH_RETRIES:
+                    continue
+            elif status == 429:
+                print(f"   ⚠️ 配额耗尽，不再重试")
+                break
             else:
-                matched_templates = json.loads(clean)
-            print(f"   ✅ AI匹配完成 | {elapsed:.1f}s")
-            for j, m in enumerate(matched_templates):
-                star = '⭐' if j == 0 else '  '
-                print(f"   {star} {j+1}. {m.get('id', '?')} - {m.get('reason', '?')}")
-            results['card_match'] = {'ok': True, 'time': elapsed, 'templates': matched_templates}
-        except Exception as e:
-            print(f"   ⚠️ JSON解析失败 | {elapsed:.1f}s | {str(e)[:100]}")
-            print(f"   原始回复: {clean[:200]}")
-            results['card_match'] = {'ok': False, 'time': elapsed, 'error': str(e)}
+                if attempt < MAX_MATCH_RETRIES:
+                    continue
+
+    if match_ok:
+        results['card_match'] = {'ok': True, 'time': match_elapsed, 'templates': matched_templates}
     else:
-        print(f"   ❌ AI匹配失败 | {elapsed:.1f}s | {json.dumps(r, ensure_ascii=False)[:200]}")
-        results['card_match'] = {'ok': False, 'time': elapsed}
+        results['card_match'] = {'ok': False, 'time': match_elapsed}
 
     total_time = time.time() - total_t0
 

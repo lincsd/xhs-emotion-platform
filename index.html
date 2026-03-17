@@ -4468,51 +4468,44 @@
         if (authToken) headers['Authorization'] = 'Bearer ' + authToken;
         let lastNetworkError = null;
 
+        const _delay = ms => new Promise(r => setTimeout(r, ms));
         for (const proxyUrl of proxyUrls) {
-          try {
-            const res = await fetch(proxyUrl, {
-              method: 'POST',
-              headers,
-              signal: _abortSignalTimeout(proxyTimeout),
-              body: reqBody
-            });
-            // 处理 429 配额超限
-            if (res.status === 429) {
-              const errData = await res.json().catch(() => ({}));
-              if (errData.quotaExceeded) {
-                loadCreditsInfo(); // 刷新积分显示
-                showQuotaExceeded();
-                throw { fromProxy: true, status: 429, data: errData, quotaExceeded: true };
-              }
-            }
-            const data = await parseProxyJson(res, proxyUrl);
-            // 成功后刷新积分（异步，不阻塞）
-            loadCreditsInfo();
-            return { ok: true, data };
-          } catch (e) {
-            if (e.fromProxy) throw e;
-            lastNetworkError = e;
-
+          // 最多尝试2轮（第2轮为502/过载自动重试，间隔3s）
+          for (let _retry = 0; _retry < 2; _retry++) {
             try {
-              const res2 = await fetch(proxyUrl, {
+              if (_retry > 0) {
+                console.log(`[Gemini] 502/过载重试 (${_retry}), 等待3s...`);
+                await _delay(3000);
+              }
+              const res = await fetch(proxyUrl, {
                 method: 'POST',
                 headers,
+                signal: _abortSignalTimeout(proxyTimeout),
                 body: reqBody
               });
-              if (res2.status === 429) {
-                const errData = await res2.json().catch(() => ({}));
+              // 处理 429 配额超限
+              if (res.status === 429) {
+                const errData = await res.json().catch(() => ({}));
                 if (errData.quotaExceeded) {
                   loadCreditsInfo();
                   showQuotaExceeded();
                   throw { fromProxy: true, status: 429, data: errData, quotaExceeded: true };
                 }
               }
-              const data2 = await parseProxyJson(res2, proxyUrl);
+              // 502/503 过载 → 延迟重试
+              if ((res.status === 502 || res.status === 503) && _retry < 1) {
+                console.warn(`[Gemini] 服务器 ${res.status}, 将延迟重试...`);
+                lastNetworkError = new Error(`Server ${res.status}`);
+                continue;
+              }
+              const data = await parseProxyJson(res, proxyUrl);
               loadCreditsInfo();
-              return { ok: true, data: data2 };
-            } catch (e2) {
-              if (e2.fromProxy) throw e2;
-              lastNetworkError = e2;
+              return { ok: true, data };
+            } catch (e) {
+              if (e.fromProxy) throw e;
+              lastNetworkError = e;
+              // 网络错误首次 → 立即重试一次
+              if (_retry < 1) continue;
             }
           }
         }
@@ -6414,10 +6407,9 @@
 
       async matchTemplateAI(post) {
         const apiKey = getGeminiKey();
-        try {
-          if (!canUseAI()) return { template: this.matchTemplate(post), reason: '关键词匹配（未配置AI）', ai: false };
-          const tmplList = this.templates.map(t => `${t.id}:${t.name}(${t.skill.slice(0,30)})`).join('; ');
-          const prompt = `你是小红书图文排版专家。根据以下笔记内容，从模板列表中选择最合适的1个模板。
+        if (!canUseAI()) return { template: this.matchTemplate(post), reason: '关键词匹配（未配置AI）', ai: false };
+        const tmplList = this.templates.map(t => `${t.id}:${t.name}(${t.skill.slice(0,30)})`).join('; ');
+        const prompt = `你是小红书图文排版专家。根据以下笔记内容，从模板列表中选择最合适的1个模板。
 笔记标题: ${post.title || ''}
 笔记分类: ${post.category || ''}
 笔记内容前100字: ${(post.content || '').slice(0,100)}
@@ -6425,20 +6417,33 @@
 可选模板: ${tmplList}
 
 只返回JSON: {"id":"模板id","reason":"选择原因(20字内)"}`;
-          const payload = {
-            contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: { responseMimeType: 'application/json', temperature: 0.3, maxOutputTokens: 8192 }
-          };
-          const result = await callGeminiAPI(apiKey, getGeminiModel(), payload, 'generateContent', 'template_match');
-          const text = result.data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
-          const clean = text.replace(/```json\s*/g,'').replace(/```/g,'').trim();
-          const parsed = _safeParseJSON(clean);
-          const tmpl = this.getTemplate(parsed.id);
-          return { template: tmpl, reason: parsed.reason || 'AI推荐', ai: true };
-        } catch (e) {
-          console.warn('[CardEngine] AI match failed:', e);
-          return { template: this.matchTemplate(post), reason: '关键词匹配（AI暂不可用）', ai: false };
+        const payload = {
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { responseMimeType: 'application/json', temperature: 0.3, maxOutputTokens: 8192 }
+        };
+        // 带重试的AI匹配（应对502过载）
+        const MAX_MATCH_RETRIES = 2;
+        for (let attempt = 0; attempt < MAX_MATCH_RETRIES; attempt++) {
+          try {
+            if (attempt > 0) {
+              console.log(`[CardEngine] AI匹配重试 ${attempt}/${MAX_MATCH_RETRIES}, 等待${attempt * 3}s...`);
+              await new Promise(r => setTimeout(r, attempt * 3000));
+            }
+            const result = await callGeminiAPI(apiKey, getGeminiModel(), payload, 'generateContent', 'template_match');
+            const text = result.data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+            const clean = text.replace(/```json\s*/g,'').replace(/```/g,'').trim();
+            const parsed = _safeParseJSON(clean);
+            const tmpl = this.getTemplate(parsed.id);
+            return { template: tmpl, reason: parsed.reason || 'AI推荐', ai: true };
+          } catch (e) {
+            console.warn(`[CardEngine] AI match attempt ${attempt + 1} failed:`, e?.message || e);
+            // 502/503/网络错误可重试，配额耗尽不重试
+            if (e?.quotaExceeded || e?.status === 429) break;
+            if (attempt >= MAX_MATCH_RETRIES - 1) break;
+          }
         }
+        console.warn('[CardEngine] AI match all attempts failed, fallback to keyword');
+        return { template: this.matchTemplate(post), reason: '关键词匹配（AI暂不可用）', ai: false };
       },
 
       async matchTemplateAIBatch(posts) {
