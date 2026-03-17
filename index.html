@@ -9722,20 +9722,19 @@ Style: ${stylePrompt}
 
       const images = [];
       const promptsToUse = imagePrompts.slice(0, count);
-      const clientKeys = getImageApiKeys();
 
-      // 🚀 总是并行：服务器端 3 Key 轮询 + 自动重试，无需前端控制节流
-      console.log(`[ImageGen] 🚀 并行生成 ${promptsToUse.length} 张配图`);
+      // 逐张串行生成，避免并发过多导致429限频
+      console.log(`[ImageGen] 📷 串行生成 ${promptsToUse.length} 张配图`);
       const t0 = Date.now();
-      const tasks = promptsToUse.map((prompt, idx) => {
-        const keyOverride = clientKeys.length > 1 ? clientKeys[idx % clientKeys.length] : undefined;
-        return generateSingleImage(prompt, keyOverride).catch(e => {
+      for (let idx = 0; idx < promptsToUse.length; idx++) {
+        if (_imageQuotaExhausted) break;
+        try {
+          const img = await generateSingleImage(promptsToUse[idx]);
+          if (img) images.push(img);
+        } catch (e) {
           console.warn(`配图 ${idx + 1}/${count} 失败:`, e);
-          return null;
-        });
-      });
-      const results = await Promise.all(tasks);
-      results.forEach(img => { if (img) images.push(img); });
+        }
+      }
       console.log(`[ImageGen] 配图完成: ${images.length}/${promptsToUse.length} 成功, ${((Date.now() - t0) / 1000).toFixed(1)}s`);
 
       return images;
@@ -9753,21 +9752,21 @@ Style: ${stylePrompt}
         if (onProgress) onProgress(idx + 1, posts.length, 'cover');
         const postResult = { cover: null, contentImages: [] };
 
-        // 🚀 封面 + 配图并行发起
-        const [coverResult, contentResult] = await Promise.allSettled([
-          generateCoverImage(post).catch(e => { console.warn(`笔记${idx + 1} 封面失败:`, e); return null; }),
-          generateContentImagesForPost(post, imageCount)
-        ]);
-
-        // 处理封面
-        const coverUrl = coverResult.status === 'fulfilled' ? coverResult.value : null;
-        if (coverUrl) {
-          postResult.cover = coverUrl;
-          if (post.id) savePostImage(post.id, coverUrl);
+        // 先生成封面，再逐张生成配图（串行避免并发429）
+        try {
+          const coverUrl = await generateCoverImage(post);
+          if (coverUrl) {
+            postResult.cover = coverUrl;
+            if (post.id) savePostImage(post.id, coverUrl);
+          }
+        } catch (e) {
+          console.warn(`笔记${idx + 1} 封面失败:`, e);
         }
 
-        // 处理配图
-        const contentImages = contentResult.status === 'fulfilled' ? (contentResult.value || []) : [];
+        if (onProgress) onProgress(idx + 1, posts.length, 'content');
+
+        // 生成配图
+        const contentImages = await generateContentImagesForPost(post, imageCount);
         postResult.contentImages = contentImages;
         if (contentImages.length > 0 && post.id) savePostContentImages(post.id, contentImages);
 
