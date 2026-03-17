@@ -5903,7 +5903,7 @@
       async matchTemplateAI(post) {
         const apiKey = getGeminiKey();
         try {
-          if (!apiKey) return { template: this.matchTemplate(post), reason: '关键词匹配（未配置API Key）', ai: false };
+          if (!canUseAI()) return { template: this.matchTemplate(post), reason: '关键词匹配（未配置AI）', ai: false };
           const tmplList = this.templates.map(t => `${t.id}:${t.name}(${t.skill.slice(0,30)})`).join('; ');
           const prompt = `你是小红书图文排版专家。根据以下笔记内容，从模板列表中选择最合适的1个模板。
 笔记标题: ${post.title || ''}
@@ -5932,7 +5932,7 @@
       async matchTemplateAIBatch(posts) {
         const apiKey = getGeminiKey();
         try {
-          if (!apiKey) {
+          if (!canUseAI()) {
             return posts.map(p => ({ template: this.matchTemplate(p), reason: '关键词匹配', ai: false }));
           }
           const tmplList = this.templates.map(t => `${t.id}:${t.name}`).join('; ');
@@ -6247,7 +6247,7 @@ ${postList}
 
     async function _tryGeminiPhotoEnhance(dataUrls) {
       const apiKey = getGeminiKey();
-      if (!apiKey) return [];
+      if (!canUseAI()) return [];
 
       try {
         toast('🤖 AI 正在优化图片...', 'info');
@@ -6437,7 +6437,7 @@ ${postList}
 
       try {
         const apiKey = getGeminiKey();
-        if (!apiKey) throw new Error('未配置 Gemini API Key');
+        if (!canUseAI()) throw new Error('未配置 Gemini API Key 或代理地址');
 
         // Build template list for AI — include full info for better matching
         const tmplList = allTemplates.map(t =>
