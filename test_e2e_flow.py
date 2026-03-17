@@ -148,30 +148,51 @@ Style: 小红书风格，温暖治愈
 Requirements: Vertical 3:4 ratio, NO text, abstract or symbolic, harmonious colors"""
     ]
 
+    MAX_IMG_RETRIES = 2
     for i, prompt in enumerate(image_prompts):
         print(f"\n🎨 Step {2+i}: 生成配图 {i+1}/3...")
-        t0 = time.time()
-        ok, r, elapsed = gemini_image(prompt)
         has_image = False
-        if ok:
-            parts = r.get('candidates', [{}])[0].get('content', {}).get('parts', [])
-            for p in parts:
-                if 'inlineData' in p:
-                    has_image = True
-                    img_data = p['inlineData'].get('data', '')
-                    mime = p['inlineData'].get('mimeType', 'image/png')
-                    img_size = len(img_data) * 3 // 4
-                    # Build data URL (same as frontend _extractImageFromResponse)
-                    dataUrl = f"data:{mime};base64,{img_data[:100]}..."  # truncated for display
-                    image_dataUrls.append(f"data:{mime};base64,{img_data}")
-                    print(f"   ✅ 配图{i+1} 成功 | {elapsed:.1f}s | ~{img_size//1024}KB | {mime}")
+        total_elapsed = 0
+
+        for attempt in range(1, MAX_IMG_RETRIES + 1):
+            if attempt > 1:
+                wait = attempt * 3
+                print(f"   🔄 第{attempt}次重试，等待{wait}秒...")
+                time.sleep(wait)
+
+            t0 = time.time()
+            ok, r, elapsed = gemini_image(prompt)
+            total_elapsed += elapsed
+
+            if ok:
+                parts = r.get('candidates', [{}])[0].get('content', {}).get('parts', [])
+                for p in parts:
+                    if 'inlineData' in p:
+                        has_image = True
+                        img_data = p['inlineData'].get('data', '')
+                        mime = p['inlineData'].get('mimeType', 'image/png')
+                        img_size = len(img_data) * 3 // 4
+                        dataUrl = f"data:{mime};base64,{img_data[:100]}..."
+                        image_dataUrls.append(f"data:{mime};base64,{img_data}")
+                        print(f"   ✅ 配图{i+1} 成功 | {elapsed:.1f}s | ~{img_size//1024}KB | {mime}" + (f" [第{attempt}次尝试]" if attempt > 1 else ""))
+                        break
+                if has_image:
                     break
-            if not has_image:
-                print(f"   ⚠️ 配图{i+1} 无图片数据 | {elapsed:.1f}s")
-        else:
-            status = r.get('status', '?')
-            print(f"   ❌ 配图{i+1} 失败(HTTP {status}) | {elapsed:.1f}s")
-        results[f'image_{i+1}'] = {'ok': has_image, 'time': elapsed}
+                if not has_image:
+                    print(f"   ⚠️ 配图{i+1} 无图片数据 | {elapsed:.1f}s")
+            else:
+                status = r.get('status', '?')
+                print(f"   ❌ 配图{i+1} 失败(HTTP {status}) | {elapsed:.1f}s" + (f" [第{attempt}次尝试]" if attempt > 1 else ""))
+                if status == 429:
+                    print(f"   ⚠️ 配额耗尽，不再重试")
+                    break
+                if status in (502, 503) and attempt < MAX_IMG_RETRIES:
+                    continue
+                # Other errors: also retry
+                if attempt < MAX_IMG_RETRIES:
+                    continue
+
+        results[f'image_{i+1}'] = {'ok': has_image, 'time': total_elapsed}
 
     # ── Step 5: AI 卡片模板匹配（带重试） ──
     # 图片生成后等待5秒，让服务器恢复
