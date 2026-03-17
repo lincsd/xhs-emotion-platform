@@ -4101,7 +4101,7 @@
       applySkillToUI();
       toast(`已切换到「${sk.icon} ${sk.name}」账号模式`, 'success');
       // 重新加载当前页面
-      showPage(currentPage);
+      switchPage(currentPage);
     }
 
     // 将 Skill 配置应用到 UI
@@ -10354,6 +10354,9 @@ Style: ${stylePrompt}
 
       // 更新手机顶部标题
       updateMobileTitle(page);
+
+      // 每次切页时确保 Skill 分类同步
+      applySkillToUI();
 
       switch(page) {
         case 'dashboard': loadDashboard(); break;
