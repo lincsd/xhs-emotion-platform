@@ -148,15 +148,20 @@ Style: 小红书风格，温暖治愈
 Requirements: Vertical 3:4 ratio, NO text, abstract or symbolic, harmonious colors"""
     ]
 
+    IMG_COOLDOWN = 5  # 每张图之间冷却5秒
     MAX_IMG_RETRIES = 2
     for i, prompt in enumerate(image_prompts):
+        # 第2张起增加冷却间隔
+        if i > 0:
+            print(f"\n⏳ 配图间冷却{IMG_COOLDOWN}秒，防止服务器过载...")
+            time.sleep(IMG_COOLDOWN)
         print(f"\n🎨 Step {2+i}: 生成配图 {i+1}/3...")
         has_image = False
         total_elapsed = 0
 
         for attempt in range(1, MAX_IMG_RETRIES + 1):
             if attempt > 1:
-                wait = attempt * 3
+                wait = attempt * 5  # 重试间隔加长到5s起步
                 print(f"   🔄 第{attempt}次重试，等待{wait}秒...")
                 time.sleep(wait)
 

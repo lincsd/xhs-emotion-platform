@@ -4492,9 +4492,11 @@
                   throw { fromProxy: true, status: 429, data: errData, quotaExceeded: true };
                 }
               }
-              // 502/503 过载 → 延迟重试
+              // 502/503 过载 → 延迟重试（图片模型用更长间隔）
               if ((res.status === 502 || res.status === 503) && _retry < 1) {
-                console.warn(`[Gemini] 服务器 ${res.status}, 将延迟重试...`);
+                const retryDelay = isImageModel ? 5000 : 3000;
+                console.warn(`[Gemini] 服务器 ${res.status}, ${retryDelay/1000}s后重试...`);
+                await _delay(retryDelay);
                 lastNetworkError = new Error(`Server ${res.status}`);
                 continue;
               }
@@ -10246,11 +10248,17 @@ Style: ${stylePrompt}
       const images = [];
       const promptsToUse = imagePrompts.slice(0, count);
 
-      // 逐张串行生成，避免并发过多导致429限频
-      console.log(`[ImageGen] 📷 串行生成 ${promptsToUse.length} 张配图`);
+      // 逐张串行生成，每张间隔 IMAGE_GEN_COOLDOWN 秒防止服务器502过载
+      const IMAGE_GEN_COOLDOWN = 3000; // 3秒冷却
+      console.log(`[ImageGen] 📷 串行生成 ${promptsToUse.length} 张配图 (间隔${IMAGE_GEN_COOLDOWN/1000}s)`);
       const t0 = Date.now();
       for (let idx = 0; idx < promptsToUse.length; idx++) {
         if (_imageQuotaExhausted) break;
+        // 第2张起增加冷却间隔，让服务器恢复
+        if (idx > 0) {
+          console.log(`[ImageGen] ⏳ 冷却 ${IMAGE_GEN_COOLDOWN/1000}s 防过载...`);
+          await new Promise(r => setTimeout(r, IMAGE_GEN_COOLDOWN));
+        }
         try {
           const img = await generateSingleImage(promptsToUse[idx]);
           if (img) images.push(img);
@@ -10284,6 +10292,12 @@ Style: ${stylePrompt}
           }
         } catch (e) {
           console.warn(`笔记${idx + 1} 封面失败:`, e);
+        }
+
+        // 封面完成后冷却3秒再生成配图，避免服务器502
+        if (postResult.cover) {
+          console.log(`[ImageGen] ⏳ 封面→配图 冷却3s...`);
+          await new Promise(r => setTimeout(r, 3000));
         }
 
         if (onProgress) onProgress(idx + 1, posts.length, 'content');

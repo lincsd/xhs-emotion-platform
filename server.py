@@ -131,6 +131,11 @@ SERVER_GEMINI_API_KEYS = _load_server_gemini_keys()
 _server_key_index = 0
 _server_key_lock = threading.Lock()
 
+# 图片生成请求节流：防止连续图片请求压垮 Render 实例
+_last_image_gen_time = 0
+_image_gen_lock = threading.Lock()
+IMAGE_GEN_MIN_GAP = 2.0  # 图片请求最小间隔(秒)
+
 def _get_next_server_key():
     """轮询获取下一个服务器端 API Key（线程安全）"""
     global _server_key_index
@@ -2561,6 +2566,18 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         # Render Standard 方案网关超时约 300 秒
         is_image_model = 'image' in model or 'banana' in model or 'imagen' in model
         timeout = 180 if is_image_model else 120
+
+        # 图片模型请求节流：强制最小间隔，防止连续请求导致502
+        if is_image_model:
+            global _last_image_gen_time
+            with _image_gen_lock:
+                now = time.time()
+                elapsed_since_last = now - _last_image_gen_time
+                if elapsed_since_last < IMAGE_GEN_MIN_GAP:
+                    wait_time = IMAGE_GEN_MIN_GAP - elapsed_since_last
+                    print(f'[ImageThrottle] 距上次图片请求仅{elapsed_since_last:.1f}s, 等待{wait_time:.1f}s')
+                    time.sleep(wait_time)
+                _last_image_gen_time = time.time()
 
         # 多 Key 自动重试：429/500/503 时切换下一个 Key 重试
         max_retries = min(len(SERVER_GEMINI_API_KEYS), 3) if len(SERVER_GEMINI_API_KEYS) > 1 else 1
