@@ -1,0 +1,1 @@
+STATUS:200 BODY:{"version": "20260317d", "keyCount": 3, "hasServerKey": true}

@@ -4420,6 +4420,14 @@
       return _serverProxyAvailable;
     }
 
+    // 页面加载时预热 Render 后端（冷启动可能需要30秒+）
+    (function _warmupProxy() {
+      try {
+        const url = getGeminiProxyHealthUrl();
+        if (url) fetch(url, { signal: _abortSignalTimeout(15000) }).catch(() => {});
+      } catch {}
+    })();
+
     /**
      * 统一的 Gemini API 调用：优先走服务器代理，失败则直连
      * @param {string} apiKey
@@ -4469,13 +4477,16 @@
         let lastNetworkError = null;
 
         const _delay = ms => new Promise(r => setTimeout(r, ms));
+        // 502/503 冷启动重试：最多5轮，渐进等待（3s→5s→8s→10s），总等待~30s
+        const MAX_COLD_RETRIES = 5;
+        const COLD_DELAYS = [3000, 5000, 8000, 10000, 10000];
         for (const proxyUrl of proxyUrls) {
-          // 最多尝试2轮（第2轮为502/过载自动重试，间隔3s）
-          for (let _retry = 0; _retry < 2; _retry++) {
+          for (let _retry = 0; _retry < MAX_COLD_RETRIES; _retry++) {
             try {
               if (_retry > 0) {
-                console.log(`[Gemini] 502/过载重试 (${_retry}), 等待3s...`);
-                await _delay(3000);
+                const waitMs = COLD_DELAYS[Math.min(_retry - 1, COLD_DELAYS.length - 1)];
+                console.log(`[Gemini] 重试 (${_retry}/${MAX_COLD_RETRIES-1}), 等待${waitMs/1000}s...`);
+                await _delay(waitMs);
               }
               const res = await fetch(proxyUrl, {
                 method: 'POST',
@@ -4492,11 +4503,9 @@
                   throw { fromProxy: true, status: 429, data: errData, quotaExceeded: true };
                 }
               }
-              // 502/503 过载 → 延迟重试（图片模型用更长间隔）
-              if ((res.status === 502 || res.status === 503) && _retry < 1) {
-                const retryDelay = isImageModel ? 5000 : 3000;
-                console.warn(`[Gemini] 服务器 ${res.status}, ${retryDelay/1000}s后重试...`);
-                await _delay(retryDelay);
+              // 502/503 过载/冷启动 → 渐进重试
+              if ((res.status === 502 || res.status === 503) && _retry < MAX_COLD_RETRIES - 1) {
+                console.warn(`[Gemini] 服务器 ${res.status}（可能正在冷启动）, 将重试...`);
                 lastNetworkError = new Error(`Server ${res.status}`);
                 continue;
               }
@@ -4506,14 +4515,20 @@
             } catch (e) {
               if (e.fromProxy) throw e;
               lastNetworkError = e;
-              // 网络错误首次 → 立即重试一次
+              // 网络错误 → 重试（首次立即，后续等待）
               if (_retry < 1) continue;
+              // 非502网络错误，不再重试当前URL
+              break;
             }
           }
         }
 
         if (forceProxy) {
-          throw new Error('代理连接失败: ' + (lastNetworkError?.name || '') + ' ' + (lastNetworkError?.message || 'Failed to fetch'));
+          const errDetail = lastNetworkError?.message || 'Failed to fetch';
+          const isColdStart = /Server 50[23]/.test(errDetail);
+          throw new Error(isColdStart
+            ? '服务器正在启动中，请稍后10秒再试'
+            : '代理连接失败: ' + errDetail);
         }
         console.warn('[Gemini] Server proxy failed, trying direct:', lastNetworkError?.message || 'network error');
         // 代理网络错误，降级为直连
