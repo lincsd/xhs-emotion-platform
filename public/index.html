@@ -9515,6 +9515,7 @@ ${sourceInfo}
     });
     let _lastImageGenErrorMsg = '';
     let _lastWorkingImageModel = ''; // 记住上次成功的模型，跳过失败模型
+    let _imageQuotaExhausted = false; // 配额已耗尽标志，跳过后续图片请求
     const _failedImageModels = new Map(); // model → failTime, 5分钟内不重试
     const IMAGE_MODEL_FAIL_TTL = 5 * 60 * 1000;
 
@@ -9539,6 +9540,12 @@ ${sourceInfo}
      * - 服务器端 3 Key 自动轮询，不需要前端指定 Key
      */
     async function generateSingleImage(prompt, apiKeyOverride) {
+      // 如果配额已耗尽，直接跳过（配额是账户级别的，不需要再试）
+      if (_imageQuotaExhausted) {
+        console.log('[ImageGen] ⏭️ 配额已耗尽，跳过图片生成');
+        return null;
+      }
+
       const apiKey = apiKeyOverride || getNextImageKey();
       const imageModel = getImageModel();
       const now = Date.now();
@@ -9585,6 +9592,13 @@ ${sourceInfo}
           lastErr = new Error(`模型 ${modelName} 未返回图片数据`);
         } catch (e) {
           lastErr = e;
+          // 配额耗尽是账户级别的，不需要再试其他模型
+          if (e?.quotaExceeded) {
+            _imageQuotaExhausted = true;
+            _lastImageGenErrorMsg = '今日免费次数已用完，请充值积分后再生成配图';
+            console.warn('[ImageGen] ⚠️ 配额已耗尽，跳过剩余模型');
+            return null;
+          }
           _failedImageModels.set(modelName, Date.now());
           console.warn(`[ImageGen] ${modelName} 失败:`, e.message || e);
         }
@@ -9745,6 +9759,14 @@ Style: ${stylePrompt}
       // 分组并行处理多篇笔记
       const results = [];
       for (let i = 0; i < posts.length; i += MAX_CONCURRENT_POSTS) {
+        // 如果配额耗尽，跳过剩余笔记
+        if (_imageQuotaExhausted) {
+          console.warn('[ImageGen] ⚠️ 配额已耗尽，跳过剩余笔记的图片生成');
+          for (let j = i; j < posts.length; j++) {
+            results.push({ cover: null, contentImages: [] });
+          }
+          break;
+        }
         const chunk = posts.slice(i, i + MAX_CONCURRENT_POSTS);
         const chunkResults = await Promise.all(
           chunk.map((post, j) => genForPost(post, i + j))
@@ -10617,6 +10639,7 @@ Style: ${stylePrompt}
 
         // 如果启用了图片生成（封面图 + 配图）
         if (withImage && usedAI) {
+          _imageQuotaExhausted = false; // 重置配额标志
           const totalImages = count * (1 + imageCount); // 封面 + 配图
           let completedImages = 0;
 
@@ -10660,9 +10683,12 @@ Style: ${stylePrompt}
           renderGeneratedList(posts);
           if (posts.length > 0) previewPost(posts[0]);
           if (coverCount + contentImgCount > 0) {
-            toast(`🎨 ${coverCount} 张封面图 + ${contentImgCount} 张配图生成成功！`, 'success');
+            const quotaNote = _imageQuotaExhausted ? '（部分配图因额度不足被跳过）' : '';
+            toast(`🎨 ${coverCount} 张封面图 + ${contentImgCount} 张配图生成成功！${quotaNote}`, 'success');
           } else {
-            const brief = (_lastImageGenErrorMsg || '图片服务暂不可用').slice(0, 80);
+            const brief = _imageQuotaExhausted
+              ? '今日免费次数已用完，请在积分商城充值后再生成配图'
+              : (_lastImageGenErrorMsg || '图片服务暂不可用').slice(0, 80);
             toast(`文案已生成，配图失败：${brief}`, 'warning');
           }
         } else if (withImage && !hasApiKey) {
@@ -14238,7 +14264,11 @@ Style: ${stylePrompt}
       }
     }
 
+    let _quotaModalShownAt = 0;
     function showQuotaExceeded() {
+      const now = Date.now();
+      if (now - _quotaModalShownAt < 5000) return; // 5秒内不重复弹窗
+      _quotaModalShownAt = now;
       openModal('modal-quota-exceeded');
     }
 
