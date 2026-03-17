@@ -5090,66 +5090,18 @@
           }
         }
         else if (layout === 'universal' || pageType === 'universal') {
-          // 通用图片页：适用于所有非图片专属模板，用模板配色 + 拼图排版
+          // ── 通用多风格图片页：根据模板特征自动选择艺术风格 ──
           const n = Math.min(photos.length, 6);
-          const margin = 60, gap = 14;
-          const innerW = W - margin * 2;
-          const titleAreaH = 140;
-          const gridAreaH = H - titleAreaH - 80;
-
-          // 标题区域
-          ctx.font = this._font(28, '700', tmpl); ctx.fillStyle = p.text;
-          ctx.textAlign = 'center';
-          ctx.fillText('— 精选配图 —', W / 2, margin + 45);
-          ctx.font = this._font(15, '400', tmpl); ctx.fillStyle = p.sub;
-          ctx.fillText(`共 ${n} 张图片`, W / 2, margin + 72);
-          // Accent bar
-          ctx.fillStyle = p.accent + '60';
-          ctx.fillRect(W / 2 - 40, margin + 82, 80, 2);
-          ctx.textAlign = 'left';
-
-          // 自适应网格
-          if (n === 1) {
-            // 单图大图展示
-            const imgH = gridAreaH - 20;
-            const imgW = Math.min(innerW, imgH * 4 / 3);
-            this._drawImageCover(ctx, photos[0].img, (W - imgW) / 2, titleAreaH, imgW, imgH, 16);
-          } else if (n === 2) {
-            // 双图并排
-            const gw = (innerW - gap) / 2;
-            this._drawImageCover(ctx, photos[0].img, margin, titleAreaH, gw, gridAreaH, 14);
-            this._drawImageCover(ctx, photos[1].img, margin + gw + gap, titleAreaH, gw, gridAreaH, 14);
-          } else if (n === 3) {
-            // 1大+2小
-            const bigW = Math.floor(innerW * 0.58);
-            const smallW = innerW - bigW - gap;
-            const halfH = (gridAreaH - gap) / 2;
-            this._drawImageCover(ctx, photos[0].img, margin, titleAreaH, bigW, gridAreaH, 14);
-            this._drawImageCover(ctx, photos[1].img, margin + bigW + gap, titleAreaH, smallW, halfH, 14);
-            this._drawImageCover(ctx, photos[2].img, margin + bigW + gap, titleAreaH + halfH + gap, smallW, halfH, 14);
+          const style = this._getPhotoPageStyle(tmpl);
+          if (style === 'magazine') {
+            this._photoStyleMagazine(ctx, tmpl, photos.slice(0, n));
+          } else if (style === 'polaroid') {
+            this._photoStylePolaroid(ctx, tmpl, photos.slice(0, n));
+          } else if (style === 'filmstrip') {
+            this._photoStyleFilmstrip(ctx, tmpl, photos.slice(0, n));
           } else {
-            // 4-6: 2列网格
-            const cols = n <= 4 ? 2 : 3;
-            const rows = Math.ceil(n / cols);
-            const cellW = (innerW - (cols - 1) * gap) / cols;
-            const cellH = (gridAreaH - (rows - 1) * gap) / rows;
-            photos.slice(0, n).forEach((ph, i) => {
-              const col = i % cols, row = Math.floor(i / cols);
-              const cx = margin + col * (cellW + gap);
-              const cy = titleAreaH + row * (cellH + gap);
-              // 卡片阴影
-              ctx.shadowColor = 'rgba(0,0,0,0.06)'; ctx.shadowBlur = 8; ctx.shadowOffsetY = 3;
-              this._roundRect(ctx, cx, cy, cellW, cellH, 12);
-              ctx.fillStyle = '#fff'; ctx.fill();
-              ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
-              // 图片
-              this._drawImageCover(ctx, ph.img, cx + 3, cy + 3, cellW - 6, cellH - 6, 9);
-            });
+            this._photoStyleStoryCards(ctx, tmpl, photos.slice(0, n));
           }
-
-          // 底部装饰线
-          ctx.fillStyle = p.accent + '30';
-          ctx.fillRect(W / 2 - 30, H - 50, 60, 2);
         }
         else {
           // Grid layout (product_showcase default)
@@ -5202,6 +5154,340 @@
             });
           }
         }
+      },
+
+      // ══════════════ 图片页风格系统 ══════════════
+      _getPhotoPageStyle(tmpl) {
+        const tid = tmpl.id;
+        if (['magazine_edit', 'ins_aesthetic', 'ootd_collage'].includes(tid)) return 'magazine';
+        if (['minimal_literary', 'handwrite_diary', 'chinese_retro', 'nature_healing'].includes(tid)) return 'polaroid';
+        if (['dark_cyber', 'breaking_news', 'biz_premium'].includes(tid)) return 'filmstrip';
+        if (['sweet_fresh', 'candy_pop', 'color_palette', 'note_knowledge'].includes(tid)) return 'storyCards';
+        if (tmpl.dark) return 'filmstrip';
+        if (tmpl.serif) return 'polaroid';
+        const hash = tid.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+        return ['magazine', 'polaroid', 'storyCards', 'filmstrip'][hash % 4];
+      },
+
+      // ── Magazine Spread Style ──
+      _photoStyleMagazine(ctx, tmpl, photos) {
+        const W = this.W, H = this.H, p = tmpl.palette;
+        this._drawBg(ctx, tmpl);
+        const n = photos.length;
+        const margin = 40;
+
+        // Hero photo (top 55%)
+        const heroH = Math.floor(H * 0.55);
+        this._drawImageCover(ctx, photos[0].img, margin, margin, W - margin * 2, heroH, 16);
+
+        // Gradient overlay on hero bottom
+        const heroGrad = ctx.createLinearGradient(0, margin + heroH - 100, 0, margin + heroH);
+        heroGrad.addColorStop(0, 'rgba(0,0,0,0)');
+        heroGrad.addColorStop(1, 'rgba(0,0,0,0.25)');
+        ctx.fillStyle = heroGrad;
+        ctx.save();
+        this._roundRect(ctx, margin, margin + heroH - 100, W - margin * 2, 100, 0);
+        ctx.clip();
+        ctx.fillRect(margin, margin + heroH - 100, W - margin * 2, 100);
+        ctx.restore();
+
+        // Photo count badge on hero
+        this._roundRect(ctx, W - margin - 105, margin + 14, 85, 32, 16);
+        ctx.fillStyle = 'rgba(0,0,0,0.4)';
+        ctx.fill();
+        ctx.font = this._font(14, '600', tmpl);
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.fillText(`📷 ${n}`, W - margin - 62, margin + 35);
+        ctx.textAlign = 'left';
+
+        // Supporting photos strip below
+        if (n > 1) {
+          const stripY = margin + heroH + 20;
+          const stripH = H - stripY - margin - 26;
+          const remaining = photos.slice(1, Math.min(n, 5));
+          const gap = 12;
+          const imgW = (W - margin * 2 - (remaining.length - 1) * gap) / remaining.length;
+          remaining.forEach((ph, i) => {
+            const x = margin + i * (imgW + gap);
+            ctx.shadowColor = 'rgba(0,0,0,0.08)';
+            ctx.shadowBlur = 12;
+            ctx.shadowOffsetY = 4;
+            this._roundRect(ctx, x, stripY, imgW, stripH, 12);
+            ctx.fillStyle = '#fff';
+            ctx.fill();
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetY = 0;
+            this._drawImageCover(ctx, ph.img, x + 3, stripY + 3, imgW - 6, stripH - 6, 9);
+          });
+        }
+
+        // Magazine label
+        ctx.font = this._font(12, '600', tmpl);
+        ctx.fillStyle = p.sub + '80';
+        ctx.textAlign = 'center';
+        ctx.fillText(`GALLERY · ${n} PHOTOS`, W / 2, H - 20);
+        ctx.textAlign = 'left';
+      },
+
+      // ── Polaroid Scatter Style ──
+      _photoStylePolaroid(ctx, tmpl, photos) {
+        const W = this.W, H = this.H, p = tmpl.palette;
+        this._drawBg(ctx, tmpl);
+        const n = Math.min(photos.length, 4);
+
+        // Scattered polaroid positions (for 1080x1440 canvas)
+        const layouts = {
+          1: [{ x: 190, y: 240, w: 700, h: 840, rot: -0.03 }],
+          2: [
+            { x: 60, y: 140, w: 520, h: 620, rot: -0.06 },
+            { x: 440, y: 480, w: 520, h: 620, rot: 0.05 }
+          ],
+          3: [
+            { x: 60, y: 60, w: 560, h: 520, rot: -0.04 },
+            { x: 400, y: 440, w: 500, h: 460, rot: 0.05 },
+            { x: 80, y: 780, w: 480, h: 440, rot: -0.02 }
+          ],
+          4: [
+            { x: 60, y: 60, w: 460, h: 430, rot: -0.05 },
+            { x: 500, y: 100, w: 440, h: 400, rot: 0.04 },
+            { x: 80, y: 580, w: 430, h: 410, rot: 0.03 },
+            { x: 490, y: 620, w: 450, h: 430, rot: -0.06 }
+          ]
+        };
+        const positions = layouts[n] || layouts[4];
+
+        photos.slice(0, n).forEach((ph, i) => {
+          const pos = positions[i];
+          ctx.save();
+          ctx.translate(pos.x + pos.w / 2, pos.y + pos.h / 2);
+          ctx.rotate(pos.rot);
+
+          // Drop shadow
+          ctx.shadowColor = 'rgba(0,0,0,0.15)';
+          ctx.shadowBlur = 25;
+          ctx.shadowOffsetX = 3;
+          ctx.shadowOffsetY = 8;
+
+          // White polaroid frame
+          const borderSide = 14;
+          const borderBot = 50;
+          const frameW = pos.w + borderSide * 2;
+          const frameH = pos.h + borderSide + borderBot;
+          this._roundRect(ctx, -frameW / 2, -frameH / 2, frameW, frameH, 4);
+          ctx.fillStyle = '#ffffff';
+          ctx.fill();
+          ctx.shadowBlur = 0;
+          ctx.shadowOffsetX = 0;
+          ctx.shadowOffsetY = 0;
+
+          // Photo inside frame
+          this._drawImageCover(ctx, ph.img, -pos.w / 2, -frameH / 2 + borderSide, pos.w, pos.h, 0);
+
+          // Masking tape decoration on some photos
+          if (i % 2 === 0) {
+            ctx.save();
+            ctx.rotate(0.08);
+            ctx.fillStyle = 'rgba(200,190,170,0.35)';
+            ctx.fillRect(-28, -frameH / 2 - 10, 56, 22);
+            ctx.restore();
+          }
+
+          ctx.restore();
+        });
+
+        // Subtle bottom dots
+        ctx.fillStyle = p.accent + '25';
+        ctx.textAlign = 'center';
+        ctx.font = this._font(14, '400', tmpl);
+        ctx.fillText('· · ·', W / 2, H - 28);
+        ctx.textAlign = 'left';
+      },
+
+      // ── Filmstrip Style (dark/cinematic) ──
+      _photoStyleFilmstrip(ctx, tmpl, photos) {
+        const W = this.W, H = this.H, p = tmpl.palette;
+        const n = Math.min(photos.length, 6);
+
+        // Dark film background
+        ctx.fillStyle = '#0a0a0a';
+        ctx.fillRect(0, 0, W, H);
+
+        // Film sprocket holes
+        const holeR = 8, holeGap = 55;
+        ctx.fillStyle = '#1a1a1a';
+        for (let x = 35; x < W; x += holeGap) {
+          ctx.beginPath(); ctx.arc(x, 28, holeR, 0, Math.PI * 2); ctx.fill();
+          ctx.beginPath(); ctx.arc(x, H - 28, holeR, 0, Math.PI * 2); ctx.fill();
+        }
+
+        // Film border lines
+        ctx.strokeStyle = '#282828';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(0, 48); ctx.lineTo(W, 48); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, H - 48); ctx.lineTo(W, H - 48); ctx.stroke();
+
+        // Photos in cinematic layout
+        const margin = 55;
+        const innerW = W - margin * 2;
+        const innerH = H - 110;
+
+        if (n === 1) {
+          this._drawImageCover(ctx, photos[0].img, margin, 60, innerW, innerH, 4);
+        } else if (n === 2) {
+          const gap = 14;
+          const frameH = (innerH - gap) / 2;
+          photos.forEach((ph, i) => {
+            this._drawImageCover(ctx, ph.img, margin, 60 + i * (frameH + gap), innerW, frameH, 4);
+          });
+        } else {
+          // Feature frame + strip below
+          const featureH = Math.floor(innerH * 0.58);
+          this._drawImageCover(ctx, photos[0].img, margin, 60, innerW, featureH, 4);
+          const stripY = 60 + featureH + 14;
+          const stripH = innerH - featureH - 14;
+          const remaining = photos.slice(1, Math.min(n, 5));
+          const gap = 8;
+          const frameW = (innerW - (remaining.length - 1) * gap) / remaining.length;
+          remaining.forEach((ph, i) => {
+            this._drawImageCover(ctx, ph.img, margin + i * (frameW + gap), stripY, frameW, stripH, 4);
+          });
+        }
+
+        // Film grain noise
+        ctx.fillStyle = 'rgba(255,255,255,0.015)';
+        for (let i = 0; i < 600; i++) {
+          ctx.fillRect(Math.random() * W, Math.random() * H, 1, 1);
+        }
+
+        // Frame number
+        ctx.font = this._font(12, '400', tmpl);
+        ctx.fillStyle = '#444';
+        ctx.textAlign = 'right';
+        ctx.fillText(`▶ FRAME ${n}`, W - margin, H - 58);
+        ctx.textAlign = 'left';
+      },
+
+      // ── Story Cards Style ──
+      _photoStyleStoryCards(ctx, tmpl, photos) {
+        const W = this.W, H = this.H, p = tmpl.palette;
+        this._drawBg(ctx, tmpl);
+        const n = Math.min(photos.length, 6);
+        const margin = 48;
+        const gap = 18;
+        const innerW = W - margin * 2;
+
+        // Decorative header
+        ctx.fillStyle = p.accent + '40';
+        ctx.beginPath(); ctx.arc(W / 2 - 80, 56, 4, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(W / 2 + 80, 56, 4, 0, Math.PI * 2); ctx.fill();
+        ctx.font = this._font(22, '700', tmpl);
+        ctx.fillStyle = p.text;
+        ctx.textAlign = 'center';
+        ctx.fillText('✦ 精选图集 ✦', W / 2, 64);
+        ctx.fillStyle = p.accent + '30';
+        ctx.fillRect(W / 2 - 45, 77, 90, 1.5);
+        ctx.textAlign = 'left';
+
+        const gridTop = 108;
+        const gridH = H - gridTop - 55;
+
+        if (n === 1) {
+          const cardW = innerW * 0.8;
+          const cardH = gridH * 0.85;
+          const cx = (W - cardW) / 2;
+          const cy = gridTop + (gridH - cardH) / 2;
+          ctx.strokeStyle = p.accent + '22';
+          ctx.lineWidth = 2;
+          this._roundRect(ctx, cx - 8, cy - 8, cardW + 16, cardH + 16, 22);
+          ctx.stroke();
+          ctx.shadowColor = 'rgba(0,0,0,0.1)';
+          ctx.shadowBlur = 20;
+          ctx.shadowOffsetY = 6;
+          this._roundRect(ctx, cx, cy, cardW, cardH, 18);
+          ctx.fillStyle = '#fff';
+          ctx.fill();
+          ctx.shadowBlur = 0;
+          ctx.shadowOffsetY = 0;
+          this._drawImageCover(ctx, photos[0].img, cx + 6, cy + 6, cardW - 12, cardH - 12, 14);
+        } else if (n === 2) {
+          const cardW = (innerW - gap) / 2;
+          const cardH = gridH * 0.85;
+          const cy = gridTop + (gridH - cardH) / 2;
+          [0, 1].forEach(i => {
+            const cx = margin + i * (cardW + gap);
+            ctx.shadowColor = 'rgba(0,0,0,0.08)';
+            ctx.shadowBlur = 16;
+            ctx.shadowOffsetY = 5;
+            this._roundRect(ctx, cx, cy, cardW, cardH, 16);
+            ctx.fillStyle = '#fff';
+            ctx.fill();
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetY = 0;
+            this._drawImageCover(ctx, photos[i].img, cx + 5, cy + 5, cardW - 10, cardH - 10, 12);
+          });
+          ctx.fillStyle = p.accent + '18';
+          ctx.fillRect(W / 2 - 1, cy + 24, 2, cardH - 48);
+        } else if (n === 3) {
+          const bigH = Math.floor(gridH * 0.56);
+          const smallH = gridH - bigH - gap;
+          const smallW = (innerW - gap) / 2;
+          ctx.shadowColor = 'rgba(0,0,0,0.08)';
+          ctx.shadowBlur = 16;
+          ctx.shadowOffsetY = 5;
+          this._roundRect(ctx, margin, gridTop, innerW, bigH, 16);
+          ctx.fillStyle = '#fff';
+          ctx.fill();
+          ctx.shadowBlur = 0;
+          ctx.shadowOffsetY = 0;
+          this._drawImageCover(ctx, photos[0].img, margin + 5, gridTop + 5, innerW - 10, bigH - 10, 12);
+          [0, 1].forEach(i => {
+            const cx = margin + i * (smallW + gap);
+            const cy = gridTop + bigH + gap;
+            ctx.shadowColor = 'rgba(0,0,0,0.08)';
+            ctx.shadowBlur = 12;
+            ctx.shadowOffsetY = 4;
+            this._roundRect(ctx, cx, cy, smallW, smallH, 14);
+            ctx.fillStyle = '#fff';
+            ctx.fill();
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetY = 0;
+            this._drawImageCover(ctx, photos[i + 1].img, cx + 4, cy + 4, smallW - 8, smallH - 8, 10);
+          });
+        } else {
+          const cols = n <= 4 ? 2 : 3;
+          const rows = Math.ceil(n / cols);
+          const cellW = (innerW - (cols - 1) * gap) / cols;
+          const cellH = (gridH - (rows - 1) * gap) / rows;
+          photos.slice(0, n).forEach((ph, i) => {
+            const col = i % cols, row = Math.floor(i / cols);
+            const cx = margin + col * (cellW + gap);
+            const cy = gridTop + row * (cellH + gap);
+            if (i % 3 === 0) {
+              ctx.strokeStyle = p.accent + '18';
+              ctx.lineWidth = 2;
+              this._roundRect(ctx, cx - 4, cy - 4, cellW + 8, cellH + 8, 18);
+              ctx.stroke();
+            }
+            ctx.shadowColor = 'rgba(0,0,0,0.08)';
+            ctx.shadowBlur = 14;
+            ctx.shadowOffsetY = 5;
+            this._roundRect(ctx, cx, cy, cellW, cellH, 14);
+            ctx.fillStyle = '#fff';
+            ctx.fill();
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetY = 0;
+            this._drawImageCover(ctx, ph.img, cx + 5, cy + 5, cellW - 10, cellH - 10, 10);
+          });
+        }
+
+        // Bottom decoration
+        ctx.fillStyle = p.accent + '25';
+        ctx.fillRect(W / 2 - 25, H - 38, 50, 2);
+        ctx.beginPath();
+        ctx.arc(W / 2, H - 37, 3, 0, Math.PI * 2);
+        ctx.fillStyle = p.accent + '35';
+        ctx.fill();
       },
 
       // ══════════════ 段落智能解析器 ══════════════
@@ -5458,11 +5744,125 @@
         }
       },
 
+      // ══════════════ 照片封面渲染（图文融合版）══════════════
+      _drawPhotoCover(ctx, post, tmpl) {
+        const W = this.W, H = this.H, p = tmpl.palette;
+        const photos = this._userPhotos.filter(ph => ph.img);
+        if (!photos.length) return;
+        const img = photos[0].img;
+
+        // 1. Full-bleed photo background
+        this._drawImageCover(ctx, img, 0, 0, W, H, 0);
+
+        // 2. Top scrim gradient (category tag area)
+        const topG = ctx.createLinearGradient(0, 0, 0, H * 0.22);
+        topG.addColorStop(0, 'rgba(0,0,0,0.32)');
+        topG.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = topG;
+        ctx.fillRect(0, 0, W, H * 0.22);
+
+        // 3. Bottom scrim gradient (title + text area)
+        const botG = ctx.createLinearGradient(0, H * 0.38, 0, H);
+        botG.addColorStop(0, 'rgba(0,0,0,0)');
+        botG.addColorStop(0.3, 'rgba(0,0,0,0.12)');
+        botG.addColorStop(0.65, 'rgba(0,0,0,0.42)');
+        botG.addColorStop(1, 'rgba(0,0,0,0.72)');
+        ctx.fillStyle = botG;
+        ctx.fillRect(0, H * 0.38, W, H * 0.62);
+
+        // 4. Accent color strip at top
+        ctx.fillStyle = p.accent;
+        ctx.fillRect(0, 0, W, 4);
+
+        // 5. Category tag (top-left, frosted-glass pill)
+        const catEmoji = this._catEmoji(post.category);
+        if (post.category) {
+          const catText = `${catEmoji} ${post.category}`;
+          ctx.font = this._font(18, '500', tmpl);
+          const catTW = ctx.measureText(catText).width;
+          this._roundRect(ctx, 56, 46, catTW + 28, 34, 17);
+          ctx.fillStyle = 'rgba(255,255,255,0.18)';
+          ctx.fill();
+          ctx.strokeStyle = 'rgba(255,255,255,0.28)';
+          ctx.lineWidth = 1;
+          this._roundRect(ctx, 56, 46, catTW + 28, 34, 17);
+          ctx.stroke();
+          ctx.fillStyle = '#ffffff';
+          ctx.textAlign = 'left';
+          ctx.fillText(catText, 70, 69);
+        }
+
+        // 6. Template header label badge (top-right)
+        if (tmpl.headerLabel) {
+          ctx.font = this._font(13, '600', tmpl);
+          const hlW = ctx.measureText(tmpl.headerLabel).width;
+          this._roundRect(ctx, W - hlW - 80, 48, hlW + 24, 28, 14);
+          ctx.fillStyle = 'rgba(255,255,255,0.14)';
+          ctx.fill();
+          ctx.fillStyle = 'rgba(255,255,255,0.65)';
+          ctx.textAlign = 'center';
+          ctx.fillText(tmpl.headerLabel, W - hlW / 2 - 68, 67);
+          ctx.textAlign = 'left';
+        }
+
+        // 7. Title (bottom area, white with text shadow)
+        const tFontSz = tmpl.titleSize || 48;
+        const tLineH = tFontSz + 14;
+        ctx.font = this._font(tFontSz, tmpl.boldTitle ? '800' : '700', tmpl);
+        ctx.textAlign = 'left';
+        const maxTitleW = W - 140;
+        const titleLines = this.wrapText(ctx, post.title || '无标题', maxTitleW);
+        const titleY = H - 200 - Math.min(titleLines.length, 3) * tLineH;
+
+        ctx.shadowColor = 'rgba(0,0,0,0.5)';
+        ctx.shadowBlur = 14;
+        ctx.fillStyle = '#ffffff';
+        titleLines.slice(0, 3).forEach((ln, i) => {
+          ctx.fillText(ln, 70, titleY + i * tLineH);
+        });
+        ctx.shadowBlur = 0;
+
+        // 8. Accent bar below title
+        const afterTitleY = titleY + Math.min(titleLines.length, 3) * tLineH + 12;
+        ctx.fillStyle = p.accent;
+        ctx.fillRect(70, afterTitleY, 48, 3);
+        ctx.fillStyle = 'rgba(255,255,255,0.30)';
+        ctx.fillRect(126, afterTitleY, 24, 3);
+
+        // 9. Preview text
+        if (post.cover_text || post.content) {
+          const previewText = post.cover_text || (post.content || '').slice(0, 120);
+          ctx.font = this._font(24, '400', tmpl);
+          ctx.fillStyle = 'rgba(255,255,255,0.70)';
+          const previewLines = this.wrapText(ctx, previewText, W - 160);
+          previewLines.slice(0, 2).forEach((ln, i) => {
+            ctx.fillText(ln, 70, afterTitleY + 30 + i * 36);
+          });
+        }
+
+        // 10. Bottom-right photo count indicator
+        if (photos.length > 1) {
+          ctx.font = this._font(13, '500', tmpl);
+          ctx.fillStyle = 'rgba(255,255,255,0.45)';
+          ctx.textAlign = 'right';
+          ctx.fillText(`📷 1/${photos.length}`, W - 60, H - 36);
+          ctx.textAlign = 'left';
+        }
+      },
+
       // ══════════════ 封面渲染（增强版 v2）══════════════
       _drawCover(ctx, post, tmpl) {
         const W = this.W, H = this.H, p = tmpl.palette;
-        this._drawBg(ctx, tmpl);
         const tid = tmpl.id;
+
+        // Photo cover mode: use first user photo as full-bleed background
+        const _coverPhotos = this._userPhotos.filter(ph => ph.img);
+        if (_coverPhotos.length > 0 && !['breaking_news'].includes(tid)) {
+          this._drawPhotoCover(ctx, post, tmpl);
+          return;
+        }
+
+        this._drawBg(ctx, tmpl);
         const cx = W / 2;
         const isLeft = tmpl.titleAlign === 'left';
 
