@@ -1907,6 +1907,7 @@
                 <h3>📝 生成结果</h3>
                 <div class="btn-group">
                   <button class="btn btn-sm btn-outline" onclick="viewAnalysisReport()" id="btn-analysis-report" style="display:none;">📊 查看分析报告</button>
+                  <button class="btn btn-sm" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;" onclick="goToAICardFromGenerator()">🃏 生成AI卡片</button>
                   <button class="btn btn-sm btn-outline" onclick="batchScheduleGenerated()">📅 批量排期</button>
                   <button class="btn btn-sm btn-outline" onclick="openImageUploadForAssign()">🖼️ 上传图片分配</button>
                 </div>
@@ -2099,6 +2100,21 @@
             <button class="btn btn-primary" onclick="redeemCodeFromPurchase()">兑换</button>
           </div>
           <div id="purchase-redeem-result" style="margin-top:8px; font-size:13px;"></div>
+        </div>
+
+        <!-- 客服/帮助 -->
+        <div class="card" style="margin-bottom:24px; background:linear-gradient(135deg,#e8f5e9,#f1f8e9); border:1px solid #c8e6c9;">
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <div style="font-size:32px;">💁</div>
+            <div style="flex:1; min-width:180px;">
+              <div style="font-weight:700; font-size:14px; color:#2e7d32;">需要帮助？联系客服</div>
+              <div style="font-size:12px; color:#558b2f; margin-top:4px;">充值问题、功能咨询、合作洽谈</div>
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button class="btn btn-sm" style="background:#07c160;color:#fff;" onclick="window.open('https://work.weixin.qq.com/kfid/kfcb2c0455','_blank')">💬 微信客服</button>
+              <button class="btn btn-sm btn-outline" onclick="copyCustomerServiceInfo()">📋 复制联系方式</button>
+            </div>
+          </div>
         </div>
 
         <!-- 订单历史 -->
@@ -6562,6 +6578,7 @@ ${hasPhotos ? '注意：用户有配图，优先选择支持图片的模板（�
             <button class="btn btn-sm btn-primary" onclick="downloadAllAICards()">📥 下载全部</button>
             <button class="btn btn-sm btn-outline" onclick="downloadSingleAICard(0)">📥 仅封面</button>
             ${_aiCardPhotos.length===0 && tmpl.hasPhotos ? '<button class="btn btn-sm btn-outline" onclick="aiCardGenPhotos()">🤖 AI生成配图</button>' : ''}
+            <button class="btn btn-sm btn-outline" onclick="saveAICardToTemplateLib()" title="将当前模板保存到模板库">📌 保存到模板库</button>
           </div>
         </div>
 
@@ -6645,6 +6662,66 @@ ${hasPhotos ? '注意：用户有配图，优先选择支持图片的模板（�
       a.href = card.dataUrl;
       a.download = `card_${card.type}.png`;
       a.click();
+    }
+
+    // ============ 保存 AI 卡片模板到模板库 ============
+    function saveAICardToTemplateLib() {
+      const result = window._aiCardCurrentResult;
+      if (!result || !result.template) { toast('没有可保存的模板', 'error'); return; }
+      const tmpl = { ...result.template };
+      // 确保有必要字段
+      tmpl.id = tmpl.id || 'custom_' + Date.now();
+      tmpl._source = 'ai-card-save';
+      if (typeof TemplateLibrary !== 'undefined' && TemplateLibrary.saveCustom) {
+        TemplateLibrary.saveCustom(tmpl);
+        toast(`模板「${tmpl.name}」已保存到模板库`, 'success');
+      } else {
+        toast('模板库不可用', 'error');
+      }
+    }
+
+    // ============ 内容生成 → AI卡片 一键联动 ============
+    function goToAICardFromGenerator() {
+      // 取第一条生成的笔记
+      const posts = window._lastGeneratedPosts;
+      if (!posts || !posts.length) { toast('请先生成笔记', 'error'); return; }
+      const p = posts[0];
+      switchPage('ai-card');
+      setTimeout(() => {
+        const titleEl = document.getElementById('aicard-title');
+        const contentEl = document.getElementById('aicard-content');
+        const catEl = document.getElementById('aicard-category');
+        if (titleEl) titleEl.value = p.title || '';
+        if (contentEl) contentEl.value = p.content || '';
+        if (catEl) {
+          const opt = [...catEl.options].find(o => o.value === (p.category || ''));
+          catEl.value = opt ? p.category : '';
+        }
+        toast('已自动填入第一条笔记内容，点击生成即可', 'success');
+      }, 100);
+    }
+
+    // 单条笔记 → AI卡片（生成列表中每条的 🃏 按钮）
+    function goToAICardWithPost(post) {
+      switchPage('ai-card');
+      setTimeout(() => {
+        const titleEl = document.getElementById('aicard-title');
+        const contentEl = document.getElementById('aicard-content');
+        const catEl = document.getElementById('aicard-category');
+        if (titleEl) titleEl.value = post.title || '';
+        if (contentEl) contentEl.value = post.content || '';
+        if (catEl) {
+          const opt = [...catEl.options].find(o => o.value === (post.category || ''));
+          catEl.value = opt ? post.category : '';
+        }
+        toast('已填入笔记内容，点击生成即可', 'success');
+      }, 100);
+    }
+
+    // 复制客服联系方式
+    function copyCustomerServiceInfo() {
+      const text = '小红书AI助手客服\n微信客服：扫码添加\n工作时间：周一至周五 9:00-21:00\n也可在充值页面点击"微信客服"直接联系';
+      navigator.clipboard.writeText(text).then(() => toast('联系方式已复制', 'success'));
     }
 
     async function aiCardGenPhotos() {
@@ -10524,6 +10601,7 @@ Style: ${stylePrompt}
         }
 
         generatedPostIds = posts.map(p => p.id).filter(Boolean);
+        window._lastGeneratedPosts = posts;
 
         // 先显示文案结果
         renderGeneratedList(posts);
@@ -10652,6 +10730,7 @@ Style: ${stylePrompt}
           </div>
           <div class="post-actions">
             <button class="btn btn-sm btn-outline" onclick="event.stopPropagation(); quickCardForPost(${i})" title="生成图文卡片">🎴</button>
+            <button class="btn btn-sm" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;font-size:11px;padding:2px 8px;" onclick="event.stopPropagation(); goToAICardWithPost(${_safePostJson(p)})" title="AI智能卡片">🃏</button>
             ${p.id ? `
               <button class="btn btn-sm btn-outline" onclick="event.stopPropagation(); openEditPost(${p.id})">✏️</button>
               <button class="btn btn-sm btn-outline" onclick="event.stopPropagation(); viewPost(${p.id})">👁️</button>
