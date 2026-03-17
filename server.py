@@ -1121,7 +1121,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         return user
 
     # ---- AI 配额系统 ----
-    FREE_DAILY_AI_LIMIT = 20  # 免费用户每天20次免费调用（支持完整的内容+配图生成流程）
+    FREE_DAILY_AI_LIMIT = 10  # 免费用户每天10次免费调用（够2轮完整 内容+配图 流程）
 
     # 各功能积分消耗映射（基于真实 Gemini API 成本 + 合理毛利）
     FEATURE_COSTS = {
@@ -1129,15 +1129,15 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         '内容搜索分析':  2,   # Google grounding $0.035 + tokens ~¥0.33
         '内容分析':      1,   # 无 grounding，纯文本分析
         '内容生成':      2,   # 大量输出 tokens + thinking
-        # 图片生成（Imagen模型）
-        '图片生成':      1,   # Imagen 单独计价（降低门槛，鼓励使用）
+        # 图片生成（图片模型，成本较高）
+        '图片生成':      2,   # 图片模型成本 ~¥0.15-0.30/张
         '图片测试':      0,   # 测试不扣费
-        'AI修图':        1,   # 图片模型编辑
+        'AI修图':        2,   # 图片模型编辑，成本同上
         # 品牌定位（文本生成，中等）
         '品牌定位':      2,
         # 轻量功能（纯文本，便宜）
         'AI评分优化':    1,
-        '热门话题搜索':  1,   # grounding 但输出少
+        '热门话题搜索':  2,   # grounding 搜索，成本 ~¥0.25/次
         '标签生成':      1,
         '生成评论话术':  1,
         '竞品分析':      2,   # grounding + 较多输出

@@ -1670,7 +1670,7 @@
             <span class="ucl-gem">💎</span>
             <span class="ucl-val" id="sidebar-credits-val">0</span>
             <span class="ucl-sep">·</span>
-            <span>免费<span id="sidebar-credits-free">20/20</span></span>
+            <span>免费<span id="sidebar-credits-free">10/10</span></span>
             <button class="ucl-recharge" onclick="event.stopPropagation(); switchPage('purchase')">充值</button>
           </div>
           <div class="user-logout" onclick="doLogout()">退出登录</div>
@@ -1735,7 +1735,7 @@
       </div>
       <div class="drawer-credits-line" id="drawer-credits" onclick="openModal('modal-redeem'); toggleMobileDrawer();" style="display:none;">
         💎 积分 <span class="dcl-val" id="drawer-credits-val">0</span>
-        &nbsp;·&nbsp; 免费 <span id="drawer-free-remain">20/20</span>
+        &nbsp;·&nbsp; 免费 <span id="drawer-free-remain">10/10</span>
         <button class="dcl-btn" onclick="event.stopPropagation(); switchPage('purchase'); toggleMobileDrawer();">充值</button>
       </div>
       <div style="padding:6px 16px;font-size:10px;color:rgba(255,255,255,0.3);text-align:center;" id="drawer-version"></div>
@@ -1889,7 +1889,7 @@
               <button class="btn btn-outline" onclick="openABTestModal()" style="margin-left:8px;">
                 🧪 A/B 测试 <span style="font-size:11px;opacity:0.7;">(2积分)</span>
               </button>
-              <div style="margin-top:6px; font-size:11px; color:var(--text-light);">💡 内容生成 = 搜索分析(2) + 内容创作(2)，含配图另加1积分/张 · 每日前20次免费</div>
+              <div style="margin-top:6px; font-size:11px; color:var(--text-light);">💡 内容生成 = 搜索分析(2) + 内容创作(2)，含配图另加2积分/张 · 每日前10次免费</div>
               <div class="form-group" style="margin-top:12px;">
                 <label>自定义 Prompt（选填）</label>
                 <textarea id="gen-custom-prompt" class="form-control" rows="2" placeholder="输入自定义创作指令，AI 会优先参考"></textarea>
@@ -2085,7 +2085,7 @@
         <div class="card" style="text-align:center; margin-bottom:24px; background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); color:#fff;">
           <div style="font-size:14px; opacity:.8;">当前积分余额</div>
           <div style="font-size:48px; font-weight:700;" id="purchase-credits-display">0</div>
-          <div style="font-size:13px; opacity:.7;">今日免费 <span id="purchase-free-info">20/20</span> · 积分永久有效</div>
+          <div style="font-size:13px; opacity:.7;">今日免费 <span id="purchase-free-info">10/10</span> · 积分永久有效</div>
         </div>
 
         <!-- 套餐选择 -->
@@ -2313,7 +2313,7 @@
               </div>
 
               <div class="btn-group">
-                <button class="btn btn-primary" id="branding-generate-btn" onclick="generateBrandingPackage()">✨ 生成账号包装 <span style="font-size:11px;opacity:0.8;">(~4积分)</span></button>
+                <button class="btn btn-primary" id="branding-generate-btn" onclick="generateBrandingPackage()">✨ 生成账号包装 <span style="font-size:11px;opacity:0.8;">(~6积分)</span></button>
                 <button class="btn btn-outline" onclick="loadBrandingPage()">↻ 读取上次结果</button>
               </div>
               <div id="branding-progress" style="display:none; margin-top:12px;"></div>
@@ -2546,7 +2546,7 @@
         </div>
         <!-- Tab: 热门话题 -->
         <div id="trending-tab-trending">
-          <div style="text-align:right;margin-bottom:12px;"><button class="btn btn-primary" onclick="initTrendingPage()">🔄 刷新话题 <span style="font-size:11px;opacity:0.8;">(1积分)</span></button></div>
+          <div style="text-align:right;margin-bottom:12px;"><button class="btn btn-primary" onclick="initTrendingPage()">🔄 刷新话题 <span style="font-size:11px;opacity:0.8;">(2积分)</span></button></div>
           <div id="trending-container"><div class="empty-state"><p>点击「刷新话题」获取最新热门话题</p></div></div>
         </div>
         <!-- Tab: 热词分析 -->
@@ -2906,7 +2906,7 @@
                   <input type="text" id="ai-edit-prompt" class="form-control" placeholder="输入自定义修图指令，如：去除水印、换背景为蓝天..." style="flex:1;font-size:13px;">
                   <button class="btn btn-primary" onclick="aiEditImage(document.getElementById('ai-edit-prompt').value)" style="white-space:nowrap;">🪄 修图</button>
                 </div>
-                <div style="font-size:11px;color:var(--text-light);margin-top:4px;">💡 1积分/次 · 使用 Gemini 图片模型进行 AI 修图</div>
+                <div style="font-size:11px;color:var(--text-light);margin-top:4px;">💡 2积分/次 · 使用 Gemini 图片模型进行 AI 修图</div>
                 <div id="ai-edit-result" style="margin-top:8px;"></div>
               </div>
               <!-- AI 配文 -->
@@ -3460,12 +3460,12 @@
         <div style="text-align:center; margin-bottom:20px;">
           <div style="font-size:14px; color:var(--text-light); margin-bottom:4px;">当前积分</div>
           <div style="font-size:36px; font-weight:700; color:var(--primary);" id="redeem-credits-display">0</div>
-          <div style="font-size:12px; color:var(--text-light); margin-top:4px;" id="redeem-usage-info">今日已用 0/20 次免费额度</div>
+          <div style="font-size:12px; color:var(--text-light); margin-top:4px;" id="redeem-usage-info">今日已用 0/10 次免费额度</div>
         </div>
         <div style="background:#f9f9f9; border-radius:10px; padding:14px; margin-bottom:16px;">
           <h4 style="font-size:13px; margin-bottom:8px;">📋 计费规则</h4>
           <ul style="font-size:12px; color:var(--text-light); padding-left:16px; line-height:1.8;">
-            <li>每天免费 <strong>20次</strong> AI 调用（含内容生成、配图、评分等所有AI功能）</li>
+            <li>每天免费 <strong>10次</strong> AI 调用（含内容生成、配图、评分等所有AI功能）</li>
             <li>免费次数用完后，每次 AI 调用消耗 <strong>1积分</strong></li>
             <li>积分永久有效，不会过期</li>
           </ul>
@@ -3496,16 +3496,16 @@
       <div class="quota-modal-body">
         <div class="qm-icon">💎</div>
         <div class="qm-title">今日免费次数已用完</div>
-        <div class="qm-desc">您今天的 20 次免费 AI 调用已用完。<br>充值积分即可继续使用所有 AI 功能。</div>
+        <div class="qm-desc">您今天的 10 次免费 AI 调用已用完。<br>充值积分即可继续使用所有 AI 功能。</div>
         <div style="margin:12px 0; padding:10px; background:var(--bg); border-radius:8px; font-size:12px;">
           <div style="font-weight:600; margin-bottom:6px; font-size:13px;">💰 各功能积分消耗</div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:3px 12px;">
             <span>✨ 内容生成(5条)</span><span style="text-align:right; color:var(--info);">~4分</span>
-            <span>🖼️ AI图片生成</span><span style="text-align:right; color:var(--info);">1分</span>
-            <span>🪄 AI修图</span><span style="text-align:right; color:var(--info);">1分</span>
+            <span>🖼️ AI图片生成</span><span style="text-align:right; color:var(--info);">2分</span>
+            <span>🪄 AI修图</span><span style="text-align:right; color:var(--info);">2分</span>
             <span>🎯 品牌定位生成</span><span style="text-align:right; color:var(--info);">~4分</span>
             <span>🏷️ 标签/评分/改写</span><span style="text-align:right; color:var(--info);">1分</span>
-            <span>🔥 热门话题/评论</span><span style="text-align:right; color:var(--info);">1分</span>
+            <span>🔥 热门话题/评论</span><span style="text-align:right; color:var(--info);">2分</span>
           </div>
         </div>
         <div class="qm-input-row">
@@ -13745,7 +13745,7 @@ Style: ${stylePrompt}
         const data = await res.json();
         document.getElementById('purchase-credits-display').textContent = data.credits || 0;
         document.getElementById('purchase-free-info').textContent =
-          `${data.freeRemaining || 0}/${data.freeLimit || 20}`;
+          `${data.freeRemaining || 0}/${data.freeLimit || 10}`;
       } catch {}
       // 加载支付配置
       try {
@@ -14165,7 +14165,7 @@ Style: ${stylePrompt}
     }
 
     // ============ AI 积分系统 ============
-    let userCreditsInfo = { credits: 0, todayUsed: 0, freeLimit: 20, freeRemaining: 20, tier: 'free' };
+    let userCreditsInfo = { credits: 0, todayUsed: 0, freeLimit: 10, freeRemaining: 10, tier: 'free' };
 
     async function loadCreditsInfo() {
       try {
