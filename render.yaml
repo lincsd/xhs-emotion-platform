@@ -34,3 +34,10 @@ services:
         value: cn-hangzhou
       - key: ALIYUN_SMS_ENDPOINT
         value: dysmsapi.aliyuncs.com
+  # 定时 ping 防止冷启动
+  - type: cron
+    name: keep-alive-ping
+    env: python
+    schedule: "*/14 * * * *"
+    buildCommand: echo ok
+    startCommand: python -c "import urllib.request; urllib.request.urlopen('https://xhs-gemini-proxy.onrender.com/healthz').read(); print('ping ok')"

@@ -21,6 +21,8 @@ import urllib.request
 import ssl
 import re
 import threading
+import time
+import gzip
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -782,18 +784,21 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         pass
 
     def end_headers(self):
-        # 防止浏览器缓存 HTML，确保用户总是加载最新版
         path = getattr(self, 'path', '') or ''
         if path == '/' or path.endswith('.html'):
+            # HTML 不缓存，确保用户总是加载最新版
             self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
             self.send_header('Pragma', 'no-cache')
             self.send_header('Expires', '0')
+        elif any(path.endswith(ext) for ext in ('.css', '.js', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.woff', '.woff2')):
+            # 静态资源缓存 7 天
+            self.send_header('Cache-Control', 'public, max-age=604800')
         super().end_headers()
 
     def _set_json_headers(self, code=200):
         self.send_response(code)
         self.send_header('Content-Type', 'application/json; charset=utf-8')
-        # CORS: 允许前端请求（生产环境应限制为具体域名）
+        # CORS
         origin = self.headers.get('Origin', '*')
         self.send_header('Access-Control-Allow-Origin', origin)
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
@@ -801,7 +806,6 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         # 安全响应头
         self.send_header('X-Content-Type-Options', 'nosniff')
         self.send_header('X-Frame-Options', 'DENY')
-        self.end_headers()
 
     # ---- 用户认证工具方法 ----
     @staticmethod
@@ -1609,8 +1613,20 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         return self._send_json({'orders': [dict(r) for r in rows]})
 
     def _send_json(self, data, code=200):
-        self._set_json_headers(code)
-        self.wfile.write(json.dumps(data, ensure_ascii=False).encode('utf-8'))
+        raw = json.dumps(data, ensure_ascii=False).encode('utf-8')
+        # Gzip 压缩（仅当客户端支持且数据 > 512 字节时）
+        accept_enc = self.headers.get('Accept-Encoding', '') if hasattr(self, 'headers') else ''
+        if len(raw) > 512 and 'gzip' in accept_enc:
+            compressed = gzip.compress(raw)
+            self._set_json_headers(code)
+            self.send_header('Content-Encoding', 'gzip')
+            self.send_header('Content-Length', str(len(compressed)))
+            self.end_headers()
+            self.wfile.write(compressed)
+        else:
+            self._set_json_headers(code)
+            self.end_headers()
+            self.wfile.write(raw)
 
     MAX_BODY_SIZE = 10 * 1024 * 1024  # 10MB 请求体上限
 
@@ -1907,7 +1923,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         if not username or not password:
             return self._send_json({'error': '请输入用户名/手机号和密码'}, 400)
         # 登录频率限制
-        client_ip = self._get_client_ip()
+        client_ip = self._client_ip(self.headers)
         rate_key = f'{client_ip}:{username}'
         now = time.time()
         fail_info = _login_fail_tracker.get(rate_key)

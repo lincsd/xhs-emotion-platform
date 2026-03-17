@@ -10413,7 +10413,9 @@ Style: ${stylePrompt}
             console.warn('AI generation failed, fallback to local templates:', aiErr);
             usedAI = false;
             btn.textContent = '⏳ 切换本地模板生成...';
-            updateGenProgress(progressEl, '⚠️ AI 网络波动，已自动切换本地模板继续生成...', 40);
+            const errDetail = aiErr?.message || aiErr?.data?.error?.message || '网络超时';
+            updateGenProgress(progressEl, `⚠️ AI 服务暂不可用（${errDetail}），已自动切换本地模板`, 40);
+            toast(`AI 生成失败（${errDetail}），已使用本地模板替代`, 'warning');
             posts = ContentEngine.generateBatch(count, category || null);
           }
 
