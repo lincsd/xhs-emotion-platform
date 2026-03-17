@@ -6569,6 +6569,23 @@ ${postList}
       if (!posts || !posts[idx]) return;
       const post = posts[idx];
 
+      // 自动加载笔记已有的配图到卡片引擎（封面图 + 内容配图）
+      const postImages = [
+        ...(post.content_images || []),
+        ...(post.cover_image ? [post.cover_image] : [])
+      ].filter(Boolean);
+      if (postImages.length > 0 && !CardEngine._userPhotos.some(ph => ph.img)) {
+        try {
+          await CardEngine.setUserPhotos(postImages);
+          const preview = document.getElementById('card-photo-preview');
+          if (preview) {
+            preview.innerHTML = postImages.map(url => `<div style="position:relative;display:inline-block;"><img src="${url}" style="width:60px;height:60px;object-fit:cover;border-radius:6px;border:1px solid var(--border);"><span style="position:absolute;bottom:2px;right:2px;font-size:10px;background:rgba(0,0,0,0.6);color:#fff;padding:1px 3px;border-radius:3px;">AI</span></div>`).join('');
+          }
+          const clearBtn = document.getElementById('btn-clear-photos');
+          if (clearBtn) clearBtn.style.display = 'inline-block';
+        } catch(e) { console.warn('自动加载配图失败:', e); }
+      }
+
       let tmplId = null;
       let matchReason = '';
       if (CardEngine._aiMatchCache[idx]) {
@@ -11204,6 +11221,30 @@ Style: ${stylePrompt}
           // 重新渲染列表
           renderGeneratedList(posts);
           if (posts.length > 0) previewPost(posts[0]);
+
+          // 自动将生成的配图加载到卡片引擎，刷新卡片预览
+          if (contentImgCount > 0 || coverCount > 0) {
+            try {
+              const selectedIdx = parseInt(document.getElementById('card-post-select')?.value || '0');
+              const selPost = posts[selectedIdx];
+              const allImgs = [
+                ...(selPost?.content_images || []),
+                ...(selPost?.cover_image ? [selPost.cover_image] : [])
+              ].filter(Boolean);
+              if (allImgs.length > 0) {
+                await CardEngine.setUserPhotos(allImgs);
+                const preview = document.getElementById('card-photo-preview');
+                if (preview) {
+                  preview.innerHTML = allImgs.map(url => `<div style="position:relative;display:inline-block;"><img src="${url}" style="width:60px;height:60px;object-fit:cover;border-radius:6px;border:1px solid var(--border);"><span style="position:absolute;bottom:2px;right:2px;font-size:10px;background:rgba(0,0,0,0.6);color:#fff;padding:1px 3px;border-radius:3px;">AI</span></div>`).join('');
+                }
+                const clearBtn = document.getElementById('btn-clear-photos');
+                if (clearBtn) clearBtn.style.display = 'inline-block';
+                if (CardEngine._currentTmplId) switchCardTemplate(CardEngine._currentTmplId);
+                updateGenProgress(progressEl, '🎉 配图已自动加载到卡片引擎，卡片已刷新！', 98);
+              }
+            } catch(e) { console.warn('自动加载配图到卡片失败:', e); }
+          }
+
           if (coverCount + contentImgCount > 0) {
             const quotaNote = _imageQuotaExhausted ? '（部分配图因额度不足被跳过）' : '';
             toast(`🎨 ${coverCount} 张封面图 + ${contentImgCount} 张配图生成成功！${quotaNote}`, 'success');
