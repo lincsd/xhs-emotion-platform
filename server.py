@@ -59,7 +59,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260316a'  # 更新此版本号以追踪部署
+BUILD_VERSION = '20260317a'  # 更新此版本号以追踪部署
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -2521,6 +2521,21 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         payload = body.get('payload', {})
         action = body.get('action', 'generateContent')  # generateContent or listModels
         feature = body.get('feature', action)  # 用于追踪功能类型
+
+        # 智能模型路由：对高质量需求的功能，自动将 flash-lite 升级为 flash
+        # flash-lite 适合简单任务（标签、评分），但内容生成/分析等需要更强能力
+        UPGRADE_FEATURES = {
+            '内容生成', '内容分析', '内容搜索分析', '品牌定位', '竞品分析',
+            '笔记改写', '一键润色', '爆款标题', '内容规划', 'AB测试',
+            '热词分析', '图片配文', '评论话术', '生成评论话术',
+            'ai_card_match', 'template_match', 'template_match_batch',
+            'tmpl_ai_gen', 'tmpl_palette', 'tmpl_transfer',
+        }
+        original_model = model
+        if model == 'gemini-2.5-flash-lite' and feature in UPGRADE_FEATURES:
+            model = 'gemini-2.5-flash'
+            print(f'[ModelRoute] {feature}: {original_model} → {model} (auto-upgrade)')
+
 
         # AI 配额检查（传入 feature 以判断所需积分）
         user = self._get_current_user()
