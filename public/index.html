@@ -4941,6 +4941,259 @@
         ctx.closePath(); ctx.fillStyle = fill; ctx.fill();
       },
 
+      // ══════════════ 高级视觉效果工具库 (v2 升级) ══════════════
+
+      /** 渐变文字填充 — 支持水平/垂直/对角线渐变 */
+      _gradientText(ctx, text, x, y, colors, font, direction = 'horizontal') {
+        ctx.save();
+        if (font) ctx.font = font;
+        const m = ctx.measureText(text);
+        const w = m.width, h = parseInt(ctx.font) || 40;
+        let g;
+        if (direction === 'vertical') g = ctx.createLinearGradient(x, y - h, x, y);
+        else if (direction === 'diagonal') g = ctx.createLinearGradient(x, y - h, x + w, y);
+        else g = ctx.createLinearGradient(x - (ctx.textAlign === 'center' ? w/2 : 0), 0, x + (ctx.textAlign === 'center' ? w/2 : w), 0);
+        colors.forEach((c, i) => g.addColorStop(i / (colors.length - 1), c));
+        ctx.fillStyle = g;
+        ctx.fillText(text, x, y);
+        ctx.restore();
+      },
+
+      /** 描边文字 — 先描边再填充,文字更醒目(适合图片上方) */
+      _strokeText(ctx, text, x, y, opts = {}) {
+        ctx.save();
+        if (opts.font) ctx.font = opts.font;
+        ctx.textAlign = opts.align || ctx.textAlign;
+        // 外描边
+        ctx.strokeStyle = opts.strokeColor || 'rgba(0,0,0,0.3)';
+        ctx.lineWidth = opts.strokeWidth || 3;
+        ctx.lineJoin = 'round';
+        ctx.strokeText(text, x, y);
+        // 内填充
+        ctx.fillStyle = opts.fillColor || '#ffffff';
+        ctx.fillText(text, x, y);
+        ctx.restore();
+      },
+
+      /** 发光文字 — 霓虹灯/赛博朋克效果 */
+      _glowText(ctx, text, x, y, opts = {}) {
+        ctx.save();
+        if (opts.font) ctx.font = opts.font;
+        ctx.textAlign = opts.align || ctx.textAlign;
+        ctx.shadowColor = opts.glowColor || '#00ffff';
+        ctx.shadowBlur = opts.glowSize || 20;
+        ctx.fillStyle = opts.fillColor || opts.glowColor || '#00ffff';
+        // 多次绘制增强发光
+        for (let i = 0; i < (opts.intensity || 2); i++) ctx.fillText(text, x, y);
+        ctx.shadowBlur = 0;
+        ctx.restore();
+      },
+
+      /** 荧光笔高亮标记 — 文字下方的彩色高亮条 */
+      _highlightMark(ctx, text, x, y, opts = {}) {
+        ctx.save();
+        if (opts.font) ctx.font = opts.font;
+        const m = ctx.measureText(text);
+        const w = m.width;
+        const fontSize = parseInt(ctx.font) || 28;
+        const hx = ctx.textAlign === 'center' ? x - w/2 : x;
+        const hh = opts.height || fontSize * 0.35;
+        const hy = y - hh + (opts.offsetY || 4);
+        // 高亮条（带圆角）
+        this._roundRect(ctx, hx - 3, hy, w + 6, hh, opts.radius || 3);
+        ctx.fillStyle = opts.color || 'rgba(255,230,0,0.35)';
+        ctx.fill();
+        ctx.restore();
+      },
+
+      /** 毛玻璃拟态矩形 — iOS/Canva风格半透明模糊 */
+      _glassMorph(ctx, x, y, w, h, r, opts = {}) {
+        ctx.save();
+        // 先用 filter blur 模糊底层（需要先截取区域再叠加）
+        // Canvas 2D 无法直接 backdrop-blur，用多层半透明模拟
+        this._roundRect(ctx, x, y, w, h, r);
+        // 底层半透明白色
+        ctx.fillStyle = opts.bg || 'rgba(255,255,255,0.12)';
+        ctx.fill();
+        // 顶部高光边
+        ctx.save(); this._roundRect(ctx, x, y, w, h, r); ctx.clip();
+        const tg = ctx.createLinearGradient(x, y, x, y + h * 0.3);
+        tg.addColorStop(0, opts.highlight || 'rgba(255,255,255,0.25)');
+        tg.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = tg; ctx.fillRect(x, y, w, h * 0.3);
+        ctx.restore();
+        // 修饰边框
+        this._roundRect(ctx, x, y, w, h, r);
+        ctx.strokeStyle = opts.border || 'rgba(255,255,255,0.2)';
+        ctx.lineWidth = opts.borderWidth || 1;
+        ctx.stroke();
+        ctx.restore();
+      },
+
+      /** 图案背景填充 — 圆点/波浪/网格/人字纹 */
+      _patternFill(ctx, type, opts = {}) {
+        const W = this.W, H = this.H;
+        const color = opts.color || 'rgba(0,0,0,0.04)';
+        const size = opts.size || 30;
+        ctx.save();
+        ctx.fillStyle = color;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = opts.lineWidth || 1;
+
+        if (type === 'dots') {
+          const r = opts.dotRadius || 2;
+          for (let x = size/2; x < W; x += size) {
+            for (let y = size/2; y < H; y += size) {
+              ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+            }
+          }
+        }
+        else if (type === 'waves') {
+          const amp = opts.amplitude || 8, freq = opts.frequency || 0.02;
+          for (let y = size; y < H; y += size) {
+            ctx.beginPath(); ctx.moveTo(0, y);
+            for (let x = 0; x <= W; x += 4) {
+              ctx.lineTo(x, y + Math.sin(x * freq + y * 0.01) * amp);
+            }
+            ctx.stroke();
+          }
+        }
+        else if (type === 'crosshatch') {
+          for (let x = -H; x < W + H; x += size) {
+            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x + H, H); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(x + H, 0); ctx.lineTo(x, H); ctx.stroke();
+          }
+        }
+        else if (type === 'chevron') {
+          const cw = size * 2, ch = size;
+          for (let y = 0; y < H; y += ch) {
+            for (let x = -cw; x < W + cw; x += cw) {
+              const ox = (Math.floor(y / ch) % 2) * cw/2;
+              ctx.beginPath();
+              ctx.moveTo(x + ox, y + ch/2);
+              ctx.lineTo(x + ox + cw/2, y);
+              ctx.lineTo(x + ox + cw, y + ch/2);
+              ctx.stroke();
+            }
+          }
+        }
+        else if (type === 'isometric') {
+          const s = size;
+          for (let y = 0; y < H + s; y += s * 0.866) {
+            const row = Math.floor(y / (s * 0.866));
+            for (let x = (row % 2) * s/2 - s; x < W + s; x += s) {
+              ctx.beginPath();
+              ctx.moveTo(x, y); ctx.lineTo(x + s/2, y - s*0.866/2); ctx.lineTo(x + s, y);
+              ctx.stroke();
+            }
+          }
+        }
+        ctx.restore();
+      },
+
+      /** 网格渐变背景（Mesh Gradient 模拟）— 多色点之间柔和过渡 */
+      _meshGradient(ctx, colorPoints) {
+        // colorPoints: [{x, y, color, radius}]
+        const W = this.W, H = this.H;
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+        colorPoints.forEach(cp => {
+          const g = ctx.createRadialGradient(cp.x * W, cp.y * H, 0, cp.x * W, cp.y * H, (cp.radius || 0.5) * Math.max(W, H));
+          g.addColorStop(0, cp.color);
+          g.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = g;
+          ctx.fillRect(0, 0, W, H);
+        });
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.restore();
+      },
+
+      /** 手动字间距渲染 — Canvas不支持letterSpacing,逐字绘制 */
+      _letterSpacingText(ctx, text, x, y, spacing) {
+        if (!spacing || spacing <= 0) { ctx.fillText(text, x, y); return; }
+        const align = ctx.textAlign;
+        const totalW = [...text].reduce((s, ch) => s + ctx.measureText(ch).width + spacing, -spacing);
+        let cx = align === 'center' ? x - totalW / 2 : align === 'right' ? x - totalW : x;
+        ctx.save(); ctx.textAlign = 'left';
+        for (const ch of text) {
+          ctx.fillText(ch, cx, y);
+          cx += ctx.measureText(ch).width + spacing;
+        }
+        ctx.restore();
+      },
+
+      /** 装饰分割线 — 波浪/圆点/菱形/渐变线 */
+      _decorLine(ctx, type, cx, y, w, opts = {}) {
+        const color = opts.color || 'rgba(0,0,0,0.15)';
+        const x0 = cx - w/2, x1 = cx + w/2;
+        ctx.save();
+        if (type === 'wave') {
+          ctx.strokeStyle = color; ctx.lineWidth = opts.lineWidth || 1.5;
+          ctx.beginPath(); ctx.moveTo(x0, y);
+          for (let x = x0; x <= x1; x += 2) {
+            ctx.lineTo(x, y + Math.sin((x - x0) * 0.08) * (opts.amplitude || 4));
+          }
+          ctx.stroke();
+        } else if (type === 'dots') {
+          ctx.fillStyle = color;
+          const gap = opts.gap || 12, r = opts.dotRadius || 2.5;
+          for (let x = x0; x <= x1; x += gap) {
+            ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+          }
+        } else if (type === 'diamonds') {
+          ctx.fillStyle = color;
+          const gap = opts.gap || 20, s = opts.size || 5;
+          for (let x = x0; x <= x1; x += gap) {
+            ctx.save(); ctx.translate(x, y); ctx.rotate(Math.PI / 4);
+            ctx.fillRect(-s/2, -s/2, s, s); ctx.restore();
+          }
+        } else if (type === 'gradient') {
+          const g = ctx.createLinearGradient(x0, 0, x1, 0);
+          g.addColorStop(0, 'transparent');
+          g.addColorStop(0.2, color); g.addColorStop(0.8, color);
+          g.addColorStop(1, 'transparent');
+          ctx.fillStyle = g; ctx.fillRect(x0, y, w, opts.height || 1.5);
+        } else if (type === 'dashes') {
+          ctx.strokeStyle = color; ctx.lineWidth = opts.lineWidth || 1;
+          ctx.setLineDash(opts.dash || [8, 6]);
+          ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.stroke();
+          ctx.setLineDash([]);
+        }
+        ctx.restore();
+      },
+
+      /** Drop Cap 首字下沉 — 杂志风/国潮风大号首字 */
+      _dropCap(ctx, text, x, y, opts = {}) {
+        if (!text || text.length === 0) return { width: 0, restText: text };
+        ctx.save();
+        const firstChar = text[0];
+        const restText = text.slice(1);
+        const capSize = opts.size || 72;
+        const capFont = opts.font || this._font(capSize, '800');
+        ctx.font = capFont;
+        const capW = ctx.measureText(firstChar).width;
+        // 装饰背景框
+        if (opts.bgColor) {
+          this._roundRect(ctx, x - 4, y - capSize + 8, capW + 8, capSize + 4, opts.radius || 6);
+          ctx.fillStyle = opts.bgColor; ctx.fill();
+        }
+        // 首字
+        ctx.fillStyle = opts.color || opts.fillColor || '#333';
+        ctx.textAlign = 'left';
+        ctx.fillText(firstChar, x, y);
+        ctx.restore();
+        return { width: capW + (opts.gap || 10), restText };
+      },
+
+      /** 暗角/晕影效果 — 照片页添加氛围感 */
+      _vignette(ctx, strength = 0.3) {
+        const W = this.W, H = this.H;
+        const g = ctx.createRadialGradient(W/2, H/2, Math.min(W, H) * 0.3, W/2, H/2, Math.max(W, H) * 0.7);
+        g.addColorStop(0, 'rgba(0,0,0,0)');
+        g.addColorStop(1, `rgba(0,0,0,${strength})`);
+        ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      },
+
       // ══════════════ 用户照片管理 ══════════════
       _userPhotos: [],      // [{dataUrl, img (HTMLImageElement), colors}]
       _loadedImages: [],     // loaded Image objects
@@ -5355,11 +5608,16 @@
           ctx.fillRect(Math.random() * W, Math.random() * H, 1, 1);
         }
 
-        // Frame number
+        // v3: Cinematic vignette
+        this._vignette(ctx, 0.5);
+
+        // Frame number with glow
         ctx.font = this._font(12, '400', tmpl);
-        ctx.fillStyle = '#444';
+        ctx.shadowColor = p.accent || '#00f5ff'; ctx.shadowBlur = 6;
+        ctx.fillStyle = '#555';
         ctx.textAlign = 'right';
         ctx.fillText(`▶ FRAME ${n}`, W - margin, H - 58);
+        ctx.shadowBlur = 0;
         ctx.textAlign = 'left';
       },
 
@@ -5372,16 +5630,18 @@
         const gap = 18;
         const innerW = W - margin * 2;
 
-        // Decorative header
+        // v3: Decorative header with glassMorph
+        this._glassMorph(ctx, W / 2 - 120, 30, 240, 56, 28, {
+          bgColor: p.accent + '08', borderColor: p.accent + '18', borderWidth: 0.5
+        });
         ctx.fillStyle = p.accent + '40';
-        ctx.beginPath(); ctx.arc(W / 2 - 80, 56, 4, 0, Math.PI * 2); ctx.fill();
-        ctx.beginPath(); ctx.arc(W / 2 + 80, 56, 4, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(W / 2 - 80, 56, 3, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(W / 2 + 80, 56, 3, 0, Math.PI * 2); ctx.fill();
         ctx.font = this._font(22, '700', tmpl);
         ctx.fillStyle = p.text;
         ctx.textAlign = 'center';
         ctx.fillText('✦ 精选图集 ✦', W / 2, 64);
-        ctx.fillStyle = p.accent + '30';
-        ctx.fillRect(W / 2 - 45, 77, 90, 1.5);
+        this._decorLine(ctx, 'gradient', W / 2, 80, 90, { color: p.accent + '30' });
         ctx.textAlign = 'left';
 
         const gridTop = 108;
@@ -5476,13 +5736,8 @@
           });
         }
 
-        // Bottom decoration
-        ctx.fillStyle = p.accent + '25';
-        ctx.fillRect(W / 2 - 25, H - 38, 50, 2);
-        ctx.beginPath();
-        ctx.arc(W / 2, H - 37, 3, 0, Math.PI * 2);
-        ctx.fillStyle = p.accent + '35';
-        ctx.fill();
+        // v3: Bottom decoration with decorLine
+        this._decorLine(ctx, 'dots', W / 2, H - 37, 60, { color: p.accent + '30', count: 3, radius: 3 });
       },
 
       // ══════════════ 段落智能解析器 ══════════════
@@ -5524,14 +5779,18 @@
         const tid = tmpl.id;
 
         if (tid === 'minimal_literary') {
-          // Paper texture noise
-          for (let i = 0; i < 3000; i++) {
+          // Paper texture noise (refined)
+          for (let i = 0; i < 4000; i++) {
             ctx.fillStyle = `rgba(180,170,155,${Math.random()*0.06})`;
             ctx.fillRect(Math.random()*W, Math.random()*H, 1, 1);
           }
-          // Thin accent line at top
+          // Subtle dot pattern overlay
+          this._patternFill(ctx, 'dots', { color: 'rgba(160,145,120,0.025)', size: 40, dotRadius: 1 });
+          // Elegant double accent line at top
           ctx.fillStyle = p.accent; ctx.fillRect(80, 80, W-160, 1);
-          ctx.fillRect(80, 84, W-160, 0.5);
+          ctx.fillStyle = p.accent + '40'; ctx.fillRect(80, 84, W-160, 0.5);
+          // Bottom decorative line
+          ctx.fillStyle = p.accent + '30'; ctx.fillRect(80, H-80, W-160, 0.5);
         }
         else if (tid === 'sweet_fresh') {
           // Pink gradient
@@ -5563,34 +5822,47 @@
           ctx.beginPath(); ctx.moveTo(W-140, H-40); ctx.lineTo(W-40, H-40); ctx.lineTo(W-40, H-120); ctx.stroke();
         }
         else if (tid === 'ins_aesthetic') {
-          // Film grain
-          for (let i = 0; i < 2000; i++) {
+          // Warm Morandi gradient base
+          const ig = ctx.createLinearGradient(0, 0, W * 0.3, H);
+          ig.addColorStop(0, 'rgba(210,195,175,0.08)'); ig.addColorStop(1, 'rgba(190,170,145,0.04)');
+          ctx.fillStyle = ig; ctx.fillRect(0, 0, W, H);
+          // Film grain (enhanced density)
+          for (let i = 0; i < 3000; i++) {
             const v = Math.random() * 0.04;
             ctx.fillStyle = `rgba(140,130,120,${v})`;
             ctx.fillRect(Math.random()*W, Math.random()*H, 1, 1);
           }
-          // Thin frame
+          // Thin frame with film-strip feel
           ctx.strokeStyle = 'rgba(184,151,126,0.3)'; ctx.lineWidth = 1;
           ctx.strokeRect(50, 50, W-100, H-100);
+          // Inner subtle frame
+          ctx.strokeStyle = 'rgba(184,151,126,0.12)'; ctx.lineWidth = 0.5;
+          ctx.strokeRect(56, 56, W-112, H-112);
         }
         else if (tid === 'dark_cyber') {
+          // Isometric grid pattern (futuristic feel)
+          this._patternFill(ctx, 'isometric', { color: 'rgba(0,240,255,0.025)', size: 40 });
           // Scan lines
           for (let y = 0; y < H; y += 4) {
             ctx.fillStyle = `rgba(0,240,255,${0.01 + Math.random()*0.02})`;
             ctx.fillRect(0, y, W, 1);
           }
-          // Neon glow accents
-          const neonG = ctx.createRadialGradient(200, 300, 0, 200, 300, 400);
-          neonG.addColorStop(0, 'rgba(0,240,255,0.06)'); neonG.addColorStop(1, 'rgba(0,0,0,0)');
-          ctx.fillStyle = neonG; ctx.fillRect(0, 0, W, H);
-          const neonP = ctx.createRadialGradient(W-200, H-400, 0, W-200, H-400, 350);
-          neonP.addColorStop(0, 'rgba(255,0,170,0.05)'); neonP.addColorStop(1, 'rgba(0,0,0,0)');
-          ctx.fillStyle = neonP; ctx.fillRect(0, 0, W, H);
+          // Neon mesh gradient (multiple color zones)
+          this._meshGradient(ctx, [
+            { x: 0.15, y: 0.2, color: 'rgba(0,240,255,0.06)', radius: 0.35 },
+            { x: 0.85, y: 0.7, color: 'rgba(255,0,170,0.05)', radius: 0.3 },
+            { x: 0.5, y: 0.5, color: 'rgba(140,0,255,0.03)', radius: 0.25 }
+          ]);
           // Glitch bars
-          for (let i = 0; i < 3; i++) {
+          for (let i = 0; i < 4; i++) {
             const gy = Math.random() * H;
             ctx.fillStyle = `rgba(255,0,170,${0.03+Math.random()*0.04})`;
             ctx.fillRect(0, gy, W, 2 + Math.random()*3);
+          }
+          // Data noise pixels
+          for (let i = 0; i < 120; i++) {
+            ctx.fillStyle = Math.random() > 0.5 ? 'rgba(0,240,255,0.08)' : 'rgba(255,0,170,0.06)';
+            ctx.fillRect(Math.random()*W, Math.random()*H, Math.random()*4+1, 1);
           }
         }
         else if (tid === 'chinese_retro') {
@@ -5634,10 +5906,18 @@
           ctx.fillStyle = '#e63946'; ctx.fillRect(W/2-1, 100, 2, H-200);
         }
         else if (tid === 'nature_healing') {
-          // Warm gradient
+          // Warm gradient with mesh feel
           const g = ctx.createLinearGradient(0, 0, W, H);
-          g.addColorStop(0, '#f0f4e8'); g.addColorStop(0.4, '#e8f0db'); g.addColorStop(1, '#faf3e0');
+          g.addColorStop(0, '#f0f4e8'); g.addColorStop(0.3, '#e8f0db'); g.addColorStop(0.7, '#eef5e0'); g.addColorStop(1, '#faf3e0');
           ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+          // Mesh gradient overlay (organic multi-color feel)
+          this._meshGradient(ctx, [
+            { x: 0.15, y: 0.1, color: 'rgba(200,230,180,0.08)', radius: 0.4 },
+            { x: 0.85, y: 0.4, color: 'rgba(255,245,200,0.07)', radius: 0.35 },
+            { x: 0.3, y: 0.85, color: 'rgba(210,235,190,0.06)', radius: 0.4 }
+          ]);
+          // Subtle wave pattern (organic feel)
+          this._patternFill(ctx, 'waves', { color: 'rgba(120,150,90,0.02)', size: 60, amplitude: 5, frequency: 0.015 });
           // Light orbs
           [{x:200,y:200,r:250},{x:800,y:600,r:200},{x:400,y:1100,r:300}].forEach(o => {
             const rg = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);
@@ -5727,10 +6007,18 @@
           for (let y = 0; y < H; y += 80) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
         }
         else if (tid === 'color_palette') {
+          // Mesh gradient with rich purple/pink tones
           const g = ctx.createLinearGradient(0, 0, W, H);
-          g.addColorStop(0, '#f8f6ff'); g.addColorStop(0.4, '#f0ecff'); g.addColorStop(1, '#faf5ff');
+          g.addColorStop(0, '#f8f6ff'); g.addColorStop(0.3, '#f0ecff'); g.addColorStop(0.7, '#f6f0ff'); g.addColorStop(1, '#faf5ff');
           ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-          // Soft gradient circles as decor
+          this._meshGradient(ctx, [
+            { x: 0.1, y: 0.1, color: 'rgba(124,92,191,0.04)', radius: 0.35 },
+            { x: 0.9, y: 0.3, color: 'rgba(220,160,255,0.03)', radius: 0.3 },
+            { x: 0.3, y: 0.85, color: 'rgba(180,140,255,0.04)', radius: 0.35 }
+          ]);
+          // Chevron pattern (subtle geometric)
+          this._patternFill(ctx, 'chevron', { color: 'rgba(124,92,191,0.018)', size: 24 });
+          // Soft gradient circles
           [{ x:100, y:120, r:120, c:'rgba(124,92,191,0.04)' },
            { x:W-80, y:H-300, r:150, c:'rgba(180,140,255,0.04)' }].forEach(ci => {
             ctx.beginPath(); ctx.arc(ci.x, ci.y, ci.r, 0, Math.PI*2);
@@ -5769,19 +6057,16 @@
         ctx.fillStyle = p.accent;
         ctx.fillRect(0, 0, W, 4);
 
-        // 5. Category tag (top-left, frosted-glass pill)
+        // 5. v3 Category tag (top-left, glassMorph pill)
         const catEmoji = this._catEmoji(post.category);
         if (post.category) {
           const catText = `${catEmoji} ${post.category}`;
           ctx.font = this._font(18, '500', tmpl);
           const catTW = ctx.measureText(catText).width;
-          this._roundRect(ctx, 56, 46, catTW + 28, 34, 17);
-          ctx.fillStyle = 'rgba(255,255,255,0.18)';
-          ctx.fill();
-          ctx.strokeStyle = 'rgba(255,255,255,0.28)';
-          ctx.lineWidth = 1;
-          this._roundRect(ctx, 56, 46, catTW + 28, 34, 17);
-          ctx.stroke();
+          this._glassMorph(ctx, 56, 46, catTW + 28, 34, 17, {
+            bgColor: 'rgba(255,255,255,0.18)', borderColor: 'rgba(255,255,255,0.28)',
+            borderWidth: 1, highlightAlpha: '10'
+          });
           ctx.fillStyle = '#ffffff';
           ctx.textAlign = 'left';
           ctx.fillText(catText, 70, 69);
@@ -5809,15 +6094,15 @@
         const titleLines = this.wrapText(ctx, post.title || '无标题', maxTitleW);
         const titleY = H - 200 - Math.min(titleLines.length, 3) * tLineH;
 
-        ctx.shadowColor = 'rgba(0,0,0,0.5)';
-        ctx.shadowBlur = 14;
-        ctx.fillStyle = '#ffffff';
+        // v3: Title with stroke text for clarity
         titleLines.slice(0, 3).forEach((ln, i) => {
-          ctx.fillText(ln, 70, titleY + i * tLineH);
+          this._strokeText(ctx, ln, 70, titleY + i * tLineH, {
+            font: this._font(tFontSz, tmpl.boldTitle ? '800' : '700', tmpl),
+            fill: '#ffffff', stroke: 'rgba(0,0,0,0.35)', lineWidth: 3
+          });
         });
-        ctx.shadowBlur = 0;
 
-        // 8. Accent bar below title
+        // 8. v3 Accent bar with decorLine
         const afterTitleY = titleY + Math.min(titleLines.length, 3) * tLineH + 12;
         ctx.fillStyle = p.accent;
         ctx.fillRect(70, afterTitleY, 48, 3);
@@ -5873,23 +6158,32 @@
           ctx.fillRect(isLeft ? 80 : cx - hlW/2, 126, hlW, 2);
         }
 
-        // ── Category emoji + tag ──
+        // ── Category emoji + tag (glassmorphism pill) ──
         const catEmoji = this._catEmoji(post.category);
         const titleY = tid === 'breaking_news' ? 160 : 200;
         if (post.category) {
           ctx.font = this._font(20, '500', tmpl); ctx.fillStyle = p.sub;
           ctx.textAlign = isLeft ? 'left' : 'center';
           const catX = isLeft ? 80 : cx;
-          // Category tag with pill background
           const catText = `${catEmoji} ${post.category}`;
           const catTW = ctx.measureText(catText).width;
-          this._roundRect(ctx, (isLeft ? 80 : cx - catTW/2) - 12, titleY - 45, catTW + 24, 28, 14);
-          ctx.fillStyle = p.accent + '15'; ctx.fill();
+          const pillX = (isLeft ? 80 : cx - catTW/2) - 12;
+          const pillY = titleY - 45;
+          // Glass-morph pill for non-dark themes
+          if (!tmpl.dark) {
+            this._glassMorph(ctx, pillX, pillY, catTW + 24, 30, 15, {
+              bg: p.accent + '10', highlight: p.accent + '15', border: p.accent + '20'
+            });
+          } else {
+            this._glassMorph(ctx, pillX, pillY, catTW + 24, 30, 15, {
+              bg: 'rgba(255,255,255,0.08)', highlight: 'rgba(255,255,255,0.12)', border: 'rgba(255,255,255,0.15)'
+            });
+          }
           ctx.fillStyle = p.sub;
           ctx.fillText(catText, catX, titleY - 26);
         }
 
-        // ── Title with accent highlight block ──
+        // ── Title with gradient text + accent highlight ──
         ctx.font = this._font(tmpl.titleSize || 48, tmpl.boldTitle ? '800' : '700', tmpl);
         const titleX = isLeft ? 80 : cx;
         const maxTitleW = isLeft ? W - 160 : W - 140;
@@ -5904,26 +6198,47 @@
             const lnW = ctx.measureText(ln).width;
             const lnX = isLeft ? 80 : cx - lnW / 2;
             const lnY = titleY + i * tLineH - 4;
-            // Subtle accent block behind title
             this._roundRect(ctx, lnX - 10, lnY, lnW + 20, tFontSz + 6, 6);
             ctx.fillStyle = p.accent + '10'; ctx.fill();
           });
         }
 
-        // Render title text
-        ctx.fillStyle = p.text;
-        ctx.font = this._font(tFontSz, tmpl.boldTitle ? '800' : '700', tmpl);
-        titleLines.forEach((ln, i) => ctx.fillText(ln, titleX, titleY + 10 + i * tLineH));
+        // Render title text — use gradient fill for specific templates
+        const titleFont = this._font(tFontSz, tmpl.boldTitle ? '800' : '700', tmpl);
+        const _useGradientTitle = ['nature_healing', 'candy_pop', 'color_palette', 'dark_cyber', 'sweet_fresh'].includes(tid);
+        if (_useGradientTitle && tmpl.palette.accent) {
+          // Gradient text: accent → text color blend
+          const gradColors = {
+            'nature_healing': ['#2d8a4e', '#5a9a3a', '#8ab648'],
+            'candy_pop': ['#ff6b6b', '#ffd93d', '#6bcb77', '#4d96ff'],
+            'color_palette': ['#7c5cbf', '#b488ff', '#9b6dff'],
+            'dark_cyber': ['#00f0ff', '#ff00aa', '#00f0ff'],
+            'sweet_fresh': ['#ff6b8a', '#ff8fa3', '#ffb4c0']
+          };
+          titleLines.forEach((ln, i) => {
+            this._gradientText(ctx, ln, titleX, titleY + 10 + i * tLineH, gradColors[tid] || [p.accent, p.text], titleFont);
+          });
+        } else {
+          ctx.fillStyle = p.text;
+          ctx.font = titleFont;
+          titleLines.forEach((ln, i) => ctx.fillText(ln, titleX, titleY + 10 + i * tLineH));
+        }
 
-        // ── Decorative accent bar below title ──
+        // ── Decorative accent bar below title (upgraded with decorLine) ──
         const afterTitleY = titleY + titleLines.length * tLineH + 16;
         if (tid === 'magazine_edit') {
           ctx.fillStyle = p.accent; ctx.fillRect(80, afterTitleY, 60, 4);
           ctx.fillStyle = p.text; ctx.fillRect(150, afterTitleY, 20, 4);
         } else if (tid === 'minimal_literary') {
-          ctx.fillStyle = p.accent + '60';
-          ctx.fillRect(isLeft ? 80 : cx - 50, afterTitleY, 100, 1);
-          ctx.fillRect(isLeft ? 80 : cx - 30, afterTitleY + 5, 60, 0.5);
+          this._decorLine(ctx, 'gradient', isLeft ? 80 + 50 : cx, afterTitleY, 100, { color: p.accent + '60' });
+        } else if (tid === 'candy_pop') {
+          this._decorLine(ctx, 'dots', cx, afterTitleY, 140, { color: p.accent, dotRadius: 3, gap: 16 });
+        } else if (tid === 'nature_healing') {
+          this._decorLine(ctx, 'wave', cx, afterTitleY, 120, { color: p.accent + '50', amplitude: 3, lineWidth: 1.5 });
+        } else if (tid === 'chinese_retro') {
+          this._decorLine(ctx, 'diamonds', cx, afterTitleY, 100, { color: p.accent + '50', size: 4, gap: 18 });
+        } else if (tid === 'handwrite_diary') {
+          this._decorLine(ctx, 'dashes', cx, afterTitleY, 120, { color: p.accent + '40', dash: [6, 8] });
         } else if (!tmpl.dark && tid !== 'breaking_news') {
           const barW = 80;
           ctx.fillStyle = p.accent + '50';
@@ -6069,7 +6384,7 @@
         this._drawCTA(ctx, tmpl, H - 180, W);
       },
 
-      // ══════════════ CTA 按钮渲染 ══════════════
+      // ══════════════ CTA 按钮渲染（增强版 v3: 毛玻璃/霓虹/3D阴影）══════════════
       _drawCTA(ctx, tmpl, y, W) {
         const p = tmpl.palette;
         const ctaText = tmpl.ctaText || '关注我';
@@ -6079,28 +6394,61 @@
 
         if (tmpl.ctaStyle === 'filled') {
           const col = tmpl.ctaColor || p.accent;
+          // 3D shadow effect
+          this._roundRect(ctx, bx + 2, y + 3, bw, bh, 26);
+          ctx.fillStyle = col + '30'; ctx.fill();
           this._roundRect(ctx, bx, y, bw, bh, 26);
           ctx.fillStyle = col; ctx.fill();
+          // Inner highlight
+          ctx.save(); this._roundRect(ctx, bx, y, bw, bh, 26); ctx.clip();
+          const hg = ctx.createLinearGradient(bx, y, bx, y + bh * 0.5);
+          hg.addColorStop(0, 'rgba(255,255,255,0.2)'); hg.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = hg; ctx.fillRect(bx, y, bw, bh * 0.5);
+          ctx.restore();
           ctx.fillStyle = '#ffffff'; ctx.textAlign = 'center';
           ctx.fillText(ctaText, W/2, y + 34);
         } else if (tmpl.ctaStyle === 'gradient') {
           const g = ctx.createLinearGradient(bx, y, bx + bw, y);
           g.addColorStop(0, p.accent); g.addColorStop(1, p.sub || p.accent);
+          // Soft shadow
+          ctx.shadowColor = p.accent + '40'; ctx.shadowBlur = 12; ctx.shadowOffsetY = 4;
           this._roundRect(ctx, bx, y, bw, bh, 26);
           ctx.fillStyle = g; ctx.fill();
+          ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+          // Inner highlight
+          ctx.save(); this._roundRect(ctx, bx, y, bw, bh, 26); ctx.clip();
+          const hg = ctx.createLinearGradient(bx, y, bx, y + bh * 0.4);
+          hg.addColorStop(0, 'rgba(255,255,255,0.22)'); hg.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = hg; ctx.fillRect(bx, y, bw, bh * 0.4);
+          ctx.restore();
           ctx.fillStyle = '#ffffff'; ctx.textAlign = 'center';
           ctx.fillText(ctaText, W/2, y + 34);
         } else if (tmpl.ctaStyle === 'rainbow') {
           const g = ctx.createLinearGradient(bx, y, bx + bw, y);
           g.addColorStop(0, '#ff6b6b'); g.addColorStop(0.25, '#ffd93d'); g.addColorStop(0.5, '#6bcb77'); g.addColorStop(0.75, '#4d96ff'); g.addColorStop(1, '#9775fa');
+          ctx.shadowColor = 'rgba(100,100,255,0.3)'; ctx.shadowBlur = 14; ctx.shadowOffsetY = 4;
           this._roundRect(ctx, bx, y, bw, bh, 26);
           ctx.fillStyle = g; ctx.fill();
+          ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
           ctx.fillStyle = '#ffffff'; ctx.textAlign = 'center';
           ctx.fillText(ctaText, W/2, y + 34);
-        } else {
-          // border style
+        } else if (tmpl.dark) {
+          // Neon glow CTA for dark themes
+          ctx.shadowColor = p.accent; ctx.shadowBlur = 16;
           this._roundRect(ctx, bx, y, bw, bh, 26);
-          ctx.strokeStyle = p.accent; ctx.lineWidth = 2; ctx.stroke();
+          ctx.strokeStyle = p.accent; ctx.lineWidth = 1.5; ctx.stroke();
+          ctx.shadowBlur = 0;
+          // Glass inner fill
+          this._glassMorph(ctx, bx, y, bw, bh, 26, {
+            bg: p.accent + '15', highlight: p.accent + '20', border: 'transparent', borderWidth: 0
+          });
+          ctx.fillStyle = p.accent; ctx.textAlign = 'center';
+          ctx.fillText(ctaText, W/2, y + 34);
+        } else {
+          // Glass-morph border style (upgraded)
+          this._glassMorph(ctx, bx, y, bw, bh, 26, {
+            bg: p.accent + '08', highlight: p.accent + '12', border: p.accent + '40'
+          });
           ctx.fillStyle = p.text; ctx.textAlign = 'center';
           ctx.fillText(ctaText, W/2, y + 34);
         }
@@ -6219,37 +6567,58 @@
             y += Math.max(lines.length, 1) * 40 + 12;
           }
           else {
-            // Plain text — subtle accent sidebar for long paragraphs
+            // Plain text — drop cap for first plain paragraph on page 1
             ctx.font = this._font(28, '400', tmpl); ctx.fillStyle = p.text;
-            const lines = this.wrapText(ctx, para.text, contentW);
-            if (lines.length > 2) {
-              this._roundRect(ctx, mx - 10, y - 4, 3, lines.length * 44 + 6, 2);
-              ctx.fillStyle = p.accent + '25'; ctx.fill();
+            const _useDropCap = pageNum === 1 && idx === 0 && para.text.length > 20 && ['magazine_edit', 'chinese_retro', 'minimal_literary', 'ins_aesthetic'].includes(tid);
+            if (_useDropCap) {
+              const dcOpts = {
+                size: 64, color: p.accent,
+                bgColor: tid === 'chinese_retro' ? p.accent + '15' : undefined,
+                font: this._font(64, '900', tmpl), radius: 4, gap: 12
+              };
+              const { width: dcW, restText } = this._dropCap(ctx, para.text, mx, y + 48, dcOpts);
+              // Remaining text wraps around drop cap
+              ctx.font = this._font(28, '400', tmpl); ctx.fillStyle = p.text;
+              const shortW = contentW - dcW;
+              const firstLines = this.wrapText(ctx, restText, shortW);
+              const dcLines = Math.ceil(58 / 44); // lines that wrap around drop cap
+              let li = 0;
+              firstLines.forEach((ln, i) => {
+                if (y + i * 44 < maxY) {
+                  const lx = i < dcLines ? mx + dcW : mx;
+                  ctx.fillText(ln, lx, y + i * 44);
+                }
+                li = i;
+              });
+              y += (li + 1) * 44 + 10;
+            } else {
+              // Standard plain text with accent sidebar
+              const lines = this.wrapText(ctx, para.text, contentW);
+              if (lines.length > 2) {
+                this._roundRect(ctx, mx - 10, y - 4, 3, lines.length * 44 + 6, 2);
+                ctx.fillStyle = p.accent + '25'; ctx.fill();
+              }
+              ctx.fillStyle = p.text;
+              lines.forEach((ln, i) => {
+                if (y + i * 44 < maxY) ctx.fillText(ln, mx, y + i * 44);
+              });
+              y += lines.length * 44 + 10;
             }
-            ctx.fillStyle = p.text;
-            lines.forEach((ln, i) => {
-              if (y + i * 44 < maxY) ctx.fillText(ln, mx, y + i * 44);
-            });
-            y += lines.length * 44 + 10;
           }
 
-          // Paragraph separator
+          // Paragraph separator (upgraded with decorLine)
           if (idx < paras.length - 1 && y < maxY - 40) {
             y += 6;
-            ctx.fillStyle = p.accent + '30';
             if (tid === 'candy_pop') {
-              ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
-              ctx.fillText('✦   ✦   ✦', W/2, y + 3); ctx.textAlign = 'left';
+              this._decorLine(ctx, 'dots', W/2, y + 2, 100, { color: p.accent + '60', dotRadius: 3, gap: 14 });
             } else if (tid === 'chinese_retro') {
-              ctx.font = '12px serif'; ctx.fillStyle = p.accent + '50'; ctx.textAlign = 'center';
-              ctx.fillText('◇  ◆  ◇', W/2, y + 3); ctx.textAlign = 'left';
+              this._decorLine(ctx, 'diamonds', W/2, y + 2, 80, { color: p.accent + '50', size: 4, gap: 18 });
             } else if (tid === 'nature_healing') {
-              ctx.font = '12px sans-serif'; ctx.textAlign = 'center';
-              ctx.fillText('🌿', W/2, y + 4); ctx.textAlign = 'left';
+              this._decorLine(ctx, 'wave', W/2, y + 2, 100, { color: p.accent + '40', amplitude: 3, lineWidth: 1 });
             } else if (tid === 'handwrite_diary') {
-              ctx.strokeStyle = p.accent + '30'; ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
-              ctx.beginPath(); ctx.moveTo(mx + 40, y + 2); ctx.lineTo(W - mx - 40, y + 2); ctx.stroke();
-              ctx.setLineDash([]);
+              this._decorLine(ctx, 'dashes', W/2, y + 2, W - mx*2 - 80, { color: p.accent + '30', dash: [4, 4] });
+            } else if (tid === 'minimal_literary') {
+              this._decorLine(ctx, 'gradient', W/2, y + 2, 80, { color: p.accent + '40' });
             } else {
               for (let d = 0; d < 3; d++) {
                 ctx.beginPath(); ctx.arc(W/2 - 16 + d * 16, y + 2, 2, 0, Math.PI*2); ctx.fill();
@@ -6274,61 +6643,108 @@
         const cx = W / 2;
         const cy = H / 2;
 
-        // ── Decorative border frame ──
+        // ── v3 Decorative border frame ──
         if (tid === 'biz_premium' || tid === 'dark_cyber') {
-          // Double-line frame for dark themes
-          ctx.strokeStyle = p.accent + '30'; ctx.lineWidth = 1;
+          // Neon double-line frame with glow
+          ctx.shadowColor = p.accent; ctx.shadowBlur = 8;
+          ctx.strokeStyle = p.accent + '35'; ctx.lineWidth = 1;
           ctx.strokeRect(50, 50, W-100, H-100);
+          ctx.shadowBlur = 0;
           ctx.strokeStyle = p.accent + '15'; ctx.lineWidth = 0.5;
           ctx.strokeRect(60, 60, W-120, H-120);
+          // Corner accent dots
+          const corners = [[50,50],[W-50,50],[50,H-50],[W-50,H-50]];
+          corners.forEach(([x,y]) => {
+            ctx.beginPath(); ctx.arc(x, y, 3, 0, Math.PI*2);
+            ctx.fillStyle = p.accent + '60'; ctx.fill();
+          });
         } else if (tid === 'chinese_retro') {
-          // Traditional double border
+          // Traditional double border with corner ornaments
           ctx.strokeStyle = p.accent + '40'; ctx.lineWidth = 2;
           ctx.strokeRect(55, 55, W-110, H-110);
           ctx.strokeStyle = p.accent + '20'; ctx.lineWidth = 1;
           ctx.strokeRect(65, 65, W-130, H-130);
+          // Corner ornaments
+          ctx.font = '14px serif'; ctx.fillStyle = p.accent + '50'; ctx.textAlign = 'center';
+          ctx.fillText('◆', 55, 52); ctx.fillText('◆', W-55, 52);
+          ctx.fillText('◆', 55, H-48); ctx.fillText('◆', W-55, H-48);
         } else if (tid === 'magazine_edit') {
-          // Bold frame
+          // Bold frame + inner thin frame
           ctx.strokeStyle = p.text; ctx.lineWidth = 4;
           ctx.strokeRect(45, 45, W-90, H-90);
+          ctx.strokeStyle = p.text + '20'; ctx.lineWidth = 0.5;
+          ctx.strokeRect(55, 55, W-110, H-110);
         } else if (!tmpl.dark) {
-          // Elegant rounded frame
-          this._roundRect(ctx, 60, 60, W-120, H-120, 20);
-          ctx.strokeStyle = p.accent + '20'; ctx.lineWidth = 1; ctx.stroke();
+          // GlassMorph rounded frame
+          this._glassMorph(ctx, 60, 60, W-120, H-120, 20, {
+            bgColor: p.accent + '06', borderColor: p.accent + '18', borderWidth: 1
+          });
         }
 
-        // ── Scattered decorative emojis ──
-        ctx.globalAlpha = 0.08; ctx.font = '36px sans-serif';
+        // ── v3 Scattered decorative emojis with rotation ──
+        ctx.save();
+        ctx.globalAlpha = 0.08;
         const endEmoji = tmpl.endEmoji || this._catEmoji(post.category);
         const scatterEmojis = endEmoji.length > 2 ? [...endEmoji].filter(c => c.trim()) : [endEmoji, '✨', '💫'];
         const scatterPoints = [[120, 180], [W-140, 220], [100, H-280], [W-120, H-240], [200, 300], [W-200, H-350]];
         scatterPoints.forEach((pt, i) => {
           if (i < scatterEmojis.length) {
-            ctx.font = `${20 + Math.random()*16}px sans-serif`;
-            ctx.fillText(scatterEmojis[i % scatterEmojis.length], pt[0], pt[1]);
+            ctx.save();
+            ctx.translate(pt[0], pt[1]);
+            ctx.rotate((Math.random() - 0.5) * 0.6); // slight random rotation
+            ctx.font = `${22 + Math.random()*14}px sans-serif`;
+            ctx.fillText(scatterEmojis[i % scatterEmojis.length], 0, 0);
+            ctx.restore();
           }
         });
-        ctx.globalAlpha = 1;
+        ctx.restore();
 
-        // ── Central emoji with glow ──
+        // ── v3 Central emoji with enhanced glow ──
+        ctx.textAlign = 'center';
         if (tmpl.dark) {
-          // Glow effect for dark themes
-          ctx.shadowColor = p.accent; ctx.shadowBlur = 30;
+          // Multi-layer glow for dark themes
+          ctx.shadowColor = p.accent; ctx.shadowBlur = 40;
+          ctx.font = '88px sans-serif';
+          ctx.fillText(endEmoji, cx, cy - 90);
+          ctx.shadowBlur = 20;
+          ctx.fillText(endEmoji, cx, cy - 90);
+          ctx.shadowBlur = 0;
+        } else {
+          // Soft circle behind emoji for light themes
+          const emojiGrad = ctx.createRadialGradient(cx, cy - 100, 0, cx, cy - 100, 60);
+          emojiGrad.addColorStop(0, p.accent + '12');
+          emojiGrad.addColorStop(1, 'transparent');
+          ctx.fillStyle = emojiGrad;
+          ctx.fillRect(cx - 60, cy - 160, 120, 120);
+          ctx.font = '88px sans-serif';
+          ctx.fillText(endEmoji, cx, cy - 90);
         }
-        ctx.font = '88px sans-serif'; ctx.textAlign = 'center';
-        ctx.fillText(endEmoji, cx, cy - 90);
-        ctx.shadowBlur = 0;
 
-        // ── End text with accent background ──
+        // ── v3 End text with glassMorph pill ──
         ctx.font = this._font(38, '700', tmpl);
         const endTextStr = tmpl.endText || '感谢阅读';
         const etW = ctx.measureText(endTextStr).width;
-        // Accent pill behind end text
-        this._roundRect(ctx, cx - etW/2 - 20, cy - 22, etW + 40, 52, 26);
-        ctx.fillStyle = p.accent + '12'; ctx.fill();
-        // Text
-        ctx.fillStyle = p.text;
-        ctx.fillText(endTextStr, cx, cy + 10);
+        // GlassMorph pill behind end text
+        this._glassMorph(ctx, cx - etW/2 - 24, cy - 26, etW + 48, 58, 29, {
+          bgColor: tmpl.dark ? p.accent + '18' : p.accent + '10',
+          borderColor: tmpl.dark ? p.accent + '30' : p.accent + '15',
+          borderWidth: tmpl.dark ? 1 : 0.5,
+          highlightAlpha: tmpl.dark ? '08' : '06'
+        });
+        // v3 gradient text for select templates
+        if (['nature_healing','candy_pop','dark_cyber','color_palette','sweet_fresh'].includes(tid)) {
+          const gradColors = {
+            nature_healing: ['#2d9d78','#52b788','#74c69d'],
+            candy_pop: ['#ff6b6b','#ffd93d','#6bcb77','#4d96ff','#9775fa'],
+            dark_cyber: ['#00f5ff','#a855f7','#f472b6'],
+            color_palette: ['#8b5cf6','#a78bfa','#c4b5fd'],
+            sweet_fresh: ['#f472b6','#fb923c','#f472b6']
+          };
+          this._gradientText(ctx, endTextStr, cx, cy + 10, gradColors[tid], this._font(38, '700', tmpl));
+        } else {
+          ctx.fillStyle = p.text;
+          ctx.fillText(endTextStr, cx, cy + 10);
+        }
 
         // ── Sub text ──
         if (tmpl.endSub) {
@@ -6336,39 +6752,38 @@
           ctx.fillText(tmpl.endSub, cx, cy + 52);
         }
 
-        // ── Decorative divider ──
+        // ── v3 Decorative divider using _decorLine ──
         const divY = cy + (tmpl.endSub ? 76 : 50);
         if (tid === 'candy_pop') {
-          const rainbowColors = ['#ff6b6b', '#ffd93d', '#6bcb77', '#4d96ff', '#9775fa'];
-          rainbowColors.forEach((c, i) => {
-            ctx.beginPath(); ctx.arc(cx - 40 + i*20, divY, 4, 0, Math.PI*2);
-            ctx.fillStyle = c; ctx.fill();
-          });
+          this._decorLine(ctx, 'dots', cx, divY, 100, { color: '#ff6b6b', count: 5, radius: 4 });
         } else if (tid === 'chinese_retro') {
-          ctx.font = '16px serif'; ctx.fillStyle = p.accent + '60';
-          ctx.fillText('◇  ◆  ◇', cx, divY + 4);
+          this._decorLine(ctx, 'diamonds', cx, divY, 80, { color: p.accent + '60' });
         } else if (tid === 'nature_healing') {
-          ctx.font = '18px sans-serif'; ctx.fillStyle = p.accent;
-          ctx.fillText('🌿  ·  🌿', cx, divY + 5);
+          this._decorLine(ctx, 'wave', cx, divY, 100, { color: p.accent + '50' });
+        } else if (tid === 'handwrite_diary') {
+          this._decorLine(ctx, 'dashes', cx, divY, 80, { color: p.accent + '40' });
+        } else if (tid === 'dark_cyber') {
+          this._decorLine(ctx, 'dots', cx, divY, 120, { color: p.accent + '50', count: 7, radius: 2 });
         } else {
-          // Gradient line
-          const g = ctx.createLinearGradient(cx - 60, 0, cx + 60, 0);
-          g.addColorStop(0, 'transparent'); g.addColorStop(0.3, p.accent + '60');
-          g.addColorStop(0.7, p.accent + '60'); g.addColorStop(1, 'transparent');
-          ctx.fillStyle = g; ctx.fillRect(cx - 60, divY, 120, 2);
+          this._decorLine(ctx, 'gradient', cx, divY, 120, { color: p.accent + '60' });
         }
 
-        // ── Social guidance row ──
+        // ── v3 Social guidance row with glassMorph card ──
         const socialY = H - 290;
-        ctx.font = this._font(17, '400', tmpl); ctx.fillStyle = p.sub + '90';
         const socialItems = ['❤️ 点赞', '⭐ 收藏', '💬 评论', '↗️ 分享'];
-        const totalSocialW = socialItems.length * 120;
-        socialItems.forEach((item, i) => {
-          ctx.fillText(item, cx - totalSocialW/2 + i * 120 + 20, socialY);
+        const totalSocialW = socialItems.length * 115 + 20;
+        // GlassMorph backing
+        this._glassMorph(ctx, cx - totalSocialW/2, socialY - 26, totalSocialW, 46, 23, {
+          bgColor: tmpl.dark ? p.accent + '08' : p.accent + '05',
+          borderColor: tmpl.dark ? p.accent + '18' : p.accent + '10',
+          borderWidth: 0.5
         });
-        // Thin line above social
-        ctx.fillStyle = p.accent + '15';
-        ctx.fillRect(cx - totalSocialW/2 + 10, socialY - 18, totalSocialW - 20, 1);
+        ctx.font = this._font(17, '400', tmpl); ctx.fillStyle = p.sub + '90';
+        ctx.textAlign = 'center';
+        socialItems.forEach((item, i) => {
+          const ix = cx - totalSocialW/2 + 60 + i * 115;
+          ctx.fillText(item, ix, socialY + 3);
+        });
 
         // ── CTA ──
         this._drawCTA(ctx, tmpl, H - 230, W);

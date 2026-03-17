@@ -59,7 +59,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260317b'  # 502防护优化：图片生成节流+重试延迟
+BUILD_VERSION = '20260317c'  # 卡片引擎v3：视觉效果库+背景/封面/CTA/内容/尾页/图片页全面升级
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
