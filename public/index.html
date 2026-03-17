@@ -8940,6 +8940,9 @@ ${track ? '参考赛道: ' + track : ''}
     }
     const showToast = toast; // TemplateLibrary 兼容别名
 
+    let _apiFailCount = 0;
+    const _API_FAIL_THRESHOLD = 3; // 连续失败3次才切本地模式
+
     async function api(url, options = {}) {
       if (useLocalMode) return localApi(url, options);
       try {
@@ -8960,13 +8963,17 @@ ${track ? '参考赛道: ' + track : ''}
             throw new Error('请先登录');
           }
         }
+        _apiFailCount = 0; // 成功则重置计数
         return await res.json();
       } catch (e) {
         if (e.message === '请先登录') throw e;
-        // 如果API调用失败，自动切换到本地模式
-        console.warn('API不可用，自动切换到本地模式:', e.message);
-        useLocalMode = true;
-        toast('已切换到本地存储模式（数据保存在浏览器中）', 'info');
+        _apiFailCount++;
+        console.warn(`API调用失败(${_apiFailCount}/${_API_FAIL_THRESHOLD}):`, e.message);
+        if (_apiFailCount >= _API_FAIL_THRESHOLD) {
+          // 连续多次失败才切换本地模式
+          useLocalMode = true;
+          toast('后端暂时不可用，已切换到本地存储模式', 'info');
+        }
         return localApi(url, options);
       }
     }
