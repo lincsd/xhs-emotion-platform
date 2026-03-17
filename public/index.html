@@ -1623,12 +1623,6 @@
         <div class="nav-item" data-page="trending">
           <span class="icon">🔥</span> 热门话题
         </div>
-        <div class="nav-item" data-page="comments">
-          <span class="icon">💬</span> 评论话术
-        </div>
-        <div class="nav-item" data-page="competitor">
-          <span class="icon">🔍</span> 竞品分析
-        </div>
         <div class="nav-item" data-page="polish">
           <span class="icon">🪄</span> 内容优化
         </div>
@@ -1726,8 +1720,6 @@
         <div class="nav-item mob-nav" data-page="forbidden" onclick="mobileSwitchPage('forbidden')"><span class="icon">🚫</span> 违禁词检测</div>
         <div class="nav-item mob-nav" data-page="score" onclick="mobileSwitchPage('score')"><span class="icon">💯</span> 笔记评分</div>
         <div class="nav-item mob-nav" data-page="trending" onclick="mobileSwitchPage('trending')"><span class="icon">🔥</span> 热门话题</div>
-        <div class="nav-item mob-nav" data-page="comments" onclick="mobileSwitchPage('comments')"><span class="icon">💬</span> 评论话术</div>
-        <div class="nav-item mob-nav" data-page="competitor" onclick="mobileSwitchPage('competitor')"><span class="icon">🔍</span> 竞品分析</div>
         <div class="nav-item mob-nav" data-page="polish" onclick="mobileSwitchPage('polish')"><span class="icon">🪄</span> 内容优化</div>
         <div class="nav-item mob-nav" data-page="content-plan" onclick="mobileSwitchPage('content-plan')"><span class="icon">📋</span> 内容规划</div>
         <div class="nav-item mob-nav" data-page="img-tool" onclick="mobileSwitchPage('img-tool')"><span class="icon">🖼️</span> 图片优化</div>
@@ -1973,6 +1965,7 @@
             <option value="scheduled">已排期</option>
             <option value="published">已发布</option>
           </select>
+          <button id="filter-starred" class="btn btn-sm btn-outline" onclick="toggleStarredFilter()" style="white-space:nowrap;font-size:13px;" title="只看收藏">☆ 收藏</button>
           <select id="filter-category" class="form-control" onchange="loadPosts()">
             <option value="">全部分类</option>
             <option value="治愈">🌸 治愈</option>
@@ -1999,6 +1992,7 @@
             <thead>
               <tr>
                 <th width="36"><input type="checkbox" id="select-all" onchange="toggleSelectAll()"></th>
+                <th width="28"></th>
                 <th>标题</th>
                 <th width="80">分类</th>
                 <th width="80">状态</th>
@@ -3362,12 +3356,16 @@
 
         <!-- 操作栏 -->
         <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; padding-top:16px; border-top:1px solid var(--border);">
-          <button class="btn btn-sm btn-outline" onclick="copyPostContent()">📋 复制内容</button>
-          <button class="btn btn-sm btn-outline" onclick="downloadPostImage()">🖼️ 下载封面图</button>
-          <button class="btn btn-sm btn-outline" onclick="downloadContentImages()">📥 下载全部配图</button>
-          <button class="btn btn-sm btn-outline" onclick="exportCurrentPost()">📥 导出文件</button>
+          <button class="btn btn-sm" id="view-star-btn" onclick="toggleStarPost()" style="font-size:14px;" title="收藏">☆</button>
+          <button class="btn btn-sm btn-outline" onclick="copyPostContent()">📋 复制全文</button>
+          <button class="btn btn-sm btn-outline" onclick="generateCommentForPost()">💬 生成评论话术</button>
+          <button class="btn btn-sm btn-outline" onclick="downloadPostImage()">🖼️ 下载封面</button>
+          <button class="btn btn-sm btn-outline" onclick="downloadContentImages()">📥 全部配图</button>
+          <button class="btn btn-sm btn-outline" onclick="exportCurrentPost()">📥 导出</button>
           <button class="btn btn-sm" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;" onclick="goToAICard()">🃏 生成卡片</button>
         </div>
+        <!-- 评论话术结果（嵌入笔记详情弹窗底部） -->
+        <div id="view-comment-result" style="display:none; margin-top:12px; padding:12px; background:#f8f9fa; border-radius:10px; font-size:13px; line-height:1.8;"></div>
       </div>
     </div>
   </div>
@@ -3490,7 +3488,6 @@
             <span>🖼️ AI图片生成</span><span style="text-align:right; color:var(--info);">3分</span>
             <span>🪄 AI修图</span><span style="text-align:right; color:var(--info);">3分</span>
             <span>🎯 品牌定位生成</span><span style="text-align:right; color:var(--info);">~8分</span>
-            <span>🔍 竞品分析</span><span style="text-align:right; color:var(--info);">2分</span>
             <span>🏷️ 标签/评分/改写</span><span style="text-align:right; color:var(--info);">1分</span>
             <span>🔥 热门话题/评论</span><span style="text-align:right; color:var(--info);">1分</span>
           </div>
@@ -10280,8 +10277,8 @@ Style: ${stylePrompt}
       dashboard: '📊 数据看板', generator: '✨ 内容生成', posts: '📝 笔记管理',
       calendar: '📅 发布日历', income: '💰 收入追踪', monetization: '🚀 变现方案',
       forbidden: '🚫 违禁词检测', score: '💯 笔记评分', trending: '🔥 热门话题',
-      tags: '🏷️ 标签引擎', rewrite: '🔄 笔记改写', comments: '💬 评论话术',
-      competitor: '🔍 竞品分析', branding: '🎀 账号包装', account: '📈 账号数据',
+      tags: '🏷️ 标签引擎', rewrite: '🔄 笔记改写',
+      branding: '🎀 账号包装', account: '📈 账号数据',
       'multi-account': '👥 多账号管理', purchase: '💎 积分商城', invite: '🎁 邀请赚钱',
       polish: '🪄 内容优化', 'title-gen': '📰 爆款标题',
       keywords: '🔑 热词分析', 'content-plan': '📋 内容规划',
@@ -10739,12 +10736,13 @@ Style: ${stylePrompt}
       const params = new URLSearchParams({ page: postsPage, limit: 20 });
       if (status) params.append('status', status);
       if (category) params.append('category', category);
+      if (window._starredFilter) params.append('starred', '1');
 
       const data = await api(`/api/posts?${params}`);
 
       const tbody = document.getElementById('posts-table');
       if (!data.posts.length) {
-        tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state"><div class="empty-icon">📝</div><p>暂无笔记</p><button class="btn btn-primary" onclick="switchPage('generator')">✨ 去生成</button></div></td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state"><div class="empty-icon">📝</div><p>暂无笔记</p><button class="btn btn-primary" onclick="switchPage('generator')">✨ 去生成</button></div></td></tr>`;
         return;
       }
 
@@ -10756,9 +10754,12 @@ Style: ${stylePrompt}
         const imgBadge = imgCount > 0
           ? `<span style="display:inline-block; font-size:11px; color:#ff6b81; margin-left:6px; vertical-align:middle;" title="${p.has_cover_image ? '有封面图' : ''}${p.content_images_count ? (' + ' + p.content_images_count + '张配图') : ''}">🎨${imgCount}图</span>`
           : '';
+        const starIcon = p.starred ? '★' : '☆';
+        const starColor = p.starred ? 'color:#f5a623;' : 'color:#ccc;';
         return `
         <tr style="cursor:pointer;" onclick="viewPost(${p.id})">
           <td onclick="event.stopPropagation();"><input type="checkbox" value="${p.id}" onchange="toggleSelect(${p.id})" ${selectedPosts.has(p.id) ? 'checked' : ''}></td>
+          <td onclick="event.stopPropagation();" style="text-align:center;"><span style="cursor:pointer;font-size:16px;${starColor}" onclick="quickToggleStar(${p.id},${p.starred?0:1})" title="${p.starred ? '取消收藏' : '收藏'}">${starIcon}</span></td>
           <td>
             <div class="post-title" style="color:var(--text);">
               ${(() => { const hits = checkForbiddenInText((p.title||'')); return hits.ban.length ? '<span style="color:#e74c3c;" title="含封禁词">🚫</span> ' : (hits.high.length ? '<span style="color:#f39c12;" title="含高危词">⚠️</span> ' : ''); })()}${p.title}${imgBadge}
@@ -10957,6 +10958,17 @@ Style: ${stylePrompt}
       }
       metricsContainer.innerHTML = `<h4 style="margin-bottom:8px;">📊 数据表现</h4>${renderPostMetrics(post.id)}`;
       
+      // 更新收藏按钮状态
+      const starBtn = document.getElementById('view-star-btn');
+      if (starBtn) {
+        starBtn.textContent = post.starred ? '★ 已收藏' : '☆ 收藏';
+        starBtn.style.background = post.starred ? '#fff3e0' : '';
+        starBtn.style.color = post.starred ? '#f5a623' : '';
+      }
+      // 隐藏评论结果
+      const commentResult = document.getElementById('view-comment-result');
+      if (commentResult) { commentResult.style.display = 'none'; commentResult.innerHTML = ''; }
+
       openModal('modal-view');
     }
 
@@ -10964,6 +10976,72 @@ Style: ${stylePrompt}
       if (!currentViewPost) return;
       const text = `${currentViewPost.title}\n\n${currentViewPost.content}\n\n${currentViewPost.tags ? currentViewPost.tags.split(',').map(t => '#' + t).join(' ') : ''}`;
       navigator.clipboard.writeText(text).then(() => toast('已复制到剪贴板', 'success'));
+    }
+
+    // ============ 收藏功能 ============
+    async function toggleStarPost() {
+      if (!currentViewPost) return;
+      const newVal = currentViewPost.starred ? 0 : 1;
+      await api(`/api/posts/${currentViewPost.id}`, 'PUT', { starred: newVal });
+      currentViewPost.starred = newVal;
+      const btn = document.getElementById('view-star-btn');
+      if (btn) {
+        btn.textContent = newVal ? '★ 已收藏' : '☆ 收藏';
+        btn.style.background = newVal ? '#fff3e0' : '';
+        btn.style.color = newVal ? '#f5a623' : '';
+      }
+      toast(newVal ? '已收藏' : '已取消收藏', 'success');
+    }
+
+    async function quickToggleStar(postId, newVal) {
+      await api(`/api/posts/${postId}`, 'PUT', { starred: newVal });
+      loadPosts();
+    }
+
+    function toggleStarredFilter() {
+      window._starredFilter = !window._starredFilter;
+      const btn = document.getElementById('filter-starred');
+      if (btn) {
+        btn.textContent = window._starredFilter ? '★ 收藏' : '☆ 收藏';
+        btn.style.background = window._starredFilter ? '#fff3e0' : '';
+        btn.style.color = window._starredFilter ? '#f5a623' : '';
+        btn.style.borderColor = window._starredFilter ? '#f5a623' : '';
+      }
+      postsPage = 1;
+      loadPosts();
+    }
+
+    // ============ 笔记详情内生成评论话术 ============
+    async function generateCommentForPost() {
+      if (!currentViewPost) return;
+      if (!canUseAI()) { toast('请先配置 API Key', 'error'); return; }
+      const resultEl = document.getElementById('view-comment-result');
+      if (!resultEl) return;
+      resultEl.style.display = 'block';
+      resultEl.innerHTML = '<div style="text-align:center;padding:8px;">💬 正在生成评论话术…</div>';
+      try {
+        const key = getGeminiKey();
+        const prompt = `你是小红书运营专家。基于以下笔记内容，生成 6 条不同场景的评论回复话术（感谢、求助、质疑、互动各1-2条）。要求语气亲切自然，适合小红书风格。\n\n笔记标题：${currentViewPost.title}\n笔记内容：${(currentViewPost.content || '').slice(0,500)}\n\n直接输出话术列表，每条前面加场景标签如【感谢】【互动】等，每行一条，不要其他格式。`;
+        const payload = {
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { temperature: 0.8, maxOutputTokens: 2048 }
+        };
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', '评论话术');
+        const resData = result?.data || result;
+        const text = _extractGeminiText(resData);
+        if (text) {
+          const lines = text.split('\n').filter(l => l.trim());
+          resultEl.innerHTML = '<div style="font-weight:600;margin-bottom:8px;">💬 评论话术</div>' +
+            lines.map(l => `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #eee;">
+              <span style="flex:1;">${l}</span>
+              <button class="btn btn-outline" style="font-size:11px;padding:2px 8px;margin-left:8px;flex-shrink:0;" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('span').textContent.trim()).then(()=>toast('已复制','success'))">📋</button>
+            </div>`).join('');
+        } else {
+          resultEl.innerHTML = '<div style="color:#e74c3c;">生成失败，请重试</div>';
+        }
+      } catch (e) {
+        resultEl.innerHTML = `<div style="color:#e74c3c;">生成失败: ${_extractAIError(e)}</div>`;
+      }
     }
 
     // ============ 笔记 → AI 卡片一键联动 ============

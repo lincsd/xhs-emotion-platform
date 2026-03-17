@@ -275,6 +275,12 @@ def init_db():
         conn.execute('CREATE UNIQUE INDEX IF NOT EXISTS idx_users_invite_code ON users(invite_code)')
     except:
         pass
+    # 迁移：给 posts 表添加 starred（收藏）列
+    try:
+        conn.execute('ALTER TABLE posts ADD COLUMN starred INTEGER DEFAULT 0')
+        conn.commit()
+    except:
+        pass
     # 迁移：给 orders 表添加 pay_method 字段
     try:
         conn.execute("ALTER TABLE orders ADD COLUMN pay_method TEXT DEFAULT ''")
@@ -2020,6 +2026,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         if query.get('category'):
             sql += ' AND category = ?'
             params.append(query['category'])
+        if query.get('starred'):
+            sql += ' AND starred = 1'
         
         sql += ' ORDER BY created_at DESC'
         
@@ -2097,7 +2105,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         fields = []
         params = []
         
-        for key in ['title', 'content', 'category', 'tags', 'cover_text', 'status', 'scheduled_date', 'publish_date', 'likes', 'collects', 'comments', 'views']:
+        for key in ['title', 'content', 'category', 'tags', 'cover_text', 'status', 'scheduled_date', 'publish_date', 'likes', 'collects', 'comments', 'views', 'starred']:
             if key in body and body[key] is not None:
                 fields.append(f'{key} = ?')
                 params.append(body[key])
