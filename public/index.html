@@ -6475,7 +6475,7 @@ ${hasPhotos ? '注意：用户有配图，优先选择支持图片的模板（�
 
         const payload = {
           contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { responseMimeType: 'application/json', temperature: 0.3, maxOutputTokens: 512 }
+          generationConfig: { responseMimeType: 'application/json', temperature: 0.3, maxOutputTokens: 2048 }
         };
         const result = await callGeminiAPI(apiKey, getGeminiModel(), payload, 'generateContent', 'ai_card_match');
         const text = result.data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
