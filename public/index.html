@@ -4286,9 +4286,22 @@
     const DEFAULT_GEMINI_PROXY_BASE = 'https://xhs-gemini-proxy.onrender.com';
 
     function getGeminiKey() { return localStorage.getItem('xhs_gemini_key') || ''; }
-    function getGeminiModel() { return localStorage.getItem('xhs_gemini_model') || 'gemini-2.5-flash'; }
+    function getGeminiModel() {
+      const stored = localStorage.getItem('xhs_gemini_model');
+      const valid = ['gemini-2.5-flash', 'gemini-2.5-pro', 'gemini-2.5-flash-lite'];
+      if (stored && valid.includes(stored)) return stored;
+      // 旧版或无效模型名→重置为默认
+      if (stored) localStorage.setItem('xhs_gemini_model', 'gemini-2.5-flash');
+      return 'gemini-2.5-flash';
+    }
     function getImageStyle() { return localStorage.getItem('xhs_image_style') || 'xiaohongshu'; }
-    function getImageModel() { return localStorage.getItem('xhs_image_model') || 'gemini-3.1-flash-image-preview'; }
+    function getImageModel() {
+      const stored = localStorage.getItem('xhs_image_model');
+      const valid = ['gemini-3.1-flash-image-preview', 'gemini-3-pro-image-preview', 'gemini-2.5-flash-image'];
+      if (stored && valid.includes(stored)) return stored;
+      if (stored) localStorage.setItem('xhs_image_model', 'gemini-3.1-flash-image-preview');
+      return 'gemini-3.1-flash-image-preview';
+    }
     function getContentImageCount() { return parseInt(localStorage.getItem('xhs_content_image_count') || '2'); }
 
     // ============ 多 API Key 轮询系统 ============
