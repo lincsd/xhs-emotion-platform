@@ -2961,7 +2961,7 @@
 
             <!-- 图片上传区 -->
             <div style="margin-bottom:16px;">
-              <label style="font-size:12px;color:var(--text-light);display:block;margin-bottom:4px;">📸 配图（可选，支持 1-6 张）</label>
+              <label style="font-size:12px;color:var(--text-light);display:block;margin-bottom:4px;">📸 配图（可选，支持 1-6 张，上传后所有模板都会自动生成图片页）</label>
               <div id="aicard-photo-preview" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;min-height:0;"></div>
               <div style="display:flex;gap:8px;">
                 <label class="btn btn-sm btn-outline" style="cursor:pointer;">
@@ -5089,6 +5089,68 @@
             ctx.textAlign = 'left';
           }
         }
+        else if (layout === 'universal' || pageType === 'universal') {
+          // 通用图片页：适用于所有非图片专属模板，用模板配色 + 拼图排版
+          const n = Math.min(photos.length, 6);
+          const margin = 60, gap = 14;
+          const innerW = W - margin * 2;
+          const titleAreaH = 140;
+          const gridAreaH = H - titleAreaH - 80;
+
+          // 标题区域
+          ctx.font = this._font(28, '700', tmpl); ctx.fillStyle = p.text;
+          ctx.textAlign = 'center';
+          ctx.fillText('— 精选配图 —', W / 2, margin + 45);
+          ctx.font = this._font(15, '400', tmpl); ctx.fillStyle = p.sub;
+          ctx.fillText(`共 ${n} 张图片`, W / 2, margin + 72);
+          // Accent bar
+          ctx.fillStyle = p.accent + '60';
+          ctx.fillRect(W / 2 - 40, margin + 82, 80, 2);
+          ctx.textAlign = 'left';
+
+          // 自适应网格
+          if (n === 1) {
+            // 单图大图展示
+            const imgH = gridAreaH - 20;
+            const imgW = Math.min(innerW, imgH * 4 / 3);
+            this._drawImageCover(ctx, photos[0].img, (W - imgW) / 2, titleAreaH, imgW, imgH, 16);
+          } else if (n === 2) {
+            // 双图并排
+            const gw = (innerW - gap) / 2;
+            this._drawImageCover(ctx, photos[0].img, margin, titleAreaH, gw, gridAreaH, 14);
+            this._drawImageCover(ctx, photos[1].img, margin + gw + gap, titleAreaH, gw, gridAreaH, 14);
+          } else if (n === 3) {
+            // 1大+2小
+            const bigW = Math.floor(innerW * 0.58);
+            const smallW = innerW - bigW - gap;
+            const halfH = (gridAreaH - gap) / 2;
+            this._drawImageCover(ctx, photos[0].img, margin, titleAreaH, bigW, gridAreaH, 14);
+            this._drawImageCover(ctx, photos[1].img, margin + bigW + gap, titleAreaH, smallW, halfH, 14);
+            this._drawImageCover(ctx, photos[2].img, margin + bigW + gap, titleAreaH + halfH + gap, smallW, halfH, 14);
+          } else {
+            // 4-6: 2列网格
+            const cols = n <= 4 ? 2 : 3;
+            const rows = Math.ceil(n / cols);
+            const cellW = (innerW - (cols - 1) * gap) / cols;
+            const cellH = (gridAreaH - (rows - 1) * gap) / rows;
+            photos.slice(0, n).forEach((ph, i) => {
+              const col = i % cols, row = Math.floor(i / cols);
+              const cx = margin + col * (cellW + gap);
+              const cy = titleAreaH + row * (cellH + gap);
+              // 卡片阴影
+              ctx.shadowColor = 'rgba(0,0,0,0.06)'; ctx.shadowBlur = 8; ctx.shadowOffsetY = 3;
+              this._roundRect(ctx, cx, cy, cellW, cellH, 12);
+              ctx.fillStyle = '#fff'; ctx.fill();
+              ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+              // 图片
+              this._drawImageCover(ctx, ph.img, cx + 3, cy + 3, cellW - 6, cellH - 6, 9);
+            });
+          }
+
+          // 底部装饰线
+          ctx.fillStyle = p.accent + '30';
+          ctx.fillRect(W / 2 - 30, H - 50, 60, 2);
+        }
         else {
           // Grid layout (product_showcase default)
           const n = Math.min(photos.length, 6);
@@ -6017,16 +6079,17 @@ ${postList}
         const tmpl = templateId ? this.getTemplate(templateId) : this.matchTemplate(post);
         let c = document.createElement('canvas'); c.width = this.W; c.height = this.H;
         const cards = [];
-        const hasUserPhotos = tmpl.hasPhotos && this._userPhotos.some(ph => ph.img);
+        const hasUserPhotos = this._userPhotos.some(ph => ph.img);
 
         // Cover
         this._drawCover(c.getContext('2d'), post, tmpl);
         cards.push({ type: 'cover', label: '封面', dataUrl: c.toDataURL('image/png') });
 
-        // Photo page (for templates with hasPhotos + user uploaded photos)
+        // Photo page: 用户上传了配图时，所有模板都生成图片页
         if (hasUserPhotos) {
           c = document.createElement('canvas'); c.width = this.W; c.height = this.H;
-          this._drawPhotoPage(c.getContext('2d'), tmpl, tmpl.photoLayout === 'hero' ? 'cover-photo' : 'photo-grid');
+          const layoutType = tmpl.hasPhotos ? (tmpl.photoLayout === 'hero' ? 'cover-photo' : 'photo-grid') : 'universal';
+          this._drawPhotoPage(c.getContext('2d'), tmpl, layoutType);
           cards.push({ type: 'photos', label: '图片页', dataUrl: c.toDataURL('image/png') });
         } else if (tmpl.hasPhotos) {
           // Placeholder — user can click to generate AI photos or upload
@@ -6068,7 +6131,7 @@ ${postList}
         <div id="card-photo-upload" style="margin-bottom:12px;padding:12px;border:1px dashed var(--border);border-radius:10px;background:var(--bg);display:none;">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
             <span style="font-size:14px;font-weight:600;">📸 上传产品/穿搭照片</span>
-            <span style="font-size:12px;color:var(--text-light);">（支持1-6张，用于图片页）</span>
+            <span style="font-size:12px;color:var(--text-light);">（支持1-6张，所有模板都会自动生成图片页）</span>
           </div>
           <div id="card-photo-preview" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;min-height:0;"></div>
           <div style="display:flex;gap:8px;">
@@ -6144,11 +6207,11 @@ ${postList}
       const post = CardEngine._currentPost;
       if (!post) return;
 
-      // Show/hide photo upload panel based on template
+      // Show/hide photo upload panel — 所有模板都支持上传配图
       const tmpl = CardEngine.getTemplate(tmplId);
       const photoPanel = document.getElementById('card-photo-upload');
       if (photoPanel) {
-        photoPanel.style.display = (tmpl && tmpl.hasPhotos) ? 'block' : 'none';
+        photoPanel.style.display = 'block';
       }
 
       const result = CardEngine.generateCards(post, tmplId);
@@ -6506,7 +6569,7 @@ ${hasPhotos ? '用户上传了' + _aiCardPhotos.length + '张配图' : '无配�
 可选模板列表:
 ${tmplList}
 
-${hasPhotos ? '注意：用户有配图，优先选择支持图片的模板（如种草带货、穿搭拼图、配色灵感等有 hasPhotos 属性的）' : ''}
+${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片展示页，请根据笔记内容选择最佳模板即可，不必局限于图片专属模板' : ''}
 
 严格返回JSON（不要markdown代码块）:
 {"matches":[{"id":"模板id","score":90,"reason":"选择原因(15字内)"},{"id":"","score":80,"reason":""},{"id":"","score":70,"reason":""}]}`;
