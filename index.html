@@ -4737,6 +4737,23 @@
       _currentTmplId: null,
       _allPosts: [],
       _aiMatchCache: {},
+      _paletteOverride: null,  // 用户自定义配色覆盖
+
+      // ── 预设配色方案 ──
+      palettePresets: [
+        { name: '奶茶暖棕', palette: { bg:'#f5efe6', card:'#fdfaf3', text:'#3c3226', accent:'#c4a882', sub:'#8a7f72' } },
+        { name: '莫兰迪灰', palette: { bg:'#e8e4df', card:'#f0ece7', text:'#4a4540', accent:'#9b8e82', sub:'#b5aba0' } },
+        { name: '樱花粉', palette: { bg:'#fff5f7', card:'#ffffff', text:'#4a3540', accent:'#ff8fa3', sub:'#c9a0b0' } },
+        { name: '薄荷清新', palette: { bg:'#f0faf4', card:'#ffffff', text:'#2d4a3e', accent:'#6bcb77', sub:'#8ab5a0' } },
+        { name: '克莱因蓝', palette: { bg:'#f0f4ff', card:'#ffffff', text:'#1a2456', accent:'#002fa7', sub:'#7888b0' } },
+        { name: '赛博暗夜', palette: { bg:'#0d1117', card:'#161b22', text:'#e6edf3', accent:'#00f0ff', sub:'#7d8590' } },
+        { name: '落日橘', palette: { bg:'#fff8f0', card:'#ffffff', text:'#4a3020', accent:'#ff6b35', sub:'#c49070' } },
+        { name: '薰衣草紫', palette: { bg:'#f8f5ff', card:'#ffffff', text:'#3c2e5c', accent:'#9775fa', sub:'#a89cc8' } },
+        { name: '复古红金', palette: { bg:'#fdf6f0', card:'#faf3eb', text:'#2c1810', accent:'#c41e3a', sub:'#b8860b' } },
+        { name: '极简黑白', palette: { bg:'#ffffff', card:'#f8f8f8', text:'#111111', accent:'#333333', sub:'#888888' } },
+        { name: '森系墨绿', palette: { bg:'#f0f4e8', card:'#f8faf0', text:'#2d3a2d', accent:'#4a7c59', sub:'#7a9a70' } },
+        { name: '焦糖玛奇朵', palette: { bg:'#f8f0e3', card:'#fdf8f2', text:'#3a2a1a', accent:'#d4883a', sub:'#a08060' } },
+      ],
 
       // ══════════════ 12 Skill-Based 模板定义 ══════════════
       templates: [
@@ -4894,6 +4911,27 @@
           photoLayout: 'hero',
           endText: '这组配色你爱了吗？', endEmoji: '🎨✨',
           ctaText: '收藏这组配色 🎨', ctaStyle: 'gradient'
+        },
+        {
+          id: 'letter_paper', name: '拟物信笺', icon: '📜',
+          bestFor: ['金句','语录','心情','手写','信','感悟','散文','独白','信笺','便签','日记'],
+          skill: '复古信纸纹理+拟物化书写质感+印章装饰+信封风格。适合金句分享/心情独白/手写风文字/锤子便签风',
+          accountTypes: ['情感博主','文字创作','读书笔记'],
+          palette: { bg:'#f5efe6', card:'#fdfaf3', text:'#3c3226', accent:'#b8860b', sub:'#8b7d6b' },
+          serif: true, italic: false, titleSize: 44, titleAlign: 'left',
+          endText: '见字如面', endEmoji: '📜✒️', endSub: '— 纸短情长 —',
+          ctaText: '收藏这封信 ✉️', ctaStyle: 'filled'
+        },
+        {
+          id: 'bold_impact', name: '醒目大字', icon: '💥',
+          bestFor: ['爆款','标题','封面','干货','盘点','必看','推荐','排名','对比','冲击'],
+          skill: '超大加粗标题+高对比色块背景+冲击力排版。适合爆款封面/干货盘点/排行榜/稿定设计风格',
+          accountTypes: ['知识博主','种草博主','自媒体运营'],
+          palette: { bg:'#1a1a2e', card:'#16213e', text:'#ffffff', accent:'#e94560', sub:'#a8a8b3' },
+          dark: true, serif: false, boldTitle: true, titleSize: 64, titleAlign: 'center',
+          headerLabel: 'TOP LIST',
+          endText: '点赞收藏不迷路', endEmoji: '🔥💥', endSub: '下期更精彩',
+          ctaText: '一键三连 🔥', ctaStyle: 'gradient'
         }
       ],
 
@@ -4934,6 +4972,11 @@
       _catEmoji(cat) {
         const m = {'治愈':'🌿','成长':'🌱','爱情':'💕','友情':'🤝','自我':'✨','离别':'🍂','温暖':'🌅','释怀':'🕊️'};
         return m[cat] || '📝';
+      },
+      _isLightColor(hex) {
+        const c = hex.replace('#','');
+        const r = parseInt(c.substr(0,2),16), g = parseInt(c.substr(2,2),16), b = parseInt(c.substr(4,2),16);
+        return (r*299 + g*587 + b*114) / 1000 > 128;
       },
       _drawStar(ctx, cx, cy, r, fill) {
         ctx.beginPath();
@@ -5235,8 +5278,8 @@
           .map(([k]) => { const [r,g,b] = k.split(','); return `rgb(${r},${g},${b})`; });
       },
 
-      // Draw image into rounded rect area with cover-fit
-      _drawImageCover(ctx, img, x, y, w, h, r) {
+      // Draw image into rounded rect area with cover-fit + optional filter overlay
+      _drawImageCover(ctx, img, x, y, w, h, r, filterType) {
         if (!img) return;
         ctx.save();
         this._roundRect(ctx, x, y, w, h, r || 0);
@@ -5245,6 +5288,74 @@
         const scale = Math.max(w / iw, h / ih);
         const sw = iw * scale, sh = ih * scale;
         ctx.drawImage(img, x + (w - sw) / 2, y + (h - sh) / 2, sw, sh);
+        // Apply filter overlay if specified
+        if (filterType) this._photoFilter(ctx, x, y, w, h, filterType);
+        ctx.restore();
+      },
+
+      // ── 图片滤镜覆盖层（醒图/黄油相机风格）──
+      _photoFilter(ctx, x, y, w, h, type) {
+        ctx.save();
+        if (type === 'vintage') {
+          // 复古胶片: 暖色调 + 低饱和 + 暗角
+          ctx.globalCompositeOperation = 'multiply';
+          const vg = ctx.createLinearGradient(x, y, x + w, y + h);
+          vg.addColorStop(0, 'rgba(240,220,180,0.15)'); vg.addColorStop(1, 'rgba(200,160,120,0.20)');
+          ctx.fillStyle = vg; ctx.fillRect(x, y, w, h);
+          ctx.globalCompositeOperation = 'source-over';
+          // Light leak (top-left warm glow)
+          const leak = ctx.createRadialGradient(x, y, 0, x, y, w * 0.6);
+          leak.addColorStop(0, 'rgba(255,200,100,0.08)'); leak.addColorStop(1, 'transparent');
+          ctx.fillStyle = leak; ctx.fillRect(x, y, w, h);
+          // Vignette corners
+          const vig = ctx.createRadialGradient(x + w/2, y + h/2, Math.min(w,h)*0.3, x + w/2, y + h/2, Math.max(w,h)*0.7);
+          vig.addColorStop(0, 'transparent'); vig.addColorStop(1, 'rgba(40,20,10,0.25)');
+          ctx.fillStyle = vig; ctx.fillRect(x, y, w, h);
+        }
+        else if (type === 'japanese') {
+          // 日系清新: 高亮+低对比+淡青
+          ctx.globalCompositeOperation = 'screen';
+          ctx.fillStyle = 'rgba(220,240,255,0.10)'; ctx.fillRect(x, y, w, h);
+          ctx.globalCompositeOperation = 'source-over';
+          // Soft haze overlay
+          ctx.fillStyle = 'rgba(255,255,250,0.06)'; ctx.fillRect(x, y, w, h);
+          // Subtle warm bottom
+          const jg = ctx.createLinearGradient(x, y, x, y + h);
+          jg.addColorStop(0, 'transparent'); jg.addColorStop(1, 'rgba(255,240,220,0.08)');
+          ctx.fillStyle = jg; ctx.fillRect(x, y, w, h);
+        }
+        else if (type === 'cinema') {
+          // 电影色调: 青橙对比 (teal & orange)
+          ctx.globalCompositeOperation = 'overlay';
+          const cg = ctx.createLinearGradient(x, y, x, y + h);
+          cg.addColorStop(0, 'rgba(0,80,120,0.08)'); cg.addColorStop(0.5, 'transparent'); cg.addColorStop(1, 'rgba(180,100,40,0.08)');
+          ctx.fillStyle = cg; ctx.fillRect(x, y, w, h);
+          ctx.globalCompositeOperation = 'source-over';
+          // Cinematic bars (2.35:1 letterbox hint)
+          ctx.fillStyle = 'rgba(0,0,0,0.35)';
+          ctx.fillRect(x, y, w, Math.max(8, h * 0.04));
+          ctx.fillRect(x, y + h - Math.max(8, h * 0.04), w, Math.max(8, h * 0.04));
+        }
+        else if (type === 'dreamy') {
+          // 梦幻柔光: 柔焦+粉紫光晕
+          ctx.globalCompositeOperation = 'screen';
+          const dg = ctx.createRadialGradient(x + w/2, y + h/2, 0, x + w/2, y + h/2, Math.max(w,h)*0.5);
+          dg.addColorStop(0, 'rgba(255,200,255,0.06)'); dg.addColorStop(0.5, 'rgba(200,180,255,0.04)'); dg.addColorStop(1, 'transparent');
+          ctx.fillStyle = dg; ctx.fillRect(x, y, w, h);
+          ctx.globalCompositeOperation = 'source-over';
+          // Soft white haze edges
+          const haze = ctx.createRadialGradient(x + w/2, y + h/2, Math.min(w,h)*0.25, x + w/2, y + h/2, Math.max(w,h)*0.6);
+          haze.addColorStop(0, 'transparent'); haze.addColorStop(1, 'rgba(255,255,255,0.12)');
+          ctx.fillStyle = haze; ctx.fillRect(x, y, w, h);
+        }
+        else if (type === 'bw') {
+          // 黑白质感: 去饱和 + 微对比
+          ctx.globalCompositeOperation = 'saturation';
+          ctx.fillStyle = 'rgba(128,128,128,0.85)'; ctx.fillRect(x, y, w, h);
+          ctx.globalCompositeOperation = 'overlay';
+          ctx.fillStyle = 'rgba(0,0,0,0.05)'; ctx.fillRect(x, y, w, h);
+          ctx.globalCompositeOperation = 'source-over';
+        }
         ctx.restore();
       },
 
@@ -5256,11 +5367,12 @@
         this._drawBg(ctx, tmpl);
         const tid = tmpl.id;
         const layout = tmpl.photoLayout || 'grid';
+        const _pf = this._getPhotoFilter(tmpl);
 
         if (layout === 'hero' && pageType === 'cover-photo') {
           // Hero: one large photo at top + color palette below
           const img = photos[0].img;
-          this._drawImageCover(ctx, img, 60, 80, W - 120, 680, 16);
+          this._drawImageCover(ctx, img, 60, 80, W - 120, 680, 16, _pf);
           // Color palette extracted from image
           const colors = photos[0].colors || [];
           if (colors.length >= 4) {
@@ -5287,25 +5399,25 @@
           // Magazine-style collage
           const n = Math.min(photos.length, 6);
           if (n === 1) {
-            this._drawImageCover(ctx, photos[0].img, 60, 100, W - 120, H - 200, 16);
+            this._drawImageCover(ctx, photos[0].img, 60, 100, W - 120, H - 200, 16, _pf);
           } else if (n === 2) {
             const gw = (W - 140) / 2;
-            this._drawImageCover(ctx, photos[0].img, 60, 100, gw, H - 200, 12);
-            this._drawImageCover(ctx, photos[1].img, 80 + gw, 100, gw, H - 200, 12);
+            this._drawImageCover(ctx, photos[0].img, 60, 100, gw, H - 200, 12, _pf);
+            this._drawImageCover(ctx, photos[1].img, 80 + gw, 100, gw, H - 200, 12, _pf);
           } else if (n === 3) {
             // 1 big left + 2 small right
             const bigW = (W - 140) * 0.6;
             const smallW = W - 140 - bigW - 10;
             const halfH = (H - 210) / 2;
-            this._drawImageCover(ctx, photos[0].img, 60, 100, bigW, H - 200, 12);
-            this._drawImageCover(ctx, photos[1].img, 70 + bigW, 100, smallW, halfH - 5, 12);
-            this._drawImageCover(ctx, photos[2].img, 70 + bigW, 105 + halfH, smallW, halfH - 5, 12);
+            this._drawImageCover(ctx, photos[0].img, 60, 100, bigW, H - 200, 12, _pf);
+            this._drawImageCover(ctx, photos[1].img, 70 + bigW, 100, smallW, halfH - 5, 12, _pf);
+            this._drawImageCover(ctx, photos[2].img, 70 + bigW, 105 + halfH, smallW, halfH - 5, 12, _pf);
           } else if (n === 4) {
             const gw = (W - 150) / 2;
             const gh = (H - 220) / 2;
             photos.slice(0, 4).forEach((ph, i) => {
               const col = i % 2, row = Math.floor(i / 2);
-              this._drawImageCover(ctx, ph.img, 60 + col * (gw + 10), 100 + row * (gh + 10), gw, gh, 12);
+              this._drawImageCover(ctx, ph.img, 60 + col * (gw + 10), 100 + row * (gh + 10), gw, gh, 12, _pf);
             });
           } else {
             // 2 rows: top 3, bottom 3 (or less)
@@ -5315,13 +5427,13 @@
             // Top row
             const tw = (W - 120 - (topCount - 1) * 10) / topCount;
             photos.slice(0, topCount).forEach((ph, i) => {
-              this._drawImageCover(ctx, ph.img, 60 + i * (tw + 10), 100, tw, rowH - 5, 10);
+              this._drawImageCover(ctx, ph.img, 60 + i * (tw + 10), 100, tw, rowH - 5, 10, _pf);
             });
             // Bottom row
             if (botCount > 0) {
               const bw = (W - 120 - (botCount - 1) * 10) / botCount;
               photos.slice(topCount, topCount + botCount).forEach((ph, i) => {
-                this._drawImageCover(ctx, ph.img, 60 + i * (bw + 10), 105 + rowH, bw, rowH - 5, 10);
+                this._drawImageCover(ctx, ph.img, 60 + i * (bw + 10), 105 + rowH, bw, rowH - 5, 10, _pf);
               });
             }
           }
@@ -5385,7 +5497,7 @@
             ctx.fillStyle = '#fff'; ctx.fill();
             ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
             // Photo
-            this._drawImageCover(ctx, ph.img, cx + 4, cy + 4, cellW - 8, cellH - 8, 10);
+            this._drawImageCover(ctx, ph.img, cx + 4, cy + 4, cellW - 8, cellH - 8, 10, _pf);
           });
 
           // Color swatches at bottom if available
@@ -5408,13 +5520,24 @@
       _getPhotoPageStyle(tmpl) {
         const tid = tmpl.id;
         if (['magazine_edit', 'ins_aesthetic', 'ootd_collage'].includes(tid)) return 'magazine';
-        if (['minimal_literary', 'handwrite_diary', 'chinese_retro', 'nature_healing'].includes(tid)) return 'polaroid';
-        if (['dark_cyber', 'breaking_news', 'biz_premium'].includes(tid)) return 'filmstrip';
+        if (['minimal_literary', 'handwrite_diary', 'chinese_retro', 'nature_healing', 'letter_paper'].includes(tid)) return 'polaroid';
+        if (['dark_cyber', 'breaking_news', 'biz_premium', 'bold_impact'].includes(tid)) return 'filmstrip';
         if (['sweet_fresh', 'candy_pop', 'color_palette', 'note_knowledge'].includes(tid)) return 'storyCards';
         if (tmpl.dark) return 'filmstrip';
         if (tmpl.serif) return 'polaroid';
         const hash = tid.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
         return ['magazine', 'polaroid', 'storyCards', 'filmstrip'][hash % 4];
+      },
+
+      // ── 根据模板自动选择图片滤镜 ──
+      _getPhotoFilter(tmpl) {
+        const tid = tmpl.id;
+        if (['chinese_retro', 'letter_paper', 'handwrite_diary'].includes(tid)) return 'vintage';
+        if (['nature_healing', 'sweet_fresh', 'ins_aesthetic'].includes(tid)) return 'japanese';
+        if (['dark_cyber', 'bold_impact', 'breaking_news'].includes(tid)) return 'cinema';
+        if (['minimal_literary'].includes(tid)) return 'dreamy';
+        if (['magazine_edit', 'biz_premium'].includes(tid)) return 'bw';
+        return null; // No filter for other templates
       },
 
       // ── Magazine Spread Style ──
@@ -5423,10 +5546,11 @@
         this._drawBg(ctx, tmpl);
         const n = photos.length;
         const margin = 40;
+        const _pf = this._getPhotoFilter(tmpl);
 
         // Hero photo (top 55%)
         const heroH = Math.floor(H * 0.55);
-        this._drawImageCover(ctx, photos[0].img, margin, margin, W - margin * 2, heroH, 16);
+        this._drawImageCover(ctx, photos[0].img, margin, margin, W - margin * 2, heroH, 16, _pf);
 
         // Gradient overlay on hero bottom
         const heroGrad = ctx.createLinearGradient(0, margin + heroH - 100, 0, margin + heroH);
@@ -5466,7 +5590,7 @@
             ctx.fill();
             ctx.shadowBlur = 0;
             ctx.shadowOffsetY = 0;
-            this._drawImageCover(ctx, ph.img, x + 3, stripY + 3, imgW - 6, stripH - 6, 9);
+            this._drawImageCover(ctx, ph.img, x + 3, stripY + 3, imgW - 6, stripH - 6, 9, _pf);
           });
         }
 
@@ -5483,6 +5607,7 @@
         const W = this.W, H = this.H, p = tmpl.palette;
         this._drawBg(ctx, tmpl);
         const n = Math.min(photos.length, 4);
+        const _pf = this._getPhotoFilter(tmpl);
 
         // Scattered polaroid positions (for 1080x1440 canvas)
         const layouts = {
@@ -5530,7 +5655,7 @@
           ctx.shadowOffsetY = 0;
 
           // Photo inside frame
-          this._drawImageCover(ctx, ph.img, -pos.w / 2, -frameH / 2 + borderSide, pos.w, pos.h, 0);
+          this._drawImageCover(ctx, ph.img, -pos.w / 2, -frameH / 2 + borderSide, pos.w, pos.h, 0, _pf);
 
           // Masking tape decoration on some photos
           if (i % 2 === 0) {
@@ -5556,6 +5681,7 @@
       _photoStyleFilmstrip(ctx, tmpl, photos) {
         const W = this.W, H = this.H, p = tmpl.palette;
         const n = Math.min(photos.length, 6);
+        const _pf = this._getPhotoFilter(tmpl);
 
         // Dark film background
         ctx.fillStyle = '#0a0a0a';
@@ -5581,24 +5707,24 @@
         const innerH = H - 110;
 
         if (n === 1) {
-          this._drawImageCover(ctx, photos[0].img, margin, 60, innerW, innerH, 4);
+          this._drawImageCover(ctx, photos[0].img, margin, 60, innerW, innerH, 4, _pf);
         } else if (n === 2) {
           const gap = 14;
           const frameH = (innerH - gap) / 2;
           photos.forEach((ph, i) => {
-            this._drawImageCover(ctx, ph.img, margin, 60 + i * (frameH + gap), innerW, frameH, 4);
+            this._drawImageCover(ctx, ph.img, margin, 60 + i * (frameH + gap), innerW, frameH, 4, _pf);
           });
         } else {
           // Feature frame + strip below
           const featureH = Math.floor(innerH * 0.58);
-          this._drawImageCover(ctx, photos[0].img, margin, 60, innerW, featureH, 4);
+          this._drawImageCover(ctx, photos[0].img, margin, 60, innerW, featureH, 4, _pf);
           const stripY = 60 + featureH + 14;
           const stripH = innerH - featureH - 14;
           const remaining = photos.slice(1, Math.min(n, 5));
           const gap = 8;
           const frameW = (innerW - (remaining.length - 1) * gap) / remaining.length;
           remaining.forEach((ph, i) => {
-            this._drawImageCover(ctx, ph.img, margin + i * (frameW + gap), stripY, frameW, stripH, 4);
+            this._drawImageCover(ctx, ph.img, margin + i * (frameW + gap), stripY, frameW, stripH, 4, _pf);
           });
         }
 
@@ -5629,6 +5755,7 @@
         const margin = 48;
         const gap = 18;
         const innerW = W - margin * 2;
+        const _pf = this._getPhotoFilter(tmpl);
 
         // v3: Decorative header with glassMorph
         this._glassMorph(ctx, W / 2 - 120, 30, 240, 56, 28, {
@@ -5664,7 +5791,7 @@
           ctx.fill();
           ctx.shadowBlur = 0;
           ctx.shadowOffsetY = 0;
-          this._drawImageCover(ctx, photos[0].img, cx + 6, cy + 6, cardW - 12, cardH - 12, 14);
+          this._drawImageCover(ctx, photos[0].img, cx + 6, cy + 6, cardW - 12, cardH - 12, 14, _pf);
         } else if (n === 2) {
           const cardW = (innerW - gap) / 2;
           const cardH = gridH * 0.85;
@@ -5679,7 +5806,7 @@
             ctx.fill();
             ctx.shadowBlur = 0;
             ctx.shadowOffsetY = 0;
-            this._drawImageCover(ctx, photos[i].img, cx + 5, cy + 5, cardW - 10, cardH - 10, 12);
+            this._drawImageCover(ctx, photos[i].img, cx + 5, cy + 5, cardW - 10, cardH - 10, 12, _pf);
           });
           ctx.fillStyle = p.accent + '18';
           ctx.fillRect(W / 2 - 1, cy + 24, 2, cardH - 48);
@@ -5695,7 +5822,7 @@
           ctx.fill();
           ctx.shadowBlur = 0;
           ctx.shadowOffsetY = 0;
-          this._drawImageCover(ctx, photos[0].img, margin + 5, gridTop + 5, innerW - 10, bigH - 10, 12);
+          this._drawImageCover(ctx, photos[0].img, margin + 5, gridTop + 5, innerW - 10, bigH - 10, 12, _pf);
           [0, 1].forEach(i => {
             const cx = margin + i * (smallW + gap);
             const cy = gridTop + bigH + gap;
@@ -5707,7 +5834,7 @@
             ctx.fill();
             ctx.shadowBlur = 0;
             ctx.shadowOffsetY = 0;
-            this._drawImageCover(ctx, photos[i + 1].img, cx + 4, cy + 4, smallW - 8, smallH - 8, 10);
+            this._drawImageCover(ctx, photos[i + 1].img, cx + 4, cy + 4, smallW - 8, smallH - 8, 10, _pf);
           });
         } else {
           const cols = n <= 4 ? 2 : 3;
@@ -5732,7 +5859,7 @@
             ctx.fill();
             ctx.shadowBlur = 0;
             ctx.shadowOffsetY = 0;
-            this._drawImageCover(ctx, ph.img, cx + 5, cy + 5, cellW - 10, cellH - 10, 10);
+            this._drawImageCover(ctx, ph.img, cx + 5, cy + 5, cellW - 10, cellH - 10, 10, _pf);
           });
         }
 
@@ -6025,17 +6152,105 @@
             ctx.fillStyle = ci.c; ctx.fill();
           });
         }
+        else if (tid === 'letter_paper') {
+          // ── 锤子便签风 拟物信笺纸 ──
+          // 1. Warm parchment base gradient
+          const pg = ctx.createLinearGradient(0, 0, W * 0.2, H);
+          pg.addColorStop(0, '#f5efe6'); pg.addColorStop(0.5, '#fdf8f0'); pg.addColorStop(1, '#f0e8d8');
+          ctx.fillStyle = pg; ctx.fillRect(0, 0, W, H);
+          // 2. Paper fiber noise (dense for realism)
+          for (let i = 0; i < 6000; i++) {
+            const v = Math.random();
+            ctx.fillStyle = `rgba(${160+Math.random()*40},${140+Math.random()*30},${110+Math.random()*30},${v*0.04})`;
+            ctx.fillRect(Math.random()*W, Math.random()*H, v > 0.5 ? 2 : 1, 1);
+          }
+          // 3. Aging stains (subtle)
+          [{ x:180, y:200, r:120, o:0.015 },{ x:W-200, y:H-400, r:160, o:0.02 },{ x:400, y:800, r:100, o:0.012 }].forEach(s => {
+            const sg = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r);
+            sg.addColorStop(0, `rgba(180,150,100,${s.o})`); sg.addColorStop(1, 'transparent');
+            ctx.fillStyle = sg; ctx.fillRect(s.x-s.r, s.y-s.r, s.r*2, s.r*2);
+          });
+          // 4. Horizontal ruled lines (notebook feel)
+          ctx.strokeStyle = 'rgba(184,134,11,0.08)'; ctx.lineWidth = 0.5;
+          for (let y = 220; y < H-100; y += 44) {
+            ctx.beginPath(); ctx.moveTo(80, y); ctx.lineTo(W-80, y); ctx.stroke();
+          }
+          // 5. Left margin red line
+          ctx.strokeStyle = 'rgba(200,80,80,0.12)'; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(108, 140); ctx.lineTo(108, H-80); ctx.stroke();
+          // 6. Decorative border (aged frame)
+          ctx.strokeStyle = 'rgba(184,134,11,0.15)'; ctx.lineWidth = 1.5;
+          this._roundRect(ctx, 40, 40, W-80, H-80, 6); ctx.stroke();
+          ctx.strokeStyle = 'rgba(184,134,11,0.06)'; ctx.lineWidth = 0.5;
+          this._roundRect(ctx, 48, 48, W-96, H-96, 4); ctx.stroke();
+          // 7. Corner fold effect (top-right)
+          ctx.save();
+          ctx.beginPath(); ctx.moveTo(W-40, 40); ctx.lineTo(W-80, 40); ctx.lineTo(W-40, 80); ctx.closePath();
+          ctx.fillStyle = 'rgba(230,220,200,0.6)'; ctx.fill();
+          ctx.strokeStyle = 'rgba(184,134,11,0.12)'; ctx.lineWidth = 0.5; ctx.stroke();
+          ctx.restore();
+          // 8. Red seal stamp (bottom-right)
+          ctx.save();
+          ctx.globalAlpha = 0.08;
+          ctx.translate(W-140, H-160); ctx.rotate(-0.15);
+          ctx.strokeStyle = '#c41e3a'; ctx.lineWidth = 2.5;
+          this._roundRect(ctx, -30, -30, 60, 60, 4); ctx.stroke();
+          ctx.font = "bold 22px 'Noto Serif SC', serif"; ctx.fillStyle = '#c41e3a';
+          ctx.textAlign = 'center'; ctx.fillText('信', 0, 8);
+          ctx.restore(); ctx.globalAlpha = 1;
+        }
+        else if (tid === 'bold_impact') {
+          // ── 稿定设计风 醒目大字冲击力背景 ──
+          // 1. Deep dark base
+          const bg = ctx.createLinearGradient(0, 0, W, H);
+          bg.addColorStop(0, '#1a1a2e'); bg.addColorStop(0.5, '#16213e'); bg.addColorStop(1, '#0f3460');
+          ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+          // 2. Large color block accent splashes
+          ctx.save();
+          ctx.globalAlpha = 0.12;
+          ctx.fillStyle = '#e94560';
+          ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(W*0.6, 0); ctx.lineTo(0, H*0.4); ctx.closePath(); ctx.fill();
+          ctx.fillStyle = '#0f3460';
+          ctx.beginPath(); ctx.moveTo(W, H); ctx.lineTo(W*0.3, H); ctx.lineTo(W, H*0.5); ctx.closePath(); ctx.fill();
+          ctx.globalAlpha = 1;
+          ctx.restore();
+          // 3. Diagonal stripes pattern
+          ctx.save();
+          ctx.strokeStyle = 'rgba(233,69,96,0.06)'; ctx.lineWidth = 3;
+          for (let i = -H; i < W + H; i += 60) {
+            ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i + H, H); ctx.stroke();
+          }
+          ctx.restore();
+          // 4. Large decorative numbers (background)
+          ctx.save();
+          ctx.globalAlpha = 0.03;
+          ctx.font = "900 320px 'Noto Sans SC', sans-serif";
+          ctx.fillStyle = '#ffffff';
+          ctx.textAlign = 'center';
+          ctx.fillText('TOP', W/2, H*0.45);
+          ctx.globalAlpha = 1;
+          ctx.restore();
+          // 5. Neon grid accent
+          ctx.strokeStyle = 'rgba(233,69,96,0.04)'; ctx.lineWidth = 0.5;
+          for (let x = 0; x < W; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+          for (let y = 0; y < H; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+          // 6. Bold corner accents
+          ctx.fillStyle = '#e94560';
+          ctx.fillRect(0, 0, 6, 120); ctx.fillRect(0, 0, 120, 6);
+          ctx.fillRect(W-6, H-120, 6, 120); ctx.fillRect(W-120, H-6, 120, 6);
+        }
       },
 
-      // ══════════════ 照片封面渲染（图文融合版）══════════════
+      // ══════════════ 照片封面渲染 ══════════════
       _drawPhotoCover(ctx, post, tmpl) {
         const W = this.W, H = this.H, p = tmpl.palette;
         const photos = this._userPhotos.filter(ph => ph.img);
         if (!photos.length) return;
         const img = photos[0].img;
+        const _pf = this._getPhotoFilter(tmpl);
 
         // 1. Full-bleed photo background
-        this._drawImageCover(ctx, img, 0, 0, W, H, 0);
+        this._drawImageCover(ctx, img, 0, 0, W, H, 0, _pf);
 
         // 2. Top scrim gradient (category tag area)
         const topG = ctx.createLinearGradient(0, 0, 0, H * 0.22);
@@ -6205,7 +6420,7 @@
 
         // Render title text — use gradient fill for specific templates
         const titleFont = this._font(tFontSz, tmpl.boldTitle ? '800' : '700', tmpl);
-        const _useGradientTitle = ['nature_healing', 'candy_pop', 'color_palette', 'dark_cyber', 'sweet_fresh'].includes(tid);
+        const _useGradientTitle = ['nature_healing', 'candy_pop', 'color_palette', 'dark_cyber', 'sweet_fresh', 'bold_impact'].includes(tid);
         if (_useGradientTitle && tmpl.palette.accent) {
           // Gradient text: accent → text color blend
           const gradColors = {
@@ -6213,7 +6428,8 @@
             'candy_pop': ['#ff6b6b', '#ffd93d', '#6bcb77', '#4d96ff'],
             'color_palette': ['#7c5cbf', '#b488ff', '#9b6dff'],
             'dark_cyber': ['#00f0ff', '#ff00aa', '#00f0ff'],
-            'sweet_fresh': ['#ff6b8a', '#ff8fa3', '#ffb4c0']
+            'sweet_fresh': ['#ff6b8a', '#ff8fa3', '#ffb4c0'],
+            'bold_impact': ['#e94560', '#ffffff', '#e94560']
           };
           titleLines.forEach((ln, i) => {
             this._gradientText(ctx, ln, titleX, titleY + 10 + i * tLineH, gradColors[tid] || [p.accent, p.text], titleFont);
@@ -6239,6 +6455,13 @@
           this._decorLine(ctx, 'diamonds', cx, afterTitleY, 100, { color: p.accent + '50', size: 4, gap: 18 });
         } else if (tid === 'handwrite_diary') {
           this._decorLine(ctx, 'dashes', cx, afterTitleY, 120, { color: p.accent + '40', dash: [6, 8] });
+        } else if (tid === 'letter_paper') {
+          // Quill pen line
+          this._decorLine(ctx, 'wave', isLeft ? 80 + 50 : cx, afterTitleY, 80, { color: p.accent + '40', amplitude: 2, lineWidth: 1 });
+        } else if (tid === 'bold_impact') {
+          // Bold accent slash
+          ctx.fillStyle = p.accent; ctx.fillRect(cx - 80, afterTitleY, 160, 5);
+          ctx.fillStyle = '#ffffff20'; ctx.fillRect(cx - 80, afterTitleY + 1, 160, 2);
         } else if (!tmpl.dark && tid !== 'breaking_news') {
           const barW = 80;
           ctx.fillStyle = p.accent + '50';
@@ -6569,7 +6792,7 @@
           else {
             // Plain text — drop cap for first plain paragraph on page 1
             ctx.font = this._font(28, '400', tmpl); ctx.fillStyle = p.text;
-            const _useDropCap = pageNum === 1 && idx === 0 && para.text.length > 20 && ['magazine_edit', 'chinese_retro', 'minimal_literary', 'ins_aesthetic'].includes(tid);
+            const _useDropCap = pageNum === 1 && idx === 0 && para.text.length > 20 && ['magazine_edit', 'chinese_retro', 'minimal_literary', 'ins_aesthetic', 'letter_paper'].includes(tid);
             if (_useDropCap) {
               const dcOpts = {
                 size: 64, color: p.accent,
@@ -6732,13 +6955,14 @@
           highlightAlpha: tmpl.dark ? '08' : '06'
         });
         // v3 gradient text for select templates
-        if (['nature_healing','candy_pop','dark_cyber','color_palette','sweet_fresh'].includes(tid)) {
+        if (['nature_healing','candy_pop','dark_cyber','color_palette','sweet_fresh','bold_impact'].includes(tid)) {
           const gradColors = {
             nature_healing: ['#2d9d78','#52b788','#74c69d'],
             candy_pop: ['#ff6b6b','#ffd93d','#6bcb77','#4d96ff','#9775fa'],
             dark_cyber: ['#00f5ff','#a855f7','#f472b6'],
             color_palette: ['#8b5cf6','#a78bfa','#c4b5fd'],
-            sweet_fresh: ['#f472b6','#fb923c','#f472b6']
+            sweet_fresh: ['#f472b6','#fb923c','#f472b6'],
+            bold_impact: ['#e94560','#ffffff','#e94560']
           };
           this._gradientText(ctx, endTextStr, cx, cy + 10, gradColors[tid], this._font(38, '700', tmpl));
         } else {
@@ -6810,6 +7034,8 @@
           { kw: ['种草','带货','好物','推荐','测评','开箱','安利','必买','合集'], id: 'product_showcase' },
           { kw: ['穿搭','ootd','搭配','衣服','时装','春装','秋装','显瘦','显高'], id: 'ootd_collage' },
           { kw: ['配色','色彩','调色','滤镜','色系','撞色','莫兰迪','高级感'], id: 'color_palette' },
+          { kw: ['金句','语录','信笺','便签','见字如面','手札','书信','纸短情长'], id: 'letter_paper' },
+          { kw: ['爆款','盘点','排名','top','必看','对比','冲击','榜单','排行'], id: 'bold_impact' },
         ];
         for (const { kw, id } of kwMap) {
           if (kw.some(k => text.includes(k))) return this.getTemplate(id);
@@ -6898,7 +7124,13 @@ ${postList}
       },
 
       generateCards(post, templateId) {
-        const tmpl = templateId ? this.getTemplate(templateId) : this.matchTemplate(post);
+        let tmpl = templateId ? this.getTemplate(templateId) : this.matchTemplate(post);
+        // Apply user palette override if set
+        if (this._paletteOverride) {
+          tmpl = Object.assign({}, tmpl, { palette: Object.assign({}, tmpl.palette, this._paletteOverride) });
+          if (this._paletteOverride.bg && this._isLightColor(this._paletteOverride.bg) === false) tmpl.dark = true;
+          else if (this._paletteOverride.bg && this._isLightColor(this._paletteOverride.bg) === true) tmpl.dark = false;
+        }
         let c = document.createElement('canvas'); c.width = this.W; c.height = this.H;
         const cards = [];
         const hasUserPhotos = this._userPhotos.some(ph => ph.img);
@@ -6965,6 +7197,26 @@ ${postList}
           </div>
         </div>
         <div id="card-template-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;margin-bottom:12px;"></div>
+        <div id="card-palette-bar" style="margin-bottom:12px;">
+          <div style="display:flex;align-items:center;gap:6px;cursor:pointer;" onclick="togglePalettePanel()">
+            <span style="font-size:13px;font-weight:600;">🎨 自定义配色</span>
+            <span id="palette-bar-arrow" style="font-size:10px;color:var(--text-light);transition:transform 0.2s;">▶</span>
+            <span id="palette-bar-indicator" style="display:none;margin-left:4px;"></span>
+          </div>
+          <div id="palette-panel" style="display:none;margin-top:8px;padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--bg);">
+            <div style="font-size:11px;color:var(--text-light);margin-bottom:6px;">预设方案（点击应用）</div>
+            <div id="palette-presets-row" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;"></div>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+              <span style="font-size:11px;color:var(--text-light);">微调:</span>
+              <label style="font-size:10px;text-align:center;cursor:pointer;">背景<br><input type="color" id="cp-bg" style="width:28px;height:28px;border:none;border-radius:6px;cursor:pointer;" onchange="onPalettePickerChange()"></label>
+              <label style="font-size:10px;text-align:center;cursor:pointer;">卡片<br><input type="color" id="cp-card" style="width:28px;height:28px;border:none;border-radius:6px;cursor:pointer;" onchange="onPalettePickerChange()"></label>
+              <label style="font-size:10px;text-align:center;cursor:pointer;">文字<br><input type="color" id="cp-text" style="width:28px;height:28px;border:none;border-radius:6px;cursor:pointer;" onchange="onPalettePickerChange()"></label>
+              <label style="font-size:10px;text-align:center;cursor:pointer;">强调<br><input type="color" id="cp-accent" style="width:28px;height:28px;border:none;border-radius:6px;cursor:pointer;" onchange="onPalettePickerChange()"></label>
+              <label style="font-size:10px;text-align:center;cursor:pointer;">辅助<br><input type="color" id="cp-sub" style="width:28px;height:28px;border:none;border-radius:6px;cursor:pointer;" onchange="onPalettePickerChange()"></label>
+              <button class="btn btn-sm btn-outline" style="font-size:10px;padding:2px 8px;" onclick="resetPaletteOverride()">↩ 重置</button>
+            </div>
+          </div>
+        </div>
         <div id="card-preview-area"></div>
       `;
 
@@ -7105,6 +7357,91 @@ ${postList}
           <div style="font-size:11px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${t.name}</div>
         </div>
       `).join('');
+      // Initialize palette presets row
+      initPalettePresetsRow();
+    }
+
+    function initPalettePresetsRow() {
+      const row = document.getElementById('palette-presets-row');
+      if (!row) return;
+      row.innerHTML = CardEngine.palettePresets.map((p, i) => `
+        <div onclick="applyPalettePreset(${i})" style="cursor:pointer;padding:4px 8px;border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;gap:4px;transition:all 0.15s;font-size:11px;" onmouseenter="this.style.borderColor='var(--primary)'" onmouseleave="this.style.borderColor='var(--border)'">
+          <span style="display:flex;gap:2px;">${Object.values(p.palette).map(c=>'<span style="width:10px;height:10px;border-radius:2px;background:'+c+';"></span>').join('')}</span>
+          <span>${p.name}</span>
+        </div>
+      `).join('');
+    }
+
+    function togglePalettePanel() {
+      const panel = document.getElementById('palette-panel');
+      const arrow = document.getElementById('palette-bar-arrow');
+      if (!panel) return;
+      const isOpen = panel.style.display !== 'none';
+      panel.style.display = isOpen ? 'none' : 'block';
+      if (arrow) arrow.style.transform = isOpen ? '' : 'rotate(90deg)';
+      // Sync pickers with current palette
+      if (!isOpen) syncPalettePickers();
+    }
+
+    function syncPalettePickers() {
+      const tmplId = CardEngine._currentTmplId;
+      if (!tmplId) return;
+      const tmpl = CardEngine.getTemplate(tmplId);
+      const ov = CardEngine._paletteOverride || {};
+      ['bg','card','text','accent','sub'].forEach(k => {
+        const el = document.getElementById('cp-' + k);
+        if (el) el.value = ov[k] || tmpl.palette[k];
+      });
+    }
+
+    function applyPalettePreset(idx) {
+      const preset = CardEngine.palettePresets[idx];
+      if (!preset) return;
+      CardEngine._paletteOverride = Object.assign({}, preset.palette);
+      // Update pickers
+      ['bg','card','text','accent','sub'].forEach(k => {
+        const el = document.getElementById('cp-' + k);
+        if (el) el.value = preset.palette[k];
+      });
+      // Update indicator
+      updatePaletteIndicator(preset.name);
+      // Re-render
+      if (CardEngine._currentTmplId) switchCardTemplate(CardEngine._currentTmplId);
+      showToast(`已应用「${preset.name}」配色`, 'success');
+    }
+
+    function onPalettePickerChange() {
+      const palette = {};
+      ['bg','card','text','accent','sub'].forEach(k => {
+        const el = document.getElementById('cp-' + k);
+        if (el) palette[k] = el.value;
+      });
+      CardEngine._paletteOverride = palette;
+      updatePaletteIndicator('自定义');
+      if (CardEngine._currentTmplId) switchCardTemplate(CardEngine._currentTmplId);
+    }
+
+    function resetPaletteOverride() {
+      CardEngine._paletteOverride = null;
+      updatePaletteIndicator(null);
+      syncPalettePickers();
+      if (CardEngine._currentTmplId) switchCardTemplate(CardEngine._currentTmplId);
+      showToast('已恢复原始配色', 'success');
+    }
+
+    function updatePaletteIndicator(name) {
+      const ind = document.getElementById('palette-bar-indicator');
+      if (!ind) return;
+      if (name) {
+        const ov = CardEngine._paletteOverride;
+        ind.style.display = 'inline-flex';
+        ind.style.gap = '3px';
+        ind.style.alignItems = 'center';
+        ind.innerHTML = `${ov ? Object.values(ov).map(c=>'<span style="width:8px;height:8px;border-radius:2px;background:'+c+';display:inline-block;"></span>').join('') : ''}<span style="font-size:10px;color:var(--primary);">${name}</span>`;
+      } else {
+        ind.style.display = 'none';
+        ind.innerHTML = '';
+      }
     }
 
     function openCardLightbox(idx) {
