@@ -1623,12 +1623,6 @@
         <div class="nav-item" data-page="trending">
           <span class="icon">🔥</span> 热门话题
         </div>
-        <div class="nav-item" data-page="tags">
-          <span class="icon">🏷️</span> 标签引擎
-        </div>
-        <div class="nav-item" data-page="rewrite">
-          <span class="icon">🔄</span> 笔记改写
-        </div>
         <div class="nav-item" data-page="comments">
           <span class="icon">💬</span> 评论话术
         </div>
@@ -1636,13 +1630,7 @@
           <span class="icon">🔍</span> 竞品分析
         </div>
         <div class="nav-item" data-page="polish">
-          <span class="icon">🪄</span> 一键润色
-        </div>
-        <div class="nav-item" data-page="title-gen">
-          <span class="icon">📰</span> 爆款标题
-        </div>
-        <div class="nav-item" data-page="keywords">
-          <span class="icon">🔑</span> 热词分析
+          <span class="icon">🪄</span> 内容优化
         </div>
         <div class="nav-item" data-page="content-plan">
           <span class="icon">📋</span> 内容规划
@@ -1738,13 +1726,9 @@
         <div class="nav-item mob-nav" data-page="forbidden" onclick="mobileSwitchPage('forbidden')"><span class="icon">🚫</span> 违禁词检测</div>
         <div class="nav-item mob-nav" data-page="score" onclick="mobileSwitchPage('score')"><span class="icon">💯</span> 笔记评分</div>
         <div class="nav-item mob-nav" data-page="trending" onclick="mobileSwitchPage('trending')"><span class="icon">🔥</span> 热门话题</div>
-        <div class="nav-item mob-nav" data-page="tags" onclick="mobileSwitchPage('tags')"><span class="icon">🏷️</span> 标签引擎</div>
-        <div class="nav-item mob-nav" data-page="rewrite" onclick="mobileSwitchPage('rewrite')"><span class="icon">🔄</span> 笔记改写</div>
         <div class="nav-item mob-nav" data-page="comments" onclick="mobileSwitchPage('comments')"><span class="icon">💬</span> 评论话术</div>
         <div class="nav-item mob-nav" data-page="competitor" onclick="mobileSwitchPage('competitor')"><span class="icon">🔍</span> 竞品分析</div>
-        <div class="nav-item mob-nav" data-page="polish" onclick="mobileSwitchPage('polish')"><span class="icon">🪄</span> 一键润色</div>
-        <div class="nav-item mob-nav" data-page="title-gen" onclick="mobileSwitchPage('title-gen')"><span class="icon">📰</span> 爆款标题</div>
-        <div class="nav-item mob-nav" data-page="keywords" onclick="mobileSwitchPage('keywords')"><span class="icon">🔑</span> 热词分析</div>
+        <div class="nav-item mob-nav" data-page="polish" onclick="mobileSwitchPage('polish')"><span class="icon">🪄</span> 内容优化</div>
         <div class="nav-item mob-nav" data-page="content-plan" onclick="mobileSwitchPage('content-plan')"><span class="icon">📋</span> 内容规划</div>
         <div class="nav-item mob-nav" data-page="img-tool" onclick="mobileSwitchPage('img-tool')"><span class="icon">🖼️</span> 图片优化</div>
         <div class="nav-item mob-nav" data-page="card-lib" onclick="mobileSwitchPage('card-lib')"><span class="icon">🎴</span> 卡片模板库</div>
@@ -2542,10 +2526,39 @@
         </div>
       </section>
 
-      <!-- ===== 热门话题 ===== -->
+      <!-- ===== 热门话题（合并热词分析） ===== -->
       <section id="page-trending" class="page hidden">
-        <div class="page-header"><div><h2>🔥 热门话题</h2><p class="subtitle">追踪当前赛道热点</p></div><button class="btn btn-primary" onclick="initTrendingPage()">🔄 刷新话题 <span style="font-size:11px;opacity:0.8;">(1积分)</span></button></div>
-        <div id="trending-container"><div class="empty-state"><p>点击「刷新话题」获取最新热门话题</p></div></div>
+        <div class="page-header"><div><h2>🔥 热门话题 & 热词分析</h2><p class="subtitle">追踪赛道热点，挖掘蓝海关键词</p></div></div>
+        <!-- Tab 切换 -->
+        <div style="display:flex;gap:0;margin-bottom:16px;border-radius:10px;overflow:hidden;border:1px solid var(--border);">
+          <button class="trending-tab active" data-tab="trending" onclick="switchTrendingTab('trending')" style="flex:1;padding:10px;border:none;cursor:pointer;font-size:13px;font-weight:600;background:var(--primary);color:#fff;transition:all 0.2s;">🔥 热门话题</button>
+          <button class="trending-tab" data-tab="keywords" onclick="switchTrendingTab('keywords')" style="flex:1;padding:10px;border:none;cursor:pointer;font-size:13px;font-weight:600;background:#f5f5f5;color:#666;transition:all 0.2s;">🔑 热词分析</button>
+        </div>
+        <!-- Tab: 热门话题 -->
+        <div id="trending-tab-trending">
+          <div style="text-align:right;margin-bottom:12px;"><button class="btn btn-primary" onclick="initTrendingPage()">🔄 刷新话题 <span style="font-size:11px;opacity:0.8;">(1积分)</span></button></div>
+          <div id="trending-container"><div class="empty-state"><p>点击「刷新话题」获取最新热门话题</p></div></div>
+        </div>
+        <!-- Tab: 热词分析 -->
+        <div id="trending-tab-keywords" style="display:none;">
+          <div class="card">
+            <div class="form-row">
+              <div class="form-group" style="flex:2;"><label>行业 / 赛道</label>
+                <input type="text" id="trending-keywords-niche" class="form-control" placeholder="如：护肤、家居收纳、健身减脂、副业赚钱">
+              </div>
+              <div class="form-group" style="flex:1;"><label>分析维度</label>
+                <select id="trending-keywords-dimension" class="form-control">
+                  <option value="trending">🔥 当前热搜</option>
+                  <option value="seasonal">🌸 季节热点</option>
+                  <option value="longtail">🎯 长尾蓝海</option>
+                  <option value="rising">📈 上升趋势</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="analyzeKeywordsFromTrending()" style="margin-bottom:16px;">🔑 AI 热词分析 <span style="font-size:11px;opacity:0.8;">(2积分)</span></button>
+            <div id="trending-keywords-result"></div>
+          </div>
+        </div>
       </section>
 
       <!-- ===== 标签引擎 ===== -->
@@ -2625,10 +2638,18 @@
         <div id="multi-account-list"></div>
       </section>
 
-      <!-- ===== 一键润色 ===== -->
+      <!-- ===== 内容优化（合并：润色 + 改写 + 爆款标题 + 标签引擎） ===== -->
       <section id="page-polish" class="page hidden">
-        <div class="page-header"><div><h2>🪄 一键润色</h2><p class="subtitle">粘贴草稿，AI 自动优化为小红书爆款风格</p></div></div>
-        <div class="card">
+        <div class="page-header"><div><h2>🪄 内容优化</h2><p class="subtitle">润色、改写、标题生成、标签推荐 — 一站搞定</p></div></div>
+        <!-- Tab 切换 -->
+        <div style="display:flex;gap:0;margin-bottom:16px;border-radius:10px;overflow:hidden;border:1px solid var(--border);">
+          <button class="polish-tab active" data-tab="polish" onclick="switchPolishTab('polish')" style="flex:1;padding:10px;border:none;cursor:pointer;font-size:13px;font-weight:600;background:var(--primary);color:#fff;transition:all 0.2s;">🪄 一键润色</button>
+          <button class="polish-tab" data-tab="rewrite" onclick="switchPolishTab('rewrite')" style="flex:1;padding:10px;border:none;cursor:pointer;font-size:13px;font-weight:600;background:#f5f5f5;color:#666;transition:all 0.2s;">🔄 笔记改写</button>
+          <button class="polish-tab" data-tab="title" onclick="switchPolishTab('title')" style="flex:1;padding:10px;border:none;cursor:pointer;font-size:13px;font-weight:600;background:#f5f5f5;color:#666;transition:all 0.2s;">📰 爆款标题</button>
+          <button class="polish-tab" data-tab="tags" onclick="switchPolishTab('tags')" style="flex:1;padding:10px;border:none;cursor:pointer;font-size:13px;font-weight:600;background:#f5f5f5;color:#666;transition:all 0.2s;">🏷️ 标签推荐</button>
+        </div>
+        <!-- Tab: 润色 -->
+        <div id="polish-tab-polish" class="card">
           <div class="form-group">
             <label>草稿内容</label>
             <textarea id="polish-input" class="form-control" rows="8" placeholder="粘贴你的草稿内容，AI 将自动优化为小红书爆款风格：\n• 口语化表达\n• 智能加 emoji\n• 合理分段\n• 爪子号结尾设计"></textarea>
@@ -2662,9 +2683,71 @@
           </div>
           <div id="polish-result"></div>
         </div>
+        <!-- Tab: 改写 -->
+        <div id="polish-tab-rewrite" class="card" style="display:none;">
+          <div class="form-group">
+            <label>原始内容</label>
+            <textarea id="polish-rewrite-input" class="form-control" rows="6" placeholder="粘贴需要改写的笔记内容"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>改写模式</label>
+              <select id="polish-rewrite-mode" class="form-control">
+                <option value="angle">🔄 换角度</option>
+                <option value="tone">🎭 换语气</option>
+                <option value="expand">📝 扩写</option>
+                <option value="shorten">✂️ 缩写</option>
+                <option value="viral">🔥 爆款化</option>
+              </select>
+            </div>
+            <div class="form-group"><label>文风</label>
+              <select id="polish-rewrite-style" class="form-control">
+                <option value="casual">轻松口语</option>
+                <option value="professional">专业权威</option>
+                <option value="cute">可爱卖萌</option>
+                <option value="story">故事叙述</option>
+                <option value="list">干货清单</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;margin-bottom:16px;">
+            <button class="btn btn-primary" onclick="rewritePostFromPolish()">✨ 开始改写 <span style="font-size:11px;opacity:0.8;">(1积分)</span></button>
+            <button class="btn btn-outline" onclick="copyEl('polish-rewrite-result')">📋 复制结果</button>
+            <button class="btn btn-outline" onclick="saveElAsDraft('polish-rewrite-result')">💾 存为草稿</button>
+          </div>
+          <div id="polish-rewrite-result"></div>
+        </div>
+        <!-- Tab: 爆款标题 -->
+        <div id="polish-tab-title" class="card" style="display:none;">
+          <div class="form-row">
+            <div class="form-group" style="flex:2;"><label>内容主题 / 关键词</label>
+              <input type="text" id="polish-title-topic" class="form-control" placeholder="如：春季穿搭、平价护肤、日本旅行攻略">
+            </div>
+            <div class="form-group" style="flex:1;"><label>标题风格</label>
+              <select id="polish-title-style" class="form-control">
+                <option value="viral">🔥 爆款悬念</option>
+                <option value="list">📝 干货清单</option>
+                <option value="story">📖 故事引入</option>
+                <option value="question">❓ 提问互动</option>
+                <option value="emotional">💗 情感共鸣</option>
+                <option value="contrast">⚡ 反差冲击</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="generateViralTitlesFromPolish()" style="margin-bottom:16px;">📰 生成 10 个爆款标题 <span style="font-size:11px;opacity:0.8;">(1积分)</span></button>
+          <div id="polish-title-result"></div>
+        </div>
+        <!-- Tab: 标签推荐 -->
+        <div id="polish-tab-tags" class="card" style="display:none;">
+          <div class="form-group">
+            <label>笔记主题 / 关键词</label>
+            <input type="text" id="polish-tags-keyword" class="form-control" placeholder="输入笔记主题，如：春季穿搭、家常菜做法">
+          </div>
+          <button class="btn btn-primary" onclick="generateSmartTagsFromPolish()" style="margin-bottom:16px;">🏷️ 生成标签 <span style="font-size:11px;opacity:0.8;">(1积分)</span></button>
+          <div id="polish-tags-result"></div>
+        </div>
       </section>
 
-      <!-- ===== 爆款标题生成器 ===== -->
+      <!-- ===== 爆款标题生成器（保留隐藏页面兼容旧链接） ===== -->
       <section id="page-title-gen" class="page hidden">
         <div class="page-header"><div><h2>📰 爆款标题生成器</h2><p class="subtitle">输入主题，AI 批量生成 10 个高点击标题</p></div></div>
         <div class="card">
@@ -3283,6 +3366,7 @@
           <button class="btn btn-sm btn-outline" onclick="downloadPostImage()">🖼️ 下载封面图</button>
           <button class="btn btn-sm btn-outline" onclick="downloadContentImages()">📥 下载全部配图</button>
           <button class="btn btn-sm btn-outline" onclick="exportCurrentPost()">📥 导出文件</button>
+          <button class="btn btn-sm" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;" onclick="goToAICard()">🃏 生成卡片</button>
         </div>
       </div>
     </div>
@@ -10173,7 +10257,7 @@ Style: ${stylePrompt}
         case 'account': loadAccountStats(); break;
         case 'forbidden': initForbiddenPage(); break;
         case 'score': initScorePage(); break;
-        case 'trending': initTrendingPage(); break;
+        case 'trending': break; // content loaded on button click
         case 'tags': break;
         case 'rewrite': break;
         case 'comments': loadCommentTemplates(); break;
@@ -10199,7 +10283,7 @@ Style: ${stylePrompt}
       tags: '🏷️ 标签引擎', rewrite: '🔄 笔记改写', comments: '💬 评论话术',
       competitor: '🔍 竞品分析', branding: '🎀 账号包装', account: '📈 账号数据',
       'multi-account': '👥 多账号管理', purchase: '💎 积分商城', invite: '🎁 邀请赚钱',
-      polish: '🪄 一键润色', 'title-gen': '📰 爆款标题',
+      polish: '🪄 内容优化', 'title-gen': '📰 爆款标题',
       keywords: '🔑 热词分析', 'content-plan': '📋 内容规划',
       'img-tool': '🖼️ 图片优化', 'card-lib': '🎴 卡片模板库',
       'ai-card': '🃏 AI智能卡片'
@@ -10880,6 +10964,110 @@ Style: ${stylePrompt}
       if (!currentViewPost) return;
       const text = `${currentViewPost.title}\n\n${currentViewPost.content}\n\n${currentViewPost.tags ? currentViewPost.tags.split(',').map(t => '#' + t).join(' ') : ''}`;
       navigator.clipboard.writeText(text).then(() => toast('已复制到剪贴板', 'success'));
+    }
+
+    // ============ 笔记 → AI 卡片一键联动 ============
+    function goToAICard() {
+      if (!currentViewPost) return;
+      closeModal('modal-view');
+      switchPage('ai-card');
+      setTimeout(() => {
+        const titleEl = document.getElementById('aicard-title');
+        const contentEl = document.getElementById('aicard-content');
+        const catEl = document.getElementById('aicard-category');
+        if (titleEl) titleEl.value = currentViewPost.title || '';
+        if (contentEl) contentEl.value = currentViewPost.content || '';
+        if (catEl) {
+          const cat = currentViewPost.category || '';
+          const opt = [...catEl.options].find(o => o.value === cat);
+          catEl.value = opt ? cat : '';
+        }
+        toast('已自动填入笔记内容，点击生成即可', 'success');
+      }, 100);
+    }
+
+    // ============ 内容优化页 Tab 切换 ============
+    function switchPolishTab(tab) {
+      ['polish', 'rewrite', 'title', 'tags'].forEach(t => {
+        const panel = document.getElementById('polish-tab-' + t);
+        const btn = document.querySelector('.polish-tab[data-tab="' + t + '"]');
+        if (panel) panel.style.display = t === tab ? '' : 'none';
+        if (btn) { btn.style.background = t === tab ? 'var(--primary)' : '#f5f5f5'; btn.style.color = t === tab ? '#fff' : '#666'; }
+      });
+    }
+
+    // 改写（从润色页调用）
+    async function rewritePostFromPolish() {
+      const input = document.getElementById('polish-rewrite-input')?.value?.trim();
+      if (!input) { toast('请输入需要改写的内容', 'error'); return; }
+      document.getElementById('rewrite-input').value = input;
+      document.getElementById('rewrite-mode').value = document.getElementById('polish-rewrite-mode').value;
+      document.getElementById('rewrite-style').value = document.getElementById('polish-rewrite-style').value;
+      await rewritePost();
+      // Copy result to polish page
+      const origResult = document.getElementById('rewrite-result')?.innerHTML || '';
+      const polishResult = document.getElementById('polish-rewrite-result');
+      if (polishResult) polishResult.innerHTML = origResult;
+    }
+
+    // 爆款标题（从润色页调用）
+    async function generateViralTitlesFromPolish() {
+      const topic = document.getElementById('polish-title-topic')?.value?.trim();
+      if (!topic) { toast('请输入内容主题', 'error'); return; }
+      document.getElementById('titlegen-topic').value = topic;
+      document.getElementById('titlegen-style').value = document.getElementById('polish-title-style').value;
+      await generateViralTitles();
+      const origResult = document.getElementById('titlegen-result')?.innerHTML || '';
+      const polishResult = document.getElementById('polish-title-result');
+      if (polishResult) polishResult.innerHTML = origResult;
+    }
+
+    // 标签推荐（从润色页调用）
+    async function generateSmartTagsFromPolish() {
+      const keyword = document.getElementById('polish-tags-keyword')?.value?.trim();
+      if (!keyword) { toast('请输入笔记主题', 'error'); return; }
+      document.getElementById('tags-keyword').value = keyword;
+      await generateSmartTags();
+      const origResult = document.getElementById('tags-result')?.innerHTML || '';
+      const polishResult = document.getElementById('polish-tags-result');
+      if (polishResult) polishResult.innerHTML = origResult;
+    }
+
+    // 通用复制/保存工具
+    function copyEl(elId) {
+      const el = document.getElementById(elId);
+      if (!el || !el.textContent.trim()) { toast('没有内容可复制', 'error'); return; }
+      navigator.clipboard.writeText(el.textContent).then(() => toast('已复制', 'success'));
+    }
+    function saveElAsDraft(elId) {
+      const el = document.getElementById(elId);
+      if (!el || !el.textContent.trim()) { toast('没有内容', 'error'); return; }
+      const text = el.textContent.trim();
+      const lines = text.split('\n').filter(l => l.trim());
+      const title = lines[0]?.slice(0, 50) || 'AI 改写结果';
+      createPost({ title, content: text, category: _s().defaultCategory, status: 'draft' });
+    }
+
+    // ============ 热门话题页 Tab 切换 ============
+    function switchTrendingTab(tab) {
+      ['trending', 'keywords'].forEach(t => {
+        const panel = document.getElementById('trending-tab-' + t);
+        const btn = document.querySelector('.trending-tab[data-tab="' + t + '"]');
+        if (panel) panel.style.display = t === tab ? '' : 'none';
+        if (btn) { btn.style.background = t === tab ? 'var(--primary)' : '#f5f5f5'; btn.style.color = t === tab ? '#fff' : '#666'; }
+      });
+    }
+
+    // 热词分析（从热门话题页调用）
+    async function analyzeKeywordsFromTrending() {
+      const niche = document.getElementById('trending-keywords-niche')?.value?.trim();
+      if (!niche) { toast('请输入行业/赛道', 'error'); return; }
+      document.getElementById('keywords-niche').value = niche;
+      document.getElementById('keywords-dimension').value = document.getElementById('trending-keywords-dimension').value;
+      await analyzeKeywords();
+      const origResult = document.getElementById('keywords-result')?.innerHTML || '';
+      const trendingResult = document.getElementById('trending-keywords-result');
+      if (trendingResult) trendingResult.innerHTML = origResult;
     }
 
     async function exportCurrentPost() {
