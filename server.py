@@ -6,6 +6,7 @@
 """
 
 import http.server
+import socketserver
 import json
 import sqlite3
 import os
@@ -1652,6 +1653,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
     def _get_db(self):
         conn = sqlite3.connect(DB_PATH)
+        conn.execute("PRAGMA journal_mode=WAL")
         conn.row_factory = sqlite3.Row
         return conn
 
@@ -2630,14 +2632,21 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         self._send_json(last_err_json or {'error': {'code': 500, 'message': 'All API keys exhausted'}}, last_err_code)
 
 
+# ============ 多线程 HTTP 服务器 ============
+class ThreadedHTTPServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
+    """ThreadingMixIn 使每个请求在独立线程中处理，
+    防止长耗时的 Gemini 代理请求阻塞其他 API 调用。"""
+    daemon_threads = True
+
+
 # ============ 启动服务器 ============
 def main():
     bootstrap_db_if_needed()
     init_db()
     
-    server = http.server.HTTPServer(('0.0.0.0', PORT), APIHandler)
+    server = ThreadedHTTPServer(('0.0.0.0', PORT), APIHandler)
     
-    print(f"\n[*] XHS Emotion Platform started")
+    print(f"\n[*] XHS Emotion Platform started (threaded)")
     print(f"[*] URL: http://localhost:{PORT}")
     print(f"[*] API: http://localhost:{PORT}/api")
     print(f"[*] DB Path: {DB_PATH}")
