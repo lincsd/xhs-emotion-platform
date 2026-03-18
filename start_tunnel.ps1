@@ -1,4 +1,4 @@
-# ============================================================
+﻿# ============================================================
 #  小红书 AI 平台 — 一键启动脚本
 #  启动 server.py (本地代理) + Cloudflare Tunnel
 # ============================================================
@@ -103,7 +103,10 @@ Write-Section "加载 API Key"
 $KeyFile = Join-Path $ScriptDir "api_key.txt"
 if (-not $env:GEMINI_API_KEY) {
     if (Test-Path $KeyFile) {
-        $env:GEMINI_API_KEY = (Get-Content $KeyFile -Raw).Trim()
+        $rawKey = (Get-Content $KeyFile -Raw).Trim()
+        # 支持 "GEMINI_API_KEY=xxx" 和纯 "xxx" 两种格式
+        if ($rawKey -match '^\s*GEMINI_API_KEY\s*=\s*(.+)$') { $rawKey = $Matches[1].Trim() }
+        $env:GEMINI_API_KEY = $rawKey
         Write-Ok "从 api_key.txt 加载 Key: $($env:GEMINI_API_KEY.Substring(0,10))..."
     } else {
         Write-Err "未找到 API Key！请设置 GEMINI_API_KEY 环境变量 或创建 api_key.txt"
@@ -124,14 +127,17 @@ Write-Info "server.py PID: $($ServerProc.Id)"
 
 # 等待服务器启动
 $ready = $false
-for ($i = 0; $i -lt 15; $i++) {
+for ($i = 0; $i -lt 20; $i++) {
     Start-Sleep -Milliseconds 500
     try {
-        $oldProxy = $env:HTTPS_PROXY; $env:HTTPS_PROXY = ""
-        $r = Invoke-WebRequest -Uri "http://localhost:$Port/api/version" -UseBasicParsing -TimeoutSec 2
-        $env:HTTPS_PROXY = $oldProxy
-        if ($r.StatusCode -eq 200) { $ready = $true; break }
-    } catch { $env:HTTPS_PROXY = $oldProxy }
+        # 用 .NET HttpWebRequest 直连（绕过 PS 代理缓存）
+        $req = [System.Net.HttpWebRequest]::Create("http://127.0.0.1:$Port/api/version")
+        $req.Timeout = 2000
+        $req.Proxy = [System.Net.GlobalProxySelection]::GetEmptyWebProxy()
+        $resp = $req.GetResponse()
+        if ($resp.StatusCode -eq 'OK') { $ready = $true; $resp.Close(); break }
+        $resp.Close()
+    } catch {}
 }
 if ($ready) {
     Write-Ok "本地服务器已启动 → http://localhost:$Port"
@@ -178,14 +184,16 @@ if (-not $SkipTunnel) {
         & $CfExe tunnel route dns $TunnelName $TunnelDomain 2>$null
         # 写入配置
         $cfConfig = "$env:USERPROFILE\.cloudflared\config.yml"
-        @"
-tunnel: $TunnelName
-credentials-file: $env:USERPROFILE\.cloudflared\$($existing.id ?? $TunnelName).json
-ingress:
-  - hostname: $TunnelDomain
-    service: http://localhost:$Port
-  - service: http_status:404
-"@ | Set-Content $cfConfig
+        $credId = if ($existing) { $existing.id } else { $TunnelName }
+        $cfgLines = @(
+            "tunnel: $TunnelName",
+            "credentials-file: $env:USERPROFILE\.cloudflared\$credId.json",
+            "ingress:",
+            "  - hostname: $TunnelDomain",
+            "    service: http://localhost:$Port",
+            "  - service: http_status:404"
+        )
+        $cfgLines -join "`n" | Set-Content $cfConfig -Encoding UTF8
         $TunnelUrl = "https://$TunnelDomain"
         $CfProc = Start-Process -FilePath $CfExe -ArgumentList "tunnel run $TunnelName" `
             -PassThru -RedirectStandardError $CfLog -WindowStyle Hidden
@@ -193,6 +201,13 @@ ingress:
         # Quick Tunnel 模式 — 随机 URL
         Write-Info "Quick Tunnel 模式（随机 URL，每次重启会变）"
         $CfArgs = "tunnel --url http://localhost:$Port"
+        # cloudflared 需要走梯子访问 trycloudflare.com（国内直连超时）
+        $cfEnv = @{}
+        if ($ProxyUrl) {
+            $cfEnv['HTTPS_PROXY'] = $ProxyUrl
+            $cfEnv['HTTP_PROXY'] = $ProxyUrl
+            Write-Info "cloudflared 使用代理: $ProxyUrl"
+        }
         $CfProc = Start-Process -FilePath $CfExe -ArgumentList $CfArgs `
             -PassThru -RedirectStandardError $CfLog -WindowStyle Hidden
     }
@@ -206,7 +221,8 @@ ingress:
             Start-Sleep -Seconds 1
             if (Test-Path $CfLog) {
                 $content = Get-Content $CfLog -Raw -ErrorAction SilentlyContinue
-                if ($content -match '(https://[a-z0-9-]+\.trycloudflare\.com)') {
+                # 匹配实际分配的 Tunnel URL（排除 api.trycloudflare.com）
+                if ($content -match '(https://[a-z0-9]+-[a-z0-9-]+\.trycloudflare\.com)') {
                     $TunnelUrl = $Matches[1]
                     break
                 }
@@ -223,16 +239,58 @@ ingress:
         
         # 自动更新前端代码中的 Tunnel URL
         $IndexFile = Join-Path $ScriptDir "public\index.html"
-        $htmlContent = Get-Content $IndexFile -Raw
-        $oldPattern = "const CF_TUNNEL_BACKEND = '[^']*';"
+        $htmlContent = Get-Content $IndexFile -Raw -Encoding UTF8
+        $oldPattern = 'const CF_TUNNEL_BACKEND = ''[^'']*'';'
         $newValue = "const CF_TUNNEL_BACKEND = '$TunnelUrl';"
         if ($htmlContent -match $oldPattern) {
-            $currentUrl = [regex]::Match($htmlContent, "const CF_TUNNEL_BACKEND = '([^']*)'").Groups[1].Value
+            $regexObj = [regex]::new("const CF_TUNNEL_BACKEND = '([^']+)';")
+            $currentUrl = $regexObj.Match($htmlContent).Groups[1].Value
             if ($currentUrl -ne $TunnelUrl) {
                 $htmlContent = $htmlContent -replace $oldPattern, $newValue
-                Set-Content -Path $IndexFile -Value $htmlContent -NoNewline
+                [System.IO.File]::WriteAllText($IndexFile, $htmlContent)
                 Write-Ok "已更新 public/index.html 中的 Tunnel URL"
-                Write-Warn "请记得 git commit & push 以更新 GitHub Pages"
+                
+                # 自动 git commit & push（Quick Tunnel URL 每次变，必须推送）
+                Write-Section "自动推送 Tunnel URL 到 GitHub Pages"
+                $oldEAP = $ErrorActionPreference
+                $ErrorActionPreference = 'Continue'
+                try {
+                    # 清除代理环境变量（否则 SSH push 会失败）
+                    $savedProxy = $env:HTTPS_PROXY; $savedHttp = $env:HTTP_PROXY
+                    $env:HTTPS_PROXY = ""; $env:HTTP_PROXY = ""
+                    
+                    # 设置 Git SSH
+                    $sshKeyPaths = @(
+                        "$env:USERPROFILE\.ssh\id_ed25519",
+                        "$env:USERPROFILE\.ssh\id_rsa"
+                    )
+                    $sshKey = $sshKeyPaths | Where-Object { Test-Path $_ } | Select-Object -First 1
+                    if ($sshKey) {
+                        $sshKeyForward = $sshKey -replace '\\','/'
+                        $env:GIT_SSH_COMMAND = "ssh -i $sshKeyForward -o StrictHostKeyChecking=no"
+                    }
+                    
+                    Push-Location $ScriptDir
+                    & git add public/index.html 2>$null
+                    $commitOut = & git commit -m "auto: update Tunnel URL to $TunnelUrl" 2>&1 | Out-String
+                    $pushOut = & git push origin master 2>&1 | Out-String
+                    Pop-Location
+                    
+                    if ($pushOut -match 'master -> master') {
+                        Write-Ok "已推送到 GitHub，GitHub Pages 将在 1-2 分钟内更新"
+                    } else {
+                        Write-Info $pushOut.Trim()
+                        Write-Warn "推送可能失败，请手动运行: git add . && git commit -m 'update tunnel url' && git push"
+                    }
+                    
+                    # 恢复代理
+                    $env:HTTPS_PROXY = $savedProxy; $env:HTTP_PROXY = $savedHttp
+                } catch {
+                    Write-Warn "自动推送出错: $($_.Exception.Message)"
+                    Write-Warn "请手动运行: git add . && git commit -m 'update tunnel url' && git push"
+                    $env:HTTPS_PROXY = $savedProxy; $env:HTTP_PROXY = $savedHttp
+                }
+                $ErrorActionPreference = $oldEAP
             } else {
                 Write-Info "Tunnel URL 未变化，无需更新"
             }
@@ -248,7 +306,7 @@ Write-Host @"
 ╠══════════════════════════════════════════════════╣
 ║  本地服务器: http://localhost:$Port                  ║
 ║  Tunnel URL: $($TunnelUrl.PadRight(36))║
-║  代理/梯子:  $($ProxyUrl ?? '无（直连）')                      ║
+║  代理/梯子:  $(if($ProxyUrl){$ProxyUrl}else{'无（直连）'})                      ║
 ╠══════════════════════════════════════════════════╣
 ║  Ctrl+C 停止所有服务                              ║
 ╚══════════════════════════════════════════════════╝
