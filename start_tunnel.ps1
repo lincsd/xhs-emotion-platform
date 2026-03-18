@@ -103,17 +103,36 @@ Write-Section "加载 API Key"
 $KeyFile = Join-Path $ScriptDir "api_key.txt"
 if (-not $env:GEMINI_API_KEY) {
     if (Test-Path $KeyFile) {
-        $rawKey = (Get-Content $KeyFile -Raw).Trim()
-        # 支持 "GEMINI_API_KEY=xxx" 和纯 "xxx" 两种格式
-        if ($rawKey -match '^\s*GEMINI_API_KEY\s*=\s*(.+)$') { $rawKey = $Matches[1].Trim() }
-        $env:GEMINI_API_KEY = $rawKey
-        Write-Ok "从 api_key.txt 加载 Key: $($env:GEMINI_API_KEY.Substring(0,10))..."
+        $keyLines = Get-Content $KeyFile -Encoding UTF8
+        $rawKey = ''
+        foreach ($line in $keyLines) {
+            $l = $line.Trim()
+            if ($l -match '^\s*GEMINI_API_KEY\s*=\s*(.+)$') { $rawKey = $Matches[1].Trim(); break }
+            if ($l -and -not $l.StartsWith('#') -and $l -notmatch '=') { $rawKey = $l; break }
+        }
+        if ($rawKey) {
+            $env:GEMINI_API_KEY = $rawKey
+            Write-Ok "从 api_key.txt 加载 Key: $($env:GEMINI_API_KEY.Substring(0,10))..."
+        } else {
+            Write-Err "api_key.txt 中未找到 GEMINI_API_KEY"
+            exit 1
+        }
     } else {
         Write-Err "未找到 API Key！请设置 GEMINI_API_KEY 环境变量 或创建 api_key.txt"
         exit 1
     }
 } else {
     Write-Ok "使用环境变量 Key: $($env:GEMINI_API_KEY.Substring(0,10))..."
+}
+# 加载 ADMIN_KEY
+if (-not $env:ADMIN_KEY) {
+    if (Test-Path $KeyFile) {
+        $keyContent = Get-Content $KeyFile -Raw
+        if ($keyContent -match '(?m)^\s*ADMIN_KEY\s*=\s*(.+)$') {
+            $env:ADMIN_KEY = $Matches[1].Trim()
+            Write-Ok "管理员密钥已加载 (ADMIN_KEY)"
+        }
+    }
 }
 
 # ============ 4. 启动 server.py ============
@@ -171,22 +190,54 @@ if (-not $SkipTunnel) {
         }
         # 检查/创建 Tunnel
         $TunnelName = "xhs-local"
-        $tunnelList = & $CfExe tunnel list --output json 2>$null | ConvertFrom-Json
-        $existing = $tunnelList | Where-Object { $_.name -eq $TunnelName -and -not $_.deleted_at }
-        if (-not $existing) {
-            Write-Info "创建 Named Tunnel: $TunnelName"
-            & $CfExe tunnel create $TunnelName
+        $tunnelId = $null
+        $prevEAP = $ErrorActionPreference
+        $ErrorActionPreference = 'Continue'
+        try {
+            $tunnelListJson = & $CfExe tunnel list --output json 2>$null
+            if ($tunnelListJson) {
+                $tunnelList = $tunnelListJson | ConvertFrom-Json
+                $existing = $tunnelList | Where-Object { $_.name -eq $TunnelName -and -not $_.deleted_at }
+                if ($existing) { $tunnelId = $existing.id }
+            }
+        } catch {}
+        if (-not $tunnelId) {
+            Write-Info "创建/查找 Named Tunnel: $TunnelName"
+            $createOut = & $CfExe tunnel create $TunnelName 2>&1 | Out-String
+            if ($createOut -match 'already exists') {
+                # Tunnel 已存在但 list 失败，从 credentials 文件查找 ID
+                $credFiles = Get-ChildItem "$env:USERPROFILE\.cloudflared\*.json" -ErrorAction SilentlyContinue
+                foreach ($f in $credFiles) {
+                    try {
+                        $cred = Get-Content $f.FullName -Raw | ConvertFrom-Json
+                        if ($cred.AccountTag) { $tunnelId = $f.BaseName; break }
+                    } catch {}
+                }
+                if ($tunnelId) {
+                    Write-Ok "使用已有 Tunnel: $TunnelName (ID: $tunnelId)"
+                } else {
+                    Write-Warn "Tunnel 已存在但无法获取 ID，尝试继续..."
+                }
+            } elseif ($createOut -match '([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})') {
+                $tunnelId = $Matches[1]
+                Write-Ok "Tunnel 已创建 (ID: $tunnelId)"
+            }
         } else {
-            Write-Info "使用已有 Tunnel: $TunnelName (ID: $($existing.id))"
+            Write-Ok "使用已有 Tunnel: $TunnelName (ID: $tunnelId)"
         }
-        # 配置 DNS 路由
-        Write-Info "配置 DNS: $TunnelDomain → $TunnelName"
-        & $CfExe tunnel route dns $TunnelName $TunnelDomain 2>$null
+        # 配置 DNS 路由（已存在则跳过）
+        $dnsOut = & $CfExe tunnel route dns $TunnelName $TunnelDomain 2>&1 | Out-String
+        if ($dnsOut -match 'already configured') {
+            Write-Ok "DNS 已配置: $TunnelDomain → Tunnel"
+        } else {
+            Write-Ok "DNS 路由已添加: $TunnelDomain → $TunnelName"
+        }
+        $ErrorActionPreference = $prevEAP
         # 写入配置
         $cfConfig = "$env:USERPROFILE\.cloudflared\config.yml"
-        $credId = if ($existing) { $existing.id } else { $TunnelName }
+        $credId = if ($tunnelId) { $tunnelId } else { $TunnelName }
         $cfgLines = @(
-            "tunnel: $TunnelName",
+            "tunnel: $credId",
             "credentials-file: $env:USERPROFILE\.cloudflared\$credId.json",
             "ingress:",
             "  - hostname: $TunnelDomain",
