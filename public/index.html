@@ -4505,7 +4505,8 @@
               }
               // 502/503 过载/冷启动 → 渐进重试
               if ((res.status === 502 || res.status === 503) && _retry < MAX_COLD_RETRIES - 1) {
-                console.warn(`[Gemini] 服务器 ${res.status}（可能正在冷启动）, 将重试...`);
+                const waitMs = COLD_DELAYS[Math.min(_retry, COLD_DELAYS.length - 1)];
+                console.warn(`[Gemini] 服务器 ${res.status}（冷启动）, 重试 ${_retry+1}/${MAX_COLD_RETRIES-1}, 等待${waitMs/1000}s...`);
                 lastNetworkError = new Error(`Server ${res.status}`);
                 continue;
               }
@@ -4515,9 +4516,13 @@
             } catch (e) {
               if (e.fromProxy) throw e;
               lastNetworkError = e;
-              // 网络错误 → 重试（首次立即，后续等待）
-              if (_retry < 1) continue;
-              // 非502网络错误，不再重试当前URL
+              // 网络错误（含 CORS 被 block 的 502/503）→ 与 502 同等重试策略
+              if (_retry < MAX_COLD_RETRIES - 1) {
+                const waitMs = COLD_DELAYS[Math.min(_retry, COLD_DELAYS.length - 1)];
+                console.warn(`[Gemini] 网络错误(${e.message?.substring(0,40)}), 重试 ${_retry+1}/${MAX_COLD_RETRIES-1}, 等待${waitMs/1000}s...`);
+                await _delay(waitMs);
+                continue;
+              }
               break;
             }
           }
@@ -4525,7 +4530,7 @@
 
         if (forceProxy) {
           const errDetail = lastNetworkError?.message || 'Failed to fetch';
-          const isColdStart = /Server 50[23]/.test(errDetail);
+          const isColdStart = /Server 50[23]|Failed to fetch|network|CORS|ERR_FAILED/i.test(errDetail);
           throw new Error(isColdStart
             ? '服务器正在启动中，请稍后10秒再试'
             : '代理连接失败: ' + errDetail);
