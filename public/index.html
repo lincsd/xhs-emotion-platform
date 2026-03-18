@@ -3567,7 +3567,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260318c'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260318d'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -3578,61 +3578,74 @@
     // v20260318: 所有搜索已走服务端代理，内嵌浏览器无需降级轻量模式
     const IS_LIGHT_AI_MODE = false;
 
-    // 智能后端选择：优先尝试 Cloudflare Tunnel（本地快速），失败则回退 Render
+    // 智能后端选择：竞速模式（Promise.any）同时探测 Tunnel 和 Render，谁先响应用谁
+    // 如果 Render 先赢，额外给 Tunnel 3秒宽限期（优先 Tunnel）
     let _activeBackend = CF_TUNNEL_BACKEND; // 初始指向隧道
     let _backendChecked = false;
-    let _backendSwitchCount = 0; // 防止频繁切换
-    let _lastCheckInfo = ''; // 诊断信息
-
-    // 单次尝试 tunnel 探测
-    async function _probeTunnel(timeoutMs) {
-      const t0 = Date.now();
-      const r = await fetch(CF_TUNNEL_BACKEND + '/api/version', { signal: _abortSignalTimeout(timeoutMs) });
-      const elapsed = Date.now() - t0;
-      if (r.ok) return elapsed;
-      throw new Error('not ok: ' + r.status);
-    }
+    let _backendSwitchCount = 0;
+    let _lastCheckInfo = '';
 
     async function _selectBestBackend(forceRecheck = false) {
       if (_backendChecked && !forceRecheck) return _activeBackend;
       _updateBackendIndicator('checking');
-      const isMobile = /iPhone|iPad|Android|Mobile/i.test(navigator.userAgent);
-      const timeout1 = isMobile ? 8000 : 5000;
-      const timeout2 = 12000; // 重试更长
-      // 尝试 1
+
+      const PROBE_TIMEOUT = 15000;
+      const TUNNEL_GRACE = 3000; // Render 先赢时，额外等 Tunnel 3秒
+
+      // 探测函数：成功 resolve，失败 reject
+      const probe = (url, label) => {
+        const t0 = Date.now();
+        return fetch(url + '/api/version', { signal: _abortSignalTimeout(PROBE_TIMEOUT) })
+          .then(r => {
+            if (!r.ok) throw new Error(label + ':' + r.status);
+            return { label, url, ms: Date.now() - t0 };
+          });
+      };
+
+      const tunnelP = probe(CF_TUNNEL_BACKEND, 'tunnel');
+      const renderP = probe(RENDER_BACKEND, 'render');
+
       try {
-        const ms = await _probeTunnel(timeout1);
-        _activeBackend = CF_TUNNEL_BACKEND;
-        _backendChecked = true;
-        _backendSwitchCount++;
-        _lastCheckInfo = `✅ Tunnel ${ms}ms (build:${PAGE_BUILD})`;
-        console.log('🚀 后端: Cloudflare Tunnel', ms + 'ms');
-        _updateBackendIndicator('tunnel');
-        return _activeBackend;
-      } catch (e1) {
-        console.warn('⚠️ Tunnel 探测第1次失败:', e1.message);
+        // Promise.any: 第一个成功的胜出（忽略失败）
+        const winner = await Promise.any([tunnelP, renderP]);
+
+        if (winner.label === 'tunnel') {
+          // Tunnel 先赢，直接用
+          _activeBackend = CF_TUNNEL_BACKEND;
+          _lastCheckInfo = `✅ Tunnel 胜出 ${winner.ms}ms (build:${PAGE_BUILD})`;
+          console.log(`🚀 后端: Tunnel ${winner.ms}ms`);
+          _updateBackendIndicator('tunnel');
+        } else {
+          // Render 先赢，给 Tunnel 宽限期
+          console.log(`☁️ Render 先响应 ${winner.ms}ms，等 Tunnel ${TUNNEL_GRACE}ms...`);
+          try {
+            const tunnelResult = await Promise.race([
+              tunnelP,
+              new Promise((_, rej) => setTimeout(() => rej('grace_timeout'), TUNNEL_GRACE))
+            ]);
+            // Tunnel 在宽限内响应了
+            _activeBackend = CF_TUNNEL_BACKEND;
+            _lastCheckInfo = `✅ Tunnel ${tunnelResult.ms}ms (宽限), Render ${winner.ms}ms (build:${PAGE_BUILD})`;
+            console.log(`🚀 Tunnel 在宽限内响应 ${tunnelResult.ms}ms`);
+            _updateBackendIndicator('tunnel');
+          } catch {
+            // 宽限超时，用 Render
+            _activeBackend = RENDER_BACKEND;
+            _lastCheckInfo = `☁️ Render ${winner.ms}ms, Tunnel 超时 (build:${PAGE_BUILD})`;
+            console.log(`☁️ 后端: Render ${winner.ms}ms (Tunnel超时)`);
+            _updateBackendIndicator('render');
+          }
+        }
+      } catch (aggErr) {
+        // Promise.any 抛 AggregateError = 两个都失败
+        _activeBackend = RENDER_BACKEND;
+        _lastCheckInfo = `⚠️ 两后端均失败, 默认Render (build:${PAGE_BUILD})`;
+        console.warn('⚠️ 两后端均不可达:', aggErr);
+        _updateBackendIndicator('render');
       }
-      // 尝试 2（重试一次，更长超时）
-      try {
-        const ms = await _probeTunnel(timeout2);
-        _activeBackend = CF_TUNNEL_BACKEND;
-        _backendChecked = true;
-        _backendSwitchCount++;
-        _lastCheckInfo = `✅ Tunnel ${ms}ms (retry, build:${PAGE_BUILD})`;
-        console.log('🚀 后端: Cloudflare Tunnel (重试成功)', ms + 'ms');
-        _updateBackendIndicator('tunnel');
-        return _activeBackend;
-      } catch (e2) {
-        console.warn('⚠️ Tunnel 探测第2次失败:', e2.message);
-        _lastCheckInfo = `❌ Tunnel不可达 (${e2.message}), build:${PAGE_BUILD}`;
-      }
-      // 回退 Render
-      const prev = _activeBackend;
-      _activeBackend = RENDER_BACKEND;
+
       _backendChecked = true;
-      if (prev !== _activeBackend) _backendSwitchCount++;
-      console.log('☁️ 后端: Render 云端 (隧道不可用, 使用备用)');
-      _updateBackendIndicator('render');
+      _backendSwitchCount++;
       return _activeBackend;
     }
 
@@ -15836,7 +15849,7 @@ Style: ${stylePrompt}
         if (res.ok) {
           backendOk = true;
           useLocalMode = false;
-          const backendType = _activeBackend.includes('trycloudflare') ? 'Cloudflare Tunnel 🚀' : (IS_GITHUB_PAGES ? 'Render ☁️' : '本地');
+          const backendType = (_activeBackend === CF_TUNNEL_BACKEND) ? 'Cloudflare Tunnel 🚀' : (IS_GITHUB_PAGES ? 'Render ☁️' : '本地');
           console.log(`✅ 已连接后端服务器（${backendType}）`);
         } else {
           throw new Error('Server error');
