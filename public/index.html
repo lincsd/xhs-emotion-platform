@@ -1679,6 +1679,12 @@
       <div style="padding:8px 16px;font-size:11px;color:rgba(255,255,255,0.35);text-align:center;" id="sidebar-version"></div>
     </aside>
 
+    <!-- 后端指示器（右下角浮动） -->
+    <div id="backend-indicator" class="backend-indicator-base checking" title="点击重新检测后端" onclick="(async()=>{_backendChecked=false;const b=await _selectBestBackend(true);if(IS_GITHUB_PAGES)API_BASE=b;})()">
+      <div class="bi-dot"></div>
+      <span class="bi-label">⏳ 检测中...</span>
+    </div>
+
     <!-- ===== 手机端顶部栏 ===== -->
     <div class="mobile-top-bar" id="mobile-top-bar">
       <button class="mob-hamburger" onclick="toggleMobileDrawer()">☰</button>
@@ -2998,6 +3004,36 @@
             #page-ai-card > div { grid-template-columns: 1fr !important; }
           }
         </style>
+
+        <!-- 后端指示器样式 -->
+        <style>
+          .backend-indicator-base {
+            position: fixed; bottom: 16px; right: 16px; z-index: 99999;
+            display: flex; align-items: center; gap: 6px;
+            padding: 6px 14px; border-radius: 20px;
+            font-size: 12px; font-weight: 600;
+            color: #fff; cursor: pointer;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease; opacity: 0.85;
+            backdrop-filter: blur(8px); user-select: none;
+          }
+          .backend-indicator-base:hover { opacity: 1; transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.25); }
+          .backend-indicator-base.tunnel { background: linear-gradient(135deg, #00b894, #00cec9); }
+          .backend-indicator-base.render { background: linear-gradient(135deg, #6c5ce7, #a29bfe); }
+          .backend-indicator-base.checking { background: linear-gradient(135deg, #636e72, #b2bec3); }
+          .backend-indicator-base .bi-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #55efc4; animation: bi-pulse 2s infinite;
+          }
+          .backend-indicator-base.render .bi-dot { background: #dfe6e9; }
+          .backend-indicator-base.checking .bi-dot { background: #ffeaa7; animation: bi-spin 1s linear infinite; }
+          @keyframes bi-pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+          @keyframes bi-spin { 0%{transform:rotate(0)} 100%{transform:rotate(360deg)} }
+          .backend-indicator-base .bi-label { white-space: nowrap; }
+          @media(max-width:768px) {
+            .backend-indicator-base { bottom: 10px; right: 10px; padding: 5px 10px; font-size: 11px; }
+          }
+        </style>
       </section>
 
       <!-- ===== �🎴 卡片模板库页面 ===== -->
@@ -3543,24 +3579,63 @@
     // 智能后端选择：优先尝试 Cloudflare Tunnel（本地快速），失败则回退 Render
     let _activeBackend = CF_TUNNEL_BACKEND; // 初始指向隧道
     let _backendChecked = false;
+    let _backendSwitchCount = 0; // 防止频繁切换
 
-    async function _selectBestBackend() {
-      if (_backendChecked) return _activeBackend;
+    async function _selectBestBackend(forceRecheck = false) {
+      if (_backendChecked && !forceRecheck) return _activeBackend;
+      _updateBackendIndicator('checking');
       // 先尝试 CF Tunnel
       try {
         const r = await fetch(CF_TUNNEL_BACKEND + '/api/version', { signal: _abortSignalTimeout(5000) });
         if (r.ok) {
+          const prev = _activeBackend;
           _activeBackend = CF_TUNNEL_BACKEND;
           _backendChecked = true;
+          if (prev !== _activeBackend) _backendSwitchCount++;
           console.log('🚀 后端: Cloudflare Tunnel (本地直连, 最快)');
+          _updateBackendIndicator('tunnel');
           return _activeBackend;
         }
       } catch {}
       // 回退 Render
+      const prev = _activeBackend;
       _activeBackend = RENDER_BACKEND;
       _backendChecked = true;
+      if (prev !== _activeBackend) _backendSwitchCount++;
       console.log('☁️ 后端: Render 云端 (隧道不可用, 使用备用)');
+      _updateBackendIndicator('render');
       return _activeBackend;
+    }
+
+    // 运行时故障切换：API 调用连续失败时尝试切换后端
+    let _consecutiveFailures = 0;
+    const _MAX_FAILURES_BEFORE_SWITCH = 2;
+
+    async function _tryBackendFailover() {
+      _consecutiveFailures++;
+      if (_consecutiveFailures >= _MAX_FAILURES_BEFORE_SWITCH && _backendSwitchCount < 5) {
+        console.warn(`⚠️ 后端连续 ${_consecutiveFailures} 次失败, 尝试切换...`);
+        _backendChecked = false;
+        _consecutiveFailures = 0;
+        const newBackend = await _selectBestBackend(true);
+        if (IS_GITHUB_PAGES) API_BASE = newBackend;
+        return true; // 已切换
+      }
+      return false; // 未切换
+    }
+
+    function _resetFailureCount() { _consecutiveFailures = 0; }
+
+    // 后端指示器 UI 更新
+    function _updateBackendIndicator(type) {
+      const el = document.getElementById('backend-indicator');
+      if (!el) return;
+      el.className = type; // tunnel / render / checking
+      el.id = 'backend-indicator'; // keep id
+      el.className = 'backend-indicator-base ' + type;
+      const labels = { tunnel: '🚀 Tunnel 直连', render: '☁️ Render 云端', checking: '⏳ 检测中...' };
+      const labelEl = el.querySelector('.bi-label');
+      if (labelEl) labelEl.textContent = labels[type] || type;
     }
 
     if (IS_GITHUB_PAGES && IS_CN_EMBEDDED_BROWSER) {
@@ -4542,9 +4617,10 @@
               }
               const data = await parseProxyJson(res, proxyUrl);
               loadCreditsInfo();
+              _resetFailureCount(); // 成功，重置失败计数
               return { ok: true, data };
             } catch (e) {
-              if (e.fromProxy) throw e;
+              if (e.fromProxy) { _resetFailureCount(); throw e; } // 业务错误不算网络故障
               lastNetworkError = e;
               // 网络错误（含 CORS 被 block 的 502/503）→ 与 502 同等重试策略
               if (_retry < MAX_COLD_RETRIES - 1) {
@@ -4559,6 +4635,13 @@
         }
 
         if (forceProxy) {
+          // 所有重试都失败 — 尝试切换后端
+          const switched = await _tryBackendFailover();
+          if (switched) {
+            // 后端已切换，用新后端递归重试一次
+            console.log('[Gemini] 后端已切换, 用新后端重试...');
+            return callGeminiAPI(apiKey, model, payload, action, feature);
+          }
           const errDetail = lastNetworkError?.message || 'Failed to fetch';
           const isColdStart = /Server 50[23]|Failed to fetch|network|CORS|ERR_FAILED/i.test(errDetail);
           throw new Error(isColdStart
