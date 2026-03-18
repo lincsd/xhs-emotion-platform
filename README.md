@@ -1,162 +1,324 @@
-# 🌸 小红书情感账号 · 自动化运营管理平台
+# 🌸 小红书 AI 智能运营平台
 
-一套完整的小红书情感账号运营工具，支持内容自动生成、发布排期、变现追踪。
+**全栈一体化**的小红书内容创作 & 账号运营工具。AI 驱动内容生成、精美图文卡片渲染、智能排期发布、变现追踪、数据分析——一个平台搞定全部。
 
-## ✨ 功能特色
+> 🌐 在线体验：[https://lincsd.github.io/xhs-emotion-platform/](https://lincsd.github.io/xhs-emotion-platform/)
+>
+> 🔧 后端代理：部署在 [Render](https://render.com)，自动代理 Gemini API
 
-- **一键生成** 8大情感分类笔记（治愈/成长/爱情/友情/自我/离别/温暖/释怀）
-- **批量产出** 支持一次生成7天/14天/30天的内容
-- **发布日历** 可视化排期管理
-- **变现追踪** 记录收入来源和金额
-- **账号数据** 跟踪粉丝/点赞/收藏增长
-- **变现方案** 系统化变现策略指导
-- **双模式运行** 本地服务器模式 + GitHub Pages 纯静态模式
+---
+
+## ✨ 核心亮点
+
+| 能力 | 描述 |
+|------|------|
+| 🤖 **AI 智能生成** | 基于 Gemini 2.5 Flash/Pro，一键生成高质量小红书笔记 |
+| 🎴 **17+ 精美卡片模板** | 图文卡片引擎 v3，支持 Canvas 渲染一键导出图片 |
+| 🎨 **5 种图片滤镜** | 复古胶片 / 日系清新 / 电影色调 / 梦幻柔光 / 黑白质感 |
+| 🎯 **7 大赛道技能** | 情感 / 美食 / 旅行 / 健身 / 穿搭 / 科技数码 / 电商带货 |
+| 📅 **发布日历 + 最佳时段** | 可视化排期，内置发布时段评分指导 |
+| 💎 **积分 + 邀请赚钱** | 完整付费体系 + 邀请返佣机制 |
+| 🖼️ **AI 图片生成** | Gemini 3.x 图片模型，直接在平台内生成配图 |
+| 📱 **移动端适配** | 响应式设计，手机 / 平板 / PC 均可流畅使用 |
+
+---
 
 ## 🚀 快速开始
 
-### 方式一：GitHub Pages 在线访问（无需安装）
+### 方式一：在线访问（零安装）
 
-直接访问部署后的 GitHub Pages 链接即可使用，数据保存在浏览器 localStorage 中。
+直接打开 [GitHub Pages 链接](https://lincsd.github.io/xhs-emotion-platform/) 注册/登录即可使用。
 
-### 方式二：本地服务器模式（推荐，支持数据持久化）
+### 方式二：本地运行
 
 ```bash
-# 只需要 Python 3，无需任何第三方依赖
+# 纯 Python 标准库，无需 pip install
 python server.py
 # 访问 http://localhost:3000
 ```
 
-## 🌍 无梯子可用方案（GitHub Pages + 云端 Gemini 代理）
+### 方式三：Render 一键部署（推荐生产环境）
 
-如果本地浏览器无法直连 Google API，可将 `server.py` 部署到海外云（如 Render），让前端通过 HTTPS 代理调用 Gemini。
+1. Fork 本仓库 → Render → New → Blueprint → 连接仓库
+2. 自动读取 `render.yaml`，创建 Web Service + 持久化磁盘
+3. 设置环境变量 `GEMINI_API_KEY`（支持多个，逗号分隔）
+4. 部署完成后获得 HTTPS 地址，如：`https://xhs-gemini-proxy.onrender.com`
 
-### 1) 一键部署代理（Render）
+---
 
-本仓库已内置 [render.yaml](render.yaml)，可直接使用 Blueprint 部署：
+## 📋 完整功能清单
 
-1. 打开 Render → New → Blueprint
-2. 连接本仓库并创建服务（自动读取 `render.yaml`）
-3. 部署完成后获得代理地址，例如：`https://xhs-gemini-proxy.onrender.com`
+### 🤖 AI 内容生成
 
-> 当前 Blueprint 已切换为持久化版本：会在 Render Web Service 上挂载持久化磁盘，并将 SQLite 数据库写入 `/var/data/xhsqg/data.db`。
+- **一键生成笔记** — 输入主题，AI 自动生成标题/正文/标签/封面文案
+- **联网搜索增强** — 可选百度搜索分析实时热点，融入内容创作
+- **参考笔记学习** — 粘贴爆款笔记，AI 学习风格并仿写
+- **自定义 Prompt** — 自由输入创作指令，AI 优先参考
+- **笔记改写** — 5 种模式（口语化/正式化/故事化/金句化/精简化）× 5 种风格
+- **一键润色** — 3 级力度 × 9 大领域，保留原意优化表达
+- **爆款标题生成器** — 6 种风格（悬念/数字/情感/反转/对比/问答）
+- **AI 评论话术** — 6 大场景（感谢/互动/咨询/质疑/合作/涨粉）自动生成回复
+- **A/B 测试** — 多版本内容对比分析，选出最优方案
 
-> 注意：Render 的持久化磁盘仅支持付费 Web Service，因此实例类型需至少为 `starter`，不能继续使用 `free`。
+### 🎴 图文卡片引擎 v3
 
-建议在 Render 服务中设置环境变量（更安全）：
+**17 套内置模板**：
 
-- Key: `GEMINI_API_KEY`
-- Value: 你的 Gemini API Key
+| 模板 | 适用场景 |
+|------|----------|
+| 📖 简约文艺 | 情感、成长、读书、感悟 |
+| 🌸 甜美清新 | 日常、美食、手帐、少女 |
+| 💼 商务高级 | 职场、商业、投资、科技 |
+| 📷 INS美学 | 穿搭、生活、旅行、咖啡 |
+| 🔮 暗黑赛博 | 摄影、音乐、潮流、游戏 |
+| 🏮 国潮中式 | 国潮、汉服、书法、茶道 |
+| 📚 笔记干货 | 学习、考试、干货、效率 |
+| 🎞 杂志排版 | 时尚、大片、封面、质感 |
+| 🌿 自然治愈 | 治愈、心理、正能量、晚安 |
+| ✍️ 手写日记 | 日记、心情、碎碎念、随笔 |
+| 🍬 活力彩虹 | 彩虹、派对、生日、搞笑 |
+| 🔥 热点速报 | 新闻、热点、时事、评论 |
+| 🛍️ 种草带货 | 种草、带货、好物、测评 |
+| 👗 穿搭拼图 | 穿搭、ootd、搭配、显瘦 |
+| 🎨 配色灵感 | 配色、色彩、滤镜、美学 |
+| 📜 拟物信笺 | 金句、语录、心情、手写 |
+| 💥 醒目大字 | 爆款、标题、封面、干货 |
 
-设置后，前端可不再填写 API Key，仅填写代理地址即可调用。
+**视觉效果库**：渐变文字、描边文字、霓虹发光、毛玻璃面板、网格渐变、照片滤镜
 
-### 2) 在前端配置代理地址
+**12 套自定义配色**：奶茶暖棕 / 莫兰迪灰 / 樱花粉 / 薄荷清新 / 克莱因蓝 / 赛博暗夜 / 落日橘 / 薰衣草紫 / 复古红金 / 极简黑白 / 森系墨绿 / 焦糖玛奇朵
 
-打开你的 GitHub Pages 页面后：
+### 📸 图片滤镜系统
 
-1. 进入「⚙️ API 设置」
-2. `Gemini API Key` 可留空（若 Render 已配置 `GEMINI_API_KEY`）
-3. 在「Gemini 代理地址（可选）」填写你的 Render HTTPS 域名
-4. 点击「测试连接」和「保存设置」
+| 滤镜 | 效果 |
+|------|------|
+| 🎞 复古胶片 | 暖色调 + 低饱和 + 暗角 + 漏光 |
+| 🌊 日系清新 | 高亮度 + 低对比 + 青色偏移 |
+| 🎬 电影色调 | 青橙分离 + 宽银幕黑边 |
+| 🌸 梦幻柔光 | 柔焦 + 粉紫光晕 + 白雾 |
+| ⚫ 黑白质感 | 去色 + 微对比叠加 |
 
-完成后，前端会优先通过 `https://你的代理域名/api/gemini-proxy` 调用 Gemini，无需本地开梯子。
+### 🎯 7 大赛道技能系统
 
-### 3) 持久化数据说明（账号长期有效）
+每个赛道包含：专属 AI 角色设定、内容分类、图片风格、变现策略、发布时间建议
 
-此版本已将账号、会话、笔记、收入、统计数据统一存入 SQLite。
+| 赛道 | 分类示例 |
+|------|----------|
+| 🌸 情感 | 治愈、成长、爱情、友情、自我、离别、温暖、释怀 |
+| 🍜 美食 | 家常菜、烘焙、探店、减脂餐、甜品、早餐、宵夜 |
+| ✈️ 旅行 | 城市探索、徒步、住宿推荐、穷游攻略、自驾游 |
+| 💪 健身 | 减脂、增肌、瑜伽、跑步、居家健身、体态矫正 |
+| 👗 穿搭 | 日常穿搭、通勤OL、约会、小个子、微胖穿搭 |
+| 📱 科技数码 | 手机评测、好物推荐、App推荐、智能家居 |
+| 🛒 电商带货 | 好物测评、选品分析、带货文案、种草笔记 |
 
-- 本地运行：默认写入项目根目录的 `data.db`
-- Render 运行：若设置 `DATA_DIR` 或 `DB_PATH`，数据库将写入指定持久化目录
-- 默认 Blueprint 已设置 `DATA_DIR=/var/data/xhsqg`
+### 📊 数据 & 分析
 
-这意味着：
+- **数据看板** — 笔记数、排期数、收入统计、趋势图表
+- **笔记评分** — AI 5 维评分（标题/内容/标签/视觉/结构），专业优化建议
+- **热词分析** — 4 维度关键词分析（搜索量/竞争度/趋势/推荐指数）
+- **违禁词检测** — 3 级敏感词过滤（禁用词/高风险/低风险）
+- **热门话题** — AI 发现当下热门话题与爆款方向
+- **竞品分析** — AI 分析竞品账号策略
+- **账号数据** — 粉丝/点赞/收藏/评论增长追踪
 
-- 重启服务后，账号和业务数据会保留
-- 重新部署代码后，账号和业务数据会保留
-- 只有你主动清空磁盘、删除服务或更换存储位置，数据才会丢失
+### 🖼️ 图片工具箱
 
-如果你已经在 Render 控制台手动建好了服务，也可以手动补齐这两项：
+- **AI 图片生成** — Gemini 3.x 模型生成配图
+- **图片裁剪** — 1:1 / 3:4 / 4:3 / 16:9 / 自由裁剪
+- **调色板** — 亮度、对比度、饱和度、锐化
+- **水印** — 4 种位置 + 平铺模式，自定义大小
+- **压缩** — 质量滑杆 + 尺寸预估
+- **AI 配文** — 上传图片，自动生成小红书风格文案
+- **AI 修图** — 自然语言描述修图需求，AI 执行
 
-1. 在 Render 服务的 Disks 页面添加一个磁盘，挂载路径设为 `/var/data`
-2. 在 Environment 中添加 `DATA_DIR=/var/data/xhsqg`
-3. 重新部署服务
+### 💰 变现体系
 
-## 🔐 手机号验证码注册/登录
+- **变现方案** — 按赛道定制的变现路线图（冷启动→成长→变现→规模化）
+- **收入追踪** — 记录广告/带货/付费内容等收入来源
+- **内容规划** — AI 生成周/月内容计划
 
-已支持：
+### 💎 积分商城 & 邀请系统
 
-- 注册：手机号 + 短信验证码 + 用户名 + 密码
-- 登录：用户名/手机号 + 密码，或手机号 + 短信验证码
+| 套餐 | 积分 | 价格 |
+|------|------|------|
+| 体验包 | 50 | ¥9.9 |
+| 标准包 | 200 | ¥29.9 |
+| 专业包 | 500 | ¥59.9 |
+| 团队包 | 2,000 | ¥199 |
 
-后端接口：
+- **每日免费** — 每用户每天 10 次免费 AI 调用
+- **邀请返佣** — 邀请好友注册得 20 积分，好友得 10 积分，后续消费 15% 返佣
+- **兑换码** — 管理员可生成积分兑换码
+- **微信/支付宝付款** — QR 码扫码 → 管理员确认 → 积分到账
 
-- `POST /api/auth/send-code`：发送验证码（`purpose` 为 `register` 或 `login`）
-- `POST /api/auth/register`：注册（新增 `smsCode` 字段）
-- `POST /api/auth/login-sms`：手机号验证码登录
+---
 
-默认行为：
+## 🏗️ 技术架构
 
-- 未配置短信通道时，后端会使用 mock 发送（仅服务端日志打印验证码）
-- 验证码有效期 10 分钟
-- 同手机号发送冷却 60 秒
+```
+┌─────────────────────────────────────────────────┐
+│  前端 (GitHub Pages CDN)                          │
+│  public/index.html — 15,700+ 行全功能 SPA         │
+│  Canvas 卡片引擎 + IndexedDB 图片存储              │
+└────────────────────┬────────────────────────────┘
+                     │ HTTPS
+┌────────────────────▼────────────────────────────┐
+│  后端 (Render Singapore)                          │
+│  server.py — Python 纯标准库，零依赖              │
+│  SQLite + 持久化磁盘 + 多 Key 轮询               │
+│  Gemini API 代理 + 百度搜索代理                    │
+└────────────────────┬────────────────────────────┘
+                     │
+┌────────────────────▼────────────────────────────┐
+│  Google Gemini API                                │
+│  gemini-2.5-flash / pro / lite (文本)             │
+│  gemini-3.x (图片生成)                            │
+└─────────────────────────────────────────────────┘
+```
 
-短信通道模式：
+- **前端**：单文件 SPA（HTML + CSS + JS），响应式设计
+- **后端**：Python 3 标准库 HTTP Server，**零第三方依赖**
+- **数据库**：SQLite（用户/笔记/订单/积分/邀请等全部数据）
+- **AI 引擎**：Google Gemini 2.5 Flash（文本） + Gemini 3.x（图片）
+- **认证**：Token + 手机号短信验证码（阿里云 SMS / 通用网关 / Mock）
+- **部署**：Render Standard + 5GB 持久化磁盘 + 14 分钟保活心跳
 
-- `SMS_PROVIDER=aliyun`：使用阿里云短信直连
-- 未设置 `SMS_PROVIDER`：使用通用网关（`SMS_API_URL`）
-- 两者都未配置：mock 模式（仅日志打印验证码）
-
-通用网关模式环境变量：
-
-- `SMS_API_URL`：短信网关地址（POST JSON）
-- `SMS_API_TOKEN`：短信网关 Bearer Token（可选）
-- `SMS_SIGN`：短信签名（可选，默认“小红书智能运营台”）
-
-阿里云短信模式环境变量：
-
-- `SMS_PROVIDER=aliyun`
-- `ALIYUN_SMS_ACCESS_KEY_ID`
-- `ALIYUN_SMS_ACCESS_KEY_SECRET`
-- `ALIYUN_SMS_SIGN_NAME`
-- `ALIYUN_SMS_TEMPLATE_CODE_REGISTER`（注册模板）
-- `ALIYUN_SMS_TEMPLATE_CODE_LOGIN`（登录模板）
-
-可选：
-
-- `ALIYUN_SMS_TEMPLATE_CODE`（通用模板，若未设置上面两个分用途模板则回退到它）
-- `ALIYUN_SMS_REGION_ID`（默认 `cn-hangzhou`）
-- `ALIYUN_SMS_ENDPOINT`（默认 `dysmsapi.aliyuncs.com`）
+---
 
 ## 📁 项目结构
 
 ```
-├── index.html         # 前端管理面板（GitHub Pages 入口，支持离线模式）
-├── server.py          # Python 后端服务（纯标准库，无需pip安装）
 ├── public/
-│   └── index.html     # 前端管理面板（本地服务器使用）
-├── .gitignore
-└── README.md
+│   └── index.html       # 前端主文件（15,700+ 行全功能 SPA）
+├── index.html           # GitHub Pages 入口（重定向到 public/）
+├── server.py            # Python 后端（~2,660 行，零依赖）
+├── render.yaml          # Render 部署配置（Blueprint）
+├── card_templates.json  # 卡片模板定义
+├── models.json          # AI 模型列表
+├── style.css            # 补充样式
+├── PRODUCT.md           # 产品文档
+├── SKILL.md             # 技能系统文档
+├── CARD_TEMPLATES.md    # 卡片模板文档
+└── README.md            # 本文件
 ```
 
-## 🌐 GitHub Pages 部署
+---
 
-1. Fork 或 Push 本仓库到你的 GitHub
-2. 进入仓库 Settings → Pages
-3. Source 选择 `main` 分支，目录选 `/ (root)`
-4. 保存后等待部署，访问 `https://你的用户名.github.io/仓库名/`
+## ⚙️ 环境变量
 
-> GitHub Pages 模式下数据存储在浏览器 localStorage 中，所有功能均可正常使用（内容生成、排期、收入记录等）。
+### 必需
 
-> 注意：请勿将 API Key 提交到 Git 仓库；如有泄露请立即在 Google AI Studio 里删除并重建。
+| 变量 | 说明 |
+|------|------|
+| `GEMINI_API_KEY` | Google Gemini API Key（多个用逗号分隔，自动轮询） |
 
-## 💰 变现路线
+### 可选
 
-| 阶段 | 时间 | 粉丝 | 策略 |
-|------|------|-------|------|
-| 冷启动 | 1-2个月 | 0-1000 | 每天发2-3条，积累内容 |
-| 成长期 | 2-4个月 | 1000-5000 | 入驻蒲公英，接广告 |
-| 变现期 | 4-6个月 | 5000-2万 | 稳定广告+付费产品 |
-| 规模化 | 6个月+ | 2万+ | 矩阵运营，品牌化 |
+| 变量 | 说明 | 默认值 |
+|------|------|--------|
+| `PORT` | 服务端口 | `3000` |
+| `DATA_DIR` | 数据目录 | 项目根目录 |
+| `DB_PATH` | SQLite 数据库路径 | `{DATA_DIR}/data.db` |
+| `ADMIN_KEY` | 管理员操作密钥 | — |
+| `HTTPS_PROXY` | Gemini API 代理地址 | — |
 
-## 📝 License
+### 短信验证码（可选）
+
+| 变量 | 说明 |
+|------|------|
+| `SMS_PROVIDER` | `aliyun` 使用阿里云短信 |
+| `ALIYUN_SMS_ACCESS_KEY_ID` | 阿里云 AccessKey ID |
+| `ALIYUN_SMS_ACCESS_KEY_SECRET` | 阿里云 AccessKey Secret |
+| `ALIYUN_SMS_SIGN_NAME` | 短信签名 |
+| `ALIYUN_SMS_TEMPLATE_CODE_REGISTER` | 注册验证码模板 |
+| `ALIYUN_SMS_TEMPLATE_CODE_LOGIN` | 登录验证码模板 |
+| `SMS_API_URL` | 通用短信网关地址（POST JSON） |
+| `SMS_API_TOKEN` | 通用短信网关 Bearer Token |
+
+> 两者都未配置时，使用 Mock 模式（验证码打印在服务端日志）
+
+### 支付配置（可选）
+
+| 变量 | 说明 |
+|------|------|
+| `WECHAT_PAY_QR` | 微信收款码图片 URL |
+| `ALIPAY_QR` | 支付宝收款码图片 URL |
+
+---
+
+## 🔐 API 端点（41 个）
+
+<details>
+<summary>展开查看全部 API</summary>
+
+### GET
+
+| 路径 | 说明 |
+|------|------|
+| `/healthz` | 健康检查 |
+| `/api/version` | 版本信息 + Key 数量 |
+| `/api/stats` | 数据看板统计 |
+| `/api/categories` | 分类列表 |
+| `/api/posts` | 笔记列表 |
+| `/api/calendar` | 日历事件 |
+| `/api/income` | 收入记录 |
+| `/api/account-stats` | 账号数据 |
+| `/api/user/credits` | 积分余额 |
+| `/api/packages` | 积分套餐 |
+| `/api/payment-config` | 支付配置 |
+| `/api/orders/my` | 我的订单 |
+| `/api/captcha` | 图形验证码 |
+| `/api/monetization-guide` | 变现指南 |
+| `/api/invite/info` | 邀请信息 |
+| `/api/invite/leaderboard` | 邀请排行榜 |
+| `/api/invite/commissions` | 佣金记录 |
+| `/api/invite/withdrawals` | 提现记录 |
+| `/api/content-plans` | 内容规划 |
+| `/api/admin/orders` | [管理员] 订单管理 |
+
+### POST
+
+| 路径 | 说明 |
+|------|------|
+| `/api/auth/send-code` | 发送短信验证码 |
+| `/api/auth/register` | 注册 |
+| `/api/auth/login` | 密码登录 |
+| `/api/auth/login-sms` | 短信登录 |
+| `/api/auth/logout` | 登出 |
+| `/api/gemini-proxy` | Gemini API 代理 |
+| `/api/ai-proxy` | AI 代理（备用） |
+| `/api/baidu-search` | 百度搜索代理 |
+| `/api/posts` | 创建笔记 |
+| `/api/generate` | 生成内容 |
+| `/api/schedule` | 排期 |
+| `/api/income` | 记录收入 |
+| `/api/account-stats` | 记录账号数据 |
+| `/api/export-batch` | 批量导出 |
+| `/api/redeem` | 兑换积分码 |
+| `/api/orders/create` | 创建订单 |
+| `/api/orders/notify-paid` | 通知已付款 |
+| `/api/orders/cancel` | 取消订单 |
+| `/api/content-plans` | 创建内容规划 |
+| `/api/invite/withdraw` | 申请提现 |
+| `/api/admin/gen-codes` | [管理员] 生成兑换码 |
+| `/api/admin/orders/confirm` | [管理员] 确认付款 |
+| `/api/admin/withdrawal` | [管理员] 处理提现 |
+
+</details>
+
+---
+
+## 📝 版本历史
+
+| 版本 | 日期 | 主要更新 |
+|------|------|----------|
+| `v20260317d` | 2026-03-17 | 竞品升级：拟物信笺模板 + 醒目大字模板 + 图片滤镜系统 + 自定义配色 |
+| `v20260317c` | 2026-03-17 | Card Engine v3：视觉效果库 + 6 大渲染器升级 |
+| — | 更早 | Skill 系统、积分商城、邀请返佣、AI 图片生成、多账号管理等 |
+
+---
+
+## 📄 License
 
 MIT
