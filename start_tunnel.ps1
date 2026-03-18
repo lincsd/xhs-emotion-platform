@@ -4,7 +4,7 @@
 # ============================================================
 param(
     [int]$Port = 3000,
-    [string]$TunnelDomain = '',   # 留空=Quick Tunnel，填写=使用 Named Tunnel 域名
+    [string]$TunnelDomain = 'xhs.xiaohsai.com',   # 默认使用 Named Tunnel 固定域名
     [switch]$SkipTunnel           # 只启动 server.py，不启动 Tunnel
 )
 
