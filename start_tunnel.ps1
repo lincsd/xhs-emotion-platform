@@ -198,39 +198,53 @@ if (-not $SkipTunnel) {
         $CfProc = Start-Process -FilePath $CfExe -ArgumentList "tunnel run $TunnelName" `
             -PassThru -RedirectStandardError $CfLog -WindowStyle Hidden
     } else {
-        # Quick Tunnel 模式 — 随机 URL
+        # Quick Tunnel 模式 — 随机 URL，支持重试
         Write-Info "Quick Tunnel 模式（随机 URL，每次重启会变）"
         $CfArgs = "tunnel --url http://localhost:$Port"
-        # cloudflared 需要走梯子访问 trycloudflare.com（国内直连超时）
-        $cfEnv = @{}
         if ($ProxyUrl) {
-            $cfEnv['HTTPS_PROXY'] = $ProxyUrl
-            $cfEnv['HTTP_PROXY'] = $ProxyUrl
             Write-Info "cloudflared 使用代理: $ProxyUrl"
         }
-        $CfProc = Start-Process -FilePath $CfExe -ArgumentList $CfArgs `
-            -PassThru -RedirectStandardError $CfLog -WindowStyle Hidden
-    }
-    Write-Info "cloudflared PID: $($CfProc.Id)"
-
-    # 等待 Tunnel URL 出现
-    if (-not $TunnelDomain) {
-        Write-Info "等待 Tunnel 分配 URL（约 5-15 秒）..."
+        
         $TunnelUrl = $null
-        for ($i = 0; $i -lt 30; $i++) {
-            Start-Sleep -Seconds 1
-            if (Test-Path $CfLog) {
-                $content = Get-Content $CfLog -Raw -ErrorAction SilentlyContinue
-                # 匹配实际分配的 Tunnel URL（排除 api.trycloudflare.com）
-                if ($content -match '(https://[a-z0-9]+-[a-z0-9-]+\.trycloudflare\.com)') {
-                    $TunnelUrl = $Matches[1]
-                    break
+        $maxAttempts = 3
+        for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
+            if ($attempt -gt 1) {
+                Write-Warn "第 $attempt 次尝试创建 Tunnel..."
+                # 杀掉上一次的 cloudflared
+                if ($CfProc -and -not $CfProc.HasExited) { Stop-Process -Id $CfProc.Id -Force -ErrorAction SilentlyContinue }
+                Start-Sleep 3
+                Remove-Item $CfLog -Force -ErrorAction SilentlyContinue
+            }
+            
+            $CfProc = Start-Process -FilePath $CfExe -ArgumentList $CfArgs `
+                -PassThru -RedirectStandardError $CfLog -WindowStyle Hidden
+            Write-Info "cloudflared PID: $($CfProc.Id)"
+            
+            # 等待 Tunnel URL 出现
+            Write-Info "等待 Tunnel 分配 URL（约 5-20 秒）..."
+            for ($i = 0; $i -lt 40; $i++) {
+                Start-Sleep -Seconds 1
+                if (Test-Path $CfLog) {
+                    $content = Get-Content $CfLog -Raw -ErrorAction SilentlyContinue
+                    # 匹配实际分配的 Tunnel URL（排除 api.trycloudflare.com）
+                    if ($content -match '(https://[a-z0-9]+-[a-z0-9-]+\.trycloudflare\.com)') {
+                        $TunnelUrl = $Matches[1]
+                        break
+                    }
+                    # 检测失败（如 500 错误）则提前退出重试
+                    if ($content -match 'failed to (request|unmarshal) quick Tunnel') {
+                        Write-Warn "Cloudflare API 返回错误，将重试..."
+                        break
+                    }
                 }
             }
+            if ($TunnelUrl) { break }
         }
+        
         if (-not $TunnelUrl) {
-            Write-Err "Tunnel URL 获取超时，请检查 $CfLog"
-            Get-Content $CfLog -Tail 5 -ErrorAction SilentlyContinue | Write-Host
+            Write-Err "Tunnel 创建失败（$maxAttempts 次尝试），仅启动本地服务器"
+            Write-Info "可通过 http://localhost:$Port 本地访问"
+            if (Test-Path $CfLog) { Get-Content $CfLog -Tail 5 -ErrorAction SilentlyContinue | ForEach-Object { Write-Info $_ } }
         }
     }
     
@@ -299,24 +313,16 @@ if (-not $SkipTunnel) {
 }
 
 # ============ 汇总 ============
-Write-Host @"
-
-╔══════════════════════════════════════════════════╗
-║            🎉 启动成功！                          ║
-╠══════════════════════════════════════════════════╣
-║  本地服务器: http://localhost:$Port                  ║
-║  Tunnel URL: $($TunnelUrl.PadRight(36))║
-║  代理/梯子:  $(if($ProxyUrl){$ProxyUrl}else{'无（直连）'})                      ║
-╠══════════════════════════════════════════════════╣
-║  Ctrl+C 停止所有服务                              ║
-╚══════════════════════════════════════════════════╝
-
-"@ -ForegroundColor Green
-
-# 前端地址
+$tunnelDisplay = if ($TunnelUrl) { $TunnelUrl } else { '（未启动）' }
+$proxyDisplay = if ($ProxyUrl) { $ProxyUrl } else { '无（直连）' }
+Write-Host "`n`n═══ 🎉 启动完成 ═══" -ForegroundColor Green
+Write-Host "  本地服务器: http://localhost:$Port" -ForegroundColor White
+Write-Host "  Tunnel URL:  $tunnelDisplay" -ForegroundColor $(if($TunnelUrl){'Cyan'}else{'Yellow'})
+Write-Host "  代理/梯子:   $proxyDisplay" -ForegroundColor White
+Write-Host ""
 Write-Host "  📱 用户访问地址:" -ForegroundColor White
 Write-Host "     GitHub Pages: https://lincsd.github.io/xhs-emotion-platform/" -ForegroundColor Cyan
-Write-Host "     Tunnel 直连:  $TunnelUrl" -ForegroundColor Cyan
+if ($TunnelUrl) { Write-Host "     Tunnel 直连:  $TunnelUrl" -ForegroundColor Cyan }
 Write-Host ""
 
 # ============ 等待退出 ============
