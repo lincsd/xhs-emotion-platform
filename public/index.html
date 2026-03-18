@@ -3530,18 +3530,49 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    // GitHub Pages 或其他静态托管时，使用 Render 后端；本地开发时用相对路径
+    // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
+    // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
+    const CF_TUNNEL_BACKEND = 'https://gale-freelance-collections-corners.trycloudflare.com';
     const RENDER_BACKEND = 'https://xhs-gemini-proxy.onrender.com';
     const IS_GITHUB_PAGES = location.hostname.endsWith('.github.io') || location.hostname.endsWith('.pages.dev');
     const UA = navigator.userAgent || '';
     const IS_CN_EMBEDDED_BROWSER = /baiduboxapp|baidubrowser|quark|qqbrowser|mqqbrowser|micromessenger/i.test(UA);
     // v20260318: 所有搜索已走服务端代理，内嵌浏览器无需降级轻量模式
     const IS_LIGHT_AI_MODE = false;
-    if (IS_GITHUB_PAGES && IS_CN_EMBEDDED_BROWSER) {
-      const target = `${RENDER_BACKEND}/?from=github-pages`;
-      if (location.href !== target) location.replace(target);
+
+    // 智能后端选择：优先尝试 Cloudflare Tunnel（本地快速），失败则回退 Render
+    let _activeBackend = CF_TUNNEL_BACKEND; // 初始指向隧道
+    let _backendChecked = false;
+
+    async function _selectBestBackend() {
+      if (_backendChecked) return _activeBackend;
+      // 先尝试 CF Tunnel
+      try {
+        const r = await fetch(CF_TUNNEL_BACKEND + '/api/version', { signal: _abortSignalTimeout(5000) });
+        if (r.ok) {
+          _activeBackend = CF_TUNNEL_BACKEND;
+          _backendChecked = true;
+          console.log('🚀 后端: Cloudflare Tunnel (本地直连, 最快)');
+          return _activeBackend;
+        }
+      } catch {}
+      // 回退 Render
+      _activeBackend = RENDER_BACKEND;
+      _backendChecked = true;
+      console.log('☁️ 后端: Render 云端 (隧道不可用, 使用备用)');
+      return _activeBackend;
     }
-    let API_BASE = IS_GITHUB_PAGES ? RENDER_BACKEND : '';
+
+    if (IS_GITHUB_PAGES && IS_CN_EMBEDDED_BROWSER) {
+      // 内嵌浏览器跳转到后端服务器
+      // 优先 Tunnel（快），否则 Render
+      (async () => {
+        const backend = await _selectBestBackend();
+        const target = `${backend}/?from=github-pages`;
+        if (location.href !== target) location.replace(target);
+      })();
+    }
+    let API_BASE = IS_GITHUB_PAGES ? CF_TUNNEL_BACKEND : '';
 
     // ============ Skill 系统 — 多账号类型复用 ============
     const SKILL_TEMPLATES = {
@@ -4277,7 +4308,8 @@
     }
 
     // Gemini 设置
-    const DEFAULT_GEMINI_PROXY_BASE = 'https://xhs-gemini-proxy.onrender.com';
+    // 默认代理指向 Cloudflare Tunnel（本地服务器+梯子直连 Gemini，速度最快）
+    const DEFAULT_GEMINI_PROXY_BASE = CF_TUNNEL_BACKEND || 'https://xhs-gemini-proxy.onrender.com';
 
     // 安全 JSON 解析：处理思考模型(gemini-2.5-flash)输出被截断的情况
     function _safeParseJSON(str) {
@@ -4372,7 +4404,8 @@
     }
     function getGeminiProxyBase() {
       const fromStorage = normalizeGeminiProxyBase(localStorage.getItem('xhs_gemini_proxy_base') || '');
-      return fromStorage || DEFAULT_GEMINI_PROXY_BASE;
+      // 用户手动设置的优先；否则用智能后端选择结果
+      return fromStorage || (_backendChecked ? _activeBackend : DEFAULT_GEMINI_PROXY_BASE);
     }
     function canUseAI() {
       return !!getGeminiKey() || !!getGeminiProxyBase();
@@ -4414,11 +4447,14 @@
       return _serverProxyAvailable;
     }
 
-    // 页面加载时预热 Render 后端（冷启动可能需要30秒+）
-    (function _warmupProxy() {
+    // 页面加载时预热后端（Tunnel 或 Render）
+    (async function _warmupProxy() {
       try {
-        const url = getGeminiProxyHealthUrl();
-        if (url) fetch(url, { signal: _abortSignalTimeout(15000) }).catch(() => {});
+        const backend = await _selectBestBackend();
+        // 更新 API_BASE 为实际可用的后端
+        if (IS_GITHUB_PAGES) API_BASE = _activeBackend;
+        const url = backend + '/api/stats';
+        fetch(url, { signal: _abortSignalTimeout(15000) }).catch(() => {});
       } catch {}
     })();
 
@@ -15674,15 +15710,18 @@ Style: ${stylePrompt}
         }
       }
 
-      // 尝试连接后端（本地或 Render）
+      // 尝试连接后端（优先 Tunnel，备用 Render）
       let backendOk = false;
       try {
+        const backend = await _selectBestBackend();
+        if (IS_GITHUB_PAGES) API_BASE = _activeBackend;
         const probeUrl = API_BASE + '/api/stats';
         const res = await fetch(probeUrl, { signal: _abortSignalTimeout(IS_GITHUB_PAGES ? 8000 : 2000) });
         if (res.ok) {
           backendOk = true;
           useLocalMode = false;
-          console.log('✅ 已连接后端服务器' + (IS_GITHUB_PAGES ? '（Render）' : '（本地）'));
+          const backendType = _activeBackend.includes('trycloudflare') ? 'Cloudflare Tunnel 🚀' : (IS_GITHUB_PAGES ? 'Render ☁️' : '本地');
+          console.log(`✅ 已连接后端服务器（${backendType}）`);
         } else {
           throw new Error('Server error');
         }
