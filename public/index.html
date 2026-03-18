@@ -1683,6 +1683,7 @@
     <div id="backend-indicator" class="backend-indicator-base checking" title="点击重新检测后端" onclick="(async()=>{_backendChecked=false;const b=await _selectBestBackend(true);if(IS_GITHUB_PAGES)API_BASE=b;})()">
       <div class="bi-dot"></div>
       <span class="bi-label">⏳ 检测中...</span>
+      <span class="bi-ver" style="font-size:9px;opacity:0.6;margin-left:4px" id="bi-build-ver"></span>
     </div>
 
     <!-- ===== 手机端顶部栏 ===== -->
@@ -3566,6 +3567,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
+    const PAGE_BUILD = '20260318c'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -3580,23 +3582,50 @@
     let _activeBackend = CF_TUNNEL_BACKEND; // 初始指向隧道
     let _backendChecked = false;
     let _backendSwitchCount = 0; // 防止频繁切换
+    let _lastCheckInfo = ''; // 诊断信息
+
+    // 单次尝试 tunnel 探测
+    async function _probeTunnel(timeoutMs) {
+      const t0 = Date.now();
+      const r = await fetch(CF_TUNNEL_BACKEND + '/api/version', { signal: _abortSignalTimeout(timeoutMs) });
+      const elapsed = Date.now() - t0;
+      if (r.ok) return elapsed;
+      throw new Error('not ok: ' + r.status);
+    }
 
     async function _selectBestBackend(forceRecheck = false) {
       if (_backendChecked && !forceRecheck) return _activeBackend;
       _updateBackendIndicator('checking');
-      // 先尝试 CF Tunnel
+      const isMobile = /iPhone|iPad|Android|Mobile/i.test(navigator.userAgent);
+      const timeout1 = isMobile ? 8000 : 5000;
+      const timeout2 = 12000; // 重试更长
+      // 尝试 1
       try {
-        const r = await fetch(CF_TUNNEL_BACKEND + '/api/version', { signal: _abortSignalTimeout(5000) });
-        if (r.ok) {
-          const prev = _activeBackend;
-          _activeBackend = CF_TUNNEL_BACKEND;
-          _backendChecked = true;
-          if (prev !== _activeBackend) _backendSwitchCount++;
-          console.log('🚀 后端: Cloudflare Tunnel (本地直连, 最快)');
-          _updateBackendIndicator('tunnel');
-          return _activeBackend;
-        }
-      } catch {}
+        const ms = await _probeTunnel(timeout1);
+        _activeBackend = CF_TUNNEL_BACKEND;
+        _backendChecked = true;
+        _backendSwitchCount++;
+        _lastCheckInfo = `✅ Tunnel ${ms}ms (build:${PAGE_BUILD})`;
+        console.log('🚀 后端: Cloudflare Tunnel', ms + 'ms');
+        _updateBackendIndicator('tunnel');
+        return _activeBackend;
+      } catch (e1) {
+        console.warn('⚠️ Tunnel 探测第1次失败:', e1.message);
+      }
+      // 尝试 2（重试一次，更长超时）
+      try {
+        const ms = await _probeTunnel(timeout2);
+        _activeBackend = CF_TUNNEL_BACKEND;
+        _backendChecked = true;
+        _backendSwitchCount++;
+        _lastCheckInfo = `✅ Tunnel ${ms}ms (retry, build:${PAGE_BUILD})`;
+        console.log('🚀 后端: Cloudflare Tunnel (重试成功)', ms + 'ms');
+        _updateBackendIndicator('tunnel');
+        return _activeBackend;
+      } catch (e2) {
+        console.warn('⚠️ Tunnel 探测第2次失败:', e2.message);
+        _lastCheckInfo = `❌ Tunnel不可达 (${e2.message}), build:${PAGE_BUILD}`;
+      }
       // 回退 Render
       const prev = _activeBackend;
       _activeBackend = RENDER_BACKEND;
@@ -3630,12 +3659,12 @@
     function _updateBackendIndicator(type) {
       const el = document.getElementById('backend-indicator');
       if (!el) return;
-      el.className = type; // tunnel / render / checking
-      el.id = 'backend-indicator'; // keep id
       el.className = 'backend-indicator-base ' + type;
       const labels = { tunnel: '🚀 Tunnel 直连', render: '☁️ Render 云端', checking: '⏳ 检测中...' };
       const labelEl = el.querySelector('.bi-label');
       if (labelEl) labelEl.textContent = labels[type] || type;
+      // 长按/双击显示诊断信息
+      el.title = _lastCheckInfo || `build:${PAGE_BUILD}`;
     }
 
     if (IS_GITHUB_PAGES && IS_CN_EMBEDDED_BROWSER) {
@@ -15217,6 +15246,10 @@ Style: ${stylePrompt}
 
     // 回车键支持
     document.addEventListener('DOMContentLoaded', () => {
+      // 显示页面构建版本
+      const bv = document.getElementById('bi-build-ver');
+      if (bv) bv.textContent = PAGE_BUILD;
+
       const loginPw = document.getElementById('login-password');
       if (loginPw) loginPw.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 
