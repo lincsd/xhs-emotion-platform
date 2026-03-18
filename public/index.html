@@ -3535,7 +3535,8 @@
     const IS_GITHUB_PAGES = location.hostname.endsWith('.github.io') || location.hostname.endsWith('.pages.dev');
     const UA = navigator.userAgent || '';
     const IS_CN_EMBEDDED_BROWSER = /baiduboxapp|baidubrowser|quark|qqbrowser|mqqbrowser|micromessenger/i.test(UA);
-    const IS_LIGHT_AI_MODE = IS_CN_EMBEDDED_BROWSER;
+    // v20260318: 所有搜索已走服务端代理，内嵌浏览器无需降级轻量模式
+    const IS_LIGHT_AI_MODE = false;
     if (IS_GITHUB_PAGES && IS_CN_EMBEDDED_BROWSER) {
       const target = `${RENDER_BACKEND}/?from=github-pages`;
       if (location.href !== target) location.replace(target);
