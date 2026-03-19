@@ -4592,16 +4592,72 @@
       statusEl.style.display = 'block';
       statusEl.style.background = '#e3f2fd';
       statusEl.style.color = '#1565c0';
-      statusEl.innerHTML = '🔍 正在通过 AI 访问链接并提取招聘信息，请稍候（约 5-10 秒）...';
+      statusEl.innerHTML = '🔍 步骤 1/2：正在直接抓取网页内容...';
 
       try {
-        const key = getGeminiKey();
-        const payload = {
-          contents: [{ parts: [{ text: `请访问以下招聘链接，提取出完整的招聘岗位信息。
+        // ========== 步骤1：通过服务器代理直接抓取网页原始内容 ==========
+        let pageText = '';
+        let fetchMethod = '';
+
+        try {
+          const fetchResp = await api('/api/fetch-url', {
+            method: 'POST',
+            body: { url }
+          });
+
+          if (fetchResp?.ok && fetchResp?.text && fetchResp.text.trim().length > 50) {
+            pageText = fetchResp.text;
+            fetchMethod = '直接抓取';
+            statusEl.innerHTML = `🔍 步骤 1/2：已获取网页内容（${pageText.length} 字），正在用 AI 提取招聘信息...`;
+          }
+        } catch (fetchErr) {
+          console.warn('直接抓取失败，将使用 Google Search 降级:', fetchErr);
+        }
+
+        // ========== 步骤2：用 AI 提取招聘信息 ==========
+        statusEl.innerHTML = `🤖 步骤 2/2：AI 正在从${fetchMethod || '搜索结果'}中提取招聘信息...`;
+
+        let text = '';
+
+        if (pageText) {
+          // 方案A：已有页面内容，直接让 AI 提取
+          const truncatedPage = pageText.slice(0, 15000); // 限制发送长度
+          const key = getGeminiKey();
+          const payload = {
+            contents: [{ parts: [{ text: `以下是从招聘链接 ${url} 抓取到的网页内容。请从中精确提取招聘岗位信息。
+
+=== 网页内容开始 ===
+${truncatedPage}
+=== 网页内容结束 ===
+
+请从上述网页内容中提取并整理以下信息（只提取网页中实际存在的内容，不要编造）：
+- 公司名称
+- 招聘岗位
+- 工作地点
+- 薪资范围
+- 岗位职责（详细列出）
+- 任职要求（详细列出）
+- 学历要求
+- 工作经验要求
+- 福利待遇
+- 工作时间
+- 联系方式
+
+请用简洁清晰的中文格式输出，每个字段一行，列表项用数字编号。不要输出 markdown 格式标记，直接输出纯文本。如果某些信息在网页中不存在就跳过。` }] }],
+            generationConfig: { temperature: 0.1, maxOutputTokens: 4096 }
+          };
+          const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', '招聘信息提取');
+          text = _extractGeminiText(result?.data || result);
+        } else {
+          // 方案B：直接抓取失败，降级用 Google Search grounding
+          statusEl.innerHTML = '🌐 直接抓取未成功，正在通过 Google 搜索获取信息...';
+          const key = getGeminiKey();
+          const payload = {
+            contents: [{ parts: [{ text: `请访问以下链接，提取出完整的招聘岗位信息。
 
 链接：${url}
 
-请提取并整理以下信息（如果链接中有的话）：
+请提取并整理以下信息（如果链接中有的话，只提取真实存在的信息，不要编造）：
 - 公司名称
 - 招聘岗位
 - 工作地点
@@ -4616,13 +4672,12 @@
 
 如果链接中包含多个岗位，请列出所有岗位的信息。
 请用简洁清晰的中文格式输出，每个字段一行，列表项用数字编号。不要输出 markdown 格式标记，直接输出纯文本。` }] }],
-          tools: [{ googleSearch: {} }],
-          generationConfig: { temperature: 0.3, maxOutputTokens: 4096 }
-        };
-
-        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', '招聘链接抓取');
-        const resData = result?.data || result;
-        const text = _extractGeminiText(resData);
+            tools: [{ googleSearch: {} }],
+            generationConfig: { temperature: 0.3, maxOutputTokens: 4096 }
+          };
+          const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', '招聘链接抓取');
+          text = _extractGeminiText(result?.data || result);
+        }
 
         if (!text || text.trim().length < 20) {
           throw new Error('未能从链接中提取到有效的招聘信息');
@@ -4638,14 +4693,15 @@
 
         statusEl.style.background = '#e8f5e9';
         statusEl.style.color = '#2e7d32';
-        statusEl.innerHTML = '✅ 招聘信息已成功提取并填入下方，请检查内容是否准确，可手动修改补充。';
+        const methodTag = fetchMethod ? `（${fetchMethod}）` : '（Google搜索）';
+        statusEl.innerHTML = `✅ 招聘信息已成功提取并填入下方${methodTag}，请检查内容是否准确，可手动修改补充。`;
         toast('招聘信息抓取成功！', 'success');
 
       } catch (e) {
         const errMsg = _extractAIError ? _extractAIError(e) : (e?.message || '未知错误');
         statusEl.style.background = '#fce4ec';
         statusEl.style.color = '#c62828';
-        statusEl.innerHTML = `❌ 抓取失败：${errMsg}<br><span style="font-size:11px;color:#777;">提示：部分招聘平台可能有反爬限制，可以手动复制岗位信息粘贴到下方文本框</span>`;
+        statusEl.innerHTML = `❌ 抓取失败：${errMsg}<br><span style="font-size:11px;color:#777;">提示：部分平台有反爬限制，可以手动复制岗位信息粘贴到下方文本框</span>`;
         toast('抓取失败，请手动填写招聘信息', 'error');
       } finally {
         btn.disabled = false;

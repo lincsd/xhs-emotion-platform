@@ -1760,6 +1760,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._gemini_proxy(body)
         elif path == '/api/baidu-search':
             return self._baidu_search(body)
+        elif path == '/api/fetch-url':
+            return self._fetch_url(body)
         # --- 需要登录的路由 ---
         elif path == '/api/posts':
             return self._create_post(body)
@@ -2369,6 +2371,217 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write('\n\n'.join(texts).encode('utf-8'))
 
+
+    # ---- URL 内容抓取代理 ----
+    def _fetch_url(self, body):
+        """代理抓取指定 URL 的网页内容，针对小红书特殊优化"""
+        import re as _re
+        import html as _html
+
+        url = (body.get('url', '') or '').strip()
+        if not url:
+            return self._send_json({'error': 'Missing url'}, 400)
+        if not url.startswith(('http://', 'https://')):
+            return self._send_json({'error': 'Invalid url'}, 400)
+
+        is_xhs = 'xiaohongshu.com' in url or 'xhslink.com' in url
+
+        # 小红书用 Mobile UA 获取 SSR 数据
+        if is_xhs:
+            ua = 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1'
+        else:
+            ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+
+        headers = {
+            'User-Agent': ua,
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+        }
+        if is_xhs:
+            headers['Referer'] = 'https://www.xiaohongshu.com/'
+
+        try:
+            req = urllib.request.Request(url, headers=headers)
+            ctx = ssl.create_default_context()
+            ctx.check_hostname = False
+            ctx.verify_mode = ssl.CERT_NONE
+            resp = urllib.request.urlopen(req, timeout=20, context=ctx)
+            raw = resp.read()
+
+            # 解码
+            encoding = 'utf-8'
+            content_type = resp.headers.get('Content-Type', '')
+            if 'charset=' in content_type:
+                encoding = content_type.split('charset=')[-1].strip()
+            try:
+                html_text = raw.decode(encoding, errors='replace')
+            except Exception:
+                html_text = raw.decode('utf-8', errors='replace')
+
+            # ===== 小红书特殊处理：从 __INITIAL_STATE__ 中提取笔记内容 =====
+            if is_xhs:
+                xhs_text = self._extract_xhs_note(html_text, _re, _html)
+                if xhs_text and len(xhs_text) > 50:
+                    return self._send_json({
+                        'ok': True,
+                        'text': xhs_text,
+                        'length': len(xhs_text),
+                        'url': url,
+                        'method': 'xhs_ssr'
+                    })
+
+            # ===== 通用处理：提取页面纯文本 =====
+            text = html_text
+            text = _re.sub(r'<script[^>]*>[\s\S]*?</script>', '', text, flags=_re.IGNORECASE)
+            text = _re.sub(r'<style[^>]*>[\s\S]*?</style>', '', text, flags=_re.IGNORECASE)
+            text = _re.sub(r'<!--[\s\S]*?-->', '', text)
+            text = _re.sub(r'<br\s*/?>', '\n', text, flags=_re.IGNORECASE)
+            text = _re.sub(r'</(p|div|h[1-6]|li|tr)>', '\n', text, flags=_re.IGNORECASE)
+            text = _re.sub(r'<[^>]+>', ' ', text)
+            text = _html.unescape(text)
+            text = _re.sub(r'[ \t]+', ' ', text)
+            text = _re.sub(r'\n\s*\n+', '\n\n', text)
+            text = text.strip()
+
+            if len(text) > 30000:
+                text = text[:30000] + '\n\n[内容已截断]'
+
+            self._send_json({
+                'ok': True,
+                'text': text,
+                'length': len(text),
+                'url': url,
+                'method': 'generic'
+            })
+        except Exception as e:
+            self._send_json({
+                'ok': False,
+                'error': f'抓取失败: {str(e)}',
+                'url': url
+            }, 500)
+
+    def _extract_xhs_note(self, html_text, _re, _html):
+        """从小红书页面 __INITIAL_STATE__ 中提取笔记的标题和正文"""
+        # 提取 __INITIAL_STATE__ JSON
+        m = _re.search(r'window\.__INITIAL_STATE__\s*=\s*(\{[\s\S]*?\})\s*</script>', html_text)
+        if not m:
+            return None
+
+        state_str = m.group(1)
+        # XHS 使用 \u002F 替代 /，先还原
+        state_str = state_str.replace('\\u002F', '/')
+
+        try:
+            state = json.loads(state_str)
+        except Exception:
+            # JSON 解析失败，用正则提取关键字段
+            return self._extract_xhs_note_regex(state_str, _re)
+
+        # 从 state 中查找笔记数据
+        note_data = None
+        # 尝试多种路径
+        for path in [
+            lambda s: s.get('noteData', {}).get('data', {}).get('noteData', {}),
+            lambda s: s.get('noteDetailMap', {}).get(list(s.get('noteDetailMap', {}).keys())[0] if s.get('noteDetailMap') else '', {}),
+            lambda s: s.get('note', {}).get('noteDetailMap', {}).get(list(s.get('note', {}).get('noteDetailMap', {}).keys())[0] if s.get('note', {}).get('noteDetailMap') else '', {}),
+        ]:
+            try:
+                nd = path(state)
+                if nd and (nd.get('title') or nd.get('desc')):
+                    note_data = nd
+                    break
+            except Exception:
+                continue
+
+        if not note_data:
+            # 降级：在整个 state 字符串中用正则搜索
+            return self._extract_xhs_note_regex(state_str, _re)
+
+        # 组装文本
+        parts = []
+        title = note_data.get('title', '')
+        if title:
+            parts.append(f'标题：{title}')
+
+        desc = note_data.get('desc', '')
+        if desc:
+            # 清理 XHS 话题标签格式
+            desc = _re.sub(r'\[话题\]', '', desc)
+            desc = desc.replace('\\n', '\n').replace('\\t', '\t')
+            parts.append(f'\n正文：\n{desc}')
+
+        # 用户信息
+        user = note_data.get('user', {})
+        if user:
+            nick = user.get('nickName', '') or user.get('nickname', '')
+            if nick:
+                parts.append(f'\n发布者：{nick}')
+
+        # 标签
+        tags = note_data.get('tagList', [])
+        if tags:
+            tag_names = [t.get('name', '') for t in tags if t.get('name')]
+            if tag_names:
+                parts.append(f'标签：{", ".join(tag_names)}')
+
+        # 互动数据
+        interact = note_data.get('interactInfo', {})
+        if interact:
+            stats = []
+            if interact.get('likedCount'): stats.append(f'点赞 {interact["likedCount"]}')
+            if interact.get('collectedCount'): stats.append(f'收藏 {interact["collectedCount"]}')
+            if interact.get('commentCount'): stats.append(f'评论 {interact["commentCount"]}')
+            if interact.get('shareCount'): stats.append(f'转发 {interact["shareCount"]}')
+            if stats:
+                parts.append(f'互动数据：{" | ".join(stats)}')
+
+        return '\n'.join(parts) if parts else None
+
+    def _extract_xhs_note_regex(self, state_str, _re):
+        """当 JSON 解析失败时，用正则从 state 字符串中提取笔记内容"""
+        parts = []
+
+        # 提取标题
+        title_m = _re.search(r'"title"\s*:\s*"([^"]{2,200})"', state_str)
+        # 找最后一个 title（通常是笔记标题而非热搜标题）
+        titles = _re.findall(r'"title"\s*:\s*"([^"]{2,200})"', state_str)
+        if titles:
+            # 笔记标题通常在 noteData 附近，取最长的一个作为候选
+            note_title = max(titles, key=len)
+            parts.append(f'标题：{note_title}')
+
+        # 提取正文 desc
+        desc_m = _re.search(r'"desc"\s*:\s*"((?:[^"\\]|\\.){10,})"', state_str)
+        if desc_m:
+            desc = desc_m.group(1)
+            desc = desc.replace('\\n', '\n').replace('\\t', '\t').replace('\\"', '"')
+            desc = _re.sub(r'\[话题\]', '', desc)
+            parts.append(f'\n正文：\n{desc}')
+
+        # 提取用户昵称
+        nick_m = _re.search(r'"nickName"\s*:\s*"([^"]{1,50})"', state_str)
+        if nick_m:
+            parts.append(f'\n发布者：{nick_m.group(1)}')
+
+        # 提取标签
+        tag_names = _re.findall(r'"name"\s*:\s*"([^"]{1,30})"[^}]*"type"\s*:\s*"topic"', state_str)
+        if not tag_names:
+            tag_names = _re.findall(r'"type"\s*:\s*"topic"[^}]*"name"\s*:\s*"([^"]{1,30})"', state_str)
+        if tag_names:
+            parts.append(f'标签：{", ".join(tag_names)}')
+
+        # 提取互动数据
+        liked_m = _re.search(r'"likedCount"\s*:\s*"(\d+)"', state_str)
+        collected_m = _re.search(r'"collectedCount"\s*:\s*"(\d+)"', state_str)
+        comment_m = _re.search(r'"commentCount"\s*:\s*"(\d+)"', state_str)
+        stats = []
+        if liked_m: stats.append(f'点赞 {liked_m.group(1)}')
+        if collected_m: stats.append(f'收藏 {collected_m.group(1)}')
+        if comment_m: stats.append(f'评论 {comment_m.group(1)}')
+        if stats:
+            parts.append(f'互动数据：{" | ".join(stats)}')
+
+        return '\n'.join(parts) if parts else None
 
     # ---- 百度搜索小红书笔记 ----
     def _baidu_search(self, body):
