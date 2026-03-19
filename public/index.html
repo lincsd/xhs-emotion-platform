@@ -1907,6 +1907,12 @@
                 <label>自定义 Prompt（选填）</label>
                 <textarea id="gen-custom-prompt" class="form-control" rows="2" placeholder="输入自定义创作指令，AI 会优先参考"></textarea>
               </div>
+              <div id="gen-skill-extra-fields" style="display:none; margin-top:12px;">
+                <div id="gen-recruitment-info-section" class="form-group" style="display:none;">
+                  <label>📋 招聘信息（必填）<span style="font-size:11px;color:var(--text-light);margin-left:6px;">填写具体的招聘岗位信息，AI 将基于此生成招聘笔记</span></label>
+                  <textarea id="gen-recruitment-info" class="form-control" rows="6" placeholder="请填写具体的招聘信息，例如：&#10;&#10;公司名称：XX科技有限公司&#10;招聘岗位：高级前端工程师&#10;工作地点：北京市朝阳区&#10;薪资范围：25K-40K&#10;岗位职责：&#10;1. 负责公司核心产品的前端开发&#10;2. 优化前端性能和用户体验&#10;任职要求：&#10;1. 3年以上前端开发经验&#10;2. 熟悉 React/Vue 等主流框架&#10;福利待遇：五险一金、弹性工作、免费午餐&#10;联系方式：hr@example.com"></textarea>
+                </div>
+              </div>
               <div class="form-group" style="margin-top:12px;">
                 <label>📌 参考笔记（选填）<span style="font-size:11px;color:var(--text-light);margin-left:6px;">粘贴你看到的爆款笔记标题/正文，AI 会参考真实案例来创作</span></label>
                 <textarea id="gen-ref-notes" class="form-control" rows="4" placeholder="粘贴 1-3 条小红书爆款笔记的标题和正文内容，每条之间用空行分隔。&#10;&#10;示例：&#10;标题：熬过最难的日子，你会感谢自己｜治愈文案&#10;正文：有些路，只能一个人走……"></textarea>
@@ -4529,6 +4535,23 @@
       // Skill 切换器高亮
       const switcher = document.getElementById('skill-switcher');
       if (switcher) switcher.value = currentSkillName;
+      // 技能专属输入区域
+      _updateSkillExtraFields();
+    }
+
+    function _updateSkillExtraFields() {
+      const container = document.getElementById('gen-skill-extra-fields');
+      const recruitSection = document.getElementById('gen-recruitment-info-section');
+      if (!container || !recruitSection) return;
+      // 隐藏所有技能专属区域
+      recruitSection.style.display = 'none';
+      // 根据当前技能显示对应区域
+      if (currentSkillName === '招聘') {
+        container.style.display = 'block';
+        recruitSection.style.display = 'block';
+      } else {
+        container.style.display = 'none';
+      }
     }
 
     function _fillCategorySelect(id, withAll) {
@@ -11002,6 +11025,15 @@ ${refBlock}
         ? `\n\n## 参考来源\n${compactSources.map((s, i) => `${i + 1}. ${s.title} (${s.uri})`).join('\n')}`
         : '';
 
+      // 招聘技能：注入用户提供的具体招聘信息
+      let recruitmentBlock = '';
+      if (currentSkillName === '招聘') {
+        const recruitInfo = (document.getElementById('gen-recruitment-info')?.value || '').trim();
+        if (recruitInfo) {
+          recruitmentBlock = `\n\n## ⚠️ 用户提供的具体招聘信息（必须基于此信息创作）\n以下是用户提供的真实招聘岗位信息，所有生成的笔记都必须围绕这些具体信息来创作，不能编造与以下信息不符的内容：\n\n${recruitInfo}\n\n请确保每条笔记都精确包含上述招聘信息中的关键要素（如岗位名称、公司、薪资、要求等），同时用小红书的风格让内容更加吸引人。`;
+        }
+      }
+
       const prompt = `你是一位拥有百万粉丝的${sk.aiRole}。
 
 ## 背景：真实爆款笔记分析
@@ -11012,6 +11044,7 @@ ${refBlock}
 ${compactAnalysisText}
 ---
 ${sourceInfo}
+${recruitmentBlock}
 
 ## 你的任务
 
@@ -12247,8 +12280,16 @@ Style: ${stylePrompt}
       const withImage = document.getElementById('gen-with-image').checked;
       const imageCount = parseInt(document.getElementById('gen-image-count')?.value || '2');
       const refNotes = (document.getElementById('gen-ref-notes')?.value || '').trim();
+      const recruitmentInfo = (document.getElementById('gen-recruitment-info')?.value || '').trim();
       const hasApiKey = canUseAI();
       let usedAI = hasApiKey;
+
+      // 招聘技能：校验招聘信息是否填写
+      if (currentSkillName === '招聘' && !recruitmentInfo) {
+        toast('请填写具体的招聘信息（如岗位、薪资、要求等），AI 需要基于真实信息生成内容', 'error');
+        document.getElementById('gen-recruitment-info')?.focus();
+        return;
+      }
 
       const btn = document.getElementById('gen-btn');
       const progressEl = document.getElementById('gen-progress');

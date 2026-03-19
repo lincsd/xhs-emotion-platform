@@ -1582,7 +1582,6 @@
           <option value="电商带货">🛒 电商带货账号</option>
           <option value="玄学">🔮 玄学账号</option>
           <option value="招聘">💼 招聘账号</option>
-          <option value="推广">📣 推广账号</option>
         </select>
       </div>
       <div class="nav-group">
@@ -1703,7 +1702,6 @@
         <option value="电商带货">🛒 电商带货</option>
         <option value="玄学">🔮 玄学</option>
         <option value="招聘">💼 招聘</option>
-        <option value="推广">📣 推广</option>
       </select>
     </div>
 
@@ -1906,12 +1904,6 @@
               <div class="form-group" style="margin-top:12px;">
                 <label>自定义 Prompt（选填）</label>
                 <textarea id="gen-custom-prompt" class="form-control" rows="2" placeholder="输入自定义创作指令，AI 会优先参考"></textarea>
-              </div>
-              <div id="gen-skill-extra-fields" style="display:none; margin-top:12px;">
-                <div id="gen-recruitment-info-section" class="form-group" style="display:none;">
-                  <label>📋 招聘信息（必填）<span style="font-size:11px;color:var(--text-light);margin-left:6px;">填写具体的招聘岗位信息，AI 将基于此生成招聘笔记</span></label>
-                  <textarea id="gen-recruitment-info" class="form-control" rows="6" placeholder="请填写具体的招聘信息，例如：&#10;&#10;公司名称：XX科技有限公司&#10;招聘岗位：高级前端工程师&#10;工作地点：北京市朝阳区&#10;薪资范围：25K-40K&#10;岗位职责：&#10;1. 负责公司核心产品的前端开发&#10;2. 优化前端性能和用户体验&#10;任职要求：&#10;1. 3年以上前端开发经验&#10;2. 熟悉 React/Vue 等主流框架&#10;福利待遇：五险一金、弹性工作、免费午餐&#10;联系方式：hr@example.com"></textarea>
-                </div>
               </div>
               <div class="form-group" style="margin-top:12px;">
                 <label>📌 参考笔记（选填）<span style="font-size:11px;color:var(--text-light);margin-left:6px;">粘贴你看到的爆款笔记标题/正文，AI 会参考真实案例来创作</span></label>
@@ -4364,115 +4356,6 @@
             { phase:'规模化', duration:'6个月+', followers:'20000+', tasks:['团队化运营','猎头/内推业务','行业矩阵号','招聘IP打造'] },
           ]
         }
-      },
-      '推广': {
-        id: 'promotion', name: '推广', icon: '📣', color: '#7c3aed',
-        title: '小红书工具推广 · 运营管理平台',
-        sidebarTitle: '📣 工具推广台',
-        subtitle: '一键生成AI运营工具推广笔记',
-        categoryLabel: '推广分类',
-        categories: ['工具种草','运营干货','效率对比','副业变现','新手教程','功能展示','案例展示','行业趋势'],
-        categoryColors: { '工具种草':'#7C3AED','运营干货':'#2563EB','效率对比':'#059669','副业变现':'#D97706','新手教程':'#EC4899','功能展示':'#0891B2','案例展示':'#E11D48','行业趋势':'#4F46E5' },
-        categoryEmojis: { '工具种草':'🔧','运营干货':'📚','效率对比':'⚡','副业变现':'💰','新手教程':'🎓','功能展示':'✨','案例展示':'📊','行业趋势':'🔮' },
-        defaultCategory: '工具种草',
-        imageStyles: { xiaohongshu:'小红书种草风格', minimalist:'极简信息图风', watercolor:'可爱手绘教程风', gradient:'科技AI未来风', photo:'真实工作场景风' },
-        imageStylePrompts: {
-          xiaohongshu: '小红书种草推荐风格，紫蓝色调，科技感UI界面元素，功能亮点卡片式展示，干净排版，高级感但亲切',
-          minimalist: '极简信息图海报，白底配蓝紫色重点，数据对比可视化，图标+数字突出效率提升',
-          watercolor: '可爱手绘插画风格，步骤图解，Q版人物在用电脑/手机运营，轻松活泼配色',
-          gradient: '科技AI风格，蓝紫渐变霓虹背景，AI芯片/机器人/数据流元素，未来感十足',
-          photo: '真实办公桌面场景，笔记本电脑+咖啡+手机，自然光线，温暖高效的工作氛围'
-        },
-        branding: {
-          niche: '小红书AI运营工具推荐', audience: '想做小红书但不知道怎么起步的新手、自媒体运营人、想提升效率的博主、想做副业的上班族',
-          persona: '一个用AI工具成功起号的过来人，真诚分享好用工具，乐于助人', keywords: 'AI运营,效率工具,小红书起号,自动化,内容创作,副业',
-          nichePlaceholder: '例如：AI运营工具测评 / 小红书效率神器 / 自媒体提效',
-          audiencePlaceholder: '例如：想做小红书的新手、自媒体人、想做副业的上班族',
-          personaPlaceholder: '例如：工具测评达人、效率狂魔、AI运营老手',
-          keywordsPlaceholder: '例如：AI,运营工具,效率,小红书,起号,副业',
-          tagsPlaceholder: 'AI工具推荐,小红书运营,效率神器',
-          previewChips: ['AI神器','运营提效','起号攻略'],
-          avatarFallback: '📣',
-          nameStyles: ['科技感专业','亲切种草风','简短好记','有记忆点'],
-          promptPrefix: 'AI运营工具推荐类账号',
-          avatarSuffix: '小红书AI工具推荐账号头像，正方形构图，蓝紫渐变科技感，AI/效率/工具主题，专业但亲切，无文字。',
-          bannerSuffix: '小红书个人主页顶部封面，横版构图，AI工具/效率提升主题，蓝紫科技风，无文字，适合AI工具推荐账号。',
-        },
-        aiRole: `拥有20万粉丝的小红书AI工具评测博主，同时也是"小红书AI运营平台"的深度用户和推广达人。你亲自用这个平台从0到1运营了多个账号并成功变现。
-
-## 你要推广的产品信息
-
-产品名称：小红书AI运营平台
-一句话定位：一站式AI驱动的小红书内容创作+账号运营管理平台
-
-## 产品核心功能（写笔记时自然种草，不要写成说明书）
-
-1. 【10种账号类型一键切换】情感/美食/旅行/健身/穿搭/科技数码/电商带货/玄学/招聘/推广——每种都有专属AI提示词、分类、变现方案，一套系统运营所有赛道
-2. 【AI联网搜索+爆款分析+内容生成】自动搜索小红书实时热门笔记→分析爆款规律→批量生成高质量原创内容，3分钟出10篇
-3. 【AI图片生成】Gemini AI为每条笔记自动生成封面图+内容配图，5种视觉风格可选，不用会PS
-4. 【AI智能卡片生成】50+精美图文排版模板，AI自动匹配最佳模板，一键生成小红书风卡片
-5. 【违禁词检测】一键扫描敏感词，避免限流降权，新手必备
-6. 【AI笔记评分】多维度评估笔记质量（标题/正文/标签/分类），AI给出优化建议
-7. 【热门话题追踪+热词分析】实时追踪赛道热点，挖掘蓝海关键词，选题不再难
-8. 【智能标签推荐】AI推荐大/中/长尾标签策略，提高笔记曝光
-9. 【笔记改写5种模式】换角度/换语气/扩写/缩写/爆款化，一条笔记改出10个版本
-10. 【一键润色3档】轻度/中度/强力润色，30秒让笔记质感翻倍
-11. 【爆款标题生成器】6种风格批量生成10个标题，标题党不求人
-12. 【账号包装一键生成】AI生成账号名称+简介+头像图+首页封面图，5分钟完成全套包装
-13. 【发布日历+排期管理】可视化日历管理发布计划，再也不会断更
-14. 【图片优化工具】裁剪/调色/压缩/水印/AI修图，不用Photoshop
-15. 【竞品分析】AI综合分析竞品账号的内容策略/标签/发布节奏
-16. 【评论话术库】AI生成6种场景的热评回复模板，互动率翻倍
-17. 【A/B测试】同一主题生成多个版本对比，数据选出最优
-18. 【内容规划】AI生成每周发布计划，系统化运营
-19. 【多账号管理】一个平台管理所有小红书号
-20. 【收入追踪+变现方案】记录收入数据，自带完整变现路线图
-
-## 推广写作要求
-- 像真实用户种草，不要像广告或说明书
-- 从运营痛点切入：不会写文案/不会做图/没时间/不知道怎么起号
-- 多用具体数字：我用XX功能3分钟搞定/效率提升10倍/一周涨粉500
-- 每条笔记聚焦1-3个核心功能深入展示
-- 标题要有小红书爆款感：数字+痛点+解决方案+emoji`,
-        aiNiche: '工具推广类',
-        searchKeywords: (cat) => [`小红书 ${cat} AI工具 运营 爆款 推荐`, `小红书 AI 内容生成 ${cat} 效率 万赞`, `小红书 运营神器 ${cat} 涨粉 自动化`, `site:xiaohongshu.com ${cat} AI运营 工具 收藏`, `小红书 ${cat} 自媒体 提效 赚钱 副业`],
-        postingTimeTips: {
-          '工具种草': '💡 工具种草类在午休12:00和晚间20:00-22:00效果最佳，运营人和上班族都在刷手机找灵感',
-          '运营干货': '💡 干货类内容适合早上8:00和晚间21:00发布，此时用户学习意愿最强',
-          '效率对比': '💡 效率对比类在工作日下午效果好，「打工人摸鱼时看到效率工具最心动」',
-          '副业变现': '💡 副业类内容在晚间20:00-23:00爆发力强，下班后人们最渴望副业赚钱',
-          '新手教程': '💡 教程类在周末和晚间效果最佳，新手有整块时间学习和尝试',
-          '功能展示': '💡 功能展示适合午间和晚间，配合短视频或截图效果翻倍',
-          '案例展示': '💡 案例类在工作日效果好，真实数据和效果最有说服力',
-          '行业趋势': '💡 趋势类内容在周一到周三发布最佳，大家关注行业动态的意愿最强',
-        },
-        postingTimeBonus: {
-          '工具种草': { '12:00': 3, '20:00': 2, '21:00': 3, '22:00': 1 },
-          '运营干货': { '08:00': 3, '12:00': 1, '21:00': 3, '22:00': 2 },
-          '效率对比': { '12:00': 2, '14:00': 2, '15:00': 3, '20:00': 2 },
-          '副业变现': { '20:00': 2, '21:00': 3, '22:00': 3, '23:00': 1 },
-          '新手教程': { '10:00': 2, '14:00': 2, '20:00': 3, '21:00': 2 },
-          '功能展示': { '12:00': 2, '18:00': 2, '20:00': 3, '21:00': 2 },
-          '案例展示': { '09:00': 2, '12:00': 2, '20:00': 3, '21:00': 2 },
-          '行业趋势': { '08:00': 2, '09:00': 3, '12:00': 2, '20:00': 2 },
-        },
-        monetization: {
-          strategies: [
-            { name:'工具分销佣金', icon:'💸', threshold:'500粉丝起', income:'10-50元/单', description:'每推荐一个用户充值，获得分销佣金。平台自带邀请码系统，好友充值返佣15%', tips:['在笔记中自然植入邀请码','展示真实使用效果','佣金自动到账'] },
-            { name:'付费社群', icon:'👥', threshold:'1000粉丝+', income:'50-200元/人', description:'建立小红书运营交流社群，分享AI运营技巧和工具使用教程', tips:['提供工具使用指导','定期分享运营心得','社群内互助涨粉'] },
-            { name:'代运营服务', icon:'🏢', threshold:'3000粉丝+', income:'2000-10000元/月', description:'用AI工具帮中小商家/个人代运营小红书账号', tips:['AI生成内容效率极高','一人可代运营多个号','按月收费稳定'] },
-            { name:'运营课程', icon:'📚', threshold:'5000粉丝+', income:'被动收入', description:'出品AI运营教程：从起号到变现的全流程课程', tips:['录屏演示工具操作','分阶段定价49-299元','一次录制持续卖'] },
-            { name:'蒲公英平台', icon:'🌻', threshold:'1000粉丝+', income:'200-3000元/单', description:'接AI工具、效率软件类品牌的推广合作', tips:['AI/效率赛道广告主多','保持专业测评调性','可长期合作'] },
-            { name:'企业培训', icon:'🎤', threshold:'10000粉丝+', income:'5000-20000元/场', description:'为企业团队做AI运营工具培训', tips:['企业付费能力强','可在线或线下','积累案例很重要'] },
-            { name:'账号矩阵', icon:'📱', threshold:'积累经验后', income:'倍增收益', description:'用同一个工具批量运营多个赛道的推广号', tips:['AI工具+美食推荐号、AI工具+穿搭号等','共享运营经验','本系统天然支持多账号'] },
-          ],
-          roadmap: [
-            { phase:'冷启动期', duration:'1-2周', followers:'0-500', tasks:['每天发2-3条工具种草/教程笔记','利用AI批量生成高质量内容','研究工具推荐类爆款笔记','在评论区互动引流'] },
-            { phase:'成长期', duration:'1-2个月', followers:'500-3000', tasks:['启用邀请码分销','建付费社群','入驻蒲公英平台','产出系列教程'] },
-            { phase:'变现期', duration:'2-4个月', followers:'3000-10000', tasks:['开展代运营业务','出品付费课程','稳定广告合作','积累企业客户'] },
-            { phase:'规模化', duration:'4个月+', followers:'10000+', tasks:['企业培训业务','账号矩阵','团队化运营','IP打造'] },
-          ]
-        }
       }
     };
 
@@ -4535,23 +4418,6 @@
       // Skill 切换器高亮
       const switcher = document.getElementById('skill-switcher');
       if (switcher) switcher.value = currentSkillName;
-      // 技能专属输入区域
-      _updateSkillExtraFields();
-    }
-
-    function _updateSkillExtraFields() {
-      const container = document.getElementById('gen-skill-extra-fields');
-      const recruitSection = document.getElementById('gen-recruitment-info-section');
-      if (!container || !recruitSection) return;
-      // 隐藏所有技能专属区域
-      recruitSection.style.display = 'none';
-      // 根据当前技能显示对应区域
-      if (currentSkillName === '招聘') {
-        container.style.display = 'block';
-        recruitSection.style.display = 'block';
-      } else {
-        container.style.display = 'none';
-      }
     }
 
     function _fillCategorySelect(id, withAll) {
@@ -11025,15 +10891,6 @@ ${refBlock}
         ? `\n\n## 参考来源\n${compactSources.map((s, i) => `${i + 1}. ${s.title} (${s.uri})`).join('\n')}`
         : '';
 
-      // 招聘技能：注入用户提供的具体招聘信息
-      let recruitmentBlock = '';
-      if (currentSkillName === '招聘') {
-        const recruitInfo = (document.getElementById('gen-recruitment-info')?.value || '').trim();
-        if (recruitInfo) {
-          recruitmentBlock = `\n\n## ⚠️ 用户提供的具体招聘信息（必须基于此信息创作）\n以下是用户提供的真实招聘岗位信息，所有生成的笔记都必须围绕这些具体信息来创作，不能编造与以下信息不符的内容：\n\n${recruitInfo}\n\n请确保每条笔记都精确包含上述招聘信息中的关键要素（如岗位名称、公司、薪资、要求等），同时用小红书的风格让内容更加吸引人。`;
-        }
-      }
-
       const prompt = `你是一位拥有百万粉丝的${sk.aiRole}。
 
 ## 背景：真实爆款笔记分析
@@ -11044,7 +10901,6 @@ ${refBlock}
 ${compactAnalysisText}
 ---
 ${sourceInfo}
-${recruitmentBlock}
 
 ## 你的任务
 
@@ -12280,16 +12136,8 @@ Style: ${stylePrompt}
       const withImage = document.getElementById('gen-with-image').checked;
       const imageCount = parseInt(document.getElementById('gen-image-count')?.value || '2');
       const refNotes = (document.getElementById('gen-ref-notes')?.value || '').trim();
-      const recruitmentInfo = (document.getElementById('gen-recruitment-info')?.value || '').trim();
       const hasApiKey = canUseAI();
       let usedAI = hasApiKey;
-
-      // 招聘技能：校验招聘信息是否填写
-      if (currentSkillName === '招聘' && !recruitmentInfo) {
-        toast('请填写具体的招聘信息（如岗位、薪资、要求等），AI 需要基于真实信息生成内容', 'error');
-        document.getElementById('gen-recruitment-info')?.focus();
-        return;
-      }
 
       const btn = document.getElementById('gen-btn');
       const progressEl = document.getElementById('gen-progress');
@@ -16178,5 +16026,6 @@ Style: ${stylePrompt}
     }
     init();
   </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"f50cccea1a724fcc9d74a9a847fa104d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
