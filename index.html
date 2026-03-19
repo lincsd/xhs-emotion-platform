@@ -1581,6 +1581,7 @@
           <option value="科技数码">📱 科技数码账号</option>
           <option value="电商带货">🛒 电商带货账号</option>
           <option value="玄学">🔮 玄学账号</option>
+          <option value="招聘">💼 招聘账号</option>
         </select>
       </div>
       <div class="nav-group">
@@ -1700,6 +1701,7 @@
         <option value="科技数码">📱 科技数码</option>
         <option value="电商带货">🛒 电商带货</option>
         <option value="玄学">🔮 玄学</option>
+        <option value="招聘">💼 招聘</option>
       </select>
     </div>
 
@@ -3591,59 +3593,42 @@
       if (_backendChecked && !forceRecheck) return _activeBackend;
       _updateBackendIndicator('checking');
 
-      const PROBE_TIMEOUT = 15000;
-      const TUNNEL_GRACE = 3000; // Render 先赢时，额外等 Tunnel 3秒
+      const TUNNEL_TIMEOUT = 8000;  // Tunnel 探测超时
+      const RENDER_TIMEOUT = 15000; // Render 探测超时
 
-      // 探测函数：成功 resolve，失败 reject
-      const probe = (url, label) => {
+      // 探测函数
+      const probe = (url, label, timeout) => {
         const t0 = Date.now();
-        return fetch(url + '/api/version', { signal: _abortSignalTimeout(PROBE_TIMEOUT) })
+        return fetch(url + '/api/version', { signal: _abortSignalTimeout(timeout) })
           .then(r => {
             if (!r.ok) throw new Error(label + ':' + r.status);
             return { label, url, ms: Date.now() - t0 };
           });
       };
 
-      const tunnelP = probe(CF_TUNNEL_BACKEND, 'tunnel');
-      const renderP = probe(RENDER_BACKEND, 'render');
-
+      // 策略：先试 Tunnel，失败再 fallback 到 Render
       try {
-        // Promise.any: 第一个成功的胜出（忽略失败）
-        const winner = await Promise.any([tunnelP, renderP]);
-
-        if (winner.label === 'tunnel') {
-          // Tunnel 先赢，直接用
-          _activeBackend = CF_TUNNEL_BACKEND;
-          _lastCheckInfo = `✅ Tunnel 胜出 ${winner.ms}ms (build:${PAGE_BUILD})`;
-          console.log(`🚀 后端: Tunnel ${winner.ms}ms`);
-          _updateBackendIndicator('tunnel');
-        } else {
-          // Render 先赢，给 Tunnel 宽限期
-          console.log(`☁️ Render 先响应 ${winner.ms}ms，等 Tunnel ${TUNNEL_GRACE}ms...`);
-          try {
-            const tunnelResult = await Promise.race([
-              tunnelP,
-              new Promise((_, rej) => setTimeout(() => rej('grace_timeout'), TUNNEL_GRACE))
-            ]);
-            // Tunnel 在宽限内响应了
-            _activeBackend = CF_TUNNEL_BACKEND;
-            _lastCheckInfo = `✅ Tunnel ${tunnelResult.ms}ms (宽限), Render ${winner.ms}ms (build:${PAGE_BUILD})`;
-            console.log(`🚀 Tunnel 在宽限内响应 ${tunnelResult.ms}ms`);
-            _updateBackendIndicator('tunnel');
-          } catch {
-            // 宽限超时，用 Render
-            _activeBackend = RENDER_BACKEND;
-            _lastCheckInfo = `☁️ Render ${winner.ms}ms, Tunnel 超时 (build:${PAGE_BUILD})`;
-            console.log(`☁️ 后端: Render ${winner.ms}ms (Tunnel超时)`);
-            _updateBackendIndicator('render');
-          }
+        const tunnelResult = await probe(CF_TUNNEL_BACKEND, 'tunnel', TUNNEL_TIMEOUT);
+        _activeBackend = CF_TUNNEL_BACKEND;
+        _lastCheckInfo = `🚀 Tunnel 直连 ${tunnelResult.ms}ms (build:${PAGE_BUILD})`;
+        console.log(`🚀 后端: Tunnel ${tunnelResult.ms}ms`);
+        _updateBackendIndicator('tunnel');
+      } catch (tunnelErr) {
+        // Tunnel 不可用，fallback 到 Render
+        console.warn(`⚠️ Tunnel 不可用: ${tunnelErr.message}，切换 Render...`);
+        try {
+          const renderResult = await probe(RENDER_BACKEND, 'render', RENDER_TIMEOUT);
+          _activeBackend = RENDER_BACKEND;
+          _lastCheckInfo = `☁️ Render 备用 ${renderResult.ms}ms, Tunnel 不可用 (build:${PAGE_BUILD})`;
+          console.log(`☁️ 后端: Render ${renderResult.ms}ms (Tunnel不可用)`);
+          _updateBackendIndicator('render');
+        } catch (renderErr) {
+          // 两个都失败
+          _activeBackend = RENDER_BACKEND;
+          _lastCheckInfo = `⚠️ 两后端均失败, 默认Render (build:${PAGE_BUILD})`;
+          console.warn('⚠️ 两后端均不可达:', tunnelErr, renderErr);
+          _updateBackendIndicator('render');
         }
-      } catch (aggErr) {
-        // Promise.any 抛 AggregateError = 两个都失败
-        _activeBackend = RENDER_BACKEND;
-        _lastCheckInfo = `⚠️ 两后端均失败, 默认Render (build:${PAGE_BUILD})`;
-        console.warn('⚠️ 两后端均不可达:', aggErr);
-        _updateBackendIndicator('render');
       }
 
       _backendChecked = true;
@@ -4295,6 +4280,80 @@
             { phase:'成长期', duration:'2-4个月', followers:'1000-5000', tasks:['开通付费占卜服务','入驻蒲公英','开始水晶/法器带货','建立粉丝社群'] },
             { phase:'变现期', duration:'4-8个月', followers:'5000-20000', tasks:['稳定付费占卜收入','出品玄学课程','尝试直播占卜','挖掘高客单品'] },
             { phase:'规模化', duration:'8个月+', followers:'20000+', tasks:['团队化运营','自有品牌水晶/法器','多方向矩阵','IP打造'] },
+          ]
+        }
+      },
+      '招聘': {
+        id: 'recruitment', name: '招聘', icon: '💼', color: '#2563eb',
+        title: '小红书招聘账号 · 运营管理平台',
+        sidebarTitle: '💼 招聘运营台',
+        subtitle: '一键自动生成小红书招聘笔记',
+        categoryLabel: '招聘分类',
+        categories: ['校园招聘','社会招聘','实习机会','求职干货','面试技巧','简历优化','职场成长','行业解析'],
+        categoryColors: { '校园招聘':'#3B82F6','社会招聘':'#10B981','实习机会':'#F59E0B','求职干货':'#8B5CF6','面试技巧':'#EF4444','简历优化':'#06B6D4','职场成长':'#F97316','行业解析':'#6366F1' },
+        categoryEmojis: { '校园招聘':'🎓','社会招聘':'🏢','实习机会':'📝','求职干货':'📌','面试技巧':'🎯','简历优化':'📄','职场成长':'🚀','行业解析':'📊' },
+        defaultCategory: '社会招聘',
+        imageStyles: { xiaohongshu:'小红书招聘风格', minimalist:'极简商务风', watercolor:'手绘职场风', gradient:'现代科技风', photo:'职场摄影风' },
+        imageStylePrompts: {
+          xiaohongshu: '小红书招聘风格，蓝白商务色调，专业干练，信息清晰，适合HR和求职者',
+          minimalist: '极简商务设计，干净排版，蓝色系配色，专业可信赖',
+          watercolor: '手绘职场插画风格，轻松活泼，年轻化办公场景',
+          gradient: '现代科技风，蓝紫渐变，未来感办公空间，科技公司氛围',
+          photo: '职场摄影风格，明亮的办公环境，团队协作场景，积极向上'
+        },
+        branding: {
+          niche: '小红书招聘/职场账号', audience: '20-35岁求职者、应届毕业生、职场新人、想跳槽的打工人',
+          persona: '像一个靠谱的HR朋友，专业但不端架子，真诚分享职场内幕和求职技巧', keywords: '招聘,求职,面试,简历,offer,职场,薪资',
+          nichePlaceholder: '例如：互联网招聘 / 求职攻略 / 面试辅导 / HR干货',
+          audiencePlaceholder: '例如：应届毕业生、互联网求职者、想跳槽的打工人',
+          personaPlaceholder: '例如：靠谱HR姐姐、职场导师、面试教练',
+          keywordsPlaceholder: '例如：招聘,求职,面试,简历,offer,跳槽',
+          tagsPlaceholder: '招聘信息,求职干货,面试技巧',
+          previewChips: ['岗位推荐','面试攻略','简历模板'],
+          avatarFallback: '💼',
+          nameStyles: ['专业可信赖','亲切接地气','简短好记','有记忆点'],
+          promptPrefix: '招聘求职类账号',
+          avatarSuffix: '小红书招聘账号头像，正方形构图，蓝色商务风，专业、可信、有亲和力，无文字，适合做招聘/职场账号头像。',
+          bannerSuffix: '小红书个人主页顶部封面，横版构图，职场招聘主题，蓝白商务色调，专业阳光，无文字，适合招聘求职类账号主页封面。',
+        },
+        aiRole: '拥有30万粉丝的小红书招聘博主，曾任大厂HR负责人，精通人才招聘全流程，擅长用真诚接地气的方式分享岗位信息和求职技巧，深谙小红书招聘赛道的爆款规律，能写出让求职者立刻想投简历的笔记',
+        aiNiche: '招聘类',
+        searchKeywords: (cat) => [`小红书 ${cat} 招聘 求职 爆款 高赞`, `小红书 ${cat} 面试 offer 万赞`, `小红书 招聘博主 ${cat} 涨粉 热门`, `site:xiaohongshu.com ${cat} 招聘 求职 收藏`, `小红书 ${cat} 简历 薪资 攻略`],
+        postingTimeTips: {
+          '校园招聘': '💡 校招内容在秋招(9-11月)春招(3-4月)期间流量最大，工作日早上发布效果最佳',
+          '社会招聘': '💡 社招内容在工作日午休12:00和晚间20:00-22:00互动率最高，打工人摸鱼看机会',
+          '实习机会': '💡 实习信息在开学季和寒暑假前流量最大，适合下午和晚间发布',
+          '求职干货': '💡 求职干货在周一到周三效果最好，大家刚上班最想跳槽',
+          '面试技巧': '💡 面试技巧在晚间20:00-22:00效果最佳，求职者晚上准备第二天面试',
+          '简历优化': '💡 简历优化内容在招聘旺季流量暴增，适合傍晚18:00-20:00发布',
+          '职场成长': '💡 职场成长内容在早晨和晚间效果好，上班前/下班后是反思成长的时间',
+          '行业解析': '💡 行业分析内容适合工作日发布，周二到周四最佳，内容深度带来高收藏',
+        },
+        postingTimeBonus: {
+          '校园招聘': { '08:00': 3, '09:00': 2, '12:00': 2, '20:00': 1 },
+          '社会招聘': { '12:00': 3, '20:00': 2, '21:00': 3, '22:00': 1 },
+          '实习机会': { '15:00': 2, '18:00': 2, '20:00': 2, '21:00': 1 },
+          '求职干货': { '08:00': 2, '12:00': 2, '20:00': 3, '21:00': 2 },
+          '面试技巧': { '20:00': 3, '21:00': 3, '22:00': 2 },
+          '简历优化': { '18:00': 2, '19:00': 2, '20:00': 3 },
+          '职场成长': { '07:00': 2, '08:00': 2, '21:00': 2, '22:00': 2 },
+          '行业解析': { '09:00': 2, '12:00': 2, '20:00': 3, '21:00': 2 },
+        },
+        monetization: {
+          strategies: [
+            { name:'企业招聘推广', icon:'🏢', threshold:'1000粉丝起', income:'500-5000元/条', description:'企业付费发布招聘信息，精准触达求职人群', tips:['按行业垂直化运营','企业客单价高','可长期合作'] },
+            { name:'蒲公英平台', icon:'🌻', threshold:'1000粉丝+', income:'200-3000元/单', description:'招聘平台(Boss直聘/猎聘等)的品牌推广合作', tips:['招聘平台投放预算大','配合招聘旺季效果好','保持内容专业度'] },
+            { name:'简历修改服务', icon:'📄', threshold:'3000粉丝+', income:'50-500元/份', description:'提供1v1简历优化、修改、润色服务', tips:['从免费点评引流','分档定价','展示修改前后对比案例'] },
+            { name:'面试辅导', icon:'🎯', threshold:'5000粉丝+', income:'200-1000元/次', description:'提供模拟面试、面试策略辅导等付费服务', tips:['按岗位/行业细分','可做1v1或小班','积累成功案例'] },
+            { name:'求职课程', icon:'📚', threshold:'5000粉丝+', income:'被动收入', description:'出品求职类课程：简历写作、面试技巧、职业规划等', tips:['体系化整理经验','定价49-399元','通过笔记引流'] },
+            { name:'猎头/内推佣金', icon:'🤝', threshold:'10000粉丝+', income:'岗位薪资5-20%', description:'积累企业和求职者资源后，做人才中介和内推', tips:['高端岗位佣金可观','需要建立信任','长线生意'] },
+            { name:'账号矩阵', icon:'📱', threshold:'积累经验后', income:'倍增收益', description:'按行业拆分：互联网招聘号、金融招聘号、设计招聘号等', tips:['每个号定位一个行业','共享内容库','本系统支持多账号管理'] },
+          ],
+          roadmap: [
+            { phase:'冷启动期', duration:'1-2个月', followers:'0-1000', tasks:['每天发1-2条招聘/求职笔记','收集真实岗位信息','研究爆款招聘笔记','互动回复求职问题'] },
+            { phase:'成长期', duration:'2-4个月', followers:'1000-5000', tasks:['入驻蒲公英平台','开始接企业招聘推广','开通简历修改服务','建立求职者社群'] },
+            { phase:'变现期', duration:'4-6个月', followers:'5000-20000', tasks:['稳定企业推广收入','出品求职课程','开展面试辅导','积累企业资源'] },
+            { phase:'规模化', duration:'6个月+', followers:'20000+', tasks:['团队化运营','猎头/内推业务','行业矩阵号','招聘IP打造'] },
           ]
         }
       }
