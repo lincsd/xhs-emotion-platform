@@ -1896,13 +1896,19 @@
                   <option value="5">5 张</option>
                 </select>
               </div>
-              <button class="btn btn-primary" onclick="generatePosts()" id="gen-btn">
-                ✨ 一键生成 <span style="font-size:11px;opacity:0.8;">(~4积分)</span>
+              <!-- 合规提醒横幅 -->
+              <div style="margin-bottom:12px; padding:10px 14px; background:linear-gradient(135deg, #fff8e1, #fff3cd); border:1px solid #ffc107; border-radius:10px; font-size:12px; color:#856404; line-height:1.6;">
+                ⚠️ <strong>合规提醒：</strong>小红书平台已发布 <a href="https://www.xiaohongshu.com/discovery/item/69b001470000000016009ce7" target="_blank" style="color:#0056b3;">AI托管治理公告</a>，
+                AI 生成内容仅供参考，请<strong>融入个人真实经历后再发布</strong>，避免账号被限流或封禁。
+                <span onclick="openModal('modal-compliance')" style="color:#0056b3; cursor:pointer; text-decoration:underline;">查看详情</span>
+              </div>
+              <button class="btn btn-primary" onclick="generatePostsWithCheck()" id="gen-btn">
+                ✨ AI辅助创作 <span style="font-size:11px;opacity:0.8;">(~4积分)</span>
               </button>
               <button class="btn btn-outline" onclick="openABTestModal()" style="margin-left:8px;">
                 🧪 A/B 测试 <span style="font-size:11px;opacity:0.7;">(2积分)</span>
               </button>
-              <div style="margin-top:6px; font-size:11px; color:var(--text-light);">💡 内容生成 = 搜索分析(2) + 内容创作(2)，含配图另加2积分/张 · 每日前10次免费</div>
+              <div style="margin-top:6px; font-size:11px; color:var(--text-light);">💡 AI辅助创作 = 搜索分析(2) + 内容创作(2)，含配图另加2积分/张 · 每日前10次免费 · 生成后请手动编辑再发布</div>
               <div class="form-group" style="margin-top:12px;">
                 <label>自定义 Prompt（选填）</label>
                 <textarea id="gen-custom-prompt" class="form-control" rows="2" placeholder="输入自定义创作指令，AI 会优先参考"></textarea>
@@ -2540,7 +2546,7 @@
 
       <!-- ===== 笔记评分 ===== -->
       <section id="page-score" class="page hidden">
-        <div class="page-header"><div><h2>💯 笔记评分</h2><p class="subtitle">多维度评估笔记质量</p></div></div>
+        <div class="page-header"><div><h2>💯 笔记评分 & AI痕迹检测</h2><p class="subtitle">多维度评估笔记质量，检测 AI 生成痕迹</p></div></div>
         <div class="card">
           <div class="form-group">
             <label>标题</label>
@@ -2554,10 +2560,12 @@
             <div class="form-group"><label>标签</label><input type="text" id="score-tags" class="form-control" placeholder="标签,逗号分隔" oninput="liveScorePost()"></div>
             <div class="form-group"><label>分类</label><input type="text" id="score-category" class="form-control" placeholder="分类"></div>
           </div>
-          <div style="display:flex;gap:8px;margin-bottom:16px;">
+          <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
             <button class="btn btn-primary" onclick="liveScorePost()">💯 评分</button>
+            <button class="btn" style="background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff;" onclick="detectAITrace()">🔍 AI痕迹检测</button>
             <button class="btn btn-outline" onclick="aiOptimizeScore()">🤖 AI 优化建议 <span style="font-size:11px;opacity:0.7;">(1积分)</span></button>
           </div>
+          <div id="ai-trace-result"></div>
           <div id="score-result"></div>
         </div>
       </section>
@@ -3568,6 +3576,87 @@
           <button class="btn btn-primary" onclick="redeemFromQuotaModal()">兑换</button>
         </div>
         <div id="quota-redeem-result" style="margin-top:8px; font-size:13px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 模态框：合规提醒 ===== -->
+  <div class="modal-overlay" id="modal-compliance">
+    <div class="modal" style="max-width:560px;">
+      <div class="modal-header" style="background:linear-gradient(135deg, #fff8e1, #fff3cd); border-bottom:1px solid #ffc107;">
+        <h3>⚠️ 小红书平台合规指南</h3>
+        <button class="modal-close" onclick="closeModal('modal-compliance')">✕</button>
+      </div>
+      <div class="modal-body" style="padding:20px 24px;">
+        <div style="background:#fff5f5; border-radius:10px; padding:14px; margin-bottom:16px; border-left:4px solid #e74c3c;">
+          <h4 style="color:#e74c3c; margin-bottom:8px; font-size:14px;">🚫 平台明确禁止</h4>
+          <ul style="font-size:13px; color:#333; padding-left:16px; line-height:2;">
+            <li>通过 AI 托管工具<strong>自动注册、发布、互动</strong></li>
+            <li>主页所有笔记<strong>均为 AI 代发</strong>的账号 → <span style="color:#e74c3c;">封禁</span></li>
+            <li>利用技术手段<strong>模拟真人</strong>进行虚假内容创作</li>
+          </ul>
+        </div>
+        <div style="background:#fff8e1; border-radius:10px; padding:14px; margin-bottom:16px; border-left:4px solid #f39c12;">
+          <h4 style="color:#f39c12; margin-bottom:8px; font-size:14px;">⚡ 偶发使用 AI 代写</h4>
+          <ul style="font-size:13px; color:#333; padding-left:16px; line-height:2;">
+            <li>平台将根据违规程度采取<strong>警告、限制分发</strong>等措施</li>
+            <li>建议：AI 生成初稿后，必须<strong>融入个人真实经历</strong>再发布</li>
+          </ul>
+        </div>
+        <div style="background:#e8f5e9; border-radius:10px; padding:14px; margin-bottom:16px; border-left:4px solid #27ae60;">
+          <h4 style="color:#27ae60; margin-bottom:8px; font-size:14px;">✅ 正确使用方式</h4>
+          <ul style="font-size:13px; color:#333; padding-left:16px; line-height:2;">
+            <li>将 AI 作为<strong>创作灵感工具</strong>，而非内容自动生产线</li>
+            <li>每篇笔记必须<strong>手动修改 30% 以上内容</strong></li>
+            <li>融入<strong>个人真实经历、照片、感受</strong></li>
+            <li>不要批量发布模板化内容，保持发布<strong>节奏自然</strong></li>
+            <li>使用本平台的「AI痕迹检测」功能自查后再发布</li>
+          </ul>
+        </div>
+        <div style="text-align:center; padding-top:8px;">
+          <a href="https://www.xiaohongshu.com/discovery/item/69b001470000000016009ce7" target="_blank" style="color:#0056b3; font-size:13px;">📄 查看小红书官方公告原文</a>
+        </div>
+      </div>
+      <div class="modal-footer" style="padding:16px 24px; border-top:1px solid var(--border); text-align:center;">
+        <button class="btn btn-primary" onclick="closeModal('modal-compliance')" style="min-width:160px;">我已了解，合理使用 AI</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 模态框：编辑确认 ===== -->
+  <div class="modal-overlay" id="modal-edit-confirm">
+    <div class="modal" style="max-width:520px;">
+      <div class="modal-header">
+        <h3>✏️ 发布前编辑确认</h3>
+        <button class="modal-close" onclick="closeModal('modal-edit-confirm')">✕</button>
+      </div>
+      <div class="modal-body" style="padding:20px 24px;">
+        <div style="text-align:center; margin-bottom:16px;">
+          <div style="font-size:48px; margin-bottom:8px;">📝</div>
+          <div style="font-size:15px; font-weight:600; color:#333;">AI 已生成内容，请在发布前完成以下步骤</div>
+        </div>
+        <div style="background:#f8f9fa; border-radius:10px; padding:16px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <span style="width:24px; height:24px; border-radius:50%; background:#e74c3c; color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700;">1</span>
+            <span style="font-size:13px;"><strong>融入真实经历</strong>：在每篇笔记中加入你的亲身体验、感受或故事</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <span style="width:24px; height:24px; border-radius:50%; background:#f39c12; color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700;">2</span>
+            <span style="font-size:13px;"><strong>修改 30%+ 内容</strong>：调整措辞、补充细节、替换模板化表达</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <span style="width:24px; height:24px; border-radius:50%; background:#27ae60; color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700;">3</span>
+            <span style="font-size:13px;"><strong>使用真实配图</strong>：尽量用自己拍的照片替换 AI 生成图</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span style="width:24px; height:24px; border-radius:50%; background:#3498db; color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700;">4</span>
+            <span style="font-size:13px;"><strong>AI痕迹自查</strong>：使用「笔记评分」中的 AI 痕迹检测功能扫描</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="padding:16px 24px; display:flex; gap:8px; justify-content:center;">
+        <button class="btn btn-outline" onclick="closeModal('modal-edit-confirm'); switchPage('score');" style="min-width:140px;">🔍 去AI痕迹检测</button>
+        <button class="btn btn-primary" onclick="closeModal('modal-edit-confirm')" style="min-width:140px;">✅ 我会编辑后再发布</button>
       </div>
     </div>
   </div>
@@ -12491,6 +12580,26 @@ Style: ${stylePrompt}
     }
 
     // ============ 内容生成 ============
+    // 合规检查包装函数：首次生成时弹出合规提醒
+    let _complianceAccepted = localStorage.getItem('xhs_compliance_accepted') === 'true';
+    function generatePostsWithCheck() {
+      if (!_complianceAccepted) {
+        openModal('modal-compliance');
+        // 设置合规确认回调
+        const confirmBtn = document.querySelector('#modal-compliance .modal-footer .btn-primary');
+        const origOnclick = confirmBtn.onclick;
+        confirmBtn.onclick = function() {
+          _complianceAccepted = true;
+          localStorage.setItem('xhs_compliance_accepted', 'true');
+          closeModal('modal-compliance');
+          confirmBtn.onclick = origOnclick;
+          generatePosts();
+        };
+        return;
+      }
+      generatePosts();
+    }
+
     async function generatePosts() {
       const category = document.getElementById('gen-category').value;
       const count = parseInt(document.getElementById('gen-count').value);
@@ -12738,8 +12847,10 @@ Style: ${stylePrompt}
           toast('未配置 Gemini 代理地址/API Key，请在侧边栏「API 设置」中配置', 'warning');
         }
 
-        updateGenProgress(progressEl, '🎉 全部完成！', 100);
-        setTimeout(() => { progressEl.style.display = 'none'; }, 3000);
+        updateGenProgress(progressEl, '🎉 全部完成！请记得<strong>编辑融入个人经历后再发布</strong>', 100);
+        // 生成完成后弹出编辑确认提醒
+        setTimeout(() => { openModal('modal-edit-confirm'); }, 800);
+        setTimeout(() => { progressEl.style.display = 'none'; }, 5000);
 
       } catch (e) {
         toast('生成失败: ' + e.message, 'error');
@@ -12793,6 +12904,7 @@ Style: ${stylePrompt}
                 ${imgInfo.join(' · ')}
                 ${p.ai_analysis ? ` · 💡 ${p.ai_analysis}` : ''}
                 ${(() => { const hits = checkForbiddenInText((p.title||'') + '\n' + (p.content||'')); return hits.ban.length ? ' <span style="color:#e74c3c;font-size:11px;">🚫 违禁</span>' : (hits.high.length ? ' <span style="color:#f39c12;font-size:11px;">⚠️ 高危</span>' : ''); })()}
+                <span style="color:#ff6b35;font-size:11px;font-weight:600;" title="请编辑融入个人经历后再发布">✏️ 待人工编辑</span>
               </div>
               ${contentImgCount > 0 ? `<div style="margin-top:4px; display:flex; gap:4px;">${(p.content_images || getPostContentImages(p.id) || []).slice(0, 3).map(img => `<img src="${img}" style="width:32px; height:42px; object-fit:cover; border-radius:4px;">`).join('')}</div>` : ''}
             </div>
@@ -14050,6 +14162,186 @@ Style: ${stylePrompt}
     }
 
     function initScorePage() {}
+
+    // ============ AI痕迹检测（本地规则引擎） ============
+    const AI_TRACE_PATTERNS = {
+      // 模板化开头
+      templateOpening: [
+        /^在这个.{2,8}的时代/,
+        /^作为一个/,
+        /^今天我想和大家分享/,
+        /^众所周知/,
+        /^随着.{2,10}的发展/,
+        /^不知道从什么时候开始/,
+        /^说实话/,
+        /^这么说吧/
+      ],
+      // AI常见口头禅
+      aiClicheWords: [
+        '总而言之', '综上所述', '值得一提的是', '不得不说',
+        '总的来说', '综合来看', '总结一下', '以上就是',
+        '希望对你有所帮助', '希望能给大家', '不妨试试',
+        '让我们一起', '跟我一起来看', '废话不多说',
+        '先说结论', '事不宜迟', '不知不觉',
+        '每个人都应该', '每个女生都', '如果你也在',
+        '如果你也有同感', '你一定不能错过',
+        '强烈建议收藏', '建议收藏保存'
+      ],
+      // 过度整齐的结构词
+      structureWords: [
+        '首先', '其次', '然后', '最后', '总结',
+        '第一', '第二', '第三', '第四', '第五',
+        '一方面', '另一方面', '此外', '与此同时'
+      ],
+      // 口语化不足的书面语
+      formalWords: [
+        '然而', '因此', '尽管', '尽管如此', '尤其是',
+        '显而易见', '与之相对应', '与此同时',
+        '值得注意的是', '所谓', '基于此',
+        '在某种程度上', '不可否认', '毫无疑问'
+      ]
+    };
+
+    function detectAITraceLocal(title, content) {
+      const results = [];
+      let riskScore = 0;
+      const text = (title || '') + '\n' + (content || '');
+      const contentOnly = content || '';
+
+      // 1. 检测模板化开头
+      for (const pat of AI_TRACE_PATTERNS.templateOpening) {
+        if (pat.test(contentOnly.trim())) {
+          results.push({ type: 'warning', msg: `模板化开头：「${contentOnly.trim().slice(0, 20)}...」很常见于AI生成内容` });
+          riskScore += 15;
+          break;
+        }
+      }
+
+      // 2. 检测 AI 口头禅
+      const clicheHits = AI_TRACE_PATTERNS.aiClicheWords.filter(w => text.includes(w));
+      if (clicheHits.length >= 3) {
+        results.push({ type: 'danger', msg: `发现 ${clicheHits.length} 个 AI 常见口头禅：${clicheHits.slice(0, 5).join('、')}` });
+        riskScore += Math.min(30, clicheHits.length * 8);
+      } else if (clicheHits.length > 0) {
+        results.push({ type: 'info', msg: `发现 ${clicheHits.length} 个常见表达：${clicheHits.join('、')}` });
+        riskScore += clicheHits.length * 3;
+      }
+
+      // 3. 检测过度整齐的结构
+      const structHits = AI_TRACE_PATTERNS.structureWords.filter(w => text.includes(w));
+      if (structHits.length >= 4) {
+        results.push({ type: 'warning', msg: `结构过于整齐（${structHits.join('、')}），缺乏自然口语感` });
+        riskScore += 15;
+      }
+
+      // 4. 检测书面语过多
+      const formalHits = AI_TRACE_PATTERNS.formalWords.filter(w => text.includes(w));
+      if (formalHits.length >= 3) {
+        results.push({ type: 'warning', msg: `书面语过多（${formalHits.slice(0, 5).join('、')}），小红书内容应更口语化` });
+        riskScore += formalHits.length * 5;
+      }
+
+      // 5. 检测段落长度均匀度（AI 生成的段落往往长度很均匀）
+      const paragraphs = contentOnly.split('\n').filter(l => l.trim().length > 10);
+      if (paragraphs.length >= 3) {
+        const lengths = paragraphs.map(p => p.length);
+        const avg = lengths.reduce((a, b) => a + b, 0) / lengths.length;
+        const variance = lengths.reduce((s, l) => s + Math.pow(l - avg, 2), 0) / lengths.length;
+        const cv = Math.sqrt(variance) / avg; // 变异系数
+        if (cv < 0.2 && paragraphs.length >= 4) {
+          results.push({ type: 'warning', msg: '段落长度过于均匀（变异系数=' + cv.toFixed(2) + '），真人写作通常更随意' });
+          riskScore += 12;
+        }
+      }
+
+      // 6. 检测缺乏个人化元素
+      const personalIndicators = ['我', '咱', '偷偷告诉你', '说真的', '嘿嘿', '哈哈', '呵呵', '喔喔', '嗯嗯',
+        '实话说', '老实说', '真的会', '给姐妹们', '姐妹们', '宝子们', '集美们',
+        '我跟你们说', '别问我怎么知道的', '!!', '！！', '??', '？？'];
+      const personalCount = personalIndicators.filter(w => text.includes(w)).length;
+      if (personalCount === 0) {
+        results.push({ type: 'danger', msg: '完全缺乏个人化表达（没有“我”、口语化词汇、语气词等），强烈的AI痕迹' });
+        riskScore += 25;
+      } else if (personalCount <= 2) {
+        results.push({ type: 'info', msg: '个人化元素较少，建议加入更多真实感受和口语化表达' });
+        riskScore += 5;
+      }
+
+      // 7. 检测 emoji 使用模式（AI生成的emoji常常很整齐地分布在每段开头）
+      const emojiRegex = /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu;
+      const emojiPositions = [];
+      let match;
+      while ((match = emojiRegex.exec(contentOnly)) !== null) {
+        emojiPositions.push(match.index);
+      }
+      if (emojiPositions.length > 5 && paragraphs.length >= 3) {
+        // 检查是否每段都以emoji开头
+        const emojiStartCount = paragraphs.filter(p => emojiRegex.test(p.trim().charAt(0) + p.trim().charAt(1))).length;
+        if (emojiStartCount >= paragraphs.length * 0.8) {
+          results.push({ type: 'warning', msg: '每段都以 emoji 开头，过于整齐，建议随意一些' });
+          riskScore += 8;
+        }
+      }
+
+      // 综合风险等级
+      riskScore = Math.min(100, riskScore);
+      let riskLevel, riskColor, riskIcon;
+      if (riskScore >= 60) {
+        riskLevel = '高风险'; riskColor = '#e74c3c'; riskIcon = '🚨';
+      } else if (riskScore >= 35) {
+        riskLevel = '中风险'; riskColor = '#f39c12'; riskIcon = '⚠️';
+      } else if (riskScore >= 15) {
+        riskLevel = '低风险'; riskColor = '#3498db'; riskIcon = '💡';
+      } else {
+        riskLevel = '安全'; riskColor = '#27ae60'; riskIcon = '✅';
+      }
+
+      return { riskScore, riskLevel, riskColor, riskIcon, results };
+    }
+
+    function detectAITrace() {
+      const title = document.getElementById('score-title').value;
+      const content = document.getElementById('score-content').value;
+      if (!title && !content) { toast('请先输入内容', 'error'); return; }
+
+      const result = detectAITraceLocal(title, content);
+      let html = `
+        <div style="background:${result.riskColor}11; border:1px solid ${result.riskColor}44; border-radius:12px; padding:16px; margin-bottom:16px;">
+          <div style="text-align:center; margin-bottom:12px;">
+            <div style="font-size:36px;">${result.riskIcon}</div>
+            <div style="font-size:24px; font-weight:700; color:${result.riskColor};">风险分：${result.riskScore}/100</div>
+            <div style="font-size:14px; color:${result.riskColor}; font-weight:600;">${result.riskLevel} — ${result.riskScore >= 60 ? '建议大幅修改后再发布' : result.riskScore >= 35 ? '建议适当修改后发布' : result.riskScore >= 15 ? '可少量修改后发布' : '内容自然，可以发布'}</div>
+          </div>
+      `;
+
+      if (result.results.length > 0) {
+        html += '<div style="margin-top:12px;">';
+        for (const r of result.results) {
+          const bgColor = r.type === 'danger' ? '#fff5f5' : r.type === 'warning' ? '#fff8e1' : '#e8f4fd';
+          const borderColor = r.type === 'danger' ? '#e74c3c' : r.type === 'warning' ? '#f39c12' : '#3498db';
+          const icon = r.type === 'danger' ? '🚨' : r.type === 'warning' ? '⚠️' : '💡';
+          html += `<div style="background:${bgColor}; border-left:3px solid ${borderColor}; padding:8px 12px; margin-bottom:6px; border-radius:0 6px 6px 0; font-size:13px;">${icon} ${r.msg}</div>`;
+        }
+        html += '</div>';
+      } else {
+        html += '<div style="text-align:center; color:#27ae60; font-size:13px;">✅ 未检测到明显的AI生成痕迹，内容看起来很自然！</div>';
+      }
+
+      html += `
+          <div style="margin-top:14px; padding:10px; background:#f8f9fa; border-radius:8px; font-size:12px; color:#666;">
+            <strong>💡 降低AI痕迹小技巧：</strong>
+            <ul style="margin:6px 0 0; padding-left:16px; line-height:1.8;">
+              <li>用自己的语气重写开头，加入真实场景</li>
+              <li>把「然而、因此、总而言之」换成口语表达</li>
+              <li>把整齐的段落打散，加入随意的短句</li>
+              <li>添加个人照片、截图、聊天记录等真实素材</li>
+            </ul>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('ai-trace-result').innerHTML = html;
+    }
 
     async function aiOptimizeScore() {
       if (!canUseAI()) { toast('请先配置 API Key', 'error'); return; }
