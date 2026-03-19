@@ -1909,8 +1909,15 @@
               </div>
               <div id="gen-skill-extra-fields" style="display:none; margin-top:12px;">
                 <div id="gen-recruitment-info-section" class="form-group" style="display:none;">
-                  <label>📋 招聘信息（必填）<span style="font-size:11px;color:var(--text-light);margin-left:6px;">填写具体的招聘岗位信息，AI 将基于此生成招聘笔记</span></label>
-                  <textarea id="gen-recruitment-info" class="form-control" rows="6" placeholder="请填写具体的招聘信息，例如：&#10;&#10;公司名称：XX科技有限公司&#10;招聘岗位：高级前端工程师&#10;工作地点：北京市朝阳区&#10;薪资范围：25K-40K&#10;岗位职责：&#10;1. 负责公司核心产品的前端开发&#10;2. 优化前端性能和用户体验&#10;任职要求：&#10;1. 3年以上前端开发经验&#10;2. 熟悉 React/Vue 等主流框架&#10;福利待遇：五险一金、弹性工作、免费午餐&#10;联系方式：hr@example.com"></textarea>
+                  <label>📋 招聘信息（必填）<span style="font-size:11px;color:var(--text-light);margin-left:6px;">手动填写 或 粘贴招聘链接自动抓取</span></label>
+                  <div style="display:flex; gap:8px; margin-bottom:8px;">
+                    <input id="gen-recruitment-url" class="form-control" style="flex:1;" placeholder="粘贴招聘链接（Boss直聘/拉勾/智联/猎聘/公司官网等）" />
+                    <button class="btn btn-outline" onclick="fetchRecruitmentFromURL()" id="btn-fetch-recruit" style="white-space:nowrap; font-size:13px;">
+                      🔗 抓取岗位信息
+                    </button>
+                  </div>
+                  <div id="recruit-fetch-status" style="display:none; margin-bottom:8px; padding:8px 12px; border-radius:8px; font-size:12px;"></div>
+                  <textarea id="gen-recruitment-info" class="form-control" rows="6" placeholder="请填写具体的招聘信息，例如：&#10;&#10;公司名称：XX科技有限公司&#10;招聘岗位：高级前端工程师&#10;工作地点：北京市朝阳区&#10;薪资范围：25K-40K&#10;岗位职责：&#10;1. 负责公司核心产品的前端开发&#10;2. 优化前端性能和用户体验&#10;任职要求：&#10;1. 3年以上前端开发经验&#10;2. 熟悉 React/Vue 等主流框架&#10;福利待遇：五险一金、弹性工作、免费午餐&#10;联系方式：hr@example.com&#10;&#10;💡 也可以直接粘贴招聘链接到上方，点击「抓取岗位信息」自动填入"></textarea>
                 </div>
               </div>
               <div class="form-group" style="margin-top:12px;">
@@ -4551,6 +4558,98 @@
         recruitSection.style.display = 'block';
       } else {
         container.style.display = 'none';
+      }
+    }
+
+    // ======== 招聘链接抓取功能 ========
+    async function fetchRecruitmentFromURL() {
+      const urlInput = document.getElementById('gen-recruitment-url');
+      const statusEl = document.getElementById('recruit-fetch-status');
+      const textArea = document.getElementById('gen-recruitment-info');
+      const btn = document.getElementById('btn-fetch-recruit');
+      const url = (urlInput?.value || '').trim();
+
+      if (!url) {
+        toast('请先粘贴招聘链接', 'error');
+        urlInput?.focus();
+        return;
+      }
+
+      // 简单 URL 校验
+      if (!/^https?:\/\/.+/i.test(url)) {
+        toast('请输入有效的链接（以 http:// 或 https:// 开头）', 'error');
+        return;
+      }
+
+      if (!canUseAI()) {
+        toast('请先配置 API Key 才能使用链接抓取', 'error');
+        return;
+      }
+
+      // 显示抓取中状态
+      btn.disabled = true;
+      btn.textContent = '⏳ 抓取中...';
+      statusEl.style.display = 'block';
+      statusEl.style.background = '#e3f2fd';
+      statusEl.style.color = '#1565c0';
+      statusEl.innerHTML = '🔍 正在通过 AI 访问链接并提取招聘信息，请稍候（约 5-10 秒）...';
+
+      try {
+        const key = getGeminiKey();
+        const payload = {
+          contents: [{ parts: [{ text: `请访问以下招聘链接，提取出完整的招聘岗位信息。
+
+链接：${url}
+
+请提取并整理以下信息（如果链接中有的话）：
+- 公司名称
+- 招聘岗位
+- 工作地点
+- 薪资范围
+- 岗位职责（详细列出）
+- 任职要求（详细列出）
+- 学历要求
+- 工作经验要求
+- 福利待遇
+- 工作时间
+- 联系方式
+
+如果链接中包含多个岗位，请列出所有岗位的信息。
+请用简洁清晰的中文格式输出，每个字段一行，列表项用数字编号。不要输出 markdown 格式标记，直接输出纯文本。` }] }],
+          tools: [{ googleSearch: {} }],
+          generationConfig: { temperature: 0.3, maxOutputTokens: 4096 }
+        };
+
+        const result = await callGeminiAPI(key, 'gemini-2.5-flash', payload, 'generateContent', '招聘链接抓取');
+        const resData = result?.data || result;
+        const text = _extractGeminiText(resData);
+
+        if (!text || text.trim().length < 20) {
+          throw new Error('未能从链接中提取到有效的招聘信息');
+        }
+
+        // 填入文本框
+        const existingText = (textArea?.value || '').trim();
+        if (existingText) {
+          textArea.value = existingText + '\n\n--- 以下为链接抓取内容 ---\n\n' + text.trim();
+        } else {
+          textArea.value = text.trim();
+        }
+
+        statusEl.style.background = '#e8f5e9';
+        statusEl.style.color = '#2e7d32';
+        statusEl.innerHTML = '✅ 招聘信息已成功提取并填入下方，请检查内容是否准确，可手动修改补充。';
+        toast('招聘信息抓取成功！', 'success');
+
+      } catch (e) {
+        const errMsg = _extractAIError ? _extractAIError(e) : (e?.message || '未知错误');
+        statusEl.style.background = '#fce4ec';
+        statusEl.style.color = '#c62828';
+        statusEl.innerHTML = `❌ 抓取失败：${errMsg}<br><span style="font-size:11px;color:#777;">提示：部分招聘平台可能有反爬限制，可以手动复制岗位信息粘贴到下方文本框</span>`;
+        toast('抓取失败，请手动填写招聘信息', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🔗 抓取岗位信息';
       }
     }
 
