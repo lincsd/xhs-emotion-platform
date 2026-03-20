@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260320d';
+      var BUILD='20260320e';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);}
@@ -3133,7 +3133,7 @@
       <!-- ===== 📢 推广物料页面 ===== -->
       <section id="page-promo" class="page hidden">
         <div class="page-header">
-          <div><h2>📢 推广物料生成</h2><p class="subtitle">一键生成平台推广展示图，用于闲鱼、朋友圈、社群等场景</p></div>
+          <div><h2>📢 推广物料生成</h2><p class="subtitle">一键生成平台推广展示图，用于闲鱼、小红书、朋友圈、社群等场景</p></div>
           <button class="btn btn-primary" onclick="PromoMaterial.downloadAll()">📥 一键下载全部</button>
         </div>
 
@@ -3152,6 +3152,11 @@
           <button class="btn btn-sm" onclick="PromoMaterial.switchTab('tracks')" id="promo-tab-tracks">🎯 赛道切换</button>
           <button class="btn btn-sm" onclick="PromoMaterial.switchTab('desc')" id="promo-tab-desc">📋 商品描述</button>
           <button class="btn btn-sm" onclick="PromoMaterial.switchTab('reply')" id="promo-tab-reply">💬 私信话术</button>
+          <span style="display:block;width:100%;height:0;"></span>
+          <span style="font-size:11px;color:var(--text-light);padding:4px 8px;background:var(--bg);border-radius:8px;">📕 小红书推广笔记</span>
+          <button class="btn btn-sm" onclick="PromoMaterial.switchTab('xhscover')" id="promo-tab-xhscover">📕 笔记封面</button>
+          <button class="btn btn-sm" onclick="PromoMaterial.switchTab('xhsnote')" id="promo-tab-xhsnote">📝 笔记文案</button>
+          <button class="btn btn-sm" onclick="PromoMaterial.switchTab('xhsplan')" id="promo-tab-xhsplan">📅 发布计划</button>
         </div>
 
         <!-- 画布预览区 -->
@@ -3748,7 +3753,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260320d'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260320e'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -8903,7 +8908,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
 
       switchTab(tab) {
         this.currentTab = tab;
-        ['templates','features','pricing','demo','customdev','cover','mobile','aiimg','dashboard','tools','tracks','desc','reply'].forEach(t => {
+        ['templates','features','pricing','demo','customdev','cover','mobile','aiimg','dashboard','tools','tracks','desc','reply','xhscover','xhsnote','xhsplan'].forEach(t => {
           const btn = document.getElementById(`promo-tab-${t}`);
           if (btn) { btn.style.background = t === tab ? 'var(--primary)' : ''; btn.style.color = t === tab ? '#fff' : ''; }
         });
@@ -8939,6 +8944,9 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           case 'tracks': this.drawTracks(ctx, W, H); break;
           case 'desc': this.drawDesc(ctx, W, H); break;
           case 'reply': this.drawReply(ctx, W, H); break;
+          case 'xhscover': this.drawXhsCover(ctx, W, H); break;
+          case 'xhsnote': this.drawXhsNote(ctx, W, H); break;
+          case 'xhsplan': this.drawXhsPlan(ctx, W, H); break;
         }
         // 转成img显示，方便手机长按保存（JPEG压缩减小体积）
         const img = document.getElementById('promo-img');
@@ -10137,6 +10145,218 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         if(p.contact){ctx.font='16px "Noto Sans SC",sans-serif';ctx.fillStyle='#888';ctx.fillText('📱 '+p.contact,W/2,bottomY+75);}
       },
 
+      // ── 物料14: 小红书笔记封面图（5种风格） ──
+      drawXhsCover(ctx, W, H) {
+        const p = this.getParams();
+        // 背景渐变
+        const bgG = ctx.createLinearGradient(0,0,0,H);
+        bgG.addColorStop(0,'#fff0f3'); bgG.addColorStop(0.5,'#ffe4ec'); bgG.addColorStop(1,'#ffd6e0');
+        ctx.fillStyle=bgG; ctx.fillRect(0,0,W,H);
+
+        // 顶部
+        this.rr(ctx,0,0,W,110,0);
+        const topG=ctx.createLinearGradient(0,0,W,0);
+        topG.addColorStop(0,'#ff2442');topG.addColorStop(1,'#ff6b81');
+        ctx.fillStyle=topG;ctx.fill();
+        ctx.font='bold 34px "Noto Sans SC",sans-serif';ctx.fillStyle='#fff';ctx.textAlign='center';
+        ctx.fillText('📕 小红书推广封面 · 5种角度',W/2,62);
+        ctx.font='17px "Noto Sans SC",sans-serif';ctx.fillStyle='rgba(255,255,255,0.85)';
+        ctx.fillText('每张封面对应一篇笔记，直接保存发布',W/2,98);
+
+        // 5种封面卡片
+        const covers = [
+          { type:'痛点引入', emoji:'😩', title:'做小红书还在\n手动写文案？', sub:'AI帮你3分钟\n出一条爆款笔记', color:['#ff6b6b','#ee5a24'], tag:'引流款' },
+          { type:'效果对比', emoji:'✨', title:'用AI前 vs 用AI后', sub:'10小时→3分钟\n手动码字→自动生成', color:['#6c5ce7','#a29bfe'], tag:'种草款' },
+          { type:'干货教程', emoji:'📚', title:'小红书博主\n必备的AI神器', sub:'写文案+配图+排版\n一个工具全搞定', color:['#00b894','#55efc4'], tag:'干货款' },
+          { type:'数据晒单', emoji:'📊', title:'用AI做小红书\n7天涨粉1000+', sub:'我的运营数据\n全部公开', color:['#fdcb6e','#f39c12'], tag:'信任款' },
+          { type:'工具测评', emoji:'🏆', title:'测了10个AI工具\n这个最好用', sub:'真实测评\n不收广告费', color:['#74b9ff','#0984e3'], tag:'测评款' }
+        ];
+
+        const cw = (W-100)/2, ch = 240, startY = 135;
+        covers.forEach((c, i) => {
+          const cx = i < 4 ? 40 + (i%2)*(cw+20) : W/2-cw/2;
+          const cy = startY + Math.floor(i < 4 ? i/2 : 2)*(ch+16);
+          // 卡片
+          this.rr(ctx,cx,cy,cw,ch,16);
+          const cg=ctx.createLinearGradient(cx,cy,cx+cw,cy+ch);
+          cg.addColorStop(0,c.color[0]);cg.addColorStop(1,c.color[1]);
+          ctx.fillStyle=cg;ctx.fill();
+          // tag
+          this.rr(ctx,cx+12,cy+12,60,24,12);
+          ctx.fillStyle='rgba(255,255,255,0.3)';ctx.fill();
+          ctx.font='bold 13px "Noto Sans SC",sans-serif';ctx.fillStyle='#fff';ctx.textAlign='left';
+          ctx.fillText(c.tag,cx+20,cy+30);
+          // type
+          ctx.font='13px "Noto Sans SC",sans-serif';ctx.fillStyle='rgba(255,255,255,0.7)';ctx.textAlign='right';
+          ctx.fillText(c.type,cx+cw-16,cy+30);
+          // emoji
+          ctx.font='44px sans-serif';ctx.textAlign='center';
+          ctx.fillText(c.emoji,cx+cw/2,cy+80);
+          // title
+          ctx.font='bold 26px "Noto Sans SC",sans-serif';ctx.fillStyle='#fff';ctx.textAlign='center';
+          c.title.split('\n').forEach((l,li)=>{ctx.fillText(l,cx+cw/2,cy+120+li*34);});
+          // sub
+          ctx.font='16px "Noto Sans SC",sans-serif';ctx.fillStyle='rgba(255,255,255,0.85)';
+          c.sub.split('\n').forEach((l,li)=>{ctx.fillText(l,cx+cw/2,cy+195+li*22);});
+        });
+
+        // 底部
+        const by = startY + 3*(ch+16) + 10;
+        this.rr(ctx,40,by,W-80,90,16);
+        ctx.fillStyle='#fff';ctx.fill();ctx.strokeStyle='#ffccd5';ctx.lineWidth=1;ctx.stroke();
+        ctx.font='bold 20px "Noto Sans SC",sans-serif';ctx.fillStyle='#ff2442';ctx.textAlign='center';
+        ctx.fillText('📌 使用方法：保存封面图 → 配合对应文案 → 直接发布',W/2,by+35);
+        ctx.font='16px "Noto Sans SC",sans-serif';ctx.fillStyle='#999';
+        ctx.fillText('每种封面针对不同受众，建议5篇都发，测试哪个效果最好',W/2,by+62);
+        if(p.contact){ctx.font='16px "Noto Sans SC",sans-serif';ctx.fillStyle='#aaa';ctx.fillText('📱 '+p.contact,W/2,by+88);}
+      },
+
+      // ── 物料15: 小红书笔记文案（5篇完整文案可复制） ──
+      drawXhsNote(ctx, W, H) {
+        const p = this.getParams();
+        const bgG = ctx.createLinearGradient(0,0,0,H);
+        bgG.addColorStop(0,'#fef9f0'); bgG.addColorStop(0.5,'#fff5e6'); bgG.addColorStop(1,'#ffefd5');
+        ctx.fillStyle=bgG; ctx.fillRect(0,0,W,H);
+
+        // 顶部
+        this.rr(ctx,0,0,W,110,0);
+        const topG=ctx.createLinearGradient(0,0,W,0);
+        topG.addColorStop(0,'#e17055');topG.addColorStop(1,'#fdcb6e');
+        ctx.fillStyle=topG;ctx.fill();
+        ctx.font='bold 34px "Noto Sans SC",sans-serif';ctx.fillStyle='#fff';ctx.textAlign='center';
+        ctx.fillText('📝 小红书推广笔记 · 5篇文案',W/2,60);
+        ctx.font='17px "Noto Sans SC",sans-serif';ctx.fillStyle='rgba(255,255,255,0.85)';
+        ctx.fillText('复制文案 + 配封面图 → 直接发布',W/2,95);
+
+        const notes = [
+          { num:'①', type:'痛点引入型', title:'做小红书还在手动写文案？3分钟AI帮你搞定',
+            body:'每次写笔记花2小时？配图再花1小时？\\n我之前也是这样，直到发现了这个工具...\\n输入主题→AI自动写标题+正文+标签\\n还能一键生成精美卡片配图\\n50+模板随便选 手机电脑都能用',
+            tags:'#小红书运营 #AI写作 #博主必备 #效率工具 #自媒体' },
+          { num:'②', type:'效果对比型', title:'用AI前vs用AI后，小红书运营效率翻10倍',
+            body:'【用AI前】写1条笔记要2小时\\n想标题30分钟 写正文1小时 找配图30分钟\\n一天最多发2条 还经常没灵感\\n\\n【用AI后】3分钟出一条完整笔记\\nAI写文案+自动配图+50+模板排版\\n一天能出10条 质量还更高',
+            tags:'#效率提升 #AI工具 #小红书博主 #内容创作 #运营技巧' },
+          { num:'③', type:'干货教程型', title:'小红书博主必备的AI神器，写文配图排版全搞定',
+            body:'安利一个超好用的AI创作工具👇\\n\\n✅ 输主题→自动写完整笔记\\n✅ 50+精美卡片模板一键生成\\n✅ 违禁词检测 发前扫一遍\\n✅ AI痕迹检测 确保不被识别\\n✅ 10个赛道自动适配策略\\n✅ 爆款标题一次生成10个',
+            tags:'#博主工具 #AI创作 #小红书教程 #运营干货 #效率神器' },
+          { num:'④', type:'数据晒单型', title:'用AI做小红书7天，数据全公开（附方法）',
+            body:'用这个AI工具做了一周小红书\\n数据给大家看看👇\\n\\nDay1: 发了5条笔记 AI3分钟一条\\nDay3: 有2条破500赞\\nDay5: 涨粉300+\\nDay7: 总曝光5w+ 涨粉1000+\\n\\n关键是省了巨多时间 一天就花30分钟',
+            tags:'#小红书涨粉 #数据复盘 #AI运营 #博主日常 #涨粉技巧' },
+          { num:'⑤', type:'工具测评型', title:'测了10个AI写作工具，这个最适合小红书博主',
+            body:'做测评不收广告费 纯个人体验\\n\\n❌ ChatGPT：要翻墙 中文一般\\n❌ 文心一言：泛用型 不懂小红书\\n❌ XX助手：模板少 不能配图\\n\\n✅ 这个工具专为小红书设计\\n• 懂小红书的写法和调性\\n• 50+卡片模板直接出图\\n• 还有违禁词检测+AI痕迹检测',
+            tags:'#AI测评 #写作工具 #小红书运营 #博主推荐 #效率工具' }
+        ];
+
+        const cardH = 230, gap = 12, cardW = W-80;
+        notes.forEach((n, i) => {
+          const cy = 130 + i*(cardH+gap);
+          // 卡片
+          this.rr(ctx,40,cy,cardW,cardH,14);
+          ctx.fillStyle='#fff';ctx.fill();
+          ctx.strokeStyle='#ffe0b2';ctx.lineWidth=1;ctx.stroke();
+          // 编号+类型
+          ctx.font='bold 20px "Noto Sans SC",sans-serif';ctx.fillStyle='#e17055';ctx.textAlign='left';
+          ctx.fillText(n.num+' '+n.type,60,cy+28);
+          // 标题
+          ctx.font='bold 18px "Noto Sans SC",sans-serif';ctx.fillStyle='#333';
+          ctx.fillText('📌 '+n.title,60,cy+58);
+          // 正文预览
+          const bodyLines = n.body.split('\\n');
+          ctx.font='14px "Noto Sans SC",sans-serif';ctx.fillStyle='#555';
+          bodyLines.forEach((l,li)=>{
+            if(li<6) ctx.fillText(l,60,cy+82+li*18);
+          });
+          if(bodyLines.length>6){ctx.fillStyle='#999';ctx.fillText('...',60,cy+82+6*18);}
+          // tags
+          ctx.font='13px "Noto Sans SC",sans-serif';ctx.fillStyle='#ff2442';
+          ctx.fillText(n.tags,60,cy+cardH-16);
+        });
+
+        // 底部
+        const by=130+5*(cardH+gap)+5;
+        this.rr(ctx,40,by,W-80,50,12);
+        ctx.fillStyle='#fff5e6';ctx.fill();
+        ctx.font='bold 16px "Noto Sans SC",sans-serif';ctx.fillStyle='#e17055';ctx.textAlign='center';
+        ctx.fillText('💡 建议：AI生成后加入个人经历/截图，效果更好',W/2,by+32);
+      },
+
+      // ── 物料16: 小红书7天发布计划 ──
+      drawXhsPlan(ctx, W, H) {
+        const p = this.getParams();
+        const bgG = ctx.createLinearGradient(0,0,0,H);
+        bgG.addColorStop(0,'#f0f4ff'); bgG.addColorStop(0.5,'#e8eeff'); bgG.addColorStop(1,'#dde4ff');
+        ctx.fillStyle=bgG; ctx.fillRect(0,0,W,H);
+
+        // 顶部
+        this.rr(ctx,0,0,W,110,0);
+        const topG=ctx.createLinearGradient(0,0,W,0);
+        topG.addColorStop(0,'#4834d4');topG.addColorStop(1,'#686de0');
+        ctx.fillStyle=topG;ctx.fill();
+        ctx.font='bold 34px "Noto Sans SC",sans-serif';ctx.fillStyle='#fff';ctx.textAlign='center';
+        ctx.fillText('📅 7天小红书推广计划',W/2,60);
+        ctx.font='17px "Noto Sans SC",sans-serif';ctx.fillStyle='rgba(255,255,255,0.85)';
+        ctx.fillText('按计划发布，测试反馈，持续优化',W/2,95);
+
+        const days = [
+          { day:'Day 1', title:'痛点引入·测试反应', time:'下午 6:00', type:'痛点型',
+            task:'发布「做小红书还在手动写？」\\n观察点赞/收藏/评论数据', tip:'晚高峰发布流量最大' },
+          { day:'Day 2', title:'干货教程·建立信任', time:'中午 12:00', type:'教程型',
+            task:'发布「博主必备AI神器」\\n详细介绍功能点，配操作截图', tip:'午休时间打开率高' },
+          { day:'Day 3', title:'效果对比·制造反差', time:'晚上 8:00', type:'对比型',
+            task:'发布「用AI前vs用AI后」\\n用数据说话：2小时→3分钟', tip:'配上真实操作截图' },
+          { day:'Day 4', title:'互动回复·维护流量', time:'全天', type:'互动日',
+            task:'回复前3天所有评论\\n私信引导体验试用\\n收集用户反馈', tip:'及时回复提升权重' },
+          { day:'Day 5', title:'数据晒单·社会证明', time:'下午 6:00', type:'晒单型',
+            task:'发布「7天数据全公开」\\n晒使用效果和涨粉数据', tip:'真实数据最有说服力' },
+          { day:'Day 6', title:'工具测评·差异化', time:'中午 12:00', type:'测评型',
+            task:'发布「测了10个AI工具」\\n对比竞品突出优势', tip:'客观测评更有可信度' },
+          { day:'Day 7', title:'复盘优化·定方向', time:'晚上 9:00', type:'复盘日',
+            task:'分析7天数据，找出最佳类型\\n调整下周策略\\n优化表现最好的笔记', tip:'数据驱动持续优化' }
+        ];
+
+        const cardH = 155, gap = 10, startY = 130;
+        days.forEach((d, i) => {
+          const cy = startY + i*(cardH+gap);
+          // 卡片
+          this.rr(ctx,40,cy,W-80,cardH,14);
+          ctx.fillStyle='#fff';ctx.fill();
+          ctx.strokeStyle='#c8d6e5';ctx.lineWidth=1;ctx.stroke();
+          // day 标签
+          this.rr(ctx,40,cy,80,cardH,{tl:14,bl:14,tr:0,br:0}||14);
+          const dg=ctx.createLinearGradient(40,cy,120,cy+cardH);
+          const colors=['#ff6b6b','#ffa502','#2ed573','#1e90ff','#ff6348','#a29bfe','#4834d4'];
+          dg.addColorStop(0,colors[i]);dg.addColorStop(1,colors[i]+'cc');
+          ctx.fillStyle=dg;ctx.fill();
+          ctx.font='bold 16px "Noto Sans SC",sans-serif';ctx.fillStyle='#fff';ctx.textAlign='center';
+          ctx.save();ctx.translate(80,cy+cardH/2);
+          ctx.fillText(d.day,0,-12);
+          ctx.font='12px "Noto Sans SC",sans-serif';
+          ctx.fillText(d.type,0,8);
+          ctx.restore();
+          // 内容
+          ctx.textAlign='left';
+          ctx.font='bold 18px "Noto Sans SC",sans-serif';ctx.fillStyle='#2d3436';
+          ctx.fillText(d.title,135,cy+28);
+          ctx.font='13px "Noto Sans SC",sans-serif';ctx.fillStyle='#636e72';
+          ctx.fillText('⏰ '+d.time,135,cy+48);
+          // 任务
+          ctx.font='14px "Noto Sans SC",sans-serif';ctx.fillStyle='#444';
+          d.task.split('\\n').forEach((l,li)=>{ctx.fillText(l,135,cy+72+li*20);});
+          // tip
+          ctx.font='13px "Noto Sans SC",sans-serif';ctx.fillStyle='#4834d4';
+          ctx.fillText('💡 '+d.tip,135,cy+cardH-16);
+        });
+
+        // 底部
+        const by = startY + 7*(cardH+gap) + 5;
+        this.rr(ctx,40,by,W-80,80,14);
+        ctx.fillStyle='#4834d4';ctx.fill();
+        ctx.font='bold 20px "Noto Sans SC",sans-serif';ctx.fillStyle='#fff';ctx.textAlign='center';
+        ctx.fillText('🔄 第2周起：重复最佳类型 + 尝试新角度',W/2,by+32);
+        ctx.font='16px "Noto Sans SC",sans-serif';ctx.fillStyle='rgba(255,255,255,0.8)';
+        ctx.fillText('核心原则：先量后质 → 数据筛选 → 放大爆款',W/2,by+58);
+        if(p.contact){ctx.font='16px "Noto Sans SC",sans-serif';ctx.fillStyle='#aaa';ctx.textAlign='center';ctx.fillText('📱 '+p.contact,W/2,by+95);}
+      },
+
       downloadCurrent() {
         const canvas = document.getElementById('promo-canvas');
         if (!canvas) return;
@@ -10157,8 +10377,8 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
       },
 
       async downloadAll() {
-        const tabs = ['templates','features','pricing','demo','customdev','cover','mobile','aiimg','dashboard','tools','tracks','desc','reply'];
-        const names = ['卡片模板展示','功能亮点','价格方案','效果演示','定制开发','主图封面','手机端效果','AI配图效果','数据看板','工具箱功能','赛道切换','商品描述','私信话术'];
+        const tabs = ['templates','features','pricing','demo','customdev','cover','mobile','aiimg','dashboard','tools','tracks','desc','reply','xhscover','xhsnote','xhsplan'];
+        const names = ['卡片模板展示','功能亮点','价格方案','效果演示','定制开发','主图封面','手机端效果','AI配图效果','数据看板','工具箱功能','赛道切换','商品描述','私信话术','小红书封面','小红书文案','小红书发布计划'];
         for (let i = 0; i < tabs.length; i++) {
           this.switchTab(tabs[i]);
           await new Promise(r => setTimeout(r, 200));
