@@ -1653,7 +1653,7 @@
         <div class="nav-item" data-page="multi-account">
           <span class="icon">👥</span> 多账号管理
         </div>
-        <div class="nav-item" data-page="promo">
+        <div class="nav-item" data-page="promo" id="sidebar-promo-nav" style="display:none;">
           <span class="icon">📢</span> 推广物料
         </div>
         <div class="nav-item" onclick="openModal('modal-templates')" style="cursor:pointer;">
@@ -1747,7 +1747,7 @@
         <div class="nav-item mob-nav" data-page="branding" onclick="mobileSwitchPage('branding')"><span class="icon">🎀</span> 账号包装</div>
         <div class="nav-item mob-nav" data-page="account" onclick="mobileSwitchPage('account')"><span class="icon">📈</span> 账号数据</div>
         <div class="nav-item mob-nav" data-page="multi-account" onclick="mobileSwitchPage('multi-account')"><span class="icon">👥</span> 多账号管理</div>
-        <div class="nav-item mob-nav" data-page="promo" onclick="mobileSwitchPage('promo')"><span class="icon">📢</span> 推广物料</div>
+        <div class="nav-item mob-nav" data-page="promo" onclick="mobileSwitchPage('promo')" id="drawer-promo-nav" style="display:none;"><span class="icon">📢</span> 推广物料</div>
         <div class="nav-item mob-nav" onclick="openModal('modal-settings'); toggleMobileDrawer();"><span class="icon">⚙️</span> API 设置</div>
       </div>
       <div class="drawer-credits-line" id="drawer-credits" onclick="openModal('modal-redeem'); toggleMobileDrawer();" style="display:none;">
@@ -13811,7 +13811,9 @@ Style: ${stylePrompt}
         case 'img-tool': break;
         case 'card-lib': TemplateLibrary.render(); break;
         case 'ai-card': _updateAICardTmplCount(); break;
-        case 'promo': PromoMaterial.init(); break;
+        case 'promo':
+          if (!currentUser || currentUser.username !== 'lin') { switchPage('dashboard'); return; }
+          PromoMaterial.init(); break;
       }
     }
 
@@ -17190,6 +17192,12 @@ Style: ${stylePrompt}
         document.getElementById('user-display-name').textContent = currentUser.nickname || currentUser.username;
         document.getElementById('user-avatar-icon').textContent = (currentUser.nickname || currentUser.username || '👤').charAt(0);
       }
+      // 推广物料仅 lin 账号可见
+      const isPromoUser = currentUser && currentUser.username === 'lin';
+      const sidebarPromo = document.getElementById('sidebar-promo-nav');
+      const drawerPromo = document.getElementById('drawer-promo-nav');
+      if (sidebarPromo) sidebarPromo.style.display = isPromoUser ? '' : 'none';
+      if (drawerPromo) drawerPromo.style.display = isPromoUser ? '' : 'none';
       // 加载AI积分信息
       loadCreditsInfo();
     }
