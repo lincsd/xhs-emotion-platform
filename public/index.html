@@ -3141,6 +3141,8 @@
           <button class="btn btn-sm" onclick="PromoMaterial.switchTab('dashboard')" id="promo-tab-dashboard">📊 数据看板</button>
           <button class="btn btn-sm" onclick="PromoMaterial.switchTab('tools')" id="promo-tab-tools">🧰 工具箱</button>
           <button class="btn btn-sm" onclick="PromoMaterial.switchTab('tracks')" id="promo-tab-tracks">🎯 赛道切换</button>
+          <button class="btn btn-sm" onclick="PromoMaterial.switchTab('desc')" id="promo-tab-desc">📋 商品描述</button>
+          <button class="btn btn-sm" onclick="PromoMaterial.switchTab('reply')" id="promo-tab-reply">💬 私信话术</button>
         </div>
 
         <!-- 画布预览区 -->
@@ -8894,7 +8896,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
 
       switchTab(tab) {
         this.currentTab = tab;
-        ['templates','features','pricing','demo','customdev','cover','mobile','aiimg','dashboard','tools','tracks'].forEach(t => {
+        ['templates','features','pricing','demo','customdev','cover','mobile','aiimg','dashboard','tools','tracks','desc','reply'].forEach(t => {
           const btn = document.getElementById(`promo-tab-${t}`);
           if (btn) { btn.style.background = t === tab ? 'var(--primary)' : ''; btn.style.color = t === tab ? '#fff' : ''; }
         });
@@ -8928,6 +8930,8 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           case 'dashboard': this.drawDashboard(ctx, W, H); break;
           case 'tools': this.drawTools(ctx, W, H); break;
           case 'tracks': this.drawTracks(ctx, W, H); break;
+          case 'desc': this.drawDesc(ctx, W, H); break;
+          case 'reply': this.drawReply(ctx, W, H); break;
         }
       },
 
@@ -9942,6 +9946,185 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         if(p.contact){ctx.font='18px "Noto Sans SC",sans-serif';ctx.fillStyle='#999';ctx.fillText('📱 '+p.contact,W/2,by+120);}
       },
 
+      // ── 物料12: 商品描述 ──
+      drawDesc(ctx, W, H) {
+        const p = this.getParams();
+        // 背景
+        const bgG = ctx.createLinearGradient(0,0,0,H);
+        bgG.addColorStop(0,'#fef9f4'); bgG.addColorStop(0.5,'#fff5eb'); bgG.addColorStop(1,'#fef0e0');
+        ctx.fillStyle=bgG; ctx.fillRect(0,0,W,H);
+
+        // 顶部品牌条
+        this.rr(ctx,0,0,W,120,0);
+        const topG=ctx.createLinearGradient(0,0,W,0);
+        topG.addColorStop(0,'#ff6b35');topG.addColorStop(1,'#ff2442');
+        ctx.fillStyle=topG;ctx.fill();
+        ctx.font='bold 36px "Noto Sans SC",sans-serif';ctx.fillStyle='#fff';ctx.textAlign='center';
+        ctx.fillText('📋 闲鱼商品描述 · 复制即用',W/2,72);
+        ctx.font='18px "Noto Sans SC",sans-serif';ctx.fillStyle='rgba(255,255,255,0.85)';
+        ctx.fillText('4套方案覆盖不同价位',W/2,105);
+
+        // 4个方案卡片
+        const plans = [
+          { tag:'💎 源码版', price:'¥388', title:'完整源码+商用授权',
+            items:['✅ 完整前后端源码','✅ 50+卡片模板','✅ 10大赛道策略','✅ 积分付费系统','✅ 邀请返佣机制','✅ 10分钟部署教程','✅ API申请教程','✅ 售后答疑'] },
+          { tag:'🥇 月卡', price:'¥29.9', title:'500积分/月 打开就用',
+            items:['📝 AI写完整笔记','🃏 50+卡片模板','🔍 爆款分析','📅 排期日历','🚫 违禁词检测','🤖 AI痕迹检测','🔄 一条改5版','📰 10个爆款标题'] },
+          { tag:'🔧 部署服务', price:'¥158', title:'帮你搭建专属平台',
+            items:['✅ 部署到你服务器','✅ 绑定你的域名','✅ 配好AI密钥','✅ 调通所有功能','✅ 运维教程','👑 管理员后台','💰 收费系统','📱 全端适配'] },
+          { tag:'🎁 体验包', price:'¥9.9', title:'100积分≈25条笔记',
+            items:['📝 AI写笔记+配图','🃏 精美卡片排版','🔍 分析爆款套路','📅 发布计划','🚫 违禁词检查','🤖 AI痕迹检测','🔄 多版本改写','💬 评论话术'] }
+        ];
+
+        const cardW = (W-100)/2, cardH = 290, startY = 150;
+        plans.forEach((pl, i) => {
+          const cx = 40 + (i%2)*(cardW+20);
+          const cy = startY + Math.floor(i/2)*(cardH+20);
+          // 卡片背景
+          this.rr(ctx,cx,cy,cardW,cardH,16);
+          ctx.fillStyle='#fff';ctx.fill();
+          ctx.strokeStyle='#ffe0cc';ctx.lineWidth=1.5;ctx.stroke();
+          // tag + price
+          this.rr(ctx,cx,cy,cardW,52,{tl:16,tr:16,bl:0,br:0}||16);
+          const tg=ctx.createLinearGradient(cx,cy,cx+cardW,cy);
+          tg.addColorStop(0,'#fff5eb');tg.addColorStop(1,'#ffe8d5');
+          ctx.fillStyle=tg;ctx.fill();
+          ctx.font='bold 22px "Noto Sans SC",sans-serif';ctx.fillStyle='#d35400';ctx.textAlign='left';
+          ctx.fillText(pl.tag,cx+16,cy+35);
+          ctx.font='bold 26px "Noto Sans SC",sans-serif';ctx.fillStyle='#ff2442';ctx.textAlign='right';
+          ctx.fillText(pl.price,cx+cardW-16,cy+37);
+          // subtitle
+          ctx.font='16px "Noto Sans SC",sans-serif';ctx.fillStyle='#666';ctx.textAlign='left';
+          ctx.fillText(pl.title,cx+16,cy+74);
+          // items
+          pl.items.forEach((it, j) => {
+            ctx.font='15px "Noto Sans SC",sans-serif';ctx.fillStyle='#444';
+            ctx.fillText(it, cx+16, cy+100+j*24);
+          });
+        });
+
+        // 中间分隔 - 使用须知
+        const noticeY = startY + 2*(cardH+20) + 20;
+        this.rr(ctx,40,noticeY,W-80,180,16);
+        ctx.fillStyle='#fff8f0';ctx.fill();
+        ctx.strokeStyle='#ffcc80';ctx.lineWidth=1;ctx.stroke();
+        ctx.font='bold 24px "Noto Sans SC",sans-serif';ctx.fillStyle='#e65100';ctx.textAlign='center';
+        ctx.fillText('⚠️ 使用须知',W/2,noticeY+35);
+        const notices = [
+          '• AI内容仅供参考灵感，建议融入个人经历后发布',
+          '• 纯Python后端 零依赖 标准库直接跑',
+          '• Gemini 2.5模型（免费额度就够用）',
+          '• 手机电脑自适应 数据云端同步',
+          '• 支持多API Key轮询防限流'
+        ];
+        notices.forEach((n,i) => {
+          ctx.font='16px "Noto Sans SC",sans-serif';ctx.fillStyle='#5d4037';ctx.textAlign='left';
+          ctx.fillText(n,80,noticeY+65+i*24);
+        });
+
+        // 底部 - 推荐文案
+        const recY = noticeY + 210;
+        this.rr(ctx,40,recY,W-80,320,16);
+        ctx.fillStyle='#fff';ctx.fill();
+        ctx.strokeStyle='#e0e0e0';ctx.lineWidth=1;ctx.stroke();
+        ctx.font='bold 22px "Noto Sans SC",sans-serif';ctx.fillStyle='#333';ctx.textAlign='center';
+        ctx.fillText('📝 推荐标题（复制即用）',W/2,recY+35);
+        const titles = [
+          '① 小红书AI自动写笔记配图排版全套源码 可二开可商用',
+          '② 小红书AI写文神器 自动生成笔记配图排版 月卡',
+          '③ 帮你搭建小红书AI创作平台 独立部署可收费运营',
+          '④ 小红书AI自动写笔记神器 9.9体验 生成文案配图'
+        ];
+        titles.forEach((t,i) => {
+          ctx.font='16px "Noto Sans SC",sans-serif';ctx.fillStyle='#1a73e8';ctx.textAlign='left';
+          ctx.fillText(t,70,recY+70+i*32);
+        });
+        // 分类建议
+        ctx.font='bold 18px "Noto Sans SC",sans-serif';ctx.fillStyle='#666';ctx.textAlign='left';
+        ctx.fillText('📁 分类建议：数码 > 软件/系统 或 其他 > 虚拟商品',70,recY+210);
+        ctx.font='16px "Noto Sans SC",sans-serif';ctx.fillStyle='#999';
+        ctx.fillText('💡 标题含关键词：小红书/AI/笔记/配图/自动 更易搜到',70,recY+245);
+        ctx.font='14px "Noto Sans SC",sans-serif';ctx.fillStyle='#aaa';
+        ctx.fillText('详细文案见「闲鱼上架_复制粘贴版.txt」',70,recY+275);
+
+        // 底部CTA
+        const bottomY = recY + 340;
+        this.rr(ctx,W/2-160,bottomY,320,50,25);
+        const ctaG=ctx.createLinearGradient(W/2-160,0,W/2+160,0);
+        ctaG.addColorStop(0,'#ff2442');ctaG.addColorStop(1,'#ff6b35');
+        ctx.fillStyle=ctaG;ctx.fill();
+        ctx.font='bold 22px "Noto Sans SC",sans-serif';ctx.fillStyle='#fff';ctx.textAlign='center';
+        ctx.fillText('4套方案 · 总有一款适合你',W/2,bottomY+33);
+        if(p.contact){ctx.font='18px "Noto Sans SC",sans-serif';ctx.fillStyle='#999';ctx.fillText('📱 '+p.contact,W/2,bottomY+75);}
+      },
+
+      // ── 物料13: 私信回复话术 ──
+      drawReply(ctx, W, H) {
+        const p = this.getParams();
+        // 背景
+        const bgG = ctx.createLinearGradient(0,0,0,H);
+        bgG.addColorStop(0,'#f0f7ff'); bgG.addColorStop(0.5,'#e8f4fd'); bgG.addColorStop(1,'#dbeafe');
+        ctx.fillStyle=bgG; ctx.fillRect(0,0,W,H);
+
+        // 顶部
+        this.rr(ctx,0,0,W,120,0);
+        const topG=ctx.createLinearGradient(0,0,W,0);
+        topG.addColorStop(0,'#1e88e5');topG.addColorStop(1,'#7c4dff');
+        ctx.fillStyle=topG;ctx.fill();
+        ctx.font='bold 36px "Noto Sans SC",sans-serif';ctx.fillStyle='#fff';ctx.textAlign='center';
+        ctx.fillText('💬 闲鱼私信回复话术',W/2,65);
+        ctx.font='18px "Noto Sans SC",sans-serif';ctx.fillStyle='rgba(255,255,255,0.85)';
+        ctx.fillText('不同场景 · 直接复制 · 促成成交',W/2,100);
+
+        // 场景话术卡片
+        const scenes = [
+          { icon:'👋', title:'买家初次咨询', trigger:'"这个怎么用？" / "能看演示吗？"',
+            reply:'你好～感谢关注！\n我们是小红书AI创作平台，输入主题就能自动生成完整笔记（标题+正文+配图+标签）\n还有50+精美卡片模板一键排版 🎨\n我发个在线演示链接给你体验一下？完全免费试用～' },
+          { icon:'💰', title:'问价格/砍价', trigger:'"能便宜点吗？" / "最低多少？"',
+            reply:'现在有体验包 ¥9.9 送100积分（约25条笔记）\n可以先试试效果～\n觉得好用再升级月卡 ¥29.9（500积分）\n月卡性价比最高 算下来一条笔记才6分钱 😄' },
+          { icon:'🤔', title:'问效果/犹豫中', trigger:'"AI写的能用吗？" / "会不会限流？"',
+            reply:'放心～我们有三重保障：\n① 违禁词检测 — 发前自动扫描\n② AI痕迹检测 — 确保看不出是AI写的\n③ 一键改写 — 一条变5个版本\n建议在AI基础上加入个人经历就完美了\n要不先看看效果？我发演示给你' },
+          { icon:'🔧', title:'问技术/部署', trigger:'"需要什么技术？" / "怎么部署？"',
+            reply:'零技术门槛！两种方式：\n① 直接用：打开网页就能用 手机电脑都行\n② 买源码自己部署：纯Python零依赖 有详细教程\n③ 代部署服务 ¥158：我帮你搭好 绑你域名\n不管哪种 10分钟就能用上～' },
+          { icon:'🎯', title:'已下单/使用引导', trigger:'买家下单后',
+            reply:'感谢购买！🎉\n① 平台地址：[发链接]\n② 使用教程：进去后点左侧菜单就能看到所有功能\n③ 建议先试「一键创作」输入你的赛道主题\n④ 有问题随时问我 售后包答疑 💪\n觉得好用帮忙点个好评哦～' },
+          { icon:'🔄', title:'犹豫要走/挽留', trigger:'"我再看看" / "考虑一下"',
+            reply:'好的没关系～\n我们现在有 ¥9.9 体验包 先试试效果\n用了不满意随时跟我说\n而且今天下单送额外20积分 🎁\n链接我先发你 有需要随时找我～' }
+        ];
+
+        const cardW = W-80, cardH = 185, startY = 145, gap = 12;
+        scenes.forEach((s, i) => {
+          const cy = startY + i * (cardH + gap);
+          // 卡片
+          this.rr(ctx,40,cy,cardW,cardH,14);
+          ctx.fillStyle='#fff';ctx.fill();
+          ctx.strokeStyle='#c8ddf0';ctx.lineWidth=1;ctx.stroke();
+          // icon+title
+          ctx.font='bold 22px "Noto Sans SC",sans-serif';ctx.fillStyle='#1565c0';ctx.textAlign='left';
+          ctx.fillText(s.icon+' '+s.title,60,cy+30);
+          // trigger
+          ctx.font='14px "Noto Sans SC",sans-serif';ctx.fillStyle='#999';
+          ctx.fillText('🔔 触发：'+s.trigger,60,cy+52);
+          // 分隔线
+          ctx.beginPath();ctx.moveTo(60,cy+62);ctx.lineTo(40+cardW-20,cy+62);
+          ctx.strokeStyle='#e3f2fd';ctx.lineWidth=1;ctx.stroke();
+          // 回复内容 - 多行
+          const lines = s.reply.split('\n');
+          ctx.font='15px "Noto Sans SC",sans-serif';ctx.fillStyle='#333';
+          lines.forEach((line, li) => {
+            if(li < 6) ctx.fillText(line, 60, cy+82+li*19);
+          });
+        });
+
+        // 底部提示
+        const bottomY = startY + 6*(cardH+gap) + 5;
+        this.rr(ctx,40,bottomY,W-80,60,12);
+        ctx.fillStyle='#e3f2fd';ctx.fill();
+        ctx.font='bold 18px "Noto Sans SC",sans-serif';ctx.fillStyle='#1565c0';ctx.textAlign='center';
+        ctx.fillText('💡 话术核心：先给价值 → 降低门槛 → 促成体验 → 引导好评',W/2,bottomY+38);
+        if(p.contact){ctx.font='16px "Noto Sans SC",sans-serif';ctx.fillStyle='#888';ctx.fillText('📱 '+p.contact,W/2,bottomY+75);}
+      },
+
       downloadCurrent() {
         const canvas = document.getElementById('promo-canvas');
         if (!canvas) return;
@@ -9962,8 +10145,8 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
       },
 
       async downloadAll() {
-        const tabs = ['templates','features','pricing','demo','customdev','cover','mobile','aiimg','dashboard','tools','tracks'];
-        const names = ['卡片模板展示','功能亮点','价格方案','效果演示','定制开发','主图封面','手机端效果','AI配图效果','数据看板','工具箱功能','赛道切换'];
+        const tabs = ['templates','features','pricing','demo','customdev','cover','mobile','aiimg','dashboard','tools','tracks','desc','reply'];
+        const names = ['卡片模板展示','功能亮点','价格方案','效果演示','定制开发','主图封面','手机端效果','AI配图效果','数据看板','工具箱功能','赛道切换','商品描述','私信话术'];
         for (let i = 0; i < tabs.length; i++) {
           this.switchTab(tabs[i]);
           await new Promise(r => setTimeout(r, 200));
