@@ -3741,7 +3741,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260318d'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260320a'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -17194,6 +17194,7 @@ Style: ${stylePrompt}
       }
       // 推广物料仅 lin 账号可见
       const isPromoUser = currentUser && currentUser.username === 'lin';
+      console.log('[promo] currentUser:', currentUser?.username, 'isPromoUser:', isPromoUser);
       const sidebarPromo = document.getElementById('sidebar-promo-nav');
       const drawerPromo = document.getElementById('drawer-promo-nav');
       if (sidebarPromo) sidebarPromo.style.display = isPromoUser ? '' : 'none';
