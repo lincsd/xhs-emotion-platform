@@ -1735,6 +1735,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         elif path.startswith('/api/export/'):
             post_id = path.split('/')[-1]
             return self._export_post(post_id)
+        elif path.startswith('/api/note-images/'):
+            return self._serve_note_image(path)
         else:
             # 静态文件
             return super().do_GET()
@@ -2334,6 +2336,31 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         self._send_json({'message': '记录成功'})
 
     # ---- 导出 ----
+    def _serve_note_image(self, path):
+        """Serve images from xhs_notes/ directory safely."""
+        import posixpath
+        # Strip prefix: /api/note-images/数学_三下_.../slide_2.jpg -> 数学_三下_.../slide_2.jpg
+        rel = path[len('/api/note-images/'):]
+        rel = urllib.parse.unquote(rel)
+        # Security: prevent path traversal
+        rel = posixpath.normpath(rel)
+        if rel.startswith('..') or rel.startswith('/') or ':' in rel:
+            return self._send_json({'error': 'Invalid path'}, 403)
+        full_path = os.path.join(BASE_DIR, 'xhs_notes', rel)
+        if not os.path.isfile(full_path):
+            return self._send_json({'error': 'Image not found'}, 404)
+        ext = os.path.splitext(full_path)[1].lower()
+        mime_map = {'.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.gif': 'image/gif', '.webp': 'image/webp'}
+        content_type = mime_map.get(ext, 'application/octet-stream')
+        with open(full_path, 'rb') as f:
+            data = f.read()
+        self.send_response(200)
+        self.send_header('Content-Type', content_type)
+        self.send_header('Content-Length', str(len(data)))
+        self.send_header('Cache-Control', 'public, max-age=604800')
+        self.end_headers()
+        self.wfile.write(data)
+
     def _export_post(self, post_id):
         conn = self._get_db()
         row = conn.execute('SELECT * FROM posts WHERE id = ?', (post_id,)).fetchone()

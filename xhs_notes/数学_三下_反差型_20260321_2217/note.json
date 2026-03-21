@@ -174,5 +174,80 @@
   },
   "pinned_comment": "第一个陷阱题答案揭晓：840 - 840 ÷ 4 = 840 - 210 = 630！你和娃都做对了吗？后续两个陷阱题的解析我会在下期笔记或评论区补充哦，记得关注不迷路！",
   "generated_at": "2026-03-21 22:23:40",
-  "pipeline": "v1_6role_note"
+  "pipeline": "v2_7role_note",
+  "slide_prompts": [
+    {
+      "slide": 1,
+      "type": "封面",
+      "card_id": null,
+      "prompt": "IMPORTANT: All visible text MUST be Simplified Chinese. LARGE BOLD thick-stroke rounded sans-serif.\n\nA vibrant and engaging vertical 3:4 aspect ratio Xiaohongshu cover image designed for high click-th"
+    },
+    {
+      "slide": 2,
+      "type": "错误展示",
+      "card_id": "T1-02",
+      "prompt": "IMPORTANT: All visible text MUST be Simplified Chinese. LARGE BOLD thick-stroke rounded sans-serif.\n\nA vibrant and engaging vertical 3:4 aspect ratio Xiaohongshu carousel slide, designed as an \"Error "
+    },
+    {
+      "slide": 3,
+      "type": "正确揭秘",
+      "card_id": "T1-02",
+      "prompt": "IMPORTANT: All visible text MUST be Simplified Chinese. LARGE BOLD thick-stroke rounded sans-serif.\n\nA vibrant, engaging, and clear educational carousel slide for Xiaohongshu, portrait orientation, 3:"
+    },
+    {
+      "slide": 4,
+      "type": "口诀总结/陷阱扩展",
+      "card_id": null,
+      "prompt": "IMPORTANT: All visible text MUST be Simplified Chinese. LARGE BOLD thick-stroke rounded sans-serif.\n\nA vibrant and engaging vertical 3:4 aspect ratio Xiaohongshu educational carousel content slide (pa"
+    },
+    {
+      "slide": 5,
+      "type": "互动挑战/更多陷阱",
+      "card_id": "T1-01",
+      "prompt": "IMPORTANT: All visible text MUST be Simplified Chinese. LARGE BOLD thick-stroke rounded sans-serif.\n\nA vibrant and engaging vertical 3:4 aspect ratio Xiaohongshu educational carousel slide, designed a"
+    },
+    {
+      "slide": 6,
+      "type": "互动引导/系列预告",
+      "card_id": null,
+      "prompt": "IMPORTANT: All visible text MUST be Simplified Chinese. LARGE BOLD thick-stroke rounded sans-serif.\n\nA vibrant, warm, and interactive Xiaohongshu educational carousel slide, portrait orientation, 3:4 "
+    }
+  ],
+  "slide_images": [
+    {
+      "slide": 1,
+      "file": "cover.jpg",
+      "status": "skip(cover)"
+    },
+    {
+      "slide": 2,
+      "file": "slide_2.jpg",
+      "status": "ok",
+      "size": 634815
+    },
+    {
+      "slide": 3,
+      "file": "slide_3.jpg",
+      "status": "ok",
+      "size": 684540
+    },
+    {
+      "slide": 4,
+      "file": "slide_4.jpg",
+      "status": "ok",
+      "size": 522577
+    },
+    {
+      "slide": 5,
+      "file": "slide_5.jpg",
+      "status": "ok",
+      "size": 564766
+    },
+    {
+      "slide": 6,
+      "file": "slide_6.jpg",
+      "status": "ok",
+      "size": 630682
+    }
+  ]
 }
