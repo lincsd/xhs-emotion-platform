@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260322c';
+      var BUILD='20260322d';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);}
@@ -1656,6 +1656,9 @@
         <div class="nav-item" data-page="prompt-lib">
           <span class="icon">🧪</span> Prompt工程库
         </div>
+        <div class="nav-item" data-page="note-workshop">
+          <span class="icon">📝</span> 笔记工坊
+        </div>
       </div>
       <div class="nav-group">
         <div class="nav-group-title">账号管理</div>
@@ -3249,6 +3252,15 @@
         </div>
       </section>
 
+      <!-- ===== 笔记工坊页面 ===== -->
+      <section id="page-note-workshop" class="page hidden">
+        <div class="section-card">
+          <h2 class="section-title">📝 笔记工坊</h2>
+          <p class="section-desc">六角色 AI 流水线 · 自动生成小红书笔记 · 标题/正文/封面/标签一站式生产</p>
+          <div id="nw-container"></div>
+        </div>
+      </section>
+
     </main>
   </div>
 
@@ -3807,7 +3819,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260322c'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260322d'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -9870,6 +9882,348 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
     })();
 
 
+    // ============ 📝 笔记工坊模块 ============
+    const NoteWorkshop = (() => {
+      let inited = false;
+      /* -- 已生成笔记数据 (由 generate_xhs_note.py 产出) -- */
+      const NOTES = [
+        {
+          note_id: "数学_三下_反差型_20260321_2217",
+          title: "三年级数学陷阱题！🤯 90%家长都会错，答案你绝对想不到！",
+          template: "反差型",
+          card_ids: ["T1-01","T1-02","T1-03"],
+          total: 57, verdict: "PASS",
+          scores: {title_appeal:10,content_quality:9,knowledge_accuracy:10,readability:9,viral_potential:10,compliance:9},
+          predicted: {likes:"5k-15k",saves:"3k-8k",comments:"500-1.5k"},
+          hashtags: "#三年级数学 #小学数学 #数学易错题 #家长辅导 #作业辅导 #数学混合运算 #数学学习技巧 #孩子学习 #小学三年级",
+          generated_at: "2026-03-21 22:23:40",
+          narrative_arc: "从家长辅导作业的痛点切入，抛出一道看似简单实则暗藏陷阱的计算题，先展示90%人会犯的错误，再揭示正确解法和背后的数学原理，最后引申出其他易错点，激发用户求知欲和分享欲。",
+          emotion_curve: ["好奇/自信","尝试(可能做错)","震惊/意外","恍然大悟","分享冲动"],
+          carousel: [
+            {slide:1,type:"封面",card_id:"T1-02",desc:"大字展示题目：840 - 840 ÷ 4 = ?。配合强hook：'90%的大人都做错！你家娃能对吗？😱'"},
+            {slide:2,type:"错误展示",card_id:"T1-02",desc:"展示最常见的错误做法并用醒目红色❌标记"},
+            {slide:3,type:"正确揭秘",card_id:"T1-02",desc:"揭示正确解法：840÷4=210, 840-210=630，用绿色✅标记"},
+            {slide:4,type:"口诀总结",card_id:null,desc:"总结卡片：📝 混合运算口诀：先乘除，后加减，同级运算从左边！"},
+            {slide:5,type:"互动挑战",card_id:"T1-01",desc:"结合T1-01和T1-03，设计'家长易错题挑战！'"},
+            {slide:6,type:"互动引导",card_id:null,desc:"呼吁用户：评论区告诉我你的第一反应！💬 收藏➕转发！"}
+          ],
+          title_candidates: [
+            {title:"90%家长算错的送命题，你家娃能对吗？😱别再坑娃了！",score:9},
+            {title:"震惊！这道小学数学题，90%大人都做错，你确定吗？🤔",score:8},
+            {title:"辅导作业必看👀：90%家长踩坑的数学易错点，你家娃别再错了！",score:8},
+            {title:"三年级数学陷阱题！🤯 90%家长都会错，答案你绝对想不到！",score:9},
+            {title:"小学数学0÷5和5÷0，你真分得清吗？90%大人看了都懵！😵\u200d💫",score:7}
+          ],
+          body: "哎呀，家有神兽，辅导作业真是每天的\u201c渡劫\u201d啊！🧘\u200d♀️ 最近发现三年级数学里藏着好多\u201c小陷阱\u201d，连我这个自诩\u201c数学还行\u201d的老母亲都差点踩雷！今天就给大家分享3个超容易错的题，90%的家长都可能答错哦！你家娃能对吗？🤔\n\n---\n\n**第一个陷阱：先乘除后加减，你别被顺序骗！**\n\n来，先试试这道题：`840 - 840 ÷ 4 = ?`\n\n你的第一反应是不是 `840 - 840 = 0`，然后 `0 ÷ 4 = 0`？⚡️ 停！大错特错！❌ 如果你得出0，那恭喜你，和90%的人犯了同样的错误！\n\n小学数学老师会告诉你，混合运算要\u201c先乘除后加减\u201d！📝 这可是铁律！\n\n所以正确步骤是：\n1.  先算除法：`840 ÷ 4 = 210`\n2.  再算减法：`840 - 210 = 630`\n✅ 答案是630！是不是瞬间恍然大悟？💡 记住口诀：**先乘除后加减，别被顺序骗！**\n\n---\n\n**第二个陷阱：关于\u201c0\u201d的除法，真的不简单！**\n\n我们再来看一组迷惑行为：`0 ÷ 5 = ?` 和 `5 ÷ 0 = ?`\n\n是不是觉得它们都一样，或者一个等于0一个等于5？😅\n这两个\u201c0\u201d的位置一变，含义可就天差地别了！\n\n1.  `0 ÷ 5 = 0`。你想想，0个苹果🍎分给5个人，每个人是不是0个？没错，就是0！\n2.  但是 `5 ÷ 0` 呢？这个可是**无意义**的！想象一下，5个苹果要分给0个人，这根本没法分啊！🤯 数学上规定，除数不能为0。\n\n所以口诀来啦：**零除谁都是零，谁除零都不行！** 💡 是不是清晰多了？\n\n---\n\n**第三个陷阱：有余数的除法，余数必须\u201c小小\u201d的！**\n\n最后一个，有余数的除法！比如 `25 ÷ 4 = ? ... ?`\n\n有些孩子（甚至大人）会算出 `25 ÷ 4 = 5 ... 5`。 ❌ 错啦！这里面的\u201c坑\u201d可不小哦！\n\n记住一个铁律：**余数必须比除数小！** ⚡️ 这里的余数5比除数4还大，说明商算小了，还能再分一次呢！\n\n正确答案是：\n`25 ÷ 4 = 6 ... 1` ✅ 因为1比4小，这就对了！\n\n口诀帮你记：**余数小小不超除，超了就要加一商！** 📝 这样就再也不会算错啦！\n\n---\n\n这3个三年级数学陷阱题，你和孩子中招了吗？评论区告诉我你的第一反应是啥？💬\n\n觉得有用的话，赶紧点赞收藏⭐，转发给身边的家长朋友们，一起避坑！这些知识点真的太重要了，搞懂了孩子才能少走弯路！\n\n下次我再给大家挖挖三年级数学里还有哪些\u201c隐藏款\u201d易错点！拜拜👋\n\n#小学数学 #三年级数学 #数学陷阱题 #辅导作业 #学习方法 #家长必看 #教育干货 #避坑指南",
+          strengths: [
+            "标题吸引力极强，利用数字和疑问句制造悬念和共鸣",
+            "内容结构清晰，每个陷阱题都包含问题、常见错误、正确解法和口诀",
+            "知识点解释准确无误，符合小学三年级数学教学要求",
+            "排版和emoji使用恰到好处，增强趣味性和可读性",
+            "内容具有高度传播潜力，切中家长辅导作业的痛点",
+            "互动性强，通过提问鼓励用户在评论区分享经验"
+          ],
+          issues: ["'90%家长都会错'属于夸大性表述，在教育内容中应尽量避免"],
+          suggestions: [
+            "可替换为更温和说法，如'很多家长容易忽略'",
+            "增加引导孩子思考的提示，提升教育指导性",
+            "封面Prompt补充具体色彩方案"
+          ],
+          pinned_comment: "第一个陷阱题答案揭晓：840 - 840 ÷ 4 = 840 - 210 = 630！你和娃都做对了吗？后续两个陷阱题的解析我会在下期笔记或评论区补充哦，记得关注不迷路！",
+          interaction_hooks: {
+            comment_guide:"你家娃能做对这道题吗？评论区分享你还遇到过哪些三年级数学'坑'！",
+            save_guide:"赶紧收藏起来，下次辅导作业前拿出来看看，避免踩雷！",
+            share_guide:"转发给身边的家长朋友们，一起帮孩子避开这些数学陷阱！"
+          },
+          best_post_time: "周二/周三晚8点"
+        }
+      ];
+
+      const TEMPLATE_META = {
+        '反差型': {icon:'⚡',color:'#e74c3c',desc:'设置认知冲突→暴露错误→揭示正确→引发讨论',cards:'陷阱卡/辨析卡'},
+        '挑战型': {icon:'🏆',color:'#f39c12',desc:'发起挑战→限时→公布答案→评级',cards:'挑战卡/速算卡'},
+        '干货型': {icon:'📚',color:'#27ae60',desc:'痛点引入→系统知识点→口诀总结→收藏引导',cards:'方法卡/公式卡/概念卡'},
+        '故事型': {icon:'📖',color:'#3498db',desc:'生活场景→遇到问题→数学解决→触动共鸣',cards:'生活卡/思维卡/对战卡'}
+      };
+
+      const ROLE_PIPELINE = [
+        {role:'R1',name:'笔记策划师',icon:'🧠',desc:'选卡+叙事弧线+轮播规划'},
+        {role:'R2',name:'标题大师',icon:'✍️',desc:'5候选标题+评分+选取最佳'},
+        {role:'R3',name:'封面设计师',icon:'🎨',desc:'生成封面图Prompt+渲染'},
+        {role:'R4',name:'正文写手',icon:'📝',desc:'小红书风格正文+emoji节奏'},
+        {role:'R5',name:'标签优化师',icon:'🏷️',desc:'核心/趋势/长尾标签+互动钩子'},
+        {role:'R6',name:'发布审核官',icon:'🔍',desc:'六维评分+合规+优化建议'}
+      ];
+
+      /* ---- helpers ---- */
+      function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+      function scoreBadge(v,max){
+        const pct = v/max;
+        const c = pct>=0.9?'#27ae60':pct>=0.7?'#f39c12':'#e74c3c';
+        return `<span style="display:inline-block;padding:2px 10px;border-radius:12px;background:${c};color:#fff;font-weight:700;font-size:13px">${v}/${max}</span>`;
+      }
+
+      function renderRadar(scores){
+        const keys = Object.keys(scores);
+        const labels = {title_appeal:'标题力',content_quality:'内容',knowledge_accuracy:'准确',readability:'可读',viral_potential:'传播',compliance:'合规'};
+        const size = 180, cx = size/2, cy = size/2, r = 70;
+        let svg = `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="display:block;margin:0 auto">`;
+        for(let lv=1;lv<=5;lv++){
+          const pts = keys.map((_,i)=>{
+            const ang = Math.PI*2*i/keys.length - Math.PI/2;
+            const rr = r*lv/5;
+            return `${cx+rr*Math.cos(ang)},${cy+rr*Math.sin(ang)}`;
+          }).join(' ');
+          svg += `<polygon points="${pts}" fill="none" stroke="#e0e0e0" stroke-width="1"/>`;
+        }
+        keys.forEach((k,i)=>{
+          const ang = Math.PI*2*i/keys.length - Math.PI/2;
+          const ex = cx+r*Math.cos(ang), ey = cy+r*Math.sin(ang);
+          svg += `<line x1="${cx}" y1="${cy}" x2="${ex}" y2="${ey}" stroke="#ddd"/>`;
+          const lx = cx+(r+18)*Math.cos(ang), ly = cy+(r+18)*Math.sin(ang);
+          svg += `<text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#666">${labels[k]||k}</text>`;
+        });
+        const dataPts = keys.map((k,i)=>{
+          const ang = Math.PI*2*i/keys.length - Math.PI/2;
+          const rr = r*scores[k]/10;
+          return `${cx+rr*Math.cos(ang)},${cy+rr*Math.sin(ang)}`;
+        }).join(' ');
+        svg += `<polygon points="${dataPts}" fill="rgba(255,215,0,0.25)" stroke="#ffd700" stroke-width="2"/>`;
+        keys.forEach((k,i)=>{
+          const ang = Math.PI*2*i/keys.length - Math.PI/2;
+          const rr = r*scores[k]/10;
+          svg += `<circle cx="${cx+rr*Math.cos(ang)}" cy="${cy+rr*Math.sin(ang)}" r="3" fill="#ffd700"/>`;
+        });
+        svg += '</svg>';
+        return svg;
+      }
+
+      /* ---- 列表视图 ---- */
+      function renderList(){
+        const el = document.getElementById('nw-container');
+        if(!el) return;
+        let h = '';
+
+        h += '<div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px">';
+        h += `<div style="flex:1;min-width:140px;background:linear-gradient(135deg,#fff9e6,#fff3cd);border-radius:12px;padding:16px;text-align:center">
+          <div style="font-size:28px;font-weight:800;color:#e74c3c">${NOTES.length}</div>
+          <div style="font-size:13px;color:#888;margin-top:4px">已生成笔记</div></div>`;
+        const passN = NOTES.filter(n=>n.verdict==='PASS').length;
+        h += `<div style="flex:1;min-width:140px;background:linear-gradient(135deg,#e8f8f5,#d5f5e3);border-radius:12px;padding:16px;text-align:center">
+          <div style="font-size:28px;font-weight:800;color:#27ae60">${passN}</div>
+          <div style="font-size:13px;color:#888;margin-top:4px">通过审核</div></div>`;
+        const tmplSet = new Set(NOTES.map(n=>n.template));
+        h += `<div style="flex:1;min-width:140px;background:linear-gradient(135deg,#eaf2f8,#d4e6f1);border-radius:12px;padding:16px;text-align:center">
+          <div style="font-size:28px;font-weight:800;color:#3498db">${tmplSet.size}/4</div>
+          <div style="font-size:13px;color:#888;margin-top:4px">模板覆盖</div></div>`;
+        h += '</div>';
+
+        h += '<div style="background:#f8f9fa;border-radius:12px;padding:18px 20px;margin-bottom:24px">';
+        h += '<div style="font-weight:700;margin-bottom:12px;font-size:15px">\uD83D\uDD04 六角色 AI 流水线</div>';
+        h += '<div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center">';
+        ROLE_PIPELINE.forEach((r,i)=>{
+          h += `<div style="text-align:center;min-width:90px;padding:8px 4px">
+            <div style="font-size:24px">${r.icon}</div>
+            <div style="font-weight:700;font-size:13px;margin:4px 0">${r.role} ${r.name}</div>
+            <div style="font-size:11px;color:#888">${r.desc}</div></div>`;
+          if(i < ROLE_PIPELINE.length-1) h += '<div style="font-size:18px;color:#ccc;padding:0 2px">\u2192</div>';
+        });
+        h += '</div></div>';
+
+        h += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:24px">';
+        Object.entries(TEMPLATE_META).forEach(([name,m])=>{
+          const cnt = NOTES.filter(n=>n.template===name).length;
+          h += `<div style="background:#fff;border:2px solid ${m.color}22;border-radius:12px;padding:14px;position:relative">
+            <div style="font-size:20px;margin-bottom:4px">${m.icon} ${name}</div>
+            <div style="font-size:12px;color:#888;margin-bottom:6px">${m.desc}</div>
+            <div style="font-size:12px;color:#aaa">适用卡片: ${m.cards}</div>
+            <div style="position:absolute;top:12px;right:14px;font-size:22px;font-weight:800;color:${m.color}">${cnt}</div></div>`;
+        });
+        h += '</div>';
+
+        h += '<div style="font-weight:700;font-size:16px;margin-bottom:14px">\uD83D\uDCCB 已生成笔记</div>';
+        if(NOTES.length===0){
+          h += '<div style="text-align:center;padding:40px;color:#aaa">暂无笔记，请运行 <code>python generate_xhs_note.py</code> 生成</div>';
+        } else {
+          NOTES.forEach((n,idx)=>{
+            const tm = TEMPLATE_META[n.template]||{icon:'\uD83D\uDCC4',color:'#999'};
+            h += `<div onclick="NoteWorkshop.showDetail(${idx})" style="background:#fff;border-radius:14px;padding:18px 20px;margin-bottom:14px;cursor:pointer;border:1px solid #eee;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.04)" onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow='0 2px 8px rgba(0,0,0,.04)'">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+                <span style="font-size:28px">${tm.icon}</span>
+                <div style="flex:1;min-width:0">
+                  <div style="font-weight:700;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(n.title)}</div>
+                  <div style="font-size:12px;color:#aaa;margin-top:2px">${n.template} \u00B7 ${n.card_ids.join(', ')} \u00B7 ${n.generated_at}</div>
+                </div>
+                <div style="text-align:right">
+                  ${scoreBadge(n.total,60)}
+                  <div style="font-size:11px;color:#888;margin-top:4px">${n.verdict}</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+                <span style="font-size:12px;padding:2px 8px;background:#ffeaa7;border-radius:8px">\u2764\uFE0F ${n.predicted.likes}</span>
+                <span style="font-size:12px;padding:2px 8px;background:#dfe6e9;border-radius:8px">\u2B50 ${n.predicted.saves}</span>
+                <span style="font-size:12px;padding:2px 8px;background:#d5f5e3;border-radius:8px">\uD83D\uDCAC ${n.predicted.comments}</span>
+                <span style="font-size:12px;padding:2px 8px;background:#fadbd8;border-radius:8px">\uD83D\uDD50 ${n.best_post_time}</span>
+              </div>
+            </div>`;
+          });
+        }
+
+        el.innerHTML = h;
+      }
+
+      /* ---- 详情视图 ---- */
+      function showDetail(idx){
+        const n = NOTES[idx]; if(!n) return;
+        const el = document.getElementById('nw-container');
+        const tm = TEMPLATE_META[n.template]||{icon:'\uD83D\uDCC4',color:'#999'};
+        let h = '';
+
+        h += '<button onclick="NoteWorkshop.init()" style="background:none;border:1px solid #ddd;border-radius:8px;padding:6px 16px;cursor:pointer;margin-bottom:16px;font-size:14px">\u2190 返回列表</button>';
+
+        h += `<div style="background:linear-gradient(135deg,${tm.color}11,${tm.color}05);border:2px solid ${tm.color}33;border-radius:16px;padding:22px;margin-bottom:20px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <span style="font-size:32px">${tm.icon}</span>
+            <div style="flex:1"><div style="font-weight:800;font-size:18px">${esc(n.title)}</div>
+            <div style="font-size:13px;color:#888;margin-top:4px">${n.template}模板 \u00B7 ${n.card_ids.join(', ')} \u00B7 ${n.generated_at}</div></div>
+            ${scoreBadge(n.total,60)}
+          </div></div>`;
+
+        h += '<div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:20px">';
+        h += `<div style="flex:1;min-width:200px;background:#fff;border-radius:14px;padding:18px;border:1px solid #eee">
+          <div style="font-weight:700;margin-bottom:8px">\uD83C\uDFAF 六维评分</div>
+          ${renderRadar(n.scores)}
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;justify-content:center">`;
+        const sLabels = {title_appeal:'标题力',content_quality:'内容质量',knowledge_accuracy:'知识准确',readability:'可读性',viral_potential:'传播力',compliance:'合规性'};
+        Object.entries(n.scores).forEach(([k,v])=>{
+          h += `<span style="font-size:12px;padding:2px 8px;background:#f8f9fa;border-radius:8px">${sLabels[k]||k}: ${v}/10</span>`;
+        });
+        h += '</div></div>';
+
+        h += `<div style="flex:1;min-width:200px;background:#fff;border-radius:14px;padding:18px;border:1px solid #eee">
+          <div style="font-weight:700;margin-bottom:12px">\uD83D\uDCCA 预测数据</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:center;gap:8px"><span style="font-size:22px">\u2764\uFE0F</span><div><div style="font-size:13px;color:#888">预估点赞</div><div style="font-weight:700;font-size:18px;color:#e74c3c">${n.predicted.likes}</div></div></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="font-size:22px">\u2B50</span><div><div style="font-size:13px;color:#888">预估收藏</div><div style="font-weight:700;font-size:18px;color:#f39c12">${n.predicted.saves}</div></div></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="font-size:22px">\uD83D\uDCAC</span><div><div style="font-size:13px;color:#888">预估评论</div><div style="font-weight:700;font-size:18px;color:#3498db">${n.predicted.comments}</div></div></div>
+            <div style="margin-top:8px;padding-top:10px;border-top:1px solid #eee">
+              <div style="font-size:12px;color:#888">\uD83D\uDD50 最佳发布时间</div>
+              <div style="font-weight:600;font-size:14px;margin-top:4px">${n.best_post_time}</div>
+            </div>
+          </div></div>`;
+        h += '</div>';
+
+        h += '<div style="background:#fff;border-radius:14px;padding:18px;border:1px solid #eee;margin-bottom:20px">';
+        h += '<div style="font-weight:700;margin-bottom:10px">\uD83C\uDFAD 情绪曲线</div>';
+        h += '<div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center">';
+        n.emotion_curve.forEach((e,i)=>{
+          const colors = ['#3498db','#e67e22','#e74c3c','#27ae60','#9b59b6'];
+          h += `<div style="text-align:center;padding:8px 12px">
+            <div style="width:36px;height:36px;border-radius:50%;background:${colors[i%5]};color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;margin:0 auto">${i+1}</div>
+            <div style="font-size:12px;margin-top:4px;color:#555;font-weight:600">${e}</div></div>`;
+          if(i<n.emotion_curve.length-1) h += '<div style="color:#ccc">\u2192</div>';
+        });
+        h += '</div>';
+        h += `<div style="font-size:13px;color:#666;margin-top:10px;background:#f8f9fa;border-radius:8px;padding:10px">${esc(n.narrative_arc)}</div>`;
+        h += '</div>';
+
+        h += `<div style="background:#fff;border-radius:14px;padding:18px;border:1px solid #eee;margin-bottom:20px">
+          <div style="font-weight:700;margin-bottom:12px">\uD83D\uDDBC\uFE0F 轮播图规划 (${n.carousel.length}页)</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">`;
+        n.carousel.forEach(s=>{
+          h += `<div style="background:#f8f9fa;border-radius:10px;padding:12px;border-left:3px solid ${tm.color}">
+            <div style="font-weight:700;font-size:13px;margin-bottom:4px">P${s.slide} \u00B7 ${s.type}</div>
+            <div style="font-size:12px;color:#666">${esc(s.desc)}</div>
+            ${s.card_id?`<div style="font-size:11px;color:#aaa;margin-top:6px">卡片: ${s.card_id}</div>`:''}
+          </div>`;
+        });
+        h += '</div></div>';
+
+        h += `<div style="background:#fff;border-radius:14px;padding:18px;border:1px solid #eee;margin-bottom:20px">
+          <div style="font-weight:700;margin-bottom:12px">\u270D\uFE0F 候选标题 (${n.title_candidates.length}个)</div>`;
+        n.title_candidates.forEach((t,i)=>{
+          const isWin = t.title === n.title;
+          h += `<div style="padding:10px 14px;border-radius:10px;margin-bottom:8px;background:${isWin?'#fff9e6':'#f8f9fa'};border:${isWin?'2px solid #ffd700':'1px solid #eee'};display:flex;align-items:center;gap:10px">
+            <span style="font-size:20px;font-weight:800;color:${isWin?'#ffd700':'#ccc'}">#${i+1}</span>
+            <div style="flex:1;font-size:14px;${isWin?'font-weight:700':''}">${esc(t.title)}</div>
+            ${scoreBadge(t.score,10)}
+            ${isWin?'<span style="font-size:11px;background:#ffd700;color:#000;padding:2px 8px;border-radius:6px;font-weight:700">\u2713 采用</span>':''}
+          </div>`;
+        });
+        h += '</div>';
+
+        h += `<div style="background:#fff;border-radius:14px;padding:18px;border:1px solid #eee;margin-bottom:20px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+            <div style="font-weight:700">\uD83D\uDCF1 正文预览</div>
+            <button onclick="NoteWorkshop.copyBody(${idx})" style="background:var(--primary);color:#fff;border:none;border-radius:8px;padding:6px 16px;cursor:pointer;font-size:13px">\uD83D\uDCCB 复制正文</button>
+          </div>
+          <div style="max-width:420px;margin:0 auto;background:#fafafa;border-radius:16px;padding:20px;border:1px solid #e8e8e8;max-height:500px;overflow-y:auto;font-size:14px;line-height:1.8;white-space:pre-wrap;word-break:break-word">${esc(n.body)}</div>
+        </div>`;
+
+        h += '<div style="background:#fff;border-radius:14px;padding:18px;border:1px solid #eee;margin-bottom:20px">';
+        h += '<div style="font-weight:700;margin-bottom:10px">\uD83C\uDFF7\uFE0F 标签</div>';
+        h += '<div style="display:flex;gap:8px;flex-wrap:wrap">';
+        n.hashtags.split(' ').forEach(tag=>{
+          if(tag) h += `<span style="background:linear-gradient(135deg,#fff9e6,#ffeaa7);padding:4px 12px;border-radius:20px;font-size:13px;font-weight:600">${esc(tag)}</span>`;
+        });
+        h += '</div></div>';
+
+        h += '<div style="background:#fff;border-radius:14px;padding:18px;border:1px solid #eee;margin-bottom:20px">';
+        h += '<div style="font-weight:700;margin-bottom:12px">\uD83D\uDCAC 互动策略</div>';
+        h += `<div style="background:#fff3cd;border-radius:10px;padding:12px;margin-bottom:10px">
+            <div style="font-size:12px;color:#888;margin-bottom:4px">\uD83D\uDCCC 置顶评论</div>
+            <div style="font-size:13px">${esc(n.pinned_comment)}</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">
+            <div style="background:#f0f9ff;border-radius:10px;padding:12px">
+              <div style="font-size:12px;color:#3498db;font-weight:600;margin-bottom:4px">\uD83D\uDCAC 评论引导</div>
+              <div style="font-size:13px">${esc(n.interaction_hooks.comment_guide)}</div></div>
+            <div style="background:#f0fff0;border-radius:10px;padding:12px">
+              <div style="font-size:12px;color:#27ae60;font-weight:600;margin-bottom:4px">\u2B50 收藏引导</div>
+              <div style="font-size:13px">${esc(n.interaction_hooks.save_guide)}</div></div>
+            <div style="background:#fef0f0;border-radius:10px;padding:12px">
+              <div style="font-size:12px;color:#e74c3c;font-weight:600;margin-bottom:4px">\uD83D\uDD17 转发引导</div>
+              <div style="font-size:13px">${esc(n.interaction_hooks.share_guide)}</div></div>
+          </div></div>`;
+
+        h += '<div style="background:#fff;border-radius:14px;padding:18px;border:1px solid #eee;margin-bottom:20px">';
+        h += '<div style="font-weight:700;margin-bottom:12px">\uD83D\uDD0D 审核结论</div>';
+        if(n.strengths.length){
+          h += '<div style="font-size:13px;font-weight:600;color:#27ae60;margin-bottom:6px">\u2705 优势</div>';
+          n.strengths.forEach(s=>{ h += `<div style="font-size:13px;padding:4px 0;color:#555">\u2022 ${esc(s)}</div>`; });
+        }
+        if(n.issues.length){
+          h += '<div style="font-size:13px;font-weight:600;color:#e74c3c;margin:10px 0 6px">\u26A0\uFE0F 问题</div>';
+          n.issues.forEach(s=>{ h += `<div style="font-size:13px;padding:4px 0;color:#555">\u2022 ${esc(s)}</div>`; });
+        }
+        if(n.suggestions.length){
+          h += '<div style="font-size:13px;font-weight:600;color:#3498db;margin:10px 0 6px">\uD83D\uDCA1 建议</div>';
+          n.suggestions.forEach(s=>{ h += `<div style="font-size:13px;padding:4px 0;color:#555">\u2022 ${esc(s)}</div>`; });
+        }
+        h += '</div>';
+
+        el.innerHTML = h;
+      }
+
+      /* ---- 复制正文 ---- */
+      function copyBody(idx){
+        const n = NOTES[idx]; if(!n) return;
+        navigator.clipboard.writeText(n.body + '\n\n' + n.hashtags).then(()=>{
+          showToast('\u2705 正文+标签已复制到剪贴板！');
+        }).catch(()=>{ showToast('\u274C 复制失败，请手动复制'); });
+      }
+
+      /* ---- init ---- */
+      function init(){
+        inited = true;
+        renderList();
+      }
+
+      return { init, showDetail, copyBody };
+    })();
+
+
     // ============ �📢 推广物料生成系统 ============
     const PromoMaterial = {
       currentTab: 'templates',
@@ -15019,6 +15373,7 @@ Style: ${stylePrompt}
         case 'ai-card': _updateAICardTmplCount(); break;
         case 'knowledge-cards': KnowledgeCards.init(); break;
         case 'prompt-lib': PromptLib.init(); break;
+        case 'note-workshop': NoteWorkshop.init(); break;
         case 'promo':
           if (!currentUser || currentUser.username !== 'lin') { switchPage('dashboard'); return; }
           PromoMaterial.init(); break;
