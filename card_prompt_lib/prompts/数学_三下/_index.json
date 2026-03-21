@@ -1,0 +1,20 @@
+{
+  "数学-三下-02-01": {
+    "title": "口算整十、整百数除以一位数",
+    "type": "方法卡",
+    "prompt_file": "02_01_口算整十、整百数除以一位数.md",
+    "prompt_length": 4010,
+    "image": "card_images/数学_三下_02_01.jpg",
+    "generated_at": "2026-03-21 18:10",
+    "prompt_version": "v9"
+  },
+  "数学-三下-04-01": {
+    "title": "认识年、月、日",
+    "type": "概念卡",
+    "prompt_file": "04_01_认识年、月、日.md",
+    "prompt_length": 3108,
+    "image": "card_images/数学_三下_04_01.jpg",
+    "generated_at": "2026-03-21 18:08",
+    "prompt_version": "v9"
+  }
+}

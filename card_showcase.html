@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>卡片模板展示</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.header h1 {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  margin-bottom: 8px;
+}
+.header .sub {
+  color: rgba(255,255,255,0.5);
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+.header .badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #c9a96e, #d4a840);
+  color: #1a1a2e;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 16px;
+  border-radius: 20px;
+  margin-top: 12px;
+  letter-spacing: 1px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 780px;
+}
+.card-wrap {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
+  transition: transform 0.3s;
+}
+.card-wrap:hover { transform: translateY(-4px); }
+.card-wrap canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+.card-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  padding: 40px 16px 14px;
+  color: #fff;
+  text-align: center;
+}
+.card-label .name {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.card-label .tags {
+  font-size: 11px;
+  color: rgba(255,255,255,0.65);
+  margin-top: 4px;
+}
+.footer {
+  color: rgba(255,255,255,0.35);
+  font-size: 12px;
+  margin-top: 28px;
+  letter-spacing: 2px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🃏 AI 智能卡片模板</h1>
+  <div class="sub">50+ 精美模板 · AI 自动匹配 · 一键生成</div>
+  <div class="badge">小红书 AI 辅助创作平台</div>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="footer">更多模板持续更新中 ✦ 支持自定义模板</div>
+
+<script>
+const templates = [
+  {
+    name: '📖 简约文艺', tags: '情感语录 · 读书笔记 · 人生感悟',
+    bg: '#f7f3ee',
+    draw(ctx, w, h) {
+      // bg
+      ctx.fillStyle = '#f7f3ee';
+      ctx.fillRect(0, 0, w, h);
+      // paper texture
+      for (let i = 0; i < 3000; i++) {
+        ctx.fillStyle = `rgba(120,110,100,${Math.random()*0.03})`;
+        ctx.fillRect(Math.random()*w, Math.random()*h, 1, 1);
+      }
+      // top accent line
+      ctx.fillStyle = '#c4a882';
+      ctx.fillRect(w/2 - 40, h*0.22, 80, 1.5);
+      // title
+      ctx.font = 'bold 36px "Noto Serif SC", serif';
+      ctx.fillStyle = '#2c2c2c';
+      ctx.textAlign = 'center';
+      ctx.fillText('那些藏在心底的', w/2, h*0.39);
+      ctx.fillText('温柔时光', w/2, h*0.39 + 50);
+      // subtitle
+      ctx.font = '300 18px "Noto Sans SC", sans-serif';
+      ctx.fillStyle = '#8a7f72';
+      ctx.fillText('治愈系情感语录合集', w/2, h*0.56);
+      // author
+      ctx.font = '16px "Noto Sans SC", sans-serif';
+      ctx.fillStyle = '#a09890';
+      ctx.fillText('✦ 文艺小站 ✦', w/2, h*0.86);
+      // bottom line
+      ctx.fillStyle = '#d8d0c4';
+      ctx.fillRect(w/2 - 60, h*0.91, 120, 1);
+    }
+  },
+  {
+    name: '🌸 清新可爱', tags: '日常分享 · 美食探店 · 好物推荐',
+    draw(ctx, w, h) {
+      // gradient bg
+      const grd = ctx.createLinearGradient(0, 0, 0, h);
+      grd.addColorStop(0, '#fff5f7');
+      grd.addColorStop(0.5, '#ffeef2');
+      grd.addColorStop(1, '#fff0e6');
+      ctx.fillStyle = grd;
+      ctx.fillRect(0, 0, w, h);
+      // decorative circles
+      ctx.beginPath(); ctx.arc(w*0.9, h*-0.04, 120, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(255,179,71,0.08)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(w*0.05, h*0.96, 100, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(255,133,162,0.06)'; ctx.fill();
+      // dots
+      const dotColors = ['rgba(255,133,162,0.15)','rgba(255,179,71,0.15)','rgba(126,203,161,0.15)'];
+      for (let i = 0; i < 12; i++) {
+        ctx.beginPath();
+        ctx.arc(Math.random()*w, Math.random()*h, 2+Math.random()*5, 0, Math.PI*2);
+        ctx.fillStyle = dotColors[i%3]; ctx.fill();
+      }
+      // white card
+      roundRect(ctx, w*0.06, h*0.12, w*0.88, h*0.76, 22);
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.shadowColor = 'rgba(255,133,162,0.15)'; ctx.shadowBlur = 20; ctx.shadowOffsetY = 6;
+      ctx.fill(); ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+      // emoji
+      ctx.font = '48px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('🍰', w/2, h*0.28);
+      // title
+      ctx.font = 'bold 32px "Noto Sans SC", sans-serif';
+      ctx.fillStyle = '#ff85a2';
+      ctx.fillText('今日份小确幸', w/2, h*0.40);
+      // subtitle
+      ctx.font = '17px "Noto Sans SC", sans-serif';
+      ctx.fillStyle = '#8b6f7f';
+      ctx.fillText('分享生活中甜甜的瞬间 💕', w/2, h*0.50);
+      // tags
+      const tags = ['#美食','#日常','#治愈'];
+      const tagW = 58, tagGap = 10, totalW = tags.length * tagW + (tags.length-1) * tagGap;
+      let tx = w/2 - totalW/2;
+      ctx.font = '14px "Noto Sans SC", sans-serif';
+      tags.forEach(t => {
+        roundRect(ctx, tx, h*0.58, tagW, 26, 13);
+        ctx.fillStyle = 'rgba(255,133,162,0.1)'; ctx.fill();
+        ctx.strokeStyle = 'rgba(255,133,162,0.3)'; ctx.lineWidth = 1; ctx.stroke();
+        ctx.fillStyle = '#ff85a2'; ctx.textAlign = 'center';
+        ctx.fillText(t, tx + tagW/2, h*0.58 + 18);
+        tx += tagW + tagGap;
+      });
+      // wavy line
+      ctx.beginPath(); ctx.strokeStyle = '#ffd6e0'; ctx.lineWidth = 1.5;
+      for (let x = w*0.15; x < w*0.85; x += 2) {
+        const y = h*0.82 + Math.sin(x/20)*5;
+        x === w*0.15 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+  },
+  {
+    name: '💎 高级感商务', tags: '职场干货 · 商业分析 · 理财投资',
+    draw(ctx, w, h) {
+      // dark gradient
+      const grd = ctx.createLinearGradient(0, 0, w, h);
+      grd.addColorStop(0, '#1a1a2e');
+      grd.addColorStop(0.4, '#16213e');
+      grd.addColorStop(1, '#0f0f1e');
+      ctx.fillStyle = grd;
+      ctx.fillRect(0, 0, w, h);
+      // grid pattern
+      ctx.strokeStyle = 'rgba(201,169,110,0.06)';
+      ctx.lineWidth = 0.3;
+      for (let x = 0; x < w; x += 50) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
+      for (let y = 0; y < h; y += 50) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
+      // corner L decorations
+      const drawCornerL = (x, y, len, flipX, flipY) => {
+        ctx.strokeStyle = '#c9a96e'; ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(x + len*flipX, y); ctx.lineTo(x, y); ctx.lineTo(x, y + len*flipY);
+        ctx.stroke();
+      };
+      drawCornerL(w*0.05, h*0.04, 60, 1, 1);
+      drawCornerL(w*0.95, h*0.96, 60, -1, -1);
+      // label
+      ctx.font = '500 14px "Noto Sans SC", sans-serif';
+      ctx.fillStyle = '#c9a96e';
+      ctx.textAlign = 'left';
+      ctx.letterSpacing = '3px';
+      ctx.fillText('B U S I N E S S  I N S I G H T', w*0.09, h*0.20);
+      // gold line
+      ctx.fillStyle = '#c9a96e';
+      ctx.fillRect(w*0.09, h*0.24, 36, 2.5);
+      // title
+      ctx.font = 'bold 34px "Noto Sans SC", sans-serif';
+      ctx.fillStyle = '#f0ece4';
+      ctx.textAlign = 'left';
+      ctx.fillText('2026年个人', w*0.09, h*0.36);
+      ctx.fillText('财富增长指南', w*0.09, h*0.36 + 46);
+      // subtitle
+      ctx.font = '300 17px "Noto Sans SC", sans-serif';
+      ctx.fillStyle = '#b8b0a0';
+      ctx.fillText('从认知升级到资产配置的完整路径', w*0.09, h*0.52);
+      // bottom info bar
+      ctx.font = '13px "Noto Sans SC", sans-serif';
+      ctx.fillStyle = '#7a7468';
+      ctx.fillText('商业洞察  ·  2026.03.20  ·  深度分析', w*0.09, h*0.89);
+    }
+  },
+  {
+    name: '🏮 国潮复古', tags: '国风文化 · 传统节日 · 诗词书法',
+    draw(ctx, w, h) {
+      // warm paper bg
+      ctx.fillStyle = '#f5f0e8';
+      ctx.fillRect(0, 0, w, h);
+      // paper noise
+      for (let i = 0; i < 4000; i++) {
+        ctx.fillStyle = `rgba(200,185,160,${Math.random()*0.025})`;
+        ctx.fillRect(Math.random()*w, Math.random()*h, 1, 1);
+      }
+      // double border
+      ctx.strokeStyle = '#c41e3a'; ctx.lineWidth = 2;
+      ctx.strokeRect(w*0.03, h*0.02, w*0.94, h*0.96);
+      ctx.lineWidth = 0.8;
+      ctx.strokeRect(w*0.04, h*0.03, w*0.92, h*0.94);
+      // corner ornaments
+      const corners = [[w*0.03, h*0.02], [w*0.97, h*0.02], [w*0.03, h*0.98], [w*0.97, h*0.98]];
+      corners.forEach(([cx, cy]) => {
+        ctx.beginPath(); ctx.arc(cx, cy, 5, 0, Math.PI*2);
+        ctx.fillStyle = '#c41e3a'; ctx.fill();
+      });
+      // red seal circle
+      ctx.beginPath(); ctx.arc(w/2, h*0.16, 42, 0, Math.PI*2);
+      ctx.fillStyle = '#c41e3a'; ctx.fill();
+      ctx.font = 'bold 40px SimSun, serif';
+      ctx.fillStyle = '#f5f0e8';
+      ctx.textAlign = 'center';
+      ctx.fillText('诗', w/2, h*0.16 + 14);
+      // title
+      ctx.font = 'bold 36px "Noto Serif SC", serif';
+      ctx.fillStyle = '#2d1810';
+      ctx.textAlign = 'center';
+      ctx.fillText('诗词里的人间', w/2, h*0.37);
+      ctx.fillText('烟火气', w/2, h*0.37 + 52);
+      // gold line
+      ctx.fillStyle = '#d4a840';
+      ctx.fillRect(w/2 - 70, h*0.52, 140, 2);
+      // subtitle
+      ctx.font = '18px "Noto Serif SC", serif';
+      ctx.fillStyle = '#5a4030';
+      ctx.fillText('品读经典 · 感受千年文化之美', w/2, h*0.59);
+      // vertical side text
+      ctx.font = '14px "Noto Serif SC", serif';
+      ctx.fillStyle = '#8b7355';
+      const sideText = '岁月如诗';
+      ctx.textAlign = 'center';
+      for (let i = 0; i < sideText.length; i++) {
+        ctx.fillText(sideText[i], w*0.92, h*0.30 + i*24);
+      }
+      // oval seal at bottom
+      ctx.save();
+      ctx.translate(w/2, h*0.83);
+      ctx.scale(1.8, 0.9);
+      ctx.beginPath(); ctx.arc(0, 0, 20, 0, Math.PI*2);
+      ctx.fillStyle = '#c41e3a'; ctx.fill();
+      ctx.restore();
+      ctx.font = '13px SimSun, serif';
+      ctx.fillStyle = '#f5f0e8';
+      ctx.textAlign = 'center';
+      ctx.fillText('雅集', w/2, h*0.83 + 5);
+    }
+  }
+];
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+const grid = document.getElementById('grid');
+const cW = 360, cH = 480;
+
+templates.forEach(t => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  
+  const canvas = document.createElement('canvas');
+  canvas.width = cW * 2;
+  canvas.height = cH * 2;
+  canvas.style.width = cW + 'px';
+  canvas.style.height = cH + 'px';
+  
+  const ctx = canvas.getContext('2d');
+  ctx.scale(2, 2);
+  t.draw(ctx, cW, cH);
+  
+  const label = document.createElement('div');
+  label.className = 'card-label';
+  label.innerHTML = `<div class="name">${t.name}</div><div class="tags">${t.tags}</div>`;
+  
+  wrap.appendChild(canvas);
+  wrap.appendChild(label);
+  grid.appendChild(wrap);
+});
+</script>
+</body>
+</html>
