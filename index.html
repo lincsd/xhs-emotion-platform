@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260322a';
+      var BUILD='20260322b';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);}
@@ -3807,7 +3807,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260322a'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260322b'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -9280,6 +9280,28 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         dontList: ['不画完整竖式', '不画裸箭头(必须有标签)', '箭头不超过2个', '不让人猜题目——必须清晰可见', '不只有口诀没有例题']
       };
 
+      // ─── 已生成的 Prompt 记录（五角色流水线输出）───
+      const PROMPT_RECORDS = {
+        '\u6570\u5b66-\u4e09\u4e0b-T1-02': {
+          title: '\u5148\u4e58\u9664\u540e\u52a0\u51cf', type: '\u9677\u9631\u5361', pipeline: 'v2_5role', score: 42, verdict: 'PASS',
+          generated_at: '2026-03-21 21:33', prompt_length: 4738,
+          briefs: {
+            R1: { selected_problem: '840 - 840 \u00f7 4 = ?', why_important: '\u8fd9\u9053\u9898\u662f\u68c0\u9a8c\u5b66\u751f\u662f\u5426\u771f\u6b63\u7406\u89e3\u5e76\u80fd\u6b63\u786e\u8fd0\u7528\u201c\u5148\u4e58\u9664\u540e\u52a0\u51cf\u201d\u8fd0\u7b97\u987a\u5e8f\u7684\u201c\u8bd5\u91d1\u77f3\u201d', top3_mistakes: ['\u4ece\u5de6\u5230\u53f3\u76f4\u63a5\u8ba1\u7b97\uff0c\u5148\u7b97\u51cf\u6cd5(840-840=0)\uff0c\u5bfc\u81f4\u7ed3\u679c\u4e3a0', '\u5bf9\u9664\u6cd5\u8fd0\u7b97840\u00f74\u7684\u8ba1\u7b97\u5931\u8bef', '\u6570\u5b57\u91cd\u590d\u51fa\u73b0\u65f6\u5bb9\u6613\u5f62\u6210\u601d\u7ef4\u5b9a\u52bf'], trap_point: '\u5b66\u751f\u5728\u6ca1\u6709\u62ec\u53f7\u7684\u6df7\u5408\u8fd0\u7b97\u4e2d\uff0c\u5bb9\u6613\u5ffd\u7565\u4e58\u9664\u6cd5\u4f18\u5148\u7684\u89c4\u5219' },
+            R2: { eureka_moment: '\u539f\u6765\u6570\u5b57\u867d\u7136\u4e00\u6837\uff0c\u4f46\u9664\u6cd5\u6bd4\u51cf\u6cd5\u66f4\u201c\u5389\u5bb3\u201d\uff0c\u5f97\u5148\u7b97\u5b83\uff01', analogy: '\u5c31\u50cf\u53a8\u623f\u91cc\u505a\u83dc\uff0c\u5f97\u5148\u201c\u5904\u7406\u98df\u6750\u201d(\u4e58\u9664)\uff0c\u624d\u80fd\u201c\u6df7\u5408\u6405\u62cc\u201d(\u52a0\u51cf)', novel_strategy: '\u53cd\u8f6c\u6cd5', soul_mnemonic: '\u4e58\u9664\u8001\u5927\uff0c\u5148\u51fa\u573a\uff01' },
+            R3: { best_title: '\u8fd9\u9053\u989890%\u7684\u4eba\u4f1a\u7b97\u9519\uff01\u4f60\u7684\u7b2c\u4e00\u53cd\u5e94\u662f______\uff1f', emotion_tone: '\u6311\u6218', hook_type: '\u6311\u6218', series_tag: '#\u5c0f\u5b66\u6570\u5b66\u9677\u9631\u9898#', ip_character_state: '\u60ca\u8bb6\u5f20\u5634' }
+          }
+        },
+        '\u6570\u5b66-\u4e09\u4e0b-T1-03': {
+          title: '\u4f59\u6570\u5fc5\u987b\u5c0f\u4e8e\u9664\u6570', type: '\u9677\u9631\u5361', pipeline: 'v2_5role', score: 40, verdict: 'PASS',
+          generated_at: '2026-03-21 21:38', prompt_length: 4611,
+          briefs: {
+            R1: { selected_problem: '25 \u00f7 4 = ? ... ?', why_important: '\u5b83\u662f\u7406\u89e3\u6709\u4f59\u6570\u9664\u6cd5\u672c\u8d28\u7684\u5173\u952e\uff0c\u786e\u4fdd\u8ba1\u7b97\u7ed3\u679c\u7684\u6b63\u786e\u6027', top3_mistakes: ['\u4f59\u6570\u5927\u4e8e\u9664\u6570(25\u00f74=5...5)', '\u4f59\u6570\u7b49\u4e8e\u9664\u6570(25\u00f74=5...4)', '\u8ba1\u7b97\u5b8c\u4e0d\u68c0\u67e5\u4f59\u6570\u4e0e\u9664\u6570\u7684\u5173\u7cfb'], trap_point: '\u5546\u4e0d\u591f\u5927\u5bfc\u81f4\u4f59\u6570\u8fc7\u5927\uff0c\u6216\u8005\u8ba1\u7b97\u7ed3\u675f\u540e\u5fd8\u8bb0\u68c0\u9a8c' },
+            R2: { eureka_moment: '\u539f\u6765\u4f59\u6570\u8fd8\u80fd\u518d\u5206\uff0c\u6240\u4ee5\u5546\u6ca1\u7b97\u591f\uff01', analogy: '\u5206\u7cd6\u679c\u65f6\uff0c\u5982\u679c\u76d8\u5b50\u91cc\u5269\u4e0b\u7684\u7cd6\u8fd8\u80fd\u518d\u5206\u7ed9\u6bcf\u4e2a\u4eba\u4e00\u4efd\uff0c\u5c31\u8bf4\u660e\u4f60\u8fd8\u6ca1\u5206\u5b8c\uff01', novel_strategy: '\u53cd\u8f6c\u6cd5', soul_mnemonic: '\u4f59\u6570\u5c0f\uff0c\u5546\u624d\u5bf9\uff01' },
+            R3: { best_title: '\u5c0f\u5b66\u6570\u5b66\u7206\u6b3e\u9677\u9631\uff0190%\u5b69\u5b50\u505a\u990925\u00f74\uff0c\u4f60\u6562\u6765\u6311\u6218\u5417\uff1f', emotion_tone: '\u6311\u6218', hook_type: '\u6311\u6218', series_tag: '#\u5c0f\u5b66\u6570\u5b66\u9677\u9631\u9898#', ip_character_state: '\u5f97\u610f\u7728\u773c' }
+          }
+        }
+      };
+
       let allCards = [];
       let currentTab = 'overview';
 
@@ -9425,6 +9447,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           return '<div onclick="PromptLib.showDetail(\'' + c.full_id + '\')" style="border:1px solid #e8e8e8;border-radius:12px;padding:14px;cursor:pointer;transition:all .2s;border-left:4px solid ' + color + '" onmouseenter="this.style.boxShadow=\'0 4px 16px rgba(0,0,0,.08)\'" onmouseleave="this.style.boxShadow=\'none\'">' +
             '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">' +
               '<span style="background:' + color + ';color:#fff;padding:2px 8px;border-radius:6px;font-size:11px">' + c.type + '</span>' +
+              (PROMPT_RECORDS[c.full_id] ? '<span style="background:#2ed573;color:#fff;padding:2px 6px;border-radius:6px;font-size:10px">' + PROMPT_RECORDS[c.full_id].score + '/50 \u2705</span>' : '') +
               '<span style="font-weight:600;font-size:14px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + c.title + '</span>' +
             '</div>' +
             '<div style="font-size:12px;color:#999;margin-bottom:4px">📖 第' + c.unit_id + '单元 · ' + c.unit_name + '</div>' +
@@ -9478,6 +9501,59 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
             html += '<div style="font-size:13px;color:#2e7d32">\u2705 ' + m.correct + '</div>';
           });
           html += '</div>';
+        }
+
+        // ─── 五角色 Prompt 记录 ───
+        const rec = PROMPT_RECORDS[card.full_id];
+        if (rec && rec.briefs) {
+          const b = rec.briefs;
+          html += '<div style="margin-bottom:16px;border:2px solid rgba(102,126,234,.3);border-radius:12px;overflow:hidden">';
+          html += '<div style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between">';
+          html += '<div style="font-weight:700;font-size:14px">\ud83e\udd16 \u4e94\u89d2\u8272\u6d41\u6c34\u7ebf\u8bb0\u5f55</div>';
+          html += '<div style="display:flex;gap:8px;align-items:center">';
+          html += '<span style="background:' + (rec.verdict === 'PASS' ? '#2ed573' : '#ff4757') + ';padding:2px 10px;border-radius:6px;font-size:12px;font-weight:600">' + rec.score + '/50 ' + rec.verdict + '</span>';
+          html += '<span style="font-size:11px;opacity:.7">' + rec.generated_at + '</span>';
+          html += '</div></div>';
+
+          // R1 教研专家
+          if (b.R1) {
+            html += '<div style="padding:12px 16px;border-bottom:1px solid #f0f0f0">';
+            html += '<div style="font-weight:600;font-size:13px;color:#54A0FF;margin-bottom:6px">\ud83d\udcda R1 \u6559\u7814\u4e13\u5bb6</div>';
+            html += '<div style="font-size:12px;color:#555;line-height:1.6">';
+            html += '\ud83c\udfaf \u9009\u9898: <strong>' + (b.R1.selected_problem || '') + '</strong><br>';
+            html += '\u26a0\ufe0f \u9677\u9631\u70b9: ' + (b.R1.trap_point || '') + '<br>';
+            html += '\u274c Top\u9519\u8bef: ' + (b.R1.top3_mistakes || []).join(' | ');
+            html += '</div></div>';
+          }
+
+          // R2 教学设计师
+          if (b.R2) {
+            html += '<div style="padding:12px 16px;border-bottom:1px solid #f0f0f0">';
+            html += '<div style="font-weight:600;font-size:13px;color:#FF9F43;margin-bottom:6px">\ud83c\udf93 R2 \u6559\u5b66\u8bbe\u8ba1\u5e08</div>';
+            html += '<div style="font-size:12px;color:#555;line-height:1.6">';
+            html += '\ud83d\udca1 \u987f\u609f\u70b9: ' + (b.R2.eureka_moment || '') + '<br>';
+            html += '\ud83c\udf55 \u7c7b\u6bd4: ' + (b.R2.analogy || '') + '<br>';
+            html += '\u2728 \u7b56\u7565: <strong>' + (b.R2.novel_strategy || '') + '</strong><br>';
+            html += '\ud83d\udcac \u53e3\u8bc0: <strong style="color:var(--primary)">' + (b.R2.soul_mnemonic || '') + '</strong>';
+            html += '</div></div>';
+          }
+
+          // R3 小红书策划
+          if (b.R3) {
+            html += '<div style="padding:12px 16px;border-bottom:1px solid #f0f0f0">';
+            html += '<div style="font-weight:600;font-size:13px;color:#E84393;margin-bottom:6px">\ud83d\udcf1 R3 \u5c0f\u7ea2\u4e66\u7b56\u5212</div>';
+            html += '<div style="font-size:12px;color:#555;line-height:1.6">';
+            html += '\ud83d\udd25 \u7206\u6b3e\u6807\u9898: <strong>' + (b.R3.best_title || '') + '</strong><br>';
+            html += '\ud83c\udfad \u60c5\u7eea: ' + (b.R3.emotion_tone || '') + ' | \ud83c\udfaa \u94a9\u5b50: ' + (b.R3.hook_type || '') + '<br>';
+            html += '\ud83c\udff7\ufe0f ' + (b.R3.series_tag || '') + ' | \ud83d\udc66 IP\u72b6\u6001: ' + (b.R3.ip_character_state || '');
+            html += '</div></div>';
+          }
+
+          // 底部信息
+          html += '<div style="padding:10px 16px;background:#f8f9fa;font-size:11px;color:#999;display:flex;gap:16px">';
+          html += '<span>\ud83d\udcdd Prompt: ' + rec.prompt_length + ' chars</span>';
+          html += '<span>\ud83e\udd16 Pipeline: ' + rec.pipeline + '</span>';
+          html += '</div></div>';
         }
 
         // 生成图片按钮

@@ -27,5 +27,27 @@
     "pipeline": "v2_5role",
     "audit_score": 35,
     "audit_verdict": "FAIL"
+  },
+  "数学-三下-T1-02": {
+    "title": "先乘除后加减",
+    "type": "陷阱卡",
+    "prompt_file": "T1_02_先乘除后加减.md",
+    "prompt_length": 4738,
+    "image": "card_images_v2\\数学_三下_T1_02.jpg",
+    "generated_at": "2026-03-21 21:33",
+    "pipeline": "v2_5role",
+    "audit_score": 42,
+    "audit_verdict": "PASS"
+  },
+  "数学-三下-T1-03": {
+    "title": "余数必须小于除数",
+    "type": "陷阱卡",
+    "prompt_file": "T1_03_余数必须小于除数.md",
+    "prompt_length": 4611,
+    "image": "card_images_v2\\数学_三下_T1_03.jpg",
+    "generated_at": "2026-03-21 21:38",
+    "pipeline": "v2_5role",
+    "audit_score": 40,
+    "audit_verdict": "PASS"
   }
 }
