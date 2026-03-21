@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260321c';
+      var BUILD='20260322a';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);}
@@ -3229,6 +3229,7 @@
             <div class="pl-tab" data-tab="prompts" onclick="PromptLib.switchTab('prompts')" style="padding:10px 20px;cursor:pointer;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--text-light);font-size:14px">📝 Prompt 记录</div>
             <div class="pl-tab" data-tab="template" onclick="PromptLib.switchTab('template')" style="padding:10px 20px;cursor:pointer;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--text-light);font-size:14px">📐 当前模板</div>
             <div class="pl-tab" data-tab="changelog" onclick="PromptLib.switchTab('changelog')" style="padding:10px 20px;cursor:pointer;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--text-light);font-size:14px">📋 迭代日志</div>
+            <div class="pl-tab" data-tab="pipeline" onclick="PromptLib.switchTab('pipeline')" style="padding:10px 20px;cursor:pointer;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--text-light);font-size:14px">🤖 五角色流水线</div>
           </div>
 
           <!-- 总览面板 -->
@@ -3239,6 +3240,8 @@
           <div id="pl-panel-template" class="pl-panel" style="display:none"></div>
           <!-- 迭代日志面板 -->
           <div id="pl-panel-changelog" class="pl-panel" style="display:none"></div>
+          <!-- 五角色流水线面板 -->
+          <div id="pl-panel-pipeline" class="pl-panel" style="display:none"></div>
         </div>
         <!-- Prompt 详情弹窗 -->
         <div id="pl-detail-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.45);z-index:9999;overflow-y:auto" onclick="if(event.target===this)this.style.display='none'">
@@ -3804,7 +3807,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260321c'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260322a'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -9205,13 +9208,22 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
     const PromptLib = (() => {
       // ─── 嵌入数据 ───
       const CARD_TYPES = {
-        '概念卡': { count: 8, color: '#54A0FF', icon: '💡', desc: '生活场景→抽象概念', examples: '面积含义、小数含义、方向认知' },
-        '方法卡': { count: 21, color: '#FF9F43', icon: '🔧', desc: '具体例题→色块分步→答案', examples: '口算、笔算、估算、验算' },
-        '辨析卡': { count: 2, color: '#FF6B6B', icon: '⚖️', desc: '✓/✗ 并排对比→红圈标差异', examples: '商中间有0 vs 商末尾有0' },
-        '公式卡': { count: 3, color: '#5ECE7B', icon: '📐', desc: '图形实例→推导可视化→公式', examples: '长方形面积、正方形面积' }
+        '概念卡': { count: 8, color: '#54A0FF', icon: '💡', desc: '生活场景→抽象概念', examples: '面积含义、小数含义、方向认知', pack: 'v1' },
+        '方法卡': { count: 21, color: '#FF9F43', icon: '🔧', desc: '具体例题→色块分步→答案', examples: '口算、笔算、估算、验算', pack: 'v1' },
+        '辨析卡': { count: 2, color: '#FF6B6B', icon: '⚖️', desc: '✓/✗ 并排对比→红圈标差异', examples: '商中间有0 vs 商末尾有0', pack: 'v1' },
+        '公式卡': { count: 3, color: '#5ECE7B', icon: '📐', desc: '图形实例→推导可视化→公式', examples: '长方形面积、正方形面积', pack: 'v1' },
+        '陷阱卡': { count: 3, color: '#E84393', icon: '🪤', desc: '设置陷阱→暴露错误→揭示真相', examples: '0÷5和5÷0、先乘除后加减、余数<除数', pack: 'v2爆款', hook: '90%做错' },
+        '速算卡': { count: 3, color: '#00B894', icon: '⚡', desc: '常规慢方法→速算技巧→结果一致', examples: '拆数法、凑整速算、乘法交换巧算', pack: 'v2爆款', hook: '比老师教的快10倍' },
+        '挑战卡': { count: 2, color: '#FDCB6E', icon: '🏆', desc: '限时+闯关+悬念答案', examples: '口算闪电战、巧填运算符', pack: 'v2爆款', hook: '30秒能答对吗' },
+        '生活卡': { count: 2, color: '#6C5CE7', icon: '🛒', desc: '生活场景→数学问题→实用解法', examples: '超市找零、分蛋糕', pack: 'v2爆款', hook: '原来买菜也要数学' },
+        '对战卡': { count: 1, color: '#0984E3', icon: '⚔️', desc: '左右分栏→家长vs孩子→同题PK', examples: '口算PK赛', pack: 'v2爆款', hook: '家长vs孩子谁先答对' },
+        '思维卡': { count: 3, color: '#D63031', icon: '🧩', desc: '有趣问题→可视化思维→优雅解法', examples: '鸡兔同笼、数列规律、植树问题', pack: 'v2爆款', hook: '聪明的孩子都会' }
       };
 
       const CHANGELOG = [
+        { ver: 'v10', date: '2026-03-22', title: '五角色流水线 + 6种爆款新题型',
+          problem: '单角色Prompt无法同时兼顾教研准确、教学有效、传播爆款',
+          changes: ['5个AI角色分工协作: 教研专家→教学设计师→小红书策划→视觉设计师→质检总监', '新增6种爆款题型: 陷阱卡/速算卡/挑战卡/生活卡/对战卡/思维卡', '5种新奇解题策略: 反转法/类比法/对抗法/动画帧法/一笔改错法', '设计要素系统: IP角色+系列编号+情绪钩子+角标徽章', '5维度质检评分(满分50)+不合格自动改进循环', 'generate_card_images_v2.py 五角色流水线脚本'] },
         { ver: 'v9', date: '2026-03-21', title: '例题驱动 + 题型 Skill 分化',
           problem: '卡片看不出在解什么题，解题过程抽象',
           changes: ['每张卡片必须围绕一道具体例题展开', '题目必须醒目展示在卡面上', '解题用色块分步图示，不画竖式', '答案单独大字展示', '建立 card_prompt_lib/ 目录，按题型归档 Skill'] },
@@ -9239,8 +9251,8 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
       ];
 
       const TEMPLATE_INFO = {
-        version: 'v9',
-        date: '2026-03-21',
+        version: 'v10',
+        date: '2026-03-22',
         textModel: 'gemini-2.5-flash',
         imageModel: 'nano-banana-pro-preview (Gemini 3 Pro Image Preview)',
         layout: [
@@ -9308,6 +9320,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           case 'prompts': renderPrompts(); break;
           case 'template': renderTemplate(); break;
           case 'changelog': renderChangelog(); break;
+          case 'pipeline': renderPipeline(); break;
         }
       }
 
@@ -9329,11 +9342,11 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
               <div style="font-size:13px;opacity:.8">知识点卡片</div>
             </div>
             <div style="background:linear-gradient(135deg,#43e97b,#38f9d7);color:#fff;padding:20px;border-radius:14px">
-              <div style="font-size:28px;font-weight:700">4</div>
+              <div style="font-size:28px;font-weight:700">10</div>
               <div style="font-size:13px;opacity:.8">题型 Skill</div>
             </div>
           </div>
-          <h3 style="font-size:16px;margin-bottom:14px">📁 四种题型 Skill</h3>
+          <h3 style="font-size:16px;margin-bottom:14px">📁 十种题型 Skill</h3>
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:24px">
             ${Object.entries(CARD_TYPES).map(([name, t]) => `
               <div style="border:1px solid ${t.color}22;border-radius:12px;padding:16px;background:${t.color}08">
@@ -9404,7 +9417,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         let cards = allCards;
         if (typeF) cards = cards.filter(c => c.type === typeF);
         if (unitF) cards = cards.filter(c => c.unit_id === unitF);
-        const tc = { '概念卡': '#54A0FF', '方法卡': '#FF9F43', '辨析卡': '#FF6B6B', '公式卡': '#5ECE7B' };
+        const tc = Object.fromEntries(Object.entries(CARD_TYPES).map(([k,v]) => [k, v.color]));
         grid.innerHTML = cards.map(c => {
           const color = tc[c.type] || '#999';
           const ex = c.example && c.example.question ? c.example.question.slice(0, 40) : '';
@@ -9427,7 +9440,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
       function showDetail(fullId) {
         const card = allCards.find(c => c.full_id === fullId);
         if (!card) return;
-        const tc = { '概念卡': '#54A0FF', '方法卡': '#FF9F43', '辨析卡': '#FF6B6B', '公式卡': '#5ECE7B' };
+        const tc = Object.fromEntries(Object.entries(CARD_TYPES).map(([k,v]) => [k, v.color]));
         const color = tc[card.type] || '#999';
         const overlay = document.getElementById('pl-detail-overlay');
         const box = document.getElementById('pl-detail-box');
@@ -9643,6 +9656,122 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
 
       function _buildSystemPrompt(subject) {
         return '\u4f60\u662f\u4e00\u4f4d\u62e5\u670925\u5e74' + subject + '\u6559\u5b66\u7ecf\u9a8c\u7684\u7279\u7ea7\u6559\u5e08 + \u5c0f\u7ea2\u4e66\u7206\u6b3e\u5361\u7247\u8bbe\u8ba1\u5e08\u3002\n\n\u4f60\u7684\u6838\u5fc3\u4f7f\u547d\uff1a\u7528\u4e00\u9053\u5177\u4f53\u4f8b\u9898\uff0c\u8ba9\u4e00\u4e2a\u5b8c\u5168\u6ca1\u5b66\u8fc7\u7684\u5b69\u5b50\uff0c\u770b\u4e00\u773c\u5c31\u300c\u61c2\u4e86\uff01\u300d\n\n\u4f60\u7684\u4efb\u52a1\uff1a\u5c06\u77e5\u8bc6\u70b9\u8f6c\u5316\u4e3a\u4e00\u6bb5\u82f1\u6587AI\u56fe\u7247\u751f\u6210\u63d0\u793a\u8bcd\u3002\n\n\u2550\u2550\u2550\u2550\u2550\u2550 \u6559\u5b66\u601d\u8def\uff08\u6700\u91cd\u8981\uff01\uff09\u2550\u2550\u2550\u2550\u2550\u2550\n\n\u26a0\ufe0f \u6bcf\u5f20\u5361\u7247 = \u4e00\u9053\u5177\u4f53\u4f8b\u9898\u7684\u201c\u4e00\u56fe\u79d2\u61c2\u201d\u8bb2\u89e3\uff01\n\n\u8bbe\u8ba1\u601d\u8def\uff1a\n\u7b2c\u4e00\u6b65\uff1a\u9009\u62e9\u4e00\u9053\u771f\u5b9e\u4f8b\u9898 - \u9898\u76ee\u5fc5\u987b\u5728\u5361\u7247\u4e0a\u6e05\u6670\u5c55\u793a\n\u7b2c\u4e8c\u6b65\uff1a\u753b\u51fa\u89e3\u9898\u7684\u5173\u952e\u4e00\u6b65\uff08\u4e0d\u662f\u5168\u8fc7\u7a0b\uff01\uff09\u7528\u76f4\u89c2\u56fe\u793a\n\u7b2c\u4e09\u6b65\uff1a\u5927\u5b57\u5c55\u793a\u7b54\u6848 + \u53e3\u8bc0\n\n\u26a0\ufe0f \u7edd\u5bf9\u4e0d\u8981\uff1a\u274c\u4e0d\u753b\u5b8c\u6574\u7ad6\u5f0f \u274c\u4e0d\u753b\u88f8\u7bad\u5934 \u274c\u7bad\u5934\u4e0d\u8d85\u8fc72\u4e2a \u274c\u9898\u76ee\u5fc5\u987b\u6e05\u6670\u53ef\u89c1 \u274c\u4e0d\u53ea\u6709\u53e3\u8bc0\u6ca1\u6709\u4f8b\u9898\n\n\u2550\u2550\u2550\u2550\u2550\u2550 \u89c6\u89c9\u8bbe\u8ba1 \u2550\u2550\u2550\u2550\u2550\u2550\n\u7ad6\u5c4f3:4, \u6e10\u53d8\u80cc\u666f(\u73ca\u745a\u7c89/\u8584\u8377\u84dd/\u871c\u6843\u6a59/\u85b0\u8863\u8349\u7d2b)\n\u6807\u9898banner\u9c9c\u660e\u9971\u548c\u8272, \u5168\u5361\u4e2d\u6587\u226435\u5b57, \u6807\u9898\u22644\u5b5772pt\u7c97\u4f53\n\n\u2550\u2550\u2550\u2550\u2550\u2550 \u5e03\u5c40 \u2550\u2550\u2550\u2550\u2550\u2550\n[TITLE] 10%: \u9c9c\u8272banner+\u6807\u9898\n[PROBLEM] 15%: \u4f8b\u9898(\u767d\u8272\u5361\u7247,\u8d85\u5927\u9192\u76ee)\n[SOLVE] 40%: \u8272\u5757/\u56fe\u793a\u5206\u6b65\u89e3\u9898\n[ANSWER] 12%: \u7b54\u6848\u8d85\u5927+\u53e3\u8bc0\n[BOTTOM] 8%: \u5c0f\u8001\u5e08\u5361\u901a+\u6c14\u6ce1\n\n\u53ea\u8f93\u51fa\u82f1\u6587\u63d0\u793a\u8bcd\uff0c\u4e0d\u8f93\u51fa\u5176\u4ed6\u6587\u5b57\u3002';
+      }
+
+      // ─── 五角色流水线面板 ───
+      function renderPipeline() {
+        const el = document.getElementById('pl-panel-pipeline');
+        const roles = [
+          { id: 'R1', name: '\u6559\u7814\u4e13\u5bb6', icon: '\ud83d\udcda', color: '#54A0FF', time: '~8s', desc: '\u5185\u5bb9\u9009\u9898 + \u6613\u9519\u70b9\u5206\u6790', output: '\u9009\u51fa\u6700\u6838\u5fc3\u4f8b\u9898\u3001top3\u5e38\u89c1\u9519\u8bef\u3001\u9677\u9631\u70b9\u3001\u8003\u8bd5\u9891\u7387\u3001\u5bb6\u957f\u5173\u6ce8\u70b9' },
+          { id: 'R2', name: '\u6559\u5b66\u8bbe\u8ba1\u5e08', icon: '\ud83c\udf93', color: '#FF9F43', time: '~8s', desc: '\u89e3\u9898\u7b56\u7565 + \u6559\u5b66\u6cd5\u8bbe\u8ba1', output: '\u987f\u609f\u70b9\u3001\u7c7b\u6bd4\u3001\u65b0\u5947\u7b56\u7565(\u53cd\u8f6c\u6cd5/\u7c7b\u6bd4\u6cd5/\u5bf9\u6297\u6cd5/\u52a8\u753b\u5e27\u6cd5/\u4e00\u7b14\u6539\u9519\u6cd5)\u3001\u53ef\u89c6\u5316\u65b9\u6848\u3001\u7075\u9b42\u53e3\u8bc0' },
+          { id: 'R3', name: '\u5c0f\u7ea2\u4e66\u7b56\u5212', icon: '\ud83d\udcf1', color: '#E84393', time: '~8s', desc: '\u7206\u6b3e\u6807\u9898 + \u60c5\u7eea\u94a9\u5b50 + \u4e92\u52a8\u8bbe\u8ba1', output: '3\u4e2a\u7206\u6b3e\u6807\u9898\u3001\u60c5\u7eea\u57fa\u8c03\u3001\u4e92\u52a8\u8bbe\u8ba1\u3001\u8bc4\u8bba\u5f15\u5bfc\u3001\u7cfb\u5217\u6807\u7b7e\u3001IP\u89d2\u8272\u72b6\u6001' },
+          { id: 'R4', name: '\u89c6\u89c9\u8bbe\u8ba1\u5e08', icon: '\ud83c\udfa8', color: '#00B894', time: '~12s', desc: '\u7efc\u5408\u6240\u6709brief \u2192 \u6700\u7ec8\u56fe\u7247Prompt', output: '500-800\u8bcd\u82f1\u6587Prompt\uff0c\u878d\u5408\u6559\u5b66\u8bbe\u8ba1+\u4f20\u64ad\u7b56\u7565+IP\u89d2\u8272+\u7cfb\u5217\u611f\u8bbe\u8ba1' },
+          { id: 'R5', name: '\u8d28\u68c0\u603b\u76d1', icon: '\ud83d\udd0d', color: '#D63031', time: '~6s', desc: '5\u7ef4\u5ea6\u8bc4\u5206 + \u6539\u8fdb\u5efa\u8bae \u2192 \u5faa\u73af\u6539\u8fdb', output: '\u77e5\u8bc6\u51c6\u786e/\u6559\u5b66\u6709\u6548/\u4f20\u64ad\u6f5c\u529b/\u89c6\u89c9\u5438\u5f15/\u4fe1\u606f\u5e73\u8861\u540410\u5206\uff0c\u603b\u5206\u226538\u5219\u901a\u8fc7' }
+        ];
+
+        const strategies = [
+          { name: '\u53cd\u8f6c\u6cd5', icon: '\ud83d\udd04', desc: '\u5148\u5c55\u793a\u5e38\u89c1\u9519\u8bef\u7b54\u6848\uff0c\u518d\u63ed\u793a\u6b63\u786e\u89e3\u6cd5', best: '\u9677\u9631\u5361' },
+          { name: '\u7c7b\u6bd4\u6cd5', icon: '\ud83c\udf55', desc: '\u628a\u62bd\u8c61\u6570\u5b66\u6620\u5c04\u5230\u751f\u6d3b\u573a\u666f', best: '\u751f\u6d3b\u5361/\u6982\u5ff5\u5361' },
+          { name: '\u5bf9\u6297\u6cd5', icon: '\u2694\ufe0f', desc: '\u201c\u6b63\u786e\u5148\u751f vs \u7c97\u5fc3\u602a\u201d\u89d2\u8272\u5bf9\u6297', best: '\u5bf9\u6218\u5361/\u8fa8\u6790\u5361' },
+          { name: '\u52a8\u753b\u5e27\u6cd5', icon: '\ud83c\udfac', desc: '\u8bbe\u8ba1\u6210\u52a8\u753b\u5173\u952e\u5e27\uff0c\u9759\u56fe\u4e5f\u6709\u65f6\u95f4\u6d41\u52a8\u611f', best: '\u601d\u7ef4\u5361/\u65b9\u6cd5\u5361' },
+          { name: '\u4e00\u7b14\u6539\u9519\u6cd5', icon: '\u270f\ufe0f', desc: '\u5c55\u793a\u9519\u8bef\u7b97\u5f0f\uff0c\u53ea\u6539\u4e00\u5904\u53d8\u6b63\u786e', best: '\u6311\u6218\u5361/\u9677\u9631\u5361' }
+        ];
+
+        const designElements = [
+          { name: 'IP\u89d2\u8272\u7cfb\u7edf', icon: '\ud83d\udc66', desc: '\u201c\u6570\u5b66\u5c0f\u535a\u58eb\u201d\u2014\u2014 \u6234\u773c\u955c\u7684\u53ef\u7231\u5361\u901a\u5c0f\u5b69\uff0c\u6bcf\u5f20\u5361\u7247\u53f3\u4e0b\u89d2\u56fa\u5b9a\u51fa\u73b0+\u5bf9\u8bdd\u6c14\u6ce1\uff0c\u589e\u5f3a\u7cfb\u5217\u611f\u548c\u4eb2\u5207\u611f' },
+          { name: '\u7cfb\u5217\u7f16\u53f7', icon: '\ud83d\udcca', desc: '\u201c\u7b2cN\u5173/\u5171M\u5173\u201d\u201c\u7b2cN\u5f20/\u5171M\u5f20\u201d \u2014\u2014 \u89e6\u53d1\u6536\u85cf\u6b32\u548c\u5b8c\u6574\u5f3a\u8feb\u75c7\uff0c\u63d0\u5347\u8f6c\u53d1\u7387' },
+          { name: '\u60c5\u7eea\u94a9\u5b50', icon: '\ud83c\udfad', desc: '\u6bcf\u79cd\u9898\u578b\u6709\u4e13\u5c5e\u60c5\u7eea\u8def\u7ebf\uff1a\u9677\u9631\u5361(\u597d\u5947\u2192\u60ca\u8bb6\u2192\u604d\u7136)\u3001\u901f\u7b97\u5361(\u597d\u5947\u2192\u9707\u64bc\u2192\u6210\u5c31)\u3001\u751f\u6d3b\u5361(\u719f\u6089\u2192\u604d\u7136\u2192\u5b9e\u7528)' },
+          { name: '\u89d2\u6807/\u5fbd\u7ae0', icon: '\ud83c\udfc5', desc: '\u201c\u671f\u672b\u5fc5\u8003\u201d\u201c\u6613\u9519TOP3\u201d\u201c90%\u505a\u9519\u201d\u201c\u8001\u5e08\u4e0d\u4f1a\u6559\u201d \u2014\u2014 \u5236\u9020\u7d27\u8feb\u611f\u548c\u7a00\u7f3a\u611f' },
+          { name: '\u914d\u8272\u7cfb\u7edf', icon: '\ud83c\udfa8', desc: '\u6bcf\u79cd\u9898\u578b\u6709\u4e13\u5c5e\u914d\u8272: \u9677\u9631\u7ea2\u7cfb(\u8b66\u89c9)\u3001\u901f\u7b97\u7eff\u7cfb(\u6e05\u723d)\u3001\u6311\u6218\u91d1\u7cfb(\u5174\u594b)\u3001\u751f\u6d3b\u7d2b\u7cfb(\u6e29\u99a8)\u3001\u5bf9\u6218\u84dd\u7cfb(\u7ade\u6280)\u3001\u601d\u7ef4\u7ea2\u7cfb(\u6df1\u5ea6)' }
+        ];
+
+        let html = '';
+        // 流程图
+        html += '<div style="margin-bottom:32px">';
+        html += '<h3 style="font-size:16px;margin-bottom:16px">\ud83d\ude80 \u4e94\u89d2\u8272\u534f\u4f5c\u6d41\u6c34\u7ebf</h3>';
+        html += '<div style="display:flex;align-items:center;gap:0;overflow-x:auto;padding:12px 0">';
+        roles.forEach(function(r, i) {
+          html += '<div style="min-width:180px;border:2px solid ' + r.color + ';border-radius:14px;padding:16px;background:' + r.color + '08;position:relative">';
+          html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">';
+          html += '<span style="font-size:28px">' + r.icon + '</span>';
+          html += '<div><div style="font-weight:700;font-size:15px;color:' + r.color + '">' + r.id + ' ' + r.name + '</div>';
+          html += '<div style="font-size:11px;color:#999">' + r.time + '</div></div></div>';
+          html += '<div style="font-size:12px;color:#555;margin-bottom:6px">' + r.desc + '</div>';
+          html += '<div style="font-size:11px;color:#888;background:#f8f9fa;padding:6px 8px;border-radius:6px">\ud83d\udce4 ' + r.output + '</div>';
+          html += '</div>';
+          if (i < roles.length - 1) {
+            html += '<div style="font-size:24px;color:#ccc;padding:0 6px;flex-shrink:0">\u2192</div>';
+          }
+        });
+        html += '</div>';
+        // 改进循环
+        html += '<div style="margin-top:12px;background:#FFF5F5;border:1px solid #FFC7C7;border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:10px">';
+        html += '<span style="font-size:20px">\ud83d\udd04</span>';
+        html += '<div><div style="font-weight:600;font-size:13px;color:#D63031">\u8d28\u68c0\u5faa\u73af: \u603b\u5206 < 38/50 \u2192 \u53d1\u56deR4\u6539\u8fdb (\u6700\u591a1\u8f6e)</div>';
+        html += '<div style="font-size:12px;color:#999">5\u7ef4\u5ea6\u8bc4\u5206: \u77e5\u8bc6\u51c6\u786e \u00b7 \u6559\u5b66\u6709\u6548 \u00b7 \u4f20\u64ad\u6f5c\u529b \u00b7 \u89c6\u89c9\u5438\u5f15 \u00b7 \u4fe1\u606f\u5e73\u8861</div></div></div>';
+        html += '</div>';
+
+        // 5种新奇策略
+        html += '<div style="margin-bottom:32px">';
+        html += '<h3 style="font-size:16px;margin-bottom:16px">\u2728 \u89e3\u9898\u201c\u65b0\u5947\u7279\u201d\u7b56\u7565\u5e93</h3>';
+        html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px">';
+        strategies.forEach(function(s) {
+          html += '<div style="border:1px solid #e8e8e8;border-radius:12px;padding:14px;background:#fafafa">';
+          html += '<div style="font-size:22px;margin-bottom:6px">' + s.icon + '</div>';
+          html += '<div style="font-weight:700;font-size:14px;margin-bottom:4px">' + s.name + '</div>';
+          html += '<div style="font-size:12px;color:#666;margin-bottom:6px">' + s.desc + '</div>';
+          html += '<div style="font-size:11px;color:var(--primary);background:#e8f0fe;padding:2px 8px;border-radius:6px;display:inline-block">\u6700\u4f73\u914d\u5bf9: ' + s.best + '</div>';
+          html += '</div>';
+        });
+        html += '</div></div>';
+
+        // 设计要素系统
+        html += '<div style="margin-bottom:32px">';
+        html += '<h3 style="font-size:16px;margin-bottom:16px">\ud83c\udfad \u8bbe\u8ba1\u8981\u7d20\u7cfb\u7edf</h3>';
+        html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px">';
+        designElements.forEach(function(d) {
+          html += '<div style="border:1px solid #e8e8e8;border-radius:12px;padding:14px;display:flex;gap:12px;align-items:flex-start">';
+          html += '<span style="font-size:28px;flex-shrink:0">' + d.icon + '</span>';
+          html += '<div><div style="font-weight:700;font-size:14px;margin-bottom:4px">' + d.name + '</div>';
+          html += '<div style="font-size:12px;color:#666;line-height:1.6">' + d.desc + '</div></div></div>';
+        });
+        html += '</div></div>';
+
+        // v1 vs v2对比
+        html += '<div style="margin-bottom:24px">';
+        html += '<h3 style="font-size:16px;margin-bottom:16px">\ud83d\udcca v1 \u5355\u89d2\u8272 vs v2 \u4e94\u89d2\u8272\u5bf9\u6bd4</h3>';
+        html += '<table style="width:100%;border-collapse:collapse;font-size:13px;border:1px solid #e8e8e8;border-radius:12px;overflow:hidden">';
+        html += '<thead><tr style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff"><th style="padding:10px 14px;text-align:left">\u7ef4\u5ea6</th><th style="padding:10px 14px;text-align:left">v1 \u5355\u89d2\u8272</th><th style="padding:10px 14px;text-align:left">\ud83c\udf1f v2 \u4e94\u89d2\u8272</th></tr></thead>';
+        html += '<tbody>';
+        var cmp = [
+          ['\u89d2\u8272', '1\u4e2a(\u7279\u7ea7\u6559\u5e08+\u8bbe\u8ba1\u5e08)', '5\u4e2a\u4e13\u4e1a\u89d2\u8272\u5206\u5de5\u534f\u4f5c'],
+          ['\u9898\u578b', '4\u79cd(\u6982\u5ff5/\u65b9\u6cd5/\u8fa8\u6790/\u516c\u5f0f)', '10\u79cd(+\u9677\u9631/\u901f\u7b97/\u6311\u6218/\u751f\u6d3b/\u5bf9\u6218/\u601d\u7ef4)'],
+          ['\u89e3\u9898\u7b56\u7565', '\u56fa\u5b9a\u6a21\u677f', '5\u79cd\u65b0\u5947\u7b56\u7565\u81ea\u52a8\u5339\u914d'],
+          ['\u4f20\u64ad\u8bbe\u8ba1', '\u65e0', '\u7206\u6b3e\u6807\u9898+\u60c5\u7eea\u94a9\u5b50+\u4e92\u52a8\u5f15\u5bfc'],
+          ['\u8d28\u68c0', '\u65e0', '5\u7ef4\u5ea6\u8bc4\u5206(\u603b50\u5206)+\u6539\u8fdb\u5faa\u73af'],
+          ['\u8bbe\u8ba1\u8981\u7d20', '\u57fa\u7840\u5e03\u5c40', 'IP\u89d2\u8272+\u7cfb\u5217\u7f16\u53f7+\u60c5\u7eea\u94a9\u5b50+\u5fbd\u7ae0'],
+          ['\u5355\u5f20\u8017\u65f6', '~20s', '~50s(5\u89d2\u8272+\u8d28\u68c0)'],
+          ['\u8106\u672c', 'generate_card_images.py', 'generate_card_images_v2.py']
+        ];
+        cmp.forEach(function(row, i) {
+          html += '<tr style="background:' + (i % 2 ? '#f8f9fa' : '#fff') + '">';
+          html += '<td style="padding:8px 14px;font-weight:600;border-bottom:1px solid #f0f0f0">' + row[0] + '</td>';
+          html += '<td style="padding:8px 14px;color:#999;border-bottom:1px solid #f0f0f0">' + row[1] + '</td>';
+          html += '<td style="padding:8px 14px;color:#2e7d32;border-bottom:1px solid #f0f0f0;font-weight:500">' + row[2] + '</td>';
+          html += '</tr>';
+        });
+        html += '</tbody></table></div>';
+
+        // 使用说明
+        html += '<div style="background:#f0f8ff;border-radius:12px;padding:16px;margin-bottom:16px">';
+        html += '<h3 style="font-size:15px;margin-bottom:10px">\ud83d\udcbb \u4f7f\u7528\u65b9\u6cd5</h3>';
+        html += '<div style="font-size:13px;color:#555;line-height:1.8">';
+        html += '<code style="background:#e8e8e8;padding:2px 8px;border-radius:4px">python generate_card_images_v2.py --test</code> \u2014 \u6d4b\u8bd5\u751f\u62101\u5f20<br>';
+        html += '<code style="background:#e8e8e8;padding:2px 8px;border-radius:4px">python generate_card_images_v2.py --count 5</code> \u2014 \u751f\u6210\u524d5\u5f20<br>';
+        html += '<code style="background:#e8e8e8;padding:2px 8px;border-radius:4px">python generate_card_images_v2.py --role-debug</code> \u2014 \u663e\u793a\u6bcf\u4e2a\u89d2\u8272\u8f93\u51fa<br>';
+        html += '<code style="background:#e8e8e8;padding:2px 8px;border-radius:4px">python generate_card_images_v2.py knowledge_cards_*.json</code> \u2014 \u6307\u5b9a\u5361\u7247JSON</div></div>';
+
+        el.innerHTML = html;
       }
 
       return { init, switchTab, filterPrompts, showDetail, generateImage };

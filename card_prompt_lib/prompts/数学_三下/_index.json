@@ -16,5 +16,16 @@
     "image": "card_images/数学_三下_04_01.jpg",
     "generated_at": "2026-03-21 18:08",
     "prompt_version": "v9"
+  },
+  "数学-三下-T1-01": {
+    "title": "0÷5和5÷0",
+    "type": "陷阱卡",
+    "prompt_file": "T1_01_0÷5和5÷0.md",
+    "prompt_length": 4346,
+    "image": "card_images_v2\\数学_三下_T1_01.jpg",
+    "generated_at": "2026-03-21 21:24",
+    "pipeline": "v2_5role",
+    "audit_score": 35,
+    "audit_verdict": "FAIL"
   }
 }
