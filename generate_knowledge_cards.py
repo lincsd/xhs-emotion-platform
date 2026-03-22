@@ -1,0 +1,334 @@
+#!/usr/bin/env python3
+"""
+批量生成知识卡片 — 全学段 × 全学科
+=================================
+使用 Gemini API 按人教版教材大纲，生成结构化知识卡片 JSON。
+
+用法:
+  python generate_knowledge_cards.py                     # 生成小学数学全年级
+  python generate_knowledge_cards.py --stage 小学         # 同上
+  python generate_knowledge_cards.py --stage 初中         # 生成初中数学全年级
+  python generate_knowledge_cards.py --grade 四上          # 只生成四年级上册
+  python generate_knowledge_cards.py --subject 语文       # 生成小学语文
+  python generate_knowledge_cards.py --stage 小学 --subject 语文 --grade 二上
+  python generate_knowledge_cards.py --boom 四上          # 为四上生成爆款卡
+"""
+
+import os, sys, json, time, re, argparse
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# ============ API 配置 ============
+def load_keys():
+    kp = os.path.join(BASE_DIR, 'api_key.txt')
+    if not os.path.exists(kp):
+        print("❌ api_key.txt 不存在"); sys.exit(1)
+    keys = []
+    for line in open(kp, encoding='utf-8'):
+        line = line.strip()
+        if not line or line.startswith('#'):
+            continue
+        if line.startswith('GEMINI_API_KEY='):
+            val = line.split('=', 1)[1]
+            keys.extend([k.strip() for k in val.split(',') if k.strip()])
+    if not keys:
+        print("❌ api_key.txt 中无有效 Gemini Key"); sys.exit(1)
+    return keys
+
+def call_gemini(prompt, keys, model="gemini-2.5-flash", temperature=0.7, max_retries=3):
+    """调用 Gemini API，返回文本结果"""
+    import urllib.request, urllib.error, ssl
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+
+    for attempt in range(max_retries):
+        key = keys[attempt % len(keys)]
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}"
+        body = json.dumps({
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {"temperature": temperature, "maxOutputTokens": 65536}
+        }).encode('utf-8')
+        req = urllib.request.Request(url, data=body, headers={"Content-Type": "application/json"}, method="POST")
+        try:
+            resp = urllib.request.urlopen(req, timeout=120, context=ctx)
+            data = json.loads(resp.read().decode('utf-8'))
+            text = data['candidates'][0]['content']['parts'][0]['text']
+            return text
+        except Exception as e:
+            print(f"  ⚠️ API 调用失败 (attempt {attempt+1}): {e}")
+            if attempt < max_retries - 1:
+                time.sleep(5 * (attempt + 1))
+    return None
+
+# ============ 学段配置 ============
+STAGES = {
+    '小学': {
+        'grades': ['一上','一下','二上','二下','三上','三下','四上','四下','五上','五下','六上','六下'],
+        'grade_full': {
+            '一上':'一年级上册','一下':'一年级下册','二上':'二年级上册','二下':'二年级下册',
+            '三上':'三年级上册','三下':'三年级下册','四上':'四年级上册','四下':'四年级下册',
+            '五上':'五年级上册','五下':'五年级下册','六上':'六年级上册','六下':'六年级下册',
+        },
+        'subjects': ['数学','语文','英语'],
+        'dir': '小学'
+    },
+    '初中': {
+        'grades': ['七上','七下','八上','八下','九上','九下'],
+        'grade_full': {
+            '七上':'七年级上册','七下':'七年级下册','八上':'八年级上册','八下':'八年级下册',
+            '九上':'九年级上册','九下':'九年级下册',
+        },
+        'subjects': ['数学','语文','英语','物理','化学'],
+        'dir': '初中'
+    },
+    '高中': {
+        'grades': ['高一上','高一下','高二上','高二下','高三'],
+        'grade_full': {
+            '高一上':'高一上学期','高一下':'高一下学期','高二上':'高二上学期','高二下':'高二下学期',
+            '高三':'高三总复习',
+        },
+        'subjects': ['数学','语文','英语','物理','化学','生物'],
+        'dir': '高中'
+    }
+}
+
+# ============ Prompt 模板 ============
+CARD_GEN_PROMPT = """你是一位资深的中国{stage}{subject}教研员，精通人教版教材。
+请为 **人教版{subject} {grade_full}** 生成一套完整的知识卡片（JSON格式）。
+
+要求：
+1. 按教材单元编排，每个单元3-6张卡片
+2. 卡片类型包括：概念卡、方法卡、公式卡、辨析卡（根据学科灵活选用）
+3. 每张卡片必须包含以下字段：
+   - card_id: 格式 "单元号-序号" 如 "01-01"
+   - full_id: 格式 "{subject}-{grade_short}-01-01"
+   - title: 知识点名称
+   - type: 卡片类型
+   - difficulty: 难度 1-5
+   - importance: 重要性 1-5
+   - definition: 核心定义/概念（一句话）
+   - core_points: 要点列表（3-5条）
+   - example: {{question, steps[], answer}}
+   - mistakes: [{{wrong, correct}}]（1-2个常见错误）
+   - memory_tip: 记忆口诀/助记
+   - related: {{prerequisite, next}}
+
+4. 知识点要覆盖该册教材的所有主要单元
+5. 难度和重要性要符合实际教学情况
+6. 例题要典型、易懂，步骤清晰
+7. 记忆口诀要朗朗上口
+
+请直接输出完整JSON（不要markdown代码块），格式如下：
+{{
+  "subject": "{subject}",
+  "grade": "{grade_name}",
+  "semester": "{semester}",
+  "textbook": "人教版",
+  "grade_short": "{grade_short}",
+  "units": [
+    {{
+      "unit_id": "01",
+      "unit_name": "单元名称",
+      "cards": [...]
+    }}
+  ]
+}}
+"""
+
+BOOM_CARD_PROMPT = """你是一位小红书教育类爆款内容策划专家，同时精通人教版{stage}{subject}教材。
+请为 **人教版{subject} {grade_full}** 设计一套爆款知识卡片（JSON格式），用于生成高传播力的小红书笔记。
+
+爆款卡类型（共6种）：
+1. **陷阱卡** (T1): 学生/家长最容易犯的错误，制造"你也做错了吗？"的冲突感
+2. **速算卡** (T2): 巧妙的速算技巧，制造"原来还能这么算？"的惊喜
+3. **挑战卡** (T3): 设计挑战题，"你能xx秒内做完吗？"的互动
+4. **生活卡** (T4): 数学在生活中的应用，"原来买菜也要用到这个？"
+5. **对战卡** (T5): 家长vs孩子的PK题，制造家庭互动场景
+6. **思维卡** (T6): 思维拓展题，"学霸才能想到的解法"
+
+每种类型2-3张卡片。每张卡片需包含：
+- card_id: "T类型号-序号" 如 "T1-01"
+- full_id: "{subject}-{grade_short}-T1-01"
+- title: 简短有冲击力的标题
+- type: 具体类型名（陷阱卡/速算卡/挑战卡/生活卡/对战卡/思维卡）
+- difficulty: 1-5
+- importance: 1-5
+- definition: 核心知识点
+- core_points: 要点3-5条
+- example: {{question, steps[], answer}}
+- mistakes: [{{wrong, correct}}]
+- memory_tip: 口诀
+- emotion_hook: 情绪钩子（一句话引发好奇或共鸣）
+- trap_point / speed_tip / challenge_rule / life_scene / battle_rule / think_expand: 对应类型的特有字段
+
+知识点必须准确，符合该年级教材范围！不要超纲！
+
+请直接输出JSON（不要markdown代码块），格式如下：
+{{
+  "subject": "{subject}",
+  "grade": "{grade_name}",
+  "semester": "{semester}",
+  "textbook": "人教版",
+  "grade_short": "{grade_short}",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种新题型卡片",
+  "units": [
+    {{
+      "unit_id": "T1",
+      "unit_name": "陷阱题集",
+      "cards": [...]
+    }},
+    ...T2到T6...
+  ]
+}}
+"""
+
+def extract_json(text):
+    """从API返回文本中提取JSON"""
+    # 去掉可能的 markdown 代码块
+    text = re.sub(r'^```json\s*', '', text.strip())
+    text = re.sub(r'^```\s*', '', text.strip())
+    text = re.sub(r'\s*```$', '', text.strip())
+    # 找到第一个 { 和最后一个 }
+    start = text.find('{')
+    end = text.rfind('}')
+    if start >= 0 and end > start:
+        text = text[start:end+1]
+    return json.loads(text)
+
+def get_grade_info(stage_name, grade_short, subject):
+    """获取年级的完整信息"""
+    stage = STAGES[stage_name]
+    grade_full = stage['grade_full'].get(grade_short, grade_short)
+    # 解析年级名和学期
+    if '上' in grade_short:
+        semester = '上册'
+        grade_name = grade_full.replace('上册','').replace('上学期','')
+    elif '下' in grade_short:
+        semester = '下册'
+        grade_name = grade_full.replace('下册','').replace('下学期','')
+    else:
+        semester = '全册'
+        grade_name = grade_full
+    return grade_full, grade_name, semester
+
+def generate_cards(stage_name, grade_short, subject, keys, boom=False):
+    """为指定年级学科生成知识卡"""
+    stage = STAGES[stage_name]
+    grade_full, grade_name, semester = get_grade_info(stage_name, grade_short, subject)
+    
+    card_type = "爆款" if boom else "知识"
+    output_dir = os.path.join(BASE_DIR, 'knowledge_cards', stage['dir'])
+    os.makedirs(output_dir, exist_ok=True)
+    
+    suffix = '_爆款' if boom else ''
+    output_file = os.path.join(output_dir, f'{subject}_{grade_short}{suffix}.json')
+    
+    if os.path.exists(output_file):
+        print(f"  ⏭️  已存在: {output_file}，跳过")
+        return output_file
+    
+    print(f"\n{'='*60}")
+    print(f"  🎯 生成 {stage_name} {subject} {grade_full} {card_type}卡片")
+    print(f"{'='*60}")
+    
+    template = BOOM_CARD_PROMPT if boom else CARD_GEN_PROMPT
+    prompt = template.format(
+        stage=stage_name,
+        subject=subject,
+        grade_full=grade_full,
+        grade_name=grade_name,
+        semester=semester,
+        grade_short=grade_short,
+    )
+    
+    print(f"  📤 调用 Gemini API...")
+    text = call_gemini(prompt, keys, temperature=0.7)
+    if not text:
+        print(f"  ❌ API 调用失败，跳过 {grade_short}")
+        return None
+    
+    try:
+        data = extract_json(text)
+    except json.JSONDecodeError as e:
+        print(f"  ❌ JSON 解析失败: {e}")
+        # 保存原始响应用于调试
+        err_file = output_file.replace('.json', '_raw.txt')
+        with open(err_file, 'w', encoding='utf-8') as f:
+            f.write(text)
+        print(f"  📄 原始响应已保存: {err_file}")
+        return None
+    
+    # 统计
+    total_cards = sum(len(u.get('cards', [])) for u in data.get('units', []))
+    total_units = len(data.get('units', []))
+    
+    # 保存
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    
+    print(f"  ✅ 生成完成: {total_units} 个单元, {total_cards} 张卡片")
+    print(f"  📁 保存至: {output_file}")
+    
+    return output_file
+
+def main():
+    parser = argparse.ArgumentParser(description='批量生成知识卡片')
+    parser.add_argument('--stage', default='小学', choices=['小学','初中','高中'], help='学段')
+    parser.add_argument('--subject', default='数学', help='学科')
+    parser.add_argument('--grade', default=None, help='指定年级 (如 四上)，不指定则生成全部')
+    parser.add_argument('--boom', default=None, help='为指定年级生成爆款卡 (如 --boom 四上)')
+    parser.add_argument('--boom-all', action='store_true', help='为所有年级生成爆款卡')
+    parser.add_argument('--delay', type=int, default=5, help='每次API调用间隔秒数')
+    args = parser.parse_args()
+    
+    keys = load_keys()
+    stage = STAGES[args.stage]
+    
+    print(f"""
+╔══════════════════════════════════════════════╗
+║   📚 知识卡片批量生成器                       ║
+║   学段: {args.stage}  学科: {args.subject}              ║
+║   API Keys: {len(keys)} 个                          ║
+╚══════════════════════════════════════════════╝
+""")
+    
+    # 爆款卡模式
+    if args.boom:
+        generate_cards(args.stage, args.boom, args.subject, keys, boom=True)
+        return
+    
+    # 确定要生成的年级列表
+    if args.grade:
+        grades = [args.grade]
+    else:
+        grades = stage['grades']
+    
+    results = []
+    for i, grade in enumerate(grades):
+        result = generate_cards(args.stage, grade, args.subject, keys, boom=False)
+        results.append((grade, result))
+        
+        # 如果也需要爆款卡
+        if args.boom_all:
+            generate_cards(args.stage, grade, args.subject, keys, boom=True)
+        
+        # API 调用间隔
+        if i < len(grades) - 1 and result:
+            print(f"\n  ⏳ 等待 {args.delay} 秒...")
+            time.sleep(args.delay)
+    
+    # 汇总
+    print(f"\n{'='*60}")
+    print(f"  📊 生成汇总")
+    print(f"{'='*60}")
+    success = sum(1 for _, r in results if r)
+    skip = sum(1 for _, r in results if r and '跳过' not in str(r))
+    for grade, result in results:
+        status = '✅' if result else '❌'
+        print(f"  {status} {args.subject}_{grade}")
+    print(f"\n  总计: {len(results)} 个年级, {success} 个成功")
+
+if __name__ == '__main__':
+    main()

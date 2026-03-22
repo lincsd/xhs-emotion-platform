@@ -1,0 +1,246 @@
+{
+  "stages": {
+    "小学": [
+      {
+        "file": "数学_一上.json",
+        "subject": "数学",
+        "grade": "一年级",
+        "semester": "上册",
+        "grade_short": "一上",
+        "is_boom": false,
+        "units": 8,
+        "cards": 24
+      },
+      {
+        "file": "数学_一上_爆款.json",
+        "subject": "数学",
+        "grade": "一年级",
+        "semester": "上册",
+        "grade_short": "一上",
+        "is_boom": true,
+        "units": 6,
+        "cards": 18
+      },
+      {
+        "file": "数学_一下.json",
+        "subject": "数学",
+        "grade": "一年级",
+        "semester": "下册",
+        "grade_short": "一下",
+        "is_boom": false,
+        "units": 8,
+        "cards": 26
+      },
+      {
+        "file": "数学_一下_爆款.json",
+        "subject": "数学",
+        "grade": "一年级",
+        "semester": "下册",
+        "grade_short": "一下",
+        "is_boom": true,
+        "units": 6,
+        "cards": 14
+      },
+      {
+        "file": "数学_三上.json",
+        "subject": "数学",
+        "grade": "三年级",
+        "semester": "上册",
+        "grade_short": "三上",
+        "is_boom": false,
+        "units": 9,
+        "cards": 31
+      },
+      {
+        "file": "数学_三上_爆款.json",
+        "subject": "数学",
+        "grade": "三年级",
+        "semester": "上册",
+        "grade_short": "三上",
+        "is_boom": true,
+        "units": 6,
+        "cards": 18
+      },
+      {
+        "file": "数学_三下.json",
+        "subject": "数学",
+        "grade": "三年级",
+        "semester": "下册",
+        "grade_short": "三下",
+        "is_boom": false,
+        "units": 8,
+        "cards": 34
+      },
+      {
+        "file": "数学_三下_爆款.json",
+        "subject": "数学",
+        "grade": "三年级",
+        "semester": "下册",
+        "grade_short": "三下",
+        "is_boom": true,
+        "units": 6,
+        "cards": 15
+      },
+      {
+        "file": "数学_二上.json",
+        "subject": "数学",
+        "grade": "二年级",
+        "semester": "上册",
+        "grade_short": "二上",
+        "is_boom": false,
+        "units": 8,
+        "cards": 22
+      },
+      {
+        "file": "数学_二上_爆款.json",
+        "subject": "数学",
+        "grade": "二年级",
+        "semester": "上册",
+        "grade_short": "二上",
+        "is_boom": true,
+        "units": 6,
+        "cards": 13
+      },
+      {
+        "file": "数学_二下.json",
+        "subject": "数学",
+        "grade": "二年级",
+        "semester": "下册",
+        "grade_short": "二下",
+        "is_boom": false,
+        "units": 9,
+        "cards": 26
+      },
+      {
+        "file": "数学_二下_爆款.json",
+        "subject": "数学",
+        "grade": "二年级",
+        "semester": "下册",
+        "grade_short": "二下",
+        "is_boom": true,
+        "units": 6,
+        "cards": 12
+      },
+      {
+        "file": "数学_五上.json",
+        "subject": "数学",
+        "grade": "五年级",
+        "semester": "上册",
+        "grade_short": "五上",
+        "is_boom": false,
+        "units": 7,
+        "cards": 26
+      },
+      {
+        "file": "数学_五上_爆款.json",
+        "subject": "数学",
+        "grade": "五年级",
+        "semester": "上册",
+        "grade_short": "五上",
+        "is_boom": true,
+        "units": 6,
+        "cards": 13
+      },
+      {
+        "file": "数学_五下.json",
+        "subject": "数学",
+        "grade": "五年级",
+        "semester": "下册",
+        "grade_short": "五下",
+        "is_boom": false,
+        "units": 7,
+        "cards": 25
+      },
+      {
+        "file": "数学_五下_爆款.json",
+        "subject": "数学",
+        "grade": "五年级",
+        "semester": "下册",
+        "grade_short": "五下",
+        "is_boom": true,
+        "units": 6,
+        "cards": 13
+      },
+      {
+        "file": "数学_六上.json",
+        "subject": "数学",
+        "grade": "六年级",
+        "semester": "上册",
+        "grade_short": "六上",
+        "is_boom": false,
+        "units": 8,
+        "cards": 36
+      },
+      {
+        "file": "数学_六上_爆款.json",
+        "subject": "数学",
+        "grade": "六年级",
+        "semester": "上册",
+        "grade_short": "六上",
+        "is_boom": true,
+        "units": 6,
+        "cards": 12
+      },
+      {
+        "file": "数学_六下.json",
+        "subject": "数学",
+        "grade": "六年级",
+        "semester": "下册",
+        "grade_short": "六下",
+        "is_boom": false,
+        "units": 6,
+        "cards": 22
+      },
+      {
+        "file": "数学_六下_爆款.json",
+        "subject": "数学",
+        "grade": "六年级",
+        "semester": "下册",
+        "grade_short": "六下",
+        "is_boom": true,
+        "units": 6,
+        "cards": 15
+      },
+      {
+        "file": "数学_四上.json",
+        "subject": "数学",
+        "grade": "四年级",
+        "semester": "上册",
+        "grade_short": "四上",
+        "is_boom": false,
+        "units": 7,
+        "cards": 28
+      },
+      {
+        "file": "数学_四上_爆款.json",
+        "subject": "数学",
+        "grade": "四年级",
+        "semester": "上册",
+        "grade_short": "四上",
+        "is_boom": true,
+        "units": 6,
+        "cards": 13
+      },
+      {
+        "file": "数学_四下.json",
+        "subject": "数学",
+        "grade": "四年级",
+        "semester": "下册",
+        "grade_short": "四下",
+        "is_boom": false,
+        "units": 8,
+        "cards": 28
+      },
+      {
+        "file": "数学_四下_爆款.json",
+        "subject": "数学",
+        "grade": "四年级",
+        "semester": "下册",
+        "grade_short": "四下",
+        "is_boom": true,
+        "units": 6,
+        "cards": 18
+      }
+    ]
+  }
+}
