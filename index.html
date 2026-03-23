@@ -19808,10 +19808,17 @@ Style: ${stylePrompt}
       const btn = document.getElementById('btn-login');
       btn.disabled = true; btn.textContent = '登录中...';
       try {
+        // 确保后端已检测完成
+        if (!_backendChecked && IS_GITHUB_PAGES) {
+          btn.textContent = '正在连接服务器...';
+          await _selectBestBackend();
+          API_BASE = _activeBackend;
+        }
         const res = await fetch(API_BASE + '/api/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password })
+          body: JSON.stringify({ username, password }),
+          signal: _abortSignalTimeout(15000)
         });
         const data = await res.json();
         if (!res.ok) { showLoginError(data.error || '登录失败'); return; }
@@ -19820,7 +19827,31 @@ Style: ${stylePrompt}
         showApp();
         loadDashboard();
       } catch (e) {
-        showLoginError('网络错误，请重试');
+        if (e.name === 'AbortError') {
+          // 超时后自动尝试切换后端重试一次
+          try {
+            btn.textContent = '切换线路重试...';
+            _backendChecked = false;
+            await _selectBestBackend(true);
+            if (IS_GITHUB_PAGES) API_BASE = _activeBackend;
+            const res2 = await fetch(API_BASE + '/api/auth/login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ username, password }),
+              signal: _abortSignalTimeout(15000)
+            });
+            const data2 = await res2.json();
+            if (!res2.ok) { showLoginError(data2.error || '登录失败'); return; }
+            localStorage.setItem('xhs_auth_token', data2.token);
+            currentUser = data2.user;
+            showApp();
+            loadDashboard();
+            return;
+          } catch { /* fall through to error below */ }
+          showLoginError('连接超时，请检查网络后重试');
+        } else {
+          showLoginError('网络错误，请检查网络后重试');
+        }
       } finally {
         btn.disabled = false; btn.textContent = '🔐 登 录';
       }
@@ -19843,10 +19874,17 @@ Style: ${stylePrompt}
       const btn = document.getElementById('btn-register');
       btn.disabled = true; btn.textContent = '注册中...';
       try {
+        // 确保后端已检测完成
+        if (!_backendChecked && IS_GITHUB_PAGES) {
+          btn.textContent = '正在连接服务器...';
+          await _selectBestBackend();
+          API_BASE = _activeBackend;
+        }
         const res = await fetch(API_BASE + '/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ phone, username, password, nickname, inviteCode, captchaToken, captchaAnswer })
+          body: JSON.stringify({ phone, username, password, nickname, inviteCode, captchaToken, captchaAnswer }),
+          signal: _abortSignalTimeout(15000)
         });
         const data = await res.json();
         if (!res.ok) {
@@ -19860,7 +19898,11 @@ Style: ${stylePrompt}
         toast('注册成功，欢迎加入！', 'success');
         loadDashboard();
       } catch (e) {
-        showLoginError('网络错误，请重试');
+        if (e.name === 'AbortError') {
+          showLoginError('连接超时，请检查网络后重试');
+        } else {
+          showLoginError('网络错误，请检查网络后重试');
+        }
         loadRegCaptcha();
       } finally {
         btn.disabled = false; btn.textContent = '✨ 注 册';
