@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    width: 1080px;
+    min-height: 1440px;
+    background: linear-gradient(135deg, #FFD89B 0%, #FFA7A7 100%);
+    font-family: 'Noto Sans SC', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    padding: 0;
+    overflow: hidden;
+}
+
+.card {
+    width: 1080px;
+    min-height: 1440px;
+    padding: 40px;
+    position: relative;
+}
+
+/* ── Banner ── */
+.banner {
+    background: #FF9F43;
+    border-radius: 24px;
+    padding: 32px 40px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+}
+.banner::after {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+}
+.banner-icon {
+    font-size: 48px;
+    position: absolute;
+    top: 20px; right: 30px;
+    opacity: 0.3;
+}
+.banner-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.25);
+    color: white;
+    font-size: 22px;
+    font-weight: 500;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+}
+.banner-title {
+    color: white;
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.banner-sub {
+    color: rgba(255,255,255,0.85);
+    font-size: 22px;
+    font-weight: 300;
+    margin-top: 8px;
+}
+
+/* ── Definition ── */
+.definition-box {
+    background: white;
+    border-radius: 20px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border-left: 5px solid #FF6B6B;
+}
+.definition-label {
+    color: #FF6B6B;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.definition-text {
+    color: #333;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* ── Core Points ── */
+.core-points {
+    background: white;
+    border-radius: 20px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.core-points-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #FF9F43;
+    margin-bottom: 16px;
+}
+.core-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 24px;
+    color: #444;
+    line-height: 1.5;
+}
+.point-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    background: #FF9F43;
+    color: white;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+/* ── Example ── */
+.example-box {
+    background: white;
+    border-radius: 20px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.example-question {
+    font-size: 32px;
+    font-weight: 700;
+    color: #FF6B6B;
+    margin-bottom: 20px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, rgba(255,107,107,0.08), rgba(255,159,67,0.08));
+    border-radius: 14px;
+}
+.steps-container {
+    margin: 16px 0;
+}
+.step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 14px;
+    font-size: 23px;
+    color: #444;
+    line-height: 1.55;
+}
+.step-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    color: white;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+.step-text {
+    flex: 1;
+}
+.example-answer {
+    font-size: 30px;
+    color: #FF4757;
+    font-weight: 700;
+    padding: 14px 20px;
+    background: #FFF5F5;
+    border-radius: 14px;
+    margin-top: 16px;
+}
+
+/* ── Mistakes Compare ── */
+.mistakes-compare {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+.mistake-col {
+    flex: 1;
+    border-radius: 18px;
+    padding: 22px 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+.wrong-col {
+    background: #FFF5F5;
+    border: 2px solid #FFD5D5;
+}
+.correct-col {
+    background: #F0FFF4;
+    border: 2px solid #C6F6D5;
+}
+.mistake-header {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+.wrong-col .mistake-header { color: #FF4757; }
+.correct-col .mistake-header { color: #2ED573; }
+.mistake-body {
+    font-size: 20px;
+    color: #555;
+    line-height: 1.6;
+    white-space: pre-line;
+    font-family: 'Consolas', 'Noto Sans SC', monospace;
+}
+
+/* ── Memory Tip ── */
+.memory-tip {
+    background: linear-gradient(135deg, #FFF9C4, #FFE082);
+    border-radius: 20px;
+    padding: 24px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    position: relative;
+}
+.memory-tip::before {
+    content: '💡';
+    font-size: 36px;
+    position: absolute;
+    top: -12px;
+    left: 20px;
+}
+.memory-tip-label {
+    font-size: 20px;
+    font-weight: 700;
+    color: #F59E0B;
+    margin-bottom: 8px;
+    padding-left: 8px;
+}
+.memory-tip-text {
+    font-size: 28px;
+    font-weight: 700;
+    color: #92400E;
+    line-height: 1.5;
+}
+
+/* ── Footer ── */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 8px;
+    color: rgba(0,0,0,0.35);
+    font-size: 18px;
+}
+.footer-right {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+.difficulty {
+    font-size: 16px;
+}
+</style>
+</head>
+<body>
+<div class="card">
+    <!-- Banner -->
+    <div class="banner">
+        <span class="banner-icon">📐</span>
+        <div class="banner-tag">方法卡 · 数学三年级</div>
+        <div class="banner-title">笔算两位数乘两位数</div>
+        <div class="banner-sub">数学-三下-05-03</div>
+    </div>
+    
+    <!-- Definition -->
+    <div class="definition-box">
+        <div class="definition-label">📖 知识要点</div>
+        <div class="definition-text">用竖式计算两位数乘两位数：先用个位乘，再用十位乘并错位，最后把两层积相加。</div>
+    </div>
+    
+    <!-- Core Points -->
+    <div class="core-points">
+        <div class="core-points-title">🎯 核心要点</div>
+        <div class="core-point"><span class="point-num">1</span> 先用第二个乘数的个位分别去乘第一个乘数的每一位，积的末位和个位对齐。</div>
+<div class="core-point"><span class="point-num">2</span> 再用第二个乘数的十位分别去乘第一个乘数的每一位，积的末位和十位对齐（向左错一位）。</div>
+<div class="core-point"><span class="point-num">3</span> 把两次乘得的积上下对齐相加，就是最终结果。</div>
+<div class="core-point"><span class="point-num">4</span> 每一步乘法中满十要向前一位进位，别漏进位。</div>
+
+    </div>
+    
+    <!-- Example -->
+    
+        <div class="example-box">
+            <div class="example-question">📝 用竖式计算 34 × 21 = ?</div>
+            <div class="steps-container"><div class="step">
+                <span class="step-badge" style="background:#2ED573;">1</span>
+                <span class="step-text">列竖式：把34写在上面，21写在下面，乘号写在左边，画横线。</span>
+            </div>
+<div class="step">
+                <span class="step-badge" style="background:#FF9F43;">2</span>
+                <span class="step-text">第一层：用个位1×34。1×4=4写个位，1×3=3写十位，第一层得34。</span>
+            </div>
+<div class="step">
+                <span class="step-badge" style="background:#54A0FF;">3</span>
+                <span class="step-text">第二层：用十位2×34。2×4=8，2×3=6，得68。因为2在十位上，所以68的末位8要写在十位下面（向左错一位），相当于680。</span>
+            </div>
+<div class="step">
+                <span class="step-badge" style="background:#A55EEA;">4</span>
+                <span class="step-text">相加：把第一层34和第二层680对齐相加，4+0=4，3+8=11写1进1，0+6+1=7，最终得714。</span>
+            </div>
+</div>
+            <div class="example-answer">✅ 答案：<strong>34 × 21 = 714</strong></div>
+        </div>
+    
+    <!-- Mistakes Compare -->
+    
+        <div class="mistakes-compare">
+            <div class="mistake-col wrong-col">
+                <div class="mistake-header">❌ 常见错误</div>
+                <div class="mistake-body">用十位上的2乘34得68后，没有向左错一位，直接对齐个位写：
+    34
+  × 21
+  ────
+    34  ← 1×34
+    68  ← 2×34（没错位！）
+  ────
+   102  ← 错误答案</div>
+            </div>
+            <div class="mistake-col correct-col">
+                <div class="mistake-header">✅ 正确做法</div>
+                <div class="mistake-body">用十位上的2乘34得68后，末位8必须对齐十位（向左错一位）：
+    34
+  × 21
+  ────
+    34  ← 1×34
+  680   ← 2×34，错一位
+  ────
+  714   ← 正确答案</div>
+            </div>
+        </div>
+    
+    <!-- Memory Tip -->
+    <div class="memory-tip">
+        <div class="memory-tip-label">记忆口诀</div>
+        <div class="memory-tip-text">个位乘完十位乘，十位积要错一位，对齐相加得总积。</div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <span>小红薯学习平台</span>
+        <div class="footer-right">
+            <span class="difficulty">难度 ⭐⭐⭐⭐☆</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
