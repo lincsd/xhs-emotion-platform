@@ -9598,7 +9598,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         if (clearBtn) clearBtn.style.display = 'inline-block';
 
         try {
-          const r = await fetch('/api/ai-match-cards', {
+          const r = await fetch(API_BASE + '/api/ai-match-cards', {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({query, subject: currentSubject})
@@ -10566,7 +10566,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
       /* ---- 从API加载笔记 ---- */
       async function loadNotes(){
         try {
-          const r = await fetch('/api/generated-notes');
+          const r = await fetch(API_BASE + '/api/generated-notes');
           if(r.ok){
             const d = await r.json();
             if(d.notes && d.notes.length) {
@@ -10617,7 +10617,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         }
 
         try {
-          const r = await fetch('/api/generate-note', {
+          const r = await fetch(API_BASE + '/api/generate-note', {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify(reqBody)
