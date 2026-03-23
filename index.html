@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260323c';
+      var BUILD='20260323d';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);}
@@ -3819,7 +3819,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260323c'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260323d'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -3915,15 +3915,9 @@
       el.title = _lastCheckInfo || `build:${PAGE_BUILD}`;
     }
 
-    if (IS_GITHUB_PAGES && IS_CN_EMBEDDED_BROWSER) {
-      // 内嵌浏览器跳转到后端服务器
-      // 优先 Tunnel（快），否则 Render
-      (async () => {
-        const backend = await _selectBestBackend();
-        const target = `${backend}/?from=github-pages`;
-        if (location.href !== target) location.replace(target);
-      })();
-    }
+    // v20260323c: 不再重定向内嵌浏览器到后端，所有浏览器统一留在 GitHub Pages
+    // API 调用通过 _selectBestBackend() 智能选择 Tunnel 或 Render
+    // if (IS_GITHUB_PAGES && IS_CN_EMBEDDED_BROWSER) { ... 已移除 ... }
     let API_BASE = IS_GITHUB_PAGES ? CF_TUNNEL_BACKEND : '';
 
     // ============ Skill 系统 — 多账号类型复用 ============
