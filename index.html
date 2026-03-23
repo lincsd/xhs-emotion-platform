@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260323f';
+      var BUILD='20260323g';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);}
@@ -10015,8 +10015,8 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
 
         // 生成图片 + 生成笔记按钮
         html += '<div style="margin-bottom:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">';
-        html += '<button id="pl-gen-html-btn" onclick="PromptLib.renderCardHTML(\'' + card.full_id + '\')" style="background:linear-gradient(135deg,#2ED573,#1B9CFC);color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px" onmouseenter="this.style.opacity=0.9" onmouseleave="this.style.opacity=1">\ud83d\uddbc\ufe0f HTML渲染图片</button>';
-        html += '<button id="pl-gen-btn" onclick="PromptLib.generateImage(\'' + card.full_id + '\')" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px" onmouseenter="this.style.opacity=0.9" onmouseleave="this.style.opacity=1">\ud83c\udfa8 AI生成图片</button>;
+        html += '<button id="pl-gen-html-btn" onclick="PromptLib.renderCardHTML(\'' + card.full_id + '\')" style="background:linear-gradient(135deg,#2ED573,#1B9CFC);color:#fff;border:none;padding:12px 28px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;box-shadow:0 3px 12px rgba(46,213,115,.3)" onmouseenter="this.style.opacity=0.9" onmouseleave="this.style.opacity=1">\ud83d\uddbc\ufe0f \u751f\u6210\u5361\u7247\u56fe\u7247</button>';
+        html += '<button id="pl-gen-btn" onclick="PromptLib.generateImage(\'' + card.full_id + '\')" style="background:#999;color:#fff;border:none;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:4px;opacity:0.7" onmouseenter="this.style.opacity=0.9" onmouseleave="this.style.opacity=0.7" title="\u5b9e\u9a8c\u6027\u529f\u80fd\uff0c\u53ef\u80fd\u51fa\u73b0\u4e71\u7801">\ud83e\uddea AI\u751f\u6210(\u5b9e\u9a8c)</button>';
         html += '<button onclick="PromptLib._goNote(\'' + card.full_id + '\')" style="background:linear-gradient(135deg,#f093fb,#f5576c);color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px" onmouseenter="this.style.opacity=0.9" onmouseleave="this.style.opacity=1">📝 生成笔记</button>';
         html += '<span id="pl-gen-status" style="font-size:13px;color:#999"></span>';
         html += '</div>';
@@ -10139,9 +10139,11 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
             '\n\u53e3\u8bc0: ' + (card.memory_tip || '') +
             '\n\u6613\u9519\u70b9: ' + (card.mistakes || []).map(function(m){return m.wrong + '\u2192' + m.correct}).join('; ');
 
-          const sysPrompt = _buildSystemPrompt('\u6570\u5b66');
+          // 根据卡片学科自动匹配
+          const cardSubject = (card.full_id || '').includes('\u8bed\u6587') ? '\u8bed\u6587' : (card.full_id || '').includes('\u82f1\u8bed') ? '\u82f1\u8bed' : '\u6570\u5b66';
+          const sysPrompt = _buildSystemPrompt(cardSubject);
           const step1Payload = {
-            contents: [{ parts: [{ text: 'SYSTEM:\n' + sysPrompt + '\n\nUSER:\n\u8bf7\u4e3a\u4ee5\u4e0b\u77e5\u8bc6\u70b9\u8bbe\u8ba1\u4e00\u5f20\u77e5\u8bc6\u5361\u7247\u7684\u56fe\u7247\u63d0\u793a\u8bcd\uff1a\n\n' + cardInfo }] }],
+            contents: [{ parts: [{ text: 'SYSTEM:\n' + sysPrompt + '\n\nUSER:\nDesign an image prompt for this knowledge card. REMEMBER: absolutely NO Chinese/CJK characters in the image. Use only English, numbers and math symbols.\n\n' + cardInfo }] }],
             generationConfig: { thinkingConfig: { thinkingBudget: 2048 }, maxOutputTokens: 8192 }
           };
 
@@ -10200,7 +10202,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
               '<br><button onclick="PromptLib.generateImage(\'' + fullId + '\')" style="margin-top:6px;background:#FF9F43;color:#fff;border:none;padding:4px 14px;border-radius:6px;font-size:12px;cursor:pointer">\ud83d\udd04 \u7acb\u5373\u91cd\u8bd5</button>' : '');
           }
         } finally {
-          if (btn) { btn.disabled = false; btn.style.opacity = '1'; btn.innerHTML = '\ud83c\udfa8 \u751f\u6210 Nano Banana \u56fe\u7247'; }
+          if (btn) { btn.disabled = false; btn.style.opacity = '0.7'; btn.innerHTML = '\ud83e\uddea AI\u751f\u6210(\u5b9e\u9a8c)'; }
         }
       }
 
@@ -10216,7 +10218,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         var btn = document.getElementById('pl-gen-html-btn');
         var status = document.getElementById('pl-gen-status');
         var resultDiv = document.getElementById('pl-gen-result');
-        if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; btn.innerHTML = '\u23f3 HTML\u6e32\u67d3\u4e2d...'; }
+        if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; btn.innerHTML = '\u23f3 \u751f\u6210\u4e2d...'; }
         if (status) status.textContent = '\u6b63\u5728\u7528 HTML \u6a21\u677f\u6e32\u67d3\u5361\u7247\u56fe\u7247...';
 
         try {
@@ -10259,12 +10261,12 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           console.error('[PromptLib] renderCardHTML error:', e);
           if (status) status.innerHTML = '<span style="color:#cf1322">\u274c ' + (e.message || e) + '</span>';
         } finally {
-          if (btn) { btn.disabled = false; btn.style.opacity = '1'; btn.innerHTML = '\ud83d\uddbc\ufe0f HTML\u6e32\u67d3\u56fe\u7247'; }
+          if (btn) { btn.disabled = false; btn.style.opacity = '1'; btn.innerHTML = '\ud83d\uddbc\ufe0f \u751f\u6210\u5361\u7247\u56fe\u7247'; }
         }
       }
 
       function _buildSystemPrompt(subject) {
-        return '\u4f60\u662f\u4e00\u4f4d\u62e5\u670925\u5e74' + subject + '\u6559\u5b66\u7ecf\u9a8c\u7684\u7279\u7ea7\u6559\u5e08 + \u5c0f\u7ea2\u4e66\u7206\u6b3e\u5361\u7247\u8bbe\u8ba1\u5e08\u3002\n\n\u4f60\u7684\u6838\u5fc3\u4f7f\u547d\uff1a\u7528\u4e00\u9053\u5177\u4f53\u4f8b\u9898\uff0c\u8ba9\u4e00\u4e2a\u5b8c\u5168\u6ca1\u5b66\u8fc7\u7684\u5b69\u5b50\uff0c\u770b\u4e00\u773c\u5c31\u300c\u61c2\u4e86\uff01\u300d\n\n\u4f60\u7684\u4efb\u52a1\uff1a\u5c06\u77e5\u8bc6\u70b9\u8f6c\u5316\u4e3a\u4e00\u6bb5\u82f1\u6587AI\u56fe\u7247\u751f\u6210\u63d0\u793a\u8bcd\u3002\n\n\u2550\u2550\u2550\u2550\u2550\u2550 \u6559\u5b66\u601d\u8def\uff08\u6700\u91cd\u8981\uff01\uff09\u2550\u2550\u2550\u2550\u2550\u2550\n\n\u26a0\ufe0f \u6bcf\u5f20\u5361\u7247 = \u4e00\u9053\u5177\u4f53\u4f8b\u9898\u7684\u201c\u4e00\u56fe\u79d2\u61c2\u201d\u8bb2\u89e3\uff01\n\n\u8bbe\u8ba1\u601d\u8def\uff1a\n\u7b2c\u4e00\u6b65\uff1a\u9009\u62e9\u4e00\u9053\u771f\u5b9e\u4f8b\u9898 - \u9898\u76ee\u5fc5\u987b\u5728\u5361\u7247\u4e0a\u6e05\u6670\u5c55\u793a\n\u7b2c\u4e8c\u6b65\uff1a\u753b\u51fa\u89e3\u9898\u7684\u5173\u952e\u4e00\u6b65\uff08\u4e0d\u662f\u5168\u8fc7\u7a0b\uff01\uff09\u7528\u76f4\u89c2\u56fe\u793a\n\u7b2c\u4e09\u6b65\uff1a\u5927\u5b57\u5c55\u793a\u7b54\u6848 + \u53e3\u8bc0\n\n\u26a0\ufe0f \u7edd\u5bf9\u4e0d\u8981\uff1a\u274c\u4e0d\u753b\u5b8c\u6574\u7ad6\u5f0f \u274c\u4e0d\u753b\u88f8\u7bad\u5934 \u274c\u7bad\u5934\u4e0d\u8d85\u8fc72\u4e2a \u274c\u9898\u76ee\u5fc5\u987b\u6e05\u6670\u53ef\u89c1 \u274c\u4e0d\u53ea\u6709\u53e3\u8bc0\u6ca1\u6709\u4f8b\u9898\n\n\u2550\u2550\u2550\u2550\u2550\u2550 \u89c6\u89c9\u8bbe\u8ba1 \u2550\u2550\u2550\u2550\u2550\u2550\n\u7ad6\u5c4f3:4, \u6e10\u53d8\u80cc\u666f(\u73ca\u745a\u7c89/\u8584\u8377\u84dd/\u871c\u6843\u6a59/\u85b0\u8863\u8349\u7d2b)\n\u6807\u9898banner\u9c9c\u660e\u9971\u548c\u8272, \u5168\u5361\u4e2d\u6587\u226435\u5b57, \u6807\u9898\u22644\u5b5772pt\u7c97\u4f53\n\n\u2550\u2550\u2550\u2550\u2550\u2550 \u5e03\u5c40 \u2550\u2550\u2550\u2550\u2550\u2550\n[TITLE] 10%: \u9c9c\u8272banner+\u6807\u9898\n[PROBLEM] 15%: \u4f8b\u9898(\u767d\u8272\u5361\u7247,\u8d85\u5927\u9192\u76ee)\n[SOLVE] 40%: \u8272\u5757/\u56fe\u793a\u5206\u6b65\u89e3\u9898\n[ANSWER] 12%: \u7b54\u6848\u8d85\u5927+\u53e3\u8bc0\n[BOTTOM] 8%: \u5c0f\u8001\u5e08\u5361\u901a+\u6c14\u6ce1\n\n\u53ea\u8f93\u51fa\u82f1\u6587\u63d0\u793a\u8bcd\uff0c\u4e0d\u8f93\u51fa\u5176\u4ed6\u6587\u5b57\u3002';
+        return 'You are a top-tier educational card designer for Chinese elementary ' + subject + ' content.\n\nYour task: Convert the given knowledge point into an ENGLISH image generation prompt for an AI image model.\n\n═══ CRITICAL TEXT RULES ═══\n\n⚠️ ABSOLUTELY NO CHINESE/CJK CHARACTERS IN THE IMAGE! The AI model CANNOT render Chinese text correctly.\n\n✅ ALLOWED text: English words, Arabic numbers (0-9), math symbols (+−×÷=<>), basic punctuation\n❌ FORBIDDEN: Any Chinese characters, Japanese, Korean, or other CJK text. Do NOT include Chinese titles, labels, or captions.\n\nInstead of Chinese text, use:\n- Numbers and math expressions: "3 × 4 = 12"\n- English labels: "Step 1", "Answer", "Tip"\n- Visual icons/emojis described in English\n- Color-coded regions with arrows instead of text labels\n\n═══ DESIGN APPROACH ═══\n\nDesign an educational infographic card that teaches through VISUALS, not text:\n1. Show the math problem using numbers and symbols only\n2. Use color blocks, diagrams, arrows to show the solution process\n3. Display the answer prominently with large numbers\n4. A cute cartoon teacher character in bottom-right corner with a speech bubble (English or emoji only)\n\n═══ VISUAL DESIGN ═══\nPortrait 3:4 ratio, gradient background (coral pink/mint blue/peach orange/lavender)\nBright saturated title banner, clean modern layout\nLarge readable numbers, minimal text (English only)\n\n═══ LAYOUT ═══\n[TITLE] 10%: Colored banner with English title or just emoji + numbers\n[PROBLEM] 15%: Show the math problem with big numbers (white card, eye-catching)\n[SOLVE] 40%: Visual step-by-step with color blocks and diagrams\n[ANSWER] 15%: Super large answer number + tip in English\n[BOTTOM] 10%: Cute cartoon character + speech bubble (English/emoji)\n\nOutput ONLY the English prompt, no other text.';
       }
 
       // ─── 五角色流水线面板 ───
