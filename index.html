@@ -10841,12 +10841,19 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         h += `<div style="background:#fff;border-radius:14px;padding:18px;border:1px solid #eee;margin-bottom:20px">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
             <div style="font-weight:700">\uD83D\uDDBC\uFE0F 轮播图规划 (${carousel.length}页)</div>
-            ${hasSlideImages?'<span style="font-size:12px;padding:2px 10px;border-radius:10px;background:#d5f5e3;color:#27ae60;font-weight:600">\u2705 AI图片已生成</span>':''}
-          </div>`;
+            <div style="display:flex;gap:8px;align-items:center">
+              ${hasSlideImages?'<span style="font-size:12px;padding:2px 10px;border-radius:10px;background:#d5f5e3;color:#27ae60;font-weight:600">\u2705 AI图片已生成</span>':''}
+              <button id="nw-gen-carousel-btn" onclick="NoteWorkshop.generateCarouselImages(${idx})" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:8px;padding:6px 16px;cursor:pointer;font-size:12px;font-weight:600;white-space:nowrap" onmouseenter="this.style.opacity=0.85" onmouseleave="this.style.opacity=1">${hasSlideImages?'\uD83D\uDD04 重新生成图片':'\uD83D\uDDBC\uFE0F AI生成轮播图'}</button>
+            </div>
+          </div>
+          <div id="nw-carousel-gen-status" style="margin-bottom:10px"></div>`;
         if(hasSlideImages){
+          const okImages = n.slide_images.filter(si => si.status === 'ok' || si.status === 'skip(cover)');
           /* 大图轮播 */
+          const firstImg = okImages[0] || n.slide_images[0];
+          const firstSrc = firstImg.dataUrl || (imgBase + firstImg.file);
           h += `<div id="nw-carousel-wrap" style="position:relative;max-width:540px;margin:0 auto 16px;border-radius:12px;overflow:hidden;background:#000">`;
-          h += `<img id="nw-carousel-img" src="${imgBase}${n.slide_images[0].file}" style="width:100%;display:block;border-radius:12px" onerror="this.style.display='none'">`;
+          h += `<img id="nw-carousel-img" src="${firstSrc}" style="width:100%;display:block;border-radius:12px" onerror="this.style.display='none'">`;
           h += `<div style="position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;padding:3px 10px;border-radius:8px" id="nw-carousel-idx">1/${n.slide_images.length}</div>`;
           h += `<button onclick="NoteWorkshop._carouselNav(-1)" style="position:absolute;left:6px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.4);color:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:16px">\u276E</button>`;
           h += `<button onclick="NoteWorkshop._carouselNav(1)" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.4);color:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:16px">\u276F</button>`;
@@ -10854,7 +10861,11 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           /* 缩略图条 */
           h += `<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px">`;
           n.slide_images.forEach((si,i)=>{
-            h += `<img src="${imgBase}${si.file}" onclick="NoteWorkshop._carouselGo(${i})" style="width:64px;height:64px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid ${i===0?tm.color:'transparent'};opacity:${i===0?1:0.6};transition:all .2s" class="nw-thumb" data-idx="${i}" onerror="this.style.display='none'">`;
+            const thumbSrc = si.dataUrl || (imgBase + si.file);
+            const isFail = si.status === 'fail';
+            h += isFail
+              ? `<div style="width:64px;height:64px;border-radius:8px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:11px;color:#ccc;border:2px solid transparent" class="nw-thumb" data-idx="${i}">\u274c</div>`
+              : `<img src="${thumbSrc}" onclick="NoteWorkshop._carouselGo(${i})" style="width:64px;height:64px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid ${i===0?tm.color:'transparent'};opacity:${i===0?1:0.6};transition:all .2s" class="nw-thumb" data-idx="${i}" onerror="this.style.display='none'">`;
           });
           h += `</div>`;
         }
@@ -10945,6 +10956,75 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         el.innerHTML = h;
       }
 
+      /* ---- AI生成轮播图 ---- */
+      async function generateCarouselImages(noteIdx) {
+        const n = allNotes[noteIdx]; if(!n || !n.carousel || !n.carousel.length) return;
+        const btn = document.getElementById('nw-gen-carousel-btn');
+        const statusEl = document.getElementById('nw-carousel-gen-status');
+        if(btn) { btn.disabled = true; btn.style.opacity = '0.6'; btn.textContent = '\u23f3 生成中...'; }
+
+        const noteTitle = n.title || '';
+        const noteTemplate = n.template || '';
+        const slides = n.carousel;
+        const slideImages = [];
+        let successCount = 0;
+
+        for(let i = 0; i < slides.length; i++) {
+          const s = slides[i];
+          if(statusEl) statusEl.innerHTML = `<div style="padding:8px 12px;background:#eef2ff;border-radius:8px;font-size:13px;color:#3949ab">\uD83C\uDFA8 正在生成第 ${i+1}/${slides.length} 页: P${s.slide} ${esc(s.type)}...</div>`;
+
+          try {
+            // Step 1: 用 Flash 生成英文图片 Prompt
+            const slideContext = `笔记标题: ${noteTitle}\n模板风格: ${noteTemplate}\n当前页: 第${s.slide}页/${slides.length}页\n页面类型: ${s.type}\n页面描述: ${s.desc}${s.card_id ? '\n关联卡片: ' + s.card_id : ''}`;
+
+            const sysPrompt = '你是一位小红书教育轮播图设计专家。\n\n你的任务：将轮播图的页面描述转化为一段英文AI图片生成提示词。\n\n设计要求：\n- 竖屏3:4比例，适合手机滑动浏览\n- 教育风格：色彩鲜明、字体醒目、布局清晰\n- 每页有明确的视觉焦点和信息层次\n- 使用渐变背景(珊瑚粉/薄荷蓝/蜜桃橙/薰衣草紫)\n- 中文文字清晰可见\n- 封面页要有强视觉冲击力和钩子\n- 内容页要图文并茂\n- 结尾页要有互动引导\n\n只输出英文提示词，不要其他文字。';
+
+            const step1Payload = {
+              contents: [{ parts: [{ text: 'SYSTEM:\n' + sysPrompt + '\n\nUSER:\n请为以下轮播图页面设计图片提示词：\n\n' + slideContext }] }],
+              generationConfig: { thinkingConfig: { thinkingBudget: 1024 }, maxOutputTokens: 4096 }
+            };
+
+            const step1Result = await callGeminiAPI(null, 'gemini-2.5-flash', step1Payload, 'generateContent', '轮播图Prompt');
+            if(!step1Result || !step1Result.ok) throw new Error('Prompt生成失败');
+
+            let imagePrompt = '';
+            for(const cand of (step1Result.data.candidates || [])) {
+              for(const part of (cand.content || {}).parts || []) {
+                if(part.text) imagePrompt += part.text;
+              }
+            }
+            imagePrompt = imagePrompt.trim();
+            if(!imagePrompt) throw new Error('Prompt为空');
+
+            // Step 2: 用图片模型生成图片
+            const imageResult = await generateSingleImage(imagePrompt);
+            if(!imageResult) throw new Error('图片生成失败');
+
+            slideImages.push({ slide: s.slide, file: `slide_${s.slide}.jpg`, status: 'ok', dataUrl: imageResult });
+            successCount++;
+          } catch(e) {
+            console.error(`[NoteWorkshop] Slide ${s.slide} generation failed:`, e);
+            slideImages.push({ slide: s.slide, file: `slide_${s.slide}.jpg`, status: 'fail', error: e.message });
+          }
+        }
+
+        // 保存到笔记对象
+        n.slide_images = slideImages;
+        _carouselNote = n;
+        _carouselCur = 0;
+
+        if(statusEl) {
+          if(successCount > 0) {
+            statusEl.innerHTML = `<div style="padding:8px 12px;background:#d5f5e3;border-radius:8px;font-size:13px;color:#27ae60">\u2705 轮播图生成完成！成功 ${successCount}/${slides.length} 页</div>`;
+          } else {
+            statusEl.innerHTML = `<div style="padding:8px 12px;background:#fde8e8;border-radius:8px;font-size:13px;color:#e74c3c">\u274c 轮播图生成失败，请重试</div>`;
+          }
+        }
+
+        // 重新渲染详情页
+        setTimeout(() => showDetail(noteIdx), 1500);
+      }
+
       /* ---- 复制正文 ---- */
       function copyBody(idx){
         const n = allNotes[idx]; if(!n) return;
@@ -10960,10 +11040,11 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
       function _carouselGo(idx){
         const n = _carouselNote; if(!n || !n.slide_images) return;
         _carouselCur = Math.max(0, Math.min(idx, n.slide_images.length-1));
+        const si = n.slide_images[_carouselCur];
         const imgBase = `note-images/${encodeURIComponent(n.note_id)}/`;
         const img = document.getElementById('nw-carousel-img');
         const counter = document.getElementById('nw-carousel-idx');
-        if(img) img.src = imgBase + n.slide_images[_carouselCur].file;
+        if(img) img.src = si.dataUrl || (imgBase + si.file);
         if(counter) counter.textContent = `${_carouselCur+1}/${n.slide_images.length}`;
         document.querySelectorAll('.nw-thumb').forEach(t=>{
           const ti = parseInt(t.dataset.idx);
@@ -11066,7 +11147,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         if (banner) banner.remove();
       }
 
-      return { init, showDetail, copyBody, _carouselGo, _carouselNav, generateNote, setFilter, clearPipeline };
+      return { init, showDetail, copyBody, _carouselGo, _carouselNav, generateNote, generateCarouselImages, setFilter, clearPipeline };
     })();
 
 
