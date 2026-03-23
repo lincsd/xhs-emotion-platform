@@ -106,13 +106,24 @@ LOGIN_LOCKOUT_SECONDS = 300  # 锁定5分钟
 # Gemini API Proxy 配置
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com'
 
+def _sanitize_api_key(key):
+    """清洗 API Key：去除 GEMINI_API_KEY= 前缀、ADMIN_KEY=xxx 后缀等杂质"""
+    key = key.strip()
+    # 去除 KEY=value 前缀 (如 GEMINI_API_KEY=AIza...)
+    if '=' in key and not key.startswith('AIza'):
+        key = key.split('=', 1)[-1].strip()
+    # 去除末尾可能的 ADMIN_KEY=xxx 等杂质
+    if ' ' in key:
+        key = key.split()[0].strip()
+    return key
+
 def _load_server_gemini_key():
     """只从环境变量读取 API Key，绝不从文件读取（防止 Key 泄露到 Git）
     如果 GEMINI_API_KEY 包含逗号（多 Key 模式），只返回第一个 Key"""
     raw = (os.environ.get('GEMINI_API_KEY') or '').strip()
     if ',' in raw:
-        return raw.split(',')[0].strip()
-    return raw
+        return _sanitize_api_key(raw.split(',')[0])
+    return _sanitize_api_key(raw)
 
 SERVER_GEMINI_API_KEY = _load_server_gemini_key()
 
@@ -126,7 +137,8 @@ def _load_server_gemini_keys():
         raw = (os.environ.get('GEMINI_API_KEY') or '').strip()
     if not raw:
         return []
-    return [k.strip() for k in raw.split(',') if k.strip()]
+    keys = [_sanitize_api_key(k) for k in raw.split(',') if k.strip()]
+    return [k for k in keys if k]  # 过滤空值
 
 SERVER_GEMINI_API_KEYS = _load_server_gemini_keys()
 _server_key_index = 0
@@ -3254,7 +3266,12 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 "generationConfig": {"temperature": temperature, "maxOutputTokens": 4096}
             }).encode('utf-8')
             req = urllib.request.Request(url, data=req_body, headers={"Content-Type": "application/json"}, method="POST")
-            resp = _OPENER.open(req, timeout=60)
+            try:
+                resp = _OPENER.open(req, timeout=60)
+            except urllib.error.HTTPError as he:
+                err_body = he.read().decode('utf-8', errors='replace')[:500]
+                print(f'[Gemini API Error] {he.code}: {err_body}')
+                raise Exception(f'Gemini API {he.code}: {err_body[:200]}')
             data = json.loads(resp.read().decode('utf-8'))
             # 提取文本（跳过 thought 部分）
             text = ''
