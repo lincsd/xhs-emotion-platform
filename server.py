@@ -2930,12 +2930,63 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             hook = c.get('emotion_hook', '')
             if hook:
                 cards_text += f"  钩子: {hook}\n"
+            trap = c.get('trap_point', '')
+            if trap:
+                cards_text += f"  陷阱点: {trap}\n"
+
+        # ── Prompt工程智慧注入 ──
+        prompt_wisdom = ""
+        card_context = body.get('card_context')
+        prompt_context = body.get('prompt_context')
+        if card_context or prompt_context:
+            prompt_wisdom += "\n\n🔗 【Prompt工程智慧 - 来自五角色流水线分析】\n"
+            if prompt_context:
+                pc = prompt_context
+                if isinstance(pc, dict):
+                    r1 = pc.get('R1', {})
+                    r2 = pc.get('R2', {})
+                    r3 = pc.get('R3', {})
+                    if r1:
+                        prompt_wisdom += f"\n📚 R1 教研专家分析:\n"
+                        prompt_wisdom += f"  选题: {r1.get('selected_problem', '')}\n"
+                        prompt_wisdom += f"  陷阱点: {r1.get('trap_point', '')}\n"
+                        prompt_wisdom += f"  Top3易错: {'; '.join(r1.get('top3_mistakes', []))}\n"
+                        prompt_wisdom += f"  为何重要: {r1.get('why_important', '')}\n"
+                    if r2:
+                        prompt_wisdom += f"\n🎓 R2 教学设计师智慧:\n"
+                        prompt_wisdom += f"  顿悟时刻: {r2.get('eureka_moment', '')}\n"
+                        prompt_wisdom += f"  生活类比: {r2.get('analogy', '')}\n"
+                        prompt_wisdom += f"  创新策略: {r2.get('novel_strategy', '')}\n"
+                        prompt_wisdom += f"  灵魂口诀: {r2.get('soul_mnemonic', '')}\n"
+                    if r3:
+                        prompt_wisdom += f"\n📱 R3 小红书策划:\n"
+                        prompt_wisdom += f"  爆款标题: {r3.get('best_title', '')}\n"
+                        prompt_wisdom += f"  情绪基调: {r3.get('emotion_tone', '')}\n"
+                        prompt_wisdom += f"  钩子类型: {r3.get('hook_type', '')}\n"
+                        prompt_wisdom += f"  系列标签: {r3.get('series_tag', '')}\n"
+                        prompt_wisdom += f"  IP状态: {r3.get('ip_character_state', '')}\n"
+            if card_context and isinstance(card_context, dict):
+                cc = card_context
+                if cc.get('emotion_hook'):
+                    prompt_wisdom += f"\n💥 情绪钩子: {cc['emotion_hook']}\n"
+                if cc.get('trap_point'):
+                    prompt_wisdom += f"🪤 卡片陷阱点: {cc['trap_point']}\n"
+                mistakes = cc.get('mistakes', [])
+                if mistakes:
+                    prompt_wisdom += f"⚠️ 易错点: {'; '.join(m.get('wrong','') + '→' + m.get('correct','') for m in mistakes[:3] if isinstance(m, dict))}\n"
+
+            prompt_wisdom += "\n请充分利用以上Prompt工程智慧来丰富笔记内容：\n"
+            prompt_wisdom += "- 使用R1的陷阱分析来设置认知冲突\n"
+            prompt_wisdom += "- 使用R2的顿悟时刻和类比来打造'啊哈'体验\n"
+            prompt_wisdom += "- 使用R2的灵魂口诀作为记忆锚点\n"
+            prompt_wisdom += "- 参考R3的爆款标题风格和情绪基调\n"
+            prompt_wisdom += "- 使用钩子类型来设计封面和开头\n"
 
         note_prompt = f"""你是一位小红书教育内容创作高手，擅长将知识卡片转化为高传播力的小红书笔记。
 
 以下是{subject} {grade_short}的知识卡片数据：
 {cards_text}
-
+{prompt_wisdom}
 请基于以上卡片内容，用「{template}」模板风格，生成一篇完整的小红书笔记。
 
 模板风格说明：
