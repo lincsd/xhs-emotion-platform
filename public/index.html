@@ -10183,7 +10183,22 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           if (status) status.innerHTML = '<span style="color:#2e7d32">\u2705 \u751f\u6210\u6210\u529f!</span>';
         } catch(e) {
           console.error('[PromptLib] generateImage error:', e);
-          if (status) status.innerHTML = '<span style="color:#cf1322">\u274c ' + (e.message || e) + '</span>';
+          // 解析错误消息（兼容 fromProxy 对象和普通 Error）
+          let errMsg = '';
+          if (e && e.fromProxy && e.data) {
+            const errData = e.data.error || e.data;
+            const code = e.status || errData.code || '';
+            const msg = errData.message || JSON.stringify(errData).slice(0, 150);
+            errMsg = `Gemini API ${code}: ${msg.slice(0, 100)}`;
+          } else {
+            errMsg = e.message || String(e);
+          }
+          const is503 = /503|繁忙|overload|high demand/i.test(errMsg);
+          if (status) {
+            status.innerHTML = '<span style="color:#cf1322">\u274c ' + errMsg + '</span>' +
+              (is503 ? '<br><span style="font-size:12px;color:#888">\u26a1 \u6a21\u578b\u5f53\u524d\u7e41\u5fd9\uff0c\u670d\u52a1\u5668\u5df2\u81ea\u52a8\u91cd\u8bd5\u591a\u6b21\u3002\u53ef\u7a0d\u540e\u70b9\u51fb\u201c\u91cd\u65b0\u751f\u6210\u201d\u518d\u8bd5\u3002</span>' +
+              '<br><button onclick="PromptLib.generateImage(\'' + fullId + '\')" style="margin-top:6px;background:#FF9F43;color:#fff;border:none;padding:4px 14px;border-radius:6px;font-size:12px;cursor:pointer">\ud83d\udd04 \u7acb\u5373\u91cd\u8bd5</button>' : '');
+          }
         } finally {
           if (btn) { btn.disabled = false; btn.style.opacity = '1'; btn.innerHTML = '\ud83c\udfa8 \u751f\u6210 Nano Banana \u56fe\u7247'; }
         }

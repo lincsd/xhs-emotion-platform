@@ -2843,15 +2843,28 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     time.sleep(wait_time)
                 _last_image_gen_time = time.time()
 
-        # 多 Key 自动重试：429/500/503 时切换下一个 Key 重试
-        max_retries = min(len(SERVER_GEMINI_API_KEYS), 3) if len(SERVER_GEMINI_API_KEYS) > 1 else 1
+        # 多 Key 自动重试：429/500/503 时切换 Key + 渐进退避
+        # Phase 1: 每个 Key 尝试一轮（快速切换，2s间隔）
+        # Phase 2: keys 耗尽后，额外重试最后一个 key（递增退避 5s/10s/15s）
+        n_keys = len(SERVER_GEMINI_API_KEYS)
+        PHASE1_DELAY = 2.0             # Key 切换间隔
+        PHASE2_DELAYS = [5, 10, 15]    # 额外退避轮次
+        max_retries = n_keys + len(PHASE2_DELAYS) if n_keys > 1 else 1 + len(PHASE2_DELAYS)
         last_err_json, last_err_code = None, 500
 
         for attempt in range(max_retries):
             if attempt > 0:
-                api_key = _get_next_server_key()
+                # Phase1: 切换下一个 Key; Phase2: 保持上一个 Key 但加长等待
+                if attempt < n_keys:
+                    api_key = _get_next_server_key()
+                    delay = PHASE1_DELAY
+                else:
+                    delay = PHASE2_DELAYS[min(attempt - n_keys, len(PHASE2_DELAYS) - 1)]
                 if not api_key:
                     break
+                phase = 'keyRotate' if attempt < n_keys else 'backoff'
+                print(f'[GeminiProxy] 重试 {attempt}/{max_retries-1} ({phase}), key=...{api_key[-6:]}, 等待{delay}s')
+                time.sleep(delay)
 
             try:
                 if action == 'listModels':
@@ -2869,6 +2882,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 if user and action != 'listModels':
                     self._record_ai_usage(user['id'], feature)
 
+                if attempt > 0:
+                    print(f'[GeminiProxy] ✅ 重试{attempt}次后成功 ({model})')
                 return self._send_json(result)
             except urllib.error.HTTPError as e:
                 err_body = e.read().decode('utf-8', errors='replace')
@@ -2879,19 +2894,20 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 last_err_json, last_err_code = err_json, e.code
                 # 可重试的错误码：429 限频 / 500 服务器错误 / 503 过载
                 if e.code in (429, 500, 503) and attempt < max_retries - 1:
-                    time.sleep(1.5)  # 重试间隔避免连续打满
-                    continue
+                    continue  # delay 在循环顶部处理
+                print(f'[GeminiProxy] ❌ {model} 最终失败: HTTP {e.code} (尝试{attempt+1}次)')
                 return self._send_json(err_json, e.code)
             except Exception as e:
                 last_err_json = {'error': {'code': 500, 'message': str(e)}}
                 last_err_code = 500
                 if attempt < max_retries - 1:
-                    time.sleep(1)  # 网络错误重试间隔
-                    continue
+                    continue  # delay 在循环顶部处理
+                print(f'[GeminiProxy] ❌ {model} 网络错误: {e} (尝试{attempt+1}次)')
                 return self._send_json(last_err_json, 500)
 
         # 所有重试都失败
-        self._send_json(last_err_json or {'error': {'code': 500, 'message': 'All API keys exhausted'}}, last_err_code)
+        print(f'[GeminiProxy] ❌ {model} 所有 {max_retries} 次重试失败')
+        self._send_json(last_err_json or {'error': {'code': 503, 'message': f'所有API Key均返回503，模型 {model} 当前繁忙，请稍后重试'}}, last_err_code)
 
     # ============ 笔记工坊 - AI 笔记生成 ============
     def _generate_xhs_note(self, body):
