@@ -9381,7 +9381,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           ${trapHtml}
           ${(card.mistakes && card.mistakes.length) ? `<div style="background:#ffebee;border-radius:12px;padding:16px;margin-bottom:14px">
             <div style="font-size:13px;font-weight:600;color:#c62828;margin-bottom:6px">⚠️ 易错提醒</div>
-            ${card.mistakes.map(m => \`<div style="margin-bottom:8px"><div style="font-size:13px;color:#c62828">❌ ${m.wrong}</div><div style="font-size:13px;color:#2e7d32;margin-top:2px">✅ ${m.correct}</div></div>\`).join('')}
+            ${card.mistakes.map(m => '<div style="margin-bottom:8px"><div style="font-size:13px;color:#c62828">\u274c ' + m.wrong + '</div><div style="font-size:13px;color:#2e7d32;margin-top:2px">\u2705 ' + m.correct + '</div></div>').join('')}
           </div>` : ''}
           ${card.memory_tip ? `<div style="background:#e8f5e9;border-radius:12px;padding:16px;margin-bottom:14px">
             <div style="font-size:13px;font-weight:600;color:#2e7d32;margin-bottom:6px">💡 记忆技巧</div>
