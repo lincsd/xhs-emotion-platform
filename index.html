@@ -9378,19 +9378,19 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
             <div style="font-size:14px;color:#2e7d32;font-weight:600;margin-top:8px;padding-top:8px;border-top:1px dashed #c8e6c9">✅ ${card.example.answer}</div>
           </div>
           ${trapHtml}
-          <div style="background:#ffebee;border-radius:12px;padding:16px;margin-bottom:14px">
+          ${(card.mistakes && card.mistakes.length) ? `<div style="background:#ffebee;border-radius:12px;padding:16px;margin-bottom:14px">
             <div style="font-size:13px;font-weight:600;color:#c62828;margin-bottom:6px">⚠️ 易错提醒</div>
-            ${card.mistakes.map(m => `<div style="margin-bottom:8px"><div style="font-size:13px;color:#c62828">❌ ${m.wrong}</div><div style="font-size:13px;color:#2e7d32;margin-top:2px">✅ ${m.correct}</div></div>`).join('')}
-          </div>
-          <div style="background:#e8f5e9;border-radius:12px;padding:16px;margin-bottom:14px">
+            ${card.mistakes.map(m => \`<div style="margin-bottom:8px"><div style="font-size:13px;color:#c62828">❌ ${m.wrong}</div><div style="font-size:13px;color:#2e7d32;margin-top:2px">✅ ${m.correct}</div></div>\`).join('')}
+          </div>` : ''}
+          ${card.memory_tip ? `<div style="background:#e8f5e9;border-radius:12px;padding:16px;margin-bottom:14px">
             <div style="font-size:13px;font-weight:600;color:#2e7d32;margin-bottom:6px">💡 记忆技巧</div>
             <div style="font-size:14px;color:#333;line-height:1.6">${card.memory_tip}</div>
-          </div>
-          <div style="background:#f3e5f5;border-radius:12px;padding:16px;margin-bottom:18px">
+          </div>` : ''}
+          ${card.related ? `<div style="background:#f3e5f5;border-radius:12px;padding:16px;margin-bottom:18px">
             <div style="font-size:13px;font-weight:600;color:#6a1b9a;margin-bottom:6px">🔗 关联知识</div>
-            <div style="font-size:13px;color:#555">前置：${card.related.prerequisite}</div>
-            <div style="font-size:13px;color:#555;margin-top:4px">后续：${card.related.next}</div>
-          </div>
+            <div style="font-size:13px;color:#555">前置：${card.related.prerequisite || '暂无'}</div>
+            <div style="font-size:13px;color:#555;margin-top:4px">后续：${card.related.next || '暂无'}</div>
+          </div>` : ''}
           <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
             <button onclick="KnowledgeCards.downloadCard('${card.full_id}')" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;padding:10px 28px;border-radius:24px;font-size:14px;cursor:pointer;box-shadow:0 4px 12px rgba(102,126,234,.3)">📥 下载卡片图片</button>
             <button onclick="KnowledgeCards._goNote('${card.full_id}')" style="background:linear-gradient(135deg,#f093fb,#f5576c);color:#fff;border:none;padding:10px 28px;border-radius:24px;font-size:14px;cursor:pointer;box-shadow:0 4px 12px rgba(245,87,108,.3)">📝 生成笔记</button>
@@ -9472,8 +9472,8 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         y = _sec(ctx,'📖 定义',card.definition,30,y,W-60,th);
         y = _secList(ctx,'🎯 核心要点',card.core_points,30,y,W-60,th);
         y = _secEx(ctx,card.example,30,y,W-60);
-        if (card.mistakes.length>0 && y<H-220) y = _secMis(ctx,card.mistakes[0],30,y,W-60);
-        if (y<H-120) y = _sec(ctx,'💡 记忆技巧',card.memory_tip,30,y,W-60,{p:'#2e7d32',l:'#e8f5e9'});
+        if (card.mistakes && card.mistakes.length>0 && y<H-220) y = _secMis(ctx,card.mistakes[0],30,y,W-60);
+        if (card.memory_tip && y<H-120) y = _sec(ctx,'💡 记忆技巧',card.memory_tip,30,y,W-60,{p:'#2e7d32',l:'#e8f5e9'});
 
         // bottom
         ctx.fillStyle = th.p; ctx.fillRect(0,H-48,W,48);

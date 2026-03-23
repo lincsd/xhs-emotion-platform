@@ -45,7 +45,11 @@
           ],
           "memory_tip": "on在表面，in在里面，under在下面，小球位置要看清！",
           "emotion_hook": "介词小迷糊？看完这篇，你就是定位大师！",
-          "trap_point": "很多同学分不清“在桌子上”到底用in还是on，容易受中文思维影响。"
+          "trap_point": "很多同学分不清“在桌子上”到底用in还是on，容易受中文思维影响。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T1-02",
@@ -81,7 +85,11 @@
           ],
           "memory_tip": "Mine像个小超人，自己就能站！My后面要跟个伴！",
           "emotion_hook": "你的英语是不是总在“我的”和“你的”上卡壳？快来终结你的困扰！",
-          "trap_point": "误将mine/yours当成my/your使用，或反之，导致语法错误。"
+          "trap_point": "误将mine/yours当成my/your使用，或反之，导致语法错误。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -123,7 +131,11 @@
           ],
           "memory_tip": "擦窗户“擦擦擦”/tʃ/，嘘，安静“嘘嘘嘘”/ʃ/。",
           "emotion_hook": "你的发音小细节，决定了别人能不能听懂你！别再让“看”和“洗”傻傻分不清！",
-          "pronunciation_tip": "练习时可以对着镜子观察嘴型，并感受舌头在口腔中的位置。/tʃ/发音时有轻微的爆破感。"
+          "pronunciation_tip": "练习时可以对着镜子观察嘴型，并感受舌头在口腔中的位置。/tʃ/发音时有轻微的爆破感。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T2-02",
@@ -159,7 +171,11 @@
           ],
           "memory_tip": "短U像个小钩子，长U像个大嘴巴。发音长短要记牢，意思才不会跑！",
           "emotion_hook": "别让你的“书”和“食物”听起来一样啦！掌握这个，你的发音更地道！",
-          "pronunciation_tip": "发/ʊ/音时，感觉嘴巴像要说“哦”但没完全发出；发/uː/音时，嘴巴像吹口哨一样，持续时间更长。"
+          "pronunciation_tip": "发/ʊ/音时，感觉嘴巴像要说“哦”但没完全发出；发/uː/音时，嘴巴像吹口哨一样，持续时间更长。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -190,7 +206,18 @@
             "answer": "It's on the wall. / It's near the window."
           },
           "scene_dialogue": "A: Excuse me, where is the board? B: It's on the wall, near the door. A: Thank you! And where is the light? B: The light is on the ceiling (天花板).",
-          "emotion_hook": "别再指手画脚啦！用英语清晰表达，你就是小小讲解员！快来挑战你的“寻宝”能力！"
+          "emotion_hook": "别再指手画脚啦！用英语清晰表达，你就是小小讲解员！快来挑战你的“寻宝”能力！",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          },
+          "mistakes": [
+            {
+              "wrong": "粗心大意导致计算错误。",
+              "correct": "认真审题，仔细检查每一步。"
+            }
+          ],
+          "memory_tip": "别再指手画脚啦！用英语清晰表达，你就是小小讲解员！快来挑战你的“寻宝”能力！"
         },
         {
           "card_id": "T3-02",
@@ -215,7 +242,18 @@
             "answer": "He is tall. He can't swim."
           },
           "scene_dialogue": "A: Look at my friend! B: Wow, he is so tall! Can he play basketball? A: Yes, he can. But he can't sing. B: That's okay! He is still cool.",
-          "emotion_hook": "想让朋友佩服你的英语？赶紧来挑战这个！用英语描述你的“神秘嘉宾”！"
+          "emotion_hook": "想让朋友佩服你的英语？赶紧来挑战这个！用英语描述你的“神秘嘉宾”！",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          },
+          "mistakes": [
+            {
+              "wrong": "粗心大意导致计算错误。",
+              "correct": "认真审题，仔细检查每一步。"
+            }
+          ],
+          "memory_tip": "想让朋友佩服你的英语？赶紧来挑战这个！用英语描述你的“神秘嘉宾”！"
         }
       ]
     },
@@ -257,7 +295,11 @@
           ],
           "memory_tip": "一只is，好多are，记住不犯错！",
           "emotion_hook": "别让你的英语听起来像“中式英语”！这个语法点，你小学就该掌握！",
-          "grammar_fix": "There is 用于单数名词或不可数名词，There are 用于复数名词。"
+          "grammar_fix": "There is 用于单数名词或不可数名词，There are 用于复数名词。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T4-02",
@@ -293,7 +335,11 @@
           ],
           "memory_tip": "数清多少个，后面加个s！",
           "emotion_hook": "小细节决定大问题！你的英语严谨吗？这个小陷阱，你踩过吗？",
-          "grammar_fix": "How many 后面必须跟可数名词的复数形式。"
+          "grammar_fix": "How many 后面必须跟可数名词的复数形式。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -324,7 +370,18 @@
             "answer": "There are three chairs in the living room."
           },
           "battle_rule": "轮流说出房间里不同物品的数量，说对且说得快者得分。可以设定主题（如“厨房里的东西”），看谁说得更多更准确。",
-          "emotion_hook": "妈妈和娃的英语大比拼，谁能胜出？快来家里找找英语宝藏！"
+          "emotion_hook": "妈妈和娃的英语大比拼，谁能胜出？快来家里找找英语宝藏！",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          },
+          "mistakes": [
+            {
+              "wrong": "粗心大意导致计算错误。",
+              "correct": "认真审题，仔细检查每一步。"
+            }
+          ],
+          "memory_tip": "妈妈和娃的英语大比拼，谁能胜出？快来家里找找英语宝藏！"
         },
         {
           "card_id": "T5-02",
@@ -350,7 +407,18 @@
           },
           "battle_rule": "妈妈说英语指令（如 'Please sing a song!' 'Please read a book!'），孩子听指令做动作。看谁反应快，动作准。可以计时或累计错误次数。",
           "emotion_hook": "别再“听不懂”啦！英语听力大闯关，谁是行动派？",
-          "scene_dialogue": "Mom: Please watch TV! Child: (假装看电视) Mom: Good job! Now, please jump! Child: (跳起来)"
+          "scene_dialogue": "Mom: Please watch TV! Child: (假装看电视) Mom: Good job! Now, please jump! Child: (跳起来)",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          },
+          "mistakes": [
+            {
+              "wrong": "粗心大意导致计算错误。",
+              "correct": "认真审题，仔细检查每一步。"
+            }
+          ],
+          "memory_tip": "别再“听不懂”啦！英语听力大闯关，谁是行动派？"
         }
       ]
     },
@@ -383,7 +451,17 @@
           },
           "memory_tip": "小球on the table，小球in the box，小球under the chair。唱着跳着就记住啦！",
           "emotion_hook": "还在死记硬背？这种方法让你英语学习开挂！介词再也不会错！",
-          "speed_method": "形象联想+动作示范法。用手模拟小球在不同位置，边说边做，加深记忆。"
+          "speed_method": "形象联想+动作示范法。用手模拟小球在不同位置，边说边做，加深记忆。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          },
+          "mistakes": [
+            {
+              "wrong": "粗心大意导致计算错误。",
+              "correct": "认真审题，仔细检查每一步。"
+            }
+          ]
         },
         {
           "card_id": "T6-02",
@@ -412,7 +490,17 @@
           },
           "memory_tip": "大小对对碰，长短手牵手，胖瘦做朋友，轻重不分离。反义词一起背，效率翻几倍！",
           "emotion_hook": "告别单词书，这样背单词才有趣高效！你的词汇量要爆棚啦！",
-          "speed_method": "对比记忆法+情景联想法。将反义词配对成组，并结合图片或实际物品进行联想，如“big apple, small apple”。"
+          "speed_method": "对比记忆法+情景联想法。将反义词配对成组，并结合图片或实际物品进行联想，如“big apple, small apple”。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          },
+          "mistakes": [
+            {
+              "wrong": "粗心大意导致计算错误。",
+              "correct": "认真审题，仔细检查每一步。"
+            }
+          ]
         },
         {
           "card_id": "T6-03",
@@ -441,7 +529,17 @@
           },
           "memory_tip": "看电视(watch TV)，看书(read books)，玩电脑(play computer games)。活动搭配不分离，周末生活更精彩！",
           "emotion_hook": "还在一个一个背？这种组合记忆法，让你的词汇量翻倍，轻松聊周末！",
-          "speed_method": "搭配记忆法+情景串联法。将相关联的动词和名词一起记忆，并想象自己在做这些活动，形成画面感。"
+          "speed_method": "搭配记忆法+情景串联法。将相关联的动词和名词一起记忆，并想象自己在做这些活动，形成画面感。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          },
+          "mistakes": [
+            {
+              "wrong": "粗心大意导致计算错误。",
+              "correct": "认真审题，仔细检查每一步。"
+            }
+          ]
         }
       ]
     }

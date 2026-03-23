@@ -45,7 +45,11 @@
           ],
           "memory_tip": "三单他她它，动词has变化；其余主语用have，牢记口诀不犯错！",
           "emotion_hook": "你的英语老师看到这个错误会皱眉！小学必考，赶紧收藏！",
-          "trap_point": "很多同学只记住了“三单用has”，却忘了I和you虽然是单数，但要用have。"
+          "trap_point": "很多同学只记住了“三单用has”，却忘了I和you虽然是单数，但要用have。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T1-02",
@@ -81,7 +85,11 @@
           ],
           "memory_tip": "句首用主格，动宾用宾格；He/She是主，Him/Her是宾。",
           "emotion_hook": "别再闹笑话了！一句话让你彻底分清主宾格，告别小学低级错误！",
-          "trap_point": "中文习惯不分主宾格，导致学生经常混淆。记住“谁发出动作就用主格，谁承受动作就用宾格”。"
+          "trap_point": "中文习惯不分主宾格，导致学生经常混淆。记住“谁发出动作就用主格，谁承受动作就用宾格”。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -124,7 +132,11 @@
           ],
           "memory_tip": "记住'th'是浊音，发音时喉咙要震动，像中文“克楼子”快速连读。",
           "emotion_hook": "你的发音暴露了你的英语水平！一个单词，看你是不是英语高手！",
-          "pronunciation_tip": "发/ð/音时，舌尖轻触上齿，气流从舌头和上齿之间通过，声带振动。可以先练习发/ðɪs/ (this) 中的/ð/音。"
+          "pronunciation_tip": "发/ð/音时，舌尖轻触上齿，气流从舌头和上齿之间通过，声带振动。可以先练习发/ðɪs/ (this) 中的/ð/音。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T2-02",
@@ -160,7 +172,11 @@
           ],
           "memory_tip": "记住“快呀特”！“快”重读，“呀特”轻读。",
           "emotion_hook": "老师的耳朵都快受不了了！这个单词你读对了吗？",
-          "pronunciation_tip": "发音时注意将两个音节清晰地分开，第一个音节的/ai/是双元音，要发饱满。可以多听标准发音模仿。"
+          "pronunciation_tip": "发音时注意将两个音节清晰地分开，第一个音节的/ai/是双元音，要发饱满。可以多听标准发音模仿。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -200,7 +216,11 @@
             "B: She is tall and has long hair. She has big eyes, too.",
             "A: What is she like?",
             "B: She is very kind and funny. I like her very much."
-          ]
+          ],
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T3-02",
@@ -235,7 +255,11 @@
             "B: I eat breakfast.",
             "A: And what about in the evening?",
             "B: I do my homework and watch TV."
-          ]
+          ],
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -277,7 +301,11 @@
           ],
           "memory_tip": "单数is，复数are，You和我们都用are。",
           "emotion_hook": "别让简单的错误拉低你的英语水平！这个语法点，你真的掌握了吗？",
-          "grammar_fix": "be动词is和are的选择取决于主语的单复数。主语是单数（或不可数名词）用is，主语是复数用are。"
+          "grammar_fix": "be动词is和are的选择取决于主语的单复数。主语是单数（或不可数名词）用is，主语是复数用are。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T4-02",
@@ -314,7 +342,11 @@
           ],
           "memory_tip": "in是里面，on是上面，under是下面，形象记忆不犯错！",
           "emotion_hook": "小学英语最基础的错误，你还在犯吗？一张图帮你搞定！",
-          "grammar_fix": "介词的选择需要结合语境和具体含义。in表示被包围，on表示接触表面，under表示在下方。"
+          "grammar_fix": "介词的选择需要结合语境和具体含义。in表示被包围，on表示接触表面，under表示在下方。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -347,7 +379,11 @@
           "mistakes": [],
           "memory_tip": "描述要具体，猜测要迅速！",
           "emotion_hook": "是时候证明谁才是家里的英语小能手了！爸妈和娃，谁更厉害？",
-          "battle_rule": "一人描述一个人物（可以是家人、老师或卡通人物），另一人根据描述猜出是谁。限定15秒内猜出，猜对加一分。三轮后分数高者胜。"
+          "battle_rule": "一人描述一个人物（可以是家人、老师或卡通人物），另一人根据描述猜出是谁。限定15秒内猜出，猜对加一分。三轮后分数高者胜。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T5-02",
@@ -374,7 +410,11 @@
           "mistakes": [],
           "memory_tip": "眼疾手快，脱口而出！",
           "emotion_hook": "比拼手速和口语，看谁是反应王！不服来战！",
-          "battle_rule": "准备10张日常活动图片。一人出图，另一人抢答。先说出正确英语表达者得一分。限定每图5秒，超时不得分。10轮后分数高者胜。"
+          "battle_rule": "准备10张日常活动图片。一人出图，另一人抢答。先说出正确英语表达者得一分。限定每图5秒，超时不得分。10轮后分数高者胜。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -408,7 +448,11 @@
           "mistakes": [],
           "memory_tip": "in（里面）on（上面）under（下面），behind（后面）in front of（前面）near（旁边），跟着动作一起学！",
           "emotion_hook": "背单词痛苦？那是你没找到对的方法！这个方法让你爱上背单词！",
-          "speed_method": "【小球歌记忆法】准备一个小球和一个盒子。边唱边做动作：\n'The ball is **in** the box!' (把球放进盒子里)\n'The ball is **on** the box!' (把球放在盒子上)\n'The ball is **under** the box!' (把球放在盒子下面)\n'The ball is **near** the box!' (把球放在盒子旁边)\n'The ball is **behind** the box!' (把球放在盒子后面)\n'The ball is **in front of** the box!' (把球放在盒子前面)\n重复数次，让身体记住介词的含义和用法。"
+          "speed_method": "【小球歌记忆法】准备一个小球和一个盒子。边唱边做动作：\n'The ball is **in** the box!' (把球放进盒子里)\n'The ball is **on** the box!' (把球放在盒子上)\n'The ball is **under** the box!' (把球放在盒子下面)\n'The ball is **near** the box!' (把球放在盒子旁边)\n'The ball is **behind** the box!' (把球放在盒子后面)\n'The ball is **in front of** the box!' (把球放在盒子前面)\n重复数次，让身体记住介词的含义和用法。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T6-02",
@@ -435,7 +479,11 @@
           "mistakes": [],
           "memory_tip": "外貌分高矮胖瘦老少，性格分好坏动静，物品分大小新旧轻重颜色，分类记忆效率高！",
           "emotion_hook": "告别只会'good'和'bad'的尴尬！用高级词汇震惊你的老师和同学！",
-          "speed_method": "【分类联想记忆法】\n1. **描述人物外貌：** \n   - **身高：** tall (高) vs. short (矮) \n   - **体型：** fat (胖) vs. thin (瘦) \n   - **年龄：** young (年轻) vs. old (年老) \n   - **头发：** long hair (长发) vs. short hair (短发) \n   - **眼睛：** big eyes (大眼睛) vs. small eyes (小眼睛) \n   *联想：* 你的爸爸是tall还是short？你的老师是young还是old？\n2. **描述人物性格：** \n   - **好性格：** kind (善良), funny (有趣的), quiet (安静的) \n   - **一般性格：** strict (严格的) \n   *联想：* 你的妈妈是kind还是strict？你的朋友是funny还是quiet？\n3. **描述物品特征：** \n   - **大小：** big (大) vs. small (小) \n   - **新旧：** new (新) vs. old (旧) \n   - **轻重：** heavy (重) vs. light (轻) \n   - **颜色：** red, blue, green, yellow... (各种颜色)\n   *联想：* 你的书包是big还是small？你的衣服是new还是old？"
+          "speed_method": "【分类联想记忆法】\n1. **描述人物外貌：** \n   - **身高：** tall (高) vs. short (矮) \n   - **体型：** fat (胖) vs. thin (瘦) \n   - **年龄：** young (年轻) vs. old (年老) \n   - **头发：** long hair (长发) vs. short hair (短发) \n   - **眼睛：** big eyes (大眼睛) vs. small eyes (小眼睛) \n   *联想：* 你的爸爸是tall还是short？你的老师是young还是old？\n2. **描述人物性格：** \n   - **好性格：** kind (善良), funny (有趣的), quiet (安静的) \n   - **一般性格：** strict (严格的) \n   *联想：* 你的妈妈是kind还是strict？你的朋友是funny还是quiet？\n3. **描述物品特征：** \n   - **大小：** big (大) vs. small (小) \n   - **新旧：** new (新) vs. old (旧) \n   - **轻重：** heavy (重) vs. light (轻) \n   - **颜色：** red, blue, green, yellow... (各种颜色)\n   *联想：* 你的书包是big还是small？你的衣服是new还是old？",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     }

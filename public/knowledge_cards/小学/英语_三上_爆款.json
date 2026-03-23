@@ -41,7 +41,11 @@
           ],
           "memory_tip": "This近that远，一伸手就能辨！",
           "emotion_hook": "你的英语老师没教你的this/that小秘密，今天全告诉你！",
-          "trap_point": "很多同学只知道翻译，但不会根据实际距离（近或远）来选择使用。"
+          "trap_point": "很多同学只知道翻译，但不会根据实际距离（近或远）来选择使用。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T1-02",
@@ -77,7 +81,11 @@
           ],
           "memory_tip": "元音a,e,i,o,u，an在前面不发愁！辅音a，跟着走！",
           "emotion_hook": "90%的家长和孩子都搞不清a和an的区别，你家娃中招了吗？",
-          "trap_point": "误以为是看单词的第一个字母而不是看第一个音素（发音）。"
+          "trap_point": "误以为是看单词的第一个字母而不是看第一个音素（发音）。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T1-03",
@@ -109,7 +117,11 @@
           ],
           "memory_tip": "He是男孩，She是女孩，性别分清就不会猜！",
           "emotion_hook": "这个小学英语最基础的性别代词，你真的用对了吗？别再闹笑话了！",
-          "trap_point": "中文里“他”和“她”发音相同，容易导致在英语中混淆使用。"
+          "trap_point": "中文里“他”和“她”发音相同，容易导致在英语中混淆使用。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -151,7 +163,11 @@
           ],
           "memory_tip": "舌尖偷偷藏起来，摩擦出气才厉害！",
           "emotion_hook": "发音不标准，英语白学了！这个音90%的人都读错！",
-          "pronunciation_tip": "练习时可以先伸出舌尖，轻轻咬住，再尝试发出声音，感受气流从舌尖和上齿之间通过。"
+          "pronunciation_tip": "练习时可以先伸出舌尖，轻轻咬住，再尝试发出声音，感受气流从舌尖和上齿之间通过。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T2-02",
@@ -187,7 +203,11 @@
           ],
           "memory_tip": "张大嘴巴咧咧笑，发个'æ'音真奇妙！",
           "emotion_hook": "别再用中文发音学英语了！这个音是检验你是否是'中式英语'的关键！",
-          "pronunciation_tip": "对着镜子练习，确保嘴巴张开，嘴角向两侧拉伸，发出短促的/æ/音。"
+          "pronunciation_tip": "对着镜子练习，确保嘴巴张开，嘴角向两侧拉伸，发出短促的/æ/音。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T2-03",
@@ -223,7 +243,11 @@
           ],
           "memory_tip": "嘴巴微张舌放平，/e/音轻松就搞定！",
           "emotion_hook": "小学英语发音入门课！这个'e'音，你可能一直读错了！快来纠正！",
-          "pronunciation_tip": "感受发音时舌头的位置，它比发/iː/时更低更平，确保发音短促而清晰。"
+          "pronunciation_tip": "感受发音时舌头的位置，它比发/iː/时更低更平，确保发音短促而清晰。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -262,7 +286,11 @@
           ],
           "memory_tip": "打招呼，报姓名，问名字，很文明！",
           "emotion_hook": "别让你的孩子成为'哑巴英语'！这几句实用口语，张口就能说！",
-          "scene_dialogue": "A: Hello! My name is Lily. What's your name?\nB: Hi Lily! My name is Tom. Nice to meet you!"
+          "scene_dialogue": "A: Hello! My name is Lily. What's your name?\nB: Hi Lily! My name is Tom. Nice to meet you!",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T3-02",
@@ -294,7 +322,11 @@
           ],
           "memory_tip": "指着东西问this，回答It's a/an，真给力！",
           "emotion_hook": "逛街遇到外国小哥哥小姐姐，想问东西，却开不了口？这招学起来！",
-          "scene_dialogue": "A: (指着一本书) What's this?\nB: It's a book.\nA: Oh, a book! Thank you."
+          "scene_dialogue": "A: (指着一本书) What's this?\nB: It's a book.\nA: Oh, a book! Thank you.",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T3-03",
@@ -327,7 +359,11 @@
           ],
           "memory_tip": "早晨morning，下午noon，再加teacher真好听！",
           "emotion_hook": "让老师对你的英语刮目相看！这几个问候语，让你的孩子更自信！",
-          "scene_dialogue": "Teacher: Good morning, class!\nStudents: Good morning, Miss Li!\n...\nTeacher: Goodbye, children!\nStudents: Goodbye, Mr. Wang!"
+          "scene_dialogue": "Teacher: Good morning, class!\nStudents: Good morning, Miss Li!\n...\nTeacher: Goodbye, children!\nStudents: Goodbye, Mr. Wang!",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -366,7 +402,11 @@
           ],
           "memory_tip": "I am，你are，他is，动词跟着主语跑！",
           "emotion_hook": "小学英语最基础的语法陷阱！你家娃中招了吗？",
-          "grammar_fix": "主语'I'必须和be动词'am'连用，表示“我是...”。"
+          "grammar_fix": "主语'I'必须和be动词'am'连用，表示“我是...”。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T4-02",
@@ -399,7 +439,11 @@
           ],
           "memory_tip": "我的东西用My，动词后面跟着Me！",
           "emotion_hook": "小学英语启蒙期，这个错误不纠正，英语学不好！",
-          "grammar_fix": "“My”是形容词性物主代词，表示所属关系，后面必须跟名词；“Me”是人称代词宾格，不能直接修饰名词。"
+          "grammar_fix": "“My”是形容词性物主代词，表示所属关系，后面必须跟名词；“Me”是人称代词宾格，不能直接修饰名词。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T4-03",
@@ -432,7 +476,11 @@
           ],
           "memory_tip": "单数名词不孤单，a或an来作伴！",
           "emotion_hook": "你的孩子英语总是差点意思？也许就是少了这个小细节！",
-          "grammar_fix": "英语中，单数可数名词前面必须有冠词（a/an/the）或物主代词（my/your等）进行修饰，不能裸奔。"
+          "grammar_fix": "英语中，单数可数名词前面必须有冠词（a/an/the）或物主代词（my/your等）进行修饰，不能裸奔。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -471,7 +519,11 @@
           ],
           "memory_tip": "看到实物大声喊，英语单词记心间！",
           "emotion_hook": "我家娃的单词量居然比我多！快来挑战，别输给三年级的孩子！",
-          "battle_rule": "准备10-15张三年级上册的词汇卡片（如pen, book, cat, apple等）。家长和孩子轮流翻牌，谁先准确说出单词并口头拼写正确，谁就得一分。三局两胜，看谁是单词王！"
+          "battle_rule": "准备10-15张三年级上册的词汇卡片（如pen, book, cat, apple等）。家长和孩子轮流翻牌，谁先准确说出单词并口头拼写正确，谁就得一分。三局两胜，看谁是单词王！",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T5-02",
@@ -504,7 +556,11 @@
           ],
           "memory_tip": "你一句，我一句，英语对话真有趣！",
           "emotion_hook": "别再让孩子只做题了！这种亲子互动，让孩子爱上开口说英语！",
-          "battle_rule": "从“打招呼”情景开始。家长先说一句英语，孩子接一句，要求句型正确，且与上下文相关。说不出或说错者淘汰。例如：\n家长：Hello! I'm Miss Li.\n孩子：Hi Miss Li! I'm Amy.\n家长：Nice to meet you, Amy.\n孩子：Nice to meet you, too!"
+          "battle_rule": "从“打招呼”情景开始。家长先说一句英语，孩子接一句，要求句型正确，且与上下文相关。说不出或说错者淘汰。例如：\n家长：Hello! I'm Miss Li.\n孩子：Hi Miss Li! I'm Amy.\n家长：Nice to meet you, Amy.\n孩子：Nice to meet you, too!",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T5-03",
@@ -537,7 +593,11 @@
           ],
           "memory_tip": "颜色数字藏起来，问问猜猜乐开怀！",
           "emotion_hook": "玩游戏也能学英语？这个亲子活动，让娃边玩边记单词！",
-          "battle_rule": "一方心里想一个1-10的数字或一种颜色。另一方在5次机会内用英语提问猜出。如 'Is it red?' 'Is it five?'。猜对得分，猜错则对方得分。比比谁是英语小侦探！"
+          "battle_rule": "一方心里想一个1-10的数字或一种颜色。另一方在5次机会内用英语提问猜出。如 'Is it red?' 'Is it five?'。猜对得分，猜错则对方得分。比比谁是英语小侦探！",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -576,7 +636,11 @@
           ],
           "memory_tip": "元音字母a e i o u，发音开头是元音，an在前面不发愁；其他字母辅音头，a呀a呀跟着走！",
           "emotion_hook": "小红书爆火的英语速记法！妈妈再也不用担心我的a/an了！",
-          "speed_method": "元音音素歌诀法：想象a, e, i, o, u五个元音字母手拉手，只要单词开头音是它们的声音，就用an；否则用a。记住：hour虽然是h开头，但h不发音，开头是元音/aʊ/，所以是an hour。"
+          "speed_method": "元音音素歌诀法：想象a, e, i, o, u五个元音字母手拉手，只要单词开头音是它们的声音，就用an；否则用a。记住：hour虽然是h开头，但h不发音，开头是元音/aʊ/，所以是an hour。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T6-02",
@@ -608,7 +672,11 @@
           ],
           "memory_tip": "This近that远，伸伸手就能看；指着黑板用that，指着铅笔用this！",
           "emotion_hook": "小学英语入门必备！这个小技巧，让孩子轻松掌握this/that！",
-          "speed_method": "动作联想法：想象你伸手就能摸到的东西，用手去指并说'This'；你伸手够不着、需要用手指远方的东西，用手去指并说'That'。"
+          "speed_method": "动作联想法：想象你伸手就能摸到的东西，用手去指并说'This'；你伸手够不着、需要用手指远方的东西，用手去指并说'That'。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T6-03",
@@ -640,7 +708,11 @@
           ],
           "memory_tip": "One小狗，two小兔，three小猫咪，four小鸭子，five小老虎，six小猴子，seven小公鸡，eight小胖猪，nine小老鼠，ten小花鹿！",
           "emotion_hook": "还在死记硬背数字？快来试试这个超有趣的顺口溜，孩子一学就会，秒变数字小达人！",
-          "speed_method": "动物联想顺口溜法：将每个数字与一种小动物或形象联系起来，编成有趣的故事或儿歌，通过画面感和韵律感进行记忆。"
+          "speed_method": "动物联想顺口溜法：将每个数字与一种小动物或形象联系起来，编成有趣的故事或儿歌，通过画面感和韵律感进行记忆。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     }

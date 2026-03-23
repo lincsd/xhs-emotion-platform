@@ -40,7 +40,11 @@
           ],
           "memory_tip": "数得清用many，数不清用much！",
           "emotion_hook": "别再傻傻分不清了，一卡搞定！",
-          "trap_point": "water是不可数名词，所以只能用much。"
+          "trap_point": "water是不可数名词，所以只能用much。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T1-02",
@@ -72,7 +76,11 @@
           ],
           "memory_tip": "肯定用some，否定疑问用any，请求建议some也行！",
           "emotion_hook": "小细节决定大分数，赶紧收藏！",
-          "trap_point": "一般疑问句通常用any，但在表示请求或建议时，即使是疑问句也可用some。"
+          "trap_point": "一般疑问句通常用any，但在表示请求或建议时，即使是疑问句也可用some。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T1-03",
@@ -103,7 +111,11 @@
           ],
           "memory_tip": "trip是“一趟”，travel是“动”，journey是“长路”。",
           "emotion_hook": "告别“ Chinglish”，让你的英语更地道！",
-          "trap_point": "travel作为动词时，后面通常不直接跟目的地，而trip则可以指一次具体的旅程。"
+          "trap_point": "travel作为动词时，后面通常不直接跟目的地，而trip则可以指一次具体的旅程。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -140,7 +152,11 @@
           ],
           "memory_tip": "清辅音清/t/，浊辅音浊/d/，t/d后面加/ɪd/！",
           "emotion_hook": "别让你的发音暴露了你的英语水平！",
-          "pronunciation_tip": "发音时要轻快，不要拖沓，尤其是/t/和/d/音。"
+          "pronunciation_tip": "发音时要轻快，不要拖沓，尤其是/t/和/d/音。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T2-02",
@@ -171,7 +187,11 @@
           ],
           "memory_tip": "水果（fruit）嘴巴扁，西装（suit）嘴巴圆！",
           "emotion_hook": "小红书英语达人必备，发音细节控！",
-          "pronunciation_tip": "fruit中的u是长元音/uː/，suit中的u是长元音/uː/或双元音/juː/，注意口型变化。"
+          "pronunciation_tip": "fruit中的u是长元音/uː/，suit中的u是长元音/uː/或双元音/juː/，注意口型变化。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T2-03",
@@ -202,7 +222,11 @@
           ],
           "memory_tip": "熊和穿（bear, wear）像姐妹，耳朵（hear）有点不一样！",
           "emotion_hook": "挑战你的发音极限，成为班级小明星！",
-          "pronunciation_tip": "注意/eər/和/ɪər/的区别，/eər/舌位较低，/ɪər/舌位较高，嘴巴张开程度不同。"
+          "pronunciation_tip": "注意/eər/和/ɪər/的区别，/eər/舌位较低，/ɪər/舌位较高，嘴巴张开程度不同。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -245,7 +269,11 @@
             "你: Yes, I'd like a hamburger and a Coke, please.",
             "店员: Anything else?",
             "你: No, that's all, thank you."
-          ]
+          ],
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T3-02",
@@ -281,7 +309,11 @@
             "A: What are you going to do this summer holiday?",
             "B: I'm going to Hainan! I'm going to swim at the beach and eat some delicious food.",
             "A: Sounds great!"
-          ]
+          ],
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T3-03",
@@ -317,7 +349,11 @@
             "A: What's your favourite season, Mike?",
             "B: My favourite season is autumn. It's cool and I like to climb mountains.",
             "A: Me too!"
-          ]
+          ],
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -355,7 +391,11 @@
           ],
           "memory_tip": "过去时间过去式，动词变形要牢记！",
           "emotion_hook": "别再犯低级错误了，语法细节决定高分！",
-          "grammar_fix": "过去时态中，动词要变成过去式形式，不规则动词需特别记忆，是六年级上册的重点。"
+          "grammar_fix": "过去时态中，动词要变成过去式形式，不规则动词需特别记忆，是六年级上册的重点。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T4-02",
@@ -387,7 +427,11 @@
           ],
           "memory_tip": "be going to，be动词不能少，后面动词用原形！",
           "emotion_hook": "未来时态不再迷茫，一招搞定“be going to”！",
-          "grammar_fix": "\"be going to\"结构中，be动词必须与主语人称和数一致，且\"going to\"后接动词原形。"
+          "grammar_fix": "\"be going to\"结构中，be动词必须与主语人称和数一致，且\"going to\"后接动词原形。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T4-03",
@@ -419,7 +463,11 @@
           ],
           "memory_tip": "三单does，其他do，动词原形跟着走！",
           "emotion_hook": "掌握这个，你的英语瞬间提升一个档次！",
-          "grammar_fix": "主语是第三人称单数时，疑问句和否定句的助动词用does/doesn't，且谓语动词变回原形。"
+          "grammar_fix": "主语是第三人称单数时，疑问句和否定句的助动词用does/doesn't，且谓语动词变回原形。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -459,7 +507,11 @@
           ],
           "memory_tip": "看图说话用过去式，活动地点别忘记！",
           "emotion_hook": "别让孩子小瞧你！亲子PK，乐趣无穷！",
-          "battle_rule": "孩子先描述照片中的3个细节，家长再补充2个细节或提问1个问题。看谁的描述更丰富、更准确。"
+          "battle_rule": "孩子先描述照片中的3个细节，家长再补充2个细节或提问1个问题。看谁的描述更丰富、更准确。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T5-02",
@@ -491,7 +543,11 @@
           ],
           "memory_tip": "未来计划be going to，be动词是关键！",
           "emotion_hook": "看看谁的“未来”更精彩，谁的英语更流畅！",
-          "battle_rule": "轮流说出明天要做的两件事，看谁的句子更完整、更符合逻辑，并能相互提问。"
+          "battle_rule": "轮流说出明天要做的两件事，看谁的句子更完整、更符合逻辑，并能相互提问。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T5-03",
@@ -523,7 +579,11 @@
           ],
           "memory_tip": "季节天气要连说，活动动词要准确！",
           "emotion_hook": "速度与准确度的较量，家庭英语氛围瞬间拉满！",
-          "battle_rule": "准备5个关于季节的问题，一人一句轮流回答，或抢答。答对加分，答错扣分。"
+          "battle_rule": "准备5个关于季节的问题，一人一句轮流回答，或抢答。答对加分，答错扣分。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -568,6 +628,10 @@
               "**元音变化型：** 元音发生规律性变化。如：sing-sang-sung (唱), drink-drank-drunk (喝)",
               "**口诀联想：** fly-flew-flown (飞了飞了飞，飞走了)"
             ]
+          },
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
           }
         },
         {
@@ -613,6 +677,10 @@
               "9th (ninth)",
               "12th (twelfth)"
             ]
+          },
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
           }
         },
         {
@@ -655,6 +723,10 @@
               "He (is) going to swim.",
               "They (are) going to sing."
             ]
+          },
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
           }
         }
       ]

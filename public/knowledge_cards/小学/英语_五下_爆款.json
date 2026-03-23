@@ -44,7 +44,11 @@
           ],
           "memory_tip": "肯定some，否定疑问any，请求建议some也行！",
           "emotion_hook": "这两个词用错，英语老师都要皱眉啦！别再傻傻分不清了！",
-          "trap_point": "请求或建议的疑问句（如Would you like some juice?），虽然是问句，但通常用some，表示期待对方接受。"
+          "trap_point": "请求或建议的疑问句（如Would you like some juice?），虽然是问句，但通常用some，表示期待对方接受。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T1-02",
@@ -79,7 +83,11 @@
           ],
           "memory_tip": "能数清，用many；数不清，用much！",
           "emotion_hook": "小学英语最头疼的搭配，你真的会用吗？用错就尴尬啦！",
-          "trap_point": "区分可数名词和不可数名词是关键。可数名词有单复数之分，不可数名词没有。"
+          "trap_point": "区分可数名词和不可数名词是关键。可数名词有单复数之分，不可数名词没有。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -120,7 +128,11 @@
           ],
           "memory_tip": "清音舌尖顶牙缝，浊音振动气流冲！",
           "emotion_hook": "发音不准毁气质！这个音发对了，英语瞬间高级！",
-          "pronunciation_tip": "发/θ/时，舌尖轻轻顶住上齿，不要咬紧；发/ð/时，同样姿势，但声带振动，多练习能感受震动。"
+          "pronunciation_tip": "发/θ/时，舌尖轻轻顶住上齿，不要咬紧；发/ð/时，同样姿势，但声带振动，多练习能感受震动。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T2-02",
@@ -155,7 +167,11 @@
           ],
           "memory_tip": "清s浊z，特殊音后/ɪz/！",
           "emotion_hook": "别再把's'都读成一个音了！这样做，英语老师都要哭了！",
-          "pronunciation_tip": "多听母语者的发音，模仿并感受发音部位的变化。特别是/ɪz/，要加上一个清晰的/ɪ/音节。"
+          "pronunciation_tip": "多听母语者的发音，模仿并感受发音部位的变化。特别是/ɪz/，要加上一个清晰的/ɪ/音节。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -197,7 +213,11 @@
           ],
           "memory_tip": "点餐礼貌用I'd like，数量价格要问清！",
           "emotion_hook": "出国旅行，再也不怕点错餐啦！轻松搞定海外美食！",
-          "scene_dialogue": "Customer: Hello! Can I have a burger and some fries? Server: Sure. Anything else? Customer: Yes, a cola, please. Server: That's 25 yuan. Customer: Here you are. Server: Thank you!"
+          "scene_dialogue": "Customer: Hello! Can I have a burger and some fries? Server: Sure. Anything else? Customer: Yes, a cola, please. Server: That's 25 yuan. Customer: Here you are. Server: Thank you!",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T3-02",
@@ -233,7 +253,11 @@
           ],
           "memory_tip": "问路Where is，指路左右直行，谢谢不忘说！",
           "emotion_hook": "方向感是硬伤？英语问路帮你解决，秒变路痴救星！",
-          "scene_dialogue": "A: Excuse me, where is the park? B: Go straight, then turn left at the first crossing. The park is next to the supermarket. A: Thank you very much! B: You're welcome."
+          "scene_dialogue": "A: Excuse me, where is the park? B: Go straight, then turn left at the first crossing. The park is next to the supermarket. A: Thank you very much! B: You're welcome.",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -276,7 +300,11 @@
           ],
           "memory_tip": "三单动词要加s，特殊情况加es，have变has别忘记！",
           "emotion_hook": "小小的's'，决定你英语专不专业！别让低级错误拉低你的分数！",
-          "grammar_fix": "在一般现在时中，检查主语是否为第三人称单数（he, she, it或单数名词），如果是，务必在动词后加上-s或-es。"
+          "grammar_fix": "在一般现在时中，检查主语是否为第三人称单数（he, she, it或单数名词），如果是，务必在动词后加上-s或-es。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T4-02",
@@ -312,7 +340,11 @@
           ],
           "memory_tip": "面on，里in，下under，旁边next to，记住场景不犯错！",
           "emotion_hook": "小学英语介词的坑，你踩过几个？一个小红点帮你搞定！",
-          "grammar_fix": "想象物体和空间的关系：'on'是接触表面，'in'是内部空间，'under'是下方，'next to'是紧挨着。多结合实际场景理解。"
+          "grammar_fix": "想象物体和空间的关系：'on'是接触表面，'in'是内部空间，'under'是下方，'next to'是紧挨着。多结合实际场景理解。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -352,7 +384,11 @@
           ],
           "memory_tip": "描述动物用can，动词原形不能变！",
           "emotion_hook": "谁是动物百科小能手？快来挑战爸妈，看看谁更厉害！",
-          "battle_rule": "一人选择一种动物，用英语描述其特征和能力（不能直接说出名字），另一人猜测。猜对得一分，轮流进行，看谁得分高！"
+          "battle_rule": "一人选择一种动物，用英语描述其特征和能力（不能直接说出名字），另一人猜测。猜对得一分，轮流进行，看谁得分高！",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T5-02",
@@ -386,7 +422,11 @@
           ],
           "memory_tip": "时间点用at，早中晚用in，动词原形要牢记！",
           "emotion_hook": "看看谁的英语日常更地道！全家总动员，一起说英语！",
-          "battle_rule": "家长和孩子轮流描述自己的一个日常活动，并说出大概时间（如'I usually get up at 7 o'clock.'）。或者一方说时间，另一方说活动。看谁能用更多不同的词汇和句型，表达更准确。"
+          "battle_rule": "家长和孩子轮流描述自己的一个日常活动，并说出大概时间（如'I usually get up at 7 o'clock.'）。或者一方说时间，另一方说活动。看谁能用更多不同的词汇和句型，表达更准确。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -426,7 +466,11 @@
           ],
           "memory_tip": "in里on上under下，next to旁边between间，behind后in front前，口诀配图记更全！",
           "emotion_hook": "死记硬背效率低？试试这个超有趣的记忆法，小学介词轻松搞定！",
-          "speed_method": "画一个简单的盒子或小人，然后用箭头和图示来表示各种介词的位置关系。例如：一个箭头指向盒子内部是'in'，一个箭头指向盒子上方是'on'，一个箭头指向盒子下方是'under'。"
+          "speed_method": "画一个简单的盒子或小人，然后用箭头和图示来表示各种介词的位置关系。例如：一个箭头指向盒子内部是'in'，一个箭头指向盒子上方是'on'，一个箭头指向盒子下方是'under'。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T6-02",
@@ -461,7 +505,11 @@
           ],
           "memory_tip": "频率高低记顺序，动前be后是规律！",
           "emotion_hook": "你的英语听起来不够地道？可能是频率副词用错了！快来拯救你的口语！",
-          "speed_method": "画一条从100%到0%的直线，在上面标注always, usually, often, sometimes, never，形象展示频率高低。同时记住口诀'动前be后'来确定它们在句子中的位置。"
+          "speed_method": "画一条从100%到0%的直线，在上面标注always, usually, often, sometimes, never，形象展示频率高低。同时记住口诀'动前be后'来确定它们在句子中的位置。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     }

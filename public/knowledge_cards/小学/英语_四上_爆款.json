@@ -45,7 +45,11 @@
           ],
           "memory_tip": "近用this，远用that，一远一近要记牢！",
           "emotion_hook": "小学英语最基础的this/that你用对了吗？别再傻傻分不清啦！",
-          "trap_point": "很多同学不注意距离，随意混用this和that，导致表达不准确。"
+          "trap_point": "很多同学不注意距离，随意混用this和that，导致表达不准确。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T1-02",
@@ -81,7 +85,11 @@
           ],
           "memory_tip": "男人he，女人she，动物it，记住性别和数量，代词不再错！",
           "emotion_hook": "别让代词错误暴露你的英语水平！小学英语基础，你真的掌握了吗？",
-          "trap_point": "初学者常常混淆he/she的性别，或将it用于人。"
+          "trap_point": "初学者常常混淆he/she的性别，或将it用于人。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -124,7 +132,11 @@
           ],
           "memory_tip": "教室classroom，重音在前，'oo'是长音，就像“乌”！",
           "emotion_hook": "一个小小的单词，却能暴露你的发音盲区！快来挑战你的'classroom'发音！",
-          "pronunciation_tip": "发音时嘴巴要放松，'oo'音要拖长，不要发成短促的'u'音。"
+          "pronunciation_tip": "发音时嘴巴要放松，'oo'音要拖长，不要发成短促的'u'音。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T2-02",
@@ -159,7 +171,11 @@
           ],
           "memory_tip": "铅笔PEN-cil，橡皮e-RA-ser，重音不同，仔细听！",
           "emotion_hook": "这两个文具单词，你的孩子读对了吗？别让小小的发音问题影响大大的自信！",
-          "pronunciation_tip": "pencil的'i'是弱读音，eraser的'a'是长元音/eɪ/，要发到位。"
+          "pronunciation_tip": "pencil的'i'是弱读音，eraser的'a'是长元音/eɪ/，要发到位。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -206,7 +222,11 @@
             "B: It's a board.",
             "A: What about this? (指向窗户)",
             "B: Oh, it's a window."
-          ]
+          ],
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T3-02",
@@ -249,7 +269,11 @@
             "Child: No, thank you.",
             "Waiter: Here you are.",
             "Child: Thank you! Bye-bye!"
-          ]
+          ],
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -291,7 +315,11 @@
           ],
           "memory_tip": "元音an，辅音a，开口就听它！",
           "emotion_hook": "小小的'a'和'an'，却是语法大魔王！快来测测你家娃有没有中招！",
-          "grammar_fix": "核心是听单词的第一个发音，是元音（a, e, i, o, u的音）就用an，是辅音就用a。"
+          "grammar_fix": "核心是听单词的第一个发音，是元音（a, e, i, o, u的音）就用an，是辅音就用a。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T4-02",
@@ -327,7 +355,11 @@
           ],
           "memory_tip": "问句Is开头，答句It is结尾，肯定Yes，否定No，isn't别忘记！",
           "emotion_hook": "孩子总把问句答句搞混？一招教你纠正，让孩子自信开口说英语！",
-          "grammar_fix": "注意'is'和'isn't'的正确使用，以及回答时主语'it'的指代。"
+          "grammar_fix": "注意'is'和'isn't'的正确使用，以及回答时主语'it'的指代。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -361,7 +393,11 @@
           "mistakes": [],
           "memory_tip": "单词说得快，物品找得准，家庭PK，英语蹭蹭涨！",
           "emotion_hook": "一场家庭寻宝游戏，让孩子秒变英语小达人，爸妈快来挑战！",
-          "battle_rule": "1. 准备10个家庭或教室常见物品。2. 轮流说出物品的英语名称，对方需在10秒内找到并用英语说出其位置（如'It's on the table.'）。3. 答对得分，答错扣分。看谁得分高！"
+          "battle_rule": "1. 准备10个家庭或教室常见物品。2. 轮流说出物品的英语名称，对方需在10秒内找到并用英语说出其位置（如'It's on the table.'）。3. 答对得分，答错扣分。看谁得分高！",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T5-02",
@@ -388,7 +424,11 @@
           "mistakes": [],
           "memory_tip": "时钟滴答，时间到，亲子PK，看谁先报！",
           "emotion_hook": "还在为孩子记不住时间表达发愁？这场PK赛，让孩子轻松成为时间管理大师！",
-          "battle_rule": "1. 准备一个时钟模型或图片。2. 家长拨动时钟，孩子用英语说出时间。3. 孩子说出时间，家长说出这个时间通常会做什么活动（如'It's seven o'clock. I get up.'）。4. 交换角色，看谁反应快、说得准！"
+          "battle_rule": "1. 准备一个时钟模型或图片。2. 家长拨动时钟，孩子用英语说出时间。3. 孩子说出时间，家长说出这个时间通常会做什么活动（如'It's seven o'clock. I get up.'）。4. 交换角色，看谁反应快、说得准！",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -423,7 +463,11 @@
           "mistakes": [],
           "memory_tip": "分类联想，实物指认，单词卡片，轻松记牢！",
           "emotion_hook": "告别死记硬背！这个单词速记法，让你的孩子轻松拿下四年级上册词汇！",
-          "speed_method": "1. **场景法：** 带着孩子在教室里，指着每个物品说出它的英文名，如 'This is a board.' 'That is a window.' 2. **分类法：** 将本单元的单词按类别（如家具、文具）进行整理。3. **联想法：** 将新单词与已知的事物或中文谐音进行关联（如 'fan' 像“饭”，联想风扇吹来香喷喷的饭）。"
+          "speed_method": "1. **场景法：** 带着孩子在教室里，指着每个物品说出它的英文名，如 'This is a board.' 'That is a window.' 2. **分类法：** 将本单元的单词按类别（如家具、文具）进行整理。3. **联想法：** 将新单词与已知的事物或中文谐音进行关联（如 'fan' 像“饭”，联想风扇吹来香喷喷的饭）。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T6-02",
@@ -451,7 +495,11 @@
           "mistakes": [],
           "memory_tip": "家族树，顺口溜，家庭成员记心头！",
           "emotion_hook": "孩子抱怨家庭成员单词太多记不住？这个顺口溜，让孩子边玩边学，秒变小天才！",
-          "speed_method": "1. **家族树：** 和孩子一起画出家庭成员图，从爷爷奶奶到爸爸妈妈，再到兄弟姐妹，每个成员旁写上对应的英文单词。2. **顺口溜：** 编一段关于家庭成员的简单顺口溜，如 'Father, mother, I love you. Brother, sister, me and you. Grandfather, grandmother, happy family!' 3. **照片对应：** 拿出家庭相册，指着照片中的人物，用英语说出他们的称谓。反复练习。"
+          "speed_method": "1. **家族树：** 和孩子一起画出家庭成员图，从爷爷奶奶到爸爸妈妈，再到兄弟姐妹，每个成员旁写上对应的英文单词。2. **顺口溜：** 编一段关于家庭成员的简单顺口溜，如 'Father, mother, I love you. Brother, sister, me and you. Grandfather, grandmother, happy family!' 3. **照片对应：** 拿出家庭相册，指着照片中的人物，用英语说出他们的称谓。反复练习。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     }

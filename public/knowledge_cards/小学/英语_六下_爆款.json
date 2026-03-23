@@ -39,7 +39,11 @@
           ],
           "memory_tip": "问“什么样”，用 `is/are ... like`；问“喜欢啥”，用 `do/does ... like`。",
           "emotion_hook": "这个问题90%的同学都答错过！你敢来挑战吗？",
-          "trap_point": "动词 `like` 问的是喜好，介词 `like` 问的是特征。"
+          "trap_point": "动词 `like` 问的是喜好，介词 `like` 问的是特征。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T1-02",
@@ -69,7 +73,11 @@
           ],
           "memory_tip": "`who`问“人”，`whose`问“物归谁”。",
           "emotion_hook": "每次都分不清`who`和`whose`？看完这张卡片，你就是班级小达人！",
-          "trap_point": "`whose`可以直接作主语或宾语，也可以作定语修饰名词。"
+          "trap_point": "`whose`可以直接作主语或宾语，也可以作定语修饰名词。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T1-03",
@@ -99,7 +107,11 @@
           ],
           "memory_tip": "形容词 `healthy` 有 `y`，像个小尾巴，修饰名词；名词 `health` 没尾巴，是本质。",
           "emotion_hook": "你的英语是不是也经常犯这种低级错误？快来测测！",
-          "trap_point": "形容词修饰名词，名词作主语或宾语。"
+          "trap_point": "形容词修饰名词，名词作主语或宾语。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -136,7 +148,11 @@
           ],
           "memory_tip": "`us-u-ally`，第二个`s`发音像“日”字，记住这个“日”！",
           "emotion_hook": "你的发音暴露了你的英语水平！想知道怎么读才地道吗？",
-          "pronunciation_tip": "嘴巴放松，舌尖微卷，发出像中文“日”的音，但更轻柔，声带振动。"
+          "pronunciation_tip": "嘴巴放松，舌尖微卷，发出像中文“日”的音，但更轻柔，声带振动。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T2-02",
@@ -168,7 +184,11 @@
           ],
           "memory_tip": "`q`后面跟着`u`，就像“快”字开头，然后是“啊特”。",
           "emotion_hook": "老师听了都想纠正你！你的`quiet`读对了吗？",
-          "pronunciation_tip": "`qu`发/kw/，注意`i`是双元音/aɪ/，不是短音/ɪ/。"
+          "pronunciation_tip": "`qu`发/kw/，注意`i`是双元音/aɪ/，不是短音/ɪ/。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T2-03",
@@ -199,7 +219,11 @@
           ],
           "memory_tip": "`th`像吐舌头，`h`像哈气，`ng`像打呼噜！",
           "emotion_hook": "你的`th`音是不是总被老师说不标准？来，跟我一起练！",
-          "pronunciation_tip": "`th`的清辅音/θ/发音时，舌尖轻轻放在上下牙齿之间，然后吹气，声带不振动。"
+          "pronunciation_tip": "`th`的清辅音/θ/发音时，舌尖轻轻放在上下牙齿之间，然后吹气，声带不振动。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -237,7 +261,11 @@
           ],
           "memory_tip": "想描述一个人，就从性格特点开始说，再加一点他的行为习惯。",
           "emotion_hook": "班里来了个新朋友，想用英语夸他？这个情景卡帮你！",
-          "scene_dialogue": "A: Who is the new boy? B: He is David. A: What's he like? B: He is very active and funny. He always makes us laugh."
+          "scene_dialogue": "A: Who is the new boy? B: He is David. A: What's he like? B: He is very active and funny. He always makes us laugh.",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T3-02",
@@ -269,7 +297,11 @@
           ],
           "memory_tip": "比较两样东西，形容词后面加`-er`（或`more`），别忘了`than`！",
           "emotion_hook": "动物园里那么多动物，快来和爸爸妈妈一起PK谁能说出更多比较句！",
-          "scene_dialogue": "A: Look at the two monkeys! This one is smaller. B: Yes, and that one is fatter than this one! A: Wow, the giraffe is taller than all the other animals!"
+          "scene_dialogue": "A: Look at the two monkeys! This one is smaller. B: Yes, and that one is fatter than this one! A: Wow, the giraffe is taller than all the other animals!",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T3-03",
@@ -300,7 +332,11 @@
           ],
           "memory_tip": "问国家用`where`，问语言用`what language`。",
           "emotion_hook": "你的笔友终于回信了！快用英语和他开启第一次对话吧！",
-          "scene_dialogue": "A: Hello, I'm Tom. Nice to meet you! B: Nice to meet you too, Tom. I'm Mike. Where are you from? A: I'm from China. What about you? B: I'm from Australia. I speak English."
+          "scene_dialogue": "A: Hello, I'm Tom. Nice to meet you! B: Nice to meet you too, Tom. I'm Mike. Where are you from? A: I'm from China. What about you? B: I'm from Australia. I speak English.",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -342,7 +378,11 @@
           ],
           "memory_tip": "比较级，要么加`-er`，要么加`more`，两个只能选一个！",
           "emotion_hook": "老师看了都想哭！这些比较级错误你中招了吗？",
-          "grammar_fix": "比较级规则：短词加`-er`，长词加`more`。不规则变化要记牢 (good-better, bad-worse)。"
+          "grammar_fix": "比较级规则：短词加`-er`，长词加`more`。不规则变化要记牢 (good-better, bad-worse)。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T4-02",
@@ -376,7 +416,11 @@
           ],
           "memory_tip": "频率副词是“小跟班”，跟在“be”后，跟在“行”前。",
           "emotion_hook": "你的英语句子是不是总是怪怪的？原来是这里出错了！",
-          "grammar_fix": "频率副词口诀：Be后动前。 (Be动词后，行为动词前)。"
+          "grammar_fix": "频率副词口诀：Be后动前。 (Be动词后，行为动词前)。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T4-03",
@@ -410,7 +454,11 @@
           ],
           "memory_tip": "`like`问特点，`do`问职业。",
           "emotion_hook": "这两个句子你用对了吗？小升初常考，快来补课！",
-          "grammar_fix": "记住句型：`What's + 名词 + like?` (问特征)；`What does/do + 名词 + do?` (问职业)。"
+          "grammar_fix": "记住句型：`What's + 名词 + like?` (问特征)；`What does/do + 名词 + do?` (问职业)。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -442,7 +490,11 @@
           "mistakes": [],
           "memory_tip": "记住关键词：描述性格，不要说名字！",
           "emotion_hook": "谁是家里的英语小达人？快来和爸爸妈妈一起挑战！",
-          "battle_rule": "一人描述一个家庭成员或朋友的性格特点（如kind, funny, quiet等），另一人猜是谁。限时30秒，看谁猜对多！"
+          "battle_rule": "一人描述一个家庭成员或朋友的性格特点（如kind, funny, quiet等），另一人猜是谁。限时30秒，看谁猜对多！",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T5-02",
@@ -469,7 +521,11 @@
           "mistakes": [],
           "memory_tip": "记住：先说时间，再说活动，最后加上频率！",
           "emotion_hook": "别以为孩子小就赢不了你！这个挑战让你知道谁才是真正的英语高手！",
-          "battle_rule": "孩子和家长轮流用英语描述自己一天的活动（至少3句话，包含频率副词），看谁的描述更流畅、词汇更丰富。"
+          "battle_rule": "孩子和家长轮流用英语描述自己一天的活动（至少3句话，包含频率副词），看谁的描述更流畅、词汇更丰富。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T5-03",
@@ -495,7 +551,11 @@
           "mistakes": [],
           "memory_tip": "看到两样东西，就想想它们哪里不同，用比较级说出来！",
           "emotion_hook": "是时候展现你和孩子的英语实力了！谁是动物比较王？",
-          "battle_rule": "给出两张动物图片或说出两种动物名称，孩子和家长轮流说出比较句，看谁说得又快又准。例如：elephant vs mouse (bigger, smaller), horse vs turtle (faster, slower)。"
+          "battle_rule": "给出两张动物图片或说出两种动物名称，孩子和家长轮流说出比较句，看谁说得又快又准。例如：elephant vs mouse (bigger, smaller), horse vs turtle (faster, slower)。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -528,7 +588,11 @@
           "mistakes": [],
           "memory_tip": "短词直接`er`，`y`变`i`再`er`，重闭双写`er`，长词`more`放前。",
           "emotion_hook": "还在死记硬背比较级？有了这个口诀，你再也不会错了！",
-          "speed_method": "记住四句口诀，对应四种变化：\n1. 一般加`er`：tall -> taller\n2. `y`变`i`加`er`：happy -> happier\n3. 重闭双写加`er`：big -> bigger\n4. 多音节前`more`：beautiful -> more beautiful"
+          "speed_method": "记住四句口诀，对应四种变化：\n1. 一般加`er`：tall -> taller\n2. `y`变`i`加`er`：happy -> happier\n3. 重闭双写加`er`：big -> bigger\n4. 多音节前`more`：beautiful -> more beautiful",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T6-02",
@@ -554,7 +618,11 @@
           "mistakes": [],
           "memory_tip": "频率副词家族歌：`Always`总是百分百，`usually`通常八九成，`often`常常七八分，`sometimes`有时一半半，`hardly ever`几乎不，`never`从不零点零！",
           "emotion_hook": "你的频率副词是不是总是分不清？这首歌让你边唱边记！",
-          "speed_method": "编成小歌谣，配上动作，从高频率到低频率排序记忆，形成肌肉记忆和韵律感。"
+          "speed_method": "编成小歌谣，配上动作，从高频率到低频率排序记忆，形成肌肉记忆和韵律感。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T6-03",
@@ -581,7 +649,11 @@
           "mistakes": [],
           "memory_tip": "找规律，比如`China-Chinese`，`America-American`。记住后缀是关键！",
           "emotion_hook": "看到外国人只会说Hello？这张卡片让你自信开口！",
-          "speed_method": "制作表格或思维导图，将国家、国籍、语言三者对应起来，分类记忆。例如：\n*   国家名 + `-ese` -> 国籍/语言 (Chinese, Japanese)\n*   国家名 + `-an` -> 国籍 (American, Canadian, Australian)\n*   国家名 + `-ish` -> 国籍/语言 (English, French)"
+          "speed_method": "制作表格或思维导图，将国家、国籍、语言三者对应起来，分类记忆。例如：\n*   国家名 + `-ese` -> 国籍/语言 (Chinese, Japanese)\n*   国家名 + `-an` -> 国籍 (American, Canadian, Australian)\n*   国家名 + `-ish` -> 国籍/语言 (English, French)",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     }

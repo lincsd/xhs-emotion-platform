@@ -45,7 +45,11 @@
           ],
           "memory_tip": "近用this，远用that，单数朋友is！",
           "emotion_hook": "别再指错啦！一句话让你秒懂this和that的秘密！",
-          "trap_point": "区分远近是关键，想象自己伸手指的动作来判断。"
+          "trap_point": "区分远近是关键，想象自己伸手指的动作来判断。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T1-02",
@@ -81,7 +85,11 @@
           ],
           "memory_tip": "盒子里面用in，桌子上面用on！",
           "emotion_hook": "房间里的小物件，你真的知道它们在哪儿吗？",
-          "trap_point": "关键在于物体是否被包围在内部，还是只是在表面接触。"
+          "trap_point": "关键在于物体是否被包围在内部，还是只是在表面接触。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T1-03",
@@ -117,7 +125,11 @@
           ],
           "memory_tip": "男孩he，女孩she，性别区分要牢记！",
           "emotion_hook": "别让性别搞混了你的英语！",
-          "trap_point": "中文的“他”有时可泛指，但英文必须严格区分男性(he)和女性(she)。"
+          "trap_point": "中文的“他”有时可泛指，但英文必须严格区分男性(he)和女性(she)。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -159,7 +171,11 @@
           ],
           "memory_tip": "舌头伸一点，轻轻咬住它，发出this和that！",
           "emotion_hook": "多少人把this读成了dis？你中招了吗？",
-          "pronunciation_tip": "发音时，舌尖要伸出一点点，放在上下门牙之间，然后发音。如果声带振动，就是浊辅音/ð/。"
+          "pronunciation_tip": "发音时，舌尖要伸出一点点，放在上下门牙之间，然后发音。如果声带振动，就是浊辅音/ð/。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T2-02",
@@ -195,7 +211,11 @@
           ],
           "memory_tip": "短i像小鱼（fish）快快游，长i像灯泡（light）亮晶晶！",
           "emotion_hook": "搞不清i的发音，你说的英语别人听不懂！",
-          "pronunciation_tip": "短音/ɪ/：嘴巴放松，舌头靠前，快速短促。长音/aɪ/：嘴巴张开，从/a/滑向/ɪ/，发音饱满。"
+          "pronunciation_tip": "短音/ɪ/：嘴巴放松，舌头靠前，快速短促。长音/aɪ/：嘴巴张开，从/a/滑向/ɪ/，发音饱满。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T2-03",
@@ -231,7 +251,11 @@
           ],
           "memory_tip": "ch像火车（train）“吃吃吃”，sh像安静（shh）“嘘嘘嘘”！",
           "emotion_hook": "你的chicken是shicken吗？别闹笑话啦！",
-          "pronunciation_tip": "发/tʃ/音时，舌尖抵住上颚，气流瞬间冲出；发/ʃ/音时，舌尖上翘，气流持续流出，嘴巴呈圆形。"
+          "pronunciation_tip": "发/tʃ/音时，舌尖抵住上颚，气流瞬间冲出；发/ʃ/音时，舌尖上翘，气流持续流出，嘴巴呈圆形。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -279,7 +303,11 @@
             "A: Yes, it is. The fan is on the ceiling. And my chair is near the desk.",
             "B: Where is your bag?",
             "A: My bag is under the desk."
-          ]
+          ],
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T3-02",
@@ -321,7 +349,11 @@
             "A: Anything else?",
             "B: Yes, I'd like some water. Thank you.",
             "A: Here you are."
-          ]
+          ],
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T3-03",
@@ -362,7 +394,11 @@
             "B: Wow, she's pretty! What does she look like?",
             "A: She has long hair and big eyes. She has a small nose too.",
             "B: Oh, I see! She looks nice."
-          ]
+          ],
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -404,7 +440,11 @@
           ],
           "memory_tip": "单数主语爱is，就像影子不分离！",
           "emotion_hook": "你的英语口语是不是也常犯这个低级错误？",
-          "grammar_fix": "英语句子通常需要主谓结构，系动词is连接主语和表语，不能省略。"
+          "grammar_fix": "英语句子通常需要主谓结构，系动词is连接主语和表语，不能省略。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T4-02",
@@ -440,7 +480,11 @@
           ],
           "memory_tip": "元音字母an来伴，辅音字母a在前！",
           "emotion_hook": "细节决定成败！这个小小的词，你用对了吗？",
-          "grammar_fix": "a和an是限定单数可数名词的，根据名词开头“发音”选择。记住，看发音，不是看字母！"
+          "grammar_fix": "a和an是限定单数可数名词的，根据名词开头“发音”选择。记住，看发音，不是看字母！",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T4-03",
@@ -476,7 +520,11 @@
           ],
           "memory_tip": "头发是“海”，不可数，眼睛两只加s！",
           "emotion_hook": "描述自己和朋友，是不是总在这里犯迷糊？",
-          "grammar_fix": "不可数名词如hair, water, milk等不加a/an，也不变复数。可数名词单数前用a/an，复数加s。"
+          "grammar_fix": "不可数名词如hair, water, milk等不加a/an，也不变复数。可数名词单数前用a/an，复数加s。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -509,7 +557,11 @@
           "mistakes": [],
           "memory_tip": "边玩边学，物品词汇记得牢！",
           "emotion_hook": "谁是家里的“英语小天才”？快来挑战！",
-          "battle_rule": "两人轮流说出教室里的物品名称，另一个人指出并说出其颜色或位置。限时5秒，答错或超时扣分。看谁得分高，赢得“教室小专家”称号！"
+          "battle_rule": "两人轮流说出教室里的物品名称，另一个人指出并说出其颜色或位置。限时5秒，答错或超时扣分。看谁得分高，赢得“教室小专家”称号！",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T5-02",
@@ -536,7 +588,11 @@
           "mistakes": [],
           "memory_tip": "吃饭也能学英语，喜欢不喜欢都敢说！",
           "emotion_hook": "连吃饭都不能好好吃？英语PK等你来战！",
-          "battle_rule": "轮流说出一种食物，然后问对方“Do you like...?”，对方必须在3秒内回答“Yes, I do.”或“No, I don't.”，并尝试说出原因。答错或超时扣分。看谁是“挑食”小能手！"
+          "battle_rule": "轮流说出一种食物，然后问对方“Do you like...?”，对方必须在3秒内回答“Yes, I do.”或“No, I don't.”，并尝试说出原因。答错或超时扣分。看谁是“挑食”小能手！",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T5-03",
@@ -563,7 +619,11 @@
           "mistakes": [],
           "memory_tip": "穿什么，就说什么，英语表达真轻松！",
           "emotion_hook": "每天穿的衣服，你用英语说得出来吗？",
-          "battle_rule": "两人面对面，一方说“What are you wearing?”，另一方必须在5秒内说出自己身上至少两件衣服的名称和颜色。交换角色，看谁是“时尚英语达人”！"
+          "battle_rule": "两人面对面，一方说“What are you wearing?”，另一方必须在5秒内说出自己身上至少两件衣服的名称和颜色。交换角色，看谁是“时尚英语达人”！",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     },
@@ -595,7 +655,11 @@
           "mistakes": [],
           "memory_tip": "眼睛扫一扫，嘴巴动一动，单词记得牢！",
           "emotion_hook": "告别死记硬背！这个方法让背单词像玩游戏！",
-          "speed_method": "**房间扫描法 (Room Scan Method)**：\n1.  **确定起点：** 选择教室里一个固定的起点，比如教室门。\n2.  **顺时针/逆时针：** 沿着墙壁或固定方向，一个接一个地看向所有物品。\n3.  **大声说出：** 每看到一个物品，就大声说出它的英文名称（如door, window, board, light, fan, desk, chair, bag, book, pencil, ruler, eraser）。\n4.  **联想记忆：** 同时在脑海中浮现该物品的画面、颜色或用途。\n5.  **重复练习：** 每天进行2-3次“房间扫描”，直到所有物品都能脱口而出。"
+          "speed_method": "**房间扫描法 (Room Scan Method)**：\n1.  **确定起点：** 选择教室里一个固定的起点，比如教室门。\n2.  **顺时针/逆时针：** 沿着墙壁或固定方向，一个接一个地看向所有物品。\n3.  **大声说出：** 每看到一个物品，就大声说出它的英文名称（如door, window, board, light, fan, desk, chair, bag, book, pencil, ruler, eraser）。\n4.  **联想记忆：** 同时在脑海中浮现该物品的画面、颜色或用途。\n5.  **重复练习：** 每天进行2-3次“房间扫描”，直到所有物品都能脱口而出。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T6-02",
@@ -621,7 +685,11 @@
           "mistakes": [],
           "memory_tip": "唱歌跳舞真快乐，身体部位记得多！",
           "emotion_hook": "还在枯燥地背单词？这个方法让你爱上学英语！",
-          "speed_method": "**动作歌曲法 (Action Song Method)**：\n1.  **选择歌曲：** 学习“Head, Shoulders, Knees and Toes”这类经典身体部位歌曲。\n2.  **边唱边指：** 跟着歌曲的节奏，用手指出对应的身体部位，并大声唱出单词。\n3.  **全身动起来：** 不仅是手，全身都参与进来，加深记忆。\n4.  **亲子互动：** 和爸爸妈妈一起玩“Simon Says”游戏，比如“Simon says, touch your nose!”。\n5.  **日常运用：** 每天洗漱或穿衣时，指着自己的身体部位说出英文。"
+          "speed_method": "**动作歌曲法 (Action Song Method)**：\n1.  **选择歌曲：** 学习“Head, Shoulders, Knees and Toes”这类经典身体部位歌曲。\n2.  **边唱边指：** 跟着歌曲的节奏，用手指出对应的身体部位，并大声唱出单词。\n3.  **全身动起来：** 不仅是手，全身都参与进来，加深记忆。\n4.  **亲子互动：** 和爸爸妈妈一起玩“Simon Says”游戏，比如“Simon says, touch your nose!”。\n5.  **日常运用：** 每天洗漱或穿衣时，指着自己的身体部位说出英文。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         },
         {
           "card_id": "T6-03",
@@ -648,7 +716,11 @@
           "mistakes": [],
           "memory_tip": "食物分分类，味道记一记，单词忘不了！",
           "emotion_hook": "吃货福音！边吃边学，单词嗖嗖涨！",
-          "speed_method": "**尝味分类法 (Taste & Categorize Method)**：\n1.  **视觉联想：** 看到食物单词（如apple, milk, bread, chicken），立即在脑海中浮现食物的图片。\n2.  **味觉/触觉联想：** 想象它的味道（sweet, sour, salty, yummy）或口感。\n3.  **分类记忆：** 将食物进行分类，如：主食 (Staple food): rice, noodles, bread；肉类 (Meat): chicken, fish, meat；饮品 (Drinks): milk, water, juice, tea。\n4.  **情景模拟：** 玩“超市购物”游戏，说出想买的食物，如“I'd like some chicken and some rice.”\n5.  **餐桌运用：** 吃饭时，指着餐桌上的食物说出英文名称。"
+          "speed_method": "**尝味分类法 (Taste & Categorize Method)**：\n1.  **视觉联想：** 看到食物单词（如apple, milk, bread, chicken），立即在脑海中浮现食物的图片。\n2.  **味觉/触觉联想：** 想象它的味道（sweet, sour, salty, yummy）或口感。\n3.  **分类记忆：** 将食物进行分类，如：主食 (Staple food): rice, noodles, bread；肉类 (Meat): chicken, fish, meat；饮品 (Drinks): milk, water, juice, tea。\n4.  **情景模拟：** 玩“超市购物”游戏，说出想买的食物，如“I'd like some chicken and some rice.”\n5.  **餐桌运用：** 吃饭时，指着餐桌上的食物说出英文名称。",
+          "related": {
+            "prerequisite": "见同年级标准卡片包",
+            "next": "见同年级标准卡片包"
+          }
         }
       ]
     }
