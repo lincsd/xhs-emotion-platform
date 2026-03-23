@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260323d';
+      var BUILD='20260323e';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);}
@@ -3819,7 +3819,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260323d'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260323e'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -9940,7 +9940,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           return '<div onclick="PromptLib.showDetail(\'' + c.full_id + '\')" style="border:1px solid #e8e8e8;border-radius:12px;padding:14px;cursor:pointer;transition:all .2s;border-left:4px solid ' + color + '" onmouseenter="this.style.boxShadow=\'0 4px 16px rgba(0,0,0,.08)\'" onmouseleave="this.style.boxShadow=\'none\'">' +
             '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">' +
               '<span style="background:' + color + ';color:#fff;padding:2px 8px;border-radius:6px;font-size:11px">' + c.type + '</span>' +
-              (PROMPT_RECORDS[c.full_id] ? '<span style="background:#2ed573;color:#fff;padding:2px 6px;border-radius:6px;font-size:10px">' + PROMPT_RECORDS[c.full_id].score + '/50 \u2705</span>' : '') +
+              (PROMPT_RECORDS[c.full_id] ? '<span style="background:#2ed573;color:#fff;padding:2px 6px;border-radius:6px;font-size:10px">' + PROMPT_RECORDS[c.full_id].score + '/50 \u2705</span>' : '<span style="background:#dfe6e9;color:#636e72;padding:2px 6px;border-radius:6px;font-size:10px">🧪 待生成</span>') +
               '<span style="font-weight:600;font-size:14px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + c.title + '</span>' +
             '</div>' +
             '<div style="font-size:12px;color:#999;margin-bottom:4px">📖 第' + c.unit_id + '单元 · ' + c.unit_name + '</div>' +
@@ -10000,53 +10000,16 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         const rec = PROMPT_RECORDS[card.full_id];
         if (rec && rec.briefs) {
           const b = rec.briefs;
-          html += '<div style="margin-bottom:16px;border:2px solid rgba(102,126,234,.3);border-radius:12px;overflow:hidden">';
-          html += '<div style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between">';
-          html += '<div style="font-weight:700;font-size:14px">\ud83e\udd16 \u4e94\u89d2\u8272\u6d41\u6c34\u7ebf\u8bb0\u5f55</div>';
-          html += '<div style="display:flex;gap:8px;align-items:center">';
-          html += '<span style="background:' + (rec.verdict === 'PASS' ? '#2ed573' : '#ff4757') + ';padding:2px 10px;border-radius:6px;font-size:12px;font-weight:600">' + rec.score + '/50 ' + rec.verdict + '</span>';
-          html += '<span style="font-size:11px;opacity:.7">' + rec.generated_at + '</span>';
-          html += '</div></div>';
-
-          // R1 教研专家
-          if (b.R1) {
-            html += '<div style="padding:12px 16px;border-bottom:1px solid #f0f0f0">';
-            html += '<div style="font-weight:600;font-size:13px;color:#54A0FF;margin-bottom:6px">\ud83d\udcda R1 \u6559\u7814\u4e13\u5bb6</div>';
-            html += '<div style="font-size:12px;color:#555;line-height:1.6">';
-            html += '\ud83c\udfaf \u9009\u9898: <strong>' + (b.R1.selected_problem || '') + '</strong><br>';
-            html += '\u26a0\ufe0f \u9677\u9631\u70b9: ' + (b.R1.trap_point || '') + '<br>';
-            html += '\u274c Top\u9519\u8bef: ' + (b.R1.top3_mistakes || []).join(' | ');
-            html += '</div></div>';
-          }
-
-          // R2 教学设计师
-          if (b.R2) {
-            html += '<div style="padding:12px 16px;border-bottom:1px solid #f0f0f0">';
-            html += '<div style="font-weight:600;font-size:13px;color:#FF9F43;margin-bottom:6px">\ud83c\udf93 R2 \u6559\u5b66\u8bbe\u8ba1\u5e08</div>';
-            html += '<div style="font-size:12px;color:#555;line-height:1.6">';
-            html += '\ud83d\udca1 \u987f\u609f\u70b9: ' + (b.R2.eureka_moment || '') + '<br>';
-            html += '\ud83c\udf55 \u7c7b\u6bd4: ' + (b.R2.analogy || '') + '<br>';
-            html += '\u2728 \u7b56\u7565: <strong>' + (b.R2.novel_strategy || '') + '</strong><br>';
-            html += '\ud83d\udcac \u53e3\u8bc0: <strong style="color:var(--primary)">' + (b.R2.soul_mnemonic || '') + '</strong>';
-            html += '</div></div>';
-          }
-
-          // R3 小红书策划
-          if (b.R3) {
-            html += '<div style="padding:12px 16px;border-bottom:1px solid #f0f0f0">';
-            html += '<div style="font-weight:600;font-size:13px;color:#E84393;margin-bottom:6px">\ud83d\udcf1 R3 \u5c0f\u7ea2\u4e66\u7b56\u5212</div>';
-            html += '<div style="font-size:12px;color:#555;line-height:1.6">';
-            html += '\ud83d\udd25 \u7206\u6b3e\u6807\u9898: <strong>' + (b.R3.best_title || '') + '</strong><br>';
-            html += '\ud83c\udfad \u60c5\u7eea: ' + (b.R3.emotion_tone || '') + ' | \ud83c\udfaa \u94a9\u5b50: ' + (b.R3.hook_type || '') + '<br>';
-            html += '\ud83c\udff7\ufe0f ' + (b.R3.series_tag || '') + ' | \ud83d\udc66 IP\u72b6\u6001: ' + (b.R3.ip_character_state || '');
-            html += '</div></div>';
-          }
-
-          // 底部信息
-          html += '<div style="padding:10px 16px;background:#f8f9fa;font-size:11px;color:#999;display:flex;gap:16px">';
-          html += '<span>\ud83d\udcdd Prompt: ' + rec.prompt_length + ' chars</span>';
-          html += '<span>\ud83e\udd16 Pipeline: ' + rec.pipeline + '</span>';
-          html += '</div></div>';
+          html += _renderPromptRecordHTML(rec);
+        } else {
+          // 没有 Prompt 记录，显示生成按钮
+          html += '<div id="pl-prompt-gen-area" style="margin-bottom:16px;border:2px dashed rgba(102,126,234,.4);border-radius:12px;padding:24px;text-align:center;background:linear-gradient(135deg,rgba(102,126,234,.05),rgba(118,75,162,.05))">';
+          html += '<div style="font-size:32px;margin-bottom:8px">🤖</div>';
+          html += '<div style="font-weight:600;font-size:15px;color:#667eea;margin-bottom:6px">暂无五角色流水线记录</div>';
+          html += '<div style="font-size:12px;color:#999;margin-bottom:16px">点击下方按钮，AI将依次调用 教研专家(R1) → 教学设计师(R2) → 小红书策划(R3) 三个角色<br>为这张知识卡片生成专属的Prompt工程分析</div>';
+          html += '<button id="pl-gen-prompt-btn" onclick="PromptLib.generatePromptRecord(\'' + card.full_id + '\')" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;padding:12px 32px;border-radius:24px;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 4px 16px rgba(102,126,234,.3);transition:all .2s" onmouseenter="this.style.transform=\'scale(1.05)\'" onmouseleave="this.style.transform=\'scale(1)\'">🧪 生成Prompt记录 (R1→R2→R3)</button>';
+          html += '<div id="pl-gen-prompt-status" style="margin-top:12px;font-size:13px;color:#999"></div>';
+          html += '</div>';
         }
 
         // 生成图片 + 生成笔记按钮
@@ -10354,7 +10317,116 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         _goToNoteWorkshop(card, subject, grade, rec, 'prompt-lib');
       }
 
-      return { init, switchTab, filterPrompts, showDetail, generateImage, _goNote };
+      // ── 渲染五角色记录HTML (供 showDetail 和 generatePromptRecord 共用) ──
+      function _renderPromptRecordHTML(rec) {
+        if (!rec || !rec.briefs) return '';
+        const b = rec.briefs;
+        let h = '';
+        h += '<div style="margin-bottom:16px;border:2px solid rgba(102,126,234,.3);border-radius:12px;overflow:hidden">';
+        h += '<div style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between">';
+        h += '<div style="font-weight:700;font-size:14px">🤖 五角色流水线记录</div>';
+        h += '<div style="display:flex;gap:8px;align-items:center">';
+        h += '<span style="background:' + (rec.verdict === 'PASS' ? '#2ed573' : '#ff4757') + ';padding:2px 10px;border-radius:6px;font-size:12px;font-weight:600">' + rec.score + '/50 ' + rec.verdict + '</span>';
+        h += '<span style="font-size:11px;opacity:.7">' + rec.generated_at + '</span>';
+        h += '</div></div>';
+        if (b.R1) {
+          h += '<div style="padding:12px 16px;border-bottom:1px solid #f0f0f0">';
+          h += '<div style="font-weight:600;font-size:13px;color:#54A0FF;margin-bottom:6px">📚 R1 教研专家</div>';
+          h += '<div style="font-size:12px;color:#555;line-height:1.6">';
+          h += '🎯 选题: <strong>' + (b.R1.selected_problem || '') + '</strong><br>';
+          h += '⚠️ 陷阱点: ' + (b.R1.trap_point || '') + '<br>';
+          h += '❌ Top错误: ' + (b.R1.top3_mistakes || []).join(' | ');
+          if (b.R1.why_important) h += '<br>📌 重要性: ' + b.R1.why_important;
+          if (b.R1.parent_appeal) h += '<br>👨‍👩‍👧 家长关注: ' + b.R1.parent_appeal;
+          h += '</div></div>';
+        }
+        if (b.R2) {
+          h += '<div style="padding:12px 16px;border-bottom:1px solid #f0f0f0">';
+          h += '<div style="font-weight:600;font-size:13px;color:#FF9F43;margin-bottom:6px">🎓 R2 教学设计师</div>';
+          h += '<div style="font-size:12px;color:#555;line-height:1.6">';
+          h += '💡 顿悟点: ' + (b.R2.eureka_moment || '') + '<br>';
+          h += '🍕 类比: ' + (b.R2.analogy || '') + '<br>';
+          h += '✨ 策略: <strong>' + (b.R2.novel_strategy || '') + '</strong><br>';
+          h += '💬 口诀: <strong style="color:var(--primary)">' + (b.R2.soul_mnemonic || '') + '</strong>';
+          if (b.R2.novel_application) h += '<br>🔧 策略应用: ' + b.R2.novel_application;
+          h += '</div></div>';
+        }
+        if (b.R3) {
+          h += '<div style="padding:12px 16px;border-bottom:1px solid #f0f0f0">';
+          h += '<div style="font-weight:600;font-size:13px;color:#E84393;margin-bottom:6px">📱 R3 小红书策划</div>';
+          h += '<div style="font-size:12px;color:#555;line-height:1.6">';
+          h += '🔥 爆款标题: <strong>' + (b.R3.best_title || '') + '</strong><br>';
+          h += '🎭 情绪: ' + (b.R3.emotion_tone || '') + ' | 🎪 钩子: ' + (b.R3.hook_type || '') + '<br>';
+          h += '🏷️ ' + (b.R3.series_tag || '') + ' | 👦 IP状态: ' + (b.R3.ip_character_state || '');
+          if (b.R3.interaction_design) h += '<br>💬 互动设计: ' + b.R3.interaction_design;
+          if (b.R3.title_options && b.R3.title_options.length > 1) h += '<br>📝 备选标题: ' + b.R3.title_options.join(' / ');
+          h += '</div></div>';
+        }
+        h += '<div style="padding:10px 16px;background:#f8f9fa;font-size:11px;color:#999;display:flex;gap:16px">';
+        h += '<span>📝 Prompt: ' + rec.prompt_length + ' chars</span>';
+        h += '<span>🤖 Pipeline: ' + rec.pipeline + '</span>';
+        h += '</div></div>';
+        return h;
+      }
+
+      // ── 按需生成五角色 Prompt 记录 (R1→R2→R3) ──
+      async function generatePromptRecord(fullId) {
+        const card = allCards.find(c => c.full_id === fullId);
+        if (!card) return;
+        const subject = card._subject || '数学';
+        const statusEl = document.getElementById('pl-gen-prompt-status');
+        const btnEl = document.getElementById('pl-gen-prompt-btn');
+
+        if (btnEl) { btnEl.disabled = true; btnEl.style.opacity = '0.6'; btnEl.innerHTML = '⏳ 正在生成...'; }
+
+        const steps = ['📚 R1 教研专家分析中...', '🎓 R2 教学设计师设计中...', '📱 R3 小红书策划中...', '✅ 即将完成...'];
+        let stepIdx = 0;
+        const timer = setInterval(() => {
+          if (statusEl && stepIdx < steps.length) { statusEl.textContent = steps[stepIdx]; stepIdx++; }
+        }, 5000);
+
+        if (statusEl) statusEl.textContent = '🚀 正在调用AI五角色流水线 (约15-30秒)...';
+
+        try {
+          const cardData = {
+            full_id: card.full_id, type: card.type, title: card.title,
+            definition: card.definition || '', core_points: card.core_points || [],
+            example: card.example || {}, memory_tip: card.memory_tip || '',
+            mistakes: card.mistakes || [], difficulty: card.difficulty || 3,
+            emotion_hook: card.emotion_hook || '', trap_point: card.trap_point || ''
+          };
+
+          const res = await fetch(API_BASE + '/api/generate-prompt-record', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ card: cardData, subject: subject })
+          });
+
+          const data = await res.json();
+          clearInterval(timer);
+
+          if (!data.ok || !data.record) {
+            throw new Error(data.error || '生成失败');
+          }
+
+          // 存入 PROMPT_RECORDS 缓存
+          PROMPT_RECORDS[fullId] = data.record;
+
+          // 替换生成区域为实际记录
+          const area = document.getElementById('pl-prompt-gen-area');
+          if (area) {
+            area.outerHTML = _renderPromptRecordHTML(data.record);
+          }
+
+          if (statusEl) statusEl.textContent = '';
+        } catch(e) {
+          clearInterval(timer);
+          if (statusEl) statusEl.innerHTML = '<span style="color:#ff4757">❌ ' + e.message + '</span>';
+          if (btnEl) { btnEl.disabled = false; btnEl.style.opacity = '1'; btnEl.innerHTML = '🧪 重试生成'; }
+        }
+      }
+
+      return { init, switchTab, filterPrompts, showDetail, generateImage, _goNote, generatePromptRecord };
     })();
 
 

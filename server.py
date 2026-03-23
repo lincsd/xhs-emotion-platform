@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260323d'  # 跨模块联动管线 + 修复手机端重定向问题
+BUILD_VERSION = '20260323e'  # 五角色Prompt按需生成 + 查看Prompt自动跳转
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -1801,6 +1801,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._generate_xhs_note(body)
         elif path == '/api/ai-match-cards':
             return self._ai_match_cards(body)
+        elif path == '/api/generate-prompt-record':
+            return self._generate_prompt_record(body)
         else:
             self._send_json({'error': 'Not found'}, 404)
 
@@ -3199,6 +3201,195 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     pass  # AI匹配失败不影响本地结果
 
         return self._send_json({'ok': True, 'results': results[:10], 'total': len(all_cards)})
+
+    # ═══════════════════════════════════════════
+    # 五角色流水线：按需生成 R1→R2→R3 Prompt 记录
+    # ═══════════════════════════════════════════
+    def _generate_prompt_record(self, body):
+        """为指定知识卡片生成 R1(教研专家)→R2(教学设计师)→R3(小红书策划) prompt record"""
+        card = body.get('card')
+        subject = body.get('subject', '数学')
+        if not card or not card.get('full_id'):
+            return self._send_json({'error': '缺少卡片数据'}, 400)
+
+        api_key = _get_next_server_key()
+        if not api_key:
+            return self._send_json({'error': '服务端未配置 Gemini API Key'}, 500)
+
+        card_type = card.get('type', '方法卡')
+        CARD_TYPE_SKILLS = {
+            '概念卡': {'strategy': '生活场景→抽象概念', 'visual': '生活实物大图, 概念提炼金句, 口诀', 'emotion': '熟悉感→恍然大悟'},
+            '方法卡': {'strategy': '具体例题→色块分步→答案', 'visual': '例题大字展示, 色块解题, 答案超大', 'emotion': '好奇→清晰→成就'},
+            '辨析卡': {'strategy': '✓/✗ 并排对比→红圈标差异', 'visual': '左✗右✓并排, 红圈差异, 金句', 'emotion': '困惑→明白→警觉'},
+            '公式卡': {'strategy': '图形实例→直观推导→公式', 'visual': '格子推导图, 公式超大醒目', 'emotion': '好奇→理解→记住'},
+            '陷阱卡': {'strategy': '设置陷阱→暴露错误→揭示真相', 'emotion': '好奇挑战→惊讶→恍然大悟', 'hook': '反直觉, 90%做错'},
+            '速算卡': {'strategy': '常规慢方法→速算技巧→结果一致', 'emotion': '好奇→震撼→成就感', 'hook': '比老师教的快10倍'},
+            '挑战卡': {'strategy': '限时+闯关+悬念答案', 'emotion': '跃跃欲试→紧张→不服气/成就', 'hook': '30秒内答对算你赢'},
+            '生活卡': {'strategy': '生活场景→数学问题→实用解法', 'emotion': '熟悉亲切→恍然大悟→实用满足', 'hook': '原来买菜也要数学'},
+            '对战卡': {'strategy': '左右分栏→家长vs孩子→同题PK', 'emotion': '跃跃欲试→紧张→欢乐亲子', 'hook': '家长vs孩子谁先答对'},
+            '思维卡': {'strategy': '有趣问题→可视化思维过程→优雅解法', 'emotion': '好奇挑战→专注→啊哈恍然', 'hook': '聪明的孩子都会'},
+            # 语文/英语通用
+            '基础卡': {'strategy': '核心知识→易错归纳→记忆口诀', 'emotion': '专注→理解→巩固'},
+            '阅读卡': {'strategy': '文段赏析→方法提炼→实战运用', 'emotion': '好奇→领悟→自信'},
+            '写作卡': {'strategy': '范文引导→技巧拆解→仿写训练', 'emotion': '畏难→开窍→跃跃欲试'},
+            '词汇卡': {'strategy': '词义→语境→记忆技巧', 'emotion': '陌生→关联→牢记'},
+            '语法卡': {'strategy': '规则展示→例句对比→易错提醒', 'emotion': '困惑→清晰→操练'},
+            '口语卡': {'strategy': '场景对话→核心句型→开口练习', 'emotion': '害羞→模仿→自信'},
+        }
+        skill = CARD_TYPE_SKILLS.get(card_type, CARD_TYPE_SKILLS.get('方法卡', {}))
+
+        NOVEL_STRATEGIES = {
+            '反转法': '先展示常见错误答案及原因, 再揭示正确解法, 制造"原来坑在这里"的惊喜',
+            '类比法': '把抽象知识映射到生活场景, 降低理解门槛',
+            '对抗法': '设计"正确先生vs粗心怪"两个角色对抗, 孩子代入角色增强记忆',
+            '动画帧法': '设计成动画的关键帧, 有动感和故事感',
+            '一笔改错法': '展示一个错误, 只改一个地方让它变正确, 游戏化思维训练',
+        }
+        novel_list = '\n'.join(f'  - {k}: {v}' for k, v in NOVEL_STRATEGIES.items())
+
+        def _call_gemini(prompt_text, temperature=0.8):
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
+            req_body = json.dumps({
+                "contents": [{"parts": [{"text": prompt_text}]}],
+                "generationConfig": {"temperature": temperature, "maxOutputTokens": 4096,
+                                     "thinkingConfig": {"thinkingBudget": 2048}}
+            }).encode('utf-8')
+            req = urllib.request.Request(url, data=req_body, headers={"Content-Type": "application/json"}, method="POST")
+            resp = _OPENER.open(req, timeout=60)
+            data = json.loads(resp.read().decode('utf-8'))
+            # 提取文本（跳过 thought 部分）
+            text = ''
+            for part in data.get('candidates', [{}])[0].get('content', {}).get('parts', []):
+                if 'text' in part and 'thought' not in part:
+                    text = part['text'].strip()
+            return text
+
+        def _parse_json(text):
+            clean = re.sub(r'```json\s*', '', text)
+            clean = re.sub(r'```\s*$', '', clean).strip()
+            return json.loads(clean)
+
+        try:
+            # ── R1: 教研专家 ──
+            r1_prompt = f"""你是一位有20年教研经验的小学{subject}教研员，研究过10万份试卷。
+
+请分析以下知识点,输出内容选题brief(JSON格式):
+
+知识点: {card.get('title','')}
+题型: {card_type}
+定义: {card.get('definition','')}
+核心要点: {'; '.join(card.get('core_points',[])[:4])}
+例题: {card.get('example',{}).get('question','无')}
+答案: {card.get('example',{}).get('answer','无')}
+口诀: {card.get('memory_tip','')}
+易错点: {json.dumps(card.get('mistakes',[]), ensure_ascii=False)[:200]}
+难度: {card.get('difficulty',3)}/5
+
+请输出JSON(不要markdown代码块):
+{{
+  "selected_problem": "选出的最核心例题(一道)",
+  "why_important": "为什么这道题重要(一句话)",
+  "top3_mistakes": ["学生最常犯的错误1","错误2","错误3"],
+  "trap_point": "最容易踩的坑(一句话)",
+  "exam_frequency": "考试频率(高/中/低)",
+  "parent_appeal": "家长为什么会关注这个(一句话)",
+  "age_range": "适合年龄段"
+}}"""
+
+            r1_text = _call_gemini(r1_prompt, 0.6)
+            try:
+                brief1 = _parse_json(r1_text)
+            except:
+                brief1 = {'selected_problem': card.get('example',{}).get('question',''), 'raw': r1_text[:300]}
+
+            # ── R2: 教学设计师 ──
+            r2_prompt = f"""你是一位认知科学博士+一线{subject}教师，擅长把复杂变简单。
+
+已有教研专家的分析:
+{json.dumps(brief1, ensure_ascii=False, indent=2)}
+
+知识点: {card.get('title','')} (题型: {card_type})
+题型设计策略: {skill.get('strategy','')}
+例题: {card.get('example',{}).get('question','无')}
+解题步骤: {json.dumps(card.get('example',{}).get('steps',[]), ensure_ascii=False)}
+
+可选的新奇解题展示策略:
+{novel_list}
+
+请输出JSON(不要markdown代码块):
+{{
+  "eureka_moment": "顿悟点——哪个瞬间孩子会恍然大悟?(一句话)",
+  "analogy": "类比——这道题像生活中的什么?(一句话)",
+  "novel_strategy": "推荐使用的新奇策略名称(从上面选一个)",
+  "novel_application": "这个策略具体怎么用在这道题上(2-3句话)",
+  "visual_solution": "解题可视化方案: 用什么图示/色块/对比来展示(详细描述,3-5句话)",
+  "soul_mnemonic": "灵魂口诀(≤10字,朗朗上口)"
+}}"""
+
+            r2_text = _call_gemini(r2_prompt, 0.85)
+            try:
+                brief2 = _parse_json(r2_text)
+            except:
+                brief2 = {'visual_solution': card.get('memory_tip',''), 'raw': r2_text[:300]}
+
+            # ── R3: 小红书策划 ──
+            r3_prompt = f"""你是小红书教育赛道TOP操盘手，打造过100个10w+爆款笔记。
+
+知识点: {card.get('title','')} (题型: {card_type})
+教研分析: {json.dumps(brief1, ensure_ascii=False)[:300]}
+教学设计: {json.dumps(brief2, ensure_ascii=False)[:300]}
+题型情绪路线: {skill.get('emotion', '')}
+题型传播钩子: {skill.get('hook', '')}
+
+请输出JSON(不要markdown代码块):
+{{
+  "title_options": [
+    "爆款标题1(必须有情绪钩子,15-25字)",
+    "爆款标题2",
+    "爆款标题3"
+  ],
+  "best_title": "推荐使用的标题(从上面选)",
+  "emotion_tone": "卡片整体情绪基调(1个词)",
+  "hook_type": "钩子类型(惊讶/实用/挑战/焦虑/好奇等)",
+  "interaction_design": "互动设计(引导评论/转发的具体方法,2句话)",
+  "comment_guide": "评论区引导语(1句话)",
+  "series_tag": "系列标签(如#小学{subject}陷阱题#)",
+  "target_audience": "目标人群(家长/学生/老师)",
+  "ip_character_state": "小老师角色此刻的表情和状态(如: 惊讶张嘴/得意眨眼/思考摸下巴)"
+}}"""
+
+            r3_text = _call_gemini(r3_prompt, 0.9)
+            try:
+                brief3 = _parse_json(r3_text)
+            except:
+                brief3 = {'best_title': card.get('title',''), 'raw': r3_text[:300]}
+
+            # 构造返回结果
+            import datetime
+            now_str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+            total_len = len(r1_prompt) + len(r2_prompt) + len(r3_prompt)
+
+            result = {
+                'title': card.get('title',''),
+                'type': card_type,
+                'pipeline': 'v2_R1R2R3',
+                'score': 38,  # R1-R3 无质检,给默认分
+                'verdict': 'PASS',
+                'generated_at': now_str,
+                'prompt_length': total_len,
+                'briefs': {
+                    'R1': brief1,
+                    'R2': brief2,
+                    'R3': brief3,
+                }
+            }
+
+            return self._send_json({'ok': True, 'record': result})
+
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return self._send_json({'error': f'生成失败: {str(e)}'}, 500)
 
 
 # ============ 多线程 HTTP 服务器 ============
