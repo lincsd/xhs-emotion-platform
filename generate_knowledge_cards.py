@@ -94,7 +94,9 @@ STAGES = {
 }
 
 # ============ Prompt 模板 ============
-CARD_GEN_PROMPT = """你是一位资深的中国{stage}{subject}教研员，精通人教版教材。
+
+# --- 数学 标准卡 ---
+CARD_GEN_PROMPT_MATH = """你是一位资深的中国{stage}{subject}教研员，精通人教版教材。
 请为 **人教版{subject} {grade_full}** 生成一套完整的知识卡片（JSON格式）。
 
 要求：
@@ -136,7 +138,71 @@ CARD_GEN_PROMPT = """你是一位资深的中国{stage}{subject}教研员，精�
 }}
 """
 
-BOOM_CARD_PROMPT = """你是一位小红书教育类爆款内容策划专家，同时精通人教版{stage}{subject}教材。
+# --- 语文 标准卡 ---
+CARD_GEN_PROMPT_YUWEN = """你是一位资深的中国{stage}语文教研员，精通统编版（部编版）语文教材。
+请为 **统编版语文 {grade_full}** 生成一套完整的知识卡片（JSON格式）。
+
+要求：
+1. 按教材单元编排，每个单元3-6张卡片
+2. 卡片类型包括（根据年级灵活选用）：
+   - **易错字卡**: 本单元最容易写错/混淆的汉字，含正确写法、笔顺要点、易错部分标注
+   - **多音字卡**: 多音字辨析，列出不同读音及对应词语、例句
+   - **词语辨析卡**: 近义词/形近字辨析，区分用法和语境
+   - **古诗理解卡**: 古诗/古文的重点字词翻译、主题思想、作者背景（三年级及以上）
+   - **阅读技巧卡**: 阅读理解答题方法，归纳中心思想/人物描写/修辞手法识别等
+   - **写作方法卡**: 写作技巧，如开头方法、过渡句、细节描写、总分总结构等
+   - **修辞手法卡**: 比喻、拟人、排比、夸张等修辞手法辨析及仿写（三年级及以上）
+   - **标点符号卡**: 标点符号用法辨析（低年级侧重）
+   - **成语卡**: 重点成语的含义、出处、易错用法
+   - **拼音卡**: 声母韵母整体认读/拼读规则（一二年级侧重）
+
+3. 每张卡片必须包含以下字段：
+   - card_id: 格式 "单元号-序号" 如 "01-01"
+   - full_id: 格式 "语文-{grade_short}-01-01"
+   - title: 知识点名称（如"易错字：已vs己"、"古诗：静夜思"）
+   - type: 卡片类型（易错字卡/多音字卡/词语辨析卡/古诗理解卡/阅读技巧卡/写作方法卡/修辞手法卡/标点符号卡/成语卡/拼音卡）
+   - difficulty: 难度 1-5
+   - importance: 重要性 1-5
+   - definition: 核心知识点（一句话概括）
+   - core_points: 要点列表（3-5条）
+   - example: {{question, steps[], answer}}（示例题目或练习）
+   - mistakes: [{{wrong, correct}}]（1-2个常见错误，如错别字对比、误用示例）
+   - memory_tip: 记忆口诀/顺口溜/助记方法
+   - related: {{prerequisite, next}}
+
+4. 知识点要覆盖该册教材的所有主要单元
+5. 一二年级侧重拼音卡、易错字卡、标点符号卡；三四年级增加古诗理解卡、修辞手法卡；五六年级增加阅读技巧卡、写作方法卡
+6. 例题要贴合课文内容，步骤清晰
+7. 记忆口诀要朗朗上口，适合小学生记忆
+
+请直接输出完整JSON（不要markdown代码块），格式如下：
+{{
+  "subject": "语文",
+  "grade": "{grade_name}",
+  "semester": "{semester}",
+  "textbook": "统编版",
+  "grade_short": "{grade_short}",
+  "units": [
+    {{
+      "unit_id": "01",
+      "unit_name": "单元名称",
+      "cards": [...]
+    }}
+  ]
+}}
+"""
+
+# --- 通用 fallback ---
+CARD_GEN_PROMPT = CARD_GEN_PROMPT_MATH
+
+# 按学科选择标准卡模板
+CARD_GEN_PROMPTS = {
+    '数学': CARD_GEN_PROMPT_MATH,
+    '语文': CARD_GEN_PROMPT_YUWEN,
+}
+
+# --- 数学 爆款卡 ---
+BOOM_CARD_PROMPT_MATH = """你是一位小红书教育类爆款内容策划专家，同时精通人教版{stage}{subject}教材。
 请为 **人教版{subject} {grade_full}** 设计一套爆款知识卡片（JSON格式），用于生成高传播力的小红书笔记。
 
 爆款卡类型（共6种）：
@@ -183,6 +249,69 @@ BOOM_CARD_PROMPT = """你是一位小红书教育类爆款内容策划专家，�
   ]
 }}
 """
+
+# --- 语文 爆款卡 ---
+BOOM_CARD_PROMPT_YUWEN = """你是一位小红书教育类爆款内容策划专家，同时精通统编版（部编版）{stage}语文教材。
+请为 **统编版语文 {grade_full}** 设计一套爆款知识卡片（JSON格式），用于生成高传播力的小红书笔记。
+
+爆款卡类型（共6种）：
+1. **易错字陷阱卡** (T1): 本册最容易写错的字/词，制造"10个孩子9个写错！"的冲突感。展示错误写法vs正确写法，标注易错部首/笔画。
+2. **多音字辨析卡** (T2): 最容易读错的多音字，制造"这个字你读对了吗？"的惊喜。给出不同读音和对应词语。
+3. **古诗默写挑战卡** (T3): 古诗填空/默写挑战，"你能不看书写出来吗？"的互动。挖空关键字让用户填写。（三年级及以上）
+4. **成语纠错卡** (T4): 成语误用场景，"这些成语你一直用错了！"。给出常见误用例句，引导正确理解。（三年级及以上）
+5. **亲子古诗PK卡** (T5): 家长vs孩子的诗词PK题，"妈妈居然输给了二年级的娃！"。设计适合亲子互动的诗词抢答。
+6. **阅读理解技巧卡** (T6): 阅读理解答题万能公式，"背下这个模板，阅读理解不丢分！"。给出分题型的答题模板和技巧。（三年级及以上）
+
+注意：一二年级没有古诗默写挑战卡(T3)、成语纠错卡(T4)、阅读理解技巧卡(T6)的，可以替换为：
+- **拼音闯关卡** (T3替代): 拼音拼读挑战，"这些拼音你能全拼对吗？"
+- **笔顺挑战卡** (T4替代): 笔顺易错字，"这个字的笔顺你写对了吗？"
+- **看图写话卡** (T6替代): 看图说话/写话引导，"用3句话描述这幅图"
+
+每种类型2-3张卡片。每张卡片需包含：
+- card_id: "T类型号-序号" 如 "T1-01"
+- full_id: "语文-{grade_short}-T1-01"
+- title: 简短有冲击力的标题（如"这个字全班80%写错！"）
+- type: 具体类型名（易错字陷阱卡/多音字辨析卡/古诗默写挑战卡/成语纠错卡/亲子古诗PK卡/阅读理解技巧卡，或低年级替代类型）
+- difficulty: 1-5
+- importance: 1-5
+- definition: 核心知识点
+- core_points: 要点3-5条
+- example: {{question, steps[], answer}}
+- mistakes: [{{wrong, correct}}]
+- memory_tip: 口诀/顺口溜
+- emotion_hook: 情绪钩子（一句话引发好奇或共鸣，如"看完这张卡，默写不丢分！"）
+- trap_point / pinyin_tip / challenge_rule / idiom_correction / battle_rule / reading_formula: 对应类型的特有字段
+
+知识点必须准确，符合该年级统编版教材范围！不要超纲！
+
+请直接输出JSON（不要markdown代码块），格式如下：
+{{
+  "subject": "语文",
+  "grade": "{grade_name}",
+  "semester": "{semester}",
+  "textbook": "统编版",
+  "grade_short": "{grade_short}",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种语文爆款题型卡片",
+  "units": [
+    {{
+      "unit_id": "T1",
+      "unit_name": "易错字陷阱",
+      "cards": [...]
+    }},
+    ...T2到T6...
+  ]
+}}
+"""
+
+# 通用 fallback
+BOOM_CARD_PROMPT = BOOM_CARD_PROMPT_MATH
+
+# 按学科选择爆款卡模板
+BOOM_CARD_PROMPTS = {
+    '数学': BOOM_CARD_PROMPT_MATH,
+    '语文': BOOM_CARD_PROMPT_YUWEN,
+}
 
 def extract_json(text):
     """从API返回文本中提取JSON"""
@@ -233,7 +362,7 @@ def generate_cards(stage_name, grade_short, subject, keys, boom=False):
     print(f"  🎯 生成 {stage_name} {subject} {grade_full} {card_type}卡片")
     print(f"{'='*60}")
     
-    template = BOOM_CARD_PROMPT if boom else CARD_GEN_PROMPT
+    template = BOOM_CARD_PROMPTS.get(subject, BOOM_CARD_PROMPT) if boom else CARD_GEN_PROMPTS.get(subject, CARD_GEN_PROMPT)
     prompt = template.format(
         stage=stage_name,
         subject=subject,

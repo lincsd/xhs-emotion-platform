@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260322g';
+      var BUILD='20260322h';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);}
@@ -3819,7 +3819,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260322g'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260322h'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -8972,13 +8972,20 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         '五上':'五年级上册','五下':'五年级下册','六上':'六年级上册','六下':'六年级下册'
       };
 
+      // ── 学科配置 ──
+      const SUBJECTS = [
+        { key: '数学', icon: '📐', label: '数学' },
+        { key: '语文', icon: '📖', label: '语文' }
+      ];
+
       // ── 状态 ──
       let PACKS = [];           // [标准卡片包, 爆款卡片包]
       let activePack = null;
       let activeUnitId = null;
       let currentGrade = '三下'; // 默认年级
+      let currentSubject = '数学'; // 默认学科
       let isLoading = false;
-      let cardCache = {};        // { '三下': [stdPack, boomPack], ... }
+      let cardCache = {};        // { '数学_三下': [stdPack, boomPack], ... }
 
       // ── 基础路径（兼容 GitHub Pages / 本地 / Tunnel）──
       function getBasePath() {
@@ -8995,16 +9002,17 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
 
       // ── 加载卡片数据 ──
       async function loadGrade(gradeShort) {
-        if (cardCache[gradeShort]) {
-          PACKS = cardCache[gradeShort];
+        const cacheKey = `${currentSubject}_${gradeShort}`;
+        if (cardCache[cacheKey]) {
+          PACKS = cardCache[cacheKey];
           currentGrade = gradeShort;
           activePack = PACKS[0];
           return true;
         }
 
         const base = getBasePath();
-        const stdFile = `${base}数学_${gradeShort}.json`;
-        const boomFile = `${base}数学_${gradeShort}_爆款.json`;
+        const stdFile = `${base}${currentSubject}_${gradeShort}.json`;
+        const boomFile = `${base}${currentSubject}_${gradeShort}_爆款.json`;
 
         try {
           isLoading = true;
@@ -9029,7 +9037,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           if (packs.length === 0) throw new Error('无数据');
 
           PACKS = packs;
-          cardCache[gradeShort] = packs;
+          cardCache[cacheKey] = packs;
           currentGrade = gradeShort;
           activePack = PACKS[0];
           isLoading = false;
@@ -9056,6 +9064,8 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         const filterBar = document.getElementById('kc-filter-bar');
         if (!filterBar) return;
 
+        // 渲染学科选择器
+        renderSubjectSelector(filterBar);
         // 渲染年级选择器
         renderGradeSelector(filterBar);
 
@@ -9063,6 +9073,51 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         const ok = await loadGrade(currentGrade);
         if (!ok) {
           renderError('加载失败，请检查网络');
+          return;
+        }
+        renderPackInfo(filterBar);
+        renderUnitTabs();
+        if (activePack.units.length > 0) selectUnit(activePack.units[0].unit_id);
+      }
+
+      function renderSubjectSelector(filterBar) {
+        let subjectBar = filterBar.querySelector('.kc-subject-bar');
+        if (!subjectBar) {
+          subjectBar = document.createElement('div');
+          subjectBar.className = 'kc-subject-bar';
+          subjectBar.style.cssText = 'display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #eee';
+          filterBar.prepend(subjectBar);
+        }
+        const btns = SUBJECTS.map(s => {
+          const active = s.key === currentSubject;
+          return `<button onclick="KnowledgeCards.switchSubject('${s.key}')"
+            class="kc-subject-btn" data-subject="${s.key}"
+            style="padding:7px 20px;border-radius:20px;border:2px solid ${active?'#667eea':'#e0e0e0'};
+            background:${active?'linear-gradient(135deg,#667eea,#764ba2)':'#fff'};
+            color:${active?'#fff':'#555'};cursor:pointer;font-size:14px;font-weight:${active?'700':'400'};
+            transition:all .2s;white-space:nowrap">${s.icon} ${s.label}</button>`;
+        }).join('');
+        subjectBar.innerHTML = `<span style="font-weight:700;font-size:14px;color:#333;margin-right:4px">🎯 学科：</span>${btns}`;
+      }
+
+      async function switchSubject(subjectKey) {
+        if (subjectKey === currentSubject && PACKS.length > 0) return;
+        currentSubject = subjectKey;
+        const filterBar = document.getElementById('kc-filter-bar');
+
+        // 更新学科按钮样式
+        document.querySelectorAll('.kc-subject-btn').forEach(b => {
+          const on = b.dataset.subject === subjectKey;
+          b.style.border = on ? '2px solid #667eea' : '2px solid #e0e0e0';
+          b.style.background = on ? 'linear-gradient(135deg,#667eea,#764ba2)' : '#fff';
+          b.style.color = on ? '#fff' : '#555';
+          b.style.fontWeight = on ? '700' : '400';
+        });
+
+        // 重新加载当前年级的该学科数据
+        const ok = await loadGrade(currentGrade);
+        if (!ok) {
+          renderError(`加载 ${subjectKey} ${GRADE_LABELS[currentGrade] || currentGrade} 失败`);
           return;
         }
         renderPackInfo(filterBar);
@@ -9180,6 +9235,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
       }
 
       const _tc = {
+        // 数学
         '概念卡': { bg:'#e3f2fd', fg:'#1565c0', icon:'💡' },
         '方法卡': { bg:'#e8f5e9', fg:'#2e7d32', icon:'🔧' },
         '公式卡': { bg:'#fff3e0', fg:'#e65100', icon:'📐' },
@@ -9190,7 +9246,28 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         '挑战卡': { bg:'#fce4ec', fg:'#ad1457', icon:'🏆' },
         '生活卡': { bg:'#e8f5e9', fg:'#2e7d32', icon:'🛒' },
         '对战卡': { bg:'#f3e5f5', fg:'#6a1b9a', icon:'⚔️' },
-        '思维卡': { bg:'#e8eaf6', fg:'#283593', icon:'🧠' }
+        '思维卡': { bg:'#e8eaf6', fg:'#283593', icon:'🧠' },
+        // 语文 标准
+        '拼音卡': { bg:'#e3f2fd', fg:'#1565c0', icon:'🔤' },
+        '易错字卡': { bg:'#ffebee', fg:'#c62828', icon:'✏️' },
+        '标点符号卡': { bg:'#fff3e0', fg:'#e65100', icon:'❗' },
+        '看图写话卡': { bg:'#e8f5e9', fg:'#2e7d32', icon:'🖼️' },
+        '词语辨析卡': { bg:'#fce4ec', fg:'#c62828', icon:'🔍' },
+        '多音字卡': { bg:'#f3e5f5', fg:'#6a1b9a', icon:'🎵' },
+        '修辞手法卡': { bg:'#e0f7fa', fg:'#00838f', icon:'🎭' },
+        '阅读技巧卡': { bg:'#e8eaf6', fg:'#283593', icon:'📖' },
+        '写作方法卡': { bg:'#fff8e1', fg:'#f57f17', icon:'✍️' },
+        '成语卡': { bg:'#e8f5e9', fg:'#2e7d32', icon:'📜' },
+        '古诗理解卡': { bg:'#f3e5f5', fg:'#6a1b9a', icon:'🏯' },
+        '阅读理解技巧卡': { bg:'#e8eaf6', fg:'#283593', icon:'📚' },
+        // 语文 爆款
+        '易错字陷阱卡': { bg:'#fff3e0', fg:'#e65100', icon:'⚡' },
+        '多音字辨析卡': { bg:'#f3e5f5', fg:'#6a1b9a', icon:'🎵' },
+        '拼音闯关卡': { bg:'#e3f2fd', fg:'#1565c0', icon:'🎮' },
+        '笔顺挑战卡': { bg:'#fce4ec', fg:'#ad1457', icon:'🖊️' },
+        '亲子古诗PK卡': { bg:'#e8f5e9', fg:'#2e7d32', icon:'⚔️' },
+        '古诗默写挑战卡': { bg:'#f3e5f5', fg:'#6a1b9a', icon:'📝' },
+        '成语纠错卡': { bg:'#ffebee', fg:'#c62828', icon:'🔎' }
       };
       const _stars = n => '★'.repeat(n) + '☆'.repeat(5 - n);
 
@@ -9298,7 +9375,27 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           '挑战卡':{ p:'#ad1457', l:'#fce4ec', a:'#ec407a' },
           '生活卡':{ p:'#2e7d32', l:'#e8f5e9', a:'#66bb6a' },
           '对战卡':{ p:'#6a1b9a', l:'#f3e5f5', a:'#ab47bc' },
-          '思维卡':{ p:'#283593', l:'#e8eaf6', a:'#5c6bc0' }
+          '思维卡':{ p:'#283593', l:'#e8eaf6', a:'#5c6bc0' },
+          // 语文
+          '拼音卡':{ p:'#1565c0', l:'#e3f2fd', a:'#42a5f5' },
+          '易错字卡':{ p:'#c62828', l:'#ffebee', a:'#ef5350' },
+          '标点符号卡':{ p:'#e65100', l:'#fff3e0', a:'#ff9800' },
+          '看图写话卡':{ p:'#2e7d32', l:'#e8f5e9', a:'#66bb6a' },
+          '词语辨析卡':{ p:'#c62828', l:'#fce4ec', a:'#ef5350' },
+          '多音字卡':{ p:'#6a1b9a', l:'#f3e5f5', a:'#ab47bc' },
+          '修辞手法卡':{ p:'#00838f', l:'#e0f7fa', a:'#26c6da' },
+          '阅读技巧卡':{ p:'#283593', l:'#e8eaf6', a:'#5c6bc0' },
+          '写作方法卡':{ p:'#f57f17', l:'#fff8e1', a:'#ffca28' },
+          '成语卡':{ p:'#2e7d32', l:'#e8f5e9', a:'#66bb6a' },
+          '古诗理解卡':{ p:'#6a1b9a', l:'#f3e5f5', a:'#ab47bc' },
+          '阅读理解技巧卡':{ p:'#283593', l:'#e8eaf6', a:'#5c6bc0' },
+          '易错字陷阱卡':{ p:'#e65100', l:'#fff3e0', a:'#ff9800' },
+          '多音字辨析卡':{ p:'#6a1b9a', l:'#f3e5f5', a:'#ab47bc' },
+          '拼音闯关卡':{ p:'#1565c0', l:'#e3f2fd', a:'#42a5f5' },
+          '笔顺挑战卡':{ p:'#ad1457', l:'#fce4ec', a:'#ec407a' },
+          '亲子古诗PK卡':{ p:'#2e7d32', l:'#e8f5e9', a:'#66bb6a' },
+          '古诗默写挑战卡':{ p:'#6a1b9a', l:'#f3e5f5', a:'#ab47bc' },
+          '成语纠错卡':{ p:'#c62828', l:'#ffebee', a:'#ef5350' }
         };
         const th = themes[card.type] || { p:'#333', l:'#f5f5f5', a:'#999' };
 
@@ -9411,7 +9508,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         ctx.fillStyle='#2e7d32';for(const l of cl){ctx.fillText(l,x+16,ty);ty+=18;}return y+tot+12;
       }
 
-      return { init, selectUnit, showDetail, downloadCard, switchPack, switchGrade, _getPacks: () => PACKS };
+      return { init, selectUnit, showDetail, downloadCard, switchPack, switchGrade, switchSubject, _getPacks: () => PACKS };
     })();
 
     // ============ 🧪 Prompt 工程库模块 ============
