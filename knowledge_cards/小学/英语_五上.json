@@ -1,0 +1,1038 @@
+{
+  "subject": "英语",
+  "grade": "五年级",
+  "semester": "上册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "五上",
+  "units": [
+    {
+      "unit_id": "01",
+      "unit_name": "My new teachers",
+      "cards": [
+        {
+          "card_id": "01-01",
+          "full_id": "英语-五上-01-01",
+          "title": "词汇：新老师与学科",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习描述新老师和不同学科的英语词汇。",
+          "core_points": [
+            "teacher [ˈtiːtʃər] 老师",
+            "Chinese teacher 语文老师",
+            "English teacher 英语老师",
+            "Math teacher 数学老师",
+            "PE teacher 体育老师"
+          ],
+          "example": {
+            "question": "看图回答：Who's that? (图片显示一位女老师拿着数学书)",
+            "steps": [
+              "识别图片人物是老师",
+              "识别老师手中的书是数学书，确定是数学老师",
+              "用学过的句型回答"
+            ],
+            "answer": "She's our Math teacher."
+          },
+          "mistakes": [
+            {
+              "wrong": "She's my Math.",
+              "correct": "She's my Math teacher."
+            }
+          ],
+          "memory_tip": "学科加teacher，就是某某老师。比如：English (英语) + teacher (老师) = English teacher (英语老师)。",
+          "related": {
+            "prerequisite": "认识'teacher'，知道'is/are'用法",
+            "next": "描述老师的性格"
+          }
+        },
+        {
+          "card_id": "01-02",
+          "full_id": "英语-五上-01-02",
+          "title": "词汇：描述人物性格",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习用形容词描述老师或朋友的性格特点。",
+          "core_points": [
+            "young [jʌŋ] 年轻的",
+            "old [əʊld] 年老的",
+            "strict [strɪkt] 严格的",
+            "kind [kaɪnd] 友好的，和蔼的",
+            "funny [ˈfʌni] 有趣的"
+          ],
+          "example": {
+            "question": "用一个词描述你的英语老师：My English teacher is (____).",
+            "steps": [
+              "回忆你的英语老师的特点",
+              "选择一个合适的形容词填空"
+            ],
+            "answer": "My English teacher is kind/funny/strict."
+          },
+          "mistakes": [
+            {
+              "wrong": "She is fun.",
+              "correct": "She is funny."
+            }
+          ],
+          "memory_tip": "Young和old是一对反义词，strict和kind是另一对。funny很有趣，就像'fun'一样。",
+          "related": {
+            "prerequisite": "形容词的基本概念",
+            "next": "用更复杂的句型描述人物"
+          }
+        },
+        {
+          "card_id": "01-03",
+          "full_id": "英语-五上-01-03",
+          "title": "句型：介绍他人与询问身份",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习如何介绍他人，以及询问对方是谁。",
+          "core_points": [
+            "Who's that? 那个是谁？ (询问单数，远处的人)",
+            "He's/She's our... 他/她是我们的...",
+            "Who's he/she? 他/她是谁？ (询问单数，可能在场或已知)",
+            "He's/She's my friend/classmate. 他/她是我的朋友/同学。"
+          ],
+          "example": {
+            "question": "补全对话：A: Who's that? B: (____) our Chinese teacher.",
+            "steps": [
+              "理解A在询问“那个人是谁”",
+              "根据上下文判断B应该回答“她/他是我们的语文老师”",
+              "选择正确的代词和be动词形式"
+            ],
+            "answer": "She's"
+          },
+          "mistakes": [
+            {
+              "wrong": "Who is that?",
+              "correct": "Who's that?"
+            },
+            {
+              "wrong": "He is our Math.",
+              "correct": "He's our Math teacher."
+            }
+          ],
+          "memory_tip": "Who's = Who is，问谁是谁。回答时，He's/She's 是缩写，更常用。",
+          "related": {
+            "prerequisite": "人称代词和be动词",
+            "next": "询问和描述人物特征"
+          }
+        },
+        {
+          "card_id": "01-04",
+          "full_id": "英语-五上-01-04",
+          "title": "句型：询问和描述人物特点",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习如何询问一个人的性格或外貌特点，并用形容词进行描述。",
+          "core_points": [
+            "What's he/she like? 他/她怎么样？ (询问性格或特点)",
+            "He's/She's kind/strict/funny. 他/她很和蔼/严格/有趣。",
+            "What do you think of...? 你觉得……怎么样？",
+            "I think he/she is... 我觉得他/她很……"
+          ],
+          "example": {
+            "question": "你的新英语老师怎么样？用英语说一说。",
+            "steps": [
+              "思考老师的特点 (如：kind, funny)",
+              "使用句型 'My English teacher is...' 或 'I think she is...'"
+            ],
+            "answer": "My English teacher is kind and funny."
+          },
+          "mistakes": [
+            {
+              "wrong": "What is he like?",
+              "correct": "What's he like?"
+            },
+            {
+              "wrong": "She is like kind.",
+              "correct": "She is kind."
+            }
+          ],
+          "memory_tip": "What's ... like? 问的是'像什么样'，也就是'怎么样'。回答时直接用be动词加形容词。",
+          "related": {
+            "prerequisite": "形容词词汇",
+            "next": "描述更复杂的个人信息"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "02",
+      "unit_name": "My schoolbag",
+      "cards": [
+        {
+          "card_id": "02-01",
+          "full_id": "英语-五上-02-01",
+          "title": "词汇：书包里的物品",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习书包里常见文具和书籍的英语名称。",
+          "core_points": [
+            "schoolbag [ˈskuːlbæɡ] 书包",
+            "dictionary [ˈdɪkʃəneri] 字典",
+            "story-book [ˈstɔːri bʊk] 故事书",
+            "comic book [ˈkɒmɪk bʊk] 漫画书",
+            "notebook [ˈnəʊtbʊk] 笔记本",
+            "pencil-case [ˈpensl keɪs] 铅笔盒"
+          ],
+          "example": {
+            "question": "看图说出物品名称：(图片显示一本字典)",
+            "steps": [
+              "识别图片中的物品",
+              "说出对应的英语单词"
+            ],
+            "answer": "dictionary"
+          },
+          "mistakes": [
+            {
+              "wrong": "story book",
+              "correct": "story-book"
+            }
+          ],
+          "memory_tip": "school (学校) + bag (包) = schoolbag (书包)。dictionary像'迪克森'，专门查词。comic book是'搞怪的书'，就是漫画书。",
+          "related": {
+            "prerequisite": "常见文具名称",
+            "next": "学习物品的复数形式"
+          }
+        },
+        {
+          "card_id": "02-02",
+          "full_id": "英语-五上-02-02",
+          "title": "语法：名词的复数形式",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习名词变复数的规则，包括加-s和加-es。",
+          "core_points": [
+            "一般情况下，名词后加-s：book -> books, pen -> pens",
+            "以s, x, ch, sh结尾的名词，加-es：bus -> buses, watch -> watches, box -> boxes",
+            "以辅音字母+y结尾的名词，变y为i再加-es：story -> stories, dictionary -> dictionaries",
+            "以f或fe结尾的名词，变f/fe为v再加-es：knife -> knives (本单元不涉及，但可拓展)"
+          ],
+          "example": {
+            "question": "将下列单词变为复数：1. story-book 2. box 3. ruler",
+            "steps": [
+              "判断单词的结尾字母",
+              "根据规则进行变化"
+            ],
+            "answer": "1. story-books 2. boxes 3. rulers"
+          },
+          "mistakes": [
+            {
+              "wrong": "storys",
+              "correct": "stories"
+            },
+            {
+              "wrong": "boxs",
+              "correct": "boxes"
+            }
+          ],
+          "memory_tip": "S, X, CH, SH，结尾加ES。辅音Y变I，再加ES。其他直接加S。",
+          "related": {
+            "prerequisite": "名词单数形式",
+            "next": "不可数名词和量词"
+          }
+        },
+        {
+          "card_id": "02-03",
+          "full_id": "英语-五上-02-03",
+          "title": "句型：询问和陈述物品数量",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习如何询问某物有多少，以及如何回答具体的数量。",
+          "core_points": [
+            "How many...? 多少……？ (用于询问可数名词的数量)",
+            "How many story-books do you have? 你有多少故事书？",
+            "I have one/two/three... 我有1/2/3个……",
+            "I have some... 我有一些……"
+          ],
+          "example": {
+            "question": "看图回答：How many pencils do you have? (图片显示5支铅笔)",
+            "steps": [
+              "数出图片中铅笔的数量",
+              "用学过的句型回答"
+            ],
+            "answer": "I have five pencils."
+          },
+          "mistakes": [
+            {
+              "wrong": "How many pencil do you have?",
+              "correct": "How many pencils do you have?"
+            },
+            {
+              "wrong": "I have a five pencils.",
+              "correct": "I have five pencils."
+            }
+          ],
+          "memory_tip": "How many 后面要加复数名词！回答时，数字后面也加复数名词。",
+          "related": {
+            "prerequisite": "名词复数形式，数字1-10",
+            "next": "询问物品的种类和颜色"
+          }
+        },
+        {
+          "card_id": "02-04",
+          "full_id": "英语-五上-02-04",
+          "title": "句型：询问和陈述书包里的物品",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习询问书包里有什么，以及介绍自己书包里的物品。",
+          "core_points": [
+            "What's in your schoolbag? 你的书包里有什么？",
+            "I have a/an... 我有一个……",
+            "I have some... 我有一些……",
+            "I have... and... 我有……和……"
+          ],
+          "example": {
+            "question": "你的书包里有什么？用英语说出两种物品。",
+            "steps": [
+              "回忆自己书包里的物品",
+              "选择两种物品，并用合适的句型陈述"
+            ],
+            "answer": "I have a pencil-case and some story-books."
+          },
+          "mistakes": [
+            {
+              "wrong": "I have a dictionary and some story book.",
+              "correct": "I have a dictionary and some story-books."
+            }
+          ],
+          "memory_tip": "问'有什么'用What's in...，回答'我有'用I have...，注意单复数和a/an/some的搭配。",
+          "related": {
+            "prerequisite": "物品词汇，名词复数",
+            "next": "描述物品的位置"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "03",
+      "unit_name": "My favourite season",
+      "cards": [
+        {
+          "card_id": "03-01",
+          "full_id": "英语-五上-03-01",
+          "title": "词汇：四季与天气",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习一年四季的名称和描述天气状况的词汇。",
+          "core_points": [
+            "spring [sprɪŋ] 春天",
+            "summer [ˈsʌmər] 夏天",
+            "fall [fɔːl] / autumn [ˈɔːtəm] 秋天",
+            "winter [ˈwɪntər] 冬天",
+            "warm [wɔːrm] 温暖的",
+            "hot [hɒt] 炎热的",
+            "cool [kuːl] 凉爽的",
+            "cold [kəʊld] 寒冷的"
+          ],
+          "example": {
+            "question": "将下列词语与对应季节连线：hot - summer, cold - (____)",
+            "steps": [
+              "回忆每个季节的天气特点",
+              "将'cold'与对应的季节连接"
+            ],
+            "answer": "cold - winter"
+          },
+          "mistakes": [
+            {
+              "wrong": "The weather is hot.",
+              "correct": "It's hot."
+            }
+          ],
+          "memory_tip": "春夏秋冬 (spring, summer, fall, winter) 就像一首诗。天气词汇是'温热凉冷'：warm, hot, cool, cold。",
+          "related": {
+            "prerequisite": "基础形容词",
+            "next": "描述季节活动"
+          }
+        },
+        {
+          "card_id": "03-02",
+          "full_id": "英语-五上-03-02",
+          "title": "词汇：季节性活动",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习在不同季节可以进行的活动。",
+          "core_points": [
+            "fly kites 放风筝 (spring)",
+            "swim [swɪm] 游泳 (summer)",
+            "pick apples 摘苹果 (fall)",
+            "make a snowman 堆雪人 (winter)",
+            "plant trees 种树 (spring)",
+            "go hiking 去徒步 (fall)"
+          ],
+          "example": {
+            "question": "春天我们喜欢做什么？(用一个短语回答)",
+            "steps": [
+              "回忆春天常见的活动",
+              "选择一个合适的短语"
+            ],
+            "answer": "fly kites / plant trees"
+          },
+          "mistakes": [
+            {
+              "wrong": "make snowman",
+              "correct": "make a snowman"
+            }
+          ],
+          "memory_tip": "动词+名词，组成活动短语。像'fly kites'，'make a snowman'，都是'做'什么。",
+          "related": {
+            "prerequisite": "动词词汇",
+            "next": "用简单现在时描述活动"
+          }
+        },
+        {
+          "card_id": "03-03",
+          "full_id": "英语-五上-03-03",
+          "title": "句型：询问和表达最喜欢的季节",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习如何询问别人最喜欢的季节，并表达自己的喜好及原因。",
+          "core_points": [
+            "What's your favourite season? 你最喜欢的季节是什么？",
+            "My favourite season is... 我最喜欢的季节是……",
+            "Why? 为什么？",
+            "Because it's... / Because I can... 因为它很…… / 因为我能……"
+          ],
+          "example": {
+            "question": "补全对话：A: What's your favourite season? B: My favourite season is summer. A: Why? B: (____) it's hot and I can swim.",
+            "steps": [
+              "理解A在询问原因",
+              "选择表示原因的连词"
+            ],
+            "answer": "Because"
+          },
+          "mistakes": [
+            {
+              "wrong": "My favourite is summer.",
+              "correct": "My favourite season is summer."
+            },
+            {
+              "wrong": "Why? It's hot.",
+              "correct": "Why? Because it's hot."
+            }
+          ],
+          "memory_tip": "Favourite (最喜欢的) + season (季节)。回答原因用Because，后面接原因。",
+          "related": {
+            "prerequisite": "四季与天气词汇",
+            "next": "描述季节活动"
+          }
+        },
+        {
+          "card_id": "03-04",
+          "full_id": "英语-五上-03-04",
+          "title": "语法：一般现在时 (描述事实与习惯)",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习一般现在时用于描述事实、习惯或经常发生的动作。",
+          "core_points": [
+            "主语+动词原形 (I, you, we, they)",
+            "主语+动词三单形式 (he, she, it) - 动词词尾加-s或-es",
+            "常与always, often, usually, sometimes, every day/week/year等时间状语连用",
+            "否定句：don't/doesn't + 动词原形",
+            "疑问句：Do/Does + 主语 + 动词原形？"
+          ],
+          "example": {
+            "question": "用一般现在时完成句子：1. I (swim) in summer. 2. He (fly) kites in spring.",
+            "steps": [
+              "判断主语是单数还是复数",
+              "根据主语选择动词原形或三单形式"
+            ],
+            "answer": "1. I swim in summer. 2. He flies kites in spring."
+          },
+          "mistakes": [
+            {
+              "wrong": "She like summer.",
+              "correct": "She likes summer."
+            },
+            {
+              "wrong": "I likes apples.",
+              "correct": "I like apples."
+            }
+          ],
+          "memory_tip": "我你我们他们，动词不用变。他她它，动词s要加。疑问否定do/does帮，动词回到老家样。",
+          "related": {
+            "prerequisite": "动词词汇，主谓一致",
+            "next": "一般过去时"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "04",
+      "unit_name": "What can you do?",
+      "cards": [
+        {
+          "card_id": "04-01",
+          "full_id": "英语-五上-04-01",
+          "title": "词汇：表达能力与动作",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习描述各种能力和动作的动词词汇。",
+          "core_points": [
+            "sing [sɪŋ] 唱歌",
+            "dance [dæns] 跳舞",
+            "draw [drɔː] 画画",
+            "swim [swɪm] 游泳",
+            "play the piano 弹钢琴",
+            "play basketball 打篮球",
+            "run [rʌn] 跑步",
+            "jump [dʒʌmp] 跳跃"
+          ],
+          "example": {
+            "question": "看图说出你能做什么：(图片显示一个人在唱歌)",
+            "steps": [
+              "识别图片中的动作",
+              "用'I can...'句型回答"
+            ],
+            "answer": "I can sing."
+          },
+          "mistakes": [
+            {
+              "wrong": "play piano",
+              "correct": "play the piano"
+            }
+          ],
+          "memory_tip": "乐器前面加the，play the piano。球类运动不加the，play basketball。",
+          "related": {
+            "prerequisite": "基础动词",
+            "next": "情态动词'can'的用法"
+          }
+        },
+        {
+          "card_id": "04-02",
+          "full_id": "英语-五上-04-02",
+          "title": "语法：情态动词 'can' (表达能力)",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习情态动词'can'的用法，表示能力、可能性或请求。",
+          "core_points": [
+            "can + 动词原形 (表示“能，会”)",
+            "肯定句：主语 + can + 动词原形",
+            "否定句：主语 + can't (cannot) + 动词原形",
+            "疑问句：Can + 主语 + 动词原形？",
+            "回答：Yes, I can. / No, I can't."
+          ],
+          "example": {
+            "question": "将下列句子改为否定句和疑问句：You can draw.",
+            "steps": [
+              "在can后加not变为否定句",
+              "将can提前变为疑问句"
+            ],
+            "answer": "否定句：You can't draw. 疑问句：Can you draw?"
+          },
+          "mistakes": [
+            {
+              "wrong": "I can to swim.",
+              "correct": "I can swim."
+            },
+            {
+              "wrong": "Can you to sing?",
+              "correct": "Can you sing?"
+            }
+          ],
+          "memory_tip": "Can是情态小帮手，后面动词不带to。否定直接加not，疑问把它提到头。",
+          "related": {
+            "prerequisite": "动词原形",
+            "next": "其他情态动词"
+          }
+        },
+        {
+          "card_id": "04-03",
+          "full_id": "英语-五上-04-03",
+          "title": "句型：询问和陈述能力",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习如何询问别人会做什么，以及表达自己会做什么或不会做什么。",
+          "core_points": [
+            "What can you do? 你会做什么？",
+            "I can... 我会……",
+            "I can't... 我不会……",
+            "Can you...? 你会……吗？",
+            "Yes, I can. / No, I can't."
+          ],
+          "example": {
+            "question": "补全对话：A: What can you do? B: I can (____) and (____).",
+            "steps": [
+              "思考自己会做的两件事",
+              "用动词原形填空"
+            ],
+            "answer": "I can sing and dance."
+          },
+          "mistakes": [
+            {
+              "wrong": "What can you to do?",
+              "correct": "What can you do?"
+            },
+            {
+              "wrong": "Yes, I can do.",
+              "correct": "Yes, I can."
+            }
+          ],
+          "memory_tip": "问'会什么'用What can you do? 答'我会'用I can...，简洁明了。",
+          "related": {
+            "prerequisite": "情态动词'can'",
+            "next": "描述他人的能力"
+          }
+        },
+        {
+          "card_id": "04-04",
+          "full_id": "英语-五上-04-04",
+          "title": "句型：询问和描述他人的能力",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何询问别人会做什么，以及表达别人会做什么或不会做什么。",
+          "core_points": [
+            "What can he/she do? 他/她会做什么？",
+            "He/She can... 他/她会……",
+            "He/She can't... 他/她不会……",
+            "Can he/she...? 他/她会……吗？",
+            "Yes, he/she can. / No, he/she can't."
+          ],
+          "example": {
+            "question": "你的朋友会游泳吗？用英语问并回答。",
+            "steps": [
+              "使用'Can he/she...?' 句型提问",
+              "根据实际情况用'Yes, he/she can.' 或 'No, he/she can't.' 回答"
+            ],
+            "answer": "Can your friend swim? Yes, he can. / No, he can't."
+          },
+          "mistakes": [
+            {
+              "wrong": "Can he to swim?",
+              "correct": "Can he swim?"
+            },
+            {
+              "wrong": "Yes, he can do.",
+              "correct": "Yes, he can."
+            }
+          ],
+          "memory_tip": "can后面动词原形不变，无论主语是谁。回答时，代词要和主语一致。",
+          "related": {
+            "prerequisite": "人称代词，情态动词'can'",
+            "next": "描述多人能力"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "05",
+      "unit_name": "What does he do?",
+      "cards": [
+        {
+          "card_id": "05-01",
+          "full_id": "英语-五上-05-01",
+          "title": "词汇：职业名称",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习各种职业的英语名称。",
+          "core_points": [
+            "doctor [ˈdɒktər] 医生",
+            "nurse [nɜːrs] 护士",
+            "farmer [ˈfɑːrmər] 农民",
+            "worker [ˈwɜːrkər] 工人",
+            "driver [ˈdraɪvər] 司机",
+            "teacher [ˈtiːtʃər] 老师",
+            "student [ˈstuːdnt] 学生",
+            "police officer 警察",
+            "postman [ˈpəʊstmæn] 邮递员",
+            "cook [kʊk] 厨师"
+          ],
+          "example": {
+            "question": "看图说出职业名称：(图片显示一位警察)",
+            "steps": [
+              "识别图片中的人物职业",
+              "说出对应的英语单词"
+            ],
+            "answer": "police officer"
+          },
+          "mistakes": [
+            {
+              "wrong": "policeman",
+              "correct": "police officer"
+            }
+          ],
+          "memory_tip": "许多职业名称以-er结尾 (worker, driver, farmer)。police officer是'警察官'。",
+          "related": {
+            "prerequisite": "基础名词",
+            "next": "询问和描述职业"
+          }
+        },
+        {
+          "card_id": "05-02",
+          "full_id": "英语-五上-05-02",
+          "title": "语法：一般现在时 (第三人称单数)",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "深入学习一般现在时中，当主语是第三人称单数时，动词的变化规则。",
+          "core_points": [
+            "动词后加-s：cook -> cooks, work -> works",
+            "以s, x, ch, sh, o结尾的动词，加-es：watch -> watches, go -> goes",
+            "以辅音字母+y结尾的动词，变y为i再加-es：fly -> flies",
+            "否定句：doesn't + 动词原形",
+            "疑问句：Does + 主语 + 动词原形？"
+          ],
+          "example": {
+            "question": "将下列动词变为第三人称单数形式：1. teach 2. work 3. do",
+            "steps": [
+              "判断动词的结尾字母",
+              "根据规则进行变化"
+            ],
+            "answer": "1. teaches 2. works 3. does"
+          },
+          "mistakes": [
+            {
+              "wrong": "He work in a hospital.",
+              "correct": "He works in a hospital."
+            },
+            {
+              "wrong": "She doesn't works.",
+              "correct": "She doesn't work."
+            }
+          ],
+          "memory_tip": "三单主语动词S，S X CH SH O，加ES。辅音Y变I再加ES。Do/Does一出场，动词还原它原样。",
+          "related": {
+            "prerequisite": "一般现在时基本概念",
+            "next": "动词时态综合运用"
+          }
+        },
+        {
+          "card_id": "05-03",
+          "full_id": "英语-五上-05-03",
+          "title": "句型：询问和陈述职业",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习如何询问他人的职业，以及回答自己或他人的职业。",
+          "core_points": [
+            "What do you do? 你是做什么的？",
+            "I'm a student/teacher. 我是一名学生/老师。",
+            "What does he/she do? 他/她是做什么的？",
+            "He's/She's a doctor/farmer. 他/她是一名医生/农民。"
+          ],
+          "example": {
+            "question": "补全对话：A: What does your father do? B: (____) a driver.",
+            "steps": [
+              "识别主语是'your father' (他)",
+              "选择正确的代词和be动词形式"
+            ],
+            "answer": "He's"
+          },
+          "mistakes": [
+            {
+              "wrong": "What do he do?",
+              "correct": "What does he do?"
+            },
+            {
+              "wrong": "He is driver.",
+              "correct": "He's a driver."
+            }
+          ],
+          "memory_tip": "问'你'用do，问'他/她'用does。回答职业别忘了加a/an。",
+          "related": {
+            "prerequisite": "职业词汇，一般现在时疑问句",
+            "next": "询问工作地点"
+          }
+        },
+        {
+          "card_id": "05-04",
+          "full_id": "英语-五上-05-04",
+          "title": "句型：询问和陈述工作地点",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何询问他人的工作地点，并进行回答。",
+          "core_points": [
+            "Where do you work? 你在哪里工作？",
+            "I work in a school/hospital. 我在学校/医院工作。",
+            "Where does he/she work? 他/她在哪里工作？",
+            "He/She works in a school/hospital. 他/她在学校/医院工作。"
+          ],
+          "example": {
+            "question": "你的妈妈是护士，她在哪里工作？用英语问并回答。",
+            "steps": [
+              "使用'Where does she work?' 提问",
+              "根据职业特点选择工作地点，并用'She works in a...' 回答"
+            ],
+            "answer": "Where does she work? She works in a hospital."
+          },
+          "mistakes": [
+            {
+              "wrong": "Where do she work?",
+              "correct": "Where does she work?"
+            },
+            {
+              "wrong": "He work in a school.",
+              "correct": "He works in a school."
+            }
+          ],
+          "memory_tip": "问地点用Where，动词work跟着主语变三单。in a/an后面接工作地点。",
+          "related": {
+            "prerequisite": "职业词汇，一般现在时疑问句",
+            "next": "描述工作内容"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "06",
+      "unit_name": "Shopping",
+      "cards": [
+        {
+          "card_id": "06-01",
+          "full_id": "英语-五上-06-01",
+          "title": "词汇：服装",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习各种常见服装的英语名称。",
+          "core_points": [
+            "clothes [kləʊðz] 衣服 (复数)",
+            "T-shirt [ˈtiːʃɜːrt] T恤衫",
+            "skirt [skɜːrt] 裙子",
+            "dress [dres] 连衣裙",
+            "pants [pænts] 裤子 (复数)",
+            "shorts [ʃɔːrts] 短裤 (复数)",
+            "shoes [ʃuːz] 鞋子 (复数)",
+            "socks [sɒks] 袜子 (复数)",
+            "sweater [ˈswetər] 毛衣",
+            "coat [kəʊt] 外套"
+          ],
+          "example": {
+            "question": "看图说出服装名称：(图片显示一条裙子)",
+            "steps": [
+              "识别图片中的服装",
+              "说出对应的英语单词"
+            ],
+            "answer": "skirt"
+          },
+          "mistakes": [
+            {
+              "wrong": "a pants",
+              "correct": "some pants"
+            }
+          ],
+          "memory_tip": "T恤像个T字，裙子像个S。裤子鞋子袜子都是两只，所以都是复数形式。",
+          "related": {
+            "prerequisite": "基础名词",
+            "next": "描述服装的颜色和价格"
+          }
+        },
+        {
+          "card_id": "06-02",
+          "full_id": "英语-五上-06-02",
+          "title": "词汇：颜色",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习各种常见颜色的英语名称。",
+          "core_points": [
+            "red [red] 红色",
+            "blue [bluː] 蓝色",
+            "green [ɡriːn] 绿色",
+            "yellow [ˈjeləʊ] 黄色",
+            "white [waɪt] 白色",
+            "black [blæk] 黑色",
+            "orange [ˈɒrɪndʒ] 橙色",
+            "purple [ˈpɜːrpl] 紫色",
+            "brown [braʊn] 棕色"
+          ],
+          "example": {
+            "question": "说出你最喜欢的三种颜色。",
+            "steps": [
+              "回忆自己喜欢的颜色",
+              "用英语说出它们的名称"
+            ],
+            "answer": "My favourite colours are red, blue and yellow."
+          },
+          "mistakes": [
+            {
+              "wrong": "I like the red.",
+              "correct": "I like red."
+            }
+          ],
+          "memory_tip": "红黄蓝绿是基本色，黑白橙紫棕是拓展色。多读多看，记住它们。",
+          "related": {
+            "prerequisite": "基础形容词",
+            "next": "描述物品的颜色"
+          }
+        },
+        {
+          "card_id": "06-03",
+          "full_id": "英语-五上-06-03",
+          "title": "句型：询问和陈述颜色",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习如何询问物品的颜色，以及如何回答。",
+          "core_points": [
+            "What colour is it? 它是什么颜色？",
+            "It's red/blue/green. 它是红色/蓝色/绿色。",
+            "What colour are they? 它们是什么颜色？",
+            "They're yellow/white/black. 它们是黄色/白色/黑色。"
+          ],
+          "example": {
+            "question": "补全对话：A: What colour is your new T-shirt? B: (____) blue.",
+            "steps": [
+              "识别主语是'your new T-shirt' (它)",
+              "选择正确的代词和be动词形式"
+            ],
+            "answer": "It's"
+          },
+          "mistakes": [
+            {
+              "wrong": "What colours is it?",
+              "correct": "What colour is it?"
+            },
+            {
+              "wrong": "It is a red.",
+              "correct": "It is red."
+            }
+          ],
+          "memory_tip": "问单数用is it，问复数用are they。回答时，颜色是形容词，不用加a/an。",
+          "related": {
+            "prerequisite": "颜色词汇，be动词",
+            "next": "询问和陈述价格"
+          }
+        },
+        {
+          "card_id": "06-04",
+          "full_id": "英语-五上-06-04",
+          "title": "句型：询问和陈述价格",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习如何询问物品的价格，并用人民币单位进行回答。",
+          "core_points": [
+            "How much is it? 它多少钱？ (询问单数物品)",
+            "It's ten yuan. 它十元。",
+            "How much are they? 它们多少钱？ (询问复数物品)",
+            "They're twenty yuan. 它们二十元。",
+            "yuan [juːˈɑːn] 元"
+          ],
+          "example": {
+            "question": "你买了一件T恤，价格是35元。用英语询问并回答。",
+            "steps": [
+              "使用'How much is it?' 提问",
+              "用'It's thirty-five yuan.' 回答"
+            ],
+            "answer": "How much is it? It's thirty-five yuan."
+          },
+          "mistakes": [
+            {
+              "wrong": "How many is it?",
+              "correct": "How much is it?"
+            },
+            {
+              "wrong": "It's ten yuans.",
+              "correct": "It's ten yuan."
+            }
+          ],
+          "memory_tip": "问价格用How much，问单数用is，问复数用are。'yuan'作货币单位，单复数同形。",
+          "related": {
+            "prerequisite": "数字1-100，be动词",
+            "next": "完整的购物对话"
+          }
+        },
+        {
+          "card_id": "06-05",
+          "full_id": "英语-五上-06-05",
+          "title": "易混词卡：this/that, these/those (指示代词)",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "辨析this/that (指单数) 和 these/those (指复数) 的区别和用法。",
+          "core_points": [
+            "this [ðɪs] 这个 (指近处单数)",
+            "that [ðæt] 那个 (指远处单数)",
+            "these [ðiːz] 这些 (指近处复数)",
+            "those [ðəʊz] 那些 (指远处复数)",
+            "this/that + is + 名词",
+            "these/those + are + 名词"
+          ],
+          "example": {
+            "question": "选择正确的词填空：1. (____) is my book. (指着手边的书) 2. (____) are your shoes. (指着远处的鞋)",
+            "steps": [
+              "判断物品数量是单数还是复数",
+              "判断物品距离是近处还是远处"
+            ],
+            "answer": "1. This 2. Those"
+          },
+          "mistakes": [
+            {
+              "wrong": "These is my books.",
+              "correct": "These are my books."
+            },
+            {
+              "wrong": "That are my shoes.",
+              "correct": "Those are my shoes."
+            }
+          ],
+          "memory_tip": "近处this，远处that。近复these，远复those。单数配is，复数配are。",
+          "related": {
+            "prerequisite": "单复数概念，be动词",
+            "next": "形容词性物主代词"
+          }
+        },
+        {
+          "card_id": "06-06",
+          "full_id": "英语-五上-06-06",
+          "title": "情景对话卡：购物 (买衣服)",
+          "type": "情景对话卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "学习在商店里购买衣服的实用对话。",
+          "core_points": [
+            "Can I help you? 我能帮你吗？",
+            "I want a T-shirt. 我想要一件T恤。",
+            "What colour do you want? 你想要什么颜色？",
+            "How much is it/are they? 多少钱？",
+            "It's/They're... yuan. 它们是……元。",
+            "Here you are. 给你。"
+          ],
+          "example": {
+            "question": "角色扮演：你是一名顾客，想买一件红色的裙子。店员问你想要什么。请完成对话。",
+            "steps": [
+              "顾客说出想要什么 (I want a skirt.)",
+              "店员询问颜色 (What colour do you want?)",
+              "顾客说出颜色 (I want a red one.)",
+              "店员告知价格 (It's... yuan.)"
+            ],
+            "answer": "Customer: I want a skirt. Shopkeeper: What colour do you want? Customer: I want a red one. Shopkeeper: It's sixty yuan. Customer: Here you are. Shopkeeper: Thank you."
+          },
+          "mistakes": [
+            {
+              "wrong": "I want red skirt.",
+              "correct": "I want a red skirt."
+            },
+            {
+              "wrong": "How much it is?",
+              "correct": "How much is it?"
+            }
+          ],
+          "memory_tip": "购物流程：打招呼-说需求-问颜色-问价格-付钱。记住常用句型，多练习。",
+          "related": {
+            "prerequisite": "服装词汇，颜色词汇，价格句型",
+            "next": "其他购物场景对话"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1180 @@
+{
+  "subject": "英语",
+  "grade": "四年级",
+  "semester": "下册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "四下",
+  "units": [
+    {
+      "unit_id": "01",
+      "unit_name": "My Schoolbag",
+      "cards": [
+        {
+          "card_id": "01-01",
+          "full_id": "英语-四下-01-01",
+          "title": "词汇：文具用品",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习描述书包中常见文具的英语单词。",
+          "core_points": [
+            "pen [pen] 钢笔/圆珠笔",
+            "pencil [ˈpensl] 铅笔",
+            "eraser [ɪˈreɪsər] 橡皮",
+            "ruler [ˈruːlər] 尺子",
+            "book [bʊk] 书"
+          ],
+          "example": {
+            "question": "请根据图片，说出对应的文具名称。",
+            "steps": [
+              "图片1：一支笔",
+              "图片2：一块橡皮",
+              "图片3：一把尺子"
+            ],
+            "answer": "1. pen 2. eraser 3. ruler"
+          },
+          "mistakes": [
+            {
+              "wrong": "rubber (英式英语，美式英语用eraser)",
+              "correct": "eraser"
+            }
+          ],
+          "memory_tip": "笔(pen)和铅笔(pencil)是好朋友，橡皮(eraser)擦掉错，尺子(ruler)画线直，书(book)里知识多。",
+          "related": {
+            "prerequisite": "三年级上册关于教室物品的词汇",
+            "next": "更多关于学习用品的词汇，如pencil case, sharpener"
+          }
+        },
+        {
+          "card_id": "01-02",
+          "full_id": "英语-四下-01-02",
+          "title": "句型：询问和陈述物品所有",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习使用'Do you have...?'询问对方是否拥有某物，并用'Yes, I do.'或'No, I don't.'回答。",
+          "core_points": [
+            "询问：Do you have a/an + 单数名词?",
+            "肯定回答：Yes, I do.",
+            "否定回答：No, I don't.",
+            "陈述：I have a/an + 单数名词."
+          ],
+          "example": {
+            "question": "看图回答：你有一支铅笔吗？",
+            "steps": [
+              "图示：一个孩子拿着铅笔。"
+            ],
+            "answer": "Do you have a pencil? Yes, I do."
+          },
+          "mistakes": [
+            {
+              "wrong": "Do you have a pencils?",
+              "correct": "Do you have a pencil? (a后面接单数名词)"
+            },
+            {
+              "wrong": "Yes, I have.",
+              "correct": "Yes, I do. (助动词问，助动词答)"
+            }
+          ],
+          "memory_tip": "Do你问，Do我答，有就Yes, I do，没有No, I don't啦。",
+          "related": {
+            "prerequisite": "三年级上册'What's this?'句型",
+            "next": "询问复数物品的句型'Do you have any...?'"
+          }
+        },
+        {
+          "card_id": "01-03",
+          "full_id": "英语-四下-01-03",
+          "title": "自然拼读：短元音e /e/",
+          "type": "自然拼读卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母e在单词中的常见发音，发/e/，嘴巴略微张开，舌头平放。",
+          "core_points": [
+            "发音：/e/ (像中文“哎”的快速短音)",
+            "字母：e",
+            "常见单词：pen, red, bed, egg, ten"
+          ],
+          "example": {
+            "question": "请读出下列单词并注意字母e的发音。",
+            "steps": [
+              "bed",
+              "desk",
+              "egg"
+            ],
+            "answer": "/bed/, /desk/, /eɡ/ (强调/e/音)"
+          },
+          "mistakes": [
+            {
+              "wrong": "将/e/发成/iː/ (如将bed读成'bee-d')",
+              "correct": "注意是短音，不是长音。"
+            }
+          ],
+          "memory_tip": "小e小e，爱吃egg，发出/e/的短促音，像公鸡打鸣“咯咯e！”",
+          "related": {
+            "prerequisite": "短元音a /æ/和i /ɪ/",
+            "next": "短元音o /ɒ/和u /ʌ/"
+          }
+        },
+        {
+          "card_id": "01-04",
+          "full_id": "英语-四下-01-04",
+          "title": "情景对话：分享文具",
+          "type": "情景对话卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习在教室中如何借用和分享文具用品的简单对话。",
+          "core_points": [
+            "借用请求：May I borrow your...? (我可以借用你的...吗？)",
+            "同意：Sure. / Here you are. (当然。/给你。)",
+            "拒绝：Sorry, I don't have one. (抱歉，我没有。)",
+            "感谢：Thank you. (谢谢你。)"
+          ],
+          "example": {
+            "question": "小明没有铅笔，想向小红借一支。请完成对话。",
+            "steps": [
+              "小明：May I borrow your pencil?",
+              "小红：(如果小红有，她会怎么说？)",
+              "小明：(感谢小红)"
+            ],
+            "answer": "小红：Sure. / Here you are. 小明：Thank you."
+          },
+          "mistakes": [
+            {
+              "wrong": "Can I borrow your pencil? (Can语气更直接，May更礼貌)",
+              "correct": "May I borrow your pencil? (更适合小学阶段的礼貌用语)"
+            }
+          ],
+          "memory_tip": "May I borrow，借东西，Sure，Here you are，谢谢你！",
+          "related": {
+            "prerequisite": "三年级上册'Thank you'和'You're welcome'",
+            "next": "更多日常情景对话，如购物、问路"
+          }
+        },
+        {
+          "card_id": "01-05",
+          "full_id": "英语-四下-01-05",
+          "title": "语法：名词的复数形式（规则变化）",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习名词变复数的规则变化，主要是在词尾加-s。",
+          "core_points": [
+            "一般情况：在名词后直接加-s。例：book -> books, pen -> pens",
+            "以s, x, ch, sh结尾的名词：加-es。例：bus -> buses, box -> boxes (四年级可能不强调，作为拓展)",
+            "以辅音字母+y结尾的名词：变y为i再加-es。例：baby -> babies (四年级可能不强调，作为拓展)",
+            "不可数名词没有复数形式 (如water, milk)"
+          ],
+          "example": {
+            "question": "请将下列单词变为复数。",
+            "steps": [
+              "pencil",
+              "ruler",
+              "eraser"
+            ],
+            "answer": "pencils, rulers, erasers"
+          },
+          "mistakes": [
+            {
+              "wrong": "a books (单数冠词后接复数名词)",
+              "correct": "a book 或 books (冠词与名词单复数要一致)"
+            }
+          ],
+          "memory_tip": "一个名词加-s，多个名词变复数，数数时，别忘了，-s结尾是多数。",
+          "related": {
+            "prerequisite": "三年级上册学习名词单数形式",
+            "next": "不规则名词复数变化，以及与'How many'的搭配使用"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "02",
+      "unit_name": "My Favourite Season",
+      "cards": [
+        {
+          "card_id": "02-01",
+          "full_id": "英语-四下-02-01",
+          "title": "词汇：四季与天气",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习表示四季和常见天气状况的英语单词。",
+          "core_points": [
+            "spring [sprɪŋ] 春天",
+            "summer [ˈsʌmər] 夏天",
+            "autumn [ˈɔːtəm] 秋天 (美式英语：fall [fɔːl])",
+            "winter [ˈwɪntər] 冬天",
+            "warm [wɔːrm] 温暖的",
+            "hot [hɒt] 炎热的",
+            "cool [kuːl] 凉爽的",
+            "cold [kəʊld] 寒冷的"
+          ],
+          "example": {
+            "question": "请根据描述猜猜这是哪个季节。",
+            "steps": [
+              "It's hot. I can swim. (天气炎热，我可以游泳。)",
+              "It's cold. I can make a snowman. (天气寒冷，我可以堆雪人。)"
+            ],
+            "answer": "1. summer 2. winter"
+          },
+          "mistakes": [
+            {
+              "wrong": "It's warm.",
+              "correct": "It's warm. (注意发音，不要与worm混淆)"
+            }
+          ],
+          "memory_tip": "春(spring)暖花开，夏(summer)日炎炎，秋(autumn/fall)高气爽，冬(winter)雪皑皑。",
+          "related": {
+            "prerequisite": "三年级上册'sunny, rainy'等简单天气词汇",
+            "next": "更多形容天气的词汇，如cloudy, snowy"
+          }
+        },
+        {
+          "card_id": "02-02",
+          "full_id": "英语-四下-02-02",
+          "title": "词汇：季节性活动",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习与不同季节相关的常见活动。",
+          "core_points": [
+            "fly kites 放风筝 (spring)",
+            "swim [swɪm] 游泳 (summer)",
+            "pick apples 摘苹果 (autumn)",
+            "make a snowman 堆雪人 (winter)",
+            "plant trees 种树 (spring)"
+          ],
+          "example": {
+            "question": "请将活动与对应的季节连线。",
+            "steps": [
+              "1. swim      A. winter",
+              "2. make a snowman  B. summer",
+              "3. fly kites   C. spring"
+            ],
+            "answer": "1-B, 2-A, 3-C"
+          },
+          "mistakes": [
+            {
+              "wrong": "I can make a snow.",
+              "correct": "I can make a snowman. (make a snowman是固定搭配)"
+            }
+          ],
+          "memory_tip": "春天放风筝，夏天去游泳，秋天摘苹果，冬天堆雪人，四季活动真有趣！",
+          "related": {
+            "prerequisite": "三年级上册'run, jump'等简单动词",
+            "next": "更多兴趣爱好类动词短语"
+          }
+        },
+        {
+          "card_id": "02-03",
+          "full_id": "英语-四下-02-03",
+          "title": "句型：谈论喜爱的季节和活动",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习询问和表达自己最喜欢的季节，并描述在该季节可以进行的活动。",
+          "core_points": [
+            "询问：What's your favourite season? (你最喜欢的季节是什么？)",
+            "回答：My favourite season is + 季节. (我最喜欢的季节是...)",
+            "描述：It's + 天气形容词. I can + 活动. (天气..., 我可以...)"
+          ],
+          "example": {
+            "question": "请根据提示完成对话。",
+            "steps": [
+              "A: What's your favourite season?",
+              "B: My favourite season is summer.",
+              "A: Why? (为什么？)",
+              "B: (回答：夏天很热，我可以游泳。)"
+            ],
+            "answer": "B: It's hot. I can swim."
+          },
+          "mistakes": [
+            {
+              "wrong": "My favourite is summer season.",
+              "correct": "My favourite season is summer. (season在is之后)"
+            },
+            {
+              "wrong": "I can to swim.",
+              "correct": "I can swim. (can后直接跟动词原形，不加to)"
+            }
+          ],
+          "memory_tip": "What's your favourite season？My favourite season is...，然后It's... I can...，清清楚楚记得住！",
+          "related": {
+            "prerequisite": "Unit 1的'Do you have...?'句型，形容词的用法",
+            "next": "Unit 5学习情态动词'can'的更多用法"
+          }
+        },
+        {
+          "card_id": "02-04",
+          "full_id": "英语-四下-02-04",
+          "title": "自然拼读：字母组合sh /ʃ/",
+          "type": "自然拼读卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母组合sh的发音，发/ʃ/，舌头上抬，嘴唇向前突出。",
+          "core_points": [
+            "发音：/ʃ/ (像中文“嘘”的声音)",
+            "字母组合：sh",
+            "常见单词：she, fish, wash, shop, shoe"
+          ],
+          "example": {
+            "question": "请读出下列单词并注意sh的发音。",
+            "steps": [
+              "she",
+              "fish",
+              "wash"
+            ],
+            "answer": "/ʃiː/, /fɪʃ/, /wɒʃ/ (强调/ʃ/音)"
+          },
+          "mistakes": [
+            {
+              "wrong": "将/ʃ/发成/s/ (如将fish读成'fis')",
+              "correct": "注意舌头和嘴唇的形状，发出“嘘”的声音。"
+            }
+          ],
+          "memory_tip": "sh sh sh，小鱼fish，洗洗wash，她she，都是/ʃ/。",
+          "related": {
+            "prerequisite": "短元音a, e, i",
+            "next": "字母组合ch /tʃ/"
+          }
+        },
+        {
+          "card_id": "02-05",
+          "full_id": "英语-四下-02-05",
+          "title": "情景对话：讨论天气和穿着",
+          "type": "情景对话卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "学习根据天气情况讨论合适的穿着。",
+          "core_points": [
+            "询问天气：What's the weather like?",
+            "描述天气：It's + 天气形容词. (e.g., It's cold.)",
+            "建议穿着：Put on your + 衣物. (穿上你的...)",
+            "询问穿着：What should I wear?"
+          ],
+          "example": {
+            "question": "小明要出门，外面很冷，妈妈会怎么说？",
+            "steps": [
+              "妈妈：What's the weather like?",
+              "小明：It's cold!",
+              "妈妈：(建议小明穿上外套。)"
+            ],
+            "answer": "妈妈：Put on your coat."
+          },
+          "mistakes": [
+            {
+              "wrong": "Wear your coat. (Put on your coat更常用)",
+              "correct": "Put on your coat."
+            }
+          ],
+          "memory_tip": "天气冷，穿外套，Put on your coat。天气热，脱外套，Take off your coat。",
+          "related": {
+            "prerequisite": "三年级上册'It's sunny/rainy'",
+            "next": "更多关于衣物的词汇"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "03",
+      "unit_name": "What Time Is It?",
+      "cards": [
+        {
+          "card_id": "03-01",
+          "full_id": "英语-四下-03-01",
+          "title": "词汇：日常活动",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习描述日常生活中常见活动的英语动词短语。",
+          "core_points": [
+            "eat breakfast 吃早餐",
+            "go to school 去上学",
+            "eat lunch 吃午餐",
+            "go home 回家",
+            "eat dinner 吃晚餐",
+            "go to bed 上床睡觉"
+          ],
+          "example": {
+            "question": "请将下列图片与对应的活动连线。",
+            "steps": [
+              "图片1：一个孩子在吃饭   A. go to school",
+              "图片2：一个孩子背书包上学 B. eat breakfast",
+              "图片3：一个孩子在睡觉   C. go to bed"
+            ],
+            "answer": "1-B, 2-A, 3-C"
+          },
+          "mistakes": [
+            {
+              "wrong": "have breakfast (虽然正确，但教材主要用eat breakfast)",
+              "correct": "eat breakfast"
+            }
+          ],
+          "memory_tip": "早饭eat breakfast，上学go to school，午饭eat lunch，回家go home，晚饭eat dinner，睡觉go to bed，一天生活真丰富。",
+          "related": {
+            "prerequisite": "Unit 2的活动词汇",
+            "next": "更多日常习惯的动词短语"
+          }
+        },
+        {
+          "card_id": "03-02",
+          "full_id": "英语-四下-03-02",
+          "title": "句型：询问和告知时间",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习使用'What time is it?'询问时间，并用'It's ... o'clock.'回答整点时间。",
+          "core_points": [
+            "询问时间：What time is it? (现在几点了？)",
+            "回答整点时间：It's + 数字 + o'clock. (现在是...点整。)",
+            "例如：It's seven o'clock. (7点整)",
+            "注意：o'clock只用于整点时间"
+          ],
+          "example": {
+            "question": "请看钟表，回答现在几点了。",
+            "steps": [
+              "钟表显示：时针指着8，分针指着12。"
+            ],
+            "answer": "What time is it? It's eight o'clock."
+          },
+          "mistakes": [
+            {
+              "wrong": "It's eight o'clock thirty. (o'clock只用于整点)",
+              "correct": "It's eight o'clock."
+            },
+            {
+              "wrong": "It's eight.",
+              "correct": "It's eight o'clock. (通常需要o'clock来表示整点)"
+            }
+          ],
+          "memory_tip": "What time is it？问时间，It's o'clock，整点到，分针指着十二高。",
+          "related": {
+            "prerequisite": "数字1-12的英文表达",
+            "next": "非整点时间的表达，如half past, quarter past/to"
+          }
+        },
+        {
+          "card_id": "03-03",
+          "full_id": "英语-四下-03-03",
+          "title": "句型：谈论日常活动的时间",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习使用'I ... at ... o'clock.'来描述自己每天在某个整点做的活动。",
+          "core_points": [
+            "句型：I + 动词短语 + at + 数字 + o'clock.",
+            "介词'at'用于表示精确的时间点。",
+            "例如：I eat breakfast at seven o'clock. (我七点吃早餐。)",
+            "例如：I go to school at eight o'clock. (我八点去上学。)"
+          ],
+          "example": {
+            "question": "请根据图片和时间，描述小明在做什么。",
+            "steps": [
+              "图片：小明在吃晚餐。时间：6:00"
+            ],
+            "answer": "I eat dinner at six o'clock."
+          },
+          "mistakes": [
+            {
+              "wrong": "I eat dinner on six o'clock. (on用于日期、星期，at用于精确时间)",
+              "correct": "I eat dinner at six o'clock."
+            }
+          ],
+          "memory_tip": "做事情，用动词，at后面跟时间，整点o'clock别忘记！",
+          "related": {
+            "prerequisite": "Unit 3词汇卡中的日常活动",
+            "next": "用'in the morning/afternoon/evening'描述时间段"
+          }
+        },
+        {
+          "card_id": "03-04",
+          "full_id": "英语-四下-03-04",
+          "title": "自然拼读：字母组合ch /tʃ/",
+          "type": "自然拼读卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母组合ch的发音，发/tʃ/，舌尖抵住上齿龈，快速发出“吃”的声音。",
+          "core_points": [
+            "发音：/tʃ/ (像中文“吃”的音)",
+            "字母组合：ch",
+            "常见单词：chair, chicken, watch, lunch, much"
+          ],
+          "example": {
+            "question": "请读出下列单词并注意ch的发音。",
+            "steps": [
+              "chair",
+              "watch",
+              "lunch"
+            ],
+            "answer": "/tʃeər/, /wɒtʃ/, /lʌntʃ/ (强调/tʃ/音)"
+          },
+          "mistakes": [
+            {
+              "wrong": "将/tʃ/发成/k/ (如将chair读成'kair')",
+              "correct": "注意是两个音的快速组合，像“特吃”。"
+            }
+          ],
+          "memory_tip": "ch ch ch，小鸡chicken，椅子chair，午饭lunch，都是/tʃ/。",
+          "related": {
+            "prerequisite": "字母组合sh /ʃ/",
+            "next": "字母组合th /θ/和/ð/"
+          }
+        },
+        {
+          "card_id": "03-05",
+          "full_id": "英语-四下-03-05",
+          "title": "情景对话：约定时间",
+          "type": "情景对话卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "学习如何与朋友约定见面或做某事的时间。",
+          "core_points": [
+            "提议：Let's + 动词短语 + at + 时间. (我们...在...点吧。)",
+            "同意：Great! / OK! (太好了！/好的！)",
+            "询问：What time is it? (确认时间)",
+            "提醒：Don't be late! (别迟到！)"
+          ],
+          "example": {
+            "question": "小明和小红想约在下午三点踢足球，请完成对话。",
+            "steps": [
+              "小明：Let's play football at three o'clock this afternoon.",
+              "小红：(表示同意)",
+              "小明：(提醒小红不要迟到)"
+            ],
+            "answer": "小红：Great! / OK! 小明：Don't be late!"
+          },
+          "mistakes": [
+            {
+              "wrong": "We play football at three o'clock. (陈述句，不是提议)",
+              "correct": "Let's play football at three o'clock. (用Let's表示提议)"
+            }
+          ],
+          "memory_tip": "Let's一起去，约定时间at，Great！OK！Don't be late！",
+          "related": {
+            "prerequisite": "日常活动词汇，时间表达",
+            "next": "更复杂的约定，如日期、地点"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "04",
+      "unit_name": "Where Is My Car?",
+      "cards": [
+        {
+          "card_id": "04-01",
+          "full_id": "英语-四下-04-01",
+          "title": "词汇：表示方位的介词（基础）",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习表示物体位置关系的基本介词。",
+          "core_points": [
+            "in [ɪn] 在...里面",
+            "on [ɒn] 在...上面",
+            "under [ˈʌndər] 在...下面",
+            "常用搭配：in the box, on the desk, under the chair"
+          ],
+          "example": {
+            "question": "请根据图片，选择正确的介词填空。",
+            "steps": [
+              "图片1：一个苹果在盒子里。 The apple is ___ the box.",
+              "图片2：一本书在桌子上。 The book is ___ the desk.",
+              "图片3：一只猫在椅子下面。 The cat is ___ the chair."
+            ],
+            "answer": "1. in 2. on 3. under"
+          },
+          "mistakes": [
+            {
+              "wrong": "The apple is on the box. (如果苹果在盒子里)",
+              "correct": "The apple is in the box."
+            }
+          ],
+          "memory_tip": "in在里，on在上，under在下，小小介词真有用。",
+          "related": {
+            "prerequisite": "三年级上册'It's a ...'句型",
+            "next": "更多方位介词，如near, behind"
+          }
+        },
+        {
+          "card_id": "04-02",
+          "full_id": "英语-四下-04-02",
+          "title": "词汇：表示方位的介词（拓展）",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习更多表示物体位置关系的介词。",
+          "core_points": [
+            "near [nɪər] 在...旁边",
+            "behind [bɪˈhaɪnd] 在...后面",
+            "in front of 在...前面 (注意是词组)",
+            "常用搭配：near the door, behind the tree, in front of the car"
+          ],
+          "example": {
+            "question": "请根据图片，选择正确的介词填空。",
+            "steps": [
+              "图片1：一个男孩在门旁边。 The boy is ___ the door.",
+              "图片2：一辆车在树后面。 The car is ___ the tree.",
+              "图片3：一个小女孩在桌子前面。 The girl is ___ the desk."
+            ],
+            "answer": "1. near 2. behind 3. in front of"
+          },
+          "mistakes": [
+            {
+              "wrong": "in front of (中间少了of)",
+              "correct": "in front of"
+            }
+          ],
+          "memory_tip": "near旁边，behind后，in front of在前面，方位词语记心间。",
+          "related": {
+            "prerequisite": "Unit 4词汇卡中的in, on, under",
+            "next": "介词的综合运用"
+          }
+        },
+        {
+          "card_id": "04-03",
+          "full_id": "英语-四下-04-03",
+          "title": "句型：询问和回答物品位置",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习使用'Where is...?'询问物品的位置，并用'It's + 介词 + 地点.'回答。",
+          "core_points": [
+            "询问单数物品：Where is + 单数名词? (我的...在哪里？)",
+            "回答：It's + 介词 + the + 地点名词. (它在...)",
+            "例如：Where is my car? It's in the box.",
+            "询问复数物品：Where are + 复数名词? (我的...在哪里？)",
+            "回答：They're + 介词 + the + 地点名词. (它们在...)"
+          ],
+          "example": {
+            "question": "请根据图片和问题，完成对话。",
+            "steps": [
+              "图片：一只猫在沙发下面。",
+              "A: Where is the cat?",
+              "B: (回答猫的位置)"
+            ],
+            "answer": "B: It's under the sofa."
+          },
+          "mistakes": [
+            {
+              "wrong": "Where is my cars? (is用于单数)",
+              "correct": "Where are my cars?"
+            },
+            {
+              "wrong": "It's in box. (名词前通常需要冠词)",
+              "correct": "It's in the box."
+            }
+          ],
+          "memory_tip": "Where is问哪里？It's介词加地点。Where are问哪里？They're介词加地点。",
+          "related": {
+            "prerequisite": "名词的单复数，Unit 4词汇卡中的介词",
+            "next": "询问人或动物的位置"
+          }
+        },
+        {
+          "card_id": "04-04",
+          "full_id": "英语-四下-04-04",
+          "title": "自然拼读：字母组合th /θ/和/ð/",
+          "type": "自然拼读卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习字母组合th的两种常见发音：清辅音/θ/ (无声) 和浊辅音/ð/ (有声)。",
+          "core_points": [
+            "清辅音/θ/：舌尖轻触上齿，气流从缝隙中发出，无声。例：three, thank, thin",
+            "浊辅音/ð/：发音方法同/θ/，但声带振动，有声。例：this, that, mother, brother",
+            "注意：四年级重点区分两种发音，不要求深入理解清浊辅音概念。"
+          ],
+          "example": {
+            "question": "请读出下列单词并注意th的发音。",
+            "steps": [
+              "three (三)",
+              "this (这/这个)",
+              "thank (感谢)"
+            ],
+            "answer": "/θriː/ (无声), /ðɪs/ (有声), /θæŋk/ (无声)"
+          },
+          "mistakes": [
+            {
+              "wrong": "将/θ/发成/f/或/t/ (如将three读成'free'或'tree')",
+              "correct": "注意舌头位置，是摩擦音。"
+            },
+            {
+              "wrong": "将/ð/发成/d/ (如将this读成'dis')",
+              "correct": "注意声带振动，是摩擦音。"
+            }
+          ],
+          "memory_tip": "th真顽皮，有时/θ/不发声，有时/ð/振动喉，舌头放在牙齿间，轻轻一吹就知道。",
+          "related": {
+            "prerequisite": "字母组合sh /ʃ/, ch /tʃ/",
+            "next": "其他复合辅音发音"
+          }
+        },
+        {
+          "card_id": "04-05",
+          "full_id": "英语-四下-04-05",
+          "title": "情景对话：寻找物品",
+          "type": "情景对话卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习在日常生活中寻找丢失物品的对话。",
+          "core_points": [
+            "询问：Where is my + 物品? (我的...在哪里？)",
+            "提示：Is it + 介词 + 地点? (它在...吗？)",
+            "确认：Yes, it is! / No, it isn't. (是的/不是。)",
+            "感谢：Thank you! (谢谢你！)"
+          ],
+          "example": {
+            "question": "小明找不到他的铅笔盒了，妈妈帮他找。请完成对话。",
+            "steps": [
+              "小明：Mom, where is my pencil case?",
+              "妈妈：(提示：它在书包里吗？)",
+              "小明：(回答：不是。)",
+              "妈妈：Is it on the desk?",
+              "小明：(回答：是的。)"
+            ],
+            "answer": "妈妈：Is it in your schoolbag? 小明：No, it isn't. 小明：Yes, it is!"
+          },
+          "mistakes": [
+            {
+              "wrong": "Is it in the schoolbag you? (介词后直接跟名词)",
+              "correct": "Is it in your schoolbag?"
+            }
+          ],
+          "memory_tip": "Where is my...？我来找，Is it...？你来猜，找到啦，Thank you！",
+          "related": {
+            "prerequisite": "Unit 4句型卡中的询问和回答物品位置",
+            "next": "询问物品的颜色、大小等特征"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "05",
+      "unit_name": "What Can You Do?",
+      "cards": [
+        {
+          "card_id": "05-01",
+          "full_id": "英语-四下-05-01",
+          "title": "词汇：动作动词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习描述各种能力的动作动词。",
+          "core_points": [
+            "swim [swɪm] 游泳",
+            "run [rʌn] 跑",
+            "jump [dʒʌmp] 跳",
+            "sing [sɪŋ] 唱歌",
+            "dance [dæns] 跳舞",
+            "draw [drɔː] 画画",
+            "speak English 说英语"
+          ],
+          "example": {
+            "question": "请根据图片，说出对应的动作。",
+            "steps": [
+              "图片1：一个人在游泳",
+              "图片2：一个人在唱歌",
+              "图片3：一个人在画画"
+            ],
+            "answer": "1. swim 2. sing 3. draw"
+          },
+          "mistakes": [
+            {
+              "wrong": "drawing (动词原形)",
+              "correct": "draw"
+            }
+          ],
+          "memory_tip": "游(swim)跑(run)跳(jump)，唱(sing)跳(dance)画(draw)，说英语(speak English)，我能行！",
+          "related": {
+            "prerequisite": "Unit 2的季节性活动动词",
+            "next": "更多运动和才艺相关的动词"
+          }
+        },
+        {
+          "card_id": "05-02",
+          "full_id": "英语-四下-05-02",
+          "title": "语法：情态动词can表示能力",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习情态动词can，表示“能，会”，用于表达能力。",
+          "core_points": [
+            "肯定句：主语 + can + 动词原形. (I can swim.)",
+            "否定句：主语 + can't + 动词原形. (can't = can not) (I can't fly.)",
+            "疑问句：Can + 主语 + 动词原形? (Can you sing?)",
+            "回答：Yes, I can. / No, I can't. (肯定/否定回答)",
+            "注意：can后面必须跟动词原形，不能加to。"
+          ],
+          "example": {
+            "question": "请将下列句子变为疑问句并回答。",
+            "steps": [
+              "You can draw. (肯定回答)",
+              "He can't run fast. (否定回答)"
+            ],
+            "answer": "1. Can you draw? Yes, I can. 2. Can he run fast? No, he can't."
+          },
+          "mistakes": [
+            {
+              "wrong": "I can to swim. (can后直接跟动词原形)",
+              "correct": "I can swim."
+            },
+            {
+              "wrong": "Can you sings? (动词用原形)",
+              "correct": "Can you sing?"
+            }
+          ],
+          "memory_tip": "Can能会，后面跟原形，疑问Can开头，否定can't清。",
+          "related": {
+            "prerequisite": "Unit 2中'I can...'的初步接触",
+            "next": "can表示请求、可能性等其他用法"
+          }
+        },
+        {
+          "card_id": "05-03",
+          "full_id": "英语-四下-05-03",
+          "title": "句型：询问和回答能力",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习使用'Can you...?'询问对方是否会做某事，并用'Yes, I can.'或'No, I can't.'回答。",
+          "core_points": [
+            "询问：Can you + 动词原形 + ...? (你会...吗？)",
+            "肯定回答：Yes, I can.",
+            "否定回答：No, I can't.",
+            "询问具体能做什么：What can you do? (你能做什么？)",
+            "回答：I can + 动词原形 + ... (我能...)"
+          ],
+          "example": {
+            "question": "请根据图片和问题，完成对话。",
+            "steps": [
+              "图片：一个孩子在跳舞。",
+              "A: Can you dance?",
+              "B: (回答会跳舞)"
+            ],
+            "answer": "B: Yes, I can."
+          },
+          "mistakes": [
+            {
+              "wrong": "Can you dance? Yes, I do. (can问can答)",
+              "correct": "Can you dance? Yes, I can."
+            }
+          ],
+          "memory_tip": "Can你问，can我答，Yes I can，No I can't，能力问题不复杂。",
+          "related": {
+            "prerequisite": "Unit 1的'Do you have...?'句型，Unit 5语法卡",
+            "next": "询问别人'Can he/she...?'"
+          }
+        },
+        {
+          "card_id": "05-04",
+          "full_id": "英语-四下-05-04",
+          "title": "自然拼读：字母组合ck /k/",
+          "type": "自然拼读卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母组合ck的发音，发/k/，与字母c和k单独发音相同。",
+          "core_points": [
+            "发音：/k/ (像中文“克”的音)",
+            "字母组合：ck",
+            "常见单词：duck, kick, black, clock, back",
+            "注意：ck通常出现在单词末尾，前面是短元音。"
+          ],
+          "example": {
+            "question": "请读出下列单词并注意ck的发音。",
+            "steps": [
+              "duck",
+              "kick",
+              "black"
+            ],
+            "answer": "/dʌk/, /kɪk/, /blæk/ (强调/k/音)"
+          },
+          "mistakes": [
+            {
+              "wrong": "将ck读成两个音，如'c-k' (它是一个整体发一个音)",
+              "correct": "ck发一个/k/的音。"
+            }
+          ],
+          "memory_tip": "ck ck ck，小鸭duck，踢球kick，黑色black，都是/k/。",
+          "related": {
+            "prerequisite": "字母c和k的单独发音",
+            "next": "其他双字母组合发音"
+          }
+        },
+        {
+          "card_id": "05-05",
+          "full_id": "英语-四下-05-05",
+          "title": "情景对话：谈论才艺",
+          "type": "情景对话卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习与朋友交流各自的才艺和能力。",
+          "core_points": [
+            "询问：What can you do? (你能做什么？)",
+            "回答：I can + 动词原形 + ... (我能...)",
+            "表达羡慕/赞扬：Wow! You are great! (哇！你真棒！)",
+            "鼓励：You can do it! (你能做到！)"
+          ],
+          "example": {
+            "question": "小明和小红互相展示才艺。小明会画画，小红会唱歌。请完成对话。",
+            "steps": [
+              "小明：What can you do?",
+              "小红：(回答她会唱歌。)",
+              "小明：(赞扬小红。)",
+              "小红：What can you do?",
+              "小明：(回答他会画画。)"
+            ],
+            "answer": "小红：I can sing. 小明：Wow! You are great! 小明：I can draw."
+          },
+          "mistakes": [
+            {
+              "wrong": "You are good! (虽然正确，但教材更常用You are great!)",
+              "correct": "You are great!"
+            }
+          ],
+          "memory_tip": "What can you do？我能...，Wow！你真棒！You are great！",
+          "related": {
+            "prerequisite": "Unit 5句型卡",
+            "next": "描述自己的兴趣爱好"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "06",
+      "unit_name": "How Many?",
+      "cards": [
+        {
+          "card_id": "06-01",
+          "full_id": "英语-四下-06-01",
+          "title": "词汇：数字1-12",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 4,
+          "definition": "复习和巩固数字1-12的英语表达。",
+          "core_points": [
+            "one [wʌn]",
+            "two [tuː]",
+            "three [θriː]",
+            "four [fɔːr]",
+            "five [faɪv]",
+            "six [sɪks]",
+            "seven [ˈsevn]",
+            "eight [eɪt]",
+            "nine [naɪn]",
+            "ten [ten]",
+            "eleven [ɪˈlevn]",
+            "twelve [twelv]"
+          ],
+          "example": {
+            "question": "请听数字，并写出对应的英文单词。",
+            "steps": [
+              "老师说：seven",
+              "老师说：twelve",
+              "老师说：three"
+            ],
+            "answer": "1. seven 2. twelve 3. three"
+          },
+          "mistakes": [
+            {
+              "wrong": "ture (three的拼写错误)",
+              "correct": "three"
+            },
+            {
+              "wrong": "eleven (发音错误，重音在第二音节)",
+              "correct": "eleven [ɪˈlevn]"
+            }
+          ],
+          "memory_tip": "一到十，one to ten，十一十二，eleven twelve，数数歌谣唱不停。",
+          "related": {
+            "prerequisite": "三年级上册数字1-10",
+            "next": "数字13-20，以及更大数字的表达"
+          }
+        },
+        {
+          "card_id": "06-02",
+          "full_id": "英语-四下-06-02",
+          "title": "词汇：水果",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习常见水果的英语单词。",
+          "core_points": [
+            "apple [ˈæpl] 苹果",
+            "banana [bəˈnænə] 香蕉",
+            "pear [peər] 梨",
+            "orange [ˈɒrɪndʒ] 橙子",
+            "grape [ɡreɪp] 葡萄",
+            "peach [piːtʃ] 桃子"
+          ],
+          "example": {
+            "question": "请根据图片，说出对应的水果名称。",
+            "steps": [
+              "图片1：一个苹果",
+              "图片2：一串葡萄",
+              "图片3：一个香蕉"
+            ],
+            "answer": "1. apple 2. grape 3. banana"
+          },
+          "mistakes": [
+            {
+              "wrong": "oranges (单数形式)",
+              "correct": "orange"
+            }
+          ],
+          "memory_tip": "苹果(apple)香蕉(banana)梨(pear)，橙子(orange)葡萄(grape)桃(peach)，水果家族真好吃。",
+          "related": {
+            "prerequisite": "三年级上册食物词汇",
+            "next": "更多食物和饮品词汇"
+          }
+        },
+        {
+          "card_id": "06-03",
+          "full_id": "英语-四下-06-03",
+          "title": "语法：How many 提问数量",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习用'How many'询问可数名词的数量。",
+          "core_points": [
+            "句型：How many + 可数名词复数 + do you have? (你有多少个...？)",
+            "句型：How many + 可数名词复数 + are there? (有多少个...？)",
+            "回答：I have + 数字 + 复数名词. / There are + 数字 + 复数名词.",
+            "注意：'How many'后面必须跟可数名词的复数形式。"
+          ],
+          "example": {
+            "question": "请根据图片和问题，完成对话。",
+            "steps": [
+              "图片：桌上有5个苹果。",
+              "A: How many apples do you have?",
+              "B: (回答你有多少个苹果。)"
+            ],
+            "answer": "B: I have five apples."
+          },
+          "mistakes": [
+            {
+              "wrong": "How many apple do you have? (apple应为复数)",
+              "correct": "How many apples do you have?"
+            },
+            {
+              "wrong": "I have five apple. (名词应为复数)",
+              "correct": "I have five apples."
+            }
+          ],
+          "memory_tip": "How many问数量，后面名词变复数，回答数字加复数，清清楚楚不迷糊。",
+          "related": {
+            "prerequisite": "名词的复数形式，数字1-12",
+            "next": "How much 提问不可数名词数量"
+          }
+        },
+        {
+          "card_id": "06-04",
+          "full_id": "英语-四下-06-04",
+          "title": "句型：询问和回答数量",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习使用'How many...?'询问可数名词的数量，并用'I have...'或'There are...'回答。",
+          "core_points": [
+            "询问：How many + 复数名词 + do you have? (你有多少...？)",
+            "回答：I have + 数字 + 复数名词. (我有...)",
+            "询问：How many + 复数名词 + are there? (有多少...？)",
+            "回答：There are + 数字 + 复数名词. (有...)"
+          ],
+          "example": {
+            "question": "请根据图片和问题，完成对话。",
+            "steps": [
+              "图片：书包里有3支铅笔。",
+              "A: How many pencils do you have in your schoolbag?",
+              "B: (回答你有多少支铅笔。)"
+            ],
+            "answer": "B: I have three pencils in my schoolbag."
+          },
+          "mistakes": [
+            {
+              "wrong": "How many apples is there? (are there用于复数)",
+              "correct": "How many apples are there?"
+            }
+          ],
+          "memory_tip": "How many问数量，你有几个，I have...告诉我，有几个，There are...指给你。",
+          "related": {
+            "prerequisite": "Unit 6语法卡，Unit 1的'I have...'句型",
+            "next": "购物情景中询问价格"
+          }
+        },
+        {
+          "card_id": "06-05",
+          "full_id": "英语-四下-06-05",
+          "title": "自然拼读：字母组合ai /eɪ/",
+          "type": "自然拼读卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "学习字母组合ai的常见发音，发/eɪ/，是一个双元音，先发/e/再滑向/ɪ/。",
+          "core_points": [
+            "发音：/eɪ/ (像中文“诶”拖长音)",
+            "字母组合：ai",
+            "常见单词：rain, train, paint, wait, tail"
+          ],
+          "example": {
+            "question": "请读出下列单词并注意ai的发音。",
+            "steps": [
+              "rain",
+              "train",
+              "paint"
+            ],
+            "answer": "/reɪn/, /treɪn/, /peɪnt/ (强调/eɪ/音)"
+          },
+          "mistakes": [
+            {
+              "wrong": "将/eɪ/发成/æ/ (如将rain读成'ran')",
+              "correct": "注意是双元音，有一个滑动的过程。"
+            }
+          ],
+          "memory_tip": "ai ai ai，下雨rain，火车train，画画paint，都是/eɪ/。",
+          "related": {
+            "prerequisite": "短元音a, e, i, o, u",
+            "next": "其他双元音字母组合，如ay, oa"
+          }
+        },
+        {
+          "card_id": "06-06",
+          "full_id": "英语-四下-06-06",
+          "title": "易混词卡：a/an 与复数名词",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "辨析不定冠词a/an与复数名词的用法区别，避免混淆。",
+          "core_points": [
+            "a/an：用于修饰单数可数名词，表示“一个”。a用于辅音音素开头的单词前，an用于元音音素开头的单词前。",
+            "复数名词：表示两个或两个以上的事物，通常在名词后加-s/-es。",
+            "不能同时使用：a/an不能与复数名词一起使用。",
+            "例：an apple (一个苹果) vs. apples (多个苹果)"
+          ],
+          "example": {
+            "question": "请选择正确的选项填空。",
+            "steps": [
+              "I have ___ (apple/apples). (我有多个苹果)",
+              "She has ___ (a orange/an orange). (她有一个橙子)"
+            ],
+            "answer": "1. apples 2. an orange"
+          },
+          "mistakes": [
+            {
+              "wrong": "I have a apples. (a与复数名词冲突)",
+              "correct": "I have apples."
+            },
+            {
+              "wrong": "He has a orange. (orange是元音音素开头)",
+              "correct": "He has an orange."
+            }
+          ],
+          "memory_tip": "a/an是一，复数是多多，一多不能在一起，分清单复不犯错。",
+          "related": {
+            "prerequisite": "名词的单复数，a/an的初步认识",
+            "next": "定冠词the的用法"
+          }
+        }
+      ]
+    }
+  ]
+}

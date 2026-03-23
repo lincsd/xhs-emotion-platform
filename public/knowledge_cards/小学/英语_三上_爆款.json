@@ -1,0 +1,648 @@
+{
+  "subject": "英语",
+  "grade": "三年级",
+  "semester": "上册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "三上",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片，专为PEP人教版三年级上册设计。",
+  "units": [
+    {
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [
+        {
+          "card_id": "T1-01",
+          "full_id": "英语-三上-T1-01",
+          "title": "this和that分不清？一张图搞定远近！",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "指示代词this (这) 用于指近处的人或物，that (那) 用于指远处的人或物，两者都用于单数。",
+          "core_points": [
+            "This: 指近处，可触及的。",
+            "That: 指远处，不可触及的。",
+            "两者都用于单数名词前。",
+            "常与'is'连用，构成'This/That is a/an...'"
+          ],
+          "example": {
+            "question": "老师手拿一支笔，问你：'___ is a pen.'，应该选this还是that？",
+            "steps": [
+              "1. 判断笔与提问者的距离是近是远。",
+              "2. 近用this，远用that。"
+            ],
+            "answer": "This (因为笔在老师手中，是近的)."
+          },
+          "mistakes": [
+            {
+              "wrong": "That is my book. (书就在手边)",
+              "correct": "This is my book."
+            }
+          ],
+          "memory_tip": "This近that远，一伸手就能辨！",
+          "emotion_hook": "你的英语老师没教你的this/that小秘密，今天全告诉你！",
+          "trap_point": "很多同学只知道翻译，但不会根据实际距离（近或远）来选择使用。"
+        },
+        {
+          "card_id": "T1-02",
+          "full_id": "英语-三上-T1-02",
+          "title": "a和an到底怎么用？别再凭感觉啦！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "不定冠词a和an都表示“一个”，a用于辅音音素开头的单词前，an用于元音音素开头的单词前。",
+          "core_points": [
+            "a/an都表示“一个”，用于单数可数名词前。",
+            "关键看单词的“发音”开头，而不是字母。",
+            "元音音素（如/æ/, /e/, /ɪ/, /ɒ/, /ʌ/）开头用an。",
+            "辅音音素开头用a。"
+          ],
+          "example": {
+            "question": "在'___ apple' 前，应该用a还是an？",
+            "steps": [
+              "1. 读出单词'apple'的发音。",
+              "2. 判断其开头音素是元音还是辅音。"
+            ],
+            "answer": "an (因为'apple'开头音是元音/æ/)."
+          },
+          "mistakes": [
+            {
+              "wrong": "a orange",
+              "correct": "an orange"
+            },
+            {
+              "wrong": "an book",
+              "correct": "a book"
+            }
+          ],
+          "memory_tip": "元音a,e,i,o,u，an在前面不发愁！辅音a，跟着走！",
+          "emotion_hook": "90%的家长和孩子都搞不清a和an的区别，你家娃中招了吗？",
+          "trap_point": "误以为是看单词的第一个字母而不是看第一个音素（发音）。"
+        },
+        {
+          "card_id": "T1-03",
+          "full_id": "英语-三上-T1-03",
+          "title": "He/She傻傻分不清？男女有别，一秒识别！",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "he (他) 是第三人称单数代词，用于指男性；she (她) 也是第三人称单数代词，用于指女性。",
+          "core_points": [
+            "He = 他 (男孩/男人)。",
+            "She = 她 (女孩/女人)。",
+            "两者都指单数个体。",
+            "常用于介绍他人：'He is my friend.' / 'She is my teacher.'"
+          ],
+          "example": {
+            "question": "看到一个女孩，你想说'___ is a girl.' 应该选He还是She？",
+            "steps": [
+              "1. 判断所指对象是男性还是女性。",
+              "2. 女性用she，男性用he。"
+            ],
+            "answer": "She (因为指女孩)."
+          },
+          "mistakes": [
+            {
+              "wrong": "She is my father.",
+              "correct": "He is my father."
+            }
+          ],
+          "memory_tip": "He是男孩，She是女孩，性别分清就不会猜！",
+          "emotion_hook": "这个小学英语最基础的性别代词，你真的用对了吗？别再闹笑话了！",
+          "trap_point": "中文里“他”和“她”发音相同，容易导致在英语中混淆使用。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T2",
+      "unit_name": "发音挑战",
+      "cards": [
+        {
+          "card_id": "T2-01",
+          "full_id": "英语-三上-T2-01",
+          "title": "这个'th'音你确定会读吗？发错了超尴尬！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "字母组合'th'有两种常见发音：清辅音/θ/ (如three) 和浊辅音/ð/ (如this, that)。",
+          "core_points": [
+            "发音时，舌尖轻触上齿背。",
+            "清辅音/θ/：声带不震动，气流从舌齿间摩擦而出 (如three, thank)。",
+            "浊辅音/ð/：声带震动，气流从舌齿间摩擦而出 (如this, that, mother)。",
+            "三年级上册的'this', 'that'是浊辅音/ð/，'three'是清辅音/θ/。"
+          ],
+          "example": {
+            "question": "'this' 和 'three' 的'th'发音一样吗？",
+            "steps": [
+              "1. 尝试分别读出'this'和'three'。",
+              "2. 感受发音时声带是否震动。"
+            ],
+            "answer": "不一样，'this'是浊辅音/ð/，'three'是清辅音/θ/。"
+          },
+          "mistakes": [
+            {
+              "wrong": "读'this'像中文的'dis'。",
+              "correct": "舌尖轻触上齿，声带震动，发/ðɪs/。"
+            },
+            {
+              "wrong": "读'three'像中文的'tree'。",
+              "correct": "舌尖轻触上齿，声带不震动，发/θriː/。"
+            }
+          ],
+          "memory_tip": "舌尖偷偷藏起来，摩擦出气才厉害！",
+          "emotion_hook": "发音不标准，英语白学了！这个音90%的人都读错！",
+          "pronunciation_tip": "练习时可以先伸出舌尖，轻轻咬住，再尝试发出声音，感受气流从舌尖和上齿之间通过。"
+        },
+        {
+          "card_id": "T2-02",
+          "full_id": "英语-三上-T2-02",
+          "title": "apple的'a'不是'啊'！你的发音够地道吗？",
+          "type": "发音挑战卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "单词'apple', 'cat', 'bag'中的'a'发短元音/æ/，这是一个介于“a”和“e”之间的音。",
+          "core_points": [
+            "嘴巴张大，嘴角向两边咧开，像要笑。",
+            "舌尖抵住下齿，舌面弓起。",
+            "发音短促有力，听起来介于“哎”和“啊”之间。",
+            "与中文的“啊”音不同，更扁平。"
+          ],
+          "example": {
+            "question": "'apple' 和 'book' 中的'a'发音一样吗？",
+            "steps": [
+              "1. 尝试分别读出'apple'和'book'。",
+              "2. 比较两个单词中'a'的发音。"
+            ],
+            "answer": "不一样，'apple'发/æ/，'book'中的'oo'发/ʊ/。"
+          },
+          "mistakes": [
+            {
+              "wrong": "读'apple'像中文的'阿婆'。",
+              "correct": "读/ˈæpl/。"
+            },
+            {
+              "wrong": "读'cat'像中文的'卡特'。",
+              "correct": "读/kæt/。"
+            }
+          ],
+          "memory_tip": "张大嘴巴咧咧笑，发个'æ'音真奇妙！",
+          "emotion_hook": "别再用中文发音学英语了！这个音是检验你是否是'中式英语'的关键！",
+          "pronunciation_tip": "对着镜子练习，确保嘴巴张开，嘴角向两侧拉伸，发出短促的/æ/音。"
+        },
+        {
+          "card_id": "T2-03",
+          "full_id": "英语-三上-T2-03",
+          "title": "pen的'e'不是'一'！这个音你读对了吗？",
+          "type": "发音挑战卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "单词'pen', 'desk', 'elephant'中的'e'发短元音/e/，类似于中文“诶”的短促音。",
+          "core_points": [
+            "嘴巴微张，舌尖轻抵下齿。",
+            "舌面平坦，发音短促。",
+            "与中文“诶”音相比，英语的/e/更短促，舌位更低。",
+            "注意与长元音/iː/ (如'see') 的区别。"
+          ],
+          "example": {
+            "question": "'pen' 和 'pencil' 中的'e'发音一样吗？",
+            "steps": [
+              "1. 尝试分别读出'pen'和'pencil'。",
+              "2. 比较两个单词中'e'的发音。"
+            ],
+            "answer": "'pen'中的'e'发/e/，而'pencil'中的'e'发/ɪ/。"
+          },
+          "mistakes": [
+            {
+              "wrong": "读'pen'像中文的'拼'。",
+              "correct": "读/pen/。"
+            },
+            {
+              "wrong": "读'desk'像中文的'迪斯克'。",
+              "correct": "读/desk/。"
+            }
+          ],
+          "memory_tip": "嘴巴微张舌放平，/e/音轻松就搞定！",
+          "emotion_hook": "小学英语发音入门课！这个'e'音，你可能一直读错了！快来纠正！",
+          "pronunciation_tip": "感受发音时舌头的位置，它比发/iː/时更低更平，确保发音短促而清晰。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T3",
+      "unit_name": "情景闯关",
+      "cards": [
+        {
+          "card_id": "T3-01",
+          "full_id": "英语-三上-T3-01",
+          "title": "第一次见外国人，你会用英语介绍自己吗？",
+          "type": "情景闯关卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习用简单的英语进行自我介绍，包括打招呼和说出自己的名字。",
+          "core_points": [
+            "打招呼：Hello! / Hi!",
+            "介绍自己：I'm [你的名字]. / My name is [你的名字].",
+            "询问对方：What's your name?",
+            "注意礼貌用语和语序。"
+          ],
+          "example": {
+            "question": "你叫Amy，第一次见到新同学，你会怎么说？",
+            "steps": [
+              "1. 先打招呼。",
+              "2. 介绍自己的名字。",
+              "3. 询问对方的名字。"
+            ],
+            "answer": "Hello! I'm Amy. What's your name?"
+          },
+          "mistakes": [
+            {
+              "wrong": "My name is Amy. Hello.",
+              "correct": "Hello! My name is Amy."
+            }
+          ],
+          "memory_tip": "打招呼，报姓名，问名字，很文明！",
+          "emotion_hook": "别让你的孩子成为'哑巴英语'！这几句实用口语，张口就能说！",
+          "scene_dialogue": "A: Hello! My name is Lily. What's your name?\nB: Hi Lily! My name is Tom. Nice to meet you!"
+        },
+        {
+          "card_id": "T3-02",
+          "full_id": "英语-三上-T3-02",
+          "title": "去商店看到喜欢的东西，你会用英语问是什么吗？",
+          "type": "情景闯关卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习用'What's this?'询问近处单数物品，并用'It's a/an...'进行回答。",
+          "core_points": [
+            "'What's this?' 用于询问近处、不确定的单数物品。",
+            "回答用 'It's a/an [物品名称].'。",
+            "注意'a'和'an'的正确使用。",
+            "结合手势指物进行练习。"
+          ],
+          "example": {
+            "question": "老师指着一个铅笔盒，问学生这是什么，学生应该怎么问？",
+            "steps": [
+              "1. 提出疑问的句型。",
+              "2. 老师回答。"
+            ],
+            "answer": "学生：What's this? 老师：It's a pencil case."
+          },
+          "mistakes": [
+            {
+              "wrong": "What this?",
+              "correct": "What's this? (What's是What is的缩写)"
+            }
+          ],
+          "memory_tip": "指着东西问this，回答It's a/an，真给力！",
+          "emotion_hook": "逛街遇到外国小哥哥小姐姐，想问东西，却开不了口？这招学起来！",
+          "scene_dialogue": "A: (指着一本书) What's this?\nB: It's a book.\nA: Oh, a book! Thank you."
+        },
+        {
+          "card_id": "T3-03",
+          "full_id": "英语-三上-T3-03",
+          "title": "上课遇到老师，你只会说'Hello'吗？高级问候学起来！",
+          "type": "情景闯关卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习在不同时间段对老师进行恰当的问候。",
+          "core_points": [
+            "早上问候：Good morning, teacher.",
+            "下午问候：Good afternoon, teacher.",
+            "晚上或离别问候：Good evening, teacher. / Goodbye, teacher.",
+            "问候语后加上称谓'teacher'表示尊敬。"
+          ],
+          "example": {
+            "question": "下午放学时，你遇到老师，应该怎么说？",
+            "steps": [
+              "1. 判断时间段。",
+              "2. 选择合适的问候语。",
+              "3. 加上称谓。"
+            ],
+            "answer": "Good afternoon, teacher! 或 Goodbye, teacher!"
+          },
+          "mistakes": [
+            {
+              "wrong": "Good morning, teacher. (下午)",
+              "correct": "Good afternoon, teacher."
+            }
+          ],
+          "memory_tip": "早晨morning，下午noon，再加teacher真好听！",
+          "emotion_hook": "让老师对你的英语刮目相看！这几个问候语，让你的孩子更自信！",
+          "scene_dialogue": "Teacher: Good morning, class!\nStudents: Good morning, Miss Li!\n...\nTeacher: Goodbye, children!\nStudents: Goodbye, Mr. Wang!"
+        }
+      ]
+    },
+    {
+      "unit_id": "T4",
+      "unit_name": "语法纠错",
+      "cards": [
+        {
+          "card_id": "T4-01",
+          "full_id": "英语-三上-T4-01",
+          "title": "10个孩子9个错！'I is'你是不是也说过？",
+          "type": "语法纠错卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "第一人称单数代词'I'的be动词形式是'am'，而不是'is'。",
+          "core_points": [
+            "I 搭配 am (I am a student.)",
+            "He/She/It 搭配 is (He is a boy.)",
+            "You/We/They 搭配 are (You are a girl.)",
+            "这是英语中最基础的'主谓一致'原则。"
+          ],
+          "example": {
+            "question": "找出并改正错误：'I is a boy.'",
+            "steps": [
+              "1. 识别主语'I'。",
+              "2. 确定'I'对应的正确be动词。",
+              "3. 进行改正。"
+            ],
+            "answer": "I am a boy."
+          },
+          "mistakes": [
+            {
+              "wrong": "I is a student.",
+              "correct": "I am a student."
+            }
+          ],
+          "memory_tip": "I am，你are，他is，动词跟着主语跑！",
+          "emotion_hook": "小学英语最基础的语法陷阱！你家娃中招了吗？",
+          "grammar_fix": "主语'I'必须和be动词'am'连用，表示“我是...”。"
+        },
+        {
+          "card_id": "T4-02",
+          "full_id": "英语-三上-T4-02",
+          "title": "'Me name is...'？别闹了，你的英语老师要哭了！",
+          "type": "语法纠错卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "'My'是形容词性物主代词，表示“我的”，后面要跟名词；'Me'是宾格代词，作宾语，不能直接跟名词表示所属。",
+          "core_points": [
+            "My + 名词 (我的...，如My book)。",
+            "Me 通常作动词或介词的宾语 (如Look at me. / Give it to me.)。",
+            "三年级学生常混淆两者，导致表达错误。",
+            "这是人称代词和物主代词的基础用法。"
+          ],
+          "example": {
+            "question": "找出并改正错误：'Me name is Lily.'",
+            "steps": [
+              "1. 识别'Me name'的用法是否正确。",
+              "2. 确定表示“我的”的正确词汇。",
+              "3. 进行改正。"
+            ],
+            "answer": "My name is Lily."
+          },
+          "mistakes": [
+            {
+              "wrong": "Me book is red.",
+              "correct": "My book is red."
+            }
+          ],
+          "memory_tip": "我的东西用My，动词后面跟着Me！",
+          "emotion_hook": "小学英语启蒙期，这个错误不纠正，英语学不好！",
+          "grammar_fix": "“My”是形容词性物主代词，表示所属关系，后面必须跟名词；“Me”是人称代词宾格，不能直接修饰名词。"
+        },
+        {
+          "card_id": "T4-03",
+          "full_id": "英语-三上-T4-03",
+          "title": "一句话让你的英语瞬间高级！就差这个小词！",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在英语中，表示单数可数名词时，通常需要在名词前加上不定冠词'a'或'an'。",
+          "core_points": [
+            "单数可数名词不能单独使用，前面需要有冠词或限定词。",
+            "'a'用于辅音音素开头的名词前。",
+            "'an'用于元音音素开头的名词前。",
+            "这是英语与中文重要的区别之一。"
+          ],
+          "example": {
+            "question": "找出并改正错误：'This is book.'",
+            "steps": [
+              "1. 识别'book'是单数可数名词。",
+              "2. 确定其前面需要加冠词。",
+              "3. 选择正确的冠词。"
+            ],
+            "answer": "This is a book."
+          },
+          "mistakes": [
+            {
+              "wrong": "I have pencil.",
+              "correct": "I have a pencil."
+            }
+          ],
+          "memory_tip": "单数名词不孤单，a或an来作伴！",
+          "emotion_hook": "你的孩子英语总是差点意思？也许就是少了这个小细节！",
+          "grammar_fix": "英语中，单数可数名词前面必须有冠词（a/an/the）或物主代词（my/your等）进行修饰，不能裸奔。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T5",
+      "unit_name": "亲子英语PK",
+      "cards": [
+        {
+          "card_id": "T5-01",
+          "full_id": "英语-三上-T5-01",
+          "title": "眼力手速大挑战！和孩子一起抢答英语单词！",
+          "type": "亲子英语PK卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "通过快速识别图片或实物，抢答对应的英语单词，提高词汇反应速度。",
+          "core_points": [
+            "准备三年级上册的词汇卡片或实物。",
+            "家长和孩子轮流翻牌或计时抢答。",
+            "正确说出单词并拼写（口头拼写）可得分。",
+            "营造轻松愉快的学习氛围。"
+          ],
+          "example": {
+            "question": "爸爸妈妈给孩子看一张“书”的图片，谁先说出'book'并拼写正确就算赢？",
+            "steps": [
+              "1. 快速识别图片内容。",
+              "2. 准确说出英语单词。",
+              "3. 口头拼写单词。"
+            ],
+            "answer": "book (B-O-O-K)"
+          },
+          "mistakes": [
+            {
+              "wrong": "说成中文'课本'。",
+              "correct": "说'book'。"
+            }
+          ],
+          "memory_tip": "看到实物大声喊，英语单词记心间！",
+          "emotion_hook": "我家娃的单词量居然比我多！快来挑战，别输给三年级的孩子！",
+          "battle_rule": "准备10-15张三年级上册的词汇卡片（如pen, book, cat, apple等）。家长和孩子轮流翻牌，谁先准确说出单词并口头拼写正确，谁就得一分。三局两胜，看谁是单词王！"
+        },
+        {
+          "card_id": "T5-02",
+          "full_id": "英语-三上-T5-02",
+          "title": "英语对话接龙！看看谁的反应更快！",
+          "type": "亲子英语PK卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "围绕三年级上册的简单对话主题，进行英语句子接龙，锻炼口语表达和听力理解。",
+          "core_points": [
+            "设定一个情景（如打招呼、介绍朋友）。",
+            "家长说一句，孩子接一句，看谁能坚持更久。",
+            "鼓励使用学过的句型，保证句型正确。",
+            "培养孩子快速反应和组织语言的能力。"
+          ],
+          "example": {
+            "question": "爸爸妈妈说：'Hello! I'm Tom.' 孩子应该怎么接？",
+            "steps": [
+              "1. 听清对方的话。",
+              "2. 思考合适的回复。",
+              "3. 快速说出。"
+            ],
+            "answer": "Hi Tom! I'm Lily."
+          },
+          "mistakes": [
+            {
+              "wrong": "孩子接'book' (答非所问)。",
+              "correct": "孩子接'Hi Tom! I'm Lily.' (与上下文相关)。"
+            }
+          ],
+          "memory_tip": "你一句，我一句，英语对话真有趣！",
+          "emotion_hook": "别再让孩子只做题了！这种亲子互动，让孩子爱上开口说英语！",
+          "battle_rule": "从“打招呼”情景开始。家长先说一句英语，孩子接一句，要求句型正确，且与上下文相关。说不出或说错者淘汰。例如：\n家长：Hello! I'm Miss Li.\n孩子：Hi Miss Li! I'm Amy.\n家长：Nice to meet you, Amy.\n孩子：Nice to meet you, too!"
+        },
+        {
+          "card_id": "T5-03",
+          "full_id": "英语-三上-T5-03",
+          "title": "小小侦探！用英语猜颜色、猜数字！",
+          "type": "亲子英语PK卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "通过提问和回答，用英语猜出对方心中所想的颜色或数字，巩固颜色和数字词汇。",
+          "core_points": [
+            "一方心中想一个1-10的数字或一种颜色。",
+            "另一方用'Is it...?' 'What color is it?' 'How many...?' 等句型提问。",
+            "限制提问次数，增加挑战性。",
+            "锻炼孩子的提问和猜测能力。"
+          ],
+          "example": {
+            "question": "妈妈心里想了一个数字，孩子应该怎么问？",
+            "steps": [
+              "1. 确定要猜的范围（1-10）。",
+              "2. 提出疑问句型。",
+              "3. 妈妈回答Yes/No。"
+            ],
+            "answer": "Is it one? / Is it five? (用Yes/No回答)"
+          },
+          "mistakes": [
+            {
+              "wrong": "直接问'What number is it?' (挑战性降低)。",
+              "correct": "用'Is it...?'进行猜测，锻炼提问能力。"
+            }
+          ],
+          "memory_tip": "颜色数字藏起来，问问猜猜乐开怀！",
+          "emotion_hook": "玩游戏也能学英语？这个亲子活动，让娃边玩边记单词！",
+          "battle_rule": "一方心里想一个1-10的数字或一种颜色。另一方在5次机会内用英语提问猜出。如 'Is it red?' 'Is it five?'。猜对得分，猜错则对方得分。比比谁是英语小侦探！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T6",
+      "unit_name": "速记卡",
+      "cards": [
+        {
+          "card_id": "T6-01",
+          "full_id": "英语-三上-T6-01",
+          "title": "a和an分不清？这句口诀让你秒懂！",
+          "type": "速记卡",
+          "difficulty": 1,
+          "importance": 4,
+          "definition": "通过口诀快速记忆a和an的用法规则：看单词的第一个音素是元音还是辅音。",
+          "core_points": [
+            "核心是看发音（音素），不是字母。",
+            "元音音素开头用an。",
+            "辅音音素开头用a。",
+            "记住元音的发音特点。"
+          ],
+          "example": {
+            "question": "看到单词'umbrella'，你如何快速判断用a还是an？",
+            "steps": [
+              "1. 读出单词'umbrella'的发音。",
+              "2. 判断开头音素是元音/ʌ/还是辅音。",
+              "3. 根据规则选择冠词。"
+            ],
+            "answer": "'umbrella'开头是元音/ʌ/，所以用'an'。"
+          },
+          "mistakes": [
+            {
+              "wrong": "只看字母U，以为是辅音，用'a umbrella'。",
+              "correct": "听发音判断元辅音，用'an umbrella'。"
+            }
+          ],
+          "memory_tip": "元音字母a e i o u，发音开头是元音，an在前面不发愁；其他字母辅音头，a呀a呀跟着走！",
+          "emotion_hook": "小红书爆火的英语速记法！妈妈再也不用担心我的a/an了！",
+          "speed_method": "元音音素歌诀法：想象a, e, i, o, u五个元音字母手拉手，只要单词开头音是它们的声音，就用an；否则用a。记住：hour虽然是h开头，但h不发音，开头是元音/aʊ/，所以是an hour。"
+        },
+        {
+          "card_id": "T6-02",
+          "full_id": "英语-三上-T6-02",
+          "title": "this和that，一句话让你永不混淆！",
+          "type": "速记卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "通过形象联想和口诀，快速记忆this和that的远近区别。",
+          "core_points": [
+            "this指近处，that指远处。",
+            "两者都用于指单数的人或物。",
+            "结合身体动作帮助记忆。",
+            "在实际语境中多练习。"
+          ],
+          "example": {
+            "question": "老师指着黑板，你应该用this还是that？",
+            "steps": [
+              "1. 判断黑板与你的距离是近还是远。",
+              "2. 近用this，远用that。"
+            ],
+            "answer": "That is a board. (黑板通常离学生较远)"
+          },
+          "mistakes": [
+            {
+              "wrong": "随便用this或that，不看实际距离。",
+              "correct": "根据远近准确选择。"
+            }
+          ],
+          "memory_tip": "This近that远，伸伸手就能看；指着黑板用that，指着铅笔用this！",
+          "emotion_hook": "小学英语入门必备！这个小技巧，让孩子轻松掌握this/that！",
+          "speed_method": "动作联想法：想象你伸手就能摸到的东西，用手去指并说'This'；你伸手够不着、需要用手指远方的东西，用手去指并说'That'。"
+        },
+        {
+          "card_id": "T6-03",
+          "full_id": "英语-三上-T6-03",
+          "title": "1-10数字背不下来？这个顺口溜太好用了！",
+          "type": "速记卡",
+          "difficulty": 1,
+          "importance": 4,
+          "definition": "通过有趣的顺口溜和联想记忆法，帮助孩子快速记住1-10的英语单词。",
+          "core_points": [
+            "利用谐音或形象联想。",
+            "结合动物或日常物品。",
+            "每天重复朗读，形成节奏感。",
+            "可配合手指游戏或跳房子游戏进行。"
+          ],
+          "example": {
+            "question": "怎样快速记住数字'three'的英语单词？",
+            "steps": [
+              "1. 联想谐音或形象。",
+              "2. 结合顺口溜或小故事。"
+            ],
+            "answer": "three (像“死瑞”或联想树有三根枝，谐音“树”)"
+          },
+          "mistakes": [
+            {
+              "wrong": "死记硬背，容易混淆或遗忘。",
+              "correct": "用联想记忆，活学活用，记得牢。"
+            }
+          ],
+          "memory_tip": "One小狗，two小兔，three小猫咪，four小鸭子，five小老虎，six小猴子，seven小公鸡，eight小胖猪，nine小老鼠，ten小花鹿！",
+          "emotion_hook": "还在死记硬背数字？快来试试这个超有趣的顺口溜，孩子一学就会，秒变数字小达人！",
+          "speed_method": "动物联想顺口溜法：将每个数字与一种小动物或形象联系起来，编成有趣的故事或儿歌，通过画面感和韵律感进行记忆。"
+        }
+      ]
+    }
+  ]
+}

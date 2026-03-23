@@ -1,0 +1,927 @@
+{
+  "subject": "英语",
+  "grade": "四年级",
+  "semester": "上册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "四上",
+  "units": [
+    {
+      "unit_id": "01",
+      "unit_name": "My classroom",
+      "cards": [
+        {
+          "card_id": "01-01",
+          "full_id": "英语-四上-01-01",
+          "title": "词汇：教室物品",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习描述教室里的常见物品的英语单词。",
+          "core_points": [
+            "desk /dɛsk/ n. 课桌",
+            "chair /tʃɛər/ n. 椅子",
+            "board /bɔːrd/ n. 董事会；黑板",
+            "light /laɪt/ n. 灯",
+            "fan /fæn/ n. 风扇",
+            "window /ˈwɪndoʊ/ n. 窗户",
+            "door /dɔːr/ n. 门"
+          ],
+          "example": {
+            "question": "看图写单词：这是一张课桌。",
+            "steps": [
+              "图片提示：一张课桌",
+              "回忆“课桌”的英文单词"
+            ],
+            "answer": "desk"
+          },
+          "mistakes": [
+            {
+              "wrong": "desck",
+              "correct": "desk"
+            }
+          ],
+          "memory_tip": "desk和chair是好朋友，一个用来写，一个用来坐；board是黑板，写写画画真方便。",
+          "related": {
+            "prerequisite": "三年级物品词汇",
+            "next": "用What's this?提问物品"
+          }
+        },
+        {
+          "card_id": "01-02",
+          "full_id": "英语-四上-01-02",
+          "title": "句型：询问和回答物品",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习用 'What's this?' 和 'What's that?' 询问物品，并用 'It's a...' 回答。",
+          "core_points": [
+            "What's this? 这是什么？ (指近处的物品)",
+            "What's that? 那是什么？ (指远处的物品)",
+            "It's a [物品]. 这是一个[物品]。",
+            "It's an [物品]. 这是一个[物品]。(当物品名词以元音音素开头时)"
+          ],
+          "example": {
+            "question": "看图并回答：远处有一扇门。提问并回答。",
+            "steps": [
+              "确定物品是“门”且在“远处”",
+              "选择正确的疑问句 'What's that?'",
+              "用 'It's a door.' 回答"
+            ],
+            "answer": "A: What's that? B: It's a door."
+          },
+          "mistakes": [
+            {
+              "wrong": "What's this? It's door.",
+              "correct": "What's this? It's a door."
+            },
+            {
+              "wrong": "What's that? It's an desk.",
+              "correct": "What's that? It's a desk."
+            }
+          ],
+          "memory_tip": "近处用this，远处用that，回答都是 'It's a/an...'，别忘了a/an，它是小帮手。",
+          "related": {
+            "prerequisite": "名词词汇",
+            "next": "询问物品的颜色"
+          }
+        },
+        {
+          "card_id": "01-03",
+          "full_id": "英语-四上-01-03",
+          "title": "自然拼读：字母Dd和Ff的发音",
+          "type": "自然拼读卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母Dd和Ff在单词中的常见发音。",
+          "core_points": [
+            "Dd 发音：/d/，像中文“得”的声母。",
+            "示例词：desk, door, dog, duck",
+            "Ff 发音：/f/，像中文“福”的声母，但需要咬下唇。",
+            "示例词：fan, fish, five, fox"
+          ],
+          "example": {
+            "question": "听单词，判断包含/d/音的词：dog, fish, fan, door",
+            "steps": [
+              "听发音 /d/",
+              "在给出的单词中找出包含此音的词"
+            ],
+            "answer": "dog, door"
+          },
+          "mistakes": [
+            {
+              "wrong": "把/f/发成/p/",
+              "correct": "注意上下唇轻触，气流从唇缝中送出。"
+            }
+          ],
+          "memory_tip": "D D D，小狗叫 dog；F F F，风扇 fan 呼呼转。",
+          "related": {
+            "prerequisite": "字母A-Z的认知",
+            "next": "更多辅音字母发音"
+          }
+        },
+        {
+          "card_id": "01-04",
+          "full_id": "英语-四上-01-04",
+          "title": "情景对话：介绍教室",
+          "type": "情景对话卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在教室场景中，运用所学词汇和句型进行简单的交流。",
+          "core_points": [
+            "A: Look! What's this?",
+            "B: It's a desk.",
+            "A: What's that?",
+            "B: It's a board. And that's a window.",
+            "A: Wow, our classroom is nice!"
+          ],
+          "example": {
+            "question": "小明和小红在教室里，小明指着一个风扇。请你完成他们的对话。",
+            "steps": [
+              "小明问：这是什么？ (指着风扇)",
+              "小红回答：这是一个风扇。",
+              "小明赞叹：我们的教室真好！"
+            ],
+            "answer": "A: What's this? B: It's a fan. A: Our classroom is nice!"
+          },
+          "mistakes": [
+            {
+              "wrong": "A: Look! What's this? B: A desk.",
+              "correct": "A: Look! What's this? B: It's a desk."
+            }
+          ],
+          "memory_tip": "看一看，指一指，问一问，答一答，教室里的小秘密，对话中来揭晓。",
+          "related": {
+            "prerequisite": "单元词汇和句型",
+            "next": "更多场景对话"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "02",
+      "unit_name": "My schoolbag",
+      "cards": [
+        {
+          "card_id": "02-01",
+          "full_id": "英语-四上-02-01",
+          "title": "词汇：学习用品",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习描述书包里的常见学习用品的英语单词。",
+          "core_points": [
+            "pencil /ˈpɛnsəl/ n. 铅笔",
+            "pen /pɛn/ n. 钢笔；笔",
+            "book /bʊk/ n. 书",
+            "ruler /ˈruːlər/ n. 尺子",
+            "eraser /ɪˈreɪsər/ n. 橡皮",
+            "crayon /ˈkreɪɑːn/ n. 蜡笔",
+            "bag /bæɡ/ n. 包；书包"
+          ],
+          "example": {
+            "question": "看图写单词：这是一支铅笔。",
+            "steps": [
+              "图片提示：一支铅笔",
+              "回忆“铅笔”的英文单词"
+            ],
+            "answer": "pencil"
+          },
+          "mistakes": [
+            {
+              "wrong": "pencel",
+              "correct": "pencil"
+            }
+          ],
+          "memory_tip": "pencil写字，pen画画，book里有故事，ruler量长短。",
+          "related": {
+            "prerequisite": " Unit 1物品词汇",
+            "next": "询问学习用品的颜色"
+          }
+        },
+        {
+          "card_id": "02-02",
+          "full_id": "英语-四上-02-02",
+          "title": "句型：询问颜色",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习用 'What colour is it?' 询问物品的颜色，并用 'It's [颜色].' 回答。",
+          "core_points": [
+            "What colour is it? 它是什么颜色？",
+            "It's [颜色]. 它是[颜色]。",
+            "常用颜色词：red, yellow, blue, green, white, black, brown, orange, purple, pink"
+          ],
+          "example": {
+            "question": "小明有一支红色的铅笔。请你提问并回答它的颜色。",
+            "steps": [
+              "提问铅笔的颜色",
+              "回答它是红色"
+            ],
+            "answer": "A: What colour is it? B: It's red."
+          },
+          "mistakes": [
+            {
+              "wrong": "What colour is it? It red.",
+              "correct": "What colour is it? It's red."
+            }
+          ],
+          "memory_tip": "What colour is it? 红黄蓝绿我知道，颜色词儿真奇妙。",
+          "related": {
+            "prerequisite": "颜色词汇",
+            "next": "用形容词描述物品"
+          }
+        },
+        {
+          "card_id": "02-03",
+          "full_id": "英语-四上-02-03",
+          "title": "语法：一般疑问句 'Is this/that...?'",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习用 'Is this/that...?' 提问，并用 'Yes, it is.' 或 'No, it isn't.' 回答。",
+          "core_points": [
+            "结构：Is + this/that + a/an + 名词?",
+            "肯定回答：Yes, it is.",
+            "否定回答：No, it isn't. (it isn't = it is not)",
+            "用于确认近处或远处的单一物品。"
+          ],
+          "example": {
+            "question": "老师指着一个橡皮问你：'Is this an eraser?' 你看到确实是橡皮，请你回答。",
+            "steps": [
+              "判断物品是否是橡皮",
+              "选择肯定回答形式"
+            ],
+            "answer": "Yes, it is."
+          },
+          "mistakes": [
+            {
+              "wrong": "Is this a book? Yes, it.",
+              "correct": "Is this a book? Yes, it is."
+            },
+            {
+              "wrong": "Is that a pen? No, it not.",
+              "correct": "Is that a pen? No, it isn't."
+            }
+          ],
+          "memory_tip": "Is this/that开头问，Yes, it is.或No, it isn't.来回答。",
+          "related": {
+            "prerequisite": "What's this/that?句型",
+            "next": "复数一般疑问句"
+          }
+        },
+        {
+          "card_id": "02-04",
+          "full_id": "英语-四上-02-04",
+          "title": "自然拼读：字母Pp和Rr的发音",
+          "type": "自然拼读卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母Pp和Rr在单词中的常见发音。",
+          "core_points": [
+            "Pp 发音：/p/，发音时双唇紧闭，然后突然张开，气流冲出。",
+            "示例词：pencil, pen, pig, panda",
+            "Rr 发音：/r/，发音时舌尖卷起，不接触上颚，发出摩擦音。",
+            "示例词：ruler, red, rabbit, run"
+          ],
+          "example": {
+            "question": "听单词，判断包含/p/音的词：rabbit, pen, ruler, pig",
+            "steps": [
+              "听发音 /p/",
+              "在给出的单词中找出包含此音的词"
+            ],
+            "answer": "pen, pig"
+          },
+          "mistakes": [
+            {
+              "wrong": "把/r/发成/l/",
+              "correct": "注意舌尖卷起，不要接触上颚。"
+            }
+          ],
+          "memory_tip": "P P P，铅笔 pencil 来写字；R R R，尺子 ruler 量距离。",
+          "related": {
+            "prerequisite": "字母A-Z的认知",
+            "next": "更多辅音字母发音"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "03",
+      "unit_name": "My friends",
+      "cards": [
+        {
+          "card_id": "03-01",
+          "full_id": "英语-四上-03-01",
+          "title": "词汇：身体部位",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习描述身体各部位的英语单词。",
+          "core_points": [
+            "head /hɛd/ n. 头",
+            "face /feɪs/ n. 脸",
+            "eye /aɪ/ n. 眼睛 (复数 eyes)",
+            "ear /ɪər/ n. 耳朵 (复数 ears)",
+            "nose /noʊz/ n. 鼻子",
+            "mouth /maʊθ/ n. 嘴巴",
+            "arm /ɑːrm/ n. 胳膊 (复数 arms)",
+            "hand /hænd/ n. 手 (复数 hands)",
+            "leg /lɛɡ/ n. 腿 (复数 legs)",
+            "foot /fʊt/ n. 脚 (复数 feet)"
+          ],
+          "example": {
+            "question": "看图写单词：这是一只手。",
+            "steps": [
+              "图片提示：一只手",
+              "回忆“手”的英文单词"
+            ],
+            "answer": "hand"
+          },
+          "mistakes": [
+            {
+              "wrong": "foots",
+              "correct": "feet (foot是不规则复数)"
+            }
+          ],
+          "memory_tip": "Head and shoulders, knees and toes, knees and toes... (儿歌记忆法)",
+          "related": {
+            "prerequisite": "名词复数概念",
+            "next": "用形容词描述身体部位"
+          }
+        },
+        {
+          "card_id": "03-02",
+          "full_id": "英语-四上-03-02",
+          "title": "句型：描述身体特征",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习用 'I have...' 和 'He/She has...' 描述自己或他人的身体特征。",
+          "core_points": [
+            "I have [数量] [身体部位]. 我有[数量]个[身体部位]。",
+            "He/She has [数量] [身体部位]. 他/她有[数量]个[身体部位]。",
+            "例如：I have two eyes. He has a big nose."
+          ],
+          "example": {
+            "question": "描述小明：他有两只大眼睛。",
+            "steps": [
+              "确定主语是“他” (He)",
+              "使用“has”",
+              "描述“两只大眼睛” (two big eyes)"
+            ],
+            "answer": "He has two big eyes."
+          },
+          "mistakes": [
+            {
+              "wrong": "He have two eyes.",
+              "correct": "He has two eyes."
+            },
+            {
+              "wrong": "I has a big head.",
+              "correct": "I have a big head."
+            }
+          ],
+          "memory_tip": "I have，你我他她has，拥有宝贝要分清，别把have和has弄混淆。",
+          "related": {
+            "prerequisite": "身体部位词汇，人称代词",
+            "next": "更多形容词描述人物"
+          }
+        },
+        {
+          "card_id": "03-03",
+          "full_id": "英语-四上-03-03",
+          "title": "语法：动词have/has的用法",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习动词 'have' 和 'has' 表示“拥有”的用法。",
+          "core_points": [
+            "主语为 I, you, we, they 或复数名词时，用 have。",
+            "主语为 he, she, it 或单数名词时，用 has。",
+            "表示拥有、具备某种特征。",
+            "否定形式：don't have / doesn't have (四年级不强调，但可简单提及)"
+          ],
+          "example": {
+            "question": "选择正确的动词填空：She ____ a small mouth.",
+            "steps": [
+              "判断主语 'She' 是第三人称单数",
+              "选择正确的动词形式"
+            ],
+            "answer": "She has a small mouth."
+          },
+          "mistakes": [
+            {
+              "wrong": "My friend have a long arm.",
+              "correct": "My friend has a long arm."
+            }
+          ],
+          "memory_tip": "I, you, we, they用have，他她它和单数用has，记住口诀不犯错。",
+          "related": {
+            "prerequisite": "人称代词",
+            "next": "动词be的用法"
+          }
+        },
+        {
+          "card_id": "03-04",
+          "full_id": "英语-四上-03-04",
+          "title": "情景对话：介绍朋友",
+          "type": "情景对话卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何向他人介绍自己的朋友并简单描述其外貌特征。",
+          "core_points": [
+            "A: Who's that?",
+            "B: That's my friend, [名字].",
+            "A: What does he/she look like?",
+            "B: He/She has [特征]. (e.g., big eyes, short hair)",
+            "A: Oh, I see. He/She is cute/nice."
+          ],
+          "example": {
+            "question": "你指着远处一个有长头发的女孩，向朋友介绍她。",
+            "steps": [
+              "朋友问：那是谁？",
+              "你回答：那是我的朋友，Lily。",
+              "朋友问：她长什么样？",
+              "你回答：她有长头发。"
+            ],
+            "answer": "A: Who's that? B: That's my friend, Lily. A: What does she look like? B: She has long hair."
+          },
+          "mistakes": [
+            {
+              "wrong": "B: That's my friend. She long hair.",
+              "correct": "B: That's my friend. She has long hair."
+            }
+          ],
+          "memory_tip": "Who's that? 问朋友，Has什么？看特征，介绍朋友真有趣。",
+          "related": {
+            "prerequisite": "身体部位词汇，have/has句型",
+            "next": "描述人物性格"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "04",
+      "unit_name": "My home",
+      "cards": [
+        {
+          "card_id": "04-01",
+          "full_id": "英语-四上-04-01",
+          "title": "词汇：房间和家具",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习描述家里的房间和常见家具的英语单词。",
+          "core_points": [
+            "living room /ˈlɪvɪŋ ruːm/ n. 客厅",
+            "bedroom /ˈbɛdruːm/ n. 卧室",
+            "kitchen /ˈkɪtʃɪn/ n. 厨房",
+            "bathroom /ˈbæθruːm/ n. 浴室",
+            "study /ˈstʌdi/ n. 书房",
+            "bed /bɛd/ n. 床",
+            "sofa /ˈsoʊfə/ n. 沙发",
+            "table /ˈteɪbəl/ n. 桌子",
+            "TV /ˌtiːˈviː/ n. 电视"
+          ],
+          "example": {
+            "question": "看图写单词：这是一个卧室。",
+            "steps": [
+              "图片提示：一张床的房间",
+              "回忆“卧室”的英文单词"
+            ],
+            "answer": "bedroom"
+          },
+          "mistakes": [
+            {
+              "wrong": "livng room",
+              "correct": "living room"
+            }
+          ],
+          "memory_tip": "Living room会客，bedroom睡觉，kitchen做饭，bathroom洗澡，study学习好地方。",
+          "related": {
+            "prerequisite": "物品词汇",
+            "next": "描述物品位置"
+          }
+        },
+        {
+          "card_id": "04-02",
+          "full_id": "英语-四上-04-02",
+          "title": "语法：介词in, on, under表示位置",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习使用介词 'in', 'on', 'under' 来描述物品的相对位置。",
+          "core_points": [
+            "in: 在……里面 (The book is in the bag.)",
+            "on: 在……上面 (The apple is on the table.)",
+            "under: 在……下面 (The cat is under the chair.)",
+            "用于回答 'Where is...?' 的问题。"
+          ],
+          "example": {
+            "question": "选择正确的介词填空：The ruler is ____ the desk.",
+            "steps": [
+              "图片提示：尺子在桌子上面",
+              "选择表示“在上面”的介词"
+            ],
+            "answer": "on"
+          },
+          "mistakes": [
+            {
+              "wrong": "The pen is in the book.",
+              "correct": "The pen is on the book."
+            }
+          ],
+          "memory_tip": "In里头，on上面，under在下面，小猫小狗找位置，介词来帮忙。",
+          "related": {
+            "prerequisite": "物品词汇",
+            "next": "更多方位介词"
+          }
+        },
+        {
+          "card_id": "04-03",
+          "full_id": "英语-四上-04-03",
+          "title": "句型：询问和回答物品位置",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习用 'Where's the...?' 询问物品的位置，并用 'It's in/on/under the...' 回答。",
+          "core_points": [
+            "Where's the [物品]? [物品]在哪里？",
+            "It's in/on/under the [地点]. 它在[地点]的[里面/上面/下面]。",
+            "例：Where's the ball? It's under the bed."
+          ],
+          "example": {
+            "question": "看图，书在书包里。请你提问并回答书的位置。",
+            "steps": [
+              "提问书的位置",
+              "回答书在书包里"
+            ],
+            "answer": "A: Where's the book? B: It's in the bag."
+          },
+          "mistakes": [
+            {
+              "wrong": "Where's the cat? It's the chair under.",
+              "correct": "Where's the cat? It's under the chair."
+            }
+          ],
+          "memory_tip": "Where's the...? 问地点，in on under来回答，物品藏在哪，一问便知晓。",
+          "related": {
+            "prerequisite": "房间和家具词汇，介词in/on/under",
+            "next": "描述房间布局"
+          }
+        },
+        {
+          "card_id": "04-04",
+          "full_id": "英语-四上-04-04",
+          "title": "自然拼读：字母Ll和Bb的发音",
+          "type": "自然拼读卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母Ll和Bb在单词中的常见发音。",
+          "core_points": [
+            "Ll 发音：/l/，发音时舌尖抵住上齿龈，气流从舌头两侧流出。",
+            "示例词：light, living room, lamp, lion",
+            "Bb 发音：/b/，发音时双唇紧闭，然后突然张开，气流冲出，声带振动。",
+            "示例词：bed, bathroom, book, bag, bird"
+          ],
+          "example": {
+            "question": "听单词，判断包含/b/音的词：light, bed, lamp, book",
+            "steps": [
+              "听发音 /b/",
+              "在给出的单词中找出包含此音的词"
+            ],
+            "answer": "bed, book"
+          },
+          "mistakes": [
+            {
+              "wrong": "把/l/发成/r/",
+              "correct": "注意舌尖位置，/l/舌尖抵住上齿龈，/r/舌尖卷起不接触。"
+            }
+          ],
+          "memory_tip": "L L L，灯 light 亮堂堂；B B B，床 bed 睡得香。",
+          "related": {
+            "prerequisite": "字母A-Z的认知",
+            "next": "更多辅音字母发音"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "05",
+      "unit_name": "My family",
+      "cards": [
+        {
+          "card_id": "05-01",
+          "full_id": "英语-四上-05-01",
+          "title": "词汇：家庭成员",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习描述家庭成员的英语单词。",
+          "core_points": [
+            "father /ˈfɑːðər/ n. 父亲",
+            "mother /ˈmʌðər/ n. 母亲",
+            "brother /ˈbrʌðər/ n. 兄弟",
+            "sister /ˈsɪstər/ n. 姐妹",
+            "grandfather /ˈɡrændˌfɑːðər/ n. 祖父；外祖父",
+            "grandmother /ˈɡrændˌmʌðər/ n. 祖母；外祖母",
+            "family /ˈfæməli/ n. 家庭"
+          ],
+          "example": {
+            "question": "看图写单词：这是一位母亲。",
+            "steps": [
+              "图片提示：一位母亲",
+              "回忆“母亲”的英文单词"
+            ],
+            "answer": "mother"
+          },
+          "mistakes": [
+            {
+              "wrong": "grandfater",
+              "correct": "grandfather"
+            }
+          ],
+          "memory_tip": "Father, mother, brother, sister，家庭成员一家亲，grandfather, grandmother，爱心满满乐融融。",
+          "related": {
+            "prerequisite": "人称代词",
+            "next": "询问年龄"
+          }
+        },
+        {
+          "card_id": "05-02",
+          "full_id": "英语-四上-05-02",
+          "title": "句型：询问和回答年龄",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习用 'How old are you?' 和 'How old is he/she?' 询问年龄，并用 'I'm.../He's.../She's...' 回答。",
+          "core_points": [
+            "How old are you? 你多大了？",
+            "I'm [数字]. 我[数字]岁了。",
+            "How old is he/she? 他/她多大了？",
+            "He's/She's [数字]. 他/她[数字]岁了。",
+            "数字词汇：one-ten (复习)",
+            "形容词：old (年老的), young (年轻的)"
+          ],
+          "example": {
+            "question": "小明8岁了。请你提问并回答小明的年龄。",
+            "steps": [
+              "提问小明的年龄 (主语是he)",
+              "回答他8岁了"
+            ],
+            "answer": "A: How old is he? B: He's eight."
+          },
+          "mistakes": [
+            {
+              "wrong": "How old is you? I'm eight.",
+              "correct": "How old are you? I'm eight."
+            },
+            {
+              "wrong": "He is eight years old.",
+              "correct": "He's eight. (小学阶段通常省略years old)"
+            }
+          ],
+          "memory_tip": "How old问年龄，I'm, He's, She's来回答，数字记得要说清。",
+          "related": {
+            "prerequisite": "数字词汇，动词be的用法",
+            "next": "描述人物特征"
+          }
+        },
+        {
+          "card_id": "05-03",
+          "full_id": "英语-四上-05-03",
+          "title": "语法：动词be (am/is/are) 的用法",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习动词be (am, is, are) 的基本用法，表示“是”或“在”。",
+          "core_points": [
+            "I 用 am (I'm)",
+            "He, She, It 或单数名词用 is (He's, She's, It's)",
+            "You, We, They 或复数名词用 are (You're, We're, They're)",
+            "常用于介绍身份、年龄、状态或位置。",
+            "否定形式：am not / isn't / aren't"
+          ],
+          "example": {
+            "question": "选择正确的动词填空：My father ____ tall.",
+            "steps": [
+              "判断主语 'My father' 是第三人称单数",
+              "选择正确的be动词形式"
+            ],
+            "answer": "My father is tall."
+          },
+          "mistakes": [
+            {
+              "wrong": "I is a student.",
+              "correct": "I am a student."
+            },
+            {
+              "wrong": "They is friends.",
+              "correct": "They are friends."
+            }
+          ],
+          "memory_tip": "我用am，你用are，is跟着他她它，复数名词都用are，be动词家族真热闹。",
+          "related": {
+            "prerequisite": "人称代词",
+            "next": "be动词疑问句"
+          }
+        },
+        {
+          "card_id": "05-04",
+          "full_id": "英语-四上-05-04",
+          "title": "情景对话：介绍家庭成员",
+          "type": "情景对话卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何向他人介绍自己的家庭成员。",
+          "core_points": [
+            "A: Who's that man/woman?",
+            "B: That's my father/mother.",
+            "A: How old is he/she?",
+            "B: He's/She's [年龄].",
+            "A: Is he/she tall?",
+            "B: Yes, he/she is. / No, he/she isn't."
+          ],
+          "example": {
+            "question": "你向朋友介绍你的妈妈，她35岁，很漂亮。",
+            "steps": [
+              "朋友问：那位女士是谁？",
+              "你回答：那是我妈妈。",
+              "朋友问：她多大了？",
+              "你回答：她35岁。",
+              "朋友赞叹：她真漂亮！"
+            ],
+            "answer": "A: Who's that woman? B: That's my mother. A: How old is she? B: She's thirty-five. A: She's beautiful!"
+          },
+          "mistake": {
+            "wrong": "B: That's my mother. She thirty-five.",
+            "correct": "B: That's my mother. She's thirty-five."
+          },
+          "memory_tip": "Who's that? 问是谁，How old? 问年龄，介绍家人要清晰，be动词不忘记。",
+          "related": {
+            "prerequisite": "家庭成员词汇，be动词用法，年龄句型",
+            "next": "描述家庭活动"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "06",
+      "unit_name": "My clothes",
+      "cards": [
+        {
+          "card_id": "06-01",
+          "full_id": "英语-四上-06-01",
+          "title": "词汇：服装",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习描述常见服装的英语单词。",
+          "core_points": [
+            "T-shirt /ˈtiː ʃɜːrt/ n. T恤衫",
+            "shirt /ʃɜːrt/ n. 衬衫",
+            "dress /drɛs/ n. 连衣裙",
+            "skirt /skɜːrt/ n. 半身裙",
+            "pants /pænts/ n. 裤子 (美式)",
+            "shoes /ʃuːz/ n. 鞋子",
+            "socks /sɑːks/ n. 袜子",
+            "coat /koʊt/ n. 外套"
+          ],
+          "example": {
+            "question": "看图写单词：这是一件衬衫。",
+            "steps": [
+              "图片提示：一件衬衫",
+              "回忆“衬衫”的英文单词"
+            ],
+            "answer": "shirt"
+          },
+          "mistakes": [
+            {
+              "wrong": "skrit",
+              "correct": "skirt"
+            },
+            {
+              "wrong": "pant",
+              "correct": "pants (通常用复数形式)"
+            }
+          ],
+          "memory_tip": "T-shirt T恤，shirt衬衫，dress连衣裙，skirt小短裙，穿上新衣真高兴。",
+          "related": {
+            "prerequisite": "颜色词汇",
+            "next": "描述穿着"
+          }
+        },
+        {
+          "card_id": "06-02",
+          "full_id": "英语-四上-06-02",
+          "title": "句型：询问和回答穿着",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习用 'What are you wearing?' 询问穿着，并用 'I'm wearing...' 回答。",
+          "core_points": [
+            "What are you wearing? 你穿什么？",
+            "I'm wearing a [单数衣物]. 我穿着一件[单数衣物]。",
+            "I'm wearing [复数衣物]. 我穿着[复数衣物]。",
+            "I'm wearing a [颜色] [衣物]. 我穿着一件[颜色]的[衣物]。",
+            "例：I'm wearing a red T-shirt. I'm wearing blue pants."
+          ],
+          "example": {
+            "question": "小红穿着一条黄色的连衣裙。请你提问并回答她穿什么。",
+            "steps": [
+              "提问她穿什么 (主语是you，回答时变成I)",
+              "回答穿着一条黄色连衣裙"
+            ],
+            "answer": "A: What are you wearing? B: I'm wearing a yellow dress."
+          },
+          "mistakes": [
+            {
+              "wrong": "I wearing a T-shirt.",
+              "correct": "I'm wearing a T-shirt."
+            },
+            {
+              "wrong": "I'm wearing red pants.",
+              "correct": "I'm wearing red pants. (pants本身是复数，不需要a/an)"
+            }
+          ],
+          "memory_tip": "What are you wearing? 问穿什么，I'm wearing来回答，穿的什么记得说清楚。",
+          "related": {
+            "prerequisite": "服装词汇，颜色词汇",
+            "next": "描述他人的穿着"
+          }
+        },
+        {
+          "card_id": "06-03",
+          "full_id": "英语-四上-06-03",
+          "title": "自然拼读：字母组合sh和dr的发音",
+          "type": "自然拼读卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习字母组合sh和dr在单词中的常见发音。",
+          "core_points": [
+            "sh 发音：/ʃ/，像中文“吸”的声母，嘴唇向前突出。",
+            "示例词：shirt, shoes, she, fish",
+            "dr 发音：/dr/，是一个辅音连缀，发音时/d/和/r/紧密结合。",
+            "示例词：dress, drink, draw, drum"
+          ],
+          "example": {
+            "question": "听单词，判断包含/ʃ/音的词：dress, shoes, drink, fish",
+            "steps": [
+              "听发音 /ʃ/",
+              "在给出的单词中找出包含此音的词"
+            ],
+            "answer": "shoes, fish"
+          },
+          "mistakes": [
+            {
+              "wrong": "把/ʃ/发成/s/",
+              "correct": "注意嘴唇突出，发出摩擦音。"
+            }
+          ],
+          "memory_tip": "sh sh sh，衬衫 shirt 穿身上；dr dr dr，连衣裙 dress 真漂亮。",
+          "related": {
+            "prerequisite": "字母A-Z的认知",
+            "next": "更多字母组合发音"
+          }
+        },
+        {
+          "card_id": "06-04",
+          "full_id": "英语-四上-06-04",
+          "title": "情景对话：谈论穿着",
+          "type": "情景对话卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在日常生活中，运用所学词汇和句型谈论穿着。",
+          "core_points": [
+            "A: What are you wearing today?",
+            "B: I'm wearing a blue T-shirt and white pants.",
+            "A: Oh, it's nice! What about him/her?",
+            "B: He's/She's wearing a yellow dress.",
+            "A: They look great!"
+          ],
+          "example": {
+            "question": "你和朋友互相询问对方今天穿了什么。你穿了件绿色的外套，朋友穿了条红色的裙子。",
+            "steps": [
+              "你问朋友穿什么",
+              "朋友回答：我穿了一条红色的裙子。",
+              "朋友问你穿什么",
+              "你回答：我穿了一件绿色的外套。"
+            ],
+            "answer": "A: What are you wearing today? B: I'm wearing a red skirt. A: What about you? B: I'm wearing a green coat."
+          },
+          "mistakes": [
+            {
+              "wrong": "A: What are you wear? B: I am a red skirt.",
+              "correct": "A: What are you wearing? B: I'm wearing a red skirt."
+            }
+          ],
+          "memory_tip": "今天穿什么，问问好朋友，互相夸一夸，穿衣搭配真时尚。",
+          "related": {
+            "prerequisite": "服装词汇，What are you wearing?句型",
+            "next": "购物对话"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,443 @@
+{
+  "subject": "英语",
+  "grade": "五年级",
+  "semester": "上册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "五上",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片，专为人教版(PEP)小学英语五年级上册设计。",
+  "units": [
+    {
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [
+        {
+          "card_id": "T1-01",
+          "full_id": "英语-五上-T1-01",
+          "title": "have和has分不清？一张图搞定！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "have和has都表示“有”，但用法取决于主语的单复数。",
+          "core_points": [
+            "have用于I, you, we, they以及复数名词作主语。",
+            "has用于he, she, it以及单数名词作主语。",
+            "这是英语主谓一致中最基础也最重要的考点。",
+            "常用于描述人物特征、物品归属等。"
+          ],
+          "example": {
+            "question": "请选择正确的动词填空：She ____ a new schoolbag.",
+            "steps": [
+              "分析主语：She是第三人称单数。",
+              "根据规则选择：第三人称单数主语动词用has。"
+            ],
+            "answer": "has"
+          },
+          "mistakes": [
+            {
+              "wrong": "He have big eyes.",
+              "correct": "He has big eyes."
+            },
+            {
+              "wrong": "My teachers has many books.",
+              "correct": "My teachers have many books."
+            }
+          ],
+          "memory_tip": "三单他她它，动词has变化；其余主语用have，牢记口诀不犯错！",
+          "emotion_hook": "你的英语老师看到这个错误会皱眉！小学必考，赶紧收藏！",
+          "trap_point": "很多同学只记住了“三单用has”，却忘了I和you虽然是单数，但要用have。"
+        },
+        {
+          "card_id": "T1-02",
+          "full_id": "英语-五上-T1-02",
+          "title": "He和Him，She和Her，你真的用对了吗？",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "he/she是主格代词，him/her是宾格代词，它们在句子中充当不同成分。",
+          "core_points": [
+            "主格代词(he, she)做主语，通常放在动词前面。",
+            "宾格代词(him, her)做宾语，通常放在动词或介词后面。",
+            "区分句子的主语和宾语是关键。",
+            "常用于指代人物。"
+          ],
+          "example": {
+            "question": "选择正确的代词填空：____ is my P.E. teacher. I like ____ very much.",
+            "steps": [
+              "第一个空在句首，做主语，所以用主格。",
+              "第二个空在动词like之后，做宾语，所以用宾格。"
+            ],
+            "answer": "He, him"
+          },
+          "mistakes": [
+            {
+              "wrong": "I like he.",
+              "correct": "I like him."
+            },
+            {
+              "wrong": "Give the book to she.",
+              "correct": "Give the book to her."
+            }
+          ],
+          "memory_tip": "句首用主格，动宾用宾格；He/She是主，Him/Her是宾。",
+          "emotion_hook": "别再闹笑话了！一句话让你彻底分清主宾格，告别小学低级错误！",
+          "trap_point": "中文习惯不分主宾格，导致学生经常混淆。记住“谁发出动作就用主格，谁承受动作就用宾格”。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T2",
+      "unit_name": "发音挑战",
+      "cards": [
+        {
+          "card_id": "T2-01",
+          "full_id": "英语-五上-T2-01",
+          "title": "这个单词你确定会读吗？90%的人都读错的'衣服'！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "单词'clothes'的正确发音 /kloʊðz/。",
+          "core_points": [
+            "注意'th'发浊辅音/ð/，而不是清辅音/θ/。",
+            "单词末尾的'es'发/z/音。",
+            "整个单词只有一个音节，不要拆成两个。",
+            "口型和舌位要正确，舌尖轻触上齿，气流振动声带。"
+          ],
+          "example": {
+            "question": "请大声朗读单词 'clothes'。",
+            "steps": [
+              "先发/kloʊ/音。",
+              "舌尖抵住上齿，振动声带发出/ð/音。",
+              "紧接着发出/z/音。"
+            ],
+            "answer": "/kloʊðz/"
+          },
+          "mistakes": [
+            {
+              "wrong": "/kloʊθs/ (th发清辅音)",
+              "correct": "/kloʊðz/ (th发浊辅音)"
+            },
+            {
+              "wrong": "/kloʊz/ (忽略了th音)",
+              "correct": "/kloʊðz/"
+            }
+          ],
+          "memory_tip": "记住'th'是浊音，发音时喉咙要震动，像中文“克楼子”快速连读。",
+          "emotion_hook": "你的发音暴露了你的英语水平！一个单词，看你是不是英语高手！",
+          "pronunciation_tip": "发/ð/音时，舌尖轻触上齿，气流从舌头和上齿之间通过，声带振动。可以先练习发/ðɪs/ (this) 中的/ð/音。"
+        },
+        {
+          "card_id": "T2-02",
+          "full_id": "英语-五上-T2-02",
+          "title": "别再把'安静'读成'魁特'了！这个词发音超容易错！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "单词'quiet'的正确发音 /ˈkwaɪ.ət/。",
+          "core_points": [
+            "单词有2个音节：/kwaɪ/ 和 /ət/。",
+            "重音在第一个音节 /kwaɪ/。",
+            "第二个音节的'e'发弱读音/ə/。",
+            "注意区分'quiet' (安静的) 和 'quite' (非常地) 的发音。"
+          ],
+          "example": {
+            "question": "请大声朗读单词 'quiet'。",
+            "steps": [
+              "先发重读音节 /kwaɪ/ (像中文的“快”的音)。",
+              "再轻读第二个音节 /ət/ (像中文的“饿特”的轻音)。"
+            ],
+            "answer": "/ˈkwaɪ.ət/"
+          },
+          "mistakes": [
+            {
+              "wrong": "/kwaɪt/ (读成一个音节，与quite混淆)",
+              "correct": "/ˈkwaɪ.ət/ (两个音节)"
+            },
+            {
+              "wrong": "/kwɪ.ɛt/ (元音发音错误)",
+              "correct": "/ˈkwaɪ.ət/"
+            }
+          ],
+          "memory_tip": "记住“快呀特”！“快”重读，“呀特”轻读。",
+          "emotion_hook": "老师的耳朵都快受不了了！这个单词你读对了吗？",
+          "pronunciation_tip": "发音时注意将两个音节清晰地分开，第一个音节的/ai/是双元音，要发饱满。可以多听标准发音模仿。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T3",
+      "unit_name": "情景闯关",
+      "cards": [
+        {
+          "card_id": "T3-01",
+          "full_id": "英语-五上-T3-01",
+          "title": "新老师来了！你会用英语介绍Ta吗？",
+          "type": "情景闯关卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "在实际情景中，运用所学词汇和句型描述人物的外貌和性格。",
+          "core_points": [
+            "掌握描述外貌的句型：What does she/he look like? She/He is... She/He has...",
+            "掌握描述性格的句型：What is she/he like? She/He is...",
+            "常用形容词：tall, short, young, old, kind, strict, funny, quiet, long/short hair, big/small eyes。",
+            "注意主谓一致和have/has的正确使用。"
+          ],
+          "example": {
+            "question": "你的新英语老师来了！请用英语向你的朋友介绍Ta的外貌和性格。",
+            "steps": [
+              "先用一两句话描述外貌，如：She is tall. She has long hair and big eyes.",
+              "再用一两句话描述性格，如：She is kind and funny."
+            ],
+            "answer": "This is our new English teacher. She is tall and young. She has long hair and big eyes. She is kind and funny."
+          },
+          "mistakes": [],
+          "memory_tip": "外貌用“look like”，性格用“be like”；记住高矮胖瘦、长短大小，再加性格词！",
+          "emotion_hook": "开学第一天，用英语给新老师一个惊喜！你的英语表达能力是时候展现了！",
+          "scene_dialogue": [
+            "A: Look! Who's that?",
+            "B: That's our new English teacher!",
+            "A: Oh, what does she look like?",
+            "B: She is tall and has long hair. She has big eyes, too.",
+            "A: What is she like?",
+            "B: She is very kind and funny. I like her very much."
+          ]
+        },
+        {
+          "card_id": "T3-02",
+          "full_id": "英语-五上-T3-02",
+          "title": "挑战！用英语说出你的一天！",
+          "type": "情景闯关卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "在日常生活中，用英语描述自己的作息时间表。",
+          "core_points": [
+            "掌握日常活动词组：get up, eat breakfast, go to school, do homework, watch TV, go to bed等。",
+            "掌握时间表达：at six o'clock, in the morning/afternoon/evening。",
+            "连贯地描述一天的活动，注意动词时态和主谓一致。",
+            "可以加入频率副词：usually, often, sometimes。"
+          ],
+          "example": {
+            "question": "请用英语描述你早上7点到晚上9点的日常活动。",
+            "steps": [
+              "从早上起床开始，I usually get up at six in the morning.",
+              "接着是早餐、上学、午饭、下午的课、放学、做作业、晚饭、看电视、睡觉等。",
+              "每个活动搭配具体时间点。"
+            ],
+            "answer": "I usually get up at six in the morning. I eat breakfast at seven. I go to school at eight. In the afternoon, I do my homework. I watch TV at eight in the evening. Then I go to bed at nine."
+          },
+          "mistakes": [],
+          "memory_tip": "记住“时间+活动”的搭配，用“and then”连接不同活动。",
+          "emotion_hook": "你的时间管理，英语也能搞定！用英语说出你精彩的一天！",
+          "scene_dialogue": [
+            "A: What time do you get up?",
+            "B: I get up at six o'clock.",
+            "A: What do you do at seven in the morning?",
+            "B: I eat breakfast.",
+            "A: And what about in the evening?",
+            "B: I do my homework and watch TV."
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "T4",
+      "unit_name": "语法纠错",
+      "cards": [
+        {
+          "card_id": "T4-01",
+          "full_id": "英语-五上-T4-01",
+          "title": "这句话10个人9个说错！is和are用不对，英语白学！",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "be动词is和are的主谓一致问题，is用于单数主语，are用于复数主语和you。",
+          "core_points": [
+            "is用于第三人称单数（he, she, it）和单数名词。",
+            "are用于复数主语（we, they）和复数名词，以及第二人称（you）。",
+            "这是小学英语最基础的语法点，但仍有许多同学会犯错。",
+            "判断主语的单复数是关键。"
+          ],
+          "example": {
+            "question": "请纠正下面的句子：My teachers is kind.",
+            "steps": [
+              "分析主语：My teachers是复数名词。",
+              "根据主谓一致原则，复数主语应搭配are。"
+            ],
+            "answer": "My teachers are kind."
+          },
+          "mistakes": [
+            {
+              "wrong": "My schoolbag are heavy.",
+              "correct": "My schoolbag is heavy."
+            },
+            {
+              "wrong": "The books is on the desk.",
+              "correct": "The books are on the desk."
+            }
+          ],
+          "memory_tip": "单数is，复数are，You和我们都用are。",
+          "emotion_hook": "别让简单的错误拉低你的英语水平！这个语法点，你真的掌握了吗？",
+          "grammar_fix": "be动词is和are的选择取决于主语的单复数。主语是单数（或不可数名词）用is，主语是复数用are。"
+        },
+        {
+          "card_id": "T4-02",
+          "full_id": "英语-五上-T4-02",
+          "title": "你的书包在桌子'里'还是'上'？别再用错介词了！",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "in, on, under等表示方位的介词的正确使用。",
+          "core_points": [
+            "in表示“在……里面”。",
+            "on表示“在……上面”，且物体之间有接触。",
+            "under表示“在……下面”。",
+            "根据物品的实际相对位置选择正确的介词。",
+            "这是描述物体位置的基础语法。"
+          ],
+          "example": {
+            "question": "请纠正下面的句子：The pencil is in the desk. (实际情况是铅笔在桌子表面)",
+            "steps": [
+              "分析句意和实际情景：铅笔在桌子表面，而不是里面。",
+              "根据介词含义，'on'更符合情景。"
+            ],
+            "answer": "The pencil is on the desk."
+          },
+          "mistakes": [
+            {
+              "wrong": "My book is under the schoolbag. (实际在书包里)",
+              "correct": "My book is in the schoolbag."
+            },
+            {
+              "wrong": "The cat is on the bed. (实际在床底下)",
+              "correct": "The cat is under the bed."
+            }
+          ],
+          "memory_tip": "in是里面，on是上面，under是下面，形象记忆不犯错！",
+          "emotion_hook": "小学英语最基础的错误，你还在犯吗？一张图帮你搞定！",
+          "grammar_fix": "介词的选择需要结合语境和具体含义。in表示被包围，on表示接触表面，under表示在下方。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T5",
+      "unit_name": "亲子英语PK",
+      "cards": [
+        {
+          "card_id": "T5-01",
+          "full_id": "英语-五上-T5-01",
+          "title": "亲子PK：谁能最快猜出这个描述？",
+          "type": "亲子英语PK卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "通过英语描述和猜测，练习人物外貌和性格的词汇和句型。",
+          "core_points": [
+            "一人描述，一人猜测。",
+            "描述者需运用形容词和have/has句型。",
+            "猜测者需听懂关键词，快速反应。",
+            "可以描述家人、老师、朋友或卡通人物。"
+          ],
+          "example": {
+            "question": "家长描述：She is kind and funny. She has long hair and big eyes. Who is she?",
+            "steps": [
+              "孩子听描述，分析关键词：kind, funny, long hair, big eyes。",
+              "根据特征联想身边的人物。"
+            ],
+            "answer": "My English teacher!"
+          },
+          "mistakes": [],
+          "memory_tip": "描述要具体，猜测要迅速！",
+          "emotion_hook": "是时候证明谁才是家里的英语小能手了！爸妈和娃，谁更厉害？",
+          "battle_rule": "一人描述一个人物（可以是家人、老师或卡通人物），另一人根据描述猜出是谁。限定15秒内猜出，猜对加一分。三轮后分数高者胜。"
+        },
+        {
+          "card_id": "T5-02",
+          "full_id": "英语-五上-T5-02",
+          "title": "亲子PK：看图抢答！谁能最快说出日常活动？",
+          "type": "亲子英语PK卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "通过看图抢答，快速识别并用英语说出日常活动。",
+          "core_points": [
+            "准备一些日常活动的图片（如起床、吃饭、上学、做作业、看电视等）。",
+            "家长或孩子轮流出示图片，另一方抢答对应的英语表达。",
+            "比拼反应速度和词汇掌握度。",
+            "可加入时间表达，如：What time do you...?"
+          ],
+          "example": {
+            "question": "（出示一张孩子在写作业的图片）",
+            "steps": [
+              "看到图片，识别活动内容。",
+              "快速说出对应的英语短语。"
+            ],
+            "answer": "Do homework!"
+          },
+          "mistakes": [],
+          "memory_tip": "眼疾手快，脱口而出！",
+          "emotion_hook": "比拼手速和口语，看谁是反应王！不服来战！",
+          "battle_rule": "准备10张日常活动图片。一人出图，另一人抢答。先说出正确英语表达者得一分。限定每图5秒，超时不得分。10轮后分数高者胜。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T6",
+      "unit_name": "速记卡",
+      "cards": [
+        {
+          "card_id": "T6-01",
+          "full_id": "英语-五上-T6-01",
+          "title": "5个介词1分钟全记住！小学英语速记法大公开！",
+          "type": "速记卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "高效记忆表示方位的介词：in, on, under, near, behind, in front of。",
+          "core_points": [
+            "结合实物或身体动作进行记忆。",
+            "编成口诀或小故事，增加趣味性。",
+            "重复练习，形成肌肉记忆和条件反射。",
+            "理解每个介词的核心含义，而非死记硬背。"
+          ],
+          "example": {
+            "question": "请用“小球歌”记忆in, on, under。",
+            "steps": [
+              "准备一个小球和盒子。",
+              "边唱边做动作：小球in the box (放进去)，小球on the box (放上面)，小球under the box (放下面)。",
+              "重复多次。"
+            ],
+            "answer": "通过动作和歌谣，轻松记住介词。"
+          },
+          "mistakes": [],
+          "memory_tip": "in（里面）on（上面）under（下面），behind（后面）in front of（前面）near（旁边），跟着动作一起学！",
+          "emotion_hook": "背单词痛苦？那是你没找到对的方法！这个方法让你爱上背单词！",
+          "speed_method": "【小球歌记忆法】准备一个小球和一个盒子。边唱边做动作：\n'The ball is **in** the box!' (把球放进盒子里)\n'The ball is **on** the box!' (把球放在盒子上)\n'The ball is **under** the box!' (把球放在盒子下面)\n'The ball is **near** the box!' (把球放在盒子旁边)\n'The ball is **behind** the box!' (把球放在盒子后面)\n'The ball is **in front of** the box!' (把球放在盒子前面)\n重复数次，让身体记住介词的含义和用法。"
+        },
+        {
+          "card_id": "T6-02",
+          "full_id": "英语-五上-T6-02",
+          "title": "描述人/物不再词穷！万能形容词速记法！",
+          "type": "速记卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "高效记忆描述人物外貌、性格及物品特征的常用形容词。",
+          "core_points": [
+            "分类记忆：按描述对象（人/物）和特征（外貌/性格/大小/颜色）分类。",
+            "对比记忆：tall/short, big/small, new/old, kind/strict。",
+            "联想记忆：将单词与实际的人或物联系起来。",
+            "通过造句和口语练习巩固。"
+          ],
+          "example": {
+            "question": "如何快速记住描述人物外貌的形容词？",
+            "steps": [
+              "将形容词分组：高矮（tall, short），胖瘦（fat, thin），年龄（young, old）。",
+              "结合身边的人进行联想：My father is tall. My mother is thin. My grandpa is old."
+            ],
+            "answer": "通过分类和联想，形成记忆网络。"
+          },
+          "mistakes": [],
+          "memory_tip": "外貌分高矮胖瘦老少，性格分好坏动静，物品分大小新旧轻重颜色，分类记忆效率高！",
+          "emotion_hook": "告别只会'good'和'bad'的尴尬！用高级词汇震惊你的老师和同学！",
+          "speed_method": "【分类联想记忆法】\n1. **描述人物外貌：** \n   - **身高：** tall (高) vs. short (矮) \n   - **体型：** fat (胖) vs. thin (瘦) \n   - **年龄：** young (年轻) vs. old (年老) \n   - **头发：** long hair (长发) vs. short hair (短发) \n   - **眼睛：** big eyes (大眼睛) vs. small eyes (小眼睛) \n   *联想：* 你的爸爸是tall还是short？你的老师是young还是old？\n2. **描述人物性格：** \n   - **好性格：** kind (善良), funny (有趣的), quiet (安静的) \n   - **一般性格：** strict (严格的) \n   *联想：* 你的妈妈是kind还是strict？你的朋友是funny还是quiet？\n3. **描述物品特征：** \n   - **大小：** big (大) vs. small (小) \n   - **新旧：** new (新) vs. old (旧) \n   - **轻重：** heavy (重) vs. light (轻) \n   - **颜色：** red, blue, green, yellow... (各种颜色)\n   *联想：* 你的书包是big还是small？你的衣服是new还是old？"
+        }
+      ]
+    }
+  ]
+}

@@ -195,10 +195,62 @@ CARD_GEN_PROMPT_YUWEN = """你是一位资深的中国{stage}语文教研员，�
 # --- 通用 fallback ---
 CARD_GEN_PROMPT = CARD_GEN_PROMPT_MATH
 
+# --- 英语 标准卡 ---
+CARD_GEN_PROMPT_ENGLISH = """你是一位资深的中国{stage}英语教研员，精通人教版(PEP)英语教材。
+请为 **人教版(PEP)英语 {grade_full}** 生成一套完整的知识卡片（JSON格式）。
+
+要求：
+1. 按教材单元编排，每个单元3-6张卡片
+2. 卡片类型包括（根据年级灵活选用）：
+   - **词汇卡**: 本单元重点单词/短语，含音标、词性、例句、记忆方法
+   - **语法卡**: 核心语法点（如be动词/一般现在时/there be句型等），含结构规则和变化
+   - **句型卡**: 重点句型结构，含模板句和变形练习
+   - **自然拼读卡**: 字母/字母组合发音规则（低年级侧重）
+   - **易混词卡**: 易混淆的词汇辨析（如this/that, some/any等）
+   - **情景对话卡**: 实用对话场景（购物/问路/自我介绍等）
+   - **不规则动词卡**: 不规则动词过去式/过去分词变化（高年级）
+
+3. 每张卡片必须包含以下字段：
+   - card_id: 格式 "单元号-序号" 如 "01-01"
+   - full_id: 格式 "英语-{grade_short}-01-01"
+   - title: 知识点名称（如"词汇：school用品"、"语法：一般现在时"）
+   - type: 卡片类型（词汇卡/语法卡/句型卡/自然拼读卡/易混词卡/情景对话卡/不规则动词卡）
+   - difficulty: 难度 1-5
+   - importance: 重要性 1-5
+   - definition: 核心知识点（一句话概括）
+   - core_points: 要点列表（3-5条）
+   - example: {{question, steps[], answer}}（示例题目或练习）
+   - mistakes: [{{wrong, correct}}]（1-2个常见错误）
+   - memory_tip: 记忆口诀/助记方法
+   - related: {{prerequisite, next}}
+
+4. 知识点要覆盖该册教材的所有主要单元
+5. 小学三年级起开设英语课，三四年级侧重自然拼读卡、词汇卡、情景对话卡；五六年级增加语法卡、句型卡、易混词卡
+6. 例题要贴合课文内容，步骤清晰
+7. 记忆技巧要生动有趣，适合小学生
+
+请直接输出完整JSON（不要markdown代码块），格式如下：
+{{
+  "subject": "英语",
+  "grade": "{grade_name}",
+  "semester": "{semester}",
+  "textbook": "人教版(PEP)",
+  "grade_short": "{grade_short}",
+  "units": [
+    {{
+      "unit_id": "01",
+      "unit_name": "单元名称",
+      "cards": [...]
+    }}
+  ]
+}}
+"""
+
 # 按学科选择标准卡模板
 CARD_GEN_PROMPTS = {
     '数学': CARD_GEN_PROMPT_MATH,
     '语文': CARD_GEN_PROMPT_YUWEN,
+    '英语': CARD_GEN_PROMPT_ENGLISH,
 }
 
 # --- 数学 爆款卡 ---
@@ -307,10 +359,62 @@ BOOM_CARD_PROMPT_YUWEN = """你是一位小红书教育类爆款内容策划专�
 # 通用 fallback
 BOOM_CARD_PROMPT = BOOM_CARD_PROMPT_MATH
 
+# --- 英语 爆款卡 ---
+BOOM_CARD_PROMPT_ENGLISH = """你是一位小红书教育类爆款内容策划专家，同时精通人教版(PEP){stage}英语教材。
+请为 **人教版(PEP)英语 {grade_full}** 设计一套爆款知识卡片（JSON格式），用于生成高传播力的小红书笔记。
+
+爆款卡类型（共6种）：
+1. **易混词陷阱卡** (T1): 最容易混淆的单词/用法，制造"这两个词你一直用错了！"的冲突感。如this/that, I/my, is/are等。
+2. **发音挑战卡** (T2): 最容易读错的单词/字母组合，"这个单词你确定会读吗？"。展示常见发音错误vs正确发音。
+3. **情景闯关卡** (T3): 实际场景英语挑战，"去麦当劳点餐，你会用英语说吗？"。设计趣味情景题。
+4. **语法纠错卡** (T4): 常见语法错误，"这句话10个人9个说错！"。展示错误句子→正确句子的对比。
+5. **亲子英语PK卡** (T5): 家长vs孩子的英语PK题，"妈妈的英语居然不如三年级的娃！"。设计趣味英语抢答。
+6. **速记卡** (T6): 单词/语法速记技巧，"背单词原来可以这么简单！"。分享高效记忆方法。
+
+注意：三四年级侧重T1(易混词)/T2(发音)/T3(情景)/T5(亲子PK)/T6(速记)，T4语法纠错可简化为简单句式纠错。五六年级可涉及更复杂的语法纠错。
+
+每种类型2-3张卡片。每张卡片需包含：
+- card_id: "T类型号-序号" 如 "T1-01"
+- full_id: "英语-{grade_short}-T1-01"
+- title: 简短有冲击力的标题（如"this和that分不清？一张图搞定！"）
+- type: 具体类型名（易混词陷阱卡/发音挑战卡/情景闯关卡/语法纠错卡/亲子英语PK卡/速记卡）
+- difficulty: 1-5
+- importance: 1-5
+- definition: 核心知识点
+- core_points: 要点3-5条
+- example: {{question, steps[], answer}}
+- mistakes: [{{wrong, correct}}]（1-2个常见错误）
+- memory_tip: 口诀/顺口溜
+- emotion_hook: 情绪钩子（一句话引发好奇或共鸣）
+- trap_point / pronunciation_tip / scene_dialogue / grammar_fix / battle_rule / speed_method: 对应类型的特有字段
+
+知识点必须准确，符合该年级PEP教材范围！不要超纲！小学英语从三年级开始。
+
+请直接输出JSON（不要markdown代码块），格式如下：
+{{
+  "subject": "英语",
+  "grade": "{grade_name}",
+  "semester": "{semester}",
+  "textbook": "人教版(PEP)",
+  "grade_short": "{grade_short}",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片",
+  "units": [
+    {{
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [...]
+    }},
+    ...T2到T6...
+  ]
+}}
+"""
+
 # 按学科选择爆款卡模板
 BOOM_CARD_PROMPTS = {
     '数学': BOOM_CARD_PROMPT_MATH,
     '语文': BOOM_CARD_PROMPT_YUWEN,
+    '英语': BOOM_CARD_PROMPT_ENGLISH,
 }
 
 def extract_json(text):

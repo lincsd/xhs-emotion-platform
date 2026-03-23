@@ -1,0 +1,589 @@
+{
+  "subject": "英语",
+  "grade": "六年级",
+  "semester": "下册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "六下",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片，聚焦人教版(PEP)小学英语六年级下册核心知识点。",
+  "units": [
+    {
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [
+        {
+          "card_id": "T1-01",
+          "full_id": "英语-六下-T1-01",
+          "title": "“like”到底啥意思？别再傻傻分不清了！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "`like`既可以是“喜欢”的动词，也可以是“像…一样”的介词，用于描述特征。",
+          "core_points": [
+            "动词 `like` 后跟名词/动名词，表示喜好。",
+            "介词 `like` 后跟名词，表示“像...一样”，常用于 `What's ... like?` 句型，询问人物或事物的特征。"
+          ],
+          "example": {
+            "question": "请用`like`造两个句子，分别表示“喜欢”和“像...一样”。",
+            "steps": [
+              "表示“喜欢”：I like playing basketball.",
+              "表示“像...一样”：What's your new teacher like? She's kind and friendly."
+            ],
+            "answer": "I like playing basketball. (我喜欢打篮球) / What's your new teacher like? (你的新老师怎么样？)"
+          },
+          "mistakes": [
+            {
+              "wrong": "What does he like? (想问他是什么样的人)",
+              "correct": "What's he like?"
+            }
+          ],
+          "memory_tip": "问“什么样”，用 `is/are ... like`；问“喜欢啥”，用 `do/does ... like`。",
+          "emotion_hook": "这个问题90%的同学都答错过！你敢来挑战吗？",
+          "trap_point": "动词 `like` 问的是喜好，介词 `like` 问的是特征。"
+        },
+        {
+          "card_id": "T1-02",
+          "full_id": "英语-六下-T1-02",
+          "title": "“谁”和“谁的”一秒搞定！秒杀小升初易错点！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "`who`是疑问代词“谁”，`whose`是疑问代词“谁的/谁的物品”。",
+          "core_points": [
+            "`who` 用来询问人，在句中作主语或宾语。",
+            "`whose` 用来询问所属关系，后面常直接跟名词，也可以单独使用。"
+          ],
+          "example": {
+            "question": "选择正确的词填空：(Who / Whose) book is this?",
+            "steps": [
+              "分析句子结构，book是名词，前面需要一个表示所属关系的词。",
+              "根据`who`和`whose`的含义，选择`whose`。"
+            ],
+            "answer": "Whose book is this? (这是谁的书？)"
+          },
+          "mistakes": [
+            {
+              "wrong": "Who book is this?",
+              "correct": "Whose book is this?"
+            }
+          ],
+          "memory_tip": "`who`问“人”，`whose`问“物归谁”。",
+          "emotion_hook": "每次都分不清`who`和`whose`？看完这张卡片，你就是班级小达人！",
+          "trap_point": "`whose`可以直接作主语或宾语，也可以作定语修饰名词。"
+        },
+        {
+          "card_id": "T1-03",
+          "full_id": "英语-六下-T1-03",
+          "title": "别再把“健康”说错了！healthy和health的区别你知道吗？",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "`healthy`是形容词，意为“健康的”；`health`是名词，意为“健康”。",
+          "core_points": [
+            "`healthy` 用来修饰名词或作表语，说明某人或某物是健康的。",
+            "`health` 是一个抽象名词，表示健康状态，常作主语或宾语。"
+          ],
+          "example": {
+            "question": "选择正确的词填空：He is very (health / healthy).",
+            "steps": [
+              "分析句子结构，be动词后需要一个形容词作表语。",
+              "根据`health`和`healthy`的词性，选择`healthy`。"
+            ],
+            "answer": "He is very healthy. (他很健康。)"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is health.",
+              "correct": "He is healthy."
+            }
+          ],
+          "memory_tip": "形容词 `healthy` 有 `y`，像个小尾巴，修饰名词；名词 `health` 没尾巴，是本质。",
+          "emotion_hook": "你的英语是不是也经常犯这种低级错误？快来测测！",
+          "trap_point": "形容词修饰名词，名词作主语或宾语。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T2",
+      "unit_name": "发音挑战",
+      "cards": [
+        {
+          "card_id": "T2-01",
+          "full_id": "英语-六下-T2-01",
+          "title": "这个单词你确定会读？99%的人都读错了！",
+          "type": "发音挑战卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "`usually` (adv.) 意为“通常，经常”。",
+          "core_points": [
+            "重点在第二个`s`的发音，不是/s/，而是/ʒ/ (浊辅音，像中文“日”的音，但更轻柔)。",
+            "重音在第一个音节 `/ˈjuːʒuəli/`。"
+          ],
+          "example": {
+            "question": "请正确读出单词 `usually`。",
+            "steps": [
+              "注意`u`发/ju:/。",
+              "第二个`s`发/ʒ/。",
+              "重音放在第一个音节。"
+            ],
+            "answer": "/ˈjuːʒuəli/"
+          },
+          "mistakes": [
+            {
+              "wrong": "/'ju:suəli/",
+              "correct": "/'ju:ʒuəli/"
+            }
+          ],
+          "memory_tip": "`us-u-ally`，第二个`s`发音像“日”字，记住这个“日”！",
+          "emotion_hook": "你的发音暴露了你的英语水平！想知道怎么读才地道吗？",
+          "pronunciation_tip": "嘴巴放松，舌尖微卷，发出像中文“日”的音，但更轻柔，声带振动。"
+        },
+        {
+          "card_id": "T2-02",
+          "full_id": "英语-六下-T2-02",
+          "title": "quiet的“q”怎么读？别再读成“快特”了！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "`quiet` (adj.) 意为“安静的”。",
+          "core_points": [
+            "`qu`组合发/kw/的音。",
+            "`i`发/aɪ/的音，`et`发/ət/的音。",
+            "重音在第一个音节 `/ˈkwaɪət/`。"
+          ],
+          "example": {
+            "question": "请正确读出单词 `quiet`。",
+            "steps": [
+              "注意`qu`发/kw/。",
+              "`i`发/aɪ/。",
+              "重音在第一个音节。"
+            ],
+            "answer": "/ˈkwaɪət/"
+          },
+          "mistakes": [
+            {
+              "wrong": "/'kwaɪt/ (容易和quite混淆)",
+              "correct": "/'kwaɪət/"
+            }
+          ],
+          "memory_tip": "`q`后面跟着`u`，就像“快”字开头，然后是“啊特”。",
+          "emotion_hook": "老师听了都想纠正你！你的`quiet`读对了吗？",
+          "pronunciation_tip": "`qu`发/kw/，注意`i`是双元音/aɪ/，不是短音/ɪ/。"
+        },
+        {
+          "card_id": "T2-03",
+          "full_id": "英语-六下-T2-03",
+          "title": "th音大挑战！thirsty和hungry你真的会读吗？",
+          "type": "发音挑战卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "`thirsty` (adj.) 意为“口渴的”；`hungry` (adj.) 意为“饥饿的”。",
+          "core_points": [
+            "`th`在`thirsty`中发/θ/的音 (清辅音，舌尖轻触上齿，送气，声带不振动)。",
+            "`hungry`中的`h`发/h/的音，`ng`发/ŋ/的音 (鼻音)。"
+          ],
+          "example": {
+            "question": "请正确读出单词 `thirsty`。",
+            "steps": [
+              "舌尖轻触上齿，送气发/θ/。",
+              "发出/ɜːr/音。",
+              "最后加上/sti/。"
+            ],
+            "answer": "/ˈθɜːrsti/"
+          },
+          "mistakes": [
+            {
+              "wrong": "`thirsty`读成/sɜːrti/ (把`th`读成`s`)",
+              "correct": "/ˈθɜːrsti/"
+            }
+          ],
+          "memory_tip": "`th`像吐舌头，`h`像哈气，`ng`像打呼噜！",
+          "emotion_hook": "你的`th`音是不是总被老师说不标准？来，跟我一起练！",
+          "pronunciation_tip": "`th`的清辅音/θ/发音时，舌尖轻轻放在上下牙齿之间，然后吹气，声带不振动。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T3",
+      "unit_name": "情景闯关",
+      "cards": [
+        {
+          "card_id": "T3-01",
+          "full_id": "英语-六下-T3-01",
+          "title": "新同学转学来了，你会用英语介绍他吗？",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "运用形容词描述人物性格特征。",
+          "core_points": [
+            "掌握常用性格形容词（kind, friendly, smart, funny, quiet, helpful, active, polite）。",
+            "使用 `He/She is ...` 句型。",
+            "可以加上爱好或习惯等信息，让描述更生动。"
+          ],
+          "example": {
+            "question": "你的新同学David是什么样的人？请用英语描述他。",
+            "steps": [
+              "选择合适的性格形容词。",
+              "构成句子 `He is ...`。",
+              "可以补充一句他的日常行为来支持这个性格。"
+            ],
+            "answer": "He is very active and funny. He always makes us laugh. (他非常活泼有趣，总是逗我们笑。)"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is like kind.",
+              "correct": "He is kind."
+            }
+          ],
+          "memory_tip": "想描述一个人，就从性格特点开始说，再加一点他的行为习惯。",
+          "emotion_hook": "班里来了个新朋友，想用英语夸他？这个情景卡帮你！",
+          "scene_dialogue": "A: Who is the new boy? B: He is David. A: What's he like? B: He is very active and funny. He always makes us laugh."
+        },
+        {
+          "card_id": "T3-02",
+          "full_id": "英语-六下-T3-02",
+          "title": "去动物园玩，你会用英语比较动物吗？",
+          "type": "情景闯关卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "运用比较级形容词描述动物的特点。",
+          "core_points": [
+            "掌握比较级规则（-er, more...）。",
+            "常用比较词汇（taller, heavier, faster, bigger, smaller, older, younger）。",
+            "使用 `...is ...er than...` 或 `...is more...than...` 句型。"
+          ],
+          "example": {
+            "question": "比较大象和老虎，哪一个更大？哪一个更重？",
+            "steps": [
+              "思考大象和老虎的体型和重量。",
+              "使用 `bigger` 和 `heavier`。",
+              "构成比较句。"
+            ],
+            "answer": "An elephant is bigger than a tiger. An elephant is heavier than a tiger. (大象比老虎更大，大象比老虎更重。)"
+          },
+          "mistakes": [
+            {
+              "wrong": "A panda is more big than a cat.",
+              "correct": "A panda is bigger than a cat."
+            }
+          ],
+          "memory_tip": "比较两样东西，形容词后面加`-er`（或`more`），别忘了`than`！",
+          "emotion_hook": "动物园里那么多动物，快来和爸爸妈妈一起PK谁能说出更多比较句！",
+          "scene_dialogue": "A: Look at the two monkeys! This one is smaller. B: Yes, and that one is fatter than this one! A: Wow, the giraffe is taller than all the other animals!"
+        },
+        {
+          "card_id": "T3-03",
+          "full_id": "英语-六下-T3-03",
+          "title": "你有个外国笔友！第一次聊天，你会问什么？",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何询问笔友的国家、语言和个人信息。",
+          "core_points": [
+            "询问国家：`Where are you from?`",
+            "询问语言：`What language do you speak?`",
+            "询问兴趣爱好：`What do you like to do?`"
+          ],
+          "example": {
+            "question": "你第一次和笔友Lily聊天，你想知道她来自哪里，说什么语言。你会怎么问？",
+            "steps": [
+              "使用`Where are you from?`询问国家。",
+              "使用`What language do you speak?`询问语言。"
+            ],
+            "answer": "Where are you from? / What language do you speak?"
+          },
+          "mistakes": [
+            {
+              "wrong": "What country are you?",
+              "correct": "Where are you from?"
+            }
+          ],
+          "memory_tip": "问国家用`where`，问语言用`what language`。",
+          "emotion_hook": "你的笔友终于回信了！快用英语和他开启第一次对话吧！",
+          "scene_dialogue": "A: Hello, I'm Tom. Nice to meet you! B: Nice to meet you too, Tom. I'm Mike. Where are you from? A: I'm from China. What about you? B: I'm from Australia. I speak English."
+        }
+      ]
+    },
+    {
+      "unit_id": "T4",
+      "unit_name": "语法纠错",
+      "cards": [
+        {
+          "card_id": "T4-01",
+          "full_id": "英语-六下-T4-01",
+          "title": "“more bigger”错到离谱！这个语法陷阱你踩过吗？",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "比较级形容词的正确使用，避免双重比较级。",
+          "core_points": [
+            "单音节和部分双音节形容词变比较级时，词尾加`-er`。",
+            "多音节形容词变比较级时，词前加`more`。",
+            "严禁`more`和`-er`同时使用，造成双重比较级。"
+          ],
+          "example": {
+            "question": "纠正以下句子：This book is more bigger than that one.",
+            "steps": [
+              "识别形容词`big`是单音节词。",
+              "单音节词变比较级是双写末尾辅音字母再加`-er`。",
+              "删除`more`。"
+            ],
+            "answer": "This book is bigger than that one. (这本书比那本大。)"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is more taller than me.",
+              "correct": "He is taller than me."
+            },
+            {
+              "wrong": "The elephant is biger than the tiger.",
+              "correct": "The elephant is bigger than the tiger."
+            }
+          ],
+          "memory_tip": "比较级，要么加`-er`，要么加`more`，两个只能选一个！",
+          "emotion_hook": "老师看了都想哭！这些比较级错误你中招了吗？",
+          "grammar_fix": "比较级规则：短词加`-er`，长词加`more`。不规则变化要记牢 (good-better, bad-worse)。"
+        },
+        {
+          "card_id": "T4-02",
+          "full_id": "英语-六下-T4-02",
+          "title": "always放哪儿才对？一句话帮你搞定频率副词！",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "频率副词（always, usually, often, sometimes, hardly ever, never）在句中的正确位置。",
+          "core_points": [
+            "频率副词放在行为动词之前。",
+            "频率副词放在be动词、助动词、情态动词之后。"
+          ],
+          "example": {
+            "question": "纠正以下句子：He plays often football.",
+            "steps": [
+              "识别`plays`是行为动词。",
+              "频率副词`often`应放在行为动词之前。"
+            ],
+            "answer": "He often plays football. (他经常踢足球。)"
+          },
+          "mistakes": [
+            {
+              "wrong": "I always am late.",
+              "correct": "I am always late."
+            },
+            {
+              "wrong": "She usually doesn't get up early.",
+              "correct": "She doesn't usually get up early."
+            }
+          ],
+          "memory_tip": "频率副词是“小跟班”，跟在“be”后，跟在“行”前。",
+          "emotion_hook": "你的英语句子是不是总是怪怪的？原来是这里出错了！",
+          "grammar_fix": "频率副词口诀：Be后动前。 (Be动词后，行为动词前)。"
+        },
+        {
+          "card_id": "T4-03",
+          "full_id": "英语-六下-T4-03",
+          "title": "问性格和问职业，别再傻傻分不清了！",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "`What's...like?` 询问人物性格或事物特征；`What does...do?` 询问人物职业。",
+          "core_points": [
+            "`What's + 名词 + like?` 用于描述“是什么样子的”。",
+            "`What does/do + 名词 + do?` 用于询问“做什么工作”。"
+          ],
+          "example": {
+            "question": "纠正以下句子：What's your father do?",
+            "steps": [
+              "识别句子意图是询问职业。",
+              "询问职业应使用`What does/do...do?`句型。"
+            ],
+            "answer": "What does your father do? (你爸爸是做什么工作的？)"
+          },
+          "mistakes": [
+            {
+              "wrong": "What does your teacher like? (想问老师的性格)",
+              "correct": "What's your teacher like?"
+            },
+            {
+              "wrong": "What's your mother do?",
+              "correct": "What does your mother do?"
+            }
+          ],
+          "memory_tip": "`like`问特点，`do`问职业。",
+          "emotion_hook": "这两个句子你用对了吗？小升初常考，快来补课！",
+          "grammar_fix": "记住句型：`What's + 名词 + like?` (问特征)；`What does/do + 名词 + do?` (问职业)。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T5",
+      "unit_name": "亲子英语PK",
+      "cards": [
+        {
+          "card_id": "T5-01",
+          "full_id": "英语-六下-T5-01",
+          "title": "妈妈的英语居然不如三年级的娃！性格大猜谜，你敢来PK吗？",
+          "type": "亲子英语PK卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "通过描述性格特征，让对方猜人物。",
+          "core_points": [
+            "运用Unit 1学过的性格形容词（kind, funny, quiet, smart, helpful等）。",
+            "描述者不能直接说出名字，只能描述特征。",
+            "猜谜者可以提问 `Is he/she...?` 进行确认。"
+          ],
+          "example": {
+            "question": "描述一个家庭成员的性格，让对方猜是谁。",
+            "steps": [
+              "描述者：He is very smart and helpful. He always helps me with my homework. Who is he?",
+              "猜谜者：Is he Mike?"
+            ],
+            "answer": "Yes, he is! (或者：No, try again!)"
+          },
+          "mistakes": [],
+          "memory_tip": "记住关键词：描述性格，不要说名字！",
+          "emotion_hook": "谁是家里的英语小达人？快来和爸爸妈妈一起挑战！",
+          "battle_rule": "一人描述一个家庭成员或朋友的性格特点（如kind, funny, quiet等），另一人猜是谁。限时30秒，看谁猜对多！"
+        },
+        {
+          "card_id": "T5-02",
+          "full_id": "英语-六下-T5-02",
+          "title": "爸爸妈妈，你们的英语能流利描述一天吗？",
+          "type": "亲子英语PK卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "运用Unit 3的频率副词和日常活动词汇，描述自己的一天。",
+          "core_points": [
+            "掌握常用日常活动词汇（get up, eat breakfast, go to school, do homework, watch TV, play sports）。",
+            "正确使用频率副词（always, usually, often, sometimes, hardly ever, never）。",
+            "句子结构清晰，表达流畅。"
+          ],
+          "example": {
+            "question": "请用英语描述你的一天，至少包含3个活动和2个频率副词。",
+            "steps": [
+              "I usually get up at 6:30.",
+              "I always eat eggs for breakfast.",
+              "I often do my homework after school."
+            ],
+            "answer": "I usually get up at 6:30. I always eat eggs for breakfast. I often do my homework after school."
+          },
+          "mistakes": [],
+          "memory_tip": "记住：先说时间，再说活动，最后加上频率！",
+          "emotion_hook": "别以为孩子小就赢不了你！这个挑战让你知道谁才是真正的英语高手！",
+          "battle_rule": "孩子和家长轮流用英语描述自己一天的活动（至少3句话，包含频率副词），看谁的描述更流畅、词汇更丰富。"
+        },
+        {
+          "card_id": "T5-03",
+          "full_id": "英语-六下-T5-03",
+          "title": "动物园PK赛：谁能说出更多动物的比较级句子？",
+          "type": "亲子英语PK卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "运用Unit 2的比较级形容词比较动物。",
+          "core_points": [
+            "掌握比较级形容词（bigger, taller, faster, stronger, smaller, slower, longer, shorter）。",
+            "能够正确使用 `...is ...er than...` 或 `...is more...than...` 句型。",
+            "比较至少两种动物的不同之处。"
+          ],
+          "example": {
+            "question": "比较猫和狗，说出至少两个比较句。",
+            "steps": [
+              "A dog is bigger than a cat.",
+              "A dog is faster than a cat."
+            ],
+            "answer": "A dog is bigger than a cat. A dog is faster than a cat."
+          },
+          "mistakes": [],
+          "memory_tip": "看到两样东西，就想想它们哪里不同，用比较级说出来！",
+          "emotion_hook": "是时候展现你和孩子的英语实力了！谁是动物比较王？",
+          "battle_rule": "给出两张动物图片或说出两种动物名称，孩子和家长轮流说出比较句，看谁说得又快又准。例如：elephant vs mouse (bigger, smaller), horse vs turtle (faster, slower)。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T6",
+      "unit_name": "速记卡",
+      "cards": [
+        {
+          "card_id": "T6-01",
+          "full_id": "英语-六下-T6-01",
+          "title": "比较级变化太难记？这口诀让你秒变学霸！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "总结形容词变比较级的规则。",
+          "core_points": [
+            "一般情况：词尾加`-er` (tall - taller)。",
+            "辅音字母+y结尾：改y为i再加`-er` (happy - happier)。",
+            "重读闭音节结尾：双写末尾辅音字母再加`-er` (big - bigger)。",
+            "多音节词：词前加`more` (beautiful - more beautiful)。"
+          ],
+          "example": {
+            "question": "请根据口诀，将`thin`变为比较级。",
+            "steps": [
+              "`thin`是重读闭音节结尾。",
+              "根据口诀“重闭双写加`er`”，双写n再加`er`。"
+            ],
+            "answer": "thinner"
+          },
+          "mistakes": [],
+          "memory_tip": "短词直接`er`，`y`变`i`再`er`，重闭双写`er`，长词`more`放前。",
+          "emotion_hook": "还在死记硬背比较级？有了这个口诀，你再也不会错了！",
+          "speed_method": "记住四句口诀，对应四种变化：\n1. 一般加`er`：tall -> taller\n2. `y`变`i`加`er`：happy -> happier\n3. 重闭双写加`er`：big -> bigger\n4. 多音节前`more`：beautiful -> more beautiful"
+        },
+        {
+          "card_id": "T6-02",
+          "full_id": "英语-六下-T6-02",
+          "title": "频率副词多又乱？一首歌帮你全记住！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "记忆频率副词及其含义，掌握其表示的频率高低。",
+          "core_points": [
+            "掌握六个主要频率副词：always, usually, often, sometimes, hardly ever, never。",
+            "理解其频率从高到低的排序。",
+            "通过联想和韵律进行记忆。"
+          ],
+          "example": {
+            "question": "请按照频率从高到低说出至少4个频率副词。",
+            "steps": [
+              "回想频率副词家族歌。",
+              "从高频词开始回忆。"
+            ],
+            "answer": "Always (总是), usually (通常), often (经常), sometimes (有时)。"
+          },
+          "mistakes": [],
+          "memory_tip": "频率副词家族歌：`Always`总是百分百，`usually`通常八九成，`often`常常七八分，`sometimes`有时一半半，`hardly ever`几乎不，`never`从不零点零！",
+          "emotion_hook": "你的频率副词是不是总是分不清？这首歌让你边唱边记！",
+          "speed_method": "编成小歌谣，配上动作，从高频率到低频率排序记忆，形成肌肉记忆和韵律感。"
+        },
+        {
+          "card_id": "T6-03",
+          "full_id": "英语-六下-T6-03",
+          "title": "国家-国籍-语言傻傻分不清？这张图帮你秒懂！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习常见国家、其国民（国籍）和所说语言的对应关系。",
+          "core_points": [
+            "掌握Unit 4中出现的国家、国籍和语言词汇。",
+            "注意词形变化规律，如添加后缀`-ese`, `-an`, `-ish`等。",
+            "通过分组记忆提高效率。"
+          ],
+          "example": {
+            "question": "请说出中国对应的国籍和语言。",
+            "steps": [
+              "国家：China。",
+              "国籍：Chinese。",
+              "语言：Chinese。"
+            ],
+            "answer": "China (中国) - Chinese (中国人) - Chinese (汉语)"
+          },
+          "mistakes": [],
+          "memory_tip": "找规律，比如`China-Chinese`，`America-American`。记住后缀是关键！",
+          "emotion_hook": "看到外国人只会说Hello？这张卡片让你自信开口！",
+          "speed_method": "制作表格或思维导图，将国家、国籍、语言三者对应起来，分类记忆。例如：\n*   国家名 + `-ese` -> 国籍/语言 (Chinese, Japanese)\n*   国家名 + `-an` -> 国籍 (American, Canadian, Australian)\n*   国家名 + `-ish` -> 国籍/语言 (English, French)"
+        }
+      ]
+    }
+  ]
+}

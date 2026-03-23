@@ -43,7 +43,11 @@
             }
           ],
           "memory_tip": "人字头顶空，就是“大”；人字头顶有横，就是“天”。",
-          "emotion_hook": "一笔之差，意思全变！赶紧帮孩子纠正！"
+          "emotion_hook": "一笔之差，意思全变！赶紧帮孩子纠正！",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T1-02",
@@ -77,7 +81,11 @@
             }
           ],
           "memory_tip": "土地面积大，所以下横长；读书人有学问，所以上横长。",
-          "emotion_hook": "别小看这俩字，写错就扣分！快来挑战！"
+          "emotion_hook": "别小看这俩字，写错就扣分！快来挑战！",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T1-03",
@@ -111,7 +119,11 @@
             }
           ],
           "memory_tip": "人是站着的，撇捺不交叉；入是进去的，撇捺交叉着。",
-          "emotion_hook": "写反了就闹笑话！快来学习正确写法！"
+          "emotion_hook": "写反了就闹笑话！快来学习正确写法！",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         }
       ]
     },
@@ -142,7 +154,17 @@
           },
           "trap_point": "容易混淆“快乐”的心情和“音乐”的声音。",
           "memory_tip": "心情高兴读lè，听到声音读yuè。",
-          "emotion_hook": "小测验：一秒区分“乐”的读音！"
+          "emotion_hook": "小测验：一秒区分“乐”的读音！",
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T2-02",
@@ -167,7 +189,17 @@
           },
           "trap_point": "量词和副词的用法容易混淆。",
           "memory_tip": "动物数量读zhī，只有唯一读zhǐ。",
-          "emotion_hook": "读错就闹笑话！快来挑战！"
+          "emotion_hook": "读错就闹笑话！快来挑战！",
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T2-03",
@@ -192,7 +224,17 @@
           },
           "trap_point": "形容词用法和动词用法容易混淆。",
           "memory_tip": "形容词时读hǎo，表示“喜欢”就读hào。",
-          "emotion_hook": "一年级多音字，家长也容易混淆！"
+          "emotion_hook": "一年级多音字，家长也容易混淆！",
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         }
       ]
     },
@@ -222,7 +264,18 @@
             "answer": "1. mā ma (一声、轻声)；2. bà ba (四声、轻声)"
           },
           "pinyin_tip": "声调标得准，拼音才读对，意思不混淆，交流没障碍！",
-          "emotion_hook": "声调标错，意思全变！快来挑战！"
+          "emotion_hook": "声调标错，意思全变！快来挑战！",
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
+          "memory_tip": "正确识别和标注拼音的声调。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T3-02",
@@ -246,7 +299,18 @@
             "answer": "1. 吃(chī)饭；2. 坐(zuò)下"
           },
           "pinyin_tip": "平舌尖平，翘舌尖翘，多读多练，自然分晓。",
-          "emotion_hook": "读错就变味了！快来测试你家娃！"
+          "emotion_hook": "读错就变味了！快来测试你家娃！",
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
+          "memory_tip": "区分平舌音(z, c, s)和翘舌音(zh, ch, sh)",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T3-03",
@@ -270,7 +334,18 @@
             "answer": "C. yi"
           },
           "pinyin_tip": "整体认读不用拼，记住它们好开心！",
-          "emotion_hook": "掌握这些，拼音考试不丢分！"
+          "emotion_hook": "掌握这些，拼音考试不丢分！",
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
+          "memory_tip": "识别并正确读出整体认读音节，无需拼读。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         }
       ]
     },
@@ -301,7 +376,17 @@
           },
           "trap_point": "中间两笔容易写成竖和撇，或者先写左右两边。",
           "memory_tip": "中间两点先出头，左右两撇再跟上。",
-          "emotion_hook": "笔顺不对，字就变丑！快来学习正确笔顺！"
+          "emotion_hook": "笔顺不对，字就变丑！快来学习正确笔顺！",
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T4-02",
@@ -326,7 +411,17 @@
           },
           "trap_point": "容易先写两边再写中间的竖钩。",
           "memory_tip": "一竖钩，两边撇捺来环绕。",
-          "emotion_hook": "笔顺是汉字的基础！别让孩子输在起跑线！"
+          "emotion_hook": "笔顺是汉字的基础！别让孩子输在起跑线！",
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T4-03",
@@ -351,7 +446,17 @@
           },
           "trap_point": "横折弯钩容易被拆开写，或笔顺混乱。",
           "memory_tip": "左撇一出头，中间大弯钩，右边小撇收。",
-          "emotion_hook": "学会这个字，你的孩子就是班级小榜样！"
+          "emotion_hook": "学会这个字，你的孩子就是班级小榜样！",
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         }
       ]
     },
@@ -382,7 +487,18 @@
           },
           "challenge_rule": "轮流接龙背诵，错一字或卡壳3秒算输。",
           "battle_rule": "家庭成员轮流接龙背诵，背错或卡壳即失败。",
-          "emotion_hook": "快来挑战，看看谁是家里的诗词小达人！"
+          "emotion_hook": "快来挑战，看看谁是家里的诗词小达人！",
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
+          "memory_tip": "背诵唐代诗人李白的《静夜思》。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T5-02",
@@ -407,7 +523,18 @@
           },
           "challenge_rule": "亲子接龙背诵，接不上或接错算输。",
           "battle_rule": "家庭成员接龙背诵，接不上或接错即失败。",
-          "emotion_hook": "这首诗太有趣了，快和孩子一起玩起来！"
+          "emotion_hook": "这首诗太有趣了，快和孩子一起玩起来！",
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
+          "memory_tip": "背诵唐代诗人王维的《画》。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T5-03",
@@ -432,7 +559,18 @@
           },
           "challenge_rule": "计时背诵，时间短者胜。",
           "battle_rule": "计时背诵，用时最短者获胜。",
-          "emotion_hook": "这首诗气势磅礴，快和孩子一起感受！"
+          "emotion_hook": "这首诗气势磅礴，快和孩子一起感受！",
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
+          "memory_tip": "背诵唐代诗人王之涣的《登鹳雀楼》。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         }
       ]
     },
@@ -464,7 +602,18 @@
             "answer": "晴朗的一天，小兔、小鸟和小松鼠在绿油油的草地上玩耍。小兔在吃青草，小鸟在树枝上唱歌，小松鼠在采松果。它们玩得可开心了！"
           },
           "reading_formula": "看清（时间、地点、人物/动物）→ 想清（发生什么、怎么发生）→ 说清（用好词好句连成话）",
-          "emotion_hook": "看图写话不再愁！这个万能公式赶紧收藏！"
+          "emotion_hook": "看图写话不再愁！这个万能公式赶紧收藏！",
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
+          "memory_tip": "通过观察图片，用简单连贯的句子描述画面内容。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T6-02",
@@ -489,7 +638,18 @@
             "answer": "一个阳光明媚的下午，妈妈带着小明来到公园里玩。妈妈温柔地推着小明荡秋千，小明开心地笑了。他们玩得真开心啊！"
           },
           "reading_formula": "场景描写三要素：人物、地点、事件、心情。",
-          "emotion_hook": "让孩子爱上看图写话！高分秘籍大公开！"
+          "emotion_hook": "让孩子爱上看图写话！高分秘籍大公开！",
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
+          "memory_tip": "通过观察亲子活动图片，用简单句子描述画面内容。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T6-03",
@@ -514,7 +674,18 @@
             "answer": "小红端端正正地坐在书桌前，桌上放着打开的语文书和铅笔。她正低着头，一笔一画地认真写作业。小红学习得真专心啊！"
           },
           "reading_formula": "细节观察法：看人物表情、动作，看环境物品，再串联成故事。",
-          "emotion_hook": "看图写话不再是难题！简单三步，搞定高分！"
+          "emotion_hook": "看图写话不再是难题！简单三步，搞定高分！",
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
+          "memory_tip": "通过观察学习图片，用简单句子描述画面内容。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         }
       ]
     }

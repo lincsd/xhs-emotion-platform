@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260322h';
+      var BUILD='20260323a';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);}
@@ -3819,7 +3819,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260322h'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260323a'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -8975,7 +8975,8 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
       // ── 学科配置 ──
       const SUBJECTS = [
         { key: '数学', icon: '📐', label: '数学' },
-        { key: '语文', icon: '📖', label: '语文' }
+        { key: '语文', icon: '📖', label: '语文' },
+        { key: '英语', icon: '🔤', label: '英语' }
       ];
 
       // ── 状态 ──
@@ -9066,6 +9067,8 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
 
         // 渲染学科选择器
         renderSubjectSelector(filterBar);
+        // 渲染AI搜索栏
+        renderSearchBar(filterBar);
         // 渲染年级选择器
         renderGradeSelector(filterBar);
 
@@ -9267,7 +9270,22 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         '笔顺挑战卡': { bg:'#fce4ec', fg:'#ad1457', icon:'🖊️' },
         '亲子古诗PK卡': { bg:'#e8f5e9', fg:'#2e7d32', icon:'⚔️' },
         '古诗默写挑战卡': { bg:'#f3e5f5', fg:'#6a1b9a', icon:'📝' },
-        '成语纠错卡': { bg:'#ffebee', fg:'#c62828', icon:'🔎' }
+        '成语纠错卡': { bg:'#ffebee', fg:'#c62828', icon:'🔎' },
+        // 英语 标准
+        '词汇卡': { bg:'#e3f2fd', fg:'#1565c0', icon:'📝' },
+        '语法卡': { bg:'#fff3e0', fg:'#e65100', icon:'📏' },
+        '句型卡': { bg:'#e8f5e9', fg:'#2e7d32', icon:'💬' },
+        '自然拼读卡': { bg:'#f3e5f5', fg:'#6a1b9a', icon:'🔤' },
+        '易混词卡': { bg:'#fce4ec', fg:'#c62828', icon:'🔀' },
+        '情景对话卡': { bg:'#e0f7fa', fg:'#00838f', icon:'🗣️' },
+        '不规则动词卡': { bg:'#e8eaf6', fg:'#283593', icon:'🔄' },
+        // 英语 爆款
+        '易混词陷阱卡': { bg:'#fff3e0', fg:'#e65100', icon:'⚡' },
+        '发音挑战卡': { bg:'#fce4ec', fg:'#ad1457', icon:'🎤' },
+        '情景闯关卡': { bg:'#e3f2fd', fg:'#1565c0', icon:'🎮' },
+        '语法纠错卡': { bg:'#ffebee', fg:'#c62828', icon:'🔍' },
+        '亲子英语PK卡': { bg:'#e8f5e9', fg:'#2e7d32', icon:'⚔️' },
+        '速记卡': { bg:'#fff8e1', fg:'#f57f17', icon:'⏱️' }
       };
       const _stars = n => '★'.repeat(n) + '☆'.repeat(5 - n);
 
@@ -9508,7 +9526,93 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         ctx.fillStyle='#2e7d32';for(const l of cl){ctx.fillText(l,x+16,ty);ty+=18;}return y+tot+12;
       }
 
-      return { init, selectUnit, showDetail, downloadCard, switchPack, switchGrade, switchSubject, _getPacks: () => PACKS };
+      /* ---- AI智能搜索 ---- */
+      let _searchTimeout = null;
+      function renderSearchBar(filterBar) {
+        let searchWrap = filterBar.querySelector('.kc-search-wrap');
+        if (!searchWrap) {
+          searchWrap = document.createElement('div');
+          searchWrap.className = 'kc-search-wrap';
+          searchWrap.style.cssText = 'margin-bottom:12px;position:relative';
+          // Insert after the subject bar
+          const subjectBar = filterBar.querySelector('.kc-subject-bar');
+          if (subjectBar && subjectBar.nextSibling) {
+            filterBar.insertBefore(searchWrap, subjectBar.nextSibling);
+          } else {
+            filterBar.appendChild(searchWrap);
+          }
+        }
+        searchWrap.innerHTML = `
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="flex:1;position:relative">
+              <input id="kc-ai-search" type="text" placeholder="🔍 AI搜索: 例如「混合运算怎么算」「apple怎么读」" 
+                style="width:100%;padding:10px 40px 10px 14px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;outline:none;transition:border-color .2s;box-sizing:border-box"
+                onfocus="this.style.borderColor='var(--primary)'" 
+                onblur="this.style.borderColor='#e0e0e0'"
+                onkeydown="if(event.key==='Enter')KnowledgeCards.aiSearch()">
+              <button onclick="KnowledgeCards.aiSearch()" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:18px;color:#666">🔎</button>
+            </div>
+            <button onclick="KnowledgeCards.clearSearch()" id="kc-search-clear" style="display:none;padding:8px 14px;border:1px solid #ddd;border-radius:8px;background:#fff;cursor:pointer;font-size:13px;white-space:nowrap">✕ 清除</button>
+          </div>
+          <div id="kc-search-results" style="display:none;margin-top:12px"></div>`;
+      }
+
+      async function aiSearch() {
+        const input = document.getElementById('kc-ai-search');
+        const resultsEl = document.getElementById('kc-search-results');
+        const clearBtn = document.getElementById('kc-search-clear');
+        if (!input || !resultsEl) return;
+        
+        const query = input.value.trim();
+        if (!query) return;
+        
+        resultsEl.style.display = 'block';
+        resultsEl.innerHTML = '<div style="text-align:center;padding:20px;color:#666">🔍 AI搜索中...</div>';
+        if (clearBtn) clearBtn.style.display = 'inline-block';
+
+        try {
+          const r = await fetch('/api/ai-match-cards', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({query, subject: currentSubject})
+          });
+          const d = await r.json();
+          if (d.ok && d.results && d.results.length > 0) {
+            let h = `<div style="font-size:12px;color:#888;margin-bottom:8px">找到 ${d.results.length} 张相关卡片 (共 ${d.total} 张)</div>`;
+            h += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px">';
+            d.results.forEach(c => {
+              const tc = _tc[c.type] || { bg:'#f5f5f5', fg:'#333', icon:'📄' };
+              h += `<div onclick="KnowledgeCards.showDetail('${c.full_id||''}')" style="background:${tc.bg};border-radius:10px;padding:12px;cursor:pointer;border:1px solid ${tc.fg}22;transition:all .2s" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+                  <span style="font-size:16px">${tc.icon}</span>
+                  <span style="font-size:11px;padding:2px 8px;background:${tc.fg};color:#fff;border-radius:8px">${c.type||''}</span>
+                  <span style="font-size:11px;color:#888;margin-left:auto">${c._source||''}</span>
+                </div>
+                <div style="font-weight:700;font-size:14px;color:${tc.fg};margin-bottom:4px">${c.title||''}</div>
+                <div style="font-size:12px;color:#666;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${c.definition||''}</div>
+                ${c.memory_tip?'<div style="font-size:11px;color:#e65100;margin-top:4px">💡 '+c.memory_tip+'</div>':''}
+              </div>`;
+            });
+            h += '</div>';
+            resultsEl.innerHTML = h;
+          } else {
+            resultsEl.innerHTML = '<div style="text-align:center;padding:20px;color:#aaa">未找到相关卡片，换个关键词试试？</div>';
+          }
+        } catch(e) {
+          resultsEl.innerHTML = `<div style="text-align:center;padding:20px;color:#e74c3c">搜索失败: ${e.message}</div>`;
+        }
+      }
+
+      function clearSearch() {
+        const input = document.getElementById('kc-ai-search');
+        const resultsEl = document.getElementById('kc-search-results');
+        const clearBtn = document.getElementById('kc-search-clear');
+        if (input) input.value = '';
+        if (resultsEl) { resultsEl.style.display = 'none'; resultsEl.innerHTML = ''; }
+        if (clearBtn) clearBtn.style.display = 'none';
+      }
+
+      return { init, selectUnit, showDetail, downloadCard, switchPack, switchGrade, switchSubject, aiSearch, clearSearch, _getPacks: () => PACKS };
     })();
 
     // ============ 🧪 Prompt 工程库模块 ============
@@ -10164,8 +10268,12 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
     // ============ 📝 笔记工坊模块 ============
     const NoteWorkshop = (() => {
       let inited = false;
-      /* -- 已生成笔记数据 (由 generate_xhs_note.py 产出) -- */
-      const NOTES = [
+      let allNotes = [];  // 动态加载 + 内置demo
+      let generating = false;
+      let filterTemplate = '全部';
+
+      /* -- 内置Demo笔记 -- */
+      const DEMO_NOTES = [
         {
           note_id: "数学_三下_反差型_20260321_2217",
           title: "三年级数学陷阱题！🤯 90%家长都会错，答案你绝对想不到！",
@@ -10230,8 +10338,11 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         '反差型': {icon:'⚡',color:'#e74c3c',desc:'设置认知冲突→暴露错误→揭示正确→引发讨论',cards:'陷阱卡/辨析卡'},
         '挑战型': {icon:'🏆',color:'#f39c12',desc:'发起挑战→限时→公布答案→评级',cards:'挑战卡/速算卡'},
         '干货型': {icon:'📚',color:'#27ae60',desc:'痛点引入→系统知识点→口诀总结→收藏引导',cards:'方法卡/公式卡/概念卡'},
-        '故事型': {icon:'📖',color:'#3498db',desc:'生活场景→遇到问题→数学解决→触动共鸣',cards:'生活卡/思维卡/对战卡'}
+        '故事型': {icon:'📖',color:'#3498db',desc:'生活场景→遇到问题→解决方案→触动共鸣',cards:'生活卡/思维卡/对战卡'}
       };
+
+      const NW_GRADES = ['一上','一下','二上','二下','三上','三下','四上','四下','五上','五下','六上','六下'];
+      const NW_SUBJECTS = ['数学','语文','英语'];
 
       const ROLE_PIPELINE = [
         {role:'R1',name:'笔记策划师',icon:'🧠',desc:'选卡+叙事弧线+轮播规划'},
@@ -10287,12 +10398,95 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         return svg;
       }
 
+      /* ---- 从API加载笔记 ---- */
+      async function loadNotes(){
+        try {
+          const r = await fetch('/api/generated-notes');
+          if(r.ok){
+            const d = await r.json();
+            if(d.notes && d.notes.length) {
+              // 合并API笔记(去重) 与 demo笔记
+              const apiIds = new Set(d.notes.map(n=>n.note_id));
+              const demos = DEMO_NOTES.filter(n=>!apiIds.has(n.note_id));
+              allNotes = [...d.notes, ...demos];
+              return;
+            }
+          }
+        } catch(e) { console.log('loadNotes fallback to demo', e); }
+        allNotes = [...DEMO_NOTES];
+      }
+
+      /* ---- 生成笔记 ---- */
+      async function generateNote(){
+        if(generating) return;
+        const subj = document.getElementById('nw-gen-subject')?.value || '数学';
+        const grade = document.getElementById('nw-gen-grade')?.value || '三下';
+        const tmpl = document.getElementById('nw-gen-template')?.value || '反差型';
+        const btn = document.getElementById('nw-gen-btn');
+        const status = document.getElementById('nw-gen-status');
+
+        generating = true;
+        if(btn) { btn.disabled = true; btn.textContent = '🔄 AI生成中...'; }
+        if(status) status.innerHTML = '<div style="padding:12px;color:#3498db;font-size:13px">⏳ 七角色AI流水线启动中，预计30-60秒...</div>';
+
+        try {
+          const r = await fetch('/api/generate-note', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({subject: subj, grade_short: grade, template: tmpl})
+          });
+          const d = await r.json();
+          if(d.ok && d.note) {
+            allNotes.unshift(d.note);
+            if(status) status.innerHTML = '<div style="padding:12px;color:#27ae60;font-size:13px">✅ 笔记生成成功！已添加到列表</div>';
+            showToast('✅ 笔记生成成功！');
+            setTimeout(()=> renderList(), 1200);
+          } else {
+            if(status) status.innerHTML = `<div style="padding:12px;color:#e74c3c;font-size:13px">❌ ${d.error||'生成失败'}</div>`;
+          }
+        } catch(e) {
+          if(status) status.innerHTML = `<div style="padding:12px;color:#e74c3c;font-size:13px">❌ 网络错误: ${e.message}</div>`;
+        } finally {
+          generating = false;
+          if(btn) { btn.disabled = false; btn.textContent = '🚀 AI一键生成笔记'; }
+        }
+      }
+
       /* ---- 列表视图 ---- */
       function renderList(){
         const el = document.getElementById('nw-container');
         if(!el) return;
+        const NOTES = allNotes;
         let h = '';
 
+        /* == 生成面板 == */
+        h += `<div style="background:linear-gradient(135deg,#667eea11,#764ba211);border:2px solid #667eea33;border-radius:16px;padding:22px;margin-bottom:24px">
+          <div style="font-weight:800;font-size:17px;margin-bottom:14px">🎯 从知识卡片生成小红书笔记</div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+            <div style="flex:1;min-width:120px">
+              <label style="font-size:12px;color:#888;display:block;margin-bottom:4px">📚 学科</label>
+              <select id="nw-gen-subject" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid #ddd;font-size:14px;background:#fff">
+                ${NW_SUBJECTS.map(s=>'<option value="'+s+'">'+s+'</option>').join('')}
+              </select>
+            </div>
+            <div style="flex:1;min-width:120px">
+              <label style="font-size:12px;color:#888;display:block;margin-bottom:4px">🎓 年级</label>
+              <select id="nw-gen-grade" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid #ddd;font-size:14px;background:#fff">
+                ${NW_GRADES.map(g=>'<option value="'+g+'">'+g+'</option>').join('')}
+              </select>
+            </div>
+            <div style="flex:1;min-width:160px">
+              <label style="font-size:12px;color:#888;display:block;margin-bottom:4px">📝 笔记模板</label>
+              <select id="nw-gen-template" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid #ddd;font-size:14px;background:#fff">
+                ${Object.entries(TEMPLATE_META).map(([k,v])=>'<option value="'+k+'">'+v.icon+' '+k+' - '+v.cards+'</option>').join('')}
+              </select>
+            </div>
+            <button id="nw-gen-btn" onclick="NoteWorkshop.generateNote()" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:10px;padding:10px 24px;cursor:pointer;font-size:14px;font-weight:700;white-space:nowrap;min-height:40px;transition:all .2s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">🚀 AI一键生成笔记</button>
+          </div>
+          <div id="nw-gen-status"></div>
+        </div>`;
+
+        /* == 统计卡片 == */
         h += '<div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px">';
         h += `<div style="flex:1;min-width:140px;background:linear-gradient(135deg,#fff9e6,#fff3cd);border-radius:12px;padding:16px;text-align:center">
           <div style="font-size:28px;font-weight:800;color:#e74c3c">${NOTES.length}</div>
@@ -10305,8 +10499,13 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         h += `<div style="flex:1;min-width:140px;background:linear-gradient(135deg,#eaf2f8,#d4e6f1);border-radius:12px;padding:16px;text-align:center">
           <div style="font-size:28px;font-weight:800;color:#3498db">${tmplSet.size}/4</div>
           <div style="font-size:13px;color:#888;margin-top:4px">模板覆盖</div></div>`;
+        const subjs = new Set(NOTES.map(n=>{ const m=n.note_id.match(/^(数学|语文|英语)/); return m?m[1]:''; }).filter(Boolean));
+        h += `<div style="flex:1;min-width:140px;background:linear-gradient(135deg,#f5eef8,#ebdef0);border-radius:12px;padding:16px;text-align:center">
+          <div style="font-size:28px;font-weight:800;color:#8e44ad">${subjs.size}/3</div>
+          <div style="font-size:13px;color:#888;margin-top:4px">学科覆盖</div></div>`;
         h += '</div>';
 
+        /* == 七角色流水线 == */
         h += '<div style="background:#f8f9fa;border-radius:12px;padding:18px 20px;margin-bottom:24px">';
         h += '<div style="font-weight:700;margin-bottom:12px;font-size:15px">\uD83D\uDD04 七角色 AI 流水线</div>';
         h += '<div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center">';
@@ -10319,10 +10518,12 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         });
         h += '</div></div>';
 
+        /* == 模板卡片 == */
         h += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:24px">';
         Object.entries(TEMPLATE_META).forEach(([name,m])=>{
           const cnt = NOTES.filter(n=>n.template===name).length;
-          h += `<div style="background:#fff;border:2px solid ${m.color}22;border-radius:12px;padding:14px;position:relative">
+          const isActive = filterTemplate===name;
+          h += `<div onclick="NoteWorkshop.setFilter('${name}')" style="background:#fff;border:2px solid ${isActive?m.color:m.color+'22'};border-radius:12px;padding:14px;position:relative;cursor:pointer;transition:all .2s;${isActive?'box-shadow:0 4px 12px '+m.color+'33':''}">
             <div style="font-size:20px;margin-bottom:4px">${m.icon} ${name}</div>
             <div style="font-size:12px;color:#888;margin-bottom:6px">${m.desc}</div>
             <div style="font-size:12px;color:#aaa">适用卡片: ${m.cards}</div>
@@ -10330,29 +10531,44 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         });
         h += '</div>';
 
-        h += '<div style="font-weight:700;font-size:16px;margin-bottom:14px">\uD83D\uDCCB 已生成笔记</div>';
-        if(NOTES.length===0){
-          h += '<div style="text-align:center;padding:40px;color:#aaa">暂无笔记，请运行 <code>python generate_xhs_note.py</code> 生成</div>';
+        /* == 筛选条 == */
+        h += '<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap">';
+        h += '<div style="font-weight:700;font-size:16px">\uD83D\uDCCB 已生成笔记</div>';
+        h += '<div style="display:flex;gap:6px;margin-left:auto">';
+        ['全部','反差型','挑战型','干货型','故事型'].forEach(t=>{
+          const isAct = filterTemplate===t || (t==='全部' && filterTemplate==='全部');
+          h += `<button onclick="NoteWorkshop.setFilter('${t}')" style="padding:4px 12px;border-radius:16px;border:1px solid ${isAct?'var(--primary)':'#ddd'};background:${isAct?'var(--primary)':'#fff'};color:${isAct?'#fff':'#666'};font-size:12px;cursor:pointer;font-weight:${isAct?'700':'400'}">${t}</button>`;
+        });
+        h += '</div></div>';
+
+        /* == 笔记列表 == */
+        const filtered = filterTemplate==='全部' ? NOTES : NOTES.filter(n=>n.template===filterTemplate);
+        if(filtered.length===0){
+          h += '<div style="text-align:center;padding:60px 20px;color:#aaa"><div style="font-size:48px;margin-bottom:12px">📝</div><div style="font-size:15px">暂无笔记</div><div style="font-size:13px;margin-top:6px">点击上方「AI一键生成笔记」开始创作吧！</div></div>';
         } else {
-          NOTES.forEach((n,idx)=>{
+          filtered.forEach(n=>{
+            const realIdx = NOTES.indexOf(n);
             const tm = TEMPLATE_META[n.template]||{icon:'\uD83D\uDCC4',color:'#999'};
-            h += `<div onclick="NoteWorkshop.showDetail(${idx})" style="background:#fff;border-radius:14px;padding:18px 20px;margin-bottom:14px;cursor:pointer;border:1px solid #eee;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.04)" onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow='0 2px 8px rgba(0,0,0,.04)'">
+            const cardIds = Array.isArray(n.card_ids) ? n.card_ids.join(', ') : '';
+            const genAt = n.generated_at || '';
+            const pred = n.predicted || {likes:'-',saves:'-',comments:'-'};
+            h += `<div onclick="NoteWorkshop.showDetail(${realIdx})" style="background:#fff;border-radius:14px;padding:18px 20px;margin-bottom:14px;cursor:pointer;border:1px solid #eee;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.04)" onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow='0 2px 8px rgba(0,0,0,.04)'">
               <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
                 <span style="font-size:28px">${tm.icon}</span>
                 <div style="flex:1;min-width:0">
-                  <div style="font-weight:700;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(n.title)}</div>
-                  <div style="font-size:12px;color:#aaa;margin-top:2px">${n.template} \u00B7 ${n.card_ids.join(', ')} \u00B7 ${n.generated_at}</div>
+                  <div style="font-weight:700;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(n.title||'')}</div>
+                  <div style="font-size:12px;color:#aaa;margin-top:2px">${n.template} \u00B7 ${cardIds} \u00B7 ${genAt}</div>
                 </div>
                 <div style="text-align:right">
-                  ${scoreBadge(n.total,60)}
-                  <div style="font-size:11px;color:#888;margin-top:4px">${n.verdict}</div>
+                  ${scoreBadge(n.total||0,60)}
+                  <div style="font-size:11px;color:#888;margin-top:4px">${n.verdict||''}</div>
                 </div>
               </div>
               <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
-                <span style="font-size:12px;padding:2px 8px;background:#ffeaa7;border-radius:8px">\u2764\uFE0F ${n.predicted.likes}</span>
-                <span style="font-size:12px;padding:2px 8px;background:#dfe6e9;border-radius:8px">\u2B50 ${n.predicted.saves}</span>
-                <span style="font-size:12px;padding:2px 8px;background:#d5f5e3;border-radius:8px">\uD83D\uDCAC ${n.predicted.comments}</span>
-                <span style="font-size:12px;padding:2px 8px;background:#fadbd8;border-radius:8px">\uD83D\uDD50 ${n.best_post_time}</span>
+                <span style="font-size:12px;padding:2px 8px;background:#ffeaa7;border-radius:8px">\u2764\uFE0F ${pred.likes}</span>
+                <span style="font-size:12px;padding:2px 8px;background:#dfe6e9;border-radius:8px">\u2B50 ${pred.saves}</span>
+                <span style="font-size:12px;padding:2px 8px;background:#d5f5e3;border-radius:8px">\uD83D\uDCAC ${pred.comments}</span>
+                <span style="font-size:12px;padding:2px 8px;background:#fadbd8;border-radius:8px">\uD83D\uDD50 ${n.best_post_time||''}</span>
               </div>
             </div>`;
           });
@@ -10361,8 +10577,15 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         el.innerHTML = h;
       }
 
+      /* ---- 筛选 ---- */
+      function setFilter(t){
+        filterTemplate = t;
+        renderList();
+      }
+
       /* ---- 详情视图 ---- */
       function showDetail(idx){
+        const NOTES = allNotes;
         const n = NOTES[idx]; if(!n) return;
         _carouselNote = n; _carouselCur = 0;
         const el = document.getElementById('nw-container');
@@ -10374,55 +10597,62 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         h += `<div style="background:linear-gradient(135deg,${tm.color}11,${tm.color}05);border:2px solid ${tm.color}33;border-radius:16px;padding:22px;margin-bottom:20px">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
             <span style="font-size:32px">${tm.icon}</span>
-            <div style="flex:1"><div style="font-weight:800;font-size:18px">${esc(n.title)}</div>
-            <div style="font-size:13px;color:#888;margin-top:4px">${n.template}模板 \u00B7 ${n.card_ids.join(', ')} \u00B7 ${n.generated_at}</div></div>
-            ${scoreBadge(n.total,60)}
+            <div style="flex:1"><div style="font-weight:800;font-size:18px">${esc(n.title||'')}</div>
+            <div style="font-size:13px;color:#888;margin-top:4px">${n.template}模板 \u00B7 ${(n.card_ids||[]).join(', ')} \u00B7 ${n.generated_at||''}</div></div>
+            ${scoreBadge(n.total||0,60)}
           </div></div>`;
 
         h += '<div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:20px">';
+        const scores = n.scores || {};
         h += `<div style="flex:1;min-width:200px;background:#fff;border-radius:14px;padding:18px;border:1px solid #eee">
           <div style="font-weight:700;margin-bottom:8px">\uD83C\uDFAF 六维评分</div>
-          ${renderRadar(n.scores)}
+          ${renderRadar(scores)}
           <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;justify-content:center">`;
         const sLabels = {title_appeal:'标题力',content_quality:'内容质量',knowledge_accuracy:'知识准确',readability:'可读性',viral_potential:'传播力',compliance:'合规性'};
-        Object.entries(n.scores).forEach(([k,v])=>{
+        Object.entries(scores).forEach(([k,v])=>{
           h += `<span style="font-size:12px;padding:2px 8px;background:#f8f9fa;border-radius:8px">${sLabels[k]||k}: ${v}/10</span>`;
         });
         h += '</div></div>';
 
+        const pred = n.predicted || {likes:'-',saves:'-',comments:'-'};
         h += `<div style="flex:1;min-width:200px;background:#fff;border-radius:14px;padding:18px;border:1px solid #eee">
           <div style="font-weight:700;margin-bottom:12px">\uD83D\uDCCA 预测数据</div>
           <div style="display:flex;flex-direction:column;gap:10px">
-            <div style="display:flex;align-items:center;gap:8px"><span style="font-size:22px">\u2764\uFE0F</span><div><div style="font-size:13px;color:#888">预估点赞</div><div style="font-weight:700;font-size:18px;color:#e74c3c">${n.predicted.likes}</div></div></div>
-            <div style="display:flex;align-items:center;gap:8px"><span style="font-size:22px">\u2B50</span><div><div style="font-size:13px;color:#888">预估收藏</div><div style="font-weight:700;font-size:18px;color:#f39c12">${n.predicted.saves}</div></div></div>
-            <div style="display:flex;align-items:center;gap:8px"><span style="font-size:22px">\uD83D\uDCAC</span><div><div style="font-size:13px;color:#888">预估评论</div><div style="font-weight:700;font-size:18px;color:#3498db">${n.predicted.comments}</div></div></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="font-size:22px">\u2764\uFE0F</span><div><div style="font-size:13px;color:#888">预估点赞</div><div style="font-weight:700;font-size:18px;color:#e74c3c">${pred.likes}</div></div></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="font-size:22px">\u2B50</span><div><div style="font-size:13px;color:#888">预估收藏</div><div style="font-weight:700;font-size:18px;color:#f39c12">${pred.saves}</div></div></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="font-size:22px">\uD83D\uDCAC</span><div><div style="font-size:13px;color:#888">预估评论</div><div style="font-weight:700;font-size:18px;color:#3498db">${pred.comments}</div></div></div>
             <div style="margin-top:8px;padding-top:10px;border-top:1px solid #eee">
               <div style="font-size:12px;color:#888">\uD83D\uDD50 最佳发布时间</div>
-              <div style="font-weight:600;font-size:14px;margin-top:4px">${n.best_post_time}</div>
+              <div style="font-weight:600;font-size:14px;margin-top:4px">${n.best_post_time||''}</div>
             </div>
           </div></div>`;
         h += '</div>';
 
+        const emotionCurve = n.emotion_curve || [];
+        if(emotionCurve.length){
         h += '<div style="background:#fff;border-radius:14px;padding:18px;border:1px solid #eee;margin-bottom:20px">';
         h += '<div style="font-weight:700;margin-bottom:10px">\uD83C\uDFAD 情绪曲线</div>';
         h += '<div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center">';
-        n.emotion_curve.forEach((e,i)=>{
+        emotionCurve.forEach((e,i)=>{
           const colors = ['#3498db','#e67e22','#e74c3c','#27ae60','#9b59b6'];
           h += `<div style="text-align:center;padding:8px 12px">
             <div style="width:36px;height:36px;border-radius:50%;background:${colors[i%5]};color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;margin:0 auto">${i+1}</div>
             <div style="font-size:12px;margin-top:4px;color:#555;font-weight:600">${e}</div></div>`;
-          if(i<n.emotion_curve.length-1) h += '<div style="color:#ccc">\u2192</div>';
+          if(i<emotionCurve.length-1) h += '<div style="color:#ccc">\u2192</div>';
         });
         h += '</div>';
-        h += `<div style="font-size:13px;color:#666;margin-top:10px;background:#f8f9fa;border-radius:8px;padding:10px">${esc(n.narrative_arc)}</div>`;
+        h += `<div style="font-size:13px;color:#666;margin-top:10px;background:#f8f9fa;border-radius:8px;padding:10px">${esc(n.narrative_arc||'')}</div>`;
         h += '</div>';
+        }
 
         /* -- 轮播图预览 (带AI生成图片) -- */
+        const carousel = n.carousel || [];
         const hasSlideImages = n.slide_images && n.slide_images.length > 0;
         const imgBase = `note-images/${encodeURIComponent(n.note_id)}/`;
+        if(carousel.length){
         h += `<div style="background:#fff;border-radius:14px;padding:18px;border:1px solid #eee;margin-bottom:20px">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-            <div style="font-weight:700">\uD83D\uDDBC\uFE0F 轮播图规划 (${n.carousel.length}页)</div>
+            <div style="font-weight:700">\uD83D\uDDBC\uFE0F 轮播图规划 (${carousel.length}页)</div>
             ${hasSlideImages?'<span style="font-size:12px;padding:2px 10px;border-radius:10px;background:#d5f5e3;color:#27ae60;font-weight:600">\u2705 AI图片已生成</span>':''}
           </div>`;
         if(hasSlideImages){
@@ -10441,7 +10671,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           h += `</div>`;
         }
         h += `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">`;
-        n.carousel.forEach(s=>{
+        carousel.forEach(s=>{
           const si = hasSlideImages ? n.slide_images.find(x=>x.slide===s.slide) : null;
           const hasImg = si && (si.status==='ok' || si.status==='skip(cover)');
           h += `<div style="background:#f8f9fa;border-radius:10px;padding:12px;border-left:3px solid ${tm.color};position:relative">
@@ -10453,10 +10683,13 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           </div>`;
         });
         h += '</div></div>';
+        } /* end if carousel */
 
+        const titleCands = n.title_candidates || [];
+        if(titleCands.length){
         h += `<div style="background:#fff;border-radius:14px;padding:18px;border:1px solid #eee;margin-bottom:20px">
-          <div style="font-weight:700;margin-bottom:12px">\u270D\uFE0F 候选标题 (${n.title_candidates.length}个)</div>`;
-        n.title_candidates.forEach((t,i)=>{
+          <div style="font-weight:700;margin-bottom:12px">\u270D\uFE0F 候选标题 (${titleCands.length}个)</div>`;
+        titleCands.forEach((t,i)=>{
           const isWin = t.title === n.title;
           h += `<div style="padding:10px 14px;border-radius:10px;margin-bottom:8px;background:${isWin?'#fff9e6':'#f8f9fa'};border:${isWin?'2px solid #ffd700':'1px solid #eee'};display:flex;align-items:center;gap:10px">
             <span style="font-size:20px;font-weight:800;color:${isWin?'#ffd700':'#ccc'}">#${i+1}</span>
@@ -10466,52 +10699,56 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           </div>`;
         });
         h += '</div>';
+        }
 
         h += `<div style="background:#fff;border-radius:14px;padding:18px;border:1px solid #eee;margin-bottom:20px">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
             <div style="font-weight:700">\uD83D\uDCF1 正文预览</div>
             <button onclick="NoteWorkshop.copyBody(${idx})" style="background:var(--primary);color:#fff;border:none;border-radius:8px;padding:6px 16px;cursor:pointer;font-size:13px">\uD83D\uDCCB 复制正文</button>
           </div>
-          <div style="max-width:420px;margin:0 auto;background:#fafafa;border-radius:16px;padding:20px;border:1px solid #e8e8e8;max-height:500px;overflow-y:auto;font-size:14px;line-height:1.8;white-space:pre-wrap;word-break:break-word">${esc(n.body)}</div>
+          <div style="max-width:420px;margin:0 auto;background:#fafafa;border-radius:16px;padding:20px;border:1px solid #e8e8e8;max-height:500px;overflow-y:auto;font-size:14px;line-height:1.8;white-space:pre-wrap;word-break:break-word">${esc(n.body||'')}</div>
         </div>`;
 
         h += '<div style="background:#fff;border-radius:14px;padding:18px;border:1px solid #eee;margin-bottom:20px">';
         h += '<div style="font-weight:700;margin-bottom:10px">\uD83C\uDFF7\uFE0F 标签</div>';
         h += '<div style="display:flex;gap:8px;flex-wrap:wrap">';
-        n.hashtags.split(' ').forEach(tag=>{
+        (n.hashtags||'').split(' ').forEach(tag=>{
           if(tag) h += `<span style="background:linear-gradient(135deg,#fff9e6,#ffeaa7);padding:4px 12px;border-radius:20px;font-size:13px;font-weight:600">${esc(tag)}</span>`;
         });
         h += '</div></div>';
 
+        const hooks = n.interaction_hooks || {};
+        if(n.pinned_comment || hooks.comment_guide){
         h += '<div style="background:#fff;border-radius:14px;padding:18px;border:1px solid #eee;margin-bottom:20px">';
         h += '<div style="font-weight:700;margin-bottom:12px">\uD83D\uDCAC 互动策略</div>';
         h += `<div style="background:#fff3cd;border-radius:10px;padding:12px;margin-bottom:10px">
             <div style="font-size:12px;color:#888;margin-bottom:4px">\uD83D\uDCCC 置顶评论</div>
-            <div style="font-size:13px">${esc(n.pinned_comment)}</div>
+            <div style="font-size:13px">${esc(n.pinned_comment||'')}</div>
           </div>
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">
             <div style="background:#f0f9ff;border-radius:10px;padding:12px">
               <div style="font-size:12px;color:#3498db;font-weight:600;margin-bottom:4px">\uD83D\uDCAC 评论引导</div>
-              <div style="font-size:13px">${esc(n.interaction_hooks.comment_guide)}</div></div>
+              <div style="font-size:13px">${esc(hooks.comment_guide||'')}</div></div>
             <div style="background:#f0fff0;border-radius:10px;padding:12px">
               <div style="font-size:12px;color:#27ae60;font-weight:600;margin-bottom:4px">\u2B50 收藏引导</div>
-              <div style="font-size:13px">${esc(n.interaction_hooks.save_guide)}</div></div>
+              <div style="font-size:13px">${esc(hooks.save_guide||'')}</div></div>
             <div style="background:#fef0f0;border-radius:10px;padding:12px">
               <div style="font-size:12px;color:#e74c3c;font-weight:600;margin-bottom:4px">\uD83D\uDD17 转发引导</div>
-              <div style="font-size:13px">${esc(n.interaction_hooks.share_guide)}</div></div>
+              <div style="font-size:13px">${esc(hooks.share_guide||'')}</div></div>
           </div></div>`;
+        }
 
         h += '<div style="background:#fff;border-radius:14px;padding:18px;border:1px solid #eee;margin-bottom:20px">';
         h += '<div style="font-weight:700;margin-bottom:12px">\uD83D\uDD0D 审核结论</div>';
-        if(n.strengths.length){
+        if((n.strengths||[]).length){
           h += '<div style="font-size:13px;font-weight:600;color:#27ae60;margin-bottom:6px">\u2705 优势</div>';
           n.strengths.forEach(s=>{ h += `<div style="font-size:13px;padding:4px 0;color:#555">\u2022 ${esc(s)}</div>`; });
         }
-        if(n.issues.length){
+        if((n.issues||[]).length){
           h += '<div style="font-size:13px;font-weight:600;color:#e74c3c;margin:10px 0 6px">\u26A0\uFE0F 问题</div>';
           n.issues.forEach(s=>{ h += `<div style="font-size:13px;padding:4px 0;color:#555">\u2022 ${esc(s)}</div>`; });
         }
-        if(n.suggestions.length){
+        if((n.suggestions||[]).length){
           h += '<div style="font-size:13px;font-weight:600;color:#3498db;margin:10px 0 6px">\uD83D\uDCA1 建议</div>';
           n.suggestions.forEach(s=>{ h += `<div style="font-size:13px;padding:4px 0;color:#555">\u2022 ${esc(s)}</div>`; });
         }
@@ -10522,8 +10759,8 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
 
       /* ---- 复制正文 ---- */
       function copyBody(idx){
-        const n = NOTES[idx]; if(!n) return;
-        navigator.clipboard.writeText(n.body + '\n\n' + n.hashtags).then(()=>{
+        const n = allNotes[idx]; if(!n) return;
+        navigator.clipboard.writeText(n.body + '\n\n' + (n.hashtags||'')).then(()=>{
           showToast('\u2705 正文+标签已复制到剪贴板！');
         }).catch(()=>{ showToast('\u274C 复制失败，请手动复制'); });
       }
@@ -10552,12 +10789,13 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
       }
 
       /* ---- init ---- */
-      function init(){
+      async function init(){
         inited = true;
+        await loadNotes();
         renderList();
       }
 
-      return { init, showDetail, copyBody, _carouselGo, _carouselNav };
+      return { init, showDetail, copyBody, _carouselGo, _carouselNav, generateNote, setFilter };
     })();
 
 

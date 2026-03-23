@@ -1,0 +1,922 @@
+{
+  "subject": "英语",
+  "grade": "六年级",
+  "semester": "下册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "六下",
+  "units": [
+    {
+      "unit_id": "01",
+      "unit_name": "What's he like?",
+      "cards": [
+        {
+          "card_id": "01-01",
+          "full_id": "英语-六下-01-01",
+          "title": "词汇：描述性格的形容词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习描述人物性格的常用形容词，理解其含义和用法。",
+          "core_points": [
+            "shy /ʃaɪ/ 害羞的",
+            "smart /smɑːrt/ 聪明的",
+            "helpful /ˈhelpfl/ 乐于助人的",
+            "funny /ˈfʌni/ 有趣的",
+            "polite /pəˈlaɪt/ 有礼貌的",
+            "strict /strɪkt/ 严格的",
+            "kind /kaɪnd/ 友善的"
+          ],
+          "example": {
+            "question": "根据图片或描述，选择合适的词语填空。",
+            "steps": [
+              "1. Look at the picture of a girl who doesn't like to talk much.",
+              "2. Choose the best word: shy / smart / funny.",
+              "3. Complete the sentence: She is very ____."
+            ],
+            "answer": "She is very shy."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is shily.",
+              "correct": "He is shy."
+            }
+          ],
+          "memory_tip": "害羞(shy)的女孩脸通红，聪明(smart)的脑袋转得快。乐于助人(helpful)真棒，有趣(funny)故事乐开怀。有礼貌(polite)的孩子人人都爱，严格(strict)老师教得好，友善(kind)同学真可爱！"
+        },
+        {
+          "card_id": "01-02",
+          "full_id": "英语-六下-01-02",
+          "title": "语法：询问和描述人物性格",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习使用'What's ... like?'询问人物性格，并用形容词进行回答。",
+          "core_points": [
+            "提问句型：What's + he/she/your friend + like?",
+            "回答句型：He/She is + 形容词. (He's/She's...)",
+            "注意be动词与主语的人称和单复数保持一致。",
+            "like在这里是介词，意为“像……一样的”，而不是动词“喜欢”。"
+          ],
+          "example": {
+            "question": "看图回答问题：What's he like?",
+            "steps": [
+              "1. 观察图片中男孩的特征：他正在帮助同学捡书。",
+              "2. 思考可以用什么形容词来描述他。",
+              "3. 用正确的句型回答问题。"
+            ],
+            "answer": "He's helpful."
+          },
+          "mistakes": [
+            {
+              "wrong": "What does he like?",
+              "correct": "What's he like?"
+            },
+            {
+              "wrong": "He likes helpful.",
+              "correct": "He is helpful."
+            }
+          ],
+          "memory_tip": "问性格，用'What's ... like?'，不是'does like'。回答要用'is'，形容词来帮忙！'Like'是介词，不是动词，别搞混啦！"
+        },
+        {
+          "card_id": "01-03",
+          "full_id": "英语-六下-01-03",
+          "title": "句型：介绍人物及性格",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习介绍人物并描述其性格特点的常用句型。",
+          "core_points": [
+            "This is my friend, Lily.",
+            "She is smart and helpful.",
+            "She likes to read books and help others.",
+            "可以用and连接多个形容词来描述。",
+            "还可以加上她喜欢做的事情，让描述更生动。"
+          ],
+          "example": {
+            "question": "根据提示，介绍你的老师并描述其性格。",
+            "steps": [
+              "1. 介绍你的老师：Mr. Wang.",
+              "2. 描述他的性格：strict, but kind.",
+              "3. 描述他喜欢做的事情：tell jokes, teach us well."
+            ],
+            "answer": "This is my teacher, Mr. Wang. He is strict, but he is also very kind. He likes to tell jokes and teach us well."
+          },
+          "mistakes": [
+            {
+              "wrong": "She is smart and she is helpful.",
+              "correct": "She is smart and helpful."
+            }
+          ],
+          "memory_tip": "介绍朋友用'This is...'，接着性格'He/She is...'，还可以加上爱好'He/She likes to...'，像讲故事一样生动有趣！"
+        }
+      ]
+    },
+    {
+      "unit_id": "02",
+      "unit_name": "What's the matter?",
+      "cards": [
+        {
+          "card_id": "02-01",
+          "full_id": "英语-六下-02-01",
+          "title": "词汇：常见疾病与症状",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习表达身体不适和疾病的常用词汇。",
+          "core_points": [
+            "cold /koʊld/ 感冒",
+            "fever /ˈfiːvər/ 发烧",
+            "cough /kɔːf/ 咳嗽",
+            "sore throat /sɔːr θroʊt/ 喉咙痛",
+            "headache /ˈhed.eɪk/ 头痛",
+            "stomachache /ˈstʌm.ək.eɪk/ 胃痛",
+            "toothache /ˈtuːθ.eɪk/ 牙痛",
+            "earache /ˈɪr.eɪk/ 耳朵痛"
+          ],
+          "example": {
+            "question": "看图选择正确的词汇填空。",
+            "steps": [
+              "1. 观察图片：一个女孩捂着头。",
+              "2. 思考这是什么症状。",
+              "3. 选择合适的词语：headache / cough / fever。",
+              "4. 填入句子：She has a _____."
+            ],
+            "answer": "She has a headache."
+          },
+          "mistakes": [
+            {
+              "wrong": "I have sore throat.",
+              "correct": "I have a sore throat."
+            }
+          ],
+          "memory_tip": "头痛(headache)捂着头，胃痛(stomachache)捂着肚。牙痛(toothache)捂着腮，喉咙痛(sore throat)说不出。感冒(cold)发烧(fever)又咳嗽(cough)，耳朵痛(earache)别忽视，身体不适要记住！"
+        },
+        {
+          "card_id": "02-02",
+          "full_id": "英语-六下-02-02",
+          "title": "句型：询问与表达身体不适",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习使用'What's the matter?'询问身体不适，并用'I have a/an...'回答。",
+          "core_points": [
+            "询问句型：What's the matter? / What's wrong?",
+            "回答句型：I have a/an + 疾病名称. / My + 身体部位 + hurts.",
+            "注意冠词'a/an'的使用：a cold, a fever, a headache, an earache。",
+            "matter是名词，意为“问题，麻烦”。"
+          ],
+          "example": {
+            "question": "情景对话练习：你的朋友看起来不舒服，你该怎么问？他会怎么回答？",
+            "steps": [
+              "1. 思考询问身体不适的常用句型。",
+              "2. 想象朋友的症状（例如：咳嗽）。",
+              "3. 用正确的句型进行对话。"
+            ],
+            "answer": "A: What's the matter?\nB: I have a cough."
+          },
+          "mistakes": [
+            {
+              "wrong": "What's wrong with you?",
+              "correct": "What's wrong?"
+            },
+            {
+              "wrong": "I have cold.",
+              "correct": "I have a cold."
+            }
+          ],
+          "memory_tip": "有事问'What's the matter?'，不舒服说'I have a...'。记住'a'或'an'，小病小痛说出来！"
+        },
+        {
+          "card_id": "02-03",
+          "full_id": "英语-六下-02-03",
+          "title": "语法：给予健康建议 (You should...)",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习使用情态动词'should'来给予建议。",
+          "core_points": [
+            "'should'意为“应该”，表示建议、劝告。",
+            "句型：You should + 动词原形.",
+            "否定形式：You should not (shouldn't) + 动词原形.",
+            "'should'后接动词原形，不加s/es/ed/ing。",
+            "可用于给出积极建议，也可用于阻止不当行为。"
+          ],
+          "example": {
+            "question": "你的朋友发烧了，你应该给他什么建议？",
+            "steps": [
+              "1. 思考发烧时应该做什么。",
+              "2. 使用'You should...'句型给出建议。",
+              "3. 可以给出多条建议，如：看医生，多休息，喝水。"
+            ],
+            "answer": "You have a fever. You should see a doctor. You should drink more water and have a rest."
+          },
+          "mistakes": [
+            {
+              "wrong": "You should to go to bed.",
+              "correct": "You should go to bed."
+            },
+            {
+              "wrong": "You should rests.",
+              "correct": "You should rest."
+            }
+          ],
+          "memory_tip": "Should是好朋友，后面跟着动词原形走。给出建议它最棒，不该做的用shouldn't！"
+        },
+        {
+          "card_id": "02-04",
+          "full_id": "英语-六下-02-04",
+          "title": "情景对话卡：看医生",
+          "type": "情景对话卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "模拟看医生的对话场景，学习如何描述病情和接受医生的建议。",
+          "core_points": [
+            "医生询问：What's the matter? / How do you feel?",
+            "病人描述：I have a cold/fever/sore throat. My head hurts.",
+            "医生建议：You should... / Don't...",
+            "感谢：Thank you, Doctor."
+          ],
+          "example": {
+            "question": "和你的同学扮演医生和病人，模拟一段看医生的对话。病人喉咙痛、咳嗽。",
+            "steps": [
+              "1. 医生询问病情。",
+              "2. 病人描述症状：I have a sore throat and a cough.",
+              "3. 医生给出建议：You should drink more water and take some medicine.",
+              "4. 病人表达感谢。"
+            ],
+            "answer": "Doctor: What's the matter?\nPatient: I have a sore throat and a cough.\nDoctor: You should drink more water and take some medicine. You should have a rest.\nPatient: Thank you, Doctor."
+          },
+          "mistakes": [
+            {
+              "wrong": "Doctor: What's the problem?",
+              "correct": "Doctor: What's the matter?"
+            }
+          ],
+          "memory_tip": "医生问，我来答，症状建议别落下。礼貌用语要记牢，健康对话真奇妙！"
+        }
+      ]
+    },
+    {
+      "unit_id": "03",
+      "unit_name": "My favourite sport.",
+      "cards": [
+        {
+          "card_id": "03-01",
+          "full_id": "英语-六下-03-01",
+          "title": "词汇：运动和爱好",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习各种运动和业余爱好的名称。",
+          "core_points": [
+            "basketball /ˈbæs.kɪt.bɔːl/ 篮球",
+            "soccer /ˈsɑːkər/ 足球",
+            "volleyball /ˈvɑː.li.bɔːl/ 排球",
+            "tennis /ˈten.ɪs/ 网球",
+            "ping-pong /ˈpɪŋ.pɑːŋ/ 乒乓球",
+            "swim /swɪm/ 游泳",
+            "run /rʌn/ 跑步",
+            "skate /skeɪt/ 滑冰/滑旱冰",
+            "ski /skiː/ 滑雪",
+            "hobby /ˈhɑː.bi/ 爱好"
+          ],
+          "example": {
+            "question": "根据图片选择正确的运动名称。",
+            "steps": [
+              "1. 观察图片：一个人在雪地里滑行。",
+              "2. 思考这是什么运动。",
+              "3. 选择合适的词语：swim / ski / run。",
+              "4. 填入句子：He likes to _____."
+            ],
+            "answer": "He likes to ski."
+          },
+          "mistakes": [
+            {
+              "wrong": "play swimming",
+              "correct": "go swimming / swim"
+            }
+          ],
+          "memory_tip": "球类运动用'play'，游泳滑冰用'go'。运动爱好记心间，健康生活每一天！"
+        },
+        {
+          "card_id": "03-02",
+          "full_id": "英语-六下-03-02",
+          "title": "语法：表达喜好 (like/love/enjoy + doing)",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习使用'like/love/enjoy'后接动词-ing形式来表达喜好。",
+          "core_points": [
+            "句型：主语 + like/love/enjoy + 动词-ing形式.",
+            "like表示喜欢，love表示热爱，enjoy表示享受。",
+            "动词-ing形式作宾语，表示正在进行的动作。",
+            "第三人称单数时，like/love/enjoy要加-s。",
+            "也可以用like/love + to do sth.，含义相似。"
+          ],
+          "example": {
+            "question": "将下列短语变成表达喜好的句子：",
+            "steps": [
+              "1. I / like / play basketball",
+              "2. She / love / read books",
+              "3. We / enjoy / sing songs"
+            ],
+            "answer": "1. I like playing basketball.\n2. She loves reading books.\n3. We enjoy singing songs."
+          },
+          "mistakes": [
+            {
+              "wrong": "I like play basketball.",
+              "correct": "I like playing basketball."
+            },
+            {
+              "wrong": "She likes to reading.",
+              "correct": "She likes reading."
+            }
+          ],
+          "memory_tip": "喜欢(like)、爱(love)、享受(enjoy)，后面跟着-ing跑。动词变化别忘了，三单记得加s好！"
+        },
+        {
+          "card_id": "03-03",
+          "full_id": "英语-六下-03-03",
+          "title": "句型：询问和谈论最喜欢的运动",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习询问他人最喜欢的运动，并描述自己的喜好。",
+          "core_points": [
+            "询问句型：What's your favourite sport?",
+            "回答句型：My favourite sport is + 运动名称. / I like + 运动名称/doing sth. best.",
+            "还可以描述为什么喜欢：It's exciting/relaxing/interesting/boring.",
+            "描述活动频率：I often/sometimes/usually + do sth."
+          ],
+          "example": {
+            "question": "和同学进行对话：询问对方最喜欢的运动，并描述自己的。",
+            "steps": [
+              "1. A问B最喜欢的运动。",
+              "2. B回答，并说出原因。",
+              "3. B反问A。",
+              "4. A回答，并说出原因和频率。"
+            ],
+            "answer": "A: What's your favourite sport?\nB: My favourite sport is swimming. It's relaxing. What about you?\nA: I like playing basketball best. It's exciting. I often play it after school."
+          },
+          "mistakes": [
+            {
+              "wrong": "My favourite sport is to swim.",
+              "correct": "My favourite sport is swimming."
+            }
+          ],
+          "memory_tip": "最爱运动'favourite sport'，回答'is'或'like best'。原因加上'exciting'，多说多练就学会！"
+        },
+        {
+          "card_id": "03-04",
+          "full_id": "英语-六下-03-04",
+          "title": "易混词卡：play with sports vs. instruments",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "区分动词'play'在表示“玩球类运动”和“演奏乐器”时的不同用法。",
+          "core_points": [
+            "Play + 球类运动：play basketball, play soccer, play tennis (不加冠词'the')",
+            "Play + 乐器：play the piano, play the guitar, play the violin (必须加冠词'the')",
+            "Play + 游戏：play games",
+            "Play + 角色：play a role"
+          ],
+          "example": {
+            "question": "选择正确的选项填空：",
+            "steps": [
+              "1. My brother likes to play ____ piano.",
+              "2. We often play ____ basketball after class.",
+              "3. She can play ____ violin very well."
+            ],
+            "answer": "1. the\n2. (不填)\n3. the"
+          },
+          "mistakes": [
+            {
+              "wrong": "play the soccer",
+              "correct": "play soccer"
+            },
+            {
+              "wrong": "play guitar",
+              "correct": "play the guitar"
+            }
+          ],
+          "memory_tip": "打球不带'the'，弹琴记得'the'。运动乐器分清楚，'play'用法要牢记！"
+        }
+      ]
+    },
+    {
+      "unit_id": "04",
+      "unit_name": "I have a pen pal.",
+      "cards": [
+        {
+          "card_id": "04-01",
+          "full_id": "英语-六下-04-01",
+          "title": "词汇：国家、城市与语言",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习世界主要国家、城市和对应语言的词汇。",
+          "core_points": [
+            "pen pal /ˈpen pæl/ 笔友",
+            "country /ˈkʌn.tri/ 国家",
+            "language /ˈlæŋ.ɡwɪdʒ/ 语言",
+            "speak /spiːk/ 说",
+            "Canada /ˈkæn.ə.də/ 加拿大 (Canadian, English/French)",
+            "France /fræns/ 法国 (French, French)",
+            "Japan /dʒəˈpæn/ 日本 (Japanese, Japanese)",
+            "Australia /ɔːˈstreɪl.jə/ 澳大利亚 (Australian, English)",
+            "China /ˈtʃaɪ.nə/ 中国 (Chinese, Chinese)"
+          ],
+          "example": {
+            "question": "连线题：将国家与对应的语言连接起来。",
+            "steps": [
+              "1. China        A. French",
+              "2. France       B. English",
+              "3. Japan        C. Chinese",
+              "4. Australia    D. Japanese"
+            ],
+            "answer": "1-C, 2-A, 3-D, 4-B"
+          },
+          "mistakes": [
+            {
+              "wrong": "I speak Japan.",
+              "correct": "I speak Japanese."
+            }
+          ],
+          "memory_tip": "国家(country)有名字，语言(language)也不同。加拿大(Canada)说英语，法国(France)讲法语。日本(Japan)日语真有趣，中国(China)汉语最流利！"
+        },
+        {
+          "card_id": "04-02",
+          "full_id": "英语-六下-04-02",
+          "title": "语法：询问和回答国籍与语言",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习使用'Where... from?'和'What language... speak?'来询问国籍和所说语言。",
+          "core_points": [
+            "询问国籍：Where is he/she from? / Where are you from?",
+            "回答国籍：He/She is from + 国家名称. / I'm from + 国家名称.",
+            "询问语言：What language does he/she speak? / What language do you speak?",
+            "回答语言：He/She speaks + 语言名称. / I speak + 语言名称.",
+            "注意第三人称单数动词变位 (does, speaks)。"
+          ],
+          "example": {
+            "question": "根据提示完成对话：",
+            "steps": [
+              "1. A: Where is Lily from? (Canada)",
+              "2. B: She is from ____.",
+              "3. A: What language does she speak?",
+              "4. B: She speaks ____. (English and French)"
+            ],
+            "answer": "1. A: Where is Lily from?\n2. B: She is from Canada.\n3. A: What language does she speak?\n4. B: She speaks English and French."
+          },
+          "mistakes": [
+            {
+              "wrong": "Where is he?",
+              "correct": "Where is he from?"
+            },
+            {
+              "wrong": "He speak English.",
+              "correct": "He speaks English."
+            }
+          ],
+          "memory_tip": "问从哪儿来，'Where... from?'。问说啥语言，'What language... speak?'。三单记得'does'和's'，对话流利不犯错！"
+        },
+        {
+          "card_id": "04-03",
+          "full_id": "英语-六下-04-03",
+          "title": "句型：介绍笔友",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习介绍笔友的基本信息，包括姓名、国籍、年龄和所说语言。",
+          "core_points": [
+            "I have a new pen pal.",
+            "His/Her name is + 姓名.",
+            "He/She is + 年龄 + years old.",
+            "He/She is from + 国家.",
+            "He/She speaks + 语言."
+          ],
+          "example": {
+            "question": "写一段话介绍你的笔友Tom，他来自英国，12岁，会说英语。",
+            "steps": [
+              "1. 写出你有笔友。",
+              "2. 介绍他的名字和年龄。",
+              "3. 介绍他来自哪里。",
+              "4. 介绍他会说什么语言。"
+            ],
+            "answer": "I have a new pen pal. His name is Tom. He is 12 years old. He is from the UK. He speaks English."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is from English.",
+              "correct": "He is from the UK."
+            }
+          ],
+          "memory_tip": "笔友介绍有套路，名字年龄国家语言。信息全面又清晰，友谊桥梁架起来！"
+        },
+        {
+          "card_id": "04-04",
+          "full_id": "英语-六下-04-04",
+          "title": "易混词卡：country / city / capital",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "区分'country'(国家)、'city'(城市)和'capital'(首都)这三个地理概念词汇。",
+          "core_points": [
+            "country /ˈkʌn.tri/: 国家，例如 China, France, Japan。",
+            "city /ˈsɪt.i/: 城市，例如 Beijing, Paris, Tokyo。",
+            "capital /ˈkæp.ɪ.t̬əl/: 首都，是一个国家的政治中心，通常也是一个大城市。例如 Beijing is the capital of China。",
+            "一个国家(country)可以有很多城市(cities)，但通常只有一个首都(capital)。"
+          ],
+          "example": {
+            "question": "选择合适的词语填空：",
+            "steps": [
+              "1. Beijing is the ____ of China.",
+              "2. New York is a big ____ in the USA.",
+              "3. France is a beautiful ____."
+            ],
+            "answer": "1. capital\n2. city\n3. country"
+          },
+          "mistakes": [
+            {
+              "wrong": "Beijing is a country.",
+              "correct": "Beijing is a city/capital."
+            }
+          ],
+          "memory_tip": "国家(country)最大，城市(city)在国家里。首都(capital)是城市，还是国家的中心地！"
+        }
+      ]
+    },
+    {
+      "unit_id": "05",
+      "unit_name": "Where did you go?",
+      "cards": [
+        {
+          "card_id": "05-01",
+          "full_id": "英语-六下-05-01",
+          "title": "词汇：过去的时间表达与活动",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习描述过去时间的短语和过去发生的活动词汇。",
+          "core_points": [
+            "last weekend 上周末",
+            "last month 上个月",
+            "last year 去年",
+            "yesterday 昨天",
+            "go to the park 去公园",
+            "visit my grandparents 拜访祖父母",
+            "go to the beach 去海滩",
+            "go swimming 去游泳",
+            "play sports 运动",
+            "read books 读书",
+            "watch TV 看电视"
+          ],
+          "example": {
+            "question": "将下列短语翻译成中文。",
+            "steps": [
+              "1. last weekend",
+              "2. go to the beach",
+              "3. visit my grandparents"
+            ],
+            "answer": "1. 上周末\n2. 去海滩\n3. 拜访我的祖父母"
+          },
+          "mistakes": [
+            {
+              "wrong": "last week end",
+              "correct": "last weekend"
+            }
+          ],
+          "memory_tip": "过去时间'last'开头，'weekend/month/year'跟着走。活动词组记清楚，过去发生我知道！"
+        },
+        {
+          "card_id": "05-02",
+          "full_id": "英语-六下-05-02",
+          "title": "语法：一般过去时 (规则动词)",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习规则动词过去式的构成和在一般过去时中的用法。",
+          "core_points": [
+            "一般过去时表示过去某个时间发生的动作或存在的状态。",
+            "规则动词过去式：动词原形后加-ed。",
+            "以不发音e结尾的动词，直接加-d (live-lived, like-liked)。",
+            "以辅音字母+y结尾的动词，变y为i再加-ed (study-studied, carry-carried)。",
+            "重读闭音节以一个辅音字母结尾的动词，双写最后一个辅音字母再加-ed (stop-stopped, plan-planned)。"
+          ],
+          "example": {
+            "question": "写出下列动词的过去式：",
+            "steps": [
+              "1. play",
+              "2. watch",
+              "3. live",
+              "4. study"
+            ],
+            "answer": "1. played\n2. watched\n3. lived\n4. studied"
+          },
+          "mistakes": [
+            {
+              "wrong": "playes",
+              "correct": "played"
+            },
+            {
+              "wrong": "studyed",
+              "correct": "studied"
+            }
+          ],
+          "memory_tip": "规则动词变过去，-ed结尾是规律。动词原形要看清，特殊情况别忘记！"
+        },
+        {
+          "card_id": "05-03",
+          "full_id": "英语-六下-05-03",
+          "title": "不规则动词卡：常见不规则动词过去式 (Group 1)",
+          "type": "不规则动词卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "学习一些常用不规则动词的过去式变化。",
+          "core_points": [
+            "go - went (去)",
+            "see - saw (看)",
+            "eat - ate (吃)",
+            "drink - drank (喝)",
+            "buy - bought (买)",
+            "read - read (读，发音不同)",
+            "have - had (有)",
+            "do - did (做)"
+          ],
+          "example": {
+            "question": "写出下列动词的过去式：",
+            "steps": [
+              "1. go",
+              "2. see",
+              "3. eat",
+              "4. have"
+            ],
+            "answer": "1. went\n2. saw\n3. ate\n4. had"
+          },
+          "mistakes": [
+            {
+              "wrong": "goed",
+              "correct": "went"
+            },
+            {
+              "wrong": "eated",
+              "correct": "ate"
+            }
+          ],
+          "memory_tip": "不规则动词很顽皮，变化多端不讲理。死记硬背是王道，多读多练才记牢！Go-went, see-saw, eat-ate, drink-drank, buy-bought, read-read, have-had, do-did！"
+        },
+        {
+          "card_id": "05-04",
+          "full_id": "英语-六下-05-04",
+          "title": "语法：一般过去时 (疑问句和否定句)",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "学习一般过去时疑问句和否定句的构成。",
+          "core_points": [
+            "疑问句：Did + 主语 + 动词原形...?",
+            "肯定回答：Yes, 主语 + did. / 否定回答：No, 主语 + didn't.",
+            "特殊疑问句：特殊疑问词 + did + 主语 + 动词原形...?",
+            "否定句：主语 + did not (didn't) + 动词原形.",
+            "无论是疑问句还是否定句，助动词did/didn't后动词都用原形。"
+          ],
+          "example": {
+            "question": "将下列句子改为疑问句和否定句：",
+            "steps": [
+              "1. He went to the park yesterday. (改为疑问句)",
+              "2. They watched TV last night. (改为否定句)",
+              "3. She played basketball. (改为特殊疑问句：Where...)"
+            ],
+            "answer": "1. Did he go to the park yesterday?\n2. They didn't watch TV last night.\n3. Where did she play basketball?"
+          },
+          "mistakes": [
+            {
+              "wrong": "Did he went to the park?",
+              "correct": "Did he go to the park?"
+            },
+            {
+              "wrong": "I didn't watched TV.",
+              "correct": "I didn't watch TV."
+            }
+          ],
+          "memory_tip": "'Did'一来，动词变回原形。疑问否定都一样，动词原形别忘掉！"
+        },
+        {
+          "card_id": "05-05",
+          "full_id": "英语-六下-05-05",
+          "title": "句型：谈论过去的经历",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习询问和描述过去某个时间发生的活动和地点。",
+          "core_points": [
+            "询问去处：Where did you go + 过去时间状语?",
+            "回答去处：I went to + 地点.",
+            "询问活动：What did you do + 过去时间状语?",
+            "回答活动：I + 动词过去式 + 其他信息."
+          ],
+          "example": {
+            "question": "和同学进行对话：询问对方上周末去了哪里，做了什么。",
+            "steps": [
+              "1. A问B上周末去了哪里。",
+              "2. B回答。",
+              "3. A问B在那里做了什么。",
+              "4. B回答，使用过去式动词。"
+            ],
+            "answer": "A: Where did you go last weekend?\nB: I went to the beach.\nA: What did you do there?\nB: I swam and built sandcastles."
+          },
+          "mistakes": [
+            {
+              "wrong": "What did you went there?",
+              "correct": "What did you do there?"
+            }
+          ],
+          "memory_tip": "过去的事，'did'来帮忙。地点问'where'，活动问'what'。动词过去式，说清你做了啥！"
+        }
+      ]
+    },
+    {
+      "unit_id": "06",
+      "unit_name": "How do you feel?",
+      "cards": [
+        {
+          "card_id": "06-01",
+          "full_id": "英语-六下-06-01",
+          "title": "词汇：表达感受的形容词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习表达各种情绪和感受的形容词。",
+          "core_points": [
+            "hungry /ˈhʌŋ.ɡri/ 饥饿的",
+            "thirsty /ˈθɜːr.sti/ 口渴的",
+            "angry /ˈæŋ.ɡri/ 生气的",
+            "happy /ˈhæp.i/ 开心的",
+            "sad /sæd/ 伤心的",
+            "excited /ɪkˈsaɪ.t̬ɪd/ 兴奋的",
+            "bored /bɔːrd/ 无聊的",
+            "tired /taɪrd/ 疲惫的",
+            "sleepy /ˈsliː.pi/ 困倦的"
+          ],
+          "example": {
+            "question": "根据图片选择正确的词汇填空。",
+            "steps": [
+              "1. 观察图片：一个孩子张大嘴巴打哈欠。",
+              "2. 思考这是什么感受。",
+              "3. 选择合适的词语：hungry / tired / excited。",
+              "4. 填入句子：He feels _____."
+            ],
+            "answer": "He feels tired."
+          },
+          "mistakes": [
+            {
+              "wrong": "I feel hungry.",
+              "correct": "I feel hungry."
+            }
+          ],
+          "memory_tip": "肚子饿(hungry)咕咕叫，口渴(thirsty)想喝水。生气(angry)皱眉头，开心(happy)笑哈哈。伤心(sad)掉眼泪，兴奋(excited)跳起来。无聊(bored)打哈欠，疲惫(tired)想睡觉！困倦(sleepy)也想睡！"
+        },
+        {
+          "card_id": "06-02",
+          "full_id": "英语-六下-06-02",
+          "title": "词汇：健康与不健康食物",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "学习区分健康和不健康的食物。",
+          "core_points": [
+            "healthy food 健康食物 (e.g., fruit, vegetables, milk, water, rice, bread)",
+            "unhealthy food 不健康食物 (e.g., candy, chips, soda, ice cream, fried chicken)",
+            "fruit /fruːt/ 水果",
+            "vegetables /ˈvedʒ.tə.bəlz/ 蔬菜",
+            "milk /mɪlk/ 牛奶",
+            "water /ˈwɑː.t̬ər/ 水",
+            "candy /ˈkæn.di/ 糖果",
+            "chips /tʃɪps/ 薯片",
+            "soda /ˈsoʊ.də/ 苏打水",
+            "fried chicken /fraɪd ˈtʃɪk.ɪn/ 炸鸡"
+          ],
+          "example": {
+            "question": "将下列食物分类：",
+            "steps": [
+              "1. apple, cola, carrots, chocolate, water",
+              "2. 分为 'Healthy Food' 和 'Unhealthy Food' 两类。"
+            ],
+            "answer": "Healthy Food: apple, carrots, water\nUnhealthy Food: cola, chocolate"
+          },
+          "mistakes": [
+            {
+              "wrong": "many fruits",
+              "correct": "much fruit"
+            }
+          ],
+          "memory_tip": "健康食物身体棒，水果蔬菜牛奶水。不健康食物少吃点，糖果薯片苏打水！"
+        },
+        {
+          "card_id": "06-03",
+          "full_id": "英语-六下-06-03",
+          "title": "语法：询问和表达感受 (How do you feel?)",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习使用'How do you feel?'询问感受，并用'I feel...'回答。",
+          "core_points": [
+            "询问句型：How do you feel? / How does he/she feel?",
+            "回答句型：I feel + 形容词. / He/She feels + 形容词.",
+            "feel是动词，意为“感觉，觉得”。",
+            "第三人称单数时，feel要加-s (feels)。",
+            "feel后直接接形容词，不加be动词。"
+          ],
+          "example": {
+            "question": "根据情景回答问题：",
+            "steps": [
+              "1. 你很开心，朋友问你：How do you feel?",
+              "2. 你的弟弟很生气，你告诉妈妈：How does he feel?"
+            ],
+            "answer": "1. I feel happy.\n2. He feels angry."
+          },
+          "mistakes": [
+            {
+              "wrong": "I feeling happy.",
+              "correct": "I feel happy."
+            },
+            {
+              "wrong": "He feel sad.",
+              "correct": "He feels sad."
+            }
+          ],
+          "memory_tip": "问感受，'How do you feel?'。回答'I feel...'，三单'feels'别忘记！"
+        },
+        {
+          "card_id": "06-04",
+          "full_id": "英语-六下-06-04",
+          "title": "句型：表达需求和建议 (I want to... / You should...)",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习表达自己的需求和给他人提供建议的句型。",
+          "core_points": [
+            "表达需求：I want to + 动词原形. / I need to + 动词原形.",
+            "给出建议：You should + 动词原形. / You shouldn't + 动词原形.",
+            "want to/need to表示“想要/需要做某事”。",
+            "should/shouldn't表示“应该/不应该做某事”。",
+            "这些情态动词和短语后面都接动词原形。"
+          ],
+          "example": {
+            "question": "根据情景完成对话：",
+            "steps": [
+              "1. A: I feel thirsty. (表达需求)",
+              "2. B: You should ____. (给出建议)",
+              "3. A: I feel sleepy. (表达需求)",
+              "4. B: You should ____. (给出建议)"
+            ],
+            "answer": "1. A: I feel thirsty.\n2. B: You should drink some water.\n3. A: I feel sleepy.\n4. B: You should go to bed."
+          },
+          "mistakes": [
+            {
+              "wrong": "I want drink water.",
+              "correct": "I want to drink water."
+            },
+            {
+              "wrong": "You should to eat.",
+              "correct": "You should eat."
+            }
+          ],
+          "memory_tip": "想要就说'want to'，需要就说'need to'。建议用'should'，后面动词原形来！"
+        },
+        {
+          "card_id": "06-05",
+          "full_id": "英语-六下-06-05",
+          "title": "易混词卡：hungry vs. angry",
+          "type": "易混词卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "区分形近词'hungry'(饥饿的)和'angry'(生气的)。",
+          "core_points": [
+            "hungry /ˈhʌŋ.ɡri/: 饥饿的，肚子饿的感觉。",
+            "angry /ˈæŋ.ɡri/: 生气的，不开心，有怒气的感觉。",
+            "两个词发音和拼写相似，但含义完全不同。",
+            "hungry强调身体对食物的需求，angry强调情绪。"
+          ],
+          "example": {
+            "question": "选择正确的词语填空：",
+            "steps": [
+              "1. I haven't eaten anything for a long time. I'm so ____.",
+              "2. My brother broke my toy. I'm very ____ at him."
+            ],
+            "answer": "1. hungry\n2. angry"
+          },
+          "mistakes": [
+            {
+              "wrong": "I'm angry.",
+              "correct": "I'm hungry."
+            }
+          ],
+          "memory_tip": "肚子咕咕叫，那是'hungry'。气得脸通红，那是'angry'。一个吃一个气，千万别搞错！"
+        }
+      ]
+    }
+  ]
+}

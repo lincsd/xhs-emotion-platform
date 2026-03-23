@@ -1,0 +1,836 @@
+{
+  "subject": "英语",
+  "grade": "三年级",
+  "semester": "上册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "三上",
+  "units": [
+    {
+      "unit_id": "01",
+      "unit_name": "Unit 1 Hello!",
+      "cards": [
+        {
+          "card_id": "01-01",
+          "full_id": "英语-三上-01-01",
+          "title": "词汇：日常问候语",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "学习最基本的英语问候语，用于与人打招呼。",
+          "core_points": [
+            "Hello! / Hi!：你好！",
+            "Good morning!：早上好！",
+            "Good afternoon!：下午好！",
+            "Good evening!：晚上好！"
+          ],
+          "example": {
+            "question": "请根据时间选择正确的问候语。",
+            "steps": [
+              "图片上是早上，太阳刚刚升起。",
+              "选择早上打招呼的词语。"
+            ],
+            "answer": "Good morning!"
+          },
+          "mistakes": [
+            {
+              "wrong": "晚上见面说Good night!",
+              "correct": "晚上见面说Good evening! Good night!是道别时说的。"
+            }
+          ],
+          "memory_tip": "早上太阳爬，Good morning!；下午玩耍乐，Good afternoon!；晚上星星亮，Good evening!；Hello! Hi! 随时都能说！",
+          "related": {
+            "prerequisite": "无",
+            "next": "情景对话：自我介绍"
+          }
+        },
+        {
+          "card_id": "01-02",
+          "full_id": "英语-三上-01-02",
+          "title": "情景对话：自我介绍和询问姓名",
+          "type": "情景对话卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习如何用英语介绍自己的名字，并询问他人的名字。",
+          "core_points": [
+            "介绍自己：I'm ... / My name is ...",
+            "询问姓名：What's your name?",
+            "回答询问：My name is ... / I'm ...",
+            "友好回应：Nice to meet you! (很高兴认识你！)"
+          ],
+          "example": {
+            "question": "补全对话：A: What's your name? B: ______. A: Nice to meet you!",
+            "steps": [
+              "B在回答A的问题，A问的是名字。",
+              "B需要介绍自己的名字。",
+              "选择一个合适的名字填入横线。"
+            ],
+            "answer": "My name is Mike. / I'm Mike."
+          },
+          "mistakes": [
+            {
+              "wrong": "问别人名字说 'Your name is what?'",
+              "correct": "正确的问法是 'What's your name?'"
+            }
+          ],
+          "memory_tip": "问名：What's your name? 我是：I'm...或My name is...，记住这两个，交朋友真容易！",
+          "related": {
+            "prerequisite": "词汇：日常问候语",
+            "next": "词汇：数字1-10"
+          }
+        },
+        {
+          "card_id": "01-03",
+          "full_id": "英语-三上-01-03",
+          "title": "自然拼读：字母 Aa, Bb",
+          "type": "自然拼读卡",
+          "difficulty": 1,
+          "importance": 4,
+          "definition": "学习字母 Aa 和 Bb 的大小写书写和常见发音。",
+          "core_points": [
+            "字母 Aa：大写A，小写a。发音 /æ/ (像苹果 apple 的a)。",
+            "字母 Bb：大写B，小写b。发音 /b/ (像球 ball 的b)。",
+            "Aa的书写像小山，Bb的书写像耳朵。",
+            "练习发音，感受口型变化。"
+          ],
+          "example": {
+            "question": "听单词，判断哪个包含字母 Bb 的发音：apple / ball",
+            "steps": [
+              "仔细听两个单词的发音。",
+              "找到发音 /b/ 的单词。"
+            ],
+            "answer": "ball"
+          },
+          "mistakes": [
+            {
+              "wrong": "将 /æ/ 发成汉语拼音的a。",
+              "correct": "/æ/ 的发音嘴巴张大，舌头放平，像中文的“哎”和“啊”的中间音。"
+            }
+          ],
+          "memory_tip": "A像小山尖，/æ/ /æ/ /æ/；B像两个圈，/b/ /b/ /b/。Aa apple, Bb ball，读准发音真奇妙！",
+          "related": {
+            "prerequisite": "无",
+            "next": "自然拼读：字母 Cc, Dd"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "02",
+      "unit_name": "Unit 2 Look at me!",
+      "cards": [
+        {
+          "card_id": "02-01",
+          "full_id": "英语-三上-02-01",
+          "title": "词汇：身体部位",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习描述身体各部位的英语单词。",
+          "core_points": [
+            "head (头) / face (脸)",
+            "eye (眼睛) / ear (耳朵) / nose (鼻子) / mouth (嘴巴)",
+            "arm (手臂) / hand (手)",
+            "leg (腿) / foot (脚)"
+          ],
+          "example": {
+            "question": "看图猜单词：图片是一个鼻子",
+            "steps": [
+              "观察图片，识别是身体的哪个部位。",
+              "回忆这个部位的英文单词。"
+            ],
+            "answer": "nose"
+          },
+          "mistakes": [
+            {
+              "wrong": "eyes / ears / hands / feet 忘记加 -s 变成复数。",
+              "correct": "当指多个眼睛、耳朵、手、脚时，要用复数形式。"
+            }
+          ],
+          "memory_tip": "Head头，face脸，eye眼，ear耳，nose鼻，mouth嘴。唱歌跳舞动起来，身体部位记心间！",
+          "related": {
+            "prerequisite": "无",
+            "next": "词汇：颜色"
+          }
+        },
+        {
+          "card_id": "02-02",
+          "full_id": "英语-三上-02-02",
+          "title": "词汇：颜色",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习描述物体颜色的英语单词。",
+          "core_points": [
+            "red (红色) / yellow (黄色) / blue (蓝色) / green (绿色)",
+            "white (白色) / black (黑色)",
+            "用 'It's ...' 来描述颜色，如 'It's red.'",
+            "用 'What color is it?' 来询问颜色。"
+          ],
+          "example": {
+            "question": "用英语说出下面图片的颜色：图片是一个红色的苹果。",
+            "steps": [
+              "识别图片的颜色。",
+              "说出对应颜色的英语单词。"
+            ],
+            "answer": "It's red."
+          },
+          "mistakes": [
+            {
+              "wrong": "说 'Red is it.'",
+              "correct": "描述颜色时，通常说 'It's red.' 或 'It is red.'"
+            }
+          ],
+          "memory_tip": "红red，黄yellow，蓝blue，绿green。白white，黑black，七彩世界真好看！",
+          "related": {
+            "prerequisite": "词汇：身体部位",
+            "next": "情景对话：描述外貌"
+          }
+        },
+        {
+          "card_id": "02-03",
+          "full_id": "英语-三上-02-03",
+          "title": "情景对话：描述外貌",
+          "type": "情景对话卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习用英语简单描述人物的身体部位和颜色特征。",
+          "core_points": [
+            "询问：What color is your/his/her ...?",
+            "回答：My/His/Her ... is ...",
+            "描述：I have ... / He/She has ...",
+            "例：I have two big eyes. (我有一双大眼睛。)"
+          ],
+          "example": {
+            "question": "根据图片描述人物：小女孩有长长的棕色头发。",
+            "steps": [
+              "识别图片人物的主要特征。",
+              "选择合适的词汇描述头发的颜色和形状。",
+              "用 'She has ...' 句型进行描述。"
+            ],
+            "answer": "She has long brown hair."
+          },
+          "mistakes": [
+            {
+              "wrong": "说 'She have long hair.'",
+              "correct": "主语是 'She' 时，动词要用 'has'，而不是 'have'。"
+            }
+          ],
+          "memory_tip": "看我长啥样？I have...来帮忙！眼睛鼻子和嘴巴，颜色形状全表达！",
+          "related": {
+            "prerequisite": "词汇：身体部位, 词汇：颜色",
+            "next": "自然拼读：字母 Cc, Dd"
+          }
+        },
+        {
+          "card_id": "02-04",
+          "full_id": "英语-三上-02-04",
+          "title": "自然拼读：字母 Cc, Dd",
+          "type": "自然拼读卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母 Cc 和 Dd 的大小写书写和常见发音。",
+          "core_points": [
+            "字母 Cc：大写C，小写c。发音 /k/ (像猫 cat 的c)。",
+            "字母 Dd：大写D，小写d。发音 /d/ (像狗 dog 的d)。",
+            "Cc的书写像半个圆，Dd的书写像反写的b。",
+            "练习发音，注意口型和舌位。"
+          ],
+          "example": {
+            "question": "听单词，判断哪个包含字母 Dd 的发音：cake / dog",
+            "steps": [
+              "仔细听两个单词的发音。",
+              "找到发音 /d/ 的单词。"
+            ],
+            "answer": "dog"
+          },
+          "mistakes": [
+            {
+              "wrong": "将 /k/ 发成汉语拼音的k。",
+              "correct": "/k/ 是清辅音，发音时声带不振动，舌根抬起抵住软腭，然后突然分开。"
+            }
+          ],
+          "memory_tip": "C像弯月牙，/k/ /k/ /k/；D像弓背虾，/d/ /d/ /d/。Cc cat, Dd dog，字母发音真好学！",
+          "related": {
+            "prerequisite": "自然拼读：字母 Aa, Bb",
+            "next": "自然拼读：字母 Ee, Ff"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "03",
+      "unit_name": "Unit 3 What's this?",
+      "cards": [
+        {
+          "card_id": "03-01",
+          "full_id": "英语-三上-03-01",
+          "title": "词汇：学习用品",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习描述常见学习用品的英语单词。",
+          "core_points": [
+            "pen (钢笔) / pencil (铅笔) / book (书)",
+            "bag (书包) / ruler (尺子) / eraser (橡皮)",
+            "pencil case (铅笔盒)",
+            "用 'It's a/an ...' 来介绍物品。"
+          ],
+          "example": {
+            "question": "看图说单词：图片是一个书包。",
+            "steps": [
+              "识别图片中的物品。",
+              "说出该物品的英文名称。"
+            ],
+            "answer": "bag"
+          },
+          "mistakes": [
+            {
+              "wrong": "将 pen 和 pencil 混淆。",
+              "correct": "pen 是钢笔，pencil 是铅笔。"
+            }
+          ],
+          "memory_tip": "Pen笔，pencil铅笔，book书本，bag书包。Ruler尺子，eraser橡皮，学习用品要记牢！",
+          "related": {
+            "prerequisite": "无",
+            "next": "句型卡：询问和指代物品"
+          }
+        },
+        {
+          "card_id": "03-02",
+          "full_id": "英语-三上-03-02",
+          "title": "句型卡：询问和指代物品 (What's this/that?)",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习用 'What's this/that?' 询问物体，并用 'It's a/an ...' 回答。",
+          "core_points": [
+            "What's this? (这是什么？) — 用于指代近处的单个物体。",
+            "What's that? (那是什么？) — 用于指代远处的单个物体。",
+            "It's a/an ... (它是一个/一个...) — 回答句型。",
+            "注意 a/an 的用法：元音字母开头的单词前用 an，辅音字母开头的单词前用 a。"
+          ],
+          "example": {
+            "question": "看图补全对话：A: What's ____? (指着远处的铅笔) B: It's ____ pencil.",
+            "steps": [
+              "根据图片中铅笔的距离（远处），选择合适的疑问词。",
+              "根据 pencil 的发音（辅音开头），选择正确的冠词。"
+            ],
+            "answer": "A: What's that? B: It's a pencil."
+          },
+          "mistakes": [
+            {
+              "wrong": "将 this 和 that 混用，不区分远近。",
+              "correct": "This 指近处，that 指远处。"
+            },
+            {
+              "wrong": "a 和 an 用错。",
+              "correct": "a 用于辅音开头，an 用于元音开头。"
+            }
+          ],
+          "memory_tip": "This近，that远，区分远近是关键。What's this? What's that? 问问答答真简单！",
+          "related": {
+            "prerequisite": "词汇：学习用品",
+            "next": "易混词卡：this/that"
+          }
+        },
+        {
+          "card_id": "03-03",
+          "full_id": "英语-三上-03-03",
+          "title": "易混词卡：this / that",
+          "type": "易混词卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "辨析指示代词 this 和 that 的用法，区分远近。",
+          "core_points": [
+            "this：指代离说话人较近的、单数的物体或人。意思是“这，这个”。",
+            "that：指代离说话人较远的、单数的物体或人。意思是“那，那个”。",
+            "两者都用来指代单数名词。",
+            "在问句和答句中都常用到。"
+          ],
+          "example": {
+            "question": "选择填空：Look at ____ book. (书在我的手边)",
+            "steps": [
+              "判断书本与说话人的距离（手边，表示近）。",
+              "选择表示近处的指示代词。"
+            ],
+            "answer": "this"
+          },
+          "mistakes": [
+            {
+              "wrong": "指着远处的东西说 'This is my bag.'",
+              "correct": "应该说 'That is my bag.'，因为 bag 在远处。"
+            }
+          ],
+          "memory_tip": "This指近，That指远，远近分清不困难。This是“这个”，That是“那个”，指物指人都能用！",
+          "related": {
+            "prerequisite": "句型卡：询问和指代物品",
+            "next": "自然拼读：字母 Ee, Ff"
+          }
+        },
+        {
+          "card_id": "03-04",
+          "full_id": "英语-三上-03-04",
+          "title": "自然拼读：字母 Ee, Ff",
+          "type": "自然拼读卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母 Ee 和 Ff 的大小写书写和常见发音。",
+          "core_points": [
+            "字母 Ee：大写E，小写e。发音 /e/ (像鸡蛋 egg 的e)。",
+            "字母 Ff：大写F，小写f。发音 /f/ (像鱼 fish 的f)。",
+            "Ee的书写像梳子，Ff的书写像旗杆。",
+            "练习发音，注意口型和送气。"
+          ],
+          "example": {
+            "question": "听单词，判断哪个包含字母 Ff 的发音：elephant / fan",
+            "steps": [
+              "仔细听两个单词的发音。",
+              "找到发音 /f/ 的单词。"
+            ],
+            "answer": "fan"
+          },
+          "mistakes": [
+            {
+              "wrong": "将 /e/ 发成汉语拼音的e。",
+              "correct": "/e/ 的发音嘴巴微张，舌头平放，像中文的“哎”的短促音。"
+            }
+          ],
+          "memory_tip": "E像梳子齿，/e/ /e/ /e/；F像小旗帜，/f/ /f/ /f/。Ee egg, Ff fish，发音练习别忘记！",
+          "related": {
+            "prerequisite": "自然拼读：字母 Cc, Dd",
+            "next": "自然拼读：字母 Gg, Hh"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "04",
+      "unit_name": "Unit 4 Where is my car?",
+      "cards": [
+        {
+          "card_id": "04-01",
+          "full_id": "英语-三上-04-01",
+          "title": "词汇：玩具",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习描述常见玩具的英语单词。",
+          "core_points": [
+            "car (小汽车) / toy (玩具，泛指)",
+            "boat (小船) / doll (洋娃娃) / ball (球)",
+            "plane (飞机) / train (火车)",
+            "这些都是孩子们喜欢的玩具。"
+          ],
+          "example": {
+            "question": "看图说单词：图片是一个小汽车。",
+            "steps": [
+              "识别图片中的玩具。",
+              "说出该玩具的英文名称。"
+            ],
+            "answer": "car"
+          },
+          "mistakes": [
+            {
+              "wrong": "把 toy 和 doll 混淆。",
+              "correct": "toy 是泛指玩具，doll 专指洋娃娃。"
+            }
+          ],
+          "memory_tip": "Car汽车，boat小船，doll娃娃，ball球。Plane飞机，train火车，玩具世界真热闹！",
+          "related": {
+            "prerequisite": "无",
+            "next": "语法卡：介词 on/in/under"
+          }
+        },
+        {
+          "card_id": "04-02",
+          "full_id": "英语-三上-04-02",
+          "title": "语法卡：介词 on / in / under",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习表示物体位置的三个基本介词：on (在...上面), in (在...里面), under (在...下面)。",
+          "core_points": [
+            "on：表示在物体表面之上，并与之接触。",
+            "in：表示在物体内部，被包围。",
+            "under：表示在物体下方，不一定接触。",
+            "通常与 'be' 动词连用，构成 'It's on/in/under the ...' 句型。",
+            "区分与中文“在”的不同。"
+          ],
+          "example": {
+            "question": "选择正确的介词填空：The ball is ____ the box. (球在盒子里面)",
+            "steps": [
+              "观察图片，判断球和盒子的相对位置。",
+              "选择表示“在...里面”的介词。"
+            ],
+            "answer": "in"
+          },
+          "mistakes": [
+            {
+              "wrong": "说 'The ball in the box.'",
+              "correct": "缺少动词，应为 'The ball is in the box.'。"
+            }
+          ],
+          "memory_tip": "On在上面，in在里面，under在下面。小球藏猫猫，介词位置记心间！",
+          "related": {
+            "prerequisite": "词汇：玩具",
+            "next": "句型卡：询问和回答物品位置"
+          }
+        },
+        {
+          "card_id": "04-03",
+          "full_id": "英语-三上-04-03",
+          "title": "句型卡：询问和回答物品位置 (Where is...?)",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习如何用 'Where is...?' 询问物品的位置，并用 'It's on/in/under the ...' 回答。",
+          "core_points": [
+            "询问句型：Where is my/the ...?",
+            "回答句型：It's on/in/under the ...",
+            "主语是单数时用 'is'，回答时用 'It's'。",
+            "练习指代不同的物体和不同的位置。"
+          ],
+          "example": {
+            "question": "补全对话：A: Where is the doll? B: It's ____ the bed. (娃娃在床上面)",
+            "steps": [
+              "根据问题，判断需要回答娃娃的位置。",
+              "根据图片信息（娃娃在床上面），选择正确的介词。"
+            ],
+            "answer": "on"
+          },
+          "mistakes": [
+            {
+              "wrong": "回答时说 'On the bed.' (不完整)",
+              "correct": "完整的回答是 'It's on the bed.'"
+            }
+          ],
+          "memory_tip": "Where is...? 问哪里？On/in/under来回答。找东西，问位置，这个句型真好用！",
+          "related": {
+            "prerequisite": "语法卡：介词 on/in/under",
+            "next": "自然拼读：字母 Gg, Hh"
+          }
+        },
+        {
+          "card_id": "04-04",
+          "full_id": "英语-三上-04-04",
+          "title": "自然拼读：字母 Gg, Hh",
+          "type": "自然拼读卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母 Gg 和 Hh 的大小写书写和常见发音。",
+          "core_points": [
+            "字母 Gg：大写G，小写g。发音 /g/ (像女孩 girl 的g)。",
+            "字母 Hh：大写H，小写h。发音 /h/ (像房子 house 的h)。",
+            "Gg的书写像耳朵，Hh的书写像梯子。",
+            "练习发音，注意 /h/ 是一个气音。"
+          ],
+          "example": {
+            "question": "听单词，判断哪个包含字母 Gg 的发音：hat / grape",
+            "steps": [
+              "仔细听两个单词的发音。",
+              "找到发音 /g/ 的单词。"
+            ],
+            "answer": "grape"
+          },
+          "mistakes": [
+            {
+              "wrong": "将 /h/ 发成汉语拼音的h。",
+              "correct": "/h/ 是一个摩擦音，发音时气流从喉咙摩擦而出，声带不振动。"
+            }
+          ],
+          "memory_tip": "G像耳朵弯，/g/ /g/ /g/；H像小梯子，/h/ /h/ /h/。Gg girl, Hh house，发音标准顶呱呱！",
+          "related": {
+            "prerequisite": "自然拼读：字母 Ee, Ff",
+            "next": "自然拼读：字母 Ii, Jj"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "05",
+      "unit_name": "Unit 5 I have a pen.",
+      "cards": [
+        {
+          "card_id": "05-01",
+          "full_id": "英语-三上-05-01",
+          "title": "词汇：家庭成员",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习描述家庭成员的英语单词。",
+          "core_points": [
+            "father (父亲) / mother (母亲)",
+            "brother (兄弟) / sister (姐妹)",
+            "grandpa (爷爷/外公) / grandma (奶奶/外婆)",
+            "family (家庭)",
+            "这些是核心的家庭成员称谓。"
+          ],
+          "example": {
+            "question": "看图说单词：图片是一个妈妈。",
+            "steps": [
+              "识别图片中的人物。",
+              "说出该人物的英文称谓。"
+            ],
+            "answer": "mother"
+          },
+          "mistakes": [
+            {
+              "wrong": "把 brother 和 sister 混淆。",
+              "correct": "brother 是兄弟，sister 是姐妹。"
+            }
+          ],
+          "memory_tip": "Father爸爸，mother妈妈，brother兄弟，sister姐妹。Grandpa爷爷，grandma奶奶，我的家庭真可爱！",
+          "related": {
+            "prerequisite": "无",
+            "next": "语法卡：动词 have/has"
+          }
+        },
+        {
+          "card_id": "05-02",
+          "full_id": "英语-三上-05-02",
+          "title": "语法卡：动词 have / has (拥有)",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习动词 have 和 has 表示“拥有”的用法，并区分主语搭配。",
+          "core_points": [
+            "have：用于 I, you, we, they 和复数名词作主语时。",
+            "has：用于 he, she, it 和单数名词作主语时。",
+            "表示“拥有”或“有”某物。",
+            "例：I have a pen. (我有一支钢笔。) He has a book. (他有一本书。)"
+          ],
+          "example": {
+            "question": "选择正确的动词填空：She ____ a doll. (她有一个洋娃娃)",
+            "steps": [
+              "判断主语是 'She' (第三人称单数)。",
+              "选择与第三人称单数主语搭配的动词。"
+            ],
+            "answer": "has"
+          },
+          "mistakes": [
+            {
+              "wrong": "说 'He have a car.'",
+              "correct": "主语是 'He' 时，动词应为 'has'，即 'He has a car.'。"
+            }
+          ],
+          "memory_tip": "I you we they 用 have，he she it 用 has。记住口诀不犯错，谁拥有啥都知道！",
+          "related": {
+            "prerequisite": "词汇：家庭成员",
+            "next": "情景对话卡：介绍家人和物品"
+          }
+        },
+        {
+          "card_id": "05-03",
+          "full_id": "英语-三上-05-03",
+          "title": "情景对话卡：介绍家人和物品",
+          "type": "情景对话卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何用 'This is my...' 和 'I have...' 介绍家人和自己拥有的物品。",
+          "core_points": [
+            "介绍家人：This is my father/mother/brother/sister.",
+            "介绍自己拥有的物品：I have a/an ...",
+            "询问对方：Do you have a/an ...?",
+            "肯定回答：Yes, I do. / 否定回答：No, I don't."
+          ],
+          "example": {
+            "question": "补全对话：A: This is my ______. (指着图片中的妹妹) B: Nice to meet you! A: I have a new ______. (指着一支笔)",
+            "steps": [
+              "根据图片，判断A在介绍谁。",
+              "根据图片，判断A在介绍什么物品。"
+            ],
+            "answer": "A: This is my sister. B: Nice to meet you! A: I have a new pen."
+          },
+          "mistakes": [
+            {
+              "wrong": "回答 'Do you have...?' 时，直接说 'Yes.'",
+              "correct": "完整的回答是 'Yes, I do.' 或 'No, I don't.'"
+            }
+          ],
+          "memory_tip": "This is my...介绍家人，I have...介绍物品。分享生活小乐趣，英语对话真有趣！",
+          "related": {
+            "prerequisite": "词汇：家庭成员, 语法卡：动词 have/has",
+            "next": "自然拼读：字母 Ii, Jj"
+          }
+        },
+        {
+          "card_id": "05-04",
+          "full_id": "英语-三上-05-04",
+          "title": "自然拼读：字母 Ii, Jj",
+          "type": "自然拼读卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母 Ii 和 Jj 的大小写书写和常见发音。",
+          "core_points": [
+            "字母 Ii：大写I，小写i。发音 /ɪ/ (像墨水 ink 的i)。",
+            "字母 Jj：大写J，小写j。发音 /dʒ/ (像果酱 jam 的j)。",
+            "Ii的书写像火柴，Jj的书写像鱼钩。",
+            "练习发音，注意 /ɪ/ 和 /i:/ 的区别，以及 /dʒ/ 的浊音。"
+          ],
+          "example": {
+            "question": "听单词，判断哪个包含字母 Ii 的发音：juice / insect",
+            "steps": [
+              "仔细听两个单词的发音。",
+              "找到发音 /ɪ/ 的单词。"
+            ],
+            "answer": "insect"
+          },
+          "mistakes": [
+            {
+              "wrong": "将 /ɪ/ 发成汉语拼音的i。",
+              "correct": "/ɪ/ 的发音嘴巴放松，舌头靠前，比 /i:/ 更短促。"
+            }
+          ],
+          "memory_tip": "I像火柴棍，/ɪ/ /ɪ/ /ɪ/；J像小鱼钩，/dʒ/ /dʒ/ /dʒ/。Ii ink, Jj jam，发音练习要多练！",
+          "related": {
+            "prerequisite": "自然拼读：字母 Gg, Hh",
+            "next": "自然拼读：字母 Kk, Ll"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "06",
+      "unit_name": "Unit 6 How many?",
+      "cards": [
+        {
+          "card_id": "06-01",
+          "full_id": "英语-三上-06-01",
+          "title": "词汇：数字 1-10",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "学习用英语表达数字 1 到 10。",
+          "core_points": [
+            "one (1) / two (2) / three (3)",
+            "four (4) / five (5) / six (6)",
+            "seven (7) / eight (8) / nine (9) / ten (10)",
+            "熟练掌握每个数字的读音和拼写。"
+          ],
+          "example": {
+            "question": "写出数字的英文单词：8",
+            "steps": [
+              "识别数字。",
+              "写出对应的英文单词。"
+            ],
+            "answer": "eight"
+          },
+          "mistakes": [
+            {
+              "wrong": "three 容易拼写错成 'tree'。",
+              "correct": "three 有 'th' 字母组合。"
+            }
+          ],
+          "memory_tip": "一二三四五，one two three four five。六七八九十，six seven eight nine ten。数字歌谣真好听，边唱边记效率高！",
+          "related": {
+            "prerequisite": "无",
+            "next": "语法卡：名词的复数形式"
+          }
+        },
+        {
+          "card_id": "06-02",
+          "full_id": "英语-三上-06-02",
+          "title": "语法卡：名词的复数形式",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习名词变复数的基本规则，主要以加 -s 为主。",
+          "core_points": [
+            "一般情况下，在名词后加 -s 变成复数，发音 /s/ 或 /z/。",
+            "例：one book (一本书) -> two books (两本书)",
+            "例：one pen (一支笔) -> three pens (三支笔)",
+            "少数特殊情况（如以 s, x, ch, sh 结尾加 -es，以 y 结尾变 i 加 -es）为高年级内容，三年级主要掌握加 -s。",
+            "注意复数名词与数字连用。"
+          ],
+          "example": {
+            "question": "将下列单词变为复数形式：car",
+            "steps": [
+              "判断单词的词尾。",
+              "根据一般规则，在词尾加 -s。"
+            ],
+            "answer": "cars"
+          },
+          "mistakes": [
+            {
+              "wrong": "说 'two book'。",
+              "correct": "数量大于一时，名词要用复数形式，应为 'two books'。"
+            }
+          ],
+          "memory_tip": "一个物体不加s，两个以上s跟着。book变books，pen变pens，数量多了别忘记！",
+          "related": {
+            "prerequisite": "词汇：数字 1-10",
+            "next": "句型卡：询问和回答数量"
+          }
+        },
+        {
+          "card_id": "06-03",
+          "full_id": "英语-三上-06-03",
+          "title": "句型卡：询问和回答数量 (How many...?)",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习用 'How many...?' 询问物品的数量，并用 'There are ...' 回答。",
+          "core_points": [
+            "询问句型：How many ...s are there?",
+            "回答句型：There are ... (数字) ...s.",
+            "被询问的名词必须是可数名词的复数形式。",
+            "例：How many books are there? (有多少本书？) There are ten books. (有十本书。)"
+          ],
+          "example": {
+            "question": "补全对话：A: How many ____ are there? (图片上有5支铅笔) B: There are ____ pencils.",
+            "steps": [
+              "根据图片，判断A在询问什么物品，并变为复数。",
+              "根据图片，数出铅笔的数量，并填入数字。"
+            ],
+            "answer": "A: How many pencils are there? B: There are five pencils."
+          },
+          "mistakes": [
+            {
+              "wrong": "问 'How many pencil is there?'",
+              "correct": "名词要用复数形式，且用 'are there'，应为 'How many pencils are there?'"
+            }
+          ],
+          "memory_tip": "How many? 问数量，名词复数跟着它。There are...来回答，数清数字别犯傻！",
+          "related": {
+            "prerequisite": "词汇：数字 1-10, 语法卡：名词的复数形式",
+            "next": "自然拼读：字母 Kk, Ll"
+          }
+        },
+        {
+          "card_id": "06-04",
+          "full_id": "英语-三上-06-04",
+          "title": "自然拼读：字母 Kk, Ll",
+          "type": "自然拼读卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母 Kk 和 Ll 的大小写书写和常见发音。",
+          "core_points": [
+            "字母 Kk：大写K，小写k。发音 /k/ (像风筝 kite 的k)。",
+            "字母 Ll：大写L，小写l。发音 /l/ (像狮子 lion 的l)。",
+            "Kk的书写像大叉，Ll的书写像小棍。",
+            "练习发音，注意 /k/ 和 /l/ 的口型和舌位。"
+          ],
+          "example": {
+            "question": "听单词，判断哪个包含字母 Ll 的发音：key / lamp",
+            "steps": [
+              "仔细听两个单词的发音。",
+              "找到发音 /l/ 的单词。"
+            ],
+            "answer": "lamp"
+          },
+          "mistakes": [
+            {
+              "wrong": "将 /l/ 发成汉语拼音的l。",
+              "correct": "/l/ 是舌侧音，发音时舌尖抵住上齿龈，气流从舌头两侧流出。"
+            }
+          ],
+          "memory_tip": "K像大叉叉，/k/ /k/ /k/；L像小棍棍，/l/ /l/ /l/。Kk kite, Ll lion，拼读游戏真好玩！",
+          "related": {
+            "prerequisite": "自然拼读：字母 Ii, Jj",
+            "next": "自然拼读：字母 Mm, Nn (下册)"
+          }
+        }
+      ]
+    }
+  ]
+}

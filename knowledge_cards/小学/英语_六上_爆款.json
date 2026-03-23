@@ -1,0 +1,663 @@
+{
+  "subject": "英语",
+  "grade": "六年级",
+  "semester": "上册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "六上",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片",
+  "units": [
+    {
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [
+        {
+          "card_id": "T1-01",
+          "full_id": "英语-六上-T1-01",
+          "title": "💥10个孩子9个错！many/much分不清，英语白学了？！",
+          "type": "易混词陷阱卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "many用于可数名词复数，much用于不可数名词，都表示“许多”。",
+          "core_points": [
+            "many + 可数名词复数",
+            "much + 不可数名词",
+            "两者都表示“许多”"
+          ],
+          "example": {
+            "question": "There isn't (  ) water in the bottle.",
+            "steps": [
+              "判断water是可数还是不可数名词。",
+              "根据规则选择many或much。"
+            ],
+            "answer": "much"
+          },
+          "mistakes": [
+            {
+              "wrong": "How many water do you want?",
+              "correct": "How much water do you want?"
+            }
+          ],
+          "memory_tip": "数得清用many，数不清用much！",
+          "emotion_hook": "别再傻傻分不清了，一卡搞定！",
+          "trap_point": "water是不可数名词，所以只能用much。"
+        },
+        {
+          "card_id": "T1-02",
+          "full_id": "英语-六上-T1-02",
+          "title": "⚠️Some和Any你真的会用吗？小学高年级必考！",
+          "type": "易混词陷阱卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "some通常用于肯定句，any通常用于否定句和疑问句。但在请求或建议的疑问句中，some也可使用。",
+          "core_points": [
+            "some用于肯定句",
+            "any用于否定句",
+            "any用于一般疑问句",
+            "some在表示请求或建议的疑问句中也可使用"
+          ],
+          "example": {
+            "question": "Do you have (  ) brothers or sisters?",
+            "steps": [
+              "判断句子类型是疑问句。",
+              "根据规则选择some或any。"
+            ],
+            "answer": "any"
+          },
+          "mistakes": [
+            {
+              "wrong": "I don't have some books.",
+              "correct": "I don't have any books."
+            }
+          ],
+          "memory_tip": "肯定用some，否定疑问用any，请求建议some也行！",
+          "emotion_hook": "小细节决定大分数，赶紧收藏！",
+          "trap_point": "一般疑问句通常用any，但在表示请求或建议时，即使是疑问句也可用some。"
+        },
+        {
+          "card_id": "T1-03",
+          "full_id": "英语-六上-T1-03",
+          "title": "✈️假期出行必看！Trip/Travel/Journey，你用对了吗？！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "trip指短途旅行或一次出行；travel指旅行的动作或行为，泛指旅行；journey指一段较长的旅程，尤其强调路途本身。",
+          "core_points": [
+            "trip (n.) 短途旅行，出差",
+            "travel (v./n.) 旅行（泛指），动词时不可数",
+            "journey (n.) 长途旅行，路程"
+          ],
+          "example": {
+            "question": "We had a wonderful (  ) to Hainan last summer.",
+            "steps": [
+              "分析句意，此处指一次具体的旅行。",
+              "选择最合适的词。"
+            ],
+            "answer": "trip"
+          },
+          "mistakes": [
+            {
+              "wrong": "I like to trip.",
+              "correct": "I like to travel."
+            }
+          ],
+          "memory_tip": "trip是“一趟”，travel是“动”，journey是“长路”。",
+          "emotion_hook": "告别“ Chinglish”，让你的英语更地道！",
+          "trap_point": "travel作为动词时，后面通常不直接跟目的地，而trip则可以指一次具体的旅程。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T2",
+      "unit_name": "发音挑战",
+      "cards": [
+        {
+          "card_id": "T2-01",
+          "full_id": "英语-六上-T2-01",
+          "title": "😱这个-ed你读对了吗？90%的人都栽在这儿！",
+          "type": "发音挑战卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "规则动词过去式-ed有三种发音：/t/, /d/, /ɪd/。",
+          "core_points": [
+            "动词以清辅音结尾（除/t/），-ed发/t/，如: looked /lʊkt/",
+            "动词以浊辅音或元音结尾（除/d/），-ed发/d/，如: played /pleɪd/",
+            "动词以/t/或/d/结尾，-ed发/ɪd/，如: wanted /ˈwɒntɪd/"
+          ],
+          "example": {
+            "question": "请判断 `wanted` 中-ed的发音。",
+            "steps": [
+              "判断want的词尾发音是/t/。",
+              "根据规则确定-ed的发音。"
+            ],
+            "answer": "/ɪd/"
+          },
+          "mistakes": [
+            {
+              "wrong": "walked /wɔːktɪd/",
+              "correct": "walked /wɔːkt/"
+            }
+          ],
+          "memory_tip": "清辅音清/t/，浊辅音浊/d/，t/d后面加/ɪd/！",
+          "emotion_hook": "别让你的发音暴露了你的英语水平！",
+          "pronunciation_tip": "发音时要轻快，不要拖沓，尤其是/t/和/d/音。"
+        },
+        {
+          "card_id": "T2-02",
+          "full_id": "英语-六上-T2-02",
+          "title": "🤣别再把“水果”和“西装”读混了！超容易读错的单词！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "fruit /fruːt/ 和 suit /suːt/ 或 /sjuːt/，u字母组合在不同单词中有不同发音。",
+          "core_points": [
+            "fruit 的u发/uː/音",
+            "suit 的u发/uː/或/juː/音",
+            "注意区分元音长短和前置辅音的影响"
+          ],
+          "example": {
+            "question": "请朗读 `fruit` 和 `suit`。",
+            "steps": [
+              "注意 `fr` 组合和 `s` 后的 `u` 发音。",
+              "对比两个词的元音。"
+            ],
+            "answer": "fruit /fruːt/, suit /suːt/ (或 /sjuːt/)"
+          },
+          "mistakes": [
+            {
+              "wrong": "fruit /sjuːt/",
+              "correct": "fruit /fruːt/"
+            }
+          ],
+          "memory_tip": "水果（fruit）嘴巴扁，西装（suit）嘴巴圆！",
+          "emotion_hook": "小红书英语达人必备，发音细节控！",
+          "pronunciation_tip": "fruit中的u是长元音/uː/，suit中的u是长元音/uː/或双元音/juː/，注意口型变化。"
+        },
+        {
+          "card_id": "T2-03",
+          "full_id": "英语-六上-T2-03",
+          "title": "👂耳朵/熊/穿，发音简直是“魔鬼”！你敢挑战吗？",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "bear /beər/, wear /weər/, hear /hɪər/，字母组合不同，但发音有相似之处，易混淆。",
+          "core_points": [
+            "bear /beər/ (熊，忍受，出生)",
+            "wear /weər/ (穿，戴)",
+            "hear /hɪər/ (听见)"
+          ],
+          "example": {
+            "question": "请判断 `bear` 和 `wear` 的元音发音是否相同。",
+            "steps": [
+              "注意 `ea` 和 `ea` 在不同单词中的发音。",
+              "对比两个词的音标。"
+            ],
+            "answer": "相同，都发 /eər/ 音"
+          },
+          "mistakes": [
+            {
+              "wrong": "hear /heər/",
+              "correct": "hear /hɪər/"
+            }
+          ],
+          "memory_tip": "熊和穿（bear, wear）像姐妹，耳朵（hear）有点不一样！",
+          "emotion_hook": "挑战你的发音极限，成为班级小明星！",
+          "pronunciation_tip": "注意/eər/和/ɪər/的区别，/eər/舌位较低，/ɪər/舌位较高，嘴巴张开程度不同。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T3",
+      "unit_name": "情景闯关",
+      "cards": [
+        {
+          "card_id": "T3-01",
+          "full_id": "英语-六上-T3-01",
+          "title": "🍔去麦当劳点餐，只会说\"I want...\"？太尴尬了！",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习在快餐店点餐的常用句型和礼貌表达，如“I'd like...”、“Can I get...?”。",
+          "core_points": [
+            "“Can I help you?” （店员）",
+            "“I'd like a... / two...” （顾客，礼貌表达想要什么）",
+            "“Anything else?” （店员，询问是否还需要其他）",
+            "“That's all, thank you.” （顾客，表示点完了）"
+          ],
+          "example": {
+            "question": "你想要一个汉堡和一杯可乐，怎么说？",
+            "steps": [
+              "使用礼貌的表达“I'd like...”。",
+              "说出你想要的食物和饮料名称。"
+            ],
+            "answer": "I'd like a hamburger and a Coke, please."
+          },
+          "mistakes": [
+            {
+              "wrong": "I want a hamburger.",
+              "correct": "I'd like a hamburger, please."
+            }
+          ],
+          "memory_tip": "点餐要礼貌，I'd like最地道！",
+          "emotion_hook": "告别哑巴英语，自信点餐，从现在开始！",
+          "scene_dialogue": [
+            "店员: Can I help you?",
+            "你: Yes, I'd like a hamburger and a Coke, please.",
+            "店员: Anything else?",
+            "你: No, that's all, thank you."
+          ]
+        },
+        {
+          "card_id": "T3-02",
+          "full_id": "英语-六上-T3-02",
+          "title": "🏖️暑假去哪儿？用英语和朋友聊聊你的旅行计划！",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习用\"be going to\"表达未来计划，并描述假期活动，是六年级上册的核心语法点。",
+          "core_points": [
+            "“What are you going to do...?” （询问计划）",
+            "“I'm going to...” （回答计划）",
+            "“Where are you going to go...?” （询问目的地）",
+            "“I'm going to visit...” （回答目的地）"
+          ],
+          "example": {
+            "question": "你想去海南度假，并在海边游泳，怎么和朋友说？",
+            "steps": [
+              "用be going to表达去海南。",
+              "用be going to表达在海边游泳。"
+            ],
+            "answer": "I'm going to Hainan for my holiday. I'm going to swim at the beach."
+          },
+          "mistakes": [
+            {
+              "wrong": "I going to Hainan.",
+              "correct": "I am going to Hainan."
+            }
+          ],
+          "memory_tip": "未来计划be going to，be动词别忘了！",
+          "emotion_hook": "假期英语对话不卡壳，让你的计划更精彩！",
+          "scene_dialogue": [
+            "A: What are you going to do this summer holiday?",
+            "B: I'm going to Hainan! I'm going to swim at the beach and eat some delicious food.",
+            "A: Sounds great!"
+          ]
+        },
+        {
+          "card_id": "T3-03",
+          "full_id": "英语-六上-T3-03",
+          "title": "🍂秋天来了！用英语描述你最喜欢的季节！",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "学习描述季节特点、天气和相关活动，运用形容词和一般现在时。",
+          "core_points": [
+            "“What's your favourite season?” （询问最喜欢的季节）",
+            "“My favourite season is...” （回答）",
+            "“In (season), it's (weather) and I like to (activity).” （描述季节特点和活动）"
+          ],
+          "example": {
+            "question": "你最喜欢秋天，因为天气凉爽，你可以去爬山。用英语怎么说？",
+            "steps": [
+              "表达最喜欢的季节。",
+              "描述秋天的天气。",
+              "说出你喜欢的活动。"
+            ],
+            "answer": "My favourite season is autumn. In autumn, it's cool and I like to climb mountains."
+          },
+          "mistakes": [
+            {
+              "wrong": "In autumn, it cool.",
+              "correct": "In autumn, it's cool."
+            }
+          ],
+          "memory_tip": "描述天气用it's，描述活动用I like to。",
+          "emotion_hook": "聊聊你的四季，让你的英语充满生活气息！",
+          "scene_dialogue": [
+            "A: What's your favourite season, Mike?",
+            "B: My favourite season is autumn. It's cool and I like to climb mountains.",
+            "A: Me too!"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "T4",
+      "unit_name": "语法纠错",
+      "cards": [
+        {
+          "card_id": "T4-01",
+          "full_id": "英语-六上-T4-01",
+          "title": "❌这句话10个人9个说错！你的过去式动词对了吗？",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "动词过去式是小学英语六年级上册的重点，尤其是不规则动词的运用，表示过去发生的动作或状态。",
+          "core_points": [
+            "规则动词一般在词尾加-ed",
+            "不规则动词的过去式形式需要特别记忆",
+            "句中出现过去时间状语（如yesterday, last year, ago）时，动词通常用过去式"
+          ],
+          "example": {
+            "question": "纠正句子：`I go to the park yesterday.`",
+            "steps": [
+              "识别时间状语yesterday，确定句子应为过去时态。",
+              "判断动词go的过去式是went。",
+              "替换动词go为went。"
+            ],
+            "answer": "I went to the park yesterday."
+          },
+          "mistakes": [
+            {
+              "wrong": "She eat an apple last night.",
+              "correct": "She ate an apple last night."
+            }
+          ],
+          "memory_tip": "过去时间过去式，动词变形要牢记！",
+          "emotion_hook": "别再犯低级错误了，语法细节决定高分！",
+          "grammar_fix": "过去时态中，动词要变成过去式形式，不规则动词需特别记忆，是六年级上册的重点。"
+        },
+        {
+          "card_id": "T4-02",
+          "full_id": "英语-六上-T4-02",
+          "title": "🤯“be going to”你真的用对了吗？小学高年级易错点！",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "\"be going to\"表示将要发生的动作或计划，be动词要与主语保持一致，是六年级上册的核心语法点。",
+          "core_points": [
+            "结构是 \"主语 + be (am/is/are) + going to + 动词原形\"",
+            "be动词必须与主语的人称和数保持一致",
+            "表示未来有计划、有准备的动作或意图"
+          ],
+          "example": {
+            "question": "纠正句子：`He going to play football tomorrow.`",
+            "steps": [
+              "识别be going to结构。",
+              "检查be动词是否与主语he一致。",
+              "添加正确的be动词is。"
+            ],
+            "answer": "He is going to play football tomorrow."
+          },
+          "mistakes": [
+            {
+              "wrong": "They are going to goes swimming.",
+              "correct": "They are going to go swimming."
+            }
+          ],
+          "memory_tip": "be going to，be动词不能少，后面动词用原形！",
+          "emotion_hook": "未来时态不再迷茫，一招搞定“be going to”！",
+          "grammar_fix": "\"be going to\"结构中，be动词必须与主语人称和数一致，且\"going to\"后接动词原形。"
+        },
+        {
+          "card_id": "T4-03",
+          "full_id": "英语-六上-T4-03",
+          "title": "❓“他做作业”英语怎么说？Do/Does傻傻分不清？！",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "在一般现在时中，当主语是第三人称单数时，疑问句和否定句的助动词用does；其他主语用do。",
+          "core_points": [
+            "主语是I/you/we/they或复数名词时，助动词用do",
+            "主语是he/she/it或单数名词时，助动词用does",
+            "助动词do/does后，动词必须用原形"
+          ],
+          "example": {
+            "question": "纠正句子：`Do she like apples?`",
+            "steps": [
+              "识别主语she是第三人称单数。",
+              "判断助动词do是否正确。",
+              "替换为正确的助动词does。"
+            ],
+            "answer": "Does she like apples?"
+          },
+          "mistakes": [
+            {
+              "wrong": "My mother don't like coffee.",
+              "correct": "My mother doesn't like coffee."
+            }
+          ],
+          "memory_tip": "三单does，其他do，动词原形跟着走！",
+          "emotion_hook": "掌握这个，你的英语瞬间提升一个档次！",
+          "grammar_fix": "主语是第三人称单数时，疑问句和否定句的助动词用does/doesn't，且谓语动词变回原形。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T5",
+      "unit_name": "亲子英语PK",
+      "cards": [
+        {
+          "card_id": "T5-01",
+          "full_id": "英语-六上-T5-01",
+          "title": "📸妈妈的英语不如娃？！看图说话PK，谁能赢？",
+          "type": "亲子英语PK卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "通过描述一张假期照片，运用过去时态和地点介词，巩固六年级上册相关词汇和语法。",
+          "core_points": [
+            "Where did you go...?",
+            "What did you do...?",
+            "I went to...",
+            "I saw/played/ate...",
+            "运用介词in/on/at"
+          ],
+          "example": {
+            "question": "请描述一张照片（显示海滩、孩子游泳、大人晒太阳）",
+            "steps": [
+              "孩子：用过去时说去了哪里。",
+              "孩子：描述照片中的活动。",
+              "家长：用更复杂的句子或提问。"
+            ],
+            "answer": "孩子：I went to the beach. I swam in the sea. 妈妈：Wow, you had a great time! Did you build a sandcastle?"
+          },
+          "mistakes": [
+            {
+              "wrong": "I go to the beach yesterday.",
+              "correct": "I went to the beach yesterday."
+            }
+          ],
+          "memory_tip": "看图说话用过去式，活动地点别忘记！",
+          "emotion_hook": "别让孩子小瞧你！亲子PK，乐趣无穷！",
+          "battle_rule": "孩子先描述照片中的3个细节，家长再补充2个细节或提问1个问题。看谁的描述更丰富、更准确。"
+        },
+        {
+          "card_id": "T5-02",
+          "full_id": "英语-六上-T5-02",
+          "title": "🚀未来计划大挑战！“be going to”谁用得更溜？",
+          "type": "亲子英语PK卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "运用\"be going to\"句型，预测明天或周末的活动，巩固六年级上册未来时态。",
+          "core_points": [
+            "What are you going to do...?",
+            "I'm going to...",
+            "Be动词要与主语一致",
+            "表达具体的计划和意图"
+          ],
+          "example": {
+            "question": "明天是周六，你和孩子计划做什么？",
+            "steps": [
+              "孩子：说出一个明天的计划。",
+              "家长：说出另一个明天的计划，并提问孩子。"
+            ],
+            "answer": "孩子：Tomorrow, I'm going to play football with my friends. 妈妈：Great! I'm going to cook a big dinner. Are you going to help me?"
+          },
+          "mistakes": [
+            {
+              "wrong": "She going to read.",
+              "correct": "She is going to read."
+            }
+          ],
+          "memory_tip": "未来计划be going to，be动词是关键！",
+          "emotion_hook": "看看谁的“未来”更精彩，谁的英语更流畅！",
+          "battle_rule": "轮流说出明天要做的两件事，看谁的句子更完整、更符合逻辑，并能相互提问。"
+        },
+        {
+          "card_id": "T5-03",
+          "full_id": "英语-六上-T5-03",
+          "title": "☀️四季英语抢答赛！谁是英语小百科？",
+          "type": "亲子英语PK卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "快速回答关于季节、天气和活动的英语问题，巩固六年级上册第一单元词汇。",
+          "core_points": [
+            "What's the weather like in (season)?",
+            "What do you do in (season)?",
+            "回答时注意主谓一致和动词形式",
+            "快速反应，准确表达"
+          ],
+          "example": {
+            "question": "抢答：What's the weather like in spring?",
+            "steps": [
+              "孩子和家长同时抢答。",
+              "看谁的回答又快又准确。"
+            ],
+            "answer": "It's warm and windy."
+          },
+          "mistakes": [
+            {
+              "wrong": "In spring, it warm.",
+              "correct": "In spring, it's warm."
+            }
+          ],
+          "memory_tip": "季节天气要连说，活动动词要准确！",
+          "emotion_hook": "速度与准确度的较量，家庭英语氛围瞬间拉满！",
+          "battle_rule": "准备5个关于季节的问题，一人一句轮流回答，或抢答。答对加分，答错扣分。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T6",
+      "unit_name": "速记卡",
+      "cards": [
+        {
+          "card_id": "T6-01",
+          "full_id": "英语-六上-T6-01",
+          "title": "⚡️告别死记硬背！不规则动词过去式，这样记秒会！",
+          "type": "速记卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "总结六年级上册常见的不规则动词过去式记忆技巧，提高记忆效率。",
+          "core_points": [
+            "分类记忆法（如：A-A-A型，A-B-A型，A-B-C型）",
+            "谐音联想法或形象联想法",
+            "多读多练，形成语感"
+          ],
+          "example": {
+            "question": "如何快速记住 `go-went-gone`？",
+            "steps": [
+              "联想：去（go）了就走（went），不见（gone）了。",
+              "多读几遍，形成语感。"
+            ],
+            "answer": "去（go）了就走（went），不见（gone）了。"
+          },
+          "mistakes": [
+            {
+              "wrong": "go-goed-goed",
+              "correct": "go-went-gone"
+            }
+          ],
+          "memory_tip": "分类、谐音、编故事，不规则动词变简单！",
+          "emotion_hook": "英语单词再多也不怕，学霸秘籍大公开！",
+          "speed_method": {
+            "method_name": "分类联想记忆法",
+            "steps": [
+              "**A-A-A型：** 原形、过去式、过去分词相同。如：cut-cut-cut (切), read-read-read (读)",
+              "**A-B-C型：** 三种形式都不同。如：go-went-gone (去), see-saw-seen (看)",
+              "**元音变化型：** 元音发生规律性变化。如：sing-sang-sung (唱), drink-drank-drunk (喝)",
+              "**口诀联想：** fly-flew-flown (飞了飞了飞，飞走了)"
+            ]
+          }
+        },
+        {
+          "card_id": "T6-02",
+          "full_id": "英语-六上-T6-02",
+          "title": "🔢First, Second, Third... 序数词总记混？这个口诀绝了！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "记忆1-10的序数词及其变化规律，是六年级上册第一单元的重点。",
+          "core_points": [
+            "1st (first), 2nd (second), 3rd (third)是特殊形式，需单独记忆。",
+            "4th (fourth)开始，大部分在基数词后加-th。",
+            "以-ve结尾的基数词，变f再加th (如five→fifth)。",
+            "以-y结尾的基数词，变ie再加th (如twenty→twentieth)。"
+          ],
+          "example": {
+            "question": "如何快速记住 `first, second, third`？",
+            "steps": [
+              "口诀记忆：一世（first）二神（second）三色（third）。",
+              "注意其缩写形式。"
+            ],
+            "answer": "一世（first）二神（second）三色（third），特殊记忆不烦恼。"
+          },
+          "mistakes": [
+            {
+              "wrong": "fiveth",
+              "correct": "fifth"
+            }
+          ],
+          "memory_tip": "一二三特殊记，八th九e掉，五十二把ve变fth，其余直接加th！",
+          "emotion_hook": "别再数错日子了，轻松搞定序数词！",
+          "speed_method": {
+            "method_name": "序数词口诀记忆法",
+            "steps": [
+              "**口诀：** 一世(first)二神(second)三色(third)，八th九e掉，五、十二把ve变fth，其余直接加th！",
+              "**重点记忆：**",
+              "1st (first)",
+              "2nd (second)",
+              "3rd (third)",
+              "5th (fifth)",
+              "8th (eighth)",
+              "9th (ninth)",
+              "12th (twelfth)"
+            ]
+          }
+        },
+        {
+          "card_id": "T6-03",
+          "full_id": "英语-六上-T6-03",
+          "title": "⏳️未来计划“be going to”秒速掌握！再也不怕说错！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "快速记忆并运用\"be going to\"表示未来计划，是六年级上册的核心语法点。",
+          "core_points": [
+            "结构：主语 + be动词 (am/is/are) + going to + 动词原形",
+            "be动词要与主语人称和数保持一致",
+            "主要用于表达有计划、有准备的未来动作或意图"
+          ],
+          "example": {
+            "question": "用一句话概括 `be going to` 的用法。",
+            "steps": [
+              "总结其结构。",
+              "总结其核心意义。"
+            ],
+            "answer": "有计划的未来，主语+be+going to+动原形。"
+          },
+          "mistakes": [
+            {
+              "wrong": "I going to play.",
+              "correct": "I am going to play."
+            }
+          ],
+          "memory_tip": "be going to要记住，主语不同be不同，后面动词原形跟，计划未来它来定！",
+          "emotion_hook": "告别未来时态的烦恼，一分钟学会地道表达！",
+          "speed_method": {
+            "method_name": "三步速记法",
+            "steps": [
+              "**第一步：** 记住核心结构：be going to + 动词原形。",
+              "**第二步：** 掌握be动词变化：I am, You are, He/She/It is, We/They are。",
+              "**第三步：** 记住用法：表示有计划的未来。",
+              "**快速练习：**",
+              "I (am) going to read.",
+              "He (is) going to swim.",
+              "They (are) going to sing."
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

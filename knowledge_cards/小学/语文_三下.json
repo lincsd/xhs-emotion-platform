@@ -1040,7 +1040,13 @@
           "related": {
             "prerequisite": "形近字辨析",
             "next": "更多形近字"
-          }
+          },
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ]
         },
         {
           "card_id": "08-02",

@@ -1,0 +1,656 @@
+{
+  "subject": "英语",
+  "grade": "三年级",
+  "semester": "下册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "三下",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片，专为PEP人教版三年级下册设计，内容严格符合课纲。",
+  "units": [
+    {
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [
+        {
+          "card_id": "T1-01",
+          "full_id": "英语-三下-T1-01",
+          "title": "this和that分不清？一张图搞定远近！",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "this和that是指示代词，用于指代单数的人或物，主要区别在于距离的远近。",
+          "core_points": [
+            "this：指代近处的人或物，意为“这个”。",
+            "that：指代远处的人或物，意为“那个”。",
+            "两者都与单数名词搭配，并使用be动词is。"
+          ],
+          "example": {
+            "question": "当你的手边有一支笔时，你会说“This is a pen.”还是“That is a pen.”？",
+            "steps": [
+              "判断笔的距离是近还是远。",
+              "根据距离选择正确的指示代词。",
+              "结合be动词is构成句子。"
+            ],
+            "answer": "This is a pen."
+          },
+          "mistakes": [
+            {
+              "wrong": "指着远处的桌子说：This is a desk.",
+              "correct": "That is a desk."
+            },
+            {
+              "wrong": "This are a book.",
+              "correct": "This is a book."
+            }
+          ],
+          "memory_tip": "近用this，远用that，单数朋友is！",
+          "emotion_hook": "别再指错啦！一句话让你秒懂this和that的秘密！",
+          "trap_point": "区分远近是关键，想象自己伸手指的动作来判断。"
+        },
+        {
+          "card_id": "T1-02",
+          "full_id": "英语-三下-T1-02",
+          "title": "in和on总是用错？秒懂“里面”和“上面”！",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "in和on是表示位置的介词，分别指“在…里面”和“在…上面”。",
+          "core_points": [
+            "in：表示在某个空间或容器的内部，意为“在…里面”。",
+            "on：表示在某个物体的表面，且有接触，意为“在…上面”。",
+            "通常后接地点名词，构成介词短语。"
+          ],
+          "example": {
+            "question": "你的书在书包里，你会说“My book is in my bag.”还是“My book is on my bag.”？",
+            "steps": [
+              "判断书和书包的关系是“在里面”还是“在表面”。",
+              "选择正确的介词。",
+              "结合be动词is构成句子。"
+            ],
+            "answer": "My book is in my bag."
+          },
+          "mistakes": [
+            {
+              "wrong": "笔在桌子表面，却说：The pen is in the desk.",
+              "correct": "The pen is on the desk."
+            },
+            {
+              "wrong": "苹果在箱子里面，却说：The apple is on the box.",
+              "correct": "The apple is in the box."
+            }
+          ],
+          "memory_tip": "盒子里面用in，桌子上面用on！",
+          "emotion_hook": "房间里的小物件，你真的知道它们在哪儿吗？",
+          "trap_point": "关键在于物体是否被包围在内部，还是只是在表面接触。"
+        },
+        {
+          "card_id": "T1-03",
+          "full_id": "英语-三下-T1-03",
+          "title": "男孩女孩分不清？he和she一招搞定！",
+          "type": "易混词陷阱卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "he和she是第三人称单数代词，用于指代男性和女性。",
+          "core_points": [
+            "he：指代男性，意为“他”。",
+            "she：指代女性，意为“她”。",
+            "两者都与单数be动词is或has搭配。"
+          ],
+          "example": {
+            "question": "指着你的男老师，你会说“He is my teacher.”还是“She is my teacher.”？",
+            "steps": [
+              "判断被指代人的性别。",
+              "根据性别选择正确的代词。",
+              "结合be动词is构成句子。"
+            ],
+            "answer": "He is my teacher."
+          },
+          "mistakes": [
+            {
+              "wrong": "指着妈妈说：He is my mom.",
+              "correct": "She is my mom."
+            },
+            {
+              "wrong": "指着爸爸说：She is my dad.",
+              "correct": "He is my dad."
+            }
+          ],
+          "memory_tip": "男孩he，女孩she，性别区分要牢记！",
+          "emotion_hook": "别让性别搞混了你的英语！",
+          "trap_point": "中文的“他”有时可泛指，但英文必须严格区分男性(he)和女性(she)。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T2",
+      "unit_name": "发音挑战",
+      "cards": [
+        {
+          "card_id": "T2-01",
+          "full_id": "英语-三下-T2-01",
+          "title": "这个th音，你确定会读吗？",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "th字母组合在英语中有两种常见发音：清辅音/θ/和浊辅音/ð/。三年级下册主要接触浊辅音/ð/。",
+          "core_points": [
+            "浊辅音/ð/：发音时舌尖轻触上齿，气息从舌齿间流出，声带振动。",
+            "常见单词：this, that。",
+            "练习时感受舌尖和牙齿的摩擦，以及声带的振动。"
+          ],
+          "example": {
+            "question": "请尝试读出单词this和that，感受发音。",
+            "steps": [
+              "将舌尖轻触上下门牙之间。",
+              "发出声音，让声带振动，气流从舌齿间流出。",
+              "对比自己的发音和正确发音。"
+            ],
+            "answer": "this /ðɪs/, that /ðæt/"
+          },
+          "mistakes": [
+            {
+              "wrong": "将this读成/dɪs/ (d的音)。",
+              "correct": "this /ðɪs/ (舌尖伸出，声带振动)。"
+            },
+            {
+              "wrong": "将that读成/tæt/ (t的音)。",
+              "correct": "that /ðæt/ (舌尖伸出，声带振动)。"
+            }
+          ],
+          "memory_tip": "舌头伸一点，轻轻咬住它，发出this和that！",
+          "emotion_hook": "多少人把this读成了dis？你中招了吗？",
+          "pronunciation_tip": "发音时，舌尖要伸出一点点，放在上下门牙之间，然后发音。如果声带振动，就是浊辅音/ð/。"
+        },
+        {
+          "card_id": "T2-02",
+          "full_id": "英语-三下-T2-02",
+          "title": "i到底是“爱”还是“衣”？别再读错啦！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "区分字母i在不同单词中的长音/aɪ/和短音/ɪ/。",
+          "core_points": [
+            "短音/ɪ/：发音短促，嘴巴放松，像中文的“衣”快速带过。如fish, milk。",
+            "长音/aɪ/：发音饱满，像中文的“爱”。如light。",
+            "通过对比练习，感受发音差异。"
+          ],
+          "example": {
+            "question": "请读出单词fish和light，体会i的长短音区别。",
+            "steps": [
+              "尝试发出fish中的i音，感受嘴型和气流。",
+              "尝试发出light中的i音，感受嘴型和气流。",
+              "对比两种发音的差异。"
+            ],
+            "answer": "fish /fɪʃ/ (短i音), light /laɪt/ (长i音)"
+          },
+          "mistakes": [
+            {
+              "wrong": "将fish读成/faɪʃ/ (长i音)。",
+              "correct": "fish /fɪʃ/ (短i音)。"
+            },
+            {
+              "wrong": "将light读成/lɪt/ (短i音)。",
+              "correct": "light /laɪt/ (长i音)。"
+            }
+          ],
+          "memory_tip": "短i像小鱼（fish）快快游，长i像灯泡（light）亮晶晶！",
+          "emotion_hook": "搞不清i的发音，你说的英语别人听不懂！",
+          "pronunciation_tip": "短音/ɪ/：嘴巴放松，舌头靠前，快速短促。长音/aɪ/：嘴巴张开，从/a/滑向/ɪ/，发音饱满。"
+        },
+        {
+          "card_id": "T2-03",
+          "full_id": "英语-三下-T2-03",
+          "title": "ch和sh傻傻分不清？一秒变发音达人！",
+          "type": "发音挑战卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "区分ch和sh这两个字母组合的发音，它们是英语中常见的摩擦音和破擦音。",
+          "core_points": [
+            "ch：发/tʃ/音，是破擦音，舌尖抵住上颚，气流瞬间冲出，像中文的“吃”。如chair, chicken。",
+            "sh：发/ʃ/音，是摩擦音，舌尖上翘，气流持续流出，嘴巴呈圆形，像中文的“师”。如shoes, shorts。",
+            "关键在于嘴型和气流发出方式的差异。"
+          ],
+          "example": {
+            "question": "请读出单词chair和shoes，感受ch和sh的区别。",
+            "steps": [
+              "尝试发出chair中的ch音，感受舌尖抵住上颚，气流瞬间冲出。",
+              "尝试发出shoes中的sh音，感受舌尖上翘，气流持续流出，嘴巴圆形。",
+              "对比两种发音的嘴型和气流。"
+            ],
+            "answer": "chair /tʃɛər/, shoes /ʃuːz/"
+          },
+          "mistakes": [
+            {
+              "wrong": "将chair读成/ʃɛər/ (sh的音)。",
+              "correct": "chair /tʃɛər/ (ch的音)。"
+            },
+            {
+              "wrong": "将shoes读成/tʃuːz/ (ch的音)。",
+              "correct": "shoes /ʃuːz/ (sh的音)。"
+            }
+          ],
+          "memory_tip": "ch像火车（train）“吃吃吃”，sh像安静（shh）“嘘嘘嘘”！",
+          "emotion_hook": "你的chicken是shicken吗？别闹笑话啦！",
+          "pronunciation_tip": "发/tʃ/音时，舌尖抵住上颚，气流瞬间冲出；发/ʃ/音时，舌尖上翘，气流持续流出，嘴巴呈圆形。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T3",
+      "unit_name": "情景闯关",
+      "cards": [
+        {
+          "card_id": "T3-01",
+          "full_id": "英语-三下-T3-01",
+          "title": "你的教室，用英语怎么介绍？",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "运用Unit 1的词汇和句型，描述教室里的物品及其位置。",
+          "core_points": [
+            "使用“This is...”介绍单个物品。",
+            "使用“There is a/an...”或“There are...”介绍存在的事物。",
+            "运用介词in, on, under, near等表达位置。"
+          ],
+          "example": {
+            "question": "请用英语介绍你的教室里有什么，至少说3句话。",
+            "steps": [
+              "首先介绍这是你的教室：This is my classroom.",
+              "然后指出教室里的一件大物品，并说出它的位置：There is a big board on the wall.",
+              "接着描述你的座位附近有什么：My desk is near the window. My bag is under the desk."
+            ],
+            "answer": "This is my classroom. There is a big board on the wall. My desk is near the window. My bag is under the desk."
+          },
+          "mistakes": [
+            {
+              "wrong": "My classroom has a board.",
+              "correct": "There is a board in my classroom."
+            },
+            {
+              "wrong": "The light the ceiling.",
+              "correct": "The light is on the ceiling."
+            }
+          ],
+          "memory_tip": "看一看，指一指，用英语说出我的小天地！",
+          "emotion_hook": "老师突然让你介绍教室，你敢开口吗？",
+          "scene_dialogue": [
+            "A: Welcome to my classroom! What do you see?",
+            "B: Wow, a big board! Is that a fan?",
+            "A: Yes, it is. The fan is on the ceiling. And my chair is near the desk.",
+            "B: Where is your bag?",
+            "A: My bag is under the desk."
+          ]
+        },
+        {
+          "card_id": "T3-02",
+          "full_id": "英语-三下-T3-02",
+          "title": "去餐厅点餐，你会用英语说吗？",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "运用Unit 6的食物词汇和简单句型进行点餐。",
+          "core_points": [
+            "表达“我想要”：I'd like... 或 I want...。",
+            "询问“你想要什么”：What would you like?",
+            "点餐时别忘了说“please”，表示礼貌。"
+          ],
+          "example": {
+            "question": "你想点一份米饭、一个鸡蛋和一杯牛奶，怎么说？",
+            "steps": [
+              "用“I'd like...”开头。",
+              "依次说出食物名称：some rice, an egg, some milk。",
+              "最后加上“please”。"
+            ],
+            "answer": "I'd like some rice, an egg and some milk, please."
+          },
+          "mistakes": [
+            {
+              "wrong": "I want rice egg milk.",
+              "correct": "I'd like some rice, an egg and some milk, please."
+            },
+            {
+              "wrong": "Give me water.",
+              "correct": "I'd like some water, please."
+            }
+          ],
+          "memory_tip": "I'd like+食物，礼貌点餐不犯愁！",
+          "emotion_hook": "饿了想吃东西？用英语点餐超酷der！",
+          "scene_dialogue": [
+            "A: Hello! What would you like?",
+            "B: I'd like some noodles, please.",
+            "A: Anything else?",
+            "B: Yes, I'd like some water. Thank you.",
+            "A: Here you are."
+          ]
+        },
+        {
+          "card_id": "T3-03",
+          "full_id": "英语-三下-T3-03",
+          "title": "夸夸你的好朋友，用英语怎么说？",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "运用Unit 3的身体部位词汇和形容词描述人物外貌。",
+          "core_points": [
+            "介绍朋友：This is my friend, ...。",
+            "描述外貌：He/She has + 形容词 + 身体部位。",
+            "注意区分he和she，以及has的用法。"
+          ],
+          "example": {
+            "question": "你的朋友有长头发、大眼睛和小嘴巴，你会怎么描述他/她？",
+            "steps": [
+              "先确定朋友的性别，选择he或she。",
+              "运用has来描述身体部位。",
+              "在身体部位前加上形容词，如long, big, small。"
+            ],
+            "answer": "She has long hair, big eyes and a small mouth."
+          },
+          "mistakes": [
+            {
+              "wrong": "He have long hair.",
+              "correct": "He has long hair."
+            },
+            {
+              "wrong": "She is long hair.",
+              "correct": "She has long hair."
+            }
+          ],
+          "memory_tip": "He/She has + 形容词 + 身体部位，描述朋友真简单！",
+          "emotion_hook": "想让外国朋友认识你的小伙伴吗？快来学！",
+          "scene_dialogue": [
+            "A: Look! This is my friend, Lily.",
+            "B: Wow, she's pretty! What does she look like?",
+            "A: She has long hair and big eyes. She has a small nose too.",
+            "B: Oh, I see! She looks nice."
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "T4",
+      "unit_name": "语法纠错",
+      "cards": [
+        {
+          "card_id": "T4-01",
+          "full_id": "英语-三下-T4-01",
+          "title": "10个人9个会说错！这个is你忘了吗？",
+          "type": "语法纠错卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "动词be（is, am, are）在英语句子中非常重要，连接主语和表语。",
+          "core_points": [
+            "当主语是单数（it, he, she, this, that, 单数名词）时，谓语动词用is。",
+            "is是系动词，不能随意省略。",
+            "肯定句、否定句、疑问句中都不能缺少is。"
+          ],
+          "example": {
+            "question": "“It a red bag.”这句话错在哪里？",
+            "steps": [
+              "分析句子结构，找出主语和表语。",
+              "判断主语“It”是单数。",
+              "确定缺少连接主语和表语的be动词is。"
+            ],
+            "answer": "缺少is，应为“It is a red bag.”"
+          },
+          "mistakes": [
+            {
+              "wrong": "My book on the desk.",
+              "correct": "My book is on the desk."
+            },
+            {
+              "wrong": "What color it?",
+              "correct": "What color is it?"
+            }
+          ],
+          "memory_tip": "单数主语爱is，就像影子不分离！",
+          "emotion_hook": "你的英语口语是不是也常犯这个低级错误？",
+          "grammar_fix": "英语句子通常需要主谓结构，系动词is连接主语和表语，不能省略。"
+        },
+        {
+          "card_id": "T4-02",
+          "full_id": "英语-三下-T4-02",
+          "title": "a和an，到底啥时候用？别再用错啦！",
+          "type": "语法纠错卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "不定冠词a和an用于修饰单数可数名词，其选择取决于名词的开头“发音”。",
+          "core_points": [
+            "a：用于辅音开头的单数可数名词前。",
+            "an：用于元音（a, e, i, o, u）发音开头的单数可数名词前。",
+            "关键在于单词的“发音”而非“字母”本身。"
+          ],
+          "example": {
+            "question": "“I have a apple.”这句话错在哪里？",
+            "steps": [
+              "识别名词“apple”是单数可数名词。",
+              "判断“apple”的开头字母“a”是元音发音。",
+              "根据规则选择正确的冠词。"
+            ],
+            "answer": "“apple”以元音发音开头，应为“I have an apple.”"
+          },
+          "mistakes": [
+            {
+              "wrong": "an book",
+              "correct": "a book"
+            },
+            {
+              "wrong": "a egg",
+              "correct": "an egg"
+            }
+          ],
+          "memory_tip": "元音字母an来伴，辅音字母a在前！",
+          "emotion_hook": "细节决定成败！这个小小的词，你用对了吗？",
+          "grammar_fix": "a和an是限定单数可数名词的，根据名词开头“发音”选择。记住，看发音，不是看字母！"
+        },
+        {
+          "card_id": "T4-03",
+          "full_id": "英语-三下-T4-03",
+          "title": "long hair还是a long hair？这个坑你踩过吗？",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "区分可数名词与不可数名词，以及形容词修饰名词的常见错误。",
+          "core_points": [
+            "hair（头发）是不可数名词，不能用a/an修饰，也不能加s变复数。",
+            "表示身体部位时，如果是两个，要用复数形式，如two eyes, two hands。",
+            "形容词（如big, long）本身不加s，修饰名词时保持原形。"
+          ],
+          "example": {
+            "question": "“She has a long hair.”这句话错在哪里？",
+            "steps": [
+              "识别名词“hair”是不可数名词。",
+              "判断不可数名词前不能加不定冠词a。",
+              "修正句子。"
+            ],
+            "answer": "hair是不可数名词，不加a，应为“She has long hair.”"
+          },
+          "mistakes": [
+            {
+              "wrong": "I have two hand.",
+              "correct": "I have two hands."
+            },
+            {
+              "wrong": "He has bigs eyes.",
+              "correct": "He has big eyes."
+            }
+          ],
+          "memory_tip": "头发是“海”，不可数，眼睛两只加s！",
+          "emotion_hook": "描述自己和朋友，是不是总在这里犯迷糊？",
+          "grammar_fix": "不可数名词如hair, water, milk等不加a/an，也不变复数。可数名词单数前用a/an，复数加s。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T5",
+      "unit_name": "亲子英语PK",
+      "cards": [
+        {
+          "card_id": "T5-01",
+          "full_id": "英语-三下-T5-01",
+          "title": "妈妈的英语居然不如三年级的娃！教室寻宝PK！",
+          "type": "亲子英语PK卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "亲子互动游戏，巩固Unit 1教室物品词汇和位置表达。",
+          "core_points": [
+            "听懂并找出指定的教室物品。",
+            "用“It's on/in/under/near...”描述物品位置。",
+            "在规定时间内快速反应和回答。"
+          ],
+          "example": {
+            "question": "家长：Where is the book? 孩子：(找出书并说) It's on the desk. 家长：What color is the board? 孩子：It's white.",
+            "steps": [
+              "家长提问物品名称或位置。",
+              "孩子找出并用英语回答。",
+              "交换角色，增加趣味性。"
+            ],
+            "answer": "(根据实际物品和位置回答，例如：It's on the desk. / It's white.)"
+          },
+          "mistakes": [],
+          "memory_tip": "边玩边学，物品词汇记得牢！",
+          "emotion_hook": "谁是家里的“英语小天才”？快来挑战！",
+          "battle_rule": "两人轮流说出教室里的物品名称，另一个人指出并说出其颜色或位置。限时5秒，答错或超时扣分。看谁得分高，赢得“教室小专家”称号！"
+        },
+        {
+          "card_id": "T5-02",
+          "full_id": "英语-三下-T5-02",
+          "title": "晚餐吃什么？和爸妈来场“喜好大作战”！",
+          "type": "亲子英语PK卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "亲子互动游戏，练习Unit 6食物词汇和“Do you like...?”句型。",
+          "core_points": [
+            "用“Do you like...?”询问对方是否喜欢某种食物。",
+            "用“Yes, I do.”或“No, I don't.”回答。",
+            "鼓励尝试说出喜欢或不喜欢的原因（如It's yummy/sweet/salty）。"
+          ],
+          "example": {
+            "question": "家长：Do you like chicken? 孩子：Yes, I do! It's yummy.",
+            "steps": [
+              "一方说出一种食物，并问“Do you like...?”。",
+              "另一方在规定时间内回答并可尝试补充原因。",
+              "轮流提问和回答。"
+            ],
+            "answer": "(根据个人喜好回答，例如：Yes, I do! / No, I don't.)"
+          },
+          "mistakes": [],
+          "memory_tip": "吃饭也能学英语，喜欢不喜欢都敢说！",
+          "emotion_hook": "连吃饭都不能好好吃？英语PK等你来战！",
+          "battle_rule": "轮流说出一种食物，然后问对方“Do you like...?”，对方必须在3秒内回答“Yes, I do.”或“No, I don't.”，并尝试说出原因。答错或超时扣分。看谁是“挑食”小能手！"
+        },
+        {
+          "card_id": "T5-03",
+          "full_id": "英语-三下-T5-03",
+          "title": "穿搭大挑战！谁能最快描述对方的衣服？",
+          "type": "亲子英语PK卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "亲子互动游戏，巩固Unit 5服装词汇和“What are you wearing?”句型。",
+          "core_points": [
+            "用“What are you wearing?”询问对方穿着。",
+            "用“I'm wearing a/an...”或“I'm wearing...”描述自己穿着。",
+            "尝试描述衣服的颜色和种类。"
+          ],
+          "example": {
+            "question": "家长：What are you wearing, sweetie? 孩子：I'm wearing a red T-shirt and blue shorts!",
+            "steps": [
+              "一方提问“What are you wearing?”。",
+              "另一方在规定时间内快速描述自己身上至少两件衣服的名称和颜色。",
+              "交换角色，看谁描述得又快又准。"
+            ],
+            "answer": "(根据实际穿着回答，例如：I'm wearing a yellow dress. / I'm wearing blue pants and a white T-shirt.)"
+          },
+          "mistakes": [],
+          "memory_tip": "穿什么，就说什么，英语表达真轻松！",
+          "emotion_hook": "每天穿的衣服，你用英语说得出来吗？",
+          "battle_rule": "两人面对面，一方说“What are you wearing?”，另一方必须在5秒内说出自己身上至少两件衣服的名称和颜色。交换角色，看谁是“时尚英语达人”！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T6",
+      "unit_name": "速记卡",
+      "cards": [
+        {
+          "card_id": "T6-01",
+          "full_id": "英语-三下-T6-01",
+          "title": "教室单词太多记不住？“房间扫描法”秒速记忆！",
+          "type": "速记卡",
+          "difficulty": 1,
+          "importance": 4,
+          "definition": "利用视觉记忆和空间关联，快速记忆Unit 1教室物品词汇。",
+          "core_points": [
+            "从固定起点开始，顺时针或逆时针“扫描”房间。",
+            "每看到一个物品，就大声说出它的英文名称。",
+            "将物品与位置、颜色等信息联系起来，加深印象。"
+          ],
+          "example": {
+            "question": "闭上眼睛，你能说出教室里至少5样东西的英文名吗？",
+            "steps": [
+              "走进教室，从门开始，依次说出door, window, board, light, fan, desk, chair, bag, book, pencil...",
+              "每天重复几次，直到能流利地说出所有物品。"
+            ],
+            "answer": "door, window, board, light, fan, desk, chair, bag, book, pencil, ruler, eraser..."
+          },
+          "mistakes": [],
+          "memory_tip": "眼睛扫一扫，嘴巴动一动，单词记得牢！",
+          "emotion_hook": "告别死记硬背！这个方法让背单词像玩游戏！",
+          "speed_method": "**房间扫描法 (Room Scan Method)**：\n1.  **确定起点：** 选择教室里一个固定的起点，比如教室门。\n2.  **顺时针/逆时针：** 沿着墙壁或固定方向，一个接一个地看向所有物品。\n3.  **大声说出：** 每看到一个物品，就大声说出它的英文名称（如door, window, board, light, fan, desk, chair, bag, book, pencil, ruler, eraser）。\n4.  **联想记忆：** 同时在脑海中浮现该物品的画面、颜色或用途。\n5.  **重复练习：** 每天进行2-3次“房间扫描”，直到所有物品都能脱口而出。"
+        },
+        {
+          "card_id": "T6-02",
+          "full_id": "英语-三下-T6-02",
+          "title": "身体部位单词记不住？边唱边跳轻松搞定！",
+          "type": "速记卡",
+          "difficulty": 1,
+          "importance": 4,
+          "definition": "通过歌曲和肢体动作，高效记忆Unit 3身体部位词汇。",
+          "core_points": [
+            "跟着“Head, Shoulders, Knees and Toes”等歌曲边唱边做动作。",
+            "制作身体部位卡片，玩“指认游戏”。",
+            "每天对着镜子指着部位说英文，加强肌肉记忆。"
+          ],
+          "example": {
+            "question": "跟着节奏，你能准确指出并说出head, eyes, nose, mouth吗？",
+            "steps": [
+              "播放“Head, Shoulders, Knees and Toes”歌曲。",
+              "边唱边用手指出对应的身体部位。"
+            ],
+            "answer": "(准确指出并说出head, eyes, nose, mouth等)"
+          },
+          "mistakes": [],
+          "memory_tip": "唱歌跳舞真快乐，身体部位记得多！",
+          "emotion_hook": "还在枯燥地背单词？这个方法让你爱上学英语！",
+          "speed_method": "**动作歌曲法 (Action Song Method)**：\n1.  **选择歌曲：** 学习“Head, Shoulders, Knees and Toes”这类经典身体部位歌曲。\n2.  **边唱边指：** 跟着歌曲的节奏，用手指出对应的身体部位，并大声唱出单词。\n3.  **全身动起来：** 不仅是手，全身都参与进来，加深记忆。\n4.  **亲子互动：** 和爸爸妈妈一起玩“Simon Says”游戏，比如“Simon says, touch your nose!”。\n5.  **日常运用：** 每天洗漱或穿衣时，指着自己的身体部位说出英文。"
+        },
+        {
+          "card_id": "T6-03",
+          "full_id": "英语-三下-T6-03",
+          "title": "食物单词太难背？“尝味分类法”让你秒变美食家！",
+          "type": "速记卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "通过联想食物的味道、颜色和种类，高效记忆Unit 6食物词汇。",
+          "core_points": [
+            "将食物按“主食”、“肉类”、“饮品”等分类记忆。",
+            "想象食物的味道和口感，用英文描述（如yummy, sweet, salty）。",
+            "制作食物卡片，玩“超市购物”游戏，模拟真实情景。"
+          ],
+          "example": {
+            "question": "看到rice，你能想到它的味道和颜色吗？它是哪一类食物？",
+            "steps": [
+              "看到rice，想象它是白色的，是主食。",
+              "看到chicken，想象它是肉类，味道鲜美。",
+              "尝试用yummy, sweet, salty等词形容。"
+            ],
+            "answer": "Rice is white. It's a staple food. It's yummy."
+          },
+          "mistakes": [],
+          "memory_tip": "食物分分类，味道记一记，单词忘不了！",
+          "emotion_hook": "吃货福音！边吃边学，单词嗖嗖涨！",
+          "speed_method": "**尝味分类法 (Taste & Categorize Method)**：\n1.  **视觉联想：** 看到食物单词（如apple, milk, bread, chicken），立即在脑海中浮现食物的图片。\n2.  **味觉/触觉联想：** 想象它的味道（sweet, sour, salty, yummy）或口感。\n3.  **分类记忆：** 将食物进行分类，如：主食 (Staple food): rice, noodles, bread；肉类 (Meat): chicken, fish, meat；饮品 (Drinks): milk, water, juice, tea。\n4.  **情景模拟：** 玩“超市购物”游戏，说出想买的食物，如“I'd like some chicken and some rice.”\n5.  **餐桌运用：** 吃饭时，指着餐桌上的食物说出英文名称。"
+        }
+      ]
+    }
+  ]
+}

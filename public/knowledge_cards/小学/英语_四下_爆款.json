@@ -1,0 +1,449 @@
+{
+  "subject": "英语",
+  "grade": "四年级",
+  "semester": "下册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "四下",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片，专为人教版(PEP)小学英语四年级下册设计。",
+  "units": [
+    {
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [
+        {
+          "card_id": "T1-01",
+          "full_id": "英语-四下-T1-01",
+          "title": "别再“in”桌子上啦！on/in/under三姐妹，一张图秒懂！",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "区分表示位置的介词on（在…上面，接触表面）、in（在…里面，被包围）和under（在…下面）。",
+          "core_points": [
+            "on：用于表示物体在某物的表面上，有接触。",
+            "in：用于表示物体在某物的内部或范围之内。",
+            "under：用于表示物体在某物的正下方，被覆盖或遮挡。"
+          ],
+          "example": {
+            "question": "选词填空：The book is ____ the desk.",
+            "steps": [
+              "思考：书和桌子是什么关系？",
+              "判断：书在桌子表面，有接触。",
+              "选择：符合“在表面上”的介词。"
+            ],
+            "answer": "on"
+          },
+          "mistakes": [
+            {
+              "wrong": "The book is in the desk.",
+              "correct": "The book is on the desk."
+            },
+            {
+              "wrong": "The cat is on the bed (指床底下).",
+              "correct": "The cat is under the bed."
+            }
+          ],
+          "memory_tip": "on在表面，in在里面，under在下面，小球位置要看清！",
+          "emotion_hook": "介词小迷糊？看完这篇，你就是定位大师！",
+          "trap_point": "很多同学分不清“在桌子上”到底用in还是on，容易受中文思维影响。"
+        },
+        {
+          "card_id": "T1-02",
+          "full_id": "英语-四下-T1-02",
+          "title": "“这是我的”是My还是Mine？搞不清小心闹笑话！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "区分物主代词（mine, yours）和物主形容词（my, your）的用法。",
+          "core_points": [
+            "物主形容词（my, your, his, her, its, our, their）后面必须跟名词。",
+            "物主代词（mine, yours, his, hers, its, ours, theirs）可以单独使用，相当于“物主形容词+名词”。",
+            "物主代词常用于避免重复，使句子更简洁。"
+          ],
+          "example": {
+            "question": "选词填空：Is this your book? Yes, it's ____.",
+            "steps": [
+              "分析：句子末尾，前面没有名词。",
+              "判断：需要一个能单独使用的词，表示“我的书”。",
+              "选择：物主代词。"
+            ],
+            "answer": "mine"
+          },
+          "mistakes": [
+            {
+              "wrong": "This is my.",
+              "correct": "This is mine."
+            },
+            {
+              "wrong": "That's yours book.",
+              "correct": "That's your book."
+            }
+          ],
+          "memory_tip": "Mine像个小超人，自己就能站！My后面要跟个伴！",
+          "emotion_hook": "你的英语是不是总在“我的”和“你的”上卡壳？快来终结你的困扰！",
+          "trap_point": "误将mine/yours当成my/your使用，或反之，导致语法错误。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T2",
+      "unit_name": "发音挑战",
+      "cards": [
+        {
+          "card_id": "T2-01",
+          "full_id": "英语-四下-T2-01",
+          "title": "watch和wash，你真的读对了吗？别再“看”成“洗”了！",
+          "type": "发音挑战卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "区分单词watch (/wɒtʃ/) 和 wash (/wɒʃ/) 中 'ch' 和 'sh' 的发音。",
+          "core_points": [
+            "'ch'组合常发/tʃ/音，像中文拼音“吃”的音。",
+            "'sh'组合常发/ʃ/音，像中文拼音“师”的音。",
+            "注意嘴型变化：/tʃ/发音时嘴唇略向前突，舌尖抵住上颚；/ʃ/发音时嘴唇更扁，舌尖不抵上颚。"
+          ],
+          "example": {
+            "question": "请大声朗读并感受发音区别：I watch TV. (我 看 电视) vs I wash my hands. (我 洗手)",
+            "steps": [
+              "模仿正确发音。",
+              "对比两个单词的嘴型和舌头位置。",
+              "反复练习，直到自然发出正确声音。"
+            ],
+            "answer": "Watch /wɒtʃ/ (看), Wash /wɒʃ/ (洗)"
+          },
+          "mistakes": [
+            {
+              "wrong": "将watch读成/wɒʃ/",
+              "correct": "watch /wɒtʃ/"
+            },
+            {
+              "wrong": "将wash读成/wɒtʃ/",
+              "correct": "wash /wɒʃ/"
+            }
+          ],
+          "memory_tip": "擦窗户“擦擦擦”/tʃ/，嘘，安静“嘘嘘嘘”/ʃ/。",
+          "emotion_hook": "你的发音小细节，决定了别人能不能听懂你！别再让“看”和“洗”傻傻分不清！",
+          "pronunciation_tip": "练习时可以对着镜子观察嘴型，并感受舌头在口腔中的位置。/tʃ/发音时有轻微的爆破感。"
+        },
+        {
+          "card_id": "T2-02",
+          "full_id": "英语-四下-T2-02",
+          "title": "book和food，傻傻分不清？长短音一秒搞定！",
+          "type": "发音挑战卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "区分单词book (/bʊk/) 和 food (/fuːd/) 中 'oo' 的两种常见发音：短/ʊ/音和长/uː/音。",
+          "core_points": [
+            "'oo'在book, good, look中常发短/ʊ/音，发音短促。",
+            "'oo'在food, cool, moon中常发长/uː/音，发音较长，嘴唇向前突出。",
+            "长短音的区别在于发音持续时间和嘴型。"
+          ],
+          "example": {
+            "question": "请大声朗读并感受发音区别：I have a book. (我有一本书) vs I like food. (我喜欢食物)",
+            "steps": [
+              "模仿/ʊ/音：嘴唇放松，舌头略靠后，发音短促。",
+              "模仿/uː/音：嘴唇收圆向前突出，舌头靠后，发音长。",
+              "对比练习，感受长短差异。"
+            ],
+            "answer": "Book /bʊk/ (书), Food /fuːd/ (食物)"
+          },
+          "mistakes": [
+            {
+              "wrong": "将book读成/buːk/",
+              "correct": "book /bʊk/"
+            },
+            {
+              "wrong": "将food读成/fʊd/",
+              "correct": "food /fuːd/"
+            }
+          ],
+          "memory_tip": "短U像个小钩子，长U像个大嘴巴。发音长短要记牢，意思才不会跑！",
+          "emotion_hook": "别让你的“书”和“食物”听起来一样啦！掌握这个，你的发音更地道！",
+          "pronunciation_tip": "发/ʊ/音时，感觉嘴巴像要说“哦”但没完全发出；发/uː/音时，嘴巴像吹口哨一样，持续时间更长。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T3",
+      "unit_name": "情景闯关",
+      "cards": [
+        {
+          "card_id": "T3-01",
+          "full_id": "英语-四下-T3-01",
+          "title": "教室寻宝大作战！你能用英语找到所有东西吗？",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在真实场景中运用介词on, in, under, near以及教室物品词汇描述物品位置。",
+          "core_points": [
+            "掌握教室常见物品词汇：board, light, fan, picture, wall, floor, window, door。",
+            "熟练运用介词：on (在…上), in (在…里), under (在…下), near (在…旁边)。",
+            "学会用“Where is/are...?”提问，并用“It's/They're...”回答。"
+          ],
+          "example": {
+            "question": "你的朋友想知道风扇在哪里。老师说 'Where is the fan?' 你要怎么用英语回答？",
+            "steps": [
+              "在教室里找到风扇。",
+              "确定风扇的位置（通常在墙上或天花板上）。",
+              "用正确的介词和句子结构进行描述。"
+            ],
+            "answer": "It's on the wall. / It's near the window."
+          },
+          "scene_dialogue": "A: Excuse me, where is the board? B: It's on the wall, near the door. A: Thank you! And where is the light? B: The light is on the ceiling (天花板).",
+          "emotion_hook": "别再指手画脚啦！用英语清晰表达，你就是小小讲解员！快来挑战你的“寻宝”能力！"
+        },
+        {
+          "card_id": "T3-02",
+          "full_id": "英语-四下-T3-02",
+          "title": "猜猜我是谁？用英语描述朋友，挑战你的口语！",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "运用形容词和情态动词can/can't描述人物外貌特征和能力。",
+          "core_points": [
+            "掌握描述外貌的形容词：tall (高), short (矮), fat (胖), thin (瘦), strong (强壮), young (年轻)。",
+            "掌握描述能力的动词：run (跑), jump (跳), swim (游泳), sing (唱歌), dance (跳舞), play basketball/football (打篮球/踢足球)。",
+            "学会用“He/She is...”和“He/She can/can't...”来介绍朋友。"
+          ],
+          "example": {
+            "question": "你的朋友很高，但是不会游泳。你怎么用英语介绍他？",
+            "steps": [
+              "描述他的外貌特征（高）。",
+              "描述他会的能力（无）。",
+              "描述他不会的能力（游泳）。"
+            ],
+            "answer": "He is tall. He can't swim."
+          },
+          "scene_dialogue": "A: Look at my friend! B: Wow, he is so tall! Can he play basketball? A: Yes, he can. But he can't sing. B: That's okay! He is still cool.",
+          "emotion_hook": "想让朋友佩服你的英语？赶紧来挑战这个！用英语描述你的“神秘嘉宾”！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T4",
+      "unit_name": "语法纠错",
+      "cards": [
+        {
+          "card_id": "T4-01",
+          "full_id": "英语-四下-T4-01",
+          "title": "教室里有好多东西？There is/There are，你用对了吗？",
+          "type": "语法纠错卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "区分There is (用于单数名词) 和 There are (用于复数名词) 的用法。",
+          "core_points": [
+            "There is + a/an + 单数可数名词 + 地点状语。",
+            "There are + 复数可数名词 + 地点状语。",
+            "There be 句型表示“某地有某物”。"
+          ],
+          "example": {
+            "question": "纠正错误：There are a board in the classroom.",
+            "steps": [
+              "识别主语：a board (一个黑板) 是单数。",
+              "判断谓语动词：与单数主语搭配的动词是is。",
+              "改正句子。"
+            ],
+            "answer": "There is a board in the classroom."
+          },
+          "mistakes": [
+            {
+              "wrong": "There are a light in the room.",
+              "correct": "There is a light in the room."
+            },
+            {
+              "wrong": "There is two books on the desk.",
+              "correct": "There are two books on the desk."
+            }
+          ],
+          "memory_tip": "一只is，好多are，记住不犯错！",
+          "emotion_hook": "别让你的英语听起来像“中式英语”！这个语法点，你小学就该掌握！",
+          "grammar_fix": "There is 用于单数名词或不可数名词，There are 用于复数名词。"
+        },
+        {
+          "card_id": "T4-02",
+          "full_id": "英语-四下-T4-02",
+          "title": "How many后面加单数还是复数？小学知识点别翻车！",
+          "type": "语法纠错卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "掌握How many (多少个) 后面接可数名词的复数形式。",
+          "core_points": [
+            "How many 用于询问可数名词的数量。",
+            "在How many后面，名词必须是复数形式。",
+            "常见的可数名词复数变化规则：加-s, 加-es, 变y为i加-es, 不规则变化等。"
+          ],
+          "example": {
+            "question": "纠正错误：How many book do you have?",
+            "steps": [
+              "识别疑问词：How many 询问数量。",
+              "判断名词形式：book是可数名词，但这里是单数。",
+              "改正名词为复数形式。"
+            ],
+            "answer": "How many books do you have?"
+          },
+          "mistakes": [
+            {
+              "wrong": "How many apple do you want?",
+              "correct": "How many apples do you want?"
+            },
+            {
+              "wrong": "How many pencil is there?",
+              "correct": "How many pencils are there?"
+            }
+          ],
+          "memory_tip": "数清多少个，后面加个s！",
+          "emotion_hook": "小细节决定大问题！你的英语严谨吗？这个小陷阱，你踩过吗？",
+          "grammar_fix": "How many 后面必须跟可数名词的复数形式。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T5",
+      "unit_name": "亲子英语PK",
+      "cards": [
+        {
+          "card_id": "T5-01",
+          "full_id": "英语-四下-T5-01",
+          "title": "谁是家里的“火眼金睛”？亲子英语PK，数数看！",
+          "type": "亲子英语PK卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "家长和孩子轮流用英语描述房间里物品的数量，考验观察力和表达能力。",
+          "core_points": [
+            "运用There is/are句型描述物品存在。",
+            "运用How many...? 提问和回答物品数量。",
+            "掌握房间物品（sofa, bed, desk, chair, table等）和数字词汇。"
+          ],
+          "example": {
+            "question": "谁能用英语说出客厅里有几把椅子？",
+            "steps": [
+              "观察客厅，数出椅子数量。",
+              "用There are... 句型描述。",
+              "快速准确地表达出来。"
+            ],
+            "answer": "There are three chairs in the living room."
+          },
+          "battle_rule": "轮流说出房间里不同物品的数量，说对且说得快者得分。可以设定主题（如“厨房里的东西”），看谁说得更多更准确。",
+          "emotion_hook": "妈妈和娃的英语大比拼，谁能胜出？快来家里找找英语宝藏！"
+        },
+        {
+          "card_id": "T5-02",
+          "full_id": "英语-四下-T5-02",
+          "title": "妈妈的“指令”你听懂了吗？亲子英语行动力大挑战！",
+          "type": "亲子英语PK卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "听懂并执行简单的英语指令，涉及日常生活动作和周末活动。",
+          "core_points": [
+            "掌握常用动词：run, jump, swim, dance, watch TV, read books, do homework。",
+            "理解指令句型：Please + 动词原形！",
+            "提高英语听力和反应能力。"
+          ],
+          "example": {
+            "question": "妈妈说 'Please jump!' 孩子要怎么做？",
+            "steps": [
+              "孩子仔细听妈妈的指令。",
+              "理解指令的含义。",
+              "迅速做出相应动作。"
+            ],
+            "answer": "(孩子跳起来)"
+          },
+          "battle_rule": "妈妈说英语指令（如 'Please sing a song!' 'Please read a book!'），孩子听指令做动作。看谁反应快，动作准。可以计时或累计错误次数。",
+          "emotion_hook": "别再“听不懂”啦！英语听力大闯关，谁是行动派？",
+          "scene_dialogue": "Mom: Please watch TV! Child: (假装看电视) Mom: Good job! Now, please jump! Child: (跳起来)"
+        }
+      ]
+    },
+    {
+      "unit_id": "T6",
+      "unit_name": "速记卡",
+      "cards": [
+        {
+          "card_id": "T6-01",
+          "full_id": "英语-四下-T6-01",
+          "title": "on/in/under总是记不住？一首儿歌让你秒变介词高手！",
+          "type": "速记卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "通过形象口诀和动作示范，快速记忆on, in, under这三个最常用介词的用法。",
+          "core_points": [
+            "on：在物体表面上，有接触。",
+            "in：在物体内部，被包围。",
+            "under：在物体正下方。",
+            "结合手势和实物进行记忆。"
+          ],
+          "example": {
+            "question": "怎么快速记住“在桌子里面”是in the desk？",
+            "steps": [
+              "联想口诀：in在里面。",
+              "想象：把东西放进一个有边界的“里面”。",
+              "记住：in the box (在盒子里), in the bag (在包里)。"
+            ],
+            "answer": "因为桌子有“里面”的空间，所以用in，或者用on表示在桌子表面。"
+          },
+          "memory_tip": "小球on the table，小球in the box，小球under the chair。唱着跳着就记住啦！",
+          "emotion_hook": "还在死记硬背？这种方法让你英语学习开挂！介词再也不会错！",
+          "speed_method": "形象联想+动作示范法。用手模拟小球在不同位置，边说边做，加深记忆。"
+        },
+        {
+          "card_id": "T6-02",
+          "full_id": "英语-四下-T6-02",
+          "title": "单词量暴增！形容词反义词配对，轻松记忆！",
+          "type": "速记卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "将常用形容词与其反义词配对记忆，通过对比的方式高效扩展词汇量。",
+          "core_points": [
+            "big (大) vs small (小)",
+            "long (长) vs short (短)",
+            "heavy (重) vs light (轻)",
+            "tall (高) vs short (矮)",
+            "fat (胖) vs thin (瘦)",
+            "young (年轻) vs old (年老)"
+          ],
+          "example": {
+            "question": "怎么快速记住big的反义词是small？",
+            "steps": [
+              "联想图片：大象很big，小老鼠很small。",
+              "组成对子：big-small。",
+              "反复朗读和对比。"
+            ],
+            "answer": "通过具体形象的对比，如大象和小老鼠，加深记忆。"
+          },
+          "memory_tip": "大小对对碰，长短手牵手，胖瘦做朋友，轻重不分离。反义词一起背，效率翻几倍！",
+          "emotion_hook": "告别单词书，这样背单词才有趣高效！你的词汇量要爆棚啦！",
+          "speed_method": "对比记忆法+情景联想法。将反义词配对成组，并结合图片或实际物品进行联想，如“big apple, small apple”。"
+        },
+        {
+          "card_id": "T6-03",
+          "full_id": "英语-四下-T6-03",
+          "title": "周末活动词汇记不住？“动词+名词”组合拳，一招制胜！",
+          "type": "速记卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "将四年级下册学到的周末活动常见的动词和名词进行组合记忆，形成固定搭配。",
+          "core_points": [
+            "watch TV (看电视)",
+            "read books (看书)",
+            "play computer games (玩电脑游戏)",
+            "go shopping (去购物)",
+            "visit grandparents (看望祖父母)",
+            "do homework (做作业)"
+          ],
+          "example": {
+            "question": "怎么快速记住“看电视”这个短语？",
+            "steps": [
+              "记住动词 watch (看)。",
+              "记住名词 TV (电视)。",
+              "组合成 watch TV，并想象看电视的场景。"
+            ],
+            "answer": "将动词和名词绑定记忆，形成一个整体，如“watch+TV”就像一个固定词组。"
+          },
+          "memory_tip": "看电视(watch TV)，看书(read books)，玩电脑(play computer games)。活动搭配不分离，周末生活更精彩！",
+          "emotion_hook": "还在一个一个背？这种组合记忆法，让你的词汇量翻倍，轻松聊周末！",
+          "speed_method": "搭配记忆法+情景串联法。将相关联的动词和名词一起记忆，并想象自己在做这些活动，形成画面感。"
+        }
+      ]
+    }
+  ]
+}

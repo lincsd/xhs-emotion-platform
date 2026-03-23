@@ -1737,6 +1737,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._export_post(post_id)
         elif path.startswith('/api/note-images/'):
             return self._serve_note_image(path)
+        elif path == '/api/generated-notes':
+            return self._list_generated_notes()
         else:
             # 静态文件
             return super().do_GET()
@@ -1795,6 +1797,10 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._admin_process_withdrawal(body)
         elif path == '/api/content-plans':
             return self._create_content_plan(body)
+        elif path == '/api/generate-note':
+            return self._generate_xhs_note(body)
+        elif path == '/api/ai-match-cards':
+            return self._ai_match_cards(body)
         else:
             self._send_json({'error': 'Not found'}, 404)
 
@@ -2870,6 +2876,278 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
         # 所有重试都失败
         self._send_json(last_err_json or {'error': {'code': 500, 'message': 'All API keys exhausted'}}, last_err_code)
+
+    # ============ 笔记工坊 - AI 笔记生成 ============
+    def _generate_xhs_note(self, body):
+        """从知识卡片数据生成小红书笔记"""
+        subject = body.get('subject', '数学')
+        grade_short = body.get('grade_short', '三下')
+        template = body.get('template', '反差型')
+        card_ids = body.get('card_ids', [])  # 可选指定卡片
+
+        # 读取卡片数据
+        card_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', '小学', f'{subject}_{grade_short}.json')
+        boom_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', '小学', f'{subject}_{grade_short}_爆款.json')
+
+        cards_data = []
+        for fp in [card_file, boom_file]:
+            if os.path.exists(fp):
+                try:
+                    d = json.loads(open(fp, encoding='utf-8').read())
+                    for u in d.get('units', []):
+                        for c in u.get('cards', []):
+                            if not card_ids or c.get('card_id') in card_ids or c.get('full_id') in card_ids:
+                                cards_data.append(c)
+                except:
+                    pass
+
+        if not cards_data:
+            return self._send_json({'error': '未找到卡片数据'}, 404)
+
+        # 选取适合模板的卡片（最多6张）
+        import random
+        template_card_map = {
+            '反差型': ['陷阱卡','辨析卡','易错字陷阱卡','易混词陷阱卡','语法纠错卡','易错卡','易错字卡'],
+            '挑战型': ['挑战卡','速算卡','发音挑战卡','古诗默写挑战卡','拼音闯关卡','笔顺挑战卡'],
+            '干货型': ['方法卡','公式卡','概念卡','阅读技巧卡','写作方法卡','词汇卡','语法卡','句型卡','修辞手法卡','阅读理解技巧卡'],
+            '故事型': ['生活卡','思维卡','对战卡','情景对话卡','亲子古诗PK卡','亲子英语PK卡','看图写话卡'],
+        }
+        preferred = template_card_map.get(template, [])
+        matched = [c for c in cards_data if c.get('type') in preferred]
+        if len(matched) < 3:
+            matched = cards_data  # fallback to all
+        selected = random.sample(matched, min(5, len(matched)))
+
+        cards_text = ""
+        for i, c in enumerate(selected, 1):
+            cards_text += f"\n卡片{i}: [{c.get('type','')}] {c.get('title','')}\n"
+            cards_text += f"  定义: {c.get('definition','')}\n"
+            cards_text += f"  要点: {'; '.join(c.get('core_points',[][:3]))}\n"
+            ex = c.get('example', {})
+            if isinstance(ex, dict):
+                cards_text += f"  例题: {ex.get('question','')} → {ex.get('answer','')}\n"
+            cards_text += f"  口诀: {c.get('memory_tip','')}\n"
+            hook = c.get('emotion_hook', '')
+            if hook:
+                cards_text += f"  钩子: {hook}\n"
+
+        note_prompt = f"""你是一位小红书教育内容创作高手，擅长将知识卡片转化为高传播力的小红书笔记。
+
+以下是{subject} {grade_short}的知识卡片数据：
+{cards_text}
+
+请基于以上卡片内容，用「{template}」模板风格，生成一篇完整的小红书笔记。
+
+模板风格说明：
+- 反差型：设置认知冲突→暴露错误→揭示正确→引发讨论
+- 挑战型：发起挑战→限时→公布答案→评级
+- 干货型：痛点引入→系统知识点→口诀总结→收藏引导
+- 故事型：生活场景→遇到问题→解决方案→触动共鸣
+
+请输出JSON格式（不要markdown代码块），包含以下字段：
+{{
+  "note_id": "{subject}_{grade_short}_{template}_自动生成",
+  "title": "标题（含emoji，15-25字，有情绪钩子）",
+  "template": "{template}",
+  "card_ids": [使用到的卡片card_id列表],
+  "hashtags": "#标签1 #标签2 ... （8-12个相关标签）",
+  "narrative_arc": "叙事弧线描述（一句话）",
+  "emotion_curve": ["好奇", "尝试", "受挫/惊讶", "顿悟", "分享"],
+  "carousel": [
+    {{"slide": 1, "type": "封面", "desc": "封面设计描述"}},
+    {{"slide": 2, "type": "内容页", "desc": "第2页内容描述"}},
+    {{"slide": 3, "type": "内容页", "desc": "第3页内容描述"}},
+    {{"slide": 4, "type": "总结页", "desc": "总结/口诀"}},
+    {{"slide": 5, "type": "互动页", "desc": "评论引导"}}
+  ],
+  "title_candidates": [
+    {{"title": "候选标题1", "score": 8}},
+    {{"title": "候选标题2", "score": 7}},
+    {{"title": "候选标题3", "score": 9}}
+  ],
+  "body": "正文内容（800-1500字，包含emoji、分段、金句、互动引导）",
+  "pinned_comment": "置顶评论内容",
+  "interaction_hooks": {{
+    "comment_guide": "评论引导语",
+    "save_guide": "收藏引导语",
+    "share_guide": "转发引导语"
+  }},
+  "best_post_time": "最佳发布时间建议",
+  "scores": {{
+    "title_appeal": 8,
+    "content_quality": 9,
+    "knowledge_accuracy": 9,
+    "readability": 8,
+    "viral_potential": 8,
+    "compliance": 9
+  }},
+  "total": 51,
+  "verdict": "PASS",
+  "predicted": {{"likes": "2k-5k", "saves": "1k-3k", "comments": "200-500"}},
+  "strengths": ["优势1", "优势2"],
+  "issues": ["问题1（如有）"],
+  "suggestions": ["改进建议1"]
+}}
+"""
+        api_key = _get_next_server_key()
+        if not api_key:
+            return self._send_json({'error': 'No Gemini API key configured'}, 500)
+
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
+        req_body = json.dumps({
+            "contents": [{"parts": [{"text": note_prompt}]}],
+            "generationConfig": {"temperature": 0.8, "maxOutputTokens": 65536}
+        }).encode('utf-8')
+
+        try:
+            opener = _build_opener()
+            req = urllib.request.Request(url, data=req_body, headers={"Content-Type": "application/json"}, method="POST")
+            resp = opener.open(req, timeout=120)
+            data = json.loads(resp.read().decode('utf-8'))
+            text = data['candidates'][0]['content']['parts'][0]['text']
+
+            # 提取JSON
+            text = re.sub(r'^```json\s*', '', text.strip())
+            text = re.sub(r'^```\s*', '', text.strip())
+            text = re.sub(r'\s*```$', '', text.strip())
+            start = text.find('{')
+            end = text.rfind('}')
+            if start >= 0 and end > start:
+                text = text[start:end+1]
+
+            note = json.loads(text)
+            note['generated_at'] = time.strftime('%Y-%m-%d %H:%M:%S')
+            note['note_id'] = f"{subject}_{grade_short}_{template}_{time.strftime('%Y%m%d_%H%M%S')}"
+
+            # 保存到文件
+            notes_dir = os.path.join(PUBLIC_DIR, 'generated_notes')
+            os.makedirs(notes_dir, exist_ok=True)
+            note_path = os.path.join(notes_dir, f"{note['note_id']}.json")
+            with open(note_path, 'w', encoding='utf-8') as f:
+                json.dump(note, f, ensure_ascii=False, indent=2)
+
+            return self._send_json({'ok': True, 'note': note})
+        except json.JSONDecodeError as e:
+            return self._send_json({'error': f'AI响应JSON解析失败: {str(e)}'}, 500)
+        except Exception as e:
+            return self._send_json({'error': f'生成失败: {str(e)}'}, 500)
+
+    def _list_generated_notes(self):
+        """列出所有已生成的笔记"""
+        notes_dir = os.path.join(PUBLIC_DIR, 'generated_notes')
+        notes = []
+        if os.path.exists(notes_dir):
+            for f in sorted(os.listdir(notes_dir), reverse=True):
+                if f.endswith('.json'):
+                    try:
+                        data = json.loads(open(os.path.join(notes_dir, f), encoding='utf-8').read())
+                        notes.append(data)
+                    except:
+                        pass
+        return self._send_json({'notes': notes})
+
+    def _ai_match_cards(self, body):
+        """AI智能匹配: 根据用户问题推荐最相关的知识卡片"""
+        query = body.get('query', '').strip()
+        subject = body.get('subject', '')
+        grade_short = body.get('grade_short', '')
+
+        if not query:
+            return self._send_json({'error': '请输入搜索问题'}, 400)
+
+        # 收集所有(或指定学科/年级)的卡片
+        cards_dir = os.path.join(PUBLIC_DIR, 'knowledge_cards', '小学')
+        all_cards = []
+        if os.path.exists(cards_dir):
+            for f in sorted(os.listdir(cards_dir)):
+                if not f.endswith('.json') or f == 'manifest.json':
+                    continue
+                if subject and not f.startswith(subject):
+                    continue
+                if grade_short and grade_short not in f:
+                    continue
+                try:
+                    data = json.loads(open(os.path.join(cards_dir, f), encoding='utf-8').read())
+                    for u in data.get('units', []):
+                        for c in u.get('cards', []):
+                            c['_source'] = f.replace('.json', '')
+                            all_cards.append(c)
+                except:
+                    pass
+
+        if not all_cards:
+            return self._send_json({'error': '未找到卡片数据'}, 404)
+
+        # 本地关键词匹配（快速，非AI方式）
+        query_lower = query.lower()
+        scored = []
+        for c in all_cards:
+            score = 0
+            title = (c.get('title', '') or '').lower()
+            definition = (c.get('definition', '') or '').lower()
+            core_points = ' '.join(c.get('core_points', []) or []).lower()
+            card_type = (c.get('type', '') or '').lower()
+            memory_tip = (c.get('memory_tip', '') or '').lower()
+            hook = (c.get('emotion_hook', '') or '').lower()
+            
+            # 精确匹配title得分高
+            if query_lower in title:
+                score += 10
+            # 关键词在各字段中匹配
+            for kw in query_lower.split():
+                if kw in title: score += 5
+                if kw in definition: score += 3
+                if kw in core_points: score += 2
+                if kw in card_type: score += 2
+                if kw in memory_tip: score += 1
+                if kw in hook: score += 1
+            if score > 0:
+                scored.append((score, c))
+        
+        scored.sort(key=lambda x: -x[0])
+        results = [c for _, c in scored[:10]]
+
+        # 如果本地匹配不足3个结果，尝试AI匹配
+        if len(results) < 3:
+            api_key = _get_next_server_key()
+            if api_key:
+                # 构造精简卡片列表给AI
+                card_summaries = []
+                for i, c in enumerate(all_cards[:200]):  # 限制200张避免超长
+                    card_summaries.append(f"{i}|{c.get('type','')}|{c.get('title','')}|{c.get('definition','')[:50]}")
+                
+                prompt = f"""用户问题: "{query}"
+
+以下是知识卡片列表(格式: 序号|类型|标题|定义):
+{chr(10).join(card_summaries)}
+
+请从中选出最相关的5-8张卡片，返回它们的序号，用逗号分隔。只返回数字，不要其他解释。
+例如: 3,15,42,78,99"""
+
+                try:
+                    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
+                    req_body = json.dumps({
+                        "contents": [{"parts": [{"text": prompt}]}],
+                        "generationConfig": {"temperature": 0.2, "maxOutputTokens": 200}
+                    }).encode('utf-8')
+                    opener = _build_opener()
+                    req = urllib.request.Request(url, data=req_body, headers={"Content-Type": "application/json"}, method="POST")
+                    resp = opener.open(req, timeout=30)
+                    data = json.loads(resp.read().decode('utf-8'))
+                    text = data['candidates'][0]['content']['parts'][0]['text'].strip()
+                    indices = [int(x.strip()) for x in re.findall(r'\d+', text)]
+                    ai_results = [all_cards[i] for i in indices if 0 <= i < len(all_cards)]
+                    if ai_results:
+                        # 合并去重
+                        seen = set(id(c) for c in results)
+                        for c in ai_results:
+                            if id(c) not in seen:
+                                results.append(c)
+                                seen.add(id(c))
+                except Exception as e:
+                    pass  # AI匹配失败不影响本地结果
+
+        return self._send_json({'ok': True, 'results': results[:10], 'total': len(all_cards)})
 
 
 # ============ 多线程 HTTP 服务器 ============

@@ -1,0 +1,1092 @@
+{
+  "subject": "英语",
+  "grade": "六年级",
+  "semester": "上册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "六上",
+  "units": [
+    {
+      "unit_id": "01",
+      "unit_name": "How can I get there?",
+      "cards": [
+        {
+          "card_id": "01-01",
+          "full_id": "英语-六上-01-01",
+          "title": "词汇：地点名词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习描述城市中常见地点的名词，是问路指路的基础。",
+          "core_points": [
+            "library /'laɪbrəri/ (图书馆)",
+            "post office /'poʊst ˌɒfɪs/ (邮局)",
+            "cinema /'sɪnəmə/ (电影院)",
+            "hospital /'hɒspɪtl/ (医院)",
+            "park /pɑːrk/ (公园)",
+            "supermarket /'suːpərmɑːrkɪt/ (超市)"
+          ],
+          "example": {
+            "question": "请将下列中文地点与英文单词连线：\n1. 电影院   a. library\n2. 医院     b. cinema\n3. 图书馆   c. hospital",
+            "steps": [
+              "回忆每个中文地点对应的英文单词。",
+              "根据记忆进行匹配。"
+            ],
+            "answer": "1-b, 2-c, 3-a"
+          },
+          "mistakes": [
+            {
+              "wrong": "cinima",
+              "correct": "cinema"
+            },
+            {
+              "wrong": "hospitol",
+              "correct": "hospital"
+            }
+          ],
+          "memory_tip": "想象你走在城市里，去'library'看书，去'cinema'看电影，生病去'hospital'，寄信去'post office'，玩耍去'park'。",
+          "related": {
+            "prerequisite": "认识常见物品名词",
+            "next": "介词和问路句型"
+          }
+        },
+        {
+          "card_id": "01-02",
+          "full_id": "英语-六上-01-02",
+          "title": "词汇：方位介词",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "掌握描述物体或地点相对位置的介词，是准确指路的关键。",
+          "core_points": [
+            "next to (在...旁边)",
+            "across from (在...对面)",
+            "behind (在...后面)",
+            "in front of (在...前面)",
+            "between...and... (在...和...之间)"
+          ],
+          "example": {
+            "question": "根据句子填空，选择合适的介词：The post office is _____ the bank. (假设邮局在银行旁边)",
+            "steps": [
+              "理解句子意思：邮局在银行的______。",
+              "选择表示“旁边”的方位介词填入。"
+            ],
+            "answer": "next to"
+          },
+          "mistakes": [
+            {
+              "wrong": "on front of",
+              "correct": "in front of"
+            },
+            {
+              "wrong": "between",
+              "correct": "between...and..."
+            }
+          ],
+          "memory_tip": "想象一个'next'小人站在旁边，一个'across'小人从对面走来，'behind'躲起来，'in front of'站在最前面，'between'两人间。",
+          "related": {
+            "prerequisite": "认识基本地点名词",
+            "next": "指路句型"
+          }
+        },
+        {
+          "card_id": "01-03",
+          "full_id": "英语-六上-01-03",
+          "title": "句型：询问地点和路线",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习如何礼貌地询问某个地点在哪里以及如何到达。",
+          "core_points": [
+            "Where is the...? (……在哪里？)",
+            "How can I get to...? (我怎样才能到达……？)",
+            "Is it far from here? (离这里远吗？)",
+            "Excuse me, ... (打扰一下，……)"
+          ],
+          "example": {
+            "question": "请用英文询问“图书馆在哪里？”",
+            "steps": [
+              "确定要询问的地点是“图书馆” (library)。",
+              "使用询问地点的句型“Where is the...?”。",
+              "加上礼貌用语“Excuse me”。"
+            ],
+            "answer": "Excuse me, where is the library?"
+          },
+          "mistakes": [
+            {
+              "wrong": "How can I go to...?",
+              "correct": "How can I get to...?"
+            },
+            {
+              "wrong": "Where is the library?",
+              "correct": "Excuse me, where is the library?"
+            }
+          ],
+          "memory_tip": "“Where is”问地点，像在玩捉迷藏，'它在哪儿？' “How can I get to”问路线，像在问'怎么才能找到它？' 记住前面加上'Excuse me'更有礼貌哦！",
+          "related": {
+            "prerequisite": "地点名词",
+            "next": "指路句型"
+          }
+        },
+        {
+          "card_id": "01-04",
+          "full_id": "英语-六上-01-04",
+          "title": "句型：指引路线",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习如何清晰地告知他人前往某个地点的路线。",
+          "core_points": [
+            "Go straight. (直走。)",
+            "Turn left/right. (向左/右转。)",
+            "It's on your left/right. (它在你的左边/右边。)",
+            "Go along... (沿着...走。)",
+            "It's next to/across from... (它在...旁边/对面。)"
+          ],
+          "example": {
+            "question": "请用英文告诉别人：直走，然后左转，电影院就在你的右边。",
+            "steps": [
+              "将中文指令分解为英文短语：直走(Go straight)，左转(turn left)，电影院(cinema)在右边(on your right)。",
+              "将这些短语组织成完整的句子。"
+            ],
+            "answer": "Go straight, then turn left. The cinema is on your right."
+          },
+          "mistakes": [
+            {
+              "wrong": "Turn to left",
+              "correct": "Turn left"
+            },
+            {
+              "wrong": "It's your right",
+              "correct": "It's on your right"
+            }
+          ],
+          "memory_tip": "直走'straight'不拐弯，左'left'右'right'要分清，'on your left/right'表示方向，就像你的左右手一样。",
+          "related": {
+            "prerequisite": "方位介词",
+            "next": "情景对话练习"
+          }
+        },
+        {
+          "card_id": "01-05",
+          "full_id": "英语-六上-01-05",
+          "title": "情景对话：问路与指路",
+          "type": "情景对话卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "综合运用问路和指路的句型与词汇，进行完整的实际对话。",
+          "core_points": [
+            "对话开头：Excuse me, ...",
+            "询问地点：Where is the...? / How can I get to...?",
+            "指路：Go straight, turn left/right, It's on your left/right, ...",
+            "感谢：Thank you very much!",
+            "回应：You're welcome."
+          ],
+          "example": {
+            "question": "A: Excuse me, how can I get to the library?\nB: Go straight, then turn right. It's on your left, next to the park.\nA: Thank you very much!\nB: You're welcome.\n\n请替换对话中的地点，练习与同学进行问路指路。",
+            "steps": [
+              "选择一个新的地点，如“post office”。",
+              "将对话中的“library”替换为“post office”。",
+              "根据新的地点，修改指路的具体信息。",
+              "与同学进行角色扮演练习。"
+            ],
+            "answer": "A: Excuse me, how can I get to the post office?\nB: Go straight, then turn left. It's across from the cinema.\nA: Thank you very much!\nB: You're welcome."
+          },
+          "mistakes": [
+            {
+              "wrong": "No thank you.",
+              "correct": "You're welcome."
+            },
+            {
+              "wrong": "Me, where is...",
+              "correct": "Excuse me, where is..."
+            }
+          ],
+          "memory_tip": "问路像迷路的小鸟，找人帮忙指方向。指路像热心的向导，一步一步带你走。记住礼貌用语，让对话更顺畅！",
+          "related": {
+            "prerequisite": "所有Unit 1卡片",
+            "next": "Unit 2新词汇与语法"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "02",
+      "unit_name": "What's your favourite season?",
+      "cards": [
+        {
+          "card_id": "02-01",
+          "full_id": "英语-六上-02-01",
+          "title": "词汇：季节与天气",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习描述一年四季和各种天气状况的词汇。",
+          "core_points": [
+            "spring /sprɪŋ/ (春天)",
+            "summer /'sʌmər/ (夏天)",
+            "autumn /'ɔːtəm/ (秋天) / fall /fɔːl/ (秋天，美式)",
+            "winter /'wɪntər/ (冬天)",
+            "sunny /'sʌni/ (晴朗的)",
+            "rainy /'reɪni/ (下雨的)",
+            "snowy /'snoʊi/ (下雪的)",
+            "windy /'wɪndi/ (刮风的)"
+          ],
+          "example": {
+            "question": "请根据描述猜猜是哪个季节：\nIt's warm and flowers bloom.",
+            "steps": [
+              "理解描述句子的意思：天气温暖，花朵盛开。",
+              "回忆哪个季节符合这个特点。"
+            ],
+            "answer": "Spring"
+          },
+          "mistakes": [
+            {
+              "wrong": "autumm",
+              "correct": "autumn"
+            },
+            {
+              "wrong": "suny",
+              "correct": "sunny"
+            }
+          ],
+          "memory_tip": "春'spring'生机勃勃，夏'summer'热浪滚滚，秋'autumn/fall'叶落金黄，冬'winter'白雪皑皑。天气词尾常有'y'，像'sunny'、'rainy'。",
+          "related": {
+            "prerequisite": "常见形容词",
+            "next": "描述季节活动的词汇"
+          }
+        },
+        {
+          "card_id": "02-02",
+          "full_id": "英语-六上-02-02",
+          "title": "词汇：季节活动",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习在不同季节人们常做的活动。",
+          "core_points": [
+            "plant trees (植树)",
+            "swim (游泳)",
+            "go hiking (去远足)",
+            "make a snowman (堆雪人)",
+            "go camping (去露营)",
+            "fly a kite (放风筝)"
+          ],
+          "example": {
+            "question": "冬天适合做什么？请选择：\na. swim   b. make a snowman   c. plant trees",
+            "steps": [
+              "回忆每个活动的中文意思。",
+              "思考哪个活动最适合冬天进行。"
+            ],
+            "answer": "b. make a snowman"
+          },
+          "mistakes": [
+            {
+              "wrong": "make snowman",
+              "correct": "make a snowman"
+            },
+            {
+              "wrong": "go to hiking",
+              "correct": "go hiking"
+            }
+          ],
+          "memory_tip": "春天'plant trees'，夏天'swim'，秋天'go hiking'，冬天'make a snowman'。把活动和季节像朋友一样记住。",
+          "related": {
+            "prerequisite": "季节词汇",
+            "next": "一般现在时"
+          }
+        },
+        {
+          "card_id": "02-03",
+          "full_id": "英语-六上-02-03",
+          "title": "语法：一般现在时 (表示事实与习惯)",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "一般现在时表示经常性、习惯性的动作、状态或普遍真理。",
+          "core_points": [
+            "基本结构：主语 + 动词原形 (第三人称单数主语动词加-s/-es)",
+            "表示习惯性动作：I often play basketball. (我经常打篮球。)",
+            "表示客观事实或真理：The sun rises in the east. (太阳从东方升起。)",
+            "常与频度副词 (always, often, usually, sometimes, never) 连用。",
+            "否定形式：主语 + don't/doesn't + 动词原形。",
+            "疑问形式：Do/Does + 主语 + 动词原形？"
+          ],
+          "example": {
+            "question": "将下列句子改为一般现在时：\nHe (like) to swim in summer.",
+            "steps": [
+              "识别主语“He”是第三人称单数。",
+              "根据一般现在时第三人称单数规则，动词“like”需要加-s。",
+              "将句子补充完整。"
+            ],
+            "answer": "He likes to swim in summer."
+          },
+          "mistakes": [
+            {
+              "wrong": "He like",
+              "correct": "He likes"
+            },
+            {
+              "wrong": "I likes",
+              "correct": "I like"
+            }
+          ],
+          "memory_tip": "一般现在时，像个'老实人'，说的是'真话'和'常事'。主语是'我你我们他们'，动词用原形；主语是'他她它'，动词后面加's'。",
+          "related": {
+            "prerequisite": "动词原形",
+            "next": "现在进行时"
+          }
+        },
+        {
+          "card_id": "02-04",
+          "full_id": "英语-六上-02-04",
+          "title": "句型：询问与表达喜好",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何询问他人最喜欢的季节或事物，并表达自己的喜好。",
+          "core_points": [
+            "What's your favourite...? (你最喜欢什么？)",
+            "My favourite... is... (我最喜欢的……是……)",
+            "I like... (我喜欢……)",
+            "I like... best. (我最喜欢……)"
+          ],
+          "example": {
+            "question": "请用英文回答：你最喜欢哪个季节？(回答：我最喜欢夏天。)",
+            "steps": [
+              "确定问题是“What's your favourite season?”。",
+              "使用“My favourite season is...”的句型回答。",
+              "填入“夏天”的英文单词“summer”。"
+            ],
+            "answer": "My favourite season is summer."
+          },
+          "mistakes": [
+            {
+              "wrong": "What's you favourite?",
+              "correct": "What's your favourite?"
+            },
+            {
+              "wrong": "I like summer.",
+              "correct": "My favourite season is summer."
+            }
+          ],
+          "memory_tip": "'favourite'是'最爱'，问'What's your favourite?'，回答'My favourite is...'，简单又明了！",
+          "related": {
+            "prerequisite": "季节词汇",
+            "next": "描述活动句型"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "03",
+      "unit_name": "What are you doing?",
+      "cards": [
+        {
+          "card_id": "03-01",
+          "full_id": "英语-六上-03-01",
+          "title": "词汇：正在进行的动作",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习描述人物正在进行动作的动词-ing形式。",
+          "core_points": [
+            "reading /'riːdɪŋ/ (正在阅读)",
+            "drawing /'drɔːɪŋ/ (正在画画)",
+            "singing /'sɪŋɪŋ/ (正在唱歌)",
+            "dancing /'dænsɪŋ/ (正在跳舞)",
+            "sleeping /'sliːpɪŋ/ (正在睡觉)",
+            "eating /'iːtɪŋ/ (正在吃饭)",
+            "writing /'raɪtɪŋ/ (正在写字)"
+          ],
+          "example": {
+            "question": "看图填空：She is _____ (read) a book.",
+            "steps": [
+              "识别动词“read”。",
+              "根据句意，表示正在进行的动作，将动词变为-ing形式。",
+              "填入正确的单词。"
+            ],
+            "answer": "reading"
+          },
+          "mistakes": [
+            {
+              "wrong": "readig",
+              "correct": "reading"
+            },
+            {
+              "wrong": "danceing",
+              "correct": "dancing"
+            }
+          ],
+          "memory_tip": "动词加'ing'，表示'正在进行'。就像小火车开动了，ing 'ing' 'ing'地跑！",
+          "related": {
+            "prerequisite": "常见动词",
+            "next": "现在进行时语法"
+          }
+        },
+        {
+          "card_id": "03-02",
+          "full_id": "英语-六上-03-02",
+          "title": "词汇：衣物",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "学习描述各种衣服和穿着的词汇。",
+          "core_points": [
+            "T-shirt /'tiːʃɜːrt/ (T恤衫)",
+            "dress /dres/ (连衣裙)",
+            "skirt /skɜːrt/ (裙子)",
+            "jacket /'dʒækɪt/ (夹克)",
+            "pants /pænts/ (裤子，美式) / trousers /'traʊzərz/ (裤子，英式)",
+            "shoes /ʃuːz/ (鞋子)",
+            "sweater /'swetər/ (毛衣)"
+          ],
+          "example": {
+            "question": "请用英文说出你今天穿的其中一件衣服。",
+            "steps": [
+              "观察自己今天穿的衣服。",
+              "回忆对应衣服的英文单词。",
+              "用英文表达出来，例如：I'm wearing a T-shirt."
+            ],
+            "answer": "I'm wearing a sweater."
+          },
+          "mistakes": [
+            {
+              "wrong": "pant",
+              "correct": "pants"
+            },
+            {
+              "wrong": "dress",
+              "correct": "dresses"
+            }
+          ],
+          "memory_tip": "'T-shirt'像字母T，'dress'是连衣裙，'skirt'是短裙，'jacket'是小外套。每天穿衣服，记住它们！",
+          "related": {
+            "prerequisite": "颜色词汇",
+            "next": "描述穿着的句型"
+          }
+        },
+        {
+          "card_id": "03-03",
+          "full_id": "英语-六上-03-03",
+          "title": "语法：现在进行时",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "现在进行时表示说话时正在发生或进行中的动作。",
+          "core_points": [
+            "基本结构：主语 + be动词 (am/is/are) + 动词-ing形式。",
+            "be动词变化：I am..., He/She/It is..., You/We/They are...",
+            "动词-ing变化规则：一般直接加-ing (read-reading)；以不发音e结尾，去e加-ing (dance-dancing)；重读闭音节单音节词，词尾双写加-ing (run-running)。",
+            "否定形式：主语 + be动词 + not + 动词-ing形式。",
+            "疑问形式：Be动词 + 主语 + 动词-ing形式？"
+          ],
+          "example": {
+            "question": "将下列句子改为现在进行时：\nShe (draw) a picture now.",
+            "steps": [
+              "识别主语“She”，确定be动词用“is”。",
+              "将动词“draw”变为-ing形式“drawing”。",
+              "将句子补充完整。"
+            ],
+            "answer": "She is drawing a picture now."
+          },
+          "mistakes": [
+            {
+              "wrong": "She drawing",
+              "correct": "She is drawing"
+            },
+            {
+              "wrong": "He is runing",
+              "correct": "He is running"
+            }
+          ],
+          "memory_tip": "'Be'动词做'ing'的'小火车'，主语不同'车头'变。'am'、'is'、'are'，加上'ing'，动作正在进行时！",
+          "related": {
+            "prerequisite": "be动词用法，动词-ing形式",
+            "next": "现在进行时疑问句"
+          }
+        },
+        {
+          "card_id": "03-04",
+          "full_id": "英语-六上-03-04",
+          "title": "句型：询问与描述正在进行的动作",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何询问他人正在做什么，并描述自己或他人的正在进行中的动作。",
+          "core_points": [
+            "What are you doing? (你正在做什么？)",
+            "I'm + 动词-ing. (我正在……)",
+            "What is he/she doing? (他/她正在做什么？)",
+            "He/She is + 动词-ing. (他/她正在……)",
+            "Look! (看！)"
+          ],
+          "example": {
+            "question": "请用英文描述图片中正在看书的女孩。",
+            "steps": [
+              "识别图片中的人物是“女孩”(She)。",
+              "识别正在进行的动作是“看书”(read a book)。",
+              "使用“She is + 动词-ing”的句型进行描述。"
+            ],
+            "answer": "She is reading a book."
+          },
+          "mistakes": [
+            {
+              "wrong": "What you doing?",
+              "correct": "What are you doing?"
+            },
+            {
+              "wrong": "He is play basketball.",
+              "correct": "He is playing basketball."
+            }
+          ],
+          "memory_tip": "问'What are you doing?'，就像在问'小秘密'。回答'I'm doing...'，就像在分享'我的小秘密'。",
+          "related": {
+            "prerequisite": "现在进行时语法",
+            "next": "情景对话练习"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "04",
+      "unit_name": "I have a pen pal.",
+      "cards": [
+        {
+          "card_id": "04-01",
+          "full_id": "英语-六上-04-01",
+          "title": "词汇：爱好与特长",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习描述个人爱好和特长的词汇。",
+          "core_points": [
+            "playing chess (下棋)",
+            "collecting stamps (集邮)",
+            "playing sports (运动)",
+            "reading books (读书)",
+            "singing songs (唱歌)",
+            "drawing pictures (画画)"
+          ],
+          "example": {
+            "question": "请用英文说出你的一项爱好。",
+            "steps": [
+              "思考自己有什么爱好。",
+              "回忆该爱好对应的英文表达。",
+              "用“I like...”或“My hobby is...”的句型表达出来。"
+            ],
+            "answer": "I like playing basketball."
+          },
+          "mistakes": [
+            {
+              "wrong": "play chess",
+              "correct": "playing chess"
+            },
+            {
+              "wrong": "collect stamp",
+              "correct": "collecting stamps"
+            }
+          ],
+          "memory_tip": "'ing'家族真奇妙，动词变成爱好宝。'playing'、'collecting'、'reading'，都是我的小爱好！",
+          "related": {
+            "prerequisite": "动词-ing形式",
+            "next": "描述爱好句型"
+          }
+        },
+        {
+          "card_id": "04-02",
+          "full_id": "英语-六上-04-02",
+          "title": "词汇：国家与国籍",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习常见国家及其对应的国籍形容词。",
+          "core_points": [
+            "China /'tʃaɪnə/ - Chinese /tʃaɪ'niːz/ (中国 - 中国人/的)",
+            "America /ə'merɪkə/ - American /ə'merɪkən/ (美国 - 美国人/的)",
+            "Canada /'kænədə/ - Canadian /kə'neɪdiən/ (加拿大 - 加拿大人/的)",
+            "UK /ˌjuː 'keɪ/ (英国) - British /'brɪtɪʃ/ (英国人/的)",
+            "Australia /ɔː'streɪliə/ - Australian /ɔː'streɪliən/ (澳大利亚 - 澳大利亚人/的)"
+          ],
+          "example": {
+            "question": "请填空：She is from Japan. She is _____.",
+            "steps": [
+              "识别国家“Japan”。",
+              "回忆“Japan”对应的国籍形容词。",
+              "填入正确的单词。"
+            ],
+            "answer": "Japanese"
+          },
+          "mistakes": [
+            {
+              "wrong": "China person",
+              "correct": "Chinese"
+            },
+            {
+              "wrong": "Amercian",
+              "correct": "American"
+            }
+          ],
+          "memory_tip": "国家像地名，国籍像人名。'China'变'Chinese'，'America'变'American'，记住这些'变形金刚'！",
+          "related": {
+            "prerequisite": "地点名词",
+            "next": "介绍他人句型"
+          }
+        },
+        {
+          "card_id": "04-03",
+          "full_id": "英语-六上-04-03",
+          "title": "语法：Be动词的用法复习",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "巩固be动词 (am, is, are) 在不同人称和时态中的用法。",
+          "core_points": [
+            "I + am",
+            "He/She/It + is",
+            "You/We/They + are",
+            "用于介绍身份、国籍、年龄等：I am Chinese. He is ten.",
+            "用于描述状态、特征：She is happy. It is a big apple.",
+            "用于构成现在进行时：They are playing football."
+          ],
+          "example": {
+            "question": "选择正确的be动词填空：\n1. My pen pal _____ from Canada.\n2. We _____ good friends.",
+            "steps": [
+              "分析第一个句子主语“My pen pal”是第三人称单数，选择“is”。",
+              "分析第二个句子主语“We”是复数，选择“are”。"
+            ],
+            "answer": "1. is, 2. are"
+          },
+          "mistakes": [
+            {
+              "wrong": "She are",
+              "correct": "She is"
+            },
+            {
+              "wrong": "I is",
+              "correct": "I am"
+            }
+          ],
+          "memory_tip": "'I'是'am'的好朋友，'he/she/it'和'is'不分离，'you/we/they'爱和'are'在一起。三兄弟，分清楚！",
+          "related": {
+            "prerequisite": "人称代词",
+            "next": "介绍他人的句型"
+          }
+        },
+        {
+          "card_id": "04-04",
+          "full_id": "英语-六上-04-04",
+          "title": "句型：介绍他人",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何向他人介绍自己的朋友、笔友或家人。",
+          "core_points": [
+            "This is my friend/pen pal, ... (这是我的朋友/笔友，……)",
+            "He/She is from... (他/她来自……)",
+            "He/She likes... (他/她喜欢……)",
+            "He/She is good at... (他/她擅长……)"
+          ],
+          "example": {
+            "question": "请用英文介绍你的笔友Tom：他来自美国，喜欢打篮球。",
+            "steps": [
+              "使用“This is my pen pal, Tom.”开头。",
+              "描述他的国籍：“He is from America.”。",
+              "描述他的爱好：“He likes playing basketball.”。"
+            ],
+            "answer": "This is my pen pal, Tom. He is from America. He likes playing basketball."
+          },
+          "mistakes": [
+            {
+              "wrong": "This my friend is...",
+              "correct": "This is my friend..."
+            },
+            {
+              "wrong": "He like playing...",
+              "correct": "He likes playing..."
+            }
+          ],
+          "memory_tip": "介绍朋友像搭桥，'This is'是开头。再用'He/She is from...'和'He/She likes...'，把朋友介绍好！",
+          "related": {
+            "prerequisite": "国家与国籍词汇，爱好词汇",
+            "next": "情景对话练习"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "05",
+      "unit_name": "What does he like doing?",
+      "cards": [
+        {
+          "card_id": "05-01",
+          "full_id": "英语-六上-05-01",
+          "title": "词汇：更多爱好与活动",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "扩展描述个人爱好和日常活动的动词短语。",
+          "core_points": [
+            "singing songs (唱歌)",
+            "playing basketball (打篮球)",
+            "swimming (游泳)",
+            "drawing pictures (画画)",
+            "playing computer games (玩电脑游戏)",
+            "reading comic books (看漫画书)"
+          ],
+          "example": {
+            "question": "请用英文描述你朋友喜欢的一项活动。",
+            "steps": [
+              "选择一个朋友和一项他/她喜欢的活动。",
+              "回忆该活动对应的英文表达。",
+              "用“My friend likes...”的句型表达出来。"
+            ],
+            "answer": "My friend likes playing computer games."
+          },
+          "mistakes": [
+            {
+              "wrong": "play computer game",
+              "correct": "playing computer games"
+            },
+            {
+              "wrong": "read comic book",
+              "correct": "reading comic books"
+            }
+          ],
+          "memory_tip": "爱好活动多又多，'ing'形式记牢它。唱歌、画画、打篮球，都是动词加'ing'！",
+          "related": {
+            "prerequisite": "Unit 4 爱好词汇",
+            "next": "一般现在时第三人称单数"
+          }
+        },
+        {
+          "card_id": "05-02",
+          "full_id": "英语-六上-05-02",
+          "title": "语法：一般现在时第三人称单数",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "当主语是第三人称单数时，一般现在时的谓语动词要发生词形变化。",
+          "core_points": [
+            "一般动词后加-s：likes, reads, plays",
+            "以s, x, ch, sh, o结尾的动词加-es：watches, goes, does",
+            "以辅音字母+y结尾的动词，变y为i再加-es：studies, flies (但play-plays)",
+            "特殊情况：have 变为 has",
+            "疑问句用Does开头，动词变回原形：Does he like...? (他喜欢...吗？)",
+            "否定句用doesn't，动词变回原形：He doesn't like... (他不喜欢...)"
+          ],
+          "example": {
+            "question": "将下列句子中的动词变为正确形式：\n1. She often (go) to the park.\n2. He (study) English every day.",
+            "steps": [
+              "判断主语是否为第三人称单数 (She, He)。",
+              "根据动词词尾规则，将“go”变为“goes”。",
+              "根据动词词尾规则，将“study”变为“studies”。"
+            ],
+            "answer": "1. goes, 2. studies"
+          },
+          "mistakes": [
+            {
+              "wrong": "She go",
+              "correct": "She goes"
+            },
+            {
+              "wrong": "He don't like",
+              "correct": "He doesn't like"
+            }
+          ],
+          "memory_tip": "他她它，动词后面's'或'es'。疑问否定'does'来帮忙，动词变回原形它最强！",
+          "related": {
+            "prerequisite": "一般现在时基础",
+            "next": "频度副词"
+          }
+        },
+        {
+          "card_id": "05-03",
+          "full_id": "英语-六上-05-03",
+          "title": "句型：询问与表达第三人称喜好",
+          "type": "句型卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "学习如何询问第三人称（他/她）的喜好，并用完整句子表达。",
+          "core_points": [
+            "What does he/she like doing? (他/她喜欢做什么？)",
+            "He/She likes + 动词-ing. (他/她喜欢做……)",
+            "Does he/she like...? Yes, he/she does. / No, he/she doesn't.",
+            "He/She often/sometimes/never... (他/她经常/有时/从不……)"
+          ],
+          "example": {
+            "question": "请用英文询问你的朋友：你妈妈喜欢唱歌吗？并给出肯定回答。",
+            "steps": [
+              "确定主语是“你妈妈”(your mother)，为第三人称单数。",
+              "使用“Does + 主语 + like + 动词-ing？”的句型。",
+              "给出肯定回答“Yes, she does.”。"
+            ],
+            "answer": "Does your mother like singing? Yes, she does."
+          },
+          "mistakes": [
+            {
+              "wrong": "What he like doing?",
+              "correct": "What does he like doing?"
+            },
+            {
+              "wrong": "He like playing.",
+              "correct": "He likes playing."
+            }
+          ],
+          "memory_tip": "问他她，用'Does'开头，动词变回原形。回答他她，动词要加's'，别忘了！",
+          "related": {
+            "prerequisite": "一般现在时第三人称单数",
+            "next": "频度副词用法"
+          }
+        },
+        {
+          "card_id": "05-04",
+          "full_id": "英语-六上-05-04",
+          "title": "词汇：频度副词",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习描述动作发生频率的副词，常用于一般现在时。",
+          "core_points": [
+            "always /'ɔːlweɪz/ (总是)",
+            "usually /'juːʒuəli/ (通常)",
+            "often /'ɒfən/ (经常)",
+            "sometimes /'sʌmtaɪmz/ (有时)",
+            "never /'nevər/ (从不)",
+            "频度副词通常放在行为动词之前，be动词之后。"
+          ],
+          "example": {
+            "question": "请用“always”改写句子：\nHe plays basketball on Sundays.",
+            "steps": [
+              "识别频度副词“always”。",
+              "将“always”放在行为动词“plays”之前。",
+              "将句子补充完整。"
+            ],
+            "answer": "He always plays basketball on Sundays."
+          },
+          "mistakes": [
+            {
+              "wrong": "He plays always basketball.",
+              "correct": "He always plays basketball."
+            },
+            {
+              "wrong": "I am often happy.",
+              "correct": "I often am happy."
+            }
+          ],
+          "memory_tip": "'always'、'usually'、'often'、'sometimes'、'never'，它们像小闹钟，告诉我们事情发生多少次。记住'动前be后'的口诀！",
+          "related": {
+            "prerequisite": "一般现在时",
+            "next": "情景对话练习"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "06",
+      "unit_name": "How many?",
+      "cards": [
+        {
+          "card_id": "06-01",
+          "full_id": "英语-六上-06-01",
+          "title": "词汇：食物名词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习各种常见食物的英文名称。",
+          "core_points": [
+            "bread /bred/ (面包)",
+            "milk /mɪlk/ (牛奶)",
+            "juice /dʒuːs/ (果汁)",
+            "noodles /'nuːdlz/ (面条)",
+            "rice /raɪs/ (米饭)",
+            "vegetables /'vedʒtəblz/ (蔬菜)",
+            "fruit /fruːt/ (水果)",
+            "meat /miːt/ (肉)"
+          ],
+          "example": {
+            "question": "请用英文说出你早餐吃的一种食物。",
+            "steps": [
+              "回忆自己早餐吃了什么。",
+              "选择其中一种食物，回忆其英文单词。",
+              "用英文表达出来，例如：I eat bread for breakfast."
+            ],
+            "answer": "I eat noodles for breakfast."
+          },
+          "mistakes": [
+            {
+              "wrong": "noodle",
+              "correct": "noodles"
+            },
+            {
+              "wrong": "fruits",
+              "correct": "fruit"
+            }
+          ],
+          "memory_tip": "早餐'bread'、'milk'，午餐'noodles'、'rice'，还有'fruit'、'vegetables'，健康食物记起来！",
+          "related": {
+            "prerequisite": "日常用品词汇",
+            "next": "可数与不可数名词"
+          }
+        },
+        {
+          "card_id": "06-02",
+          "full_id": "英语-六上-06-02",
+          "title": "语法：可数名词与不可数名词",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "区分英语中的可数名词和不可数名词，是正确使用量词和动词单复数的基础。",
+          "core_points": [
+            "可数名词 (Countable Nouns)：可以数清，有单复数形式 (apple - apples, pen - pens)。",
+            "不可数名词 (Uncountable Nouns)：不能数清，没有复数形式，通常视为单数 (water, bread, rice, milk)。",
+            "可数名词前可用a/an, some, many, few等。",
+            "不可数名词前可用some, much, little等。",
+            "一些名词既可作可数又可作不可数，意义不同 (e.g., chicken - 鸡肉/鸡)。"
+          ],
+          "example": {
+            "question": "判断下列名词是可数 (C) 还是不可数 (U)：\n1. book   2. water   3. bread   4. orange",
+            "steps": [
+              "思考“book”能否数清，有无复数，判断为C。",
+              "思考“water”能否数清，有无复数，判断为U。",
+              "思考“bread”能否数清，有无复数，判断为U (作为整体面包时)。",
+              "思考“orange”能否数清，有无复数，判断为C。"
+            ],
+            "answer": "1. C, 2. U, 3. U, 4. C"
+          },
+          "mistakes": [
+            {
+              "wrong": "Two breads",
+              "correct": "Two pieces of bread / Two loaves of bread"
+            },
+            {
+              "wrong": "Many water",
+              "correct": "Much water"
+            }
+          ],
+          "memory_tip": "能数清，加's'是复数，它是可数名词。数不清，永远是单数，它是不可数名词。记住'水、米、面包'，都是不可数！",
+          "related": {
+            "prerequisite": "名词单复数",
+            "next": "How many/much 句型"
+          }
+        },
+        {
+          "card_id": "06-03",
+          "full_id": "英语-六上-06-03",
+          "title": "句型：询问数量 (How many/much)",
+          "type": "句型卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "学习如何使用How many和How much询问可数名词和不可数名词的数量。",
+          "core_points": [
+            "How many + 可数名词复数 + (be动词/do动词) ...? (有多少……？)",
+            "How much + 不可数名词 + (be动词/do动词) ...? (有多少……？)",
+            "回答时常用数字或量词 (some, a lot of, a little, a few)。",
+            "How many oranges do you have? (你有多少个橘子？)",
+            "How much milk do you want? (你想要多少牛奶？)"
+          ],
+          "example": {
+            "question": "请用英文询问：你有多少本书？",
+            "steps": [
+              "识别“书”是可数名词“book”，且要用复数“books”。",
+              "使用“How many”的句型。",
+              "构成完整的疑问句。"
+            ],
+            "answer": "How many books do you have?"
+          },
+          "mistakes": [
+            {
+              "wrong": "How much books?",
+              "correct": "How many books?"
+            },
+            {
+              "wrong": "How many milk?",
+              "correct": "How much milk?"
+            }
+          ],
+          "memory_tip": "'many'和'many'的朋友一起数，'much'和'much'的朋友数不清。记住'多少'的秘密，别搞混！",
+          "related": {
+            "prerequisite": "可数与不可数名词",
+            "next": "购物情景对话"
+          }
+        },
+        {
+          "card_id": "06-04",
+          "full_id": "英语-六上-06-04",
+          "title": "易混词卡：many vs. much",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "辨析many和much的用法，它们都表示“许多”，但分别用于可数名词和不可数名词。",
+          "core_points": [
+            "many：用于修饰可数名词的复数形式，表示“许多的”。",
+            "much：用于修饰不可数名词，表示“许多的”。",
+            "两者都可用于疑问句和否定句。肯定句中常用a lot of / lots of (可数和不可数都可修饰)。",
+            "例句：How many apples? (多少苹果？) How much water? (多少水？)"
+          ],
+          "example": {
+            "question": "选择正确的词填空：\n1. There aren't _____ students in the classroom. (many/much)\n2. I don't have _____ money. (many/much)",
+            "steps": [
+              "判断“students”是可数名词复数，选择“many”。",
+              "判断“money”是不可数名词，选择“much”。"
+            ],
+            "answer": "1. many, 2. much"
+          },
+          "mistakes": [
+            {
+              "wrong": "I have much friends.",
+              "correct": "I have many friends."
+            },
+            {
+              "wrong": "He has many water.",
+              "correct": "He has much water."
+            }
+          ],
+          "memory_tip": "'many'数得清，'much'数不清。就像'many'苹果一堆堆，'much'水流淌像条线。",
+          "related": {
+            "prerequisite": "可数与不可数名词",
+            "next": "购物情景对话"
+          }
+        },
+        {
+          "card_id": "06-05",
+          "full_id": "英语-六上-06-05",
+          "title": "情景对话：购物/点餐",
+          "type": "情景对话卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "综合运用食物词汇、可数/不可数名词以及How many/much句型，进行购物或点餐对话。",
+          "core_points": [
+            "询问价格：How much is it? / How much are they?",
+            "询问数量：How many... do you want? / How much... do you need?",
+            "表达需求：I'd like some... / I want three...",
+            "感谢与回应：Thank you! / You're welcome."
+          ],
+          "example": {
+            "question": "A: Can I help you?\nB: Yes, I'd like some bread.\nA: How much bread do you want?\nB: Two pieces, please. And some milk.\nA: OK. Here you are.\nB: Thank you!\n请替换对话中的食物和数量，与同学进行练习。",
+            "steps": [
+              "选择新的食物，如“apples”和“juice”。",
+              "根据食物的可数/不可数性质，调整“How many/much”和数量表达。",
+              "与同学进行角色扮演练习。"
+            ],
+            "answer": "A: Can I help you?\nB: Yes, I'd like some apples.\nA: How many apples do you want?\nB: Three, please. And some juice.\nA: OK. Here you are.\nB: Thank you!"
+          },
+          "mistakes": [
+            {
+              "wrong": "How many juice?",
+              "correct": "How much juice?"
+            },
+            {
+              "wrong": "I want a milk.",
+              "correct": "I want some milk."
+            }
+          ],
+          "memory_tip": "购物就像玩游戏，'How much'问价格，'How many'问数量。礼貌用语不能忘，'please'和'thank you'要常讲！",
+          "related": {
+            "prerequisite": "所有Unit 6卡片",
+            "next": "期末复习"
+          }
+        }
+      ]
+    }
+  ]
+}

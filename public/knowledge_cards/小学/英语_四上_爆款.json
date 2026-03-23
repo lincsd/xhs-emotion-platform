@@ -1,0 +1,459 @@
+{
+  "subject": "英语",
+  "grade": "四年级",
+  "semester": "上册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "四上",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片",
+  "units": [
+    {
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [
+        {
+          "card_id": "T1-01",
+          "full_id": "英语-四上-T1-01",
+          "title": "this和that分不清？一张图搞定！",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "this (这个) 指代近处的事物；that (那个) 指代远处的事物。",
+          "core_points": [
+            "this：离说话人近的东西，通常用手指向。",
+            "that：离说话人远的东西，通常用手指向。",
+            "两者都用于指代单数名词。",
+            "疑问句和肯定/否定回答中也要区分使用。"
+          ],
+          "example": {
+            "question": "看图选择：指着桌子上的书本，应该说 'What's ______?'",
+            "steps": [
+              "图片展示：一只手指向桌上的一本书（近处）",
+              "选项：A. this B. that"
+            ],
+            "answer": "A. this"
+          },
+          "mistakes": [
+            {
+              "wrong": "What's that? (指着手边的铅笔)",
+              "correct": "What's this? (指着手边的铅笔)"
+            },
+            {
+              "wrong": "This is a bird. (指着远处天空的鸟)",
+              "correct": "That is a bird. (指着远处天空的鸟)"
+            }
+          ],
+          "memory_tip": "近用this，远用that，一远一近要记牢！",
+          "emotion_hook": "小学英语最基础的this/that你用对了吗？别再傻傻分不清啦！",
+          "trap_point": "很多同学不注意距离，随意混用this和that，导致表达不准确。"
+        },
+        {
+          "card_id": "T1-02",
+          "full_id": "英语-四上-T1-02",
+          "title": "he/she/it 傻傻分不清？一招搞定！",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "人称代词区分：he（他），she（她），it（它）。",
+          "core_points": [
+            "he：指代单数男性。",
+            "she：指代单数女性。",
+            "it：指代单数事物或动物。",
+            "它们都是主格人称代词，用作句子的主语。"
+          ],
+          "example": {
+            "question": "看图填空：这是我的妈妈。______ is a teacher.",
+            "steps": [
+              "图片展示：一位女性老师的照片",
+              "选项：A. He B. She C. It"
+            ],
+            "answer": "B. She"
+          },
+          "mistakes": [
+            {
+              "wrong": "She is my father.",
+              "correct": "He is my father."
+            },
+            {
+              "wrong": "He is a cat.",
+              "correct": "It is a cat."
+            }
+          ],
+          "memory_tip": "男人he，女人she，动物it，记住性别和数量，代词不再错！",
+          "emotion_hook": "别让代词错误暴露你的英语水平！小学英语基础，你真的掌握了吗？",
+          "trap_point": "初学者常常混淆he/she的性别，或将it用于人。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T2",
+      "unit_name": "发音挑战",
+      "cards": [
+        {
+          "card_id": "T2-01",
+          "full_id": "英语-四上-T2-01",
+          "title": "classroom发音你确定会读吗？90%的人都读错了！",
+          "type": "发音挑战卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "正确发音 'classroom' (教室) 的重音和字母组合。",
+          "core_points": [
+            "重音在第一个音节：CLASS-room。",
+            "'oo' 发长音 /uː/，像中文的“乌”。",
+            "'s' 发 /s/ 音，不是 /z/ 音。",
+            "完整发音：/ˈklɑːsruːm/ (英式) 或 /ˈklæs.ruːm/ (美式)"
+          ],
+          "example": {
+            "question": "请读出 'classroom' 这个单词，并与正确发音对比。",
+            "steps": [
+              "展示单词 'classroom'",
+              "提供常见错误发音示例（如重音错误，'oo' 发音错误）",
+              "提供正确发音音频或音标"
+            ],
+            "answer": "正确发音：/ˈklɑːsruːm/"
+          },
+          "mistakes": [
+            {
+              "wrong": "class-ROOM (重音错误)",
+              "correct": "CLASS-room"
+            },
+            {
+              "wrong": "class-ruhm (oo发音不准)",
+              "correct": "class-ROOM (oo发长音)"
+            }
+          ],
+          "memory_tip": "教室classroom，重音在前，'oo'是长音，就像“乌”！",
+          "emotion_hook": "一个小小的单词，却能暴露你的发音盲区！快来挑战你的'classroom'发音！",
+          "pronunciation_tip": "发音时嘴巴要放松，'oo'音要拖长，不要发成短促的'u'音。"
+        },
+        {
+          "card_id": "T2-02",
+          "full_id": "英语-四上-T2-02",
+          "title": "pencil和eraser，你还在用中式发音吗？",
+          "type": "发音挑战卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "掌握 'pencil' (铅笔) 和 'eraser' (橡皮) 的正确发音，特别是元音和重音。",
+          "core_points": [
+            "pencil: 重音在前，'i' 发短音 /ɪ/，'ci' 发 /səl/ 音。/ˈpen.səl/",
+            "eraser: 重音在第二个音节，'e' 发 /ɪ/ 或 /ə/，'a' 发 /eɪ/，'er' 发 /ər/。/ɪˈreɪ.sər/",
+            "注意单词末尾的轻读音。"
+          ],
+          "example": {
+            "question": "听单词，判断哪个发音是正确的：pencil",
+            "steps": [
+              "展示单词 'pencil'",
+              "提供两个音频：一个中式错误发音，一个标准发音"
+            ],
+            "answer": "标准发音：/ˈpen.səl/"
+          },
+          "mistakes": [
+            {
+              "wrong": "pen-SEE-l (pencil重音错误)",
+              "correct": "PEN-cil"
+            },
+            {
+              "wrong": "e-RA-ser (eraser元音发音错误)",
+              "correct": "e-RAI-ser"
+            }
+          ],
+          "memory_tip": "铅笔PEN-cil，橡皮e-RA-ser，重音不同，仔细听！",
+          "emotion_hook": "这两个文具单词，你的孩子读对了吗？别让小小的发音问题影响大大的自信！",
+          "pronunciation_tip": "pencil的'i'是弱读音，eraser的'a'是长元音/eɪ/，要发到位。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T3",
+      "unit_name": "情景闯关",
+      "cards": [
+        {
+          "card_id": "T3-01",
+          "full_id": "英语-四上-T3-01",
+          "title": "教室寻宝大挑战！你能用英语找到所有东西吗？",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在教室情景中，运用 'What's this/that?' 和 'It's a...' 句型描述物品。",
+          "core_points": [
+            "掌握教室物品单词：desk, chair, board, window, door, light, fan, picture。",
+            "熟练使用 'What's this?' (问近处物品) 和 'What's that?' (问远处物品)。",
+            "正确回答 'It's a...' 或 'It's an...'。",
+            "能用英语指出物品的位置，如 'It's in/on/under the desk.' (Unit 4)"
+          ],
+          "example": {
+            "question": "你第一次走进一间教室，想知道黑板是什么。你应该怎么问？",
+            "steps": [
+              "场景描述：你站在教室门口，看到远处有一块黑板。",
+              "对话选项：A. What's this? B. What's that? C. Is it a board?"
+            ],
+            "answer": "B. What's that?"
+          },
+          "mistakes": [
+            {
+              "wrong": "This is a board. (问句)",
+              "correct": "What's this/that? (问句)"
+            },
+            {
+              "wrong": "It's board. (缺少冠词)",
+              "correct": "It's a board."
+            }
+          ],
+          "memory_tip": "指近用this，指远用that，问清是啥，It's a...回答它！",
+          "emotion_hook": "想让孩子成为课堂小侦探吗？这个寻宝游戏，让孩子爱上英语！",
+          "scene_dialogue": [
+            "A: Look! What's that?",
+            "B: It's a board.",
+            "A: What about this? (指向窗户)",
+            "B: Oh, it's a window."
+          ]
+        },
+        {
+          "card_id": "T3-02",
+          "full_id": "英语-四上-T3-02",
+          "title": "去麦当劳点餐，你会用英语说吗？",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在点餐情景中，运用 'I want...' 句型表达需求。",
+          "core_points": [
+            "掌握常见食物单词（可结合生活扩展，如hamburger, French fries, Coke, juice）。",
+            "学习 'I want...' (我想要...) 表达需求。",
+            "学习 'What about you?' (你呢？) 进行互动。",
+            "掌握 'Thank you.' 和 'You're welcome.'。"
+          ],
+          "example": {
+            "question": "你在快餐店，想点一个汉堡。你应该怎么说？",
+            "steps": [
+              "场景描述：你在快餐店柜台前。",
+              "对话选项：A. I am a hamburger. B. I want a hamburger. C. What's a hamburger?"
+            ],
+            "answer": "B. I want a hamburger."
+          },
+          "mistakes": [
+            {
+              "wrong": "I am hamburger.",
+              "correct": "I want a hamburger."
+            },
+            {
+              "wrong": "Want hamburger.",
+              "correct": "I want a hamburger."
+            }
+          ],
+          "memory_tip": "想要什么，'I want' 开头，后面加个 'a' 再说餐！",
+          "emotion_hook": "别再只会'this, this, and this'了！教孩子用英语点餐，秒变国际范儿！",
+          "scene_dialogue": [
+            "Waiter: Hello! What do you want?",
+            "Child: I want a hamburger, please.",
+            "Waiter: Anything else?",
+            "Child: No, thank you.",
+            "Waiter: Here you are.",
+            "Child: Thank you! Bye-bye!"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "T4",
+      "unit_name": "语法纠错",
+      "cards": [
+        {
+          "card_id": "T4-01",
+          "full_id": "英语-四上-T4-01",
+          "title": "这句话10个人9个说错！你的'a/an'用对了吗？",
+          "type": "语法纠错卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "不定冠词 'a' 和 'an' 的正确使用。",
+          "core_points": [
+            "'a' 用于辅音音素开头的单数可数名词前。",
+            "'an' 用于元音音素开头的单数可数名词前。",
+            "判断依据是发音，而不是字母本身。",
+            "四年级上册常见词汇如 'apple', 'eraser', 'orange' 等。"
+          ],
+          "example": {
+            "question": "找出并改正句子中的错误：It's an pen.",
+            "steps": [
+              "分析 'pen' 的发音。",
+              "根据发音选择正确的冠词。"
+            ],
+            "answer": "错误：an pen → 正确：a pen"
+          },
+          "mistakes": [
+            {
+              "wrong": "It's a apple.",
+              "correct": "It's an apple."
+            },
+            {
+              "wrong": "I have an book.",
+              "correct": "I have a book."
+            }
+          ],
+          "memory_tip": "元音an，辅音a，开口就听它！",
+          "emotion_hook": "小小的'a'和'an'，却是语法大魔王！快来测测你家娃有没有中招！",
+          "grammar_fix": "核心是听单词的第一个发音，是元音（a, e, i, o, u的音）就用an，是辅音就用a。"
+        },
+        {
+          "card_id": "T4-02",
+          "full_id": "英语-四上-T4-02",
+          "title": "问句和答句，孩子总是搞混？",
+          "type": "语法纠错卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "掌握 'Is this/that a...?' 疑问句和 'Yes, it is./No, it isn't.' 回答句的对应关系。",
+          "core_points": [
+            "疑问句以 'Is' 开头，'this/that' 指代单数物体。",
+            "肯定回答用 'Yes, it is.'。",
+            "否定回答用 'No, it isn't.' (it is not的缩写)。",
+            "回答时主语和谓语动词要与问句保持一致。"
+          ],
+          "example": {
+            "question": "改正对话中的错误：A: Is this a pen? B: Yes, it not.",
+            "steps": [
+              "识别问句类型。",
+              "判断回答是否符合肯定句结构。"
+            ],
+            "answer": "错误：Yes, it not. → 正确：Yes, it is."
+          },
+          "mistakes": [
+            {
+              "wrong": "A: Is that a book? B: No, it is.",
+              "correct": "A: Is that a book? B: No, it isn't."
+            },
+            {
+              "wrong": "A: Is this a desk? B: Yes, it's.",
+              "correct": "A: Is this a desk? B: Yes, it is."
+            }
+          ],
+          "memory_tip": "问句Is开头，答句It is结尾，肯定Yes，否定No，isn't别忘记！",
+          "emotion_hook": "孩子总把问句答句搞混？一招教你纠正，让孩子自信开口说英语！",
+          "grammar_fix": "注意'is'和'isn't'的正确使用，以及回答时主语'it'的指代。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T5",
+      "unit_name": "亲子英语PK",
+      "cards": [
+        {
+          "card_id": "T5-01",
+          "full_id": "英语-四上-T5-01",
+          "title": "妈妈的英语不如四年级的娃？来场家庭寻物PK赛！",
+          "type": "亲子英语PK卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "通过家庭寻物游戏，巩固教室和家庭物品单词及 'Where is...?' 句型。",
+          "core_points": [
+            "家长说单词，孩子快速找到物品并说出位置。",
+            "孩子说单词，家长快速找到物品并说出位置。",
+            "交换角色，增加趣味性。",
+            "重点词汇：desk, chair, bed, sofa, TV, fridge, door, window, book, pen, schoolbag等。",
+            "句型：'Where is the...?' 'It's in/on/under the...'"
+          ],
+          "example": {
+            "question": "家长说：'Find the book!' 孩子找到书后，应该怎么说？",
+            "steps": [
+              "家长：'Find the book!'",
+              "孩子找到书，并指着说：'It's on the desk.' (假设书在桌子上)"
+            ],
+            "answer": "孩子说：'It's on the desk!' 或 'Here it is!'"
+          },
+          "mistakes": [],
+          "memory_tip": "单词说得快，物品找得准，家庭PK，英语蹭蹭涨！",
+          "emotion_hook": "一场家庭寻宝游戏，让孩子秒变英语小达人，爸妈快来挑战！",
+          "battle_rule": "1. 准备10个家庭或教室常见物品。2. 轮流说出物品的英语名称，对方需在10秒内找到并用英语说出其位置（如'It's on the table.'）。3. 答对得分，答错扣分。看谁得分高！"
+        },
+        {
+          "card_id": "T5-02",
+          "full_id": "英语-四上-T5-02",
+          "title": "谁是时间小能手？亲子英语时间PK赛！",
+          "type": "亲子英语PK卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "通过问答巩固时间表达 'What time is it?' 和 'It's ... o'clock.' 以及日常活动。",
+          "core_points": [
+            "掌握整点时间表达：'one o'clock', 'two o'clock' 等。",
+            "掌握日常活动单词：get up, go to school, eat breakfast/lunch/dinner, go to bed。",
+            "熟练使用 'What time is it?' 提问。",
+            "熟练回答 'It's ... o'clock.' 和 'I ... at ... o'clock.'。"
+          ],
+          "example": {
+            "question": "家长问：'What time is it?' 孩子看到时钟指向8点，应该怎么回答？",
+            "steps": [
+              "图片展示：一个时钟指向8点。",
+              "家长问：'What time is it?'"
+            ],
+            "answer": "孩子回答：'It's eight o'clock.'"
+          },
+          "mistakes": [],
+          "memory_tip": "时钟滴答，时间到，亲子PK，看谁先报！",
+          "emotion_hook": "还在为孩子记不住时间表达发愁？这场PK赛，让孩子轻松成为时间管理大师！",
+          "battle_rule": "1. 准备一个时钟模型或图片。2. 家长拨动时钟，孩子用英语说出时间。3. 孩子说出时间，家长说出这个时间通常会做什么活动（如'It's seven o'clock. I get up.'）。4. 交换角色，看谁反应快、说得准！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T6",
+      "unit_name": "速记卡",
+      "cards": [
+        {
+          "card_id": "T6-01",
+          "full_id": "英语-四上-T6-01",
+          "title": "单词背诵太枯燥？这个方法让孩子爱上记单词！",
+          "type": "速记卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "利用分类联想和视觉记忆法，快速记忆教室物品单词。",
+          "core_points": [
+            "将单词按类别分组记忆：如“固定家具类”、“可移动物品类”。",
+            "利用联想：door (门) 联想到 open the door。",
+            "利用身体动作：指着实物说单词。",
+            "制作单词卡片，一面英文一面图片，反复翻看。",
+            "每天复习，小步快跑。"
+          ],
+          "example": {
+            "question": "如何高效记忆 'classroom', 'board', 'window', 'door'？",
+            "steps": [
+              "分类：classroom是总称，board, window, door是里面的具体物品。",
+              "联想：board (板) 联想到 blackboard (黑板)。window (窗户) 联想到 open the window。door (门) 联想到 go through the door。",
+              "实物对应：指着真实的教室物品边说边记。"
+            ],
+            "answer": "通过分类、联想和实物对应，形成记忆网络。"
+          },
+          "mistakes": [],
+          "memory_tip": "分类联想，实物指认，单词卡片，轻松记牢！",
+          "emotion_hook": "告别死记硬背！这个单词速记法，让你的孩子轻松拿下四年级上册词汇！",
+          "speed_method": "1. **场景法：** 带着孩子在教室里，指着每个物品说出它的英文名，如 'This is a board.' 'That is a window.' 2. **分类法：** 将本单元的单词按类别（如家具、文具）进行整理。3. **联想法：** 将新单词与已知的事物或中文谐音进行关联（如 'fan' 像“饭”，联想风扇吹来香喷喷的饭）。"
+        },
+        {
+          "card_id": "T6-02",
+          "full_id": "英语-四上-T6-02",
+          "title": "家庭成员单词总是记不住？这个顺口溜太好用了！",
+          "type": "速记卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "利用顺口溜和家族树，快速记忆家庭成员单词。",
+          "core_points": [
+            "绘制家族树：将家庭成员用图表形式展现，爸爸妈妈爷爷奶奶等。",
+            "利用顺口溜：将单词编成易于朗读和记忆的小短句。",
+            "角色扮演：让孩子扮演不同的家庭成员，说出对应的英文称谓。",
+            "结合照片：指着家庭照片说出对应的英文。",
+            "重点词汇：father, mother, brother, sister, grandfather, grandmother, family。"
+          ],
+          "example": {
+            "question": "如何快速记忆 family, father, mother, brother, sister？",
+            "steps": [
+              "顺口溜：Family family, 大声叫。Father father，爸爸好。Mother mother，妈妈笑。Brother brother，兄弟俩。Sister sister，姐妹闹。",
+              "家族树：画出自己的家庭成员图，标上英文。"
+            ],
+            "answer": "通过顺口溜和家族树，将单词串联起来，形成系统记忆。"
+          },
+          "mistakes": [],
+          "memory_tip": "家族树，顺口溜，家庭成员记心头！",
+          "emotion_hook": "孩子抱怨家庭成员单词太多记不住？这个顺口溜，让孩子边玩边学，秒变小天才！",
+          "speed_method": "1. **家族树：** 和孩子一起画出家庭成员图，从爷爷奶奶到爸爸妈妈，再到兄弟姐妹，每个成员旁写上对应的英文单词。2. **顺口溜：** 编一段关于家庭成员的简单顺口溜，如 'Father, mother, I love you. Brother, sister, me and you. Grandfather, grandmother, happy family!' 3. **照片对应：** 拿出家庭相册，指着照片中的人物，用英语说出他们的称谓。反复练习。"
+        }
+      ]
+    }
+  ]
+}

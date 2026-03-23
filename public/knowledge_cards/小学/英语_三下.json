@@ -1,0 +1,838 @@
+{
+  "subject": "英语",
+  "grade": "三年级",
+  "semester": "下册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "三下",
+  "units": [
+    {
+      "unit_id": "01",
+      "unit_name": "My schoolbag",
+      "cards": [
+        {
+          "card_id": "01-01",
+          "full_id": "英语-三下-01-01",
+          "title": "词汇：学校用品",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习与学校和学习相关的常用物品名称。",
+          "core_points": [
+            "schoolbag /'skuːlbæɡ/ (书包)",
+            "pencil /'pensl/ (铅笔)",
+            "pen /pen/ (钢笔/圆珠笔)",
+            "book /bʊk/ (书)",
+            "ruler /'ruːlər/ (尺子)"
+          ],
+          "example": {
+            "question": "看图识词：请说出图片中的物品名称。",
+            "steps": [
+              "1. 仔细观察图片。",
+              "2. 尝试说出物品的英文名称。",
+              "3. 对照答案，检查发音和拼写。"
+            ],
+            "answer": "（图片示例：书包）It's a schoolbag."
+          },
+          "mistakes": [
+            {
+              "wrong": "pencile",
+              "correct": "pencil"
+            },
+            {
+              "wrong": "booke",
+              "correct": "book"
+            }
+          ],
+          "memory_tip": "书包书包 (schoolbag)，装满铅笔 (pencil) 钢笔 (pen)，还有尺子 (ruler) 和书本 (book)，学习用品真不少！",
+          "related": {
+            "prerequisite": "简单问候语，数字1-10",
+            "next": "询问物品的句型"
+          }
+        },
+        {
+          "card_id": "01-02",
+          "full_id": "英语-三下-01-02",
+          "title": "句型：询问物品“这是什么？”",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习如何询问近处或远处的物品是什么。",
+          "core_points": [
+            "What's this? (这是什么？) - 询问近处的物品。",
+            "What's that? (那是什么？) - 询问远处的物品。",
+            "It's a/an... (它是一个/一个...) - 回答句型，注意a/an的用法。",
+            "this 指“这，这个”，that 指“那，那个”。"
+          ],
+          "example": {
+            "question": "情景练习：你的同桌指着你桌上的铅笔，你会怎么问？你会怎么回答？",
+            "steps": [
+              "1. 问：指着近处的铅笔，用What's this?提问。",
+              "2. 答：用It's a pencil.回答。"
+            ],
+            "answer": "A: What's this? B: It's a pencil."
+          },
+          "mistakes": [
+            {
+              "wrong": "What's a this?",
+              "correct": "What's this?"
+            },
+            {
+              "wrong": "It's pencil.",
+              "correct": "It's a pencil."
+            }
+          ],
+          "memory_tip": "近处用this，远处用that，What's this/that? 问得巧。 It's a/an... 来回答，物品名称别忘掉！",
+          "related": {
+            "prerequisite": "学校用品词汇",
+            "next": "询问颜色"
+          }
+        },
+        {
+          "card_id": "01-03",
+          "full_id": "英语-三下-01-03",
+          "title": "自然拼读：字母 Aa 的短音 /æ/",
+          "type": "自然拼读卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母 Aa 在单词中的短音发音 /æ/。",
+          "core_points": [
+            "发音方法：嘴巴张大，舌头平放，发“哎”的音，但更短促有力。",
+            "常见单词：apple /'æpl/ (苹果), ant /ænt/ (蚂蚁), cat /kæt/ (猫), bag /bæɡ/ (包)。",
+            "听音辨词：练习区分 /æ/ 和其他元音音素。",
+            "拼读规则：当 Aa 在重读开音节中，且后面跟一个辅音字母时，常发短音 /æ/。"
+          ],
+          "example": {
+            "question": "听老师发音，判断哪个单词有 /æ/ 音：A. pen B. cat C. book",
+            "steps": [
+              "1. 仔细听每个单词的发音。",
+              "2. 找出嘴巴张开，发出类似“哎”的音的单词。",
+              "3. 确认是否是字母Aa发出的短音。"
+            ],
+            "answer": "B. cat"
+          },
+          "mistakes": [
+            {
+              "wrong": "把 /æ/ 发成 /ɑː/ (如把cat发成cart)",
+              "correct": "嘴巴更扁平，更短促。"
+            },
+            {
+              "wrong": "把 /æ/ 发成 /e/ (如把bag发成beg)",
+              "correct": "嘴巴张得更大，舌头更低。"
+            }
+          ],
+          "memory_tip": "A像张开大嘴巴，看到苹果 /æ/ /æ/ /æ/！ 小猫小猫 (cat) 跑过来，书包书包 (bag) 也在那！",
+          "related": {
+            "prerequisite": "字母Aa的认知",
+            "next": "字母Ee的短音"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "02",
+      "unit_name": "My clothes",
+      "cards": [
+        {
+          "card_id": "02-01",
+          "full_id": "英语-三下-02-01",
+          "title": "词汇：颜色与衣物",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习常用颜色词和日常衣物名称。",
+          "core_points": [
+            "颜色词：red /red/ (红色), blue /bluː/ (蓝色), yellow /'jeləʊ/ (黄色), green /ɡriːn/ (绿色), white /waɪt/ (白色), black /blæk/ (黑色)。",
+            "衣物词：shirt /ʃɜːrt/ (衬衫), T-shirt /'tiːʃɜːrt/ (T恤), dress /dres/ (连衣裙), skirt /skɜːrt/ (裙子), pants /pænts/ (裤子), shoes /ʃuːz/ (鞋子)。",
+            "词性：颜色词通常作形容词，衣物词作名词。",
+            "搭配：颜色词放在衣物词前面，如'a red T-shirt'。"
+          ],
+          "example": {
+            "question": "看图填空：图片中是一条蓝色的裙子。It's a _____ ____.",
+            "steps": [
+              "1. 识别图片的颜色。",
+              "2. 识别图片的衣物种类。",
+              "3. 将颜色和衣物词填入空中，注意顺序。"
+            ],
+            "answer": "It's a blue skirt."
+          },
+          "mistakes": [
+            {
+              "wrong": "a skirt blue",
+              "correct": "a blue skirt"
+            },
+            {
+              "wrong": "reds",
+              "correct": "red (颜色词通常不变复数)"
+            }
+          ],
+          "memory_tip": "红 (red) 黄 (yellow) 蓝 (blue) 绿 (green)，白 (white) 黑 (black) 真美丽。 衬衫 (shirt) T恤 (T-shirt) 连衣裙 (dress)，裙子 (skirt) 裤子 (pants) 鞋子 (shoes)，穿上新衣真开心！",
+          "related": {
+            "prerequisite": "学校用品词汇",
+            "next": "询问颜色句型"
+          }
+        },
+        {
+          "card_id": "02-02",
+          "full_id": "英语-三下-02-02",
+          "title": "句型：询问颜色“它是什么颜色？”",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习如何询问物品的颜色以及如何回答。",
+          "core_points": [
+            "What color is it? (它是什么颜色？) - 询问单数物品的颜色。",
+            "What color are they? (它们是什么颜色？) - 询问复数物品的颜色。",
+            "It's... (它是...颜色) - 回答单数物品的颜色。",
+            "They're... (它们是...颜色) - 回答复数物品的颜色。",
+            "注意单复数be动词is/are的用法。"
+          ],
+          "example": {
+            "question": "情景练习：你看到一件红色的T恤，想知道它的颜色，你会怎么问？如果是一双黄色的鞋子，又会怎么问和答？",
+            "steps": [
+              "1. 问T恤颜色：What color is it?",
+              "2. 答T恤颜色：It's red.",
+              "3. 问鞋子颜色：What color are they?",
+              "4. 答鞋子颜色：They're yellow."
+            ],
+            "answer": "T-shirt: A: What color is it? B: It's red. Shoes: A: What color are they? B: They're yellow."
+          },
+          "mistakes": [
+            {
+              "wrong": "What color is a T-shirt?",
+              "correct": "What color is it?"
+            },
+            {
+              "wrong": "They're yellow shoes.",
+              "correct": "They're yellow."
+            }
+          ],
+          "memory_tip": "What color is it? 问颜色，It's red/blue/green！ What color are they? 问多件，They're yellow/white/black！",
+          "related": {
+            "prerequisite": "颜色词汇，衣物词汇",
+            "next": "描述衣物颜色"
+          }
+        },
+        {
+          "card_id": "02-03",
+          "full_id": "英语-三下-02-03",
+          "title": "自然拼读：字母 Ee 的短音 /e/",
+          "type": "自然拼读卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母 Ee 在单词中的短音发音 /e/。",
+          "core_points": [
+            "发音方法：嘴巴扁平，嘴角向两边拉，舌头平放，发“哎”的音，比 /æ/ 更扁更短促。",
+            "常见单词：egg /eɡ/ (鸡蛋), elephant /'elɪfənt/ (大象), red /red/ (红色), pen /pen/ (钢笔)。",
+            "听音辨词：练习区分 /e/ 和 /æ/。",
+            "拼读规则：当 Ee 在重读开音节中，且后面跟一个辅音字母时，常发短音 /e/。"
+          ],
+          "example": {
+            "question": "听老师发音，判断哪个单词有 /e/ 音：A. cat B. bed C. run",
+            "steps": [
+              "1. 仔细听每个单词的发音。",
+              "2. 找出嘴巴扁平，发出类似“哎”的音的单词。",
+              "3. 确认是否是字母Ee发出的短音。"
+            ],
+            "answer": "B. bed"
+          },
+          "mistakes": [
+            {
+              "wrong": "把 /e/ 发成 /iː/ (如把pen发成peen)",
+              "correct": "发音更短促，嘴巴更扁。"
+            },
+            {
+              "wrong": "把 /e/ 发成 /æ/ (如把bed发成bad)",
+              "correct": "嘴巴没那么开，更扁平。"
+            }
+          ],
+          "memory_tip": "Eee Eee 像鸡蛋 (egg)，大象 (elephant) 走过来。 红色 (red) 钢笔 (pen) 都在这，短音 /e/ /e/ /e/ 好好学！",
+          "related": {
+            "prerequisite": "字母Ee的认知，字母Aa的短音",
+            "next": "字母Ii的短音"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "03",
+      "unit_name": "My animal friends",
+      "cards": [
+        {
+          "card_id": "03-01",
+          "full_id": "英语-三下-03-01",
+          "title": "词汇：动物名称",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习常见的动物名称。",
+          "core_points": [
+            "cat /kæt/ (猫)",
+            "dog /dɒɡ/ (狗)",
+            "bird /bɜːrd/ (鸟)",
+            "bear /ber/ (熊)",
+            "monkey /'mʌŋki/ (猴子)",
+            "panda /'pændə/ (熊猫)",
+            "elephant /'elɪfənt/ (大象)"
+          ],
+          "example": {
+            "question": "看图识词：请说出图片中动物的名称。",
+            "steps": [
+              "1. 仔细观察图片。",
+              "2. 尝试说出动物的英文名称。",
+              "3. 对照答案，检查发音和拼写。"
+            ],
+            "answer": "（图片示例：熊猫）It's a panda."
+          },
+          "mistakes": [
+            {
+              "wrong": "monky",
+              "correct": "monkey"
+            },
+            {
+              "wrong": "elephent",
+              "correct": "elephant"
+            }
+          ],
+          "memory_tip": "猫 (cat) 狗 (dog) 鸟 (bird) 熊 (bear)，猴子 (monkey) 熊猫 (panda) 大象 (elephant)。 动物朋友真可爱，一起玩耍多欢快！",
+          "related": {
+            "prerequisite": "颜色词汇",
+            "next": "表达喜好"
+          }
+        },
+        {
+          "card_id": "03-02",
+          "full_id": "英语-三下-03-02",
+          "title": "句型：表达喜好“我喜欢...”",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习如何表达自己喜欢或不喜欢某种事物。",
+          "core_points": [
+            "I like... (我喜欢...) - 表达喜好。",
+            "I don't like... (我不喜欢...) - 表达不喜欢。",
+            "Do you like...? (你喜欢...吗？) - 询问对方的喜好。",
+            "Yes, I do. (是的，我喜欢。) / No, I don't. (不，我不喜欢。) - 回答Do you like...?的问题。"
+          ],
+          "example": {
+            "question": "情景练习：你喜欢猫吗？请用英文回答。然后问你的朋友是否喜欢狗。",
+            "steps": [
+              "1. 回答：Yes, I do. 或 No, I don't.",
+              "2. 提问：Do you like dogs?"
+            ],
+            "answer": "A: Do you like cats? B: Yes, I do. / No, I don't. A: Do you like dogs?"
+          },
+          "mistakes": [
+            {
+              "wrong": "I like a cat.",
+              "correct": "I like cats. (通常用复数泛指)"
+            },
+            {
+              "wrong": "Do you like?",
+              "correct": "Do you like cats/dogs/...? (需要加名词)"
+            }
+          ],
+          "memory_tip": "喜欢什么 I like...，不喜欢 I don't like...。 问你喜欢 Do you like...?，Yes, I do! No, I don't!",
+          "related": {
+            "prerequisite": "动物词汇",
+            "next": "描述动物特征"
+          }
+        },
+        {
+          "card_id": "03-03",
+          "full_id": "英语-三下-03-03",
+          "title": "自然拼读：字母 Ii 的短音 /ɪ/",
+          "type": "自然拼读卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母 Ii 在单词中的短音发音 /ɪ/。",
+          "core_points": [
+            "发音方法：嘴巴微张，舌头靠前，发“衣”的音，但更短促，像中文“一”的轻声。",
+            "常见单词：pig /pɪɡ/ (猪), big /bɪɡ/ (大的), fish /fɪʃ/ (鱼), ink /ɪŋk/ (墨水)。",
+            "听音辨词：练习区分 /ɪ/ 和 /iː/ (长音Ee) 以及 /e/ (短音Ee)。",
+            "拼读规则：当 Ii 在重读开音节中，且后面跟一个辅音字母时，常发短音 /ɪ/。"
+          ],
+          "example": {
+            "question": "听老师发音，判断哪个单词有 /ɪ/ 音：A. pen B. sit C. bed",
+            "steps": [
+              "1. 仔细听每个单词的发音。",
+              "2. 找出嘴巴微张，发出类似“衣”的短促音的单词。",
+              "3. 确认是否是字母Ii发出的短音。"
+            ],
+            "answer": "B. sit"
+          },
+          "mistakes": [
+            {
+              "wrong": "把 /ɪ/ 发成 /iː/ (如把fish发成feesh)",
+              "correct": "发音更短促，嘴巴更放松。"
+            },
+            {
+              "wrong": "把 /ɪ/ 发成 /e/ (如把big发成beg)",
+              "correct": "舌头位置更高，嘴巴更小。"
+            }
+          ],
+          "memory_tip": "Ii Ii 小猪 (pig) 跑，大大的 (big) 鱼儿 (fish) 游。 墨水 (ink) 滴滴答，短音 /ɪ/ /ɪ/ /ɪ/ 别混淆！",
+          "related": {
+            "prerequisite": "字母Ii的认知，字母Aa/Ee的短音",
+            "next": "字母Oo的短音"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "04",
+      "unit_name": "My home",
+      "cards": [
+        {
+          "card_id": "04-01",
+          "full_id": "英语-三下-04-01",
+          "title": "词汇：房间与家具",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习家中不同房间的名称和一些常见家具的名称。",
+          "core_points": [
+            "房间：house /haʊs/ (房子), room /ruːm/ (房间), bedroom /'bedruːm/ (卧室), living room /'lɪvɪŋ ruːm/ (客厅), kitchen /'kɪtʃɪn/ (厨房), bathroom /'bæθruːm/ (浴室)。",
+            "家具：bed /bed/ (床), table /'teɪbl/ (桌子), chair /tʃer/ (椅子), sofa /'səʊfə/ (沙发)。",
+            "记忆方法：将房间和对应的家具联系起来记忆。",
+            "发音：注意/th/在bathroom中的发音。"
+          ],
+          "example": {
+            "question": "看图识词：图片中是一个有床的房间，请说出房间名称和家具名称。",
+            "steps": [
+              "1. 识别图片中的房间。",
+              "2. 识别图片中的主要家具。",
+              "3. 用英文说出它们的名称。"
+            ],
+            "answer": "It's a bedroom. There's a bed."
+          },
+          "mistakes": [
+            {
+              "wrong": "bed room",
+              "correct": "bedroom"
+            },
+            {
+              "wrong": "kitche",
+              "correct": "kitchen"
+            }
+          ],
+          "memory_tip": "房子 (house) 有房间 (room)，卧室 (bedroom) 有张床 (bed)。 客厅 (living room) 有沙发 (sofa)，厨房 (kitchen) 浴室 (bathroom) 都在家。桌子 (table) 椅子 (chair) 整齐放，我的家真漂亮！",
+          "related": {
+            "prerequisite": "动物词汇，颜色词汇",
+            "next": "介词in, on, under"
+          }
+        },
+        {
+          "card_id": "04-02",
+          "full_id": "英语-三下-04-02",
+          "title": "语法：介词 in, on, under",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习三个常用的表示位置的介词：in (在...里面), on (在...上面), under (在...下面)。",
+          "core_points": [
+            "in: 表示在某个空间或范围的内部。例如：in the box (在盒子里), in the room (在房间里)。",
+            "on: 表示在某个表面的上面，并与之接触。例如：on the table (在桌子上), on the bed (在床上)。",
+            "under: 表示在某个物体的正下方。例如：under the chair (在椅子下面), under the table (在桌子下面)。",
+            "句型：Where is...? (...在哪里？) - It's in/on/under the... (它在...里面/上面/下面)。"
+          ],
+          "example": {
+            "question": "情景练习：你的书包在桌子下面，你会怎么问？怎么回答？",
+            "steps": [
+              "1. 提问：Where is your schoolbag?",
+              "2. 回答：It's under the table."
+            ],
+            "answer": "A: Where is your schoolbag? B: It's under the table."
+          },
+          "mistakes": [
+            {
+              "wrong": "It's in the table.",
+              "correct": "It's on the table. (桌子是表面)"
+            },
+            {
+              "wrong": "The book is in the bed.",
+              "correct": "The book is on the bed. (床上)"
+            }
+          ],
+          "memory_tip": "in在里，on在上，under在下藏。 记住这三个小词语，位置表达真简单！",
+          "related": {
+            "prerequisite": "房间和家具词汇",
+            "next": "询问位置的完整对话"
+          }
+        },
+        {
+          "card_id": "04-03",
+          "full_id": "英语-三下-04-03",
+          "title": "情景对话卡：询问物品位置",
+          "type": "情景对话卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何在日常生活中询问和回答物品的位置。",
+          "core_points": [
+            "询问方：Where is my/the...? (我的/那个...在哪里？)",
+            "回答方：It's in/on/under the... (它在...里面/上面/下面)。",
+            "还可以加入描述性词语，如'It's a yellow book.'",
+            "对话示例：A: Where is my book? B: It's on the table. A: Thank you!"
+          ],
+          "example": {
+            "question": "情景模拟：你的妈妈在找她的手机，手机在沙发上。请你和妈妈进行对话。",
+            "steps": [
+              "1. 妈妈问：Where is my phone?",
+              "2. 你回答：It's on the sofa.",
+              "3. 妈妈感谢：Thank you!"
+            ],
+            "answer": "Mom: Where is my phone? You: It's on the sofa. Mom: Thank you!"
+          },
+          "mistakes": [
+            {
+              "wrong": "Where is phone?",
+              "correct": "Where is my phone?"
+            },
+            {
+              "wrong": "It's the sofa.",
+              "correct": "It's on the sofa."
+            }
+          ],
+          "memory_tip": "我的东西在哪里？Where is...? 快找到！ in, on, under 来帮忙，位置清楚都知道！",
+          "related": {
+            "prerequisite": "介词in, on, under，房间和家具词汇",
+            "next": "描述房间布局"
+          }
+        },
+        {
+          "card_id": "04-04",
+          "full_id": "英语-三下-04-04",
+          "title": "自然拼读：字母 Oo 的短音 /ɒ/",
+          "type": "自然拼读卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母 Oo 在单词中的短音发音 /ɒ/ (英式) 或 /ɑː/ (美式，PEP教材多采用美式发音，但此音在三年级通常简化为类似“哦”的短音)。",
+          "core_points": [
+            "发音方法：嘴巴张开呈圆形，舌头后部抬起，发“哦”的短促音。",
+            "常见单词：dog /dɒɡ/ (狗), box /bɒks/ (盒子), hot /hɒt/ (热的), on /ɒn/ (在...上)。",
+            "听音辨词：练习区分 /ɒ/ 和其他元音音素。",
+            "拼读规则：当 Oo 在重读闭音节中，常发短音 /ɒ/。"
+          ],
+          "example": {
+            "question": "听老师发音，判断哪个单词有 /ɒ/ 音：A. cat B. dog C. pig",
+            "steps": [
+              "1. 仔细听每个单词的发音。",
+              "2. 找出嘴巴张开呈圆形，发出类似“哦”的短促音的单词。",
+              "3. 确认是否是字母Oo发出的短音。"
+            ],
+            "answer": "B. dog"
+          },
+          "mistakes": [
+            {
+              "wrong": "把 /ɒ/ 发成 /oʊ/ (如把dog发成dough)",
+              "correct": "发音更短促，嘴巴更开。"
+            },
+            {
+              "wrong": "把 /ɒ/ 发成 /ʌ/ (如把hot发成hut)",
+              "correct": "嘴巴更圆，舌头更靠后。"
+            }
+          ],
+          "memory_tip": "Oo Oo 小狗 (dog) 玩皮球，盒子 (box) 热 (hot) 滚烫。 短音 /ɒ/ /ɒ/ /ɒ/ 真好玩，on (在...上) 也是它来帮！",
+          "related": {
+            "prerequisite": "字母Oo的认知，字母Ii的短音",
+            "next": "字母Uu的短音"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "05",
+      "unit_name": "My day",
+      "cards": [
+        {
+          "card_id": "05-01",
+          "full_id": "英语-三下-05-01",
+          "title": "词汇：日常活动",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习描述一天中常见的活动。",
+          "core_points": [
+            "get up (起床)",
+            "eat breakfast (吃早饭)",
+            "go to school (去上学)",
+            "eat lunch (吃午饭)",
+            "go home (回家)",
+            "eat dinner (吃晚饭)",
+            "go to bed (睡觉)",
+            "时间表达：eight o'clock (八点钟), seven thirty (七点半) - 简单时间表达。"
+          ],
+          "example": {
+            "question": "看图识词：图片中是一个小女孩在吃早饭，请用英文描述这个活动。",
+            "steps": [
+              "1. 识别图片中的活动。",
+              "2. 用英文说出该活动名称。",
+              "3. 可以加上时间，如：She eats breakfast at seven o'clock."
+            ],
+            "answer": "She eats breakfast."
+          },
+          "mistakes": [
+            {
+              "wrong": "get up breakfast",
+              "correct": "eat breakfast"
+            },
+            {
+              "wrong": "go school",
+              "correct": "go to school"
+            }
+          ],
+          "memory_tip": "起床 (get up) 吃早饭 (eat breakfast)，上学 (go to school) 午饭 (eat lunch) 香。 回家 (go home) 晚饭 (eat dinner) 棒，睡觉 (go to bed) 梦里见周公！",
+          "related": {
+            "prerequisite": "数字1-12",
+            "next": "询问日常活动"
+          }
+        },
+        {
+          "card_id": "05-02",
+          "full_id": "英语-三下-05-02",
+          "title": "句型：询问和描述日常活动",
+          "type": "句型卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "学习如何询问别人在特定时间做什么，以及如何描述自己的日常活动。",
+          "core_points": [
+            "What do you do in the morning/afternoon/evening? (你早上/下午/晚上做什么？)",
+            "I get up/eat breakfast/go to school... (我起床/吃早饭/去上学...)",
+            "at ... o'clock (在...点钟) - 描述具体时间。",
+            "注意动词原形的使用，因为主语是I/you。"
+          ],
+          "example": {
+            "question": "情景练习：你的朋友问你早上做什么，你会怎么回答？",
+            "steps": [
+              "1. 朋友问：What do you do in the morning?",
+              "2. 你回答：I get up and eat breakfast."
+            ],
+            "answer": "Friend: What do you do in the morning? You: I get up and eat breakfast."
+          },
+          "mistakes": [
+            {
+              "wrong": "What do you does?",
+              "correct": "What do you do?"
+            },
+            {
+              "wrong": "I getting up.",
+              "correct": "I get up."
+            }
+          ],
+          "memory_tip": "What do you do? 问活动，in the morning/afternoon/evening。 I do... 来回答，时间地点都加上！",
+          "related": {
+            "prerequisite": "日常活动词汇，简单时间表达",
+            "next": "描述他人日常活动 (第三人称单数动词变化)"
+          }
+        },
+        {
+          "card_id": "05-03",
+          "full_id": "英语-三下-05-03",
+          "title": "自然拼读：字母 Uu 的短音 /ʌ/",
+          "type": "自然拼读卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母 Uu 在单词中的短音发音 /ʌ/。",
+          "core_points": [
+            "发音方法：嘴巴微张，舌头中部略抬，发“啊”的音，但更短促，像中文“啊”的轻声。",
+            "常见单词：up /ʌp/ (向上), bus /bʌs/ (公共汽车), sun /sʌn/ (太阳), cup /kʌp/ (杯子), run /rʌn/ (跑)。",
+            "听音辨词：练习区分 /ʌ/ 和 /æ/ (短音Aa) 和 /ɒ/ (短音Oo)。",
+            "拼读规则：当 Uu 在重读闭音节中，常发短音 /ʌ/。"
+          ],
+          "example": {
+            "question": "听老师发音，判断哪个单词有 /ʌ/ 音：A. cat B. dog C. sun",
+            "steps": [
+              "1. 仔细听每个单词的发音。",
+              "2. 找出嘴巴微张，发出类似“啊”的短促音的单词。",
+              "3. 确认是否是字母Uu发出的短音。"
+            ],
+            "answer": "C. sun"
+          },
+          "mistakes": [
+            {
+              "wrong": "把 /ʌ/ 发成 /uː/ (如把bus发成boos)",
+              "correct": "发音更短促，嘴巴更开。"
+            },
+            {
+              "wrong": "把 /ʌ/ 发成 /ɑː/ (如把sun发成sarn)",
+              "correct": "舌头位置更靠前，嘴巴更扁平。"
+            }
+          ],
+          "memory_tip": "Uu Uu 向上 (up) 跑，公共汽车 (bus) 太阳 (sun) 照。 杯子 (cup) 跑 (run) 得快，短音 /ʌ/ /ʌ/ /ʌ/ 记心怀！",
+          "related": {
+            "prerequisite": "字母Uu的认知，字母Oo的短音",
+            "next": "复合元音或辅音组合"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "06",
+      "unit_name": "At the zoo",
+      "cards": [
+        {
+          "card_id": "06-01",
+          "full_id": "英语-三下-06-01",
+          "title": "词汇：动作动词",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习描述各种动作的动词。",
+          "core_points": [
+            "swim /swɪm/ (游泳)",
+            "run /rʌn/ (跑)",
+            "jump /dʒʌmp/ (跳)",
+            "walk /wɔːk/ (走路)",
+            "fly /flaɪ/ (飞)",
+            "sing /sɪŋ/ (唱歌)",
+            "dance /dæns/ (跳舞)",
+            "climb /klaɪm/ (爬)"
+          ],
+          "example": {
+            "question": "看图识词：图片中一只猴子在爬树，请用英文描述这个动作。",
+            "steps": [
+              "1. 识别图片中的动物和动作。",
+              "2. 用英文说出动作名称。",
+              "3. 可以用句型：A monkey can climb."
+            ],
+            "answer": "Climb."
+          },
+          "mistakes": [
+            {
+              "wrong": "swime",
+              "correct": "swim"
+            },
+            {
+              "wrong": "jamp",
+              "correct": "jump"
+            }
+          ],
+          "memory_tip": "游泳 (swim) 跑步 (run) 跳 (jump)，走路 (walk) 飞 (fly) 唱歌 (sing)。 跳舞 (dance) 爬树 (climb) 样样行，动物本领真不小！",
+          "related": {
+            "prerequisite": "动物词汇",
+            "next": "情态动词can"
+          }
+        },
+        {
+          "card_id": "06-02",
+          "full_id": "英语-三下-06-02",
+          "title": "语法：情态动词 can (能/会)",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "学习情态动词 can 的用法，表示能力或可能性。",
+          "core_points": [
+            "肯定句：主语 + can + 动词原形。例如：I can swim. (我会游泳。)",
+            "否定句：主语 + cannot / can't + 动词原形。例如：I can't fly. (我不会飞。)",
+            "疑问句：Can + 主语 + 动词原形? 例如：Can you sing? (你会唱歌吗？)",
+            "回答：Yes, 主语 + can. / No, 主语 + can't. 例如：Yes, I can. / No, I can't.",
+            "can 后面的动词总是用原形。"
+          ],
+          "example": {
+            "question": "情景练习：你看到一只鸟在飞，你会怎么说？然后问你的朋友是否会跳舞。",
+            "steps": [
+              "1. 描述鸟的动作：A bird can fly.",
+              "2. 提问朋友：Can you dance?",
+              "3. 朋友回答：Yes, I can. / No, I can't."
+            ],
+            "answer": "You: A bird can fly. You: Can you dance? Friend: Yes, I can. / No, I can't."
+          },
+          "mistakes": [
+            {
+              "wrong": "I can to swim.",
+              "correct": "I can swim."
+            },
+            {
+              "wrong": "Can you sings?",
+              "correct": "Can you sing?"
+            }
+          ],
+          "memory_tip": "Can can can，我会我会我会玩！ Can't can't can't，我不会我不会我不能！ 问你会不会，Can you...? 句型真简单！",
+          "related": {
+            "prerequisite": "动作动词词汇",
+            "next": "描述动物的各种能力"
+          }
+        },
+        {
+          "card_id": "06-03",
+          "full_id": "英语-三下-06-03",
+          "title": "情景对话卡：谈论能力",
+          "type": "情景对话卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "学习如何在日常对话中询问和谈论自己或他人的能力。",
+          "core_points": [
+            "询问能力：Can you...? (你会...吗？)",
+            "肯定回答：Yes, I can. (是的，我会。)",
+            "否定回答：No, I can't. (不，我不会。)",
+            "还可以描述动物的能力：A monkey can climb. (猴子会爬。)",
+            "对话示例：A: Can you swim? B: Yes, I can. What about you? A: No, I can't, but I can run fast."
+          ],
+          "example": {
+            "question": "情景模拟：你和朋友在动物园，看到一只大象，你想问它会做什么。然后朋友问你会不会唱歌。",
+            "steps": [
+              "1. 你问：What can an elephant do?",
+              "2. 朋友答：It can walk slowly.",
+              "3. 朋友问你：Can you sing?",
+              "4. 你回答：Yes, I can. / No, I can't."
+            ],
+            "answer": "You: What can an elephant do? Friend: It can walk slowly. Friend: Can you sing? You: Yes, I can. / No, I can't."
+          },
+          "mistakes": [
+            {
+              "wrong": "What can elephant do?",
+              "correct": "What can an elephant do?"
+            },
+            {
+              "wrong": "Yes, I am.",
+              "correct": "Yes, I can."
+            }
+          ],
+          "memory_tip": "你会不会 Can you...? Yes, I can! No, I can't! 动物本领多，can来告诉它！",
+          "related": {
+            "prerequisite": "情态动词can，动作动词词汇",
+            "next": "综合运用所学知识"
+          }
+        },
+        {
+          "card_id": "06-04",
+          "full_id": "英语-三下-06-04",
+          "title": "自然拼读：辅音组合 bl-, cl-, fl-",
+          "type": "自然拼读卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习以 'l' 结尾的常见辅音组合 bl-, cl-, fl- 的发音规则。",
+          "core_points": [
+            "bl-: 发音时先发 /b/ 音，紧接着发 /l/ 音，听起来像“布勒”。常见词：blue /bluː/ (蓝色), black /blæk/ (黑色)。",
+            "cl-: 发音时先发 /k/ 音，紧接着发 /l/ 音，听起来像“克勒”。常见词：cloud /klaʊd/ (云), climb /klaɪm/ (爬)。",
+            "fl-: 发音时先发 /f/ 音，紧接着发 /l/ 音，听起来像“弗勒”。常见词：fly /flaɪ/ (飞), flower /'flaʊər/ (花)。",
+            "拼读技巧：注意两个辅音要紧密连读，不能分开。"
+          ],
+          "example": {
+            "question": "听老师发音，判断哪个单词有 'cl-' 音：A. blue B. fly C. climb",
+            "steps": [
+              "1. 仔细听每个单词的发音。",
+              "2. 找出开头有“克勒”音的单词。",
+              "3. 确认是否是 'cl-' 组合发出的声音。"
+            ],
+            "answer": "C. climb"
+          },
+          "mistakes": [
+            {
+              "wrong": "把 bl- 读成 b-l- 两个音分开",
+              "correct": "bl- 要连读，像一个音节的开头。"
+            },
+            {
+              "wrong": "把 cl- 读成 tl-",
+              "correct": "c发/k/音，不是/t/音。"
+            }
+          ],
+          "memory_tip": "bl- bl- 蓝色 (blue) 黑色 (black)， cl- cl- 云 (cloud) 爬 (climb) 高。 fl- fl- 飞 (fly) 花 (flower) 飘，辅音组合真奇妙！",
+          "related": {
+            "prerequisite": "单个辅音字母发音",
+            "next": "其他辅音组合"
+          }
+        }
+      ]
+    }
+  ]
+}

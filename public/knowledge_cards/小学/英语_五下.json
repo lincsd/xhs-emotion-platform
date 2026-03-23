@@ -1,0 +1,887 @@
+{
+  "subject": "英语",
+  "grade": "五年级",
+  "semester": "下册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "五下",
+  "units": [
+    {
+      "unit_id": "01",
+      "unit_name": "My New Teachers",
+      "cards": [
+        {
+          "card_id": "01-01",
+          "full_id": "英语-五下-01-01",
+          "title": "词汇：描述人物外貌与性格",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习描述人物外貌和性格的常用形容词。",
+          "core_points": [
+            "tall /tɔːl/ (高的)",
+            "short /ʃɔːrt/ (矮的)",
+            "thin /θɪn/ (瘦的)",
+            "strong /strɔːŋ/ (强壮的)",
+            "kind /kaɪnd/ (善良的)",
+            "strict /strɪkt/ (严格的)",
+            "funny /ˈfʌni/ (有趣的)",
+            "smart /smɑːrt/ (聪明的)"
+          ],
+          "example": {
+            "question": "用所给词描述图片中的老师：She is (高), (瘦), and (善良).",
+            "steps": [
+              "识别括号中的中文词语对应的英文单词。",
+              "将英文单词填入句子中。"
+            ],
+            "answer": "She is tall, thin, and kind."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is fun.",
+              "correct": "He is funny. (funny指人或事有趣，fun指乐趣、好玩)"
+            }
+          ],
+          "memory_tip": "外貌词像照镜子，高矮胖瘦一眼清；性格词像交朋友，善良严格记心中。",
+          "related": {
+            "prerequisite": "人称代词 He/She",
+            "next": "句型：描述人物外貌与性格"
+          }
+        },
+        {
+          "card_id": "01-02",
+          "full_id": "英语-五下-01-02",
+          "title": "句型：描述人物外貌与性格",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "使用“He/She is...”和“He/She has...”句型来描述人物的外貌和性格特征。",
+          "core_points": [
+            "描述性格或整体特征：He/She is + 形容词. (e.g., He is kind.)",
+            "描述身体部位：He/She has + 形容词 + 名词. (e.g., She has long hair.)",
+            "描述眼睛/头发颜色：He/She has + 颜色 + 眼睛/头发. (e.g., He has black eyes.)",
+            "提问：What is he/she like? (他/她怎么样？/他/她长什么样？)"
+          ],
+          "example": {
+            "question": "根据图片提示，描述一下这位老师：她有长头发和一双大眼睛，她很严格。",
+            "steps": [
+              "使用'She has...'描述头发和眼睛。",
+              "使用'She is...'描述性格。"
+            ],
+            "answer": "She has long hair and big eyes. She is strict."
+          },
+          "mistakes": [
+            {
+              "wrong": "She has strict.",
+              "correct": "She is strict. (strict是形容词，不能直接跟在has后面描述性格)"
+            }
+          ],
+          "memory_tip": "“be”动词后面跟性格，高矮胖瘦也一样；“have”动词后面跟器官，头发眼睛和嘴巴。",
+          "related": {
+            "prerequisite": "词汇：描述人物外貌与性格",
+            "next": "情景对话：介绍人物"
+          }
+        },
+        {
+          "card_id": "01-03",
+          "full_id": "英语-五下-01-03",
+          "title": "情景对话：介绍新老师",
+          "type": "情景对话卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何在不同场合介绍新老师，并简要描述其特征。",
+          "core_points": [
+            "介绍：This is my new English teacher, Miss Li.",
+            "询问对方：What is she like? (她怎么样？)",
+            "描述：She is kind and funny. She has long hair and big eyes.",
+            "回应：Nice to meet you, Miss Li."
+          ],
+          "example": {
+            "question": "小明向你介绍他的新数学老师Mr. Wang。请你提问并得到一些关于Mr. Wang的描述。",
+            "steps": [
+              "首先，小明说：This is my new math teacher, Mr. Wang.",
+              "你提问：What is he like?",
+              "小明回答：He is tall and smart. He has short hair."
+            ],
+            "answer": "A: This is my new math teacher, Mr. Wang.\nB: What is he like?\nA: He is tall and smart. He has short hair."
+          },
+          "mistakes": [
+            {
+              "wrong": "How is he?",
+              "correct": "What is he like? (How is he?通常问身体状况或心情，What is he like?问性格或外貌)"
+            }
+          ],
+          "memory_tip": "介绍老师用This is，问他/她怎么样用What is…like？外貌性格别说错，礼貌用语要牢记。",
+          "related": {
+            "prerequisite": "句型：描述人物外貌与性格",
+            "next": "Unit 5 情景对话：描述朋友"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "02",
+      "unit_name": "My Favourite Season",
+      "cards": [
+        {
+          "card_id": "02-01",
+          "full_id": "英语-五下-02-01",
+          "title": "词汇：季节与天气",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习四季名称以及描述天气的常用词汇。",
+          "core_points": [
+            "Seasons (季节): spring /sprɪŋ/, summer /ˈsʌmər/, autumn /ˈɔːtəm/ (或fall /fɔːl/), winter /ˈwɪntər/",
+            "Weather (天气): warm /wɔːrm/ (暖和的), hot /hɑːt/ (热的), cool /kuːl/ (凉爽的), cold /koʊld/ (冷的)",
+            "Weather conditions (天气状况): sunny /ˈsʌni/ (晴朗的), rainy /ˈreɪni/ (下雨的), snowy /ˈsnoʊi/ (下雪的), windy /ˈwɪndi/ (刮风的)"
+          ],
+          "example": {
+            "question": "根据中文提示填写单词：春天是(暖和的)季节，夏天是(热的)季节。",
+            "steps": [
+              "识别括号中的中文词语对应的英文单词。",
+              "将英文单词填入句子中。"
+            ],
+            "answer": "Spring is a warm season. Summer is a hot season."
+          },
+          "mistakes": [
+            {
+              "wrong": "It is sun.",
+              "correct": "It is sunny. (sun是名词，sunny是形容词，描述天气要用形容词)"
+            }
+          ],
+          "memory_tip": "春夏秋冬记顺序，温热凉冷配天气。晴雨雪风加-y，天气形容词就齐。",
+          "related": {
+            "prerequisite": "基础形容词",
+            "next": "词汇：季节活动"
+          }
+        },
+        {
+          "card_id": "02-02",
+          "full_id": "英语-五下-02-02",
+          "title": "词汇：季节活动",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习在不同季节人们常做的活动。",
+          "core_points": [
+            "In spring: plant trees (种树), fly kites (放风筝)",
+            "In summer: swim (游泳), go swimming (去游泳), eat ice cream (吃冰淇淋)",
+            "In autumn: go hiking (去远足), pick apples (摘苹果)",
+            "In winter: make a snowman (堆雪人), ski (滑雪), skate (滑冰)"
+          ],
+          "example": {
+            "question": "用所给词汇完成句子：In summer, I like to (游泳). In winter, I like to (堆雪人).",
+            "steps": [
+              "识别括号中的中文词语对应的英文词组。",
+              "将英文词组填入句子中。"
+            ],
+            "answer": "In summer, I like to swim. In winter, I like to make a snowman."
+          },
+          "mistakes": [
+            {
+              "wrong": "I like make a snowman.",
+              "correct": "I like to make a snowman. (like后面跟动词，通常用to do或doing)"
+            }
+          ],
+          "memory_tip": "季节活动真丰富，动词短语要记住。春种夏游秋远足，冬日滑雪堆雪屋。",
+          "related": {
+            "prerequisite": "词汇：季节与天气",
+            "next": "语法：一般现在时（描述习惯）"
+          }
+        },
+        {
+          "card_id": "02-03",
+          "full_id": "英语-五下-02-03",
+          "title": "语法：一般现在时（描述习惯和事实）",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "一般现在时用于描述经常性、习惯性的动作或普遍存在的客观事实。",
+          "core_points": [
+            "基本结构：主语 + 动词原形 (第三人称单数主语动词加-s/-es)",
+            "否定句：主语 + do/does not + 动词原形",
+            "疑问句：Do/Does + 主语 + 动词原形?",
+            "时间状语：often, usually, always, sometimes, every day/week/year等。",
+            "应用：描述季节特点 (It often snows in winter.)，描述个人习惯 (I usually go swimming in summer.)"
+          ],
+          "example": {
+            "question": "将下列句子改为正确的形式：(1) He (like) winter. (2) It (not snow) in summer.",
+            "steps": [
+              "判断主语人称，确定动词形式。",
+              "判断句子类型，是肯定句、否定句还是疑问句。"
+            ],
+            "answer": "(1) He likes winter. (2) It doesn't snow in summer."
+          },
+          "mistakes": [
+            {
+              "wrong": "She like spring.",
+              "correct": "She likes spring. (第三人称单数主语，动词要加-s)"
+            },
+            {
+              "wrong": "He don't like summer.",
+              "correct": "He doesn't like summer. (第三人称单数主语，否定用doesn't)"
+            }
+          ],
+          "memory_tip": "一般现在时，习惯事实来表示。主语三单动词s，其他原形别忘记。否定疑问do/does，动词原形跟着它。",
+          "related": {
+            "prerequisite": "动词原形，人称代词",
+            "next": "句型：谈论季节与活动"
+          }
+        },
+        {
+          "card_id": "02-04",
+          "full_id": "英语-五下-02-04",
+          "title": "句型：谈论季节与活动",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何询问并表达自己最喜欢的季节以及在不同季节常做的活动。",
+          "core_points": [
+            "询问：What's your favourite season? (你最喜欢的季节是什么？)",
+            "回答：My favourite season is + 季节. / I like + 季节 + best.",
+            "询问天气：What's the weather like in + 季节? (季节里天气怎么样？)",
+            "回答：It's usually + 天气形容词.",
+            "询问活动：What do you do in + 季节? (你在季节里做什么？)",
+            "回答：I usually + 活动. / We often + 活动."
+          ],
+          "example": {
+            "question": "完成对话：\nA: What's your favourite season?\nB: My favourite season is summer.\nA: What's the weather like in summer?\nB: It's usually ______. (热的)\nA: What do you do in summer?\nB: I usually _______. (去游泳)",
+            "steps": [
+              "根据中文提示填写天气形容词。",
+              "根据中文提示填写季节活动。"
+            ],
+            "answer": "B: It's usually hot.\nB: I usually go swimming."
+          },
+          "mistakes": [
+            {
+              "wrong": "What season do you like?",
+              "correct": "What's your favourite season? (更地道且符合课文)"
+            }
+          ],
+          "memory_tip": "最爱季节What's your favourite，天气如何What's the weather like。做了什么What do you do，回答动词别忘了。",
+          "related": {
+            "prerequisite": "词汇：季节与天气，词汇：季节活动，语法：一般现在时",
+            "next": "Unit 3 句型：询问正在进行的动作"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "03",
+      "unit_name": "What Are You Doing?",
+      "cards": [
+        {
+          "card_id": "03-01",
+          "full_id": "英语-五下-03-01",
+          "title": "词汇：常见动作动词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习表示正在进行的动作的常用动词。",
+          "core_points": [
+            "read /riːd/ (阅读)",
+            "write /raɪt/ (写)",
+            "draw /drɔː/ (画)",
+            "sing /sɪŋ/ (唱歌)",
+            "dance /dæns/ (跳舞)",
+            "run /rʌn/ (跑)",
+            "jump /dʒʌmp/ (跳)",
+            "sleep /sliːp/ (睡觉)",
+            "eat /iːt/ (吃)",
+            "drink /drɪŋk/ (喝)",
+            "play /pleɪ/ (玩)"
+          ],
+          "example": {
+            "question": "用所给词汇完成句子：The boy is (跑). The girl is (跳舞).",
+            "steps": [
+              "识别括号中的中文词语对应的英文单词。",
+              "将英文单词填入句子中，注意动词的ing形式。"
+            ],
+            "answer": "The boy is running. The girl is dancing."
+          },
+          "mistakes": [
+            {
+              "wrong": "play computer",
+              "correct": "play computer games (play单独使用表示玩耍，玩电脑要加games)"
+            }
+          ],
+          "memory_tip": "动词宝宝真活泼，跑跳唱画样样做。现在进行ing，正在发生记心中。",
+          "related": {
+            "prerequisite": "基础动词",
+            "next": "语法：现在进行时"
+          }
+        },
+        {
+          "card_id": "03-02",
+          "full_id": "英语-五下-03-02",
+          "title": "语法：现在进行时",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "现在进行时表示说话时正在发生或进行中的动作。",
+          "core_points": [
+            "基本结构：主语 + be动词 (am/is/are) + 动词-ing形式",
+            "否定句：主语 + be动词 + not + 动词-ing形式",
+            "疑问句：Be动词 + 主语 + 动词-ing形式?",
+            "动词-ing变化规则：",
+            "  - 一般动词直接加-ing (read → reading)",
+            "  - 以不发音e结尾的动词去e加-ing (dance → dancing, write → writing)",
+            "  - 重读闭音节以一个辅音字母结尾的动词，双写最后一个辅音字母再加-ing (run → running, swim → swimming, sit → sitting)",
+            "时间状语：now, right now, look!, listen!等。"
+          ],
+          "example": {
+            "question": "将下列句子改为正确的现在进行时形式：(1) She (read) a book now. (2) They (not play) basketball. (3) (he, sing)?",
+            "steps": [
+              "判断主语和be动词的搭配。",
+              "根据动词-ing变化规则，将动词变为-ing形式。",
+              "根据句型结构，完成否定句和疑问句。"
+            ],
+            "answer": "(1) She is reading a book now. (2) They are not playing basketball. (3) Is he singing?"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is run.",
+              "correct": "He is running. (run要双写n再加ing)"
+            },
+            {
+              "wrong": "They playing.",
+              "correct": "They are playing. (不能缺少be动词)"
+            }
+          ],
+          "memory_tip": "现在进行时，正在做的事。be动词ing，两步不能少。去e双写要记牢，问句be动词提前跑。",
+          "related": {
+            "prerequisite": "be动词的用法",
+            "next": "句型：询问正在进行的动作"
+          }
+        },
+        {
+          "card_id": "03-03",
+          "full_id": "英语-五下-03-03",
+          "title": "句型：询问正在进行的动作",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习如何询问他人或第三人称正在进行的动作，并进行回答。",
+          "core_points": [
+            "询问你正在做什么：What are you doing? (你正在做什么？)",
+            "回答：I'm + 动词-ing形式. (e.g., I'm reading a book.)",
+            "询问他/她/他们正在做什么：What is he/she doing? / What are they doing?",
+            "回答：He/She is + 动词-ing形式. / They are + 动词-ing形式.",
+            "肯定回答：Yes, I am. / Yes, he is. / Yes, they are.",
+            "否定回答：No, I'm not. / No, he isn't. / No, they aren't."
+          ],
+          "example": {
+            "question": "完成对话：\nA: What are you doing?\nB: I'm _______. (画画)\nA: Is he ______? (唱歌)\nB: No, he ______. He's _______. (跳舞)",
+            "steps": [
+              "根据中文提示，将动词变为-ing形式。",
+              "根据句意，完成否定回答和正确的动作描述。"
+            ],
+            "answer": "B: I'm drawing.\nA: Is he singing?\nB: No, he isn't. He's dancing."
+          },
+          "mistakes": [
+            {
+              "wrong": "What you doing?",
+              "correct": "What are you doing? (不能缺少be动词)"
+            }
+          ],
+          "memory_tip": "正在干啥What are you doing，回答ing别忘记。他/她/他们is/are，be动词和ing要配齐。",
+          "related": {
+            "prerequisite": "语法：现在进行时",
+            "next": "易混词卡：Do/Does vs. Is/Are"
+          }
+        },
+        {
+          "card_id": "03-04",
+          "full_id": "英语-五下-03-04",
+          "title": "易混词卡：Do/Does vs. Is/Are",
+          "type": "易混词卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "区分一般现在时疑问句和现在进行时疑问句的助动词或be动词用法。",
+          "core_points": [
+            "Do/Does用于一般现在时，询问习惯性、经常性的动作或事实。后面跟动词原形。",
+            "  - Do you like apples? (你喜欢苹果吗？)",
+            "  - Does he play football? (他踢足球吗？)",
+            "Is/Are用于现在进行时，询问正在发生的动作。后面跟动词-ing形式。",
+            "  - Are you reading? (你正在阅读吗？)",
+            "  - Is she dancing? (她正在跳舞吗？)",
+            "关键在于看动词形式：动词原形用do/does，动词-ing用is/are。"
+          ],
+          "example": {
+            "question": "选择正确的词填空：\n1. (Do/Are) you often play computer games?\n2. What (do/are) you doing now?\n3. (Does/Is) he like swimming?\n4. (Does/Is) she singing on the stage?",
+            "steps": [
+              "观察句子的动词形式，判断是现在进行时还是一般现在时。",
+              "根据时态选择正确的助动词或be动词。"
+            ],
+            "answer": "1. Do (play是动词原形)\n2. are (doing是动词-ing形式)\n3. Does (like是动词原形)\n4. Is (singing是动词-ing形式)"
+          },
+          "mistakes": [
+            {
+              "wrong": "Are you like apples?",
+              "correct": "Do you like apples? (like是一般性动词，不是正在进行)"
+            },
+            {
+              "wrong": "What do you doing?",
+              "correct": "What are you doing? (doing是进行时，需要be动词)"
+            }
+          ],
+          "memory_tip": "原形动词配Do/Does，ing动词配Is/Are。时态不同用法异，仔细辨别不混淆。",
+          "related": {
+            "prerequisite": "语法：一般现在时，语法：现在进行时",
+            "next": "Unit 4 易混词卡：Country vs. Nationality"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "04",
+      "unit_name": "I Have a Pen Pal",
+      "cards": [
+        {
+          "card_id": "04-01",
+          "full_id": "英语-五下-04-01",
+          "title": "词汇：国家与国籍",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习世界主要国家及其对应的国籍表达。",
+          "core_points": [
+            "China /ˈtʃaɪnə/ (中国) - Chinese /ˌtʃaɪˈniːz/ (中国的/中国人)",
+            "America /əˈmerɪkə/ (美国) - American /əˈmerɪkən/ (美国的/美国人)",
+            "Canada /ˈkænədə/ (加拿大) - Canadian /kəˈneɪdiən/ (加拿大的/加拿大人)",
+            "the UK /ˌjuː ˈkeɪ/ (英国) - British /ˈbrɪtɪʃ/ (英国的/英国人)",
+            "Australia /ɔːˈstreɪliə/ (澳大利亚) - Australian /ɔːˈstreɪliən/ (澳大利亚的/澳大利亚人)",
+            "Japan /dʒəˈpæn/ (日本) - Japanese /ˌdʒæpəˈniːz/ (日本的/日本人)"
+          ],
+          "example": {
+            "question": "用所给词汇完成句子：My pen pal is from (美国). He is (美国人).",
+            "steps": [
+              "识别括号中的中文词语对应的英文国家名和国籍形容词。",
+              "将英文单词填入句子中。"
+            ],
+            "answer": "My pen pal is from America. He is American."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is America.",
+              "correct": "He is American. (America是国家名，American是国籍)"
+            }
+          ],
+          "memory_tip": "国家名词是地名，国籍形容词修饰人。China变Chinese，America变American。",
+          "related": {
+            "prerequisite": "基础名词、形容词",
+            "next": "句型：询问和介绍国籍"
+          }
+        },
+        {
+          "card_id": "04-02",
+          "full_id": "英语-五下-04-02",
+          "title": "句型：询问和介绍国籍/来源地",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何询问他人的国籍或来自哪里，以及如何回答。",
+          "core_points": [
+            "询问来源地：Where are you from? (你来自哪里？)",
+            "回答来源地：I'm from + 国家名. (e.g., I'm from China.)",
+            "询问国籍：What nationality are you? (你是哪国人？)",
+            "回答国籍：I'm + 国籍形容词. (e.g., I'm Chinese.)",
+            "询问第三人称：Where is he/she from? / What nationality is he/she?",
+            "回答：He/She is from + 国家名. / He/She is + 国籍形容词."
+          ],
+          "example": {
+            "question": "完成对话：\nA: Where is your pen pal from?\nB: He is from ______. (加拿大)\nA: What nationality is he?\nB: He is _______. (加拿大人)",
+            "steps": [
+              "根据中文提示，填写正确的国家名。",
+              "根据中文提示，填写正确的国籍形容词。"
+            ],
+            "answer": "B: He is from Canada.\nB: He is Canadian."
+          },
+          "mistakes": [
+            {
+              "wrong": "Where are you?",
+              "correct": "Where are you from? (Where are you?问你在哪里，from表示来源)"
+            }
+          ],
+          "memory_tip": "来自哪里Where from，回答国名要记清。国籍是啥What nationality，回答国籍形容词。",
+          "related": {
+            "prerequisite": "词汇：国家与国籍",
+            "next": "易混词卡：Country vs. Nationality"
+          }
+        },
+        {
+          "card_id": "04-03",
+          "full_id": "英语-五下-04-03",
+          "title": "易混词卡：Country vs. Nationality",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "区分国家名词（Country）和国籍形容词（Nationality）的用法。",
+          "core_points": [
+            "Country (国家): 指一个地理或政治实体，是名词。通常跟在from后面或作主语。",
+            "  - 例句：I'm from China. (China是中国这个国家)",
+            "  - 例句：China is a big country. (中国是一个大国)",
+            "Nationality (国籍): 指一个人的国籍，是形容词。通常跟在be动词后面，或修饰名词。",
+            "  - 例句：I'm Chinese. (Chinese是中国人)",
+            "  - 例句：He is a Japanese boy. (Japanese修饰boy)",
+            "记忆要点：国家是地名，国籍是身份。"
+          ],
+          "example": {
+            "question": "选择正确的词填空：\n1. My friend is from (Japan/Japanese).\n2. She is (America/American).\n3. (China/Chinese) is in Asia.\n4. I like (China/Chinese) food.",
+            "steps": [
+              "分析句子结构，判断是需要国家名词还是国籍形容词。",
+              "根据词义选择正确的词。"
+            ],
+            "answer": "1. Japan (from后面跟国家名)\n2. American (be动词后面跟国籍形容词)\n3. China (作主语，指国家)\n4. Chinese (修饰food，表示中国风味的)"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is from British.",
+              "correct": "He is from the UK. (British是国籍，the UK是国家)"
+            }
+          ],
+          "memory_tip": "Country是地名，Nationality是身份。from后面跟国家，be动词后跟国籍。",
+          "related": {
+            "prerequisite": "词汇：国家与国籍",
+            "next": "词汇：语言"
+          }
+        },
+        {
+          "card_id": "04-04",
+          "full_id": "英语-五下-04-04",
+          "title": "词汇：语言",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "学习一些常用语言的名称。",
+          "core_points": [
+            "English /ˈɪŋɡlɪʃ/ (英语)",
+            "Chinese /ˌtʃaɪˈniːz/ (汉语/中文)",
+            "French /frentʃ/ (法语)",
+            "Japanese /ˌdʒæpəˈniːz/ (日语)",
+            "German /ˈdʒɜːrmən/ (德语)",
+            "Spanish /ˈspænɪʃ/ (西班牙语)"
+          ],
+          "example": {
+            "question": "用所给词汇完成句子：I can speak (汉语). My friend can speak (英语).",
+            "steps": [
+              "识别括号中的中文词语对应的英文语言名。",
+              "将英文单词填入句子中。"
+            ],
+            "answer": "I can speak Chinese. My friend can speak English."
+          },
+          "mistakes": [
+            {
+              "wrong": "I can speak China.",
+              "correct": "I can speak Chinese. (China是国家，Chinese是语言)"
+            }
+          ],
+          "memory_tip": "语言词汇多相似，大多和国籍一个样。Chinese、Japanese，直接拿来当语言。",
+          "related": {
+            "prerequisite": "词汇：国家与国籍",
+            "next": "Unit 5 词汇：描述朋友"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "05",
+      "unit_name": "My Best Friend",
+      "cards": [
+        {
+          "card_id": "05-01",
+          "full_id": "英语-五下-05-01",
+          "title": "词汇：描述朋友外貌与性格",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "进一步学习描述朋友外貌和性格的形容词。",
+          "core_points": [
+            "外貌：long hair (长发), short hair (短发), big eyes (大眼睛), small eyes (小眼睛), big mouth (大嘴巴), small mouth (小嘴巴)",
+            "性格：kind (善良的), smart (聪明的), funny (有趣的), helpful (乐于助人的), quiet (安静的), active (活跃的)",
+            "其他：old (老的), young (年轻的)"
+          ],
+          "example": {
+            "question": "用所给词汇描述你的朋友：她有长头发和一双大眼睛。她很善良。",
+            "steps": [
+              "使用'She has...'描述头发和眼睛。",
+              "使用'She is...'描述性格。"
+            ],
+            "answer": "She has long hair and big eyes. She is kind."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is helpful a boy.",
+              "correct": "He is a helpful boy. (形容词修饰名词时，放在冠词和名词之间)"
+            }
+          ],
+          "memory_tip": "外貌特征用has，眼睛头发和嘴巴。性格特点用is，善良聪明又活泼。",
+          "related": {
+            "prerequisite": "Unit 1 词汇：描述人物",
+            "next": "语法：比较级（基础）"
+          }
+        },
+        {
+          "card_id": "05-02",
+          "full_id": "英语-五下-05-02",
+          "title": "语法：形容词比较级（基础）",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "学习形容词比较级的基本构成和用法，用于比较两者之间的差异。",
+          "core_points": [
+            "比较级作用：表示“更……”，用于比较两个人或物。",
+            "构成规则：",
+            "  - 一般单音节和部分双音节形容词：词尾加-er (tall → taller, short → shorter, old → older, young → younger)",
+            "  - 以不发音e结尾的形容词：直接加-r (nice → nicer, large → larger)",
+            "  - 重读闭音节以一个辅音字母结尾的形容词：双写最后一个辅音字母再加-er (big → bigger, thin → thinner)",
+            "  - 以辅音字母+y结尾的形容词：变y为i再加-er (funny → funnier, happy → happier)",
+            "句型：A is + 比较级 + than B. (A比B更……)"
+          ],
+          "example": {
+            "question": "将下列形容词变为比较级并完成句子：\n1. tall → _______. My brother is _______ than me.\n2. big → _______. Her eyes are _______ than yours.\n3. funny → _______. He is _______ than his sister.",
+            "steps": [
+              "根据比较级构成规则，将形容词变为比较级形式。",
+              "将比较级填入句子中。"
+            ],
+            "answer": "1. taller, taller\n2. bigger, bigger\n3. funnier, funnier"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is more taller than me.",
+              "correct": "He is taller than me. (tall是单音节词，直接加-er，不能同时用more)"
+            }
+          ],
+          "memory_tip": "比较级，-er来帮忙。单音节，直接上。双写去y要记牢，比来比去用than。",
+          "related": {
+            "prerequisite": "形容词原级",
+            "next": "句型：比较人物特征"
+          }
+        },
+        {
+          "card_id": "05-03",
+          "full_id": "英语-五下-05-03",
+          "title": "句型：比较人物特征",
+          "type": "句型卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "学习如何使用比较级句型来比较两个人或物在身高、年龄等方面的差异。",
+          "core_points": [
+            "询问谁更……：Who is + 比较级?",
+            "回答：A is + 比较级. / A is + 比较级 + than B.",
+            "例句：Who is taller? (谁更高？) -> Mike is taller. / Mike is taller than John.",
+            "例句：Who is older? (谁更老？) -> My dad is older than my mom."
+          ],
+          "example": {
+            "question": "根据图片提示（Mike 1.5m, John 1.4m），完成对话：\nA: Who is taller?\nB: Mike is ______ ______ John.",
+            "steps": [
+              "识别比较对象和比较点。",
+              "使用形容词比较级和than完成句子。"
+            ],
+            "answer": "B: Mike is taller than John."
+          },
+          "mistakes": [
+            {
+              "wrong": "Mike is tall than John.",
+              "correct": "Mike is taller than John. (比较句中形容词要用比较级)"
+            }
+          ],
+          "memory_tip": "比高矮问Who is taller，比年龄问Who is older。答案比较级加than，对象排在than的后。",
+          "related": {
+            "prerequisite": "语法：形容词比较级（基础）",
+            "next": "情景对话：描述和比较朋友"
+          }
+        },
+        {
+          "card_id": "05-04",
+          "full_id": "英语-五下-05-04",
+          "title": "情景对话：描述和比较朋友",
+          "type": "情景对话卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "学习在对话中描述朋友的外貌、性格，并进行简单的比较。",
+          "core_points": [
+            "描述朋友：This is my best friend, Lily. She is kind and smart. She has long hair and big eyes.",
+            "询问比较：Who is taller, you or Lily?",
+            "回答比较：I am taller than Lily. / Lily is funnier than me.",
+            "表达感受：She is a good friend."
+          ],
+          "example": {
+            "question": "你和朋友正在谈论各自的好朋友。请完成对话：\nA: This is my best friend, Tom. He is tall and funny.\nB: Oh, he looks nice. Who is _______, you or Tom? (更高)\nA: I am shorter than Tom. He is _______ than me. (更强壮)",
+            "steps": [
+              "根据中文提示，将形容词变为比较级，并填入句子。",
+              "注意比较级than的用法。"
+            ],
+            "answer": "B: Who is taller, you or Tom?\nA: I am shorter than Tom. He is stronger than me."
+          },
+          "mistakes": [
+            {
+              "wrong": "Who is tall, you or Tom?",
+              "correct": "Who is taller, you or Tom? (比较两者时要用比较级)"
+            }
+          ],
+          "memory_tip": "介绍朋友先描述，外貌性格要清楚。比高比矮用比较，than连接另一方。",
+          "related": {
+            "prerequisite": "词汇：描述朋友，句型：比较人物特征",
+            "next": "Unit 6 词汇：表达感受"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "06",
+      "unit_name": "How Do You Feel?",
+      "cards": [
+        {
+          "card_id": "06-01",
+          "full_id": "英语-五下-06-01",
+          "title": "词汇：表达感受",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习描述各种情绪和感受的形容词。",
+          "core_points": [
+            "happy /ˈhæpi/ (开心的)",
+            "sad /sæd/ (悲伤的)",
+            "tired /ˈtaɪərd/ (疲惫的)",
+            "hungry /ˈhʌŋɡri/ (饥饿的)",
+            "thirsty /ˈθɜːrsti/ (口渴的)",
+            "angry /ˈæŋɡri/ (生气的)",
+            "excited /ɪkˈsaɪtɪd/ (兴奋的)",
+            "bored /bɔːrd/ (无聊的)",
+            "nervous /ˈnɜːrvəs/ (紧张的)"
+          ],
+          "example": {
+            "question": "用所给词汇完成句子：I feel (开心). He feels (疲惫).",
+            "steps": [
+              "识别括号中的中文词语对应的英文单词。",
+              "将英文单词填入句子中。"
+            ],
+            "answer": "I feel happy. He feels tired."
+          },
+          "mistakes": [
+            {
+              "wrong": "I feel hungry a lot.",
+              "correct": "I feel hungry. (hungry是形容词，不加a lot)"
+            }
+          ],
+          "memory_tip": "感受词，心情好坏我来表。happy、sad、tired，各种情绪跑不了。",
+          "related": {
+            "prerequisite": "基础形容词",
+            "next": "词汇：健康问题"
+          }
+        },
+        {
+          "card_id": "06-02",
+          "full_id": "英语-五下-06-02",
+          "title": "词汇：健康问题",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习描述常见健康问题的词汇。",
+          "core_points": [
+            "sick /sɪk/ (生病的)",
+            "cold /koʊld/ (感冒)",
+            "fever /ˈfiːvər/ (发烧)",
+            "headache /ˈhedeɪk/ (头痛)",
+            "stomachache /ˈstʌməkeɪk/ (胃痛)",
+            "toothache /ˈtuːθeɪk/ (牙痛)",
+            "sore throat /sɔːr θroʊt/ (喉咙痛)"
+          ],
+          "example": {
+            "question": "用所给词汇完成句子：I have a (头痛). She has a (牙痛).",
+            "steps": [
+              "识别括号中的中文词语对应的英文单词。",
+              "将英文单词填入句子中。"
+            ],
+            "answer": "I have a headache. She has a toothache."
+          },
+          "mistakes": [
+            {
+              "wrong": "I have sick.",
+              "correct": "I am sick. / I feel sick. (sick是形容词，不能直接跟在have后面)"
+            }
+          ],
+          "memory_tip": "生病不适记心间，headache、stomachache。感冒发烧sore throat，健康词汇要记牢。",
+          "related": {
+            "prerequisite": "词汇：表达感受",
+            "next": "句型：询问和表达感受/健康问题"
+          }
+        },
+        {
+          "card_id": "06-03",
+          "full_id": "英语-五下-06-03",
+          "title": "句型：询问和表达感受/健康问题",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习如何询问他人的感受或健康状况，并表达自己的感受或身体不适。",
+          "core_points": [
+            "询问感受：How do you feel? (你感觉怎么样？)",
+            "回答感受：I feel + 形容词. (e.g., I feel happy/tired.)",
+            "询问健康问题：What's wrong? (怎么了？)",
+            "回答健康问题：I have a + 症状. (e.g., I have a headache/cold.)",
+            "  - I am sick. (我生病了。)",
+            "  - My head hurts. (我头痛。)"
+          ],
+          "example": {
+            "question": "完成对话：\nA: How do you feel?\nB: I feel _______. (累)\nA: What's wrong?\nB: I have a _______. (胃痛)",
+            "steps": [
+              "根据中文提示，填写正确的感受形容词。",
+              "根据中文提示，填写正确的健康问题名词。"
+            ],
+            "answer": "B: I feel tired.\nB: I have a stomachache."
+          },
+          "mistakes": [
+            {
+              "wrong": "I have sick.",
+              "correct": "I am sick. / I feel sick. (sick是形容词，不能直接跟在have后面)"
+            }
+          ],
+          "memory_tip": "感觉如何How do you feel，不舒服了What's wrong。I feel后面跟感受，I have后面跟病痛。",
+          "related": {
+            "prerequisite": "词汇：表达感受，词汇：健康问题",
+            "next": "情景对话：给出建议"
+          }
+        },
+        {
+          "card_id": "06-04",
+          "full_id": "英语-五下-06-04",
+          "title": "情景对话：给出建议",
+          "type": "情景对话卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "学习在他人感到不适时，给出相应的建议。",
+          "core_points": [
+            "询问：What's wrong? / How do you feel?",
+            "表达不适：I have a cold. / I feel tired.",
+            "给出建议：You should + 动词原形. (你应该……)",
+            "  - You should drink more water. (你应该多喝水。)",
+            "  - You should go to bed early. (你应该早点睡觉。)",
+            "  - You should see a doctor. (你应该去看医生。)",
+            "回应建议：Good idea. / Thank you."
+          ],
+          "example": {
+            "question": "你的朋友说他头痛。请你给出建议。\nA: I have a headache.\nB: You should _______ _______. (多喝水)",
+            "steps": [
+              "识别朋友的问题。",
+              "根据问题，给出合适的建议，注意使用should和动词原形。"
+            ],
+            "answer": "B: You should drink more water."
+          },
+          "mistakes": [
+            {
+              "wrong": "You should to drink more water.",
+              "correct": "You should drink more water. (should后面直接跟动词原形，不需要to)"
+            }
+          ],
+          "memory_tip": "身体不适说出来，should后面给建议。多喝水，早睡觉，看医生，要记牢。",
+          "related": {
+            "prerequisite": "句型：询问和表达感受/健康问题",
+            "next": "期末复习"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,469 @@
+{
+  "subject": "英语",
+  "grade": "五年级",
+  "semester": "下册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "五下",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片",
+  "units": [
+    {
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [
+        {
+          "card_id": "T1-01",
+          "full_id": "英语-五下-T1-01",
+          "title": "some和any分不清？一句话让你秒懂！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "some用于肯定句，表示“一些”；any用于否定句和疑问句，表示“一些/任何”。",
+          "core_points": [
+            "some通常用于肯定句，表示不确定的数量。",
+            "any通常用于否定句和疑问句，表示不确定的数量或“任何”。",
+            "特例：在表示请求或建议的疑问句中，也可使用some，表示期待肯定回答。"
+          ],
+          "example": {
+            "question": "选择正确的词填空：Do you have ( ) apples? No, I don't have ( ) apples.",
+            "steps": [
+              "第一个空是疑问句，所以用any。",
+              "第二个空是否定句，所以用any。"
+            ],
+            "answer": "any, any"
+          },
+          "mistakes": [
+            {
+              "wrong": "I have any books.",
+              "correct": "I have some books."
+            },
+            {
+              "wrong": "She doesn't want some water.",
+              "correct": "She doesn't want any water."
+            }
+          ],
+          "memory_tip": "肯定some，否定疑问any，请求建议some也行！",
+          "emotion_hook": "这两个词用错，英语老师都要皱眉啦！别再傻傻分不清了！",
+          "trap_point": "请求或建议的疑问句（如Would you like some juice?），虽然是问句，但通常用some，表示期待对方接受。"
+        },
+        {
+          "card_id": "T1-02",
+          "full_id": "英语-五下-T1-02",
+          "title": "How much/How many总是错？一篇搞定可数不可数！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "much修饰不可数名词，many修饰可数名词复数。",
+          "core_points": [
+            "many用于修饰可数名词的复数形式，表示“许多”。",
+            "much用于修饰不可数名词，表示“许多”。",
+            "两者都可以用于否定句和疑问句，表示数量。"
+          ],
+          "example": {
+            "question": "选择正确的词填空：How ( ) water do you drink? How ( ) friends do you have?",
+            "steps": [
+              "water是不可数名词，所以用much。",
+              "friends是可数名词复数，所以用many。"
+            ],
+            "answer": "much, many"
+          },
+          "mistakes": [
+            {
+              "wrong": "How many milk do you want?",
+              "correct": "How much milk do you want?"
+            },
+            {
+              "wrong": "There isn't much books on the desk.",
+              "correct": "There aren't many books on the desk."
+            }
+          ],
+          "memory_tip": "能数清，用many；数不清，用much！",
+          "emotion_hook": "小学英语最头疼的搭配，你真的会用吗？用错就尴尬啦！",
+          "trap_point": "区分可数名词和不可数名词是关键。可数名词有单复数之分，不可数名词没有。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T2",
+      "unit_name": "发音挑战",
+      "cards": [
+        {
+          "card_id": "T2-01",
+          "full_id": "英语-五下-T2-01",
+          "title": "这个单词你确定会读吗？90%的人都错了！",
+          "type": "发音挑战卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "英语中`th`有两种发音：清辅音/θ/和浊辅音/ð/。",
+          "core_points": [
+            "清辅音/θ/：发音时舌尖轻触上齿，气流从缝隙呼出，声带不振动（如three, thanks）。",
+            "浊辅音/ð/：发音时舌尖轻触上齿，气流从缝隙呼出，声带振动（如this, that, with）。",
+            "区分清浊音是发音准确的关键。"
+          ],
+          "example": {
+            "question": "请正确读出 'three' 和 'this'。",
+            "steps": [
+              "'three' 中的 'th' 发清辅音/θ/。",
+              "'this' 中的 'th' 发浊辅音/ð/。"
+            ],
+            "answer": "three (/θriː/)；this (/ðɪs/)"
+          },
+          "mistakes": [
+            {
+              "wrong": "three (发成/sriː/)",
+              "correct": "three (发成/θriː/)"
+            },
+            {
+              "wrong": "this (发成/zɪs/)",
+              "correct": "this (发成/ðɪs/)"
+            }
+          ],
+          "memory_tip": "清音舌尖顶牙缝，浊音振动气流冲！",
+          "emotion_hook": "发音不准毁气质！这个音发对了，英语瞬间高级！",
+          "pronunciation_tip": "发/θ/时，舌尖轻轻顶住上齿，不要咬紧；发/ð/时，同样姿势，但声带振动，多练习能感受震动。"
+        },
+        {
+          "card_id": "T2-02",
+          "full_id": "英语-五下-T2-02",
+          "title": "单词末尾的's'，你真的读对了吗？！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "单词末尾的`s`或`es`根据前一个音的清浊，有/s/, /z/, /ɪz/三种发音。",
+          "core_points": [
+            "当前面是清辅音时，`s`发/s/音（如books, cats）。",
+            "当前面是浊辅音或元音时，`s`发/z/音（如dogs, bags, plays）。",
+            "当前面是/s/, /z/, /ʃ/, /ʒ/, /tʃ/, /dʒ/这些音时，`s`或`es`发/ɪz/音（如watches, boxes）。"
+          ],
+          "example": {
+            "question": "请正确读出 'books' 和 'watches'。",
+            "steps": [
+              "'books' 中k是清辅音，所以's'发/s/。",
+              "'watches' 中ch是/tʃ/音，所以'es'发/ɪz/。"
+            ],
+            "answer": "books (/bʊks/)；watches (/wɒtʃɪz/)"
+          },
+          "mistakes": [
+            {
+              "wrong": "dogs (发成/dɒgs/)",
+              "correct": "dogs (发成/dɒgz/)"
+            },
+            {
+              "wrong": "watches (发成/wɒtʃs/)",
+              "correct": "watches (发成/wɒtʃɪz/)"
+            }
+          ],
+          "memory_tip": "清s浊z，特殊音后/ɪz/！",
+          "emotion_hook": "别再把's'都读成一个音了！这样做，英语老师都要哭了！",
+          "pronunciation_tip": "多听母语者的发音，模仿并感受发音部位的变化。特别是/ɪz/，要加上一个清晰的/ɪ/音节。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T3",
+      "unit_name": "情景闯关",
+      "cards": [
+        {
+          "card_id": "T3-01",
+          "full_id": "英语-五下-T3-01",
+          "title": "去麦当劳点餐，你会用英语说吗？",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习在快餐店点餐的常用句型和词汇，提高实际应用能力。",
+          "core_points": [
+            "使用礼貌用语：'I'd like...' 或 'Can I have...' 表示想要。",
+            "询问价格：'How much is it?' 或 'How much are they?'。",
+            "掌握常见快餐食物词汇：burger (汉堡), fries (薯条), cola (可乐), juice (果汁)。",
+            "表达数量：a/an (一个), two (两个), some (一些)。"
+          ],
+          "example": {
+            "question": "你在麦当劳，想点一个汉堡和一杯果汁，请用英语点餐。",
+            "steps": [
+              "用礼貌句型表达需求。",
+              "说出食物名称和数量。"
+            ],
+            "answer": "I'd like a burger and a glass of juice, please."
+          },
+          "mistakes": [
+            {
+              "wrong": "I want a burger.",
+              "correct": "I'd like a burger, please."
+            },
+            {
+              "wrong": "How many is the burger?",
+              "correct": "How much is the burger?"
+            }
+          ],
+          "memory_tip": "点餐礼貌用I'd like，数量价格要问清！",
+          "emotion_hook": "出国旅行，再也不怕点错餐啦！轻松搞定海外美食！",
+          "scene_dialogue": "Customer: Hello! Can I have a burger and some fries? Server: Sure. Anything else? Customer: Yes, a cola, please. Server: That's 25 yuan. Customer: Here you are. Server: Thank you!"
+        },
+        {
+          "card_id": "T3-02",
+          "full_id": "英语-五下-T3-02",
+          "title": "迷路了怎么办？用英语问路，你敢吗？",
+          "type": "情景闯关卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "学习如何用英语询问地点和指路，运用方位词和指示方向的短语。",
+          "core_points": [
+            "询问地点：'Excuse me, where is...?'。",
+            "指示方向：'Go straight.' (直走), 'Turn left/right.' (左/右转)。",
+            "常用方位词：next to (旁边), behind (后面), in front of (前面), on the left/right (在左/右边)。",
+            "礼貌用语：'Excuse me' (打扰一下) 和 'Thank you' (谢谢)。"
+          ],
+          "example": {
+            "question": "你想去图书馆，请问路人怎么走。",
+            "steps": [
+              "先用礼貌语打招呼。",
+              "用'Where is...?'句型询问地点。"
+            ],
+            "answer": "Excuse me, where is the library?"
+          },
+          "mistakes": [
+            {
+              "wrong": "Library where?",
+              "correct": "Where is the library?"
+            },
+            {
+              "wrong": "Go left.",
+              "correct": "Turn left."
+            }
+          ],
+          "memory_tip": "问路Where is，指路左右直行，谢谢不忘说！",
+          "emotion_hook": "方向感是硬伤？英语问路帮你解决，秒变路痴救星！",
+          "scene_dialogue": "A: Excuse me, where is the park? B: Go straight, then turn left at the first crossing. The park is next to the supermarket. A: Thank you very much! B: You're welcome."
+        }
+      ]
+    },
+    {
+      "unit_id": "T4",
+      "unit_name": "语法纠错",
+      "cards": [
+        {
+          "card_id": "T4-01",
+          "full_id": "英语-五下-T4-01",
+          "title": "这句话10个人9个说错！你的动词加's'了吗？",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "当主语是第三人称单数时，一般现在时谓语动词要加-s或-es。",
+          "core_points": [
+            "主语为he, she, it或单数名词时，动词要变位。",
+            "大多数动词直接加-s。",
+            "以s, x, ch, sh, o结尾的动词加-es。",
+            "以辅音字母+y结尾的动词，变y为i再加-es（如study→studies）。",
+            "动词have的第三人称单数形式是has。"
+          ],
+          "example": {
+            "question": "改正句子：'He like to play football.'",
+            "steps": [
+              "主语'He'是第三人称单数。",
+              "动词'like'应改为'likes'。"
+            ],
+            "answer": "He likes to play football."
+          },
+          "mistakes": [
+            {
+              "wrong": "She play piano.",
+              "correct": "She plays piano."
+            },
+            {
+              "wrong": "My father go to work by bus.",
+              "correct": "My father goes to work by bus."
+            }
+          ],
+          "memory_tip": "三单动词要加s，特殊情况加es，have变has别忘记！",
+          "emotion_hook": "小小的's'，决定你英语专不专业！别让低级错误拉低你的分数！",
+          "grammar_fix": "在一般现在时中，检查主语是否为第三人称单数（he, she, it或单数名词），如果是，务必在动词后加上-s或-es。"
+        },
+        {
+          "card_id": "T4-02",
+          "full_id": "英语-五下-T4-02",
+          "title": "on和in你真的用对了吗？一张图秒懂！",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "区分常用介词on（在...上面），in（在...里面），under（在...下面），next to（在...旁边）。",
+          "core_points": [
+            "on表示物体在另一个物体的表面上，且有接触。",
+            "in表示物体在某个空间或范围的内部。",
+            "under表示物体在另一个物体的下方，通常不接触。",
+            "next to表示物体紧邻在另一个物体的旁边。"
+          ],
+          "example": {
+            "question": "选择正确介词：'The cat is ( ) the box.'",
+            "steps": [
+              "猫在盒子的内部。",
+              "表示在内部应使用介词'in'。"
+            ],
+            "answer": "in"
+          },
+          "mistakes": [
+            {
+              "wrong": "The book is in the desk.",
+              "correct": "The book is on the desk."
+            },
+            {
+              "wrong": "There is a bird on the tree.",
+              "correct": "There is a bird in the tree."
+            }
+          ],
+          "memory_tip": "面on，里in，下under，旁边next to，记住场景不犯错！",
+          "emotion_hook": "小学英语介词的坑，你踩过几个？一个小红点帮你搞定！",
+          "grammar_fix": "想象物体和空间的关系：'on'是接触表面，'in'是内部空间，'under'是下方，'next to'是紧挨着。多结合实际场景理解。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T5",
+      "unit_name": "亲子英语PK",
+      "cards": [
+        {
+          "card_id": "T5-01",
+          "full_id": "英语-五下-T5-01",
+          "title": "妈妈的英语居然不如三年级的娃！来PK猜动物！",
+          "type": "亲子英语PK卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "运用动物词汇和`can/can't`描述动物特征，进行趣味猜谜游戏。",
+          "core_points": [
+            "掌握常见动物的名称和基本特征。",
+            "熟练运用`It can...`和`It can't...`句型描述动物的能力。",
+            "用简单的形容词描述动物的颜色、大小等外貌特征。"
+          ],
+          "example": {
+            "question": "描述动物：It's big. It can swim. It can't fly. It has a long nose. What is it?",
+            "steps": [
+              "根据'big'，'can swim'，'can't fly'，'long nose'等线索进行猜测。"
+            ],
+            "answer": "An elephant (大象)"
+          },
+          "mistakes": [
+            {
+              "wrong": "It is swim.",
+              "correct": "It can swim."
+            },
+            {
+              "wrong": "What animal is it?",
+              "correct": "What is it?"
+            }
+          ],
+          "memory_tip": "描述动物用can，动词原形不能变！",
+          "emotion_hook": "谁是动物百科小能手？快来挑战爸妈，看看谁更厉害！",
+          "battle_rule": "一人选择一种动物，用英语描述其特征和能力（不能直接说出名字），另一人猜测。猜对得一分，轮流进行，看谁得分高！"
+        },
+        {
+          "card_id": "T5-02",
+          "full_id": "英语-五下-T5-02",
+          "title": "你家娃的一天，用英语说出来！亲子挑战赛！",
+          "type": "亲子英语PK卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "描述日常活动和时间，运用日常活动词汇和时间表达。",
+          "core_points": [
+            "掌握日常活动词汇：get up (起床), eat breakfast (吃早饭), go to school (上学), do homework (做作业), go to bed (睡觉)等。",
+            "运用时间表达：at 7 o'clock (七点钟), in the morning (在早上), in the afternoon (在下午), in the evening (在晚上)。",
+            "可以引入频率副词：usually (通常), often (经常), sometimes (有时)。"
+          ],
+          "example": {
+            "question": "妈妈说一个时间，孩子说这个时间通常做什么。 Mom: At 7 o'clock in the morning.",
+            "steps": [
+              "孩子听时间，说出自己通常做的活动。"
+            ],
+            "answer": "Child: I usually get up."
+          },
+          "mistakes": [
+            {
+              "wrong": "I go to school at morning.",
+              "correct": "I go to school in the morning."
+            },
+            {
+              "wrong": "She usually gets up at seven o'clock.",
+              "correct": "She usually gets up at seven o'clock."
+            }
+          ],
+          "memory_tip": "时间点用at，早中晚用in，动词原形要牢记！",
+          "emotion_hook": "看看谁的英语日常更地道！全家总动员，一起说英语！",
+          "battle_rule": "家长和孩子轮流描述自己的一个日常活动，并说出大概时间（如'I usually get up at 7 o'clock.'）。或者一方说时间，另一方说活动。看谁能用更多不同的词汇和句型，表达更准确。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T6",
+      "unit_name": "速记卡",
+      "cards": [
+        {
+          "card_id": "T6-01",
+          "full_id": "英语-五下-T6-01",
+          "title": "介词再也不怕了！一张图帮你搞定！",
+          "type": "速记卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "通过形象的图片和动作，快速记忆in, on, under, next to, behind, in front of, between等方位介词。",
+          "core_points": [
+            "in：想象一个物体被“装”在另一个物体的“里面”。",
+            "on：想象一个物体“放”在另一个物体的“上面”且有接触。",
+            "under：想象一个物体“在”另一个物体的“下面”但不接触。",
+            "next to：想象两个物体“挨”在一起，紧邻。",
+            "behind：想象一个物体“藏”在另一个物体的“后面”。",
+            "in front of：想象一个物体“站”在另一个物体的“前面”。"
+          ],
+          "example": {
+            "question": "看到一个苹果在桌子上，用英语说出来。",
+            "steps": [
+              "想象苹果和桌面的接触关系。",
+              "选择表示“在...上面且接触”的介词。"
+            ],
+            "answer": "The apple is on the desk."
+          },
+          "mistakes": [
+            {
+              "wrong": "The cat is behind the table.",
+              "correct": "The cat is in front of the table."
+            }
+          ],
+          "memory_tip": "in里on上under下，next to旁边between间，behind后in front前，口诀配图记更全！",
+          "emotion_hook": "死记硬背效率低？试试这个超有趣的记忆法，小学介词轻松搞定！",
+          "speed_method": "画一个简单的盒子或小人，然后用箭头和图示来表示各种介词的位置关系。例如：一个箭头指向盒子内部是'in'，一个箭头指向盒子上方是'on'，一个箭头指向盒子下方是'under'。"
+        },
+        {
+          "card_id": "T6-02",
+          "full_id": "英语-五下-T6-02",
+          "title": "频率副词总是乱用？一条线帮你秒懂！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握频率副词的顺序和在句子中的位置，准确表达动作发生的频率。",
+          "core_points": [
+            "频率副词表示动作发生的频繁程度：always (总是) > usually (通常) > often (经常) > sometimes (有时) > never (从不)。",
+            "频率副词在句子中的位置：通常放在实义动词之前。",
+            "频率副词在句子中的位置：放在be动词（am, is, are）和助动词（do, does, can等）之后。"
+          ],
+          "example": {
+            "question": "将 'I play football' 和 'often' 组合成正确句子。",
+            "steps": [
+              "'play' 是实义动词。",
+              "频率副词 'often' 应放在实义动词之前。"
+            ],
+            "answer": "I often play football."
+          },
+          "mistakes": [
+            {
+              "wrong": "I am sometimes late.",
+              "correct": "I am sometimes late."
+            },
+            {
+              "wrong": "I sometimes am late.",
+              "correct": "I am sometimes late."
+            }
+          ],
+          "memory_tip": "频率高低记顺序，动前be后是规律！",
+          "emotion_hook": "你的英语听起来不够地道？可能是频率副词用错了！快来拯救你的口语！",
+          "speed_method": "画一条从100%到0%的直线，在上面标注always, usually, often, sometimes, never，形象展示频率高低。同时记住口诀'动前be后'来确定它们在句子中的位置。"
+        }
+      ]
+    }
+  ]
+}

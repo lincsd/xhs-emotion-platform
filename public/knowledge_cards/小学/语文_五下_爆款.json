@@ -41,7 +41,11 @@
           ],
           "memory_tip": "辨别用力，辩论用言，辫子在头。",
           "emotion_hook": "别再写错啦！一字之差，意思全变！",
-          "trap_point": "中间部分的结构：“力” vs “言”。"
+          "trap_point": "中间部分的结构：“力” vs “言”。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T1-02",
@@ -69,7 +73,11 @@
           ],
           "memory_tip": "戈砍木头要完整，一横不能少。",
           "emotion_hook": "考试默写常扣分，这个坑你别再踩！",
-          "trap_point": "“戈”字头部分的笔画，特别是最后一横容易遗漏或变形。"
+          "trap_point": "“戈”字头部分的笔画，特别是最后一横容易遗漏或变形。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T1-03",
@@ -101,7 +109,11 @@
           ],
           "memory_tip": "足躁情绪火燥干。",
           "emotion_hook": "区分不清，作文用错尴尬癌！",
-          "trap_point": "偏旁部首的意义混淆。"
+          "trap_point": "偏旁部首的意义混淆。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         }
       ]
     },
@@ -127,10 +139,19 @@
             "steps": [],
             "answer": "bó"
           },
-          "mistakes": [],
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
           "memory_tip": "船停靠bó，湖水pō。",
           "emotion_hook": "读错就尴尬了！快来测测你是不是那90%！",
-          "pinyin_tip": "动词停靠读bó，名词湖泊读pō。"
+          "pinyin_tip": "动词停靠读bó，名词湖泊读pō。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T2-02",
@@ -150,10 +171,19 @@
             "steps": [],
             "answer": "不一样，“荷花”读hé，“负荷”读hè。"
           },
-          "mistakes": [],
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
           "memory_tip": "荷花hé，负荷hè。",
           "emotion_hook": "轻松区分，告别尴尬发音！",
-          "pinyin_tip": "植物hé，承担hè。"
+          "pinyin_tip": "植物hé，承担hè。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T2-03",
@@ -173,10 +203,19 @@
             "steps": [],
             "answer": "chàn；zhàn"
           },
-          "mistakes": [],
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
           "memory_tip": "轻微chàn，剧烈zhàn。",
           "emotion_hook": "读对这个字，你就是语文小高手！",
-          "pinyin_tip": "颤抖chàn，颤动zhàn。"
+          "pinyin_tip": "颤抖chàn，颤动zhàn。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         }
       ]
     },
@@ -206,10 +245,19 @@
             "answer": "绿",
             "answer_full": "京口瓜洲一水间，钟山只隔数重山。春风又绿江南岸，明月何时照我还。"
           },
-          "mistakes": [],
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
           "memory_tip": "京口钟山一水间，春风绿岸明月还。",
           "emotion_hook": "默写满分秘籍！背完这张卡，老师都夸你！",
-          "challenge_rule": "补全诗句中的空缺字词。"
+          "challenge_rule": "补全诗句中的空缺字词。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T3-02",
@@ -233,10 +281,19 @@
             "answer": "重",
             "answer_full": "洛阳城里见秋风，欲作家书意万重。复恐匆匆说不尽，行人临发又开封。"
           },
-          "mistakes": [],
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
           "memory_tip": "洛阳秋风家书重，匆匆不尽又开封。",
           "emotion_hook": "默写不扣分！考试提分就靠它！",
-          "challenge_rule": "补全诗句中的空缺字词。"
+          "challenge_rule": "补全诗句中的空缺字词。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T3-03",
@@ -260,10 +317,19 @@
             "answer": "悲",
             "answer_full": "死去元知万事空，但悲不见九州同。王师北定中原日，家祭无忘告乃翁。"
           },
-          "mistakes": [],
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
           "memory_tip": "万事空悲九州同，北定中原家祭告。",
           "emotion_hook": "背会这首诗，感受伟大诗人的爱国情怀！",
-          "challenge_rule": "补全诗句中的空缺字词。"
+          "challenge_rule": "补全诗句中的空缺字词。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         }
       ]
     },
@@ -297,7 +363,11 @@
           ],
           "memory_tip": "重负放下才轻松，轻松不等于开心。",
           "emotion_hook": "用错成语超尴尬！一分钟帮你纠正！",
-          "idiom_correction": "“如释重负”强调的是“卸下负担”后的轻松，而不是单纯的“高兴”或“高兴地笑”。"
+          "idiom_correction": "“如释重负”强调的是“卸下负担”后的轻松，而不是单纯的“高兴”或“高兴地笑”。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T4-02",
@@ -325,7 +395,11 @@
           ],
           "memory_tip": "禁就是忍不住，后面不再加“笑”。",
           "emotion_hook": "语文老师最常批改的错误！你中招了吗？",
-          "idiom_correction": "“忍俊不禁”本身就包含“忍不住发笑”的意思，后面不应再加“地笑了”等表示笑的词语。"
+          "idiom_correction": "“忍俊不禁”本身就包含“忍不住发笑”的意思，后面不应再加“地笑了”等表示笑的词语。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T4-03",
@@ -353,7 +427,11 @@
           ],
           "memory_tip": "浃背是辛苦或害怕，不是随便热。",
           "emotion_hook": "别再误用！让你的作文更高级！",
-          "idiom_correction": "“汗流浃背”侧重于形容因劳累、恐惧、羞愧等原因导致的大量出汗，而不是仅仅强调天气热而出汗。"
+          "idiom_correction": "“汗流浃背”侧重于形容因劳累、恐惧、羞愧等原因导致的大量出汗，而不是仅仅强调天气热而出汗。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         }
       ]
     },
@@ -382,10 +460,19 @@
             ],
             "answer": "(用户自由发挥)"
           },
-          "mistakes": [],
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
           "memory_tip": "多读多背，积累是关键！",
           "emotion_hook": "谁是家里的诗词小状元？快来PK！",
-          "battle_rule": "规定时间内，轮流说出含指定字（“春”）的诗句，不能重复，说不出者输。"
+          "battle_rule": "规定时间内，轮流说出含指定字（“春”）的诗句，不能重复，说不出者输。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T5-02",
@@ -405,10 +492,19 @@
             "steps": [],
             "answer": "疑是地上霜。"
           },
-          "mistakes": [],
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
           "memory_tip": "熟能生巧，多和家人一起玩诗词！",
           "emotion_hook": "妈妈居然输给了二年级的娃！你敢挑战吗？",
-          "battle_rule": "给出起始诗句，或指定含特定字（“月”）的诗句，轮流接龙或说出符合条件的诗句，考验诗词储备和应变能力。"
+          "battle_rule": "给出起始诗句，或指定含特定字（“月”）的诗句，轮流接龙或说出符合条件的诗句，考验诗词储备和应变能力。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T5-03",
@@ -428,10 +524,19 @@
             "steps": [],
             "answer": "《秋思》"
           },
-          "mistakes": [],
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
           "memory_tip": "理解诗意比死记硬背更重要！",
           "emotion_hook": "不仅仅是背诗，更是理解诗！",
-          "battle_rule": "一方描述诗歌情境、内容或情感，另一方猜出诗名或核心诗句。"
+          "battle_rule": "一方描述诗歌情境、内容或情感，另一方猜出诗名或核心诗句。",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         }
       ]
     },
@@ -463,10 +568,19 @@
             ],
             "answer": "“如释重负”在文中形容主人公像放下沉重负担一样轻松。它生动地写出了主人公在完成艰巨任务后，从巨大的压力中解脱出来的轻松愉悦的心情。"
           },
-          "mistakes": [],
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
           "memory_tip": "语境拆替效，四步搞定词语题。",
           "emotion_hook": "背下这个模板，阅读理解不丢分！",
-          "reading_formula": "结合语境 + 拆词解释 + 替换验证 + 表达作用"
+          "reading_formula": "结合语境 + 拆词解释 + 替换验证 + 表达作用",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T6-02",
@@ -492,10 +606,19 @@
             ],
             "answer": "“绿”字由形容词活用为动词，赋予了春风生命力，生动形象地写出了春风吹拂下江南岸草木复苏、一片生机的景象，比“到”、“过”等字更具表现力，表达了诗人对大自然的赞美和对美好事物的热爱。"
           },
-          "mistakes": [],
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
           "memory_tip": "关键词句联系上下，主旨修辞效果佳。",
           "emotion_hook": "语文老师不会教你的秘密，今天一次告诉你！",
-          "reading_formula": "找关键词 + 联系上下文 + 结合主旨 + 表达效果"
+          "reading_formula": "找关键词 + 联系上下文 + 结合主旨 + 表达效果",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         },
         {
           "card_id": "T6-03",
@@ -521,10 +644,19 @@
             ],
             "answer": "短文《桥》讲述了在解放战争时期，一座小村庄被洪水围困，一位老支书在危急关头，舍生忘死，组织村民转移，最终牺牲自己，把生的希望留给了儿子儿媳及其他村民的感人故事。"
           },
-          "mistakes": [],
+          "mistakes": [
+            {
+              "wrong": "常见错误写法",
+              "correct": "正确写法"
+            }
+          ],
           "memory_tip": "谁时地事怎，概括内容就完整。",
           "emotion_hook": "还在为概括内容发愁？这招让你轻松拿高分！",
-          "reading_formula": "谁 + 在什么时间/地点 + 做了什么 + 结果/怎么样"
+          "reading_formula": "谁 + 在什么时间/地点 + 做了什么 + 结果/怎么样",
+          "related": {
+            "prerequisite": "前置知识",
+            "next": "后续知识"
+          }
         }
       ]
     }
