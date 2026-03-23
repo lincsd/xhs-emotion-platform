@@ -3819,7 +3819,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260323e'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260323f'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -19802,31 +19802,44 @@ Style: ${stylePrompt}
     }
 
     async function doLogin() {
+      console.log('[LOGIN] doLogin() called');
       const username = document.getElementById('login-username').value.trim();
       const password = document.getElementById('login-password').value;
       if (!username || !password) return showLoginError('请输入用户名和密码');
       const btn = document.getElementById('btn-login');
       btn.disabled = true; btn.textContent = '登录中...';
+      showLoginError(''); // 清除旧错误
       try {
         // 确保后端已检测完成
         if (!_backendChecked && IS_GITHUB_PAGES) {
           btn.textContent = '正在连接服务器...';
+          console.log('[LOGIN] detecting backend...');
           await _selectBestBackend();
           API_BASE = _activeBackend;
         }
-        const res = await fetch(API_BASE + '/api/auth/login', {
+        const loginUrl = API_BASE + '/api/auth/login';
+        console.log('[LOGIN] POST', loginUrl, 'user:', username);
+        btn.textContent = '正在登录...';
+        const res = await fetch(loginUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, password }),
           signal: _abortSignalTimeout(15000)
         });
+        console.log('[LOGIN] response status:', res.status);
         const data = await res.json();
-        if (!res.ok) { showLoginError(data.error || '登录失败'); return; }
+        if (!res.ok) {
+          showLoginError(data.error || '登录失败 (HTTP ' + res.status + ')');
+          console.warn('[LOGIN] failed:', res.status, data);
+          return;
+        }
         localStorage.setItem('xhs_auth_token', data.token);
         currentUser = data.user;
+        console.log('[LOGIN] success, user:', data.user?.username);
         showApp();
         loadDashboard();
       } catch (e) {
+        console.error('[LOGIN] exception:', e.name, e.message);
         if (e.name === 'AbortError') {
           // 超时后自动尝试切换后端重试一次
           try {
@@ -19834,6 +19847,7 @@ Style: ${stylePrompt}
             _backendChecked = false;
             await _selectBestBackend(true);
             if (IS_GITHUB_PAGES) API_BASE = _activeBackend;
+            console.log('[LOGIN] retry with', API_BASE);
             const res2 = await fetch(API_BASE + '/api/auth/login', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -19847,10 +19861,12 @@ Style: ${stylePrompt}
             showApp();
             loadDashboard();
             return;
-          } catch { /* fall through to error below */ }
-          showLoginError('连接超时，请检查网络后重试');
+          } catch (e2) {
+            console.error('[LOGIN] retry also failed:', e2);
+          }
+          showLoginError('连接超时 (后端: ' + (_activeBackend || 'unknown') + ')，请检查网络后重试');
         } else {
-          showLoginError('网络错误，请检查网络后重试');
+          showLoginError('网络错误: ' + (e.message || e.name) + ' (后端: ' + (_activeBackend || API_BASE) + ')');
         }
       } finally {
         btn.disabled = false; btn.textContent = '🔐 登 录';
