@@ -1815,6 +1815,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._ai_match_cards(body)
         elif path == '/api/generate-prompt-record':
             return self._generate_prompt_record(body)
+        elif path == '/api/render-card-image':
+            return self._render_card_image_html(body)
         else:
             self._send_json({'error': 'Not found'}, 404)
 
@@ -3213,6 +3215,53 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     pass  # AI匹配失败不影响本地结果
 
         return self._send_json({'ok': True, 'results': results[:10], 'total': len(all_cards)})
+
+    # ═══════════════════════════════════════════
+    # HTML 卡片渲染器 API
+    # ═══════════════════════════════════════════
+    def _render_card_image_html(self, body):
+        """用 HTML 模板渲染知识卡片→截图→返回图片 base64"""
+        card = body.get('card')
+        if not card or not card.get('full_id'):
+            return self._send_json({'error': '缺少卡片数据(card.full_id)'}, 400)
+
+        try:
+            from generate_card_images_html import generate_card_html, render_card_to_image, _find_chrome
+        except ImportError as e:
+            return self._send_json({'error': f'渲染模块导入失败: {e}'}, 500)
+
+        if not _find_chrome():
+            return self._send_json({'error': '未找到 Chrome 浏览器，无法渲染卡片图片'}, 500)
+
+        subject = body.get('subject', '数学')
+        grade = body.get('grade', '三年级')
+        semester = body.get('semester', '下册')
+
+        import tempfile, base64
+        try:
+            html = generate_card_html(card, subject, grade, semester)
+
+            with tempfile.NamedTemporaryFile(suffix='.jpg', delete=False) as tmp:
+                tmp_path = tmp.name
+
+            size = render_card_to_image(html, tmp_path, width=1080)
+
+            with open(tmp_path, 'rb') as f:
+                img_b64 = base64.b64encode(f.read()).decode('utf-8')
+
+            os.unlink(tmp_path)
+
+            return self._send_json({
+                'ok': True,
+                'image': img_b64,
+                'mimeType': 'image/jpeg',
+                'size': size,
+                'card_id': card['full_id']
+            })
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return self._send_json({'error': f'渲染失败: {e}'}, 500)
 
     # ═══════════════════════════════════════════
     # 五角色流水线：按需生成 R1→R2→R3 Prompt 记录

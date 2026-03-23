@@ -10015,7 +10015,8 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
 
         // 生成图片 + 生成笔记按钮
         html += '<div style="margin-bottom:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">';
-        html += '<button id="pl-gen-btn" onclick="PromptLib.generateImage(\'' + card.full_id + '\')" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px" onmouseenter="this.style.opacity=0.9" onmouseleave="this.style.opacity=1">\ud83c\udfa8 生成图片</button>';
+        html += '<button id="pl-gen-html-btn" onclick="PromptLib.renderCardHTML(\'' + card.full_id + '\')" style="background:linear-gradient(135deg,#2ED573,#1B9CFC);color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px" onmouseenter="this.style.opacity=0.9" onmouseleave="this.style.opacity=1">\ud83d\uddbc\ufe0f HTML渲染图片</button>';
+        html += '<button id="pl-gen-btn" onclick="PromptLib.generateImage(\'' + card.full_id + '\')" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px" onmouseenter="this.style.opacity=0.9" onmouseleave="this.style.opacity=1">\ud83c\udfa8 AI生成图片</button>;
         html += '<button onclick="PromptLib._goNote(\'' + card.full_id + '\')" style="background:linear-gradient(135deg,#f093fb,#f5576c);color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px" onmouseenter="this.style.opacity=0.9" onmouseleave="this.style.opacity=1">📝 生成笔记</button>';
         html += '<span id="pl-gen-status" style="font-size:13px;color:#999"></span>';
         html += '</div>';
@@ -10185,6 +10186,65 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           if (status) status.innerHTML = '<span style="color:#cf1322">\u274c ' + (e.message || e) + '</span>';
         } finally {
           if (btn) { btn.disabled = false; btn.style.opacity = '1'; btn.innerHTML = '\ud83c\udfa8 \u751f\u6210 Nano Banana \u56fe\u7247'; }
+        }
+      }
+
+      // ─── HTML 渲染卡片图片（无AI，100%准确中文） ───
+      async function renderCardHTML(fullId) {
+        var card = allCards.find(function(c){ return c.full_id === fullId; });
+        if (!card) return;
+
+        // 确保 detail overlay 打开
+        var overlay = document.getElementById('pl-detail-overlay');
+        if (!overlay || overlay.style.display === 'none') showDetail(fullId);
+
+        var btn = document.getElementById('pl-gen-html-btn');
+        var status = document.getElementById('pl-gen-status');
+        var resultDiv = document.getElementById('pl-gen-result');
+        if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; btn.innerHTML = '\u23f3 HTML\u6e32\u67d3\u4e2d...'; }
+        if (status) status.textContent = '\u6b63\u5728\u7528 HTML \u6a21\u677f\u6e32\u67d3\u5361\u7247\u56fe\u7247...';
+
+        try {
+          // 从 card 数据中提取 subject/grade/semester
+          var parts = fullId.split('-');
+          var subjectMap = {'\u6570\u5b66':'数学','\u8bed\u6587':'语文','\u82f1\u8bed':'英语'};
+          var subject = '';
+          for (var key in subjectMap) { if (fullId.indexOf(key) >= 0) { subject = key; break; } }
+          if (!subject && parts.length > 0) subject = parts[0].replace(/_.+/, '');
+
+          var payload = {
+            card: card,
+            subject: subject || '数学',
+            grade: card.grade || '三年级',
+            semester: card.semester || '下册'
+          };
+
+          var resp = await fetch('/api/render-card-image', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload)
+          });
+          var data = await resp.json();
+
+          if (!data.ok) throw new Error(data.error || '渲染失败');
+
+          if (resultDiv) {
+            resultDiv.style.display = '';
+            resultDiv.innerHTML =
+              '<div style="padding:12px;text-align:center">' +
+              '<div style="font-size:13px;font-weight:600;color:#2ED573;margin-bottom:8px">\u2705 HTML\u6e32\u67d3\u56fe\u7247 (' + Math.round(data.size/1024) + 'KB) - \u65e0AI\u4e71\u7801</div>' +
+              '<img src="data:image/jpeg;base64,' + data.image + '" style="max-width:100%;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.1)">' +
+              '<div style="margin-top:8px">' +
+              '<a href="data:image/jpeg;base64,' + data.image + '" download="' + fullId + '.jpg" style="display:inline-block;background:#2ED573;color:#fff;padding:6px 16px;border-radius:8px;font-size:13px;text-decoration:none;cursor:pointer">\u2b07\ufe0f \u4e0b\u8f7d\u56fe\u7247</a> ' +
+              '<button onclick="PromptLib.renderCardHTML(\'' + fullId + '\')" style="background:#1B9CFC;color:#fff;border:none;padding:6px 16px;border-radius:8px;font-size:13px;cursor:pointer">\ud83d\udd04 \u91cd\u65b0\u6e32\u67d3</button>' +
+              '</div></div>';
+          }
+          if (status) status.innerHTML = '<span style="color:#2e7d32">\u2705 HTML\u6e32\u67d3\u6210\u529f!</span>';
+        } catch(e) {
+          console.error('[PromptLib] renderCardHTML error:', e);
+          if (status) status.innerHTML = '<span style="color:#cf1322">\u274c ' + (e.message || e) + '</span>';
+        } finally {
+          if (btn) { btn.disabled = false; btn.style.opacity = '1'; btn.innerHTML = '\ud83d\uddbc\ufe0f HTML\u6e32\u67d3\u56fe\u7247'; }
         }
       }
 
@@ -10427,7 +10487,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         }
       }
 
-      return { init, switchTab, filterPrompts, showDetail, generateImage, _goNote, generatePromptRecord };
+      return { init, switchTab, filterPrompts, showDetail, generateImage, renderCardHTML, _goNote, generatePromptRecord };
     })();
 
 
