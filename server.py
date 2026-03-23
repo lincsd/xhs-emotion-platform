@@ -3251,8 +3251,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
             req_body = json.dumps({
                 "contents": [{"parts": [{"text": prompt_text}]}],
-                "generationConfig": {"temperature": temperature, "maxOutputTokens": 4096,
-                                     "thinkingConfig": {"thinkingBudget": 2048}}
+                "generationConfig": {"temperature": temperature, "maxOutputTokens": 4096}
             }).encode('utf-8')
             req = urllib.request.Request(url, data=req_body, headers={"Content-Type": "application/json"}, method="POST")
             resp = _OPENER.open(req, timeout=60)
