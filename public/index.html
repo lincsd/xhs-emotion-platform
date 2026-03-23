@@ -1531,7 +1531,8 @@
             <label>密码</label>
             <input type="password" class="form-control" id="login-password" placeholder="请输入密码" autocomplete="current-password">
           </div>
-          <button class="btn btn-primary" onclick="doLogin()" id="btn-login">🔐 登 录</button>
+          <button class="btn btn-primary" onclick="try{doLogin()}catch(e){document.getElementById('login-error').textContent='错误:'+e.message;document.getElementById('login-error').style.display='block'}" id="btn-login">🔐 登 录</button>
+          <div id="login-conn-status" style="text-align:center;font-size:11px;color:#999;margin-top:8px;"></div>
         </div>
         <!-- 注册表单 -->
         <div id="register-form" style="display:none;">
@@ -3819,7 +3820,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260323f'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260323g'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -19731,6 +19732,10 @@ Style: ${stylePrompt}
       }
       el.textContent = msg;
       el.style.display = 'block';
+      el.style.padding = '10px';
+      el.style.background = '#fff2f0';
+      el.style.border = '1px solid #ffccc7';
+      el.style.borderRadius = '6px';
     }
 
     function isValidPhone(phone) {
@@ -20568,6 +20573,13 @@ Style: ${stylePrompt}
         const loggedIn = await checkAuth();
         if (!loggedIn) {
           showLoginPage();
+          // 显示连接状态
+          const connEl = document.getElementById('login-conn-status');
+          if (connEl) {
+            const backendType = (_activeBackend === CF_TUNNEL_BACKEND) ? '隧道直连' : 'Render云端';
+            connEl.textContent = '✅ 已连接 ' + backendType + ' | 版本 ' + PAGE_BUILD;
+            connEl.style.color = '#52c41a';
+          }
           return; // 等用户登录后再加载数据
         }
         showApp();
@@ -20576,6 +20588,8 @@ Style: ${stylePrompt}
         useLocalMode = false;
         showLoginPage();
         showLoginError('后端正在启动中（Render 免费版首次启动约需30秒），请稍后刷新重试');
+        const connEl = document.getElementById('login-conn-status');
+        if (connEl) { connEl.textContent = '⚠️ 服务器连接失败 | 版本 ' + PAGE_BUILD; connEl.style.color = '#ff4d4f'; }
         return;
       } else {
         // 纯本地模式，不需要登录
