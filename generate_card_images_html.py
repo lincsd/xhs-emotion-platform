@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-知识卡片 HTML 渲染器
-====================
-用 HTML/CSS 模板 + Selenium Chrome 截图生成卡片图片。
-解决 AI 图片模型中文乱码问题：文字由 HTML 精确渲染，保证 100% 准确。
+知识卡片 HTML 渲染器 v2 — 小红书精美卡片
+========================================
+用 HTML/CSS 模板 + Chrome headless 截图生成卡片图片。
+v2: 全新精美设计，海报级视觉效果，适合小红书/社交媒体发布。
 
 用法:
   python generate_card_images_html.py knowledge_cards/小学/数学_三下.json
@@ -14,71 +14,161 @@
 
 import json, os, sys, time, base64, tempfile, html as html_module
 
-# ─── Card type → color theme mapping ───
+# ─── Card type → color theme mapping (v2: richer palettes) ───
 CARD_TYPE_THEMES = {
     '方法卡': {
-        'gradient': 'linear-gradient(135deg, #FFD89B 0%, #FFA7A7 100%)',
-        'banner': '#FF9F43',
-        'accent': '#FF6B6B',
-        'icon': '📐',
+        'bg1': '#6C5CE7', 'bg2': '#a855f7',
+        'banner': '#7C3AED', 'bannerLight': 'rgba(124,58,237,0.12)',
+        'accent': '#8B5CF6', 'accent2': '#C084FC',
+        'cardBg': 'rgba(255,255,255,0.92)', 'textDark': '#1E1B4B',
+        'decoColor': 'rgba(139,92,246,0.12)', 'decoColor2': 'rgba(192,132,252,0.15)',
+        'icon': '📐', 'tagBg': '#EDE9FE', 'tagColor': '#6D28D9',
     },
     '概念卡': {
-        'gradient': 'linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%)',
-        'banner': '#54A0FF',
-        'accent': '#2E86DE',
-        'icon': '💡',
+        'bg1': '#0EA5E9', 'bg2': '#38BDF8',
+        'banner': '#0284C7', 'bannerLight': 'rgba(2,132,199,0.12)',
+        'accent': '#0EA5E9', 'accent2': '#7DD3FC',
+        'cardBg': 'rgba(255,255,255,0.92)', 'textDark': '#0C4A6E',
+        'decoColor': 'rgba(14,165,233,0.12)', 'decoColor2': 'rgba(125,211,252,0.15)',
+        'icon': '💡', 'tagBg': '#E0F2FE', 'tagColor': '#0369A1',
     },
     '辨析卡': {
-        'gradient': 'linear-gradient(135deg, #E8D5F5 0%, #D9AAF5 100%)',
-        'banner': '#A55EEA',
-        'accent': '#8854D0',
-        'icon': '🔍',
+        'bg1': '#9333EA', 'bg2': '#C084FC',
+        'banner': '#7E22CE', 'bannerLight': 'rgba(126,34,206,0.12)',
+        'accent': '#A855F7', 'accent2': '#D8B4FE',
+        'cardBg': 'rgba(255,255,255,0.92)', 'textDark': '#3B0764',
+        'decoColor': 'rgba(168,85,247,0.12)', 'decoColor2': 'rgba(216,180,254,0.15)',
+        'icon': '🔍', 'tagBg': '#F3E8FF', 'tagColor': '#7E22CE',
     },
     '公式卡': {
-        'gradient': 'linear-gradient(135deg, #C2E9FB 0%, #A1C4FD 100%)',
-        'banner': '#2E86DE',
-        'accent': '#54A0FF',
-        'icon': '📏',
+        'bg1': '#2563EB', 'bg2': '#60A5FA',
+        'banner': '#1D4ED8', 'bannerLight': 'rgba(29,78,216,0.12)',
+        'accent': '#3B82F6', 'accent2': '#93C5FD',
+        'cardBg': 'rgba(255,255,255,0.92)', 'textDark': '#1E3A5F',
+        'decoColor': 'rgba(59,130,246,0.12)', 'decoColor2': 'rgba(147,197,253,0.15)',
+        'icon': '📏', 'tagBg': '#DBEAFE', 'tagColor': '#1D4ED8',
     },
     '陷阱卡': {
-        'gradient': 'linear-gradient(135deg, #FFA7A7 0%, #FF6B6B 100%)',
-        'banner': '#FF4757',
-        'accent': '#FF6348',
-        'icon': '⚠️',
+        'bg1': '#DC2626', 'bg2': '#F87171',
+        'banner': '#B91C1C', 'bannerLight': 'rgba(185,28,28,0.12)',
+        'accent': '#EF4444', 'accent2': '#FCA5A5',
+        'cardBg': 'rgba(255,255,255,0.92)', 'textDark': '#450A0A',
+        'decoColor': 'rgba(239,68,68,0.12)', 'decoColor2': 'rgba(252,165,165,0.15)',
+        'icon': '⚠️', 'tagBg': '#FEE2E2', 'tagColor': '#B91C1C',
     },
     '速算卡': {
-        'gradient': 'linear-gradient(135deg, #FFECD2 0%, #FCB69F 100%)',
-        'banner': '#FF9F43',
-        'accent': '#EE5A24',
-        'icon': '⚡',
+        'bg1': '#EA580C', 'bg2': '#FB923C',
+        'banner': '#C2410C', 'bannerLight': 'rgba(194,65,12,0.12)',
+        'accent': '#F97316', 'accent2': '#FDBA74',
+        'cardBg': 'rgba(255,255,255,0.92)', 'textDark': '#431407',
+        'decoColor': 'rgba(249,115,22,0.12)', 'decoColor2': 'rgba(253,186,116,0.15)',
+        'icon': '⚡', 'tagBg': '#FFEDD5', 'tagColor': '#C2410C',
     },
     '挑战卡': {
-        'gradient': 'linear-gradient(135deg, #FFD89B 0%, #FF9A9E 100%)',
-        'banner': '#FF6348',
-        'accent': '#FF4757',
-        'icon': '🏆',
+        'bg1': '#E11D48', 'bg2': '#FB7185',
+        'banner': '#BE123C', 'bannerLight': 'rgba(190,18,60,0.12)',
+        'accent': '#F43F5E', 'accent2': '#FDA4AF',
+        'cardBg': 'rgba(255,255,255,0.92)', 'textDark': '#4C0519',
+        'decoColor': 'rgba(244,63,94,0.12)', 'decoColor2': 'rgba(253,164,175,0.15)',
+        'icon': '🏆', 'tagBg': '#FFE4E6', 'tagColor': '#BE123C',
     },
     '生活卡': {
-        'gradient': 'linear-gradient(135deg, #D4FC79 0%, #96E6A1 100%)',
-        'banner': '#5ECE7B',
-        'accent': '#2ED573',
-        'icon': '🏠',
+        'bg1': '#059669', 'bg2': '#34D399',
+        'banner': '#047857', 'bannerLight': 'rgba(4,120,87,0.12)',
+        'accent': '#10B981', 'accent2': '#6EE7B7',
+        'cardBg': 'rgba(255,255,255,0.92)', 'textDark': '#022C22',
+        'decoColor': 'rgba(16,185,129,0.12)', 'decoColor2': 'rgba(110,231,183,0.15)',
+        'icon': '🏠', 'tagBg': '#D1FAE5', 'tagColor': '#047857',
     },
     '对战卡': {
-        'gradient': 'linear-gradient(135deg, #A1C4FD 0%, #FFD89B 100%)',
-        'banner': '#54A0FF',
-        'accent': '#FF9F43',
-        'icon': '⚔️',
+        'bg1': '#7C3AED', 'bg2': '#F59E0B',
+        'banner': '#6D28D9', 'bannerLight': 'rgba(109,40,217,0.12)',
+        'accent': '#8B5CF6', 'accent2': '#FBBF24',
+        'cardBg': 'rgba(255,255,255,0.92)', 'textDark': '#1C1917',
+        'decoColor': 'rgba(139,92,246,0.12)', 'decoColor2': 'rgba(251,191,36,0.15)',
+        'icon': '⚔️', 'tagBg': '#EDE9FE', 'tagColor': '#6D28D9',
     },
     '思维卡': {
-        'gradient': 'linear-gradient(135deg, #E8D5F5 0%, #C2E9FB 100%)',
-        'banner': '#5F27CD',
-        'accent': '#341F97',
-        'icon': '🧠',
+        'bg1': '#4F46E5', 'bg2': '#818CF8',
+        'banner': '#4338CA', 'bannerLight': 'rgba(67,56,202,0.12)',
+        'accent': '#6366F1', 'accent2': '#A5B4FC',
+        'cardBg': 'rgba(255,255,255,0.92)', 'textDark': '#1E1B4B',
+        'decoColor': 'rgba(99,102,241,0.12)', 'decoColor2': 'rgba(165,180,252,0.15)',
+        'icon': '🧠', 'tagBg': '#E0E7FF', 'tagColor': '#4338CA',
+    },
+    # 语文/英语额外卡型
+    '基础卡': {
+        'bg1': '#0891B2', 'bg2': '#22D3EE',
+        'banner': '#0E7490', 'bannerLight': 'rgba(14,116,144,0.12)',
+        'accent': '#06B6D4', 'accent2': '#67E8F9',
+        'cardBg': 'rgba(255,255,255,0.92)', 'textDark': '#083344',
+        'decoColor': 'rgba(6,182,212,0.12)', 'decoColor2': 'rgba(103,232,249,0.15)',
+        'icon': '📚', 'tagBg': '#CFFAFE', 'tagColor': '#0E7490',
+    },
+    '阅读卡': {
+        'bg1': '#7C3AED', 'bg2': '#A78BFA',
+        'banner': '#6D28D9', 'bannerLight': 'rgba(109,40,217,0.12)',
+        'accent': '#8B5CF6', 'accent2': '#C4B5FD',
+        'cardBg': 'rgba(255,255,255,0.92)', 'textDark': '#2E1065',
+        'decoColor': 'rgba(139,92,246,0.12)', 'decoColor2': 'rgba(196,181,253,0.15)',
+        'icon': '📖', 'tagBg': '#EDE9FE', 'tagColor': '#6D28D9',
+    },
+    '写作卡': {
+        'bg1': '#DB2777', 'bg2': '#F472B6',
+        'banner': '#BE185D', 'bannerLight': 'rgba(190,24,93,0.12)',
+        'accent': '#EC4899', 'accent2': '#F9A8D4',
+        'cardBg': 'rgba(255,255,255,0.92)', 'textDark': '#500724',
+        'decoColor': 'rgba(236,72,153,0.12)', 'decoColor2': 'rgba(249,168,212,0.15)',
+        'icon': '✍️', 'tagBg': '#FCE7F3', 'tagColor': '#BE185D',
+    },
+    '词汇卡': {
+        'bg1': '#0D9488', 'bg2': '#2DD4BF',
+        'banner': '#0F766E', 'bannerLight': 'rgba(15,118,110,0.12)',
+        'accent': '#14B8A6', 'accent2': '#5EEAD4',
+        'cardBg': 'rgba(255,255,255,0.92)', 'textDark': '#042F2E',
+        'decoColor': 'rgba(20,184,166,0.12)', 'decoColor2': 'rgba(94,234,212,0.15)',
+        'icon': '🔤', 'tagBg': '#CCFBF1', 'tagColor': '#0F766E',
+    },
+    '语法卡': {
+        'bg1': '#4F46E5', 'bg2': '#818CF8',
+        'banner': '#4338CA', 'bannerLight': 'rgba(67,56,202,0.12)',
+        'accent': '#6366F1', 'accent2': '#A5B4FC',
+        'cardBg': 'rgba(255,255,255,0.92)', 'textDark': '#1E1B4B',
+        'decoColor': 'rgba(99,102,241,0.12)', 'decoColor2': 'rgba(165,180,252,0.15)',
+        'icon': '📝', 'tagBg': '#E0E7FF', 'tagColor': '#4338CA',
+    },
+    '口语卡': {
+        'bg1': '#D97706', 'bg2': '#FBBF24',
+        'banner': '#B45309', 'bannerLight': 'rgba(180,83,9,0.12)',
+        'accent': '#F59E0B', 'accent2': '#FCD34D',
+        'cardBg': 'rgba(255,255,255,0.92)', 'textDark': '#451A03',
+        'decoColor': 'rgba(245,158,11,0.12)', 'decoColor2': 'rgba(252,211,77,0.15)',
+        'icon': '🗣️', 'tagBg': '#FEF3C7', 'tagColor': '#B45309',
     },
 }
 
 DEFAULT_THEME = CARD_TYPE_THEMES['方法卡']
+
+# ─── Fuzzy card type → theme mapping ───
+_CARD_TYPE_ALIAS = {
+    '易错字卡': '陷阱卡', '写作方法卡': '写作卡', '阅读技巧卡': '阅读卡',
+    '古诗理解卡': '阅读卡', '词语辨析卡': '辨析卡', '易混词卡': '辨析卡',
+    '多音字卡': '辨析卡', '修辞手法卡': '写作卡', '成语卡': '词汇卡',
+    '拼音卡': '基础卡', '自然拼读卡': '基础卡', '标点符号卡': '基础卡',
+    '句型卡': '语法卡', '情景对话卡': '口语卡', '不规则动词卡': '语法卡',
+}
+
+def _get_theme(card_type):
+    """智能查找卡片类型对应的配色主题"""
+    if card_type in CARD_TYPE_THEMES:
+        return CARD_TYPE_THEMES[card_type]
+    if card_type in _CARD_TYPE_ALIAS:
+        return CARD_TYPE_THEMES.get(_CARD_TYPE_ALIAS[card_type], DEFAULT_THEME)
+    # Fuzzy: try suffix match (e.g. '写作方法卡' contains '方法卡')
+    for key in CARD_TYPE_THEMES:
+        if key in card_type:
+            return CARD_TYPE_THEMES[key]
+    return DEFAULT_THEME
 
 def _esc(text):
     """HTML escape"""
@@ -115,9 +205,9 @@ def _fmt_vertical_calc(card):
     return html
 
 def generate_card_html(card, subject, grade, semester, theme=None):
-    """生成单张知识卡片的完整 HTML"""
+    """生成单张知识卡片的完整 HTML — v2 小红书精美海报级设计"""
     card_type = card.get('type', '方法卡')
-    t = theme or CARD_TYPE_THEMES.get(card_type, DEFAULT_THEME)
+    t = theme or _get_theme(card_type)
     
     title = _esc(card.get('title', ''))
     definition = _esc(card.get('definition', ''))
@@ -128,8 +218,13 @@ def generate_card_html(card, subject, grade, semester, theme=None):
     
     # Core points
     core_html = ''
-    for i, p in enumerate(card.get('core_points', [])[:4]):
-        core_html += f'<div class="core-point"><span class="point-num">{i+1}</span> {_esc(p)}</div>\n'
+    step_colors = ['#10B981', '#F59E0B', '#3B82F6', '#EF4444', '#8B5CF6', '#EC4899']
+    for i, p in enumerate(card.get('core_points', [])[:5]):
+        c = step_colors[i % len(step_colors)]
+        core_html += f'''<div class="core-point">
+            <div class="point-marker" style="background: {c};">{i+1}</div>
+            <div class="point-text">{_esc(p)}</div>
+        </div>\n'''
     
     # Example
     example_html = ''
@@ -139,19 +234,34 @@ def generate_card_html(card, subject, grade, semester, theme=None):
         a = _esc(ex.get('answer', ''))
         steps_html = ''
         for i, s in enumerate(ex.get('steps', [])):
-            colors = ['#2ED573', '#FF9F43', '#54A0FF', '#A55EEA']
-            c = colors[i % len(colors)]
-            steps_html += f'''<div class="step">
-                <span class="step-badge" style="background:{c};">{i+1}</span>
-                <span class="step-text">{_esc(s)}</span>
+            c = step_colors[i % len(step_colors)]
+            is_last = (i == len(ex.get('steps', [])) - 1)
+            line_class = ' last' if is_last else ''
+            steps_html += f'''<div class="tl-step{line_class}">
+                <div class="tl-dot" style="background: {c}; box-shadow: 0 0 0 4px {c}33;"></div>
+                <div class="tl-line"></div>
+                <div class="tl-content">
+                    <span class="tl-num" style="color: {c};">Step {i+1}</span>
+                    <span class="tl-text">{_esc(s)}</span>
+                </div>
             </div>\n'''
         
         example_html = f'''
-        <div class="example-box">
-            <div class="example-question">📝 {q}</div>
-            <div class="steps-container">{steps_html}</div>
-            <div class="example-answer">✅ 答案：<strong>{a}</strong></div>
-        </div>'''
+    <div class="glass-card">
+        <div class="section-head">
+            <span class="section-icon">📝</span>
+            <span class="section-title">经典例题</span>
+        </div>
+        <div class="question-box">
+            <div class="q-label">题目</div>
+            <div class="q-text">{q}</div>
+        </div>
+        <div class="timeline">{steps_html}</div>
+        <div class="answer-reveal">
+            <div class="answer-label">✅ 答案</div>
+            <div class="answer-text">{a}</div>
+        </div>
+    </div>'''
     
     # Mistakes (正误对比)
     mistakes_html = ''
@@ -161,19 +271,48 @@ def generate_card_html(card, subject, grade, semester, theme=None):
         wrong = _esc(m.get('wrong', '')).replace('\\n', '<br>')
         correct = _esc(m.get('correct', '')).replace('\\n', '<br>')
         mistakes_html = f'''
-        <div class="mistakes-compare">
-            <div class="mistake-col wrong-col">
-                <div class="mistake-header">❌ 常见错误</div>
-                <div class="mistake-body">{wrong}</div>
-            </div>
-            <div class="mistake-col correct-col">
-                <div class="mistake-header">✅ 正确做法</div>
-                <div class="mistake-body">{correct}</div>
-            </div>
-        </div>'''
+    <div class="compare-row">
+        <div class="compare-card wrong">
+            <div class="compare-badge wrong-badge">✗</div>
+            <div class="compare-label">常见错误</div>
+            <div class="compare-body">{wrong}</div>
+        </div>
+        <div class="compare-vs">VS</div>
+        <div class="compare-card correct">
+            <div class="compare-badge correct-badge">✓</div>
+            <div class="compare-label">正确做法</div>
+            <div class="compare-body">{correct}</div>
+        </div>
+    </div>'''
     
     # Difficulty stars
-    stars = '⭐' * difficulty + '☆' * (5 - difficulty)
+    stars_html = ''
+    for i in range(5):
+        if i < difficulty:
+            stars_html += f'<span class="star filled">★</span>'
+        else:
+            stars_html += f'<span class="star empty">★</span>'
+    
+    # Decorative SVG shapes (inline, no external deps)
+    deco_svg = f'''
+    <svg class="deco-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1440">
+        <!-- Dot pattern -->
+        <defs>
+            <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                <circle cx="4" cy="4" r="2" fill="{t['decoColor']}"/>
+            </pattern>
+        </defs>
+        <rect width="1080" height="1440" fill="url(#dots)" opacity="0.6"/>
+        <!-- Decorative circles -->
+        <circle cx="950" cy="120" r="180" fill="{t['decoColor2']}" opacity="0.5"/>
+        <circle cx="100" cy="350" r="120" fill="{t['decoColor']}" opacity="0.4"/>
+        <circle cx="980" cy="800" r="100" fill="{t['decoColor2']}" opacity="0.35"/>
+        <circle cx="60" cy="1100" r="80" fill="{t['decoColor']}" opacity="0.3"/>
+        <circle cx="900" cy="1350" r="140" fill="{t['decoColor2']}" opacity="0.25"/>
+        <!-- Wavy line decoration -->
+        <path d="M0,400 Q270,370 540,400 T1080,400" stroke="{t['decoColor2']}" stroke-width="2" fill="none" opacity="0.4"/>
+        <path d="M0,1050 Q270,1020 540,1050 T1080,1050" stroke="{t['decoColor']}" stroke-width="2" fill="none" opacity="0.3"/>
+    </svg>'''
     
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
@@ -187,282 +326,507 @@ def generate_card_html(card, subject, grade, semester, theme=None):
 body {{
     width: 1080px;
     min-height: 1440px;
-    background: {t['gradient']};
+    background: linear-gradient(165deg, {t['bg1']} 0%, {t['bg2']} 50%, {t['bg1']}dd 100%);
     font-family: 'Noto Sans SC', 'Microsoft YaHei', 'PingFang SC', sans-serif;
     padding: 0;
     overflow: hidden;
+    -webkit-font-smoothing: antialiased;
 }}
 
-.card {{
+/* ── Canvas ── */
+.canvas {{
     width: 1080px;
     min-height: 1440px;
-    padding: 40px;
+    padding: 48px 44px;
     position: relative;
 }}
 
-/* ── Banner ── */
-.banner {{
-    background: {t['banner']};
-    border-radius: 24px;
-    padding: 32px 40px;
-    margin-bottom: 28px;
+.deco-svg {{
+    position: absolute;
+    top: 0; left: 0;
+    width: 1080px;
+    height: 1440px;
+    pointer-events: none;
+    z-index: 0;
+}}
+
+/* ── Hero Header ── */
+.hero {{
     position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 32px;
+    padding: 44px 48px 40px;
+    margin-bottom: 28px;
     overflow: hidden;
 }}
-.banner::after {{
+.hero::before {{
     content: '';
     position: absolute;
-    top: -30px; right: -30px;
-    width: 120px; height: 120px;
-    background: rgba(255,255,255,0.1);
+    top: -60px; right: -40px;
+    width: 220px; height: 220px;
+    background: rgba(255,255,255,0.08);
     border-radius: 50%;
 }}
-.banner-icon {{
-    font-size: 48px;
+.hero::after {{
+    content: '';
     position: absolute;
-    top: 20px; right: 30px;
-    opacity: 0.3;
+    bottom: -30px; left: 60px;
+    width: 100px; height: 100px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
 }}
-.banner-tag {{
+.hero-top {{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+}}
+.type-badge {{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.95);
+    color: {t['banner']};
+    font-size: 24px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 28px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}}
+.type-badge .badge-icon {{
+    font-size: 28px;
+}}
+.subject-tag {{
     display: inline-block;
     background: rgba(255,255,255,0.25);
     color: white;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 500;
-    padding: 6px 18px;
+    padding: 8px 20px;
     border-radius: 20px;
-    margin-bottom: 12px;
+    letter-spacing: 1px;
 }}
-.banner-title {{
+.hero-title {{
     color: white;
-    font-size: 52px;
+    font-size: 56px;
     font-weight: 900;
-    letter-spacing: 2px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    letter-spacing: 3px;
+    line-height: 1.25;
+    text-shadow: 0 3px 12px rgba(0,0,0,0.2);
+    margin-bottom: 16px;
+    position: relative;
 }}
-.banner-sub {{
-    color: rgba(255,255,255,0.85);
+.hero-meta {{
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+}}
+.hero-id {{
+    color: rgba(255,255,255,0.7);
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}}
+.hero-stars {{
+    display: flex;
+    gap: 4px;
+}}
+.star {{
     font-size: 22px;
-    font-weight: 300;
-    margin-top: 8px;
+}}
+.star.filled {{
+    color: #FBBF24;
+    text-shadow: 0 1px 4px rgba(251,191,36,0.4);
+}}
+.star.empty {{
+    color: rgba(255,255,255,0.3);
+}}
+
+/* ── Glass Card (common) ── */
+.glass-card {{
+    position: relative;
+    z-index: 1;
+    background: {t['cardBg']};
+    border: 1px solid rgba(255,255,255,0.6);
+    border-radius: 28px;
+    padding: 32px 36px;
+    margin-bottom: 24px;
+    box-shadow:
+        0 8px 32px rgba(0,0,0,0.08),
+        0 2px 8px rgba(0,0,0,0.04),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+}}
+
+.section-head {{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid {t['bannerLight']};
+}}
+.section-icon {{
+    font-size: 32px;
+}}
+.section-title {{
+    font-size: 28px;
+    font-weight: 800;
+    color: {t['banner']};
+    letter-spacing: 1px;
 }}
 
 /* ── Definition ── */
-.definition-box {{
-    background: white;
-    border-radius: 20px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    border-left: 5px solid {t['accent']};
-}}
-.definition-label {{
-    color: {t['accent']};
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 8px;
-}}
-.definition-text {{
-    color: #333;
+.def-text {{
+    color: {t['textDark']};
     font-size: 28px;
     font-weight: 400;
-    line-height: 1.6;
+    line-height: 1.7;
+    padding: 4px 0;
+}}
+.def-highlight {{
+    display: inline;
+    background: linear-gradient(transparent 60%, {t['bannerLight']} 60%);
 }}
 
 /* ── Core Points ── */
-.core-points {{
-    background: white;
-    border-radius: 20px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-}}
-.core-points-title {{
-    font-size: 26px;
-    font-weight: 700;
-    color: {t['banner']};
-    margin-bottom: 16px;
-}}
 .core-point {{
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 14px;
-    font-size: 24px;
-    color: #444;
-    line-height: 1.5;
+    gap: 16px;
+    margin-bottom: 18px;
+    padding: 12px 16px;
+    background: rgba(0,0,0,0.02);
+    border-radius: 16px;
+    transition: background 0.2s;
 }}
-.point-num {{
-    display: inline-flex;
+.point-marker {{
+    display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 32px;
-    height: 32px;
-    background: {t['banner']};
+    min-width: 36px;
+    height: 36px;
     color: white;
-    border-radius: 50%;
+    border-radius: 12px;
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 800;
     flex-shrink: 0;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}}
+.point-text {{
+    color: {t['textDark']};
+    font-size: 24px;
+    line-height: 1.6;
+    flex: 1;
+    padding-top: 4px;
 }}
 
-/* ── Example ── */
-.example-box {{
-    background: white;
+/* ── Example: Question ── */
+.question-box {{
+    background: {t['bannerLight']};
     border-radius: 20px;
-    padding: 28px 32px;
+    padding: 24px 28px;
     margin-bottom: 24px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border-left: 5px solid {t['accent']};
 }}
-.example-question {{
-    font-size: 32px;
-    font-weight: 700;
-    color: {t['accent']};
-    margin-bottom: 20px;
-    padding: 16px 20px;
-    background: linear-gradient(135deg, rgba(255,107,107,0.08), rgba(255,159,67,0.08));
-    border-radius: 14px;
-}}
-.steps-container {{
-    margin: 16px 0;
-}}
-.step {{
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    margin-bottom: 14px;
-    font-size: 23px;
-    color: #444;
-    line-height: 1.55;
-}}
-.step-badge {{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 34px;
-    height: 34px;
-    color: white;
-    border-radius: 10px;
+.q-label {{
     font-size: 18px;
     font-weight: 700;
-    flex-shrink: 0;
+    color: {t['accent']};
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
 }}
-.step-text {{
-    flex: 1;
+.q-text {{
+    font-size: 28px;
+    font-weight: 600;
+    color: {t['textDark']};
+    line-height: 1.6;
 }}
-.example-answer {{
-    font-size: 30px;
-    color: #FF4757;
+
+/* ── Example: Timeline Steps ── */
+.timeline {{
+    position: relative;
+    margin: 20px 0 24px 18px;
+    padding-left: 28px;
+}}
+.tl-step {{
+    position: relative;
+    padding-bottom: 20px;
+    display: flex;
+    align-items: flex-start;
+}}
+.tl-step.last {{
+    padding-bottom: 0;
+}}
+.tl-dot {{
+    position: absolute;
+    left: -34px;
+    top: 6px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    z-index: 2;
+}}
+.tl-line {{
+    position: absolute;
+    left: -27px;
+    top: 22px;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, {t['accent2']}88, {t['accent2']}22);
+}}
+.tl-step.last .tl-line {{
+    display: none;
+}}
+.tl-content {{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}}
+.tl-num {{
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}}
+.tl-text {{
+    font-size: 24px;
+    color: {t['textDark']};
+    line-height: 1.55;
+}}
+
+/* ── Answer Reveal ── */
+.answer-reveal {{
+    background: linear-gradient(135deg, {t['banner']}12, {t['accent']}18);
+    border: 2px solid {t['accent']}33;
+    border-radius: 20px;
+    padding: 22px 28px;
+    margin-top: 8px;
+}}
+.answer-label {{
+    font-size: 20px;
     font-weight: 700;
-    padding: 14px 20px;
-    background: #FFF5F5;
-    border-radius: 14px;
-    margin-top: 16px;
+    color: {t['accent']};
+    margin-bottom: 6px;
+}}
+.answer-text {{
+    font-size: 34px;
+    font-weight: 900;
+    color: {t['banner']};
+    line-height: 1.4;
 }}
 
 /* ── Mistakes Compare ── */
-.mistakes-compare {{
+.compare-row {{
+    position: relative;
+    z-index: 1;
     display: flex;
-    gap: 16px;
+    gap: 20px;
     margin-bottom: 24px;
+    align-items: stretch;
 }}
-.mistake-col {{
+.compare-card {{
     flex: 1;
-    border-radius: 18px;
-    padding: 22px 24px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    border-radius: 24px;
+    padding: 28px 24px 24px;
+    position: relative;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.06);
 }}
-.wrong-col {{
-    background: #FFF5F5;
-    border: 2px solid #FFD5D5;
+.compare-card.wrong {{
+    background: linear-gradient(165deg, #FFF1F2, #FFE4E6);
+    border: 2px solid #FECDD3;
 }}
-.correct-col {{
-    background: #F0FFF4;
-    border: 2px solid #C6F6D5;
+.compare-card.correct {{
+    background: linear-gradient(165deg, #ECFDF5, #D1FAE5);
+    border: 2px solid #A7F3D0;
 }}
-.mistake-header {{
-    font-size: 24px;
-    font-weight: 700;
+.compare-badge {{
+    position: absolute;
+    top: -14px;
+    left: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 900;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}}
+.wrong-badge {{ background: #EF4444; }}
+.correct-badge {{ background: #10B981; }}
+.compare-label {{
+    font-size: 22px;
+    font-weight: 800;
     margin-bottom: 12px;
+    margin-top: 8px;
 }}
-.wrong-col .mistake-header {{ color: #FF4757; }}
-.correct-col .mistake-header {{ color: #2ED573; }}
-.mistake-body {{
-    font-size: 20px;
-    color: #555;
-    line-height: 1.6;
+.compare-card.wrong .compare-label {{ color: #DC2626; }}
+.compare-card.correct .compare-label {{ color: #059669; }}
+.compare-body {{
+    font-size: 21px;
+    color: #374151;
+    line-height: 1.65;
     white-space: pre-line;
-    font-family: 'Consolas', 'Noto Sans SC', monospace;
+}}
+.compare-vs {{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.9);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    min-width: 40px;
 }}
 
 /* ── Memory Tip ── */
-.memory-tip {{
-    background: linear-gradient(135deg, #FFF9C4, #FFE082);
-    border-radius: 20px;
-    padding: 24px 32px;
+.tip-card {{
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, #FFFBEB, #FEF3C7, #FDE68A);
+    border: 2px solid #FCD34D;
+    border-radius: 28px;
+    padding: 32px 36px;
     margin-bottom: 24px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    box-shadow:
+        0 8px 32px rgba(251,191,36,0.15),
+        0 2px 8px rgba(0,0,0,0.04);
+    overflow: hidden;
+}}
+.tip-card::before {{
+    content: '💡';
+    position: absolute;
+    top: -8px;
+    right: 28px;
+    font-size: 64px;
+    opacity: 0.15;
+}}
+.tip-header {{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}}
+.tip-icon {{
+    font-size: 28px;
+}}
+.tip-label {{
+    font-size: 22px;
+    font-weight: 800;
+    color: #B45309;
+    letter-spacing: 1px;
+}}
+.tip-text {{
+    font-size: 30px;
+    font-weight: 700;
+    color: #78350F;
+    line-height: 1.55;
     position: relative;
 }}
-.memory-tip::before {{
-    content: '💡';
-    font-size: 36px;
+.tip-text::before {{
+    content: '"';
+    font-size: 60px;
+    color: #D97706;
+    opacity: 0.3;
     position: absolute;
-    top: -12px;
-    left: 20px;
-}}
-.memory-tip-label {{
-    font-size: 20px;
-    font-weight: 700;
-    color: #F59E0B;
-    margin-bottom: 8px;
-    padding-left: 8px;
-}}
-.memory-tip-text {{
-    font-size: 28px;
-    font-weight: 700;
-    color: #92400E;
-    line-height: 1.5;
+    left: -8px;
+    top: -16px;
+    font-family: Georgia, serif;
 }}
 
 /* ── Footer ── */
-.footer {{
+.card-footer {{
+    position: relative;
+    z-index: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 8px;
-    color: rgba(0,0,0,0.35);
+    padding: 20px 8px 4px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    margin-top: 4px;
+}}
+.footer-brand {{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.8);
+    font-size: 20px;
+    font-weight: 500;
+}}
+.footer-logo {{
+    width: 32px;
+    height: 32px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 18px;
 }}
-.footer-right {{
+.footer-cta {{
     display: flex;
-    gap: 16px;
     align-items: center;
+    gap: 16px;
 }}
-.difficulty {{
-    font-size: 16px;
+.footer-cta span {{
+    color: rgba(255,255,255,0.65);
+    font-size: 18px;
+}}
+.footer-save {{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 20px;
 }}
 </style>
 </head>
 <body>
-<div class="card">
-    <!-- Banner -->
-    <div class="banner">
-        <span class="banner-icon">{t['icon']}</span>
-        <div class="banner-tag">{_esc(card_type)} · {_esc(subject)}{_esc(grade)}</div>
-        <div class="banner-title">{title}</div>
-        <div class="banner-sub">{card_id}</div>
+<div class="canvas">
+    <!-- Decorative SVG overlay -->
+    {deco_svg}
+
+    <!-- Hero Header -->
+    <div class="hero">
+        <div class="hero-top">
+            <div class="type-badge">
+                <span class="badge-icon">{t['icon']}</span>
+                <span>{_esc(card_type)}</span>
+            </div>
+            <div class="subject-tag">{_esc(subject)} · {_esc(grade)}{_esc(semester)}</div>
+        </div>
+        <div class="hero-title">{title}</div>
+        <div class="hero-meta">
+            <span class="hero-id">{card_id}</span>
+            <div class="hero-stars">{stars_html}</div>
+        </div>
     </div>
     
     <!-- Definition -->
-    <div class="definition-box">
-        <div class="definition-label">📖 知识要点</div>
-        <div class="definition-text">{definition}</div>
+    <div class="glass-card">
+        <div class="section-head">
+            <span class="section-icon">📖</span>
+            <span class="section-title">知识要点</span>
+        </div>
+        <div class="def-text">{definition}</div>
     </div>
     
     <!-- Core Points -->
-    <div class="core-points">
-        <div class="core-points-title">🎯 核心要点</div>
+    <div class="glass-card">
+        <div class="section-head">
+            <span class="section-icon">🎯</span>
+            <span class="section-title">核心要点</span>
+        </div>
         {core_html}
     </div>
     
@@ -473,16 +837,23 @@ body {{
     {mistakes_html}
     
     <!-- Memory Tip -->
-    <div class="memory-tip">
-        <div class="memory-tip-label">记忆口诀</div>
-        <div class="memory-tip-text">{memory_tip}</div>
+    <div class="tip-card">
+        <div class="tip-header">
+            <span class="tip-icon">💡</span>
+            <span class="tip-label">记忆口诀</span>
+        </div>
+        <div class="tip-text">{memory_tip}</div>
     </div>
     
     <!-- Footer -->
-    <div class="footer">
-        <span>小红薯学习平台</span>
-        <div class="footer-right">
-            <span class="difficulty">难度 {stars}</span>
+    <div class="card-footer">
+        <div class="footer-brand">
+            <div class="footer-logo">📚</div>
+            <span>小红薯学习平台</span>
+        </div>
+        <div class="footer-cta">
+            <span>觉得有用？</span>
+            <div class="footer-save">❤️ 收藏</div>
         </div>
     </div>
 </div>
@@ -524,6 +895,8 @@ def render_card_to_image(html_content, output_path, width=1080):
     png_path = tmp.name.replace('.html', '.png')
     
     try:
+        # Use 2x scale factor for sharper text rendering (retina quality)
+        scale = 2
         cmd = [
             chrome,
             '--headless=new',
@@ -531,8 +904,8 @@ def render_card_to_image(html_content, output_path, width=1080):
             '--disable-gpu',
             '--disable-dev-shm-usage',
             '--hide-scrollbars',
-            f'--window-size={width},2400',
-            '--force-device-scale-factor=1',
+            f'--window-size={width},{width * 3}',
+            f'--force-device-scale-factor={scale}',
             f'--screenshot={png_path}',
             f'file:///{tmp.name}',
         ]
@@ -542,20 +915,24 @@ def render_card_to_image(html_content, output_path, width=1080):
         if not os.path.exists(png_path):
             raise RuntimeError(f'截图文件未生成. stderr={result.stderr[:500]}')
         
-        # Convert PNG→JPG, crop whitespace
+        # Convert PNG→JPG, crop whitespace, resize back from 2x to 1x for final output
         img = Image.open(png_path)
         img = img.convert('RGB')
         
-        # Auto-crop bottom whitespace using PIL getbbox on inverted image
+        # Auto-crop bottom whitespace using PIL getbbox
         from PIL import ImageChops
-        bg = Image.new('RGB', img.size, (255, 255, 255))
+        # Use the actual background color (not white) for cropping
+        # Sample the bottom-right pixel as background reference
+        bg_color = img.getpixel((img.width - 1, img.height - 1))
+        bg = Image.new('RGB', img.size, bg_color)
         diff = ImageChops.difference(img, bg)
         bbox = diff.getbbox()  # (left, top, right, bottom)
         if bbox:
-            bottom = min(bbox[3] + 20, img.height)  # 20px padding
-            img = img.crop((0, 0, width, bottom))
+            bottom = min(bbox[3] + 40, img.height)  # padding
+            img = img.crop((0, 0, width * scale, bottom))
         
-        img.save(output_path, 'JPEG', quality=92, optimize=True)
+        # Output at full 2x resolution (2160px wide) for crisp social media images
+        img.save(output_path, 'JPEG', quality=93, optimize=True)
         return os.path.getsize(output_path)
     finally:
         for f in [tmp.name, png_path]:
