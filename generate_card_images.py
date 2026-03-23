@@ -65,6 +65,90 @@ def gemini_call(model, contents, api_key, gen_config=None, retries=3):
                 time.sleep(3 * (attempt + 1))
     return None
 
+# ─── Card-Type Visual Strategy Rules ───
+CARD_TYPE_VISUAL_RULES = {
+    '方法卡': {
+        'solve_strategy': """运算方法类（含"笔算""竖式""列式"）：
+   - ✅ 必须画出简化竖式！竖式是核心教学内容，不能省略
+   - 竖式用彩色分层：第一层积(绿色)、第二层积(橙色)、最终和(红色大字)
+   - 用色块+箭头标注关键步骤（如"错位"用虚线框高亮）
+   - 竖式旁边放正误对比（✓正确对齐 vs ✗错误对齐）
+   其他方法类（口算/估算/简便计算）：
+   - 把数拆开→用色块区分→得到答案
+   - 不画竖式，用直观色块分步
+   几何方法类（面积/周长/体积）：
+   - 画出实际图形+标注+辅助线
+   - 公式代入用色块对应""",
+    },
+    '概念卡': {
+        'solve_strategy': """用生活场景/实物图解释抽象概念：
+   - 优先画生活实物（如分数=切披萨，千克=一袋米）
+   - 概念名称超大展示，定义浓缩为≤6字金句
+   - 不画运算过程，重在"是什么"而非"怎么算" """,
+    },
+    '辨析卡': {
+        'solve_strategy': """左右并排对比，一目了然：
+   - 左边 ✗(红色标记) 展示常见错误
+   - 右边 ✓(绿色标记) 展示正确做法
+   - 红圈/红框高亮差异点（只标1处最关键的）
+   - 底部一句话总结区别""",
+    },
+    '公式卡': {
+        'solve_strategy': """图形推导→公式→代入验证：
+   - 用格子图/拼图直观推导公式由来
+   - 公式本身超大醒目展示（占30%面积）
+   - 举一个代入计算的小例子""",
+    },
+    '陷阱卡': {
+        'solve_strategy': """先设坑→再揭秘：
+   - 大字展示容易错的题目（设置悬念）
+   - 展示错误答案并画叉
+   - 揭示正确答案，红圈标出陷阱在哪
+   - 钩子文案："90%同学做错" """,
+    },
+    '速算卡': {
+        'solve_strategy': """慢方法vs快技巧对比：
+   - 左边🐢常规慢方法(灰色，划掉)
+   - 右边⚡速算技巧(彩色，高亮)
+   - 速算步骤用色块分步展示
+   - 强调"比普通方法快N倍" """,
+    },
+    '挑战卡': {
+        'solve_strategy': """限时闯关+悬念：
+   - 关卡编号金色醒目
+   - 大题目展示（占30%）
+   - 倒计时元素增加紧迫感
+   - 答案区域用刮刮卡/折叠样式""",
+    },
+    '生活卡': {
+        'solve_strategy': """生活场景→数学问题→实用解法：
+   - 生活场景插画（占40%）
+   - 气泡标注数学计算过程
+   - 实用结论大字展示""",
+    },
+    '对战卡': {
+        'solve_strategy': """左右分栏PK：
+   - 左蓝(家长) VS 右粉(孩子)
+   - 同类不同难度的题目
+   - 计分栏增加互动感""",
+    },
+    '思维卡': {
+        'solve_strategy': """有趣问题→可视化思维→优雅解法：
+   - 情境问题大字展示
+   - 思维过程用色块分步可视化（占45%）
+   - 方法名+答案醒目展示""",
+    },
+}
+
+def _detect_vertical_calc(card):
+    """检测是否为需要画竖式的卡片（笔算/竖式/列式计算类）"""
+    keywords = ['笔算', '竖式', '列式', '列竖式']
+    title = card.get('title', '')
+    definition = card.get('definition', '')
+    question = card.get('example', {}).get('question', '')
+    text = title + definition + question
+    return any(k in text for k in keywords)
+
 # ─── Step 1: Generate image prompt ───
 PROMPT_SYSTEM_TEMPLATE = """你是一位拥有25年{subject}教学经验的特级教师 + 小红书爆款卡片设计师。
 
@@ -85,26 +169,19 @@ PROMPT_SYSTEM_TEMPLATE = """你是一位拥有25年{subject}教学经验的特�
    - 例："边长6dm的正方形，面积=?"
    - ⚠️ 题目是整张卡片的核心！没有题目的卡片是失败的
 
-第二步：画出解题的关键一步（不是全过程！）
-   - 只展示最关键的1-2步，不画完整过程
-   - 用直观图示而非文字解释
-   - 运算类：把数拆开→用色块区分→得到答案
-     例：840÷4 → 把840拆成 800+40 → 800÷4=200, 40÷4=10 → 答案210
-     （用三个不同颜色的色块表示800/40/0，分别除以4）
-   - 面积类：画出实际图形+标注+数格子
-   - 时间类：画一个实际钟面或时间轴
-   - 对比类：把容易混淆的两个并排放（✓/✗）
+第二步：画出解题的关键步骤
+{solve_strategy_block}
 
 第三步：大字展示答案 + 口诀
    - 答案用超大字+鲜明色（"= 210"）
    - 一句口诀帮助记忆（≤10字）
 
 ⚠️ 绝对不要做的事：
-   - ❌ 不画完整竖式（太复杂、太拥挤）
    - ❌ 不画没有标签的裸箭头（看的人不知道箭头什么意思）
-   - ❌ 箭头不超过2个
+   - ❌ 箭头不超过3个
    - ❌ 不要让人猜"这是在解什么题"——题目必须清晰可见
    - ❌ 不要只有口诀/结论，没有具体例题
+   - ❌ 不要把解题过程中的数字写错（必须和提供的例题数字完全一致！）
 
 ══════ 视觉设计 ══════
 
@@ -117,7 +194,7 @@ PROMPT_SYSTEM_TEMPLATE = """你是一位拥有25年{subject}教学经验的特�
    - 全卡最多4个视觉区块：标题 / 核心图 / 金句+对比 / 口诀
    - 每个区块之间有大间距
    - ≥ 25% 留白
-   - 箭头 ≤ 2个，都带标签
+   - 箭头 ≤ 3个，都带标签
 
 3. 小老师卡通：一个可爱角色 + ≤6字气泡
 
@@ -150,7 +227,7 @@ PROMPT_SYSTEM_TEMPLATE = """你是一位拥有25年{subject}教学经验的特�
 [CANVAS] 竖屏3:4, 渐变背景, 风格
 [TITLE] 顶部10%: 鲜色banner + 标题(≤4字白色超大) + 小标签
 [PROBLEM] 15%: ⚠️例题(白色圆角卡片内, 超大醒目字体展示具体题目, 如"840 ÷ 4 = ?")
-[SOLVE] 中间40%: 解题关键步骤(用色块/图示/分步, 不用竖式! 直观展示关键一步)
+[SOLVE] 中间40%: 解题关键步骤(根据题型选择最合适的视觉方式: 竖式/色块分步/图形/对比)
 [ANSWER] 12%: 答案(超大鲜明色, 如 "= 210") + 口诀(色彩便签风, ≤10字)
 [BOTTOM] 底部8%: 小老师卡通+气泡(≤6字)
 [STYLE] 风格关键词
@@ -164,8 +241,9 @@ PROMPT_SYSTEM_TEMPLATE = """你是一位拥有25年{subject}教学经验的特�
 - 中文用引号包裹
 - 指定字号（"72pt bold", "48pt"等）
 - ⚠️ 必须有一道清晰的例题展示在卡面上（如"840 ÷ 4 = ?"），字号要大，位置要醒目
-- ⚠️ 解题过程用色块/图示分步展现，不画完整竖式
-- ⚠️ 箭头≤2个且必须有中文标签，不画裸箭头
+- ⚠️ 解题过程中所有数字必须和例题完全一致，不能编造或搞混数字
+- ⚠️ 根据题型选择最佳视觉方式：笔算类画竖式（彩色分层），口算类用色块拆分，几何类画图形
+- ⚠️ 箭头≤3个且必须有中文标签，不画裸箭头
 - ✓/✗对比只一组（如有），大图并排，红圈标差异
 - 答案用超大鲜明色展示
 - 背景用渐变色（写具体色号），标题用饱和色banner
@@ -173,48 +251,78 @@ PROMPT_SYSTEM_TEMPLATE = """你是一位拥有25年{subject}教学经验的特�
 - 长度: 350-500英文单词"""
 
 def generate_image_prompt(card, subject, grade, semester, api_key):
-    """Step 1: 用文字模型生成精简但视觉丰富的提示词"""
-    system_prompt = PROMPT_SYSTEM_TEMPLATE.format(subject=subject)
+    """Step 1: 用文字模型生成精简但视觉丰富的提示词（按卡片类型选择视觉策略）"""
+    
+    # ── 根据卡片类型选择视觉策略 ──
+    card_type = card.get('type', '方法卡')
+    type_rules = CARD_TYPE_VISUAL_RULES.get(card_type, CARD_TYPE_VISUAL_RULES['方法卡'])
+    is_vertical_calc = _detect_vertical_calc(card)
+    
+    # 构建解题策略指导块
+    if is_vertical_calc:
+        solve_block = """   ⚠️ 这是笔算/竖式类卡片，竖式本身就是教学内容！
+   - ✅ 必须画出简化竖式（这是本卡的核心！）
+   - 竖式用彩色分层：第一层积(绿色)、第二层积(橙色)、最终和(红色超大)
+   - 十位乘的那层必须明确画出"向左错一位"（用虚线/色块高亮错位）
+   - 竖式旁可放一个正误对比小图（✓正确对齐 vs ✗错误对齐）
+   - 竖式中每个数字必须和例题完全一致，不能编造数字！
+   - 竖式保持简洁清晰，用颜色区分而非文字堆砌"""
+    else:
+        solve_block = type_rules['solve_strategy']
+    
+    system_prompt = PROMPT_SYSTEM_TEMPLATE.format(
+        subject=subject,
+        solve_strategy_block=solve_block
+    )
     
     # 精简卡片信息
     points = card['core_points'][:4]
     
-    # 提取公式
+    # 提取公式（扩大截取长度）
     formulas = []
     clean_points = []
     for p in points:
         if any(c in p for c in '=÷×+−≥≤<>°²³∠'):
-            formulas.append(p[:50])
+            formulas.append(p[:80])
         else:
-            clean_points.append(p[:50])
+            clean_points.append(p[:80])
     
-    # 提取易错点作为正误对比素材
+    # 提取易错点作为正误对比素材（扩大到200字，保留完整竖式布局）
     mistakes_info = ''
     if card.get('mistakes'):
         m = card['mistakes'][0]
-        mistakes_info = f"\n常见错误(用于正误对比图示):\n  ❌ 错误: {m['wrong'][:40]}\n  ✅ 正确: {m['correct'][:40]}"
+        mistakes_info = f"\n常见错误(⚠️ 必须用于正误对比图示，确保数字正确):\n  ❌ 错误做法: {m['wrong'][:200]}\n  ✅ 正确做法: {m['correct'][:200]}"
     
-    # 提取例题的完整题目（这是卡片的核心！）
+    # 提取例题的完整信息（题目+解题步骤，给AI完整上下文）
     example_info = ''
+    example_steps = ''
     if card.get('example'):
         ex = card['example']
         example_info = ex['question'][:120]
+        # 传递完整的解题步骤，让AI理解正确的解法
+        if ex.get('steps'):
+            steps_text = '\n'.join(f'  {i+1}. {s}' for i, s in enumerate(ex['steps']))
+            example_steps = f"\n【解题步骤】(图片中的解法必须与此一致！):\n{steps_text[:600]}"
+        if ex.get('answer'):
+            example_steps += f"\n【正确答案】: {ex['answer']}"
     
     card_info = f"""学科: {subject}
 年级: {grade}{semester}
 标题: {card['title']}
-类型: {card['type']}
+类型: {card_type}
 
 【⚠️ 必须展示的例题】(这是整张卡片的核心！题目必须醒目显示在卡片上):
 {example_info if example_info else '请根据知识点自行构造一道最典型的例题'}
+{example_steps}
 
-【知识点核心】: {card['definition'][:80]}
+【知识点核心】: {card['definition'][:120]}
 【关键词】(提炼≤3个，每个≤6字):
 {chr(10).join('• ' + p for p in clean_points[:3])}
 {('【公式/数字】(超大展示): ' + ' | '.join(formulas)) if formulas else ''}
 【口诀】(≤10字): {card['memory_tip'][:50]}
 {mistakes_info if mistakes_info else ''}
-难度: {card['difficulty']}/5"""
+难度: {card['difficulty']}/5
+{'⚠️ 特别提醒：这是笔算竖式类卡片，图片中必须画出正确的竖式，每个数字不能错！' if is_vertical_calc else ''}"""
 
     contents = [
         {'role': 'user', 'parts': [{'text': f'{system_prompt}\n\n--- 知识点信息 ---\n{card_info}'}]}
