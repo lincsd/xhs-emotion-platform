@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260323e'  # 五角色Prompt按需生成 + 查看Prompt自动跳转
+BUILD_VERSION = '20260324f'  # 笔记标题≤20字+正文≤1000字 + 养生v3支持
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
