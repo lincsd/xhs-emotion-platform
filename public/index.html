@@ -9095,9 +9095,15 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           if (loc.hostname.includes('github.io')) {
             p = loc.pathname.replace(/\/[^/]*$/, '') + '/knowledge_cards/manifest.json';
           }
+          console.log('[KC] loadManifest fetching:', p);
           const r = await fetch(p);
-          if (r.ok) manifestData = await r.json();
-        } catch(e) { console.warn('manifest load failed', e); }
+          if (r.ok) {
+            manifestData = await r.json();
+            console.log('[KC] manifest loaded, stages:', Object.keys(manifestData?.stages || {}));
+          } else {
+            console.error('[KC] manifest fetch failed:', r.status, r.statusText);
+          }
+        } catch(e) { console.error('[KC] manifest load error:', e); }
         return manifestData;
       }
 
@@ -9105,20 +9111,25 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         const cfg = STAGE_CONFIG[currentStageKey];
         if (cfg?.fixedGrades) return cfg.fixedGrades;
         if (manifestData?.stages?.[currentStageKey]) {
-          return manifestData.stages[currentStageKey]
+          const grades = manifestData.stages[currentStageKey]
             .filter(e => e.subject === currentSubject && !e.is_boom)
             .map(e => e.grade_short);
+          console.log('[KC] getGradesForSubject:', currentStageKey, currentSubject, '→', grades);
+          return grades;
         }
+        console.warn('[KC] getGradesForSubject: no manifest data for stage', currentStageKey, 'manifestData=', !!manifestData);
         return [];
       }
 
       // ── 加载卡片数据 ──
       async function loadGrade(gradeShort) {
         const cacheKey = `${currentStageKey}_${currentSubject}_${gradeShort}`;
+        console.log('[KC] loadGrade:', cacheKey);
         if (cardCache[cacheKey]) {
           PACKS = cardCache[cacheKey];
           currentGrade = gradeShort;
           activePack = PACKS[0];
+          console.log('[KC] loadGrade: cache hit');
           return true;
         }
 
@@ -9129,19 +9140,27 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         if (manifestData?.stages?.[currentStageKey]) {
           const entries = manifestData.stages[currentStageKey];
           const std = entries.find(e => e.subject === currentSubject && e.grade_short === gradeShort && !e.is_boom);
+          // Boom: try same subject+grade first, then same subject, then any boom in the stage
           const boom = entries.find(e => e.subject === currentSubject && e.grade_short === gradeShort && e.is_boom)
-                    || entries.find(e => e.subject === currentSubject && e.is_boom);
+                    || entries.find(e => e.subject === currentSubject && e.is_boom)
+                    || entries.find(e => e.is_boom);
           if (std) stdFile = base + std.file;
           if (boom) boomFile = base + boom.file;
+          console.log('[KC] manifest lookup: std=', std?.file, 'boom=', boom?.file);
+        } else {
+          console.warn('[KC] loadGrade: no manifest data for stage', currentStageKey);
         }
 
         try {
           isLoading = true;
           renderLoading();
+          console.log('[KC] fetching std:', encodeURI(stdFile));
+          console.log('[KC] fetching boom:', encodeURI(boomFile));
           const [stdResp, boomResp] = await Promise.all([
             fetch(encodeURI(stdFile)),
-            fetch(encodeURI(boomFile)).catch(() => null)
+            fetch(encodeURI(boomFile)).catch(err => { console.warn('[KC] boom fetch error:', err); return null; })
           ]);
+          console.log('[KC] std resp:', stdResp?.status, 'boom resp:', boomResp?.status);
 
           const packs = [];
           if (stdResp && stdResp.ok) {
@@ -9155,16 +9174,17 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
             packs.push(boomData);
           }
 
-          if (packs.length === 0) throw new Error('无数据');
+          if (packs.length === 0) throw new Error(`无数据 (std:${stdResp?.status} boom:${boomResp?.status})`);
 
           PACKS = packs;
           cardCache[cacheKey] = packs;
           currentGrade = gradeShort;
           activePack = PACKS[0];
           isLoading = false;
+          console.log('[KC] loadGrade success:', packs.length, 'packs loaded');
           return true;
         } catch(e) {
-          console.warn('加载卡片失败:', gradeShort, e);
+          console.error('[KC] loadGrade failed:', gradeShort, 'stdFile=', stdFile, 'boomFile=', boomFile, e);
           isLoading = false;
           return false;
         }
@@ -9230,10 +9250,13 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
 
       async function switchStage(stageKey) {
         if (stageKey === currentStageKey) return;
+        console.log('[KC] switchStage:', stageKey);
         currentStageKey = stageKey;
         const cfg = STAGE_CONFIG[stageKey];
         currentSubject = cfg.defaultSubject;
         currentGrade = cfg.defaultGrade;
+        // 确保 manifest 已加载
+        if (!manifestData) await loadManifest();
         const filterBar = document.getElementById('kc-filter-bar');
         // 更新赛道按钮
         document.querySelectorAll('.kc-stage-btn').forEach(b => {
@@ -9246,6 +9269,11 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         // 重新渲染学科和年级
         renderSubjectSelector(filterBar);
         renderGradeSelector(filterBar);
+        // 清除旧的卡片包信息和单元标签（防止残留旧赛道数据）
+        const infoArea = filterBar.querySelector('.kc-info-area');
+        if (infoArea) infoArea.innerHTML = '';
+        const unitTabs = document.getElementById('kc-unit-tabs');
+        if (unitTabs) unitTabs.innerHTML = '';
         // 更新描述文字
         const desc = document.querySelector('#page-knowledge-cards .section-desc');
         if (desc) {
@@ -9255,7 +9283,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         }
         // 加载默认数据
         const ok = await loadGrade(currentGrade);
-        if (!ok) { renderError(`加载 ${cfg.label} 失败`); return; }
+        if (!ok) { renderError(`加载 ${currentSubject} ${currentGrade} 失败，请检查控制台日志`); return; }
         renderPackInfo(filterBar);
         renderUnitTabs();
         if (activePack.units.length > 0) selectUnit(activePack.units[0].unit_id);
@@ -9285,6 +9313,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
 
       async function switchSubject(subjectKey) {
         if (subjectKey === currentSubject && PACKS.length > 0) return;
+        console.log('[KC] switchSubject:', subjectKey);
         currentSubject = subjectKey;
         const filterBar = document.getElementById('kc-filter-bar');
 
@@ -9297,6 +9326,12 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           b.style.fontWeight = on ? '700' : '400';
         });
 
+        // 清除旧的卡片包信息和单元标签
+        const infoArea = filterBar.querySelector('.kc-info-area');
+        if (infoArea) infoArea.innerHTML = '';
+        const unitTabs = document.getElementById('kc-unit-tabs');
+        if (unitTabs) unitTabs.innerHTML = '';
+
         // 切换学科时重新渲染年级（养生减脂赛道各学科年级不同）
         const grades = getGradesForSubject();
         if (grades.length > 0 && !grades.includes(currentGrade)) {
@@ -9307,7 +9342,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         // 重新加载当前年级的该学科数据
         const ok = await loadGrade(currentGrade);
         if (!ok) {
-          renderError(`加载 ${subjectKey} ${GRADE_LABELS[currentGrade] || currentGrade} 失败`);
+          renderError(`加载 ${subjectKey} ${GRADE_LABELS[currentGrade] || currentGrade} 失败，请检查控制台日志`);
           return;
         }
         renderPackInfo(filterBar);
