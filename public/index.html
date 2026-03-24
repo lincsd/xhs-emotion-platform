@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260324c';
+      var BUILD='20260324d';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);}
@@ -3820,7 +3820,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260324c'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260324d'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -11263,7 +11263,8 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
 
       /* ---- 智能匹配：根据学科+年级自动分析卡片并推荐最佳模板 ---- */
       let _matchCache = {}; // 缓存已分析的学科_年级结果
-      async function _autoMatchFromCards() {
+      async function _autoMatchFromCards(infoOnly) {
+        // infoOnly=true 时只显示分析面板，不改变模板下拉选择
         const subjSel = document.getElementById('nw-gen-subject');
         const gradeSel = document.getElementById('nw-gen-grade');
         const tmplSel = document.getElementById('nw-gen-template');
@@ -11278,7 +11279,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
 
         // 已有缓存直接用
         if (_matchCache[cacheKey]) {
-          _applyMatchResult(_matchCache[cacheKey], info, tmplSel);
+          _applyMatchResult(_matchCache[cacheKey], info, infoOnly ? null : tmplSel);
           return;
         }
 
@@ -11340,7 +11341,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
 
           const result = { subject, grade, totalCards: allCards.length, typeCounts, tmplScores, bestTmpl, bestScore };
           _matchCache[cacheKey] = result;
-          _applyMatchResult(result, info, tmplSel);
+          _applyMatchResult(result, info, infoOnly ? null : tmplSel);
 
         } catch(e) {
           console.warn('[NoteWorkshop] auto-match error:', e);
@@ -11400,24 +11401,73 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         }
       }
 
+      // 从卡片数据中智能提取学科
+      function _detectSubjectFromCard(card, fallback) {
+        // 优先用 _subject 字段
+        if (card._subject && ['数学','语文','英语'].includes(card._subject)) return card._subject;
+        // 从 full_id 提取 (格式如 "语文-五下-T3-01" 或 "数学_三下_...")
+        const fid = card.full_id || card.card_id || '';
+        if (/语文/.test(fid)) return '语文';
+        if (/英语/.test(fid)) return '英语';
+        if (/数学/.test(fid)) return '数学';
+        // 从 type 推断学科
+        const type = card.type || '';
+        if (/古诗|默写|拼音|笔顺|阅读|写作|易错字|作文/.test(type)) return '语文';
+        if (/发音|词汇|语法|句型|英语|对话/.test(type)) return '英语';
+        return fallback || '数学';
+      }
+
+      // 从卡片数据中智能提取年级
+      function _detectGradeFromCard(card, fallback) {
+        // 优先用 _grade 字段
+        if (card._grade) return card._grade;
+        // 从 full_id 提取
+        const fid = card.full_id || card.card_id || '';
+        const gradeMap = {'一':'一','二':'二','三':'三','四':'四','五':'五','六':'六',
+          '1':'一','2':'二','3':'三','4':'四','5':'五','6':'六'};
+        // 匹配 "五下" "三上" 等
+        const m = fid.match(/(一|二|三|四|五|六|[1-6])[上下]/);
+        if (m) {
+          const num = gradeMap[m[1]] || m[1];
+          const sem = fid.match(/(一|二|三|四|五|六|[1-6])([上下])/)[2];
+          return num + sem;
+        }
+        // 从 grade 字段提取 (如 "五年级")
+        const g = card.grade || '';
+        const m2 = g.match(/(一|二|三|四|五|六)/);
+        const s = card.semester || '';
+        if (m2) {
+          const sem2 = /下/.test(s) ? '下' : '上';
+          return m2[1] + sem2;
+        }
+        return fallback || '三下';
+      }
+
       // 应用跨模块传入的卡片上下文
       function _applyPipelineContext() {
         if (!_pipelineState.card) return;
         const ps = _pipelineState;
-        // 预填学科、年级
+        const card = ps.card;
+
+        // 智能提取学科和年级（优先管线传入，其次从卡片数据本身检测）
+        const detectedSubject = _detectSubjectFromCard(card, ps.subject);
+        const detectedGrade = _detectGradeFromCard(card, ps.gradeShort);
+
         const subjSel = document.getElementById('nw-gen-subject');
         const gradeSel = document.getElementById('nw-gen-grade');
-        if (subjSel && ps.subject) subjSel.value = ps.subject;
-        if (gradeSel && ps.gradeShort) gradeSel.value = ps.gradeShort;
+        if (subjSel) subjSel.value = detectedSubject;
+        if (gradeSel) gradeSel.value = detectedGrade;
+
         // 根据卡片类型自动选择最佳模板（使用共享映射表）
-        const cardType = ps.card.type || '';
+        const cardType = card.type || '';
         const bestTmpl = CARD_TYPE_MAP[cardType];
         const tmplSel = document.getElementById('nw-gen-template');
         if (tmplSel && bestTmpl) tmplSel.value = bestTmpl;
+
         // 显示卡片上下文横幅
         _renderPipelineBanner();
-        // 同时触发智能匹配显示卡片分布
-        _autoMatchFromCards();
+        // 显示卡片分布信息（但不覆盖已选模板）
+        _autoMatchFromCards(true);
       }
 
       // 渲染卡片上下文横幅
