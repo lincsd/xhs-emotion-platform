@@ -18519,24 +18519,24 @@ Style: ${stylePrompt}
 
       // 标题评分 (25分)
       const tl = (title || '').length;
-      if (tl >= 10 && tl <= 20) scores.title = 25;
-      else if (tl >= 6 && tl <= 25) scores.title = 18;
+      if (tl >= 8 && tl <= 20) scores.title = 25;
+      else if (tl >= 5 && tl <= 20) scores.title = 20;
       else if (tl > 0) scores.title = 10;
       if (tl === 0) suggestions.push('❌ 标题不能为空');
-      else if (tl < 6) suggestions.push('⚠️ 标题太短，建议10-20字');
-      else if (tl > 25) suggestions.push('⚠️ 标题过长，建议精简到20字以内');
+      else if (tl < 5) suggestions.push('⚠️ 标题太短，建议8-20字');
+      else if (tl > 20) suggestions.push('⚠️ 标题超过20字限制，请精简');
       if (/[!！?？]/.test(title)) scores.title = Math.min(25, scores.title + 2);
       if (/[0-9]/.test(title)) scores.title = Math.min(25, scores.title + 2);
       if (/[\u4e00-\u9fa5].*[|｜\/]/.test(title)) scores.title = Math.min(25, scores.title + 1);
 
       // 正文评分 (30分)
       const cl = (content || '').length;
-      if (cl >= 300 && cl <= 800) scores.content = 30;
-      else if (cl >= 150 && cl <= 1200) scores.content = 22;
+      if (cl >= 300 && cl <= 1000) scores.content = 30;
+      else if (cl >= 150 && cl <= 1000) scores.content = 22;
       else if (cl > 0) scores.content = 12;
       if (cl === 0) suggestions.push('❌ 正文不能为空');
-      else if (cl < 150) suggestions.push('⚠️ 正文太短，建议300-800字');
-      else if (cl > 1200) suggestions.push('⚠️ 正文过长，建议精简');
+      else if (cl < 150) suggestions.push('⚠️ 正文太短，建议300-1000字');
+      else if (cl > 1000) suggestions.push('⚠️ 正文超过1000字限制，请精简');
       const emojiCount = ((content || '').match(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}]/gu) || []).length;
       if (emojiCount >= 3 && emojiCount <= 15) scores.content = Math.min(30, scores.content + 3);
       else if (emojiCount === 0) suggestions.push('💡 建议添加emoji表情增加可读性');

@@ -3032,10 +3032,15 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 - 干货型：痛点引入→系统知识点→口诀总结→收藏引导
 - 故事型：生活场景→遇到问题→解决方案→触动共鸣
 
+⚠️ 严格字数限制（必须遵守）：
+- 标题 ≤ 20字（含emoji，超过20字视为不合格）
+- 正文 ≤ 1000字（含emoji和标点，超过1000字视为不合格）
+- 候选标题每条 ≤ 20字
+
 请输出JSON格式（不要markdown代码块），包含以下字段：
 {{
   "note_id": "{subject}_{grade_short}_{template}_自动生成",
-  "title": "标题（含emoji，15-25字，有情绪钩子）",
+  "title": "标题（含emoji，≤20字，有情绪钩子）",
   "template": "{template}",
   "card_ids": [使用到的卡片card_id列表],
   "hashtags": "#标签1 #标签2 ... （8-12个相关标签）",
@@ -3053,7 +3058,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     {{"title": "候选标题2", "score": 7}},
     {{"title": "候选标题3", "score": 9}}
   ],
-  "body": "正文内容（800-1500字，包含emoji、分段、金句、互动引导）",
+  "body": "正文内容（≤1000字，包含emoji、分段、金句、互动引导）",
   "pinned_comment": "置顶评论内容",
   "interaction_hooks": {{
     "comment_guide": "评论引导语",
