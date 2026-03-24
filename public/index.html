@@ -9087,16 +9087,18 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         return 'knowledge_cards/' + folder + '/';
       }
 
-      async function loadManifest() {
-        if (manifestData) return manifestData;
+      async function loadManifest(forceReload) {
+        if (manifestData && !forceReload) return manifestData;
         try {
           const loc = window.location;
           let p = 'knowledge_cards/manifest.json';
           if (loc.hostname.includes('github.io')) {
             p = loc.pathname.replace(/\/[^/]*$/, '') + '/knowledge_cards/manifest.json';
           }
+          // 添加缓存破坏参数，避免浏览器返回旧版manifest
+          p += '?v=' + (typeof PAGE_BUILD !== 'undefined' ? PAGE_BUILD : Date.now());
           console.log('[KC] loadManifest fetching:', p);
-          const r = await fetch(p);
+          const r = await fetch(p, { cache: 'no-cache' });
           if (r.ok) {
             manifestData = await r.json();
             console.log('[KC] manifest loaded, stages:', Object.keys(manifestData?.stages || {}));
@@ -9255,8 +9257,11 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         const cfg = STAGE_CONFIG[stageKey];
         currentSubject = cfg.defaultSubject;
         currentGrade = cfg.defaultGrade;
-        // 确保 manifest 已加载
-        if (!manifestData) await loadManifest();
+        // 确保 manifest 已加载，且包含目标赛道（否则强制重新加载）
+        if (!manifestData || !manifestData.stages?.[stageKey]) {
+          console.log('[KC] manifest missing or incomplete for stage', stageKey, ', force reload');
+          await loadManifest(true);
+        }
         const filterBar = document.getElementById('kc-filter-bar');
         // 更新赛道按钮
         document.querySelectorAll('.kc-stage-btn').forEach(b => {

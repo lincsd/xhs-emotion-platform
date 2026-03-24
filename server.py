@@ -808,12 +808,15 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         pass
 
     def end_headers(self):
-        path = getattr(self, 'path', '') or ''
+        path = getattr(self, 'path', '').split('?')[0] or ''
         if path == '/' or path.endswith('.html'):
             # HTML 不缓存，确保用户总是加载最新版
             self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
             self.send_header('Pragma', 'no-cache')
             self.send_header('Expires', '0')
+        elif path.endswith('.json'):
+            # JSON 数据文件短缓存（5分钟），确保内容更新及时
+            self.send_header('Cache-Control', 'public, max-age=300')
         elif any(path.endswith(ext) for ext in ('.css', '.js', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.woff', '.woff2')):
             # 静态资源缓存 7 天
             self.send_header('Cache-Control', 'public, max-age=604800')
