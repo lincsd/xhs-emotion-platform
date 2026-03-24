@@ -2922,12 +2922,33 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         template = body.get('template', '反差型')
         card_ids = body.get('card_ids', [])  # 可选指定卡片
 
+        # 根据 subject 判断文件夹和文件名
+        _WELLNESS_SUBJECTS = {'养生', '减脂', '养生减脂', '融合'}
+        if subject in _WELLNESS_SUBJECTS:
+            folder = '养生减脂'
+            # 养生减脂的文件名: {subject}_{grade_short}.json
+            card_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder, f'{subject}_{grade_short}.json')
+            boom_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder, '养生减脂_爆款.json')
+            # 也搜索整个目录下所有文件
+            all_wellness_files = []
+            wellness_dir = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder)
+            if os.path.isdir(wellness_dir):
+                for fn in os.listdir(wellness_dir):
+                    if fn.endswith('.json'):
+                        all_wellness_files.append(os.path.join(wellness_dir, fn))
+        else:
+            folder = '小学'
+            card_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder, f'{subject}_{grade_short}.json')
+            boom_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder, f'{subject}_{grade_short}_爆款.json')
+            all_wellness_files = []
+
         # 读取卡片数据
-        card_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', '小学', f'{subject}_{grade_short}.json')
-        boom_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', '小学', f'{subject}_{grade_short}_爆款.json')
+        files_to_search = [card_file, boom_file]
+        if all_wellness_files:
+            files_to_search = list(set(files_to_search + all_wellness_files))
 
         cards_data = []
-        for fp in [card_file, boom_file]:
+        for fp in files_to_search:
             if os.path.exists(fp):
                 try:
                     d = json.loads(open(fp, encoding='utf-8').read())
@@ -2944,10 +2965,12 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         # 选取适合模板的卡片（最多6张）
         import random
         template_card_map = {
-            '反差型': ['陷阱卡','辨析卡','易错字陷阱卡','易混词陷阱卡','语法纠错卡','易错卡','易错字卡'],
-            '挑战型': ['挑战卡','速算卡','发音挑战卡','古诗默写挑战卡','拼音闯关卡','笔顺挑战卡'],
-            '干货型': ['方法卡','公式卡','概念卡','阅读技巧卡','写作方法卡','词汇卡','语法卡','句型卡','修辞手法卡','阅读理解技巧卡'],
-            '故事型': ['生活卡','思维卡','对战卡','情景对话卡','亲子古诗PK卡','亲子英语PK卡','看图写话卡'],
+            '反差型': ['陷阱卡','辨析卡','易错字陷阱卡','易混词陷阱卡','语法纠错卡','易错卡','易错字卡','反差卡','翻车卡','误区卡'],
+            '挑战型': ['挑战卡','速算卡','发音挑战卡','古诗默写挑战卡','拼音闯关卡','笔顺挑战卡','挑战卡_养生'],
+            '干货型': ['方法卡','公式卡','概念卡','阅读技巧卡','写作方法卡','词汇卡','语法卡','句型卡','修辞手法卡','阅读理解技巧卡',
+                     '干货卡','科普卡','清单卡','食疗卡','食谱卡','体质卡','体质调理卡','日常习惯卡','穴位卡'],
+            '故事型': ['生活卡','思维卡','对战卡','情景对话卡','亲子古诗PK卡','亲子英语PK卡','看图写话卡',
+                     '对比卡','体态卡','跟练卡','运动卡','减脂卡'],
         }
         preferred = template_card_map.get(template, [])
         matched = [c for c in cards_data if c.get('type') in preferred]
@@ -2958,18 +2981,33 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         cards_text = ""
         for i, c in enumerate(selected, 1):
             cards_text += f"\n卡片{i}: [{c.get('type','')}] {c.get('title','')}\n"
-            cards_text += f"  定义: {c.get('definition','')}\n"
-            cards_text += f"  要点: {'; '.join(c.get('core_points',[][:3]))}\n"
+            if c.get('definition'):
+                cards_text += f"  定义: {c.get('definition','')}\n"
+            if c.get('description'):
+                cards_text += f"  描述: {c.get('description','')}\n"
+            points = c.get('core_points') or c.get('key_steps') or c.get('tips') or []
+            if points:
+                cards_text += f"  要点: {'; '.join(points[:5])}\n"
             ex = c.get('example', {})
-            if isinstance(ex, dict):
+            if isinstance(ex, dict) and ex:
                 cards_text += f"  例题: {ex.get('question','')} → {ex.get('answer','')}\n"
-            cards_text += f"  口诀: {c.get('memory_tip','')}\n"
+            if c.get('memory_tip'):
+                cards_text += f"  口诀: {c.get('memory_tip','')}\n"
             hook = c.get('emotion_hook', '')
             if hook:
                 cards_text += f"  钩子: {hook}\n"
             trap = c.get('trap_point', '')
             if trap:
                 cards_text += f"  陷阱点: {trap}\n"
+            # 养生专属字段
+            if c.get('myth'):
+                cards_text += f"  误区: {c.get('myth','')}\n"
+            if c.get('truth'):
+                cards_text += f"  真相: {c.get('truth','')}\n"
+            if c.get('contrast_before'):
+                cards_text += f"  反差前: {c.get('contrast_before','')}\n"
+            if c.get('contrast_after'):
+                cards_text += f"  反差后: {c.get('contrast_after','')}\n"
 
         # ── Prompt工程智慧注入 ──
         prompt_wisdom = ""
