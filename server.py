@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260324f'  # 笔记标题≤20字+正文≤1000字 + 养生v3支持
+BUILD_VERSION = '20260324g'  # v3异步轮询 解决Cloudflare tunnel 100s超时
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -148,6 +148,11 @@ _server_key_lock = threading.Lock()
 _last_image_gen_time = 0
 _image_gen_lock = threading.Lock()
 IMAGE_GEN_MIN_GAP = 2.0  # 图片请求最小间隔(秒)
+
+# ── 异步任务队列（解决 Cloudflare 100s 代理超时） ──
+_async_tasks = {}          # {task_id: {status, result, created, updated}}
+_async_tasks_lock = threading.Lock()
+_ASYNC_TASK_TTL = 600      # 任务结果保留10分钟
 
 def _get_next_server_key():
     """轮询获取下一个服务器端 API Key（线程安全）"""
@@ -1754,6 +1759,9 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._serve_note_image(path)
         elif path == '/api/generated-notes':
             return self._list_generated_notes()
+        elif path.startswith('/api/task-status/'):
+            task_id = path.split('/')[-1]
+            return self._get_task_status(task_id)
         else:
             # 静态文件
             return super().do_GET()
@@ -1822,6 +1830,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._render_card_image_html(body)
         elif path == '/api/generate-card-image-v3':
             return self._generate_card_image_v3(body)
+        elif path == '/api/generate-card-image-v3-async':
+            return self._generate_card_image_v3_async(body)
         else:
             self._send_json({'error': 'Not found'}, 404)
 
@@ -3456,6 +3466,224 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             traceback.print_exc()
             pipeline_log.append(f'异常: {str(e)[:200]}')
             return self._send_json({'error': f'v3流水线异常: {str(e)[:200]}', 'pipeline': pipeline_log}, 500)
+
+    # ── 异步 v3 图片生成（解决 Cloudflare tunnel 100s 超时） ──
+    def _generate_card_image_v3_async(self, body):
+        """接收 v3 请求 → 立即返回 task_id → 后台线程执行流水线"""
+        card = body.get('card')
+        if not card or not card.get('full_id'):
+            return self._send_json({'error': '缺少卡片数据(card.full_id)'}, 400)
+
+        task_id = secrets.token_hex(12)
+        with _async_tasks_lock:
+            # 清理过期任务
+            now = time.time()
+            expired = [k for k, v in _async_tasks.items() if now - v['created'] > _ASYNC_TASK_TTL]
+            for k in expired:
+                del _async_tasks[k]
+            _async_tasks[task_id] = {
+                'status': 'running',
+                'result': None,
+                'created': now,
+                'updated': now,
+                'card_id': card['full_id'],
+                'progress': 'v3流水线启动中...',
+            }
+
+        def _run_v3(task_id, body):
+            """在后台线程执行 v3 流水线"""
+            try:
+                from generate_card_images_v3 import (
+                    generate_image_prompt, generate_card_image,
+                    ocr_audit, _build_audit_hint, _try_pil_text_repair,
+                    quality_score, AUDIT_PASS_SCORE, MAX_AUDIT_ROUNDS
+                )
+            except ImportError as e:
+                with _async_tasks_lock:
+                    _async_tasks[task_id] = {**_async_tasks[task_id],
+                        'status': 'error', 'result': {'error': f'v3模块导入失败: {e}'}, 'updated': time.time()}
+                return
+
+            card = body.get('card', {})
+            subject = body.get('subject', '数学')
+            grade = body.get('grade', '三年级')
+            semester = body.get('semester', '下册')
+            skip_audit = body.get('skipAudit', False)
+            keys = list(SERVER_GEMINI_API_KEYS)
+            title = card.get('title', '')
+            pipeline_log = []
+
+            def _update_progress(msg):
+                with _async_tasks_lock:
+                    if task_id in _async_tasks:
+                        _async_tasks[task_id]['progress'] = msg
+                        _async_tasks[task_id]['updated'] = time.time()
+
+            try:
+                # Step 1
+                _update_progress('Step1: 生成Prompt...')
+                print(f'[v3-async] {card.get("full_id","")} Step1: 生成Prompt...', flush=True)
+                prompt, manifest = generate_image_prompt(card, subject, grade, semester, keys[0], all_keys=keys)
+                if not prompt:
+                    pipeline_log.append('Step1失败')
+                    with _async_tasks_lock:
+                        _async_tasks[task_id] = {**_async_tasks[task_id],
+                            'status': 'error', 'result': {'error': 'Step1失败: 无法生成图片提示词', 'pipeline': pipeline_log}, 'updated': time.time()}
+                    return
+
+                manifest_count = len(manifest) if manifest else 0
+                pipeline_log.append(f'Step1完成: {len(prompt)}字prompt, {manifest_count}处文字')
+                time.sleep(1)
+
+                # Step 2-4
+                best_image = None
+                best_ext = 'png'
+                best_score = 0
+                audit_hint = ''
+                used_model = ''
+                rounds_used = 0
+                max_rounds = 1 if skip_audit else MAX_AUDIT_ROUNDS
+
+                for round_num in range(1, max_rounds + 1):
+                    rounds_used = round_num
+                    _update_progress(f'Step2: 生成图片 (round {round_num}/{max_rounds})...')
+                    pipeline_log.append(f'Step2: 生成图片 (round {round_num})...')
+                    print(f'[v3-async] Step2: 生成图片 (round {round_num})...', flush=True)
+
+                    img_data, ext, model = generate_card_image(
+                        prompt, keys, card_title=title, subject=subject, audit_hint=audit_hint
+                    )
+                    if model:
+                        used_model = model
+                    if not img_data:
+                        pipeline_log.append('Step2失败: 图片生成失败')
+                        if best_image:
+                            break
+                        with _async_tasks_lock:
+                            _async_tasks[task_id] = {**_async_tasks[task_id],
+                                'status': 'error', 'result': {'error': 'Step2失败: 图片生成失败', 'pipeline': pipeline_log}, 'updated': time.time()}
+                        return
+
+                    size_kb = len(img_data) / 1024
+                    pipeline_log.append(f'Step2完成: {size_kb:.0f}KB (model={model})')
+
+                    if skip_audit:
+                        best_image = img_data
+                        best_ext = ext
+                        best_score = 100
+                        break
+
+                    # Step 3: OCR
+                    _update_progress(f'Step3: OCR审计 (round {round_num})...')
+                    pipeline_log.append('Step3: OCR审计...')
+                    audit = ocr_audit(img_data, manifest, keys[0], all_keys=keys)
+                    score = audit.get('overall_score', 0)
+                    errors = audit.get('errors', [])
+                    summary = audit.get('summary', '')
+                    pipeline_log.append(f'Step3完成: 得分={score}/100 ({summary})')
+
+                    if score > best_score:
+                        best_image = img_data
+                        best_ext = ext
+                        best_score = score
+
+                    if score >= AUDIT_PASS_SCORE:
+                        pipeline_log.append(f'✅ OCR审计通过 (score={score})')
+                        break
+                    else:
+                        if round_num < max_rounds:
+                            audit_hint = _build_audit_hint(audit, manifest)
+                            pipeline_log.append(f'⚠️ 重新生成...')
+                            time.sleep(2)
+
+                if not best_image:
+                    with _async_tasks_lock:
+                        _async_tasks[task_id] = {**_async_tasks[task_id],
+                            'status': 'error', 'result': {'error': '图片生成全部失败', 'pipeline': pipeline_log}, 'updated': time.time()}
+                    return
+
+                # Step 5: PIL
+                final_action = 'pass'
+                if best_score < AUDIT_PASS_SCORE and manifest and not skip_audit:
+                    _update_progress('Step5: PIL文字修补...')
+                    pipeline_log.append('Step5: PIL文字修补...')
+                    final_audit = ocr_audit(best_image, manifest, keys[0], all_keys=keys)
+                    repaired = _try_pil_text_repair(best_image, final_audit, manifest)
+                    if repaired != best_image:
+                        best_image = repaired
+                        best_ext = 'jpg'
+                        final_action = 'repaired'
+                        pipeline_log.append('PIL修补完成')
+                    else:
+                        final_action = 'best_effort'
+
+                # Quality score
+                quality = {'total': 0, 'comment': ''}
+                try:
+                    _update_progress('Step5b: 质量评分...')
+                    pipeline_log.append('Step5b: 质量评分...')
+                    quality = quality_score(best_image, keys[0], card_title=title, all_keys=keys)
+                    pipeline_log.append(f'质量评分: {quality.get("total", 0)}/100')
+                except Exception:
+                    pipeline_log.append('质量评分跳过')
+
+                img_b64 = base64.b64encode(best_image).decode('utf-8')
+                mime = 'image/jpeg' if best_ext == 'jpg' else 'image/png'
+                print(f'[v3-async] ✅ {card.get("full_id","")} 完成: 审计={best_score} 质量={quality.get("total",0)}', flush=True)
+
+                result = {
+                    'ok': True,
+                    'image': img_b64,
+                    'mimeType': mime,
+                    'size': len(best_image),
+                    'auditScore': best_score,
+                    'qualityScore': quality.get('total', 0),
+                    'qualityDetail': quality,
+                    'model': used_model,
+                    'rounds': rounds_used,
+                    'finalAction': final_action,
+                    'manifest': manifest,
+                    'pipeline': pipeline_log,
+                    'card_id': card.get('full_id', ''),
+                }
+                with _async_tasks_lock:
+                    _async_tasks[task_id] = {**_async_tasks[task_id],
+                        'status': 'done', 'result': result, 'updated': time.time(), 'progress': '完成'}
+
+            except Exception as e:
+                import traceback
+                traceback.print_exc()
+                pipeline_log.append(f'异常: {str(e)[:200]}')
+                with _async_tasks_lock:
+                    _async_tasks[task_id] = {**_async_tasks[task_id],
+                        'status': 'error', 'result': {'error': f'v3流水线异常: {str(e)[:200]}', 'pipeline': pipeline_log}, 'updated': time.time()}
+
+        t = threading.Thread(target=_run_v3, args=(task_id, body), daemon=True)
+        t.start()
+
+        print(f'[v3-async] 任务已创建: {task_id} for {card.get("full_id","")}', flush=True)
+        return self._send_json({'task_id': task_id, 'status': 'running'})
+
+    def _get_task_status(self, task_id):
+        """查询异步任务状态"""
+        with _async_tasks_lock:
+            task = _async_tasks.get(task_id)
+        if not task:
+            return self._send_json({'error': '任务不存在或已过期'}, 404)
+
+        resp = {'task_id': task_id, 'status': task['status'], 'progress': task.get('progress', '')}
+        if task['status'] == 'done':
+            resp['result'] = task['result']
+            # 取走结果后清理（节省内存）
+            with _async_tasks_lock:
+                if task_id in _async_tasks:
+                    del _async_tasks[task_id]
+        elif task['status'] == 'error':
+            resp['result'] = task['result']
+            with _async_tasks_lock:
+                if task_id in _async_tasks:
+                    del _async_tasks[task_id]
+        return self._send_json(resp)
 
     # ═══════════════════════════════════════════
     # HTML 卡片渲染器 API
