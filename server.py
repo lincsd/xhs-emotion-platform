@@ -1817,6 +1817,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._generate_prompt_record(body)
         elif path == '/api/render-card-image':
             return self._render_card_image_html(body)
+        elif path == '/api/generate-card-image-v3':
+            return self._generate_card_image_v3(body)
         else:
             self._send_json({'error': 'Not found'}, 404)
 
@@ -3231,6 +3233,183 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     pass  # AI匹配失败不影响本地结果
 
         return self._send_json({'ok': True, 'results': results[:10], 'total': len(all_cards)})
+
+    # ═══════════════════════════════════════════
+    # v3 AI 卡片生成器 (全自动流水线)
+    # ═══════════════════════════════════════════
+    def _generate_card_image_v3(self, body):
+        """
+        全自动 AI 卡片图片生成 v3 流水线：
+        Step 1: Flash 生成优化英文 Prompt + TEXT_MANIFEST
+        Step 2: Nano Banana 生成卡片图片
+        Step 3: Vision OCR 审计
+        Step 4: 不通过则带纠错提示重试 (最多3轮)
+        Step 5: PIL 文字修补兜底 + 质量评分
+        
+        返回: {ok, image(base64), score, audit_score, quality, model, rounds, manifest}
+        """
+        card = body.get('card')
+        if not card or not card.get('full_id'):
+            return self._send_json({'error': '缺少卡片数据(card.full_id)'}, 400)
+
+        subject = body.get('subject', '数学')
+        grade = body.get('grade', '三年级')
+        semester = body.get('semester', '下册')
+        skip_audit = body.get('skipAudit', False)
+
+        if not SERVER_GEMINI_API_KEYS:
+            return self._send_json({'error': '服务端未配置 Gemini API Key'}, 500)
+
+        try:
+            from generate_card_images_v3 import (
+                generate_image_prompt, generate_card_image,
+                ocr_audit, _build_audit_hint, _try_pil_text_repair,
+                quality_score, AUDIT_PASS_SCORE, MAX_AUDIT_ROUNDS
+            )
+        except ImportError as e:
+            return self._send_json({'error': f'v3模块导入失败: {e}'}, 500)
+
+        keys = list(SERVER_GEMINI_API_KEYS)
+        title = card.get('title', '')
+        card_type = card.get('type', '方法卡')
+
+        import traceback
+        pipeline_log = []
+
+        try:
+            # ── Step 1: 生成提示词 ──
+            pipeline_log.append('Step1: 生成Prompt...')
+            print(f'[v3] {card["full_id"]} Step1: 生成Prompt...', flush=True)
+            prompt, manifest = generate_image_prompt(card, subject, grade, semester, keys[0], all_keys=keys)
+            if not prompt:
+                return self._send_json({'error': 'Step1失败: 无法生成图片提示词', 'pipeline': pipeline_log}, 500)
+            
+            manifest_count = len(manifest) if manifest else 0
+            total_chars = sum(len(v) for v in manifest.values()) if manifest else 0
+            pipeline_log.append(f'Step1完成: {len(prompt)}字prompt, {manifest_count}处文字共{total_chars}字')
+            print(f'[v3] Step1完成: {len(prompt)}字prompt, {manifest_count}处文字', flush=True)
+
+            time.sleep(1)
+
+            # ── Step 2-4: 生成图片 + OCR审计循环 ──
+            best_image = None
+            best_ext = 'png'
+            best_score = 0
+            audit_hint = ''
+            used_model = ''
+            rounds_used = 0
+
+            max_rounds = 1 if skip_audit else MAX_AUDIT_ROUNDS
+            for round_num in range(1, max_rounds + 1):
+                rounds_used = round_num
+
+                # Step 2: 生成图片
+                round_label = f'(round {round_num}/{max_rounds})' if round_num > 1 else ''
+                pipeline_log.append(f'Step2: 生成图片{round_label}...')
+                print(f'[v3] Step2: 生成图片{round_label}...', flush=True)
+
+                img_data, ext, model = generate_card_image(
+                    prompt, keys, card_title=title, subject=subject, audit_hint=audit_hint
+                )
+                if model:
+                    used_model = model
+                if not img_data:
+                    pipeline_log.append('Step2失败: 图片生成失败')
+                    if best_image:
+                        break
+                    return self._send_json({'error': 'Step2失败: 图片生成失败', 'pipeline': pipeline_log}, 500)
+
+                size_kb = len(img_data) / 1024
+                pipeline_log.append(f'Step2完成: {size_kb:.0f}KB (model={model})')
+
+                if skip_audit:
+                    best_image = img_data
+                    best_ext = ext
+                    best_score = 100
+                    break
+
+                # Step 3: OCR 审计
+                pipeline_log.append('Step3: OCR审计...')
+                print(f'[v3] Step3: OCR审计...', flush=True)
+                audit = ocr_audit(img_data, manifest, keys[0], all_keys=keys)
+                score = audit.get('overall_score', 0)
+                errors = audit.get('errors', [])
+                summary = audit.get('summary', '')
+                pipeline_log.append(f'Step3完成: 得分={score}/100 ({summary})')
+                print(f'[v3] Step3: 得分={score}/100 ({summary})', flush=True)
+
+                if score > best_score:
+                    best_image = img_data
+                    best_ext = ext
+                    best_score = score
+
+                if score >= AUDIT_PASS_SCORE:
+                    pipeline_log.append(f'✅ OCR审计通过 (score={score})')
+                    break
+                else:
+                    high_errs = [e for e in errors if e.get('severity') in ('high', 'medium')]
+                    if round_num < max_rounds:
+                        audit_hint = _build_audit_hint(audit, manifest)
+                        pipeline_log.append(f'⚠️ {len(high_errs)}处错误, 重新生成...')
+                        time.sleep(2)
+                    else:
+                        pipeline_log.append(f'⚠️ {len(high_errs)}处错误, 已达最大轮数')
+
+            if not best_image:
+                return self._send_json({'error': '图片生成全部失败', 'pipeline': pipeline_log}, 500)
+
+            # ── Step 5: PIL 修补兜底 ──
+            final_action = 'pass'
+            if best_score < AUDIT_PASS_SCORE and manifest and not skip_audit:
+                pipeline_log.append('Step5: PIL文字修补...')
+                print(f'[v3] Step5: PIL文字修补...', flush=True)
+                final_audit = ocr_audit(best_image, manifest, keys[0], all_keys=keys)
+                repaired = _try_pil_text_repair(best_image, final_audit, manifest)
+                if repaired != best_image:
+                    best_image = repaired
+                    best_ext = 'jpg'
+                    final_action = 'repaired'
+                    pipeline_log.append('PIL修补完成')
+                else:
+                    final_action = 'best_effort'
+                    pipeline_log.append('无需PIL修补')
+
+            # ── 质量评分 ──
+            quality = {'total': 0, 'comment': ''}
+            try:
+                pipeline_log.append('Step5b: 质量评分...')
+                print(f'[v3] Step5b: 质量评分...', flush=True)
+                quality = quality_score(best_image, keys[0], card_title=title, all_keys=keys)
+                pipeline_log.append(f'质量评分: {quality.get("total", 0)}/100 ({quality.get("comment", "")})')
+            except Exception:
+                pipeline_log.append('质量评分跳过')
+
+            # 返回结果
+            img_b64 = base64.b64encode(best_image).decode('utf-8')
+            mime = 'image/jpeg' if best_ext == 'jpg' else 'image/png'
+
+            print(f'[v3] ✅ {card["full_id"]} 完成: 审计={best_score} 质量={quality.get("total",0)} model={used_model} rounds={rounds_used}', flush=True)
+
+            return self._send_json({
+                'ok': True,
+                'image': img_b64,
+                'mimeType': mime,
+                'size': len(best_image),
+                'auditScore': best_score,
+                'qualityScore': quality.get('total', 0),
+                'qualityDetail': quality,
+                'model': used_model,
+                'rounds': rounds_used,
+                'finalAction': final_action,
+                'manifest': manifest,
+                'pipeline': pipeline_log,
+                'card_id': card['full_id']
+            })
+
+        except Exception as e:
+            traceback.print_exc()
+            pipeline_log.append(f'异常: {str(e)[:200]}')
+            return self._send_json({'error': f'v3流水线异常: {str(e)[:200]}', 'pipeline': pipeline_log}, 500)
 
     # ═══════════════════════════════════════════
     # HTML 卡片渲染器 API
