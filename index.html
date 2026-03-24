@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260324b';
+      var BUILD='20260324c';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);}
@@ -3820,7 +3820,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260324b'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260324c'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -10701,6 +10701,14 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         '故事型': {icon:'📖',color:'#3498db',desc:'生活场景→遇到问题→解决方案→触动共鸣',cards:'生活卡/思维卡/对战卡'}
       };
 
+      // 卡片类型 → 模板类型 映射表（学科/年级自动匹配 + 跨模块联动共用）
+      const CARD_TYPE_MAP = {
+        '陷阱卡':'反差型','辨析卡':'反差型','易错字陷阱卡':'反差型','易混词陷阱卡':'反差型','语法纠错卡':'反差型','易错卡':'反差型','易错字卡':'反差型',
+        '挑战卡':'挑战型','速算卡':'挑战型','发音挑战卡':'挑战型','古诗默写挑战卡':'挑战型','拼音闯关卡':'挑战型','笔顺挑战卡':'挑战型',
+        '方法卡':'干货型','公式卡':'干货型','概念卡':'干货型','阅读技巧卡':'干货型','写作方法卡':'干货型','词汇卡':'干货型','语法卡':'干货型','句型卡':'干货型',
+        '生活卡':'故事型','思维卡':'故事型','对战卡':'故事型','情景对话卡':'故事型','亲子古诗PK卡':'故事型','亲子英语PK卡':'故事型'
+      };
+
       const NW_GRADES = ['一上','一下','二上','二下','三上','三下','四上','四下','五上','五下','六上','六下'];
       const NW_SUBJECTS = ['数学','语文','英语'];
 
@@ -10848,24 +10856,25 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
             <div style="flex:1;min-width:120px">
               <label style="font-size:12px;color:#888;display:block;margin-bottom:4px">📚 学科</label>
-              <select id="nw-gen-subject" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid #ddd;font-size:14px;background:#fff">
+              <select id="nw-gen-subject" onchange="NoteWorkshop.autoMatch()" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid #ddd;font-size:14px;background:#fff">
                 ${NW_SUBJECTS.map(s=>'<option value="'+s+'">'+s+'</option>').join('')}
               </select>
             </div>
             <div style="flex:1;min-width:120px">
               <label style="font-size:12px;color:#888;display:block;margin-bottom:4px">🎓 年级</label>
-              <select id="nw-gen-grade" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid #ddd;font-size:14px;background:#fff">
+              <select id="nw-gen-grade" onchange="NoteWorkshop.autoMatch()" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid #ddd;font-size:14px;background:#fff">
                 ${NW_GRADES.map(g=>'<option value="'+g+'">'+g+'</option>').join('')}
               </select>
             </div>
             <div style="flex:1;min-width:160px">
-              <label style="font-size:12px;color:#888;display:block;margin-bottom:4px">📝 笔记模板</label>
+              <label style="font-size:12px;color:#888;display:block;margin-bottom:4px">📝 笔记模板 <span style="font-size:11px;color:#aaa">(自动推荐)</span></label>
               <select id="nw-gen-template" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid #ddd;font-size:14px;background:#fff">
                 ${Object.entries(TEMPLATE_META).map(([k,v])=>'<option value="'+k+'">'+v.icon+' '+k+' - '+v.cards+'</option>').join('')}
               </select>
             </div>
             <button id="nw-gen-btn" onclick="NoteWorkshop.generateNote()" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:10px;padding:10px 24px;cursor:pointer;font-size:14px;font-weight:700;white-space:nowrap;min-height:40px;transition:all .2s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">🚀 AI一键生成笔记</button>
           </div>
+          <div id="nw-auto-match-info"></div>
           <div id="nw-gen-status"></div>
         </div>`;
 
@@ -11252,13 +11261,143 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         _carouselGo(_carouselCur + dir);
       }
 
+      /* ---- 智能匹配：根据学科+年级自动分析卡片并推荐最佳模板 ---- */
+      let _matchCache = {}; // 缓存已分析的学科_年级结果
+      async function _autoMatchFromCards() {
+        const subjSel = document.getElementById('nw-gen-subject');
+        const gradeSel = document.getElementById('nw-gen-grade');
+        const tmplSel = document.getElementById('nw-gen-template');
+        const info = document.getElementById('nw-auto-match-info');
+        if (!subjSel || !gradeSel) return;
+
+        const subject = subjSel.value;
+        const grade = gradeSel.value;
+        if (!subject || !grade) return;
+
+        const cacheKey = subject + '_' + grade;
+
+        // 已有缓存直接用
+        if (_matchCache[cacheKey]) {
+          _applyMatchResult(_matchCache[cacheKey], info, tmplSel);
+          return;
+        }
+
+        if (info) info.innerHTML = '<div style="padding:8px 12px;color:#3498db;font-size:12px;margin-top:8px">🔍 正在分析 ' + subject + grade + ' 卡片数据...</div>';
+
+        // 构建base path（兼容 GitHub Pages / 本地 / Tunnel）
+        let basePath;
+        const loc = window.location;
+        if (loc.hostname.includes('github.io')) {
+          const pathPrefix = loc.pathname.replace(/\/[^/]*$/, '');
+          basePath = pathPrefix + '/knowledge_cards/小学/';
+        } else {
+          basePath = 'knowledge_cards/小学/';
+        }
+
+        const stdFile = basePath + subject + '_' + grade + '.json';
+        const boomFile = basePath + subject + '_' + grade + '_爆款.json';
+
+        try {
+          const [stdResp, boomResp] = await Promise.all([
+            fetch(encodeURI(stdFile)).catch(() => null),
+            fetch(encodeURI(boomFile)).catch(() => null)
+          ]);
+
+          const allCards = [];
+          for (const resp of [stdResp, boomResp]) {
+            if (resp && resp.ok) {
+              const data = await resp.json();
+              (data.units || []).forEach(u => {
+                (u.cards || []).forEach(c => allCards.push(c));
+              });
+            }
+          }
+
+          if (allCards.length === 0) {
+            if (info) info.innerHTML = '<div style="padding:8px 12px;color:#f39c12;font-size:12px;margin-top:8px">⚠️ ' + subject + grade + ' 暂无卡片数据</div>';
+            return;
+          }
+
+          // 统计卡片类型分布
+          const typeCounts = {};
+          allCards.forEach(c => {
+            const t = c.type || '未知';
+            typeCounts[t] = (typeCounts[t] || 0) + 1;
+          });
+
+          // 按模板累计匹配卡片数
+          const tmplScores = { '反差型': 0, '挑战型': 0, '干货型': 0, '故事型': 0 };
+          Object.entries(typeCounts).forEach(([type, count]) => {
+            const tmpl = CARD_TYPE_MAP[type];
+            if (tmpl) tmplScores[tmpl] += count;
+          });
+
+          // 找最佳模板
+          let bestTmpl = '干货型', bestScore = 0;
+          Object.entries(tmplScores).forEach(([tmpl, score]) => {
+            if (score > bestScore) { bestScore = score; bestTmpl = tmpl; }
+          });
+
+          const result = { subject, grade, totalCards: allCards.length, typeCounts, tmplScores, bestTmpl, bestScore };
+          _matchCache[cacheKey] = result;
+          _applyMatchResult(result, info, tmplSel);
+
+        } catch(e) {
+          console.warn('[NoteWorkshop] auto-match error:', e);
+          if (info) info.innerHTML = '<div style="padding:8px 12px;color:#e74c3c;font-size:12px;margin-top:8px">❌ 卡片分析失败: ' + e.message + '</div>';
+        }
+      }
+
+      function _applyMatchResult(result, info, tmplSel) {
+        const { subject, grade, totalCards, typeCounts, tmplScores, bestTmpl, bestScore } = result;
+        const meta = TEMPLATE_META[bestTmpl];
+
+        // 自动选择最佳模板
+        if (tmplSel) tmplSel.value = bestTmpl;
+
+        // 构建类型分布摘要（按数量降序，最多显示5个）
+        const typeList = Object.entries(typeCounts)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 5)
+          .map(([t, c]) => '<span style="background:' + (CARD_TYPE_MAP[t] ? TEMPLATE_META[CARD_TYPE_MAP[t]].color + '18' : '#eee') + ';padding:1px 6px;border-radius:6px;font-size:11px">' + t + ' ' + c + '张</span>')
+          .join(' ');
+
+        // 模板得分条
+        const maxScore = Math.max(...Object.values(tmplScores), 1);
+        const barHtml = Object.entries(tmplScores).map(([t, s]) => {
+          const m = TEMPLATE_META[t];
+          const pct = Math.round(s / maxScore * 100);
+          const isBest = t === bestTmpl;
+          return '<div style="display:flex;align-items:center;gap:6px;margin-top:3px">' +
+            '<span style="font-size:12px;min-width:70px;' + (isBest ? 'font-weight:700;color:' + m.color : 'color:#888') + '">' + m.icon + ' ' + t + '</span>' +
+            '<div style="flex:1;height:6px;background:#f0f0f0;border-radius:3px;overflow:hidden">' +
+            '<div style="width:' + pct + '%;height:100%;background:' + m.color + ';border-radius:3px;transition:width .5s"></div></div>' +
+            '<span style="font-size:11px;color:#999;min-width:24px;text-align:right">' + s + '</span></div>';
+        }).join('');
+
+        if (info) {
+          info.innerHTML = '<div style="padding:12px 14px;background:linear-gradient(135deg,' + meta.color + '08,' + meta.color + '04);border:1px solid ' + meta.color + '22;border-radius:10px;margin-top:10px">' +
+            '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">' +
+            '<span style="font-size:13px;font-weight:700;color:' + meta.color + '">' + meta.icon + ' 智能推荐: ' + bestTmpl + '</span>' +
+            '<span style="font-size:11px;color:#999">📊 ' + subject + grade + ' · ' + totalCards + '张卡片</span></div>' +
+            '<div style="margin-bottom:8px">' + typeList + '</div>' +
+            barHtml +
+            '</div>';
+        }
+      }
+
       /* ---- init ---- */
       async function init(){
         inited = true;
         await loadNotes();
         renderList();
         // 如果有跨模块传入的卡片上下文，自动预填
-        _applyPipelineContext();
+        if (_pipelineState.card) {
+          _applyPipelineContext();
+        } else {
+          // 无跨模块上下文时，自动分析当前学科+年级的卡片推荐模板
+          _autoMatchFromCards();
+        }
       }
 
       // 应用跨模块传入的卡片上下文
@@ -11270,19 +11409,15 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         const gradeSel = document.getElementById('nw-gen-grade');
         if (subjSel && ps.subject) subjSel.value = ps.subject;
         if (gradeSel && ps.gradeShort) gradeSel.value = ps.gradeShort;
-        // 根据卡片类型自动选择最佳模板
+        // 根据卡片类型自动选择最佳模板（使用共享映射表）
         const cardType = ps.card.type || '';
-        const typeMap = {
-          '陷阱卡':'反差型','辨析卡':'反差型','易错字陷阱卡':'反差型','易混词陷阱卡':'反差型','语法纠错卡':'反差型','易错卡':'反差型','易错字卡':'反差型',
-          '挑战卡':'挑战型','速算卡':'挑战型','发音挑战卡':'挑战型','古诗默写挑战卡':'挑战型','拼音闯关卡':'挑战型','笔顺挑战卡':'挑战型',
-          '方法卡':'干货型','公式卡':'干货型','概念卡':'干货型','阅读技巧卡':'干货型','写作方法卡':'干货型','词汇卡':'干货型','语法卡':'干货型','句型卡':'干货型',
-          '生活卡':'故事型','思维卡':'故事型','对战卡':'故事型','情景对话卡':'故事型','亲子古诗PK卡':'故事型','亲子英语PK卡':'故事型'
-        };
-        const bestTmpl = typeMap[cardType];
+        const bestTmpl = CARD_TYPE_MAP[cardType];
         const tmplSel = document.getElementById('nw-gen-template');
         if (tmplSel && bestTmpl) tmplSel.value = bestTmpl;
         // 显示卡片上下文横幅
         _renderPipelineBanner();
+        // 同时触发智能匹配显示卡片分布
+        _autoMatchFromCards();
       }
 
       // 渲染卡片上下文横幅
@@ -11342,7 +11477,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         if (banner) banner.remove();
       }
 
-      return { init, showDetail, copyBody, _carouselGo, _carouselNav, generateNote, generateCarouselImages, setFilter, clearPipeline };
+      return { init, showDetail, copyBody, _carouselGo, _carouselNav, generateNote, generateCarouselImages, setFilter, clearPipeline, autoMatch: _autoMatchFromCards };
     })();
 
 
