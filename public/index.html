@@ -10369,8 +10369,15 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         if (promptDiv) promptDiv.style.display = 'none';
 
         try {
-          // 提取 subject
-          const cardSubject = (card.full_id || '').includes('\u8bed\u6587') ? '\u8bed\u6587' : (card.full_id || '').includes('\u82f1\u8bed') ? '\u82f1\u8bed' : '\u6570\u5b66';
+          // 提取 subject（优先使用 _subject 属性，fallback 从 full_id 推断）
+          var cardSubject = card._subject || '';
+          if (!cardSubject) {
+            var fid = card.full_id || '';
+            if (fid.includes('\u8bed\u6587')) cardSubject = '\u8bed\u6587';
+            else if (fid.includes('\u82f1\u8bed')) cardSubject = '\u82f1\u8bed';
+            else if (fid.includes('\u517b\u751f\u51cf\u8102') || fid.includes('\u517b\u751f') || fid.includes('\u51cf\u8102') || fid.includes('\u878d\u5408')) cardSubject = '\u517b\u751f\u51cf\u8102';
+            else cardSubject = '\u6570\u5b66';
+          }
 
           // 调用服务端 v3 全自动流水线
           if (status) status.innerHTML = '\u26a1 v3\u6d41\u6c34\u7ebf: Step1 Prompt\u751f\u6210 \u2192 Step2 AI\u751f\u56fe \u2192 Step3 OCR\u5ba1\u8ba1 \u2192 Step4 \u81ea\u52a8\u91cd\u8bd5 \u2192 Step5 PIL\u4fee\u8865+\u8d28\u68c0<br><span style="font-size:12px;color:#888">\u5168\u6d41\u7a0b\u7ea620-60\u79d2\uff0c\u8bf7\u8010\u5fc3\u7b49\u5f85...</span>';

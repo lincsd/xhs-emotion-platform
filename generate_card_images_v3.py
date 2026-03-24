@@ -204,48 +204,162 @@ LINE2: 第二处文字
 
 提示词长度: 350-500 英文单词。"""
 
+# ─── 养生减脂类专用模板 ───
+_WELLNESS_SUBJECTS = {'养生', '减脂', '养生减脂'}
+
+PROMPT_SYSTEM_TEMPLATE_WELLNESS = """你是小红书爆款知识卡片 AI 图片 Prompt 工程师。
+
+你的任务：为一张{subject}知识卡片写一段**英文** AI 图片生成提示词。
+
+══════ 核心思路 ══════
+
+每张卡片 = 一个养生/减脂知识的"一图秒懂"呈现。
+
+设计三步：
+1. 用最吸引眼球的视觉对比/清单/图解展示核心知识
+{visual_strategy_block}
+2. 关键数据/步骤用图标+色块清晰呈现
+3. 大字金句 + 行动口诀(≤10字)
+
+══════ 视觉设计 ══════
+
+- 竖屏 3:4 画布
+- 核心知识图占 ≥ 45%
+- 全卡最多4个区块：标题/核心图/知识要点/口诀
+- ≥ 25% 留白
+- 一个可爱养生博主卡通形象 + ≤6字气泡
+- 小红书风格：鲜明渐变背景，饱和色banner，白色圆角内容卡片
+- 养生减脂主题：抹茶绿/樱花粉/暖杏色为主
+
+══════ ⚠️ 中文文字极简原则 ══════
+
+这是最重要的规则！AI 图片模型渲染中文容易出错，必须极度精简：
+
+- 全卡中文 **≤ 20字**（越少越好！）
+- 标题 ≤ 4字（72pt 超大粗体）
+- 核心金句 ≤ 6字
+- 口诀 ≤ 8字
+- 气泡 ≤ 4字
+- ❌ 绝不超过6个连续中文字符
+- ❌ 不写段落、定义、解释
+- 数字和数据用阿拉伯数字/符号
+- 能用图/箭头/色块/图标表达的，不用文字
+
+══════ 你必须列出的文字清单 ══════
+
+在 prompt 末尾，用 [TEXT_MANIFEST] 标签列出图片中出现的所有中文文字：
+[TEXT_MANIFEST]
+TITLE: 标题文字
+LINE1: 第一处文字
+LINE2: 第二处文字
+...
+[/TEXT_MANIFEST]
+
+这个清单将用于后续OCR审计对照，务必精确！
+
+══════ 配色 ══════
+
+鲜明渐变背景(抹茶绿/樱花粉/暖杏色/薰衣草紫选一)
+标题banner饱和色，内容区白色圆角卡片
+重点数据用鲜明对比色超大加粗
+✓翠绿 #2ED573, ✗亮红 #FF4757
+
+══════ 输出格式 ══════
+
+只输出英文提示词 + TEXT_MANIFEST，不要其他内容。
+
+提示词开头必须写:
+"IMPORTANT: All visible text MUST be Simplified Chinese (简体中文). LARGE BOLD thick-stroke rounded sans-serif. Max 20 Chinese chars total, each block ≤6 chars. No English text in the image. Clean spacious layout, ≥25% whitespace."
+
+提示词长度: 350-500 英文单词。"""
+
 
 def _build_card_info(card, subject, grade, semester):
-    """构建传给 prompt 生成器的卡片信息"""
-    card_type = card.get('type', '方法卡')
+    """构建传给 prompt 生成器的卡片信息（自动区分教育/养生类）"""
+    if subject in _WELLNESS_SUBJECTS:
+        return _build_card_info_wellness(card, subject, grade, semester)
+    return _build_card_info_edu(card, subject, grade, semester)
 
-    # 提取例题
+
+def _build_card_info_wellness(card, subject, grade, semester):
+    """构建养生减脂类卡片信息"""
+    card_type = card.get('type', '干货卡')
+
     example_info = ''
     example_steps = ''
     if card.get('example'):
         ex = card['example']
-        example_info = ex['question'][:120]
+        example_info = (ex.get('question') or '')[:120]
+        if ex.get('steps'):
+            steps_text = '\n'.join(f'  {i+1}. {s}' for i, s in enumerate(ex['steps'][:5]))
+            example_steps = f"\n【步骤】:\n{steps_text[:500]}"
+        if ex.get('answer'):
+            example_steps += f"\n【结论】: {str(ex['answer'])[:150]}"
+
+    points = card.get('core_points', [])[:4]
+    clean_pts = [str(p)[:80] for p in points]
+
+    mistakes_info = ''
+    if card.get('mistakes'):
+        m = card['mistakes'][0]
+        mistakes_info = f"\n常见误区: ❌{m.get('wrong', '')[:100]} → ✅{m.get('correct', '')[:100]}"
+
+    hook = ''
+    if card.get('emotion_hook'):
+        hook = f"\n情绪钩子: {card['emotion_hook'][:100]}"
+
+    return f"""主题: {subject} | 分类: {grade} {semester}
+标题: {card.get('title', '')} | 类型: {card_type}
+
+【案例】: {example_info or '根据知识点展示最典型场景'}
+{example_steps}
+
+【定义】: {card.get('definition', '')[:120]}
+【要点】: {chr(10).join('• ' + p for p in clean_pts[:3])}
+【口诀】: {card.get('memory_tip', '')[:60]}
+{mistakes_info}
+{hook}
+难度: {card.get('difficulty', 2)}/5"""
+
+
+def _build_card_info_edu(card, subject, grade, semester):
+    """构建教育类卡片信息"""
+    card_type = card.get('type', '方法卡')
+
+    example_info = ''
+    example_steps = ''
+    if card.get('example'):
+        ex = card['example']
+        example_info = (ex.get('question') or '')[:120]
         if ex.get('steps'):
             steps_text = '\n'.join(f'  {i+1}. {s}' for i, s in enumerate(ex['steps']))
             example_steps = f"\n【解题步骤】:\n{steps_text[:500]}"
         if ex.get('answer'):
             example_steps += f"\n【正确答案】: {ex['answer']}"
 
-    # 提取公式
-    points = card['core_points'][:4]
+    points = card.get('core_points', [])[:4]
     formulas = [p[:80] for p in points if any(c in p for c in '=÷×+−≥≤<>°²³∠')]
     clean_pts = [p[:80] for p in points if not any(c in p for c in '=÷×+−≥≤<>°²³∠')]
 
-    # 易错点
     mistakes_info = ''
     if card.get('mistakes'):
         m = card['mistakes'][0]
-        mistakes_info = f"\n常见错误: ❌{m['wrong'][:150]} → ✅{m['correct'][:150]}"
+        mistakes_info = f"\n常见错误: ❌{m.get('wrong', '')[:150]} → ✅{m.get('correct', '')[:150]}"
 
     is_vert = _detect_vertical_calc(card)
 
     return f"""学科: {subject} | 年级: {grade}{semester}
-标题: {card['title']} | 类型: {card_type}
+标题: {card.get('title', '')} | 类型: {card_type}
 
 【例题】: {example_info or '根据知识点构造一道最典型例题'}
 {example_steps}
 
-【定义】: {card['definition'][:120]}
+【定义】: {card.get('definition', '')[:120]}
 【要点】: {chr(10).join('• ' + p for p in clean_pts[:3])}
 {('【公式】: ' + ' | '.join(formulas)) if formulas else ''}
-【口诀】(≤8字): {card['memory_tip'][:40]}
+【口诀】(≤8字): {card.get('memory_tip', '')[:40]}
 {mistakes_info}
-难度: {card['difficulty']}/5
+难度: {card.get('difficulty', 3)}/5
 {'⚠️ 笔算竖式类：必须画正确竖式' if is_vert else ''}"""
 
 
@@ -255,17 +369,27 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
     type_rules = CARD_TYPE_VISUAL_RULES.get(card_type, CARD_TYPE_VISUAL_RULES['方法卡'])
     is_vert = _detect_vertical_calc(card)
 
-    if is_vert:
+    # 根据学科选择对应模板
+    if subject in _WELLNESS_SUBJECTS:
+        visual_block = f"   {type_rules}"
+        system_prompt = PROMPT_SYSTEM_TEMPLATE_WELLNESS.format(
+            subject=subject,
+            visual_strategy_block=visual_block
+        )
+    elif is_vert:
         solve_block = """   ⚠️ 笔算竖式类：必须画彩色分层竖式！
    - 竖式用颜色分层(绿/橙/红)，旁边放正误对比
    - 数字必须和例题完全一致"""
+        system_prompt = PROMPT_SYSTEM_TEMPLATE.format(
+            subject=subject,
+            solve_strategy_block=solve_block
+        )
     else:
         solve_block = f"   {type_rules}"
-
-    system_prompt = PROMPT_SYSTEM_TEMPLATE.format(
-        subject=subject,
-        solve_strategy_block=solve_block
-    )
+        system_prompt = PROMPT_SYSTEM_TEMPLATE.format(
+            subject=subject,
+            solve_strategy_block=solve_block
+        )
 
     card_info = _build_card_info(card, subject, grade, semester)
 
