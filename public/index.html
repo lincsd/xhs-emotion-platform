@@ -3210,7 +3210,7 @@
       <section id="page-knowledge-cards" class="page hidden">
         <div class="section-card">
           <h2 class="section-title">📚 知识卡片</h2>
-          <p class="section-desc">小学数学全年级知识卡 · 一年级到六年级 · 按年级/单元浏览 · 下载精美卡片图</p>
+          <p class="section-desc">小学教育 & 养生减脂知识卡 · 按赛道/学科/单元浏览 · 下载精美卡片图</p>
           <div id="kc-filter-bar" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px"></div>
           <div id="kc-unit-tabs" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px"></div>
           <div id="kc-card-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px"></div>
@@ -9040,38 +9040,81 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         '五上':'五年级上册','五下':'五年级下册','六上':'六年级上册','六下':'六年级下册'
       };
 
-      // ── 学科配置 ──
-      const SUBJECTS = [
-        { key: '数学', icon: '📐', label: '数学' },
-        { key: '语文', icon: '📖', label: '语文' },
-        { key: '英语', icon: '🔤', label: '英语' }
-      ];
+      // ── 赛道配置 ──
+      const STAGE_CONFIG = {
+        '小学': {
+          label: '小学教育', icon: '🏫', folder: '小学',
+          subjects: [
+            { key: '数学', icon: '📐', label: '数学' },
+            { key: '语文', icon: '📖', label: '语文' },
+            { key: '英语', icon: '🔤', label: '英语' }
+          ],
+          defaultSubject: '数学', defaultGrade: '三下',
+          fixedGrades: GRADES_ORDER
+        },
+        '养生减脂': {
+          label: '养生减脂', icon: '🌿', folder: '养生减脂',
+          subjects: [
+            { key: '养生', icon: '🧘', label: '养生' },
+            { key: '减脂', icon: '🔥', label: '减脂' },
+            { key: '养生减脂', icon: '✨', label: '融合' }
+          ],
+          defaultSubject: '养生', defaultGrade: '经期',
+          folder: '养生减脂'
+        }
+      };
+      function _stageSubjects() { return STAGE_CONFIG[currentStageKey]?.subjects || []; }
 
       // ── 状态 ──
       let PACKS = [];           // [标准卡片包, 爆款卡片包]
       let activePack = null;
       let activeUnitId = null;
+      let currentStageKey = '小学';
       let currentGrade = '三下'; // 默认年级
       let currentSubject = '数学'; // 默认学科
       let isLoading = false;
-      let cardCache = {};        // { '数学_三下': [stdPack, boomPack], ... }
+      let cardCache = {};        // { '小学_数学_三下': [stdPack, boomPack], ... }
+      let manifestData = null;
 
       // ── 基础路径（兼容 GitHub Pages / 本地 / Tunnel）──
       function getBasePath() {
-        // 判断是否在 GitHub Pages 上
         const loc = window.location;
+        const folder = STAGE_CONFIG[currentStageKey]?.folder || '小学';
         if (loc.hostname.includes('github.io')) {
-          // GitHub Pages: /xhs-emotion-platform/knowledge_cards/小学/
           const pathPrefix = loc.pathname.replace(/\/[^/]*$/, '');
-          return pathPrefix + '/knowledge_cards/小学/';
+          return pathPrefix + '/knowledge_cards/' + folder + '/';
         }
-        // 本地或 tunnel: /knowledge_cards/小学/
-        return 'knowledge_cards/小学/';
+        return 'knowledge_cards/' + folder + '/';
+      }
+
+      async function loadManifest() {
+        if (manifestData) return manifestData;
+        try {
+          const loc = window.location;
+          let p = 'knowledge_cards/manifest.json';
+          if (loc.hostname.includes('github.io')) {
+            p = loc.pathname.replace(/\/[^/]*$/, '') + '/knowledge_cards/manifest.json';
+          }
+          const r = await fetch(p);
+          if (r.ok) manifestData = await r.json();
+        } catch(e) { console.warn('manifest load failed', e); }
+        return manifestData;
+      }
+
+      function getGradesForSubject() {
+        const cfg = STAGE_CONFIG[currentStageKey];
+        if (cfg?.fixedGrades) return cfg.fixedGrades;
+        if (manifestData?.stages?.[currentStageKey]) {
+          return manifestData.stages[currentStageKey]
+            .filter(e => e.subject === currentSubject && !e.is_boom)
+            .map(e => e.grade_short);
+        }
+        return [];
       }
 
       // ── 加载卡片数据 ──
       async function loadGrade(gradeShort) {
-        const cacheKey = `${currentSubject}_${gradeShort}`;
+        const cacheKey = `${currentStageKey}_${currentSubject}_${gradeShort}`;
         if (cardCache[cacheKey]) {
           PACKS = cardCache[cacheKey];
           currentGrade = gradeShort;
@@ -9080,8 +9123,17 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         }
 
         const base = getBasePath();
-        const stdFile = `${base}${currentSubject}_${gradeShort}.json`;
-        const boomFile = `${base}${currentSubject}_${gradeShort}_爆款.json`;
+        let stdFile = `${base}${currentSubject}_${gradeShort}.json`;
+        let boomFile = `${base}${currentSubject}_${gradeShort}_爆款.json`;
+        // Manifest-driven: look up actual filenames
+        if (manifestData?.stages?.[currentStageKey]) {
+          const entries = manifestData.stages[currentStageKey];
+          const std = entries.find(e => e.subject === currentSubject && e.grade_short === gradeShort && !e.is_boom);
+          const boom = entries.find(e => e.subject === currentSubject && e.grade_short === gradeShort && e.is_boom)
+                    || entries.find(e => e.subject === currentSubject && e.is_boom);
+          if (std) stdFile = base + std.file;
+          if (boom) boomFile = base + boom.file;
+        }
 
         try {
           isLoading = true;
@@ -9133,6 +9185,11 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         const filterBar = document.getElementById('kc-filter-bar');
         if (!filterBar) return;
 
+        // 加载 manifest（用于动态年级 & 文件名查找）
+        await loadManifest();
+
+        // 渲染赛道选择器
+        renderStageSelector(filterBar);
         // 渲染学科选择器
         renderSubjectSelector(filterBar);
         // 渲染AI搜索栏
@@ -9151,15 +9208,70 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         if (activePack.units.length > 0) selectUnit(activePack.units[0].unit_id);
       }
 
+      function renderStageSelector(filterBar) {
+        let stageBar = filterBar.querySelector('.kc-stage-bar');
+        if (!stageBar) {
+          stageBar = document.createElement('div');
+          stageBar.className = 'kc-stage-bar';
+          stageBar.style.cssText = 'display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:12px;border-bottom:2px solid #667eea22';
+          filterBar.prepend(stageBar);
+        }
+        const btns = Object.entries(STAGE_CONFIG).map(([key, cfg]) => {
+          const active = key === currentStageKey;
+          return `<button onclick="KnowledgeCards.switchStage('${key}')"
+            class="kc-stage-btn" data-stage="${key}"
+            style="padding:8px 22px;border-radius:22px;border:2px solid ${active?'#667eea':'#e0e0e0'};
+            background:${active?'linear-gradient(135deg,#667eea,#764ba2)':'#fff'};
+            color:${active?'#fff':'#555'};cursor:pointer;font-size:14px;font-weight:${active?'700':'500'};
+            transition:all .2s;white-space:nowrap">${cfg.icon} ${cfg.label}</button>`;
+        }).join('');
+        stageBar.innerHTML = `<span style="font-weight:700;font-size:14px;color:#333;margin-right:4px">🔀 赛道：</span>${btns}`;
+      }
+
+      async function switchStage(stageKey) {
+        if (stageKey === currentStageKey) return;
+        currentStageKey = stageKey;
+        const cfg = STAGE_CONFIG[stageKey];
+        currentSubject = cfg.defaultSubject;
+        currentGrade = cfg.defaultGrade;
+        const filterBar = document.getElementById('kc-filter-bar');
+        // 更新赛道按钮
+        document.querySelectorAll('.kc-stage-btn').forEach(b => {
+          const on = b.dataset.stage === stageKey;
+          b.style.border = on ? '2px solid #667eea' : '2px solid #e0e0e0';
+          b.style.background = on ? 'linear-gradient(135deg,#667eea,#764ba2)' : '#fff';
+          b.style.color = on ? '#fff' : '#555';
+          b.style.fontWeight = on ? '700' : '500';
+        });
+        // 重新渲染学科和年级
+        renderSubjectSelector(filterBar);
+        renderGradeSelector(filterBar);
+        // 更新描述文字
+        const desc = document.querySelector('#page-knowledge-cards .section-desc');
+        if (desc) {
+          desc.textContent = stageKey === '小学'
+            ? '小学数学语文英语全年级知识卡 · 一年级到六年级 · 按年级/单元浏览 · 下载精美卡片图'
+            : '女生养生减脂知识卡 · 经期调理/体质辨识/饮食运动/融合方案 · 34张专业卡片';
+        }
+        // 加载默认数据
+        const ok = await loadGrade(currentGrade);
+        if (!ok) { renderError(`加载 ${cfg.label} 失败`); return; }
+        renderPackInfo(filterBar);
+        renderUnitTabs();
+        if (activePack.units.length > 0) selectUnit(activePack.units[0].unit_id);
+      }
+
       function renderSubjectSelector(filterBar) {
         let subjectBar = filterBar.querySelector('.kc-subject-bar');
         if (!subjectBar) {
           subjectBar = document.createElement('div');
           subjectBar.className = 'kc-subject-bar';
           subjectBar.style.cssText = 'display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #eee';
-          filterBar.prepend(subjectBar);
+          // 插入到赛道栏之后
+          const stageBar = filterBar.querySelector('.kc-stage-bar');
+          if (stageBar) stageBar.after(subjectBar); else filterBar.prepend(subjectBar);
         }
-        const btns = SUBJECTS.map(s => {
+        const btns = _stageSubjects().map(s => {
           const active = s.key === currentSubject;
           return `<button onclick="KnowledgeCards.switchSubject('${s.key}')"
             class="kc-subject-btn" data-subject="${s.key}"
@@ -9185,6 +9297,13 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           b.style.fontWeight = on ? '700' : '400';
         });
 
+        // 切换学科时重新渲染年级（养生减脂赛道各学科年级不同）
+        const grades = getGradesForSubject();
+        if (grades.length > 0 && !grades.includes(currentGrade)) {
+          currentGrade = grades[0]; // 重置为该学科第一个年级
+        }
+        renderGradeSelector(filterBar);
+
         // 重新加载当前年级的该学科数据
         const ok = await loadGrade(currentGrade);
         if (!ok) {
@@ -9197,8 +9316,9 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
       }
 
       function renderGradeSelector(filterBar) {
-        // 年级选择器
-        const gradeHtml = GRADES_ORDER.map(g => {
+        // 年级选择器（动态: 根据赛道+学科从manifest派生）
+        const grades = getGradesForSubject();
+        const gradeHtml = grades.map(g => {
           const active = g === currentGrade;
           const label = g;
           return `<button onclick="KnowledgeCards.switchGrade('${g}')"
@@ -9215,9 +9335,18 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           gradeBar = document.createElement('div');
           gradeBar.className = 'kc-grade-bar';
           gradeBar.style.cssText = 'display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #eee';
-          filterBar.prepend(gradeBar);
+          // 插入到搜索栏之后（保持: 赛道→学科→搜索→年级 的顺序）
+          const searchWrap = filterBar.querySelector('.kc-search-wrap');
+          if (searchWrap && searchWrap.nextSibling) {
+            filterBar.insertBefore(gradeBar, searchWrap.nextSibling);
+          } else if (searchWrap) {
+            searchWrap.after(gradeBar);
+          } else {
+            filterBar.appendChild(gradeBar);
+          }
         }
-        gradeBar.innerHTML = `<span style="font-weight:700;font-size:14px;color:#333;margin-right:4px">📚 年级：</span>${gradeHtml}`;
+        const gradeLabel = STAGE_CONFIG[currentStageKey]?.fixedGrades ? '📚 年级：' : '📂 分类：';
+        gradeBar.innerHTML = `<span style="font-weight:700;font-size:14px;color:#333;margin-right:4px">${gradeLabel}</span>${gradeHtml}`;
       }
 
       function renderPackInfo(filterBar) {
@@ -9690,7 +9819,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         _goToNoteWorkshop(card, currentSubject, currentGrade, null, 'knowledge-cards');
       }
 
-      return { init, selectUnit, showDetail, downloadCard, switchPack, switchGrade, switchSubject, aiSearch, clearSearch, _goNote, _getPacks: () => PACKS, _getState: () => ({ subject: currentSubject, grade: currentGrade }) };
+      return { init, selectUnit, showDetail, downloadCard, switchPack, switchGrade, switchSubject, switchStage, aiSearch, clearSearch, _goNote, _getPacks: () => PACKS, _getState: () => ({ subject: currentSubject, grade: currentGrade, stage: currentStageKey }) };
     })();
 
     // ============ 🧪 Prompt 工程库模块 ============
@@ -9815,12 +9944,18 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
             const manifestResp = await fetch(encodeURI(base + 'manifest.json'));
             if (!manifestResp.ok) throw new Error('manifest fetch failed');
             const manifest = await manifestResp.json();
-            const entries = manifest.stages?.['小学'] || [];
-            // 并行加载所有 JSON 文件
-            const fetches = entries.map(e =>
-              fetch(encodeURI(base + '小学/' + e.file)).then(r => r.ok ? r.json() : null).catch(() => null)
-            );
-            const results = await Promise.all(fetches);
+            // 加载所有赛道的卡片数据
+            const allStages = Object.keys(manifest.stages || {});
+            const allFetches = [];
+            for (const stage of allStages) {
+              const entries = manifest.stages[stage] || [];
+              for (const e of entries) {
+                allFetches.push(
+                  fetch(encodeURI(base + stage + '/' + e.file)).then(r => r.ok ? r.json() : null).catch(() => null)
+                );
+              }
+            }
+            const results = await Promise.all(allFetches);
             for (const pack of results) {
               if (!pack || !pack.units) continue;
               for (const u of pack.units) {
@@ -10729,11 +10864,16 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         '陷阱卡':'反差型','辨析卡':'反差型','易错字陷阱卡':'反差型','易混词陷阱卡':'反差型','语法纠错卡':'反差型','易错卡':'反差型','易错字卡':'反差型',
         '挑战卡':'挑战型','速算卡':'挑战型','发音挑战卡':'挑战型','古诗默写挑战卡':'挑战型','拼音闯关卡':'挑战型','笔顺挑战卡':'挑战型',
         '方法卡':'干货型','公式卡':'干货型','概念卡':'干货型','阅读技巧卡':'干货型','写作方法卡':'干货型','词汇卡':'干货型','语法卡':'干货型','句型卡':'干货型',
-        '生活卡':'故事型','思维卡':'故事型','对战卡':'故事型','情景对话卡':'故事型','亲子古诗PK卡':'故事型','亲子英语PK卡':'故事型'
+        '生活卡':'故事型','思维卡':'故事型','对战卡':'故事型','情景对话卡':'故事型','亲子古诗PK卡':'故事型','亲子英语PK卡':'故事型',
+        // 养生减脂赛道卡片类型
+        '翻车卡':'反差型','反差卡':'反差型','误区卡':'反差型',
+        '清单卡':'干货型','干货卡':'干货型','科普卡':'干货型','食疗卡':'干货型','食谱卡':'干货型',
+        '对比卡':'反差型','体态卡':'干货型','跟练卡':'挑战型','穴位卡':'干货型',
+        '运动卡':'挑战型','减脂卡':'干货型','日常习惯卡':'故事型','体质调理卡':'干货型','体质卡':'干货型'
       };
 
-      const NW_GRADES = ['一上','一下','二上','二下','三上','三下','四上','四下','五上','五下','六上','六下'];
-      const NW_SUBJECTS = ['数学','语文','英语'];
+      const NW_GRADES = ['一上','一下','二上','二下','三上','三下','四上','四下','五上','五下','六上','六下','经期','体质','饮食','运动','体质减脂','爆款'];
+      const NW_SUBJECTS = ['数学','语文','英语','养生','减脂','养生减脂'];
 
       const ROLE_PIPELINE = [
         {role:'R1',name:'笔记策划师',icon:'🧠',desc:'选卡+叙事弧线+轮播规划'},
@@ -11308,18 +11448,37 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
 
         if (info) info.innerHTML = '<div style="padding:8px 12px;color:#3498db;font-size:12px;margin-top:8px">🔍 正在分析 ' + subject + grade + ' 卡片数据...</div>';
 
-        // 构建base path（兼容 GitHub Pages / 本地 / Tunnel）
+        // 构建base path（兼容多赛道 + GitHub Pages / 本地 / Tunnel）
         let basePath;
         const loc = window.location;
+        // 根据学科判断赛道
+        const isWellness = ['养生','减脂','养生减脂'].includes(subject);
+        const stageFolder = isWellness ? '养生减脂' : '小学';
         if (loc.hostname.includes('github.io')) {
           const pathPrefix = loc.pathname.replace(/\/[^/]*$/, '');
-          basePath = pathPrefix + '/knowledge_cards/小学/';
+          basePath = pathPrefix + '/knowledge_cards/' + stageFolder + '/';
         } else {
-          basePath = 'knowledge_cards/小学/';
+          basePath = 'knowledge_cards/' + stageFolder + '/';
         }
 
-        const stdFile = basePath + subject + '_' + grade + '.json';
-        const boomFile = basePath + subject + '_' + grade + '_爆款.json';
+        // 尝试从 manifest 查找实际文件名
+        let stdFile = basePath + subject + '_' + grade + '.json';
+        let boomFile = basePath + subject + '_' + grade + '_爆款.json';
+        try {
+          const mPath = loc.hostname.includes('github.io')
+            ? loc.pathname.replace(/\/[^/]*$/, '') + '/knowledge_cards/manifest.json'
+            : 'knowledge_cards/manifest.json';
+          const mResp = await fetch(mPath);
+          if (mResp.ok) {
+            const manifest = await mResp.json();
+            const entries = manifest.stages?.[stageFolder] || [];
+            const std = entries.find(e => e.subject === subject && e.grade_short === grade && !e.is_boom);
+            const boom = entries.find(e => e.subject === subject && e.grade_short === grade && e.is_boom)
+                      || entries.find(e => e.subject === subject && e.is_boom);
+            if (std) stdFile = basePath + std.file;
+            if (boom) boomFile = basePath + boom.file;
+          }
+        } catch(e) {}
 
         try {
           const [stdResp, boomResp] = await Promise.all([
@@ -11427,16 +11586,21 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
       // 从卡片数据中智能提取学科
       function _detectSubjectFromCard(card, fallback) {
         // 优先用 _subject 字段
-        if (card._subject && ['数学','语文','英语'].includes(card._subject)) return card._subject;
-        // 从 full_id 提取 (格式如 "语文-五下-T3-01" 或 "数学_三下_...")
+        if (card._subject && ['数学','语文','英语','养生','减脂','养生减脂'].includes(card._subject)) return card._subject;
+        // 从 full_id 提取
         const fid = card.full_id || card.card_id || '';
         if (/语文/.test(fid)) return '语文';
         if (/英语/.test(fid)) return '英语';
         if (/数学/.test(fid)) return '数学';
+        if (/养生减脂/.test(fid)) return '养生减脂';
+        if (/养生/.test(fid)) return '养生';
+        if (/减脂/.test(fid)) return '减脂';
         // 从 type 推断学科
         const type = card.type || '';
         if (/古诗|默写|拼音|笔顺|阅读|写作|易错字|作文/.test(type)) return '语文';
         if (/发音|词汇|语法|句型|英语|对话/.test(type)) return '英语';
+        if (/食疗|穴位|体质|泡脚|经期|养生/.test(type)) return '养生';
+        if (/减脂|热量|运动|体态|跟练/.test(type)) return '减脂';
         return fallback || '数学';
       }
 
