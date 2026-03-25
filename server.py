@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260324g'  # v3异步轮询 解决Cloudflare tunnel 100s超时
+BUILD_VERSION = '20260324h'  # v3异步+全局超时240s+减少重试
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -153,6 +153,7 @@ IMAGE_GEN_MIN_GAP = 2.0  # 图片请求最小间隔(秒)
 _async_tasks = {}          # {task_id: {status, result, created, updated}}
 _async_tasks_lock = threading.Lock()
 _ASYNC_TASK_TTL = 600      # 任务结果保留10分钟
+_ASYNC_TASK_TIMEOUT = 240  # 后台任务最大运行时间(秒) — 超时返回最佳结果或错误
 
 def _get_next_server_key():
     """轮询获取下一个服务器端 API Key（线程安全）"""
@@ -3491,7 +3492,15 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             }
 
         def _run_v3(task_id, body):
-            """在后台线程执行 v3 流水线"""
+            """在后台线程执行 v3 流水线（带全局超时保护）"""
+            _start_time = time.time()
+
+            def _elapsed():
+                return time.time() - _start_time
+
+            def _timed_out():
+                return _elapsed() > _ASYNC_TASK_TIMEOUT
+
             try:
                 from generate_card_images_v3 import (
                     generate_image_prompt, generate_card_image,
@@ -3519,6 +3528,29 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                         _async_tasks[task_id]['progress'] = msg
                         _async_tasks[task_id]['updated'] = time.time()
 
+            def _finish_with_best(best_image, best_ext, best_score, used_model, rounds_used, final_action='timeout_best'):
+                """超时时用目前最好的结果返回"""
+                if not best_image:
+                    pipeline_log.append(f'⏰ 超时({_elapsed():.0f}s)且无可用图片')
+                    with _async_tasks_lock:
+                        _async_tasks[task_id] = {**_async_tasks[task_id],
+                            'status': 'error', 'result': {'error': f'v3流水线超时({_elapsed():.0f}s): Gemini API响应缓慢', 'pipeline': pipeline_log}, 'updated': time.time()}
+                    return
+                pipeline_log.append(f'⏰ 超时({_elapsed():.0f}s), 使用当前最佳结果(score={best_score})')
+                img_b64 = base64.b64encode(best_image).decode('utf-8')
+                mime = 'image/jpeg' if best_ext == 'jpg' else 'image/png'
+                result = {
+                    'ok': True, 'image': img_b64, 'mimeType': mime,
+                    'size': len(best_image), 'auditScore': best_score,
+                    'qualityScore': 0, 'qualityDetail': {'total': 0, 'comment': '超时跳过评分'},
+                    'model': used_model, 'rounds': rounds_used,
+                    'finalAction': final_action, 'manifest': {},
+                    'pipeline': pipeline_log, 'card_id': card.get('full_id', ''),
+                }
+                with _async_tasks_lock:
+                    _async_tasks[task_id] = {**_async_tasks[task_id],
+                        'status': 'done', 'result': result, 'updated': time.time(), 'progress': '完成(超时最佳)'}
+
             try:
                 # Step 1
                 _update_progress('Step1: 生成Prompt...')
@@ -3532,23 +3564,32 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     return
 
                 manifest_count = len(manifest) if manifest else 0
-                pipeline_log.append(f'Step1完成: {len(prompt)}字prompt, {manifest_count}处文字')
+                pipeline_log.append(f'Step1完成: {len(prompt)}字prompt, {manifest_count}处文字 ({_elapsed():.0f}s)')
                 time.sleep(1)
 
-                # Step 2-4
+                if _timed_out():
+                    _finish_with_best(None, 'png', 0, '', 0)
+                    return
+
+                # Step 2-4: 生成+审计循环
                 best_image = None
                 best_ext = 'png'
                 best_score = 0
                 audit_hint = ''
                 used_model = ''
                 rounds_used = 0
-                max_rounds = 1 if skip_audit else MAX_AUDIT_ROUNDS
+                # 异步模式下限制审计轮数为1（减少总时间）
+                max_rounds = 1 if skip_audit else min(MAX_AUDIT_ROUNDS, 2)
 
                 for round_num in range(1, max_rounds + 1):
+                    if _timed_out():
+                        pipeline_log.append(f'⏰ 超时, 跳出循环')
+                        break
+
                     rounds_used = round_num
-                    _update_progress(f'Step2: 生成图片 (round {round_num}/{max_rounds})...')
+                    _update_progress(f'Step2: AI生图 (round {round_num}/{max_rounds})... [{_elapsed():.0f}s]')
                     pipeline_log.append(f'Step2: 生成图片 (round {round_num})...')
-                    print(f'[v3-async] Step2: 生成图片 (round {round_num})...', flush=True)
+                    print(f'[v3-async] Step2: 生成图片 (round {round_num})... [{_elapsed():.0f}s]', flush=True)
 
                     img_data, ext, model = generate_card_image(
                         prompt, keys, card_title=title, subject=subject, audit_hint=audit_hint
@@ -3556,16 +3597,19 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     if model:
                         used_model = model
                     if not img_data:
-                        pipeline_log.append('Step2失败: 图片生成失败')
+                        pipeline_log.append(f'Step2失败: 图片生成失败 ({_elapsed():.0f}s)')
                         if best_image:
                             break
+                        if _timed_out():
+                            _finish_with_best(None, 'png', 0, '', rounds_used)
+                            return
                         with _async_tasks_lock:
                             _async_tasks[task_id] = {**_async_tasks[task_id],
-                                'status': 'error', 'result': {'error': 'Step2失败: 图片生成失败', 'pipeline': pipeline_log}, 'updated': time.time()}
+                                'status': 'error', 'result': {'error': 'Step2失败: 图片生成失败(所有模型/Key均失败)', 'pipeline': pipeline_log}, 'updated': time.time()}
                         return
 
                     size_kb = len(img_data) / 1024
-                    pipeline_log.append(f'Step2完成: {size_kb:.0f}KB (model={model})')
+                    pipeline_log.append(f'Step2完成: {size_kb:.0f}KB (model={model}) [{_elapsed():.0f}s]')
 
                     if skip_audit:
                         best_image = img_data
@@ -3573,14 +3617,22 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                         best_score = 100
                         break
 
+                    if _timed_out():
+                        # 已有图片但来不及审计 → 直接用
+                        best_image = img_data
+                        best_ext = ext
+                        best_score = 50  # 未审计
+                        pipeline_log.append(f'⏰ 超时, 跳过审计')
+                        break
+
                     # Step 3: OCR
-                    _update_progress(f'Step3: OCR审计 (round {round_num})...')
+                    _update_progress(f'Step3: OCR审计 (round {round_num})... [{_elapsed():.0f}s]')
                     pipeline_log.append('Step3: OCR审计...')
                     audit = ocr_audit(img_data, manifest, keys[0], all_keys=keys)
                     score = audit.get('overall_score', 0)
                     errors = audit.get('errors', [])
                     summary = audit.get('summary', '')
-                    pipeline_log.append(f'Step3完成: 得分={score}/100 ({summary})')
+                    pipeline_log.append(f'Step3完成: 得分={score}/100 ({summary}) [{_elapsed():.0f}s]')
 
                     if score > best_score:
                         best_image = img_data
@@ -3591,7 +3643,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                         pipeline_log.append(f'✅ OCR审计通过 (score={score})')
                         break
                     else:
-                        if round_num < max_rounds:
+                        if round_num < max_rounds and not _timed_out():
                             audit_hint = _build_audit_hint(audit, manifest)
                             pipeline_log.append(f'⚠️ 重新生成...')
                             time.sleep(2)
@@ -3602,10 +3654,14 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                             'status': 'error', 'result': {'error': '图片生成全部失败', 'pipeline': pipeline_log}, 'updated': time.time()}
                     return
 
+                if _timed_out():
+                    _finish_with_best(best_image, best_ext, best_score, used_model, rounds_used)
+                    return
+
                 # Step 5: PIL
                 final_action = 'pass'
-                if best_score < AUDIT_PASS_SCORE and manifest and not skip_audit:
-                    _update_progress('Step5: PIL文字修补...')
+                if best_score < AUDIT_PASS_SCORE and manifest and not skip_audit and not _timed_out():
+                    _update_progress(f'Step5: PIL文字修补... [{_elapsed():.0f}s]')
                     pipeline_log.append('Step5: PIL文字修补...')
                     final_audit = ocr_audit(best_image, manifest, keys[0], all_keys=keys)
                     repaired = _try_pil_text_repair(best_image, final_audit, manifest)
@@ -3619,17 +3675,21 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
                 # Quality score
                 quality = {'total': 0, 'comment': ''}
-                try:
-                    _update_progress('Step5b: 质量评分...')
-                    pipeline_log.append('Step5b: 质量评分...')
-                    quality = quality_score(best_image, keys[0], card_title=title, all_keys=keys)
-                    pipeline_log.append(f'质量评分: {quality.get("total", 0)}/100')
-                except Exception:
-                    pipeline_log.append('质量评分跳过')
+                if not _timed_out():
+                    try:
+                        _update_progress(f'Step5b: 质量评分... [{_elapsed():.0f}s]')
+                        pipeline_log.append('Step5b: 质量评分...')
+                        quality = quality_score(best_image, keys[0], card_title=title, all_keys=keys)
+                        pipeline_log.append(f'质量评分: {quality.get("total", 0)}/100')
+                    except Exception:
+                        pipeline_log.append('质量评分跳过')
+                else:
+                    pipeline_log.append('⏰ 超时, 跳过质量评分')
 
                 img_b64 = base64.b64encode(best_image).decode('utf-8')
                 mime = 'image/jpeg' if best_ext == 'jpg' else 'image/png'
-                print(f'[v3-async] ✅ {card.get("full_id","")} 完成: 审计={best_score} 质量={quality.get("total",0)}', flush=True)
+                total_time = _elapsed()
+                print(f'[v3-async] ✅ {card.get("full_id","")} 完成: 审计={best_score} 质量={quality.get("total",0)} 耗时={total_time:.0f}s', flush=True)
 
                 result = {
                     'ok': True,
@@ -3645,6 +3705,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     'manifest': manifest,
                     'pipeline': pipeline_log,
                     'card_id': card.get('full_id', ''),
+                    'elapsed': round(total_time, 1),
                 }
                 with _async_tasks_lock:
                     _async_tasks[task_id] = {**_async_tasks[task_id],

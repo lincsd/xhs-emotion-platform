@@ -79,7 +79,7 @@ def gemini_call(model, contents, api_key, gen_config=None, retries=2, all_keys=N
             attempt_num += 1
             try:
                 req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'})
-                with urllib.request.urlopen(req, timeout=240) as resp:
+                with urllib.request.urlopen(req, timeout=120) as resp:
                     return json.loads(resp.read().decode('utf-8'))
             except urllib.error.HTTPError as e:
                 err_body = e.read().decode('utf-8', errors='replace')
@@ -95,7 +95,7 @@ def gemini_call(model, contents, api_key, gen_config=None, retries=2, all_keys=N
                         break  # 跳到下一个key
                     else:
                         # 已经是最后一个key，短暂等待后重试
-                        wait = 8 * (retry + 1)
+                        wait = 5 * (retry + 1)
                         print(f'      ⏳ 所有key均受限, 等待{wait}秒...')
                         time.sleep(wait)
                 elif attempt_num < total_attempts:
@@ -330,12 +330,15 @@ def _build_card_info_edu(card, subject, grade, semester):
     example_steps = ''
     if card.get('example'):
         ex = card['example']
-        example_info = (ex.get('question') or '')[:120]
-        if ex.get('steps'):
-            steps_text = '\n'.join(f'  {i+1}. {s}' for i, s in enumerate(ex['steps']))
-            example_steps = f"\n【解题步骤】:\n{steps_text[:500]}"
-        if ex.get('answer'):
-            example_steps += f"\n【正确答案】: {ex['answer']}"
+        if isinstance(ex, str):
+            example_info = ex[:120]
+        else:
+            example_info = (ex.get('question') or '')[:120]
+            if ex.get('steps'):
+                steps_text = '\n'.join(f'  {i+1}. {s}' for i, s in enumerate(ex['steps']))
+                example_steps = f"\n【解题步骤】:\n{steps_text[:500]}"
+            if ex.get('answer'):
+                example_steps += f"\n【正确答案】: {ex['answer']}"
 
     points = card.get('core_points', [])[:4]
     formulas = [p[:80] for p in points if any(c in p for c in '=÷×+−≥≤<>°²³∠')]
@@ -485,9 +488,10 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint=''):
         'responseModalities': ['TEXT', 'IMAGE']
     }
 
-    # 每个模型用所有 key 尝试（3模型×3key = 最多9次机会）
+    # 按模型优先级尝试（遇到成功立即返回，失败换下一个模型）
+    # retries=1 减少单模型重试次数，加速失败切换
     for model in IMAGE_MODELS:
-        resp = gemini_call(model, contents, keys[0], gen_config=gen_config, retries=2, all_keys=keys)
+        resp = gemini_call(model, contents, keys[0], gen_config=gen_config, retries=1, all_keys=keys)
         if not resp:
             continue
         try:
