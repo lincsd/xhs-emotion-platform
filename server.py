@@ -2940,6 +2940,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             # 养生减脂的文件名: {subject}_{grade_short}.json
             card_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder, f'{subject}_{grade_short}.json')
             boom_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder, '养生减脂_爆款.json')
+            exam_file = None
             # 也搜索整个目录下所有文件
             all_wellness_files = []
             wellness_dir = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder)
@@ -2951,10 +2952,13 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             folder = '小学'
             card_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder, f'{subject}_{grade_short}.json')
             boom_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder, f'{subject}_{grade_short}_爆款.json')
+            exam_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder, f'{subject}_{grade_short}_考卷.json')
             all_wellness_files = []
 
         # 读取卡片数据
         files_to_search = [card_file, boom_file]
+        if exam_file:
+            files_to_search.append(exam_file)
         if all_wellness_files:
             files_to_search = list(set(files_to_search + all_wellness_files))
 

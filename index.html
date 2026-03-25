@@ -10968,7 +10968,10 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         '翻车卡':'反差型','反差卡':'反差型','误区卡':'反差型',
         '清单卡':'干货型','干货卡':'干货型','科普卡':'干货型','食疗卡':'干货型','食谱卡':'干货型',
         '对比卡':'反差型','体态卡':'干货型','跟练卡':'挑战型','穴位卡':'干货型',
-        '运动卡':'挑战型','减脂卡':'干货型','日常习惯卡':'故事型','体质调理卡':'干货型','体质卡':'干货型'
+        '运动卡':'挑战型','减脂卡':'干货型','日常习惯卡':'故事型','体质调理卡':'干货型','体质卡':'干货型',
+        // 考卷真题赛道卡片类型
+        '填空满分卡':'干货型','选择秒杀卡':'干货型','计算零失误卡':'干货型',
+        '判断火眼卡':'反差型','应用题拆解卡':'干货型','操作题规范卡':'干货型'
       };
 
       const NW_GRADES = ['一上','一下','二上','二下','三上','三下','四上','四下','五上','五下','六上','六下','经期','体质','饮食','运动','体质减脂','爆款'];
@@ -11563,6 +11566,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         // 尝试从 manifest 查找实际文件名
         let stdFile = basePath + subject + '_' + grade + '.json';
         let boomFile = basePath + subject + '_' + grade + '_爆款.json';
+        let examFile = basePath + subject + '_' + grade + '_考卷.json';
         try {
           const mPath = loc.hostname.includes('github.io')
             ? loc.pathname.replace(/\/[^/]*$/, '') + '/knowledge_cards/manifest.json'
@@ -11571,22 +11575,25 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           if (mResp.ok) {
             const manifest = await mResp.json();
             const entries = manifest.stages?.[stageFolder] || [];
-            const std = entries.find(e => e.subject === subject && e.grade_short === grade && !e.is_boom);
+            const std = entries.find(e => e.subject === subject && e.grade_short === grade && !e.is_boom && !e.is_exam);
             const boom = entries.find(e => e.subject === subject && e.grade_short === grade && e.is_boom)
                       || entries.find(e => e.subject === subject && e.is_boom);
+            const exam = entries.find(e => e.subject === subject && e.grade_short === grade && e.is_exam);
             if (std) stdFile = basePath + std.file;
             if (boom) boomFile = basePath + boom.file;
+            if (exam) examFile = basePath + exam.file;
           }
         } catch(e) {}
 
         try {
-          const [stdResp, boomResp] = await Promise.all([
+          const [stdResp, boomResp, examResp] = await Promise.all([
             fetch(encodeURI(stdFile)).catch(() => null),
-            fetch(encodeURI(boomFile)).catch(() => null)
+            fetch(encodeURI(boomFile)).catch(() => null),
+            fetch(encodeURI(examFile)).catch(() => null)
           ]);
 
           const allCards = [];
-          for (const resp of [stdResp, boomResp]) {
+          for (const resp of [stdResp, boomResp, examResp]) {
             if (resp && resp.ok) {
               const data = await resp.json();
               (data.units || []).forEach(u => {
