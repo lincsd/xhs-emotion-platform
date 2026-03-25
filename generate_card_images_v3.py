@@ -36,7 +36,7 @@ IMAGE_MODELS    = [                              # 图片生成（按优先级�
 ]
 
 MAX_AUDIT_ROUNDS = 3    # OCR审计最大重试轮数
-AUDIT_PASS_SCORE = 70   # OCR审计通过分数 (0-100)
+AUDIT_PASS_SCORE = 80   # OCR审计通过分数 (0-100) — 提高标准以减少乱码
 
 # ═══════════════════════════════════════════
 # API 基础设施
@@ -201,15 +201,16 @@ PROMPT_SYSTEM_TEMPLATE = """你是小红书爆款知识卡片 AI 图片 Prompt �
 
 这是最重要的规则！AI 图片模型渲染中文容易出错，必须极度精简：
 
-- 全卡中文 **≤ 20字**（越少越好！）
+- 全卡中文 **≤ 15字**（越少越好！理想≤ 10字）
 - 标题 ≤ 4字（72pt 超大粗体）
-- 核心金句 ≤ 6字
-- 口诀 ≤ 8字
-- 气泡 ≤ 4字
-- ❌ 绝不超过6个连续中文字符
-- ❌ 不写段落、定义、解释
+- 核心金句 ≤ 4字
+- 口诀 ≤ 6字
+- 气泡 ≤ 3字
+- ❌ 绝不超过4个连续中文字符（严格！）
+- ❌ 不写段落、定义、解释、长句子
 - 数字和数学符号用阿拉伯数字/符号(不用中文写数字)
-- 能用图/箭头/色块表达的，不用文字
+- 能用图/箭头/色块/图标表达的，绝不用文字
+- ❗每个中文字必须笔画清晰、粗体加大，绝不能出现乱码/错字/缺笔画
 
 ══════ 你必须列出的文字清单 ══════
 
@@ -235,7 +236,7 @@ LINE2: 第二处文字
 只输出英文提示词 + TEXT_MANIFEST，不要其他内容。
 
 提示词开头必须写:
-"IMPORTANT: All visible text MUST be Simplified Chinese (简体中文). LARGE BOLD thick-stroke rounded sans-serif. Max 20 Chinese chars total, each block ≤6 chars. No English text in the image. Clean spacious layout, ≥25% whitespace."
+"IMPORTANT: All visible text MUST be Simplified Chinese (简体中文). LARGE BOLD thick-stroke rounded sans-serif. Max 15 Chinese chars total, each block ≤4 chars. No English text in the image. Clean spacious layout, ≥25% whitespace. Every Chinese character must be pixel-perfect with clear strokes."
 
 提示词长度: 350-500 英文单词。"""
 
@@ -270,15 +271,16 @@ PROMPT_SYSTEM_TEMPLATE_WELLNESS = """你是小红书爆款知识卡片 AI 图片
 
 这是最重要的规则！AI 图片模型渲染中文容易出错，必须极度精简：
 
-- 全卡中文 **≤ 20字**（越少越好！）
+- 全卡中文 **≤ 15字**（越少越好！理想≤ 10字）
 - 标题 ≤ 4字（72pt 超大粗体）
-- 核心金句 ≤ 6字
-- 口诀 ≤ 8字
-- 气泡 ≤ 4字
-- ❌ 绝不超过6个连续中文字符
-- ❌ 不写段落、定义、解释
+- 核心金句 ≤ 4字
+- 口诀 ≤ 6字
+- 气泡 ≤ 3字
+- ❌ 绝不超过4个连续中文字符（严格！）
+- ❌ 不写段落、定义、解释、长句子
 - 数字和数据用阿拉伯数字/符号
-- 能用图/箭头/色块/图标表达的，不用文字
+- 能用图/箭头/色块/图标表达的，绝不用文字
+- ❗每个中文字必须笔画清晰、粗体加大，绝不能出现乱码/错字/缺笔画
 
 ══════ 你必须列出的文字清单 ══════
 
@@ -304,7 +306,7 @@ LINE2: 第二处文字
 只输出英文提示词 + TEXT_MANIFEST，不要其他内容。
 
 提示词开头必须写:
-"IMPORTANT: All visible text MUST be Simplified Chinese (简体中文). LARGE BOLD thick-stroke rounded sans-serif. Max 20 Chinese chars total, each block ≤6 chars. No English text in the image. Clean spacious layout, ≥25% whitespace."
+"IMPORTANT: All visible text MUST be Simplified Chinese (简体中文). LARGE BOLD thick-stroke rounded sans-serif. Max 15 Chinese chars total, each block ≤4 chars. No English text in the image. Clean spacious layout, ≥25% whitespace. Every Chinese character must be pixel-perfect with clear strokes."
 
 提示词长度: 350-500 英文单词。"""
 
@@ -496,22 +498,36 @@ def _parse_text_manifest(text):
 # ═══════════════════════════════════════════
 # Step 2: 生成卡片图片（强模型 + fallback）
 # ═══════════════════════════════════════════
-def generate_card_image(prompt, keys, card_title='', subject='', audit_hint=''):
+def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', manifest=None):
     """Step 2: 用最强图片模型生成卡片图片。
     
     多模型 × 多key 全组合尝试，最大化成功率。
     keys: API key 列表（全部），内部按 模型→全部key 的顺序尝试。
+    manifest: TEXT_MANIFEST 字典，用于逐字注入提示。
     """
     chinese_prefix = (
         f"CRITICAL INSTRUCTIONS (MUST FOLLOW):\n"
         f"1. This is a {subject} educational knowledge card about \"{card_title}\".\n"
         f"2. ALL visible text MUST be Simplified Chinese (简体中文). "
         f"Use LARGE, BOLD, thick-stroke rounded/gothic sans-serif font.\n"
-        f"3. Maximum 20 Chinese characters total. Each text block ≤ 6 characters.\n"
+        f"3. Maximum 15 Chinese characters total. Each text block ≤ 4 characters.\n"
         f"4. Render each Chinese character CLEARLY and CORRECTLY. "
         f"Thick bold strokes. High contrast. No thin/serif/cursive fonts.\n"
         f"5. The main title should be \"{card_title}\" in extra-large bold font.\n"
+        f"6. DO NOT substitute similar-looking characters. "
+        f"Every single Chinese character must be EXACTLY as specified below.\n"
     )
+
+    # 逐字注入 manifest —— 让模型精确知道每个字
+    if manifest:
+        chinese_prefix += "\n=== EXACT TEXT REFERENCE (copy these characters precisely) ===\n"
+        for key, val in manifest.items():
+            # 逐字拆分，每个字标 Unicode
+            char_detail = ' '.join(f'"{c}"(U+{ord(c):04X})' for c in val if '\u4e00' <= c <= '\u9fff')
+            chinese_prefix += f"{key}: \"{val}\"  →  Characters: {char_detail}\n"
+        chinese_prefix += "=== END TEXT REFERENCE ===\n"
+        chinese_prefix += "IMPORTANT: Render ONLY these exact characters. Do NOT change, swap, or approximate any character.\n"
+
     if audit_hint:
         chinese_prefix += f"\n⚠️ CORRECTION FROM PREVIOUS ATTEMPT:\n{audit_hint}\n"
 
@@ -633,16 +649,18 @@ def _build_audit_hint(audit_result, expected_manifest):
         exp = err.get('expected', '?')
         act = err.get('actual', '?')
         etype = err.get('type', 'unknown')
+        # 逐字拆分期望文字
+        char_detail = ' '.join(f'"{c}"(U+{ord(c):04X})' for c in exp if '\u4e00' <= c <= '\u9fff')
         if etype == 'garbled':
-            hints.append(f'The text "{exp}" appeared as garbled/unreadable "{act}". Please render "{exp}" clearly with thick bold strokes.')
+            hints.append(f'CRITICAL: The text "{exp}" appeared as garbled "{act}". Render EXACTLY these characters: {char_detail}. Use thick bold strokes.')
         elif etype == 'wrong_char':
-            hints.append(f'"{act}" should be "{exp}". Please fix this character.')
+            hints.append(f'WRONG CHARACTER: "{act}" must be replaced with "{exp}". Exact characters: {char_detail}.')
         elif etype == 'missing':
-            hints.append(f'The text "{exp}" is missing from the image. Please add it.')
+            hints.append(f'MISSING TEXT: "{exp}" is missing. Add it with exact characters: {char_detail}.')
         elif etype == 'distorted':
-            hints.append(f'The text "{exp}" is distorted. Please render it more clearly.')
+            hints.append(f'DISTORTED: "{exp}" is unreadable. Re-render clearly: {char_detail}.')
         else:
-            hints.append(f'Fix: "{act}" → "{exp}"')
+            hints.append(f'Fix: "{act}" → "{exp}" (characters: {char_detail})')
 
     return '\n'.join(hints)
 
@@ -661,14 +679,14 @@ def _try_pil_text_repair(image_data, audit_result, expected_manifest):
         print('      [PIL not available for text repair]')
         return image_data
 
-    # 只修补 high severity 的错误
-    high_errors = [e for e in audit_result.get('errors', []) if e.get('severity') == 'high']
-    if not high_errors:
+    # 修补 high 和 medium severity 的错误（更积极修补）
+    repair_errors = [e for e in audit_result.get('errors', []) if e.get('severity') in ('high', 'medium')]
+    if not repair_errors:
         return image_data
 
-    # 收集需要修补的文字
+    # 收集需要修补的文字（标题优先，然后其他错误文字）
     repair_texts = []
-    for err in high_errors[:3]:
+    for err in repair_errors[:5]:
         exp = err.get('expected', '')
         if exp and exp in [v for v in expected_manifest.values()]:
             repair_texts.append(exp)
@@ -683,7 +701,7 @@ def _try_pil_text_repair(image_data, audit_result, expected_manifest):
 
     # 尝试加载中文字体
     font = None
-    font_size = max(28, w // 20)
+    font_size = max(36, w // 16)  # 更大字号确保可读
     font_paths = [
         'C:/Windows/Fonts/msyh.ttc',       # 微软雅黑
         'C:/Windows/Fonts/simhei.ttf',      # 黑体
@@ -838,7 +856,8 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
         print(f'  ├─ Step 2: 生成图片{round_label}...', end='', flush=True)
         t1 = time.time()
         img_data, ext, model = generate_card_image(
-            prompt, keys, card_title=title, subject=subject, audit_hint=audit_hint
+            prompt, keys, card_title=title, subject=subject,
+            audit_hint=audit_hint, manifest=manifest
         )
         stats['image_gen_time'] += time.time() - t1
         stats['image_model'] = model or ''

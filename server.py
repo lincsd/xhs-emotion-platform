@@ -3425,7 +3425,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 print(f'[v3] Step2: 生成图片{round_label}...', flush=True)
 
                 img_data, ext, model = generate_card_image(
-                    prompt, keys, card_title=title, subject=subject, audit_hint=audit_hint
+                    prompt, keys, card_title=title, subject=subject,
+                    audit_hint=audit_hint, manifest=manifest
                 )
                 if model:
                     used_model = model
@@ -3654,7 +3655,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     print(f'[v3-async] Step2: 生成图片 (round {round_num})... [{_elapsed():.0f}s]', flush=True)
 
                     img_data, ext, model = generate_card_image(
-                        prompt, keys, card_title=title, subject=subject, audit_hint=audit_hint
+                        prompt, keys, card_title=title, subject=subject,
+                        audit_hint=audit_hint, manifest=manifest
                     )
                     if model:
                         used_model = model
