@@ -9114,7 +9114,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         if (cfg?.fixedGrades) return cfg.fixedGrades;
         if (manifestData?.stages?.[currentStageKey]) {
           const grades = manifestData.stages[currentStageKey]
-            .filter(e => e.subject === currentSubject && !e.is_boom)
+            .filter(e => e.subject === currentSubject && !e.is_boom && !e.is_exam)
             .map(e => e.grade_short);
           console.log('[KC] getGradesForSubject:', currentStageKey, currentSubject, '→', grades);
           return grades;
@@ -9138,17 +9138,21 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         const base = getBasePath();
         let stdFile = `${base}${currentSubject}_${gradeShort}.json`;
         let boomFile = `${base}${currentSubject}_${gradeShort}_爆款.json`;
+        let examFiles = []; // 考卷真题包
         // Manifest-driven: look up actual filenames
         if (manifestData?.stages?.[currentStageKey]) {
           const entries = manifestData.stages[currentStageKey];
-          const std = entries.find(e => e.subject === currentSubject && e.grade_short === gradeShort && !e.is_boom);
+          const std = entries.find(e => e.subject === currentSubject && e.grade_short === gradeShort && !e.is_boom && !e.is_exam);
           // Boom: try same subject+grade first, then same subject, then any boom in the stage
           const boom = entries.find(e => e.subject === currentSubject && e.grade_short === gradeShort && e.is_boom)
                     || entries.find(e => e.subject === currentSubject && e.is_boom)
                     || entries.find(e => e.is_boom);
+          // Exam packs: all exam entries for this subject+grade
+          const exams = entries.filter(e => e.subject === currentSubject && e.grade_short === gradeShort && e.is_exam);
           if (std) stdFile = base + std.file;
           if (boom) boomFile = base + boom.file;
-          console.log('[KC] manifest lookup: std=', std?.file, 'boom=', boom?.file);
+          examFiles = exams.map(e => base + e.file);
+          console.log('[KC] manifest lookup: std=', std?.file, 'boom=', boom?.file, 'exam=', exams.map(e=>e.file));
         } else {
           console.warn('[KC] loadGrade: no manifest data for stage', currentStageKey);
         }
@@ -9158,11 +9162,13 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           renderLoading();
           console.log('[KC] fetching std:', encodeURI(stdFile));
           console.log('[KC] fetching boom:', encodeURI(boomFile));
-          const [stdResp, boomResp] = await Promise.all([
+          const fetchPromises = [
             fetch(encodeURI(stdFile)),
-            fetch(encodeURI(boomFile)).catch(err => { console.warn('[KC] boom fetch error:', err); return null; })
-          ]);
-          console.log('[KC] std resp:', stdResp?.status, 'boom resp:', boomResp?.status);
+            fetch(encodeURI(boomFile)).catch(err => { console.warn('[KC] boom fetch error:', err); return null; }),
+            ...examFiles.map(f => fetch(encodeURI(f)).catch(err => { console.warn('[KC] exam fetch error:', err); return null; }))
+          ];
+          const [stdResp, boomResp, ...examResps] = await Promise.all(fetchPromises);
+          console.log('[KC] std resp:', stdResp?.status, 'boom resp:', boomResp?.status, 'exam resps:', examResps.map(r=>r?.status));
 
           const packs = [];
           if (stdResp && stdResp.ok) {
@@ -9174,6 +9180,14 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
             const boomData = await boomResp.json();
             boomData.total_cards = (boomData.units || []).reduce((s,u) => s + (u.cards||[]).length, 0);
             packs.push(boomData);
+          }
+          // 加载考卷真题包
+          for (const examResp of examResps) {
+            if (examResp && examResp.ok) {
+              const examData = await examResp.json();
+              examData.total_cards = (examData.units || []).reduce((s,u) => s + (u.cards||[]).length, 0);
+              packs.push(examData);
+            }
           }
 
           if (packs.length === 0) throw new Error(`无数据 (std:${stdResp?.status} boom:${boomResp?.status})`);
