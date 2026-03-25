@@ -3169,7 +3169,12 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             req = urllib.request.Request(url, data=req_body, headers={"Content-Type": "application/json"}, method="POST")
             resp = opener.open(req, timeout=120)
             data = json.loads(resp.read().decode('utf-8'))
-            text = data['candidates'][0]['content']['parts'][0]['text']
+            candidates = data.get('candidates', [])
+            if not candidates:
+                return self._send_json({'error': 'AI返回空结果(可能触发安全过滤)'}, 500)
+            text = candidates[0].get('content', {}).get('parts', [{}])[0].get('text', '')
+            if not text:
+                return self._send_json({'error': 'AI返回无文本内容'}, 500)
 
             # 提取JSON
             text = re.sub(r'^```json\s*', '', text.strip())
@@ -3299,7 +3304,10 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     req = urllib.request.Request(url, data=req_body, headers={"Content-Type": "application/json"}, method="POST")
                     resp = opener.open(req, timeout=30)
                     data = json.loads(resp.read().decode('utf-8'))
-                    text = data['candidates'][0]['content']['parts'][0]['text'].strip()
+                    candidates = data.get('candidates', [])
+                    if not candidates:
+                        raise ValueError('AI返回空结果')
+                    text = candidates[0].get('content', {}).get('parts', [{}])[0].get('text', '').strip()
                     indices = [int(x.strip()) for x in re.findall(r'\d+', text)]
                     ai_results = [all_cards[i] for i in indices if 0 <= i < len(all_cards)]
                     if ai_results:
@@ -3497,6 +3505,9 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         card = body.get('card')
         if not card or not card.get('full_id'):
             return self._send_json({'error': '缺少卡片数据(card.full_id)'}, 400)
+
+        if not SERVER_GEMINI_API_KEYS:
+            return self._send_json({'error': '服务端未配置 Gemini API Key'}, 500)
 
         task_id = secrets.token_hex(12)
         with _async_tasks_lock:
@@ -3849,6 +3860,13 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             '词汇卡': {'strategy': '词义→语境→记忆技巧', 'emotion': '陌生→关联→牢记'},
             '语法卡': {'strategy': '规则展示→例句对比→易错提醒', 'emotion': '困惑→清晰→操练'},
             '口语卡': {'strategy': '场景对话→核心句型→开口练习', 'emotion': '害羞→模仿→自信'},
+            # 考卷真题专题
+            '填空满分卡': {'strategy': '审题三步法→陷阱识别→验证', 'visual': '色块审题流程, 陷阱红圈, 单位对比', 'emotion': '警觉→细心→满分'},
+            '选择秒杀卡': {'strategy': '排除法→单位筛查→估算验证', 'visual': '四选项排列, 划掉错项, 绿色正确', 'emotion': '快速→精准→秒杀'},
+            '计算零失误卡': {'strategy': '竖式分层→进位检查→验算', 'visual': '彩色竖式, 对位检查, 验算步骤', 'emotion': '专注→仔细→零错'},
+            '判断火眼卡': {'strategy': '识别绝对词→举反例→判断', 'visual': '✓✗对比, 反例图, 陷阱词高亮', 'emotion': '怀疑→验证→火眼金睛'},
+            '应用题拆解卡': {'strategy': '读→画→列→验四步法', 'visual': '线段图, 流程色块, 答语模板', 'emotion': '畏难→拆解→满分'},
+            '操作题规范卡': {'strategy': '审题→作图→标注→检查', 'visual': '方格纸, 尺子画线, 检查清单', 'emotion': '随意→规范→满分'},
         }
         skill = CARD_TYPE_SKILLS.get(card_type, CARD_TYPE_SKILLS.get('方法卡', {}))
 
