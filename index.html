@@ -3210,7 +3210,7 @@
       <section id="page-knowledge-cards" class="page hidden">
         <div class="section-card">
           <h2 class="section-title">📚 知识卡片</h2>
-          <p class="section-desc">小学教育 & 养生减脂知识卡 · 按赛道/学科/单元浏览 · 下载精美卡片图</p>
+          <p class="section-desc">小学教育 & 养生减脂 & 国学文化 & 情感生活 知识卡 · 按赛道/学科/单元浏览 · 下载精美卡片图</p>
           <div id="kc-filter-bar" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px"></div>
           <div id="kc-unit-tabs" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px"></div>
           <div id="kc-card-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px"></div>
@@ -9061,6 +9061,20 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           ],
           defaultSubject: '养生', defaultGrade: '经期',
           folder: '养生减脂'
+        },
+        '国学文化': {
+          label: '国学文化', icon: '📜', folder: '国学文化',
+          subjects: [
+            { key: '国学', icon: '🏛️', label: '国学' }
+          ],
+          defaultSubject: '国学', defaultGrade: '预言'
+        },
+        '情感生活': {
+          label: '情感生活', icon: '💕', folder: '情感生活',
+          subjects: [
+            { key: '恋爱', icon: '💘', label: '恋爱' }
+          ],
+          defaultSubject: '恋爱', defaultGrade: '谈恋爱'
         }
       };
       function _stageSubjects() { return STAGE_CONFIG[currentStageKey]?.subjects || []; }
@@ -9296,9 +9310,13 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         // 更新描述文字
         const desc = document.querySelector('#page-knowledge-cards .section-desc');
         if (desc) {
-          desc.textContent = stageKey === '小学'
-            ? '小学数学语文英语全年级知识卡 · 一年级到六年级 · 按年级/单元浏览 · 下载精美卡片图'
-            : '女生养生减脂知识卡 · 经期调理/体质辨识/饮食运动/融合方案 · 34张专业卡片';
+          const descMap = {
+            '小学': '小学数学语文英语全年级知识卡 · 一年级到六年级 · 按年级/单元浏览 · 下载精美卡片图',
+            '养生减脂': '女生养生减脂知识卡 · 经期调理/体质辨识/饮食运动/融合方案 · 34张专业卡片',
+            '国学文化': '国学文化知识卡 · 古代预言故事/经典智慧 · 按专题浏览 · 下载精美卡片图',
+            '情感生活': '情感生活知识卡 · 恋爱心理/约会攻略/避雷指南/自我疗愈 · 18张实用卡片'
+          };
+          desc.textContent = descMap[stageKey] || STAGE_CONFIG[stageKey]?.label + '知识卡';
         }
         // 加载默认数据
         const ok = await loadGrade(currentGrade);
