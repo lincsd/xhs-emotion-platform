@@ -1023,8 +1023,20 @@
         "units": 4,
         "cards": 7
       }
+    ],
+    "国学文化": [
+      {
+        "file": "国学_预言.json",
+        "subject": "国学",
+        "grade": "古代预言故事",
+        "semester": "通识",
+        "grade_short": "预言",
+        "is_boom": false,
+        "units": 6,
+        "cards": 19
+      }
     ]
   },
-  "total_cards": 1620,
-  "total_files": 102
+  "total_cards": 1639,
+  "total_files": 103
 }

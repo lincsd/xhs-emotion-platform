@@ -2935,7 +2935,19 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
         # 根据 subject 判断文件夹和文件名
         _WELLNESS_SUBJECTS = {'养生', '减脂', '养生减脂', '融合'}
-        if subject in _WELLNESS_SUBJECTS:
+        _CULTURE_SUBJECTS = {'国学'}
+        if subject in _CULTURE_SUBJECTS:
+            folder = '国学文化'
+            card_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder, f'{subject}_{grade_short}.json')
+            boom_file = None
+            exam_file = None
+            all_wellness_files = []
+            culture_dir = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder)
+            if os.path.isdir(culture_dir):
+                for fn in os.listdir(culture_dir):
+                    if fn.endswith('.json'):
+                        all_wellness_files.append(os.path.join(culture_dir, fn))
+        elif subject in _WELLNESS_SUBJECTS:
             folder = '养生减脂'
             # 养生减脂的文件名: {subject}_{grade_short}.json
             card_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder, f'{subject}_{grade_short}.json')
@@ -2956,7 +2968,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             all_wellness_files = []
 
         # 读取卡片数据
-        files_to_search = [card_file, boom_file]
+        files_to_search = [f for f in [card_file, boom_file] if f]
         if exam_file:
             files_to_search.append(exam_file)
         if all_wellness_files:
@@ -3884,6 +3896,12 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             '阅读理解卡': {'strategy': '先看题→再读文→定位关键句→组织答案', 'visual': '文段分层色块, 关键句下划线, 答题模板', 'emotion': '畏难→拆解→能答'},
             '古诗默写卡': {'strategy': '理解诗意→抽查默写→易错字标红', 'visual': '古诗原文大字, 易错字红圈, 诗意图解', 'emotion': '模糊→理解→背熟'},
             '作文模板卡': {'strategy': '开头套路→中间展开→结尾升华', 'visual': '三段式框架, 好词好句高亮, 修辞示例', 'emotion': '动笔难→套模板→满分'},
+            # 国学文化专题
+            '预言解密卡': {'strategy': '原文引用→逐句拆解→历史验证', 'visual': '古文竖排大字, 拆字色块, 历史对照图', 'emotion': '好奇→解密→震撼'},
+            '人物传奇卡': {'strategy': '人物档案→传奇事迹→后世影响', 'visual': '人物画像, 故事场景还原, 名言金句', 'emotion': '好奇→敬佩→传承'},
+            '历史印证卡': {'strategy': '预言原文→历史事实→精准对比', 'visual': '左预言右历史对比栏, 时间线, 命中标记', 'emotion': '怀疑→震惊→折服'},
+            '反转揭秘卡': {'strategy': '常见认知→反转真相→深层启示', 'visual': '先展示误区, 大反转箭头, 真相揭晓', 'emotion': '以为→震惊→恍然大悟'},
+            '智慧启示卡': {'strategy': '故事总结→思维提炼→现代应用', 'visual': '古今对比, 思维导图, 金句收尾', 'emotion': '思考→领悟→启发'},
         }
         skill = CARD_TYPE_SKILLS.get(card_type, CARD_TYPE_SKILLS.get('方法卡', {}))
 
