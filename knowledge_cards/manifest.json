@@ -1035,8 +1035,20 @@
         "units": 6,
         "cards": 19
       }
+    ],
+    "情感生活": [
+      {
+        "file": "恋爱_谈恋爱.json",
+        "subject": "恋爱",
+        "grade": "谈恋爱全攻略",
+        "semester": "核心",
+        "grade_short": "谈恋爱",
+        "is_boom": false,
+        "units": 6,
+        "cards": 18
+      }
     ]
   },
-  "total_cards": 1639,
-  "total_files": 103
+  "total_cards": 1657,
+  "total_files": 104
 }

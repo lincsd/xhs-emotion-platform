@@ -2936,7 +2936,19 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         # 根据 subject 判断文件夹和文件名
         _WELLNESS_SUBJECTS = {'养生', '减脂', '养生减脂', '融合'}
         _CULTURE_SUBJECTS = {'国学'}
-        if subject in _CULTURE_SUBJECTS:
+        _EMOTION_SUBJECTS = {'恋爱'}
+        if subject in _EMOTION_SUBJECTS:
+            folder = '情感生活'
+            card_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder, f'{subject}_{grade_short}.json')
+            boom_file = None
+            exam_file = None
+            all_wellness_files = []
+            emotion_dir = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder)
+            if os.path.isdir(emotion_dir):
+                for fn in os.listdir(emotion_dir):
+                    if fn.endswith('.json'):
+                        all_wellness_files.append(os.path.join(emotion_dir, fn))
+        elif subject in _CULTURE_SUBJECTS:
             folder = '国学文化'
             card_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder, f'{subject}_{grade_short}.json')
             boom_file = None
@@ -3902,6 +3914,13 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             '历史印证卡': {'strategy': '预言原文→历史事实→精准对比', 'visual': '左预言右历史对比栏, 时间线, 命中标记', 'emotion': '怀疑→震惊→折服'},
             '反转揭秘卡': {'strategy': '常见认知→反转真相→深层启示', 'visual': '先展示误区, 大反转箭头, 真相揭晓', 'emotion': '以为→震惊→恍然大悟'},
             '智慧启示卡': {'strategy': '故事总结→思维提炼→现代应用', 'visual': '古今对比, 思维导图, 金句收尾', 'emotion': '思考→领悟→启发'},
+            # 情感生活专题
+            '恋爱心理卡': {'strategy': '心理学研究→恋爱现象解析→实用认知', 'visual': '大脑/心理示意图, 数据图表, 金句', 'emotion': '好奇→恍然大悟→自我认知'},
+            '暧昧信号卡': {'strategy': '行为信号→心理解读→判断方法', 'visual': '信号对比清单, 真假心动对比, 行为解码', 'emotion': '纠结→清晰→果断'},
+            '约会攻略卡': {'strategy': '场景设定→实战技巧→避坑指南', 'visual': '场景插画, 对话示例, DO/DONT清单', 'emotion': '紧张→自信→期待'},
+            '避雷指南卡': {'strategy': '红旗信号→案例分析→止损建议', 'visual': '红旗图标列表, 案例对比, 警示色块', 'emotion': '警觉→识别→保护自己'},
+            '情感升温卡': {'strategy': '心理学方法→亲密升级→关系维护', 'visual': '关系阶梯图, 互动示例, 温暖色调', 'emotion': '期待→尝试→甜蜜'},
+            '自我疗愈卡': {'strategy': '科学解释→情绪接纳→重建步骤', 'visual': '愈合阶段图, 自我关怀清单, 希望色调', 'emotion': '痛苦→理解→释然→重生'},
         }
         skill = CARD_TYPE_SKILLS.get(card_type, CARD_TYPE_SKILLS.get('方法卡', {}))
 
