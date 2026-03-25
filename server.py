@@ -2982,6 +2982,11 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                      '干货卡','科普卡','清单卡','食疗卡','食谱卡','体质卡','体质调理卡','日常习惯卡','穴位卡'],
             '故事型': ['生活卡','思维卡','对战卡','情景对话卡','亲子古诗PK卡','亲子英语PK卡','看图写话卡',
                      '对比卡','体态卡','跟练卡','运动卡','减脂卡'],
+            '考前冲刺型': ['填空满分卡','选择秒杀卡','计算零失误卡','判断火眼卡','应用题拆解卡','操作题规范卡',
+                       '拼写零错卡','默写满分卡','作文得分卡','听力得分卡','填空必会卡','写作模板卡'],
+            '满分攻略型': ['填空满分卡','选择秒杀卡','选择审题卡','选择攻略卡','计算零失误卡','判断火眼卡',
+                       '应用题拆解卡','操作题规范卡','拼写零错卡','默写满分卡','阅读答题卡','句子变换卡',
+                       '作文得分卡','听力得分卡','填空必会卡','匹配速解卡','阅读通关卡','写作模板卡'],
         }
         preferred = template_card_map.get(template, [])
         matched = [c for c in cards_data if c.get('type') in preferred]
@@ -3019,6 +3024,22 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 cards_text += f"  反差前: {c.get('contrast_before','')}\n"
             if c.get('contrast_after'):
                 cards_text += f"  反差后: {c.get('contrast_after','')}\n"
+            # 考卷专题专属字段
+            if c.get('exam_frequency'):
+                cards_text += f"  考试频率: {c.get('exam_frequency','')}\n"
+            if c.get('score_weight'):
+                cards_text += f"  分值占比: {c.get('score_weight','')}\n"
+            for ef in ['fill_strategy','choice_tricks','calc_checklist','judge_traps',
+                       'problem_model','operation_steps','high_freq_words','audit_points',
+                       'must_dictate','answer_templates','transform_rules','writing_formulas',
+                       'listening_strategy','choice_focus','must_know_words','match_method',
+                       'reading_skills','writing_frames']:
+                val = c.get(ef)
+                if val:
+                    if isinstance(val, list):
+                        cards_text += f"  {ef}: {'; '.join(str(v) for v in val[:5])}\n"
+                    else:
+                        cards_text += f"  {ef}: {val}\n"
 
         # ── Prompt工程智慧注入 ──
         prompt_wisdom = ""
@@ -3080,6 +3101,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 - 挑战型：发起挑战→限时→公布答案→评级
 - 干货型：痛点引入→系统知识点→口诀总结→收藏引导
 - 故事型：生活场景→遇到问题→解决方案→触动共鸣
+- 考前冲刺型：倒计时紧迫感→必考清单→快速提分技巧→检查提醒→加油打气
+- 满分攻略型：题型拆解→得分策略→答题模板→避坑清单→满分示范
 
 ⚠️ 严格字数限制（必须遵守）：
 - 标题 ≤ 20字（含emoji，超过20字视为不合格）

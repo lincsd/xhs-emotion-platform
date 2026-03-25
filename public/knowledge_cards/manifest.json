@@ -82,6 +82,16 @@
         "cards": 15
       },
       {
+        "file": "数学_三下_考卷.json",
+        "subject": "数学",
+        "grade": "三年级",
+        "semester": "下册",
+        "grade_short": "三下",
+        "is_exam": true,
+        "units": 6,
+        "cards": 11
+      },
+      {
         "file": "数学_二上.json",
         "subject": "数学",
         "grade": "二年级",
