@@ -1,0 +1,185 @@
+{
+  "subject": "英语",
+  "grade": "六年级",
+  "semester": "上册",
+  "textbook": "人教PEP版",
+  "grade_short": "六上",
+  "card_pack": "知识总结",
+  "description": "六年级上册英语核心知识点精华总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "出行与交通",
+      "cards": [
+        {
+          "card_id": "S1-01",
+          "full_id": "英语-六上-S1-01",
+          "title": "交通方式",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "各种出行方式的英语表达。",
+          "core_points": [
+            "交通工具：bus公交 taxi出租车 plane飞机 ship轮船 subway地铁 train火车 bike自行车",
+            "How do you come to school? 你怎么来学校？— I come by bus. / I come on foot.",
+            "by + 交通工具（不加the/a）: by bus, by bike, by subway",
+            "on foot 步行（特殊，不用by）"
+          ],
+          "example": {
+            "question": "How does your father go to work?",
+            "steps": ["第三人称用does", "He goes to work by car."],
+            "answer": "He goes to work by car."
+          },
+          "mistakes": [
+            {"wrong": "by a bus / by the bus", "correct": "by+交通工具中间不加任何冠词: by bus"},
+            {"wrong": "by foot（步行）", "correct": "步行说on foot，不说by foot"}
+          ],
+          "memory_tip": "🚌 by后面的交通工具都是「光杆」(不加a/the)，唯一特殊的是on foot(脚在地上走)",
+          "related": {"prerequisite": "见基础名词", "next": "见S1-02 问路指路"}
+        },
+        {
+          "card_id": "S1-02",
+          "full_id": "英语-六上-S1-02",
+          "title": "问路与指路",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "用英语问路和给别人指路。",
+          "core_points": [
+            "问路：Where is the hospital/cinema/bookstore? / How can I get to...?",
+            "指路：Go straight. 直走 Turn left/right. 左/右转 It's near/next to/behind... 在...附近/旁边/后面",
+            "地点：hospital医院 cinema电影院 bookstore书店 post office邮局 museum博物馆 library图书馆",
+            "交通规则：Stop at a red light. Wait at a yellow light. Go at a green light."
+          ],
+          "example": {
+            "question": "Where is the cinema?",
+            "steps": ["Go straight.直走", "Turn left at the bookstore.在书店左转", "It's next to the hospital.在医院旁边"],
+            "answer": "Go straight. Turn left at the bookstore. It's next to the hospital."
+          },
+          "mistakes": [
+            {"wrong": "Turn to left.（多了to）", "correct": "Turn left. 不需要to"},
+            {"wrong": "It's next the hospital.", "correct": "next to: It's next TO the hospital.（不能漏to）"}
+          ],
+          "memory_tip": "🧭 方位词记忆：near靠近 next to紧挨着 behind后面 in front of前面 between在...之间",
+          "related": {"prerequisite": "见S1-01 交通方式", "next": "见S2 业余爱好"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "爱好与职业理想",
+      "cards": [
+        {
+          "card_id": "S2-01",
+          "full_id": "英语-六上-S2-01",
+          "title": "爱好表达",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "用英语谈论自己和他人的兴趣爱好。",
+          "core_points": [
+            "爱好：reading reading books看书 singing唱歌 dancing跳舞 playing football踢足球 cooking做饭 drawing画画",
+            "What are your hobbies? 你的爱好是什么？— I like reading. / My hobby is singing.",
+            "like + 动词ing: I like swimming. He likes playing basketball.",
+            "三单变化：like→likes, do→does, have→has, go→goes"
+          ],
+          "example": {
+            "question": "What are Peter's hobbies?",
+            "steps": ["Peter是第三人称he", "He likes reading and playing football."],
+            "answer": "He likes reading and playing football."
+          },
+          "mistakes": [
+            {"wrong": "He like swimming.（忘三单）", "correct": "第三人称单数: He likes swimming."},
+            {"wrong": "I like swim.（忘了ing）", "correct": "like后面加动词ing: I like swimming."}
+          ],
+          "memory_tip": "🎨 三单加s记忆：he/she/it做主语时，动词要穿「s」这件衣服",
+          "related": {"prerequisite": "见五上 日常活动", "next": "见S2-02 职业理想"}
+        },
+        {
+          "card_id": "S2-02",
+          "full_id": "英语-六上-S2-02",
+          "title": "未来职业理想",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习更多职业词汇，表达未来理想。",
+          "core_points": [
+            "职业：scientist科学家 pilot飞行员 coach教练 police officer警察 fisherman渔夫 postman邮递员",
+            "worker工人 businessman商人 writer作家 singer歌手 dancer舞者",
+            "What does he/she want to be? 他/她想成为什么？— He wants to be a pilot.",
+            "I'm going to be a/an... 我将来要当..."
+          ],
+          "example": {
+            "question": "What do you want to be?",
+            "steps": ["want to be=想要成为", "I want to be a scientist."],
+            "answer": "I want to be a scientist. I like science."
+          },
+          "mistakes": [
+            {"wrong": "He want to be...", "correct": "三单：He wants to be..."},
+            {"wrong": "I want to be scientist.（漏a）", "correct": "职业前加a/an: a scientist, an artist"}
+          ],
+          "memory_tip": "💼 职业后缀：-er(teach→teacher), -or(act→actor), -ist(science→scientist), -man(post→postman)",
+          "related": {"prerequisite": "见四上 职业", "next": "见S3 感受与动作"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S3",
+      "unit_name": "情绪与一般过去时入门",
+      "cards": [
+        {
+          "card_id": "S3-01",
+          "full_id": "英语-六上-S3-01",
+          "title": "情绪表达",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "用英语表达各种心情和感受。",
+          "core_points": [
+            "情绪：happy高兴 sad难过 angry生气 afraid害怕 worried担心 ill生病 bored无聊",
+            "How do you feel? / How are you? 你感觉怎么样？— I'm happy/sad.",
+            "What's wrong? / What's the matter? 怎么了？— I'm ill. / I'm worried about the test.",
+            "should应该: You should see a doctor. 你应该看医生。"
+          ],
+          "example": {
+            "question": "Sarah looks sad. What should she do?",
+            "steps": ["sad=难过", "She should talk to her friends."],
+            "answer": "She should take a deep breath and talk to her friends."
+          },
+          "mistakes": [
+            {"wrong": "I feel happily.（用副词）", "correct": "feel后用形容词：I feel happy."},
+            {"wrong": "You should to see a doctor.", "correct": "should后面直接加动词原形，不要to"}
+          ],
+          "memory_tip": "😊 feel + 形容词 = 感到...（feel happy/sad/angry就像中文「感到高兴/难过/生气」）",
+          "related": {"prerequisite": "见基础表达", "next": "见S3-02 过去时入门"}
+        },
+        {
+          "card_id": "S3-02",
+          "full_id": "英语-六上-S3-02",
+          "title": "一般过去时入门",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "表示过去发生的事情，六年级最核心的语法。",
+          "core_points": [
+            "结构：主语 + 动词过去式",
+            "规则变化：①一般加ed: played ②e结尾加d: liked ③辅+y变ied: studied ④双写+ed: stopped",
+            "不规则变化（必背）：is/am→was, are→were, go→went, have→had, do→did, eat→ate, see→saw",
+            "时间标志词：yesterday昨天, last week上周, ago...之前"
+          ],
+          "example": {
+            "question": "用过去式说「昨天我去了公园」",
+            "steps": ["昨天=yesterday", "去→went（go的过去式）", "I went to the park yesterday."],
+            "answer": "I went to the park yesterday."
+          },
+          "mistakes": [
+            {"wrong": "I goed to school.（规则化不规则动词）", "correct": "go→went是不规则变化，必须背"},
+            {"wrong": "He didn't went.（否定句动词还用过去式）", "correct": "didn't后用原形：He didn't go."}
+          ],
+          "memory_tip": "⏪ 过去时 = 时光倒流键！was/were(是)、went(去)、had(有)、did(做)、ate(吃)、saw(看) ← 先背这6个王牌",
+          "related": {"prerequisite": "见五下 现在进行时", "next": "见六下 过去时综合"}
+        }
+      ]
+    }
+  ]
+}

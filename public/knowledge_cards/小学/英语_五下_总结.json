@@ -1,0 +1,159 @@
+{
+  "subject": "英语",
+  "grade": "五年级",
+  "semester": "下册",
+  "textbook": "人教PEP版",
+  "grade_short": "五下",
+  "card_pack": "知识总结",
+  "description": "五年级下册英语核心知识点精华总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "四季与月份",
+      "cards": [
+        {
+          "card_id": "S1-01",
+          "full_id": "英语-五下-S1-01",
+          "title": "四季与月份",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "四季、十二个月份的英语说法和相关活动。",
+          "core_points": [
+            "四季：spring春 summer夏 autumn/fall秋 winter冬",
+            "月份(1-6)：January February March April May June（首字母大写）",
+            "月份(7-12)：July August September October November December",
+            "Which season do you like best? 你最喜欢哪个季节？— I like spring. It's warm and green."
+          ],
+          "example": {
+            "question": "Which season do you like best?",
+            "steps": ["选一个季节", "说原因", "I like summer. I can swim."],
+            "answer": "I like summer best. Because I can swim."
+          },
+          "mistakes": [
+            {"wrong": "月份首字母小写march", "correct": "月份首字母一定大写：March"},
+            {"wrong": "February拼写错", "correct": "Feb-ru-ary（中间有个r容易漏掉）"}
+          ],
+          "memory_tip": "📅 月份缩写前三个字母：Jan. Feb. Mar. Apr. May Jun. Jul. Aug. Sep(t). Oct. Nov. Dec.",
+          "related": {"prerequisite": "见四下 天气", "next": "见S1-02 日期表达"}
+        },
+        {
+          "card_id": "S1-02",
+          "full_id": "英语-五下-S1-02",
+          "title": "日期与生日",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "用英语表达日期、问答生日。",
+          "core_points": [
+            "序数词：first(1st) second(2nd) third(3rd) fourth(4th)... twelfth(12th)... twentieth(20th)",
+            "When is your birthday? 你的生日是什么时候？— My birthday is in October. / It's on October 1st.",
+            "月份前用in: in January; 具体日期前用on: on January 1st",
+            "序数词规律：大多+th，特殊记1st/2nd/3rd/5th/8th/9th/12th"
+          ],
+          "example": {
+            "question": "When is Children's Day?",
+            "steps": ["儿童节=Children's Day", "6月1日=June 1st"],
+            "answer": "It's on June 1st."
+          },
+          "mistakes": [
+            {"wrong": "in October 1st（具体日期用in）", "correct": "具体日期用on: on October 1st"},
+            {"wrong": "five→fiveth", "correct": "five→fifth（去ve加fth）"}
+          ],
+          "memory_tip": "🎂 序数词特殊记: 1st 2nd 3rd (一二三特殊记), 5th(five去e), 8th(eight直接加th), 9th(nine去e), 12th(twelve去ve+fth)",
+          "related": {"prerequisite": "见三下 数字", "next": "见S2 日常活动"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "日常活动与现在进行时",
+      "cards": [
+        {
+          "card_id": "S2-01",
+          "full_id": "英语-五下-S2-01",
+          "title": "一天的活动",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "描述一天中各个时段的日常活动。",
+          "core_points": [
+            "活动：get up起床 eat breakfast吃早餐 go to school上学 have...class上...课 eat lunch吃午餐 play sports做运动 eat dinner吃晚餐 go to bed上床睡觉",
+            "When do you get up? 你几点起床？— I usually get up at 6:30.",
+            "时间点前用at: at 7 o'clock, at noon, at night",
+            "频率词+动词: I usually/often/always/sometimes + 动词原形"
+          ],
+          "example": {
+            "question": "When do you go to school?",
+            "steps": ["at + 时间", "I go to school at 7:30."],
+            "answer": "I usually go to school at 7:30."
+          },
+          "mistakes": [
+            {"wrong": "I get up in 6:30.（用错介词）", "correct": "具体时间点用at: I get up at 6:30."},
+            {"wrong": "I go to the school.", "correct": "go to school不加the（固定搭配）"}
+          ],
+          "memory_tip": "⏰ 时间介词：at几点(小), on几号/星期(中), in月/季/年(大) → 从小到大at→on→in",
+          "related": {"prerequisite": "见五上 日常活动", "next": "见S2-02 现在进行时"}
+        },
+        {
+          "card_id": "S2-02",
+          "full_id": "英语-五下-S2-02",
+          "title": "现在进行时",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "表示正在进行的动作，是五年级最重要的语法点之一。",
+          "core_points": [
+            "结构：主语 + am/is/are + 动词ing",
+            "加ing规则：①一般直接加ing: read→reading ②去e加ing: write→writing ③双写+ing: run→running swim→swimming",
+            "What are you doing? 你在做什么？— I'm reading a book.",
+            "关键词：now, look, listen 通常提示用进行时"
+          ],
+          "example": {
+            "question": "Look! What is the boy doing?",
+            "steps": ["Look提示进行时", "boy是第三人称→is", "He is swimming."],
+            "answer": "He is swimming."
+          },
+          "mistakes": [
+            {"wrong": "He is swiming.（只写一个m）", "correct": "swim→swimming（双写m再加ing）"},
+            {"wrong": "She is writeing.（没去e）", "correct": "write→writing（去e加ing）"}
+          ],
+          "memory_tip": "🏃 ing加法三兄弟：①普通直加 ②哑e让座 ③重辅双写 → read-ing, writ(e)-ing, runn-ing",
+          "related": {"prerequisite": "见动词基础", "next": "见六上 一般过去时"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S3",
+      "unit_name": "动物与自然",
+      "cards": [
+        {
+          "card_id": "S3-01",
+          "full_id": "英语-五下-S3-01",
+          "title": "动物行为与归属",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "描述动物正在做的事和名词所有格。",
+          "core_points": [
+            "动物行为：climbing爬 jumping跳 sleeping睡 eating吃 playing玩 drinking喝 fighting打架 swinging荡",
+            "The elephant is drinking water. 大象正在喝水。",
+            "Whose monkey is that? 那是谁的猴子？— It's his/hers/theirs.",
+            "名词所有格：John's约翰的 the cat's猫的"
+          ],
+          "example": {
+            "question": "What is the cat doing?",
+            "steps": ["cat=猫", "它在睡觉", "The cat is sleeping."],
+            "answer": "The cat is sleeping."
+          },
+          "mistakes": [
+            {"wrong": "The cat is sleep.", "correct": "进行时必须有ing: The cat is sleeping."},
+            {"wrong": "It's her.", "correct": "如果后面没名词用hers: It's hers. 有名词用her: It's her monkey."}
+          ],
+          "memory_tip": "🐵 物主代词配对记：my→mine, your→yours, his→his, her→hers, our→ours, their→theirs",
+          "related": {"prerequisite": "见四下 农场动物", "next": "见六上 动物世界"}
+        }
+      ]
+    }
+  ]
+}

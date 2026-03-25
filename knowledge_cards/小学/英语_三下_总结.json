@@ -1,0 +1,133 @@
+{
+  "subject": "英语",
+  "grade": "三年级",
+  "semester": "下册",
+  "textbook": "人教PEP版",
+  "grade_short": "三下",
+  "card_pack": "知识总结",
+  "description": "三年级下册英语核心知识点精华总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "家庭与身体",
+      "cards": [
+        {
+          "card_id": "S1-01",
+          "full_id": "英语-三下-S1-01",
+          "title": "家庭成员",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "介绍家庭成员的英语说法。",
+          "core_points": [
+            "father爸爸 / dad爸爸(口语) / mother妈妈 / mum妈妈(口语)",
+            "brother哥哥弟弟 / sister姐姐妹妹",
+            "grandfather爷爷外公 / grandmother奶奶外婆",
+            "句型：This is my... 这是我的..."
+          ],
+          "example": {
+            "question": "介绍你的妈妈用英语怎么说？",
+            "steps": ["这是→This is", "我的妈妈→my mother/mum"],
+            "answer": "This is my mother."
+          },
+          "mistakes": [
+            {"wrong": "father和mother拼错", "correct": "fa-ther（发音像「发热」）, mo-ther"},
+            {"wrong": "分不清grandpa和grandfather", "correct": "grandpa是口语（简称），grandfather是正式说法"}
+          ],
+          "memory_tip": "👨‍👩‍👧‍👦 family = father and mother I love you（家庭=爸爸和妈妈我爱你们）",
+          "related": {"prerequisite": "见三上 自我介绍", "next": "见S1-02 身体部位"}
+        },
+        {
+          "card_id": "S1-02",
+          "full_id": "英语-三下-S1-02",
+          "title": "身体部位",
+          "type": "知识总结卡",
+          "difficulty": 1,
+          "importance": 4,
+          "definition": "认识身体各部位的英语名称。",
+          "core_points": [
+            "head头 eye眼 ear耳 nose鼻 mouth嘴",
+            "hand手 arm胳膊 leg腿 foot脚(复数feet)",
+            "body身体 finger手指 face脸",
+            "句型：Touch your nose! 摸你的鼻子！"
+          ],
+          "example": {
+            "question": "用英语说「闭上你的眼睛」",
+            "steps": ["闭上=Close", "你的眼睛=your eyes"],
+            "answer": "Close your eyes."
+          },
+          "mistakes": [
+            {"wrong": "eye和ear搞混", "correct": "eye=眼（y像鼻子，两边是眼睛），ear=耳朵"},
+            {"wrong": "foot的复数不知道", "correct": "foot→feet（不规则变化）"}
+          ],
+          "memory_tip": "👃 nose里有个no→闻到臭的就摇头说No！eye像一张小脸：e是眼睛y是鼻子e是眼睛",
+          "related": {"prerequisite": "基础名词", "next": "见四上 更多身体动作"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "水果与食物",
+      "cards": [
+        {
+          "card_id": "S2-01",
+          "full_id": "英语-三下-S2-01",
+          "title": "水果和食物单词",
+          "type": "知识总结卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "常见水果和食物的英语说法。",
+          "core_points": [
+            "水果：apple苹果 banana香蕉 orange橙子 pear梨 grape葡萄 watermelon西瓜 strawberry草莓",
+            "食物：bread面包 egg鸡蛋 milk牛奶 rice米饭 fish鱼 cake蛋糕",
+            "Do you like...? 你喜欢...吗？— Yes, I do. / No, I don't.",
+            "I like apples. 我喜欢苹果。（表示喜好时名词用复数）"
+          ],
+          "example": {
+            "question": "Do you like bananas?",
+            "steps": ["问你喜不喜欢香蕉", "喜欢→Yes, I do. 不喜欢→No, I don't."],
+            "answer": "Yes, I do. / No, I don't."
+          },
+          "mistakes": [
+            {"wrong": "I like apple.（忘了复数）", "correct": "表示喜好用复数：I like apples."},
+            {"wrong": "strawberry拼错", "correct": "straw(稻草)+berry(浆果)→strawberry"}
+          ],
+          "memory_tip": "🍎 apple = a + pp(两个苹果) + le → 一个苹果; banana有3个a像3个弯弯的香蕉",
+          "related": {"prerequisite": "见三上 基础词汇", "next": "见四上 更多食物"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S3",
+      "unit_name": "数字与形状",
+      "cards": [
+        {
+          "card_id": "S3-01",
+          "full_id": "英语-三下-S3-01",
+          "title": "数字11-20与形容词",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习11-20的英语数字，以及描述大小、长短等基本形容词。",
+          "core_points": [
+            "11-12特殊：eleven, twelve",
+            "13-19有规律：thirteen, fourteen, fifteen... nineteen（-teen结尾=十几）",
+            "20：twenty",
+            "形容词：big大 small小 long长 short短/矮 tall高 fat胖 thin瘦"
+          ],
+          "example": {
+            "question": "How many books do you have? (你有15本书)",
+            "steps": ["15=fifteen", "I have fifteen books."],
+            "answer": "I have fifteen books."
+          },
+          "mistakes": [
+            {"wrong": "thirteen拼成threeteen", "correct": "thirteen不是threeteen，注意拼写变化"},
+            {"wrong": "short只记得「短」", "correct": "short既可以表示「短」也可以表示「矮」"}
+          ],
+          "memory_tip": "🔢 teen = 十几（teenager=十几岁的人=青少年），13-19都是 X-teen",
+          "related": {"prerequisite": "见三上 数字1-10", "next": "见四上 更多数字"}
+        }
+      ]
+    }
+  ]
+}

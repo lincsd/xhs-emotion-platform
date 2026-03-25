@@ -1,0 +1,185 @@
+{
+  "subject": "英语",
+  "grade": "六年级",
+  "semester": "下册",
+  "textbook": "人教PEP版",
+  "grade_short": "六下",
+  "card_pack": "知识总结",
+  "description": "六年级下册英语核心知识点精华总结（小学毕业总复习）",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "比较级与最高级",
+      "cards": [
+        {
+          "card_id": "S1-01",
+          "full_id": "英语-六下-S1-01",
+          "title": "形容词比较级",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "两个事物做比较时使用的语法。",
+          "core_points": [
+            "规则变化：①短词加er: taller, shorter, older, younger ②e结尾加r: nicer, larger",
+            "③辅+y变ier: heavier, happier ④双写+er: bigger, thinner, fatter",
+            "不规则：good→better, bad→worse, many/much→more",
+            "句型：A + is + 比较级 + than + B：Tom is taller than Sam."
+          ],
+          "example": {
+            "question": "比较你和你的朋友",
+            "steps": ["I am 140cm. My friend is 150cm.", "My friend is taller than me."],
+            "answer": "My friend is taller than me. But I am heavier than him."
+          },
+          "mistakes": [
+            {"wrong": "I am more tall than him.", "correct": "短单词用er不用more: I am taller than him."},
+            {"wrong": "He is taller than me 10cm.", "correct": "He is 10cm taller than me.（数量放在比较级前面）"}
+          ],
+          "memory_tip": "📏 比较级=两个比→加er或more; than=比; taller THAN=比...更高",
+          "related": {"prerequisite": "见基础形容词", "next": "见S1-02 身高体重"}
+        },
+        {
+          "card_id": "S1-02",
+          "full_id": "英语-六下-S1-02",
+          "title": "身高体重与度量",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "用英语表达身高、体重、鞋码等。",
+          "core_points": [
+            "How tall are you? 你多高？— I'm 1.5 metres / 150 cm.",
+            "How heavy are you? 你多重？— I'm 40 kilograms.",
+            "How big are your feet? / What size are your shoes? 你穿多大的鞋？— Size 38.",
+            "metre米 kilogram千克/公斤 centimetre厘米"
+          ],
+          "example": {
+            "question": "How tall are you?",
+            "steps": ["tall=高", "I'm=I am", "1.65 metres."],
+            "answer": "I'm 1.65 metres tall."
+          },
+          "mistakes": [
+            {"wrong": "I'm 150 metre.（单位忘复数）", "correct": "超过1要用复数：1.5 metres, 40 kilograms"},
+            {"wrong": "How long are you?（用错疑问词）", "correct": "问人的身高用How tall, How long问长度（物体）"}
+          ],
+          "memory_tip": "📐 How tall=多高(人), How long=多长(物), How heavy=多重, How big=多大",
+          "related": {"prerequisite": "见四上 数字", "next": "见S2 过去时综合"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "一般过去时综合",
+      "cards": [
+        {
+          "card_id": "S2-01",
+          "full_id": "英语-六下-S2-01",
+          "title": "过去时完整用法",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "全面掌握一般过去时的肯定、否定、疑问句。",
+          "core_points": [
+            "肯定句：I watched TV last night. He went to the park yesterday.",
+            "否定句：I didn't watch TV. He didn't go to the park.（didn't + 动词原形）",
+            "疑问句：Did you watch TV? Did he go?（Did + 主语 + 动词原形）— Yes, I did. / No, I didn't.",
+            "was/were的否定：was not=wasn't, were not=weren't; Was he happy? Were they at home?"
+          ],
+          "example": {
+            "question": "What did you do last weekend?",
+            "steps": ["last weekend=上周末", "I watched a film and played with friends."],
+            "answer": "I watched a film with my family. Then I played with my friends."
+          },
+          "mistakes": [
+            {"wrong": "Did you watched TV?（did后还用过去式）", "correct": "Did后用原形：Did you watch TV?"},
+            {"wrong": "I didn't went.（didn't后用过去式）", "correct": "didn't后用原形：I didn't go."}
+          ],
+          "memory_tip": "🎯 did/didn't已经代表过去了，后面动词就不用再变了→回到原形！就像一家只需要一个人出示身份证",
+          "related": {"prerequisite": "见六上 过去时入门", "next": "见S2-02 不规则动词表"}
+        },
+        {
+          "card_id": "S2-02",
+          "full_id": "英语-六下-S2-02",
+          "title": "必背不规则动词",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "小学阶段必须记住的不规则动词过去式。",
+          "core_points": [
+            "AAA型(不变)：put→put, cut→cut, read→read(发音变)",
+            "ABB型(后两同)：buy→bought, bring→brought, think→thought, teach→taught, catch→caught",
+            "ABC型(全变)：go→went, see→saw, eat→ate, take→took, give→gave, write→wrote, swim→swam, sing→sang, drink→drank, begin→began, ride→rode, fly→flew, draw→drew, know→knew, grow→grew",
+            "特殊：is/am→was, are→were, have/has→had, do/does→did, make→made, come→came, get→got, say→said, run→ran, sleep→slept, tell→told, feel→felt"
+          ],
+          "example": {
+            "question": "yesterday I __(go) to the zoo and __(see) many animals.",
+            "steps": ["go→went", "see→saw"],
+            "answer": "Yesterday I went to the zoo and saw many animals."
+          },
+          "mistakes": [
+            {"wrong": "把不规则动词当规则处理：goed,eated", "correct": "went, ate — 没有规律，只能背！"},
+            {"wrong": "read的过去式发音不变", "correct": "read过去式拼写不变，但发音由/riːd/变为/red/"}
+          ],
+          "memory_tip": "📖 分组背：①ew家族：fly-flew, draw-drew, know-knew, grow-grew ②ought家族：buy-bought, bring-brought, think-thought, teach-taught",
+          "related": {"prerequisite": "见S2-01 过去时", "next": "见S3 将来时"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S3",
+      "unit_name": "一般将来时与毕业",
+      "cards": [
+        {
+          "card_id": "S3-01",
+          "full_id": "英语-六下-S3-01",
+          "title": "一般将来时",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "表示将来要发生的事或计划。",
+          "core_points": [
+            "be going to + 动词原形：表示计划好的将来",
+            "I'm going to visit my grandparents. 我打算探望祖父母。",
+            "What are you going to do this summer? 这个暑假你打算做什么？",
+            "will + 动词原形：表示临时决定或预测。I will help you. It will be sunny tomorrow."
+          ],
+          "example": {
+            "question": "What are you going to do in the summer holiday?",
+            "steps": ["打算=be going to", "I'm going to travel to Beijing and learn to swim."],
+            "answer": "I'm going to travel to Beijing and learn to swim."
+          },
+          "mistakes": [
+            {"wrong": "I going to play.（漏了am）", "correct": "I AM going to play.（不能忘be动词）"},
+            {"wrong": "He's going to plays.（going to后加了s）", "correct": "going to后用原形：He's going to play."}
+          ],
+          "memory_tip": "🚀 be going to = 正打算(有计划); will = 将会(临时决定/预测); 两个后面都跟动词原形！",
+          "related": {"prerequisite": "见S2 过去时", "next": "见S3-02 小学总复习"}
+        },
+        {
+          "card_id": "S3-02",
+          "full_id": "英语-六下-S3-02",
+          "title": "小学英语核心总复习",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "回顾小学阶段最重要的英语知识框架。",
+          "core_points": [
+            "四大时态：①一般现在时(习惯/事实) ②现在进行时(正在做) ③一般过去时(已经做了) ④一般将来时(打算做)",
+            "五大句型：①陈述句 ②否定句(not/don't/didn't/won't) ③一般疑问句(Do/Did/Is/Are/Will) ④特殊疑问句(What/Where/When/How/Who/Why) ⑤祈使句(Please.../Don't...)",
+            "名词复数：① +s ②es(s/x/sh/ch) ③y→ies ④f→ves ⑤特殊:man-men, child-children, sheep-sheep",
+            "最重要的be动词口诀：I用am，you用are，is跟着he/she/it，复数全都用are"
+          ],
+          "example": {
+            "question": "用四种时态说「我学英语」",
+            "steps": ["现在: I study English every day.", "进行: I am studying English now.", "过去: I studied English yesterday.", "将来: I am going to study English tomorrow."],
+            "answer": "四种时态表达同一件事，时间不同用的语法不同。"
+          },
+          "mistakes": [
+            {"wrong": "搞混四大时态", "correct": "看时间标志词：every day现在，now进行，yesterday过去，tomorrow将来"},
+            {"wrong": "特殊疑问词搞混", "correct": "What什么 Where哪里 When何时 How怎样 Who谁 Why为什么 Which哪个 Whose谁的"}
+          ],
+          "memory_tip": "🎓 小学英语三大基石：①词汇量（背单词）②语法时态（四大时态）③固定搭配（介词/冠词）→ 三根柱子撑起英语大厦！",
+          "related": {"prerequisite": "小学六年全部知识", "next": "初中英语新起点"}
+        }
+      ]
+    }
+  ]
+}

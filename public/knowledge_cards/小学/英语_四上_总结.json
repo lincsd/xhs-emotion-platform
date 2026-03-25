@@ -1,0 +1,165 @@
+{
+  "subject": "英语",
+  "grade": "四年级",
+  "semester": "上册",
+  "textbook": "人教PEP版",
+  "grade_short": "四上",
+  "card_pack": "知识总结",
+  "description": "四年级上册英语核心知识点精华总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "教室与学校",
+      "cards": [
+        {
+          "card_id": "S1-01",
+          "full_id": "英语-四上-S1-01",
+          "title": "教室物品",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "教室里常见物品的英语名词与Where引导句。",
+          "core_points": [
+            "classroom教室 blackboard黑板 light灯 fan风扇 window窗户 door门 desk课桌 chair椅子",
+            "computer电脑 teacher's desk讲台 picture图画 wall墙壁 floor地板",
+            "Where is my book? 我的书在哪？— It's on the desk. 在课桌上。",
+            "Let me/Let's + 动词原形：Let me clean the blackboard."
+          ],
+          "example": {
+            "question": "Where is the picture?",
+            "steps": ["picture=图画", "it's on the wall=它在墙上"],
+            "answer": "It's on the wall."
+          },
+          "mistakes": [
+            {"wrong": "Where is忘了用is", "correct": "Where is + 单数物品 / Where are + 复数"},
+            {"wrong": "on/in/under搞混", "correct": "on在上面 in在里面 under在下面 near在旁边"}
+          ],
+          "memory_tip": "🏫 记教室：往上看→light灯 fan风扇，往前看→blackboard黑板，四周→window窗 door门 wall墙",
+          "related": {"prerequisite": "见三下 基础名词", "next": "见S1-02 书包与文具"}
+        },
+        {
+          "card_id": "S1-02",
+          "full_id": "英语-四上-S1-02",
+          "title": "书包与文具",
+          "type": "知识总结卡",
+          "difficulty": 1,
+          "importance": 4,
+          "definition": "书包里常见文具的英语说法和相关句型。",
+          "core_points": [
+            "schoolbag书包 maths book数学书 English book英语书 Chinese book语文书 storybook故事书 notebook笔记本",
+            "pencil铅笔 pen钢笔 ruler尺子 eraser橡皮 crayon蜡笔 pencil box铅笔盒",
+            "What's in your schoolbag? 你书包里有什么？",
+            "I have a/an + 单数 / I have + 数字 + 复数"
+          ],
+          "example": {
+            "question": "What's in your schoolbag?",
+            "steps": ["列出书包里的东西", "An English book, three notebooks and a pencil box."],
+            "answer": "An English book, three notebooks and a pencil box."
+          },
+          "mistakes": [
+            {"wrong": "a English book", "correct": "元音开头用an：an English book, an eraser"},
+            {"wrong": "three notebook", "correct": "数字大于1用复数：three notebooks"}
+          ],
+          "memory_tip": "📚 a和an的区别：遇到元音(a/e/i/o/u)开头就用an，像个「n」保护元音不让它孤单",
+          "related": {"prerequisite": "见三上 文具词汇", "next": "见S2 朋友描述"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "外貌描述与朋友",
+      "cards": [
+        {
+          "card_id": "S2-01",
+          "full_id": "英语-四上-S2-01",
+          "title": "描述人的外貌",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "用英语描述一个人的外貌特征。",
+          "core_points": [
+            "He/She is tall/short/thin/strong/quiet/friendly.",
+            "He/She has long/short hair, big/small eyes.",
+            "My friend is... 我的朋友是/有...",
+            "has用于描述「有」某特征（头发、眼睛等），is用于描述「是」什么样的"
+          ],
+          "example": {
+            "question": "描述你的好朋友",
+            "steps": ["My friend is tall and thin.", "She has long hair and big eyes.", "She is friendly."],
+            "answer": "My friend is tall and thin. She has long hair and big eyes. She is friendly."
+          },
+          "mistakes": [
+            {"wrong": "He has tall.（has和is用混）", "correct": "He IS tall.（是高的）He HAS big eyes.（有大眼睛）"},
+            {"wrong": "She have long hair.", "correct": "第三人称单数用has: She has long hair."}
+          ],
+          "memory_tip": "👤 is=是什么样（高矮胖瘦），has=有什么（头发眼睛鼻子）",
+          "related": {"prerequisite": "见三下 身体部位", "next": "见S3 食物与就餐"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S3",
+      "unit_name": "食物与就餐",
+      "cards": [
+        {
+          "card_id": "S3-01",
+          "full_id": "英语-四上-S3-01",
+          "title": "食物种类与餐桌礼仪",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习更多食物名称、餐具和就餐用语。",
+          "core_points": [
+            "新食物：beef牛肉 chicken鸡肉 noodles面条 soup汤 vegetable蔬菜 juice果汁",
+            "餐具：fork叉子 knife刀 spoon勺子 chopsticks筷子 plate盘子 bowl碗",
+            "What would you like? 你想要什么？— I'd like some... 我想要一些...",
+            "Would you like some soup? 你想要一些汤吗？— Yes, please. / No, thanks."
+          ],
+          "example": {
+            "question": "What would you like for dinner?",
+            "steps": ["dinner=晚餐", "I'd like = I would like", "选择食物"],
+            "answer": "I'd like some noodles and vegetables, please."
+          },
+          "mistakes": [
+            {"wrong": "I'd like a noodles.", "correct": "noodles是复数，用some：I'd like some noodles."},
+            {"wrong": "knife的复数", "correct": "knife→knives（f变v加es）"}
+          ],
+          "memory_tip": "🍜 Would you like = 你想要（礼貌的问法），I'd like = I would like = 我想要（礼貌的说法）",
+          "related": {"prerequisite": "见三下 水果食物", "next": "见S4 数字与家里"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S4",
+      "unit_name": "家庭与职业",
+      "cards": [
+        {
+          "card_id": "S4-01",
+          "full_id": "英语-四上-S4-01",
+          "title": "家庭成员与职业",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "扩展家庭成员和常见职业的英语词汇。",
+          "core_points": [
+            "家庭：uncle叔叔 aunt阿姨 cousin堂/表兄妹 baby婴儿",
+            "职业：doctor医生 nurse护士 driver司机 farmer农民 cook厨师 teacher老师",
+            "What's your father's job? / What does your father do? 你爸爸做什么工作？",
+            "My father is a doctor. = He's a doctor."
+          ],
+          "example": {
+            "question": "What does your mother do?",
+            "steps": ["问妈妈的职业", "She's a nurse."],
+            "answer": "She's a nurse."
+          },
+          "mistakes": [
+            {"wrong": "My father is doctor.（漏a）", "correct": "职业前要加a/an：My father is a doctor."},
+            {"wrong": "What's your father job?（漏's）", "correct": "your father's job（名词所有格要加's）"}
+          ],
+          "memory_tip": "💼 问职业三种说法：What's his/her job? = What does he/she do? = What is he/she?",
+          "related": {"prerequisite": "见三下 家庭成员", "next": "见四下 更多职业"}
+        }
+      ]
+    }
+  ]
+}

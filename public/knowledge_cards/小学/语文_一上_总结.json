@@ -1,0 +1,133 @@
+{
+  "subject": "语文",
+  "grade": "一年级",
+  "semester": "上册",
+  "textbook": "人教版",
+  "grade_short": "一上",
+  "card_pack": "知识总结",
+  "description": "一年级上册语文核心知识点精华总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "拼音基础",
+      "cards": [
+        {
+          "card_id": "S1-01",
+          "full_id": "语文-一上-S1-01",
+          "title": "声母、韵母和声调",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "汉语拼音由声母、韵母和声调组成。声母在前，韵母在后，声调标在韵母上。",
+          "core_points": [
+            "23个声母：b p m f d t n l g k h j q x zh ch sh r z c s y w",
+            "6个单韵母：a o e i u ü（嘴巴从大到小）",
+            "4个声调：第一声（—）平平的，第二声（/）往上扬，第三声（∨）先下后上，第四声（\\）往下降",
+            "标调口诀：有a找a，没a找o e，i u并排标在后"
+          ],
+          "example": {
+            "question": "给「花」标拼音",
+            "steps": ["声母是h", "韵母是ua", "音调是第一声", "标在a上"],
+            "answer": "huā"
+          },
+          "mistakes": [
+            {"wrong": "b和d分不清", "correct": "b像收音机（左边有竖），d像鼓（右边有竖）"},
+            {"wrong": "声调标错位置", "correct": "记住口诀：有a标a上，没a找o e"}
+          ],
+          "memory_tip": "🎵 四声调像开车：一声平路直走（—），二声上坡（/），三声下坡再上坡（∨），四声急刹车（\\）",
+          "related": {"prerequisite": "无", "next": "见S1-02 整体认读音节"}
+        },
+        {
+          "card_id": "S1-02",
+          "full_id": "语文-一上-S1-02",
+          "title": "整体认读音节",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "整体认读音节不能拆开拼读，要整体记住。一共16个。",
+          "core_points": [
+            "zhi chi shi ri（翘舌音+i）",
+            "zi ci si（平舌音+i）",
+            "yi wu yu（y/w开头的）",
+            "ye yue yuan yin yun ying（y开头的复合）"
+          ],
+          "example": {
+            "question": "「鱼」的拼音是拼出来的还是整体认读？",
+            "steps": ["鱼的拼音是yú", "yu是整体认读音节"],
+            "answer": "整体认读音节，不能拼"
+          },
+          "mistakes": [
+            {"wrong": "把zhi拆成zh+i去拼", "correct": "zhi是整体认读音节，要整体记住"},
+            {"wrong": "16个整体认读记不全", "correct": "分组记：4个翘舌+3个平舌+3个y/w+6个ye组"}
+          ],
+          "memory_tip": "📦 整体认读就像成语：不能拆开，要整个记住",
+          "related": {"prerequisite": "见S1-01 声母韵母", "next": "见S2-01 识字"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "基础识字与笔画",
+      "cards": [
+        {
+          "card_id": "S2-01",
+          "full_id": "语文-一上-S2-01",
+          "title": "基本笔画和笔顺规则",
+          "type": "知识总结卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "汉字由基本笔画组成。写字要按笔顺规则：先横后竖，先撇后捺，从上到下，从左到右。",
+          "core_points": [
+            "基本笔画：横（一）、竖（丨）、撇（丿）、捺（㇏）、点（丶）、折",
+            "先横后竖：「十」先写横再写竖",
+            "先撇后捺：「人」先写撇再写捺",
+            "从上到下，从左到右：「二」先写上面的横"
+          ],
+          "example": {
+            "question": "「山」字的笔顺是什么？",
+            "steps": ["先写中间的竖", "再写左边的竖折", "最后写右边的竖"],
+            "answer": "竖、竖折、竖（3画）"
+          },
+          "mistakes": [
+            {"wrong": "「火」先写上面两点", "correct": "火的笔顺：点、撇、撇、捺"},
+            {"wrong": "随意写不按笔顺", "correct": "笔顺正确字才好看，考试也会考笔顺"}
+          ],
+          "memory_tip": "✍️ 写字像盖房子：先搭横梁（横），再立柱子（竖），从上往下盖",
+          "related": {"prerequisite": "无", "next": "见一下 偏旁部首"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S3",
+      "unit_name": "课文阅读启蒙",
+      "cards": [
+        {
+          "card_id": "S3-01",
+          "full_id": "语文-一上-S3-01",
+          "title": "常见反义词和量词",
+          "type": "知识总结卡",
+          "difficulty": 1,
+          "importance": 4,
+          "definition": "反义词是意思相反的词。量词是用来计量物品的词。用对量词说话才准确。",
+          "core_points": [
+            "常见反义词：大—小、多—少、上—下、前—后、左—右、高—低",
+            "量词：一（头）牛、一（匹）马、一（只）鸟、一（条）鱼",
+            "一（朵）花、一（棵）树、一（本）书、一（支）笔",
+            "量词不能乱用：不能说「一头鸟」「一只牛」"
+          ],
+          "example": {
+            "question": "填量词：一（  ）小狗",
+            "steps": ["小狗是动物", "小动物通常用「只」"],
+            "answer": "一（只）小狗"
+          },
+          "mistakes": [
+            {"wrong": "一（个）马", "correct": "马用「匹」：一匹马"},
+            {"wrong": "大的反义词是少", "correct": "大的反义词是小，多的反义词是少"}
+          ],
+          "memory_tip": "📝 量词顺口溜：头牛匹马只小鸡，条鱼朵花棵大树，本书支笔张白纸",
+          "related": {"prerequisite": "识字", "next": "见一下 句子"}
+        }
+      ]
+    }
+  ]
+}

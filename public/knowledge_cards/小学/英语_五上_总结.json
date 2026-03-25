@@ -1,0 +1,165 @@
+{
+  "subject": "英语",
+  "grade": "五年级",
+  "semester": "上册",
+  "textbook": "人教PEP版",
+  "grade_short": "五上",
+  "card_pack": "知识总结",
+  "description": "五年级上册英语核心知识点精华总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "人物描述与性格",
+      "cards": [
+        {
+          "card_id": "S1-01",
+          "full_id": "英语-五上-S1-01",
+          "title": "描述人物性格",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "用形容词描述人物的外貌和性格特征。",
+          "core_points": [
+            "外貌：young年轻 old年老 tall高 short矮 funny滑稽",
+            "性格：kind善良 strict严格 polite礼貌 helpful乐于助人 hard-working勤奋 clever聪明 shy害羞",
+            "Who's your English teacher? Mr/Miss/Mrs + 姓",
+            "What's he/she like? 他/她什么样？— He's tall and funny."
+          ],
+          "example": {
+            "question": "What's your maths teacher like?",
+            "steps": ["maths=数学", "描述他/她的性格", "She's young and kind."],
+            "answer": "She's young and kind."
+          },
+          "mistakes": [
+            {"wrong": "What does he like?（意思变了）", "correct": "What's he LIKE?=他什么样（性格外貌），What does he like?=他喜欢什么"},
+            {"wrong": "He is a funny.", "correct": "funny是形容词不加a: He is funny.（如果当名词：He is a funny person.）"}
+          ],
+          "memory_tip": "👩‍🏫 What's he LIKE = 他「像」什么样 = 描述性格; What does he LIKE = 他「喜欢」什么 = 问爱好",
+          "related": {"prerequisite": "见四上 外貌描述", "next": "见S2 日程与课程"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "课程与日常安排",
+      "cards": [
+        {
+          "card_id": "S2-01",
+          "full_id": "英语-五上-S2-01",
+          "title": "星期与课程表",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "一周七天的英语说法和描述课程安排。",
+          "core_points": [
+            "Monday周一 Tuesday周二 Wednesday周三 Thursday周四 Friday周五 Saturday周六 Sunday周日",
+            "星期首字母都大写，前面用on: on Monday",
+            "What do you have on Mondays? 周一有什么课？— We have Chinese, English and maths.",
+            "What do you do on weekends? 周末你做什么？— I often read books."
+          ],
+          "example": {
+            "question": "What do you have on Wednesdays?",
+            "steps": ["Wednesday=周三", "列出课程"],
+            "answer": "We have English, science and PE."
+          },
+          "mistakes": [
+            {"wrong": "wednesday（忘大写）", "correct": "星期几首字母必须大写：Wednesday"},
+            {"wrong": "Wednesday拼写错误", "correct": "Wed-nes-day，记住中间有个d（nes不发音）"}
+          ],
+          "memory_tip": "📅 星期记忆口诀：Mon(门)月 Tue(兔)火 Wed(蛙)水 Thu(树)木 Fri(飞)金 Sat(杀)土 Sun(日)天",
+          "related": {"prerequisite": "见四下 时间表达", "next": "见S2-02 日常活动"}
+        },
+        {
+          "card_id": "S2-02",
+          "full_id": "英语-五上-S2-02",
+          "title": "日常活动频率词",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "表示做事频率的副词和日常活动表达。",
+          "core_points": [
+            "频率词：always总是 usually通常 often经常 sometimes有时 never从不",
+            "频率词放在be动词后，实义动词前",
+            "日常活动：wash my clothes洗衣服 watch TV看电视 do homework做作业 read books读书 play football踢足球",
+            "Do you often...? 你经常...吗？"
+          ],
+          "example": {
+            "question": "What do you often do on weekends?",
+            "steps": ["often=经常", "I often play football."],
+            "answer": "I often play football and sometimes watch TV."
+          },
+          "mistakes": [
+            {"wrong": "I often am happy.（频率词位置错）", "correct": "I am often happy.（be动词后）"},
+            {"wrong": "I play often football.", "correct": "I often play football.（实义动词前）"}
+          ],
+          "memory_tip": "🎯 频率从高到低：always(100%) > usually(80%) > often(60%) > sometimes(30%) > never(0%)",
+          "related": {"prerequisite": "见S2-01 星期", "next": "见S3 食物与健康"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S3",
+      "unit_name": "食物与健康饮食",
+      "cards": [
+        {
+          "card_id": "S3-01",
+          "full_id": "英语-五上-S3-01",
+          "title": "食物偏好与健康",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "更丰富的食物词汇和表达健康饮食。",
+          "core_points": [
+            "食物：sandwich三明治 hamburger汉堡 salad沙拉 ice cream冰淇淋 tea茶",
+            "味道：delicious美味 fresh新鲜 sweet甜 hot辣 healthy健康 favourite最喜欢",
+            "What's your favourite food? 你最爱吃什么？— My favourite food is noodles.",
+            "What would you like to eat/drink? 你想吃/喝什么？"
+          ],
+          "example": {
+            "question": "What's your favourite food?",
+            "steps": ["favourite=最喜欢的", "My favourite food is..."],
+            "answer": "My favourite food is hamburgers. They're delicious!"
+          },
+          "mistakes": [
+            {"wrong": "My favourite food is hamburger.（忘复数）", "correct": "表示种类泛指用复数：My favourite food is hamburgers."},
+            {"wrong": "favourite写成favorite", "correct": "两种都对！favourite是英式，favorite是美式"}
+          ],
+          "memory_tip": "🍔 favourite = fav(最爱) + our(我们的) + ite → 我们最爱的东西",
+          "related": {"prerequisite": "见四上 就餐用语", "next": "见S4 房间描述"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S4",
+      "unit_name": "房间与家具",
+      "cards": [
+        {
+          "card_id": "S4-01",
+          "full_id": "英语-五上-S4-01",
+          "title": "房间与家具方位",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "房间名称、家具词汇和There be句型。",
+          "core_points": [
+            "房间：bedroom卧室 living room客厅 kitchen厨房 bathroom浴室 study书房",
+            "家具：bed床 sofa沙发 table桌子 clock钟 photo照片 plant植物 bike自行车",
+            "There is + 单数/不可数: There is a clock on the wall.",
+            "There are + 复数: There are two bedrooms in my house."
+          ],
+          "example": {
+            "question": "描述你的卧室",
+            "steps": ["There is a bed.", "There are two photos on the wall.", "There is a desk beside the bed."],
+            "answer": "There is a bed and a desk in my bedroom. There are two photos on the wall."
+          },
+          "mistakes": [
+            {"wrong": "There are a book on the desk.", "correct": "单数用is: There IS a book on the desk."},
+            {"wrong": "There have...", "correct": "表示「有」用There is/are，不用There have"}
+          ],
+          "memory_tip": "🏠 There be就近原则：There is a pen and two books.（靠近is的a pen是单数→用is）",
+          "related": {"prerequisite": "见四上 教室物品", "next": "见五下 自然环境"}
+        }
+      ]
+    }
+  ]
+}

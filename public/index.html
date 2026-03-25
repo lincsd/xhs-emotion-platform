@@ -9128,7 +9128,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         if (cfg?.fixedGrades) return cfg.fixedGrades;
         if (manifestData?.stages?.[currentStageKey]) {
           const grades = manifestData.stages[currentStageKey]
-            .filter(e => e.subject === currentSubject && !e.is_boom && !e.is_exam)
+            .filter(e => e.subject === currentSubject && !e.is_boom && !e.is_exam && !e.is_summary)
             .map(e => e.grade_short);
           console.log('[KC] getGradesForSubject:', currentStageKey, currentSubject, '→', grades);
           return grades;
@@ -9156,17 +9156,20 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         // Manifest-driven: look up actual filenames
         if (manifestData?.stages?.[currentStageKey]) {
           const entries = manifestData.stages[currentStageKey];
-          const std = entries.find(e => e.subject === currentSubject && e.grade_short === gradeShort && !e.is_boom && !e.is_exam);
+          const std = entries.find(e => e.subject === currentSubject && e.grade_short === gradeShort && !e.is_boom && !e.is_exam && !e.is_summary);
           // Boom: try same subject+grade first, then same subject, then any boom in the stage
           const boom = entries.find(e => e.subject === currentSubject && e.grade_short === gradeShort && e.is_boom)
                     || entries.find(e => e.subject === currentSubject && e.is_boom)
                     || entries.find(e => e.is_boom);
           // Exam packs: all exam entries for this subject+grade
           const exams = entries.filter(e => e.subject === currentSubject && e.grade_short === gradeShort && e.is_exam);
+          // Summary packs: 知识总结
+          const summaries = entries.filter(e => e.subject === currentSubject && e.grade_short === gradeShort && e.is_summary);
           if (std) stdFile = base + std.file;
           if (boom) boomFile = base + boom.file;
           examFiles = exams.map(e => base + e.file);
-          console.log('[KC] manifest lookup: std=', std?.file, 'boom=', boom?.file, 'exam=', exams.map(e=>e.file));
+          const summaryFiles = summaries.map(e => base + e.file);
+          console.log('[KC] manifest lookup: std=', std?.file, 'boom=', boom?.file, 'exam=', exams.map(e=>e.file), 'summary=', summaries.map(e=>e.file));
         } else {
           console.warn('[KC] loadGrade: no manifest data for stage', currentStageKey);
         }
@@ -9179,10 +9182,13 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           const fetchPromises = [
             fetch(encodeURI(stdFile)),
             fetch(encodeURI(boomFile)).catch(err => { console.warn('[KC] boom fetch error:', err); return null; }),
-            ...examFiles.map(f => fetch(encodeURI(f)).catch(err => { console.warn('[KC] exam fetch error:', err); return null; }))
+            ...examFiles.map(f => fetch(encodeURI(f)).catch(err => { console.warn('[KC] exam fetch error:', err); return null; })),
+            ...(typeof summaryFiles !== 'undefined' ? summaryFiles : []).map(f => fetch(encodeURI(f)).catch(err => { console.warn('[KC] summary fetch error:', err); return null; }))
           ];
-          const [stdResp, boomResp, ...examResps] = await Promise.all(fetchPromises);
-          console.log('[KC] std resp:', stdResp?.status, 'boom resp:', boomResp?.status, 'exam resps:', examResps.map(r=>r?.status));
+          const [stdResp, boomResp, ...restResps] = await Promise.all(fetchPromises);
+          const examResps = restResps.slice(0, examFiles.length);
+          const summaryResps = restResps.slice(examFiles.length);
+          console.log('[KC] std resp:', stdResp?.status, 'boom resp:', boomResp?.status, 'exam resps:', examResps.map(r=>r?.status), 'summary resps:', summaryResps.map(r=>r?.status));
 
           const packs = [];
           if (stdResp && stdResp.ok) {
@@ -9201,6 +9207,14 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
               const examData = await examResp.json();
               examData.total_cards = (examData.units || []).reduce((s,u) => s + (u.cards||[]).length, 0);
               packs.push(examData);
+            }
+          }
+          // 加载知识总结包
+          for (const sumResp of summaryResps) {
+            if (sumResp && sumResp.ok) {
+              const sumData = await sumResp.json();
+              sumData.total_cards = (sumData.units || []).reduce((s,u) => s + (u.cards||[]).length, 0);
+              packs.push(sumData);
             }
           }
 
@@ -11001,7 +11015,9 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         '反转揭秘卡':'反差型','智慧启示卡':'干货型',
         // 情感生活赛道卡片类型
         '恋爱心理卡':'干货型','暧昧信号卡':'故事型','约会攻略卡':'干货型',
-        '避雷指南卡':'反差型','情感升温卡':'故事型','自我疗愈卡':'干货型'
+        '避雷指南卡':'反差型','情感升温卡':'故事型','自我疗愈卡':'干货型',
+        // 知识总结赛道卡片类型
+        '知识总结卡':'干货型'
       };
 
       const NW_GRADES = ['一上','一下','二上','二下','三上','三下','四上','四下','五上','五下','六上','六下','经期','体质','饮食','运动','体质减脂','爆款','预言','谈恋爱'];
@@ -11605,10 +11621,11 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           if (mResp.ok) {
             const manifest = await mResp.json();
             const entries = manifest.stages?.[stageFolder] || [];
-            const std = entries.find(e => e.subject === subject && e.grade_short === grade && !e.is_boom && !e.is_exam);
+            const std = entries.find(e => e.subject === subject && e.grade_short === grade && !e.is_boom && !e.is_exam && !e.is_summary);
             const boom = entries.find(e => e.subject === subject && e.grade_short === grade && e.is_boom)
                       || entries.find(e => e.subject === subject && e.is_boom);
             const exam = entries.find(e => e.subject === subject && e.grade_short === grade && e.is_exam);
+            const summary = entries.find(e => e.subject === subject && e.grade_short === grade && e.is_summary);
             if (std) stdFile = basePath + std.file;
             if (boom) boomFile = basePath + boom.file;
             if (exam) examFile = basePath + exam.file;

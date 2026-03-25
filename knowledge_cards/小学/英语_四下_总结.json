@@ -1,0 +1,159 @@
+{
+  "subject": "英语",
+  "grade": "四年级",
+  "semester": "下册",
+  "textbook": "人教PEP版",
+  "grade_short": "四下",
+  "card_pack": "知识总结",
+  "description": "四年级下册英语核心知识点精华总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "天气与时间",
+      "cards": [
+        {
+          "card_id": "S1-01",
+          "full_id": "英语-四下-S1-01",
+          "title": "天气表达",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "用英语描述各种天气和温度。",
+          "core_points": [
+            "天气：sunny晴天 cloudy多云 rainy下雨 snowy下雪 windy有风 cold冷 warm暖 hot热 cool凉爽",
+            "What's the weather like (in Beijing)? 天气怎么样？— It's sunny and warm.",
+            "Can I go outside? 我能出去吗？— Yes, you can. / No, you can't.",
+            "It's 26 degrees. 26度。"
+          ],
+          "example": {
+            "question": "What's the weather like today?",
+            "steps": ["看窗外下雨了", "It's rainy. 下雨了"],
+            "answer": "It's rainy and cold."
+          },
+          "mistakes": [
+            {"wrong": "It's rain.（用了动词原形）", "correct": "描述天气用形容词：It's rainy.（不是rain）"},
+            {"wrong": "What's the weather?（漏了like）", "correct": "What's the weather LIKE? 别忘like"}
+          ],
+          "memory_tip": "🌤️ 天气词大多加y变形容词：rain→rainy, snow→snowy, sun→sunny(双n), cloud→cloudy, wind→windy",
+          "related": {"prerequisite": "见S1-02 时间", "next": "见S2 衣物"}
+        },
+        {
+          "card_id": "S1-02",
+          "full_id": "英语-四下-S1-02",
+          "title": "时间表达",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "认识时钟、学会用英语说时间。",
+          "core_points": [
+            "What time is it? / What's the time? 几点了？",
+            "It's + 数字 + o'clock. 整点：It's seven o'clock. 7点整。",
+            "It's + 时 + 分：It's six thirty. 6:30。",
+            "Time for + 名词/to + 动词：Time for breakfast! / Time to get up!"
+          ],
+          "example": {
+            "question": "现在7:30用英语怎么说？",
+            "steps": ["7=seven", "30=thirty", "It's seven thirty."],
+            "answer": "It's seven thirty."
+          },
+          "mistakes": [
+            {"wrong": "It's seven thirty o'clock.", "correct": "o'clock只用于整点，七点半不加o'clock"},
+            {"wrong": "Time to breakfast.", "correct": "Time FOR breakfast. 或 Time TO eat breakfast."}
+          ],
+          "memory_tip": "⏰ o'clock = of the clock 的缩写，只有整点才说「几点钟」",
+          "related": {"prerequisite": "见三下 数字", "next": "见五上 日程安排"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "衣物与购物",
+      "cards": [
+        {
+          "card_id": "S2-01",
+          "full_id": "英语-四下-S2-01",
+          "title": "衣物词汇",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "各种衣物的英语说法和试衣购物对话。",
+          "core_points": [
+            "上衣：shirt衬衫 T-shirt T恤 jacket夹克 coat外套 sweater毛衣 dress连衣裙 skirt裙子",
+            "下装：pants裤子 shorts短裤 jeans牛仔裤 socks袜子 shoes鞋",
+            "配件：hat帽子 scarf围巾 gloves手套 sunglasses太阳镜",
+            "Whose coat is this? 这是谁的外套？— It's mine/yours/his/hers."
+          ],
+          "example": {
+            "question": "Whose hat is this?",
+            "steps": ["whose=谁的", "It's my sister's. 是我姐姐的。"],
+            "answer": "It's my sister's."
+          },
+          "mistakes": [
+            {"wrong": "pants用单数a pant", "correct": "pants/shorts/jeans/socks/shoes/gloves永远是复数"},
+            {"wrong": "It's my.（代词用混）", "correct": "It's mine.（名词性物主代词）my后要跟名词: It's my hat."}
+          ],
+          "memory_tip": "👖 两条腿穿的都是复数: pants, shorts, jeans, socks, shoes — 因为都是成对的！",
+          "related": {"prerequisite": "见三上 颜色词汇", "next": "见S2-02 购物对话"}
+        },
+        {
+          "card_id": "S2-02",
+          "full_id": "英语-四下-S2-02",
+          "title": "购物对话",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习在商店买东西时的常用英语对话。",
+          "core_points": [
+            "Can I help you? 有什么可以帮你的？— Yes, I want a shirt.",
+            "How much is it? 多少钱？— It's 50 yuan.",
+            "How much are they? 它们多少钱？— They're 80 yuan.",
+            "I'll take it/them. 我买了。/ It's too expensive. 太贵了。"
+          ],
+          "example": {
+            "question": "你想买一件T恤并问价钱",
+            "steps": ["Can I have a T-shirt?", "How much is it?"],
+            "answer": "Can I have a T-shirt, please? How much is it?"
+          },
+          "mistakes": [
+            {"wrong": "How much is they?", "correct": "复数用are: How much ARE they?"},
+            {"wrong": "分不清is和are", "correct": "it(单数)→is, they(复数)→are"}
+          ],
+          "memory_tip": "💰 How much = 多少钱，单个用is it，多个用are they",
+          "related": {"prerequisite": "见S2-01 衣物词汇", "next": "见S3 农场与动物"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S3",
+      "unit_name": "农场与蔬菜",
+      "cards": [
+        {
+          "card_id": "S3-01",
+          "full_id": "英语-四下-S3-01",
+          "title": "农场动物与蔬菜",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "认识农场里的动物和常见蔬菜。",
+          "core_points": [
+            "农场动物：cow奶牛 horse马 sheep羊(单复数同) hen母鸡 lamb小羊 goat山羊",
+            "蔬菜：tomato番茄 potato土豆 carrot胡萝卜 onion洋葱 green beans四季豆",
+            "Are these/those...? 这些/那些是...吗？— Yes, they are. / No, they aren't.",
+            "How many + 复数名词 + do you have?"
+          ],
+          "example": {
+            "question": "Are those sheep?",
+            "steps": ["those=那些", "sheep单复数一样", "Yes, they are."],
+            "answer": "Yes, they are. They're sheep."
+          },
+          "mistakes": [
+            {"wrong": "sheeps（给sheep加s）", "correct": "sheep单复数一样：one sheep, many sheep"},
+            {"wrong": "tomatos（复数错误）", "correct": "tomato→tomatoes, potato→potatoes（加es）"}
+          ],
+          "memory_tip": "🐑 sheep像绵羊群一样，不管几只都长一样 → 单复数同形！和fish鱼一样",
+          "related": {"prerequisite": "见三上 动物词汇", "next": "见五上 更多动物描述"}
+        }
+      ]
+    }
+  ]
+}

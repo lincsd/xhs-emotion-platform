@@ -1,0 +1,127 @@
+{
+  "subject": "英语",
+  "grade": "三年级",
+  "semester": "上册",
+  "textbook": "人教PEP版",
+  "grade_short": "三上",
+  "card_pack": "知识总结",
+  "description": "三年级上册英语核心知识点精华总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "字母与问候",
+      "cards": [
+        {
+          "card_id": "S1-01",
+          "full_id": "英语-三上-S1-01",
+          "title": "26个字母大小写",
+          "type": "知识总结卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "英语有26个字母，每个字母都有大写和小写两种写法。大写用在句首和人名。",
+          "core_points": [
+            "5个元音字母：A E I O U（读音特别重要）",
+            "21个辅音字母：其余都是辅音字母",
+            "大写用在句首、人名、国名、I",
+            "容易混淆的：b和d、p和q、M和N"
+          ],
+          "example": {
+            "question": "哪些字母是元音字母？",
+            "steps": ["元音字母有5个", "A E I O U"],
+            "answer": "A E I O U"
+          },
+          "mistakes": [
+            {"wrong": "b和d写反", "correct": "b像竖着的拳头朝右，d像竖着的拳头朝左"},
+            {"wrong": "忘了句首字母大写", "correct": "每个句子第一个单词首字母要大写"}
+          ],
+          "memory_tip": "🅰️ 元音字母记忆：A E I O U → 一个鸡蛋（A-E-I-O-U 像念鸡蛋的声音）",
+          "related": {"prerequisite": "无", "next": "见S1-02 日常问候"}
+        },
+        {
+          "card_id": "S1-02",
+          "full_id": "英语-三上-S1-02",
+          "title": "打招呼和自我介绍",
+          "type": "知识总结卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "见面打招呼和自我介绍是最基本的英语对话。",
+          "core_points": [
+            "Hello! / Hi! 你好！",
+            "My name is... / I'm... 我叫...",
+            "What's your name? 你叫什么名字？",
+            "Nice to meet you! 很高兴认识你！— Nice to meet you, too!"
+          ],
+          "example": {
+            "question": "同学问你 What's your name? 你怎么回答？",
+            "steps": ["对方问你的名字", "用 My name is... 回答"],
+            "answer": "My name is Li Ming. (或 I'm Li Ming.)"
+          },
+          "mistakes": [
+            {"wrong": "回答名字时说 My name is Li Ming is.", "correct": "不需要两个is：My name is Li Ming."},
+            {"wrong": "Nice to meet you 回答 Nice to meet you", "correct": "要加too：Nice to meet you, too!"}
+          ],
+          "memory_tip": "👋 见面三句话：Hello! → What's your name? → Nice to meet you!",
+          "related": {"prerequisite": "字母", "next": "见S2-01 颜色和数字"}
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "核心词汇",
+      "cards": [
+        {
+          "card_id": "S2-01",
+          "full_id": "英语-三上-S2-01",
+          "title": "颜色和数字1-10",
+          "type": "知识总结卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "颜色和数字是最基础的英语词汇，一定要记牢。",
+          "core_points": [
+            "颜色：red红 yellow黄 blue蓝 green绿 black黑 white白 orange橙 pink粉 purple紫 brown棕",
+            "数字1-5：one two three four five",
+            "数字6-10：six seven eight nine ten",
+            "What colour is it? — It's red."
+          ],
+          "example": {
+            "question": "How many apples? (图片有3个苹果)",
+            "steps": ["数苹果：1,2,3", "用英语表达数量"],
+            "answer": "Three."
+          },
+          "mistakes": [
+            {"wrong": "three拼成tree（树）", "correct": "three有th开头（th-r-ee），tree没有h（t-r-ee）"},
+            {"wrong": "blue和black搞混", "correct": "blue=蓝色（想想蓝天blue sky），black=黑色"}
+          ],
+          "memory_tip": "🌈 颜色记忆法：红red（热的→红色很热烈），蓝blue（不乐→天空蓝色也会忧郁）",
+          "related": {"prerequisite": "见S1-01 字母", "next": "见S2-02 动物和文具"}
+        },
+        {
+          "card_id": "S2-02",
+          "full_id": "英语-三上-S2-02",
+          "title": "文具和动物单词",
+          "type": "知识总结卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "身边的文具和常见动物是最先学的名词。",
+          "core_points": [
+            "文具：pen钢笔 pencil铅笔 ruler尺子 eraser橡皮 book书 bag书包 crayon蜡笔",
+            "动物：cat猫 dog狗 duck鸭 pig猪 bear熊 bird鸟 monkey猴",
+            "句型：I have a... 我有一个...",
+            "句型：Show me your... 给我看看你的..."
+          ],
+          "example": {
+            "question": "I have a ___. (图片是铅笔)",
+            "steps": ["图片是铅笔", "铅笔=pencil"],
+            "answer": "I have a pencil."
+          },
+          "mistakes": [
+            {"wrong": "pen和pencil搞混", "correct": "pen=钢笔（短的），pencil=铅笔（长的，多了cil）"},
+            {"wrong": "monkey拼错", "correct": "mon-key（猴子拿着钥匙key）"}
+          ],
+          "memory_tip": "🐵 monkey = mon（门）+ key（钥匙）→ 猴子拿着门的钥匙",
+          "related": {"prerequisite": "见S2-01 颜色数字", "next": "见三下 更多词汇"}
+        }
+      ]
+    }
+  ]
+}

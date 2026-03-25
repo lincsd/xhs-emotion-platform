@@ -3921,6 +3921,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             '避雷指南卡': {'strategy': '红旗信号→案例分析→止损建议', 'visual': '红旗图标列表, 案例对比, 警示色块', 'emotion': '警觉→识别→保护自己'},
             '情感升温卡': {'strategy': '心理学方法→亲密升级→关系维护', 'visual': '关系阶梯图, 互动示例, 温暖色调', 'emotion': '期待→尝试→甜蜜'},
             '自我疗愈卡': {'strategy': '科学解释→情绪接纳→重建步骤', 'visual': '愈合阶段图, 自我关怀清单, 希望色调', 'emotion': '痛苦→理解→释然→重生'},
+            # 知识总结专题
+            '知识总结卡': {'strategy': '核心概念→要点归纳→记忆口诀→易错提醒', 'visual': '思维导图式布局, 核心公式/知识点大字, 记忆口诀色块, 易错对比', 'emotion': '回顾→梳理→豁然开朗→牢记'},
         }
         skill = CARD_TYPE_SKILLS.get(card_type, CARD_TYPE_SKILLS.get('方法卡', {}))
 
