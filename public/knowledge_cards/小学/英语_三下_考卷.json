@@ -1,0 +1,416 @@
+{
+  "subject": "英语",
+  "grade": "三年级",
+  "semester": "下册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "三下",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "听力得分专区",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "英语-三下-E1-01",
+          "title": "听力题3大丢分陷阱",
+          "type": "听力得分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "30-40%",
+          "definition": "听力是英语考试占分最高的题型，掌握预读+关键词捕捉技巧可提升正确率",
+          "core_points": [
+            "拿到卷子先预读听力选项，圈出关键词",
+            "听第一遍抓主旨，听第二遍填答案",
+            "注意近音词区别：cat/cap, pen/pan, big/pig",
+            "数字、颜色、动物名是三年级高频考点",
+            "听到 \"not\" 要特别留意——答案可能反转"
+          ],
+          "example": {
+            "question": "Listen and choose. 听录音，选择正确的图片。\nYou hear: \"I can see a big elephant at the zoo.\"",
+            "steps": [
+              "预读选项: A. 大象在动物园 B. 大象在学校 C. 小猫在动物园",
+              "圈出关键词: big elephant, zoo",
+              "听录音，匹配关键词 elephant + zoo → 选A",
+              "第二遍验证：确认是 big elephant，不是 big cat"
+            ],
+            "answer": "A"
+          },
+          "mistakes": [
+            {
+              "wrong": "听到 'big' 就选了 B（big school），没听完整句",
+              "correct": "要听完整句再选，关键词是 elephant + zoo"
+            },
+            {
+              "wrong": "cat 和 cap 分不清，选错动物",
+              "correct": "cat 结尾是 /t/ 音（猫），cap 结尾是 /p/ 音（帽子）"
+            }
+          ],
+          "memory_tip": "听力三步走：先预读、再听音、后检查！",
+          "emotion_hook": "听力占40分！很多孩子因为没预读选项白白丢了10分以上"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "英语-三下-E1-02",
+          "title": "听力数字与颜色必考词",
+          "type": "听力得分卡",
+          "difficulty": 2,
+          "importance": 4,
+          "exam_frequency": "高",
+          "score_weight": "30-40%",
+          "definition": "数字eleven~twenty和颜色词是三下听力高频考点，发音相似的易混淆",
+          "core_points": [
+            "thirteen /θɜːˈtiːn/ vs thirty /ˈθɜːti/ — 重音位置不同",
+            "fifteen vs fifty — teen结尾重读，ty结尾轻读",
+            "颜色易混: blue vs black, white vs light",
+            "How many...? 问数量，答案一定是数字",
+            "What colour...? 问颜色，答案一定是颜色词"
+          ],
+          "example": {
+            "question": "Listen and write the number.\nYou hear: \"I have fifteen pencils.\"",
+            "steps": [
+              "heard 'fifteen' → 15 (不是50!)",
+              "fifteen = 15, fifty = 50",
+              "区分方法：fifteen 重音在后 fif-TEEN，fifty 重音在前 FIF-ty"
+            ],
+            "answer": "15"
+          },
+          "mistakes": [
+            {
+              "wrong": "fifteen 听成 fifty，写了50",
+              "correct": "fifteen = 15（重音在-teen），fifty = 50（重音在fif-）"
+            }
+          ],
+          "memory_tip": "teen在后重音重，ty在后轻轻送！fifteen=15, fifty=50!",
+          "emotion_hook": "thirteen和thirty傻傻分不清？这个口诀一秒搞定！"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择题专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "英语-三下-E2-01",
+          "title": "选择题5大高频语法考点",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "15-20%",
+          "definition": "三年级英语选择题主要考查冠词、代词、介词、be动词和特殊疑问词",
+          "core_points": [
+            "a/an 用法：元音音素前用 an (an apple, an egg, an orange)",
+            "he/she/it 后面跟 is，I 后面跟 am，you/we/they 后面跟 are",
+            "in/on/under 位置介词：in the box, on the desk, under the chair",
+            "What's this? → It's a/an...",
+            "How many + 名词复数 + can you see?"
+          ],
+          "example": {
+            "question": "Choose the correct answer. \n— What's this?\n— It's ___ orange.\nA. a    B. an    C. the",
+            "steps": [
+              "orange 以元音音素 /ɒ/ 开头",
+              "元音音素前用 an",
+              "答案选 B. an"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "选了 A（a orange）——因为觉得 a 是万能的",
+              "correct": "orange 的 o 是元音音素，必须用 an"
+            },
+            {
+              "wrong": "This is a umbrella — 错！",
+              "correct": "umbrella 以元音 /ʌ/ 开头，用 an umbrella"
+            }
+          ],
+          "memory_tip": "a e i o u 开头听，听到元音用 an！（注意是听音不是看字母）",
+          "emotion_hook": "a 和 an 傻傻分不清？90%的孩子在 an hour 上翻车！"
+        },
+        {
+          "card_id": "E2-02",
+          "full_id": "英语-三下-E2-02",
+          "title": "情景对话选择必考句型",
+          "type": "选择秒杀卡",
+          "difficulty": 2,
+          "importance": 4,
+          "exam_frequency": "高",
+          "score_weight": "15-20%",
+          "definition": "情景对话题考查日常交际用语的正确使用，需要根据上下文语境判断",
+          "core_points": [
+            "Nice to meet you. → Nice to meet you, too.",
+            "How are you? → I'm fine, thank you.",
+            "Where is the...? → It's in/on/under...",
+            "Can I have some...? → Sure. / Here you are.",
+            "Thank you. → You're welcome."
+          ],
+          "example": {
+            "question": "— Thank you!\n— ___\nA. OK.    B. You're welcome.    C. Thank you.",
+            "steps": [
+              "别人说 Thank you，应该回答「不客气」",
+              "You're welcome = 不客气",
+              "选 B"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "选了 A（OK）——不够礼貌也不符合固定搭配",
+              "correct": "Thank you 的标准回答是 You're welcome"
+            }
+          ],
+          "memory_tip": "对话配对记：Thank you → You're welcome, Sorry → That's OK!",
+          "emotion_hook": "情景对话就像在装备「社交礼仪」，考试和生活都能用！"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "填空/拼写专区",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "英语-三下-E3-01",
+          "title": "单词拼写零失误攻略",
+          "type": "拼写零错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "单词拼写是英语基础，三下必须掌握四会单词的正确拼写",
+          "core_points": [
+            "元音字母 a e i o u 在开/闭音节中的发音规律",
+            "常见字母组合：ch, sh, th, oo, ee, ea",
+            "易混词对：there/their, here/hear, see/sea",
+            "高频易错词：beautiful, because, Wednesday",
+            "复数变化：加s, 加es, 变y为i加es"
+          ],
+          "example": {
+            "question": "Fill in the blank with the correct word.\nI have two _____ (eye).",
+            "steps": [
+              "two 表示两个，需要用复数",
+              "eye 的复数直接加 s → eyes",
+              "答案: eyes"
+            ],
+            "answer": "eyes"
+          },
+          "mistakes": [
+            {
+              "wrong": "two eye（忘记变复数）",
+              "correct": "two 后面一定要跟复数形式 eyes"
+            },
+            {
+              "wrong": "two eies（错误的复数变化）",
+              "correct": "eye 直接加 s → eyes，不需要变 y 为 i"
+            }
+          ],
+          "memory_tip": "数到二或以上，名词后面加 s 走！",
+          "emotion_hook": "单词拼写一分一个，全对就能甩开同学10分！"
+        },
+        {
+          "card_id": "E3-02",
+          "full_id": "英语-三下-E3-02",
+          "title": "首字母填空秒解法",
+          "type": "填空必会卡",
+          "difficulty": 3,
+          "importance": 4,
+          "exam_frequency": "中",
+          "score_weight": "10-15%",
+          "definition": "给出首字母填写完整单词，需要根据句意和语法两方面判断",
+          "core_points": [
+            "第一步：读全句理解意思",
+            "第二步：根据首字母联想单词",
+            "第三步：检查语法（单复数/时态）",
+            "常考场景词：家庭成员、动物、食物、颜色、数字",
+            "注意介词搭配：look at, listen to, point to"
+          ],
+          "example": {
+            "question": "I have a r_____ (尺子). It's long.",
+            "steps": [
+              "r开头 + 尺子 → ruler",
+              "a ruler（单数，需要冠词 a）",
+              "语义检查：我有一把尺子，它很长。✓"
+            ],
+            "answer": "ruler"
+          },
+          "mistakes": [
+            {
+              "wrong": "rubber（橡皮）——也是 r 开头但不符合「尺子」的意思",
+              "correct": "要看括号里的中文提示，尺子 = ruler"
+            }
+          ],
+          "memory_tip": "首字母填空三连招：读句→想词→查语法！",
+          "emotion_hook": "首字母填空最怕想不出单词？其实99%考的都是课本里的四会词！"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "匹配/连线专区",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "英语-三下-E4-01",
+          "title": "图文匹配速解技巧",
+          "type": "匹配速解卡",
+          "difficulty": 2,
+          "importance": 4,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "图文匹配/连线题考查单词认读能力，先做最确定的可排除干扰项",
+          "core_points": [
+            "策略一：先做100%确定的，缩小范围",
+            "策略二：图片看细节（大小、颜色、数量）",
+            "策略三：排除法——连完确定的，剩下的就是答案",
+            "高频图片：动物、食物、文具、身体部位、家庭成员",
+            "注意单复数：one apple vs two apples"
+          ],
+          "example": {
+            "question": "Match the words with the pictures.\n1. elephant  2. giraffe  3. monkey  4. bird\n(附四张动物图片)",
+            "steps": [
+              "最好认的先连：elephant（大象，最大的）→ 图C",
+              "giraffe（长颈鹿，脖子最长的）→ 图A",
+              "bird（鸟，有翅膀的）→ 图D",
+              "排除法：monkey（猴子）→ 剩下的图B"
+            ],
+            "answer": "1-C, 2-A, 3-B, 4-D"
+          },
+          "mistakes": [
+            {
+              "wrong": "monkey 和 donkey 搞混",
+              "correct": "monkey = 猴子（mon-像「门」），donkey = 驴（don-像「蛋」）"
+            }
+          ],
+          "memory_tip": "最稳的先连线，剩下排除选！",
+          "emotion_hook": "连线题看起来简单？但粗心一个连错可能导致连环错！"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "阅读理解专区",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "英语-三下-E5-01",
+          "title": "阅读理解3步通关法",
+          "type": "阅读通关卡",
+          "difficulty": 4,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "三年级阅读理解通常是短文+判断/选择，掌握定位法可高效作答",
+          "core_points": [
+            "第一步：先看题目和选项，带着问题读文章",
+            "第二步：在文章中划出与题目相关的句子",
+            "第三步：对比原文和选项，注意细节词",
+            "True/False 判断题：原文找原话，一字之差也要注意",
+            "常见陷阱：用文中没提到的信息做干扰项"
+          ],
+          "example": {
+            "question": "Read and choose.\nTom has a cat. The cat is white. It likes fish.\n题目: Tom's cat is ___.\nA. black    B. white    C. brown",
+            "steps": [
+              "题目问 Tom's cat 的颜色",
+              "在文中找到 \"The cat is white\"",
+              "white = 白色 → 选 B"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "没看原文直接凭感觉选——觉得猫应该是black",
+              "correct": "阅读理解必须回原文找答案，不能凭想象"
+            }
+          ],
+          "memory_tip": "阅读三步法：看题→找句→比选项！",
+          "emotion_hook": "阅读理解不是考你认识多少单词，而是考你会不会「找答案」！"
+        },
+        {
+          "card_id": "E5-02",
+          "full_id": "英语-三下-E5-02",
+          "title": "判断题True/False必杀技",
+          "type": "阅读通关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "exam_frequency": "中",
+          "score_weight": "10-15%",
+          "definition": "判断题要逐字对照原文，特别注意否定词、数量词和形容词的偷换",
+          "core_points": [
+            "看到 not/don't/can't 等否定词画圈标记",
+            "数量词必对：two ≠ three, some ≠ all",
+            "人物别搞混：Tom's ≠ Amy's",
+            "时间别搞混：morning ≠ afternoon",
+            "文中没提到的信息 → 一般判 False"
+          ],
+          "example": {
+            "question": "Read and judge (T or F).\n原文: Amy has three dogs.\n题目: Amy has two dogs. ( )",
+            "steps": [
+              "原文说 three dogs",
+              "题目说 two dogs",
+              "three ≠ two → False（F）"
+            ],
+            "answer": "F"
+          },
+          "mistakes": [
+            {
+              "wrong": "只看到 Amy + dogs就判了T，没注意数量不同",
+              "correct": "关键词全部都要对上，数量 three ≠ two → F"
+            }
+          ],
+          "memory_tip": "判断题四对照：人物、数量、时间、地点，一个不对就是F！",
+          "emotion_hook": "判断题最坑的就是「偷换一个词」，很多孩子看大意不看细节就丢分！"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "书写/作文专区",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "英语-三下-E6-01",
+          "title": "看图写话模板卡",
+          "type": "写作模板卡",
+          "difficulty": 4,
+          "importance": 4,
+          "exam_frequency": "中",
+          "score_weight": "5-10%",
+          "definition": "三年级看图写话主要考查简单句型的运用和书写规范",
+          "core_points": [
+            "开头大写，句末标点（句号/问号/感叹号）",
+            "万能句型: I have... / I can see... / This is... / I like...",
+            "描述图片三要素：Who(谁) + Where(在哪) + What(做什么)",
+            "至少写3-5个完整句子",
+            "字迹工整，单词间留空格"
+          ],
+          "example": {
+            "question": "Look at the picture and write 3-5 sentences.\n(图片：一个男孩在公园里看鸟)",
+            "steps": [
+              "Who: a boy (一个男孩)",
+              "Where: in the park (在公园)",
+              "What: looking at birds (看鸟)",
+              "写：This is a boy. He is in the park. He can see many birds. The birds are beautiful. He likes birds."
+            ],
+            "answer": "This is a boy. He is in the park. He can see many birds. The birds are beautiful. He likes birds."
+          },
+          "mistakes": [
+            {
+              "wrong": "this is a boy he is in park（没大写、没标点、漏冠词）",
+              "correct": "This is a boy. He is in the park.（每句开头大写+句号+the park）"
+            },
+            {
+              "wrong": "I is happy.（be动词搭配错误）",
+              "correct": "I am happy. / He is happy."
+            }
+          ],
+          "memory_tip": "写作三查：查大写、查标点、查拼写！",
+          "emotion_hook": "英语小作文拿满分其实最简单——只要不犯低级错误！"
+        }
+      ]
+    }
+  ]
+}

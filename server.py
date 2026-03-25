@@ -3871,6 +3871,13 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             '判断火眼卡': {'strategy': '识别绝对词→举反例→判断', 'visual': '✓✗对比, 反例图, 陷阱词高亮', 'emotion': '怀疑→验证→火眼金睛'},
             '应用题拆解卡': {'strategy': '读→画→列→验四步法', 'visual': '线段图, 流程色块, 答语模板', 'emotion': '畏难→拆解→满分'},
             '操作题规范卡': {'strategy': '审题→作图→标注→检查', 'visual': '方格纸, 尺子画线, 检查清单', 'emotion': '随意→规范→满分'},
+            # 英语考卷真题专题
+            '听力得分卡': {'strategy': '听前预判→关键词捕捉→排除干扰', 'visual': '耳机图标, 关键词高亮, 选项排除色块', 'emotion': '紧张→专注→精准'},
+            '拼写零错卡': {'strategy': '词根拆分→易错字母标红→手写强化', 'visual': '字母色块拆分, 红圈易错点, 手写示范', 'emotion': '粗心→警觉→零错'},
+            '填空必会卡': {'strategy': '语境推断→语法匹配→验证通顺', 'visual': '句子填空色块, 语法提示, 选词高亮', 'emotion': '犹豫→推断→必会'},
+            '匹配速解卡': {'strategy': '关键词定位→逐一排除→连线验证', 'visual': '左右连线图, 关键词高亮, 匹配箭头', 'emotion': '眼花→定位→秒解'},
+            '阅读通关卡': {'strategy': '略读大意→精读细节→定位答案', 'visual': '文段分层色块, 关键句高亮, 答案定位箭头', 'emotion': '畏难→层层通关→自信'},
+            '写作模板卡': {'strategy': '开头模板→中间展开→结尾句型', 'visual': '三段式色块模板, 句型高亮, 连接词列表', 'emotion': '不会写→套模板→轻松写'},
         }
         skill = CARD_TYPE_SKILLS.get(card_type, CARD_TYPE_SKILLS.get('方法卡', {}))
 

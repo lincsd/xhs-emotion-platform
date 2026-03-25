@@ -650,6 +650,16 @@
         "is_boom": true,
         "units": 6,
         "cards": 18
+      },
+      {
+        "file": "英语_三下_考卷.json",
+        "subject": "英语",
+        "grade": "三年级",
+        "semester": "下册",
+        "grade_short": "三下",
+        "is_exam": true,
+        "units": 6,
+        "cards": 10
       }
     ],
     "养生减脂": [
@@ -714,5 +724,7 @@
         "cards": 7
       }
     ]
-  }
+  },
+  "total_cards": 10,
+  "total_files": 1
 }
