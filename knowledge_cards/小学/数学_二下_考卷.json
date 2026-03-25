@@ -1,0 +1,276 @@
+{
+  "subject": "数学",
+  "grade": "二年级",
+  "semester": "下册",
+  "textbook": "人教版",
+  "grade_short": "二下",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "填空满分攻略",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "数学-二下-E1-01",
+          "title": "除法填空求被除数",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "除法填空求被除数是考试高频失分点",
+          "core_points": [
+            "被除数 = 商 × 除数",
+            "5 × 6 = 30"
+          ],
+          "example": {
+            "question": "（  ）÷ 6 = 5",
+            "steps": [
+              "被除数 = 商 × 除数",
+              "5 × 6 = 30"
+            ],
+            "answer": "30"
+          },
+          "mistakes": [
+            {
+              "wrong": "6-5=1",
+              "correct": "除法逆运算是乘法"
+            }
+          ],
+          "memory_tip": "被除数=商×除数+余数！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "数学-二下-E1-02",
+          "title": "万以内数的组成",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "万以内数的组成是考试高频失分点",
+          "core_points": [
+            "3205: 千位3,百位2,十位0,个位5",
+            "3个千+2个百+0个十+5个一"
+          ],
+          "example": {
+            "question": "3205是由（）个千、（）个百、（）个一组成的",
+            "steps": [
+              "3205: 千位3,百位2,十位0,个位5",
+              "3个千+2个百+0个十+5个一"
+            ],
+            "answer": "3个千、2个百、5个一"
+          },
+          "mistakes": [
+            {
+              "wrong": "说成3个千2个百5个十",
+              "correct": "5在个位不是十位"
+            }
+          ],
+          "memory_tip": "0在十位不用说，但别漏个位！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "数学-二下-E2-01",
+          "title": "混合运算顺序选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "混合运算顺序选择是考试高频失分点",
+          "core_points": [
+            "先算除法和乘法：24÷6=4, 2×3=6",
+            "再加：4+6=10",
+            "选A"
+          ],
+          "example": {
+            "question": "24 ÷ 6 + 2 × 3 = ? A.10 B.7 C.16",
+            "steps": [
+              "先算除法和乘法：24÷6=4, 2×3=6",
+              "再加：4+6=10",
+              "选A"
+            ],
+            "answer": "A"
+          },
+          "mistakes": [
+            {
+              "wrong": "从左到右全部算",
+              "correct": "要先乘除后加减"
+            }
+          ],
+          "memory_tip": "先乘除后加减，同级从左到右！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "计算零失误",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "数学-二下-E3-01",
+          "title": "有余数除法计算",
+          "type": "计算零失误卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "有余数除法计算是考试高频失分点",
+          "core_points": [
+            "5×4=20，5×5=25>23",
+            "所以商4余3",
+            "23÷5=4...3"
+          ],
+          "example": {
+            "question": "23 ÷ 5 = ?",
+            "steps": [
+              "5×4=20，5×5=25>23",
+              "所以商4余3",
+              "23÷5=4...3"
+            ],
+            "answer": "4...3"
+          },
+          "mistakes": [
+            {
+              "wrong": "商5余-2",
+              "correct": "余数不能是负数"
+            }
+          ],
+          "memory_tip": "余数一定比除数小！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "判断火眼金睛",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "数学-二下-E4-01",
+          "title": "判断：1千克棉花比1千克铁轻",
+          "type": "判断火眼卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "判断：1千克棉花比1千克铁轻是考试高频失分点",
+          "core_points": [
+            "都是1千克",
+            "一样重",
+            "判断错"
+          ],
+          "example": {
+            "question": "1千克棉花比1千克铁轻。（  ）",
+            "steps": [
+              "都是1千克",
+              "一样重",
+              "判断错"
+            ],
+            "answer": "✗"
+          },
+          "mistakes": [
+            {
+              "wrong": "✓以为棉花轻",
+              "correct": "单位相同就比数字"
+            }
+          ],
+          "memory_tip": "比重量看数字，不看材质！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "应用题拆解",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "数学-二下-E5-01",
+          "title": "除法应用有余数",
+          "type": "应用题拆解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "除法应用有余数是考试高频失分点",
+          "core_points": [
+            "22÷5=4...2",
+            "余下2人还需1条船",
+            "4+1=5条船"
+          ],
+          "example": {
+            "question": "22人去划船，每船坐5人，至少需要几条船？",
+            "steps": [
+              "22÷5=4...2",
+              "余下2人还需1条船",
+              "4+1=5条船"
+            ],
+            "answer": "5条船"
+          },
+          "mistakes": [
+            {
+              "wrong": "4条船（没管余下的人）",
+              "correct": "有余数要进一"
+            }
+          ],
+          "memory_tip": "有余数要多租1辆/条/间，进一法！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "操作题规范",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "数学-二下-E6-01",
+          "title": "画统计图规范",
+          "type": "操作题规范卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "5-10%",
+          "definition": "画统计图规范是考试高频失分点",
+          "core_points": [
+            "1.写标题",
+            "2.标横纵轴",
+            "3.统一格子高度",
+            "4.涂色对齐不超线"
+          ],
+          "example": {
+            "question": "根据数据画条形统计图",
+            "steps": [
+              "1.写标题",
+              "2.标横纵轴",
+              "3.统一格子高度",
+              "4.涂色对齐不超线"
+            ],
+            "answer": "规范统计图"
+          },
+          "mistakes": [
+            {
+              "wrong": "忘写标题",
+              "correct": "统计图必须有标题"
+            }
+          ],
+          "memory_tip": "标题+坐标轴+数据，三样缺一扣分！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

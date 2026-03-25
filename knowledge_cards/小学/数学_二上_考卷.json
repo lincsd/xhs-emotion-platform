@@ -1,0 +1,276 @@
+{
+  "subject": "数学",
+  "grade": "二年级",
+  "semester": "上册",
+  "textbook": "人教版",
+  "grade_short": "二上",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "填空满分攻略",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "数学-二上-E1-01",
+          "title": "乘法口诀填空3大陷阱",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "乘法口诀填空3大陷阱是考试高频失分点",
+          "core_points": [
+            "想口诀：五六三十",
+            "所以括号填5",
+            "验证：5×6=30 ✓"
+          ],
+          "example": {
+            "question": "（  ）× 6 = 30",
+            "steps": [
+              "想口诀：五六三十",
+              "所以括号填5",
+              "验证：5×6=30 ✓"
+            ],
+            "answer": "5"
+          },
+          "mistakes": [
+            {
+              "wrong": "填36（加法思维30+6）",
+              "correct": "这是乘法不是加法"
+            }
+          ],
+          "memory_tip": "看到积想口诀，反向推因数！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "数学-二上-E1-02",
+          "title": "角的认识填空易错",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "角的认识填空易错是考试高频失分点",
+          "core_points": [
+            "角由一个顶点和两条边组成",
+            "1个顶点，2条边"
+          ],
+          "example": {
+            "question": "一个角有（ ）个顶点，（ ）条边",
+            "steps": [
+              "角由一个顶点和两条边组成",
+              "1个顶点，2条边"
+            ],
+            "answer": "1个顶点，2条边"
+          },
+          "mistakes": [
+            {
+              "wrong": "2个顶点（把端点算2次）",
+              "correct": "角只有1个顶点"
+            }
+          ],
+          "memory_tip": "1个尖角+2条射线=1个角！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "数学-二上-E2-01",
+          "title": "乘加乘减选择秒杀",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "乘加乘减选择秒杀是考试高频失分点",
+          "core_points": [
+            "先乘后加：3×4=12",
+            "12+2=14",
+            "选B"
+          ],
+          "example": {
+            "question": "3×4+2=? A.10 B.14 C.16",
+            "steps": [
+              "先乘后加：3×4=12",
+              "12+2=14",
+              "选B"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "4+2=6,3×6=18",
+              "correct": "先乘后加，不是先加后乘"
+            }
+          ],
+          "memory_tip": "先乘除后加减，没括号按顺序！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "计算零失误",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "数学-二上-E3-01",
+          "title": "两位数加减笔算不出错",
+          "type": "计算零失误卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "两位数加减笔算不出错是考试高频失分点",
+          "core_points": [
+            "个位：8+6=14，写4进1",
+            "十位：4+3+1=8",
+            "答案：84"
+          ],
+          "example": {
+            "question": "48 + 36 = ?",
+            "steps": [
+              "个位：8+6=14，写4进1",
+              "十位：4+3+1=8",
+              "答案：84"
+            ],
+            "answer": "84"
+          },
+          "mistakes": [
+            {
+              "wrong": "=714（没进位）",
+              "correct": "个位满10进1给十位"
+            }
+          ],
+          "memory_tip": "竖式对齐，进位不忘加！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "判断火眼金睛",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "数学-二上-E4-01",
+          "title": "判断：3+3=3×3",
+          "type": "判断火眼卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "判断：3+3=3×3是考试高频失分点",
+          "core_points": [
+            "3+3=6",
+            "3×3=9",
+            "6≠9，判断错"
+          ],
+          "example": {
+            "question": "3+3和3×3的结果相同。（  ）",
+            "steps": [
+              "3+3=6",
+              "3×3=9",
+              "6≠9，判断错"
+            ],
+            "answer": "✗"
+          },
+          "mistakes": [
+            {
+              "wrong": "打✓以为都是两个3",
+              "correct": "加和乘运算不同"
+            }
+          ],
+          "memory_tip": "加法和乘法结果只有2+2=2×2时相同！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "应用题拆解",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "数学-二上-E5-01",
+          "title": "乘法应用题拆解",
+          "type": "应用题拆解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "乘法应用题拆解是考试高频失分点",
+          "core_points": [
+            "每行4棵，3行→求几个4",
+            "4×3=12棵"
+          ],
+          "example": {
+            "question": "每行有4棵树，有3行，一共有多少棵？",
+            "steps": [
+              "每行4棵，3行→求几个4",
+              "4×3=12棵"
+            ],
+            "answer": "12棵"
+          },
+          "mistakes": [
+            {
+              "wrong": "4+3=7棵",
+              "correct": "几行×每行=总数，用乘法"
+            }
+          ],
+          "memory_tip": "几个几=乘法！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "操作题规范",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "数学-二上-E6-01",
+          "title": "画角操作规范",
+          "type": "操作题规范卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "5-10%",
+          "definition": "画角操作规范是考试高频失分点",
+          "core_points": [
+            "1.先画一个顶点",
+            "2.从顶点画一条横线",
+            "3.用三角尺对齐画竖线",
+            "4.标上直角符号┐"
+          ],
+          "example": {
+            "question": "画一个直角",
+            "steps": [
+              "1.先画一个顶点",
+              "2.从顶点画一条横线",
+              "3.用三角尺对齐画竖线",
+              "4.标上直角符号┐"
+            ],
+            "answer": "一个标准直角"
+          },
+          "mistakes": [
+            {
+              "wrong": "忘记标直角符号",
+              "correct": "画完直角必须标记"
+            }
+          ],
+          "memory_tip": "直角必须标「┐」，不标扣分！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,241 @@
+{
+  "subject": "英语",
+  "grade": "五年级",
+  "semester": "上册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "五上",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "听力得分专区",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "英语-五上-E1-01",
+          "title": "人物描述听力",
+          "type": "听力得分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "30-40%",
+          "definition": "人物描述听力是考试高频失分点",
+          "core_points": [
+            "关键词: tall, thin, long hair, she",
+            "匹配：高瘦+长发+女性"
+          ],
+          "example": {
+            "question": "Listen: \"My English teacher is tall and thin. She has long hair.\"",
+            "steps": [
+              "关键词: tall, thin, long hair, she",
+              "匹配：高瘦+长发+女性"
+            ],
+            "answer": "匹配对应人物图"
+          },
+          "mistakes": [
+            {
+              "wrong": "只听到tall就选",
+              "correct": "要综合所有特征"
+            }
+          ],
+          "memory_tip": "人物描述听力抓：高矮胖瘦+发型+性别！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "英语-五上-E2-01",
+          "title": "What do you have选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "What do you have选择是考试高频失分点",
+          "core_points": [
+            "星期几前用on",
+            "on Mondays"
+          ],
+          "example": {
+            "question": "What do you have ___ Mondays? A.in B.on C.at",
+            "steps": [
+              "星期几前用on",
+              "on Mondays"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "选A in",
+              "correct": "星期前固定搭配on"
+            }
+          ],
+          "memory_tip": "on+星期, in+月份/季节, at+时间点！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "拼写零错攻略",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "英语-五上-E3-01",
+          "title": "食物单词拼写",
+          "type": "拼写零错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "食物单词拼写是考试高频失分点",
+          "core_points": [
+            "hamburger, sandwich, salad",
+            "hamburger注意ham开头"
+          ],
+          "example": {
+            "question": "h__mburger, s__ndwich, sal__d",
+            "steps": [
+              "hamburger, sandwich, salad",
+              "hamburger注意ham开头"
+            ],
+            "answer": "hamburger, sandwich, salad"
+          },
+          "mistakes": [
+            {
+              "wrong": "hanburger",
+              "correct": "是ham不是han"
+            }
+          ],
+          "memory_tip": "hamburger=ham+burger，分段记！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "填空必会宝典",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "英语-五上-E4-01",
+          "title": "There be否定句填空",
+          "type": "填空必会卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "There be否定句填空是考试高频失分点",
+          "core_points": [
+            "There be否定：be后加not",
+            "are not = aren't",
+            "There aren't any fish"
+          ],
+          "example": {
+            "question": "There ___ (not) any fish in the river.",
+            "steps": [
+              "There be否定：be后加not",
+              "are not = aren't",
+              "There aren't any fish"
+            ],
+            "answer": "aren't"
+          },
+          "mistakes": [
+            {
+              "wrong": "isn't any fish",
+              "correct": "fish可数复数用are"
+            }
+          ],
+          "memory_tip": "any用在否定句和疑问句中！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "阅读通关秘籍",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "英语-五上-E5-01",
+          "title": "菜单阅读理解",
+          "type": "阅读通关卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "15-20%",
+          "definition": "菜单阅读理解是考试高频失分点",
+          "core_points": [
+            "读菜单标题和各项",
+            "找到问题中的关键词",
+            "在菜单中定位答案"
+          ],
+          "example": {
+            "question": "Read the school menu and answer questions",
+            "steps": [
+              "读菜单标题和各项",
+              "找到问题中的关键词",
+              "在菜单中定位答案"
+            ],
+            "answer": "根据菜单回答"
+          },
+          "mistakes": [
+            {
+              "wrong": "看错行列",
+              "correct": "用尺子对齐避免看错行"
+            }
+          ],
+          "memory_tip": "菜单阅读：先看纵列分类，再横向找信息！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "写作模板大全",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "英语-五上-E6-01",
+          "title": "描述老师模板",
+          "type": "写作模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "描述老师模板是考试高频失分点",
+          "core_points": [
+            "My favourite teacher is ___.",
+            "He/She is ___.(外貌)",
+            "He/She is ___.(性格)",
+            "I like him/her!"
+          ],
+          "example": {
+            "question": "Describe your favourite teacher",
+            "steps": [
+              "My favourite teacher is ___.",
+              "He/She is ___.(外貌)",
+              "He/She is ___.(性格)",
+              "I like him/her!"
+            ],
+            "answer": "人物描述模板"
+          },
+          "mistakes": [
+            {
+              "wrong": "只写外貌",
+              "correct": "要加上性格和喜欢的原因"
+            }
+          ],
+          "memory_tip": "外貌+性格+原因=完整人物描述！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

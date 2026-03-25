@@ -1,0 +1,276 @@
+{
+  "subject": "语文",
+  "grade": "五年级",
+  "semester": "下册",
+  "textbook": "人教版(统编)",
+  "grade_short": "五下",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "拼音字词基础",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "语文-五下-E1-01",
+          "title": "易混字词辨析",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "易混字词辨析是考试高频失分点",
+          "core_points": [
+            "截=切断/截止",
+            "载=装载/承载",
+            "裁=裁剪/裁判",
+            "栽=栽种/栽培"
+          ],
+          "example": {
+            "question": "用\"截/载/裁/栽\"填空",
+            "steps": [
+              "截=切断/截止",
+              "载=装载/承载",
+              "裁=裁剪/裁判",
+              "栽=栽种/栽培"
+            ],
+            "answer": "根据字义填空"
+          },
+          "mistakes": [
+            {
+              "wrong": "截和栽分不清",
+              "correct": "截=刀断，栽=木种"
+            }
+          ],
+          "memory_tip": "截(戈=刀)载(车)裁(衣)栽(木)看偏旁！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "语文-五下-E1-02",
+          "title": "文言文词义",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "文言文词义是考试高频失分点",
+          "core_points": [
+            "忿然=愤怒的样子",
+            "才=才能/武艺"
+          ],
+          "example": {
+            "question": "解释: \"忿然\"、\"才\"(武松)的意思",
+            "steps": [
+              "忿然=愤怒的样子",
+              "才=才能/武艺"
+            ],
+            "answer": "联系古文语境"
+          },
+          "mistakes": [
+            {
+              "wrong": "用现代意思",
+              "correct": "古文词义和现代可能不同"
+            }
+          ],
+          "memory_tip": "文言文一字多义要看具体句子！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择判断秒杀",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "语文-五下-E2-01",
+          "title": "人物描写方法选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "人物描写方法选择是考试高频失分点",
+          "core_points": [
+            "心理=内心想法→A",
+            "B是语言描写",
+            "C是动作描写"
+          ],
+          "example": {
+            "question": "哪句是心理描写？A.\"我想...\" B.\"他大喊\" C.\"他跑过去\"",
+            "steps": [
+              "心理=内心想法→A",
+              "B是语言描写",
+              "C是动作描写"
+            ],
+            "answer": "A"
+          },
+          "mistakes": [
+            {
+              "wrong": "选B以为说出来的是心理",
+              "correct": "说出来是语言描写"
+            }
+          ],
+          "memory_tip": "动作/语言/心理/神态/外貌=五种描写方法！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "句式变换宝典",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "语文-五下-E3-01",
+          "title": "改间接引语",
+          "type": "句式变换卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "改间接引语是考试高频失分点",
+          "core_points": [
+            "冒号引号→逗号",
+            "你们→我们/他们(看角度)",
+            "老师说，我们要认真学习。"
+          ],
+          "example": {
+            "question": "老师说：\"你们要认真学习。\"→改转述",
+            "steps": [
+              "冒号引号→逗号",
+              "你们→我们/他们(看角度)",
+              "老师说，我们要认真学习。"
+            ],
+            "answer": "老师说，我们/他们要认真学习。"
+          },
+          "mistakes": [
+            {
+              "wrong": "老师说，你们要认真学习",
+              "correct": "要改人称代词"
+            }
+          ],
+          "memory_tip": "人称代词一定要改！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "阅读理解通关",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "语文-五下-E4-01",
+          "title": "理解文章写法",
+          "type": "阅读理解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "理解文章写法是考试高频失分点",
+          "core_points": [
+            "举例子/打比方/作比较/列数字=说明",
+            "首尾呼应/正面侧面/借物喻人=文学"
+          ],
+          "example": {
+            "question": "这篇文章用了什么表达方法？",
+            "steps": [
+              "举例子/打比方/作比较/列数字=说明",
+              "首尾呼应/正面侧面/借物喻人=文学"
+            ],
+            "answer": "辨别表达方法"
+          },
+          "mistakes": [
+            {
+              "wrong": "所有修辞都列一遍",
+              "correct": "要找文章实际用的"
+            }
+          ],
+          "memory_tip": "先判断是说明文还是叙事文！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "古诗文填空",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "语文-五下-E5-01",
+          "title": "《从军行》默写",
+          "type": "古诗默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "《从军行》默写是考试高频失分点",
+          "core_points": [
+            "孤城遥望玉门关",
+            "不破楼兰终不还"
+          ],
+          "example": {
+            "question": "青海长云暗雪山，（  ）。黄沙百战穿金甲，（  ）。",
+            "steps": [
+              "孤城遥望玉门关",
+              "不破楼兰终不还"
+            ],
+            "answer": "孤城遥望玉门关，不破楼兰终不还"
+          },
+          "mistakes": [
+            {
+              "wrong": "孤城远望",
+              "correct": "是\"遥望\"不是\"远望\""
+            }
+          ],
+          "memory_tip": "\"遥望\"不是\"远望\"！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "作文满分攻略",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "语文-五下-E6-01",
+          "title": "把人写具体模板",
+          "type": "作文模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "把人写具体模板是考试高频失分点",
+          "core_points": [
+            "开头：点明人物和特点",
+            "事例1: 通过一个事展示特点",
+            "事例2: 换个角度展示",
+            "结尾：总结印象"
+          ],
+          "example": {
+            "question": "描写一个人的特点",
+            "steps": [
+              "开头：点明人物和特点",
+              "事例1: 通过一个事展示特点",
+              "事例2: 换个角度展示",
+              "结尾：总结印象"
+            ],
+            "answer": "特点+典型事例"
+          },
+          "mistakes": [
+            {
+              "wrong": "只说特点不举例",
+              "correct": "要用事例来证明"
+            }
+          ],
+          "memory_tip": "写人=典型事例+细节描写(动作+语言+神态)！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

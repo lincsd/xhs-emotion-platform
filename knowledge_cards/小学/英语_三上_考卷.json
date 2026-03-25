@@ -1,0 +1,241 @@
+{
+  "subject": "英语",
+  "grade": "三年级",
+  "semester": "上册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "三上",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "听力得分专区",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "英语-三上-E1-01",
+          "title": "字母听辨3大陷阱",
+          "type": "听力得分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "30-40%",
+          "definition": "字母听辨3大陷阱是考试高频失分点",
+          "core_points": [
+            "b发/biː/, d发/diː/, p发/piː/",
+            "听到/biː/→选B不是D也不是P",
+            "易混组: b/d/p, m/n, g/j"
+          ],
+          "example": {
+            "question": "Listen: Which letter? You hear /biː/",
+            "steps": [
+              "b发/biː/, d发/diː/, p发/piː/",
+              "听到/biː/→选B不是D也不是P",
+              "易混组: b/d/p, m/n, g/j"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "听成D",
+              "correct": "b的/b/音嘴唇先闭再打开"
+            }
+          ],
+          "memory_tip": "字母易混组：b/d/p，m/n，g/j 多听多辨！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "英语-三上-E2-01",
+          "title": "Greetings选择秒杀",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "Greetings选择秒杀是考试高频失分点",
+          "core_points": [
+            "Good morning回应Good morning",
+            "相同时段相同问候"
+          ],
+          "example": {
+            "question": "— Good morning! — ___  A.Good evening! B.Good morning! C.Bye!",
+            "steps": [
+              "Good morning回应Good morning",
+              "相同时段相同问候"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "选A时段不对",
+              "correct": "morning对morning"
+            }
+          ],
+          "memory_tip": "同一时段问候要对称回答！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "拼写零错攻略",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "英语-三上-E3-01",
+          "title": "26字母大小写配对",
+          "type": "拼写零错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "26字母大小写配对是考试高频失分点",
+          "core_points": [
+            "B→b, D→d, G→g, Q→q, R→r",
+            "注意b/d镜像，q/p镜像"
+          ],
+          "example": {
+            "question": "写出下列字母的小写: B D G Q R",
+            "steps": [
+              "B→b, D→d, G→g, Q→q, R→r",
+              "注意b/d镜像，q/p镜像"
+            ],
+            "answer": "b, d, g, q, r"
+          },
+          "mistakes": [
+            {
+              "wrong": "b和d写反",
+              "correct": "b肚子朝右，d肚子朝左"
+            }
+          ],
+          "memory_tip": "b朝右d朝左，q尾朝左p尾朝右！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "填空必会宝典",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "英语-三上-E4-01",
+          "title": "Colour词填空",
+          "type": "填空必会卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "Colour词填空是考试高频失分点",
+          "core_points": [
+            "banana=香蕉",
+            "香蕉常见颜色=黄色",
+            "填yellow"
+          ],
+          "example": {
+            "question": "The banana is ___. (yellow/green/red)",
+            "steps": [
+              "banana=香蕉",
+              "香蕉常见颜色=黄色",
+              "填yellow"
+            ],
+            "answer": "yellow"
+          },
+          "mistakes": [
+            {
+              "wrong": "填green",
+              "correct": "生活常识：香蕉是黄色"
+            }
+          ],
+          "memory_tip": "水果颜色搭配要记牢！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "阅读通关秘籍",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "英语-三上-E5-01",
+          "title": "图文匹配阅读",
+          "type": "阅读通关卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "15-20%",
+          "definition": "图文匹配阅读是考试高频失分点",
+          "core_points": [
+            "关键词: big, red, bag",
+            "找同时满足3个条件的图"
+          ],
+          "example": {
+            "question": "Read: \"I have a big red bag.\" Which picture?",
+            "steps": [
+              "关键词: big, red, bag",
+              "找同时满足3个条件的图"
+            ],
+            "answer": "大红色书包图"
+          },
+          "mistakes": [
+            {
+              "wrong": "只看bag没看颜色和大小",
+              "correct": "要同时匹配所有描述词"
+            }
+          ],
+          "memory_tip": "圈出所有形容词，逐个匹配！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "写作模板大全",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "英语-三上-E6-01",
+          "title": "自我介绍模板",
+          "type": "写作模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "自我介绍模板是考试高频失分点",
+          "core_points": [
+            "Hello! My name is ___.",
+            "I'm ___.",
+            "I like ___.",
+            "Nice to meet you!"
+          ],
+          "example": {
+            "question": "Write about yourself",
+            "steps": [
+              "Hello! My name is ___.",
+              "I'm ___.",
+              "I like ___.",
+              "Nice to meet you!"
+            ],
+            "answer": "4句模板"
+          },
+          "mistakes": [
+            {
+              "wrong": "没有开头问候语",
+              "correct": "写作要有开头和结尾"
+            }
+          ],
+          "memory_tip": "开头Hello+名字+特点+结尾，四句搞定！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,272 @@
+{
+  "subject": "语文",
+  "grade": "三年级",
+  "semester": "上册",
+  "textbook": "人教版(统编)",
+  "grade_short": "三上",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "拼音字词基础",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "语文-三上-E1-01",
+          "title": "多音字辨析填空",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "多音字辨析填空是考试高频失分点",
+          "core_points": [
+            "假jiǎ=假如/真假",
+            "假jià=放假/假期",
+            "乐lè=快乐",
+            "乐yuè=音乐"
+          ],
+          "example": {
+            "question": "假：jiǎ（  ）jià（  ）；乐: lè（  ）yuè（  ）",
+            "steps": [
+              "假jiǎ=假如/真假",
+              "假jià=放假/假期",
+              "乐lè=快乐",
+              "乐yuè=音乐"
+            ],
+            "answer": "真假jiǎ，假期jià；快乐lè，音乐yuè"
+          },
+          "mistakes": [
+            {
+              "wrong": "放假读jiǎ",
+              "correct": "假期的假读jià"
+            }
+          ],
+          "memory_tip": "根据词义定读音！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "语文-三上-E1-02",
+          "title": "形近字辨析",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "形近字辨析是考试高频失分点",
+          "core_points": [
+            "峰=山峰(山)，蜂=蜜蜂(虫)",
+            "辨=辨别(刀)，辩=争辩(言)，辫=辫子(丝)"
+          ],
+          "example": {
+            "question": "辨析组词: 峰/蜂  辨/辩/辫",
+            "steps": [
+              "峰=山峰(山)，蜂=蜜蜂(虫)",
+              "辨=辨别(刀)，辩=争辩(言)，辫=辫子(丝)"
+            ],
+            "answer": "看偏旁辨字义"
+          },
+          "mistakes": [
+            {
+              "wrong": "三个辨分不清",
+              "correct": "中间见偏旁：刀/言/丝"
+            }
+          ],
+          "memory_tip": "辨(刀切分辨)辩(言语争辩)辫(丝线编辫)！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择判断秒杀",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "语文-三上-E2-01",
+          "title": "修辞手法选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "修辞手法选择是考试高频失分点",
+          "core_points": [
+            "有\"像\"→比喻",
+            "把水珠比作珍珠"
+          ],
+          "example": {
+            "question": "\"荷叶上的水珠像珍珠一样晶莹。\"用了什么修辞？A.拟人 B.比喻 C.排比",
+            "steps": [
+              "有\"像\"→比喻",
+              "把水珠比作珍珠"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "选A拟人",
+              "correct": "拟人是把物当人写"
+            }
+          ],
+          "memory_tip": "像/好像/如同/仿佛=比喻信号词！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "句式变换宝典",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "语文-三上-E3-01",
+          "title": "反问句改陈述句",
+          "type": "句式变换卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "反问句改陈述句是考试高频失分点",
+          "core_points": [
+            "去掉\"难道...吗\"",
+            "去掉\"不\"反转意思",
+            "这是你的书。"
+          ],
+          "example": {
+            "question": "\"难道这不是你的书吗？\"改陈述句",
+            "steps": [
+              "去掉\"难道...吗\"",
+              "去掉\"不\"反转意思",
+              "这是你的书。"
+            ],
+            "answer": "这是你的书。"
+          },
+          "mistakes": [
+            {
+              "wrong": "这不是你的书",
+              "correct": "反问含否定=肯定意思"
+            }
+          ],
+          "memory_tip": "反问改陈述：去掉反问词，否定变肯定！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "阅读理解通关",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "语文-三上-E4-01",
+          "title": "阅读理解答题法",
+          "type": "阅读理解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "阅读理解答题法是考试高频失分点",
+          "core_points": [
+            "找到词语在文中的位置",
+            "读前后句",
+            "用自己的话解释"
+          ],
+          "example": {
+            "question": "联系上下文理解词语意思",
+            "steps": [
+              "找到词语在文中的位置",
+              "读前后句",
+              "用自己的话解释"
+            ],
+            "answer": "联系上下文"
+          },
+          "mistakes": [
+            {
+              "wrong": "只背字典意思",
+              "correct": "要联系文中具体语境"
+            }
+          ],
+          "memory_tip": "词语理解=找位置+看前后+自己说！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "古诗文填空",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "语文-三上-E5-01",
+          "title": "古诗填写",
+          "type": "古诗默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "古诗填写是考试高频失分点",
+          "core_points": [
+            "白云生处有人家"
+          ],
+          "example": {
+            "question": "《山行》：远上寒山石径斜，（  ）。",
+            "steps": [
+              "白云生处有人家"
+            ],
+            "answer": "白云生处有人家"
+          },
+          "mistakes": [
+            {
+              "wrong": "白云深处",
+              "correct": "是\"生处\"不是\"深处\""
+            }
+          ],
+          "memory_tip": "注意：\"生处\"不是\"深处\"！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "作文满分攻略",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "语文-三上-E6-01",
+          "title": "写景作文模板",
+          "type": "作文模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "写景作文模板是考试高频失分点",
+          "core_points": [
+            "开头：总写美（1句）",
+            "中间：分写天上/地上/水中（2-3段）",
+            "结尾：感受（1句）"
+          ],
+          "example": {
+            "question": "这儿真美",
+            "steps": [
+              "开头：总写美（1句）",
+              "中间：分写天上/地上/水中（2-3段）",
+              "结尾：感受（1句）"
+            ],
+            "answer": "总分总结构"
+          },
+          "mistakes": [
+            {
+              "wrong": "想到哪写到哪",
+              "correct": "要有顺序：上→下/远→近"
+            }
+          ],
+          "memory_tip": "写景=总分总+按顺序+用修辞！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

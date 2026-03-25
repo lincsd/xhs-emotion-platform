@@ -1,0 +1,243 @@
+{
+  "subject": "英语",
+  "grade": "四年级",
+  "semester": "下册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "四下",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "听力得分专区",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "英语-四下-E1-01",
+          "title": "天气词汇听力",
+          "type": "听力得分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "30-40%",
+          "definition": "天气词汇听力是考试高频失分点",
+          "core_points": [
+            "rainy=下雨的",
+            "umbrella=雨伞",
+            "关联：rainy→need umbrella"
+          ],
+          "example": {
+            "question": "Listen: \"It's rainy today. Take your umbrella.\"",
+            "steps": [
+              "rainy=下雨的",
+              "umbrella=雨伞",
+              "关联：rainy→need umbrella"
+            ],
+            "answer": "rainy"
+          },
+          "mistakes": [
+            {
+              "wrong": "rainy和windy分不清",
+              "correct": "rainy有rain(雨)的词根"
+            }
+          ],
+          "memory_tip": "sunny/cloudy/rainy/windy/snowy 5种天气必会！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "英语-四下-E2-01",
+          "title": "What time选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "What time选择是考试高频失分点",
+          "core_points": [
+            "It's time for + 名词",
+            "It's time to + 动词",
+            "lunch是名词→选A"
+          ],
+          "example": {
+            "question": "It's time ___ lunch. A.for B.to C.at",
+            "steps": [
+              "It's time for + 名词",
+              "It's time to + 动词",
+              "lunch是名词→选A"
+            ],
+            "answer": "A"
+          },
+          "mistakes": [
+            {
+              "wrong": "选B",
+              "correct": "to后面跟动词，for后面跟名词"
+            }
+          ],
+          "memory_tip": "time for+名词, time to+动词！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "拼写零错攻略",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "英语-四下-E3-01",
+          "title": "天气单词拼写",
+          "type": "拼写零错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "天气单词拼写是考试高频失分点",
+          "core_points": [
+            "warm, cold, cool",
+            "注意warm是ar不是or"
+          ],
+          "example": {
+            "question": "w__rm(温暖), c__ld(寒冷), c__ol(凉爽)",
+            "steps": [
+              "warm, cold, cool",
+              "注意warm是ar不是or"
+            ],
+            "answer": "warm, cold, cool"
+          },
+          "mistakes": [
+            {
+              "wrong": "worm(虫子)",
+              "correct": "warm=温暖，worm=虫子"
+            }
+          ],
+          "memory_tip": "warm的ar发/ɔː/，不是or！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "填空必会宝典",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "英语-四下-E4-01",
+          "title": "How much购物填空",
+          "type": "填空必会卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "How much购物填空是考试高频失分点",
+          "core_points": [
+            "this dress单数→is",
+            "回答也用is"
+          ],
+          "example": {
+            "question": "How much ___ this dress? It ___ 50 yuan.",
+            "steps": [
+              "this dress单数→is",
+              "回答也用is"
+            ],
+            "answer": "is, is"
+          },
+          "mistakes": [
+            {
+              "wrong": "How much are this dress",
+              "correct": "this单数用is"
+            }
+          ],
+          "memory_tip": "How much is+单数, How much are+复数！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "阅读通关秘籍",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "英语-四下-E5-01",
+          "title": "购物对话阅读",
+          "type": "阅读通关卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "15-20%",
+          "definition": "购物对话阅读是考试高频失分点",
+          "core_points": [
+            "圈出价格数字",
+            "找出买了什么",
+            "计算总价"
+          ],
+          "example": {
+            "question": "Read the dialogue about shopping...",
+            "steps": [
+              "圈出价格数字",
+              "找出买了什么",
+              "计算总价"
+            ],
+            "answer": "根据对话回答"
+          },
+          "mistakes": [
+            {
+              "wrong": "忽略单位（yuan/dollar）",
+              "correct": "注意货币单位"
+            }
+          ],
+          "memory_tip": "购物阅读重点：物品+价格+数量！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "写作模板大全",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "英语-四下-E6-01",
+          "title": "天气日记模板",
+          "type": "写作模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "天气日记模板是考试高频失分点",
+          "core_points": [
+            "Today is ___(day).",
+            "The weather is ___.",
+            "I wear my ___.",
+            "I can ___."
+          ],
+          "example": {
+            "question": "Write about the weather today",
+            "steps": [
+              "Today is ___(day).",
+              "The weather is ___.",
+              "I wear my ___.",
+              "I can ___."
+            ],
+            "answer": "天气日记"
+          },
+          "mistakes": [
+            {
+              "wrong": "没有日期",
+              "correct": "日记要先写日期和天气"
+            }
+          ],
+          "memory_tip": "天气→穿着→活动，三层递进！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

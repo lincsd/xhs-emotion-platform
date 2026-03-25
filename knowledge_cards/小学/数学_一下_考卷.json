@@ -1,0 +1,270 @@
+{
+  "subject": "数学",
+  "grade": "一年级",
+  "semester": "下册",
+  "textbook": "人教版",
+  "grade_short": "一下",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "填空满分攻略",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "数学-一下-E1-01",
+          "title": "20以内退位减法填空技巧",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "20以内退位减法填空技巧是考试高频失分点",
+          "core_points": [
+            "想：15 - 7 = 8",
+            "所以括号填8",
+            "验证：15 - 8 = 7 ✓"
+          ],
+          "example": {
+            "question": "15 -（  ）= 7",
+            "steps": [
+              "想：15 - 7 = 8",
+              "所以括号填8",
+              "验证：15 - 8 = 7 ✓"
+            ],
+            "answer": "8"
+          },
+          "mistakes": [
+            {
+              "wrong": "填22（15+7=22）",
+              "correct": "不是求和，是求减数"
+            }
+          ],
+          "memory_tip": "用被减数减差=减数，反着想！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "数学-一下-E1-02",
+          "title": "人民币换算填空坑",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "人民币换算填空坑是考试高频失分点",
+          "core_points": [
+            "1元 = 10角",
+            "10角 + 3角 = 13角"
+          ],
+          "example": {
+            "question": "1元3角 =（  ）角",
+            "steps": [
+              "1元 = 10角",
+              "10角 + 3角 = 13角"
+            ],
+            "answer": "13角"
+          },
+          "mistakes": [
+            {
+              "wrong": "填1.3角",
+              "correct": "要统一单位，1元=10角"
+            }
+          ],
+          "memory_tip": "1元=10角=100分，先换再加！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "数学-一下-E2-01",
+          "title": "找规律选择秒杀",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "找规律选择秒杀是考试高频失分点",
+          "core_points": [
+            "每次+2",
+            "8+2=10",
+            "选B"
+          ],
+          "example": {
+            "question": "2, 4, 6, 8, ( ) A.9 B.10 C.12",
+            "steps": [
+              "每次+2",
+              "8+2=10",
+              "选B"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "选A（以为+1）",
+              "correct": "仔细看间隔都是2"
+            }
+          ],
+          "memory_tip": "找相邻两数的差，就是规律！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "计算零失误",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "数学-一下-E3-01",
+          "title": "两位数加一位数进位",
+          "type": "计算零失误卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "两位数加一位数进位是考试高频失分点",
+          "core_points": [
+            "个位：8 + 5 = 13，写3进1",
+            "十位：2 + 1 = 3",
+            "答案：33"
+          ],
+          "example": {
+            "question": "28 + 5 = ?",
+            "steps": [
+              "个位：8 + 5 = 13，写3进1",
+              "十位：2 + 1 = 3",
+              "答案：33"
+            ],
+            "answer": "33"
+          },
+          "mistakes": [
+            {
+              "wrong": "=213（没进位直接写拼）",
+              "correct": "个位相加满10要进位"
+            }
+          ],
+          "memory_tip": "个位满10进1到十位！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "判断火眼金睛",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "数学-一下-E4-01",
+          "title": "判断：最大两位数是99",
+          "type": "判断火眼卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "判断：最大两位数是99是考试高频失分点",
+          "core_points": [
+            "两位数从10到99",
+            "最大的确实是99"
+          ],
+          "example": {
+            "question": "最大的两位数是99。（  ）",
+            "steps": [
+              "两位数从10到99",
+              "最大的确实是99"
+            ],
+            "answer": "√"
+          },
+          "mistakes": [
+            {
+              "wrong": "打✗以为是100",
+              "correct": "100是三位数"
+            }
+          ],
+          "memory_tip": "最小两位数10，最大两位数99！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "应用题拆解",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "数学-一下-E5-01",
+          "title": "比多少应用题",
+          "type": "应用题拆解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "比多少应用题是考试高频失分点",
+          "core_points": [
+            "小明比小红多→小明更多→用加法",
+            "15 + 6 = 21朵"
+          ],
+          "example": {
+            "question": "小红有15朵花，小明比小红多6朵，小明有几朵？",
+            "steps": [
+              "小明比小红多→小明更多→用加法",
+              "15 + 6 = 21朵"
+            ],
+            "answer": "21朵"
+          },
+          "mistakes": [
+            {
+              "wrong": "15-6=9朵（用成减法）",
+              "correct": "比多用加法"
+            }
+          ],
+          "memory_tip": "「比…多」就加，「比…少」就减！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "操作题规范",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "数学-一下-E6-01",
+          "title": "画图补全规律",
+          "type": "操作题规范卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "5-10%",
+          "definition": "画图补全规律是考试高频失分点",
+          "core_points": [
+            "规律：圆形和方形交替",
+            "○后面是□"
+          ],
+          "example": {
+            "question": "○□○□○（ ），画出下一个",
+            "steps": [
+              "规律：圆形和方形交替",
+              "○后面是□"
+            ],
+            "answer": "□"
+          },
+          "mistakes": [
+            {
+              "wrong": "画成○",
+              "correct": "注意是交替，不是连续"
+            }
+          ],
+          "memory_tip": "找准AB重复模式，下一个就出来了！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

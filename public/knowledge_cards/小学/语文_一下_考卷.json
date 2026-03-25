@@ -1,0 +1,278 @@
+{
+  "subject": "语文",
+  "grade": "一年级",
+  "semester": "下册",
+  "textbook": "人教版(统编)",
+  "grade_short": "一下",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "拼音字词基础",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "语文-一下-E1-01",
+          "title": "形近字组词辨析",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "形近字组词辨析是考试高频失分点",
+          "core_points": [
+            "请=请求(言字旁→说话)",
+            "清=清水(三点水→水)",
+            "青=青草(无偏旁→颜色)",
+            "晴=晴天(日字旁→太阳)",
+            "情=感情(竖心旁→心)"
+          ],
+          "example": {
+            "question": "区分组词：请/清/青/晴/情",
+            "steps": [
+              "请=请求(言字旁→说话)",
+              "清=清水(三点水→水)",
+              "青=青草(无偏旁→颜色)",
+              "晴=晴天(日字旁→太阳)",
+              "情=感情(竖心旁→心)"
+            ],
+            "answer": "看偏旁定含义"
+          },
+          "mistakes": [
+            {
+              "wrong": "请/清搞混",
+              "correct": "言字旁→说话相关"
+            }
+          ],
+          "memory_tip": "偏旁定意思：言说水清日晴心情！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "语文-一下-E1-02",
+          "title": "前后鼻音区分",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "前后鼻音区分是考试高频失分点",
+          "core_points": [
+            "an嘴巴张大舌尖前",
+            "ang嘴巴张大舌根后",
+            "关键：有g的舌头后缩"
+          ],
+          "example": {
+            "question": "an-ang, en-eng, in-ing 区别",
+            "steps": [
+              "an嘴巴张大舌尖前",
+              "ang嘴巴张大舌根后",
+              "关键：有g的舌头后缩"
+            ],
+            "answer": "有g舌根后缩"
+          },
+          "mistakes": [
+            {
+              "wrong": "分不清前后鼻音",
+              "correct": "有g后鼻，无g前鼻"
+            }
+          ],
+          "memory_tip": "g结尾=后鼻音，舌头贴后面！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择判断秒杀",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "语文-一下-E2-01",
+          "title": "量词选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "量词选择是考试高频失分点",
+          "core_points": [
+            "鱼用\"条\"",
+            "鸟/猫用\"只\"",
+            "牛/猪用\"头\""
+          ],
+          "example": {
+            "question": "一（ ）小鱼 A.条 B.只 C.头",
+            "steps": [
+              "鱼用\"条\"",
+              "鸟/猫用\"只\"",
+              "牛/猪用\"头\""
+            ],
+            "answer": "A"
+          },
+          "mistakes": [
+            {
+              "wrong": "一只鱼",
+              "correct": "鱼用条不用只"
+            }
+          ],
+          "memory_tip": "条→鱼/蛇/路，只→鸟/猫/鸡，头→牛/象！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "句式变换宝典",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "语文-一下-E3-01",
+          "title": "把字句和被字句",
+          "type": "句式变换卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "把字句和被字句是考试高频失分点",
+          "core_points": [
+            "把字句：小猫把鱼吃了。",
+            "被字句：鱼被小猫吃了。"
+          ],
+          "example": {
+            "question": "改写：小猫吃了鱼。→ 把/被字句",
+            "steps": [
+              "把字句：小猫把鱼吃了。",
+              "被字句：鱼被小猫吃了。"
+            ],
+            "answer": "把字句/被字句"
+          },
+          "mistakes": [
+            {
+              "wrong": "把和被混用",
+              "correct": "把=我做，被=被做"
+            }
+          ],
+          "memory_tip": "把+受的→主动；被+做的→被动！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "阅读理解通关",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "语文-一下-E4-01",
+          "title": "短文数句子",
+          "type": "阅读理解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "短文数句子是考试高频失分点",
+          "core_points": [
+            "找句号。问号？感叹号！",
+            "每个标点=一句话结束"
+          ],
+          "example": {
+            "question": "读短文，数一数有几句话",
+            "steps": [
+              "找句号。问号？感叹号！",
+              "每个标点=一句话结束"
+            ],
+            "answer": "数标点定句数"
+          },
+          "mistakes": [
+            {
+              "wrong": "逗号也算一句",
+              "correct": "逗号是停顿，不是句子结束"
+            }
+          ],
+          "memory_tip": "句号/问号/叹号=一句话结束！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "古诗文填空",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "语文-一下-E5-01",
+          "title": "日积月累填空",
+          "type": "古诗默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "日积月累填空是考试高频失分点",
+          "core_points": [
+            "24节气歌第二句",
+            "夏满芒夏暑相连"
+          ],
+          "example": {
+            "question": "春雨惊春清谷天，（  ）",
+            "steps": [
+              "24节气歌第二句",
+              "夏满芒夏暑相连"
+            ],
+            "answer": "夏满芒夏暑相连"
+          },
+          "mistakes": [
+            {
+              "wrong": "暑相联（错字）",
+              "correct": "是\"连\"不是\"联\""
+            }
+          ],
+          "memory_tip": "节气歌4句背熟，考试必考！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "作文满分攻略",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "语文-一下-E6-01",
+          "title": "写一段话模板",
+          "type": "作文模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "写一段话模板是考试高频失分点",
+          "core_points": [
+            "我最喜欢___。",
+            "它___（样子）。",
+            "因为___。",
+            "我真喜欢它！"
+          ],
+          "example": {
+            "question": "我最喜欢的___",
+            "steps": [
+              "我最喜欢___。",
+              "它___（样子）。",
+              "因为___。",
+              "我真喜欢它！"
+            ],
+            "answer": "喜欢+描写+原因"
+          },
+          "mistakes": [
+            {
+              "wrong": "写一句就完了",
+              "correct": "至少写3-4句"
+            }
+          ],
+          "memory_tip": "先说喜欢什么→再说原因→最后总结！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

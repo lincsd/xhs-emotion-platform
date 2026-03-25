@@ -1,0 +1,245 @@
+{
+  "subject": "英语",
+  "grade": "六年级",
+  "semester": "上册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "六上",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "听力得分专区",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "英语-六上-E1-01",
+          "title": "交通方式听力辨别",
+          "type": "听力得分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "30-40%",
+          "definition": "交通方式听力辨别是考试高频失分点",
+          "core_points": [
+            "by bus=坐公交",
+            "usually=通常",
+            "匹配公交图片"
+          ],
+          "example": {
+            "question": "Listen: \"I usually go to school by bus.\"",
+            "steps": [
+              "by bus=坐公交",
+              "usually=通常",
+              "匹配公交图片"
+            ],
+            "answer": "by bus"
+          },
+          "mistakes": [
+            {
+              "wrong": "bus和bike听混",
+              "correct": "bus=/bʌs/, bike=/baɪk/"
+            }
+          ],
+          "memory_tip": "by+交通工具：bus/bike/subway/plane！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "英语-六上-E2-01",
+          "title": "问路选择题",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "问路选择题是考试高频失分点",
+          "core_points": [
+            "问地点位置→Where",
+            "Where is the hospital?"
+          ],
+          "example": {
+            "question": "Excuse me, ___ is the hospital? A.What B.Where C.How",
+            "steps": [
+              "问地点位置→Where",
+              "Where is the hospital?"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "选C How",
+              "correct": "How问方式不问地点"
+            }
+          ],
+          "memory_tip": "Where问地点, How问方式, What问事物！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "拼写零错攻略",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "英语-六上-E3-01",
+          "title": "职业单词拼写",
+          "type": "拼写零错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "职业单词拼写是考试高频失分点",
+          "core_points": [
+            "scientist=sci-en-tist",
+            "pilot=pi-lot",
+            "fisherman=fisher-man"
+          ],
+          "example": {
+            "question": "sc__entist, p__l__t, f__sh__rman",
+            "steps": [
+              "scientist=sci-en-tist",
+              "pilot=pi-lot",
+              "fisherman=fisher-man"
+            ],
+            "answer": "scientist, pilot, fisherman"
+          },
+          "mistakes": [
+            {
+              "wrong": "scentist漏i",
+              "correct": "sci-en-tist"
+            }
+          ],
+          "memory_tip": "scientist注意sc开头+ist结尾！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "填空必会宝典",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "英语-六上-E4-01",
+          "title": "一般将来时填空",
+          "type": "填空必会卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "一般将来时填空是考试高频失分点",
+          "core_points": [
+            "next week将来时间标志",
+            "am going to go / will go"
+          ],
+          "example": {
+            "question": "I ___ (go) to Beijing next week.",
+            "steps": [
+              "next week将来时间标志",
+              "am going to go / will go"
+            ],
+            "answer": "am going to go"
+          },
+          "mistakes": [
+            {
+              "wrong": "go（用原形）",
+              "correct": "有将来时间标志要用将来时"
+            }
+          ],
+          "memory_tip": "next/tomorrow/tonight→用将来时！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "阅读通关秘籍",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "英语-六上-E5-01",
+          "title": "地图指路阅读",
+          "type": "阅读通关卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "15-20%",
+          "definition": "地图指路阅读是考试高频失分点",
+          "core_points": [
+            "turn left=左转",
+            "turn right=右转",
+            "go straight=直走",
+            "在地图上跟着指令走"
+          ],
+          "example": {
+            "question": "Read the map directions and find the place",
+            "steps": [
+              "turn left=左转",
+              "turn right=右转",
+              "go straight=直走",
+              "在地图上跟着指令走"
+            ],
+            "answer": "跟着指令找到目的地"
+          },
+          "mistakes": [
+            {
+              "wrong": "left和right搞反",
+              "correct": "left=左（L形），right=右"
+            }
+          ],
+          "memory_tip": "手指跟着指令在地图上走！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "写作模板大全",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "英语-六上-E6-01",
+          "title": "我的周末计划模板",
+          "type": "写作模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "我的周末计划模板是考试高频失分点",
+          "core_points": [
+            "This weekend, I am going to ___.",
+            "In the morning, I will ___.",
+            "In the afternoon, I will ___.",
+            "It will be a ___ day!"
+          ],
+          "example": {
+            "question": "Write about your weekend plan",
+            "steps": [
+              "This weekend, I am going to ___.",
+              "In the morning, I will ___.",
+              "In the afternoon, I will ___.",
+              "It will be a ___ day!"
+            ],
+            "answer": "周末计划"
+          },
+          "mistakes": [
+            {
+              "wrong": "用过去时",
+              "correct": "计划要用将来时"
+            }
+          ],
+          "memory_tip": "将来时+时间顺序=周末计划满分作文！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

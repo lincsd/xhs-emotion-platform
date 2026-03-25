@@ -1,0 +1,272 @@
+{
+  "subject": "数学",
+  "grade": "六年级",
+  "semester": "上册",
+  "textbook": "人教版",
+  "grade_short": "六上",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "填空满分攻略",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "数学-六上-E1-01",
+          "title": "分数除法填空",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "分数除法填空是考试高频失分点",
+          "core_points": [
+            "除以分数=乘它的倒数",
+            "⅔ × 4 = 8/3 = 2⅔"
+          ],
+          "example": {
+            "question": "⅔ ÷ ¼ = （  ）",
+            "steps": [
+              "除以分数=乘它的倒数",
+              "⅔ × 4 = 8/3 = 2⅔"
+            ],
+            "answer": "8/3(即2⅔)"
+          },
+          "mistakes": [
+            {
+              "wrong": "分子÷分子=2,分母÷分母=12",
+              "correct": "要翻转后相乘"
+            }
+          ],
+          "memory_tip": "除以分数，翻转相乘！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "数学-六上-E1-02",
+          "title": "圆的周长面积",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "圆的周长面积是考试高频失分点",
+          "core_points": [
+            "周长=2πr=2×3.14×3=18.84",
+            "面积=πr²=3.14×9=28.26"
+          ],
+          "example": {
+            "question": "半径3cm的圆，周长=（  ）cm，面积=（  ）cm²",
+            "steps": [
+              "周长=2πr=2×3.14×3=18.84",
+              "面积=πr²=3.14×9=28.26"
+            ],
+            "answer": "18.84, 28.26"
+          },
+          "mistakes": [
+            {
+              "wrong": "用直径算半径的公式",
+              "correct": "注意是半径还是直径"
+            }
+          ],
+          "memory_tip": "周长2πr，面积πr²，r和d别搞混！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "数学-六上-E2-01",
+          "title": "比的化简选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "比的化简选择是考试高频失分点",
+          "core_points": [
+            "12和8的最大公因数=4",
+            "12÷4:8÷4=3:2"
+          ],
+          "example": {
+            "question": "12:8的最简比？A.3:2 B.6:4 C.1.5:1",
+            "steps": [
+              "12和8的最大公因数=4",
+              "12÷4:8÷4=3:2"
+            ],
+            "answer": "A"
+          },
+          "mistakes": [
+            {
+              "wrong": "选C小数比",
+              "correct": "最简比必须是整数"
+            }
+          ],
+          "memory_tip": "最简整数比：除以最大公因数！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "计算零失误",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "数学-六上-E3-01",
+          "title": "分数乘法计算",
+          "type": "计算零失误卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "分数乘法计算是考试高频失分点",
+          "core_points": [
+            "⅘ × 15 = 4×15÷5",
+            "先约分：15÷5=3",
+            "4×3=12"
+          ],
+          "example": {
+            "question": "⅘ × 15 = ?",
+            "steps": [
+              "⅘ × 15 = 4×15÷5",
+              "先约分：15÷5=3",
+              "4×3=12"
+            ],
+            "answer": "12"
+          },
+          "mistakes": [
+            {
+              "wrong": "4×15=60,60÷5=12虽对但麻烦",
+              "correct": "先约分更简便"
+            }
+          ],
+          "memory_tip": "先约分再乘，计算更简单！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "判断火眼金睛",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "数学-六上-E4-01",
+          "title": "判断：半径扩大2倍面积扩大2倍",
+          "type": "判断火眼卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "判断：半径扩大2倍面积扩大2倍是考试高频失分点",
+          "core_points": [
+            "面积=πr²",
+            "r→2r, 面积=π(2r)²=4πr²",
+            "面积扩大4倍，不是2倍"
+          ],
+          "example": {
+            "question": "圆的半径扩大到原来的2倍，面积也扩大到2倍。（  ）",
+            "steps": [
+              "面积=πr²",
+              "r→2r, 面积=π(2r)²=4πr²",
+              "面积扩大4倍，不是2倍"
+            ],
+            "answer": "✗"
+          },
+          "mistakes": [
+            {
+              "wrong": "✓以为同比例",
+              "correct": "面积与半径是平方关系"
+            }
+          ],
+          "memory_tip": "半径翻n倍，面积翻n²倍！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "应用题拆解",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "数学-六上-E5-01",
+          "title": "百分数应用题",
+          "type": "应用题拆解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "百分数应用题是考试高频失分点",
+          "core_points": [
+            "八折=80%",
+            "200×80%=200×0.8=160元"
+          ],
+          "example": {
+            "question": "原价200元打八折，现价多少？",
+            "steps": [
+              "八折=80%",
+              "200×80%=200×0.8=160元"
+            ],
+            "answer": "160元"
+          },
+          "mistakes": [
+            {
+              "wrong": "200-8=192",
+              "correct": "打折是乘以折扣率"
+            }
+          ],
+          "memory_tip": "几折=百分之几十：八折=80%！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "操作题规范",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "数学-六上-E6-01",
+          "title": "画圆操作规范",
+          "type": "操作题规范卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "5-10%",
+          "definition": "画圆操作规范是考试高频失分点",
+          "core_points": [
+            "1.圆规两脚张开2cm",
+            "2.固定针尖不动",
+            "3.旋转一周画完整",
+            "4.标注半径和圆心"
+          ],
+          "example": {
+            "question": "画一个半径为2cm的圆",
+            "steps": [
+              "1.圆规两脚张开2cm",
+              "2.固定针尖不动",
+              "3.旋转一周画完整",
+              "4.标注半径和圆心"
+            ],
+            "answer": "标准圆"
+          },
+          "mistakes": [
+            {
+              "wrong": "忘记标圆心和半径",
+              "correct": "画完要标注"
+            }
+          ],
+          "memory_tip": "圆规不能晃动，标上r和O！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

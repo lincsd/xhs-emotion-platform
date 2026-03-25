@@ -1,0 +1,241 @@
+{
+  "subject": "英语",
+  "grade": "四年级",
+  "semester": "上册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "四上",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "听力得分专区",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "英语-四上-E1-01",
+          "title": "教室物品听力辨别",
+          "type": "听力得分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "30-40%",
+          "definition": "教室物品听力辨别是考试高频失分点",
+          "core_points": [
+            "关键词: pencil, on, desk",
+            "动作：把铅笔放桌上",
+            "图片匹配铅笔在桌上"
+          ],
+          "example": {
+            "question": "Listen: \"Put your pencil on the desk.\"",
+            "steps": [
+              "关键词: pencil, on, desk",
+              "动作：把铅笔放桌上",
+              "图片匹配铅笔在桌上"
+            ],
+            "answer": "铅笔在桌上"
+          },
+          "mistakes": [
+            {
+              "wrong": "in和on分不清",
+              "correct": "on在表面，in在内部"
+            }
+          ],
+          "memory_tip": "on=在上面, in=在里面, under=在下面！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "英语-四上-E2-01",
+          "title": "How many选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "How many选择是考试高频失分点",
+          "core_points": [
+            "How many问数量",
+            "回答要有数字",
+            "选B"
+          ],
+          "example": {
+            "question": "How many books do you have? A.I have book. B.I have five. C.Yes, I do.",
+            "steps": [
+              "How many问数量",
+              "回答要有数字",
+              "选B"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "选C，以为是yes/no问题",
+              "correct": "How many是特殊疑问句"
+            }
+          ],
+          "memory_tip": "How many问数量→答案必须有数字！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "拼写零错攻略",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "英语-四上-E3-01",
+          "title": "Classroom物品拼写",
+          "type": "拼写零错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "Classroom物品拼写是考试高频失分点",
+          "core_points": [
+            "window: w-i-n-d-o-w",
+            "desk: d-e-s-k"
+          ],
+          "example": {
+            "question": "补全单词: w__nd__w (窗户), d__sk (桌子)",
+            "steps": [
+              "window: w-i-n-d-o-w",
+              "desk: d-e-s-k"
+            ],
+            "answer": "window, desk"
+          },
+          "mistakes": [
+            {
+              "wrong": "windou",
+              "correct": "window的ow不是ou"
+            }
+          ],
+          "memory_tip": "window注意ow结尾，不是ou！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "填空必会宝典",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "英语-四上-E4-01",
+          "title": "There be句型填空",
+          "type": "填空必会卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "There be句型填空是考试高频失分点",
+          "core_points": [
+            "a book单数→is",
+            "three pens复数→are"
+          ],
+          "example": {
+            "question": "There ___ a book on the desk. There ___ three pens.",
+            "steps": [
+              "a book单数→is",
+              "three pens复数→are"
+            ],
+            "answer": "is, are"
+          },
+          "mistakes": [
+            {
+              "wrong": "都填is",
+              "correct": "复数名词用are"
+            }
+          ],
+          "memory_tip": "There be就近原则：看最近的名词单复数！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "阅读通关秘籍",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "英语-四上-E5-01",
+          "title": "家庭成员阅读理解",
+          "type": "阅读通关卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "15-20%",
+          "definition": "家庭成员阅读理解是考试高频失分点",
+          "core_points": [
+            "读问题→找关键词→回原文定位",
+            "Who is a teacher? → My mother"
+          ],
+          "example": {
+            "question": "Read: \"This is my family. My father is tall. My mother is a teacher...\"",
+            "steps": [
+              "读问题→找关键词→回原文定位",
+              "Who is a teacher? → My mother"
+            ],
+            "answer": "根据文段回答"
+          },
+          "mistakes": [
+            {
+              "wrong": "不看题直接读全文",
+              "correct": "先看题目更高效"
+            }
+          ],
+          "memory_tip": "先看题→再读文→定位关键句！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "写作模板大全",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "英语-四上-E6-01",
+          "title": "描述房间模板",
+          "type": "写作模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "描述房间模板是考试高频失分点",
+          "core_points": [
+            "This is my room.",
+            "There is a ___ in my room.",
+            "There are ___ on the ___.",
+            "I like my room!"
+          ],
+          "example": {
+            "question": "Describe your room",
+            "steps": [
+              "This is my room.",
+              "There is a ___ in my room.",
+              "There are ___ on the ___.",
+              "I like my room!"
+            ],
+            "answer": "There be句型描述"
+          },
+          "mistakes": [
+            {
+              "wrong": "全用There is",
+              "correct": "有复数名词要用are"
+            }
+          ],
+          "memory_tip": "There is+单数, There are+复数！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

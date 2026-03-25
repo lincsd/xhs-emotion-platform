@@ -1,0 +1,278 @@
+{
+  "subject": "数学",
+  "grade": "四年级",
+  "semester": "下册",
+  "textbook": "人教版",
+  "grade_short": "四下",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "填空满分攻略",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "数学-四下-E1-01",
+          "title": "小数填空易混点",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "小数填空易混点是考试高频失分点",
+          "core_points": [
+            "0.3元 = 3角",
+            "3角 = 30分"
+          ],
+          "example": {
+            "question": "0.3元 =（  ）角 =（  ）分",
+            "steps": [
+              "0.3元 = 3角",
+              "3角 = 30分"
+            ],
+            "answer": "3角，30分"
+          },
+          "mistakes": [
+            {
+              "wrong": "0.3元=0.3角",
+              "correct": "要进行单位换算"
+            }
+          ],
+          "memory_tip": "元→角×10，角→分×10！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "数学-四下-E1-02",
+          "title": "三角形三边关系",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "三角形三边关系是考试高频失分点",
+          "core_points": [
+            "两边之差<第三边<两边之和",
+            "5-3<x<5+3",
+            "2<x<8"
+          ],
+          "example": {
+            "question": "三角形两边分别是3cm和5cm，第三边可能是（  ）cm",
+            "steps": [
+              "两边之差<第三边<两边之和",
+              "5-3<x<5+3",
+              "2<x<8"
+            ],
+            "answer": "3到7之间的整数"
+          },
+          "mistakes": [
+            {
+              "wrong": "填2或8（取等号）",
+              "correct": "不能取等号，要严格大于"
+            }
+          ],
+          "memory_tip": "两边之差<第三边<两边之和！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "数学-四下-E2-01",
+          "title": "运算定律选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "运算定律选择是考试高频失分点",
+          "core_points": [
+            "12拆成4×3",
+            "25×(4×3)=(25×4)×3→结合律",
+            "选B"
+          ],
+          "example": {
+            "question": "25×12=25×4×3，用的是？A.交换律 B.结合律 C.分配律",
+            "steps": [
+              "12拆成4×3",
+              "25×(4×3)=(25×4)×3→结合律",
+              "选B"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "选C分配律",
+              "correct": "分配律是a×(b+c)形式"
+            }
+          ],
+          "memory_tip": "拆因数是结合律，拆加数是分配律！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "计算零失误",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "数学-四下-E3-01",
+          "title": "小数加减计算",
+          "type": "计算零失误卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "小数加减计算是考试高频失分点",
+          "core_points": [
+            "小数点对齐：12.50-3.68",
+            "个位：0-8不够借1→10-8=2",
+            "十分位：4-6不够借→14-6=8",
+            "整数位：11-3=8",
+            "=8.82"
+          ],
+          "example": {
+            "question": "12.5 - 3.68 = ?",
+            "steps": [
+              "小数点对齐：12.50-3.68",
+              "个位：0-8不够借1→10-8=2",
+              "十分位：4-6不够借→14-6=8",
+              "整数位：11-3=8",
+              "=8.82"
+            ],
+            "answer": "8.82"
+          },
+          "mistakes": [
+            {
+              "wrong": "=9.82（借位错误）",
+              "correct": "退位要连续借"
+            }
+          ],
+          "memory_tip": "小数点对齐，位数不够补0！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "判断火眼金睛",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "数学-四下-E4-01",
+          "title": "判断：三角形内角和",
+          "type": "判断火眼卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "判断：三角形内角和是考试高频失分点",
+          "core_points": [
+            "这是定理",
+            "任何三角形内角和=180°"
+          ],
+          "example": {
+            "question": "所有三角形的内角和都是180°。（  ）",
+            "steps": [
+              "这是定理",
+              "任何三角形内角和=180°"
+            ],
+            "answer": "√"
+          },
+          "mistakes": [
+            {
+              "wrong": "✗以为只有特殊三角形",
+              "correct": "所有三角形都是"
+            }
+          ],
+          "memory_tip": "三角形内角和永远180°，不分大小！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "应用题拆解",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "数学-四下-E5-01",
+          "title": "简便运算应用",
+          "type": "应用题拆解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "简便运算应用是考试高频失分点",
+          "core_points": [
+            "25.8+14.2=40（凑整）",
+            "40+10=50元"
+          ],
+          "example": {
+            "question": "超市购物：苹果25.8元，香蕉14.2元，牛奶10元。共多少元？",
+            "steps": [
+              "25.8+14.2=40（凑整）",
+              "40+10=50元"
+            ],
+            "answer": "50元"
+          },
+          "mistakes": [
+            {
+              "wrong": "逐个相加算错",
+              "correct": "凑整数计算更不容易出错"
+            }
+          ],
+          "memory_tip": "先凑整再加，简便快速！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "操作题规范",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "数学-四下-E6-01",
+          "title": "画三角形的高",
+          "type": "操作题规范卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "5-10%",
+          "definition": "画三角形的高是考试高频失分点",
+          "core_points": [
+            "1.找对应顶点A",
+            "2.用三角尺从A向BC画垂线",
+            "3.标垂足和直角符号",
+            "4.标注\"h\""
+          ],
+          "example": {
+            "question": "画出三角形BC边上的高",
+            "steps": [
+              "1.找对应顶点A",
+              "2.用三角尺从A向BC画垂线",
+              "3.标垂足和直角符号",
+              "4.标注\"h\""
+            ],
+            "answer": "规范高"
+          },
+          "mistakes": [
+            {
+              "wrong": "没从顶点画",
+              "correct": "高是从对角顶点到底边的垂线段"
+            }
+          ],
+          "memory_tip": "高一定垂直于底边，标垂直符号！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,243 @@
+{
+  "subject": "英语",
+  "grade": "六年级",
+  "semester": "下册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "六下",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "听力得分专区",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "英语-六下-E1-01",
+          "title": "过去时态听力",
+          "type": "听力得分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "30-40%",
+          "definition": "过去时态听力是考试高频失分点",
+          "core_points": [
+            "关键词: Last weekend=上周末",
+            "went=go的过去式",
+            "played=play的过去式"
+          ],
+          "example": {
+            "question": "Listen: \"Last weekend, I went to the park and played football.\"",
+            "steps": [
+              "关键词: Last weekend=上周末",
+              "went=go的过去式",
+              "played=play的过去式"
+            ],
+            "answer": "上周末去公园踢球"
+          },
+          "mistakes": [
+            {
+              "wrong": "没听出went是过去式",
+              "correct": "went=go的过去式"
+            }
+          ],
+          "memory_tip": "last/yesterday/ago=过去时间信号！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "英语-六下-E2-01",
+          "title": "一般过去时选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "一般过去时选择是考试高频失分点",
+          "core_points": [
+            "last night=过去时间",
+            "see的过去式=saw",
+            "选B"
+          ],
+          "example": {
+            "question": "I ___ a film last night. A.see B.saw C.seeing",
+            "steps": [
+              "last night=过去时间",
+              "see的过去式=saw",
+              "选B"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "选A原形",
+              "correct": "有过去时间标志用过去式"
+            }
+          ],
+          "memory_tip": "last night/yesterday/ago → 过去式！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "拼写零错攻略",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "英语-六下-E3-01",
+          "title": "不规则动词过去式",
+          "type": "拼写零错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "不规则动词过去式是考试高频失分点",
+          "core_points": [
+            "go→went, eat→ate",
+            "see→saw, have→had"
+          ],
+          "example": {
+            "question": "go→___ eat→___ see→___ have→___",
+            "steps": [
+              "go→went, eat→ate",
+              "see→saw, have→had"
+            ],
+            "answer": "went, ate, saw, had"
+          },
+          "mistakes": [
+            {
+              "wrong": "goed",
+              "correct": "go是不规则变化"
+            }
+          ],
+          "memory_tip": "不规则动词要背熟，没有规律就死记！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "填空必会宝典",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "英语-六下-E4-01",
+          "title": "比较级填空",
+          "type": "填空必会卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "比较级填空是考试高频失分点",
+          "core_points": [
+            "than前用比较级：taller",
+            "the后最高级：thinnest"
+          ],
+          "example": {
+            "question": "Tom is ___(tall) than Sam. Lucy is the ___(thin) girl.",
+            "steps": [
+              "than前用比较级：taller",
+              "the后最高级：thinnest"
+            ],
+            "answer": "taller, thinnest"
+          },
+          "mistakes": [
+            {
+              "wrong": "tall than",
+              "correct": "than前面要加er"
+            }
+          ],
+          "memory_tip": "than+比较级，the+最高级！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "阅读通关秘籍",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "英语-六下-E5-01",
+          "title": "日记阅读理解",
+          "type": "阅读通关卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "15-20%",
+          "definition": "日记阅读理解是考试高频失分点",
+          "core_points": [
+            "找时间标志(last/ago)",
+            "确认是过去时",
+            "按who/when/where/what回答"
+          ],
+          "example": {
+            "question": "Read the diary about last holiday",
+            "steps": [
+              "找时间标志(last/ago)",
+              "确认是过去时",
+              "按who/when/where/what回答"
+            ],
+            "answer": "根据日记回答"
+          },
+          "mistakes": [
+            {
+              "wrong": "时态答错",
+              "correct": "日记的问答也要用过去时"
+            }
+          ],
+          "memory_tip": "日记阅读抓4W：谁/何时/何地/做什么！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "写作模板大全",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "英语-六下-E6-01",
+          "title": "毕业感言模板",
+          "type": "写作模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "毕业感言模板是考试高频失分点",
+          "core_points": [
+            "I remember ___(过去式).",
+            "My best friend is ___.",
+            "I will miss ___.",
+            "I hope to ___(将来)."
+          ],
+          "example": {
+            "question": "Write about your primary school memories",
+            "steps": [
+              "I remember ___(过去式).",
+              "My best friend is ___.",
+              "I will miss ___.",
+              "I hope to ___(将来)."
+            ],
+            "answer": "毕业感言"
+          },
+          "mistakes": [
+            {
+              "wrong": "全篇用一种时态",
+              "correct": "要过去+将来时态结合"
+            }
+          ],
+          "memory_tip": "回忆用过去式，展望用将来时！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,274 @@
+{
+  "subject": "语文",
+  "grade": "一年级",
+  "semester": "上册",
+  "textbook": "人教版(统编)",
+  "grade_short": "一上",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "拼音字词基础",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "语文-一上-E1-01",
+          "title": "声母韵母分不清",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "声母韵母分不清是考试高频失分点",
+          "core_points": [
+            "b右半圆(6)，d左半圆(反6)",
+            "p朝上(棍上圆)，q朝下(棍下圆)",
+            "ie衣+鹅，ei鹅+衣(谁在前读谁)"
+          ],
+          "example": {
+            "question": "区分: b—d, p—q, ie—ei",
+            "steps": [
+              "b右半圆(6)，d左半圆(反6)",
+              "p朝上(棍上圆)，q朝下(棍下圆)",
+              "ie衣+鹅，ei鹅+衣(谁在前读谁)"
+            ],
+            "answer": "形状+口诀区分"
+          },
+          "mistakes": [
+            {
+              "wrong": "b和d写反",
+              "correct": "b肚子朝右(像6)"
+            }
+          ],
+          "memory_tip": "b和d看肚子方向：b朝右d朝左！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "语文-一上-E1-02",
+          "title": "整体认读音节",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "整体认读音节是考试高频失分点",
+          "core_points": [
+            "zi ci si, zhi chi shi ri",
+            "yi wu yu, ye yue yuan",
+            "yin yun ying 共16个"
+          ],
+          "example": {
+            "question": "哪些是整体认读音节？zi ci si zhi chi shi ri yi wu yu",
+            "steps": [
+              "zi ci si, zhi chi shi ri",
+              "yi wu yu, ye yue yuan",
+              "yin yun ying 共16个"
+            ],
+            "answer": "16个整体认读音节"
+          },
+          "mistakes": [
+            {
+              "wrong": "把zi拆成z-i拼读",
+              "correct": "整体认读不能拆"
+            }
+          ],
+          "memory_tip": "整体认读不拼读，直接读出来！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择判断秒杀",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "语文-一上-E2-01",
+          "title": "同音字选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "同音字选择是考试高频失分点",
+          "core_points": [
+            "做作业的\"做\"→做",
+            "坐=sit, 作=create, 做=do"
+          ],
+          "example": {
+            "question": "选字填空：做（ ）业 A.坐 B.作 C.做",
+            "steps": [
+              "做作业的\"做\"→做",
+              "坐=sit, 作=create, 做=do"
+            ],
+            "answer": "C"
+          },
+          "mistakes": [
+            {
+              "wrong": "选B作",
+              "correct": "做作业的做是C"
+            }
+          ],
+          "memory_tip": "做+事情，作+品/文/业！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "句式变换宝典",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "语文-一上-E3-01",
+          "title": "连词成句",
+          "type": "句式变换卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "连词成句是考试高频失分点",
+          "core_points": [
+            "找主语：我",
+            "找动词：爱",
+            "排列：我爱我的爸爸/我的爸爸爱我"
+          ],
+          "example": {
+            "question": "排列：我 爸爸 爱 的",
+            "steps": [
+              "找主语：我",
+              "找动词：爱",
+              "排列：我爱我的爸爸/我的爸爸爱我"
+            ],
+            "answer": "我爱我的爸爸。"
+          },
+          "mistakes": [
+            {
+              "wrong": "忘加句号",
+              "correct": "句末一定要加标点"
+            }
+          ],
+          "memory_tip": "谁+做什么+什么=完整句子！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "阅读理解通关",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "语文-一上-E4-01",
+          "title": "看图说话理解",
+          "type": "阅读理解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "看图说话理解是考试高频失分点",
+          "core_points": [
+            "说清楚人物",
+            "说清楚动作",
+            "说清楚地点"
+          ],
+          "example": {
+            "question": "看图回答：图上有谁？在做什么？",
+            "steps": [
+              "说清楚人物",
+              "说清楚动作",
+              "说清楚地点"
+            ],
+            "answer": "谁/在哪/做什么"
+          },
+          "mistakes": [
+            {
+              "wrong": "只说一个字",
+              "correct": "要说完整的句子"
+            }
+          ],
+          "memory_tip": "看图说话三要素：谁+在哪+做什么！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "古诗文填空",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "语文-一上-E5-01",
+          "title": "课文填空",
+          "type": "古诗默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "课文填空是考试高频失分点",
+          "core_points": [
+            "床前明月光",
+            "疑是地上霜"
+          ],
+          "example": {
+            "question": "床前（  ），疑是（  ）。",
+            "steps": [
+              "床前明月光",
+              "疑是地上霜"
+            ],
+            "answer": "明月光，地上霜"
+          },
+          "mistakes": [
+            {
+              "wrong": "明月亮（错字）",
+              "correct": "是\"光\"不是\"亮\""
+            }
+          ],
+          "memory_tip": "静夜思全文4句20字要背熟！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "作文满分攻略",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "语文-一上-E6-01",
+          "title": "看图写话模板",
+          "type": "作文模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "看图写话模板是考试高频失分点",
+          "core_points": [
+            "第1句：什么时候",
+            "第2句：谁在哪里做什么",
+            "第3句：心情怎么样"
+          ],
+          "example": {
+            "question": "看图写2-3句话",
+            "steps": [
+              "第1句：什么时候",
+              "第2句：谁在哪里做什么",
+              "第3句：心情怎么样"
+            ],
+            "answer": "时间+人物+事件"
+          },
+          "mistakes": [
+            {
+              "wrong": "一句话写到底",
+              "correct": "要分成几句话"
+            }
+          ],
+          "memory_tip": "一句写一件事，别忘标点！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

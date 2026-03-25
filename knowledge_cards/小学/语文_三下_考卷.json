@@ -1,0 +1,272 @@
+{
+  "subject": "语文",
+  "grade": "三年级",
+  "semester": "下册",
+  "textbook": "人教版(统编)",
+  "grade_short": "三下",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "拼音字词基础",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "语文-三下-E1-01",
+          "title": "易错字词听写",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "易错字词听写是考试高频失分点",
+          "core_points": [
+            "聚拢的\"拢\"是提手旁",
+            "偶尔不是\"偶而\"",
+            "增添的\"添\"注意右下是\"点\""
+          ],
+          "example": {
+            "question": "听写：聚拢、偶尔、增添",
+            "steps": [
+              "聚拢的\"拢\"是提手旁",
+              "偶尔不是\"偶而\"",
+              "增添的\"添\"注意右下是\"点\""
+            ],
+            "answer": "聚拢/偶尔/增添"
+          },
+          "mistakes": [
+            {
+              "wrong": "偶而(错字)",
+              "correct": "是\"尔\"不是\"而\""
+            }
+          ],
+          "memory_tip": "拢≠笼，尔≠而，添≠天！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "语文-三下-E1-02",
+          "title": "近反义词填空",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "近反义词填空是考试高频失分点",
+          "core_points": [
+            "聚拢≈聚集",
+            "增添的反义=减少"
+          ],
+          "example": {
+            "question": "近义词: 聚拢→(  ) 反义词: 增添→(  )",
+            "steps": [
+              "聚拢≈聚集",
+              "增添的反义=减少"
+            ],
+            "answer": "聚集，减少"
+          },
+          "mistakes": [
+            {
+              "wrong": "增添的反义=增加",
+              "correct": "增加和增添是近义词"
+            }
+          ],
+          "memory_tip": "近义词换位能说通，反义词相反！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择判断秒杀",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "语文-三下-E2-01",
+          "title": "标点符号选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "标点符号选择是考试高频失分点",
+          "core_points": [
+            "引号内说完的话，后面还有\"他说\"",
+            "用逗号不用句号"
+          ],
+          "example": {
+            "question": "下列用法正确的是？A.\"你好。\"他说。B.\"你好，\"他说。",
+            "steps": [
+              "引号内说完的话，后面还有\"他说\"",
+              "用逗号不用句号"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "选A",
+              "correct": "后面有说话人时用逗号"
+            }
+          ],
+          "memory_tip": "引号内后面有\"XX说\"→引号内逗号！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "句式变换宝典",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "语文-三下-E3-01",
+          "title": "转述句改写",
+          "type": "句式变换卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "转述句改写是考试高频失分点",
+          "core_points": [
+            "第一人称→第三人称",
+            "冒号引号→逗号",
+            "小明说，他明天要去公园。"
+          ],
+          "example": {
+            "question": "小明说：\"我明天要去公园。\"→改转述句",
+            "steps": [
+              "第一人称→第三人称",
+              "冒号引号→逗号",
+              "小明说，他明天要去公园。"
+            ],
+            "answer": "小明说，他明天要去公园。"
+          },
+          "mistakes": [
+            {
+              "wrong": "小明说，我明天要去",
+              "correct": "要把\"我\"改成\"他\""
+            }
+          ],
+          "memory_tip": "转述改三样：标点+人称+指示词！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "阅读理解通关",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "语文-三下-E4-01",
+          "title": "概括段意",
+          "type": "阅读理解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "概括段意是考试高频失分点",
+          "core_points": [
+            "找中心句(通常在开头或结尾)",
+            "没有中心句就概括：谁+做了什么+结果"
+          ],
+          "example": {
+            "question": "读一段话，概括这段话的主要意思",
+            "steps": [
+              "找中心句(通常在开头或结尾)",
+              "没有中心句就概括：谁+做了什么+结果"
+            ],
+            "answer": "主要内容"
+          },
+          "mistakes": [
+            {
+              "wrong": "抄全段",
+              "correct": "概括不是抄写"
+            }
+          ],
+          "memory_tip": "先找中心句，没有就自己概括！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "古诗文填空",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "语文-三下-E5-01",
+          "title": "《绝句》填空",
+          "type": "古诗默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "《绝句》填空是考试高频失分点",
+          "core_points": [
+            "春风花草香",
+            "沙暖睡鸳鸯"
+          ],
+          "example": {
+            "question": "迟日江山丽，（  ）。泥融飞燕子，（  ）。",
+            "steps": [
+              "春风花草香",
+              "沙暖睡鸳鸯"
+            ],
+            "answer": "春风花草香，沙暖睡鸳鸯"
+          },
+          "mistakes": [
+            {
+              "wrong": "沙暖睡鸳(漏鸯)",
+              "correct": "鸳鸯两个字都要写"
+            }
+          ],
+          "memory_tip": "绝句4句写春天，日-风-燕-鸳！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "作文满分攻略",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "语文-三下-E6-01",
+          "title": "我的植物朋友模板",
+          "type": "作文模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "我的植物朋友模板是考试高频失分点",
+          "core_points": [
+            "开头：介绍植物名称",
+            "看：外形描写(形/色/大小)",
+            "闻/摸：感觉描写",
+            "结尾：表达喜爱之情"
+          ],
+          "example": {
+            "question": "写一种你喜欢的植物",
+            "steps": [
+              "开头：介绍植物名称",
+              "看：外形描写(形/色/大小)",
+              "闻/摸：感觉描写",
+              "结尾：表达喜爱之情"
+            ],
+            "answer": "多感官描写"
+          },
+          "mistakes": [
+            {
+              "wrong": "只写看到的",
+              "correct": "多感官描写更丰富"
+            }
+          ],
+          "memory_tip": "写植物用五感：看形/闻香/摸叶/听风/尝果！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

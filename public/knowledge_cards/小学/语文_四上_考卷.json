@@ -1,0 +1,276 @@
+{
+  "subject": "语文",
+  "grade": "四年级",
+  "semester": "上册",
+  "textbook": "人教版(统编)",
+  "grade_short": "四上",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "拼音字词基础",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "语文-四上-E1-01",
+          "title": "易错生字词",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "易错生字词是考试高频失分点",
+          "core_points": [
+            "鼎沸：鼎(三足)沸(水开)",
+            "笼罩：笼(竹)罩(四)",
+            "均匀：均(土)匀(勹内有一横)"
+          ],
+          "example": {
+            "question": "听写: 鼎沸、笼罩、均匀",
+            "steps": [
+              "鼎沸：鼎(三足)沸(水开)",
+              "笼罩：笼(竹)罩(四)",
+              "均匀：均(土)匀(勹内有一横)"
+            ],
+            "answer": "鼎沸/笼罩/均匀"
+          },
+          "mistakes": [
+            {
+              "wrong": "鼎少一笔",
+              "correct": "鼎共12画"
+            }
+          ],
+          "memory_tip": "鼎有三只脚+两耳！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "语文-四上-E1-02",
+          "title": "词语搭配填空",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "词语搭配填空是考试高频失分点",
+          "core_points": [
+            "隆隆地响(ABB式)",
+            "巨大的声音",
+            "缓缓地流(AABB)"
+          ],
+          "example": {
+            "question": "（  ）地响 / （  ）的声音 / （  ）地流",
+            "steps": [
+              "隆隆地响(ABB式)",
+              "巨大的声音",
+              "缓缓地流(AABB)"
+            ],
+            "answer": "隆隆/巨大/缓缓"
+          },
+          "mistakes": [
+            {
+              "wrong": "的地得混用",
+              "correct": "记住：地前面的修饰动词"
+            }
+          ],
+          "memory_tip": "的+名词，地+动词，得+形容词！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择判断秒杀",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "语文-四上-E2-01",
+          "title": "说明方法辨别",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "说明方法辨别是考试高频失分点",
+          "core_points": [
+            "有数据=列数字",
+            "有\"像\"=打比方",
+            "有\"例如\"=举例子"
+          ],
+          "example": {
+            "question": "列数字、打比方、举例子分别是？",
+            "steps": [
+              "有数据=列数字",
+              "有\"像\"=打比方",
+              "有\"例如\"=举例子"
+            ],
+            "answer": "数据/像/例如"
+          },
+          "mistakes": [
+            {
+              "wrong": "打比方=比喻",
+              "correct": "说明文叫打比方，不叫比喻"
+            }
+          ],
+          "memory_tip": "看信号词：数字→列数字，像→打比方！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "句式变换宝典",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "语文-四上-E3-01",
+          "title": "双重否定句",
+          "type": "句式变换卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "双重否定句是考试高频失分点",
+          "core_points": [
+            "加两个否定词",
+            "你不能不去上学。/你不得不去上学。"
+          ],
+          "example": {
+            "question": "改双重否定句：你必须去上学。",
+            "steps": [
+              "加两个否定词",
+              "你不能不去上学。/你不得不去上学。"
+            ],
+            "answer": "你不能不去上学。"
+          },
+          "mistakes": [
+            {
+              "wrong": "你不必去上学",
+              "correct": "这是否定句不是双重否定"
+            }
+          ],
+          "memory_tip": "双重否定=肯定语气更强！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "阅读理解通关",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "语文-四上-E4-01",
+          "title": "理解关键句子",
+          "type": "阅读理解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "理解关键句子是考试高频失分点",
+          "core_points": [
+            "字面意思→深层意思",
+            "联系上下文→联系中心",
+            "有修辞→还原真实意思"
+          ],
+          "example": {
+            "question": "联系全文理解句子含义",
+            "steps": [
+              "字面意思→深层意思",
+              "联系上下文→联系中心",
+              "有修辞→还原真实意思"
+            ],
+            "answer": "表面+深层"
+          },
+          "mistakes": [
+            {
+              "wrong": "只说字面意思",
+              "correct": "一定有深层含义"
+            }
+          ],
+          "memory_tip": "关键句理解=字面意+深层意+联系中心！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "古诗文填空",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "语文-四上-E5-01",
+          "title": "《题西林壁》默写",
+          "type": "古诗默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "《题西林壁》默写是考试高频失分点",
+          "core_points": [
+            "远近高低各不同",
+            "只缘身在此山中"
+          ],
+          "example": {
+            "question": "横看成岭侧成峰，（  ）。不识庐山真面目，（  ）。",
+            "steps": [
+              "远近高低各不同",
+              "只缘身在此山中"
+            ],
+            "answer": "远近高低各不同，只缘身在此山中"
+          },
+          "mistakes": [
+            {
+              "wrong": "只原身在此山中",
+              "correct": "是\"缘\"不是\"原\""
+            }
+          ],
+          "memory_tip": "注意\"缘\"不是\"原\"！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "作文满分攻略",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "语文-四上-E6-01",
+          "title": "推荐一个好地方",
+          "type": "作文模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "推荐一个好地方是考试高频失分点",
+          "core_points": [
+            "开头：直接点明推荐的地方",
+            "中间：分段写特色(景色/美食/文化)",
+            "穿插感受和修辞",
+            "结尾：呼吁大家去看看"
+          ],
+          "example": {
+            "question": "介绍你去过的一个好地方",
+            "steps": [
+              "开头：直接点明推荐的地方",
+              "中间：分段写特色(景色/美食/文化)",
+              "穿插感受和修辞",
+              "结尾：呼吁大家去看看"
+            ],
+            "answer": "总分总+推荐理由"
+          },
+          "mistakes": [
+            {
+              "wrong": "像日记一样记流水账",
+              "correct": "要突出\"好\"在哪里"
+            }
+          ],
+          "memory_tip": "推荐文=我推荐+为什么好+快来看！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

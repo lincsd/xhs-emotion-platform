@@ -1,0 +1,241 @@
+{
+  "subject": "英语",
+  "grade": "五年级",
+  "semester": "下册",
+  "textbook": "人教版(PEP)",
+  "grade_short": "五下",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "听力得分专区",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "英语-五下-E1-01",
+          "title": "季节与月份听力",
+          "type": "听力得分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "30-40%",
+          "definition": "季节与月份听力是考试高频失分点",
+          "core_points": [
+            "January=一月→冬天",
+            "birthday in January→冬天出生"
+          ],
+          "example": {
+            "question": "Listen: \"My birthday is in January. I like winter.\"",
+            "steps": [
+              "January=一月→冬天",
+              "birthday in January→冬天出生"
+            ],
+            "answer": "冬天/January"
+          },
+          "mistakes": [
+            {
+              "wrong": "January=June分不清",
+              "correct": "Jan开头的是一月，June是六月"
+            }
+          ],
+          "memory_tip": "12月份对应4季节：3-5春，6-8夏，9-11秋，12-2冬！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "英语-五下-E2-01",
+          "title": "现在进行时选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "现在进行时选择是考试高频失分点",
+          "core_points": [
+            "rabbits复数→are",
+            "正在进行→be+doing",
+            "are jumping"
+          ],
+          "example": {
+            "question": "Look! The rabbits ___. A.jump B.is jumping C.are jumping",
+            "steps": [
+              "rabbits复数→are",
+              "正在进行→be+doing",
+              "are jumping"
+            ],
+            "answer": "C"
+          },
+          "mistakes": [
+            {
+              "wrong": "选B单数is",
+              "correct": "rabbits是复数用are"
+            }
+          ],
+          "memory_tip": "Look/Listen信号词→用现在进行时！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "拼写零错攻略",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "英语-五下-E3-01",
+          "title": "月份缩写拼写",
+          "type": "拼写零错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "月份缩写拼写是考试高频失分点",
+          "core_points": [
+            "Jan. Feb. Mar.",
+            "月份前三个字母+点"
+          ],
+          "example": {
+            "question": "写出缩写: January___ February___ March___",
+            "steps": [
+              "Jan. Feb. Mar.",
+              "月份前三个字母+点"
+            ],
+            "answer": "Jan. Feb. Mar."
+          },
+          "mistakes": [
+            {
+              "wrong": "Jau",
+              "correct": "January=J-a-n"
+            }
+          ],
+          "memory_tip": "月份缩写=前三字母+点，May/June/July不缩写！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "填空必会宝典",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "英语-五下-E4-01",
+          "title": "Whose填空",
+          "type": "填空必会卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "Whose填空是考试高频失分点",
+          "core_points": [
+            "问谁的→Whose",
+            "It's mine(名词性物主代词)"
+          ],
+          "example": {
+            "question": "___ book is this? It's ___(I).",
+            "steps": [
+              "问谁的→Whose",
+              "It's mine(名词性物主代词)"
+            ],
+            "answer": "Whose, mine"
+          },
+          "mistakes": [
+            {
+              "wrong": "用Who",
+              "correct": "Who问人，Whose问物品归属"
+            }
+          ],
+          "memory_tip": "Whose问归属，回答my→mine, your→yours！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "阅读通关秘籍",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "英语-五下-E5-01",
+          "title": "生日邀请函阅读",
+          "type": "阅读通关卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "15-20%",
+          "definition": "生日邀请函阅读是考试高频失分点",
+          "core_points": [
+            "找时间When",
+            "找地点Where",
+            "找活动What"
+          ],
+          "example": {
+            "question": "Read the birthday invitation and answer",
+            "steps": [
+              "找时间When",
+              "找地点Where",
+              "找活动What"
+            ],
+            "answer": "根据邀请函回答"
+          },
+          "mistakes": [
+            {
+              "wrong": "漏看RSVP信息",
+              "correct": "RSVP=请回复"
+            }
+          ],
+          "memory_tip": "邀请函三要素：时间+地点+活动！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "写作模板大全",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "英语-五下-E6-01",
+          "title": "季节作文模板",
+          "type": "写作模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "季节作文模板是考试高频失分点",
+          "core_points": [
+            "My favourite season is ___.",
+            "Because the weather is ___.",
+            "I can ___.",
+            "I love ___!"
+          ],
+          "example": {
+            "question": "Write about your favourite season",
+            "steps": [
+              "My favourite season is ___.",
+              "Because the weather is ___.",
+              "I can ___.",
+              "I love ___!"
+            ],
+            "answer": "季节描述"
+          },
+          "mistakes": [
+            {
+              "wrong": "没说原因",
+              "correct": "favourite要给原因Because..."
+            }
+          ],
+          "memory_tip": "季节+天气+活动=满分三段式！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

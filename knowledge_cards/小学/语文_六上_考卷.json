@@ -1,0 +1,272 @@
+{
+  "subject": "语文",
+  "grade": "六年级",
+  "semester": "上册",
+  "textbook": "人教版(统编)",
+  "grade_short": "六上",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "拼音字词基础",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "语文-六上-E1-01",
+          "title": "高频易错字词",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "高频易错字词是考试高频失分点",
+          "core_points": [
+            "渲染(三点水+宣)",
+            "勾勒(勹+力)",
+            "襟飘=衣襟飘动"
+          ],
+          "example": {
+            "question": "听写: 渲染、勾勒、襟飘带舞",
+            "steps": [
+              "渲染(三点水+宣)",
+              "勾勒(勹+力)",
+              "襟飘=衣襟飘动"
+            ],
+            "answer": "渲/勒/襟"
+          },
+          "mistakes": [
+            {
+              "wrong": "喧染",
+              "correct": "是\"渲\"三点水"
+            }
+          ],
+          "memory_tip": "渲(水)不是喧(口)，勒中间横别丢！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "语文-六上-E1-02",
+          "title": "词语褒贬义",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "词语褒贬义是考试高频失分点",
+          "core_points": [
+            "果断=褒，武断=贬",
+            "聪明=褒，狡猾=贬"
+          ],
+          "example": {
+            "question": "判断褒贬: 果断/武断  聪明/狡猾",
+            "steps": [
+              "果断=褒，武断=贬",
+              "聪明=褒，狡猾=贬"
+            ],
+            "answer": "褒贬配对"
+          },
+          "mistakes": [
+            {
+              "wrong": "都是褒义",
+              "correct": "武断和狡猾是贬义"
+            }
+          ],
+          "memory_tip": "褒义=夸人好，贬义=说人坏！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择判断秒杀",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "语文-六上-E2-01",
+          "title": "修辞辨别题",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "修辞辨别题是考试高频失分点",
+          "core_points": [
+            "B是判断句不是比喻",
+            "虽有\"是\"但不是比较两种事物"
+          ],
+          "example": {
+            "question": "下列不是比喻句的是：A.他像一头牛 B.他是班长 C.月亮如银盘",
+            "steps": [
+              "B是判断句不是比喻",
+              "虽有\"是\"但不是比较两种事物"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "选A",
+              "correct": "A有像且比较了两类事物"
+            }
+          ],
+          "memory_tip": "A像B：A和B是不同类事物才是比喻！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "句式变换宝典",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "语文-六上-E3-01",
+          "title": "句式综合变换",
+          "type": "句式变换卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "句式综合变换是考试高频失分点",
+          "core_points": [
+            "找到要比喻的特点：红",
+            "联想红色的事物：火焰",
+            "这朵花红得像火焰一样。"
+          ],
+          "example": {
+            "question": "改写比喻句：这朵花很红。",
+            "steps": [
+              "找到要比喻的特点：红",
+              "联想红色的事物：火焰",
+              "这朵花红得像火焰一样。"
+            ],
+            "answer": "这朵花红得像火焰。"
+          },
+          "mistakes": [
+            {
+              "wrong": "这朵花像玫瑰",
+              "correct": "花和玫瑰同类不算比喻"
+            }
+          ],
+          "memory_tip": "比喻=本体+像+喻体，两物不同类！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "阅读理解通关",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "语文-六上-E4-01",
+          "title": "分析文章结构",
+          "type": "阅读理解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "分析文章结构是考试高频失分点",
+          "core_points": [
+            "看开头是否总述→是否分层→是否总结",
+            "判断结构类型"
+          ],
+          "example": {
+            "question": "这篇文章是什么结构？(总分总/总分/时间顺序等)",
+            "steps": [
+              "看开头是否总述→是否分层→是否总结",
+              "判断结构类型"
+            ],
+            "answer": "分析文章结构"
+          },
+          "mistakes": [
+            {
+              "wrong": "想当然就写",
+              "correct": "要从文章实际结构判断"
+            }
+          ],
+          "memory_tip": "总分总最常见：开头概括+中间展开+结尾总结！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "古诗文填空",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "语文-六上-E5-01",
+          "title": "《七律·长征》默写",
+          "type": "古诗默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "《七律·长征》默写是考试高频失分点",
+          "core_points": [
+            "万水千山只等闲",
+            "乌蒙磅礴走泥丸"
+          ],
+          "example": {
+            "question": "红军不怕远征难，（  ）。五岭逶迤腾细浪，（  ）。",
+            "steps": [
+              "万水千山只等闲",
+              "乌蒙磅礴走泥丸"
+            ],
+            "answer": "万水千山只等闲，乌蒙磅礴走泥丸"
+          },
+          "mistakes": [
+            {
+              "wrong": "委迤",
+              "correct": "是逶迤不是委迤"
+            }
+          ],
+          "memory_tip": "逶迤wēiyí、磅礴pángbó字别写错！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "作文满分攻略",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "语文-六上-E6-01",
+          "title": "多彩活动模板",
+          "type": "作文模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "多彩活动模板是考试高频失分点",
+          "core_points": [
+            "开头：活动名称+时间地点",
+            "起因：为什么举行",
+            "经过：详写精彩片段(点面结合)",
+            "结尾：感受和收获"
+          ],
+          "example": {
+            "question": "写一次活动",
+            "steps": [
+              "开头：活动名称+时间地点",
+              "起因：为什么举行",
+              "经过：详写精彩片段(点面结合)",
+              "结尾：感受和收获"
+            ],
+            "answer": "点面结合写活动"
+          },
+          "mistakes": [
+            {
+              "wrong": "只写自己",
+              "correct": "要将个人镜头和全场镜头结合"
+            }
+          ],
+          "memory_tip": "面=全场描写+点=个人特写！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,272 @@
+{
+  "subject": "语文",
+  "grade": "四年级",
+  "semester": "下册",
+  "textbook": "人教版(统编)",
+  "grade_short": "四下",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "拼音字词基础",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "语文-四下-E1-01",
+          "title": "四字词语填空",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "四字词语填空是考试高频失分点",
+          "core_points": [
+            "波澜壮阔",
+            "应接不暇"
+          ],
+          "example": {
+            "question": "补充词语: 波澜（  ）阔  应接不（  ）",
+            "steps": [
+              "波澜壮阔",
+              "应接不暇"
+            ],
+            "answer": "壮，暇"
+          },
+          "mistakes": [
+            {
+              "wrong": "波澜状阔",
+              "correct": "是\"壮\"不是\"状\""
+            }
+          ],
+          "memory_tip": "壮=盛大，暇=空闲时间！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "语文-四下-E1-02",
+          "title": "多义字选义项",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "多义字选义项是考试高频失分点",
+          "core_points": [
+            "1.深=距离大(实指)",
+            "2.深=浓/程度高(抽象)"
+          ],
+          "example": {
+            "question": "\"深\"在不同句子中的含义？1.河水很深 2.深红色",
+            "steps": [
+              "1.深=距离大(实指)",
+              "2.深=浓/程度高(抽象)"
+            ],
+            "answer": "实指距离/抽象程度"
+          },
+          "mistakes": [
+            {
+              "wrong": "都选\"距离大\"",
+              "correct": "要看具体语境"
+            }
+          ],
+          "memory_tip": "一字多义看语境！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择判断秒杀",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "语文-四下-E2-01",
+          "title": "病句选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "病句选择是考试高频失分点",
+          "core_points": [
+            "C.\"非常\"和\"很\"重复",
+            "去掉一个即可"
+          ],
+          "example": {
+            "question": "找出病句: A.春天的公园真美丽。B.小明改正了缺点。C.他非常很高兴。",
+            "steps": [
+              "C.\"非常\"和\"很\"重复",
+              "去掉一个即可"
+            ],
+            "answer": "C"
+          },
+          "mistakes": [
+            {
+              "wrong": "选B",
+              "correct": "改正缺点搭配正确"
+            }
+          ],
+          "memory_tip": "修饰词不能重复堆叠！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "句式变换宝典",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "语文-四下-E3-01",
+          "title": "仿写排比句",
+          "type": "句式变换卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "仿写排比句是考试高频失分点",
+          "core_points": [
+            "三个分句结构相同",
+            "内容层层递进",
+            "幸福是甜甜的微笑，幸福是温暖的拥抱，幸福是家人的陪伴。"
+          ],
+          "example": {
+            "question": "仿写: 幸福是___，幸福是___，幸福是___。",
+            "steps": [
+              "三个分句结构相同",
+              "内容层层递进",
+              "幸福是甜甜的微笑，幸福是温暖的拥抱，幸福是家人的陪伴。"
+            ],
+            "answer": "三个相同结构"
+          },
+          "mistakes": [
+            {
+              "wrong": "只写两个",
+              "correct": "排比至少三个"
+            }
+          ],
+          "memory_tip": "排比=3个以上结构相同+内容递进！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "阅读理解通关",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "语文-四下-E4-01",
+          "title": "概括文章主要内容",
+          "type": "阅读理解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "概括文章主要内容是考试高频失分点",
+          "core_points": [
+            "找六要素：时间/地点/人物/起因/经过/结果",
+            "串联成一句话"
+          ],
+          "example": {
+            "question": "用简洁的话概括文章主要内容",
+            "steps": [
+              "找六要素：时间/地点/人物/起因/经过/结果",
+              "串联成一句话"
+            ],
+            "answer": "六要素概括法"
+          },
+          "mistakes": [
+            {
+              "wrong": "三言两语说不清",
+              "correct": "抓重点略细节"
+            }
+          ],
+          "memory_tip": "谁+在哪+为什么+做了什么+结果=主要内容！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "古诗文填空",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "语文-四下-E5-01",
+          "title": "《清平乐·村居》默写",
+          "type": "古诗默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "《清平乐·村居》默写是考试高频失分点",
+          "core_points": [
+            "醉里吴音相媚好",
+            "白发谁家翁媪"
+          ],
+          "example": {
+            "question": "茅檐低小，溪上青青草。（  ），（  ）。",
+            "steps": [
+              "醉里吴音相媚好",
+              "白发谁家翁媪"
+            ],
+            "answer": "醉里吴音相媚好，白发谁家翁媪"
+          },
+          "mistakes": [
+            {
+              "wrong": "白发谁家翁温",
+              "correct": "是\"媪\"不是\"温\""
+            }
+          ],
+          "memory_tip": "\"媪\"ǎo不是\"温\"！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "作文满分攻略",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "语文-四下-E6-01",
+          "title": "我的乐园模板",
+          "type": "作文模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "我的乐园模板是考试高频失分点",
+          "core_points": [
+            "开头：我的乐园是___",
+            "中间1: 乐园的样子",
+            "中间2: 在那里做什么",
+            "中间3: 最难忘的一次",
+            "结尾：表达喜爱"
+          ],
+          "example": {
+            "question": "写一写你的乐园",
+            "steps": [
+              "开头：我的乐园是___",
+              "中间1: 乐园的样子",
+              "中间2: 在那里做什么",
+              "中间3: 最难忘的一次",
+              "结尾：表达喜爱"
+            ],
+            "answer": "介绍+活动+情感"
+          },
+          "mistakes": [
+            {
+              "wrong": "只写地方不写活动",
+              "correct": "要写在乐园里的快乐体验"
+            }
+          ],
+          "memory_tip": "乐园=什么地方+做什么+为什么快乐！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

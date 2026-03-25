@@ -1,0 +1,276 @@
+{
+  "subject": "语文",
+  "grade": "五年级",
+  "semester": "上册",
+  "textbook": "人教版(统编)",
+  "grade_short": "五上",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "拼音字词基础",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "语文-五上-E1-01",
+          "title": "词义辨析填空",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "词义辨析填空是考试高频失分点",
+          "core_points": [
+            "严格：标准要求高",
+            "严厉：态度生硬",
+            "严肃：认真不苟",
+            "严密：不留漏洞"
+          ],
+          "example": {
+            "question": "严格/严厉/严肃/严密 选填",
+            "steps": [
+              "严格：标准要求高",
+              "严厉：态度生硬",
+              "严肃：认真不苟",
+              "严密：不留漏洞"
+            ],
+            "answer": "根据语境选词"
+          },
+          "mistakes": [
+            {
+              "wrong": "全用一个\"严格\"",
+              "correct": "不同搭配不同字"
+            }
+          ],
+          "memory_tip": "严\"后面跟什么决定选哪个！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "语文-五上-E1-02",
+          "title": "关联词填空",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "关联词填空是考试高频失分点",
+          "core_points": [
+            "转折关系",
+            "虽然...但是/尽管...还是"
+          ],
+          "example": {
+            "question": "（ ）今天下雨，（ ）运动会照常举行。",
+            "steps": [
+              "转折关系",
+              "虽然...但是/尽管...还是"
+            ],
+            "answer": "虽然...但是"
+          },
+          "mistakes": [
+            {
+              "wrong": "因为...所以",
+              "correct": "这是转折不是因果"
+            }
+          ],
+          "memory_tip": "转折=虽然但是, 因果=因为所以, 条件=只要就！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择判断秒杀",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "语文-五上-E2-01",
+          "title": "表达方法选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "表达方法选择是考试高频失分点",
+          "core_points": [
+            "借物喻人=借物的品质说人",
+            "花生外表朴实内心有用→喻朴实有用的人"
+          ],
+          "example": {
+            "question": "以下哪个是借物喻人？A.落花生外表不美内心美 B.桂花雨稀里哗啦",
+            "steps": [
+              "借物喻人=借物的品质说人",
+              "花生外表朴实内心有用→喻朴实有用的人"
+            ],
+            "answer": "A"
+          },
+          "mistakes": [
+            {
+              "wrong": "选B",
+              "correct": "桂花雨是场景描写"
+            }
+          ],
+          "memory_tip": "借物喻人=物品特点=人物品质！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "句式变换宝典",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "语文-五上-E3-01",
+          "title": "缩句与扩句",
+          "type": "句式变换卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "缩句与扩句是考试高频失分点",
+          "core_points": [
+            "去掉修饰：五彩缤纷的、温暖的、快乐地",
+            "花朵绽放。"
+          ],
+          "example": {
+            "question": "缩句：五彩缤纷的花朵在温暖的阳光下快乐地绽放。",
+            "steps": [
+              "去掉修饰：五彩缤纷的、温暖的、快乐地",
+              "花朵绽放。"
+            ],
+            "answer": "花朵绽放。"
+          },
+          "mistakes": [
+            {
+              "wrong": "花朵在阳光下绽放",
+              "correct": "要去掉所有修饰成分"
+            }
+          ],
+          "memory_tip": "缩句只留：谁/什么+干什么/怎么样！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "阅读理解通关",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "语文-五上-E4-01",
+          "title": "体会思想感情",
+          "type": "阅读理解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "体会思想感情是考试高频失分点",
+          "core_points": [
+            "找关键词句",
+            "联系作者背景",
+            "概括中心思想"
+          ],
+          "example": {
+            "question": "作者通过___表达了___的感情",
+            "steps": [
+              "找关键词句",
+              "联系作者背景",
+              "概括中心思想"
+            ],
+            "answer": "中心思想"
+          },
+          "mistakes": [
+            {
+              "wrong": "只说事件不说感情",
+              "correct": "一定要说表达了什么"
+            }
+          ],
+          "memory_tip": "思想感情=通过什么+表达什么！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "古诗文填空",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "语文-五上-E5-01",
+          "title": "《示儿》默写",
+          "type": "古诗默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "《示儿》默写是考试高频失分点",
+          "core_points": [
+            "但悲不见九州同",
+            "家祭无忘告乃翁"
+          ],
+          "example": {
+            "question": "死去元知万事空，（  ）。王师北定中原日，（  ）。",
+            "steps": [
+              "但悲不见九州同",
+              "家祭无忘告乃翁"
+            ],
+            "answer": "但悲不见九州同，家祭无忘告乃翁"
+          },
+          "mistakes": [
+            {
+              "wrong": "死去原知",
+              "correct": "是\"元知\"不是\"原知\""
+            }
+          ],
+          "memory_tip": "注意\"元\"不是\"原\"，\"乃\"不是\"奶\"！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "作文满分攻略",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "语文-五上-E6-01",
+          "title": "我的心爱之物模板",
+          "type": "作文模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "我的心爱之物模板是考试高频失分点",
+          "core_points": [
+            "开头：直接点明心爱之物",
+            "来历：怎么得到的",
+            "描写：外形+特点",
+            "故事：和它之间的故事",
+            "结尾：为什么心爱"
+          ],
+          "example": {
+            "question": "写你最心爱的一样东西",
+            "steps": [
+              "开头：直接点明心爱之物",
+              "来历：怎么得到的",
+              "描写：外形+特点",
+              "故事：和它之间的故事",
+              "结尾：为什么心爱"
+            ],
+            "answer": "来历+描写+故事+情感"
+          },
+          "mistakes": [
+            {
+              "wrong": "只写长什么样",
+              "correct": "要写为什么心爱"
+            }
+          ],
+          "memory_tip": "心爱之物一定要写感情和故事！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

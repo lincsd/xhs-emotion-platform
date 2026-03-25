@@ -1,0 +1,276 @@
+{
+  "subject": "语文",
+  "grade": "二年级",
+  "semester": "下册",
+  "textbook": "人教版(统编)",
+  "grade_short": "二下",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "拼音字词基础",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "语文-二下-E1-01",
+          "title": "同音字填空",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "同音字填空是考试高频失分点",
+          "core_points": [
+            "等待(等候)",
+            "皮带(穿戴)",
+            "代表(代替)"
+          ],
+          "example": {
+            "question": "选填：带/代/待  等（ ） 皮（ ） （ ）表",
+            "steps": [
+              "等待(等候)",
+              "皮带(穿戴)",
+              "代表(代替)"
+            ],
+            "answer": "待，带，代"
+          },
+          "mistakes": [
+            {
+              "wrong": "全填\"带\"",
+              "correct": "三个字含义不同"
+            }
+          ],
+          "memory_tip": "等待=停留，皮带=穿戴，代表=替代！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "语文-二下-E1-02",
+          "title": "加偏旁组新字",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "加偏旁组新字是考试高频失分点",
+          "core_points": [
+            "请(言)清(水)晴(日)情(心)精(米)睛(目)",
+            "选3个说清意思"
+          ],
+          "example": {
+            "question": "\"青\"加偏旁组3个字",
+            "steps": [
+              "请(言)清(水)晴(日)情(心)精(米)睛(目)",
+              "选3个说清意思"
+            ],
+            "answer": "请/清/晴等"
+          },
+          "mistakes": [
+            {
+              "wrong": "只写字不组词",
+              "correct": "要加上组词才完整"
+            }
+          ],
+          "memory_tip": "一个字加不同偏旁=不同字不同意思！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择判断秒杀",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "语文-二下-E2-01",
+          "title": "关联词选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "关联词选择是考试高频失分点",
+          "core_points": [
+            "下雨是原因，不去是结果",
+            "因果关系→因为...所以"
+          ],
+          "example": {
+            "question": "（  ）下雨了，我们（  ）不去公园了。A.因为...所以 B.虽然...但是",
+            "steps": [
+              "下雨是原因，不去是结果",
+              "因果关系→因为...所以"
+            ],
+            "answer": "A"
+          },
+          "mistakes": [
+            {
+              "wrong": "选B转折",
+              "correct": "这是因果关系"
+            }
+          ],
+          "memory_tip": "因为...所以=因果, 虽然...但是=转折！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "句式变换宝典",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "语文-二下-E3-01",
+          "title": "缩句练习",
+          "type": "句式变换卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "缩句练习是考试高频失分点",
+          "core_points": [
+            "去掉修饰词",
+            "谁→蝴蝶",
+            "做什么→飞舞",
+            "蝴蝶飞舞。"
+          ],
+          "example": {
+            "question": "美丽的蝴蝶在花丛中快乐地飞舞。→缩句",
+            "steps": [
+              "去掉修饰词",
+              "谁→蝴蝶",
+              "做什么→飞舞",
+              "蝴蝶飞舞。"
+            ],
+            "answer": "蝴蝶飞舞。"
+          },
+          "mistakes": [
+            {
+              "wrong": "美丽的蝴蝶飞舞",
+              "correct": "去掉\"美丽的\""
+            }
+          ],
+          "memory_tip": "缩句去「的地得前+时间地点」只留主干！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "阅读理解通关",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "语文-二下-E4-01",
+          "title": "短文理解基础",
+          "type": "阅读理解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "短文理解基础是考试高频失分点",
+          "core_points": [
+            "找关键句子",
+            "用原文回答",
+            "标注在第几段"
+          ],
+          "example": {
+            "question": "为什么说春天来了？从文中找2个理由",
+            "steps": [
+              "找关键句子",
+              "用原文回答",
+              "标注在第几段"
+            ],
+            "answer": "原文依据"
+          },
+          "mistakes": [
+            {
+              "wrong": "自己编答案",
+              "correct": "要从文中找依据"
+            }
+          ],
+          "memory_tip": "答案在文中找，用原文原句！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "古诗文填空",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "语文-二下-E5-01",
+          "title": "日积月累选填",
+          "type": "古诗默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "日积月累选填是考试高频失分点",
+          "core_points": [
+            "离离原上草，一岁一枯荣",
+            "野火烧不尽，春风吹又生"
+          ],
+          "example": {
+            "question": "（  ），春风吹又生。——白居易",
+            "steps": [
+              "离离原上草，一岁一枯荣",
+              "野火烧不尽，春风吹又生"
+            ],
+            "answer": "野火烧不尽"
+          },
+          "mistakes": [
+            {
+              "wrong": "离离原上草",
+              "correct": "这是第一句不是第三句"
+            }
+          ],
+          "memory_tip": "白居易《草》全诗4句必背！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "作文满分攻略",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "语文-二下-E6-01",
+          "title": "写话提升模板",
+          "type": "作文模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "写话提升模板是考试高频失分点",
+          "core_points": [
+            "我的好朋友叫___。",
+            "他/她___（样子）。",
+            "我们经常一起___。",
+            "我觉得___真好！"
+          ],
+          "example": {
+            "question": "我的好朋友",
+            "steps": [
+              "我的好朋友叫___。",
+              "他/她___（样子）。",
+              "我们经常一起___。",
+              "我觉得___真好！"
+            ],
+            "answer": "介绍+描写+事件+感受"
+          },
+          "mistakes": [
+            {
+              "wrong": "只写名字",
+              "correct": "要写具体描写"
+            }
+          ],
+          "memory_tip": "人物写话：长相+事件+感受=完整！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

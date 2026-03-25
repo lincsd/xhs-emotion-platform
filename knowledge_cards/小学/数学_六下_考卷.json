@@ -1,0 +1,272 @@
+{
+  "subject": "数学",
+  "grade": "六年级",
+  "semester": "下册",
+  "textbook": "人教版",
+  "grade_short": "六下",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "填空满分攻略",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "数学-六下-E1-01",
+          "title": "负数填空",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "负数填空是考试高频失分点",
+          "core_points": [
+            "零下3℃= -3℃",
+            "0-(-5)=5℃"
+          ],
+          "example": {
+            "question": "零下3℃记作（  ）℃, 0℃比-5℃高（  ）℃",
+            "steps": [
+              "零下3℃= -3℃",
+              "0-(-5)=5℃"
+            ],
+            "answer": "-3, 5"
+          },
+          "mistakes": [
+            {
+              "wrong": "0比-5高-5℃",
+              "correct": "0-(-5)=0+5=5"
+            }
+          ],
+          "memory_tip": "零下=负号，温差用减法！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "数学-六下-E1-02",
+          "title": "圆柱体积",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "圆柱体积是考试高频失分点",
+          "core_points": [
+            "底面积=πr²=3.14×4=12.56",
+            "V=12.56×5=62.8"
+          ],
+          "example": {
+            "question": "底面半径2cm，高5cm，体积=（  ）cm³",
+            "steps": [
+              "底面积=πr²=3.14×4=12.56",
+              "V=12.56×5=62.8"
+            ],
+            "answer": "62.8"
+          },
+          "mistakes": [
+            {
+              "wrong": "忘记求底面积",
+              "correct": "先算底面积再乘高"
+            }
+          ],
+          "memory_tip": "圆柱体积=底面积×高，圆锥再÷3！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "数学-六下-E2-01",
+          "title": "比例选择题",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "比例选择题是考试高频失分点",
+          "core_points": [
+            "内项积=外项积",
+            "3×8=2×x",
+            "x=24÷2=12"
+          ],
+          "example": {
+            "question": "2:3=8:x，x=? A.12 B.16 C.6",
+            "steps": [
+              "内项积=外项积",
+              "3×8=2×x",
+              "x=24÷2=12"
+            ],
+            "answer": "A"
+          },
+          "mistakes": [
+            {
+              "wrong": "2×8=16",
+              "correct": "是内项积=外项积"
+            }
+          ],
+          "memory_tip": "交叉相乘解比例！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "计算零失误",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "数学-六下-E3-01",
+          "title": "圆柱表面积",
+          "type": "计算零失误卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "圆柱表面积是考试高频失分点",
+          "core_points": [
+            "底面积=3.14×9=28.26",
+            "侧面积=2πr×h=2×3.14×3×10=188.4",
+            "表面积=28.26×2+188.4=244.92"
+          ],
+          "example": {
+            "question": "底面半径3cm高10cm，表面积？",
+            "steps": [
+              "底面积=3.14×9=28.26",
+              "侧面积=2πr×h=2×3.14×3×10=188.4",
+              "表面积=28.26×2+188.4=244.92"
+            ],
+            "answer": "244.92cm²"
+          },
+          "mistakes": [
+            {
+              "wrong": "只算一个底面",
+              "correct": "要两个底面"
+            }
+          ],
+          "memory_tip": "表面积=2个底面+侧面积！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "判断火眼金睛",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "数学-六下-E4-01",
+          "title": "判断：圆锥体积是圆柱的⅓",
+          "type": "判断火眼卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "判断：圆锥体积是圆柱的⅓是考试高频失分点",
+          "core_points": [
+            "前提：等底等高",
+            "题目没说等底等高",
+            "判断错"
+          ],
+          "example": {
+            "question": "圆锥的体积是圆柱体积的⅓。（  ）",
+            "steps": [
+              "前提：等底等高",
+              "题目没说等底等高",
+              "判断错"
+            ],
+            "answer": "✗"
+          },
+          "mistakes": [
+            {
+              "wrong": "✓忘记前提条件",
+              "correct": "要强调等底等高"
+            }
+          ],
+          "memory_tip": "必须等底等高才是⅓关系！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "应用题拆解",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "数学-六下-E5-01",
+          "title": "比例尺应用",
+          "type": "应用题拆解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "比例尺应用是考试高频失分点",
+          "core_points": [
+            "比例尺=5:10000000=1:2000000",
+            "8×2000000=16000000cm=160km"
+          ],
+          "example": {
+            "question": "地图上5cm代表实际100km，比例尺是多少？图上8cm代表多远？",
+            "steps": [
+              "比例尺=5:10000000=1:2000000",
+              "8×2000000=16000000cm=160km"
+            ],
+            "answer": "1:2000000，160km"
+          },
+          "mistakes": [
+            {
+              "wrong": "5:100忘记换单位",
+              "correct": "要统一成cm"
+            }
+          ],
+          "memory_tip": "比例尺=图上÷实际，注意统一单位！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "操作题规范",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "数学-六下-E6-01",
+          "title": "画比例尺图形",
+          "type": "操作题规范卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "5-10%",
+          "definition": "画比例尺图形是考试高频失分点",
+          "core_points": [
+            "2km=200000cm",
+            "200000÷50000=4cm",
+            "画4cm线段并标注"
+          ],
+          "example": {
+            "question": "按1:50000画一条实际长度2km的路",
+            "steps": [
+              "2km=200000cm",
+              "200000÷50000=4cm",
+              "画4cm线段并标注"
+            ],
+            "answer": "4cm线段"
+          },
+          "mistakes": [
+            {
+              "wrong": "直接画2cm",
+              "correct": "要用比例尺换算"
+            }
+          ],
+          "memory_tip": "先算图上距离再画！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

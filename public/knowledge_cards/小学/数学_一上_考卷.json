@@ -1,0 +1,274 @@
+{
+  "subject": "数学",
+  "grade": "一年级",
+  "semester": "上册",
+  "textbook": "人教版",
+  "grade_short": "一上",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "填空满分攻略",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "数学-一上-E1-01",
+          "title": "10以内加减填空3大坑",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "10以内加减填空3大坑是考试高频失分点",
+          "core_points": [
+            "想：9 - 5 = 4",
+            "所以括号填4",
+            "验证：5 + 4 = 9 ✓"
+          ],
+          "example": {
+            "question": "5 + （  ）= 9",
+            "steps": [
+              "想：9 - 5 = 4",
+              "所以括号填4",
+              "验证：5 + 4 = 9 ✓"
+            ],
+            "answer": "4"
+          },
+          "mistakes": [
+            {
+              "wrong": "填成14（5+9=14）",
+              "correct": "括号求的是加数，不是和"
+            }
+          ],
+          "memory_tip": "减法是加法的逆运算，逆向思维填空！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "数学-一上-E1-02",
+          "title": "比大小符号填空不出错",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "比大小符号填空不出错是考试高频失分点",
+          "core_points": [
+            "7和5比，7大",
+            "大数在前用 >",
+            "所以填 >"
+          ],
+          "example": {
+            "question": "7 ○ 5，○里填 >、< 还是 =",
+            "steps": [
+              "7和5比，7大",
+              "大数在前用 >",
+              "所以填 >"
+            ],
+            "answer": ">"
+          },
+          "mistakes": [
+            {
+              "wrong": "填成 <（方向搞反）",
+              "correct": "大嘴对大数：7>5"
+            }
+          ],
+          "memory_tip": "大嘴巴朝大数，尖尖朝小数！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "数学-一上-E2-01",
+          "title": "钟表选择题秒杀法",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "钟表选择题秒杀法是考试高频失分点",
+          "core_points": [
+            "分针指12=整点",
+            "时针指3=3点",
+            "选B"
+          ],
+          "example": {
+            "question": "时针指向3，分针指向12，现在是几点？A.12点 B.3点 C.6点",
+            "steps": [
+              "分针指12=整点",
+              "时针指3=3点",
+              "选B"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "选A（看错指针）",
+              "correct": "时针短粗，分针长细，别看反"
+            }
+          ],
+          "memory_tip": "分针12是整点信号，看时针定几点！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "计算零失误",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "数学-一上-E3-01",
+          "title": "10以内加减口算零失误",
+          "type": "计算零失误卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "10以内加减口算零失误是考试高频失分点",
+          "core_points": [
+            "从左到右算：8 - 3 = 5",
+            "5 + 4 = 9"
+          ],
+          "example": {
+            "question": "8 - 3 + 4 = ?",
+            "steps": [
+              "从左到右算：8 - 3 = 5",
+              "5 + 4 = 9"
+            ],
+            "answer": "9"
+          },
+          "mistakes": [
+            {
+              "wrong": "3+4=7，8-7=1（先算后面）",
+              "correct": "没有括号就从左往右"
+            }
+          ],
+          "memory_tip": "混合运算从左往右，不跳步！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "判断火眼金睛",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "数学-一上-E4-01",
+          "title": "判断：0是最小的数",
+          "type": "判断火眼卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "判断：0是最小的数是考试高频失分点",
+          "core_points": [
+            "一年级范围内0是最小的自然数",
+            "这个说法是对的"
+          ],
+          "example": {
+            "question": "0是最小的数。（  ）",
+            "steps": [
+              "一年级范围内0是最小的自然数",
+              "这个说法是对的"
+            ],
+            "answer": "√"
+          },
+          "mistakes": [
+            {
+              "wrong": "打✗（以为没有比0小的就不算）",
+              "correct": "0就是最小的自然数"
+            }
+          ],
+          "memory_tip": "0是最小的自然数（一年级范围）",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "应用题拆解",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "数学-一上-E5-01",
+          "title": "看图列式不丢分",
+          "type": "应用题拆解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "看图列式不丢分是考试高频失分点",
+          "core_points": [
+            "原来6只",
+            "飞走=减去2",
+            "6 - 2 = 4只"
+          ],
+          "example": {
+            "question": "树上有6只鸟，飞走了2只，还剩几只？",
+            "steps": [
+              "原来6只",
+              "飞走=减去2",
+              "6 - 2 = 4只"
+            ],
+            "answer": "4只"
+          },
+          "mistakes": [
+            {
+              "wrong": "6+2=8只（用成加法）",
+              "correct": "飞走是减少，用减法"
+            }
+          ],
+          "memory_tip": "「飞走」「拿走」「吃掉」都是减法信号词！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "操作题规范",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "数学-一上-E6-01",
+          "title": "数一数涂一涂不漏格",
+          "type": "操作题规范卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "5-10%",
+          "definition": "数一数涂一涂不漏格是考试高频失分点",
+          "core_points": [
+            "从左边数: 第1个、第2个、第3个",
+            "只涂第3个",
+            "检查：确实是从左数"
+          ],
+          "example": {
+            "question": "把左起第3个○涂上颜色",
+            "steps": [
+              "从左边数: 第1个、第2个、第3个",
+              "只涂第3个",
+              "检查：确实是从左数"
+            ],
+            "answer": "涂左起第3个"
+          },
+          "mistakes": [
+            {
+              "wrong": "涂了前3个（把\"第3个\"看成\"前3个\"）",
+              "correct": "「第3个」只涂1个，「前3个」涂3个"
+            }
+          ],
+          "memory_tip": "注意\"从左\"还是\"从右\"，圈出方向词！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,278 @@
+{
+  "subject": "语文",
+  "grade": "六年级",
+  "semester": "下册",
+  "textbook": "人教版(统编)",
+  "grade_short": "六下",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "拼音字词基础",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "语文-六下-E1-01",
+          "title": "易混词语辨析",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "易混词语辨析是考试高频失分点",
+          "core_points": [
+            "截然=完全不同",
+            "竟然=出乎意料",
+            "果然=正如所料",
+            "居然=没想到(惊讶)"
+          ],
+          "example": {
+            "question": "截然/竟然/果然/居然 选填",
+            "steps": [
+              "截然=完全不同",
+              "竟然=出乎意料",
+              "果然=正如所料",
+              "居然=没想到(惊讶)"
+            ],
+            "answer": "看语境填词"
+          },
+          "mistakes": [
+            {
+              "wrong": "竟然和居然分不清",
+              "correct": "两者很近义都表意外"
+            }
+          ],
+          "memory_tip": "果然=不意外，竟然/居然=很意外！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "语文-六下-E1-02",
+          "title": "文言文字义",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "文言文字义是考试高频失分点",
+          "core_points": [
+            "辩=辩论、争辩",
+            "不是\"辨\"(辨别)也不是\"变\""
+          ],
+          "example": {
+            "question": "解释：\"两小儿辩日\"中\"辩\"的意思",
+            "steps": [
+              "辩=辩论、争辩",
+              "不是\"辨\"(辨别)也不是\"变\""
+            ],
+            "answer": "争辩、辩论"
+          },
+          "mistakes": [
+            {
+              "wrong": "辨别",
+              "correct": "此处是争辩"
+            }
+          ],
+          "memory_tip": "辩(言)=用语言争论！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择判断秒杀",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "语文-六下-E2-01",
+          "title": "阅读方法选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "阅读方法选择是考试高频失分点",
+          "core_points": [
+            "长篇适合浏览+精读结合",
+            "浏览了解全貌，精读品味细节"
+          ],
+          "example": {
+            "question": "读长篇小说应该用什么方法？A.逐字精读 B.浏览+精读结合 C.只看插图",
+            "steps": [
+              "长篇适合浏览+精读结合",
+              "浏览了解全貌，精读品味细节"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "选A全部精读",
+              "correct": "太花时间，要分轻重"
+            }
+          ],
+          "memory_tip": "长文=快速浏览+关键精读！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "句式变换宝典",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "语文-六下-E3-01",
+          "title": "仿写句式",
+          "type": "句式变换卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "仿写句式是考试高频失分点",
+          "core_points": [
+            "结构：不必说A也不必说B单是C",
+            "从大到小/从远到近",
+            "单是的内容要详写"
+          ],
+          "example": {
+            "question": "仿写：...不必说...也不必说...单是...",
+            "steps": [
+              "结构：不必说A也不必说B单是C",
+              "从大到小/从远到近",
+              "单是的内容要详写"
+            ],
+            "answer": "仿写结构"
+          },
+          "mistakes": [
+            {
+              "wrong": "三部分平均写",
+              "correct": "单是后面要详写"
+            }
+          ],
+          "memory_tip": "不必说不必说是略写，单是才是详写重点！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "阅读理解通关",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "语文-六下-E4-01",
+          "title": "分析人物形象",
+          "type": "阅读理解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "分析人物形象是考试高频失分点",
+          "core_points": [
+            "找关键事件",
+            "提取品质词",
+            "用事例支撑"
+          ],
+          "example": {
+            "question": "结合全文分析鲁滨逊的人物特点",
+            "steps": [
+              "找关键事件",
+              "提取品质词",
+              "用事例支撑"
+            ],
+            "answer": "勇敢/坚毅/乐观/聪明"
+          },
+          "mistakes": [
+            {
+              "wrong": "只说一个词",
+              "correct": "要列2-3个品质+对应事例"
+            }
+          ],
+          "memory_tip": "人物分析=品质词+具体事例支撑！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "古诗文填空",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "语文-六下-E5-01",
+          "title": "小学必背古诗综合",
+          "type": "古诗默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "小学必背古诗综合是考试高频失分点",
+          "core_points": [
+            "劝学：少壮不努力，老大徒伤悲",
+            "送别：劝君更尽一杯酒，西出阳关无故人",
+            "爱国：王师北定中原日，家祭无忘告乃翁"
+          ],
+          "example": {
+            "question": "总复习: 劝学/送别/爱国主题各背一首",
+            "steps": [
+              "劝学：少壮不努力，老大徒伤悲",
+              "送别：劝君更尽一杯酒，西出阳关无故人",
+              "爱国：王师北定中原日，家祭无忘告乃翁"
+            ],
+            "answer": "分类默写"
+          },
+          "mistakes": [
+            {
+              "wrong": "只背一种主题",
+              "correct": "要分类全面复习"
+            }
+          ],
+          "memory_tip": "按主题分类背，考前按类复习！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "作文满分攻略",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "语文-六下-E6-01",
+          "title": "毕业寄语模板",
+          "type": "作文模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "毕业寄语模板是考试高频失分点",
+          "core_points": [
+            "回忆：还记得___吗？",
+            "感谢：谢谢你___。",
+            "祝福：愿你___。",
+            "口号：我们___！"
+          ],
+          "example": {
+            "question": "写给同学或老师的毕业赠言",
+            "steps": [
+              "回忆：还记得___吗？",
+              "感谢：谢谢你___。",
+              "祝福：愿你___。",
+              "口号：我们___！"
+            ],
+            "answer": "回忆+感谢+祝福"
+          },
+          "mistakes": [
+            {
+              "wrong": "只写套话",
+              "correct": "要有真实回忆和真情"
+            }
+          ],
+          "memory_tip": "毕业寄语=回忆+感恩+祝福，情真意切！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

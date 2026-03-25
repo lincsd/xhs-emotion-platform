@@ -1,0 +1,274 @@
+{
+  "subject": "数学",
+  "grade": "五年级",
+  "semester": "上册",
+  "textbook": "人教版",
+  "grade_short": "五上",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "填空满分攻略",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "数学-五上-E1-01",
+          "title": "方程填空解法",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "方程填空解法是考试高频失分点",
+          "core_points": [
+            "2x = 11-3 = 8",
+            "x = 8÷2 = 4"
+          ],
+          "example": {
+            "question": "2x + 3 = 11，x = （  ）",
+            "steps": [
+              "2x = 11-3 = 8",
+              "x = 8÷2 = 4"
+            ],
+            "answer": "4"
+          },
+          "mistakes": [
+            {
+              "wrong": "x=11-3=8",
+              "correct": "要先移3再除以2"
+            }
+          ],
+          "memory_tip": "移项变号：+变-，×变÷！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "数学-五上-E1-02",
+          "title": "面积公式填空",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "面积公式填空是考试高频失分点",
+          "core_points": [
+            "平行四边形：底×高",
+            "梯形：(上底+下底)×高÷2"
+          ],
+          "example": {
+            "question": "平行四边形面积=（  ），梯形面积=（  ）",
+            "steps": [
+              "平行四边形：底×高",
+              "梯形：(上底+下底)×高÷2"
+            ],
+            "answer": "底×高，(上底+下底)×高÷2"
+          },
+          "mistakes": [
+            {
+              "wrong": "梯形忘记÷2",
+              "correct": "梯形面积公式最后要除以2"
+            }
+          ],
+          "memory_tip": "梯形别忘÷2！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "数学-五上-E2-01",
+          "title": "小数除法选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "小数除法选择是考试高频失分点",
+          "core_points": [
+            "同时×10：72÷8=9",
+            "选A"
+          ],
+          "example": {
+            "question": "7.2÷0.8=? A.9 B.0.9 C.90",
+            "steps": [
+              "同时×10：72÷8=9",
+              "选A"
+            ],
+            "answer": "A"
+          },
+          "mistakes": [
+            {
+              "wrong": "没移小数点，算成0.9",
+              "correct": "除数和被除数同时乘10"
+            }
+          ],
+          "memory_tip": "除数是小数→同时扩大成整数！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "计算零失误",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "数学-五上-E3-01",
+          "title": "小数乘法小数点位置",
+          "type": "计算零失误卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "小数乘法小数点位置是考试高频失分点",
+          "core_points": [
+            "25×3=75",
+            "两个因数共2位小数",
+            "=0.75"
+          ],
+          "example": {
+            "question": "2.5 × 0.3 = ?",
+            "steps": [
+              "25×3=75",
+              "两个因数共2位小数",
+              "=0.75"
+            ],
+            "answer": "0.75"
+          },
+          "mistakes": [
+            {
+              "wrong": "=7.5（少数一位小数）",
+              "correct": "2.5有1位+0.3有1位=2位小数"
+            }
+          ],
+          "memory_tip": "先整数算，再数小数位！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "判断火眼金睛",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "数学-五上-E4-01",
+          "title": "判断：面积相等周长也相等",
+          "type": "判断火眼卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "判断：面积相等周长也相等是考试高频失分点",
+          "core_points": [
+            "面积24：可以是6×4(周长20)或8×3(周长22)",
+            "面积同但周长不同"
+          ],
+          "example": {
+            "question": "两个面积相等的长方形，周长一定相等。（  ）",
+            "steps": [
+              "面积24：可以是6×4(周长20)或8×3(周长22)",
+              "面积同但周长不同"
+            ],
+            "answer": "✗"
+          },
+          "mistakes": [
+            {
+              "wrong": "✓以为面积决定周长",
+              "correct": "同面积形状不同周长不同"
+            }
+          ],
+          "memory_tip": "面积相等≠周长相等！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "应用题拆解",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "数学-五上-E5-01",
+          "title": "方程解应用题",
+          "type": "应用题拆解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "方程解应用题是考试高频失分点",
+          "core_points": [
+            "设笔记本x元",
+            "3x+16=31",
+            "3x=15",
+            "x=5"
+          ],
+          "example": {
+            "question": "小明买了3本笔记本和1支钢笔共31元，钢笔16元，每本笔记本多少元？",
+            "steps": [
+              "设笔记本x元",
+              "3x+16=31",
+              "3x=15",
+              "x=5"
+            ],
+            "answer": "5元"
+          },
+          "mistakes": [
+            {
+              "wrong": "31-16=15就是答案",
+              "correct": "15是3本的总价，还要÷3"
+            }
+          ],
+          "memory_tip": "设未知数→列方程→解方程→验证！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "操作题规范",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "数学-五上-E6-01",
+          "title": "画平行四边形的高",
+          "type": "操作题规范卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "5-10%",
+          "definition": "画平行四边形的高是考试高频失分点",
+          "core_points": [
+            "1.选定一条底边",
+            "2.从对边上的点向底边画垂线",
+            "3.标注高和直角符号",
+            "4.面积=底×高"
+          ],
+          "example": {
+            "question": "画出平行四边形的高并计算面积",
+            "steps": [
+              "1.选定一条底边",
+              "2.从对边上的点向底边画垂线",
+              "3.标注高和直角符号",
+              "4.面积=底×高"
+            ],
+            "answer": "底×高"
+          },
+          "mistakes": [
+            {
+              "wrong": "画斜线当高",
+              "correct": "高一定要垂直"
+            }
+          ],
+          "memory_tip": "高必须垂直于底边！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

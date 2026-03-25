@@ -1,0 +1,278 @@
+{
+  "subject": "数学",
+  "grade": "三年级",
+  "semester": "上册",
+  "textbook": "人教版",
+  "grade_short": "三上",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "填空满分攻略",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "数学-三上-E1-01",
+          "title": "万以内加减竖式填空",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "万以内加减竖式填空是考试高频失分点",
+          "core_points": [
+            "个位：3-8不够，向十位借，但十位是0→向百位借",
+            "计算得325"
+          ],
+          "example": {
+            "question": "603 - 278 = （  ）",
+            "steps": [
+              "个位：3-8不够，向十位借，但十位是0→向百位借",
+              "计算得325"
+            ],
+            "answer": "325"
+          },
+          "mistakes": [
+            {
+              "wrong": "=435（退位错误）",
+              "correct": "0不够借要往左找"
+            }
+          ],
+          "memory_tip": "连续退位：0借旁边→变9再借给个位！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "数学-三上-E1-02",
+          "title": "分数大小比较",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "分数大小比较是考试高频失分点",
+          "core_points": [
+            "同分子比分母",
+            "分母小的分数大",
+            "3<5所以⅓>⅕"
+          ],
+          "example": {
+            "question": "⅓ ○ ⅕ ，○里填 > < =",
+            "steps": [
+              "同分子比分母",
+              "分母小的分数大",
+              "3<5所以⅓>⅕"
+            ],
+            "answer": ">"
+          },
+          "mistakes": [
+            {
+              "wrong": "填<（以为3<5就小）",
+              "correct": "分母越小，每份越大"
+            }
+          ],
+          "memory_tip": "分子同看分母：分母小→分数大！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "数学-三上-E2-01",
+          "title": "周长公式选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "周长公式选择是考试高频失分点",
+          "core_points": [
+            "正方形周长=边长×4",
+            "5×4=20cm",
+            "选B"
+          ],
+          "example": {
+            "question": "正方形边长5cm，周长？A.10cm B.20cm C.25cm",
+            "steps": [
+              "正方形周长=边长×4",
+              "5×4=20cm",
+              "选B"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "选C算成面积5×5",
+              "correct": "周长是4条边之和"
+            }
+          ],
+          "memory_tip": "正方形4边等长，周长=边×4！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "计算零失误",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "数学-三上-E3-01",
+          "title": "多位数乘一位数",
+          "type": "计算零失误卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "多位数乘一位数是考试高频失分点",
+          "core_points": [
+            "6×3=18写8进1",
+            "4×3=12加1=13写3进1",
+            "2×3=6加1=7",
+            "=738"
+          ],
+          "example": {
+            "question": "246 × 3 = ?",
+            "steps": [
+              "6×3=18写8进1",
+              "4×3=12加1=13写3进1",
+              "2×3=6加1=7",
+              "=738"
+            ],
+            "answer": "738"
+          },
+          "mistakes": [
+            {
+              "wrong": "=618（漏进位）",
+              "correct": "每一位乘完别忘加进位"
+            }
+          ],
+          "memory_tip": "从个位起乘，满几十就进几！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "判断火眼金睛",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "数学-三上-E4-01",
+          "title": "判断：四边形都是长方形",
+          "type": "判断火眼卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "判断：四边形都是长方形是考试高频失分点",
+          "core_points": [
+            "四边形包括长方形、正方形、平行四边形等",
+            "长方形只是一种",
+            "判断错"
+          ],
+          "example": {
+            "question": "所有的四边形都是长方形。（  ）",
+            "steps": [
+              "四边形包括长方形、正方形、平行四边形等",
+              "长方形只是一种",
+              "判断错"
+            ],
+            "answer": "✗"
+          },
+          "mistakes": [
+            {
+              "wrong": "✓以为四边形=长方形",
+              "correct": "还有梯形、平行四边形等"
+            }
+          ],
+          "memory_tip": "长方形是特殊四边形，不是所有！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "应用题拆解",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "数学-三上-E5-01",
+          "title": "周长应用题",
+          "type": "应用题拆解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "周长应用题是考试高频失分点",
+          "core_points": [
+            "围一圈=求周长",
+            "(12+8)×2=40米"
+          ],
+          "example": {
+            "question": "长方形菜地长12m宽8m，围一圈篱笆需要多少米？",
+            "steps": [
+              "围一圈=求周长",
+              "(12+8)×2=40米"
+            ],
+            "answer": "40米"
+          },
+          "mistakes": [
+            {
+              "wrong": "12×8=96求成面积",
+              "correct": "围一圈是周长不是面积"
+            }
+          ],
+          "memory_tip": "围一圈/绕一周=求周长！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "操作题规范",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "数学-三上-E6-01",
+          "title": "画长方形规范",
+          "type": "操作题规范卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "5-10%",
+          "definition": "画长方形规范是考试高频失分点",
+          "core_points": [
+            "1.数好4格横线",
+            "2.数好3格竖线",
+            "3.连接4个顶点",
+            "4.标注长和宽"
+          ],
+          "example": {
+            "question": "在方格纸上画一个长4cm宽3cm的长方形",
+            "steps": [
+              "1.数好4格横线",
+              "2.数好3格竖线",
+              "3.连接4个顶点",
+              "4.标注长和宽"
+            ],
+            "answer": "标准长方形"
+          },
+          "mistakes": [
+            {
+              "wrong": "忘记标注边长",
+              "correct": "画完要标注数据"
+            }
+          ],
+          "memory_tip": "标注长和宽的数字+单位！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

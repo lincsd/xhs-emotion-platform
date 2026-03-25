@@ -1,0 +1,276 @@
+{
+  "subject": "数学",
+  "grade": "五年级",
+  "semester": "下册",
+  "textbook": "人教版",
+  "grade_short": "五下",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "填空满分攻略",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "数学-五下-E1-01",
+          "title": "因数倍数填空",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "因数倍数填空是考试高频失分点",
+          "core_points": [
+            "18=1×18=2×9=3×6",
+            "因数：1,2,3,6,9,18",
+            "18是1,2,3,6,9,18的倍数"
+          ],
+          "example": {
+            "question": "18的因数有（  ），18是（  ）的倍数",
+            "steps": [
+              "18=1×18=2×9=3×6",
+              "因数：1,2,3,6,9,18",
+              "18是1,2,3,6,9,18的倍数"
+            ],
+            "answer": "1,2,3,6,9,18"
+          },
+          "mistakes": [
+            {
+              "wrong": "漏了1或18本身",
+              "correct": "1和本身都是因数"
+            }
+          ],
+          "memory_tip": "找因数：从1开始配对找，到√n为止！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "数学-五下-E1-02",
+          "title": "长方体表面积",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "长方体表面积是考试高频失分点",
+          "core_points": [
+            "(5×3+5×2+3×2)×2",
+            "=(15+10+6)×2",
+            "=62cm²"
+          ],
+          "example": {
+            "question": "长5cm宽3cm高2cm，表面积=（  ）cm²",
+            "steps": [
+              "(5×3+5×2+3×2)×2",
+              "=(15+10+6)×2",
+              "=62cm²"
+            ],
+            "answer": "62"
+          },
+          "mistakes": [
+            {
+              "wrong": "=31只算了一半",
+              "correct": "表面积要乘2"
+            }
+          ],
+          "memory_tip": "三对面×2，别只算三面！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "数学-五下-E2-01",
+          "title": "质数合数选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "质数合数选择是考试高频失分点",
+          "core_points": [
+            "9=3×3,15=3×5,21=3×7 都是合数",
+            "17只有1和17两个因数→质数"
+          ],
+          "example": {
+            "question": "以下哪个是质数？A.9 B.15 C.17 D.21",
+            "steps": [
+              "9=3×3,15=3×5,21=3×7 都是合数",
+              "17只有1和17两个因数→质数"
+            ],
+            "answer": "C"
+          },
+          "mistakes": [
+            {
+              "wrong": "选奇数就行",
+              "correct": "9和15也是奇数但不是质数"
+            }
+          ],
+          "memory_tip": "质数只有1和自身两个因数！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "计算零失误",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "数学-五下-E3-01",
+          "title": "异分母分数加减",
+          "type": "计算零失误卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "异分母分数加减是考试高频失分点",
+          "core_points": [
+            "通分：找公分母12",
+            "⅓=4/12, ¼=3/12",
+            "4/12+3/12=7/12"
+          ],
+          "example": {
+            "question": "⅓ + ¼ = ?",
+            "steps": [
+              "通分：找公分母12",
+              "⅓=4/12, ¼=3/12",
+              "4/12+3/12=7/12"
+            ],
+            "answer": "7/12"
+          },
+          "mistakes": [
+            {
+              "wrong": "分子加分子1+1=2,分母加分母3+4=7",
+              "correct": "不能直接加，要先通分"
+            }
+          ],
+          "memory_tip": "先通分→再加减→最后约分！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "判断火眼金睛",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "数学-五下-E4-01",
+          "title": "判断：长方体6个面都是长方形",
+          "type": "判断火眼卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "判断：长方体6个面都是长方形是考试高频失分点",
+          "core_points": [
+            "如果有两个面是正方形，其余是长方形",
+            "正方形也是特殊长方形→对"
+          ],
+          "example": {
+            "question": "长方体的6个面一定都是长方形。（  ）",
+            "steps": [
+              "如果有两个面是正方形，其余是长方形",
+              "正方形也是特殊长方形→对"
+            ],
+            "answer": "√"
+          },
+          "mistakes": [
+            {
+              "wrong": "✗以为有的面是正方形不算",
+              "correct": "正方形是特殊长方形"
+            }
+          ],
+          "memory_tip": "正方形是特殊长方形！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "应用题拆解",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "数学-五下-E5-01",
+          "title": "体积应用题",
+          "type": "应用题拆解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "体积应用题是考试高频失分点",
+          "core_points": [
+            "V=长×宽×高",
+            "=40×30×25",
+            "=30000cm³=30升"
+          ],
+          "example": {
+            "question": "长方体水箱，从里面量长40cm宽30cm，倒入水后水深25cm，水的体积？",
+            "steps": [
+              "V=长×宽×高",
+              "=40×30×25",
+              "=30000cm³=30升"
+            ],
+            "answer": "30000cm³"
+          },
+          "mistakes": [
+            {
+              "wrong": "用外部尺寸",
+              "correct": "题目说从里面量"
+            }
+          ],
+          "memory_tip": "水的体积=底面积×水深！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "操作题规范",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "数学-五下-E6-01",
+          "title": "画折线统计图规范",
+          "type": "操作题规范卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "5-10%",
+          "definition": "画折线统计图规范是考试高频失分点",
+          "core_points": [
+            "1.标好纵横轴和标题",
+            "2.描点要准确",
+            "3.用直尺连线",
+            "4.标注每个点的数据"
+          ],
+          "example": {
+            "question": "根据数据画折线统计图",
+            "steps": [
+              "1.标好纵横轴和标题",
+              "2.描点要准确",
+              "3.用直尺连线",
+              "4.标注每个点的数据"
+            ],
+            "answer": "规范折线统计图"
+          },
+          "mistakes": [
+            {
+              "wrong": "先连线再标点",
+              "correct": "要先定点后连线"
+            }
+          ],
+          "memory_tip": "先描点再连线，每个点标数值！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,268 @@
+{
+  "subject": "语文",
+  "grade": "二年级",
+  "semester": "上册",
+  "textbook": "人教版(统编)",
+  "grade_short": "二上",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "拼音字词基础",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "语文-二上-E1-01",
+          "title": "查字典填空",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "查字典填空是考试高频失分点",
+          "core_points": [
+            "花：草字头→艹部",
+            "花去掉艹=化，4画"
+          ],
+          "example": {
+            "question": "\"花\"字用部首查字法：先查（ ）部，再查（ ）画",
+            "steps": [
+              "花：草字头→艹部",
+              "花去掉艹=化，4画"
+            ],
+            "answer": "艹部，4画"
+          },
+          "mistakes": [
+            {
+              "wrong": "总笔画7",
+              "correct": "要去掉部首再数"
+            }
+          ],
+          "memory_tip": "部首查字法：去掉部首数剩余笔画！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "语文-二上-E1-02",
+          "title": "多音字组词",
+          "type": "拼写默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "多音字组词是考试高频失分点",
+          "core_points": [
+            "lè=快乐、乐趣",
+            "yuè=音乐、乐器"
+          ],
+          "example": {
+            "question": "乐: lè（  ）yuè（  ）",
+            "steps": [
+              "lè=快乐、乐趣",
+              "yuè=音乐、乐器"
+            ],
+            "answer": "快乐，音乐"
+          },
+          "mistakes": [
+            {
+              "wrong": "音乐读lè",
+              "correct": "音乐的乐读yuè"
+            }
+          ],
+          "memory_tip": "快乐的乐lè，音乐的乐yuè！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择判断秒杀",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "语文-二上-E2-01",
+          "title": "近义词选择",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "近义词选择是考试高频失分点",
+          "core_points": [
+            "美丽=好看=漂亮",
+            "丑陋是反义词"
+          ],
+          "example": {
+            "question": "\"美丽\"的近义词：A.丑陋 B.漂亮 C.高大",
+            "steps": [
+              "美丽=好看=漂亮",
+              "丑陋是反义词"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "选A反义词",
+              "correct": "题目问的是近义词"
+            }
+          ],
+          "memory_tip": "近义词=意思相近，反义词=意思相反！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "句式变换宝典",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "语文-二上-E3-01",
+          "title": "造句练习",
+          "type": "句式变换卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "造句练习是考试高频失分点",
+          "core_points": [
+            "主语+一边+动作1+一边+动作2",
+            "妈妈一边做饭一边唱歌。"
+          ],
+          "example": {
+            "question": "用\"一边...一边...\"造句",
+            "steps": [
+              "主语+一边+动作1+一边+动作2",
+              "妈妈一边做饭一边唱歌。"
+            ],
+            "answer": "完整通顺的句子"
+          },
+          "mistakes": [
+            {
+              "wrong": "一边写字一边跑步",
+              "correct": "不能同时做的不行"
+            }
+          ],
+          "memory_tip": "两个动作要能同时做！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "阅读理解通关",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "语文-二上-E4-01",
+          "title": "短文主要内容",
+          "type": "阅读理解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "短文主要内容是考试高频失分点",
+          "core_points": [
+            "找时间地点人物",
+            "找起因经过结果",
+            "组织成一句话"
+          ],
+          "example": {
+            "question": "读短文，说说主要讲了什么？",
+            "steps": [
+              "找时间地点人物",
+              "找起因经过结果",
+              "组织成一句话"
+            ],
+            "answer": "谁+做了什么+结果"
+          },
+          "mistakes": [
+            {
+              "wrong": "把全文抄一遍",
+              "correct": "要概括不是抄写"
+            }
+          ],
+          "memory_tip": "主要内容=去掉细节只留骨架！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "古诗文填空",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "语文-二上-E5-01",
+          "title": "古诗理解填空",
+          "type": "古诗默写卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "古诗理解填空是考试高频失分点",
+          "core_points": [
+            "疑是银河落九天"
+          ],
+          "example": {
+            "question": "《望庐山瀑布》：飞流直下三千尺，（  ）",
+            "steps": [
+              "疑是银河落九天"
+            ],
+            "answer": "疑是银河落九天"
+          },
+          "mistakes": [
+            {
+              "wrong": "银河落九天疑是",
+              "correct": "顺序不能换"
+            }
+          ],
+          "memory_tip": "李白名句：飞流银河成一对！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "作文满分攻略",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "语文-二上-E6-01",
+          "title": "看图写话升级",
+          "type": "作文模板卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "看图写话升级是考试高频失分点",
+          "core_points": [
+            "第1句：什么时候什么地方",
+            "第2句：谁在做什么",
+            "第3句：具体描写(样子/动作)",
+            "第4句：心情或想法"
+          ],
+          "example": {
+            "question": "观察图片写一段话(4-5句)",
+            "steps": [
+              "第1句：什么时候什么地方",
+              "第2句：谁在做什么",
+              "第3句：具体描写(样子/动作)",
+              "第4句：心情或想法"
+            ],
+            "answer": "时间+人物+事件+心情"
+          },
+          "mistakes": [
+            {
+              "wrong": "没有心情描写",
+              "correct": "加上心情更丰富"
+            }
+          ],
+          "memory_tip": "写话四要素：时地人事+心情！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}

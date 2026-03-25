@@ -1,0 +1,274 @@
+{
+  "subject": "数学",
+  "grade": "四年级",
+  "semester": "上册",
+  "textbook": "人教版",
+  "grade_short": "四上",
+  "card_pack": "考卷真题",
+  "description": "基于真题分析的6种题型满分攻略卡片",
+  "units": [
+    {
+      "unit_id": "E1",
+      "unit_name": "填空满分攻略",
+      "cards": [
+        {
+          "card_id": "E1-01",
+          "full_id": "数学-四上-E1-01",
+          "title": "大数改写和近似数",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "大数改写和近似数是考试高频失分点",
+          "core_points": [
+            "精确值：3860000÷10000=386万",
+            "近似值：看千位，386万"
+          ],
+          "example": {
+            "question": "3860000 =（  ）万，≈（  ）万",
+            "steps": [
+              "精确值：3860000÷10000=386万",
+              "近似值：看千位，386万"
+            ],
+            "answer": "386万，386万"
+          },
+          "mistakes": [
+            {
+              "wrong": "用≈写精确值",
+              "correct": "精确改写用等号"
+            }
+          ],
+          "memory_tip": "改写用\"=\"，近似用\"≈\"！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        },
+        {
+          "card_id": "E1-02",
+          "full_id": "数学-四上-E1-02",
+          "title": "角的度数填空",
+          "type": "填空满分卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "角的度数填空是考试高频失分点",
+          "core_points": [
+            "平角=180°",
+            "周角=360°"
+          ],
+          "example": {
+            "question": "一个平角=（ ）度，一个周角=（ ）度",
+            "steps": [
+              "平角=180°",
+              "周角=360°"
+            ],
+            "answer": "180, 360"
+          },
+          "mistakes": [
+            {
+              "wrong": "平角=90°",
+              "correct": "直角才是90°"
+            }
+          ],
+          "memory_tip": "直角90→平角180→周角360，翻倍记！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E2",
+      "unit_name": "选择秒杀专区",
+      "cards": [
+        {
+          "card_id": "E2-01",
+          "full_id": "数学-四上-E2-01",
+          "title": "平行垂直选择题",
+          "type": "选择秒杀卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "平行垂直选择题是考试高频失分点",
+          "core_points": [
+            "垂直=交叉成90°",
+            "选B"
+          ],
+          "example": {
+            "question": "以下哪组线是互相垂直的？A.交叉成60° B.交叉成90° C.不相交",
+            "steps": [
+              "垂直=交叉成90°",
+              "选B"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {
+              "wrong": "选A以为只要交叉就垂直",
+              "correct": "必须90度才叫垂直"
+            }
+          ],
+          "memory_tip": "垂直=90°，其他角度只是相交！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E3",
+      "unit_name": "计算零失误",
+      "cards": [
+        {
+          "card_id": "E3-01",
+          "full_id": "数学-四上-E3-01",
+          "title": "三位数乘两位数竖式",
+          "type": "计算零失误卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "20-25%",
+          "definition": "三位数乘两位数竖式是考试高频失分点",
+          "core_points": [
+            "312×6=1872",
+            "312×20=6240",
+            "1872+6240=8112"
+          ],
+          "example": {
+            "question": "312 × 26 = ?",
+            "steps": [
+              "312×6=1872",
+              "312×20=6240",
+              "1872+6240=8112"
+            ],
+            "answer": "8112"
+          },
+          "mistakes": [
+            {
+              "wrong": "第二层没左移一位",
+              "correct": "乘十位时末尾要对齐十位"
+            }
+          ],
+          "memory_tip": "第二层乘十位数字，末尾对十位！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E4",
+      "unit_name": "判断火眼金睛",
+      "cards": [
+        {
+          "card_id": "E4-01",
+          "full_id": "数学-四上-E4-01",
+          "title": "判断：两条直线不相交就平行",
+          "type": "判断火眼卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "10-15%",
+          "definition": "判断：两条直线不相交就平行是考试高频失分点",
+          "core_points": [
+            "在同一平面内才成立",
+            "不在同一平面可能异面",
+            "但小学范围内默认同一平面"
+          ],
+          "example": {
+            "question": "不相交的两条直线一定互相平行。（  ）",
+            "steps": [
+              "在同一平面内才成立",
+              "不在同一平面可能异面",
+              "但小学范围内默认同一平面"
+            ],
+            "answer": "√（小学范围）"
+          },
+          "mistakes": [
+            {
+              "wrong": "✗考虑立体情况",
+              "correct": "小学默认同一平面"
+            }
+          ],
+          "memory_tip": "小学阶段：不相交=平行（同一平面）！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E5",
+      "unit_name": "应用题拆解",
+      "cards": [
+        {
+          "card_id": "E5-01",
+          "full_id": "数学-四上-E5-01",
+          "title": "统计图应用题",
+          "type": "应用题拆解卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "25-30%",
+          "definition": "统计图应用题是考试高频失分点",
+          "core_points": [
+            "读图获取5天数据",
+            "逐天相加",
+            "写完整答语"
+          ],
+          "example": {
+            "question": "根据统计图，食堂周一午餐用了180千克米，周二用了210千克，一周五天共用了多少？",
+            "steps": [
+              "读图获取5天数据",
+              "逐天相加",
+              "写完整答语"
+            ],
+            "answer": "看图计算"
+          },
+          "mistakes": [
+            {
+              "wrong": "只看了2天就算",
+              "correct": "要看完5天才能求总数"
+            }
+          ],
+          "memory_tip": "看清纵轴单位和每格代表的数量！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    },
+    {
+      "unit_id": "E6",
+      "unit_name": "操作题规范",
+      "cards": [
+        {
+          "card_id": "E6-01",
+          "full_id": "数学-四上-E6-01",
+          "title": "量角器操作规范",
+          "type": "操作题规范卡",
+          "difficulty": 3,
+          "importance": 5,
+          "exam_frequency": "高",
+          "score_weight": "5-10%",
+          "definition": "量角器操作规范是考试高频失分点",
+          "core_points": [
+            "1.中心点对齐顶点",
+            "2.零刻度线对齐一条边",
+            "3.另一条边读度数",
+            "4.判断用内圈还是外圈"
+          ],
+          "example": {
+            "question": "用量角器量一个角的度数",
+            "steps": [
+              "1.中心点对齐顶点",
+              "2.零刻度线对齐一条边",
+              "3.另一条边读度数",
+              "4.判断用内圈还是外圈"
+            ],
+            "answer": "准确度数"
+          },
+          "mistakes": [
+            {
+              "wrong": "内外圈读反",
+              "correct": "先判断是锐角还是钝角再读数"
+            }
+          ],
+          "memory_tip": "角小于90°用小数，大于90°用大数！",
+          "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+        }
+      ]
+    }
+  ]
+}
