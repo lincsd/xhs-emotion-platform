@@ -10574,9 +10574,10 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           };
 
           // 提交异步任务
+          var _authTk = getAuthToken();
           var submitResp = await _fetchRetry(API_BASE + '/api/generate-card-image-v3-async', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: Object.assign({'Content-Type': 'application/json'}, _authTk ? {'Authorization': 'Bearer ' + _authTk} : {}),
             body: JSON.stringify(taskPayload),
             signal: _abortSignalTimeout(30000)
           }, 2);
@@ -11019,9 +11020,10 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
             emotion_hook: card.emotion_hook || '', trap_point: card.trap_point || ''
           };
 
+          const _authTk2 = getAuthToken();
           const res = await _fetchRetry(API_BASE + '/api/generate-prompt-record', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: Object.assign({ 'Content-Type': 'application/json' }, _authTk2 ? {'Authorization': 'Bearer ' + _authTk2} : {}),
             body: JSON.stringify({ card: cardData, subject: subject })
           }, 2);
 
@@ -11270,9 +11272,10 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         }
 
         try {
+          const _authTk3 = getAuthToken();
           const r = await _fetchRetry(API_BASE + '/api/generate-note', {
             method: 'POST',
-            headers: {'Content-Type':'application/json'},
+            headers: Object.assign({'Content-Type':'application/json'}, _authTk3 ? {'Authorization': 'Bearer ' + _authTk3} : {}),
             body: JSON.stringify(reqBody)
           }, 2);
           const d = await _safeJsonParse(r);
