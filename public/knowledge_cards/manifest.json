@@ -1344,6 +1344,17 @@
         "units": 3,
         "cards": 3,
         "is_summary": true
+      },
+      {
+        "file": "英语_状语从句.json",
+        "subject": "英语",
+        "grade": "高中语法",
+        "semester": "专题",
+        "grade_short": "状语从句",
+        "card_pack": "语法辨析",
+        "is_boom": false,
+        "units": 4,
+        "cards": 9
       }
     ],
     "养生减脂": [
@@ -1433,6 +1444,6 @@
       }
     ]
   },
-  "total_cards": 1815,
-  "total_files": 136
+  "total_cards": 1824,
+  "total_files": 137
 }

@@ -197,6 +197,8 @@ CARD_TYPE_VISUAL_RULES = {
     '自我疗愈卡': "愈合阶段时间轴+自我关怀清单+温暖渐变色调",
     # 知识总结专题
     '知识总结卡': "思维导图式布局+核心知识点/公式大字色块+记忆口诀高亮+易错✗✓对比",
+    # 语法辨析专题
+    '语法辨析卡': "双栏引导词对比(左蓝右橙)+语法规则色块+中英双语例句分层+易混点红圈标注+记忆口诀底栏金色",
 }
 
 def _detect_vertical_calc(card):
@@ -345,11 +347,64 @@ LINE2: 第二处文字
 提示词长度: 350-500 英文单词。"""
 
 
+_GRAMMAR_TYPES = {'语法辨析卡'}
+
 def _build_card_info(card, subject, grade, semester):
-    """构建传给 prompt 生成器的卡片信息（自动区分教育/养生类）"""
+    """构建传给 prompt 生成器的卡片信息（自动区分教育/养生/语法类）"""
     if subject in _WELLNESS_SUBJECTS:
         return _build_card_info_wellness(card, subject, grade, semester)
+    if card.get('type') in _GRAMMAR_TYPES:
+        return _build_card_info_grammar(card, subject, grade, semester)
     return _build_card_info_edu(card, subject, grade, semester)
+
+
+def _build_card_info_grammar(card, subject, grade, semester):
+    """构建语法辨析类卡片信息（中英双语，引导词对比为核心）"""
+    card_type = card.get('type', '语法辨析卡')
+
+    example_info = ''
+    example_steps = ''
+    if card.get('example'):
+        ex = card['example']
+        example_info = (ex.get('question') or '')[:150]
+        if ex.get('steps'):
+            steps_text = '\n'.join(f'  {i+1}. {s}' for i, s in enumerate(ex['steps'][:5]))
+            example_steps = f"\n【辨析步骤】:\n{steps_text[:500]}"
+        if ex.get('answer'):
+            example_steps += f"\n【判断结论】: {str(ex['answer'])[:200]}"
+
+    points = card.get('core_points', [])[:5]
+    clean_pts = [str(p)[:100] for p in points]
+
+    mistakes_info = ''
+    if card.get('mistakes'):
+        m = card['mistakes'][0]
+        mistakes_info = f"\n易混对比: ❌{m.get('wrong', '')[:150]} → ✅{m.get('correct', '')[:150]}"
+
+    hook = ''
+    if card.get('emotion_hook'):
+        hook = f"\n情绪钩子: {card['emotion_hook'][:100]}"
+
+    trap = ''
+    if card.get('trap_point'):
+        trap = f"\n陷阱考点: {card['trap_point'][:100]}"
+
+    return f"""学科: {subject} | 专题: {grade} {semester}
+标题: {card.get('title', '')} | 类型: {card_type}
+🔑 语法辨析类：核心是引导词/句型的对比区分
+
+【例句辨析】: {example_info or '根据语法点构造对比例句'}
+{example_steps}
+
+【语法规则】: {card.get('definition', '')[:150]}
+【引导词要点】:
+{chr(10).join('• ' + p for p in clean_pts[:4])}
+【记忆口诀】(≤10字): {card.get('memory_tip', '')[:60]}
+{mistakes_info}
+{trap}
+{hook}
+难度: {card.get('difficulty', 3)}/5
+⚠️ 视觉要求：左右双栏对比引导词用法，中英双语例句，易混点红圈标注"""
 
 
 def _build_card_info_wellness(card, subject, grade, semester):

@@ -1,0 +1,371 @@
+{
+  "subject": "英语",
+  "grade": "高中语法",
+  "semester": "专题",
+  "textbook": "通用",
+  "grade_short": "状语从句",
+  "card_pack": "语法辨析",
+  "description": "英语状语从句四大类型深度辨析——地点、方式、结果、让步状语从句，涵盖引导词用法、易混辨析、高考高频考点。",
+  "units": [
+    {
+      "unit_id": "G1",
+      "unit_name": "地点状语从句",
+      "cards": [
+        {
+          "card_id": "G1-01",
+          "full_id": "英语-状语从句-G1-01",
+          "title": "where引导的地点状语从句",
+          "type": "语法辨析卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "where引导地点状语从句，表示「在……的地方」，修饰主句谓语动词，说明动作发生的地点。",
+          "core_points": [
+            "where = in/at the place where，表「在……地方」",
+            "从句可置于主句前或后，前置时常加逗号",
+            "区分where引导的地点状语从句和定语从句：状语从句中where前无先行词",
+            "常见搭配：Stay where you are. / Put it where you found it."
+          ],
+          "example": {
+            "question": "Where there is a will, there is a way. 此句中where引导什么从句？",
+            "steps": [
+              "1. 观察where前面有没有先行词（名词）",
+              "2. 没有先行词→地点状语从句",
+              "3. 翻译：在有意志的地方，就有出路"
+            ],
+            "answer": "where引导地点状语从句，表「在……的地方」，整句意为「有志者事竟成」。"
+          },
+          "mistakes": [
+            {
+              "wrong": "混淆where引导的定语从句：This is the place where I was born.（有先行词place→定语从句）",
+              "correct": "Where I was born is a small village.（无先行词→地点状语从句）"
+            }
+          ],
+          "memory_tip": "where前无名词→状语从句；where前有名词→定语从句！",
+          "emotion_hook": "99%的同学分不清where到底引导什么从句，一招秒判！",
+          "trap_point": "where既能引导定语从句也能引导状语从句，关键看前面有没有先行词。",
+          "related": {
+            "prerequisite": "定语从句基础",
+            "next": "G1-02 wherever引导的地点状语从句"
+          }
+        },
+        {
+          "card_id": "G1-02",
+          "full_id": "英语-状语从句-G1-02",
+          "title": "wherever/anywhere/everywhere引导的地点状语从句",
+          "type": "语法辨析卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "wherever/anywhere/everywhere引导地点状语从句，表示「无论在哪里/到处」，强调地点的不确定性或普遍性。",
+          "core_points": [
+            "wherever = no matter where，表「无论在哪里」",
+            "anywhere 口语化，表「在任何地方」",
+            "everywhere 表「到处/每一处」",
+            "三者可互换但语气不同：wherever最正式，anywhere最口语"
+          ],
+          "example": {
+            "question": "Wherever you go, I will follow you. 能否替换为anywhere?",
+            "steps": [
+              "1. wherever = 无论在哪里（强调让步语气）",
+              "2. anywhere = 在任何地方（偏口语）",
+              "3. 替换后：Anywhere you go, I will follow you. ✓语法正确但语气弱"
+            ],
+            "answer": "可以替换，但wherever更正式、语气更强烈。高考作文推荐用wherever。"
+          },
+          "mistakes": [
+            {
+              "wrong": "Everywhere you go, you should obey the law.（everywhere通常不引导让步含义的从句）",
+              "correct": "Wherever you go, you should obey the law."
+            }
+          ],
+          "memory_tip": "无论哪→wherever最强，anywhere口语化，everywhere「到处都」！",
+          "emotion_hook": "wherever/anywhere/everywhere傻傻分不清？三个词一张图全搞定！",
+          "trap_point": "高考完形填空常考三者区别，需根据语境选择正确的引导词。",
+          "related": {
+            "prerequisite": "G1-01",
+            "next": "G2-01 方式状语从句"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "G2",
+      "unit_name": "方式状语从句",
+      "cards": [
+        {
+          "card_id": "G2-01",
+          "full_id": "英语-状语从句-G2-01",
+          "title": "as / just as 引导的方式状语从句",
+          "type": "语法辨析卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "as引导方式状语从句，表示「正如/像……一样」，描述主句动作的方式与从句一致。just as加强语气。",
+          "core_points": [
+            "as表「正如/按照……方式」：Do as I say.",
+            "just as表「正如/恰如」，语气更强：Just as water is to fish, so is air to humans.",
+            "as引导的方式从句通常放在主句后面",
+            "区分as引导的时间从句（当……时候）和方式从句（像……一样）"
+          ],
+          "example": {
+            "question": "When in Rome, do as the Romans do. 此句as引导什么从句？",
+            "steps": [
+              "1. as the Romans do = 像罗马人那样做",
+              "2. 描述「做」的方式→方式状语从句",
+              "3. 整句翻译：入乡随俗"
+            ],
+            "answer": "as引导方式状语从句，表示「按照/像……那样」。"
+          },
+          "mistakes": [
+            {
+              "wrong": "As I was walking home, it rained.（as=当……时→时间状语从句，不是方式）",
+              "correct": "Please do it as I showed you.（as=按照……方式→方式状语从句）"
+            }
+          ],
+          "memory_tip": "as后接「怎么做」→方式从句；as后接「什么时候」→时间从句！",
+          "emotion_hook": "一个as竟然能引导5种从句？方式状语从句这样辨别最简单！",
+          "trap_point": "as是英语中最多义的连词之一，需要根据语境判断引导的从句类型。",
+          "related": {
+            "prerequisite": "as的多种用法",
+            "next": "G2-02 as if/as though引导的方式状语从句"
+          }
+        },
+        {
+          "card_id": "G2-02",
+          "full_id": "英语-状语从句-G2-02",
+          "title": "as if / as though / the way 引导的方式状语从句",
+          "type": "语法辨析卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "as if/as though表「好像/仿佛」，常接虚拟语气；the way/in the way that表「以……方式」，语气较客观。",
+          "core_points": [
+            "as if = as though，表「好像/仿佛」，可接虚拟语气",
+            "与事实相反用虚拟：He talks as if he knew everything.（实际不知道）",
+            "与事实一致用陈述：It looks as if it is going to rain.（确实要下雨）",
+            "the way = in the way (that)，表「按照……方式」：I did it the way you told me."
+          ],
+          "example": {
+            "question": "He speaks English as if he were a native speaker. 为什么用were不用was？",
+            "steps": [
+              "1. as if引导的从句表示与事实相反的假设",
+              "2. 他不是母语者→与现在事实相反→用一般过去时虚拟",
+              "3. 虚拟语气中be动词统一用were（正式用法）"
+            ],
+            "answer": "as if从句表示与现在事实相反的假设，使用虚拟语气，be动词用were。"
+          },
+          "mistakes": [
+            {
+              "wrong": "She looked as if she has cried.（虚拟语气时态错误）",
+              "correct": "She looked as if she had cried.（与过去事实相反→过去完成时）"
+            }
+          ],
+          "memory_tip": "as if + 真的→陈述语气；as if + 假的→虚拟语气！过去退一格！",
+          "emotion_hook": "as if后面到底该用什么时态？虚拟语气一张图彻底讲透！",
+          "trap_point": "高考语法填空必考：as if后的虚拟语气时态选择。",
+          "related": {
+            "prerequisite": "G2-01",
+            "next": "G3-01 结果状语从句"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "G3",
+      "unit_name": "结果状语从句",
+      "cards": [
+        {
+          "card_id": "G3-01",
+          "full_id": "英语-状语从句-G3-01",
+          "title": "so...that 与 such...that 结果状语从句",
+          "type": "语法辨析卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "so...that和such...that都表示「如此……以至于」，引导结果状语从句。so修饰形容词/副词，such修饰名词（短语）。",
+          "core_points": [
+            "so + adj./adv. + that：He ran so fast that nobody could catch him.",
+            "such + a/an + adj. + n. + that：It was such a hot day that we stayed indoors.",
+            "so + adj. + a/an + n. + that = such + a/an + adj. + n. + that",
+            "特殊：so many/much/few/little + n. + that（不用such）"
+          ],
+          "example": {
+            "question": "The book is ___ interesting ___ I can't put it down. 填so...that还是such...that？",
+            "steps": [
+              "1. 空格后紧跟interesting（形容词）",
+              "2. so修饰形容词 → 用so...that",
+              "3. The book is so interesting that I can't put it down."
+            ],
+            "answer": "so...that。因为直接修饰形容词interesting，用so。"
+          },
+          "mistakes": [
+            {
+              "wrong": "It was so a beautiful flower that... (❌ so不能直接修饰a+adj.+n.)",
+              "correct": "It was such a beautiful flower that... 或 It was so beautiful a flower that..."
+            }
+          ],
+          "memory_tip": "so后跟「形/副」，such后跟「名词短语」；many/much/few/little永远跟so！",
+          "emotion_hook": "so...that和such...that到底怎么选？这道题全班80%做错！",
+          "trap_point": "so beautiful a flower = such a beautiful flower，但so a beautiful flower ❌",
+          "related": {
+            "prerequisite": "形容词与副词的区别",
+            "next": "G3-02 so that结果/目的从句辨析"
+          }
+        },
+        {
+          "card_id": "G3-02",
+          "full_id": "英语-状语从句-G3-02",
+          "title": "so that 结果从句 vs 目的从句辨析",
+          "type": "语法辨析卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "so that既可引导结果状语从句（因此/所以），也可引导目的状语从句（为了/以便）。区分关键看从句中有无情态动词。",
+          "core_points": [
+            "目的从句：so that + can/could/may/might/will/would → 「为了/以便」",
+            "结果从句：so that + 一般陈述句（无情态动词）→ 「因此/所以」",
+            "目的从句可替换为in order that；结果从句不可",
+            "口语中so that表结果时常省略that，只用so"
+          ],
+          "example": {
+            "question": "He got up early so that he could catch the bus. 这是结果还是目的？",
+            "steps": [
+              "1. so that后面有could（情态动词）",
+              "2. 有情态动词→目的状语从句",
+              "3. 翻译：他早起以便赶上公交车"
+            ],
+            "answer": "目的状语从句。从句含情态动词could，表「为了赶公交」。"
+          },
+          "mistakes": [
+            {
+              "wrong": "混淆：He was tired so that he went to bed early.（去掉that更地道）",
+              "correct": "He was so tired that he went to bed early.（so...that结果从句）"
+            }
+          ],
+          "memory_tip": "so that + 情态动词 = 目的（为了）；so that + 普通句 = 结果（所以）！",
+          "emotion_hook": "同样是so that，一种表目的一种表结果，你分得清吗？",
+          "trap_point": "高考单选和完形常设置so that的双重含义陷阱。",
+          "related": {
+            "prerequisite": "G3-01",
+            "next": "G4-01 让步状语从句"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "G4",
+      "unit_name": "让步状语从句",
+      "cards": [
+        {
+          "card_id": "G4-01",
+          "full_id": "英语-状语从句-G4-01",
+          "title": "although/though/even though/even if 让步状语从句",
+          "type": "语法辨析卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "although/though/even though/even if都可引导让步状语从句，表「虽然/即使」，但语气强弱和用法有区别。",
+          "core_points": [
+            "although = though，表「虽然」，although更正式",
+            "though可放句末做副词（However/But语气）：It was hard, though.",
+            "even though = 即使（已知事实）：Even though it rained, we went out.",
+            "even if = 即使/哪怕（假设情况）：Even if it rains tomorrow, I will go.",
+            "although/though不与but同时使用！"
+          ],
+          "example": {
+            "question": "_____ he is young, he is very experienced. 填Although还是But？",
+            "steps": [
+              "1. 句子需要「虽然……但是」的逻辑",
+              "2. although和but不能同时出现",
+              "3. 空格在前半句 → 用Although引导让步从句"
+            ],
+            "answer": "Although。although与but二选一，不能同时使用。"
+          },
+          "mistakes": [
+            {
+              "wrong": "Although he is tired, but he kept working.（❌ although和but不能共用）",
+              "correct": "Although he is tired, he kept working. 或 He is tired, but he kept working."
+            }
+          ],
+          "memory_tip": "「虽but」不同框！用了although就不能再用but！",
+          "emotion_hook": "although和but不能一起用？90%的同学在这里翻车！",
+          "trap_point": "中文「虽然……但是」对应英语只能选其一：although或but。",
+          "related": {
+            "prerequisite": "连词基础",
+            "next": "G4-02 疑问词-ever/no matter引导的让步状语从句"
+          }
+        },
+        {
+          "card_id": "G4-02",
+          "full_id": "英语-状语从句-G4-02",
+          "title": "疑问词-ever与no matter+疑问词 让步状语从句",
+          "type": "语法辨析卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "whatever/whoever/however/wherever/whenever等和no matter what/who/how/where/when都可引导让步状语从句，表「无论……」。但疑问词-ever还能引导名词性从句，no matter+疑问词不能。",
+          "core_points": [
+            "whatever = no matter what：无论什么",
+            "whoever = no matter who：无论谁",
+            "however = no matter how：无论多么（however + adj./adv.）",
+            "wherever = no matter where：无论在哪里",
+            "关键区别：疑问词-ever可引导名词性从句，no matter+疑问词只能引导让步状语从句",
+            "however + adj./adv. + 主 + 谓 = no matter how + adj./adv. + 主 + 谓"
+          ],
+          "example": {
+            "question": "___ happens, don't give up. 填Whatever还是No matter what？",
+            "steps": [
+              "1. 两者都可表「无论什么」引导让步状语从句",
+              "2. 在让步状语从句中两者可以互换",
+              "3. Whatever happens = No matter what happens"
+            ],
+            "answer": "两者均可。在让步状语从句中whatever = no matter what。"
+          },
+          "mistakes": [
+            {
+              "wrong": "I will eat no matter what you cook.（❌ 此处what引导宾语从句，不能用no matter what）",
+              "correct": "I will eat whatever you cook.（whatever引导宾语从句=名词性从句）"
+            }
+          ],
+          "memory_tip": "让步从句wh-ever和no matter通用；名词性从句只能用wh-ever！",
+          "emotion_hook": "whatever和no matter what真的完全一样吗？这个区别高考必考！",
+          "trap_point": "名词性从句（主语/宾语/表语从句）中只能用wh-ever，不能用no matter+疑问词。",
+          "related": {
+            "prerequisite": "G4-01",
+            "next": "更多状语从句类型"
+          }
+        },
+        {
+          "card_id": "G4-03",
+          "full_id": "英语-状语从句-G4-03",
+          "title": "while引导的让步状语从句",
+          "type": "语法辨析卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "while除了引导时间状语从句（当……时候），还可引导让步状语从句，表「虽然/尽管」，通常放在句首，表示与主句的对比转折。",
+          "core_points": [
+            "while = although，表「虽然/尽管」，通常置于句首",
+            "While I understand your point, I disagree.（虽然我理解你的观点，但我不同意）",
+            "while引导让步从句时语气比although更委婉",
+            "区分while的三种含义：时间（当……时）、让步（虽然）、对比（然而）"
+          ],
+          "example": {
+            "question": "While the job is difficult, it is rewarding. 此处while表示什么？",
+            "steps": [
+              "1. while放句首，后面是「工作很难」",
+              "2. 主句是「很有回报」→前后形成对比让步关系",
+              "3. while = although = 虽然"
+            ],
+            "answer": "while表让步「虽然」。虽然工作很难，但很有回报。"
+          },
+          "mistakes": [
+            {
+              "wrong": "While I was sleeping, the phone rang.（while=当……时候→时间状语从句）混淆为让步",
+              "correct": "While he is rich, he is not happy.（while=虽然→让步状语从句）"
+            }
+          ],
+          "memory_tip": "while + 进行时 = 时间「当时」；while + 对比内容 = 让步「虽然」！",
+          "emotion_hook": "while竟然不只是「当……时候」！这个隐藏含义考试常考！",
+          "trap_point": "while的多义性是高考阅读理解和完形填空的高频考点。",
+          "related": {
+            "prerequisite": "G4-01",
+            "next": "状语从句综合复习"
+          }
+        }
+      ]
+    }
+  ]
+}
