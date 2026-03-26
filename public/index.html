@@ -2179,6 +2179,20 @@
           <div id="my-orders-list" style="font-size:13px; color:var(--text-light);">加载中...</div>
         </div>
 
+        <!-- AI 消费明细 -->
+        <div class="card" style="margin-top:16px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+            <h3>📊 AI 消费明细</h3>
+            <button class="btn btn-sm btn-outline" onclick="loadUsageHistory(1)" style="font-size:12px;">刷新</button>
+          </div>
+          <!-- 每日汇总 -->
+          <div id="usage-daily-summary" style="margin-bottom:12px;"></div>
+          <!-- 明细列表 -->
+          <div id="usage-history-list" style="font-size:13px; color:var(--text-light);">点击"刷新"加载消费记录</div>
+          <!-- 分页 -->
+          <div id="usage-history-pager" style="margin-top:8px; text-align:center;"></div>
+        </div>
+
         <!-- 管理员订单管理（输入管理密钥展开） -->
         <div class="card" style="margin-top:16px;">
           <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
@@ -3704,8 +3718,12 @@
       </div>
       <div class="quota-modal-body">
         <div class="qm-icon">💎</div>
-        <div class="qm-title">今日免费次数已用完</div>
-        <div class="qm-desc">您今天的 10 次免费 AI 调用已用完。<br>充值积分即可继续使用所有 AI 功能。</div>
+        <div class="qm-title" id="quota-modal-title">今日免费次数已用完</div>
+        <div class="qm-desc" id="quota-modal-desc">您今天的 10 次免费 AI 调用已用完。<br>充值积分即可继续使用所有 AI 功能。</div>
+        <div id="quota-modal-cost-info" style="margin:12px 0; padding:10px; background:#fff0f0; border-radius:8px; font-size:13px; display:none;">
+          <span style="font-weight:600;">本次操作需要 <span id="quota-cost-val" style="color:#ff4d4f;">0</span> 积分</span>，
+          当前余额 <span id="quota-balance-val" style="color:#ff4d4f; font-weight:600;">0</span> 积分
+        </div>
         <div style="margin:12px 0; padding:10px; background:var(--bg); border-radius:8px; font-size:12px;">
           <div style="font-weight:600; margin-bottom:6px; font-size:13px;">💰 各功能积分消耗</div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:3px 12px;">
@@ -5400,12 +5418,20 @@ ${baiduContent}
                 signal: _abortSignalTimeout(proxyTimeout),
                 body: reqBody
               });
+              // 处理 401 未登录
+              if (res.status === 401) {
+                const errData = await res.json().catch(() => ({}));
+                if (errData.authRequired) {
+                  showLoginPage();
+                  throw { fromProxy: true, status: 401, data: errData, authRequired: true };
+                }
+              }
               // 处理 429 配额超限
               if (res.status === 429) {
                 const errData = await res.json().catch(() => ({}));
                 if (errData.quotaExceeded) {
                   loadCreditsInfo();
-                  showQuotaExceeded();
+                  showQuotaExceeded(errData);
                   throw { fromProxy: true, status: 429, data: errData, quotaExceeded: true };
                 }
               }
@@ -9035,10 +9061,16 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
     const KnowledgeCards = (() => {
       // ── 配置 ──
       const GRADES_ORDER = ['一上','一下','二上','二下','三上','三下','四上','四下','五上','五下','六上','六下'];
+      const GRADES_ORDER_CZ = ['七上','七下','八上','八下','九上','九下'];
+      const GRADES_ORDER_GZ = ['高一上','高一下','高二上','高二下','高三上','高三下'];
       const GRADE_LABELS = {
         '一上':'一年级上册','一下':'一年级下册','二上':'二年级上册','二下':'二年级下册',
         '三上':'三年级上册','三下':'三年级下册','四上':'四年级上册','四下':'四年级下册',
-        '五上':'五年级上册','五下':'五年级下册','六上':'六年级上册','六下':'六年级下册'
+        '五上':'五年级上册','五下':'五年级下册','六上':'六年级上册','六下':'六年级下册',
+        '七上':'七年级上册','七下':'七年级下册','八上':'八年级上册','八下':'八年级下册',
+        '九上':'九年级上册','九下':'九年级下册',
+        '高一上':'高一上册','高一下':'高一下册','高二上':'高二上册','高二下':'高二下册',
+        '高三上':'高三上册','高三下':'高三下册'
       };
 
       // ── 赛道配置 ──
@@ -9076,6 +9108,28 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
             { key: '恋爱', icon: '💘', label: '恋爱' }
           ],
           defaultSubject: '恋爱', defaultGrade: '谈恋爱'
+        },
+        '初中': {
+          label: '初中教育', icon: '📚', folder: '初中',
+          subjects: [
+            { key: '数学', icon: '📐', label: '数学' },
+            { key: '语文', icon: '📖', label: '语文' },
+            { key: '英语', icon: '🔤', label: '英语' }
+          ],
+          defaultSubject: '数学', defaultGrade: '七上',
+          fixedGrades: GRADES_ORDER_CZ,
+          summaryOnly: true
+        },
+        '高中': {
+          label: '高中教育', icon: '🎓', folder: '高中',
+          subjects: [
+            { key: '数学', icon: '📐', label: '数学' },
+            { key: '语文', icon: '📖', label: '语文' },
+            { key: '英语', icon: '🔤', label: '英语' }
+          ],
+          defaultSubject: '数学', defaultGrade: '高一上',
+          fixedGrades: GRADES_ORDER_GZ,
+          summaryOnly: true
         }
       };
       function _stageSubjects() { return STAGE_CONFIG[currentStageKey]?.subjects || []; }
@@ -9128,18 +9182,22 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
       function getGradesForSubject() {
         const cfg = STAGE_CONFIG[currentStageKey];
         if (manifestData?.stages?.[currentStageKey]) {
+          // For summary-only stages (初中/高中), include is_summary entries in grade list
+          const isSummaryOnly = cfg?.summaryOnly === true;
           const manifestGrades = manifestData.stages[currentStageKey]
-            .filter(e => e.subject === currentSubject && !e.is_boom && !e.is_exam && !e.is_summary)
+            .filter(e => e.subject === currentSubject && !e.is_boom && !e.is_exam && (isSummaryOnly || !e.is_summary))
             .map(e => e.grade_short);
+          // Deduplicate
+          const uniqueGrades = [...new Set(manifestGrades)];
           if (cfg?.fixedGrades) {
             // 保留固定顺序，同时追加 manifest 中新增的年级/专题（如 状语从句）
-            const extras = manifestGrades.filter(g => !cfg.fixedGrades.includes(g));
-            const merged = [...cfg.fixedGrades.filter(g => manifestGrades.includes(g)), ...extras];
+            const extras = uniqueGrades.filter(g => !cfg.fixedGrades.includes(g));
+            const merged = [...cfg.fixedGrades.filter(g => uniqueGrades.includes(g)), ...extras];
             console.log('[KC] getGradesForSubject (merged):', currentStageKey, currentSubject, '→', merged);
             return merged;
           }
-          console.log('[KC] getGradesForSubject:', currentStageKey, currentSubject, '→', manifestGrades);
-          return manifestGrades;
+          console.log('[KC] getGradesForSubject:', currentStageKey, currentSubject, '→', uniqueGrades);
+          return uniqueGrades;
         }
         if (cfg?.fixedGrades) return cfg.fixedGrades;
         console.warn('[KC] getGradesForSubject: no manifest data for stage', currentStageKey, 'manifestData=', !!manifestData);
@@ -9162,6 +9220,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         let stdFile = `${base}${currentSubject}_${gradeShort}.json`;
         let boomFile = `${base}${currentSubject}_${gradeShort}_爆款.json`;
         let examFiles = []; // 考卷真题包
+        let summaryFiles = []; // 知识总结包
         // Manifest-driven: look up actual filenames
         if (manifestData?.stages?.[currentStageKey]) {
           const entries = manifestData.stages[currentStageKey];
@@ -9177,7 +9236,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           if (std) stdFile = base + std.file;
           if (boom) boomFile = base + boom.file;
           examFiles = exams.map(e => base + e.file);
-          const summaryFiles = summaries.map(e => base + e.file);
+          summaryFiles = summaries.map(e => base + e.file);
           console.log('[KC] manifest lookup: std=', std?.file, 'boom=', boom?.file, 'exam=', exams.map(e=>e.file), 'summary=', summaries.map(e=>e.file));
         } else {
           console.warn('[KC] loadGrade: no manifest data for stage', currentStageKey);
@@ -9192,7 +9251,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
             fetch(encodeURI(stdFile)),
             fetch(encodeURI(boomFile)).catch(err => { console.warn('[KC] boom fetch error:', err); return null; }),
             ...examFiles.map(f => fetch(encodeURI(f)).catch(err => { console.warn('[KC] exam fetch error:', err); return null; })),
-            ...(typeof summaryFiles !== 'undefined' ? summaryFiles : []).map(f => fetch(encodeURI(f)).catch(err => { console.warn('[KC] summary fetch error:', err); return null; }))
+            ...summaryFiles.map(f => fetch(encodeURI(f)).catch(err => { console.warn('[KC] summary fetch error:', err); return null; }))
           ];
           const [stdResp, boomResp, ...restResps] = await Promise.all(fetchPromises);
           const examResps = restResps.slice(0, examFiles.length);
@@ -9337,7 +9396,9 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
             '小学': '小学数学语文英语全年级知识卡 · 一年级到六年级 · 按年级/单元浏览 · 下载精美卡片图',
             '养生减脂': '女生养生减脂知识卡 · 经期调理/体质辨识/饮食运动/融合方案 · 34张专业卡片',
             '国学文化': '国学文化知识卡 · 古代预言故事/经典智慧 · 按专题浏览 · 下载精美卡片图',
-            '情感生活': '情感生活知识卡 · 恋爱心理/约会攻略/避雷指南/自我疗愈 · 18张实用卡片'
+            '情感生活': '情感生活知识卡 · 恋爱心理/约会攻略/避雷指南/自我疗愈 · 18张实用卡片',
+            '初中': '初中数学语文英语全年级考点总结 · 七年级到九年级 · 219张精华知识卡',
+            '高中': '高中数学语文英语全年级考点总结 · 高一到高三 · 209张精华知识卡'
           };
           desc.textContent = descMap[stageKey] || STAGE_CONFIG[stageKey]?.label + '知识卡';
         }
@@ -20811,6 +20872,8 @@ Style: ${stylePrompt}
       } catch {}
       // 加载订单
       loadMyOrders();
+      // 加载消费明细
+      loadUsageHistory(1);
     }
 
     async function createOrder(packageId) {
@@ -21304,11 +21367,64 @@ Style: ${stylePrompt}
       }
     }
 
+    // ===== 消费明细 =====
+    let _usageHistoryPage = 1;
+    async function loadUsageHistory(page) {
+      _usageHistoryPage = page || 1;
+      const listEl = document.getElementById('usage-history-list');
+      const pagerEl = document.getElementById('usage-history-pager');
+      const summaryEl = document.getElementById('usage-daily-summary');
+      listEl.innerHTML = '<span style="color:var(--info);">加载中...</span>';
+      try {
+        const data = await api(`/api/user/usage-history?page=${_usageHistoryPage}`);
+        if (!data || data.error) { listEl.innerHTML = `<span style="color:#ff4d4f;">${data?.error || '加载失败'}</span>`; return; }
+        // 每日汇总
+        if (data.dailySummary && data.dailySummary.length) {
+          summaryEl.innerHTML = '<div style="font-size:12px; font-weight:600; margin-bottom:6px;">最近7天消耗</div>' +
+            '<div style="display:flex; gap:6px; flex-wrap:wrap;">' +
+            data.dailySummary.map(d => `<div style="background:var(--bg); padding:4px 10px; border-radius:6px; font-size:12px; text-align:center;"><div style="color:var(--text-light);">${d.date.slice(5)}</div><div style="font-weight:600; color:var(--primary);">${d.total_cost}分/${d.count}次</div></div>`).join('') +
+            '</div>';
+        } else { summaryEl.innerHTML = ''; }
+        // 明细列表
+        if (data.records && data.records.length) {
+          const featureNames = {'gemini_proxy':'AI代理','xhs_note':'内容生成','card_image':'图片生成','card_image_v3':'图片生成v3','prompt_record':'提示记录','card_match':'卡片匹配'};
+          listEl.innerHTML = '<div style="display:flex; flex-direction:column; gap:6px;">' +
+            data.records.map(r => {
+              const fname = featureNames[r.feature] || r.feature;
+              const t = new Date(r.created_at).toLocaleString('zh-CN', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+              return `<div style="display:flex; justify-content:space-between; align-items:center; padding:6px 8px; background:var(--bg); border-radius:6px;"><span>${fname} <span style="color:var(--text-light); font-size:11px;">${t}</span></span><span style="color:#ff4d4f; font-weight:600;">-${r.cost}分</span></div>`;
+            }).join('') + '</div>';
+        } else {
+          listEl.innerHTML = '<span style="color:var(--text-light);">暂无消费记录</span>';
+        }
+        // 分页
+        const totalPages = Math.ceil((data.total || 0) / (data.perPage || 30));
+        if (totalPages > 1) {
+          let btns = '';
+          if (_usageHistoryPage > 1) btns += `<button class="btn btn-sm btn-outline" onclick="loadUsageHistory(${_usageHistoryPage-1})" style="font-size:12px;">上一页</button> `;
+          btns += `<span style="font-size:12px; color:var(--text-light); margin:0 8px;">${_usageHistoryPage}/${totalPages}</span>`;
+          if (_usageHistoryPage < totalPages) btns += ` <button class="btn btn-sm btn-outline" onclick="loadUsageHistory(${_usageHistoryPage+1})" style="font-size:12px;">下一页</button>`;
+          pagerEl.innerHTML = btns;
+        } else { pagerEl.innerHTML = ''; }
+      } catch (e) {
+        listEl.innerHTML = '<span style="color:#ff4d4f;">加载失败，请重试</span>';
+      }
+    }
+
     let _quotaModalShownAt = 0;
-    function showQuotaExceeded() {
+    function showQuotaExceeded(info) {
       const now = Date.now();
       if (now - _quotaModalShownAt < 5000) return; // 5秒内不重复弹窗
       _quotaModalShownAt = now;
+      // 动态显示消耗/余额信息
+      const costInfoEl = document.getElementById('quota-modal-cost-info');
+      if (info && typeof info.cost === 'number') {
+        document.getElementById('quota-cost-val').textContent = info.cost;
+        document.getElementById('quota-balance-val').textContent = info.credits ?? 0;
+        costInfoEl.style.display = 'block';
+      } else if (costInfoEl) {
+        costInfoEl.style.display = 'none';
+      }
       openModal('modal-quota-exceeded');
     }
 

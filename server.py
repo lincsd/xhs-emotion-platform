@@ -70,6 +70,9 @@ CREDIT_PACKAGES = [
     {'id': 'pkg_2000', 'name': '团队包',  'credits': 2000, 'price': 199,   'badge': '最划算'},
 ]
 
+# 新用户初始积分
+NEW_USER_INITIAL_CREDITS = 30  # 新用户注册赠送30积分（够体验多个功能）
+
 # 邀请奖励配置
 INVITE_REWARD_INVITER = 20    # 邀请人获得积分
 INVITE_REWARD_INVITEE = 10    # 被邀请人获得积分
@@ -318,6 +321,7 @@ def init_db():
             user_id INTEGER NOT NULL,
             date TEXT NOT NULL,
             feature TEXT NOT NULL,
+            cost INTEGER DEFAULT 0,
             created_at TEXT DEFAULT (datetime('now','localtime'))
         );
         CREATE INDEX IF NOT EXISTS idx_ai_usage_user_date ON ai_usage(user_id, date);
@@ -397,6 +401,12 @@ def init_db():
         CREATE INDEX IF NOT EXISTS idx_content_plans_user ON content_plans(user_id);
         CREATE INDEX IF NOT EXISTS idx_content_plans_date ON content_plans(plan_date);
     """)
+    # 迁移：给 ai_usage 表添加 cost 列（旧数据库可能没有）
+    try:
+        conn.execute('ALTER TABLE ai_usage ADD COLUMN cost INTEGER DEFAULT 0')
+        conn.commit()
+    except:
+        pass
     # 为所有老用户生成邀请码（如果没有）
     try:
         rows = conn.execute('SELECT id FROM users WHERE invite_code IS NULL').fetchall()
@@ -1210,28 +1220,75 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         return row['cnt'] if row else 0
 
     def _record_ai_usage(self, user_id, feature='ai'):
-        """记录一次AI使用，并扣减积分（如果超出免费额度）"""
+        """记录一次AI使用，并扣减积分（如果超出免费额度）。
+        使用原子操作防止竞态条件：先扣积分再记录，确保余额不会被并发请求透支。
+        返回 True 表示成功扣减，False 表示积分不足（仅在需要扣费时）。
+        """
         cost = self._get_feature_cost(feature)
         conn = self._get_db()
         today = datetime.now().strftime('%Y-%m-%d')
-        conn.execute('INSERT INTO ai_usage(user_id, date, feature) VALUES(?,?,?)',
-                     (user_id, today, feature))
+        conn.execute('INSERT INTO ai_usage(user_id, date, feature, cost) VALUES(?,?,?,?)',
+                     (user_id, today, feature, cost))
         # 检查是否超出免费额度，超出则按功能扣积分
         usage_today = conn.execute(
             'SELECT COUNT(*) as cnt FROM ai_usage WHERE user_id=? AND date=?',
             (user_id, today)
         ).fetchone()['cnt']
         if usage_today > self.FREE_DAILY_AI_LIMIT and cost > 0:
-            conn.execute('UPDATE users SET ai_credits = MAX(0, ai_credits - ?) WHERE id=?', (cost, user_id))
+            # 原子操作：仅在积分 >= cost 时扣减，防止竞态条件导致透支
+            cur = conn.execute(
+                'UPDATE users SET ai_credits = ai_credits - ? WHERE id=? AND ai_credits >= ?',
+                (cost, user_id, cost)
+            )
+            if cur.rowcount == 0:
+                # 积分不足，回滚 usage 记录
+                conn.execute(
+                    'DELETE FROM ai_usage WHERE id = (SELECT MAX(id) FROM ai_usage WHERE user_id=? AND date=? AND feature=?)',
+                    (user_id, today, feature)
+                )
+                conn.commit()
+                conn.close()
+                return False
         conn.commit()
         conn.close()
+        return True
+
+    def _refund_ai_usage(self, user_id, feature='ai'):
+        """退还一次AI使用的积分（用于异步任务失败时）"""
+        cost = self._get_feature_cost(feature)
+        conn = self._get_db()
+        today = datetime.now().strftime('%Y-%m-%d')
+        # 只有已超出免费额度才需退还积分
+        usage_today = conn.execute(
+            'SELECT COUNT(*) as cnt FROM ai_usage WHERE user_id=? AND date=?',
+            (user_id, today)
+        ).fetchone()['cnt']
+        if usage_today >= self.FREE_DAILY_AI_LIMIT and cost > 0:
+            conn.execute(
+                'UPDATE users SET ai_credits = ai_credits + ? WHERE id=?',
+                (cost, user_id)
+            )
+        # 删除最近一条该 feature 的使用记录
+        conn.execute(
+            'DELETE FROM ai_usage WHERE id = (SELECT MAX(id) FROM ai_usage WHERE user_id=? AND date=? AND feature=?)',
+            (user_id, today, feature)
+        )
+        conn.commit()
+        conn.close()
+        print(f'[Refund] 退还 {feature} {cost}积分 -> user {user_id}')
 
     def _check_ai_quota(self, user, feature='generateContent'):
-        """检查用户是否还有AI调用额度。返回 (allowed, info_dict)"""
+        """检查用户是否还有AI调用额度。返回 (allowed, info_dict)
+        注意：读取最新的 ai_credits 值（而非 user 缓存），避免并发时用旧值判断。
+        """
         user_id = user['id']
         today_usage = self._get_today_ai_usage(user_id)
-        credits = user.get('ai_credits', 0) or 0
         cost = self._get_feature_cost(feature)
+        # 读取最新的积分余额（不依赖 user 缓存）
+        conn = self._get_db()
+        row = conn.execute('SELECT ai_credits FROM users WHERE id=?', (user_id,)).fetchone()
+        conn.close()
+        credits = row['ai_credits'] if row else 0
 
         if today_usage < self.FREE_DAILY_AI_LIMIT:
             return True, {
@@ -1271,7 +1328,11 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._send_json({'error': '未登录', 'code': 'AUTH_REQUIRED'}, 401)
         user_id = user['id']
         today_usage = self._get_today_ai_usage(user_id)
-        credits = user.get('ai_credits', 0) or 0
+        # 读取最新积分余额
+        conn = self._get_db()
+        row = conn.execute('SELECT ai_credits FROM users WHERE id=?', (user_id,)).fetchone()
+        conn.close()
+        credits = row['ai_credits'] if row else 0
         return self._send_json({
             'credits': credits,
             'todayUsed': today_usage,
@@ -1279,6 +1340,38 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             'freeRemaining': max(0, self.FREE_DAILY_AI_LIMIT - today_usage),
             'tier': user.get('tier', 'free'),
             'featureCosts': self.FEATURE_COSTS
+        })
+
+    def _get_usage_history(self, query):
+        """API: 获取当前用户的积分消费明细"""
+        user = self._get_current_user()
+        if not user:
+            return self._send_json({'error': '未登录', 'code': 'AUTH_REQUIRED'}, 401)
+        user_id = user['id']
+        page = int(query.get('page', ['1'])[0]) if isinstance(query.get('page'), list) else int(query.get('page', 1))
+        per_page = 30
+        offset = (page - 1) * per_page
+        conn = self._get_db()
+        # 总记录数
+        total = conn.execute('SELECT COUNT(*) as cnt FROM ai_usage WHERE user_id=?', (user_id,)).fetchone()['cnt']
+        # 分页查询
+        rows = conn.execute(
+            'SELECT feature, cost, date, created_at FROM ai_usage WHERE user_id=? ORDER BY id DESC LIMIT ? OFFSET ?',
+            (user_id, per_page, offset)
+        ).fetchall()
+        # 按日汇总
+        daily = conn.execute(
+            '''SELECT date, COUNT(*) as count, COALESCE(SUM(cost), 0) as total_cost
+               FROM ai_usage WHERE user_id=? GROUP BY date ORDER BY date DESC LIMIT 30''',
+            (user_id,)
+        ).fetchall()
+        conn.close()
+        return self._send_json({
+            'records': [dict(r) for r in rows],
+            'dailySummary': [dict(d) for d in daily],
+            'total': total,
+            'page': page,
+            'perPage': per_page,
         })
 
     def _redeem_code(self, body):
@@ -1447,8 +1540,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         # 增加积分
         conn.execute('UPDATE users SET ai_credits = ai_credits + ? WHERE id=?',
                      (order['credits'], order['user_id']))
-        conn.commit()
-        # 处理分销佣金：查看该用户是否有邀请人
+        # 处理分销佣金：查看该用户是否有邀请人（在同一事务内完成）
         inviter_id = conn.execute('SELECT invited_by FROM users WHERE id=?', (order['user_id'],)).fetchone()
         if inviter_id and inviter_id['invited_by'] and inviter_id['invited_by'] > 0:
             commission_amount = round(order['amount'] * COMMISSION_RATE, 2)
@@ -1461,7 +1553,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     'UPDATE users SET commission_balance = commission_balance + ? WHERE id=?',
                     (commission_amount, inviter_id['invited_by'])
                 )
-                conn.commit()
+        # 统一提交：积分增加 + 佣金处理在同一事务中
+        conn.commit()
         conn.close()
         return self._send_json({'success': True, 'orderNo': order_no, 'credits': order['credits']})
 
@@ -1763,6 +1856,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._get_account_stats()
         elif path == '/api/user/credits':
             return self._get_user_credits_info()
+        elif path == '/api/user/usage-history':
+            return self._get_usage_history(query)
         elif path == '/api/packages':
             return self._get_packages()
         elif path == '/api/payment-config':
@@ -1962,8 +2057,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 inviter_id = inviter['id']
         pw_hash = self._hash_password(password)
         my_invite_code = 'INV' + secrets.token_hex(4).upper()
-        conn.execute('INSERT INTO users (username, password_hash, nickname, phone, invite_code, invited_by) VALUES (?,?,?,?,?,?)',
-                     (username, pw_hash, nickname or username, phone, my_invite_code, inviter_id))
+        conn.execute('INSERT INTO users (username, password_hash, nickname, phone, invite_code, invited_by, ai_credits) VALUES (?,?,?,?,?,?,?)',
+                     (username, pw_hash, nickname or username, phone, my_invite_code, inviter_id, NEW_USER_INITIAL_CREDITS))
         conn.commit()
         uid = conn.execute('SELECT last_insert_rowid() as id').fetchone()['id']
         # 处理邀请奖励
@@ -2854,15 +2949,20 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
         # AI 配额检查（传入 feature 以判断所需积分）
         user = self._get_current_user()
-        if user:
-            allowed, info = self._check_ai_quota(user, feature)
-            if not allowed:
-                cost = self._get_feature_cost(feature)
-                return self._send_json({
-                    'error': {'code': 429, 'message': f'积分不足（需要{cost}积分），请充值AI积分继续使用'},
-                    'quotaExceeded': True,
-                    'usage': info
-                }, 429)
+        if not user:
+            return self._send_json({
+                'error': {'code': 401, 'message': '请先登录后再使用 AI 功能'},
+                'quotaExceeded': True,
+                'authRequired': True
+            }, 401)
+        allowed, info = self._check_ai_quota(user, feature)
+        if not allowed:
+            cost = self._get_feature_cost(feature)
+            return self._send_json({
+                'error': {'code': 429, 'message': f'积分不足（需要{cost}积分，余额{info["credits"]}积分），请充值AI积分继续使用'},
+                'quotaExceeded': True,
+                'usage': info
+            }, 429)
 
         # action 只允许合法的 Gemini API 动作，中文标签归入 feature
         VALID_ACTIONS = ('generateContent', 'streamGenerateContent', 'listModels', 'countTokens')
@@ -2960,23 +3060,27 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         """从知识卡片数据生成小红书笔记"""
         # ── 积分检查 ──
         user = self._get_current_user()
-        if user:
-            allowed, info = self._check_ai_quota(user, '笔记生成')
-            if not allowed:
-                return self._send_json({
-                    'error': f'积分不足（需要{info["cost"]}积分），请充值后继续使用',
-                    'quotaExceeded': True, 'usage': info
-                }, 429)
+        if not user:
+            return self._send_json({'error': '请先登录后再使用', 'authRequired': True}, 401)
+        allowed, info = self._check_ai_quota(user, '笔记生成')
+        if not allowed:
+            return self._send_json({
+                'error': f'积分不足（需要{info["cost"]}积分，余额{info["credits"]}积分），请充值后继续使用',
+                'quotaExceeded': True, 'usage': info
+            }, 429)
 
         subject = body.get('subject', '数学')
         grade_short = body.get('grade_short', '三下')
         template = body.get('template', '反差型')
         card_ids = body.get('card_ids', [])  # 可选指定卡片
+        stage = body.get('stage', '小学')  # 赛道: 小学/初中/高中/养生减脂/国学文化/情感生活
 
         # 根据 subject 判断文件夹和文件名
         _WELLNESS_SUBJECTS = {'养生', '减脂', '养生减脂', '融合'}
         _CULTURE_SUBJECTS = {'国学'}
         _EMOTION_SUBJECTS = {'恋爱'}
+        _EDUCATION_SUBJECTS = {'数学', '语文', '英语'}
+        _EDUCATION_STAGES = {'小学', '初中', '高中'}
         if subject in _EMOTION_SUBJECTS:
             folder = '情感生活'
             card_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder, f'{subject}_{grade_short}.json')
@@ -3353,7 +3457,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         if len(results) < 3:
             # ── 积分检查（仅AI分支才扣费）──
             user = self._get_current_user()
-            ai_allowed = True
+            ai_allowed = False
             if user:
                 ai_allowed_flag, ai_info = self._check_ai_quota(user, 'AI卡片匹配')
                 ai_allowed = ai_allowed_flag
@@ -3423,13 +3527,14 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
         # ── 积分检查 ──
         user = self._get_current_user()
-        if user:
-            allowed, info = self._check_ai_quota(user, 'v3图片生成')
-            if not allowed:
-                return self._send_json({
-                    'error': f'积分不足（需要{info["cost"]}积分），请充值后继续使用',
-                    'quotaExceeded': True, 'usage': info
-                }, 429)
+        if not user:
+            return self._send_json({'error': '请先登录后再使用', 'authRequired': True}, 401)
+        allowed, info = self._check_ai_quota(user, 'v3图片生成')
+        if not allowed:
+            return self._send_json({
+                'error': f'积分不足（需要{info["cost"]}积分，余额{info["credits"]}积分），请充值后继续使用',
+                'quotaExceeded': True, 'usage': info
+            }, 429)
 
         subject = body.get('subject', '数学')
         grade = body.get('grade', '三年级')
@@ -3698,15 +3803,16 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
         # ── 积分检查（在启动后台线程前就扣减）──
         user = self._get_current_user()
-        if user:
-            allowed, info = self._check_ai_quota(user, 'v3图片生成')
-            if not allowed:
-                return self._send_json({
-                    'error': f'积分不足（需要{info["cost"]}积分），请充值后继续使用',
-                    'quotaExceeded': True, 'usage': info
-                }, 429)
-            # 异步任务预扣积分（因为后台线程无法读取 HTTP header）
-            self._record_ai_usage(user['id'], 'v3图片生成')
+        if not user:
+            return self._send_json({'error': '请先登录后再使用', 'authRequired': True}, 401)
+        allowed, info = self._check_ai_quota(user, 'v3图片生成')
+        if not allowed:
+            return self._send_json({
+                'error': f'积分不足（需要{info["cost"]}积分，余额{info["credits"]}积分），请充值后继续使用',
+                'quotaExceeded': True, 'usage': info
+            }, 429)
+        # 异步任务预扣积分（因为后台线程无法读取 HTTP header）
+        self._record_ai_usage(user['id'], 'v3图片生成')
 
         if not SERVER_GEMINI_API_KEYS:
             return self._send_json({'error': '服务端未配置 Gemini API Key'}, 500)
@@ -3727,7 +3833,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 'progress': 'v3流水线启动中...',
             }
 
-        def _run_v3(task_id, body):
+        def _run_v3(task_id, body, _user_id):
             """在后台线程执行 v3 流水线（带全局超时保护）"""
             _start_time = time.time()
 
@@ -3737,6 +3843,13 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             def _timed_out():
                 return _elapsed() > _ASYNC_TASK_TIMEOUT
 
+            def _refund_on_error():
+                """v3异步任务失败时退还预扣积分"""
+                try:
+                    self._refund_ai_usage(_user_id, 'v3图片生成')
+                except Exception as re:
+                    print(f'[v3-async] 积分退还失败: {re}')
+
             try:
                 from generate_card_images_v3 import (
                     generate_image_prompt, generate_card_image,
@@ -3744,6 +3857,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     quality_score, AUDIT_PASS_SCORE, MAX_AUDIT_ROUNDS
                 )
             except ImportError as e:
+                _refund_on_error()
                 with _async_tasks_lock:
                     _async_tasks[task_id] = {**_async_tasks[task_id],
                         'status': 'error', 'result': {'error': f'v3模块导入失败: {e}'}, 'updated': time.time()}
@@ -3768,6 +3882,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 """超时时用目前最好的结果返回"""
                 if not best_image:
                     pipeline_log.append(f'⏰ 超时({_elapsed():.0f}s)且无可用图片')
+                    _refund_on_error()
                     with _async_tasks_lock:
                         _async_tasks[task_id] = {**_async_tasks[task_id],
                             'status': 'error', 'result': {'error': f'v3流水线超时({_elapsed():.0f}s): Gemini API响应缓慢', 'pipeline': pipeline_log}, 'updated': time.time()}
@@ -3794,6 +3909,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 prompt, manifest = generate_image_prompt(card, subject, grade, semester, keys[0], all_keys=keys)
                 if not prompt:
                     pipeline_log.append('Step1失败')
+                    _refund_on_error()
                     with _async_tasks_lock:
                         _async_tasks[task_id] = {**_async_tasks[task_id],
                             'status': 'error', 'result': {'error': 'Step1失败: 无法生成图片提示词', 'pipeline': pipeline_log}, 'updated': time.time()}
@@ -3840,6 +3956,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                         if _timed_out():
                             _finish_with_best(None, 'png', 0, '', rounds_used)
                             return
+                        _refund_on_error()
                         with _async_tasks_lock:
                             _async_tasks[task_id] = {**_async_tasks[task_id],
                                 'status': 'error', 'result': {'error': 'Step2失败: 图片生成失败(所有模型/Key均失败)', 'pipeline': pipeline_log}, 'updated': time.time()}
@@ -3886,6 +4003,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                             time.sleep(2)
 
                 if not best_image:
+                    _refund_on_error()
                     with _async_tasks_lock:
                         _async_tasks[task_id] = {**_async_tasks[task_id],
                             'status': 'error', 'result': {'error': '图片生成全部失败', 'pipeline': pipeline_log}, 'updated': time.time()}
@@ -3952,11 +4070,12 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 import traceback
                 traceback.print_exc()
                 pipeline_log.append(f'异常: {str(e)[:200]}')
+                _refund_on_error()
                 with _async_tasks_lock:
                     _async_tasks[task_id] = {**_async_tasks[task_id],
                         'status': 'error', 'result': {'error': f'v3流水线异常: {str(e)[:200]}', 'pipeline': pipeline_log}, 'updated': time.time()}
 
-        t = threading.Thread(target=_run_v3, args=(task_id, body), daemon=True)
+        t = threading.Thread(target=_run_v3, args=(task_id, body, user['id']), daemon=True)
         t.start()
 
         print(f'[v3-async] 任务已创建: {task_id} for {card.get("full_id","")}', flush=True)
@@ -4192,13 +4311,14 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
         # ── 积分检查 ──
         user = self._get_current_user()
-        if user:
-            allowed, info = self._check_ai_quota(user, 'Prompt记录生成')
-            if not allowed:
-                return self._send_json({
-                    'error': f'积分不足（需要{info["cost"]}积分），请充值后继续使用',
-                    'quotaExceeded': True, 'usage': info
-                }, 429)
+        if not user:
+            return self._send_json({'error': '请先登录后再使用', 'authRequired': True}, 401)
+        allowed, info = self._check_ai_quota(user, 'Prompt记录生成')
+        if not allowed:
+            return self._send_json({
+                'error': f'积分不足（需要{info["cost"]}积分，余额{info["credits"]}积分），请充值后继续使用',
+                'quotaExceeded': True, 'usage': info
+            }, 429)
 
         api_key = _get_next_server_key()
         if not api_key:
