@@ -1735,6 +1735,12 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._get_optimizer_dashboard()
         elif path == '/api/optimizer-stats':
             return self._get_optimizer_stats()
+        elif path == '/api/quality-dashboard':
+            return self._get_quality_dashboard()
+        elif path == '/api/quality-trends':
+            return self._get_quality_trends(query)
+        elif path == '/api/quality-rubrics':
+            return self._get_quality_rubrics(query)
         elif path == '/api/captcha':
             return self._get_captcha()
         # --- 需要登录的路由 ---
@@ -3972,6 +3978,49 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             })
         except ImportError:
             return self._send_json({'ok': False, 'error': '自我优化模块未安装'}, 500)
+        except Exception as e:
+            return self._send_json({'ok': False, 'error': str(e)}, 500)
+
+    # ═══════════════════════════════════════════
+    # 内容质量三级系统 API
+    # ═══════════════════════════════════════════
+    def _get_quality_dashboard(self):
+        """返回内容质量系统完整仪表盘"""
+        try:
+            from content_quality import get_quality_dashboard
+            dashboard = get_quality_dashboard()
+            return self._send_json({'ok': True, 'dashboard': dashboard})
+        except ImportError:
+            return self._send_json({'ok': False, 'error': '内容质量模块未安装'}, 500)
+        except Exception as e:
+            return self._send_json({'ok': False, 'error': str(e)}, 500)
+
+    def _get_quality_trends(self, query):
+        """返回质量趋势数据"""
+        try:
+            from content_quality import compute_quality_trends
+            card_type = query.get('card_type', [''])[0]
+            subject = query.get('subject', [''])[0]
+            days = int(query.get('days', ['7'])[0])
+            trends = compute_quality_trends(card_type, subject, days)
+            return self._send_json({'ok': True, 'trends': trends})
+        except ImportError:
+            return self._send_json({'ok': False, 'error': '内容质量模块未安装'}, 500)
+        except Exception as e:
+            return self._send_json({'ok': False, 'error': str(e)}, 500)
+
+    def _get_quality_rubrics(self, query):
+        """返回某卡片类型的评分标准"""
+        try:
+            from content_quality import get_rubric_for_type, QUALITY_RUBRICS
+            card_type = query.get('card_type', [''])[0]
+            if card_type:
+                rubric = get_rubric_for_type(card_type)
+                return self._send_json({'ok': True, 'card_type': card_type, 'rubric': rubric})
+            else:
+                return self._send_json({'ok': True, 'all_types': list(QUALITY_RUBRICS.keys())})
+        except ImportError:
+            return self._send_json({'ok': False, 'error': '内容质量模块未安装'}, 500)
         except Exception as e:
             return self._send_json({'ok': False, 'error': str(e)}, 500)
 

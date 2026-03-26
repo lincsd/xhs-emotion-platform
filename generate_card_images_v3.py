@@ -36,6 +36,21 @@ except ImportError:
     _HAS_OPTIMIZER = False
     print('[v3] 自我优化系统未加载 (self_optimizer.py 不存在)')
 
+# 内容质量三级系统
+try:
+    from content_quality import (
+        full_quality_check, build_typed_quality_prompt,
+        build_content_refinement_hint, compute_quality_trends,
+        get_quality_dashboard, QUALITY_RUBRICS, SUBJECT_FOCUS,
+        analyze_top_cards, analyze_failures, generate_style_guide,
+        cross_pollinate,
+    )
+    _HAS_QUALITY = True
+    print('[v3] 内容质量三级系统已加载')
+except ImportError:
+    _HAS_QUALITY = False
+    print('[v3] 内容质量系统未加载 (content_quality.py 不存在)')
+
 # ═══════════════════════════════════════════
 # 配置
 # ═══════════════════════════════════════════
@@ -530,9 +545,22 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
         except Exception as e:
             print(f'      [optimizer] few-shot hint error: {e}')
 
+    # ── 内容质量: 注入风格指南 + 内容改进提示 ──
+    quality_hint = ''
+    if _HAS_QUALITY:
+        try:
+            from content_quality import get_style_guide
+            guide_data = get_style_guide(card_type, subject)
+            if guide_data.get('guide') and guide_data.get('based_on', 0) >= 3:
+                quality_hint += f'\n=== STYLE GUIDE (data-driven) ===\n{guide_data["guide"][:500]}\n=== END ===\n'
+        except Exception as e:
+            print(f'      [quality] style guide hint error: {e}')
+
     full_input = f'{system_prompt}\n\n--- 知识点信息 ---\n{card_info}'
     if fewshot_block:
         full_input += f'\n\n{fewshot_block}'
+    if quality_hint:
+        full_input += f'\n{quality_hint}'
 
     contents = [
         {'role': 'user', 'parts': [{'text': full_input}]}
@@ -913,6 +941,57 @@ def quality_score(image_data, api_key, card_title='', all_keys=None):
     return {'total': 0, 'comment': '评分解析失败'}
 
 
+def _typed_quality_score(image_data, api_key, card_title='', card_type='方法卡',
+                          subject='', all_keys=None):
+    """
+    分类型精准质量评分（Level 3 升级版）。
+    用 content_quality.py 中按卡片类型定义的评分维度替代通用评分。
+    """
+    typed_prompt = build_typed_quality_prompt(card_type, subject, card_title)
+
+    b64_img = base64.b64encode(image_data).decode('utf-8')
+    contents = [
+        {'role': 'user', 'parts': [
+            {'text': f'这张卡片的主题是"{card_title}"。\n\n{typed_prompt}'},
+            {'inlineData': {'mimeType': 'image/png', 'data': b64_img}}
+        ]}
+    ]
+    gen_config = {
+        'maxOutputTokens': 2048,
+        'temperature': 0.1,
+        'thinkingConfig': {'thinkingBudget': 0}
+    }
+
+    resp = gemini_call(TEXT_MODEL, contents, api_key, gen_config=gen_config, all_keys=all_keys)
+    if not resp:
+        return {'total': 0, 'comment': '评分调用失败'}
+
+    try:
+        candidates = resp.get('candidates', [])
+        if candidates:
+            parts = candidates[0].get('content', {}).get('parts', [])
+            all_text = ''
+            for part in parts:
+                if 'text' in part:
+                    all_text += part['text']
+            if all_text:
+                json_match = re.search(r'\{[\s\S]*?\}', all_text.strip())
+                if json_match:
+                    result = json.loads(json_match.group())
+                    # 从 dimensions 计算总分
+                    if 'total' not in result and 'dimensions' in result:
+                        dim_total = 0
+                        for d in result['dimensions'].values():
+                            dim_total += d.get('score', 0) if isinstance(d, dict) else d
+                        result['total'] = dim_total
+                    return result
+    except Exception as e:
+        print(f'      [Typed quality parse error] {e}')
+
+    # 降级到通用评分
+    return quality_score(image_data, api_key, card_title=card_title, all_keys=all_keys)
+
+
 # ═══════════════════════════════════════════
 # 完整流水线: 单卡片处理
 # ═══════════════════════════════════════════
@@ -940,6 +1019,28 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
         'final_action': '',  # 'pass' / 'repaired' / 'best_effort'
     }
 
+    # ── Step 0: 内容质量预审 ──
+    content_audit_result = None
+    if _HAS_QUALITY and not skip_audit:
+        try:
+            print(f'  ├─ Step 0: 内容质量预审...', end='', flush=True)
+            key = next_key(keys)
+            qc = full_quality_check(card, card.get('type', '方法卡'), subject, grade, key, all_keys=keys)
+            content_audit_result = qc
+            v = qc.get('verdict', 'error')
+            s = qc.get('total_score', 0)
+            print(f' {v}({s}分)')
+            if not qc.get('should_proceed', True):
+                print(f'  ├─ ⛔ 内容审核不通过(reject)，跳过图片生成')
+                stats['content_audit_score'] = s
+                stats['content_verdict'] = v
+                stats['final_action'] = 'content_rejected'
+                return False, '', stats
+            stats['content_audit_score'] = s
+            stats['content_verdict'] = v
+        except Exception as e:
+            print(f' ⚠️ 预审出错: {e}')
+
     # ── Step 1: 生成提示词 ──
     print(f'  ├─ Step 1: 生成提示词...', end='', flush=True)
     t0 = time.time()
@@ -951,6 +1052,12 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
         print(' ❌ 失败')
         return False, '', stats
     
+    # 如果内容预审有改进建议，注入到 prompt
+    if content_audit_result and _HAS_QUALITY:
+        hint = content_audit_result.get('refinement_hint', '')
+        if hint:
+            prompt = hint + '\n' + prompt
+
     manifest_count = len(manifest) if manifest else 0
     total_chars = sum(len(v) for v in manifest.values()) if manifest else 0
     print(f' ✅ ({len(prompt)}字, {manifest_count}处文字共{total_chars}字)')
@@ -1049,10 +1156,16 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
     if not stats['final_action']:
         stats['final_action'] = 'pass'
 
-    # ── 质量评分 ──
+    # ── 质量评分（分类型精准评分）──
     print(f'  ├─ Step 5b: 质量评分...', end='', flush=True)
     key = next_key(keys)
-    q = quality_score(best_image, key, card_title=title, all_keys=keys)
+    if _HAS_QUALITY:
+        # 使用分类型的精准评分 prompt
+        q = _typed_quality_score(best_image, key, card_title=title,
+                                  card_type=card.get('type', '方法卡'),
+                                  subject=subject, all_keys=keys)
+    else:
+        q = quality_score(best_image, key, card_title=title, all_keys=keys)
     q_total = q.get('total', 0)
     q_comment = q.get('comment', '')
     stats['quality_score'] = q_total
