@@ -404,7 +404,7 @@ LINE2: 第二处文字
 提示词长度: 350-500 英文单词。"""
 
 
-_GRAMMAR_TYPES = {'语法辨析卡'}
+_GRAMMAR_TYPES = {'语法辨析卡', '句型卡', '易混词卡', '易混词陷阱卡', '语法纠错卡'}
 
 def _build_card_info(card, subject, grade, semester):
     """构建传给 prompt 生成器的卡片信息（自动区分教育/养生/语法类）"""
@@ -416,7 +416,11 @@ def _build_card_info(card, subject, grade, semester):
 
 
 def _build_card_info_grammar(card, subject, grade, semester):
-    """构建语法辨析类卡片信息（中英双语，引导词对比为核心）"""
+    """构建语法辨析类卡片信息（中英双语，引导词对比为核心）
+    
+    ⚠️ 重要: 语法卡文字最容易超标！此函数传给 prompt 生成器的信息
+    只是背景知识参考，最终图片上的文字必须由 prompt 生成器精简到≤15字。
+    """
     card_type = card.get('type', '语法辨析卡')
 
     example_info = ''
@@ -425,45 +429,54 @@ def _build_card_info_grammar(card, subject, grade, semester):
         ex = card['example']
         example_info = (ex.get('question') or '')[:150]
         if ex.get('steps'):
-            steps_text = '\n'.join(f'  {i+1}. {s}' for i, s in enumerate(ex['steps'][:5]))
-            example_steps = f"\n【辨析步骤】:\n{steps_text[:500]}"
+            steps_text = '\n'.join(f'  {i+1}. {s}' for i, s in enumerate(ex['steps'][:3]))
+            example_steps = f"\n【辨析步骤】:\n{steps_text[:300]}"
         if ex.get('answer'):
-            example_steps += f"\n【判断结论】: {str(ex['answer'])[:200]}"
+            example_steps += f"\n【判断结论】: {str(ex['answer'])[:100]}"
 
-    points = card.get('core_points', [])[:5]
-    clean_pts = [str(p)[:100] for p in points]
+    points = card.get('core_points', [])[:3]
+    clean_pts = [str(p)[:80] for p in points]
 
     mistakes_info = ''
     if card.get('mistakes'):
         m = card['mistakes'][0]
         reason = m.get('reason', '')
-        mistakes_info = f"\n易混对比: ❌{m.get('wrong', '')[:150]} → ✅{m.get('correct', '')[:150]}"
+        mistakes_info = f"\n易混对比: ❌{m.get('wrong', '')[:80]} → ✅{m.get('correct', '')[:80]}"
         if reason:
-            mistakes_info += f"\n错因: {reason[:150]}"
+            mistakes_info += f"\n错因: {reason[:100]}"
 
     why_exp = ''
     if card.get('why_explanation'):
-        why_exp = f"\n本质原因: {card['why_explanation'][:200]}"
+        why_exp = f"\n本质原因: {card['why_explanation'][:150]}"
 
     hook = ''
     if card.get('emotion_hook'):
-        hook = f"\n情绪钩子: {card['emotion_hook'][:100]}"
+        hook = f"\n情绪钩子: {card['emotion_hook'][:80]}"
 
     trap = ''
     if card.get('trap_point'):
-        trap = f"\n陷阱考点: {card['trap_point'][:100]}"
+        trap = f"\n陷阱考点: {card['trap_point'][:80]}"
 
     return f"""学科: {subject} | 专题: {grade} {semester}
 标题: {card.get('title', '')} | 类型: {card_type}
 🔑 语法辨析类：核心是引导词/句型的对比区分
 
+⚠️⚠️⚠️ 极重要提醒：语法卡特别容易文字超标！
+图片上只能出现≤15个中文字和≤4个英文单词！
+绝对不要把以下所有内容都写在图上！
+以下信息仅供理解知识点，图片上只需展示：
+  - 标题(≤4中文字)
+  - 1个✓正确例句 vs 1个✗错误例句（用英文写例句，不要中文翻译）
+  - 口诀(≤6中文字)
+  - 其余全部用图形/箭头/色块/图标表达！
+
 【例句辨析】: {example_info or '根据语法点构造对比例句'}
 {example_steps}
 
-【语法规则】: {card.get('definition', '')[:150]}
-【引导词要点】:
-{chr(10).join('• ' + p for p in clean_pts[:4])}
-【记忆口诀】(≤10字): {card.get('memory_tip', '')[:60]}
+【语法规则】: {card.get('definition', '')[:120]}
+【要点】:
+{chr(10).join('• ' + p for p in clean_pts[:3])}
+【记忆口诀】(≤6字): {card.get('memory_tip', '')[:40]}
 {mistakes_info}
 {trap}
 {hook}
@@ -697,6 +710,9 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
         # 清理 prompt（移除 manifest 标签）
         prompt_clean = re.sub(r'\[TEXT_MANIFEST\].*?\[/TEXT_MANIFEST\]', '', best_text, flags=re.DOTALL).strip()
 
+        # ── 文字量守门员: 检查manifest总汉字数 ──
+        manifest = _enforce_manifest_limits(manifest)
+
         return prompt_clean, manifest
 
     except Exception as e:
@@ -718,6 +734,91 @@ def _parse_text_manifest(text):
                 if val:
                     manifest[key] = val
     return manifest
+
+
+def _count_chinese_chars(text):
+    """统计文本中的中文字符数"""
+    return sum(1 for c in text if '\u4e00' <= c <= '\u9fff')
+
+
+def _enforce_manifest_limits(manifest, max_total=15, max_per_block=4):
+    """
+    文字量守门员: 强制裁剪 TEXT_MANIFEST 中超标的中文文字。
+    
+    规则:
+    1. 每个文字块中文≤ max_per_block 字
+    2. 全部文字块总中文≤ max_total 字
+    3. 超标时优先保留 TITLE，其次按顺序保留，尾部截断或删除
+    """
+    if not manifest:
+        return manifest
+    
+    # 统计当前总中文字数
+    total_cn = sum(_count_chinese_chars(v) for v in manifest.values())
+    if total_cn <= max_total:
+        # 仍需检查每块≤max_per_block
+        trimmed = {}
+        for k, v in manifest.items():
+            cn_count = _count_chinese_chars(v)
+            if cn_count > max_per_block:
+                # 截断到max_per_block个中文字
+                new_v = _trim_to_n_chinese(v, max_per_block)
+                print(f'      [manifest guard] {k}: "{v}" → "{new_v}" (每块≤{max_per_block}字)')
+                trimmed[k] = new_v
+            else:
+                trimmed[k] = v
+        return trimmed
+    
+    # 总字数超标，需要激进裁剪
+    print(f'      ⚠️ [manifest guard] 总中文{total_cn}字超标(上限{max_total})，启动裁剪...')
+    
+    result = {}
+    budget = max_total
+    
+    # 优先保留 TITLE
+    for k, v in manifest.items():
+        if 'TITLE' in k.upper():
+            trimmed_v = _trim_to_n_chinese(v, min(max_per_block, budget))
+            result[k] = trimmed_v
+            budget -= _count_chinese_chars(trimmed_v)
+            break
+    
+    # 其余按顺序，每块限max_per_block且总量不超budget
+    for k, v in manifest.items():
+        if k in result:
+            continue
+        if budget <= 0:
+            print(f'      [manifest guard] 丢弃 {k}: "{v}" (预算用完)')
+            continue
+        alloc = min(max_per_block, budget)
+        cn_count = _count_chinese_chars(v)
+        if cn_count == 0:
+            result[k] = v  # 纯数字/符号，保留
+        elif cn_count <= alloc:
+            result[k] = v
+            budget -= cn_count
+        else:
+            trimmed_v = _trim_to_n_chinese(v, alloc)
+            print(f'      [manifest guard] {k}: "{v}" → "{trimmed_v}"')
+            result[k] = trimmed_v
+            budget -= _count_chinese_chars(trimmed_v)
+    
+    new_total = sum(_count_chinese_chars(v) for v in result.values())
+    print(f'      [manifest guard] 裁剪完成: {total_cn}字 → {new_total}字, {len(manifest)}块 → {len(result)}块')
+    return result
+
+
+def _trim_to_n_chinese(text, n):
+    """截断文本保留前n个中文字符（保留非中文字符）"""
+    result = []
+    cn_count = 0
+    for c in text:
+        if '\u4e00' <= c <= '\u9fff':
+            cn_count += 1
+            if cn_count > n:
+                break
+        result.append(c)
+    return ''.join(result).rstrip()
 
 
 # ═══════════════════════════════════════════
@@ -745,13 +846,16 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
 
     # 逐字注入 manifest —— 让模型精确知道每个字
     if manifest:
-        chinese_prefix += "\n=== EXACT TEXT REFERENCE (copy these characters precisely) ===\n"
+        # 再次强制确保manifest字数在限制内
+        manifest = _enforce_manifest_limits(manifest)
+        total_cn = sum(_count_chinese_chars(v) for v in manifest.values())
+        chinese_prefix += f"\n=== EXACT TEXT REFERENCE ({total_cn} Chinese chars total — this is the MAXIMUM) ===\n"
         for key, val in manifest.items():
             # 逐字拆分，每个字标 Unicode
             char_detail = ' '.join(f'"{c}"(U+{ord(c):04X})' for c in val if '\u4e00' <= c <= '\u9fff')
             chinese_prefix += f"{key}: \"{val}\"  →  Characters: {char_detail}\n"
         chinese_prefix += "=== END TEXT REFERENCE ===\n"
-        chinese_prefix += "IMPORTANT: Render ONLY these exact characters. Do NOT change, swap, or approximate any character.\n"
+        chinese_prefix += f"IMPORTANT: Render ONLY these {total_cn} Chinese characters. Do NOT add ANY extra Chinese text beyond this list. Do NOT change, swap, or approximate any character.\n"
 
     if audit_hint:
         chinese_prefix += f"\n⚠️ CORRECTION FROM PREVIOUS ATTEMPT:\n{audit_hint}\n"
