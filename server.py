@@ -1185,6 +1185,11 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         '模板匹配':      1,   # AI模板智能匹配
         'template_match': 1,  # 单篇模板匹配
         'template_match_batch': 1,  # 批量模板匹配
+        # 直接调用 Gemini 的后端 AI 功能
+        '笔记生成':      2,   # generate-note, 大量输出
+        'AI卡片匹配':    1,   # ai-match-cards, 轻量
+        'v3图片生成':     3,   # 全流水线: prompt+图片+OCR+修补，多次API调用
+        'Prompt记录生成': 3,   # R1→R2→R3 三次Gemini调用
         # 默认（未标记的功能）
         'generateContent': 1,
     }
@@ -2939,6 +2944,16 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     # ============ 笔记工坊 - AI 笔记生成 ============
     def _generate_xhs_note(self, body):
         """从知识卡片数据生成小红书笔记"""
+        # ── 积分检查 ──
+        user = self._get_current_user()
+        if user:
+            allowed, info = self._check_ai_quota(user, '笔记生成')
+            if not allowed:
+                return self._send_json({
+                    'error': f'积分不足（需要{info["cost"]}积分），请充值后继续使用',
+                    'quotaExceeded': True, 'usage': info
+                }, 429)
+
         subject = body.get('subject', '数学')
         grade_short = body.get('grade_short', '三下')
         template = body.get('template', '反差型')
@@ -3228,6 +3243,10 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             note['generated_at'] = time.strftime('%Y-%m-%d %H:%M:%S')
             note['note_id'] = f"{subject}_{grade_short}_{template}_{time.strftime('%Y%m%d_%H%M%S')}"
 
+            # ── 积分扣减 ──
+            if user:
+                self._record_ai_usage(user['id'], '笔记生成')
+
             # 保存到文件
             notes_dir = os.path.join(PUBLIC_DIR, 'generated_notes')
             os.makedirs(notes_dir, exist_ok=True)
@@ -3318,8 +3337,14 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
         # 如果本地匹配不足3个结果，尝试AI匹配
         if len(results) < 3:
+            # ── 积分检查（仅AI分支才扣费）──
+            user = self._get_current_user()
+            ai_allowed = True
+            if user:
+                ai_allowed_flag, ai_info = self._check_ai_quota(user, 'AI卡片匹配')
+                ai_allowed = ai_allowed_flag
             api_key = _get_next_server_key()
-            if api_key:
+            if api_key and ai_allowed:
                 # 构造精简卡片列表给AI
                 card_summaries = []
                 for i, c in enumerate(all_cards[:200]):  # 限制200张避免超长
@@ -3356,6 +3381,9 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                             if id(c) not in seen:
                                 results.append(c)
                                 seen.add(id(c))
+                        # ── 积分扣减（AI实际调用成功才扣）──
+                        if user:
+                            self._record_ai_usage(user['id'], 'AI卡片匹配')
                 except Exception as e:
                     pass  # AI匹配失败不影响本地结果
 
@@ -3378,6 +3406,16 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         card = body.get('card')
         if not card or not card.get('full_id'):
             return self._send_json({'error': '缺少卡片数据(card.full_id)'}, 400)
+
+        # ── 积分检查 ──
+        user = self._get_current_user()
+        if user:
+            allowed, info = self._check_ai_quota(user, 'v3图片生成')
+            if not allowed:
+                return self._send_json({
+                    'error': f'积分不足（需要{info["cost"]}积分），请充值后继续使用',
+                    'quotaExceeded': True, 'usage': info
+                }, 429)
 
         subject = body.get('subject', '数学')
         grade = body.get('grade', '三年级')
@@ -3542,6 +3580,10 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             except Exception as opt_e:
                 pipeline_log.append(f'自我优化记录跳过: {str(opt_e)[:80]}')
 
+            # ── 积分扣减 ──
+            if user:
+                self._record_ai_usage(user['id'], 'v3图片生成')
+
             return self._send_json({
                 'ok': True,
                 'image': img_b64,
@@ -3569,6 +3611,18 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         card = body.get('card')
         if not card or not card.get('full_id'):
             return self._send_json({'error': '缺少卡片数据(card.full_id)'}, 400)
+
+        # ── 积分检查（在启动后台线程前就扣减）──
+        user = self._get_current_user()
+        if user:
+            allowed, info = self._check_ai_quota(user, 'v3图片生成')
+            if not allowed:
+                return self._send_json({
+                    'error': f'积分不足（需要{info["cost"]}积分），请充值后继续使用',
+                    'quotaExceeded': True, 'usage': info
+                }, 429)
+            # 异步任务预扣积分（因为后台线程无法读取 HTTP header）
+            self._record_ai_usage(user['id'], 'v3图片生成')
 
         if not SERVER_GEMINI_API_KEYS:
             return self._send_json({'error': '服务端未配置 Gemini API Key'}, 500)
@@ -3931,6 +3985,16 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         if not card or not card.get('full_id'):
             return self._send_json({'error': '缺少卡片数据'}, 400)
 
+        # ── 积分检查 ──
+        user = self._get_current_user()
+        if user:
+            allowed, info = self._check_ai_quota(user, 'Prompt记录生成')
+            if not allowed:
+                return self._send_json({
+                    'error': f'积分不足（需要{info["cost"]}积分），请充值后继续使用',
+                    'quotaExceeded': True, 'usage': info
+                }, 429)
+
         api_key = _get_next_server_key()
         if not api_key:
             return self._send_json({'error': '服务端未配置 Gemini API Key'}, 500)
@@ -4141,6 +4205,10 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     'R3': brief3,
                 }
             }
+
+            # ── 积分扣减 ──
+            if user:
+                self._record_ai_usage(user['id'], 'Prompt记录生成')
 
             return self._send_json({'ok': True, 'record': result})
 
