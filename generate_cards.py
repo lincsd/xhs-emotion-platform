@@ -176,13 +176,14 @@ def generate_unit_cards(index, unit):
     "importance": 数字1-5,
     "definition": "用{target_user}能理解的最简单的话解释这个知识点（一句话）",
     "core_points": ["核心公式/要素1", "核心公式/要素2"],
+    "why_explanation": "本质原因（用通俗语言解释'为什么是这样'，而非只说结论）",
     "example": {{
       "question": "一道贴近考试的真题（数字具体）",
-      "steps": ["步骤1", "步骤2", "步骤3"],
+      "steps": ["步骤1（含为什么这样做）", "步骤2", "步骤3"],
       "answer": "明确的数字答案"
     }},
     "mistakes": [
-      {{"wrong": "常见错误做法", "correct": "正确做法"}}
+      {{"wrong": "常见错误做法", "correct": "正确做法", "reason": "为什么这样做是错的（根本原因）"}}
     ],
     "memory_tip": "口诀或记忆技巧",
     "related": {{
@@ -198,6 +199,8 @@ def generate_unit_cards(index, unit):
 3. 语言标准：{target_user}独立阅读可理解
 4. 公式中如用字母表示，必须注明含义
 5. 不得出现超纲内容
+6. ⚠️ 每张卡片的why_explanation必须回答"为什么"，不能只说"是什么"
+7. ⚠️ mistakes的reason必须解释错误的根本原因，不能只标注对错
 """
     result = gemini_generate(prompt, max_tokens=16384)
     if not result:

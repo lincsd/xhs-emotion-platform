@@ -111,8 +111,9 @@ CARD_GEN_PROMPT_MATH = """你是一位资深的中国{stage}{subject}教研员�
    - importance: 重要性 1-5
    - definition: 核心定义/概念（一句话）
    - core_points: 要点列表（3-5条）
+   - why_explanation: 本质原因/底层逻辑（用通俗语言解释"为什么是这样"，而非只告诉结论）
    - example: {{question, steps[], answer}}
-   - mistakes: [{{wrong, correct}}]（1-2个常见错误）
+   - mistakes: [{{wrong: "常见错误做法", correct: "正确做法", reason: "为什么这样做是错的（一句话解释根本原因）"}}]（1-2个常见错误）
    - memory_tip: 记忆口诀/助记
    - related: {{prerequisite, next}}
 
@@ -120,6 +121,12 @@ CARD_GEN_PROMPT_MATH = """你是一位资深的中国{stage}{subject}教研员�
 5. 难度和重要性要符合实际教学情况
 6. 例题要典型、易懂，步骤清晰
 7. 记忆口诀要朗朗上口
+8. ⚠️ 深度教学原则（非常重要！）：
+   - 每张卡片必须回答"为什么"，不能只告诉"是什么"和"怎么做"
+   - why_explanation 必须解释知识点的本质原因（例如：为什么乘法交换律成立？因为3组4个和4组3个的总数相同）
+   - mistakes的reason必须解释错误的根本原因，不能只标注对错（例如：不是只说"应该用×不是÷"，而要说"因为'每组3个，5组'是重复相加，所以用乘法"）
+   - 步骤(steps)中至少有一步解释"为什么这样做"而非只说"怎么做"
+   - 记忆口诀不能为了押韵而牺牲准确性，必须涵盖关键例外情况
 
 请直接输出完整JSON（不要markdown代码块），格式如下：
 {{
@@ -165,8 +172,9 @@ CARD_GEN_PROMPT_YUWEN = """你是一位资深的中国{stage}语文教研员，�
    - importance: 重要性 1-5
    - definition: 核心知识点（一句话概括）
    - core_points: 要点列表（3-5条）
+   - why_explanation: 本质原因/底层逻辑（用通俗语言解释"为什么是这样"，如：为什么"己"和"已"容易混？因为只差一笔封口，"己"开口像张开的自己，"已"封口表示已经完成）
    - example: {{question, steps[], answer}}（示例题目或练习）
-   - mistakes: [{{wrong, correct}}]（1-2个常见错误，如错别字对比、误用示例）
+   - mistakes: [{{wrong: "常见错误", correct: "正确写法/用法", reason: "为什么这样是错的（根本原因）"}}]（1-2个常见错误）
    - memory_tip: 记忆口诀/顺口溜/助记方法
    - related: {{prerequisite, next}}
 
@@ -174,6 +182,11 @@ CARD_GEN_PROMPT_YUWEN = """你是一位资深的中国{stage}语文教研员，�
 5. 一二年级侧重拼音卡、易错字卡、标点符号卡；三四年级增加古诗理解卡、修辞手法卡；五六年级增加阅读技巧卡、写作方法卡
 6. 例题要贴合课文内容，步骤清晰
 7. 记忆口诀要朗朗上口，适合小学生记忆
+8. ⚠️ 深度教学原则（非常重要！）：
+   - 每张卡片必须回答"为什么"，不能只告诉"是什么"
+   - why_explanation 要用孩子能懂的比喻解释本质（如：比喻句为什么生动？因为把陌生事物变成了你熟悉的东西，大脑自动"看到"画面）
+   - mistakes的reason必须解释根本原因（如：不是只说"应写'已'不是'己'"，而要说"因为'已经'表示完成、封住了，所以上面那笔要封口"）
+   - 修辞手法/阅读技巧类卡片必须解释"为什么这种方法有效"而非只给模板
 
 请直接输出完整JSON（不要markdown代码块），格式如下：
 {{
@@ -219,8 +232,9 @@ CARD_GEN_PROMPT_ENGLISH = """你是一位资深的中国{stage}英语教研员�
    - importance: 重要性 1-5
    - definition: 核心知识点（一句话概括）
    - core_points: 要点列表（3-5条）
+   - why_explanation: 本质原因/底层逻辑（用通俗语言解释语法/用法"为什么是这样"，如：为什么现在进行时要加ing？因为ing像一个"正在发生"的动作画面，提醒听者"此刻正在做"）
    - example: {{question, steps[], answer}}（示例题目或练习）
-   - mistakes: [{{wrong, correct}}]（1-2个常见错误）
+   - mistakes: [{{wrong: "常见错误", correct: "正确用法", reason: "为什么这样是错的（根本原因，不只是标注对错）"}}]（1-2个常见错误）
    - memory_tip: 记忆口诀/助记方法
    - related: {{prerequisite, next}}
 
@@ -228,6 +242,12 @@ CARD_GEN_PROMPT_ENGLISH = """你是一位资深的中国{stage}英语教研员�
 5. 小学三年级起开设英语课，三四年级侧重自然拼读卡、词汇卡、情景对话卡；五六年级增加语法卡、句型卡、易混词卡
 6. 例题要贴合课文内容，步骤清晰
 7. 记忆技巧要生动有趣，适合小学生
+8. ⚠️ 深度教学原则（非常重要！）：
+   - 语法卡/句型卡必须解释"为什么英语要这样说"，不能只给规则
+   - why_explanation 要解释语法规则的底层逻辑（如：为什么if条件句不用will？因为if本身已经表达了"假设/未来"的含义，再加will就重复了，英语中避免语义重复）
+   - mistakes的reason必须解释为什么这个错法是错的（如：不是只标❌"If it will rain"→✓"If it rains"，而要解释"if引导的条件从句用一般现在时表将来，因为if已经暗示了将来的可能性"）
+   - 步骤中至少一步解释"为什么这样选/填"而非只说"按规则填xxx"
+   - 记忆口诀不能过度简化导致错误（如"将来will"这种口诀会让学生在if从句中也用will，必须标注例外）
 
 请直接输出完整JSON（不要markdown代码块），格式如下：
 {{
@@ -274,13 +294,15 @@ BOOM_CARD_PROMPT_MATH = """你是一位小红书教育类爆款内容策划专�
 - importance: 1-5
 - definition: 核心知识点
 - core_points: 要点3-5条
+- why_explanation: 本质原因/底层逻辑（解释"为什么会错/为什么要这样做"，让学生真正理解而非死记）
 - example: {{question, steps[], answer}}
-- mistakes: [{{wrong, correct}}]
+- mistakes: [{{wrong, correct, reason: "为什么这样做是错的（根本原因）"}}]
 - memory_tip: 口诀
 - emotion_hook: 情绪钩子（一句话引发好奇或共鸣）
 - trap_point / speed_tip / challenge_rule / life_scene / battle_rule / think_expand: 对应类型的特有字段
 
 知识点必须准确，符合该年级教材范围！不要超纲！
+⚠️ 深度教学：每张卡片的why_explanation和mistakes.reason必须解释根本原因，不能只标注对错！陷阱卡要解释"为什么会踩这个坑"，速算卡要解释"为什么这个巧算成立"。
 
 请直接输出JSON（不要markdown代码块），格式如下：
 {{
@@ -328,13 +350,15 @@ BOOM_CARD_PROMPT_YUWEN = """你是一位小红书教育类爆款内容策划专�
 - importance: 1-5
 - definition: 核心知识点
 - core_points: 要点3-5条
+- why_explanation: 本质原因/底层逻辑（解释"为什么会错/为什么是这样"，如：为什么"己"和"已"容易混？因为只差一笔封口）
 - example: {{question, steps[], answer}}
-- mistakes: [{{wrong, correct}}]
+- mistakes: [{{wrong, correct, reason: "为什么这样是错的（根本原因）"}}]
 - memory_tip: 口诀/顺口溜
 - emotion_hook: 情绪钩子（一句话引发好奇或共鸣，如"看完这张卡，默写不丢分！"）
 - trap_point / pinyin_tip / challenge_rule / idiom_correction / battle_rule / reading_formula: 对应类型的特有字段
 
 知识点必须准确，符合该年级统编版教材范围！不要超纲！
+⚠️ 深度教学：每张卡片的why_explanation和mistakes.reason必须解释根本原因，不能只标注对错！易错字要解释"为什么这个部首/笔画容易错"，多音字要解释"为什么这个词语里读这个音"。
 
 请直接输出JSON（不要markdown代码块），格式如下：
 {{
@@ -382,13 +406,15 @@ BOOM_CARD_PROMPT_ENGLISH = """你是一位小红书教育类爆款内容策划�
 - importance: 1-5
 - definition: 核心知识点
 - core_points: 要点3-5条
+- why_explanation: 本质原因/底层逻辑（解释"为什么会混/为什么要这样用"，如：this/that为什么混？因为中文里"这个/那个"不区分距离，但英文要区分远近）
 - example: {{question, steps[], answer}}
-- mistakes: [{{wrong, correct}}]（1-2个常见错误）
+- mistakes: [{{wrong, correct, reason: "为什么这样是错的（根本原因）"}}]（1-2个常见错误）
 - memory_tip: 口诀/顺口溜
 - emotion_hook: 情绪钩子（一句话引发好奇或共鸣）
 - trap_point / pronunciation_tip / scene_dialogue / grammar_fix / battle_rule / speed_method: 对应类型的特有字段
 
 知识点必须准确，符合该年级PEP教材范围！不要超纲！小学英语从三年级开始。
+⚠️ 深度教学：每张卡片的why_explanation和mistakes.reason必须解释根本原因，不能只标注对错！语法纠错卡要解释"为什么这个语法点容易错，背后的中英思维差异是什么"。
 
 请直接输出JSON（不要markdown代码块），格式如下：
 {{

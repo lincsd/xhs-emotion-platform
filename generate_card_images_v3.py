@@ -272,9 +272,14 @@ PROMPT_SYSTEM_TEMPLATE = """你是小红书爆款知识卡片 AI 图片 Prompt �
 
 设计三步：
 1. 选一道最典型的例题，大号醒目展示
-2. 用最简视觉方式画出解题关键步骤
+2. 用最简视觉方式画出解题关键步骤（至少一步解释"为什么"而非只说"怎么做"）
 {solve_strategy_block}
 3. 大字答案 + 口诀(≤10字)
+
+⚠️ 深度教学要求：
+- 如果有"本质原因"或"错因"信息，必须在视觉中体现（用💡图标+简短文字）
+- ❌错误示范不能只标红叉，必须配一句"为什么错"的解释
+- 口诀区如有例外情况，用小字标注
 
 ══════ 视觉设计 ══════
 
@@ -431,7 +436,14 @@ def _build_card_info_grammar(card, subject, grade, semester):
     mistakes_info = ''
     if card.get('mistakes'):
         m = card['mistakes'][0]
+        reason = m.get('reason', '')
         mistakes_info = f"\n易混对比: ❌{m.get('wrong', '')[:150]} → ✅{m.get('correct', '')[:150]}"
+        if reason:
+            mistakes_info += f"\n错因: {reason[:150]}"
+
+    why_exp = ''
+    if card.get('why_explanation'):
+        why_exp = f"\n本质原因: {card['why_explanation'][:200]}"
 
     hook = ''
     if card.get('emotion_hook'):
@@ -455,8 +467,9 @@ def _build_card_info_grammar(card, subject, grade, semester):
 {mistakes_info}
 {trap}
 {hook}
+{why_exp}
 难度: {card.get('difficulty', 3)}/5
-⚠️ 视觉要求：左右双栏对比引导词用法，中英双语例句，易混点红圈标注"""
+⚠️ 视觉要求：左右双栏对比引导词用法，中英双语例句，易混点红圈标注，错因用粗体/高亮展示"""
 
 
 def _build_card_info_wellness(card, subject, grade, semester):
@@ -480,7 +493,10 @@ def _build_card_info_wellness(card, subject, grade, semester):
     mistakes_info = ''
     if card.get('mistakes'):
         m = card['mistakes'][0]
+        reason = m.get('reason', '')
         mistakes_info = f"\n常见误区: ❌{m.get('wrong', '')[:100]} → ✅{m.get('correct', '')[:100]}"
+        if reason:
+            mistakes_info += f"\n错因: {reason[:120]}"
 
     hook = ''
     if card.get('emotion_hook'):
@@ -525,7 +541,14 @@ def _build_card_info_edu(card, subject, grade, semester):
     mistakes_info = ''
     if card.get('mistakes'):
         m = card['mistakes'][0]
+        reason = m.get('reason', '')
         mistakes_info = f"\n常见错误: ❌{m.get('wrong', '')[:150]} → ✅{m.get('correct', '')[:150]}"
+        if reason:
+            mistakes_info += f"\n错因: {reason[:150]}"
+
+    why_exp = ''
+    if card.get('why_explanation'):
+        why_exp = f"\n本质原因: {card['why_explanation'][:200]}"
 
     is_vert = _detect_vertical_calc(card)
 
@@ -539,6 +562,7 @@ def _build_card_info_edu(card, subject, grade, semester):
 【要点】: {chr(10).join('• ' + p for p in clean_pts[:3])}
 {('【公式】: ' + ' | '.join(formulas)) if formulas else ''}
 【口诀】(≤8字): {card.get('memory_tip', '')[:40]}
+{'\n本质原因: ' + card.get('why_explanation', '')[:200] if card.get('why_explanation') else ''}
 {mistakes_info}
 难度: {card.get('difficulty', 3)}/5
 {'⚠️ 笔算竖式类：必须画正确竖式' if is_vert else ''}"""
