@@ -5,153 +5,514 @@
   "textbook": "人教PEP版",
   "grade_short": "四下",
   "card_pack": "知识总结",
-  "description": "四年级下册英语核心知识点精华总结",
+  "description": "四年级下册英语考点笔记总结",
   "units": [
     {
-      "unit_id": "S1",
-      "unit_name": "天气与时间",
+      "unit_id": "U1",
+      "unit_name": "我的教室与位置",
       "cards": [
         {
-          "card_id": "S1-01",
-          "full_id": "英语-四下-S1-01",
-          "title": "天气表达",
+          "card_id": "C1",
+          "full_id": "四下-U1-C1",
+          "title": "方位介词与「Where」疑问句",
           "type": "知识总结卡",
           "difficulty": 2,
-          "importance": 5,
-          "definition": "用英语描述各种天气和温度。",
+          "importance": 4,
+          "definition": "学习如何使用方位介词（on, in, under, near）来描述物品的位置，并运用「Where is/are...?」句型进行提问与回答。",
           "core_points": [
-            "天气：sunny晴天 cloudy多云 rainy下雨 snowy下雪 windy有风 cold冷 warm暖 hot热 cool凉爽",
-            "What's the weather like (in Beijing)? 天气怎么样？— It's sunny and warm.",
-            "Can I go outside? 我能出去吗？— Yes, you can. / No, you can't.",
-            "It's 26 degrees. 26度。"
+            "方位介词：on（在…上面）, in（在…里面）, under（在…下面）, near（在…附近）",
+            "提问单数物品位置：Where is the...?（它在哪里？）",
+            "回答单数物品位置：It's on/in/under/near the...（它在…的上面/里面/下面/附近。）",
+            "提问复数物品位置：Where are the...?（它们在哪里？）",
+            "回答复数物品位置：They're on/in/under/near the...（它们在…的上面/里面/下面/附近。）"
           ],
           "example": {
-            "question": "What's the weather like today?",
-            "steps": ["看窗外下雨了", "It's rainy. 下雨了"],
-            "answer": "It's rainy and cold."
+            "question": "看图回答问题：铅笔盒在书包里。",
+            "steps": [
+              "1. 确定物品和位置：pencil case, in, schoolbag。",
+              "2. 构造疑问句：Where is the pencil case?",
+              "3. 构造回答句：It's in the schoolbag."
+            ],
+            "answer": "Q: Where is the pencil case?\nA: It's in the schoolbag."
           },
           "mistakes": [
-            {"wrong": "It's rain.（用了动词原形）", "correct": "描述天气用形容词：It's rainy.（不是rain）"},
-            {"wrong": "What's the weather?（漏了like）", "correct": "What's the weather LIKE? 别忘like"}
+            {
+              "wrong": "Where is the pens?",
+              "correct": "Where are the pens?"
+            },
+            {
+              "wrong": "It's on schoolbag.",
+              "correct": "It's on the schoolbag."
+            }
           ],
-          "memory_tip": "🌤️ 天气词大多加y变形容词：rain→rainy, snow→snowy, sun→sunny(双n), cloud→cloudy, wind→windy",
-          "related": {"prerequisite": "见S1-02 时间", "next": "见S2 衣物"}
-        },
-        {
-          "card_id": "S1-02",
-          "full_id": "英语-四下-S1-02",
-          "title": "时间表达",
-          "type": "知识总结卡",
-          "difficulty": 2,
-          "importance": 5,
-          "definition": "认识时钟、学会用英语说时间。",
-          "core_points": [
-            "What time is it? / What's the time? 几点了？",
-            "It's + 数字 + o'clock. 整点：It's seven o'clock. 7点整。",
-            "It's + 时 + 分：It's six thirty. 6:30。",
-            "Time for + 名词/to + 动词：Time for breakfast! / Time to get up!"
-          ],
-          "example": {
-            "question": "现在7:30用英语怎么说？",
-            "steps": ["7=seven", "30=thirty", "It's seven thirty."],
-            "answer": "It's seven thirty."
+          "memory_tip": "「在上面on，在里面in，在下面under，在旁边near，位置介词记心间！单数用is，复数用are，代词it/they别搞错。」",
+          "related": {
+            "prerequisite": "三年级上册：This is...句型，基础名词；三年级下册：基础颜色词。",
+            "next": "五年级上册：更复杂的介词短语，描述房间布局。"
           },
-          "mistakes": [
-            {"wrong": "It's seven thirty o'clock.", "correct": "o'clock只用于整点，七点半不加o'clock"},
-            {"wrong": "Time to breakfast.", "correct": "Time FOR breakfast. 或 Time TO eat breakfast."}
-          ],
-          "memory_tip": "⏰ o'clock = of the clock 的缩写，只有整点才说「几点钟」",
-          "related": {"prerequisite": "见三下 数字", "next": "见五上 日程安排"}
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "听力选图",
+              "选择填空",
+              "连线",
+              "情景交际",
+              "按要求改句子"
+            ],
+            "scoring_key": "介词选择正确；单复数一致；代词it/they区分；大小写和标点。",
+            "common_trap": "介词与地点名词搭配错误；Where is/are...后接名词单复数混淆。",
+            "real_exam_example": {
+              "source": "期中考试选择题",
+              "question": "选择正确的介词填空：The book is ____ the desk.",
+              "answer": "on",
+              "scoring_notes": "考察对on表示『在…表面上』的理解。"
+            }
+          }
         }
       ]
     },
     {
-      "unit_id": "S2",
-      "unit_name": "衣物与购物",
+      "unit_id": "U2",
+      "unit_name": "我的学习用品",
       "cards": [
         {
-          "card_id": "S2-01",
-          "full_id": "英语-四下-S2-01",
-          "title": "衣物词汇",
+          "card_id": "C1",
+          "full_id": "四下-U2-C1",
+          "title": "学习用品词汇与「What's in...?」句型",
           "type": "知识总结卡",
           "difficulty": 2,
-          "importance": 5,
-          "definition": "各种衣物的英语说法和试衣购物对话。",
+          "importance": 3,
+          "definition": "掌握常见的学习用品词汇，并能运用「What's in your/my...?」句型询问和描述书包或其他容器里的物品。",
           "core_points": [
-            "上衣：shirt衬衫 T-shirt T恤 jacket夹克 coat外套 sweater毛衣 dress连衣裙 skirt裙子",
-            "下装：pants裤子 shorts短裤 jeans牛仔裤 socks袜子 shoes鞋",
-            "配件：hat帽子 scarf围巾 gloves手套 sunglasses太阳镜",
-            "Whose coat is this? 这是谁的外套？— It's mine/yours/his/hers."
+            "核心词汇：pencil（铅笔）, pen（钢笔）, ruler（尺子）, eraser（橡皮）, book（书）, notebook（笔记本）, schoolbag（书包）",
+            "疑问句：What's in your schoolbag?（你的书包里有什么？）",
+            "回答句：I have a pen, an eraser and some books.（我有一支钢笔，一块橡皮和一些书。）",
+            "不定冠词a/an的用法：a用于辅音音素开头的单数可数名词前，an用于元音音素开头的单数可数名词前。"
           ],
           "example": {
-            "question": "Whose hat is this?",
-            "steps": ["whose=谁的", "It's my sister's. 是我姐姐的。"],
-            "answer": "It's my sister's."
+            "question": "看图写话：描述你的书包里有什么（一支钢笔，两本书，一块橡皮）。",
+            "steps": [
+              "1. 识别物品：a pen, two books, an eraser。",
+              "2. 运用句型：What's in my schoolbag? I have...",
+              "3. 组合成句：I have a pen, two books and an eraser."
+            ],
+            "answer": "What's in my schoolbag?\nI have a pen, two books and an eraser."
           },
           "mistakes": [
-            {"wrong": "pants用单数a pant", "correct": "pants/shorts/jeans/socks/shoes/gloves永远是复数"},
-            {"wrong": "It's my.（代词用混）", "correct": "It's mine.（名词性物主代词）my后要跟名词: It's my hat."}
+            {
+              "wrong": "I have an pen.",
+              "correct": "I have a pen."
+            },
+            {
+              "wrong": "I have some book.",
+              "correct": "I have some books."
+            }
           ],
-          "memory_tip": "👖 两条腿穿的都是复数: pants, shorts, jeans, socks, shoes — 因为都是成对的！",
-          "related": {"prerequisite": "见三上 颜色词汇", "next": "见S2-02 购物对话"}
-        },
-        {
-          "card_id": "S2-02",
-          "full_id": "英语-四下-S2-02",
-          "title": "购物对话",
-          "type": "知识总结卡",
-          "difficulty": 2,
-          "importance": 4,
-          "definition": "学习在商店买东西时的常用英语对话。",
-          "core_points": [
-            "Can I help you? 有什么可以帮你的？— Yes, I want a shirt.",
-            "How much is it? 多少钱？— It's 50 yuan.",
-            "How much are they? 它们多少钱？— They're 80 yuan.",
-            "I'll take it/them. 我买了。/ It's too expensive. 太贵了。"
-          ],
-          "example": {
-            "question": "你想买一件T恤并问价钱",
-            "steps": ["Can I have a T-shirt?", "How much is it?"],
-            "answer": "Can I have a T-shirt, please? How much is it?"
+          "memory_tip": "「文具家族大集合，a/an别忘它，复数名词加-s，some表示一些！」",
+          "related": {
+            "prerequisite": "三年级上册：I have...句型，数字1-10；三年级下册：颜色词。",
+            "next": "五年级上册：购物情境下的物品描述，更复杂的名词短语。"
           },
-          "mistakes": [
-            {"wrong": "How much is they?", "correct": "复数用are: How much ARE they?"},
-            {"wrong": "分不清is和are", "correct": "it(单数)→is, they(复数)→are"}
-          ],
-          "memory_tip": "💰 How much = 多少钱，单个用is it，多个用are they",
-          "related": {"prerequisite": "见S2-01 衣物词汇", "next": "见S3 农场与动物"}
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": [
+              "看图写单词",
+              "选择填空",
+              "连线",
+              "书面表达",
+              "补全对话"
+            ],
+            "scoring_key": "单词拼写准确；a/an/some使用正确；名词单复数一致；书面表达时句型完整。",
+            "common_trap": "a/an与名词首字母发音的混淆；可数名词复数形式拼写错误。",
+            "real_exam_example": {
+              "source": "期末考试看图写单词",
+              "question": "根据图片写出单词：[一张尺子的图片]",
+              "answer": "ruler",
+              "scoring_notes": "考察核心词汇的拼写能力。"
+            }
+          }
         }
       ]
     },
     {
-      "unit_id": "S3",
-      "unit_name": "农场与蔬菜",
+      "unit_id": "U3",
+      "unit_name": "我的朋友们",
       "cards": [
         {
-          "card_id": "S3-01",
-          "full_id": "英语-四下-S3-01",
-          "title": "农场动物与蔬菜",
+          "card_id": "C1",
+          "full_id": "四下-U3-C1",
+          "title": "描述人物外貌与性格",
           "type": "知识总结卡",
-          "difficulty": 2,
+          "difficulty": 3,
           "importance": 4,
-          "definition": "认识农场里的动物和常见蔬菜。",
+          "definition": "学习描述人物外貌（高矮胖瘦）和简单性格（安静活跃）的形容词，并运用「Who is he/she?」句型询问人物身份，用「He/She is...」回答。",
           "core_points": [
-            "农场动物：cow奶牛 horse马 sheep羊(单复数同) hen母鸡 lamb小羊 goat山羊",
-            "蔬菜：tomato番茄 potato土豆 carrot胡萝卜 onion洋葱 green beans四季豆",
-            "Are these/those...? 这些/那些是...吗？— Yes, they are. / No, they aren't.",
-            "How many + 复数名词 + do you have?"
+            "外貌词汇：tall（高的）, short（矮的）, thin（瘦的）, fat（胖的）, strong（强壮的）",
+            "性格词汇：quiet（安静的）, active（活跃的）",
+            "询问身份：Who is he/she?（他/她是谁？）",
+            "描述人物：He/She is tall and strong.（他高大强壮。）"
           ],
           "example": {
-            "question": "Are those sheep?",
-            "steps": ["those=那些", "sheep单复数一样", "Yes, they are."],
-            "answer": "Yes, they are. They're sheep."
+            "question": "看图描述人物：一个高大强壮的男孩。",
+            "steps": [
+              "1. 识别人物性别：boy -> he。",
+              "2. 识别外貌特征：tall, strong。",
+              "3. 组合成句：He is tall and strong."
+            ],
+            "answer": "He is tall and strong."
           },
           "mistakes": [
-            {"wrong": "sheeps（给sheep加s）", "correct": "sheep单复数一样：one sheep, many sheep"},
-            {"wrong": "tomatos（复数错误）", "correct": "tomato→tomatoes, potato→potatoes（加es）"}
+            {
+              "wrong": "He is tall and strong.",
+              "correct": "He is tall and strong."
+            },
+            {
+              "wrong": "Who is he? She is my friend.",
+              "correct": "Who is he? He is my friend."
+            }
           ],
-          "memory_tip": "🐑 sheep像绵羊群一样，不管几只都长一样 → 单复数同形！和fish鱼一样",
-          "related": {"prerequisite": "见三上 动物词汇", "next": "见五上 更多动物描述"}
+          "memory_tip": "「高矮胖瘦形容词，安静活跃记在心，Who问是谁He/She答，be动词作桥梁。」",
+          "related": {
+            "prerequisite": "三年级上册：I am/He is/She is句型，基础称谓词。",
+            "next": "五年级上册：更详细的人物特征描述（头发、眼睛），描述爱好。"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "听力选图",
+              "选择填空",
+              "连线",
+              "情景交际",
+              "阅读理解",
+              "书面表达"
+            ],
+            "scoring_key": "形容词拼写正确；he/she/it人称代词区分；be动词与主语一致。",
+            "common_trap": "he/she与性别不符；形容词与be动词的搭配遗漏。",
+            "real_exam_example": {
+              "source": "期中考试阅读判断题",
+              "question": "阅读短文，判断正误：Mike is short and thin. (图片显示Mike高大强壮)",
+              "answer": "False",
+              "scoring_notes": "考察对人物外貌描述词汇的理解。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U4",
+      "unit_name": "我们的农场",
+      "cards": [
+        {
+          "card_id": "C1",
+          "full_id": "四下-U4-C1",
+          "title": "农场动物与「How many」句型",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握常见的农场动物词汇，学习使用「How many...?」句型询问数量，并用「There is/are...」句型进行回答。",
+          "core_points": [
+            "核心词汇：chicken（小鸡）, duck（鸭子）, pig（猪）, cow（奶牛）, horse（马）, sheep（绵羊）, goat（山羊）",
+            "询问数量：How many chickens are there?（有多少只小鸡？）",
+            "回答数量：There are five chickens.（有五只小鸡。）",
+            "There be句型：There is + 单数名词/不可数名词；There are + 复数名词。",
+            "特殊名词：sheep（绵羊）单复数同形。"
+          ],
+          "example": {
+            "question": "看图回答：图片中有三只鸭子。",
+            "steps": [
+              "1. 识别动物和数量：duck, three。",
+              "2. 构造疑问句：How many ducks are there?",
+              "3. 构造回答句：There are three ducks."
+            ],
+            "answer": "Q: How many ducks are there?\nA: There are three ducks."
+          },
+          "mistakes": [
+            {
+              "wrong": "How many chicken is there?",
+              "correct": "How many chickens are there?"
+            },
+            {
+              "wrong": "There is three pigs.",
+              "correct": "There are three pigs."
+            }
+          ],
+          "memory_tip": "「How many问数量，there are来回答，名词复数别忘加，sheep单复数一样大！」",
+          "related": {
+            "prerequisite": "三年级上册：数字1-10，基础动物词汇；三年级下册：I have...句型。",
+            "next": "五年级上册：描述农场活动，一般现在时态。"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "看图写单词",
+              "选择填空",
+              "按要求改句子",
+              "阅读理解",
+              "书面表达"
+            ],
+            "scoring_key": "动物单词拼写准确；How many后接可数名词复数；there be句型主谓一致；特殊名词单复数形式。",
+            "common_trap": "How many后名词用单数；there is/are与数量不符；sheep等特殊名词复数错误。",
+            "real_exam_example": {
+              "source": "期末考试选择填空",
+              "question": "There ____ a cow and two pigs on the farm.",
+              "answer": "are",
+              "scoring_notes": "考察there be句型就近原则，此处应看最近的two pigs，故用are。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U5",
+      "unit_name": "我能做什么",
+      "cards": [
+        {
+          "card_id": "C1",
+          "full_id": "四下-U5-C1",
+          "title": "情态动词「can」与能力表达",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习使用情态动词「can」（能，会）来表达能力，并掌握「Can you...?」句型进行提问与回答。",
+          "core_points": [
+            "核心动词：run（跑）, jump（跳）, swim（游泳）, sing（唱歌）, dance（跳舞）, draw（画画）, play basketball/football（打篮球/足球）",
+            "情态动词can的用法：can + 动词原形（表示能力或允许）",
+            "肯定句：I can run.（我能跑步。）",
+            "疑问句：Can you swim?（你会游泳吗？）",
+            "肯定回答：Yes, I can.（是的，我会。）",
+            "否定回答：No, I can't.（不，我不会。） （can't = can not）"
+          ],
+          "example": {
+            "question": "看图提问与回答：一个男孩在游泳。",
+            "steps": [
+              "1. 识别动作：swim。",
+              "2. 构造疑问句：Can he swim?",
+              "3. 构造肯定回答：Yes, he can."
+            ],
+            "answer": "Q: Can he swim?\nA: Yes, he can."
+          },
+          "mistakes": [
+            {
+              "wrong": "I can to run.",
+              "correct": "I can run."
+            },
+            {
+              "wrong": "Can you swim? No, I not can.",
+              "correct": "Can you swim? No, I can't."
+            }
+          ],
+          "memory_tip": "「Can能会，动词原形紧跟随，疑问回答Can不能，Yes/No后面把Can用。」",
+          "related": {
+            "prerequisite": "三年级下册：动词play，基础动作词汇。",
+            "next": "五年级上册：情态动词could（过去式），更复杂的行为动词。"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "听力判断",
+              "选择填空",
+              "情景交际",
+              "按要求改句子",
+              "阅读理解",
+              "书面表达"
+            ],
+            "scoring_key": "can后动词用原形；can't的正确拼写；主语与代词一致；回答简练准确。",
+            "common_trap": "can后动词加-ing或to；can't与can not的混淆。",
+            "real_exam_example": {
+              "source": "期末考试情景交际",
+              "question": "A: Can you sing? B: _____",
+              "answer": "Yes, I can. / No, I can't.",
+              "scoring_notes": "考察对can句型肯定和否定简答的掌握。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U6",
+      "unit_name": "天气与季节",
+      "cards": [
+        {
+          "card_id": "C1",
+          "full_id": "四下-U6-C1",
+          "title": "天气、季节词汇与「What's the weather like?」",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握常见的天气状况和四季词汇，并能运用「What's the weather like?」句型询问天气，用「It's...」回答。",
+          "core_points": [
+            "天气词汇：sunny（晴朗的）, cloudy（多云的）, rainy（下雨的）, windy（有风的）, snowy（下雪的）",
+            "季节词汇：spring（春天）, summer（夏天）, autumn（秋天）, winter（冬天）",
+            "询问天气：What's the weather like?（天气怎么样？）",
+            "回答天气：It's sunny.（天气晴朗。）",
+            "描述季节：It's spring.（现在是春天。）"
+          ],
+          "example": {
+            "question": "看图回答：图片显示下雨。",
+            "steps": [
+              "1. 识别天气：rainy。",
+              "2. 构造疑问句：What's the weather like?",
+              "3. 构造回答句：It's rainy."
+            ],
+            "answer": "Q: What's the weather like?\nA: It's rainy."
+          },
+          "mistakes": [
+            {
+              "wrong": "It's weather is rainy.",
+              "correct": "It's rainy."
+            },
+            {
+              "wrong": "What's the like weather?",
+              "correct": "What's the weather like?"
+            }
+          ],
+          "memory_tip": "「天气季节一家亲，like在问句末，It's开头来回答，形容词修饰天气。」",
+          "related": {
+            "prerequisite": "三年级下册：基础形容词，It's...句型。",
+            "next": "五年级上册：根据天气选择衣物，描述季节特征。"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "听力选图",
+              "看图写单词",
+              "选择填空",
+              "情景交际",
+              "书面表达"
+            ],
+            "scoring_key": "天气词汇拼写准确；What's the weather like句型完整；It's...开头。",
+            "common_trap": "天气名词和形容词混淆（rain vs rainy）；遗漏like或将like放在错误位置。",
+            "real_exam_example": {
+              "source": "期末考试看图写话",
+              "question": "看图描述今天的天气：[一张下雪的图片]",
+              "answer": "It's snowy today.",
+              "scoring_notes": "考察对天气词汇的拼写和简单句型的运用。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "Review",
+      "unit_name": "复习与巩固",
+      "cards": [
+        {
+          "card_id": "C1",
+          "full_id": "四下-Review-C1",
+          "title": "名词单复数与冠词a/an",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "复习名词单复数的变化规则，以及不定冠词a/an的正确使用，这是英语语法的基础。",
+          "core_points": [
+            "普通名词变复数：通常加-s（如：book-books, pen-pens）",
+            "特殊名词变复数：以s, x, ch, sh结尾加-es（如：bus-buses, box-boxes, watch-watches）；以f/fe结尾变v再加-es（如：knife-knives）；以辅音字母+y结尾变y为i再加-es（如：family-families）；特殊不规则变化（如：man-men, woman-women, child-children, foot-feet, tooth-teeth, sheep-sheep, fish-fish）",
+            "不定冠词a：用于辅音音素开头的单数可数名词前（如：a pen, a book）",
+            "不定冠词an：用于元音音素开头的单数可数名词前（如：an apple, an eraser）"
+          ],
+          "example": {
+            "question": "将以下词语变为复数或填入a/an：\n1. apple\n2. box\n3. ruler\n4. child",
+            "steps": [
+              "1. apple：元音开头，单数可数名词 -> an apple。",
+              "2. box：以x结尾，变复数加-es -> boxes。",
+              "3. ruler：辅音开头，单数可数名词 -> a ruler。",
+              "4. child：特殊不规则变化 -> children。"
+            ],
+            "answer": "1. an apple / apples\n2. a box / boxes\n3. a ruler / rulers\n4. a child / children"
+          },
+          "mistakes": [
+            {
+              "wrong": "an book",
+              "correct": "a book"
+            },
+            {
+              "wrong": "three childs",
+              "correct": "three children"
+            },
+            {
+              "wrong": "two sheeps",
+              "correct": "two sheep"
+            }
+          ],
+          "memory_tip": "「a/an单数可数名词前，元音an，辅音a，复数多加s/es，特殊变化要背它！」",
+          "related": {
+            "prerequisite": "三年级上册：名词概念，基础数字。",
+            "next": "五年级上册：所有格名词，可数与不可数名词区分。"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "选择填空",
+              "按要求改句子",
+              "看图写单词",
+              "听力判断"
+            ],
+            "scoring_key": "冠词a/an选择准确；名词复数形式拼写正确；特殊不规则复数记忆。",
+            "common_trap": "a/an与名词首字母发音混淆；不规则复数名词忘记变化；不可数名词加复数。",
+            "real_exam_example": {
+              "source": "期末考试按要求改句子",
+              "question": "将单数名词变为复数：a watch",
+              "answer": "watches",
+              "scoring_notes": "考察以ch结尾名词的复数变化规则。"
+            }
+          }
+        },
+        {
+          "card_id": "C2",
+          "full_id": "四下-Review-C2",
+          "title": "人称代词与be动词的搭配",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "复习主格人称代词（I, you, he, she, it, we, they）与be动词（am, is, are）的正确搭配，这是构成英语句子的核心。",
+          "core_points": [
+            "I 搭配 am：I am a student.（我是一名学生。）",
+            "You 搭配 are：You are my friend.（你是我的朋友。）",
+            "He/She/It 搭配 is：He is tall. She is happy. It is a cat.（他很高。她很开心。它是一只猫。）",
+            "We/They 搭配 are：We are teachers. They are good boys.（我们是老师。他们是好男孩。）",
+            "缩写形式：I'm, You're, He's, She's, It's, We're, They're"
+          ],
+          "example": {
+            "question": "选择正确的be动词填空：\n1. She ___ a girl.\n2. We ___ friends.\n3. I ___ happy.",
+            "steps": [
+              "1. She是第三人称单数，搭配is。",
+              "2. We是第一人称复数，搭配are。",
+              "3. I是第一人称单数，搭配am。"
+            ],
+            "answer": "1. is\n2. are\n3. am"
+          },
+          "mistakes": [
+            {
+              "wrong": "He am a boy.",
+              "correct": "He is a boy."
+            },
+            {
+              "wrong": "You is tall.",
+              "correct": "You are tall."
+            }
+          ],
+          "memory_tip": "「我用am，你用are，他她它用is，我们你们他们are，be动词随主语变。」",
+          "related": {
+            "prerequisite": "三年级上册：基础人称代词，be动词初步概念。",
+            "next": "五年级上册：be动词的过去式（was/were），动词ing形式。"
+          },
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": [
+              "选择填空",
+              "按要求改句子",
+              "补全对话",
+              "书面表达"
+            ],
+            "scoring_key": "主谓一致；be动词选择准确；缩写形式的正确使用。",
+            "common_trap": "第三人称单数He/She/It与is搭配错误；I与am搭配错误。",
+            "real_exam_example": {
+              "source": "期中考试选择填空",
+              "question": "My sister and I ____ watching TV now.",
+              "answer": "are",
+              "scoring_notes": "考察主语My sister and I（相当于We）与be动词的搭配。"
+            }
+          }
         }
       ]
     }

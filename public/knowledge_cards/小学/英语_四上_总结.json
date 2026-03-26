@@ -5,159 +5,617 @@
   "textbook": "人教PEP版",
   "grade_short": "四上",
   "card_pack": "知识总结",
-  "description": "四年级上册英语核心知识点精华总结",
+  "description": "四年级上册英语考点笔记总结，助你轻松攻克期末考试！",
   "units": [
     {
-      "unit_id": "S1",
-      "unit_name": "教室与学校",
+      "unit_id": "U1",
+      "unit_name": "我的教室与物品",
       "cards": [
         {
-          "card_id": "S1-01",
-          "full_id": "英语-四上-S1-01",
-          "title": "教室物品",
+          "card_id": "C1",
+          "full_id": "G4S1U1C1",
+          "title": "「教室物品与颜色词汇」",
           "type": "知识总结卡",
-          "difficulty": 2,
+          "difficulty": 3,
           "importance": 5,
-          "definition": "教室里常见物品的英语名词与Where引导句。",
+          "definition": "「掌握人教版PEP四年级上册中常见的教室物品和颜色词汇，并能正确拼写和识别。」",
           "core_points": [
-            "classroom教室 blackboard黑板 light灯 fan风扇 window窗户 door门 desk课桌 chair椅子",
-            "computer电脑 teacher's desk讲台 picture图画 wall墙壁 floor地板",
-            "Where is my book? 我的书在哪？— It's on the desk. 在课桌上。",
-            "Let me/Let's + 动词原形：Let me clean the blackboard."
+            "「教室物品：desk（课桌）, chair（椅子）, book（书）, bag（书包）, pencil（铅笔）, pen（钢笔/圆珠笔）, ruler（尺子）, eraser（橡皮）, board（黑板）, computer（电脑）。」",
+            "「颜色词汇：red（红色）, yellow（黄色）, blue（蓝色）, green（绿色）, white（白色）, black（黑色）, brown（棕色）, orange（橙色）, purple（紫色）。」",
+            "「识记：通过图片、实物和读音来记忆单词，注意区分pen和pencil。」",
+            "「拼写：多写多练，尤其注意元音字母和易错字母组合。」"
           ],
           "example": {
-            "question": "Where is the picture?",
-            "steps": ["picture=图画", "it's on the wall=它在墙上"],
-            "answer": "It's on the wall."
+            "question": "看图写单词：(图片为一支红色的铅笔)",
+            "steps": [
+              "1. 识别图片内容：一支铅笔。",
+              "2. 回忆「铅笔」的英语单词：pencil。",
+              "3. 观察颜色：红色。",
+              "4. 回忆「红色」的英语单词：red。",
+              "5. 综合写出：red pencil。"
+            ],
+            "answer": "red pencil"
           },
           "mistakes": [
-            {"wrong": "Where is忘了用is", "correct": "Where is + 单数物品 / Where are + 复数"},
-            {"wrong": "on/in/under搞混", "correct": "on在上面 in在里面 under在下面 near在旁边"}
+            {
+              "wrong": "pencle",
+              "correct": "pencil"
+            },
+            {
+              "wrong": "yello",
+              "correct": "yellow"
+            },
+            {
+              "wrong": "bord",
+              "correct": "board"
+            }
           ],
-          "memory_tip": "🏫 记教室：往上看→light灯 fan风扇，往前看→blackboard黑板，四周→window窗 door门 wall墙",
-          "related": {"prerequisite": "见三下 基础名词", "next": "见S1-02 书包与文具"}
+          "memory_tip": "「物品颜色多，分类记牢靠；拼读多练习，大小写别忘掉。」",
+          "related": {
+            "prerequisite": "「三年级基础词汇（颜色、数字1-10）」",
+            "next": "「五年级物品形容词拓展」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "听力选图",
+              "听力判断",
+              "看图写单词",
+              "英汉互译",
+              "选择填空"
+            ],
+            "scoring_key": "「单词拼写准确无误，大小写按要求书写。」",
+            "common_trap": "「易混淆单词（如pen/pencil），部分单词拼写易错（如yellow, purple）。」",
+            "real_exam_example": {
+              "source": "模拟题",
+              "question": "看图写单词，补全句子：It's a ______ (图片为一张绿色的椅子).",
+              "answer": "green chair",
+              "scoring_notes": "「识别图片并正确拼写颜色和物品单词。」"
+            }
+          }
         },
         {
-          "card_id": "S1-02",
-          "full_id": "英语-四上-S1-02",
-          "title": "书包与文具",
+          "card_id": "C2",
+          "full_id": "G4S1U1C2",
+          "title": "「询问物品：What's this/that?」",
           "type": "知识总结卡",
-          "difficulty": 1,
+          "difficulty": 3,
           "importance": 4,
-          "definition": "书包里常见文具的英语说法和相关句型。",
+          "definition": "「学习使用What's this/that?询问物品，并用It's a/an...回答，掌握this/that/it的指代用法。」",
           "core_points": [
-            "schoolbag书包 maths book数学书 English book英语书 Chinese book语文书 storybook故事书 notebook笔记本",
-            "pencil铅笔 pen钢笔 ruler尺子 eraser橡皮 crayon蜡笔 pencil box铅笔盒",
-            "What's in your schoolbag? 你书包里有什么？",
-            "I have a/an + 单数 / I have + 数字 + 复数"
+            "「`What's this?`（这是什么？）用于询问近处单数物品。」",
+            "「`What's that?`（那是什么？）用于询问远处单数物品。」",
+            "「回答统一用`It's a/an...`（它是一个/件……），其中`'s`是`is`的缩写。」",
+            "「`this`（这）指近处的单数人或物；`that`（那）指远处的单数人或物；`it`（它）指代单数物品或动物。」"
           ],
           "example": {
-            "question": "What's in your schoolbag?",
-            "steps": ["列出书包里的东西", "An English book, three notebooks and a pencil box."],
-            "answer": "An English book, three notebooks and a pencil box."
+            "question": "根据图片和提示完成对话：A: What's this? B: It's a ______ (图片为一本蓝色的书).",
+            "steps": [
+              "1. 识别问句：What's this? 询问近处物品。",
+              "2. 识别图片：一本蓝色的书。",
+              "3. 回忆「蓝色」和「书」的单词：blue, book。",
+              "4. 组织回答：It's a blue book."
+            ],
+            "answer": "blue book"
           },
           "mistakes": [
-            {"wrong": "a English book", "correct": "元音开头用an：an English book, an eraser"},
-            {"wrong": "three notebook", "correct": "数字大于1用复数：three notebooks"}
+            {
+              "wrong": "It's book.",
+              "correct": "It's a book."
+            },
+            {
+              "wrong": "This is a pen.",
+              "correct": "It's a pen."
+            }
           ],
-          "memory_tip": "📚 a和an的区别：遇到元音(a/e/i/o/u)开头就用an，像个「n」保护元音不让它孤单",
-          "related": {"prerequisite": "见三上 文具词汇", "next": "见S2 朋友描述"}
+          "memory_tip": "「近this远that，单数用what；it来回答，a/an别落下。」",
+          "related": {
+            "prerequisite": "「三年级This is.../That is...句型」",
+            "next": "「五年级询问复数物品What are these/those?」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "选择填空",
+              "情景交际",
+              "按要求改句子",
+              "补全对话"
+            ],
+            "scoring_key": "「正确使用a/an，代词it的指代一致性，以及问答句的匹配。」",
+            "common_trap": "「a/an的误用，回答时直接用this/that代替it。」",
+            "real_exam_example": {
+              "source": "期中考试",
+              "question": "选择最佳答案：A: What's that? B: ________.",
+              "options": [
+                "A. It's a bag.",
+                "B. That's a bag.",
+                "C. Yes, it is."
+              ],
+              "answer": "A",
+              "scoring_notes": "「考察it的指代作用和简单问答句的正确匹配。」"
+            }
+          }
         }
       ]
     },
     {
-      "unit_id": "S2",
-      "unit_name": "外貌描述与朋友",
+      "unit_id": "U2",
+      "unit_name": "我的书包与数量",
       "cards": [
         {
-          "card_id": "S2-01",
-          "full_id": "英语-四上-S2-01",
-          "title": "描述人的外貌",
+          "card_id": "C3",
+          "full_id": "G4S1U2C3",
+          "title": "「物品数量与 How many...?」",
           "type": "知识总结卡",
-          "difficulty": 2,
+          "difficulty": 4,
           "importance": 5,
-          "definition": "用英语描述一个人的外貌特征。",
+          "definition": "「学习使用How many...?询问可数名词复数数量，并用There are...回答，掌握数字1-20的拼写。」",
           "core_points": [
-            "He/She is tall/short/thin/strong/quiet/friendly.",
-            "He/She has long/short hair, big/small eyes.",
-            "My friend is... 我的朋友是/有...",
-            "has用于描述「有」某特征（头发、眼睛等），is用于描述「是」什么样的"
+            "「`How many...?`（有多少……？）用于询问可数名词的复数数量。」",
+            "「`How many` 后面直接跟名词复数，如：How many books?」",
+            "「回答用`There are + 数字 + 名词复数`。例如：There are five books.」",
+            "「数字1-20的英文拼写：one, two, three... ten, eleven, twelve... twenty。」",
+            "「名词变复数规则：一般加`-s`，以`s, x, ch, sh`结尾加`-es`（如`boxes`），以辅音字母+`y`结尾变`y`为`i`再加`-es`（如`families`）。」"
           ],
           "example": {
-            "question": "描述你的好朋友",
-            "steps": ["My friend is tall and thin.", "She has long hair and big eyes.", "She is friendly."],
-            "answer": "My friend is tall and thin. She has long hair and big eyes. She is friendly."
+            "question": "完成对话：A: How many pens are there? B: There are ______ pens. (图片有三支笔)",
+            "steps": [
+              "1. 识别问句：How many pens? 询问笔的数量。",
+              "2. 识别图片：有三支笔。",
+              "3. 回忆「三」的英文拼写：three。",
+              "4. 组织回答：There are three pens."
+            ],
+            "answer": "three"
           },
           "mistakes": [
-            {"wrong": "He has tall.（has和is用混）", "correct": "He IS tall.（是高的）He HAS big eyes.（有大眼睛）"},
-            {"wrong": "She have long hair.", "correct": "第三人称单数用has: She has long hair."}
+            {
+              "wrong": "How many book?",
+              "correct": "How many books?"
+            },
+            {
+              "wrong": "There is five books.",
+              "correct": "There are five books."
+            },
+            {
+              "wrong": "There are three pen.",
+              "correct": "There are three pens."
+            }
           ],
-          "memory_tip": "👤 is=是什么样（高矮胖瘦），has=有什么（头发眼睛鼻子）",
-          "related": {"prerequisite": "见三下 身体部位", "next": "见S3 食物与就餐"}
+          "memory_tip": "「How many问数量，后面名词带-s；There are来回答，数字复数不写差。」",
+          "related": {
+            "prerequisite": "「数字1-10，名词单复数概念」",
+            "next": "「五年级更多名词复数不规则变化」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "选择填空",
+              "连线",
+              "情景交际",
+              "阅读理解",
+              "按要求改句子"
+            ],
+            "scoring_key": "「名词复数形式正确，be动词与数量一致，数字拼写无误。」",
+            "common_trap": "「名词单复数混淆，be动词is/are误用，数字拼写错误。」",
+            "real_exam_example": {
+              "source": "期末考试",
+              "question": "选择正确选项：Look! There are two ______ in the box.",
+              "options": [
+                "A. book",
+                "B. books",
+                "C. a book"
+              ],
+              "answer": "B",
+              "scoring_notes": "「考察数字后的名词复数形式。」"
+            }
+          }
         }
       ]
     },
     {
-      "unit_id": "S3",
-      "unit_name": "食物与就餐",
+      "unit_id": "U3",
+      "unit_name": "我的朋友与家人",
       "cards": [
         {
-          "card_id": "S3-01",
-          "full_id": "英语-四上-S3-01",
-          "title": "食物种类与餐桌礼仪",
+          "card_id": "C4",
+          "full_id": "G4S1U3C4",
+          "title": "「家庭成员与人称代词」",
           "type": "知识总结卡",
-          "difficulty": 2,
-          "importance": 5,
-          "definition": "学习更多食物名称、餐具和就餐用语。",
-          "core_points": [
-            "新食物：beef牛肉 chicken鸡肉 noodles面条 soup汤 vegetable蔬菜 juice果汁",
-            "餐具：fork叉子 knife刀 spoon勺子 chopsticks筷子 plate盘子 bowl碗",
-            "What would you like? 你想要什么？— I'd like some... 我想要一些...",
-            "Would you like some soup? 你想要一些汤吗？— Yes, please. / No, thanks."
-          ],
-          "example": {
-            "question": "What would you like for dinner?",
-            "steps": ["dinner=晚餐", "I'd like = I would like", "选择食物"],
-            "answer": "I'd like some noodles and vegetables, please."
-          },
-          "mistakes": [
-            {"wrong": "I'd like a noodles.", "correct": "noodles是复数，用some：I'd like some noodles."},
-            {"wrong": "knife的复数", "correct": "knife→knives（f变v加es）"}
-          ],
-          "memory_tip": "🍜 Would you like = 你想要（礼貌的问法），I'd like = I would like = 我想要（礼貌的说法）",
-          "related": {"prerequisite": "见三下 水果食物", "next": "见S4 数字与家里"}
-        }
-      ]
-    },
-    {
-      "unit_id": "S4",
-      "unit_name": "家庭与职业",
-      "cards": [
-        {
-          "card_id": "S4-01",
-          "full_id": "英语-四上-S4-01",
-          "title": "家庭成员与职业",
-          "type": "知识总结卡",
-          "difficulty": 2,
+          "difficulty": 3,
           "importance": 4,
-          "definition": "扩展家庭成员和常见职业的英语词汇。",
+          "definition": "「掌握常见家庭成员称谓，并正确使用人称代词he/she/it/they及其缩写形式。」",
           "core_points": [
-            "家庭：uncle叔叔 aunt阿姨 cousin堂/表兄妹 baby婴儿",
-            "职业：doctor医生 nurse护士 driver司机 farmer农民 cook厨师 teacher老师",
-            "What's your father's job? / What does your father do? 你爸爸做什么工作？",
-            "My father is a doctor. = He's a doctor."
+            "「家庭成员词汇：father（父亲）, mother（母亲）, brother（兄弟）, sister（姐妹）, grandfather（祖父/外祖父）, grandmother（祖母/外祖母）, friend（朋友）, family（家庭）。」",
+            "「人称代词：`he`（他）, `she`（她）, `it`（它）, `they`（他们/她们/它们）。」",
+            "「`he` 指男性单数，`she` 指女性单数，`it` 指物或动物单数，`they` 指复数（人或物）。」",
+            "「缩写形式：`he's` (=he is), `she's` (=she is), `it's` (=it is), `they're` (=they are)。」",
+            "「`Who's this/that?`（这是/那是谁？）用于询问人，回答用`This is/That is...` 或 `He's/She's...`。」"
           ],
           "example": {
-            "question": "What does your mother do?",
-            "steps": ["问妈妈的职业", "She's a nurse."],
-            "answer": "She's a nurse."
+            "question": "选择正确的人称代词填空：This is my mother. ______ is a doctor.",
+            "steps": [
+              "1. 识别指代对象：my mother（我的妈妈）。",
+              "2. 判断性别和单复数：女性，单数。",
+              "3. 选择对应的人称代词：she。",
+              "4. 填入：She."
+            ],
+            "answer": "She"
           },
           "mistakes": [
-            {"wrong": "My father is doctor.（漏a）", "correct": "职业前要加a/an：My father is a doctor."},
-            {"wrong": "What's your father job?（漏's）", "correct": "your father's job（名词所有格要加's）"}
+            {
+              "wrong": "He's my mother.",
+              "correct": "She's my mother."
+            },
+            {
+              "wrong": "They is my friends.",
+              "correct": "They are my friends."
+            }
           ],
-          "memory_tip": "💼 问职业三种说法：What's his/her job? = What does he/she do? = What is he/she?",
-          "related": {"prerequisite": "见三下 家庭成员", "next": "见四下 更多职业"}
+          "memory_tip": "「爸爸哥哥用he，妈妈姐姐用she；动物物品都用it，人多物多用they。」",
+          "related": {
+            "prerequisite": "「三年级This is...介绍句型」",
+            "next": "「五年级主格宾格代词区分」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "选择填空",
+              "听力选图",
+              "情景交际",
+              "书面表达 (My family)"
+            ],
+            "scoring_key": "「人称代词与指代对象性别、单复数一致，缩写形式正确。」",
+            "common_trap": "「he/she/it/they的混淆，特别是she/he的性别错误。」",
+            "real_exam_example": {
+              "source": "期中考试",
+              "question": "判断对错：This is my father. She is a teacher. (T/F)",
+              "answer": "F",
+              "scoring_notes": "「考察人称代词与指代对象性别的一致性。」"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U4",
+      "unit_name": "我的家",
+      "cards": [
+        {
+          "card_id": "C5",
+          "full_id": "G4S1U4C5",
+          "title": "「房间家具词汇与 Where is...?」",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "「掌握常见房间和家具词汇，并学习使用Where is...?询问物品位置，用介词in/on/under回答。」",
+          "core_points": [
+            "「房间词汇：bedroom（卧室）, living room（客厅）, kitchen（厨房）, bathroom（浴室）, study（书房）。」",
+            "「家具词汇：bed（床）, sofa（沙发）, table（桌子）, chair（椅子）, TV（电视）, desk（书桌）, lamp（台灯）, picture（图片/画）。」",
+            "「`Where is...?`（……在哪里？）用于询问单数物品的位置。」",
+            "「介词：`in`（在……里）, `on`（在……上）, `under`（在……下）。」",
+            "「回答用`It's in/on/under the...`」"
+          ],
+          "example": {
+            "question": "看图回答问题：Where is the ball? (图片：球在桌子下面)",
+            "steps": [
+              "1. 识别问句：Where is the ball? 询问球的位置。",
+              "2. 观察图片：球在桌子下面。",
+              "3. 回忆「在……下」的介词：under。",
+              "4. 组织回答：It's under the table."
+            ],
+            "answer": "It's under the table."
+          },
+          "mistakes": [
+            {
+              "wrong": "Where the ball?",
+              "correct": "Where is the ball?"
+            },
+            {
+              "wrong": "It's the table.",
+              "correct": "It's under the table."
+            },
+            {
+              "wrong": "It's in the table.",
+              "correct": "It's on/under the table."
+            }
+          ],
+          "memory_tip": "「房间家具记清楚，in on under位置说；Where is问单数，it来回答不糊涂。」",
+          "related": {
+            "prerequisite": "「Unit 1物品词汇，Unit 2 What's this?」",
+            "next": "「五年级更多方位介词（behind, in front of, next to）」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "看图写单词",
+              "选择填空",
+              "情景交际",
+              "阅读理解",
+              "补全对话"
+            ],
+            "scoring_key": "「介词使用准确，be动词不遗漏，名词单复数一致。」",
+            "common_trap": "「介词混淆，漏写is，介词后名词漏写the。」",
+            "real_exam_example": {
+              "source": "模拟题",
+              "question": "选择正确介词填空：The cat is ______ the bed. (图片：猫在床上)",
+              "options": [
+                "A. in",
+                "B. on",
+                "C. under"
+              ],
+              "answer": "B",
+              "scoring_notes": "「考察对介词on的理解和应用。」"
+            }
+          }
+        },
+        {
+          "card_id": "C6",
+          "full_id": "G4S1U4C6",
+          "title": "「There is/are 句型」",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "「学习使用There is/are句型表示某地有某物，并掌握其单复数形式、疑问句和否定句变化。」",
+          "core_points": [
+            "「`There is + 单数名词`：表示有「一个」某物。例如：There is a book on the desk.」",
+            "「`There are + 复数名词`：表示有「多个」某物。例如：There are three books on the desk.」",
+            "「疑问句：将`is/are`提前。`Is there...?` / `Are there...?`」",
+            "「否定句：在`is/are`后加`not`。`There isn't...` / `There aren't...`（`isn't`=is not, `aren't`=are not）。」",
+            "「句型结构：`There be + 名词 + 地点状语`。」"
+          ],
+          "example": {
+            "question": "按要求改写句子：There is a cat in the living room. (改为疑问句并作肯定回答)",
+            "steps": [
+              "1. 识别原句：There is a cat... 单数肯定句。",
+              "2. 改为疑问句：将is提前，Is there a cat in the living room?",
+              "3. 作肯定回答：Yes, there is."
+            ],
+            "answer": "Is there a cat in the living room? Yes, there is."
+          },
+          "mistakes": [
+            {
+              "wrong": "There are a book.",
+              "correct": "There is a book."
+            },
+            {
+              "wrong": "Is there three books?",
+              "correct": "Are there three books?"
+            },
+            {
+              "wrong": "There no book.",
+              "correct": "There isn't a book."
+            }
+          ],
+          "memory_tip": "「有物用there be，单数is复数are；疑问be提前，否定be后not加。」",
+          "related": {
+            "prerequisite": "「be动词用法，名词单复数」",
+            "next": "「五年级There be句型与some/any的搭配」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "选择填空",
+              "按要求改句子",
+              "阅读理解",
+              "书面表达 (My home)"
+            ],
+            "scoring_key": "「be动词与名词的单复数一致，疑问句和否定句的结构正确，缩写形式熟练运用。」",
+            "common_trap": "「There is/are与名词单复数不一致，疑问句be动词提前漏写，否定句缺少not。」",
+            "real_exam_example": {
+              "source": "期末考试",
+              "question": "选择正确选项：______ a computer in my study.",
+              "options": [
+                "A. There are",
+                "B. There is",
+                "C. Is there"
+              ],
+              "answer": "B",
+              "scoring_notes": "「考察There be句型中is/are与名词单复数的匹配。」"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U5",
+      "unit_name": "你想要什么？",
+      "cards": [
+        {
+          "card_id": "C7",
+          "full_id": "G4S1U5C7",
+          "title": "「食物饮料词汇与 What would you like?」",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "「掌握常见食物和饮料词汇，并学习使用What would you like?询问对方想要什么，用I'd like...回答。」",
+          "core_points": [
+            "「食物词汇：rice（米饭）, bread（面包）, noodles（面条）, cake（蛋糕）, egg（鸡蛋）, hamburger（汉堡）, hot dog（热狗）, pizza（披萨）, chicken（鸡肉）, fish（鱼肉）, fruit（水果）, apple（苹果）, banana（香蕉）, pear（梨）, orange（橙子）, grape（葡萄）。」",
+            "「饮料词汇：water（水）, juice（果汁）, milk（牛奶）, tea（茶）, coffee（咖啡）。」",
+            "「`What would you like?`（你想要什么？）是礼貌的询问方式。」",
+            "「回答用`I'd like...`（我想要……），`'d`是`would`的缩写。」",
+            "「`Do you like...?`（你喜欢……吗？）回答用`Yes, I do.` / `No, I don't.`」"
+          ],
+          "example": {
+            "question": "完成对话：A: What would you like? B: I'd like some ______ (图片为果汁).",
+            "steps": [
+              "1. 识别问句：What would you like? 询问想要什么。",
+              "2. 识别图片：果汁。",
+              "3. 回忆「果汁」的英文单词：juice。",
+              "4. 组织回答：I'd like some juice."
+            ],
+            "answer": "juice"
+          },
+          "mistakes": [
+            {
+              "wrong": "I like juice.",
+              "correct": "I'd like some juice."
+            },
+            {
+              "wrong": "I'd like a rice.",
+              "correct": "I'd like some rice."
+            }
+          ],
+          "memory_tip": "「食物饮料多，分类记清楚；想要什么would like，喜欢不喜欢do you like。」",
+          "related": {
+            "prerequisite": "「三年级食物词汇，I like...句型」",
+            "next": "「五年级可数/不可数名词与some/any」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "看图写单词",
+              "选择填空",
+              "情景交际",
+              "补全对话"
+            ],
+            "scoring_key": "「食物饮料词汇拼写准确，What would you like?与I'd like...问答句式正确。」",
+            "common_trap": "「可数/不可数名词前冠词a/an/some的误用，混淆like与would like。」",
+            "real_exam_example": {
+              "source": "模拟题",
+              "question": "选择最佳答案：A: What would you like? B: ________.",
+              "options": [
+                "A. Yes, I do.",
+                "B. I'd like a hot dog.",
+                "C. I like hot dogs."
+              ],
+              "answer": "B",
+              "scoring_notes": "「考察What would you like?的正确回答方式。」"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U6",
+      "unit_name": "更多数量与回顾",
+      "cards": [
+        {
+          "card_id": "C8",
+          "full_id": "G4S1U6C8",
+          "title": "「名词单复数变化规则」",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "「掌握英语名词从单数变为复数的基本规则，包括规则变化和常见不规则变化。」",
+          "core_points": [
+            "「一般情况：词尾加`-s` (如: book -> books, pen -> pens)。」",
+            "「以`s, x, ch, sh`结尾：词尾加`-es` (如: bus -> buses, box -> boxes, watch -> watches, brush -> brushes)。」",
+            "「以辅音字母+`y`结尾：变`y`为`i`再加`-es` (如: family -> families, baby -> babies)。」",
+            "「不规则变化：需特殊记忆。四年级常考：`man -> men`, `woman -> women`, `child -> children`, `foot -> feet`, `tooth -> teeth`。」",
+            "「特殊情况：`sheep -> sheep`, `fish -> fish`（单复数同形）。」"
+          ],
+          "example": {
+            "question": "写出下列名词的复数形式：1. desk ______ 2. watch ______ 3. child ______",
+            "steps": [
+              "1. desk：一般情况，加-s -> desks。",
+              "2. watch：以-ch结尾，加-es -> watches。",
+              "3. child：不规则变化 -> children。"
+            ],
+            "answer": "1. desks 2. watches 3. children"
+          },
+          "mistakes": [
+            {
+              "wrong": "boxs",
+              "correct": "boxes"
+            },
+            {
+              "wrong": "childs",
+              "correct": "children"
+            },
+            {
+              "wrong": "familys",
+              "correct": "families"
+            }
+          ],
+          "memory_tip": "「名词变复数，-s最常见；-s -x -ch -sh，-es跟着来；y前辅音变i es，不规则变化要牢记，一个一个背下来。」",
+          "related": {
+            "prerequisite": "「名词概念，数字认知」",
+            "next": "「五年级更多不规则名词复数，可数/不可数名词」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "选择填空",
+              "看图写单词",
+              "按要求改句子",
+              "阅读理解"
+            ],
+            "scoring_key": "「熟练掌握规则变化，准确记忆常见不规则变化，区分单复数同形名词。」",
+            "common_trap": "「规则变化中易错后缀，不规则变化背诵不牢。」",
+            "real_exam_example": {
+              "source": "期末考试",
+              "question": "选择正确的复数形式：There are many ______ in the park.",
+              "options": [
+                "A. child",
+                "B. children",
+                "C. childs"
+              ],
+              "answer": "B",
+              "scoring_notes": "「考察不规则名词child的复数形式。」"
+            }
+          }
+        },
+        {
+          "card_id": "C9",
+          "full_id": "G4S1U6C9",
+          "title": "「情景交际与日常问答」",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "「掌握四年级上册中常见的日常交际用语，能在特定情景下进行简单问答和交流。」",
+          "core_points": [
+            "「问候语：`Hello/Hi`, `Good morning/afternoon/evening`, `How are you? I'm fine, thank you.`」",
+            "「介绍与询问：`What's your name? My name is...`, `Who's this? This is...`」",
+            "「课堂指令：`Come in`, `Go out`, `Stand up`, `Sit down`, `Open your book`, `Close your book`, `Look at the board.`」",
+            "「请求与感谢：`May I come in? Yes, you may.`, `Thank you! You're welcome.`」",
+            "「询问与回答：`What's this/that? It's a...`, `How many...? There are...`, `Where is...? It's in/on/under...`」"
+          ],
+          "example": {
+            "question": "根据情景选择最佳回答：Your teacher says 'Good morning, class!'. You should say: ________.",
+            "steps": [
+              "1. 识别情景：老师说「早上好」。",
+              "2. 回忆对应回答：学生通常会回应「早上好，老师」。",
+              "3. 选择匹配选项：Good morning, teacher."
+            ],
+            "answer": "Good morning, teacher."
+          },
+          "mistakes": [
+            {
+              "wrong": "A: How are you? B: Fine, thanks.",
+              "correct": "A: How are you? B: I'm fine, thank you."
+            },
+            {
+              "wrong": "A: Thank you! B: Thank you.",
+              "correct": "A: Thank you! B: You're welcome."
+            }
+          ],
+          "memory_tip": "「情景对话有套路，问候指令和请求；多听多说多模仿，自然流利脱口出。」",
+          "related": {
+            "prerequisite": "「三年级基本问候语和指令」",
+            "next": "「五年级更多情景对话和情感表达」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "情景交际",
+              "补全对话",
+              "听力判断",
+              "选择填空"
+            ],
+            "scoring_key": "「理解语境，选择或填入最恰当的交际用语，注意礼貌用语。」",
+            "common_trap": "「回答不符合语境，或与问句不匹配。」",
+            "real_exam_example": {
+              "source": "模拟题",
+              "question": "选择最佳答案：A: May I come in? B: ________.",
+              "options": [
+                "A. Yes, I do.",
+                "B. Yes, you may.",
+                "C. Thank you."
+              ],
+              "answer": "B",
+              "scoring_notes": "「考察对May I...?请求句的正确回答。」"
+            }
+          }
         }
       ]
     }

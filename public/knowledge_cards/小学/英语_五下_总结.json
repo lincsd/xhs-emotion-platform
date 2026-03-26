@@ -5,153 +5,535 @@
   "textbook": "人教PEP版",
   "grade_short": "五下",
   "card_pack": "知识总结",
-  "description": "五年级下册英语核心知识点精华总结",
+  "description": "五年级下册英语考点笔记总结",
   "units": [
     {
-      "unit_id": "S1",
-      "unit_name": "四季与月份",
+      "unit_id": "U1",
+      "unit_name": "Unit 1 My New Teacher",
       "cards": [
         {
-          "card_id": "S1-01",
-          "full_id": "英语-五下-S1-01",
-          "title": "四季与月份",
-          "type": "知识总结卡",
-          "difficulty": 2,
-          "importance": 5,
-          "definition": "四季、十二个月份的英语说法和相关活动。",
-          "core_points": [
-            "四季：spring春 summer夏 autumn/fall秋 winter冬",
-            "月份(1-6)：January February March April May June（首字母大写）",
-            "月份(7-12)：July August September October November December",
-            "Which season do you like best? 你最喜欢哪个季节？— I like spring. It's warm and green."
-          ],
-          "example": {
-            "question": "Which season do you like best?",
-            "steps": ["选一个季节", "说原因", "I like summer. I can swim."],
-            "answer": "I like summer best. Because I can swim."
-          },
-          "mistakes": [
-            {"wrong": "月份首字母小写march", "correct": "月份首字母一定大写：March"},
-            {"wrong": "February拼写错", "correct": "Feb-ru-ary（中间有个r容易漏掉）"}
-          ],
-          "memory_tip": "📅 月份缩写前三个字母：Jan. Feb. Mar. Apr. May Jun. Jul. Aug. Sep(t). Oct. Nov. Dec.",
-          "related": {"prerequisite": "见四下 天气", "next": "见S1-02 日期表达"}
-        },
-        {
-          "card_id": "S1-02",
-          "full_id": "英语-五下-S1-02",
-          "title": "日期与生日",
-          "type": "知识总结卡",
-          "difficulty": 3,
-          "importance": 5,
-          "definition": "用英语表达日期、问答生日。",
-          "core_points": [
-            "序数词：first(1st) second(2nd) third(3rd) fourth(4th)... twelfth(12th)... twentieth(20th)",
-            "When is your birthday? 你的生日是什么时候？— My birthday is in October. / It's on October 1st.",
-            "月份前用in: in January; 具体日期前用on: on January 1st",
-            "序数词规律：大多+th，特殊记1st/2nd/3rd/5th/8th/9th/12th"
-          ],
-          "example": {
-            "question": "When is Children's Day?",
-            "steps": ["儿童节=Children's Day", "6月1日=June 1st"],
-            "answer": "It's on June 1st."
-          },
-          "mistakes": [
-            {"wrong": "in October 1st（具体日期用in）", "correct": "具体日期用on: on October 1st"},
-            {"wrong": "five→fiveth", "correct": "five→fifth（去ve加fth）"}
-          ],
-          "memory_tip": "🎂 序数词特殊记: 1st 2nd 3rd (一二三特殊记), 5th(five去e), 8th(eight直接加th), 9th(nine去e), 12th(twelve去ve+fth)",
-          "related": {"prerequisite": "见三下 数字", "next": "见S2 日常活动"}
-        }
-      ]
-    },
-    {
-      "unit_id": "S2",
-      "unit_name": "日常活动与现在进行时",
-      "cards": [
-        {
-          "card_id": "S2-01",
-          "full_id": "英语-五下-S2-01",
-          "title": "一天的活动",
-          "type": "知识总结卡",
-          "difficulty": 2,
-          "importance": 5,
-          "definition": "描述一天中各个时段的日常活动。",
-          "core_points": [
-            "活动：get up起床 eat breakfast吃早餐 go to school上学 have...class上...课 eat lunch吃午餐 play sports做运动 eat dinner吃晚餐 go to bed上床睡觉",
-            "When do you get up? 你几点起床？— I usually get up at 6:30.",
-            "时间点前用at: at 7 o'clock, at noon, at night",
-            "频率词+动词: I usually/often/always/sometimes + 动词原形"
-          ],
-          "example": {
-            "question": "When do you go to school?",
-            "steps": ["at + 时间", "I go to school at 7:30."],
-            "answer": "I usually go to school at 7:30."
-          },
-          "mistakes": [
-            {"wrong": "I get up in 6:30.（用错介词）", "correct": "具体时间点用at: I get up at 6:30."},
-            {"wrong": "I go to the school.", "correct": "go to school不加the（固定搭配）"}
-          ],
-          "memory_tip": "⏰ 时间介词：at几点(小), on几号/星期(中), in月/季/年(大) → 从小到大at→on→in",
-          "related": {"prerequisite": "见五上 日常活动", "next": "见S2-02 现在进行时"}
-        },
-        {
-          "card_id": "S2-02",
-          "full_id": "英语-五下-S2-02",
-          "title": "现在进行时",
-          "type": "知识总结卡",
-          "difficulty": 3,
-          "importance": 5,
-          "definition": "表示正在进行的动作，是五年级最重要的语法点之一。",
-          "core_points": [
-            "结构：主语 + am/is/are + 动词ing",
-            "加ing规则：①一般直接加ing: read→reading ②去e加ing: write→writing ③双写+ing: run→running swim→swimming",
-            "What are you doing? 你在做什么？— I'm reading a book.",
-            "关键词：now, look, listen 通常提示用进行时"
-          ],
-          "example": {
-            "question": "Look! What is the boy doing?",
-            "steps": ["Look提示进行时", "boy是第三人称→is", "He is swimming."],
-            "answer": "He is swimming."
-          },
-          "mistakes": [
-            {"wrong": "He is swiming.（只写一个m）", "correct": "swim→swimming（双写m再加ing）"},
-            {"wrong": "She is writeing.（没去e）", "correct": "write→writing（去e加ing）"}
-          ],
-          "memory_tip": "🏃 ing加法三兄弟：①普通直加 ②哑e让座 ③重辅双写 → read-ing, writ(e)-ing, runn-ing",
-          "related": {"prerequisite": "见动词基础", "next": "见六上 一般过去时"}
-        }
-      ]
-    },
-    {
-      "unit_id": "S3",
-      "unit_name": "动物与自然",
-      "cards": [
-        {
-          "card_id": "S3-01",
-          "full_id": "英语-五下-S3-01",
-          "title": "动物行为与归属",
+          "card_id": "C001",
+          "full_id": "G5S2_C001",
+          "title": "人物外貌、性格与职业描述",
           "type": "知识总结卡",
           "difficulty": 2,
           "importance": 4,
-          "definition": "描述动物正在做的事和名词所有格。",
+          "definition": "学习描述人物的身高、体型、性格等外貌特征，以及常见的职业名称和相关句型。",
           "core_points": [
-            "动物行为：climbing爬 jumping跳 sleeping睡 eating吃 playing玩 drinking喝 fighting打架 swinging荡",
-            "The elephant is drinking water. 大象正在喝水。",
-            "Whose monkey is that? 那是谁的猴子？— It's his/hers/theirs.",
-            "名词所有格：John's约翰的 the cat's猫的"
+            "描述外貌：tall, short, thin, heavy, long hair, short hair. (She has long hair.)",
+            "描述性格：kind, funny, strict, quiet. (He is kind.)",
+            "常见职业：teacher, doctor, nurse, driver, student. (My father is a driver.)",
+            "提问句型：What does he/she look like? (他/她长什么样？) What is he/she? (他/她是什么职业？)",
+            "肯定句型：He/She is... He/She has..."
           ],
           "example": {
-            "question": "What is the cat doing?",
-            "steps": ["cat=猫", "它在睡觉", "The cat is sleeping."],
-            "answer": "The cat is sleeping."
+            "question": "看图描述人物：一位高高瘦瘦、留着短发、看起来很友善的女老师。",
+            "steps": [
+              "确定人物性别和代词：She。",
+              "描述外貌：tall, thin, short hair。",
+              "描述性格：kind。",
+              "描述职业：teacher。",
+              "整合句型：She is a kind teacher. She is tall and thin. She has short hair."
+            ],
+            "answer": "She is a kind teacher. She is tall and thin. She has short hair."
           },
           "mistakes": [
-            {"wrong": "The cat is sleep.", "correct": "进行时必须有ing: The cat is sleeping."},
-            {"wrong": "It's her.", "correct": "如果后面没名词用hers: It's hers. 有名词用her: It's her monkey."}
+            {
+              "wrong": "He is a teacher. He have short hair.",
+              "correct": "He is a teacher. He has short hair. (第三人称单数用has)"
+            },
+            {
+              "wrong": "She is tall and long hair.",
+              "correct": "She is tall and she has long hair. / She is tall with long hair. (形容词和名词不能直接并列)"
+            }
           ],
-          "memory_tip": "🐵 物主代词配对记：my→mine, your→yours, his→his, her→hers, our→ours, their→theirs",
-          "related": {"prerequisite": "见四下 农场动物", "next": "见六上 动物世界"}
+          "memory_tip": "「高矮胖瘦」用be，「长短卷直」用has；人称职业别混淆，一般现在要记牢。",
+          "related": {
+            "prerequisite": "三年级：形容词基本认识，be动词，have/has",
+            "next": "六年级：更复杂的形容词和人物描述，间接引语"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "听力选图",
+              "选择填空",
+              "看图写单词",
+              "情景交际",
+              "阅读理解"
+            ],
+            "scoring_key": "主谓一致，has/have的正确使用，形容词顺序。",
+            "common_trap": "忘记第三人称单数动词变化（如have变has）。",
+            "real_exam_example": {
+              "source": "某市五年级期末考试",
+              "question": "根据图片提示完成句子：This is my English teacher. She is _____. She has _____ hair.",
+              "answer": "This is my English teacher. She is tall and kind. She has long hair. (答案仅供参考，需根据图片具体信息填写)",
+              "scoring_notes": "正确填写形容词和名词，注意has的用法。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U2",
+      "unit_name": "Unit 2 My Favourite Season",
+      "cards": [
+        {
+          "card_id": "C002",
+          "full_id": "G5S2_C002",
+          "title": "四季、天气与活动",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握四季名称、常见天气词汇及在不同季节进行的活动，并能用简单句型进行描述和问答。",
+          "core_points": [
+            "四季名称：spring, summer, autumn/fall, winter。",
+            "天气词汇：sunny, rainy, snowy, windy, cloudy, warm, hot, cool, cold。",
+            "季节活动：fly kites, swim, pick apples, make a snowman, go skiing。",
+            "提问句型：What's your favourite season? What's the weather like in...? What do you do in...?",
+            "回答句型：My favourite season is... It's... (weather). I like to... in... (season)."
+          ],
+          "example": {
+            "question": "根据提示完成对话：A: What's your favourite season? B: _____. A: What's the weather like in _____? B: It's _____. A: What do you do in _____? B: I like to _____.",
+            "steps": [
+              "选择喜欢的季节：Summer。",
+              "描述夏季天气：hot and sunny。",
+              "描述夏季活动：swim。",
+              "填入对话。",
+              "A: What's your favourite season? B: My favourite season is summer. A: What's the weather like in summer? B: It's hot and sunny. A: What do you do in summer? B: I like to swim."
+            ],
+            "answer": "A: What's your favourite season? B: My favourite season is summer. A: What's the weather like in summer? B: It's hot and sunny. A: What do you do in summer? B: I like to swim."
+          },
+          "mistakes": [
+            {
+              "wrong": "In summer, I like swimming.",
+              "correct": "In summer, I like to swim. (或 I like swimming. 但教材更侧重I like to do sth.)"
+            },
+            {
+              "wrong": "It's rain.",
+              "correct": "It's rainy. (rain是名词或动词，rainy是形容词)"
+            }
+          ],
+          "memory_tip": "「春夏秋冬」别忘季，「晴雨风雪」是天气；活动动词要记住，介词in用来分。",
+          "related": {
+            "prerequisite": "三年级：天气词汇，喜欢做某事句型",
+            "next": "六年级：更复杂的自然现象描述，天气预报"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "听力选图",
+              "听力判断",
+              "选择填空",
+              "连线",
+              "看图写单词",
+              "情景交际",
+              "阅读理解"
+            ],
+            "scoring_key": "季节、天气、活动词汇的正确拼写和使用，介词in的正确搭配。",
+            "common_trap": "天气名词和形容词混淆（如rain/rainy），in summer/on summer混淆。",
+            "real_exam_example": {
+              "source": "人教PEP五年级下册期中测试",
+              "question": "选择正确的选项：_____ is my favourite season. I like to make a snowman in it. A. Summer B. Winter C. Spring",
+              "answer": "B. Winter",
+              "scoring_notes": "根据活动'make a snowman'判断季节。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U3",
+      "unit_name": "Unit 3 What's Your Hobby?",
+      "cards": [
+        {
+          "card_id": "C003",
+          "full_id": "G5S2_C003",
+          "title": "爱好与频率副词",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习表达个人爱好的词汇和句型，掌握频率副词（always, usually, often, sometimes, never）的含义、位置和用法。",
+          "core_points": [
+            "爱好词汇：reading books, drawing pictures, playing sports (basketball/soccer/ping-pong), collecting stamps, singing songs。",
+            "提问爱好：What's your hobby? What do you like to do?",
+            "回答爱好：My hobby is... I like to... / I like doing...",
+            "频率副词：always (总是), usually (通常), often (经常), sometimes (有时), never (从不)。",
+            "频率副词位置：通常放在行为动词之前，be动词、助动词、情态动词之后。"
+          ],
+          "example": {
+            "question": "用频率副词和动词ing形式填空：My sister (always/watch) TV in the evening. (我的姐姐晚上总是看电视。)",
+            "steps": [
+              "确定主语：My sister (第三人称单数)。",
+              "确定动词形式：watch TV。",
+              "确定频率副词位置：always放在动词watch之前。",
+              "注意动词watch在一般现在时中，主语是第三人称单数时要加-es，但这里是动词ing形式表示爱好，所以是watching。如果表示习惯性动作，则是watches。",
+              "题目要求的是动词ing形式，所以这里是 My sister always watches TV. 但是，如果题目是表爱好，则用动名词。这里以习惯动作来解释。",
+              "假设题目是：My sister _____ (watch) TV in the evening. (always)",
+              "答案应该是：My sister always watches TV in the evening."
+            ],
+            "answer": "My sister always watches TV in the evening. (注意：这里是描述习惯性动作，不是动词ing做爱好。)"
+          },
+          "mistakes": [
+            {
+              "wrong": "I watch TV always.",
+              "correct": "I always watch TV. (频率副词放在行为动词前)"
+            },
+            {
+              "wrong": "He is sometimes late.",
+              "correct": "He sometimes is late. / He is sometimes late. (be动词之后，行为动词之前，这里两种都常见，但教材强调be动词之后)"
+            },
+            {
+              "wrong": "She like reading books.",
+              "correct": "She likes reading books. (主语是第三人称单数，动词加-s)"
+            }
+          ],
+          "memory_tip": "「爱好看法」ing，「频率副词」很重要；动前be后是规矩，主谓一致别忘掉。",
+          "related": {
+            "prerequisite": "四年级：一般现在时，动词ing形式",
+            "next": "六年级：更复杂的副词，复合句"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "选择填空",
+              "按要求改句子",
+              "情景交际",
+              "补全对话",
+              "阅读理解",
+              "书面表达"
+            ],
+            "scoring_key": "频率副词的正确位置，动词的正确形式（-s/-es或-ing），主谓一致。",
+            "common_trap": "频率副词位置错误，动词单复数形式错误。",
+            "real_exam_example": {
+              "source": "人教PEP五年级下册期末考试",
+              "question": "选择填空：My father _____ (often/read) newspapers after dinner. A. often read B. often reads C. reads often",
+              "answer": "B. often reads",
+              "scoring_notes": "考察频率副词位置和第三人称单数动词变化。"
+            }
+          }
+        },
+        {
+          "card_id": "C004",
+          "full_id": "G5S2_C004",
+          "title": "现在进行时表将来",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "掌握现在进行时态表示将来计划或安排的用法，通常与将来时间状语连用，强调确定性。",
+          "core_points": [
+            "构成：主语 + be (am/is/are) + 动词-ing。",
+            "表示将来：用于表示未来某个时间已确定或安排好的计划和活动。",
+            "常用将来时间状语：tomorrow, this weekend, next week, tonight, this afternoon/evening。",
+            "例句：I am visiting my grandparents this weekend. (我这个周末要去探望我的祖父母。)",
+            "疑问句：Are you playing soccer tomorrow? (你明天要踢足球吗？)"
+          ],
+          "example": {
+            "question": "用现在进行时表示将来完成句子：They (go) to the park tomorrow afternoon.",
+            "steps": [
+              "确定主语：They。",
+              "确定be动词：They are。",
+              "确定动词ing形式：go -> going。",
+              "整合句子：They are going to the park tomorrow afternoon."
+            ],
+            "answer": "They are going to the park tomorrow afternoon."
+          },
+          "mistakes": [
+            {
+              "wrong": "I am play soccer tomorrow.",
+              "correct": "I am playing soccer tomorrow. (忘记动词ing形式)"
+            },
+            {
+              "wrong": "He going to the zoo next week.",
+              "correct": "He is going to the zoo next week. (忘记be动词)"
+            }
+          ],
+          "memory_tip": "「ing形式」表将来，计划安排很确定；be动词不能忘，时间状语是关键。",
+          "related": {
+            "prerequisite": "四年级：现在进行时基本用法，一般将来时（be going to）",
+            "next": "六年级：一般将来时（will），时态综合运用"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "选择填空",
+              "按要求改句子",
+              "情景交际",
+              "补全对话",
+              "阅读理解"
+            ],
+            "scoring_key": "be动词与动词-ing形式的正确搭配，将来时间状语的识别。",
+            "common_trap": "忘记be动词，动词-ing形式拼写错误。",
+            "real_exam_example": {
+              "source": "某市五年级期末考试",
+              "question": "改写句子：I will visit my uncle tomorrow. (用现在进行时表示将来) -> I _____ my uncle tomorrow.",
+              "answer": "I am visiting my uncle tomorrow.",
+              "scoring_notes": "正确转换时态，并保持句意不变。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U4",
+      "unit_name": "Unit 4 I Have a Pen Pal",
+      "cards": [
+        {
+          "card_id": "C005",
+          "full_id": "G5S2_C005",
+          "title": "国家、国籍与语言",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习主要国家、国籍和语言的词汇，并能运用相关句型进行简单的问答和介绍。",
+          "core_points": [
+            "国家名称：China, America, the UK, Canada, Australia, Japan, France。",
+            "国籍形容词：Chinese, American, British, Canadian, Australian, Japanese, French。",
+            "语言名称：Chinese, English, Japanese, French。",
+            "提问句型：Where are you from? What nationality are you? What language do you speak?",
+            "回答句型：I'm from... I'm... (nationality). I speak... (language)."
+          ],
+          "example": {
+            "question": "补全对话：A: Where are you from? B: I'm from _____. A: What language do you speak? B: I speak _____.",
+            "steps": [
+              "选择一个国家：Canada。",
+              "确定其语言：English/French。",
+              "填入对话。",
+              "A: Where are you from? B: I'm from Canada. A: What language do you speak? B: I speak English."
+            ],
+            "answer": "A: Where are you from? B: I'm from Canada. A: What language do you speak? B: I speak English."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is from China. He is Chinese language.",
+              "correct": "He is from China. He speaks Chinese. (国籍和语言词性不同)"
+            },
+            {
+              "wrong": "I speak English. I am English.",
+              "correct": "I speak English. I am British. (英国人说英语，国籍是British，不是English)"
+            }
+          ],
+          "memory_tip": "「国家国籍」要分清，「语言动词」是speak；from后跟国家，be动词后是国籍。",
+          "related": {
+            "prerequisite": "三年级：基础问候，be动词",
+            "next": "六年级：世界地理和文化知识，更复杂的国家和语言"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "听力判断",
+              "连线",
+              "选择填空",
+              "看图写单词",
+              "情景交际",
+              "阅读理解"
+            ],
+            "scoring_key": "国家、国籍、语言词汇的正确拼写和搭配，介词from的用法。",
+            "common_trap": "国家、国籍、语言名词和形容词混淆，大小写错误。",
+            "real_exam_example": {
+              "source": "人教PEP五年级下册期中测试",
+              "question": "连线题：China - _____ (Chinese), America - _____ (American), the UK - _____ (British)",
+              "answer": "China - Chinese, America - American, the UK - British",
+              "scoring_notes": "考察国家与国籍的对应关系。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U5",
+      "unit_name": "Unit 5 Where Is the Bird?",
+      "cards": [
+        {
+          "card_id": "C006",
+          "full_id": "G5S2_C006",
+          "title": "方位介词与地点描述",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握表示物体方位的介词（in, on, under, near, behind, in front of, next to），并能运用there be句型和特殊疑问句描述物体的位置。",
+          "core_points": [
+            "常见方位介词：in (在...里), on (在...上), under (在...下), near (在...旁边), behind (在...后面), in front of (在...前面), next to (在...旁边/紧邻)。",
+            "提问句型：Where is/are...? (用来询问物体位置)",
+            "回答句型：It's/They're + 介词短语。 (It's in the box.)",
+            "There be句型：There is/are + 事物 + 介词短语。 (There is a book on the desk.)",
+            "There be句型变疑问：Is/Are there...? (Is there a cat under the chair?)"
+          ],
+          "example": {
+            "question": "看图回答问题：Where is the cat? (图片显示猫在椅子下面)",
+            "steps": [
+              "识别图片内容：cat, chair。",
+              "判断猫与椅子的相对位置：under (在...下面)。",
+              "选择正确的代词和介词短语：It's under the chair。",
+              "回答问题：It's under the chair."
+            ],
+            "answer": "It's under the chair."
+          },
+          "mistakes": [
+            {
+              "wrong": "The cat is in the chair.",
+              "correct": "The cat is on the chair. / The cat is under the chair. (介词使用错误，in表示在内部)"
+            },
+            {
+              "wrong": "There is two books on the desk.",
+              "correct": "There are two books on the desk. (there be句型主谓一致错误)"
+            }
+          ],
+          "memory_tip": "「上on下under里in」，旁边near，前面in front；后面behind，紧邻next to，there be句型记心中。",
+          "related": {
+            "prerequisite": "四年级：there be句型，in/on/under",
+            "next": "六年级：更复杂的地点描述，指路问路"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "听力选图",
+              "选择填空",
+              "看图写单词",
+              "按要求改句子",
+              "阅读理解"
+            ],
+            "scoring_key": "方位介词的准确使用，there be句型的主谓一致，特殊疑问句的构成。",
+            "common_trap": "介词混淆，there is/are与主语单复数不一致。",
+            "real_exam_example": {
+              "source": "人教PEP五年级下册期末考试",
+              "question": "选择填空：The dog is _____ the tree. (图片显示狗在树旁边) A. in B. on C. near",
+              "answer": "C. near",
+              "scoring_notes": "根据图片情境选择最合适的介词。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U6",
+      "unit_name": "Unit 6 How Do You Feel?",
+      "cards": [
+        {
+          "card_id": "C007",
+          "full_id": "G5S2_C007",
+          "title": "感受、健康与建议",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习描述各种感受和健康状况的词汇，以及使用should/shouldn't给出建议的句型。",
+          "core_points": [
+            "感受词汇：happy, sad, tired, hungry, thirsty, angry, excited, bored。",
+            "健康状况：sick, have a cold, have a fever, cough, have a sore throat, have a headache。",
+            "提问感受/健康：How do you feel? What's wrong? What's the matter?",
+            "回答感受/健康：I feel... I have a...",
+            "给出建议：You should... (你应该...) You shouldn't... (你不应该...) + 动词原形。"
+          ],
+          "example": {
+            "question": "根据情景给出建议：My friend has a cold. (我的朋友感冒了。)",
+            "steps": [
+              "识别问题：has a cold。",
+              "思考感冒时应该做什么：drink more water, take some medicine, go to bed early。",
+              "选择一个建议并用should句型表达：You should drink more water.",
+              "回答：You should drink more water."
+            ],
+            "answer": "You should drink more water. / You should take some medicine. / You should go to bed early."
+          },
+          "mistakes": [
+            {
+              "wrong": "You should to drink water.",
+              "correct": "You should drink water. (should后直接跟动词原形，不加to)"
+            },
+            {
+              "wrong": "I'm a cold.",
+              "correct": "I have a cold. (感冒用have a cold，而不是be a cold)"
+            }
+          ],
+          "memory_tip": "「感觉不适」How you feel，「病了What's wrong」要提问；「应该should，不应shouldn't」，动词原形紧跟上。",
+          "related": {
+            "prerequisite": "三年级：基本情感词汇",
+            "next": "六年级：更复杂的健康问题和就医情景，虚拟语气"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "听力判断",
+              "选择填空",
+              "情景交际",
+              "补全对话",
+              "阅读理解",
+              "书面表达"
+            ],
+            "scoring_key": "感受和健康词汇的正确使用，should/shouldn't后动词原形。",
+            "common_trap": "should后加to，have a cold误用be a cold。",
+            "real_exam_example": {
+              "source": "某市五年级期末考试",
+              "question": "补全对话：A: What's wrong? B: I'm tired. A: You _____ go to bed early. A. should B. shouldn't C. can",
+              "answer": "A. should",
+              "scoring_notes": "根据情景判断给出正面建议。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "RW",
+      "unit_name": "Review & Writing",
+      "cards": [
+        {
+          "card_id": "C008",
+          "full_id": "G5S2_C008",
+          "title": "书面表达：介绍自己或他人",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "综合运用所学词汇、句型和语法知识，撰写一篇关于介绍自己、家人或朋友的短文。",
+          "core_points": [
+            "文章结构：通常包括开头（介绍姓名、年龄），中间（描述外貌、性格、爱好、职业等），结尾（总结或展望）。",
+            "常用句型：I am... He/She is... I/He/She has... I/He/She likes to do/doing... My hobby is...",
+            "时态运用：主要使用一般现在时，描述正在进行的动作可使用现在进行时。",
+            "连词使用：and, but, because等，使文章连贯。",
+            "写作要素：包含人物基本信息、外貌特征、性格特点、爱好、家庭成员等。",
+            "注意大小写、标点符号和拼写。",
+            "字数要求：通常30-50词。"
+          ],
+          "example": {
+            "question": "以「My Good Friend」为题，写一篇短文介绍你的好朋友，包含姓名、年龄、外貌、性格和爱好。",
+            "steps": [
+              "构思开头：介绍朋友姓名、年龄。",
+              "描述外貌：高矮、胖瘦、头发颜色和长度等。",
+              "描述性格：友善、有趣、安静等。",
+              "描述爱好：喜欢做什么，频率如何。",
+              "整合句子，注意时态一致和拼写。",
+              "检查：字数是否达标，有无语法错误，标点符号是否正确。"
+            ],
+            "answer": "My Good Friend\nI have a good friend. Her name is Sarah. She is ten years old. She is tall and thin. She has long, black hair. Sarah is a kind and funny girl. She likes reading books and drawing pictures. She often draws beautiful pictures. I like to play with her very much."
+          },
+          "mistakes": [
+            {
+              "wrong": "My friend is tall and has long hair. She like drawing.",
+              "correct": "My friend is tall and has long hair. She likes drawing. (第三人称单数动词形式错误)"
+            },
+            {
+              "wrong": "He is from China. He is Chinese. He speak Chinese.",
+              "correct": "He is from China. He is Chinese. He speaks Chinese. (动词speak未加s)"
+            }
+          ],
+          "memory_tip": "「开头结尾」要完整，「中间细节」不能少；时态一致是关键，大小标点要记牢。",
+          "related": {
+            "prerequisite": "三年级：简单句写作，四年级：看图写话",
+            "next": "六年级：应用文写作（邮件、日记），记叙文"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "书面表达",
+              "看图写话",
+              "补全对话"
+            ],
+            "scoring_key": "内容完整，语言流畅，语法正确，拼写无误，书写规范。",
+            "common_trap": "时态混用，主谓不一致，大小写和标点错误，单词拼写错误。",
+            "real_exam_example": {
+              "source": "人教PEP五年级下册期末考试",
+              "question": "请以「My Day」为题，写一篇短文，介绍你的一天。要求包含至少5个句子，描述你在上午、下午和晚上做了什么。",
+              "answer": "My Day\nI usually get up at six thirty in the morning. I eat breakfast and then go to school. In the afternoon, I play soccer with my friends. In the evening, I do my homework. I often watch TV with my family. I go to bed at nine thirty.",
+              "scoring_notes": "考察是否能用简单句描述日常活动，时态是否正确，句子是否连贯。"
+            }
+          }
         }
       ]
     }

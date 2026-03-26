@@ -5,159 +5,654 @@
   "textbook": "人教PEP版",
   "grade_short": "五上",
   "card_pack": "知识总结",
-  "description": "五年级上册英语核心知识点精华总结",
+  "description": "五年级上册英语考点笔记总结",
   "units": [
     {
-      "unit_id": "S1",
-      "unit_name": "人物描述与性格",
+      "unit_id": "U1",
+      "unit_name": "Unit 1: My New Teachers",
       "cards": [
         {
-          "card_id": "S1-01",
-          "full_id": "英语-五上-S1-01",
-          "title": "描述人物性格",
-          "type": "知识总结卡",
+          "card_id": 1,
+          "full_id": "五上-U1-01",
+          "title": "词汇识记：人物与学科",
+          "type": "词汇识记",
           "difficulty": 2,
-          "importance": 5,
-          "definition": "用形容词描述人物的外貌和性格特征。",
+          "importance": 3,
+          "definition": "掌握Unit 1中涉及的人物称谓、学科名称和数字词汇，并能正确拼写和理解。",
           "core_points": [
-            "外貌：young年轻 old年老 tall高 short矮 funny滑稽",
-            "性格：kind善良 strict严格 polite礼貌 helpful乐于助人 hard-working勤奋 clever聪明 shy害羞",
-            "Who's your English teacher? Mr/Miss/Mrs + 姓",
-            "What's he/she like? 他/她什么样？— He's tall and funny."
+            "人物称谓：teacher, student, friend, class(mate) 「老师，学生，朋友，同学」",
+            "学科名称：English, Chinese, Math, Science, Art, Music, PE 「英语，语文，数学，科学，美术，音乐，体育」",
+            "数字复习：eleven to twenty 「十一到二十」",
+            "形容词：new, old, tall, short, kind, funny 「新的，旧的，高的，矮的，友善的，有趣的」"
           ],
           "example": {
-            "question": "What's your maths teacher like?",
-            "steps": ["maths=数学", "描述他/她的性格", "She's young and kind."],
-            "answer": "She's young and kind."
+            "question": "看图写单词或英汉互译：\n1. She is my _______ (老师).\n2. 数学: _______",
+            "steps": [
+              "回忆图片或中文提示对应的英文单词。",
+              "注意单词的拼写，尤其是易混淆的字母组合。",
+              "检查大小写是否正确（专有名词如English首字母大写）。"
+            ],
+            "answer": "1. teacher\n2. Math"
           },
           "mistakes": [
-            {"wrong": "What does he like?（意思变了）", "correct": "What's he LIKE?=他什么样（性格外貌），What does he like?=他喜欢什么"},
-            {"wrong": "He is a funny.", "correct": "funny是形容词不加a: He is funny.（如果当名词：He is a funny person.）"}
+            {
+              "wrong": "Engilsh",
+              "correct": "English"
+            },
+            {
+              "wrong": "mate",
+              "correct": "Math"
+            },
+            {
+              "wrong": "twelve",
+              "correct": "twelve (拼写易错)"
+            }
           ],
-          "memory_tip": "👩‍🏫 What's he LIKE = 他「像」什么样 = 描述性格; What does he LIKE = 他「喜欢」什么 = 问爱好",
-          "related": {"prerequisite": "见四上 外貌描述", "next": "见S2 日程与课程"}
+          "memory_tip": "「学科就像好朋友，各有特点要记熟。老师同学常相伴，数字从小到大串。」",
+          "related": {
+            "prerequisite": "三年级：基础数字、颜色、动物词汇",
+            "next": "五年级下册：更多人物描述词汇"
+          },
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": [
+              "看图写单词",
+              "英汉互译",
+              "选择填空",
+              "听力选图"
+            ],
+            "scoring_key": "单词拼写准确无误，专有名词首字母大写。",
+            "common_trap": "易混淆的学科名称拼写（如Math和Art），数字单词的拼写错误。",
+            "real_exam_example": {
+              "source": "某市期中考试真题",
+              "question": "根据图片，写出对应的英文单词。\n(图片显示一个老师在讲台前)",
+              "answer": "teacher",
+              "scoring_notes": "正确拼写得满分，拼写错误扣分。"
+            }
+          }
         }
       ]
     },
     {
-      "unit_id": "S2",
-      "unit_name": "课程与日常安排",
+      "unit_id": "U2",
+      "unit_name": "Unit 2: My School Things",
       "cards": [
         {
-          "card_id": "S2-01",
-          "full_id": "英语-五上-S2-01",
-          "title": "星期与课程表",
-          "type": "知识总结卡",
-          "difficulty": 2,
-          "importance": 5,
-          "definition": "一周七天的英语说法和描述课程安排。",
+          "card_id": 2,
+          "full_id": "五上-U2-01",
+          "title": "句型应用：There be 句型与地点介词",
+          "type": "句型应用",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握'There be'句型表达「有」的含义，并能正确使用in, on, under, near等地点介词描述物品位置。",
           "core_points": [
-            "Monday周一 Tuesday周二 Wednesday周三 Thursday周四 Friday周五 Saturday周六 Sunday周日",
-            "星期首字母都大写，前面用on: on Monday",
-            "What do you have on Mondays? 周一有什么课？— We have Chinese, English and maths.",
-            "What do you do on weekends? 周末你做什么？— I often read books."
+            "There be 句型：There is (用于单数名词), There are (用于复数名词) 「有」",
+            "地点介词：in (在…里), on (在…上), under (在…下), near (在…旁边), behind (在…后面), in front of (在…前面) 「表示位置」",
+            "疑问句形式：Is there...? Are there...? 「有……吗？」",
+            "否定句形式：There isn't... / There aren't... 「没有……」"
           ],
           "example": {
-            "question": "What do you have on Wednesdays?",
-            "steps": ["Wednesday=周三", "列出课程"],
-            "answer": "We have English, science and PE."
+            "question": "根据图片和提示，完成句子。\n(图片：一个苹果在桌子上)\nThere ____ an apple ____ the desk.",
+            "steps": [
+              "判断名词单复数，选择合适的be动词 (is/are)。",
+              "根据物品的位置，选择正确的地点介词。",
+              "注意句子的完整性和标点符号。"
+            ],
+            "answer": "is, on"
           },
           "mistakes": [
-            {"wrong": "wednesday（忘大写）", "correct": "星期几首字母必须大写：Wednesday"},
-            {"wrong": "Wednesday拼写错误", "correct": "Wed-nes-day，记住中间有个d（nes不发音）"}
+            {
+              "wrong": "There are an apple on the desk.",
+              "correct": "There is an apple on the desk."
+            },
+            {
+              "wrong": "The apple is on desk.",
+              "correct": "The apple is on the desk. (缺少冠词)"
+            },
+            {
+              "wrong": "There has a book.",
+              "correct": "There is a book. (There be 句型不能用has)"
+            }
           ],
-          "memory_tip": "📅 星期记忆口诀：Mon(门)月 Tue(兔)火 Wed(蛙)水 Thu(树)木 Fri(飞)金 Sat(杀)土 Sun(日)天",
-          "related": {"prerequisite": "见四下 时间表达", "next": "见S2-02 日常活动"}
+          "memory_tip": "「有物用There be，单is复用are。里in上on下under，旁边near不复杂。」",
+          "related": {
+            "prerequisite": "四年级：基础名词单复数，简单地点介词",
+            "next": "五年级下册：更多地点状语和方位词"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "选择填空",
+              "按要求改句子",
+              "看图写句子",
+              "阅读理解"
+            ],
+            "scoring_key": "be动词与主语一致，介词选用准确，句末标点正确。",
+            "common_trap": "单复数混淆导致be动词误用，介词选择错误，或漏掉冠词。",
+            "real_exam_example": {
+              "source": "省统一小学英语期末测试",
+              "question": "选择正确的选项填空。\nThere ____ many books ____ the shelf.",
+              "answer": "are, on",
+              "scoring_notes": "正确判断many books为复数，选择are；books在shelf上，选择on。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U3",
+      "unit_name": "Unit 3: My Day",
+      "cards": [
+        {
+          "card_id": 3,
+          "full_id": "五上-U3-01",
+          "title": "词汇识记：日常活动与时间表达",
+          "type": "词汇识记",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握描述日常活动的动词短语、时间表达方式，以及表示频率的副词。",
+          "core_points": [
+            "日常活动动词短语：get up, eat breakfast/lunch/dinner, go to school, have class, do homework, watch TV, go to bed 「起床，吃早/中/晚餐，上学，上课，做作业，看电视，睡觉」",
+            "时间表达：at seven o'clock, at half past seven, at nine thirty 「七点，七点半，九点半」",
+            "频率副词：always (总是), usually (通常), often (经常), sometimes (有时), never (从不) 「表示动作发生的频率」",
+            "疑问词：What time...? (几点？), How often...? (多长时间一次？)"
+          ],
+          "example": {
+            "question": "根据中文提示完成句子或英汉互译：\n1. 我通常七点半起床。I _______ _______ at half past seven.\n2. 总是: _______",
+            "steps": [
+              "识别中文提示对应的英文动词短语和频率副词。",
+              "注意动词短语的搭配和频率副词在句中的位置（通常在实义动词前，be动词后）。",
+              "检查拼写。"
+            ],
+            "answer": "1. usually get up\n2. always"
+          },
+          "mistakes": [
+            {
+              "wrong": "I get up usually at seven.",
+              "correct": "I usually get up at seven."
+            },
+            {
+              "wrong": "What time you get up?",
+              "correct": "What time do you get up? (缺少助动词)"
+            },
+            {
+              "wrong": "have my breakfast",
+              "correct": "eat breakfast (常用eat)"
+            }
+          ],
+          "memory_tip": "「一日三餐Eat别忘，起床上学Go是王。频率副词真听话，动词前面它安家。」",
+          "related": {
+            "prerequisite": "四年级：基础动词，整点时间表达",
+            "next": "五年级下册：更多生活场景词汇，过去时态的活动描述"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "看图写单词",
+              "选择填空",
+              "情景交际",
+              "连线",
+              "书面表达"
+            ],
+            "scoring_key": "动词短语搭配正确，频率副词位置准确，时间表达无误。",
+            "common_trap": "频率副词位置错误，动词短语搭配不当（如用do breakfast），时间表达的冠词或介词缺失。",
+            "real_exam_example": {
+              "source": "人教版PEP五年级上册期末卷",
+              "question": "选择填空：My mother ____ (always / sometime) gets up at six o'clock.",
+              "answer": "always",
+              "scoring_notes": "考察频率副词的含义和在句中的位置，以及三单形式。"
+            }
+          }
         },
         {
-          "card_id": "S2-02",
-          "full_id": "英语-五上-S2-02",
-          "title": "日常活动频率词",
-          "type": "知识总结卡",
-          "difficulty": 2,
-          "importance": 4,
-          "definition": "表示做事频率的副词和日常活动表达。",
-          "core_points": [
-            "频率词：always总是 usually通常 often经常 sometimes有时 never从不",
-            "频率词放在be动词后，实义动词前",
-            "日常活动：wash my clothes洗衣服 watch TV看电视 do homework做作业 read books读书 play football踢足球",
-            "Do you often...? 你经常...吗？"
-          ],
-          "example": {
-            "question": "What do you often do on weekends?",
-            "steps": ["often=经常", "I often play football."],
-            "answer": "I often play football and sometimes watch TV."
-          },
-          "mistakes": [
-            {"wrong": "I often am happy.（频率词位置错）", "correct": "I am often happy.（be动词后）"},
-            {"wrong": "I play often football.", "correct": "I often play football.（实义动词前）"}
-          ],
-          "memory_tip": "🎯 频率从高到低：always(100%) > usually(80%) > often(60%) > sometimes(30%) > never(0%)",
-          "related": {"prerequisite": "见S2-01 星期", "next": "见S3 食物与健康"}
-        }
-      ]
-    },
-    {
-      "unit_id": "S3",
-      "unit_name": "食物与健康饮食",
-      "cards": [
-        {
-          "card_id": "S3-01",
-          "full_id": "英语-五上-S3-01",
-          "title": "食物偏好与健康",
-          "type": "知识总结卡",
-          "difficulty": 2,
-          "importance": 4,
-          "definition": "更丰富的食物词汇和表达健康饮食。",
-          "core_points": [
-            "食物：sandwich三明治 hamburger汉堡 salad沙拉 ice cream冰淇淋 tea茶",
-            "味道：delicious美味 fresh新鲜 sweet甜 hot辣 healthy健康 favourite最喜欢",
-            "What's your favourite food? 你最爱吃什么？— My favourite food is noodles.",
-            "What would you like to eat/drink? 你想吃/喝什么？"
-          ],
-          "example": {
-            "question": "What's your favourite food?",
-            "steps": ["favourite=最喜欢的", "My favourite food is..."],
-            "answer": "My favourite food is hamburgers. They're delicious!"
-          },
-          "mistakes": [
-            {"wrong": "My favourite food is hamburger.（忘复数）", "correct": "表示种类泛指用复数：My favourite food is hamburgers."},
-            {"wrong": "favourite写成favorite", "correct": "两种都对！favourite是英式，favorite是美式"}
-          ],
-          "memory_tip": "🍔 favourite = fav(最爱) + our(我们的) + ite → 我们最爱的东西",
-          "related": {"prerequisite": "见四上 就餐用语", "next": "见S4 房间描述"}
-        }
-      ]
-    },
-    {
-      "unit_id": "S4",
-      "unit_name": "房间与家具",
-      "cards": [
-        {
-          "card_id": "S4-01",
-          "full_id": "英语-五上-S4-01",
-          "title": "房间与家具方位",
-          "type": "知识总结卡",
-          "difficulty": 2,
+          "card_id": 4,
+          "full_id": "五上-U3-02",
+          "title": "语法规则：一般现在时（三单变化）",
+          "type": "语法规则",
+          "difficulty": 4,
           "importance": 5,
-          "definition": "房间名称、家具词汇和There be句型。",
+          "definition": "掌握一般现在时动词的第三人称单数变化规则及其在句子中的应用。",
           "core_points": [
-            "房间：bedroom卧室 living room客厅 kitchen厨房 bathroom浴室 study书房",
-            "家具：bed床 sofa沙发 table桌子 clock钟 photo照片 plant植物 bike自行车",
-            "There is + 单数/不可数: There is a clock on the wall.",
-            "There are + 复数: There are two bedrooms in my house."
+            "一般现在时：表示经常性动作、习惯或客观事实。 「主语+动词原形/动词三单」",
+            "第三人称单数主语：he, she, it, 单个人名/物名，不可数名词。 「动词+s/es」",
+            "动词三单变化规则：\n  1. 一般情况：动词后加-s (works, reads) \n  2. 以s, x, ch, sh, o结尾：加-es (watches, goes) \n  3. 辅音字母+y结尾：变y为i再加-es (studies, carries)",
+            "助动词：Does (用于三单主语), Do (用于其他人称主语) 「用于疑问句和否定句」"
           ],
           "example": {
-            "question": "描述你的卧室",
-            "steps": ["There is a bed.", "There are two photos on the wall.", "There is a desk beside the bed."],
-            "answer": "There is a bed and a desk in my bedroom. There are two photos on the wall."
+            "question": "用所给动词的正确形式填空：\n1. He often _______ (watch) TV in the evening.\n2. My mother _______ (go) to work every day.",
+            "steps": [
+              "判断主语是否为第三人称单数。",
+              "如果是，根据动词结尾字母，选择正确的-s/-es变化规则。",
+              "如果不是，则用动词原形。"
+            ],
+            "answer": "1. watches\n2. goes"
           },
           "mistakes": [
-            {"wrong": "There are a book on the desk.", "correct": "单数用is: There IS a book on the desk."},
-            {"wrong": "There have...", "correct": "表示「有」用There is/are，不用There have"}
+            {
+              "wrong": "She like English.",
+              "correct": "She likes English."
+            },
+            {
+              "wrong": "He go to school by bus.",
+              "correct": "He goes to school by bus."
+            },
+            {
+              "wrong": "Does he watches TV?",
+              "correct": "Does he watch TV? (助动词Does出现，动词还原形)"
+            }
           ],
-          "memory_tip": "🏠 There be就近原则：There is a pen and two books.（靠近is的a pen是单数→用is）",
-          "related": {"prerequisite": "见四上 教室物品", "next": "见五下 自然环境"}
+          "memory_tip": "「三单动词要变脸，s或es要加全。o, s, x, ch, sh，es跟着它回家。辅音y改i再加es，牢记口诀没差错！」",
+          "related": {
+            "prerequisite": "四年级：be动词，基础动词原形",
+            "next": "五年级下册：一般过去时动词变化，现在进行时"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "选择填空",
+              "用所给动词的正确形式填空",
+              "按要求改句子",
+              "书面表达"
+            ],
+            "scoring_key": "主谓一致，动词三单变化规则运用准确，疑问句和否定句中动词还原形。",
+            "common_trap": "忘记给第三人称单数主语的动词加-s/-es；在Do/Does疑问句和否定句中动词仍加-s/-es。",
+            "real_exam_example": {
+              "source": "全国小学英语统一测试",
+              "question": "选择填空：My father ____ (read) a newspaper every morning.",
+              "answer": "reads",
+              "scoring_notes": "考察主语My father是第三人称单数，动词read需加s。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U4",
+      "unit_name": "Unit 4: What Can You Do?",
+      "cards": [
+        {
+          "card_id": 5,
+          "full_id": "五上-U4-01",
+          "title": "句型应用：情态动词 can/can't 表能力",
+          "type": "句型应用",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "掌握情态动词can (能/会) 和can't (不能/不会) 来表达能力、请求或允许。",
+          "core_points": [
+            "Can的肯定句：主语 + can + 动词原形。 「我能游」",
+            "Can的否定句：主语 + can't (cannot) + 动词原形。 「他不能跑」",
+            "Can的疑问句：Can + 主语 + 动词原形...? 回答：Yes, I can. / No, I can't. 「你会唱歌吗？」",
+            "Can的用法：\n  1. 表示能力：I can swim. \n  2. 表示请求：Can I help you? \n  3. 表示允许：You can go now."
+          ],
+          "example": {
+            "question": "根据中文提示完成句子：\n1. 他会画画。He ____ ____.\n2. 你会骑自行车吗？____ you ____ a bike?",
+            "steps": [
+              "根据句意，判断是肯定、否定还是疑问句。",
+              "选择can或can't，并确保后面的动词使用原形。",
+              "疑问句注意句首大写和句末问号。"
+            ],
+            "answer": "1. can draw\n2. Can, ride"
+          },
+          "mistakes": [
+            {
+              "wrong": "She can sings.",
+              "correct": "She can sing. (can后动词用原形)"
+            },
+            {
+              "wrong": "Can you to swim?",
+              "correct": "Can you swim? (can后不加to)"
+            },
+            {
+              "wrong": "I no can play football.",
+              "correct": "I can't play football."
+            }
+          ],
+          "memory_tip": "「Can后动词用原形，能力请求它来请。Can't就是不能做，问句Can放最前头。」",
+          "related": {
+            "prerequisite": "三年级：基础动词",
+            "next": "六年级：情态动词may/must等，更复杂的请求表达"
+          },
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": [
+              "选择填空",
+              "情景交际",
+              "按要求改句子",
+              "看图写句子"
+            ],
+            "scoring_key": "can后动词用原形，肯定否定疑问句型转换准确。",
+            "common_trap": "can后动词加-s/-es或-ing；在can后加to。",
+            "real_exam_example": {
+              "source": "人教版PEP五年级上册单元测试",
+              "question": "将下列句子改为疑问句并作肯定回答：\nHe can play the piano.",
+              "answer": "Can he play the piano? Yes, he can.",
+              "scoring_notes": "考察can疑问句的构成和简略回答。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U5",
+      "unit_name": "Unit 5: What Does He Do?",
+      "cards": [
+        {
+          "card_id": 6,
+          "full_id": "五上-U5-01",
+          "title": "词汇识记：职业与工作地点",
+          "type": "词汇识记",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握常见的职业名称及其工作地点，并能用英文描述。",
+          "core_points": [
+            "职业名称：doctor, nurse, farmer, worker, teacher, student, driver, police officer, postman, reporter 「医生，护士，农民，工人，老师，学生，司机，警察，邮递员，记者」",
+            "工作地点：hospital, farm, factory, school, office, post office, TV station 「医院，农场，工厂，学校，办公室，邮局，电视台」",
+            "疑问句：What does he/she do? (他/她做什么工作？)",
+            "答句：He/She is a ______. He/She works in a ______."
+          ],
+          "example": {
+            "question": "看图写单词或回答问题：\n(图片：一个医生在医院里)\n1. What does he do? He is a _______.\n2. Where does he work? He works in a _______. (医院)",
+            "steps": [
+              "识别图片中的职业和工作地点。",
+              "根据疑问句，选择正确的职业和地点词汇。",
+              "注意单词拼写和句子的完整性。"
+            ],
+            "answer": "1. doctor\n2. hospital"
+          },
+          "mistakes": [
+            {
+              "wrong": "a doctor work in hospital",
+              "correct": "A doctor works in a hospital."
+            },
+            {
+              "wrong": "She is driver.",
+              "correct": "She is a driver. (职业前加a/an)"
+            },
+            {
+              "wrong": "Where do he work?",
+              "correct": "Where does he work? (he用does)"
+            }
+          ],
+          "memory_tip": "「职业地点常配对，医生医院不离队。警察邮递员，各有所属记心间。」",
+          "related": {
+            "prerequisite": "三年级：基础人物词汇",
+            "next": "六年级：更多职业，不同工作性质的描述"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "看图写单词",
+              "英汉互译",
+              "情景交际",
+              "连线",
+              "阅读理解"
+            ],
+            "scoring_key": "职业与工作地点词汇拼写准确，搭配合理，疑问句和回答完整。",
+            "common_trap": "职业名词前漏加冠词a/an；工作地点前介词用错。",
+            "real_exam_example": {
+              "source": "某市小学英语期末考试",
+              "question": "连线题：\n1. doctor        A. school\n2. teacher       B. hospital",
+              "answer": "1-B, 2-A",
+              "scoring_notes": "考察职业与工作地点的匹配。"
+            }
+          }
+        },
+        {
+          "card_id": 7,
+          "full_id": "五上-U5-02",
+          "title": "语法规则：一般现在时（疑问句与否定句强化）",
+          "type": "语法规则",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "强化一般现在时疑问句和否定句的构成，特别是第三人称单数主语的情况。",
+          "core_points": [
+            "一般疑问句：Do/Does + 主语 + 动词原形...? 「Does he like English?」",
+            "肯定回答：Yes, 主语 + do/does. 否定回答：No, 主语 + don't/doesn't. 「Yes, he does. / No, he doesn't.」",
+            "特殊疑问句：疑问词 + do/does + 主语 + 动词原形...? (如 What, Where, When, How often) 「What does she do?」",
+            "否定句：主语 + don't/doesn't + 动词原形... 「I don't like apples. / He doesn't go to school on Sunday.」"
+          ],
+          "example": {
+            "question": "按要求改写句子：\n1. She works in a hospital. (改为一般疑问句并作否定回答)\n2. My father likes swimming. (改为否定句)",
+            "steps": [
+              "判断主语人称，选择Do或Does。",
+              "疑问句中，动词还原形。",
+              "否定句中，在动词前加don't/doesn't，动词还原形。",
+              "注意大小写和标点符号。"
+            ],
+            "answer": "1. Does she work in a hospital? No, she doesn't.\n2. My father doesn't like swimming."
+          },
+          "mistakes": [
+            {
+              "wrong": "Does she works in a hospital?",
+              "correct": "Does she work in a hospital."
+            },
+            {
+              "wrong": "He don't like milk.",
+              "correct": "He doesn't like milk."
+            },
+            {
+              "wrong": "What does he do?",
+              "correct": "What does he do? (问句中动词用原形)"
+            }
+          ],
+          "memory_tip": "「Do/Does一出现，动词原形立还原。三单主语用Does，其他Do在前边。」",
+          "related": {
+            "prerequisite": "卡片4：一般现在时三单变化规则",
+            "next": "六年级：一般过去时疑问句与否定句"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "选择填空",
+              "按要求改句子",
+              "情景交际",
+              "补全对话"
+            ],
+            "scoring_key": "助动词do/does与主语一致，动词还原形，简略回答正确，句末标点。",
+            "common_trap": "在Do/Does句型中动词不还原形；do/does与主语人称不一致。",
+            "real_exam_example": {
+              "source": "小学毕业班模拟考试",
+              "question": "将下列句子改为否定句：\nMy brother plays football on Sundays.",
+              "answer": "My brother doesn't play football on Sundays.",
+              "scoring_notes": "考察三单主语的否定句，助动词doesn't和动词play还原形。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U6",
+      "unit_name": "Unit 6: How Much Are These?",
+      "cards": [
+        {
+          "card_id": 8,
+          "full_id": "五上-U6-01",
+          "title": "句型应用：购物与价格询问",
+          "type": "句型应用",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握购物场景中的常用词汇和句型，特别是询问价格'How much'的用法。",
+          "core_points": [
+            "价格询问：How much is this/that? (这/那多少钱？) How much are these/those? (这些/那些多少钱？) 「用于询问价格」",
+            "回答价格：It's ten yuan. They're twenty yuan. 「十元，二十元」",
+            "购物常用词汇：clothes, T-shirt, skirt, dress, pants, shoes, socks, coat, hat 「衣服，T恤，裙子，连衣裙，裤子，鞋子，袜子，外套，帽子」",
+            "颜色词汇：red, yellow, blue, green, white, black, orange, purple, brown, pink 「红，黄，蓝，绿，白，黑，橙，紫，棕，粉」",
+            "指示代词：this (这，近处单数), that (那，远处单数), these (这些，近处复数), those (那些，远处复数)"
+          ],
+          "example": {
+            "question": "补全对话：\nA: How much ____ these shoes?\nB: ____ ten yuan.",
+            "steps": [
+              "根据名词单复数 (shoes是复数)，选择正确的be动词 (are)。",
+              "回答复数物品的价格，用They're。",
+              "注意大小写和标点。"
+            ],
+            "answer": "A: are\nB: They're"
+          },
+          "mistakes": [
+            {
+              "wrong": "How much is these?",
+              "correct": "How much are these?"
+            },
+            {
+              "wrong": "It's twenty yuan.",
+              "correct": "They're twenty yuan. (指代复数物品)"
+            },
+            {
+              "wrong": "a red T-shirt",
+              "correct": "a red T-shirt (注意形容词位置)"
+            }
+          ],
+          "memory_tip": "「单数How much is this/that，复数How much are these/those。颜色衣服手牵手，购物砍价乐悠悠。」",
+          "related": {
+            "prerequisite": "三年级：基础颜色词汇，数字；四年级：This/That",
+            "next": "六年级：更多购物场景，货币单位"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "选择填空",
+              "情景交际",
+              "补全对话",
+              "阅读理解"
+            ],
+            "scoring_key": "be动词与指示代词单复数一致，价格表达准确，购物词汇拼写无误。",
+            "common_trap": "单复数混淆导致be动词或指示代词使用错误；价格单位遗漏。",
+            "real_exam_example": {
+              "source": "人教版PEP五年级上册期末卷",
+              "question": "选择填空：\n— How much ____ the coat?\n— ____ twenty yuan.",
+              "answer": "is, It's",
+              "scoring_notes": "考察单数物品的价格询问和回答。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "Review",
+      "unit_name": "综合复习与写作",
+      "cards": [
+        {
+          "card_id": 9,
+          "full_id": "五上-Review-01",
+          "title": "阅读理解：细节捕捉与主旨归纳",
+          "type": "阅读理解",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "掌握阅读理解的基本策略，包括快速定位关键信息、理解文章主旨和推断隐含意义。",
+          "core_points": [
+            "通读全文：快速浏览文章，了解大意和主题。",
+            "细读问题：理解每个问题要考察的内容，划出关键词。",
+            "定位信息：带着问题回到原文，寻找与问题相关的句子或段落。",
+            "核对答案：根据原文信息判断选项正误，或组织答案。",
+            "主旨归纳：识别文章的中心思想或作者意图。"
+          ],
+          "example": {
+            "question": "阅读短文，回答问题。\nMy name is Mike. I am a student. I usually get up at six thirty. I eat breakfast at seven. I go to school at seven thirty. I have four classes in the morning. I often play basketball after school. I do my homework in the evening. I go to bed at nine.",
+            "steps": [
+              "通读短文，了解Mike的日常。",
+              "阅读问题：What time does Mike get up?",
+              "回到原文定位：'I usually get up at six thirty.'",
+              "回答问题：He gets up at six thirty."
+            ],
+            "answer": "He gets up at six thirty."
+          },
+          "mistakes": [
+            {
+              "wrong": "直接回答时间，没有主谓语",
+              "correct": "He gets up at six thirty. (完整句子)"
+            },
+            {
+              "wrong": "把Mike的活动误认为是自己的活动",
+              "correct": "严格根据原文信息回答"
+            },
+            {
+              "wrong": "对文章内容进行过度推断",
+              "correct": "只根据原文明确信息回答"
+            }
+          ],
+          "memory_tip": "「阅读理解有技巧，先看问题再找料。关键词句是线索，主旨大意别忘掉。」",
+          "related": {
+            "prerequisite": "四年级：简单短文阅读",
+            "next": "六年级：更复杂的阅读文章，推理判断题"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "阅读判断对错",
+              "阅读选择",
+              "阅读回答问题"
+            ],
+            "scoring_key": "答案基于原文，回答完整，语法正确，拼写无误。",
+            "common_trap": "信息定位不准，对原文理解有偏差，回答不完整或出现语法错误。",
+            "real_exam_example": {
+              "source": "人教版PEP五年级上册期末真题",
+              "question": "阅读短文，判断正误。\n(短文内容关于一个学生的日常活动，其中提到他喜欢科学)\nHe likes Math. (T/F)",
+              "answer": "F",
+              "scoring_notes": "考察学生能否根据原文细节进行判断，避免误读。"
+            }
+          }
+        },
+        {
+          "card_id": 10,
+          "full_id": "五上-Review-02",
+          "title": "书面表达：介绍我的…… (My Day/My Family)",
+          "type": "书面表达",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "掌握基本的写作框架和常用表达，能用学过的词汇和句型进行简单的自我介绍或描述日常活动。",
+          "core_points": [
+            "审题：明确写作主题（如My Day, My Family, My Friend），确定写作内容和重点。",
+            "构思：列出与主题相关的关键词、短语和句型，组织好段落结构。",
+            "遣词造句：运用学过的词汇和一般现在时、can等句型，注意主谓一致和三单变化。",
+            "连词运用：使用and, but, so等连接词使句子连贯。",
+            "检查：检查单词拼写、大小写、标点符号和语法错误（特别是三单形式）。"
+          ],
+          "example": {
+            "question": "以'My Day'为题，写一篇50词左右的短文，介绍你一天的生活。",
+            "steps": [
+              "开头：介绍自己和主题 (My name is ..., This is my day.)",
+              "中间：按时间顺序描述日常活动，使用日常活动动词短语和时间表达 (I usually get up at..., I eat breakfast..., I go to school...).",
+              "结尾：总结或表达感受 (I like my day.).",
+              "检查：确保动词三单变化正确，标点符号和大小写规范。"
+            ],
+            "answer": "My name is Lily. I am a student. This is my day. I usually get up at seven o'clock. Then I eat breakfast. I go to school at eight. I have four classes in the morning. After school, I often play with my friends. In the evening, I do my homework. I go to bed at nine thirty. I like my day.",
+            "scoring_notes": "内容切题，语句通顺，语法正确，拼写准确，字数符合要求。重点考察一般现在时态和日常活动词汇的运用。"
+          },
+          "mistakes": [
+            {
+              "wrong": "句子堆砌，没有逻辑顺序",
+              "correct": "按时间或逻辑顺序组织句子"
+            },
+            {
+              "wrong": "忘记给动词加s，或主谓不一致",
+              "correct": "反复检查一般现在时态的动词形式"
+            },
+            {
+              "wrong": "标点符号和大小写错误",
+              "correct": "句首大写，句末标点，专有名词大写"
+            }
+          ],
+          "memory_tip": "「写作五步走，审题构思遣词句。连词检查不能少，高分作文轻松有！」",
+          "related": {
+            "prerequisite": "所有单元的词汇和语法知识",
+            "next": "六年级：看图写话，描述过去或将来的活动，写信"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "看图写话",
+              "介绍类（My family/My day/My friend）",
+              "对话补全"
+            ],
+            "scoring_key": "内容切题，语言流畅，语法正确（尤其是三单和时态），词汇丰富，拼写规范，卷面整洁。",
+            "common_trap": "语法错误（三单、be动词、介词），单词拼写错误，句子不连贯，内容偏离主题。",
+            "real_exam_example": {
+              "source": "小学毕业班统一测试",
+              "question": "根据提示写一篇关于'My Best Friend'的短文，包含姓名、年龄、喜好、擅长做的事情等。",
+              "answer": "(略，类似示例答案)",
+              "scoring_notes": "考察学生能否综合运用所学知识，清晰、准确地描述人物。重点关注一般现在时、can的运用和形容词的搭配。"
+            }
+          }
         }
       ]
     }

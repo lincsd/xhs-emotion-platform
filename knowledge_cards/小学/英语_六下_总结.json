@@ -5,179 +5,533 @@
   "textbook": "人教PEP版",
   "grade_short": "六下",
   "card_pack": "知识总结",
-  "description": "六年级下册英语核心知识点精华总结（小学毕业总复习）",
+  "description": "六年级下册英语考点笔记总结",
   "units": [
     {
-      "unit_id": "S1",
-      "unit_name": "比较级与最高级",
+      "unit_id": "U1",
+      "unit_name": "Unit 1 What's your hobby?",
       "cards": [
         {
-          "card_id": "S1-01",
-          "full_id": "英语-六下-S1-01",
-          "title": "形容词比较级",
-          "type": "知识总结卡",
-          "difficulty": 3,
-          "importance": 5,
-          "definition": "两个事物做比较时使用的语法。",
-          "core_points": [
-            "规则变化：①短词加er: taller, shorter, older, younger ②e结尾加r: nicer, larger",
-            "③辅+y变ier: heavier, happier ④双写+er: bigger, thinner, fatter",
-            "不规则：good→better, bad→worse, many/much→more",
-            "句型：A + is + 比较级 + than + B：Tom is taller than Sam."
-          ],
-          "example": {
-            "question": "比较你和你的朋友",
-            "steps": ["I am 140cm. My friend is 150cm.", "My friend is taller than me."],
-            "answer": "My friend is taller than me. But I am heavier than him."
-          },
-          "mistakes": [
-            {"wrong": "I am more tall than him.", "correct": "短单词用er不用more: I am taller than him."},
-            {"wrong": "He is taller than me 10cm.", "correct": "He is 10cm taller than me.（数量放在比较级前面）"}
-          ],
-          "memory_tip": "📏 比较级=两个比→加er或more; than=比; taller THAN=比...更高",
-          "related": {"prerequisite": "见基础形容词", "next": "见S1-02 身高体重"}
-        },
-        {
-          "card_id": "S1-02",
-          "full_id": "英语-六下-S1-02",
-          "title": "身高体重与度量",
+          "card_id": "U1-C1",
+          "full_id": "G6S2U1C1",
+          "title": "兴趣爱好与动词-ing形式",
           "type": "知识总结卡",
           "difficulty": 2,
           "importance": 4,
-          "definition": "用英语表达身高、体重、鞋码等。",
+          "definition": "本单元核心考点是学习表达个人兴趣爱好，掌握动词-ing形式在句中的应用，以及询问和回答他人爱好。",
           "core_points": [
-            "How tall are you? 你多高？— I'm 1.5 metres / 150 cm.",
-            "How heavy are you? 你多重？— I'm 40 kilograms.",
-            "How big are your feet? / What size are your shoes? 你穿多大的鞋？— Size 38.",
-            "metre米 kilogram千克/公斤 centimetre厘米"
+            "1. 词汇识记：掌握常见的兴趣爱好词汇，如reading, drawing, playing sports, collecting stamps等。",
+            "2. 句型应用：学会使用「What's your hobby? My hobby is...」和「What do you like to do? I like to...」表达爱好。",
+            "3. 动词-ing形式：动词-ing形式可以作名词（动名词），作表语表示爱好，如「My hobby is reading.」。",
+            "4. 动词后接-ing：like/love/enjoy/finish/start等动词后常接动词-ing形式，表示喜欢做某事。",
+            "5. 情态动词Can：回顾并熟练运用Can表达能力，如「I can swim.」"
           ],
           "example": {
-            "question": "How tall are you?",
-            "steps": ["tall=高", "I'm=I am", "1.65 metres."],
-            "answer": "I'm 1.65 metres tall."
+            "question": "请根据图片提示，完成句子并回答问题：\n(图片显示一个女孩在画画)\nQ: What's her hobby?\nA: Her hobby is ________.",
+            "steps": [
+              "1. 识别图片内容：女孩在画画。",
+              "2. 联想相关词汇：画画是drawing。",
+              "3. 填入动词-ing形式：drawing。",
+              "4. 检查句型是否完整：Her hobby is drawing."
+            ],
+            "answer": "Her hobby is drawing."
           },
           "mistakes": [
-            {"wrong": "I'm 150 metre.（单位忘复数）", "correct": "超过1要用复数：1.5 metres, 40 kilograms"},
-            {"wrong": "How long are you?（用错疑问词）", "correct": "问人的身高用How tall, How long问长度（物体）"}
+            {
+              "wrong": "My hobby is read.",
+              "correct": "My hobby is reading."
+            },
+            {
+              "wrong": "I like play computer games.",
+              "correct": "I like playing computer games."
+            }
           ],
-          "memory_tip": "📐 How tall=多高(人), How long=多长(物), How heavy=多重, How big=多大",
-          "related": {"prerequisite": "见四上 数字", "next": "见S2 过去时综合"}
+          "memory_tip": "爱好ing，动词变身真神奇！Like, love, enjoy，后面跟着ing！",
+          "related": {
+            "prerequisite": "三年级：I like...句型；四年级：Can表达能力；五年级：现在进行时动词-ing形式。",
+            "next": "六年级下册：一般过去时动词形式。"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "看图写单词",
+              "选择填空",
+              "情景交际",
+              "按要求改句子",
+              "书面表达"
+            ],
+            "scoring_key": "动词-ing形式的正确使用；主谓一致；大小写和标点。",
+            "common_trap": "忘记将动词变为-ing形式；like后接动词不定式to do和动名词-ing的区别（通常可互换，但考试中常考-ing）。",
+            "real_exam_example": {
+              "source": "某市期末真题",
+              "question": "补全对话：\nA: What's your hobby, Mike?\nB: My hobby is ________ (collect) stamps.",
+              "answer": "collecting",
+              "scoring_notes": "正确填入动词的-ing形式，体现对动名词作表语的理解。"
+            }
+          }
         }
       ]
     },
     {
-      "unit_id": "S2",
-      "unit_name": "一般过去时综合",
+      "unit_id": "U2",
+      "unit_name": "Unit 2 Where did you go?",
       "cards": [
         {
-          "card_id": "S2-01",
-          "full_id": "英语-六下-S2-01",
-          "title": "过去时完整用法",
+          "card_id": "U2-C1",
+          "full_id": "G6S2U2C1",
+          "title": "一般过去时（规则动词）",
           "type": "知识总结卡",
           "difficulty": 3,
           "importance": 5,
-          "definition": "全面掌握一般过去时的肯定、否定、疑问句。",
+          "definition": "学习和掌握一般过去时的构成、用法，特别是规则动词的过去式变化规律，以及如何询问和描述过去发生的事情。",
           "core_points": [
-            "肯定句：I watched TV last night. He went to the park yesterday.",
-            "否定句：I didn't watch TV. He didn't go to the park.（didn't + 动词原形）",
-            "疑问句：Did you watch TV? Did he go?（Did + 主语 + 动词原形）— Yes, I did. / No, I didn't.",
-            "was/were的否定：was not=wasn't, were not=weren't; Was he happy? Were they at home?"
+            "1. 用法：表示过去某个时间发生或完成的动作，或过去存在的状态。",
+            "2. 标志词：yesterday, last week/month/year, two days ago, in 2020等。",
+            "3. 规则动词过去式：动词原形+ed（play-played, look-looked）。",
+            "4. 特殊变化：以不发音e结尾的动词+d（live-lived）；以辅音字母+y结尾的动词，变y为i再+ed（study-studied）；重读闭音节动词，双写最后一个辅音字母再+ed（stop-stopped）。",
+            "5. 否定句：主语+did not (didn't)+动词原形。",
+            "6. 疑问句：Did+主语+动词原形？肯定回答：「Yes, 主语+did.」否定回答：「No, 主语+didn't.」"
           ],
           "example": {
-            "question": "What did you do last weekend?",
-            "steps": ["last weekend=上周末", "I watched a film and played with friends."],
-            "answer": "I watched a film with my family. Then I played with my friends."
+            "question": "请将下列句子改为一般过去时：\nI watch TV every evening.",
+            "steps": [
+              "1. 识别句子时态：一般现在时。",
+              "2. 找到动词：watch。",
+              "3. 将动词变为过去式：watch是规则动词，变为watched。",
+              "4. 添加过去时间状语（可选，但通常会使句子更完整）：yesterday/last night。",
+              "5. 检查句型：I watched TV last night."
+            ],
+            "answer": "I watched TV last night."
           },
           "mistakes": [
-            {"wrong": "Did you watched TV?（did后还用过去式）", "correct": "Did后用原形：Did you watch TV?"},
-            {"wrong": "I didn't went.（didn't后用过去式）", "correct": "didn't后用原形：I didn't go."}
+            {
+              "wrong": "I didn't watched TV.",
+              "correct": "I didn't watch TV."
+            },
+            {
+              "wrong": "Did you went to the park?",
+              "correct": "Did you go to the park?"
+            }
           ],
-          "memory_tip": "🎯 did/didn't已经代表过去了，后面动词就不用再变了→回到原形！就像一家只需要一个人出示身份证",
-          "related": {"prerequisite": "见六上 过去时入门", "next": "见S2-02 不规则动词表"}
-        },
-        {
-          "card_id": "S2-02",
-          "full_id": "英语-六下-S2-02",
-          "title": "必背不规则动词",
-          "type": "知识总结卡",
-          "difficulty": 3,
-          "importance": 5,
-          "definition": "小学阶段必须记住的不规则动词过去式。",
-          "core_points": [
-            "AAA型(不变)：put→put, cut→cut, read→read(发音变)",
-            "ABB型(后两同)：buy→bought, bring→brought, think→thought, teach→taught, catch→caught",
-            "ABC型(全变)：go→went, see→saw, eat→ate, take→took, give→gave, write→wrote, swim→swam, sing→sang, drink→drank, begin→began, ride→rode, fly→flew, draw→drew, know→knew, grow→grew",
-            "特殊：is/am→was, are→were, have/has→had, do/does→did, make→made, come→came, get→got, say→said, run→ran, sleep→slept, tell→told, feel→felt"
-          ],
-          "example": {
-            "question": "yesterday I __(go) to the zoo and __(see) many animals.",
-            "steps": ["go→went", "see→saw"],
-            "answer": "Yesterday I went to the zoo and saw many animals."
+          "memory_tip": "过去时，ed跟着跑，Did一出场，动词回原貌！",
+          "related": {
+            "prerequisite": "五年级：一般现在时；be动词的过去式。",
+            "next": "六年级下册：一般过去时（不规则动词）；一般将来时。"
           },
-          "mistakes": [
-            {"wrong": "把不规则动词当规则处理：goed,eated", "correct": "went, ate — 没有规律，只能背！"},
-            {"wrong": "read的过去式发音不变", "correct": "read过去式拼写不变，但发音由/riːd/变为/red/"}
-          ],
-          "memory_tip": "📖 分组背：①ew家族：fly-flew, draw-drew, know-knew, grow-grew ②ought家族：buy-bought, bring-brought, think-thought, teach-taught",
-          "related": {"prerequisite": "见S2-01 过去时", "next": "见S3 将来时"}
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "选择填空",
+              "按要求改句子",
+              "情景交际",
+              "阅读理解",
+              "书面表达"
+            ],
+            "scoring_key": "动词过去式变化准确；否定句和疑问句中，did后动词用原形；时间状语与时态一致。",
+            "common_trap": "did出现后，动词仍然使用过去式；动词过去式拼写错误。",
+            "real_exam_example": {
+              "source": "某省小学毕业考试",
+              "question": "选择正确的选项：\nMy family and I ________ (visit) the museum last Sunday.",
+              "answer": "visited",
+              "scoring_notes": "根据时间状语「last Sunday」判断为一般过去时，并正确拼写规则动词visit的过去式。"
+            }
+          }
         }
       ]
     },
     {
-      "unit_id": "S3",
-      "unit_name": "一般将来时与毕业",
+      "unit_id": "U3",
+      "unit_name": "Unit 3 What did you do?",
       "cards": [
         {
-          "card_id": "S3-01",
-          "full_id": "英语-六下-S3-01",
-          "title": "一般将来时",
+          "card_id": "U3-C1",
+          "full_id": "G6S2U3C1",
+          "title": "一般过去时（不规则动词）",
           "type": "知识总结卡",
-          "difficulty": 3,
+          "difficulty": 4,
           "importance": 5,
-          "definition": "表示将来要发生的事或计划。",
+          "definition": "深入学习一般过去时，重点掌握常见不规则动词的过去式变化，并能灵活运用于描述过去活动。",
           "core_points": [
-            "be going to + 动词原形：表示计划好的将来",
-            "I'm going to visit my grandparents. 我打算探望祖父母。",
-            "What are you going to do this summer? 这个暑假你打算做什么？",
-            "will + 动词原形：表示临时决定或预测。I will help you. It will be sunny tomorrow."
+            "1. 不规则动词：其过去式变化不遵循「动词原形+ed」的规律，需单独记忆，如go-went, see-saw, eat-ate, have-had, do-did等。",
+            "2. 否定句和疑问句：与规则动词一样，使用「did not (didn't) + 动词原形」和「Did + 主语 + 动词原形？」。",
+            "3. 常见不规则动词：背诵人教版教材中出现的不规则动词表格。",
+            "4. 句型应用：熟练运用「What did you do last weekend? I went to...」等句型描述过去活动。",
+            "5. 时间状语：与一般过去时态一致的时间状语，如yesterday, last night, two days ago等。"
           ],
           "example": {
-            "question": "What are you going to do in the summer holiday?",
-            "steps": ["打算=be going to", "I'm going to travel to Beijing and learn to swim."],
-            "answer": "I'm going to travel to Beijing and learn to swim."
+            "question": "请根据提示完成句子：\nLast summer, I ________ (go) to the beach with my parents.",
+            "steps": [
+              "1. 识别时间状语：Last summer，表明句子需要用一般过去时。",
+              "2. 找到动词：go。",
+              "3. 判断动词类型：go是不规则动词。",
+              "4. 转换动词过去式：go的过去式是went。",
+              "5. 填入并检查：Last summer, I went to the beach with my parents."
+            ],
+            "answer": "went"
           },
           "mistakes": [
-            {"wrong": "I going to play.（漏了am）", "correct": "I AM going to play.（不能忘be动词）"},
-            {"wrong": "He's going to plays.（going to后加了s）", "correct": "going to后用原形：He's going to play."}
+            {
+              "wrong": "I didn't saw a film.",
+              "correct": "I didn't see a film."
+            },
+            {
+              "wrong": "She eated an apple.",
+              "correct": "She ate an apple."
+            }
           ],
-          "memory_tip": "🚀 be going to = 正打算(有计划); will = 将会(临时决定/预测); 两个后面都跟动词原形！",
-          "related": {"prerequisite": "见S2 过去时", "next": "见S3-02 小学总复习"}
-        },
+          "memory_tip": "不规则，变变变，死记硬背是关键！Did一出，原形现，别把过去式再变！",
+          "related": {
+            "prerequisite": "六年级下册：一般过去时（规则动词）。",
+            "next": "六年级下册：阅读理解中对过去时态的辨析；书面表达中描述个人经历。"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "选择填空",
+              "按要求改句子",
+              "看图写单词",
+              "阅读理解",
+              "书面表达"
+            ],
+            "scoring_key": "准确记忆和拼写不规则动词过去式；在否定和疑问句中正确还原动词原形。",
+            "common_trap": "不规则动词过去式拼写错误；混淆动词原形和过去式。",
+            "real_exam_example": {
+              "source": "某市期中考试",
+              "question": "选择正确的选项：\nMy brother ________ (have) a good time at the party yesterday.",
+              "answer": "had",
+              "scoring_notes": "根据时间状语「yesterday」判断为一般过去时，并正确写出不规则动词have的过去式had。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U4",
+      "unit_name": "Unit 4 I have a pen pal.",
+      "cards": [
         {
-          "card_id": "S3-02",
-          "full_id": "英语-六下-S3-02",
-          "title": "小学英语核心总复习",
+          "card_id": "U4-C1",
+          "full_id": "G6S2U4C1",
+          "title": "描述人物与国家/国籍",
           "type": "知识总结卡",
           "difficulty": 3,
-          "importance": 5,
-          "definition": "回顾小学阶段最重要的英语知识框架。",
+          "importance": 4,
+          "definition": "学习如何描述人物的外貌和性格特点，以及介绍不同国家和国籍，掌握相关词汇和句型。",
           "core_points": [
-            "四大时态：①一般现在时(习惯/事实) ②现在进行时(正在做) ③一般过去时(已经做了) ④一般将来时(打算做)",
-            "五大句型：①陈述句 ②否定句(not/don't/didn't/won't) ③一般疑问句(Do/Did/Is/Are/Will) ④特殊疑问句(What/Where/When/How/Who/Why) ⑤祈使句(Please.../Don't...)",
-            "名词复数：① +s ②es(s/x/sh/ch) ③y→ies ④f→ves ⑤特殊:man-men, child-children, sheep-sheep",
-            "最重要的be动词口诀：I用am，you用are，is跟着he/she/it，复数全都用are"
+            "1. 描述外貌：掌握head, hair, eyes, nose, mouth等身体部位词汇，以及long/short, big/small, black/brown/blue等形容词。",
+            "2. 描述性格：学习happy, kind, friendly, quiet, lively等形容词。",
+            "3. 国家与国籍：掌握常见国家（China, America, Canada, Australia等）和对应国籍（Chinese, American, Canadian, Australian等）。",
+            "4. 句型应用：使用「He/She is from...」和「He/She is... (nationality)」介绍国籍；使用「He/She has...」描述外貌；使用「He/She is... (personality)」描述性格。",
+            "5. 特殊疑问句：Where is he/she from? What does he/she look like? What is he/she like?"
           ],
           "example": {
-            "question": "用四种时态说「我学英语」",
-            "steps": ["现在: I study English every day.", "进行: I am studying English now.", "过去: I studied English yesterday.", "将来: I am going to study English tomorrow."],
-            "answer": "四种时态表达同一件事，时间不同用的语法不同。"
+            "question": "请根据提示，用英语描述图片中的人物（一个来自美国的金发女孩）。\n(提示词：American, blonde hair, friendly)",
+            "steps": [
+              "1. 确定人物国籍：American。",
+              "2. 描述外貌：blonde hair。",
+              "3. 描述性格：friendly。",
+              "4. 组织句子：使用He/She is from... / He/She has... / He/She is...句型。",
+              "5. 组合成文：She is from America. She is American. She has blonde hair. She is friendly."
+            ],
+            "answer": "She is from America. She is American. She has blonde hair. She is friendly."
           },
           "mistakes": [
-            {"wrong": "搞混四大时态", "correct": "看时间标志词：every day现在，now进行，yesterday过去，tomorrow将来"},
-            {"wrong": "特殊疑问词搞混", "correct": "What什么 Where哪里 When何时 How怎样 Who谁 Why为什么 Which哪个 Whose谁的"}
+            {
+              "wrong": "She is China.",
+              "correct": "She is Chinese."
+            },
+            {
+              "wrong": "He have big eyes.",
+              "correct": "He has big eyes."
+            }
           ],
-          "memory_tip": "🎓 小学英语三大基石：①词汇量（背单词）②语法时态（四大时态）③固定搭配（介词/冠词）→ 三根柱子撑起英语大厦！",
-          "related": {"prerequisite": "小学六年全部知识", "next": "初中英语新起点"}
+          "memory_tip": "国家变国籍，字母细细瞧；描述人，is+形容词，has+名词，别混淆！",
+          "related": {
+            "prerequisite": "三年级：身体部位词汇；五年级：形容词的运用；一般现在时第三人称单数。",
+            "next": "六年级下册：书面表达中的人物介绍；阅读理解中的人物特征描述。"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "看图写单词",
+              "选择填空",
+              "情景交际",
+              "阅读理解",
+              "书面表达"
+            ],
+            "scoring_key": "国家和国籍词汇的正确拼写和使用；have/has的正确选择；形容词的准确运用。",
+            "common_trap": "国家和国籍混淆；he/she后动词has漏掉s。",
+            "real_exam_example": {
+              "source": "某区期末考试",
+              "question": "根据句子意思，选择正确的词语填空：\nMy pen pal is from Canada. He is ________.",
+              "answer": "Canadian",
+              "scoring_notes": "正确识别国家「Canada」对应的国籍是「Canadian」。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U5",
+      "unit_name": "Unit 5 My favourite season.",
+      "cards": [
+        {
+          "card_id": "U5-C1",
+          "full_id": "G6S2U5C1",
+          "title": "季节与天气描述 + 比较级/最高级回顾",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习描述季节特点和天气状况，并复习形容词和副词的比较级和最高级，用于比较事物。",
+          "core_points": [
+            "1. 季节词汇：spring, summer, autumn/fall, winter及其特点（warm, hot, cool, cold）。",
+            "2. 天气词汇：sunny, rainy, cloudy, windy, snowy等，以及询问天气「What's the weather like?」。",
+            "3. 比较级：形容词/副词+er或more+形容词/副词，表示「更...」。常用句型「A is ...er than B.」。",
+            "4. 最高级：the+形容词/副词+est或the most+形容词/副词，表示「最...」。常用句型「A is the ...est in/of...」。",
+            "5. 不规则变化：good-better-best, bad-worse-worst, far-farther/further-farthest/furthest等。"
+          ],
+          "example": {
+            "question": "请将下列句子改为比较级和最高级：\n(1) Summer is hot. (比较Spring)\n(2) Winter is cold. (最高级)",
+            "steps": [
+              "1. 识别形容词：hot, cold。",
+              "2. hot是重读闭音节单音节词，比较级双写t加er，最高级双写t加est。",
+              "3. cold是单音节词，比较级加er，最高级加est。",
+              "4. 构成比较级句子：Summer is hotter than Spring.",
+              "5. 构成最高级句子：Winter is the coldest (season)."
+            ],
+            "answer": "(1) Summer is hotter than Spring.\n(2) Winter is the coldest (season)."
+          },
+          "mistakes": [
+            {
+              "wrong": "Beijing is more colder than Shanghai.",
+              "correct": "Beijing is colder than Shanghai."
+            },
+            {
+              "wrong": "She is the most tall girl.",
+              "correct": "She is the tallest girl."
+            }
+          ],
+          "memory_tip": "季节天气记心间，比较最是形容词；单音节er/est，多音节more/most来帮忙！",
+          "related": {
+            "prerequisite": "三年级：颜色词；四年级：天气词汇；五年级：形容词的基本用法。",
+            "next": "六年级下册：阅读理解中对比较和最高级的理解；书面表达中的情景描述。"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "选择填空",
+              "按要求改句子",
+              "情景交际",
+              "阅读理解",
+              "书面表达"
+            ],
+            "scoring_key": "比较级和最高级形式的正确拼写；than和the的正确使用；不规则变化的准确记忆。",
+            "common_trap": "在比较级前多加more或最高级前多加most；单音节词和多音节词的比较级/最高级规则混淆。",
+            "real_exam_example": {
+              "source": "某市期末真题",
+              "question": "选择正确的选项：\nWhich season is ________ (cold) in your city?",
+              "answer": "the coldest",
+              "scoring_notes": "根据句意「哪个季节最冷」判断为最高级，正确构成cold的最高级形式the coldest。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U6",
+      "unit_name": "Unit 6 How do you feel?",
+      "cards": [
+        {
+          "card_id": "U6-C1",
+          "full_id": "G6S2U6C1",
+          "title": "情绪与健康表达 + 情态动词should/shouldn't",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习表达各种情绪和身体状况，掌握询问和建议的句型，以及情态动词should/shouldn't的用法。",
+          "core_points": [
+            "1. 情绪词汇：happy, sad, angry, tired, excited, worried等。",
+            "2. 身体状况：sick, ill, a fever, a cold, a headache, a toothache等。",
+            "3. 询问感受：How do you feel? What's wrong? What's the matter?",
+            "4. 表达感受：I feel... / I have a... / My... hurts.",
+            "5. 情态动词should/shouldn't：表示「应该/不应该」，后接动词原形，用于给出建议或劝告。",
+            "6. 建议句型：You should... / You shouldn't... / Why don't you...?"
+          ],
+          "example": {
+            "question": "请根据情景给出建议：\nLi Ming has a bad cold. What should he do?",
+            "steps": [
+              "1. 识别问题：Li Ming感冒了，应该做什么？",
+              "2. 联想感冒的常规建议：看医生、多休息、多喝水。",
+              "3. 使用should句型给出建议：He should see a doctor. He should drink more water. He should have a rest.",
+              "4. 检查句型：should后接动词原形。"
+            ],
+            "answer": "He should see a doctor. / He should drink more water. / He should have a rest."
+          },
+          "mistakes": [
+            {
+              "wrong": "You should to go to bed.",
+              "correct": "You should go to bed."
+            },
+            {
+              "wrong": "He should eats more vegetables.",
+              "correct": "He should eat more vegetables."
+            }
+          ],
+          "memory_tip": "情绪身体要表达，should/shouldn't给建议，后面跟着动词原形，千万别忘了！",
+          "related": {
+            "prerequisite": "三年级：身体部位词汇；四年级：一般疑问句和特殊疑问句；五年级：情态动词can。",
+            "next": "六年级下册：书面表达中的建议信或情景对话。"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "选择填空",
+              "情景交际",
+              "按要求改句子",
+              "阅读理解",
+              "补全对话"
+            ],
+            "scoring_key": "情绪和健康词汇的准确使用；should/shouldn't后接动词原形；建议句型表达得体。",
+            "common_trap": "should后动词加to或加s；情景交际中回答不切题。",
+            "real_exam_example": {
+              "source": "某区期末考试",
+              "question": "补全对话：\nA: I have a headache.\nB: Oh, you ________ (go) to bed early.",
+              "answer": "should go",
+              "scoring_notes": "根据情景判断B在给出建议，正确使用should和动词原形。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "Review1",
+      "unit_name": "语法专题：一般将来时",
+      "cards": [
+        {
+          "card_id": "R1-C1",
+          "full_id": "G6S2R1C1",
+          "title": "一般将来时：will与be going to",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "学习表示未来动作或状态的两种基本形式：will和be going to，掌握它们的构成、用法及区别。",
+          "core_points": [
+            "1. 用法：表示将要发生或存在的动作和状态。常与tomorrow, next week/month/year, in the future等时间状语连用。",
+            "2. will：构成「主语+will+动词原形」。常用于表示：a. 预测未来；b. 临时决定；c. 意愿。",
+            "3. be going to：构成「主语+be动词+going to+动词原形」。常用于表示：a. 计划好的未来；b. 有迹象表明将要发生的事情。",
+            "4. 否定句：will not (won't)+动词原形；be动词+not+going to+动词原形。",
+            "5. 疑问句：Will+主语+动词原形？；Be动词+主语+going to+动词原形？",
+            "6. 区别：will更强调临时的决定或意愿，be going to更强调事先的计划或有根据的预测。"
+          ],
+          "example": {
+            "question": "请根据情景选择will或be going to填空：\n(1) It's sunny now, but look at those dark clouds! It ________ (rain) soon.\n(2) I'm tired. I think I ________ (go) to bed early.",
+            "steps": [
+              "1. 分析(1)情景：有乌云，表示有迹象将下雨，是基于现有事实的预测，用be going to。",
+              "2. 分析(2)情景：因为累而决定早睡，是临时的决定，用will。",
+              "3. 填入并检查：(1) is going to rain. (2) will go."
+            ],
+            "answer": "(1) is going to rain\n(2) will go"
+          },
+          "mistakes": [
+            {
+              "wrong": "She will goes to the park.",
+              "correct": "She will go to the park."
+            },
+            {
+              "wrong": "They are going to went to the cinema.",
+              "correct": "They are going to go to the cinema."
+            }
+          ],
+          "memory_tip": "will是临时，going to是计划；两者都跟动词原形，别把它俩搞混啦！",
+          "related": {
+            "prerequisite": "五年级：be动词的用法；六年级下册：一般现在时、现在进行时（表将来）。",
+            "next": "初中英语：更复杂的将来时态，如将来完成时、将来进行时。"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "选择填空",
+              "按要求改句子",
+              "情景交际",
+              "阅读理解",
+              "书面表达"
+            ],
+            "scoring_key": "will/be going to后接动词原形；be动词与主语保持一致；根据语境选择will或be going to。",
+            "common_trap": "will或be going to后动词加s或变成过去式；be动词与主语不一致（如he are going to）。",
+            "real_exam_example": {
+              "source": "某市期末真题",
+              "question": "选择填空：\nMy mother ________ (buy) a new dress for me next week.",
+              "answer": "is going to buy / will buy (取决于语境，但通常is going to buy更强调计划)",
+              "scoring_notes": "根据时间状语「next week」判断为将来时，选择be going to buy或will buy均可，但若强调计划性，is going to buy更佳。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "Review2",
+      "unit_name": "综合技能：阅读理解与书面表达",
+      "cards": [
+        {
+          "card_id": "R2-C1",
+          "full_id": "G6S2R2C1",
+          "title": "阅读理解与书面表达高分秘籍",
+          "type": "知识总结卡",
+          "difficulty": 5,
+          "importance": 5,
+          "definition": "总结阅读理解的解题策略和书面表达的写作技巧，帮助学生在综合性考试中取得高分。",
+          "core_points": [
+            "1. 阅读理解：先看问题，带着问题读文章，圈画关键词句，注意时间、地点、人物、事件。",
+            "2. 阅读理解：关注文章主旨、细节信息、推理判断题，理解段落大意，把握作者意图。",
+            "3. 书面表达（看图写话）：仔细观察图片，找出时间、地点、人物、事件，理清逻辑顺序，想象对话或心情。",
+            "4. 书面表达（介绍类/对话补全）：明确写作目的，运用所学词汇和句型，注意时态、人称、主谓一致、大小写和标点。",
+            "5. 写作技巧：文章结构清晰（开头、主体、结尾），语言地道，避免中式英语，多用连接词，句式多样。",
+            "6. 检查与修改：写完后务必检查拼写、语法、标点，确保语句通顺、逻辑合理。"
+          ],
+          "example": {
+            "question": "请为一篇关于「My Last Weekend」的作文拟定提纲并写出开头和结尾。",
+            "steps": [
+              "1. 确定主题：My Last Weekend（我的上个周末），时态为一般过去时。",
+              "2. 构思提纲：\n   - 开头：点明主题，上个周末过得怎么样。\n   - 主体：具体描述周末活动，如周六上午去图书馆，下午和朋友踢球；周日和家人看电影，做饭。\n   - 结尾：总结感受，期待下一个周末。",
+              "3. 撰写开头：Last weekend was great! I had a wonderful time.",
+              "4. 撰写结尾：I really enjoyed my last weekend. I can't wait for the next one!"
+            ],
+            "answer": "提纲：\n1. 开头：点明上个周末过得愉快。\n2. 主体：具体描述周六和周日的活动（例如：去图书馆、踢球、看电影、做饭）。\n3. 结尾：总结感受，期待未来。\n\n开头范例：Last weekend was great! I had a wonderful time.\n结尾范例：I really enjoyed my last weekend. I can't wait for the next one!"
+          },
+          "mistakes": [
+            {
+              "wrong": "文章没有中心思想，流水账。",
+              "correct": "文章有明确主题，围绕主题展开，详略得当。"
+            },
+            {
+              "wrong": "语法错误多，拼写错误多，标点混乱。",
+              "correct": "认真检查，确保语法正确、拼写无误、标点规范。"
+            }
+          ],
+          "memory_tip": "阅读找线索，问题是导向；写作有框架，时态是核心，检查是保障！",
+          "related": {
+            "prerequisite": "小学阶段所有词汇、语法和句型知识。",
+            "next": "初中英语：更复杂的阅读理解篇章和议论文、记叙文等书面表达。"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "阅读判断对错",
+              "阅读选择",
+              "阅读回答问题",
+              "看图写话",
+              "介绍类（My family/My day/My friend）",
+              "对话补全"
+            ],
+            "scoring_key": "阅读理解：准确把握文章主旨和细节，推理判断合理。\n书面表达：卷面整洁，语法正确，词汇丰富，句型多样，内容完整，逻辑清晰，符合题意。",
+            "common_trap": "阅读：粗心大意，遗漏细节；过度推断，脱离原文。\n写作：时态混乱，主谓不一致；大小写和标点错误；词不达意，中式英语。",
+            "real_exam_example": {
+              "source": "全国各地小学毕业考试",
+              "question": "请阅读一篇关于小明周末活动的短文，然后回答问题：\n(短文略，内容涉及小明上周末去公园、看电影等)\nQ1: What did Xiao Ming do last Saturday morning?\nQ2: Did he go to the cinema last Sunday?",
+              "answer": "Q1: He went to the park.\nQ2: No, he didn't.",
+              "scoring_notes": "根据原文信息准确回答问题，注意时态和人称代词的使用。书面表达则要求学生根据图片或提示词，运用所学词汇和句型，写出一段通顺、连贯、语法正确的短文。"
+            }
+          }
         }
       ]
     }

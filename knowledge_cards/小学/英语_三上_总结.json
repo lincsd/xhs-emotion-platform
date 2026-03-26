@@ -5,121 +5,555 @@
   "textbook": "人教PEP版",
   "grade_short": "三上",
   "card_pack": "知识总结",
-  "description": "三年级上册英语核心知识点精华总结",
+  "description": "三年级上册英语考点笔记总结",
   "units": [
     {
-      "unit_id": "S1",
-      "unit_name": "字母与问候",
+      "unit_id": "U1",
+      "unit_name": "Unit 1 Hello! & 字母数字专题",
       "cards": [
         {
-          "card_id": "S1-01",
-          "full_id": "英语-三上-S1-01",
-          "title": "26个字母大小写",
+          "card_id": "C3S1001",
+          "full_id": "PEP-3S-U1-C001",
+          "title": "26个字母大小写与数字1-10",
           "type": "知识总结卡",
-          "difficulty": 1,
+          "difficulty": 2,
           "importance": 5,
-          "definition": "英语有26个字母，每个字母都有大写和小写两种写法。大写用在句首和人名。",
+          "definition": "掌握26个英文字母的大小写形式、正确读音及书写顺序，熟悉数字1-10的英文表达。",
           "core_points": [
-            "5个元音字母：A E I O U（读音特别重要）",
-            "21个辅音字母：其余都是辅音字母",
-            "大写用在句首、人名、国名、I",
-            "容易混淆的：b和d、p和q、M和N"
+            "26 Letters (Aa-Zz): 26个英文字母，每个字母都有大写（Capital letter）和小写（Lowercase letter）两种形式。",
+            "Alphabet Order: 字母有固定的排列顺序，如A-B-C-D...，熟记顺序是拼写的基础。",
+            "Numbers 1-10: 掌握1到10的英文单词拼写及读音 (one, two, three...ten)。",
+            "Writing Rules: 字母书写需注意占格（三线格），大写字母占上两格，小写字母占中格或上中下三格。"
           ],
           "example": {
-            "question": "哪些字母是元音字母？",
-            "steps": ["元音字母有5个", "A E I O U"],
-            "answer": "A E I O U"
+            "question": "请将下列大写字母改为小写，小写字母改为大写，并写出数字的英文单词。\n1. A → __   2. c → __   3. 5 → __",
+            "steps": [
+              "识别字母的大小写形式。",
+              "根据规则进行转换。",
+              "回忆数字的英文拼写。"
+            ],
+            "answer": "1. a   2. C   3. five"
           },
           "mistakes": [
-            {"wrong": "b和d写反", "correct": "b像竖着的拳头朝右，d像竖着的拳头朝左"},
-            {"wrong": "忘了句首字母大写", "correct": "每个句子第一个单词首字母要大写"}
+            {
+              "wrong": "B b (大小写混淆)",
+              "correct": "B b (大写是B，小写是b)"
+            },
+            {
+              "wrong": "3 (threee)",
+              "correct": "3 (three)"
+            }
           ],
-          "memory_tip": "🅰️ 元音字母记忆：A E I O U → 一个鸡蛋（A-E-I-O-U 像念鸡蛋的声音）",
-          "related": {"prerequisite": "无", "next": "见S1-02 日常问候"}
+          "memory_tip": "「字母歌」勤唱多听，大小写像「双胞胎」；数字「一到十」，发音拼写记心间！",
+          "related": {
+            "prerequisite": "无",
+            "next": "单词拼写、看图写单词"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "听力选图",
+              "听力判断",
+              "选择填空",
+              "连线",
+              "看图写单词"
+            ],
+            "scoring_key": "字母大小写区分、数字单词拼写正确",
+            "common_trap": "易混淆字母如b/d, p/q的大小写书写错误；数字单词拼写多一两个字母",
+            "real_exam_example": {
+              "source": "人教版PEP三年级上册期中考试",
+              "question": "请将下列字母和数字的正确形式写在横线上。\n1. 大写字母 'e' 是：____\n2. 小写字母 'G' 是：____\n3. 数字 '7' 的英文是：____",
+              "answer": "1. E   2. g   3. seven",
+              "scoring_notes": "每个空1分，大小写错误或拼写错误均不得分。"
+            }
+          }
         },
         {
-          "card_id": "S1-02",
-          "full_id": "英语-三上-S1-02",
-          "title": "打招呼和自我介绍",
+          "card_id": "C3S1002",
+          "full_id": "PEP-3S-U1-C002",
+          "title": "课堂交际与自我介绍",
           "type": "知识总结卡",
-          "difficulty": 1,
-          "importance": 5,
-          "definition": "见面打招呼和自我介绍是最基本的英语对话。",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习日常问候、介绍自己名字、询问他人姓名及简单的课堂指令，进行基本的情景交流。",
           "core_points": [
-            "Hello! / Hi! 你好！",
-            "My name is... / I'm... 我叫...",
-            "What's your name? 你叫什么名字？",
-            "Nice to meet you! 很高兴认识你！— Nice to meet you, too!"
+            "Greetings: 常用问候语如「Hello!」「Hi!」「Good morning/afternoon!」。",
+            "Self-introduction: 介绍自己：「I'm [name].」或「My name is [name].」。",
+            "Asking Names: 询问他人姓名：「What's your name?」。",
+            "Classroom Commands: 简单的课堂指令如「Stand up!」「Sit down!」「Open your book!」「Close your book!」。",
+            "Responses: 对问候和提问的礼貌回应。"
           ],
           "example": {
-            "question": "同学问你 What's your name? 你怎么回答？",
-            "steps": ["对方问你的名字", "用 My name is... 回答"],
-            "answer": "My name is Li Ming. (或 I'm Li Ming.)"
+            "question": "根据对话情景，选择正确的选项。\nA: Hello! What's your name?\nB: ________.\n(A) I'm fine. (B) My name is Mike. (C) Thank you.",
+            "steps": [
+              "理解A的提问：「你叫什么名字？」",
+              "思考B的回答应是介绍自己的名字。",
+              "选择符合情景的选项。"
+            ],
+            "answer": "B"
           },
           "mistakes": [
-            {"wrong": "回答名字时说 My name is Li Ming is.", "correct": "不需要两个is：My name is Li Ming."},
-            {"wrong": "Nice to meet you 回答 Nice to meet you", "correct": "要加too：Nice to meet you, too!"}
+            {
+              "wrong": "What's your name? - I'm fine. (答非所问)",
+              "correct": "What's your name? - I'm Lily."
+            },
+            {
+              "wrong": "Stand up! - (无动作)",
+              "correct": "Stand up! - (起立)"
+            }
           ],
-          "memory_tip": "👋 见面三句话：Hello! → What's your name? → Nice to meet you!",
-          "related": {"prerequisite": "字母", "next": "见S2-01 颜色和数字"}
+          "memory_tip": "「Hello」打招呼，「What's your name」问名字，「I'm」加上我姓名；「Stand up」站立，「Sit down」坐好，指令记牢不跑调！",
+          "related": {
+            "prerequisite": "简单词汇",
+            "next": "更复杂的情景交际、人物介绍"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "听力选图",
+              "情景交际",
+              "补全对话",
+              "选择填空"
+            ],
+            "scoring_key": "理解对话语境、选择恰当回应",
+            "common_trap": "将问候语与姓名询问的回答混淆；对课堂指令的动作理解错误",
+            "real_exam_example": {
+              "source": "人教版PEP三年级上册期末考试",
+              "question": "选择最佳答案补全对话：\nA: Good morning, Sam!\nB: ____________.\n(A) Good morning, Ben! (B) How are you? (C) I'm Sam.",
+              "answer": "A",
+              "scoring_notes": "考查问候语的应答，选择与A相同问候语表示礼貌回应。"
+            }
+          }
         }
       ]
     },
     {
-      "unit_id": "S2",
-      "unit_name": "核心词汇",
+      "unit_id": "U2",
+      "unit_name": "Unit 2 Look at me! & 身体颜色专题",
       "cards": [
         {
-          "card_id": "S2-01",
-          "full_id": "英语-三上-S2-01",
-          "title": "颜色和数字1-10",
+          "card_id": "C3S1003",
+          "full_id": "PEP-3S-U2-C003",
+          "title": "身体部位与颜色词汇",
           "type": "知识总结卡",
-          "difficulty": 1,
+          "difficulty": 2,
           "importance": 5,
-          "definition": "颜色和数字是最基础的英语词汇，一定要记牢。",
+          "definition": "掌握头部、身体、四肢等常见身体部位的英文名称，以及红、黄、蓝等基本颜色的英文单词。",
           "core_points": [
-            "颜色：red红 yellow黄 blue蓝 green绿 black黑 white白 orange橙 pink粉 purple紫 brown棕",
-            "数字1-5：one two three four five",
-            "数字6-10：six seven eight nine ten",
-            "What colour is it? — It's red."
+            "Body Parts: 头部 (head)、眼睛 (eye)、耳朵 (ear)、鼻子 (nose)、嘴巴 (mouth)、手臂 (arm)、手 (hand)、腿 (leg)、脚 (foot) 等。",
+            "Colors: 红色 (red)、黄色 (yellow)、蓝色 (blue)、绿色 (green)、白色 (white)、黑色 (black) 等基本颜色词。",
+            "Vocabulary Recognition: 能看图识词，听音辨词。",
+            "Spelling: 熟练拼写这些基础词汇。"
           ],
           "example": {
-            "question": "How many apples? (图片有3个苹果)",
-            "steps": ["数苹果：1,2,3", "用英语表达数量"],
-            "answer": "Three."
+            "question": "看图写单词或选择正确单词。\n1. (一张眼睛的图片) → ____\n2. (一个红色的苹果) It's a ____ apple. (A) blue (B) red (C) green",
+            "steps": [
+              "识别图片内容。",
+              "回忆对应的英文单词。",
+              "根据图片颜色选择正确的颜色词。"
+            ],
+            "answer": "1. eye   2. B"
           },
           "mistakes": [
-            {"wrong": "three拼成tree（树）", "correct": "three有th开头（th-r-ee），tree没有h（t-r-ee）"},
-            {"wrong": "blue和black搞混", "correct": "blue=蓝色（想想蓝天blue sky），black=黑色"}
+            {
+              "wrong": "ear (eay)",
+              "correct": "ear"
+            },
+            {
+              "wrong": "red (rid)",
+              "correct": "red"
+            }
           ],
-          "memory_tip": "🌈 颜色记忆法：红red（热的→红色很热烈），蓝blue（不乐→天空蓝色也会忧郁）",
-          "related": {"prerequisite": "见S1-01 字母", "next": "见S2-02 动物和文具"}
+          "memory_tip": "「头」是head，「眼」是eye，「手」是hand，「脚」是foot；「红」是red，「黄」是yellow，「蓝」是blue，颜色身体记得住！",
+          "related": {
+            "prerequisite": "字母拼写",
+            "next": "描述身体特征、形容词作定语"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "看图写单词",
+              "听力选图",
+              "连线",
+              "选择填空",
+              "英汉互译"
+            ],
+            "scoring_key": "单词拼写准确无误，英汉互译正确",
+            "common_trap": "易混淆单词 (e.g., ear/eye, hand/foot)；单词拼写漏写或多写字母",
+            "real_exam_example": {
+              "source": "人教版PEP三年级上册期中考试",
+              "question": "看图写出单词。\n1. (图片：一只手) _______  2. (图片：绿色) _______",
+              "answer": "1. hand   2. green",
+              "scoring_notes": "单词拼写完全正确得满分，字母错误不得分。"
+            }
+          }
         },
         {
-          "card_id": "S2-02",
-          "full_id": "英语-三上-S2-02",
-          "title": "文具和动物单词",
+          "card_id": "C3S1004",
+          "full_id": "PEP-3S-U2-C004",
+          "title": "描述身体特征与拥有（I have...）",
           "type": "知识总结卡",
-          "difficulty": 1,
-          "importance": 5,
-          "definition": "身边的文具和常见动物是最先学的名词。",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习使用「I have...」句型描述自己拥有的身体部位，并简单描述其数量或颜色。",
           "core_points": [
-            "文具：pen钢笔 pencil铅笔 ruler尺子 eraser橡皮 book书 bag书包 crayon蜡笔",
-            "动物：cat猫 dog狗 duck鸭 pig猪 bear熊 bird鸟 monkey猴",
-            "句型：I have a... 我有一个...",
-            "句型：Show me your... 给我看看你的..."
+            "I have...: 「我有一个/些...」用于表达拥有，后接名词。",
+            "Singular/Plural: 描述单数时用「a/an + 名词单数」，描述复数时用「数字 + 名词复数」。如：「I have a nose.」「I have two eyes.」。",
+            "Adjective Order: 颜色词等形容词通常放在名词前。如：「I have two big eyes.」「I have a red mouth.」。",
+            "Simple Questions: 简单的提问如「What do you have?」或「Do you have...?」"
           ],
           "example": {
-            "question": "I have a ___. (图片是铅笔)",
-            "steps": ["图片是铅笔", "铅笔=pencil"],
-            "answer": "I have a pencil."
+            "question": "按要求完成句子。\n1. 我有两只大眼睛。 (翻译句子)\n   ____________________.\n2. I have a ____. (mouth / two mouths) (选择填空)",
+            "steps": [
+              "识别句子主语「我」和谓语「有」。",
+              "将身体部位和数量/形容词正确组合。",
+              "注意单复数和冠词的搭配。"
+            ],
+            "answer": "1. I have two big eyes.   2. mouth"
           },
           "mistakes": [
-            {"wrong": "pen和pencil搞混", "correct": "pen=钢笔（短的），pencil=铅笔（长的，多了cil）"},
-            {"wrong": "monkey拼错", "correct": "mon-key（猴子拿着钥匙key）"}
+            {
+              "wrong": "I have a two eyes. (冠词与复数名词冲突)",
+              "correct": "I have two eyes."
+            },
+            {
+              "wrong": "I have eye two. (形容词位置错误)",
+              "correct": "I have two eyes."
+            }
           ],
-          "memory_tip": "🐵 monkey = mon（门）+ key（钥匙）→ 猴子拿着门的钥匙",
-          "related": {"prerequisite": "见S2-01 颜色数字", "next": "见三下 更多词汇"}
+          "memory_tip": "「I have」表拥有，后面跟着「是什么」；「一个a」配单数，「数字」跟上复数它！",
+          "related": {
+            "prerequisite": "身体部位和颜色词汇、数字1-10",
+            "next": "描述他人特征、形容词的进一步学习"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "按要求改句子",
+              "选择填空",
+              "看图写话",
+              "英汉互译"
+            ],
+            "scoring_key": "主谓一致、名词单复数、冠词使用、形容词位置",
+            "common_trap": "「a/an」与复数名词混用；形容词和名词顺序颠倒；动词拼写错误 (如have写成has)",
+            "real_exam_example": {
+              "source": "人教版PEP三年级上册期末考试",
+              "question": "将下列句子翻译成英语。\n我有两只耳朵和一张嘴巴。\n__________________________________.",
+              "answer": "I have two ears and a mouth.",
+              "scoring_notes": "动词have、名词单复数、冠词a以及连词and的运用是得分点。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U3",
+      "unit_name": "Unit 3 What's this? & 教室物品专题",
+      "cards": [
+        {
+          "card_id": "C3S1005",
+          "full_id": "PEP-3S-U3-C005",
+          "title": "教室物品与物品识别（What's this? It's a...）",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习常见的教室物品词汇，掌握「What's this?」提问和「It's a/an...」回答的句型。",
+          "core_points": [
+            "Classroom Objects: 铅笔 (pencil)、书 (book)、尺子 (ruler)、橡皮 (eraser)、包 (bag)、钢笔 (pen) 等。",
+            "What's this?: 用于询问单数物品的名称，意为「这是什么？」。",
+            "It's a/an...: 用于回答「What's this?」的句型，意为「它是一个...」。注意「a」和「an」的使用规则 (元音前用an)。",
+            "Pronunciation & Spelling: 熟练掌握这些词汇的读音和拼写。"
+          ],
+          "example": {
+            "question": "看图回答问题。\n(图片：一支铅笔)\nQ: What's this?\nA: ______________.",
+            "steps": [
+              "识别图片中的物品。",
+              "回忆该物品的英文名称。",
+              "使用「It's a/an...」句型完整回答。"
+            ],
+            "answer": "It's a pencil."
+          },
+          "mistakes": [
+            {
+              "wrong": "What's this? - A book. (回答不完整)",
+              "correct": "What's this? - It's a book."
+            },
+            {
+              "wrong": "It's a eraser. (冠词使用错误)",
+              "correct": "It's an eraser."
+            }
+          ],
+          "memory_tip": "「What's this」问「这是啥」，「It's a/an」来回答；「a」跟辅音，「an」跟元音，小口诀，要记牢！",
+          "related": {
+            "prerequisite": "字母、简单词汇",
+            "next": "物品所有权、复数物品询问 (What are these?)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "看图写单词",
+              "选择填空",
+              "情景交际",
+              "补全对话",
+              "按要求改句子"
+            ],
+            "scoring_key": "物品单词拼写、冠词a/an的正确使用、句型完整性",
+            "common_trap": "忘记写「It's」；「a」和「an」的混用；单词拼写错误",
+            "real_exam_example": {
+              "source": "人教版PEP三年级上册期中考试",
+              "question": "根据图片，补全对话。\n(图片：一个橡皮)\nA: What's this?\nB: It's ____ eraser.",
+              "answer": "an",
+              "scoring_notes": "考查对冠词「a」和「an」使用规则的掌握。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U4",
+      "unit_name": "Unit 4 My home & 家庭成员专题",
+      "cards": [
+        {
+          "card_id": "C3S1006",
+          "full_id": "PEP-3S-U4-C006",
+          "title": "家庭成员与人物介绍（This is my...）",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习家庭成员的英文称谓，掌握「This is my...」句型用于介绍家人或朋友。",
+          "core_points": [
+            "Family Members: 爸爸 (father/dad)、妈妈 (mother/mom)、哥哥/弟弟 (brother)、姐姐/妹妹 (sister)、爷爷/外公 (grandfather/grandpa)、奶奶/外婆 (grandmother/grandma) 等。",
+            "This is my...: 「这是我的...」用于介绍单个人物，后接单数名词。",
+            "Plural Form: 当介绍多个人时，可以用「These are my...」或列举多个「This is my...」。三年级主要侧重单数介绍。",
+            "Pronunciation & Spelling: 熟练掌握这些词汇的读音和拼写。"
+          ],
+          "example": {
+            "question": "看图写句子。\n(图片：一个男孩指着他的妈妈)\n____________________.",
+            "steps": [
+              "识别图片中的人物关系。",
+              "回忆家庭成员的英文称谓。",
+              "使用「This is my...」句型完整表达。"
+            ],
+            "answer": "This is my mom/mother."
+          },
+          "mistakes": [
+            {
+              "wrong": "This is my mother. (拼写错误，如mothre)",
+              "correct": "This is my mother."
+            },
+            {
+              "wrong": "Is this my mom? (混淆陈述句和疑问句)",
+              "correct": "This is my mom."
+            }
+          ],
+          "memory_tip": "「爸爸father妈妈mother，兄弟brother姐妹sister」；「This is my」来介绍，我的家人真可爱！",
+          "related": {
+            "prerequisite": "简单词汇、自我介绍句型",
+            "next": "描述人物特征、询问人物关系 (Who's this?)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "看图写话",
+              "选择填空",
+              "情景交际",
+              "补全对话",
+              "英汉互译"
+            ],
+            "scoring_key": "家庭成员单词拼写、句型完整性与准确性",
+            "common_trap": "家庭成员称谓混淆 (如brother/sister)；忘记所有格代词my；动词is拼写错误",
+            "real_exam_example": {
+              "source": "人教版PEP三年级上册期末考试",
+              "question": "根据图片提示，完成对话。\n(图片：一个女孩指着一位老奶奶)\nA: Who's this?\nB: This is my __________.",
+              "answer": "grandma/grandmother",
+              "scoring_notes": "正确识别图片人物并拼写出对应的家庭成员称谓。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U5",
+      "unit_name": "Unit 5 How many? & 数字数量专题",
+      "cards": [
+        {
+          "card_id": "C3S1007",
+          "full_id": "PEP-3S-U5-C007",
+          "title": "数字11-100与数量询问（How many...?）",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习数字11-100的英文表达，掌握「How many...?」句型用于询问物品的数量。",
+          "core_points": [
+            "Numbers 11-20: 掌握teen数字 (eleven, twelve, thirteen...twenty) 的拼写和读音。",
+            "Tens (20-100): 掌握整十数字 (twenty, thirty, forty...hundred) 的拼写和读音。",
+            "Compound Numbers: 掌握二十一到九十九的组合数字拼写规则 (twenty-one, thirty-five)。",
+            "How many...?: 「有多少...？」用于询问可数名词的数量，后接可数名词复数。",
+            "Answering How many?: 回答时直接说出数字。如：「How many books?」-「Ten.」"
+          ],
+          "example": {
+            "question": "看图回答问题，并写出数字的英文单词。\n1. (图片：32个苹果) Q: How many apples?\n   A: ______________.\n2. 写出数字 '56' 的英文单词：____________.",
+            "steps": [
+              "数清图片中的物品数量。",
+              "使用数字单词回答「How many...?」问题。",
+              "回忆并正确拼写组合数字。"
+            ],
+            "answer": "1. Thirty-two.   2. fifty-six"
+          },
+          "mistakes": [
+            {
+              "wrong": "How many book? (名词用单数)",
+              "correct": "How many books?"
+            },
+            {
+              "wrong": "twenty one (中间无连字符)",
+              "correct": "twenty-one"
+            }
+          ],
+          "memory_tip": "「How many」问数量，后面名词要复数；「teen」和「ty」要分清，中间「-」莫忘记！",
+          "related": {
+            "prerequisite": "数字1-10、可数名词",
+            "next": "更复杂的数量描述、序数词"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "听力数字",
+              "选择填空",
+              "看图写单词",
+              "按要求改句子",
+              "阅读回答问题"
+            ],
+            "scoring_key": "数字单词拼写正确、可数名词复数形式、How many句型运用",
+            "common_trap": "数字单词拼写错误 (如thirteen/thirty)；「How many」后名词用单数；组合数字中间漏写连字符",
+            "real_exam_example": {
+              "source": "人教版PEP三年级上册期末考试",
+              "question": "选择正确的选项。\nQ: How many pencils do you have?\nA: I have ____________ pencils.\n(A) twenty-two (B) twenty two (C) twenty twoes",
+              "answer": "A",
+              "scoring_notes": "考查数字组合的正确拼写和How many句型的回答。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U6",
+      "unit_name": "Unit 6 What would you like? & 食物喜好专题",
+      "cards": [
+        {
+          "card_id": "C3S1008",
+          "full_id": "PEP-3S-U6-C008",
+          "title": "食物词汇与表达喜好（I like...）",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习常见的食物和饮料词汇，掌握「I like...」句型表达个人喜好。",
+          "core_points": [
+            "Food & Drinks: 苹果 (apple)、香蕉 (banana)、梨 (pear)、牛奶 (milk)、水 (water)、面包 (bread)、米饭 (rice)、面条 (noodles) 等。",
+            "I like...: 「我喜欢...」用于表达对食物或物品的喜好，后接名词。",
+            "Singular/Plural/Uncountable: 可数名词单数前用a/an，可数名词复数不加冠词，不可数名词也不加冠词。如：「I like an apple.」「I like bananas.」「I like milk.」。",
+            "Simple Questions: 询问喜好：「Do you like...?」或「What do you like?」。"
+          ],
+          "example": {
+            "question": "根据图片，用「I like...」写句子。\n1. (图片：一根香蕉)\n   ____________________.\n2. (图片：一杯牛奶)\n   ____________________.",
+            "steps": [
+              "识别图片中的食物或饮料。",
+              "回忆对应的英文单词。",
+              "使用「I like...」句型完整表达，注意名词的单复数或不可数形式。"
+            ],
+            "answer": "1. I like bananas.   2. I like milk."
+          },
+          "mistakes": [
+            {
+              "wrong": "I like a milks. (不可数名词加s)",
+              "correct": "I like milk."
+            },
+            {
+              "wrong": "I likes apples. (主语I，动词like不加s)",
+              "correct": "I like apples."
+            }
+          ],
+          "memory_tip": "「I like」我喜欢，后面食物名字跟；可数复数莫忘s，不可数词不加s！",
+          "related": {
+            "prerequisite": "名词单复数、冠词a/an",
+            "next": "询问和提供食物 (What would you like?)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "看图写单词",
+              "选择填空",
+              "情景交际",
+              "补全对话",
+              "书面表达"
+            ],
+            "scoring_key": "食物单词拼写、动词like的正确使用、名词单复数和冠词的搭配",
+            "common_trap": "可数名词复数不加s；不可数名词加s；like动词形式错误 (如likes)",
+            "real_exam_example": {
+              "source": "人教版PEP三年级上册期中考试",
+              "question": "选择填空。\nI like ________.\n(A) a water (B) waters (C) water",
+              "answer": "C",
+              "scoring_notes": "考查不可数名词water的正确用法，不能加冠词a或复数s。"
+            }
+          }
+        },
+        {
+          "card_id": "C3S1009",
+          "full_id": "PEP-3S-U6-C009",
+          "title": "询问和提供食物（What would you like?）",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习使用「What would you like?」询问对方想要什么食物或饮料，并用「I'd like...」或「Here you are.」进行回应或提供。",
+          "core_points": [
+            "What would you like?: 「你想要什么？」用于礼貌地询问对方的需求。",
+            "I'd like...: 「我想要...」是「I would like...」的缩写，用于礼貌地表达自己的需求。",
+            "Here you are.: 「给你。」用于递给对方物品时的常用语。",
+            "You're welcome./Thank you.: 礼貌的应答，表达感谢或不客气。",
+            "Situational Dialogue: 掌握在餐厅、商店等场景下点餐或提供食物的简单对话。"
+          ],
+          "example": {
+            "question": "补全对话。\nA: What would you like?\nB: I'd like some ________. (milk)\nA: Here you are.\nB: ________.",
+            "steps": [
+              "理解A的提问：「你想要什么？」",
+              "根据括号内提示，用「I'd like...」回答。",
+              "理解A的提供：「给你。」",
+              "思考B的礼貌回应应是感谢。"
+            ],
+            "answer": "B: milk   B: Thank you."
+          },
+          "mistakes": [
+            {
+              "wrong": "What do you like? (混淆一般喜好和当下需求)",
+              "correct": "What would you like?"
+            },
+            {
+              "wrong": "I like milk. (不够礼貌，不如I'd like...)",
+              "correct": "I'd like milk."
+            }
+          ],
+          "memory_tip": "「What would you like」问你想要啥，「I'd like」礼貌来回答；「Here you are」给你啦，「Thank you」别忘了！",
+          "related": {
+            "prerequisite": "食物词汇、I like句型",
+            "next": "更复杂的购物对话、情态动词would"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "情景交际",
+              "补全对话",
+              "选择填空",
+              "书面表达"
+            ],
+            "scoring_key": "句型完整性与准确性、情景对话的流畅性与礼貌性",
+            "common_trap": "「would like」与「like」的混用；「Here you are」的误用；感谢语或回应语缺失",
+            "real_exam_example": {
+              "source": "人教版PEP三年级上册期末考试",
+              "question": "选择最佳答案补全对话。\nA: What would you like?\nB: ____________.\n(A) I like bread. (B) I'd like some bread. (C) I want bread.",
+              "answer": "B",
+              "scoring_notes": "考查「would like」的礼貌表达，选项B最为恰当。"
+            }
+          }
         }
       ]
     }

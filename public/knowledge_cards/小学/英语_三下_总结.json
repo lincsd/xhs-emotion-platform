@@ -5,127 +5,574 @@
   "textbook": "人教PEP版",
   "grade_short": "三下",
   "card_pack": "知识总结",
-  "description": "三年级下册英语核心知识点精华总结",
+  "description": "三年级下册英语考点笔记总结",
   "units": [
     {
-      "unit_id": "S1",
-      "unit_name": "家庭与身体",
+      "unit_id": "U1",
+      "unit_name": "Unit 1 My classroom & Unit 2 My schoolbag",
       "cards": [
         {
-          "card_id": "S1-01",
-          "full_id": "英语-三下-S1-01",
-          "title": "家庭成员",
+          "card_id": "3B_U1_01",
+          "full_id": "PEP3B-U1-01",
+          "title": "教室物品与方位词「Where is...?」",
           "type": "知识总结卡",
           "difficulty": 2,
-          "importance": 5,
-          "definition": "介绍家庭成员的英语说法。",
+          "importance": 4,
+          "definition": "学习教室常见物品名称及表示位置的介词，并用「Where is...?」提问和回答。",
           "core_points": [
-            "father爸爸 / dad爸爸(口语) / mother妈妈 / mum妈妈(口语)",
-            "brother哥哥弟弟 / sister姐姐妹妹",
-            "grandfather爷爷外公 / grandmother奶奶外婆",
-            "句型：This is my... 这是我的..."
+            "「教室物品」：desk, chair, board, window, door, light, fan. (课桌、椅子、黑板、窗户、门、灯、风扇)",
+            "「方位介词」：on (在...上面), in (在...里面), under (在...下面), near (在...旁边).",
+            "「提问句型」：Where is the...? (它在哪里？)",
+            "「回答句型」：It's on/in/under/near the... (它在...上面/里面/下面/旁边。)"
           ],
           "example": {
-            "question": "介绍你的妈妈用英语怎么说？",
-            "steps": ["这是→This is", "我的妈妈→my mother/mum"],
-            "answer": "This is my mother."
+            "question": "Look at the picture. The book is on the desk. Where is the pencil? (看图，书在课桌上。铅笔在哪里？)",
+            "steps": [
+              "1. 识别图片中的物品名称 (pencil, schoolbag)。",
+              "2. 找出铅笔与书包的位置关系 (在书包里)。",
+              "3. 选用正确的介词 (in)。",
+              "4. 组织完整回答句。"
+            ],
+            "answer": "It's in the schoolbag."
           },
           "mistakes": [
-            {"wrong": "father和mother拼错", "correct": "fa-ther（发音像「发热」）, mo-ther"},
-            {"wrong": "分不清grandpa和grandfather", "correct": "grandpa是口语（简称），grandfather是正式说法"}
+            {
+              "wrong": "It's on schoolbag.",
+              "correct": "It's on the schoolbag."
+            }
           ],
-          "memory_tip": "👨‍👩‍👧‍👦 family = father and mother I love you（家庭=爸爸和妈妈我爱你们）",
-          "related": {"prerequisite": "见三上 自我介绍", "next": "见S1-02 身体部位"}
+          "memory_tip": "「上on下under，in在里头，near旁边不离手，Where is问位置，It's回答不犯愁。」",
+          "related": {
+            "prerequisite": "基础名词识记, be动词用法.",
+            "next": "更多介词学习 (behind, in front of), 「there be」句型."
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "听力选图",
+              "选择填空",
+              "连线",
+              "看图写单词",
+              "情景交际",
+              "按要求改句子"
+            ],
+            "scoring_key": "「介词选用正确」「名词拼写无误」「大小写和标点」",
+            "common_trap": "「介词后是否加the」「on/in/under混淆」",
+            "real_exam_example": {
+              "source": "某市三年级期末考试",
+              "question": "看图填空，选择正确的介词。The cat is ___ the chair. (图片：猫在椅子下面) A. on B. in C. under",
+              "answer": "C. under",
+              "scoring_notes": "考察学生对方位介词的理解和运用。"
+            }
+          }
         },
         {
-          "card_id": "S1-02",
-          "full_id": "英语-三下-S1-02",
-          "title": "身体部位",
+          "card_id": "3B_U1_02",
+          "full_id": "PEP3B-U1-02",
+          "title": "文具用品与颜色提问「What color is it?」",
           "type": "知识总结卡",
-          "difficulty": 1,
+          "difficulty": 2,
           "importance": 4,
-          "definition": "认识身体各部位的英语名称。",
+          "definition": "掌握常见文具名称和颜色词汇，并学会用「What color is it?」询问颜色。",
           "core_points": [
-            "head头 eye眼 ear耳 nose鼻 mouth嘴",
-            "hand手 arm胳膊 leg腿 foot脚(复数feet)",
-            "body身体 finger手指 face脸",
-            "句型：Touch your nose! 摸你的鼻子！"
+            "「文具词汇」：pencil, pen, book, ruler, eraser, crayon, schoolbag. (铅笔、钢笔、书、尺子、橡皮、蜡笔、书包)",
+            "「颜色词汇」：red, yellow, blue, green, white, black, brown, orange. (红、黄、蓝、绿、白、黑、棕、橙)",
+            "「提问句型」：What color is it/the...? (它/这个...是什么颜色？)",
+            "「回答句型」：It's red/yellow/blue... (它是红色/黄色/蓝色...)"
           ],
           "example": {
-            "question": "用英语说「闭上你的眼睛」",
-            "steps": ["闭上=Close", "你的眼睛=your eyes"],
-            "answer": "Close your eyes."
+            "question": "Look at the picture. What color is the ruler? (图片：一把绿色的尺子)",
+            "steps": [
+              "1. 识别图片中的物品 (ruler) 和颜色 (绿色)。",
+              "2. 回忆颜色的英文单词 (green)。",
+              "3. 组织完整回答句。"
+            ],
+            "answer": "It's green."
           },
           "mistakes": [
-            {"wrong": "eye和ear搞混", "correct": "eye=眼（y像鼻子，两边是眼睛），ear=耳朵"},
-            {"wrong": "foot的复数不知道", "correct": "foot→feet（不规则变化）"}
+            {
+              "wrong": "It's a green.",
+              "correct": "It's green. / It's a green ruler."
+            }
           ],
-          "memory_tip": "👃 nose里有个no→闻到臭的就摇头说No！eye像一张小脸：e是眼睛y是鼻子e是眼睛",
-          "related": {"prerequisite": "基础名词", "next": "见四上 更多身体动作"}
+          "memory_tip": "「文具颜色背得牢，What color问得巧，It's回答不跑调。」",
+          "related": {
+            "prerequisite": "基础名词和形容词.",
+            "next": "更多形容词描述 (big, small, long, short)."
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "听力选图",
+              "看图写单词",
+              "选择填空",
+              "连线",
+              "情景交际"
+            ],
+            "scoring_key": "「单词拼写正确」「颜色与物品对应」「大小写和标点」",
+            "common_trap": "「颜色单词的字母顺序错误」「It's green. 和 It's a green book. 的区别」",
+            "real_exam_example": {
+              "source": "某小学三年级期中考试",
+              "question": "选出与图片匹配的单词。(图片：一支红色的铅笔) A. blue pen B. red pencil C. yellow book",
+              "answer": "B. red pencil",
+              "scoring_notes": "考察学生对颜色和文具词汇的综合识记。"
+            }
+          }
         }
       ]
     },
     {
-      "unit_id": "S2",
-      "unit_name": "水果与食物",
+      "unit_id": "U2",
+      "unit_name": "Unit 3 My animal friends",
       "cards": [
         {
-          "card_id": "S2-01",
-          "full_id": "英语-三下-S2-01",
-          "title": "水果和食物单词",
+          "card_id": "3B_U2_01",
+          "full_id": "PEP3B-U2-01",
+          "title": "动物词汇与能力描述「It can...」",
           "type": "知识总结卡",
-          "difficulty": 1,
-          "importance": 5,
-          "definition": "常见水果和食物的英语说法。",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习常见动物的名称，并用「can/can't」描述它们的能力。",
           "core_points": [
-            "水果：apple苹果 banana香蕉 orange橙子 pear梨 grape葡萄 watermelon西瓜 strawberry草莓",
-            "食物：bread面包 egg鸡蛋 milk牛奶 rice米饭 fish鱼 cake蛋糕",
-            "Do you like...? 你喜欢...吗？— Yes, I do. / No, I don't.",
-            "I like apples. 我喜欢苹果。（表示喜好时名词用复数）"
+            "「动物词汇」：cat, dog, bird, panda, monkey, elephant, tiger, lion, bear. (猫、狗、鸟、熊猫、猴子、大象、老虎、狮子、熊)",
+            "「能力动词」：run, jump, swim, fly, climb, walk, sing. (跑、跳、游泳、飞、爬、走、唱歌)",
+            "「能力句型」：It can run/jump/swim... (它会跑/跳/游泳...)",
+            "「否定句型」：It can't fly. (它不会飞。)"
           ],
           "example": {
-            "question": "Do you like bananas?",
-            "steps": ["问你喜不喜欢香蕉", "喜欢→Yes, I do. 不喜欢→No, I don't."],
-            "answer": "Yes, I do. / No, I don't."
+            "question": "What can a bird do? (鸟会做什么？)",
+            "steps": [
+              "1. 识别动物名称 (bird)。",
+              "2. 回忆鸟的常见能力 (fly, sing)。",
+              "3. 选用正确的动词并组织句型。"
+            ],
+            "answer": "It can fly and sing."
           },
           "mistakes": [
-            {"wrong": "I like apple.（忘了复数）", "correct": "表示喜好用复数：I like apples."},
-            {"wrong": "strawberry拼错", "correct": "straw(稻草)+berry(浆果)→strawberry"}
+            {
+              "wrong": "It can to fly.",
+              "correct": "It can fly."
+            }
           ],
-          "memory_tip": "🍎 apple = a + pp(两个苹果) + le → 一个苹果; banana有3个a像3个弯弯的香蕉",
-          "related": {"prerequisite": "见三上 基础词汇", "next": "见四上 更多食物"}
+          "memory_tip": "「动物朋友真可爱，能力动词配can来，想说不能can't改，句型简单要记快。」",
+          "related": {
+            "prerequisite": "基础动词和名词.",
+            "next": "询问他人能力「Can you...?」, 更多动词学习."
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "听力选图",
+              "看图写单词",
+              "选择填空",
+              "连线",
+              "按要求改句子",
+              "书面表达"
+            ],
+            "scoring_key": "「动物和动词拼写正确」「can/can't运用恰当」「动词原形」",
+            "common_trap": "「can后动词加to」「can't写成can not」",
+            "real_exam_example": {
+              "source": "某市小学三年级英语竞赛",
+              "question": "看图完成句子。A monkey can ___. (图片：猴子在爬树) A. swim B. climb C. fly",
+              "answer": "B. climb",
+              "scoring_notes": "考察学生对动物及其典型能力的掌握。"
+            }
+          }
         }
       ]
     },
     {
-      "unit_id": "S3",
-      "unit_name": "数字与形状",
+      "unit_id": "U3",
+      "unit_name": "Unit 4 My home",
       "cards": [
         {
-          "card_id": "S3-01",
-          "full_id": "英语-三下-S3-01",
-          "title": "数字11-20与形容词",
+          "card_id": "3B_U3_01",
+          "full_id": "PEP3B-U3-01",
+          "title": "我的家与房间物品「This is my home.」",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习房屋各房间名称和常见家具物品，并用「This is...」介绍家庭。",
+          "core_points": [
+            "「房间词汇」：home, living room, bedroom, kitchen, bathroom, study. (家、客厅、卧室、厨房、卫生间、书房)",
+            "「家具物品」：bed, sofa, table, chair, TV, fridge. (床、沙发、桌子、椅子、电视、冰箱)",
+            "「介绍句型」：This is my home. (这是我的家。) This is the living room. (这是客厅。)",
+            "「问候句型」：Welcome to my home! (欢迎来我家！)"
+          ],
+          "example": {
+            "question": "Look at the picture and complete the sentence. This is the ___. (图片：一个厨房)",
+            "steps": [
+              "1. 识别图片中的房间 (厨房)。",
+              "2. 回忆厨房的英文单词 (kitchen)。",
+              "3. 填入单词完成句子。"
+            ],
+            "answer": "kitchen"
+          },
+          "mistakes": [
+            {
+              "wrong": "This is a home.",
+              "correct": "This is my home."
+            }
+          ],
+          "memory_tip": "「家home房间多，客厅living room，卧室bedroom，厨房kitchen，卫生间bathroom，家具物品要记牢，This is介绍真美好。」",
+          "related": {
+            "prerequisite": "基础名词.",
+            "next": "描述房间里有什么 (there be), 介绍家庭成员."
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "听力选图",
+              "看图写单词",
+              "选择填空",
+              "连线",
+              "书面表达"
+            ],
+            "scoring_key": "「房间和家具单词拼写正确」「与图片对应」「大小写和标点」",
+            "common_trap": "「home和house的区别」「拼写错误」",
+            "real_exam_example": {
+              "source": "某市三年级期末模拟",
+              "question": "将下列单词归类。(bed, kitchen, sofa, bedroom, table, living room)",
+              "answer": "房间类：kitchen, bedroom, living room；家具类：bed, sofa, table.",
+              "scoring_notes": "考察学生对房间和家具词汇的分类和识记。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U4",
+      "unit_name": "Unit 5 What can you do?",
+      "cards": [
+        {
+          "card_id": "3B_U4_01",
+          "full_id": "PEP3B-U4-01",
+          "title": "询问与表达能力「Can you...?」",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习如何询问他人的能力，并用「Yes, I can./No, I can't.」进行回答。",
+          "core_points": [
+            "「动词短语」：sing a song, dance, draw a picture, read a book, write, play football/basketball/ping-pong, swim. (唱歌、跳舞、画画、读书、写字、踢足球/打篮球/打乒乓球、游泳)",
+            "「提问句型」：Can you...? (你会...吗？)",
+            "「肯定回答」：Yes, I can. (是的，我会。)",
+            "「否定回答」：No, I can't. (不，我不会。)",
+            "「特殊疑问句」：What can you do? (你会做什么？) -> I can... (我会...)"
+          ],
+          "example": {
+            "question": "Can you play basketball? (图片：一个男孩在打篮球)",
+            "steps": [
+              "1. 理解问题内容 (你会打篮球吗？)。",
+              "2. 根据图片判断答案 (会)。",
+              "3. 组织完整的肯定回答。"
+            ],
+            "answer": "Yes, I can."
+          },
+          "mistakes": [
+            {
+              "wrong": "Yes, I can do.",
+              "correct": "Yes, I can."
+            }
+          ],
+          "memory_tip": "「Can你问我，我can答，Yes, I can，No, I can't，能力表达很简单。」",
+          "related": {
+            "prerequisite": "动词原形, 基础人称代词.",
+            "next": "询问第三人称能力 (Can he/she...?)."
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "听力判断",
+              "选择填空",
+              "情景交际",
+              "补全对话",
+              "按要求改句子",
+              "书面表达"
+            ],
+            "scoring_key": "「回答与问题匹配」「can/can't使用正确」「大小写和标点」",
+            "common_trap": "「Can you...? 回答成I can. 而非Yes, I can.」「can't拼写错误」",
+            "real_exam_example": {
+              "source": "某市小学三年级口语测试",
+              "question": "老师提问：Can you draw a picture? 学生应如何回答？",
+              "answer": "Yes, I can. / No, I can't.",
+              "scoring_notes": "考察学生情景交际能力，能正确回应关于能力的提问。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U5",
+      "unit_name": "Unit 6 How many?",
+      "cards": [
+        {
+          "card_id": "3B_U5_01",
+          "full_id": "PEP3B-U5-01",
+          "title": "数量提问与名词复数「How many...?」",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习用「How many...?」询问数量，并掌握名词变复数的基本规则。",
+          "core_points": [
+            "「数字词汇」：1-20 (one, two, three... twenty) 识记与拼写。",
+            "「名词复数」：",
+            "  a. 一般情况加-s：book -> books, pen -> pens, cat -> cats.",
+            "  b. 以s, x, ch, sh结尾加-es：bus -> buses, box -> boxes. (三年级侧重-s)",
+            "「提问句型」：How many books do you have? / How many apples are there? (你有多少本书？/有多少个苹果？)",
+            "「回答句型」：I have five books. / There are three apples. (我有五本书。/有三个苹果。)"
+          ],
+          "example": {
+            "question": "How many pencils are there? (图片：四支铅笔)",
+            "steps": [
+              "1. 识别图片中的物品 (pencil) 和数量 (4)。",
+              "2. 将名词变为复数 (pencils)。",
+              "3. 组织完整的回答句。"
+            ],
+            "answer": "There are four pencils."
+          },
+          "mistakes": [
+            {
+              "wrong": "There are four pencil.",
+              "correct": "There are four pencils."
+            }
+          ],
+          "memory_tip": "「How many问数量，名词复数s莫忘，数字拼写要准确，There are回答棒棒哒！」",
+          "related": {
+            "prerequisite": "数字识记, 基础名词.",
+            "next": "不规则名词复数, 更多数量词."
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "听力选数",
+              "看图写单词",
+              "选择填空",
+              "连线",
+              "按要求改句子",
+              "书面表达"
+            ],
+            "scoring_key": "「数字拼写正确」「名词复数形式正确」「大小写和标点」",
+            "common_trap": "「名词复数漏加s」「数字与名词不一致」",
+            "real_exam_example": {
+              "source": "某市三年级期末考试",
+              "question": "看图，完成对话。A: How many rulers do you have? B: I have ___. (图片：B手里拿着三把尺子)",
+              "answer": "three rulers",
+              "scoring_notes": "考察学生对「How many...?」句型的理解和名词复数的使用。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U6",
+      "unit_name": "综合复习与应用",
+      "cards": [
+        {
+          "card_id": "3B_RV_01",
+          "full_id": "PEP3B-RV-01",
+          "title": "常用情景交际与基础问答",
           "type": "知识总结卡",
           "difficulty": 2,
           "importance": 5,
-          "definition": "学习11-20的英语数字，以及描述大小、长短等基本形容词。",
+          "definition": "掌握日常问候、介绍、请求和感谢等基本交际用语，能在特定情境下正确运用。",
           "core_points": [
-            "11-12特殊：eleven, twelve",
-            "13-19有规律：thirteen, fourteen, fifteen... nineteen（-teen结尾=十几）",
-            "20：twenty",
-            "形容词：big大 small小 long长 short短/矮 tall高 fat胖 thin瘦"
+            "「问候语」：Good morning/afternoon/evening. Hello/Hi. (早上/下午/晚上好。你好。)",
+            "「介绍与回应」：My name is... Nice to meet you. -> Nice to meet you, too. (我叫... 很高兴认识你。 -> 我也很高兴认识你。)",
+            "「请求与感谢」：May I come in? (我可以进来吗？) -> Yes, you may. Thank you. -> You're welcome. (是的，你可以。谢谢你。 -> 不客气。)",
+            "「告别语」：Goodbye/Bye-bye. See you. (再见。回头见。)"
           ],
           "example": {
-            "question": "How many books do you have? (你有15本书)",
-            "steps": ["15=fifteen", "I have fifteen books."],
-            "answer": "I have fifteen books."
+            "question": "当你第一次见到新朋友时，你会说什么？",
+            "steps": [
+              "1. 识别情境 (第一次见面)。",
+              "2. 回忆相应的交际用语 (介绍自己，表达高兴)。",
+              "3. 组织对话。"
+            ],
+            "answer": "Hello! My name is Lily. Nice to meet you."
           },
           "mistakes": [
-            {"wrong": "thirteen拼成threeteen", "correct": "thirteen不是threeteen，注意拼写变化"},
-            {"wrong": "short只记得「短」", "correct": "short既可以表示「短」也可以表示「矮」"}
+            {
+              "wrong": "Nice to meet you. -> Nice to meet you.",
+              "correct": "Nice to meet you. -> Nice to meet you, too."
+            }
           ],
-          "memory_tip": "🔢 teen = 十几（teenager=十几岁的人=青少年），13-19都是 X-teen",
-          "related": {"prerequisite": "见三上 数字1-10", "next": "见四上 更多数字"}
+          "memory_tip": "「问候介绍感谢谢，情景交际用得对，礼貌用语记心间，英语对话更流利。」",
+          "related": {
+            "prerequisite": "基础词汇, 简单句型.",
+            "next": "更复杂的情景对话, 邀请和建议."
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "听力选图",
+              "选择填空",
+              "情景交际",
+              "补全对话"
+            ],
+            "scoring_key": "「交际用语选用恰当」「对话逻辑合理」「大小写和标点」",
+            "common_trap": "「回答不符合语境」「Thank you 回答成Thank you.」",
+            "real_exam_example": {
+              "source": "某市三年级期末口语测试",
+              "question": "补全对话。A: Good morning, Sam! B: ___, Amy!",
+              "answer": "Good morning",
+              "scoring_notes": "考察学生对日常问候语的掌握和运用。"
+            }
+          }
+        },
+        {
+          "card_id": "3B_RV_02",
+          "full_id": "PEP3B-RV-02",
+          "title": "26个英文字母大小写与基础单词拼写",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "熟练掌握26个英文字母的大小写形式，并能正确拼写三年级下册的核心词汇。",
+          "core_points": [
+            "1. 「字母大小写」：A a, B b, C c ... Z z (能识别、书写、配对)。",
+            "2. 「字母顺序」：能按顺序默写26个字母。",
+            "3. 「单词拼写」：根据图片或中文提示拼写核心名词 (如：pencil, desk, cat, home) 和动词 (如：run, swim)。",
+            "4. 「听音拼写」：能根据听到的单词读音，尝试拼写出来。"
+          ],
+          "example": {
+            "question": "听音写单词。老师读：「pencil」",
+            "steps": [
+              "1. 仔细听单词发音。",
+              "2. 尝试将发音拆解成字母。",
+              "3. 默写出单词。"
+            ],
+            "answer": "pencil"
+          },
+          "mistakes": [
+            {
+              "wrong": "pencial",
+              "correct": "pencil"
+            }
+          ],
+          "memory_tip": "「字母歌唱得欢，大小写配对不犯难，单词拼写要仔细，多听多写是关键。」",
+          "related": {
+            "prerequisite": "字母发音.",
+            "next": "字母组合发音, 音标学习."
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "听力选图",
+              "看图写单词",
+              "连线",
+              "选择填空"
+            ],
+            "scoring_key": "「字母书写规范」「单词拼写完全正确」「大小写区分」",
+            "common_trap": "「字母大小写混淆」「易错字母 (如b/d, p/q)」「单词拼写漏字母或多字母」",
+            "real_exam_example": {
+              "source": "某市三年级期末考试",
+              "question": "根据图片写出单词。(图片：一张桌子)",
+              "answer": "desk",
+              "scoring_notes": "考察学生对核心词汇的拼写能力。"
+            }
+          }
+        },
+        {
+          "card_id": "3B_RV_03",
+          "full_id": "PEP3B-RV-03",
+          "title": "简单形容词与物品描述",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "学习并运用常见的简单形容词描述物品的特征，如大小、长短等。",
+          "core_points": [
+            "1. 「形容词词汇」：big (大的), small (小的), long (长的), short (短的), tall (高的), new (新的), old (旧的).",
+            "2. 「描述句型」：It's big/small/long/short... (它是大/小/长/短的...)",
+            "3. 「形容词修饰名词」：a big book (一本大书), a small cat (一只小猫). 形容词放在名词前。",
+            "4. 「问句」：Is it big? (它大吗？) -> Yes, it is./No, it isn't."
+          ],
+          "example": {
+            "question": "Look at the picture. Complete the sentence. This is a ___ ruler. (图片：一把长尺子)",
+            "steps": [
+              "1. 识别图片中的物品 (ruler) 和特征 (长)。",
+              "2. 回忆「长」的英文单词 (long)。",
+              "3. 填入单词完成句子。"
+            ],
+            "answer": "long"
+          },
+          "mistakes": [
+            {
+              "wrong": "This is a ruler long.",
+              "correct": "This is a long ruler."
+            }
+          ],
+          "memory_tip": "「形容词放名词前，大小长短都表现，描述物品更生动，英语表达真轻松。」",
+          "related": {
+            "prerequisite": "颜色词汇, 基础名词.",
+            "next": "比较级形容词, 更多形容词."
+          },
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": [
+              "听力选图",
+              "看图写单词",
+              "选择填空",
+              "连线",
+              "按要求改句子",
+              "书面表达"
+            ],
+            "scoring_key": "「形容词拼写正确」「形容词位置正确」「与图片描述一致」",
+            "common_trap": "「形容词作表语时，形容词前不加a/an」「形容词修饰名词时，a/an放在形容词前」",
+            "real_exam_example": {
+              "source": "某市三年级下册单元测试",
+              "question": "将句子重新排列。is / a / This / big / book / .",
+              "answer": "This is a big book.",
+              "scoring_notes": "考察学生对形容词修饰名词的语序掌握。"
+            }
+          }
+        },
+        {
+          "card_id": "3B_RV_04",
+          "full_id": "PEP3B-RV-04",
+          "title": "简单看图写话与短文表达",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "能够根据图片或简单提示，写出2-3句描述性或介绍性的短文。",
+          "core_points": [
+            "1. 「观察图片」：仔细观察图片中的人物、物品、动作、地点和数量。",
+            "2. 「核心词汇」：选用三年级下册所学核心词汇，如动物、文具、房间、动词等。",
+            "3. 「简单句型」：运用「This is...」「I have...」「It can...」「There are...」「He/She is...」等句型。",
+            "4. 「连贯表达」：尝试用and连接句子，使表达更流畅。注意大小写和标点符号。"
+          ],
+          "example": {
+            "question": "Look at the picture and write three sentences. (图片：小明在一个房间里，房间里有床、桌子，桌子上有书和笔，小明在看书。)",
+            "steps": [
+              "1. 识别图片内容：人物 (小明), 地点 (卧室), 物品 (床、桌子、书、笔), 动作 (看书)。",
+              "2. 选用合适的句型进行描述：This is Mike. This is his bedroom. There is a bed and a desk. He has a book and a pen. He can read. (选择其中3句)",
+              "3. 检查大小写和标点。"
+            ],
+            "answer": "This is Mike. This is his bedroom. He has a book and a pen."
+          },
+          "mistakes": [
+            {
+              "wrong": "mike is a boy. he have a book.",
+              "correct": "Mike is a boy. He has a book."
+            }
+          ],
+          "memory_tip": "「看图写话仔细瞧，人、物、动作不能少，简单句型连一连，大小标点要记牢。」",
+          "related": {
+            "prerequisite": "所有学过的词汇和句型.",
+            "next": "运用更多时态和复杂句型, 话题作文."
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "书面表达"
+            ],
+            "scoring_key": "「内容与图片吻合」「句型运用正确」「词汇拼写无误」「大小写和标点规范」",
+            "common_trap": "「句子不完整」「语法错误 (如主谓不一致)」「拼写错误过多」",
+            "real_exam_example": {
+              "source": "某市三年级期末考试",
+              "question": "看图写话，至少写三句话。(图片：一个女孩和她的宠物猫，猫在玩球)",
+              "answer": "This is Lily. She has a cat. Her cat can play with a ball.",
+              "scoring_notes": "考察学生综合运用所学知识进行简单书面表达的能力。"
+            }
+          }
         }
       ]
     }

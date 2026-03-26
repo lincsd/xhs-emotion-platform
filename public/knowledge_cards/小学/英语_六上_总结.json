@@ -5,179 +5,695 @@
   "textbook": "人教PEP版",
   "grade_short": "六上",
   "card_pack": "知识总结",
-  "description": "六年级上册英语核心知识点精华总结",
+  "description": "六年级上册英语考点笔记总结",
   "units": [
     {
-      "unit_id": "S1",
-      "unit_name": "出行与交通",
+      "unit_id": "U1",
+      "unit_name": "Unit 1 My New Teachers",
       "cards": [
         {
-          "card_id": "S1-01",
-          "full_id": "英语-六上-S1-01",
-          "title": "交通方式",
+          "card_id": "C001",
+          "full_id": "六上-U1-C001",
+          "title": "人物描述与职业表达",
           "type": "知识总结卡",
           "difficulty": 2,
-          "importance": 5,
-          "definition": "各种出行方式的英语表达。",
+          "importance": 4,
+          "definition": "学会用英语描述人物的外貌、性格特征，并表达不同职业。",
           "core_points": [
-            "交通工具：bus公交 taxi出租车 plane飞机 ship轮船 subway地铁 train火车 bike自行车",
-            "How do you come to school? 你怎么来学校？— I come by bus. / I come on foot.",
-            "by + 交通工具（不加the/a）: by bus, by bike, by subway",
-            "on foot 步行（特殊，不用by）"
+            "描述外貌：使用`be`动词（如`tall/short`, `fat/thin`）或`have/has`（如`long hair`, `big eyes`）。",
+            "描述性格：使用`be`动词加形容词（如`kind`, `funny`, `strict`, `smart`）。",
+            "常见职业词汇：`teacher`, `doctor`, `driver`, `cook`, `farmer`等，注意单数职业前加`a/an`。",
+            "提问职业：`What do you do?` / `What does he/she do?`",
+            "提问人物特征：`What does he/she look like?` (外貌) / `What is he/she like?` (性格)"
           ],
           "example": {
-            "question": "How does your father go to work?",
-            "steps": ["第三人称用does", "He goes to work by car."],
-            "answer": "He goes to work by car."
+            "question": "根据图片和提示词，描述你的新老师：(Ms. Gao, tall, kind, a good teacher)",
+            "steps": [
+              "1. 介绍老师名字：She is Ms. Gao.",
+              "2. 描述外貌：She is tall.",
+              "3. 描述性格：She is kind.",
+              "4. 描述职业：She is a good teacher."
+            ],
+            "answer": "She is Ms. Gao. She is tall. She is kind. She is a good teacher."
           },
           "mistakes": [
-            {"wrong": "by a bus / by the bus", "correct": "by+交通工具中间不加任何冠词: by bus"},
-            {"wrong": "by foot（步行）", "correct": "步行说on foot，不说by foot"}
+            {
+              "wrong": "He is a teacher. He is a tall.",
+              "correct": "He is a teacher. He is tall. (形容词前不加a/an)"
+            },
+            {
+              "wrong": "She have long hair.",
+              "correct": "She has long hair. (主谓一致：第三人称单数用has)"
+            }
           ],
-          "memory_tip": "🚌 by后面的交通工具都是「光杆」(不加a/the)，唯一特殊的是on foot(脚在地上走)",
-          "related": {"prerequisite": "见基础名词", "next": "见S1-02 问路指路"}
-        },
-        {
-          "card_id": "S1-02",
-          "full_id": "英语-六上-S1-02",
-          "title": "问路与指路",
-          "type": "知识总结卡",
-          "difficulty": 3,
-          "importance": 5,
-          "definition": "用英语问路和给别人指路。",
-          "core_points": [
-            "问路：Where is the hospital/cinema/bookstore? / How can I get to...?",
-            "指路：Go straight. 直走 Turn left/right. 左/右转 It's near/next to/behind... 在...附近/旁边/后面",
-            "地点：hospital医院 cinema电影院 bookstore书店 post office邮局 museum博物馆 library图书馆",
-            "交通规则：Stop at a red light. Wait at a yellow light. Go at a green light."
-          ],
-          "example": {
-            "question": "Where is the cinema?",
-            "steps": ["Go straight.直走", "Turn left at the bookstore.在书店左转", "It's next to the hospital.在医院旁边"],
-            "answer": "Go straight. Turn left at the bookstore. It's next to the hospital."
+          "memory_tip": "『高矮胖瘦』用be，『有无头发』用have/has。职业前面『a/an』，『三单』『be』要分清。",
+          "related": {
+            "prerequisite": "人称代词、be动词、have/has动词用法",
+            "next": "一般现在时描述日常活动"
           },
-          "mistakes": [
-            {"wrong": "Turn to left.（多了to）", "correct": "Turn left. 不需要to"},
-            {"wrong": "It's next the hospital.", "correct": "next to: It's next TO the hospital.（不能漏to）"}
-          ],
-          "memory_tip": "🧭 方位词记忆：near靠近 next to紧挨着 behind后面 in front of前面 between在...之间",
-          "related": {"prerequisite": "见S1-01 交通方式", "next": "见S2 业余爱好"}
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "看图写单词",
+              "选择填空",
+              "情景交际",
+              "书面表达",
+              "阅读理解"
+            ],
+            "scoring_key": "主谓一致，形容词和名词的正确使用，大小写和标点。",
+            "common_trap": "形容词前误加a/an；have/has与主语不一致；职业词汇拼写错误。",
+            "real_exam_example": {
+              "source": "期中考试填空题",
+              "question": "My father is a ______. He works in a hospital. (A. driver B. doctor C. farmer)",
+              "answer": "B. doctor",
+              "scoring_notes": "根据上下文语境（works in a hospital）判断职业。"
+            }
+          }
         }
       ]
     },
     {
-      "unit_id": "S2",
-      "unit_name": "爱好与职业理想",
+      "unit_id": "U2",
+      "unit_name": "Unit 2 My Favourite Season",
       "cards": [
         {
-          "card_id": "S2-01",
-          "full_id": "英语-六上-S2-01",
-          "title": "爱好表达",
+          "card_id": "C002",
+          "full_id": "六上-U2-C002",
+          "title": "季节、天气与活动",
           "type": "知识总结卡",
           "difficulty": 2,
-          "importance": 5,
-          "definition": "用英语谈论自己和他人的兴趣爱好。",
+          "importance": 3,
+          "definition": "掌握四季名称、天气描述词汇，并能用一般现在时描述季节性活动。",
           "core_points": [
-            "爱好：reading reading books看书 singing唱歌 dancing跳舞 playing football踢足球 cooking做饭 drawing画画",
-            "What are your hobbies? 你的爱好是什么？— I like reading. / My hobby is singing.",
-            "like + 动词ing: I like swimming. He likes playing basketball.",
-            "三单变化：like→likes, do→does, have→has, go→goes"
+            "四季名称：`spring`, `summer`, `autumn` (或`fall`), `winter`。",
+            "天气词汇：`sunny`, `rainy`, `cloudy`, `windy`, `snowy`, `hot`, `cold`, `warm`, `cool`。",
+            "天气提问：`What's the weather like in...?` 或 `How's the weather in...?`",
+            "季节性活动：`plant trees`, `swim`, `go hiking`, `make a snowman`, `fly kites`等。",
+            "描述活动：使用一般现在时，注意第三人称单数动词加`s/es`。"
           ],
           "example": {
-            "question": "What are Peter's hobbies?",
-            "steps": ["Peter是第三人称he", "He likes reading and playing football."],
-            "answer": "He likes reading and playing football."
+            "question": "描述冬天（Winter）的天气和人们常做的活动。",
+            "steps": [
+              "1. 介绍季节：It's winter.",
+              "2. 描述天气：It's cold and snowy.",
+              "3. 描述活动：People often make a snowman and go skating."
+            ],
+            "answer": "It's winter. It's cold and snowy. People often make a snowman and go skating."
           },
           "mistakes": [
-            {"wrong": "He like swimming.（忘三单）", "correct": "第三人称单数: He likes swimming."},
-            {"wrong": "I like swim.（忘了ing）", "correct": "like后面加动词ing: I like swimming."}
+            {
+              "wrong": "In summer, I swimming.",
+              "correct": "In summer, I swim. (一般现在时动词原形)"
+            },
+            {
+              "wrong": "The weather is wind.",
+              "correct": "The weather is windy. (形容词修饰)"
+            }
           ],
-          "memory_tip": "🎨 三单加s记忆：he/she/it做主语时，动词要穿「s」这件衣服",
-          "related": {"prerequisite": "见五上 日常活动", "next": "见S2-02 职业理想"}
-        },
-        {
-          "card_id": "S2-02",
-          "full_id": "英语-六上-S2-02",
-          "title": "未来职业理想",
-          "type": "知识总结卡",
-          "difficulty": 3,
-          "importance": 4,
-          "definition": "学习更多职业词汇，表达未来理想。",
-          "core_points": [
-            "职业：scientist科学家 pilot飞行员 coach教练 police officer警察 fisherman渔夫 postman邮递员",
-            "worker工人 businessman商人 writer作家 singer歌手 dancer舞者",
-            "What does he/she want to be? 他/她想成为什么？— He wants to be a pilot.",
-            "I'm going to be a/an... 我将来要当..."
-          ],
-          "example": {
-            "question": "What do you want to be?",
-            "steps": ["want to be=想要成为", "I want to be a scientist."],
-            "answer": "I want to be a scientist. I like science."
+          "memory_tip": "『四季』分清，『天气』加y。『活动』动词用原形，『三单』别忘加s。",
+          "related": {
+            "prerequisite": "一般现在时（行为动词）",
+            "next": "一般将来时描述计划"
           },
-          "mistakes": [
-            {"wrong": "He want to be...", "correct": "三单：He wants to be..."},
-            {"wrong": "I want to be scientist.（漏a）", "correct": "职业前加a/an: a scientist, an artist"}
-          ],
-          "memory_tip": "💼 职业后缀：-er(teach→teacher), -or(act→actor), -ist(science→scientist), -man(post→postman)",
-          "related": {"prerequisite": "见四上 职业", "next": "见S3 感受与动作"}
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": [
+              "看图写单词",
+              "选择填空",
+              "连线",
+              "情景交际",
+              "书面表达"
+            ],
+            "scoring_key": "词汇拼写准确，主谓一致，形容词与名词的正确使用。",
+            "common_trap": "天气名词与形容词混淆；描述活动时动词形式错误。",
+            "real_exam_example": {
+              "source": "期末考试选择题",
+              "question": "What's the weather like in winter? It's ______ and snowy. (A. hot B. warm C. cold)",
+              "answer": "C. cold",
+              "scoring_notes": "根据季节特点选择合适的天气词汇。"
+            }
+          }
         }
       ]
     },
     {
-      "unit_id": "S3",
-      "unit_name": "情绪与一般过去时入门",
+      "unit_id": "U3",
+      "unit_name": "Unit 3 My Weekend Plan",
       "cards": [
         {
-          "card_id": "S3-01",
-          "full_id": "英语-六上-S3-01",
-          "title": "情绪表达",
-          "type": "知识总结卡",
-          "difficulty": 2,
-          "importance": 4,
-          "definition": "用英语表达各种心情和感受。",
-          "core_points": [
-            "情绪：happy高兴 sad难过 angry生气 afraid害怕 worried担心 ill生病 bored无聊",
-            "How do you feel? / How are you? 你感觉怎么样？— I'm happy/sad.",
-            "What's wrong? / What's the matter? 怎么了？— I'm ill. / I'm worried about the test.",
-            "should应该: You should see a doctor. 你应该看医生。"
-          ],
-          "example": {
-            "question": "Sarah looks sad. What should she do?",
-            "steps": ["sad=难过", "She should talk to her friends."],
-            "answer": "She should take a deep breath and talk to her friends."
-          },
-          "mistakes": [
-            {"wrong": "I feel happily.（用副词）", "correct": "feel后用形容词：I feel happy."},
-            {"wrong": "You should to see a doctor.", "correct": "should后面直接加动词原形，不要to"}
-          ],
-          "memory_tip": "😊 feel + 形容词 = 感到...（feel happy/sad/angry就像中文「感到高兴/难过/生气」）",
-          "related": {"prerequisite": "见基础表达", "next": "见S3-02 过去时入门"}
-        },
-        {
-          "card_id": "S3-02",
-          "full_id": "英语-六上-S3-02",
-          "title": "一般过去时入门",
+          "card_id": "C003",
+          "full_id": "六上-U3-C003",
+          "title": "一般将来时 (be going to)",
           "type": "知识总结卡",
           "difficulty": 3,
           "importance": 5,
-          "definition": "表示过去发生的事情，六年级最核心的语法。",
+          "definition": "掌握一般将来时`be going to + 动词原形`的用法，表示即将发生的计划或打算。",
           "core_points": [
-            "结构：主语 + 动词过去式",
-            "规则变化：①一般加ed: played ②e结尾加d: liked ③辅+y变ied: studied ④双写+ed: stopped",
-            "不规则变化（必背）：is/am→was, are→were, go→went, have→had, do→did, eat→ate, see→saw",
-            "时间标志词：yesterday昨天, last week上周, ago...之前"
+            "构成：主语 + `be`动词 (am/is/are) + `going to` + 动词原形。",
+            "用法：表示有计划、有准备的将要发生的动作或意图。",
+            "时间状语：`tomorrow`, `next week/month/year`, `this weekend`, `tonight`等。",
+            "肯定句：`I am going to play football.`",
+            "否定句：`I am not going to play football.` (`be`动词后加`not`)",
+            "疑问句：`Are you going to play football?` (`be`动词提前)"
           ],
           "example": {
-            "question": "用过去式说「昨天我去了公园」",
-            "steps": ["昨天=yesterday", "去→went（go的过去式）", "I went to the park yesterday."],
-            "answer": "I went to the park yesterday."
+            "question": "根据提示词，用`be going to`造句：(I / visit my grandparents / this Sunday)",
+            "steps": [
+              "1. 确定主语`I`，搭配`am`。",
+              "2. 加上`going to`。",
+              "3. 加上动词原形`visit`。",
+              "4. 加上宾语和时间状语`my grandparents this Sunday`。"
+            ],
+            "answer": "I am going to visit my grandparents this Sunday."
           },
           "mistakes": [
-            {"wrong": "I goed to school.（规则化不规则动词）", "correct": "go→went是不规则变化，必须背"},
-            {"wrong": "He didn't went.（否定句动词还用过去式）", "correct": "didn't后用原形：He didn't go."}
+            {
+              "wrong": "He is going to plays basketball.",
+              "correct": "He is going to play basketball. (going to 后接动词原形)"
+            },
+            {
+              "wrong": "Are you going to go to the park?",
+              "correct": "Are you going to the park? (go to the park 表示去公园，go to go to the park 语感重复)"
+            }
           ],
-          "memory_tip": "⏪ 过去时 = 时光倒流键！was/were(是)、went(去)、had(有)、did(做)、ate(吃)、saw(看) ← 先背这6个王牌",
-          "related": {"prerequisite": "见五下 现在进行时", "next": "见六下 过去时综合"}
+          "memory_tip": "『be going to』『动原』跟着走，计划打算全都有。",
+          "related": {
+            "prerequisite": "be动词用法，动词原形概念",
+            "next": "一般将来时 (will)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "选择填空",
+              "按要求改句子",
+              "情景交际",
+              "补全对话",
+              "书面表达"
+            ],
+            "scoring_key": "be动词与主语一致，going to 后接动词原形，否定句和疑问句形式正确。",
+            "common_trap": "忘记be动词或be动词形式错误；going to 后动词加s或ing。",
+            "real_exam_example": {
+              "source": "期末考试选择题",
+              "question": "What ______ you going to do this weekend? (A. is B. am C. are)",
+              "answer": "C. are",
+              "scoring_notes": "`you`搭配`are`，考察`be`动词与主语一致。"
+            }
+          }
+        },
+        {
+          "card_id": "C004",
+          "full_id": "六上-U3-C004",
+          "title": "一般将来时 (will)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握一般将来时`will + 动词原形`的用法，表示将来会发生的事情或主观意愿。",
+          "core_points": [
+            "构成：主语 + `will` + 动词原形。",
+            "用法：表示将来会发生的事情（常用于预测），或主观意愿、临时的决定。",
+            "时间状语：`tomorrow`, `next week/month/year`, `tonight`等。",
+            "肯定句：`I will go to the park.` 缩写：`I'll go to the park.`",
+            "否定句：`I will not go to the park.` 缩写：`I won't go to the park.` (`will`后加`not`)",
+            "疑问句：`Will you go to the park?` (`will`提前)"
+          ],
+          "example": {
+            "question": "根据提示词，用`will`造句：(He / watch TV / tonight)",
+            "steps": [
+              "1. 确定主语`He`。",
+              "2. 加上`will`。",
+              "3. 加上动词原形`watch`。",
+              "4. 加上宾语和时间状语`TV tonight`。"
+            ],
+            "answer": "He will watch TV tonight."
+          },
+          "mistakes": [
+            {
+              "wrong": "She will goes to school tomorrow.",
+              "correct": "She will go to school tomorrow. (will 后接动词原形)"
+            },
+            {
+              "wrong": "Will he not come?",
+              "correct": "Will he come? (否定疑问句通常用Won't he come? 或在陈述句后加问号变为疑问)"
+            }
+          ],
+          "memory_tip": "『will』很『will』，后面『动原』真自由。预测打算都可用，否定『won't』不发愁。",
+          "related": {
+            "prerequisite": "be动词用法，动词原形概念",
+            "next": "一般过去时"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "选择填空",
+              "按要求改句子",
+              "情景交际",
+              "补全对话",
+              "书面表达"
+            ],
+            "scoring_key": "will 后接动词原形，否定句和疑问句形式正确。",
+            "common_trap": "will 后动词加s或ing；will not 缩写成won't 拼写错误。",
+            "real_exam_example": {
+              "source": "期末考试选择题",
+              "question": "I think it ______ be sunny tomorrow. (A. is B. will C. going to)",
+              "answer": "B. will",
+              "scoring_notes": "表示对未来天气的预测，用`will`更自然，且`going to`缺少`be`动词。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U4",
+      "unit_name": "Unit 4 I Have a Pen Pal",
+      "cards": [
+        {
+          "card_id": "C005",
+          "full_id": "六上-U4-C005",
+          "title": "日常活动与时间表达",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握描述日常活动的词汇和短语，并学会用介词`at/in/on`表达时间。",
+          "core_points": [
+            "日常活动词汇：`get up`, `eat breakfast/lunch/dinner`, `go to school`, `do homework`, `read books`, `watch TV`, `go to bed`等。",
+            "时间表达介词：`at` + 具体时间点（`at 6 o'clock`, `at noon`）；`in` + 年/月/季节/上午/下午/晚上（`in 2023`, `in July`, `in spring`, `in the morning/afternoon/evening`）；`on` + 具体日期/星期几（`on Monday`, `on May 1st`）。",
+            "提问时间：`What time do you...?` / `When do you...?`",
+            "描述活动：通常使用一般现在时。"
+          ],
+          "example": {
+            "question": "用英语描述你早上7点吃早饭。",
+            "steps": [
+              "1. 确定主语`I`。",
+              "2. 确定动词短语`eat breakfast`。",
+              "3. 确定时间`7 o'clock`，搭配介词`at`。"
+            ],
+            "answer": "I eat breakfast at 7 o'clock in the morning."
+          },
+          "mistakes": [
+            {
+              "wrong": "I go to school in 7 o'clock.",
+              "correct": "I go to school at 7 o'clock. (具体时间点用at)"
+            },
+            {
+              "wrong": "He watch TV in the evening.",
+              "correct": "He watches TV in the evening. (第三人称单数动词加es)"
+            }
+          ],
+          "memory_tip": "『at』点钟，『in』早中晚、年月季。『on』周几、日期不混淆，日常动词三单别忘s。",
+          "related": {
+            "prerequisite": "一般现在时，介词in/on/at基础用法",
+            "next": "一般过去时描述过去活动"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "选择填空",
+              "连线",
+              "情景交际",
+              "按要求改句子",
+              "书面表达"
+            ],
+            "scoring_key": "介词使用正确，动词形式正确，日常活动词汇拼写无误。",
+            "common_trap": "介词in/on/at混淆；第三人称单数动词忘记加s/es。",
+            "real_exam_example": {
+              "source": "期中考试选择题",
+              "question": "We usually have lunch ______ noon. (A. in B. on C. at)",
+              "answer": "C. at",
+              "scoring_notes": "`noon`是具体时间点，用`at`。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U5",
+      "unit_name": "Unit 5 A Trip to the Zoo",
+      "cards": [
+        {
+          "card_id": "C006",
+          "full_id": "六上-U5-C006",
+          "title": "一般过去时 (be动词)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "掌握be动词在一般过去时中的形式和用法，描述过去的状态或事实。",
+          "core_points": [
+            "be动词过去式：`am/is`的过去式是`was`；`are`的过去式是`were`。",
+            "用法：表示过去某一时间点发生的事情或存在的情况。",
+            "时间状语：`yesterday`, `last night/week/month/year`, `two days ago`, `in 2022`等。",
+            "肯定句：`I was happy yesterday.` / `They were at the zoo last Sunday.`",
+            "否定句：`I was not happy.` (wasn't) / `They were not at the zoo.` (weren't)",
+            "疑问句：`Was he happy?` / `Were they at the zoo?` (was/were提前)"
+          ],
+          "example": {
+            "question": "用一般过去时改写句子：(She is a student now. → Yesterday, she ____ a student.)",
+            "steps": [
+              "1. 识别原句be动词`is`。",
+              "2. 确定主语`she`是第三人称单数。",
+              "3. `is`的过去式是`was`。",
+              "4. 填入`was`。"
+            ],
+            "answer": "Yesterday, she was a student."
+          },
+          "mistakes": [
+            {
+              "wrong": "We was at home last night.",
+              "correct": "We were at home last night. (主语`We`是复数，用`were`)"
+            },
+            {
+              "wrong": "Were you not happy?",
+              "correct": "Were you happy? (或 Were you not happy? / Weren't you happy? 但小学阶段避免否定疑问句)"
+            }
+          ],
+          "memory_tip": "『我单他她它』用was，『你我他们』用were。过去时间很明确，be动词变身不纠结。",
+          "related": {
+            "prerequisite": "be动词现在时用法",
+            "next": "一般过去时 (行为动词)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "选择填空",
+              "按要求改句子",
+              "情景交际",
+              "阅读理解"
+            ],
+            "scoring_key": "was/were与主语一致，否定句和疑问句形式正确，时间状语与时态匹配。",
+            "common_trap": "was/were与主语不一致；时间状语判断错误导致时态混淆。",
+            "real_exam_example": {
+              "source": "期末考试选择填空",
+              "question": "My father ______ a teacher ten years ago. Now he is a doctor. (A. is B. was C. were)",
+              "answer": "B. was",
+              "scoring_notes": "`ten years ago`是过去时间，且`father`是单数，选`was`。"
+            }
+          }
+        },
+        {
+          "card_id": "C007",
+          "full_id": "六上-U5-C007",
+          "title": "一般过去时 (规则动词)",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "掌握规则动词过去式的构成和用法，描述过去发生的动作。",
+          "core_points": [
+            "构成：动词原形后加`-ed` (如`played`, `watched`)。",
+            "特殊变化：",
+            "  1. 以`e`结尾的动词加`-d` (如`lived`, `liked`)。",
+            "  2. 以`辅音字母+y`结尾的动词，变`y`为`i`再加`-ed` (如`studied`, `cried`)。",
+            "  3. 重读闭音节，末尾只有一个辅音字母，双写该辅音字母再加`-ed` (如`stopped`, `planned`)。",
+            "否定句：`didn't + 动词原形` (如`I didn't play football.`)",
+            "疑问句：`Did + 主语 + 动词原形...?` (如`Did you play football?`)"
+          ],
+          "example": {
+            "question": "用一般过去时改写句子：(They often watch TV. → Yesterday, they ____ TV.)",
+            "steps": [
+              "1. 识别原句动词`watch`。",
+              "2. `watch`是规则动词，直接加`-ed`。",
+              "3. 填入`watched`。"
+            ],
+            "answer": "Yesterday, they watched TV."
+          },
+          "mistakes": [
+            {
+              "wrong": "He played football yesterday. He didn't played basketball.",
+              "correct": "He played football yesterday. He didn't play basketball. (didn't 后接动词原形)"
+            },
+            {
+              "wrong": "Did she studies English?",
+              "correct": "Did she study English? (Did 疑问句中动词用原形)"
+            }
+          ],
+          "memory_tip": "『规则动词』加ed，特殊变化要牢记。否定疑问『did』来帮，动词原形跑不了。",
+          "related": {
+            "prerequisite": "动词原形概念，一般现在时",
+            "next": "一般过去时 (不规则动词)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "选择填空",
+              "按要求改句子",
+              "情景交际",
+              "阅读理解",
+              "书面表达"
+            ],
+            "scoring_key": "规则动词过去式变化正确，否定句和疑问句中使用动词原形。",
+            "common_trap": "动词过去式拼写错误；否定句和疑问句中动词忘记还原为原形。",
+            "real_exam_example": {
+              "source": "期末考试动词填空",
+              "question": "My mother ______ (clean) the room last Sunday.",
+              "answer": "cleaned",
+              "scoring_notes": "`last Sunday`是过去时间，`clean`是规则动词，加`-ed`。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U6",
+      "unit_name": "Unit 6 How Do You Go There?",
+      "cards": [
+        {
+          "card_id": "C008",
+          "full_id": "六上-U6-C008",
+          "title": "一般过去时 (不规则动词)",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "掌握常见不规则动词的过去式形式和用法，描述过去发生的动作。",
+          "core_points": [
+            "构成：不规则动词的过去式没有规律，需要单独记忆 (如`go-went`, `eat-ate`, `see-saw`, `have-had`, `do-did`, `say-said`, `buy-bought`, `take-took`, `come-came`)。",
+            "用法：与规则动词相同，表示过去某一时间点发生的动作。",
+            "否定句：`didn't + 动词原形` (如`I didn't go to school yesterday.`)",
+            "疑问句：`Did + 主语 + 动词原形...?` (如`Did you eat breakfast?`)"
+          ],
+          "example": {
+            "question": "用一般过去时改写句子：(She goes to the park every day. → She ____ to the park yesterday.)",
+            "steps": [
+              "1. 识别原句动词`goes`，其原形是`go`。",
+              "2. `go`是不规则动词，过去式是`went`。",
+              "3. 填入`went`。"
+            ],
+            "answer": "She went to the park yesterday."
+          },
+          "mistakes": [
+            {
+              "wrong": "I eated an apple.",
+              "correct": "I ate an apple. (`eat`是不规则动词，过去式是`ate`)"
+            },
+            {
+              "wrong": "Did you went to the cinema?",
+              "correct": "Did you go to the cinema? (Did 疑问句中动词用原形)"
+            }
+          ],
+          "memory_tip": "『不规则』动词不讲理，背诵记忆是王道。否定疑问『did』来帮，动词原形不能忘。",
+          "related": {
+            "prerequisite": "动词原形概念，规则动词过去式",
+            "next": "综合阅读理解与写作"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "选择填空",
+              "按要求改句子",
+              "看图写单词",
+              "阅读理解",
+              "书面表达"
+            ],
+            "scoring_key": "不规则动词过去式形式正确，否定句和疑问句中使用动词原形。",
+            "common_trap": "不规则动词误当规则动词处理；否定句和疑问句中动词忘记还原为原形。",
+            "real_exam_example": {
+              "source": "期末考试动词填空",
+              "question": "Last night, I ______ (have) a good dream.",
+              "answer": "had",
+              "scoring_notes": "`last night`是过去时间，`have`是不规则动词，过去式是`had`。"
+            }
+          }
+        },
+        {
+          "card_id": "C009",
+          "full_id": "六上-U6-C009",
+          "title": "交通方式与问路指路",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握常见交通方式的表达，以及问路和指路的基本句型。",
+          "core_points": [
+            "交通方式：`by bus`, `by car`, `by bike`, `by train`, `by plane`, `by subway`。步行用`on foot`。",
+            "提问交通方式：`How do you go to...?`",
+            "问路：`Excuse me, where is...?` / `How can I get to...?`",
+            "指路：`Go straight.`, `Turn left/right.`, `It's on your left/right.`, `It's next to/between...`。",
+            "介词应用：`go to school by bus` (乘坐交通工具)；`walk to school on foot` (步行)。"
+          ],
+          "example": {
+            "question": "用英语描述你乘公交车去学校。",
+            "steps": [
+              "1. 确定主语`I`。",
+              "2. 确定动词短语`go to school`。",
+              "3. 确定交通方式`bus`，搭配介词`by`。"
+            ],
+            "answer": "I go to school by bus."
+          },
+          "mistakes": [
+            {
+              "wrong": "He goes to school by a car.",
+              "correct": "He goes to school by car. (by后接交通工具名词时通常不加a/an)"
+            },
+            {
+              "wrong": "Go straightly.",
+              "correct": "Go straight. (straight在此作副词，直接修饰go)"
+            }
+          ],
+          "memory_tip": "『by』交通工具不加『a』，『on foot』步行要记牢。问路『where/how』，指路『直左右』。",
+          "related": {
+            "prerequisite": "介词in/on/at用法，方位词",
+            "next": "综合阅读理解"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "看图写单词",
+              "选择填空",
+              "情景交际",
+              "连线",
+              "补全对话"
+            ],
+            "scoring_key": "介词`by`和`on`的正确使用，交通方式词汇拼写，问路指路句型完整。",
+            "common_trap": "by后多加a/an；on foot拼写或使用错误；指路方向混淆。",
+            "real_exam_example": {
+              "source": "期末考试情景交际",
+              "question": "A: How do you go to the library? B: I go there ______. (A. by foot B. on foot C. by bus)",
+              "answer": "C. by bus (或B. on foot，如果选项中没有by bus)",
+              "scoring_notes": "考察交通方式介词的正确使用。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "General",
+      "unit_name": "综合技能",
+      "cards": [
+        {
+          "card_id": "C010",
+          "full_id": "六上-General-C010",
+          "title": "阅读理解策略",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "掌握阅读理解的基本方法和技巧，提高获取信息和推断的能力。",
+          "core_points": [
+            "通读全文：快速浏览文章，了解大意和主旨。",
+            "细读问题：仔细阅读题目，划出关键词，明确考查点。",
+            "定位信息：根据问题关键词，回文章中查找相关句子或段落。",
+            "理解句意：结合上下文理解生词、难句，不要逐字翻译。",
+            "逻辑推断：对于没有直接答案的问题，根据文章信息进行合理推断。",
+            "核对答案：选择或写出答案后，再次与文章和问题核对，确保无误。"
+          ],
+          "example": {
+            "question": "阅读短文，判断正误：\nMy name is Mike. I am 12. I like playing football. Last Sunday, I went to the park with my father. We played football there. We were very happy.\n(1) Mike is 10 years old. (T/F)\n(2) Mike played football with his mother last Sunday. (T/F)",
+            "steps": [
+              "1. 读问题(1)：关键词`Mike is 10 years old`。",
+              "2. 定位原文：`I am 12.`",
+              "3. 判断：12不等于10，所以是F。",
+              "4. 读问题(2)：关键词`played football with his mother`。",
+              "5. 定位原文：`I went to the park with my father. We played football there.`",
+              "6. 判断：是`father`而不是`mother`，所以是F。"
+            ],
+            "answer": "(1) F (2) F"
+          },
+          "mistakes": [
+            {
+              "wrong": "只看题目中的关键词，不结合原文语境理解。",
+              "correct": "关键词定位后，需仔细阅读关键词所在句子的前后文，确保理解准确。"
+            },
+            {
+              "wrong": "遇到生词就卡壳，无法继续阅读。",
+              "correct": "尝试根据上下文猜测生词含义，或跳过不影响主旨的生词。"
+            }
+          ],
+          "memory_tip": "『通读』抓大意，『细读』找问题。『定位』关键词，『推断』莫着急。核对仔细，高分有戏。",
+          "related": {
+            "prerequisite": "大量词汇积累，基本语法知识",
+            "next": "书面表达"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "阅读判断",
+              "阅读选择",
+              "阅读回答问题"
+            ],
+            "scoring_key": "理解文章主旨和细节，准确捕捉信息，合理推断。",
+            "common_trap": "信息定位不准；对细节理解有偏差；过度推断或脑补。",
+            "real_exam_example": {
+              "source": "期末考试阅读理解",
+              "question": "（短文略）What did Sam do yesterday? (A. He went swimming. B. He cleaned his room. C. He played computer games.)",
+              "answer": "B. He cleaned his room.",
+              "scoring_notes": "根据文中`yesterday`后Sam的具体行为来选择，排除干扰项。"
+            }
+          }
+        },
+        {
+          "card_id": "C011",
+          "full_id": "六上-General-C011",
+          "title": "书面表达 (介绍类)",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "掌握写作介绍类短文（如介绍自己、家人、朋友、一天）的基本结构和常用句型。",
+          "core_points": [
+            "开篇：点明主题，简单介绍（`My name is...`, `I am...`, `This is my friend...`）。",
+            "主体：",
+            "  1. 介绍人物：外貌、性格、爱好、职业、喜欢做的事（用一般现在时）。",
+            "  2. 介绍一天：按照时间顺序描述活动（用一般现在时，注意时间介词）。",
+            "  3. 介绍地点：地理位置、有什么、能做什么（用`there be`句型，一般现在时）。",
+            "结尾：简短总结或表达感受（`I love my family.`, `I have a happy day.`）。",
+            "常用连接词：`and`, `but`, `then`, `also`。",
+            "写作注意：时态一致，主谓一致，大小写和标点符号正确。"
+          ],
+          "example": {
+            "question": "以『My Best Friend』为题，写一篇50词左右的短文。",
+            "steps": [
+              "1. 确定介绍对象：My best friend, Lily。",
+              "2. 介绍基本信息：She is 11. She is tall and has long hair。",
+              "3. 介绍性格爱好：She is kind and funny. She likes reading and drawing. She often plays with me.",
+              "4. 总结：I like her very much."
+            ],
+            "answer": "My Best Friend\nI have a best friend. Her name is Lily. She is 11 years old. She is tall and has long hair. She is kind and funny. Lily likes reading and drawing. She often plays with me after school. We are good friends. I like her very much."
+          },
+          "mistakes": [
+            {
+              "wrong": "时态混乱，一会儿现在时一会儿过去时。",
+              "correct": "介绍类文章通常使用一般现在时，除非明确描述过去发生的事情。"
+            },
+            {
+              "wrong": "句子结构单一，都是主谓宾。",
+              "correct": "尝试使用一些连接词，或在句首使用时间状语，使文章更流畅。"
+            }
+          ],
+          "memory_tip": "『开篇』点题，『主体』详说。『时间顺序』排活动，『外貌性格』细描摹。『结尾』总结，『标点』不漏。",
+          "related": {
+            "prerequisite": "词汇、句型、语法知识的综合运用",
+            "next": "更复杂主题的写作"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "看图写话",
+              "介绍类写作",
+              "补全对话"
+            ],
+            "scoring_key": "内容切题，条理清晰，语法正确，句型多样，词汇准确，书写规范。",
+            "common_trap": "拼写错误，标点符号错误，时态语态错误，主谓不一致，大小写不规范。",
+            "real_exam_example": {
+              "source": "期末考试书面表达",
+              "question": "请以`My Happy Weekend`为题，写一篇短文，描述你上个周末做了什么。不少于5句话。",
+              "answer": "Last weekend was great. I went to the park with my family. We played games and had a picnic. On Sunday, I did my homework and read a book. I was very happy.",
+              "scoring_notes": "考察一般过去时运用，内容连贯，句型完整，词汇拼写。"
+            }
+          }
         }
       ]
     }
