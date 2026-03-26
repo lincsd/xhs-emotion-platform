@@ -32,8 +32,8 @@ MAX_ERROR_HINTS = 10           # 注入提示最多几条
 # Adaptive Params 配置
 ADAPT_WINDOW = 50              # 计算自适应参数的样本窗口
 DEFAULT_PARAMS = {
-    'max_chinese_chars': 15,
-    'max_chars_per_block': 4,
+    'max_chinese_chars': 20,       # 起步20字（Nano Banana 2模型基线），自适应可增长到35
+    'max_chars_per_block': 5,      # 每块起步5字，自适应可增长到8
     'audit_pass_score': 80,
     'max_audit_rounds': 3,
     'temperature': 0.4,
@@ -399,9 +399,12 @@ def compute_adaptive_params():
     pass_rate = stats['pass_rate']
     repair_rate = stats['repair_rate']
 
-    # 自适应字数限制
+    # 自适应字数限制 —— Nano Banana 2 模型可支持更多中文，上限放宽到35字
     if avg_audit >= 90:
-        params['max_chinese_chars'] = min(20, params['max_chinese_chars'] + 2)
+        params['max_chinese_chars'] = min(35, params['max_chinese_chars'] + 3)
+        params['max_chars_per_block'] = min(8, params['max_chars_per_block'] + 1)
+    elif avg_audit >= 80:
+        params['max_chinese_chars'] = min(30, params['max_chinese_chars'] + 2)
         params['max_chars_per_block'] = min(6, params['max_chars_per_block'] + 1)
     elif avg_audit < 70:
         params['max_chinese_chars'] = max(10, params['max_chinese_chars'] - 2)

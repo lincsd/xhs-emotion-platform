@@ -110,8 +110,8 @@ def _get_effective_params():
         return {
             'max_audit_rounds': MAX_AUDIT_ROUNDS,
             'audit_pass_score': AUDIT_PASS_SCORE,
-            'max_chinese_chars': 15,
-            'max_chars_per_block': 4,
+            'max_chinese_chars': 20,
+            'max_chars_per_block': 5,
         }
     try:
         return get_adaptive_params()
@@ -119,8 +119,8 @@ def _get_effective_params():
         return {
             'max_audit_rounds': MAX_AUDIT_ROUNDS,
             'audit_pass_score': AUDIT_PASS_SCORE,
-            'max_chinese_chars': 15,
-            'max_chars_per_block': 4,
+            'max_chinese_chars': 20,
+            'max_chars_per_block': 5,
         }
 
 
@@ -294,12 +294,12 @@ PROMPT_SYSTEM_TEMPLATE = """你是小红书爆款知识卡片 AI 图片 Prompt �
 
 这是最重要的规则！AI 图片模型渲染中文容易出错，必须极度精简：
 
-- 全卡中文 **≤ 15字**（越少越好！理想≤ 10字）
-- 标题 ≤ 4字（72pt 超大粗体）
-- 核心金句 ≤ 4字
-- 口诀 ≤ 6字
+- 全卡中文 **≤ {max_chars}字**（越少越好！理想≤ {ideal_chars}字）
+- 标题 ≤ {max_per_block}字（72pt 超大粗体）
+- 核心金句 ≤ {max_per_block}字
+- 口诀 ≤ {max_slogan}字
 - 气泡 ≤ 3字
-- ❌ 绝不超过4个连续中文字符（严格！）
+- ❌ 绝不超过{max_per_block}个连续中文字符（严格！）
 - ❌ 不写段落、定义、解释、长句子
 - 数字和数学符号用阿拉伯数字/符号(不用中文写数字)
 - 能用图/箭头/色块/图标表达的，绝不用文字
@@ -364,12 +364,12 @@ PROMPT_SYSTEM_TEMPLATE_WELLNESS = """你是小红书爆款知识卡片 AI 图片
 
 这是最重要的规则！AI 图片模型渲染中文容易出错，必须极度精简：
 
-- 全卡中文 **≤ 15字**（越少越好！理想≤ 10字）
-- 标题 ≤ 4字（72pt 超大粗体）
-- 核心金句 ≤ 4字
-- 口诀 ≤ 6字
+- 全卡中文 **≤ {max_chars}字**（越少越好！理想≤ {ideal_chars}字）
+- 标题 ≤ {max_per_block}字（72pt 超大粗体）
+- 核心金句 ≤ {max_per_block}字
+- 口诀 ≤ {max_slogan}字
 - 气泡 ≤ 3字
-- ❌ 绝不超过4个连续中文字符（严格！）
+- ❌ 绝不超过{max_per_block}个连续中文字符（严格！）
 - ❌ 不写段落、定义、解释、长句子
 - 数字和数据用阿拉伯数字/符号
 - 能用图/箭头/色块/图标表达的，绝不用文字
@@ -419,9 +419,14 @@ def _build_card_info_grammar(card, subject, grade, semester):
     """构建语法辨析类卡片信息（中英双语，引导词对比为核心）
     
     ⚠️ 重要: 语法卡文字最容易超标！此函数传给 prompt 生成器的信息
-    只是背景知识参考，最终图片上的文字必须由 prompt 生成器精简到≤15字。
+    只是背景知识参考，最终图片上的文字必须由 prompt 生成器精简到≤{max_chars}字。
     """
     card_type = card.get('type', '语法辨析卡')
+    
+    # 获取自适应字数限制
+    eff = _get_effective_params()
+    _mc = eff.get('max_chinese_chars', 20)
+    _mpb = eff.get('max_chars_per_block', 5)
 
     example_info = ''
     example_steps = ''
@@ -462,12 +467,12 @@ def _build_card_info_grammar(card, subject, grade, semester):
 🔑 语法辨析类：核心是引导词/句型的对比区分
 
 ⚠️⚠️⚠️ 极重要提醒：语法卡特别容易文字超标！
-图片上只能出现≤15个中文字和≤4个英文单词！
+图片上只能出现≤{_mc}个中文字和≤4个英文单词！
 绝对不要把以下所有内容都写在图上！
 以下信息仅供理解知识点，图片上只需展示：
-  - 标题(≤4中文字)
+  - 标题(≤{_mpb}中文字)
   - 1个✓正确例句 vs 1个✗错误例句（用英文写例句，不要中文翻译）
-  - 口诀(≤6中文字)
+  - 口诀(≤{min(_mpb+2, 8)}中文字)
   - 其余全部用图形/箭头/色块/图标表达！
 
 【例句辨析】: {example_info or '根据语法点构造对比例句'}
@@ -587,12 +592,22 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
     type_rules = CARD_TYPE_VISUAL_RULES.get(card_type, CARD_TYPE_VISUAL_RULES['方法卡'])
     is_vert = _detect_vertical_calc(card)
 
+    # ── 获取自适应字数参数 ──
+    eff = _get_effective_params()
+    max_chars = eff.get('max_chinese_chars', 20)
+    max_per_block = eff.get('max_chars_per_block', 5)
+    ideal_chars = max(8, max_chars - 5)
+    max_slogan = min(max_per_block + 2, 8)
+    char_fmt = dict(max_chars=max_chars, max_per_block=max_per_block,
+                    ideal_chars=ideal_chars, max_slogan=max_slogan)
+
     # 根据学科选择对应模板
     if subject in _WELLNESS_SUBJECTS:
         visual_block = f"   {type_rules}"
         system_prompt = PROMPT_SYSTEM_TEMPLATE_WELLNESS.format(
             subject=subject,
-            visual_strategy_block=visual_block
+            visual_strategy_block=visual_block,
+            **char_fmt
         )
     elif is_vert:
         solve_block = """   ⚠️ 笔算竖式类：必须画彩色分层竖式！
@@ -600,13 +615,15 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
    - 数字必须和例题完全一致"""
         system_prompt = PROMPT_SYSTEM_TEMPLATE.format(
             subject=subject,
-            solve_strategy_block=solve_block
+            solve_strategy_block=solve_block,
+            **char_fmt
         )
     else:
         solve_block = f"   {type_rules}"
         system_prompt = PROMPT_SYSTEM_TEMPLATE.format(
             subject=subject,
-            solve_strategy_block=solve_block
+            solve_strategy_block=solve_block,
+            **char_fmt
         )
 
     card_info = _build_card_info(card, subject, grade, semester)
@@ -741,15 +758,24 @@ def _count_chinese_chars(text):
     return sum(1 for c in text if '\u4e00' <= c <= '\u9fff')
 
 
-def _enforce_manifest_limits(manifest, max_total=15, max_per_block=4):
+def _enforce_manifest_limits(manifest, max_total=None, max_per_block=None):
     """
     文字量守门员: 强制裁剪 TEXT_MANIFEST 中超标的中文文字。
+    
+    参数自动从自适应系统获取，随着模型成功率提高可自动放宽。
     
     规则:
     1. 每个文字块中文≤ max_per_block 字
     2. 全部文字块总中文≤ max_total 字
     3. 超标时优先保留 TITLE，其次按顺序保留，尾部截断或删除
     """
+    # 从自适应系统获取当前限制
+    if max_total is None or max_per_block is None:
+        params = _get_effective_params()
+        if max_total is None:
+            max_total = params.get('max_chinese_chars', 15)
+        if max_per_block is None:
+            max_per_block = params.get('max_chars_per_block', 4)
     if not manifest:
         return manifest
     
