@@ -1408,15 +1408,18 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._send_json({'error': '无权限'}, 403)
         count = min(int(body.get('count', 1)), 100)
         credits = int(body.get('credits', 100))
+        prefix = body.get('prefix', 'XHS')  # 支持自定义前缀
         conn = self._get_db()
         codes = []
         for _ in range(count):
-            code = secrets.token_hex(6).upper()
+            # 格式: XHS-XXXX-XXXX-XXXX（更易读、更专业）
+            seg = secrets.token_hex(6).upper()
+            code = f'{prefix}-{seg[:4]}-{seg[4:8]}-{seg[8:12]}'
             conn.execute('INSERT INTO redeem_codes(code, credits) VALUES(?,?)', (code, credits))
             codes.append(code)
         conn.commit()
         conn.close()
-        return self._send_json({'codes': codes, 'credits': credits})
+        return self._send_json({'codes': codes, 'credits': credits, 'count': len(codes)})
 
     # ---- 支付配置 ----
     def _get_payment_config(self):
