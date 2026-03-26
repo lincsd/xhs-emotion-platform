@@ -1,0 +1,770 @@
+{
+  "subject": "英语",
+  "grade": "七年级",
+  "semester": "上册",
+  "textbook": "人教Go for it!版",
+  "grade_short": "七上",
+  "card_pack": "知识总结",
+  "description": "初中七年级上册英语中考考点笔记总结",
+  "units": [
+    {
+      "unit_id": "U1",
+      "unit_name": "Unit 1: Hello! & Unit 2: Is this your pencil?",
+      "cards": [
+        {
+          "card_id": "001",
+          "full_id": "七上-U1-001",
+          "title": "be动词的用法 (am/is/are)",
+          "type": "知识总结卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "be动词表示「是」或「在」，其形式会随主语的人称和单复数发生变化。",
+          "core_points": [
+            "主语是I时，be动词用「am」。",
+            "主语是You/We/They/复数名词时，be动词用「are」。",
+            "主语是He/She/It/单数名词时，be动词用「is」。",
+            "否定句在be动词后加「not」；疑问句将be动词提前到主语之前。",
+            "缩略形式：I'm, you're, he's, she's, it's, we're, they're; aren't, isn't."
+          ],
+          "example": {
+            "question": "选出正确选项：My favorite color ____ blue.",
+            "steps": [
+              "1. 识别主语「My favorite color」是第三人称单数。",
+              "2. 根据主谓一致原则，第三人称单数主语搭配be动词「is」。"
+            ],
+            "answer": "is"
+          },
+          "mistakes": [
+            {
+              "wrong": "You is a student.",
+              "correct": "You are a student."
+            },
+            {
+              "wrong": "He not is a teacher.",
+              "correct": "He is not a teacher."
+            }
+          ],
+          "memory_tip": "我am你are他她它is，复数都是are，否定加not，疑问往前移。",
+          "related": {
+            "prerequisite": "人称代词",
+            "next": "一般现在时（实义动词）"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "单选",
+              "语法填空",
+              "短文改错",
+              "完形填空"
+            ],
+            "scoring_key": "「主谓一致是核心，人称单复要看清，否定疑问句型不错乱」",
+            "common_trap": "「易与一般动词混淆，误用助动词do/does来否定或提问」",
+            "real_exam_example": {
+              "source": "某市2022年中考真题",
+              "question": "My name ____ Li Hua. I ____ from China.",
+              "answer": "is; am",
+              "scoring_notes": "考查be动词与第三人称单数主语和第一人称单数主语的搭配。"
+            }
+          }
+        },
+        {
+          "card_id": "002",
+          "full_id": "七上-U1-002",
+          "title": "人称代词与指示代词",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "人称代词指代人或事物，有主格和宾格之分；指示代词指明远近和单复数。",
+          "core_points": [
+            "人称代词主格：I, you, he, she, it, we, they (作主语)。",
+            "人称代词宾格：me, you, him, her, it, us, them (作宾语，常在动词或介词后)。",
+            "指示代词：this (这, 单数近), that (那, 单数远), these (这些, 复数近), those (那些, 复数远)。",
+            "指示代词可作主语、宾语、表语或定语 (后接名词)。"
+          ],
+          "example": {
+            "question": "选出正确选项：Look at ____ boy. ____ is my brother.",
+            "steps": [
+              "1. 第一空后接名词「boy」，用作定语，且「boy」是单数，可选「this/that」。",
+              "2. 第二空作主语，指代「boy」，用人称代词「He」。"
+            ],
+            "answer": "this; He"
+          },
+          "mistakes": [
+            {
+              "wrong": "Give it to I.",
+              "correct": "Give it to me."
+            },
+            {
+              "wrong": "That are my books.",
+              "correct": "Those are my books."
+            }
+          ],
+          "memory_tip": "主格站句首，宾格跟动介。近用this/these，远用that/those。",
+          "related": {
+            "prerequisite": "be动词",
+            "next": "名词单复数"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "语法填空",
+              "短文改错"
+            ],
+            "scoring_key": "「主宾格分清，指示代词看远近单复数及指代功能」",
+            "common_trap": "「主宾格混淆，尤其在介词后；指示代词单复数与动词不一致」",
+            "real_exam_example": {
+              "source": "某市2023年中考真题",
+              "question": "My mother asked ____ to help ____ with the housework.",
+              "answer": "me; her",
+              "scoring_notes": "考查宾格代词在动词后作宾语的用法。"
+            }
+          }
+        },
+        {
+          "card_id": "003",
+          "full_id": "七上-U1-003",
+          "title": "特殊疑问句 (What/Who/How)",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "用特殊疑问词引导的疑问句，对句中特定信息提问，不能用Yes/No回答。",
+          "core_points": [
+            "What (什么)：问事物、职业、姓名、颜色等。",
+            "Who (谁)：问人，可作主语或宾语。",
+            "How (怎样/如何)：问方式、健康状况、程度等。",
+            "句式：特殊疑问词 + be动词/助动词 + 主语 + 其他?"
+          ],
+          "example": {
+            "question": "选出正确选项：A: ____ is your favorite color? B: It's blue.",
+            "steps": [
+              "1. 回答是「It's blue」，问的是颜色。",
+              "2. 提问颜色用疑问词「What」。"
+            ],
+            "answer": "What"
+          },
+          "mistakes": [
+            {
+              "wrong": "Who are you name?",
+              "correct": "What is your name?"
+            },
+            {
+              "wrong": "How do you?",
+              "correct": "How are you?"
+            }
+          ],
+          "memory_tip": "What问事，Who问人，How问方式和健康。",
+          "related": {
+            "prerequisite": "be动词，人称代词",
+            "next": "更多疑问词 (When/Where/Why)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "补全对话",
+              "听力理解"
+            ],
+            "scoring_key": "「根据回答内容判断疑问词，注意疑问句语序」",
+            "common_trap": "「What/Who/How与What's your name/How are you等固定搭配混淆」",
+            "real_exam_example": {
+              "source": "某市2021年中考真题",
+              "question": "A: ____ is your English teacher? B: Mr. Wang.",
+              "answer": "Who",
+              "scoring_notes": "考查根据回答判断疑问词的能力。"
+            }
+          }
+        },
+        {
+          "card_id": "004",
+          "full_id": "七上-U2-004",
+          "title": "名词单复数与所有格形容词/名词所有格",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "名词有单复数形式，表示数量；所有格形容词和名词所有格表示所属关系。",
+          "core_points": [
+            "名词复数规则：一般加-s；s, x, ch, sh结尾加-es；辅音字母+y结尾改y为i加-es；f/fe结尾改f/fe为v加-es。",
+            "不规则名词复数：man-men, woman-women, child-children, foot-feet, tooth-teeth, mouse-mice, sheep-sheep, fish-fish等。",
+            "所有格形容词：my, your, his, her, its, our, their (后接名词，作定语)。",
+            "名词所有格：'s (单数名词或不以s结尾的复数名词), s' (以s结尾的复数名词)。"
+          ],
+          "example": {
+            "question": "选出正确选项：These are ____ (child) books.",
+            "steps": [
+              "1. 「child」是不规则复数名词，其复数形式是「children」。",
+              "2. 表示所属关系，用名词所有格，不以s结尾的复数名词加's。",
+              "3. 组合起来是「children's books」。"
+            ],
+            "answer": "children's"
+          },
+          "mistakes": [
+            {
+              "wrong": "Two apple.",
+              "correct": "Two apples."
+            },
+            {
+              "wrong": "This is my brothers' book. (如果只有一个哥哥)",
+              "correct": "This is my brother's book."
+            }
+          ],
+          "memory_tip": "变复数，加s/es/ies/ves，不规则要牢记。所有格，'s表示「的」，复数s'别混淆。",
+          "related": {
+            "prerequisite": "人称代词",
+            "next": "形容词"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "单选",
+              "语法填空",
+              "短文改错",
+              "选词填空"
+            ],
+            "scoring_key": "「规则复数要记清，不规则复数是重点，所有格区分's和s'」",
+            "common_trap": "「不规则名词复数变化易错，名词所有格与复数形式混淆，易漏掉名词复数」",
+            "real_exam_example": {
+              "source": "某市2022年中考真题",
+              "question": "My mother bought two new ____ (dress) for me.",
+              "answer": "dresses",
+              "scoring_notes": "考查以ss结尾名词的复数形式变化。"
+            }
+          }
+        },
+        {
+          "card_id": "005",
+          "full_id": "七上-U2-005",
+          "title": "基本方位介词 (in/on/under)",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "介词表示名词或代词与句中其他词的关系，此处主要指物体的位置关系。",
+          "core_points": [
+            "in (在...里面)：用于表示在物体内部或空间内。",
+            "on (在...上面)：用于表示在物体表面或接触。",
+            "under (在...下面)：用于表示在物体下方，不一定接触。",
+            "介词后接名词或代词宾格。"
+          ],
+          "example": {
+            "question": "选出正确选项：The book is ____ the desk.",
+            "steps": [
+              "1. 书通常是放在桌子表面的。",
+              "2. 表示在物体表面用介词「on」。"
+            ],
+            "answer": "on"
+          },
+          "mistakes": [
+            {
+              "wrong": "The cat is in the chair. (如果猫坐在椅子上)",
+              "correct": "The cat is on the chair."
+            },
+            {
+              "wrong": "The apple is on the box. (如果苹果在盒子里)",
+              "correct": "The apple is in the box."
+            }
+          ],
+          "memory_tip": "里面in，上面on，下面under记心间。",
+          "related": {
+            "prerequisite": "名词，be动词",
+            "next": "方位介词扩展 (behind, in front of, next to)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "语法填空",
+              "短文改错",
+              "任务型阅读"
+            ],
+            "scoring_key": "「根据语境准确判断具体方位，理解介词的精确含义」",
+            "common_trap": "「in/on/at等介词易混淆，尤其在表示时间或地点时」",
+            "real_exam_example": {
+              "source": "某市2023年中考真题",
+              "question": "My keys are ____ the box. Can you help me find them?",
+              "answer": "in",
+              "scoring_notes": "考查介词in表示「在...里面」的用法。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U3",
+      "unit_name": "Unit 3: This is my sister. & Unit 4: Where's my backpack?",
+      "cards": [
+        {
+          "card_id": "006",
+          "full_id": "七上-U3-006",
+          "title": "家庭成员词汇与数字 (11-100)",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "掌握常用的家庭成员名称，以及数字11到100的英语表达，是日常交流的基础。",
+          "core_points": [
+            "家庭成员：father, mother, brother, sister, grandfather, grandmother, uncle, aunt, cousin, parent, child等。",
+            "数字11-19：eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen。",
+            "整十数：twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety。",
+            "复合数字：在整十数和个位数之间用连字符连接，如twenty-one, forty-five。"
+          ],
+          "example": {
+            "question": "选出正确选项：My ____ (father's brother) is coming to visit.",
+            "steps": [
+              "1. 「father's brother」指的是「叔叔/伯伯」。",
+              "2. 对应的英语单词是「uncle」。"
+            ],
+            "answer": "uncle"
+          },
+          "mistakes": [
+            {
+              "wrong": "My family has four peoples.",
+              "correct": "My family has four people."
+            },
+            {
+              "wrong": "fourty",
+              "correct": "forty"
+            }
+          ],
+          "memory_tip": "十几teen，几十ty，中间连字符。家庭成员多练习，熟能生巧记牢靠。",
+          "related": {
+            "prerequisite": "基础词汇",
+            "next": "描述人物/年龄"
+          },
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "阅读理解",
+              "听力理解",
+              "书面表达"
+            ],
+            "scoring_key": "「词汇拼写和意义准确，数字听力辨识和书写」",
+            "common_trap": "「thirty/thirteen, forty/fourteen等发音相似数字易混淆，家庭成员称谓混淆」",
+            "real_exam_example": {
+              "source": "某市2022年中考真题听力部分",
+              "question": "(听一段对话，问多少钱) \"It's fifty-five yuan.\"",
+              "answer": "55",
+              "scoring_notes": "考查对数字发音的辨识能力。"
+            }
+          }
+        },
+        {
+          "card_id": "007",
+          "full_id": "七上-U3-007",
+          "title": "表达时间 (Telling Time)",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "掌握英语中表达时间的常用方式，是日常交流和听力理解的重要内容。",
+          "core_points": [
+            "整点：o'clock (It's six o'clock.)",
+            "半点：half past + 小时 (It's half past six.)",
+            "刻钟：quarter past + 小时 (过刻), quarter to + 小时 (差刻)。(It's a quarter past six. / It's a quarter to seven.)",
+            "分钟表达：",
+            "  - 顺读法 (小时+分钟)：six fifteen.",
+            "  - 倒读法 (分钟+past/to+小时)：十五分钟内用past，十五分钟后用to。例如：fifteen past six (6:15), twenty to seven (6:40)。"
+          ],
+          "example": {
+            "question": "选出正确选项：It's 8:30. We can say it's ____.",
+            "steps": [
+              "1. 8:30 是八点半。",
+              "2. 用half past表达半点。"
+            ],
+            "answer": "half past eight"
+          },
+          "mistakes": [
+            {
+              "wrong": "It's eight and thirty.",
+              "correct": "It's eight thirty. / It's half past eight."
+            },
+            {
+              "wrong": "It's a quarter past seven. (表示7:45)",
+              "correct": "It's a quarter to eight."
+            }
+          ],
+          "memory_tip": "整点o'clock，半点half past。过刻quarter past，差刻quarter to。",
+          "related": {
+            "prerequisite": "数字词汇",
+            "next": "时间状语"
+          },
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": [
+              "单选",
+              "听力理解",
+              "阅读理解",
+              "补全对话"
+            ],
+            "scoring_key": "「掌握多种时间表达法，尤其quarter past/to的用法，听力中能准确辨识」",
+            "common_trap": "「past/to用错，quarter/half混淆，口语和书面表达的差异」",
+            "real_exam_example": {
+              "source": "某市2021年中考真题听力部分",
+              "question": "(听一段对话，问上课时间) \"Class begins at a quarter to nine.\"",
+              "answer": "8:45",
+              "scoring_notes": "考查对quarter to表达的理解。"
+            }
+          }
+        },
+        {
+          "card_id": "008",
+          "full_id": "七上-U4-008",
+          "title": "方位介词扩展 (behind, in front of, next to)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在基本介词in/on/under的基础上，进一步学习表示物体位置关系的介词短语，丰富空间描述。",
+          "core_points": [
+            "behind (在...后面)",
+            "in front of (在...前面)",
+            "next to (在...旁边/紧挨着)",
+            "这些介词短语常用于回答「Where...?」的提问。",
+            "介词短语后接名词或代词宾格。"
+          ],
+          "example": {
+            "question": "选出正确选项：The ball is ____ the door. (球在门后面)",
+            "steps": [
+              "1. 根据中文提示「在门后面」。",
+              "2. 对应的介词短语是「behind」。"
+            ],
+            "answer": "behind"
+          },
+          "mistakes": [
+            {
+              "wrong": "The boy is next his mother.",
+              "correct": "The boy is next to his mother."
+            },
+            {
+              "wrong": "He is in the front of the house.",
+              "correct": "He is in front of the house."
+            }
+          ],
+          "memory_tip": "前in front of，后behind，旁边next to。",
+          "related": {
+            "prerequisite": "基本方位介词 (in/on/under)",
+            "next": "描述位置的复杂句型"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "阅读理解",
+              "语法填空",
+              "短文改错"
+            ],
+            "scoring_key": "「准确理解各介词短语的含义及使用场景，注意固定搭配」",
+            "common_trap": "「in front of与behind混淆，next to漏掉to，介词短语内部单词拼写或顺序错误」",
+            "real_exam_example": {
+              "source": "某市2022年中考真题",
+              "question": "The teacher is standing ____ the blackboard.",
+              "answer": "in front of",
+              "scoring_notes": "考查in front of的固定搭配及语境理解。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U5",
+      "unit_name": "Unit 5: Do you have a soccer ball?",
+      "cards": [
+        {
+          "card_id": "009",
+          "full_id": "七上-U5-009",
+          "title": "一般现在时 (have/has 表示「有」)",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "have/has作为实义动词，用于表示拥有、存在，是中考常考的基础语法点。",
+          "core_points": [
+            "主语为I/you/we/they/复数名词时，动词用「have」。",
+            "主语为he/she/it/单数名词时，动词用「has」。",
+            "否定句：主语 + don't/doesn't + have (注意否定句中has要变回have)。",
+            "疑问句：Do/Does + 主语 + have...? (同样疑问句中has要变回have)。"
+          ],
+          "example": {
+            "question": "选出正确选项：My brother ____ a new bike.",
+            "steps": [
+              "1. 主语「My brother」是第三人称单数。",
+              "2. 第三人称单数主语搭配「has」。"
+            ],
+            "answer": "has"
+          },
+          "mistakes": [
+            {
+              "wrong": "She don't have a pen.",
+              "correct": "She doesn't have a pen."
+            },
+            {
+              "wrong": "Does he has a car?",
+              "correct": "Does he have a car?"
+            }
+          ],
+          "memory_tip": "主语三单用has，其他have；否定疑问都用have。",
+          "related": {
+            "prerequisite": "人称代词，be动词",
+            "next": "一般现在时（实义动词）"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "单选",
+              "语法填空",
+              "短文改错",
+              "完形填空"
+            ],
+            "scoring_key": "「主谓一致原则，否定和疑问句中has必须变回have」",
+            "common_trap": "「否定句或疑问句中误用has，而非have；易与be动词混淆」",
+            "real_exam_example": {
+              "source": "某市2023年中考真题",
+              "question": "My friend ____ a cute dog.",
+              "answer": "has",
+              "scoring_notes": "考查have/has与第三人称单数主语的搭配。"
+            }
+          }
+        },
+        {
+          "card_id": "010",
+          "full_id": "七上-U5-010",
+          "title": "一般现在时 (do/does 构成疑问和否定)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "一般现在时表示经常性、习惯性的动作或状态，其否定句和疑问句需要借助助动词do/does。",
+          "core_points": [
+            "肯定句：主语 + 动词原形 (主语为第三人称单数时，动词加-s/es)。",
+            "否定句：主语 + don't/doesn't + 动词原形。",
+            "疑问句：Do/Does + 主语 + 动词原形?",
+            "助动词「do」用于I/you/we/they/复数名词；「does」用于he/she/it/单数名词。",
+            "在助动词do/does后，实义动词必须用原形。"
+          ],
+          "example": {
+            "question": "选出正确选项：____ he ____ (play) soccer every day?",
+            "steps": [
+              "1. 句中有时间状语「every day」，表示一般现在时。",
+              "2. 主语「he」是第三人称单数，疑问句用「Does」开头，且动词「play」应还原为原形。"
+            ],
+            "answer": "Does; play"
+          },
+          "mistakes": [
+            {
+              "wrong": "He doesn't likes apples.",
+              "correct": "He doesn't like apples."
+            },
+            {
+              "wrong": "She usually going to school by bus.",
+              "correct": "She usually goes to school by bus."
+            }
+          ],
+          "memory_tip": "三单动词加s/es，否定疑问do/does后动原。",
+          "related": {
+            "prerequisite": "be动词，人称代词",
+            "next": "一般过去时"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "单选",
+              "语法填空",
+              "短文改错",
+              "完形填空",
+              "书面表达"
+            ],
+            "scoring_key": "「主谓一致，助动词后动词必须用原形，时间状语是判断时态的关键」",
+            "common_trap": "「助动词后动词忘记还原，第三人称单数动词变化漏掉s/es」",
+            "real_exam_example": {
+              "source": "某市2022年中考真题",
+              "question": "My mother ____ (go) to work at 7:00 a.m. every day.",
+              "answer": "goes",
+              "scoring_notes": "考查一般现在时第三人称单数动词以o结尾的es变化。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U6",
+      "unit_name": "Unit 6: We have a new student.",
+      "cards": [
+        {
+          "card_id": "011",
+          "full_id": "七上-U6-011",
+          "title": "一般现在时 (综合运用)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "综合运用一般现在时，表示习惯、事实、真理，包括be动词和实义动词的各种句型。",
+          "core_points": [
+            "be动词和实义动词的一般现在时是独立体系，不能混用（如：He is likes music. 错误）。",
+            "时间状语：every day/week/month, usually, often, always, sometimes, never等。",
+            "常用于描述日常活动、习惯、客观事实、自然规律和个人爱好。",
+            "掌握肯定句、否定句和疑问句的正确构成。"
+          ],
+          "example": {
+            "question": "选出正确选项：Mary often ____ (read) books in the evening.",
+            "steps": [
+              "1. 时间状语「often」提示句子使用一般现在时。",
+              "2. 主语「Mary」是第三人称单数，动词「read」应加-s。"
+            ],
+            "answer": "reads"
+          },
+          "mistakes": [
+            {
+              "wrong": "She is like music.",
+              "correct": "She likes music."
+            },
+            {
+              "wrong": "Does he goes to school by bus?",
+              "correct": "Does he go to school by bus?"
+            }
+          ],
+          "memory_tip": "日常习惯和真理，一般现在时莫忘记。be动实义不打架，三单变化要牢记。",
+          "related": {
+            "prerequisite": "be动词，have/has，do/does",
+            "next": "现在进行时"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "阅读理解",
+              "语法填空",
+              "书面表达",
+              "短文改错"
+            ],
+            "scoring_key": "「识别时间状语，区分be动词与实义动词，主谓一致，动词正确变形」",
+            "common_trap": "「be动词与实义动词句型混淆，第三人称单数动词变化漏写或错写」",
+            "real_exam_example": {
+              "source": "某市2023年中考真题",
+              "question": "My father ____ (watch) TV after dinner every night.",
+              "answer": "watches",
+              "scoring_notes": "考查一般现在时第三人称单数动词以ch结尾的es变化。"
+            }
+          }
+        },
+        {
+          "card_id": "012",
+          "full_id": "七上-U6-012",
+          "title": "常用疑问词 (Wh-words) 综合运用",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "掌握并能灵活运用Who, What, When, Where, Why, How等疑问词提问，是获取信息的重要手段。",
+          "core_points": [
+            "Who (谁)：问人。",
+            "What (什么)：问事、物、职业。",
+            "When (何时)：问时间。",
+            "Where (何地)：问地点。",
+            "Why (为何)：问原因 (回答常用Because...)。",
+            "How (如何)：问方式、程度、健康、年龄等。",
+            "疑问词 + be动词/助动词 + 主语 + 动词原形/其他?"
+          ],
+          "example": {
+            "question": "选出正确选项：A: ____ do you go to school? B: By bike.",
+            "steps": [
+              "1. 回答是「By bike」，表示上学的方式。",
+              "2. 提问方式用疑问词「How」。"
+            ],
+            "answer": "How"
+          },
+          "mistakes": [
+            {
+              "wrong": "Where is your birthday? (问时间)",
+              "correct": "When is your birthday?"
+            },
+            {
+              "wrong": "Why do you like English? Because I like it.",
+              "correct": "Why do you like English? Because it's interesting."
+            }
+          ],
+          "memory_tip": "人who，事what，时when，地where，因why，方式how。",
+          "related": {
+            "prerequisite": "be动词，一般现在时",
+            "next": "特殊疑问句的回答"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "补全对话",
+              "阅读理解",
+              "听力理解"
+            ],
+            "scoring_key": "「根据回答内容准确选择疑问词，注意疑问句语序和时态」",
+            "common_trap": "「What/Which/How many/How much等易混淆，不理解Why的回答必须用Because」",
+            "real_exam_example": {
+              "source": "某市2022年中考真题",
+              "question": "A: ____ do you usually get up? B: At six o'clock.",
+              "answer": "When",
+              "scoring_notes": "考查根据时间回答选择疑问词When。"
+            }
+          }
+        },
+        {
+          "card_id": "013",
+          "full_id": "七上-U6-013",
+          "title": "基础词汇 (家庭/学校/数字/颜色/物品)",
+          "type": "知识总结卡",
+          "difficulty": 1,
+          "importance": 3,
+          "definition": "掌握七年级上册核心话题词汇，是构建英语基础、理解文章和进行日常交流的基石。",
+          "core_points": [
+            "家庭成员：father, mother, brother, sister, aunt, uncle, parents, family等。",
+            "学校用品：student, teacher, school, class, classroom, desk, chair, book, pencil, pen, ruler, eraser等。",
+            "数字：one to one hundred。",
+            "颜色：red, yellow, blue, green, black, white, orange, purple, brown等。",
+            "常见物品：bag, backpack, map, key, watch, dictionary, photo, ID card等。",
+            "日常问候语：Hello, Hi, Good morning/afternoon/evening, How are you?, Fine, thank you."
+          ],
+          "example": {
+            "question": "选出正确选项：My favorite color is ____ (红色).",
+            "steps": [
+              "1. 识别中文词汇「红色」。",
+              "2. 对应的英语单词是「red」。"
+            ],
+            "answer": "red"
+          },
+          "mistakes": [
+            {
+              "wrong": "My father is a teach.",
+              "correct": "My father is a teacher."
+            },
+            {
+              "wrong": "There are many book in the library.",
+              "correct": "There are many books in the library."
+            }
+          ],
+          "memory_tip": "分类记忆，结合图片和实际生活；多读多写，强化记忆。",
+          "related": {
+            "prerequisite": "无",
+            "next": "词汇辨析，构词法"
+          },
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "阅读理解",
+              "听力理解",
+              "书面表达",
+              "首字母填空"
+            ],
+            "scoring_key": "「词汇拼写、词义辨析、上下文语境的准确理解」",
+            "common_trap": "「形近词、音近词混淆，不注意名词单复数和词性变化，拼写错误」",
+            "real_exam_example": {
+              "source": "某市2023年中考真题",
+              "question": "There are many ____ (book) in the library.",
+              "answer": "books",
+              "scoring_notes": "考查名词复数形式的拼写。"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

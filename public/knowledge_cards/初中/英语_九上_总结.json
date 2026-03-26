@@ -1,0 +1,854 @@
+{
+  "subject": "英语",
+  "grade": "九年级",
+  "semester": "上册",
+  "textbook": "人教Go for it!版",
+  "grade_short": "九上",
+  "card_pack": "知识总结",
+  "description": "初中九年级上册英语中考考点笔记总结",
+  "units": [
+    {
+      "unit_id": "U1",
+      "unit_name": "非谓语动词作宾语：动名词与不定式",
+      "cards": [
+        {
+          "card_id": "C1",
+          "full_id": "G9S1-U1-C1",
+          "title": "动名词与不定式作宾语的辨析",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "动名词（-ing形式）和不定式（to do）均可作动词宾语，但取决于其前的动词。",
+          "core_points": [
+            "只接动名词作宾语的动词：enjoy, finish, mind, keep, practice, suggest, advise, avoid, imagine, risk, consider, appreciate, escape, miss, quit, deny, admit 等。",
+            "只接不定式作宾语的动词：want, hope, wish, agree, decide, plan, promise, refuse, learn, manage, afford, pretend, choose, expect, offer, seem, plan 等。",
+            "既可接动名词又可接不定式作宾语，意义相同：love, like, begin, start, continue, prefer 等。",
+            "既可接动名词又可接不定式作宾语，意义不同：remember, forget, stop, try, regret 等。",
+            "动名词作宾语常表示已发生或习惯性的动作；不定式作宾语常表示未发生或一次性的动作。"
+          ],
+          "example": {
+            "question": "Choose the best answer: My brother suggested _______ a movie tonight.",
+            "steps": [
+              "分析句意：哥哥「建议」看电影。",
+              "识别核心动词：suggest。",
+              "回忆suggest的用法：suggest后接动名词作宾语。",
+              "选择正确形式：watching。"
+            ],
+            "answer": "watching"
+          },
+          "mistakes": [
+            {
+              "wrong": "He finished to write his homework.",
+              "correct": "He finished writing his homework."
+            },
+            {
+              "wrong": "I hope seeing you soon.",
+              "correct": "I hope to see you soon."
+            }
+          ],
+          "memory_tip": "『动名词：爱怕想建议，完成避免否认；不定式：希望想决定，计划学答应。』(通过谐音和联想记忆常见动词)",
+          "related": {
+            "prerequisite": "动名词和不定式的基本形式和作主语、表语的用法",
+            "next": "非谓语动词作定语和状语"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "语法填空",
+              "短文改错"
+            ],
+            "scoring_key": "记住常见动词的固定搭配，尤其是意义有区别的动词。",
+            "common_trap": "混淆remember/forget/stop/try后接动名词和不定式的意义。",
+            "real_exam_example": {
+              "source": "2022年北京市中考真题",
+              "question": "Don't forget _______ the door when you leave.",
+              "answer": "to lock",
+              "scoring_notes": "forget to do表示「忘记去做某事」（未做），forget doing表示「忘记做过某事」（已做）。此处指离开时要锁门，动作尚未发生，故用不定式。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U2",
+      "unit_name": "不定式作目的状语",
+      "cards": [
+        {
+          "card_id": "C2",
+          "full_id": "G9S1-U2-C1",
+          "title": "不定式作目的状语",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "不定式在句中作状语，表示动作的目的，通常翻译为「为了…」。",
+          "core_points": [
+            "基本结构：S + V + (O) + to do (目的状语)。",
+            "可置于句首或句末，置于句首时常加逗号与主句隔开。",
+            "加强语气时，可用 in order to do 或 so as to do 来替代 to do。",
+            "否定形式：in order not to do 或 so as not to do。"
+          ],
+          "example": {
+            "question": "Rewrite the sentence: He got up early. He wanted to catch the first bus. (Combine into one sentence using an infinitive of purpose)",
+            "steps": [
+              "识别两个句子的目的关系：第二个句子是第一个句子的目的。",
+              "将表示目的的句子转换为不定式：He wanted to catch the first bus → to catch the first bus。",
+              "将不定式置于主句后，构成完整句子。"
+            ],
+            "answer": "He got up early to catch the first bus."
+          },
+          "mistakes": [
+            {
+              "wrong": "He works hard for pass the exam.",
+              "correct": "He works hard to pass the exam."
+            },
+            {
+              "wrong": "In order not to be late, he ran fast.",
+              "correct": "In order not to be late, he ran fast."
+            }
+          ],
+          "memory_tip": "『To do表目的，句首句末皆可居。为了不…，not to 紧相随。』",
+          "related": {
+            "prerequisite": "不定式的基本用法",
+            "next": "不定式作结果状语"
+          },
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": [
+              "语法填空",
+              "单句改错",
+              "句型转换",
+              "书面表达"
+            ],
+            "scoring_key": "注意不定式的正确形式，以及否定结构 not to do。",
+            "common_trap": "混淆介词 for 和不定式 to 表示目的的用法。for后接名词或动名词，to后接动词原形。",
+            "real_exam_example": {
+              "source": "2021年某市中考真题",
+              "question": "Many people wear masks _______ themselves from the virus.",
+              "answer": "to protect",
+              "scoring_notes": "句子表示戴口罩的目的是为了保护自己，故用不定式作目的状语。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U3",
+      "unit_name": "宾语从句的语序与连接词",
+      "cards": [
+        {
+          "card_id": "C3",
+          "full_id": "G9S1-U3-C1",
+          "title": "宾语从句的语序与连接词",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "宾语从句是用作宾语的从句，位于主句动词、介词或形容词之后。",
+          "core_points": [
+            "宾语从句的语序必须是陈述句语序（主语+谓语），即使主句是疑问句。",
+            "连接词：that（可省略）用于陈述句；whether/if 用于一般疑问句；疑问词（what, who, when, where, why, how）用于特殊疑问句。",
+            "当主句谓语动词是过去时态时，宾语从句的谓语动词通常也要用相应的过去时态（时态一致原则）。",
+            "宾语从句可以作动词、介词或形容词的宾语。",
+            "常见引导宾语从句的动词：say, think, know, tell, believe, ask, wonder, find out, hope, expect 等。"
+          ],
+          "example": {
+            "question": "Combine these two sentences: 'Do you know?' 'Where does he live?'",
+            "steps": [
+              "识别主句和从句：主句是'Do you know?'，从句是'Where does he live?'。",
+              "确定从句类型：特殊疑问句，需要用疑问词where连接。",
+              "将从句改为陈述句语序：Where does he live? → where he lives。",
+              "连接主句和从句。"
+            ],
+            "answer": "Do you know where he lives?"
+          },
+          "mistakes": [
+            {
+              "wrong": "He asked me what was my name.",
+              "correct": "He asked me what my name was."
+            },
+            {
+              "wrong": "I wonder if will she come.",
+              "correct": "I wonder if she will come."
+            }
+          ],
+          "memory_tip": "『宾语从句要记牢，陈述语序不能跑。疑问词来把桥搭，that/if/whether也重要。』",
+          "related": {
+            "prerequisite": "简单句结构，疑问句结构，时态基本概念",
+            "next": "主语从句、表语从句"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "单选",
+              "语法填空",
+              "句型转换",
+              "短文改错",
+              "书面表达"
+            ],
+            "scoring_key": "从句语序是核心考点，务必是『主语+谓语』。同时注意时态一致。",
+            "common_trap": "将宾语从句误用疑问句语序，或忽略时态一致。",
+            "real_exam_example": {
+              "source": "2023年某省中考真题",
+              "question": "Can you tell me _______ to the nearest post office?",
+              "answer": "how I can get",
+              "scoring_notes": "宾语从句需要用陈述语序，且连接词how引导方式状语从句。常见的错误是写成how can I get。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U4",
+      "unit_name": "虚拟语气：If I were you...",
+      "cards": [
+        {
+          "card_id": "C4",
+          "full_id": "G9S1-U4-C1",
+          "title": "虚拟语气：与现在事实相反的条件句",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "虚拟语气表示非真实条件或主观愿望，与事实相反或不可能发生的情况。九上主要学习与现在事实相反的虚拟语气。",
+          "core_points": [
+            "结构：If + 主语 + 动词过去式 (be动词用were)，主语 + would/could/should/might + 动词原形。",
+            "表示对现在或将来情况的假设，与事实相反。",
+            "If从句中的be动词无论主语单复数，一律用were。",
+            "主句中的情态动词would/could/should/might表示不同的语气。",
+            "常见用于提供建议的句型：If I were you, I would..."
+          ],
+          "example": {
+            "question": "Fill in the blanks: If I _______ (be) a bird, I _______ (fly) to the sky.",
+            "steps": [
+              "识别If从句，判断是虚拟语气。",
+              "判断是与现在事实相反的虚拟语气：If I were a bird (我不是鸟)。",
+              "If从句中be动词用were。",
+              "主句用would/could/should/might + 动词原形。"
+            ],
+            "answer": "were; would fly"
+          },
+          "mistakes": [
+            {
+              "wrong": "If I was you, I would accept it.",
+              "correct": "If I were you, I would accept it."
+            },
+            {
+              "wrong": "If he studied harder, he will pass the exam.",
+              "correct": "If he studied harder, he would pass the exam."
+            }
+          ],
+          "memory_tip": "『If后过去式（be用were），主句would/could/should/might原形动。』",
+          "related": {
+            "prerequisite": "条件状语从句（真实条件句）",
+            "next": "虚拟语气：与过去事实相反的条件句，wish句型"
+          },
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": [
+              "单选",
+              "语法填空",
+              "短文改错",
+              "书面表达"
+            ],
+            "scoring_key": "记住If从句中be动词一律用were，以及主句的情态动词加动词原形。",
+            "common_trap": "混淆虚拟语气与真实条件句的时态，尤其是在be动词的使用上。",
+            "real_exam_example": {
+              "source": "2022年某市中考真题",
+              "question": "If I _______ (have) enough money, I _______ (buy) a big house.",
+              "answer": "had; would buy",
+              "scoring_notes": "假设现在没有足够的钱，是与现在事实相反的虚拟语气。If从句用动词过去式，主句用would + 动词原形。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U5",
+      "unit_name": "被动语态的进阶用法",
+      "cards": [
+        {
+          "card_id": "C5",
+          "full_id": "G9S1-U5-C1",
+          "title": "被动语态的进阶用法：现在完成时与过去完成时",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "被动语态表示主语是动作的承受者。九上学习在不同时态下的被动语态，特别是完成时态。",
+          "core_points": [
+            "基本结构：be + 动词过去分词 (V-ed)。",
+            "现在完成时的被动语态：have/has + been + V-ed。表示动作已经完成且影响到现在。",
+            "过去完成时的被动语态：had + been + V-ed。表示在过去某个时间点之前动作已经完成。",
+            "使用by + 动作执行者，表示动作的发出者（可省略）。",
+            "语态转换的步骤：找出宾语作主语，根据时态选择be动词形式，将谓语动词变过去分词，原主语变by介词短语。"
+          ],
+          "example": {
+            "question": "Change the sentence into the passive voice: 'They have finished the project.'",
+            "steps": [
+              "找出宾语：the project。",
+              "确定时态：现在完成时。",
+              "将宾语作主语：The project。",
+              "根据时态和主语选择be动词形式：has been。",
+              "将谓语动词finish变为过去分词：finished。",
+              "原主语'They'变为by介词短语（可省略）：(by them)。"
+            ],
+            "answer": "The project has been finished (by them)."
+          },
+          "mistakes": [
+            {
+              "wrong": "The letter was wrote by him.",
+              "correct": "The letter was written by him."
+            },
+            {
+              "wrong": "The house has been built last year.",
+              "correct": "The house was built last year."
+            }
+          ],
+          "memory_tip": "『被动语态be V-ed，完成时态been来添。现在has/have been，过去had been要记全。』",
+          "related": {
+            "prerequisite": "一般现在时、一般过去时、一般将来时的被动语态，现在完成时和过去完成时的主动语态",
+            "next": "含情态动词的被动语态"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "单选",
+              "语法填空",
+              "短文改错",
+              "句型转换",
+              "书面表达"
+            ],
+            "scoring_key": "正确判断时态是关键，同时要熟记不规则动词的过去分词形式。",
+            "common_trap": "混淆主动语态和被动语态，尤其在复杂句中。时态与语态的综合考察。",
+            "real_exam_example": {
+              "source": "2023年某省中考真题",
+              "question": "By the time he arrived, the cake _______ (eat) up.",
+              "answer": "had been eaten",
+              "scoring_notes": "By the time引导时间状语从句，从句是过去时，主句表示在过去某个时间点前已经完成的动作，且蛋糕是被吃掉，所以用过去完成时的被动语态。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U7",
+      "unit_name": "含情态动词的被动语态",
+      "cards": [
+        {
+          "card_id": "C6",
+          "full_id": "G9S1-U7-C1",
+          "title": "含情态动词的被动语态",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "情态动词后的动词原形变为被动语态时，结构为「情态动词 + be + 动词过去分词」。",
+          "core_points": [
+            "结构：情态动词 (can, must, should, may, might, could, would, need, ought to) + be + V-ed。",
+            "表示『某事应该/可能/必须/可以被做』。",
+            "情态动词本身不发生变化，be动词保持原形。",
+            "常用于表达建议、义务、可能性等。",
+            "例：The problem should be solved. (这个问题应该被解决。)"
+          ],
+          "example": {
+            "question": "Change the sentence into the passive voice: 'We must protect our environment.'",
+            "steps": [
+              "找出宾语：our environment。",
+              "识别情态动词：must。",
+              "将宾语作主语：Our environment。",
+              "情态动词保持不变：must。",
+              "将主动动词protect变为被动语态形式：be protected。",
+              "原主语'We'变为by介词短语（可省略）：(by us)。"
+            ],
+            "answer": "Our environment must be protected (by us)."
+          },
+          "mistakes": [
+            {
+              "wrong": "The homework must be finish.",
+              "correct": "The homework must be finished."
+            },
+            {
+              "wrong": "This book can be read by anyone.",
+              "correct": "This book can be read by anyone."
+            }
+          ],
+          "memory_tip": "『情态动词被动语，be加分词是规矩。』",
+          "related": {
+            "prerequisite": "被动语态基本结构，情态动词的用法",
+            "next": "使役动词的被动语态"
+          },
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": [
+              "单选",
+              "语法填空",
+              "短文改错",
+              "句型转换"
+            ],
+            "scoring_key": "确保be动词是原形，且主语与动词的逻辑关系是被动。",
+            "common_trap": "遗漏be动词，或将be动词变位。",
+            "real_exam_example": {
+              "source": "2020年某市中考真题",
+              "question": "The new rules _______ (follow) by all students.",
+              "answer": "should be followed",
+              "scoring_notes": "根据句意，新规则应该被所有学生遵守，所以用情态动词should的被动语态形式。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U8",
+      "unit_name": "情态动词表推测",
+      "cards": [
+        {
+          "card_id": "C7",
+          "full_id": "G9S1-U8-C1",
+          "title": "情态动词表推测：可能性与确定性",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "情态动词can, must, may, might, could等可以用来表示对某事发生的可能性或确定性进行推测。",
+          "core_points": [
+            "must：表示“一定，必定”，语气最强，可能性最大（100%确定）。常用于肯定句。",
+            "can't：表示“不可能”，语气最强，可能性最小（几乎0%确定）。常用于否定句。",
+            "may/might/could：表示“可能”，可能性由强到弱，may可能性稍大，might/could可能性较小（50%或更低）。可用于肯定、否定和疑问句。",
+            "can：表示理论上的可能性或疑问（在疑问句中）。",
+            "推测正在发生的动作：情态动词 + be + V-ing。",
+            "推测已经发生的动作：情态动词 + have + V-ed。"
+          ],
+          "example": {
+            "question": "Choose the best answer: That tall man _______ be Mr. Li. He is much taller than Mr. Li.",
+            "steps": [
+              "分析句意：那个人比李先生高很多，所以「不可能是」李先生。",
+              "判断推测的语气：表示强烈否定、不可能。",
+              "选择正确的情态动词：can't。"
+            ],
+            "answer": "can't"
+          },
+          "mistakes": [
+            {
+              "wrong": "He must be ill, because he looks healthy.",
+              "correct": "He can't be ill, because he looks healthy."
+            },
+            {
+              "wrong": "It may raining outside.",
+              "correct": "It may be raining outside."
+            }
+          ],
+          "memory_tip": "『must肯定，can't否定；may/might/could可能，程度渐低。』",
+          "related": {
+            "prerequisite": "情态动词的基本用法",
+            "next": "情态动词的完成时态（should have done等）"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "阅读理解",
+              "短文改错"
+            ],
+            "scoring_key": "根据上下文语境判断推测的确定性高低和肯定/否定，尤其要注意must和can't的强烈语气。",
+            "common_trap": "混淆must not (禁止) 和 can't (不可能)；对may/might/could的细微差别把握不准。",
+            "real_exam_example": {
+              "source": "2023年某市中考真题",
+              "question": "The lights are off. He _______ be at home.",
+              "answer": "can't",
+              "scoring_notes": "灯关着，所以他不可能在家。表示强烈否定推测用can't。若用must，则表示灯关着，他一定在家，与事实不符。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U9",
+      "unit_name": "过去完成时",
+      "cards": [
+        {
+          "card_id": "C8",
+          "full_id": "G9S1-U9-C1",
+          "title": "过去完成时：过去的过去",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "过去完成时表示在过去某一时间点或动作之前已经完成的动作。",
+          "core_points": [
+            "结构：had + 动词过去分词 (V-ed)。",
+            "关键在于『过去的过去』：动作发生在过去某时或某动作之前。",
+            "常与by (by that time, by the end of last year), before, when, until, as soon as, after等时间状语从句连用。",
+            "在复合句中，主句用过去完成时，从句用一般过去时，表示主句动作发生在从句动作之前。",
+            "例：By the time I arrived, the train had already left. (我到达之前火车已经走了。)"
+          ],
+          "example": {
+            "question": "Fill in the blanks: She said that she _______ (visit) Beijing before.",
+            "steps": [
+              "分析句意：她说她「以前去过」北京。主句动词said是过去时。",
+              "判断动作发生顺序：她去北京的动作发生在她说之前。",
+              "选择正确时态：had visited。"
+            ],
+            "answer": "had visited"
+          },
+          "mistakes": [
+            {
+              "wrong": "When I got there, he left.",
+              "correct": "When I got there, he had left."
+            },
+            {
+              "wrong": "He had finished his homework before I came.",
+              "correct": "He had finished his homework before I came."
+            }
+          ],
+          "memory_tip": "『过去完成had V-ed，过去的过去是特点。时间状语by/before，顺序分明不混乱。』",
+          "related": {
+            "prerequisite": "现在完成时，一般过去时",
+            "next": "过去将来时"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "语法填空",
+              "阅读理解",
+              "短文改错"
+            ],
+            "scoring_key": "关键是理解动作的先后顺序，特别是与一般过去时结合考察时。",
+            "common_trap": "混淆过去完成时与一般过去时，当动作有明显先后顺序时，发生在前的用过去完成时。",
+            "real_exam_example": {
+              "source": "2022年某市中考真题",
+              "question": "He told me that he _______ (never be) to Shanghai before.",
+              "answer": "had never been",
+              "scoring_notes": "主句told是过去时，从句表示他告诉别人之前从未去过上海，是『过去的过去』，故用过去完成时。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U10",
+      "unit_name": "定语从句：关系代词 who/whom/whose",
+      "cards": [
+        {
+          "card_id": "C9",
+          "full_id": "G9S1-U10-C1",
+          "title": "定语从句：修饰人的关系代词 who/whom/whose",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "定语从句修饰先行词（名词或代词），在句中作定语，通常由关系词引导，置于先行词之后。",
+          "core_points": [
+            "who：在定语从句中作主语，指人。例：The boy who is standing there is my brother.",
+            "whom：在定语从句中作宾语，指人。例：The man whom I met yesterday is a doctor. (口语中常用who或省略)",
+            "whose：在定语从句中作定语，表示「…的」，指人或物。例：This is the girl whose father is a teacher.",
+            "关系代词在从句中充当成分（主语、宾语、定语），同时起连接主句和从句的作用。",
+            "先行词是人时，who/whom/whose是主要选择。",
+            "当关系代词在定语从句中作宾语时，可以省略（如 whom I met yesterday）。"
+          ],
+          "example": {
+            "question": "Choose the best answer: This is the student _______ won the first prize in the competition.",
+            "steps": [
+              "分析先行词：the student (指人)。",
+              "分析从句结构：won the first prize (谓语动词)。从句缺少主语。",
+              "选择在从句中作主语的关系代词：who。"
+            ],
+            "answer": "who"
+          },
+          "mistakes": [
+            {
+              "wrong": "The girl whom is singing is my sister.",
+              "correct": "The girl who is singing is my sister."
+            },
+            {
+              "wrong": "He is the person whose I want to talk to.",
+              "correct": "He is the person whom I want to talk to."
+            }
+          ],
+          "memory_tip": "『人称关系代词记心间，who主whom宾whose的。』",
+          "related": {
+            "prerequisite": "简单句，复合句，形容词作定语",
+            "next": "定语从句：关系代词 which/that"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "单选",
+              "语法填空",
+              "短文改错",
+              "阅读理解"
+            ],
+            "scoring_key": "根据先行词是人还是物，以及关系代词在从句中作何成分来选择。",
+            "common_trap": "混淆who和whom的用法，尤其是在作宾语时who和whom都可能出现。",
+            "real_exam_example": {
+              "source": "2023年某省中考真题",
+              "question": "She is the teacher _______ I told you about.",
+              "answer": "whom/who/that",
+              "scoring_notes": "先行词是the teacher（人），关系代词在从句中作介词about的宾语。作宾语时可用whom，口语中常用who，that也可，且均可省略。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U11",
+      "unit_name": "定语从句：关系代词 which/that 和关系副词",
+      "cards": [
+        {
+          "card_id": "C10",
+          "full_id": "G9S1-U11-C1",
+          "title": "定语从句：修饰物和地点的关系词",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "定语从句使用which/that修饰物，使用when/where/why修饰时间/地点/原因。",
+          "core_points": [
+            "which：在定语从句中作主语或宾语，指物。例：This is the book which I borrowed from the library.",
+            "that：在定语从句中作主语或宾语，指人或物，可替代who/whom/which。例：This is the book that I borrowed.",
+            "that不可替代的情况：1. 介词后；2. 非限制性定语从句；3. 先行词是those/all等。",
+            "when：在定语从句中作时间状语，先行词是时间词。例：I'll never forget the day when we first met.",
+            "where：在定语从句中作地点状语，先行词是地点词。例：This is the school where I studied.",
+            "why：在定语从句中作原因状语，先行词是reason。例：Tell me the reason why you were late.",
+            "关系代词作宾语时可省略；关系副词不可省略。"
+          ],
+          "example": {
+            "question": "Choose the best answer: This is the house _______ he was born.",
+            "steps": [
+              "分析先行词：the house (地点)。",
+              "分析从句结构：he was born (完整句子，不缺少主语或宾语)。从句表示『他出生的地方』，在从句中作地点状语。",
+              "选择在从句中作地点状语的关系副词：where。"
+            ],
+            "answer": "where"
+          },
+          "mistakes": [
+            {
+              "wrong": "This is the book that I borrowed it from the library.",
+              "correct": "This is the book that I borrowed from the library."
+            },
+            {
+              "wrong": "I remember the time which we first met.",
+              "correct": "I remember the time when we first met."
+            }
+          ],
+          "memory_tip": "『物用which/that，人也that能代。时间when，地点where，原因why，记住它们不奇怪。』",
+          "related": {
+            "prerequisite": "定语从句：关系代词 who/whom/whose",
+            "next": "非限制性定语从句"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "单选",
+              "语法填空",
+              "短文改错",
+              "阅读理解"
+            ],
+            "scoring_key": "根据先行词和关系词在从句中充当的成分（主语/宾语/状语）来选择。注意that不能省略和不能用的情况。",
+            "common_trap": "混淆关系代词和关系副词，当从句缺少主语或宾语时用关系代词，当从句完整且关系词作状语时用关系副词。",
+            "real_exam_example": {
+              "source": "2021年某市中考真题",
+              "question": "The factory _______ they visited last year is now closed.",
+              "answer": "which/that",
+              "scoring_notes": "先行词是the factory（物），从句they visited last year中缺少visited的宾语，故用which或that。作宾语可省略。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U12",
+      "unit_name": "主谓一致",
+      "cards": [
+        {
+          "card_id": "C11",
+          "full_id": "G9S1-U12-C1",
+          "title": "主谓一致：复杂主语与特殊情况",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "谓语动词的人称和数必须与主语保持一致，九上主要考察复杂主语和特殊情况。",
+          "core_points": [
+            "就近原则：由or, nor, either...or..., neither...nor..., not only...but also...连接的并列主语，谓语动词与靠近它的主语保持一致。",
+            "整体原则：由and连接的并列主语，若指同一个人、同一事物、同一概念或同一道菜，谓语动词用单数。",
+            "主语与谓语之间插入介词短语、从句等修饰成分时，谓语动词仍与主语保持一致。",
+            "部分倒装句：There be句型中，谓语be动词与be后的第一个名词保持一致。",
+            "集合名词：family, class, team, group等，作整体看时谓语用单数，指成员个体时谓语用复数。",
+            "度量衡、时间、金钱等作整体概念时谓语用单数。例：Ten years is a long time."
+          ],
+          "example": {
+            "question": "Choose the best answer: Not only Jim but also his parents _______ (be) going to the party.",
+            "steps": [
+              "识别主语结构：Not only...but also...连接并列主语。",
+              "应用就近原则：谓语动词与靠近它的主语his parents保持一致。",
+              "选择正确形式：are。"
+            ],
+            "answer": "are"
+          },
+          "mistakes": [
+            {
+              "wrong": "The number of students are increasing.",
+              "correct": "The number of students is increasing."
+            },
+            {
+              "wrong": "Each of us have a dream.",
+              "correct": "Each of us has a dream."
+            }
+          ],
+          "memory_tip": "『主谓一致三原则：语法、意义、就近。集合名词看整体，度量时间是单身。』",
+          "related": {
+            "prerequisite": "主谓一致的基本原则（三单，复数），名词单复数",
+            "next": "倒装句的特殊主谓一致"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "单选",
+              "语法填空",
+              "短文改错",
+              "阅读理解"
+            ],
+            "scoring_key": "准确判断句子的真正主语，并根据就近原则、整体原则等特殊规则进行判断。",
+            "common_trap": "被插入语、介词短语等干扰，误判主语。集合名词的单复数混淆。",
+            "real_exam_example": {
+              "source": "2023年某省中考真题",
+              "question": "The news about the accident _______ (be) spread quickly.",
+              "answer": "was",
+              "scoring_notes": "主语是The news，是不可数名词，谓语动词用单数。且事故已发生，所以用一般过去时。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U13",
+      "unit_name": "构词法：前缀与后缀",
+      "cards": [
+        {
+          "card_id": "C12",
+          "full_id": "G9S1-U13-C1",
+          "title": "构词法：通过前缀和后缀扩大词汇量",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "构词法是通过给词根添加前缀或后缀来形成新词，从而改变词义或词性。",
+          "core_points": [
+            "常见否定前缀：un-, dis-, in-, im-, il-, ir-, non- (如 unhappy, dislike, impossible, illegal, irregular, non-stop)。",
+            "常见表示重复/相反/过度等前缀：re- (redo), mis- (misunderstand), over- (overeat), under- (underestimate)。",
+            "常见名词后缀：-er/-or (teacher, actor), -ist (artist), -ment (development), -ness (kindness), -tion/-sion (information, decision), -ence/-ance (difference, importance)。",
+            "常见形容词后缀：-ful (helpful), -less (careless), -able/-ible (comfortable, sensible), -y (sunny), -ous (famous), -ive (active)。",
+            "常见副词后缀：-ly (quickly)。",
+            "常见动词后缀：-en (widen), -ify (simplify), -ize (realize)。",
+            "通过构词法可以有效猜测词义、进行词性转换，是完形填空和语法填空的常考点。"
+          ],
+          "example": {
+            "question": "Fill in the blank with the correct form of the word in brackets: It's _______ (possible) for me to finish the work in an hour.",
+            "steps": [
+              "分析句意：一个小时内完成这项工作是「不可能的」。",
+              "识别词根：possible (可能的)。",
+              "根据句意需要表达否定意义，且词根以p开头，选择否定前缀im-。",
+              "构成新词：impossible。"
+            ],
+            "answer": "impossible"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is a real help person.",
+              "correct": "He is a really helpful person."
+            },
+            {
+              "wrong": "I dislike to do homework.",
+              "correct": "I dislike doing homework."
+            }
+          ],
+          "memory_tip": "『前缀改义，后缀变性。否定un/dis/in，名词er/ment/tion，形容ful/less/able。』",
+          "related": {
+            "prerequisite": "词性（名词、动词、形容词、副词）的基本概念",
+            "next": "词根词缀的更深入学习"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "完形填空",
+              "语法填空",
+              "阅读理解",
+              "短文改错"
+            ],
+            "scoring_key": "根据句子的语法结构和语境，判断所需词的词性，再选择合适的前缀或后缀。",
+            "common_trap": "混淆不同否定前缀的用法，或误判词性，导致词形变化错误。",
+            "real_exam_example": {
+              "source": "2023年某市中考真题",
+              "question": "We should learn to be _______ (care) when crossing the street.",
+              "answer": "careful",
+              "scoring_notes": "be动词后接形容词作表语，表示「我们应该小心」。careful是形容词，意为「小心的」。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U14",
+      "unit_name": "常见动词短语与固定搭配",
+      "cards": [
+        {
+          "card_id": "C13",
+          "full_id": "G9S1-U14-C1",
+          "title": "中考高频动词短语与固定搭配",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "动词短语（phrasal verbs）是由动词与介词或副词组成的短语，其意义往往与原动词不同，是中考词汇和完形填空的重点。",
+          "core_points": [
+            "look after (照顾), look for (寻找), look forward to (期待), look up (查阅), look out (当心)。",
+            "put on (穿上), put off (推迟), put out (扑灭), put up (张贴/搭建)。",
+            "take off (脱下/起飞), take out (取出), take up (占据/开始从事), take care of (照顾)。",
+            "turn on (打开), turn off (关掉), turn up (调大/出现), turn down (调小/拒绝)。",
+            "give up (放弃), give away (赠送), give out (分发)。",
+            "get up (起床), get on/off (上/下车), get along with (与…相处), get over (克服)。",
+            "make up (编造/弥补), make a decision (做决定), make a difference (有所作为)。",
+            "be interested in (对…感兴趣), be good at (擅长), be afraid of (害怕), be famous for (因…而著名)。"
+          ],
+          "example": {
+            "question": "Choose the best answer: Don't _______ the meeting until next week.",
+            "steps": [
+              "分析句意：不要把会议「推迟」到下周。",
+              "识别选项中表示「推迟」的动词短语。",
+              "选择正确短语：put off。"
+            ],
+            "answer": "put off"
+          },
+          "mistakes": [
+            {
+              "wrong": "She looks for her little brother.",
+              "correct": "She looks after her little brother."
+            },
+            {
+              "wrong": "He gave up to smoke.",
+              "correct": "He gave up smoking."
+            }
+          ],
+          "memory_tip": "『动词短语像小精灵，动词介副意义新。多读多练多总结，完形阅读得高分。』",
+          "related": {
+            "prerequisite": "基础动词词汇，介词和副词的基本用法",
+            "next": "更复杂的动词短语和习语"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "完形填空",
+              "单选",
+              "阅读理解",
+              "语法填空",
+              "短文改错",
+              "书面表达"
+            ],
+            "scoring_key": "理解动词短语的整体含义，而不是单个词的字面意思。注意介词或副词的变化带来的意义差异。",
+            "common_trap": "混淆形近或意近的动词短语，如look for与look after，put on与take off。",
+            "real_exam_example": {
+              "source": "2022年某市中考真题",
+              "question": "We should _______ the elderly and help them when they are in need.",
+              "answer": "look after",
+              "scoring_notes": "根据句意，我们应该『照顾』老人并在他们需要时帮助他们。look after意为『照顾』，符合语境。"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

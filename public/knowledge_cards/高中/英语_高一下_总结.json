@@ -1,0 +1,600 @@
+{
+  "subject": "英语",
+  "grade": "高一",
+  "semester": "下册",
+  "textbook": "人教版",
+  "grade_short": "高一下",
+  "card_pack": "知识总结",
+  "description": "高中高一下册英语高考考点笔记总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "非谓语动词：不定式",
+      "cards": [
+        {
+          "card_id": "01",
+          "full_id": "G1S2-NFV-01",
+          "title": "不定式作宾语、表语、宾语补足语",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "不定式 (to do) 在句中充当宾语、表语或宾语补足语，表示未发生或目的。",
+          "core_points": [
+            "作宾语：某些动词后只能跟不定式作宾语，如 decide, want, agree, promise, manage, pretend 等。例句：He decided 「to go」 abroad.",
+            "作表语：主系表结构中，表语表示主语的内容或将要发生的动作。例句：My dream is 「to travel」 around the world.",
+            "作宾语补足语：在「动词+宾语+不定式」结构中，不定式补充说明宾语。例句：I advised him 「to take」 a rest.",
+            "注意：感官动词 (see, hear, watch) 和使役动词 (make, let, have) 后接不带to的不定式作宾补。例句：I saw him 「enter」 the room."
+          ],
+          "example": {
+            "question": "The teacher encouraged students _______ (participate) in the debate.",
+            "steps": [
+              "分析句子结构：主语 (The teacher) + 谓语 (encouraged) + 宾语 (students)。",
+              "识别动词用法：encourage sb to do sth 是固定搭配。",
+              "确定非谓语动词形式：应使用不定式作宾语补足语。"
+            ],
+            "answer": "to participate"
+          },
+          "mistakes": [
+            {
+              "wrong": "I want him taking a rest.",
+              "correct": "I want him to take a rest."
+            },
+            {
+              "wrong": "She made me to laugh.",
+              "correct": "She made me laugh."
+            }
+          ],
+          "memory_tip": "「动宾补，表主语，想做就用to do。感使不带to，高考常考要记牢。」",
+          "related": {
+            "prerequisite": "谓语动词基本概念",
+            "next": "不定式作主语、状语、定语"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错"
+            ],
+            "scoring_key": "「动词固定搭配」「区分不定式与动名词」「感官/使役动词后不定式省略to」",
+            "common_trap": "「感官动词/使役动词后不定式省略to的误用」",
+            "real_exam_example": {
+              "source": "2022年全国甲卷 语法填空",
+              "question": "As a child, I was taught _______ (not interrupt) others when they were speaking.",
+              "answer": "not to interrupt",
+              "scoring_notes": "考察不定式的否定形式和作宾语补足语的用法。teach sb to do sth，否定为 teach sb not to do sth。"
+            }
+          }
+        },
+        {
+          "card_id": "02",
+          "full_id": "G1S2-NFV-02",
+          "title": "不定式作主语、状语、定语及独立主格",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "不定式 (to do) 还能在句中充当主语、状语、定语，或构成独立主格结构。",
+          "core_points": [
+            "作主语：常用于It作形式主语的句型。例句：It's important 「to learn」 English well.",
+            "作状语：表示目的、结果、原因、条件、程度等。例句：He studied hard 「to pass」 the exam. (目的)",
+            "作定语：修饰名词，通常置于被修饰词之后。例句：I have a lot of homework 「to do」.",
+            "逻辑主语：不定式的逻辑主语常通过 for/of sb 来表示。例句：It's kind 「of you to help」 me. (of sb 表示主语的品格)"
+          ],
+          "example": {
+            "question": "It is our duty _______ (protect) the environment for future generations.",
+            "steps": [
+              "分析句型：It is + 形容词 + for sb/of sb + to do sth。",
+              "识别主语：It 作形式主语，真正主语是后面的不定式。",
+              "确定非谓语动词形式：应使用不定式作真正主语。"
+            ],
+            "answer": "to protect"
+          },
+          "mistakes": [
+            {
+              "wrong": "He worked hard for pass the exam.",
+              "correct": "He worked hard to pass the exam."
+            },
+            {
+              "wrong": "It's difficult for understand this problem.",
+              "correct": "It's difficult to understand this problem."
+            }
+          ],
+          "memory_tip": "「主状定，形式主语常出现，目的结果是状语，for/of逻辑主语清。」",
+          "related": {
+            "prerequisite": "不定式作宾语、表语、补语",
+            "next": "动名词作主语、宾语、表语、定语"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错",
+              "书面表达"
+            ],
+            "scoring_key": "「识别不定式在句中的功能」「形式主语it的正确使用」「不定式逻辑主语的表达」",
+            "common_trap": "「不定式作状语表示结果时与so...that的区别」「逻辑主语的for/of混淆」",
+            "real_exam_example": {
+              "source": "2021年全国乙卷 语法填空",
+              "question": "It is not easy for a young person _______ (live) independently in a big city.",
+              "answer": "to live",
+              "scoring_notes": "考察it作形式主语，真正主语为不定式，且for a young person为不定式的逻辑主语。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "非谓语动词：动名词与分词",
+      "cards": [
+        {
+          "card_id": "03",
+          "full_id": "G1S2-NFV-03",
+          "title": "动名词作主语、宾语、表语、定语",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "动名词 (-ing形式) 具有名词和动词双重特征，可在句中作主语、宾语、表语、定语。",
+          "core_points": [
+            "作主语：表示抽象的动作或习惯。例句：「Reading」 is my favorite hobby.",
+            "作宾语：某些动词 (e.g., enjoy, finish, mind, avoid, suggest, admit, deny) 及介词后只能跟动名词作宾语。例句：We enjoy 「playing」 football after school.",
+            "作表语：表示主语的内容或性质。例句：My hobby is 「reading」.",
+            "作定语：修饰名词，表示用途或正在进行的动作。例句：a 「reading」 room (阅读室), a 「sleeping」 baby (正在睡觉的婴儿)。",
+            "注意：动名词的逻辑主语常通过物主代词或名词所有格表示。例句：He insisted on 「my going」 with him."
+          ],
+          "example": {
+            "question": "She is good at _______ (solve) difficult problems.",
+            "steps": [
+              "分析句子结构：be good at 是固定搭配。",
+              "识别介词：介词 at 后必须接名词或动名词。",
+              "确定非谓语动词形式：应使用动名词作介词宾语。"
+            ],
+            "answer": "solving"
+          },
+          "mistakes": [
+            {
+              "wrong": "He finished to do his homework.",
+              "correct": "He finished doing his homework."
+            },
+            {
+              "wrong": "I'm looking forward to meet you.",
+              "correct": "I'm looking forward to meeting you."
+            }
+          ],
+          "memory_tip": "「介宾主表定，ing形式不能忘，动词介词是标志。」",
+          "related": {
+            "prerequisite": "不定式",
+            "next": "分词作定语、状语、补语"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "语法填空",
+              "完形填空",
+              "短文改错"
+            ],
+            "scoring_key": "「掌握动词后跟动名词的固定搭配」「介词后只能跟动名词」",
+            "common_trap": "「动名词与不定式作宾语时的辨析 (e.g., remember to do/doing, stop to do/doing)」「to作为介词而非不定式符号时的辨析」",
+            "real_exam_example": {
+              "source": "2020年全国I卷 语法填空",
+              "question": "Most people enjoy _______ (listen) to music while working out.",
+              "answer": "listening",
+              "scoring_notes": "考察enjoy后接动名词作宾语的固定用法。"
+            }
+          }
+        },
+        {
+          "card_id": "04",
+          "full_id": "G1S2-NFV-04",
+          "title": "分词作定语、状语、补语",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "分词 (现在分词-ing, 过去分词-ed) 具有动词和形容词双重特征，可在句中作定语、状语、补语。",
+          "core_points": [
+            "作定语：现在分词表示主动或正在进行；过去分词表示被动或已完成。例句：a 「sleeping」 child (正在睡觉的), a 「broken」 window (被打碎的)。",
+            "作状语：表示时间、原因、条件、让步、伴随等，可置于句首或句末，其逻辑主语与句子主语一致。例句：「Having finished」 his work, he went home. (表时间)",
+            "作宾语补足语：在「动词+宾语+分词」结构中，现在分词表示正在进行或主动，过去分词表示被动或已完成。例句：I saw him 「playing」 football. (主动进行) I had my hair 「cut」. (被动完成)",
+            "注意：分词作状语时，要确保其逻辑主语与句子的主语一致，否则易犯「悬垂分词」错误。"
+          ],
+          "example": {
+            "question": "_______ (surprise) by the sudden noise, the little girl cried.",
+            "steps": [
+              "分析句子结构：逗号前后是两个独立的逻辑部分。",
+              "判断分词与主语的关系：the little girl 被 noise 惊吓，是被动的。",
+              "确定分词形式：被动且已完成，应使用过去分词作状语。"
+            ],
+            "answer": "Surprised"
+          },
+          "mistakes": [
+            {
+              "wrong": "The boy excited shouted loudly.",
+              "correct": "The excited boy shouted loudly."
+            },
+            {
+              "wrong": "Walking along the street, a car hit me.",
+              "correct": "Walking along the street, I was hit by a car."
+            }
+          ],
+          "memory_tip": "「主动进行-ing，被动完成-ed，状语定语补语都得它，逻辑主语要一致。」",
+          "related": {
+            "prerequisite": "动名词",
+            "next": "情态动词基本用法"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错",
+              "阅读理解",
+              "书面表达"
+            ],
+            "scoring_key": "「根据分词与被修饰词/句子主语的关系判断主动/被动、进行/完成」「避免悬垂分词」",
+            "common_trap": "「现在分词与过去分词的混淆 (e.g., interesting vs. interested)」「分词作状语逻辑主语不一致，导致句意不清」",
+            "real_exam_example": {
+              "source": "2023年全国新课标I卷 语法填空",
+              "question": "The newly _______ (develop) technology will greatly improve our life.",
+              "answer": "developed",
+              "scoring_notes": "考察过去分词作定语。technology是被develop的，所以用过去分词表示被动。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S3",
+      "unit_name": "情态动词",
+      "cards": [
+        {
+          "card_id": "05",
+          "full_id": "G1S2-MV-01",
+          "title": "基本情态动词：能力、许可、义务、建议",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "情态动词表示说话人的语气和态度，如能力、许可、义务、建议等。",
+          "core_points": [
+            "`can/could`: 表示能力、许可、可能性。例句：I 「can」 speak English. Could I use your phone?",
+            "`may/might`: 表示许可、可能性。例句：You 「may」 leave now. It 「might」 rain tomorrow.",
+            "`must/have to`: 表示义务、必要性 (must语气更强，have to表示客观需要)。例句：You 「must」 finish your homework. We 「have to」 wear school uniforms.",
+            "`should/ought to`: 表示建议、义务。例句：You 「should」 study harder. We 「ought to」 help each other.",
+            "情态动词后跟动词原形，否定句加not，疑问句情态动词提前。"
+          ],
+          "example": {
+            "question": "You _______ (obey) the traffic rules; it's everyone's responsibility.",
+            "steps": [
+              "分析语境：句子强调「遵守交通规则是每个人的责任」，带有强制性或义务性。",
+              "选择情态动词：表示义务或必要性，可选用 must 或 should。",
+              "确定动词形式：情态动词后接动词原形。"
+            ],
+            "answer": "must obey"
+          },
+          "mistakes": [
+            {
+              "wrong": "He musts study hard.",
+              "correct": "He must study hard."
+            },
+            {
+              "wrong": "I can to swim.",
+              "correct": "I can swim."
+            }
+          ],
+          "memory_tip": "「情态动词原形跟，表意不同用法分，能力许可义务劝，语境判断是关键。」",
+          "related": {
+            "prerequisite": "动词基本概念",
+            "next": "情态动词表推测和虚拟"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "语法填空",
+              "完形填空",
+              "短文改错"
+            ],
+            "scoring_key": "「根据语境准确选择情态动词表达的语气和含义」「情态动词后接动词原形」",
+            "common_trap": "「must与have to的区别 (主观义务 vs. 客观要求)」「can与be able to的区别 (能力 vs. 能够做到)」",
+            "real_exam_example": {
+              "source": "2022年全国乙卷 语法填空",
+              "question": "If you want to pass the exam, you _______ (study) harder.",
+              "answer": "should study",
+              "scoring_notes": "考察表示建议或义务的情态动词，should study 更符合语境。"
+            }
+          }
+        },
+        {
+          "card_id": "06",
+          "full_id": "G1S2-MV-02",
+          "title": "情态动词表推测和虚拟语气",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "情态动词可用于表示对过去或现在动作的推测，以及用于虚拟语气。",
+          "core_points": [
+            "对现在/将来推测：`must/can't/may/might/could + 动词原形`。例句：He 「must be」 ill. (肯定推测) She 「can't be」 serious. (否定推测)",
+            "对过去推测：`must/can't/may/might/could + have done`。例句：He 「must have gone」 home. (肯定推测) They 「might have missed」 the bus. (可能性推测)",
+            "虚拟语气：`should have done` (本应该做而未做)，`could have done` (本可以做而未做)，`might have done` (本可能做而未做)。例句：You 「should have told」 me earlier.",
+            "注意：`must`表示「一定，肯定」，`can't`表示「不可能」，`may/might/could`表示「可能」。"
+          ],
+          "example": {
+            "question": "She didn't answer the phone. She _______ (sleep) when I called.",
+            "steps": [
+              "分析语境：过去某个时间点发生的事情，对过去动作进行推测。",
+              "判断可能性：她没接电话，很可能在睡觉。",
+              "选择情态动词及形式：表示对过去动作的推测，用 `might/may/could have done` 或 `must have done`。这里是可能性推测，用might have been sleeping更贴切。"
+            ],
+            "answer": "might have been sleeping (或 must have been sleeping，取决于语境中的确定性)"
+          },
+          "mistakes": [
+            {
+              "wrong": "He must forget his key yesterday.",
+              "correct": "He must have forgotten his key yesterday."
+            },
+            {
+              "wrong": "You needn't to worry about it.",
+              "correct": "You needn't worry about it."
+            }
+          ],
+          "memory_tip": "「推测过去have done，虚拟语气也同伴；肯定must，否定can't，可能may/might/could。」",
+          "related": {
+            "prerequisite": "基本情态动词用法",
+            "next": "条件句虚拟语气"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "完形填空",
+              "短文改错",
+              "阅读理解"
+            ],
+            "scoring_key": "「根据语境和时间状语判断推测的时态 (do vs. have done)」「区分肯定推测与否定推测」",
+            "common_trap": "「`must have done`与`should have done`的含义混淆 (前者是肯定推测，后者是虚拟语气)」「否定推测用`can't`而非`mustn't`」",
+            "real_exam_example": {
+              "source": "2023年全国新课标II卷 语法填空",
+              "question": "He looks very tired. He _______ (work) late last night.",
+              "answer": "must have worked",
+              "scoring_notes": "考察对过去动作的肯定推测，用 must have done 结构。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S4",
+      "unit_name": "虚拟语气入门",
+      "cards": [
+        {
+          "card_id": "07",
+          "full_id": "G1S2-SUB-01",
+          "title": "条件句虚拟语气 (If条件句)",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "条件句虚拟语气表示与事实相反或不可能发生的情况，分为与现在、过去、将来事实相反。",
+          "core_points": [
+            "与现在事实相反：If从句用一般过去时 (be动词用were)，主句用`would/could/might/should + 动词原形`。例句：If I 「were」 you, I 「would accept」 the offer.",
+            "与过去事实相反：If从句用过去完成时，主句用`would/could/might/should + have done`。例句：If I 「had known」, I 「would have told」 you.",
+            "与将来事实相反：If从句用一般过去时/`should + 动词原形`/`were to do`，主句用`would/could/might/should + 动词原形`。例句：If it 「should rain」 tomorrow, the match 「would be」 cancelled.",
+            "注意：有时主从句时态不一致 (错综时间虚拟语气)。例句：If he 「had studied」 hard last year, he 「would be」 a college student now."
+          ],
+          "example": {
+            "question": "If he _______ (study) harder last year, he _______ (pass) the exam.",
+            "steps": [
+              "分析语境：句子描述的是与「去年」的事实相反的情况，是对过去的假设。",
+              "确定虚拟语气的类型：与过去事实相反的虚拟语气。",
+              "确定主从句时态：If从句用过去完成时 (had done)，主句用 `would/could/might/should + have done`。"
+            ],
+            "answer": "had studied; would have passed"
+          },
+          "mistakes": [
+            {
+              "wrong": "If I was you, I would do it.",
+              "correct": "If I were you, I would do it."
+            },
+            {
+              "wrong": "If he had come, I would tell him.",
+              "correct": "If he had come, I would have told him."
+            }
+          ],
+          "memory_tip": "「现在过去将来反，时态后移是关键。be动词只用were，主从搭配要成双。」",
+          "related": {
+            "prerequisite": "情态动词表推测",
+            "next": "wish/as if/It's time 虚拟语气"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错",
+              "书面表达"
+            ],
+            "scoring_key": "「根据时间状语或语境判断虚拟语气的类型」「主从句时态的正确搭配」",
+            "common_trap": "「be动词在虚拟语气中只用were」「错综时间虚拟语气判断失误」「省略if的倒装句 (Were I..., Had I...等)」",
+            "real_exam_example": {
+              "source": "2021年全国甲卷 语法填空",
+              "question": "If I _______ (know) about the problem earlier, I would have helped you.",
+              "answer": "had known",
+              "scoring_notes": "考察与过去事实相反的虚拟语气，If从句用过去完成时。"
+            }
+          }
+        },
+        {
+          "card_id": "08",
+          "full_id": "G1S2-SUB-02",
+          "title": "wish/as if/It's time 等词后的虚拟语气",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在`wish`, `as if/as though`, `It's (high) time` 等特定表达后，常使用虚拟语气。",
+          "core_points": [
+            "`wish` 后的虚拟语气：对现在/将来用一般过去时；对过去用过去完成时。例句：I wish I 「were」 taller. I wish I 「had told」 her the truth.",
+            "`as if/as though` 后的虚拟语气：与现在事实相反用一般过去时；与过去事实相反用过去完成时。例句：He acts as if he 「knew」 everything. She looked as if she 「had seen」 a ghost.",
+            "`It's (high/about) time` 后的虚拟语气：用一般过去时。例句：It's high time we 「went」 home.",
+            "注意：`would rather` 后也常接虚拟语气，表示「宁愿」。例句：I'd rather you 「didn't tell」 him."
+          ],
+          "example": {
+            "question": "I wish I _______ (not make) that mistake yesterday.",
+            "steps": [
+              "分析语境：wish 表达对过去发生的事情的遗憾。",
+              "确定虚拟语气的类型：对过去事实的虚拟。",
+              "确定动词形式：用过去完成时 (had done) 的否定形式。"
+            ],
+            "answer": "hadn't made"
+          },
+          "mistakes": [
+            {
+              "wrong": "It's time we go home.",
+              "correct": "It's time we went home."
+            },
+            {
+              "wrong": "He talks as if he knows everything.",
+              "correct": "He talks as if he knew everything."
+            }
+          ],
+          "memory_tip": "「wish想，as if像，time该，统统过去表虚幻，时间点是判断关。」",
+          "related": {
+            "prerequisite": "条件句虚拟语气",
+            "next": "被动语态基本结构与时态"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错",
+              "书面表达"
+            ],
+            "scoring_key": "「识别特定句型后的虚拟语气要求」「根据语境判断虚拟的时间点」",
+            "common_trap": "「`wish`后虚拟与条件句虚拟时态的混淆」「`as if`后有时也用陈述语气 (表示可能性大，非虚拟)」",
+            "real_exam_example": {
+              "source": "2020年全国II卷 语法填空",
+              "question": "It's high time we _______ (take) action to protect the environment.",
+              "answer": "took",
+              "scoring_notes": "考察It's high time后接虚拟语气，动词用一般过去时。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S5",
+      "unit_name": "被动语态",
+      "cards": [
+        {
+          "card_id": "09",
+          "full_id": "G1S2-PAS-01",
+          "title": "基本被动语态结构与常见时态",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "被动语态表示主语是动作的承受者，基本结构为「be + 动词的过去分词」。",
+          "core_points": [
+            "基本结构：`be + V-ed` (动词的过去分词)。",
+            "一般现在时：`am/is/are + V-ed`。例句：English 「is spoken」 worldwide.",
+            "一般过去时：`was/were + V-ed`。例句：The letter 「was written」 yesterday.",
+            "一般将来时：`will be + V-ed`。例句：The work 「will be finished」 tomorrow.",
+            "现在进行时：`am/is/are + being + V-ed`。例句：The house 「is being built」.",
+            "现在完成时：`have/has + been + V-ed`。例句：The book 「has been published」.",
+            "情态动词的被动语态：`情态动词 + be + V-ed`。例句：It 「must be done」.",
+            "被动语态的标志：动作发出者不明确，或强调动作承受者。"
+          ],
+          "example": {
+            "question": "A new library _______ (build) in our city last year.",
+            "steps": [
+              "分析语境：句子中提到「last year」，表明是过去发生的动作。",
+              "判断主谓关系：library 是被 build 的，是被动关系。",
+              "确定时态和语态：过去时态的被动语态，且主语 library 为单数。"
+            ],
+            "answer": "was built"
+          },
+          "mistakes": [
+            {
+              "wrong": "The door is open by him.",
+              "correct": "The door is opened by him."
+            },
+            {
+              "wrong": "Many trees planted last spring.",
+              "correct": "Many trees were planted last spring."
+            }
+          ],
+          "memory_tip": "「be加过去分词，动作承受者是主语，时态变化看be动词。」",
+          "related": {
+            "prerequisite": "动词时态",
+            "next": "特殊被动语态结构"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "语法填空",
+              "完形填空",
+              "短文改错",
+              "阅读理解"
+            ],
+            "scoring_key": "「根据语境判断主动/被动关系」「根据时间状语选择正确的被动语态时态」",
+            "common_trap": "「被动语态中be动词形式与主语单复数不一致」「忽略动词的过去分词形式」",
+            "real_exam_example": {
+              "source": "2023年全国新课标I卷 语法填空",
+              "question": "The new bridge _______ (expect) to be completed next month.",
+              "answer": "is expected",
+              "scoring_notes": "考察一般现在时被动语态。bridge是被expect的，且expect to do sth是常见搭配。"
+            }
+          }
+        },
+        {
+          "card_id": "10",
+          "full_id": "G1S2-PAS-02",
+          "title": "特殊被动语态结构：双宾语、复合宾语、动词短语",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "某些动词或结构在变为被动语态时有特殊处理方式，如双宾语动词、复合宾语动词和动词短语。",
+          "core_points": [
+            "双宾语动词：`give, tell, show, offer` 等动词，可将间接宾语或直接宾语作主语。例句：He 「was given」 a book. (人作主语) A book 「was given to」 him. (物作主语)",
+            "复合宾语：`make/see/hear/watch + 宾语 + 不带to的不定式`，变为被动后不定式要加to。例句：He 「was made to clean」 the room. I 「was seen to enter」 the building.",
+            "动词短语：`look after, refer to, laugh at, pay attention to` 等，短语作为一个整体被动。例句：He 「was laughed at」 by his classmates.",
+            "含宾语从句的被动：`It is said that...` / `He is said to do/to have done...`。例句：It 「is believed that」 he is innocent. He 「is believed to be」 innocent."
+          ],
+          "example": {
+            "question": "The old woman _______ (take care of) by her granddaughter.",
+            "steps": [
+              "分析语境：old woman 是被照料的，是被动关系。",
+              "识别动词短语：take care of 是一个整体的动词短语，表示「照料」。",
+              "确定时态和语态：根据语境，通常是一般现在时态的被动语态，且主语 old woman 为单数。"
+            ],
+            "answer": "is taken care of"
+          },
+          "mistakes": [
+            {
+              "wrong": "He was laughed by his classmates.",
+              "correct": "He was laughed at by his classmates."
+            },
+            {
+              "wrong": "She was seen enter the room.",
+              "correct": "She was seen to enter the room."
+            }
+          ],
+          "memory_tip": "「双宾主语两可选，复合不定to还原，动词短语不拆散，宾从被动It指代。」",
+          "related": {
+            "prerequisite": "基本被动语态结构与时态",
+            "next": "高二上定语从句复杂用法"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错",
+              "阅读理解",
+              "书面表达"
+            ],
+            "scoring_key": "「掌握双宾语变被动后的两种形式」「感官动词/使役动词后不定式在被动语态中加to」「动词短语的完整性」",
+            "common_trap": "「动词短语被动时介词遗漏」「`make/let/have`的被动语态混淆 (let几乎没有被动，make/have有，且to还原)」",
+            "real_exam_example": {
+              "source": "2022年全国甲卷 语法填空",
+              "question": "The news _______ (report) yesterday that the famous scientist had made a breakthrough.",
+              "answer": "was reported",
+              "scoring_notes": "考察含宾语从句的被动语态，且时间状语yesterday提示用一般过去时。It is reported that... 的变体，news作主语。"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

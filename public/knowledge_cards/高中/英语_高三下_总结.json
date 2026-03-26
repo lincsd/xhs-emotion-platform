@@ -1,0 +1,722 @@
+{
+  "subject": "英语",
+  "grade": "高三",
+  "semester": "下册",
+  "textbook": "人教版",
+  "grade_short": "高三下",
+  "card_pack": "知识总结",
+  "description": "高中高三下册英语高考考点笔记总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "读后续写高分策略",
+      "cards": [
+        {
+          "card_id": "C1",
+          "full_id": "G3S_S1_C1",
+          "title": "读后续写：审题立意与故事衔接",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "在给定故事结尾的基础上，按照要求续写两段，确保故事连贯、情节合理、主题积极向上。",
+          "core_points": [
+            "「审题要点」：仔细阅读原文，理解故事背景、人物关系、矛盾冲突及结局暗示。划出关键词，明确续写提示（如：想象主人公的感受，接下来发生了什么）。",
+            "「立意与主题」：续写应紧扣原文主旨，体现积极向上的价值观，避免脱离原文或主题跑偏。",
+            "「故事连贯性」：续写段落必须与原文无缝衔接，故事情节发展合理，时间、地点、人物行为符合逻辑。",
+            "「人物形象」：保持人物性格一致，通过细节描写展现人物心理变化与成长，使人物更加丰满。"
+          ],
+          "example": {
+            "question": "（原文结尾）'The old clock on the wall struck midnight, and a profound silence filled the room. Sarah realized her decision would change everything.' 请根据原文和提示续写：1. 描述Sarah做出决定的具体内容。2. 描述这个决定带来的初步影响。",
+            "steps": [
+              "「步骤一」：理解原文，Sarah面临重要抉择，结果将改变一切。",
+              "「步骤二」：构思一个与原文氛围和主题相符的决定，可以是关于学习、家庭或个人成长。",
+              "「步骤三」：构思该决定带来的直接、初步的积极或充满挑战的影响。",
+              "「步骤四」：选择恰当的连接词和过渡句，使续写与原文衔接自然。"
+            ],
+            "answer": "（答案要点）Sarah决定放弃出国留学的机会，留在国内照顾生病的奶奶。这个决定让她感到一丝不舍，但更多的是内心的平静和责任感。她开始调整自己的学习计划，并积极寻找兼职工作以减轻家庭负担，生活虽然忙碌却充满意义。"
+          },
+          "mistakes": [
+            {
+              "wrong": "「续写内容与原文主题脱节，另起炉灶。」",
+              "correct": "「紧扣原文主题，在原文基础上合理展开，深化主题。」"
+            },
+            {
+              "wrong": "「情节发展突兀，不合逻辑，缺乏过渡。」",
+              "correct": "「注重时间、地点、人物行为的合理过渡，使用连接词。」"
+            }
+          ],
+          "memory_tip": "「读懂原文，找准提示，合理拓展，主题先行，逻辑清晰。」",
+          "related": {
+            "prerequisite": "「阅读理解能力，基础写作能力。」",
+            "next": "「读后续写：情节展开与细节描写。」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "读后续写"
+            ],
+            "scoring_key": "「情节连贯性、主题升华、语言表达（词汇多样性、句式复杂性、语法准确性）。」",
+            "common_trap": "「审题不细致，续写内容与原文脱节；只写故事，缺乏情感和主题的升华；语言平淡，缺乏亮点。」",
+            "real_exam_example": {
+              "source": "「2023年全国甲卷读后续写」",
+              "question": "（原文讲述主人公在困境中如何做出选择，续写提示要求描写主人公的选择带来的影响及内心感受。）",
+              "answer": "（高分答案通常能紧扣主人公的心理变化，通过具体行动展现其成长，语言生动形象，并有明确的主题升华。）",
+              "scoring_notes": "「立意深刻，情节发展自然，语言细节丰富，符合人物性格，且有积极的教育意义。」"
+            }
+          }
+        },
+        {
+          "card_id": "C2",
+          "full_id": "G3S_S1_C2",
+          "title": "读后续写：情节展开与细节描写",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "在确保故事连贯性的基础上，通过丰富的情节展开和生动的细节描写，使续写内容更加饱满、引人入胜。",
+          "core_points": [
+            "「情节合理性」：续写的情节应在原文背景下合理展开，避免超出现实逻辑或原文设定。",
+            "「冲突与高潮」：适当设置小冲突或转折，推动情节发展，形成高潮，增加故事的吸引力。",
+            "「多感官描写」：运用视觉、听觉、嗅觉、味觉、触觉等多种感官描写，使场景和人物活动栩栩如生。",
+            "「心理活动描写」：通过内心独白、表情、动作等展现人物的心理变化，深化人物形象。",
+            "「环境描写」：利用环境烘托气氛，暗示人物心情或推动情节发展。"
+          ],
+          "example": {
+            "question": "（原文结尾）'He hesitated at the crossroads, unsure which path to take, his heart heavy with an unspoken fear.' 请根据原文和提示续写：1. 描写他选择了一条路后遇到的具体困难。2. 描写他是如何克服困难的。",
+            "steps": [
+              "「步骤一」：理解原文，主人公面临选择，内心恐惧。",
+              "「步骤二」：构思一条道路及该道路上可能遇到的具体困难（如：恶劣天气、迷路、物资短缺、遭遇野生动物）。",
+              "「步骤三」：构思主人公如何利用智慧、勇气或他人的帮助克服困难。",
+              "「步骤四」：运用比喻、拟人等修辞手法，使描写更具画面感和感染力。"
+            ],
+            "answer": "（答案要点）他最终选择了那条看起来更崎岖的小径。没走多远，暴雨倾盆而下，泥泞的山路变得湿滑难行。他几次差点摔倒，背包也被树枝刮破。筋疲力尽之际，他看到了一束微弱的灯光，原来是一位好心的老猎人搭建的简易木屋。老猎人不仅提供了食物和休息的地方，还指明了正确的方向，使他重拾信心。"
+          },
+          "mistakes": [
+            {
+              "wrong": "「情节平铺直叙，缺乏波澜和细节。」",
+              "correct": "「设置合理的小冲突或转折，运用细节描写丰富情节。」"
+            },
+            {
+              "wrong": "「只写事件，不写人物感受和心理。」",
+              "correct": "「通过人物的语言、动作、神态和内心独白展现其心理变化。」"
+            }
+          ],
+          "memory_tip": "「情节有波澜，细节要生动，多感官描写，人物心理通。」",
+          "related": {
+            "prerequisite": "「读后续写：审题立意与故事衔接。」",
+            "next": "「读后续写：语言润色与主题升华。」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "读后续写"
+            ],
+            "scoring_key": "「情节的合理性和吸引力，细节描写的生动性，人物形象的塑造。」",
+            "common_trap": "「情节过于简单，缺乏说服力；细节描写不足，导致故事苍白；人物形象扁平，缺乏立体感。」",
+            "real_exam_example": {
+              "source": "「2022年全国乙卷读后续写」",
+              "question": "（原文讲述主人公在一次户外活动中迷路，续写提示要求描写他如何找到出路以及期间的心理挣扎。）",
+              "answer": "（高分答案会通过对自然环境的细致描写、主人公多次尝试寻找方向的行动以及内心的焦虑与希望的交织，展现其坚韧不拔的品质。）",
+              "scoring_notes": "「情节发展扣人心弦，细节描写具体入微，主人公的心理刻画真实感人。」"
+            }
+          }
+        },
+        {
+          "card_id": "C3",
+          "full_id": "G3S_S1_C3",
+          "title": "读后续写：语言润色与主题升华",
+          "type": "知识总结卡",
+          "difficulty": 5,
+          "importance": 5,
+          "definition": "在故事结构和情节完整的基础上，运用高级词汇、多样句式和修辞手法，提升语言表达质量，并深度挖掘故事蕴含的主题。",
+          "core_points": [
+            "「词汇选择」：避免使用过于简单、重复的词汇，多使用形容词、副词、动词的同义替换或高级表达，增加语言的丰富性。",
+            "「句式多样性」：交替使用简单句、并列句、复合句（尤其是各种从句），运用倒装、强调、插入语等句式，使文章富有变化和节奏感。",
+            "「修辞手法」：恰当运用比喻（metaphor/simile）、拟人（personification）、排比（parallelism）、反问（rhetorical question）等，增强语言的表现力和感染力。",
+            "「主题升华」：在故事结尾处点明或深化主题，可以是人物的成长、哲理的感悟、对社会现象的思考等，使文章具有思想深度。",
+            "「情感表达」：通过细节、修辞和句式，准确传达人物情感，与读者产生共鸣。"
+          ],
+          "example": {
+            "question": "（续写已完成，请对以下句子进行语言润色和主题升华）'He was happy. He learned a lot. He would never forget it.'",
+            "steps": [
+              "「步骤一」：识别简单句，寻找可替换的普通词汇。",
+              "「步骤二」：尝试使用更具表现力的形容词、副词和动词。",
+              "「步骤三」：将短句合并，运用从句、非谓语等结构，增加句式复杂性。",
+              "「步骤四」：加入情感描写或哲理思考，使结尾更具深度。",
+              "「步骤五」：检查润色后的句子是否流畅自然，是否符合原文语境。"
+            ],
+            "answer": "（答案要点）'A profound sense of contentment washed over him as he reflected on the arduous journey. This unforgettable experience had not only broadened his horizons but also instilled in him an unyielding resilience, teaching him that true strength lies not in avoiding challenges, but in confronting them with courage and wisdom.' (将简单句合并为复合句，使用高级词汇如'profound contentment', 'arduous journey', 'broadened his horizons', 'unyielding resilience'，并点明主题'true strength...')"
+          },
+          "mistakes": [
+            {
+              "wrong": "「词汇贫乏，句式单一，缺乏表现力。」",
+              "correct": "「拓展词汇，灵活运用多种句式，增强语言的生动性。」"
+            },
+            {
+              "wrong": "「故事结尾仓促，主题不明确或流于表面。」",
+              "correct": "「在结尾处进行点睛之笔，深化主题，引发读者思考。」"
+            }
+          ],
+          "memory_tip": "「高分词汇巧替换，长短句式要切换，修辞手法添光彩，结尾点睛主题化。」",
+          "related": {
+            "prerequisite": "「读后续写：情节展开与细节描写，高级词汇与语法知识。」",
+            "next": "「应用文写作万能模板。」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "读后续写"
+            ],
+            "scoring_key": "「语言的准确性、丰富性和多样性，主题的深刻性。」",
+            "common_trap": "「过度堆砌华丽词藻，导致表达不自然；为追求句式复杂而出现语法错误；主题升华生硬，与故事脱节。」",
+            "real_exam_example": {
+              "source": "「2021年全国甲卷读后续写」",
+              "question": "（原文讲述主人公在一次失败后重新振作的故事，续写提示要求描写他最终的成功以及从中获得的感悟。）",
+              "answer": "（高分答案会用丰富的词汇和多变的句式来描绘主人公的成功，并在结尾处，通过富有哲理的语句，深刻阐述失败是成功之母的道理，体现人物的成长和精神的升华。）",
+              "scoring_notes": "「语言流畅地道，修辞运用恰当，主题思想积极向上，具有启发性。」"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "应用文写作万能模板",
+      "cards": [
+        {
+          "card_id": "C4",
+          "full_id": "G3S_S2_C4",
+          "title": "应用文：书信类（邀请、感谢、建议、投诉）",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握各类书信的写作格式、常用句式和表达要点，确保内容符合场景，语言得体。",
+          "core_points": [
+            "「基本格式」：称谓（Dear…）、正文、结束语（Yours sincerely/faithfully）、署名、日期。注意顶格与缩进。",
+            "「邀请信」：目的明确（We are writing to invite you to…），时间地点（The event will be held on…at…），活动内容，期待回复（We look forward to your presence.）。",
+            "「感谢信」：表达感谢（I am writing to express my sincere gratitude for…），具体感谢事由及带来的帮助，再次致谢（Thank you again for your kindness.）。",
+            "「建议信」：提出问题（I am writing to draw your attention to…），分析原因（This is mainly because…），提出具体建议（I would like to suggest…），期待采纳（I hope my suggestions will be taken into consideration.）。",
+            "「投诉信」：说明问题（I am writing to complain about…），描述细节（The problem is…），提出要求（I would appreciate it if you could…），期待解决（I look forward to your prompt reply and a satisfactory solution.）。"
+          ],
+          "example": {
+            "question": "假设你是李华，给外教Mr. Smith写一封感谢信，感谢他对你英语学习的帮助。",
+            "steps": [
+              "「步骤一」：确定信件类型为感谢信，明确称谓和结束语。",
+              "「步骤二」：在正文开头直接点明感谢目的。",
+              "「步骤三」：具体列举Mr. Smith在哪些方面提供了帮助（如：耐心解答问题，提供学习资料，鼓励口语练习）。",
+              "「步骤四」：表达感谢之情及对未来学习的积极影响。",
+              "「步骤五」：检查语法和拼写，确保语言得体。"
+            ],
+            "answer": "Dear Mr. Smith,\nI am writing to express my sincere gratitude for your invaluable help with my English studies during the past semester. Your patient explanations of complex grammar points and your encouraging words during our oral practices have greatly boosted my confidence and improved my proficiency. I particularly appreciate the extra materials you provided, which broadened my vocabulary and understanding of Western culture. Thanks to your guidance, I now feel much more prepared for the upcoming college entrance exam. Thank you again for your kindness and dedication. I will always cherish your lessons.\nYours sincerely,\nLi Hua\n[Date]"
+          },
+          "mistakes": [
+            {
+              "wrong": "「格式不规范，称谓或结束语错误。」",
+              "correct": "「严格遵守书信格式，根据收信人身份选择恰当的称谓和结束语。」"
+            },
+            {
+              "wrong": "「内容空泛，未能具体说明事由或建议。」",
+              "correct": "「围绕主题，提供具体、详细的信息，使表达更有说服力。」"
+            }
+          ],
+          "memory_tip": "「格式记心间，目的要开篇，内容具体化，得体是关键。」",
+          "related": {
+            "prerequisite": "「基础写作能力，常用表达积累。」",
+            "next": "「应用文：通知、报告与演讲稿。」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "书面表达"
+            ],
+            "scoring_key": "「格式准确、内容完整、要点齐全、语言得体、语法正确。」",
+            "common_trap": "「忽略格式要求，导致扣分；内容要点遗漏；语言表达不符合语境或身份；语法错误较多。」",
+            "real_exam_example": {
+              "source": "「2023年全国新课标I卷书面表达（建议信）」",
+              "question": "（假设你是学生会主席，给学校写一封建议信，提出改善图书馆服务的建议。）",
+              "answer": "（高分答案会包括明确的称谓、清晰的问题描述、具体可行的三点建议及期待回复的结束语，语言正式得体。）",
+              "scoring_notes": "「建议具体且有建设性，语言表达流畅准确，格式完全符合要求。」"
+            }
+          }
+        },
+        {
+          "card_id": "C5",
+          "full_id": "G3S_S2_C5",
+          "title": "应用文：通知、报告与演讲稿",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握通知、报告和演讲稿的文体特征、写作结构和语言风格，确保信息传达清晰、目的明确。",
+          "core_points": [
+            "「通知（Notice）」：标题（NOTICE）、发布者、时间、地点、事由、联系方式。语言简洁明了，信息准确无误。",
+            "「报告（Report）」：标题、报告对象、报告人、日期、正文（引言、主体、结论）。结构严谨，数据或事实支撑，语言客观正式。",
+            "「演讲稿（Speech）」：称谓（Ladies and Gentlemen/Dear friends）、开场白（Good morning/evening, everyone. It's a great honor to…）、主体（论点清晰、论据充分）、结束语（Thank you for listening.）。语言富有感染力，注重与听众互动。",
+            "「通用要点」：无论是哪种文体，都要注意审题，明确写作目的、读者对象和具体要求。"
+          ],
+          "example": {
+            "question": "假设你是学校英语社团主席，为即将举办的英语角活动写一份通知。",
+            "steps": [
+              "「步骤一」：确定标题为NOTICE，明确发布者。",
+              "「步骤二」：说明活动名称、目的、时间、地点、参与方式、注意事项。",
+              "「步骤三」：语言简洁明了，信息传达清晰。",
+              "「步骤四」：检查是否有遗漏的关键信息，如联系人或咨询方式。"
+            ],
+            "answer": "NOTICE\nTo all students,\nThe English Club is excited to announce that our weekly English Corner will be held this Friday, April 26th, at 7:00 PM in the Multi-function Hall. This week's theme is 'Exploring World Cultures', and we will have interactive games, free talk sessions, and a special guest speaker sharing their travel experiences. It's a fantastic opportunity to practice your English and make new friends. All students are welcome to join us. For more information, please contact Li Ming at 123456789. We look forward to seeing you there!\nEnglish Club\nApril 24th, 2024"
+          },
+          "mistakes": [
+            {
+              "wrong": "「通知或报告信息不全，关键要素缺失。」",
+              "correct": "「确保通知包含时间、地点、事由等核心信息；报告有引言、主体、结论。」"
+            },
+            {
+              "wrong": "「演讲稿语言平淡，缺乏与听众的互动性。」",
+              "correct": "「运用提问、号召等句式，增强演讲稿的感染力和互动性。」"
+            }
+          ],
+          "memory_tip": "「通知简明要点齐，报告客观重数据，演讲感染有互动，文体风格要得体。」",
+          "related": {
+            "prerequisite": "「基础写作能力，不同文体阅读经验。」",
+            "next": "「长难句深度解析。」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "书面表达"
+            ],
+            "scoring_key": "「格式正确、信息完整、语言准确、文体风格恰当。」",
+            "common_trap": "「混淆不同文体格式；信息点遗漏；语言过于口语化或过于生硬；逻辑混乱。」",
+            "real_exam_example": {
+              "source": "「2022年全国新课标II卷书面表达（演讲稿）」",
+              "question": "（假设你代表学校参加一个环保主题的演讲比赛，写一篇演讲稿。）",
+              "answer": "（高分答案会包含恰当的开场白和结束语，主体部分论点清晰，论据充分，语言富有号召力，并能与听众建立情感连接。）",
+              "scoring_notes": "「主题鲜明，结构完整，语言富有激情和说服力，体现了演讲稿的特点。」"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S3",
+      "unit_name": "长难句深度解析",
+      "cards": [
+        {
+          "card_id": "C6",
+          "full_id": "G3S_S3_C6",
+          "title": "长难句：主干识别与复杂修饰成分拆解",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "通过识别句子主干（主谓宾），剥离各种修饰成分（从句、非谓语、介词短语），从而准确理解长难句的深层含义。",
+          "core_points": [
+            "「寻找谓语动词」：一个句子通常只有一个谓语动词。如果出现多个动词，则可能包含从句或非谓语动词。这是识别主干的关键。",
+            "「确定主语和宾语」：根据谓语动词，找到其主语和宾语，构成句子的核心主谓宾结构。",
+            "「剥离修饰成分」：\n  - 「定语从句」：由关系代词/副词引导，修饰名词。\n  - 「状语从句」：由连词引导，修饰动词、形容词、副词或整个句子。\n  - 「非谓语动词」：不定式、动名词、分词作定语、状语、补语等。\n  - 「介词短语」：作定语、状语或表语。",
+            "「层层分析」：从外到内，先识别主句，再分析从句，最后理解非谓语和短语结构。"
+          ],
+          "example": {
+            "question": "分析以下长难句：'The increasing demand for renewable energy sources, which are considered environmentally friendly alternatives to fossil fuels, has led to significant investments in solar and wind power projects worldwide.'",
+            "steps": [
+              "「步骤一」：寻找谓语动词：'has led'。",
+              "「步骤二」：确定主语：'The increasing demand for renewable energy sources'。",
+              "「步骤三」：确定宾语：'significant investments'。",
+              "「步骤四」：剥离定语从句：'which are considered environmentally friendly alternatives to fossil fuels'，修饰'renewable energy sources'。",
+              "「步骤五」：剥离介词短语：'for renewable energy sources'修饰'demand'；'in solar and wind power projects'修饰'investments'；'worldwide'作状语。",
+              "「步骤六」：整合理解：对可再生能源日益增长的需求，这种能源被认为是化石燃料的环保替代品，已导致全球在太阳能和风能项目上进行大量投资。"
+            ],
+            "answer": "（主干）'The demand has led to investments.' （修饰成分）'increasing'修饰'demand'；'for renewable energy sources'修饰'demand'；'which are considered environmentally friendly alternatives to fossil fuels'是定语从句，修饰'renewable energy sources'；'significant'修饰'investments'；'in solar and wind power projects'修饰'investments'；'worldwide'作地点状语。"
+          },
+          "mistakes": [
+            {
+              "wrong": "「将从句或非谓语动词误认为主句谓语。」",
+              "correct": "「准确识别主句谓语动词，区分从句谓语和非谓语动词。」"
+            },
+            {
+              "wrong": "「忽略修饰成分，导致对句子核心信息的理解偏差。」",
+              "correct": "「系统性地拆解并理解每个修饰成分的功能和含义。」"
+            }
+          ],
+          "memory_tip": "「一找谓语二主宾，三剥修饰四整合，层层分析不迷路，句意清晰自然通。」",
+          "related": {
+            "prerequisite": "「各种从句、非谓语动词、介词短语的基础知识。」",
+            "next": "「长难句：特殊结构（倒装、强调、省略）与语义理解。」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "阅读理解",
+              "语法填空",
+              "七选五",
+              "短文改错"
+            ],
+            "scoring_key": "「准确理解句子主旨，区分主次信息，避免因复杂结构造成的误读。」",
+            "common_trap": "「断章取义，只看局部词汇；对复杂从句结构理解不清，导致语义偏差；忽略非谓语动词的逻辑主语。」",
+            "real_exam_example": {
+              "source": "「2023年全国甲卷阅读理解A篇某长句」",
+              "question": "（文章中一个包含多个从句和非谓语结构的复杂句子，要求理解其含义。）",
+              "answer": "（需要识别主句'The study suggests that...'，然后拆解'that'引导的宾语从句以及其中的定语从句和非谓语结构，才能准确把握研究结论。）",
+              "scoring_notes": "「能准确找出句子的核心信息，并理解各修饰成分对核心信息的限定和补充作用。」"
+            }
+          }
+        },
+        {
+          "card_id": "C7",
+          "full_id": "G3S_S3_C7",
+          "title": "长难句：特殊结构（倒装、强调、省略）与语义理解",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "掌握英语中倒装句、强调句和省略句的构成形式、句法功能及语义侧重，以应对高考中的复杂句型。",
+          "core_points": [
+            "「倒装句（Inversion）」：\n  - 「完全倒装」：谓语动词前置于主语（There be, Here comes…）。\n  - 「部分倒装」：助动词/情态动词/be动词前置于主语（No sooner…than…, Not until…, Only if/when/by, Hardly…when…, So/Such…that…）。\n  - 「目的」：强调、保持平衡或符合习惯。",
+            "「强调句（Emphasis）」：\n  - 「It is/was…that/who…」：强调句中的任何成分（主语、宾语、状语）。\n  - 「Do/Does/Did + 动词原形」：强调动词本身。",
+            "「省略句（Ellipsis）」：\n  - 「省略相同成分」：为避免重复，省略句子中与上文相同的成分（She can sing, and he can [sing], too.）。\n  - 「固定搭配或习惯表达」：如'If necessary' (If it is necessary)。\n  - 「目的」：使语言简洁、紧凑。",
+            "「理解策略」：遇到特殊结构，先还原为正常语序或补充省略成分，再进行理解。"
+          ],
+          "example": {
+            "question": "分析以下句子：'Not until he had finished all his homework did he feel free to play games.'",
+            "steps": [
+              "「步骤一」：识别'Not until…'引导的部分倒装结构。",
+              "「步骤二」：还原为正常语序：'He did not feel free to play games until he had finished all his homework.'",
+              "「步骤三」：理解句意：他直到做完所有作业才觉得可以自由玩游戏。",
+              "「步骤四」：体会倒装强调的语气：强调“做完作业”是“玩游戏”的前提。"
+            ],
+            "answer": "这是一个由'Not until + 时间状语从句'引导的部分倒装句。还原为正常语序是'He did not feel free to play games until he had finished all his homework.' 强调的是'他只有在完成所有作业之后'才能感到轻松地玩游戏。"
+          },
+          "mistakes": [
+            {
+              "wrong": "「不熟悉倒装句的构成，导致语法填空或短文改错错误。」",
+              "correct": "「熟记常见倒装句型，特别是'Not until', 'Only if/when/by'等引导的倒装。」"
+            },
+            {
+              "wrong": "「误解强调句'It is…that…'中的'that'为关系代词或连词。」",
+              "correct": "「区分强调句和从句，强调句中'that'（或'who'）无实际意义，只起连接作用。」"
+            }
+          ],
+          "memory_tip": "「倒装强调有重点，省略简洁表意全，还原分析是妙招，特殊句式不再难。」",
+          "related": {
+            "prerequisite": "「基础句法知识，各种从句的用法。」",
+            "next": "「高频语法易错点精练。」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错",
+              "阅读理解"
+            ],
+            "scoring_key": "「识别特殊句型，准确还原其本义，理解强调或省略的目的。」",
+            "common_trap": "「倒装句中助动词使用错误；强调句中'that/who'与被强调成分不匹配；省略句理解偏差导致语义错误。」",
+            "real_exam_example": {
+              "source": "「2023年全国新课标I卷语法填空第15题」",
+              "question": "（考察'Not until…'引导的部分倒装句中助动词的选择。）",
+              "answer": "（答案通常是根据主句时态和主语单复数选择正确的助动词，如'did'或'was'。）",
+              "scoring_notes": "「考生需准确判断倒装句的类型和时态，选择正确的助动词。」"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S4",
+      "unit_name": "高频语法易错点精练",
+      "cards": [
+        {
+          "card_id": "C8",
+          "full_id": "G3S_S4_C8",
+          "title": "动词辨析：时态、语态与非谓语动词",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "准确判断动词在句中的时态、语态和非谓语形式，是语法填空和短文改错的核心考点。",
+          "core_points": [
+            "「时态（Tense）」：\n  - 「关键」：根据时间状语、语境和动词的动作类型（瞬时/延续）判断。\n  - 「易错」：完成时态（现在完成时与过去完成时）、将来完成时、过去将来时。",
+            "「语态（Voice）」：\n  - 「关键」：判断主语与谓语动词之间的关系（主动发出动作或被动承受动作）。\n  - 「易错」：情态动词的被动语态、含有双宾语的被动语态、动词+介词的被动语态。",
+            "「非谓语动词（Non-finite Verbs）」：\n  - 「不定式（to do）」：作主语、宾语、表语、定语、状语、宾补。强调目的或将来。\n  - 「动名词（doing）」：作主语、宾语、表语、定语。表示正在进行或经常性的动作。\n  - 「分词（doing/done）」：作定语、状语、补语。现在分词表主动和进行，过去分词表被动和完成。\n  - 「关键」：判断非谓语动词与逻辑主语之间的「主动/被动」和「进行/完成」关系。",
+            "「综合考查」：时态、语态、非谓语动词常混合考查，需综合分析句子的结构和语义。"
+          ],
+          "example": {
+            "question": "（语法填空）By the time I arrived, the train _______ (leave) already.",
+            "steps": [
+              "「步骤一」：识别时间状语'By the time I arrived'（在我到达之前），表示一个截止到过去某个时间点前已完成的动作。",
+              "「步骤二」：判断动词'leave'与主语'the train'的关系是主动。",
+              "「步骤三」：根据语境和时间状语，应使用过去完成时。",
+              "「步骤四」：填入'had left'。"
+            ],
+            "answer": "had left"
+          },
+          "mistakes": [
+            {
+              "wrong": "「时态判断失误，如混淆现在完成时和过去完成时。」",
+              "correct": "「注意时间状语和上下文语境，准确把握时间线。」"
+            },
+            {
+              "wrong": "「非谓语动词的主被动关系判断错误。」",
+              "correct": "「明确非谓语动词的逻辑主语，判断其与动词的主被动关系。」"
+            }
+          ],
+          "memory_tip": "「时态语态看语境，非谓主被看主语，完成进行兼顾好，动词考点不再愁。」",
+          "related": {
+            "prerequisite": "「各种时态、语态、非谓语动词的基础知识。」",
+            "next": "「从句精讲：名词性、定语、状语从句易错点。」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错",
+              "完形填空"
+            ],
+            "scoring_key": "「准确判断动词的时态、语态和非谓语形式，确保与句意和语法规则一致。」",
+            "common_trap": "「忽视上下文语境，孤立判断；对特殊动词的用法不熟悉；非谓语动词的完成式或进行式与主被动关系混淆。」",
+            "real_exam_example": {
+              "source": "「2023年全国新课标II卷语法填空第11题」",
+              "question": "（考察动词'expect'在句中作宾语补足语时，应使用何种非谓语形式。）",
+              "answer": "（答案为'to be expected'或'expecting'等，取决于句子的主被动和语境。）",
+              "scoring_notes": "「考生需根据句子的逻辑主语和动词的语义，正确选择非谓语动词的形式和语态。」"
+            }
+          }
+        },
+        {
+          "card_id": "C9",
+          "full_id": "G3S_S4_C9",
+          "title": "从句精讲：名词性、定语、状语从句易错点",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "系统梳理各类从句的引导词选择、句法功能和常见易错点，提升对复杂句式的理解和运用能力。",
+          "core_points": [
+            "「名词性从句」：\n  - 「引导词」：that, whether/if, what, who, when, where, why, how。\n  - 「功能」：主语、宾语、表语、同位语从句。\n  - 「易错」：'that'与'what'的区别，'whether'与'if'的区分。",
+            "「定语从句」：\n  - 「引导词」：关系代词（who, whom, whose, which, that），关系副词（when, where, why）。\n  - 「分类」：限制性与非限制性定语从句。\n  - 「易错」：关系代词与关系副词的选择，介词+关系代词的用法，'that'与'which'的混淆。",
+            "「状语从句」：\n  - 「类型」：时间、地点、原因、目的、结果、条件、让步、方式、比较。\n  - 「引导词」：when, while, as, since, because, so that, if, unless, though, although等。\n  - 「易错」：连词的准确选择，尤其是表示原因、条件、让步的连词辨析。",
+            "「复合考点」：从句内部可能包含非谓语动词或倒装等结构，需综合分析。"
+          ],
+          "example": {
+            "question": "（语法填空）The reason _______ he was late was that his car broke down.",
+            "steps": [
+              "「步骤一」：识别空前有先行词'reason'，空后是修饰'reason'的从句。",
+              "「步骤二」：判断从句在句中作定语，修饰'reason'。",
+              "「步骤三」：关系副词'why'可引导定语从句修饰'reason'。",
+              "「步骤四」：填入'why'。"
+            ],
+            "answer": "why"
+          },
+          "mistakes": [
+            {
+              "wrong": "「名词性从句中'that'和'what'混淆，或关系代词和关系副词选择错误。」",
+              "correct": "「'what'在从句中作成分，'that'不作成分；关系副词替代'介词+关系代词'。」"
+            },
+            {
+              "wrong": "「状语从句连词选择不当，导致逻辑关系错误。」",
+              "correct": "「仔细分析主从句之间的逻辑关系，选择最合适的连词。」"
+            }
+          ],
+          "memory_tip": "「名词从句分成分，定语从句选对词，状语从句辨逻辑，从句考点全掌握。」",
+          "related": {
+            "prerequisite": "「主谓宾、定状补等句子成分的基础知识。」",
+            "next": "「词性活用：冠词、代词、名词、形容词、副词辨析。」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错",
+              "阅读理解"
+            ],
+            "scoring_key": "「准确判断从句类型和功能，正确选择引导词，避免引导词与句法成分冲突。」",
+            "common_trap": "「省略引导词的情况判断失误；非限制性定语从句与限制性定语从句的混淆；介词提前与关系代词的搭配错误。」",
+            "real_exam_example": {
+              "source": "「2022年全国甲卷语法填空第13题」",
+              "question": "（考察定语从句中关系副词'where'的运用，先行词为地点名词。）",
+              "answer": "（答案为'where'，因为它在从句中作地点状语，且先行词为地点。）",
+              "scoring_notes": "「考生需准确判断先行词与从句谓语动词之间的关系，选择正确的引导词。」"
+            }
+          }
+        },
+        {
+          "card_id": "C10",
+          "full_id": "G3S_S4_C10",
+          "title": "词性活用：冠词、代词、名词、形容词、副词辨析",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握各种词类的基本用法和常见易错点，尤其是在特定语境下词性转换和词义辨析，以应对语法填空和短文改错。",
+          "core_points": [
+            "「冠词（Articles）」：\n  - 「a/an」：泛指单数可数名词。\n  - 「the」：特指或表示独一无二。\n  - 「零冠词」：表示泛指的复数名词、不可数名词、专有名词、球类运动等。\n  - 「易错」：固定搭配中的冠词省略或使用。",
+            "「代词（Pronouns）」：\n  - 「人称代词」：主格、宾格、所有格（形容词性/名词性）。\n  - 「反身代词」：强调或表示“自己”。\n  - 「指示代词」：this/that, these/those。\n  - 「不定代词」：some, any, no, one, all, both, each, every等。\n  - 「易错」：指代不清，单复数不一致，所有格与形容词性物主代词混淆。",
+            "「名词（Nouns）」：\n  - 「可数/不可数」：决定单复数和量词使用。\n  - 「单复数」：规则与不规则变化。\n  - 「所有格」：'s或of结构。\n  - 「易错」：集合名词的单复数，抽象名词的具体化。",
+            "「形容词与副词（Adjectives & Adverbs）」：\n  - 「形容词」：修饰名词或代词，作表语。\n  - 「副词」：修饰动词、形容词、其他副词或整个句子。\n  - 「易错」：形副词形同义异，副词位置，比较级和最高级，以及'well' vs 'good'等。"
+          ],
+          "example": {
+            "question": "（短文改错）She plays piano very good.",
+            "steps": [
+              "「步骤一」：识别'good'，它是一个形容词。",
+              "「步骤二」：判断它在句中修饰动词'plays'。",
+              "「步骤三」：修饰动词应使用副词。",
+              "「步骤四」：将'good'改为其副词形式'well'。",
+              "「步骤五」：检查修改后句子是否正确。"
+            ],
+            "answer": "good -> well"
+          },
+          "mistakes": [
+            {
+              "wrong": "「冠词滥用或误用，如在不可数名词前加'a/an'。」",
+              "correct": "「掌握冠词的基本规则，注意特指、泛指和零冠词的区分。」"
+            },
+            {
+              "wrong": "「代词指代不明或单复数、人称不一致。」",
+              "correct": "「确保代词与所指代的名词在数、人称、性别上保持一致。」"
+            },
+            {
+              "wrong": "「形容词与副词混淆，如用形容词修饰动词。」",
+              "correct": "「牢记形容词修饰名词，副词修饰动词、形容词或其他副词。」"
+            }
+          ],
+          "memory_tip": "「冠词有无细辨析，代词指代要一致，名词单复看语境，形副功能莫混淆。」",
+          "related": {
+            "prerequisite": "「词性分类与基本功能。」",
+            "next": "「句法结构：主谓一致、倒装、强调、平行结构。」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错",
+              "完形填空"
+            ],
+            "scoring_key": "「准确判断词性，选择正确的词形，确保词义符合语境。」",
+            "common_trap": "「熟词僻义；形近词或同根词辨析不清；固定搭配中的特殊用法；中式英语思维。」",
+            "real_exam_example": {
+              "source": "「2023年全国新课标I卷短文改错第1题」",
+              "question": "（考察形容词'quick'在句中应改为副词'quickly'。）",
+              "answer": "（答案为'quick'改为'quickly'，因为它修饰动词。）",
+              "scoring_notes": "「考生需区分形容词和副词的功能，并进行正确替换。」"
+            }
+          }
+        },
+        {
+          "card_id": "C11",
+          "full_id": "G3S_S4_C11",
+          "title": "句法结构：主谓一致、倒装、强调、平行结构",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "深入理解主谓一致的各种特殊情况、倒装和强调句的运用规则以及平行结构的保持，是提升句子结构准确性的关键。",
+          "core_points": [
+            "「主谓一致（Subject-Verb Agreement）」：\n  - 「基本原则」：谓语动词的单复数与主语的单复数保持一致。\n  - 「易错情况」：\n    - 「就近原则」：由'either…or…'，'neither…nor…'，'not only…but also…'连接主语时。\n    - 「部分倒装」：主语后置时。\n    - 「集体名词」：family, team, government等，既可作单数也可作复数。\n    - 「不可数名词」：news, physics等，形式上是复数但作单数。",
+            "「倒装句（Inversion）」：\n  - 「目的」：强调、语体要求。\n  - 「类型」：完全倒装（Here comes…），部分倒装（Not until…, So/Such…that…, Only if/when/by…）。\n  - 「易错」：助动词选择和主谓语序。",
+            "「强调句（Emphasis）」：\n  - 「It is/was…that/who…」：强调句中任何成分。\n  - 「Do/Does/Did + 动词原形」：强调动词。\n  - 「易错」：'that/who'与被强调成分的匹配。",
+            "「平行结构（Parallelism）」：\n  - 「原则」：并列的成分在句法功能和形式上保持一致（名词对名词，动词对动词，从句对从句等）。\n  - 「常见连接词」：and, but, or, as well as, not only…but also…等。\n  - 「易错」：并列成分形式不一致，导致句子结构混乱。"
+          ],
+          "example": {
+            "question": "（短文改错）Neither my brother nor my sister are good at math.",
+            "steps": [
+              "「步骤一」：识别主语由'Neither…nor…'连接。",
+              "「步骤二」：根据主谓一致的就近原则，谓语动词应与靠近的'my sister'保持一致。",
+              "「步骤三」：'my sister'是单数，所以谓语动词应为单数。",
+              "「步骤四」：将'are'改为'is'。",
+              "「步骤五」：检查修改后句子是否正确。"
+            ],
+            "answer": "are -> is"
+          },
+          "mistakes": [
+            {
+              "wrong": "「主谓一致时，忽视倒装句的主语后置，或集体名词的单复数用法。」",
+              "correct": "「仔细分析句子的主语，特别是复杂主语或特殊情况下的主语。」"
+            },
+            {
+              "wrong": "「平行结构中并列成分形式不一致。」",
+              "correct": "「确保并列的词、短语或从句在语法形式上完全一致。」"
+            }
+          ],
+          "memory_tip": "「主谓一致看主语，倒装强调有规矩，平行结构要对等，句法准确高分取。」",
+          "related": {
+            "prerequisite": "「基础语法知识，句子成分分析能力。」",
+            "next": "「高考考场冲刺策略。」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错",
+              "阅读理解"
+            ],
+            "scoring_key": "「准确判断主谓一致，正确运用倒装和强调，保持平行结构，确保句子语法正确。」",
+            "common_trap": "「复杂主语的主谓一致判断失误；倒装句中助动词或谓语动词形式错误；平行结构中出现非平行成分。」",
+            "real_exam_example": {
+              "source": "「2021年全国甲卷短文改错第3题」",
+              "question": "（考察主谓一致，主语为'a number of'引导的复数，但考生易误认为单数。）",
+              "answer": "（答案为将谓语动词由单数改为复数。）",
+              "scoring_notes": "「考生需注意'a number of'和'the number of'的区别，正确判断主语的单复数。」"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S5",
+      "unit_name": "高考考场冲刺策略",
+      "cards": [
+        {
+          "card_id": "C12",
+          "full_id": "G3S_S5_C12",
+          "title": "高考考场时间管理与心理调适",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "掌握高考英语各题型的时间分配策略，学会有效应对考场压力，保持良好心态，发挥最佳水平。",
+          "core_points": [
+            "「时间分配策略」：\n  - 「听力（30分）」：紧跟节奏，边听边选，不纠结。\n  - 「阅读理解（37.5分）」：每篇8-10分钟，七选五8分钟。先看问题，带着问题读文章。\n  - 「完形填空（15分）」：12-15分钟。先通读全文把握大意，再逐空精填。\n  - 「语法填空（15分）」：8-10分钟。先判断词性，再考虑时态、语态、从句等。\n  - 「短文改错（10分）」：8-10分钟。逐行检查，重点关注冠词、代词、时态、单复数等。\n  - 「书面表达（25分）」：25-30分钟。审题、构思、打草稿、誊写、检查。",
+            "「答题顺序建议」：\n  - 「常规顺序」：听力 → 阅读 → 完形 → 语法填空 → 短文改错 → 书面表达。\n  - 「灵活调整」：若某个题型难度大，可暂时跳过，先做擅长的，避免卡壳。",
+            "「心理调适技巧」：\n  - 「考前准备」：充分休息，保持积极心态，熟悉考场环境。\n  - 「考中应对」：遇到难题不慌张，深呼吸，暗示自己「我能行」。\n  - 「检查策略」：留出5-10分钟检查，重点检查书面表达的语法、拼写、标点，以及各题型涂卡是否正确。",
+            "「卷面整洁」：书写工整，字迹清晰，给阅卷老师留下好印象。"
+          ],
+          "example": {
+            "question": "在高考英语考试中，你发现阅读理解有一篇文章特别难，耗费了大量时间仍无头绪，此时应如何处理？",
+            "steps": [
+              "「步骤一」：认识到时间宝贵，不能在一道题上耗费过多。",
+              "「步骤二」：快速浏览该篇剩余题目，尝试选择性作答，如只做细节题或排除法能确定的题目。",
+              "「步骤三」：果断放弃部分难题，将精力转移到其他更有把握的题型上。",
+              "「步骤四」：做完其他题目后，若有剩余时间再回过头来重新审视或蒙猜。",
+              "「步骤五」：确保不影响其他题目的答题时间。"
+            ],
+            "answer": "遇到特别难的阅读文章时，应立即停止过度纠结，快速做完能确定的题目，然后果断跳过，将剩余时间分配给其他题型。切忌因小失大，影响整体得分。在所有题目完成后，若有时间再返回处理。记住，高考是取舍的艺术，战略性放弃也是一种智慧。"
+          },
+          "mistakes": [
+            {
+              "wrong": "「在某一难题上耗费过多时间，导致后续题目来不及做或匆忙作答。」",
+              "correct": "「严格执行时间分配，遇到难题及时止损，战略性放弃或快速蒙猜。」"
+            },
+            {
+              "wrong": "「考前焦虑过度，考中紧张导致思维混乱。」",
+              "correct": "「考前放松心态，考中通过深呼吸、积极自我暗示等方式缓解紧张情绪。」"
+            }
+          ],
+          "memory_tip": "「时间规划要严谨，难题不纠及时停，心态平和效率高，卷面整洁印象好。」",
+          "related": {
+            "prerequisite": "「所有英语知识点的掌握与练习。」",
+            "next": "「无（这是高考前的最后冲刺策略）。」"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "听力",
+              "阅读理解",
+              "完形填空",
+              "语法填空",
+              "短文改错",
+              "书面表达",
+              "读后续写"
+            ],
+            "scoring_key": "「合理的时间分配确保所有题目都有机会作答，心理素质稳定发挥，避免低级失误。」",
+            "common_trap": "「因某题卡壳而影响整体进度；涂卡错误；书面表达审题不清或字迹潦草；粗心大意导致不必要的失分。」",
+            "real_exam_example": {
+              "source": "「历年高考高分考生经验总结」",
+              "question": "（高考英语考试中，如何在高压环境下保持高效答题？）",
+              "answer": "（高分考生普遍会提前进行模拟训练，熟悉时间分配，培养答题节奏。考场上，他们会先做自己擅长的题目，遇到难题不慌张，懂得取舍，并留有检查时间。）",
+              "scoring_notes": "「时间管理得当，心态稳定，能够将知识点有效转化为分数。」"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

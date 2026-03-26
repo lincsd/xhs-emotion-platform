@@ -1,0 +1,739 @@
+{
+  "subject": "英语",
+  "grade": "八年级",
+  "semester": "上册",
+  "textbook": "人教Go for it!版",
+  "grade_short": "八上",
+  "card_pack": "知识总结",
+  "description": "初中八年级上册英语中考考点笔记总结",
+  "units": [
+    {
+      "unit_id": "U1",
+      "unit_name": "学习方法与频率",
+      "cards": [
+        {
+          "card_id": "A8S1-01",
+          "full_id": "A8S1-U1-C1",
+          "title": "频率副词 (Adverbs of Frequency)",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "频率副词表示动作发生的频繁程度，主要有always, usually, often, sometimes, hardly ever, never等。",
+          "core_points": [
+            "位置：一般位于行为动词之前，be动词、情态动词、助动词之后。",
+            "Examples: I always get up early. He is usually late for school.",
+            "疑问句：常用How often...？提问。",
+            "Examples: How often do you go to the library? I sometimes go there.",
+            "特殊情况：sometimes可置于句首或句末，强调时间。",
+            "Examples: Sometimes I walk to school. I walk to school sometimes."
+          ],
+          "example": {
+            "question": "Choose the best answer: My brother ______ plays computer games, maybe once a month.",
+            "steps": [
+              "分析句意：我的哥哥玩电脑游戏，大约一个月一次。",
+              "判断频率：一个月一次表示频率不高，接近不玩。",
+              "选择对应副词：hardly ever（几乎不）符合语境。"
+            ],
+            "answer": "hardly ever"
+          },
+          "mistakes": [
+            {
+              "wrong": "He often is late for school.",
+              "correct": "He is often late for school."
+            },
+            {
+              "wrong": "I watch TV never.",
+              "correct": "I never watch TV."
+            }
+          ],
+          "memory_tip": "『主谓宾，副词前；be动助情，副词后。』",
+          "related": {
+            "prerequisite": "一般现在时 (七年级上)",
+            "next": "时间状语从句 (八年级上)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "语法填空"
+            ],
+            "scoring_key": "准确判断副词位置和句意，尤其注意be动词、情态动词和行为动词的区别。",
+            "common_trap": "频率副词的位置错误，特别是be动词和行为动词混合的句子。",
+            "real_exam_example": {
+              "source": "2022年福建省福州市中考真题",
+              "question": "My father ______ goes to bed before 11 p.m., because he has a lot of work to do.",
+              "answer": "never",
+              "scoring_notes": "根据句中“has a lot of work to do”判断父亲睡前工作很多，因此“从不在11点前睡觉”符合逻辑。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U2_U3",
+      "unit_name": "未来计划与预测",
+      "cards": [
+        {
+          "card_id": "A8S1-02",
+          "full_id": "A8S1-U2-C1",
+          "title": "will将来时",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "will将来时表示将来发生的动作或状态，常用于预测、意愿、即时决定等。",
+          "core_points": [
+            "构成：will + 动词原形。否定形式：will not (won't) + 动词原形。疑问形式：Will + 主语 + 动词原形？",
+            "Examples: I will go to Beijing next year. She won't come to the party. Will you help me?",
+            "用法：表示预测（I think it will rain.）、意愿（I will try my best.）、即时决定（It's cold. I'll close the window.）。",
+            "常与tomorrow, next week/year, in the future等时间状语连用。"
+          ],
+          "example": {
+            "question": "Look at the dark clouds. It ______ rain soon.",
+            "steps": [
+              "分析句意：天空有乌云，表示即将下雨。",
+              "判断语境：这是对未来情况的预测。",
+              "选择will将来时。"
+            ],
+            "answer": "will"
+          },
+          "mistakes": [
+            {
+              "wrong": "He will goes to the park.",
+              "correct": "He will go to the park."
+            },
+            {
+              "wrong": "Will you going to the party?",
+              "correct": "Will you go to the party?"
+            }
+          ],
+          "memory_tip": "『will后动原，将来事儿不用愁，预测意愿即时决，时间状语是帮手。』",
+          "related": {
+            "prerequisite": "一般现在时 (七年级上)",
+            "next": "be going to 将来时 (八年级上)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "语法填空",
+              "书面表达"
+            ],
+            "scoring_key": "掌握will的基本构成和不同用法，尤其与be going to的区别。",
+            "common_trap": "will后接动词使用非原形，或与be going to混淆。",
+            "real_exam_example": {
+              "source": "2023年江苏省南京市中考真题",
+              "question": "I think the weather ______ be fine tomorrow, so we can go hiking.",
+              "answer": "will",
+              "scoring_notes": "根据“I think”和“tomorrow”判断是对未来的预测，应使用will将来时。"
+            }
+          }
+        },
+        {
+          "card_id": "A8S1-03",
+          "full_id": "A8S1-U3-C1",
+          "title": "will将来时 vs be going to",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "will和be going to都表示将来，但用法侧重不同，will多用于预测、意愿、即时决定；be going to多用于事先计划、有迹象的预测。",
+          "core_points": [
+            "will：1. 预测（I think it will rain.）；2. 意愿/承诺（I will help you.）；3. 即时决定（I'll have a cup of coffee.）。",
+            "be going to：1. 事先计划/打算（I'm going to visit my grandparents next week.）；2. 有迹象的预测（Look at the dark clouds! It's going to rain.）。",
+            "有时可互换：当表示纯粹的未来事实或没有明确计划的预测时，两者可通用。",
+            "Examples: The train will/is going to arrive at 8 a.m. tomorrow."
+          ],
+          "example": {
+            "question": "—Why are you carrying a bucket of water? —I ______ wash the car.",
+            "steps": [
+              "分析对话：提问者看到携带水桶，询问目的。",
+              "判断语境：携带水桶是洗车的准备动作，表示事先的计划或意图。",
+              "选择be going to表示计划。"
+            ],
+            "answer": "am going to"
+          },
+          "mistakes": [
+            {
+              "wrong": "It's cold. I'm going to close the window. (即时决定)",
+              "correct": "It's cold. I'll close the window."
+            },
+            {
+              "wrong": "I think she is going to pass the exam. (纯粹预测)",
+              "correct": "I think she will pass the exam."
+            }
+          ],
+          "memory_tip": "『will临场决，be going to早有案；will预测无凭据，be going to有迹象。』",
+          "related": {
+            "prerequisite": "will将来时 (八年级上)",
+            "next": "时间状语从句 (八年级上)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "语法填空",
+              "补全对话"
+            ],
+            "scoring_key": "区分两者在“计划性”、“即时性”和“预测依据”上的细微差别。",
+            "common_trap": "对话题中根据上下文语境判断选择will还是be going to。",
+            "real_exam_example": {
+              "source": "2021年北京市中考真题",
+              "question": "—What are your plans for the summer vacation? —I ______ visit my aunt in Shanghai.",
+              "answer": "am going to",
+              "scoring_notes": "问句询问“计划”，答句应使用be going to表示事先的计划或打算。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U4",
+      "unit_name": "比较与描述",
+      "cards": [
+        {
+          "card_id": "A8S1-04",
+          "full_id": "A8S1-U4-C1",
+          "title": "形容词比较级 (Comparative Adjectives)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "形容词比较级用于比较两个人或物在某方面程度上的差异，常与than连用。",
+          "core_points": [
+            "构成：1. 单音节词和部分双音节词：词尾加-er。2. 多音节词和部分双音节词：在前面加more。",
+            "Examples: taller, bigger, happier, more beautiful, more careful.",
+            "不规则变化：good/well-better, bad/ill-worse, many/much-more, little-less, far-farther/further。",
+            "用法：A is + 比较级 + than B。表示“A比B更…”。",
+            "Examples: Mike is taller than Tom. This book is more interesting than that one."
+          ],
+          "example": {
+            "question": "My new smartphone is ______ (expensive) than my old one.",
+            "steps": [
+              "分析句意：新手机和旧手机进行比较。",
+              "判断形容词：expensive是多音节词。",
+              "使用more + 形容词原形构成比较级。"
+            ],
+            "answer": "more expensive"
+          },
+          "mistakes": [
+            {
+              "wrong": "She is more taller than her sister.",
+              "correct": "She is taller than her sister."
+            },
+            {
+              "wrong": "This is gooder than that.",
+              "correct": "This is better than that."
+            }
+          ],
+          "memory_tip": "『短词加er，长词用more，不规则变化要记牢，than是比较好伙伴。』",
+          "related": {
+            "prerequisite": "形容词 (七年级上)",
+            "next": "形容词最高级 (八年级上)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "语法填空",
+              "短文改错"
+            ],
+            "scoring_key": "熟练掌握比较级的构成规则（-er, more）和不规则变化，以及than的用法。",
+            "common_trap": "双重比较级（如more taller），或不规则变化记忆不清。",
+            "real_exam_example": {
+              "source": "2022年广东省广州市中考真题",
+              "question": "The weather today is much ______ (cold) than yesterday.",
+              "answer": "colder",
+              "scoring_notes": "cold是单音节词，直接加-er构成比较级。much用于修饰比较级，表示程度更深。"
+            }
+          }
+        },
+        {
+          "card_id": "A8S1-05",
+          "full_id": "A8S1-U4-C2",
+          "title": "形容词最高级 (Superlative Adjectives)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "形容词最高级用于比较三者或三者以上，表示“最……的”，常与the连用，并有表示范围的短语。",
+          "core_points": [
+            "构成：1. 单音节词和部分双音节词：词尾加-est。2. 多音节词和部分双音节词：在前面加most。",
+            "Examples: tallest, biggest, happiest, most beautiful, most careful。",
+            "不规则变化：good/well-best, bad/ill-worst, many/much-most, little-least, far-farthest/furthest。",
+            "用法：the + 最高级 + (of/in...)。表示“在……之中最……”。",
+            "Examples: He is the tallest boy in our class. This is the most interesting book of all."
+          ],
+          "example": {
+            "question": "Mount Everest is ______ (high) mountain in the world.",
+            "steps": [
+              "分析句意：珠穆朗玛峰是世界上最高的山，表示最高程度。",
+              "判断形容词：high是单音节词。",
+              "使用the + 形容词-est构成最高级。"
+            ],
+            "answer": "the highest"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is most cleverest student.",
+              "correct": "He is the cleverest student."
+            },
+            {
+              "wrong": "This is a most interesting movie.",
+              "correct": "This is the most interesting movie."
+            }
+          ],
+          "memory_tip": "『短词加est，长词用most，前面the莫忘，of/in表范围。』",
+          "related": {
+            "prerequisite": "形容词比较级 (八年级上)",
+            "next": "副词比较级与最高级 (八年级上)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "语法填空",
+              "阅读理解"
+            ],
+            "scoring_key": "熟练掌握最高级的构成规则（-est, most）和不规则变化，以及定冠词the和表示范围的介词短语（in/of）。",
+            "common_trap": "遗漏定冠词the，或不规则变化记忆不清。",
+            "real_exam_example": {
+              "source": "2023年湖北省武汉市中考真题",
+              "question": "Which season do you like ______ (well)?",
+              "answer": "best",
+              "scoring_notes": "比较的是四季，三者或三者以上，因此使用well的最高级best。此题考察不规则变化和最高级用法。"
+            }
+          }
+        },
+        {
+          "card_id": "A8S1-06",
+          "full_id": "A8S1-U4-C3",
+          "title": "副词比较级与最高级",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "副词的比较级和最高级形式用于比较动作或状态的程度。",
+          "core_points": [
+            "构成：1. 单音节副词和与形容词同形的副词：词尾加-er/-est。2. 大部分以-ly结尾的副词：前面加more/most。",
+            "Examples: faster-fastest, earlier-earliest, more carefully-most carefully, more slowly-most slowly。",
+            "不规则变化：well-better-best, badly-worse-worst, much-more-most, little-less-least, far-farther/further-farthest/furthest。",
+            "用法：修饰动词时，副词比较级/最高级放在动词之后。",
+            "Examples: He runs faster than I. She sings the most beautifully in our class."
+          ],
+          "example": {
+            "question": "Of all the students, Mary writes ______ (careful).",
+            "steps": [
+              "分析句意：在所有学生中，玛丽写字最仔细，表示最高程度。",
+              "判断词性：修饰动词writes，应用副词。",
+              "判断副词：careful的副词是carefully，是多音节副词，构成最高级用most。"
+            ],
+            "answer": "most carefully"
+          },
+          "mistakes": [
+            {
+              "wrong": "He speaks English more fluent than me.",
+              "correct": "He speaks English more fluently than I."
+            },
+            {
+              "wrong": "She did the best in the exam.",
+              "correct": "She did best in the exam. (或She did the best work in the exam.) - 副词最高级前通常不加the，除非后面有修饰成分。"
+            }
+          ],
+          "memory_tip": "『副词加er/est，长词用more/most，不规则要牢记，修饰动词莫忘记。』",
+          "related": {
+            "prerequisite": "形容词比较级与最高级 (八年级上)",
+            "next": "形容词与副词辨析 (八年级上)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "语法填空",
+              "短文改错"
+            ],
+            "scoring_key": "区分形容词和副词的用法，掌握副词比较级和最高级的构成，特别是-ly副词的构成。",
+            "common_trap": "形容词和副词混淆，尤其是在比较级和最高级形式中。",
+            "real_exam_example": {
+              "source": "2020年浙江省杭州市中考真题",
+              "question": "My sister practices singing every day, so she sings ______ (good) than before.",
+              "answer": "better",
+              "scoring_notes": "修饰动词sings，用副词。与“before”比较，用比较级。good的副词是well，比较级是better。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U5",
+      "unit_name": "条件与建议",
+      "cards": [
+        {
+          "card_id": "A8S1-07",
+          "full_id": "A8S1-U5-C1",
+          "title": "条件状语从句 (If-clauses)",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "条件状语从句由if引导，表示主句动作发生的条件，主从句时态常遵循“主将从现”原则。",
+          "core_points": [
+            "引导词：if (如果)。",
+            "时态：主句用将来时（will do），从句用一般现在时（do/does）。",
+            "Examples: If it rains tomorrow, I won't go out. (如果明天下雨，我就不出去了。)",
+            "主句可以是祈使句：If you want to be healthy, eat more vegetables. (如果你想健康，多吃蔬菜。)",
+            "主句也可以是情态动词：If you are free, you can come to my party. (如果你有空，可以来参加我的派对。)",
+            "注意：if从句中不能使用will，即使表示将来。"
+          ],
+          "example": {
+            "question": "If he ______ (come) back, please tell him to call me.",
+            "steps": [
+              "分析句意：主句是祈使句，从句是if引导的条件状语从句。",
+              "判断时态：条件状语从句中，即使表示将来，也要用一般现在时。",
+              "he是第三人称单数，动词come应变为comes。"
+            ],
+            "answer": "comes"
+          },
+          "mistakes": [
+            {
+              "wrong": "If it will rain tomorrow, we will stay at home.",
+              "correct": "If it rains tomorrow, we will stay at home."
+            },
+            {
+              "wrong": "If he doesn't work hard, he won't pass the exam.",
+              "correct": "If he doesn't work hard, he won't pass the exam."
+            }
+          ],
+          "memory_tip": "『主将从现，if不能will。祈使情态也常现，条件状语多考点。』",
+          "related": {
+            "prerequisite": "一般现在时 (七年级上), will将来时 (八年级上)",
+            "next": "时间状语从句 (八年级上), 宾语从句 (八年级下)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "语法填空",
+              "短文改错",
+              "书面表达"
+            ],
+            "scoring_key": "核心是“主将从现”，即if从句中用一般现在时表示将来，主句用将来时、祈使句或情态动词。",
+            "common_trap": "if从句中使用will，或主从句时态不一致。",
+            "real_exam_example": {
+              "source": "2023年湖南省长沙市中考真题",
+              "question": "If you ______ (finish) your homework, you can watch TV.",
+              "answer": "finish",
+              "scoring_notes": "if引导的条件状语从句，主句是情态动词can do，从句用一般现在时。you是第二人称，动词用原形。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U6",
+      "unit_name": "过去与时间",
+      "cards": [
+        {
+          "card_id": "A8S1-08",
+          "full_id": "A8S1-U6-C1",
+          "title": "时间状语从句 (When-clauses)",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "时间状语从句由when, while, as, after, before, until, as soon as等引导，表示主句动作发生的时间背景。",
+          "core_points": [
+            "引导词：when (当...时), while (当...时, 强调同时进行), as (一边...一边...), after (在...之后), before (在...之前), until (直到...为止), as soon as (一...就...)。",
+            "时态：主从句时态要保持一致。如果主句是将来时，从句用一般现在时（与条件状语从句的“主将从现”类似）。",
+            "Examples: I was playing basketball when he called me. (主从句都用过去时)",
+            "Examples: When I get home, I will call you. (主将从现)",
+            "while强调主从句动作同时发生且持续一段时间，when既可指点也可指段。",
+            "until通常与否定句连用，表示“直到……才”。"
+          ],
+          "example": {
+            "question": "Don't go out ______ it stops raining.",
+            "steps": [
+              "分析句意：不要出去，直到雨停。",
+              "判断引导词：until表示“直到……才”，符合语境。",
+              "判断时态：主句是祈使句（将来意义），从句用一般现在时。"
+            ],
+            "answer": "until"
+          },
+          "mistakes": [
+            {
+              "wrong": "When he will come, I will tell him the news.",
+              "correct": "When he comes, I will tell him the news."
+            },
+            {
+              "wrong": "She watched TV while she cooked dinner. (强调同时进行)",
+              "correct": "She watched TV while she was cooking dinner. (或She cooked dinner while she watched TV.)"
+            }
+          ],
+          "memory_tip": "『when, while, as，时间状语一大把；主将从现是关键，时态一致不能差。』",
+          "related": {
+            "prerequisite": "一般现在时 (七年级上), 一般过去时 (七年级下), will将来时 (八年级上)",
+            "next": "宾语从句 (八年级下), 定语从句 (九年级)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "语法填空",
+              "短文改错",
+              "书面表达"
+            ],
+            "scoring_key": "掌握不同引导词的含义和用法，以及主从句时态的呼应（尤其是“主将从现”原则）。",
+            "common_trap": "在表示将来的时间状语从句中误用will，或混淆when和while的用法。",
+            "real_exam_example": {
+              "source": "2022年浙江省丽水市中考真题",
+              "question": "______ I was walking along the street, I met an old friend.",
+              "answer": "As / When",
+              "scoring_notes": "从句和主句都用过去时，表示过去某个时间点或持续一段时间，when和as都可以。as更强调伴随性。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "G1",
+      "unit_name": "综合语法",
+      "cards": [
+        {
+          "card_id": "A8S1-09",
+          "full_id": "A8S1-G1-C1",
+          "title": "不定代词 (Indefinite Pronouns)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "不定代词指代不确定的人或物，常见的有some-, any-, no-, every-构成的复合不定代词以及many, much, few, little, all, both, either, neither等。",
+          "core_points": [
+            "some-系列 (someone, something, somewhere)：通常用于肯定句，也可用于疑问句表示请求或建议。",
+            "Examples: I have something to tell you. Would you like something to drink?",
+            "any-系列 (anyone, anything, anywhere)：通常用于否定句和疑问句，也可用于肯定句表示“任何一个”。",
+            "Examples: I don't have anything to do. Is there anyone here? Anyone can do it.",
+            "no-系列 (no one, nothing, nowhere)：表示否定意义，句中不再用否定词。",
+            "Examples: There is nothing in the box. (不能说There isn't nothing...)",
+            "every-系列 (everyone, everything, everywhere)：表示“每个”，作主语时谓语动词用单数形式。",
+            "Examples: Everyone likes him. Everything is ready."
+          ],
+          "example": {
+            "question": "There is ______ in the room, so it's very quiet.",
+            "steps": [
+              "分析句意：房间里没有人在，所以很安静。",
+              "判断语境：需要表达否定的概念，且句中没有否定词。",
+              "no one符合要求，表示“没有人”。"
+            ],
+            "answer": "no one"
+          },
+          "mistakes": [
+            {
+              "wrong": "He didn't say nothing.",
+              "correct": "He didn't say anything. / He said nothing."
+            },
+            {
+              "wrong": "Everyone are happy.",
+              "correct": "Everyone is happy."
+            }
+          ],
+          "memory_tip": "『some肯定any否问，no句不带否定词；every做主单数用，人one物thing地where。』",
+          "related": {
+            "prerequisite": "名词单复数 (七年级上)",
+            "next": "主谓一致 (九年级)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "语法填空"
+            ],
+            "scoring_key": "区分some-, any-, no-系列不定代词的用法，特别是肯定、否定和疑问句中的应用，以及主谓一致问题。",
+            "common_trap": "双重否定，或将不定代词作主语时谓语动词误用复数。",
+            "real_exam_example": {
+              "source": "2021年四川省成都市中考真题",
+              "question": "The classroom is empty. There is ______ in it.",
+              "answer": "no one",
+              "scoring_notes": "根据“empty”判断教室里“没有人”，且句中没有否定词，选择no one。"
+            }
+          }
+        },
+        {
+          "card_id": "A8S1-10",
+          "full_id": "A8S1-G1-C2",
+          "title": "形容词与副词辨析",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "形容词修饰名词，说明事物的性质或特征；副词修饰动词、形容词或其他副词，说明动作或状态的方式、程度、时间、地点等。",
+          "core_points": [
+            "形容词：作定语（修饰名词）、表语（be动词后，说明主语特征）。",
+            "Examples: a beautiful flower (定语); She is happy (表语).",
+            "副词：作状语（修饰动词、形容词、副词、句子）。",
+            "Examples: He runs quickly (修饰动词); very happy (修饰形容词); quite well (修饰副词).",
+            "大部分副词由形容词加-ly构成 (quick-quickly, careful-carefully)。",
+            "特殊情况：hard, fast, early, late等词形兼作形容词和副词，well既是good的副词也是形容词（身体好）。"
+          ],
+          "example": {
+            "question": "He speaks English very ______ (fluent).",
+            "steps": [
+              "分析句意：修饰动词speaks，表示说话的方式。",
+              "判断词性：修饰动词应使用副词。",
+              "fluent的副词形式是fluently。"
+            ],
+            "answer": "fluently"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is a fast runner. He runs fastly.",
+              "correct": "He is a fast runner. He runs fast."
+            },
+            {
+              "wrong": "She looks happily.",
+              "correct": "She looks happy. (look作系动词，后接形容词作表语)"
+            }
+          ],
+          "memory_tip": "『形修名，作表语；副修动形副，作状语。-ly是标志，特殊兼职要记牢。』",
+          "related": {
+            "prerequisite": "形容词 (七年级上), 副词 (七年级上)",
+            "next": "比较级最高级 (八年级上)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "语法填空",
+              "短文改错"
+            ],
+            "scoring_key": "根据词语在句中的功能判断是修饰名词还是动词、形容词等，从而选择形容词或副词。",
+            "common_trap": "系动词（如look, sound, feel, smell, taste, become, get等）后误用副词，或混淆形容词和副词同形词的用法。",
+            "real_exam_example": {
+              "source": "2023年广东省深圳市中考真题",
+              "question": "The food smells ______ (good). I want to try some.",
+              "answer": "good",
+              "scoring_notes": "smells是系动词，后接形容词作表语，表示主语的状态。good是形容词。"
+            }
+          }
+        },
+        {
+          "card_id": "A8S1-11",
+          "full_id": "A8S1-G1-C3",
+          "title": "情态动词 (Modal Verbs)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "情态动词表示说话人的语气、情态、能力、可能性、允许、必要等，其后接动词原形。",
+          "core_points": [
+            "常见情态动词：can/could (能力/可能性/请求), may/might (允许/可能性), must (必须/推测), should (应该), have to (不得不), will/would (意愿/请求)等。",
+            "Examples: I can swim. You may sit here. We must finish it. You should study hard.",
+            "特点：1. 没人称和数的变化。2. 后接动词原形。3. 构成否定句和疑问句时不需要助动词do/does/did。",
+            "Examples: Can you help me? No, I can't. Must I go? Yes, you must. / No, you don't have to.",
+            "can vs be able to：be able to有更多时态，表示具体能力；can多用于一般现在时，表示一般能力。",
+            "must vs have to：must表示主观要求；have to表示客观需要。",
+            "may vs might：might表示的可能性更小。"
+          ],
+          "example": {
+            "question": "You ______ smoke here. It's forbidden.",
+            "steps": [
+              "分析句意：这里禁止吸烟。",
+              "判断语境：表示禁止，不允许做某事。",
+              "选择mustn't (禁止) 或can't (不允许)。"
+            ],
+            "answer": "mustn't / can't"
+          },
+          "mistakes": [
+            {
+              "wrong": "He must to go now.",
+              "correct": "He must go now."
+            },
+            {
+              "wrong": "Does he can speak French?",
+              "correct": "Can he speak French?"
+            }
+          ],
+          "memory_tip": "『情态动词真奇妙，动词原形紧跟跑；人称数不变，否问不需do。』",
+          "related": {
+            "prerequisite": "动词原形 (七年级上)",
+            "next": "被动语态 (八年级下), 虚拟语气 (九年级)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "单选",
+              "完形填空",
+              "语法填空",
+              "补全对话"
+            ],
+            "scoring_key": "掌握不同情态动词的基本含义和用法，以及其构成否定和疑问句的特点。",
+            "common_trap": "情态动词后误用to do或动词非原形，或混淆must与have to的区别。",
+            "real_exam_example": {
+              "source": "2023年安徽省中考真题",
+              "question": "—I can't find my keys. —Don't worry. They ______ be in your bag.",
+              "answer": "may / might",
+              "scoring_notes": "表示不确定的推测，可能在包里，用may或might。"
+            }
+          }
+        },
+        {
+          "card_id": "A8S1-12",
+          "full_id": "A8S1-G1-C4",
+          "title": "构词法 (Word Formation - 基础)",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "构词法是词汇学习的重要组成部分，八年级主要涉及通过添加前缀、后缀改变词义或词性。",
+          "core_points": [
+            "前缀 (Prefixes)：加在词根前，改变词义。如：un- (不，非，反), dis- (不，非，反), re- (再，又)。",
+            "Examples: happy → unhappy, like → dislike, write → rewrite。",
+            "后缀 (Suffixes)：加在词根后，改变词性或词义。如：-ful (充满…的，形容词), -less (没有…的，形容词), -er/-or (人，名词), -ly (副词)。",
+            "Examples: care → careful/careless, teach → teacher, quick → quickly。",
+            "复合词 (Compound words)：由两个或多个词组成的新词。如：sunflower, classroom, weekend。",
+            "转化 (Conversion)：词性转化，如名词作动词，形容词作名词。如：water (水) → water (浇水), clean (干净的) → clean (打扫)。"
+          ],
+          "example": {
+            "question": "He is always ______ (care) when doing experiments.",
+            "steps": [
+              "分析句意：他做实验时总是很仔细。",
+              "判断词性：修饰主语He，作表语，应使用形容词。",
+              "care的名词，需要变成形容词，表示“充满仔细的”，加上后缀-ful。"
+            ],
+            "answer": "careful"
+          },
+          "mistakes": [
+            {
+              "wrong": "She is a good teach.",
+              "correct": "She is a good teacher."
+            },
+            {
+              "wrong": "Don't be unpolite.",
+              "correct": "Don't be impolite."
+            }
+          ],
+          "memory_tip": "『前缀改意，后缀变性；复合转化，词汇变通。』",
+          "related": {
+            "prerequisite": "词性 (七年级上)",
+            "next": "高级构词法 (九年级)"
+          },
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": [
+              "完形填空",
+              "语法填空",
+              "首字母填空",
+              "短文改错"
+            ],
+            "scoring_key": "理解常见前缀和后缀的含义，能根据语境判断所需词性并正确构词。",
+            "common_trap": "混淆形容词和副词的后缀，或对前缀的否定意义理解不到位。",
+            "real_exam_example": {
+              "source": "2022年重庆市中考真题",
+              "question": "It's ______ (polite) to talk loudly in the library.",
+              "answer": "impolite",
+              "scoring_notes": "根据句意“在图书馆大声说话是不礼貌的”，判断polite需要加否定前缀，用im-。"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
