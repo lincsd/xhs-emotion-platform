@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260325a'  # 中文字符渲染优化+逐字Unicode注入+审计80分
+BUILD_VERSION = '20260326a'  # 自我优化系统: Prompt记忆库+错字词典+自适应参数
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -411,6 +411,13 @@ def init_db():
     conn.commit()
     conn.close()
     print(f"[init_db] Done. Version={BUILD_VERSION}")
+
+    # 初始化自我优化系统数据库
+    try:
+        from self_optimizer import init_optimizer_db
+        init_optimizer_db()
+    except ImportError:
+        print("[init_db] self_optimizer not available, skipping")
 
 
 def bootstrap_db_if_needed():
@@ -1719,6 +1726,10 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 'keyCount': len(SERVER_GEMINI_API_KEYS),
                 'hasServerKey': bool(SERVER_GEMINI_API_KEY),
             })
+        elif path == '/api/optimizer-dashboard':
+            return self._get_optimizer_dashboard()
+        elif path == '/api/optimizer-stats':
+            return self._get_optimizer_stats()
         elif path == '/api/captcha':
             return self._get_captcha()
         # --- 需要登录的路由 ---
@@ -3507,6 +3518,30 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
             print(f'[v3] ✅ {card["full_id"]} 完成: 审计={best_score} 质量={quality.get("total",0)} model={used_model} rounds={rounds_used}', flush=True)
 
+            # ── 自我优化: 记录结果 ──
+            try:
+                from self_optimizer import record_full_result
+                record_full_result(
+                    card_id=card['full_id'],
+                    subject=subject,
+                    grade=grade,
+                    card_type=card_type,
+                    prompt_text=prompt,
+                    manifest=manifest,
+                    audit_score=best_score,
+                    quality_score=quality.get('total', 0),
+                    audit_result=None,  # 由前面 ocr_audit 结果在 v3 模块内部记录
+                    image_model=used_model,
+                    audit_rounds=rounds_used,
+                    final_action=final_action,
+                    prompt_length=len(prompt),
+                    image_size_kb=len(best_image) / 1024,
+                    success=True
+                )
+                pipeline_log.append('🧠 自我优化: 已记录')
+            except Exception as opt_e:
+                pipeline_log.append(f'自我优化记录跳过: {str(opt_e)[:80]}')
+
             return self._send_json({
                 'ok': True,
                 'image': img_b64,
@@ -3856,6 +3891,35 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             import traceback
             traceback.print_exc()
             return self._send_json({'error': f'渲染失败: {e}'}, 500)
+
+    # ═══════════════════════════════════════════
+    # 自我优化系统 API
+    # ═══════════════════════════════════════════
+    def _get_optimizer_dashboard(self):
+        """返回自我优化系统完整仪表盘"""
+        try:
+            from self_optimizer import get_optimizer_dashboard
+            dashboard = get_optimizer_dashboard()
+            return self._send_json({'ok': True, 'dashboard': dashboard})
+        except ImportError:
+            return self._send_json({'ok': False, 'error': '自我优化模块未安装'}, 500)
+        except Exception as e:
+            return self._send_json({'ok': False, 'error': str(e)}, 500)
+
+    def _get_optimizer_stats(self):
+        """返回简要统计"""
+        try:
+            from self_optimizer import get_stats_summary, get_adaptive_params, get_frequent_errors
+            return self._send_json({
+                'ok': True,
+                'stats': get_stats_summary(),
+                'params': get_adaptive_params(),
+                'top_errors': get_frequent_errors(),
+            })
+        except ImportError:
+            return self._send_json({'ok': False, 'error': '自我优化模块未安装'}, 500)
+        except Exception as e:
+            return self._send_json({'ok': False, 'error': str(e)}, 500)
 
     # ═══════════════════════════════════════════
     # 五角色流水线：按需生成 R1→R2→R3 Prompt 记录

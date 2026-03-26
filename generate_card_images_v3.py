@@ -23,6 +23,19 @@
 import json, os, sys, time, base64, datetime, re, io, textwrap
 import urllib.request, urllib.error
 
+# 自我优化系统
+try:
+    from self_optimizer import (
+        build_fewshot_hint, build_error_boost_hint,
+        record_full_result, get_adaptive_params,
+        record_errors as _so_record_errors
+    )
+    _HAS_OPTIMIZER = True
+    print('[v3] 自我优化系统已加载')
+except ImportError:
+    _HAS_OPTIMIZER = False
+    print('[v3] 自我优化系统未加载 (self_optimizer.py 不存在)')
+
 # ═══════════════════════════════════════════
 # 配置
 # ═══════════════════════════════════════════
@@ -37,6 +50,27 @@ IMAGE_MODELS    = [                              # 图片生成（按优先级�
 
 MAX_AUDIT_ROUNDS = 3    # OCR审计最大重试轮数
 AUDIT_PASS_SCORE = 80   # OCR审计通过分数 (0-100) — 提高标准以减少乱码
+
+
+def _get_effective_params():
+    """获取当前有效参数（自适应覆盖默认值）"""
+    if not _HAS_OPTIMIZER:
+        return {
+            'max_audit_rounds': MAX_AUDIT_ROUNDS,
+            'audit_pass_score': AUDIT_PASS_SCORE,
+            'max_chinese_chars': 15,
+            'max_chars_per_block': 4,
+        }
+    try:
+        return get_adaptive_params()
+    except Exception:
+        return {
+            'max_audit_rounds': MAX_AUDIT_ROUNDS,
+            'audit_pass_score': AUDIT_PASS_SCORE,
+            'max_chinese_chars': 15,
+            'max_chars_per_block': 4,
+        }
+
 
 # ═══════════════════════════════════════════
 # API 基础设施
@@ -433,8 +467,20 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
 
     card_info = _build_card_info(card, subject, grade, semester)
 
+    # ── 自我优化: 注入 few-shot 高分 prompt 参考 ──
+    fewshot_block = ''
+    if _HAS_OPTIMIZER:
+        try:
+            fewshot_block = build_fewshot_hint(subject, card_type)
+        except Exception as e:
+            print(f'      [optimizer] few-shot hint error: {e}')
+
+    full_input = f'{system_prompt}\n\n--- 知识点信息 ---\n{card_info}'
+    if fewshot_block:
+        full_input += f'\n\n{fewshot_block}'
+
     contents = [
-        {'role': 'user', 'parts': [{'text': f'{system_prompt}\n\n--- 知识点信息 ---\n{card_info}'}]}
+        {'role': 'user', 'parts': [{'text': full_input}]}
     ]
     gen_config = {
         'maxOutputTokens': 8192,
@@ -530,6 +576,15 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
 
     if audit_hint:
         chinese_prefix += f"\n⚠️ CORRECTION FROM PREVIOUS ATTEMPT:\n{audit_hint}\n"
+
+    # ── 自我优化: 注入易错字符强化提示 ──
+    if _HAS_OPTIMIZER and manifest:
+        try:
+            error_boost = build_error_boost_hint(subject, manifest)
+            if error_boost:
+                chinese_prefix += error_boost
+        except Exception as e:
+            print(f'      [optimizer] error boost hint error: {e}')
 
     full_prompt = chinese_prefix + "\n" + prompt
     contents = [
@@ -811,6 +866,11 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
     处理单张卡片的完整流水线。
     返回: (success: bool, filepath: str, stats: dict)
     """
+    # 使用自适应参数
+    _params = _get_effective_params()
+    _max_rounds = _params.get('max_audit_rounds', MAX_AUDIT_ROUNDS)
+    _pass_score = _params.get('audit_pass_score', AUDIT_PASS_SCORE)
+
     card_id = card['full_id']
     title = card['title']
     stats = {
@@ -847,12 +907,13 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
     best_ext = 'png'
     best_score = 0
     audit_hint = ''
+    last_audit = None  # 保存最近一次审计结果（供自我优化系统使用）
 
-    for round_num in range(1, MAX_AUDIT_ROUNDS + 1):
+    for round_num in range(1, _max_rounds + 1):
         stats['audit_rounds'] = round_num
 
         # Step 2: 生成图片
-        round_label = f'(round {round_num}/{MAX_AUDIT_ROUNDS})' if round_num > 1 else ''
+        round_label = f'(round {round_num}/{_max_rounds})' if round_num > 1 else ''
         print(f'  ├─ Step 2: 生成图片{round_label}...', end='', flush=True)
         t1 = time.time()
         img_data, ext, model = generate_card_image(
@@ -886,6 +947,7 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
         score = audit.get('overall_score', 0)
         errors = audit.get('errors', [])
         summary = audit.get('summary', '')
+        last_audit = audit  # 记录最近审计结果
         print(f' 得分={score}/100 ({summary})')
 
         if score > best_score:
@@ -895,7 +957,7 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
 
         stats['audit_score'] = best_score
 
-        if score >= AUDIT_PASS_SCORE:
+        if score >= _pass_score:
             print(f'  ├─ ✅ OCR审计通过! (score={score})')
             stats['final_action'] = 'pass'
             break
@@ -903,7 +965,7 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
             # 构建纠错提示
             high_errs = [e for e in errors if e.get('severity') in ('high', 'medium')]
             print(f'  ├─ ⚠️  {len(high_errs)}处文字错误, ', end='')
-            if round_num < MAX_AUDIT_ROUNDS:
+            if round_num < _max_rounds:
                 audit_hint = _build_audit_hint(audit, manifest)
                 print(f'重新生成...')
                 time.sleep(2)
@@ -914,7 +976,7 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
         return False, '', stats
 
     # ── Step 5: PIL 修补兜底 ──
-    if best_score < AUDIT_PASS_SCORE and manifest and not skip_audit:
+    if best_score < _pass_score and manifest and not skip_audit:
         print(f'  ├─ Step 5: PIL文字修补...', end='', flush=True)
         # 重新审计最佳图片获取错误详情
         key = next_key(keys)
@@ -950,6 +1012,30 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
         f.write(best_image)
     size_kb = len(best_image) / 1024
     print(f'  └─ 💾 保存 {filename} ({size_kb:.0f}KB) [审计={best_score} 质量={q_total}]')
+
+    # ── 自我优化: 记录完整结果 ──
+    if _HAS_OPTIMIZER:
+        try:
+            record_full_result(
+                card_id=card_id,
+                subject=subject,
+                grade=grade,
+                card_type=card.get('type', ''),
+                prompt_text=prompt,
+                manifest=manifest,
+                audit_score=best_score,
+                quality_score=q_total,
+                audit_result=last_audit,
+                image_model=stats.get('image_model', ''),
+                audit_rounds=stats.get('audit_rounds', 1),
+                final_action=stats.get('final_action', ''),
+                prompt_length=len(prompt),
+                image_size_kb=size_kb,
+                elapsed_seconds=stats.get('prompt_gen_time', 0) + stats.get('image_gen_time', 0),
+                success=True
+            )
+        except Exception as e:
+            print(f'  ⚠️ [optimizer] record error: {e}')
 
     return True, filepath, stats
 
