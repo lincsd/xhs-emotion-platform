@@ -1,0 +1,615 @@
+{
+  "subject": "英语",
+  "grade": "七年级",
+  "semester": "下册",
+  "textbook": "人教Go for it!版",
+  "grade_short": "七下",
+  "card_pack": "知识总结",
+  "description": "人教版七年级下册英语中考考点笔记总结，聚焦核心语法与词汇，助你通关中考。",
+  "units": [
+    {
+      "unit_id": "U1",
+      "unit_name": "现在进行时",
+      "cards": [
+        {
+          "card_id": "001",
+          "full_id": "G7B_U1_001",
+          "title": "现在进行时 (Present Continuous)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "表示正在发生或现阶段正在进行的动作，或在某些语境下表示将来。",
+          "core_points": [
+            "构成：be动词 (am/is/are) + 动词现在分词 (-ing形式)",
+            "肯定句：主语 + am/is/are + V-ing + 其他.",
+            "否定句：主语 + am/is/are + not + V-ing + 其他.",
+            "疑问句：Am/Is/Are + 主语 + V-ing + 其他?",
+            "常见时间状语：now, right now, look!, listen!, at the moment, this week/month/year (表示现阶段进行)"
+          ],
+          "example": {
+            "question": "Choose the best answer: Look! The children ______ in the park now.",
+            "steps": [
+              "1. 识别时间状语「now」和提示词「Look!」，表明动作正在发生。",
+              "2. 确定句子需使用现在进行时。",
+              "3. 根据主语「The children」(复数) 选择正确的be动词「are」。",
+              "4. 将动词「play」变为现在分词「playing」。"
+            ],
+            "answer": "are playing"
+          },
+          "mistakes": [
+            {"wrong": "He is often playing football.", "correct": "He often plays football. (频率副词与一般现在时)"},
+            {"wrong": "They is watching TV.", "correct": "They are watching TV. (主谓一致错误)"}
+          ],
+          "memory_tip": "be加ing，正在进行；now, look, listen，常伴行。",
+          "related": {
+            "prerequisite": "七年级上册一般现在时，be动词用法",
+            "next": "八年级上册现在完成时，现在进行时表将来"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "短文改错"],
+            "scoring_key": "主谓一致与动词ing形式的正确构成，时间状语的准确判断。",
+            "common_trap": "与一般现在时混淆，尤其是在表示习惯性动作或客观事实时误用进行时。",
+            "real_exam_example": {
+              "source": "2023年某市中考真题",
+              "question": "My sister ______ (listen) to music in her room at the moment.",
+              "answer": "is listening",
+              "scoring_notes": "考察现在进行时的构成与时间状语「at the moment」的对应。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U2",
+      "unit_name": "be going to 句型",
+      "cards": [
+        {
+          "card_id": "002",
+          "full_id": "G7B_U2_002",
+          "title": "be going to 句型 (Future Plans)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "表示将要发生的动作或未来计划，通常是经过考虑或有迹象表明会发生。",
+          "core_points": [
+            "构成：主语 + am/is/are + going to + 动词原形 + 其他.",
+            "肯定句：I am going to visit Beijing next year.",
+            "否定句：She isn't going to buy a new dress.",
+            "疑问句：Are you going to study abroad?",
+            "常见时间状语：tomorrow, next week/month/year, soon, in the future."
+          ],
+          "example": {
+            "question": "Fill in the blank: What ______ you ______ (do) this weekend?",
+            "steps": [
+              "1. 识别时间状语「this weekend」，表示未来。",
+              "2. 题干是特殊疑问句，且询问计划，适合用「be going to」。",
+              "3. 根据主语「you」选择be动词「are」。",
+              "4. 动词「do」保持原形。"
+            ],
+            "answer": "are; going to do"
+          },
+          "mistakes": [
+            {"wrong": "He is going to goes to the park.", "correct": "He is going to go to the park. (going to 后接动词原形)"},
+            {"wrong": "Are you going to going?", "correct": "Are you going to go? (避免重复使用ing形式)"}
+          ],
+          "memory_tip": "be going to，计划未来；动词原形，别忘带。",
+          "related": {
+            "prerequisite": "七年级上册be动词用法",
+            "next": "八年级上册will将来时，现在进行时表将来"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "书面表达"],
+            "scoring_key": "be动词与主语一致，going to 后接动词原形。",
+            "common_trap": "与will将来时混淆：be going to 强调计划或有迹象，will 强调意愿或预测。",
+            "real_exam_example": {
+              "source": "2022年某省中考真题",
+              "question": "Look at the dark clouds! It ______ (rain) soon.",
+              "answer": "is going to rain",
+              "scoring_notes": "考察根据迹象进行的预测，需要用be going to。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U3",
+      "unit_name": "There be 句型",
+      "cards": [
+        {
+          "card_id": "003",
+          "full_id": "G7B_U3_003",
+          "title": "There be 句型 (Existence)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "表示「某地有某物」或「存在某事」，强调存在而非拥有。",
+          "core_points": [
+            "构成：There + be动词 (is/are/was/were) + 名词 + 地点状语.",
+            "主谓一致：be动词与紧随其后的名词保持单复数一致。",
+            "肯定句：There is a book on the desk. / There are many students in the classroom.",
+            "否定句：There isn't any milk in the fridge. / There weren't many people at the party.",
+            "疑问句：Is there a pen in your bag? / Were there any apples left?"
+          ],
+          "example": {
+            "question": "Choose the correct sentence: (A) There is two pens on the table. (B) There are two pens on the table. (C) There has two pens on the table.",
+            "steps": [
+              "1. 识别句型为「There be」句型，表示存在。",
+              "2. 紧随be动词的名词是「two pens」(复数)。",
+              "3. 根据主谓一致原则，be动词应使用「are」。",
+              "4. 排除选项 (A) 和 (C)，(C) 是「拥有」概念，不适用。"
+            ],
+            "answer": "(B) There are two pens on the table."
+          },
+          "mistakes": [
+            {"wrong": "There are a bird in the tree.", "correct": "There is a bird in the tree. (主谓一致错误)"},
+            {"wrong": "There have some books.", "correct": "There are some books. (误用have表示存在)"}
+          ],
+          "memory_tip": "There be 有，主语在后；is/are 跟着，单复数要对。",
+          "related": {
+            "prerequisite": "七年级上册be动词用法，名词单复数",
+            "next": "八年级上册动词的时态变化在There be句型中的应用"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "短文改错"],
+            "scoring_key": "There be 句型中be动词与后置名词的单复数一致。",
+            "common_trap": "误将「There be」与「have/has」混用，或忽略过去时态的运用 (was/were)。",
+            "real_exam_example": {
+              "source": "2021年某市中考真题",
+              "question": "______ (be) a lot of tall buildings in our city ten years ago.",
+              "answer": "There were",
+              "scoring_notes": "考察There be句型的过去时态和主谓一致，时间状语「ten years ago」提示过去时，后接名词「buildings」为复数。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U4",
+      "unit_name": "一般过去时",
+      "cards": [
+        {
+          "card_id": "004",
+          "full_id": "G7B_U4_004",
+          "title": "一般过去时 - 规则动词 (Simple Past - Regular)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "表示过去某个时间发生的动作或存在的状态，动作已结束。",
+          "core_points": [
+            "构成：动词原形加-ed (规则动词)",
+            "肯定句：主语 + 动词过去式 + 其他.",
+            "否定句：主语 + didn't + 动词原形 + 其他.",
+            "疑问句：Did + 主语 + 动词原形 + 其他?",
+            "常见时间状语：yesterday, last week/month/year, ago, in 1990 (过去的年份)."
+          ],
+          "example": {
+            "question": "Choose the best answer: My brother ______ (watch) a football match last night.",
+            "steps": [
+              "1. 识别时间状语「last night」，表明动作发生在过去。",
+              "2. 确定句子需使用一般过去时。",
+              "3. 动词「watch」是规则动词，其过去式为「watched」。"
+            ],
+            "answer": "watched"
+          },
+          "mistakes": [
+            {"wrong": "He didn't watched TV.", "correct": "He didn't watch TV. (didn't 后接动词原形)"},
+            {"wrong": "Did she played football?", "correct": "Did she play football? (did 后接动词原形)"}
+          ],
+          "memory_tip": "过去时，ed 来帮忙；否定疑问，did 找原形。",
+          "related": {
+            "prerequisite": "七年级上册一般现在时",
+            "next": "七年级下册一般过去时-不规则动词，八年级上册过去进行时"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "短文改错", "书面表达"],
+            "scoring_key": "准确判断过去时间状语，规则动词过去式拼写正确，否定疑问句中动词用原形。",
+            "common_trap": "规则动词变过去式时，忽略y变i加ed，双写辅音字母等拼写规则。",
+            "real_exam_example": {
+              "source": "2023年某市中考真题",
+              "question": "My father ______ (live) in Shanghai for five years when he was young.",
+              "answer": "lived",
+              "scoring_notes": "考察一般过去时，通过「when he was young」提示过去时间段，且动作已结束。"
+            }
+          }
+        },
+        {
+          "card_id": "005",
+          "full_id": "G7B_U4_005",
+          "title": "一般过去时 - 不规则动词 (Simple Past - Irregular)",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "表示过去某个时间发生的动作或存在的状态，其过去式需特殊记忆。",
+          "core_points": [
+            "构成：动词原形转换为特殊形式 (不规则动词)",
+            "肯定句：主语 + 不规则动词过去式 + 其他.",
+            "否定句：主语 + didn't + 动词原形 + 其他.",
+            "疑问句：Did + 主语 + 动词原形 + 其他?",
+            "常见不规则动词：go-went, see-saw, eat-ate, drink-drank, take-took, have-had, do-did, say-said, come-came, get-got, make-made, write-wrote, read-read (发音不同)"
+          ],
+          "example": {
+            "question": "Fill in the blank: My mother ______ (make) a delicious cake yesterday.",
+            "steps": [
+              "1. 识别时间状语「yesterday」，表明动作发生在过去。",
+              "2. 确定句子需使用一般过去时。",
+              "3. 动词「make」是不规则动词，其过去式为「made」。"
+            ],
+            "answer": "made"
+          },
+          "mistakes": [
+            {"wrong": "He goed to school.", "correct": "He went to school. (go是不规则动词)"},
+            {"wrong": "I didn't saw her.", "correct": "I didn't see her. (didn't 后接动词原形)"}
+          ],
+          "memory_tip": "不规则，要死记；did 出现，变回原形。",
+          "related": {
+            "prerequisite": "七年级上册动词原形",
+            "next": "八年级上册过去进行时，八年级下册现在完成时"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "短文改错", "书面表达"],
+            "scoring_key": "熟练掌握常见不规则动词的过去式，并在否定疑问句中正确还原动词原形。",
+            "common_trap": "将不规则动词误作规则动词加-ed，或在否定疑问句中仍使用过去式。",
+            "real_exam_example": {
+              "source": "2022年某省中考真题",
+              "question": "Last Sunday, I ______ (go) to the library with my friends.",
+              "answer": "went",
+              "scoring_notes": "考察不规则动词「go」的过去式，时间状语「Last Sunday」提示过去时。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U5",
+      "unit_name": "情态动词",
+      "cards": [
+        {
+          "card_id": "006",
+          "full_id": "G7B_U5_006",
+          "title": "情态动词 can/can't (Ability/Permission)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "表示能力、请求、允许或可能性。",
+          "core_points": [
+            "表示能力：I can swim. (我会游泳)",
+            "表示请求：Can I help you? / Can you pass me the salt? (可以/能否)",
+            "表示允许：You can go now. (你可以走了)",
+            "表示可能性：It can be very cold here in winter. (可能)",
+            "否定形式：can't (cannot)，疑问形式：Can + 主语 + 动词原形?"
+          ],
+          "example": {
+            "question": "Choose the best answer: My little brother is only three, but he ______ read some simple words.",
+            "steps": [
+              "1. 句子描述「My little brother is only three」，但能「read some simple words」，强调能力。",
+              "2. 情态动词「can」表示能力。",
+              "3. 排除其他不符合语境的选项。"
+            ],
+            "answer": "can"
+          },
+          "mistakes": [
+            {"wrong": "She can to sing well.", "correct": "She can sing well. (情态动词后接动词原形，不带to)"},
+            {"wrong": "Can he speaks English?", "correct": "Can he speak English? (疑问句中情态动词后接动词原形)"}
+          ],
+          "memory_tip": "can 加原形，能力请求；否定 can't，别忘它。",
+          "related": {
+            "prerequisite": "七年级上册动词原形",
+            "next": "八年级上册情态动词could/may/might"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "补全对话"],
+            "scoring_key": "理解can表示的能力、请求、允许等含义，以及其后动词用原形。",
+            "common_trap": "情态动词后误加to或将动词变为其他形式。",
+            "real_exam_example": {
+              "source": "2023年某市中考真题",
+              "question": "— ______ I borrow your dictionary? — Yes, of course.",
+              "answer": "Can",
+              "scoring_notes": "考察情态动词表示请求的用法，对话语境是借东西。"
+            }
+          }
+        },
+        {
+          "card_id": "007",
+          "full_id": "G7B_U5_007",
+          "title": "情态动词 must/mustn't (Obligation/Prohibition)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "表示必须、禁止或非常肯定的推测。",
+          "core_points": [
+            "表示义务/必要：We must obey the traffic rules. (我们必须遵守交通规则)",
+            "表示禁止：You mustn't smoke here. (你不能在这儿吸烟)",
+            "表示推测：He must be tired after a long journey. (他一定很累)",
+            "否定形式：mustn't (must not)，疑问形式：Must + 主语 + 动词原形?"
+          ],
+          "example": {
+            "question": "Choose the best answer: Students ______ hand in their homework on time.",
+            "steps": [
+              "1. 句子描述「Students hand in their homework on time」，强调遵守规定或义务。",
+              "2. 情态动词「must」表示必须、义务。",
+              "3. 排除其他不符合语境的选项。"
+            ],
+            "answer": "must"
+          },
+          "mistakes": [
+            {"wrong": "You mustn't to talk loudly.", "correct": "You mustn't talk loudly. (情态动词后接动词原形，不带to)"},
+            {"wrong": "He must not smokes.", "correct": "He must not smoke. (情态动词后动词用原形)"}
+          ],
+          "memory_tip": "must 必须，mustn't 禁止；后接原形，别忘记。",
+          "related": {
+            "prerequisite": "七年级上册动词原形",
+            "next": "八年级上册情态动词have to (与must的区别)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "补全对话"],
+            "scoring_key": "理解must表示的义务、禁止或推测，及其后动词用原形。",
+            "common_trap": "与have to混淆：must强调主观意愿或强制性，have to强调客观规定或需要。",
+            "real_exam_example": {
+              "source": "2021年某省中考真题",
+              "question": "You ______ tell lies. It's wrong.",
+              "answer": "mustn't",
+              "scoring_notes": "考察情态动词表示禁止的用法，根据「It's wrong」判断为禁止。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U6",
+      "unit_name": "介词",
+      "cards": [
+        {
+          "card_id": "008",
+          "full_id": "G7B_U6_008",
+          "title": "常用方位介词 (Prepositions of Place)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "表示物体或人物所处的位置或方向。",
+          "core_points": [
+            "in (在…里面)：in the box, in the room, in the tree (树上指在树的内部)",
+            "on (在…上面，接触)：on the desk, on the wall, on the floor",
+            "under (在…下面)：under the table, under the bed",
+            "behind (在…后面)：behind the door, behind the curtain",
+            "in front of (在…前面)：in front of the building, in front of me",
+            "next to (在…旁边)：next to the window, next to the bank",
+            "between (在两者之间)：between A and B",
+            "among (在三者或三者以上之间)：among the students"
+          ],
+          "example": {
+            "question": "Choose the best answer: The cat is hiding ______ the sofa.",
+            "steps": [
+              "1. 句子描述猫藏身的位置，通常是沙发的下面或后面。",
+              "2. 选项中能表示「下面」或「后面」的介词是「under」或「behind」。",
+              "3. 假设选项有 under, on, in, next to，则「under」或「behind」更符合常识。"
+            ],
+            "answer": "under (或 behind，取决于具体语境和选项)"
+          },
+          "mistakes": [
+            {"wrong": "The picture is in the wall.", "correct": "The picture is on the wall. (挂在墙上用on)"},
+            {"wrong": "He is sitting in the tree.", "correct": "He is sitting on the tree. (坐在树枝上用on，在树内部用in)"}
+          ],
+          "memory_tip": "in 里，on 上，under 下；behind 后，in front of 前。",
+          "related": {
+            "prerequisite": "七年级上册基础介词",
+            "next": "八年级上册复合介词"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "阅读理解"],
+            "scoring_key": "准确理解不同介词表示的方位含义，结合语境选择。",
+            "common_trap": "in/on/at 在不同语境下的细微区别，如in the tree (在树叶中) vs. on the tree (在树枝上)。",
+            "real_exam_example": {
+              "source": "2023年某市中考真题",
+              "question": "There is a clock ______ the wall.",
+              "answer": "on",
+              "scoring_notes": "考察「在墙上」的固定搭配，用介词on。"
+            }
+          }
+        },
+        {
+          "card_id": "009",
+          "full_id": "G7B_U6_009",
+          "title": "时间介词与交通介词 (Prepositions of Time & Transportation)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "表示时间或交通方式的介词。",
+          "core_points": [
+            "时间介词：",
+            "  - at (具体时间点)：at 6 o'clock, at noon, at night",
+            "  - on (具体日期/某天上午/下午)：on Monday, on May 1st, on a sunny morning",
+            "  - in (年/月/季节/长段时间)：in 2023, in July, in summer, in the morning/afternoon/evening",
+            "交通介词：",
+            "  - by (乘坐某种交通工具)：by bus, by train, by bike, by car (注意by 后不加冠词)",
+            "  - on (乘坐公共交通工具，需加冠词)：on a bus, on the train, on a plane",
+            "  - in (乘坐小汽车，需加冠词)：in a car, in a taxi",
+            "  - on foot (步行)"
+          ],
+          "example": {
+            "question": "Fill in the blanks: My birthday is ______ October 2nd. I usually go to school ______ bike.",
+            "steps": [
+              "1. 第一个空涉及具体日期「October 2nd」，时间介词用「on」。",
+              "2. 第二个空涉及交通方式「bike」，且不带冠词，交通介词用「by」。",
+              "3. 综合判断，选择正确的介词。"
+            ],
+            "answer": "on; by"
+          },
+          "mistakes": [
+            {"wrong": "I go to school by a bike.", "correct": "I go to school by bike. (by后不加冠词)"},
+            {"wrong": "She was born in Monday.", "correct": "She was born on Monday. (具体日期用on)"}
+          ],
+          "memory_tip": "时间 at 点 on 天，in 年月季上下午；by 交通不加冠，on foot 靠双脚。",
+          "related": {
+            "prerequisite": "七年级上册基础介词",
+            "next": "八年级上册介词短语"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "短文改错"],
+            "scoring_key": "区分at/on/in在时间表达上的用法，以及by/on/in在交通方式表达上的区别。",
+            "common_trap": "by后误加冠词；on/in/at在特定短语中的固定用法。",
+            "real_exam_example": {
+              "source": "2022年某市中考真题",
+              "question": "We had a party ______ the evening of New Year's Day.",
+              "answer": "on",
+              "scoring_notes": "考察特定日期的某个部分用on，因为有「New Year's Day」修饰「evening」。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "ZT",
+      "unit_name": "综合考点",
+      "cards": [
+        {
+          "card_id": "010",
+          "full_id": "G7B_ZT_010",
+          "title": "时态辨析与转换 (Tense Distinction & Conversion)",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "区分一般现在时、现在进行时、一般过去时和be going to将来时，并能在不同语境下正确转换。",
+          "core_points": [
+            "一般现在时：表示习惯、事实、真理。关键词：always, often, usually, every day.",
+            "现在进行时：表示正在发生或现阶段进行。关键词：now, look!, listen!, at the moment, this week.",
+            "一般过去时：表示过去发生的已结束动作。关键词：yesterday, last week, ago, in 1990.",
+            "be going to 将来时：表示计划或有迹象的预测。关键词：tomorrow, next year, soon, look at the clouds!",
+            "转换：时间状语是判断时态的关键，理解语境是核心。"
+          ],
+          "example": {
+            "question": "Choose the best answer: My father ______ (go) to work by bus every day, but today he ______ (walk).",
+            "steps": [
+              "1. 第一个空前有「every day」，表示习惯性动作，用一般现在时。",
+              "2. 第二个空前有「today」，且与「every day」形成对比，表示今天正在发生或暂时性的动作，用现在进行时。",
+              "3. 根据主谓一致和时态规则填空。"
+            ],
+            "answer": "goes; is walking"
+          },
+          "mistakes": [
+            {"wrong": "She usually is reading books.", "correct": "She usually reads books. (频率副词与一般现在时)"},
+            {"wrong": "Last night I watch TV.", "correct": "Last night I watched TV. (过去时间状语用过去时)"}
+          ],
+          "memory_tip": "习惯事实一般现，正在进行ing；过去发生ed，计划将来be going to。",
+          "related": {
+            "prerequisite": "七年级上下册所有时态",
+            "next": "八年级上册will将来时，八年级下册现在完成时"
+          },
+          exam_focus: {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "短文改错", "书面表达"],
+            "scoring_key": "根据句子中的时间状语、上下文逻辑和动词含义准确判断时态。",
+            "common_trap": "时间状语与时态不匹配；一般现在时与现在进行时，be going to与will的混淆。",
+            "real_exam_example": {
+              "source": "2023年某省中考真题",
+              "question": "It ______ (rain) heavily now, so we ______ (not go) out for a walk.",
+              "answer": "is raining; are not going",
+              "scoring_notes": "考察现在进行时，根据「now」判断，并根据语境判断后面也是进行时或be going to表示计划。"
+            }
+          }
+        },
+        {
+          "card_id": "011",
+          "full_id": "G7B_ZT_011",
+          "title": "特殊疑问句 (Wh-questions)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "以疑问词 (wh-words) 开头，对句中某一特定信息提问的句子。",
+          "core_points": [
+            "疑问词：what (什么), who (谁), whose (谁的), when (何时), where (何地), why (为何), how (如何), which (哪个).",
+            "构成：疑问词 + 一般疑问句结构 (助动词/be动词/情态动词 + 主语 + 谓语动词/其他)?",
+            "主语疑问句：疑问词作主语时，直接替换主语，句子保持陈述句语序。如：Who is singing? (谁在唱歌？)",
+            "宾语/状语疑问句：疑问词 + 助动词/be动词/情态动词 + 主语 + 谓语动词原形/其他?",
+            "注意：对主语提问时，不需要助动词do/does/did。"
+          ],
+          "example": {
+            "question": "Turn into a Wh-question: Tom goes to school by bike every day. (对「by bike」提问)",
+            "steps": [
+              "1. 确定提问对象是「by bike」，表示交通方式，疑问词用「How」。",
+              "2. 原句是一般现在时，主语「Tom」是第三人称单数，助动词用「does」。",
+              "3. 将主语「Tom」和谓语动词「go」还原成原形。",
+              "4. 组成疑问句：How does Tom go to school every day?"
+            ],
+            "answer": "How does Tom go to school every day?"
+          },
+          "mistakes": [
+            {"wrong": "What he likes?", "correct": "What does he like? (缺少助动词)"},
+            {"wrong": "Where you went yesterday?", "correct": "Where did you go yesterday? (过去时态中动词要还原原形)"}
+          ],
+          "memory_tip": "疑问词开头，后跟一般问；对主语提问，直接替换不用do。",
+          "related": {
+            "prerequisite": "七年级上册一般疑问句，be动词疑问句",
+            "next": "八年级上册宾语从句中的疑问词"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["单选", "补全对话", "阅读理解 (细节信息捕捉)", "书面表达"],
+            "scoring_key": "选择正确的疑问词，正确使用助动词、be动词或情态动词，并注意动词原形的还原。",
+            "common_trap": "对主语提问时误加助动词do/does/did；忽略时态变化导致动词形式错误。",
+            "real_exam_example": {
+              "source": "2023年某市中考真题",
+              "question": "— ______ did you go to the party? — I went there by taxi.",
+              "answer": "How",
+              "scoring_notes": "考察对交通方式提问的疑问词「How」，并注意过去时态的运用。"
+            }
+          }
+        },
+        {
+          "card_id": "012",
+          "full_id": "G7B_ZT_012",
+          "title": "形容词与副词辨析 (Adjective vs. Adverb)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "形容词修饰名词，副词修饰动词、形容词或其他副词，说明动作或状态的特征。",
+          "core_points": [
+            "形容词 (Adjective)：修饰名词或代词，作定语或表语。如：a beautiful flower, He is happy.",
+            "副词 (Adverb)：修饰动词、形容词、副词或整个句子，作状语。通常由形容词加-ly构成。如：He sings beautifully. She works hard.",
+            "位置：形容词通常在名词前或系动词后；副词位置灵活，常在动词后、句末或句首。",
+            "特殊情况：有些词形同义异，如hard (努力的/努力地), fast (快的/快地), well (好的/好地), late (晚的/晚地)。",
+            "注意：well 是 good 的副词形式。"
+          ],
+          "example": {
+            "question": "Choose the best answer: She sings very ______ (beautiful).",
+            "steps": [
+              "1. 分析句子结构，动词「sings」需要一个词来修饰，说明她唱歌的方式。",
+              "2. 修饰动词的词是副词。",
+              "3. 将形容词「beautiful」变为副词「beautifully」。"
+            ],
+            "answer": "beautifully"
+          },
+          "mistakes": [
+            {"wrong": "He runs very quick.", "correct": "He runs very quickly. (修饰动词用副词)"},
+            {"wrong": "She is a well student.", "correct": "She is a good student. (修饰名词用形容词)"}
+          ],
+          "memory_tip": "形容词修名词，副词修动词；-ly 常常是副词，特殊情况要记清。",
+          "related": {
+            "prerequisite": "七年级上册基础形容词",
+            "next": "八年级上册比较级最高级，副词的比较级最高级"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "短文改错"],
+            "scoring_key": "根据所修饰的词是名词还是动词来判断使用形容词还是副词，并注意特殊词形。",
+            "common_trap": "形容词与副词的混用，尤其是在系动词后或修饰动词时。",
+            "real_exam_example": {
+              "source": "2022年某省中考真题",
+              "question": "He drives too ______ (careful), so he often has accidents.",
+              "answer": "carelessly",
+              "scoring_notes": "考察副词修饰动词「drives」，且根据语境「often has accidents」判断是「粗心地」而非「小心地」。"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

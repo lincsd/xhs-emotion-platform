@@ -1,0 +1,708 @@
+{
+  "subject": "英语",
+  "grade": "高三",
+  "semester": "上册",
+  "textbook": "人教版",
+  "grade_short": "高三上",
+  "card_pack": "知识总结",
+  "description": "高中高三上册英语高考考点笔记总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "语法填空专项突破",
+      "cards": [
+        {
+          "card_id": "S1-01",
+          "full_id": "G3S-S1-01",
+          "title": "语法填空：时态、语态与主谓一致",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "语法填空中，根据上下文语境和时间状语判断动词的正确时态、语态，并确保主谓一致。",
+          "core_points": [
+            "时态判断：关注时间状语、上下文逻辑，区分一般、进行、完成、完成进行时态。例：By the end of next year, I will have finished my studies.",
+            "语态选择：判断主语与谓语动词的关系（主动或被动），特别是系动词+过去分词构成被动语态。例：The report was written by him last night.",
+            "主谓一致：遵循就近原则、意义一致原则、以及并列主语、集合名词、不定代词作主语时的特殊规则。例：Neither he nor I am to blame."
+          ],
+          "example": {
+            "question": "By the time he came back, the meeting ________ (already begin) for half an hour.",
+            "steps": [
+              "分析时间状语“By the time he came back”（过去时），表示截止到过去某一时间点。",
+              "动作“begin”在“came back”之前已经持续了半小时，且主语“meeting”与“begin”是主动关系。",
+              "结合时间状语和动作的持续性，应使用过去完成进行时或过去完成时。"
+            ],
+            "answer": "had already been going / had already begun"
+          },
+          "mistakes": [
+            {
+              "wrong": "When I arrived, the film started. (未考虑先发生动作)",
+              "correct": "When I arrived, the film had already started."
+            },
+            {
+              "wrong": "The books was placed on the shelf. (主谓不一致)",
+              "correct": "The books were placed on the shelf."
+            }
+          ],
+          "memory_tip": "「时态看时间，语态看主宾，一致看核心。」",
+          "related": {
+            "prerequisite": "高一上册时态综合、高一下册被动语态综合、高二下册主谓一致。",
+            "next": "语法填空：非谓语动词"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错"
+            ],
+            "scoring_key": "「先找时间状语，再看主语与动词关系，最后确定主谓是否一致。」",
+            "common_trap": "「混淆过去完成时与一般过去时；忽略主语是单数还是复数，导致主谓不一致。」",
+            "real_exam_example": {
+              "source": "2022年全国乙卷模拟",
+              "question": "When I arrived, the meeting ________ (already begin) for half an hour.",
+              "answer": "had already begun",
+              "scoring_notes": "根据时间状语“When I arrived”（过去时）和动作“begin”在“arrived”之前已经持续了半小时，判断应使用过去完成时。此处强调动作已经开始，用过去完成时更佳。"
+            }
+          }
+        },
+        {
+          "card_id": "S1-02",
+          "full_id": "G3S-S1-02",
+          "title": "语法填空：非谓语动词",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "语法填空中，根据动词与主语或句中其他成分的关系，选择不定式、动名词或分词作非谓语动词。",
+          "core_points": [
+            "不定式 (to do)：常作目的状语、结果状语、表语、宾语补足语等，或跟在某些动词、形容词后。例：He went there to study English.",
+            "动名词 (doing)：常作主语、表语、宾语、介词宾语，或在某些固定搭配中。例：Smoking is bad for your health.",
+            "分词 (doing/done)：作定语、状语、宾语补足语，现在分词表主动和进行，过去分词表被动和完成。例：The exciting news made them jump. / The broken window needs repairing."
+          ],
+          "example": {
+            "question": "The boy stood there, ________ (watch) his father mend the car.",
+            "steps": [
+              "判断“watch”与主语“The boy”的关系，是主动关系。",
+              "判断动作“watch”与谓语动词“stood”的发生时间，是同时发生。",
+              "因此，应使用现在分词作伴随状语。"
+            ],
+            "answer": "watching"
+          },
+          "mistakes": [
+            {
+              "wrong": "The problem is difficult solving. (动名词作状语，语意不符)",
+              "correct": "The problem is difficult to solve."
+            },
+            {
+              "wrong": "The man injured in the accident was sent to hospital. (省略了be动词)",
+              "correct": "The man injured in the accident was sent to hospital."
+            }
+          ],
+          "memory_tip": "「主被动看分词，目的结果用不定，作主宾介词跟ing。」",
+          "related": {
+            "prerequisite": "高一下册非谓语动词。",
+            "next": "语法填空：从句与词性转换"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错"
+            ],
+            "scoring_key": "「判断动词与逻辑主语的主被动关系和动作发生的时间先后，以及其在句中充当的成分。」",
+            "common_trap": "「混淆现在分词与过去分词；介词后误用不定式；忽略动词本身特性（如某些动词只跟不定式或动名词）。」",
+            "real_exam_example": {
+              "source": "2023年全国甲卷模拟",
+              "question": "The girl stood there, ________ (watch) the children play happily.",
+              "answer": "watching",
+              "scoring_notes": "此处“watching”作伴随状语，与主语“The girl”是主动关系，且动作与谓语动词同时发生，故用现在分词。"
+            }
+          }
+        },
+        {
+          "card_id": "S1-03",
+          "full_id": "G3S-S1-03",
+          "title": "语法填空：从句与词性转换",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "语法填空中，识别句子结构，选择正确的从句连接词，或根据语境将词根转换为适当的词性。",
+          "core_points": [
+            "从句连接词：名词性从句（what, why, whether, that等），定语从句（which, who, whom, whose, where, when, that等），状语从句（when, while, though, although, because, if, unless等）。例：What he said is true. / This is the book which I bought yesterday.",
+            "词性转换：根据句子成分（名词作主宾、动词作谓语、形容词修饰名词、副词修饰动词/形容词/副词/全句），将词根转换为名词、动词、形容词、副词。例：He spoke fluent English. (形容词) / She spoke fluently. (副词)"
+          ],
+          "example": {
+            "question": "1. It is important ________ (that) we should protect the environment. 2. He answered the question ________ (careful).",
+            "steps": [
+              "1. 第一个空是形式主语it引导的主语从句，从句不缺成分，用连接词“that”。",
+              "2. 第二个空修饰动词“answered”，需要副词形式“carefully”来修饰。"
+            ],
+            "answer": "1. that; 2. carefully"
+          },
+          "mistakes": [
+            {
+              "wrong": "He didn't know that to do next. (that不能作宾语)",
+              "correct": "He didn't know what to do next."
+            },
+            {
+              "wrong": "She spoke fluent. (形容词不能单独作状语)",
+              "correct": "She spoke fluently."
+            }
+          ],
+          "memory_tip": "「从句缺成分，连接词来补；词性看位置，成分定形式。」",
+          "related": {
+            "prerequisite": "高一上册名词性从句、定语从句，高二上册状语从句、倒装强调、词汇。",
+            "next": "语法填空综合练习"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错"
+            ],
+            "scoring_key": "「分析句子结构，判断从句类型及连接词在从句中充当的成分；根据词在句中的语法功能，判断其所需词性。」",
+            "common_trap": "「混淆定语从句和名词性从句的连接词；忽视词根的派生词，如形容词和副词的辨析。」",
+            "real_exam_example": {
+              "source": "2021年全国乙卷",
+              "question": "It was in the small village ________ he was born ________ he spent his childhood.",
+              "answer": "where; that",
+              "scoring_notes": "第一个空是定语从句，修饰地点“village”，且从句中不缺主宾，故用“where”；第二个空是强调句型“It was...that...”的结构。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "完形填空高分技巧",
+      "cards": [
+        {
+          "card_id": "S2-01",
+          "full_id": "G3S-S2-01",
+          "title": "完形填空：解题总览与语境推断",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "完形填空旨在考察考生对语篇的理解能力，通过上下文语境推断出最符合文章逻辑和语义的词汇。",
+          "core_points": [
+            "通读全文，把握主旨：先快速阅读，了解文章大意、体裁、情感基调，建立整体认知。",
+            "瞻前顾后，局部推断：根据挖空处前后的词语、句子，以及段落主题句，推断所需词汇的词义、词性。",
+            "排除干扰，筛选最佳：选项往往具有迷惑性，需仔细辨析，排除不符语境、语义的选项。"
+          ],
+          "example": {
+            "question": "Although he failed many times, he never gave up. He believed that ________ was the key to success.",
+            "options": [
+              "A. practice",
+              "B. honesty",
+              "C. persistence",
+              "D. patience"
+            ],
+            "steps": [
+              "通读句子，理解主语“he never gave up”，表明他很有毅力。",
+              "结合前文，推断「不放弃」与「成功」之间的关系。",
+              "选项中“persistence”（坚持）最符合语境。"
+            ],
+            "answer": "C"
+          },
+          "mistakes": [
+            {
+              "wrong": "He believed that practice was the key to success. (虽然“practice”也重要，但此处更强调「不放弃」的精神)",
+              "correct": "He believed that persistence was the key to success."
+            }
+          ],
+          "memory_tip": "「先整体，后局部，逻辑语义最重要。」",
+          "related": {
+            "prerequisite": "高一下册阅读技巧入门、高二下册完形阅读技巧进阶。",
+            "next": "完形填空：词义辨析与固定搭配"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "完形填空"
+            ],
+            "scoring_key": "「通读全文把握文章脉络，利用上下文语境、逻辑关系和情感基调进行推断。」",
+            "common_trap": "「只看挖空处前后一两个词，不顾全文；选项中词义相近的词易混淆。」",
+            "real_exam_example": {
+              "source": "2023年全国乙卷",
+              "question": "The old man lived a simple life, but he was always ________ (satisfied/happy) with what he had.",
+              "answer": "satisfied",
+              "scoring_notes": "根据“but”转折关系，虽然生活简单，但他却很满足。选项中“satisfied”（满足的）更符合语境，且常与“with”搭配。"
+            }
+          }
+        },
+        {
+          "card_id": "S2-02",
+          "full_id": "G3S-S2-02",
+          "title": "完形填空：词义辨析与固定搭配",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "完形填空常考察近义词辨析、形近词辨析以及动词、名词、形容词、副词的固定搭配。",
+          "core_points": [
+            "近义词辨析：区分词义相近但用法、语境、侧重点不同的词，如“affect/effect”，“raise/rise”。例：The weather affects his mood. / The effect of the medicine is good.",
+            "形近词辨析：注意拼写相似但意义完全不同的词，如“accept/except”，“lose/loose”。例：I accept your apology. / Everyone except him went.",
+            "固定搭配：掌握常见的动词短语、介词短语、形容词短语，如“take part in”，“be interested in”，“be devoted to”。例：She is devoted to her work."
+          ],
+          "example": {
+            "question": "1. He was so ________ (confused/puzzled) that he didn't know what to do. 2. She is devoted ________ (to/in) her work.",
+            "steps": [
+              "1. “confused”和“puzzled”都表示困惑，但“confused”更强调思维混乱，与“didn't know what to do”语境吻合。",
+              "2. “devoted”后跟介词“to”，表示「致力于」是固定搭配。"
+            ],
+            "answer": "1. confused; 2. to"
+          },
+          "mistakes": [
+            {
+              "wrong": "He was so puzzled that he didn't know what to do. (语义略有偏差)",
+              "correct": "He was so confused that he didn't know what to do."
+            },
+            {
+              "wrong": "She is devoted in her work. (介词搭配错误)",
+              "correct": "She is devoted to her work."
+            }
+          ],
+          "memory_tip": "「词义辨析细推敲，固定搭配死记牢。」",
+          "related": {
+            "prerequisite": "词汇3500。",
+            "next": "完形填空高频词汇与搭配"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "完形填空",
+              "短文改错"
+            ],
+            "scoring_key": "「积累高频词汇的精确含义和常用搭配，善用排除法。」",
+            "common_trap": "「望文生义，不仔细辨别词语的细微差别；对固定搭配记忆不牢。」",
+            "real_exam_example": {
+              "source": "2020年全国I卷",
+              "question": "The success of the project largely ________ (depended/relied) on teamwork.",
+              "answer": "depended",
+              "scoring_notes": "虽然“depend on”和“rely on”都有「依靠」之意，但“depend on”更强调因果关系和必然性，此处项目成功是“largely”（很大程度上）取决于团队合作，用“depended”更自然。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S3",
+      "unit_name": "阅读理解策略精讲",
+      "cards": [
+        {
+          "card_id": "S3-01",
+          "full_id": "G3S-S3-01",
+          "title": "阅读理解：细节理解与推理判断",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "细节理解要求从原文中准确找出信息；推理判断要求根据原文信息进行逻辑推理，得出隐含结论。",
+          "core_points": [
+            "细节理解：关键词定位，将定位到的信息与选项进行比对（注意同义替换、改写），排除干扰选项。",
+            "推理判断：忠于原文，所有推理必须基于原文信息；根据原文的因果、比较、转折等逻辑关系进行合理推断；识别作者的语气、态度等隐含信息。"
+          ],
+          "example": {
+            "question": "（基于一篇关于可再生能源的文章）Which of the following is NOT a benefit of solar energy mentioned in the passage?",
+            "steps": [
+              "扫描题目，定位关键词“solar energy”, “benefit”, “NOT”。",
+              "回原文查找关于太阳能优点的信息点。",
+              "将选项与原文提到的优点逐一比对，找出未提及或不符的选项。"
+            ],
+            "answer": "（假设原文只提了环保、可再生，选项C是成本低，但原文说成本仍较高，则C是答案）"
+          },
+          "mistakes": [
+            {
+              "wrong": "选择了原文提及的优点，或者是一个原文未提但常识中存在的优点。",
+              "correct": "严格按照原文信息，排除所有正确选项，找出「非」选项。"
+            }
+          ],
+          "memory_tip": "「细节定位找关键词，推理判断不离文。」",
+          "related": {
+            "prerequisite": "高一下册阅读技巧入门。",
+            "next": "阅读理解：主旨大意与词义猜测"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "阅读理解"
+            ],
+            "scoring_key": "「准确回文定位，识别同义替换和信息改写；基于原文信息进行严谨的逻辑推理。」",
+            "common_trap": "「过度推断，将常识或个人观点带入；忽略题干中的否定词（NOT, EXCEPT）。」",
+            "real_exam_example": {
+              "source": "2023年全国甲卷",
+              "question": "According to paragraph 3, what can be inferred about the author's attitude towards AI?",
+              "answer": "The author holds a cautious but optimistic view.",
+              "scoring_notes": "在第三段中，作者既提到了AI的潜在风险，也强调了其巨大潜力，并用“however”等转折词连接，表明一种审慎但积极的态度。"
+            }
+          }
+        },
+        {
+          "card_id": "S3-02",
+          "full_id": "G3S-S3-02",
+          "title": "阅读理解：主旨大意与词义猜测",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "主旨大意题要求概括文章中心思想；词义猜测题要求根据上下文语境推断生词或短语的含义。",
+          "core_points": [
+            "主旨大意：关注首段、尾段、各段落主题句，以及高频词汇；排除细节信息、片面信息、无关信息，正确选项通常是对全文的概括。",
+            "词义猜测：利用上下文语境（近义词、反义词、解释说明、举例等）推断词义；利用词根词缀和句子结构辅助理解。"
+          ],
+          "example": {
+            "question": "1. (Main Idea) What is the main idea of the passage? 2. (Vocabulary) The word “ubiquitous” in paragraph 2 probably means ________.",
+            "steps": [
+              "1. 阅读文章开头和结尾，以及每段首句；找出文章反复出现的中心词或概念；综合归纳，形成文章主旨。",
+              "2. 定位“ubiquitous”在原文中的位置；阅读其前后句子，寻找线索（如：如果前文说手机无处不在，每个人都有，后文说它的影响深远，则“ubiquitous”可能指「普遍存在的」）。"
+            ],
+            "answer": "1. (取决于文章内容，如“The importance of environmental protection”); 2. (取决于语境，如“present everywhere”)"
+          },
+          "mistakes": [
+            {
+              "wrong": "选择了文章某一段的细节信息作为主旨。",
+              "correct": "选择了对全文的概括，而非以偏概全的选项。"
+            },
+            {
+              "wrong": "猜测词义时，仅凭单词字面意思或熟词僻义。",
+              "correct": "根据上下文语境进行合理推断，而非主观臆断。"
+            }
+          ],
+          "memory_tip": "「主旨抓首尾，词义靠语境。」",
+          "related": {
+            "prerequisite": "词汇3500。",
+            "next": "阅读理解速度与准确率提升"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "阅读理解"
+            ],
+            "scoring_key": "「主旨题要从宏观把握，排除以偏概全的选项；词义题要从微观入手，利用上下文线索进行推断。」",
+            "common_trap": "「主旨题易被细节迷惑；词义题易被熟词僻义或形近词误导。」",
+            "real_exam_example": {
+              "source": "2022年全国甲卷",
+              "question": "What is the best title for the passage?",
+              "answer": "The Impact of Digitalization on Traditional Crafts",
+              "scoring_notes": "文章通篇讨论数字化技术如何影响和改变传统手工艺，最佳标题应能概括这一核心主题。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S4",
+      "unit_name": "七选五篇章解构",
+      "cards": [
+        {
+          "card_id": "S4-01",
+          "full_id": "G3S-S4-01",
+          "title": "七选五：解题总览与篇章结构",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "七选五题型要求考生从七个选项中选出五个填入文章空白处，使文章连贯完整，主要考察对篇章结构和上下文逻辑的理解。",
+          "core_points": [
+            "通读原文，把握主旨：先不看选项，快速阅读原文，了解文章主题、结构和各段大意。",
+            "分析空白处前文：关注空白处前一句或前几句的中心思想、关键词、句式结构。",
+            "分析空白处后文：关注空白处后一句或后几句的中心思想、关键词、句式结构。",
+            "初步筛选选项：根据空白处前后的信息，从七个选项中初步筛选出可能符合的选项。"
+          ],
+          "example": {
+            "question": "（文章中间有空白处，前后文讨论解决问题的方法）Before blank: “Problem-solving requires a clear mind and a calm attitude.” After blank: “Therefore, taking a break can often lead to new insights.” Options: (其中一个选项是“It's also important not to rush into solutions.”)",
+            "steps": [
+              "分析前文，强调解决问题需要清晰的头脑和冷静的态度。",
+              "分析后文，提到休息能带来新见解，暗示不急于求成。",
+              "结合前后文，选项“It's also important not to rush into solutions.”与前后文逻辑衔接紧密。"
+            ],
+            "answer": "It's also important not to rush into solutions."
+          },
+          "mistakes": [
+            {
+              "wrong": "选择了与上下文语义不符或逻辑跳跃的选项。",
+              "correct": "选择了与前后文逻辑严密、语义连贯的选项。"
+            }
+          ],
+          "memory_tip": "「先读文章抓主旨，再看空白前后句。」",
+          "related": {
+            "prerequisite": "高一下册阅读技巧入门。",
+            "next": "七选五：逻辑衔接与指代关系"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "七选五"
+            ],
+            "scoring_key": "「理解文章整体结构和段落之间的逻辑关系，关注空白处前后的承上启下作用。」",
+            "common_trap": "「只关注空白处前一句或后一句，忽略了更远的上下文；对文章主旨把握不清，导致选项选择偏差。」",
+            "real_exam_example": {
+              "source": "2023年全国乙卷",
+              "question": "（文章讨论健康饮食）Blank in paragraph 2. Before: Eating a balanced diet is crucial. After: This ensures your body gets all necessary nutrients.",
+              "answer": "It means consuming a variety of foods from different groups.",
+              "scoring_notes": "前文提出均衡饮食的重要性，后文解释其作用，中间应解释何为均衡饮食。选项解释了均衡饮食的构成，完美衔接。"
+            }
+          }
+        },
+        {
+          "card_id": "S4-02",
+          "full_id": "G3S-S4-02",
+          "title": "七选五：逻辑衔接与指代关系",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "七选五题型除了考察篇章结构，还重点考察句际间的逻辑关系（并列、转折、因果、举例、递进等）和指代关系（代词、冠词、同义词复现）。",
+          "core_points": [
+            "逻辑连接词：关注选项和原文中出现的表示逻辑关系的词，如“however”, “therefore”, “in addition”, “for example”等。",
+            "代词指代：注意代词（it, they, this, these, such等）所指代的对象，确保指代明确。",
+            "名词复现与同义替换：文章中常常通过重复名词或使用其同义词、近义词来保持主题连贯，利用这一特点进行判断。",
+            "语境连贯：选择的选项必须使文章在语义上流畅自然，没有跳跃感。"
+          ],
+          "example": {
+            "question": "（文章讨论学习方法）Before blank: “Active learning involves participation and interaction.” Blank: ________ After blank: “This approach helps students retain information more effectively.” Options: (其中一个选项是“For instance, group discussions and debates are good examples of it.”)",
+            "steps": [
+              "前文提到“active learning”涉及参与和互动。",
+              "后文“This approach”指代前文提到的学习方法。",
+              "选项“For instance...”是举例说明前文的“participation and interaction”，并用“it”指代“active learning”。逻辑和指代都吻合。"
+            ],
+            "answer": "For instance, group discussions and debates are good examples of it."
+          },
+          "mistakes": [
+            {
+              "wrong": "选择了逻辑上不连贯，或者代词指代不明的选项。",
+              "correct": "选择了逻辑衔接紧密，指代关系明确的选项。"
+            }
+          ],
+          "memory_tip": "「代词指代要明确，逻辑连接是桥梁。」",
+          "related": {
+            "prerequisite": "连词的用法、代词的指代。",
+            "next": "七选五模拟实战"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "七选五"
+            ],
+            "scoring_key": "「重点关注代词、冠词、连词等衔接手段，确保句际间的逻辑严密性。」",
+            "common_trap": "「忽略代词的指代对象，导致理解错误；对逻辑连接词的含义理解不准确。」",
+            "real_exam_example": {
+              "source": "2021年全国I卷",
+              "question": "（文章介绍一种新型环保材料）Blank in paragraph 3. Before: This material is both strong and lightweight. After: ________ For example, it can be used in aerospace.",
+              "answer": "Moreover, it is highly durable.",
+              "scoring_notes": "前文介绍材料优点，后文举例说明其应用。中间的空白应是递进关系，继续说明材料的优点。“Moreover”连接，“it”指代材料，符合逻辑。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S5",
+      "unit_name": "短文改错核心规律",
+      "cards": [
+        {
+          "card_id": "S5-01",
+          "full_id": "G3S-S5-01",
+          "title": "短文改错：常见语法错误（一）",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "短文改错题型要求考生在短文中找出并改正语法、词汇、句法等错误，主要考察基础语法知识的掌握和运用。",
+          "core_points": [
+            "冠词错误：特指 vs 泛指 (a/an vs the)；固定搭配；可数名词单复数前是否需要冠词。例：He is an honest boy. (发音决定)",
+            "代词错误：人称代词（主格/宾格/所有格/反身代词）的正确使用；指代一致（代词所指代的名词单复数、人称要一致）；关系代词的选择。例：Everyone should do his best. (指代一致)",
+            "时态错误：时间状语与时态的匹配；上下文语境中动词动作发生的时间先后；易混淆时态（如一般过去时与现在完成时）。例：I have lived here since 2000."
+          ],
+          "example": {
+            "question": "He is a honest boy.",
+            "steps": [
+              "“honest”以h开头，但发音是元音音素。",
+              "泛指单数可数名词前用不定冠词。",
+              "故应使用“an”而不是“a”。"
+            ],
+            "answer": "a -> an"
+          },
+          "mistakes": [
+            {
+              "wrong": "I saw a interesting film yesterday. (冠词误用)",
+              "correct": "I saw an interesting film yesterday."
+            },
+            {
+              "wrong": "He asked her if she could help him. (指代错误)",
+              "correct": "He asked her if she could help him."
+            }
+          ],
+          "memory_tip": "「冠词看发音和特指，代词看主格宾格和指代，时态看时间状语和语境。」",
+          "related": {
+            "prerequisite": "高一上册时态、名词性从句、定语从句，高二上册状语从句。",
+            "next": "短文改错：常见语法错误（二）"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "短文改错"
+            ],
+            "scoring_key": "「对基础语法知识点进行地毯式排查，特别注意冠词、代词、时态这些高频易错点。」",
+            "common_trap": "「忽略冠词的「音」而非「形」；代词指代对象不明；时态判断只看局部不顾全文。」",
+            "real_exam_example": {
+              "source": "2023年全国甲卷模拟",
+              "question": "I saw a interesting film yesterday.",
+              "answer": "a -> an",
+              "scoring_notes": "单词“interesting”以元音音素开头，其前的不定冠词应为“an”而不是“a”。"
+            }
+          }
+        },
+        {
+          "card_id": "S5-02",
+          "full_id": "G3S-S5-02",
+          "title": "短文改错：常见语法错误（二）",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "继续考察短文改错中常见的名词单复数、连词、非谓语动词、主谓一致、形容词副词等错误。",
+          "core_points": [
+            "名词单复数：可数名词 vs 不可数名词；单复数形式的正确使用；集合名词的特殊用法。例：Many people believe this. (people是复数)",
+            "连词错误：并列连词 (and, but, or) vs 从属连词 (when, while, though, because)；连词的语义和逻辑关系；连词与副词（如however, therefore）的区别。例：Although he was tired, he kept working. (不能同时用but)",
+            "非谓语动词错误：不定式、动名词、分词的正确选择；与主语的主被动关系和时间先后。例：Seeing the snake, he ran away.",
+            "形容词/副词错误：形容词修饰名词，副词修饰动词、形容词、副词；比较级、最高级的使用。例：She sings beautifully. (副词修饰动词)"
+          ],
+          "example": {
+            "question": "1. She sang beautiful. 2. Although he was tired, but he kept working.",
+            "steps": [
+              "1. “sang”是动词，需要副词修饰。将形容词“beautiful”改为副词“beautifully”。",
+              "2. “Although”和“but”不能同时使用，二者选其一。可去掉“but”。"
+            ],
+            "answer": "1. beautiful -> beautifully; 2. (去掉but)"
+          },
+          "mistakes": [
+            {
+              "wrong": "He worked hardly to achieve his dream. (词义错误)",
+              "correct": "He worked hard to achieve his dream."
+            },
+            {
+              "wrong": "The news make me happy. (主谓不一致)",
+              "correct": "The news makes me happy."
+            }
+          ],
+          "memory_tip": "「名词单复数要细查，连词逻辑不能差，非谓语动词主被动，形容副词看成分。」",
+          "related": {
+            "prerequisite": "高一下册非谓语动词，高二上册状语从句。",
+            "next": "短文改错真题演练"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "短文改错"
+            ],
+            "scoring_key": "「系统检查每一句话的语法结构，特别是动词形式、词性转换和连词使用。」",
+            "common_trap": "「中式英语表达习惯；对动词的非谓语形式判断失误；并列连词与从属连词混用。」",
+            "real_exam_example": {
+              "source": "2022年全国乙卷",
+              "question": "He worked hardly to achieve his dream.",
+              "answer": "hardly -> hard",
+              "scoring_notes": "“hardly”是副词，意为「几乎不」，与语境不符；此处应使用形容词“hard”作副词，表示「努力地」。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S6",
+      "unit_name": "书面表达高分模板",
+      "cards": [
+        {
+          "card_id": "S6-01",
+          "full_id": "G3S-S6-01",
+          "title": "书面表达：应用文写作框架与常用句式",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "应用文写作（如通知、邀请函、建议信、感谢信、道歉信等）要求考生根据特定情境，运用恰当的格式、语体和常用句式，清晰准确地表达信息。",
+          "core_points": [
+            "掌握基本格式：如称谓、正文、落款、日期等，不同应用文格式略有差异。",
+            "明确写作目的：根据目的选择合适的语体（正式/非正式）、语气。",
+            "通用框架：开头（点明写作目的），中间（展开具体内容），结尾（表达期望、感谢、歉意等）。",
+            "常用句式：积累各类应用文的高频句式，如“I am writing to...”, “I would like to suggest...”, “Thank you for...”, “I sincerely apologize for...”。"
+          ],
+          "example": {
+            "question": "假设你是李华，给外教Mr. Smith写一封邮件，邀请他参加学校的英语角活动。",
+            "steps": [
+              "确定邮件格式（称谓、正文、落款）。",
+              "开头点明邀请目的：I am writing to invite you to...",
+              "中间说明活动时间、地点、内容。",
+              "结尾表达期待：We would be greatly honored if you could join us. Looking forward to your reply. Yours, Li Hua."
+            ],
+            "answer": "Dear Mr. Smith,\nI am writing to invite you to our school's English Corner activity, which will be held at the school library on Friday, May 10th, from 4:00 p.m. to 5:30 p.m. We will have various activities, including free talk, debates, and games, focusing on cultural exchange. We would be greatly honored if you could join us and share your insights with the students. Your presence would surely make the event more inspiring.\nLooking forward to your reply.\nYours,\nLi Hua"
+          },
+          "mistakes": [
+            {
+              "wrong": "格式错误，语体不当，信息点遗漏。",
+              "correct": "格式正确，目的明确，内容充实，语言得体。"
+            }
+          ],
+          "memory_tip": "「格式语体记心中，目的内容要完整，常用句式助高分。」",
+          "related": {
+            "prerequisite": "高二下册应用文写作。",
+            "next": "书面表达：表达升级与高分策略"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "书面表达"
+            ],
+            "scoring_key": "「格式规范，信息点齐全，语言表达准确流畅，无重大语法错误。」",
+            "common_trap": "「格式不规范，如称谓或落款错误；信息点遗漏；中式英语表达，影响地道性。」",
+            "real_exam_example": {
+              "source": "2023年全国乙卷",
+              "question": "请你以学生会主席李华的名义，给外籍教师Tom写一封感谢信，感谢他为学校英语演讲比赛提供的帮助。",
+              "answer": "（信件需包含感谢语、具体帮助内容、比赛成果、未来期待等要素，并注意书信格式和得体用语。）",
+              "scoring_notes": "学生会主席的身份决定了语体应正式且礼貌；感谢信需具体说明感谢原因，并表达积极的期待。"
+            }
+          }
+        },
+        {
+          "card_id": "S6-02",
+          "full_id": "G3S-S6-02",
+          "title": "书面表达：表达升级与高分策略",
+          "type": "知识总结卡",
+          "difficulty": 5,
+          "importance": 5,
+          "definition": "高分书面表达不仅要求内容完整、语法正确，更要求语言地道、表达多样、句式高级，能体现考生的语言运用能力。",
+          "core_points": [
+            "词汇多样性：避免重复使用同一词汇，运用同义词、近义词替换，使用更高级、更精准的词汇。例：good -> excellent, beneficial, advantageous",
+            "句式多样性：长短句结合，熟练运用定语从句、状语从句、名词性从句；尝试强调句、倒装句、非谓语动词作状语等特殊句式。例：Not only does it help, but it also inspires.",
+            "逻辑衔接：使用恰当的连接词和过渡语，使文章逻辑清晰、衔接自然。例：Furthermore, consequently, in conclusion.",
+            "情感表达：根据写作目的，适当加入情感色彩，使文章更具感染力。例：It is truly a privilege to..."
+          ],
+          "example": {
+            "question": "将简单句“I like reading. It helps me relax.” 升级为高分句。",
+            "steps": [
+              "合并句子，使用非谓语动词或从句。",
+              "替换简单词汇，使用更高级的表达。",
+              "增加细节或修饰，使句意更丰富。"
+            ],
+            "answer": "Being an avid reader, I find immense pleasure in immersing myself in books, which effectively helps me unwind after a long day."
+          },
+          "mistakes": [
+            {
+              "wrong": "仅堆砌高级词汇而不顾语境，或滥用复杂句式导致语法错误。",
+              "correct": "语言自然流畅，词汇丰富，句式多样，且无语法错误。"
+            }
+          ],
+          "memory_tip": "「词汇多变句式活，逻辑清晰情感浓。」",
+          "related": {
+            "prerequisite": "高二上册复杂句式、高二下册长难句分析。",
+            "next": "读后续写高分技巧"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "书面表达"
+            ],
+            "scoring_key": "「语言表达的准确性、多样性、地道性和逻辑性是高分关键。」",
+            "common_trap": "「为了追求高级表达而犯语法错误；过度使用模板句式导致内容空泛；中式思维直接翻译，缺乏地道表达。」",
+            "real_exam_example": {
+              "source": "2023年全国乙卷模拟",
+              "question": "（要求考生写一篇关于环保的短文，并给出一些关键词）",
+              "answer": "（高分作文会巧妙运用高级词汇如“sustainable”, “ecological footprint”，并使用复合句、倒装句等句式，如“Not only does environmental protection benefit nature, but it also ensures a healthier future for humanity.”）",
+              "scoring_notes": "考察考生能否在内容完整的基础上，运用高级词汇和多样句式，提升文章的语言质量，体现更强的语言驾驭能力。"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,651 @@
+{
+  "subject": "英语",
+  "grade": "高二",
+  "semester": "下册",
+  "textbook": "人教版",
+  "grade_short": "高二下",
+  "card_pack": "知识总结",
+  "description": "高中高二下册英语高考考点笔记总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "虚拟语气进阶",
+      "cards": [
+        {
+          "card_id": "S1-C1",
+          "full_id": "高二下-S1-C1",
+          "title": "If条件句中的虚拟语气",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "表示与事实相反或不可能发生的假设，谓语动词需使用特定形式。",
+          "core_points": [
+            "与现在事实相反：If + 主语 + 动词过去式 (be动词用were), 主语 + would/could/should/might + 动词原形。例句：If I were you, I would accept the offer.",
+            "与过去事实相反：If + 主语 + had + 动词过去分词, 主语 + would/could/should/might + have + 动词过去分词。例句：If he had studied harder, he would have passed the exam.",
+            "与将来事实相反：If + 主语 + should/were to + 动词原形, 主语 + would/could/should/might + 动词原形。例句：If it were to rain tomorrow, we would cancel the picnic.",
+            "错综复杂条件句：主句和从句时间不一致，根据各自时间状语判断时态。例句：If I had taken your advice, I would be rich now."
+          ],
+          "example": {
+            "question": "If my parents ________ (not support) me, I couldn't have finished my college studies.",
+            "steps": [
+              "分析句意：句子描述的是过去的情况，且与事实相反。",
+              "判断时态：主句谓语动词是「couldn't have finished」，表示与过去事实相反。",
+              "确定从句虚拟语气形式：If从句谓语动词应使用过去完成时「had + 动词过去分词」。"
+            ],
+            "answer": "hadn't supported"
+          },
+          "mistakes": [
+            {
+              "wrong": "If I was you, ...",
+              "correct": "If I were you, ..."
+            },
+            {
+              "wrong": "If he didn't study, he wouldn't pass.",
+              "correct": "If he hadn't studied, he wouldn't have passed."
+            }
+          ],
+          "memory_tip": "「现在过去式，过去过去完成时，将来should/were to」",
+          "related": {
+            "prerequisite": "高一下：情态动词+虚拟语气入门",
+            "next": "高二下：其他虚拟语气句型"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错",
+              "阅读理解"
+            ],
+            "scoring_key": "准确判断条件句所表达的时间，并严格套用虚拟语气结构。",
+            "common_trap": "混淆现在、过去、将来的虚拟语气形式；忽略be动词在虚拟语气中一律用were。",
+            "real_exam_example": {
+              "source": "模拟高考真题",
+              "question": "If you ________ (listen) to my advice, you wouldn't be in such trouble now.",
+              "answer": "had listened",
+              "scoring_notes": "本题为错综复杂条件句，主句「wouldn't be...now」表示与现在事实相反，从句「If you...to my advice」表示与过去事实相反，故从句用过去完成时。"
+            }
+          }
+        },
+        {
+          "card_id": "S1-C2",
+          "full_id": "高二下-S1-C2",
+          "title": "其他虚拟语气句型",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "在wish, as if, suggest等动词后，以及It is time等句型中使用的虚拟语气。",
+          "core_points": [
+            "Wish后接宾语从句：表示「但愿，要是...就好了」。对现在愿望用过去式；对过去愿望用过去完成时；对将来愿望用would/could/might + 动词原形。例句：I wish I had a car. (现在) I wish I hadn't made that mistake. (过去)",
+            "As if/as though后接从句：表示「仿佛，好像」。与现在事实相反用过去式；与过去事实相反用过去完成时。例句：He acts as if he knew everything. (现在) She looked as though she had seen a ghost. (过去)",
+            "在suggest/order/demand/insist/advise等动词后的that从句中：谓语动词用「(should) + 动词原形」。例句：I suggested that he (should) go there at once.",
+            "It is (high/about) time (that)后接从句：谓语动词用过去式。例句：It's high time that we went home.",
+            "Would rather/sooner (that)后接从句：对现在/将来用过去式；对过去用过去完成时。例句：I'd rather you didn't tell him."
+          ],
+          "example": {
+            "question": "The manager insisted that the new plan ________ (carry out) immediately.",
+            "steps": [
+              "识别句型：主句动词为「insisted」，后接that从句。",
+              "确定虚拟语气：在insist, suggest, demand等动词后，that从句的谓语动词应使用虚拟语气「(should) + 动词原形」。",
+              "考虑语态：plan与carry out之间是被动关系，故用被动语态。"
+            ],
+            "answer": "(should) be carried out"
+          },
+          "mistakes": [
+            {
+              "wrong": "I wish I have a car.",
+              "correct": "I wish I had a car."
+            },
+            {
+              "wrong": "He suggested that he goes there.",
+              "correct": "He suggested that he (should) go there."
+            }
+          ],
+          "memory_tip": "「一『should』二『过去』三『过去完成』」",
+          "related": {
+            "prerequisite": "高二下：If条件句中的虚拟语气",
+            "next": "高三上：高考语法填空专项"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错"
+            ],
+            "scoring_key": "熟记各类虚拟语气句型的固定搭配和时态要求，特别是should的省略。",
+            "common_trap": "忽略should的使用或误用时态；It is time后从句动词的时态。",
+            "real_exam_example": {
+              "source": "模拟高考真题",
+              "question": "It's about time we ________ (take) action to protect the environment.",
+              "answer": "took",
+              "scoring_notes": "「It's about time that...」结构后从句动词用过去式，表示「是时候做某事了」。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "主谓一致",
+      "cards": [
+        {
+          "card_id": "S2-C1",
+          "full_id": "高二下-S2-C1",
+          "title": "主谓一致基本原则与就近原则",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "谓语动词的人称和数必须与主语保持一致。",
+          "core_points": [
+            "语法一致：单数主语配单数谓语，复数主语配复数谓语。例句：The student is reading. The students are reading.",
+            "意义一致：主语形式为单数，但意义为复数，谓语用复数（如police, people）；主语形式为复数，但意义为单数，谓语用单数（如names of books, subjects）。例句：The police are investigating the case. Mathematics is my favorite subject.",
+            "就近原则：由or, nor, either...or, neither...nor, not only...but also 连接的主语，谓语动词与最近的主语保持一致。例句：Neither he nor his parents are to blame. Not only I but also he is responsible.",
+            "由as well as, with, together with, but, except, besides, in addition to, rather than等连接的主语，谓语动词与前面的主语保持一致。例句：The teacher, as well as his students, is going to the museum."
+          ],
+          "example": {
+            "question": "Not only the students but also the teacher ________ (be) excited about the field trip.",
+            "steps": [
+              "识别连接词：句中使用了「not only...but also...」。",
+              "应用就近原则：谓语动词应与靠近它的主语「the teacher」(单数) 保持一致。",
+              "确定谓语形式：因此谓语动词用单数形式。"
+            ],
+            "answer": "is"
+          },
+          "mistakes": [
+            {
+              "wrong": "The students, as well as the teacher, are happy.",
+              "correct": "The students, as well as the teacher, is happy."
+            },
+            {
+              "wrong": "Neither he nor I is wrong.",
+              "correct": "Neither he nor I am wrong."
+            }
+          ],
+          "memory_tip": "「主谓一致看主语，就近原则看最近，插入成分不作主」",
+          "related": {
+            "prerequisite": "高一下：被动语态综合",
+            "next": "高二下：主谓一致特殊情况"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错"
+            ],
+            "scoring_key": "准确判断句子的真正主语，尤其是被介词短语或并列连词干扰的复杂结构。",
+            "common_trap": "被插入语或定语从句干扰，误判主语单复数；对就近原则和就远原则的应用混淆。",
+            "real_exam_example": {
+              "source": "模拟高考真题",
+              "question": "The manager, accompanied by his assistants, ________ (attend) the meeting every week.",
+              "answer": "attends",
+              "scoring_notes": "「accompanied by his assistants」是伴随状语，不影响主语「The manager」的单复数，故谓语用单数第三人称形式。"
+            }
+          }
+        },
+        {
+          "card_id": "S2-C2",
+          "full_id": "高二下-S2-C2",
+          "title": "主谓一致特殊情况",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "集合名词、不定代词、数量词、倒装句等特殊情况下的主谓一致。",
+          "core_points": [
+            "集合名词：如family, class, team, audience, government等，作整体看用单数，指成员看用复数。例句：My family is a big one. My family are all music lovers.",
+            "不定代词：each, every, no, many a, more than one后接单数谓语。例句：Every student and every teacher is required to attend. More than one student has failed the exam.",
+            "数量词：A number of + 复数名词 + 复数谓语；The number of + 复数名词 + 单数谓语。例句：A number of students are absent. The number of students is increasing.",
+            "表示时间、距离、金钱、重量等的复数名词作一个整体时，谓语用单数。例句：Ten years is a long time. Five hundred dollars is not a small sum.",
+            "倒装句：谓语动词与倒装后的实际主语保持一致。例句：On the wall hang two pictures. (主语是two pictures)"
+          ],
+          "example": {
+            "question": "The number of cars on the road ________ (increase) rapidly.",
+            "steps": [
+              "识别主语结构：主语是「The number of cars」。",
+              "应用规则：「The number of + 复数名词」后谓语动词用单数。",
+              "确定谓语形式：因此动词用单数形式。"
+            ],
+            "answer": "is increasing"
+          },
+          "mistakes": [
+            {
+              "wrong": "A number of students is here.",
+              "correct": "A number of students are here."
+            },
+            {
+              "wrong": "More than one student have passed.",
+              "correct": "More than one student has passed."
+            }
+          ],
+          "memory_tip": "「A number of复，The number of单；集合名词两面看，不定代词单数伴」",
+          "related": {
+            "prerequisite": "高二下：主谓一致基本原则与就近原则",
+            "next": "高三上：语法填空专项训练"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错"
+            ],
+            "scoring_key": "区分「a number of」和「the number of」；理解集合名词的「整体」与「个体」概念。",
+            "common_trap": "误将「the number of」后的复数名词当成主语；忽视「many a」和「more than one」的单数谓语。",
+            "real_exam_example": {
+              "source": "模拟高考真题",
+              "question": "Every boy and every girl in the class ________ (be) eager to join the volunteer activity.",
+              "answer": "is",
+              "scoring_notes": "由「every...and every...」连接的主语，即使是复数概念，谓语动词仍用单数。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S3",
+      "unit_name": "It的用法",
+      "cards": [
+        {
+          "card_id": "S3-C1",
+          "full_id": "高二下-S3-C1",
+          "title": "It作形式主语和形式宾语",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "It在句中不表示具体意义，只作形式上的主语或宾语，代替真正的主语或宾语。",
+          "core_points": [
+            "It作形式主语：代替真正的主语（不定式、动名词、从句）。结构：It is + adj./n. + to do/doing/that从句。例句：It is important to protect the environment. It is a fact that he succeeded.",
+            "It作形式宾语：代替真正的宾语（不定式、动名词、从句）。常用于find, think, believe, make, feel等动词后。结构：主语 + 动词 + it + adj./n. + to do/that从句。例句：I find it difficult to master English. We made it clear that we objected to the plan.",
+            "形式主语/宾语与强调句的区别：形式主语/宾语中的it不能省略，且通常不能还原；强调句中的it is/was...that/who...结构可还原为原句。",
+            "It还可指代时间、天气、距离等。例句：It's sunny today. It's ten kilometers from here to the station."
+          ],
+          "example": {
+            "question": "I find ________ useful to listen to English radio programs every day.",
+            "steps": [
+              "分析句型：动词「find」后接宾语和宾语补足语「useful to listen...」。",
+              "判断宾语：真正的宾语是「to listen to English radio programs every day」，较长。",
+              "使用形式宾语：当真正宾语是较长的不定式或从句时，常用「it」作形式宾语。",
+              "确定形式：因此空格处填「it」。"
+            ],
+            "answer": "it"
+          },
+          "mistakes": [
+            {
+              "wrong": "It is necessary we should go.",
+              "correct": "It is necessary that we should go."
+            },
+            {
+              "wrong": "I think difficult to finish the task.",
+              "correct": "I think it difficult to finish the task."
+            }
+          ],
+          "memory_tip": "「It形式主宾，代真主宾」",
+          "related": {
+            "prerequisite": "高一下：非谓语动词",
+            "next": "高二下：It作强调句型"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错",
+              "阅读理解"
+            ],
+            "scoring_key": "区分it的各种用法，尤其要避免与强调句型混淆。",
+            "common_trap": "在需要形式宾语时，直接省略it；在强调句中误判it的性质。",
+            "real_exam_example": {
+              "source": "模拟高考真题",
+              "question": "It is generally believed ________ reading aloud helps improve pronunciation.",
+              "answer": "that",
+              "scoring_notes": "It作形式主语，真正主语是后面的that从句，故用that引导主语从句。"
+            }
+          }
+        },
+        {
+          "card_id": "S3-C2",
+          "full_id": "高二下-S3-C2",
+          "title": "It作强调句型",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "用It is/was...that/who...结构来强调句子中的某个成分（主语、宾语、状语）。",
+          "core_points": [
+            "强调句型结构：It is/was + 被强调部分 + that/who + 句子的其余部分。例句：It was Jim who broke the window. (强调主语Jim)",
+            "被强调部分可以是主语、宾语、状语（时间状语、地点状语、方式状语等）。例句：It was yesterday that I met him. (强调时间状语Yesterday)",
+            "强调人时可用who或that，强调物或时间、地点时用that。例句：It was Mary that I saw at the party. It was in the park that we first met.",
+            "判断强调句的方法：拿掉「It is/was」和「that/who」，句子仍能构成一个完整、通顺的句子。如果不能还原，则不是强调句。",
+            "强调句中的谓语动词时态取决于原句，但It is/was...that/who...中的be动词只用is或was。"
+          ],
+          "example": {
+            "question": "It was in the small village ________ he spent his childhood.",
+            "steps": [
+              "分析句型：句子以「It was...」开头，且中间强调了地点状语「in the small village」。",
+              "应用强调句判断方法：去掉「It was」和空格，原句「In the small village he spent his childhood」仍然完整。",
+              "确定连接词：强调地点状语时，连接词用「that」。"
+            ],
+            "answer": "that"
+          },
+          "mistakes": [
+            {
+              "wrong": "It was Jim when broke the window.",
+              "correct": "It was Jim who broke the window."
+            },
+            {
+              "wrong": "It is important that he comes.",
+              "correct": "It is important for him to come."
+            }
+          ],
+          "memory_tip": "「强调句，It is that；去掉还原看完整」",
+          "related": {
+            "prerequisite": "高二下：It作形式主语和形式宾语",
+            "next": "高三上：语法填空专项训练"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错",
+              "阅读理解"
+            ],
+            "scoring_key": "准确判断被强调成分，选择正确的连接词（that/who）。",
+            "common_trap": "将强调句与主语从句或定语从句混淆；在强调句中误用which/where/when等连接词。",
+            "real_exam_example": {
+              "source": "模拟高考真题",
+              "question": "It was not until he left ________ I realized how much I loved him.",
+              "answer": "that",
+              "scoring_notes": "本题为强调句型，强调了时间状语「not until he left」，连接词用that。强调句型中的「not until...that...」是固定搭配。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S4",
+      "unit_name": "完形填空技巧进阶",
+      "cards": [
+        {
+          "card_id": "S4-C1",
+          "full_id": "高二下-S4-C1",
+          "title": "完形填空：词义辨析与语境推断",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "结合上下文语境，准确辨析近义词、形近词的细微差别，选择最符合语境的词汇，并通过语境推断进行逻辑填空。",
+          "core_points": [
+            "通读全文，理解大意：在做题前快速浏览全文，把握文章主旨、体裁和情感基调。",
+            "瞻前顾后，锁定信息：根据空格前后的词语、句子进行初步判断，尤其关注动词、名词、形容词、副词的搭配。",
+            "词义辨析：区分形近词（如affect/effect）、近义词（如job/work/task）、同根词（如careful/carefully/carelessness）的用法和细微差别。",
+            "语境推断：根据上下文的因果、转折、并列、递进、让步等逻辑关系，推断出最合理的词语。",
+            "固定搭配：熟练掌握动词、名词、形容词、副词的常见固定搭配和习惯用法。"
+          ],
+          "example": {
+            "question": "He tried to ________ (avoid/escape/prevent/refuse) answering the tricky question.",
+            "steps": [
+              "分析句意：他试图避免回答那个棘手的问题。",
+              "辨析选项：avoid意为「避免(做某事)」，后接动名词；escape意为「逃跑，逃脱」；prevent意为「阻止，预防」；refuse意为「拒绝(做某事)」。",
+              "确定搭配：根据句意和搭配，只有「avoid doing sth.」符合。",
+              "选择最佳选项：选择「avoid」。"
+            ],
+            "answer": "avoid",
+            "additional_notes": "此题考查动词辨析和搭配，avoid后常接动名词。"
+          },
+          "mistakes": [
+            {
+              "wrong": "只看空格附近，不顾全文语境。",
+              "correct": "先通读全文，理解大意，再结合上下文选择。"
+            },
+            {
+              "wrong": "望文生义，不区分近义词的细微差别。",
+              "correct": "仔细辨析词义，结合固定搭配和语体风格选择最恰当的词。"
+            }
+          ],
+          "memory_tip": "「通读抓主旨，瞻前顾后找线索，词义搭配两手抓」",
+          "related": {
+            "prerequisite": "高一下：阅读技巧入门",
+            "next": "高二下：完形填空：逻辑关系与篇章结构"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "完形填空"
+            ],
+            "scoring_key": "先通读全文，把握文章脉络；再逐空细读，结合语境和搭配筛选；最后复读验证。",
+            "common_trap": "「熟词僻义」：常见词汇在特定语境下的特殊含义；「形近词干扰」：长相相似但意义迥异的词。",
+            "real_exam_example": {
+              "source": "模拟高考真题",
+              "question": "When faced with difficulties, some people tend to ________ (give up/give in/give away/give out) easily.",
+              "answer": "give up",
+              "scoring_notes": "此处考查动词短语辨析。give up意为「放弃」；give in意为「屈服」；give away意为「赠送，泄露」；give out意为「分发，耗尽」。根据句意「面对困难时，一些人容易『放弃』」，故选give up。"
+            }
+          }
+        },
+        {
+          "card_id": "S4-C2",
+          "full_id": "高二下-S4-C2",
+          "title": "完形填空：逻辑关系与篇章结构",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "识别文章内部的逻辑关系（并列、转折、因果、递进、解释等），理解篇章结构，从而选择正确选项。",
+          "core_points": [
+            "理解段落大意：把握每段的核心信息，理清段落间的关系，如总分、分总、并列等。",
+            "识别逻辑连接词：关注but, however, therefore, in addition, for example, because, in contrast, meanwhile等表示逻辑关系的词汇。",
+            "时间顺序与空间顺序：对于记叙文和说明文，注意事件发展的时间线和场景转换的空间线。",
+            "情感态度：通过作者的用词和描述，判断其情感倾向（积极/消极，客观/主观），这有助于选择带有情感色彩的词语。",
+            "主旨与细节：选项既要符合局部语境，又要服从全文主旨，不能因小失大。"
+          ],
+          "example": {
+            "question": "The experiment failed for the first time; ________, they didn't lose heart and tried again.",
+            "steps": [
+              "分析句意：前句说实验失败了，后句说他们没有灰心并再次尝试。",
+              "判断逻辑关系：前后两句之间存在转折关系，即尽管失败了，但他们没有放弃。",
+              "选择连接词：表示转折关系的副词有「however, nevertheless, but」等。",
+              "选择最佳选项：根据句式，空格前有分号，后有逗号，选择「however」最为恰当。"
+            ],
+            "answer": "however"
+          },
+          "mistakes": [
+            {
+              "wrong": "只关注局部语法正确性，忽略文章整体逻辑。",
+              "correct": "在语法正确的基础上，优先考虑逻辑合理性，确保填入的词能使文章连贯。"
+            },
+            {
+              "wrong": "对逻辑连接词的含义和用法理解不清。",
+              "correct": "系统复习并掌握常见的逻辑连接词及其引导的句式和语境。"
+            }
+          ],
+          "memory_tip": "「逻辑连接词是路标，篇章结构是地图」",
+          "related": {
+            "prerequisite": "高二下：完形填空：词义辨析与语境推断",
+            "next": "高三上：完形填空技巧专项"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "完形填空"
+            ],
+            "scoring_key": "从整体到局部，再从局部回整体。先通读把握大意，再细读填空，最后复读检查逻辑和连贯性。",
+            "common_trap": "「断章取义」：只看空格所在句，不顾前后文；「情感错位」：未能准确把握文章的情感基调，选择与主旨或作者态度不符的词。",
+            "real_exam_example": {
+              "source": "模拟高考真题",
+              "question": "He was very tired after a long day's work; ________, he stayed up late to finish his report.",
+              "answer": "nevertheless",
+              "scoring_notes": "前句说明他很累，后句说他熬夜完成报告，两者构成转折关系。nevertheless意为「然而，尽管如此」，符合语境。"
+            }
+          }
+        },
+        {
+          "card_id": "S4-C3",
+          "full_id": "高二下-S4-C3",
+          "title": "阅读理解：推理判断与主旨大意",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "掌握在阅读理解中进行深层推理、判断作者意图和准确归纳文章主旨的方法。",
+          "core_points": [
+            "推理判断题：基于原文信息进行逻辑推断，但避免过度推断或臆断。关注关键词如imply, infer, suggest, conclude。答案往往是原文的隐含信息或深层含义。",
+            "主旨大意题：识别文章主题句（通常在首段或各段首句），归纳文章核心内容。注意排除细节干扰项和以偏概全的选项。",
+            "作者意图/态度题：通过词汇（褒贬词）、语气、论证方式判断作者的情感倾向和写作目的（如persuade, inform, entertain, criticize）。",
+            "细节理解题：精准定位原文信息，注意同义替换和信息筛选，避免「似是而非」的选项。",
+            "词义猜测题：结合上下文语境、构词法、逻辑关系等推测生词含义。"
+          ],
+          "example": {
+            "question": "What can be inferred from the second paragraph?",
+            "steps": [
+              "定位：仔细阅读文章第二段，理解其核心内容。",
+              "分析：找出段落中的关键信息点，并思考这些信息点可能暗示的深层含义或作者未直接表达的观点。",
+              "排除：排除与原文信息不符、过度推断或无关的选项。",
+              "选择：选择最符合原文逻辑推断的选项。"
+            ],
+            "answer": "（假设选项A是正确推断）The author believes that technological advancements bring both opportunities and challenges.",
+            "additional_notes": "推理题需要考生在理解原文的基础上进行合理演绎，不能脱离原文。"
+          },
+          "mistakes": [
+            {
+              "wrong": "过度推理，将自己的主观判断强加于作者。",
+              "correct": "所有推理都必须有原文依据，避免「无中生有」或「以偏概全」。"
+            },
+            {
+              "wrong": "主旨题选择的是文章的某个细节作为答案。",
+              "correct": "主旨题的答案应具有概括性，能覆盖文章的主要内容。"
+            }
+          ],
+          "memory_tip": "「推理不臆断，主旨抓中心，细节找定位」",
+          "related": {
+            "prerequisite": "高一下：阅读技巧入门",
+            "next": "高三上：阅读理解四大题型"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "阅读理解",
+              "七选五"
+            ],
+            "scoring_key": "忠于原文，逻辑严谨。对于推理题，选项必须是原文信息的合理延伸；对于主旨题，选项需具备高度概括性。",
+            "common_trap": "「张冠李戴」：将文中甲的特点说成乙的；「偷换概念」：选项中部分词语与原文不符；「以偏概全」：用文章的细节充当主旨。",
+            "real_exam_example": {
+              "source": "模拟高考真题",
+              "question": "The author's attitude towards the new policy is most likely to be ________.",
+              "answer": "objective",
+              "scoring_notes": "通过分析文章中作者的用词和语气，发现作者在陈述新政策时，既提到了其优点，也指出了其潜在问题，并未表现出明显的偏向性，因此是客观的。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S5",
+      "unit_name": "应用文写作",
+      "cards": [
+        {
+          "card_id": "S5-C1",
+          "full_id": "高二下-S5-C1",
+          "title": "应用文常见类型与基本结构",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "掌握高考常见应用文（书信、通知、报告、邮件、日记等）的格式、结构和写作要点。",
+          "core_points": [
+            "书信/邮件：包含称呼、正文（开场、主体、结尾）、落款（署名、日期）。格式要规范，如称呼顶格，正文各段落开头空两格。",
+            "通知：包含标题（Notice/通知）、称谓（To: All students/staff）、正文（事由、时间、地点、要求、联系方式）、落款（发通知单位、日期）。",
+            "报告/建议信：包含标题、称谓、正文（背景/问题、具体建议/措施、预期效果）、落款。通常要求正式且逻辑清晰。",
+            "日记：包含日期、天气、正文。日记通常使用第一人称，内容可较为随意，但需围绕主题。",
+            "备忘录/便条：内容简短，说明事由、时间、地点及相关要求，署名即可。"
+          ],
+          "example": {
+            "question": "请你以校学生会名义，给全校师生写一封感谢信，感谢他们在上次环保活动中的积极参与和支持。",
+            "steps": [
+              "确定应用文类型：感谢信，属于书信体。",
+              "确定写作对象：全校师生，称呼应得体。",
+              "确定信件目的：感谢参与和支持，并简要提及活动意义。",
+              "规划结构：称呼-开场-主体（感谢具体行动）-结尾（展望未来合作）-落款（学生会，日期）。"
+            ],
+            "answer": "（略，需包含称呼、正文、落款等要素）",
+            "additional_notes": "写作时需注意语气真诚，用词恰当。"
+          },
+          "mistakes": [
+            {
+              "wrong": "格式混乱，如日期或署名位置错误。",
+              "correct": "严格按照各类应用文的固定格式书写。"
+            },
+            {
+              "wrong": "内容不全，遗漏关键信息。",
+              "correct": "审题时圈出所有要点，确保在正文中一一对应体现。"
+            }
+          ],
+          "memory_tip": "「格式是骨架，内容是血肉，语言是灵魂」",
+          "related": {
+            "prerequisite": "高一上：基础写作",
+            "next": "高二下：应用文高分策略与常用表达"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "书面表达"
+            ],
+            "scoring_key": "格式正确（2-3分），信息完整（8-10分），语言得体（5-7分）。",
+            "common_trap": "「信息遗漏」：未覆盖题目要求的所有要点；「语体不当」：在正式场合使用非正式语言；「格式错误」：如书信没有日期或署名。",
+            "real_exam_example": {
+              "source": "模拟高考真题",
+              "question": "假设你是李华，你的美国朋友Peter将来中国学习。请你给他写一封邮件，告知他来华前需要做的准备。",
+              "answer": "Dear Peter,\nI'm so glad to hear that you are coming to China for study. Here are some suggestions for your preparation.\nFirst, you'd better apply for your visa as soon as possible... (略)\nLooking forward to seeing you soon!\nYours,\nLi Hua",
+              "scoring_notes": "此邮件包含了称呼、正文、落款，信息完整，语言得体，格式正确，符合应用文要求。"
+            }
+          }
+        },
+        {
+          "card_id": "S5-C2",
+          "full_id": "高二下-S5-C2",
+          "title": "应用文高分策略与常用表达",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "运用高级词汇、多样句式和恰当的语体，提升应用文的表达效果和分数。",
+          "core_points": [
+            "高级词汇：替换简单词汇，如「good」替换为「excellent/outstanding」，「many」替换为「numerous/a great deal of」。积累与各类话题（环保、教育、科技）相关的核心词汇。",
+            "多样句式：适当使用复合句（定语从句、状语从句）、倒装句、强调句、非谓语动词（不定式、动名词、分词）等，增加句子的复杂性和表现力。例句：Not only did he come, but he also brought a gift.",
+            "逻辑连接词：运用恰当的连接词使文章衔接自然，逻辑清晰。如表示并列（in addition, moreover）、转折（however, nevertheless）、因果（therefore, consequently）、递进（furthermore, what's more）等。",
+            "语体得体：根据应用文类型选择正式或非正式的语气。如建议信通常用较正式的语言，而给朋友的邮件可轻松随意。",
+            "常用表达：积累各类应用文的常用开场白、过渡句和结尾语，如「I am writing to...」、「It is my pleasure to...」、「I would appreciate it if...」、「Looking forward to your reply.」。"
+          ],
+          "example": {
+            "question": "请将以下句子进行改写，使其更具文采：'I think it's important to study hard.'",
+            "steps": [
+              "替换简单词汇：think → believe/hold the view that；important → crucial/essential。",
+              "增加句式多样性：可使用强调句、非谓语动词或从句。",
+              "结合语境：如果是在正式语境，可使用更正式的表达。"
+            ],
+            "answer": "It is widely acknowledged that diligent study is crucial for academic success. (使用被动语态和更高级词汇)\nI cannot emphasize too much the significance of studying diligently. (使用双重否定和高级词汇)",
+            "additional_notes": "改写时应注意保持原意，并使表达更自然流畅。"
+          },
+          "mistakes": [
+            {
+              "wrong": "语言平淡，句式单一，过多使用简单句。",
+              "correct": "有意识地运用复合句、非谓语动词和各类连接词，提升句式复杂性。"
+            },
+            {
+              "wrong": "中式英语，不符合英语表达习惯。",
+              "correct": "多阅读地道英语范文，模仿其表达方式，积累常用句型。"
+            }
+          ],
+          "memory_tip": "「词汇句式多变化，逻辑衔接是关键」",
+          "related": {
+            "prerequisite": "高二下：应用文常见类型与基本结构",
+            "next": "高三上：书面表达模板与策略"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "书面表达"
+            ],
+            "scoring_key": "语言准确性（语法、拼写、标点）、丰富性（词汇、句式）、连贯性（逻辑、衔接）、得体性（语体、语气）。",
+            "common_trap": "「语法错误」：为了追求高级词汇和句式而出现大量语法错误；「堆砌辞藻」：生硬地使用高级词汇和句式，导致表达不自然。",
+            "real_exam_example": {
+              "source": "模拟高考真题",
+              "question": "（书面表达任务）请你写一封信给校长，提出关于改善校园环境的建议。",
+              "answer": "Dear Principal,\nI am writing to express my sincere concern about the campus environment and offer some humble suggestions for its improvement. It is widely recognized that a pleasant campus environment plays a pivotal role in fostering a positive learning atmosphere. Therefore, I propose that... (略)\nYour prompt attention to this matter would be greatly appreciated.\nSincerely,\nLi Hua",
+              "scoring_notes": "此范文使用了正式的语体，高级词汇（sincere concern, pivotal role, fostering, prompt attention），复合句（It is widely recognized that...），并有明确的建议，符合高分标准。"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

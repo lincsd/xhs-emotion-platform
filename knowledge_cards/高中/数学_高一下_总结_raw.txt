@@ -1,0 +1,674 @@
+```json
+{
+  "subject": "数学",
+  "grade": "高一",
+  "semester": "下册",
+  "textbook": "人教A版",
+  "grade_short": "高一下",
+  "card_pack": "知识总结",
+  "description": "高中高一下册数学高考考点笔记总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "指数函数与对数函数",
+      "cards": [
+        {
+          "card_id": "S1-01",
+          "full_id": "数学-高一下-S1-01",
+          "title": "指数与指数幂的运算",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "整数指数幂：$a^n=a \\cdot a \\cdots a$ (n个a)；分数指数幂：$a^{m/n}=\\sqrt[n]{a^m}$。",
+          "core_points": [
+            "整数指数幂：$a^n$ (n为正整数)，$a^0=1 (a \\ne 0)$，$a^{-n}=1/a^n (a \\ne 0)$。",
+            "分数指数幂：$a^{m/n}=\\sqrt[n]{a^m} (a>0, m,n \\in N^*, n>1)$。",
+            "指数幂运算性质：$a^m a^n=a^{m+n}$，$(a^m)^n=a^{mn}$，$(ab)^n=a^n b^n$。"
+          ],
+          "example": {
+            "question": "计算：$(0.064)^{-1/3} - (-1/2)^{-2} + (\\sqrt{2}-1)^0$。",
+            "steps": [
+              "将小数和负指数转化为分数和正指数。",
+              "计算各项的值。",
+              "合并计算结果。"
+            ],
+            "answer": "原式 = $(64/1000)^{-1/3} - (1/(-1/2)^2) + 1 = (4/10)^{-1} - 4 + 1 = 10/4 - 4 + 1 = 2.5 - 3 = -0.5$。"
+          },
+          "mistakes": [
+            {"wrong": "负指数幂$a^{-n}=-a^n$", "correct": "$a^{-n}=1/a^n$。"},
+            {"wrong": "分数指数幂$a^{m/n}=(\\sqrt[n]{a})^m$不考虑a的范围", "correct": "分数指数幂定义要求底数$a>0$。"}
+          ],
+          "memory_tip": "遇到负指数先变倒数，遇到分数指数先变根式，遇到小数先变分数，运算顺序要分清。",
+          "related": {
+            "prerequisite": "初中代数运算，根式运算",
+            "next": "指数函数，对数运算"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["选择", "填空", "计算题"],
+            "scoring_key": "熟练掌握指数幂定义和运算性质，计算准确。",
+            "common_trap": "负指数、分数指数的定义混淆，底数范围限制，计算符号错误。",
+            "real_exam_example": {
+              "source": "模拟考",
+              "question": "化简并求值：$((a^{1/2}b^{-1/3})^2 \\cdot (a^{-1}b^{2/3})) / (a^{1/2}b^{1/3})$，其中 $a=4, b=27$。",
+              "answer": "原式 = $(a b^{-2/3} \\cdot a^{-1}b^{2/3}) / (a^{1/2}b^{1/3}) = (a^{1-1} b^{-2/3+2/3}) / (a^{1/2}b^{1/3}) = 1 / (a^{1/2}b^{1/3})$。代入 $a=4, b=27$，得 $1 / (4^{1/2} \\cdot 27^{1/3}) = 1 / (2 \\cdot 3) = 1/6$。",
+              "scoring_notes": "指数幂的乘除法、幂的乘方运算正确得关键分；化简到最简形式并代入求值。注意底数a,b为正数。"
+            }
+          }
+        },
+        {
+          "card_id": "S1-02",
+          "full_id": "数学-高一下-S1-02",
+          "title": "指数函数及其性质",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "函数 $y=a^x (a>0, a \\ne 1)$ 叫做指数函数。",
+          "core_points": [
+            "定义域：R；值域：$(0, +\\infty)$。",
+            "图像过定点 $(0,1)$。",
+            "单调性：当 $a>1$ 时，是增函数；当 $0<a<1$ 时，是减函数。",
+            "图像特征：恒在x轴上方，当 $x \\to -\\infty$ 时，$y \\to 0$ (a>1) 或 $x \\to +\\infty$ 时，$y \\to 0$ (0<a<1)。"
+          ],
+          "example": {
+            "question": "已知函数 $f(x)=a^x (a>0, a \\ne 1)$，若 $f(2)=4$，求 $f(-1)$ 的值。",
+            "steps": [
+              "根据 $f(2)=4$ 求出底数a。",
+              "写出函数解析式。",
+              "计算 $f(-1)$ 的值。"
+            ],
+            "answer": "由 $f(2)=4$，得 $a^2=4$，因为 $a>0$，所以 $a=2$。函数为 $f(x)=2^x$。则 $f(-1)=2^{-1}=1/2$。"
+          },
+          "mistakes": [
+            {"wrong": "忽略底数 $a>0, a \\ne 1$ 的条件", "correct": "严格遵循定义域和底数限制。"},
+            {"wrong": "判断单调性时混淆 $a>1$ 和 $0<a<1$ 的情况", "correct": "记住'大1增，小1减'。"}
+          ],
+          "memory_tip": "指数函数图像'过1'，底数'大1'向上翘，'小1'向下弯。",
+          "related": {
+            "prerequisite": "指数幂运算",
+            "next": "对数函数，函数单调性、值域"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["选择", "填空", "函数性质判断"],
+            "scoring_key": "理解指数函数定义域、值域、单调性、过定点等性质，并能应用。",
+            "common_trap": "底数a的范围限制，单调性判断错误，与复合函数结合时定义域的确定。",
+            "real_exam_example": {
+              "source": "模拟考",
+              "question": "比较大小：$a=2^{0.3}, b=0.3^2, c=0.3^{0.2}$。",
+              "answer": "首先，$b=0.3^2 = 0.09$。对于 $a=2^{0.3}$，底数 $2>1$，指数 $0.3>0$，所以 $a>1$。对于 $c=0.3^{0.2}$，底数 $0<0.3<1$，指数 $0.2>0$，所以 $0<c<1$。因此 $b<c<a$。",
+              "scoring_notes": "正确识别指数函数的底数和指数，利用单调性或特殊值比较大小。注意 $0.3^2$ 是常数，不是指数函数形式。"
+            }
+          }
+        },
+        {
+          "card_id": "S1-03",
+          "full_id": "数学-高一下-S1-03",
+          "title": "对数与对数运算性质",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "若 $a^b=N (a>0, a \\ne 1, N>0)$，则 $b=\\log_a N$ (a为底N的对数)。",
+          "core_points": [
+            "对数定义：指数与对数的互化 $a^b=N \\iff b=\\log_a N$。",
+            "常用对数 $\\lg N = \\log_{10} N$，自然对数 $\\ln N = \\log_e N$。",
+            "对数运算性质：$\\log_a (MN)=\\log_a M + \\log_a N$，$\\log_a (M/N)=\\log_a M - \\log_a N$，$\\log_a M^n = n \\log_a M$。",
+            "换底公式：$\\log_a b = \\log_c b / \\log_c a$。"
+          ],
+          "example": {
+            "question": "计算：$\\log_3 9 + \\log_2 \\sqrt{8} - \\lg 100$。",
+            "steps": [
+              "利用对数定义和性质化简各项。",
+              "计算各项的值。",
+              "合并计算结果。"
+            ],
+            "answer": "$\\log_3 9 = \\log_3 3^2 = 2$；$\\log_2 \\sqrt{8} = \\log_2 2^{3/2} = 3/2$；$\\lg 100 = \\lg 10^2 = 2$。原式 = $2 + 3/2 - 2 = 3/2$。"
+          },
+          "mistakes": [
+            {"wrong": "对数真数或底数范围不满足", "correct": "真数 $N>0$，底数 $a>0, a \\ne 1$。"},
+            {"wrong": "对数运算性质混淆，如$\\log_a (M+N)=\\log_a M + \\log_a N$", "correct": "严格区分对数运算性质。"}
+          ],
+          "memory_tip": "对数是指数的逆运算，乘变加，除变减，幂变系数。",
+          "related": {
+            "prerequisite": "指数幂运算，指数定义",
+            "next": "对数函数，指对数方程与不等式"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["选择", "填空", "计算题"],
+            "scoring_key": "熟练掌握对数定义、性质和换底公式，计算准确。",
+            "common_trap": "真数、底数范围限制，对数运算性质的误用，换底公式的应用技巧。",
+            "real_exam_example": {
+              "source": "模拟考",
+              "question": "若 $\\log_2 3 = a, \\log_3 7 = b$，用 $a,b$ 表示 $\\log_{14} 56$。",
+              "answer": "由题意，$\\log_2 3 = a \\implies \\log_3 2 = 1/a$。$\\log_3 7 = b$。$\\log_{14} 56 = \\frac{\\log_3 56}{\\log_3 14} = \\frac{\\log_3 (2^3 \\cdot 7)}{\\log_3 (2 \\cdot 7)} = \\frac{3\\log_3 2 + \\log_3 7}{\\log_3 2 + \\log_3 7} = \\frac{3/a + b}{1/a + b} = \\frac{3+ab}{1+ab}$。",
+              "scoring_notes": "正确使用换底公式是第一步，将所有对数化为同底；然后利用对数运算性质进行化简。注意细节计算。"
+            }
+          }
+        },
+        {
+          "card_id": "S1-04",
+          "full_id": "数学-高一下-S1-04",
+          "title": "对数函数及其性质",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "函数 $y=\\log_a x (a>0, a \\ne 1)$ 叫做对数函数。",
+          "core_points": [
+            "定义域：$(0, +\\infty)$；值域：R。",
+            "图像过定点 $(1,0)$。",
+            "单调性：当 $a>1$ 时，是增函数；当 $0<a<1$ 时，是减函数。",
+            "图像特征：恒在y轴右侧，当 $x \\to 0^+$ 时，$y \\to -\\infty$ (a>1) 或 $y \\to +\\infty$ (0<a<1)。"
+          ],
+          "example": {
+            "question": "求函数 $y=\\log_2 (x-1)$ 的定义域、值域和单调区间。",
+            "steps": [
+              "根据对数定义，真数必须大于0求定义域。",
+              "根据对数函数值域特征写出值域。",
+              "根据底数判断单调性。",
+              "结合定义域写出单调区间。"
+            ],
+            "answer": "定义域：$x-1>0 \\implies x>1$，即 $(1, +\\infty)$。值域：R。底数 $2>1$，所以函数在定义域上是增函数，单调区间为 $(1, +\\infty)$。"
+          },
+          "mistakes": [
+            {"wrong": "忽略真数 $x>0$ 的条件", "correct": "定义域是解题首要步骤。"},
+            {"wrong": "判断单调性时混淆 $a>1$ 和 $0<a<1$ 的情况", "correct": "记住'大1增，小1减'。"}
+          ],
+          "memory_tip": "对数函数图像'过1'，底数'大1'向上弯，'小1'向下翘。",
+          "related": {
+            "prerequisite": "对数定义与运算，函数定义域、值域、单调性",
+            "next": "指数与对数方程/不等式，复合函数"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["选择", "填空", "函数性质判断"],
+            "scoring_key": "理解对数函数定义域、值域、单调性、过定点等性质，并能应用。",
+            "common_trap": "定义域的确定，单调性判断错误，与复合函数结合时需考虑内层函数定义域和单调性。",
+            "real_exam_example": {
+              "source": "模拟考",
+              "question": "函数 $f(x)=\\log_{0.5} (x^2-2x-3)$ 的单调递减区间是？",
+              "answer": "首先，定义域要求 $x^2-2x-3>0$，即 $(x-3)(x+1)>0$，解得 $x<-1$ 或 $x>3$。设 $u=x^2-2x-3$，则 $u$ 的对称轴为 $x=1$。底数 $0.5 \\in (0,1)$，所以 $f(x)$ 的单调性与 $u$ 的单调性相反。当 $x>1$ 时，$u$ 递增，所以 $f(x)$ 递减。结合定义域 $x>3$，所以递减区间为 $(3, +\\infty)$。",
+              "scoring_notes": "定义域是第一步，必须正确求出。复合函数单调性判断：同增异减。注意内层函数 $u$ 的单调区间与外层函数底数的关系。"
+            }
+          }
+        },
+        {
+          "card_id": "S1-05",
+          "full_id": "数学-高一下-S1-05",
+          "title": "指数与对数方程/不等式",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "含有指数或对数形式的方程或不等式。",
+          "core_points": [
+            "解指数方程/不等式：化为同底数，利用单调性比较指数；或换元法。",
+            "解对数方程/不等式：化为同底数，利用单调性比较真数；或换元法。",
+            "解对数不等式时，需先确定真数大于0的定义域，再根据底数与1的关系判断单调性。"
+          ],
+          "example": {
+            "question": "解不等式：$\\log_2 (x-1) < 3$。",
+            "steps": [
+              "确定对数函数的定义域。",
+              "将常数3转化为以2为底的对数。",
+              "利用对数函数的单调性比较真数。",
+              "综合定义域和比较结果得出解集。"
+            ],
+            "answer": "定义域：$x-1>0 \\implies x>1$。将 $3$ 写作 $\\log_2 2^3 = \\log_2 8$。不等式变为 $\\log_2 (x-1) < \\log_2 8$。由于底数 $2>1$，对数函数为增函数，所以 $x-1 < 8$，即 $x<9$。综合定义域，解集为 $(1, 9)$。"
+          },
+          "mistakes": [
+            {"wrong": "解对数不等式时未考虑定义域", "correct": "定义域是解题的先决条件。"},
+            {"wrong": "解不等式时未根据底数分类讨论", "correct": "底数 $a>1$ 和 $0<a<1$ 时单调性相反，不等号方向不同。"}
+          ],
+          "memory_tip": "指对数不等式，先定域，再同底，最后利用单调性。底数大于1不变号，小于1要变号。",
+          "related": {
+            "prerequisite": "指数函数与对数函数性质，一元二次不等式",
+            "next": "函数综合题，导数应用"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["选择", "填空", "解答题 (小问)"],
+            "scoring_key": "准确确定定义域，熟练进行同底转化，正确应用单调性解不等式。",
+            "common_trap": "定义域的遗漏，底数分类讨论的缺失，换元法后变量范围的改变。",
+            "real_exam_example": {
+              "source": "模拟考",
+              "question": "若函数 $f(x)=\\sqrt{1-\\log_2 x}$ 的定义域为 $[m, n]$，求 $m+n$ 的值。",
+              "answer": "要使函数有意义，需满足 $1-\\log_2 x \\ge 0$ 且 $x>0$。由 $1-\\log_2 x \\ge 0$，得 $\\log_2 x \\le 1$。将 $1$ 写作 $\\log_2 2$，则 $\\log_2 x \\le \\log_2 2$。由于底数 $2>1$，所以 $x \\le 2$。综合 $x>0$，定义域为 $(0, 2]$。题目说定义域为 $[m, n]$，这与我们求出的 $(0,2]$ 不符，说明题目可能存在问题或我理解有误。假设题目是求 $f(x)=\\sqrt{1-\\log_2 x}$ 的定义域，并假设定义域为 $[m,n]$ 是一种特殊情况。如果定义域是 $[m,n]$，那么 $m$ 必须是 $0$ 的极限，所以 $m=0$ 且 $n=2$。但对数函数 $x>0$ 无法取到 $0$。这道题的表述有点问题。如果改为求 $f(x)=\\sqrt{1-\\log_2 x}$ 的定义域，那么定义域是 $(0,2]$。如果定义域为 $[m,n]$，则此题无解。重新审视题目，可能是求 $f(x)=\\log_2 (1-x)$ 的定义域。不，还是按照原题。这个题目的定义域是 $(0,2]$，不是闭区间。高考不会出这种有歧义的题目。我将修改题目，使其合理。\\n\\n**修改后的题目：** 若函数 $f(x)=\\sqrt{1-\\log_2 x}$ 的定义域为 $(0, n]$，求 $n$ 的值。",
+              "answer": "要使函数有意义，需满足 $1-\\log_2 x \\ge 0$ 且 $x>0$。由 $1-\\log_2 x \\ge 0$，得 $\\log_2 x \\le 1$。将 $1$ 写作 $\\log_2 2$，则 $\\log_2 x \\le \\log_2 2$。由于底数 $2>1$，所以 $x \\le 2$。综合 $x>0$，定义域为 $(0, 2]$。因此 $n=2$。",
+              "scoring_notes": "正确列出定义域的两个条件（真数大于0，根号下非负）；正确解对数不等式；综合条件得到最终定义域。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "三角函数",
+      "cards": [
+        {
+          "card_id": "S2-01",
+          "full_id": "数学-高一下-S2-01",
+          "title": "任意角、弧度制、同角三角函数关系",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "任意角可正可负，弧度制用弧长与半径比定义角，同角关系指 $\\sin^2 \\alpha + \\cos^2 \\alpha = 1, \\tan \\alpha = \\sin \\alpha / \\cos \\alpha$。",
+          "core_points": [
+            "角的概念推广：正角、负角、零角，象限角，终边相同的角。",
+            "弧度制：$1\\text{ rad} = (180/\\pi)^\\circ \\approx 57.3^\\circ$，$\\pi \\text{ rad} = 180^\\circ$。",
+            "弧长公式 $l=R|\\alpha|$，扇形面积 $S=1/2 R^2 |\\alpha| = 1/2 lR$。",
+            "同角三角函数基本关系式：$\\sin^2 \\alpha + \\cos^2 \\alpha = 1$；$\\tan \\alpha = \\sin \\alpha / \\cos \\alpha$。"
+          ],
+          "example": {
+            "question": "已知角 $\\alpha$ 的终边经过点 $P(-3, 4)$，求 $\\sin \\alpha, \\cos \\alpha, \\tan \\alpha$ 的值。",
+            "steps": [
+              "计算点P到原点的距离r。",
+              "根据三角函数定义，用坐标表示三角函数值。",
+              "写出结果。"
+            ],
+            "answer": "点 $P(-3, 4)$ 到原点的距离 $r=\\sqrt{(-3)^2+4^2}=5$。所以 $\\sin \\alpha = 4/5$，$\\cos \\alpha = -3/5$，$\\tan \\alpha = 4/(-3) = -4/3$。"
+          },
+          "mistakes": [
+            {"wrong": "弧度制与角度制混淆", "correct": "注意单位，计算时统一单位。"},
+            {"wrong": "同角关系式开方时忘记讨论正负", "correct": "根据角的象限判断符号。"}
+          ],
+          "memory_tip": "同角关系'平方和为1，商为tan'；弧度制'π等于180'。",
+          "related": {
+            "prerequisite": "初中锐角三角函数",
+            "next": "诱导公式，三角函数图像与性质"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["选择", "填空", "计算题"],
+            "scoring_key": "理解任意角概念，熟练进行角度与弧度互化，掌握同角关系式并能灵活运用。",
+            "common_trap": "角的终边与象限判断，同角关系式开方时的符号判断，弧长扇形面积公式应用。",
+            "real_exam_example": {
+              "source": "模拟考",
+              "question": "若 $\\sin \\alpha + \\cos \\alpha = 1/5$，且 $\\alpha \\in (0, \\pi)$，求 $\\tan \\alpha$ 的值。",
+              "answer": "将 $\\sin \\alpha + \\cos \\alpha = 1/5$ 两边平方，得 $(\\sin \\alpha + \\cos \\alpha)^2 = (1/5)^2$，即 $\\sin^2 \\alpha + \\cos^2 \\alpha + 2\\sin \\alpha \\cos \\alpha = 1/25$。所以 $1 + 2\\sin \\alpha \\cos \\alpha = 1/25$，得 $2\\sin \\alpha \\cos \\alpha = -24/25$。因为 $\\alpha \\in (0, \\pi)$ 且 $\\sin \\alpha \\cos \\alpha < 0$，所以 $\\alpha$ 位于第二象限。$(\\sin \\alpha - \\cos \\alpha)^2 = \\sin^2 \\alpha + \\cos^2 \\alpha - 2\\sin \\alpha \\cos \\alpha = 1 - (-24/25) = 49/25$。所以 $\\sin \\alpha - \\cos \\alpha = \\pm 7/5$。因为 $\\alpha$ 在第二象限，$\\sin \\alpha > 0, \\cos \\alpha < 0$，所以 $\\sin \\alpha - \\cos \\alpha > 0$，取 $\\sin \\alpha - \\cos \\alpha = 7/5$。联立 $\\sin \\alpha + \\cos \\alpha = 1/5$ 和 $\\sin \\alpha - \\cos \\alpha = 7/5$，解得 $2\\sin \\alpha = 8/5 \\implies \\sin \\alpha = 4/5$，$2\\cos \\alpha = -6/5 \\implies \\cos \\alpha = -3/5$。所以 $\\tan \\alpha = \\sin \\alpha / \\cos \\alpha = (4/5) / (-3/5) = -4/3$。",
+              "scoring_notes": "平方求 $\\sin \\alpha \\cos \\alpha$ 是关键一步；根据 $\\sin \\alpha \\cos \\alpha$ 符号判断象限；利用 $(\\sin \\alpha - \\cos \\alpha)^2$ 结合象限确定 $\\sin \\alpha - \\cos \\alpha$ 的符号；最后解方程组求 $\\sin \\alpha, \\cos \\alpha$。"
+            }
+          }
+        },
+        {
+          "card_id": "S2-02",
+          "full_id": "数学-高一下-S2-02",
+          "title": "诱导公式",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "将任意角的三角函数转化为锐角三角函数，口诀「奇变偶不变，符号看象限」。",
+          "core_points": [
+            "公式一至六：如 $\\sin(\\pi \\pm \\alpha) = \\mp \\sin \\alpha$，$\\cos(\\pi \\pm \\alpha) = -\\cos \\alpha$。",
+            "公式七：$\\sin(\\pi/2 - \\alpha) = \\cos \\alpha$，$\\cos(\\pi/2 - \\alpha) = \\sin \\alpha$。",
+            "公式八：$\\sin(\\pi/2 + \\alpha) = \\cos \\alpha$，$\\cos(\\pi/2 + \\alpha) = -\\sin \\alpha$。",
+            "口诀：'奇变偶不变'指 $\\pi/2 \\cdot k \\pm \\alpha$ 中k为奇数时变函数名，k为偶数时不变；'符号看象限'指原函数在 $\\alpha$ 所在象限的符号。"
+          ],
+          "example": {
+            "question": "化简：$\\sin(3\\pi/2 - \\alpha) + \\cos(\\pi + \\alpha) - \\tan(2\\pi - \\alpha)$。",
+            "steps": [
+              "对各项分别应用诱导公式。",
+              "确定函数名是否变化和符号。",
+              "合并化简结果。"
+            ],
+            "answer": "$\\sin(3\\pi/2 - \\alpha) = -\\cos \\alpha$ (3π/2是奇数倍π/2，变cos，3π/2-α在第三象限，sin为负)。$\\cos(\\pi + \\alpha) = -\\cos \\alpha$ (π是偶数倍π/2，不变cos，π+α在第三象限，cos为负)。$\\tan(2\\pi - \\alpha) = -\\tan \\alpha$ (2π是偶数倍π/2，不变tan，2π-α在第四象限，tan为负)。原式 = $-\\cos \\alpha - \\cos \\alpha - (-\\tan \\alpha) = -2\\cos \\alpha + \\tan \\alpha$。"
+          },
+          "mistakes": [
+            {"wrong": "符号判断错误", "correct": "严格按照'符号看象限'，看的是原函数的符号。"},
+            {"wrong": "函数名变化错误", "correct": "记住'奇变偶不变'。"}
+          ],
+          "memory_tip": "奇变偶不变，符号看象限。负角公式最简单，直接去负号。",
+          "related": {
+            "prerequisite": "任意角，同角三角函数关系",
+            "next": "三角函数图像与性质，三角恒等变换"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["选择", "填空", "解答题 (化简求值)"],
+            "scoring_key": "熟练掌握所有诱导公式，尤其是'奇变偶不变，符号看象限'的运用。",
+            "common_trap": "符号判断失误，函数名变化错误，多重诱导公式的连续应用。",
+            "real_exam_example": {
+              "source": "模拟考",
+              "question": "已知 $\\cos(\\pi/2 + \\alpha) = 1/3$，且 $\\alpha \\in (\\pi, 3\\pi/2)$，求 $\\tan \\alpha$ 的值。",
+              "answer": "由诱导公式 $\\cos(\\pi/2 + \\alpha) = -\\sin \\alpha$。所以 $-\\sin \\alpha = 1/3$，即 $\\sin \\alpha = -1/3$。因为 $\\alpha \\in (\\pi, 3\\pi/2)$，所以 $\\alpha$ 在第三象限。在第三象限，$\\sin \\alpha < 0$ 且 $\\cos \\alpha < 0$。由 $\\sin^2 \\alpha + \\cos^2 \\alpha = 1$，得 $(-1/3)^2 + \\cos^2 \\alpha = 1$，所以 $\\cos^2 \\alpha = 1 - 1/9 = 8/9$。因为 $\\cos \\alpha < 0$，所以 $\\cos \\alpha = -\\sqrt{8}/3 = -2\\sqrt{2}/3$。所以 $\\tan \\alpha = \\sin \\alpha / \\cos \\alpha = (-1/3) / (-2\\sqrt{2}/3) = 1/(2\\sqrt{2}) = \\sqrt{2}/4$。",
+              "scoring_notes": "正确应用诱导公式求出 $\\sin \\alpha$；根据 $\\alpha$ 象限判断 $\\cos \\alpha$ 符号；利用同角关系求 $\\cos \\alpha$；最后求 $\\tan \\alpha$。"
+            }
+          }
+        },
+        {
+          "card_id": "S2-03",
+          "full_id": "数学-高一下-S2-03",
+          "title": "正弦、余弦函数的图像与性质",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "函数 $y=\\sin x$ 和 $y=\\cos x$ 是周期函数，其图像呈波浪形。",
+          "core_points": [
+            "定义域：R；值域：$[-1, 1]$。",
+            "周期性：$T=2\\pi$。",
+            "奇偶性：$y=\\sin x$ 是奇函数，图像关于原点对称；$y=\\cos x$ 是偶函数，图像关于y轴对称。",
+            "单调性：$y=\\sin x$ 在 $[2k\\pi - \\pi/2, 2k\\pi + \\pi/2]$ 上递增，在 $[2k\\pi + \\pi/2, 2k\\pi + 3\\pi/2]$ 上递减。",
+            "单调性：$y=\\cos x$ 在 $[2k\\pi - \\pi, 2k\\pi]$ 上递增，在 $[2k\\pi, 2k\\pi + \\pi]$ 上递减。",
+            "对称性：$y=\\sin x$ 对称轴 $x=k\\pi + \\pi/2$，对称中心 $(k\\pi, 0)$。",
+            "对称性：$y=\\cos x$ 对称轴 $x=k\\pi$，对称中心 $(k\\pi + \\pi/2, 0)$。"
+          ],
+          "example": {
+            "question": "求函数 $f(x)=2\\sin x - 1$ 的值域和最小正周期。",
+            "steps": [
+              "根据 $\\sin x$ 的值域确定 $2\\sin x$ 的值域。",
+              "确定 $2\\sin x - 1$ 的值域。",
+              "根据 $\\sin x$ 的周期确定 $f(x)$ 的周期。"
+            ],
+            "answer": "因为 $-1 \\le \\sin x \\le 1$，所以 $-2 \\le 2\\sin x \\le 2$，从而 $-3 \\le 2\\sin x - 1 \\le 1$。所以函数的值域为 $[-3, 1]$。函数 $f(x)=2\\sin x - 1$ 的最小正周期与 $y=\\sin x$ 相同，为 $T=2\\pi$。"
+          },
+          "mistakes": [
+            {"wrong": "单调区间书写错误，漏写 $k\\pi$", "correct": "单调区间要写成 $[2k\\pi + a, 2k\\pi + b]$ 形式。"},
+            {"wrong": "对称轴和对称中心混淆", "correct": "记住'正弦对称中心在x轴，余弦对称轴在y轴'。"}
+          ],
+          "memory_tip": "正弦原点过，余弦峰值在y轴；周期2π，值域正负1。",
+          "related": {
+            "prerequisite": "诱导公式，函数定义域、值域、单调性、奇偶性",
+            "next": "正切函数，三角函数图像变换"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["选择", "填空", "解答题 (图像性质)"],
+            "scoring_key": "熟练掌握正弦、余弦函数的定义域、值域、周期性、奇偶性、单调性、对称性。",
+            "common_trap": "单调区间、对称轴、对称中心的书写格式，与复合函数结合时性质的判断。",
+            "real_exam_example": {
+              "source": "模拟考",
+              "question": "已知函数 $f(x)=\\sin x + \\cos x$，求其最大值和最小正周期。",
+              "answer": "$f(x)=\\sin x + \\cos x = \\sqrt{2} (\\frac{1}{\\sqrt{2}}\\sin x + \\frac{1}{\\sqrt{2}}\\cos x) = \\sqrt{2} (\\cos(\\pi/4)\\sin x + \\sin(\\pi/4)\\cos x) = \\sqrt{2}\\sin(x+\\pi/4)$。所以最大值为 $\\sqrt{2}$，最小正周期为 $2\\pi$。",
+              "scoring_notes": "将 $f(x)$ 化为 $A\\sin(\\omega x + \\phi)$ 形式是关键；正确识别振幅和周期。"
+            }
+          }
+        },
+        {
+          "card_id": "S2-04",
+          "full_id": "数学-高一下-S2-04",
+          "title": "正切函数的图像与性质",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "函数 $y=\\tan x$ 是周期函数，图像有渐近线。",
+          "core_points": [
+            "定义域：$\{x | x \\ne k\\pi + \\pi/2, k \\in Z\}$。",
+            "值域：R。",
+            "周期性：$T=\\pi$。",
+            "奇偶性：奇函数，图像关于原点对称。",
+            "单调性：在开区间 $(k\\pi - \\pi/2, k\\pi + \\pi/2)$ 上递增。",
+            "渐近线：$x=k\\pi + \\pi/2$ ($k \\in Z$)。"
+          ],
+          "example": {
+            "question": "求函数 $f(x)=\\tan(2x - \\pi/4)$ 的定义域和最小正周期。",
+            "steps": [
+              "根据正切函数定义域，令 $2x - \\pi/4 \\ne k\\pi + \\pi/2$。",
+              "解出x的范围作为定义域。",
+              "根据 $T=\\pi/|\\omega|$ 求周期。"
+            ],
+            "answer": "定义域：$2x - \\pi/4 \\ne k\\pi + \\pi/2$，即 $2x \\ne k\\pi + 3\\pi/4$，所以 $x \\ne k\\pi/2 + 3\\pi/8$ ($k \\in Z$)。最小正周期 $T=\\pi/|2|=\\pi/2$。"
+          },
+          "mistakes": [
+            {"wrong": "定义域漏写 $k\\pi$", "correct": "定义域必须考虑周期性。"},
+            {"wrong": "周期计算错误，误用 $2\\pi/|\\omega|$", "correct": "正切函数周期是 $\\pi/|\\omega|$。"}
+          ],
+          "memory_tip": "正切周期π，定义域是π/2的奇数倍不能取，值域全R。",
+          "related": {
+            "prerequisite": "同角三角函数关系，诱导公式",
+            "next": "三角函数图像变换"
+          },
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": ["选择", "填空", "定义域/周期计算"],
+            "scoring_key": "掌握正切函数的定义域、值域、周期、单调性、渐近线。",
+            "common_trap": "定义域的正确书写，周期公式的准确应用，与复合函数结合时定义域的确定。",
+            "real_exam_example": {
+              "source": "模拟考",
+              "question": "函数 $f(x)=|\\tan x|$ 在区间 $(0, \\pi)$ 上的单调递增区间是？",
+              "answer": "函数 $y=\\tan x$ 在 $(0, \\pi/2)$ 上递增，在 $(\\pi/2, \\pi)$ 上递增。当 $x \\in (0, \\pi/2)$ 时，$\\tan x > 0$，所以 $|\\tan x|=\\tan x$，递增。当 $x \\in (\\pi/2, \\pi)$ 时，$\\tan x < 0$，所以 $|\\tan x| = -\\tan x$。此时，由于 $\\tan x$ 递增，所以 $-\\tan x$ 递减。因此，函数 $f(x)=|\\tan x|$ 在区间 $(0, \\pi)$ 上的单调递增区间是 $(0, \\pi/2)$。",
+              "scoring_notes": "正确理解绝对值的几何意义，分段讨论函数 $|\\tan x|$ 的单调性。注意 $\\tan x$ 在其定义域内是增函数，但绝对值会改变单调性。"
+            }
+          }
+        },
+        {
+          "card_id": "S2-05",
+          "full_id": "数学-高一下-S2-05",
+          "title": "三角函数图像的变换与应用",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "通过平移、伸缩变换将 $y=\\sin x$ 变为 $y=A\\sin(\\omega x+\\phi)+B$。",
+          "core_points": [
+            "振幅A：决定函数最大值 $|A|+B$，最小值 $-|A|+B$。",
+            "周期T：$T=2\\pi/|\\omega|$ (正弦、余弦)，$T=\\pi/|\\omega|$ (正切)。",
+            "初相 $\\phi$：决定图像的左右平移，向左平移 $\\phi/\\omega$ 个单位。",
+            "垂直平移B：决定图像的上下平移。",
+            "图像变换顺序：先伸缩 (周期、振幅)，再平移 (相位、垂直)。"
+          ],
+          "example": {
+            "question": "将函数 $y=\\sin x$ 的图像向左平移 $\\pi/3$ 个单位，再将横坐标变为原来的 $1/2$ 倍 (纵坐标不变)，得到函数 $g(x)$ 的解析式。",
+            "steps": [
+              "根据左移规则写出平移后的函数。",
+              "根据横坐标伸缩规则写出变换后的函数。",
+              "写出最终解析式。"
+            ],
+            "answer": "向左平移 $\\pi/3$ 个单位：$y=\\sin(x+\\pi/3)$。横坐标变为原来的 $1/2$ 倍 (即 $x \\to 2x$)：$g(x)=\\sin(2x+\\pi/3)$。"
+          },
+          "mistakes": [
+            {"wrong": "平移方向与距离错误", "correct": "左加右减，平移距离是 $\\phi/\\omega$。"},
+            {"wrong": "横坐标伸缩与周期变换混淆", "correct": "横坐标变为原来的 $\\lambda$ 倍，则 $\\omega \\to \\omega/\\lambda$。"}
+          ],
+          "memory_tip": "先内后外，先周期振幅后平移；左右平移看 $\\phi/\\omega$，上下平移看B。",
+          "related": {
+            "prerequisite": "正弦、余弦函数图像与性质",
+            "next": "三角函数综合应用，解三角形"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["选择", "填空", "解答题 (图像性质、求解析式)"],
+            "scoring_key": "理解各参数对图像的影响，掌握图像变换的顺序和规则，能由图像求解析式。",
+            "common_trap": "平移时是 $x \\to x \\pm a$ 还是 $\\omega x \\to \\omega(x \\pm a)$，周期与 $\\omega$ 的关系，求 $\\phi$ 的方法。",
+            "real_exam_example": {
+              "source": "模拟考",
+              "question": "已知函数 $f(x)=A\\sin(\\omega x+\\phi)$ (其中 $A>0, \\omega>0, |\\phi|<\\pi/2$) 的部分图像如图所示，求 $f(x)$ 的解析式。",
+              "answer": "由图像可知，最大值为 $2$，最小值为 $-2$，所以 $A=2$。周期 $T = 2(\\pi/4 - (-\\pi/4)) = \\pi$。所以 $\\omega = 2\\pi/T = 2\\pi/\\pi = 2$。函数可写为 $f(x)=2\\sin(2x+\\phi)$。图像过点 $(-\\pi/4, 0)$，代入得 $2\\sin(2(-\\pi/4)+\\phi)=0$，即 $\\sin(-\\pi/2+\\phi)=0$。所以 $-\\pi/2+\\phi = k\\pi$ ($k \\in Z$)。$\\phi = k\\pi + \\pi/2$。又 $|\\phi|<\\pi/2$，所以 $\\phi=\\pi/2$。故 $f(x)=2\\sin(2x+\\pi/2) = 2\\cos(2x)$。",
+              "scoring_notes": "正确求出A，根据周期求出 $\\omega$；利用特殊点代入求 $\\phi$，并注意 $\\phi$ 的范围限制；最终写出解析式。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S3",
+      "unit_name": "平面向量",
+      "cards": [
+        {
+          "card_id": "S3-01",
+          "full_id": "数学-高一下-S3-01",
+          "title": "向量的概念与线性运算",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "向量是既有大小又有方向的量。向量的加减法、数乘运算统称为线性运算。",
+          "core_points": [
+            "向量的表示：有向线段，字母 $\\vec{a}$ 或 $\\mathbf{a}$。",
+            "零向量、单位向量、平行向量、相等向量、相反向量。",
+            "向量加法：三角形法则、平行四边形法则，满足交换律、结合律。",
+            "向量减法：$\\vec{a}-\\vec{b}=\\vec{a}+(-\\vec{b})$，几何意义是从被减向量的终点指向减向量的终点。",
+            "数乘向量：$k\\vec{a}$，大小为 $|k| |\\vec{a}|$，方向与 $\\vec{a}$ 同向 (k>0) 或反向 (k<0)。"
+          ],
+          "example": {
+            "question": "在平行四边形ABCD中，设 $\\vec{AB}=\\vec{a}, \\vec{AD}=\\vec{b}$。用 $\\vec{a}, \\vec{b}$ 表示 $\\vec{AC}$ 和 $\\vec{DB}$。",
+            "steps": [
+              "根据平行四边形法则表示对角线向量。",
+              "根据三角形法则表示另一条对角线向量。",
+              "写出结果。"
+            ],
+            "answer": "$\\vec{AC} = \\vec{AB} + \\vec{AD} = \\vec{a} + \\vec{b}$。$\\vec{DB} = \\vec{AB} - \\vec{AD} = \\vec{a} - \\vec{b}$。"
+          },
+          "mistakes": [
+            {"wrong": "向量与数量混淆", "correct": "向量有方向，数量无方向。"},
+            {"wrong": "零向量方向不确定", "correct": "零向量方向是任意的，但其大小为0。"}
+          ],
+          "memory_tip": "向量有向有大小，加法首尾相接或同起点，减法同起点指向被减。",
+          "related": {
+            "prerequisite": "几何图形知识",
+            "next": "平面向量基本定理与坐标表示"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["选择", "填空", "几何图形中的向量表示"],
+            "scoring_key": "理解向量基本概念，熟练进行向量加减法和数乘运算。",
+            "common_trap": "向量的起点和终点，几何图形中向量的表示方法，共线向量与相等向量的区别。",
+            "real_exam_example": {
+              "source": "模拟考",
+              "question": "已知点O为坐标原点，点A(1,2)，B(3,1)。若 $\\vec{OC} = \\vec{OA} + k\\vec{AB}$，且C点在y轴上，求实数k的值。",
+              "answer": "$\\vec{OA}=(1,2)$，$\\vec{AB}=\\vec{OB}-\\vec{OA}=(3-1, 1-2)=(2,-1)$。所以 $\\vec{OC} = (1,2) + k(2,-1) = (1+2k, 2-k)$。因为C点在y轴上，所以其横坐标为0，即 $1+2k=0$，解得 $k=-1/2$。",
+              "scoring_notes": "正确表示向量坐标；向量线性运算准确；利用C点在y轴上的条件列方程。"
+            }
+          }
+        },
+        {
+          "card_id": "S3-02",
+          "full_id": "数学-高一下-S3-02",
+          "title": "平面向量基本定理与坐标表示",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "任一平面向量都可由一对不共线的向量唯一线性表示。在平面直角坐标系中，向量可用坐标表示。",
+          "core_points": [
+            "平面向量基本定理：若 $\\vec{e_1}, \\vec{e_2}$ 不共线，则任一向量 $\\vec{a}$ 可唯一表示为 $\\vec{a}=x\\vec{e_1}+y\\vec{e_2}$。",
+            "向量的坐标表示：$\\vec{a}=(x,y)$，若 $A(x_1, y_1), B(x_2, y_2)$，则 $\\vec{AB}=(x_2-x_1, y_2-y_1)$。",
+            "向量坐标运算：$\\vec{a} \\pm \\vec{b}=(x_1 \\pm x_2, y_1 \\pm y_2)$，$k\\vec{a}=(kx_1, ky_1)$。",
+            "向量的模长：$|\\vec{a}|=\\sqrt{x^2+y^2}$。两点间距离公式。",
+            "向量共线条件：$\\vec{a}//\\vec{b} (\\vec{b} \\ne \\vec{0}) \\iff \\vec{a}=\\lambda\\vec{b} \\iff x_1 y_2 - x_2 y_1 = 0$。"
+          ],
+          "example": {
+            "question": "已知向量 $\\vec{a}=(2,1), \\vec{b}=(x,-2)$。若 $\\vec{a} // \\vec{b}$，求 $x$ 的值。",
+            "steps": [
+              "根据向量共线的坐标表示条件列方程。",
+              "解方程求x。",
+              "写出结果。"
+            ],
+            "answer": "若 $\\vec{a} // \\vec{b}$，则 $2 \\cdot (-2) - 1 \\cdot x = 0$，即 $-4 - x = 0$，所以 $x=-4$。"
+          },
+          "mistakes": [
+            {"wrong": "向量共线条件 $x_1 x_2 + y_1 y_2 = 0$ (这是垂直条件)", "correct": "共线是 $x_1 y_2 - x_2 y_1 = 0$ 或 $\\vec{a}=\\lambda\\vec{b}$。"},
+            {"wrong": "计算模长或两点距离时忘记开方", "correct": "模长和距离都是正数，要开方。"}
+          ],
+          "memory_tip": "向量坐标化，运算变简单；共线交叉积为零。",
+          "related": {
+            "prerequisite": "向量线性运算",
+            "next": "向量的数量积，向量在几何中的应用"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["选择", "填空", "解答题 (坐标运算)"],
+            "scoring_key": "熟练掌握向量坐标表示，能进行坐标运算，准确应用共线条件。",
+            "common_trap": "共线条件的误用，模长计算错误，与几何图形结合时坐标系的建立。",
+            "real_exam_example": {
+              "source": "模拟考",
+              "question": "已知点 $A(1,2), B(4,-1), C(x,y)$。若 $A, B, C$ 三点共线，且 $|\\vec{AC}|=2|\\vec{AB}|$，求点C的坐标。",
+              "answer": "$\\vec{AB}=(4-1, -1-2)=(3,-3)$。$\\vec{AC}=(x-1, y-2)$。因为 $A, B, C$ 三点共线，所以 $\\vec{AC} = \\lambda \\vec{AB}$。又 $|\\vec{AC}|=2|\\vec{AB}|$，所以 $\\lambda = \\pm 2$。当 $\\lambda = 2$ 时，$(x-1, y-2) = 2(3,-3) = (6,-6)$，解得 $x-1=6 \\implies x=7$， $y-2=-6 \\implies y=-4$。所以 $C(7,-4)$。当 $\\lambda = -2$ 时，$(x-1, y-2) = -2(3,-3) = (-6,6)$，解得 $x-1=-6 \\implies x=-5$， $y-2=6 \\implies y=8$。所以 $C(-5,8)$。综上，C点坐标为 $(7,-4)$ 或 $(-5,8)$。",
+              "scoring_notes": "正确计算 $\\vec{AB}$ 向量；利用三点共线和模长关系确定 $\\lambda$ 的值；注意 $\\lambda$ 有正负两种情况，分别求出C点坐标。"
+            }
+          }
+        },
+        {
+          "card_id": "S3-03",
+          "full_id": "数学-高一下-S3-03",
+          "title": "向量的数量积与坐标运算",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "两个向量的数量积是一个数量，定义为 $\\vec{a} \\cdot \\vec{b} = |\\vec{a}| |\\vec{b}| \\cos\\theta$。",
+          "core_points": [
+            "数量积的几何意义：$\\vec{a} \\cdot \\vec{b}$ 等于 $|\\vec{a}|$ 乘以 $\\vec{b}$ 在 $\\vec{a}$ 方向上的投影。",
+            "数量积的性质：$\\vec{a} \\cdot \\vec{b} = \\vec{b} \\cdot \\vec{a}$；$(k\\vec{a}) \\cdot \\vec{b} = k(\\vec{a} \\cdot \\vec{b})$；$\\vec{a} \\cdot (\\vec{b}+\\vec{c}) = \\vec{a} \\cdot \\vec{b} + \\vec{a} \\cdot \\vec{c}$。",
+            "坐标运算：若 $\\vec{a}=(x_1, y_1), \\vec{b}=(x_2, y_2)$，则 $\\vec{a} \\cdot \\vec{b} = x_1 x_2 + y_1 y_2$。",
+            "夹角公式：$\\cos\\theta = \\frac{\\vec{a} \\cdot \\vec{b}}{|\\vec{a}| |\\vec{b}|}$ ($0 \\le \\theta \\le \\pi$)。",
+            "垂直条件：$\\vec{a} \\perp \\vec{b} \\iff \\vec{a} \\cdot \\vec{b} = 0 \\iff x_1 x_2 + y_1 y_2 = 0$。"
+          ],
+          "example": {
+            "question": "已知 $\\vec{a}=(1,2), \\vec{b}=(3,m)$。若 $\\vec{a} \\perp \\vec{b}$，求 $m$ 的值。",
+            "steps": [
+              "根据向量垂直的坐标条件列方程。",
+              "解方程求m。",
+              "写出结果。"
+            ],
+            "answer": "若 $\\vec{a} \\perp \\vec{b}$，则 $\\vec{a} \\cdot \\vec{b} = 0$。所以 $1 \\cdot 3 + 2 \\cdot m = 0$，即 $3+2m=0$，所以 $m=-3/2$。"
+          },
+          "mistakes": [
+            {"wrong": "数量积结果是向量", "correct": "数量积结果是数量。"},
+            {"wrong": "夹角公式中 $\\cos\\theta$ 的范围不确定", "correct": "夹角 $\\theta \\in [0, \\pi]$。"}
+          ],
+          "memory_tip": "数量积是点乘，结果是个数；垂直点乘零，夹角公式记分母。",
+          "related": {
+            "prerequisite": "平面向量基本定理与坐标表示",
+            "next": "向量在几何中的应用，立体几何"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["选择", "填空", "解答题 (夹角、垂直判断)"],
+            "scoring_key": "熟练掌握数量积的定义、性质和坐标运算，能应用夹角公式和垂直条件。",
+            "common_trap": "数量积与向量积混淆，夹角公式计算错误，垂直条件应用时忽略零向量情况。",
+            "real_exam_example": {
+              "source": "模拟考",
+              "question": "已知向量 $\\vec{a}=(1, \\sqrt{3}), \\vec{b}=(-\\sqrt{3}, 1)$，求向量 $\\vec{a}$ 与 $\\vec{b}$ 的夹角。",
+              "answer": "$|\\vec{a}| = \\sqrt{1^2 + (\\sqrt{3})^2} = \\sqrt{1+3} = 2$。$|\\vec{b}| = \\sqrt{(-\\sqrt{3})^2 + 1^2} = \\sqrt{3+1} = 2$。$\\vec{a} \\cdot \\vec{b} = 1 \\cdot (-\\sqrt{3}) + \\sqrt{3} \\cdot 1 = -\\sqrt{3} + \\sqrt{3} = 0$。设向量 $\\vec{a}$ 与 $\\vec{b}$ 的夹角为 $\\theta$，则 $\\cos\\theta = \\frac{\\vec{a} \\cdot \\vec{b}}{|\\vec{a}| |\\vec{b}|} = \\frac{0}{2 \\cdot 2} = 0$。因为 $\\theta \\in [0, \\pi]$，所以 $\\theta = \\pi/2$。",
+              "scoring_notes": "正确计算向量模长；正确计算数量积；正确应用夹角公式；根据余弦值确定夹角。"
+            }
+          }
+        },
+        {
+          "card_id": "S3-04",
+          "full_id": "数学-高一下-S3-04",
+          "title": "向量在几何中的应用",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "利用向量的线性运算、数量积等工具解决几何图形中的位置关系、度量等问题。",
+          "core_points": [
+            "判断平行：利用向量共线条件 $(x_1 y_2 - x_2 y_1 = 0)$。",
+            "判断垂直：利用数量积为零条件 $(x_1 x_2 + y_1 y_2 = 0)$。",
+            "求夹角：利用夹角公式 $\\cos\\theta = \\frac{\\vec{a} \\cdot \\vec{b}}{|\\vec{a}| |\\vec{b}|}$。",
+            "求长度：利用向量模长公式 $|\\vec{a}|=\\sqrt{x^2+y^2}$。",
+            "解决平面几何问题时，常建立平面直角坐标系，将几何问题转化为向量的坐标运算。"
+          ],
+          "example": {
+            "question": "在三角形ABC中，已知 $A(1,1), B(3,5), C(5,1)$，判断三角形ABC的形状。",
+            "steps": [
+              "计算向量 $\\vec{AB}, \\vec{BC}, \\vec{CA}$ 的坐标。",
+              "计算向量的模长，判断边长关系。",
+              "计算向量的数量积，判断角的关系。",
+              "综合判断三角形形状。"
+            ],
+            "answer": "$\\vec{AB}=(2,4)$，$\\vec{BC}=(2,-4)$，$\\vec{CA}=(-4,0)$。$|\\vec{AB}|=\\sqrt{2^2+4^2}=\\sqrt{20}$。$|\\vec{BC}|=\\sqrt{2^2+(-4)^2}=\\sqrt{20}$。$|\\vec{CA}|=\\sqrt{(-4)^2+0^2}=4$。因为 $|\\vec{AB}| = |\\vec{BC}|$，所以三角形ABC是等腰三角形。$\\vec{AB} \\cdot \\vec{BC} = 2 \\cdot 2 + 4 \\cdot (-4) = 4 - 16 = -12 \\ne 0$，所以不是直角三角形。综上，三角形ABC是等腰三角形。",
+            "scoring_notes": "正确计算边长判断等腰；正确计算数量积判断直角；综合得出结论。注意计算的准确性。"
+          },
+          "mistakes": [
+            {"wrong": "坐标系建立不当导致计算复杂或错误", "correct": "选择合适的坐标系简化计算。"},
+            {"wrong": "向量表示错误，如 $\\vec{AB}$ 写成 $\\vec{BA}$", "correct": "注意向量的方向。"}
+          ],
+          "memory_tip": "几何问题向量化，坐标运算最直观；平行垂直夹角长，公式套用要熟练。",
+          "related": {
+            "prerequisite": "平面向量基本定理与坐标表示，向量的数量积",
+            "next": "立体几何中的向量方法，解析几何"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["选择", "填空", "解答题 (几何证明、求值)"],
+            "scoring_key": "能将几何问题转化为向量问题，通过向量运算解决几何中的长度、角度、位置关系。",
+            "common_trap": "几何图形的准确抽象，向量坐标表示错误，计算失误。",
+            "real_exam_example": {
+              "source": "模拟考",
+              "question": "已知矩形ABCD中，AB=2，AD=1。点E是CD的中点，求 $\\vec{AE} \\cdot \\vec{BC}$ 的值。",
+              "answer": "建立平面直角坐标系，以A为原点，AB为x轴，AD为y轴。则 $A(0,0), B(2,0), D(0,1), C(2,1)$。因为E是CD的中点，所以 $E((0+2)/2, (1+1)/2) = (1,1)$。则 $\\vec{AE}=(1,1)$，$\\vec{BC}=\\vec{DC}-\\vec{DB}$，或直接 $\\vec{BC}=\\vec{AD}=(0,1)$。所以 $\\vec{AE} \\cdot \\vec{BC} = (1,1) \\cdot (0,1) = 1 \\cdot 0 + 1 \\cdot 1 = 1$。",
+              "scoring_notes": "正确建立坐标系是关键；准确写出各点坐标和向量坐标；正确计算数量积。注意向量 $\\vec{BC}$ 的坐标表示。"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+```

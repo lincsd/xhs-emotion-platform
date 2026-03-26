@@ -1,0 +1,610 @@
+```json
+{
+  "subject": "英语",
+  "grade": "八年级",
+  "semester": "下册",
+  "textbook": "人教Go for it!版",
+  "grade_short": "八下",
+  "card_pack": "知识总结",
+  "description": "初中八年级下册英语中考考点笔记总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "时态：现在完成时",
+      "cards": [
+        {
+          "card_id": "01",
+          "full_id": "八下-S1-01",
+          "title": "现在完成时：基本概念与构成",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "现在完成时表示过去发生并持续到现在，或过去发生对现在产生影响的动作或状态。",
+          "core_points": [
+            "构成：have/has + 动词过去分词 (V-ed/V3)",
+            "肯定句：主语 + have/has + V-ed/V3 + 其他",
+            "否定句：主语 + have/has + not + V-ed/V3 + 其他",
+            "疑问句：Have/Has + 主语 + V-ed/V3 + 其他？",
+            "常与for (一段时间), since (某一时间点), already, yet, ever, never, just, so far等连用"
+          ],
+          "example": {
+            "question": "He ______ (live) in Beijing for five years.",
+            "steps": [
+              "判断时间状语：for five years 表示持续性动作。",
+              "确定时态：持续到现在的动作，用现在完成时。",
+              "根据主语He选择has，动词live的过去分词是lived。"
+            ],
+            "answer": "He has lived in Beijing for five years."
+          },
+          "mistakes": [
+            {"wrong": "He lives in Beijing for five years.", "correct": "He has lived in Beijing for five years."},
+            {"wrong": "I haven't ever been to the Great Wall.", "correct": "I have never been to the Great Wall."}
+          ],
+          "memory_tip": "现在完成时，have/has V3。for接段，since接点，影响现在很关键。",
+          "related": {
+            "prerequisite": "一般现在时，一般过去时，动词过去分词",
+            "next": "现在完成时与一般过去时的辨析"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "短文改错"],
+            "scoring_key": "时态辨析首看时间状语，主谓一致决定have/has，动词分词形式要准确。",
+            "common_trap": "for/since引导的时间状语易混淆；already/yet在句中位置。",
+            "real_exam_example": {
+              "source": "「2022年某市中考真题」",
+              "question": "—Have you finished your homework yet?\n—No, I haven't. I ____ it for an hour.",
+              "answer": "have been doing",
+              "scoring_notes": "考察现在完成进行时，表示动作从过去开始，持续到现在，并且可能还在继续。虽然本卡片主要讲现在完成时，但此题是常见考点，需要辨析。如果选项没有完成进行时，则完成时也可以接受。"
+            }
+          }
+        },
+        {
+          "card_id": "02",
+          "full_id": "八下-S1-02",
+          "title": "现在完成时：与一般过去时、现在完成进行时的辨析",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "区分现在完成时与一般过去时、现在完成进行时，是中考时态考查的重点和难点。",
+          "core_points": [
+            "现在完成时：动作发生在过去，对现在有影响或持续到现在。不与具体的过去时间状语（如yesterday, last year）连用。",
+            "一般过去时：动作发生在过去，与现在无关。常与具体的过去时间状语连用。",
+            "have been to (去过某地) vs. have gone to (去了某地，人不在本地)",
+            "现在完成进行时：have/has been + V-ing，表示动作从过去开始，持续到现在，且可能仍在进行。",
+            "瞬间动词（如join, begin, die, become）不能与for/since连用表示持续，需转换为延续性动词（如be a member of, be on, be dead, be）。"
+          ],
+          "example": {
+            "question": "Which sentence is grammatically correct?\nA. He has gone to Shanghai last week.\nB. He went to Shanghai last week.\nC. He has been to Shanghai last week.\nD. He has gone to Shanghai for a week.",
+            "steps": [
+              "A和C选项：现在完成时不能与last week这样的具体过去时间状语连用。",
+              "B选项：一般过去时与last week连用，正确。",
+              "D选项：have gone to表示去了某地不在本地，for a week表示持续一周，语法结构上虽然是完成时，但逻辑上与went to Shanghai last week这种明确的过去时间状语冲突，且have gone to强调结果，for a week强调持续，搭配略显不自然，不如have been in Shanghai for a week或He went to Shanghai a week ago.更自然。在多选题中，B是最佳选项。"
+            ],
+            "answer": "B"
+          },
+          "mistakes": [
+            {"wrong": "I have seen him yesterday.", "correct": "I saw him yesterday."},
+            {"wrong": "Mr. Li has come to our school for ten years.", "correct": "Mr. Li has been in our school for ten years."}
+          ],
+          "memory_tip": "过去时，过去就完。完成时，影响现在，for/since连。been to去过，gone to不在。瞬间动词不能延。",
+          "related": {
+            "prerequisite": "现在完成时基本概念，一般过去时",
+            "next": "时态综合辨析"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "短文改错"],
+            "scoring_key": "区分时间状语是关键，看清动词是延续性还是瞬间性。",
+            "common_trap": "「have been to」与「have gone to」的混淆；瞬间动词与for/since的误用。",
+            "real_exam_example": {
+              "source": "「2023年某省中考真题」",
+              "question": "My grandpa ____ a teacher for over 40 years before he retired.",
+              "answer": "had been",
+              "scoring_notes": "此题考查过去完成时，但体现了对延续性动词和时间状语的理解，与现在完成时有相似之处。have been a teacher (延续性动词)与for over 40 years连用，before he retired（过去时间点）是过去完成时的标志。若无before he retired，则为has been。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "语态：被动语态",
+      "cards": [
+        {
+          "card_id": "03",
+          "full_id": "八下-S2-03",
+          "title": "被动语态：基本概念与构成",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "被动语态表示句子的主语是动作的承受者，而非发出者。",
+          "core_points": [
+            "构成：be动词的相应形式 + 动词过去分词 (V-ed/V3)",
+            "使用场景：1. 不知道动作的发出者；2. 强调动作的承受者；3. 避免提及动作发出者。",
+            "主动变被动：主动句宾语作被动句主语，主动句主语作介词by的宾语（可省略）。",
+            "常见时态的被动语态：一般现在时 (am/is/are + V3)，一般过去时 (was/were + V3)。",
+            "例：The book was written by Lu Xun. (这本书是鲁迅写的。)"
+          ],
+          "example": {
+            "question": "The window ______ (break) by a boy yesterday.",
+            "steps": [
+              "判断主语The window是动作break的承受者，应用被动语态。",
+              "时间状语yesterday，确定为一般过去时。",
+              "The window是单数，be动词用was。",
+              "break的过去分词是broken。"
+            ],
+            "answer": "The window was broken by a boy yesterday."
+          },
+          "mistakes": [
+            {"wrong": "The house built in 1990.", "correct": "The house was built in 1990."},
+            {"wrong": "He was surprised by the news.", "correct": "He was surprised at/by the news."}
+          ],
+          "memory_tip": "被动语态be加V3，主语承受动作它。by后接人可省略，时态变化be来变。",
+          "related": {
+            "prerequisite": "动词过去分词，be动词各种形式，一般现在时，一般过去时",
+            "next": "被动语态的更多时态和复杂结构"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "短文改错", "句型转换"],
+            "scoring_key": "判断主语与谓语动词的关系（发出者/承受者），根据时态选择正确的be动词形式。",
+            "common_trap": "忘记加be动词；be动词形式与时态、主语不一致；过去分词拼写错误。",
+            "real_exam_example": {
+              "source": "「2023年某省市中考真题」",
+              "question": "English _______ (speak) in many countries.",
+              "answer": "is spoken",
+              "scoring_notes": "主语English是动作speak的承受者，且是普遍事实，用一般现在时被动语态。考察被动语态的基本构成和时态判断。"
+            }
+          }
+        },
+        {
+          "card_id": "04",
+          "full_id": "八下-S2-04",
+          "title": "被动语态：更多时态与特殊结构",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "掌握被动语态在不同时态中的应用，以及情态动词、双宾语、含宾补等特殊句型的被动语态转换。",
+          "core_points": [
+            "现在进行时被动：am/is/are being + V3 (The house is being built.)",
+            "现在完成时被动：have/has been + V3 (The work has been finished.)",
+            "一般将来时被动：will be + V3 (The problem will be solved.)",
+            "情态动词被动：情态动词 + be + V3 (The task must be done.)",
+            "双宾语被动：两种转换方式，通常以“人”作主语更常见 (He was given a book. / A book was given to him.)",
+            "含宾语补足语的被动：保留宾补 (He was called Tom. / He was seen to play basketball.)"
+          ],
+          "example": {
+            "question": "The new library ______ (build) next year.",
+            "steps": [
+              "主语The new library是动作build的承受者，用被动语态。",
+              "时间状语next year，确定为一般将来时。",
+              "一般将来时被动语态构成：will be + V3。",
+              "build的过去分词是built。"
+            ],
+            "answer": "The new library will be built next year."
+          },
+          "mistakes": [
+            {"wrong": "The problem has solved.", "correct": "The problem has been solved."},
+            {"wrong": "He was seen playing football.", "correct": "He was seen to play football."}
+          ],
+          "memory_tip": "进行被动being加V3，完成被动been加V3，将来被动will be V3。情态加be V3，宾补保留别乱改。",
+          "related": {
+            "prerequisite": "被动语态基本构成，各种时态，情态动词，宾语补足语",
+            "next": "被动语态与主动语态的综合辨析"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "短文改错", "句型转换"],
+            "scoring_key": "辨析时态、情态动词，正确选择be动词形式和过去分词。注意宾补保留。",
+            "common_trap": "现在完成进行时被动语态的复杂性；含宾补动词（如see, hear, make, let）在被动语态中to的添加或省略。",
+            "real_exam_example": {
+              "source": "「2022年某省市中考真题」",
+              "question": "The old woman _____ (look after) by her grandson now.",
+              "answer": "is being looked after",
+              "scoring_notes": "主语是动作承受者，时间状语now表明正在进行，所以用现在进行时被动语态。考察对时态和语态的综合判断。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S3",
+      "unit_name": "从句：宾语从句",
+      "cards": [
+        {
+          "card_id": "05",
+          "full_id": "八下-S3-05",
+          "title": "宾语从句：概述与引导词",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "宾语从句在复合句中充当主句动词或介词的宾语，通常由that, whether/if或疑问词引导。",
+          "core_points": [
+            "结构：主句 + 引导词 + 从句 (陈述语序)",
+            "引导词：that (可省略，但不可在介词后省略), whether/if (是否), what, when, where, why, who, whom, whose, which, how。",
+            "that引导的宾语从句：常跟在think, say, know, hope, believe, feel, understand等动词后。",
+            "whether/if引导的宾语从句：表示“是否”，if不能在介词后或从句前有or not时使用。",
+            "疑问词引导的宾语从句：疑问词在从句中充当成分（主语、宾语、表语、状语），从句语序为陈述句语序。"
+          ],
+          "example": {
+            "question": "I don't know ____ he will come or not.",
+            "steps": [
+              "判断是宾语从句，主句I don't know。",
+              "从句he will come or not有or not，表示“是否”。",
+              "引导“是否”的词是whether/if，但有or not时，只能用whether。"
+            ],
+            "answer": "whether"
+          },
+          "mistakes": [
+            {"wrong": "He asked me what was my name.", "correct": "He asked me what my name was."},
+            {"wrong": "I wonder if he will come or not.", "correct": "I wonder whether he will come or not."}
+          ],
+          "memory_tip": "宾语从句是陈述，引导词后要顺句。that可省，if与否，疑问词带头要变序。",
+          "related": {
+            "prerequisite": "简单句，疑问句，复合句概念",
+            "next": "宾语从句的时态呼应与特殊用法"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "句型转换"],
+            "scoring_key": "宾语从句语序必须是陈述语序；正确选择引导词，尤其注意whether/if的用法。",
+            "common_trap": "宾语从句语序误用疑问语序；that的省略规则；if/whether的混用。",
+            "real_exam_example": {
+              "source": "「2023年某市中考真题」",
+              "question": "Could you tell me ______ the bus station is?",
+              "answer": "where",
+              "scoring_notes": "考察疑问词引导的宾语从句。从句是the bus station is，主语是the bus station，谓语是is，缺少地点状语，所以用where引导。同时考察陈述语序。"
+            }
+          }
+        },
+        {
+          "card_id": "06",
+          "full_id": "八下-S3-06",
+          "title": "宾语从句：时态呼应与特殊用法",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "宾语从句的时态需与主句时态保持呼应，但也有例外情况。",
+          "core_points": [
+            "时态呼应：主句一般现在时，从句时态不限；主句一般过去时，从句时态通常也要用过去时态。",
+            "从句时态变化：一般现在时变一般过去时，现在进行时变过去进行时，一般将来时变过去将来时 (would do)，现在完成时变过去完成时。",
+            "例外：从句表达的是客观事实、真理、格言，或从句中有具体的过去时间状语时，不受主句时态限制，保持原有时间。",
+            "形式宾语it：当宾语从句太长或为强调时，可用it作形式宾语，将宾语从句后置。常用于find it + adj. + that/to do, make it + adj. + that/to do等结构。",
+            "介词后的宾语从句：介词后只能跟that引导的宾语从句，且that不可省略。"
+          ],
+          "example": {
+            "question": "He said that he ______ (be) a student.",
+            "steps": [
+              "主句是He said (一般过去时)。",
+              "从句he be a student通常应与主句时态呼应。",
+              "be动词的过去式是was/were，he对应was。"
+            ],
+            "answer": "He said that he was a student."
+          },
+          "mistakes": [
+            {"wrong": "He said that the sun rises in the east.", "correct": "He said that the sun rises in the east." (客观事实不变时态)},
+            {"wrong": "I think it important that we should protect the environment.", "correct": "I think it important that we protect the environment."}
+          ],
+          "memory_tip": "主句过去从句变，现在变过去，将来变would。真理事实不改变，it作形式宾语常见。",
+          "related": {
+            "prerequisite": "宾语从句基本概念，各种时态",
+            "next": "直接引语与间接引语"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "短文改错", "句型转换"],
+            "scoring_key": "注意主句时态对从句时态的影响，识别客观事实等特殊情况。掌握形式宾语it的用法。",
+            "common_trap": "客观事实的从句时态误变；形式宾语it的误用或省略。",
+            "real_exam_example": {
+              "source": "「2023年某市中考真题」",
+              "question": "The teacher told us that the earth ______ (go) around the sun.",
+              "answer": "goes",
+              "scoring_notes": "主句是told (一般过去时)，但从句是客观事实（地球绕着太阳转），所以从句时态不变，仍用一般现在时。考察时态呼应的例外情况。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S4",
+      "unit_name": "直接引语与间接引语",
+      "cards": [
+        {
+          "card_id": "07",
+          "full_id": "八下-S4-07",
+          "title": "直接引语与间接引语：陈述句",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "直接引语是直接引用原话，间接引语是转述原话，通常以宾语从句的形式出现。",
+          "core_points": [
+            "直接引语：用引号引起来，句首字母大写，标点符号在引号内。",
+            "间接引语：通常用that引导（可省略），从句语序为陈述句语序。",
+            "转述动词：say, tell (sb), explain, report等。",
+            "时态变化：主句为一般过去时，间接引语从句时态需相应调整（与宾语从句时态呼应规则一致）。",
+            "人称代词变化：根据语境，第一人称变主语，第二人称变宾语，第三人称不变。",
+            "时间、地点、指示代词变化：now→then, today→that day, here→there, this→that等。"
+          ],
+          "example": {
+            "question": "将直接引语 \"I am busy now.\" 转为间接引语，主句为 He said that...",
+            "steps": [
+              "转述动词是said (一般过去时)，所以从句时态需后移。",
+              "人称I改为He。",
+              "am busy改为was busy。",
+              "时间状语now改为then。",
+              "连接词that可省略。"
+            ],
+            "answer": "He said that he was busy then. / He said he was busy then."
+          },
+          "mistakes": [
+            {"wrong": "He said that I am busy now.", "correct": "He said that he was busy then."},
+            {"wrong": "She told to me that she was ill.", "correct": "She told me that she was ill."}
+          ],
+          "memory_tip": "直接引号，间接从句。主句过去从句变，人称时地跟着换。tell后直接接宾语，say to sb.",
+          "related": {
+            "prerequisite": "宾语从句，时态呼应",
+            "next": "直接引语与间接引语：疑问句与祈使句"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["句型转换", "语法填空", "短文改错"],
+            "scoring_key": "时态、人称、时间/地点状语的正确转换是关键。",
+            "common_trap": "忘记时态变化；人称代词指代错误；时间/地点状语漏变。",
+            "real_exam_example": {
+              "source": "「2022年某省市中考真题」",
+              "question": "Tom said, \"I will go to Beijing tomorrow.\" (改为间接引语)",
+              "answer": "Tom said that he would go to Beijing the next day.",
+              "scoring_notes": "考察时态will→would，人称I→he，时间状语tomorrow→the next day的转换。"
+            }
+          }
+        },
+        {
+          "card_id": "08",
+          "full_id": "八下-S4-08",
+          "title": "直接引语与间接引语：疑问句与祈使句",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "疑问句和祈使句在转为间接引语时，其引导词和句型结构有特殊变化。",
+          "core_points": [
+            "一般疑问句：用if或whether引导，改为陈述句语序，注意时态、人称、时间/地点变化。",
+            "特殊疑问句：用原疑问词引导，改为陈述句语序，注意时态、人称、时间/地点变化。",
+            "转述动词：一般疑问句/特殊疑问句常用ask, wonder, inquire等。",
+            "祈使句：用to do (肯定) 或 not to do (否定) 引导，转述动词常用tell, ask, order, advise等。",
+            "转述动词+宾语+to do的形式，如：He told me to open the door."
+          ],
+          "example": {
+            "question": "将直接引语 \"Are you a student?\" 转为间接引语，主句为 He asked me...",
+            "steps": [
+              "原句是一般疑问句，用if或whether引导。",
+              "改为陈述句语序：you are a student。",
+              "人称you改为I。",
+              "时态are改为was (主句是asked，过去时)。"
+            ],
+            "answer": "He asked me if I was a student. / He asked me whether I was a student."
+          },
+          "mistakes": [
+            {"wrong": "She asked me what was my name.", "correct": "She asked me what my name was."},
+            {"wrong": "He told me not open the door.", "correct": "He told me not to open the door."}
+          ],
+          "memory_tip": "疑问句变陈述，if/whether或疑问词。祈使句变to do，否定not to do。",
+          "related": {
+            "prerequisite": "直接引语与间接引语：陈述句，宾语从句",
+            "next": "各种从句的综合运用"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["句型转换", "语法填空", "短文改错"],
+            "scoring_key": "疑问句转述时，语序必须是陈述语序；祈使句转述时，to do/not to do的格式不能错。",
+            "common_trap": "疑问句语序仍用疑问语序；祈使句转述时to的遗漏。",
+            "real_exam_example": {
+              "source": "「2021年某省市中考真题」",
+              "question": "The teacher told us, \"Don't make any noise!\" (改为间接引语)",
+              "answer": "The teacher told us not to make any noise.",
+              "scoring_notes": "考察祈使句的间接引语转换，否定形式用not to do。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S5",
+      "unit_name": "不定式 to do",
+      "cards": [
+        {
+          "card_id": "09",
+          "full_id": "八下-S5-09",
+          "title": "不定式 to do：作主语、宾语、表语",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "不定式to do是动词的一种非谓语形式，可以在句中充当多种成分，其本身不发生人称和数的变化。",
+          "core_points": [
+            "作主语：To learn English well is important. (常用it作形式主语：It's important to learn English well.)",
+            "作宾语：I like to play basketball. (有些动词后只能接to do，如want, hope, decide, agree, plan, learn等)",
+            "作表语：My dream is to travel around the world. (表语不定式常表示主语的内容)",
+            "不定式的否定形式：not to do (e.g., He decided not to go.)",
+            "带疑问词的不定式：what to do, how to do, when to do, where to go等 (e.g., I don't know what to do.)"
+          ],
+          "example": {
+            "question": "It's important ______ (protect) our environment.",
+            "steps": [
+              "句型It's + adj. + to do，to do作真正主语。",
+              "动词protect用不定式形式。"
+            ],
+            "answer": "to protect"
+          },
+          "mistakes": [
+            {"wrong": "To make friends is not easy.", "correct": "It's not easy to make friends."},
+            {"wrong": "I enjoy to read.", "correct": "I enjoy reading."}
+          ],
+          "memory_tip": "不定式to do，主宾表语都能当。It's adj. to do，动词跟着to跑。",
+          "related": {
+            "prerequisite": "动词原形，简单句成分",
+            "next": "不定式 to do：作定语、状语"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "短文改错"],
+            "scoring_key": "区分动词后接to do还是doing；掌握it作形式主语/宾语的句型。",
+            "common_trap": "to do和doing的混淆；带疑问词不定式的语序错误。",
+            "real_exam_example": {
+              "source": "「2023年某市中考真题」",
+              "question": "My father taught me ______ (swim) when I was little.",
+              "answer": "to swim",
+              "scoring_notes": "teach sb to do sth 是固定搭配，考察不定式作宾语补足语（宾语从句的简化）。"
+            }
+          }
+        },
+        {
+          "card_id": "10",
+          "full_id": "八下-S5-10",
+          "title": "不定式 to do：作定语、状语",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "不定式 to do 还可在句中作定语修饰名词，或作状语表示目的、结果、原因等。",
+          "core_points": [
+            "作定语：修饰名词，通常放在被修饰词之后 (e.g., I have a lot of homework to do.)",
+            "作目的状语：表示“为了……”，可置于句首或句末 (e.g., To pass the exam, he studied hard.)",
+            "作结果状语：表示“结果是……”，常与only, too...to, enough to等连用 (e.g., He worked so hard only to fail.)",
+            "作原因状语：表示“因为……”，常跟在表示情感的形容词后 (e.g., I'm glad to see you.)",
+            "作状语修饰形容词/副词：too...to (太……而不能……), enough to (足够……做……)",
+            "不定式的逻辑主语：for sb to do (e.g., It's kind of you to help me. / It's hard for me to learn English.)"
+          ],
+          "example": {
+            "question": "He got up early ______ (catch) the first bus.",
+            "steps": [
+              "句中He got up early是动作，后面需要说明目的。",
+              "表示目的用不定式to do。",
+              "动词catch用不定式形式。"
+            ],
+            "answer": "to catch"
+          },
+          "mistakes": [
+            {"wrong": "He is too old to marry.", "correct": "He is too old to get married."},
+            {"wrong": "I have something to say you.", "correct": "I have something to say to you."}
+          ],
+          "memory_tip": "定语后置修名词，状语目的结果因。too...to太不能，enough to足够能。",
+          "related": {
+            "prerequisite": "不定式作主语、宾语、表语，句子的各种成分",
+            "next": "非谓语动词综合辨析 (不定式、动名词、分词)"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "短文改错"],
+            "scoring_key": "区分不定式作定语和状语，尤其注意too...to和enough to的结构。注意不定式的逻辑主语。",
+            "common_trap": "too...to和enough to的混淆；不定式作定语时与介词的搭配。",
+            "real_exam_example": {
+              "source": "「2022年某省中考真题」",
+              "question": "It's important for us ______ (learn) English well.",
+              "answer": "to learn",
+              "scoring_notes": "考察不定式作真正主语，并且使用了for sb to do的结构，明确了不定式的逻辑主语。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S6",
+      "unit_name": "综合考点：词汇与语法应用",
+      "cards": [
+        {
+          "card_id": "11",
+          "full_id": "八下-S6-11",
+          "title": "词汇辨析与固定搭配",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "中考常考近义词辨析、形近词辨析以及动词、名词、形容词、副词的固定搭配。",
+          "core_points": [
+            "近义词辨析：如borrow/lend, speak/say/tell/talk, look/see/watch等。",
+            "形近词辨析：如quite/quiet/quit, affect/effect, accept/except等。",
+            "动词固定搭配：如look forward to doing, be interested in, succeed in doing, make a decision等。",
+            "名词固定搭配：如a piece of advice, a kind of, in common等。",
+            "形容词/副词固定搭配：如be good at, be afraid of, be busy with, for a long time等。",
+            "介词短语：如in front of, on time, at home, by bus等。"
+          ],
+          "example": {
+            "question": "He is good ______ playing football.",
+            "steps": [
+              "考察固定搭配：be good at (擅长做某事)。",
+              "at是介词，后面接动名词playing。"
+            ],
+            "answer": "at"
+          },
+          "mistakes": [
+            {"wrong": "Thank you for your advices.", "correct": "Thank you for your advice."},
+            {"wrong": "I often help my mother do house work.", "correct": "I often help my mother do housework."}
+          ],
+          "memory_tip": "近义形近仔细瞧，固定搭配要记牢。动名形副配介词，熟能生巧分数高。",
+          "related": {
+            "prerequisite": "基础词汇，词性概念",
+            "next": "语法填空与短文改错策略"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "阅读理解", "短文改错"],
+            "scoring_key": "平时积累词汇和短语，做题时结合语境和词性进行判断。",
+            "common_trap": "不规则名词的复数形式；动词与介词的搭配错误；易混淆词汇的误用。",
+            "real_exam_example": {
+              "source": "「2023年某市中考真题」",
+              "question": "My parents often tell me to be ______ (honest) to others.",
+              "answer": "honest",
+              "scoring_notes": "考察形容词作表语，be honest to others是固定搭配。如果填空是名词，则需要填honesty。"
+            }
+          }
+        },
+        {
+          "card_id": "12",
+          "full_id": "八下-S6-12",
+          "title": "语法填空与短文改错策略",
+          "type": "知识总结卡",
+          "difficulty": 5,
+          "importance": 5,
+          "definition": "语法填空和短文改错是中考综合性考查语法知识和应用能力的题型。",
+          "core_points": [
+            "语法填空：通读全文，理解大意。判断所填词的词性、时态、语态、单复数、人称等。注意上下文逻辑和固定搭配。",
+            "短文改错：通读全文，找出错误类型（多词、少词、错词）。",
+            "常见错误类型：时态语态错误、主谓一致错误、非谓语动词错误、词性错误、代词指代错误、冠词/介词/连词错误、固定搭配错误。",
+            "解题步骤：1. 整体阅读，理解文章大意。2. 逐句分析，找寻语法或逻辑错误。3. 确定错误类型并改正。4. 复查。",
+            "多词：在多余词下划线，并在右侧横线上写出该词并划斜线（如：the /）。",
+            "少词：在缺词处加一个漏字符号（^），并在右侧横线上写出所加词（如：^ in）。",
+            "错词：在错词下划线，并在右侧横线上写出改正后的词（如：is → are）。"
+          ],
+          "example": {
+            "question": "语法填空：He is a student. He often helps (1)______ (other) with their studies.",
+            "steps": [
+              "根据上下文，other修饰studies，且前面有帮助别人的意思。",
+              "other作为名词时常与s连用表示“其他人”，或与形容词others连用。",
+              "这里需要一个代词表示“其他人”，且是宾语，所以用others。"
+            ],
+            "answer": "others"
+          },
+          "mistakes": [
+            {"wrong": "He is good at write.", "correct": "He is good at writing."},
+            {"wrong": "The sun rises in the west.", "correct": "The sun rises in the east."}
+          ],
+          "memory_tip": "语法填空看词性，时态语态细分析。短文改错找三类，多词少词和错词。通读全文是基础，上下文意是钥匙。",
+          "related": {
+            "prerequisite": "所有语法知识，词汇积累",
+            "next": "书面表达写作技巧"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["语法填空", "短文改错"],
+            "scoring_key": "对语法知识的系统掌握和灵活运用，细心审题，避免粗心大意。",
+            "common_trap": "只看单句，不顾上下文；对时态、语态、非谓语动词的混淆；固定搭配记忆不牢。",
+            "real_exam_example": {
+              "source": "「2023年某省市中考真题」",
+              "question": "短文改错：\nMy brother is a doctor. He works hardly every day.\n(错词：hardly → hard)",
+              "answer": "hardly → hard",
+              "scoring_notes": "考察副词的辨析。hardly是「几乎不」的意思，而此处应表示「努力地工作」，应使用hard。"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+```

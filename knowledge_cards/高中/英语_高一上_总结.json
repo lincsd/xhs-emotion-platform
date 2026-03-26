@@ -1,0 +1,701 @@
+{
+  "subject": "英语",
+  "grade": "高一",
+  "semester": "上册",
+  "textbook": "人教版",
+  "grade_short": "高一上",
+  "card_pack": "知识总结",
+  "description": "高中高一上册英语高考考点笔记总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "时态综合运用",
+      "cards": [
+        {
+          "card_id": 1,
+          "full_id": "G1S-U1-C1",
+          "title": "一般现在时与现在进行时辨析",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "一般现在时表示习惯性动作、客观事实或永恒真理；现在进行时表示正在发生的动作或短期内进行的动作。",
+          "core_points": [
+            "一般现在时：常与`always, often, usually, every day, every week`等时间状语连用，或表示客观事实、科学真理。例：`The sun rises in the east.`",
+            "现在进行时：常与`now, at the moment, currently, these days`等时间状语连用，表示动作正在进行。例：`He is reading a book now.`",
+            "状态动词（如`know, believe, love, seem, own`等）通常不用于进行时态。例：`I know him well.` (非`I am knowing him.`)",
+            "特殊用法：现在进行时可表示按计划或安排在近期将要发生的动作，常用于`go, come, leave, start`等动词。例：`We are leaving for Beijing tomorrow.`"
+          ],
+          "example": {
+            "question": "（2023年全国甲卷·语法填空改编）Look! The children ______ (play) happily in the park. They often ______ (spend) their weekends here.",
+            "steps": [
+              "分析第一空：看到感叹词`Look!`和时间状语`in the park`，表示眼前正在发生的动作，应使用现在进行时。",
+              "分析第二空：看到时间状语`often`和`their weekends here`，表示习惯性动作，应使用一般现在时。"
+            ],
+            "answer": "are playing; spend"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is knowing the answer.",
+              "correct": "He knows the answer."
+            },
+            {
+              "wrong": "She often is going to school by bus.",
+              "correct": "She often goes to school by bus."
+            }
+          ],
+          "memory_tip": "「常事真理用一般，正在进行ing；状态动词不进行，将来安排也用ing。」",
+          "related": {
+            "prerequisite": "动词基本形式",
+            "next": "一般过去时与过去进行时"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错",
+              "完形填空"
+            ],
+            "scoring_key": "语法填空时，先判断句子的主线时态和具体的时间状语，再结合动词的性质。",
+            "common_trap": "状态动词误用进行时；忽略时间状语导致时态误判。",
+            "real_exam_example": {
+              "source": "高考真题改编",
+              "question": "My father usually ______ (watch) TV in the evening, but tonight he ______ (read) a novel.",
+              "answer": "watches; is reading",
+              "scoring_notes": "第一空由`usually`判断为一般现在时；第二空由`tonight`判断为现在进行时，体现了与平时习惯的不同。"
+            }
+          }
+        },
+        {
+          "card_id": 2,
+          "full_id": "G1S-U1-C2",
+          "title": "一般过去时与过去进行时辨析",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "一般过去时表示过去某个时间点或时间段内发生的已完成的动作；过去进行时表示过去某一时刻正在进行的动作。",
+          "core_points": [
+            "一般过去时：强调动作的完成，常与`yesterday, last week, two years ago, in 2008`等明确的过去时间状语连用。例：`I visited my grandma yesterday.`",
+            "过去进行时：强调过去某一时刻的持续性，常与`while, as`引导的从句连用，或与`at that time, all day yesterday`等连用。例：`While I was walking home, I saw an old friend.`",
+            "`When`引导时间状语从句时：若主从句动作同时发生且持续，都用过去进行时；若一个动作正在进行时，另一个动作突然发生，则进行时与一般过去时连用。例：`When the phone rang, I was having dinner.`",
+            "表示过去一段时间内的重复性动作，可用一般过去时。例：`He often came to visit me when he lived here.`"
+          ],
+          "example": {
+            "question": "（2022年全国乙卷·短文改错改编）I ______ (walk) along the street when I suddenly ______ (hear) a strange noise.",
+            "steps": [
+              "分析句意：`when`连接两个动作，一个是持续性的“走路”，另一个是突然发生的“听到”。",
+              "持续性动作`walk`应使用过去进行时。",
+              "突然发生的动作`hear`应使用一般过去时。"
+            ],
+            "answer": "was walking; heard"
+          },
+          "mistakes": [
+            {
+              "wrong": "While I heard the news, I was shocked.",
+              "correct": "When I heard the news, I was shocked."
+            },
+            {
+              "wrong": "He was finishing his homework at 8 p.m. last night.",
+              "correct": "He finished his homework at 8 p.m. last night."
+            }
+          ],
+          "memory_tip": "「过去一点用一般，过去持续用ing；when从两事相遇，一长一短是常情。」",
+          "related": {
+            "prerequisite": "一般现在时与现在进行时",
+            "next": "一般将来时与将来进行时"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "语法填空",
+              "完形填空",
+              "短文改错"
+            ],
+            "scoring_key": "完形填空中，理解上下文语境，判断动作的持续性或瞬时性是关键。",
+            "common_trap": "`when`和`while`引导的从句时态混淆；与过去完成时（高一未学）的干扰。",
+            "real_exam_example": {
+              "source": "高考真题改编",
+              "question": "She ______ (cook) dinner when her husband ______ (come) back home.",
+              "answer": "was cooking; came",
+              "scoring_notes": "妻子做饭是一个持续的动作，丈夫回家是一个瞬间的动作，故用过去进行时和一般过去时。"
+            }
+          }
+        },
+        {
+          "card_id": 3,
+          "full_id": "G1S-U1-C3",
+          "title": "一般将来时与将来进行时",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "一般将来时表示将来发生的动作或状态；将来进行时表示将来某一时刻正在进行的动作。",
+          "core_points": [
+            "一般将来时：主要形式有`will/shall do`, `be going to do`, `be to do`, `be about to do`。例：`I will visit him tomorrow.`",
+            "`will do`表示意愿、预测；`be going to do`表示计划、意图或根据迹象判断的将来。",
+            "将来进行时：`will be doing`，强调将来某一特定时间点或时间段内正在进行的动作。例：`This time tomorrow, I will be flying to Shanghai.`",
+            "时间状语从句中（由`if, when, as soon as, unless, until`等引导），用一般现在时态表示将来。例：`I will tell him the news when he comes back.`"
+          ],
+          "example": {
+            "question": "（2023年新高考I卷·语法填空改编）Don't worry. I ______ (finish) the report by 5 p.m. and then I ______ (meet) you at the station.",
+            "steps": [
+              "分析第一空：`by 5 p.m.`表示在某个时间点之前完成，通常用将来完成时（高二学），但高一阶段可考察一般将来时表示计划或承诺。",
+              "分析第二空：`then`连接，表示接下来的动作，与第一空构成动作序列，用一般将来时。",
+              "考虑到高一内容，可理解为`will finish`和`will meet`表示将来计划。"
+            ],
+            "answer": "will finish; will meet",
+            "alternative_answer": "am going to finish; am going to meet"
+          },
+          "mistakes": [
+            {
+              "wrong": "If it will rain tomorrow, we will stay at home.",
+              "correct": "If it rains tomorrow, we will stay at home."
+            },
+            {
+              "wrong": "He will be finishing his homework by tonight.",
+              "correct": "He will finish his homework by tonight."
+            }
+          ],
+          "memory_tip": "「将来时间用will，将来此刻ing；条件时间状语从，主将从现记心中。」",
+          "related": {
+            "prerequisite": "一般现在时、一般过去时",
+            "next": "时态综合运用与高考陷阱"
+          },
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错"
+            ],
+            "scoring_key": "重点考察时间状语从句中“主将从现”的原则。",
+            "common_trap": "时间状语从句中误用将来时。",
+            "real_exam_example": {
+              "source": "模拟题改编",
+              "question": "As soon as he ______ (arrive), we ______ (start) our meeting.",
+              "answer": "arrives; will start",
+              "scoring_notes": "`As soon as`引导时间状语从句，从句用一般现在时，主句用一般将来时。"
+            }
+          }
+        },
+        {
+          "card_id": 4,
+          "full_id": "G1S-U1-C4",
+          "title": "时态综合运用与高考陷阱",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "高考时态题常综合考察多种时态，要求考生通过语境、时间状语、动词性质等进行准确判断。",
+          "core_points": [
+            "**通读全文，把握主线时态**：在完形填空和语法填空中，首先要快速阅读全文，理解文章的主要时态背景（如叙事文多用过去时，说明文多用现在时）。",
+            "**关注时间状语**：`yesterday, now, tomorrow, often, when, while, since, for`等都是判断时态的关键线索。",
+            "**注意动词性质**：区分瞬间动词（如`arrive, die, begin`）和延续性动词（如`live, study, wait`），避免延续性动词与表示完成的时间状语连用。",
+            "**语态初步判断**：虽然被动语态是高一下册重点，但在高一上册也需对主语与谓语动词的关系有初步感知，判断是主动发出动作还是被动接受动作。",
+            "**特殊结构**：时间状语从句中的“主将从现”原则；`It is time (that) ...`等固定句型。"
+          ],
+          "example": {
+            "question": "（2023年全国甲卷·语法填空改编）Last night, while I ______ (prepare) for my exams, my little brother suddenly ______ (ask) me for help with his homework. He usually ______ (do) it by himself.",
+            "steps": [
+              "第一空：`Last night`和`while`提示过去，`prepare`是持续动作，用过去进行时。",
+              "第二空：`suddenly`提示瞬间发生的动作，且在过去，用一般过去时。",
+              "第三空：`usually`提示习惯性动作，但主线时态是过去，所以这里是过去习惯，用一般过去时。",
+              "综合起来，判断为`was preparing`, `asked`, `did`。"
+            ],
+            "answer": "was preparing; asked; did"
+          },
+          "mistakes": [
+            {
+              "wrong": "He has lived here for three years, but he moved last year.",
+              "correct": "He lived here for three years, and then he moved last year."
+            }
+          ],
+          "memory_tip": "「语境为王细推敲，时间状语是向导；动词性质要分清，主被动语也要瞧。」",
+          "related": {
+            "prerequisite": "所有基本时态",
+            "next": "名词性从句"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "完形填空",
+              "短文改错"
+            ],
+            "scoring_key": "语法填空先判断有无提示词，再通读全文，最后逐空锁定。完形填空需通读全文理解语境，再结合时态知识。",
+            "common_trap": "混合时态题，特别是`when/while`引导的复合句；动词的延续性与非延续性混淆；忽视上下文主线时态。",
+            "real_exam_example": {
+              "source": "高考真题改编",
+              "question": "Yesterday, as I ______ (walk) along the river, I ______ (notice) a group of people ______ (clean) up the rubbish there. They ______ (do) a great job.",
+              "answer": "was walking; noticed; cleaning; were doing",
+              "scoring_notes": "第一空`as`引导的从句，`walk`是持续动作，用过去进行时。第二空`notice`是瞬间动作，用一般过去时。第三空`cleaning`是非谓语动词作宾语补足语。第四空`do`是持续动作，描述当时的情景，用过去进行时。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "名词性从句",
+      "cards": [
+        {
+          "card_id": 5,
+          "full_id": "G1S-U2-C5",
+          "title": "主语从句与it作形式主语",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "主语从句指在句中充当主语的从句；当主语从句较长时，常用`it`作形式主语，将真正的主语从句后置。",
+          "core_points": [
+            "主语从句的连接词：`that, whether, what, who, which, when, where, why, how`等。例：`That he passed the exam surprised us all.`",
+            "`that`在主语从句中只起连接作用，无实际意义，不作成分；`whether/if`意为「是否」；`wh-`词（如`what, who, when`）在从句中充当主语、宾语、表语或状语。",
+            "主语从句作主语时，谓语动词通常用单数形式。例：`What he said is true.`",
+            "**`it`作形式主语**：当主语从句置于句首时，句子显得头重脚轻，常用`it`作形式主语，将主语从句后置。句型为`It is/was + adj./n. + that/whether/wh-`。例：`It is important that we learn English well.`",
+            "常见的`it`作形式主语的句型：`It is said/known/reported that...`, `It is clear/obvious/true that...`。"
+          ],
+          "example": {
+            "question": "（2023年全国乙卷·语法填空改编）______ (it) is widely believed ______ (that) reading more books can broaden our minds.",
+            "steps": [
+              "分析句型：`is widely believed`是谓语动词，后面`reading more books can broaden our minds`是一个完整的句子，充当主语。",
+              "当主语从句较长且有被动语态`is believed`时，常使用`it`作形式主语。",
+              "`reading more books can broaden our minds`是一个陈述句，用`that`引导主语从句。"
+            ],
+            "answer": "It; that"
+          },
+          "mistakes": [
+            {
+              "wrong": "What he said are true.",
+              "correct": "What he said is true."
+            },
+            {
+              "wrong": "It is not sure if he will come.",
+              "correct": "It is not sure whether he will come."
+            }
+          ],
+          "memory_tip": "「主从单数要牢记，it作形式主语常出现；that只连不作分，wh-词句中作成分。」",
+          "related": {
+            "prerequisite": "简单句结构",
+            "next": "宾语从句与表语从句"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错",
+              "阅读理解"
+            ],
+            "scoring_key": "在语法填空中，判断是否需要`it`作形式主语以及选择正确的连接词是得分关键。",
+            "common_trap": "混淆`that`和`what`在主语从句中的用法；`it`作形式主语的结构不熟悉。",
+            "real_exam_example": {
+              "source": "高考真题改编",
+              "question": "______ (it) is still a mystery ______ (how) the ancient Egyptians built the pyramids.",
+              "answer": "It; how",
+              "scoring_notes": "第一空考查`it`作形式主语；第二空考查连接词，从句`the ancient Egyptians built the pyramids`缺少方式状语，故用`how`。"
+            }
+          }
+        },
+        {
+          "card_id": 6,
+          "full_id": "G1S-U2-C6",
+          "title": "宾语从句与表语从句",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "宾语从句在句中作动词、介词的宾语；表语从句在句中作系动词的表语。",
+          "core_points": [
+            "**宾语从句**：连接词与主语从句类似。动词后的宾语从句，若由`that`引导，`that`常可省略。例：`I believe (that) he will succeed.`",
+            "**介词宾语从句**：介词后的宾语从句，连接词`that`不可省略。例：`We are talking about whether we should go.` (非`We are talking about that we should go.`)",
+            "**表语从句**：系动词（主要是`be`动词）后的从句。连接词与主语从句类似。例：`The problem is that we don't have enough time.`",
+            "`whether`和`if`辨析：`if`不能引导介词宾语从句和表语从句，也不能与`or not`连用；`whether`则无此限制，更通用。例：`I'm not sure whether he will come or not.` (非`if he will come or not.`)",
+            "`what`在从句中充当主语、宾语或表语，有实际意义。例：`I don't know what he wants.`"
+          ],
+          "example": {
+            "question": "（2023年全国甲卷·语法填空改编）The question is ______ (that/what) we should do next, and I'm wondering ______ (if/whether) we can find a better solution.",
+            "steps": [
+              "分析第一空：系动词`is`后接表语从句。从句`we should do next`缺少宾语，因此需要一个既能连接又能作宾语的词，选择`what`。",
+              "分析第二空：`wondering`后接宾语从句，表示「是否」。`if`和`whether`都可以，但`whether`更正式，且在特定语境下更灵活（如与`or not`连用）。此处两者皆可，但高考更倾向于`whether`的通用性。",
+              "最终选择`what`和`whether`。"
+            ],
+            "answer": "what; whether"
+          },
+          "mistakes": [
+            {
+              "wrong": "The problem is what he didn't come.",
+              "correct": "The problem is that he didn't come."
+            },
+            {
+              "wrong": "It depends on if you agree.",
+              "correct": "It depends on whether you agree."
+            }
+          ],
+          "memory_tip": "「宾从that可省略，介后that不可省；表从if不能用，whether万能记心间；从句缺成分，wh-词来填。」",
+          "related": {
+            "prerequisite": "主语从句",
+            "next": "名词性从句连接词辨析"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错"
+            ],
+            "scoring_key": "介词后或系动词后，要注意`that`和`what`的区别，以及`if`和`whether`的适用范围。",
+            "common_trap": "介词后误用`if`或`that`；`that`和`what`混淆，主要看从句是否缺少成分。",
+            "real_exam_example": {
+              "source": "高考真题改编",
+              "question": "He didn't know ______ (who/that) would attend the meeting, so he asked his secretary ______ (to inform/to inform him) about it.",
+              "answer": "who; to inform him",
+              "scoring_notes": "第一空，`know`后接宾语从句，从句`would attend the meeting`缺少主语，故用`who`。第二空考查动词不定式作宾语补足语，`ask sb. to do sth.`。"
+            }
+          }
+        },
+        {
+          "card_id": 7,
+          "full_id": "G1S-U2-C7",
+          "title": "名词性从句连接词辨析",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "准确辨析`that, whether, what`以及其他`wh-`连接词在名词性从句中的作用和用法。",
+          "core_points": [
+            "**`that`**：只作连接词，无实际意义，在从句中不作任何成分，只引导一个完整的陈述句。例：`I know that he is honest.`",
+            "**`whether/if`**：表示「是否」，在从句中不作成分，引导一个完整的疑问句。`whether`比`if`更正式，适用范围更广。例：`I wonder whether he will come.`",
+            "**`what`**：表示「什么」，在从句中充当主语、宾语、表语等成分，具有实际意义。例：`What he said made me angry.` (作主语)",
+            "**其他`wh-`连接词**：`who, whom, whose, which, when, where, why, how`等，它们在从句中充当相应的成分（主语、宾语、定语、状语），并具有实际意义。例：`I don't know where he lives.` (作地点状语)",
+            "**辨析技巧**：**看从句是否完整**。如果从句结构完整（主谓宾/主系表齐全），则选择`that`或`whether/if`；如果从句缺少主语、宾语、表语或状语，则选择`what`或相应的`wh-`词。"
+          ],
+          "example": {
+            "question": "（2023年新高考II卷·语法填空改编）It is often discussed ______ (that/what/how) we can protect our environment, and the key is ______ (whether/if) everyone takes action.",
+            "steps": [
+              "第一空：`It is often discussed`后接主语从句。从句`we can protect our environment`结构完整（主谓宾），但从句前需要一个能表示方式的词，故选`how`。",
+              "第二空：`the key is`后接表语从句，表示「是否」。`everyone takes action`是完整从句，用`whether`或`if`。但`whether`更通用。",
+              "最终选择`how`和`whether`。"
+            ],
+            "answer": "how; whether"
+          },
+          "mistakes": [
+            {
+              "wrong": "The truth is what he didn't realize his mistake.",
+              "correct": "The truth is that he didn't realize his mistake."
+            },
+            {
+              "wrong": "I wonder what the weather is like tomorrow.",
+              "correct": "I wonder what the weather will be like tomorrow."
+            }
+          ],
+          "memory_tip": "「从句缺成分，wh-词来补；从句不缺省，that/whether来相助；what自带意义，that纯粹是连接。」",
+          "related": {
+            "prerequisite": "主语从句、宾语从句、表语从句",
+            "next": "定语从句进阶"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错"
+            ],
+            "scoring_key": "语法填空中，首先判断从句在句中作何成分，再分析从句内部结构是否完整，从而选择合适的连接词。",
+            "common_trap": "`that`和`what`的混淆是高频陷阱，关键在于判断从句是否缺少成分。",
+            "real_exam_example": {
+              "source": "高考真题改编",
+              "question": "Scientists are still trying to figure out ______ (what/that/how) life began on Earth.",
+              "answer": "how",
+              "scoring_notes": "从句`life began on Earth`结构完整，但缺少方式状语，故用`how`。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S3",
+      "unit_name": "定语从句进阶",
+      "cards": [
+        {
+          "card_id": 8,
+          "full_id": "G1S-U3-C8",
+          "title": "关系代词与关系副词的选用",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "定语从句由关系代词（`who, whom, whose, which, that`）或关系副词（`when, where, why`）引导，修饰先行词。",
+          "core_points": [
+            "**关系代词**：在定语从句中充当主语、宾语或定语。`who/whom`指人，`which`指物，`that`指人或物，`whose`表示所属关系。",
+            "**关系代词的用法**：",
+            "  - `who`：作主语。例：`The man who is standing there is my teacher.`",
+            "  - `whom`：作宾语。例：`The student whom I helped passed the exam.` (`whom`常可省略或用`who/that`替代)",
+            "  - `which`：指物，作主语或宾语。例：`This is the book which I bought yesterday.`",
+            "  - `that`：指人或物，作主语或宾语。不能用于非限制性定语从句，也不能置于介词后。例：`He is the boy that helped me.`",
+            "  - `whose`：作定语，表示「……的」。例：`I know a girl whose father is a doctor.`",
+            "**关系副词**：在定语从句中充当时间状语、地点状语或原因状语，相当于「介词+关系代词」。",
+            "  - `when`：指时间，相当于`in/on/at which`。例：`I remember the day when we first met.`",
+            "  - `where`：指地点，相当于`in/at/on which`。例：`This is the school where I studied.`",
+            "  - `why`：指原因，相当于`for which`。例：`That's the reason why he was late.`",
+            "**选用原则**：**看从句是否完整**。如果从句缺少主语或宾语等名词性成分，用关系代词；如果从句结构完整，但缺少时间、地点、原因状语，用关系副词。"
+          ],
+          "example": {
+            "question": "（2023年全国甲卷·语法填空改编）I still remember the small village ______ (where/which) I spent my childhood, a place ______ (that/whose) beauty always impresses me.",
+            "steps": [
+              "第一空：先行词`the small village`是地点。从句`I spent my childhood`结构完整，不缺主谓宾，但缺少地点状语，故用关系副词`where`。",
+              "第二空：先行词`a place`是物。从句`beauty always impresses me`中，`beauty`是名词，前面缺少一个定语来修饰`beauty`，表示「这个地方的美丽」，故用`whose`。",
+              "最终选择`where`和`whose`。"
+            ],
+            "answer": "where; whose"
+          },
+          "mistakes": [
+            {
+              "wrong": "This is the house which I live.",
+              "correct": "This is the house where I live."
+            }
+          ],
+          "memory_tip": "「从句缺主宾，代词来帮忙；从句缺状语，副词来补充；that不能有逗号，介词后也莫用。」",
+          "related": {
+            "prerequisite": "名词性从句",
+            "next": "介词+关系代词的定语从句"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错",
+              "阅读理解"
+            ],
+            "scoring_key": "语法填空中，分析先行词的性质和从句内部成分是关键。尤其注意从句是否完整。",
+            "common_trap": "混淆`which`和`where`；`whose`的用法易错。",
+            "real_exam_example": {
+              "source": "高考真题改编",
+              "question": "The factory ______ (which/where) I work produces high-quality goods.",
+              "answer": "where",
+              "scoring_notes": "先行词`the factory`是地点，从句`I work`结构完整，缺少地点状语，故用`where`。"
+            }
+          }
+        },
+        {
+          "card_id": 9,
+          "full_id": "G1S-U3-C9",
+          "title": "介词+关系代词的定语从句",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "当关系代词作介词的宾语时，介词可以提前到关系代词之前，构成`介词+关系代词`的定语从句。",
+          "core_points": [
+            "**介词前置的结构**：`先行词 + 介词 + whom/which + 从句`。例：`This is the book about which I told you.`",
+            "**关系代词的选择**：介词前置时，关系代词只能用`whom`（指人）或`which`（指物），不能用`that`或`who`。例：`The man to whom I spoke is my boss.` (非`to who`或`to that`)",
+            "**介词的选择**：介词的选择取决于先行词或从句谓语动词的固定搭配。如`talk about, rely on, famous for`等。例：`This is the topic about which we are discussing.`",
+            "**介词后置**：介词也可以置于从句末尾，此时关系代词可用`who/whom/which/that`，且`that`和`whom/which`作宾语时常可省略。例：`This is the topic (that/which) we are discussing about.`",
+            "理解`介词+关系代词`相当于关系副词：`on which` = `when` (指时间)，`in which` = `where` (指地点)，`for which` = `why` (指原因)。"
+          ],
+          "example": {
+            "question": "（2023年全国乙卷·语法填空改编）The old house, in ______ (which/that) my grandparents used to live, is now a museum. I often recall the happy days ______ (in which/when) we played there.",
+            "steps": [
+              "第一空：先行词`the old house`是物，介词`in`前置。根据规则，介词后只能用`which`或`whom`，此处指物，故选`which`。",
+              "第二空：先行词`the happy days`是时间。从句`we played there`结构完整，缺少时间状语，故用关系副词`when`。`in which`也可以，但`when`更简洁。",
+              "最终选择`which`和`when`。"
+            ],
+            "answer": "which; when"
+          },
+          "mistakes": [
+            {
+              "wrong": "The friend with that I went to the party is Jane.",
+              "correct": "The friend with whom I went to the party is Jane."
+            },
+            {
+              "wrong": "This is the problem which we are concerned.",
+              "correct": "This is the problem with which we are concerned."
+            }
+          ],
+          "memory_tip": "「介词提前代词后，whom/which是正宗；介词后置更灵活，that省略皆可行。」",
+          "related": {
+            "prerequisite": "关系代词与关系副词的选用",
+            "next": "定语从句与高考长难句分析"
+          },
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": [
+              "语法填空",
+              "短文改错"
+            ],
+            "scoring_key": "介词前置时，关系代词的准确选用是难点。注意介词与动词的固定搭配。",
+            "common_trap": "介词后误用`that`或`who`；介词选择错误。",
+            "real_exam_example": {
+              "source": "模拟题改编",
+              "question": "He showed me the photo ______ (of which/which) he was very proud.",
+              "answer": "of which",
+              "scoring_notes": "从句`he was very proud`，谓语动词`proud`与介词`of`搭配，`be proud of sth.`，故选`of which`。"
+            }
+          }
+        },
+        {
+          "card_id": 10,
+          "full_id": "G1S-U3-C10",
+          "title": "定语从句与高考长难句分析",
+          "type": "知识总结卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "定语从句是构建复杂句的重要手段，准确识别和理解定语从句对高考阅读理解至关重要。",
+          "core_points": [
+            "**识别先行词和关系词**：在长难句中，首先要找到被修饰的名词（先行词）和引导定语从句的关系代词或关系副词。",
+            "**划分从句边界**：定语从句通常从关系词开始，到从句谓语动词结束，或者到下一个谓语动词开始之前。",
+            "**理解从句功能**：定语从句的作用是限定或补充说明先行词，理解其具体修饰内容。",
+            "**跳读从句，抓主干**：在阅读理解中，有时可以先跳过定语从句，快速找出句子的主谓宾，把握句子的核心意思。",
+            "**非限制性定语从句**（高二上重点，高一可初步了解）：用逗号与主句隔开，提供额外信息，即使去掉也不影响主句的完整性。关系代词不能用`that`。例：`My brother, who lives in London, is a doctor.`"
+          ],
+          "example": {
+            "question": "（2023年全国甲卷·阅读理解长难句分析）The invention of the printing press, which revolutionized the spread of knowledge, played a crucial role in the Renaissance.",
+            "steps": [
+              "识别主句主干：`The invention ... played a crucial role in the Renaissance.`",
+              "识别定语从句：`which revolutionized the spread of knowledge`。",
+              "分析关系词`which`：指代先行词`the printing press`，在从句中作主语。",
+              "理解从句功能：从句补充说明了印刷术的特点，即「它彻底改变了知识的传播」。",
+              "整合句意：印刷术的发明，彻底改变了知识的传播方式，并在文艺复兴中扮演了关键角色。"
+            ],
+            "answer": "略（侧重分析过程而非具体答案）"
+          },
+          "mistakes": [
+            {
+              "wrong": "将定语从句误认为是名词性从句，导致句意理解偏差。",
+              "correct": "通过关系词和先行词判断从句类型。"
+            },
+            {
+              "wrong": "在分析长难句时，未能准确找到主句谓语，导致句子结构分析错误。",
+              "correct": "先找主句主语和谓语，再分析从句。"
+            }
+          ],
+          "memory_tip": "「长句莫慌乱，先找主谓干；关系词是路标，从句信息来补充。」",
+          "related": {
+            "prerequisite": "所有定语从句基础知识",
+            "next": "词汇学习策略"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "阅读理解",
+              "七选五",
+              "语法填空"
+            ],
+            "scoring_key": "阅读理解中，准确理解长难句的结构和含义是解题的基础。在七选五中，需要通过从句理解上下文的衔接。",
+            "common_trap": "复杂句中多重从句的嵌套，导致主从句混淆；非限制性定语从句的理解，尤其是与主句语气的关联。",
+            "real_exam_example": {
+              "source": "高考真题改编",
+              "question": "The reason why he failed the exam was that he didn't prepare well, which was a lesson for him.",
+              "answer": "无具体答案，侧重分析",
+              "scoring_notes": "分析：`The reason...was that...`是主系表结构。`why he failed the exam`是定语从句修饰`reason`。`which was a lesson for him`是非限制性定语从句，修饰前面整个主句的内容，表示「他没有准备好这件事，对他来说是个教训」。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "S4",
+      "unit_name": "词汇与语用",
+      "cards": [
+        {
+          "card_id": 11,
+          "full_id": "G1S-U4-C11",
+          "title": "词汇学习策略与高考词义辨析",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "掌握高效词汇学习方法，并通过上下文语境、词根词缀等技巧准确辨析词义，应对高考完形填空和阅读理解。",
+          "core_points": [
+            "**上下文猜测词义**：高考中遇到生词，切忌慌张。利用文章语境、同义词、反义词、解释、举例、因果关系等线索进行推断。",
+            "**词根词缀法**：学习常见词根（如`ject`投掷，`port`携带）和词缀（如`un-`否定，`-able`可……的），有助于快速理解陌生词汇。例：`unbelievable` (un-否定 + believe相信 + -able可……的 = 不可信的)。",
+            "**熟词僻义**：高考常考高频词汇在特定语境下的非常规含义。如`book`除了「书」还可作动词「预订」；`present`除了「礼物」还可作动词「呈现」或形容词「在场的」。",
+            "**辨析形近义近词**：区分拼写相似或含义相近的词汇，如`affect` (影响) 和`effect` (影响/结果)，`adapt` (适应) 和`adopt` (采纳)。",
+            "**词汇积累方法**：主题归类、词族记忆、高频词汇反复背诵、制作单词卡片、多读多练。"
+          ],
+          "example": {
+            "question": "（2023年全国甲卷·阅读理解词义猜测改编）The new policy aims to **alleviate** poverty in rural areas. What does the underlined word 'alleviate' most likely mean?",
+            "steps": [
+              "分析上下文：`new policy` (新政策) 旨在解决`poverty` (贫困) 问题。政策的目标通常是改善或减轻负面情况。",
+              "推断词义：根据语境，`alleviate`应是「减轻、缓解」的意思。",
+              "选项排除：如果选项中有`worsen` (恶化)、`create` (创造) 等，则可排除。"
+            ],
+            "answer": "减轻/缓解"
+          },
+          "mistakes": [
+            {
+              "wrong": "死记硬背单词，不关注语境，导致词义理解僵化。",
+              "correct": "结合语境，活学活用单词，理解多义词。"
+            },
+            {
+              "wrong": "看到生词就放弃，不尝试运用猜测技巧。",
+              "correct": "积极运用上下文猜测、词根词缀等方法。"
+            }
+          ],
+          "memory_tip": "「词汇考点有套路，语境猜测是王道；熟词僻义要警惕，词根词缀是法宝。」",
+          "related": {
+            "prerequisite": "基础词汇量",
+            "next": "高频词汇活用与固定搭配"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "完形填空",
+              "阅读理解",
+              "短文改错"
+            ],
+            "scoring_key": "完形填空和阅读理解中，词义辨析题需要结合语境，而非单纯依靠单词本含义。熟词僻义是高考常考点。",
+            "common_trap": "脱离语境，望文生义；熟词僻义的误判。",
+            "real_exam_example": {
+              "source": "高考真题改编",
+              "question": "The old woman was so **frail** that she could barely stand up. What does 'frail' mean?",
+              "answer": "虚弱的/脆弱的",
+              "scoring_notes": "通过`barely stand up`（几乎站不起来）这个线索，推断`frail`意为「虚弱的」。"
+            }
+          }
+        },
+        {
+          "card_id": 12,
+          "full_id": "G1S-U4-C12",
+          "title": "高频词汇活用与固定搭配",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "熟练掌握高考高频词汇的多种用法、固定搭配和短语动词，是提升语言运用能力和高考成绩的关键。",
+          "core_points": [
+            "**动词固定搭配**：如`make progress` (取得进步), `take part in` (参加), `pay attention to` (注意), `devote oneself to` (致力于)。",
+            "**形容词固定搭配**：如`be proud of` (为……自豪), `be interested in` (对……感兴趣), `be familiar with` (熟悉), `be responsible for` (对……负责)。",
+            "**名词固定搭配**：如`a sense of humor` (幽默感), `a lack of` (缺乏), `a variety of` (各种各样的), `a piece of advice` (一条建议)。",
+            "**短语动词（phrasal verbs）**：由动词与介词/副词构成，常有特殊含义，如`put up with` (忍受), `turn down` (拒绝/调低), `come across` (偶然遇见)。",
+            "**词性转换**：同一词根的不同词性形式，如`success` (名词), `succeed` (动词), `successful` (形容词), `successfully` (副词)。高考语法填空常考词性转换。",
+            "**积累方法**：在阅读中划出并记录固定搭配和短语动词，分类整理，反复练习，尤其注意其在语境中的应用。"
+          ],
+          "example": {
+            "question": "（2023年全国乙卷·语法填空改编）It is important to ______ (pay) close attention ______ (to) details when you are doing scientific research. Only in this way can you ______ (succeed).",
+            "steps": [
+              "第一空：`close attention`提示此处需要一个动词来搭配，构成`pay attention to` (注意)。",
+              "第二空：`pay attention`的固定搭配是`pay attention to`，故填`to`。",
+              "第三空：`can`后接动词原形，根据句意「成功」，应填动词`succeed`。",
+              "最终答案为`pay`, `to`, `succeed`。"
+            ],
+            "answer": "pay; to; succeed"
+          },
+          "mistakes": [
+            {
+              "wrong": "He made a great successful in his career.",
+              "correct": "He made great success in his career."
+            }
+          ],
+          "memory_tip": "「搭配固定要多记，熟能生巧是真理；词性转换有规律，词根不变后缀异。」",
+          "related": {
+            "prerequisite": "基础词汇和语法",
+            "next": "高一下册非谓语动词"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": [
+              "完形填空",
+              "语法填空",
+              "短文改错",
+              "书面表达"
+            ],
+            "scoring_key": "完形填空和语法填空中，固定搭配和词性转换是高频考点，需要依靠日常积累和语境判断。书面表达中，恰当使用固定搭配能提升表达地道性。",
+            "common_trap": "固定搭配的介词选择错误；词性转换时，未能根据句子的成分需求选择正确词性。",
+            "real_exam_example": {
+              "source": "高考真题改编",
+              "question": "The ______ (develop) of new technology has brought about great changes.",
+              "answer": "development",
+              "scoring_notes": "`The...of`结构中，中间需要一个名词，故`develop`需要转换为名词`development`。"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

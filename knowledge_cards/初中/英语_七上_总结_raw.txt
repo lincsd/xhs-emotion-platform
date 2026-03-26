@@ -1,0 +1,689 @@
+{
+  "subject": "英语",
+  "grade": "七年级",
+  "semester": "上册",
+  "textbook": "人教Go for it!版",
+  "grade_short": "七上",
+  "card_pack": "知识总结",
+  "description": "初中七年级上册英语中考考点笔记总结",
+  "units": [
+    {
+      "unit_id": "U1",
+      "unit_name": "我的名字叫吉娜 (My name is Gina)",
+      "cards": [
+        {
+          "card_id": 1,
+          "full_id": "7A-U1-C1",
+          "title": "be动词 (am/is/are) 的基本用法与变化",
+          "type": "知识总结卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "be动词是英语中最基本的动词，表示「是」或「在」，其形式随主语的人称和数变化。",
+          "core_points": [
+            "主谓一致原则：第一人称单数用am (I am)；第三人称单数用is (he/she/it is)；其他人称和复数用are (you/we/they are)。",
+            "肯定句型：主语 + be动词 + 其他成分。",
+            "否定句型：主语 + be动词 + not + 其他成分。缩写：isn't, aren't (am not无缩写)。",
+            "一般疑问句型：Be动词 + 主语 + 其他成分？肯定回答：Yes, 主语 + be动词. 否定回答：No, 主语 + be动词 + not."
+          ],
+          "example": {
+            "question": "「请完成句子：My name ___ Gina. She ___ from China. ___ you a student?」",
+            "steps": [
+              "判断第一个空的主语是My name (单数第三人称)，所以用is。",
+              "判断第二个空的主语是She (单数第三人称)，所以用is。",
+              "判断第三个空的主语是you (第二人称)，所以用are，且是疑问句be动词提前。"
+            ],
+            "answer": "is; is; Are"
+          },
+          "mistakes": [
+            {"wrong": "I is a student.", "correct": "I am a student."},
+            {"wrong": "They isn't happy.", "correct": "They aren't happy."},
+            {"wrong": "He are a boy.", "correct": "He is a boy."}
+          ],
+          "memory_tip": "「我am，你are，他她它is；复数都用are，句末把点移，疑问句be要提前。」",
+          "related": {
+            "prerequisite": "人称代词",
+            "next": "一般现在时"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "语法填空", "完形填空", "短文改错"],
+            "scoring_key": "「主谓一致是关键，看清主语定be变。疑问否定勿漏not/提前。」",
+            "common_trap": "「忽略主语是单数第三人称，误用are；或在否定句中忘记加not。」",
+            "real_exam_example": {
+              "source": "2023年某市中考真题（改编）",
+              "question": "选词填空：My favorite color ___ blue. What ___ your favorite color?",
+              "answer": "is; is",
+              "scoring_notes": "考察be动词的主谓一致，两个空的主语都是单数名词，所以都用is。"
+            }
+          }
+        },
+        {
+          "card_id": 2,
+          "full_id": "7A-U1-C2",
+          "title": "人称代词主格与宾格",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "人称代词用于指代人或物，分为主格（作主语）和宾格（作宾语）。",
+          "core_points": [
+            "主格：I, you, he, she, it, we, they (在句中作主语，位于动词之前)。",
+            "宾格：me, you, him, her, it, us, them (在句中作宾语，位于动词或介词之后)。",
+            "口诀：主格放句首，宾格放动介后。"
+          ],
+          "example": {
+            "question": "「选择正确答案：My name is Tom. This is ___ (I/me). Do you know ___ (he/him)?」",
+            "steps": [
+              "第一个空在be动词is之后，作表语，应使用宾格me。",
+              "第二个空在动词know之后，作宾语，应使用宾格him。"
+            ],
+            "answer": "me; him"
+          },
+          "mistakes": [
+            {"wrong": "She likes I.", "correct": "She likes me."},
+            {"wrong": "He and me are friends.", "correct": "He and I are friends."}
+          ],
+          "memory_tip": "「主格是主宾是宾，主在前宾在后。」",
+          "related": {
+            "prerequisite": "基础词汇",
+            "next": "物主代词"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["单选", "完形填空", "语法填空"],
+            "scoring_key": "「判断代词在句中作主语还是宾语。」",
+            "common_trap": "「在并列结构中，如『A and B』，B处易错用宾格。」",
+            "real_exam_example": {
+              "source": "2022年某市中考真题（改编）",
+              "question": "单项选择：My mother often tells ___ (I/me) to be polite to others.",
+              "answer": "me",
+              "scoring_notes": "tell是及物动词，其后直接跟宾语，故用宾格me。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U2",
+      "unit_name": "这是你的铅笔吗？ (Is this your pencil?)",
+      "cards": [
+        {
+          "card_id": 3,
+          "full_id": "7A-U2-C1",
+          "title": "指示代词 this/that/these/those",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "指示代词用于指代人或物，并指示其远近和单复数。",
+          "core_points": [
+            "this (这个) 和 that (那个) 指代单数名词或不可数名词。",
+            "these (这些) 和 those (那些) 指代复数名词。",
+            "this/these 指近处的人或物，that/those 指远处的人或物。",
+            "可单独作主语、宾语或表语，也可作限定词修饰名词。"
+          ],
+          "example": {
+            "question": "「选择正确答案：___ is my book, and ___ are my pens. (This/These; That/Those)」",
+            "steps": [
+              "第一个空后是is my book (单数)，所以用this或that。根据语境，通常指近处用this。",
+              "第二个空后是are my pens (复数)，所以用these或those。根据语境，通常指近处用these。"
+            ],
+            "answer": "This; These"
+          },
+          "mistakes": [
+            {"wrong": "These is my pen.", "correct": "This is my pen."},
+            {"wrong": "That are my friends.", "correct": "Those are my friends."}
+          ],
+          "memory_tip": "「近单this，远单that；近复these，远复those。」",
+          "related": {
+            "prerequisite": "be动词",
+            "next": "名词单复数"
+          },
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": ["单选", "语法填空"],
+            "scoring_key": "「判断指代对象的单复数和远近。」",
+            "common_trap": "「混淆this/that和these/those的单复数用法。」",
+            "real_exam_example": {
+              "source": "2021年某市中考真题（改编）",
+              "question": "单项选择：Look! ___ are my new shoes. They are comfortable.",
+              "answer": "These",
+              "scoring_notes": "shoes是复数名词，且表示『看！』，说明在近处，故用These。"
+            }
+          }
+        },
+        {
+          "card_id": 4,
+          "full_id": "7A-U2-C2",
+          "title": "名词单复数规则变化与特殊情况",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "名词有单数和复数之分，表示一个或多个。可数名词有单复数变化，不可数名词没有。",
+          "core_points": [
+            "一般情况：词尾加-s (books, cats)。",
+            "以s, x, sh, ch结尾：词尾加-es (buses, boxes, brushes, watches)。",
+            "以辅音字母+y结尾：变y为i再加-es (families, cities)。",
+            "以f或fe结尾：变f/fe为v再加-es (knives, leaves)。",
+            "以o结尾：有生命加-es (heroes, tomatoes)；无生命加-s (radios, photos)。",
+            "不规则变化：man-men, woman-women, child-children, foot-feet, tooth-teeth, mouse-mice, sheep-sheep, fish-fish, deer-deer。"
+          ],
+          "example": {
+            "question": "「写出下列名词的复数形式：box, family, knife, photo, child, sheep」",
+            "steps": [
+              "box以x结尾，加-es。",
+              "family以辅音y结尾，变y为i加-es。",
+              "knife以fe结尾，变fe为v加-es。",
+              "photo以o结尾，是无生命名词，加-s。",
+              "child是不规则名词，复数是children。",
+              "sheep是不规则名词，单复数同形。"
+            ],
+            "answer": "boxes, families, knives, photos, children, sheep"
+          },
+          "mistakes": [
+            {"wrong": "two mans", "correct": "two men"},
+            {"wrong": "three tomatos", "correct": "three tomatoes"},
+            {"wrong": "many sheeps", "correct": "many sheep"}
+          ],
+          "memory_tip": "「s,x,sh,ch,o,y结尾有讲究，f/fe变v，不规则要牢记。」",
+          "related": {
+            "prerequisite": "基础词汇",
+            "next": "可数名词与不可数名词的量词"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "语法填空", "完形填空", "短文改错"],
+            "scoring_key": "「熟记规则和不规则变化，尤其是不规则名词的记忆。」",
+            "common_trap": "「混淆以o结尾的名词复数规则；不规则名词的误用。」",
+            "real_exam_example": {
+              "source": "2023年某市中考真题",
+              "question": "短文改错：I have two new box. They are very beautiful.",
+              "answer": "box → boxes",
+              "scoring_notes": "two修饰复数名词，box应变为boxes。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U3",
+      "unit_name": "这是你姐姐吗？ (Is this your sister?)",
+      "cards": [
+        {
+          "card_id": 5,
+          "full_id": "7A-U3-C1",
+          "title": "特殊疑问句 (Who/What/Where)",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "特殊疑问句用于询问具体信息，不能用Yes/No回答，以疑问词开头。",
+          "core_points": [
+            "句型结构：疑问词 + 一般疑问句语序。",
+            "Who (谁)：询问人。Who is that boy? (他是谁？)",
+            "What (什么)：询问事物、职业、姓名等。What's your name? What's this? What's he?",
+            "Where (哪里)：询问地点。Where is my book? (我的书在哪里？)",
+            "注意疑问词作主语时，直接跟动词，动词用单数第三人称形式。"
+          ],
+          "example": {
+            "question": "「根据划线部分提问：My name is Tom. This is my father. He is in the living room.」",
+            "steps": [
+              "Tom是姓名，用What提问。",
+              "my father是人，用Who提问。",
+              "in the living room是地点，用Where提问。"
+            ],
+            "answer": "What's your name? Who is this? Where is he?"
+          },
+          "mistakes": [
+            {"wrong": "What your name is?", "correct": "What's your name?"},
+            {"wrong": "Where you are from?", "correct": "Where are you from?"}
+          ],
+          "memory_tip": "「特问特答不能Yes/No，问啥就用啥词头，语序变回一般问。」",
+          "related": {
+            "prerequisite": "be动词一般疑问句",
+            "next": "一般现在时疑问句"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["补全对话", "阅读理解", "单选"],
+            "scoring_key": "「正确选择疑问词，并确保疑问句的语序正确。」",
+            "common_trap": "「混淆特殊疑问句的语序与陈述句语序；疑问词选择错误。」",
+            "real_exam_example": {
+              "source": "2022年某市中考真题（补全对话）",
+              "question": "A: ___ is your favorite sport?\nB: My favorite sport is basketball.",
+              "answer": "What",
+              "scoring_notes": "B的回答是运动名称，所以A应该用What询问事物。"
+            }
+          }
+        },
+        {
+          "card_id": 6,
+          "full_id": "7A-U3-C2",
+          "title": "家庭成员词汇及介绍",
+          "type": "知识总结卡",
+          "difficulty": 1,
+          "importance": 3,
+          "definition": "掌握基本的家庭成员词汇，并能用英语介绍自己的家庭。",
+          "core_points": [
+            "核心词汇：father (dad), mother (mom), parents, brother, sister, grandfather (grandpa), grandmother (grandma), grandparents, uncle, aunt, cousin。",
+            "介绍家庭：This is my father. He is a doctor. I have a brother and a sister.",
+            "询问家庭成员：Who is this? Is this your mother?"
+          ],
+          "example": {
+            "question": "「补全对话：A: Who is that woman? B: She is my ___. (妈妈)」",
+            "steps": [
+              "根据对话语境，woman是女性，与妈妈对应。"
+            ],
+            "answer": "mother/mom"
+          },
+          "mistakes": [
+            {"wrong": "My father and mother are my grandpas.", "correct": "My father and mother are my parents."},
+            {"wrong": "I have one brothers.", "correct": "I have one brother."}
+          ],
+          "memory_tip": "「爸爸妈妈叫parents，爷爷奶奶grandparents，兄弟姐妹要分清。」",
+          "related": {
+            "prerequisite": "be动词, 指示代词",
+            "next": "形容词性物主代词"
+          },
+          "exam_focus": {
+            "frequency": "★★★",
+            "question_types": ["阅读理解", "完形填空", "补全对话", "书面表达"],
+            "scoring_key": "「准确辨认和使用家庭成员词汇，注意单复数。」",
+            "common_trap": "「混淆grandfather/grandmother和grandparents。」",
+            "real_exam_example": {
+              "source": "2020年某市中考真题（阅读理解）",
+              "question": "根据短文内容判断正误：Tom has a brother and a sister. (T/F)",
+              "answer": "T (根据短文信息判断)",
+              "scoring_notes": "考察对文中家庭成员信息的理解。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U4",
+      "unit_name": "我的背包在哪里？ (Where's my backpack?)",
+      "cards": [
+        {
+          "card_id": 7,
+          "full_id": "7A-U4-C1",
+          "title": "方位介词 (in/on/under)",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "方位介词用于表示事物的位置或方向。",
+          "core_points": [
+            "in (在…里)：表示在某物的内部空间。in the box, in the room。",
+            "on (在…上)：表示在某物的表面接触。on the desk, on the wall。",
+            "under (在…下)：表示在某物的正下方。under the chair, under the bed。",
+            "常用搭配：Where is/are...? It's/They're + 介词短语。"
+          ],
+          "example": {
+            "question": "「选择正确的介词填空：The cat is ___ the tree. The book is ___ the bag. The ball is ___ the table. (in/on/under)」",
+            "steps": [
+              "猫在树上，接触树枝表面，用on。",
+              "书在包里，在包的内部，用in。",
+              "球在桌子下面，用under。"
+            ],
+            "answer": "on; in; under"
+          },
+          "mistakes": [
+            {"wrong": "The apple is in the table.", "correct": "The apple is on the table."},
+            {"wrong": "The dog is on the house.", "correct": "The dog is in the house."}
+          ],
+          "memory_tip": "「里in上on下under，位置分清不犯错。」",
+          "related": {
+            "prerequisite": "名词, be动词",
+            "next": "there be句型"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["单选", "完形填空", "语法填空", "阅读理解", "看图填空"],
+            "scoring_key": "「根据图片或语境准确判断事物所处位置。」",
+            "common_trap": "「混淆in和on的用法，尤其是在描述『在树上』等情景时。」",
+            "real_exam_example": {
+              "source": "2023年某市中考真题（单选）",
+              "question": "The keys are ___ the drawer. You can find them there.",
+              "answer": "in",
+              "scoring_notes": "drawer是抽屉，钥匙在抽屉『里』面，故用in。"
+            }
+          }
+        },
+        {
+          "card_id": 8,
+          "full_id": "7A-U4-C2",
+          "title": "there be句型 (基础引入)",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "there be句型表示「某地有某物」，强调存在。",
+          "core_points": [
+            "基本结构：There is/are + 某物 + 某地。",
+            "主谓一致：be动词的形式由紧随其后的名词决定。There is + 单数名词/不可数名词；There are + 复数名词。",
+            "疑问句：Is/Are there + 某物 + 某地？",
+            "否定句：There isn't/aren't + 某物 + 某地。"
+          ],
+          "example": {
+            "question": "「选择正确答案：___ (There is/There are) a book on the desk. ___ (There is/There are) some pens in the pencil box.」",
+            "steps": [
+              "第一个空后是a book (单数名词)，所以用There is。",
+              "第二个空后是some pens (复数名词)，所以用There are。"
+            ],
+            "answer": "There is; There are"
+          },
+          "mistakes": [
+            {"wrong": "There are a bird in the tree.", "correct": "There is a bird in the tree."},
+            {"wrong": "Is there some apples on the table?", "correct": "Are there any apples on the table?"}
+          ],
+          "memory_tip": "「there be有，主谓一致看后头。」",
+          "related": {
+            "prerequisite": "be动词, 名词单复数",
+            "next": "some/any用法"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["单选", "语法填空", "完形填空", "短文改错"],
+            "scoring_key": "「紧跟其后的名词决定be动词的单复数形式。」",
+            "common_trap": "「混淆there be和have/has的用法；在疑问句或否定句中some和any的误用。」",
+            "real_exam_example": {
+              "source": "2023年某市中考真题（语法填空）",
+              "question": "There ___ many students in the classroom.",
+              "answer": "are",
+              "scoring_notes": "many students是复数名词，所以be动词用are。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U5",
+      "unit_name": "你有一个足球吗？ (Do you have a soccer ball?)",
+      "cards": [
+        {
+          "card_id": 9,
+          "full_id": "7A-U5-C1",
+          "title": "have/has 的用法",
+          "type": "知识总结卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "have/has表示「拥有」，其形式随主语人称和数变化。",
+          "core_points": [
+            "主谓一致：I/you/we/they/复数名词用have；he/she/it/单数名词用has。",
+            "肯定句：主语 + have/has + 宾语。",
+            "否定句：主语 + don't/doesn't + have + 宾语。",
+            "疑问句：Do/Does + 主语 + have + 宾语？肯定回答：Yes, 主语 + do/does. 否定回答：No, 主语 + don't/doesn't."
+          ],
+          "example": {
+            "question": "「完成句子：I ___ a new bike. She ___ a pet dog. ___ he ___ a sister?」",
+            "steps": [
+              "I是第一人称，用have。",
+              "She是第三人称单数，用has。",
+              "He是第三人称单数，疑问句用Does开头，动词用have原形。"
+            ],
+            "answer": "have; has; Does; have"
+          },
+          "mistakes": [
+            {"wrong": "He don't have a car.", "correct": "He doesn't have a car."},
+            {"wrong": "Do she has a pencil?", "correct": "Does she have a pencil?"}
+          ],
+          "memory_tip": "「我你我们他们have，他她它和单数has。否定疑问助动词，have变回原形时。」",
+          "related": {
+            "prerequisite": "人称代词, be动词",
+            "next": "一般现在时"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["单选", "语法填空", "完形填空", "短文改错"],
+            "scoring_key": "「区分have/has的主谓一致；否定和疑问句中have还原为原形。」",
+            "common_trap": "「在否定句和疑问句中，误将have变has或不还原。」",
+            "real_exam_example": {
+              "source": "2021年某市中考真题（单选）",
+              "question": "My brother ___ a lot of comic books.",
+              "answer": "has",
+              "scoring_notes": "My brother是单数第三人称，所以用has。"
+            }
+          }
+        },
+        {
+          "card_id": 10,
+          "full_id": "7A-U5-C2",
+          "title": "一般现在时 (肯定句与否定句)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "一般现在时表示经常性、习惯性的动作或状态，以及客观事实、真理。",
+          "core_points": [
+            "基本结构：主语 + 动词原形 (或动词第三人称单数形式) + 其他。",
+            "动词第三人称单数：主语是第三人称单数时，动词加-s或-es。规则同名词复数。",
+            "否定句：主语 + don't/doesn't + 动词原形 + 其他。 (don't = do not; doesn't = does not)。",
+            "时间状语：often, usually, always, sometimes, every day/week/year等。"
+          ],
+          "example": {
+            "question": "「用动词的正确形式填空：He often ___ (go) to school by bus. My parents ___ (not like) fast food.」",
+            "steps": [
+              "He是第三人称单数，go以o结尾，加-es。",
+              "My parents是复数名词，否定用don't，动词用原形。"
+            ],
+            "answer": "goes; don't like"
+          },
+          "mistakes": [
+            {"wrong": "He like apples.", "correct": "He likes apples."},
+            {"wrong": "They doesn't watch TV.", "correct": "They don't watch TV."}
+          ],
+          "memory_tip": "「主三单动加s/es，否定疑问do/does help，动词变回原形记。」",
+          "related": {
+            "prerequisite": "be动词, have/has",
+            "next": "一般现在时疑问句"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "语法填空", "完形填空", "短文改错", "书面表达"],
+            "scoring_key": "「识别时间状语，判断时态；主谓一致和动词第三人称单数变化。」",
+            "common_trap": "「忘记动词第三人称单数加s/es；否定句中助动词与动词原形搭配错误。」",
+            "real_exam_example": {
+              "source": "2023年某市中考真题（语法填空）",
+              "question": "My father often ___ (read) newspapers in the morning.",
+              "answer": "reads",
+              "scoring_notes": "My father是第三人称单数，often表示经常性动作，故用一般现在时，动词read加s。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U6",
+      "unit_name": "你喜欢香蕉吗？ (Do you like bananas?)",
+      "cards": [
+        {
+          "card_id": 11,
+          "full_id": "7A-U6-C1",
+          "title": "一般现在时 (疑问句与简略回答)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "一般现在时疑问句用于询问经常性、习惯性的动作或状态，以Do/Does开头。",
+          "core_points": [
+            "一般疑问句：Do/Does + 主语 + 动词原形 + 其他？",
+            "肯定回答：Yes, 主语 + do/does.",
+            "否定回答：No, 主语 + don't/doesn't.",
+            "特殊疑问句：疑问词 + do/does + 主语 + 动词原形 + 其他？"
+          ],
+          "example": {
+            "question": "「完成对话：A: ___ you ___ (like) apples? B: Yes, I ___. A: ___ she ___ (eat) breakfast every day? B: No, she ___.」",
+            "steps": [
+              "第一个空主语是you，用Do，动词原形like。",
+              "回答Yes, I do。",
+              "第三个空主语是she，用Does，动词原形eat。",
+              "回答No, she doesn't。"
+            ],
+            "answer": "Do; like; do; Does; eat; doesn't"
+          },
+          "mistakes": [
+            {"wrong": "Does you like it?", "correct": "Do you like it?"},
+            {"wrong": "Yes, I like.", "correct": "Yes, I do."}
+          ],
+          "memory_tip": "「Do/Does开头问，动词原形紧跟身。简答只用do/does，否认加个not就完成。」",
+          "related": {
+            "prerequisite": "一般现在时肯定句与否定句",
+            "next": "情态动词can/must"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "完形填空", "补全对话", "书面表达"],
+            "scoring_key": "「助动词Do/Does与主语人称一致；动词回归原形；简略回答的正确形式。」",
+            "common_trap": "「简略回答中忘记助动词或动词原形不还原；Do/Does与主语不一致。」",
+            "real_exam_example": {
+              "source": "2023年某市中考真题（补全对话）",
+              "question": "A: ___ your brother often play computer games?\nB: No, he doesn't. He likes reading.",
+              "answer": "Does",
+              "scoring_notes": "主语your brother是第三人称单数，所以用Does。B的回答也证实了这一点。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "card_id": 12,
+          "full_id": "7A-U6-C2",
+          "title": "可数名词与不可数名词的量词 (some/any/a/an)",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "量词用于修饰名词，表示数量，需区分可数名词和不可数名词。",
+          "core_points": [
+            "a/an：用于修饰单数可数名词，a用于辅音音素开头，an用于元音音素开头。",
+            "some：用于肯定句，修饰可数名词复数或不可数名词，表示「一些」。",
+            "any：用于疑问句和否定句，修饰可数名词复数或不可数名词，表示「一些/任何」。",
+            "特殊情况：在表示请求或建议的疑问句中，用some。"
+          ],
+          "example": {
+            "question": "「选择正确答案：I have ___ (a/an) orange. Do you have ___ (some/any) milk? There isn't ___ (some/any) water in the bottle.」",
+            "steps": [
+              "orange以元音音素开头，用an。",
+              "疑问句，milk是不可数名词，用any。",
+              "否定句，water是不可数名词，用any。"
+            ],
+            "answer": "an; any; any"
+          },
+          "mistakes": [
+            {"wrong": "I have some apple.", "correct": "I have some apples."},
+            {"wrong": "There is any bread here.", "correct": "There is some bread here."},
+            {"wrong": "Can I have any juice?", "correct": "Can I have some juice?"}
+          ],
+          "memory_tip": "「a/an单可数，some肯定都接受。any否疑才露头，请求建议some不走。」",
+          "related": {
+            "prerequisite": "名词单复数",
+            "next": "many/much/a lot of"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["单选", "完形填空", "语法填空"],
+            "scoring_key": "「区分some和any的用法，特别是肯定/否定/疑问句中的应用。」",
+            "common_trap": "「在疑问句中，如果表示请求或建议，仍用some，而非any。」",
+            "real_exam_example": {
+              "source": "2022年某市中考真题（单选）",
+              "question": "Would you like ___ (some/any) tea?",
+              "answer": "some",
+              "scoring_notes": "这是表示请求的疑问句，所以用some。"
+            }
+          }
+        },
+        {
+          "card_id": 13,
+          "full_id": "7A-U6-C3",
+          "title": "动词的第三人称单数变化规则",
+          "type": "知识总结卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "当主语是第三人称单数时，一般现在时的动词要变成第三人称单数形式。",
+          "core_points": [
+            "一般动词：词尾加-s (plays, works, reads)。",
+            "以s, x, sh, ch结尾：词尾加-es (watches, washes, fixes)。",
+            "以辅音字母+y结尾：变y为i再加-es (studies, carries)。",
+            "特殊情况：have → has; go → goes; do → does。",
+            "注意：只在肯定句中动词才变化，否定句和疑问句中动词用原形。"
+          ],
+          "example": {
+            "question": "「用动词的正确形式填空：She often ___ (watch) TV. My brother ___ (study) English every night. He ___ (have) a new computer.」",
+            "steps": [
+              "watch以ch结尾，加-es。",
+              "study以辅音y结尾，变y为i加-es。",
+              "have是特殊变化，变为has。"
+            ],
+            "answer": "watches; studies; has"
+          },
+          "mistakes": [
+            {"wrong": "He go to school.", "correct": "He goes to school."},
+            {"wrong": "She crys loudly.", "correct": "She cries loudly."}
+          ],
+          "memory_tip": "「三单动词变变变，s, es规则要记全。辅y变i再加es，have, go, do是特例。」",
+          "related": {
+            "prerequisite": "名词单复数, 一般现在时",
+            "next": "一般过去时"
+          },
+          "exam_focus": {
+            "frequency": "★★★★★",
+            "question_types": ["单选", "语法填空", "完形填空", "短文改错", "书面表达"],
+            "scoring_key": "「准确判断主语是否为第三人称单数；熟记各种变化规则，尤其是特殊变化。」",
+            "common_trap": "「忘记动词第三人称单数变化；混淆动词和名词的复数变化规则。」",
+            "real_exam_example": {
+              "source": "2023年某市中考真题（语法填空）",
+              "question": "My sister usually ___ (do) her homework after dinner.",
+              "answer": "does",
+              "scoring_notes": "My sister是第三人称单数，usually表示经常性动作，动词do的第三人称单数形式是does。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "U_Review",
+      "unit_name": "综合复习",
+      "cards": [
+        {
+          "card_id": 14,
+          "full_id": "7A-RV-C1",
+          "title": "七年级上册核心词汇分类总结",
+          "type": "知识总结卡",
+          "difficulty": 1,
+          "importance": 4,
+          "definition": "掌握七年级上册涉及的日常基础词汇，包括自我介绍、家庭、学校、数字、颜色、食物等。",
+          "core_points": [
+            "自我介绍：name, first name, last name, phone number, old, student, friend。",
+            "家庭成员：father, mother, parents, brother, sister, grandfather, grandmother, family。",
+            "学校生活：school, class, teacher, student, book, pencil, pen, backpack, ruler, eraser, map, dictionary, computer。",
+            "数字与颜色：one to ten, twenty, red, yellow, blue, green, white, black, brown, orange。",
+            "食物：apple, banana, hamburger, tomato, orange, milk, water, bread, egg, pear, salad, ice cream。",
+            "方位介词：in, on, under。"
+          ],
+          "example": {
+            "question": "「根据图片和首字母提示完成单词：这是一个红色的苹果。It's a r___ a___.」",
+            "steps": [
+              "图片是苹果，颜色是红色。",
+              "红色单词是red，苹果单词是apple。"
+            ],
+            "answer": "red apple"
+          },
+          "mistakes": [
+            {"wrong": "I like eat apple.", "correct": "I like to eat apples."},
+            {"wrong": "My favorite color is green and blue.", "correct": "My favorite colors are green and blue."}
+          ],
+          "memory_tip": "「分类记忆效率高，单词卡片随身带，高频词汇多听读。」",
+          "related": {
+            "prerequisite": "发音规则",
+            "next": "七年级下册词汇"
+          },
+          "exam_focus": {
+            "frequency": "★★★★",
+            "question_types": ["听力理解", "完形填空", "阅读理解", "首字母填空", "书面表达"],
+            "scoring_key": "「词汇量是基础，拼写、词义、词性、搭配都要准确。」",
+            "common_trap": "「单词拼写错误；词义理解偏差导致上下文逻辑不通。」",
+            "real_exam_example": {
+              "source": "2022年某市中考真题（首字母填空）",
+              "question": "My favorite f___ is bananas.",
+              "answer": "food",
+              "scoring_notes": "根据上下文，banana是食物，所以填food。"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
