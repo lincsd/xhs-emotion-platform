@@ -132,7 +132,7 @@ EXAM_NOTE_PROMPT_TEMPLATE = """你是一位小红书教育垂类TOP博主，专�
 
 ⚠️ 严格字数限制：
 - 标题 ≤ 20字（含emoji）
-- 正文 ≤ 1000字
+- 正文 ≤ 800字
 - 候选标题每条 ≤ 20字
 
 请输出JSON格式（不要markdown代码块），包含：
@@ -156,7 +156,7 @@ EXAM_NOTE_PROMPT_TEMPLATE = """你是一位小红书教育垂类TOP博主，专�
     {{"title": "候选2", "score": 9}},
     {{"title": "候选3", "score": 7}}
   ],
-  "body": "正文（≤1000字）",
+  "body": "正文（≤800字）",
   "pinned_comment": "置顶评论",
   "interaction_hooks": {{
     "comment_guide": "评论引导",

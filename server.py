@@ -3145,7 +3145,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
 ⚠️ 严格字数限制（必须遵守）：
 - 标题 ≤ 20字（含emoji，超过20字视为不合格）
-- 正文 ≤ 1000字（含emoji和标点，超过1000字视为不合格）
+- 正文 ≤ 800字（含emoji和标点，超过800字视为不合格）
 - 候选标题每条 ≤ 20字
 
 请输出JSON格式（不要markdown代码块），包含以下字段：
@@ -3169,7 +3169,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     {{"title": "候选标题2", "score": 7}},
     {{"title": "候选标题3", "score": 9}}
   ],
-  "body": "正文内容（≤1000字，包含emoji、分段、金句、互动引导）",
+  "body": "正文内容（≤800字，包含emoji、分段、金句、互动引导）",
   "pinned_comment": "置顶评论内容",
   "interaction_hooks": {{
     "comment_guide": "评论引导语",
