@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260326d'  # 三维内容智能: 内容设计引擎+教学审核+视觉蓝图
+BUILD_VERSION = '20260326e'  # 考点笔记总结: 344张卡全部含exam_focus
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
