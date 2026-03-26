@@ -9224,20 +9224,24 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         // Manifest-driven: look up actual filenames
         if (manifestData?.stages?.[currentStageKey]) {
           const entries = manifestData.stages[currentStageKey];
-          const std = entries.find(e => e.subject === currentSubject && e.grade_short === gradeShort && !e.is_boom && !e.is_exam && !e.is_summary);
+          const isSummaryOnly = STAGE_CONFIG[currentStageKey]?.summaryOnly === true;
+          // For summaryOnly stages (初中/高中), treat summary files as standard files
+          const std = isSummaryOnly
+            ? entries.find(e => e.subject === currentSubject && e.grade_short === gradeShort && e.is_summary)
+            : entries.find(e => e.subject === currentSubject && e.grade_short === gradeShort && !e.is_boom && !e.is_exam && !e.is_summary);
           // Boom: try same subject+grade first, then same subject, then any boom in the stage
           const boom = entries.find(e => e.subject === currentSubject && e.grade_short === gradeShort && e.is_boom)
                     || entries.find(e => e.subject === currentSubject && e.is_boom)
                     || entries.find(e => e.is_boom);
           // Exam packs: all exam entries for this subject+grade
           const exams = entries.filter(e => e.subject === currentSubject && e.grade_short === gradeShort && e.is_exam);
-          // Summary packs: 知识总结
-          const summaries = entries.filter(e => e.subject === currentSubject && e.grade_short === gradeShort && e.is_summary);
+          // Summary packs: 知识总结 (skip for summaryOnly stages since summary is already the std)
+          const summaries = isSummaryOnly ? [] : entries.filter(e => e.subject === currentSubject && e.grade_short === gradeShort && e.is_summary);
           if (std) stdFile = base + std.file;
           if (boom) boomFile = base + boom.file;
           examFiles = exams.map(e => base + e.file);
           summaryFiles = summaries.map(e => base + e.file);
-          console.log('[KC] manifest lookup: std=', std?.file, 'boom=', boom?.file, 'exam=', exams.map(e=>e.file), 'summary=', summaries.map(e=>e.file));
+          console.log('[KC] manifest lookup: std=', std?.file, 'boom=', boom?.file, 'exam=', exams.map(e=>e.file), 'summary=', summaries.map(e=>e.file), 'summaryOnly=', isSummaryOnly);
         } else {
           console.warn('[KC] loadGrade: no manifest data for stage', currentStageKey);
         }
