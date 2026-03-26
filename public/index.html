@@ -9345,16 +9345,16 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         if (!stageBar) {
           stageBar = document.createElement('div');
           stageBar.className = 'kc-stage-bar';
-          stageBar.style.cssText = 'display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:12px;border-bottom:2px solid #667eea22';
+          stageBar.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;padding-bottom:12px;border-bottom:2px solid #667eea22';
           filterBar.prepend(stageBar);
         }
         const btns = Object.entries(STAGE_CONFIG).map(([key, cfg]) => {
           const active = key === currentStageKey;
           return `<button onclick="KnowledgeCards.switchStage('${key}')"
             class="kc-stage-btn" data-stage="${key}"
-            style="padding:8px 22px;border-radius:22px;border:2px solid ${active?'#667eea':'#e0e0e0'};
+            style="padding:6px 16px;border-radius:22px;border:2px solid ${active?'#667eea':'#e0e0e0'};
             background:${active?'linear-gradient(135deg,#667eea,#764ba2)':'#fff'};
-            color:${active?'#fff':'#555'};cursor:pointer;font-size:14px;font-weight:${active?'700':'500'};
+            color:${active?'#fff':'#555'};cursor:pointer;font-size:13px;font-weight:${active?'700':'500'};
             transition:all .2s;white-space:nowrap">${cfg.icon} ${cfg.label}</button>`;
         }).join('');
         stageBar.innerHTML = `<span style="font-weight:700;font-size:14px;color:#333;margin-right:4px">🔀 赛道：</span>${btns}`;
