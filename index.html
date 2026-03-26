@@ -9125,14 +9125,21 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
 
       function getGradesForSubject() {
         const cfg = STAGE_CONFIG[currentStageKey];
-        if (cfg?.fixedGrades) return cfg.fixedGrades;
         if (manifestData?.stages?.[currentStageKey]) {
-          const grades = manifestData.stages[currentStageKey]
+          const manifestGrades = manifestData.stages[currentStageKey]
             .filter(e => e.subject === currentSubject && !e.is_boom && !e.is_exam && !e.is_summary)
             .map(e => e.grade_short);
-          console.log('[KC] getGradesForSubject:', currentStageKey, currentSubject, '→', grades);
-          return grades;
+          if (cfg?.fixedGrades) {
+            // 保留固定顺序，同时追加 manifest 中新增的年级/专题（如 状语从句）
+            const extras = manifestGrades.filter(g => !cfg.fixedGrades.includes(g));
+            const merged = [...cfg.fixedGrades.filter(g => manifestGrades.includes(g)), ...extras];
+            console.log('[KC] getGradesForSubject (merged):', currentStageKey, currentSubject, '→', merged);
+            return merged;
+          }
+          console.log('[KC] getGradesForSubject:', currentStageKey, currentSubject, '→', manifestGrades);
+          return manifestGrades;
         }
+        if (cfg?.fixedGrades) return cfg.fixedGrades;
         console.warn('[KC] getGradesForSubject: no manifest data for stage', currentStageKey, 'manifestData=', !!manifestData);
         return [];
       }

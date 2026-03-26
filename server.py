@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260326a'  # 自我优化系统: Prompt记忆库+错字词典+自适应参数
+BUILD_VERSION = '20260326b'  # 前端年级选择器: 支持manifest动态年级合并(语法辨析卡等)
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
