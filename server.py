@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260326c'  # 内容质量三级系统: 内容审核+沉淀+自适应评分
+BUILD_VERSION = '20260326d'  # 三维内容智能: 内容设计引擎+教学审核+视觉蓝图
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -1741,6 +1741,12 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._get_quality_trends(query)
         elif path == '/api/quality-rubrics':
             return self._get_quality_rubrics(query)
+        elif path == '/api/pedagogical-dashboard':
+            return self._get_pedagogical_dashboard()
+        elif path == '/api/design-analyze':
+            return self._get_design_analyze(query)
+        elif path == '/api/feedback-tags':
+            return self._get_feedback_tags()
         elif path == '/api/captcha':
             return self._get_captcha()
         # --- 需要登录的路由 ---
@@ -1855,6 +1861,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             return self._generate_card_image_v3(body)
         elif path == '/api/generate-card-image-v3-async':
             return self._generate_card_image_v3_async(body)
+        elif path == '/api/user-feedback':
+            return self._submit_user_feedback(body)
         else:
             self._send_json({'error': 'Not found'}, 404)
 
@@ -3435,7 +3443,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             from generate_card_images_v3 import (
                 generate_image_prompt, generate_card_image,
                 ocr_audit, _build_audit_hint, _try_pil_text_repair,
-                quality_score, AUDIT_PASS_SCORE, MAX_AUDIT_ROUNDS
+                quality_score, AUDIT_PASS_SCORE, MAX_AUDIT_ROUNDS,
+                _typed_quality_score,
             )
         except ImportError as e:
             return self._send_json({'error': f'v3模块导入失败: {e}'}, 500)
@@ -3448,12 +3457,64 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         pipeline_log = []
 
         try:
+            # ── Step 0: 内容预审 + 教学设计 + 教学效果评估 ──
+            content_audit_result = None
+            design_report = None
+            pedagogy_report = None
+
+            # Step 0a: 内容质量预审
+            if not skip_audit:
+                try:
+                    from content_quality import full_quality_check
+                    pipeline_log.append('Step0a: 内容质量预审...')
+                    qc = full_quality_check(card, card_type, subject, grade, keys[0], all_keys=keys)
+                    content_audit_result = qc
+                    v = qc.get('verdict', 'error')
+                    s = qc.get('total_score', 0)
+                    pipeline_log.append(f'Step0a: {v}({s}分)')
+                    if not qc.get('should_proceed', True):
+                        return self._send_json({'ok': False, 'error': f'内容审核不通过({v})', 'audit_score': s, 'pipeline': pipeline_log}, 400)
+                except ImportError:
+                    pass
+                except Exception as e:
+                    pipeline_log.append(f'Step0a 跳过: {str(e)[:50]}')
+
+            # Step 0b: 内容设计分析
+            try:
+                from content_design_engine import design_card_content
+                design_report = design_card_content(card, card_type, subject, grade)
+                cog_load = design_report.get('cognitive_load', {}).get('total_load', 0)
+                strategy = design_report.get('teaching_strategy', {}).get('strategy', '')
+                pipeline_log.append(f'Step0b: 设计分析 认知负荷={cog_load:.0f} 策略={strategy}')
+            except ImportError:
+                pass
+            except Exception as e:
+                pipeline_log.append(f'Step0b 跳过: {str(e)[:50]}')
+
+            # Step 0c: 教学效果评估
+            try:
+                from pedagogical_audit import full_pedagogical_audit
+                pedagogy_report = full_pedagogical_audit(card, card_type, subject, grade)
+                ped_score = pedagogy_report.get('pedagogical_score', 0)
+                ped_verdict = pedagogy_report.get('verdict', '')
+                pipeline_log.append(f'Step0c: 教学效果={ped_score:.0f}分({ped_verdict})')
+            except ImportError:
+                pass
+            except Exception as e:
+                pipeline_log.append(f'Step0c 跳过: {str(e)[:50]}')
+
             # ── Step 1: 生成提示词 ──
             pipeline_log.append('Step1: 生成Prompt...')
             print(f'[v3] {card["full_id"]} Step1: 生成Prompt...', flush=True)
             prompt, manifest = generate_image_prompt(card, subject, grade, semester, keys[0], all_keys=keys)
             if not prompt:
                 return self._send_json({'error': 'Step1失败: 无法生成图片提示词', 'pipeline': pipeline_log}, 500)
+
+            # 如果内容预审有改进建议，注入到 prompt
+            if content_audit_result:
+                hint = content_audit_result.get('refinement_hint', '')
+                if hint:
+                    prompt = hint + '\n' + prompt
             
             manifest_count = len(manifest) if manifest else 0
             total_chars = sum(len(v) for v in manifest.values()) if manifest else 0
@@ -3546,15 +3607,19 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     final_action = 'best_effort'
                     pipeline_log.append('无需PIL修补')
 
-            # ── 质量评分 ──
+            # ── 质量评分 (使用类型化评分) ──
             quality = {'total': 0, 'comment': ''}
             try:
-                pipeline_log.append('Step5b: 质量评分...')
-                print(f'[v3] Step5b: 质量评分...', flush=True)
-                quality = quality_score(best_image, keys[0], card_title=title, all_keys=keys)
+                pipeline_log.append('Step5b: 类型化质量评分...')
+                print(f'[v3] Step5b: 类型化质量评分...', flush=True)
+                quality = _typed_quality_score(best_image, keys[0], card_type, card_title=title, all_keys=keys)
                 pipeline_log.append(f'质量评分: {quality.get("total", 0)}/100 ({quality.get("comment", "")})')
             except Exception:
-                pipeline_log.append('质量评分跳过')
+                try:
+                    quality = quality_score(best_image, keys[0], card_title=title, all_keys=keys)
+                    pipeline_log.append(f'通用质量评分: {quality.get("total", 0)}/100')
+                except Exception:
+                    pipeline_log.append('质量评分跳过')
 
             # 返回结果
             img_b64 = base64.b64encode(best_image).decode('utf-8')
@@ -3603,7 +3668,20 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 'finalAction': final_action,
                 'manifest': manifest,
                 'pipeline': pipeline_log,
-                'card_id': card['full_id']
+                'card_id': card['full_id'],
+                'contentDesign': {
+                    'cognitiveLoad': design_report.get('cognitive_load', {}).get('total_load', 0) if design_report else 0,
+                    'teachingStrategy': design_report.get('teaching_strategy', {}).get('strategy', '') if design_report else '',
+                    'designScore': design_report.get('design_score', 0) if design_report else 0,
+                    'warnings': design_report.get('warnings', [])[:3] if design_report else [],
+                } if design_report else None,
+                'pedagogical': {
+                    'score': pedagogy_report.get('pedagogical_score', 0) if pedagogy_report else 0,
+                    'verdict': pedagogy_report.get('verdict', '') if pedagogy_report else '',
+                    'understandability': pedagogy_report.get('understandability', {}).get('total', 0) if pedagogy_report else 0,
+                    'mnemonic': pedagogy_report.get('mnemonic', {}).get('total', 0) if pedagogy_report else 0,
+                    'engagement': pedagogy_report.get('engagement', {}).get('total', 0) if pedagogy_report else 0,
+                } if pedagogy_report else None,
             })
 
         except Exception as e:
@@ -4021,6 +4099,84 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 return self._send_json({'ok': True, 'all_types': list(QUALITY_RUBRICS.keys())})
         except ImportError:
             return self._send_json({'ok': False, 'error': '内容质量模块未安装'}, 500)
+        except Exception as e:
+            return self._send_json({'ok': False, 'error': str(e)}, 500)
+
+    def _get_pedagogical_dashboard(self):
+        """返回教学效果审核仪表盘"""
+        try:
+            from pedagogical_audit import get_pedagogical_dashboard
+            dashboard = get_pedagogical_dashboard()
+            return self._send_json(dashboard)
+        except ImportError:
+            return self._send_json({'ok': False, 'error': '教学审核模块未安装'}, 500)
+        except Exception as e:
+            return self._send_json({'ok': False, 'error': str(e)}, 500)
+
+    def _get_design_analyze(self, query):
+        """返回内容设计分析(教学策略库/认知负荷模型)"""
+        try:
+            from content_design_engine import TEACHING_MODES, CARD_TYPE_STRATEGY_MAP
+            card_type = query.get('card_type', [''])[0]
+            if card_type and card_type in CARD_TYPE_STRATEGY_MAP:
+                strategy_info = CARD_TYPE_STRATEGY_MAP[card_type]
+                primary_mode = TEACHING_MODES.get(strategy_info.get('primary', ''))
+                return self._send_json({
+                    'ok': True,
+                    'card_type': card_type,
+                    'strategy': strategy_info,
+                    'primary_mode': {
+                        'name': strategy_info.get('primary', ''),
+                        'description': primary_mode.get('description', '') if primary_mode else '',
+                        'visual_pattern': primary_mode.get('visual_pattern', '') if primary_mode else '',
+                    }
+                })
+            else:
+                return self._send_json({
+                    'ok': True,
+                    'all_types': list(CARD_TYPE_STRATEGY_MAP.keys()),
+                    'all_modes': list(TEACHING_MODES.keys()),
+                })
+        except ImportError:
+            return self._send_json({'ok': False, 'error': '内容设计模块未安装'}, 500)
+        except Exception as e:
+            return self._send_json({'ok': False, 'error': str(e)}, 500)
+
+    def _get_feedback_tags(self):
+        """返回预定义的用户反馈标签"""
+        try:
+            from pedagogical_audit import FEEDBACK_TAGS
+            return self._send_json({'ok': True, 'tags': FEEDBACK_TAGS})
+        except ImportError:
+            return self._send_json({'ok': True, 'tags': {
+                'positive': ['讲得清楚', '很有用', '已收藏'],
+                'negative': ['看不懂', '太难了', '内容有误'],
+                'suggestion': ['希望更简洁']
+            }})
+
+    def _submit_user_feedback(self, body):
+        """接收用户对卡片的反馈评分"""
+        card_id = body.get('card_id', '')
+        rating = body.get('rating', 0)
+        feedback_type = body.get('type', 'general')
+        feedback_text = body.get('text', '')
+        tags = body.get('tags', [])
+
+        if not card_id or not rating:
+            return self._send_json({'error': '缺少card_id或rating'}, 400)
+
+        try:
+            from pedagogical_audit import record_user_feedback
+            result = record_user_feedback(
+                card_id=card_id,
+                rating=int(rating),
+                feedback_type=feedback_type,
+                feedback_text=feedback_text,
+                tags=tags
+            )
+            return self._send_json(result)
+        except ImportError:
+            return self._send_json({'ok': False, 'error': '教学审核模块未安装'}, 500)
         except Exception as e:
             return self._send_json({'ok': False, 'error': str(e)}, 500)
 

@@ -51,6 +51,43 @@ except ImportError:
     _HAS_QUALITY = False
     print('[v3] 内容质量系统未加载 (content_quality.py 不存在)')
 
+# 内容设计引擎
+try:
+    from content_design_engine import (
+        design_card_content, match_teaching_strategy,
+        compute_cognitive_load, suggest_content_split,
+        analyze_information_density,
+    )
+    _HAS_DESIGN = True
+    print('[v3] 内容设计引擎已加载')
+except ImportError:
+    _HAS_DESIGN = False
+    print('[v3] 内容设计引擎未加载 (content_design_engine.py 不存在)')
+
+# 教学效果审核
+try:
+    from pedagogical_audit import (
+        full_pedagogical_audit, score_understandability,
+        score_mnemonic_effectiveness, predict_engagement,
+    )
+    _HAS_PEDAGOGY = True
+    print('[v3] 教学效果审核已加载')
+except ImportError:
+    _HAS_PEDAGOGY = False
+    print('[v3] 教学效果审核未加载 (pedagogical_audit.py 不存在)')
+
+# 知识呈现蓝图
+try:
+    from visual_blueprint import (
+        generate_visual_blueprint, compress_for_manifest,
+        match_memory_strategy, analyze_info_layers,
+    )
+    _HAS_BLUEPRINT = True
+    print('[v3] 知识呈现蓝图已加载')
+except ImportError:
+    _HAS_BLUEPRINT = False
+    print('[v3] 知识呈现蓝图未加载 (visual_blueprint.py 不存在)')
+
 # ═══════════════════════════════════════════
 # 配置
 # ═══════════════════════════════════════════
@@ -556,11 +593,46 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
         except Exception as e:
             print(f'      [quality] style guide hint error: {e}')
 
+    # ── 内容设计引擎: 教学策略 + 认知负荷 ──
+    design_hint = ''
+    if _HAS_DESIGN:
+        try:
+            design = design_card_content(card, card_type, subject, grade)
+            design_hint = design.get('design_prompt_injection', '')
+            if design.get('warnings'):
+                print(f'      [design] 警告: {design["warnings"][0][:60]}')
+        except Exception as e:
+            print(f'      [design] hint error: {e}')
+
+    # ── 知识呈现蓝图: 视觉布局 + 记忆策略 ──
+    blueprint_hint = ''
+    if _HAS_BLUEPRINT:
+        try:
+            bp = generate_visual_blueprint(card, card_type, subject, grade)
+            blueprint_hint = bp.get('blueprint_prompt', '')
+        except Exception as e:
+            print(f'      [blueprint] hint error: {e}')
+
+    # ── 教学效果: 注入教学改进提示 ──
+    pedagogy_hint = ''
+    if _HAS_PEDAGOGY:
+        try:
+            ped = full_pedagogical_audit(card, card_type, subject, grade)
+            pedagogy_hint = ped.get('prompt_injection', '')
+        except Exception as e:
+            print(f'      [pedagogy] hint error: {e}')
+
     full_input = f'{system_prompt}\n\n--- 知识点信息 ---\n{card_info}'
     if fewshot_block:
         full_input += f'\n\n{fewshot_block}'
     if quality_hint:
         full_input += f'\n{quality_hint}'
+    if design_hint:
+        full_input += f'\n{design_hint}'
+    if blueprint_hint:
+        full_input += f'\n{blueprint_hint}'
+    if pedagogy_hint:
+        full_input += f'\n{pedagogy_hint}'
 
     contents = [
         {'role': 'user', 'parts': [{'text': full_input}]}
