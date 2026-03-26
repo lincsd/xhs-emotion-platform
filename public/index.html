@@ -3839,7 +3839,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260326e'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260326f'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -9345,7 +9345,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         if (!stageBar) {
           stageBar = document.createElement('div');
           stageBar.className = 'kc-stage-bar';
-          stageBar.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;padding-bottom:12px;border-bottom:2px solid #667eea22';
+          stageBar.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;padding-bottom:12px;border-bottom:2px solid #667eea22;width:100%';
           filterBar.prepend(stageBar);
         }
         const btns = Object.entries(STAGE_CONFIG).map(([key, cfg]) => {
@@ -9415,7 +9415,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         if (!subjectBar) {
           subjectBar = document.createElement('div');
           subjectBar.className = 'kc-subject-bar';
-          subjectBar.style.cssText = 'display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #eee';
+          subjectBar.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #eee;width:100%';
           // 插入到赛道栏之后
           const stageBar = filterBar.querySelector('.kc-stage-bar');
           if (stageBar) stageBar.after(subjectBar); else filterBar.prepend(subjectBar);
