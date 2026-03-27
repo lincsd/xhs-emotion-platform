@@ -421,6 +421,42 @@ def _build_card_info(card, subject, grade, semester):
     return _build_card_info_edu(card, subject, grade, semester)
 
 
+def _filter_off_topic_steps(card):
+    """过滤掉与卡片主题无关的 steps，防止混杂知识点传给 Gemini"""
+    import re as _re
+    steps = (card.get('example') or {}).get('steps', [])
+    if len(steps) < 2:
+        return steps
+    topic_text = (card.get('title', '') + ' ' + card.get('definition', '')).lower()
+    topic_kw = set(_re.findall(r'[a-zA-Z]{3,}', topic_text))
+    if not topic_kw:
+        return steps  # 无英文关键词可比较，全部保留
+    filtered = []
+    for i, s in enumerate(steps):
+        kw = set(_re.findall(r'[a-zA-Z]{3,}', str(s).lower()))
+        if not kw:
+            filtered.append(s)
+            continue
+        # 与主题有交集 → 保留
+        if kw & topic_kw:
+            filtered.append(s)
+            continue
+        # 与相邻 step 有交集 → 保留
+        neighbor_ok = False
+        if i > 0:
+            prev_kw = set(_re.findall(r'[a-zA-Z]{3,}', str(steps[i-1]).lower()))
+            if kw & prev_kw:
+                neighbor_ok = True
+        if not neighbor_ok and i < len(steps) - 1:
+            next_kw = set(_re.findall(r'[a-zA-Z]{3,}', str(steps[i+1]).lower()))
+            if kw & next_kw:
+                neighbor_ok = True
+        if neighbor_ok:
+            filtered.append(s)
+        # else: 离题 step，丢弃
+    return filtered if filtered else steps[:1]  # 至少保留1个
+
+
 def _build_card_info_grammar(card, subject, grade, semester):
     """构建语法辨析类卡片信息（中英双语，引导词对比为核心）
     
@@ -439,8 +475,10 @@ def _build_card_info_grammar(card, subject, grade, semester):
     if card.get('example'):
         ex = card['example']
         example_info = (ex.get('question') or '')[:150]
-        if ex.get('steps'):
-            steps_text = '\n'.join(f'  {i+1}. {s}' for i, s in enumerate(ex['steps'][:3]))
+        # 过滤离题 steps，只传主题相关的给 Gemini
+        clean_steps = _filter_off_topic_steps(card)
+        if clean_steps:
+            steps_text = '\n'.join(f'  {i+1}. {s}' for i, s in enumerate(clean_steps[:3]))
             example_steps = f"\n【辨析步骤】:\n{steps_text[:300]}"
         if ex.get('answer'):
             example_steps += f"\n【判断结论】: {str(ex['answer'])[:100]}"
@@ -468,20 +506,27 @@ def _build_card_info_grammar(card, subject, grade, semester):
     if card.get('trap_point'):
         trap = f"\n陷阱考点: {card['trap_point'][:80]}"
 
+    # 从 definition 中提取本卡的唯一主题关键短语
+    topic_phrase = card.get('definition', '')[:60] or card.get('title', '')
+
     return f"""学科: {subject} | 专题: {grade} {semester}
 标题: {card.get('title', '')} | 类型: {card_type}
+🎯 本卡唯一主题: {topic_phrase}
 🔑 英语卡片核心：对比辨析 + 错因解释
 
 ⚠️⚠️⚠️ 极重要提醒：英语卡片质量铁律！
-🔒1. 单卡只讲一个知识点！标题必须精确(如“pay attention to搭配”)，禁止泛化标题如“高频词”“重点语法”
+🔒1. 单卡只讲一个知识点！标题必须精确(如"pay attention to搭配")，禁止泛化标题如"高频词""重点语法""搭配活用"
 🔒2. 知识点准确性第一！不能把正确用法标为❌！每个❌/✅必须反复检查
 🔒3. 必须有完整例句对比(不能只放孤立短语)：❌错句 vs ✅正句，例句必须是完整英语句子
 🔒4. 所有英文单词必须是真实存在的词！严禁编造不存在的词(如guestioneful)
-🔒5. 错因必须具体(如“to后接动词原形”)，禁止“词性错”“搭配错”等笼统说法
-🔒6. 口诀必须有记忆粘性，禁止“搭配固定”“多练就会”“记住就好”类废话！
+🔒5. 错因必须具体(如"to后接动词原形")，禁止"词性错""搭配错"等笼统说法
+🔒6. 口诀必须是完整有意义的短句(如"to后加原形")，禁止截断废话如"搭配固定要""搭配固定""多练就会""记住就好"！
 🔒7. 所有Steps必须围绕同一个知识点展开，步骤间逻辑连贯递进
 🔒8. 视觉隐喻必须匹配内容逻辑(不用阶梯图表示非递进关系)
-🔒9. 学生看完必须能答“为什么这样用”，不能只停留在“知道这样用”
+🔒9. 学生看完必须能答"为什么这样用"，不能只停留在"知道这样用"
+🔒10. 🚫严禁在图中添加任何与"{topic_phrase}"无关的语法公式、规则、知识点！（如本卡讲搭配，就不能出现Modal verb公式）
+🔒11. 图片底部/总结区域只能总结本卡主题的结论，禁止突然出现卡片数据中没有的新知识点！
+🔒12. 所有中文文字必须是完整的词/短句，禁止截断（如"搭配固"就是截断废字）
 
 图片上只能出现≤{_mc}个中文字！
 以下信息仅供理解知识点，图片上只需展示：

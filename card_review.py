@@ -183,6 +183,11 @@ VAGUE_TITLE_PATTERNS = [
     '核心知识', '重要知识', '关键考点', '必考考点', '常考题型',
     '高频考点', '重点知识', '基础语法', '基础词汇',
 ]
+# 泛化标题子串 — 英语卡标题如果纯中文≤4字且包含这些词，就是泛化
+VAGUE_TITLE_SUBSTRINGS = [
+    '活用', '辨析', '高频', '重点', '考点', '必背',
+    '常见', '基础', '核心', '关键', '常考',
+]
 
 # 常见重复词模式 (英文)
 REPEATED_WORD_PATTERN = re.compile(
@@ -444,28 +449,51 @@ def validate_hard_rules(card, subject=''):
 
     # ── 规则 10: 标题过于泛化 ──
     title = card.get('title', '')
+    title_flagged = False
     for vague in VAGUE_TITLE_PATTERNS:
         if title.strip() == vague:
             issues.append(f'标题 "{title}" 过于泛化，需要精确到具体知识点 (如 "succeed词族辨析")')
+            title_flagged = True
             break
+    # 英语卡额外检测: 纯中文≤4字 + 含泛化子串 → 大概率不够具体
+    if not title_flagged and is_eng:
+        has_eng_in_title = bool(re.search(r'[a-zA-Z]', title))
+        cn_chars_in_title = len(re.findall(r'[\u4e00-\u9fff]', title))
+        if not has_eng_in_title and cn_chars_in_title <= 4:
+            for sub in VAGUE_TITLE_SUBSTRINGS:
+                if sub in title:
+                    issues.append(f'标题 "{title}" 过于泛化 (英语卡标题应包含具体词/短语，如 "pay attention to搭配")')
+                    break
 
-    # ── 规则 11: Steps 连贯性 (英语卡) ──
+    # ── 规则 11: Steps 连贯性 + 离题检测 (英语卡) ──
     if is_eng:
         steps = card.get('example', {}).get('steps', [])
-        if len(steps) >= 4:  # 至少4步才检查连贯性
+        if len(steps) >= 2:
+            # 标题+定义的英文关键词 = 本卡核心主题
+            topic_text = (card.get('title', '') + ' ' + card.get('definition', '')).lower()
+            topic_kw = set(re.findall(r'[a-zA-Z]{3,}', topic_text))
             # 提取每个 step 的英文关键词
             step_keywords = []
             for s in steps:
                 kw = set(re.findall(r'[a-zA-Z]{3,}', str(s).lower()))
                 step_keywords.append(kw)
-            # 如果相邻 steps 完全没有共同关键词，可能主题不连贯
-            disconnected = 0
-            for i in range(len(step_keywords) - 1):
-                if step_keywords[i] and step_keywords[i+1]:
-                    if not step_keywords[i] & step_keywords[i+1]:
-                        disconnected += 1
-            if disconnected >= 3:  # 至少3对相邻步骤断连才报警
-                issues.append('Steps 之间缺乏连贯性，可能混杂了多个不相关主题')
+            # 检测: 某个 step 既与相邻 step 断连，又与标题/定义无关 → 离题
+            off_topic_steps = []
+            for i, kw in enumerate(step_keywords):
+                if not kw:
+                    continue
+                # 与标题主题有没有交集
+                has_topic_overlap = bool(kw & topic_kw)
+                # 与相邻步骤有没有交集
+                has_neighbor_overlap = False
+                if i > 0 and step_keywords[i-1]:
+                    has_neighbor_overlap = has_neighbor_overlap or bool(kw & step_keywords[i-1])
+                if i < len(step_keywords) - 1 and step_keywords[i+1]:
+                    has_neighbor_overlap = has_neighbor_overlap or bool(kw & step_keywords[i+1])
+                if not has_topic_overlap and not has_neighbor_overlap:
+                    off_topic_steps.append(i + 1)
+            if off_topic_steps:
+                issues.append(f'Step {off_topic_steps} 与本卡主题无关，可能混杂了不相关知识点')
 
     return {
         'pass': len(issues) == 0,
