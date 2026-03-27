@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260327d'  # v6.5b: anti-timeout — reduce call timeout, widen poll/task limits
+BUILD_VERSION = '20260327e'  # v7: content optimization — merged OCR+quality, schema validation, specialized layouts, auto-fix loop, eng OCR check, cognitive load
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -3666,6 +3666,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             audit_hint = ''
             used_model = ''
             rounds_used = 0
+            merged_quality = {}  # 从合并审计中提取的质量评分
 
             max_rounds = 1 if skip_audit else MAX_AUDIT_ROUNDS
             for round_num in range(1, max_rounds + 1):
@@ -3697,15 +3698,17 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     best_score = 100
                     break
 
-                # Step 3: OCR 审计
-                pipeline_log.append('Step3: OCR审计...')
-                print(f'[v3] Step3: OCR审计...', flush=True)
-                audit = ocr_audit(img_data, manifest, keys[0], all_keys=keys)
+                # Step 3: OCR 审计 + 质量评分（合并）
+                pipeline_log.append('Step3: OCR审计+质量评分...')
+                print(f'[v3] Step3: OCR审计+质量评分...', flush=True)
+                _eng_kp = card.get('_eng_key_phrase', '')
+                audit = ocr_audit(img_data, manifest, keys[0], all_keys=keys, eng_key_phrase=_eng_kp)
                 score = audit.get('overall_score', 0)
                 errors = audit.get('errors', [])
                 summary = audit.get('summary', '')
-                pipeline_log.append(f'Step3完成: 得分={score}/100 ({summary})')
-                print(f'[v3] Step3: 得分={score}/100 ({summary})', flush=True)
+                merged_quality = audit.get('quality', {})
+                pipeline_log.append(f'Step3完成: 审计={score}/100 质量={merged_quality.get("total", 0)}/100 ({summary})')
+                print(f'[v3] Step3: 审计={score}/100 质量={merged_quality.get("total", 0)}/100 ({summary})', flush=True)
 
                 if score > best_score:
                     best_image = img_data
@@ -3743,19 +3746,24 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     final_action = 'best_effort'
                     pipeline_log.append('无需PIL修补')
 
-            # ── 质量评分 (使用类型化评分) ──
+            # ── 质量评分 (优先从合并审计提取，省掉单独API调用) ──
             quality = {'total': 0, 'comment': ''}
-            try:
-                pipeline_log.append('Step5b: 类型化质量评分...')
-                print(f'[v3] Step5b: 类型化质量评分...', flush=True)
-                quality = _typed_quality_score(best_image, keys[0], card_type, card_title=title, all_keys=keys)
-                pipeline_log.append(f'质量评分: {quality.get("total", 0)}/100 ({quality.get("comment", "")})')
-            except Exception:
+            if merged_quality and merged_quality.get('total', 0) > 0:
+                quality = merged_quality
+                pipeline_log.append(f'质量评分(from merged): {quality.get("total", 0)}/100')
+                print(f'[v3] 质量评分(from merged): {quality.get("total", 0)}/100', flush=True)
+            else:
                 try:
-                    quality = quality_score(best_image, keys[0], card_title=title, all_keys=keys)
-                    pipeline_log.append(f'通用质量评分: {quality.get("total", 0)}/100')
+                    pipeline_log.append('Step5b: 类型化质量评分(fallback)...')
+                    print(f'[v3] Step5b: 类型化质量评分(fallback)...', flush=True)
+                    quality = _typed_quality_score(best_image, keys[0], card_type, card_title=title, all_keys=keys)
+                    pipeline_log.append(f'质量评分: {quality.get("total", 0)}/100 ({quality.get("comment", "")})')
                 except Exception:
-                    pipeline_log.append('质量评分跳过')
+                    try:
+                        quality = quality_score(best_image, keys[0], card_title=title, all_keys=keys)
+                        pipeline_log.append(f'通用质量评分: {quality.get("total", 0)}/100')
+                    except Exception:
+                        pipeline_log.append('质量评分跳过')
 
             # 返回结果
             img_b64 = base64.b64encode(best_image).decode('utf-8')
@@ -3961,6 +3969,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 audit_hint = ''
                 used_model = ''
                 rounds_used = 0
+                merged_quality = {}  # 从合并审计中提取
                 # 异步模式下限制审计轮数为1（减少总时间）
                 max_rounds = 1 if skip_audit else min(MAX_AUDIT_ROUNDS, 2)
 
@@ -4010,14 +4019,16 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                         pipeline_log.append(f'⏰ 超时, 跳过审计')
                         break
 
-                    # Step 3: OCR
-                    _update_progress(f'Step3: OCR审计 (round {round_num})... [{_elapsed():.0f}s]')
-                    pipeline_log.append('Step3: OCR审计...')
-                    audit = ocr_audit(img_data, manifest, keys[0], all_keys=keys)
+                    # Step 3: OCR + 质量评分（合并）
+                    _update_progress(f'Step3: OCR审计+质量 (round {round_num})... [{_elapsed():.0f}s]')
+                    pipeline_log.append('Step3: OCR审计+质量评分...')
+                    _eng_kp = card.get('_eng_key_phrase', '')
+                    audit = ocr_audit(img_data, manifest, keys[0], all_keys=keys, eng_key_phrase=_eng_kp)
                     score = audit.get('overall_score', 0)
                     errors = audit.get('errors', [])
                     summary = audit.get('summary', '')
-                    pipeline_log.append(f'Step3完成: 得分={score}/100 ({summary}) [{_elapsed():.0f}s]')
+                    merged_quality = audit.get('quality', {})
+                    pipeline_log.append(f'Step3完成: 审计={score}/100 质量={merged_quality.get("total", 0)}/100 ({summary}) [{_elapsed():.0f}s]')
 
                     if score > best_score:
                         best_image = img_data
@@ -4059,12 +4070,15 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     else:
                         final_action = 'best_effort'
 
-                # Quality score (如果已超过280s就跳过，留余量给返回)
+                # Quality score (优先使用合并审计结果，省掉单独API调用)
                 quality = {'total': 0, 'comment': ''}
-                if not _timed_out() and _elapsed() < 320:
+                if merged_quality and merged_quality.get('total', 0) > 0:
+                    quality = merged_quality
+                    pipeline_log.append(f'质量评分(from merged): {quality.get("total", 0)}/100')
+                elif not _timed_out() and _elapsed() < 320:
                     try:
-                        _update_progress(f'Step5b: 质量评分... [{_elapsed():.0f}s]')
-                        pipeline_log.append('Step5b: 质量评分...')
+                        _update_progress(f'Step5b: 质量评分(fallback)... [{_elapsed():.0f}s]')
+                        pipeline_log.append('Step5b: 质量评分(fallback)...')
                         quality = quality_score(best_image, keys[0], card_title=title, all_keys=keys)
                         pipeline_log.append(f'质量评分: {quality.get("total", 0)}/100')
                     except Exception:

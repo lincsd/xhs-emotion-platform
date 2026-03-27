@@ -441,6 +441,200 @@ _GRAMMAR_TERMS_PROTECTED = {
     '比较级', '最高级', '倒装句', '强调句', '感叹句', '祈使句',
 }
 
+
+# ═══════════════════════════════════════════
+#  Feature #5: 自动修复卡片数据 (审核reject → 修复 → 重审)
+# ═══════════════════════════════════════════
+
+_AUTO_FIX_PROMPT = """你是卡片数据修复助手。以下卡片数据在内容质量审核中被判定为 reject。
+请根据审核反馈修复卡片数据，返回修复后的完整卡片 JSON。
+
+== 原始卡片数据 ==
+{card_json}
+
+== 审核反馈 ==
+知识性错误: {knowledge_errors}
+缺失元素: {missing_elements}
+红线问题: {red_flags}
+改进建议: {improvements}
+审核总评: {summary}
+
+== 修复规则 ==
+1. 修复所有知识性错误（替换错误的知识内容）
+2. 补充所有缺失元素（missing）
+3. 解决所有红线问题（red_flags）
+4. 保持原始卡片结构不变（title/definition/core_points/mistakes/example/memory_tip/why_explanation）
+5. 对于英语卡: 确保 mistakes 中的 wrong/correct 都是完整英文句子(≥6词)
+6. 对于英语卡: 确保 core_points 有具体英文例句
+7. memory_tip 不能是废话（如"记住就好""多练就会"）
+
+== 输出格式 ==
+只输出修复后的纯 JSON 对象（不要代码块标记）。保留所有原始字段和新增字段。"""
+
+
+def _auto_fix_card_data(card, audit_result, api_key, all_keys=None):
+    """
+    根据内容审核的 reject 结果，调用 Gemini 自动修复卡片数据。
+    
+    返回: (fixed: bool, fixed_card: dict)
+    """
+    import urllib.request
+    
+    if not audit_result:
+        return False, card
+    
+    # 提取审核反馈
+    knowledge_errors = audit_result.get('knowledge_errors', [])
+    missing = audit_result.get('must_have_check', {}).get('missing', [])
+    red_flags = audit_result.get('red_flags', [])
+    improvements = audit_result.get('improvements', [])
+    summary = audit_result.get('summary', '')
+    
+    # 如果没有具体反馈，无法修复
+    if not knowledge_errors and not missing and not red_flags and not improvements:
+        return False, card
+    
+    # 构建修复请求
+    # 去掉内部字段
+    card_clean = {k: v for k, v in card.items() if not k.startswith('_')}
+    prompt = _AUTO_FIX_PROMPT.format(
+        card_json=json.dumps(card_clean, ensure_ascii=False, indent=2),
+        knowledge_errors='\n'.join(f'  - {e}' for e in knowledge_errors) if knowledge_errors else '无',
+        missing_elements='\n'.join(f'  - {m}' for m in missing) if missing else '无',
+        red_flags='\n'.join(f'  - {r}' for r in red_flags) if red_flags else '无',
+        improvements='\n'.join(f'  - {i}' for i in improvements[:5]) if improvements else '无',
+        summary=summary or '无',
+    )
+    
+    api_base = 'https://generativelanguage.googleapis.com/v1beta'
+    model = 'gemini-2.5-flash'
+    url = f'{api_base}/models/{model}:generateContent?key={api_key}'
+    
+    body = {
+        'contents': [{'role': 'user', 'parts': [{'text': prompt}]}],
+        'generationConfig': {
+            'maxOutputTokens': 8192,
+            'temperature': 0.1,
+            'thinkingConfig': {'thinkingBudget': 2048}
+        }
+    }
+    
+    try:
+        req = urllib.request.Request(
+            url,
+            data=json.dumps(body).encode('utf-8'),
+            headers={'Content-Type': 'application/json'},
+            method='POST'
+        )
+        resp = urllib.request.urlopen(req, timeout=60)
+        data = json.loads(resp.read())
+        
+        candidates = data.get('candidates', [])
+        if candidates:
+            parts = candidates[0].get('content', {}).get('parts', [])
+            all_text = ''
+            for part in parts:
+                if 'text' in part and not part.get('thought', False):
+                    all_text += part['text']
+            if all_text:
+                json_match = re.search(r'\{[\s\S]*\}', all_text.strip())
+                if json_match:
+                    fixed = json.loads(json_match.group())
+                    # 保留原始 id/full_id 等元数据
+                    for meta_key in ('id', 'full_id', 'card_id', 'type', 'difficulty', '_eng_key_phrase'):
+                        if meta_key in card and meta_key not in fixed:
+                            fixed[meta_key] = card[meta_key]
+                    return True, fixed
+    except Exception as e:
+        print(f'  │  ⚠️ 自动修复API调用失败: {e}')
+    
+    return False, card
+
+
+def _validate_and_repair_card(card, subject, grade):
+    """
+    卡片数据源 schema 校验 + 自动修复。
+    在进入图片生成管线前调用，确保关键字段质量。
+    
+    修复策略: 能修则修，不能修才拒绝。
+    返回: (card_ok: bool, card: dict, issues: list[str])
+    """
+    issues = []
+    is_eng = subject == '英语' or card.get('type', '') in _GRAMMAR_TYPES
+    
+    # ── 1. 基础字段检查 ──
+    if not card.get('title', '').strip():
+        issues.append('❌ 缺少 title')
+        return False, card, issues
+    if not card.get('definition', '').strip():
+        issues.append('❌ 缺少 definition')
+        return False, card, issues
+    
+    # ── 2. 英语卡专属校验 ──
+    if is_eng:
+        # 2a. core_points 至少有 1 条含英文例句
+        points = card.get('core_points', [])
+        has_eng_sentence = False
+        for p in points:
+            eng_words = re.findall(r'[a-zA-Z]+', str(p))
+            if len(eng_words) >= 4:  # ≥4个英文词视为含例句
+                has_eng_sentence = True
+                break
+        if not has_eng_sentence and points:
+            issues.append('⚠️ core_points 缺少英文例句，已标记')
+        
+        # 2b. mistakes 完整性检查 + 自动修复
+        mistakes = card.get('mistakes', [])
+        for i, m in enumerate(mistakes):
+            if not isinstance(m, dict):
+                continue
+            wrong = m.get('wrong', '')
+            correct = m.get('correct', '')
+            # 如果 wrong/correct 少于 4 个英文词，标记为浅层
+            wrong_words = len(re.findall(r'[a-zA-Z]+', wrong))
+            correct_words = len(re.findall(r'[a-zA-Z]+', correct))
+            if wrong and wrong_words < 4:
+                issues.append(f'⚠️ mistakes[{i}].wrong 不是完整句 ({wrong_words}词): "{wrong[:50]}"')
+            if correct and correct_words < 4:
+                issues.append(f'⚠️ mistakes[{i}].correct 不是完整句 ({correct_words}词): "{correct[:50]}"')
+            # 自动修复: 确保有 reason 字段
+            if not m.get('reason', '').strip() and wrong and correct:
+                m['reason'] = f'Note the difference between wrong and correct usage'
+                issues.append(f'🔧 自动补充 mistakes[{i}].reason')
+        
+        # 2c. memory_tip 不能是废话
+        tip = card.get('memory_tip', '').strip()
+        _USELESS = {'多练就会', '记住就好', '背了就行', '牢记即可', '熟能生巧',
+                     '搭配固定要多记', '重点词汇要掌握', '语法规则记清楚',
+                     '记住哦', '来看看', '一起学', '加油哦', '注意哦'}
+        if tip in _USELESS:
+            card['memory_tip'] = ''  # 清空废话，让后续 prompt 生成自行构造
+            issues.append(f'🔧 清空废话口诀: "{tip}"')
+    
+    # ── 3. 认知负荷检查（如果引擎可用）──
+    if _HAS_DESIGN:
+        try:
+            cog = compute_cognitive_load(card, grade)
+            if cog.get('overloaded', False):
+                ratio = cog.get('overload_ratio', 1.0)
+                suggestions = cog.get('suggestions', [])
+                issues.append(f'⚠️ 认知负荷过高 (ratio={ratio:.1f}): {"; ".join(suggestions[:2])}')
+                # 自动修复: 截断过多的 core_points
+                if len(card.get('core_points', [])) > 4:
+                    card['core_points'] = card['core_points'][:4]
+                    issues.append('🔧 自动截断 core_points 到 4 条')
+                # 自动修复: 截断过多的 steps
+                steps = card.get('example', {}).get('steps', [])
+                if len(steps) > 5:
+                    card['example']['steps'] = steps[:5]
+                    issues.append('🔧 自动截断 steps 到 5 步')
+        except Exception as e:
+            pass  # 设计引擎出错不阻塞管线
+    
+    # issues 都是 warning 级别，不阻塞管线
+    return True, card, issues
+
+
 def _build_card_info(card, subject, grade, semester):
     """构建传给 prompt 生成器的卡片信息（自动区分教育/养生/语法类）"""
     if subject in _WELLNESS_SUBJECTS:
@@ -637,6 +831,170 @@ def _build_standard_card_layout(eng_key_phrase, cn_meaning):
   🚫 绝对禁止用卡通人物、"记住哦"气泡、装饰图案代替本区块的教学文字！"""
 
 
+# ── 易混词卡 检测 + 双栏布局 ──────────────────────────────────────
+
+def _is_confusion_card(card):
+    """判断是否为「易混词卡」— 比较两个容易混淆的词/短语
+    
+    检测依据:
+    1) card type 包含"易混"
+    2) title/definition 包含 vs / VS / 与…区分 / 辨析
+    3) mistakes 中同时含有两个不同英文动词/名词
+    返回: (bool, word_a, word_b, meaning_a, meaning_b)
+    """
+    card_type = card.get('type', '')
+    title = card.get('title', '')
+    definition = card.get('definition', '')
+    text = f'{card_type} {title} {definition}'
+    
+    # 明确的易混词标识
+    is_confusion = '易混' in text or '辨析' in text
+    
+    # vs / VS 分隔的两个词
+    import re as _re
+    vs_match = _re.search(r'([a-zA-Z]+)\s*(?:vs\.?|VS\.?|v\.s\.?|与|和|还是)\s*([a-zA-Z]+)', text)
+    if vs_match:
+        is_confusion = True
+    
+    if not is_confusion:
+        return False, '', '', '', ''
+    
+    # 提取两个对比词
+    word_a, word_b = '', ''
+    if vs_match:
+        word_a, word_b = vs_match.group(1).strip(), vs_match.group(2).strip()
+    else:
+        # 从 title/definition 提取前两个不同的英文词
+        eng_words = _re.findall(r'[a-zA-Z]{3,}', text)
+        seen = []
+        for w in eng_words:
+            wl = w.lower()
+            if wl not in [s.lower() for s in seen]:
+                seen.append(w)
+            if len(seen) >= 2:
+                break
+        if len(seen) >= 2:
+            word_a, word_b = seen[0], seen[1]
+    
+    if not word_a or not word_b:
+        return False, '', '', '', ''
+    
+    # 尝试从 definition 提取各自中文含义
+    meaning_a = ''
+    meaning_b = ''
+    # 尝试: "affect 影响(动词), effect 效果(名词)"
+    for word, attr in [(word_a, 'meaning_a'), (word_b, 'meaning_b')]:
+        pat = _re.search(rf'{_re.escape(word)}[,，\s]*[=:：]?\s*([\u4e00-\u9fff]+)', definition)
+        if pat:
+            if attr == 'meaning_a':
+                meaning_a = pat.group(1)[:6]
+            else:
+                meaning_b = pat.group(1)[:6]
+    
+    return True, word_a, word_b, meaning_a, meaning_b
+
+
+def _build_confusion_card_layout(word_a, word_b, meaning_a, meaning_b):
+    """构建易混词卡 — 双栏对比布局"""
+    ma = f'（{meaning_a}）' if meaning_a else ''
+    mb = f'（{meaning_b}）' if meaning_b else ''
+    return f"""📐 易混词对比卡 — 左右双栏布局
+
+本卡特点: 「{word_a}」vs「{word_b}」容易混淆，用双栏对比帮助学生区分。
+
+【顶部标题栏】
+  标题: 「{word_a} vs {word_b}」大号粗体居中
+  副标题: 小字 "易混词辨析"
+
+【双栏对比区 — 占卡片≥50%面积】(最重要的教学区！)
+  ┌──────────────────┬──────────────────┐
+  │   {word_a} {ma}  │   {word_b} {mb}  │
+  ├──────────────────┼──────────────────┤
+  │ 词性:            │ 词性:            │
+  │ 用法:            │ 用法:            │
+  │ 例句(≥6词):      │ 例句(≥6词):      │
+  └──────────────────┴──────────────────┘
+  
+  ⚠️ 每列必须包含: 词性标注 + 核心用法说明 + 一个完整英文例句
+  ⚠️ 两列用不同色块区分（如左蓝右绿），形成强烈视觉对比
+  ⚠️ 例句中的关键词（{word_a}/{word_b}）用粗体或下划线高亮
+
+【速记区 — 底部】
+  一句简短的区分口诀，用英文关键词 + ≤4中文字
+  好口诀: "{word_a}=动词做" / "{word_b}=名词果"
+  🚫 禁止万能废话: "要区分""记清楚""多注意" """
+
+
+# ── 时态卡 检测 + 时间轴布局 ──────────────────────────────────────
+
+_TENSE_KEYWORDS = {
+    '一般现在时', '一般过去时', '一般将来时',
+    '现在进行时', '过去进行时', '将来进行时',
+    '现在完成时', '过去完成时', '将来完成时',
+    '现在完成进行时', '过去完成进行时',
+    '过去将来时',
+    'present simple', 'past simple', 'future simple',
+    'present continuous', 'past continuous',
+    'present perfect', 'past perfect', 'future perfect',
+}
+
+def _is_tense_card(card):
+    """判断是否为「时态卡」— 讲解某个时态的用法
+    
+    检测依据: title/definition/type 包含时态关键词
+    返回: (bool, tense_name)
+    """
+    text = f"{card.get('type', '')} {card.get('title', '')} {card.get('definition', '')}"
+    text_lower = text.lower()
+    
+    for kw in _TENSE_KEYWORDS:
+        if kw in text or kw in text_lower:
+            return True, kw
+    
+    # 通用检测: "...时态" / "...时"
+    import re as _re
+    m = _re.search(r'([\u4e00-\u9fff]{2,6}时(?:态)?)', text)
+    if m and '时态' in text:
+        return True, m.group(1)
+    
+    return False, ''
+
+
+def _build_tense_card_layout(eng_key_phrase, cn_meaning, tense_name):
+    """构建时态卡 — 时间轴布局"""
+    return f"""📐 时态卡 — 时间轴布局
+
+本卡特点: 讲解「{tense_name}」时态，使用时间轴直观展示时间关系。
+
+【顶部标题】
+  标题: 「{tense_name}」大号粗体居中
+  副标题: 英文时态名 + 中文释义（{cn_meaning}）
+
+【时间轴区 — 占卡片≥45%面积】(核心教学区！)
+  画一条水平时间轴线: ←── past ── now ── future ──→
+  
+  在时间轴上用箭头/标记/色块标出该时态的时间范围:
+  - 标记动作发生的时间点/时间段
+  - 用色块高亮该时态覆盖的时间区域
+  - 在标记旁写出该时态的结构公式
+  
+  结构公式示例: "S + have/has + V-ed (past participle)"
+  ⚠️ 结构公式必须作为可见文字渲染！
+
+【例句区 — 时间轴下方】
+  2-3 个完整英文例句（各≥6词），展示该时态在不同语境的用法:
+  ① 基本用法例句
+  ② 否定/疑问形式例句
+  ③ 常见时间标志词（如 since, for, already, yet 等）
+  
+  时间标志词用色块标注，与时间轴上的标记颜色对应
+
+【底部速记】
+  公式 + 标志词的精炼总结
+  如: "have+V-ed → 已完成" / "标志词: since/for/already"
+  🚫 禁止万能废话"""
+
+
 def _is_grammar_concept_card(card):
     """判断是否是「语法概念卡」— 一个词/结构有多种语法用途的卡片
     
@@ -698,15 +1056,38 @@ def _build_card_info_grammar(card, subject, grade, semester):
     if not eng_key_phrase:
         eng_key_phrase = title_raw  # 最终兜底
 
-    # ── 检测是否是「语法概念卡」(一词多用型) ──
+    # 注入到 card 以供后续 OCR 审计使用
+    card['_eng_key_phrase'] = eng_key_phrase
+
+    # ── 检测卡片子类型 ──
     is_concept_card, grammar_terms = _is_grammar_concept_card(card)
     if is_concept_card:
         print(f'      [grammar concept] 检测到语法概念卡, 术语: {grammar_terms[:5]}')
 
+    is_confusion, conf_word_a, conf_word_b, conf_mean_a, conf_mean_b = _is_confusion_card(card)
+    if is_confusion:
+        print(f'      [confusion card] 检测到易混词卡: {conf_word_a} vs {conf_word_b}')
+
+    is_tense, tense_name = _is_tense_card(card)
+    if is_tense:
+        print(f'      [tense card] 检测到时态卡: {tense_name}')
+
     # 覆盖 card title
+    # 易混词卡: "word_a vs word_b" 样式标题
+    # 时态卡: 允许中文时态名
     # 语法概念卡: 允许 "English + 中文语法功能" 混合标题 (如 "that 从句")
     # 普通卡: 强制英文标题
-    if is_concept_card and eng_key_phrase:
+    if is_confusion and conf_word_a and conf_word_b:
+        card['title'] = f'{conf_word_a} vs {conf_word_b}'
+        print(f'      [prompt title fix] confusion: "{title_raw}" → "{card["title"]}"')
+    elif is_tense and tense_name:
+        # 时态卡保留中文时态名作为标题
+        if eng_key_phrase and re.search(r'[a-zA-Z]{3,}', eng_key_phrase):
+            card['title'] = f'{tense_name} ({eng_key_phrase})'
+        else:
+            card['title'] = tense_name
+        print(f'      [prompt title fix] tense: "{title_raw}" → "{card["title"]}"')
+    elif is_concept_card and eng_key_phrase:
         # 保留中文语法功能词 + 英文关键词的混合标题
         cn_grammar_part = re.sub(r'[a-zA-Z\s]+', '', title_raw).strip()[:4]
         if cn_grammar_part:
@@ -753,8 +1134,12 @@ def _build_card_info_grammar(card, subject, grade, semester):
     why_exp = card.get('why_explanation', '')[:120]
     memory_tip = card.get('memory_tip', '')[:30]
 
-    # ── 构建布局指令 ──
-    if is_concept_card:
+    # ── 构建布局指令（优先级: 易混词 > 时态 > 概念 > 标准）──
+    if is_confusion:
+        layout_block = _build_confusion_card_layout(conf_word_a, conf_word_b, conf_mean_a, conf_mean_b)
+    elif is_tense:
+        layout_block = _build_tense_card_layout(eng_key_phrase, cn_meaning, tense_name)
+    elif is_concept_card:
         layout_block = _build_concept_card_layout(eng_key_phrase, cn_meaning, grammar_terms)
     else:
         layout_block = _build_standard_card_layout(eng_key_phrase, cn_meaning)
@@ -1353,13 +1738,13 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
 
 
 # ═══════════════════════════════════════════
-# Step 3: Vision OCR 审计
+# Step 3: Vision OCR 审计 + 质量评分（合并为一次调用）
 # ═══════════════════════════════════════════
-OCR_AUDIT_PROMPT = """你是一个严格的中文文字审计员。
+OCR_AND_QUALITY_PROMPT = """你是一个严格的知识卡片审计员，同时负责文字审计和质量评分。
 
-我给你一张知识卡片图片。请仔细检查图片中所有可见的中文文字。
+我给你一张知识卡片图片。请完成两项任务:
 
-任务：
+═══ 任务A: 中文文字审计 ═══
 1. 列出图片中所有可见的中文文字（逐条列出）
 2. 检查是否有乱码、错字、缺笔画、变形
 3. 将图片中的文字与期望文字对照，标记差异
@@ -1368,17 +1753,30 @@ OCR_AUDIT_PROMPT = """你是一个严格的中文文字审计员。
 期望的文字清单：
 {expected_texts}
 
+═══ 任务B: 质量评分 ═══
+从5个维度评分(每项0-20分，满分100)：
+1. **教学清晰度**(20): 例题清晰? 英语卡:有完整例句+易错对比?
+2. **文字准确性**(20): 中文无乱码? 英文拼写正确? 截断废字扣15分!
+3. **视觉美感**(20): 配色好看? 像小红书爆款? 有吸引力?
+4. **布局合理性**(20): 信息层次清晰? 留白充足? 不拥挤?
+5. **可收藏感**(20): 看到就想截图保存? 有"干货感"?
+{eng_check_block}
+
 请用以下严格 JSON 格式回复（不要加 markdown 代码块标记）：
 {{
   "found_texts": ["图中实际读到的每一处中文文字"],
   "errors": [
-    {{"expected": "期望文字", "actual": "实际看到的", "type": "garbled|wrong_char|missing|distorted|gibberish_en", "severity": "high|medium|low"}}
+    {{"expected": "期望文字", "actual": "实际看到的", "type": "garbled|wrong_char|missing|distorted|gibberish_en|eng_error", "severity": "high|medium|low"}}
   ],
   "overall_score": 85,
-  "summary": "一句话总结"
+  "summary": "一句话总结文字审计",
+  "quality": {{
+    "teaching": 16, "text_accuracy": 18, "visual": 17, "layout": 15, "saveable": 16,
+    "total": 82, "comment": "一句话点评质量"
+  }}
 }}
 
-评分标准(0-100)：
+═══ 文字审计评分标准(overall_score, 0-100) ═══
 - 100: 所有中文完美无误
 - 80+: 有轻微瑕疵但可读
 - 60-79: 有明显错字但整体可理解
@@ -1386,36 +1784,64 @@ OCR_AUDIT_PROMPT = """你是一个严格的中文文字审计员。
 
 ⚠️ 特别检查：截断废字
 - 检查每个中文文字块是否是**完整**的词或短句
-- 如果某个文字块以虚词/助词结尾(如"搭配固定要""注意到""记住就")明显是被截断了 → 标记为 type:"truncated", severity:"high"
-- 截断废字每发现一处扣10分
+- 如果某个文字块以虚词/助词结尾(如"搭配固定要""注意到""记住就")明显是被截断了 → type:"truncated", severity:"high", 扣10分
 
 ⚠️ 特别检查：英文乱码词
-- 如果图片中出现不是正常英语单词/短语的英文字符串（如 "onpiere" "teh" "grammer"）
-- 标记为 type:"gibberish_en", severity:"medium"
-- 每发现一处扣5分
+- 不是正常英语单词的英文字符串（如 "onpiere" "teh" "grammer"）→ type:"gibberish_en", severity:"medium", 扣5分
 
-⚠️ 特别检查：教学内容缺失（英语卡片）
-- 如果期望文字中包含英文短语/例句，但图片中间区域只有卡通人物+"记住哦"之类的气泡，没有实际英文例句文字
-- 标记为 type:"missing_content", severity:"high"
-- 教学内容缺失直接扣30分（这是最严重的问题！一张没有教学内容的卡=废卡）
-- 常见废话填充: "记住哦" "来看看" "一起学" "加油哦" "注意哦" — 这些不是教学内容
+⚠️ 特别检查：教学内容缺失
+- 图片中间区域只有卡通人物+"记住哦"气泡没有实际教学文字 → type:"missing_content", severity:"high", 扣30分
 
 ⚠️ 特别检查：语法术语错字
-- 期望文字中如果有 GRAMMAR_TERM_1/2/3 等条目，这些是精确的语法术语（如"宾语从句""同位语从句"）
-- 图片中对应术语必须100%拼写正确，任何错字都是 severity:"high"
-- 常见 AI 渲染错误: "同位语"→"应语"/"问位语", "宾语"→"宝语"/"实语", "状语"→"壮语"
-- 语法术语错字每处扣15分（比普通错字更严重，因为学生会记住错误知识）
+- GRAMMAR_TERM_1/2/3 条目必须100%精确，错字=severity:"high"
+- 常见渲染错误: "同位语"→"应语", "宾语"→"宝语", "状语"→"壮语"
+- 每处扣15分
+
+⚠️ 特别检查：英文关键短语
+- 如果期望文字中有 ENG_KEY_PHRASE 条目，图片中必须可见该英文短语
+- 如果找不到该英文短语 → type:"eng_missing", severity:"high", 扣20分
+- 英文单词拼写错误（如 progres→progress 少字母）→ type:"eng_error", severity:"medium", 扣10分
 
 只输出JSON，不要其他文字。"""
 
+# 向下兼容: 保留旧变量名
+OCR_AUDIT_PROMPT = OCR_AND_QUALITY_PROMPT
 
-def ocr_audit(image_data, expected_manifest, api_key, all_keys=None):
-    """Step 3: 用 Vision 模型审计图片中的中文文字"""
+
+def ocr_audit(image_data, expected_manifest, api_key, all_keys=None, eng_key_phrase=''):
+    """Step 3: 用 Vision 模型审计图片文字 + 同步质量评分（合并调用，省一次API）
+    
+    返回: {
+        'overall_score': int,  # OCR审计分
+        'errors': list,
+        'found_texts': list,
+        'summary': str,
+        'quality': {'total': int, 'teaching': int, ...}  # 质量评分
+    }
+    """
     if not expected_manifest:
-        return {'overall_score': 100, 'errors': [], 'found_texts': [], 'summary': '无期望文字，跳过审计'}
+        return {'overall_score': 100, 'errors': [], 'found_texts': [], 'summary': '无期望文字，跳过审计',
+                'quality': {'total': 75, 'comment': '无manifest跳过'}}
 
     expected_lines = '\n'.join(f'- {k}: "{v}"' for k, v in expected_manifest.items())
-    prompt_text = OCR_AUDIT_PROMPT.format(expected_texts=expected_lines)
+    
+    # 英语卡额外检查块
+    eng_check_block = ''
+    if eng_key_phrase:
+        eng_check_block = f"""
+═══ 英文内容特别检查 ═══
+本卡的核心英文短语是: "{eng_key_phrase}"
+请额外检查:
+1. 图片中是否能看到「{eng_key_phrase}」或其部分？
+2. 图片中是否有≥2处完整英文例句（≥6词）？
+3. 图片中是否有❌/✅对比区域？
+4. 英文单词拼写是否正确？（尤其是 {eng_key_phrase} 相关词汇）
+如发现英文问题请加入 errors 列表（type:"eng_error" 或 "eng_missing"）。"""
+    
+    prompt_text = OCR_AND_QUALITY_PROMPT.format(
+        expected_texts=expected_lines,
+        eng_check_block=eng_check_block
+    )
 
     b64_img = base64.b64encode(image_data).decode('utf-8')
     contents = [
@@ -1430,8 +1856,10 @@ def ocr_audit(image_data, expected_manifest, api_key, all_keys=None):
     }
 
     resp = gemini_call(TEXT_MODEL, contents, api_key, gen_config=gen_config, all_keys=all_keys)
+    default_quality = {'total': 0, 'comment': '审计调用失败'}
     if not resp:
-        return {'overall_score': 0, 'errors': [], 'found_texts': [], 'summary': 'OCR调用失败'}
+        return {'overall_score': 0, 'errors': [], 'found_texts': [], 'summary': 'OCR调用失败',
+                'quality': default_quality}
 
     try:
         candidates = resp.get('candidates', [])
@@ -1440,14 +1868,23 @@ def ocr_audit(image_data, expected_manifest, api_key, all_keys=None):
             for part in parts:
                 if 'text' in part and not part.get('thought', False):
                     text = part['text'].strip()
-                    # 提取 JSON（兼容 markdown 代码块和纯 JSON）
                     json_match = re.search(r'\{[\s\S]*\}', text)
                     if json_match:
-                        return json.loads(json_match.group())
+                        result = json.loads(json_match.group())
+                        # 确保 quality 字段存在
+                        if 'quality' not in result:
+                            result['quality'] = default_quality
+                        else:
+                            q = result['quality']
+                            if 'total' not in q:
+                                scores = [q.get(k, 0) for k in ('teaching', 'text_accuracy', 'visual', 'layout', 'saveable')]
+                                q['total'] = sum(scores)
+                        return result
     except (json.JSONDecodeError, Exception) as e:
         print(f'      [OCR parse error] {e}')
 
-    return {'overall_score': 50, 'errors': [], 'found_texts': [], 'summary': 'OCR解析失败'}
+    return {'overall_score': 50, 'errors': [], 'found_texts': [], 'summary': 'OCR解析失败',
+            'quality': default_quality}
 
 
 def _build_audit_hint(audit_result, expected_manifest):
@@ -1692,6 +2129,14 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
         'final_action': '',  # 'pass' / 'repaired' / 'best_effort'
     }
 
+    # ── Step -1: 数据源 schema 校验 + 自动修复 ──
+    card_ok, card, schema_issues = _validate_and_repair_card(card, subject, grade)
+    if schema_issues:
+        print(f'  ├─ Schema校验: {len(schema_issues)}项 → {"; ".join(schema_issues[:3])}')
+    if not card_ok:
+        stats['final_action'] = 'schema_rejected'
+        return False, '', stats
+
     # ── Step 0: 内容质量预审 ──
     content_audit_result = None
     if _HAS_QUALITY and not skip_audit:
@@ -1704,11 +2149,32 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
             s = qc.get('total_score', 0)
             print(f' {v}({s}分)')
             if not qc.get('should_proceed', True):
-                print(f'  ├─ ⛔ 内容审核不通过(reject)，跳过图片生成')
-                stats['content_audit_score'] = s
-                stats['content_verdict'] = v
-                stats['final_action'] = 'content_rejected'
-                return False, '', stats
+                # ── Feature #5: 自动修复 → 重审 (代替直接 reject) ──
+                audit_detail = qc.get('audit', {})
+                print(f'  ├─ 🔧 Step 0b: 尝试自动修复卡片数据...')
+                fix_key = next_key(keys)
+                fixed_ok, fixed_card = _auto_fix_card_data(card, audit_detail, fix_key, all_keys=keys)
+                if fixed_ok:
+                    # 重新 schema 校验
+                    fix_ok2, fixed_card, fix_issues = _validate_and_repair_card(fixed_card, subject, grade)
+                    if fix_ok2:
+                        card = fixed_card  # 替换为修复后的卡片
+                        print(f'  ├─ ✅ 自动修复成功，使用修复后的卡片继续')
+                        if fix_issues:
+                            print(f'  │   修复后仍有: {"; ".join(fix_issues[:2])}')
+                        stats['auto_fixed'] = True
+                    else:
+                        print(f'  ├─ ⛔ 自动修复后仍不合格，reject')
+                        stats['content_audit_score'] = s
+                        stats['content_verdict'] = v
+                        stats['final_action'] = 'content_rejected_after_fix'
+                        return False, '', stats
+                else:
+                    print(f'  ├─ ⛔ 自动修复失败，reject')
+                    stats['content_audit_score'] = s
+                    stats['content_verdict'] = v
+                    stats['final_action'] = 'content_rejected'
+                    return False, '', stats
             stats['content_audit_score'] = s
             stats['content_verdict'] = v
         except Exception as e:
@@ -1775,15 +2241,18 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
             stats['final_action'] = 'no_audit'
             break
 
-        # Step 3: OCR 审计
-        print(f'  ├─ Step 3: OCR审计...', end='', flush=True)
+        # Step 3: OCR 审计 + 质量评分（合并调用）
+        print(f'  ├─ Step 3: OCR审计+质量评分...', end='', flush=True)
         key = next_key(keys)
-        audit = ocr_audit(img_data, manifest, key, all_keys=keys)
+        _eng_kp = card.get('_eng_key_phrase', '')  # 由 _build_card_info_grammar 注入
+        audit = ocr_audit(img_data, manifest, key, all_keys=keys, eng_key_phrase=_eng_kp)
         score = audit.get('overall_score', 0)
         errors = audit.get('errors', [])
         summary = audit.get('summary', '')
         last_audit = audit  # 记录最近审计结果
-        print(f' 得分={score}/100 ({summary})')
+        # 提取合并的质量评分
+        merged_quality = audit.get('quality', {})
+        print(f' 审计={score}/100 质量={merged_quality.get("total", 0)}/100 ({summary})')
 
         if score > best_score:
             best_image = img_data
@@ -1829,21 +2298,26 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
     if not stats['final_action']:
         stats['final_action'] = 'pass'
 
-    # ── 质量评分（分类型精准评分）──
-    print(f'  ├─ Step 5b: 质量评分...', end='', flush=True)
-    key = next_key(keys)
-    if _HAS_QUALITY:
-        # 使用分类型的精准评分 prompt
-        q = _typed_quality_score(best_image, key, card_title=title,
-                                  card_type=card.get('type', '方法卡'),
-                                  subject=subject, all_keys=keys)
+    # ── 质量评分（从合并审计结果中提取，省掉单独API调用）──
+    q = {}
+    if last_audit and last_audit.get('quality', {}).get('total', 0) > 0:
+        q = last_audit['quality']
+        print(f'  ├─ Step 5b: 质量评分(from merged audit) {q.get("total", 0)}/100')
     else:
-        q = quality_score(best_image, key, card_title=title, all_keys=keys)
+        # 降级: 如果合并审计没返回 quality，单独调用
+        print(f'  ├─ Step 5b: 质量评分(fallback)...', end='', flush=True)
+        key = next_key(keys)
+        if _HAS_QUALITY:
+            q = _typed_quality_score(best_image, key, card_title=title,
+                                      card_type=card.get('type', '方法卡'),
+                                      subject=subject, all_keys=keys)
+        else:
+            q = quality_score(best_image, key, card_title=title, all_keys=keys)
+        print(f' {q.get("total", 0)}/100')
     q_total = q.get('total', 0)
     q_comment = q.get('comment', '')
     stats['quality_score'] = q_total
     stats['quality_detail'] = q
-    print(f' {q_total}/100 ({q_comment})')
 
     # ── 保存 ──
     out_name = card_id.replace('-', '_')
