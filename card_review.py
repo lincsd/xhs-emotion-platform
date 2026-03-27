@@ -17,15 +17,17 @@
       skip ...
 """
 
-import re, json
+import re, json, os
 
 # ═══════════════════════════════════════════
 # 常量 & 阈值
 # ═══════════════════════════════════════════
 LANGUAGE_SCORE_THRESHOLD = 90   # 语言分 < 此值 → 不出图
 TEACHING_SCORE_THRESHOLD = 85   # 教学分 < 此值 → 不出图
-MAX_KNOWLEDGE_POINTS = 1        # 单卡最大主知识点数
-MAX_REWRITE_ATTEMPTS = 2        # 最多自动重写次数
+MAX_KNOWLEDGE_POINTS_GRAMMAR = 5  # 语法/句型/情景卡最大主知识点数
+MAX_KNOWLEDGE_POINTS_VOCAB = 6    # 词汇卡最大主知识点数 (词汇卡通常 3-5 个词)
+MAX_TITLE_LEN = 30                # 中文标题最大字符数
+MAX_REWRITE_ATTEMPTS = 2          # 最多自动重写次数
 
 # 英语语法卡检测关键词
 ENGLISH_GRAMMAR_KEYWORDS = [
@@ -41,86 +43,82 @@ ENGLISH_GRAMMAR_KEYWORDS = [
 _BASIC_ENGLISH_WORDS = set()
 
 def _load_basic_words():
-    """懒加载基础英语词表 (约 5000 常用词 + 语法术语)"""
+    """懒加载基础英语词表 (外部词表 ~10000 + 内置教学补充)"""
     global _BASIC_ENGLISH_WORDS
     if _BASIC_ENGLISH_WORDS:
         return _BASIC_ENGLISH_WORDS
-    # 内置核心词表 (高频 + 教学常用)
-    core = {
-        # 常见动词
-        'is','am','are','was','were','be','been','being','have','has','had',
-        'do','does','did','done','will','would','shall','should','can','could',
-        'may','might','must','need','dare','make','made','take','taken','took',
-        'give','gave','given','get','got','gotten','go','went','gone','come',
-        'came','say','said','tell','told','know','knew','known','think','thought',
-        'see','saw','seen','find','found','want','use','used','work','try',
-        'ask','seem','feel','felt','leave','left','call','keep','kept','let',
-        'begin','began','begun','show','showed','shown','hear','heard','play',
-        'run','ran','move','live','believe','bring','brought','happen','write',
-        'wrote','written','provide','sit','sat','stand','stood','lose','lost',
-        'pay','paid','meet','met','include','continue','set','learn','learned',
-        'change','lead','led','understand','understood','watch','follow',
-        'stop','create','speak','spoke','spoken','read','allow','add','spend',
-        'spent','grow','grew','grown','open','walk','win','won','teach','taught',
-        'offer','remember','love','consider','appear','buy','bought','wait',
-        'serve','die','send','sent','expect','build','built','stay','fall',
-        'fell','fallen','cut','reach','kill','remain','suggest','raise','pass',
-        'sell','sold','require','report','decide','pull','develop','succeed',
-        # 常见名词
-        'time','year','people','way','day','man','woman','child','children',
-        'world','life','hand','part','place','case','week','company','system',
-        'program','question','work','government','number','night','point',
-        'home','water','room','mother','area','money','story','fact','month',
-        'lot','right','study','book','eye','job','word','business','issue',
-        'side','kind','head','house','service','friend','father','power',
-        'hour','game','line','end','member','law','car','city','community',
-        'name','president','team','minute','idea','body','information',
-        'back','parent','face','others','level','office','door','health',
-        'person','art','war','history','party','result','change','morning',
-        'reason','research','girl','guy','moment','air','teacher','force',
-        'education','success','attention','career',
-        # 常见形容词
-        'good','better','best','new','first','last','long','great','little',
-        'own','other','old','right','big','high','different','small','large',
-        'next','early','young','important','few','public','bad','same','able',
-        'close','late','hard','real','strong','possible','whole','free',
-        'short','sure','clear','correct','wrong','poor','nice','beautiful',
-        'complete','simple','certain','true','false','full','special',
-        'difficult','easy','successful','careful','happy','serious',
-        # 常见副词
-        'not','also','very','often','however','too','usually','really',
-        'already','always','never','sometimes','together','enough','quite',
-        'probably','actually','finally','certainly','suddenly','directly',
-        'slowly','quickly','carefully','clearly','closely','absolutely',
-        # 常见介词/连词/代词
-        'the','a','an','in','to','for','of','on','with','at','by','from',
-        'up','about','into','over','after','beneath','under','above',
-        'between','out','against','during','without','before','through',
-        'because','although','though','while','when','where','if','that',
-        'this','these','those','which','what','who','whom','whose','how',
-        'he','she','it','they','we','you','i','me','him','her','us','them',
-        'my','your','his','its','our','their','mine','yours','hers','ours',
-        'theirs','myself','yourself','himself','herself','itself',
+
+    core = set()
+
+    # 1) 从外部文件加载 (google-10000-english)
+    words_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), '_english_words.txt')
+    if os.path.exists(words_file):
+        with open(words_file, 'r', encoding='utf-8') as f:
+            for line in f:
+                w = line.strip().lower()
+                if w:
+                    core.add(w)
+
+    # 2) 教学/考试补充词 (外部词表可能遗漏的教育常见词)
+    edu_supplement = {
+        # 文具/学校
+        'eraser','sharpener','crayon','marker','textbook','notebook','backpack',
+        'blackboard','whiteboard','chalk','scissors','stapler','ruler','compass',
+        'protractor','calculator','dictionary','encyclopedia','syllabus',
+        # 身体部位
+        'forehead','eyebrow','eyelash','cheek','tongue','throat','shoulder',
+        'elbow','wrist','thumb','fingernail','ankle','heel',
+        # 动物扩展
+        'giraffe','hippopotamus','rhinoceros','crocodile','chimpanzee','squirrel',
+        'hedgehog','tortoise','parrot','sparrow','woodpecker','grasshopper',
+        'dragonfly','caterpillar','centipede','octopus','jellyfish','seahorse',
+        'insect','beetle','cricket','mosquito','butterfly','firefly','ladybug',
+        # 食物
+        'hamburger','sandwich','sausage','chocolate','strawberry','blueberry',
+        'watermelon','pineapple','grapefruit','tangerine','avocado','broccoli',
+        'cauliflower','asparagus','mushroom','cucumber','eggplant','zucchini',
+        # 天气/自然
+        'temperature','thermometer','hurricane','earthquake','lightning','thunder',
+        'rainbow','atmosphere','hemisphere','continent','peninsula','archipelago',
+        # 家庭称谓
+        'grandpa','grandma','grandfather','grandmother','granddaughter','grandson',
+        'uncle','auntie','nephew','niece','cousin',
         # 语法术语
         'noun','verb','adjective','adverb','pronoun','preposition',
         'conjunction','interjection','article','phrase','clause','sentence',
-        'subject','predicate','object','modifier','tense','aspect','mood',
+        'subject','predicate','modifier','tense','aspect','mood',
         'voice','singular','plural','masculine','feminine','neuter',
         'infinitive','participle','gerund','modal','auxiliary',
         'collocation','synonym','antonym','homophone','prefix','suffix',
         'syllable','vowel','consonant','stress','intonation',
-        # 教学常见
-        'example','step','rule','tip','memory','practice','exercise',
-        'answer','solution','method','formula','pattern','structure',
-        'meaning','definition','explanation','reason','because','therefore',
-        'fixed','base','needs','after','before','blank','choose','fill',
-        'complete','match','circle','underline','highlight','translate',
-        'rewrite','correct','incorrect','right','false','check',
-        'sentence','paragraph','passage','title','heading','details',
-        'attention','career','question','important','necessary','notice',
-        'usage','between','describe','identify','replace','select',
-        'compare','contrast','apply','analyze','evaluate','review',
+        # 教学指令
+        'underline','highlight','rewrite','translate','paraphrase',
+        'summarize','brainstorm','categorize','prioritize','alphabetize',
+        # 考试/学科
+        'examination','assessment','curriculum','semester','prerequisite',
+        'scholarship','certificate','diploma','graduation','commencement',
+        # 复合词/常见学校用词
+        'schoolbag','classmate','classroom','homework','birthday','football',
+        'basketball','baseball','volleyball','playground','bookstore','airport',
+        'supermarket','postcard','weekend','somewhere','everywhere','anywhere',
+        'nothing','something','everything','anything','everyone','someone',
+        'anyone','nobody','whoever','whatever','whenever','wherever','however',
+        'although','because','therefore','otherwise','meanwhile','furthermore',
+        'nowadays','themselves','ourselves','yourselves','itself',
+        'cannot','didn','doesn','isn','wasn','weren','hadn','hasn','shouldn',
+        'wouldn','couldn','mustn','aren',
+        # 复合人称/常见复合名词
+        'snowman','snowmen','postman','postmen','policeman','policemen',
+        'fireman','firemen','fisherman','businessman','gentleman',
+        'doorbell','raincoat','rainforest','sunlight','moonlight','starfish',
+        'seashell','outside','inside','upstairs','downstairs','afternoon',
+        'tonight','tomorrow','yesterday','together','sometimes','everyone',
+        # 日常用品/衣物
+        'sweater','jacket','trousers','umbrella','glasses','toothbrush',
+        'toothpaste','bathroom','bedroom','kitchen','living','dining',
     }
+    core.update(edu_supplement)
+
     _BASIC_ENGLISH_WORDS = core
     return _BASIC_ENGLISH_WORDS
 
@@ -128,27 +126,53 @@ def _load_basic_words():
 def detect_fabricated_words(text):
     """
     检测可能是 AI 编造的英文假词 (如 guestioneful, bindingly)。
-    策略: 提取所有 5+ 字母的英文单词，不在基础词表中的标记为可疑。
+    策略: 提取所有 6+ 字母的英文单词，不在基础词表中的标记为可疑。
+    使用 ~10000 词外部词表 + 教学补充词 + 多层词形还原。
     返回可疑词列表。
     """
     words = _load_basic_words()
-    # 提取所有英文单词
-    tokens = re.findall(r"\b[a-zA-Z]{5,}\b", text)
+    # 提取所有英文单词 (最小 6 字母，减少误报)
+    tokens = re.findall(r"\b[a-zA-Z]{6,}\b", text)
     suspicious = []
     for tok in tokens:
         low = tok.lower()
         # 跳过全大写缩写
         if tok.isupper():
             continue
-        # 常见后缀变形 (简单 stemming)
-        stems = {low}
-        for suffix in ('s','es','ed','ing','ly','er','est','tion','sion','ment','ness','ful','less','able','ible','ous','ive','al','ical'):
+        # 直接匹配
+        if low in words:
+            continue
+        # 多层词形还原
+        stems = set()
+        # 常见屈折后缀
+        inflections = [
+            ('ies', 'y'), ('ied', 'y'), ('ying', 'y'),  # carry → carries
+            ('ves', 'f'), ('ves', 'fe'),                 # knife → knives
+            ('ses', 's'), ('xes', 'x'), ('zes', 'z'),   # bus → buses
+            ('ches', 'ch'), ('shes', 'sh'),              # watch → watches
+            ('ness', ''), ('ment', ''), ('tion', ''), ('sion', ''),
+            ('able', ''), ('ible', ''), ('ful', ''), ('less', ''),
+            ('ous', ''), ('ive', ''), ('ical', ''), ('ence', ''),
+            ('ance', ''), ('ment', ''), ('ness', ''),
+        ]
+        simple_suffixes = ['s', 'es', 'ed', 'ing', 'ly', 'er', 'est',
+                           'tion', 'sion', 'ment', 'ness', 'ful', 'less',
+                           'able', 'ible', 'ous', 'ive', 'al', 'ical',
+                           'ity', 'ize', 'ise', 'ify', 'ate', 'ent', 'ant']
+        for suffix in simple_suffixes:
             if low.endswith(suffix) and len(low) - len(suffix) >= 3:
-                stems.add(low[:-len(suffix)])
-                stems.add(low[:-len(suffix)] + 'e')  # e.g. made -> mak+e
-        # 检查词根是否在词表中
-        if not any(s in words for s in stems) and low not in words:
-            suspicious.append(tok)
+                root = low[:-len(suffix)]
+                stems.add(root)
+                stems.add(root + 'e')     # e.g. make → making
+                stems.add(root + root[-1]) # e.g. run → running (doubled consonant)
+        for old_end, new_end in inflections:
+            if low.endswith(old_end) and len(low) - len(old_end) >= 2:
+                stems.add(low[:-len(old_end)] + new_end)
+
+        # 检查任一词根是否在词表中
+        if any(s in words for s in stems):
+            continue
+        suspicious.append(tok)
     # 去重
     return list(dict.fromkeys(suspicious))
 
@@ -263,14 +287,31 @@ def detect_knowledge_candidates(card):
 
 
 def has_repeated_word(text):
-    """检测是否有连续重复的英文单词，如 'can can'"""
-    return bool(REPEATED_WORD_PATTERN.search(text))
+    """检测是否有连续重复的英文单词，如 'can can'。
+    排除自然拼读/语音教学中的合法重复 (如 'ball: ball', 'B-b-ball')
+    """
+    match = REPEATED_WORD_PATTERN.search(text)
+    if not match:
+        return False
+    word = match.group(1).lower()
+    # 自然拼读卡里, 单个名词在发音演示中重复是正常的
+    # 如 "Aa apple apple" 或 "ball: ball"
+    # 只标记语法/功能词重复 (如 can can, the the, is is)
+    grammar_words = {
+        'can','could','will','would','shall','should','may','might','must',
+        'is','am','are','was','were','be','been','being',
+        'have','has','had','do','does','did',
+        'the','a','an','this','that','these','those',
+        'not','no','and','or','but','if','so','for','to',
+        'he','she','it','they','we','you','i',
+    }
+    return word in grammar_words
 
 
 def has_incomplete_phrase(text):
     """检测是否有残缺的英文表达"""
-    # 按句子拆分后逐句检查
-    sentences = re.split(r'[.!?。！？]', text)
+    # 按句子和换行拆分后逐段检查
+    sentences = re.split(r'[.!?。！？\n]', text)
     for sent in sentences:
         sent = sent.strip()
         if not sent:
@@ -340,8 +381,14 @@ def validate_hard_rules(card, subject=''):
         word = match.group(1) if match else '?'
         issues.append(f'存在重复词: "{word} {word}"')
 
-    # ── 规则 2: 残缺表达 ──
-    if _has_english(text) and has_incomplete_phrase(text):
+    # ── 规则 2: 残缺表达 (只检查 mistakes 的 wrong/correct 字段，不检查标题/定义) ──
+    mistake_texts = []
+    for m in card.get('mistakes', []):
+        if isinstance(m, dict):
+            mistake_texts.append(str(m.get('wrong', '')))
+            mistake_texts.append(str(m.get('correct', '')))
+    mistake_text = '\n'.join(mistake_texts)
+    if _has_english(mistake_text) and has_incomplete_phrase(mistake_text):
         issues.append('存在残缺英文表达 (短语末尾缺宾语/补语)')
 
     # ── 规则 3: 正误对比完整性 ──
@@ -354,15 +401,27 @@ def validate_hard_rules(card, subject=''):
             issues.append('mistakes 缺少 correct 字段')
 
     # ── 规则 4: 英语卡正确例句必须像完整句 ──
+    # 仅对语法/句型卡的纯英文 correct 字段检查, 跳过词汇卡(单词即正确答案)和中文解释
     if is_eng and correct and _has_english(correct):
-        if not looks_like_complete_sentence(correct):
-            issues.append('正确例句不是完整句')
+        card_type_4 = card.get('type', '') + card.get('title', '')
+        is_vocab_4 = any(kw in card_type_4 for kw in ('词汇', '单词', '拼读', '发音'))
+        if not is_vocab_4:
+            eng_chars = len(re.findall(r'[a-zA-Z]', correct))
+            total_chars = len(correct.replace(' ',''))
+            if total_chars > 0 and eng_chars / total_chars > 0.8:
+                # 排除: 只有1-2个英文单词的答案 (如 "pencil", "swim")
+                eng_words = re.findall(r'[a-zA-Z]+', correct)
+                if len(eng_words) >= 3 and not looks_like_complete_sentence(correct):
+                    issues.append('正确例句不是完整句')
 
     # ── 规则 5: 单卡知识点过多 ──
     if is_eng:
         candidates = detect_knowledge_candidates(card)
-        if len(candidates) > MAX_KNOWLEDGE_POINTS + 1:
-            issues.append(f'单卡知识点过多 ({len(candidates)}个), 建议拆分')
+        card_type = card.get('type', '')
+        is_vocab = '词汇' in card_type or '词汇' in card.get('title', '')
+        max_kp = MAX_KNOWLEDGE_POINTS_VOCAB if is_vocab else MAX_KNOWLEDGE_POINTS_GRAMMAR
+        if len(candidates) > max_kp:
+            issues.append(f'单卡知识点过多 ({len(candidates)}个, 限{max_kp}), 建议拆分')
 
     # ── 规则 6: 错因过于笼统 ──
     if is_eng and vague_error_reason(card):
@@ -370,8 +429,8 @@ def validate_hard_rules(card, subject=''):
 
     # ── 规则 7: 标题过长 ──
     title = card.get('title', '')
-    if len(title) > 20:
-        issues.append(f'标题过长 ({len(title)}字), 建议≤12字')
+    if len(title) > MAX_TITLE_LEN:
+        issues.append(f'标题过长 ({len(title)}字), 建议≤{MAX_TITLE_LEN}字')
 
     # ── 规则 8: 定义缺失 ──
     if not card.get('definition', '').strip():
@@ -393,7 +452,7 @@ def validate_hard_rules(card, subject=''):
     # ── 规则 11: Steps 连贯性 (英语卡) ──
     if is_eng:
         steps = card.get('example', {}).get('steps', [])
-        if len(steps) >= 3:
+        if len(steps) >= 4:  # 至少4步才检查连贯性
             # 提取每个 step 的英文关键词
             step_keywords = []
             for s in steps:
@@ -405,7 +464,7 @@ def validate_hard_rules(card, subject=''):
                 if step_keywords[i] and step_keywords[i+1]:
                     if not step_keywords[i] & step_keywords[i+1]:
                         disconnected += 1
-            if disconnected >= 2:
+            if disconnected >= 3:  # 至少3对相邻步骤断连才报警
                 issues.append('Steps 之间缺乏连贯性，可能混杂了多个不相关主题')
 
     return {

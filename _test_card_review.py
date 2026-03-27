@@ -15,9 +15,10 @@ r1 = validate_hard_rules(card1, '英语')
 print(f"Test 1 (repeated word): pass={r1['pass']}, issues={r1['issues']}")
 assert not r1['pass'], "Should fail: repeated word"
 
-# Test 2: incomplete phrase 'success in'
+# Test 2: incomplete phrase 'success in' (use 语法卡 type so Rule 4 applies)
 card2 = {
     'title': '词性辨析',
+    'type': '语法卡',
     'definition': 'succeed vs success vs successful',
     'core_points': ['succeed是动词'],
     'memory_tip': '动名形要分清',
