@@ -573,10 +573,10 @@ def _clean_answer(card):
 
 
 def _build_card_info_grammar(card, subject, grade, semester):
-    """构建英语语法/搭配类卡片信息 — v6 极简用法卡
+    """构建英语语法/搭配类卡片信息 — v6 极简用法卡（通用版）
     
     设计理念: 一张卡只做一件事 → 展示一个短语/语法点的「用法 + 对错 + 拓展」
-    布局: 标题短语 → 用法结构 → 对错例句 → 一句话规则
+    对所有英语知识点通用：搭配卡/语法辨析卡/易混词卡/句型卡/词汇卡...
     """
     card_type = card.get('type', '语法辨析卡')
 
@@ -610,118 +610,81 @@ def _build_card_info_grammar(card, subject, grade, semester):
         if cn_chars:
             cn_meaning = max(cn_chars, key=len)[:8]
 
-    # ── 从 definition 提取用法结构（to是介词/后接名词 等）──
-    grammar_rule = ''
-    rule_patterns = [
-        r'(to\s*是\s*介词[^。，]*)',
-        r'(后接\s*[^。，]{2,15})',
-        r'(后面\s*[^。，]{2,15})',
-        r'(接\s*(名词|动名词|动词原形|ing|doing)[^。，]*)',
-    ]
-    for pat in rule_patterns:
-        m = re.search(pat, definition)
-        if m:
-            grammar_rule = m.group(1).strip()[:40]
-            break
-    if not grammar_rule:
-        grammar_rule = definition[:60]
+    # ── 收集参考数据: core_points（过滤离题后）──
+    points = _filter_off_topic_core_points(card)[:4]
+    ref_points = '\n'.join(f'  • {str(p).strip()[:80]}' for p in points) if points else '  （无）'
 
-    # ── 构建用法拓展模式 ──
-    usage_patterns = []
-    # 常见结构: phrase + 名词, phrase + doing, phrase + adj
-    kp = eng_key_phrase.lower().strip()
-    if 'to' in kp.split():
-        usage_patterns.append(f'{eng_key_phrase} + 名词')
-        usage_patterns.append(f'{eng_key_phrase} + doing (动名词)')
-    elif kp.endswith('ing'):
-        usage_patterns.append(f'{eng_key_phrase} + 名词')
-    else:
-        usage_patterns.append(f'{eng_key_phrase} + ...')
-    
-    # 从 core_points 补充用法
-    points = _filter_off_topic_core_points(card)[:3]
-    for p in points:
-        p_str = str(p).strip()[:80]
-        if p_str and p_str not in usage_patterns:
-            usage_patterns.append(p_str)
-    usage_block = '\n'.join(f'  • {u}' for u in usage_patterns[:3])
-
-    # ── 构建对错例句 ──
+    # ── 收集参考数据: 对错例句 ──
     on_topic_mistakes = _filter_off_topic_mistakes(card)
-    contrast_block = ''
+    contrast_ref = ''
     if on_topic_mistakes:
         m = on_topic_mistakes[0]
-        contrast_block = f"  ❌ {m.get('wrong', '')[:80]}\n  ✅ {m.get('correct', '')[:80]}"
+        contrast_ref = f"  ❌ {m.get('wrong', '')[:80]}\n  ✅ {m.get('correct', '')[:80]}"
         reason = m.get('reason', '')
         if reason:
-            contrast_block += f"\n  💡 错因: {reason[:60]}"
+            contrast_ref += f"\n  💡 {reason[:60]}"
     else:
-        # 没有现成的对错数据，指示 Gemini 自行设计
-        contrast_block = (
-            f"  （请根据「{eng_key_phrase}」自行设计一组对错例句）\n"
-            f"  ❌ 错句必须是学生真正会犯的介词/搭配错误\n"
-            f"  ✅ 正句纠正该错误，关键词粗体\n"
-            f"  🚫 严禁使用与「{eng_key_phrase}」无关的词汇!"
-        )
+        contrast_ref = f"  （数据缺失，请你根据「{eng_key_phrase}」自行设计，必须是该知识点的真实高频错误）"
 
-    # ── 本质原因 ──
-    why_exp = card.get('why_explanation', '')[:100]
-
-    # ── 记忆口诀 ──
+    # ── 本质原因 / 口诀 ──
+    why_exp = card.get('why_explanation', '')[:120]
     memory_tip = card.get('memory_tip', '')[:30]
 
     return f"""学科: {subject} | {grade} {semester} | 类型: {card_type}
 
-═══════ 🎯 极简用法卡 — 设计规范 ═══════
+═══════ 🎯 极简用法卡 — 通用设计规范 ═══════
 
 本卡主角: 「{eng_key_phrase}」（{cn_meaning}）
+语法规则: {definition[:120]}
 
-📐 卡片只允许4个区块（自上而下，严禁其他内容！）：
+📐 卡片严格4个区块，自上而下，不允许其他内容：
 
-┌─────────────────────────────────┐
-│ 区块A: 英文短语标题              │  ← 大号粗体，就是「{eng_key_phrase}」
-│        小字中文释义               │  ← "{cn_meaning}"（≤4中文字）
-├─────────────────────────────────┤
-│ 区块B: 用法结构 (2-3行)          │  ← 展示该短语的搭配模式
-│  {eng_key_phrase} + noun         │     每行一个结构，关键词高亮
-│  {eng_key_phrase} + doing        │     用不同颜色区分
-│  (配完整例句)                    │
-├─────────────────────────────────┤
-│ 区块C: ❌/✅ 对比 (各一句)       │  ← 最重要！学生最易错的点
-│  ❌ 错句 (≥6词, 错处红色高亮)    │
-│  ✅ 正句 (≥6词, 正处绿色高亮)    │
-│  💡 一句话错因 (≤6中文字)        │
-├─────────────────────────────────┤
-│ 区块D: 记忆口诀 (≤6中文字)       │  ← 与本短语紧密相关
-└─────────────────────────────────┘
+【区块A — 标题】
+  英文短语/词组本身，大号粗体居中
+  下方小字中文释义（≤4中文字）
 
-═══════ ⛔ 6条铁律 ═══════
+【区块B — 用法拓展】(最重要的教学区！)
+  展示该知识点的 2-3 种典型搭配/用法结构
+  每种结构必须配一个完整英文例句（≥6词）
+  例如: 如果知识点是一个搭配短语，展示它接不同词性时的句子
+       如果是易混词，展示两个词各自正确的用法句
+       如果是语法点，展示该语法在不同语境中的用法
+  ⚠️ 用法结构由你根据语法规则推断，不要只是翻译 definition！
 
-🔒1. 标题就是英文短语本身「{eng_key_phrase}」，🚫禁止"高频搭配""注意to"等中文泛化标题
-🔒2. 区块B必须展示2-3种用法结构 + 每种配一个完整英文例句(≥6词)
-     例: {eng_key_phrase} + noun → "Please pay attention to the details."
-     例: {eng_key_phrase} + doing → "Pay attention to crossing the road."
-🔒3. 区块C的❌/✅必须是完整句子(≥6词)，错误必须是学生真正会犯的（如介词用错 in/on → to）
-🔒4. 所有内容只能涉及「{eng_key_phrase}」，🚫严禁出现 successful/succeed/grammar 等无关词汇
-🔒5. 口诀必须含具体语法知识(如"to后接doing")，🚫禁止"搭配固定要多记"等万能废话
-🔒6. 全卡中文≤{_mc}字！英文例句不限。每个中文字必须粗体清晰
+【区块C — ❌/✅ 对比】
+  一组完整句子（各≥6词），展示学生最容易犯的错误
+  错处用红色高亮，正处用绿色高亮
+  配一句话错因（≤6中文字）
+
+【区块D — 记忆口诀】
+  ≤6中文字，必须含该知识点的具体语法/搭配特征
+  好口诀示例: "to后接doing" / "affect是动词" / "enough放后面"
+  🚫 万能废话=废卡: "搭配固定要多记" / "语法规则记清楚" / "重点词汇要掌握"
+
+═══════ ⛔ 6条铁律（违反=废卡）═══════
+
+🔒1. 标题就是「{eng_key_phrase}」本身（英文！），🚫禁止纯中文泛化标题
+🔒2. 区块B必须展示2-3种不同的用法/搭配，每种配完整英文例句
+🔒3. 区块C的❌/✅必须是学生真正会犯的错误，完整句子≥6词
+🔒4. 全卡所有内容只能涉及「{eng_key_phrase}」这一个知识点，🚫严禁混入无关词汇/语法点
+🔒5. 口诀必须含具体语法特征，🚫禁止万能废话
+🔒6. 全卡中文≤{_mc}字，英文不限。每个中文字必须粗体清晰
 
 ═══════ 📋 最终检查 ═══════
-□ 标题是不是「{eng_key_phrase}」本身？（不是的话=废卡）
-□ 有没有展示 {eng_key_phrase} + 名词 和 + doing 两种用法？
-□ ❌/✅ 例句是否只涉及「{eng_key_phrase}」的典型错误？
-□ 有没有混入任何与「{eng_key_phrase}」无关的内容？（有=废卡）
-□ 口诀是否含具体语法点？（"要多记"类=废卡）
+□ 标题是「{eng_key_phrase}」本身吗？
+□ 区块B有2-3种不同用法+完整例句吗？
+□ ❌/✅例句只涉及「{eng_key_phrase}」吗？有没有混入无关内容？
+□ 口诀含具体语法知识吗？不是万能废话吗？
+□ 全卡只有ABCD四个区块吗？没有多余的填空题/步骤编号吗？
 
-═══════ 📚 参考数据（仅供参考，以上规范优先）═══════
+═══════ 📚 参考数据（仅供理解，以上规范优先）═══════
 
-【语法规则】: {grammar_rule}
-【用法结构】:
-{usage_block}
-【对错对比】:
-{contrast_block}
+【知识要点】:
+{ref_points}
+【对错参考】:
+{contrast_ref}
 {f'【本质原因】: {why_exp}' if why_exp else ''}
-{f'【记忆口诀参考】: {memory_tip}' if memory_tip else ''}
+{f'【口诀参考】(可改进): {memory_tip}' if memory_tip else ''}
 难度: {card.get('difficulty', 3)}/5
 
 ⚠️ 视觉风格: 竖屏3:4，鲜明渐变背景，白色圆角卡片区块，可爱小老师卡通角色，标题区用饱和色banner，≥25%留白"""
