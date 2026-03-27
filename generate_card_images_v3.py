@@ -427,6 +427,19 @@ LINE2: 第二处文字
 _GRAMMAR_TYPES = {'语法辨析卡', '句型卡', '易混词卡', '易混词陷阱卡', '语法纠错卡',
                   '词汇卡', '高频活用卡', '搭配卡', '词性辨析卡'}
 
+# ── 高频语法术语保护表 ──
+# 这些中文术语在 AI 图片渲染时极易出错，需要精确匹配 OCR 审计
+_GRAMMAR_TERMS_PROTECTED = {
+    '宾语从句', '表语从句', '同位语从句', '定语从句', '状语从句', '主语从句',
+    '宾语', '表语', '同位语', '定语', '状语', '主语', '谓语', '补语',
+    '名词性从句', '形容词性从句', '副词性从句',
+    '现在完成时', '过去完成时', '一般现在时', '一般过去时', '现在进行时',
+    '过去进行时', '将来时', '被动语态', '主动语态', '虚拟语气',
+    '不定式', '动名词', '分词', '现在分词', '过去分词',
+    '可数名词', '不可数名词', '冠词', '介词', '连词', '代词',
+    '比较级', '最高级', '倒装句', '强调句', '感叹句', '祈使句',
+}
+
 def _build_card_info(card, subject, grade, semester):
     """构建传给 prompt 生成器的卡片信息（自动区分教育/养生/语法类）"""
     if subject in _WELLNESS_SUBJECTS:
@@ -580,11 +593,74 @@ def _clean_answer(card):
     return '; '.join(cleaned) if cleaned else answer
 
 
+def _build_concept_card_layout(eng_key_phrase, cn_meaning, grammar_terms):
+    """构建语法概念卡（一词多用型）的布局指令 — 思维导图/放射状变体"""
+    terms_display = '、'.join(grammar_terms[:4])
+    return f"""📐 语法概念卡 — 思维导图布局（一词多用型）
+
+本卡特点: 「{eng_key_phrase}」有多种语法用途（{terms_display}），需要用放射状/思维导图展示。
+
+【整体布局 — 放射状/思维导图】
+  中心: 「{eng_key_phrase}」大号粗体居中，下方小字（{cn_meaning}）
+  分支: 从中心向外辐射 2-4 个分支，每个分支 = 一种语法用途
+
+【每个分支 — 必须包含】
+  ① 中文语法术语标签（如"宾语从句""表语从句"）— 用色块/气泡标注
+  ② 一个完整英文例句（≥6词）— 作为可见文字渲染
+  ⚠️ 中文语法术语必须100%拼写正确！"同位语从句"≠"应语从句"
+  ⚠️ 如果不确定中文术语，改用英文标注（如 appositive clause）
+  
+【分支布局建议】
+  - 每个分支用不同的柔和色块区分（蓝/绿/粉/紫）
+  - 术语标签用粗体在色块上方或内部
+  - 例句用较小字体在色块内
+  - 整体形成清晰的放射状结构"""
+
+
+def _build_standard_card_layout(eng_key_phrase, cn_meaning):
+    """构建标准英语卡（搭配/易混词/单一语法点）的布局指令 — 线性ABCD"""
+    return f"""📐 卡片严格4个区块，自上而下，不允许其他内容：
+
+【区块A — 标题】
+  英文短语/词组本身「{eng_key_phrase}」，大号粗体居中
+  下方小字中文释义（{cn_meaning}，≤4中文字）
+
+【区块B — 用法拓展】(最重要的教学区！占卡片≥40%面积！)
+  ⚠️ 这个区块必须是 **纯文字教学内容**，不是卡通/插图/装饰！
+  展示该知识点的 2-3 种典型搭配/用法结构
+  每种结构必须配一个完整英文例句（≥6词），例句必须作为可见文字渲染在卡片上
+  例如: 如果知识点是一个搭配短语，展示它接不同词性时的句子
+       如果是易混词，展示两个词各自正确的用法句
+       如果是语法点，展示该语法在不同语境中的用法
+  ⚠️ 用法结构由你根据语法规则推断，不要只是翻译 definition！
+  🚫 绝对禁止用卡通人物、"记住哦"气泡、装饰图案代替本区块的教学文字！"""
+
+
+def _is_grammar_concept_card(card):
+    """判断是否是「语法概念卡」— 一个词/结构有多种语法用途的卡片
+    
+    如: 连接that（宾语/表语/同位语从句）, 连接词when/if, 不定式的用法, 分词的用法
+    特征: title 或 definition 中出现多种语法术语 (≥2种从句/时态/用法)
+    """
+    text = f"{card.get('title', '')} {card.get('definition', '')}"
+    # 统计出现了几种受保护的语法术语
+    found_terms = [t for t in _GRAMMAR_TERMS_PROTECTED if t in text]
+    # 也检查 core_points 中是否有多种术语
+    for p in card.get('core_points', [])[:6]:
+        for t in _GRAMMAR_TERMS_PROTECTED:
+            if t in str(p) and t not in found_terms:
+                found_terms.append(t)
+    return len(found_terms) >= 2, found_terms
+
+
 def _build_card_info_grammar(card, subject, grade, semester):
     """构建英语语法/搭配类卡片信息 — v6 极简用法卡（通用版）
     
     设计理念: 一张卡只做一件事 → 展示一个短语/语法点的「用法 + 对错 + 拓展」
     对所有英语知识点通用：搭配卡/语法辨析卡/易混词卡/句型卡/词汇卡...
+    支持两种布局:
+    - 默认: 线性 ABCD 四区块（搭配/易混词/单一语法点）
+    - 变体: 思维导图/放射状（一词多用型语法概念卡）
     """
     card_type = card.get('type', '语法辨析卡')
 
@@ -621,8 +697,23 @@ def _build_card_info_grammar(card, subject, grade, semester):
     if not eng_key_phrase:
         eng_key_phrase = title_raw  # 最终兜底
 
-    # 覆盖 card title 为英文短语（让后续所有环节都统一）
-    if eng_key_phrase and not re.search(r'[a-zA-Z]{3,}', title_raw):
+    # ── 检测是否是「语法概念卡」(一词多用型) ──
+    is_concept_card, grammar_terms = _is_grammar_concept_card(card)
+    if is_concept_card:
+        print(f'      [grammar concept] 检测到语法概念卡, 术语: {grammar_terms[:5]}')
+
+    # 覆盖 card title
+    # 语法概念卡: 允许 "English + 中文语法功能" 混合标题 (如 "that 从句")
+    # 普通卡: 强制英文标题
+    if is_concept_card and eng_key_phrase:
+        # 保留中文语法功能词 + 英文关键词的混合标题
+        cn_grammar_part = re.sub(r'[a-zA-Z\s]+', '', title_raw).strip()[:4]
+        if cn_grammar_part:
+            card['title'] = f'{cn_grammar_part}{eng_key_phrase}'
+        else:
+            card['title'] = eng_key_phrase
+        print(f'      [prompt title fix] concept: "{title_raw}" → "{card["title"]}"')
+    elif eng_key_phrase and not re.search(r'[a-zA-Z]{3,}', title_raw):
         card['title'] = eng_key_phrase
         print(f'      [prompt title fix] "{title_raw}" → "{card["title"]}"')
 
@@ -661,6 +752,12 @@ def _build_card_info_grammar(card, subject, grade, semester):
     why_exp = card.get('why_explanation', '')[:120]
     memory_tip = card.get('memory_tip', '')[:30]
 
+    # ── 构建布局指令 ──
+    if is_concept_card:
+        layout_block = _build_concept_card_layout(eng_key_phrase, cn_meaning, grammar_terms)
+    else:
+        layout_block = _build_standard_card_layout(eng_key_phrase, cn_meaning)
+
     return f"""学科: {subject} | {grade} {semester} | 类型: {card_type}
 
 ═══════ 🎯 极简用法卡 — 通用设计规范 ═══════
@@ -668,21 +765,7 @@ def _build_card_info_grammar(card, subject, grade, semester):
 本卡主角: 「{eng_key_phrase}」（{cn_meaning}）
 语法规则: {definition[:120]}
 
-📐 卡片严格4个区块，自上而下，不允许其他内容：
-
-【区块A — 标题】
-  英文短语/词组本身，大号粗体居中
-  下方小字中文释义（≤4中文字）
-
-【区块B — 用法拓展】(最重要的教学区！占卡片≥40%面积！)
-  ⚠️ 这个区块必须是 **纯文字教学内容**，不是卡通/插图/装饰！
-  展示该知识点的 2-3 种典型搭配/用法结构
-  每种结构必须配一个完整英文例句（≥6词），例句必须作为可见文字渲染在卡片上
-  例如: 如果知识点是一个搭配短语，展示它接不同词性时的句子
-       如果是易混词，展示两个词各自正确的用法句
-       如果是语法点，展示该语法在不同语境中的用法
-  ⚠️ 用法结构由你根据语法规则推断，不要只是翻译 definition！
-  🚫 绝对禁止用卡通人物、"记住哦"气泡、装饰图案代替本区块的教学文字！
+{layout_block}
 
 【区块C — ❌/✅ 对比】
   一组完整句子（各≥6词），展示学生最容易犯的错误
@@ -697,22 +780,22 @@ def _build_card_info_grammar(card, subject, grade, semester):
 
 ═══════ ⛔ 6条铁律（违反=废卡）═══════
 
-🔒1. 标题就是「{eng_key_phrase}」本身（英文！），🚫禁止纯中文泛化标题
-🔒2. 区块B必须展示2-3种不同的用法/搭配，每种配完整英文例句。区块B是纯文字教学区，🚫严禁用卡通人物或装饰替代
+🔒1. 标题包含「{eng_key_phrase}」（英文！），{'语法概念卡允许混合标题如"连接that"' if is_concept_card else '🚫禁止纯中文泛化标题'}
+🔒2. {'每个分支必须有中文语法术语+完整英文例句，术语文字必须精确（如"同位语从句"不能写成"应语从句"）' if is_concept_card else '区块B必须展示2-3种不同的用法/搭配，每种配完整英文例句。区块B是纯文字教学区，🚫严禁用卡通人物或装饰替代'}
 🔒3. 区块C的❌/✅必须是学生真正会犯的错误，完整句子≥6词，错因用英文标注（不写中文句子）
 🔒4. 全卡所有内容只能涉及「{eng_key_phrase}」这一个知识点，🚫严禁混入无关词汇/语法点
 🔒5. 口诀用「英文+≤4中文字」混合格式，🚫禁止万能废话
 🔒6. 全卡中文≤{_mc}字，英文不限。每个中文字必须粗体清晰，中文越少越好
 🔒7. 🚫严禁出现以下废话填充: "记住哦""来看看""一起学""加油""注意哦""要记住"——这些不是教学内容！
+🔒8. {'⚠️ 中文语法术语必须100%精确！"同位语从句"不能写成"应语从句"，"宾语从句"不能写成"宝语从句"。如果不确定，用英文标注替代（如 appositive clause）' if is_concept_card else '教学内容不能被卡通角色替代'}
 
 ═══════ 📋 最终检查 ═══════
-□ 标题是「{eng_key_phrase}」本身吗？
-□ 区块B有2-3种不同用法+完整例句吗？(不是卡通人物/装饰图案？)
-□ 区块B的英文例句是否作为可见文字渲染在卡面上？
+□ 标题包含「{eng_key_phrase}」吗？
+{'□ 每个分支的语法术语拼写正确吗？（同位语从句≠应语从句）' if is_concept_card else '□ 区块B有2-3种不同用法+完整例句吗？(不是卡通人物/装饰图案？)'}
+□ 英文例句是否作为可见文字渲染在卡面上？
 □ ❌/✅例句只涉及「{eng_key_phrase}」吗？有没有混入无关内容？
 □ 口诀含具体语法知识吗？不是万能废话吗？
 □ 区块C的错因标注是英文吗？（不要写中文句子，防乱码）
-□ 全卡只有ABCD四个区块吗？没有多余的填空题/步骤编号吗？
 □ 卡片中间有没有"记住哦""来看看"等废话？（如果有：删掉，替换为英文例句）
 
 ═══════ 📚 参考数据（仅供理解，以上规范优先）═══════
@@ -965,6 +1048,8 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
         manifest = _parse_text_manifest(best_text)
         # 英语卡标题优化: 自动注入英文关键词
         manifest = _fix_english_card_title_manifest(manifest, card, subject)
+        # 语法术语保护: 将卡片中的语法术语加入manifest，方便OCR精确审计
+        manifest = _inject_grammar_terms_to_manifest(manifest, card, subject)
         # 清理 prompt（移除 manifest 标签）
         prompt_clean = re.sub(r'\[TEXT_MANIFEST\].*?\[/TEXT_MANIFEST\]', '', best_text, flags=re.DOTALL).strip()
 
@@ -1037,6 +1122,33 @@ def _fix_english_card_title_manifest(manifest, card, subject):
         cn_prefix = ''.join(cn_chars[:2]) if cn_chars else title_val[:2]
         manifest[title_key] = f'{cn_prefix}{eng_phrase}'
         print(f'      [title fix] "{title_val}" → "{manifest[title_key]}"')
+    
+    return manifest
+
+
+def _inject_grammar_terms_to_manifest(manifest, card, subject):
+    """将卡片中涉及的语法术语注入 manifest，用于 OCR 精确审计
+    
+    如果卡面会渲染"宾语从句""同位语从句"等中文术语，
+    将它们加入 manifest 的期望文字列表，OCR 审计时能精确匹配，
+    防止 "同位语从句" 被渲染成 "应语从句" 等错误漏过检测。
+    """
+    if subject != '英语' and subject != 'english':
+        return manifest
+    
+    is_concept, terms = _is_grammar_concept_card(card)
+    if not is_concept or not terms:
+        return manifest
+    
+    # 检查 manifest 中已有的值，避免重复
+    existing_values = ' '.join(manifest.values())
+    added = 0
+    for term in terms[:4]:  # 最多保护4个术语
+        if term not in existing_values:
+            key = f'GRAMMAR_TERM_{added + 1}'
+            manifest[key] = term
+            added += 1
+            print(f'      [grammar protect] 注入期望术语: {key}="{term}"')
     
     return manifest
 
@@ -1286,6 +1398,12 @@ OCR_AUDIT_PROMPT = """你是一个严格的中文文字审计员。
 - 标记为 type:"missing_content", severity:"high"
 - 教学内容缺失直接扣30分（这是最严重的问题！一张没有教学内容的卡=废卡）
 - 常见废话填充: "记住哦" "来看看" "一起学" "加油哦" "注意哦" — 这些不是教学内容
+
+⚠️ 特别检查：语法术语错字
+- 期望文字中如果有 GRAMMAR_TERM_1/2/3 等条目，这些是精确的语法术语（如"宾语从句""同位语从句"）
+- 图片中对应术语必须100%拼写正确，任何错字都是 severity:"high"
+- 常见 AI 渲染错误: "同位语"→"应语"/"问位语", "宾语"→"宝语"/"实语", "状语"→"壮语"
+- 语法术语错字每处扣15分（比普通错字更严重，因为学生会记住错误知识）
 
 只输出JSON，不要其他文字。"""
 
