@@ -156,8 +156,9 @@ def gemini_call(model, contents, api_key, gen_config=None, retries=2, all_keys=N
     data = json.dumps(body).encode('utf-8')
 
     # 图片模型给更宽裕的超时（生图较慢），文本模型缩短超时
+    # v6.5b: 150→100s(image), 90→60s(text) — 减少单次超时避免总时间超限
     is_image_model = 'image' in model or 'imagen' in model
-    call_timeout = 150 if is_image_model else 90
+    call_timeout = 100 if is_image_model else 60
 
     total_attempts = len(key_list) * retries
     attempt_num = 0

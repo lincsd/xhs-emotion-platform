@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260327c';
+      var BUILD='20260327d';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);}
@@ -3839,7 +3839,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260327c'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260327d'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -10590,12 +10590,12 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           var submitData = await _safeJsonParse(submitResp);
           if (!submitData.task_id) throw new Error(submitData.error || '\u4efb\u52a1\u521b\u5efa\u5931\u8d25');
 
-          // 轮询任务状态（每3秒，最多100次=300秒；后端全局超时240s）
+          // 轮询任务状态（每3秒，最多140次=420秒；后端全局超时420s）
           var taskId = submitData.task_id;
           var data = null;
           var pollStart = Date.now();
           var _pollErrors = 0; // 连续轮询网络失败次数
-          for (var _poll = 0; _poll < 100; _poll++) {
+          for (var _poll = 0; _poll < 140; _poll++) {
             await new Promise(function(r){ setTimeout(r, 3000); });
             var elapsed = Math.round((Date.now() - pollStart) / 1000);
             if (status) {

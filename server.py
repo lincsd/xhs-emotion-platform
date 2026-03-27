@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260327c'  # v5: prompt vacuum fix + title injection + slogan quality
+BUILD_VERSION = '20260327d'  # v6.5b: anti-timeout — reduce call timeout, widen poll/task limits
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -156,7 +156,7 @@ IMAGE_GEN_MIN_GAP = 2.0  # 图片请求最小间隔(秒)
 _async_tasks = {}          # {task_id: {status, result, created, updated}}
 _async_tasks_lock = threading.Lock()
 _ASYNC_TASK_TTL = 600      # 任务结果保留10分钟
-_ASYNC_TASK_TIMEOUT = 360  # 后台任务最大运行时间(秒) — v6.3加宽: image模型+长prompt需要更多时间
+_ASYNC_TASK_TIMEOUT = 420  # 后台任务最大运行时间(秒) — v6.5b加宽: 概念卡prompt更复杂
 
 def _get_next_server_key():
     """轮询获取下一个服务器端 API Key（线程安全）"""
@@ -4061,7 +4061,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
                 # Quality score (如果已超过280s就跳过，留余量给返回)
                 quality = {'total': 0, 'comment': ''}
-                if not _timed_out() and _elapsed() < 280:
+                if not _timed_out() and _elapsed() < 320:
                     try:
                         _update_progress(f'Step5b: 质量评分... [{_elapsed():.0f}s]')
                         pipeline_log.append('Step5b: 质量评分...')
