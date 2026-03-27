@@ -559,9 +559,23 @@ def validate_hard_rules(card, subject=''):
                 f'不是完整短句 (如"搭配固定要" → 应改为"搭配用to")'
             )
         # 检查是否太笼统无意义
-        _USELESS_SLOGANS = ['多练就会', '记住就好', '背了就行', '牢记即可', '熟能生巧']
+        _USELESS_SLOGANS = [
+            '多练就会', '记住就好', '背了就行', '牢记即可', '熟能生巧',
+            '搭配固定要多记', '重点词汇要掌握', '语法规则记清楚',
+            '多背多练多记', '词汇积累靠坚持', '知识要点记牢',
+            '搭配要多记', '固定搭配记住', '语法要牢记',
+        ]
         if memory_tip in _USELESS_SLOGANS:
-            issues.append(f'口诀"{memory_tip}"过于笼统无意义，需要包含具体知识点')
+            issues.append(f'口诀"{memory_tip}"过于笼统无意义，需要包含具体知识点(如"to后接名词")')
+        # 进一步检查：英语卡口诀不含任何英文关键词也是问题
+        if subject in ('英语', 'english') and memory_tip:
+            has_eng_word = bool(re.search(r'[a-zA-Z]{2,}', memory_tip))
+            has_specific_cn = bool(re.search(r'(介词|名词|动词|原形|ing|ed|不可数|可数|单数|复数|被动|主动|从句|定语|状语)', memory_tip))
+            if not has_eng_word and not has_specific_cn and len(memory_tip) >= 4:
+                issues.append(
+                    f'英语卡口诀"{memory_tip}"缺少英文关键词或具体语法术语，'
+                    f'应含具体知识点(如"to后加名词""注意pay的搭配")'
+                )
 
     return {
         'pass': len(issues) == 0,

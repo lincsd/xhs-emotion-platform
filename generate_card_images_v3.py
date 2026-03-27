@@ -574,6 +574,21 @@ def _build_card_info_grammar(card, subject, grade, semester):
     只是背景知识参考，最终图片上的文字必须由 prompt 生成器精简到≤{max_chars}字。
     """
     card_type = card.get('type', '语法辨析卡')
+
+    # ── 英语卡标题预处理: 在构建 prompt 前就注入英文关键词 ──
+    if subject in ('英语', 'english'):
+        _title_val = card.get('title', '')
+        _has_eng_in_title = bool(re.search(r'[a-zA-Z]', _title_val))
+        if not _has_eng_in_title:
+            _def = card.get('definition', '')
+            _eng_words = re.findall(r'[a-zA-Z][a-zA-Z\s]{2,}', _def)
+            if _eng_words:
+                _eng_kw = max(_eng_words, key=len).strip()[:25]
+                if _eng_kw:
+                    _cn_chars = re.findall(r'[\u4e00-\u9fff]', _title_val)
+                    _cn_prefix = ''.join(_cn_chars[:2]) if _cn_chars else _title_val[:2]
+                    card['title'] = f'{_cn_prefix}{_eng_kw}'
+                    print(f'      [prompt title fix] "{_title_val}" → "{card["title"]}"')
     
     # 获取自适应字数限制
     eff = _get_effective_params()
@@ -608,6 +623,14 @@ def _build_card_info_grammar(card, subject, grade, semester):
         mistakes_info = f"\n易混对比: ❌{m.get('wrong', '')[:80]} → ✅{m.get('correct', '')[:80]}"
         if reason:
             mistakes_info += f"\n错因: {reason[:100]}"
+    else:
+        # ⚠️ 所有 mistakes 被过滤为离题 → 明确指示 Gemini 不要自行发明无关内容
+        _tp = card.get('definition', '')[:60] or card.get('title', '')
+        mistakes_info = (
+            f"\n⚠️ 易混对比数据已因离题被移除。你必须自行根据「{_tp}」设计一个"
+            f"与本知识点直接相关的 ❌/✅ 完整例句对比！"
+            f"\n🚫 严禁使用任何与「{_tp}」无关的词汇/语法点作为 Common Error！"
+        )
 
     why_exp = ''
     if card.get('why_explanation'):
@@ -656,18 +679,19 @@ def _build_card_info_grammar(card, subject, grade, semester):
 🔒3. 必须有完整英文例句对比：❌错句(≥5词) vs ✅正句(≥5词)，禁止孤立短语/单词当步骤！
 🔒4. 🚫严禁"拆词式"步骤（如 attention→pay attention→pay attention to 是废话），每步必须展示真实语境用法
 🔒5. 错因必须具体(如"to后接动词原形")，学生看完能答"为什么这样用"，禁止"词性错""搭配错"等笼统说法
-🔒6. 口诀必须是完整有意义的短句(如"to后加原形"，≤6字)，🚫严禁截断废字（"搭配固定要""搭配固""记住就"都是废话）！
-🔒7. 🚫严禁添加任何与「{topic_phrase}」无关的公式/规则/知识点！图片底部只总结本卡结论！
+🔒6. 口诀必须是与「{topic_phrase}」紧密相关的短句(≤6字)！好口诀: "to后加名词""注意介词to"。🚫垃圾口诀: "搭配固定要多记""重点词汇要掌握""语法规则记清楚"（这些万能废话=废卡）！
+🔒7. 🚫严禁添加任何与「{topic_phrase}」无关的公式/规则/知识点/词汇！Common Error 必须只涉及「{topic_phrase}」本身的易错用法，严禁混入无关词汇(如讲"pay attention to"时禁止出现successful/succeed等无关词)！
 🔒8. 所有中文文字必须是完整的词/短句，禁止截断！每个中文字笔画清晰粗体加大！
 🔒9. 视觉隐喻必须匹配内容逻辑，布局清晰不拥挤，≥25%留白
 🔒10. 学生看完必须能回答三个问题: ①怎么在句子里用 ②常见错误是什么 ③为什么错
 
 🚨🚨🚨 最终检查清单（生成图片前必须逐条确认）：
 □ 图中是否只有「{topic_phrase}」这一个语法/搭配知识点？
-□ 是否有任何与「{topic_phrase}」无关的公式/规则/例子？如果有，立即删除！
+□ 是否有任何与「{topic_phrase}」无关的公式/规则/例子/词汇？如果有，立即删除！
 □ 答案区域是否只包含「{topic_phrase}」相关的答案？
-□ Common Error 是否与「{topic_phrase}」直接相关？
-□ 口诀是否是完整且有意义的中文短句？
+□ Common Error 是否只涉及「{topic_phrase}」本身的易错用法？（严禁混入其他知识点！）
+□ 口诀是否是完整且有意义的中文短句？（如"注意to后加名词"而非"搭配固定要多记"这种万能废话）
+□ 标题是否包含英文关键词？（如"搭配pay attention to"而非"高频搭配"）
 {depth_override}
 
 图片上只能出现≤{_mc}个中文字！
