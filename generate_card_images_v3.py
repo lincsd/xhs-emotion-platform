@@ -650,22 +650,17 @@ def _build_card_info_grammar(card, subject, grade, semester):
 🎯 本卡唯一主题: {topic_phrase}
 🔑 英语卡片核心：对比辨析 + 错因解释
 
-⚠️⚠️⚠️ 极重要提醒：英语卡片质量铁律！
-🔒1. 单卡只讲一个知识点！标题必须精确(如"pay attention to搭配")，禁止泛化标题如"高频词""重点语法""搭配活用"
-🔒2. 知识点准确性第一！不能把正确用法标为❌！每个❌/✅必须反复检查
-🔒3. 必须有完整例句对比(不能只放孤立短语)：❌错句 vs ✅正句，例句必须是完整英语句子
-🔒4. 所有英文单词必须是真实存在的词！严禁编造不存在的词(如guestioneful)
-🔒5. 错因必须具体(如"to后接动词原形")，禁止"词性错""搭配错"等笼统说法
-🔒6. 口诀必须是完整有意义的短句(如"to后加原形")，禁止截断废话如"搭配固定要""搭配固定""多练就会""记住就好"！
-🔒7. 所有Steps必须围绕同一个知识点展开，步骤间逻辑连贯递进
-🔒8. 视觉隐喻必须匹配内容逻辑(不用阶梯图表示非递进关系)
-🔒9. 学生看完必须能答"为什么这样用"，不能只停留在"知道这样用"
-🔒10. 🚫严禁在图中添加任何与"{topic_phrase}"无关的语法公式、规则、知识点！（如本卡讲搭配，就不能出现Modal verb公式）
-🔒11. 图片底部/总结区域只能总结本卡主题的结论，禁止突然出现卡片数据中没有的新知识点！
-🔒12. 所有中文文字必须是完整的词/短句，禁止截断（如"搭配固"就是截断废字）
-🔒13. 🚫严禁"拆词式"步骤！不能把短语拆成单词当步骤(如 attention→pay attention→pay attention to 是废话)
-🔒14. 每个步骤必须包含至少一个完整英文例句(≥5词)，展示知识点在真实语境中的用法
-🔒15. 学生看完必须能回答"这个词/短语怎么在句子里用"+"常见错误是什么"+"为什么错"三个问题
+⚠️⚠️⚠️ 英语卡片10条铁律（违反任何一条=废卡重做）！
+🔒1. 单卡只讲「{topic_phrase}」一个知识点！标题必须含英文关键词，禁止"高频词""搭配活用"等泛化标题
+🔒2. 知识点准确性第一！❌/✅必须反复核对，不能把正确用法标错！所有单词必须真实存在！
+🔒3. 必须有完整英文例句对比：❌错句(≥5词) vs ✅正句(≥5词)，禁止孤立短语/单词当步骤！
+🔒4. 🚫严禁"拆词式"步骤（如 attention→pay attention→pay attention to 是废话），每步必须展示真实语境用法
+🔒5. 错因必须具体(如"to后接动词原形")，学生看完能答"为什么这样用"，禁止"词性错""搭配错"等笼统说法
+🔒6. 口诀必须是完整有意义的短句(如"to后加原形"，≤6字)，🚫严禁截断废字（"搭配固定要""搭配固""记住就"都是废话）！
+🔒7. 🚫严禁添加任何与「{topic_phrase}」无关的公式/规则/知识点！图片底部只总结本卡结论！
+🔒8. 所有中文文字必须是完整的词/短句，禁止截断！每个中文字笔画清晰粗体加大！
+🔒9. 视觉隐喻必须匹配内容逻辑，布局清晰不拥挤，≥25%留白
+🔒10. 学生看完必须能回答三个问题: ①怎么在句子里用 ②常见错误是什么 ③为什么错
 
 🚨🚨🚨 最终检查清单（生成图片前必须逐条确认）：
 □ 图中是否只有「{topic_phrase}」这一个语法/搭配知识点？
@@ -931,6 +926,8 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
 
         # 解析 TEXT_MANIFEST
         manifest = _parse_text_manifest(best_text)
+        # 英语卡标题优化: 自动注入英文关键词
+        manifest = _fix_english_card_title_manifest(manifest, card, subject)
         # 清理 prompt（移除 manifest 标签）
         prompt_clean = re.sub(r'\[TEXT_MANIFEST\].*?\[/TEXT_MANIFEST\]', '', best_text, flags=re.DOTALL).strip()
 
@@ -957,6 +954,53 @@ def _parse_text_manifest(text):
                 val = val.strip().strip('"').strip("'")
                 if val:
                     manifest[key] = val
+    return manifest
+
+
+def _fix_english_card_title_manifest(manifest, card, subject):
+    """英语卡标题优化: 如果 TITLE 是纯中文泛化标题，自动拼入英文关键短语"""
+    if subject != '英语' and subject != 'english':
+        return manifest
+    
+    title_key = None
+    title_val = None
+    for k, v in manifest.items():
+        if 'TITLE' in k.upper():
+            title_key = k
+            title_val = v
+            break
+    
+    if not title_key or not title_val:
+        return manifest
+    
+    # 检查: TITLE 是否有英文
+    has_eng = bool(re.search(r'[a-zA-Z]', title_val))
+    if has_eng:
+        return manifest  # 已经有英文了，不动
+    
+    # 从 definition 中提取英文关键短语
+    definition = card.get('definition', '')
+    eng_phrase = ''
+    # 尝试提取完整短语 (如 "pay attention to")
+    eng_words = re.findall(r'[a-zA-Z][a-zA-Z\s]{2,}', definition)
+    if eng_words:
+        # 取最长的英文片段
+        eng_phrase = max(eng_words, key=len).strip()[:25]
+    
+    if not eng_phrase:
+        # 从 title 尝试
+        title_full = card.get('title', '')
+        eng_words = re.findall(r'[a-zA-Z][a-zA-Z\s]{2,}', title_full)
+        if eng_words:
+            eng_phrase = max(eng_words, key=len).strip()[:25]
+    
+    if eng_phrase:
+        # 中文标题保留前2字 + 英文关键词
+        cn_chars = re.findall(r'[\u4e00-\u9fff]', title_val)
+        cn_prefix = ''.join(cn_chars[:2]) if cn_chars else title_val[:2]
+        manifest[title_key] = f'{cn_prefix}{eng_phrase}'
+        print(f'      [title fix] "{title_val}" → "{manifest[title_key]}"')
+    
     return manifest
 
 
@@ -988,15 +1032,17 @@ def _enforce_manifest_limits(manifest, max_total=None, max_per_block=None):
     
     # 统计当前总中文字数
     total_cn = sum(_count_chinese_chars(v) for v in manifest.values())
+    max_slogan_check = min(max_per_block + 2, 8)  # 口诀允许更宽
     if total_cn <= max_total:
-        # 仍需检查每块≤max_per_block
+        # 仍需检查每块≤limit (口诀用独立预算)
         trimmed = {}
         for k, v in manifest.items():
             cn_count = _count_chinese_chars(v)
-            if cn_count > max_per_block:
-                # 截断到max_per_block个中文字
-                new_v = _trim_to_n_chinese(v, max_per_block)
-                print(f'      [manifest guard] {k}: "{v}" → "{new_v}" (每块≤{max_per_block}字)')
+            is_slogan = any(s in k.upper() for s in ('SLOGAN', '口诀', 'TIP', 'MOTTO'))
+            limit = max_slogan_check if is_slogan else max_per_block
+            if cn_count > limit:
+                new_v = _trim_to_n_chinese(v, limit)
+                print(f'      [manifest guard] {k}: "{v}" → "{new_v}" (每块≤{limit}字)')
                 trimmed[k] = new_v
             else:
                 trimmed[k] = v
@@ -1007,6 +1053,7 @@ def _enforce_manifest_limits(manifest, max_total=None, max_per_block=None):
     
     result = {}
     budget = max_total
+    max_slogan = min(max_per_block + 2, 8)  # 口诀独立预算，比普通块多2字
     
     # 优先保留 TITLE
     for k, v in manifest.items():
@@ -1016,14 +1063,16 @@ def _enforce_manifest_limits(manifest, max_total=None, max_per_block=None):
             budget -= _count_chinese_chars(trimmed_v)
             break
     
-    # 其余按顺序，每块限max_per_block且总量不超budget
+    # 其余按顺序，口诀给独立预算
     for k, v in manifest.items():
         if k in result:
             continue
         if budget <= 0:
             print(f'      [manifest guard] 丢弃 {k}: "{v}" (预算用完)')
             continue
-        alloc = min(max_per_block, budget)
+        # 口诀/SLOGAN 类字段给更大预算
+        is_slogan = any(s in k.upper() for s in ('SLOGAN', '口诀', 'TIP', 'MOTTO'))
+        alloc = min(max_slogan if is_slogan else max_per_block, budget)
         cn_count = _count_chinese_chars(v)
         if cn_count == 0:
             result[k] = v  # 纯数字/符号，保留
@@ -1042,7 +1091,7 @@ def _enforce_manifest_limits(manifest, max_total=None, max_per_block=None):
 
 
 def _trim_to_n_chinese(text, n):
-    """截断文本保留前n个中文字符（保留非中文字符）"""
+    """智能截断：保留前n个中文字（保留非中文字符），确保不以虚词/助词半截结尾"""
     result = []
     cn_count = 0
     for c in text:
@@ -1051,7 +1100,25 @@ def _trim_to_n_chinese(text, n):
             if cn_count > n:
                 break
         result.append(c)
-    return ''.join(result).rstrip()
+    trimmed = ''.join(result).rstrip()
+    # 如果截断了，检查末尾是否完整
+    if len(trimmed) < len(text):
+        trimmed = _ensure_complete_chinese(trimmed)
+    return trimmed
+
+
+# 常见的中文"废尾"——如果口诀以这些字结尾，说明被截断了
+_DANGLING_ENDINGS = set('要的了地得在是和与用把被让给往到从向对着过将')
+
+def _ensure_complete_chinese(text):
+    """确保中文文字块不以虚词/助词结尾（说明被截断）"""
+    if not text:
+        return text
+    last_char = text[-1]
+    if last_char in _DANGLING_ENDINGS:
+        # 去掉最后的虚词
+        return text[:-1].rstrip()
+    return text
 
 
 # ═══════════════════════════════════════════
@@ -1165,6 +1232,11 @@ OCR_AUDIT_PROMPT = """你是一个严格的中文文字审计员。
 - 80+: 有轻微瑕疵但可读
 - 60-79: 有明显错字但整体可理解
 - <60: 严重乱码，需要重新生成
+
+⚠️ 特别检查：截断废字
+- 检查每个中文文字块是否是**完整**的词或短句
+- 如果某个文字块以虚词/助词结尾(如"搭配固定要""注意到""记住就")明显是被截断了 → 标记为 type:"truncated", severity:"high"
+- 截断废字每发现一处扣10分
 
 只输出JSON，不要其他文字。"""
 
@@ -1321,11 +1393,11 @@ def _try_pil_text_repair(image_data, audit_result, expected_manifest):
 # ═══════════════════════════════════════════
 QUALITY_PROMPT = """你是知识卡片质量评审员。请从5个维度评分(每项0-20分，满分100)：
 
-1. **教学清晰度**(20分): 例题清晰? 解题步骤直观? 一眼就懂?
-2. **文字准确性**(20分): 中文无乱码无错字? 数字公式正确?
+1. **教学清晰度**(20分): 例题清晰? 解题步骤直观? 一眼就懂? (英语卡: 有完整例句+易错对比+本质原因?)
+2. **文字准确性**(20分): 中文无乱码无错字? 数字公式正确? ⚠️截断废字(如"搭配固定要""注意到")直接扣15分!
 3. **视觉美感**(20分): 配色好看? 像小红书爆款? 有吸引力?
 4. **布局合理性**(20分): 信息层次清晰? 留白充足? 不拥挤?
-5. **可收藏感**(20分): 看到就想截图保存? 有"干货感"?
+5. **可收藏感**(20分): 看到就想截图保存? 有"干货感"? 口诀是否完整有意义(截断废话扣10分)?
 
 只输出JSON格式（不要代码块标记）：
 {{"teaching": 16, "text_accuracy": 18, "visual": 17, "layout": 15, "saveable": 16, "total": 82, "comment": "一句话点评"}}"""

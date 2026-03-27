@@ -513,6 +513,21 @@ def validate_hard_rules(card, subject=''):
                     f'缺少完整例句和解释 (禁止把短语拆成单词当步骤)'
                 )
 
+    # ── 规则 13: 口诀完整性检测 ──
+    memory_tip = card.get('memory_tip', '').strip()
+    if memory_tip:
+        # 检查是否以虚词/助词结尾(表被截断)
+        _DANGLING_TAILS = set('要的了地得在是和与用把被让给往到从向对着过将')
+        if memory_tip[-1] in _DANGLING_TAILS and len(memory_tip) <= 8:
+            issues.append(
+                f'口诀疑似截断: "{memory_tip}" 以虚词"{memory_tip[-1]}"结尾，'
+                f'不是完整短句 (如"搭配固定要" → 应改为"搭配用to")'
+            )
+        # 检查是否太笼统无意义
+        _USELESS_SLOGANS = ['多练就会', '记住就好', '背了就行', '牢记即可', '熟能生巧']
+        if memory_tip in _USELESS_SLOGANS:
+            issues.append(f'口诀"{memory_tip}"过于笼统无意义，需要包含具体知识点')
+
     return {
         'pass': len(issues) == 0,
         'issues': issues,
