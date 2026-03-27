@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260326f'  # 积分系统5Bug修复+消费明细+配额弹窗改进
+BUILD_VERSION = '20260327a'  # 英语卡片质量铁律+自适应字数限制+文字守门员
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
