@@ -156,7 +156,7 @@ IMAGE_GEN_MIN_GAP = 2.0  # 图片请求最小间隔(秒)
 _async_tasks = {}          # {task_id: {status, result, created, updated}}
 _async_tasks_lock = threading.Lock()
 _ASYNC_TASK_TTL = 600      # 任务结果保留10分钟
-_ASYNC_TASK_TIMEOUT = 240  # 后台任务最大运行时间(秒) — 超时返回最佳结果或错误
+_ASYNC_TASK_TIMEOUT = 360  # 后台任务最大运行时间(秒) — v6.3加宽: image模型+长prompt需要更多时间
 
 def _get_next_server_key():
     """轮询获取下一个服务器端 API Key（线程安全）"""
@@ -4059,9 +4059,9 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     else:
                         final_action = 'best_effort'
 
-                # Quality score
+                # Quality score (如果已超过280s就跳过，留余量给返回)
                 quality = {'total': 0, 'comment': ''}
-                if not _timed_out():
+                if not _timed_out() and _elapsed() < 280:
                     try:
                         _update_progress(f'Step5b: 质量评分... [{_elapsed():.0f}s]')
                         pipeline_log.append('Step5b: 质量评分...')
@@ -4070,7 +4070,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     except Exception:
                         pipeline_log.append('质量评分跳过')
                 else:
-                    pipeline_log.append('⏰ 超时, 跳过质量评分')
+                    pipeline_log.append(f'⏰ 时间紧张({_elapsed():.0f}s), 跳过质量评分')
 
                 img_b64 = base64.b64encode(best_image).decode('utf-8')
                 mime = 'image/jpeg' if best_ext == 'jpg' else 'image/png'

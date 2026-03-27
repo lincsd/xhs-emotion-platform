@@ -155,6 +155,10 @@ def gemini_call(model, contents, api_key, gen_config=None, retries=2, all_keys=N
         body['generationConfig'] = gen_config
     data = json.dumps(body).encode('utf-8')
 
+    # 图片模型给更宽裕的超时（生图较慢），文本模型缩短超时
+    is_image_model = 'image' in model or 'imagen' in model
+    call_timeout = 150 if is_image_model else 90
+
     total_attempts = len(key_list) * retries
     attempt_num = 0
 
@@ -165,7 +169,7 @@ def gemini_call(model, contents, api_key, gen_config=None, retries=2, all_keys=N
             attempt_num += 1
             try:
                 req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'})
-                with urllib.request.urlopen(req, timeout=120) as resp:
+                with urllib.request.urlopen(req, timeout=call_timeout) as resp:
                     return json.loads(resp.read().decode('utf-8'))
             except urllib.error.HTTPError as e:
                 err_body = e.read().decode('utf-8', errors='replace')
