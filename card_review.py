@@ -36,6 +36,130 @@ ENGLISH_GRAMMAR_KEYWORDS = [
     '语法辨析', '高频活用', '易混辨析', '词性辨析',
 ]
 
+# ─── 英文拼写检查: 基础高频词表 ───
+# 不在此表中的 5+ 字母英文单词视为可疑 (需进一步检查)
+_BASIC_ENGLISH_WORDS = set()
+
+def _load_basic_words():
+    """懒加载基础英语词表 (约 5000 常用词 + 语法术语)"""
+    global _BASIC_ENGLISH_WORDS
+    if _BASIC_ENGLISH_WORDS:
+        return _BASIC_ENGLISH_WORDS
+    # 内置核心词表 (高频 + 教学常用)
+    core = {
+        # 常见动词
+        'is','am','are','was','were','be','been','being','have','has','had',
+        'do','does','did','done','will','would','shall','should','can','could',
+        'may','might','must','need','dare','make','made','take','taken','took',
+        'give','gave','given','get','got','gotten','go','went','gone','come',
+        'came','say','said','tell','told','know','knew','known','think','thought',
+        'see','saw','seen','find','found','want','use','used','work','try',
+        'ask','seem','feel','felt','leave','left','call','keep','kept','let',
+        'begin','began','begun','show','showed','shown','hear','heard','play',
+        'run','ran','move','live','believe','bring','brought','happen','write',
+        'wrote','written','provide','sit','sat','stand','stood','lose','lost',
+        'pay','paid','meet','met','include','continue','set','learn','learned',
+        'change','lead','led','understand','understood','watch','follow',
+        'stop','create','speak','spoke','spoken','read','allow','add','spend',
+        'spent','grow','grew','grown','open','walk','win','won','teach','taught',
+        'offer','remember','love','consider','appear','buy','bought','wait',
+        'serve','die','send','sent','expect','build','built','stay','fall',
+        'fell','fallen','cut','reach','kill','remain','suggest','raise','pass',
+        'sell','sold','require','report','decide','pull','develop','succeed',
+        # 常见名词
+        'time','year','people','way','day','man','woman','child','children',
+        'world','life','hand','part','place','case','week','company','system',
+        'program','question','work','government','number','night','point',
+        'home','water','room','mother','area','money','story','fact','month',
+        'lot','right','study','book','eye','job','word','business','issue',
+        'side','kind','head','house','service','friend','father','power',
+        'hour','game','line','end','member','law','car','city','community',
+        'name','president','team','minute','idea','body','information',
+        'back','parent','face','others','level','office','door','health',
+        'person','art','war','history','party','result','change','morning',
+        'reason','research','girl','guy','moment','air','teacher','force',
+        'education','success','attention','career',
+        # 常见形容词
+        'good','better','best','new','first','last','long','great','little',
+        'own','other','old','right','big','high','different','small','large',
+        'next','early','young','important','few','public','bad','same','able',
+        'close','late','hard','real','strong','possible','whole','free',
+        'short','sure','clear','correct','wrong','poor','nice','beautiful',
+        'complete','simple','certain','true','false','full','special',
+        'difficult','easy','successful','careful','happy','serious',
+        # 常见副词
+        'not','also','very','often','however','too','usually','really',
+        'already','always','never','sometimes','together','enough','quite',
+        'probably','actually','finally','certainly','suddenly','directly',
+        'slowly','quickly','carefully','clearly','closely','absolutely',
+        # 常见介词/连词/代词
+        'the','a','an','in','to','for','of','on','with','at','by','from',
+        'up','about','into','over','after','beneath','under','above',
+        'between','out','against','during','without','before','through',
+        'because','although','though','while','when','where','if','that',
+        'this','these','those','which','what','who','whom','whose','how',
+        'he','she','it','they','we','you','i','me','him','her','us','them',
+        'my','your','his','its','our','their','mine','yours','hers','ours',
+        'theirs','myself','yourself','himself','herself','itself',
+        # 语法术语
+        'noun','verb','adjective','adverb','pronoun','preposition',
+        'conjunction','interjection','article','phrase','clause','sentence',
+        'subject','predicate','object','modifier','tense','aspect','mood',
+        'voice','singular','plural','masculine','feminine','neuter',
+        'infinitive','participle','gerund','modal','auxiliary',
+        'collocation','synonym','antonym','homophone','prefix','suffix',
+        'syllable','vowel','consonant','stress','intonation',
+        # 教学常见
+        'example','step','rule','tip','memory','practice','exercise',
+        'answer','solution','method','formula','pattern','structure',
+        'meaning','definition','explanation','reason','because','therefore',
+        'fixed','base','needs','after','before','blank','choose','fill',
+        'complete','match','circle','underline','highlight','translate',
+        'rewrite','correct','incorrect','right','false','check',
+        'sentence','paragraph','passage','title','heading','details',
+        'attention','career','question','important','necessary','notice',
+        'usage','between','describe','identify','replace','select',
+        'compare','contrast','apply','analyze','evaluate','review',
+    }
+    _BASIC_ENGLISH_WORDS = core
+    return _BASIC_ENGLISH_WORDS
+
+
+def detect_fabricated_words(text):
+    """
+    检测可能是 AI 编造的英文假词 (如 guestioneful, bindingly)。
+    策略: 提取所有 5+ 字母的英文单词，不在基础词表中的标记为可疑。
+    返回可疑词列表。
+    """
+    words = _load_basic_words()
+    # 提取所有英文单词
+    tokens = re.findall(r"\b[a-zA-Z]{5,}\b", text)
+    suspicious = []
+    for tok in tokens:
+        low = tok.lower()
+        # 跳过全大写缩写
+        if tok.isupper():
+            continue
+        # 常见后缀变形 (简单 stemming)
+        stems = {low}
+        for suffix in ('s','es','ed','ing','ly','er','est','tion','sion','ment','ness','ful','less','able','ible','ous','ive','al','ical'):
+            if low.endswith(suffix) and len(low) - len(suffix) >= 3:
+                stems.add(low[:-len(suffix)])
+                stems.add(low[:-len(suffix)] + 'e')  # e.g. made -> mak+e
+        # 检查词根是否在词表中
+        if not any(s in words for s in stems) and low not in words:
+            suspicious.append(tok)
+    # 去重
+    return list(dict.fromkeys(suspicious))
+
+
+# 过于泛化的标题关键词 (这些单独作为标题不够具体)
+VAGUE_TITLE_PATTERNS = [
+    '高频词汇', '重点语法', '常见搭配', '易错考点', '必背知识',
+    '核心知识', '重要知识', '关键考点', '必考考点', '常考题型',
+    '高频考点', '重点知识', '基础语法', '基础词汇',
+]
+
 # 常见重复词模式 (英文)
 REPEATED_WORD_PATTERN = re.compile(
     r'\b(\w{2,})\s+\1\b', re.IGNORECASE
@@ -253,6 +377,37 @@ def validate_hard_rules(card, subject=''):
     if not card.get('definition', '').strip():
         issues.append('缺少 definition 字段')
 
+    # ── 规则 9: AI 造词检测 ──
+    if is_eng and _has_english(text):
+        fabricated = detect_fabricated_words(text)
+        if fabricated:
+            issues.append(f'疑似 AI 造词: {", ".join(fabricated[:3])}')
+
+    # ── 规则 10: 标题过于泛化 ──
+    title = card.get('title', '')
+    for vague in VAGUE_TITLE_PATTERNS:
+        if title.strip() == vague:
+            issues.append(f'标题 "{title}" 过于泛化，需要精确到具体知识点 (如 "succeed词族辨析")')
+            break
+
+    # ── 规则 11: Steps 连贯性 (英语卡) ──
+    if is_eng:
+        steps = card.get('example', {}).get('steps', [])
+        if len(steps) >= 3:
+            # 提取每个 step 的英文关键词
+            step_keywords = []
+            for s in steps:
+                kw = set(re.findall(r'[a-zA-Z]{3,}', str(s).lower()))
+                step_keywords.append(kw)
+            # 如果相邻 steps 完全没有共同关键词，可能主题不连贯
+            disconnected = 0
+            for i in range(len(step_keywords) - 1):
+                if step_keywords[i] and step_keywords[i+1]:
+                    if not step_keywords[i] & step_keywords[i+1]:
+                        disconnected += 1
+            if disconnected >= 2:
+                issues.append('Steps 之间缺乏连贯性，可能混杂了多个不相关主题')
+
     return {
         'pass': len(issues) == 0,
         'issues': issues,
@@ -450,58 +605,70 @@ def build_structured_payload(card, subject='', review_result=None):
 
 ENGLISH_GRAMMAR_PROMPT_TEMPLATE = """你是英语语法教学卡图片设计师。
 
-核心原则:
-- 一张卡只讲一个主知识点
-- 只允许以下信息块: 标题 / 主规则 / 正误对比 / 错因 / 记忆点
-- 不要混入第二个知识点
-- 正句必须是完整自然英语
-- 错因必须具体 (不能只写"词性错", 要写"succeed是动词, 这里需要名词success")
+══════ 铁 律 (违反任何一条 = 废卡) ══════
 
-══════ 信息块固定结构 ══════
+1. 一张卡只讲 **一个** 知识点 (如 "succeed词族" 或 "pay attention to搭配"，不能两个都讲)
+2. 卡面上所有英文必须是 **真实存在的单词和短语**，禁止编造词汇
+3. 正确例句必须是 **完整、地道、语法正确** 的英文句子
+4. 错误例句必须是 **真实常见的典型错误**，不能人为编造不自然的错句
+5. 错因必须 **具体标注词性/搭配/句法** (如 "succeed是动词, 这里需要名词success")
+6. 标题必须精确到知识点 (如 "succeed词族辨析")，不能写 "高频词汇" "重点语法" 等空泛标题
+7. 如有 Steps，每步必须聚焦同一知识点，逻辑递进
+8. 不出现任何与主知识点无关的单词/短语/例句
 
-[标题] ≤8个中文字, 如"高频搭配: pay attention to"
-[主规则] 一句话说清楚核心语法规则, ≤15字
-[正确例句] 一个完整自然的英文例句
-[错误例句] 一个典型错误的英文例句
-[错因解释] 用中文具体说明为什么错, 标注词性/搭配/句法
-[记忆点] ≤10字的口诀或助记
+══════ 信息块固定结构 (只有这 6 块，多一块都不行) ══════
+
+[标题] 格式: "知识点名: 关键短语", 如 "词族辨析: succeed"，≤10中文字
+[主规则] 一句话核心规则, ≤15字, 如 "great后接名词success, 不接形容词successful"
+[正确例句] 一个完整自然英文句 + 关键词绿色高亮 + ✓
+[错误例句] 一个典型错误英文句 + 错误词红色删除线 + ✗
+[错因解释] ≤20字中文, 必须标注词性/搭配, 如 "successful是形容词→应改为名词success"
+[记忆口诀] ≤10字, 如 "great配名词, 别用形容词"
+
+⚠️ 禁止添加:
+- 第二组正误对比
+- 不相关的 Step 拆解
+- 与主知识点无关的词汇或短语
+- "高频词汇" "重点必背" 等无意义装饰文字
 
 ══════ 视觉设计 ══════
 
 - 竖版 3:4 比例
 - 渐变背景, 小红书风格 (鲜明温暖有活力)
-- 标题用鲜色 banner, 超大加粗字体
-- 正确例句: 绿色高亮关键词, 带 ✓ 标记
-- 错误例句: 红色删除线关键词, 带 ✗ 标记
-- 错因: 用箭头或色块指向错误位置
-- 记忆点: 便签纸风格, 手写感
+- 标题用鲜色 banner, 超大加粗字体 (72pt)
+- 正误对比: 上下或左右并排, 差异词用颜色强调
+  - ✓ 正确: 翠绿 #2ED573 高亮关键词
+  - ✗ 错误: 亮红 #FF4757 删除线关键词
+- 错因: 橙色/蓝色色块, 箭头指向错误位置
+- 记忆口诀: 便签纸风格, 手写感
 - 最多 3 处高亮重点
-- 最多 3 个视觉区块
+- 只有 3-4 个视觉区块 (标题 / 规则 / 正误对比 / 口诀)
 - ≥ 25% 留白
-- 可爱小老师卡通角色 + ≤6字气泡
+- 可爱小老师卡通角色 + ≤6字气泡 (如 "秒懂!")
 
 ══════ 配色 ══════
 
 - 背景: 渐变 (如薰衣草紫 #E8D5F5→#D9AAF5 或 薄荷蓝 #A1C4FD→#C2E9FB)
-- ✓ 正确: 翠绿 #2ED573
-- ✗ 错误: 亮红 #FF4757
-- 标题: 饱和色 banner
-- 错因: 橙色或蓝色色块
+- 标题: 饱和色 banner (亮粉 #FF6B81 / 活力橙 #FF9F43)
+- 内容区: 白色/浅奶油圆角卡片
 
 ══════ 文字原则 ══════
 
 - 全卡中文 ≤ 30 字
 - 英文例句保持原样, 关键词高亮
-- 标题 ≤ 8 字
-- 错因 ≤ 15 字
-- 记忆点 ≤ 10 字
+- 标题 ≤ 10 字
+- 规则 ≤ 15 字
+- 错因 ≤ 20 字
+- 口诀 ≤ 10 字
 - 不写段落, 不写解释性长文
 
 ══════ 输出 ══════
 
 只输出一段英文图片生成提示词, 不输出其他内容。
-提示词开头必须写: "IMPORTANT: All visible text must be Simplified Chinese (简体中文) except for English example sentences. LARGE BOLD font. Clean layout."
-长度: 300-450 英文单词"""
+提示词开头必须写: "IMPORTANT: All visible text must be Simplified Chinese (简体中文) except for English example sentences. LARGE BOLD font. Clean layout. Only ONE grammar point per card."
+长度: 300-450 英文单词
+
+⚠️ 最终检查: 生成前确认卡面上只出现与主知识点直接相关的英文词汇，没有拼凑无关内容。"""
 
 
 def generate_english_grammar_prompt(payload, gemini_call_fn, api_key, text_model='gemini-2.5-flash'):

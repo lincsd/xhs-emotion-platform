@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Quick smoke test for card_review.py"""
-from card_review import validate_hard_rules, is_english_grammar_card
+from card_review import validate_hard_rules, is_english_grammar_card, detect_fabricated_words
 
 # Test 1: repeated word 'can can'
 card1 = {
@@ -71,4 +71,40 @@ r6 = validate_hard_rules(card6, '英语')
 print(f"Test 6 (vague reason): pass={r6['pass']}, issues={r6['issues']}")
 assert not r6['pass'], "Should fail: vague error reason"
 
-print("\n✅ All 6 tests passed!")
+# Test 7: AI fabricated word detection
+fab = detect_fabricated_words("He made a guestioneful attention in his career")
+print(f"Test 7 (fabricated word): found={fab}")
+assert 'guestioneful' in fab, f"Should detect 'guestioneful' but got: {fab}"
+
+# Test 8: real words should not be flagged
+fab2 = detect_fabricated_words("He made great success in his career successfully")
+print(f"Test 8 (real words): found={fab2}")
+assert len(fab2) == 0, f"Should not flag real words but got: {fab2}"
+
+# Test 9: vague title detection
+card9 = {
+    'title': '高频词汇',
+    'definition': 'pay attention to 后接名词',
+    'core_points': ['pay attention to'],
+    'memory_tip': '搭配记忆',
+    'mistakes': [{'wrong': 'He pay attention to it.', 'correct': 'He pays attention to it.'}],
+    'example': {'question': 'q', 'answer': 'a', 'steps': []},
+}
+r9 = validate_hard_rules(card9, '英语')
+print(f"Test 9 (vague title): pass={r9['pass']}, issues={r9['issues']}")
+assert not r9['pass'], "Should fail: vague title"
+
+# Test 10: fabricated word in card should be caught by hard rules
+card10 = {
+    'title': '搭配辨析',
+    'definition': 'pay attention to usage',
+    'core_points': ['pay attention to'],
+    'memory_tip': '搭配记忆',
+    'mistakes': [{'wrong': 'He made a guestioneful attention.', 'correct': 'He paid close attention.'}],
+    'example': {'question': 'q', 'answer': 'a', 'steps': []},
+}
+r10 = validate_hard_rules(card10, '英语')
+print(f"Test 10 (fabricated in card): pass={r10['pass']}, issues={r10['issues']}")
+assert not r10['pass'], "Should fail: fabricated word in card"
+
+print("\n✅ All 10 tests passed!")
