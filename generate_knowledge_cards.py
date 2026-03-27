@@ -247,8 +247,12 @@ CARD_GEN_PROMPT_ENGLISH = """你是一位资深的中国{stage}英语教研员�
    - why_explanation 要解释语法规则的底层逻辑（如：为什么if条件句不用will？因为if本身已经表达了"假设/未来"的含义，再加will就重复了，英语中避免语义重复）
    - mistakes的reason必须解释为什么这个错法是错的（如：不是只标❌"If it will rain"→✓"If it rains"，而要解释"if引导的条件从句用一般现在时表将来，因为if已经暗示了将来的可能性"）
    - 步骤中至少一步解释"为什么这样选/填"而非只说"按规则填xxx"
-   - 记忆口诀不能过度简化导致错误（如"将来will"这种口诀会让学生在if从句中也用will，必须标注例外）
-
+   - 记忆口诀不能过度简化导致错误（如"将来will"这种口诀会让学生在if从句中也用will，必须标注例外）9. 🔒 英语卡片质量铁律（踩坑经验沉淀，必须遵守！）：
+   a) 知识点准确性第一：不能把正确用法标为错误！如"close attention"和"pay close attention to"都是正确的，不能标❌。每个正误标注必须反复检查是否符合权威语法参考。
+   b) 必须包含真实例句对比：mistakes中的wrong/correct必须是完整句子（不是孤立短语），如 wrong:"I pay attention the teacher" correct:"I pay attention to the teacher" reason:"因为pay attention是不及物词组，接宾语必须用介词to"
+   c) 口诀必须有记忆粘性：禁止“搭配固定”“多练就会”“记住就好”这类废话口诀。必须是有巧妙联想的句子，如“注意力要‘付to’（付出）”“看见look加at（看准目标）”
+   d) 视觉逻辑必须与内容逻辑匹配：不能用阶梯图表示非递进关系、不能用流程图表示并列关系。如"pay attention" vs "pay attention to"不是阶梯递进，而是及物性对比。
+   e) 信息密度要高：学生看完必须能答出“为什么这样用”，而不只是“知道这样用”。如果pay attention to卡片看完后学生只知道“搭配固定”但不知道“因为是不及物词组/to引导宾语”，说明卡片失败。
 请直接输出完整JSON（不要markdown代码块），格式如下：
 {{
   "subject": "英语",
@@ -414,8 +418,11 @@ BOOM_CARD_PROMPT_ENGLISH = """你是一位小红书教育类爆款内容策划�
 - trap_point / pronunciation_tip / scene_dialogue / grammar_fix / battle_rule / speed_method: 对应类型的特有字段
 
 知识点必须准确，符合该年级PEP教材范围！不要超纲！小学英语从三年级开始。
-⚠️ 深度教学：每张卡片的why_explanation和mistakes.reason必须解释根本原因，不能只标注对错！语法纠错卡要解释"为什么这个语法点容易错，背后的中英思维差异是什么"。
-
+⚠️ 深度教学：每张卡片的why_explanation和mistakes.reason必须解释根本原因，不能只标注对错！语法纠错卡要解释"为什么这个语法点容易错，背后的中英思维差异是什么"。🔒 英语卡片质量铁律（必须遵守）：
+   a) 知识点准确性第一：不能把正确用法标为❌！如"close attention"、"pay close attention to"都是正确的。每个正误标注必须反复检查。
+   b) mistakes的wrong/correct必须是完整句子（不是孤立短语），让学生看到语境中的对比
+   c) memory_tip禁止“搭配固定”“多练就会”“记住就好”这类废话口诀，必须有巧妙联想
+   d) 学生看完必须能答出“为什么这样用”，不能只停留在“知道这样用”的层面
 请直接输出JSON（不要markdown代码块），格式如下：
 {{
   "subject": "英语",
