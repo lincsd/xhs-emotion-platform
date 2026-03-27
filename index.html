@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260327b';
+      var BUILD='20260327c';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);}
@@ -3839,7 +3839,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260327b'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260327c'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
