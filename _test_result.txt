@@ -1,0 +1,19 @@
+﻿=== Tunnel JSON Tests ===
+  OK 初中 数学_七上_总结: pack=? units=4
+  OK 小学 数学_三下: pack=? units=8
+  OK manifest: stages=['小学', '初中', '高中', '养生减脂', '国学文化', '情感生活']
+
+=== HTML Fix Check ===
+  Has isSummaryOnly: True
+  PAGE_BUILD: 20260326f
+
+=== GitHub Pages Tests ===
+  OK manifest: stages=['小学', '养生减脂', '国学文化', '情感生活']
+  FAIL 初中 数学_七上_总结: HTTP Error 404: Not Found
+  Has isSummaryOnly: True
+  PAGE_BUILD: 20260326f
+
+=== Local Tests ===
+  OK local 初中: pack=? units=4
+  Has isSummaryOnly: True
+  PAGE_BUILD: 20260326f

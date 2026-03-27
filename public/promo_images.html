@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小红书发布配图 - 知识卡片AI平台</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #f5f5f5; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; padding: 40px; }
+  .page-title { text-align: center; font-size: 24px; color: #333; margin-bottom: 10px; font-weight: 700; }
+  .page-subtitle { text-align: center; font-size: 14px; color: #999; margin-bottom: 40px; }
+  .slides { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; }
+  .slide-wrapper { text-align: center; }
+  .slide-label { font-size: 14px; color: #666; margin-bottom: 8px; font-weight: 600; }
+  /* 小红书比例 3:4 = 1080x1440 缩放到 405x540 */
+  .slide {
+    width: 405px; height: 540px;
+    border-radius: 12px; overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,.12);
+    position: relative;
+  }
+
+  /* ========== 封面图 ========== */
+  .slide-cover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 40px 30px;
+  }
+  .slide-cover .badge {
+    background: rgba(255,255,255,.2); backdrop-filter: blur(10px);
+    padding: 6px 20px; border-radius: 20px;
+    font-size: 13px; font-weight: 600; margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,.3);
+  }
+  .slide-cover .main-title {
+    font-size: 36px; font-weight: 900; line-height: 1.3;
+    text-align: center; margin-bottom: 16px;
+    text-shadow: 0 2px 8px rgba(0,0,0,.2);
+  }
+  .slide-cover .sub-title {
+    font-size: 16px; opacity: .85; text-align: center;
+    line-height: 1.6; margin-bottom: 30px;
+  }
+  .slide-cover .vs-box {
+    display: flex; gap: 16px; align-items: center;
+    width: 100%;
+  }
+  .slide-cover .vs-card {
+    flex: 1; border-radius: 14px; padding: 20px 16px;
+    text-align: center;
+  }
+  .slide-cover .vs-card.before {
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.2);
+  }
+  .slide-cover .vs-card.after {
+    background: rgba(255,255,255,.25);
+    border: 2px solid rgba(255,255,255,.5);
+    box-shadow: 0 4px 20px rgba(0,0,0,.1);
+  }
+  .slide-cover .vs-card .emoji { font-size: 36px; margin-bottom: 8px; }
+  .slide-cover .vs-card .label { font-size: 13px; opacity: .8; margin-bottom: 4px; }
+  .slide-cover .vs-card .time { font-size: 22px; font-weight: 800; }
+  .slide-cover .vs-arrow { font-size: 28px; }
+  .slide-cover .bottom-tag {
+    margin-top: 28px;
+    background: rgba(255,255,255,.15);
+    padding: 8px 24px; border-radius: 24px;
+    font-size: 13px; font-weight: 600;
+  }
+
+  /* ========== 功能介绍图 ========== */
+  .slide-features {
+    background: #fff;
+    padding: 36px 28px;
+    display: flex; flex-direction: column;
+  }
+  .slide-features .header {
+    text-align: center; margin-bottom: 24px;
+  }
+  .slide-features .header .icon { font-size: 32px; margin-bottom: 6px; }
+  .slide-features .header h2 {
+    font-size: 24px; font-weight: 800;
+    background: linear-gradient(135deg, #667eea, #f5576c);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .slide-features .header p { font-size: 13px; color: #999; margin-top: 4px; }
+  .slide-features .feat-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    flex: 1;
+  }
+  .slide-features .feat-card {
+    border-radius: 14px; padding: 18px 14px;
+    text-align: center;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+  }
+  .slide-features .feat-card .feat-icon { font-size: 32px; margin-bottom: 8px; }
+  .slide-features .feat-card .feat-name {
+    font-size: 15px; font-weight: 700; margin-bottom: 4px;
+  }
+  .slide-features .feat-card .feat-desc {
+    font-size: 11px; color: #888; line-height: 1.5;
+  }
+  .f1 { background: linear-gradient(135deg, #e8f0fe, #d4e4fc); }
+  .f1 .feat-name { color: #1a73e8; }
+  .f2 { background: linear-gradient(135deg, #fce4ec, #f8bbd0); }
+  .f2 .feat-name { color: #c62828; }
+  .f3 { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
+  .f3 .feat-name { color: #2e7d32; }
+  .f4 { background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
+  .f4 .feat-name { color: #e65100; }
+  .f5 { background: linear-gradient(135deg, #f3e5f5, #e1bee7); }
+  .f5 .feat-name { color: #6a1b9a; }
+  .f6 { background: linear-gradient(135deg, #e0f7fa, #b2ebf2); }
+  .f6 .feat-name { color: #00695c; }
+
+  .slide-features .bottom-bar {
+    margin-top: 16px; text-align: center;
+    padding: 10px; border-radius: 10px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff; font-size: 14px; font-weight: 700;
+  }
+
+  /* ========== 赛道覆盖图 ========== */
+  .slide-tracks {
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+    color: #fff; padding: 36px 28px;
+    display: flex; flex-direction: column;
+  }
+  .slide-tracks .header {
+    text-align: center; margin-bottom: 24px;
+  }
+  .slide-tracks .header h2 { font-size: 24px; font-weight: 800; }
+  .slide-tracks .header p { font-size: 13px; color: rgba(255,255,255,.5); margin-top: 4px; }
+  .slide-tracks .track-list { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .slide-tracks .track-item {
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 14px; padding: 14px 16px;
+    backdrop-filter: blur(10px);
+  }
+  .slide-tracks .track-item .t-icon { font-size: 28px; }
+  .slide-tracks .track-item .t-info { flex: 1; }
+  .slide-tracks .track-item .t-name { font-size: 16px; font-weight: 700; }
+  .slide-tracks .track-item .t-detail { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 2px; }
+  .slide-tracks .track-item .t-badge {
+    background: rgba(102,126,234,.4); padding: 4px 12px;
+    border-radius: 8px; font-size: 11px; font-weight: 600;
+    white-space: nowrap;
+  }
+  .slide-tracks .bottom-note {
+    margin-top: 16px; text-align: center;
+    font-size: 13px; color: rgba(255,255,255,.4);
+  }
+
+  /* ========== 流水线图 ========== */
+  .slide-pipeline {
+    background: #fff;
+    padding: 36px 28px;
+    display: flex; flex-direction: column;
+  }
+  .slide-pipeline .header {
+    text-align: center; margin-bottom: 20px;
+  }
+  .slide-pipeline .header h2 {
+    font-size: 22px; font-weight: 800; color: #333;
+  }
+  .slide-pipeline .header p { font-size: 12px; color: #999; margin-top: 4px; }
+  .slide-pipeline .steps { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .slide-pipeline .step {
+    display: flex; align-items: center; gap: 12px;
+    border-radius: 12px; padding: 12px 14px;
+  }
+  .slide-pipeline .step .s-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; color: #fff; flex-shrink: 0;
+  }
+  .slide-pipeline .step .s-icon { font-size: 24px; flex-shrink: 0; }
+  .slide-pipeline .step .s-info { flex: 1; }
+  .slide-pipeline .step .s-name { font-size: 14px; font-weight: 700; }
+  .slide-pipeline .step .s-desc { font-size: 11px; color: #888; margin-top: 1px; }
+  .slide-pipeline .arrow-down {
+    text-align: center; font-size: 18px; color: #ccc; line-height: 1;
+  }
+  .s-bg1 { background: #e8f0fe; }
+  .s-bg1 .s-num { background: #1a73e8; }
+  .s-bg1 .s-name { color: #1a73e8; }
+  .s-bg2 { background: #fce4ec; }
+  .s-bg2 .s-num { background: #c62828; }
+  .s-bg2 .s-name { color: #c62828; }
+  .s-bg3 { background: #e8f5e9; }
+  .s-bg3 .s-num { background: #2e7d32; }
+  .s-bg3 .s-name { color: #2e7d32; }
+  .s-bg4 { background: #fff3e0; }
+  .s-bg4 .s-num { background: #e65100; }
+  .s-bg4 .s-name { color: #e65100; }
+  .s-bg5 { background: #f3e5f5; }
+  .s-bg5 .s-num { background: #6a1b9a; }
+  .s-bg5 .s-name { color: #6a1b9a; }
+  .slide-pipeline .result-box {
+    margin-top: 12px; text-align: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 14px; padding: 16px;
+    color: #fff;
+  }
+  .slide-pipeline .result-box .r-title { font-size: 16px; font-weight: 800; }
+  .slide-pipeline .result-box .r-stats {
+    display: flex; justify-content: center; gap: 20px;
+    margin-top: 8px; font-size: 12px;
+  }
+
+  /* ========== CTA图 ========== */
+  .slide-cta {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: #fff;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 40px 30px;
+    text-align: center;
+  }
+  .slide-cta .cta-icon { font-size: 64px; margin-bottom: 16px; }
+  .slide-cta .cta-title {
+    font-size: 32px; font-weight: 900; line-height: 1.3;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+  .slide-cta .cta-sub {
+    font-size: 15px; opacity: .85; line-height: 1.6;
+    margin-bottom: 28px;
+  }
+  .slide-cta .cta-benefits {
+    display: flex; flex-direction: column; gap: 10px;
+    width: 100%; margin-bottom: 28px;
+  }
+  .slide-cta .cta-benefit {
+    background: rgba(255,255,255,.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 12px; padding: 12px 20px;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 15px; font-weight: 600;
+  }
+  .slide-cta .cta-benefit .b-icon { font-size: 22px; }
+  .slide-cta .cta-btn {
+    background: #fff; color: #f5576c;
+    border: none; padding: 16px 48px;
+    border-radius: 30px; font-size: 18px;
+    font-weight: 800; cursor: pointer;
+    box-shadow: 0 6px 24px rgba(0,0,0,.15);
+    margin-bottom: 12px;
+  }
+  .slide-cta .cta-note {
+    font-size: 12px; opacity: .6;
+  }
+
+  @media print {
+    body { padding: 0; background: #fff; }
+    .slide-wrapper { page-break-after: always; }
+    .slide { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-title">📱 小红书发布配图</div>
+<div class="page-subtitle">在浏览器中打开，逐张截图即可使用（建议用 F12 设备模拟 1080x1440）</div>
+
+<div class="slides">
+
+  <!-- 图1: 封面图 -->
+  <div class="slide-wrapper">
+    <div class="slide-label">图1：封面图（反差对比）</div>
+    <div class="slide slide-cover">
+      <div class="badge">✨ 教育赛道必备神器</div>
+      <div class="main-title">做知识卡片<br>从40分钟→3分钟</div>
+      <div class="sub-title">AI全自动生成知识卡片 + 笔记文案<br>覆盖小学/初中/高中全学段</div>
+      <div class="vs-box">
+        <div class="vs-card before">
+          <div class="emoji">😩</div>
+          <div class="label">以前手动做图</div>
+          <div class="time">40分钟</div>
+          <div style="font-size:11px;margin-top:6px;opacity:.7">排版 + 配色 + 文案<br>一张卡片累半天</div>
+        </div>
+        <div class="vs-arrow">→</div>
+        <div class="vs-card after">
+          <div class="emoji">🚀</div>
+          <div class="label">现在AI自动生成</div>
+          <div class="time">3分钟</div>
+          <div style="font-size:11px;margin-top:6px;opacity:.7">一键出图 + 自动审计<br>质量评分全流程</div>
+        </div>
+      </div>
+      <div class="bottom-tag">💡 新用户免费体验</div>
+    </div>
+  </div>
+
+  <!-- 图2: 六大功能 -->
+  <div class="slide-wrapper">
+    <div class="slide-label">图2：核心功能展示</div>
+    <div class="slide slide-features">
+      <div class="header">
+        <div class="icon">⚡</div>
+        <h2>六大核心功能</h2>
+        <p>从内容创作到发布的完整工作流</p>
+      </div>
+      <div class="feat-grid">
+        <div class="feat-card f1">
+          <div class="feat-icon">🤖</div>
+          <div class="feat-name">AI智能卡片</div>
+          <div class="feat-desc">Gemini 2.5模型<br>v3全自动流水线</div>
+        </div>
+        <div class="feat-card f2">
+          <div class="feat-icon">📐</div>
+          <div class="feat-name">Prompt工程库</div>
+          <div class="feat-desc">v10版本迭代<br>五角色流水线分析</div>
+        </div>
+        <div class="feat-card f3">
+          <div class="feat-icon">📝</div>
+          <div class="feat-name">笔记工坊</div>
+          <div class="feat-desc">一键生成完整笔记<br>标题+文案+标签</div>
+        </div>
+        <div class="feat-card f4">
+          <div class="feat-icon">🎨</div>
+          <div class="feat-name">卡片模板库</div>
+          <div class="feat-desc">10种题型模板<br>概念/方法/陷阱/对战</div>
+        </div>
+        <div class="feat-card f5">
+          <div class="feat-icon">📊</div>
+          <div class="feat-name">内容优化</div>
+          <div class="feat-desc">笔记评分系统<br>SEO关键词分析</div>
+        </div>
+        <div class="feat-card f6">
+          <div class="feat-icon">🖼️</div>
+          <div class="feat-name">图片优化</div>
+          <div class="feat-desc">OCR审计+PIL修补<br>中文零乱码保障</div>
+        </div>
+      </div>
+      <div class="bottom-bar">🎯 一站式小红书内容创作平台</div>
+    </div>
+  </div>
+
+  <!-- 图3: 六大赛道 -->
+  <div class="slide-wrapper">
+    <div class="slide-label">图3：赛道覆盖</div>
+    <div class="slide slide-tracks">
+      <div class="header">
+        <h2>📚 六大内容赛道</h2>
+        <p>教育+生活，全场景覆盖</p>
+      </div>
+      <div class="track-list">
+        <div class="track-item">
+          <div class="t-icon">📖</div>
+          <div class="t-info">
+            <div class="t-name">小学教育</div>
+            <div class="t-detail">三年级~六年级 · 数学/语文/英语</div>
+          </div>
+          <div class="t-badge">8学期</div>
+        </div>
+        <div class="track-item">
+          <div class="t-icon">🏫</div>
+          <div class="t-info">
+            <div class="t-name">初中教育</div>
+            <div class="t-detail">七年级~九年级 · 数学/语文/英语</div>
+          </div>
+          <div class="t-badge">6学期</div>
+        </div>
+        <div class="track-item">
+          <div class="t-icon">🎓</div>
+          <div class="t-info">
+            <div class="t-name">高中教育</div>
+            <div class="t-detail">高一~高三 · 数学/语文/英语</div>
+          </div>
+          <div class="t-badge">6学期</div>
+        </div>
+        <div class="track-item">
+          <div class="t-icon">🧘</div>
+          <div class="t-info">
+            <div class="t-name">养生减脂</div>
+            <div class="t-detail">健康饮食 · 运动方案 · 中医养生</div>
+          </div>
+          <div class="t-badge">热门</div>
+        </div>
+        <div class="track-item">
+          <div class="t-icon">📜</div>
+          <div class="t-info">
+            <div class="t-name">国学文化</div>
+            <div class="t-detail">诗词典故 · 传统文化 · 经典解读</div>
+          </div>
+          <div class="t-badge">新上线</div>
+        </div>
+        <div class="track-item">
+          <div class="t-icon">💕</div>
+          <div class="t-info">
+            <div class="t-name">情感生活</div>
+            <div class="t-detail">亲子关系 · 情感分析 · 心理疏导</div>
+          </div>
+          <div class="t-badge">新上线</div>
+        </div>
+      </div>
+      <div class="bottom-note">持续扩展新赛道中... 🚀</div>
+    </div>
+  </div>
+
+  <!-- 图4: AI流水线 -->
+  <div class="slide-wrapper">
+    <div class="slide-label">图4：AI全自动流水线</div>
+    <div class="slide slide-pipeline">
+      <div class="header">
+        <h2>🔧 v3 全自动流水线</h2>
+        <p>5步完成从知识点到精美卡片</p>
+      </div>
+      <div class="steps">
+        <div class="step s-bg1">
+          <div class="s-num">1</div>
+          <div class="s-icon">📋</div>
+          <div class="s-info">
+            <div class="s-name">Prompt智能生成</div>
+            <div class="s-desc">五角色分析：教研专家→设计师→策划师</div>
+          </div>
+        </div>
+        <div class="arrow-down">⬇</div>
+        <div class="step s-bg2">
+          <div class="s-num">2</div>
+          <div class="s-icon">🎨</div>
+          <div class="s-info">
+            <div class="s-name">AI图片生成</div>
+            <div class="s-desc">Gemini 3.1 Flash 多模态图片模型</div>
+          </div>
+        </div>
+        <div class="arrow-down">⬇</div>
+        <div class="step s-bg3">
+          <div class="s-num">3</div>
+          <div class="s-icon">🔍</div>
+          <div class="s-info">
+            <div class="s-name">OCR文字审计</div>
+            <div class="s-desc">自动检测中文乱码/缺失/错位</div>
+          </div>
+        </div>
+        <div class="arrow-down">⬇</div>
+        <div class="step s-bg4">
+          <div class="s-num">4</div>
+          <div class="s-icon">🔄</div>
+          <div class="s-info">
+            <div class="s-name">智能重试+修补</div>
+            <div class="s-desc">不合格自动重生成 + PIL文字修补</div>
+          </div>
+        </div>
+        <div class="arrow-down">⬇</div>
+        <div class="step s-bg5">
+          <div class="s-num">5</div>
+          <div class="s-icon">⭐</div>
+          <div class="s-info">
+            <div class="s-name">质量评分输出</div>
+            <div class="s-desc">OCR审计分 + 整体质量评分 100分制</div>
+          </div>
+        </div>
+      </div>
+      <div class="result-box">
+        <div class="r-title">✅ 平均质量评分 85+</div>
+        <div class="r-stats">
+          <span>⏱️ 20-60秒完成</span>
+          <span>🎯 中文零乱码</span>
+          <span>🔁 自动3轮重试</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 图5: CTA -->
+  <div class="slide-wrapper">
+    <div class="slide-label">图5：行动号召</div>
+    <div class="slide slide-cta">
+      <div class="cta-icon">🎁</div>
+      <div class="cta-title">新用户福利<br>免费体验</div>
+      <div class="cta-sub">注册即送积分<br>够生成 10+ 张精美知识卡片</div>
+      <div class="cta-benefits">
+        <div class="cta-benefit">
+          <div class="b-icon">✅</div>
+          <div>AI生成卡片 · 秒出图</div>
+        </div>
+        <div class="cta-benefit">
+          <div class="b-icon">✅</div>
+          <div>笔记文案 · 一键生成</div>
+        </div>
+        <div class="cta-benefit">
+          <div class="b-icon">✅</div>
+          <div>六大赛道 · 全科覆盖</div>
+        </div>
+      </div>
+      <div class="cta-btn">👉 立即免费体验</div>
+      <div class="cta-note">评论区留言「体验」获取链接 💬</div>
+    </div>
+  </div>
+
+</div>
+
+<div style="text-align:center;margin-top:40px;color:#999;font-size:13px">
+  <p>💡 截图方法：在每张图上右键 → 检查元素 → 选中 .slide 节点 → 右键截图节点</p>
+  <p>或者用 F12 → 设备模拟器 → 设置分辨率 1080x1440 → 逐张截图</p>
+</div>
+
+</body>
+</html>

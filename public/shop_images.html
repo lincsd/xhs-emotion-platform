@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>小红书店铺商品图 - 知识卡片AI平台</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #f0f0f0; font-family: 'PingFang SC','Microsoft YaHei',sans-serif; padding: 30px; }
+  .section-title { text-align:center; font-size:22px; font-weight:800; color:#333; margin: 40px 0 8px; }
+  .section-sub { text-align:center; font-size:13px; color:#999; margin-bottom:24px; }
+  .grid { display:flex; flex-wrap:wrap; gap:30px; justify-content:center; margin-bottom:50px; }
+  .card-wrap { text-align:center; }
+  .card-label { font-size:13px; color:#666; margin-bottom:6px; font-weight:600; }
+  /* 小红书商品主图 1:1 = 800x800，缩放到 400x400 */
+  .main-img { width:400px; height:400px; border-radius:8px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,.1); position:relative; }
+  /* 详情图 宽750，长度不限，缩放到 375 */
+  .detail-img { width:375px; border-radius:8px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,.1); }
+
+  /* ====== 主图1: 封面主图 ====== */
+  .mi-cover {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:30px;
+  }
+  .mi-cover .tag { background:rgba(255,255,255,.2); padding:4px 14px; border-radius:16px; font-size:11px; font-weight:600; margin-bottom:14px; border:1px solid rgba(255,255,255,.3); }
+  .mi-cover .title { font-size:28px; font-weight:900; text-align:center; line-height:1.35; margin-bottom:10px; text-shadow:0 2px 6px rgba(0,0,0,.15); }
+  .mi-cover .sub { font-size:13px; opacity:.8; text-align:center; line-height:1.6; margin-bottom:18px; }
+  .mi-cover .price-row { display:flex; align-items:baseline; gap:6px; margin-bottom:16px; }
+  .mi-cover .price-row .yen { font-size:18px; font-weight:700; }
+  .mi-cover .price-row .amount { font-size:40px; font-weight:900; }
+  .mi-cover .price-row .unit { font-size:14px; opacity:.7; }
+  .mi-cover .features { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+  .mi-cover .feat { background:rgba(255,255,255,.18); padding:5px 12px; border-radius:8px; font-size:11px; font-weight:600; }
+
+  /* ====== 主图2: 功能亮点 ====== */
+  .mi-features {
+    background:#fff; display:flex; flex-direction:column; padding:28px;
+  }
+  .mi-features .header { text-align:center; margin-bottom:16px; }
+  .mi-features .header h2 { font-size:22px; font-weight:800; color:#333; }
+  .mi-features .header p { font-size:11px; color:#999; margin-top:2px; }
+  .mi-features .grid4 { display:grid; grid-template-columns:1fr 1fr; gap:10px; flex:1; }
+  .mi-features .fbox { border-radius:12px; padding:16px 12px; text-align:center; }
+  .mi-features .fbox .icon { font-size:28px; margin-bottom:6px; }
+  .mi-features .fbox .name { font-size:14px; font-weight:700; margin-bottom:2px; }
+  .mi-features .fbox .desc { font-size:10px; color:#888; line-height:1.4; }
+  .fb1{background:#e8f0fe;} .fb1 .name{color:#1a73e8;}
+  .fb2{background:#fce4ec;} .fb2 .name{color:#c62828;}
+  .fb3{background:#e8f5e9;} .fb3 .name{color:#2e7d32;}
+  .fb4{background:#fff3e0;} .fb4 .name{color:#e65100;}
+
+  /* ====== 主图3: 效果展示 ====== */
+  .mi-effect {
+    background: linear-gradient(180deg,#1a1a2e,#16213e);
+    color:#fff; display:flex; flex-direction:column; padding:28px; align-items:center; justify-content:center;
+  }
+  .mi-effect h2 { font-size:22px; font-weight:800; margin-bottom:6px; }
+  .mi-effect .sub { font-size:12px; opacity:.5; margin-bottom:20px; }
+  .mi-effect .cards { display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; }
+  .mi-effect .ecard {
+    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12);
+    border-radius:12px; padding:14px; text-align:center;
+  }
+  .mi-effect .ecard .emoji { font-size:24px; margin-bottom:4px; }
+  .mi-effect .ecard .ename { font-size:13px; font-weight:700; }
+  .mi-effect .ecard .edesc { font-size:10px; opacity:.5; margin-top:2px; }
+  .mi-effect .bottom { margin-top:18px; text-align:center; }
+  .mi-effect .bottom .stat { font-size:28px; font-weight:900; color:#667eea; }
+  .mi-effect .bottom .slabel { font-size:12px; opacity:.5; margin-top:2px; }
+
+  /* ====== 主图4: 套餐价格 ====== */
+  .mi-price {
+    background:#fff; display:flex; flex-direction:column; padding:24px;
+  }
+  .mi-price .header { text-align:center; margin-bottom:14px; }
+  .mi-price .header h2 { font-size:20px; font-weight:800; color:#333; }
+  .mi-price .pkg-list { display:flex; flex-direction:column; gap:8px; flex:1; }
+  .mi-price .pkg {
+    display:flex; align-items:center; border-radius:12px; padding:14px; gap:12px;
+  }
+  .mi-price .pkg .p-icon { font-size:28px; }
+  .mi-price .pkg .p-info { flex:1; }
+  .mi-price .pkg .p-name { font-size:15px; font-weight:700; }
+  .mi-price .pkg .p-desc { font-size:11px; color:#888; margin-top:1px; }
+  .mi-price .pkg .p-price { font-size:20px; font-weight:800; }
+  .p-体验{background:#f0f8ff;} .p-体验 .p-name{color:#1a73e8;} .p-体验 .p-price{color:#1a73e8;}
+  .p-月卡{background:#fff0f5;} .p-月卡 .p-name{color:#c62828;} .p-月卡 .p-price{color:#c62828;}
+  .p-季卡{background:#f0fff4; border:2px solid #2e7d32;} .p-季卡 .p-name{color:#2e7d32;} .p-季卡 .p-price{color:#2e7d32;}
+  .p-年卡{background:#fffbf0;} .p-年卡 .p-name{color:#e65100;} .p-年卡 .p-price{color:#e65100;}
+  .mi-price .hot-tag { position:absolute; top:-6px; right:-6px; background:#ff4d4f; color:#fff; font-size:10px; padding:2px 8px; border-radius:10px; font-weight:700; }
+  .mi-price .note { text-align:center; font-size:11px; color:#999; margin-top:10px; }
+
+  /* ====== 主图5: 信任背书 ====== */
+  .mi-trust {
+    background: linear-gradient(135deg,#f093fb,#f5576c);
+    color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:30px;
+  }
+  .mi-trust .big-icon { font-size:48px; margin-bottom:10px; }
+  .mi-trust h2 { font-size:24px; font-weight:900; margin-bottom:8px; text-shadow:0 2px 6px rgba(0,0,0,.1); }
+  .mi-trust .sub { font-size:13px; opacity:.8; margin-bottom:18px; text-align:center; line-height:1.6; }
+  .mi-trust .trust-items { width:100%; display:flex; flex-direction:column; gap:8px; }
+  .mi-trust .ti { background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.25); border-radius:10px; padding:10px 16px; display:flex; align-items:center; gap:10px; font-size:13px; font-weight:600; }
+  .mi-trust .ti .ti-icon { font-size:20px; }
+  .mi-trust .cta { margin-top:18px; background:#fff; color:#f5576c; border:none; padding:12px 40px; border-radius:24px; font-size:16px; font-weight:800; box-shadow:0 4px 16px rgba(0,0,0,.1); }
+
+  /* ====== 详情图 ====== */
+  .di-section { padding:32px 24px; }
+  .di-header { text-align:center; margin-bottom:20px; }
+  .di-header h2 { font-size:20px; font-weight:800; }
+  .di-header p { font-size:12px; color:#999; margin-top:3px; }
+
+  .di-cover { background:linear-gradient(135deg,#667eea,#764ba2); color:#fff; padding:40px 24px; text-align:center; }
+  .di-cover h1 { font-size:26px; font-weight:900; margin-bottom:8px; }
+  .di-cover .sub { font-size:14px; opacity:.8; line-height:1.6; }
+
+  .di-white { background:#fff; }
+  .di-light { background:#f8f9ff; }
+  .di-dark { background:linear-gradient(180deg,#1a1a2e,#16213e); color:#fff; }
+  .di-pink { background:linear-gradient(135deg,#ffecd2,#fcb69f); }
+
+  .step-list { display:flex; flex-direction:column; gap:12px; }
+  .step-item { display:flex; gap:12px; align-items:flex-start; }
+  .step-num { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; color:#fff; flex-shrink:0; }
+  .step-content .step-title { font-size:15px; font-weight:700; margin-bottom:2px; }
+  .step-content .step-desc { font-size:12px; color:#888; line-height:1.5; }
+
+  .faq-list { display:flex; flex-direction:column; gap:12px; }
+  .faq-item { background:#f8f9ff; border-radius:10px; padding:14px; }
+  .faq-q { font-size:14px; font-weight:700; color:#333; margin-bottom:6px; }
+  .faq-a { font-size:12px; color:#666; line-height:1.6; }
+
+  .guarantee-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .g-item { text-align:center; padding:16px 10px; border-radius:12px; background:rgba(255,255,255,.2); border:1px solid rgba(255,255,255,.3); }
+  .g-item .g-icon { font-size:28px; margin-bottom:6px; }
+  .g-item .g-text { font-size:12px; font-weight:600; }
+</style>
+</head>
+<body>
+
+<!-- ==================== 商品主图 (1:1, 800x800) ==================== -->
+<div class="section-title">🛍️ 商品主图（5张, 1:1比例）</div>
+<div class="section-sub">在每张图上右键 → 检查 → 选中 .main-img → 截取节点截图（建议放大2倍截图得到800x800）</div>
+
+<div class="grid">
+  <!-- 主图1: 产品封面 -->
+  <div class="card-wrap">
+    <div class="card-label">主图1：产品封面（必须）</div>
+    <div class="main-img mi-cover">
+      <div class="tag">✨ 教育博主必备</div>
+      <div class="title">知识卡片<br>AI生成器</div>
+      <div class="sub">小学·初中·高中 全学段覆盖<br>数学·语文·英语 全科目支持</div>
+      <div class="price-row">
+        <span class="yen">¥</span>
+        <span class="amount">9.9</span>
+        <span class="unit">起</span>
+      </div>
+      <div class="features">
+        <span class="feat">🤖 AI出图</span>
+        <span class="feat">📝 自动文案</span>
+        <span class="feat">🎨 10种模板</span>
+        <span class="feat">⚡ 3分钟出片</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 主图2: 核心功能 -->
+  <div class="card-wrap">
+    <div class="card-label">主图2：核心功能</div>
+    <div class="main-img mi-features">
+      <div class="header">
+        <h2>⚡ 四大核心功能</h2>
+        <p>从内容创作到发布全覆盖</p>
+      </div>
+      <div class="grid4">
+        <div class="fbox fb1">
+          <div class="icon">🤖</div>
+          <div class="name">AI智能出图</div>
+          <div class="desc">Gemini大模型<br>v3全自动流水线<br>OCR审计零乱码</div>
+        </div>
+        <div class="fbox fb2">
+          <div class="icon">📝</div>
+          <div class="name">笔记文案</div>
+          <div class="desc">一键生成完整笔记<br>标题+正文+标签<br>多种写作风格</div>
+        </div>
+        <div class="fbox fb3">
+          <div class="icon">🎨</div>
+          <div class="name">10种卡片</div>
+          <div class="desc">概念/方法/生活<br>陷阱/对战/公式<br>连算/速算卡...</div>
+        </div>
+        <div class="fbox fb4">
+          <div class="icon">📚</div>
+          <div class="name">6大赛道</div>
+          <div class="desc">小学/初中/高中<br>养生减脂/国学<br>情感生活</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 主图3: 效果展示 -->
+  <div class="card-wrap">
+    <div class="card-label">主图3：效果/数据</div>
+    <div class="main-img mi-effect">
+      <h2>🎯 生成效果展示</h2>
+      <div class="sub">AI全自动 · 质量评分85+</div>
+      <div class="cards">
+        <div class="ecard">
+          <div class="emoji">📖</div>
+          <div class="ename">小学数学</div>
+          <div class="edesc">三上~六下 8学期</div>
+        </div>
+        <div class="ecard">
+          <div class="emoji">🏫</div>
+          <div class="ename">初中全科</div>
+          <div class="edesc">七上~九下 6学期</div>
+        </div>
+        <div class="ecard">
+          <div class="emoji">🎓</div>
+          <div class="ename">高中全科</div>
+          <div class="edesc">高一~高三 6学期</div>
+        </div>
+        <div class="ecard">
+          <div class="emoji">🧘</div>
+          <div class="ename">生活赛道</div>
+          <div class="edesc">养生/国学/情感</div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="stat">3分钟</div>
+        <div class="slabel">一张精美知识卡片 · 从40分钟到3分钟</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 主图4: 套餐价格 -->
+  <div class="card-wrap">
+    <div class="card-label">主图4：套餐价格</div>
+    <div class="main-img mi-price">
+      <div class="header">
+        <h2>💎 积分套餐</h2>
+      </div>
+      <div class="pkg-list">
+        <div class="pkg p-体验">
+          <div class="p-icon">🎁</div>
+          <div class="p-info"><div class="p-name">体验包</div><div class="p-desc">100积分 · 可生成~10张卡片</div></div>
+          <div class="p-price">¥9.9</div>
+        </div>
+        <div class="pkg p-月卡">
+          <div class="p-icon">⭐</div>
+          <div class="p-info"><div class="p-name">月卡</div><div class="p-desc">500积分 · 可生成~50张卡片</div></div>
+          <div class="p-price">¥39.9</div>
+        </div>
+        <div class="pkg p-季卡" style="position:relative;">
+          <div class="p-icon">🔥</div>
+          <div class="p-info"><div class="p-name">季卡（热卖）</div><div class="p-desc">2000积分 · 可生成~200张卡片</div></div>
+          <div class="p-price">¥99.9</div>
+        </div>
+        <div class="pkg p-年卡">
+          <div class="p-icon">👑</div>
+          <div class="p-info"><div class="p-name">年卡</div><div class="p-desc">10000积分 · 可生成~1000张卡片</div></div>
+          <div class="p-price">¥399.9</div>
+        </div>
+      </div>
+      <div class="note">积分永久有效 · 不限使用时间 · 即买即用</div>
+    </div>
+  </div>
+
+  <!-- 主图5: 信任/CTA -->
+  <div class="card-wrap">
+    <div class="card-label">主图5：信任背书</div>
+    <div class="main-img mi-trust">
+      <div class="big-icon">🛡️</div>
+      <h2>放心购买</h2>
+      <div class="sub">拍下后自动发送兑换码<br>输入即到账，立即可用</div>
+      <div class="trust-items">
+        <div class="ti"><span class="ti-icon">✅</span> 兑换码即拍即发 · 秒到账</div>
+        <div class="ti"><span class="ti-icon">✅</span> 积分永久有效 · 不过期</div>
+        <div class="ti"><span class="ti-icon">✅</span> 覆盖全学段 · 全科目</div>
+        <div class="ti"><span class="ti-icon">✅</span> 7x24小时客服 · 有问必答</div>
+      </div>
+      <div class="cta">👉 立即购买体验</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 商品详情图 (宽750px) ==================== -->
+<div class="section-title">📋 商品详情图（长图，从上到下依次排列）</div>
+<div class="section-sub">整体截图或分段截图，上传到商品详情区域</div>
+
+<div style="display:flex; justify-content:center; margin-bottom:60px;">
+  <div class="detail-img">
+
+    <!-- 详情头图 -->
+    <div class="di-cover">
+      <div style="font-size:14px;opacity:.6;margin-bottom:8px;">教育博主·知识号·学习号 专属工具</div>
+      <h1>知识卡片 AI 生成器</h1>
+      <div class="sub">
+        AI全自动生成精美知识卡片 + 小红书笔记文案<br>
+        做教育号，再也不用手动做图了
+      </div>
+      <div style="margin-top:16px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+        <span style="background:rgba(255,255,255,.2);padding:4px 12px;border-radius:16px;font-size:11px;font-weight:600;">小学</span>
+        <span style="background:rgba(255,255,255,.2);padding:4px 12px;border-radius:16px;font-size:11px;font-weight:600;">初中</span>
+        <span style="background:rgba(255,255,255,.2);padding:4px 12px;border-radius:16px;font-size:11px;font-weight:600;">高中</span>
+        <span style="background:rgba(255,255,255,.2);padding:4px 12px;border-radius:16px;font-size:11px;font-weight:600;">养生减脂</span>
+        <span style="background:rgba(255,255,255,.2);padding:4px 12px;border-radius:16px;font-size:11px;font-weight:600;">国学文化</span>
+        <span style="background:rgba(255,255,255,.2);padding:4px 12px;border-radius:16px;font-size:11px;font-weight:600;">情感生活</span>
+      </div>
+    </div>
+
+    <!-- 详情: 你是否遇到这些问题 -->
+    <div class="di-section di-white">
+      <div class="di-header">
+        <h2>😩 做教育号，你是不是也……</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="background:#fff5f5;border-radius:10px;padding:14px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:24px;">😰</span>
+          <div><div style="font-weight:700;font-size:14px;color:#c62828;">做一张知识卡片要40分钟</div><div style="font-size:11px;color:#888;margin-top:2px;">排版、配色、文字校对太耗时间</div></div>
+        </div>
+        <div style="background:#fff5f5;border-radius:10px;padding:14px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:24px;">😤</span>
+          <div><div style="font-weight:700;font-size:14px;color:#c62828;">AI生成的图中文总是乱码</div><div style="font-size:11px;color:#888;margin-top:2px;">用各种AI工具出的图，中文全是乱七八糟</div></div>
+        </div>
+        <div style="background:#fff5f5;border-radius:10px;padding:14px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:24px;">😫</span>
+          <div><div style="font-weight:700;font-size:14px;color:#c62828;">笔记文案写不出爆款感</div><div style="font-size:11px;color:#888;margin-top:2px;">标题没吸引力、正文干巴巴</div></div>
+        </div>
+        <div style="background:#fff5f5;border-radius:10px;padding:14px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:24px;">😭</span>
+          <div><div style="font-weight:700;font-size:14px;color:#c62828;">内容产量跟不上更新频率</div><div style="font-size:11px;color:#888;margin-top:2px;">一天一更都做不到，赛道竞争越来越大</div></div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:16px;padding:12px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:10px;color:#fff;font-size:15px;font-weight:700;">
+        👇 一个工具，全部搞定
+      </div>
+    </div>
+
+    <!-- 详情: 核心功能 -->
+    <div class="di-section di-light">
+      <div class="di-header">
+        <h2>⚡ 核心功能</h2>
+        <p>AI驱动 · 全流程自动化</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div style="background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <span style="font-size:28px;">🤖</span>
+            <div><div style="font-size:16px;font-weight:700;color:#1a73e8;">AI智能出图</div></div>
+          </div>
+          <ul style="font-size:12px;color:#666;line-height:2;padding-left:16px;">
+            <li>Gemini 2.5 大模型驱动</li>
+            <li>v3全自动流水线：生图→OCR审计→自动重试→质量评分</li>
+            <li>中文零乱码保障（PIL文字修补兜底）</li>
+          </ul>
+        </div>
+        <div style="background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <span style="font-size:28px;">📝</span>
+            <div><div style="font-size:16px;font-weight:700;color:#c62828;">笔记工坊</div></div>
+          </div>
+          <ul style="font-size:12px;color:#666;line-height:2;padding-left:16px;">
+            <li>从知识卡片一键生成完整小红书笔记</li>
+            <li>标题、正文、配图、标签全自动</li>
+            <li>反差型/干货型/种草型 多种风格</li>
+          </ul>
+        </div>
+        <div style="background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <span style="font-size:28px;">🎨</span>
+            <div><div style="font-size:16px;font-weight:700;color:#2e7d32;">10种卡片模板</div></div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
+            <span style="background:#e8f5e9;color:#2e7d32;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;">概念卡</span>
+            <span style="background:#e8f5e9;color:#2e7d32;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;">方法卡</span>
+            <span style="background:#e8f5e9;color:#2e7d32;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;">生活卡</span>
+            <span style="background:#e8f5e9;color:#2e7d32;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;">陷阱卡</span>
+            <span style="background:#e8f5e9;color:#2e7d32;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;">对战卡</span>
+            <span style="background:#e8f5e9;color:#2e7d32;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;">公式卡</span>
+            <span style="background:#e8f5e9;color:#2e7d32;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;">连算卡</span>
+            <span style="background:#e8f5e9;color:#2e7d32;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;">速算卡</span>
+            <span style="background:#e8f5e9;color:#2e7d32;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;">句型卡</span>
+            <span style="background:#e8f5e9;color:#2e7d32;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;">总结卡</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 详情: 覆盖学段 -->
+    <div class="di-section di-dark">
+      <div class="di-header">
+        <h2>📚 覆盖范围</h2>
+        <p style="color:rgba(255,255,255,.4);">6大赛道 · 3大科目 · 20个学期</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border-radius:10px;padding:12px;">
+          <span style="font-size:24px;">📖</span>
+          <div style="flex:1;"><div style="font-weight:700;">小学教育</div><div style="font-size:11px;opacity:.5;">三年级~六年级 · 数学/语文/英语 · 8学期</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border-radius:10px;padding:12px;">
+          <span style="font-size:24px;">🏫</span>
+          <div style="flex:1;"><div style="font-weight:700;">初中教育</div><div style="font-size:11px;opacity:.5;">七年级~九年级 · 数学/语文/英语 · 6学期</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border-radius:10px;padding:12px;">
+          <span style="font-size:24px;">🎓</span>
+          <div style="flex:1;"><div style="font-weight:700;">高中教育</div><div style="font-size:11px;opacity:.5;">高一~高三 · 数学/语文/英语 · 6学期</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border-radius:10px;padding:12px;">
+          <span style="font-size:24px;">🧘</span>
+          <div style="flex:1;"><div style="font-weight:700;">养生减脂</div><div style="font-size:11px;opacity:.5;">健康饮食 · 运动方案 · 中医养生</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border-radius:10px;padding:12px;">
+          <span style="font-size:24px;">📜</span>
+          <div style="flex:1;"><div style="font-weight:700;">国学文化</div><div style="font-size:11px;opacity:.5;">诗词典故 · 传统文化 · 经典解读</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border-radius:10px;padding:12px;">
+          <span style="font-size:24px;">💕</span>
+          <div style="flex:1;"><div style="font-weight:700;">情感生活</div><div style="font-size:11px;opacity:.5;">亲子关系 · 情感分析 · 心理疏导</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 详情: 使用流程 -->
+    <div class="di-section di-white">
+      <div class="di-header">
+        <h2>📱 使用流程</h2>
+        <p>3步搞定，超简单</p>
+      </div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num" style="background:#1a73e8;">1</div>
+          <div class="step-content">
+            <div class="step-title" style="color:#1a73e8;">拍下 → 收到兑换码</div>
+            <div class="step-desc">下单后自动发送兑换码到订单消息<br>格式：XHS-XXXX-XXXX-XXXX</div>
+          </div>
+        </div>
+        <div style="text-align:center;color:#ccc;font-size:18px;margin-left:16px;">⬇</div>
+        <div class="step-item">
+          <div class="step-num" style="background:#2e7d32;">2</div>
+          <div class="step-content">
+            <div class="step-title" style="color:#2e7d32;">登录平台 → 输入兑换码</div>
+            <div class="step-desc">打开平台网址 → 注册/登录<br>点击「💎 AI积分」→ 输入兑换码 → 积分到账</div>
+          </div>
+        </div>
+        <div style="text-align:center;color:#ccc;font-size:18px;margin-left:16px;">⬇</div>
+        <div class="step-item">
+          <div class="step-num" style="background:#e65100;">3</div>
+          <div class="step-content">
+            <div class="step-title" style="color:#e65100;">开始创作 → AI自动出图</div>
+            <div class="step-desc">选择学段+科目+知识点<br>点击「🎨 AI生成卡片」→ 3分钟出精美图片</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 详情: 套餐对比 -->
+    <div class="di-section di-light">
+      <div class="di-header">
+        <h2>💎 套餐选择</h2>
+        <p>积分永久有效 · 不限使用时间</p>
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+        <thead>
+          <tr style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;">
+            <th style="padding:10px 8px;">套餐</th>
+            <th style="padding:10px 8px;">积分</th>
+            <th style="padding:10px 8px;">可生成</th>
+            <th style="padding:10px 8px;">价格</th>
+            <th style="padding:10px 8px;">单价</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #f0f0f0;">
+            <td style="padding:10px 8px;font-weight:600;">🎁 体验包</td>
+            <td style="padding:10px 8px;text-align:center;">100</td>
+            <td style="padding:10px 8px;text-align:center;">~10张</td>
+            <td style="padding:10px 8px;text-align:center;font-weight:700;color:#1a73e8;">¥9.9</td>
+            <td style="padding:10px 8px;text-align:center;">¥0.99/张</td>
+          </tr>
+          <tr style="border-bottom:1px solid #f0f0f0;">
+            <td style="padding:10px 8px;font-weight:600;">⭐ 月卡</td>
+            <td style="padding:10px 8px;text-align:center;">500</td>
+            <td style="padding:10px 8px;text-align:center;">~50张</td>
+            <td style="padding:10px 8px;text-align:center;font-weight:700;color:#c62828;">¥39.9</td>
+            <td style="padding:10px 8px;text-align:center;">¥0.80/张</td>
+          </tr>
+          <tr style="border-bottom:1px solid #f0f0f0;background:#f0fff4;">
+            <td style="padding:10px 8px;font-weight:600;">🔥 季卡</td>
+            <td style="padding:10px 8px;text-align:center;">2000</td>
+            <td style="padding:10px 8px;text-align:center;">~200张</td>
+            <td style="padding:10px 8px;text-align:center;font-weight:700;color:#2e7d32;">¥99.9</td>
+            <td style="padding:10px 8px;text-align:center;color:#2e7d32;font-weight:700;">¥0.50/张</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 8px;font-weight:600;">👑 年卡</td>
+            <td style="padding:10px 8px;text-align:center;">10000</td>
+            <td style="padding:10px 8px;text-align:center;">~1000张</td>
+            <td style="padding:10px 8px;text-align:center;font-weight:700;color:#e65100;">¥399.9</td>
+            <td style="padding:10px 8px;text-align:center;color:#e65100;font-weight:700;">¥0.40/张</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="text-align:center;margin-top:10px;font-size:11px;color:#999;">🔥 季卡性价比最高，推荐教育号日更博主选择</div>
+    </div>
+
+    <!-- 详情: 常见问题 -->
+    <div class="di-section di-white">
+      <div class="di-header">
+        <h2>❓ 常见问题</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q">Q: 积分会过期吗？</div>
+          <div class="faq-a">A: 不会！积分永久有效，买了随时都可以用，没有使用期限。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Q: 兑换码怎么用？</div>
+          <div class="faq-a">A: 拍下后会自动收到兑换码（格式：XHS-XXXX-XXXX-XXXX）。打开平台 → 登录 → 点「💎 AI积分」→ 输入兑换码 → 积分秒到。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Q: 一个积分能生成什么？</div>
+          <div class="faq-a">A: 每天有10次免费AI调用。免费次数用完后，生成一张卡片约10积分，生成一篇笔记约2积分。每天免费额度会重置。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Q: 支持哪些科目和年级？</div>
+          <div class="faq-a">A: 教育赛道支持小学(3-6年级)、初中(7-9年级)、高中(高一~高三)的数学、语文、英语。另外还有养生减脂、国学文化、情感生活赛道。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Q: 可以退款吗？</div>
+          <div class="faq-a">A: 虚拟商品，兑换码一经兑换不支持退款。未兑换的卡密可联系客服处理。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 详情: 服务保障 -->
+    <div class="di-section" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;">
+      <div class="di-header">
+        <h2>🛡️ 服务保障</h2>
+        <p style="color:rgba(255,255,255,.5);">放心购买 · 售后无忧</p>
+      </div>
+      <div class="guarantee-grid">
+        <div class="g-item">
+          <div class="g-icon">⚡</div>
+          <div class="g-text">即买即用<br>兑换码秒发</div>
+        </div>
+        <div class="g-item">
+          <div class="g-icon">♾️</div>
+          <div class="g-text">永久有效<br>积分不过期</div>
+        </div>
+        <div class="g-item">
+          <div class="g-icon">🔄</div>
+          <div class="g-text">持续更新<br>功能迭代中</div>
+        </div>
+        <div class="g-item">
+          <div class="g-icon">💬</div>
+          <div class="g-text">在线客服<br>有问必答</div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:20px;font-size:13px;opacity:.7;">
+        如有任何问题，请随时私信联系 ❤️
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div style="text-align:center;color:#999;font-size:13px;margin-bottom:40px;">
+  <p>💡 截图方法：右键 → 检查元素 → 选中目标节点 → 右键「截取节点截图」</p>
+  <p>或用 F12 设备模拟器，主图设800x800，详情图设750宽度</p>
+</div>
+
+</body>
+</html>
