@@ -14,6 +14,17 @@ Step 2: Gemini 原生图片生成模型 生成可爱童趣风格卡片图片
 import json, os, sys, time, base64, datetime
 import urllib.request, urllib.error
 
+# ─── 审校模块 ───
+try:
+    from card_review import (
+        run_review_gate, is_english_grammar_card,
+        generate_english_grammar_prompt, build_structured_payload,
+    )
+    _HAS_REVIEW = True
+except ImportError:
+    _HAS_REVIEW = False
+    print('[WARN] card_review.py not found, 审校层未启用')
+
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta'
 TEXT_MODEL = 'gemini-2.5-flash'
 IMAGE_MODEL = 'nano-banana-pro-preview'  # nano banana 原生图片生成
@@ -250,8 +261,15 @@ PROMPT_SYSTEM_TEMPLATE = """你是一位拥有25年{subject}教学经验的特�
 - 解题图描述要详细但图本身要简洁直观
 - 长度: 350-500英文单词"""
 
-def generate_image_prompt(card, subject, grade, semester, api_key):
-    """Step 1: 用文字模型生成精简但视觉丰富的提示词（按卡片类型选择视觉策略）"""
+def generate_image_prompt(card, subject, grade, semester, api_key, payload=None):
+    """Step 1: 用文字模型生成精简但视觉丰富的提示词（按卡片类型选择视觉策略）
+    
+    如果 payload 传入且 is_english_grammar=True，走英语语法卡专用分支。
+    """
+    # ── 英语语法卡专用分支 ──
+    if payload and payload.get('is_english_grammar') and _HAS_REVIEW:
+        print('      [英语语法卡专用 prompt]')
+        return generate_english_grammar_prompt(payload, gemini_call, api_key, TEXT_MODEL)
     
     # ── 根据卡片类型选择视觉策略 ──
     card_type = card.get('type', '方法卡')
@@ -572,10 +590,39 @@ def main():
                 success += 1
                 continue
             
+            # ── Step 0: 审校闸门 ──
+            review_payload = None
+            review_result_data = None
+            if _HAS_REVIEW:
+                print(f'  ├─ Step 0: 审校检查...', end='', flush=True)
+                review_key = next_key(keys)
+                gate = run_review_gate(card, subject, gemini_call, review_key, TEXT_MODEL)
+                if not gate['pass']:
+                    print(f' ❌ 未通过 [{gate["stage"]}]')
+                    for iss in gate['issues']:
+                        print(f'  │   ⚠️  {iss}')
+                    print(f'  └─ 🚫 跳过此卡片 (审校不通过)')
+                    # 记录到 self_optimizer (如果可用)
+                    try:
+                        from self_optimizer import record_generation
+                        record_generation(
+                            card_id=card['full_id'], subject=subject, grade=grade,
+                            audit_score=gate.get('review_result', {}).get('teaching_score', 0) if gate.get('review_result') else 0,
+                            quality_score=gate.get('review_result', {}).get('language_score', 0) if gate.get('review_result') else 0,
+                            final_action=f'rejected_{gate["stage"]}',
+                            success=False,
+                        )
+                    except Exception:
+                        pass
+                    continue
+                review_payload = gate.get('payload')
+                review_result_data = gate.get('review_result')
+                print(' ✅ 通过')
+            
             # Step 1: Generate prompt
             print(f'  ├─ Step 1: 生成提示词...', end='', flush=True)
             key = next_key(keys)
-            prompt = generate_image_prompt(card, subject, grade, semester, key)
+            prompt = generate_image_prompt(card, subject, grade, semester, key, payload=review_payload)
             if not prompt:
                 print(' ❌ 失败')
                 print(f'  └─ ❌ 跳过此卡片')
@@ -613,6 +660,21 @@ def main():
             
             # Save prompt to library
             save_prompt_to_lib(card, prompt, subject, grade, semester, image_path=filepath)
+            
+            # 记录到 self_optimizer
+            try:
+                from self_optimizer import record_generation
+                record_generation(
+                    card_id=card['full_id'], subject=subject, grade=grade,
+                    audit_score=review_result_data.get('teaching_score', 0) if review_result_data else 0,
+                    quality_score=review_result_data.get('language_score', 0) if review_result_data else 0,
+                    final_action='pass',
+                    prompt_length=len(prompt),
+                    image_size_kb=size_kb,
+                    success=True,
+                )
+            except Exception:
+                pass
             
             # Save prompts incrementally
             prompts_file = os.path.join(output_dir, '_prompts.json')

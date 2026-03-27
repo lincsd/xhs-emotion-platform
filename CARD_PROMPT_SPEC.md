@@ -1,6 +1,7 @@
-# 📚 知识卡片图片提示词规范 v1.0
+# 📚 知识卡片图片提示词规范 v2.0
 
 > 基于小红书爆款知识卡片分析 + 3张高质量参考图总结
+> v2.0 新增: 内容审校规范 + 英语语法卡专属规则
 
 ---
 
@@ -164,3 +165,129 @@ high contrast text, organized layout, visual hierarchy
 | 图示 | 无具体描述 | **每个知识点配图示描述** |
 | 配色 | "colorful" | **具体色名 soft pink, mint green** |
 | 公式 | 混在文字里 | **单独放大突出展示** |
+
+---
+
+## 六、内容审校规范 (v2.0 新增)
+
+> 模块文件: `card_review.py`
+> 接入位置: `generate_card_images.py` 主循环 Step 0
+
+### 6.1 审校流程 (三层闸门)
+
+```
+卡片 JSON
+   │
+   ▼
+Layer 1: 硬规则校验 (validate_hard_rules)
+   │  纯代码，零延迟
+   │  不通过 → 直接跳过，记录 rejected_hard_rule
+   ▼
+Layer 2: AI 教学审稿 (review_teaching_quality)
+   │  调 Gemini 2.5 Flash，~3s
+   │  仅英语语法卡启用，其他学科跳过
+   │  不通过 → 跳过，记录 rejected_teaching_review
+   ▼
+Layer 3: 结构化 Payload 构建 (build_structured_payload)
+   │  将卡片信息压缩为固定槽位
+   ▼
+Prompt 生成 → 图片生成
+```
+
+### 6.2 硬规则清单 (Layer 1)
+
+| # | 规则 | 适用范围 | 说明 |
+|---|------|---------|------|
+| R1 | 不允许重复词 | 全部 | 如 `can can`、`the the` |
+| R2 | 不允许残缺表达 | 含英文卡 | 如 `success in` 末尾无宾语 |
+| R3 | mistakes 必须成对 | 全部 | wrong + correct 都不能为空 |
+| R4 | 正确例句必须完整 | 英语卡 | 至少 3 个单词，像完整句子 |
+| R5 | 单卡知识点 ≤ 1 | 英语卡 | core_points 中主题不能分裂 |
+| R6 | 错因不能笼统 | 英语卡 | 不能只写"词性错"/"搭配错" |
+| R7 | 标题 ≤ 20 字 | 全部 | 过长标题无法在卡片上展示 |
+| R8 | definition 不能为空 | 全部 | 基础字段必填 |
+
+### 6.3 AI 审稿标准 (Layer 2)
+
+审稿输出固定 JSON 格式:
+
+```json
+{
+  "pass": true,
+  "language_score": 92,
+  "teaching_score": 88,
+  "issues": [],
+  "rewrite_suggestion": ""
+}
+```
+
+**通过条件:**
+- `language_score ≥ 90`
+- `teaching_score ≥ 85`
+- `issues` 为空
+
+**评分维度:**
+
+| 维度 | 权重 | 说明 |
+|------|------|------|
+| 语言自然度 | language_score | 英文是否地道自然，无语法错 |
+| 语法准确性 | language_score | 搭配、词性、句法是否正确 |
+| 知识点聚焦 | teaching_score | 是否只聚焦一个主知识点 |
+| 正误对比清晰度 | teaching_score | 错句真错、正句真对、错因具体 |
+| 秒懂适配度 | teaching_score | 是否适合压缩成图片教学卡 |
+
+### 6.4 self_optimizer 记录规范
+
+审校结果通过 `final_action` 字段记录:
+
+| final_action 值 | 含义 |
+|-----------------|------|
+| `pass` | 审校通过，成功出图 |
+| `rejected_hard_rule` | 硬规则拦截 |
+| `rejected_ai_review` | AI 审稿拦截 |
+
+---
+
+## 七、英语语法卡专属规范 (v2.0 新增)
+
+> 模块: `card_review.py` → `generate_english_grammar_prompt()`
+> 条件: `subject == '英语'` 或卡片内容命中语法关键词
+
+### 7.1 核心原则
+
+1. **一张卡只讲一个主知识点**
+2. 正句必须是完整自然英语
+3. 错因必须具体（标注词性/搭配/句法）
+4. 不能混入第二个知识点
+5. 不能把词组碎片当作最终正确答案
+
+### 7.2 固定信息块 (6 个槽位)
+
+| 槽位 | 字数限制 | 示例 |
+|------|---------|------|
+| 标题 | ≤ 8 字 | 高频搭配: pay attention to |
+| 主规则 | ≤ 15 字 | pay attention to + 名词/动名词 |
+| 正确例句 | 完整英文句 | It is important to pay close attention to details so you can succeed. |
+| 错误例句 | 完整英文句 | ✗ ...so you can can successful in career. |
+| 错因解释 | ≤ 15 字 | succeed 是动词，这里不能用形容词 successful |
+| 记忆点 | ≤ 10 字 | 搭配多记 熟能生巧 |
+
+### 7.3 视觉规则
+
+- 最多 3 个视觉区块
+- 最多 3 处高亮重点
+- ≥ 25% 留白
+- ✓ 正确用翠绿 `#2ED573`
+- ✗ 错误用亮红 `#FF4757`
+- 全卡中文 ≤ 30 字
+- 英文例句保持原样，关键词高亮
+
+### 7.4 禁止事项
+
+- ❌ 一张卡同时讲搭配 + 词性辨析
+- ❌ 只展示短语碎片充当"正确答案"
+- ❌ 错因只写"词性错"不解释具体是哪个词
+- ❌ 出现 `can can` 等重复词
+- ❌ 出现 `success in` 等残缺表达
+- ❌ 高亮颜色超过 3 种
+- ❌ 信息块超过 3 个
