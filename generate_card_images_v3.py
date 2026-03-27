@@ -284,6 +284,9 @@ PROMPT_SYSTEM_TEMPLATE = """你是小红书爆款知识卡片 AI 图片 Prompt �
 - 如果有"本质原因"或"错因"信息，必须在视觉中体现（用💡图标+简短文字）
 - ❌错误示范不能只标红叉，必须配一句"为什么错"的解释
 - 口诀区如有例外情况，用小字标注
+- 🚫 严禁把短语拆成单词当步骤（如"attention → pay attention → pay attention to"是无意义拆词）
+- ✅ 每个步骤必须展示知识点在完整句子中的用法 + 为什么这样用
+- ✅ 英语卡核心三要素: ①完整例句(粗体关键词) ②易错对比(完整句) ③本质原因(≤4中文字)
 
 ══════ 视觉设计 ══════
 
@@ -439,6 +442,49 @@ def _get_topic_keywords(card):
     return set(_re.findall(r'[a-zA-Z]{3,}', topic_text))
 
 
+
+def _detect_shallow_steps(card):
+    """检测步骤是否为'拆词式'浅层内容 (如把 pay attention to 拆成三步: attention / pay->attention / pay attention to)
+    
+    返回: (is_shallow: bool, reason: str)
+    """
+    import re as _re
+    steps = (card.get('example') or {}).get('steps', [])
+    if not steps:
+        return False, ''
+    
+    definition = card.get('definition', '').lower().strip()
+    title = card.get('title', '').lower().strip()
+    
+    # 检测1: 步骤是否只是逐词拆解短语
+    # 如果大部分步骤只有1-2个英文单词(无解释句子)，就是拆词
+    short_step_count = 0
+    for s in steps:
+        s_str = str(s).strip()
+        # 去掉箭头等符号后，看纯英文单词数
+        eng_words = _re.findall(r'[a-zA-Z]+', s_str)
+        # 如果中文字符极少(<=8)且英文单词<=3，视为浅层步骤
+        cn_chars = len(_re.findall(r'[\u4e00-\u9fff]', s_str))
+        if len(eng_words) <= 3 and cn_chars <= 8:
+            short_step_count += 1
+    
+    if len(steps) >= 2 and short_step_count >= len(steps) * 0.6:
+        return True, f'{short_step_count}/{len(steps)}步是孤立短语/单词，缺少完整例句和解释'
+    
+    # 检测2: 步骤是否包含完整英文句子(至少有主谓结构，>=5个词)
+    has_sentence = False
+    for s in steps:
+        eng_words = _re.findall(r'[a-zA-Z]+', str(s))
+        if len(eng_words) >= 5:
+            has_sentence = True
+            break
+    
+    if not has_sentence and len(steps) >= 2:
+        return True, '所有步骤都没有完整英文例句，缺乏教学深度'
+    
+    return False, ''
+
+
 def _filter_off_topic_steps(card):
     """过滤掉与卡片主题无关的 steps，防止混杂知识点传给 Gemini"""
     import re as _re
@@ -578,6 +624,27 @@ def _build_card_info_grammar(card, subject, grade, semester):
     # 从 definition 中提取本卡的唯一主题关键短语
     topic_phrase = card.get('definition', '')[:60] or card.get('title', '')
 
+    # ── 浅层内容检测: 识别拆词式步骤并生成深度教学覆盖指令 ──
+    is_shallow, shallow_reason = _detect_shallow_steps(card)
+    depth_override = ''
+    if is_shallow:
+        depth_override = f"""
+
+\u2757\u2757\u2757 \u6781\u91cd\u8981\uff01\u5361\u7247\u6570\u636e\u7684\u6b65\u9aa4\u8fc7\u4e8e\u6d45\u8584: {shallow_reason}
+\u4f60\u5fc5\u987b\u5b8c\u5168\u91cd\u65b0\u8bbe\u8ba1\u6559\u5b66\u5185\u5bb9\uff0c\u800c\u4e0d\u662f\u7167\u642c\u4e0a\u9762\u7684\u6b65\u9aa4\uff01
+
+\u6b63\u786e\u7684\u82f1\u8bed\u5361\u7247\u5e94\u8be5\u8fd9\u6837\u8bbe\u8ba1:
+\u2460 \u5b8c\u6574\u4f8b\u53e5\u5c55\u793a\u7528\u6cd5: \u5199\u4e00\u4e2a\u5b8c\u6574\u82f1\u6587\u53e5\u5b50\uff0c\u591a\u5173\u952e\u8bcd\u7c97\u4f53\u9ad8\u4eae
+\u2461 \u6613\u9519\u5bf9\u6bd4(\u5b8c\u6574\u53e5): \u2716 \u9519\u8bef\u53e5\u5b50 vs \u2714 \u6b63\u786e\u53e5\u5b50\uff0c\u5fc5\u987b\u662f\u5b8c\u6574\u82f1\u6587\u53e5
+\u2462 \u89e3\u91ca\u201c\u4e3a\u4ec0\u4e48\u201d: \u7528\u7b80\u77ed\u4e2d\u6587(\u22644\u5b57)\u89e3\u91ca\u8bed\u6cd5\u89c4\u5219\u7684\u672c\u8d28\u539f\u56e0
+
+\u7edd\u5bf9\u7981\u6b62:
+- \u628a\u77ed\u8bed\u62c6\u6210\u5355\u8bcd\u5f53\u6b65\u9aa4(\u5982: attention \u2192 pay attention \u2192 pay attention to)
+- \u6b65\u9aa4\u53ea\u6709\u5b64\u7acb\u5355\u8bcd/\u77ed\u8bed\uff0c\u6ca1\u6709\u5b8c\u6574\u53e5\u5b50
+- \u201c\u62fc\u4e50\u9ad8\u5f0f\u201d\u9010\u8bcd\u7ec4\u88c5\u2014\u2014\u8fd9\u4e0d\u662f\u6559\u5b66\uff0c\u8fd9\u662f\u5e9f\u8bdd
+"""
+
+
     return f"""学科: {subject} | 专题: {grade} {semester}
 标题: {card.get('title', '')} | 类型: {card_type}
 🎯 本卡唯一主题: {topic_phrase}
@@ -596,6 +663,9 @@ def _build_card_info_grammar(card, subject, grade, semester):
 🔒10. 🚫严禁在图中添加任何与"{topic_phrase}"无关的语法公式、规则、知识点！（如本卡讲搭配，就不能出现Modal verb公式）
 🔒11. 图片底部/总结区域只能总结本卡主题的结论，禁止突然出现卡片数据中没有的新知识点！
 🔒12. 所有中文文字必须是完整的词/短句，禁止截断（如"搭配固"就是截断废字）
+🔒13. 🚫严禁"拆词式"步骤！不能把短语拆成单词当步骤(如 attention→pay attention→pay attention to 是废话)
+🔒14. 每个步骤必须包含至少一个完整英文例句(≥5词)，展示知识点在真实语境中的用法
+🔒15. 学生看完必须能回答"这个词/短语怎么在句子里用"+"常见错误是什么"+"为什么错"三个问题
 
 🚨🚨🚨 最终检查清单（生成图片前必须逐条确认）：
 □ 图中是否只有「{topic_phrase}」这一个语法/搭配知识点？
@@ -603,6 +673,7 @@ def _build_card_info_grammar(card, subject, grade, semester):
 □ 答案区域是否只包含「{topic_phrase}」相关的答案？
 □ Common Error 是否与「{topic_phrase}」直接相关？
 □ 口诀是否是完整且有意义的中文短句？
+{depth_override}
 
 图片上只能出现≤{_mc}个中文字！
 以下信息仅供理解知识点，图片上只需展示：

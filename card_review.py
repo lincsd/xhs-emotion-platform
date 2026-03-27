@@ -495,6 +495,24 @@ def validate_hard_rules(card, subject=''):
             if off_topic_steps:
                 issues.append(f'Step {off_topic_steps} 与本卡主题无关，可能混杂了不相关知识点')
 
+    # ── 规则 12: 步骤教学深度检测 (英语卡，防止拆词式浅层内容) ──
+    if is_eng:
+        steps = card.get('example', {}).get('steps', [])
+        if len(steps) >= 2:
+            short_step_count = 0
+            for s in steps:
+                s_str = str(s).strip()
+                eng_words = re.findall(r'[a-zA-Z]+', s_str)
+                cn_chars = len(re.findall(r'[\u4e00-\u9fff]', s_str))
+                # 步骤只有1-3个英文单词且中文极少 → 浅层
+                if len(eng_words) <= 3 and cn_chars <= 8:
+                    short_step_count += 1
+            if short_step_count >= len(steps) * 0.6:
+                issues.append(
+                    f'步骤内容过浅: {short_step_count}/{len(steps)}步只有孤立单词/短语，'
+                    f'缺少完整例句和解释 (禁止把短语拆成单词当步骤)'
+                )
+
     return {
         'pass': len(issues) == 0,
         'issues': issues,
