@@ -421,14 +421,31 @@ def _build_card_info(card, subject, grade, semester):
     return _build_card_info_edu(card, subject, grade, semester)
 
 
+def _is_text_on_topic(text, topic_kw):
+    """判断一段文本是否与主题关键词相关（至少有1个交集）"""
+    import re as _re
+    if not text or not topic_kw:
+        return True  # 无法判断时默认保留
+    text_kw = set(_re.findall(r'[a-zA-Z]{3,}', str(text).lower()))
+    if not text_kw:
+        return True  # 纯中文内容，保留
+    return bool(text_kw & topic_kw)
+
+
+def _get_topic_keywords(card):
+    """从标题+定义中提取本卡主题英文关键词集合"""
+    import re as _re
+    topic_text = (card.get('title', '') + ' ' + card.get('definition', '')).lower()
+    return set(_re.findall(r'[a-zA-Z]{3,}', topic_text))
+
+
 def _filter_off_topic_steps(card):
     """过滤掉与卡片主题无关的 steps，防止混杂知识点传给 Gemini"""
     import re as _re
     steps = (card.get('example') or {}).get('steps', [])
     if len(steps) < 2:
         return steps
-    topic_text = (card.get('title', '') + ' ' + card.get('definition', '')).lower()
-    topic_kw = set(_re.findall(r'[a-zA-Z]{3,}', topic_text))
+    topic_kw = _get_topic_keywords(card)
     if not topic_kw:
         return steps  # 无英文关键词可比较，全部保留
     filtered = []
@@ -457,6 +474,53 @@ def _filter_off_topic_steps(card):
     return filtered if filtered else steps[:1]  # 至少保留1个
 
 
+def _filter_off_topic_core_points(card):
+    """过滤掉与主题无关的 core_points"""
+    points = card.get('core_points', [])[:5]
+    topic_kw = _get_topic_keywords(card)
+    if not topic_kw or not points:
+        return points
+    filtered = [p for p in points if _is_text_on_topic(str(p), topic_kw)]
+    return filtered if filtered else points[:1]
+
+
+def _filter_off_topic_mistakes(card):
+    """过滤掉与主题无关的 mistakes 条目"""
+    mistakes = card.get('mistakes', [])
+    topic_kw = _get_topic_keywords(card)
+    if not topic_kw or not mistakes:
+        return mistakes
+    filtered = []
+    for m in mistakes:
+        if not isinstance(m, dict):
+            continue
+        # 判断 wrong+correct+reason 是否与主题相关
+        m_text = f"{m.get('wrong', '')} {m.get('correct', '')} {m.get('reason', '')}"
+        if _is_text_on_topic(m_text, topic_kw):
+            filtered.append(m)
+    return filtered if filtered else []  # 离题 mistakes 直接丢弃（不保留）
+
+
+def _clean_answer(card):
+    """清理 answer 中的离题内容（例如把 'pay; to; succeed' 清理为 'pay; to'）"""
+    import re as _re
+    answer = str((card.get('example') or {}).get('answer', ''))
+    topic_kw = _get_topic_keywords(card)
+    if not topic_kw or not answer:
+        return answer
+    # 按分号/逗号拆分答案
+    parts = _re.split(r'[;,]\s*', answer)
+    if len(parts) <= 1:
+        return answer  # 不是多答案，原样返回
+    cleaned = []
+    for part in parts:
+        part_kw = set(_re.findall(r'[a-zA-Z]{3,}', part.lower()))
+        if not part_kw or (part_kw & topic_kw):
+            cleaned.append(part.strip())
+        # else: 离题答案部分，丢弃
+    return '; '.join(cleaned) if cleaned else answer
+
+
 def _build_card_info_grammar(card, subject, grade, semester):
     """构建语法辨析类卡片信息（中英双语，引导词对比为核心）
     
@@ -480,15 +544,20 @@ def _build_card_info_grammar(card, subject, grade, semester):
         if clean_steps:
             steps_text = '\n'.join(f'  {i+1}. {s}' for i, s in enumerate(clean_steps[:3]))
             example_steps = f"\n【辨析步骤】:\n{steps_text[:300]}"
-        if ex.get('answer'):
-            example_steps += f"\n【判断结论】: {str(ex['answer'])[:100]}"
+        # 清理离题答案
+        clean_answer = _clean_answer(card)
+        if clean_answer:
+            example_steps += f"\n【判断结论】: {clean_answer[:100]}"
 
-    points = card.get('core_points', [])[:3]
+    # 过滤离题 core_points
+    points = _filter_off_topic_core_points(card)[:3]
     clean_pts = [str(p)[:80] for p in points]
 
+    # 过滤离题 mistakes
+    on_topic_mistakes = _filter_off_topic_mistakes(card)
     mistakes_info = ''
-    if card.get('mistakes'):
-        m = card['mistakes'][0]
+    if on_topic_mistakes:
+        m = on_topic_mistakes[0]
         reason = m.get('reason', '')
         mistakes_info = f"\n易混对比: ❌{m.get('wrong', '')[:80]} → ✅{m.get('correct', '')[:80]}"
         if reason:
@@ -527,6 +596,13 @@ def _build_card_info_grammar(card, subject, grade, semester):
 🔒10. 🚫严禁在图中添加任何与"{topic_phrase}"无关的语法公式、规则、知识点！（如本卡讲搭配，就不能出现Modal verb公式）
 🔒11. 图片底部/总结区域只能总结本卡主题的结论，禁止突然出现卡片数据中没有的新知识点！
 🔒12. 所有中文文字必须是完整的词/短句，禁止截断（如"搭配固"就是截断废字）
+
+🚨🚨🚨 最终检查清单（生成图片前必须逐条确认）：
+□ 图中是否只有「{topic_phrase}」这一个语法/搭配知识点？
+□ 是否有任何与「{topic_phrase}」无关的公式/规则/例子？如果有，立即删除！
+□ 答案区域是否只包含「{topic_phrase}」相关的答案？
+□ Common Error 是否与「{topic_phrase}」直接相关？
+□ 口诀是否是完整且有意义的中文短句？
 
 图片上只能出现≤{_mc}个中文字！
 以下信息仅供理解知识点，图片上只需展示：
