@@ -3587,6 +3587,25 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 except Exception as e:
                     pipeline_log.append(f'Step0a 跳过: {str(e)[:50]}')
 
+            # Step 0a2: 硬规则审校闸门 (card_review)
+            if not skip_audit:
+                try:
+                    from card_review import validate_hard_rules, is_english_grammar_card
+                    pipeline_log.append('Step0a2: 硬规则审校...')
+                    hr = validate_hard_rules(card, subject)
+                    if not hr['pass']:
+                        issues_str = '; '.join(hr['issues'][:5])
+                        pipeline_log.append(f'Step0a2: ⚠️ {len(hr["issues"])}条问题: {issues_str}')
+                        print(f'[v3] ⚠️ 硬规则审校不通过: {issues_str}', flush=True)
+                        # 不阻断流水线，但把问题注入后续 prompt 以引导 AI 修正
+                        card['_review_issues'] = hr['issues']
+                    else:
+                        pipeline_log.append('Step0a2: ✅ 硬规则通过')
+                except ImportError:
+                    pipeline_log.append('Step0a2: card_review未安装,跳过')
+                except Exception as e:
+                    pipeline_log.append(f'Step0a2 跳过: {str(e)[:50]}')
+
             # Step 0b: 内容设计分析
             try:
                 from content_design_engine import design_card_content
@@ -3623,6 +3642,15 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 hint = content_audit_result.get('refinement_hint', '')
                 if hint:
                     prompt = hint + '\n' + prompt
+
+            # 如果硬规则审校有问题，注入纠错提示到 prompt
+            review_issues = card.get('_review_issues', [])
+            if review_issues:
+                fix_hint = '\n⚠️ CONTENT REVIEW FOUND THESE ISSUES — YOU MUST FIX THEM:\n'
+                for iss in review_issues[:5]:
+                    fix_hint += f'  - {iss}\n'
+                fix_hint += 'Fix all above issues in the generated image. Do NOT repeat these mistakes.\n'
+                prompt = fix_hint + prompt
             
             manifest_count = len(manifest) if manifest else 0
             total_chars = sum(len(v) for v in manifest.values()) if manifest else 0
