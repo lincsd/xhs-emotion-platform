@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>v10.5 E2E Results</title>
+<style>
+body{background:#1a1a2e;color:#eee;font-family:system-ui;margin:0;padding:20px;text-align:center}
+h1{color:#e94560;margin-bottom:5px}
+.sub{color:#888;margin-bottom:30px}
+.cards{display:flex;justify-content:center;gap:30px;flex-wrap:wrap}
+.card{background:#16213e;border-radius:12px;padding:16px;max-width:480px}
+.card img{width:100%;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+.card h2{color:#0f3460;font-size:16px;margin:12px 0 4px}
+.card h2{color:#e94560}
+.stats{text-align:left;font-size:13px;color:#aaa;line-height:1.8;margin-top:8px}
+.stats b{color:#eee}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;margin:2px}
+.badge.green{background:#2d6a4f;color:#b7e4c7}
+.badge.blue{background:#1d3557;color:#a8dadc}
+.badge.orange{background:#e76f51;color:#fff}
+</style></head><body>
+<h1>v10.5 — 5层审核矩阵 + image-to-image 精修</h1>
+<p class="sub">E2E 测试结果 · 2026-03-28 · 2/2 成功 · 全部经过精修闭环</p>
+<div class="cards">
+  <div class="card">
+    <img src="数学_三下_test_v10_01.jpg" alt="数学卡">
+    <h2>数学方法卡 · 三年级下</h2>
+    <div class="stats">
+      <b>标题:</b> 口算整十整百÷一位数<br>
+      <span class="badge green">OCR 审计 98</span>
+      <span class="badge green">质量 97</span>
+      <span class="badge blue">5层视觉 88</span>
+      <span class="badge green">精修 ✓ ×1轮</span><br>
+      <b>耗时:</b> 242s · <b>模型:</b> gemini-3.1-flash-image-preview<br>
+      <b>闭环:</b> OCR通过(95) → 5层审核(88) → 精修 → OCR复检(98) → 采纳 ✅
+    </div>
+  </div>
+  <div class="card">
+    <img src="英语_五上_test_v10_02.jpg" alt="英语卡">
+    <h2>英语易混词卡 · 五年级上</h2>
+    <div class="stats">
+      <b>标题:</b> look at VS look for<br>
+      <span class="badge green">OCR 审计 100</span>
+      <span class="badge green">质量 99</span>
+      <span class="badge blue">5层视觉 88</span>
+      <span class="badge green">精修 ✓ ×1轮</span><br>
+      <b>耗时:</b> 112s · <b>模型:</b> gemini-3.1-flash-image-preview<br>
+      <b>闭环:</b> OCR通过(100) → 5层审核(88) → 精修 → OCR复检(100) → 采纳 ✅
+    </div>
+  </div>
+</div>
+</body></html>

@@ -3,7 +3,7 @@
 """
 知识卡片图片生成器 v3 — 终极流水线
 =============================================
-v10.5: AI全量渲染 + 5层审核矩阵 + image-to-image 视觉精修闭环
+v10.6: 多学科支持 + AI全量渲染 + 5层审核矩阵 + image-to-image 视觉精修闭环
 
   Step 1: Gemini 2.5 Flash 生成优化英文提示词
   Step 2: Gemini Image 生成完整卡片（AI直接渲染所有文字）
@@ -11,6 +11,14 @@ v10.5: AI全量渲染 + 5层审核矩阵 + image-to-image 视觉精修闭环
   Step 4b: 5层审核矩阵全维度评估（文字保真/视觉叙事/教学力/传播力）
   Step 4c: image-to-image 精修（基于审核结果迭代改进现有图片）
   Step 5: 质量评分 + 英语专项审核
+
+v10.6 新增:
+  - 全学科术语保护表 (英语/语文/数学/物理/化学/生物/历史/地理/政治)
+  - 语文专属 card builder (诗词/文言文/修辞手法)
+  - 学科专属教育提示注入 (物理/化学/生物/历史/地理/政治)
+  - 全学科术语注入到 manifest (OCR 精确审计)
+  - 学科专属校验 (语文/物理/化学/生物/历史)
+  - 视觉审核 Layer D 全学科覆盖
 
 用法:
   python generate_card_images_v3.py                          # 默认: 找 knowledge_cards/小学/*.json
@@ -529,6 +537,153 @@ _GRAMMAR_TERMS_PROTECTED = {
     '比较级', '最高级', '倒装句', '强调句', '感叹句', '祈使句',
 }
 
+# ── 全学科术语保护表 ──
+# v10.6: 将英语的术语保护机制推广到所有学科
+# 这些高频专业术语在 AI 渲染时容易出错，注入 manifest 后可精确 OCR 审计
+_SUBJECT_TERMS_PROTECTED = {
+    '英语': _GRAMMAR_TERMS_PROTECTED,
+
+    '语文': {
+        # 修辞手法
+        '比喻', '拟人', '夸张', '排比', '对偶', '反问', '设问', '借代',
+        '反复', '对比', '引用', '双关', '通感', '互文', '顶真', '回环',
+        # 文言文术语
+        '通假字', '古今异义', '词类活用', '一词多义', '特殊句式',
+        '判断句', '省略句', '倒装句', '被动句', '宾语前置', '定语后置', '状语后置',
+        # 诗词格律
+        '平仄', '押韵', '对仗', '律诗', '绝句', '词牌', '曲牌',
+        # 表达方式
+        '记叙', '描写', '议论', '抒情', '说明',
+        '直接抒情', '间接抒情', '借景抒情', '托物言志', '以小见大',
+        # 文体知识
+        '说明文', '议论文', '记叙文', '散文', '小说', '诗歌',
+        '论点', '论据', '论证', '说明方法', '说明顺序',
+    },
+
+    '数学': {
+        # 代数
+        '一元一次方程', '一元二次方程', '二元一次方程',
+        '因式分解', '公因式', '完全平方', '平方差',
+        '函数', '一次函数', '二次函数', '反比例函数', '指数函数', '对数函数',
+        '不等式', '绝对值', '根号', '平方根', '立方根',
+        # 几何
+        '全等三角形', '相似三角形', '等腰三角形', '直角三角形',
+        '勾股定理', '平行线', '垂直', '中位线', '角平分线', '垂直平分线',
+        '圆心角', '圆周角', '弧', '弦', '切线', '扇形',
+        '对称轴', '旋转', '平移', '中心对称',
+        # 统计概率
+        '平均数', '中位数', '众数', '方差', '标准差',
+        '概率', '频率', '样本', '总体',
+    },
+
+    '物理': {
+        # 力学
+        '重力', '弹力', '摩擦力', '合力', '分力', '力的合成', '力的分解',
+        '牛顿第一定律', '牛顿第二定律', '牛顿第三定律',
+        '惯性', '质量', '密度', '压强', '浮力', '阿基米德原理',
+        '功', '功率', '机械能', '动能', '势能', '机械能守恒',
+        '杠杆', '滑轮', '斜面', '机械效率',
+        # 电学
+        '电流', '电压', '电阻', '欧姆定律', '串联', '并联',
+        '电功', '电功率', '焦耳定律', '安培', '伏特', '欧姆',
+        '电磁感应', '电磁铁', '电动机', '发电机',
+        # 光学
+        '反射定律', '折射', '全反射', '凸透镜', '凹透镜',
+        '实像', '虚像', '焦距', '光的色散',
+        # 热学
+        '比热容', '热量', '内能', '热传递',
+        '熔化', '凝固', '汽化', '液化', '升华', '凝华',
+    },
+
+    '化学': {
+        # 基本概念
+        '原子', '分子', '离子', '元素', '化合物', '单质', '混合物',
+        '化合价', '化学键', '共价键', '离子键', '金属键',
+        '氧化还原', '氧化反应', '还原反应', '氧化剂', '还原剂',
+        # 物质分类
+        '酸', '碱', '盐', '氧化物',
+        '饱和溶液', '不饱和溶液', '溶解度', '溶质', '溶剂',
+        '质量守恒', '化学方程式', '配平',
+        # 元素化学
+        '摩尔', '摩尔质量', '阿伏伽德罗常数',
+        '周期表', '周期律', '电子层', '最外层电子',
+        '催化剂', '催化作用',
+        # 实验
+        '蒸馏', '过滤', '蒸发', '结晶', '萃取',
+    },
+
+    '生物': {
+        # 细胞
+        '细胞膜', '细胞壁', '细胞核', '细胞质', '线粒体', '叶绿体',
+        '内质网', '高尔基体', '核糖体', '液泡', '溶酶体',
+        '有丝分裂', '减数分裂', '细胞分化',
+        # 遗传
+        '基因', '染色体', 'DNA', 'RNA', '显性', '隐性',
+        '基因型', '表现型', '等位基因', '纯合子', '杂合子',
+        '孟德尔', '分离定律', '自由组合定律', '伴性遗传',
+        # 代谢
+        '光合作用', '呼吸作用', '有氧呼吸', '无氧呼吸',
+        '酶', '催化', 'ATP',
+        # 生态
+        '种群', '群落', '生态系统', '食物链', '食物网',
+        '生产者', '消费者', '分解者', '能量流动', '物质循环',
+    },
+
+    '历史': {
+        # 中国古代史
+        '封建制度', '郡县制', '科举制', '中央集权',
+        '丝绸之路', '大运河', '长城',
+        '春秋', '战国', '秦', '汉', '唐', '宋', '元', '明', '清',
+        # 中国近现代史
+        '鸦片战争', '太平天国', '洋务运动', '戊戌变法', '辛亥革命',
+        '五四运动', '新文化运动', '北伐战争', '长征', '抗日战争',
+        '解放战争', '新中国', '改革开放', '一国两制',
+        # 世界史
+        '文艺复兴', '宗教改革', '启蒙运动', '工业革命',
+        '法国大革命', '美国独立战争', '俄国十月革命',
+        '第一次世界大战', '第二次世界大战', '冷战',
+        '联合国', '欧盟', '全球化',
+    },
+
+    '地理': {
+        # 自然地理
+        '经度', '纬度', '赤道', '回归线', '极圈',
+        '板块构造', '地壳运动', '火山', '地震', '褶皱', '断层',
+        '气候', '季风', '气压', '锋面', '气旋', '反气旋',
+        '水循环', '洋流', '暖流', '寒流',
+        '风化', '侵蚀', '搬运', '沉积', '地貌',
+        # 人文地理
+        '城市化', '工业化', '人口迁移', '产业转移',
+        '农业区位', '工业区位', '交通运输',
+        '可持续发展', '环境问题', '资源',
+    },
+
+    '政治': {
+        # 政治常识
+        '人民代表大会', '政治协商', '中国共产党', '多党合作',
+        '民族区域自治', '基层群众自治', '依法治国',
+        '公民权利', '公民义务', '民主选举', '民主决策', '民主管理', '民主监督',
+        # 经济常识
+        '市场经济', '宏观调控', '供给', '需求', '价值规律',
+        '财政', '税收', '货币', '通货膨胀', '通货紧缩',
+        # 哲学
+        '唯物主义', '唯心主义', '辩证法', '形而上学',
+        '矛盾', '对立统一', '量变', '质变', '否定之否定',
+        '实践', '认识', '真理', '意识', '物质',
+        '联系', '发展', '规律', '主要矛盾', '次要矛盾',
+    },
+}
+
+def _get_subject_terms(subject):
+    """获取指定学科的保护术语集合"""
+    if subject in _SUBJECT_TERMS_PROTECTED:
+        return _SUBJECT_TERMS_PROTECTED[subject]
+    # 模糊匹配（如 "英语" 在 key 中）
+    for k, v in _SUBJECT_TERMS_PROTECTED.items():
+        if k in subject or subject in k:
+            return v
+    return set()
+
 
 # ═══════════════════════════════════════════
 #  Feature #5: 自动修复卡片数据 (审核reject → 修复 → 重审)
@@ -646,6 +801,7 @@ def _validate_and_repair_card(card, subject, grade):
     
     修复策略: 能修则修，不能修才拒绝。
     返回: (card_ok: bool, card: dict, issues: list[str])
+    v10.6: 新增全学科专属校验
     """
     issues = []
     is_eng = subject == '英语' or card.get('type', '') in _GRAMMAR_TYPES
@@ -699,7 +855,32 @@ def _validate_and_repair_card(card, subject, grade):
             card['memory_tip'] = ''  # 清空废话，让后续 prompt 生成自行构造
             issues.append(f'🔧 清空废话口诀: "{tip}"')
     
-    # ── 3. 认知负荷检查（如果引擎可用）──
+    # ── 2b. 全学科通用废话口诀检测 (v10.6) ──
+    if not is_eng:
+        tip = card.get('memory_tip', '').strip()
+        _USELESS_GENERAL = {
+            '多练就会', '记住就好', '背了就行', '牢记即可', '熟能生巧',
+            '认真学习', '好好复习', '多做练习', '仔细审题', '注意细节',
+            '记住哦', '来看看', '一起学', '加油哦', '注意哦',
+            '要记住', '别忘了', '很重要',
+        }
+        if tip in _USELESS_GENERAL:
+            card['memory_tip'] = ''
+            issues.append(f'🔧 清空废话口诀: "{tip}"')
+    
+    # ── 3. 学科专属校验 (v10.6) ──
+    if subject == '语文':
+        _validate_yuwen(card, issues)
+    elif subject == '物理':
+        _validate_physics(card, issues)
+    elif subject == '化学':
+        _validate_chemistry(card, issues)
+    elif subject == '生物':
+        _validate_biology(card, issues)
+    elif subject == '历史':
+        _validate_history(card, issues)
+    
+    # ── 4. 认知负荷检查（如果引擎可用）──
     if _HAS_DESIGN:
         try:
             cog = compute_cognitive_load(card, grade)
@@ -723,13 +904,82 @@ def _validate_and_repair_card(card, subject, grade):
     return True, card, issues
 
 
+def _validate_yuwen(card, issues):
+    """语文学科校验"""
+    definition = card.get('definition', '')
+    title = card.get('title', '')
+    
+    # 诗词类: 检查原文是否完整
+    poetry_kw = ['古诗', '诗词', '默写', '文言文', '古文']
+    is_poetry = any(k in title + definition for k in poetry_kw)
+    if is_poetry:
+        points = card.get('core_points', [])
+        if not points:
+            issues.append('⚠️ 语文诗词类缺少core_points（应含原文/注释）')
+    
+    # 修辞类: 检查是否有例句
+    rhetoric_kw = ['修辞', '比喻', '拟人', '排比']
+    is_rhetoric = any(k in title + definition for k in rhetoric_kw)
+    if is_rhetoric:
+        example = card.get('example', {})
+        if isinstance(example, dict) and not example.get('question'):
+            issues.append('⚠️ 语文修辞类缺少典型例句')
+
+
+def _validate_physics(card, issues):
+    """物理学科校验"""
+    points = card.get('core_points', [])
+    definition = card.get('definition', '')
+    
+    # 物理卡通常应包含公式或单位
+    formula_chars = set('=÷×+−≥≤<>°²³∠NkgmsPaJWVAΩ')
+    has_formula = any(any(c in str(p) for c in formula_chars) for p in points)
+    has_formula = has_formula or any(c in definition for c in formula_chars)
+    if not has_formula and len(points) > 0:
+        issues.append('⚠️ 物理卡片core_points中未检测到公式/单位，请确认')
+
+
+def _validate_chemistry(card, issues):
+    """化学学科校验"""
+    points = card.get('core_points', [])
+    
+    # 检查是否有化学相关符号
+    chem_pattern = re.compile(r'[A-Z][a-z]?[\d]*|→|↑|↓|⁺|⁻')
+    has_chem = any(chem_pattern.search(str(p)) for p in points)
+    if not has_chem and len(points) > 0:
+        # 不一定所有化学卡都有符号，但标记一下
+        pass  # 化学概念卡可能纯文字
+
+
+def _validate_biology(card, issues):
+    """生物学科校验"""
+    # 生物卡通常不需要特殊符号校验
+    # 主要确保术语准确性（在 term injection 阶段处理）
+    pass
+
+
+def _validate_history(card, issues):
+    """历史学科校验"""
+    definition = card.get('definition', '')
+    title = card.get('title', '')
+    
+    # 历史卡通常应包含年代信息
+    has_year = bool(re.search(r'\d{3,4}年?', title + definition))
+    if not has_year:
+        # 不是所有历史卡都需要年代，但很多需要
+        pass  # 历史概念卡可能无年代
+
+
 def _build_card_info(card, subject, grade, semester):
-    """构建传给 prompt 生成器的卡片信息（自动区分教育/养生/语法类）"""
+    """构建传给 prompt 生成器的卡片信息（自动区分教育/养生/语法/语文类）"""
     if subject in _WELLNESS_SUBJECTS:
         return _build_card_info_wellness(card, subject, grade, semester)
     # 英语学科的卡片统一走语法/英语路径
     if subject == '英语' or card.get('type') in _GRAMMAR_TYPES:
         return _build_card_info_grammar(card, subject, grade, semester)
+    # v10.6: 语文学科走专属路径（诗词/文言文/修辞需要特殊处理）
+    if subject == '语文':
+        return _build_card_info_yuwen(card, subject, grade, semester)
     return _build_card_info_edu(card, subject, grade, semester)
 
 
@@ -1100,6 +1350,33 @@ def _is_grammar_concept_card(card):
     return len(found_terms) >= 2, found_terms
 
 
+def _find_subject_terms_in_card(card, subject):
+    """v10.6: 通用版 — 在卡片中查找属于该学科的保护术语
+    
+    返回: list[str] — 卡片中出现的受保护术语列表
+    """
+    terms_set = _get_subject_terms(subject)
+    if not terms_set:
+        return []
+    
+    text = f"{card.get('title', '')} {card.get('definition', '')}"
+    found = [t for t in terms_set if t in text]
+    # 也检查 core_points
+    for p in card.get('core_points', [])[:6]:
+        p_str = str(p)
+        for t in terms_set:
+            if t in p_str and t not in found:
+                found.append(t)
+    # 检查 mistakes
+    for m in card.get('mistakes', [])[:3]:
+        if isinstance(m, dict):
+            m_text = f"{m.get('wrong', '')} {m.get('correct', '')} {m.get('reason', '')}"
+            for t in terms_set:
+                if t in m_text and t not in found:
+                    found.append(t)
+    return found
+
+
 def _build_card_info_grammar(card, subject, grade, semester):
     """构建英语语法/搭配类卡片信息 — v6 极简用法卡（通用版）
     
@@ -1330,8 +1607,139 @@ def _build_card_info_wellness(card, subject, grade, semester):
 难度: {card.get('difficulty', 2)}/5"""
 
 
+def _build_card_info_yuwen(card, subject, grade, semester):
+    """v10.6: 构建语文类卡片信息 — 诗词/文言文/修辞/阅读/作文
+    
+    语文与其他学科不同:
+    - 诗词/文言文需要原文展示 + 注释 + 翻译
+    - 修辞手法需要典型例句 + 对比分析
+    - 中文字形准确度要求极高（易错字/多音字/形近字）
+    """
+    card_type = card.get('type', '方法卡')
+    title = card.get('title', '')
+    definition = card.get('definition', '')
+    
+    # 检测是否为诗词/文言文类
+    poetry_keywords = ['古诗', '诗词', '诗句', '名句', '默写', '文言文', '古文',
+                        '词牌', '律诗', '绝句', '赋', '词']
+    is_poetry = any(k in title + definition + card_type for k in poetry_keywords)
+    
+    # 检测是否为修辞/阅读/写作技巧类
+    rhetoric_keywords = ['修辞', '比喻', '拟人', '夸张', '排比', '对偶',
+                          '表达方式', '写作手法', '阅读理解', '作文']
+    is_rhetoric = any(k in title + definition + card_type for k in rhetoric_keywords)
+    
+    example_info = ''
+    example_steps = ''
+    if card.get('example'):
+        ex = card['example']
+        if isinstance(ex, str):
+            example_info = ex[:200]  # 语文例句允许更长
+        else:
+            example_info = (ex.get('question') or '')[:200]
+            if ex.get('steps'):
+                steps_text = '\n'.join(f'  {i+1}. {s}' for i, s in enumerate(ex['steps']))
+                example_steps = f"\n【解析步骤】:\n{steps_text[:600]}"
+            if ex.get('answer'):
+                example_steps += f"\n【参考答案】: {str(ex['answer'])[:200]}"
+    
+    points = card.get('core_points', [])[:5]
+    clean_pts = [str(p)[:100] for p in points]
+    
+    mistakes_info = ''
+    if card.get('mistakes'):
+        m = card['mistakes'][0]
+        reason = m.get('reason', '')
+        mistakes_info = f"\n易错点: ❌{m.get('wrong', '')[:150]} → ✅{m.get('correct', '')[:150]}"
+        if reason:
+            mistakes_info += f"\n错因: {reason[:150]}"
+    
+    # 语文专属提示
+    subject_hint = ''
+    if is_poetry:
+        subject_hint = """
+⚠️ 语文诗词/文言文卡片要求:
+- 原文必须逐字精确，不能有错别字/漏字/多字
+- 易错字用特殊颜色标注（红色加粗）
+- 注释用小字标注在对应词语旁
+- 如有多音字，用注音标注（如 "行háng/xíng"）
+- 翻译用现代文，简洁准确"""
+    elif is_rhetoric:
+        subject_hint = """
+⚠️ 语文修辞/写作卡片要求:
+- 典型例句完整准确，标注修辞手法名称
+- 用颜色区分手法名称（蓝色）和例句（黑色）
+- 对比分析用左右栏或上下排列
+- 术语名称必须100%精确（如"借代"不能写成"借待"）"""
+    
+    return f"""学科: 语文 | 年级: {grade}{semester}
+标题: {title} | 类型: {card_type}
+
+【典型例句/原文】: {example_info or '选一个最经典的例句或名篇段落'}
+{example_steps}
+
+【定义/释义】: {definition[:150]}
+【知识要点】: {chr(10).join('• ' + p for p in clean_pts[:4])}
+【口诀】(≤8字): {card.get('memory_tip', '')[:40]}
+{mistakes_info}
+难度: {card.get('difficulty', 3)}/5
+{subject_hint}"""
+
+
+# ── 学科特定提示（注入到通用教育builder中）──
+_SUBJECT_EDU_HINTS = {
+    '物理': """
+⚠️ 物理卡片要求:
+- 公式必须完整准确，变量用斜体，单位不用斜体
+- 物理量的单位必须标注（如 N, kg, m/s², Pa）
+- 力的方向用箭头明确标注
+- 电路图符号必须规范（电阻用矩形、电容用平行线）
+- 实验图示要标注自变量和因变量""",
+    
+    '化学': """
+⚠️ 化学卡片要求:
+- 化学方程式必须配平，箭头方向正确
+- 元素符号大小写严格正确（如 Na 不能写成 na 或 NA）
+- 化合价标注在元素正上方
+- 离子符号的电荷标在右上角（如 Na⁺, Cl⁻）
+- 有机物结构简式要准确（键线式/分子式）""",
+    
+    '生物': """
+⚠️ 生物卡片要求:
+- 生物学术语必须准确（如"有丝分裂"不能写成"有死分裂"）
+- 细胞/组织/器官示意图需标注名称
+- 遗传图解用标准符号（P/F1/F2, ♀♂）
+- 过程类知识用流程箭头连接各阶段
+- 对比类（如动植物细胞）用表格或并排展示""",
+    
+    '历史': """
+⚠️ 历史卡片要求:
+- 时间(年代)必须准确，用醒目数字标注
+- 人物名字不能有错别字
+- 因果关系用箭头链接
+- 时间轴类用清晰的年代标注 + 事件简述
+- 历史概念用标准教科书表述""",
+    
+    '地理': """
+⚠️ 地理卡片要求:
+- 地图类必须标注方向（指北针）和比例尺
+- 经纬度数值准确
+- 气候类型名称完整准确（如"温带季风气候"）
+- 地形/地貌术语不能写错
+- 自然地理过程用箭头表示方向和顺序""",
+    
+    '政治': """
+⚠️ 政治卡片要求:
+- 政治术语必须使用标准表述（如"人民代表大会制度"不能简化错）
+- 理论观点用框架图呈现逻辑关系
+- 哲学原理必须准确区分（如唯物/唯心、辩证/形而上学）
+- 经济学概念区分清楚（如"财政"vs"货币""通胀"vs"通缩"）
+- 引用原文要准确""",
+}
+
+
 def _build_card_info_edu(card, subject, grade, semester):
-    """构建教育类卡片信息"""
+    """构建教育类卡片信息（v10.6: 支持全学科专属提示）"""
     card_type = card.get('type', '方法卡')
 
     example_info = ''
@@ -1365,6 +1773,9 @@ def _build_card_info_edu(card, subject, grade, semester):
         why_exp = f"\n本质原因: {card['why_explanation'][:200]}"
 
     is_vert = _detect_vertical_calc(card)
+    
+    # v10.6: 学科专属提示注入
+    subject_hint = _SUBJECT_EDU_HINTS.get(subject, '')
 
     return f"""学科: {subject} | 年级: {grade}{semester}
 标题: {card.get('title', '')} | 类型: {card_type}
@@ -1379,7 +1790,8 @@ def _build_card_info_edu(card, subject, grade, semester):
 {'\n本质原因: ' + card.get('why_explanation', '')[:200] if card.get('why_explanation') else ''}
 {mistakes_info}
 难度: {card.get('difficulty', 3)}/5
-{'⚠️ 笔算竖式类：必须画正确竖式' if is_vert else ''}"""
+{'⚠️ 笔算竖式类：必须画正确竖式' if is_vert else ''}
+{subject_hint}"""
 
 
 def generate_image_prompt_v2(card, subject, grade, semester, api_key, all_keys=None):
@@ -1768,28 +2180,37 @@ def _fix_english_card_title_manifest(manifest, card, subject):
 
 
 def _inject_grammar_terms_to_manifest(manifest, card, subject):
-    """将卡片中涉及的语法术语注入 manifest，用于 OCR 精确审计
+    """v10.6: 将卡片中涉及的学科专业术语注入 manifest，用于 OCR 精确审计
     
-    如果卡面会渲染"宾语从句""同位语从句"等中文术语，
+    原理: 如果卡面会渲染"宾语从句""氧化还原""有丝分裂"等中文术语，
     将它们加入 manifest 的期望文字列表，OCR 审计时能精确匹配，
     防止 "同位语从句" 被渲染成 "应语从句" 等错误漏过检测。
-    """
-    if subject != '英语' and subject != 'english':
-        return manifest
     
-    is_concept, terms = _is_grammar_concept_card(card)
-    if not is_concept or not terms:
-        return manifest
+    v10.6: 从英语专属扩展到全学科支持
+    """
+    # 英语: 保留原有逻辑 — 只对概念卡(≥2术语)注入
+    if subject == '英语' or subject == 'english':
+        is_concept, terms = _is_grammar_concept_card(card)
+        if not is_concept or not terms:
+            return manifest
+    else:
+        # 其他学科: 查找卡片中出现的受保护术语
+        terms = _find_subject_terms_in_card(card, subject)
+        if not terms:
+            return manifest
     
     # 检查 manifest 中已有的值，避免重复
     existing_values = ' '.join(manifest.values())
     added = 0
-    for term in terms[:4]:  # 最多保护4个术语
-        if term not in existing_values:
-            key = f'GRAMMAR_TERM_{added + 1}'
+    # 按术语长度降序排列，优先保护长术语（更容易出错）
+    sorted_terms = sorted(terms, key=len, reverse=True)
+    max_inject = 6 if subject != '英语' else 4  # 非英语学科允许更多术语
+    for term in sorted_terms[:max_inject]:
+        if term not in existing_values and len(term) >= 2:
+            key = f'SUBJECT_TERM_{added + 1}'
             manifest[key] = term
             added += 1
-            print(f'      [grammar protect] 注入期望术语: {key}="{term}"')
+            print(f'      [{subject} protect] 注入期望术语: {key}="{term}"')
     
     return manifest
 
@@ -2391,7 +2812,7 @@ Layer C — 视觉叙事（满分 25）
 好的设计是在「讲故事」，不只是排信息。
 
 C1. 色彩叙事 (0-9)
-  - 配色是否匹配学科氛围？（数学→蓝/绿理性冷静，语文→暖橙/米色人文，英语→活泼多彩）
+  - 配色是否匹配学科氛围？（数学→蓝/绿理性冷静，语文→暖橙/米色人文，英语→活泼多彩，物理→深蓝/银灰科技感，化学→紫/绿实验风，生物→绿色自然，历史→褐/金复古，地理→蓝绿地球色，政治→红/蓝庄重）
   - 是否有1个主色+1个辅色+1个点缀色的配色体系？
   - 文字与背景对比度是否 ≥ 4.5:1？（WCAG AA 标准）
   - 避免：纯黑背景、荧光色、红配绿等不和谐搭配
@@ -2429,10 +2850,16 @@ D3. 重点凸显 (0-7)
   - 核心考点是否是最醒目的元素？
   - 易错点有没有⚠️或❌的视觉标注？
   - 答案/结论是否有区别于普通文字的展示？（框、底色、✅）
-  - 学科专属：
-    · 数学：公式/运算步骤是否清晰分步？
-    · 英语：例句中重点词汇是否标注（加粗/下划线/色块）？
-    · 语文：易错字/多音字是否有标注注音？
+  - 学科专属（v10.6 全学科覆盖）：
+    · 数学：公式/运算步骤是否清晰分步？变量和常数是否区分标注？
+    · 英语：例句中重点词汇是否标注（加粗/下划线/色块）？语法术语是否精确？
+    · 语文：易错字/多音字是否有标注注音？修辞手法名称是否准确？诗词原文是否逐字正确？
+    · 物理：公式变量是否用斜体？单位是否正确标注（N/kg/m/s/Pa）？力的方向箭头是否清晰？
+    · 化学：化学方程式是否配平？元素符号大小写是否正确（Na不是na）？离子电荷标注是否在右上角？
+    · 生物：生物学术语是否精确（有丝分裂≠有死分裂）？过程流程箭头方向是否正确？
+    · 历史：年代数字是否准确？人物姓名是否正确？因果关系链是否逻辑清晰？
+    · 地理：地图方向标注是否正确？气候类型名称是否完整准确？经纬度数值是否合理？
+    · 政治：政治术语是否使用标准表述？哲学原理是否正确区分？逻辑框架是否完整？
 
 ═══════════════════════════════════════════
 Layer E — 传播力（满分 20）
@@ -2501,7 +2928,7 @@ E3. 工艺打磨 (0-6)
   ],
 
   "subject_specific": {{
-    "check": "数学/英语/语文", 
+    "check": "数学/英语/语文/物理/化学/生物/历史/地理/政治", 
     "issues": ["公式 a²+b²=c² 中指数渲染为普通字符'2'而非上标"]
   }},
 

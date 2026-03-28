@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260328c'  # v10.5c: +程序化截断补检 + 生成prompt反截断强化
+BUILD_VERSION = '20260328d'  # v10.6: 多学科支持(术语保护/专属builder/校验/视觉审核)
 
 # 积分套餐配置
 CREDIT_PACKAGES = [

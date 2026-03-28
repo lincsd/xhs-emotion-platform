@@ -1,0 +1,557 @@
+[
+  {
+    "index": 1,
+    "source_file": "小学//数学_三下.json",
+    "unit_id": "01",
+    "unit_name": "位置与方向 (一)",
+    "card": {
+      "card_id": "01-03",
+      "full_id": "数学-三下-01-03",
+      "title": "根据一个方向确定其他方向",
+      "type": "方法卡",
+      "difficulty": 3,
+      "importance": 4,
+      "definition": "只要知道一个方向，我们就能利用方向之间的关系，找出其他所有的方向。",
+      "core_points": [
+        "东和西是相对的，南和北是相对的。",
+        "面朝北，背面是南，左边是西，右边是东。",
+        "面朝南，背面是北，左边是东，右边是西。",
+        "面朝东，背面是西，左边是北，右边是南。",
+        "面朝西，背面是东，左边是南，右边是北。"
+      ],
+      "example": {
+        "question": "小丽面朝南方站立。请问，她的背面是什么方向？她的左手边是什么方向？她的右手边是什么方向？",
+        "steps": [
+          "小丽面朝南方，那么与南相对的方向是北，所以她的背面是北方。",
+          "面朝南时，左手边是东方。",
+          "面朝南时，右手边是西方。"
+        ],
+        "answer": "她的背面是北方，左手边是东方，右手边是西方。"
+      },
+      "mistakes": [
+        {
+          "wrong": "混淆左右手对应的方向，例如面朝南时，认为左手是西方。",
+          "correct": "想象自己站在那个方向，伸出左右手，或者用口诀“面北背南，左西右东；面南背北，左东右西”来判断。"
+        }
+      ],
+      "memory_tip": "面北背南，左西右东；面南背北，左东右西；面东背西，左北右南；面西背东，左南右北。",
+      "related": {
+        "prerequisite": "认识东、南、西、北四个基本方向，认识东南、东北、西南、西北四个中间方向",
+        "next": "描述物体所在的方向"
+      }
+    }
+  },
+  {
+    "index": 2,
+    "source_file": "小学//数学_四上.json",
+    "unit_id": "01",
+    "unit_name": "大数的认识",
+    "card": {
+      "card_id": "01-01",
+      "full_id": "数学-四上-01-01",
+      "title": "数位、计数单位和数级",
+      "type": "概念卡",
+      "difficulty": 2,
+      "importance": 5,
+      "definition": "计数单位是数位的名称，如个、十、百、千等，每相邻两个计数单位间的进率都是十；数级是按我国计数习惯，从右往左每四位分为一级。",
+      "core_points": [
+        "十进制计数法：每相邻两个计数单位间的进率都是十。",
+        "数位：数字所在的位，如个位、十位、百位、千位等。",
+        "计数单位：每个数位上的单位，如个、十、百、千、万、十万、百万、千万、亿等。",
+        "数级：个级（个、十、百、千）、万级（万、十万、百万、千万）、亿级（亿、十亿、百亿、千亿）。",
+        "数位顺序表是学习大数的基础。"
+      ],
+      "example": {
+        "question": "说出345678901这个数中，数字“5”在哪个数位上，表示什么？",
+        "steps": [
+          "1. 从右往左数，确定数级和数位。",
+          "2. 345678901可以分为亿级（3）、万级（4567）、个级（8901）。",
+          "3. 数字“5”在万级，是万级中的十万位。",
+          "4. “5”在十万位上，表示5个十万。"
+        ],
+        "answer": "数字“5”在十万位上，表示5个十万。"
+      },
+      "mistakes": [
+        {
+          "wrong": "将数位和计数单位混淆，例如说“5在十万单位上”。",
+          "correct": "“5”在十万位上，它的计数单位是十万。"
+        },
+        {
+          "wrong": "只知道数位名称，不理解其表示的意义。",
+          "correct": "每个数位上的数字表示有多少个这个数位上的计数单位。"
+        }
+      ],
+      "memory_tip": "数位是位置，单位是名称，四位一分级，十进是根本。",
+      "related": {
+        "prerequisite": [
+          "三年级：万以内数的认识",
+          "二年级：百以内数的认识"
+        ],
+        "next": [
+          "四年级：亿以内数的读写",
+          "五年级：多位小数的认识"
+        ]
+      }
+    }
+  },
+  {
+    "index": 3,
+    "source_file": "小学//数学_五上.json",
+    "unit_id": "05",
+    "unit_name": "多边形的面积",
+    "card": {
+      "card_id": "05-01",
+      "full_id": "数学-五上-05-01",
+      "title": "平行四边形的面积",
+      "type": "公式卡",
+      "difficulty": 2,
+      "importance": 4,
+      "definition": "平行四边形的面积等于它的底乘以高。",
+      "core_points": [
+        "公式：S = a × h (其中S表示面积，a表示底，h表示高)。",
+        "底和高是对应的，高必须是底边上的高。",
+        "可以将平行四边形剪拼成长方形来推导公式。",
+        "注意单位的统一，面积单位是平方单位。"
+      ],
+      "example": {
+        "question": "一个平行四边形的底是5厘米，高是3厘米，它的面积是多少？",
+        "steps": [
+          "1. 确定底a = 5厘米，高h = 3厘米。",
+          "2. 套用公式 S = a × h。",
+          "3. 计算 S = 5 × 3 = 15。"
+        ],
+        "answer": "15平方厘米。"
+      },
+      "mistakes": [
+        {
+          "wrong": "将平行四边形的邻边作为高。",
+          "correct": "高必须是底边上的垂线段的长度。"
+        },
+        {
+          "wrong": "单位使用错误，例如将面积单位写成长度单位。",
+          "correct": "面积单位是平方厘米、平方米等。"
+        }
+      ],
+      "memory_tip": "平行四边形，底乘高，面积公式记心房。",
+      "related": {
+        "prerequisite": "长方形的面积，平行四边形的特征",
+        "next": "三角形的面积"
+      }
+    }
+  },
+  {
+    "index": 4,
+    "source_file": "小学//数学_五上.json",
+    "unit_id": "02",
+    "unit_name": "小数除法",
+    "card": {
+      "card_id": "02-05",
+      "full_id": "数学-五上-02-05",
+      "title": "解决问题中的近似数（进一法、去尾法）",
+      "type": "辨析卡",
+      "difficulty": 4,
+      "importance": 5,
+      "definition": "在解决实际问题时，根据具体情况，除了“四舍五入”法，有时需要采用“进一法”或“去尾法”来取商的近似值。",
+      "core_points": [
+        "进一法：无论余数是多少（只要有余数），都向前一位进1。常用于求至少需要多少个容器、多少件物品等。",
+        "去尾法：将小数部分全部舍去，只保留整数部分。常用于求最多能做多少件物品、能装多少袋等。",
+        "四舍五入法：根据下一位的数字进行取舍。常用于一般性的近似计算。",
+        "关键是理解题目的实际意义，选择合适的取近似数方法。"
+      ],
+      "example": {
+        "question": "1. 一根绳子长25米，剪成每段1.8米，最多能剪多少段？ 2. 制作一个蛋糕需要0.8千克面粉，现有5千克面粉，至少能做多少个蛋糕？",
+        "steps": [
+          "1. 25 ÷ 1.8 ≈ 13.88…  根据“最多能剪多少段”，采用去尾法。",
+          "2. 5 ÷ 0.8 = 6.25  根据“至少能做多少个蛋糕”，即使余下一点面粉，也需要一个完整的容器来装，所以采用进一法。"
+        ],
+        "answer": "1. 最多能剪13段。 2. 至少能做7个蛋糕。"
+      },
+      "mistakes": [
+        {
+          "wrong": "25 ÷ 1.8 ≈ 13.88… ≈ 14 (四舍五入法处理“最多能剪多少段”)",
+          "correct": "应采用去尾法，最多能剪13段。"
+        },
+        {
+          "wrong": "5 ÷ 0.8 = 6.25 ≈ 6 (去尾法处理“至少能做多少个蛋糕”)",
+          "correct": "应采用进一法，至少能做7个蛋糕。"
+        }
+      ],
+      "memory_tip": "实际问题多变化，取舍方法要细察。求多去尾求至少，进一法则要记牢。",
+      "related": {
+        "prerequisite": "商的近似数",
+        "next": "解决实际应用问题"
+      }
+    }
+  },
+  {
+    "index": 5,
+    "source_file": "小学//英语_四上.json",
+    "unit_id": "01",
+    "unit_name": "My classroom",
+    "card": {
+      "card_id": "01-01",
+      "full_id": "英语-四上-01-01",
+      "title": "词汇：教室物品",
+      "type": "词汇卡",
+      "difficulty": 2,
+      "importance": 5,
+      "definition": "学习描述教室里的常见物品的英语单词。",
+      "core_points": [
+        "desk /dɛsk/ n. 课桌",
+        "chair /tʃɛər/ n. 椅子",
+        "board /bɔːrd/ n. 董事会；黑板",
+        "light /laɪt/ n. 灯",
+        "fan /fæn/ n. 风扇",
+        "window /ˈwɪndoʊ/ n. 窗户",
+        "door /dɔːr/ n. 门"
+      ],
+      "example": {
+        "question": "看图写单词：这是一张课桌。",
+        "steps": [
+          "图片提示：一张课桌",
+          "回忆“课桌”的英文单词"
+        ],
+        "answer": "desk"
+      },
+      "mistakes": [
+        {
+          "wrong": "desck",
+          "correct": "desk"
+        }
+      ],
+      "memory_tip": "desk和chair是好朋友，一个用来写，一个用来坐；board是黑板，写写画画真方便。",
+      "related": {
+        "prerequisite": "三年级物品词汇",
+        "next": "用What's this?提问物品"
+      }
+    }
+  },
+  {
+    "index": 6,
+    "source_file": "小学//英语_四上.json",
+    "unit_id": "01",
+    "unit_name": "My classroom",
+    "card": {
+      "card_id": "01-02",
+      "full_id": "英语-四上-01-02",
+      "title": "句型：询问和回答物品",
+      "type": "句型卡",
+      "difficulty": 2,
+      "importance": 5,
+      "definition": "学习用 'What's this?' 和 'What's that?' 询问物品，并用 'It's a...' 回答。",
+      "core_points": [
+        "What's this? 这是什么？ (指近处的物品)",
+        "What's that? 那是什么？ (指远处的物品)",
+        "It's a [物品]. 这是一个[物品]。",
+        "It's an [物品]. 这是一个[物品]。(当物品名词以元音音素开头时)"
+      ],
+      "example": {
+        "question": "看图并回答：远处有一扇门。提问并回答。",
+        "steps": [
+          "确定物品是“门”且在“远处”",
+          "选择正确的疑问句 'What's that?'",
+          "用 'It's a door.' 回答"
+        ],
+        "answer": "A: What's that? B: It's a door."
+      },
+      "mistakes": [
+        {
+          "wrong": "What's this? It's door.",
+          "correct": "What's this? It's a door."
+        },
+        {
+          "wrong": "What's that? It's an desk.",
+          "correct": "What's that? It's a desk."
+        }
+      ],
+      "memory_tip": "近处用this，远处用that，回答都是 'It's a/an...'，别忘了a/an，它是小帮手。",
+      "related": {
+        "prerequisite": "名词词汇",
+        "next": "询问物品的颜色"
+      }
+    }
+  },
+  {
+    "index": 7,
+    "source_file": "小学//英语_四上.json",
+    "unit_id": "02",
+    "unit_name": "My schoolbag",
+    "card": {
+      "card_id": "02-03",
+      "full_id": "英语-四上-02-03",
+      "title": "语法：一般疑问句 'Is this/that...?'",
+      "type": "语法卡",
+      "difficulty": 3,
+      "importance": 4,
+      "definition": "学习用 'Is this/that...?' 提问，并用 'Yes, it is.' 或 'No, it isn't.' 回答。",
+      "core_points": [
+        "结构：Is + this/that + a/an + 名词?",
+        "肯定回答：Yes, it is.",
+        "否定回答：No, it isn't. (it isn't = it is not)",
+        "用于确认近处或远处的单一物品。"
+      ],
+      "example": {
+        "question": "老师指着一个橡皮问你：'Is this an eraser?' 你看到确实是橡皮，请你回答。",
+        "steps": [
+          "判断物品是否是橡皮",
+          "选择肯定回答形式"
+        ],
+        "answer": "Yes, it is."
+      },
+      "mistakes": [
+        {
+          "wrong": "Is this a book? Yes, it.",
+          "correct": "Is this a book? Yes, it is."
+        },
+        {
+          "wrong": "Is that a pen? No, it not.",
+          "correct": "Is that a pen? No, it isn't."
+        }
+      ],
+      "memory_tip": "Is this/that开头问，Yes, it is.或No, it isn't.来回答。",
+      "related": {
+        "prerequisite": "What's this/that?句型",
+        "next": "复数一般疑问句"
+      }
+    }
+  },
+  {
+    "index": 8,
+    "source_file": "小学//英语_四上_爆款.json",
+    "unit_id": "T1",
+    "unit_name": "易混词陷阱",
+    "card": {
+      "card_id": "T1-01",
+      "full_id": "英语-四上-T1-01",
+      "title": "this和that分不清？一张图搞定！",
+      "type": "易混词陷阱卡",
+      "difficulty": 2,
+      "importance": 4,
+      "definition": "this (这个) 指代近处的事物；that (那个) 指代远处的事物。",
+      "core_points": [
+        "this：离说话人近的东西，通常用手指向。",
+        "that：离说话人远的东西，通常用手指向。",
+        "两者都用于指代单数名词。",
+        "疑问句和肯定/否定回答中也要区分使用。"
+      ],
+      "example": {
+        "question": "看图选择：指着桌子上的书本，应该说 'What's ______?'",
+        "steps": [
+          "图片展示：一只手指向桌上的一本书（近处）",
+          "选项：A. this B. that"
+        ],
+        "answer": "A. this"
+      },
+      "mistakes": [
+        {
+          "wrong": "What's that? (指着手边的铅笔)",
+          "correct": "What's this? (指着手边的铅笔)"
+        },
+        {
+          "wrong": "This is a bird. (指着远处天空的鸟)",
+          "correct": "That is a bird. (指着远处天空的鸟)"
+        }
+      ],
+      "memory_tip": "近用this，远用that，一远一近要记牢！",
+      "emotion_hook": "小学英语最基础的this/that你用对了吗？别再傻傻分不清啦！",
+      "trap_point": "很多同学不注意距离，随意混用this和that，导致表达不准确。"
+    }
+  },
+  {
+    "index": 9,
+    "source_file": "小学//英语_四上_考卷.json",
+    "unit_id": "E1",
+    "unit_name": "听力得分专区",
+    "card": {
+      "card_id": "E1-01",
+      "full_id": "英语-四上-E1-01",
+      "title": "教室物品听力辨别",
+      "type": "听力得分卡",
+      "difficulty": 3,
+      "importance": 5,
+      "exam_frequency": "高",
+      "score_weight": "30-40%",
+      "definition": "教室物品听力辨别是考试高频失分点",
+      "core_points": [
+        "关键词: pencil, on, desk",
+        "动作：把铅笔放桌上",
+        "图片匹配铅笔在桌上"
+      ],
+      "example": {
+        "question": "Listen: \"Put your pencil on the desk.\"",
+        "steps": [
+          "关键词: pencil, on, desk",
+          "动作：把铅笔放桌上",
+          "图片匹配铅笔在桌上"
+        ],
+        "answer": "铅笔在桌上"
+      },
+      "mistakes": [
+        {
+          "wrong": "in和on分不清",
+          "correct": "on在表面，in在内部"
+        }
+      ],
+      "memory_tip": "on=在上面, in=在里面, under=在下面！",
+      "emotion_hook": "这道题全班一半人做错！你家孩子会不会？"
+    }
+  },
+  {
+    "index": 10,
+    "source_file": "小学//英语_四上_总结.json",
+    "unit_id": "U1",
+    "unit_name": "我的教室与物品",
+    "card": {
+      "card_id": "C1",
+      "full_id": "G4S1U1C1",
+      "title": "「教室物品与颜色词汇」",
+      "type": "知识总结卡",
+      "difficulty": 3,
+      "importance": 5,
+      "definition": "「掌握人教版PEP四年级上册中常见的教室物品和颜色词汇，并能正确拼写和识别。」",
+      "core_points": [
+        "「教室物品：desk（课桌）, chair（椅子）, book（书）, bag（书包）, pencil（铅笔）, pen（钢笔/圆珠笔）, ruler（尺子）, eraser（橡皮）, board（黑板）, computer（电脑）。」",
+        "「颜色词汇：red（红色）, yellow（黄色）, blue（蓝色）, green（绿色）, white（白色）, black（黑色）, brown（棕色）, orange（橙色）, purple（紫色）。」",
+        "「识记：通过图片、实物和读音来记忆单词，注意区分pen和pencil。」",
+        "「拼写：多写多练，尤其注意元音字母和易错字母组合。」"
+      ],
+      "example": {
+        "question": "看图写单词：(图片为一支红色的铅笔)",
+        "steps": [
+          "1. 识别图片内容：一支铅笔。",
+          "2. 回忆「铅笔」的英语单词：pencil。",
+          "3. 观察颜色：红色。",
+          "4. 回忆「红色」的英语单词：red。",
+          "5. 综合写出：red pencil。"
+        ],
+        "answer": "red pencil"
+      },
+      "mistakes": [
+        {
+          "wrong": "pencle",
+          "correct": "pencil"
+        },
+        {
+          "wrong": "yello",
+          "correct": "yellow"
+        },
+        {
+          "wrong": "bord",
+          "correct": "board"
+        }
+      ],
+      "memory_tip": "「物品颜色多，分类记牢靠；拼读多练习，大小写别忘掉。」",
+      "related": {
+        "prerequisite": "「三年级基础词汇（颜色、数字1-10）」",
+        "next": "「五年级物品形容词拓展」"
+      },
+      "exam_focus": {
+        "frequency": "★★★★★",
+        "question_types": [
+          "听力选图",
+          "听力判断",
+          "看图写单词",
+          "英汉互译",
+          "选择填空"
+        ],
+        "scoring_key": "「单词拼写准确无误，大小写按要求书写。」",
+        "common_trap": "「易混淆单词（如pen/pencil），部分单词拼写易错（如yellow, purple）。」",
+        "real_exam_example": {
+          "source": "模拟题",
+          "question": "看图写单词，补全句子：It's a ______ (图片为一张绿色的椅子).",
+          "answer": "green chair",
+          "scoring_notes": "「识别图片并正确拼写颜色和物品单词。」"
+        }
+      }
+    }
+  },
+  {
+    "index": 11,
+    "source_file": "小学/英语_状语从句.json",
+    "unit_id": "G1",
+    "unit_name": "地点状语从句",
+    "card": {
+      "card_id": "G1-01",
+      "full_id": "英语-状语从句-G1-01",
+      "title": "where引导的地点状语从句",
+      "type": "语法辨析卡",
+      "difficulty": 3,
+      "importance": 5,
+      "definition": "where引导地点状语从句，表示「在……的地方」，修饰主句谓语动词，说明动作发生的地点。",
+      "core_points": [
+        "where = in/at the place where，表「在……地方」",
+        "从句可置于主句前或后，前置时常加逗号",
+        "区分where引导的地点状语从句和定语从句：状语从句中where前无先行词",
+        "常见搭配：Stay where you are. / Put it where you found it."
+      ],
+      "example": {
+        "question": "Where there is a will, there is a way. 此句中where引导什么从句？",
+        "steps": [
+          "1. 观察where前面有没有先行词（名词）",
+          "2. 没有先行词→地点状语从句",
+          "3. 翻译：在有意志的地方，就有出路"
+        ],
+        "answer": "where引导地点状语从句，表「在……的地方」，整句意为「有志者事竟成」。"
+      },
+      "mistakes": [
+        {
+          "wrong": "混淆where引导的定语从句：This is the place where I was born.（有先行词place→定语从句）",
+          "correct": "Where I was born is a small village.（无先行词→地点状语从句）"
+        }
+      ],
+      "memory_tip": "where前无名词→状语从句；where前有名词→定语从句！",
+      "emotion_hook": "99%的同学分不清where到底引导什么从句，一招秒判！",
+      "trap_point": "where既能引导定语从句也能引导状语从句，关键看前面有没有先行词。",
+      "related": {
+        "prerequisite": "定语从句基础",
+        "next": "G1-02 wherever引导的地点状语从句"
+      }
+    }
+  },
+  {
+    "index": 12,
+    "source_file": "小学/英语_六下.json",
+    "unit_id": "05",
+    "unit_name": "Where did you go?",
+    "card": {
+      "card_id": "05-03",
+      "full_id": "英语-六下-05-03",
+      "title": "不规则动词卡：常见不规则动词过去式 (Group 1)",
+      "type": "不规则动词卡",
+      "difficulty": 4,
+      "importance": 5,
+      "definition": "学习一些常用不规则动词的过去式变化。",
+      "core_points": [
+        "go - went (去)",
+        "see - saw (看)",
+        "eat - ate (吃)",
+        "drink - drank (喝)",
+        "buy - bought (买)",
+        "read - read (读，发音不同)",
+        "have - had (有)",
+        "do - did (做)"
+      ],
+      "example": {
+        "question": "写出下列动词的过去式：",
+        "steps": [
+          "1. go",
+          "2. see",
+          "3. eat",
+          "4. have"
+        ],
+        "answer": "1. went\n2. saw\n3. ate\n4. had"
+      },
+      "mistakes": [
+        {
+          "wrong": "goed",
+          "correct": "went"
+        },
+        {
+          "wrong": "eated",
+          "correct": "ate"
+        }
+      ],
+      "memory_tip": "不规则动词很顽皮，变化多端不讲理。死记硬背是王道，多读多练才记牢！Go-went, see-saw, eat-ate, drink-drank, buy-bought, read-read, have-had, do-did！"
+    }
+  }
+]
