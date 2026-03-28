@@ -534,6 +534,254 @@ _register(SkillSchema(
 
 
 # ═══════════════════════════════════════════
+# 9 种理科专属 Skill 定义 (v10.9: 物理/化学/生物)
+# ═══════════════════════════════════════════
+
+# ── 实验卡 ──────────────────────────────────
+_register(SkillSchema(
+    card_type='实验卡',
+    teaching_goal='掌握一个完整实验：目的→步骤→现象→结论',
+    core_strategy='实验名 → 器材图示 → 步骤流程 → 现象/结论 → 安全提示',
+    layout_blocks=[
+        LayoutBlock('标题', 'top', max_chars=10, description='🧪 实验名称 + 学科标签'),
+        LayoutBlock('目的与器材', 'upper', min_area_pct=15, description='实验目的(1句) + 主要器材图标化展示'),
+        LayoutBlock('步骤流程', 'middle', min_area_pct=35, description='编号色块步骤 ①→②→③ 流程图，对照组用虚线'),
+        LayoutBlock('现象与结论', 'lower', min_area_pct=20, description='观察到的现象(有色彩描述) + 结论大字'),
+        LayoutBlock('安全/易错', 'bottom', max_chars=15, required=False, description='⚠️ 安全注意事项 / 常见操作失误'),
+    ],
+    sub_types=[
+        SubType('物理实验', '控制变量法', '自变量/因变量表格+数据图', '调音量只转一个旋钮', '忘了控制变量'),
+        SubType('化学实验', '操作规范法', '器材图+操作箭头流程', '做菜按食谱步骤来', '加热前未预热/未检查气密性'),
+        SubType('生物实验', '对照实验法', '实验组vs对照组双栏对比', '双胞胎只改变一个条件', '对照组设置不合理'),
+        SubType('探究实验', '提出假设→验证', '假设→方案→数据→结论四步', '侦探破案四步推理', '变量没有定量化'),
+    ],
+    visual_rule_summary='器材图标化展示+编号色块步骤流程图+现象色彩描述+安全⚠️红色提示',
+    forbidden=[
+        '步骤不超过5步',
+        '不省略实验目的直接讲步骤',
+        '不写没有现象描述的实验',
+        '安全提示不超过2条',
+    ],
+    required_elements=['实验目的', '器材', '步骤流程', '现象', '结论'],
+    color_scheme='实验蓝绿：器材蓝#3498DB + 现象绿#27AE60 + 安全红#E74C3C',
+))
+
+# ── 公式推导卡 ──────────────────────────────────
+_register(SkillSchema(
+    card_type='公式推导卡',
+    teaching_goal='理解公式从哪来、每步为什么成立、何时能用',
+    core_strategy='已知条件 → 逐步推导(标注物理意义) → 最终公式 → 适用条件',
+    layout_blocks=[
+        LayoutBlock('标题', 'top', max_chars=10, description='公式名称 + 学科标签'),
+        LayoutBlock('已知条件', 'upper', description='出发点：基本定律/公理/已知关系'),
+        LayoutBlock('推导过程', 'middle', min_area_pct=40, description='逐步推导：每步标注物理/化学意义，变量用色块'),
+        LayoutBlock('最终公式', 'lower', min_area_pct=15, description='公式超大展示 + 各符号含义注释'),
+        LayoutBlock('适用条件', 'bottom', max_chars=20, description='⚠️ 适用前提 + 常见误用场景'),
+    ],
+    sub_types=[
+        SubType('物理推导', '定律→公式推导', '每步标注物理量单位+因果箭头', '搭积木从底层往上搭', '不标单位/混淆标量矢量'),
+        SubType('化学推导', '守恒→等量关系', '电子转移/质量守恒箭头标注', '天平两边一样重', '忘记考虑系数'),
+        SubType('数学推导', '公理→定理推导', '命题→证明逻辑链', '推理像接力赛传棒', '跳步/循环论证'),
+    ],
+    visual_rule_summary='推导步骤色块递进↓+每步物理意义注释+最终公式超大+适用条件⚠️',
+    forbidden=[
+        '不跳步省略中间过程',
+        '不省略物理意义只写数学变换',
+        '推导步骤不超过5步',
+        '不写没有适用条件的公式',
+    ],
+    required_elements=['已知条件', '逐步推导', '最终公式', '适用条件'],
+    color_scheme='推导蓝紫：条件蓝#5B8DEF + 推导紫#9B59B6 + 公式金#F1C40F',
+))
+
+# ── 过程流卡 ──────────────────────────────────
+_register(SkillSchema(
+    card_type='过程流卡',
+    teaching_goal='理解一个动态过程的完整流程和各阶段变化',
+    core_strategy='起始状态 → 各阶段变化(箭头连接) → 终态 → 物质/能量流向',
+    layout_blocks=[
+        LayoutBlock('标题', 'top', max_chars=10, description='过程名称 + 学科标签'),
+        LayoutBlock('流程主体', 'middle', min_area_pct=55, description='纵向/横向流程图，每阶段用不同色块，箭头标注输入/输出物质'),
+        LayoutBlock('关键转化', 'lower', description='核心转化方程/反应式大字展示'),
+        LayoutBlock('口诀', 'bottom', max_chars=12, description='流程记忆口诀'),
+    ],
+    sub_types=[
+        SubType('生物代谢流', '物质+能量追踪', '物质用色块箭头, 能量用波浪箭头', '工厂流水线各环节', '混淆光反应/暗反应场所'),
+        SubType('化学工业流', '原料→产品流程', '反应器图标+条件标注(温度/催化剂)', '做菜配料→烹饪→成品', '忘标反应条件'),
+        SubType('物理多过程', '状态→状态转换', '时间轴/位移轴上标注各阶段', '坐地铁换乘多段行程', '各段加速度方向搞错'),
+        SubType('遗传表达流', '中心法则方向', 'DNA→RNA→蛋白质箭头链', '图纸→施工→建筑物', '混淆转录/翻译方向'),
+    ],
+    visual_rule_summary='纵向流程图(55%)+色块阶段+箭头标注输入输出+核心方程大字',
+    forbidden=[
+        '阶段不超过6个',
+        '不画没有箭头连接的孤立色块',
+        '不省略物质输入/输出',
+    ],
+    required_elements=['流程图', '阶段色块', '物质/能量箭头', '关键方程'],
+    color_scheme='流程渐变：起始蓝#3498DB → 中间绿#2ECC71 → 终态橙#E67E22',
+))
+
+# ── 微观图解卡 ──────────────────────────────────
+_register(SkillSchema(
+    card_type='微观图解卡',
+    teaching_goal='看懂宏观现象背后的微观本质',
+    core_strategy='宏观现象描述 → 微观粒子级图解 → 宏微观对应 → 本质总结',
+    layout_blocks=[
+        LayoutBlock('标题', 'top', max_chars=10, description='现象名称 + 学科标签'),
+        LayoutBlock('宏观现象', 'upper', min_area_pct=15, description='你看到的：宏观现象描述(实物/场景)'),
+        LayoutBlock('微观图解', 'middle', min_area_pct=40, description='粒子级别示意图：原子/分子/离子运动，用不同颜色/大小圆圈表示'),
+        LayoutBlock('本质总结', 'lower', description='一句话揭示微观→宏观的因果关系'),
+        LayoutBlock('口诀', 'bottom', max_chars=10, description='微观记忆口诀'),
+    ],
+    sub_types=[
+        SubType('化学微观', '粒子模型', '不同色圆=不同原子，箭头=电子转移', '乐高积木拼拆', '混淆原子/离子大小'),
+        SubType('生物微观', '细胞/分子结构', '放大镜效果：宏观→细胞→分子三层', '俄罗斯套娃层层打开', '混淆细胞器功能'),
+        SubType('物理微观', '分子运动模型', '小球运动轨迹+碰撞动画效果', '台球桌上球的碰撞', '温度≠分子动能'),
+    ],
+    visual_rule_summary='上方宏观现象+中间放大镜式微观图解(40%)+底部一句话本质',
+    forbidden=[
+        '不画过于复杂的分子结构(简化为圆圈)',
+        '不省略宏观→微观的对应关系',
+        '微观图中粒子不超过15个',
+    ],
+    required_elements=['宏观现象', '微观图解', '宏微对应', '本质总结'],
+    color_scheme='微观科技：分子蓝#00B4D8 + 原子绿#06D6A0 + 电子紫#9B5DE5',
+))
+
+# ── 图像解读卡 ──────────────────────────────────
+_register(SkillSchema(
+    card_type='图像解读卡',
+    teaching_goal='掌握一种图像的读图方法和常见考法',
+    core_strategy='图像展示 → 读图三步法(看轴/看点/看趋势) → 典型考法 → 易错点',
+    layout_blocks=[
+        LayoutBlock('标题', 'top', max_chars=10, description='图像类型名称 + 学科标签'),
+        LayoutBlock('示例图像', 'upper', min_area_pct=30, description='一张典型的坐标图/曲线图(标注坐标轴名称+单位)'),
+        LayoutBlock('读图方法', 'middle', min_area_pct=25, description='三步法色块：①看轴(物理量) ②看特殊点 ③看变化趋势'),
+        LayoutBlock('考法提示', 'lower', description='该图常考的2-3种题型，用标签色块'),
+        LayoutBlock('易错点', 'bottom', max_chars=15, required=False, description='⚠️ 常见读图错误'),
+    ],
+    sub_types=[
+        SubType('物理v-t图', '斜率=加速度/面积=位移', '标注斜率箭头+阴影面积', '山坡的陡缓=快慢变化', '面积搞错正负'),
+        SubType('化学平衡图', '平衡移动方向判断', '浓度/速率曲线+移动箭头标注', '天平倾斜后重新平衡', '混淆正逆反应速率'),
+        SubType('生物光合曲线', '光补偿点/饱和点', '标注关键拐点+虚线辅助线', '水龙头进水排水平衡', '忽略呼吸消耗'),
+        SubType('化学滴定曲线', 'pH突变范围', '曲线突变点+指示剂选择区间', '悬崖边的急转弯', '终点≠等当点'),
+    ],
+    visual_rule_summary='示例图像(30%)+三步读图法色块+标签式考法提示+⚠️易错',
+    forbidden=[
+        '图像必须有清晰的坐标轴标注',
+        '读图方法不超过3步',
+        '考法提示不超过3种',
+    ],
+    required_elements=['示例图像', '坐标轴标注', '读图方法', '考法提示'],
+    color_scheme='图表蓝橙：坐标蓝#2C3E50 + 曲线橙#E74C3C + 辅助线灰#95A5A6',
+))
+
+# ── 模型卡 ──────────────────────────────────
+_register(SkillSchema(
+    card_type='模型卡',
+    teaching_goal='理解一个科学模型的核心思想、适用范围和局限',
+    core_strategy='模型名称 → 核心假设图示 → 能解释什么/不能解释什么 → 模型演变',
+    layout_blocks=[
+        LayoutBlock('标题', 'top', max_chars=10, description='模型名称 + 学科标签'),
+        LayoutBlock('模型图示', 'middle', min_area_pct=40, description='模型的核心示意图(简化图形，标注关键假设)'),
+        LayoutBlock('适用与局限', 'lower', min_area_pct=20, description='✅能解释 vs ❌不能解释，双栏对比'),
+        LayoutBlock('口诀/记忆', 'bottom', max_chars=12, description='模型核心思想一句话'),
+    ],
+    sub_types=[
+        SubType('物理模型', '简化+理想化', '现实→简化模型对比图', '地图是城市的简化模型', '忘了模型的前提条件'),
+        SubType('化学模型', '原子/分子模型', '模型演变时间轴(道尔顿→卢瑟福→玻尔→量子)', '手机更新换代', '混淆不同模型的适用场景'),
+        SubType('生物模型', '结构/功能模型', '流动镶嵌/双螺旋等经典模型图', '乐高模型展示真实建筑', '把模型当成真实结构'),
+    ],
+    visual_rule_summary='核心模型示意图(40%)+✅/❌双栏适用范围+一句话核心思想',
+    forbidden=[
+        '不画过于复杂的3D结构',
+        '不省略模型的关键假设/前提',
+        '不超过1个模型(一卡一模型)',
+    ],
+    required_elements=['模型示意图', '核心假设', '适用范围', '局限性'],
+    color_scheme='模型灰蓝：结构蓝#34495E + 假设绿#1ABC9C + 局限红#E74C3C',
+))
+
+# ── 解题策略卡 ──────────────────────────────────
+_register(SkillSchema(
+    card_type='解题策略卡',
+    teaching_goal='掌握一类题的通用解题方法论',
+    core_strategy='题型识别 → 通用N步法 → 每步要点 → 常忘检查项',
+    layout_blocks=[
+        LayoutBlock('标题', 'top', max_chars=10, description='策略名称(如"受力分析四步法") + 学科标签'),
+        LayoutBlock('步骤方法', 'middle', min_area_pct=45, description='编号色块N步法，每步用不同色块+要点注释'),
+        LayoutBlock('检查清单', 'lower', min_area_pct=15, description='⚠️ 常忘的检查项/易漏步骤，用红色标记'),
+        LayoutBlock('口诀', 'bottom', max_chars=12, description='步骤记忆口诀(首字缩写)'),
+    ],
+    sub_types=[
+        SubType('物理解题', '受力/能量/动量分析法', '色块步骤+检查清单复选框', '机场安检步骤不能跳', '忘分析某个力/忘画图'),
+        SubType('化学解题', '配平/推断/计算策略', '策略树+分支判断条件', '侦探推理排除法', '忘检查得失电子守恒'),
+        SubType('生物解题', '遗传/实验设计策略', '判断流程图+分支箭头', '医生问诊排查流程', '忘设对照组/忘排除无关变量'),
+    ],
+    visual_rule_summary='编号色块N步法(45%)+红色检查清单+首字缩写口诀',
+    forbidden=[
+        '步骤不超过5步',
+        '不教具体题目(教方法不教答案)',
+        '检查项不超过3条',
+    ],
+    required_elements=['步骤方法', '每步要点', '检查清单', '口诀'],
+    color_scheme='策略暖色：步骤蓝#5DADE2 + 要点橙#F39C12 + 检查红#E74C3C',
+))
+
+# ── 知识网络卡 ──────────────────────────────────
+_register(SkillSchema(
+    card_type='知识网络卡',
+    teaching_goal='一张图看清一个章节的知识逻辑骨架',
+    core_strategy='核心概念居中 → 分支辐射(层级关系) → 交叉连线(跨概念关联)',
+    layout_blocks=[
+        LayoutBlock('标题', 'top', max_chars=10, description='章节/主题名称 + 学科标签'),
+        LayoutBlock('知识网络图', 'middle', min_area_pct=60, description='树状/放射状知识网络：中心节点→一级分支→二级分支，重要连接加粗'),
+        LayoutBlock('核心公式/规律', 'lower', description='该章节最核心的1-2个公式/规律大字展示'),
+        LayoutBlock('记忆口诀', 'bottom', max_chars=12, description='章节总结口诀'),
+    ],
+    sub_types=[
+        SubType('物理知识网', '力/电/热板块关联', '板块色块+跨板块连线', '地铁线路图各站换乘', '忽略跨章节联系'),
+        SubType('化学知识网', '物质转化网络', '物质节点+反应箭头网络', '城市道路网各路口连通', '忘记某条转化路径'),
+        SubType('生物知识网', '概念层级嵌套', '大概念→小概念树状图', '公司组织架构图', '层级关系搞颠倒'),
+    ],
+    visual_rule_summary='放射状知识网络(60%)+核心公式大字+章节口诀',
+    forbidden=[
+        '节点不超过12个',
+        '不画过于密集的交叉连线',
+        '二级分支不超过3层深度',
+    ],
+    required_elements=['知识网络图', '核心节点', '分支连线', '核心公式/规律'],
+    color_scheme='网络多彩：核心红#FF6B6B + 分支1蓝#4ECDC4 + 分支2紫#A29BFE + 连线灰#DFE6E9',
+))
+
+# ── 术语精准卡 ──────────────────────────────────
+_register(SkillSchema(
+    card_type='术语精准卡',
+    teaching_goal='掌握一组易错术语的精准表述(高考踩分用词)',
+    core_strategy='常见错误表述 → 精准表述 → 为什么差一个字就扣分 → 记忆技巧',
+    layout_blocks=[
+        LayoutBlock('标题', 'top', max_chars=10, description='术语主题 + 学科标签'),
+        LayoutBlock('对比区', 'middle', min_area_pct=45, description='左❌错误表述(红色) vs 右✅精准表述(绿色)，逐条对比'),
+        LayoutBlock('扣分解析', 'lower', min_area_pct=15, description='💡 为什么这样说不对/差在哪里，逐条解释'),
+        LayoutBlock('记忆技巧', 'bottom', max_chars=15, description='精准用词记忆口诀'),
+    ],
+    sub_types=[
+        SubType('生物术语', '精准动词/名词', '❌→✅逐条对比+扣分原因', '法律条文每个字都有意义', '"促进"≠"有利于"'),
+        SubType('化学术语', '反应条件/现象描述', '规范vs不规范表述对比', '药品说明书用语严格', '"点燃"≠"加热"'),
+        SubType('物理术语', '物理量/单位精准表达', '量名vs单位vs符号三列对比', '地址门牌号每个字都不能错', '混淆标量矢量'),
+    ],
+    visual_rule_summary='❌/✅双栏对比(45%)+扣分原因逐条解析+记忆口诀',
+    forbidden=[
+        '对比不超过4组',
+        '不写过长的解释(每条≤30字)',
+        '不堆砌不相关的术语',
+    ],
+    required_elements=['错误表述', '精准表述', '扣分原因', '记忆技巧'],
+    color_scheme='精准对比：错误红#FF4757 + 正确绿#2ED573 + 解析蓝#3742FA',
+))
+
+
+# ═══════════════════════════════════════════
 # 公共 API
 # ═══════════════════════════════════════════
 
@@ -634,6 +882,25 @@ def match_sub_type(card_type: str, card_data: dict) -> SubType | None:
         '指示代词': ['this', 'that', 'these', 'those', '指示代词'],
         '冠词': ['a', 'an', 'the', '冠词', 'article'],
         '介词': ['in', 'on', 'at', '介词', 'preposition'],
+        # 理科 — 实验卡
+        '物理实验': ['物理', '力', '电路', '光', '声', '热', '实验', '测量', '控制变量'],
+        '化学实验': ['化学', '反应', '试剂', '加热', '蒸馏', '过滤', '滴定', '气密性'],
+        '生物实验': ['生物', '细胞', '显微镜', '染色', '培养', '对照', '探究'],
+        '探究实验': ['探究', '假设', '验证', '自变量', '因变量'],
+        # 理科 — 过程流卡
+        '生物代谢流': ['光合', '呼吸', '代谢', 'atp', '有氧', '无氧', '暗反应', '光反应'],
+        '化学工业流': ['工业', '流程', '制备', '原料', '产品', '合成'],
+        '物理多过程': ['多过程', '阶段', '匀加速', '匀减速', '自由落体'],
+        '遗传表达流': ['中心法则', '转录', '翻译', 'dna', 'rna', '蛋白质', '基因表达'],
+        # 理科 — 图像解读卡
+        '物理v-t图': ['v-t', '速度-时间', '加速度', '位移', '斜率', '面积'],
+        '化学平衡图': ['平衡', '速率', '浓度', '平衡移动', '勒夏特列'],
+        '生物光合曲线': ['光补偿点', '光饱和点', '光合速率', 'co₂浓度'],
+        '化学滴定曲线': ['滴定', 'ph', '指示剂', '等当点', '突变'],
+        # 理科 — 模型卡
+        '物理模型': ['质点', '理想气体', '自由落体', '简谐运动', '模型'],
+        '化学模型': ['原子模型', '电子云', '杂化', '分子模型'],
+        '生物模型': ['流动镶嵌', '双螺旋', '中心法则', '减数分裂'],
     }
 
     best_match = None

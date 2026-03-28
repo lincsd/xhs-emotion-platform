@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260328f'  # v10.8: 多尺寸画布系统(8平台+内容类型智能推荐)
+BUILD_VERSION = '20260328g'  # v10.9: 理科卡片系统(物理/化学/生物×12种卡片类型)
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -3082,7 +3082,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         _WELLNESS_SUBJECTS = {'养生', '减脂', '养生减脂', '融合'}
         _CULTURE_SUBJECTS = {'国学'}
         _EMOTION_SUBJECTS = {'恋爱'}
-        _EDUCATION_SUBJECTS = {'数学', '语文', '英语'}
+        _EDUCATION_SUBJECTS = {'数学', '语文', '英语', '物理', '化学', '生物', '历史', '地理', '政治'}
         _EDUCATION_STAGES = {'小学', '初中', '高中'}
         if subject in _EMOTION_SUBJECTS:
             folder = '情感生活'
@@ -3120,7 +3120,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     if fn.endswith('.json'):
                         all_wellness_files.append(os.path.join(wellness_dir, fn))
         else:
-            folder = '小学'
+            # 根据 stage 参数选择正确的文件夹（小学/初中/高中）
+            folder = stage if stage in _EDUCATION_STAGES else '小学'
             card_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder, f'{subject}_{grade_short}.json')
             boom_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder, f'{subject}_{grade_short}_爆款.json')
             exam_file = os.path.join(PUBLIC_DIR, 'knowledge_cards', folder, f'{subject}_{grade_short}_考卷.json')
