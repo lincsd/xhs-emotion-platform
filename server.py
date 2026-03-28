@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260327e'  # v7: content optimization — merged OCR+quality, schema validation, specialized layouts, auto-fix loop, eng OCR check, cognitive load
+BUILD_VERSION = '20260328a'  # v10.5: 5层审核矩阵 + image-to-image视觉精修闭环
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
