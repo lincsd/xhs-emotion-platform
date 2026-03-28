@@ -2032,6 +2032,14 @@ OCR_AND_QUALITY_PROMPT = """你是一个严格的知识卡片审计员，同时�
 - 60-79: 有明显错字但整体可理解
 - <60: 严重乱码，需要重新生成
 
+⚠️ 特别检查：伪语义中文（非常重要！）
+- AI生成的图片中，经常出现「每个字都能认，但组合起来不是人话」的中文短语
+- 典型例子："实则考试快速概忆""学会总结要点明""考试重点复习忆""知识牢记心中悟"
+- 这些短句不是成语、不是俗语、不是正常句子——读起来别扭、生硬、不通顺
+- 判断方法：把图中每段中文读一遍，如果不像正常中国人说的话 → type:"nonsense_cn", severity:"high", 扣15分
+- 尤其注意：底部标语/口号区域、装饰性文字区域——这些位置最容易出现
+- 注意区分："熟能生巧" "温故知新" 是正常成语 ✅；"实则考试快速概忆" 不是正常中文 ❌
+
 ⚠️ 特别检查：截断废字
 - 检查每个中文文字块是否是**完整**的词或短句
 - 如果某个文字块以虚词/助词结尾(如"搭配固定要""注意到""记住就")明显是被截断了 → type:"truncated", severity:"high", 扣10分
@@ -2243,6 +2251,10 @@ def _build_audit_hint(audit_result, expected_manifest):
             hints.append(f'MISSING TEXT: "{exp}" must appear. Add it clearly.')
         elif etype == 'distorted':
             hints.append(f'DISTORTED: "{exp}" is unreadable. Re-render with thick bold strokes.')
+        elif etype == 'nonsense_cn':
+            hints.append(f'NONSENSE CHINESE: "{act}" is pseudo-semantic gibberish (每个字都对但拼起来不是人话). Remove it entirely or replace with a natural, meaningful Chinese phrase like a real idiom (e.g. 温故知新) or a clear slogan.')
+        elif etype == 'truncated':
+            hints.append(f'TRUNCATED TEXT: "{act}" is cut off. Complete the full phrase: "{exp}".')
         else:
             hints.append(f'Fix: "{act}" → "{exp}"')
 
@@ -2274,6 +2286,9 @@ Layer A — 致命缺陷排查（一票否决）
   A3. 布局坍塌: 文字之间重叠、溢出画布边界、完全不可读？
   A4. 内容偏离: 图片内容与期望教学主题严重不符（如数学卡出现英语内容）？
   A5. 尺寸灾难: 核心教学文字过小（<图片宽度的4%），手机端完全看不清？
+  A6. 伪语义文本: 有中文短句虽然每个字都认得，但拼在一起不通顺、不是真正的中文表达吗？
+      例如 "实则考试快速概忆" "学会总结要点明" — 每个字没错但读起来不是人话。
+      特别关注底部标语/口号/装饰文字区域，这里最常出现AI编造的伪语义文本。
 
 ═══════════════════════════════════════════
 Layer B — 文字保真度（满分 30）
@@ -2394,7 +2409,7 @@ E3. 工艺打磨 (0-6)
   "total": 78,
 
   "text_errors": [
-    {{"expected": "期望文字", "actual": "图片中看到的", "type": "garbled|wrong_char|missing|truncated|ghost_text", "severity": "fatal|high|medium|low", "location": "Banner/Content/Accent/Bottom"}}
+    {{"expected": "期望文字", "actual": "图片中看到的", "type": "garbled|wrong_char|missing|truncated|ghost_text|nonsense_cn", "severity": "fatal|high|medium|low", "location": "Banner/Content/Accent/Bottom"}}
   ],
 
   "eye_flow_path": "标题→步骤1→步骤2→口诀（流畅）",
@@ -2580,6 +2595,8 @@ def _build_refinement_prompt(visual_audit_result, expected_manifest, subject='')
                 parts.append(f'  ✏ TRUNCATED: "{act}" → complete it to "{exp}"{loc_str}')
             elif ttype == 'ghost_text':
                 parts.append(f'  ✏ REMOVE unwanted text: "{act}"{loc_str}')
+            elif ttype == 'nonsense_cn':
+                parts.append(f'  ✏ NONSENSE CHINESE: "{act}"{loc_str} is AI-generated pseudo-text (每个字都对但拼起来不是人话). Remove it entirely or replace with a real Chinese idiom/phrase.')
             else:
                 parts.append(f'  ✏ "{act}" → "{exp}"{loc_str}')
         parts.append("")

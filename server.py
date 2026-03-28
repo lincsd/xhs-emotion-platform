@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260328a'  # v10.5: 5层审核矩阵 + image-to-image视觉精修闭环
+BUILD_VERSION = '20260328b'  # v10.5b: +伪语义文本检测(nonsense_cn)
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
