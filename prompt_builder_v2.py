@@ -233,10 +233,16 @@ Then at the end, include the TEXT_MANIFEST (text that MUST appear in the image):
 
 
 def build_visual_translation_prompt(content_decision: dict, card_type: str,
-                                     subject: str) -> str:
+                                     subject: str,
+                                     extra_color_hint: str = '',
+                                     extra_layout_hint: str = '') -> str:
     """构建 Step 1b 的视觉翻译 prompt。
     
     把 Step 1a 输出的内容 JSON 翻译成图片生成 prompt。
+    
+    Args:
+        extra_color_hint: v10.7 学科配色提示（英文）
+        extra_layout_hint: v10.7 布局变体提示（英文）
     """
     schema = get_skill_schema(card_type)
     
@@ -245,8 +251,12 @@ def build_visual_translation_prompt(content_decision: dict, card_type: str,
     
     # 额外视觉规则
     extra_rules = ''
+    if extra_color_hint:
+        extra_rules += extra_color_hint
+    if extra_layout_hint:
+        extra_rules += extra_layout_hint
     if schema:
-        extra_rules = f'- Visual strategy: {schema.visual_rule_summary}\n'
+        extra_rules += f'- Visual strategy: {schema.visual_rule_summary}\n'
         if schema.color_scheme:
             extra_rules += f'- Color scheme: {schema.color_scheme}\n'
         if schema.forbidden:

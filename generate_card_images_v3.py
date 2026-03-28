@@ -366,23 +366,7 @@ PROMPT_SYSTEM_TEMPLATE = """你是小红书爆款知识卡片 AI 图片 Prompt �
 - 一个可爱小老师卡通在右下角落（小于画面 10%）
 - 小红书风格：精致卡片版式设计（Canva 模板风）
 
-请设计以下 4 个结构化区块：
-
-🔹 区块A — 顶部 Banner（~2%-12%）：
-   深色渐变横幅（深紫/深蓝/深绿），带柔和光泽
-   标题文字白色大字，居中显示
-
-🔹 区块B — 中间内容卡（~14%-78%）：
-   白色或极浅色圆角矩形卡片，带轻微阴影
-   卡片内排版教学内容：例题、步骤、对比等
-   文字清晰、字号适当、行距舒适
-
-🔹 区块C — 底部口诀条（~80%-92%）：
-   暖色渐变横条（珊瑚粉/蜜桃橙/薄荷绿），带圆角
-   口诀/金句白字居中
-
-🔹 区块D — 最底部（~93%-98%）：
-   极浅背景，小提示文字
+{layout_variant_block}
 
 ══════ ⚠️ 文字渲染要求（最重要！） ══════
 
@@ -410,13 +394,7 @@ TIP: 小提示(可选) → 渲染到区块D
 
 此清单中的文字必须原封不动地渲染到图片对应区域中！
 
-══════ 配色 ══════
-
-主色选一: 珊瑚粉 / 薄荷蓝 / 蜜桃橙 / 薰衣草紫
- Banner 区块: 该主色的深色版本（如深紫色渐变 #3a1c71→#5a3f8e）
- 内容卡: 纯白 #FFFFFF 或极浅色 #FAFAFA，带轻微阴影
- 口诀条: 该主色的暖亮版本（如暖粉 #FF9A9E→#FAD0C4）
- 背景: 该主色的极浅淡版本，有微妙渐变过渡
+{color_scheme_block}
 
 ══════ 输出格式 ══════
 
@@ -460,19 +438,7 @@ PROMPT_SYSTEM_TEMPLATE_WELLNESS = """你是小红书爆款知识卡片 AI 图片
 - 小红书风格：精致卡片版式设计
 - 养生减脂配色: 抹茶绿/樱花粉/暖杏色为主
 
-请设计以下 4 个结构化区块：
-
-🔹 区块A — 顶部 Banner（~2%-12%）：
-   深色渐变横幅（深绿/深粉/暖棕），标题白色大字居中
-
-🔹 区块B — 中间内容卡（~14%-78%）：
-   白色圆角矩形卡片，内部排版教学内容，文字清晰可读
-
-🔹 区块C — 底部口诀条（~80%-92%）：
-   暖色渐变横条（樱花粉/抹茶绿/暖杏色），口诀白字居中
-
-🔹 区块D — 最底部（~93%-98%）：
-   极浅背景，小提示文字
+{layout_variant_block}
 
 ══════ ⚠️ 文字渲染要求（最重要！） ══════
 
@@ -497,12 +463,7 @@ SLOGAN: 口诀金句 → 渲染到区块C
 
 此清单中的文字必须原封不动渲染到图片中！
 
-══════ 配色 ══════
-
-主色: 抹茶绿 / 樱花粉 / 暖杏色 选一
- Banner: 主色的深色版渐变
- 内容卡: 纯白 #FFFFFF 或极浅色
- 口诀条: 主色的暖亮版渐变
+{color_scheme_block}
 
 ══════ 输出格式 ══════
 
@@ -1738,6 +1699,325 @@ _SUBJECT_EDU_HINTS = {
 }
 
 
+# ═══════════════════════════════════════════
+# v10.7: 学科专属配色系统
+# ═══════════════════════════════════════════
+_SUBJECT_COLOR_SCHEMES = {
+    '数学': {
+        'name': '理性蓝',
+        'banner_gradient': '#1a237e → #283593 (深靛蓝渐变)',
+        'accent_strip': '#42a5f5 → #90caf9 (天蓝渐变)',
+        'content_bg': '#f5f8ff (极浅蓝)',
+        'highlight': '#ffc107 (金色强调关键数字)',
+        'description': '冷静理性的蓝色系，金色强调关键数字，传达数学的精确与严谨',
+    },
+    '英语': {
+        'name': '活力橙',
+        'banner_gradient': '#e65100 → #f57c00 (深橙渐变)',
+        'accent_strip': '#ffab40 → #ffd180 (暖橙渐变)',
+        'content_bg': '#fff8f0 (极浅橙)',
+        'highlight': '#00bcd4 (青色对比词标注)',
+        'description': '活泼明亮的橙色系，青色点缀对比词，传达语言的活力与趣味',
+    },
+    '语文': {
+        'name': '古韵棕',
+        'banner_gradient': '#4e342e → #6d4c41 (深棕渐变)',
+        'accent_strip': '#ffab91 → #ffccbc (暖杏渐变)',
+        'content_bg': '#fdf6f0 (极浅米/宣纸色)',
+        'highlight': '#d84315 (朱砂红强调)',
+        'description': '温暖人文的棕色系，朱砂红标注重点，宣纸质感传达中国文化底蕴',
+    },
+    '物理': {
+        'name': '科技银蓝',
+        'banner_gradient': '#0d47a1 → #1565c0 (深蓝渐变)',
+        'accent_strip': '#00e5ff → #84ffff (科技青渐变)',
+        'content_bg': '#f0f4f8 (极浅银灰)',
+        'highlight': '#ff6d00 (橙色力/能量标注)',
+        'description': '深邃科技的蓝色系，亮青色强调实验数据，橙色标注力与能量',
+    },
+    '化学': {
+        'name': '实验紫绿',
+        'banner_gradient': '#4a148c → #6a1b9a (深紫渐变)',
+        'accent_strip': '#69f0ae → #b9f6ca (薄荷绿渐变)',
+        'content_bg': '#f3e5f5 (极浅紫)',
+        'highlight': '#00e676 (试剂绿标注)',
+        'description': '神秘紫色+清新绿色系，模拟化学反应的绚丽，绿色标注元素符号',
+    },
+    '生物': {
+        'name': '生命绿',
+        'banner_gradient': '#1b5e20 → #2e7d32 (深绿渐变)',
+        'accent_strip': '#81c784 → #c8e6c9 (嫩绿渐变)',
+        'content_bg': '#f1f8e9 (极浅绿)',
+        'highlight': '#ff7043 (珊瑚红标注)',
+        'description': '自然生命力的绿色系，珊瑚红强调关键术语，传达生机与活力',
+    },
+    '历史': {
+        'name': '复古金棕',
+        'banner_gradient': '#3e2723 → #5d4037 (深咖啡渐变)',
+        'accent_strip': '#ffcc80 → #ffe0b2 (金色渐变)',
+        'content_bg': '#faf3e0 (极浅羊皮纸色)',
+        'highlight': '#b71c1c (印章红标注)',
+        'description': '厚重复古的咖啡色系，金色装饰边框，印章红标注关键年代与人物',
+    },
+    '地理': {
+        'name': '地球蓝绿',
+        'banner_gradient': '#004d40 → #00695c (深青绿渐变)',
+        'accent_strip': '#4dd0e1 → #b2ebf2 (天蓝渐变)',
+        'content_bg': '#e0f7fa (极浅青)',
+        'highlight': '#ff9800 (沙漠橙标注)',
+        'description': '海洋与大地的蓝绿色系，橙色标注关键地理数据，传达地球的广袤',
+    },
+    '政治': {
+        'name': '庄重红蓝',
+        'banner_gradient': '#b71c1c → #c62828 (深红渐变)',
+        'accent_strip': '#42a5f5 → #90caf9 (稳重蓝渐变)',
+        'content_bg': '#fce4ec (极浅红)',
+        'highlight': '#1565c0 (蓝色框架标注)',
+        'description': '庄重大气的红色系，蓝色呈现框架与逻辑，传达政治学科的严肃与正式',
+    },
+    '养生': {
+        'name': '养生绿粉',
+        'banner_gradient': '#2e7d32 → #388e3c (深抹茶渐变)',
+        'accent_strip': '#f48fb1 → #f8bbd0 (樱花粉渐变)',
+        'content_bg': '#f1f8e9 (极浅绿)',
+        'highlight': '#ff8a65 (暖杏标注)',
+        'description': '清新自然的抹茶绿，樱花粉口诀条，暖杏色标注关键数据',
+    },
+    '减脂': {
+        'name': '活力粉橙',
+        'banner_gradient': '#c62828 → #e53935 (深珊瑚渐变)',
+        'accent_strip': '#ffab91 → #ffccbc (蜜桃橙渐变)',
+        'content_bg': '#fff3e0 (极浅橙)',
+        'highlight': '#00c853 (健康绿标注)',
+        'description': '活力珊瑚红+蜜桃橙，绿色标注健康数据，传达运动的热情与活力',
+    },
+}
+
+# ═══════════════════════════════════════════
+# v10.7: 布局模板多样化
+# ═══════════════════════════════════════════
+_LAYOUT_VARIANTS = {
+    'standard': {
+        'name': '标准四区',
+        'prompt_block': """请设计以下 4 个结构化区块：
+
+🔹 区块A — 顶部 Banner（~2%-12%）：
+   深色渐变横幅，带柔和光泽
+   标题文字白色大字，居中显示
+
+🔹 区块B — 中间内容卡（~14%-78%）：
+   白色或极浅色圆角矩形卡片，带轻微阴影
+   卡片内排版教学内容：例题、步骤、对比等
+   文字清晰、字号适当、行距舒适
+
+🔹 区块C — 底部口诀条（~80%-92%）：
+   暖色渐变横条，带圆角
+   口诀/金句白字居中
+
+🔹 区块D — 最底部（~93%-98%）：
+   极浅背景，小提示文字""",
+    },
+    'comparison': {
+        'name': '左右对比式',
+        'prompt_block': """请设计以下结构化区块（对比式布局）：
+
+🔹 区块A — 顶部 Banner（~2%-12%）：
+   深色渐变横幅，标题白色大字居中
+
+🔹 区块B — 对比内容区（~14%-78%）：
+   白色圆角矩形卡片，内部分为左右两栏：
+   ┌─────────────┬─────────────┐
+   │   左栏 ❌    │   右栏 ✅    │
+   │ 红色调浅底色  │ 绿色调浅底色  │
+   │ 错误/旧方法   │ 正确/新方法   │
+   └─────────────┴─────────────┘
+   中间用虚线或VS图标分隔
+   左栏淡红色底 = 错误/旧方法
+   右栏淡绿色底 = 正确/新方法
+   对比项目一一对齐，形成强烈视觉反差
+
+🔹 区块C — 底部口诀条（~80%-92%）：
+   暖色渐变横条，口诀白字居中
+
+🔹 区块D — 最底部（~93%-98%）：
+   极浅背景，小提示文字""",
+    },
+    'flow': {
+        'name': '步骤流程式',
+        'prompt_block': """请设计以下结构化区块（流程式布局）：
+
+🔹 区块A — 顶部 Banner（~2%-12%）：
+   深色渐变横幅，标题白色大字居中
+
+🔹 区块B — 步骤流程区（~14%-78%）：
+   白色圆角矩形卡片，内部用编号色块+箭头展示步骤：
+   ① → ② → ③ → ④ 从上到下排列
+   每步用不同颜色的圆角色块（浅蓝→浅绿→浅橙→浅粉递进）
+   步骤之间用大号 → 箭头连接，形成清晰视觉流
+   最后一步（答案/结论）用加粗+大号+⭐标记突出
+   若有错误步骤，用红色虚线框+❌标记
+
+🔹 区块C — 底部口诀条（~80%-92%）：
+   暖色渐变横条，口诀白字居中
+
+🔹 区块D — 最底部（~93%-98%）：
+   极浅背景，小提示文字""",
+    },
+    'concept_map': {
+        'name': '思维导图式',
+        'prompt_block': """请设计以下结构化区块（思维导图式布局）：
+
+🔹 区块A — 顶部 Banner（~2%-12%）：
+   深色渐变横幅，标题白色大字居中
+
+🔹 区块B — 思维导图区（~14%-78%）：
+   白色圆角矩形卡片，内部用思维导图/放射状布局：
+   中心：核心概念 — 大圆角矩形（主色填充+白字）
+   辐射：3-4 个分支，每个分支用不同浅色圆角矩形
+   分支用细线/箭头连接到中心
+   每个分支内 1-2 行精炼文字
+   最重要的分支用加粗边框+⭐标记
+   整体呈放射状/树状分布，层次清晰
+
+🔹 区块C — 底部口诀条（~80%-92%）：
+   暖色渐变横条，口诀白字居中
+
+🔹 区块D — 最底部（~93%-98%）：
+   极浅背景，小提示文字""",
+    },
+    'formula_hero': {
+        'name': '公式突出式',
+        'prompt_block': """请设计以下结构化区块（公式突出式布局）：
+
+🔹 区块A — 顶部 Banner（~2%-12%）：
+   深色渐变横幅，标题白色大字居中
+
+🔹 区块B — 公式展示区（~14%-78%）：
+   白色圆角矩形卡片，内部分为上下两部分：
+   上半(~40%)：核心公式/定理超大展示
+     - 公式字号是正文的 2-3 倍
+     - 公式用浅色圆角色块背景托底
+     - 变量用主色标注，常数用黑色
+   下半(~40%)：代入实例验证
+     - "例" 标签 + 具体数字代入
+     - 关键步骤用色块高亮
+     - 推导箭头连接各步骤
+
+🔹 区块C — 底部口诀条（~80%-92%）：
+   暖色渐变横条，口诀白字居中
+
+🔹 区块D — 最底部（~93%-98%）：
+   极浅背景，小提示文字""",
+    },
+    'poetry': {
+        'name': '诗意水墨式',
+        'prompt_block': """请设计以下结构化区块（诗意水墨式布局）：
+
+🔹 区块A — 顶部 Banner（~2%-12%）：
+   深棕/墨色渐变横幅，书法风标题白色大字居中
+
+🔹 区块B — 诗词内容区（~14%-78%）：
+   宣纸质感背景（极浅米/淡黄色）
+   诗词原文用大号书法风字体居中排列
+   每句独占一行，字间距宽松典雅
+   重点字/易错字用朱红色标注
+   意境装饰：角落淡墨山水/竹叶/梅花等中国风元素（≤15%面积）
+   译文/赏析用小号字体排列在诗词下方
+
+🔹 区块C — 底部口诀条（~80%-92%）：
+   暖杏/朱砂渐变横条，口诀白字居中
+
+🔹 区块D — 最底部（~93%-98%）：
+   极浅背景，小提示文字""",
+    },
+}
+
+# 卡片类型 → 推荐布局
+_CARD_TYPE_LAYOUT_MAP = {
+    # 对比式
+    '辨析卡': 'comparison', '速算卡': 'comparison', '对战卡': 'comparison',
+    '语法辨析卡': 'comparison', '易混词卡': 'comparison', '易混词陷阱卡': 'comparison',
+    '语法纠错卡': 'comparison', '句式变换卡': 'comparison', '判断火眼卡': 'comparison',
+    '暧昧信号卡': 'comparison', '避雷指南卡': 'comparison',
+    # 流程式
+    '方法卡': 'flow', '应用题拆解卡': 'flow', '计算零失误卡': 'flow',
+    '操作题规范卡': 'flow', '情感升温卡': 'flow',
+    # 思维导图式
+    '概念卡': 'concept_map', '思维卡': 'concept_map', '知识总结卡': 'concept_map',
+    # 公式突出式
+    '公式卡': 'formula_hero',
+    # 诗意水墨式 (仅语文)
+    '古诗默写卡': 'poetry', '预言解密卡': 'poetry',
+}
+
+
+def _get_subject_color_scheme(subject):
+    """获取学科专属配色方案（v10.7）"""
+    if subject in _SUBJECT_COLOR_SCHEMES:
+        return _SUBJECT_COLOR_SCHEMES[subject]
+    # 模糊匹配
+    for k, v in _SUBJECT_COLOR_SCHEMES.items():
+        if k in subject or subject in k:
+            return v
+    return None
+
+
+def _build_color_scheme_block(subject):
+    """构建配色 prompt 区块（v10.7）"""
+    cs = _get_subject_color_scheme(subject)
+    if cs:
+        return f"""══════ 配色 — {cs['name']}（{subject}专属） ══════
+
+{cs['description']}
+ Banner 区块: {cs['banner_gradient']}
+ 内容卡: {cs['content_bg']}，带轻微阴影
+ 口诀条: {cs['accent_strip']}
+ 强调色（标注重点）: {cs['highlight']}
+ 背景: 内容卡底色的更浅版本，有微妙渐变过渡"""
+    return """══════ 配色 ══════
+
+主色选一: 珊瑚粉 / 薄荷蓝 / 蜜桃橙 / 薰衣草紫
+ Banner 区块: 该主色的深色版本（如深紫色渐变 #3a1c71→#5a3f8e）
+ 内容卡: 纯白 #FFFFFF 或极浅色 #FAFAFA，带轻微阴影
+ 口诀条: 该主色的暖亮版本（如暖粉 #FF9A9E→#FAD0C4）
+ 背景: 该主色的极浅淡版本，有微妙渐变过渡"""
+
+
+def _get_layout_variant(card_type, subject):
+    """根据卡片类型和学科选择最合适的布局变体（v10.7）"""
+    layout_key = _CARD_TYPE_LAYOUT_MAP.get(card_type, 'standard')
+    # 语文古诗/文言文类型使用诗意布局
+    if subject == '语文' and card_type in ('古诗默写卡', '预言解密卡'):
+        layout_key = 'poetry'
+    return _LAYOUT_VARIANTS.get(layout_key, _LAYOUT_VARIANTS['standard'])
+
+
+def _build_layout_block(card_type, subject):
+    """构建布局 prompt 区块（v10.7）"""
+    layout = _get_layout_variant(card_type, subject)
+    return layout['prompt_block']
+
+
+def _build_color_scheme_for_v2(subject):
+    """为 v2 视觉翻译模板构建英文配色提示（v10.7）"""
+    cs = _get_subject_color_scheme(subject)
+    if not cs:
+        return ''
+    return (f"- Subject color scheme: {cs['name']} — {cs['description']}\n"
+            f"- Banner: {cs['banner_gradient']}\n"
+            f"- Accent strip: {cs['accent_strip']}\n"
+            f"- Content background: {cs['content_bg']}\n"
+            f"- Highlight color: {cs['highlight']}\n")
+
+
+def _build_layout_hint_for_v2(card_type, subject):
+    """为 v2 视觉翻译模板构建英文布局提示（v10.7）"""
+    layout = _get_layout_variant(card_type, subject)
+    if layout['name'] == '标准四区':
+        return ''  # 标准布局不需要额外提示
+    return f"- Layout variant: {layout['name']} — use this layout structure instead of standard 4-zone\n"
+
+
 def _build_card_info_edu(card, subject, grade, semester):
     """构建教育类卡片信息（v10.6: 支持全学科专属提示）"""
     card_type = card.get('type', '方法卡')
@@ -1848,7 +2128,14 @@ def generate_image_prompt_v2(card, subject, grade, semester, api_key, all_keys=N
         return generate_image_prompt(card, subject, grade, semester, api_key, all_keys)
 
     # ── Phase 1b: 视觉翻译 ──
-    prompt_1b = build_visual_translation_prompt(content_decision, card_type, subject)
+    # v10.7: 注入学科配色 + 布局提示
+    color_hint_v2 = _build_color_scheme_for_v2(subject)
+    layout_hint_v2 = _build_layout_hint_for_v2(card_type, subject)
+    prompt_1b = build_visual_translation_prompt(
+        content_decision, card_type, subject,
+        extra_color_hint=color_hint_v2,
+        extra_layout_hint=layout_hint_v2,
+    )
     
     # 注入反向学习反馈
     if _HAS_SKILL_FEEDBACK:
@@ -1940,12 +2227,18 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
     char_fmt = dict(max_chars=max_chars, max_per_block=max_per_block,
                     ideal_chars=ideal_chars, max_slogan=max_slogan)
 
+    # ── v10.7: 学科配色 + 布局多样化 ──
+    color_scheme_block = _build_color_scheme_block(subject)
+    layout_variant_block = _build_layout_block(card_type, subject)
+
     # 根据学科选择对应模板
     if subject in _WELLNESS_SUBJECTS:
         visual_block = f"   {type_rules}"
         system_prompt = PROMPT_SYSTEM_TEMPLATE_WELLNESS.format(
             subject=subject,
             visual_strategy_block=visual_block,
+            color_scheme_block=color_scheme_block,
+            layout_variant_block=layout_variant_block,
             **char_fmt
         )
     elif is_vert:
@@ -1955,6 +2248,8 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
         system_prompt = PROMPT_SYSTEM_TEMPLATE.format(
             subject=subject,
             solve_strategy_block=solve_block,
+            color_scheme_block=color_scheme_block,
+            layout_variant_block=layout_variant_block,
             **char_fmt
         )
     else:
@@ -1962,6 +2257,8 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
         system_prompt = PROMPT_SYSTEM_TEMPLATE.format(
             subject=subject,
             solve_strategy_block=solve_block,
+            color_scheme_block=color_scheme_block,
+            layout_variant_block=layout_variant_block,
             **char_fmt
         )
 
@@ -2812,8 +3109,9 @@ Layer C — 视觉叙事（满分 25）
 好的设计是在「讲故事」，不只是排信息。
 
 C1. 色彩叙事 (0-9)
-  - 配色是否匹配学科氛围？（数学→蓝/绿理性冷静，语文→暖橙/米色人文，英语→活泼多彩，物理→深蓝/银灰科技感，化学→紫/绿实验风，生物→绿色自然，历史→褐/金复古，地理→蓝绿地球色，政治→红/蓝庄重）
+  - 配色是否匹配学科专属色系？（数学→理性蓝#1a237e系，语文→古韵棕#4e342e系，英语→活力橙#e65100系，物理→科技银蓝#0d47a1系，化学→实验紫绿#4a148c系，生物→生命绿#1b5e20系，历史→复古金棕#3e2723系，地理→地球蓝绿#004d40系，政治→庄重红蓝#b71c1c系）
   - 是否有1个主色+1个辅色+1个点缀色的配色体系？
+  - Banner 是否使用学科主色的深色渐变？口诀条是否用暖亮色？
   - 文字与背景对比度是否 ≥ 4.5:1？（WCAG AA 标准）
   - 避免：纯黑背景、荧光色、红配绿等不和谐搭配
 
