@@ -361,8 +361,7 @@ PROMPT_SYSTEM_TEMPLATE = """你是小红书爆款知识卡片 AI 图片 Prompt �
 
 ══════ 视觉设计 — 完整卡片（含文字） ══════
 
-- 竖屏 3:4 画布
-- ≥ 25% 留白
+{canvas_block}
 - 一个可爱小老师卡通在右下角落（小于画面 10%）
 - 小红书风格：精致卡片版式设计（Canva 模板风）
 
@@ -432,8 +431,7 @@ PROMPT_SYSTEM_TEMPLATE_WELLNESS = """你是小红书爆款知识卡片 AI 图片
 
 ══════ 视觉设计 — 完整卡片（含文字） ══════
 
-- 竖屏 3:4 画布
-- ≥ 25% 留白
+{canvas_block}
 - 一个可爱养生博主卡通在右下角落（小于画面 10%）
 - 小红书风格：精致卡片版式设计
 - 养生减脂配色: 抹茶绿/樱花粉/暖杏色为主
@@ -931,7 +929,7 @@ def _validate_history(card, issues):
         pass  # 历史概念卡可能无年代
 
 
-def _build_card_info(card, subject, grade, semester):
+def _build_card_info(card, subject, grade, semester, canvas=None):
     """构建传给 prompt 生成器的卡片信息（自动区分教育/养生/语法/语文类）"""
     if subject in _WELLNESS_SUBJECTS:
         return _build_card_info_wellness(card, subject, grade, semester)
@@ -940,7 +938,7 @@ def _build_card_info(card, subject, grade, semester):
         return _build_card_info_grammar(card, subject, grade, semester)
     # v10.6: 语文学科走专属路径（诗词/文言文/修辞需要特殊处理）
     if subject == '语文':
-        return _build_card_info_yuwen(card, subject, grade, semester)
+        return _build_card_info_yuwen(card, subject, grade, semester, canvas=canvas)
     return _build_card_info_edu(card, subject, grade, semester)
 
 
@@ -1520,7 +1518,7 @@ def _build_card_info_grammar(card, subject, grade, semester):
 {f'【口诀参考】(可改进): {memory_tip}' if memory_tip else ''}
 难度: {card.get('difficulty', 3)}/5
 
-⚠️ 视觉风格: 竖屏3:4，鲜明渐变背景，白色圆角卡片区块，标题区用饱和色banner，≥25%留白
+⚠️ 视觉风格: {(canvas or _CANVAS_PRESETS['小红书'])['desc_cn']}，鲜明渐变背景，白色圆角卡片区块，标题区用饱和色banner，{(canvas or _CANVAS_PRESETS['小红书'])['breathing']}留白
 ⚠️ 卡通角色: 可以有一个极小的角色(≤10%面积)在角落装饰，但绝不能占据区块B/C的位置。区块B/C必须是文字教学内容！"""
 
 
@@ -1568,7 +1566,7 @@ def _build_card_info_wellness(card, subject, grade, semester):
 难度: {card.get('difficulty', 2)}/5"""
 
 
-def _build_card_info_yuwen(card, subject, grade, semester):
+def _build_card_info_yuwen(card, subject, grade, semester, canvas=None):
     """v10.6: 构建语文类卡片信息 — 诗词/文言文/修辞/阅读/作文
     
     语文与其他学科不同:
@@ -1697,6 +1695,146 @@ _SUBJECT_EDU_HINTS = {
 - 经济学概念区分清楚（如"财政"vs"货币""通胀"vs"通缩"）
 - 引用原文要准确""",
 }
+
+
+# ═══════════════════════════════════════════
+# v10.8: 多尺寸画布系统
+# ═══════════════════════════════════════════
+
+# 平台 → 默认画布预设
+_CANVAS_PRESETS = {
+    '小红书': {
+        'ratio': '3:4',
+        'orientation': 'vertical',
+        'desc_cn': '竖屏 3:4 画布',
+        'desc_en': 'Canvas ratio 3:4 (vertical)',
+        'breathing': '≥ 25%',
+    },
+    '抖音': {
+        'ratio': '9:16',
+        'orientation': 'vertical',
+        'desc_cn': '竖屏 9:16 画布（全屏沉浸）',
+        'desc_en': 'Canvas ratio 9:16 (full-screen vertical, immersive)',
+        'breathing': '≥ 20%',
+    },
+    '微信': {
+        'ratio': '1:1',
+        'orientation': 'square',
+        'desc_cn': '正方形 1:1 画布',
+        'desc_en': 'Canvas ratio 1:1 (square)',
+        'breathing': '≥ 25%',
+    },
+    'B站': {
+        'ratio': '16:9',
+        'orientation': 'horizontal',
+        'desc_cn': '横屏 16:9 画布',
+        'desc_en': 'Canvas ratio 16:9 (horizontal / landscape)',
+        'breathing': '≥ 20%',
+    },
+    '朋友圈': {
+        'ratio': '1:1',
+        'orientation': 'square',
+        'desc_cn': '正方形 1:1 画布',
+        'desc_en': 'Canvas ratio 1:1 (square)',
+        'breathing': '≥ 25%',
+    },
+    '公众号': {
+        'ratio': '4:3',
+        'orientation': 'horizontal',
+        'desc_cn': '横屏 4:3 画布（公众号封面）',
+        'desc_en': 'Canvas ratio 4:3 (horizontal, WeChat article cover)',
+        'breathing': '≥ 20%',
+    },
+    '知乎': {
+        'ratio': '3:4',
+        'orientation': 'vertical',
+        'desc_cn': '竖屏 3:4 画布',
+        'desc_en': 'Canvas ratio 3:4 (vertical)',
+        'breathing': '≥ 25%',
+    },
+    'PPT': {
+        'ratio': '16:9',
+        'orientation': 'horizontal',
+        'desc_cn': '横屏 16:9 画布（演示文稿）',
+        'desc_en': 'Canvas ratio 16:9 (presentation slide)',
+        'breathing': '≥ 15%',
+    },
+}
+
+# 内容类型 → 最优比例覆盖（当不指定平台时，根据内容智能推荐）
+_CONTENT_RATIO_MAP = {
+    # 对比类 — 左右并排更好看 → 4:3 横屏
+    '辨析卡': '4:3', '对战卡': '4:3', '语法辨析卡': '4:3',
+    '易混词卡': '4:3', '易混词陷阱卡': '4:3', '暧昧信号卡': '4:3',
+    # 流程类 — 纵向更清晰 → 3:4 竖屏
+    '方法卡': '3:4', '应用题拆解卡': '3:4', '计算零失误卡': '3:4',
+    '情感升温卡': '3:4',
+    # 公式突出 — 方形居中 → 1:1
+    '公式卡': '1:1',
+    # 诗词 — 古卷轴感 → 9:16 长屏
+    '古诗默写卡': '9:16', '预言解密卡': '9:16',
+    # 概念总结 — 标准竖屏
+    '概念卡': '3:4', '思维卡': '3:4', '知识总结卡': '3:4',
+}
+
+# 从比例字符串推断方向
+_RATIO_ORIENTATION = {
+    '3:4': 'vertical', '9:16': 'vertical', '2:3': 'vertical',
+    '1:1': 'square',
+    '4:3': 'horizontal', '16:9': 'horizontal', '3:2': 'horizontal',
+}
+
+
+def _resolve_canvas(platform: str = '', card_type: str = '',
+                    subject: str = '', ratio_override: str = '') -> dict:
+    """v10.8: 智能解析画布参数。
+
+    优先级: ratio_override > platform > content_type > 默认(小红书 3:4)
+    
+    Returns:
+        {ratio, orientation, desc_cn, desc_en, breathing}
+    """
+    # 1) 用户直接指定比例
+    if ratio_override and ratio_override in _RATIO_ORIENTATION:
+        orient = _RATIO_ORIENTATION[ratio_override]
+        orient_cn = {'vertical': '竖屏', 'horizontal': '横屏', 'square': '正方形'}[orient]
+        return {
+            'ratio': ratio_override,
+            'orientation': orient,
+            'desc_cn': f'{orient_cn} {ratio_override} 画布',
+            'desc_en': f'Canvas ratio {ratio_override} ({orient})',
+            'breathing': '≥ 25%',
+        }
+
+    # 2) 平台预设
+    if platform and platform in _CANVAS_PRESETS:
+        return dict(_CANVAS_PRESETS[platform])
+
+    # 3) 按内容类型推荐（当未指定已知平台时）
+    if card_type and card_type in _CONTENT_RATIO_MAP and platform not in _CANVAS_PRESETS:
+        ratio = _CONTENT_RATIO_MAP[card_type]
+        orient = _RATIO_ORIENTATION.get(ratio, 'vertical')
+        orient_cn = {'vertical': '竖屏', 'horizontal': '横屏', 'square': '正方形'}[orient]
+        return {
+            'ratio': ratio,
+            'orientation': orient,
+            'desc_cn': f'{orient_cn} {ratio} 画布',
+            'desc_en': f'Canvas ratio {ratio} ({orient})',
+            'breathing': '≥ 25%',
+        }
+
+    # 4) 默认 = 小红书 3:4
+    return dict(_CANVAS_PRESETS['小红书'])
+
+
+def _build_canvas_block_cn(canvas: dict) -> str:
+    """生成中文画布 prompt 片段 (用于 PROMPT_SYSTEM_TEMPLATE)"""
+    return f"- {canvas['desc_cn']}\n- {canvas['breathing']} 留白"
+
+
+def _build_canvas_block_en(canvas: dict) -> str:
+    """生成英文画布 prompt 片段 (用于 generate_card_image / refinement)"""
+    return f"{canvas['desc_en']}. {canvas['breathing']} breathing room."
 
 
 # ═══════════════════════════════════════════
@@ -2074,13 +2212,16 @@ def _build_card_info_edu(card, subject, grade, semester):
 {subject_hint}"""
 
 
-def generate_image_prompt_v2(card, subject, grade, semester, api_key, all_keys=None):
+def generate_image_prompt_v2(card, subject, grade, semester, api_key, all_keys=None,
+                              platform='', ratio_override=''):
     """Step 1 (v2 两阶段): 内容决策 → 视觉翻译 → TEXT_MANIFEST
     
     Phase 1a: Gemini 生成结构化内容 JSON (教学内容决策)
     Phase 1b: Gemini 把内容 JSON 翻译成英文图片 prompt
     
     优势: 每步 prompt 短 → 信号密度高 → 遵循率高
+    
+    v10.8: platform / ratio_override 控制画布比例。
     """
     card_type = card.get('type', '方法卡')
     eff = _get_effective_params()
@@ -2104,7 +2245,7 @@ def generate_image_prompt_v2(card, subject, grade, semester, api_key, all_keys=N
                           gen_config=gen_config_1a, all_keys=all_keys)
     if not resp_1a:
         print('      [v2] Phase 1a 失败, 降级到 v1')
-        return generate_image_prompt(card, subject, grade, semester, api_key, all_keys)
+        return generate_image_prompt(card, subject, grade, semester, api_key, all_keys, platform=platform, ratio_override=ratio_override)
     
     # 解析 1a 输出
     try:
@@ -2119,22 +2260,27 @@ def generate_image_prompt_v2(card, subject, grade, semester, api_key, all_keys=N
         content_decision = parse_content_decision(text_1a)
         if not content_decision:
             print('      [v2] Phase 1a JSON 解析失败, 降级到 v1')
-            return generate_image_prompt(card, subject, grade, semester, api_key, all_keys)
+            return generate_image_prompt(card, subject, grade, semester, api_key, all_keys, platform=platform, ratio_override=ratio_override)
         
         print(f'      [v2] Phase 1a ✓ — blocks={len(content_decision.get("blocks", []))}, '
               f'cn={content_decision.get("total_chinese_chars", "?")}字')
     except Exception as e:
         print(f'      [v2] Phase 1a 解析失败 ({e}), 降级到 v1')
-        return generate_image_prompt(card, subject, grade, semester, api_key, all_keys)
+        return generate_image_prompt(card, subject, grade, semester, api_key, all_keys, platform=platform, ratio_override=ratio_override)
 
     # ── Phase 1b: 视觉翻译 ──
     # v10.7: 注入学科配色 + 布局提示
     color_hint_v2 = _build_color_scheme_for_v2(subject)
     layout_hint_v2 = _build_layout_hint_for_v2(card_type, subject)
+    # v10.8: 画布尺寸
+    canvas = _resolve_canvas(platform=platform, card_type=card_type,
+                             subject=subject, ratio_override=ratio_override)
+    canvas_line_v2 = f"{canvas['desc_en']}\n- {canvas['breathing']} whitespace"
     prompt_1b = build_visual_translation_prompt(
         content_decision, card_type, subject,
         extra_color_hint=color_hint_v2,
         extra_layout_hint=layout_hint_v2,
+        canvas_line=canvas_line_v2,
     )
     
     # 注入反向学习反馈
@@ -2159,7 +2305,7 @@ def generate_image_prompt_v2(card, subject, grade, semester, api_key, all_keys=N
                           gen_config=gen_config_1b, all_keys=all_keys)
     if not resp_1b:
         print('      [v2] Phase 1b 失败, 降级到 v1')
-        return generate_image_prompt(card, subject, grade, semester, api_key, all_keys)
+        return generate_image_prompt(card, subject, grade, semester, api_key, all_keys, platform=platform, ratio_override=ratio_override)
     
     try:
         parts_1b = resp_1b.get('candidates', [{}])[0].get('content', {}).get('parts', [])
@@ -2172,7 +2318,7 @@ def generate_image_prompt_v2(card, subject, grade, semester, api_key, all_keys=N
         
         if len(text_1b) < 50:
             print('      [v2] Phase 1b 输出太短, 降级到 v1')
-            return generate_image_prompt(card, subject, grade, semester, api_key, all_keys)
+            return generate_image_prompt(card, subject, grade, semester, api_key, all_keys, platform=platform, ratio_override=ratio_override)
         
         # 解析 manifest — 优先从 1b 输出提取，降级到 1a 的 text_manifest
         manifest = _parse_text_manifest(text_1b)
@@ -2205,11 +2351,15 @@ def generate_image_prompt_v2(card, subject, grade, semester, api_key, all_keys=N
     
     except Exception as e:
         print(f'      [v2] Phase 1b 解析失败 ({e}), 降级到 v1')
-        return generate_image_prompt(card, subject, grade, semester, api_key, all_keys)
+        return generate_image_prompt(card, subject, grade, semester, api_key, all_keys, platform=platform, ratio_override=ratio_override)
 
 
-def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None):
-    """Step 1: 生成英文图片提示词 + TEXT_MANIFEST"""
+def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None,
+                          platform='', ratio_override=''):
+    """Step 1: 生成英文图片提示词 + TEXT_MANIFEST
+    
+    v10.8: platform / ratio_override 控制画布比例。
+    """
     card_type = card.get('type', '方法卡')
     # 优先使用结构化 Skill Schema 的视觉策略，降级到原始字符串规则
     if _HAS_SKILL_SCHEMA:
@@ -2231,6 +2381,11 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
     color_scheme_block = _build_color_scheme_block(subject)
     layout_variant_block = _build_layout_block(card_type, subject)
 
+    # ── v10.8: 画布尺寸 ──
+    canvas = _resolve_canvas(platform=platform, card_type=card_type,
+                             subject=subject, ratio_override=ratio_override)
+    canvas_block = _build_canvas_block_cn(canvas)
+
     # 根据学科选择对应模板
     if subject in _WELLNESS_SUBJECTS:
         visual_block = f"   {type_rules}"
@@ -2239,6 +2394,7 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
             visual_strategy_block=visual_block,
             color_scheme_block=color_scheme_block,
             layout_variant_block=layout_variant_block,
+            canvas_block=canvas_block,
             **char_fmt
         )
     elif is_vert:
@@ -2250,6 +2406,7 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
             solve_strategy_block=solve_block,
             color_scheme_block=color_scheme_block,
             layout_variant_block=layout_variant_block,
+            canvas_block=canvas_block,
             **char_fmt
         )
     else:
@@ -2259,10 +2416,11 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
             solve_strategy_block=solve_block,
             color_scheme_block=color_scheme_block,
             layout_variant_block=layout_variant_block,
+            canvas_block=canvas_block,
             **char_fmt
         )
 
-    card_info = _build_card_info(card, subject, grade, semester)
+    card_info = _build_card_info(card, subject, grade, semester, canvas=canvas)
 
     # ── 自我优化: 注入 few-shot 高分 prompt 参考 ──
     fewshot_block = ''
@@ -2630,14 +2788,18 @@ def _ensure_complete_chinese(text):
 # ═══════════════════════════════════════════
 # Step 2: 生成卡片图片（强模型 + fallback）
 # ═══════════════════════════════════════════
-def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', manifest=None):
+def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', manifest=None, canvas=None):
     """Step 2: 用最强图片模型生成卡片图片。
     
     v10.4 策略: AI 直接生成完整卡片（含所有文字），不再使用 PIL 叠加。
     
     keys: API key 列表（全部），内部按 模型→全部key 的顺序尝试。
     manifest: TEXT_MANIFEST 字典，告诉 AI 需要渲染哪些文字。
+    canvas: v10.8 画布配置 dict，默认 None 等效于 3:4。
     """
+    if not canvas:
+        canvas = _CANVAS_PRESETS['小红书']
+    canvas_en = _build_canvas_block_en(canvas)
     # ── 核心策略: 告诉 AI 渲染所有文字到图片中 ──
     chinese_prefix = (
         f"CRITICAL INSTRUCTIONS — COMPLETE CARD WITH TEXT:\n"
@@ -2658,7 +2820,7 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
         f"     Example: '提升语言运用能力' must NOT become '提升语言运用能' (missing 力)\n"
         f"5. Style: Professional Xiaohongshu card template with text as part of design.\n"
         f"   Main color: choose from coral pink / mint blue / peach orange / lavender.\n"
-        f"6. Canvas ratio 3:4 (vertical). ≥25% breathing room.\n"
+        f"6. {canvas_en}\n"
     )
 
     # manifest: 告诉 AI 需要渲染的文字内容
@@ -3336,7 +3498,7 @@ def visual_feedback_audit(image_data, expected_manifest, api_key, all_keys=None,
     return empty_result
 
 
-def _build_refinement_prompt(visual_audit_result, expected_manifest, subject=''):
+def _build_refinement_prompt(visual_audit_result, expected_manifest, subject='', canvas=None):
     """将5层审核矩阵的结果转化为 image-to-image 精修指令。
     
     核心原则:
@@ -3346,6 +3508,8 @@ def _build_refinement_prompt(visual_audit_result, expected_manifest, subject='')
     - 维度改进 (improvements) → 第三优先级
     - 最弱维度特别强调
     - 重新附上完整文字manifest
+    
+    canvas: v10.8 画布配置 dict，默认 None 等效于 3:4。
     """
     fatal_flaws = visual_audit_result.get('fatal_flaws', [])
     improvements = visual_audit_result.get('improvements', [])
@@ -3447,9 +3611,13 @@ def _build_refinement_prompt(visual_audit_result, expected_manifest, subject='')
             parts.append(f'  {key}: "{val}" → {zone}')
         parts.append("⚠️ EVERY character must be pixel-perfect. No omissions.\n")
 
+    if not canvas:
+        canvas = _CANVAS_PRESETS['小红书']
+    canvas_en = _build_canvas_block_en(canvas)
+
     parts.append(
         "OUTPUT: An improved version of this card image. "
-        "3:4 vertical ratio. Same overall color scheme. "
+        f"{canvas['ratio']} {canvas['orientation']} ratio. Same overall color scheme. "
         "Chinese characters with perfect strokes. "
         "Fix all issues above while keeping the good parts."
     )
@@ -3691,15 +3859,23 @@ def _typed_quality_score(image_data, api_key, card_title='', card_type='方法�
 # ═══════════════════════════════════════════
 # 完整流水线: 单卡片处理
 # ═══════════════════════════════════════════
-def process_single_card(card, subject, grade, semester, keys, output_dir, skip_audit=False):
+def process_single_card(card, subject, grade, semester, keys, output_dir, skip_audit=False,
+                        platform='', ratio_override=''):
     """
     处理单张卡片的完整流水线。
+    
+    v10.8: platform / ratio_override 控制画布比例。
     返回: (success: bool, filepath: str, stats: dict)
     """
     # 使用自适应参数
     _params = _get_effective_params()
     _max_rounds = _params.get('max_audit_rounds', MAX_AUDIT_ROUNDS)
     _pass_score = _params.get('audit_pass_score', AUDIT_PASS_SCORE)
+
+    # v10.8: 解析画布配置
+    card_type = card.get('type', '方法卡')
+    canvas = _resolve_canvas(platform=platform, card_type=card_type,
+                             subject=subject, ratio_override=ratio_override)
 
     card_id = card['full_id']
     title = card['title']
@@ -3775,9 +3951,11 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
     t0 = time.time()
     key = next_key(keys)
     if _HAS_PROMPT_V2:
-        prompt, manifest = generate_image_prompt_v2(card, subject, grade, semester, key, all_keys=keys)
+        prompt, manifest = generate_image_prompt_v2(card, subject, grade, semester, key, all_keys=keys,
+                                                     platform=platform, ratio_override=ratio_override)
     else:
-        prompt, manifest = generate_image_prompt(card, subject, grade, semester, key, all_keys=keys)
+        prompt, manifest = generate_image_prompt(card, subject, grade, semester, key, all_keys=keys,
+                                                  platform=platform, ratio_override=ratio_override)
     stats['prompt_gen_time'] = time.time() - t0
 
     if not prompt:
@@ -3812,7 +3990,7 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
         t1 = time.time()
         img_data, ext, model = generate_card_image(
             prompt, keys, card_title=title, subject=subject,
-            audit_hint=audit_hint, manifest=manifest
+            audit_hint=audit_hint, manifest=manifest, canvas=canvas
         )
         stats['image_gen_time'] += time.time() - t1
         stats['image_model'] = model or ''
@@ -3926,7 +4104,7 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
                 print(f'  ├─ Step 4c: image-to-image 精修 (round {refine_round}/{MAX_REFINE_ROUNDS})...',
                       end='', flush=True)
                 refinement_prompt = _build_refinement_prompt(
-                    visual_audit_result, manifest, subject=subject
+                    visual_audit_result, manifest, subject=subject, canvas=canvas
                 )
                 t_refine = time.time()
                 refined_data, refined_ext, refined_model = refine_card_image(

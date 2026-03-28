@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260328e'  # v10.7: 审美升级(学科配色+布局多样化)
+BUILD_VERSION = '20260328f'  # v10.8: 多尺寸画布系统(8平台+内容类型智能推荐)
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -3543,6 +3543,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         grade = body.get('grade', '三年级')
         semester = body.get('semester', '下册')
         skip_audit = body.get('skipAudit', False)
+        platform = body.get('platform', '')  # v10.8: 画布平台
+        ratio_override = body.get('ratio', '')  # v10.8: 直接指定比例
 
         if not SERVER_GEMINI_API_KEYS:
             return self._send_json({'error': '服务端未配置 Gemini API Key'}, 500)
@@ -3553,6 +3555,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 ocr_audit, _build_audit_hint, _try_pil_text_repair,
                 quality_score, AUDIT_PASS_SCORE, MAX_AUDIT_ROUNDS,
                 _typed_quality_score,
+                _resolve_canvas,
             )
         except ImportError as e:
             return self._send_json({'error': f'v3模块导入失败: {e}'}, 500)
@@ -3560,6 +3563,10 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         keys = list(SERVER_GEMINI_API_KEYS)
         title = card.get('title', '')
         card_type = card.get('type', '方法卡')
+
+        # v10.8: 解析画布配置
+        canvas = _resolve_canvas(platform=platform, card_type=card_type,
+                                 subject=subject, ratio_override=ratio_override)
 
         import traceback
         pipeline_log = []
@@ -3633,7 +3640,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             # ── Step 1: 生成提示词 ──
             pipeline_log.append('Step1: 生成Prompt...')
             print(f'[v3] {card["full_id"]} Step1: 生成Prompt...', flush=True)
-            prompt, manifest = generate_image_prompt(card, subject, grade, semester, keys[0], all_keys=keys)
+            prompt, manifest = generate_image_prompt(card, subject, grade, semester, keys[0], all_keys=keys,
+                                                      platform=platform, ratio_override=ratio_override)
             if not prompt:
                 return self._send_json({'error': 'Step1失败: 无法生成图片提示词', 'pipeline': pipeline_log}, 500)
 
@@ -3679,7 +3687,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
                 img_data, ext, model = generate_card_image(
                     prompt, keys, card_title=title, subject=subject,
-                    audit_hint=audit_hint, manifest=manifest
+                    audit_hint=audit_hint, manifest=manifest, canvas=canvas
                 )
                 if model:
                     used_model = model
@@ -3893,7 +3901,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 from generate_card_images_v3 import (
                     generate_image_prompt, generate_card_image,
                     ocr_audit, _build_audit_hint, _try_pil_text_repair,
-                    quality_score, AUDIT_PASS_SCORE, MAX_AUDIT_ROUNDS
+                    quality_score, AUDIT_PASS_SCORE, MAX_AUDIT_ROUNDS,
+                    _resolve_canvas,
                 )
             except ImportError as e:
                 _refund_on_error()
@@ -3907,8 +3916,13 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             grade = body.get('grade', '三年级')
             semester = body.get('semester', '下册')
             skip_audit = body.get('skipAudit', False)
+            platform = body.get('platform', '')  # v10.8
+            ratio_override = body.get('ratio', '')  # v10.8
             keys = list(SERVER_GEMINI_API_KEYS)
             title = card.get('title', '')
+            card_type_async = card.get('type', '方法卡')
+            canvas = _resolve_canvas(platform=platform, card_type=card_type_async,
+                                     subject=subject, ratio_override=ratio_override)
             pipeline_log = []
 
             def _update_progress(msg):
@@ -3945,7 +3959,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 # Step 1
                 _update_progress('Step1: 生成Prompt...')
                 print(f'[v3-async] {card.get("full_id","")} Step1: 生成Prompt...', flush=True)
-                prompt, manifest = generate_image_prompt(card, subject, grade, semester, keys[0], all_keys=keys)
+                prompt, manifest = generate_image_prompt(card, subject, grade, semester, keys[0], all_keys=keys,
+                                                          platform=platform, ratio_override=ratio_override)
                 if not prompt:
                     pipeline_log.append('Step1失败')
                     _refund_on_error()
@@ -3985,7 +4000,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
                     img_data, ext, model = generate_card_image(
                         prompt, keys, card_title=title, subject=subject,
-                        audit_hint=audit_hint, manifest=manifest
+                        audit_hint=audit_hint, manifest=manifest, canvas=canvas
                     )
                     if model:
                         used_model = model

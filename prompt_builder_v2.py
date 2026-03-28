@@ -198,8 +198,7 @@ Convert the following structured content into a concise English image generation
 {content_json}
 
 == Visual Rules — COMPLETE CARD WITH TEXT ==
-- Canvas: 3:4 vertical ratio
-- ≥ 25% whitespace
+- {canvas_line}
 - Small cute mascot in bottom-right corner (<10% of image)
 - Xiaohongshu style: professional card template design (like Canva/PPT)
 {extra_visual_rules}
@@ -235,7 +234,8 @@ Then at the end, include the TEXT_MANIFEST (text that MUST appear in the image):
 def build_visual_translation_prompt(content_decision: dict, card_type: str,
                                      subject: str,
                                      extra_color_hint: str = '',
-                                     extra_layout_hint: str = '') -> str:
+                                     extra_layout_hint: str = '',
+                                     canvas_line: str = '') -> str:
     """构建 Step 1b 的视觉翻译 prompt。
     
     把 Step 1a 输出的内容 JSON 翻译成图片生成 prompt。
@@ -243,8 +243,12 @@ def build_visual_translation_prompt(content_decision: dict, card_type: str,
     Args:
         extra_color_hint: v10.7 学科配色提示（英文）
         extra_layout_hint: v10.7 布局变体提示（英文）
+        canvas_line: v10.8 画布描述行（英文），默认 "Canvas: 3:4 vertical ratio / ≥ 25% whitespace"
     """
     schema = get_skill_schema(card_type)
+    
+    if not canvas_line:
+        canvas_line = 'Canvas: 3:4 vertical ratio\\n- ≥ 25% whitespace'
     
     # 序列化内容 JSON
     content_json = json.dumps(content_decision, ensure_ascii=False, indent=2)
@@ -272,6 +276,7 @@ def build_visual_translation_prompt(content_decision: dict, card_type: str,
         content_json=content_json,
         extra_visual_rules=extra_rules,
         manifest_lines=manifest_lines,
+        canvas_line=canvas_line,
     )
 
 

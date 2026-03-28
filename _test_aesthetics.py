@@ -279,6 +279,7 @@ class TestTemplateFormatting(unittest.TestCase):
             solve_strategy_block='test strategy',
             color_scheme_block='COLOR BLOCK HERE',
             layout_variant_block='LAYOUT BLOCK HERE',
+            canvas_block='CANVAS BLOCK HERE',
         )
         self.assertIn('COLOR BLOCK HERE', result)
         self.assertIn('LAYOUT BLOCK HERE', result)
@@ -291,6 +292,7 @@ class TestTemplateFormatting(unittest.TestCase):
             visual_strategy_block='test strategy',
             color_scheme_block='COLOR BLOCK HERE',
             layout_variant_block='LAYOUT BLOCK HERE',
+            canvas_block='CANVAS BLOCK HERE',
         )
         self.assertIn('COLOR BLOCK HERE', result)
         self.assertIn('LAYOUT BLOCK HERE', result)
@@ -304,6 +306,7 @@ class TestTemplateFormatting(unittest.TestCase):
             solve_strategy_block='步骤分解',
             color_scheme_block=color_block,
             layout_variant_block=layout_block,
+            canvas_block='- 竖屏 3:4 画布\n- ≥ 25% 留白',
         )
         self.assertIn('理性蓝', result)
         self.assertIn('步骤流程', result)
@@ -319,6 +322,7 @@ class TestTemplateFormatting(unittest.TestCase):
             solve_strategy_block='诗词鉴赏',
             color_scheme_block=color_block,
             layout_variant_block=layout_block,
+            canvas_block='- 竖屏 3:4 画布\n- ≥ 25% 留白',
         )
         self.assertIn('古韵棕', result)
         self.assertIn('宣纸', result)
@@ -333,6 +337,7 @@ class TestTemplateFormatting(unittest.TestCase):
             solve_strategy_block='语法对比',
             color_scheme_block=color_block,
             layout_variant_block=layout_block,
+            canvas_block='- 竖屏 3:4 画布\n- ≥ 25% 留白',
         )
         self.assertIn('活力橙', result)
         self.assertIn('左栏', result)
