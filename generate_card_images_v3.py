@@ -3,13 +3,14 @@
 """
 知识卡片图片生成器 v3 — 终极流水线
 =============================================
-5 步流水线，兼得 AI 艺术感 + 文字 100% 准确：
+v10.5: AI全量渲染 + 5层审核矩阵 + image-to-image 视觉精修闭环
 
   Step 1: Gemini 2.5 Flash 生成优化英文提示词
-  Step 2: Gemini 3 Pro Image 生成卡片图片（强模型）
-  Step 3: Gemini 2.5 Flash Vision OCR 审计
-  Step 4: 对比期望文字 vs OCR → 不通过则重生成（最多3轮）
-  Step 5: PIL 精确叠加修补残留文字错误 + 质量评分
+  Step 2: Gemini Image 生成完整卡片（AI直接渲染所有文字）
+  Step 3: Vision OCR 审计 + 质量评分（最多3轮重生成）
+  Step 4b: 5层审核矩阵全维度评估（文字保真/视觉叙事/教学力/传播力）
+  Step 4c: image-to-image 精修（基于审核结果迭代改进现有图片）
+  Step 5: 质量评分 + 英语专项审核
 
 用法:
   python generate_card_images_v3.py                          # 默认: 找 knowledge_cards/小学/*.json
@@ -88,6 +89,55 @@ except ImportError:
     _HAS_BLUEPRINT = False
     print('[v3] 知识呈现蓝图未加载 (visual_blueprint.py 不存在)')
 
+# Skill 结构化 + Prompt 分段生成 + 结构审计
+try:
+    from skill_schema import get_skill_schema
+    from prompt_builder import build_skill_enhanced_prompt, get_visual_strategy
+    from prompt_auditor import audit_and_patch, format_audit_summary
+    _HAS_SKILL_SCHEMA = True
+    print('[v3] Skill结构化 + Prompt分段 + 结构审计 已加载')
+except ImportError as _e:
+    _HAS_SKILL_SCHEMA = False
+    print(f'[v3] Skill结构化未加载 ({_e})')
+
+# 英语卡片8维审核器
+try:
+    from english_card_auditor import (
+        is_english_card, rule_audit_english, full_english_audit,
+        format_english_audit, EnglishAuditResult,
+    )
+    _HAS_ENG_AUDIT = True
+    print('[v3] 英语卡片审核器已加载')
+except ImportError as _e:
+    _HAS_ENG_AUDIT = False
+    print(f'[v3] 英语卡片审核器未加载 ({_e})')
+
+# PIL 文字渲染引擎（v10.4 已停用 — AI 直接渲染文字）
+_HAS_PIL_RENDERER = False
+print('[v3] v10.4: AI全量渲染模式 — PIL文字叠加已停用')
+
+# Prompt 两阶段引擎 v2 (内容决策 + 视觉翻译)
+try:
+    from prompt_builder_v2 import (
+        build_content_decision_prompt,
+        parse_content_decision,
+        build_visual_translation_prompt,
+    )
+    _HAS_PROMPT_V2 = True
+    print('[v3] Prompt两阶段引擎 v2 已加载 (内容决策+视觉翻译)')
+except ImportError as _e:
+    _HAS_PROMPT_V2 = False
+    print(f'[v3] Prompt两阶段引擎 v2 未加载 ({_e})')
+
+# Skill 反向学习闭环 (从生成结果反哺参数)
+try:
+    from skill_feedback import build_feedback_prompt_hint
+    _HAS_SKILL_FEEDBACK = True
+    print('[v3] Skill反向学习闭环已加载')
+except ImportError as _e:
+    _HAS_SKILL_FEEDBACK = False
+    print(f'[v3] Skill反向学习闭环未加载 ({_e})')
+
 # ═══════════════════════════════════════════
 # 配置
 # ═══════════════════════════════════════════
@@ -110,8 +160,8 @@ def _get_effective_params():
         return {
             'max_audit_rounds': MAX_AUDIT_ROUNDS,
             'audit_pass_score': AUDIT_PASS_SCORE,
-            'max_chinese_chars': 20,
-            'max_chars_per_block': 5,
+            'max_chinese_chars': 15,
+            'max_chars_per_block': 4,
         }
     try:
         return get_adaptive_params()
@@ -119,8 +169,8 @@ def _get_effective_params():
         return {
             'max_audit_rounds': MAX_AUDIT_ROUNDS,
             'audit_pass_score': AUDIT_PASS_SCORE,
-            'max_chinese_chars': 20,
-            'max_chars_per_block': 5,
+            'max_chinese_chars': 15,
+            'max_chars_per_block': 4,
         }
 
 
@@ -294,65 +344,88 @@ PROMPT_SYSTEM_TEMPLATE = """你是小红书爆款知识卡片 AI 图片 Prompt �
 - 标题直接用英文短语本身（如 "pay attention to"），不用中文泛化标题
 - 必须展示2-3种用法结构 + 每种配完整英文例句(≥6词)
 - 必须有❌/✅对错例句对比，错误必须是该短语的真实高频错误
-- ❌/✅的错因标注用英文箭头格式（如 "✗ do → ✓ make"），不要写中文句子（中文渲染容易乱码）
+- ❌/✅的错因标注用英文箭头格式（如 "✗ do → ✓ make"），不要写中文句子
 - 口诀用「英文关键词+≤4中文字」混合格式（如 "progress用make"），减少纯中文
-- 🚫严禁混入与该短语无关的词汇/语法点（如讲 pay attention to 时不准出现 successful）
+- 🚫严禁混入与该短语无关的词汇/语法点
 - 🚫严禁填空题——学生不能在图片上写字
-- 🚫严禁numbered步骤（①②③流程图）——改用用法结构列表
-- 🚫严禁用卡通人物/"记住哦"气泡替代教学内容——用法区(区块B)必须有英文例句文字！
+- 🚫严禁用卡通人物/"记住哦"气泡替代教学内容
 - 英语卡的卡通角色只能极小放角落，不能出现在卡片中央
 
-══════ 视觉设计 ══════
+══════ 视觉设计 — 完整卡片（含文字） ══════
 
 - 竖屏 3:4 画布
-- 核心教学图占 ≥ 45%
-- 全卡最多4个区块：标题/核心图/金句对比/口诀
 - ≥ 25% 留白
-- 一个可爱小老师卡通 + ≤6字气泡
-- 小红书风格：鲜明渐变背景，饱和色banner，白色圆角内容卡片
+- 一个可爱小老师卡通在右下角落（小于画面 10%）
+- 小红书风格：精致卡片版式设计（Canva 模板风）
 
-══════ ⚠️ 中文文字极简原则 ══════
+请设计以下 4 个结构化区块：
 
-这是最重要的规则！AI 图片模型渲染中文容易出错，必须极度精简：
+🔹 区块A — 顶部 Banner（~2%-12%）：
+   深色渐变横幅（深紫/深蓝/深绿），带柔和光泽
+   标题文字白色大字，居中显示
 
-- 全卡中文 **≤ {max_chars}字**（越少越好！理想≤ {ideal_chars}字）
-- 标题 ≤ {max_per_block}字（72pt 超大粗体）
-- 核心金句 ≤ {max_per_block}字
-- 口诀 ≤ {max_slogan}字
-- 气泡 ≤ 3字
-- ❌ 绝不超过{max_per_block}个连续中文字符（严格！）
-- ❌ 不写段落、定义、解释、长句子
-- 数字和数学符号用阿拉伯数字/符号(不用中文写数字)
-- 能用图/箭头/色块/图标表达的，绝不用文字
-- ❗每个中文字必须笔画清晰、粗体加大，绝不能出现乱码/错字/缺笔画
+🔹 区块B — 中间内容卡（~14%-78%）：
+   白色或极浅色圆角矩形卡片，带轻微阴影
+   卡片内排版教学内容：例题、步骤、对比等
+   文字清晰、字号适当、行距舒适
 
-══════ 你必须列出的文字清单 ══════
+🔹 区块C — 底部口诀条（~80%-92%）：
+   暖色渐变横条（珊瑚粉/蜜桃橙/薄荷绿），带圆角
+   口诀/金句白字居中
 
-在 prompt 末尾，用 [TEXT_MANIFEST] 标签列出图片中出现的所有中文文字：
+🔹 区块D — 最底部（~93%-98%）：
+   极浅背景，小提示文字
+
+══════ ⚠️ 文字渲染要求（最重要！） ══════
+
+AI 必须直接在图片中渲染所有文字！文字是卡片的核心内容。
+
+- ✅ 所有中文必须字形完整、清晰可读，绝不能出现乱码/缺笔画/错字
+- ✅ 英文字母和数字必须拼写完全正确
+- ✅ 文字要与背景区块融为一体，像专业设计师排版的效果
+- ✅ 标题区大字白色加粗，内容区黑色/深灰正文，口诀区白色醒目
+- ✅ 文字大小层次分明：标题最大 > 内容正文 > 口诀 > 小提示
+- ⚠️ 中文字符必须笔画正确——任何乱码都是致命错误！
+- ⚠️ 数学公式/符号必须完全准确
+
+══════ 文字清单 ══════
+
+在 prompt 末尾，用 [TEXT_MANIFEST] 列出卡片中要渲染的所有文字：
 [TEXT_MANIFEST]
-TITLE: 标题文字
-LINE1: 第一处文字
-LINE2: 第二处文字
-...
+TITLE: 标题文字 → 渲染到区块A（Banner白色大字）
+LINE1: 核心内容第一行 → 渲染到区块B
+LINE2: 核心内容第二行 → 渲染到区块B
+LINE3: 核心内容第三行 → 渲染到区块B
+SLOGAN: 口诀金句 → 渲染到区块C（暖色条白字）
+TIP: 小提示(可选) → 渲染到区块D
 [/TEXT_MANIFEST]
 
-这个清单将用于后续OCR审计对照，务必精确！
+此清单中的文字必须原封不动地渲染到图片对应区域中！
 
 ══════ 配色 ══════
 
-鲜明渐变背景(珊瑚粉/薄荷蓝/蜜桃橙/薰衣草紫选一)
-标题banner饱和色，内容区白色圆角卡片
-重点数字用鲜明对比色超大加粗
-✓翠绿 #2ED573, ✗亮红 #FF4757
+主色选一: 珊瑚粉 / 薄荷蓝 / 蜜桃橙 / 薰衣草紫
+ Banner 区块: 该主色的深色版本（如深紫色渐变 #3a1c71→#5a3f8e）
+ 内容卡: 纯白 #FFFFFF 或极浅色 #FAFAFA，带轻微阴影
+ 口诀条: 该主色的暖亮版本（如暖粉 #FF9A9E→#FAD0C4）
+ 背景: 该主色的极浅淡版本，有微妙渐变过渡
 
 ══════ 输出格式 ══════
 
 只输出英文提示词 + TEXT_MANIFEST，不要其他内容。
 
 提示词开头必须写:
-"IMPORTANT: All visible text MUST be Simplified Chinese (简体中文). LARGE BOLD thick-stroke rounded sans-serif. Max 15 Chinese chars total, each block ≤4 chars. No English text in the image. Clean spacious layout, ≥25% whitespace. Every Chinese character must be pixel-perfect with clear strokes."
+"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top ~2-12% with white title text, (2) a white rounded CONTENT CARD ~14-78% with clearly rendered teaching content, (3) a warm colored ACCENT STRIP ~80-92% with white slogan text, (4) a small cute mascot in corner. Text must be pixel-perfect: every Chinese character fully formed, every letter correct."
 
-提示词长度: 350-500 英文单词。"""
+══════ ⚠️ 文字质量核心要求 ══════
+
+- ✅ 中文字符必须笔画完整，绝不能出现乱码
+- ✅ 英文拼写必须100%正确
+- ✅ 数字和数学符号必须准确
+- ✅ 文字排版像专业设计师的作品——大小层次分明、对齐工整
+- ✅ 文字与背景融为一体，是设计的一部分（不是贴上去的感觉）
+
+提示词长度: 250-400 英文单词。"""
 
 # ─── 养生减脂类专用模板 ───
 _WELLNESS_SUBJECTS = {'养生', '减脂', '养生减脂'}
@@ -371,58 +444,73 @@ PROMPT_SYSTEM_TEMPLATE_WELLNESS = """你是小红书爆款知识卡片 AI 图片
 2. 关键数据/步骤用图标+色块清晰呈现
 3. 大字金句 + 行动口诀(≤10字)
 
-══════ 视觉设计 ══════
+══════ 视觉设计 — 完整卡片（含文字） ══════
 
 - 竖屏 3:4 画布
-- 核心知识图占 ≥ 45%
-- 全卡最多4个区块：标题/核心图/知识要点/口诀
 - ≥ 25% 留白
-- 一个可爱养生博主卡通形象 + ≤6字气泡
-- 小红书风格：鲜明渐变背景，饱和色banner，白色圆角内容卡片
-- 养生减脂主题：抹茶绿/樱花粉/暖杏色为主
+- 一个可爱养生博主卡通在右下角落（小于画面 10%）
+- 小红书风格：精致卡片版式设计
+- 养生减脂配色: 抹茶绿/樱花粉/暖杏色为主
 
-══════ ⚠️ 中文文字极简原则 ══════
+请设计以下 4 个结构化区块：
 
-这是最重要的规则！AI 图片模型渲染中文容易出错，必须极度精简：
+🔹 区块A — 顶部 Banner（~2%-12%）：
+   深色渐变横幅（深绿/深粉/暖棕），标题白色大字居中
 
-- 全卡中文 **≤ {max_chars}字**（越少越好！理想≤ {ideal_chars}字）
-- 标题 ≤ {max_per_block}字（72pt 超大粗体）
-- 核心金句 ≤ {max_per_block}字
-- 口诀 ≤ {max_slogan}字
-- 气泡 ≤ 3字
-- ❌ 绝不超过{max_per_block}个连续中文字符（严格！）
-- ❌ 不写段落、定义、解释、长句子
-- 数字和数据用阿拉伯数字/符号
-- 能用图/箭头/色块/图标表达的，绝不用文字
-- ❗每个中文字必须笔画清晰、粗体加大，绝不能出现乱码/错字/缺笔画
+🔹 区块B — 中间内容卡（~14%-78%）：
+   白色圆角矩形卡片，内部排版教学内容，文字清晰可读
 
-══════ 你必须列出的文字清单 ══════
+🔹 区块C — 底部口诀条（~80%-92%）：
+   暖色渐变横条（樱花粉/抹茶绿/暖杏色），口诀白字居中
 
-在 prompt 末尾，用 [TEXT_MANIFEST] 标签列出图片中出现的所有中文文字：
+🔹 区块D — 最底部（~93%-98%）：
+   极浅背景，小提示文字
+
+══════ ⚠️ 文字渲染要求（最重要！） ══════
+
+AI 必须直接在图片中渲染所有文字！文字是卡片的核心内容。
+
+- ✅ 所有中文必须字形完整、清晰可读，绝不能乱码/缺笔画/错字
+- ✅ 英文和数字拼写100%正确
+- ✅ 文字与背景融为一体，像专业设计师排版
+- ✅ 标题白色大字、内容区深色正文、口诀白色醒目
+- ⚠️ 中文字符笔画正确是硬性要求
+
+══════ 文字清单 ══════
+
+在 prompt 末尾，用 [TEXT_MANIFEST] 列出卡片要渲染的所有文字：
 [TEXT_MANIFEST]
-TITLE: 标题文字
-LINE1: 第一处文字
-LINE2: 第二处文字
+TITLE: 标题文字 → 渲染到区块A
+LINE1: 第一行内容 → 渲染到区块B
+LINE2: 第二行内容 → 渲染到区块B
 ...
+SLOGAN: 口诀金句 → 渲染到区块C
 [/TEXT_MANIFEST]
 
-这个清单将用于后续OCR审计对照，务必精确！
+此清单中的文字必须原封不动渲染到图片中！
 
 ══════ 配色 ══════
 
-鲜明渐变背景(抹茶绿/樱花粉/暖杏色/薰衣草紫选一)
-标题banner饱和色，内容区白色圆角卡片
-重点数据用鲜明对比色超大加粗
-✓翠绿 #2ED573, ✗亮红 #FF4757
+主色: 抹茶绿 / 樱花粉 / 暖杏色 选一
+ Banner: 主色的深色版渐变
+ 内容卡: 纯白 #FFFFFF 或极浅色
+ 口诀条: 主色的暖亮版渐变
 
 ══════ 输出格式 ══════
 
 只输出英文提示词 + TEXT_MANIFEST，不要其他内容。
 
 提示词开头必须写:
-"IMPORTANT: All visible text MUST be Simplified Chinese (简体中文). LARGE BOLD thick-stroke rounded sans-serif. Max 15 Chinese chars total, each block ≤4 chars. No English text in the image. Clean spacious layout, ≥25% whitespace. Every Chinese character must be pixel-perfect with clear strokes."
+"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the middle with teaching content, (3) a warm colored ACCENT STRIP at bottom with white slogan text, (4) a small cute mascot in corner. All Chinese characters must be perfectly formed — no garbled text."
 
-提示词长度: 350-500 英文单词。"""
+══════ ⚠️ 文字质量核心要求 ══════
+
+- ✅ 中文字符笔画完整，不能乱码
+- ✅ 英文拼写100%正确
+- ✅ 文字排版专业——大小层次分明、对齐工整
+- ✅ 文字与背景融为一体
+
+提示词长度: 250-400 英文单词。"""
 
 
 _GRAMMAR_TYPES = {'语法辨析卡', '句型卡', '易混词卡', '易混词陷阱卡', '语法纠错卡',
@@ -1294,10 +1382,141 @@ def _build_card_info_edu(card, subject, grade, semester):
 {'⚠️ 笔算竖式类：必须画正确竖式' if is_vert else ''}"""
 
 
+def generate_image_prompt_v2(card, subject, grade, semester, api_key, all_keys=None):
+    """Step 1 (v2 两阶段): 内容决策 → 视觉翻译 → TEXT_MANIFEST
+    
+    Phase 1a: Gemini 生成结构化内容 JSON (教学内容决策)
+    Phase 1b: Gemini 把内容 JSON 翻译成英文图片 prompt
+    
+    优势: 每步 prompt 短 → 信号密度高 → 遵循率高
+    """
+    card_type = card.get('type', '方法卡')
+    eff = _get_effective_params()
+    # v10.2: PIL 渲染全部文字，不再受人工限制, 允许足够的字符和行数
+    max_chars = max(eff.get('max_chinese_chars', 15), 80)
+
+    # ── Phase 1a: 内容决策 ──
+    prompt_1a = build_content_decision_prompt(
+        card, card_type, subject, grade, semester, max_chars=max_chars
+    )
+    print(f'      [v2] Phase 1a: 内容决策 ({len(prompt_1a)}字)')
+    
+    contents_1a = [{'role': 'user', 'parts': [{'text': prompt_1a}]}]
+    gen_config_1a = {
+        'maxOutputTokens': 4096,
+        'temperature': 0.5,
+        'thinkingConfig': {'thinkingBudget': 1024}
+    }
+    
+    resp_1a = gemini_call(TEXT_MODEL, contents_1a, api_key,
+                          gen_config=gen_config_1a, all_keys=all_keys)
+    if not resp_1a:
+        print('      [v2] Phase 1a 失败, 降级到 v1')
+        return generate_image_prompt(card, subject, grade, semester, api_key, all_keys)
+    
+    # 解析 1a 输出
+    try:
+        parts_1a = resp_1a.get('candidates', [{}])[0].get('content', {}).get('parts', [])
+        text_1a = ''
+        for part in parts_1a:
+            if 'text' in part and not part.get('thought', False):
+                t = part['text'].strip()
+                if len(t) > len(text_1a):
+                    text_1a = t
+        
+        content_decision = parse_content_decision(text_1a)
+        if not content_decision:
+            print('      [v2] Phase 1a JSON 解析失败, 降级到 v1')
+            return generate_image_prompt(card, subject, grade, semester, api_key, all_keys)
+        
+        print(f'      [v2] Phase 1a ✓ — blocks={len(content_decision.get("blocks", []))}, '
+              f'cn={content_decision.get("total_chinese_chars", "?")}字')
+    except Exception as e:
+        print(f'      [v2] Phase 1a 解析失败 ({e}), 降级到 v1')
+        return generate_image_prompt(card, subject, grade, semester, api_key, all_keys)
+
+    # ── Phase 1b: 视觉翻译 ──
+    prompt_1b = build_visual_translation_prompt(content_decision, card_type, subject)
+    
+    # 注入反向学习反馈
+    if _HAS_SKILL_FEEDBACK:
+        try:
+            feedback_hint = build_feedback_prompt_hint(card_type)
+            if feedback_hint:
+                prompt_1b += f'\n{feedback_hint}'
+        except Exception:
+            pass
+    
+    print(f'      [v2] Phase 1b: 视觉翻译 ({len(prompt_1b)}字)')
+    
+    contents_1b = [{'role': 'user', 'parts': [{'text': prompt_1b}]}]
+    gen_config_1b = {
+        'maxOutputTokens': 4096,
+        'temperature': 0.6,
+        'thinkingConfig': {'thinkingBudget': 1024}
+    }
+    
+    resp_1b = gemini_call(TEXT_MODEL, contents_1b, api_key,
+                          gen_config=gen_config_1b, all_keys=all_keys)
+    if not resp_1b:
+        print('      [v2] Phase 1b 失败, 降级到 v1')
+        return generate_image_prompt(card, subject, grade, semester, api_key, all_keys)
+    
+    try:
+        parts_1b = resp_1b.get('candidates', [{}])[0].get('content', {}).get('parts', [])
+        text_1b = ''
+        for part in parts_1b:
+            if 'text' in part and not part.get('thought', False):
+                t = part['text'].strip()
+                if len(t) > len(text_1b):
+                    text_1b = t
+        
+        if len(text_1b) < 50:
+            print('      [v2] Phase 1b 输出太短, 降级到 v1')
+            return generate_image_prompt(card, subject, grade, semester, api_key, all_keys)
+        
+        # 解析 manifest — 优先从 1b 输出提取，降级到 1a 的 text_manifest
+        manifest = _parse_text_manifest(text_1b)
+        if not manifest and content_decision.get('text_manifest'):
+            manifest = content_decision['text_manifest']
+        
+        # 英语卡标题优化 + 语法术语保护
+        manifest = _fix_english_card_title_manifest(manifest, card, subject)
+        manifest = _inject_grammar_terms_to_manifest(manifest, card, subject)
+        
+        # 清理 prompt
+        prompt_clean = re.sub(r'\[TEXT_MANIFEST\].*?\[/TEXT_MANIFEST\]', '', text_1b, flags=re.DOTALL).strip()
+        
+        # 字数守门员
+        manifest = _enforce_manifest_limits(manifest)
+        
+        # Skill 审计
+        if _HAS_SKILL_SCHEMA:
+            try:
+                prompt_clean, audit_result = audit_and_patch(
+                    prompt_clean, card_type, card, manifest
+                )
+                summary = format_audit_summary(audit_result)
+                print(f'      [v2] {summary}')
+            except Exception as e:
+                print(f'      [v2] [skill audit] error: {e}')
+        
+        print(f'      [v2] Phase 1b ✓ — prompt={len(prompt_clean)}字, manifest={len(manifest)}项')
+        return prompt_clean, manifest
+    
+    except Exception as e:
+        print(f'      [v2] Phase 1b 解析失败 ({e}), 降级到 v1')
+        return generate_image_prompt(card, subject, grade, semester, api_key, all_keys)
+
+
 def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None):
     """Step 1: 生成英文图片提示词 + TEXT_MANIFEST"""
     card_type = card.get('type', '方法卡')
-    type_rules = CARD_TYPE_VISUAL_RULES.get(card_type, CARD_TYPE_VISUAL_RULES['方法卡'])
+    # 优先使用结构化 Skill Schema 的视觉策略，降级到原始字符串规则
+    if _HAS_SKILL_SCHEMA:
+        type_rules = get_visual_strategy(card_type, card) or CARD_TYPE_VISUAL_RULES.get(card_type, CARD_TYPE_VISUAL_RULES['方法卡'])
+    else:
+        type_rules = CARD_TYPE_VISUAL_RULES.get(card_type, CARD_TYPE_VISUAL_RULES['方法卡'])
     is_vert = _detect_vertical_calc(card)
 
     # ── 获取自适应字数参数 ──
@@ -1385,6 +1604,19 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
             print(f'      [pedagogy] hint error: {e}')
 
     full_input = f'{system_prompt}\n\n--- 知识点信息 ---\n{card_info}'
+
+    # ── Skill 结构化注入: 骨架+填充 双阶段 ──
+    skill_hint = ''
+    if _HAS_SKILL_SCHEMA:
+        try:
+            skill_hint = build_skill_enhanced_prompt(card_type, card, subject, grade, semester)
+            if skill_hint:
+                print(f'      [skill] 注入 Skill 骨架+填充 ({len(skill_hint)}字)')
+        except Exception as e:
+            print(f'      [skill] hint error: {e}')
+
+    if skill_hint:
+        full_input += f'\n{skill_hint}'
     if fewshot_block:
         full_input += f'\n\n{fewshot_block}'
     if quality_hint:
@@ -1395,6 +1627,16 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
         full_input += f'\n{blueprint_hint}'
     if pedagogy_hint:
         full_input += f'\n{pedagogy_hint}'
+
+    # ── Skill 反向学习: 注入历史数据驱动的反馈提示 ──
+    if _HAS_SKILL_FEEDBACK:
+        try:
+            feedback_hint = build_feedback_prompt_hint(card_type)
+            if feedback_hint:
+                full_input += f'\n{feedback_hint}'
+                print(f'      [feedback] 注入反馈提示 ({len(feedback_hint)}字)')
+        except Exception as e:
+            print(f'      [feedback] hint error: {e}')
 
     contents = [
         {'role': 'user', 'parts': [{'text': full_input}]}
@@ -1441,6 +1683,19 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
 
         # ── 文字量守门员: 检查manifest总汉字数 ──
         manifest = _enforce_manifest_limits(manifest)
+
+        # ── Prompt 结构审计: 检查是否覆盖 Skill 规则要求 ──
+        if _HAS_SKILL_SCHEMA:
+            try:
+                prompt_clean, audit_result = audit_and_patch(
+                    prompt_clean, card_type, card, manifest
+                )
+                summary = format_audit_summary(audit_result)
+                print(f'      {summary}')
+                if audit_result.verdict == 'fail':
+                    print(f'      ⚠️ [skill audit] 覆盖率过低，已自动补丁')
+            except Exception as e:
+                print(f'      [skill audit] error: {e}')
 
         return prompt_clean, manifest
 
@@ -1548,20 +1803,17 @@ def _enforce_manifest_limits(manifest, max_total=None, max_per_block=None):
     """
     文字量守门员: 强制裁剪 TEXT_MANIFEST 中超标的中文文字。
     
-    参数自动从自适应系统获取，随着模型成功率提高可自动放宽。
-    
-    规则:
-    1. 每个文字块中文≤ max_per_block 字
-    2. 全部文字块总中文≤ max_total 字
-    3. 超标时优先保留 TITLE，其次按顺序保留，尾部截断或删除
+    v10.2: PIL 全量渲染模式下大幅放宽限制。
+    AI 不再渲染文字，PIL 可以精确渲染任意长度的中文。
+    限制仅用于保持卡片视觉简洁，不再受 AI 渲染能力约束。
     """
-    # 从自适应系统获取当前限制
-    if max_total is None or max_per_block is None:
-        params = _get_effective_params()
-        if max_total is None:
-            max_total = params.get('max_chinese_chars', 15)
-        if max_per_block is None:
-            max_per_block = params.get('max_chars_per_block', 4)
+    # v10.2: PIL 全量渲染，大幅放宽限制
+    # AI 不渲染文字 → 不需要严格限制中文字数
+    # 仅保留合理上限防止卡片过于拥挤
+    if max_total is None:
+        max_total = 80   # v10.2: PIL 可以渲染更多内容
+    if max_per_block is None:
+        max_per_block = 20  # v10.2: 每块允许更多（PIL 自动换行）
     if not manifest:
         return manifest
     
@@ -1662,54 +1914,52 @@ def _ensure_complete_chinese(text):
 def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', manifest=None):
     """Step 2: 用最强图片模型生成卡片图片。
     
-    多模型 × 多key 全组合尝试，最大化成功率。
+    v10.4 策略: AI 直接生成完整卡片（含所有文字），不再使用 PIL 叠加。
+    
     keys: API key 列表（全部），内部按 模型→全部key 的顺序尝试。
-    manifest: TEXT_MANIFEST 字典，用于逐字注入提示。
+    manifest: TEXT_MANIFEST 字典，告诉 AI 需要渲染哪些文字。
     """
+    # ── 核心策略: 告诉 AI 渲染所有文字到图片中 ──
     chinese_prefix = (
-        f"CRITICAL INSTRUCTIONS (MUST FOLLOW):\n"
+        f"CRITICAL INSTRUCTIONS — COMPLETE CARD WITH TEXT:\n"
         f"1. This is a {subject} educational knowledge card about \"{card_title}\".\n"
-        f"2. ALL visible text MUST be Simplified Chinese (简体中文). "
-        f"Use LARGE, BOLD, thick-stroke rounded/gothic sans-serif font.\n"
-        f"3. Maximum 15 Chinese characters total. Each text block ≤ 4 characters.\n"
-        f"4. Render each Chinese character CLEARLY and CORRECTLY. "
-        f"Thick bold strokes. High contrast. No thin/serif/cursive fonts.\n"
-        f"5. The main title should be \"{card_title}\" in extra-large bold font.\n"
-        f"6. DO NOT substitute similar-looking characters. "
-        f"Every single Chinese character must be EXACTLY as specified below.\n"
+        f"2. ✅ You MUST render ALL text directly in the image — text is the core content!\n"
+        f"3. Design a STRUCTURED CARD with text integrated into each zone:\n"
+        f"   - TOP BANNER (~2-12%): Dark gradient strip with WHITE TITLE TEXT centered\n"
+        f"   - CONTENT CARD (~14-78%): White rounded rectangle with TEACHING CONTENT text\n"
+        f"   - ACCENT STRIP (~80-92%): Warm gradient bar with WHITE SLOGAN TEXT centered\n"
+        f"   - BOTTOM (~93-98%): Small tip text if needed\n"
+        f"   - Small cute mascot in bottom-right corner (<10% of image)\n"
+        f"4. ⚠️ TEXT QUALITY IS CRITICAL:\n"
+        f"   - Every Chinese character must be perfectly formed (correct strokes, no garbled text)\n"
+        f"   - Every English word must be spelled correctly\n"
+        f"   - Numbers and math symbols must be accurate\n"
+        f"   - Text must look professionally typeset — clear hierarchy, aligned, readable\n"
+        f"5. Style: Professional Xiaohongshu card template with text as part of design.\n"
+        f"   Main color: choose from coral pink / mint blue / peach orange / lavender.\n"
+        f"6. Canvas ratio 3:4 (vertical). ≥25% breathing room.\n"
     )
 
-    # 逐字注入 manifest —— 让模型精确知道每个字
+    # manifest: 告诉 AI 需要渲染的文字内容
     if manifest:
-        # 再次强制确保manifest字数在限制内
         manifest = _enforce_manifest_limits(manifest)
-        total_cn = sum(_count_chinese_chars(v) for v in manifest.values())
-        chinese_prefix += f"\n=== EXACT TEXT REFERENCE ({total_cn} Chinese chars total — this is the MAXIMUM) ===\n"
+        chinese_prefix += f"\n=== TEXT TO RENDER IN THE IMAGE (MUST be pixel-perfect) ===\n"
         for key, val in manifest.items():
-            # 逐字拆分，每个字标 Unicode
-            char_detail = ' '.join(f'"{c}"(U+{ord(c):04X})' for c in val if '\u4e00' <= c <= '\u9fff')
-            chinese_prefix += f"{key}: \"{val}\"  →  Characters: {char_detail}\n"
-        chinese_prefix += "=== END TEXT REFERENCE ===\n"
-        chinese_prefix += f"IMPORTANT: Render ONLY these {total_cn} Chinese characters. Do NOT add ANY extra Chinese text beyond this list. Do NOT change, swap, or approximate any character.\n"
+            zone = 'Banner' if key == 'TITLE' else 'Accent strip' if key == 'SLOGAN' else 'Content card' if key.startswith('LINE') else 'Bottom'
+            chinese_prefix += f"  {key}: \"{val}\" → render in {zone}\n"
+        chinese_prefix += f"⚠️ Render EVERY text item above exactly as written. No omissions, no changes.\n"
+        chinese_prefix += "=== END TEXT ===\n"
 
     if audit_hint:
         chinese_prefix += f"\n⚠️ CORRECTION FROM PREVIOUS ATTEMPT:\n{audit_hint}\n"
-
-    # ── 自我优化: 注入易错字符强化提示 ──
-    if _HAS_OPTIMIZER and manifest:
-        try:
-            error_boost = build_error_boost_hint(subject, manifest)
-            if error_boost:
-                chinese_prefix += error_boost
-        except Exception as e:
-            print(f'      [optimizer] error boost hint error: {e}')
 
     full_prompt = chinese_prefix + "\n" + prompt
     contents = [
         {'role': 'user', 'parts': [{'text': full_prompt}]}
     ]
     gen_config = {
-        'responseModalities': ['TEXT', 'IMAGE']
+        'responseModalities': ['TEXT', 'IMAGE'],
+        'temperature': 0.4,   # 降低随机性，提升中文渲染稳定性
     }
 
     # 按模型优先级尝试（遇到成功立即返回，失败换下一个模型）
@@ -1808,6 +2058,91 @@ OCR_AND_QUALITY_PROMPT = """你是一个严格的知识卡片审计员，同时�
 OCR_AUDIT_PROMPT = OCR_AND_QUALITY_PROMPT
 
 
+def _safe_parse_json(raw: str) -> dict | None:
+    """鲁棒的 JSON 解析：处理 trailing commas、注释、非法控制字符等 LLM 常见格式问题"""
+    # 第一次尝试：直接解析
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        pass
+
+    cleaned = raw
+    # 移除可能的 markdown 代码块标记
+    cleaned = re.sub(r'^```(?:json)?\s*', '', cleaned, flags=re.MULTILINE)
+    cleaned = re.sub(r'```\s*$', '', cleaned, flags=re.MULTILINE)
+    # 移除单行注释 // ...（但不破坏 URL 中的 //）
+    cleaned = re.sub(r'(?<![:\"\'])//[^\n]*', '', cleaned)
+    # 移除 trailing commas: ,] 或 ,}
+    cleaned = re.sub(r',\s*([\]}])', r'\1', cleaned)
+    # 替换非标准引号
+    cleaned = cleaned.replace('\u201c', '"').replace('\u201d', '"')
+    cleaned = cleaned.replace('\u2018', "'").replace('\u2019', "'")
+    # 移除非法控制字符 (U+0000-U+001F 除了 \t \n \r)
+    cleaned = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f]', '', cleaned)
+
+    # 第二次尝试
+    try:
+        return json.loads(cleaned)
+    except json.JSONDecodeError:
+        pass
+
+    # 第三次尝试：找到最大的平衡 {} 块
+    depth = 0
+    start_idx = None
+    best_start, best_end = 0, 0
+    for i, ch in enumerate(cleaned):
+        if ch == '{':
+            if depth == 0:
+                start_idx = i
+            depth += 1
+        elif ch == '}':
+            depth -= 1
+            if depth == 0 and start_idx is not None:
+                if (i - start_idx) > (best_end - best_start):
+                    best_start, best_end = start_idx, i + 1
+    if best_end > best_start:
+        try:
+            return json.loads(cleaned[best_start:best_end])
+        except json.JSONDecodeError:
+            pass
+
+    # 第四次尝试：逐行修复（移除无法解析的行）
+    try:
+        # 尝试用 ast.literal_eval 作为最后手段 — 不行，不支持 true/false/null
+        # 替换 JSON literals 为 Python literals
+        py_compat = cleaned.replace(':true', ':True').replace(':false', ':False').replace(':null', ':None')
+        py_compat = py_compat.replace(', true', ', True').replace(', false', ', False').replace(', null', ', None')
+        import ast
+        return ast.literal_eval(py_compat[best_start:best_end] if best_end > best_start else py_compat)
+    except Exception:
+        pass
+
+    # 第五次尝试：截断 JSON 修复 — 补全缺失的括号使之可解析
+    # 常见于 Gemini 思维链消耗 output budget 导致 JSON 被截
+    try:
+        # 找到最后一个完整的 key:value 对
+        # 去掉最后的不完整 key 或 value
+        truncated = cleaned
+        # 去掉最后的不完整值（如 "C_eye_flow" 没有 : 和 value）
+        truncated = re.sub(r',?\s*"[^"]*"\s*$', '', truncated)      # 去掉末尾不完整 key
+        truncated = re.sub(r',?\s*"[^"]*":\s*$', '', truncated)      # 去掉末尾 key: 没value
+        truncated = re.sub(r',?\s*"[^"]*":\s*\[?\s*$', '', truncated) # 去掉末尾 key: [
+        truncated = re.sub(r',\s*$', '', truncated)                    # 去掉末尾逗号
+        # 计算需要补全的括号
+        open_braces = truncated.count('{') - truncated.count('}')
+        open_brackets = truncated.count('[') - truncated.count(']')
+        truncated += ']' * max(0, open_brackets) + '}' * max(0, open_braces)
+        result = json.loads(truncated)
+        if isinstance(result, dict):
+            print(f'      [JSON truncation repaired] recovered {len(result)} keys')
+            return result
+    except Exception:
+        pass
+
+    print(f'      [JSON repair failed] raw length={len(raw)}, preview: {raw[:200]}')
+    return None
+
+
 def ocr_audit(image_data, expected_manifest, api_key, all_keys=None, eng_key_phrase=''):
     """Step 3: 用 Vision 模型审计图片文字 + 同步质量评分（合并调用，省一次API）
     
@@ -1851,7 +2186,7 @@ def ocr_audit(image_data, expected_manifest, api_key, all_keys=None, eng_key_phr
         ]}
     ]
     gen_config = {
-        'maxOutputTokens': 4096,
+        'maxOutputTokens': 16384,  # v10.5b: 4096→16384, 防止思维链截断JSON
         'temperature': 0.1,
     }
 
@@ -1870,7 +2205,10 @@ def ocr_audit(image_data, expected_manifest, api_key, all_keys=None, eng_key_phr
                     text = part['text'].strip()
                     json_match = re.search(r'\{[\s\S]*\}', text)
                     if json_match:
-                        result = json.loads(json_match.group())
+                        raw_json = json_match.group()
+                        result = _safe_parse_json(raw_json)
+                        if result is None:
+                            continue
                         # 确保 quality 字段存在
                         if 'quality' not in result:
                             result['quality'] = default_quality
@@ -1888,7 +2226,7 @@ def ocr_audit(image_data, expected_manifest, api_key, all_keys=None, eng_key_phr
 
 
 def _build_audit_hint(audit_result, expected_manifest):
-    """根据审计结果构建纠错提示"""
+    """根据审计结果构建纠错提示（仅文字错误，旧版兼容）"""
     if not audit_result.get('errors'):
         return ''
 
@@ -1897,20 +2235,452 @@ def _build_audit_hint(audit_result, expected_manifest):
         exp = err.get('expected', '?')
         act = err.get('actual', '?')
         etype = err.get('type', 'unknown')
-        # 逐字拆分期望文字
-        char_detail = ' '.join(f'"{c}"(U+{ord(c):04X})' for c in exp if '\u4e00' <= c <= '\u9fff')
         if etype == 'garbled':
-            hints.append(f'CRITICAL: The text "{exp}" appeared as garbled "{act}". Render EXACTLY these characters: {char_detail}. Use thick bold strokes.')
+            hints.append(f'CRITICAL: "{exp}" appeared as garbled "{act}". Render EXACTLY "{exp}" in thick bold strokes.')
         elif etype == 'wrong_char':
-            hints.append(f'WRONG CHARACTER: "{act}" must be replaced with "{exp}". Exact characters: {char_detail}.')
+            hints.append(f'WRONG CHARACTER: "{act}" must be "{exp}". Replace exactly.')
         elif etype == 'missing':
-            hints.append(f'MISSING TEXT: "{exp}" is missing. Add it with exact characters: {char_detail}.')
+            hints.append(f'MISSING TEXT: "{exp}" must appear. Add it clearly.')
         elif etype == 'distorted':
-            hints.append(f'DISTORTED: "{exp}" is unreadable. Re-render clearly: {char_detail}.')
+            hints.append(f'DISTORTED: "{exp}" is unreadable. Re-render with thick bold strokes.')
         else:
-            hints.append(f'Fix: "{act}" → "{exp}" (characters: {char_detail})')
+            hints.append(f'Fix: "{act}" → "{exp}"')
 
     return '\n'.join(hints)
+
+
+# ═══════════════════════════════════════════
+# v10.5: 视觉反馈闭环 — 5层审核矩阵 + image-to-image 迭代
+# ═══════════════════════════════════════════
+
+# 视觉反馈闭环参数
+VISUAL_REFINE_THRESHOLD = 78   # 低于此分触发视觉精修
+MAX_REFINE_ROUNDS = 2          # 最多精修轮数
+
+VISUAL_FEEDBACK_AUDIT_PROMPT = """你是小红书知识卡片的艺术总监 + 教育产品经理。
+请用「5 层审核矩阵」全面审核这张知识卡片，每一层都不能敷衍。
+
+期望出现在图片中的文字清单：
+{expected_texts}
+
+学科: {subject}　　目标年级: {grade}
+
+═══════════════════════════════════════════
+Layer A — 致命缺陷排查（一票否决）
+═══════════════════════════════════════════
+任何一条命中 → 直接判定 FAIL，total 不超过 40：
+  A1. 文字腐坏: 有中文出现乱码/缺笔画/偏旁错位/不成字的残影吗？
+  A2. 内容缺失: 期望文字清单中有哪些完全没出现在图片中？
+  A3. 布局坍塌: 文字之间重叠、溢出画布边界、完全不可读？
+  A4. 内容偏离: 图片内容与期望教学主题严重不符（如数学卡出现英语内容）？
+  A5. 尺寸灾难: 核心教学文字过小（<图片宽度的4%），手机端完全看不清？
+
+═══════════════════════════════════════════
+Layer B — 文字保真度（满分 30）
+═══════════════════════════════════════════
+这是知识卡片的命脉，权重最高。
+
+B1. 笔画保真 (0-12)
+  - 逐字检查中文：偏旁部首是否完整？笔画是否正确？
+  - 特别关注高频出错字：语/话/词/算/题/解/等
+  - 英文字母拼写完全正确？
+  - 数学符号（±×÷=≠≤≥√∑∫）渲染正确？
+
+B2. 文字完备性 (0-10)
+  - 期望文字清单里的每一项是否都在图片中出现？
+  - 哪些缺失？哪些被截断？（"固定搭配要" → 明显截断）
+  - 是否有不该出现的幽灵文字/乱码英文单词？
+
+B3. 排版系统 (0-8)
+  - 字号层级清晰？（标题 ≫ 正文 > 口诀 > 注释）
+  - 对齐方式统一？（标题居中、正文左对齐、一致性）
+  - 行距适中？字间距正常？没有不自然的拉伸/挤压？
+
+═══════════════════════════════════════════
+Layer C — 视觉叙事（满分 25）
+═══════════════════════════════════════════
+好的设计是在「讲故事」，不只是排信息。
+
+C1. 色彩叙事 (0-9)
+  - 配色是否匹配学科氛围？（数学→蓝/绿理性冷静，语文→暖橙/米色人文，英语→活泼多彩）
+  - 是否有1个主色+1个辅色+1个点缀色的配色体系？
+  - 文字与背景对比度是否 ≥ 4.5:1？（WCAG AA 标准）
+  - 避免：纯黑背景、荧光色、红配绿等不和谐搭配
+
+C2. 空间节奏 (0-9)
+  - 四周安全边距 ≥ 5% 画布宽度？
+  - 各区块（Banner/内容卡/口诀条）之间间距是否一致？
+  - 整体留白比例 ≥ 20%？还是信息塞得满满当当？
+  - 是否遵循某种网格系统？元素是否对齐到隐形网格线？
+
+C3. 视线引导 (0-7)
+  - 用户的眼睛会自然按什么路径阅读？
+  - 理想路径: 标题 → 核心知识点 → 例题/示范 → 口诀/总结
+  - 是否有元素打断了自然阅读流？（如巨大装饰图插在文字中间）
+  - 最重要的内容是否在视觉焦点位置？（上方1/3黄金区域）
+
+═══════════════════════════════════════════
+Layer D — 教学力（满分 25）
+═══════════════════════════════════════════
+这不是普通美图，是教学工具。
+
+D1. 认知负荷管理 (0-9)
+  - 信息密度是否合理？一张卡讲一个知识点还是塞了太多？
+  - 是否有清晰的信息分块（chunking）？相关信息归为一组？
+  - 30 秒内能否抓住核心要点？还是需要反复看？
+  - 有无冗余/重复信息占据宝贵空间？
+
+D2. 记忆锚点 (0-9)
+  - 有没有帮助记忆的视觉技巧？（颜色编码、图标标注、对比框）
+  - 口诀/速记法是否用视觉方式强化？（加粗、专色、专区）
+  - 错例是否用红色/删除线等视觉标记与正确答案区分？
+  - 关键数字/公式是否有视觉锚定？（大号字、框线、背景色块）
+
+D3. 重点凸显 (0-7)
+  - 核心考点是否是最醒目的元素？
+  - 易错点有没有⚠️或❌的视觉标注？
+  - 答案/结论是否有区别于普通文字的展示？（框、底色、✅）
+  - 学科专属：
+    · 数学：公式/运算步骤是否清晰分步？
+    · 英语：例句中重点词汇是否标注（加粗/下划线/色块）？
+    · 语文：易错字/多音字是否有标注注音？
+
+═══════════════════════════════════════════
+Layer E — 传播力（满分 20）
+═══════════════════════════════════════════
+小红书上的知识卡片，传播力=价值。
+
+E1. 拇指急停力 (0-7)
+  - 在信息流中快速滑动时，这张图能让人停下来吗？
+  - 有没有视觉「钩子」？（色块对比、有趣的标题、醒目的图形）
+  - 第一眼印象：专业感、可信度、美感三合一？
+
+E2. 截图冲动 (0-7)
+  - 看到这张卡片会想长按保存吗？
+  - 是否有「干货满满，值得收藏」的感觉？
+  - 内容是否足够完整，保存后不看原文也能复习？
+  - 是否有品牌/系列标志让人想关注更多？
+
+E3. 工艺打磨 (0-6)
+  - 像专业设计师用 Figma/Sketch 做的？还是 Word 截图？
+  - 圆角统一？阴影自然？渐变平滑？
+  - 装饰元素（卡通角色/图标/分割线）是否精致而不喧宾夺主？
+  - 整体是否有「系列感」——像是一套知识卡的其中一张？
+
+═══════════════════════════════════════════
+输出格式（严格 JSON，不要任何其他文字）
+═══════════════════════════════════════════
+
+{{
+  "fatal_flaws": [
+    {{"code": "A1", "description": "标题'乘法口诀'中'诀'字缺少右半部分，变成乱码"}}
+  ],
+
+  "scores": {{
+    "B_stroke_fidelity": 9,
+    "B_text_completeness": 8,
+    "B_typo_system": 7,
+    "C_color_narrative": 8,
+    "C_spatial_rhythm": 7,
+    "C_eye_flow": 6,
+    "D_cognitive_load": 8,
+    "D_memory_anchor": 7,
+    "D_key_emphasis": 7,
+    "E_thumb_stop": 7,
+    "E_screenshot_urge": 8,
+    "E_craft_polish": 6
+  }},
+
+  "total": 78,
+
+  "text_errors": [
+    {{"expected": "期望文字", "actual": "图片中看到的", "type": "garbled|wrong_char|missing|truncated|ghost_text", "severity": "fatal|high|medium|low", "location": "Banner/Content/Accent/Bottom"}}
+  ],
+
+  "eye_flow_path": "标题→步骤1→步骤2→口诀（流畅）",
+
+  "improvements": [
+    "【B1·笔画】标题区'诀'字右半偏旁渲染错误→重新渲染,确保'言'+'夬'完整",
+    "【C2·空间】内容卡左边距仅约2%画布宽度→增加到至少5%,与右边距对称",
+    "【D2·记忆】口诀'归去来兮辞'没有视觉强化→单独置于暖色底条上,加粗36pt",
+    "【E3·打磨】Banner渐变生硬(纯黑→纯白)→改为深蓝#1a237e→靛青#283593平滑渐变"
+  ],
+
+  "keep": [
+    "配色体系（薄荷绿+珊瑚粉）清新舒适，符合学科氛围",
+    "内容分块清晰，三大步骤各自独立成框"
+  ],
+
+  "subject_specific": {{
+    "check": "数学/英语/语文", 
+    "issues": ["公式 a²+b²=c² 中指数渲染为普通字符'2'而非上标"]
+  }},
+
+  "one_line_verdict": "文字保真度好，但空间太拥挤且口诀区缺少视觉锚定"
+}}
+
+⚠️ improvements 规范：
+  - 每条必须标注对应维度代码（如【B1·笔画】【C2·空间】）
+  - 必须说清楚：[哪里] [什么问题] → [怎么改]
+  - 优先排序：fatal_flaws > B层文字 > D层教学 > C层视觉 > E层传播
+  - 最多 6 条（抓大放小）
+  - 禁止空泛建议（❌"提高美感"  ✅"Banner背景从纯黑#000改为深蓝渐变#1a237e→#0d47a1"）
+
+⚠️ keep 规范：
+  - 至少 2 条——这些方面在改进时不要动！
+  - 说具体（❌"颜色不错"  ✅"薄荷绿#a8e6cf主色调清新舒适"）
+
+⚠️ fatal_flaws 规范：
+  - 如果没有致命缺陷，返回空数组 []
+  - 有致命缺陷时 total 不超过 40
+
+只输出 JSON。"""
+
+
+def visual_feedback_audit(image_data, expected_manifest, api_key, all_keys=None,
+                          subject='', grade=''):
+    """v10.5 视觉反馈闭环: 5层审核矩阵全维度审核图片。
+    
+    Layer A: 致命缺陷排查 (gate check)
+    Layer B: 文字保真度 (30分)
+    Layer C: 视觉叙事   (25分)
+    Layer D: 教学力     (25分)
+    Layer E: 传播力     (20分)
+    
+    返回结构化审核结果，可直接喂给 refine_card_image() 做迭代改进。
+    """
+    empty_result = {
+        'total': 0, 'scores': {}, 'fatal_flaws': [],
+        'improvements': [], 'keep': [], 'text_errors': [],
+        'eye_flow_path': '', 'subject_specific': {},
+        'one_line_verdict': ''
+    }
+
+    if not expected_manifest:
+        empty_result['total'] = 75
+        empty_result['one_line_verdict'] = '无manifest，跳过审核'
+        return empty_result
+    
+    expected_lines = '\n'.join(f'- {k}: "{v}"' for k, v in expected_manifest.items())
+    prompt_text = VISUAL_FEEDBACK_AUDIT_PROMPT.format(
+        expected_texts=expected_lines,
+        subject=subject or '通用',
+        grade=grade or '小学',
+    )
+
+    b64_img = base64.b64encode(image_data).decode('utf-8')
+    contents = [
+        {'role': 'user', 'parts': [
+            {'text': prompt_text},
+            {'inlineData': {'mimeType': 'image/jpeg', 'data': b64_img}}
+        ]}
+    ]
+    # v10.5b: maxOutputTokens 4096→16384 — Gemini 2.5 Flash 的思维链消耗输出 budget,
+    # 4096 导致 JSON 被截断(raw_length~347)，16384 给足空间
+    gen_config = {'maxOutputTokens': 16384, 'temperature': 0.15}
+
+    # 最多尝试2次（首次解析失败时重试1次）
+    for attempt in range(2):
+        resp = gemini_call(TEXT_MODEL, contents, api_key, gen_config=gen_config, all_keys=all_keys)
+        if not resp:
+            if attempt == 0:
+                continue
+            empty_result['one_line_verdict'] = '审核API调用失败'
+            return empty_result
+        
+        try:
+            candidates = resp.get('candidates', [])
+            if candidates:
+                parts = candidates[0].get('content', {}).get('parts', [])
+                for part in parts:
+                    if 'text' in part and not part.get('thought', False):
+                        text = part['text'].strip()
+                        result = _safe_parse_json(text)
+                        if result and 'scores' in result:
+                            # 确保 total 计算正确
+                            if 'total' not in result or result['total'] == 0:
+                                result['total'] = sum(result['scores'].values())
+                            # 致命缺陷 → total 限制到 40
+                            if result.get('fatal_flaws'):
+                                result['total'] = min(result['total'], 40)
+                            # 确保所有期望字段都存在
+                            for key in ('fatal_flaws', 'improvements', 'keep',
+                                        'text_errors', 'eye_flow_path',
+                                        'subject_specific', 'one_line_verdict'):
+                                if key not in result:
+                                    result[key] = empty_result[key]
+                            return result
+        except Exception as e:
+            print(f'      [Visual audit parse error] {e}')
+        
+        if attempt == 0:
+            print(f'      [Visual audit] JSON解析失败, 重试...')
+    
+    empty_result['total'] = 50
+    empty_result['improvements'] = ['审核解析失败，建议重新生成']
+    empty_result['one_line_verdict'] = '解析失败'
+    return empty_result
+
+
+def _build_refinement_prompt(visual_audit_result, expected_manifest, subject=''):
+    """将5层审核矩阵的结果转化为 image-to-image 精修指令。
+    
+    核心原则:
+    - 保留做得好的 (keep) → DON'T TOUCH
+    - 修复致命缺陷 (fatal_flaws) → 最高优先级
+    - 文字错误 (text_errors) → 第二优先级
+    - 维度改进 (improvements) → 第三优先级
+    - 最弱维度特别强调
+    - 重新附上完整文字manifest
+    """
+    fatal_flaws = visual_audit_result.get('fatal_flaws', [])
+    improvements = visual_audit_result.get('improvements', [])
+    keep_list = visual_audit_result.get('keep', [])
+    text_errors = visual_audit_result.get('text_errors', [])
+    scores = visual_audit_result.get('scores', {})
+    total = visual_audit_result.get('total', 0)
+    eye_flow = visual_audit_result.get('eye_flow_path', '')
+    subject_issues = visual_audit_result.get('subject_specific', {})
+
+    parts = []
+    parts.append(
+        f"REFINE this {subject or 'educational'} knowledge card (score: {total}/100).\n"
+        f"You must output an IMPROVED version of this exact image.\n"
+    )
+
+    # 0. 保留不动的优点
+    if keep_list:
+        parts.append("═══ DO NOT CHANGE (these are already good) ═══")
+        for k in keep_list[:4]:
+            parts.append(f"  ✅ {k}")
+        parts.append("")
+
+    # 1. 致命缺陷（最高优先）
+    if fatal_flaws:
+        parts.append("═══ 🚨 FATAL FLAWS — FIX THESE FIRST ═══")
+        for ff in fatal_flaws[:3]:
+            desc = ff.get('description', str(ff)) if isinstance(ff, dict) else str(ff)
+            parts.append(f"  🚨 {desc}")
+        parts.append("")
+
+    # 2. 文字修正
+    if text_errors:
+        parts.append("═══ 🔴 TEXT CORRECTIONS ═══")
+        for te in text_errors[:6]:
+            exp = te.get('expected', '?')
+            act = te.get('actual', '?')
+            ttype = te.get('type', '')
+            loc = te.get('location', '')
+            loc_str = f" (in {loc})" if loc else ''
+            if ttype == 'missing':
+                parts.append(f'  + ADD: "{exp}"{loc_str} — currently not in image')
+            elif ttype == 'garbled':
+                parts.append(f'  ✏ FIX GARBLED: "{act}" → "{exp}"{loc_str} (correct every stroke)')
+            elif ttype == 'truncated':
+                parts.append(f'  ✏ TRUNCATED: "{act}" → complete it to "{exp}"{loc_str}')
+            elif ttype == 'ghost_text':
+                parts.append(f'  ✏ REMOVE unwanted text: "{act}"{loc_str}')
+            else:
+                parts.append(f'  ✏ "{act}" → "{exp}"{loc_str}')
+        parts.append("")
+
+    # 3. 维度改进（已按优先级排序）
+    if improvements:
+        parts.append("═══ 🔧 DIMENSIONAL IMPROVEMENTS ═══")
+        for imp in improvements[:6]:
+            parts.append(f"  → {imp}")
+        parts.append("")
+
+    # 4. 学科专属修复
+    if subject_issues and subject_issues.get('issues'):
+        parts.append(f"═══ 📐 SUBJECT-SPECIFIC ({subject_issues.get('check', subject)}) ═══")
+        for si in subject_issues['issues'][:3]:
+            parts.append(f"  → {si}")
+        parts.append("")
+
+    # 5. 最弱维度特别叮嘱
+    if scores:
+        worst = sorted(scores.items(), key=lambda x: x[1])[:3]
+        dim_names = {
+            'B_stroke_fidelity': '笔画保真', 'B_text_completeness': '文字完备',
+            'B_typo_system': '排版系统', 'C_color_narrative': '色彩叙事',
+            'C_spatial_rhythm': '空间节奏', 'C_eye_flow': '视线引导',
+            'D_cognitive_load': '认知负荷', 'D_memory_anchor': '记忆锚点',
+            'D_key_emphasis': '重点凸显', 'E_thumb_stop': '拇指急停',
+            'E_screenshot_urge': '截图冲动', 'E_craft_polish': '工艺打磨',
+        }
+        parts.append("═══ ⚠️ WEAKEST DIMENSIONS ═══")
+        for dim, score in worst:
+            name = dim_names.get(dim, dim)
+            # 给出具体建议方向
+            parts.append(f"  ⚠ {name} = {score}/{'12' if 'B1' in dim or dim.endswith('fidelity') else '10' if '9' in str(score) else '9'} — significant room for improvement")
+        parts.append("")
+
+    # 6. 视线流建议
+    if eye_flow:
+        parts.append(f"Current eye flow: {eye_flow}")
+        parts.append("Ideal: Title → Key concept → Example/Steps → Mnemonic/Summary → CTA\n")
+
+    # 7. 完整 manifest 重新附上
+    if expected_manifest:
+        parts.append("═══ 📝 REQUIRED TEXT (render exactly) ═══")
+        for key, val in expected_manifest.items():
+            zone = ('Banner' if key == 'TITLE' else
+                    'Accent strip' if key == 'SLOGAN' else
+                    'Content card' if key.startswith('LINE') else 'Bottom')
+            parts.append(f'  {key}: "{val}" → {zone}')
+        parts.append("⚠️ EVERY character must be pixel-perfect. No omissions.\n")
+
+    parts.append(
+        "OUTPUT: An improved version of this card image. "
+        "3:4 vertical ratio. Same overall color scheme. "
+        "Chinese characters with perfect strokes. "
+        "Fix all issues above while keeping the good parts."
+    )
+
+    return '\n'.join(parts)
+
+
+def refine_card_image(prev_image_data, refinement_prompt, keys):
+    """v10.5: 基于上一轮图片 + 精修指令生成改进版图片 (image-to-image)。
+    
+    核心: 把上一张图片 + 审核转化的精修指令一起发给图片模型，
+    让 AI 在现有基础上改进，而不是从零生成。
+    """
+    b64_prev = base64.b64encode(prev_image_data).decode('utf-8')
+    
+    contents = [
+        {'role': 'user', 'parts': [
+            {'text': refinement_prompt},
+            {'inlineData': {'mimeType': 'image/jpeg', 'data': b64_prev}}
+        ]}
+    ]
+    gen_config = {
+        'responseModalities': ['TEXT', 'IMAGE'],
+        'temperature': 0.3,  # 稳定改进,不要大幅变化
+    }
+
+    for model in IMAGE_MODELS:
+        resp = gemini_call(model, contents, keys[0], gen_config=gen_config, retries=1, all_keys=keys)
+        if not resp:
+            continue
+        try:
+            candidates = resp.get('candidates', [])
+            if candidates:
+                parts = candidates[0].get('content', {}).get('parts', [])
+                for part in parts:
+                    if 'inlineData' in part:
+                        b64data = part['inlineData'].get('data', '')
+                        mime = part['inlineData'].get('mimeType', 'image/png')
+                        if b64data:
+                            ext = 'png' if 'png' in mime else 'jpg'
+                            print(f' ✅ (model={model}, refined)', end='')
+                            return base64.b64decode(b64data), ext, model
+        except Exception as e:
+            print(f'      [Refine parse error with {model}] {e}')
+            continue
+
+    return None, None, None
 
 
 # ═══════════════════════════════════════════
@@ -2181,10 +2951,17 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
             print(f' ⚠️ 预审出错: {e}')
 
     # ── Step 1: 生成提示词 ──
-    print(f'  ├─ Step 1: 生成提示词...', end='', flush=True)
+    # v2 两阶段 (内容决策 + 视觉翻译)  vs  v1 单阶段
+    if _HAS_PROMPT_V2:
+        print(f'  ├─ Step 1: 生成提示词 [v2 两阶段]...', end='', flush=True)
+    else:
+        print(f'  ├─ Step 1: 生成提示词...', end='', flush=True)
     t0 = time.time()
     key = next_key(keys)
-    prompt, manifest = generate_image_prompt(card, subject, grade, semester, key, all_keys=keys)
+    if _HAS_PROMPT_V2:
+        prompt, manifest = generate_image_prompt_v2(card, subject, grade, semester, key, all_keys=keys)
+    else:
+        prompt, manifest = generate_image_prompt(card, subject, grade, semester, key, all_keys=keys)
     stats['prompt_gen_time'] = time.time() - t0
 
     if not prompt:
@@ -2233,6 +3010,9 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
         size_kb = len(img_data) / 1024
         print(f' ({size_kb:.0f}KB)')
 
+        # v10.4: AI 直接渲染文字，不再使用 PIL 叠加
+        # (PIL 渲染已停用)
+
         if skip_audit:
             best_image = img_data
             best_ext = ext
@@ -2279,24 +3059,127 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
     if not best_image:
         return False, '', stats
 
-    # ── Step 5: PIL 修补兜底 ──
-    if best_score < _pass_score and manifest and not skip_audit:
-        print(f'  ├─ Step 5: PIL文字修补...', end='', flush=True)
-        # 重新审计最佳图片获取错误详情
-        key = next_key(keys)
-        final_audit = ocr_audit(best_image, manifest, key, all_keys=keys)
-        repaired = _try_pil_text_repair(best_image, final_audit, manifest)
-        if repaired != best_image:
-            best_image = repaired
-            best_ext = 'jpg'
-            stats['final_action'] = 'repaired'
-            print(f' ✅')
-        else:
-            stats['final_action'] = 'best_effort'
-            print(f' (无需修补)')
-
+    # v10.4: PIL 修补已停用 — AI 直接渲染文字
+    # 如果审计未通过，使用最佳得分的图片
     if not stats['final_action']:
-        stats['final_action'] = 'pass'
+        stats['final_action'] = 'best_effort' if best_score < _pass_score else 'pass'
+
+    # ── v10.5: 视觉反馈精修闭环（始终执行） ──
+    # OCR循环只管文字对不对；这一步用5层审核矩阵全面评估，
+    # 然后 image-to-image 精修，覆盖排版/配色/教学力/传播力等维度。
+    # 每张图都过审核+精修，确保视觉质量打磨到位。
+    visual_audit_result = None
+    if not skip_audit and manifest:
+        merged_q_total = 0
+        if last_audit:
+            merged_q_total = last_audit.get('quality', {}).get('total', 0)
+        combined_score = (best_score + merged_q_total) / 2 if merged_q_total > 0 else best_score
+
+        # 始终执行5层视觉审核
+        print(f'  ├─ Step 4b: 5层视觉审核 (综合分{combined_score:.0f})...',
+              end='', flush=True)
+        key = next_key(keys)
+        visual_audit_result = visual_feedback_audit(
+            best_image, manifest, key, all_keys=keys,
+            subject=subject, grade=grade
+        )
+        va_total = visual_audit_result.get('total', 0)
+        va_fatal = visual_audit_result.get('fatal_flaws', [])
+        va_verdict = visual_audit_result.get('one_line_verdict', '')
+        va_eye = visual_audit_result.get('eye_flow_path', '')
+        print(f' {va_total}/100 {"🚨致命!" if va_fatal else ""} ({va_verdict})')
+        if va_eye:
+            print(f'  │   视线流: {va_eye}')
+
+        # 按最弱维度输出 top-3 scores
+        va_scores = visual_audit_result.get('scores', {})
+        if va_scores:
+            worst3 = sorted(va_scores.items(), key=lambda x: x[1])[:3]
+            worst_str = ', '.join(f'{k}={v}' for k, v in worst3)
+            print(f'  │   最弱维度: {worst_str}')
+
+        stats['visual_audit_score'] = va_total
+        stats['visual_audit_fatal'] = len(va_fatal)
+
+        # 始终至少精修1轮；va_total太低(<30)说明图可能烂到无法精修
+        improvements = visual_audit_result.get('improvements', [])
+        text_errors = visual_audit_result.get('text_errors', [])
+        should_refine = (improvements or text_errors) and va_total >= 30
+        if should_refine:
+            for refine_round in range(1, MAX_REFINE_ROUNDS + 1):
+                print(f'  ├─ Step 4c: image-to-image 精修 (round {refine_round}/{MAX_REFINE_ROUNDS})...',
+                      end='', flush=True)
+                refinement_prompt = _build_refinement_prompt(
+                    visual_audit_result, manifest, subject=subject
+                )
+                t_refine = time.time()
+                refined_data, refined_ext, refined_model = refine_card_image(
+                    best_image, refinement_prompt, keys
+                )
+                stats['image_gen_time'] += time.time() - t_refine
+
+                if not refined_data:
+                    print(' ❌ 精修失败，保留原图')
+                    break
+
+                refined_kb = len(refined_data) / 1024
+                print(f' ({refined_kb:.0f}KB)')
+
+                # 对精修后的图片做 OCR 快审 — 确保文字没变差
+                print(f'  ├─ Step 4d: 精修后OCR快审...', end='', flush=True)
+                key = next_key(keys)
+                refined_audit = ocr_audit(refined_data, manifest, key, all_keys=keys,
+                                          eng_key_phrase=card.get('_eng_key_phrase', ''))
+                refined_ocr = refined_audit.get('overall_score', 0)
+                refined_q = refined_audit.get('quality', {}).get('total', 0)
+                print(f' OCR={refined_ocr} 质量={refined_q}')
+
+                # 精修后如果文字没变差且质量有提升→采纳
+                ocr_ok = refined_ocr >= best_score - 5  # 允许OCR微降5分
+                quality_better = refined_q > merged_q_total
+                if ocr_ok and (quality_better or refined_ocr > best_score):
+                    old_combined = combined_score
+                    best_image = refined_data
+                    best_ext = refined_ext
+                    best_score = max(best_score, refined_ocr)
+                    last_audit = refined_audit
+                    merged_q_total = refined_q
+                    combined_score = (best_score + merged_q_total) / 2
+                    print(f'  ├─ ✅ 精修采纳! 综合分 {old_combined:.0f}→{combined_score:.0f}')
+                    stats['refined'] = True
+                    stats['refine_rounds'] = refine_round
+                    stats['audit_score'] = best_score
+                    stats['final_action'] = 'refined'
+
+                    # 精修后综合分达到高标准(90+)，停止精修
+                    if combined_score >= 90:
+                        print(f'  ├─ ✅ 综合分优秀 ({combined_score:.0f}>=90)，停止精修')
+                        break
+
+                    # 多轮精修：对精修结果再做视觉审核 → 供下轮精修用
+                    if refine_round < MAX_REFINE_ROUNDS:
+                        print(f'  ├─ Step 4b+: 精修后5层审核...', end='', flush=True)
+                        key = next_key(keys)
+                        visual_audit_result = visual_feedback_audit(
+                            best_image, manifest, key, all_keys=keys,
+                            subject=subject, grade=grade
+                        )
+                        va_total = visual_audit_result.get('total', 0)
+                        va_verdict = visual_audit_result.get('one_line_verdict', '')
+                        print(f' {va_total}/100 ({va_verdict})')
+                        stats['visual_audit_score'] = va_total
+                        improvements = visual_audit_result.get('improvements', [])
+                        if not improvements or va_total >= 90:
+                            print(f'  ├─ ✅ 视觉审核已满意(va={va_total})，停止精修')
+                            break
+                else:
+                    reason = []
+                    if not ocr_ok:
+                        reason.append(f'OCR降了({refined_ocr}<{best_score - 5})')
+                    if not quality_better and refined_ocr <= best_score:
+                        reason.append(f'质量未提升({refined_q}<={merged_q_total})')
+                    print(f'  ├─ ❌ 精修未采纳: {", ".join(reason)}，保留原图')
+                    break
 
     # ── 质量评分（从合并审计结果中提取，省掉单独API调用）──
     q = {}
@@ -2319,6 +3202,37 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
     stats['quality_score'] = q_total
     stats['quality_detail'] = q
 
+    # ── Step 6: 英语卡片专项审核 ──
+    eng_audit_result = None
+    if _HAS_ENG_AUDIT and is_english_card(card, subject) and not skip_audit:
+        print(f'  ├─ Step 6: 英语卡片8维审核...', end='', flush=True)
+        try:
+            _eng_kp = card.get('_eng_key_phrase', '')
+            eng_audit_result = full_english_audit(
+                ocr_result=last_audit or {},
+                image_data=best_image,
+                card_data=card,
+                manifest=manifest or {},
+                prompt_text=prompt,
+                eng_key_phrase=_eng_kp,
+                api_key=next_key(keys),
+                gemini_call_fn=gemini_call,
+                all_keys=keys,
+                skip_semantic=(best_score < 60),  # OCR太差就别浪费语义层
+            )
+            stats['eng_audit'] = {
+                'rule_score': eng_audit_result.rule_score,
+                'semantic_score': eng_audit_result.semantic_score,
+                'final_score': eng_audit_result.final_score,
+                'verdict': eng_audit_result.verdict,
+                'issue_count': eng_audit_result.issue_count,
+            }
+            print(f' {eng_audit_result.summary}')
+            if eng_audit_result.issues:
+                print(f'      {format_english_audit(eng_audit_result)}')
+        except Exception as e:
+            print(f' ⚠️ 英语审核出错: {e}')
+
     # ── 保存 ──
     out_name = card_id.replace('-', '_')
     filename = f'{out_name}.{best_ext}'
@@ -2326,11 +3240,28 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
     with open(filepath, 'wb') as f:
         f.write(best_image)
     size_kb = len(best_image) / 1024
-    print(f'  └─ 💾 保存 {filename} ({size_kb:.0f}KB) [审计={best_score} 质量={q_total}]')
+    eng_info = f' 英语={eng_audit_result.final_score}' if eng_audit_result else ''
+    print(f'  └─ 💾 保存 {filename} ({size_kb:.0f}KB) [审计={best_score} 质量={q_total}{eng_info}]')
 
     # ── 自我优化: 记录完整结果 ──
     if _HAS_OPTIMIZER:
         try:
+            # v10.5: 检查 record_full_result 是否接受新参数
+            _extra = {}
+            try:
+                import inspect as _ins
+                _sig = _ins.signature(record_full_result)
+                if 'visual_audit_score' in _sig.parameters or any(
+                    p.kind == _ins.Parameter.VAR_KEYWORD for p in _sig.parameters.values()
+                ):
+                    _extra = {
+                        'visual_audit_score': stats.get('visual_audit_score', 0),
+                        'refined': stats.get('refined', False),
+                        'refine_rounds': stats.get('refine_rounds', 0),
+                    }
+            except Exception:
+                pass
+
             record_full_result(
                 card_id=card_id,
                 subject=subject,
@@ -2347,7 +3278,8 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
                 prompt_length=len(prompt),
                 image_size_kb=size_kb,
                 elapsed_seconds=stats.get('prompt_gen_time', 0) + stats.get('image_gen_time', 0),
-                success=True
+                success=True,
+                **_extra,
             )
         except Exception as e:
             print(f'  ⚠️ [optimizer] record error: {e}')

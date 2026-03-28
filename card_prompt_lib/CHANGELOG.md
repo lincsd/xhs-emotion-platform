@@ -1,5 +1,39 @@
 # Prompt 迭代日志
 
+## v9.2 (2025-06-27) — Skill 结构化 + Prompt 分段生成 + 结构审计
+
+**问题**: Skill 规则以 Markdown 存在，注入 prompt 时依赖 AI "阅读理解"，容易遗漏必需元素
+**改进**:
+- 新增 `skill_schema.py` — 将 10 种 Skill 规则转为 JSON Schema 结构 (LayoutBlock, SubType, SkillSchema)
+- 新增 `prompt_builder.py` — Prompt 分段生成引擎，先锁定布局骨架再填充内容
+- 新增 `prompt_auditor.py` — 结构审计器，Step 1 后自动检查覆盖率并补丁遗漏
+- 三模块集成到 `generate_card_images_v3.py` Step 1 流水线中
+- 视觉策略从 `CARD_TYPE_VISUAL_RULES` 字典字符串升级为结构化 Schema (含子类型匹配)
+- 审计器自动匹配子类型 → 注入对应的类比和易错提示
+
+**技术架构**:
+- `skill_schema.py`: 10 种卡片类型 × (布局区块 + 子类型 + 禁止项 + 必需元素)
+- `prompt_builder.py`: build_layout_skeleton() + build_content_fill() → 双阶段注入
+- `prompt_auditor.py`: 5 维检查 (区块覆盖/教学元素/禁止项/字数/子类型一致性) → 自动补丁
+
+---
+
+## v9.1 (2026-03-27) — 生活类比锚点 + 轻量易错提示
+
+**问题**: (1) 方法卡/公式卡缺少生活类比，理解锚点单一 (2) 易错数据已有但未用在卡面上
+**改进**:
+- 所有卡型新增"生活类比"要素，放在气泡/便签里做"第二锚点"
+- 方法卡/公式卡新增可选的轻量易错提示（≤8字，红色小字，不喧宾夺主）
+- 概念卡选择性启用易错提示（仅在极易混淆概念上）
+- system prompt 文字上限从35→40字（容纳易错行）
+- 布局新增 [CAUTION] 可选区块（5%）
+- 每种 Skill 的子类型补充了推荐类比和典型易错
+- 禁止事项新增：类比不能太抽象、易错不超过1条
+
+**布局变化**: [ANSWER]下方新增可选[CAUTION]区 | [BOTTOM]气泡改为含类比
+
+---
+
 ## v9 (2026-03-21) — 例题驱动 + 题型 Skill 分化
 
 **问题**: 生成的卡片看不出在解什么题，解题过程抽象
