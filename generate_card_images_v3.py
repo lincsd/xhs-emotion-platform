@@ -1895,7 +1895,8 @@ def _trim_to_n_chinese(text, n):
 
 
 # 常见的中文"废尾"——如果口诀以这些字结尾，说明被截断了
-_DANGLING_ENDINGS = set('要的了地得在是和与用把被让给往到从向对着过将')
+# v10.5c: 扩展废尾列表 — 加入常见双字词的前半字（被截断后不成词）
+_DANGLING_ENDINGS = set('要的了地得在是和与用把被让给往到从向对着过将能运应学知考记复总提升')
 
 def _ensure_complete_chinese(text):
     """确保中文文字块不以虚词/助词结尾（说明被截断）"""
@@ -1935,6 +1936,8 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
         f"   - Every English word must be spelled correctly\n"
         f"   - Numbers and math symbols must be accurate\n"
         f"   - Text must look professionally typeset — clear hierarchy, aligned, readable\n"
+        f"   - ⚠️ NEVER truncate text! Every phrase must be COMPLETE — do not drop the last 1-2 characters!\n"
+        f"     Example: '提升语言运用能力' must NOT become '提升语言运用能' (missing 力)\n"
         f"5. Style: Professional Xiaohongshu card template with text as part of design.\n"
         f"   Main color: choose from coral pink / mint blue / peach orange / lavender.\n"
         f"6. Canvas ratio 3:4 (vertical). ≥25% breathing room.\n"
@@ -1948,6 +1951,8 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
             zone = 'Banner' if key == 'TITLE' else 'Accent strip' if key == 'SLOGAN' else 'Content card' if key.startswith('LINE') else 'Bottom'
             chinese_prefix += f"  {key}: \"{val}\" → render in {zone}\n"
         chinese_prefix += f"⚠️ Render EVERY text item above exactly as written. No omissions, no changes.\n"
+        chinese_prefix += f"⚠️ CRITICAL: Do NOT truncate any text! Every phrase must be rendered in FULL.\n"
+        chinese_prefix += f"   If space is tight, use smaller font — but NEVER drop the last 1-2 characters!\n"
         chinese_prefix += "=== END TEXT ===\n"
 
     if audit_hint:
@@ -2225,12 +2230,81 @@ def ocr_audit(image_data, expected_manifest, api_key, all_keys=None, eng_key_phr
                             if 'total' not in q:
                                 scores = [q.get(k, 0) for k in ('teaching', 'text_accuracy', 'visual', 'layout', 'saveable')]
                                 q['total'] = sum(scores)
+                        # v10.5c: 程序化补检 — 对比 found_texts vs manifest 抓漏检
+                        result = _programmatic_text_check(result, expected_manifest)
                         return result
     except (json.JSONDecodeError, Exception) as e:
         print(f'      [OCR parse error] {e}')
 
     return {'overall_score': 50, 'errors': [], 'found_texts': [], 'summary': 'OCR解析失败',
             'quality': default_quality}
+
+
+def _programmatic_text_check(ocr_result, expected_manifest):
+    """v10.5c: 程序化后置检查 —— 用代码逐字对比 found_texts vs manifest。
+    
+    Gemini Vision 有时会"脑补"缺失的字（把"提升语言运用能"读成"提升语言运用能力"），
+    导致截断/缺字漏检。这里用程序做兜底：
+    1. 对每个 manifest 值，检查是否有 found_text 与之匹配（允许少量差异）
+    2. 如果 found_text 比 manifest 短 1-3 字 → 补报 truncated 错误
+    3. 如果 found_text 与 manifest 完全无匹配 → 已由 Gemini 处理
+    """
+    found_texts = ocr_result.get('found_texts', [])
+    if not found_texts or not expected_manifest:
+        return ocr_result
+    
+    errors = ocr_result.get('errors', [])
+    existing_errors = {(e.get('expected', ''), e.get('type', '')) for e in errors}
+    score = ocr_result.get('overall_score', 100)
+    added = 0
+    
+    # 提取 manifest 中所有中文值（>= 3字的才检查截断）
+    manifest_values = []
+    for k, v in expected_manifest.items():
+        cn_chars = [c for c in v if '\u4e00' <= c <= '\u9fff']
+        if len(cn_chars) >= 3:
+            manifest_values.append((k, v, ''.join(cn_chars)))
+    
+    # 对每个 manifest 值，在 found_texts 中找最佳匹配
+    for mk, mv, m_cn in manifest_values:
+        best_ratio = 0
+        best_found = ''
+        for ft in found_texts:
+            ft_cn = ''.join(c for c in ft if '\u4e00' <= c <= '\u9fff')
+            if not ft_cn:
+                continue
+            # 检查是否是前缀匹配（截断情况）
+            if m_cn.startswith(ft_cn) and len(ft_cn) < len(m_cn):
+                ratio = len(ft_cn) / len(m_cn)
+                if ratio > best_ratio:
+                    best_ratio = ratio
+                    best_found = ft
+            # 检查是否完全匹配
+            elif ft_cn == m_cn:
+                best_ratio = 1.0
+                best_found = ft
+                break
+        
+        # 检测截断：found_text 是 manifest 的前缀，但缺 1-3 字
+        if 0.5 < best_ratio < 1.0:
+            missing_count = len(m_cn) - int(len(m_cn) * best_ratio)
+            if missing_count <= 3 and (mv, 'truncated') not in existing_errors:
+                errors.append({
+                    'expected': mv,
+                    'actual': best_found,
+                    'type': 'truncated',
+                    'severity': 'high'
+                })
+                score = max(0, score - 10)
+                added += 1
+                print(f'      [程序化补检] 截断: "{best_found}" → 期望 "{mv}" (缺{missing_count}字)')
+    
+    if added > 0:
+        ocr_result['errors'] = errors
+        ocr_result['overall_score'] = score
+        ocr_result['summary'] = (ocr_result.get('summary', '') + f' [+{added}处程序化补检]').strip()
+    
+    return ocr_result
 
 
 def _build_audit_hint(audit_result, expected_manifest):
