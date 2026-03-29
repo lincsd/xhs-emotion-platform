@@ -40,6 +40,10 @@ from generate_card_images_v3 import (
     _SCIENCE_CARD_TYPES, _SCIENCE_SUBJECTS,
 )
 
+# 全学科集合
+_ALL_SUBJECTS = {'数学', '语文', '英语', '物理', '化学', '生物'}
+_ALL_STAGES   = ['小学', '初中', '高中']
+
 def _load_keys():
     keys = load_api_keys()
     if not keys:
@@ -89,11 +93,21 @@ KC_DIRS = [
 ]
 
 def load_all_science_cards() -> list[dict]:
-    """加载所有理科知识卡，返回 [{card, subject, stage, grade_short, file, unit_name}]"""
+    """加载所有理科知识卡(向后兼容)"""
+    return load_all_cards(subjects=_SCIENCE_SUBJECTS, stages=['初中', '高中'])
+
+
+def load_all_cards(subjects: set | None = None, stages: list | None = None) -> list[dict]:
+    """加载知识卡，可按学科/学段筛选。
+    subjects=None → 加载全部学科; stages=None → 全部学段"""
+    if stages is None:
+        stages = _ALL_STAGES
+    if subjects is None:
+        subjects = _ALL_SUBJECTS
     results = []
     seen_ids = set()
     for d in KC_DIRS:
-        for stage in ['初中', '高中']:
+        for stage in stages:
             sd = os.path.join(d, stage)
             if not os.path.isdir(sd):
                 continue
@@ -101,12 +115,12 @@ def load_all_science_cards() -> list[dict]:
                 if not fname.endswith('.json'):
                     continue
                 subj = fname.split('_')[0]
-                if subj not in _SCIENCE_SUBJECTS:
+                if subj not in subjects:
                     continue
                 fp = os.path.join(sd, fname)
                 try:
                     data = json.loads(open(fp, encoding='utf-8').read())
-                except:
+                except Exception:
                     continue
                 gs = data.get('grade_short', '')
                 for unit in data.get('units', []):
@@ -157,7 +171,7 @@ def card_text(card: dict) -> str:
 # 维度 1: 教学有效性
 # ═══════════════════════════════════════════
 
-DIM1_PROMPT = """你是一位资深中学理科教研员。请严格审查下面这张知识卡的教学有效性。
+DIM1_PROMPT = """你是一位资深{subject}教研员。请严格审查下面这张知识卡的教学有效性。
 
 ## 被审知识卡
 - 科目: {subject}  年级: {grade_short} ({stage})
@@ -646,6 +660,373 @@ TEXTBOOK_OUTLINE = {
         '种群', '群落', '生态系统', '物质循环', '能量流动',
         '生态平衡', '生物多样性',
     ],
+
+    # ═══════════════════════════════════════════
+    # 数学 (人教版)
+    # ═══════════════════════════════════════════
+    ('数学', '一上'): [
+        '数一数', '比一比', '1-5的认识和加减法', '认识图形(一)',
+        '6-10的认识和加减法', '11-20各数的认识', '认识钟表',
+        '20以内的进位加法', '总复习',
+    ],
+    ('数学', '一下'): [
+        '认识图形(二)', '20以内的退位减法', '分类与整理',
+        '100以内数的认识', '认识人民币', '100以内的加法和减法(一)',
+        '找规律',
+    ],
+    ('数学', '二上'): [
+        '长度单位', '100以内的加法和减法(二)', '角的初步认识',
+        '表内乘法(一)', '观察物体(一)', '表内乘法(二)',
+        '量一量比一比', '认识时间', '数学广角-搭配',
+    ],
+    ('数学', '二下'): [
+        '数据收集整理', '表内除法(一)', '图形的运动(一)',
+        '表内除法(二)', '混合运算', '有余数的除法',
+        '万以内数的认识', '克和千克', '数学广角-推理',
+    ],
+    ('数学', '三上'): [
+        '时分秒', '万以内的加法和减法(一)', '测量',
+        '万以内的加法和减法(二)', '倍的认识', '多位数乘一位数',
+        '长方形和正方形', '分数的初步认识', '数学广角-集合',
+    ],
+    ('数学', '三下'): [
+        '位置与方向(一)', '除数是一位数的除法', '复式统计表',
+        '两位数乘两位数', '面积', '年月日',
+        '小数的初步认识', '数学广角-搭配(二)',
+    ],
+    ('数学', '四上'): [
+        '大数的认识', '公顷和平方千米', '角的度量',
+        '三位数乘两位数', '平行四边形和梯形', '除数是两位数的除法',
+        '条形统计图', '数学广角-优化',
+    ],
+    ('数学', '四下'): [
+        '四则运算', '观察物体(二)', '运算定律',
+        '小数的意义和性质', '三角形', '小数的加法和减法',
+        '图形的运动(二)', '平均数与条形统计图', '数学广角-鸡兔同笼',
+    ],
+    ('数学', '五上'): [
+        '小数乘法', '位置', '小数除法', '可能性',
+        '简易方程', '多边形的面积', '植树问题',
+    ],
+    ('数学', '五下'): [
+        '观察物体(三)', '因数与倍数', '长方体和正方体',
+        '分数的意义和性质', '图形的运动(三)',
+        '分数的加法和减法', '折线统计图', '数学广角-找次品',
+    ],
+    ('数学', '六上'): [
+        '分数乘法', '位置与方向(二)', '分数除法', '比',
+        '圆', '百分数(一)', '扇形统计图', '数学广角-数与形',
+    ],
+    ('数学', '六下'): [
+        '负数', '百分数(二)', '圆柱与圆锥', '比例',
+        '数学广角-鸽巢问题', '小学总复习',
+    ],
+    ('数学', '七上'): [
+        '有理数', '有理数的运算', '整式的加减',
+        '一元一次方程', '几何图形初步',
+    ],
+    ('数学', '七下'): [
+        '相交线与平行线', '实数', '平面直角坐标系',
+        '二元一次方程组', '不等式与不等式组', '数据的收集整理描述',
+    ],
+    ('数学', '八上'): [
+        '三角形', '全等三角形', '轴对称',
+        '整式的乘法与因式分解', '分式',
+    ],
+    ('数学', '八下'): [
+        '二次根式', '勾股定理', '平行四边形',
+        '一次函数', '数据的分析',
+    ],
+    ('数学', '九上'): [
+        '一元二次方程', '二次函数', '旋转',
+        '圆', '概率初步',
+    ],
+    ('数学', '九下'): [
+        '反比例函数', '相似', '锐角三角函数',
+        '投影与视图', '总复习',
+    ],
+    ('数学', '高一上'): [
+        '集合', '常用逻辑用语', '不等式',
+        '函数的概念与性质', '幂函数', '指数函数', '对数函数',
+        '三角函数',
+    ],
+    ('数学', '高一下'): [
+        '三角恒等变换', '平面向量',
+        '复数', '立体几何初步', '空间几何体',
+        '统计', '概率',
+    ],
+    ('数学', '高二上'): [
+        '数列', '等差数列', '等比数列',
+        '空间向量与立体几何', '直线与方程', '圆与方程',
+    ],
+    ('数学', '高二下'): [
+        '圆锥曲线', '椭圆', '双曲线', '抛物线',
+        '计数原理', '排列组合', '二项式定理',
+        '概率与统计', '条件概率', '随机变量',
+    ],
+    ('数学', '高三上'): [
+        '导数及其应用', '导数与函数单调性', '极值最值',
+        '定积分初步', '综合复习',
+    ],
+    ('数学', '高三下'): [
+        '高考综合复习', '函数综合', '几何综合',
+        '概率统计综合', '数列综合', '解析几何综合',
+    ],
+
+    # ═══════════════════════════════════════════
+    # 语文 (人教版/部编版)
+    # ═══════════════════════════════════════════
+    ('语文', '一上'): [
+        '汉语拼音', '识字(一)', '课文(一)', '识字(二)', '课文(二)',
+        '口语交际', '语文园地',
+    ],
+    ('语文', '一下'): [
+        '识字', '课文', '口语交际', '语文园地',
+        '快乐读书吧',
+    ],
+    ('语文', '二上'): [
+        '场景歌', '树之歌', '拍手歌', '田家四季歌',
+        '小蝌蚪找妈妈', '我是什么', '植物妈妈有办法',
+        '曹冲称象', '玲玲的画', '一封信', '妈妈睡了',
+    ],
+    ('语文', '二下'): [
+        '古诗二首', '找春天', '开满鲜花的小路',
+        '邓小平爷爷植树', '雷锋叔叔你在哪里',
+        '千人糕', '一匹出色的马', '神州谣', '传统节日',
+    ],
+    ('语文', '三上'): [
+        '大青树下的小学', '花的学校', '不懂就要问',
+        '古诗三首', '铺满金色巴掌的水泥道', '秋天的雨', '听听秋的声音',
+        '去年的树', '那一定会很好', '在牛肚子里旅行', '一块奶酪',
+        '总也倒不了的老屋',
+    ],
+    ('语文', '三下'): [
+        '古诗三首', '燕子', '荷花', '昆虫备忘录',
+        '守株待兔', '陶罐和铁罐', '鹿角和鹿腿', '池子与河流',
+        '小虾', '纸的发明', '赵州桥', '一幅名扬中外的画',
+    ],
+    ('语文', '四上'): [
+        '观潮', '走月亮', '现代诗二首', '繁星',
+        '一个豆荚里的五粒豆', '蝙蝠和雷达', '呼风唤雨的世纪',
+        '古诗三首', '爬山虎的脚', '蟋蟀的住宅',
+        '盘古开天地', '精卫填海', '普罗米修斯', '女娲补天',
+    ],
+    ('语文', '四下'): [
+        '古诗词三首', '乡下人家', '天窗', '三月桃花水',
+        '琥珀', '飞向蓝天的恐龙', '纳米技术就在我们身边',
+        '短诗三首', '绿', '白桦', '在天晴了的时候',
+        '猫', '母鸡', '白鹅',
+    ],
+    ('语文', '五上'): [
+        '白鹭', '落花生', '桂花雨', '珍珠鸟',
+        '搭石', '将相和', '什么比猎豹的速度更快',
+        '古诗词三首', '少年中国说', '圆明园的毁灭', '小岛',
+        '太阳', '松鼠',
+    ],
+    ('语文', '五下'): [
+        '古诗三首', '祖父的园子', '月是故乡明', '梅花魂',
+        '草船借箭', '景阳冈', '猴王出世', '红楼春趣',
+        '人物描写一组', '刷子李',
+        '威尼斯的小艇', '牧场之国', '金字塔',
+    ],
+    ('语文', '六上'): [
+        '草原', '丁香结', '古诗词三首', '花之歌',
+        '七律长征', '狼牙山五壮士', '开国大典', '灯光',
+        '竹节人', '宇宙生命之谜', '故宫博物院',
+        '桥', '穷人', '在柏林',
+    ],
+    ('语文', '六下'): [
+        '北京的春节', '腊八粥', '古诗三首', '藏戏',
+        '鲁滨逊漂流记', '骑鹅旅行记', '汤姆索亚历险记',
+        '匆匆', '那个星期天', '古诗三首',
+        '真理诞生于一百个问号之后', '表里的生物',
+    ],
+    ('语文', '七上'): [
+        '春', '济南的冬天', '雨的四季',
+        '古代诗歌四首', '散步', '秋天的怀念', '散文诗二首',
+        '从百草园到三味书屋', '再塑生命的人', '窃读记',
+        '纪念白求恩', '植树的牧羊人', '走一步再走一步',
+    ],
+    ('语文', '七下'): [
+        '邓稼先', '说和做', '回忆鲁迅先生', '孙权劝学',
+        '黄河颂', '老山界', '谁是最可爱的人',
+        '阿长与山海经', '台阶', '卖油翁',
+        '叶圣陶先生二三事', '驿路梨花', '短文两篇',
+    ],
+    ('语文', '八上'): [
+        '消息二则', '首届诺贝尔奖颁发', '飞天凌空', '一着惊海天',
+        '藤野先生', '回忆我的母亲', '列夫托尔斯泰', '美丽的颜色',
+        '三峡', '短文二篇', '与朱元思书', '唐诗五首',
+        '背影', '白杨礼赞', '散文二篇', '昆明的雨',
+    ],
+    ('语文', '八下'): [
+        '社戏', '回延安', '安塞腰鼓', '灯笼',
+        '大自然的语言', '阿西莫夫短文两篇', '大雁归来', '时间的脚印',
+        '桃花源记', '小石潭记', '核舟记', '诗经二首',
+        '最后一次讲演', '应有格物致知精神', '我一生中的重要抉择',
+    ],
+    ('语文', '九上'): [
+        '沁园春雪', '我爱这土地', '乡愁', '你是人间的四月天',
+        '敬业与乐业', '就英法联军远征中国致巴特勒上尉的信',
+        '岳阳楼记', '醉翁亭记', '湖心亭看雪',
+        '故乡', '我的叔叔于勒', '孤独之旅',
+        '中国人失掉自信力了吗', '怀疑与学问', '谈创造性思维',
+    ],
+    ('语文', '九下'): [
+        '祖国啊我亲爱的祖国', '梅岭三章', '短诗五首',
+        '孔乙己', '变色龙', '溜索',
+        '鱼我所欲也', '送东阳马生序', '词四首',
+        '屈原', '天下第一楼', '枣儿',
+    ],
+    ('语文', '高一上'): [
+        '沁园春长沙', '立在地球边上放号', '红烛', '百合花',
+        '哦香雪', '喜看稻菽千重浪', '心有一团火温暖众人心',
+        '短歌行', '梦游天姥吟留别', '登高', '琵琶行',
+        '静女', '涉江采芙蓉', '虞美人', '鹊桥仙',
+        '劝学', '师说', '反对党八股',
+    ],
+    ('语文', '高一下'): [
+        '祝福', '林教头风雪山神庙', '装在套子里的人',
+        '窦娥冤', '雷雨', '哈姆莱特',
+        '青蒿素:人类征服疾病的一小步', '一名物理学家的教育历程',
+        '谏太宗十思疏', '答司马谏议书', '阿房宫赋',
+        '六国论', '烛之武退秦师', '鸿门宴',
+    ],
+    ('语文', '高二上'): [
+        '荷塘月色', '故都的秋', '我与地坛',
+        '论语十二章', '大学之道', '人皆有不忍人之心',
+        '复活', '老人与海', '百年孤独',
+        '以工匠精神雕琢时代品质', '在民族复兴的历史丰碑上',
+    ],
+    ('语文', '高二下'): [
+        '社会历史的决定性基础', '改造我们的学习', '人的正确思想是从哪里来的',
+        '修辞立其诚', '怜悯是人的天性',
+        '边城', '一个消逝了的山村', '秦腔',
+        '陈情表', '项脊轩志', '兰亭集序', '归去来兮辞',
+        '种树郭橐驼传', '石钟山记',
+    ],
+    ('语文', '高三上'): [
+        '中国建筑的特征', '说木叶', '作为生物的社会',
+        '信息时代的语文生活', '整本书阅读', '经典常谈选读',
+    ],
+    ('语文', '高三下'): [
+        '红楼梦整本书阅读', '高考作文复习', '文言文综合复习',
+        '诗歌鉴赏复习', '现代文阅读复习', '语言知识运用',
+    ],
+
+    # ═══════════════════════════════════════════
+    # 英语 (人教版PEP / 人教版Go for it / 人教版)
+    # ═══════════════════════════════════════════
+    ('英语', '三上'): [
+        'Hello', 'Colours', 'Look at me', 'We love animals',
+        'Lets eat', 'Happy birthday',
+    ],
+    ('英语', '三下'): [
+        'Welcome back to school', 'My family', 'At the zoo',
+        'Where is my car', 'Do you like pears', 'How many',
+    ],
+    ('英语', '四上'): [
+        'My classroom', 'My schoolbag', 'My friends',
+        'My home', 'Dinner is ready', 'Meet my family',
+    ],
+    ('英语', '四下'): [
+        'My school', 'What time is it', 'Weather',
+        'At the farm', 'My clothes', 'Shopping',
+    ],
+    ('英语', '五上'): [
+        'Whats he like', 'My week', 'What would you like',
+        'What can you do', 'There is a big bed', 'In a nature park',
+    ],
+    ('英语', '五下'): [
+        'My day', 'My favourite season', 'My school calendar',
+        'When is Easter', 'Whose dog is it', 'Work quietly',
+    ],
+    ('英语', '六上'): [
+        'How can I get there', 'Ways to go to school',
+        'My weekend plan', 'I have a pen pal',
+        'What does he do', 'How do you feel',
+    ],
+    ('英语', '六下'): [
+        'How tall are you', 'Last weekend', 'Where did you go',
+        'Then and now', 'A farewell party',
+    ],
+    ('英语', '七上'): [
+        'My names Gina', 'This is my sister', 'Is this your pencil',
+        'Wheres my schoolbag', 'Do you have a soccer ball',
+        'Do you like bananas', 'How much are these socks',
+        'When is your birthday', 'My favorite subject is science',
+    ],
+    ('英语', '七下'): [
+        'Can you play the guitar', 'What time do you go to school',
+        'How do you get to school', 'Dont eat in class',
+        'Why do you like pandas', 'Im watching TV',
+        'Its raining', 'Is there a post office near here',
+        'What does he look like', 'Id like some noodles',
+        'How was your school trip', 'What did you do last weekend',
+    ],
+    ('英语', '八上'): [
+        'Where did you go on vacation', 'How often do you exercise',
+        'Im more outgoing than my sister', 'Whats the best movie theater',
+        'Do you want to watch a game show', 'Im going to study computer science',
+        'Will people have robots', 'How do you make a banana milk shake',
+        'Can you come to my party', 'If you go to the party youll have a great time',
+    ],
+    ('英语', '八下'): [
+        'Whats the matter', 'Ill help to clean up the city parks',
+        'Could you please clean your room', 'Why dont you talk to your parents',
+        'What were you doing when the rainstorm came',
+        'An old man tried to move the mountains',
+        'Whats the highest mountain in the world',
+        'Have you read Treasure Island yet',
+        'Have you ever been to a museum',
+        'Ive had this bike for three years',
+    ],
+    ('英语', '九上'): [
+        'How can we become good learners',
+        'I think that mooncakes are delicious',
+        'Could you please tell me where the restrooms are',
+        'I used to be afraid of the dark',
+        'What are the shirts made of',
+        'When was it invented',
+        'Teenagers should be allowed to choose their own clothes',
+        'It must belong to Carla',
+    ],
+    ('英语', '九下'): [
+        'I like music that I can dance to',
+        'You are supposed to shake hands',
+        'Sad movies make me cry',
+        'Life is full of the unexpected',
+        'I remember meeting all of you in Grade 7',
+        'Grammar Review', 'Reading Comprehension',
+    ],
+    ('英语', '高一上'): [
+        'Teenage Life', 'Travelling Around', 'Sports and Fitness',
+        'Natural Disasters', 'Languages Around the World',
+        '定语从句', '现在进行时表将来', '虚拟语气初步',
+    ],
+    ('英语', '高一下'): [
+        'Cultural Heritage', 'Wildlife Protection', 'The Internet',
+        'History and Traditions', 'Music',
+        '非谓语动词', '定语从句(续)', '被动语态',
+    ],
+    ('英语', '高二上'): [
+        'Science and Scientists', 'Looking into the Future',
+        'The Art of Painting', 'Festivals and Customs',
+        '名词性从句', '倒装句', '过去分词作状语',
+    ],
+    ('英语', '高二下'): [
+        'Space Exploration', 'Healthy Lifestyle',
+        'Environment Protection', 'Literature and Art',
+        '虚拟语气', '独立主格', '强调句',
+    ],
+    ('英语', '高三上'): [
+        '高考阅读理解', '完形填空', '语法填空', '短文改错',
+        '书面表达', '听力训练', '词汇综合复习',
+    ],
+    ('英语', '高三下'): [
+        '高考综合冲刺', '模拟训练', '真题精练',
+        '查漏补缺', '写作模板', '高频考点回顾',
+    ],
 }
 
 DIM5_ALIGNMENT_PROMPT = """你是一位教育内容分析师。请对比以下知识卡覆盖的知识点和教材大纲，找出差距。
@@ -726,7 +1107,7 @@ def run_dim5_textbook(all_cards: list[dict], keys: list[str]) -> list[dict]:
 # 维度 6: 稳定性统计
 # ═══════════════════════════════════════════
 
-DIM6_PROMPT = """你是一位资深理科教师，负责为知识卡片生成教学图片的 prompt。
+DIM6_PROMPT = """你是一位资深{subject}教师，负责为知识卡片生成教学图片的 prompt。
 
 请为以下知识卡生成一段英文图片 prompt (用于 AI 图片生成)，要求：
 - 描述一张教学卡片的视觉设计
@@ -855,6 +1236,160 @@ def _parse_json_response(resp: str | None) -> dict | None:
             except json.JSONDecodeError:
                 continue
     return None
+
+
+# ═══════════════════════════════════════════
+# Skill 沉淀 — 将审查结果持久化到 optimizer.db
+# ═══════════════════════════════════════════
+
+def _init_content_review_table():
+    """在 optimizer.db 中创建 content_review 表"""
+    from self_optimizer import _get_conn as _opt_conn
+    conn = _opt_conn()
+    conn.executescript("""
+        CREATE TABLE IF NOT EXISTS content_review (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            card_id TEXT NOT NULL,
+            subject TEXT NOT NULL,
+            grade TEXT DEFAULT '',
+            dimension TEXT NOT NULL,
+            severity TEXT DEFAULT 'none',
+            overall_score REAL DEFAULT 0,
+            issues_json TEXT DEFAULT '[]',
+            suggestions_json TEXT DEFAULT '[]',
+            raw_json TEXT DEFAULT '{}',
+            created_at TEXT DEFAULT (datetime('now','localtime'))
+        );
+        CREATE INDEX IF NOT EXISTS idx_cr_card ON content_review(card_id);
+        CREATE INDEX IF NOT EXISTS idx_cr_subject ON content_review(subject);
+        CREATE INDEX IF NOT EXISTS idx_cr_severity ON content_review(severity);
+        CREATE INDEX IF NOT EXISTS idx_cr_dim ON content_review(dimension);
+    """)
+    conn.commit()
+    conn.close()
+
+
+def save_review_to_skill(all_results: dict) -> int:
+    """将 dim1/dim2/dim3/dim5 的审查结果存入 optimizer.db/content_review 表。
+    返回写入的记录数。"""
+    _init_content_review_table()
+    from self_optimizer import _get_conn as _opt_conn
+    conn = _opt_conn()
+    count = 0
+
+    # dim1: 教学有效性
+    for r in all_results.get('dim1_teaching', []):
+        if 'error' in r:
+            continue
+        conn.execute("""
+            INSERT INTO content_review (card_id, subject, grade, dimension, severity, overall_score,
+                                        issues_json, suggestions_json, raw_json)
+            VALUES (?, ?, ?, 'dim1_teaching', ?, ?, ?, ?, ?)
+        """, (
+            r.get('card_id', ''), r.get('subject', ''), r.get('grade', ''),
+            'low' if r.get('overall', 10) >= 7 else ('medium' if r.get('overall', 10) >= 5 else 'high'),
+            r.get('overall', 0),
+            json.dumps(r.get('issues', []), ensure_ascii=False),
+            json.dumps(r.get('suggestions', []), ensure_ascii=False),
+            json.dumps(r, ensure_ascii=False),
+        ))
+        count += 1
+
+    # dim2: 对抗性内容
+    for r in all_results.get('dim2_adversarial', []):
+        if 'error' in r:
+            continue
+        conn.execute("""
+            INSERT INTO content_review (card_id, subject, grade, dimension, severity, overall_score,
+                                        issues_json, suggestions_json, raw_json)
+            VALUES (?, ?, ?, 'dim2_adversarial', ?, ?, ?, ?, ?)
+        """, (
+            r.get('card_id', ''), r.get('subject', ''), r.get('grade', ''),
+            r.get('severity', 'none'), 0,
+            json.dumps([r.get('summary', '')], ensure_ascii=False),
+            json.dumps([], ensure_ascii=False),
+            json.dumps(r, ensure_ascii=False),
+        ))
+        count += 1
+
+    # dim3: 闭环考试
+    for r in all_results.get('dim3_exam', []):
+        if 'error' in r:
+            continue
+        sev = 'none' if r.get('correct') else 'medium'
+        conn.execute("""
+            INSERT INTO content_review (card_id, subject, grade, dimension, severity, overall_score,
+                                        issues_json, suggestions_json, raw_json)
+            VALUES (?, ?, ?, 'dim3_exam', ?, ?, ?, ?, ?)
+        """, (
+            r.get('card_id', ''), r.get('subject', ''), r.get('grade', ''),
+            sev, r.get('score', 0),
+            json.dumps([r.get('knowledge_gap', '')] if r.get('knowledge_gap') else [], ensure_ascii=False),
+            json.dumps([], ensure_ascii=False),
+            json.dumps(r, ensure_ascii=False),
+        ))
+        count += 1
+
+    # dim5: 教材对标
+    for r in all_results.get('dim5_textbook', []):
+        if 'error' in r:
+            continue
+        cov = r.get('coverage_pct', 100)
+        sev = 'none' if cov >= 80 else ('low' if cov >= 60 else 'medium')
+        conn.execute("""
+            INSERT INTO content_review (card_id, subject, grade, dimension, severity, overall_score,
+                                        issues_json, suggestions_json, raw_json)
+            VALUES (?, ?, ?, 'dim5_textbook', ?, ?, ?, ?, ?)
+        """, (
+            f"{r.get('subject', '')}_{r.get('grade', '')}", r.get('subject', ''), r.get('grade', ''),
+            sev, cov,
+            json.dumps(r.get('blind_spots', []), ensure_ascii=False),
+            json.dumps(r.get('out_of_scope', []), ensure_ascii=False),
+            json.dumps(r, ensure_ascii=False),
+        ))
+        count += 1
+
+    conn.commit()
+    conn.close()
+    return count
+
+
+def get_skill_insights(subject: str = '', severity_min: str = 'low') -> list[dict]:
+    """查询沉淀的审查结果，供 prompt 生成时参考。
+    severity_min: 'low' / 'medium' / 'high' — 只返回≥此严重度的记录"""
+    _init_content_review_table()
+    from self_optimizer import _get_conn as _opt_conn
+    sev_order = {'none': 0, 'low': 1, 'medium': 2, 'high': 3, 'critical': 4}
+    min_val = sev_order.get(severity_min, 1)
+
+    conn = _opt_conn()
+    if subject:
+        rows = conn.execute("""
+            SELECT card_id, subject, grade, dimension, severity, overall_score,
+                   issues_json, suggestions_json, created_at
+            FROM content_review
+            WHERE subject = ?
+            ORDER BY created_at DESC
+            LIMIT 100
+        """, (subject,)).fetchall()
+    else:
+        rows = conn.execute("""
+            SELECT card_id, subject, grade, dimension, severity, overall_score,
+                   issues_json, suggestions_json, created_at
+            FROM content_review
+            ORDER BY created_at DESC
+            LIMIT 200
+        """).fetchall()
+    conn.close()
+
+    results = []
+    for r in rows:
+        row = dict(r)
+        if sev_order.get(row['severity'], 0) >= min_val:
+            row['issues'] = json.loads(row.pop('issues_json', '[]'))
+            row['suggestions'] = json.loads(row.pop('suggestions_json', '[]'))
+            results.append(row)
+    return results
 
 
 def print_header(title: str):
@@ -1038,21 +1573,40 @@ def main():
     parser.add_argument('--img-dir', default=os.path.join(BASE_DIR, '_test_science_output'), help='图片目录')
     parser.add_argument('--repeats', type=int, default=3, help='维度6稳定性重复次数')
     parser.add_argument('--output', default='', help='JSON结果输出路径')
+    parser.add_argument('--subjects', default='science',
+                        help='学科范围: science(理科) / all(全学科) / 逗号分隔的科目名')
+    parser.add_argument('--stages', default='初中,高中',
+                        help='学段范围: 逗号分隔 (小学,初中,高中)')
+    parser.add_argument('--save-skill', action='store_true',
+                        help='将审查结果沉淀到 optimizer.db 的 content_review 表')
     args = parser.parse_args()
 
     dims = [int(x.strip()) for x in args.dims.split(',')]
+
+    # 解析学科范围
+    if args.subjects == 'science':
+        subjects = _SCIENCE_SUBJECTS
+    elif args.subjects == 'all':
+        subjects = _ALL_SUBJECTS
+    else:
+        subjects = set(s.strip() for s in args.subjects.split(','))
+    stages = [s.strip() for s in args.stages.split(',')]
+
+    subj_label = '理科' if subjects == _SCIENCE_SUBJECTS else (
+        '全学科' if subjects == _ALL_SUBJECTS else ','.join(sorted(subjects)))
 
     print("═" * 64)
     print("  知识卡深层复审 — 6 维度全面审计")
     print(f"  时间: {time.strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"  维度: {dims}")
+    print(f"  学科: {subj_label}  学段: {','.join(stages)}")
     print("═" * 64)
 
     keys = _load_keys()
     print(f"✅ 加载 {len(keys)} 个 API key")
 
-    all_cards = load_all_science_cards()
-    print(f"✅ 加载 {len(all_cards)} 张理科知识卡")
+    all_cards = load_all_cards(subjects=subjects, stages=stages)
+    print(f"✅ 加载 {len(all_cards)} 张知识卡 ({subj_label})")
 
     sampled = sample_cards(all_cards, n_per_bucket=args.sample)
     print(f"✅ 抽样 {len(sampled)} 张卡片 (每桶 {args.sample})")
@@ -1113,6 +1667,7 @@ def main():
     print_header("总 结")
     print(f"  耗时: {elapsed:.0f}s ({elapsed/60:.1f}min)")
     print(f"  维度数: {len(dims)}")
+    print(f"  学科: {subj_label}  学段: {','.join(stages)}")
     print(f"  总卡片: {len(all_cards)}")
 
     # 保存 JSON
@@ -1120,6 +1675,12 @@ def main():
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(all_results, f, ensure_ascii=False, indent=2)
     print(f"  结果已保存: {output_path}")
+
+    # ── Skill 沉淀 ──
+    if args.save_skill:
+        print_header("Skill 沉淀")
+        saved = save_review_to_skill(all_results)
+        print(f"  ✅ 已沉淀 {saved} 条记录到 optimizer.db / content_review")
 
 
 if __name__ == '__main__':
