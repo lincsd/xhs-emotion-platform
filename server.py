@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260329e'  # v10.9.9: warm-start渐进式精修(最优图+最优Prompt缓存→从最优出发精修)
+BUILD_VERSION = '20260329f'  # v10.9.9 fix: 超时路径也保存warm-start缓存
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -4233,6 +4233,27 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                             'status': 'error', 'result': {'error': f'v3流水线超时({_elapsed():.0f}s): Gemini API响应缓慢', 'pipeline': pipeline_log}, 'updated': time.time()}
                     return
                 pipeline_log.append(f'⏰ 超时({_elapsed():.0f}s), 使用当前最佳结果(score={best_score})')
+
+                # v10.9.9 fix: 超时路径也执行 Step 7 warm-start 缓存保存
+                try:
+                    from _card_best_image import save_best_cache
+                    ws_saved, ws_reason = save_best_cache(
+                        card_id=card.get('full_id', ''),
+                        image_data=best_image,
+                        ext=best_ext,
+                        audit_score=best_score,
+                        quality_score=0,
+                        prompt_text=prompt if prompt else '',
+                        model=used_model,
+                        manifest=manifest if manifest else {},
+                        subject=subject,
+                        grade=grade,
+                    )
+                    pipeline_log.append(f'Step7: {"💾 最优缓存已保存" if ws_saved else "📦 缓存未更新"}: {ws_reason}')
+                    print(f'[v3-async] Step7(timeout): warm-start {"saved" if ws_saved else "skipped"}: {ws_reason}', flush=True)
+                except Exception as ws_e:
+                    pipeline_log.append(f'Step7(timeout) 跳过: {str(ws_e)[:60]}')
+
                 img_b64 = base64.b64encode(best_image).decode('utf-8')
                 mime = 'image/jpeg' if best_ext == 'jpg' else 'image/png'
                 result = {
