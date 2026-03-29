@@ -446,7 +446,7 @@ TIP: 小提示(可选) → 渲染到区块D
 只输出英文提示词 + TEXT_MANIFEST，不要其他内容。
 
 提示词开头必须写:
-"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top ~2-12% with white title text, (2) a white rounded CONTENT CARD ~14-78% with clearly rendered teaching content, (3) a warm colored ACCENT STRIP ~80-92% with white slogan text, (4) a small cute mascot in corner. Text must be pixel-perfect: every Chinese character fully formed, every letter correct."
+"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the main body with clearly rendered teaching content, (3) a warm colored ACCENT STRIP near the bottom with white slogan text, (4) a small cute mascot in corner. Text must be pixel-perfect: every Chinese character fully formed, every letter correct. ⚠️ Do NOT render any color hex codes, percentage numbers, or layout coordinates as visible text in the image!"
 
 ══════ ⚠️ 文字质量核心要求 ══════
 
@@ -1899,90 +1899,90 @@ def _build_canvas_block_en(canvas: dict) -> str:
 _SUBJECT_COLOR_SCHEMES = {
     '数学': {
         'name': '理性蓝',
-        'banner_gradient': '#1a237e → #283593 (深靛蓝渐变)',
-        'accent_strip': '#42a5f5 → #90caf9 (天蓝渐变)',
-        'content_bg': '#f5f8ff (极浅蓝)',
-        'highlight': '#ffc107 (金色强调关键数字)',
+        'banner_gradient': '深靛蓝渐变 (dark indigo blue gradient)',
+        'accent_strip': '天蓝渐变 (sky blue gradient)',
+        'content_bg': '极浅蓝底 (very pale blue)',
+        'highlight': '金色强调关键数字 (golden yellow for key numbers)',
         'description': '冷静理性的蓝色系，金色强调关键数字，传达数学的精确与严谨',
     },
     '英语': {
         'name': '活力橙',
-        'banner_gradient': '#e65100 → #f57c00 (深橙渐变)',
-        'accent_strip': '#ffab40 → #ffd180 (暖橙渐变)',
-        'content_bg': '#fff8f0 (极浅橙)',
-        'highlight': '#00bcd4 (青色对比词标注)',
+        'banner_gradient': '深橙渐变 (deep orange gradient)',
+        'accent_strip': '暖橙渐变 (warm orange gradient)',
+        'content_bg': '极浅橙底 (very pale orange)',
+        'highlight': '青色对比词标注 (teal/cyan for contrast words)',
         'description': '活泼明亮的橙色系，青色点缀对比词，传达语言的活力与趣味',
     },
     '语文': {
         'name': '古韵棕',
-        'banner_gradient': '#4e342e → #6d4c41 (深棕渐变)',
-        'accent_strip': '#ffab91 → #ffccbc (暖杏渐变)',
-        'content_bg': '#fdf6f0 (极浅米/宣纸色)',
-        'highlight': '#d84315 (朱砂红强调)',
+        'banner_gradient': '深棕渐变 (dark brown gradient)',
+        'accent_strip': '暖杏渐变 (warm apricot gradient)',
+        'content_bg': '极浅米/宣纸色底 (very pale cream/rice paper)',
+        'highlight': '朱砂红强调 (vermilion red for emphasis)',
         'description': '温暖人文的棕色系，朱砂红标注重点，宣纸质感传达中国文化底蕴',
     },
     '物理': {
         'name': '科技银蓝',
-        'banner_gradient': '#0d47a1 → #1565c0 (深蓝渐变)',
-        'accent_strip': '#00e5ff → #84ffff (科技青渐变)',
-        'content_bg': '#f0f4f8 (极浅银灰)',
-        'highlight': '#ff6d00 (橙色力/能量标注)',
+        'banner_gradient': '深蓝渐变 (deep blue gradient)',
+        'accent_strip': '科技青渐变 (electric cyan gradient)',
+        'content_bg': '极浅银灰底 (very pale silver gray)',
+        'highlight': '橙色力/能量标注 (orange for force/energy)',
         'description': '深邃科技的蓝色系，亮青色强调实验数据，橙色标注力与能量',
     },
     '化学': {
         'name': '实验紫绿',
-        'banner_gradient': '#4a148c → #6a1b9a (深紫渐变)',
-        'accent_strip': '#69f0ae → #b9f6ca (薄荷绿渐变)',
-        'content_bg': '#f3e5f5 (极浅紫)',
-        'highlight': '#00e676 (试剂绿标注)',
+        'banner_gradient': '深紫渐变 (deep purple gradient)',
+        'accent_strip': '薄荷绿渐变 (mint green gradient)',
+        'content_bg': '极浅紫底 (very pale lavender)',
+        'highlight': '试剂绿标注 (bright green for elements)',
         'description': '神秘紫色+清新绿色系，模拟化学反应的绚丽，绿色标注元素符号',
     },
     '生物': {
         'name': '生命绿',
-        'banner_gradient': '#1b5e20 → #2e7d32 (深绿渐变)',
-        'accent_strip': '#81c784 → #c8e6c9 (嫩绿渐变)',
-        'content_bg': '#f1f8e9 (极浅绿)',
-        'highlight': '#ff7043 (珊瑚红标注)',
+        'banner_gradient': '深绿渐变 (deep forest green gradient)',
+        'accent_strip': '嫩绿渐变 (fresh light green gradient)',
+        'content_bg': '极浅绿底 (very pale green)',
+        'highlight': '珊瑚红标注 (coral red for key terms)',
         'description': '自然生命力的绿色系，珊瑚红强调关键术语，传达生机与活力',
     },
     '历史': {
         'name': '复古金棕',
-        'banner_gradient': '#3e2723 → #5d4037 (深咖啡渐变)',
-        'accent_strip': '#ffcc80 → #ffe0b2 (金色渐变)',
-        'content_bg': '#faf3e0 (极浅羊皮纸色)',
-        'highlight': '#b71c1c (印章红标注)',
+        'banner_gradient': '深咖啡渐变 (dark coffee brown gradient)',
+        'accent_strip': '金色渐变 (golden gradient)',
+        'content_bg': '极浅羊皮纸色底 (very pale parchment)',
+        'highlight': '印章红标注 (stamp red for key dates)',
         'description': '厚重复古的咖啡色系，金色装饰边框，印章红标注关键年代与人物',
     },
     '地理': {
         'name': '地球蓝绿',
-        'banner_gradient': '#004d40 → #00695c (深青绿渐变)',
-        'accent_strip': '#4dd0e1 → #b2ebf2 (天蓝渐变)',
-        'content_bg': '#e0f7fa (极浅青)',
-        'highlight': '#ff9800 (沙漠橙标注)',
+        'banner_gradient': '深青绿渐变 (deep teal gradient)',
+        'accent_strip': '天蓝渐变 (sky blue gradient)',
+        'content_bg': '极浅青底 (very pale cyan)',
+        'highlight': '沙漠橙标注 (desert orange for key data)',
         'description': '海洋与大地的蓝绿色系，橙色标注关键地理数据，传达地球的广袤',
     },
     '政治': {
         'name': '庄重红蓝',
-        'banner_gradient': '#b71c1c → #c62828 (深红渐变)',
-        'accent_strip': '#42a5f5 → #90caf9 (稳重蓝渐变)',
-        'content_bg': '#fce4ec (极浅红)',
-        'highlight': '#1565c0 (蓝色框架标注)',
+        'banner_gradient': '深红渐变 (deep crimson gradient)',
+        'accent_strip': '稳重蓝渐变 (steady blue gradient)',
+        'content_bg': '极浅红底 (very pale pink)',
+        'highlight': '蓝色框架标注 (blue for frameworks)',
         'description': '庄重大气的红色系，蓝色呈现框架与逻辑，传达政治学科的严肃与正式',
     },
     '养生': {
         'name': '养生绿粉',
-        'banner_gradient': '#2e7d32 → #388e3c (深抹茶渐变)',
-        'accent_strip': '#f48fb1 → #f8bbd0 (樱花粉渐变)',
-        'content_bg': '#f1f8e9 (极浅绿)',
-        'highlight': '#ff8a65 (暖杏标注)',
+        'banner_gradient': '深抹茶渐变 (dark matcha green gradient)',
+        'accent_strip': '樱花粉渐变 (cherry blossom pink gradient)',
+        'content_bg': '极浅绿底 (very pale green)',
+        'highlight': '暖杏标注 (warm apricot for key data)',
         'description': '清新自然的抹茶绿，樱花粉口诀条，暖杏色标注关键数据',
     },
     '减脂': {
         'name': '活力粉橙',
-        'banner_gradient': '#c62828 → #e53935 (深珊瑚渐变)',
-        'accent_strip': '#ffab91 → #ffccbc (蜜桃橙渐变)',
-        'content_bg': '#fff3e0 (极浅橙)',
-        'highlight': '#00c853 (健康绿标注)',
+        'banner_gradient': '深珊瑚渐变 (deep coral red gradient)',
+        'accent_strip': '蜜桃橙渐变 (peach orange gradient)',
+        'content_bg': '极浅橙底 (very pale orange)',
+        'highlight': '健康绿标注 (healthy green for data)',
         'description': '活力珊瑚红+蜜桃橙，绿色标注健康数据，传达运动的热情与活力',
     },
 }
@@ -1995,30 +1995,30 @@ _LAYOUT_VARIANTS = {
         'name': '标准四区',
         'prompt_block': """请设计以下 4 个结构化区块：
 
-🔹 区块A — 顶部 Banner（~2%-12%）：
+🔹 区块A — 顶部 Banner：
    深色渐变横幅，带柔和光泽
    标题文字白色大字，居中显示
 
-🔹 区块B — 中间内容卡（~14%-78%）：
+🔹 区块B — 中间内容卡（占据卡片主体）：
    白色或极浅色圆角矩形卡片，带轻微阴影
    卡片内排版教学内容：例题、步骤、对比等
    文字清晰、字号适当、行距舒适
 
-🔹 区块C — 底部口诀条（~80%-92%）：
+🔹 区块C — 底部口诀条：
    暖色渐变横条，带圆角
    口诀/金句白字居中
 
-🔹 区块D — 最底部（~93%-98%）：
+🔹 区块D — 最底部窄条：
    极浅背景，小提示文字""",
     },
     'comparison': {
         'name': '左右对比式',
         'prompt_block': """请设计以下结构化区块（对比式布局）：
 
-🔹 区块A — 顶部 Banner（~2%-12%）：
+🔹 区块A — 顶部 Banner：
    深色渐变横幅，标题白色大字居中
 
-🔹 区块B — 对比内容区（~14%-78%）：
+🔹 区块B — 对比内容区（占据卡片主体）：
    白色圆角矩形卡片，内部分为左右两栏：
    ┌─────────────┬─────────────┐
    │   左栏 ❌    │   右栏 ✅    │
@@ -2030,20 +2030,20 @@ _LAYOUT_VARIANTS = {
    右栏淡绿色底 = 正确/新方法
    对比项目一一对齐，形成强烈视觉反差
 
-🔹 区块C — 底部口诀条（~80%-92%）：
+🔹 区块C — 底部口诀条：
    暖色渐变横条，口诀白字居中
 
-🔹 区块D — 最底部（~93%-98%）：
+🔹 区块D — 最底部窄条：
    极浅背景，小提示文字""",
     },
     'flow': {
         'name': '步骤流程式',
         'prompt_block': """请设计以下结构化区块（流程式布局）：
 
-🔹 区块A — 顶部 Banner（~2%-12%）：
+🔹 区块A — 顶部 Banner：
    深色渐变横幅，标题白色大字居中
 
-🔹 区块B — 步骤流程区（~14%-78%）：
+🔹 区块B — 步骤流程区（占据卡片主体）：
    白色圆角矩形卡片，内部用编号色块+箭头展示步骤：
    ① → ② → ③ → ④ 从上到下排列
    每步用不同颜色的圆角色块（浅蓝→浅绿→浅橙→浅粉递进）
@@ -2051,20 +2051,20 @@ _LAYOUT_VARIANTS = {
    最后一步（答案/结论）用加粗+大号+⭐标记突出
    若有错误步骤，用红色虚线框+❌标记
 
-🔹 区块C — 底部口诀条（~80%-92%）：
+🔹 区块C — 底部口诀条：
    暖色渐变横条，口诀白字居中
 
-🔹 区块D — 最底部（~93%-98%）：
+🔹 区块D — 最底部窄条：
    极浅背景，小提示文字""",
     },
     'concept_map': {
         'name': '思维导图式',
         'prompt_block': """请设计以下结构化区块（思维导图式布局）：
 
-🔹 区块A — 顶部 Banner（~2%-12%）：
+🔹 区块A — 顶部 Banner：
    深色渐变横幅，标题白色大字居中
 
-🔹 区块B — 思维导图区（~14%-78%）：
+🔹 区块B — 思维导图区：
    白色圆角矩形卡片，内部用思维导图/放射状布局：
    中心：核心概念 — 大圆角矩形（主色填充+白字）
    辐射：3-4 个分支，每个分支用不同浅色圆角矩形
@@ -2073,44 +2073,44 @@ _LAYOUT_VARIANTS = {
    最重要的分支用加粗边框+⭐标记
    整体呈放射状/树状分布，层次清晰
 
-🔹 区块C — 底部口诀条（~80%-92%）：
+🔹 区块C — 底部口诀条：
    暖色渐变横条，口诀白字居中
 
-🔹 区块D — 最底部（~93%-98%）：
+🔹 区块D — 最底部：
    极浅背景，小提示文字""",
     },
     'formula_hero': {
         'name': '公式突出式',
         'prompt_block': """请设计以下结构化区块（公式突出式布局）：
 
-🔹 区块A — 顶部 Banner（~2%-12%）：
+🔹 区块A — 顶部 Banner：
    深色渐变横幅，标题白色大字居中
 
-🔹 区块B — 公式展示区（~14%-78%）：
+🔹 区块B — 公式展示区：
    白色圆角矩形卡片，内部分为上下两部分：
-   上半(~40%)：核心公式/定理超大展示
+   上半部分：核心公式/定理超大展示
      - 公式字号是正文的 2-3 倍
      - 公式用浅色圆角色块背景托底
      - 变量用主色标注，常数用黑色
-   下半(~40%)：代入实例验证
+   下半部分：代入实例验证
      - "例" 标签 + 具体数字代入
      - 关键步骤用色块高亮
      - 推导箭头连接各步骤
 
-🔹 区块C — 底部口诀条（~80%-92%）：
+🔹 区块C — 底部口诀条：
    暖色渐变横条，口诀白字居中
 
-🔹 区块D — 最底部（~93%-98%）：
+🔹 区块D — 最底部：
    极浅背景，小提示文字""",
     },
     'poetry': {
         'name': '诗意水墨式',
         'prompt_block': """请设计以下结构化区块（诗意水墨式布局）：
 
-🔹 区块A — 顶部 Banner（~2%-12%）：
+🔹 区块A — 顶部 Banner：
    深棕/墨色渐变横幅，书法风标题白色大字居中
 
-🔹 区块B — 诗词内容区（~14%-78%）：
+🔹 区块B — 诗词内容区：
    宣纸质感背景（极浅米/淡黄色）
    诗词原文用大号书法风字体居中排列
    每句独占一行，字间距宽松典雅
@@ -2118,10 +2118,10 @@ _LAYOUT_VARIANTS = {
    意境装饰：角落淡墨山水/竹叶/梅花等中国风元素（≤15%面积）
    译文/赏析用小号字体排列在诗词下方
 
-🔹 区块C — 底部口诀条（~80%-92%）：
+🔹 区块C — 底部口诀条：
    暖杏/朱砂渐变横条，口诀白字居中
 
-🔹 区块D — 最底部（~93%-98%）：
+🔹 区块D — 最底部：
    极浅背景，小提示文字""",
     },
     # v10.9: 理科专属布局变体
@@ -2129,65 +2129,65 @@ _LAYOUT_VARIANTS = {
         'name': '实验流程式',
         'prompt_block': """请设计以下结构化区块（实验流程式布局）：
 
-🔹 区块A — 顶部 Banner（~2%-12%）：
+🔹 区块A — 顶部 Banner：
    深蓝/深绿渐变横幅，🧪图标+实验名称白色大字居中
 
-🔹 区块B — 目的与器材区（~14%-28%）：
+🔹 区块B — 目的与器材区：
    白色圆角卡片，左侧实验目的(1句话)，右侧主要器材图标化展示
    器材用简化图标+名称标注
 
-🔹 区块C — 步骤流程区（~30%-70%）：
+🔹 区块C — 步骤流程区：
    白色圆角卡片内，编号色块步骤从上到下：
    ①浅蓝 → ②浅绿 → ③浅橙 → ④浅粉
    每步用圆角色块，步骤之间大号→箭头连接
    对照实验用虚线框标注对照组
    关键操作用⚠️图标标注
 
-🔹 区块D — 现象与结论区（~72%-88%）：
+🔹 区块D — 现象与结论区：
    左侧：观察到的现象（用色彩描述词："变蓝""冒泡""沉淀"等）
    右侧：结论大字+核心方程式
 
-🔹 区块E — 底部安全条（~90%-98%）：
+🔹 区块E — 底部安全条：
    淡红色渐变横条，⚠️安全注意事项1-2条白字""",
     },
     'derivation': {
         'name': '公式推导式',
         'prompt_block': """请设计以下结构化区块（公式推导式布局）：
 
-🔹 区块A — 顶部 Banner（~2%-12%）：
+🔹 区块A — 顶部 Banner：
    深紫/深蓝渐变横幅，公式名称白色大字居中
 
-🔹 区块B — 已知条件区（~14%-26%）：
+🔹 区块B — 已知条件区：
    浅蓝色圆角卡片：列出推导的出发点/基本定律/已知关系
    用公式色块展示，变量用主色标注
 
-🔹 区块C — 推导过程区（~28%-65%）：
+🔹 区块C — 推导过程区：
    白色卡片内，逐步推导从上到下：
    Step1 → Step2 → Step3 递进色块（浅→深渐变）
    每步右侧标注该步的物理/化学意义（斜体灰色小字）
    步骤之间用 ⇓ 大箭头连接
    关键变换步骤用黄色高亮背景
 
-🔹 区块D — 最终公式区（~67%-82%）：
+🔹 区块D — 最终公式区：
    大面积主色圆角色块，公式字号是正文2-3倍
    各符号注释在公式下方（符号=含义 排列）
 
-🔹 区块E — 适用条件条（~84%-98%）：
+🔹 区块E — 适用条件条：
    淡橙色渐变横条，⚠️适用前提+常见误用场景白字""",
     },
     'microscopic': {
         'name': '微观图解式',
         'prompt_block': """请设计以下结构化区块（微观图解式布局）：
 
-🔹 区块A — 顶部 Banner（~2%-12%）：
+🔹 区块A — 顶部 Banner：
    深色科技感渐变横幅，标题白色大字居中
 
-🔹 区块B — 宏观现象区（~14%-30%）：
+🔹 区块B — 宏观现象区：
    白色圆角卡片，展示宏观可观察的现象
    用实物/场景图+现象描述文字
    标注"你看到的👁"
 
-🔹 区块C — 微观图解区（~32%-72%）：
+🔹 区块C — 微观图解区：
    浅灰/浅蓝科技感背景圆角卡片
    放大镜视觉效果：从宏观→微观的过渡
    粒子用不同颜色+大小的圆圈表示：
@@ -2197,32 +2197,32 @@ _LAYOUT_VARIANTS = {
    粒子数量≤15个，保持清晰
    标注"微观本质🔬"
 
-🔹 区块D — 本质总结区（~74%-88%）：
+🔹 区块D — 本质总结区：
    暖色渐变条，一句话揭示宏观→微观因果
 
-🔹 区块E — 底部口诀（~90%-98%）：
+🔹 区块E — 底部口诀：
    极浅背景，记忆口诀小字""",
     },
     'graph_analysis': {
         'name': '图像解读式',
         'prompt_block': """请设计以下结构化区块（图像解读式布局 — 横屏4:3）：
 
-🔹 区块A — 顶部 Banner（~2%-12%）：
+🔹 区块A — 顶部 Banner：
    深色渐变横幅，图像类型名称白色大字居中
 
-🔹 区块B — 示例图像区（~14%-50%）：
+🔹 区块B — 示例图像区：
    白色卡片内，一张典型坐标图/曲线图：
    - 横轴+纵轴标注物理量名称和单位
    - 曲线用主色粗线绘制
    - 关键点(截距/拐点/交点)用红色圆点标注
    - 特殊区域用浅色阴影填充
 
-🔹 区块C — 读图方法区（~52%-78%）：
+🔹 区块C — 读图方法区：
    三色步骤条横排：
    ①蓝色"看轴" → ②绿色"看点" → ③橙色"看趋势"
    每步下方2-3行要点注释
 
-🔹 区块D — 考法/易错区（~80%-98%）：
+🔹 区块D — 考法/易错区：
    左侧：标签色块列出常考题型（2-3种）
    右侧：⚠️易错点红色小字""",
     },
@@ -2230,17 +2230,17 @@ _LAYOUT_VARIANTS = {
         'name': '科学模型式',
         'prompt_block': """请设计以下结构化区块（科学模型式布局）：
 
-🔹 区块A — 顶部 Banner（~2%-12%）：
+🔹 区块A — 顶部 Banner：
    深灰/深蓝渐变横幅，模型名称白色大字居中
 
-🔹 区块B — 模型示意图区（~14%-58%）：
+🔹 区块B — 模型示意图区：
    白色圆角卡片内，模型的核心简化示意图：
    - 用圆形/矩形/箭头等几何元素构建模型
    - 关键假设用标注气泡指出
    - 不同部分用不同颜色区分
    - 保持简洁，避免过于复杂的3D效果
 
-🔹 区块C — 适用与局限区（~60%-82%）：
+🔹 区块C — 适用与局限区：
    白色卡片内分左右两栏：
    ┌─────────────┬─────────────┐
    │  ✅ 能解释    │  ❌ 不能解释  │
@@ -2248,17 +2248,17 @@ _LAYOUT_VARIANTS = {
    └─────────────┴─────────────┘
    每栏列出2-3条
 
-🔹 区块D — 底部核心思想（~84%-98%）：
+🔹 区块D — 底部核心思想：
    暖色渐变条，模型核心思想一句话白字居中""",
     },
     'precise_wording': {
         'name': '术语精准式',
         'prompt_block': """请设计以下结构化区块（术语精准式布局）：
 
-🔹 区块A — 顶部 Banner（~2%-12%）：
+🔹 区块A — 顶部 Banner：
    深色渐变横幅，"⚠️ 高考踩分用词"白色大字居中
 
-🔹 区块B — 对比区（~14%-65%）：
+🔹 区块B — 对比区：
    白色圆角卡片内，逐条对比：
    ┌──────────────────────────────┐
    │ ❌ 错误表述（红色底）           │
@@ -2271,10 +2271,10 @@ _LAYOUT_VARIANTS = {
    └──────────────────────────────┘
    每组❌/✅/💡 三行，最多4组
 
-🔹 区块C — 记忆技巧（~67%-82%）：
+🔹 区块C — 记忆技巧：
    暖色圆角色块，精准用词的记忆口诀/技巧
 
-🔹 区块D — 底部提示（~84%-98%）：
+🔹 区块D — 底部提示：
    极浅背景，"每个字都是踩分点"提示小字""",
     },
 }
@@ -2326,14 +2326,18 @@ def _build_color_scheme_block(subject):
  内容卡: {cs['content_bg']}，带轻微阴影
  口诀条: {cs['accent_strip']}
  强调色（标注重点）: {cs['highlight']}
- 背景: 内容卡底色的更浅版本，有微妙渐变过渡"""
+ 背景: 内容卡底色的更浅版本，有微妙渐变过渡
+
+⚠️ 以上配色仅供你选色参考，不要把颜色名称或色值渲染到卡片图片上！"""
     return """══════ 配色 ══════
 
 主色选一: 珊瑚粉 / 薄荷蓝 / 蜜桃橙 / 薰衣草紫
- Banner 区块: 该主色的深色版本（如深紫色渐变 #3a1c71→#5a3f8e）
- 内容卡: 纯白 #FFFFFF 或极浅色 #FAFAFA，带轻微阴影
- 口诀条: 该主色的暖亮版本（如暖粉 #FF9A9E→#FAD0C4）
- 背景: 该主色的极浅淡版本，有微妙渐变过渡"""
+ Banner 区块: 该主色的深色渐变版本
+ 内容卡: 纯白或极浅色，带轻微阴影
+ 口诀条: 该主色的暖亮渐变版本
+ 背景: 该主色的极浅淡版本，有微妙渐变过渡
+
+⚠️ 以上配色仅供你选色参考，不要把颜色名称或色值渲染到卡片图片上！"""
 
 
 def _get_layout_variant(card_type, subject):
@@ -3028,10 +3032,10 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
         f"1. This is a {subject} educational knowledge card about \"{card_title}\".\n"
         f"2. ✅ You MUST render ALL text directly in the image — text is the core content!\n"
         f"3. Design a STRUCTURED CARD with text integrated into each zone:\n"
-        f"   - TOP BANNER (~2-12%): Dark gradient strip with WHITE TITLE TEXT centered\n"
-        f"   - CONTENT CARD (~14-78%): White rounded rectangle with TEACHING CONTENT text\n"
-        f"   - ACCENT STRIP (~80-92%): Warm gradient bar with WHITE SLOGAN TEXT centered\n"
-        f"   - BOTTOM (~93-98%): Small tip text if needed\n"
+        f"   - TOP BANNER: Dark gradient strip at top with WHITE TITLE TEXT centered\n"
+        f"   - CONTENT CARD: White rounded rectangle in main body with TEACHING CONTENT text\n"
+        f"   - ACCENT STRIP: Warm gradient bar near bottom with WHITE SLOGAN TEXT centered\n"
+        f"   - BOTTOM EDGE: Small tip text if needed\n"
         f"   - Small cute mascot in bottom-right corner (<10% of image)\n"
         f"4. ⚠️ TEXT QUALITY IS CRITICAL:\n"
         f"   - Every Chinese character must be perfectly formed (correct strokes, no garbled text)\n"
@@ -3043,6 +3047,7 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
         f"5. Style: Professional Xiaohongshu card template with text as part of design.\n"
         f"   Main color: choose from coral pink / mint blue / peach orange / lavender.\n"
         f"6. {canvas_en}\n"
+        f"7. ⚠️ Do NOT render any color hex codes (like #1a237e), percentage numbers, or layout coordinates as visible text in the image!\n"
     )
 
     # manifest: 告诉 AI 需要渲染的文字内容
