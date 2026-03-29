@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260329f'  # v10.9.9 fix: 超时路径也保存warm-start缓存
+BUILD_VERSION = '20260329g'  # v10.9.9a: card_source_hash替代manifest_hash + 始终保护高分缓存
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -3732,26 +3732,27 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             warm_cached_prompt = ''       # 缓存的最优 prompt
             warm_cached_manifest = None   # 缓存的 manifest
             warm_prompt_reused = False    # 是否复用了缓存 prompt
+            _card_src_hash = ''  # v10.9.9a: 稳定的卡片源数据哈希
             try:
                 from _card_best_image import (
-                    get_best_cache, save_best_cache, manifest_hash as _mf_hash,
+                    get_best_cache, save_best_cache, card_source_hash as _cs_hash,
                     WARM_START_THRESHOLD, WARM_START_SKIP_FRESH
                 )
+                _card_src_hash = _cs_hash(card)
                 cached = get_best_cache(card['full_id'])
                 if cached:
                     ws_audit = cached['audit_score']
                     ws_combined = cached['combined_score']
                     ws_gen = cached['generation_count']
                     cached_m_hash = cached['manifest_hash']
-                    current_m_hash = _mf_hash(manifest)
-                    manifest_match = (cached_m_hash == current_m_hash)
+                    content_match = (cached_m_hash == _card_src_hash)
                     ws_prompt_len = cached.get('prompt_length', 0)
-                    pipeline_log.append(f'Step1.5: 🔥 发现缓存 audit={ws_audit} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字 manifest_match={manifest_match}')
-                    print(f'[v3] Step1.5: warm-start audit={ws_audit} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字', flush=True)
+                    pipeline_log.append(f'Step1.5: 🔥 发现缓存 audit={ws_audit} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字 content_match={content_match}')
+                    print(f'[v3] Step1.5: warm-start audit={ws_audit} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字 content_match={content_match}', flush=True)
 
                     # ── Prompt 复用逻辑 ──
-                    # manifest匹配 + 有缓存prompt → 可复用prompt (省1次API调用)
-                    if manifest_match and cached.get('prompt_text'):
+                    # 卡片内容匹配 + 有缓存prompt → 可复用prompt (省1次API调用)
+                    if content_match and cached.get('prompt_text'):
                         warm_cached_prompt = cached['prompt_text']
                         warm_cached_manifest = cached.get('manifest', {})
                         prompt = warm_cached_prompt  # 覆盖 Step1 生成的 prompt
@@ -3760,8 +3761,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                         print(f'[v3] Step1.5: 复用缓存prompt ({len(prompt)}字)', flush=True)
 
                     # ── Image warm-start 逻辑 ──
-                    if not manifest_match:
-                        pipeline_log.append('Step1.5: ⚠️ manifest已变化, 图片缓存失效, 从头生成')
+                    if not content_match:
+                        pipeline_log.append('Step1.5: ⚠️ 卡片内容已变化, 图片缓存失效, 从头生成')
                     elif ws_audit < WARM_START_THRESHOLD:
                         pipeline_log.append(f'Step1.5: ⚠️ 缓存分不够({ws_audit}<{WARM_START_THRESHOLD}), 从头生成')
                     else:
@@ -4064,7 +4065,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             except Exception as cr_e:
                 pipeline_log.append(f'深度复审沉淀跳过: {str(cr_e)[:80]}')
 
-            # ── v10.9.9 Step 7: 保存/更新卡片最优图+Prompt缓存 ──
+            # ── v10.9.9a Step 7: 保存/更新卡片最优图+Prompt缓存 ──
             try:
                 from _card_best_image import save_best_cache
                 ws_saved, ws_reason = save_best_cache(
@@ -4078,6 +4079,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     manifest=manifest,
                     subject=subject,
                     grade=grade,
+                    source_hash=_card_src_hash,
                 )
                 pipeline_log.append(f'Step7: {"💾 最优缓存已保存" if ws_saved else "📦 缓存未更新"}: {ws_reason}')
                 print(f'[v3] Step7: warm-start {"saved" if ws_saved else "skipped"}: {ws_reason}', flush=True)
@@ -4234,7 +4236,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     return
                 pipeline_log.append(f'⏰ 超时({_elapsed():.0f}s), 使用当前最佳结果(score={best_score})')
 
-                # v10.9.9 fix: 超时路径也执行 Step 7 warm-start 缓存保存
+                # v10.9.9a fix: 超时路径也执行 Step 7 warm-start 缓存保存
                 try:
                     from _card_best_image import save_best_cache
                     ws_saved, ws_reason = save_best_cache(
@@ -4248,6 +4250,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                         manifest=manifest if manifest else {},
                         subject=subject,
                         grade=grade,
+                        source_hash=_card_src_hash,
                     )
                     pipeline_log.append(f'Step7: {"💾 最优缓存已保存" if ws_saved else "📦 缓存未更新"}: {ws_reason}')
                     print(f'[v3-async] Step7(timeout): warm-start {"saved" if ws_saved else "skipped"}: {ws_reason}', flush=True)
@@ -4324,40 +4327,41 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     _finish_with_best(None, 'png', 0, '', 0)
                     return
 
-                # ── v10.9.9 Step 1.5: Warm-Start 历史最优缓存检查 (图+Prompt) ──
+                # ── v10.9.9a Step 1.5: Warm-Start 历史最优缓存检查 (图+Prompt) ──
                 warm_start_image = None
                 warm_start_score = 0
                 warm_start_ext = 'png'
                 warm_start_model = ''
                 warm_skip_fresh = False
                 warm_prompt_reused = False
+                _card_src_hash = ''  # v10.9.9a: 稳定的卡片源数据哈希
                 try:
                     from _card_best_image import (
-                        get_best_cache, save_best_cache, manifest_hash as _mf_hash,
+                        get_best_cache, save_best_cache, card_source_hash as _cs_hash,
                         WARM_START_THRESHOLD, WARM_START_SKIP_FRESH
                     )
+                    _card_src_hash = _cs_hash(card)
                     cached = get_best_cache(card.get('full_id', ''))
                     if cached:
                         ws_audit = cached['audit_score']
                         ws_combined = cached['combined_score']
                         ws_gen = cached['generation_count']
                         cached_m_hash = cached['manifest_hash']
-                        current_m_hash = _mf_hash(manifest)
-                        manifest_match = (cached_m_hash == current_m_hash)
+                        content_match = (cached_m_hash == _card_src_hash)
                         ws_prompt_len = cached.get('prompt_length', 0)
-                        pipeline_log.append(f'Step1.5: 🔥 发现缓存 audit={ws_audit} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字 manifest_match={manifest_match}')
-                        print(f'[v3-async] Step1.5: warm-start audit={ws_audit} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字', flush=True)
+                        pipeline_log.append(f'Step1.5: 🔥 发现缓存 audit={ws_audit} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字 content_match={content_match}')
+                        print(f'[v3-async] Step1.5: warm-start audit={ws_audit} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字 content_match={content_match}', flush=True)
 
                         # ── Prompt 复用逻辑 ──
-                        if manifest_match and cached.get('prompt_text'):
+                        if content_match and cached.get('prompt_text'):
                             prompt = cached['prompt_text']
                             warm_prompt_reused = True
                             pipeline_log.append(f'Step1.5: ♻️ 复用缓存prompt ({len(prompt)}字)')
                             print(f'[v3-async] Step1.5: 复用缓存prompt ({len(prompt)}字)', flush=True)
 
                         # ── Image warm-start 逻辑 ──
-                        if not manifest_match:
-                            pipeline_log.append('Step1.5: ⚠️ manifest已变化, 图片缓存失效')
+                        if not content_match:
+                            pipeline_log.append('Step1.5: ⚠️ 卡片内容已变化, 图片缓存失效')
                         elif ws_audit < WARM_START_THRESHOLD:
                             pipeline_log.append(f'Step1.5: ⚠️ 缓存分不够({ws_audit}<{WARM_START_THRESHOLD})')
                         else:
@@ -4706,7 +4710,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 except Exception as opt_e:
                     pipeline_log.append(f'自我优化记录跳过: {str(opt_e)[:80]}')
 
-                # ── v10.9.9 Step 7: 保存/更新卡片最优图+Prompt缓存 ──
+                # ── v10.9.9a Step 7: 保存/更新卡片最优图+Prompt缓存 ──
                 try:
                     from _card_best_image import save_best_cache
                     ws_saved, ws_reason = save_best_cache(
@@ -4720,6 +4724,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                         manifest=manifest,
                         subject=subject,
                         grade=grade,
+                        source_hash=_card_src_hash,
                     )
                     pipeline_log.append(f'Step7: {"💾 最优缓存已保存" if ws_saved else "📦 缓存未更新"}: {ws_reason}')
                     print(f'[v3-async] Step7: warm-start {"saved" if ws_saved else "skipped"}: {ws_reason}', flush=True)

@@ -23,8 +23,13 @@ Pipeline 集成点:
   │ 有缓存 score < 60      │ 复用缓存prompt → Step2-4从头生成, 结束取更优   │
   │ 有缓存 60 ≤ s < 85     │ 复用缓存prompt → 缩减轮数=1, 结束取更优       │
   │ 有缓存 score ≥ 85      │ 复用缓存prompt → 跳过从头生成, 直接精修缓存图   │
-  │ manifest 变化          │ 重新走Step1生成prompt, 图片缓存失效            │
+  │ card内容变化           │ 重新走Step1生成prompt, 图片缓存失效            │
   └────────────────────────┴──────────────────────────────────────────────┘
+
+v10.9.9a fix: manifest_hash → card_source_hash
+  旧版用 Gemini 生成的 manifest 做哈希 (每次不同 → 永远 mismatch)
+  新版用卡片源数据字段做哈希 (只有内容真正变化才 mismatch)
+  + save_best_cache 始终保护高分图片 (分数低不覆盖)
 """
 
 import os
@@ -102,11 +107,41 @@ def _safe_filename(card_id):
 
 
 def manifest_hash(manifest):
-    """manifest → 12字符 MD5 短哈希 (用于变更检测)"""
+    """manifest → 12字符 MD5 短哈希 (用于变更检测)
+    注意: 此函数保留用于兼容, 新代码应使用 card_source_hash()"""
     if not manifest:
         return ''
     m_str = json.dumps(manifest, sort_keys=True, ensure_ascii=False)
     return hashlib.md5(m_str.encode('utf-8')).hexdigest()[:12]
+
+
+def card_source_hash(card):
+    """卡片源数据 → 12字符 MD5 短哈希 (稳定, 不受 Gemini 输出变化影响)
+
+    只有卡片源内容真正变化 (如教师修改了知识点) 才会产生不同哈希。
+    比 manifest_hash 更适合做缓存失效判断。
+    """
+    if not card:
+        return ''
+    # 选取影响图片内容的稳定字段
+    stable_fields = {
+        'full_id': card.get('full_id', ''),
+        'title': card.get('title', ''),
+        'type': card.get('type', ''),
+        'content': card.get('content', ''),
+        'knowledge_points': card.get('knowledge_points', []),
+        'points': card.get('points', []),
+        'bullets': card.get('bullets', []),
+        'example': card.get('example', ''),
+        'examples': card.get('examples', []),
+        'formula': card.get('formula', ''),
+        'tip': card.get('tip', ''),
+        'steps': card.get('steps', []),
+    }
+    # 过滤掉空值
+    stable_fields = {k: v for k, v in stable_fields.items() if v}
+    s = json.dumps(stable_fields, sort_keys=True, ensure_ascii=False)
+    return hashlib.md5(s.encode('utf-8')).hexdigest()[:12]
 
 
 def get_best_cache(card_id):
@@ -182,17 +217,20 @@ get_best_image = get_best_cache
 
 
 def save_best_cache(card_id, image_data, ext, audit_score, quality_score,
-                    prompt_text='', model='', manifest=None, subject='', grade=''):
+                    prompt_text='', model='', manifest=None, subject='', grade='',
+                    source_hash=''):
     """
     保存/更新某卡片的最优图 + 最优 prompt。
-    仅在新图更优 或 manifest 变化时才更新。
+    v10.9.9a: 始终保护高分 — 只有新图更优时才替换图片。
+    source_hash 用于检测卡片源内容变化 (由 card_source_hash 生成)。
 
     Returns:
         (saved: bool, reason: str)
     """
     _ensure_dir()
     combined = (audit_score + quality_score) / 2 if quality_score > 0 else float(audit_score)
-    m_hash = manifest_hash(manifest)
+    # 优先使用 source_hash, 降级到 manifest_hash
+    m_hash = source_hash if source_hash else manifest_hash(manifest)
     m_json = json.dumps(manifest or {}, ensure_ascii=False)
 
     conn = _get_conn()
@@ -208,13 +246,19 @@ def save_best_cache(card_id, image_data, ext, audit_score, quality_score,
             gen_count = existing['generation_count'] + 1
             old_m_hash = existing['manifest_hash']
 
-            # 仅在 新分更高 或 manifest变化 时才更新图片+prompt
-            if combined <= old_combined and m_hash == old_m_hash:
-                # 只更新计数
-                conn.execute(
-                    "UPDATE card_best_images SET generation_count = ?, updated_at = datetime('now','localtime') WHERE card_id = ?",
-                    (gen_count, card_id)
-                )
+            # v10.9.9a fix: 始终保护高分图片, 不因 hash 变化就覆盖
+            if combined <= old_combined:
+                # 分数未超越 → 只更新计数 + hash (如有变化)
+                if m_hash != old_m_hash:
+                    conn.execute(
+                        "UPDATE card_best_images SET generation_count = ?, manifest_hash = ?, manifest_json = ?, updated_at = datetime('now','localtime') WHERE card_id = ?",
+                        (gen_count, m_hash, m_json, card_id)
+                    )
+                else:
+                    conn.execute(
+                        "UPDATE card_best_images SET generation_count = ?, updated_at = datetime('now','localtime') WHERE card_id = ?",
+                        (gen_count, card_id)
+                    )
                 conn.commit()
                 return False, f'缓存更优({old_combined:.0f}>={combined:.0f}), gen#{gen_count}'
 
