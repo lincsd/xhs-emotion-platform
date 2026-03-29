@@ -146,6 +146,42 @@ except ImportError as _e:
     _HAS_SKILL_FEEDBACK = False
     print(f'[v3] Skill反向学习闭环未加载 ({_e})')
 
+# 深层复审沉淀 (content_review → prompt 预防)
+# 注意: 延迟导入, 避免与 _deep_review.py 的循环依赖
+
+
+def build_content_review_hint(subject: str, card_id: str = '') -> str:
+    """从 content_review 表查询该学科/卡片历史审查问题, 组装成 prompt 警告提示。
+    仅返回 severity >= medium 的条目, 最多注入 8 条。"""
+    try:
+        from _deep_review import get_skill_insights as _get_content_review_insights
+    except ImportError:
+        return ''
+    try:
+        rows = _get_content_review_insights(subject, severity_min='medium')
+        if not rows:
+            return ''
+        # 优先精确匹配 card_id, 再补充同学科通用问题
+        card_rows = [r for r in rows if card_id and r.get('card_id', '') == card_id]
+        subj_rows = [r for r in rows if r not in card_rows]
+        selected = card_rows[:4] + subj_rows[:max(0, 8 - len(card_rows[:4]))]
+        if not selected:
+            return ''
+        lines = ['\n=== CONTENT REVIEW WARNINGS (from deep audit history) ===']
+        for r in selected:
+            dim = r.get('dimension', '')
+            sev = r.get('severity', '')
+            issues = r.get('issues', [])
+            issue_str = '; '.join(i for i in issues if i)[:150]
+            if issue_str:
+                lines.append(f'  - [{dim}|{sev}] {issue_str}')
+        lines.append('IMPORTANT: Avoid repeating the above issues in this generation.')
+        lines.append('=== END CONTENT REVIEW WARNINGS ===\n')
+        return '\n'.join(lines) if len(lines) > 3 else ''
+    except Exception as e:
+        print(f'      [content_review] hint error: {e}')
+        return ''
+
 # ═══════════════════════════════════════════
 # 配置
 # ═══════════════════════════════════════════
@@ -2683,6 +2719,13 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
                 print(f'      [feedback] 注入反馈提示 ({len(feedback_hint)}字)')
         except Exception as e:
             print(f'      [feedback] hint error: {e}')
+
+    # ── 深层复审沉淀: 注入历史审查发现的内容问题警告 ──
+    card_id = card.get('full_id') or card.get('card_id', '')
+    review_hint = build_content_review_hint(subject, card_id)
+    if review_hint:
+        full_input += f'\n{review_hint}'
+        print(f'      [content_review] 注入审查警告 ({len(review_hint)}字)')
 
     contents = [
         {'role': 'user', 'parts': [{'text': full_input}]}

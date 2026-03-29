@@ -3595,6 +3595,32 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 except Exception as e:
                     pipeline_log.append(f'Step0a 跳过: {str(e)[:50]}')
 
+            # Step 0a1.5: 深层复审沉淀检查 (content_review)
+            if not skip_audit:
+                try:
+                    from _deep_review import get_skill_insights
+                    cr_rows = get_skill_insights(subject, severity_min='high')
+                    # 精确匹配当前卡片
+                    card_full_id = card.get('full_id') or card.get('card_id', '')
+                    card_cr = [r for r in cr_rows if r.get('card_id', '') == card_full_id]
+                    if card_cr:
+                        cr_issues = []
+                        for r in card_cr:
+                            cr_issues.extend(r.get('issues', []))
+                        cr_issues = [i for i in cr_issues if i]
+                        if cr_issues:
+                            pipeline_log.append(f'Step0a1.5: ⚠️ 深层复审曾发现{len(cr_issues)}个高严重度问题')
+                            # 注入到卡片以供后续 prompt 参考
+                            card['_deep_review_issues'] = cr_issues[:5]
+                        else:
+                            pipeline_log.append('Step0a1.5: ✅ 无高严重度问题')
+                    else:
+                        pipeline_log.append('Step0a1.5: ✅ 无历史审查记录')
+                except ImportError:
+                    pipeline_log.append('Step0a1.5: deep_review未安装,跳过')
+                except Exception as e:
+                    pipeline_log.append(f'Step0a1.5 跳过: {str(e)[:50]}')
+
             # Step 0a2: 硬规则审校闸门 (card_review)
             if not skip_audit:
                 try:
@@ -3660,7 +3686,16 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     fix_hint += f'  - {iss}\n'
                 fix_hint += 'Fix all above issues in the generated image. Do NOT repeat these mistakes.\n'
                 prompt = fix_hint + prompt
-            
+
+            # 如果深层复审有历史高严重度问题，注入纠错提示到 prompt
+            deep_review_issues = card.get('_deep_review_issues', [])
+            if deep_review_issues:
+                dr_hint = '\n⚠️ DEEP REVIEW HISTORY — KNOWN ISSUES FOR THIS CARD:\n'
+                for iss in deep_review_issues[:5]:
+                    dr_hint += f'  - {iss}\n'
+                dr_hint += 'You MUST avoid these known content errors.\n'
+                prompt = dr_hint + prompt
+
             manifest_count = len(manifest) if manifest else 0
             total_chars = sum(len(v) for v in manifest.values()) if manifest else 0
             pipeline_log.append(f'Step1完成: {len(prompt)}字prompt, {manifest_count}处文字共{total_chars}字')
