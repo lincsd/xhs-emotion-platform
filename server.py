@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260328g'  # v10.9: 理科卡片系统(物理/化学/生物×12种卡片类型)
+BUILD_VERSION = '20260329b'  # v10.9.6: 深度复审闭环+grade智能提取+异步流水线审核
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -3547,6 +3547,15 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         platform = body.get('platform', '')  # v10.8: 画布平台
         ratio_override = body.get('ratio', '')  # v10.8: 直接指定比例
 
+        # v10.9.6: 从 full_id 智能提取 grade（避免前端传递默认值'三年级'bug）
+        import re as _re
+        card_full_id = card.get('full_id', '')
+        if grade in ('三年级', '') and card_full_id:
+            _gm = _re.search(r'(高[一二三][上下]|[七八九][上下]|[一二三四五六][上下])', card_full_id)
+            if _gm:
+                grade = _gm.group(1)
+                semester = '上册' if grade.endswith('上') else '下册'
+
         if not SERVER_GEMINI_API_KEYS:
             return self._send_json({'error': '服务端未配置 Gemini API Key'}, 500)
 
@@ -3839,6 +3848,42 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             except Exception as opt_e:
                 pipeline_log.append(f'自我优化记录跳过: {str(opt_e)[:80]}')
 
+            # v10.9.6: 将审核结果沉淀到 content_review 表（深度复审闭环）
+            try:
+                from _deep_review import _init_content_review_table
+                from self_optimizer import _get_conn as _opt_conn
+                _init_content_review_table()
+                conn = _opt_conn()
+                card_fid = card.get('full_id', '')
+                ped_total = pedagogy_report.get('pedagogical_score', 0) if pedagogy_report else 0
+                cr_sev = 'none' if ped_total >= 80 else ('low' if ped_total >= 65 else ('medium' if ped_total >= 50 else 'high'))
+                cr_issues = []
+                if pedagogy_report:
+                    cr_issues = pedagogy_report.get('top_improvements', [])[:5]
+                cr_raw = {
+                    'pedagogical_score': ped_total,
+                    'audit_score': best_score,
+                    'quality_score': quality.get('total', 0),
+                    'verdict': pedagogy_report.get('verdict', '') if pedagogy_report else '',
+                    'model': used_model,
+                    'rounds': rounds_used,
+                }
+                conn.execute("""
+                    INSERT INTO content_review (card_id, subject, grade, dimension, severity, overall_score,
+                                                issues_json, suggestions_json, raw_json)
+                    VALUES (?, ?, ?, 'auto_pipeline', ?, ?, ?, ?, ?)
+                """, (
+                    card_fid, subject, grade, cr_sev, ped_total,
+                    json.dumps(cr_issues, ensure_ascii=False),
+                    json.dumps([], ensure_ascii=False),
+                    json.dumps(cr_raw, ensure_ascii=False),
+                ))
+                conn.commit()
+                conn.close()
+                pipeline_log.append(f'深度复审记录已沉淀 (severity={cr_sev})')
+            except Exception as cr_e:
+                pipeline_log.append(f'深度复审沉淀跳过: {str(cr_e)[:80]}')
+
             # ── 积分扣减 ──
             if user:
                 self._record_ai_usage(user['id'], 'v3图片生成')
@@ -3954,6 +3999,15 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             skip_audit = body.get('skipAudit', False)
             platform = body.get('platform', '')  # v10.8
             ratio_override = body.get('ratio', '')  # v10.8
+
+            # v10.9.6: 从 full_id 智能提取 grade
+            import re as _re
+            card_full_id = card.get('full_id', '')
+            if grade in ('三年级', '') and card_full_id:
+                _gm = _re.search(r'(高[一二三][上下]|[七八九][上下]|[一二三四五六][上下])', card_full_id)
+                if _gm:
+                    grade = _gm.group(1)
+                    semester = '上册' if grade.endswith('上') else '下册'
             keys = list(SERVER_GEMINI_API_KEYS)
             title = card.get('title', '')
             card_type_async = card.get('type', '方法卡')
@@ -3992,6 +4046,31 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                         'status': 'done', 'result': result, 'updated': time.time(), 'progress': '完成(超时最佳)'}
 
             try:
+                # v10.9.6: Step 0 — 深层复审沉淀检查 + 硬规则
+                skip_audit = body.get('skipAudit', False)
+                if not skip_audit:
+                    try:
+                        from _deep_review import get_skill_insights
+                        cr_rows = get_skill_insights(subject, severity_min='high')
+                        card_fid_check = card.get('full_id') or card.get('card_id', '')
+                        card_cr = [r for r in cr_rows if r.get('card_id', '') == card_fid_check]
+                        if card_cr:
+                            cr_issues = []
+                            for r in card_cr:
+                                cr_issues.extend(r.get('issues', []))
+                            cr_issues = [i for i in cr_issues if i]
+                            if cr_issues:
+                                pipeline_log.append(f'Step0: ⚠️ 深层复审发现{len(cr_issues)}个高严重度问题')
+                                card['_deep_review_issues'] = cr_issues[:5]
+                            else:
+                                pipeline_log.append('Step0: ✅ 无高严重度问题')
+                        else:
+                            pipeline_log.append('Step0: ✅ 无历史审查记录')
+                    except ImportError:
+                        pipeline_log.append('Step0: deep_review未安装,跳过')
+                    except Exception as e:
+                        pipeline_log.append(f'Step0 跳过: {str(e)[:50]}')
+
                 # Step 1
                 _update_progress('Step1: 生成Prompt...')
                 print(f'[v3-async] {card.get("full_id","")} Step1: 生成Prompt...', flush=True)
@@ -4004,6 +4083,15 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                         _async_tasks[task_id] = {**_async_tasks[task_id],
                             'status': 'error', 'result': {'error': 'Step1失败: 无法生成图片提示词', 'pipeline': pipeline_log}, 'updated': time.time()}
                     return
+
+                # 注入深层复审纠错提示
+                deep_review_issues = card.get('_deep_review_issues', [])
+                if deep_review_issues:
+                    dr_hint = '\n⚠️ DEEP REVIEW HISTORY — KNOWN ISSUES FOR THIS CARD:\n'
+                    for iss in deep_review_issues[:5]:
+                        dr_hint += f'  - {iss}\n'
+                    dr_hint += 'You MUST avoid these known content errors.\n'
+                    prompt = dr_hint + prompt
 
                 manifest_count = len(manifest) if manifest else 0
                 pipeline_log.append(f'Step1完成: {len(prompt)}字prompt, {manifest_count}处文字 ({_elapsed():.0f}s)')
@@ -4142,6 +4230,81 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 total_time = _elapsed()
                 print(f'[v3-async] ✅ {card.get("full_id","")} 完成: 审计={best_score} 质量={quality.get("total",0)} 耗时={total_time:.0f}s', flush=True)
 
+                # ── v10.9.6 Step6: 后置教学审核 + 深度复审记录 ──
+                pedagogy_result = None
+                try:
+                    from pedagogical_audit import full_pedagogical_audit
+                    pedagogy_result = full_pedagogical_audit(card, card_type_async, subject, grade)
+                    ped_score = pedagogy_result.get('pedagogical_score', 0)
+                    pipeline_log.append(f'Step6a: 教学审核={ped_score:.0f}分({pedagogy_result.get("verdict","")})')
+                except Exception as pa_e:
+                    pipeline_log.append(f'Step6a 跳过: {str(pa_e)[:50]}')
+
+                # v10.9.6: 将审核结果沉淀到 content_review 表（深度复审闭环）
+                try:
+                    from _deep_review import _init_content_review_table
+                    from self_optimizer import _get_conn as _opt_conn
+                    _init_content_review_table()
+                    conn = _opt_conn()
+                    import json as _json
+                    card_fid = card.get('full_id', '')
+                    ped_total = pedagogy_result.get('pedagogical_score', 0) if pedagogy_result else 0
+                    # 严重度根据教学评分判定
+                    cr_sev = 'none' if ped_total >= 80 else ('low' if ped_total >= 65 else ('medium' if ped_total >= 50 else 'high'))
+                    cr_issues = []
+                    cr_suggestions = []
+                    if pedagogy_result:
+                        cr_issues = pedagogy_result.get('top_improvements', [])[:5]
+                        if pedagogy_result.get('understandability', {}).get('cognitive_gaps'):
+                            cr_issues.extend(pedagogy_result['understandability']['cognitive_gaps'][:2])
+                    cr_raw = {
+                        'pedagogical_score': ped_total,
+                        'audit_score': best_score,
+                        'quality_score': quality.get('total', 0),
+                        'verdict': pedagogy_result.get('verdict', '') if pedagogy_result else '',
+                        'model': used_model,
+                        'rounds': rounds_used,
+                    }
+                    conn.execute("""
+                        INSERT INTO content_review (card_id, subject, grade, dimension, severity, overall_score,
+                                                    issues_json, suggestions_json, raw_json)
+                        VALUES (?, ?, ?, 'auto_pipeline', ?, ?, ?, ?, ?)
+                    """, (
+                        card_fid, subject, grade, cr_sev, ped_total,
+                        _json.dumps(cr_issues, ensure_ascii=False),
+                        _json.dumps(cr_suggestions, ensure_ascii=False),
+                        _json.dumps(cr_raw, ensure_ascii=False),
+                    ))
+                    conn.commit()
+                    conn.close()
+                    pipeline_log.append(f'Step6b: ✅ 深度复审记录已沉淀 (severity={cr_sev})')
+                except Exception as cr_e:
+                    pipeline_log.append(f'Step6b 跳过: {str(cr_e)[:80]}')
+
+                # ── 自我优化: 记录结果 ──
+                try:
+                    from self_optimizer import record_full_result
+                    record_full_result(
+                        card_id=card.get('full_id', ''),
+                        subject=subject,
+                        grade=grade,
+                        card_type=card_type_async,
+                        prompt_text=prompt,
+                        manifest=manifest,
+                        audit_score=best_score,
+                        quality_score=quality.get('total', 0),
+                        audit_result=None,
+                        image_model=used_model,
+                        audit_rounds=rounds_used,
+                        final_action=final_action,
+                        prompt_length=len(prompt),
+                        image_size_kb=len(best_image) / 1024,
+                        success=True
+                    )
+                    pipeline_log.append('🧠 自我优化: 已记录')
+                except Exception as opt_e:
+                    pipeline_log.append(f'自我优化记录跳过: {str(opt_e)[:80]}')
+
                 result = {
                     'ok': True,
                     'image': img_b64,
@@ -4157,6 +4320,10 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     'pipeline': pipeline_log,
                     'card_id': card.get('full_id', ''),
                     'elapsed': round(total_time, 1),
+                    'pedagogical': {
+                        'score': pedagogy_result.get('pedagogical_score', 0) if pedagogy_result else 0,
+                        'verdict': pedagogy_result.get('verdict', '') if pedagogy_result else '',
+                    } if pedagogy_result else None,
                 }
                 with _async_tasks_lock:
                     _async_tasks[task_id] = {**_async_tasks[task_id],
@@ -4218,6 +4385,15 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         subject = body.get('subject', '数学')
         grade = body.get('grade', '三年级')
         semester = body.get('semester', '下册')
+
+        # v10.9.6: 从 full_id 智能提取 grade
+        import re as _re
+        card_full_id = card.get('full_id', '')
+        if grade in ('三年级', '') and card_full_id:
+            _gm = _re.search(r'(高[一二三][上下]|[七八九][上下]|[一二三四五六][上下])', card_full_id)
+            if _gm:
+                grade = _gm.group(1)
+                semester = '上册' if grade.endswith('上') else '下册'
 
         import tempfile, base64
         try:
