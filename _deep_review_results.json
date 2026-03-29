@@ -1,0 +1,68 @@
+{
+  "dim6_stability": [
+    {
+      "core_consistency": 85,
+      "style_consistency": 70,
+      "keyword_overlap_pct": 60,
+      "overall_stability": 72,
+      "divergent_elements": [
+        "Prompt 1独有包含一个带有化学方程式、数值质量和分步计算的专用示例部分，而Prompt 2和Prompt 3没有明确提及此部分。",
+        "微观解释的相对位置描述不同：Prompt 1将其置于'平衡秤下方'，而Prompt 2和Prompt 3则描述为与宏观秤'相邻'。",
+        "关于'五不变'、'两必变'和'两可能变'列表的具体图标描述和风格在三个prompt中有所不同。",
+        "Prompt 2描述了'发光标题'和'闪卡'格式，而Prompt 3强调了'彩色3D原子模型'和宏观视图中的'清晰数学方程式'。"
+      ],
+      "verdict": "这些prompt在核心知识点和整体美学风格上高度一致，但在是否包含数值计算示例以及具体布局细节上存在差异。",
+      "card_id": "S4-01",
+      "title": "质量守恒定律推导",
+      "prompt_count": 3,
+      "prompt_lengths": [
+        2830,
+        1750,
+        1967
+      ]
+    },
+    {
+      "core_consistency": 95,
+      "style_consistency": 70,
+      "keyword_overlap_pct": 65,
+      "overall_stability": 77,
+      "divergent_elements": [
+        "Prompt 1 uses 'callouts' for interpretation points, while Prompts 2 & 3 specify 'illustrative icons' around the graph.",
+        "Prompt 2 mentions specific substances (KNO₃, NaCl) and grid lines, which are not in P1 or P3.",
+        "Prompt 3 includes specific details about 'steep' and 'flatter' curves based on temperature dependence, and 'studio lighting, high detail, sharp focus' for image quality.",
+        "Prompt 2 does not mention subtle background scientific imagery, unlike P1 and P3."
+      ],
+      "verdict": "三个Prompt在核心知识点和整体主题上高度一致，但在呈现方式（callouts vs. icons）和部分细节描述上存在中度差异，导致风格和关键词重叠度略有波动。",
+      "card_id": "S2-01",
+      "title": "溶解度曲线图像解读",
+      "prompt_count": 3,
+      "prompt_lengths": [
+        1128,
+        1461,
+        1452
+      ]
+    },
+    {
+      "core_consistency": 85,
+      "style_consistency": 70,
+      "keyword_overlap_pct": 60,
+      "overall_stability": 72,
+      "divergent_elements": [
+        "标题措辞略有不同（'Candle Burning Exploration Experiment' vs 'Exploration Experiment of Candle Burning' vs 'Investigation of Candle Burning Experiment'）",
+        "火焰层级的具体命名和温度描述略有差异（例如，P1的'Inner Flame (Hotter)'和P3的'Middle Flame'）",
+        "科学探究步骤的措辞和详细程度不同（P3为每个步骤提供了具体的图标示例，而P1仅提及图标，P2未提及）",
+        "产品测试中使用的具体玻璃器皿描述不同（烧杯、锥形瓶、试管、集气管等）",
+        "对蜡烛性质和整体美学风格的额外描述（例如，P2提及'soft texture'，P3提及'flat design style'、'vibrant yet academic'）"
+      ],
+      "verdict": "这三个 prompt 在核心知识点覆盖和整体风格上表现出高度一致性，但在具体措辞、细节描述和部分美学元素上存在细微差异，预计生成的图片在内容上会非常相似，但在细节呈现上会有所不同。",
+      "card_id": "S1-01",
+      "title": "蜡烛燃烧探究实验",
+      "prompt_count": 3,
+      "prompt_lengths": [
+        1689,
+        1718,
+        2360
+      ]
+    }
+  ]
+}
