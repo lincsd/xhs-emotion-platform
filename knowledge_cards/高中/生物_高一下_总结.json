@@ -1,0 +1,129 @@
+{
+  "subject": "生物",
+  "grade": "高一年级",
+  "semester": "下册",
+  "textbook": "人教版",
+  "grade_short": "高一下",
+  "card_pack": "知识总结",
+  "description": "高中高一下册生物中考/高考考点笔记总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "基因的本质",
+      "cards": [
+        {
+          "card_id": "S1-01",
+          "title": "DNA双螺旋模型",
+          "type": "模型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "DNA是双链螺旋结构，两条链反向平行。碱基互补配对：A-T(两个氢键)，G-C(三个氢键)。",
+          "core_points": [
+            "磷酸-脱氧核糖交替连接构成骨架（外侧）",
+            "碱基配对在内侧: A=T(2个氢键), G≡C(3个氢键)",
+            "两条链反向平行(5'→3'和3'→5')",
+            "DNA的多样性: 碱基对的排列顺序千变万化"
+          ],
+          "example": {
+            "question": "DNA一条链A占30%，另一条链A占多少？",
+            "steps": [
+              "1. 一条链A=30%→对应链T=30%",
+              "2. 另一条链A=第一条链的T",
+              "3. 由于A和T互补，另一条链的T对应第一条链A=30%",
+              "4. 另一条链中A不确定，需知道C/G"
+            ],
+            "answer": "不能直接确定。一条链A=30%只能确定对面T=30%。"
+          },
+          "mistakes": [
+            {
+              "wrong": "DNA两条链的碱基组成完全相同。",
+              "correct": "两条链碱基互补，A₁=T₂, T₁=A₂, 组成一般不同。"
+            }
+          ],
+          "memory_tip": "「A配T两氢键，G配C三氢键，反向平行螺旋转。」",
+          "related": {
+            "prerequisite": "核酸结构",
+            "next": "DNA复制"
+          },
+          "full_id": "生物-高一下-S1-01"
+        },
+        {
+          "card_id": "S1-02",
+          "title": "DNA复制过程流",
+          "type": "过程流卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "DNA复制是半保留复制。解旋酶解开双链→DNA聚合酶以每条链为模板合成互补链→两个相同的DNA分子。",
+          "core_points": [
+            "解旋→互补配对→延伸→两个子代DNA",
+            "半保留复制: 每个子代DNA含1条母链+1条新链",
+            "所需酶: 解旋酶(解开氢键), DNA聚合酶(合成新链)",
+            "n次复制后: 2ⁿ个DNA, 含母链的只有2个"
+          ],
+          "example": {
+            "question": "1个DNA复制3次，生成几个DNA？含母链的有几个？",
+            "steps": [
+              "1. 2³=8个DNA",
+              "2. 母链只有2条→含母链的DNA有2个",
+              "3. 新合成的DNA有6个"
+            ],
+            "answer": "8个DNA，其中2个含有母链。"
+          },
+          "mistakes": [
+            {
+              "wrong": "DNA复制后母链被破坏。",
+              "correct": "半保留复制，母链完整保留在子代DNA中。"
+            }
+          ],
+          "memory_tip": "「解旋配对延伸连，半保留母链藏两边。」",
+          "related": {
+            "prerequisite": "DNA结构",
+            "next": "基因的表达"
+          },
+          "full_id": "生物-高一下-S1-02"
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "基因的表达",
+      "cards": [
+        {
+          "card_id": "S2-01",
+          "title": "转录翻译过程流",
+          "type": "过程流卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "中心法则: DNA→(转录)→mRNA→(翻译)→蛋白质。转录在细胞核，翻译在核糖体。",
+          "core_points": [
+            "转录: DNA模板链→mRNA (RNA聚合酶，核中)",
+            "翻译: mRNA→蛋白质 (核糖体，细胞质)",
+            "密码子: mRNA上每3个碱基编码1个氨基酸(64种)",
+            "终止密码子不编码氨基酸(UAA, UAG, UGA)"
+          ],
+          "example": {
+            "question": "模板链碱基序列TAC，对应mRNA密码子？氨基酸？",
+            "steps": [
+              "1. T→A, A→U, C→G",
+              "2. mRNA密码子: AUG",
+              "3. AUG对应甲硫氨酸(起始密码子)"
+            ],
+            "answer": "mRNA: AUG, 对应甲硫氨酸。"
+          },
+          "mistakes": [
+            {
+              "wrong": "翻译在细胞核中进行。",
+              "correct": "翻译在核糖体上进行（细胞质中）。"
+            }
+          ],
+          "memory_tip": "「转录核中DNA变RNA，翻译核糖体上蛋白成。」",
+          "related": {
+            "prerequisite": "DNA复制",
+            "next": "基因突变"
+          },
+          "full_id": "生物-高一下-S2-01"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "subject": "物理",
+  "grade": "高二年级",
+  "semester": "上册",
+  "textbook": "人教版",
+  "grade_short": "高二上",
+  "card_pack": "知识总结",
+  "description": "高中高二上册物理中考/高考考点笔记总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "静电场",
+      "cards": [
+        {
+          "card_id": "S1-01",
+          "title": "库仑定律公式推导",
+          "type": "公式推导卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "真空中两个静止点电荷间的作用力F=kq₁q₂/r²，k=9×10⁹N·m²/C²。",
+          "core_points": [
+            "库仑定律: F=kq₁q₂/r² (方向: 同斥异吸)",
+            "电场强度: E=F/q=kQ/r² (点电荷电场)",
+            "电势能: E_p=kq₁q₂/r",
+            "电势差: U=W/q=Ed(匀强电场)"
+          ],
+          "example": {
+            "question": "两个电荷q相距r，力为F。距离变为2r，力为？",
+            "steps": [
+              "1. F=kq²/r²",
+              "2. F'=kq²/(2r)²=kq²/4r²",
+              "3. F'=F/4"
+            ],
+            "answer": "力变为原来的1/4。"
+          },
+          "mistakes": [
+            {
+              "wrong": "电场强度与试探电荷有关。",
+              "correct": "E=F/q，E是电场本身的性质，与试探电荷无关。"
+            }
+          ],
+          "memory_tip": "「库仑力平方反比，场强不看试探电荷。」",
+          "related": {
+            "prerequisite": "万有引力",
+            "next": "恒定电流"
+          },
+          "full_id": "物理-高二上-S1-01"
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "恒定电流",
+      "cards": [
+        {
+          "card_id": "S2-01",
+          "title": "闭合电路欧姆定律解题策略",
+          "type": "解题策略卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "闭合电路欧姆定律: ε=I(R+r)，其中ε是电动势，R是外电阻，r是内电阻。",
+          "core_points": [
+            "ε=IR+Ir=U外+U内",
+            "三步: ①画等效电路图 ②标注电流方向 ③列方程",
+            "R外增大→I减小→U外增大→U内减小",
+            "短路: R外=0, I=ε/r (最大电流)"
+          ],
+          "example": {
+            "question": "ε=6V, r=1Ω, R=5Ω, 求I和U外。",
+            "steps": [
+              "1. I=ε/(R+r)=6/(5+1)=1A",
+              "2. U外=IR=1×5=5V",
+              "3. U内=Ir=1×1=1V"
+            ],
+            "answer": "I=1A, U外=5V, U内=1V。"
+          },
+          "mistakes": [
+            {
+              "wrong": "电动势等于路端电压。",
+              "correct": "ε=U外+U内，只有断路时U外=ε。"
+            }
+          ],
+          "memory_tip": "「ε=I(R+r)，里外分压不能忘。」",
+          "related": {
+            "prerequisite": "静电场",
+            "next": "电磁感应"
+          },
+          "full_id": "物理-高二上-S2-01"
+        }
+      ]
+    }
+  ]
+}

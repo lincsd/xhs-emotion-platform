@@ -1,0 +1,169 @@
+{
+  "subject": "物理",
+  "grade": "高一年级",
+  "semester": "下册",
+  "textbook": "人教版",
+  "grade_short": "高一下",
+  "card_pack": "知识总结",
+  "description": "高中高一下册物理中考/高考考点笔记总结",
+  "units": [
+    {
+      "unit_id": "S1",
+      "unit_name": "曲线运动",
+      "cards": [
+        {
+          "card_id": "S1-01",
+          "title": "平抛运动公式推导",
+          "type": "公式推导卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "平抛运动是水平方向匀速直线运动和竖直方向自由落体运动的合运动。",
+          "core_points": [
+            "水平: x=v₀t (匀速)",
+            "竖直: y=½gt² (自由落体)",
+            "合速度: v=√(v₀²+(gt)²)",
+            "轨迹方程: y=gx²/(2v₀²) (抛物线)"
+          ],
+          "example": {
+            "question": "v₀=10m/s水平抛出，1s后位移？",
+            "steps": [
+              "1. x=v₀t=10×1=10m",
+              "2. y=½gt²=½×10×1=5m",
+              "3. 位移s=√(100+25)=√125≈11.2m"
+            ],
+            "answer": "s=√(x²+y²)=√(100+25)≈11.2m"
+          },
+          "mistakes": [
+            {
+              "wrong": "平抛运动的加速度方向是沿轨迹方向。",
+              "correct": "加速度方向始终竖直向下(g)。"
+            }
+          ],
+          "memory_tip": "「水平匀速，竖直落体，运动独立性。」",
+          "related": {
+            "prerequisite": "匀变速直线运动",
+            "next": "圆周运动"
+          },
+          "full_id": "物理-高一下-S1-01"
+        },
+        {
+          "card_id": "S1-02",
+          "title": "圆周运动解题策略",
+          "type": "解题策略卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "匀速圆周运动的向心力F=mv²/r=mω²r，提供向心力的是合力或合力的分量。",
+          "core_points": [
+            "三步法: ①确定圆心和半径 ②分析受力 ③列向心力方程",
+            "关系: v=ωr, T=2π/ω, f=1/T",
+            "竖直面: 最高点mg-N=mv²/r, 最低点N-mg=mv²/r",
+            "临界条件: 最高点N=0时v_min=√(gr)"
+          ],
+          "example": {
+            "question": "汽车过拱桥顶部时，速度增大会怎样？",
+            "steps": [
+              "1. 顶部: mg-N=mv²/r",
+              "2. v增大→mv²/r增大→N减小",
+              "3. 当N=0时v=√(gr)，超过此速度车飞离桥面"
+            ],
+            "answer": "速度增大，对桥压力减小；v=√(gr)时压力为零，再快就飞离。"
+          },
+          "mistakes": [
+            {
+              "wrong": "圆周运动一定有向心力提供。",
+              "correct": "是合力（或合力的分量）提供向心力。"
+            }
+          ],
+          "memory_tip": "「找圆心，析合力，列向心力等式。」",
+          "related": {
+            "prerequisite": "牛顿第二定律",
+            "next": "万有引力"
+          },
+          "full_id": "物理-高一下-S1-02"
+        }
+      ]
+    },
+    {
+      "unit_id": "S2",
+      "unit_name": "万有引力与宇宙航行",
+      "cards": [
+        {
+          "card_id": "S2-01",
+          "title": "万有引力知识网络",
+          "type": "知识网络卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "万有引力F=GMm/r²。天体运动问题常用万有引力=向心力：GMm/r²=mv²/r=mω²r=4π²mr/T²。",
+          "core_points": [
+            "万有引力定律: F=GMm/r², G=6.67×10⁻¹¹N·m²/kg²",
+            "天体运动: GMm/r²=mv²/r → v=√(GM/r)",
+            "三个宇宙速度: v₁=7.9km/s, v₂=11.2km/s, v₃=16.7km/s",
+            "同步卫星: T=24h, r固定, 在赤道正上方"
+          ],
+          "example": {
+            "question": "卫星轨道越高，线速度如何变化？",
+            "steps": [
+              "1. v=√(GM/r)",
+              "2. r增大→v减小",
+              "3. 轨道越高线速度越小"
+            ],
+            "answer": "轨道越高，线速度越小（v=√(GM/r)）。"
+          },
+          "mistakes": [
+            {
+              "wrong": "轨道越高角速度越大。",
+              "correct": "r增大→ω=√(GM/r³)减小→角速度越小。"
+            }
+          ],
+          "memory_tip": "「高轨低速长周期。」",
+          "related": {
+            "prerequisite": "圆周运动",
+            "next": "功和功率"
+          },
+          "full_id": "物理-高一下-S2-01"
+        }
+      ]
+    },
+    {
+      "unit_id": "S3",
+      "unit_name": "功和能",
+      "cards": [
+        {
+          "card_id": "S3-01",
+          "title": "功能关系过程流",
+          "type": "过程流卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "合外力做功=动能变化(动能定理)。重力做功=重力势能变化。弹力做功=弹性势能变化。",
+          "core_points": [
+            "动能定理: W合=½mv₂²-½mv₁² (适用于任何过程)",
+            "重力做功: W_G=mgh₁-mgh₂=-ΔE_p(势能)",
+            "机械能守恒条件: 只有重力/弹力做功",
+            "功率: P=W/t=Fv (匀速时P=Fv)"
+          ],
+          "example": {
+            "question": "物体从高h处自由落下，求落地速度。",
+            "steps": [
+              "1. 只有重力做功→机械能守恒",
+              "2. mgh=½mv²",
+              "3. v=√(2gh)"
+            ],
+            "answer": "v=√(2gh)"
+          },
+          "mistakes": [
+            {
+              "wrong": "动能定理只适用于匀变速运动。",
+              "correct": "动能定理适用于任何运动过程（变力也行）。"
+            }
+          ],
+          "memory_tip": "「合力做功看动能，重力做功看势能，只重弹时守机能。」",
+          "related": {
+            "prerequisite": "功和功率",
+            "next": "动量"
+          },
+          "full_id": "物理-高一下-S3-01"
+        }
+      ]
+    }
+  ]
+}

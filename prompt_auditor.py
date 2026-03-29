@@ -139,6 +139,44 @@ _ELEMENT_KEYWORDS: dict[str, list[str]] = {
     '情景图': ['情景图', '情景', '场景', 'scenario', 'scene'],
     '英文对话': ['英文对话', '对话', 'dialogue', 'conversation'],
     '替换练习': ['替换练习', '替换', 'substitution', 'practice'],
+    # ── 理科卡教学元素 ──
+    # 实验卡
+    '实验目的': ['实验目的', '目的', 'purpose', 'objective', 'aim', 'goal'],
+    '器材': ['器材', 'apparatus', 'equipment', 'instrument', 'material', 'tool'],
+    '现象': ['现象', 'phenomenon', 'observation', 'observe', 'result'],
+    # 公式推导卡
+    '逐步推导': ['逐步推导', '推导', 'derive', 'derivation', 'proof', 'step-by-step'],
+    # 过程流卡
+    '流程图': ['流程图', '流程', 'flowchart', 'flow chart', 'process', 'pipeline', 'arrow'],
+    '阶段色块': ['阶段', '色块', 'stage', 'phase', 'color block', 'section'],
+    '物质/能量箭头': ['物质', '能量', '箭头', 'arrow', 'material flow', 'energy flow', 'input', 'output'],
+    '关键方程': ['关键方程', '方程', 'equation', 'reaction', 'formula'],
+    # 微观图解卡
+    '微观图解': ['微观图解', '微观', 'micro', 'microscopic', 'particle', 'atom', 'molecule'],
+    '宏微对应': ['宏微对应', '宏观', '微观', 'macro-micro', 'correspondence', 'relation'],
+    # 图像解读卡
+    '示例图像': ['示例图像', '图像', 'graph', 'chart', 'plot', 'curve', 'diagram'],
+    '坐标轴标注': ['坐标轴', '标注', 'axis', 'label', 'x-axis', 'y-axis', 'coordinate'],
+    '读图方法': ['读图方法', '读图', 'reading method', 'interpret', 'slope', 'trend'],
+    '考法提示': ['考法提示', '考法', 'exam tip', 'test type', 'common question'],
+    # 模型卡
+    '模型示意图': ['模型示意图', '模型', 'model', 'schematic', 'diagram', 'illustration'],
+    '核心假设': ['核心假设', '假设', 'assumption', 'hypothesis', 'premise', 'key idea'],
+    '适用范围': ['适用范围', '适用', 'applicable', 'scope', 'valid', 'can explain'],
+    '局限性': ['局限性', '局限', 'limitation', 'cannot explain', 'shortcoming'],
+    # 解题策略卡
+    '步骤方法': ['步骤方法', '步骤', '方法', 'step', 'method', 'strategy', 'procedure'],
+    '每步要点': ['要点', 'key point', 'note', 'annotation', 'emphasis'],
+    '检查清单': ['检查清单', '检查', 'checklist', 'verify', 'double check'],
+    # 知识网络卡
+    '知识网络图': ['知识网络', '网络图', 'knowledge network', 'mind map', 'concept map'],
+    '核心节点': ['核心节点', '节点', 'core node', 'center', 'central concept'],
+    '分支连线': ['分支', '连线', 'branch', 'connection', 'link', 'edge'],
+    '核心公式/规律': ['核心公式', '规律', 'core formula', 'key law', 'principle'],
+    # 术语精准卡
+    '错误表述': ['错误表述', '错误', 'wrong', 'incorrect', '❌', 'mistake'],
+    '精准表述': ['精准表述', '精准', '正确', 'precise', 'accurate', '✅', 'correct'],
+    '扣分原因': ['扣分原因', '扣分', 'deduction', 'why wrong', 'scoring'],
 }
 
 # 布局区块名 → prompt 关键词
@@ -197,6 +235,44 @@ _BLOCK_KEYWORDS: dict[str, list[str]] = {
     '真题速记': ['真题', '速记', 'real exam', 'exam example'],
     '情景区': ['情景区', '情景', '对话', 'scenario', 'dialogue', 'conversation'],
     '替换练习': ['替换练习', '替换', 'substitution', 'practice', 'variation'],
+    # ── 理科卡区块 ──
+    # 实验卡
+    '目的与器材': ['目的与器材', '目的', '器材', 'purpose', 'apparatus', 'equipment', 'material', 'instrument', 'objective'],
+    '步骤流程': ['步骤流程', '步骤', '流程', 'step', 'procedure', 'process', 'flow', 'method'],
+    '现象与结论': ['现象与结论', '现象', '结论', 'phenomenon', 'observation', 'conclusion', 'result'],
+    '安全/易错': ['安全', '易错', 'safety', 'caution', 'warning', 'common mistake', '⚠️'],
+    # 公式推导卡
+    '已知条件': ['已知条件', '已知', 'known', 'given', 'starting point', 'premise', 'axiom', 'law'],
+    '推导过程': ['推导过程', '推导', 'derivation', 'derive', 'proof', 'step-by-step', 'algebraic'],
+    '最终公式': ['最终公式', '公式', 'final formula', 'equation', 'result formula', 'formula'],
+    '适用条件': ['适用条件', '适用', 'condition', 'applicable', 'limitation', 'prerequisite', 'valid when'],
+    # 过程流卡
+    '流程主体': ['流程主体', '流程', 'flow chart', 'process', 'pipeline', 'stage', 'phase', 'step'],
+    '关键转化': ['关键转化', '转化', 'key reaction', 'transformation', 'conversion', 'equation'],
+    # 微观图解卡
+    '宏观现象': ['宏观现象', '宏观', 'macro', 'macroscopic', 'visible', 'observable', 'phenomenon'],
+    '微观图解': ['微观图解', '微观', 'micro', 'microscopic', 'particle', 'molecular', 'atom', 'molecule'],
+    '本质总结': ['本质总结', '本质', 'essence', 'fundamental', 'underlying', 'root cause', 'summary'],
+    # 图像解读卡
+    '示例图像': ['示例图像', '示例', 'graph', 'chart', 'plot', 'curve', 'coordinate', 'diagram', 'example graph'],
+    '读图方法': ['读图方法', '读图', 'reading method', 'interpret', 'how to read', 'axis', 'trend', 'slope'],
+    '考法提示': ['考法提示', '考法', 'exam tip', 'test pattern', 'common question', 'exam type'],
+    '易错点': ['易错点', '易错', 'common mistake', 'pitfall', 'trap', 'error', '⚠️'],
+    # 模型卡
+    '模型图示': ['模型图示', '模型', 'model', 'diagram', 'schematic', 'illustration', 'structure'],
+    '适用与局限': ['适用与局限', '适用', '局限', 'applicable', 'limitation', 'can explain', 'cannot explain', '✅', '❌'],
+    '口诀/记忆': ['口诀', '记忆', 'mnemonic', 'memory', 'slogan', 'key idea'],
+    # 解题策略卡
+    '步骤方法': ['步骤方法', '步骤', '方法', 'step', 'method', 'strategy', 'approach', 'procedure'],
+    '检查清单': ['检查清单', '检查', 'checklist', 'check', 'verify', 'common omission'],
+    # 知识网络卡
+    '知识网络图': ['知识网络图', '知识网络', '网络图', 'knowledge network', 'mind map', 'concept map', 'tree', 'radial'],
+    '核心公式/规律': ['核心公式', '规律', 'core formula', 'key law', 'principle', 'equation'],
+    '记忆口诀': ['记忆口诀', '口诀', 'mnemonic', 'slogan', 'memory tip'],
+    # 术语精准卡
+    '对比区': ['对比区', '对比', 'compare', 'contrast', 'vs', 'left right', '❌', '✅', 'wrong', 'correct'],
+    '扣分解析': ['扣分解析', '扣分', 'deduction', 'why wrong', 'scoring', 'penalty', 'explanation'],
+    '记忆技巧': ['记忆技巧', '记忆', 'memory trick', 'mnemonic', 'tip', 'technique'],
 }
 
 
