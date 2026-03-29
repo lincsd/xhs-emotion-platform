@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260329b'  # v10.9.6: 深度复审闭环+grade智能提取+异步流水线审核
+BUILD_VERSION = '20260329c'  # v10.9.7: 修复反馈闭环断裂(severity_min)+severity综合审计分+OCR问题沉淀
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -3608,7 +3608,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             if not skip_audit:
                 try:
                     from _deep_review import get_skill_insights
-                    cr_rows = get_skill_insights(subject, severity_min='high')
+                    cr_rows = get_skill_insights(subject, severity_min='low')  # v10.9.7: 'high'->'low' 修复反馈断裂
                     # 精确匹配当前卡片
                     card_full_id = card.get('full_id') or card.get('card_id', '')
                     card_cr = [r for r in cr_rows if r.get('card_id', '') == card_full_id]
@@ -3856,10 +3856,18 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 conn = _opt_conn()
                 card_fid = card.get('full_id', '')
                 ped_total = pedagogy_report.get('pedagogical_score', 0) if pedagogy_report else 0
+                # v10.9.7: 严重度综合教学评分 + 图片审计分
                 cr_sev = 'none' if ped_total >= 80 else ('low' if ped_total >= 65 else ('medium' if ped_total >= 50 else 'high'))
+                if best_score < 40 and cr_sev in ('none', 'low', 'medium'):
+                    cr_sev = 'high'   # 图片OCR极差 → 强制high
+                elif best_score < 60 and cr_sev in ('none', 'low'):
+                    cr_sev = 'medium'  # 图片OCR不佳 → 至少medium
                 cr_issues = []
                 if pedagogy_report:
                     cr_issues = pedagogy_report.get('top_improvements', [])[:5]
+                # v10.9.7: OCR审计分过低时追加图片质量问题
+                if best_score < 60:
+                    cr_issues.append(f'图片OCR审计仅{best_score}分，可能存在文字乱码/渲染错误')
                 cr_raw = {
                     'pedagogical_score': ped_total,
                     'audit_score': best_score,
@@ -4051,7 +4059,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 if not skip_audit:
                     try:
                         from _deep_review import get_skill_insights
-                        cr_rows = get_skill_insights(subject, severity_min='high')
+                        cr_rows = get_skill_insights(subject, severity_min='low')  # v10.9.7: 'high'->'low' 修复反馈断裂
                         card_fid_check = card.get('full_id') or card.get('card_id', '')
                         card_cr = [r for r in cr_rows if r.get('card_id', '') == card_fid_check]
                         if card_cr:
@@ -4249,14 +4257,21 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     import json as _json
                     card_fid = card.get('full_id', '')
                     ped_total = pedagogy_result.get('pedagogical_score', 0) if pedagogy_result else 0
-                    # 严重度根据教学评分判定
+                    # v10.9.7: 严重度综合教学评分 + 图片审计分
                     cr_sev = 'none' if ped_total >= 80 else ('low' if ped_total >= 65 else ('medium' if ped_total >= 50 else 'high'))
+                    if best_score < 40 and cr_sev in ('none', 'low', 'medium'):
+                        cr_sev = 'high'   # 图片OCR极差 → 强制high
+                    elif best_score < 60 and cr_sev in ('none', 'low'):
+                        cr_sev = 'medium'  # 图片OCR不佳 → 至少medium
                     cr_issues = []
                     cr_suggestions = []
                     if pedagogy_result:
                         cr_issues = pedagogy_result.get('top_improvements', [])[:5]
                         if pedagogy_result.get('understandability', {}).get('cognitive_gaps'):
                             cr_issues.extend(pedagogy_result['understandability']['cognitive_gaps'][:2])
+                    # v10.9.7: OCR审计分过低时追加图片质量问题
+                    if best_score < 60:
+                        cr_issues.append(f'图片OCR审计仅{best_score}分，可能存在文字乱码/渲染错误')
                     cr_raw = {
                         'pedagogical_score': ped_total,
                         'audit_score': best_score,
