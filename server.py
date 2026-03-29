@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260329d'  # v10.9.8: 视觉反馈闭环接入HTTP流水线(5层审核+image-to-image精修)
+BUILD_VERSION = '20260329e'  # v10.9.9: warm-start渐进式精修(最优图+最优Prompt缓存→从最优出发精修)
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -1827,6 +1827,15 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 'keyCount': len(SERVER_GEMINI_API_KEYS),
                 'hasServerKey': bool(SERVER_GEMINI_API_KEY),
             })
+        elif path == '/api/warm-start-stats':
+            try:
+                from _card_best_image import get_cache_stats, list_cached_cards
+                stats = get_cache_stats()
+                cards = list_cached_cards(limit=20)
+                return self._send_json({'ok': True, 'stats': stats, 'cached_cards': cards,
+                                        'thresholds': {'warm_start': 60, 'skip_fresh': 85}})
+            except Exception as e:
+                return self._send_json({'ok': False, 'error': str(e)})
         elif path == '/api/optimizer-dashboard':
             return self._get_optimizer_dashboard()
         elif path == '/api/optimizer-stats':
@@ -3714,6 +3723,64 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
             time.sleep(1)
 
+            # ── v10.9.9 Step 1.5: Warm-Start 历史最优缓存检查 (图+Prompt) ──
+            warm_start_image = None
+            warm_start_score = 0
+            warm_start_ext = 'png'
+            warm_start_model = ''
+            warm_skip_fresh = False
+            warm_cached_prompt = ''       # 缓存的最优 prompt
+            warm_cached_manifest = None   # 缓存的 manifest
+            warm_prompt_reused = False    # 是否复用了缓存 prompt
+            try:
+                from _card_best_image import (
+                    get_best_cache, save_best_cache, manifest_hash as _mf_hash,
+                    WARM_START_THRESHOLD, WARM_START_SKIP_FRESH
+                )
+                cached = get_best_cache(card['full_id'])
+                if cached:
+                    ws_audit = cached['audit_score']
+                    ws_combined = cached['combined_score']
+                    ws_gen = cached['generation_count']
+                    cached_m_hash = cached['manifest_hash']
+                    current_m_hash = _mf_hash(manifest)
+                    manifest_match = (cached_m_hash == current_m_hash)
+                    ws_prompt_len = cached.get('prompt_length', 0)
+                    pipeline_log.append(f'Step1.5: 🔥 发现缓存 audit={ws_audit} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字 manifest_match={manifest_match}')
+                    print(f'[v3] Step1.5: warm-start audit={ws_audit} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字', flush=True)
+
+                    # ── Prompt 复用逻辑 ──
+                    # manifest匹配 + 有缓存prompt → 可复用prompt (省1次API调用)
+                    if manifest_match and cached.get('prompt_text'):
+                        warm_cached_prompt = cached['prompt_text']
+                        warm_cached_manifest = cached.get('manifest', {})
+                        prompt = warm_cached_prompt  # 覆盖 Step1 生成的 prompt
+                        warm_prompt_reused = True
+                        pipeline_log.append(f'Step1.5: ♻️ 复用缓存prompt ({len(prompt)}字), 省去重新生成')
+                        print(f'[v3] Step1.5: 复用缓存prompt ({len(prompt)}字)', flush=True)
+
+                    # ── Image warm-start 逻辑 ──
+                    if not manifest_match:
+                        pipeline_log.append('Step1.5: ⚠️ manifest已变化, 图片缓存失效, 从头生成')
+                    elif ws_audit < WARM_START_THRESHOLD:
+                        pipeline_log.append(f'Step1.5: ⚠️ 缓存分不够({ws_audit}<{WARM_START_THRESHOLD}), 从头生成')
+                    else:
+                        warm_start_image = cached['image_data']
+                        warm_start_score = ws_audit
+                        warm_start_ext = cached['ext']
+                        warm_start_model = cached.get('model', '')
+                        if ws_audit >= WARM_START_SKIP_FRESH:
+                            warm_skip_fresh = True
+                            pipeline_log.append(f'Step1.5: ✅ 高分缓存({ws_audit}>={WARM_START_SKIP_FRESH}), 跳过从头生成, 直接精修')
+                        else:
+                            pipeline_log.append(f'Step1.5: ✅ 中等缓存({ws_audit}), 缩减生成轮数并对比')
+                else:
+                    pipeline_log.append('Step1.5: 无历史缓存, 从头生成')
+            except ImportError:
+                pipeline_log.append('Step1.5: warm-start模块未安装, 跳过')
+            except Exception as ws_e:
+                pipeline_log.append(f'Step1.5: warm-start跳过: {str(ws_e)[:60]}')
+
             # ── Step 2-4: 生成图片 + OCR审计循环 ──
             best_image = None
             best_ext = 'png'
@@ -3723,8 +3790,28 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             rounds_used = 0
             merged_quality = {}  # 从合并审计中提取的质量评分
 
+            # v10.9.9: warm-start高分 → 跳过从头生成, 直接用缓存图进入精修
+            if warm_skip_fresh and warm_start_image:
+                best_image = warm_start_image
+                best_ext = warm_start_ext
+                best_score = warm_start_score
+                used_model = warm_start_model
+                rounds_used = 0
+                pipeline_log.append(f'Step2-3: ⏭️ 已跳过(warm-start score={warm_start_score})')
+                print(f'[v3] Step2-3跳过: warm-start score={warm_start_score}', flush=True)
+            elif warm_start_image:
+                # 中等缓存 → 用缓存图作为baseline, 缩减生成轮数
+                best_image = warm_start_image
+                best_ext = warm_start_ext
+                best_score = warm_start_score
+                used_model = warm_start_model
+                pipeline_log.append(f'Step1.5: baseline设为缓存图(score={warm_start_score}), 缩减轮数=1')
+
             max_rounds = 1 if skip_audit else MAX_AUDIT_ROUNDS
-            for round_num in range(1, max_rounds + 1):
+            # v10.9.9: 有warm-start中等缓存时缩减轮数
+            if warm_start_image and not warm_skip_fresh:
+                max_rounds = min(max_rounds, 1)
+            for round_num in range(1 if not warm_skip_fresh else max_rounds + 1, max_rounds + 1):
                 rounds_used = round_num
 
                 # Step 2: 生成图片
@@ -3977,6 +4064,26 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             except Exception as cr_e:
                 pipeline_log.append(f'深度复审沉淀跳过: {str(cr_e)[:80]}')
 
+            # ── v10.9.9 Step 7: 保存/更新卡片最优图+Prompt缓存 ──
+            try:
+                from _card_best_image import save_best_cache
+                ws_saved, ws_reason = save_best_cache(
+                    card_id=card['full_id'],
+                    image_data=best_image,
+                    ext=best_ext,
+                    audit_score=best_score,
+                    quality_score=quality.get('total', 0),
+                    prompt_text=prompt,
+                    model=used_model,
+                    manifest=manifest,
+                    subject=subject,
+                    grade=grade,
+                )
+                pipeline_log.append(f'Step7: {"💾 最优缓存已保存" if ws_saved else "📦 缓存未更新"}: {ws_reason}')
+                print(f'[v3] Step7: warm-start {"saved" if ws_saved else "skipped"}: {ws_reason}', flush=True)
+            except Exception as ws_e:
+                pipeline_log.append(f'Step7 跳过: {str(ws_e)[:60]}')
+
             # ── 积分扣减 ──
             if user:
                 self._record_ai_usage(user['id'], 'v3图片生成')
@@ -4196,6 +4303,59 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     _finish_with_best(None, 'png', 0, '', 0)
                     return
 
+                # ── v10.9.9 Step 1.5: Warm-Start 历史最优缓存检查 (图+Prompt) ──
+                warm_start_image = None
+                warm_start_score = 0
+                warm_start_ext = 'png'
+                warm_start_model = ''
+                warm_skip_fresh = False
+                warm_prompt_reused = False
+                try:
+                    from _card_best_image import (
+                        get_best_cache, save_best_cache, manifest_hash as _mf_hash,
+                        WARM_START_THRESHOLD, WARM_START_SKIP_FRESH
+                    )
+                    cached = get_best_cache(card.get('full_id', ''))
+                    if cached:
+                        ws_audit = cached['audit_score']
+                        ws_combined = cached['combined_score']
+                        ws_gen = cached['generation_count']
+                        cached_m_hash = cached['manifest_hash']
+                        current_m_hash = _mf_hash(manifest)
+                        manifest_match = (cached_m_hash == current_m_hash)
+                        ws_prompt_len = cached.get('prompt_length', 0)
+                        pipeline_log.append(f'Step1.5: 🔥 发现缓存 audit={ws_audit} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字 manifest_match={manifest_match}')
+                        print(f'[v3-async] Step1.5: warm-start audit={ws_audit} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字', flush=True)
+
+                        # ── Prompt 复用逻辑 ──
+                        if manifest_match and cached.get('prompt_text'):
+                            prompt = cached['prompt_text']
+                            warm_prompt_reused = True
+                            pipeline_log.append(f'Step1.5: ♻️ 复用缓存prompt ({len(prompt)}字)')
+                            print(f'[v3-async] Step1.5: 复用缓存prompt ({len(prompt)}字)', flush=True)
+
+                        # ── Image warm-start 逻辑 ──
+                        if not manifest_match:
+                            pipeline_log.append('Step1.5: ⚠️ manifest已变化, 图片缓存失效')
+                        elif ws_audit < WARM_START_THRESHOLD:
+                            pipeline_log.append(f'Step1.5: ⚠️ 缓存分不够({ws_audit}<{WARM_START_THRESHOLD})')
+                        else:
+                            warm_start_image = cached['image_data']
+                            warm_start_score = ws_audit
+                            warm_start_ext = cached['ext']
+                            warm_start_model = cached.get('model', '')
+                            if ws_audit >= WARM_START_SKIP_FRESH:
+                                warm_skip_fresh = True
+                                pipeline_log.append(f'Step1.5: ✅ 高分缓存({ws_audit}>={WARM_START_SKIP_FRESH}), 跳过从头生成')
+                            else:
+                                pipeline_log.append(f'Step1.5: ✅ 中等缓存({ws_audit}), 缩减轮数并对比')
+                    else:
+                        pipeline_log.append('Step1.5: 无历史缓存, 从头生成')
+                except ImportError:
+                    pipeline_log.append('Step1.5: warm-start模块未安装')
+                except Exception as ws_e:
+                    pipeline_log.append(f'Step1.5: warm-start跳过: {str(ws_e)[:60]}')
+
                 # Step 2-4: 生成+审计循环
                 best_image = None
                 best_ext = 'png'
@@ -4204,10 +4364,31 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 used_model = ''
                 rounds_used = 0
                 merged_quality = {}  # 从合并审计中提取
+
+                # v10.9.9: warm-start高分 → 跳过从头生成
+                if warm_skip_fresh and warm_start_image:
+                    best_image = warm_start_image
+                    best_ext = warm_start_ext
+                    best_score = warm_start_score
+                    used_model = warm_start_model
+                    rounds_used = 0
+                    pipeline_log.append(f'Step2-3: ⏭️ 已跳过(warm-start score={warm_start_score})')
+                    print(f'[v3-async] Step2-3跳过: warm-start score={warm_start_score}', flush=True)
+                elif warm_start_image:
+                    # 中等缓存 → 用缓存图作为baseline
+                    best_image = warm_start_image
+                    best_ext = warm_start_ext
+                    best_score = warm_start_score
+                    used_model = warm_start_model
+                    pipeline_log.append(f'Step1.5: baseline设为缓存图(score={warm_start_score})')
+
                 # 异步模式下限制审计轮数为1（减少总时间）
                 max_rounds = 1 if skip_audit else min(MAX_AUDIT_ROUNDS, 2)
+                # v10.9.9: 有warm-start时缩减轮数
+                if warm_start_image and not warm_skip_fresh:
+                    max_rounds = min(max_rounds, 1)
 
-                for round_num in range(1, max_rounds + 1):
+                for round_num in range(1 if not warm_skip_fresh else max_rounds + 1, max_rounds + 1):
                     if _timed_out():
                         pipeline_log.append(f'⏰ 超时, 跳出循环')
                         break
@@ -4503,6 +4684,26 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     pipeline_log.append('🧠 自我优化: 已记录')
                 except Exception as opt_e:
                     pipeline_log.append(f'自我优化记录跳过: {str(opt_e)[:80]}')
+
+                # ── v10.9.9 Step 7: 保存/更新卡片最优图+Prompt缓存 ──
+                try:
+                    from _card_best_image import save_best_cache
+                    ws_saved, ws_reason = save_best_cache(
+                        card_id=card.get('full_id', ''),
+                        image_data=best_image,
+                        ext=best_ext,
+                        audit_score=best_score,
+                        quality_score=quality.get('total', 0),
+                        prompt_text=prompt,
+                        model=used_model,
+                        manifest=manifest,
+                        subject=subject,
+                        grade=grade,
+                    )
+                    pipeline_log.append(f'Step7: {"💾 最优缓存已保存" if ws_saved else "📦 缓存未更新"}: {ws_reason}')
+                    print(f'[v3-async] Step7: warm-start {"saved" if ws_saved else "skipped"}: {ws_reason}', flush=True)
+                except Exception as ws_e:
+                    pipeline_log.append(f'Step7 跳过: {str(ws_e)[:60]}')
 
                 result = {
                     'ok': True,
