@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260328f';
+      var BUILD='20260329a';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);}
@@ -9121,7 +9121,10 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           subjects: [
             { key: '数学', icon: '📐', label: '数学' },
             { key: '语文', icon: '📖', label: '语文' },
-            { key: '英语', icon: '🔤', label: '英语' }
+            { key: '英语', icon: '🔤', label: '英语' },
+            { key: '物理', icon: '⚡', label: '物理' },
+            { key: '化学', icon: '🧪', label: '化学' },
+            { key: '生物', icon: '🧬', label: '生物' }
           ],
           defaultSubject: '数学', defaultGrade: '七上',
           fixedGrades: GRADES_ORDER_CZ,
@@ -9132,7 +9135,10 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           subjects: [
             { key: '数学', icon: '📐', label: '数学' },
             { key: '语文', icon: '📖', label: '语文' },
-            { key: '英语', icon: '🔤', label: '英语' }
+            { key: '英语', icon: '🔤', label: '英语' },
+            { key: '物理', icon: '⚡', label: '物理' },
+            { key: '化学', icon: '🧪', label: '化学' },
+            { key: '生物', icon: '🧬', label: '生物' }
           ],
           defaultSubject: '数学', defaultGrade: '高一上',
           fixedGrades: GRADES_ORDER_GZ,
@@ -10623,7 +10629,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
             }
             // status === 'running' → continue polling
           }
-          if (!data) throw new Error('v3\u6d41\u6c34\u7ebf\u8d85\u65f6\uff08>420s\uff09\uff0c\u8bf7\u91cd\u8bd5');
+          if (!data) throw new Error('v3\u6d41\u6c34\u7ebf\u8d85\u65f6\uff08>300s\uff09\uff0c\u8bf7\u91cd\u8bd5');
           if (!data.ok) throw new Error(data.error || 'v3\u6d41\u6c34\u7ebf\u5931\u8d25');
 
           // 显示流水线日志

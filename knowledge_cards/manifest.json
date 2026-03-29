@@ -1472,6 +1472,106 @@
         "is_summary": true,
         "units": 6,
         "cards": 12
+      },
+      {
+        "file": "化学_九上_总结.json",
+        "subject": "化学",
+        "grade": "九年级",
+        "semester": "上册",
+        "grade_short": "九上",
+        "is_summary": true,
+        "units": 5,
+        "cards": 11
+      },
+      {
+        "file": "化学_九下_总结.json",
+        "subject": "化学",
+        "grade": "九年级",
+        "semester": "下册",
+        "grade_short": "九下",
+        "is_summary": true,
+        "units": 3,
+        "cards": 5
+      },
+      {
+        "file": "物理_九上_总结.json",
+        "subject": "物理",
+        "grade": "九年级",
+        "semester": "上册",
+        "grade_short": "九上",
+        "is_summary": true,
+        "units": 3,
+        "cards": 5
+      },
+      {
+        "file": "物理_九下_总结.json",
+        "subject": "物理",
+        "grade": "九年级",
+        "semester": "下册",
+        "grade_short": "九下",
+        "is_summary": true,
+        "units": 3,
+        "cards": 4
+      },
+      {
+        "file": "物理_八上_总结.json",
+        "subject": "物理",
+        "grade": "八年级",
+        "semester": "上册",
+        "grade_short": "八上",
+        "is_summary": true,
+        "units": 5,
+        "cards": 16
+      },
+      {
+        "file": "物理_八下_总结.json",
+        "subject": "物理",
+        "grade": "八年级",
+        "semester": "下册",
+        "grade_short": "八下",
+        "is_summary": true,
+        "units": 4,
+        "cards": 9
+      },
+      {
+        "file": "生物_七上_总结.json",
+        "subject": "生物",
+        "grade": "七年级",
+        "semester": "上册",
+        "grade_short": "七上",
+        "is_summary": true,
+        "units": 3,
+        "cards": 9
+      },
+      {
+        "file": "生物_七下_总结.json",
+        "subject": "生物",
+        "grade": "七年级",
+        "semester": "下册",
+        "grade_short": "七下",
+        "is_summary": true,
+        "units": 3,
+        "cards": 4
+      },
+      {
+        "file": "生物_八上_总结.json",
+        "subject": "生物",
+        "grade": "八年级",
+        "semester": "上册",
+        "grade_short": "八上",
+        "is_summary": true,
+        "units": 3,
+        "cards": 4
+      },
+      {
+        "file": "生物_八下_总结.json",
+        "subject": "生物",
+        "grade": "八年级",
+        "semester": "下册",
+        "grade_short": "八下",
+        "is_summary": true,
+        "units": 2,
+        "cards": 3
       }
     ],
     "高中": [
@@ -1644,6 +1744,126 @@
         "is_summary": true,
         "units": 6,
         "cards": 14
+      },
+      {
+        "file": "化学_高一上_总结.json",
+        "subject": "化学",
+        "grade": "高一",
+        "semester": "上册",
+        "grade_short": "高一上",
+        "is_summary": true,
+        "units": 3,
+        "cards": 6
+      },
+      {
+        "file": "化学_高一下_总结.json",
+        "subject": "化学",
+        "grade": "高一年级",
+        "semester": "下册",
+        "grade_short": "高一下",
+        "is_summary": true,
+        "units": 2,
+        "cards": 2
+      },
+      {
+        "file": "化学_高二上_总结.json",
+        "subject": "化学",
+        "grade": "高二年级",
+        "semester": "上册",
+        "grade_short": "高二上",
+        "is_summary": true,
+        "units": 1,
+        "cards": 2
+      },
+      {
+        "file": "化学_高二下_总结.json",
+        "subject": "化学",
+        "grade": "高二年级",
+        "semester": "下册",
+        "grade_short": "高二下",
+        "is_summary": true,
+        "units": 1,
+        "cards": 2
+      },
+      {
+        "file": "物理_高一上_总结.json",
+        "subject": "物理",
+        "grade": "高一",
+        "semester": "上册",
+        "grade_short": "高一上",
+        "is_summary": true,
+        "units": 3,
+        "cards": 8
+      },
+      {
+        "file": "物理_高一下_总结.json",
+        "subject": "物理",
+        "grade": "高一年级",
+        "semester": "下册",
+        "grade_short": "高一下",
+        "is_summary": true,
+        "units": 3,
+        "cards": 4
+      },
+      {
+        "file": "物理_高二上_总结.json",
+        "subject": "物理",
+        "grade": "高二年级",
+        "semester": "上册",
+        "grade_short": "高二上",
+        "is_summary": true,
+        "units": 2,
+        "cards": 2
+      },
+      {
+        "file": "物理_高二下_总结.json",
+        "subject": "物理",
+        "grade": "高二年级",
+        "semester": "下册",
+        "grade_short": "高二下",
+        "is_summary": true,
+        "units": 2,
+        "cards": 2
+      },
+      {
+        "file": "生物_高一上_总结.json",
+        "subject": "生物",
+        "grade": "高一",
+        "semester": "上册",
+        "grade_short": "高一上",
+        "is_summary": true,
+        "units": 3,
+        "cards": 7
+      },
+      {
+        "file": "生物_高一下_总结.json",
+        "subject": "生物",
+        "grade": "高一年级",
+        "semester": "下册",
+        "grade_short": "高一下",
+        "is_summary": true,
+        "units": 2,
+        "cards": 3
+      },
+      {
+        "file": "生物_高二上_总结.json",
+        "subject": "生物",
+        "grade": "高二年级",
+        "semester": "上册",
+        "grade_short": "高二上",
+        "is_summary": true,
+        "units": 1,
+        "cards": 2
+      },
+      {
+        "file": "生物_高二下_总结.json",
+        "subject": "生物",
+        "grade": "高二年级",
+        "semester": "下册",
+        "grade_short": "高二下",
+        "is_summary": true,
+        "units": 2,
+        "cards": 3
       }
     ],
     "养生减脂": [
