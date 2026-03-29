@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260329c'  # v10.9.7: 修复反馈闭环断裂(severity_min)+severity综合审计分+OCR问题沉淀
+BUILD_VERSION = '20260329d'  # v10.9.8: 视觉反馈闭环接入HTTP流水线(5层审核+image-to-image精修)
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -3566,6 +3566,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 quality_score, AUDIT_PASS_SCORE, MAX_AUDIT_ROUNDS,
                 _typed_quality_score,
                 _resolve_canvas,
+                visual_feedback_audit, _build_refinement_prompt, refine_card_image,
+                VISUAL_REFINE_THRESHOLD, MAX_REFINE_ROUNDS,
             )
         except ImportError as e:
             return self._send_json({'error': f'v3模块导入失败: {e}'}, 500)
@@ -3783,6 +3785,89 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             if not best_image:
                 return self._send_json({'error': '图片生成全部失败', 'pipeline': pipeline_log}, 500)
 
+            # ── v10.9.8 Step 4b/4c/4d: 视觉反馈闭环 (image-to-image 精修) ──
+            if not skip_audit and manifest and best_image:
+                try:
+                    # Step 4b: 5层视觉审核
+                    pipeline_log.append('Step4b: 5层视觉审核...')
+                    print(f'[v3] Step4b: 5层视觉审核...', flush=True)
+                    va_result = visual_feedback_audit(
+                        best_image, manifest, keys[0], all_keys=keys,
+                        subject=subject, grade=grade
+                    )
+                    va_total = va_result.get('total', 0)
+                    va_fatal = va_result.get('fatal_flaws', [])
+                    va_verdict = va_result.get('one_line_verdict', '')
+                    pipeline_log.append(f'Step4b: 视觉审核={va_total}/100 {"🚨致命!" if va_fatal else ""} ({va_verdict})')
+                    print(f'[v3] Step4b: 视觉={va_total}/100 {"🚨" if va_fatal else ""} ({va_verdict})', flush=True)
+
+                    # Step 4c: image-to-image 精修
+                    improvements = va_result.get('improvements', [])
+                    text_errors = va_result.get('text_errors', [])
+                    should_refine = (improvements or text_errors) and va_total >= 30
+                    if should_refine:
+                        for refine_round in range(1, min(MAX_REFINE_ROUNDS, 2) + 1):
+                            pipeline_log.append(f'Step4c: image-to-image精修 (round {refine_round})...')
+                            print(f'[v3] Step4c: image-to-image精修 (round {refine_round})...', flush=True)
+                            refinement_prompt = _build_refinement_prompt(
+                                va_result, manifest, subject=subject, canvas=canvas
+                            )
+                            refined_data, refined_ext, refined_model = refine_card_image(
+                                best_image, refinement_prompt, keys
+                            )
+                            if not refined_data:
+                                pipeline_log.append('Step4c: ❌ 精修失败，保留原图')
+                                break
+
+                            # Step 4d: 精修后OCR快审
+                            pipeline_log.append('Step4d: 精修后OCR快审...')
+                            print(f'[v3] Step4d: 精修后OCR快审...', flush=True)
+                            refined_audit = ocr_audit(refined_data, manifest, keys[0], all_keys=keys)
+                            refined_ocr = refined_audit.get('overall_score', 0)
+                            refined_q = refined_audit.get('quality', {}).get('total', 0)
+                            old_q = merged_quality.get('total', 0) if merged_quality else 0
+                            pipeline_log.append(f'Step4d: OCR={refined_ocr} 质量={refined_q}')
+
+                            ocr_ok = refined_ocr >= best_score - 5
+                            quality_better = refined_q > old_q
+                            if ocr_ok and (quality_better or refined_ocr > best_score):
+                                best_image = refined_data
+                                best_ext = refined_ext
+                                best_score = max(best_score, refined_ocr)
+                                merged_quality = refined_audit.get('quality', merged_quality)
+                                pipeline_log.append(f'Step4c: ✅ 精修采纳! OCR={best_score} 质量={refined_q}')
+                                print(f'[v3] ✅ 精修采纳! OCR={best_score} 质量={refined_q}', flush=True)
+
+                                combined = (best_score + refined_q) / 2 if refined_q > 0 else best_score
+                                if combined >= 90:
+                                    pipeline_log.append(f'Step4c: ✅ 综合分优秀({combined:.0f}>=90)，停止精修')
+                                    break
+
+                                if refine_round < min(MAX_REFINE_ROUNDS, 2):
+                                    pipeline_log.append('Step4b+: 精修后再审核...')
+                                    va_result = visual_feedback_audit(
+                                        best_image, manifest, keys[0], all_keys=keys,
+                                        subject=subject, grade=grade
+                                    )
+                                    va_total = va_result.get('total', 0)
+                                    pipeline_log.append(f'Step4b+: 视觉={va_total}/100')
+                                    improvements = va_result.get('improvements', [])
+                                    if not improvements or va_total >= 90:
+                                        break
+                            else:
+                                reason = []
+                                if not ocr_ok:
+                                    reason.append(f'OCR降了({refined_ocr}<{best_score-5})')
+                                if not quality_better and refined_ocr <= best_score:
+                                    reason.append(f'质量未提升({refined_q}<={old_q})')
+                                pipeline_log.append(f'Step4c: ❌ 精修未采纳: {", ".join(reason)}')
+                                break
+                    else:
+                        pipeline_log.append(f'Step4b: ✅ 无需精修 (va={va_total}, improvements={len(improvements)})')
+                except Exception as vr_e:
+                    pipeline_log.append(f'视觉精修跳过: {str(vr_e)[:80]}')
+                    print(f'[v3] 视觉精修异常: {vr_e}', flush=True)
+
             # ── Step 5: PIL 修补兜底 ──
             final_action = 'pass'
             if best_score < AUDIT_PASS_SCORE and manifest and not skip_audit:
@@ -3992,6 +4077,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     ocr_audit, _build_audit_hint, _try_pil_text_repair,
                     quality_score, AUDIT_PASS_SCORE, MAX_AUDIT_ROUNDS,
                     _resolve_canvas,
+                    visual_feedback_audit, _build_refinement_prompt, refine_card_image,
+                    VISUAL_REFINE_THRESHOLD, MAX_REFINE_ROUNDS,
                 )
             except ImportError as e:
                 _refund_on_error()
@@ -4197,6 +4284,103 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                         _async_tasks[task_id] = {**_async_tasks[task_id],
                             'status': 'error', 'result': {'error': '图片生成全部失败', 'pipeline': pipeline_log}, 'updated': time.time()}
                     return
+
+                if _timed_out():
+                    _finish_with_best(best_image, best_ext, best_score, used_model, rounds_used)
+                    return
+
+                # ── v10.9.8 Step 4b/4c/4d: 视觉反馈闭环 (image-to-image 精修) ──
+                if not skip_audit and manifest and best_image and not _timed_out():
+                    try:
+                        # Step 4b: 5层视觉审核
+                        _update_progress(f'Step4b: 5层视觉审核... [{_elapsed():.0f}s]')
+                        pipeline_log.append('Step4b: 5层视觉审核...')
+                        print(f'[v3-async] Step4b: 5层视觉审核... [{_elapsed():.0f}s]', flush=True)
+                        va_result = visual_feedback_audit(
+                            best_image, manifest, keys[0], all_keys=keys,
+                            subject=subject, grade=grade
+                        )
+                        va_total = va_result.get('total', 0)
+                        va_fatal = va_result.get('fatal_flaws', [])
+                        va_verdict = va_result.get('one_line_verdict', '')
+                        pipeline_log.append(f'Step4b: 视觉审核={va_total}/100 {"🚨致命!" if va_fatal else ""} ({va_verdict}) [{_elapsed():.0f}s]')
+                        print(f'[v3-async] Step4b: 视觉={va_total}/100 {"🚨" if va_fatal else ""} [{_elapsed():.0f}s]', flush=True)
+
+                        # Step 4c: image-to-image 精修
+                        improvements = va_result.get('improvements', [])
+                        text_errors = va_result.get('text_errors', [])
+                        should_refine = (improvements or text_errors) and va_total >= 30
+                        if should_refine and not _timed_out():
+                            for refine_round in range(1, min(MAX_REFINE_ROUNDS, 2) + 1):
+                                if _timed_out():
+                                    pipeline_log.append(f'⏰ 超时, 跳过精修')
+                                    break
+                                _update_progress(f'Step4c: image-to-image精修 (round {refine_round})... [{_elapsed():.0f}s]')
+                                pipeline_log.append(f'Step4c: image-to-image精修 (round {refine_round})...')
+                                print(f'[v3-async] Step4c: 精修 round {refine_round} [{_elapsed():.0f}s]', flush=True)
+                                refinement_prompt = _build_refinement_prompt(
+                                    va_result, manifest, subject=subject, canvas=canvas
+                                )
+                                refined_data, refined_ext, refined_model = refine_card_image(
+                                    best_image, refinement_prompt, keys
+                                )
+                                if not refined_data:
+                                    pipeline_log.append('Step4c: ❌ 精修失败，保留原图')
+                                    break
+
+                                if _timed_out():
+                                    pipeline_log.append(f'⏰ 超时, 跳过精修后审计')
+                                    break
+
+                                # Step 4d: 精修后OCR快审
+                                _update_progress(f'Step4d: 精修后OCR快审... [{_elapsed():.0f}s]')
+                                pipeline_log.append('Step4d: 精修后OCR快审...')
+                                print(f'[v3-async] Step4d: OCR快审 [{_elapsed():.0f}s]', flush=True)
+                                refined_audit = ocr_audit(refined_data, manifest, keys[0], all_keys=keys)
+                                refined_ocr = refined_audit.get('overall_score', 0)
+                                refined_q = refined_audit.get('quality', {}).get('total', 0)
+                                old_q = merged_quality.get('total', 0) if merged_quality else 0
+                                pipeline_log.append(f'Step4d: OCR={refined_ocr} 质量={refined_q} [{_elapsed():.0f}s]')
+
+                                ocr_ok = refined_ocr >= best_score - 5
+                                quality_better = refined_q > old_q
+                                if ocr_ok and (quality_better or refined_ocr > best_score):
+                                    best_image = refined_data
+                                    best_ext = refined_ext
+                                    best_score = max(best_score, refined_ocr)
+                                    merged_quality = refined_audit.get('quality', merged_quality)
+                                    pipeline_log.append(f'Step4c: ✅ 精修采纳! OCR={best_score} 质量={refined_q}')
+                                    print(f'[v3-async] ✅ 精修采纳 OCR={best_score} 质量={refined_q}', flush=True)
+
+                                    combined = (best_score + refined_q) / 2 if refined_q > 0 else best_score
+                                    if combined >= 90:
+                                        pipeline_log.append(f'Step4c: ✅ 综合分优秀({combined:.0f}>=90)，停止精修')
+                                        break
+
+                                    if refine_round < min(MAX_REFINE_ROUNDS, 2) and not _timed_out():
+                                        pipeline_log.append('Step4b+: 精修后再审核...')
+                                        va_result = visual_feedback_audit(
+                                            best_image, manifest, keys[0], all_keys=keys,
+                                            subject=subject, grade=grade
+                                        )
+                                        va_total = va_result.get('total', 0)
+                                        pipeline_log.append(f'Step4b+: 视觉={va_total}/100')
+                                        improvements = va_result.get('improvements', [])
+                                        if not improvements or va_total >= 90:
+                                            break
+                                else:
+                                    reason = []
+                                    if not ocr_ok:
+                                        reason.append(f'OCR降了({refined_ocr}<{best_score-5})')
+                                    if not quality_better and refined_ocr <= best_score:
+                                        reason.append(f'质量未提升({refined_q}<={old_q})')
+                                    pipeline_log.append(f'Step4c: ❌ 精修未采纳: {", ".join(reason)}')
+                                    break
+                        else:
+                            pipeline_log.append(f'Step4b: ✅ 无需精修 (va={va_total}, improvements={len(improvements)})')
+                    except Exception as vr_e:
+                        pipeline_log.append(f'视觉精修跳过: {str(vr_e)[:80]}')
+                        print(f'[v3-async] 视觉精修异常: {vr_e}', flush=True)
 
                 if _timed_out():
                     _finish_with_best(best_image, best_ext, best_score, used_model, rounds_used)
