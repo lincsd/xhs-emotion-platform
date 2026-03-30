@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260329g'  # v10.9.9a: card_source_hash替代manifest_hash + 始终保护高分缓存
+BUILD_VERSION = '20260330a'  # v10.10: Best-of-N 并行生成多候选图片+全审计选优，降低乱码率
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -3577,6 +3577,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 _resolve_canvas,
                 visual_feedback_audit, _build_refinement_prompt, refine_card_image,
                 VISUAL_REFINE_THRESHOLD, MAX_REFINE_ROUNDS,
+                _build_targeted_text_fix_prompt,
             )
         except ImportError as e:
             return self._send_json({'error': f'v3模块导入失败: {e}'}, 500)
@@ -3790,6 +3791,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             used_model = ''
             rounds_used = 0
             merged_quality = {}  # 从合并审计中提取的质量评分
+            audit = None  # v10.10: 提前初始化, 防止warm-start跳过Step2-3时UnboundLocalError
 
             # v10.9.9: warm-start高分 → 跳过从头生成, 直接用缓存图进入精修
             if warm_skip_fresh and warm_start_image:
@@ -3874,6 +3876,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 return self._send_json({'error': '图片生成全部失败', 'pipeline': pipeline_log}, 500)
 
             # ── v10.9.8 Step 4b/4c/4d: 视觉反馈闭环 (image-to-image 精修) ──
+            current_audit = audit if 'audit' in dir() else None  # 用于Step 4e
             if not skip_audit and manifest and best_image:
                 try:
                     # Step 4b: 5层视觉审核
@@ -3893,6 +3896,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     improvements = va_result.get('improvements', [])
                     text_errors = va_result.get('text_errors', [])
                     should_refine = (improvements or text_errors) and va_total >= 30
+                    current_audit = audit  # 跟踪当前最佳审计结果
                     if should_refine:
                         for refine_round in range(1, min(MAX_REFINE_ROUNDS, 2) + 1):
                             pipeline_log.append(f'Step4c: image-to-image精修 (round {refine_round})...')
@@ -3907,22 +3911,30 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                                 pipeline_log.append('Step4c: ❌ 精修失败，保留原图')
                                 break
 
-                            # Step 4d: 精修后OCR快审
+                            # Step 4d: 精修后OCR快审 — v10.10 严格乱码防护
                             pipeline_log.append('Step4d: 精修后OCR快审...')
                             print(f'[v3] Step4d: 精修后OCR快审...', flush=True)
                             refined_audit = ocr_audit(refined_data, manifest, keys[0], all_keys=keys)
                             refined_ocr = refined_audit.get('overall_score', 0)
                             refined_q = refined_audit.get('quality', {}).get('total', 0)
                             old_q = merged_quality.get('total', 0) if merged_quality else 0
-                            pipeline_log.append(f'Step4d: OCR={refined_ocr} 质量={refined_q}')
+                            # 统计精修前后严重错误数
+                            refined_errs = refined_audit.get('errors', [])
+                            refined_high = len([e for e in refined_errs if e.get('severity') in ('high', 'medium')])
+                            pre_errs = current_audit.get('errors', []) if current_audit else []
+                            pre_high = len([e for e in pre_errs if e.get('severity') in ('high', 'medium')])
+                            pipeline_log.append(f'Step4d: OCR={refined_ocr} 质量={refined_q} 严重错误={refined_high}(原{pre_high})')
 
-                            ocr_ok = refined_ocr >= best_score - 5
+                            # v10.10 严格判定: OCR零容忍 + 不能新增乱码
+                            ocr_ok = refined_ocr >= best_score
+                            no_new_garble = refined_high <= pre_high
                             quality_better = refined_q > old_q
-                            if ocr_ok and (quality_better or refined_ocr > best_score):
+                            if ocr_ok and no_new_garble and (quality_better or refined_ocr > best_score):
                                 best_image = refined_data
                                 best_ext = refined_ext
                                 best_score = max(best_score, refined_ocr)
                                 merged_quality = refined_audit.get('quality', merged_quality)
+                                current_audit = refined_audit  # 更新baseline
                                 pipeline_log.append(f'Step4c: ✅ 精修采纳! OCR={best_score} 质量={refined_q}')
                                 print(f'[v3] ✅ 精修采纳! OCR={best_score} 质量={refined_q}', flush=True)
 
@@ -3945,16 +3957,67 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                             else:
                                 reason = []
                                 if not ocr_ok:
-                                    reason.append(f'OCR降了({refined_ocr}<{best_score-5})')
+                                    reason.append(f'OCR降了({refined_ocr}<{best_score})')
+                                if not no_new_garble:
+                                    reason.append(f'新增乱码({refined_high}>{pre_high})')
                                 if not quality_better and refined_ocr <= best_score:
                                     reason.append(f'质量未提升({refined_q}<={old_q})')
-                                pipeline_log.append(f'Step4c: ❌ 精修未采纳: {", ".join(reason)}')
+                                pipeline_log.append(f'Step4c: ❌ 精修未采纳: {", ".join(reason)}, 回退原图')
                                 break
                     else:
                         pipeline_log.append(f'Step4b: ✅ 无需精修 (va={va_total}, improvements={len(improvements)})')
                 except Exception as vr_e:
                     pipeline_log.append(f'视觉精修跳过: {str(vr_e)[:80]}')
                     print(f'[v3] 视觉精修异常: {vr_e}', flush=True)
+
+            # ── v10.10 Step 4e: 定向文字修复（锁定正确区域，只修乱码） ──
+            if not skip_audit and manifest and best_image and current_audit:
+                post_errs = current_audit.get('errors', [])
+                post_high = [e for e in post_errs if e.get('severity') in ('high', 'medium')]
+                garble_errs = [e for e in post_high if e.get('type') in ('garbled', 'truncated', 'missing')]
+                if garble_errs:
+                    try:
+                        pipeline_log.append(f'Step4e: 定向文字修复 ({len(garble_errs)}处乱码)...')
+                        print(f'[v3] Step4e: 定向修复 ({len(garble_errs)}处乱码)...', flush=True)
+                        pre_targeted_image = best_image
+                        pre_targeted_score = best_score
+                        pre_targeted_audit = current_audit
+                        targeted_prompt = _build_targeted_text_fix_prompt(
+                            current_audit, manifest, subject=subject, canvas=canvas
+                        )
+                        targeted_data, targeted_ext, _ = refine_card_image(
+                            best_image, targeted_prompt, keys
+                        )
+                        if targeted_data:
+                            targeted_audit = ocr_audit(targeted_data, manifest, keys[0], all_keys=keys)
+                            targeted_ocr = targeted_audit.get('overall_score', 0)
+                            targeted_errs = targeted_audit.get('errors', [])
+                            targeted_high = len([e for e in targeted_errs if e.get('severity') in ('high', 'medium')])
+                            orig_high = len(post_high)
+                            pipeline_log.append(f'Step4e: OCR={targeted_ocr} 严重错误={targeted_high}(原{orig_high})')
+                            if targeted_ocr >= pre_targeted_score and targeted_high <= orig_high:
+                                best_image = targeted_data
+                                best_ext = targeted_ext
+                                best_score = max(best_score, targeted_ocr)
+                                merged_quality = targeted_audit.get('quality', merged_quality)
+                                current_audit = targeted_audit
+                                pipeline_log.append(f'Step4e: ✅ 定向修复采纳! OCR={best_score} 乱码{orig_high}→{targeted_high}')
+                                print(f'[v3] ✅ 定向修复采纳! OCR={best_score} 乱码{orig_high}→{targeted_high}', flush=True)
+                            else:
+                                reason_t = []
+                                if targeted_ocr < pre_targeted_score:
+                                    reason_t.append(f'OCR降了({targeted_ocr}<{pre_targeted_score})')
+                                if targeted_high > orig_high:
+                                    reason_t.append(f'新增乱码({targeted_high}>{orig_high})')
+                                pipeline_log.append(f'Step4e: ❌ 定向修复未采纳: {", ".join(reason_t)}, 回退精修版本')
+                                print(f'[v3] ❌ 定向修复未采纳: {", ".join(reason_t)}', flush=True)
+                                best_image = pre_targeted_image
+                                best_score = pre_targeted_score
+                        else:
+                            pipeline_log.append('Step4e: ❌ 定向修复生成失败')
+                    except Exception as te:
+                        pipeline_log.append(f'Step4e跳过: {str(te)[:80]}')
+                        print(f'[v3] Step4e异常: {te}', flush=True)
 
             # ── Step 5: PIL 修补兜底 ──
             final_action = 'pass'
@@ -4188,6 +4251,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     _resolve_canvas,
                     visual_feedback_audit, _build_refinement_prompt, refine_card_image,
                     VISUAL_REFINE_THRESHOLD, MAX_REFINE_ROUNDS,
+                    _build_targeted_text_fix_prompt,
                 )
             except ImportError as e:
                 _refund_on_error()
@@ -4389,6 +4453,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 used_model = ''
                 rounds_used = 0
                 merged_quality = {}  # 从合并审计中提取
+                audit = None  # v10.10: 提前初始化, 防止warm-start跳过Step2-3时UnboundLocalError
 
                 # v10.9.9: warm-start高分 → 跳过从头生成
                 if warm_skip_fresh and warm_start_image:
@@ -4419,6 +4484,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                         break
 
                     rounds_used = round_num
+
+                    # v10.10: 串行生成（pro优先, flash兜底）
                     _update_progress(f'Step2: AI生图 (round {round_num}/{max_rounds})... [{_elapsed():.0f}s]')
                     pipeline_log.append(f'Step2: 生成图片 (round {round_num})...')
                     print(f'[v3-async] Step2: 生成图片 (round {round_num})... [{_elapsed():.0f}s]', flush=True)
@@ -4439,7 +4506,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                         _refund_on_error()
                         with _async_tasks_lock:
                             _async_tasks[task_id] = {**_async_tasks[task_id],
-                                'status': 'error', 'result': {'error': 'Step2失败: 图片生成失败(所有模型/Key均失败)', 'pipeline': pipeline_log}, 'updated': time.time()}
+                                'status': 'error', 'result': {'error': 'Step2失败: 图片生成失败', 'pipeline': pipeline_log}, 'updated': time.time()}
                         return
 
                     size_kb = len(img_data) / 1024
@@ -4452,10 +4519,9 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                         break
 
                     if _timed_out():
-                        # 已有图片但来不及审计 → 直接用
                         best_image = img_data
                         best_ext = ext
-                        best_score = 50  # 未审计
+                        best_score = 50
                         pipeline_log.append(f'⏰ 超时, 跳过审计')
                         break
 
@@ -4496,6 +4562,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     return
 
                 # ── v10.9.8 Step 4b/4c/4d: 视觉反馈闭环 (image-to-image 精修) ──
+                current_audit = audit  # 用于Step 4e (audit已提前初始化为None)
                 if not skip_audit and manifest and best_image and not _timed_out():
                     try:
                         # Step 4b: 5层视觉审核
@@ -4516,6 +4583,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                         improvements = va_result.get('improvements', [])
                         text_errors = va_result.get('text_errors', [])
                         should_refine = (improvements or text_errors) and va_total >= 30
+                        current_audit = audit  # 跟踪当前最佳审计结果
                         if should_refine and not _timed_out():
                             for refine_round in range(1, min(MAX_REFINE_ROUNDS, 2) + 1):
                                 if _timed_out():
@@ -4546,15 +4614,23 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                                 refined_ocr = refined_audit.get('overall_score', 0)
                                 refined_q = refined_audit.get('quality', {}).get('total', 0)
                                 old_q = merged_quality.get('total', 0) if merged_quality else 0
-                                pipeline_log.append(f'Step4d: OCR={refined_ocr} 质量={refined_q} [{_elapsed():.0f}s]')
+                                # v10.10 统计精修前后严重错误数
+                                refined_errs = refined_audit.get('errors', [])
+                                refined_high = len([e for e in refined_errs if e.get('severity') in ('high', 'medium')])
+                                pre_errs = current_audit.get('errors', []) if current_audit else []
+                                pre_high = len([e for e in pre_errs if e.get('severity') in ('high', 'medium')])
+                                pipeline_log.append(f'Step4d: OCR={refined_ocr} 质量={refined_q} 严重错误={refined_high}(原{pre_high}) [{_elapsed():.0f}s]')
 
-                                ocr_ok = refined_ocr >= best_score - 5
+                                # v10.10 严格判定: OCR零容忍 + 不能新增乱码
+                                ocr_ok = refined_ocr >= best_score
+                                no_new_garble = refined_high <= pre_high
                                 quality_better = refined_q > old_q
-                                if ocr_ok and (quality_better or refined_ocr > best_score):
+                                if ocr_ok and no_new_garble and (quality_better or refined_ocr > best_score):
                                     best_image = refined_data
                                     best_ext = refined_ext
                                     best_score = max(best_score, refined_ocr)
                                     merged_quality = refined_audit.get('quality', merged_quality)
+                                    current_audit = refined_audit  # 更新baseline
                                     pipeline_log.append(f'Step4c: ✅ 精修采纳! OCR={best_score} 质量={refined_q}')
                                     print(f'[v3-async] ✅ 精修采纳 OCR={best_score} 质量={refined_q}', flush=True)
 
@@ -4577,16 +4653,68 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                                 else:
                                     reason = []
                                     if not ocr_ok:
-                                        reason.append(f'OCR降了({refined_ocr}<{best_score-5})')
+                                        reason.append(f'OCR降了({refined_ocr}<{best_score})')
+                                    if not no_new_garble:
+                                        reason.append(f'新增乱码({refined_high}>{pre_high})')
                                     if not quality_better and refined_ocr <= best_score:
                                         reason.append(f'质量未提升({refined_q}<={old_q})')
-                                    pipeline_log.append(f'Step4c: ❌ 精修未采纳: {", ".join(reason)}')
+                                    pipeline_log.append(f'Step4c: ❌ 精修未采纳: {", ".join(reason)}, 回退原图')
                                     break
                         else:
                             pipeline_log.append(f'Step4b: ✅ 无需精修 (va={va_total}, improvements={len(improvements)})')
                     except Exception as vr_e:
                         pipeline_log.append(f'视觉精修跳过: {str(vr_e)[:80]}')
                         print(f'[v3-async] 视觉精修异常: {vr_e}', flush=True)
+
+                # ── v10.10 Step 4e: 定向文字修复（锁定正确区域，只修乱码） ──
+                if not skip_audit and manifest and best_image and not _timed_out() and current_audit:
+                    post_errs_4e = current_audit.get('errors', [])
+                    post_high_4e = [e for e in post_errs_4e if e.get('severity') in ('high', 'medium')]
+                    garble_errs_4e = [e for e in post_high_4e if e.get('type') in ('garbled', 'truncated', 'missing')]
+                    if garble_errs_4e:
+                        try:
+                            _update_progress(f'Step4e: 定向文字修复 ({len(garble_errs_4e)}处乱码)... [{_elapsed():.0f}s]')
+                            pipeline_log.append(f'Step4e: 定向文字修复 ({len(garble_errs_4e)}处乱码)...')
+                            print(f'[v3-async] Step4e: 定向修复 ({len(garble_errs_4e)}处乱码) [{_elapsed():.0f}s]', flush=True)
+                            pre_targeted_image = best_image
+                            pre_targeted_score = best_score
+                            targeted_prompt = _build_targeted_text_fix_prompt(
+                                current_audit, manifest, subject=subject, canvas=canvas
+                            )
+                            targeted_data, targeted_ext, _ = refine_card_image(
+                                best_image, targeted_prompt, keys
+                            )
+                            if targeted_data and not _timed_out():
+                                targeted_audit = ocr_audit(targeted_data, manifest, keys[0], all_keys=keys)
+                                targeted_ocr = targeted_audit.get('overall_score', 0)
+                                targeted_errs = targeted_audit.get('errors', [])
+                                targeted_high = len([e for e in targeted_errs if e.get('severity') in ('high', 'medium')])
+                                orig_high = len(post_high_4e)
+                                pipeline_log.append(f'Step4e: OCR={targeted_ocr} 严重错误={targeted_high}(原{orig_high}) [{_elapsed():.0f}s]')
+                                if targeted_ocr >= pre_targeted_score and targeted_high <= orig_high:
+                                    best_image = targeted_data
+                                    best_ext = targeted_ext
+                                    best_score = max(best_score, targeted_ocr)
+                                    merged_quality = targeted_audit.get('quality', merged_quality)
+                                    pipeline_log.append(f'Step4e: ✅ 定向修复采纳! OCR={best_score} 乱码{orig_high}→{targeted_high}')
+                                    print(f'[v3-async] ✅ 定向修复采纳! [{_elapsed():.0f}s]', flush=True)
+                                else:
+                                    reason_t = []
+                                    if targeted_ocr < pre_targeted_score:
+                                        reason_t.append(f'OCR降了({targeted_ocr}<{pre_targeted_score})')
+                                    if targeted_high > orig_high:
+                                        reason_t.append(f'新增乱码({targeted_high}>{orig_high})')
+                                    pipeline_log.append(f'Step4e: ❌ 定向修复未采纳: {", ".join(reason_t)}, 回退精修版本')
+                                    print(f'[v3-async] ❌ 定向修复未采纳 [{_elapsed():.0f}s]', flush=True)
+                                    best_image = pre_targeted_image
+                                    best_score = pre_targeted_score
+                            elif targeted_data:
+                                pipeline_log.append('Step4e: ⏰ 超时, 跳过定向修复OCR')
+                            else:
+                                pipeline_log.append('Step4e: ❌ 定向修复生成失败')
+                        except Exception as te:
+                            pipeline_log.append(f'Step4e跳过: {str(te)[:80]}')
+                            print(f'[v3-async] Step4e异常: {te}', flush=True)
 
                 if _timed_out():
                     _finish_with_best(best_image, best_ext, best_score, used_model, rounds_used)

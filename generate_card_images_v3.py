@@ -31,6 +31,7 @@ v10.6 新增:
 
 import json, os, sys, time, base64, datetime, re, io, textwrap
 import urllib.request, urllib.error
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # 自我优化系统
 try:
@@ -188,10 +189,9 @@ def build_content_review_hint(subject: str, card_id: str = '') -> str:
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta'
 
 TEXT_MODEL      = 'gemini-2.5-flash'            # 提示词生成 + OCR审计
-IMAGE_MODELS    = [                              # 图片生成（按优先级尝试）
-    'gemini-3.1-flash-image-preview',            # Nano Banana 2: 高精度多语言文字，最均衡
-    'gemini-3-pro-image-preview',                 # Nano Banana Pro: 电影级画质，深度推理
-    'nano-banana-pro-preview',                    # 兜底: 已验证可用
+IMAGE_MODELS    = [                              # 图片生成（串行: pro优先, flash兜底）
+    'gemini-3-pro-image-preview',                 # ★ 最优: audit=100 质量最高
+    'gemini-3.1-flash-image-preview',            # 兜底: pro失败时才使用
 ]
 
 MAX_AUDIT_ROUNDS = 3    # OCR审计最大重试轮数
@@ -3112,6 +3112,99 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
     return None, None, None
 
 
+def _generate_single_model(model, contents, gen_config, keys):
+    """单个模型的图片生成（供并行调用）。返回 (image_data, ext, model) 或 (None, None, model)。"""
+    try:
+        resp = gemini_call(model, contents, keys[0], gen_config=gen_config, retries=1, all_keys=keys)
+        if not resp:
+            return None, None, model
+        candidates = resp.get('candidates', [])
+        if candidates:
+            parts = candidates[0].get('content', {}).get('parts', [])
+            for part in parts:
+                if 'inlineData' in part:
+                    b64data = part['inlineData'].get('data', '')
+                    mime = part['inlineData'].get('mimeType', 'image/png')
+                    if b64data:
+                        ext = 'png' if 'png' in mime else 'jpg'
+                        return base64.b64decode(b64data), ext, model
+    except Exception as e:
+        print(f'      [Parallel gen error with {model}] {e}')
+    return None, None, model
+
+
+def generate_card_images_parallel(prompt, keys, card_title='', subject='', audit_hint='', manifest=None, canvas=None):
+    """Step 2 v10.10: Best-of-N 并行生成 — 用所有图片模型同时生成，返回全部候选图片。
+    
+    返回: list of (image_data, ext, model)  — 只包含成功生成的候选
+    """
+    if not canvas:
+        canvas = _CANVAS_PRESETS['小红书']
+    canvas_en = _build_canvas_block_en(canvas)
+    chinese_prefix = (
+        f"CRITICAL INSTRUCTIONS — COMPLETE CARD WITH TEXT:\n"
+        f"1. This is a {subject} educational knowledge card about \"{card_title}\".\n"
+        f"2. ✅ You MUST render ALL text directly in the image — text is the core content!\n"
+        f"3. Design a STRUCTURED CARD with text integrated into each zone:\n"
+        f"   - TOP BANNER: Dark gradient strip at top with WHITE TITLE TEXT centered\n"
+        f"   - CONTENT CARD: White rounded rectangle in main body with TEACHING CONTENT text\n"
+        f"   - ACCENT STRIP: Warm gradient bar near bottom with WHITE SLOGAN TEXT centered\n"
+        f"   - BOTTOM EDGE: Small tip text if needed\n"
+        f"   - Small cute mascot in bottom-right corner (<10% of image)\n"
+        f"4. ⚠️ TEXT QUALITY IS CRITICAL:\n"
+        f"   - Every Chinese character must be perfectly formed (correct strokes, no garbled text)\n"
+        f"   - Every English word must be spelled correctly\n"
+        f"   - Numbers and math symbols must be accurate\n"
+        f"   - Text must look professionally typeset — clear hierarchy, aligned, readable\n"
+        f"   - ⚠️ NEVER truncate text! Every phrase must be COMPLETE — do not drop the last 1-2 characters!\n"
+        f"     Example: '提升语言运用能力' must NOT become '提升语言运用能' (missing 力)\n"
+        f"5. Style: Professional Xiaohongshu card template with text as part of design.\n"
+        f"   Main color: choose from coral pink / mint blue / peach orange / lavender.\n"
+        f"6. {canvas_en}\n"
+        f"7. ⚠️ Do NOT render any color hex codes (like #1a237e), percentage numbers, or layout coordinates as visible text in the image!\n"
+    )
+    if manifest:
+        manifest = _enforce_manifest_limits(manifest)
+        chinese_prefix += f"\n=== TEXT TO RENDER IN THE IMAGE (MUST be pixel-perfect) ===\n"
+        for key, val in manifest.items():
+            zone = 'Banner' if key == 'TITLE' else 'Accent strip' if key == 'SLOGAN' else 'Content card' if key.startswith('LINE') else 'Bottom'
+            chinese_prefix += f"  {key}: \"{val}\" → render in {zone}\n"
+        chinese_prefix += f"⚠️ Render EVERY text item above exactly as written. No omissions, no changes.\n"
+        chinese_prefix += f"⚠️ CRITICAL: Do NOT truncate any text! Every phrase must be rendered in FULL.\n"
+        chinese_prefix += f"   If space is tight, use smaller font — but NEVER drop the last 1-2 characters!\n"
+        chinese_prefix += "=== END TEXT ===\n"
+    if audit_hint:
+        chinese_prefix += f"\n⚠️ CORRECTION FROM PREVIOUS ATTEMPT:\n{audit_hint}\n"
+
+    full_prompt = chinese_prefix + "\n" + prompt
+    contents = [{'role': 'user', 'parts': [{'text': full_prompt}]}]
+    gen_config = {
+        'responseModalities': ['TEXT', 'IMAGE'],
+        'temperature': 0.4,
+    }
+
+    # 并行调用所有图片模型
+    results = []
+    with ThreadPoolExecutor(max_workers=len(IMAGE_MODELS)) as executor:
+        futures = {
+            executor.submit(_generate_single_model, model, contents, gen_config, keys): model
+            for model in IMAGE_MODELS
+        }
+        for future in as_completed(futures):
+            model_name = futures[future]
+            try:
+                img_data, ext, model = future.result()
+                if img_data:
+                    results.append((img_data, ext, model))
+                    print(f' ✅{model_name}', end='')
+                else:
+                    print(f' ❌{model_name}', end='')
+            except Exception as e:
+                print(f' ❌{model_name}({e})', end='')
+    
+    return results
+
+
 # ═══════════════════════════════════════════
 # Step 3: Vision OCR 审计 + 质量评分（合并为一次调用）
 # ═══════════════════════════════════════════
@@ -3865,6 +3958,110 @@ def _build_refinement_prompt(visual_audit_result, expected_manifest, subject='',
     return '\n'.join(parts)
 
 
+def _build_targeted_text_fix_prompt(ocr_audit_result, expected_manifest, subject='', canvas=None):
+    """v10.10: 定向文字修复 prompt — 锁定正确区域，只修乱码区域。
+    
+    与 _build_refinement_prompt 不同，这个 prompt:
+    1. 明确标注哪些区域文字正确 → "DO NOT TOUCH"
+    2. 只列出有问题的区域 → 要求 AI 仅重绘这些文字
+    3. 不做布局/配色/排版调整 → 只改文字
+    """
+    errors = ocr_audit_result.get('errors', [])
+    # 收集有乱码/错字的 manifest key
+    broken_keys = set()
+    for err in errors:
+        sev = err.get('severity', '')
+        if sev in ('high', 'medium'):
+            exp = err.get('expected', '')
+            # 找到这个错误对应的 manifest key
+            for mk, mv in (expected_manifest or {}).items():
+                if exp and (exp in mv or mv in exp):
+                    broken_keys.add(mk)
+                    break
+            # 也看 location 字段
+            loc = err.get('location', '')
+            if loc:
+                for mk in (expected_manifest or {}):
+                    if mk.lower() in loc.lower() or loc.lower() in mk.lower():
+                        broken_keys.add(mk)
+
+    if not broken_keys and errors:
+        # 如果没匹配到具体 key，标记所有 LINE 为需修复（保守策略）
+        broken_keys = {k for k in (expected_manifest or {}) if k.startswith('LINE')}
+
+    correct_keys = set(expected_manifest.keys()) - broken_keys if expected_manifest else set()
+
+    parts = []
+    parts.append(
+        f"TARGETED TEXT FIX — {subject or 'educational'} knowledge card.\n"
+        f"This image has some garbled/incorrect text that needs fixing.\n"
+        f"⚠️ CRITICAL: Only fix the text areas marked below. Do NOT change anything else!\n"
+        f"Keep the exact same layout, colors, background, illustrations, and mascot.\n"
+    )
+
+    # 1. 锁定正确区域 — DO NOT TOUCH
+    if correct_keys:
+        parts.append("═══ ✅ CORRECT TEXT — DO NOT MODIFY THESE ═══")
+        for ck in sorted(correct_keys):
+            val = expected_manifest.get(ck, '')
+            zone = ('Banner' if ck == 'TITLE' else
+                    'Accent strip' if ck == 'SLOGAN' else
+                    'Content card' if ck.startswith('LINE') else 'Bottom')
+            parts.append(f'  ✅ {ck} ({zone}): "{val}" — ALREADY CORRECT, DO NOT TOUCH!')
+        parts.append("")
+
+    # 2. 列出需要修复的区域
+    if broken_keys:
+        parts.append("═══ 🔴 FIX THESE TEXT AREAS ONLY ═══")
+        for bk in sorted(broken_keys):
+            val = expected_manifest.get(bk, '')
+            zone = ('Banner' if bk == 'TITLE' else
+                    'Accent strip' if bk == 'SLOGAN' else
+                    'Content card' if bk.startswith('LINE') else 'Bottom')
+            # 找到这个 key 对应的错误描述
+            err_desc = ''
+            for err in errors:
+                exp = err.get('expected', '')
+                if exp and (exp in val or val in exp):
+                    actual = err.get('actual', '?')
+                    err_desc = f' (current garbled text: "{actual}")'
+                    break
+            parts.append(f'  🔴 {bk} ({zone}): MUST be "{val}"{err_desc}')
+            parts.append(f'      → Redraw this text with PERFECT Chinese characters, correct strokes')
+        parts.append("")
+
+    # 3. 具体错误列表
+    high_errors = [e for e in errors if e.get('severity') in ('high', 'medium')]
+    if high_errors:
+        parts.append("═══ 📋 SPECIFIC ERRORS TO FIX ═══")
+        for he in high_errors[:8]:
+            exp = he.get('expected', '?')
+            act = he.get('actual', '?')
+            etype = he.get('type', '')
+            if etype == 'garbled':
+                parts.append(f'  ✏ GARBLED: "{act}" → must be "{exp}" (fix every character stroke)')
+            elif etype == 'truncated':
+                parts.append(f'  ✏ TRUNCATED: "{act}" → complete to "{exp}"')
+            elif etype == 'missing':
+                parts.append(f'  + ADD: "{exp}" is missing, render it in the correct zone')
+            else:
+                parts.append(f'  ✏ FIX: "{act}" → "{exp}"')
+        parts.append("")
+
+    # 4. 画布配置
+    if not canvas:
+        canvas = _CANVAS_PRESETS['小红书']
+
+    parts.append(
+        "OUTPUT: The same card image with ONLY the broken text areas fixed.\n"
+        f"{canvas['ratio']} {canvas['orientation']} ratio. "
+        "ALL other elements (layout, colors, background, illustrations, correct text) must remain IDENTICAL.\n"
+        "Chinese characters must have perfect strokes — no garbling, no truncation.\n"
+    )
+
+    return '\n'.join(parts)
+
+
 def refine_card_image(prev_image_data, refinement_prompt, keys):
     """v10.5: 基于上一轮图片 + 精修指令生成改进版图片 (image-to-image)。
     
@@ -4214,7 +4411,8 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
 
     time.sleep(1)
 
-    # ── Step 2-4: 生成图片 + OCR审计循环 ──
+    # ── Step 2-4: 串行生成 + OCR审计循环 ──
+    # v10.10: pro优先 → flash兜底（串行），省 API 调用
     best_image = None
     best_ext = 'png'
     best_score = 0
@@ -4224,28 +4422,26 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
     for round_num in range(1, _max_rounds + 1):
         stats['audit_rounds'] = round_num
 
-        # Step 2: 生成图片
+        # Step 2: 串行生成图片（pro优先, flash兜底）
         round_label = f'(round {round_num}/{_max_rounds})' if round_num > 1 else ''
         print(f'  ├─ Step 2: 生成图片{round_label}...', end='', flush=True)
         t1 = time.time()
+
         img_data, ext, model = generate_card_image(
             prompt, keys, card_title=title, subject=subject,
             audit_hint=audit_hint, manifest=manifest, canvas=canvas
         )
+
         stats['image_gen_time'] += time.time() - t1
-        stats['image_model'] = model or ''
 
         if not img_data:
-            print(' ❌ 图片生成失败')
+            print(f' ❌ 所有模型生成失败')
             if best_image:
-                break  # 用之前最好的
+                break
             return False, '', stats
 
-        size_kb = len(img_data) / 1024
-        print(f' ({size_kb:.0f}KB)')
-
-        # v10.4: AI 直接渲染文字，不再使用 PIL 叠加
-        # (PIL 渲染已停用)
+        print(f' ✅ ({model}, {len(img_data)/1024:.0f}KB)')
+        stats['image_model'] = model or ''
 
         if skip_audit:
             best_image = img_data
@@ -4255,32 +4451,32 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
             stats['final_action'] = 'no_audit'
             break
 
-        # Step 3: OCR 审计 + 质量评分（合并调用）
+        # Step 3: OCR 审计 + 质量评分
+        _eng_kp = card.get('_eng_key_phrase', '')
         print(f'  ├─ Step 3: OCR审计+质量评分...', end='', flush=True)
         key = next_key(keys)
-        _eng_kp = card.get('_eng_key_phrase', '')  # 由 _build_card_info_grammar 注入
         audit = ocr_audit(img_data, manifest, key, all_keys=keys, eng_key_phrase=_eng_kp)
         score = audit.get('overall_score', 0)
         errors = audit.get('errors', [])
         summary = audit.get('summary', '')
-        last_audit = audit  # 记录最近审计结果
-        # 提取合并的质量评分
         merged_quality = audit.get('quality', {})
-        print(f' 审计={score}/100 质量={merged_quality.get("total", 0)}/100 ({summary})')
+        q_total = merged_quality.get('total', 0)
+        combined = (score + q_total) / 2 if q_total > 0 else score
+        print(f' 审计={score} 质量={q_total} 综合={combined:.0f} ({summary})')
 
         if score > best_score:
             best_image = img_data
             best_ext = ext
             best_score = score
+            last_audit = audit
 
         stats['audit_score'] = best_score
 
         if score >= _pass_score:
-            print(f'  ├─ ✅ OCR审计通过! (score={score})')
+            print(f'  ├─ ✅ OCR审计通过! (score={score}, model={model})')
             stats['final_action'] = 'pass'
             break
         else:
-            # 构建纠错提示
             high_errs = [e for e in errors if e.get('severity') in ('high', 'medium')]
             print(f'  ├─ ⚠️  {len(high_errs)}处文字错误, ', end='')
             if round_num < _max_rounds:
@@ -4360,18 +4556,28 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
                 print(f' ({refined_kb:.0f}KB)')
 
                 # 对精修后的图片做 OCR 快审 — 确保文字没变差
+                # v10.10: 严格乱码防护 — 精修不能引入新的文字错误
                 print(f'  ├─ Step 4d: 精修后OCR快审...', end='', flush=True)
                 key = next_key(keys)
                 refined_audit = ocr_audit(refined_data, manifest, key, all_keys=keys,
                                           eng_key_phrase=card.get('_eng_key_phrase', ''))
                 refined_ocr = refined_audit.get('overall_score', 0)
                 refined_q = refined_audit.get('quality', {}).get('total', 0)
-                print(f' OCR={refined_ocr} 质量={refined_q}')
+                refined_errs = refined_audit.get('errors', [])
+                refined_high = len([e for e in refined_errs if e.get('severity') in ('high', 'medium')])
+                # 精修前的 high/medium 错误数
+                pre_errs = last_audit.get('errors', []) if last_audit else []
+                pre_high = len([e for e in pre_errs if e.get('severity') in ('high', 'medium')])
+                print(f' OCR={refined_ocr} 质量={refined_q} 严重错误={refined_high}(原{pre_high})')
 
-                # 精修后如果文字没变差且质量有提升→采纳
-                ocr_ok = refined_ocr >= best_score - 5  # 允许OCR微降5分
+                # v10.10 严格判定：
+                # 1) OCR不能降（零容忍）
+                # 2) 不能引入新的高严重度错误
+                # 3) 质量要有提升或OCR提升
+                ocr_ok = refined_ocr >= best_score  # 零容忍: OCR不能降
+                no_new_garble = refined_high <= pre_high  # 不能多出新乱码
                 quality_better = refined_q > merged_q_total
-                if ocr_ok and (quality_better or refined_ocr > best_score):
+                if ocr_ok and no_new_garble and (quality_better or refined_ocr > best_score):
                     old_combined = combined_score
                     best_image = refined_data
                     best_ext = refined_ext
@@ -4409,11 +4615,77 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
                 else:
                     reason = []
                     if not ocr_ok:
-                        reason.append(f'OCR降了({refined_ocr}<{best_score - 5})')
+                        reason.append(f'OCR降了({refined_ocr}<{best_score})')
+                    if not no_new_garble:
+                        reason.append(f'新增乱码({refined_high}>{pre_high})')
                     if not quality_better and refined_ocr <= best_score:
                         reason.append(f'质量未提升({refined_q}<={merged_q_total})')
-                    print(f'  ├─ ❌ 精修未采纳: {", ".join(reason)}，保留原图')
+                    print(f'  ├─ ❌ 精修未采纳: {", ".join(reason)}，回退原图')
                     break
+
+    # ── v10.10 Step 4e: 定向文字修复（锁定正确区域，只修乱码） ──
+    # 条件: 精修后仍有 high/medium 乱码错误（不管是否执行了精修）
+    if last_audit and best_image and not skip_audit:
+        post_errs = last_audit.get('errors', [])
+        post_high = [e for e in post_errs if e.get('severity') in ('high', 'medium')]
+        garble_errs = [e for e in post_high if e.get('type') in ('garbled', 'truncated', 'missing')]
+        if garble_errs:
+            print(f'  ├─ Step 4e: 定向文字修复 ({len(garble_errs)}处乱码)...', flush=True)
+            # 保存精修后的版本作为回退基准
+            pre_targeted_image = best_image
+            pre_targeted_ext = best_ext
+            pre_targeted_score = best_score
+            pre_targeted_audit = last_audit
+
+            targeted_prompt = _build_targeted_text_fix_prompt(
+                last_audit, manifest, subject=subject, canvas=canvas
+            )
+            t_targeted = time.time()
+            targeted_data, targeted_ext, targeted_model = refine_card_image(
+                best_image, targeted_prompt, keys
+            )
+            stats['image_gen_time'] += time.time() - t_targeted
+
+            if targeted_data:
+                targeted_kb = len(targeted_data) / 1024
+                print(f'  │  定向修复生成 ({targeted_kb:.0f}KB), OCR快审...', end='', flush=True)
+                key = next_key(keys)
+                targeted_audit = ocr_audit(targeted_data, manifest, key, all_keys=keys,
+                                            eng_key_phrase=card.get('_eng_key_phrase', ''))
+                targeted_ocr = targeted_audit.get('overall_score', 0)
+                targeted_q = targeted_audit.get('quality', {}).get('total', 0)
+                targeted_errs = targeted_audit.get('errors', [])
+                targeted_high = len([e for e in targeted_errs if e.get('severity') in ('high', 'medium')])
+                orig_high = len(post_high)
+
+                print(f' OCR={targeted_ocr} 严重错误={targeted_high}(原{orig_high})')
+
+                # 采纳条件: OCR不降 + 乱码不增
+                if targeted_ocr >= pre_targeted_score and targeted_high <= orig_high:
+                    best_image = targeted_data
+                    best_ext = targeted_ext
+                    best_score = max(best_score, targeted_ocr)
+                    last_audit = targeted_audit
+                    if targeted_q > 0:
+                        merged_q_total = targeted_q
+                    combined_score = (best_score + merged_q_total) / 2
+                    print(f'  ├─ ✅ 定向修复采纳! OCR={best_score} 乱码{orig_high}→{targeted_high}')
+                    stats['targeted_fix'] = True
+                    stats['final_action'] = 'targeted_fix'
+                else:
+                    # 回退到精修版本
+                    reason_t = []
+                    if targeted_ocr < pre_targeted_score:
+                        reason_t.append(f'OCR降了({targeted_ocr}<{pre_targeted_score})')
+                    if targeted_high > orig_high:
+                        reason_t.append(f'新增乱码({targeted_high}>{orig_high})')
+                    print(f'  ├─ ❌ 定向修复未采纳: {", ".join(reason_t)}，回退精修版本')
+                    best_image = pre_targeted_image
+                    best_ext = pre_targeted_ext
+                    best_score = pre_targeted_score
+                    last_audit = pre_targeted_audit
+            else:
+                print(f'  ├─ ❌ 定向修复生成失败，保留当前版本')
 
     # ── 质量评分（从合并审计结果中提取，省掉单独API调用）──
     q = {}
