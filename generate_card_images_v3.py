@@ -1411,6 +1411,7 @@ def _build_card_info_grammar(card, subject, grade, semester, canvas=None):
         eng_key_phrase = max(eng_phrases, key=len).strip() if eng_phrases else ''
     # 3) ★ 当 title+definition 无英文时，从 core_points 提取第一个具体英文短语
     #    解决"综合类"知识点（如"高频词汇活用与固定搭配"）标题为纯中文的问题
+    _cn_from_core_point = ''  # 从同一 core_point 提取的中文释义
     if not eng_key_phrase or not re.search(r'[a-zA-Z]{3,}', eng_key_phrase):
         for p in card.get('core_points', []):
             p_str = str(p)
@@ -1418,16 +1419,26 @@ def _build_card_info_grammar(card, subject, grade, semester, canvas=None):
             bt = re.findall(r'`([a-zA-Z][a-zA-Z\s]+?)`', p_str)
             if bt:
                 eng_key_phrase = bt[0].strip()
+                # ★ 同时提取同一 core_point 的中文释义（括号内中文）
+                cn_in_paren = re.search(r'[（(]\s*([\u4e00-\u9fff/、]+)\s*[）)]', p_str)
+                if cn_in_paren:
+                    _cn_from_core_point = cn_in_paren.group(1).strip()[:8]
                 break
             # 次优: 多词英文短语 (≥2 words)
             mw = re.findall(r'[a-zA-Z]+(?:\s+[a-zA-Z]+)+', p_str)
             if mw:
                 eng_key_phrase = mw[0].strip()
+                cn_in_paren = re.search(r'[（(]\s*([\u4e00-\u9fff/、]+)\s*[）)]', p_str)
+                if cn_in_paren:
+                    _cn_from_core_point = cn_in_paren.group(1).strip()[:8]
                 break
             # 兜底: 第一个 ≥4字母 英文单词
             sw = re.findall(r'[a-zA-Z]{4,}', p_str)
             if sw:
                 eng_key_phrase = sw[0].strip()
+                cn_in_paren = re.search(r'[（(]\s*([\u4e00-\u9fff/、]+)\s*[）)]', p_str)
+                if cn_in_paren:
+                    _cn_from_core_point = cn_in_paren.group(1).strip()[:8]
                 break
     if not eng_key_phrase:
         eng_key_phrase = title_raw  # 最终兜底
@@ -1480,11 +1491,13 @@ def _build_card_info_grammar(card, subject, grade, semester, canvas=None):
     _mc = eff.get('max_chinese_chars', 20)
     _mpb = eff.get('max_chars_per_block', 5)
 
-    # ── 从 definition 提取中文释义（短）──
-    cn_meaning = ''
-    cn_match = re.search(r'[，,]?\s*(意为|意思是|表示|指的是)[\s""]*([\u4e00-\u9fff/、]+)', definition)
-    if cn_match:
-        cn_meaning = cn_match.group(2).strip()[:8]
+    # ── 提取中文释义（短）──
+    # ★ 优先使用从 core_point 提取的释义（与 eng_key_phrase 语义匹配）
+    cn_meaning = _cn_from_core_point if _cn_from_core_point else ''
+    if not cn_meaning:
+        cn_match = re.search(r'[，,]?\s*(意为|意思是|表示|指的是)[\s""]*([\u4e00-\u9fff/、]+)', definition)
+        if cn_match:
+            cn_meaning = cn_match.group(2).strip()[:8]
     if not cn_meaning:
         cn_chars = re.findall(r'[\u4e00-\u9fff]+', definition)
         if cn_chars:
