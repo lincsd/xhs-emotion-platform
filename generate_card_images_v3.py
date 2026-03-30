@@ -987,7 +987,7 @@ def _build_card_info(card, subject, grade, semester, canvas=None):
         return _build_card_info_wellness(card, subject, grade, semester)
     # 英语学科的卡片统一走语法/英语路径
     if subject == '英语' or card.get('type') in _GRAMMAR_TYPES:
-        return _build_card_info_grammar(card, subject, grade, semester)
+        return _build_card_info_grammar(card, subject, grade, semester, canvas=canvas)
     # v10.6: 语文学科走专属路径（诗词/文言文/修辞需要特殊处理）
     if subject == '语文':
         return _build_card_info_yuwen(card, subject, grade, semester, canvas=canvas)
@@ -1388,7 +1388,7 @@ def _find_subject_terms_in_card(card, subject):
     return found
 
 
-def _build_card_info_grammar(card, subject, grade, semester):
+def _build_card_info_grammar(card, subject, grade, semester, canvas=None):
     """构建英语语法/搭配类卡片信息 — v6 极简用法卡（通用版）
     
     设计理念: 一张卡只做一件事 → 展示一个短语/语法点的「用法 + 对错 + 拓展」
