@@ -3578,6 +3578,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 visual_feedback_audit, _build_refinement_prompt, refine_card_image,
                 VISUAL_REFINE_THRESHOLD, MAX_REFINE_ROUNDS,
                 _build_targeted_text_fix_prompt,
+                _auto_split_card, _compress_card_content, _estimate_card_text_volume,
             )
         except ImportError as e:
             return self._send_json({'error': f'v3模块导入失败: {e}'}, 500)
@@ -3594,6 +3595,21 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         pipeline_log = []
 
         try:
+            # ── v10.11 Step 0.5: 内容压缩 + 自动拆卡 ──
+            pre_chars, _ = _estimate_card_text_volume(card)
+            card, comp_log = _compress_card_content(card, subject=subject)
+            if comp_log:
+                post_chars, _ = _estimate_card_text_volume(card)
+                pipeline_log.append(f'Step0.5: 内容压缩 {pre_chars}字→{post_chars}字')
+                title = card.get('title', title)  # 更新title（可能被拆卡改过）
+            # 查看是否需要拆卡（同步handler只处理第一张，其余记录下来）
+            sub_cards = _auto_split_card(card, subject=subject)
+            if len(sub_cards) > 1:
+                pipeline_log.append(f'Step0.5: 📦 自动拆卡 1张→{len(sub_cards)}张子卡 (当前处理第1张: {sub_cards[0].get("full_id","")})')
+                card = sub_cards[0]  # 同步handler只处理第一张
+                title = card.get('title', title)
+                card_type = card.get('type', card_type)
+
             # ── Step 0: 内容预审 + 教学设计 + 教学效果评估 ──
             content_audit_result = None
             design_report = None
@@ -4252,6 +4268,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     visual_feedback_audit, _build_refinement_prompt, refine_card_image,
                     VISUAL_REFINE_THRESHOLD, MAX_REFINE_ROUNDS,
                     _build_targeted_text_fix_prompt,
+                    _auto_split_card, _compress_card_content, _estimate_card_text_volume,
                 )
             except ImportError as e:
                 _refund_on_error()
@@ -4282,6 +4299,24 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             canvas = _resolve_canvas(platform=platform, card_type=card_type_async,
                                      subject=subject, ratio_override=ratio_override)
             pipeline_log = []
+
+            # ── v10.11 Step 0.5: 内容压缩 + 自动拆卡 ──
+            pre_chars, _ = _estimate_card_text_volume(card)
+            card, comp_log = _compress_card_content(card, subject=subject)
+            if comp_log:
+                post_chars, _ = _estimate_card_text_volume(card)
+                pipeline_log.append(f'Step0.5: 内容压缩 {pre_chars}字→{post_chars}字')
+                print(f'[v3-async] Step0.5: compress {pre_chars}→{post_chars} chars', flush=True)
+                title = card.get('title', title)
+            sub_cards = _auto_split_card(card, subject=subject)
+            if len(sub_cards) > 1:
+                pipeline_log.append(f'Step0.5: 📦 自动拆卡 1张→{len(sub_cards)}张子卡 (当前处理第1张: {sub_cards[0].get("full_id","")})')
+                print(f'[v3-async] Step0.5: split into {len(sub_cards)} sub-cards', flush=True)
+                card = sub_cards[0]
+                title = card.get('title', title)
+                card_type_async = card.get('type', card_type_async)
+                canvas = _resolve_canvas(platform=platform, card_type=card_type_async,
+                                         subject=subject, ratio_override=ratio_override)
 
             def _update_progress(msg):
                 with _async_tasks_lock:

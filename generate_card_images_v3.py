@@ -805,6 +805,358 @@ def _auto_fix_card_data(card, audit_result, api_key, all_keys=None):
     return False, card
 
 
+# ═══════════════════════════════════════════
+# v10.11: 内容预处理 — 自动拆卡 + 内容压缩 + 文字量降级
+# ═══════════════════════════════════════════
+
+# ── 文字量预算常量 ──
+_MAX_CARD_CHARS = 180         # 单张卡片文字总量上限（包含标题+定义+要点+例题+口诀）
+_MAX_CORE_POINT_CHARS = 20    # 单条要点上限字数
+_MAX_CORE_POINTS = 3          # 单张卡片最大要点数
+_MAX_EXAMPLE_STEPS = 3        # 例题最大步骤数
+_MAX_MEMORY_TIP_CHARS = 16    # 口诀上限字数
+
+# 可拆卡的类型（带有多个独立子项的卡片）
+_SPLITTABLE_TYPES = {'陷阱卡', '辨析卡', '知识总结卡', '知识网络卡', '术语精准卡', '解题策略卡'}
+
+# 拆卡时每个子组的子项上限
+_SPLIT_GROUP_SIZE = 2
+
+
+def _estimate_card_text_volume(card):
+    """估算一张卡片的渲染文字总量（字符数）。
+    
+    返回: (total_chars, breakdown_dict)
+    """
+    title_chars = len(card.get('title', ''))
+    definition_chars = len(card.get('definition', ''))
+    
+    points = card.get('core_points', [])
+    points_chars = sum(len(str(p)) for p in points)
+    
+    example = card.get('example', {})
+    example_chars = 0
+    if isinstance(example, str):
+        example_chars = len(example)
+    elif isinstance(example, dict):
+        example_chars += len(example.get('question', ''))
+        for s in example.get('steps', []):
+            example_chars += len(str(s))
+        example_chars += len(example.get('answer', ''))
+    
+    tip_chars = len(card.get('memory_tip', ''))
+    
+    mistakes = card.get('mistakes', [])
+    mistakes_chars = 0
+    for m in mistakes[:1]:
+        if isinstance(m, dict):
+            mistakes_chars += len(m.get('wrong', '')) + len(m.get('correct', ''))
+    
+    total = title_chars + definition_chars + points_chars + example_chars + tip_chars + mistakes_chars
+    
+    breakdown = {
+        'title': title_chars,
+        'definition': definition_chars,
+        'core_points': points_chars,
+        'core_points_count': len(points),
+        'example': example_chars,
+        'memory_tip': tip_chars,
+        'mistakes': mistakes_chars,
+        'total': total,
+    }
+    return total, breakdown
+
+
+def _auto_split_card(card, subject=''):
+    """v10.11: 自动拆卡 — 将内容过多的卡片拆成多张子卡片。
+    
+    拆卡逻辑：
+    1. 检测 core_points 中的独立子项（如 "陷阱1:", "陷阱2:" 等编号模式）
+    2. 按每 _SPLIT_GROUP_SIZE 个子项拆成一张子卡
+    3. 每张子卡继承原卡的 title/definition/type 等元数据
+    4. 例题只分配给内容最相关的子卡
+    
+    返回: list[dict]  — 拆分后的卡片列表（至少1张）
+    """
+    card_type = card.get('type', '')
+    points = card.get('core_points', [])
+    
+    # 条件1: 只有可拆类型才拆
+    if card_type not in _SPLITTABLE_TYPES:
+        return [card]
+    
+    # 条件2: 要点数 > _MAX_CORE_POINTS 才需要拆
+    if len(points) <= _MAX_CORE_POINTS:
+        return [card]
+    
+    # 条件3: 文字量不超标也不拆
+    total_chars, _ = _estimate_card_text_volume(card)
+    if total_chars <= _MAX_CARD_CHARS:
+        return [card]
+    
+    # ── 检测编号模式（陷阱1, 陷阱2... 或 ①②③... 或 1. 2. 3.）──
+    import re as _re
+    numbered_pattern = _re.compile(
+        r'^(?:陷阱|误区|易错|要点|知识点|规律|方法|步骤|特征|区别)?'
+        r'\s*(?:\d+|[①②③④⑤⑥⑦⑧⑨⑩])[：:.\s、]'
+    )
+    
+    # 检测要点是否有编号模式（或带"陷阱X"关键词）
+    has_numbering = sum(1 for p in points if numbered_pattern.match(str(p).strip())) >= 2
+    if not has_numbering:
+        # 无编号也可以拆，按位置分组
+        pass
+    
+    # ── 分组 ──
+    groups = []
+    for i in range(0, len(points), _SPLIT_GROUP_SIZE):
+        group = points[i:i + _SPLIT_GROUP_SIZE]
+        groups.append(group)
+    
+    if len(groups) <= 1:
+        return [card]
+    
+    # ── 生成子卡片 ──
+    sub_cards = []
+    original_title = card.get('title', '')
+    original_full_id = card.get('full_id', '')
+    example = card.get('example', {})
+    example_text = str(example)  # 用于匹配相关性
+    
+    # 判断方法/总结类要点（非编号的通用要点）单独成卡
+    general_points = []
+    specific_groups = []
+    for g in groups:
+        # 检查这组要点是否都是"判断方法"/"总结"等通用型
+        is_general = all(
+            any(kw in str(p) for kw in ['判断方法', '总结', '方法', '规律', '注意'])
+            for p in g
+        )
+        if is_general:
+            general_points.extend(g)
+        else:
+            specific_groups.append(g)
+    
+    # 如果有通用要点，加回最后一组
+    if general_points:
+        if specific_groups:
+            specific_groups[-1] = specific_groups[-1] + general_points
+        else:
+            specific_groups = [general_points]
+    
+    for idx, group_points in enumerate(specific_groups):
+        sub = {}
+        # 复制原卡元数据
+        for k, v in card.items():
+            if k not in ('core_points', 'example', 'full_id', 'card_id', 'id'):
+                sub[k] = v if not isinstance(v, (list, dict)) else (v.copy() if isinstance(v, list) else {**v})
+        
+        # 子卡 ID
+        suffix = chr(ord('a') + idx)
+        sub['full_id'] = f"{original_full_id}-{suffix}"
+        sub['card_id'] = f"{card.get('card_id', card.get('id', ''))}-{suffix}"
+        
+        # 子卡标题：加上子组描述
+        if len(specific_groups) > 1:
+            # 从要点中提取子标题关键词
+            first_point = str(group_points[0]).strip()
+            # 尝试提取 "陷阱X" 或编号
+            label_match = _re.match(r'^(陷阱|误区|易错)?[：:\s]*(\d+)(?:[：:.\s、])', first_point)
+            last_point = str(group_points[-1]).strip()
+            label_end = _re.match(r'^(?:陷阱|误区|易错)?[：:\s]*(\d+)', last_point)
+            
+            if label_match and label_end:
+                start_num = label_match.group(2)
+                end_num = label_end.group(1)
+                prefix = label_match.group(1) or '要点'
+                sub['title'] = f"{original_title}({prefix}{start_num}-{end_num})"
+            else:
+                sub['title'] = f"{original_title}(第{idx + 1}部分)"
+        
+        sub['core_points'] = group_points
+        
+        # 例题分配：只给内容最相关的子卡
+        if example and isinstance(example, dict):
+            example_q = example.get('question', '') + example.get('answer', '')
+            # 计算这组要点与例题的关键词重叠度
+            group_text = ' '.join(str(p) for p in group_points)
+            overlap = sum(1 for c in set(example_q) if c in group_text and c not in '的是在了不也')
+            if overlap >= 3 or idx == 0:
+                sub['example'] = example
+            else:
+                sub['example'] = {}  # 其他子卡不分配例题
+        
+        # 精简定义（子卡不需要完整定义）
+        orig_def = card.get('definition', '')
+        if len(orig_def) > 60:
+            sub['definition'] = orig_def[:60]
+        
+        # 口诀只分配给第一张子卡（或最后一张总结卡）
+        if idx > 0:
+            sub['memory_tip'] = ''
+        
+        sub['_split_source'] = original_full_id
+        sub['_split_index'] = idx
+        sub['_split_total'] = len(specific_groups)
+        
+        sub_cards.append(sub)
+    
+    return sub_cards if sub_cards else [card]
+
+
+def _compress_card_content(card, subject='', keys=None):
+    """v10.11: 内容压缩 — 将冗长的要点/定义/口诀压缩到渲染友好的长度。
+    
+    纯规则压缩（不调API），保证速度和可靠性：
+    1. 每条 core_point 截断到 _MAX_CORE_POINT_CHARS 字（智能断句）
+    2. definition 截断到 60 字
+    3. memory_tip 截断到 _MAX_MEMORY_TIP_CHARS 字
+    4. example.steps 最多 _MAX_EXAMPLE_STEPS 步
+    5. core_points 最多 _MAX_CORE_POINTS 条
+    
+    返回: (card, compression_log: list[str])
+    """
+    import re as _re
+    log = []
+    card = {**card}  # shallow copy
+    
+    # ── 1. core_points 压缩 ──
+    points = card.get('core_points', [])
+    if isinstance(points, list):
+        points = list(points)  # copy
+    
+    # 1a. 数量截断
+    if len(points) > _MAX_CORE_POINTS:
+        # 优先保留: 含公式的、含关键对比(❌/✅)的、排在前面的
+        scored = []
+        for i, p in enumerate(points):
+            p_str = str(p)
+            score = 0
+            if any(c in p_str for c in '=÷×+−≥≤<>²³'):
+                score += 10  # 公式型优先
+            if '❌' in p_str or '✅' in p_str or '错' in p_str:
+                score += 5   # 对比型优先
+            score -= i * 0.1  # 靠前的优先
+            scored.append((score, i, p))
+        scored.sort(key=lambda x: -x[0])
+        kept_indices = sorted([x[1] for x in scored[:_MAX_CORE_POINTS]])
+        dropped = [str(points[i])[:30] for i in range(len(points)) if i not in kept_indices]
+        points = [points[i] for i in kept_indices]
+        log.append(f'📦 要点: {len(card["core_points"])}条→{len(points)}条 (丢弃: {", ".join(dropped)})')
+    
+    # 1b. 每条要点智能压缩
+    compressed_points = []
+    for p in points:
+        p_str = str(p).strip()
+        original_len = len(p_str)
+        
+        if original_len <= _MAX_CORE_POINT_CHARS:
+            compressed_points.append(p_str)
+            continue
+        
+        # 去掉编号前缀（"陷阱1：" → 保留内容部分）
+        content = _re.sub(r'^(?:陷阱|误区|易错|要点|知识点)\s*\d*[：:.\s、]*', '', p_str).strip()
+        
+        # 如果有括号补充说明，去掉括号内容（优先，因为括号常是冗余）
+        no_paren = _re.sub(r'[（(].+?[）)]', '', content).strip()
+        if len(no_paren) <= _MAX_CORE_POINT_CHARS and len(no_paren) >= 6:
+            compressed_points.append(no_paren)
+            log.append(f'✂️ "{p_str[:25]}..." → "{no_paren}"')
+            continue
+        
+        # 如果有"不是...而是..." 对比结构，提取核心
+        contrast = _re.search(r'不是[「「]?(.{2,8})[」」]?[，,]\s*而是[「「]?(.{2,12})[」」]?', content)
+        if contrast:
+            short = f'非{contrast.group(1)}，而是{contrast.group(2)}'
+            if len(short) <= _MAX_CORE_POINT_CHARS:
+                compressed_points.append(short)
+                log.append(f'✂️ "{p_str[:25]}..." → "{short}"')
+                continue
+        
+        # 硬截断 — 在标点处断句
+        truncated = content[:_MAX_CORE_POINT_CHARS]
+        # 往回找最近的标点断点
+        for cut_pos in range(len(truncated) - 1, max(len(truncated) - 6, 5), -1):
+            if truncated[cut_pos] in '，。；、：':
+                truncated = truncated[:cut_pos]
+                break
+        compressed_points.append(truncated)
+        log.append(f'✂️ "{p_str[:25]}..." → "{truncated}"')
+    
+    card['core_points'] = compressed_points
+    
+    # ── 2. 定义压缩 ──
+    definition = card.get('definition', '')
+    if len(definition) > 60:
+        # 在标点处断
+        trunc_def = definition[:60]
+        for i in range(len(trunc_def) - 1, max(len(trunc_def) - 10, 10), -1):
+            if trunc_def[i] in '，。；':
+                trunc_def = trunc_def[:i]
+                break
+        card['definition'] = trunc_def
+        log.append(f'📦 定义: {len(definition)}字→{len(trunc_def)}字')
+    
+    # ── 3. 口诀压缩 ──
+    tip = card.get('memory_tip', '')
+    if len(tip) > _MAX_MEMORY_TIP_CHARS:
+        # 保留前半段（通常更核心）
+        trunc_tip = tip[:_MAX_MEMORY_TIP_CHARS]
+        for i in range(len(trunc_tip) - 1, max(len(trunc_tip) - 4, 4), -1):
+            if trunc_tip[i] in '，。；、':
+                trunc_tip = trunc_tip[:i]
+                break
+        card['memory_tip'] = trunc_tip
+        log.append(f'📦 口诀: {len(tip)}字→{len(trunc_tip)}字')
+    
+    # ── 4. 例题步骤压缩 ──
+    example = card.get('example', {})
+    if isinstance(example, dict):
+        example = {**example}
+        steps = example.get('steps', [])
+        if len(steps) > _MAX_EXAMPLE_STEPS:
+            example['steps'] = steps[:_MAX_EXAMPLE_STEPS]
+            log.append(f'📦 步骤: {len(steps)}步→{_MAX_EXAMPLE_STEPS}步')
+        # 每步截断
+        if example.get('steps'):
+            new_steps = []
+            for s in example['steps']:
+                s_str = str(s)
+                if len(s_str) > 40:
+                    s_str = s_str[:40]
+                new_steps.append(s_str)
+            example['steps'] = new_steps
+        card['example'] = example
+    
+    # ── 5. 最终文字量检查 ──
+    final_total, final_bd = _estimate_card_text_volume(card)
+    if log:
+        log.append(f'📊 压缩后总字数: {final_total}字 (上限{_MAX_CARD_CHARS})')
+    
+    return card, log
+
+
+def _preprocess_card_for_rendering(card, subject='', keys=None):
+    """v10.11 Step 0.5: 渲染预处理总入口。
+    
+    依次执行:
+    1. 自动拆卡（内容过多的卡 → 多张子卡）
+    2. 内容压缩（每张子卡独立压缩到渲染安全区间）
+    
+    返回: list[tuple(card, logs)]
+    """
+    # Step 1: 拆卡
+    sub_cards = _auto_split_card(card, subject=subject)
+    
+    results = []
+    for sc in sub_cards:
+        # Step 2: 压缩
+        compressed, comp_log = _compress_card_content(sc, subject=subject, keys=keys)
+        results.append((compressed, comp_log))
+    
+    return results
+
+
 def _validate_and_repair_card(card, subject, grade):
     """
     卡片数据源 schema 校验 + 自动修复。
@@ -2299,6 +2651,7 @@ _CARD_TYPE_LAYOUT_MAP = {
     '语法辨析卡': 'comparison', '易混词卡': 'comparison', '易混词陷阱卡': 'comparison',
     '语法纠错卡': 'comparison', '句式变换卡': 'comparison', '判断火眼卡': 'comparison',
     '暧昧信号卡': 'comparison', '避雷指南卡': 'comparison',
+    '陷阱卡': 'comparison',  # v10.11: 陷阱卡核心是❌vs✅对比
     # 流程式
     '方法卡': 'flow', '应用题拆解卡': 'flow', '计算零失误卡': 'flow',
     '操作题规范卡': 'flow', '情感升温卡': 'flow',
@@ -2389,43 +2742,76 @@ def _build_layout_hint_for_v2(card_type, subject):
 
 
 def _build_card_info_edu(card, subject, grade, semester):
-    """构建教育类卡片信息（v10.6: 支持全学科专属提示）"""
+    """构建教育类卡片信息（v10.6: 支持全学科专属提示 / v10.11: 动态文字量降级）"""
     card_type = card.get('type', '方法卡')
+
+    # ── v10.11: 动态文字量降级 ──
+    total_chars, bd = _estimate_card_text_volume(card)
+    is_overloaded = total_chars > _MAX_CARD_CHARS
+    # 根据超标程度决定降级力度
+    if is_overloaded:
+        ratio = total_chars / _MAX_CARD_CHARS  # >1.0 表示超标
+        # 动态调整各字段上限
+        def_limit = 60 if ratio < 1.5 else 40
+        pt_limit = _MAX_CORE_POINT_CHARS if ratio < 1.5 else 15
+        pt_count = _MAX_CORE_POINTS if ratio < 2.0 else 2
+        step_limit = _MAX_EXAMPLE_STEPS if ratio < 1.5 else 2
+        tip_limit = _MAX_MEMORY_TIP_CHARS if ratio < 1.5 else 10
+        mistake_limit = 60 if ratio < 1.5 else 40
+    else:
+        def_limit = 120
+        pt_limit = 80
+        pt_count = 4
+        step_limit = 5
+        tip_limit = 40
+        mistake_limit = 150
 
     example_info = ''
     example_steps = ''
     if card.get('example'):
         ex = card['example']
         if isinstance(ex, str):
-            example_info = ex[:120]
+            example_info = ex[:80]
         else:
-            example_info = (ex.get('question') or '')[:120]
+            example_info = (ex.get('question') or '')[:80]
             if ex.get('steps'):
-                steps_text = '\n'.join(f'  {i+1}. {s}' for i, s in enumerate(ex['steps']))
-                example_steps = f"\n【解题步骤】:\n{steps_text[:500]}"
+                steps = ex['steps'][:step_limit]
+                import re as _re_step
+                def _clean_step(s, idx):
+                    s = str(s).strip()
+                    # 去掉已有的编号前缀 (1. / ①等)
+                    s = _re_step.sub(r'^(?:\d+[.\s、）)]\s*|[①②③④⑤⑥⑦⑧]\s*)', '', s)
+                    return f'  {idx+1}. {s[:40]}'
+                steps_text = '\n'.join(_clean_step(s, i) for i, s in enumerate(steps))
+                example_steps = f"\n【解题步骤】:\n{steps_text}"
             if ex.get('answer'):
-                example_steps += f"\n【正确答案】: {ex['answer']}"
+                example_steps += f"\n【正确答案】: {ex['answer'][:60]}"
 
-    points = card.get('core_points', [])[:4]
-    formulas = [p[:80] for p in points if any(c in p for c in '=÷×+−≥≤<>°²³∠')]
-    clean_pts = [p[:80] for p in points if not any(c in p for c in '=÷×+−≥≤<>°²³∠')]
+    points = card.get('core_points', [])[:pt_count]
+    formulas = [p[:pt_limit] for p in points if any(c in p for c in '=÷×+−≥≤<>°²³∠')]
+    clean_pts = [p[:pt_limit] for p in points if not any(c in p for c in '=÷×+−≥≤<>°²³∠')]
 
     mistakes_info = ''
     if card.get('mistakes'):
         m = card['mistakes'][0]
         reason = m.get('reason', '')
-        mistakes_info = f"\n常见错误: ❌{m.get('wrong', '')[:150]} → ✅{m.get('correct', '')[:150]}"
+        mistakes_info = f"\n常见错误: ❌{m.get('wrong', '')[:mistake_limit]} → ✅{m.get('correct', '')[:mistake_limit]}"
         if reason:
-            mistakes_info += f"\n错因: {reason[:150]}"
+            mistakes_info += f"\n错因: {reason[:60]}"
 
     why_exp = ''
     if card.get('why_explanation'):
-        why_exp = f"\n本质原因: {card['why_explanation'][:200]}"
+        why_exp = f"\n本质原因: {card['why_explanation'][:80]}"
 
     is_vert = _detect_vertical_calc(card)
     
     # v10.6: 学科专属提示注入
     subject_hint = _SUBJECT_EDU_HINTS.get(subject, '')
+    
+    # v10.11: 文字量警告（提示AI尽量用图不用字）
+    text_budget_hint = ''
+    if is_overloaded:
+        text_budget_hint = f'\n⚠️ 文字量偏多({total_chars}字)！请尽量用图标/示意图/箭头表达，减少文字渲染。核心文字≤{_MAX_CARD_CHARS}字。'
 
     return f"""学科: {subject} | 年级: {grade}{semester}
 标题: {card.get('title', '')} | 类型: {card_type}
@@ -2433,15 +2819,15 @@ def _build_card_info_edu(card, subject, grade, semester):
 【例题】: {example_info or '根据知识点构造一道最典型例题'}
 {example_steps}
 
-【定义】: {card.get('definition', '')[:120]}
-【要点】: {chr(10).join('• ' + p for p in clean_pts[:3])}
+【定义】: {card.get('definition', '')[:def_limit]}
+【要点】: {chr(10).join('• ' + p for p in clean_pts[:_MAX_CORE_POINTS])}
 {('【公式】: ' + ' | '.join(formulas)) if formulas else ''}
-【口诀】(≤8字): {card.get('memory_tip', '')[:40]}
-{'\n本质原因: ' + card.get('why_explanation', '')[:200] if card.get('why_explanation') else ''}
+【口诀】(≤8字): {card.get('memory_tip', '')[:tip_limit]}
+{why_exp}
 {mistakes_info}
 难度: {card.get('difficulty', 3)}/5
 {'⚠️ 笔算竖式类：必须画正确竖式' if is_vert else ''}
-{subject_hint}"""
+{subject_hint}{text_budget_hint}"""
 
 
 def generate_image_prompt_v2(card, subject, grade, semester, api_key, all_keys=None,
@@ -4335,6 +4721,18 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
     if not card_ok:
         stats['final_action'] = 'schema_rejected'
         return False, '', stats
+
+    # ── v10.11 Step 0.5: 内容压缩（渲染前文字量降级）──
+    pre_total, pre_bd = _estimate_card_text_volume(card)
+    card, comp_log = _compress_card_content(card, subject=subject, keys=keys)
+    if comp_log:
+        post_total, _ = _estimate_card_text_volume(card)
+        print(f'  ├─ Step 0.5: 内容压缩 ({pre_total}字→{post_total}字)')
+        for cl in comp_log[:3]:
+            print(f'  │   {cl}')
+        stats['content_compressed'] = True
+        stats['pre_compress_chars'] = pre_total
+        stats['post_compress_chars'] = post_total
 
     # ── Step 0: 内容质量预审 ──
     content_audit_result = None
