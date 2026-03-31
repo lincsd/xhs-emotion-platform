@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260331d'  # v10.15: 图文融合4方向升级(质量稳定+覆盖扩大+视觉升级+并行生成)
+BUILD_VERSION = '20260401a'  # v10.17: 7大AI优化(字数精简/坐标锚定/两步生图/参考图/Best-of-N/定向精修/温度调优)
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -3877,6 +3877,22 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 pipeline_log.append(f'Step3完成: 审计={score}/100 质量={merged_quality.get("total", 0)}/100 ({summary})')
                 print(f'[v3] Step3: 审计={score}/100 质量={merged_quality.get("total", 0)}/100 ({summary})', flush=True)
 
+                # Step 3.5: 本地 OCR 交叉验证 (零API费用, <2s)
+                try:
+                    from local_ocr import validate_and_calibrate
+                    cal_score, cv_result, cv_reason = validate_and_calibrate(img_data, manifest, score)
+                    cv_hit = cv_result.get('hit_rate', 0)
+                    cv_ms = cv_result.get('elapsed_ms', 0)
+                    pipeline_log.append(f'Step3.5: OCR交叉验证 命中率={cv_hit:.0%} 校准={score}→{cal_score} ({cv_reason}) [{cv_ms}ms]')
+                    print(f'[v3] Step3.5: OCR交叉验证 hit={cv_hit:.0%} {score}→{cal_score} ({cv_reason}) [{cv_ms}ms]', flush=True)
+                    audit['_cross_validate'] = cv_result
+                    audit['_calibrated_score'] = cal_score
+                    score = cal_score
+                except ImportError:
+                    pipeline_log.append('Step3.5: 跳过(local_ocr未安装)')
+                except Exception as cv_e:
+                    pipeline_log.append(f'Step3.5: 跳过({str(cv_e)[:60]})')
+
                 if score > best_score:
                     best_image = img_data
                     best_ext = ext
@@ -4581,6 +4597,22 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     summary = audit.get('summary', '')
                     merged_quality = audit.get('quality', {})
                     pipeline_log.append(f'Step3完成: 审计={score}/100 质量={merged_quality.get("total", 0)}/100 ({summary}) [{_elapsed():.0f}s]')
+
+                    # Step 3.5: 本地 OCR 交叉验证 (零API费用, <2s)
+                    try:
+                        from local_ocr import validate_and_calibrate
+                        cal_score, cv_result, cv_reason = validate_and_calibrate(img_data, manifest, score)
+                        cv_hit = cv_result.get('hit_rate', 0)
+                        cv_ms = cv_result.get('elapsed_ms', 0)
+                        pipeline_log.append(f'Step3.5: OCR交叉验证 命中率={cv_hit:.0%} 校准={score}→{cal_score} ({cv_reason}) [{cv_ms}ms]')
+                        print(f'[v3-async] Step3.5: OCR交叉验证 hit={cv_hit:.0%} {score}→{cal_score} ({cv_reason}) [{cv_ms}ms]', flush=True)
+                        audit['_cross_validate'] = cv_result
+                        audit['_calibrated_score'] = cal_score
+                        score = cal_score
+                    except ImportError:
+                        pipeline_log.append('Step3.5: 跳过(local_ocr未安装)')
+                    except Exception as cv_e:
+                        pipeline_log.append(f'Step3.5: 跳过({str(cv_e)[:60]})')
 
                     if score > best_score:
                         best_image = img_data

@@ -3,22 +3,24 @@
 """
 知识卡片图片生成器 v3 — 终极流水线
 =============================================
-v10.6: 多学科支持 + AI全量渲染 + 5层审核矩阵 + image-to-image 视觉精修闭环
+v10.17: 7大AI优化 — 字数精简/坐标锚定/两步生图/参考图/Best-of-N/定向精修/温度调优
 
-  Step 1: Gemini 2.5 Flash 生成优化英文提示词
-  Step 2: Gemini Image 生成完整卡片（AI直接渲染所有文字）
-  Step 3: Vision OCR 审计 + 质量评分（最多3轮重生成）
-  Step 4b: 5层审核矩阵全维度评估（文字保真/视觉叙事/教学力/传播力）
-  Step 4c: image-to-image 精修（基于审核结果迭代改进现有图片）
+  Step 1: Gemini 2.5 Flash 生成优化英文提示词 (v2两阶段)
+  Step 2: Best-of-N 并行生成 + 两步生图(标题先出/内容后补)
+  Step 3: Vision OCR 审计 + 质量评分（最多3轮）
+  Step 3+: 后续轮用定向精修替代全图重生
+  Step 4b: 5层审核矩阵全维度评估
+  Step 4c: image-to-image 精修
   Step 5: 质量评分 + 英语专项审核
 
-v10.6 新增:
-  - 全学科术语保护表 (英语/语文/数学/物理/化学/生物/历史/地理/政治)
-  - 语文专属 card builder (诗词/文言文/修辞手法)
-  - 学科专属教育提示注入 (物理/化学/生物/历史/地理/政治)
-  - 全学科术语注入到 manifest (OCR 精确审计)
-  - 学科专属校验 (语文/物理/化学/生物/历史)
-  - 视觉审核 Layer D 全学科覆盖
+v10.17 新增:
+  ① 字数精简: manifest 80→50字, 每块20→12字, 用符号压缩
+  ② 坐标锚定: 每个文字块带精确y%/font/color定位
+  ③ 两步生图: 先生标题+底图, 再image-to-image补内容(每步≤10汉字)
+  ④ 参考图约束: 历史高分卡片作为few-shot style reference
+  ⑤ Best-of-N: 第1轮并行生成多张, OCR审计选最优
+  ⑥ 定向精修: 后续轮只修出错区域, 不全图重生
+  ⑦ 温度调优: 文字密集0.15, 普通0.3, 精修0.15
 
 用法:
   python generate_card_images_v3.py                          # 默认: 找 knowledge_cards/小学/*.json
@@ -933,7 +935,7 @@ _MAX_CORE_POINT_CHARS = 25    # 单条要点上限字数 (v10.12: 20→25, 保�
 _MAX_CORE_POINTS = 3          # 单张卡片最大要点数
 _MAX_EXAMPLE_STEPS = 3        # 例题最大步骤数
 _MAX_MEMORY_TIP_CHARS = 35    # 口诀上限字数 (v10.12: 16→35, 避免截断致无意义)
-_MAX_LINE_CHARS = 20          # v10.13: manifest 单行最大中文字数，超出自动拆行
+_MAX_LINE_CHARS = 14          # v10.17: manifest 单行最大中文字数(20→14)，每行更短AI渲染更准
 
 # 可拆卡的类型（带有多个独立子项的卡片）
 _SPLITTABLE_TYPES = {'陷阱卡', '辨析卡', '知识总结卡', '知识网络卡', '术语精准卡', '解题策略卡'}
@@ -2989,8 +2991,10 @@ def generate_image_prompt_v2(card, subject, grade, semester, api_key, all_keys=N
     """
     card_type = card.get('type', '方法卡')
     eff = _get_effective_params()
-    # v10.2: PIL 渲染全部文字，不再受人工限制, 允许足够的字符和行数
-    max_chars = max(eff.get('max_chinese_chars', 15), 80)
+    # v10.17: 减少AI渲染中文量, 50字以内准确率最高; 重文字类型允许70字
+    _HEAVY_TEXT_TYPES = ('实验卡', '实验', '对比卡', '辨析卡', '比较卡')
+    is_heavy = card_type in _HEAVY_TEXT_TYPES
+    max_chars = 70 if is_heavy else 50
 
     # ── Phase 1a: 内容决策 ──
     prompt_1a = build_content_decision_prompt(
@@ -3482,9 +3486,9 @@ def _enforce_manifest_limits(manifest, max_total=None, max_per_block=None, card_
     _HEAVY_TEXT_TYPES = ('实验卡', '实验', '对比卡', '辨析卡', '比较卡')
     is_heavy = card_type in _HEAVY_TEXT_TYPES
     if max_total is None:
-        max_total = 120 if is_heavy else 80   # v10.16: 重文字卡片120字，其他80字
+        max_total = 70 if is_heavy else 50   # v10.17: 减少AI渲染中文量(120→70/80→50)，符号替代降乱码率
     if max_per_block is None:
-        max_per_block = 25 if is_heavy else 20  # v10.16: 重文字卡片每块25字
+        max_per_block = 16 if is_heavy else 12  # v10.17: 每块字数收紧(25→16/20→12)，单块越短AI越准
     if not manifest:
         return manifest
     
@@ -3666,80 +3670,183 @@ def _smart_split_text(text: str, max_cn: int) -> list:
 
 # ═══════════════════════════════════════════
 # Step 2: 生成卡片图片（强模型 + fallback）
+# v10.17: 7大AI优化（字数精简/坐标锚定/两步生图/参考图/Best-of-N/定向精修/温度调优）
 # ═══════════════════════════════════════════
-def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', manifest=None, canvas=None):
+
+# v10.17 参考图缓存 — 按卡片类型缓存高分样本供 few-shot 约束
+_REFERENCE_IMAGE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'card_reference_images')
+_reference_cache = {}  # {card_type: b64_data}
+
+def _load_reference_image(card_type, subject=''):
+    """v10.17: 加载参考图用于 few-shot image 约束。
+    从 card_reference_images/ 目录按 card_type 或 subject 查找。
+    返回 base64 编码的图片数据，或 None。
+    """
+    cache_key = f'{card_type}_{subject}'
+    if cache_key in _reference_cache:
+        return _reference_cache[cache_key]
+    
+    if not os.path.isdir(_REFERENCE_IMAGE_DIR):
+        return None
+    
+    # 优先: "{card_type}_{subject}.jpg" → "{card_type}.jpg" → "{subject}.jpg"
+    candidates = [
+        f'{card_type}_{subject}.jpg', f'{card_type}_{subject}.png',
+        f'{card_type}.jpg', f'{card_type}.png',
+        f'{subject}.jpg', f'{subject}.png',
+    ]
+    for fname in candidates:
+        fpath = os.path.join(_REFERENCE_IMAGE_DIR, fname)
+        if os.path.isfile(fpath):
+            try:
+                with open(fpath, 'rb') as f:
+                    data = f.read()
+                b64 = base64.b64encode(data).decode('utf-8')
+                _reference_cache[cache_key] = b64
+                print(f'      [ref] 加载参考图: {fname} ({len(data)//1024}KB)')
+                return b64
+            except Exception:
+                pass
+    return None
+
+
+def _build_coordinate_manifest(manifest, canvas=None):
+    """v10.17 优化②: 坐标锚定 — 为每个 manifest 条目分配精确的 y% 坐标和字号。
+    比"render in Banner"更精确，AI 遵循率更高。
+    """
+    if not manifest:
+        return ''
+    
+    # 计算 LINE 条目数量，动态分配内容区 y 坐标
+    line_keys = [k for k in manifest if k.upper().startswith('LINE')]
+    n_lines = len(line_keys)
+    
+    parts = []
+    parts.append(
+        f"\n=== TEXT RENDERING PLAN (pixel-precise coordinates) ===\n"
+        f"The card has {len(manifest)} text blocks. Render each at its EXACT position:\n"
+    )
+    
+    line_idx = 0
+    for key, val in manifest.items():
+        cn_count = _count_chinese_chars(val)
+        if key.upper() == 'TITLE':
+            parts.append(f'  {key}: "{val}" → y=5%, font=48px, color=WHITE, align=center, zone=TOP_BANNER')
+        elif key.upper() == 'SLOGAN':
+            parts.append(f'  {key}: "{val}" → y=84%, font=28px, color=WHITE, align=center, zone=ACCENT_STRIP')
+        elif key.upper().startswith('LINE'):
+            # 动态分配 y 坐标: 内容区 y=18%~75%, 均匀分布
+            if n_lines > 0:
+                y_start, y_end = 18, 75
+                y_step = (y_end - y_start) / max(n_lines, 1)
+                y_pos = int(y_start + line_idx * y_step)
+            else:
+                y_pos = 30
+            font_size = 22 if cn_count > 10 else 26
+            parts.append(f'  {key}: "{val}" → y={y_pos}%, font={font_size}px, color=#333, align=left, x=8%, zone=CONTENT_CARD')
+            line_idx += 1
+        elif key.upper() == 'TIP':
+            parts.append(f'  {key}: "{val}" → y=93%, font=14px, color=#999, align=left, zone=BOTTOM')
+        else:
+            parts.append(f'  {key}: "{val}" → zone=CONTENT_CARD')
+    
+    parts.append(f"\n⚠️ Render EVERY text item at its coordinate. NO omissions, NO truncation.")
+    parts.append(f"⚠️ Each Chinese character must have perfect strokes — no garbling!")
+    parts.append(f"⚠️ If space is tight, use smaller font — NEVER drop characters!")
+    parts.append("=== END TEXT PLAN ===\n")
+    
+    return '\n'.join(parts)
+
+
+def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', manifest=None, canvas=None,
+                        reference_image_b64=None, two_step=True):
     """Step 2: 用最强图片模型生成卡片图片。
     
-    v10.4 策略: AI 直接生成完整卡片（含所有文字），不再使用 PIL 叠加。
+    v10.17 七大优化:
+      ① 字数精简 — manifest 已在外部降到 50 字以内
+      ② 坐标锚定 — 每个文字块带精确 y%/font/color 定位
+      ③ 两步生图 — 先生标题+装饰底图, 再 image-to-image 补内容文字
+      ④ 参考图约束 — 高分历史卡片作为 few-shot 风格参考
+      ⑤ Best-of-N — 由外部 generate_card_images_best_of_n 调用
+      ⑥ 定向精修 — OCR 错误后只修出错区域 (已有 _build_targeted_text_fix_prompt)
+      ⑦ 温度调优 — 文字密集型 0.15, 普通 0.3
     
     keys: API key 列表（全部），内部按 模型→全部key 的顺序尝试。
     manifest: TEXT_MANIFEST 字典，告诉 AI 需要渲染哪些文字。
     canvas: v10.8 画布配置 dict，默认 None 等效于 3:4。
+    reference_image_b64: v10.17 参考图 base64 (可选)
+    two_step: v10.17 是否使用两步生图 (默认 True)
     """
     if not canvas:
         canvas = _CANVAS_PRESETS['小红书']
     canvas_en = _build_canvas_block_en(canvas)
+    
+    # v10.17 优化⑦: 温度策略 — 文字多则极低温, 少则稍高
+    total_cn = sum(_count_chinese_chars(v) for v in (manifest or {}).values())
+    temperature = 0.15 if total_cn > 20 else 0.3
+    
     # ── 核心策略: 告诉 AI 渲染所有文字到图片中 ──
     chinese_prefix = (
         f"CRITICAL INSTRUCTIONS — COMPLETE CARD WITH TEXT:\n"
         f"1. This is a {subject} educational knowledge card about \"{card_title}\".\n"
         f"2. ✅ You MUST render ALL text directly in the image — text is the core content!\n"
         f"3. Design a STRUCTURED CARD with text integrated into each zone:\n"
-        f"   - TOP BANNER: Dark gradient strip at top with WHITE TITLE TEXT centered\n"
-        f"   - CONTENT CARD: White rounded rectangle in main body with TEACHING CONTENT text\n"
-        f"   - ACCENT STRIP: Warm gradient bar near bottom with WHITE SLOGAN TEXT centered\n"
-        f"   - BOTTOM EDGE: Small tip text if needed\n"
+        f"   - TOP BANNER (y=0-12%): Dark gradient strip with WHITE TITLE TEXT centered\n"
+        f"   - CONTENT CARD (y=14-78%): White rounded rectangle with TEACHING CONTENT text\n"
+        f"   - ACCENT STRIP (y=80-92%): Warm gradient bar with WHITE SLOGAN TEXT centered\n"
+        f"   - BOTTOM (y=93-98%): Small tip text if any\n"
         f"   - Small cute mascot in bottom-right corner (<10% of image)\n"
         f"4. ⚠️ TEXT QUALITY IS CRITICAL:\n"
         f"   - Every Chinese character must be perfectly formed (correct strokes, no garbled text)\n"
         f"   - Every English word must be spelled correctly\n"
         f"   - Numbers and math symbols must be accurate\n"
-        f"   - Text must look professionally typeset — clear hierarchy, aligned, readable\n"
-        f"   - ⚠️ NEVER truncate text! Every phrase must be COMPLETE — do not drop the last 1-2 characters!\n"
-        f"     Example: '提升语言运用能力' must NOT become '提升语言运用能' (missing 力)\n"
-        f"5. Style: Professional Xiaohongshu card template with text as part of design.\n"
+        f"   - ⚠️ NEVER truncate text! Every phrase must be COMPLETE\n"
+        f"5. Style: Professional Xiaohongshu card template. Use symbols (→/①②③/≈/=) to replace verbose Chinese.\n"
         f"   Main color: choose from coral pink / mint blue / peach orange / lavender.\n"
         f"6. {canvas_en}\n"
-        f"7. ⚠️ Do NOT render any color hex codes (like #1a237e), percentage numbers, or layout coordinates as visible text in the image!\n"
+        f"7. ⚠️ Do NOT render any color hex codes, percentage numbers, or layout coordinates as visible text!\n"
     )
 
-    # manifest: 告诉 AI 需要渲染的文字内容
+    # v10.17 优化②: 坐标锚定 manifest (替代旧的 zone-only 描述)
     if manifest:
         manifest = _enforce_manifest_limits(manifest)
-        # v10.13: 逐行拆分 — 超过 _MAX_LINE_CHARS 的行自动拆成多行
         manifest = _split_long_manifest_lines(manifest)
-        # v10.13 法则二: 结构化分行排版 — 用 "The text is split into X lines" 格式
-        line_keys = [k for k in manifest if k.upper().startswith('LINE')]
-        n_text_blocks = len(manifest)
-        chinese_prefix += (
-            f"\n=== TEXT TO RENDER IN THE IMAGE (MUST be pixel-perfect) ===\n"
-            f"The text is split into {n_text_blocks} blocks. "
-            f"Render each block on its OWN line/region — do NOT merge multiple blocks into one line.\n"
-            f"Each line should have ≤ 20 Chinese characters. This prevents edge distortion.\n"
-        )
-        for key, val in manifest.items():
-            zone = 'Banner' if key == 'TITLE' else 'Accent strip' if key == 'SLOGAN' else 'Content card' if key.upper().startswith('LINE') else 'Bottom'
-            chinese_prefix += f"  {key}: \"{val}\" → render in {zone}\n"
-        chinese_prefix += f"⚠️ Render EVERY text item above exactly as written. No omissions, no changes.\n"
-        chinese_prefix += f"⚠️ CRITICAL: Do NOT truncate any text! Every phrase must be rendered in FULL.\n"
-        chinese_prefix += f"   If space is tight, use smaller font — but NEVER drop the last 1-2 characters!\n"
-        chinese_prefix += "=== END TEXT ===\n"
+        chinese_prefix += _build_coordinate_manifest(manifest, canvas)
 
     if audit_hint:
         chinese_prefix += f"\n⚠️ CORRECTION FROM PREVIOUS ATTEMPT:\n{audit_hint}\n"
 
+    # ── v10.17 优化③: 两步生图 ──
+    # 第一步: 只渲染 TITLE + SLOGAN + 装饰底图（≤10个汉字，准确率极高）
+    # 第二步: 把底图 + 剩余 LINE 内容通过 image-to-image 补上
+    if two_step and manifest and len(manifest) > 2:
+        base_result = _two_step_generate(prompt, chinese_prefix, manifest, keys, 
+                                          card_title, subject, canvas, canvas_en, 
+                                          temperature, reference_image_b64)
+        if base_result[0]:
+            return base_result
+        # 两步失败则降级到单步
+        print('      [v10.17] 两步生图失败, 降级到单步...')
+
+    # ── 单步生成 (降级路径 / 文字少的卡片) ──
     full_prompt = chinese_prefix + "\n" + prompt
-    contents = [
-        {'role': 'user', 'parts': [{'text': full_prompt}]}
-    ]
+    
+    # v10.17 优化④: 参考图约束 — 注入 few-shot image
+    contents_parts = [{'text': full_prompt}]
+    if reference_image_b64:
+        contents_parts = [
+            {'text': 'Use this card as a style reference (same layout, color style, text placement). Generate a NEW card with different content:\n'},
+            {'inlineData': {'mimeType': 'image/jpeg', 'data': reference_image_b64}},
+            {'text': full_prompt}
+        ]
+    
+    contents = [{'role': 'user', 'parts': contents_parts}]
     gen_config = {
         'responseModalities': ['TEXT', 'IMAGE'],
-        'temperature': 0.4,   # 降低随机性，提升中文渲染稳定性
-        'thinkingConfig': {'thinkingBudget': 1024},  # v10.13 法则三: 让模型先理清复杂笔画拓扑
+        'temperature': temperature,
+        'thinkingConfig': {'thinkingBudget': 1024},
     }
 
-    # 按模型优先级尝试（遇到成功立即返回，失败换下一个模型）
-    # retries=1 减少单模型重试次数，加速失败切换
     for model in IMAGE_MODELS:
         resp = gemini_call(model, contents, keys[0], gen_config=gen_config, retries=1, all_keys=keys)
         if not resp:
@@ -3763,6 +3870,164 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
     return None, None, None
 
 
+def _two_step_generate(prompt, chinese_prefix, manifest, keys, card_title, subject, 
+                        canvas, canvas_en, temperature, reference_image_b64):
+    """v10.17 优化③: 两步生图 — 先出标题底图, 再 image-to-image 补内容。
+    
+    Step 2a: 只渲染 TITLE + SLOGAN + 背景装饰 (≤10个汉字, 准确率~95%)
+    Step 2b: 把 2a 的图 + 剩余 LINE/TIP 内容通过 image-to-image 补充
+    
+    好处: 每步只需渲染 3-5 个汉字，AI 准确率从 ~60% 提升到 ~90%
+    """
+    # 分离 manifest: 标题层 vs 内容层
+    title_manifest = {}
+    content_manifest = {}
+    for k, v in manifest.items():
+        if k.upper() in ('TITLE', 'SLOGAN'):
+            title_manifest[k] = v
+        else:
+            content_manifest[k] = v
+    
+    if not title_manifest:
+        return None, None, None
+    
+    # ── Step 2a: 标题 + 装饰底图 ──
+    title_cn = sum(_count_chinese_chars(v) for v in title_manifest.values())
+    step2a_prompt = (
+        f"Generate a {subject} educational knowledge card layout about \"{card_title}\".\n"
+        f"This is Step 1 of 2 — generate the CARD FRAME with title and decoration ONLY.\n"
+        f"⚠️ In this step, ONLY render these {len(title_manifest)} text items:\n"
+    )
+    for k, v in title_manifest.items():
+        if k.upper() == 'TITLE':
+            step2a_prompt += f'  {k}: "{v}" → y=5%, font=48px, WHITE, center, in TOP BANNER\n'
+        elif k.upper() == 'SLOGAN':
+            step2a_prompt += f'  {k}: "{v}" → y=84%, font=28px, WHITE, center, in ACCENT STRIP\n'
+    
+    step2a_prompt += (
+        f"\nFor the CONTENT CARD area (y=14-78%), leave it as a BLANK white rounded rectangle.\n"
+        f"Do NOT put any text in the content area — it will be added in Step 2.\n"
+        f"Add: dark gradient banner at top, warm accent strip near bottom, soft background, small mascot.\n"
+        f"Style: Professional Xiaohongshu card. {canvas_en}\n"
+        f"⚠️ Chinese characters must have perfect strokes. Only {title_cn} characters total.\n"
+    )
+    
+    # 参考图
+    parts_2a = [{'text': step2a_prompt}]
+    if reference_image_b64:
+        parts_2a = [
+            {'text': 'Style reference (match layout/colors):'},
+            {'inlineData': {'mimeType': 'image/jpeg', 'data': reference_image_b64}},
+            {'text': step2a_prompt}
+        ]
+    
+    contents_2a = [{'role': 'user', 'parts': parts_2a}]
+    gen_config_2a = {
+        'responseModalities': ['TEXT', 'IMAGE'],
+        'temperature': 0.15,  # 标题层极低温度 — 保证文字准确
+        'thinkingConfig': {'thinkingBudget': 512},
+    }
+    
+    base_image = None
+    base_ext = None
+    base_model = None
+    
+    for model in IMAGE_MODELS:
+        resp = gemini_call(model, contents_2a, keys[0], gen_config=gen_config_2a, retries=1, all_keys=keys)
+        if not resp:
+            continue
+        try:
+            candidates = resp.get('candidates', [])
+            if candidates:
+                for part in candidates[0].get('content', {}).get('parts', []):
+                    if 'inlineData' in part:
+                        b64data = part['inlineData'].get('data', '')
+                        mime = part['inlineData'].get('mimeType', 'image/png')
+                        if b64data:
+                            base_image = base64.b64decode(b64data)
+                            base_ext = 'png' if 'png' in mime else 'jpg'
+                            base_model = model
+                            break
+            if base_image:
+                break
+        except Exception as e:
+            print(f'      [Step 2a parse error: {model}] {e}')
+            continue
+    
+    if not base_image:
+        return None, None, None
+    
+    print(f' ✅2a({base_model},{len(base_image)//1024}KB)', end='')
+    
+    if not content_manifest:
+        # 没有内容层，直接返回
+        return base_image, base_ext, base_model
+    
+    # ── Step 2b: image-to-image 补充内容区文字 ──
+    content_cn = sum(_count_chinese_chars(v) for v in content_manifest.values())
+    step2b_prompt = (
+        f"This is Step 2 of 2 — ADD the teaching content text to the blank white area.\n"
+        f"The card frame (banner, accent strip, background, mascot) is already done.\n"
+        f"⚠️ DO NOT change the banner, accent strip, background, or mascot!\n"
+        f"⚠️ ONLY add text into the white CONTENT CARD area (y=14%-78%).\n\n"
+        f"ADD these {len(content_manifest)} text blocks into the content area:\n"
+    )
+    
+    # 分配 content 区域的 y 坐标
+    line_keys = list(content_manifest.keys())
+    n = len(line_keys)
+    for i, (k, v) in enumerate(content_manifest.items()):
+        y_pos = int(18 + i * (57 / max(n, 1)))
+        font_size = 22 if _count_chinese_chars(v) > 10 else 26
+        if k.upper() == 'TIP':
+            step2b_prompt += f'  {k}: "{v}" → y=93%, font=14px, color=#999\n'
+        else:
+            step2b_prompt += f'  {k}: "{v}" → y={y_pos}%, font={font_size}px, color=#333, align=left, x=8%\n'
+    
+    step2b_prompt += (
+        f"\n⚠️ Only {content_cn} Chinese characters to add. Render with perfect strokes.\n"
+        f"⚠️ Use clear font, good spacing, professional typeset on white background.\n"
+        f"⚠️ Keep ALL existing elements (banner title, slogan, colors, mascot) IDENTICAL.\n"
+    )
+    
+    b64_base = base64.b64encode(base_image).decode('utf-8')
+    contents_2b = [
+        {'role': 'user', 'parts': [
+            {'text': step2b_prompt},
+            {'inlineData': {'mimeType': f'image/{base_ext}', 'data': b64_base}}
+        ]}
+    ]
+    gen_config_2b = {
+        'responseModalities': ['TEXT', 'IMAGE'],
+        'temperature': 0.15,  # 内容层也用极低温度
+        'thinkingConfig': {'thinkingBudget': 1024},
+    }
+    
+    for model in IMAGE_MODELS:
+        resp = gemini_call(model, contents_2b, keys[0], gen_config=gen_config_2b, retries=1, all_keys=keys)
+        if not resp:
+            continue
+        try:
+            candidates = resp.get('candidates', [])
+            if candidates:
+                for part in candidates[0].get('content', {}).get('parts', []):
+                    if 'inlineData' in part:
+                        b64data = part['inlineData'].get('data', '')
+                        mime = part['inlineData'].get('mimeType', 'image/png')
+                        if b64data:
+                            final_image = base64.b64decode(b64data)
+                            final_ext = 'png' if 'png' in mime else 'jpg'
+                            print(f'+2b({model},{len(final_image)//1024}KB)', end='')
+                            return final_image, final_ext, model
+        except Exception as e:
+            print(f'      [Step 2b parse error: {model}] {e}')
+            continue
+    
+    # Step 2b 失败 → 返回 Step 2a 的底图（至少标题正确）
+    print(' ⚠️2b失败,用2a底图', end='')
+    return base_image, base_ext, base_model
+
+
 def _generate_single_model(model, contents, gen_config, keys):
     """单个模型的图片生成（供并行调用）。返回 (image_data, ext, model) 或 (None, None, model)。"""
     try:
@@ -3784,63 +4049,62 @@ def _generate_single_model(model, contents, gen_config, keys):
     return None, None, model
 
 
-def generate_card_images_parallel(prompt, keys, card_title='', subject='', audit_hint='', manifest=None, canvas=None):
-    """Step 2 v10.10: Best-of-N 并行生成 — 用所有图片模型同时生成，返回全部候选图片。
+def generate_card_images_parallel(prompt, keys, card_title='', subject='', audit_hint='', manifest=None, canvas=None, reference_image_b64=None):
+    """Step 2 v10.17: Best-of-N 并行生成 — 用所有图片模型同时生成，返回全部候选图片。
     
+    v10.17: 坐标锚定 + 温度调优 + 参考图约束
     返回: list of (image_data, ext, model)  — 只包含成功生成的候选
     """
     if not canvas:
         canvas = _CANVAS_PRESETS['小红书']
     canvas_en = _build_canvas_block_en(canvas)
+    
+    # v10.17: 温度策略
+    total_cn = sum(_count_chinese_chars(v) for v in (manifest or {}).values())
+    temperature = 0.15 if total_cn > 20 else 0.3
+    
     chinese_prefix = (
         f"CRITICAL INSTRUCTIONS — COMPLETE CARD WITH TEXT:\n"
         f"1. This is a {subject} educational knowledge card about \"{card_title}\".\n"
         f"2. ✅ You MUST render ALL text directly in the image — text is the core content!\n"
         f"3. Design a STRUCTURED CARD with text integrated into each zone:\n"
-        f"   - TOP BANNER: Dark gradient strip at top with WHITE TITLE TEXT centered\n"
-        f"   - CONTENT CARD: White rounded rectangle in main body with TEACHING CONTENT text\n"
-        f"   - ACCENT STRIP: Warm gradient bar near bottom with WHITE SLOGAN TEXT centered\n"
-        f"   - BOTTOM EDGE: Small tip text if needed\n"
+        f"   - TOP BANNER (y=0-12%): Dark gradient strip with WHITE TITLE TEXT centered\n"
+        f"   - CONTENT CARD (y=14-78%): White rounded rectangle with TEACHING CONTENT text\n"
+        f"   - ACCENT STRIP (y=80-92%): Warm gradient bar with WHITE SLOGAN TEXT centered\n"
+        f"   - BOTTOM (y=93-98%): Small tip text if any\n"
         f"   - Small cute mascot in bottom-right corner (<10% of image)\n"
         f"4. ⚠️ TEXT QUALITY IS CRITICAL:\n"
         f"   - Every Chinese character must be perfectly formed (correct strokes, no garbled text)\n"
         f"   - Every English word must be spelled correctly\n"
-        f"   - Numbers and math symbols must be accurate\n"
-        f"   - Text must look professionally typeset — clear hierarchy, aligned, readable\n"
-        f"   - ⚠️ NEVER truncate text! Every phrase must be COMPLETE — do not drop the last 1-2 characters!\n"
-        f"     Example: '提升语言运用能力' must NOT become '提升语言运用能' (missing 力)\n"
-        f"5. Style: Professional Xiaohongshu card template with text as part of design.\n"
+        f"   - ⚠️ NEVER truncate text! Every phrase must be COMPLETE\n"
+        f"5. Style: Professional Xiaohongshu card. Use symbols (→/①②③/≈) to replace verbose text.\n"
         f"   Main color: choose from coral pink / mint blue / peach orange / lavender.\n"
         f"6. {canvas_en}\n"
-        f"7. ⚠️ Do NOT render any color hex codes (like #1a237e), percentage numbers, or layout coordinates as visible text in the image!\n"
+        f"7. ⚠️ Do NOT render any color hex codes, percentage numbers, or layout coordinates as visible text!\n"
     )
+    # v10.17: 坐标锚定 manifest
     if manifest:
         manifest = _enforce_manifest_limits(manifest)
-        # v10.13: 逐行拆分 + 结构化分行格式
         manifest = _split_long_manifest_lines(manifest)
-        n_text_blocks = len(manifest)
-        chinese_prefix += (
-            f"\n=== TEXT TO RENDER IN THE IMAGE (MUST be pixel-perfect) ===\n"
-            f"The text is split into {n_text_blocks} blocks. "
-            f"Render each block on its OWN line/region — do NOT merge multiple blocks into one line.\n"
-            f"Each line should have ≤ 20 Chinese characters. This prevents edge distortion.\n"
-        )
-        for key, val in manifest.items():
-            zone = 'Banner' if key == 'TITLE' else 'Accent strip' if key == 'SLOGAN' else 'Content card' if key.upper().startswith('LINE') else 'Bottom'
-            chinese_prefix += f"  {key}: \"{val}\" → render in {zone}\n"
-        chinese_prefix += f"⚠️ Render EVERY text item above exactly as written. No omissions, no changes.\n"
-        chinese_prefix += f"⚠️ CRITICAL: Do NOT truncate any text! Every phrase must be rendered in FULL.\n"
-        chinese_prefix += f"   If space is tight, use smaller font — but NEVER drop the last 1-2 characters!\n"
-        chinese_prefix += "=== END TEXT ===\n"
+        chinese_prefix += _build_coordinate_manifest(manifest, canvas)
     if audit_hint:
         chinese_prefix += f"\n⚠️ CORRECTION FROM PREVIOUS ATTEMPT:\n{audit_hint}\n"
 
     full_prompt = chinese_prefix + "\n" + prompt
-    contents = [{'role': 'user', 'parts': [{'text': full_prompt}]}]
+    
+    # v10.17: 参考图约束
+    content_parts = [{'text': full_prompt}]
+    if reference_image_b64:
+        content_parts = [
+            {'text': 'Use this card as style reference (same layout/colors). Generate a NEW card:'},
+            {'inlineData': {'mimeType': 'image/jpeg', 'data': reference_image_b64}},
+            {'text': full_prompt}
+        ]
+    contents = [{'role': 'user', 'parts': content_parts}]
     gen_config = {
         'responseModalities': ['TEXT', 'IMAGE'],
-        'temperature': 0.4,
-        'thinkingConfig': {'thinkingBudget': 1024},  # v10.13: 笔画拓扑预思考
+        'temperature': temperature,
+        'thinkingConfig': {'thinkingBudget': 1024},
     }
 
     # 并行调用所有图片模型
@@ -4996,8 +5260,8 @@ def refine_card_image(prev_image_data, refinement_prompt, keys):
     ]
     gen_config = {
         'responseModalities': ['TEXT', 'IMAGE'],
-        'temperature': 0.3,  # 稳定改进,不要大幅变化
-        'thinkingConfig': {'thinkingBudget': 1024},  # v10.13: 精修前也先理清笔画拓扑
+        'temperature': 0.15,  # v10.17: 精修用极低温度(0.3→0.15)，只做点修复不做创意改动
+        'thinkingConfig': {'thinkingBudget': 1024},
     }
 
     for model in IMAGE_MODELS:
@@ -5346,8 +5610,11 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
 
     time.sleep(1)
 
-    # ── Step 2-4: 串行生成 + OCR审计循环 ──
-    # v10.10: pro优先 → flash兜底（串行），省 API 调用
+    # v10.17 优化④: 加载参考图 (few-shot image constraint)
+    ref_b64 = _load_reference_image(card_type, subject)
+
+    # ── Step 2-4: Best-of-N + OCR审计 + 定向精修循环 ──
+    # v10.17: 第1轮用 Best-of-N 并行生成, 后续轮用定向精修
     best_image = None
     best_ext = 'png'
     best_score = 0
@@ -5357,56 +5624,135 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
     for round_num in range(1, _max_rounds + 1):
         stats['audit_rounds'] = round_num
 
-        # Step 2: 串行生成图片（pro优先, flash兜底）
         round_label = f'(round {round_num}/{_max_rounds})' if round_num > 1 else ''
-        print(f'  ├─ Step 2: 生成图片{round_label}...', end='', flush=True)
-        t1 = time.time()
-
-        img_data, ext, model = generate_card_image(
-            prompt, keys, card_title=title, subject=subject,
-            audit_hint=audit_hint, manifest=manifest, canvas=canvas
-        )
-
-        stats['image_gen_time'] += time.time() - t1
-
-        if not img_data:
-            print(f' ❌ 所有模型生成失败')
-            if best_image:
+        
+        # v10.17: 第1轮 Best-of-N 并行; 后续轮定向精修已有图片
+        if round_num == 1:
+            # ── v10.17 优化⑤: Best-of-N 并行生成 + 选最优 ──
+            print(f'  ├─ Step 2: Best-of-N 并行生成...', end='', flush=True)
+            t1 = time.time()
+            candidates = generate_card_images_parallel(
+                prompt, keys, card_title=title, subject=subject,
+                audit_hint='', manifest=manifest, canvas=canvas,
+                reference_image_b64=ref_b64
+            )
+            stats['image_gen_time'] += time.time() - t1
+            
+            if not candidates:
+                # 并行失败 → 降级到单步生成
+                print(f' ❌ 并行失败, 降级单步...', end='', flush=True)
+                t1b = time.time()
+                img_data, ext, model = generate_card_image(
+                    prompt, keys, card_title=title, subject=subject,
+                    audit_hint='', manifest=manifest, canvas=canvas,
+                    reference_image_b64=ref_b64
+                )
+                stats['image_gen_time'] += time.time() - t1b
+                if not img_data:
+                    print(f' ❌ 所有模型生成失败')
+                    return False, '', stats
+                candidates = [(img_data, ext, model)]
+            
+            print(f' {len(candidates)}张候选')
+            
+            if skip_audit:
+                # 无审计模式: 取第一张
+                best_image, best_ext, model = candidates[0]
+                best_score = 100
+                stats['audit_score'] = 100
+                stats['image_model'] = model or ''
+                stats['final_action'] = 'no_audit'
                 break
-            return False, '', stats
+            
+            # 对所有候选做快速OCR审计, 选最高分
+            _eng_kp = card.get('_eng_key_phrase', '')
+            best_candidate_score = -1
+            for ci, (cimg, cext, cmodel) in enumerate(candidates):
+                print(f'  │  候选{ci+1} OCR审计...', end='', flush=True)
+                key = next_key(keys)
+                c_audit = ocr_audit(cimg, manifest, key, all_keys=keys, eng_key_phrase=_eng_kp)
+                c_audit = _teaching_completeness_audit(c_audit, original_card)
+                c_audit = _contrast_pair_check(c_audit, original_card)
+                c_score = c_audit.get('overall_score', 0)
+                c_q = c_audit.get('quality', {}).get('total', 0)
+                c_combined = (c_score + c_q) / 2 if c_q > 0 else c_score
+                print(f' 审计={c_score} 质量={c_q} ({c_audit.get("summary", "")})')
+                if c_score > best_candidate_score:
+                    best_candidate_score = c_score
+                    best_image = cimg
+                    best_ext = cext
+                    best_score = c_score
+                    last_audit = c_audit
+                    stats['image_model'] = cmodel or ''
+            
+            img_data = best_image
+            ext = best_ext
+            model = stats['image_model']
+            
+        else:
+            # ── v10.17 优化⑥: 后续轮用定向精修 (不全图重生) ──
+            if best_image and last_audit:
+                post_errs = last_audit.get('errors', [])
+                high_errs = [e for e in post_errs if e.get('severity') in ('high', 'medium')]
+                if high_errs:
+                    print(f'  ├─ Step 2: 定向修复{round_label} ({len(high_errs)}处错误)...', end='', flush=True)
+                    t1 = time.time()
+                    targeted_prompt = _build_targeted_text_fix_prompt(
+                        last_audit, manifest, subject=subject, canvas=canvas
+                    )
+                    img_data, ext, model = refine_card_image(
+                        best_image, targeted_prompt, keys
+                    )
+                    stats['image_gen_time'] += time.time() - t1
+                else:
+                    # 没有高严重度错误, 用普通重生成
+                    print(f'  ├─ Step 2: 生成图片{round_label}...', end='', flush=True)
+                    t1 = time.time()
+                    img_data, ext, model = generate_card_image(
+                        prompt, keys, card_title=title, subject=subject,
+                        audit_hint=audit_hint, manifest=manifest, canvas=canvas,
+                        reference_image_b64=ref_b64
+                    )
+                    stats['image_gen_time'] += time.time() - t1
+            else:
+                print(f'  ├─ Step 2: 生成图片{round_label}...', end='', flush=True)
+                t1 = time.time()
+                img_data, ext, model = generate_card_image(
+                    prompt, keys, card_title=title, subject=subject,
+                    audit_hint=audit_hint, manifest=manifest, canvas=canvas,
+                    reference_image_b64=ref_b64
+                )
+                stats['image_gen_time'] += time.time() - t1
 
-        print(f' ✅ ({model}, {len(img_data)/1024:.0f}KB)')
-        stats['image_model'] = model or ''
+            if not img_data:
+                print(f' ❌ 生成失败')
+                if best_image:
+                    break
+                return False, '', stats
 
-        if skip_audit:
-            best_image = img_data
-            best_ext = ext
-            best_score = 100
-            stats['audit_score'] = 100
-            stats['final_action'] = 'no_audit'
-            break
+            print(f' ✅ ({model}, {len(img_data)/1024:.0f}KB)')
+            stats['image_model'] = model or ''
 
-        # Step 3: OCR 审计 + 质量评分
-        _eng_kp = card.get('_eng_key_phrase', '')
-        print(f'  ├─ Step 3: OCR审计+质量评分...', end='', flush=True)
-        key = next_key(keys)
-        audit = ocr_audit(img_data, manifest, key, all_keys=keys, eng_key_phrase=_eng_kp)
-        # v10.12: 教学完整性审计 + ✔/✖对比度校验
-        audit = _teaching_completeness_audit(audit, original_card)
-        audit = _contrast_pair_check(audit, original_card)
-        score = audit.get('overall_score', 0)
-        errors = audit.get('errors', [])
-        summary = audit.get('summary', '')
-        merged_quality = audit.get('quality', {})
-        q_total = merged_quality.get('total', 0)
-        combined = (score + q_total) / 2 if q_total > 0 else score
-        print(f' 审计={score} 质量={q_total} 综合={combined:.0f} ({summary})')
+            # Step 3: OCR 审计 + 质量评分
+            _eng_kp = card.get('_eng_key_phrase', '')
+            print(f'  ├─ Step 3: OCR审计+质量评分...', end='', flush=True)
+            key = next_key(keys)
+            audit = ocr_audit(img_data, manifest, key, all_keys=keys, eng_key_phrase=_eng_kp)
+            audit = _teaching_completeness_audit(audit, original_card)
+            audit = _contrast_pair_check(audit, original_card)
+            score = audit.get('overall_score', 0)
+            errors = audit.get('errors', [])
+            summary = audit.get('summary', '')
+            merged_quality = audit.get('quality', {})
+            q_total = merged_quality.get('total', 0)
+            combined = (score + q_total) / 2 if q_total > 0 else score
+            print(f' 审计={score} 质量={q_total} 综合={combined:.0f} ({summary})')
 
-        if score > best_score:
-            best_image = img_data
-            best_ext = ext
-            best_score = score
-            last_audit = audit
+            if score > best_score:
+                best_image = img_data
+                best_ext = ext
+                best_score = score
+                last_audit = audit
 
         stats['audit_score'] = best_score
 

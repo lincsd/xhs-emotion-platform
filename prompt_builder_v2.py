@@ -88,12 +88,13 @@ CONTENT_DECISION_TEMPLATE = """你是教育卡片内容策划师。基于以下�
 }}
 
 规则:
-1. text_manifest 中所有中文总计 ≤ {max_chars} 字
+1. text_manifest 中所有中文总计 ≤ {max_chars} 字（越少越好，AI渲染少量文字更准确）
 2. 每个文字块 ≤ {max_per_block} 字
-3. 能用数字/符号/图表表达的绝不用中文
+3. 能用数字/符号/图表表达的绝不用中文（→ ① ② ③ ≈ ≥ ≤ ✓ ✗ + = 代替文字）
 4. text_manifest 至少5项（TITLE + LINE1 + LINE2 + LINE3 + SLOGAN），有易错提示加TIP
 5. LINE1/2/3 来自 blocks 的 EXAMPLE/CORE/ANSWER 内容，浓缩成短行
 6. 英语卡: 标题用英文短语本身, 例句≥6个英文单词, LINE1/2/3 用英文例句+对比
+7. ⚠️ 用符号压缩: "固定打点计时器在铁架台顶端"→"① 固定计时器→悬挂" 用→/①代替连词
 """
 
 def build_content_decision_prompt(card: dict, card_type: str, subject: str,
