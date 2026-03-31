@@ -811,10 +811,10 @@ def _auto_fix_card_data(card, audit_result, api_key, all_keys=None):
 
 # ── 文字量预算常量 ──
 _MAX_CARD_CHARS = 180         # 单张卡片文字总量上限（包含标题+定义+要点+例题+口诀）
-_MAX_CORE_POINT_CHARS = 20    # 单条要点上限字数
+_MAX_CORE_POINT_CHARS = 25    # 单条要点上限字数 (v10.12: 20→25, 保留更多语义)
 _MAX_CORE_POINTS = 3          # 单张卡片最大要点数
 _MAX_EXAMPLE_STEPS = 3        # 例题最大步骤数
-_MAX_MEMORY_TIP_CHARS = 16    # 口诀上限字数
+_MAX_MEMORY_TIP_CHARS = 35    # 口诀上限字数 (v10.12: 16→35, 避免截断致无意义)
 
 # 可拆卡的类型（带有多个独立子项的卡片）
 _SPLITTABLE_TYPES = {'陷阱卡', '辨析卡', '知识总结卡', '知识网络卡', '术语精准卡', '解题策略卡'}
@@ -1128,7 +1128,34 @@ def _compress_card_content(card, subject='', keys=None):
             example['steps'] = new_steps
         card['example'] = example
     
-    # ── 5. 最终文字量检查 ──
+    # ── 5. mistakes.correct 保护（纠错内容是教学核心，不截断） ──
+    mistakes = card.get('mistakes', [])
+    if isinstance(mistakes, list) and mistakes:
+        protected_mistakes = []
+        for m in mistakes:
+            if isinstance(m, dict):
+                pm = {**m}
+                # correct 字段是纠错核心语义，保留完整（最多80字）
+                correct_text = pm.get('correct', '')
+                if len(correct_text) > 80:
+                    # 只在标点处截断，不做硬截断
+                    trunc = correct_text[:80]
+                    for ci in range(len(trunc) - 1, max(len(trunc) - 10, 10), -1):
+                        if trunc[ci] in '，。；、':
+                            trunc = trunc[:ci]
+                            break
+                    pm['correct'] = trunc
+                    log.append(f'📦 纠错: {len(correct_text)}字→{len(trunc)}字')
+                # wrong 可以适度截断（错误描述通常简短）
+                wrong_text = pm.get('wrong', '')
+                if len(wrong_text) > 30:
+                    pm['wrong'] = wrong_text[:30]
+                protected_mistakes.append(pm)
+            else:
+                protected_mistakes.append(m)
+        card['mistakes'] = protected_mistakes
+
+    # ── 6. 最终文字量检查 ──
     final_total, final_bd = _estimate_card_text_volume(card)
     if log:
         log.append(f'📊 压缩后总字数: {final_total}字 (上限{_MAX_CARD_CHARS})')
@@ -2757,7 +2784,7 @@ def _build_card_info_edu(card, subject, grade, semester):
         pt_count = _MAX_CORE_POINTS if ratio < 2.0 else 2
         step_limit = _MAX_EXAMPLE_STEPS if ratio < 1.5 else 2
         tip_limit = _MAX_MEMORY_TIP_CHARS if ratio < 1.5 else 10
-        mistake_limit = 60 if ratio < 1.5 else 40
+        mistake_limit = 80 if ratio < 1.5 else 60  # v10.12: 纠错是教学核心，保留更多
     else:
         def_limit = 120
         pt_limit = 80
@@ -3906,6 +3933,306 @@ def _programmatic_text_check(ocr_result, expected_manifest):
     return ocr_result
 
 
+def _teaching_completeness_audit(ocr_result, original_card):
+    """v10.12: 教学完整性审计 — 对比原始卡片数据 vs OCR found_texts。
+    
+    解决的问题：
+    - AI 在生成 manifest 时就已丢失内容，OCR 对着残缺 manifest 打 100 分
+    - 需要用原始教学数据做交叉校验，确保关键信息确实出现在图片中
+    
+    检查项：
+    1. mistakes.correct（纠错核心）：必须在图片中有实质体现
+    2. core_points 关键词覆盖率：核心知识点需在图中可见
+    3. memory_tip 覆盖率：口诀应完整出现
+    
+    返回: 修改后的 ocr_result（可能降分并添加错误）
+    """
+    found_texts = ocr_result.get('found_texts', [])
+    if not found_texts or not original_card:
+        return ocr_result
+    
+    all_found = ''.join(found_texts)
+    # 提取所有中文字符用于匹配
+    all_found_cn = ''.join(c for c in all_found if '\u4e00' <= c <= '\u9fff')
+    
+    errors = ocr_result.get('errors', [])
+    score = ocr_result.get('overall_score', 100)
+    added = 0
+    
+    # ── 1. mistakes.correct 检查（最关键）──
+    mistakes = original_card.get('mistakes', [])
+    for m in mistakes[:2]:  # 最多检查前2条 mistake
+        if not isinstance(m, dict):
+            continue
+        correct_text = m.get('correct', '')
+        wrong_text = m.get('wrong', '')
+        if not correct_text or len(correct_text) < 4:
+            continue
+        
+        # 提取纠错文本中的关键词（≥2字的中文片段）
+        import re as _re_tc
+        correct_cn = ''.join(c for c in correct_text if '\u4e00' <= c <= '\u9fff')
+        wrong_cn = ''.join(c for c in wrong_text if '\u4e00' <= c <= '\u9fff')
+        
+        # 将纠错文本拆成2-4字的关键词片段
+        correct_keywords = []
+        for i in range(0, max(len(correct_cn) - 1, 0), 2):
+            kw = correct_cn[i:i+3]
+            if len(kw) >= 2:
+                correct_keywords.append(kw)
+        
+        if not correct_keywords:
+            continue
+        
+        # 计算覆盖率：有多少关键词能在图片文字中找到
+        found_count = sum(1 for kw in correct_keywords if kw in all_found_cn)
+        coverage = found_count / len(correct_keywords) if correct_keywords else 0
+        
+        # 同时检查：❌的描述和✅的纠正是否有实质区分
+        # 如果图片中✅区域的文字和❌区域高度相似，说明纠错丢失
+        if coverage < 0.3:
+            errors.append({
+                'expected': f'纠错: {correct_text[:60]}',
+                'actual': f'图片中未找到纠错核心内容(覆盖率{coverage:.0%})',
+                'type': 'missing_correction',
+                'severity': 'high'
+            })
+            penalty = 20 if coverage < 0.1 else 15
+            score = max(0, score - penalty)
+            added += 1
+            print(f'      [教学完整性] ❌ 纠错核心丢失: "{correct_text[:30]}..." (覆盖率{coverage:.0%}, -{penalty}分)')
+        elif coverage < 0.5:
+            errors.append({
+                'expected': f'纠错: {correct_text[:60]}',
+                'actual': f'纠错内容不完整(覆盖率{coverage:.0%})',
+                'type': 'incomplete_correction',
+                'severity': 'medium'
+            })
+            score = max(0, score - 10)
+            added += 1
+            print(f'      [教学完整性] ⚠️ 纠错不完整: "{correct_text[:30]}..." (覆盖率{coverage:.0%}, -10分)')
+    
+    # ── 2. core_points 关键词覆盖 ──
+    points = original_card.get('core_points', [])
+    if points:
+        total_kw = 0
+        found_kw = 0
+        for p in points[:3]:  # 只检查前3条
+            p_cn = ''.join(c for c in str(p) if '\u4e00' <= c <= '\u9fff')
+            if len(p_cn) < 4:
+                continue
+            # 用3字滑窗检查
+            for i in range(0, len(p_cn) - 2, 3):
+                kw = p_cn[i:i+3]
+                total_kw += 1
+                if kw in all_found_cn:
+                    found_kw += 1
+        
+        pt_coverage = found_kw / total_kw if total_kw > 0 else 1.0
+        if pt_coverage < 0.2 and total_kw >= 3:
+            errors.append({
+                'expected': f'核心知识点({len(points)}条)',
+                'actual': f'图片中知识点覆盖率仅{pt_coverage:.0%}',
+                'type': 'missing_core_content',
+                'severity': 'high'
+            })
+            score = max(0, score - 15)
+            added += 1
+            print(f'      [教学完整性] ❌ 知识点覆盖率低: {pt_coverage:.0%} ({found_kw}/{total_kw}关键词)')
+    
+    # ── 3. memory_tip 完整性 ──
+    tip = original_card.get('memory_tip', '')
+    if tip and len(tip) >= 6:
+        tip_cn = ''.join(c for c in tip if '\u4e00' <= c <= '\u9fff')
+        if tip_cn and len(tip_cn) >= 4:
+            # 检查口诀是否在图片中有体现（允许部分匹配）
+            tip_kws = [tip_cn[i:i+3] for i in range(0, len(tip_cn) - 2, 3)]
+            tip_found = sum(1 for kw in tip_kws if kw in all_found_cn)
+            tip_cov = tip_found / len(tip_kws) if tip_kws else 1.0
+            if tip_cov < 0.2 and len(tip_kws) >= 2:
+                # 口诀完全缺失（但不像纠错那么严重）
+                errors.append({
+                    'expected': f'口诀: {tip[:40]}',
+                    'actual': f'图片中未找到口诀(覆盖率{tip_cov:.0%})',
+                    'type': 'missing_tip',
+                    'severity': 'medium'
+                })
+                score = max(0, score - 5)
+                added += 1
+                print(f'      [教学完整性] ⚠️ 口诀缺失: "{tip[:25]}..." (覆盖率{tip_cov:.0%})')
+    
+    if added > 0:
+        ocr_result['errors'] = errors
+        ocr_result['overall_score'] = score
+        ocr_result['summary'] = (ocr_result.get('summary', '') + 
+                                  f' [+教学完整性:发现{added}处缺失]').strip()
+    
+    return ocr_result
+
+
+def _contrast_pair_check(ocr_result, original_card):
+    """v10.12: ❌/✅ 对比度校验 — 陷阱卡/辨析卡专项。
+    
+    解决的问题：
+    - 陷阱卡的核心价值是 ❌错误 和 ✅正确 形成对比
+    - 如果两个区域内容高度相似（如都说"摩擦力阻碍"），教学价值=0
+    
+    检查逻辑：
+    1. 在 found_texts 中找到 ❌ 和 ✅ 区域的文字
+    2. 计算两者的文字相似度
+    3. 相似度 >80% 且原始数据有明确对比 → 判定为"对比失败"
+    
+    返回: 修改后的 ocr_result
+    """
+    card_type = original_card.get('type', '')
+    if card_type not in ('陷阱卡', '辨析卡', '易错卡'):
+        return ocr_result
+    
+    mistakes = original_card.get('mistakes', [])
+    if not mistakes or not isinstance(mistakes[0], dict):
+        return ocr_result
+    
+    wrong_text = mistakes[0].get('wrong', '')
+    correct_text = mistakes[0].get('correct', '')
+    if not wrong_text or not correct_text:
+        return ocr_result
+    
+    found_texts = ocr_result.get('found_texts', [])
+    if not found_texts:
+        return ocr_result
+    
+    # 在 found_texts 中识别 ❌ 区域和 ✅ 区域的文字
+    wrong_region_text = ''
+    correct_region_text = ''
+    
+    import re as _re_cp
+    
+    # 策略1: 逐条 found_text 按标记分类
+    wrong_cn_orig = ''.join(c for c in wrong_text if '\u4e00' <= c <= '\u9fff')
+    correct_cn_orig = ''.join(c for c in correct_text if '\u4e00' <= c <= '\u9fff')
+    
+    for ft in found_texts:
+        ft_stripped = ft.strip()
+        ft_cn = ''.join(c for c in ft if '\u4e00' <= c <= '\u9fff')
+        if not ft_cn or len(ft_cn) < 2:
+            continue
+        
+        # 按 emoji/关键词标记分类
+        has_wrong_mark = bool(_re_cp.search(r'[❌✗✘]|为什么错|常见错误', ft_stripped))
+        has_correct_mark = bool(_re_cp.search(r'[✅✓✔☑]|正确|纠正', ft_stripped))
+        
+        if has_wrong_mark and not wrong_region_text:
+            # 去掉标记本身，保留内容
+            content = _re_cp.sub(r'[❌✗✘✅✓✔☑]\s*|为什么错[：:]\s*|常见错误[：:]\s*|→\s*', '', ft_stripped).strip()
+            if len(content) >= 3:
+                wrong_region_text = content
+        elif has_correct_mark and not correct_region_text:
+            content = _re_cp.sub(r'[❌✗✘✅✓✔☑]\s*|正确[：:]\s*|纠正[：:]\s*', '', ft_stripped).strip()
+            if len(content) >= 3:
+                correct_region_text = content
+    
+    # 策略2: 如果标记匹配失败，用原始 wrong/correct 文本做内容匹配
+    if not wrong_region_text or not correct_region_text:
+        for ft in found_texts:
+            ft_cn = ''.join(c for c in ft if '\u4e00' <= c <= '\u9fff')
+            if not ft_cn:
+                continue
+            # 匹配 wrong
+            if not wrong_region_text and wrong_cn_orig:
+                prefix_len = 0
+                for i in range(min(len(ft_cn), len(wrong_cn_orig))):
+                    if ft_cn[i] == wrong_cn_orig[i]:
+                        prefix_len += 1
+                    else:
+                        break
+                if prefix_len >= max(3, len(wrong_cn_orig) * 0.5):
+                    wrong_region_text = ft
+            # 匹配 correct（排除已匹配为 wrong 的）
+            if not correct_region_text and correct_cn_orig and ft != wrong_region_text:
+                overlap = sum(1 for c in set(ft_cn) if c in correct_cn_orig)
+                if overlap >= max(3, len(correct_cn_orig) * 0.3):
+                    correct_region_text = ft
+    
+    if not wrong_region_text or not correct_region_text:
+        return ocr_result
+    
+    # 计算两区域文字的相似度
+    wrong_cn = ''.join(c for c in wrong_region_text if '\u4e00' <= c <= '\u9fff')
+    correct_cn = ''.join(c for c in correct_region_text if '\u4e00' <= c <= '\u9fff')
+    
+    if not wrong_cn or not correct_cn:
+        return ocr_result
+    
+    # Jaccard 相似度（2-gram）
+    def bigrams(s):
+        return set(s[i:i+2] for i in range(len(s) - 1)) if len(s) >= 2 else {s}
+    
+    w_bg = bigrams(wrong_cn)
+    c_bg = bigrams(correct_cn)
+    
+    if not w_bg or not c_bg:
+        return ocr_result
+    
+    intersection = len(w_bg & c_bg)
+    union = len(w_bg | c_bg)
+    similarity = intersection / union if union > 0 else 0
+    
+    # 同时检查：原始数据中 wrong vs correct 是否有实质差异
+    orig_wrong_cn = ''.join(c for c in wrong_text if '\u4e00' <= c <= '\u9fff')
+    orig_correct_cn = ''.join(c for c in correct_text if '\u4e00' <= c <= '\u9fff')
+    orig_w_bg = bigrams(orig_wrong_cn)
+    orig_c_bg = bigrams(orig_correct_cn)
+    orig_sim = len(orig_w_bg & orig_c_bg) / len(orig_w_bg | orig_c_bg) if (orig_w_bg | orig_c_bg) else 0
+    
+    # 检测对比失败的多种模式
+    errors = ocr_result.get('errors', [])
+    score = ocr_result.get('overall_score', 100)
+    contrast_lost = False
+    contrast_reason = ''
+    
+    # 模式A: bigram 高相似度 (>0.7)
+    if similarity > 0.7 and orig_sim < 0.7:
+        contrast_lost = True
+        contrast_reason = f'bigram相似度{similarity:.0%}'
+    
+    # 模式B: ✅区域是❌区域的子串（截断导致纠错 = 错误）
+    if not contrast_lost and correct_cn in wrong_cn and orig_sim < 0.7:
+        contrast_lost = True
+        contrast_reason = f'✅内容是❌的子串'
+    
+    # 模式C: ❌区域是✅区域的子串（反向包含）
+    if not contrast_lost and wrong_cn in correct_cn and orig_sim < 0.7:
+        contrast_lost = True
+        contrast_reason = f'❌内容是✅的子串'
+    
+    # 模式D: ✅ 区域太短，无法构成有效纠错（<8字且原始 correct 很长>15字）
+    if not contrast_lost and len(correct_cn) < 8 and len(orig_correct_cn) > 15 and orig_sim < 0.7:
+        # ✅ 区域被截断到几乎无信息量
+        coverage = len(correct_cn) / len(orig_correct_cn) if orig_correct_cn else 0
+        if coverage < 0.4:
+            contrast_lost = True
+            contrast_reason = f'✅区域严重截断({len(correct_cn)}/{len(orig_correct_cn)}字)'
+    
+    if contrast_lost:
+        penalty = 20 if similarity > 0.85 or (correct_cn in wrong_cn) else 10
+        errors.append({
+            'expected': f'❌"{wrong_text[:30]}" vs ✅"{correct_text[:30]}"',
+            'actual': f'图片❌/✅对比失效({contrast_reason})',
+            'type': 'contrast_lost',
+            'severity': 'high'
+        })
+        score = max(0, score - penalty)
+        ocr_result['errors'] = errors
+        ocr_result['overall_score'] = score
+        ocr_result['summary'] = (ocr_result.get('summary', '') + 
+                                  f' [❌/✅对比丢失:{contrast_reason}]').strip()
+        print(f'      [对比校验] ❌ ❌/✅对比失效({contrast_reason}): '
+              f'❌"{wrong_region_text[:20]}" vs ✅"{correct_region_text[:20]}" '
+              f'(原始差异={1-orig_sim:.0%}, -{penalty}分)')
+    
+    return ocr_result
+
+
 def _build_audit_hint(audit_result, expected_manifest):
     """根据审计结果构建纠错提示（仅文字错误，旧版兼容）"""
     if not audit_result.get('errors'):
@@ -4722,6 +5049,10 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
         stats['final_action'] = 'schema_rejected'
         return False, '', stats
 
+    # v10.12: 保存原始卡片数据（压缩前）用于教学完整性审计
+    import copy as _copy_mod
+    original_card = _copy_mod.deepcopy(card)
+
     # ── v10.11 Step 0.5: 内容压缩（渲染前文字量降级）──
     pre_total, pre_bd = _estimate_card_text_volume(card)
     card, comp_log = _compress_card_content(card, subject=subject, keys=keys)
@@ -4854,6 +5185,9 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
         print(f'  ├─ Step 3: OCR审计+质量评分...', end='', flush=True)
         key = next_key(keys)
         audit = ocr_audit(img_data, manifest, key, all_keys=keys, eng_key_phrase=_eng_kp)
+        # v10.12: 教学完整性审计 + ✔/✖对比度校验
+        audit = _teaching_completeness_audit(audit, original_card)
+        audit = _contrast_pair_check(audit, original_card)
         score = audit.get('overall_score', 0)
         errors = audit.get('errors', [])
         summary = audit.get('summary', '')
@@ -4959,6 +5293,9 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
                 key = next_key(keys)
                 refined_audit = ocr_audit(refined_data, manifest, key, all_keys=keys,
                                           eng_key_phrase=card.get('_eng_key_phrase', ''))
+                # v10.12: 精修后也做教学完整性 + 对比度校验
+                refined_audit = _teaching_completeness_audit(refined_audit, original_card)
+                refined_audit = _contrast_pair_check(refined_audit, original_card)
                 refined_ocr = refined_audit.get('overall_score', 0)
                 refined_q = refined_audit.get('quality', {}).get('total', 0)
                 refined_errs = refined_audit.get('errors', [])
@@ -5050,6 +5387,9 @@ def process_single_card(card, subject, grade, semester, keys, output_dir, skip_a
                 key = next_key(keys)
                 targeted_audit = ocr_audit(targeted_data, manifest, key, all_keys=keys,
                                             eng_key_phrase=card.get('_eng_key_phrase', ''))
+                # v10.12: 定向修复后也做教学完整性 + 对比度校验
+                targeted_audit = _teaching_completeness_audit(targeted_audit, original_card)
+                targeted_audit = _contrast_pair_check(targeted_audit, original_card)
                 targeted_ocr = targeted_audit.get('overall_score', 0)
                 targeted_q = targeted_audit.get('quality', {}).get('total', 0)
                 targeted_errs = targeted_audit.get('errors', [])
