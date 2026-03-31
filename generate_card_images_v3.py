@@ -430,13 +430,14 @@ AI 必须直接在图片中渲染所有文字！文字是卡片的核心内容�
 在 prompt 末尾，用 [TEXT_MANIFEST] 列出卡片中要渲染的所有文字：
 [TEXT_MANIFEST]
 TITLE: 标题文字 → 渲染到区块A（Banner白色大字）
-LINE1: 核心内容第一行 → 渲染到区块B
+LINE1: 核心内容第一行 → 渲染到区块B（⚠️ 每行不超过20个中文字！）
 LINE2: 核心内容第二行 → 渲染到区块B
 LINE3: 核心内容第三行 → 渲染到区块B
 SLOGAN: 口诀金句 → 渲染到区块C（暖色条白字）
 TIP: 小提示(可选) → 渲染到区块D
 [/TEXT_MANIFEST]
 
+⚠️ 每个 LINE 的中文字数不超过20字！如果内容过长，拆成多行 LINE1/LINE2/LINE3...
 此清单中的文字必须原封不动地渲染到图片对应区域中！
 
 {color_scheme_block}
@@ -499,12 +500,13 @@ AI 必须直接在图片中渲染所有文字！文字是卡片的核心内容�
 在 prompt 末尾，用 [TEXT_MANIFEST] 列出卡片要渲染的所有文字：
 [TEXT_MANIFEST]
 TITLE: 标题文字 → 渲染到区块A
-LINE1: 第一行内容 → 渲染到区块B
+LINE1: 第一行内容 → 渲染到区块B（⚠️ 每行不超过20个中文字！）
 LINE2: 第二行内容 → 渲染到区块B
 ...
 SLOGAN: 口诀金句 → 渲染到区块C
 [/TEXT_MANIFEST]
 
+⚠️ 每个 LINE 的中文字数不超过20字！内容长就拆成多行。
 此清单中的文字必须原封不动渲染到图片中！
 
 {color_scheme_block}
@@ -815,6 +817,7 @@ _MAX_CORE_POINT_CHARS = 25    # 单条要点上限字数 (v10.12: 20→25, 保�
 _MAX_CORE_POINTS = 3          # 单张卡片最大要点数
 _MAX_EXAMPLE_STEPS = 3        # 例题最大步骤数
 _MAX_MEMORY_TIP_CHARS = 35    # 口诀上限字数 (v10.12: 16→35, 避免截断致无意义)
+_MAX_LINE_CHARS = 20          # v10.13: manifest 单行最大中文字数，超出自动拆行
 
 # 可拆卡的类型（带有多个独立子项的卡片）
 _SPLITTABLE_TYPES = {'陷阱卡', '辨析卡', '知识总结卡', '知识网络卡', '术语精准卡', '解题策略卡'}
@@ -3438,6 +3441,90 @@ def _ensure_complete_chinese(text):
 
 
 # ═══════════════════════════════════════════
+# v10.13: 逐行字数控制 — manifest LINE 自动拆行
+# ═══════════════════════════════════════════
+def _split_long_manifest_lines(manifest: dict) -> dict:
+    """v10.13: 逐行字数控制 — 超过 _MAX_LINE_CHARS 的 LINE 自动拆成多行。
+
+    法则二核心: 强制"手动拆块"排版，避免单行过长导致文字堆叠/边缘变形。
+    - TITLE / SLOGAN / TIP 不拆（它们有自己的区域且通常较短）
+    - LINE1 / LINE2 / ... 超过限制时拆成 LINE1a / LINE1b
+    - 拆分点优先选：句号/逗号/分号/顿号 > 空格 > 硬切
+    """
+    if not manifest:
+        return manifest
+    limit = _MAX_LINE_CHARS
+    result = {}
+    for key, val in manifest.items():
+        # 只拆 LINE 类型的条目
+        if not key.upper().startswith('LINE'):
+            result[key] = val
+            continue
+        cn_count = _count_chinese_chars(val)
+        if cn_count <= limit:
+            result[key] = val
+            continue
+        # 需要拆分 — 找最佳拆分点
+        sub_lines = _smart_split_text(val, limit)
+        if len(sub_lines) == 1:
+            result[key] = sub_lines[0]
+        else:
+            for i, sl in enumerate(sub_lines):
+                suffix = chr(ord('a') + i)  # a, b, c...
+                new_key = f"{key}{suffix}"
+                result[new_key] = sl
+            split_keys = ', '.join(f"{key}{chr(ord('a') + i)}" for i in range(len(sub_lines)))
+            print(f'      [line split] {key}({cn_count}字) → {len(sub_lines)}行: {split_keys}')
+    return result
+
+
+def _smart_split_text(text: str, max_cn: int) -> list:
+    """将长文本按中文字数拆分成多段，优先在标点处断开。"""
+    _SPLIT_PUNCTS = '。；;！!？?、，,'
+    segments = []
+    remaining = text
+    while _count_chinese_chars(remaining) > max_cn:
+        # 在前 max_cn 个中文范围内找最后一个标点
+        best_pos = -1
+        cn_seen = 0
+        for i, ch in enumerate(remaining):
+            if '\u4e00' <= ch <= '\u9fff':
+                cn_seen += 1
+            if cn_seen <= max_cn and ch in _SPLIT_PUNCTS:
+                best_pos = i
+            if cn_seen > max_cn and best_pos >= 0:
+                break
+        if best_pos < 0:
+            # 没找到标点，在空格处断
+            cn_seen = 0
+            for i, ch in enumerate(remaining):
+                if '\u4e00' <= ch <= '\u9fff':
+                    cn_seen += 1
+                if cn_seen <= max_cn and ch == ' ':
+                    best_pos = i
+                if cn_seen > max_cn:
+                    break
+        if best_pos < 0:
+            # 硬切：在第 max_cn 个中文字后切
+            cn_seen = 0
+            for i, ch in enumerate(remaining):
+                if '\u4e00' <= ch <= '\u9fff':
+                    cn_seen += 1
+                    if cn_seen == max_cn:
+                        best_pos = i
+                        break
+        if best_pos < 0:
+            break
+        seg = remaining[:best_pos + 1].strip()
+        if seg:
+            segments.append(seg)
+        remaining = remaining[best_pos + 1:].strip()
+    if remaining.strip():
+        segments.append(remaining.strip())
+    return segments if segments else [text]
+
+
+# ═══════════════════════════════════════════
 # Step 2: 生成卡片图片（强模型 + fallback）
 # ═══════════════════════════════════════════
 def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', manifest=None, canvas=None):
@@ -3479,9 +3566,19 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
     # manifest: 告诉 AI 需要渲染的文字内容
     if manifest:
         manifest = _enforce_manifest_limits(manifest)
-        chinese_prefix += f"\n=== TEXT TO RENDER IN THE IMAGE (MUST be pixel-perfect) ===\n"
+        # v10.13: 逐行拆分 — 超过 _MAX_LINE_CHARS 的行自动拆成多行
+        manifest = _split_long_manifest_lines(manifest)
+        # v10.13 法则二: 结构化分行排版 — 用 "The text is split into X lines" 格式
+        line_keys = [k for k in manifest if k.upper().startswith('LINE')]
+        n_text_blocks = len(manifest)
+        chinese_prefix += (
+            f"\n=== TEXT TO RENDER IN THE IMAGE (MUST be pixel-perfect) ===\n"
+            f"The text is split into {n_text_blocks} blocks. "
+            f"Render each block on its OWN line/region — do NOT merge multiple blocks into one line.\n"
+            f"Each line should have ≤ 20 Chinese characters. This prevents edge distortion.\n"
+        )
         for key, val in manifest.items():
-            zone = 'Banner' if key == 'TITLE' else 'Accent strip' if key == 'SLOGAN' else 'Content card' if key.startswith('LINE') else 'Bottom'
+            zone = 'Banner' if key == 'TITLE' else 'Accent strip' if key == 'SLOGAN' else 'Content card' if key.upper().startswith('LINE') else 'Bottom'
             chinese_prefix += f"  {key}: \"{val}\" → render in {zone}\n"
         chinese_prefix += f"⚠️ Render EVERY text item above exactly as written. No omissions, no changes.\n"
         chinese_prefix += f"⚠️ CRITICAL: Do NOT truncate any text! Every phrase must be rendered in FULL.\n"
@@ -3498,6 +3595,7 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
     gen_config = {
         'responseModalities': ['TEXT', 'IMAGE'],
         'temperature': 0.4,   # 降低随机性，提升中文渲染稳定性
+        'thinkingConfig': {'thinkingBudget': 1024},  # v10.13 法则三: 让模型先理清复杂笔画拓扑
     }
 
     # 按模型优先级尝试（遇到成功立即返回，失败换下一个模型）
@@ -3578,9 +3676,17 @@ def generate_card_images_parallel(prompt, keys, card_title='', subject='', audit
     )
     if manifest:
         manifest = _enforce_manifest_limits(manifest)
-        chinese_prefix += f"\n=== TEXT TO RENDER IN THE IMAGE (MUST be pixel-perfect) ===\n"
+        # v10.13: 逐行拆分 + 结构化分行格式
+        manifest = _split_long_manifest_lines(manifest)
+        n_text_blocks = len(manifest)
+        chinese_prefix += (
+            f"\n=== TEXT TO RENDER IN THE IMAGE (MUST be pixel-perfect) ===\n"
+            f"The text is split into {n_text_blocks} blocks. "
+            f"Render each block on its OWN line/region — do NOT merge multiple blocks into one line.\n"
+            f"Each line should have ≤ 20 Chinese characters. This prevents edge distortion.\n"
+        )
         for key, val in manifest.items():
-            zone = 'Banner' if key == 'TITLE' else 'Accent strip' if key == 'SLOGAN' else 'Content card' if key.startswith('LINE') else 'Bottom'
+            zone = 'Banner' if key == 'TITLE' else 'Accent strip' if key == 'SLOGAN' else 'Content card' if key.upper().startswith('LINE') else 'Bottom'
             chinese_prefix += f"  {key}: \"{val}\" → render in {zone}\n"
         chinese_prefix += f"⚠️ Render EVERY text item above exactly as written. No omissions, no changes.\n"
         chinese_prefix += f"⚠️ CRITICAL: Do NOT truncate any text! Every phrase must be rendered in FULL.\n"
@@ -3594,6 +3700,7 @@ def generate_card_images_parallel(prompt, keys, card_title='', subject='', audit
     gen_config = {
         'responseModalities': ['TEXT', 'IMAGE'],
         'temperature': 0.4,
+        'thinkingConfig': {'thinkingBudget': 1024},  # v10.13: 笔画拓扑预思考
     }
 
     # 并行调用所有图片模型
@@ -4547,49 +4654,44 @@ def visual_feedback_audit(image_data, expected_manifest, api_key, all_keys=None,
 def _build_refinement_prompt(visual_audit_result, expected_manifest, subject='', canvas=None):
     """将5层审核矩阵的结果转化为 image-to-image 精修指令。
     
+    v10.13 法则三: 精修 prompt 极简化 — 聚焦修复，减少"大改画面"副作用。
     核心原则:
-    - 保留做得好的 (keep) → DON'T TOUCH
+    - 保留做得好的 (keep) → DON'T TOUCH (精简到1句)
     - 修复致命缺陷 (fatal_flaws) → 最高优先级
     - 文字错误 (text_errors) → 第二优先级
-    - 维度改进 (improvements) → 第三优先级
-    - 最弱维度特别强调
-    - 重新附上完整文字manifest
+    - 不再列出12维评分和视线流分析（减少AI的"重做冲动"）
+    - 附上精简版 manifest
     
     canvas: v10.8 画布配置 dict，默认 None 等效于 3:4。
     """
     fatal_flaws = visual_audit_result.get('fatal_flaws', [])
-    improvements = visual_audit_result.get('improvements', [])
-    keep_list = visual_audit_result.get('keep', [])
     text_errors = visual_audit_result.get('text_errors', [])
-    scores = visual_audit_result.get('scores', {})
+    keep_list = visual_audit_result.get('keep', [])
     total = visual_audit_result.get('total', 0)
-    eye_flow = visual_audit_result.get('eye_flow_path', '')
-    subject_issues = visual_audit_result.get('subject_specific', {})
 
     parts = []
     parts.append(
         f"REFINE this {subject or 'educational'} knowledge card (score: {total}/100).\n"
-        f"You must output an IMPROVED version of this exact image.\n"
+        f"⚠️ IMPORTANT: Only fix the specific issues listed below. Keep everything else IDENTICAL.\n"
+        f"Do NOT change layout, colors, background, or illustration style.\n"
     )
 
-    # 0. 保留不动的优点
+    # 0. 保留不动的优点 — v10.13: 精简到1句总结
     if keep_list:
-        parts.append("═══ DO NOT CHANGE (these are already good) ═══")
-        for k in keep_list[:4]:
-            parts.append(f"  ✅ {k}")
+        parts.append(f"✅ KEEP: {'; '.join(keep_list[:3])}")
         parts.append("")
 
     # 1. 致命缺陷（最高优先）
     if fatal_flaws:
-        parts.append("═══ 🚨 FATAL FLAWS — FIX THESE FIRST ═══")
+        parts.append("🚨 FATAL — FIX FIRST:")
         for ff in fatal_flaws[:3]:
             desc = ff.get('description', str(ff)) if isinstance(ff, dict) else str(ff)
             parts.append(f"  🚨 {desc}")
         parts.append("")
 
-    # 2. 文字修正
+    # 2. 文字修正 — 核心精修内容
     if text_errors:
-        parts.append("═══ 🔴 TEXT CORRECTIONS ═══")
+        parts.append("🔴 TEXT FIX:")
         for te in text_errors[:6]:
             exp = te.get('expected', '?')
             act = te.get('actual', '?')
@@ -4597,75 +4699,38 @@ def _build_refinement_prompt(visual_audit_result, expected_manifest, subject='',
             loc = te.get('location', '')
             loc_str = f" (in {loc})" if loc else ''
             if ttype == 'missing':
-                parts.append(f'  + ADD: "{exp}"{loc_str} — currently not in image')
+                parts.append(f'  + ADD: "{exp}"{loc_str}')
             elif ttype == 'garbled':
-                parts.append(f'  ✏ FIX GARBLED: "{act}" → "{exp}"{loc_str} (correct every stroke)')
+                parts.append(f'  ✏ "{act}" → "{exp}"{loc_str}')
             elif ttype == 'truncated':
-                parts.append(f'  ✏ TRUNCATED: "{act}" → complete it to "{exp}"{loc_str}')
-            elif ttype == 'ghost_text':
-                parts.append(f'  ✏ REMOVE unwanted text: "{act}"{loc_str}')
+                parts.append(f'  ✏ COMPLETE: "{act}" → "{exp}"{loc_str}')
             elif ttype == 'nonsense_cn':
-                parts.append(f'  ✏ NONSENSE CHINESE: "{act}"{loc_str} is AI-generated pseudo-text (每个字都对但拼起来不是人话). Remove it entirely or replace with a real Chinese idiom/phrase.')
+                parts.append(f'  ✏ REMOVE pseudo-Chinese: "{act}"{loc_str}')
             else:
                 parts.append(f'  ✏ "{act}" → "{exp}"{loc_str}')
         parts.append("")
 
-    # 3. 维度改进（已按优先级排序）
-    if improvements:
-        parts.append("═══ 🔧 DIMENSIONAL IMPROVEMENTS ═══")
-        for imp in improvements[:6]:
-            parts.append(f"  → {imp}")
-        parts.append("")
+    # v10.13: 移除了维度改进、学科专属、最弱维度、视线流等冗余信息
+    # 精修只做"点修复"，不做"全面重构"
 
-    # 4. 学科专属修复
-    if subject_issues and subject_issues.get('issues'):
-        parts.append(f"═══ 📐 SUBJECT-SPECIFIC ({subject_issues.get('check', subject)}) ═══")
-        for si in subject_issues['issues'][:3]:
-            parts.append(f"  → {si}")
-        parts.append("")
-
-    # 5. 最弱维度特别叮嘱
-    if scores:
-        worst = sorted(scores.items(), key=lambda x: x[1])[:3]
-        dim_names = {
-            'B_stroke_fidelity': '笔画保真', 'B_text_completeness': '文字完备',
-            'B_typo_system': '排版系统', 'C_color_narrative': '色彩叙事',
-            'C_spatial_rhythm': '空间节奏', 'C_eye_flow': '视线引导',
-            'D_cognitive_load': '认知负荷', 'D_memory_anchor': '记忆锚点',
-            'D_key_emphasis': '重点凸显', 'E_thumb_stop': '拇指急停',
-            'E_screenshot_urge': '截图冲动', 'E_craft_polish': '工艺打磨',
-        }
-        parts.append("═══ ⚠️ WEAKEST DIMENSIONS ═══")
-        for dim, score in worst:
-            name = dim_names.get(dim, dim)
-            # 给出具体建议方向
-            parts.append(f"  ⚠ {name} = {score}/{'12' if 'B1' in dim or dim.endswith('fidelity') else '10' if '9' in str(score) else '9'} — significant room for improvement")
-        parts.append("")
-
-    # 6. 视线流建议
-    if eye_flow:
-        parts.append(f"Current eye flow: {eye_flow}")
-        parts.append("Ideal: Title → Key concept → Example/Steps → Mnemonic/Summary → CTA\n")
-
-    # 7. 完整 manifest 重新附上
+    # 3. 完整 manifest 重新附上 (v10.13: 拆行后附上)
     if expected_manifest:
-        parts.append("═══ 📝 REQUIRED TEXT (render exactly) ═══")
-        for key, val in expected_manifest.items():
+        split_manifest = _split_long_manifest_lines(expected_manifest)
+        parts.append("📝 TEXT (render exactly, ≤20 chars per line):")
+        for key, val in split_manifest.items():
             zone = ('Banner' if key == 'TITLE' else
                     'Accent strip' if key == 'SLOGAN' else
-                    'Content card' if key.startswith('LINE') else 'Bottom')
+                    'Content card' if key.upper().startswith('LINE') else 'Bottom')
             parts.append(f'  {key}: "{val}" → {zone}')
-        parts.append("⚠️ EVERY character must be pixel-perfect. No omissions.\n")
+        parts.append("")
 
     if not canvas:
         canvas = _CANVAS_PRESETS['小红书']
-    canvas_en = _build_canvas_block_en(canvas)
 
     parts.append(
-        "OUTPUT: An improved version of this card image. "
-        f"{canvas['ratio']} {canvas['orientation']} ratio. Same overall color scheme. "
-        "Chinese characters with perfect strokes. "
-        "Fix all issues above while keeping the good parts."
+        f"OUTPUT: Same card, only fix the issues above. "
+        f"{canvas['ratio']} {canvas['orientation']}. Same colors/layout. "
+        f"Perfect Chinese strokes."
     )
 
     return '\n'.join(parts)
@@ -4792,6 +4857,7 @@ def refine_card_image(prev_image_data, refinement_prompt, keys):
     gen_config = {
         'responseModalities': ['TEXT', 'IMAGE'],
         'temperature': 0.3,  # 稳定改进,不要大幅变化
+        'thinkingConfig': {'thinkingBudget': 1024},  # v10.13: 精修前也先理清笔画拓扑
     }
 
     for model in IMAGE_MODELS:
