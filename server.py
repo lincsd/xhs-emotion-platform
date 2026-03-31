@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260331c'  # v10.14: 概念卡图文融合策略(60%示意图+标注式文字)
+BUILD_VERSION = '20260331d'  # v10.15: 图文融合4方向升级(质量稳定+覆盖扩大+视觉升级+并行生成)
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
@@ -3571,6 +3571,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         try:
             from generate_card_images_v3 import (
                 generate_image_prompt, generate_card_image,
+                generate_card_images_parallel,
                 ocr_audit, _build_audit_hint, _try_pil_text_repair,
                 quality_score, AUDIT_PASS_SCORE, MAX_AUDIT_ROUNDS,
                 _typed_quality_score,
@@ -3833,17 +3834,22 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             for round_num in range(1 if not warm_skip_fresh else max_rounds + 1, max_rounds + 1):
                 rounds_used = round_num
 
-                # Step 2: 生成图片
+                # Step 2: 生成图片 (v10.15: 并行 Best-of-N)
                 round_label = f'(round {round_num}/{max_rounds})' if round_num > 1 else ''
-                pipeline_log.append(f'Step2: 生成图片{round_label}...')
-                print(f'[v3] Step2: 生成图片{round_label}...', flush=True)
+                pipeline_log.append(f'Step2: 并行生成图片{round_label}...')
+                print(f'[v3] Step2: 并行生成图片{round_label}...', flush=True)
 
-                img_data, ext, model = generate_card_image(
+                parallel_results = generate_card_images_parallel(
                     prompt, keys, card_title=title, subject=subject,
                     audit_hint=audit_hint, manifest=manifest, canvas=canvas
                 )
-                if model:
+                if parallel_results:
+                    # 取第一个成功的候选(所有候选将在Step3竞争制中比较)
+                    img_data, ext, model = parallel_results[0]
                     used_model = model
+                    pipeline_log.append(f'Step2: {len(parallel_results)}个模型返回候选')
+                else:
+                    img_data, ext, model = None, None, None
                 if not img_data:
                     pipeline_log.append('Step2失败: 图片生成失败')
                     if best_image:
@@ -4262,6 +4268,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             try:
                 from generate_card_images_v3 import (
                     generate_image_prompt, generate_card_image,
+                    generate_card_images_parallel,
                     ocr_audit, _build_audit_hint, _try_pil_text_repair,
                     quality_score, AUDIT_PASS_SCORE, MAX_AUDIT_ROUNDS,
                     _resolve_canvas,
@@ -4520,17 +4527,21 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 
                     rounds_used = round_num
 
-                    # v10.10: 串行生成（pro优先, flash兜底）
-                    _update_progress(f'Step2: AI生图 (round {round_num}/{max_rounds})... [{_elapsed():.0f}s]')
-                    pipeline_log.append(f'Step2: 生成图片 (round {round_num})...')
-                    print(f'[v3-async] Step2: 生成图片 (round {round_num})... [{_elapsed():.0f}s]', flush=True)
+                    # v10.15: 并行 Best-of-N 生成
+                    _update_progress(f'Step2: 并行AI生图 (round {round_num}/{max_rounds})... [{_elapsed():.0f}s]')
+                    pipeline_log.append(f'Step2: 并行生成图片 (round {round_num})...')
+                    print(f'[v3-async] Step2: 并行生成图片 (round {round_num})... [{_elapsed():.0f}s]', flush=True)
 
-                    img_data, ext, model = generate_card_image(
+                    parallel_results = generate_card_images_parallel(
                         prompt, keys, card_title=title, subject=subject,
                         audit_hint=audit_hint, manifest=manifest, canvas=canvas
                     )
-                    if model:
+                    if parallel_results:
+                        img_data, ext, model = parallel_results[0]
                         used_model = model
+                        pipeline_log.append(f'Step2: {len(parallel_results)}个模型返回候选')
+                    else:
+                        img_data, ext, model = None, None, None
                     if not img_data:
                         pipeline_log.append(f'Step2失败: 图片生成失败 ({_elapsed():.0f}s)')
                         if best_image:
