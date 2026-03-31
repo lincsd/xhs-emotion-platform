@@ -155,8 +155,8 @@ IMAGE_GEN_MIN_GAP = 2.0  # 图片请求最小间隔(秒)
 # ── 异步任务队列（解决 Cloudflare 100s 代理超时） ──
 _async_tasks = {}          # {task_id: {status, result, created, updated}}
 _async_tasks_lock = threading.Lock()
-_ASYNC_TASK_TTL = 600      # 任务结果保留10分钟
-_ASYNC_TASK_TIMEOUT = 420  # 后台任务最大运行时间(秒) — v6.5b加宽: 概念卡prompt更复杂
+_ASYNC_TASK_TTL = 900      # 任务结果保留15分钟
+_ASYNC_TASK_TIMEOUT = 600  # v10.16: 420→600s — Gemini API高负载时单次生图可达150s
 
 def _get_next_server_key():
     """轮询获取下一个服务器端 API Key（线程安全）"""

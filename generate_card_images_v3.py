@@ -250,9 +250,9 @@ def gemini_call(model, contents, api_key, gen_config=None, retries=2, all_keys=N
     data = json.dumps(body).encode('utf-8')
 
     # 图片模型给更宽裕的超时（生图较慢），文本模型缩短超时
-    # v6.5b: 150→100s(image), 90→60s(text) — 减少单次超时避免总时间超限
+    # v10.16: 100→150s(image) — Gemini图片模型高负载时响应慢，避免频繁超时
     is_image_model = 'image' in model or 'imagen' in model
-    call_timeout = 100 if is_image_model else 60
+    call_timeout = 150 if is_image_model else 60
 
     total_attempts = len(key_list) * retries
     attempt_num = 0
@@ -274,13 +274,14 @@ def gemini_call(model, contents, api_key, gen_config=None, retries=2, all_keys=N
                     return None
                 if e.code in (429, 503):
                     # 429/503: 换下一个 key（跳出内层循环）
+                    # v10.16: 加大退避 — 503高负载时 3s太短，常导致连续失败
                     if ki < len(key_list) - 1:
                         print(f'      🔄 切换到下一个 API key...')
-                        time.sleep(3)
+                        time.sleep(8)
                         break  # 跳到下一个key
                     else:
-                        # 已经是最后一个key，短暂等待后重试
-                        wait = 5 * (retry + 1)
+                        # 已经是最后一个key，指数退避等待后重试
+                        wait = 10 * (retry + 1)
                         print(f'      ⏳ 所有key均受限, 等待{wait}秒...')
                         time.sleep(wait)
                 elif attempt_num < total_attempts:
@@ -3095,8 +3096,8 @@ def generate_image_prompt_v2(card, subject, grade, semester, api_key, all_keys=N
         # 清理 prompt
         prompt_clean = re.sub(r'\[TEXT_MANIFEST\].*?\[/TEXT_MANIFEST\]', '', text_1b, flags=re.DOTALL).strip()
         
-        # 字数守门员
-        manifest = _enforce_manifest_limits(manifest)
+        # 字数守门员 (v10.16: 传入card_type让实验卡等获得更高字数上限)
+        manifest = _enforce_manifest_limits(manifest, card_type=card_type)
         
         # Skill 审计
         if _HAS_SKILL_SCHEMA:
@@ -3342,8 +3343,8 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
         # 清理 prompt（移除 manifest 标签）
         prompt_clean = re.sub(r'\[TEXT_MANIFEST\].*?\[/TEXT_MANIFEST\]', '', best_text, flags=re.DOTALL).strip()
 
-        # ── 文字量守门员: 检查manifest总汉字数 ──
-        manifest = _enforce_manifest_limits(manifest)
+        # ── 文字量守门员: 检查manifest总汉字数 (v10.16: card_type感知) ──
+        manifest = _enforce_manifest_limits(manifest, card_type=card_type)
 
         # ── Prompt 结构审计: 检查是否覆盖 Skill 规则要求 ──
         if _HAS_SKILL_SCHEMA:
@@ -3469,21 +3470,21 @@ def _count_chinese_chars(text):
     return sum(1 for c in text if '\u4e00' <= c <= '\u9fff')
 
 
-def _enforce_manifest_limits(manifest, max_total=None, max_per_block=None):
+def _enforce_manifest_limits(manifest, max_total=None, max_per_block=None, card_type=''):
     """
     文字量守门员: 强制裁剪 TEXT_MANIFEST 中超标的中文文字。
     
     v10.2: PIL 全量渲染模式下大幅放宽限制。
-    AI 不再渲染文字，PIL 可以精确渲染任意长度的中文。
-    限制仅用于保持卡片视觉简洁，不再受 AI 渲染能力约束。
+    v10.16: 实验卡/对比卡等天然文字多的类型给更高上限(120字)。
     """
-    # v10.2: PIL 全量渲染，大幅放宽限制
-    # AI 不渲染文字 → 不需要严格限制中文字数
-    # 仅保留合理上限防止卡片过于拥挤
+    # v10.16: 根据卡片类型动态调整上限
+    # 实验卡（实验步骤多）、对比卡（双栏文字）、辨析卡 天然需要更多文字
+    _HEAVY_TEXT_TYPES = ('实验卡', '实验', '对比卡', '辨析卡', '比较卡')
+    is_heavy = card_type in _HEAVY_TEXT_TYPES
     if max_total is None:
-        max_total = 80   # v10.2: PIL 可以渲染更多内容
+        max_total = 120 if is_heavy else 80   # v10.16: 重文字卡片120字，其他80字
     if max_per_block is None:
-        max_per_block = 20  # v10.2: 每块允许更多（PIL 自动换行）
+        max_per_block = 25 if is_heavy else 20  # v10.16: 重文字卡片每块25字
     if not manifest:
         return manifest
     
