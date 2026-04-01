@@ -3413,15 +3413,34 @@ def _fix_english_card_title_manifest(manifest, card, subject):
     # 检查: TITLE 是否已有英文
     has_eng = bool(re.search(r'[a-zA-Z]', title_val))
     if has_eng:
-        return manifest  # 已经有英文了，不动
+        # v10.18b: 即使已有英文，仍检查是否是低价值片段 (如 "under the")
+        existing_eng = re.findall(r"[a-zA-Z][a-zA-Z'\s]{1,}", title_val)
+        existing_eng_text = ' '.join(e.strip().lower() for e in existing_eng)
+        LOW_VALUE_ENG = [
+            'under the', 'on the', 'in the', 'at the', 'to the', 'of the',
+            'is a', 'is an', 'is the', 'are the', 'was the', 'were the',
+            'it is', 'they are', 'he is', 'she is',
+        ]
+        is_low_value = any(existing_eng_text.strip() == lv for lv in LOW_VALUE_ENG)
+        if not is_low_value:
+            return manifest  # 已有合理英文，不动
+        # 低价值英文 → 下面会提取更好的并替换
+        print(f'      [title fix] 检测到低价值英文 "{existing_eng_text}" → 尝试替换')
 
     eng_phrase = _extract_best_english_phrase(card)
 
     if eng_phrase:
-        # 中文标题保留前2字 + 英文关键词
+        # 中文标题: 先从已有 title_val 取中文，不够则从 card['title'] 取
         cn_chars = re.findall(r'[\u4e00-\u9fff]', title_val)
-        cn_prefix = ''.join(cn_chars[:2]) if cn_chars else title_val[:2]
-        manifest[title_key] = f'{cn_prefix}{eng_phrase}'
+        if not cn_chars:
+            # title_val 纯英文 (如 "under the")，从卡片原始标题提取中文
+            card_title = card.get('title', '')
+            cn_chars = re.findall(r'[\u4e00-\u9fff]', card_title)
+        cn_prefix = ''.join(cn_chars[:4]) if cn_chars else ''
+        # 避免中文前缀过短或为空
+        if len(cn_prefix) < 2:
+            cn_prefix = '词汇'
+        manifest[title_key] = f'{cn_prefix} {eng_phrase}'
         print(f'      [title fix] "{title_val}" → "{manifest[title_key]}"')
 
     return manifest
@@ -4504,17 +4523,14 @@ def _programmatic_text_check(ocr_result, expected_manifest):
 
 
 def _programmatic_english_phrase_check(ocr_result, expected_manifest):
-    """v10.13: 程序化英文核心短语校验。
+    """v10.13b: 程序化英文核心短语校验（宽松版）。
 
-    解决的问题:
-    - manifest TITLE 被错误提取为 "under the" 而非 "Where is"
-    - OCR 对着错误的 manifest 打100分
-    - 需要校验图片中的英文内容是否合理
-
-    检查逻辑:
-    1. 提取 manifest 中所有含英文的值
-    2. 检查 found_texts 中是否存在对应的英文短语
-    3. 如果英文内容完全缺失，报 eng_missing 错误并降分
+    v10.13 原版对所有 manifest 行的英文都做 -8 扣分导致英语卡审计分暴跌至 0。
+    v10.13b 修正:
+      - TITLE 行英文缺失 → -8/处 (核心，必须准确)
+      - 其他行英文缺失 → 仅记录警告，不扣分
+      - 总扣分上限 -16 (最多影响2处TITLE)
+      - 跳过模板占位符 [Noun]/[Item] 等
     """
     found_texts = ocr_result.get('found_texts', [])
     if not found_texts or not expected_manifest:
@@ -4525,6 +4541,8 @@ def _programmatic_english_phrase_check(ocr_result, expected_manifest):
     existing_types = {(e.get('expected', ''), e.get('type', '')) for e in errors}
     score = ocr_result.get('overall_score', 100)
     added = 0
+    total_deducted = 0
+    MAX_DEDUCT = 16  # 最多扣16分
 
     for mk, mv in expected_manifest.items():
         # 只检查含英文的 manifest 行
@@ -4532,12 +4550,16 @@ def _programmatic_english_phrase_check(ocr_result, expected_manifest):
         if not eng_parts:
             continue
 
+        is_title = 'TITLE' in mk.upper()
+
         for ep in eng_parts:
             ep_clean = ep.strip().lower()
             if len(ep_clean) < 3:
                 continue
+            # 跳过模板占位符
+            if re.search(r'\[.*\]', ep):
+                continue
             # 检查核心英文词是否在 found_texts 中出现
-            # 允许小量差异：拆分为单词检查，至少 50% 的单词匹配
             words = [w for w in ep_clean.split() if len(w) >= 2]
             if not words:
                 continue
@@ -4545,15 +4567,22 @@ def _programmatic_english_phrase_check(ocr_result, expected_manifest):
             ratio = matched / len(words) if words else 0
 
             if ratio < 0.5 and (mv, 'eng_missing') not in existing_types:
-                errors.append({
-                    'expected': mv,
-                    'actual': f'英文"{ep_clean}"未在图片中找到',
-                    'type': 'eng_missing',
-                    'severity': 'medium'
-                })
-                score = max(0, score - 8)
-                added += 1
-                print(f'      [英文补检] 缺失: "{ep_clean}" ← {mk}="{mv}"')
+                if is_title and total_deducted < MAX_DEDUCT:
+                    # TITLE 英文缺失 → 扣分
+                    deduct = min(8, MAX_DEDUCT - total_deducted)
+                    errors.append({
+                        'expected': mv,
+                        'actual': f'英文"{ep_clean}"未在图片中找到',
+                        'type': 'eng_missing',
+                        'severity': 'medium'
+                    })
+                    score = max(0, score - deduct)
+                    total_deducted += deduct
+                    added += 1
+                    print(f'      [英文补检] TITLE缺失: "{ep_clean}" ← {mk}="{mv}" (-{deduct})')
+                elif not is_title:
+                    # 非TITLE行 → 仅警告，不扣分
+                    print(f'      [英文补检] 内容行缺失(不扣分): "{ep_clean}" ← {mk}')
 
     if added > 0:
         ocr_result['errors'] = errors
