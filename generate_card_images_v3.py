@@ -560,9 +560,13 @@ TIP: 小提示(可选) → 渲染到区块D
 ⚠️ 每个 LINE 的中文字数不超过20字！如果内容过长，拆成多行 LINE1/LINE2/LINE3...
 此清单中的文字必须原封不动地渲染到图片对应区域中！
 
-⚠️ 防重复规则：TITLE(Banner标题) 和 LINE1(内容区第一行) 不能是相同的文字！
-   如果 TITLE 是 "Where is...?"，LINE1 绝不能再写 "Where is...?"，应直接展示用法结构。
-   Banner标题 = 知识点名称，内容区 = 教学细节，两者不能重复！
+⚠️⚠️⚠️ 最重要的防重复规则（违反=废卡）：
+   TITLE(Banner标题) 和 LINE1(内容区第一行) 绝对不能是相同或相似的文字！！！
+   如果 TITLE="pay attention to"，LINE1 绝不能写 "Pay Attention To (...)"！
+   LINE1 应该直接写用法结构，如 "to + noun/gerund (prep., NOT infinitive)"
+   Banner标题 = 知识点名称（英文短语），内容区 = 教学细节（用法/例句），两者绝不能重复！
+   ⛔ 典型错误: TITLE="Where is...?" LINE1="Where is...?" → 重复了！
+   ✅ 正确示范: TITLE="Where is...?" LINE1="Ask location: is+单数 / are+复数"
 
 {color_scheme_block}
 
@@ -573,7 +577,11 @@ TIP: 小提示(可选) → 渲染到区块D
 提示词开头必须写:
 "IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the main body with clearly rendered teaching content, (3) a warm colored ACCENT STRIP near the bottom with white slogan text, (4) a small cute mascot in corner. Text must be pixel-perfect: every Chinese character fully formed, every letter correct. ⚠️ Do NOT render any coordinates, percentages, pixel sizes, hex color codes, or layout metadata as visible text in the image! Only render the actual card content text."
 
-⚠️ 防重复二次提醒：TITLE(Banner) 的文字不能和内容区第一行重复！如果TITLE已经写了知识点名称，内容区应直接展示教学内容（用法结构/例句等），不要再写一遍TITLE的文字。
+⚠️⚠️⚠️ 防重复三次提醒（最后警告）：
+回头检查你写的 TEXT_MANIFEST — TITLE 和 LINE1 是不是写了一样的内容？？？
+如果 TITLE 是一个英文短语（如 "pay attention to"），LINE1 里绝不能再出现这个短语！
+LINE1 应该写：用法结构说明（如 "to + noun/gerund, NOT infinitive"）或者直接是第一个例句。
+这是最常犯的错误，请一定检查！
 
 ══════ ⚠️ 文字质量核心要求 ══════
 
@@ -1673,9 +1681,10 @@ def _build_standard_card_layout(eng_key_phrase, cn_meaning):
     """构建标准英语卡（搭配/易混词/单一语法点）的布局指令 — 线性ABCD"""
     return f"""📐 卡片严格4个区块，自上而下，不允许其他内容：
 
-【区块A — 标题】
+【区块A — 标题Banner】
   英文短语/词组本身「{eng_key_phrase}」，大号粗体居中
   下方小字中文释义（{cn_meaning}，≤4中文字）
+  ⚠️ LINE1（内容区第一行）不能重复写「{eng_key_phrase}」！应直接写用法结构说明。
 
 【区块B — 用法拓展】(最重要的教学区！占卡片≥40%面积！)
   ⚠️ 这个区块必须是 **纯文字教学内容**，不是卡通/插图/装饰！
@@ -3387,6 +3396,9 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
         # ── 文字量守门员: 检查manifest总汉字数 (v10.16: card_type感知) ──
         manifest = _enforce_manifest_limits(manifest, card_type=card_type)
 
+        # ── v10.19.1: 防重复守门员: TITLE 和 LINE1 不能重复 ──
+        manifest = _dedup_title_line1(manifest, subject=subject)
+
         # ── Prompt 结构审计: 检查是否覆盖 Skill 规则要求 ──
         if _HAS_SKILL_SCHEMA:
             try:
@@ -3563,6 +3575,113 @@ def _count_chinese_chars(text):
     return sum(1 for c in text if '\u4e00' <= c <= '\u9fff')
 
 
+def _dedup_title_line1(manifest, subject=''):
+    """v10.19.1: 防重复守门员 — 如果 LINE1 以 TITLE 相同的文字开头，自动去除重复部分。
+    
+    常见问题: TITLE="pay attention to"，LINE1="Pay Attention To (是高考高频固定搭)"  
+    → LINE1 以 TITLE 开头，重复了标题内容
+    修复: 去掉 LINE1 中与 TITLE 重复的前缀，只保留教学内容部分
+    """
+    if not manifest:
+        return manifest
+    
+    # 找到 TITLE 和 LINE1
+    title_key, title_val = None, ''
+    line1_key, line1_val = None, ''
+    for k, v in manifest.items():
+        ku = k.upper()
+        if ku == 'TITLE':
+            title_key, title_val = k, v
+        elif ku == 'LINE1':
+            line1_key, line1_val = k, v
+    
+    if not title_key or not line1_key or not title_val or not line1_val:
+        return manifest
+    
+    title_norm = title_val.strip().lower().rstrip('?!.。！？')
+    line1_norm = line1_val.strip().lower()
+    
+    # 检查1: LINE1 完全等于 TITLE
+    if line1_norm.rstrip('?!.。！？') == title_norm:
+        # LINE1 完全重复 TITLE → 替换为通用教学引导
+        if subject == '英语' or subject == 'english':
+            manifest[line1_key] = f'Usage & Examples:'
+        else:
+            manifest[line1_key] = '用法详解:'
+        print(f'      [dedup] LINE1 完全重复TITLE，已替换: "{line1_val}" → "{manifest[line1_key]}"')
+        return manifest
+    
+    # 检查2: LINE1 以 TITLE 开头（含大小写变体）
+    # 如 TITLE="pay attention to" LINE1="Pay Attention To (是高考高频...)"  
+    if line1_norm.startswith(title_norm):
+        remainder = line1_val[len(title_val):].lstrip(' (（,，:：-—')
+        if remainder:
+            # 去掉重复前缀，只保留教学部分
+            # 如果剩余部分太短（<3字），补充结构标注
+            if len(remainder) < 3:
+                remainder = f'Structure & Usage'
+            manifest[line1_key] = remainder
+            print(f'      [dedup] LINE1 去除TITLE重复前缀: "{line1_val}" → "{remainder}"')
+        else:
+            if subject == '英语' or subject == 'english':
+                manifest[line1_key] = 'Structure & Usage'
+            else:
+                manifest[line1_key] = '用法详解'
+            print(f'      [dedup] LINE1 去除TITLE前缀后为空，已替换: "{line1_val}" → "{manifest[line1_key]}"')
+        return manifest
+    
+    # 检查3: TITLE 以 LINE1 开头（反向重复）
+    if title_norm.startswith(line1_norm.rstrip('?!.。！？')):
+        if subject == '英语' or subject == 'english':
+            manifest[line1_key] = 'Structure & Usage'
+        else:
+            manifest[line1_key] = '用法详解'
+        print(f'      [dedup] LINE1 被TITLE包含，已替换: "{line1_val}" → "{manifest[line1_key]}"')
+        return manifest
+    
+    # 检查4: LINE1 和 TITLE 的英文部分高度重合（>80%单词相同）
+    title_words = set(re.findall(r'[a-zA-Z]+', title_val.lower()))
+    line1_words = set(re.findall(r'[a-zA-Z]+', line1_val.lower()))
+    if title_words and line1_words:
+        overlap = len(title_words & line1_words)
+        max_len = max(len(title_words), len(line1_words))
+        if max_len > 0 and overlap / max_len > 0.8:
+            # 高度重合 → 去掉 LINE1 中的重复英文，只保留中文教学部分
+            cn_parts = re.findall(r'[\u4e00-\u9fff]+', line1_val)
+            if cn_parts:
+                manifest[line1_key] = ''.join(cn_parts[:2])  # 保留中文释义
+                print(f'      [dedup] LINE1 英文与TITLE 80%+重合，保留中文: "{line1_val}" → "{manifest[line1_key]}"')
+            else:
+                manifest[line1_key] = 'Structure & Usage'
+                print(f'      [dedup] LINE1 英文与TITLE 80%+重合，已替换: "{line1_val}" → "{manifest[line1_key]}"')
+    
+    # 检查5 (英语卡专属): LINE1 如果是纯中文描述性语句（如"高考高频固定搭配"），
+    # 对英语卡这不是有效教学内容，应替换为英文结构说明
+    if (subject == '英语' or subject == 'english'):
+        line1_cn_count = _count_chinese_chars(manifest.get(line1_key, ''))
+        line1_cur = manifest.get(line1_key, '')
+        has_eng = bool(re.search(r'[a-zA-Z]{2,}', line1_cur))
+        # 如果 LINE1 >= 5个中文且没有英文 → 纯中文描述，替换
+        if line1_cn_count >= 5 and not has_eng:
+            # 从 LINE2+ 中找出含有英文结构的行作为新 LINE1
+            for alt_k in sorted(manifest.keys()):
+                if alt_k.upper().startswith('LINE') and alt_k != line1_key:
+                    alt_v = manifest[alt_k]
+                    if re.search(r'[a-zA-Z]{3,}', alt_v):
+                        # 把这行提升为 LINE1，原 LINE1 的中文描述丢弃
+                        print(f'      [dedup] LINE1 纯中文描述"{line1_cur}" → 提升{alt_k}为LINE1')
+                        manifest[line1_key] = alt_v
+                        # 后续 LINE 往前移
+                        del manifest[alt_k]
+                        break
+            else:
+                # 没找到合适的替代，用通用英文结构标签
+                manifest[line1_key] = 'to + Noun / Gerund (prep.)'
+                print(f'      [dedup] LINE1 纯中文描述"{line1_cur}" → 替换为结构说明')
+    
+    return manifest
+
+
 def _enforce_manifest_limits(manifest, max_total=None, max_per_block=None, card_type=''):
     """
     文字量守门员: 强制裁剪 TEXT_MANIFEST 中超标的中文文字。
@@ -3573,11 +3692,14 @@ def _enforce_manifest_limits(manifest, max_total=None, max_per_block=None, card_
     # v10.16: 根据卡片类型动态调整上限
     # 实验卡（实验步骤多）、对比卡（双栏文字）、辨析卡 天然需要更多文字
     _HEAVY_TEXT_TYPES = ('实验卡', '实验', '对比卡', '辨析卡', '比较卡')
+    _LIGHT_TEXT_TYPES = ('高频活用卡', '搭配卡', '语法辨析卡', '易混词卡', '句型卡', '词汇卡',
+                         '易混词陷阱卡', '语法纠错卡')  # v10.19.1: 英语卡天然英文多中文少
     is_heavy = card_type in _HEAVY_TEXT_TYPES
+    is_light = card_type in _LIGHT_TEXT_TYPES
     if max_total is None:
-        max_total = 70 if is_heavy else 50   # v10.17: 减少AI渲染中文量(120→70/80→50)，符号替代降乱码率
+        max_total = 70 if is_heavy else (35 if is_light else 50)   # v10.19.1: 英语卡收紧到35字
     if max_per_block is None:
-        max_per_block = 16 if is_heavy else 12  # v10.17: 每块字数收紧(25→16/20→12)，单块越短AI越准
+        max_per_block = 16 if is_heavy else (10 if is_light else 12)  # v10.19.1: 英语卡单块≤10中文字
     if not manifest:
         return manifest
     
