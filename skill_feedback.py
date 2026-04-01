@@ -283,6 +283,46 @@ def build_feedback_prompt_hint(card_type: str) -> str:
     )
 
 
+def apply_feedback_overrides(card_type: str, schema_dict: dict) -> dict:
+    """基于生成历史动态覆盖 SkillSchema 参数 (v2.0 反馈闭环)。
+    
+    从 optimizer.db 分析高分/低分结果, 动态调整:
+      - max_chars (如果高分结果普遍字数更少)
+      - forbidden (如果低分结果有反复出现的失败模式)
+      - visual_variants (如果某些变体得分明显更高)
+    
+    Args:
+        card_type: 卡片类型名
+        schema_dict: 可修改的 schema 参数字典
+    
+    Returns:
+        覆盖后的 schema_dict (原地修改)
+    """
+    fb = analyze_card_type(card_type, min_samples=10)
+    if not fb or fb.confidence < 0.4:
+        return schema_dict
+    
+    # 1. 收紧 max_chars (如果高分结果字数更少)
+    if fb.suggested_max_chars and fb.suggested_max_chars > 0:
+        current_max = schema_dict.get('max_chars_overall', 0)
+        if current_max == 0 or fb.suggested_max_chars < current_max:
+            schema_dict['_feedback_max_chars'] = fb.suggested_max_chars
+    
+    # 2. 扩充 forbidden (如果低分有失败模式)
+    if fb.suggested_forbidden:
+        existing = schema_dict.get('forbidden', [])
+        for new_rule in fb.suggested_forbidden:
+            if new_rule not in existing:
+                existing.append(f'[DATA] {new_rule}')
+        schema_dict['forbidden'] = existing
+    
+    # 3. 记录最佳视觉方法 (供 visual_variants 排序)
+    if fb.top_visual_methods:
+        schema_dict['_feedback_best_visuals'] = fb.top_visual_methods[:3]
+    
+    return schema_dict
+
+
 def _safe_json(text: str) -> dict:
     """安全解析 JSON"""
     if not text:

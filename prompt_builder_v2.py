@@ -263,8 +263,19 @@ def build_visual_translation_prompt(content_decision: dict, card_type: str,
         extra_rules += extra_layout_hint
     if schema:
         extra_rules += f'- Visual strategy: {schema.visual_rule_summary}\n'
-        if schema.color_scheme:
+        # v2.0: 结构化配色优先于文本配色
+        if schema.color_config and schema.color_config.primary:
+            extra_rules += '- Color config:\n'
+            for cl in schema.color_config.to_prompt().split('\n'):
+                extra_rules += f'  {cl}\n'
+        elif schema.color_scheme:
             extra_rules += f'- Color scheme: {schema.color_scheme}\n'
+        # v2.0: 视觉语言指令
+        if schema.visual_language:
+            extra_rules += f'- Visual language: {schema.visual_language}\n'
+        # v2.0: 情绪弧线
+        if schema.emotion_design:
+            extra_rules += f'- Emotion arc: {schema.emotion_design}\n'
         if schema.forbidden:
             extra_rules += '- FORBIDDEN:\n'
             for f in schema.forbidden[:3]:

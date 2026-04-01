@@ -372,6 +372,9 @@ def audit_prompt(prompt_text: str, card_type: str, card_data: dict,
     # ── Check 6 (L2): 充分性检查 — 关键内容是否具体而非空泛 ──
     _check_sufficiency(prompt_text, card_data, manifest, result)
 
+    # ── Check 7 (v2.0): 认知负荷上限检查 ──
+    _check_info_chunks(prompt_text, manifest, schema, result)
+
     # ── 计算覆盖率 ──
     result.coverage_pct = (result.passed_checks / max(result.total_checks, 1)) * 100
 
@@ -473,6 +476,45 @@ def _check_forbidden(prompt_lower: str, schema: SkillSchema, card_data: dict, re
                 ))
             else:
                 result.passed_checks += 1
+
+
+# ═══════════════════════════════════════════
+# v2.0: 认知负荷检查
+# ═══════════════════════════════════════════
+
+def _check_info_chunks(prompt_text: str, manifest: dict,
+                        schema: SkillSchema, result: AuditResult):
+    """检查信息量是否超过认知负荷上限。
+    
+    通过统计 manifest 中的文本条目数和 prompt 中的教学要点数来估算
+    信息块数量，若超过 schema.max_info_chunks 则发出警告。
+    """
+    max_chunks = schema.max_info_chunks
+    if max_chunks <= 0:
+        return
+
+    result.total_checks += 1
+
+    # 估算方法 1: manifest 中的条目数
+    chunk_count = 0
+    if manifest:
+        chunk_count = len(manifest)
+
+    # 估算方法 2: prompt 中的 BLOCK 数量 (粗略)
+    block_mentions = len(re.findall(r'BLOCK \d+:', prompt_text, re.IGNORECASE))
+
+    estimated_chunks = max(chunk_count, block_mentions)
+
+    if estimated_chunks > max_chunks + 2:  # 容忍2个缓冲
+        result.issues.append(AuditIssue(
+            category='cognitive_overload',
+            severity='medium',
+            description=f'信息块数 ~{estimated_chunks} 超过认知负荷上限 {max_chunks}',
+            auto_fix=f'REDUCE content to ≤{max_chunks} key information chunks. '
+                     f'Remove lower-priority supplementary information.',
+        ))
+    else:
+        result.passed_checks += 1
 
 
 # ═══════════════════════════════════════════

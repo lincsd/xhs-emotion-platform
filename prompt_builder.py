@@ -12,16 +12,26 @@ Prompt 分段生成引擎 — 将单次 prompt 生成拆为「骨架 + 填充」
     2. 填充基于真实数据 → 不会张冠李戴
     3. 审计器可逐区块检查 → 发现哪里遗漏
 
-版本: 1.0 (2025-06-27)
+  v2.0 增强 (2025-07):
+    - attention_priority: 按注意力层级排序区块
+    - visual_language: 注入独特视觉语言指令
+    - hook_strategy: 3秒钩子策略 (小红书传播)
+    - l1_interference: 中文母语干扰提示
+    - max_info_chunks: 认知负荷上限
+    - visual_variants: 每次随机选一个视觉变体
+    - color_config: 结构化配色 (优先于文本 color_scheme)
+
+版本: 2.0 (2025-07)
 """
 
 from __future__ import annotations
+import random
 import re
 from typing import Optional
 
 from skill_schema import (
     get_skill_schema, match_sub_type,
-    SkillSchema, LayoutBlock, SubType,
+    SkillSchema, LayoutBlock, SubType, ColorConfig,
 )
 
 
@@ -50,18 +60,53 @@ def build_layout_skeleton(card_type: str, card_data: dict, grade: str = '') -> s
     lines = []
     lines.append('=== LAYOUT SKELETON (MUST follow this exact structure) ===')
     lines.append(f'Card Type: {card_type} | Strategy: {schema.core_strategy}')
+
+    # ── v2.0: 视觉语言指令 ──
+    if schema.visual_language:
+        lines.append(f'Visual Language: {schema.visual_language}')
+
+    # ── v2.0: 认知负荷上限 ──
+    lines.append(f'Max info chunks: {schema.max_info_chunks} (DO NOT exceed)')
+
+    # ── v2.0: 视觉变体随机选择 ──
+    if schema.visual_variants:
+        chosen_variant = random.choice(schema.visual_variants)
+        lines.append(f'Visual Variant (use this style): {chosen_variant}')
+
+    # ── v2.0: 情绪弧线 ──
+    if schema.emotion_design:
+        lines.append(f'Emotion Arc: {schema.emotion_design}')
+
+    # ── v2.0: 3秒钩子策略 ──
+    if schema.hook_strategy:
+        lines.append(f'Hook (first 3 seconds): {schema.hook_strategy}')
+
     lines.append('')
+
+    # ── v2.0: 结构化配色 (优先) 或文本配色 ──
+    if schema.color_config and schema.color_config.primary:
+        lines.append('=== COLOR CONFIG ===')
+        lines.append(schema.color_config.to_prompt())
+        lines.append('')
+    elif schema.color_scheme:
+        lines.append(f'Color scheme: {schema.color_scheme}')
+        lines.append('')
+
+    # 按 attention_priority 排序区块 (1=先看, 3=最后看)
+    sorted_blocks = sorted(schema.layout_blocks, key=lambda b: b.attention_priority)
 
     # 计算已分配面积，剩余给中间内容区
     allocated = sum(b.min_area_pct for b in schema.layout_blocks if b.min_area_pct > 0)
     remaining = max(0, 100 - allocated - 25)  # 25% 留白
 
-    for i, block in enumerate(schema.layout_blocks):
+    for i, block in enumerate(sorted_blocks):
         req = 'REQUIRED' if block.required else 'OPTIONAL'
         area = f'{block.min_area_pct}%+' if block.min_area_pct > 0 else 'auto'
         char_limit = f'max {block.max_chars} CN chars' if block.max_chars > 0 else 'visual/numbers'
+        priority_label = {1: '🔴HOOK(eye-catch first)', 2: '🟡CORE', 3: '🟢SUPPLEMENT'}
+        prio = priority_label.get(block.attention_priority, '🟡CORE')
 
-        lines.append(f'BLOCK {i+1}: [{block.name}]')
+        lines.append(f'BLOCK {i+1}: [{block.name}] — {prio}')
         lines.append(f'  Position: {block.placement} | Area: {area} | {req}')
         lines.append(f'  Content: {char_limit}')
         if block.description:
@@ -77,6 +122,18 @@ def build_layout_skeleton(card_type: str, card_data: dict, grade: str = '') -> s
             lines.append(f'  Life Analogy (bubble): "{matched_sub.analogy}"')
         if matched_sub.typical_error:
             lines.append(f'  Error Hint (optional): "⚠️{matched_sub.typical_error}"')
+        # v2.0: 子类型级别的母语干扰
+        if matched_sub.l1_interference:
+            lines.append(f'  ⚠️ L1 Chinese Interference: {matched_sub.l1_interference}')
+        lines.append('')
+
+    # ── v2.0: 母语干扰提示 (schema级别) ──
+    if schema.l1_interference:
+        lines.append('=== L1 INTERFERENCE (Chinese mother tongue) ===')
+        lines.append('Students will make these errors due to Chinese thinking patterns:')
+        for li in schema.l1_interference[:3]:
+            lines.append(f'  ⚠️ {li}')
+        lines.append('→ Design the card to PREVENT these errors, not just teach the rule.')
         lines.append('')
 
     lines.append(f'WHITESPACE: ≥25% of total area')

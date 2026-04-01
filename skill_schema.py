@@ -28,17 +28,46 @@ class LayoutBlock:
     max_chars: int = 0       # 最大中文字数 (0=不限或非文字区)
     required: bool = True    # 是否必需
     description: str = ''    # 对该区块的补充说明
+    attention_priority: int = 2  # 注意力层级: 1=钩子(第一眼) 2=核心(第二眼) 3=补充(最后瞥一眼)
 
 
 @dataclass
 class SubType:
-    """卡片子类型（如方法卡的 口算类、估算类）"""
-    name: str                # 子类型名
+    """卡片子类型 — 按教学策略分类 (非话题分类)"""
+    name: str                # 子类型名 (如"形象联想型", "词根拆解型")
     core_technique: str      # 核心技巧
-    visual_method: str       # 视觉表达方式
+    visual_method: str       # 视觉表达方式 — 每种子类型应产生视觉上完全不同的卡片
     analogy: str = ''        # 推荐生活类比 (≤6字)
     typical_error: str = ''  # 典型易错提示
+    l1_interference: str = ''  # 中文母语干扰模式 (中国学生特有错误)
     examples: list[str] = field(default_factory=list)  # 例题示例
+
+
+@dataclass
+class ColorConfig:
+    """结构化配色方案 — 比文本描述更精确地控制 Gemini 的颜色选择"""
+    primary: str = ''        # 主色 (标题/重点)
+    secondary: str = ''      # 副色 (区块背景)
+    accent: str = ''         # 强调色 (高亮/按钮)
+    error: str = '#FF6B6B'   # 错误色
+    success: str = '#2ED573' # 正确色
+    bg_style: str = 'gradient'  # gradient / solid / pattern / texture
+
+    def to_prompt(self) -> str:
+        """转换为 prompt 注入文本"""
+        parts = []
+        if self.primary:
+            parts.append(f'Primary color (title, key text): {self.primary}')
+        if self.secondary:
+            parts.append(f'Secondary color (block background): {self.secondary}')
+        if self.accent:
+            parts.append(f'Accent color (highlights): {self.accent}')
+        if self.error:
+            parts.append(f'Error/wrong: {self.error}')
+        if self.success:
+            parts.append(f'Correct/right: {self.success}')
+        parts.append(f'Background style: {self.bg_style}')
+        return '\n'.join(parts)
 
 
 @dataclass
@@ -52,8 +81,15 @@ class SkillSchema:
     visual_rule_summary: str        # 一段话视觉策略摘要 (兼容 CARD_TYPE_VISUAL_RULES)
     forbidden: list[str]            # 禁止事项
     required_elements: list[str]    # 必须出现的教学元素名 (供审计器校验)
-    color_scheme: str = ''          # 配色建议
-    emotion_design: str = ''        # 情绪设计 (传播型卡片专属)
+    color_scheme: str = ''          # 配色建议 (文本, 向后兼容)
+    emotion_design: str = ''        # 情绪弧线: "好奇→恍然→想记住"
+    # ── v10.20 新增字段 ──
+    visual_language: str = ''       # 独特视觉语言: "杂志风/漫画分镜/游戏UI/信息图/手账风"
+    hook_strategy: str = ''         # 3秒钩子策略 (小红书传播用): "这个词99%的人读错"
+    max_info_chunks: int = 4        # 认知负荷上限 (工作记忆 3±1): 小学≤3, 初中≤4, 高中≤5
+    l1_interference: list[str] = field(default_factory=list)  # 中文母语干扰提示 (中国学生特有)
+    visual_variants: list[str] = field(default_factory=list)  # 视觉变体池, 每次生成随机选一个
+    color_config: ColorConfig = field(default_factory=ColorConfig)  # 结构化配色 (优先于 color_scheme)
 
 
 # ═══════════════════════════════════════════
