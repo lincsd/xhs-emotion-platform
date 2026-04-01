@@ -3084,6 +3084,7 @@ def generate_image_prompt_v2(card, subject, grade, semester, api_key, all_keys=N
         extra_color_hint=color_hint_v2,
         extra_layout_hint=layout_hint_v2,
         canvas_line=canvas_line_v2,
+        grade=grade,
     )
     
     # 注入反向学习反馈
@@ -3142,7 +3143,7 @@ def generate_image_prompt_v2(card, subject, grade, semester, api_key, all_keys=N
         if _HAS_SKILL_SCHEMA:
             try:
                 prompt_clean, audit_result = audit_and_patch(
-                    prompt_clean, card_type, card, manifest
+                    prompt_clean, card_type, card, manifest, grade
                 )
                 summary = format_audit_summary(audit_result)
                 print(f'      [v2] {summary}')
@@ -3166,7 +3167,7 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
     card_type = card.get('type', '方法卡')
     # 优先使用结构化 Skill Schema 的视觉策略，降级到原始字符串规则
     if _HAS_SKILL_SCHEMA:
-        type_rules = get_visual_strategy(card_type, card) or CARD_TYPE_VISUAL_RULES.get(card_type, CARD_TYPE_VISUAL_RULES['方法卡'])
+        type_rules = get_visual_strategy(card_type, card, grade) or CARD_TYPE_VISUAL_RULES.get(card_type, CARD_TYPE_VISUAL_RULES['方法卡'])
     else:
         type_rules = CARD_TYPE_VISUAL_RULES.get(card_type, CARD_TYPE_VISUAL_RULES['方法卡'])
     is_vert = _detect_vertical_calc(card)
@@ -3403,7 +3404,7 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
         if _HAS_SKILL_SCHEMA:
             try:
                 prompt_clean, audit_result = audit_and_patch(
-                    prompt_clean, card_type, card, manifest
+                    prompt_clean, card_type, card, manifest, grade
                 )
                 summary = format_audit_summary(audit_result)
                 print(f'      {summary}')

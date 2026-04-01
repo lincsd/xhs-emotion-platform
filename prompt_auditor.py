@@ -281,7 +281,7 @@ _BLOCK_KEYWORDS: dict[str, list[str]] = {
 # ═══════════════════════════════════════════
 
 def audit_prompt(prompt_text: str, card_type: str, card_data: dict,
-                  manifest: dict = None) -> AuditResult:
+                  manifest: dict = None, grade: str = '') -> AuditResult:
     """对生成的 prompt 进行结构审计。
     
     Args:
@@ -289,11 +289,12 @@ def audit_prompt(prompt_text: str, card_type: str, card_data: dict,
         card_type: 卡片类型名
         card_data: 原始卡片 JSON 数据
         manifest: TEXT_MANIFEST 字典（可选）
+        grade: 年级名（可选），用于分年级段 Skill 查找
     
     Returns:
         AuditResult 包含覆盖率、问题列表、自动补丁
     """
-    schema = get_skill_schema(card_type)
+    schema = get_skill_schema(card_type, grade)
     if not schema:
         return AuditResult(card_type=card_type, total_checks=0, passed_checks=0,
                            coverage_pct=100.0, verdict='pass')
@@ -700,7 +701,7 @@ def quick_audit(prompt_text: str, card_type: str, card_data: dict,
 
 
 def audit_and_patch(prompt_text: str, card_type: str, card_data: dict,
-                     manifest: dict = None) -> tuple[str, AuditResult]:
+                     manifest: dict = None, grade: str = '') -> tuple[str, AuditResult]:
     """审计并自动补丁 (如需要)。
     
     如果审计发现遗漏且有可用补丁，自动追加到 prompt 末尾。
@@ -708,7 +709,7 @@ def audit_and_patch(prompt_text: str, card_type: str, card_data: dict,
     Returns:
         (patched_prompt, audit_result)
     """
-    result = audit_prompt(prompt_text, card_type, card_data, manifest)
+    result = audit_prompt(prompt_text, card_type, card_data, manifest, grade)
 
     if result.auto_patch and result.verdict in ('warn', 'fail'):
         patched_prompt = prompt_text + '\n' + result.auto_patch

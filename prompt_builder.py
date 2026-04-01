@@ -29,7 +29,7 @@ from skill_schema import (
 # 阶段 A: 布局骨架构建
 # ═══════════════════════════════════════════
 
-def build_layout_skeleton(card_type: str, card_data: dict) -> str:
+def build_layout_skeleton(card_type: str, card_data: dict, grade: str = '') -> str:
     """基于 SkillSchema 构建布局骨架指令。
     
     输出格式: 一段结构化英文 prompt 片段，描述每个区块的位置、面积、约束。
@@ -38,11 +38,12 @@ def build_layout_skeleton(card_type: str, card_data: dict) -> str:
     Args:
         card_type: 卡片类型名
         card_data: 卡片 JSON 数据
+        grade: 年级名（可选），用于分年级段 Skill 查找
     
     Returns:
         布局骨架 prompt 文本 (English)
     """
-    schema = get_skill_schema(card_type)
+    schema = get_skill_schema(card_type, grade)
     if not schema:
         return ''
 
@@ -105,7 +106,7 @@ def build_content_fill(card_type: str, card_data: dict, subject: str,
     Returns:
         内容填充 prompt 文本 (混合中英文)
     """
-    schema = get_skill_schema(card_type)
+    schema = get_skill_schema(card_type, grade)
     
     lines = []
     lines.append('=== CONTENT FILL (map to skeleton blocks above) ===')
@@ -325,14 +326,14 @@ def build_skill_enhanced_prompt(card_type: str, card_data: dict,
     Returns:
         完整的 Skill 增强 prompt 文本
     """
-    skeleton = build_layout_skeleton(card_type, card_data)
+    skeleton = build_layout_skeleton(card_type, card_data, grade)
     content = build_content_fill(card_type, card_data, subject, grade, semester)
 
     if not skeleton:
         # 未注册的卡片类型，返回空（会降级到原有逻辑）
         return ''
 
-    schema = get_skill_schema(card_type)
+    schema = get_skill_schema(card_type, grade)
 
     lines = []
     lines.append('')
@@ -366,13 +367,13 @@ def build_skill_enhanced_prompt(card_type: str, card_data: dict,
 # 工具: 从 card_data 提取视觉策略 (兼容 CARD_TYPE_VISUAL_RULES)
 # ═══════════════════════════════════════════
 
-def get_visual_strategy(card_type: str, card_data: dict = None) -> str:
+def get_visual_strategy(card_type: str, card_data: dict = None, grade: str = '') -> str:
     """获取视觉策略摘要。
     
     优先从 SkillSchema 取，同时融合子类型的视觉方法。
     可作为 CARD_TYPE_VISUAL_RULES 的结构化替代。
     """
-    schema = get_skill_schema(card_type)
+    schema = get_skill_schema(card_type, grade)
     if not schema:
         return ''
 

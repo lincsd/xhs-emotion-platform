@@ -105,7 +105,7 @@ def build_content_decision_prompt(card: dict, card_type: str, subject: str,
     
     输出一段 prompt，让 Gemini 生成结构化的教学内容 JSON。
     """
-    schema = get_skill_schema(card_type)
+    schema = get_skill_schema(card_type, grade)
     title = card.get('title', '')
     definition = card.get('definition', '')[:150]
     memory_tip = card.get('memory_tip', '')
@@ -236,7 +236,8 @@ def build_visual_translation_prompt(content_decision: dict, card_type: str,
                                      subject: str,
                                      extra_color_hint: str = '',
                                      extra_layout_hint: str = '',
-                                     canvas_line: str = '') -> str:
+                                     canvas_line: str = '',
+                                     grade: str = '') -> str:
     """构建 Step 1b 的视觉翻译 prompt。
     
     把 Step 1a 输出的内容 JSON 翻译成图片生成 prompt。
@@ -246,7 +247,7 @@ def build_visual_translation_prompt(content_decision: dict, card_type: str,
         extra_layout_hint: v10.7 布局变体提示（英文）
         canvas_line: v10.8 画布描述行（英文），默认 "Canvas: 3:4 vertical ratio / ≥ 25% whitespace"
     """
-    schema = get_skill_schema(card_type)
+    schema = get_skill_schema(card_type, grade)
     
     if not canvas_line:
         canvas_line = 'Canvas: 3:4 vertical ratio\\n- ≥ 25% whitespace'

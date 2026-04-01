@@ -62,9 +62,50 @@ class SkillSchema:
 
 _SKILL_REGISTRY: dict[str, SkillSchema] = {}
 
+# ── 分年级段 Skill 注册表 ──
+# key = (card_type, grade_level)  grade_level ∈ {'小学','初中','高中'}
+_GRADED_SKILL_REGISTRY: dict[tuple[str, str], SkillSchema] = {}
+
+VALID_GRADE_LEVELS = ('小学', '初中', '高中')
+
+
+def _normalize_grade_level(grade: str) -> str:
+    """把年级名称标准化为学段: 小学/初中/高中。
+    
+    支持输入: "三年级", "七上", "高二下", "初中", "小学" 等。
+    """
+    if not grade:
+        return ''
+    g = grade.strip()
+    # 已经是标准学段
+    if g in VALID_GRADE_LEVELS:
+        return g
+    # 高中
+    if g.startswith('高') or '高中' in g:
+        return '高中'
+    # 初中
+    if any(k in g for k in ('七', '八', '九', '初中')):
+        return '初中'
+    # 小学
+    if any(k in g for k in ('三', '四', '五', '六', '小学', '一', '二')):
+        return '小学'
+    return ''
+
 
 def _register(schema: SkillSchema):
     _SKILL_REGISTRY[schema.card_type] = schema
+    return schema
+
+
+def _register_graded(schema: SkillSchema, grade_level: str):
+    """注册分年级段 Skill Schema。
+    
+    Args:
+        schema: SkillSchema 实例
+        grade_level: '小学' | '初中' | '高中'
+    """
+    assert grade_level in VALID_GRADE_LEVELS, f'Invalid grade_level: {grade_level}'
+    _GRADED_SKILL_REGISTRY[(schema.card_type, grade_level)] = schema
     return schema
 
 
@@ -785,21 +826,37 @@ _register(SkillSchema(
 # 公共 API
 # ═══════════════════════════════════════════
 
-def get_skill_schema(card_type: str) -> SkillSchema | None:
+def get_skill_schema(card_type: str, grade: str = '') -> SkillSchema | None:
     """获取指定卡片类型的 Skill Schema。
     
+    查找优先级:
+      1. _GRADED_SKILL_REGISTRY[(card_type, grade_level)]  — 分年级段精准匹配
+      2. _SKILL_REGISTRY[card_type]                         — 通用 fallback
+    
     Args:
-        card_type: 卡片类型名，如 "方法卡", "概念卡"
+        card_type: 卡片类型名，如 "方法卡", "词汇卡"
+        grade: 年级名（可选），如 "七年级", "高二下", "初中"
     
     Returns:
         SkillSchema 实例，未找到则返回 None
     """
+    if grade:
+        gl = _normalize_grade_level(grade)
+        if gl:
+            graded = _GRADED_SKILL_REGISTRY.get((card_type, gl))
+            if graded:
+                return graded
     return _SKILL_REGISTRY.get(card_type)
 
 
 def get_all_skill_types() -> list[str]:
     """返回所有已注册的 Skill 类型名"""
     return list(_SKILL_REGISTRY.keys())
+
+
+def get_graded_skill_types() -> list[tuple[str, str]]:
+    """返回所有分年级段的 Skill 类型: [(card_type, grade_level), ...]"""
+    return list(_GRADED_SKILL_REGISTRY.keys())
 
 
 def get_layout_checklist(card_type: str) -> list[dict]:
@@ -932,7 +989,7 @@ def match_sub_type(card_type: str, card_data: dict) -> SubType | None:
     return best_match if best_score > 0 else None
 
 
-def build_skill_injection(card_type: str, card_data: dict) -> str:
+def build_skill_injection(card_type: str, card_data: dict, grade: str = '') -> str:
     """构建可注入 prompt 的 Skill 结构化文本。
     
     将 SkillSchema 转换为可直接拼接到 prompt 中的指令文本，
@@ -941,7 +998,7 @@ def build_skill_injection(card_type: str, card_data: dict) -> str:
     Returns:
         格式化的 Skill 注入文本；如果类型不存在返回空字符串
     """
-    schema = get_skill_schema(card_type)
+    schema = get_skill_schema(card_type, grade)
     if not schema:
         return ''
 
@@ -990,6 +1047,15 @@ def build_skill_injection(card_type: str, card_data: dict) -> str:
     return '\n'.join(lines)
 
 
+# ═══════════════════════════════════════════
+# 自动加载分年级段 Skill (英语)
+# ═══════════════════════════════════════════
+try:
+    import skill_schema_english_graded  # noqa: F401  — 注册时有副作用
+except ImportError:
+    pass  # 文件不存在时静默跳过
+
+
 # ── 快速测试 ──
 if __name__ == '__main__':
     print('=== Skill Schema Registry ===')
@@ -1000,6 +1066,16 @@ if __name__ == '__main__':
         print(f'  子类型: {len(schema.sub_types)}')
         print(f'  必须元素: {schema.required_elements}')
         print(f'  禁止: {len(schema.forbidden)} rules')
+
+    # 分年级段
+    graded = get_graded_skill_types()
+    if graded:
+        print(f'\n=== Graded Skill Schemas ({len(graded)}) ===')
+        for ct, gl in sorted(graded):
+            schema = _GRADED_SKILL_REGISTRY[(ct, gl)]
+            print(f'\n  {ct}@{gl}: {schema.teaching_goal}')
+            print(f'    布局: {len(schema.layout_blocks)} blocks, 子类型: {len(schema.sub_types)}')
+
 
     # 测试注入
     test_card = {'title': '口算整十÷一位数', 'definition': '口算除法方法', 'type': '方法卡'}
