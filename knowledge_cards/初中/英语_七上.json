@@ -1,0 +1,3718 @@
+{
+  "subject": "英语",
+  "grade": "七年级",
+  "semester": "上册",
+  "textbook": "人教版",
+  "grade_short": "七上",
+  "units": [
+    {
+      "unit_id": "01",
+      "unit_name": "My name is Gina.",
+      "cards": [
+        {
+          "card_id": "01-01",
+          "full_id": "英语-七上-01-01",
+          "title": "词汇：问候与介绍类单词",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "本单元学习用于日常问候、自我介绍和介绍他人的核心词汇。",
+          "core_points": [
+            "hi /haɪ/: (interj.) 嗨，你好（非正式）",
+            "hello /həˈloʊ/: (interj.) 你好（正式或非正式）",
+            "good /ɡʊd/: (adj.) 好的，愉快的",
+            "morning /ˈmɔːrnɪŋ/: (n.) 早晨，上午",
+            "afternoon /ˌæftərˈnuːn/: (n.) 下午",
+            "evening /ˈiːvnɪŋ/: (n.) 晚上",
+            "night /naɪt/: (n.) 夜晚",
+            "how /haʊ/: (adv.) 怎样，如何",
+            "fine /faɪn/: (adj.) 好的，健康的",
+            "thanks /θæŋks/: (interj.) 谢谢（非正式）",
+            "thank you /θæŋk ju/: (phr.) 谢谢你（正式）",
+            "and /ænd/: (conj.) 和，与",
+            "nice /naɪs/: (adj.) 好的，令人愉快的",
+            "meet /miːt/: (v.) 遇见，认识"
+          ],
+          "why_explanation": "这些词汇是英语交流的基础，用于建立人际关系和表达基本礼仪。'Good'与时间段组合，表示对特定时段的问候。",
+          "example": {
+            "question": "请用所学词汇完成以下对话：A: ____, Li Lei! B: Hello, Han Mei. How ___ you? A: I'm ____, thank ____.",
+            "steps": [
+              "分析对话语境，A是问候，B是回应并询问状况，A是回答状况并致谢。",
+              "第一个空是问候语，可选'Hi'或'Hello'。",
+              "第二个空是询问状况的词，应为'are'，构成'How are you?'。",
+              "第三个空是回答状况的词，应为'fine'。",
+              "第四个空是表示感谢的词，可选'you'或's'，这里搭配'thank'应为'you'。",
+              "组合起来：Hi/Hello, Li Lei! B: Hello, Han Mei. How are you? A: I'm fine, thank you."
+            ],
+            "answer": "A: Hi/Hello, Li Lei! B: Hello, Han Mei. How are you? A: I'm fine, thank you."
+          },
+          "mistakes": [
+            {
+              "wrong": "How are you? I'm good, thanks.",
+              "correct": "How are you? I'm fine, thanks.",
+              "reason": "在回答'How are you?'时，习惯上用'fine'表示身体状况良好，'good'更侧重于心情或事物本身的性质。"
+            },
+            {
+              "wrong": "Good night, Mr. Wang!",
+              "correct": "Good evening, Mr. Wang!",
+              "reason": "'Good night'通常用于睡前道别，而非晚上刚见面时的问候。晚上见面时应说'Good evening'。"
+            }
+          ],
+          "memory_tip": "想象一下，'Hi'像轻轻挥手，'Hello'像更正式的握手。'Good'系列问候语，就像给一天中的不同时段戴上'好'的帽子。",
+          "related": {
+            "prerequisite": "无",
+            "next": "更多日常交际用语"
+          }
+        },
+        {
+          "card_id": "01-02",
+          "full_id": "英语-七上-01-02",
+          "title": "词汇：基本名词与人称称谓",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 4,
+          "definition": "学习描述人物身份和称谓的基本名词及缩写。",
+          "core_points": [
+            "name /neɪm/: (n.) 名字",
+            "boy /bɔɪ/: (n.) 男孩",
+            "girl /ɡɜːrl/: (n.) 女孩",
+            "student /ˈstuːdnt/: (n.) 学生",
+            "teacher /ˈtiːtʃər/: (n.) 老师",
+            "friend /frend/: (n.) 朋友",
+            "Mr. /ˈmɪstər/: (abbr.) 先生（用于成年男子姓氏前）",
+            "Ms. /mɪz/: (abbr.) 女士（用于已婚或未婚女士姓氏前）",
+            "Miss /mɪs/: (n.) 小姐（用于未婚女子姓氏前）"
+          ],
+          "why_explanation": "这些词汇是构成简单句子的基本元素，用于指代或称呼不同的人。Mr., Ms., Miss是英语社会中对人的尊称，体现了礼貌和身份的区分。",
+          "example": {
+            "question": "选择正确的称谓填空：This is my new (boy/girl/Ms./Mr.) teacher, (Mr./Ms./Miss) Li. She is a very kind (boy/girl/student/teacher).",
+            "steps": [
+              "第一空修饰'teacher'，且后面有'Ms. Li'，说明是女性老师，所以不能用'boy'或'girl'，'new'是形容词，后面需要名词，'Ms.'和'Mr.'是称谓，通常放在姓氏前。这里是修饰'teacher'，应是泛指，但题干中'Ms. Li'提示性别，所以这里'teacher'不需要性别修饰词。",
+              "第二空是称谓，'She'提示是女性，所以用'Ms.'或'Miss'，'Ms.'更通用。",
+              "第三空是描述'She'的身份，应为'teacher'。",
+              "重新审视第一空：'This is my new teacher, Ms. Li.' 'new'直接修饰'teacher'即可，不需要额外的称谓词。题目可能有点迷惑性，或者我需要理解为'This is my new teacher, Mr. Li'或者'Ms. Li'。如果我严格按照题干填空，第一空应该填'Mr.'或'Ms.'，但题干中没有'teacher'，是'new (boy/girl/Ms./Mr.) teacher'，这暗示了是选择修饰'teacher'的词。但'Ms./Mr.'是称谓，不直接修饰'teacher'。最好的理解是'This is my new teacher, Ms. Li.'。如果要在括号里选，'Mr.'和'Ms.'是称谓，不是修饰词。这里我更正一下，第一空应是直接填称谓，而不是修饰词。所以是'This is my new teacher, Ms. Li.'。所以题目应该改成 'This is my new teacher, (Mr./Ms./Miss) Li. She is a very kind (boy/girl/student/teacher).'",
+              "根据修改后的题目：'She'提示是女性，所以选择'Ms.'或'Miss'。'Ms.'更常用。",
+              "最后一句'She is a very kind (boy/girl/student/teacher)'，根据'teacher'身份，选'teacher'。",
+              "最终答案为：This is my new teacher, Ms. Li. She is a very kind teacher."
+            ],
+            "answer": "This is my new teacher, Ms. Li. She is a very kind teacher."
+          },
+          "mistakes": [
+            {
+              "wrong": "This is Mr. Lucy.",
+              "correct": "This is Ms. Lucy.",
+              "reason": "Mr.用于男性，Ms.用于女性。Lucy通常是女性名字。"
+            },
+            {
+              "wrong": "My name is student.",
+              "correct": "I am a student. / My name is Li Lei.",
+              "reason": "'student'是身份，不是名字。'My name is'后面跟名字，'I am a'后面跟身份。"
+            }
+          ],
+          "memory_tip": "Mr.是'Mister'（先生）的缩写，Ms.是'Miz'（女士）的缩写，Miss是'Miss'（小姐）。记住'M'开头是称谓，'B'是男孩，'G'是女孩，'S'是学生，'T'是老师，像玩拼字游戏。",
+          "related": {
+            "prerequisite": "无",
+            "next": "名词的单复数"
+          }
+        },
+        {
+          "card_id": "01-03",
+          "full_id": "英语-七上-01-03",
+          "title": "词汇：基本动词与代词",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "学习英语中最基本的动词'be'的变形以及常用的人称代词和物主代词。",
+          "core_points": [
+            "is /ɪz/: (v.) 是（be动词第三人称单数形式）",
+            "am /æm/: (v.) 是（be动词第一人称单数形式）",
+            "are /ɑːr/: (v.) 是（be动词第二人称单数/复数，以及其他人称复数形式）",
+            "I /aɪ/: (pron.) 我（主格）",
+            "you /juː/: (pron.) 你，你们（主格）",
+            "he /hiː/: (pron.) 他（主格）",
+            "she /ʃiː/: (pron.) 她（主格）",
+            "it /ɪt/: (pron.) 它（主格）",
+            "my /maɪ/: (adj.) 我的（形容词性物主代词）",
+            "your /jʊər, jɔːr/: (adj.) 你的，你们的（形容词性物主代词）",
+            "his /hɪz/: (adj.) 他的（形容词性物主代词）",
+            "her /hɜːr/: (adj.) 她的（形容词性物主代词）",
+            "what /wɑːt/: (pron./adj.) 什么（疑问代词/形容词）",
+            "what's /wɑːts/: (abbr.) what is 的缩写"
+          ],
+          "why_explanation": "be动词是英语中最核心的动词，表示“是”或“存在”，它的变形取决于主语的人称和数。人称代词是句子的主语，物主代词则表示所属关系，两者是构成基本句子的骨架。",
+          "example": {
+            "question": "用适当的be动词和代词填空：1. ____ am a student. 2. What ____ her name? ____ name is Lucy. 3. ____ are my friends.",
+            "steps": [
+              "1. 'am'是第一人称单数be动词，主语应是'I'。",
+              "2. 'her name'是第三人称单数，be动词应是'is'。回答时，'name'是第三人称单数，所以用'Her name'。",
+              "3. 'are'是复数be动词，主语可以是'You'或'They'。这里可以填'You'或'They'，或者'We'。根据语境，填'You'或'They'均可，这里选择'You'更常用。",
+              "检查：1. I am a student. 2. What is her name? Her name is Lucy. 3. You are my friends."
+            ],
+            "answer": "1. I am a student. 2. What is her name? Her name is Lucy. 3. You are my friends."
+          },
+          "mistakes": [
+            {
+              "wrong": "He am a boy.",
+              "correct": "He is a boy.",
+              "reason": "主语'He'是第三人称单数，be动词应使用'is'，而非'am'（第一人称单数）。"
+            },
+            {
+              "wrong": "My is Tom.",
+              "correct": "My name is Tom. / I am Tom.",
+              "reason": "'My'是形容词性物主代词，后面必须跟名词。不能单独作主语。"
+            },
+            {
+              "wrong": "What your name?",
+              "correct": "What's your name?",
+              "reason": "疑问句中缺少be动词，'what's'是'what is'的缩写。"
+            }
+          ],
+          "memory_tip": "I跟'am'，You跟'are'，He/She/It跟'is'，复数都跟'are'。主格代词是句子的'头'，物主代词是名词的'帽子'。",
+          "related": {
+            "prerequisite": "无",
+            "next": "be动词的否定句和疑问句"
+          }
+        },
+        {
+          "card_id": "01-04",
+          "full_id": "英语-七上-01-04",
+          "title": "语法：be动词的构成与用法",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "be动词（am, is, are）是英语中最基本的动词，表示“是”、“存在”或“位于”。",
+          "core_points": [
+            "**构成**：be动词根据主语的人称和数进行变化。",
+            "  - 第一人称单数 (I) → am (I'm)",
+            "  - 第二人称单数/复数 (You) → are (You're)",
+            "  - 第三人称单数 (He, She, It) → is (He's, She's, It's)",
+            "  - 第一/二/三人称复数 (We, You, They) → are (We're, You're, They're)",
+            "**用法**：",
+            "  - 表示身份、职业：I am a student. She is a teacher.",
+            "  - 表示性质、状态：He is happy. It is good.",
+            "  - 表示地点：My book is on the desk. They are at school.",
+            "  - 构成时态（进行时、被动语态等，后续学习）。",
+            "**肯定句**：主语 + be动词 + 表语/宾语。",
+            "  - I am Tom. (I'm Tom.)",
+            "  - You are a boy. (You're a boy.)",
+            "  - He is Peter. (He's Peter.)",
+            "**否定句**：主语 + be动词 + not + 表语/宾语。",
+            "  - I am not Tom. (I'm not Tom.)",
+            "  - You are not a girl. (You aren't a girl.)",
+            "  - She is not Mary. (She isn't Mary.)",
+            "**一般疑问句**：Be动词 + 主语 + 表语/宾语？",
+            "  - Am I right? (Yes, you are. / No, you aren't.)",
+            "  - Are you a student? (Yes, I am. / No, I'm not.)",
+            "  - Is he your friend? (Yes, he is. / No, he isn't.)",
+            "**特殊疑问句**：疑问词 + be动词 + 主语 + (其他成分)？",
+            "  - What is your name? (My name is Li Lei.)",
+            "  - Who is he? (He is my brother.)",
+            "  - Where is my book? (It is on the desk.)"
+          ],
+          "why_explanation": "be动词的变化是为了与主语在人称和数上保持一致，这体现了英语动词的屈折变化特点。它作为系动词，连接主语和表语，构成主系表结构，是描述主语属性或状态的基本方式。在否定和疑问句中，be动词直接参与结构变化，无需助动词。",
+          "example": {
+            "question": "将句子'She is a teacher.'改为否定句和一般疑问句，并作肯定和否定回答。",
+            "steps": [
+              "**否定句**：在be动词'is'后加'not'。She is not a teacher. (She isn't a teacher.)",
+              "**一般疑问句**：将be动词'is'提前到主语'She'之前。Is she a teacher?",
+              "**肯定回答**：Yes, she is.",
+              "**否定回答**：No, she isn't."
+            ],
+            "answer": "否定句: She is not a teacher. / She isn't a teacher.\n一般疑问句: Is she a teacher?\n肯定回答: Yes, she is.\n否定回答: No, she isn't."
+          },
+          "mistakes": [
+            {
+              "wrong": "He not a student.",
+              "correct": "He is not a student. / He isn't a student.",
+              "reason": "否定句中，be动词不能省略，'not'必须跟在be动词之后。"
+            },
+            {
+              "wrong": "Are you a teacher? Yes, I am a teacher.",
+              "correct": "Are you a teacher? Yes, I am.",
+              "reason": "简略回答中，be动词后不再重复表语成分。"
+            },
+            {
+              "wrong": "Is he a boy? No, he isn't a boy.",
+              "correct": "Is he a boy? No, he isn't.",
+              "reason": "简略回答中，be动词后不再重复表语成分。"
+            }
+          ],
+          "memory_tip": "be动词像一个变色龙，跟着主语变身 (am, is, are)。记住'not'是它的影子，疑问句时它会跳到句首领路。",
+          "related": {
+            "prerequisite": "人称代词",
+            "next": "一般现在时（实义动词）"
+          }
+        },
+        {
+          "card_id": "01-05",
+          "full_id": "英语-七上-01-05",
+          "title": "语法：冠词 a/an 的用法",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "a/an 是不定冠词，用于修饰单数可数名词，表示“一个”或泛指。",
+          "core_points": [
+            "**用法**：",
+            "  - a 用于以辅音音素开头的单数可数名词前。",
+            "    - 例如：a boy, a teacher, a book, a university (注意：'university'尽管以元音字母u开头，但发音是/juː/，是辅音音素)。",
+            "  - an 用于以元音音素开头的单数可数名词前。",
+            "    - 例如：an apple, an orange, an hour (注意：'hour'尽管以辅音字母h开头，但发音是/aʊər/，是元音音素)。",
+            "**强调音素而非字母**：判断使用a还是an的关键是单词的**第一个音素**，而不是第一个字母。",
+            "**泛指**：表示某类事物中的“一个”，不特指某一个。",
+            "  - I am a student. (我是学生中的一员)",
+            "**不可数名词和复数名词前不使用不定冠词**：",
+            "  - 例如：water (不可数), books (复数可数)。"
+          ],
+          "why_explanation": "不定冠词a/an的区分是为了发音的流畅性。在元音音素前使用'an'，可以避免两个元音音素连读时的不适，使语言更自然。这与汉语中避免声母韵母搭配不协调有异曲同工之妙。",
+          "example": {
+            "question": "为下列单词选择正确的冠词 (a/an)：1. ____ apple 2. ____ book 3. ____ hour 4. ____ university",
+            "steps": [
+              "1. 'apple'以元音音素/æ/开头，用'an'。",
+              "2. 'book'以辅音音素/b/开头，用'a'。",
+              "3. 'hour'以元音音素/aʊər/开头 (h不发音)，用'an'。",
+              "4. 'university'以辅音音素/juː/开头，用'a'。",
+              "检查：an apple, a book, an hour, a university."
+            ],
+            "answer": "1. an apple 2. a book 3. an hour 4. a university"
+          },
+          "mistakes": [
+            {
+              "wrong": "I have a orange.",
+              "correct": "I have an orange.",
+              "reason": "'orange'的第一个音素是元音/ɔː/，应使用'an'。"
+            },
+            {
+              "wrong": "He is an boy.",
+              "correct": "He is a boy.",
+              "reason": "'boy'的第一个音素是辅音/b/，应使用'a'。"
+            },
+            {
+              "wrong": "She is a English teacher.",
+              "correct": "She is an English teacher.",
+              "reason": "'English'的第一个音素是元音/ɪ/，应使用'an'。"
+            }
+          ],
+          "memory_tip": "记住口诀：'元音字母发音前，an来相伴不孤单；辅音字母发音前，a君独行很自然。' 关键是**发音**，不是字母！",
+          "related": {
+            "prerequisite": "单数可数名词的概念",
+            "next": "定冠词 the 的用法"
+          }
+        },
+        {
+          "card_id": "01-06",
+          "full_id": "英语-七上-01-06",
+          "title": "句型：自我介绍与询问姓名",
+          "type": "句型卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "学习如何进行自我介绍和询问他人姓名。",
+          "core_points": [
+            "**询问姓名**：",
+            "  - What's your name? (你叫什么名字？)",
+            "  - What is your name? (完整形式)",
+            "  - What's his name? (他叫什么名字？)",
+            "  - What's her name? (她叫什么名字？)",
+            "**自我介绍/回答姓名**：",
+            "  - My name is + [姓名]. (我叫...)",
+            "  - I'm + [姓名]. (我是...)",
+            "  - His name is + [姓名]. (他叫...)",
+            "  - Her name is + [姓名]. (她叫...)",
+            "**介绍他人**：",
+            "  - This is + [姓名]. (这是...)"
+          ],
+          "why_explanation": "这些句型是社交场合的开场白。使用'What's your name?'是标准问法，而'My name is...'或'I'm...'是标准回答。通过学习这些固定句型，可以快速掌握基本的交际能力。",
+          "example": {
+            "question": "补全对话：A: Hello! ____ your name? B: My name ____ Li Lei. A: ____ is Han Mei. B: Nice ____ meet you, Han Mei.",
+            "steps": [
+              "A在问候后询问姓名，应填'What's'。",
+              "B回答姓名，'My name'后跟be动词'is'。",
+              "A介绍Han Mei，用'This'。",
+              "B回应'Nice to meet you'，缺少'to'。",
+              "检查：A: Hello! What's your name? B: My name is Li Lei. A: This is Han Mei. B: Nice to meet you, Han Mei."
+            ],
+            "answer": "A: Hello! What's your name? B: My name is Li Lei. A: This is Han Mei. B: Nice to meet you, Han Mei."
+          },
+          "mistakes": [
+            {
+              "wrong": "What your name?",
+              "correct": "What's your name?",
+              "reason": "'What's'是'What is'的缩写，不能省略be动词。"
+            },
+            {
+              "wrong": "My is Tom.",
+              "correct": "My name is Tom.",
+              "reason": "'My'是物主代词，后面需跟名词，不能直接作主语或表语。"
+            }
+          ],
+          "memory_tip": "记住'What's'是问名字的'口头禅'，'My name is'是回答名字的'标准句'。就像玩角色扮演，一问一答。",
+          "related": {
+            "prerequisite": "be动词，人称代词，物主代词",
+            "next": "询问职业/身份"
+          }
+        },
+        {
+          "card_id": "01-07",
+          "full_id": "英语-七上-01-07",
+          "title": "句型：问候与回应",
+          "type": "句型卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "学习如何问候他人健康状况并进行回应。",
+          "core_points": [
+            "**问候健康**：",
+            "  - How are you? (你好吗？)",
+            "  - How is he? (他好吗？)",
+            "  - How is she? (她好吗？)",
+            "**回应健康状况**：",
+            "  - I'm fine, thank you. / I'm fine, thanks. (我很好，谢谢你/谢谢)",
+            "  - He's fine, thanks. (他很好，谢谢)",
+            "  - She's fine, thank you. (她很好，谢谢你)",
+            "**其他问候与回应**：",
+            "  - Nice to meet you. (很高兴认识你。)",
+            "  - Nice to meet you, too. (我也很高兴认识你。)"
+          ],
+          "why_explanation": "'How are you?'是英语中最常见的问候语之一，用于询问对方的身体状况或精神状态。'Fine'是最常见的积极回应。'Nice to meet you'是初次见面表达友好的常用语，'too'表示“也”，用于回应对方的友好。",
+          "example": {
+            "question": "补全对话：A: Hello, Tom! How ____ you? B: I'm ____, thank ____. Nice to meet you! A: Nice to meet you, ____.",
+            "steps": [
+              "A问候'How'后，主语是'you'，be动词应为'are'。",
+              "B回应'I'm'后，状况词应为'fine'。",
+              "B接着感谢，应为'you'或's'，这里用'you'。",
+              "A回应'Nice to meet you'后，表示“也”，应为'too'。",
+              "检查：A: Hello, Tom! How are you? B: I'm fine, thank you. Nice to meet you! A: Nice to meet you, too."
+            ],
+            "answer": "A: Hello, Tom! How are you? B: I'm fine, thank you. Nice to meet you! A: Nice to meet you, too."
+          },
+          "mistakes": [
+            {
+              "wrong": "How you?",
+              "correct": "How are you?",
+              "reason": "疑问句中缺少be动词，'how'不能单独构成疑问。"
+            },
+            {
+              "wrong": "I'm good, thank you.",
+              "correct": "I'm fine, thank you.",
+              "reason": "在回答'How are you?'时，习惯上用'fine'表示身体状况良好，'good'更侧重于心情或事物本身的性质。"
+            }
+          ],
+          "memory_tip": "'How are you?'就像一个问号伸出两只手，期待你的回答。'Fine, thank you'是标准的礼貌回复，就像微笑着点点头。",
+          "related": {
+            "prerequisite": "be动词，人称代词",
+            "next": "询问年龄"
+          }
+        },
+        {
+          "card_id": "01-08",
+          "full_id": "英语-七上-01-08",
+          "title": "易混词卡：人称代词 vs. 形容词性物主代词",
+          "type": "易混词卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "区分人称代词（作主语）和形容词性物主代词（修饰名词，表示所属）。",
+          "core_points": [
+            "**人称代词主格**：在句中作主语，表示“谁”或“什么”。",
+            "  - I (我), You (你/你们), He (他), She (她), It (它), We (我们), They (他们/她们/它们)",
+            "  - 例：**I** am a student. **He** is my friend.",
+            "**形容词性物主代词**：放在名词前，表示“谁的”或“什么（的）”，起形容词作用。",
+            "  - My (我的), Your (你的/你们的), His (他的), Her (她的), Its (它的), Our (我们的), Their (他们的/她们的/它们的)",
+            "  - 例：**My** name is Tom. What's **her** name?",
+            "**关键区别**：人称代词可以独立使用作主语；形容词性物主代词必须与名词连用，不能单独存在。"
+          ],
+          "why_explanation": "英语中主语和表示所属的词是不同的词类，有不同的语法功能。人称代词是句子的核心，而物主代词是修饰核心的附加信息。理解这种功能上的区分，能避免将'I'与'My'混淆使用。",
+          "example": {
+            "question": "选择正确的词填空：1. ____ am a teacher. 2. ____ name is Lucy. 3. ____ is a boy. ____ name is Tom. 4. What's ____ name? ____ name is Gina.",
+            "steps": [
+              "1. 'am'对应主语'I'。",
+              "2. 'name'前需要物主代词，且是回答姓名，所以是'My'。",
+              "3. 'is a boy'，主语是第三人称单数，用'He'。接着是'name is Tom'，需要物主代词，与'He'对应的是'His'。",
+              "4. 'What's ____ name?' 询问对方姓名，用'your'。回答'____ name is Gina.'，用'My'。",
+              "检查：1. I am a teacher. 2. My name is Lucy. 3. He is a boy. His name is Tom. 4. What's your name? My name is Gina."
+            ],
+            "answer": "1. I am a teacher. 2. My name is Lucy. 3. He is a boy. His name is Tom. 4. What's your name? My name is Gina."
+          },
+          "mistakes": [
+            {
+              "wrong": "My am a student.",
+              "correct": "I am a student.",
+              "reason": "'My'是物主代词，不能作主语。主语应是人称代词'I'。"
+            },
+            {
+              "wrong": "She name is Mary.",
+              "correct": "Her name is Mary.",
+              "reason": "'She'是人称代词，不能修饰名词。修饰名词'name'应使用形容词性物主代词'Her'。"
+            },
+            {
+              "wrong": "His is a boy.",
+              "correct": "He is a boy.",
+              "reason": "'His'是物主代词，不能作主语。主语应是人称代词'He'。"
+            }
+          ],
+          "memory_tip": "'I'是独立个体，'My'是'I'的附属品。主格代词像句子的'国王'，物主代词像国王的'印章'，总要盖在东西上。",
+          "related": {
+            "prerequisite": "人称代词，be动词",
+            "next": "物主代词（名词性）"
+          }
+        },
+        {
+          "card_id": "01-09",
+          "full_id": "英语-七上-01-09",
+          "title": "语音卡：字母组合 Mm, Nn, Hh, Ww 的发音",
+          "type": "语音卡",
+          "difficulty": 1,
+          "importance": 3,
+          "definition": "学习字母Mm, Nn, Hh, Ww在单词中的常见发音。",
+          "core_points": [
+            "**Mm** /m/: 发音为双唇紧闭，气流从鼻腔发出，声带振动。像中文的“摸”。",
+            "  - 例词：**m**y, na**m**e, **m**orning, **m**eet",
+            "**Nn** /n/: 发音为舌尖抵住上齿龈，气流从鼻腔发出，声带振动。像中文的“呢”。",
+            "  - 例词：**n**ame, **n**ice, **n**ight, fi**n**e",
+            "**Hh** /h/: 发音为气流从喉部摩擦而出，声带不振动。像中文的“喝”。",
+            "  - 例词：**h**i, **h**ello, **h**ow, **h**is, **h**er",
+            "**Ww** /w/: 发音为双唇收圆向前突出，舌后部抬高，声带振动。像中文的“乌”。",
+            "  - 例词：**w**hat, **w**e"
+          ],
+          "why_explanation": "掌握这些基本辅音的发音是正确拼读和听懂英语单词的基础。正确的发音能帮助学生建立语音意识，为后续学习更复杂的发音规则打下基础。",
+          "example": {
+            "question": "听单词，判断开头字母的发音是否正确：1. name (/n/); 2. my (/m/); 3. how (/h/); 4. what (/w/); 5. night (/m/)",
+            "steps": [
+              "1. name: /neɪm/，开头是/n/，正确。",
+              "2. my: /maɪ/，开头是/m/，正确。",
+              "3. how: /haʊ/，开头是/h/，正确。",
+              "4. what: /wɑːt/，开头是/w/，正确。",
+              "5. night: /naɪt/，开头是/n/，而非/m/，错误。",
+              "检查：1.正确 2.正确 3.正确 4.正确 5.错误"
+            ],
+            "answer": "1. 正确 2. 正确 3. 正确 4. 正确 5. 错误"
+          },
+          "mistakes": [
+            {
+              "wrong": "将'name'发成 /m/ 的音。",
+              "correct": "/neɪm/",
+              "reason": "'n'和'm'都是鼻音，但发音部位不同，'n'是舌尖音，'m'是双唇音。混淆会导致发音不准。"
+            },
+            {
+              "wrong": "将'hour'中的'h'发音。",
+              "correct": "/aʊər/",
+              "reason": "单词'hour'中的'h'不发音，是哑音。学生容易受字母拼写影响而误读。"
+            }
+          ],
+          "memory_tip": "Mm像嘴巴抿起来发'嗯'；Nn像舌尖顶上颚发'嗯'；Hh像哈气；Ww像吹口哨嘟嘴巴。",
+          "related": {
+            "prerequisite": "无",
+            "next": "更多辅音发音规则"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "02",
+      "unit_name": "Is this your pencil?",
+      "cards": [
+        {
+          "card_id": "02-01",
+          "full_id": "英语-七上-02-01",
+          "title": "词汇：学习用品类单词",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "本单元学习用于描述和指代各种学习用品的词汇。",
+          "core_points": [
+            "pencil /ˈpensl/: (n.) 铅笔",
+            "pen /pen/: (n.) 钢笔，圆珠笔",
+            "book /bʊk/: (n.) 书",
+            "eraser /ɪˈreɪsər/: (n.) 橡皮",
+            "ruler /ˈruːlər/: (n.) 尺子",
+            "pencil case /ˈpensl keɪs/: (n.) 铅笔盒",
+            "backpack /ˈbækpæk/: (n.) 背包",
+            "dictionary /ˈdɪkʃəneri/: (n.) 词典",
+            "key /kiː/: (n.) 钥匙",
+            "watch /wɑːtʃ/: (n.) 手表",
+            "ID card /ˌaɪ ˈdiː kɑːrd/: (n.) 身份证",
+            "notebook /ˈnoʊtbʊk/: (n.) 笔记本"
+          ],
+          "why_explanation": "这些词汇是日常学习生活中最常用的物品名称，掌握它们能帮助学生描述自己的学习环境和物品，进行基本交流。",
+          "example": {
+            "question": "根据图片提示（假设有铅笔、书包、尺子、橡皮的图片），写出对应的英文单词。",
+            "steps": [
+              "识别第一张图是铅笔，对应'pencil'。",
+              "识别第二张图是书包，对应'backpack'。",
+              "识别第三张图是尺子，对应'ruler'。",
+              "识别第四张图是橡皮，对应'eraser'。",
+              "检查：pencil, backpack, ruler, eraser."
+            ],
+            "answer": "pencil, backpack, ruler, eraser"
+          },
+          "mistakes": [
+            {
+              "wrong": "My pencil is a book.",
+              "correct": "This is a book. / My pencil is in the pencil case.",
+              "reason": "混淆了物品的名称和属性，将'pencil'和'book'混用。"
+            },
+            {
+              "wrong": "I have a pen book.",
+              "correct": "I have a pen and a book. / I have a notebook.",
+              "reason": "错误地将两个名词连用，如果不是复合词，需要用'and'连接或选择正确的复合词。"
+            }
+          ],
+          "memory_tip": "把这些词想象成你的学习伙伴：pencil是'笔'，backpack是'背'在'包'上，ruler是'rule'（规则）的'尺'，eraser是'erase'（擦除）的'工具'。",
+          "related": {
+            "prerequisite": "a/an 冠词",
+            "next": "名词复数"
+          }
+        },
+        {
+          "card_id": "02-02",
+          "full_id": "英语-七上-02-02",
+          "title": "词汇：颜色类单词",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 4,
+          "definition": "本单元学习描述物体颜色的基本词汇。",
+          "core_points": [
+            "red /red/: (adj.) 红色的",
+            "yellow /ˈjeloʊ/: (adj.) 黄色的",
+            "green /ɡriːn/: (adj.) 绿色的",
+            "blue /bluː/: (adj.) 蓝色的",
+            "black /blæk/: (adj.) 黑色的",
+            "white /waɪt/: (adj.) 白色的",
+            "pink /pɪŋk/: (adj.) 粉红色的",
+            "purple /ˈpɜːrpl/: (adj.) 紫色的",
+            "orange /ˈɔːrɪndʒ/: (adj.) 橙色的 (n.) 橘子",
+            "brown /braʊn/: (adj.) 棕色的"
+          ],
+          "why_explanation": "颜色词是描述事物特征的基本形容词，掌握它们可以使语言表达更丰富，能更准确地指代物品。",
+          "example": {
+            "question": "用所学颜色词描述以下物品（假设有红色的铅笔、蓝色的书包、黄色的尺子图片）：1. A ____ pencil. 2. A ____ backpack. 3. A ____ ruler.",
+            "steps": [
+              "1. 红色铅笔，填'red'。",
+              "2. 蓝色书包，填'blue'。",
+              "3. 黄色尺子，填'yellow'。",
+              "检查：1. A red pencil. 2. A blue backpack. 3. A yellow ruler."
+            ],
+            "answer": "1. A red pencil. 2. A blue backpack. 3. A yellow ruler."
+          },
+          "mistakes": [
+            {
+              "wrong": "My pencil is red color.",
+              "correct": "My pencil is red. / My pencil is red in color.",
+              "reason": "'Red'本身就是形容词，表示“红色的”，不需要再加'color'。若要用'color'，应说'red in color'。"
+            },
+            {
+              "wrong": "I like blue.",
+              "correct": "I like blue. / I like the blue one.",
+              "reason": "'Blue'作为名词表示“蓝色”，或作为形容词修饰名词。直接说'I like blue'可以，但如果指某个蓝色的东西，可以加'one'。"
+            }
+          ],
+          "memory_tip": "想象彩虹的颜色，或者把每种颜色和一种熟悉的物品联系起来：red apple, yellow banana, green grass, blue sky。",
+          "related": {
+            "prerequisite": "形容词的基本概念",
+            "next": "形容词修饰名词的顺序"
+          }
+        },
+        {
+          "card_id": "02-03",
+          "full_id": "英语-七上-02-03",
+          "title": "语法：指示代词 this/that/these/those 的用法",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "指示代词用于指代人或物，并指示其与说话者的距离（近或远）和数量（单数或复数）。",
+          "core_points": [
+            "**this** (这，这个)：指代近处的单数人或物。",
+            "  - 例：**This** is my pencil. (这是我的铅笔。)",
+            "**that** (那，那个)：指代远处的单数人或物。",
+            "  - 例：**That** is your book. (那是你的书。)",
+            "**these** (这些)：指代近处的复数人或物。",
+            "  - 例：**These** are my keys. (这些是我的钥匙。)",
+            "**those** (那些)：指代远处的复数人或物。",
+            "  - 例：**Those** are your friends. (那些是你的朋友。)",
+            "**搭配**：",
+            "  - this/that 搭配 is (be动词单数形式)",
+            "  - these/those 搭配 are (be动词复数形式)",
+            "**肯定句**：This/That is + (a/an) + 名词单数. / These/Those are + 名词复数.",
+            "  - This is a pen. Those are books.",
+            "**否定句**：This/That is not + (a/an) + 名词单数. / These/Those are not + 名词复数.",
+            "  - That isn't my book. These aren't my keys.",
+            "**一般疑问句**：Is this/that + (a/an) + 名词单数? / Are these/those + 名词复数?",
+            "  - Is this your pencil? (Yes, it is. / No, it isn't.)",
+            "  - Are those your friends? (Yes, they are. / No, they aren't.)",
+            "**特殊疑问句**：What is this/that? / What are these/those?",
+            "  - What is this? (It's a book.)",
+            "  - What are these? (They're keys.)"
+          ],
+          "why_explanation": "指示代词帮助我们精确地指明所谈论的对象，通过距离和数量的区分，使交流更清晰。它们与be动词的单复数变化保持一致，体现了主谓一致原则。",
+          "example": {
+            "question": "将句子'That is my book.'改为否定句和一般疑问句，并作肯定和否定回答。再将'This is a pen.'改为复数形式。",
+            "steps": [
+              "**'That is my book.'**",
+              "  - 否定句：That is not my book. / That isn't my book.",
+              "  - 一般疑问句：Is that your book?",
+              "  - 肯定回答：Yes, it is.",
+              "  - 否定回答：No, it isn't.",
+              "**'This is a pen.'改为复数形式**：",
+              "  - 'This'的复数是'These'。",
+              "  - 'is'的复数是'are'。",
+              "  - 'a pen'的复数是'pens'。",
+              "  - 组合：These are pens."
+            ],
+            "answer": "否定句: That is not my book. / That isn't my book.\n一般疑问句: Is that your book?\n肯定回答: Yes, it is.\n否定回答: No, it isn't.\n复数形式: These are pens."
+          },
+          "mistakes": [
+            {
+              "wrong": "These is my books.",
+              "correct": "These are my books.",
+              "reason": "'These'是复数指示代词，应搭配复数be动词'are'。"
+            },
+            {
+              "wrong": "Is these your pencils?",
+              "correct": "Are these your pencils?",
+              "reason": "同上，复数主语搭配复数be动词。"
+            },
+            {
+              "wrong": "What is these?",
+              "correct": "What are these?",
+              "reason": "疑问词'what'引导的特殊疑问句中，be动词也要与主语'these'保持一致。"
+            }
+          ],
+          "memory_tip": "this/that是'单身狗'，只跟is；these/those是'双胞胎'，只跟are。近用'th-'，远用'th-'。记住's'结尾是复数（these, those, is除外）。",
+          "related": {
+            "prerequisite": "be动词，单复数名词",
+            "next": "物主代词（名词性）"
+          }
+        },
+        {
+          "card_id": "02-04",
+          "full_id": "英语-七上-02-04",
+          "title": "语法：名词复数规则",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习可数名词从单数变为复数的基本规则和特殊情况。",
+          "core_points": [
+            "**一般规则**：在名词后加 -s。",
+            "  - book → books, pen → pens, ruler → rulers",
+            "**以 s, x, ch, sh 结尾的词**：加 -es。",
+            "  - bus → buses, box → boxes, watch → watches, brush → brushes",
+            "**以辅音字母 + y 结尾的词**：变 y 为 i 再加 -es。",
+            "  - dictionary → dictionaries, family → families (注意：以元音字母 + y 结尾的词直接加 -s，如 boy → boys)",
+            "**以 o 结尾的词**：通常加 -es（少数加 -s）。",
+            "  - tomato → tomatoes, potato → potatoes, hero → heroes",
+            "  - photo → photos, radio → radios (特例，直接加s)",
+            "**以 f 或 fe 结尾的词**：变 f/fe 为 v 再加 -es。",
+            "  - knife → knives, leaf → leaves (特例：roof → roofs, safe → safes)",
+            "**不规则复数**：",
+            "  - man → men, woman → women, child → children, foot → feet, tooth → teeth, mouse → mice",
+            "  - sheep → sheep, deer → deer, fish → fish (单复数同形)",
+            "**复合名词的复数**：通常是核心词变复数。",
+            "  - passer-by → passers-by"
+          ],
+          "why_explanation": "名词的单复数变化是英语语法的重要组成部分，它反映了数量的概念。不同的变化规则是为了发音的流畅性和历史演变。掌握这些规则能帮助学生正确表达数量，并与动词保持主谓一致。",
+          "example": {
+            "question": "写出下列名词的复数形式：1. pencil 2. watch 3. dictionary 4. boy 5. man 6. photo",
+            "steps": [
+              "1. pencil：一般规则，加 -s → pencils。",
+              "2. watch：以 ch 结尾，加 -es → watches。",
+              "3. dictionary：以辅音字母 + y 结尾，变 y 为 i 再加 -es → dictionaries。",
+              "4. boy：以元音字母 + y 结尾，直接加 -s → boys。",
+              "5. man：不规则复数 → men。",
+              "6. photo：以 o 结尾的特例，直接加 -s → photos。",
+              "检查：pencils, watches, dictionaries, boys, men, photos."
+            ],
+            "answer": "1. pencils 2. watches 3. dictionaries 4. boys 5. men 6. photos"
+          },
+          "mistakes": [
+            {
+              "wrong": "two book",
+              "correct": "two books",
+              "reason": "当数量大于一时，可数名词必须使用复数形式。"
+            },
+            {
+              "wrong": "many childs",
+              "correct": "many children",
+              "reason": "'child'的复数是不规则的'children'，不是加 -s。"
+            },
+            {
+              "wrong": "three knife",
+              "correct": "three knives",
+              "reason": "以 f/fe 结尾的名词变复数时，通常要变 f/fe 为 v 再加 -es。"
+            }
+          ],
+          "memory_tip": "大多数加s，s/x/ch/sh加es。辅音y变i再es，元音y直接s。f/fe变v再es。记住几个'怪咖'（不规则复数），它们不按常理出牌。",
+          "related": {
+            "prerequisite": "可数名词的概念",
+            "next": "主谓一致"
+          }
+        },
+        {
+          "card_id": "02-05",
+          "full_id": "英语-七上-02-05",
+          "title": "语法：所有格形容词与名词性物主代词",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习表示所属关系的两种主要形式：形容词性物主代词（my, your等）和名词性物主代词（mine, yours等）。",
+          "core_points": [
+            "**形容词性物主代词 (Possessive Adjectives)**：",
+            "  - 形式：my, your, his, her, its, our, their",
+            "  - 用法：必须放在名词前面，起形容词作用，不能单独使用。",
+            "  - 例：This is **my** book. Is that **your** pencil?",
+            "**名词性物主代词 (Possessive Pronouns)**：",
+            "  - 形式：mine, yours, his, hers, its (its不常用作名词性物主代词), ours, theirs",
+            "  - 用法：可以单独使用，相当于“形容词性物主代词 + 名词”，在句中作主语、宾语或表语。",
+            "  - 例：This book is **mine**. (相当于This book is my book.)",
+            "  - 例：Is that pencil **yours**? (相当于Is that pencil your pencil?)"
+          ],
+          "why_explanation": "两种物主代词都表示所属关系，但功能不同。形容词性物主代词是修饰限定，名词性物主代词是替代名词，避免重复。这种区分是为了语言的简洁性和准确性。",
+          "example": {
+            "question": "选择正确的词填空：1. This is (my/mine) book. 2. Is that pencil (your/yours)? Yes, it's (my/mine). 3. That is (his/he) backpack.",
+            "steps": [
+              "1. 'book'是名词，前面需要形容词性物主代词 → 'my'。",
+              "2. 'pencil'后，需要名词性物主代词作表语 → 'yours'。回答时，'it's'后作表语，需要名词性物主代词 → 'mine'。",
+              "3. 'backpack'是名词，前面需要形容词性物主代词，且与'he'对应 → 'his'。",
+              "检查：1. This is my book. 2. Is that pencil yours? Yes, it's mine. 3. That is his backpack."
+            ],
+            "answer": "1. This is my book. 2. Is that pencil yours? Yes, it's mine. 3. That is his backpack."
+          },
+          "mistakes": [
+            {
+              "wrong": "This book is my.",
+              "correct": "This book is mine.",
+              "reason": "'my'是形容词性物主代词，不能单独作表语。作表语时应使用名词性物主代词'mine'。"
+            },
+            {
+              "wrong": "That is yours pen.",
+              "correct": "That is your pen.",
+              "reason": "'yours'是名词性物主代词，不能修饰名词。修饰名词'pen'应使用形容词性物主代词'your'。"
+            },
+            {
+              "wrong": "Is that her?",
+              "correct": "Is that hers?",
+              "reason": "如果此处是询问“那是她的东西吗？”，则需要名词性物主代词'hers'。如果指“那是她吗？”，则用人称代词'her'做宾语，但一般疑问句中'her'作宾语不常用，通常是'Is that she?'。"
+            }
+          ],
+          "memory_tip": "形容词性物主代词像个'小跟班'，总要跟着名词；名词性物主代词像个'替身'，能代替'小跟班+名词'。",
+          "related": {
+            "prerequisite": "人称代词，形容词",
+            "next": "名词所有格 ('s)"
+          }
+        },
+        {
+          "card_id": "02-06",
+          "full_id": "英语-七上-02-06",
+          "title": "句型：询问物品所属和确认物品",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习如何询问一个物品是谁的，以及如何确认一个物品是否属于某人。",
+          "core_points": [
+            "**询问物品所属**：",
+            "  - Whose + 名词单数 + is this/that? (这是/那是谁的...？)",
+            "    - 例：Whose pencil is this? (这是谁的铅笔？)",
+            "  - Whose + 名词复数 + are these/those? (这些是/那些是谁的...？)",
+            "    - 例：Whose keys are these? (这些是谁的钥匙？)",
+            "**确认物品**：",
+            "  - Is this/that + your/his/her + 名词单数? (这是/那是你的/他的/她的...吗？)",
+            "    - 例：Is this your pencil? (这是你的铅笔吗？)",
+            "  - Are these/those + your/his/her + 名词复数? (这些是/那些是你的/他的/她的...吗？)",
+            "    - 例：Are these your keys? (这些是你的钥匙吗？)",
+            "**肯定回答**：",
+            "  - Yes, it is. (是的，它是。)",
+            "  - Yes, they are. (是的，它们是。)",
+            "  - It's + 名词性物主代词. / It's + 人名's. (它是我的/Tom的。)",
+            "**否定回答**：",
+            "  - No, it isn't. (不，它不是。)",
+            "  - No, they aren't. (不，它们不是。)",
+            "  - It's not + 名词性物主代词. / It's not + 人名's. (它不是我的/Tom的。)"
+          ],
+          "why_explanation": "这些句型是英语中用于物品归属确认和询问的基础。'Whose'是专门询问所属关系的疑问词。'Is this/that...?'和'Are these/those...?'是对应单复数的通用疑问句结构。",
+          "example": {
+            "question": "补全对话：A: Excuse me, ____ pencil is this? B: It's ____. A: Is ____ your pencil? B: Yes, ____ is. Thank you!",
+            "steps": [
+              "A询问铅笔是谁的，用'Whose'。",
+              "B回答是自己的，用名词性物主代词'mine'。",
+              "A确认是否是对方的，用'this'。",
+              "B肯定回答，用'it's'。",
+              "检查：A: Excuse me, whose pencil is this? B: It's mine. A: Is this your pencil? B: Yes, it is. Thank you!"
+            ],
+            "answer": "A: Excuse me, whose pencil is this? B: It's mine. A: Is this your pencil? B: Yes, it is. Thank you!"
+          },
+          "mistakes": [
+            {
+              "wrong": "Who is this pencil?",
+              "correct": "Whose pencil is this?",
+              "reason": "'Who'询问人，'Whose'询问所属。这里是询问物品的归属。"
+            },
+            {
+              "wrong": "Is this your pencil? No, it's not my.",
+              "correct": "Is this your pencil? No, it's not mine.",
+              "reason": "简略否定回答后，如果用物主代词，应使用名词性物主代词'mine'，而非形容词性'my'。"
+            }
+          ],
+          "memory_tip": "'Whose'像个侦探，专门问'谁的？'。'Is this...?'像个确认的眼神，得到'Yes, it is'或'No, it isn't'的答案。",
+          "related": {
+            "prerequisite": "指示代词，be动词，物主代词",
+            "next": "询问物品颜色"
+          }
+        },
+        {
+          "card_id": "02-07",
+          "full_id": "英语-七上-02-07",
+          "title": "句型：询问物品颜色",
+          "type": "句型卡",
+          "difficulty": 1,
+          "importance": 4,
+          "definition": "学习如何询问物品的颜色以及如何回答。",
+          "core_points": [
+            "**询问物品颜色**：",
+            "  - What color is + 名词单数? (什么颜色？)",
+            "    - 例：What color is your pencil? (你的铅笔是什么颜色？)",
+            "  - What color are + 名词复数? (什么颜色？)",
+            "    - 例：What color are your books? (你的书是什么颜色？)",
+            "**回答物品颜色**：",
+            "  - It's + 颜色. (它是...颜色。)",
+            "    - 例：It's red. (它是红色的。)",
+            "  - They're + 颜色. (它们是...颜色。)",
+            "    - 例：They're blue. (它们是蓝色的。)",
+            "**其他表达**：",
+            "  - My pencil is red. (我的铅笔是红色的。)"
+          ],
+          "why_explanation": "'What color...?'是询问颜色的固定句型。'It's'和'They're'是常用的简略回答，避免重复主语和be动词，使对话更自然流畅。",
+          "example": {
+            "question": "补全对话：A: What ____ is your backpack? B: It's ____. A: What color ____ your keys? B: ____ black.",
+            "steps": [
+              "A询问背包颜色，固定句型是'What color'。",
+              "B回答是蓝色，用'blue'。",
+              "A询问钥匙颜色，'keys'是复数，be动词用'are'。",
+              "B回答是黑色，'keys'对应代词'They'，所以是'They're'。",
+              "检查：A: What color is your backpack? B: It's blue. A: What color are your keys? B: They're black."
+            ],
+            "answer": "A: What color is your backpack? B: It's blue. A: What color are your keys? B: They're black."
+          },
+          "mistakes": [
+            {
+              "wrong": "What is your pencil color?",
+              "correct": "What color is your pencil?",
+              "reason": "'What color'是固定疑问词组，修饰'is'后的主语，不能将'color'放在主语后。"
+            },
+            {
+              "wrong": "It's a red.",
+              "correct": "It's red. / It's a red one.",
+              "reason": "'Red'本身是形容词，可以直接作表语。如果想表达“一个红色的东西”，可以说'a red one'。"
+            }
+          ],
+          "memory_tip": "'What color'就像一个调色盘，等待你填上颜色。记住单数用'is'，复数用'are'。",
+          "related": {
+            "prerequisite": "be动词，颜色词，单复数名词",
+            "next": "询问物品数量"
+          }
+        },
+        {
+          "card_id": "02-08",
+          "full_id": "英语-七上-02-08",
+          "title": "易混词卡：whose vs who's",
+          "type": "易混词卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "区分'whose'（谁的，物主代词/疑问词）和'who's'（who is 或 who has 的缩写）。",
+          "core_points": [
+            "**Whose** /huːz/:",
+            "  - **疑问词**：表示“谁的”，用于询问所属关系，后面可直接跟名词，也可单独使用。",
+            "    - 例：**Whose** book is this? (这是谁的书？)",
+            "    - 例：**Whose** is this book? (这本书是谁的？)",
+            "  - **物主代词**：表示“……的”，用于引导定语从句（后续学习）。",
+            "**Who's** /huːz/:",
+            "  - **'Who is'的缩写**：表示“谁是”或“谁在”。",
+            "    - 例：**Who's** that boy? (那个男孩是谁？)",
+            "    - 例：**Who's** knocking at the door? (谁在敲门？)",
+            "  - **'Who has'的缩写**：表示“谁有”。",
+            "    - 例：**Who's** got my pen? (谁拿了我的钢笔？)"
+          ],
+          "why_explanation": "这两个词发音相同，但词性和语法功能截然不同。'Whose'是表示所属关系的独特疑问词，而'who's'是be动词或have动词的缩写，用于询问身份或存在。理解缩写和词性的差异是避免混淆的关键。",
+          "example": {
+            "question": "选择正确的词填空：1. ____ this? He is my brother. 2. ____ pen is this? It's mine. 3. ____ got my book?",
+            "steps": [
+              "1. 问的是“这是谁？”，回答是“他是我兄弟”，所以需要'who is'的缩写 → 'Who's'。",
+              "2. 问的是“谁的笔？”，回答是“我的”，所以需要疑问词“谁的” → 'Whose'。",
+              "3. 'got'是'have got'的过去分词，表示“有”，所以是'who has'的缩写 → 'Who's'。",
+              "检查：1. Who's this? 2. Whose pen is this? 3. Who's got my book?"
+            ],
+            "answer": "1. Who's this? 2. Whose pen is this? 3. Who's got my book?"
+          },
+          "mistakes": [
+            {
+              "wrong": "Whose that boy?",
+              "correct": "Who's that boy?",
+              "reason": "这里是询问“谁是那个男孩”，需要'who is'的缩写，而不是表示所属的'whose'。"
+            },
+            {
+              "wrong": "Who's book is this?",
+              "correct": "Whose book is this?",
+              "reason": "这里是询问“谁的书”，需要表示所属的疑问词'whose'，而不是'who is'的缩写。"
+            }
+          ],
+          "memory_tip": "Whose (谁的) 像个小偷，总想知道东西属于谁；Who's (谁是/谁有) 像个小侦探，问'是谁'或'谁有'。",
+          "related": {
+            "prerequisite": "be动词，have动词，疑问词",
+            "next": "定语从句中的whose"
+          }
+        },
+        {
+          "card_id": "02-09",
+          "full_id": "英语-七上-02-09",
+          "title": "语音卡：字母组合 C, K, B, D, G, P, T 的发音",
+          "type": "语音卡",
+          "difficulty": 1,
+          "importance": 3,
+          "definition": "学习字母 C, K, B, D, G, P, T 在单词中的常见发音。",
+          "core_points": [
+            "**Cc** /k/ 或 /s/:",
+            "  - /k/ (硬 c)：在 a, o, u 或辅音前。例词：**c**lass, **c**at, **c**up, **c**ase",
+            "  - /s/ (软 c)：在 e, i, y 前。例词：**c**ity, pen**c**il",
+            "**Kk** /k/: 发音为舌根抬起抵住软腭，然后突然下降，气流冲出，声带不振动。例词：**k**ey, boo**k**, ba**ck**pack",
+            "**Bb** /b/: 发音为双唇紧闭，气流冲出，声带振动。例词：**b**oy, **b**ook, **b**lue, **b**ackpack",
+            "**Dd** /d/: 发音为舌尖抵住上齿龈，气流冲出，声带振动。例词：**d**ictionary, re**d**",
+            "**Gg** /ɡ/ 或 /dʒ/:",
+            "  - /ɡ/ (硬 g)：在 a, o, u 或辅音前。例词：**g**irl, **g**reen, **g**ood",
+            "  - /dʒ/ (软 g)：在 e, i, y 前。例词：pa**g**e, orna**g**e (发音是/dʒ/，不是/ɡ/)",
+            "**Pp** /p/: 发音为双唇紧闭，气流冲出，声带不振动。例词：**p**en, **p**encil, **p**ink, **p**urple",
+            "**Tt** /t/: 发音为舌尖抵住上齿龈，气流冲出，声带不振动。例词：**t**eacher, **t**omato, wha**t**"
+          ],
+          "why_explanation": "这些辅音是英语中常见的发音，其中C和G有软硬音之分，理解其发音规则有助于正确拼读单词。掌握这些发音能提高学生的听力和口语准确性。",
+          "example": {
+            "question": "指出下列单词中划线字母的正确发音：1. **c**at 2. pen**c**il 3. **g**irl 4. ora**g**e 5. **k**ey",
+            "steps": [
+              "1. cat: 'c'在'a'前发/k/音。",
+              "2. pencil: 'c'在'i'前发/s/音。",
+              "3. girl: 'g'在'i'前发/ɡ/音 (特例，不是/dʒ/)。",
+              "4. orange: 'g'在'e'前发/dʒ/音。",
+              "5. key: 'k'发/k/音。",
+              "检查：1. /k/ 2. /s/ 3. /ɡ/ 4. /dʒ/ 5. /k/"
+            ],
+            "answer": "1. /k/ 2. /s/ 3. /ɡ/ 4. /dʒ/ 5. /k/"
+          },
+          "mistakes": [
+            {
+              "wrong": "将'pencil'中的'c'发成/k/音。",
+              "correct": "/s/",
+              "reason": "'c'在'e, i, y'前常发/s/音，学生容易受'cat'等词影响而误读。"
+            },
+            {
+              "wrong": "将'green'中的'g'发成/dʒ/音。",
+              "correct": "/ɡ/",
+              "reason": "'g'在'a, o, u'或辅音前常发/ɡ/音，'green'中的'g'是硬音。"
+            }
+          ],
+          "memory_tip": "C和G像变脸大师，遇到e, i, y就变软（/s/, /dʒ/），其他时候就硬（/k/, /ɡ/）。B像爆炸，D像敲门，P像拍手，T像滴答。",
+          "related": {
+            "prerequisite": "元音和辅音的概念",
+            "next": "更多辅音和元音发音规则"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "03",
+      "unit_name": "This is my sister.",
+      "cards": [
+        {
+          "card_id": "03-01",
+          "full_id": "英语-七上-03-01",
+          "title": "词汇：家庭成员类单词",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "本单元学习描述家庭成员关系的词汇。",
+          "core_points": [
+            "family /ˈfæməli/: (n.) 家庭，家人",
+            "father /ˈfɑːðər/: (n.) 父亲",
+            "dad /dæd/: (n.) 爸爸（非正式）",
+            "mother /ˈmʌðər/: (n.) 母亲",
+            "mom /mɑːm/: (n.) 妈妈（非正式）",
+            "parents /ˈperənts/: (n.) 父母亲",
+            "brother /ˈbrʌðər/: (n.) 兄弟",
+            "sister /ˈsɪstər/: (n.) 姐妹",
+            "son /sʌn/: (n.) 儿子",
+            "daughter /ˈdɔːtər/: (n.) 女儿",
+            "grandpa /ˈɡrændpɑː/: (n.) 爷爷，外公（非正式）",
+            "grandma /ˈɡrændmɑː/: (n.) 奶奶，外婆（非正式）",
+            "grandfather /ˈɡrændfɑːðər/: (n.) 祖父，外祖父",
+            "grandmother /ˈɡrændmʌðər/: (n.) 祖母，外祖母",
+            "grandparents /ˈɡrændperənts/: (n.) 祖父母，外祖父母",
+            "uncle /ˈʌŋkl/: (n.) 叔叔，伯伯，舅舅，姑父，姨父",
+            "aunt /ænt/: (n.) 姑妈，姨妈，伯母，舅妈，婶婶"
+          ],
+          "why_explanation": "家庭成员是每个人社会关系的核心，掌握这些词汇能帮助学生介绍自己的家人，理解家庭结构，进行更深入的社交交流。",
+          "example": {
+            "question": "用所学词汇填空：1. My ____ and ____ are my parents. 2. My ____ is my father's brother. 3. My ____ is my mother's sister.",
+            "steps": [
+              "1. 'parents'指父母亲，所以是'father'和'mother'。",
+              "2. 'father's brother'是叔叔或伯伯，对应'uncle'。",
+              "3. 'mother's sister'是姨妈或姑妈，对应'aunt'。",
+              "检查：1. My father and mother are my parents. 2. My uncle is my father's brother. 3. My aunt is my mother's sister."
+            ],
+            "answer": "1. My father and mother are my parents. 2. My uncle is my father's brother. 3. My aunt is my mother's sister."
+          },
+          "mistakes": [
+            {
+              "wrong": "My family has mother and father.",
+              "correct": "My family has a mother and a father. / My family includes my mother and father.",
+              "reason": "可数名词在单数时通常需要冠词。或者表达方式可以更自然。"
+            },
+            {
+              "wrong": "This is my mom and dad.",
+              "correct": "These are my mom and dad.",
+              "reason": "两个人是复数，应使用'These are'。"
+            }
+          ],
+          "memory_tip": "family是'家庭'，father是'爸爸'，mother是'妈妈'，grand-前缀是'祖/外'。想象一棵家庭树，将每个人物都挂在对应的位置上。",
+          "related": {
+            "prerequisite": "名词单复数",
+            "next": "描述人物外貌"
+          }
+        },
+        {
+          "card_id": "03-02",
+          "full_id": "英语-七上-03-02",
+          "title": "词汇：人称形容词与人称代词",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 4,
+          "definition": "本单元复习并巩固常用的人称形容词（物主代词）和人称代词。",
+          "core_points": [
+            "**人称代词 (主格)**：",
+            "  - I /aɪ/: 我",
+            "  - you /juː/: 你，你们",
+            "  - he /hiː/: 他",
+            "  - she /ʃiː/: 她",
+            "  - it /ɪt/: 它",
+            "  - we /wiː/: 我们",
+            "  - they /ðeɪ/: 他们，她们，它们",
+            "**人称代词 (宾格)**：",
+            "  - me /miː/: 我（宾格）",
+            "  - you /juː/: 你，你们（宾格）",
+            "  - him /hɪm/: 他（宾格）",
+            "  - her /hɜːr/: 她（宾格）",
+            "  - it /ɪt/: 它（宾格）",
+            "  - us /ʌs/: 我们（宾格）",
+            "  - them /ðem/: 他们，她们，它们（宾格）",
+            "**形容词性物主代词**：",
+            "  - my /maɪ/: 我的",
+            "  - your /jʊər/: 你的，你们的",
+            "  - his /hɪz/: 他的",
+            "  - her /hɜːr/: 她的",
+            "  - its /ɪts/: 它的",
+            "  - our /aʊər/: 我们的",
+            "  - their /ðer/: 他们的，她们的，它们的"
+          ],
+          "why_explanation": "这些代词是英语句子的骨架，用于指代人或物，避免重复。主格作主语，宾格作宾语，形容词性物主代词修饰名词表示所属。理解它们在句子中的不同位置和功能是构建正确句子的基础。",
+          "example": {
+            "question": "用正确的代词填空：1. This is my sister. ____ name is Gina. 2. I like ____. ____ is a good teacher. 3. My parents love ____.",
+            "steps": [
+              "1. 'sister'是女性，其名字前用形容词性物主代词'Her'。",
+              "2. 'is a good teacher'说明是主语，用'She'。'like'后面跟宾语，所以用'him'或'her'，假设是'him'。",
+              "3. 'parents love'后面跟宾语，指代“我”，所以用'me'。",
+              "检查：1. This is my sister. Her name is Gina. 2. I like him. He is a good teacher. 3. My parents love me."
+            ],
+            "answer": "1. This is my sister. Her name is Gina. 2. I like him. He is a good teacher. 3. My parents love me."
+          },
+          "mistakes": [
+            {
+              "wrong": "She likes I.",
+              "correct": "She likes me.",
+              "reason": "动词'likes'后应跟宾格代词'me'，而非主格代词'I'。"
+            },
+            {
+              "wrong": "Give the book to he.",
+              "correct": "Give the book to him.",
+              "reason": "介词'to'后应跟宾格代词'him'，而非主格代词'he'。"
+            },
+            {
+              "wrong": "He is my.",
+              "correct": "He is my brother. / He is mine.",
+              "reason": "'my'是形容词性物主代词，不能单独使用。要么后面跟名词，要么用名词性物主代词'mine'。"
+            }
+          ],
+          "memory_tip": "主格是'皇帝'，总在句首；宾格是'大臣'，总在动词或介词后；形容词性物主代词是'皇帝的帽子'，总要戴在名词头上。",
+          "related": {
+            "prerequisite": "动词，介词",
+            "next": "反身代词"
+          }
+        },
+        {
+          "card_id": "03-03",
+          "full_id": "英语-七上-03-03",
+          "title": "语法：名词所有格 ('s)",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "名词所有格表示“……的”，通常通过在名词后加“'s”来构成。",
+          "core_points": [
+            "**构成方式**：",
+            "  - **单数名词**：在名词后加 's。",
+            "    - 例：Tom's book (Tom的书), my father's car (我爸爸的车)",
+            "  - **以 s 结尾的复数名词**：只加 ' (撇号)。",
+            "    - 例：students' desks (学生们的课桌), my parents' room (我父母的房间)",
+            "  - **不以 s 结尾的复数名词**：在名词后加 's。",
+            "    - 例：children's toys (孩子们的玩具), men's room (男士洗手间)",
+            "**省略名词**：为避免重复，所有格后面的名词有时可以省略。",
+            "  - 例：This is Tom's. (指Tom的书、Tom的铅笔等)",
+            "**表示共同所有**：在最后一个名词后加 's。",
+            "  - 例：Tom and Mary's room (Tom和Mary共有的房间)",
+            "**表示各自所有**：在每个名词后都加 's。",
+            "  - 例：Tom's and Mary's rooms (Tom和Mary各自的房间)"
+          ],
+          "why_explanation": "名词所有格是英语中表达所属关系的一种简洁方式，它避免了使用冗长的'the ... of ...'结构。其变化规则是为了发音的流畅性和书写习惯。",
+          "example": {
+            "question": "将下列短语改为名词所有格形式：1. the book of Tom 2. the desks of the students 3. the toys of the children 4. the room of Lucy and Lily",
+            "steps": [
+              "1. 'the book of Tom' → Tom's book。",
+              "2. 'the desks of the students' → students' desks ('students'是复数，以s结尾，只加撇号)。",
+              "3. 'the toys of the children' → children's toys ('children'是不规则复数，不以s结尾，加's)。",
+              "4. 'the room of Lucy and Lily'，表示共同所有 → Lucy and Lily's room。",
+              "检查：Tom's book, students' desks, children's toys, Lucy and Lily's room."
+            ],
+            "answer": "1. Tom's book 2. students' desks 3. children's toys 4. Lucy and Lily's room"
+          },
+          "mistakes": [
+            {
+              "wrong": "This is Tom is book.",
+              "correct": "This is Tom's book.",
+              "reason": "混淆了所有格's和be动词'is'的缩写。所有格's是表示所属，be动词'is'是表示“是”。"
+            },
+            {
+              "wrong": "The students desks are new.",
+              "correct": "The students' desks are new.",
+              "reason": "复数名词表示所有格时，如果以s结尾，只需加撇号'。"
+            },
+            {
+              "wrong": "Marys pencil is long.",
+              "correct": "Mary's pencil is long.",
+              "reason": "单数名词的所有格需要在名词后加's。"
+            }
+          ],
+          "memory_tip": "'s像个小钩子，钩住名词表示'谁的'。如果名词本身已经有s了，就只钩个撇号'，避免重复。",
+          "related": {
+            "prerequisite": "名词单复数，形容词性物主代词",
+            "next": "双重所有格"
+          }
+        },
+        {
+          "card_id": "03-04",
+          "full_id": "英语-七上-03-04",
+          "title": "句型：介绍家庭成员",
+          "type": "句型卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "学习如何介绍自己的家庭成员，并询问他人。",
+          "core_points": [
+            "**介绍个人**：",
+            "  - This is my + 称谓 + [姓名]. (这是我的...[姓名])",
+            "    - 例：This is my father, Tom. (这是我爸爸，Tom。)",
+            "  - This is my + 称谓. (这是我的...)",
+            "    - 例：This is my sister. (这是我妹妹。)",
+            "**询问某人是谁**：",
+            "  - Who's this/that? (这是/那是谁？)",
+            "  - Who is this/that? (完整形式)",
+            "  - Who are these/those? (这些是/那些是谁？)",
+            "**回答某人是谁**：",
+            "  - He's/She's my + 称谓. (他是/她是我的...)",
+            "    - 例：He's my brother. (他是我哥哥。)",
+            "  - They're my + 称谓复数. (他们是我的...)",
+            "    - 例：They're my parents. (他们是我父母。)"
+          ],
+          "why_explanation": "这些句型是日常生活中介绍亲友和询问身份的基础。通过使用'This is...'和'Who's...?'，可以进行清晰的人际交流。主谓一致（单复数）是核心。",
+          "example": {
+            "question": "补全对话：A: Look! ____ is my family photo. ____ this? B: He's ____ father. A: And ____ are these? B: ____ my grandparents.",
+            "steps": [
+              "A在展示照片，用'This'指代照片。接着询问照片中的单个人物，用'Who's'。",
+              "B回答是'father'，前面需要形容词性物主代词'my'。",
+              "A接着询问照片中的多个人物，用'Who are'。",
+              "B回答是'grandparents'，前面需要代词'They're'。",
+              "检查：A: Look! This is my family photo. Who's this? B: He's my father. A: And who are these? B: They're my grandparents."
+            ],
+            "answer": "A: Look! This is my family photo. Who's this? B: He's my father. A: And who are these? B: They're my grandparents."
+          },
+          "mistakes": [
+            {
+              "wrong": "Who is these?",
+              "correct": "Who are these?",
+              "reason": "'these'是复数，be动词应使用'are'。"
+            },
+            {
+              "wrong": "This is my mom and dad.",
+              "correct": "These are my mom and dad.",
+              "reason": "介绍两个人是复数，应使用'These are'。"
+            }
+          ],
+          "memory_tip": "'This is'是介绍单数的'指引牌'，'These are'是介绍复数的'引路人'。'Who's'问单数，'Who are'问复数，就像问'谁'是'谁'们。",
+          "related": {
+            "prerequisite": "指示代词，be动词，家庭成员词汇",
+            "next": "描述人物外貌特征"
+          }
+        },
+        {
+          "card_id": "03-05",
+          "full_id": "英语-七上-03-05",
+          "title": "语音卡：字母组合 Ee, Ff, Ll, Rr, Vv 的发音",
+          "type": "语音卡",
+          "difficulty": 1,
+          "importance": 3,
+          "definition": "学习字母 Ee, Ff, Ll, Rr, Vv 在单词中的常见发音。",
+          "core_points": [
+            "**Ee** /e/ 或 /iː/:",
+            "  - /e/ (短音)：例词：p**e**n, r**e**d",
+            "  - /iː/ (长音)：例词：m**e**et, Gr**ee**n (字母组合ee常发/iː/)",
+            "**Ff** /f/: 发音为上齿轻触下唇，气流从唇齿间摩擦而出，声带不振动。例词：**f**amily, **f**ather, **f**ine, **f**riend",
+            "**Ll** /l/: 发音为舌尖抵住上齿龈，气流从舌头两侧流出，声带振动。例词：**l**ike, **l**ook, penci**l**",
+            "**Rr** /r/: 发音为舌尖卷起，不触上颚，气流从舌头中部流出，声带振动。例词：**r**uler, **r**ed, b**r**other, **r**oom",
+            "**Vv** /v/: 发音为上齿轻触下唇，气流从唇齿间摩擦而出，声带振动。例词：gi**v**e, ha**v**e (本单元可能未出现，但作为f的浊辅音对应可以提及)"
+          ],
+          "why_explanation": "这些辅音和元音的发音是构成英语单词的重要组成部分。特别是Ff和Vv，它们是清浊对应关系，发音部位相同但声带振动与否不同，理解这种差异对发音准确性至关重要。",
+          "example": {
+            "question": "指出下列单词中划线字母的正确发音：1. p**e**n 2. m**ee**t 3. **f**ine 4. **r**uler 5. **l**ike",
+            "steps": [
+              "1. pen: 'e'发短音/e/。",
+              "2. meet: 'ee'发长音/iː/。",
+              "3. fine: 'f'发/f/音。",
+              "4. ruler: 'r'发/r/音。",
+              "5. like: 'l'发/l/音。",
+              "检查：1. /e/ 2. /iː/ 3. /f/ 4. /r/ 5. /l/"
+            ],
+            "answer": "1. /e/ 2. /iː/ 3. /f/ 4. /r/ 5. /l/"
+          },
+          "mistakes": [
+            {
+              "wrong": "将'fine'中的'f'发成/v/音。",
+              "correct": "/f/",
+              "reason": "'f'是清辅音，声带不振动。'v'是浊辅音，声带振动。学生容易混淆清浊音。"
+            },
+            {
+              "wrong": "将'red'中的'r'发成汉语拼音的'r'。",
+              "correct": "/r/",
+              "reason": "英语的/r/是卷舌音，舌尖不抵上颚，与汉语拼音的'r'（舌尖颤音）不同。"
+            }
+          ],
+          "memory_tip": "Ff像漏气，Vv像嗡嗡叫（F是清，V是浊）。Ll像舌尖跳舞，Rr像舌头卷起来。Ee是'短'或'长'音，像个变焦镜头。",
+          "related": {
+            "prerequisite": "清辅音和浊辅音的概念",
+            "next": "更多元音发音规则"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "04",
+      "unit_name": "Where's my backpack?",
+      "cards": [
+        {
+          "card_id": "04-01",
+          "full_id": "英语-七上-04-01",
+          "title": "词汇：地点与家具类单词",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "本单元学习描述物品位置和常见家具的词汇。",
+          "core_points": [
+            "where /wer/: (adv.) 在哪里",
+            "in /ɪn/: (prep.) 在……里面",
+            "on /ɑːn/: (prep.) 在……上面",
+            "under /ˈʌndər/: (prep.) 在……下面",
+            "bed /bed/: (n.) 床",
+            "sofa /ˈsoʊfə/: (n.) 沙发",
+            "table /ˈteɪbl/: (n.) 桌子",
+            "desk /desk/: (n.) 书桌",
+            "chair /tʃer/: (n.) 椅子",
+            "dresser /ˈdresər/: (n.) 梳妆台，带抽屉的衣柜",
+            "bookcase /ˈbʊkkeɪs/: (n.) 书柜",
+            "plant /plænt/: (n.) 植物",
+            "lamp /læmp/: (n.) 灯",
+            "picture /ˈpɪktʃər/: (n.) 图画，照片",
+            "room /ruːm/: (n.) 房间",
+            "bedroom /ˈbedruːm/: (n.) 卧室",
+            "living room /ˈlɪvɪŋ ruːm/: (n.) 客厅"
+          ],
+          "why_explanation": "这些词汇是描述空间位置和室内环境的基础，掌握它们能帮助学生准确表达物品的存放位置，进行生活场景的交流。",
+          "example": {
+            "question": "根据图片（假设有书在桌子上，铅笔在书包里，书包在床下），用所学词汇填空：1. The book is ____ the table. 2. The pencil is ____ the backpack. 3. The backpack is ____ the bed.",
+            "steps": [
+              "1. 书在桌子'上'，用'on'。",
+              "2. 铅笔在书包'里'，用'in'。",
+              "3. 书包在床'下'，用'under'。",
+              "检查：1. The book is on the table. 2. The pencil is in the backpack. 3. The backpack is under the bed."
+            ],
+            "answer": "1. The book is on the table. 2. The pencil is in the backpack. 3. The backpack is under the bed."
+          },
+          "mistakes": [
+            {
+              "wrong": "My book is in the desk.",
+              "correct": "My book is on the desk. / My book is in the drawer of the desk.",
+              "reason": "通常书是放在书桌'上'，而不是'里面'。除非指抽屉里，否则用'on'更合适。"
+            },
+            {
+              "wrong": "The lamp is in the table.",
+              "correct": "The lamp is on the table.",
+              "reason": "灯通常放在桌子'上'，而不是'里面'。"
+            }
+          ],
+          "memory_tip": "in像个小盒子，on像个小帽子，under像个小地毯。where是问'在哪里'的魔术词。",
+          "related": {
+            "prerequisite": "名词单复数，be动词",
+            "next": "方位介词的扩展"
+          }
+        },
+        {
+          "card_id": "04-02",
+          "full_id": "英语-七上-04-02",
+          "title": "语法：介词 in/on/under (表示位置)",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "in, on, under 是最常用的表示空间位置的介词，用来指明一个物体相对于另一个物体的位置关系。",
+          "core_points": [
+            "**in** /ɪn/: 表示在……里面。",
+            "  - 例：The book is **in** the backpack. (书在书包里。)",
+            "  - 例：He is **in** the room. (他在房间里。)",
+            "**on** /ɑːn/: 表示在……上面，且通常有接触。",
+            "  - 例：The pencil is **on** the desk. (铅笔在书桌上。)",
+            "  - 例：The picture is **on** the wall. (画在墙上。)",
+            "**under** /ˈʌndər/: 表示在……下面。",
+            "  - 例：The cat is **under** the bed. (猫在床下。)",
+            "  - 例：The keys are **under** the book. (钥匙在书下面。)",
+            "**句型结构**：主语 + be动词 + 介词 + 介词宾语 (地点名词)。",
+            "  - 例：My pencil case **is on** the table.",
+            "**疑问句**：Where is/are + 主语？",
+            "  - 例：Where is my book? (It's on the table.)",
+            "  - 例：Where are your keys? (They're in the pencil case.)"
+          ],
+          "why_explanation": "介词是英语中表达空间、时间、方式等关系的重要词类。in, on, under是描述物体相对位置的核心介词，它们帮助我们构建精确的地点状语，使句子信息更完整。",
+          "example": {
+            "question": "用 in, on, under 填空：1. The apple is ____ the box. 2. The clock is ____ the wall. 3. The ball is ____ the chair. 4. My clothes are ____ the dresser.",
+            "steps": [
+              "1. 苹果在盒子'里面'，用'in'。",
+              "2. 钟在墙'上'，用'on'。",
+              "3. 球在椅子'下面'，用'under'。",
+              "4. 衣服在梳妆台'里面'（抽屉里），用'in'。",
+              "检查：1. The apple is in the box. 2. The clock is on the wall. 3. The ball is under the chair. 4. My clothes are in the dresser."
+            ],
+            "answer": "1. The apple is in the box. 2. The clock is on the wall. 3. The ball is under the chair. 4. My clothes are in the dresser."
+          },
+          "mistakes": [
+            {
+              "wrong": "The book is in the table.",
+              "correct": "The book is on the table.",
+              "reason": "通常书放在桌子'上'，而不是'里面'。'in'指封闭空间内部，'on'指表面接触。"
+            },
+            {
+              "wrong": "My keys are under the pencil case.",
+              "correct": "My keys are in the pencil case.",
+              "reason": "钥匙通常放在铅笔盒'里面'，而不是'下面'。理解物品的常识性位置很重要。"
+            },
+            {
+              "wrong": "Where my book?",
+              "correct": "Where is my book?",
+              "reason": "疑问句中缺少be动词，'where'不能单独构成疑问。"
+            }
+          ],
+          "memory_tip": "in是'内部'，on是'表面'，under是'下方'。想象一个箱子，in是箱子里，on是箱子顶，under是箱子底。",
+          "related": {
+            "prerequisite": "be动词，地点名词",
+            "next": "其他方位介词 (behind, in front of, next to)"
+          }
+        },
+        {
+          "card_id": "04-03",
+          "full_id": "英语-七上-04-03",
+          "title": "句型：询问物品位置",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习如何询问一个或多个物品的具体位置，并给出回答。",
+          "core_points": [
+            "**询问单数物品位置**：",
+            "  - Where's + 名词单数? (……在哪里？)",
+            "  - Where is + 名词单数? (完整形式)",
+            "    - 例：Where's my backpack? (我的书包在哪里？)",
+            "**回答单数物品位置**：",
+            "  - It's + 介词短语. (它在……)",
+            "    - 例：It's on the chair. (它在椅子上。)",
+            "**询问复数物品位置**：",
+            "  - Where are + 名词复数? (……在哪里？)",
+            "    - 例：Where are your keys? (你的钥匙在哪里？)",
+            "**回答复数物品位置**：",
+            "  - They're + 介词短语. (它们在……)",
+            "    - 例：They're in the pencil case. (它们在铅笔盒里。)"
+          ],
+          "why_explanation": "'Where'是专门询问地点的疑问词。通过与be动词的单复数搭配，可以精确地询问不同数量物品的位置。'It's'和'They're'是常见的缩略回答，使对话更自然。",
+          "example": {
+            "question": "补全对话：A: Excuse me, ____ my ruler? B: ____ on the desk. A: And ____ my books? B: ____ in the backpack.",
+            "steps": [
+              "A询问尺子（单数）位置，用'Where's'。",
+              "B回答尺子（单数）位置，用'It's'。",
+              "A询问书（复数）位置，用'Where are'。",
+              "B回答书（复数）位置，用'They're'。",
+              "检查：A: Excuse me, where's my ruler? B: It's on the desk. A: And where are my books? B: They're in the backpack."
+            ],
+            "answer": "A: Excuse me, where's my ruler? B: It's on the desk. A: And where are my books? B: They're in the backpack."
+          },
+          "mistakes": [
+            {
+              "wrong": "Where my books?",
+              "correct": "Where are my books?",
+              "reason": "'books'是复数名词，be动词应使用'are'。"
+            },
+            {
+              "wrong": "It's in the desk.",
+              "correct": "It's on the desk.",
+              "reason": "物品通常放在桌子'上'而不是'里面'，除非特指抽屉等封闭空间。要结合实际情况选择介词。"
+            }
+          ],
+          "memory_tip": "'Where's'问'单身'物品，'Where are'问'一群'物品。回答时，'单身'用'It's'，'一群'用'They're'。",
+          "related": {
+            "prerequisite": "be动词，介词 in/on/under，名词单复数",
+            "next": "描述房间布局"
+          }
+        },
+        {
+          "card_id": "04-04",
+          "full_id": "英语-七上-04-04",
+          "title": "语音卡：字母组合 Jj, Qq, Uu, Xx, Yy, Zz 的发音",
+          "type": "语音卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "学习字母 Jj, Qq, Uu, Xx, Yy, Zz 在单词中的常见发音。",
+          "core_points": [
+            "**Jj** /dʒ/: 发音为舌尖抵住上齿龈后部，气流冲出，声带振动。例词：**j**acket, **j**ump",
+            "**Qq** /kw/: 通常与u组合发/kw/音。例词：**qu**ick, **qu**een",
+            "**Uu** /ʌ/ 或 /juː/:",
+            "  - /ʌ/ (短音)：例词：**u**nder, b**u**s",
+            "  - /juː/ (长音)：例词：**u**niversity, comp**u**ter",
+            "**Xx** /ks/ 或 /ɡz/:",
+            "  - /ks/: 在单词末尾或重读音节后。例词：bo**x**, si**x**",
+            "  - /ɡz/: 在重读音节前。例词：e**x**ample, e**x**it",
+            "**Yy** /j/ 或 /aɪ/ 或 /ɪ/:",
+            "  - /j/: 在单词开头。例词：**y**ellow, **y**es",
+            "  - /aɪ/: 在单词末尾，前面是辅音。例词：sk**y**, m**y**",
+            "  - /ɪ/: 在单词末尾，多音节词。例词：happ**y**, famil**y**",
+            "**Zz** /z/: 发音为舌尖抵住上齿龈，气流从舌尖与齿缝间摩擦而出，声带振动。例词：**z**oo, si**z**e"
+          ],
+          "why_explanation": "这些字母的发音规则相对复杂，特别是Uu和Yy的多种发音，以及Xx的清浊变化。掌握这些规则能帮助学生应对更复杂的单词拼读，提高语音准确性。",
+          "example": {
+            "question": "指出下列单词中划线字母的正确发音：1. **u**nder 2. **u**niversity 3. bo**x** 4. happ**y** 5. **y**ellow",
+            "steps": [
+              "1. under: 'u'发短音/ʌ/。",
+              "2. university: 'u'发长音/juː/。",
+              "3. box: 'x'在单词末尾发/ks/音。",
+              "4. happy: 'y'在多音节词末尾发/ɪ/音。",
+              "5. yellow: 'y'在单词开头发/j/音。",
+              "检查：1. /ʌ/ 2. /juː/ 3. /ks/ 4. /ɪ/ 5. /j/"
+            ],
+            "answer": "1. /ʌ/ 2. /juː/ 3. /ks/ 4. /ɪ/ 5. /j/"
+          },
+          "mistakes": [
+            {
+              "wrong": "将'university'中的'u'发成/ʌ/音。",
+              "correct": "/juː/",
+              "reason": "'u'在单词中可以有多种发音，需要根据具体单词记忆。'university'是长音/juː/。"
+            },
+            {
+              "wrong": "将'happy'中的'y'发成/aɪ/音。",
+              "correct": "/ɪ/",
+              "reason": "'y'在单音节词末尾常发/aɪ/，但在多音节词末尾常发/ɪ/。"
+            }
+          ],
+          "memory_tip": "Uu像个'变色龙'，时而/ʌ/时而/juː/。Yy像个'多面手'，开头/j/，结尾/aɪ/或/ɪ/。Xx像个'混合音'，/ks/或/ɡz/。",
+          "related": {
+            "prerequisite": "元音和辅音发音基础",
+            "next": "音标学习"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "05",
+      "unit_name": "Do you have a soccer ball?",
+      "cards": [
+        {
+          "card_id": "05-01",
+          "full_id": "英语-七上-05-01",
+          "title": "词汇：体育用品与运动类单词",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "本单元学习各种体育用品的名称和相关的运动词汇。",
+          "core_points": [
+            "have /hæv/: (v.) 有",
+            "has /hæz/: (v.) 有（have的第三人称单数形式）",
+            "soccer ball /ˈsɑːkər bɔːl/: (n.) 足球",
+            "basketball /ˈbæskɪtbɔːl/: (n.) 篮球",
+            "volleyball /ˈvɑːlibɔːl/: (n.) 排球",
+            "tennis ball /ˈtenɪs bɔːl/: (n.) 网球",
+            "ping-pong ball /ˈpɪŋ pɔːŋ bɔːl/: (n.) 乒乓球",
+            "baseball /ˈbeɪsbɔːl/: (n.) 棒球",
+            "bat /bæt/: (n.) 球棒",
+            "racket /ˈrækɪt/: (n.) 球拍",
+            "computer /kəmˈpjuːtər/: (n.) 电脑",
+            "game /ɡeɪm/: (n.) 游戏，比赛",
+            "club /klʌb/: (n.) 俱乐部，社团",
+            "play /pleɪ/: (v.) 玩，打（球）",
+            "do /duː/: (v.) 做",
+            "watch /wɑːtʃ/: (v.) 观看"
+          ],
+          "why_explanation": "这些词汇是描述体育活动和休闲娱乐的基础，掌握它们能帮助学生谈论兴趣爱好，参与相关话题的交流。",
+          "example": {
+            "question": "用所学词汇填空：1. I like to ____ basketball. 2. He has a ____ and a ____ for tennis. 3. My brother likes playing computer ____.",
+            "steps": [
+              "1. 'basketball'是运动，动词应是'play'。",
+              "2. 打网球需要'racket'（球拍）和'tennis ball'（网球）。",
+              "3. 玩电脑游戏，用'game'。",
+              "检查：1. I like to play basketball. 2. He has a racket and a tennis ball for tennis. 3. My brother likes playing computer games."
+            ],
+            "answer": "1. I like to play basketball. 2. He has a racket and a tennis ball for tennis. 3. My brother likes playing computer games."
+          },
+          "mistakes": [
+            {
+              "wrong": "I have a play soccer.",
+              "correct": "I play soccer. / I have a soccer ball.",
+              "reason": "'play soccer'是动词短语，'have a soccer ball'是名词短语。不能混淆动词和名词的用法。"
+            },
+            {
+              "wrong": "He play computer games.",
+              "correct": "He plays computer games.",
+              "reason": "主语'He'是第三人称单数，动词'play'应加-s。"
+            }
+          ],
+          "memory_tip": "have/has是'拥有'的动词。球类运动大多用'ball'结尾。'play'是玩耍和打球的万能动词。",
+          "related": {
+            "prerequisite": "动词，名词单复数",
+            "next": "一般现在时（实义动词）"
+          }
+        },
+        {
+          "card_id": "05-02",
+          "full_id": "英语-七上-05-02",
+          "title": "语法：动词 have/has 的用法",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "have/has表示“拥有”或“有”，是英语中非常重要的实义动词。",
+          "core_points": [
+            "**构成**：have/has根据主语的人称和数进行变化。",
+            "  - 第一人称单数 (I) → have",
+            "  - 第二人称单数/复数 (You) → have",
+            "  - 第三人称单数 (He, She, It) → has",
+            "  - 第一/二/三人称复数 (We, You, They) → have",
+            "**用法**：",
+            "  - 表示拥有：I have a book. She has a pen.",
+            "  - 表示身体特征：He has big eyes. (后续学习)",
+            "  - 表示膳食：We have dinner at 6 p.m. (后续学习)",
+            "**肯定句**：主语 + have/has + 宾语。",
+            "  - I have a soccer ball. He has a tennis racket.",
+            "**否定句**：主语 + don't/doesn't + have + 宾语。",
+            "  - I don't have a computer. She doesn't have a baseball bat.",
+            "  - 注意：否定句中，has 变回 have。",
+            "**一般疑问句**：Do/Does + 主语 + have + 宾语？",
+            "  - Do you have a volleyball? (Yes, I do. / No, I don't.)",
+            "  - Does he have a computer? (Yes, he does. / No, he doesn't.)",
+            "  - 注意：疑问句中，has 变回 have。",
+            "**特殊疑问句**：疑问词 + do/does + 主语 + have + 宾语？",
+            "  - What do you have? (I have a book.)"
+          ],
+          "why_explanation": "have/has是表示“拥有”的核心动词，其变化与主语保持一致，体现了主谓一致原则。在否定和疑问句中，它需要助动词do/does的帮助，这是实义动词的普遍特点，与be动词直接变化不同。",
+          "example": {
+            "question": "将句子'She has a new book.'改为否定句和一般疑问句，并作肯定和否定回答。",
+            "steps": [
+              "**否定句**：主语'She'是第三人称单数，助动词用'doesn't'，'has'变回'have'。→ She doesn't have a new book.",
+              "**一般疑问句**：助动词'Does'提前，'has'变回'have'。→ Does she have a new book?",
+              "**肯定回答**：Yes, she does.",
+              "**否定回答**：No, she doesn't."
+            ],
+            "answer": "否定句: She doesn't have a new book.\n一般疑问句: Does she have a new book?\n肯定回答: Yes, she does.\n否定回答: No, she doesn't."
+          },
+          "mistakes": [
+            {
+              "wrong": "He don't have a pen.",
+              "correct": "He doesn't have a pen.",
+              "reason": "主语'He'是第三人称单数，否定句助动词应使用'doesn't'。"
+            },
+            {
+              "wrong": "Do she has a book?",
+              "correct": "Does she have a book?",
+              "reason": "主语'She'是第三人称单数，疑问句助动词应使用'Does'，且'has'要变回原形'have'。"
+            },
+            {
+              "wrong": "I has a pencil.",
+              "correct": "I have a pencil.",
+              "reason": "主语'I'是第一人称单数，动词应使用'have'。"
+            }
+          ],
+          "memory_tip": "have/has像个'拥有者'，它会变脸（have/has），但遇到do/does时，它就'变回原形'have。",
+          "related": {
+            "prerequisite": "be动词，主谓一致",
+            "next": "一般现在时（实义动词）的完整规则"
+          }
+        },
+        {
+          "card_id": "05-03",
+          "full_id": "英语-七上-05-03",
+          "title": "语法：一般现在时（实义动词）",
+          "type": "时态卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "一般现在时用于表达经常性、习惯性的动作，普遍存在的真理，或表示主语的特征和能力。",
+          "core_points": [
+            "**构成**：",
+            "  - **主语为第一、二人称单复数及第三人称复数 (I, You, We, They)**：动词使用原形。",
+            "    - 例：I **play** soccer. They **have** many books.",
+            "  - **主语为第三人称单数 (He, She, It)**：动词原形后加 -s 或 -es。",
+            "    - 例：He **plays** basketball. She **watches** TV. It **goes** fast.",
+            "**动词加 -s/-es 的规则**：",
+            "  - 一般情况：动词后加 -s。 (play→plays, work→works)",
+            "  - 以 s, x, ch, sh, o 结尾的动词：加 -es。 (watch→watches, go→goes, fix→fixes)",
+            "  - 以辅音字母 + y 结尾的动词：变 y 为 i 再加 -es。 (study→studies, fly→flies) (注意：以元音字母 + y 结尾的动词直接加 -s，如 play→plays)",
+            "**肯定句**：主语 + 动词原形/动词三单形式 + 宾语/状语。",
+            "  - I like English. She likes music.",
+            "**否定句**：主语 + don't/doesn't + 动词原形 + 宾语/状语。",
+            "  - I don't play soccer. He doesn't watch TV.",
+            "**一般疑问句**：Do/Does + 主语 + 动词原形 + 宾语/状语？",
+            "  - Do you like sports? (Yes, I do. / No, I don't.)",
+            "  - Does she read books? (Yes, she does. / No, she doesn't.)",
+            "**特殊疑问句**：疑问词 + do/does + 主语 + 动词原形 + 宾语/状语？",
+            "  - What do you do? (I am a student.)",
+            "  - Where does he live? (He lives in Beijing.)",
+            "**标志词**：often, usually, always, sometimes, every day/week/year 等。"
+          ],
+          "why_explanation": "一般现在时是英语中最基础的时态之一，它通过动词形式的变化来表达动作的普遍性和规律性。助动词do/does的引入是为了在否定和疑问句中保持动词原形，避免重复变化，同时明确疑问或否定的语气。",
+          "example": {
+            "question": "将句子'He plays tennis.'改为否定句和一般疑问句，并作肯定和否定回答。再将'I watch TV.'改为第三人称单数形式。",
+            "steps": [
+              "**'He plays tennis.'**",
+              "  - 否定句：主语'He'是三单，用'doesn't'，动词变回原形'play'。→ He doesn't play tennis.",
+              "  - 一般疑问句：助动词'Does'提前，动词变回原形'play'。→ Does he play tennis?",
+              "  - 肯定回答：Yes, he does.",
+              "  - 否定回答：No, he doesn't.",
+              "**'I watch TV.'改为第三人称单数形式**：",
+              "  - 主语改为'She'。",
+              "  - 动词'watch'以'ch'结尾，加'-es'。→ She watches TV."
+            ],
+            "answer": "否定句: He doesn't play tennis.\n一般疑问句: Does he play tennis?\n肯定回答: Yes, he does.\n否定回答: No, he doesn't.\n第三人称单数形式: She watches TV."
+          },
+          "mistakes": [
+            {
+              "wrong": "She don't like apples.",
+              "correct": "She doesn't like apples.",
+              "reason": "主语'She'是第三人称单数，否定句助动词应使用'doesn't'。"
+            },
+            {
+              "wrong": "Do he goes to school?",
+              "correct": "Does he go to school?",
+              "reason": "主语'He'是第三人称单数，疑问句助动词应使用'Does'，且主语后的实义动词要变回原形'go'。"
+            },
+            {
+              "wrong": "I likes music.",
+              "correct": "I like music.",
+              "reason": "主语'I'是第一人称单数，动词使用原形'like'，不加-s。"
+            }
+          ],
+          "memory_tip": "三单主语动词加s，遇到do/does就变回原形。记住'do'和'does'是实义动词的'拐杖'，它们出现时，实义动词就不用自己变身了。",
+          "related": {
+            "prerequisite": "be动词，主谓一致",
+            "next": "一般过去时"
+          }
+        },
+        {
+          "card_id": "05-04",
+          "full_id": "英语-七上-05-04",
+          "title": "句型：询问与表达拥有",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习如何询问他人是否拥有某物，并进行肯定或否定的回答。",
+          "core_points": [
+            "**询问是否拥有某物 (一般疑问句)**：",
+            "  - Do you have a + 名词单数? (你有一个...吗？)",
+            "    - 例：Do you have a soccer ball? (你有一个足球吗？)",
+            "  - Does he/she have a + 名词单数? (他/她有一个...吗？)",
+            "    - 例：Does she have a computer? (她有一台电脑吗？)",
+            "  - Do you have any + 名词复数/不可数名词? (你有一些...吗？)",
+            "    - 例：Do you have any books? (你有一些书吗？)",
+            "**肯定回答**：",
+            "  - Yes, I do. (是的，我有。)",
+            "  - Yes, he/she does. (是的，他/她有。)",
+            "**否定回答**：",
+            "  - No, I don't. (不，我没有。)",
+            "  - No, he/she doesn't. (不，他/她没有。)"
+          ],
+          "why_explanation": "这些句型是日常生活中询问物品归属和数量的基础。通过使用助动词'Do/Does'引导疑问句，可以清晰地表达疑问，并用简洁的'Yes, I do / No, I don't'进行回答。",
+          "example": {
+            "question": "补全对话：A: ____ you ____ a tennis racket? B: Yes, ____ ____. A: ____ she ____ a computer? B: No, she ____.",
+            "steps": [
+              "A询问是否拥有，主语是'you'，用'Do'和'have'。",
+              "B肯定回答，主语是'I'，用'I do'。",
+              "A询问是否拥有，主语是'she'，用'Does'和'have'。",
+              "B否定回答，主语是'she'，用'she doesn't'。",
+              "检查：A: Do you have a tennis racket? B: Yes, I do. A: Does she have a computer? B: No, she doesn't."
+            ],
+            "answer": "A: Do you have a tennis racket? B: Yes, I do. A: Does she have a computer? B: No, she doesn't."
+          },
+          "mistakes": [
+            {
+              "wrong": "Do you has a pen?",
+              "correct": "Do you have a pen?",
+              "reason": "在助动词'Do/Does'引导的疑问句中，实义动词'have'必须使用原形。"
+            },
+            {
+              "wrong": "Does he have a book? No, he don't.",
+              "correct": "Does he have a book? No, he doesn't.",
+              "reason": "疑问句用'does'提问，回答时也要用'does'。"
+            }
+          ],
+          "memory_tip": "'Do/Does'是'拥有'句型的'前锋'，它冲在前面，后面的'have'就不用变身了。肯定回答'do/does'，否定回答'don't/doesn't'。",
+          "related": {
+            "prerequisite": "动词 have/has，一般现在时（实义动词）",
+            "next": "询问兴趣爱好"
+          }
+        },
+        {
+          "card_id": "05-05",
+          "full_id": "英语-七上-05-05",
+          "title": "语音卡：字母组合 Aa, Ee, Ii, Oo, Uu 的短元音发音",
+          "type": "语音卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习五个元音字母 Aa, Ee, Ii, Oo, Uu 在重读闭音节中的短元音发音。",
+          "core_points": [
+            "**Aa** /æ/: 发音时嘴巴张大，舌尖抵下齿，像中文的“哎”但更扁平。例词：b**a**ckpack, h**a**ve, r**a**cket, b**a**t",
+            "**Ee** /e/: 发音时嘴巴微张，舌尖抵下齿，像中文的“呃”。例词：p**e**n, r**e**d, t**e**nnis, p**e**ncil",
+            "**Ii** /ɪ/: 发音时嘴巴微张，舌尖抵下齿，像中文的“衣”但更短促。例词：**i**n, p**i**ng-pong, **i**s, s**i**ster",
+            "**Oo** /ɑː/ (美式 /ɑː/ 或 /ɒ/ 英式): 发音时嘴巴张大，舌头后部抬高。像中文的“啊”或“奥”。例词：s**o**ccer, b**o**x, d**o**g (本单元词汇多为美式发音)",
+            "**Uu** /ʌ/: 发音时嘴巴微张，舌头后部抬高，像中文的“啊”但更短促。例词：**u**nder, b**u**s, cl**u**b"
+          ],
+          "why_explanation": "短元音是英语发音的基础，掌握它们对于正确拼读单词和理解重读闭音节规则至关重要。这些是英语词汇中最常见的元音发音。",
+          "example": {
+            "question": "指出下列单词中划线字母的短元音发音：1. b**a**ck 2. p**e**n 3. p**i**ng 4. s**o**ccer 5. **u**nder",
+            "steps": [
+              "1. back: 'a'发/æ/音。",
+              "2. pen: 'e'发/e/音。",
+              "3. ping: 'i'发/ɪ/音。",
+              "4. soccer: 'o'发/ɑː/音。",
+              "5. under: 'u'发/ʌ/音。",
+              "检查：1. /æ/ 2. /e/ 3. /ɪ/ 4. /ɑː/ 5. /ʌ/"
+            ],
+            "answer": "1. /æ/ 2. /e/ 3. /ɪ/ 4. /ɑː/ 5. /ʌ/"
+          },
+          "mistakes": [
+            {
+              "wrong": "将'pen'中的'e'发成/iː/音。",
+              "correct": "/e/",
+              "reason": "'e'在重读闭音节中发短音/e/，而不是长音/iː/（如'meet'）。"
+            },
+            {
+              "wrong": "将'soccer'中的'o'发成/oʊ/音。",
+              "correct": "/ɑː/",
+              "reason": "'o'在重读闭音节中发短音/ɑː/，而不是长音/oʊ/（如'go'）。"
+            }
+          ],
+          "memory_tip": "短元音像'快闪'，发音短促有力。Aa像扁嘴鸭，Ee像小嘴鹅，Ii像小猪哼，Oo像大嘴巴，Uu像小船翻。",
+          "related": {
+            "prerequisite": "元音字母，闭音节概念",
+            "next": "长元音发音"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "06",
+      "unit_name": "Do you like bananas?",
+      "cards": [
+        {
+          "card_id": "06-01",
+          "full_id": "英语-七上-06-01",
+          "title": "词汇：食物类单词",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "本单元学习各种常见食物的名称。",
+          "core_points": [
+            "like /laɪk/: (v.) 喜欢",
+            "banana /bəˈnænə/: (n.) 香蕉",
+            "orange /ˈɔːrɪndʒ/: (n.) 橘子",
+            "apple /ˈæpl/: (n.) 苹果",
+            "pear /per/: (n.) 梨",
+            "strawberry /ˈstrɔːberi/: (n.) 草莓",
+            "grape /ɡreɪp/: (n.) 葡萄",
+            "hamburger /ˈhæmbɜːrɡər/: (n.) 汉堡包",
+            "chicken /ˈtʃɪkɪn/: (n.) 鸡肉，鸡",
+            "salad /ˈsæləd/: (n.) 沙拉",
+            "bread /bred/: (n.) 面包",
+            "rice /raɪs/: (n.) 米饭",
+            "egg /eɡ/: (n.) 鸡蛋",
+            "milk /mɪlk/: (n.) 牛奶",
+            "water /ˈwɔːtər/: (n.) 水",
+            "food /fuːd/: (n.) 食物"
+          ],
+          "why_explanation": "食物是日常生活中必不可少的话题，掌握这些词汇能帮助学生表达饮食偏好，进行点餐、购物等相关交流。",
+          "example": {
+            "question": "用所学食物词汇填空：1. I like to eat ____ and ____ for breakfast. 2. My favorite fruit is ____. 3. Do you like ____? (假设指鸡肉)",
+            "steps": [
+              "1. 早餐常吃面包和鸡蛋，填'bread'和'eggs'（鸡蛋通常吃多个）。",
+              "2. 假设最喜欢的水果是香蕉，填'banana'。",
+              "3. 询问是否喜欢鸡肉，填'chicken'。",
+              "检查：1. I like to eat bread and eggs for breakfast. 2. My favorite fruit is banana. 3. Do you like chicken?"
+            ],
+            "answer": "1. I like to eat bread and eggs for breakfast. 2. My favorite fruit is banana. 3. Do you like chicken?"
+          },
+          "mistakes": [
+            {
+              "wrong": "I like eats apples.",
+              "correct": "I like to eat apples. / I like apples.",
+              "reason": "'like'后接动词时，通常用动词不定式'to do'或动名词'doing'；直接接名词时，动词'like'不加-s。"
+            },
+            {
+              "wrong": "Do you like a banana?",
+              "correct": "Do you like bananas? / Do you like a banana? (特指一个)",
+              "reason": "泛指喜欢某种水果时，通常用复数名词。如果特指“一个”香蕉，则用单数。"
+            }
+          ],
+          "memory_tip": "把食物想象成超市货架上的商品，每个都有自己的名字。记住'like'是表达喜好的万能动词。",
+          "related": {
+            "prerequisite": "动词 like，名词单复数",
+            "next": "可数名词与不可数名词"
+          }
+        },
+        {
+          "card_id": "06-02",
+          "full_id": "英语-七上-06-02",
+          "title": "语法：可数名词与不可数名词",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "可数名词指可以计数的事物，有单复数形式；不可数名词指不能计数的事物，只有单数形式。",
+          "core_points": [
+            "**可数名词 (Countable Nouns)**：",
+            "  - 表示可以一个一个数出来的物体、人或概念。",
+            "  - 有单数和复数形式，单数前可用a/an修饰，复数前可用数字或many/few修饰。",
+            "  - 例：apple (an apple, two apples), banana (a banana, many bananas), egg (an egg, three eggs)",
+            "**不可数名词 (Uncountable Nouns)**：",
+            "  - 表示不能一个一个数出来的物质、液体、抽象概念等。",
+            "  - 没有复数形式，不能用a/an修饰，但可以用some/any/much/little修饰，或用量词（如a cup of, a piece of）来表示数量。",
+            "  - 例：water (some water, much water), milk (some milk), bread (some bread, a piece of bread), rice (some rice)",
+            "**常见食物的可数与不可数**：",
+            "  - 可数：apple, banana, orange, pear, strawberry, grape, hamburger, egg",
+            "  - 不可数：chicken (鸡肉), salad, bread, rice, milk, water, food",
+            "**判断方法**：看它是否能被一个一个地分开数。面包、米饭、水等都是整体或液体，不能直接计数。"
+          ],
+          "why_explanation": "可数与不可数名词的区分是英语名词语法体系的核心，它影响冠词、量词和动词的选用。这种区分反映了英语对事物“个体性”和“整体性”的认知方式。",
+          "example": {
+            "question": "判断下列名词是可数名词 (C) 还是不可数名词 (U)，并写出复数形式（如果可以）：1. water 2. apple 3. bread 4. hamburger 5. milk",
+            "steps": [
+              "1. water: 液体，不可数 → U (无复数)。",
+              "2. apple: 可以计数，可数 → C (复数: apples)。",
+              "3. bread: 整体物质，不可数 → U (无复数)。",
+              "4. hamburger: 可以计数，可数 → C (复数: hamburgers)。",
+              "5. milk: 液体，不可数 → U (无复数)。",
+              "检查：1. U 2. C (apples) 3. U 4. C (hamburgers) 5. U"
+            ],
+            "answer": "1. U 2. C (apples) 3. U 4. C (hamburgers) 5. U"
+          },
+          "mistakes": [
+            {
+              "wrong": "I want a water.",
+              "correct": "I want some water. / I want a glass of water.",
+              "reason": "'water'是不可数名词，不能用不定冠词'a'修饰。需要用量词或'some'。"
+            },
+            {
+              "wrong": "He likes rices.",
+              "correct": "He likes rice.",
+              "reason": "'rice'是不可数名词，没有复数形式。"
+            },
+            {
+              "wrong": "Do you have any breads?",
+              "correct": "Do you have any bread?",
+              "reason": "'bread'是不可数名词，没有复数形式。"
+            }
+          ],
+          "memory_tip": "可数名词像'珠子'，能一个一个数；不可数名词像'沙子'或'水'，只能称重或用容器装。记住'a/an'只给'珠子'。",
+          "related": {
+            "prerequisite": "名词单复数",
+            "next": "量词，some/any的用法"
+          }
+        },
+        {
+          "card_id": "06-03",
+          "full_id": "英语-七上-06-03",
+          "title": "语法：some 与 any 的用法",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "some 和 any 都表示“一些”，用于修饰可数名词复数或不可数名词，但用法有区别。",
+          "core_points": [
+            "**some** /sʌm/:",
+            "  - **用于肯定句**：表示“一些”。",
+            "    - 例：I have **some** books. (我有一些书。)",
+            "    - 例：She wants **some** water. (她想要一些水。)",
+            "  - **用于疑问句 (表示请求或建议，期望得到肯定回答)**：",
+            "    - 例：Would you like **some** tea? (你想喝点茶吗？——建议)",
+            "    - 例：Can I have **some** apples? (我能吃些苹果吗？——请求)",
+            "**any** /ˈeni/:",
+            "  - **用于否定句**：表示“任何”或“一点也（不）”。",
+            "    - 例：I don't have **any** books. (我没有任何书。)",
+            "    - 例：She doesn't want **any** milk. (她一点牛奶也不想要。)",
+            "  - **用于一般疑问句**：表示“一些”、“任何”。",
+            "    - 例：Do you have **any** questions? (你有什么问题吗？)",
+            "    - 例：Is there **any** bread? (有一些面包吗？)",
+            "  - **用于含有否定意义的词语后**：如 without, never, hardly 等。",
+            "    - 例：He left without **any** money. (他身无分文地离开了。)"
+          ],
+          "why_explanation": "some和any的区分是为了在肯定、否定和疑问语境中更精确地表达数量概念。'some'在肯定句中是默认的存在，而在疑问句中则带有期待；'any'在否定句中强调“没有一点”，在疑问句中则表示不确定性。",
+          "example": {
+            "question": "用 some 或 any 填空：1. I have ____ apples. 2. Do you have ____ milk? 3. She doesn't have ____ friends. 4. Would you like ____ juice?",
+            "steps": [
+              "1. 肯定句，用'some'。",
+              "2. 一般疑问句，用'any'。",
+              "3. 否定句，用'any'。",
+              "4. 疑问句表示建议/请求，用'some'。",
+              "检查：1. I have some apples. 2. Do you have any milk? 3. She doesn't have any friends. 4. Would you like some juice?"
+            ],
+            "answer": "1. some 2. any 3. any 4. some"
+          },
+          "mistakes": [
+            {
+              "wrong": "I don't have some pens.",
+              "correct": "I don't have any pens.",
+              "reason": "否定句中通常使用'any'，而非'some'。"
+            },
+            {
+              "wrong": "Do you have some questions?",
+              "correct": "Do you have any questions?",
+              "reason": "一般疑问句中通常使用'any'，除非是表示建议或请求。"
+            },
+            {
+              "wrong": "She wants any bread.",
+              "correct": "She wants some bread.",
+              "reason": "肯定句中通常使用'some'，而非'any'。"
+            }
+          ],
+          "memory_tip": "some是'肯定'和'客气'的好朋友，any是'否定'和'疑问'的搭档。就像'阳光'和'阴影'，各有各的地盘。",
+          "related": {
+            "prerequisite": "可数名词与不可数名词，肯定句/否定句/疑问句的结构",
+            "next": "much/many 的用法"
+          }
+        },
+        {
+          "card_id": "06-04",
+          "full_id": "英语-七上-06-04",
+          "title": "句型：询问与表达喜好",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习如何询问他人对某事物的喜好，并进行肯定或否定的回答。",
+          "core_points": [
+            "**询问喜好 (一般疑问句)**：",
+            "  - Do you like + 名词复数/不可数名词? (你喜欢...吗？)",
+            "    - 例：Do you like bananas? (你喜欢香蕉吗？)",
+            "    - 例：Do you like milk? (你喜欢牛奶吗？)",
+            "  - Does he/she like + 名词复数/不可数名词? (他/她喜欢...吗？)",
+            "    - 例：Does she like apples? (她喜欢苹果吗？)",
+            "**肯定回答**：",
+            "  - Yes, I do. (是的，我喜欢。)",
+            "  - Yes, he/she does. (是的，他/她喜欢。)",
+            "  - I like + 名词复数/不可数名词. (我喜欢...)",
+            "    - 例：I like bananas. (我喜欢香蕉。)",
+            "**否定回答**：",
+            "  - No, I don't. (不，我不喜欢。)",
+            "  - No, he/she doesn't. (不，他/她不喜欢。)",
+            "  - I don't like + 名词复数/不可数名词. (我不喜欢...)",
+            "    - 例：I don't like milk. (我不喜欢牛奶。)",
+            "**特殊疑问句**：",
+            "  - What do you like? (你喜欢什么？)",
+            "  - What does she like? (她喜欢什么？)"
+          ],
+          "why_explanation": "这些句型是日常交流中表达个人喜好和兴趣的基础。动词'like'是核心，结合一般现在时的疑问和否定结构，可以进行流畅的对话。",
+          "example": {
+            "question": "补全对话：A: ____ you ____ apples? B: Yes, ____ ____. A: ____ he ____ chicken? B: No, ____ ____.",
+            "steps": [
+              "A询问喜好，主语'you'，用'Do'和'like'。",
+              "B肯定回答，主语'I'，用'I do'。",
+              "A询问喜好，主语'he'，用'Does'和'like'。",
+              "B否定回答，主语'he'，用'he doesn't'。",
+              "检查：A: Do you like apples? B: Yes, I do. A: Does he like chicken? B: No, he doesn't."
+            ],
+            "answer": "A: Do you like apples? B: Yes, I do. A: Does he like chicken? B: No, he doesn't."
+          },
+          "mistakes": [
+            {
+              "wrong": "Do you like a banana?",
+              "correct": "Do you like bananas?",
+              "reason": "泛指喜欢某种食物时，通常用复数名词。除非特指某个。"
+            },
+            {
+              "wrong": "He don't like rice.",
+              "correct": "He doesn't like rice.",
+              "reason": "主语'He'是第三人称单数，否定句助动词应使用'doesn't'。"
+            }
+          ],
+          "memory_tip": "'Do you like...?'是问喜好的'敲门砖'。记住'like'后面可以跟名词、动名词或动词不定式，但初中阶段主要用名词。",
+          "related": {
+            "prerequisite": "一般现在时（实义动词），可数名词与不可数名词",
+            "next": "询问价格"
+          }
+        },
+        {
+          "card_id": "06-05",
+          "full_id": "英语-七上-06-05",
+          "title": "易混词卡：food vs. foods",
+          "type": "易混词卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "区分'food'（不可数名词，泛指食物）和'foods'（可数名词复数，指不同种类的食物）。",
+          "core_points": [
+            "**food** /fuːd/: (不可数名词)",
+            "  - 泛指“食物”这一概念或作为一种物质。",
+            "  - 例：I like healthy **food**. (我喜欢健康的食物。)",
+            "  - 例：We need some **food** for the party. (我们需要一些食物用于派对。)",
+            "**foods** /fuːdz/: (可数名词复数)",
+            "  - 指“多种食物”、“不同的食物种类”。",
+            "  - 例：There are many different **foods** in the supermarket. (超市里有许多不同种类的食物。)",
+            "  - 例：Eating a variety of **foods** is good for your health. (吃各种各样的食物对你的健康有益。)",
+            "**核心区别**：'food'是总称，'foods'是特指各种具体的类别。"
+          ],
+          "why_explanation": "这种区分反映了英语中抽象概念（food）和具体分类（foods）的表达方式。理解这种细微差别能使语言表达更准确，避免语义不清。",
+          "example": {
+            "question": "选择正确的词填空：1. What's your favorite ____? 2. I like all kinds of ____. 3. My mom cooks delicious ____ for us.",
+            "steps": [
+              "1. 询问“最喜欢的食物是什么”，是泛指，用'food'。",
+              "2. 'all kinds of'（各种各样的）提示后面需要复数形式，指不同种类，用'foods'。",
+              "3. 妈妈为我们做“美味的食物”，是泛指，用'food'。",
+              "检查：1. What's your favorite food? 2. I like all kinds of foods. 3. My mom cooks delicious food for us."
+            ],
+            "answer": "1. food 2. foods 3. food"
+          },
+          "mistakes": [
+            {
+              "wrong": "There are many foods in my stomach.",
+              "correct": "There is much food in my stomach. / I have eaten a lot of food.",
+              "reason": "胃里的食物通常被看作一个整体或物质，而非不同种类。用'much food'或'a lot of food'更自然。"
+            },
+            {
+              "wrong": "Eating a healthy food is important.",
+              "correct": "Eating healthy food is important. / Eating healthy foods is important.",
+              "reason": "如果指“健康的食物”这一概念，'food'是不可数，前面不加'a'。如果指“健康的多种食物”，则用'foods'。"
+            }
+          ],
+          "memory_tip": "food是'一大堆'，foods是'一小堆一小堆'。就像'水'（food）和'瓶装水'（foods）。",
+          "related": {
+            "prerequisite": "可数名词与不可数名词",
+            "next": "更多抽象名词的可数与不可数用法"
+          }
+        },
+        {
+          "card_id": "06-06",
+          "full_id": "英语-七上-06-06",
+          "title": "语音卡：字母组合 sh, ch, th, dr, tr 的发音",
+          "type": "语音卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习字母组合 sh, ch, th, dr, tr 在单词中的常见发音。",
+          "core_points": [
+            "**sh** /ʃ/: 发音时舌尖抬起靠近硬腭，气流从舌尖与硬腭之间摩擦而出，声带不振动。像中文的“嘘”。例词：**sh**e, fi**sh**, wa**sh**",
+            "**ch** /tʃ/: 发音时舌尖抵住上齿龈后部，气流冲出，声带不振动。像中文的“吃”。例词：**ch**icken, wa**tch**, tea**ch**er",
+            "**th** /θ/ 或 /ð/:",
+            "  - /θ/ (清辅音)：舌尖轻触上齿，气流从舌齿间摩擦而出，声带不振动。例词：**th**anks, **th**ree, bir**th**day",
+            "  - /ð/ (浊辅音)：舌尖轻触上齿，气流从舌齿间摩擦而出，声带振动。例词：**th**is, **th**at, **th**ey, fa**th**er, mo**th**er",
+            "**dr** /dr/: 舌尖抵住上齿龈后部，发/d/的同时舌尖向后卷，发出/r/音。例词：**dr**ess, **dr**ink",
+            "**tr** /tr/: 舌尖抵住上齿龈后部，发/t/的同时舌尖向后卷，发出/r/音。例词：**tr**ee, **tr**ain"
+          ],
+          "why_explanation": "这些是英语中常见的辅音组合，它们有特定的发音规律，与单个字母的发音不同。特别是'th'的清浊音，是英语发音的难点之一，掌握这些能显著提高发音的准确性和流利度。",
+          "example": {
+            "question": "指出下列单词中划线字母组合的正确发音：1. **sh**e 2. **ch**icken 3. **th**anks 4. **th**is 5. **dr**ess",
+            "steps": [
+              "1. she: 'sh'发/ʃ/音。",
+              "2. chicken: 'ch'发/tʃ/音。",
+              "3. thanks: 'th'发清辅音/θ/。",
+              "4. this: 'th'发浊辅音/ð/。",
+              "5. dress: 'dr'发/dr/音。",
+              "检查：1. /ʃ/ 2. /tʃ/ 3. /θ/ 4. /ð/ 5. /dr/"
+            ],
+            "answer": "1. /ʃ/ 2. /tʃ/ 3. /θ/ 4. /ð/ 5. /dr/"
+          },
+          "mistakes": [
+            {
+              "wrong": "将'this'中的'th'发成/θ/音。",
+              "correct": "/ð/",
+              "reason": "区分'th'的清浊音是难点，'this'中的'th'是浊辅音。"
+            },
+            {
+              "wrong": "将'chicken'中的'ch'发成/ʃ/音。",
+              "correct": "/tʃ/",
+              "reason": "'ch'和'sh'发音相似，但不同。'ch'是塞擦音，'sh'是摩擦音。"
+            }
+          ],
+          "memory_tip": "sh像嘘声，ch像打喷嚏。th像舌头伸出来，清音不振动（thanks），浊音振动（this）。dr/tr像舌头打滚，发出连音。",
+          "related": {
+            "prerequisite": "清辅音和浊辅音的概念",
+            "next": "更多辅音组合发音"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "07",
+      "unit_name": "How much are these socks?",
+      "cards": [
+        {
+          "card_id": "07-01",
+          "full_id": "英语-七上-07-01",
+          "title": "词汇：服装与数字类单词",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "本单元学习各种衣物名称和数字1-100。",
+          "core_points": [
+            "sock /sɑːk/: (n.) 短袜",
+            "T-shirt /ˈtiː ʃɜːrt/: (n.) T恤衫",
+            "shorts /ʃɔːrts/: (n.) 短裤",
+            "sweater /ˈswetər/: (n.) 毛衣",
+            "shoe /ʃuː/: (n.) 鞋",
+            "skirt /skɜːrt/: (n.) 裙子",
+            "pants /pænts/: (n.) 裤子",
+            "coat /koʊt/: (n.) 外套",
+            "dress /dres/: (n.) 连衣裙",
+            "buy /baɪ/: (v.) 买",
+            "sell /sel/: (v.) 卖",
+            "want /wɑːnt/: (v.) 想要",
+            "need /niːd/: (v.) 需要",
+            "dollar /ˈdɑːlər/: (n.) 美元",
+            "cent /sent/: (n.) 美分",
+            "how much /haʊ mʌtʃ/: (phr.) 多少钱",
+            "zero /ˈzɪroʊ/ (0), one /wʌn/ (1), two /tuː/ (2), ..., ten /ten/ (10)",
+            "eleven /ɪˈlevn/ (11), twelve /twelv/ (12), ..., twenty /ˈtwenti/ (20)",
+            "twenty-one (21), ..., thirty /ˈθɜːrti/ (30), ..., one hundred /wʌn ˈhʌndrəd/ (100)"
+          ],
+          "why_explanation": "服装是日常生活必需品，数字是购物和价格交流的基础。掌握这些词汇能帮助学生进行购物对话，理解和表达价格。",
+          "example": {
+            "question": "用所学词汇填空：1. I need to ____ a new ____ for winter. 2. These ____ are thirty ____. 3. My favorite number is ____ (25).",
+            "steps": [
+              "1. 冬天需要买外套，填'buy'和'coat'。",
+              "2. 价格单位是美元和美分，这里是三十美元，填'dollars'。",
+              "3. 25的英文是'twenty-five'。",
+              "检查：1. I need to buy a new coat for winter. 2. These socks are thirty dollars. 3. My favorite number is twenty-five."
+            ],
+            "answer": "1. I need to buy a new coat for winter. 2. These socks are thirty dollars. 3. My favorite number is twenty-five."
+          },
+          "mistakes": [
+            {
+              "wrong": "I want a pants.",
+              "correct": "I want some pants. / I want a pair of pants.",
+              "reason": "'pants'是复数名词，不能用不定冠词'a'修饰。通常用'some'或'a pair of'。"
+            },
+            {
+              "wrong": "It's five dollar.",
+              "correct": "It's five dollars.",
+              "reason": "当金额大于一时，'dollar'和'cent'需要用复数形式。"
+            }
+          ],
+          "memory_tip": "衣服类名词很多是复数，如pants, shorts, shoes。数字是购物的'密码'，记住十位和个位的组合。dollar像'大钱'，cent像'小钱'。",
+          "related": {
+            "prerequisite": "可数名词复数",
+            "next": "购物情景对话"
+          }
+        },
+        {
+          "card_id": "07-02",
+          "full_id": "英语-七上-07-02",
+          "title": "语法：How much 询问价格",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "How much 用于询问物品的价格，或不可数名词的数量。",
+          "core_points": [
+            "**询问价格 (针对单数物品)**：",
+            "  - How much is + this/that + 名词单数? (这个/那个...多少钱？)",
+            "    - 例：**How much is** this T-shirt? (这件T恤多少钱？)",
+            "  - How much is it? (它多少钱？——指代单数物品)",
+            "**询问价格 (针对复数物品)**：",
+            "  - How much are + these/those + 名词复数? (这些/那些...多少钱？)",
+            "    - 例：**How much are** these socks? (这些袜子多少钱？)",
+            "  - How much are they? (它们多少钱？——指代复数物品)",
+            "**回答价格**：",
+            "  - It's + 数字 + dollars (and cents). (它……美元（和美分）。)",
+            "    - 例：It's ten dollars. (10美元。)",
+            "    - 例：It's ten dollars and fifty cents. (10美元50美分。)",
+            "  - They're + 数字 + dollars (and cents). (它们……美元（和美分）。)",
+            "    - 例：They're twenty dollars. (20美元。)",
+            "**注意**：'How much'也可以询问不可数名词的数量（例如：How much water do you need?），但本单元主要侧重价格询问。"
+          ],
+          "why_explanation": "'How much'是专门用于询问价格或不可数数量的疑问词组。它的搭配原则是与be动词的单复数保持一致，以准确指代所询问的物品。价格单位'dollar'和'cent'的复数变化也需注意。",
+          "example": {
+            "question": "补全对话：A: Excuse me, ____ ____ is this sweater? B: ____ twenty-five ____. A: And ____ ____ are these shoes? B: ____ sixty ____.",
+            "steps": [
+              "A询问毛衣（单数）价格，用'How much'和'is'。",
+              "B回答是25美元，用'It's'和'dollars'。",
+              "A询问鞋子（复数）价格，用'How much'和'are'。",
+              "B回答是60美元，用'They're'和'dollars'。",
+              "检查：A: Excuse me, how much is this sweater? B: It's twenty-five dollars. A: And how much are these shoes? B: They're sixty dollars."
+            ],
+            "answer": "A: Excuse me, how much is this sweater? B: It's twenty-five dollars. A: And how much are these shoes? B: They're sixty dollars."
+          },
+          "mistakes": [
+            {
+              "wrong": "How much are this T-shirt?",
+              "correct": "How much is this T-shirt?",
+              "reason": "'T-shirt'是单数，be动词应使用'is'。"
+            },
+            {
+              "wrong": "It's five dollar.",
+              "correct": "It's five dollars.",
+              "reason": "当金额大于一时，'dollar'和'cent'需要用复数形式。"
+            },
+            {
+              "wrong": "How many is this?",
+              "correct": "How much is this?",
+              "reason": "'How many'询问可数名词的数量，'How much'询问价格或不可数名词的数量。"
+            }
+          ],
+          "memory_tip": "'How much'是问'多少钱'的'金钥匙'。记住单数用'is'，复数用'are'。dollar是'大哥'，cent是'小弟'，大于一就加s。",
+          "related": {
+            "prerequisite": "be动词，可数名词单复数，数字",
+            "next": "购物场景对话"
+          }
+        },
+        {
+          "card_id": "07-03",
+          "full_id": "英语-七上-07-03",
+          "title": "语法：数字 0-100",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习英语中从零到一百的数字表达方式。",
+          "core_points": [
+            "**个位数**：zero, one, two, three, four, five, six, seven, eight, nine",
+            "**十位数 (10-19)**：ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen",
+            "**整十数**：ten, twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety",
+            "**复合数 (21-99)**：十位数和个位数之间用连字符 '-' 连接。",
+            "  - 例：twenty-one (21), thirty-five (35), ninety-nine (99)",
+            "**一百**：one hundred (也可以是 a hundred)",
+            "**数字的实际应用**：",
+            "  - 价格：It's twelve dollars. (它是12美元。)",
+            "  - 数量：I have twenty books. (我有20本书。)",
+            "  - 电话号码：通常一个一个数字读出。 (010-6588-1234 → zero one zero, six five double eight, one two three four)",
+            "  - 年份：通常读作两个两位数。 (1998 → nineteen ninety-eight)"
+          ],
+          "why_explanation": "数字是日常生活和学习中不可或缺的元素，掌握它们是进行计数、表达价格、时间、日期等基本交流的基础。英语数字的规则性使得学习变得有迹可循。",
+          "example": {
+            "question": "写出下列数字的英文表达：1. 15 2. 40 3. 78 4. 100",
+            "steps": [
+              "1. 15是'fifteen'。",
+              "2. 40是'forty' (注意不是'fourty')。",
+              "3. 78是'seventy-eight'。",
+              "4. 100是'one hundred'。",
+              "检查：1. fifteen 2. forty 3. seventy-eight 4. one hundred"
+            ],
+            "answer": "1. fifteen 2. forty 3. seventy-eight 4. one hundred"
+          },
+          "mistakes": [
+            {
+              "wrong": "fourty",
+              "correct": "forty",
+              "reason": "数字40的拼写是'forty'，不是'fourty'。"
+            },
+            {
+              "wrong": "twenty five",
+              "correct": "twenty-five",
+              "reason": "21-99的复合数字，十位和个位之间需要用连字符'-'连接。"
+            },
+            {
+              "wrong": "one hundreds",
+              "correct": "one hundred",
+              "reason": "'hundred'在表示“一百”时通常用单数，除非前面有具体数字且后面跟复数名词。"
+            }
+          ],
+          "memory_tip": "1-12是'独立派'，13-19是'teenager'，20-90是'ty家族'。复合数中间加'小横杠'。",
+          "related": {
+            "prerequisite": "数字0-9",
+            "next": "序数词，更大的数字表达"
+          }
+        },
+        {
+          "card_id": "07-04",
+          "full_id": "英语-七上-07-04",
+          "title": "句型：购物对话",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习在商店中进行购物的基本对话，包括询问物品、价格和表达购买意愿。",
+          "core_points": [
+            "**询问物品**：",
+            "  - I want a/an + 名词单数. (我想要一个...)",
+            "  - I want some + 名词复数/不可数名词. (我想要一些...)",
+            "  - I need a/an + 名词单数. (我需要一个...)",
+            "  - I need some + 名词复数/不可数名词. (我需要一些...)",
+            "  - Do you have a/an/any + 物品? (你们有...吗？)",
+            "**询问价格**：",
+            "  - How much is it? (它多少钱？)",
+            "  - How much are they? (它们多少钱？)",
+            "  - How much is this/that + 物品? (这个/那个...多少钱？)",
+            "  - How much are these/those + 物品? (这些/那些...多少钱？)",
+            "**表达购买意愿**：",
+            "  - I'll take it/them. (我要买它/它们。)",
+            "  - Here you are. (给你。)",
+            "  - Thank you. (谢谢。)"
+          ],
+          "why_explanation": "购物是日常生活中常见的场景，掌握这些句型能让学生在实际生活中进行简单的购物交流。这些句型涵盖了从询问到付款的整个过程。",
+          "example": {
+            "question": "补全对话：A: Can I help you? B: Yes, I ____ a T-shirt. A: What ____ is it? B: It's blue. A: ____ much ____ it? B: It's twenty ____. A: OK, I'll ____ it.",
+            "steps": [
+              "B表达想要T恤，用'want'。",
+              "A询问颜色，用'color'。",
+              "A询问价格，用'How much'和'is'。",
+              "B回答20美元，用'dollars'。",
+              "A表达购买，用'take'。",
+              "检查：A: Can I help you? B: Yes, I want a T-shirt. A: What color is it? B: It's blue. A: How much is it? B: It's twenty dollars. A: OK, I'll take it."
+            ],
+            "answer": "A: Can I help you? B: Yes, I want a T-shirt. A: What color is it? B: It's blue. A: How much is it? B: It's twenty dollars. A: OK, I'll take it."
+          },
+          "mistakes": [
+            {
+              "wrong": "I want some T-shirt.",
+              "correct": "I want a T-shirt. / I want some T-shirts.",
+              "reason": "'T-shirt'是可数名词，单数用'a'，复数用'some'或具体数字。"
+            },
+            {
+              "wrong": "How much are it?",
+              "correct": "How much is it?",
+              "reason": "'it'是单数代词，be动词应使用'is'。"
+            }
+          ],
+          "memory_tip": "购物对话像个'流程图'：店员问'Can I help you?'，你回答'I want...'，店员报'How much...'，你决定'I'll take it.'",
+          "related": {
+            "prerequisite": "物品词汇，数字，How much 句型",
+            "next": "更复杂的购物场景（打折，尺寸等）"
+          }
+        },
+        {
+          "card_id": "07-05",
+          "full_id": "英语-七上-07-05",
+          "title": "写作卡：商品描述",
+          "type": "写作卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何用简单的句子描述一件商品，包括名称、颜色、价格等基本信息。",
+          "core_points": [
+            "**基本结构**：",
+            "  - 介绍物品：This is a/an + [物品名称]. / These are + [物品名称复数].",
+            "  - 描述颜色：It's + [颜色]. / They're + [颜色].",
+            "  - 描述价格：It's + [价格]. / They're + [价格].",
+            "  - 表达喜好/推荐：I like it/them very much. / It's/They're nice.",
+            "**常用句型**：",
+            "  - This is a red T-shirt.",
+            "  - It's nice.",
+            "  - It's thirty dollars.",
+            "  - These are blue socks.",
+            "  - They're ten dollars.",
+            "  - I want to buy it/them.",
+            "**写作步骤**：",
+            "  1. 确定要描述的商品。",
+            "  2. 用'This is / These are'引入商品。",
+            "  3. 描述其颜色 (It's / They're + 颜色)。",
+            "  4. 描述其价格 (It's / They're + 价格)。",
+            "  5. 最后加上一句评价或购买意愿。"
+          ],
+          "why_explanation": "商品描述是初级写作的常见任务，它训练学生运用所学词汇和句型，有条理地表达信息。通过这种练习，学生能巩固语法知识，并将其应用于实际情境。",
+          "example": {
+            "question": "请描述一件你喜欢的商品，包含名称、颜色和价格。",
+            "steps": [
+              "选择商品：例如，一件黄色毛衣。",
+              "引入商品：This is a sweater.",
+              "描述颜色：It's yellow.",
+              "描述价格：It's forty-five dollars.",
+              "表达喜好：I like it very much.",
+              "组合成文：This is a sweater. It's yellow. It's forty-five dollars. I like it very much."
+            ],
+            "answer": "This is a yellow sweater. It's forty-five dollars. I like it very much. I want to buy it."
+          },
+          "mistakes": [
+            {
+              "wrong": "My sweater is red. It's twenty dollar. I like.",
+              "correct": "My sweater is red. It's twenty dollars. I like it.",
+              "reason": "'dollar'金额大于1时应复数。'like'是及物动词，后面需要宾语'it'。"
+            },
+            {
+              "wrong": "These socks is blue. It's ten dollars.",
+              "correct": "These socks are blue. They're ten dollars.",
+              "reason": "'socks'是复数，be动词应为'are'，指代复数物品用'they'和'they're'。"
+            }
+          ],
+          "memory_tip": "商品描述就像给商品写'小简历'：先是'我是谁'，再是'我长啥样'，然后是'我多少钱'，最后是'我好不好'。",
+          "related": {
+            "prerequisite": "物品词汇，颜色词，数字，How much 句型",
+            "next": "描述人物，描述房间"
+          }
+        },
+        {
+          "card_id": "07-06",
+          "full_id": "英语-七上-07-06",
+          "title": "语音卡：数字的重音与连读",
+          "type": "语音卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "学习数字在词组中的重音规律，以及连读现象。",
+          "core_points": [
+            "**重音规律**：",
+            "  - **十位数 (13-19)**：重音在第二个音节 -teen 上。",
+            "    - 例：thir**teen**, four**teen**, fif**teen**",
+            "  - **整十数 (20, 30, ...90)**：重音在第一个音节上。",
+            "    - 例：**twen**ty, **thir**ty, **for**ty",
+            "  - **复合数 (21-99)**：通常两个词都有重音，或略偏向第二个词。",
+            "    - 例：**twenty**-**one**, **thirty**-**five**",
+            "  - **hundred**：通常重音在'hun-'上。",
+            "    - 例：one **hun**dred",
+            "**连读现象**：",
+            "  - 以辅音结尾的词后面接以元音开头的词，两者常发生连读。",
+            "    - 例：How much **is_it**? (/ˈhaʊ mʌtʃ ɪz ɪt/)",
+            "    - 例：It's **on_the** desk. (/ɪts ɑːn ðə desk/)",
+            "    - 例：These **are_apples**. (/ðɪz ɑːr æplz/)"
+          ],
+          "why_explanation": "重音和连读是英语口语流畅性和自然度的关键。正确的重音能帮助听者理解数字的含义（例如区分'thirteen'和'thirty'），而连读则是口语中自然发生的语音现象，掌握它能提高听力和口语的自然度。",
+          "example": {
+            "question": "区分'thirteen'和'thirty'的重音，并指出'It's on the table.'中的连读。",
+            "steps": [
+              "**thirteen** /ˌθɜːrˈtiːn/: 重音在第二个音节 -teen 上。",
+              "**thirty** /ˈθɜːrti/: 重音在第一个音节 thir- 上。",
+              "**It's on the table.**：'s'和'on'之间有连读，'on'和'the'之间有连读（虽然'the'是弱读），但主要体现在'It's_on'。",
+              "检查：thirteen（重音在-teen），thirty（重音在thir-）。连读：It's_on the table."
+            ],
+            "answer": "thirteen: 重音在第二个音节 -teen 上。\nthirty: 重音在第一个音节 thir- 上。\n连读: It's **on** the table. ('s'与'on'连读)"
+          },
+          "mistakes": [
+            {
+              "wrong": "将'thirteen'和'thirty'的重音混淆。",
+              "correct": "thirteen /ˌθɜːrˈtiːn/ (重音在teen), thirty /ˈθɜːrti/ (重音在thir-)",
+              "reason": "重音位置不同，含义也不同，混淆会导致听者误解。"
+            },
+            {
+              "wrong": "将'is it'分开读，中间有停顿。",
+              "correct": "is_it (连读)",
+              "reason": "辅音结尾接元音开头的词，通常会发生连读，使发音更流畅。"
+            }
+          ],
+          "memory_tip": "teenager（青少年）的数字都在'teen'上重读，而'ty'家族的数字都在'头'上重读。连读像'搭桥'，把两个词连起来读。",
+          "related": {
+            "prerequisite": "数字发音，元音辅音",
+            "next": "语调，弱读"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "08",
+      "unit_name": "When is your birthday?",
+      "cards": [
+        {
+          "card_id": "08-01",
+          "full_id": "英语-七上-08-01",
+          "title": "词汇：月份与序数词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "本单元学习一年中的十二个月份和用于表示顺序的序数词。",
+          "core_points": [
+            "**月份**：",
+            "  - January /ˈdʒænjuˌeri/: 一月 (Jan.)",
+            "  - February /ˈfebruˌeri/: 二月 (Feb.)",
+            "  - March /mɑːrtʃ/: 三月 (Mar.)",
+            "  - April /ˈeɪprəl/: 四月 (Apr.)",
+            "  - May /meɪ/: 五月 (May)",
+            "  - June /dʒuːn/: 六月 (Jun.)",
+            "  - July /dʒuˈlaɪ/: 七月 (Jul.)",
+            "  - August /ˈɔːɡəst/: 八月 (Aug.)",
+            "  - September /sepˈtembər/: 九月 (Sept./Sep.)",
+            "  - October /ɑːkˈtoʊbər/: 十月 (Oct.)",
+            "  - November /noʊˈvembər/: 十一月 (Nov.)",
+            "  - December /dɪˈsembər/: 十二月 (Dec.)",
+            "  - **注意**：月份首字母必须大写。",
+            "**序数词**：",
+            "  - first (1st): 第一",
+            "  - second (2nd): 第二",
+            "  - third (3rd): 第三",
+            "  - fourth (4th): 第四",
+            "  - fifth (5th): 第五 (注意 five → fifth)",
+            "  - eighth (8th): 第八 (注意 eight → eighth)",
+            "  - ninth (9th): 第九 (注意 nine → ninth)",
+            "  - twelfth (12th): 第十二 (注意 twelve → twelfth)",
+            "  - twenty-first (21st): 第二十一",
+            "  - thirty-second (32nd): 第三十二",
+            "  - **规则**：除了1, 2, 3及其复合数（如21, 32）是特殊形式外，其他基数词变序数词通常加 -th。以ty结尾的整十数变y为ie再加 -th (如 twenty → twentieth)。"
+          ],
+          "why_explanation": "月份和序数词是表达日期和顺序的基础。月份的首字母大写是英语的规范。序数词的变化规则体现了英语词汇的构词特点，掌握它们能准确表达日期和排名。",
+          "example": {
+            "question": "用所学词汇填空：1. My birthday is in ____ (六月). 2. Today is the ____ (1) of May. 3. His birthday is on October the ____ (22).",
+            "steps": [
+              "1. 六月是'June'。",
+              "2. '1'的序数词是'first'。",
+              "3. '22'的序数词是'twenty-second'。",
+              "检查：1. My birthday is in June. 2. Today is the first of May. 3. His birthday is on October the twenty-second."
+            ],
+            "answer": "1. June 2. first 3. twenty-second"
+          },
+          "mistakes": [
+            {
+              "wrong": "My birthday is in january.",
+              "correct": "My birthday is in January.",
+              "reason": "月份的首字母必须大写。"
+            },
+            {
+              "wrong": "Today is the one of May.",
+              "correct": "Today is the first of May.",
+              "reason": "表示日期时，数字要用序数词，而非基数词。"
+            },
+            {
+              "wrong": "His birthday is on October the twenty-two.",
+              "correct": "His birthday is on October the twenty-second.",
+              "reason": "日期中的数字要用序数词。"
+            }
+          ],
+          "memory_tip": "月份像12个'兄弟姐妹'，名字都大写。序数词像'排队'，1, 2, 3是特殊VIP，其他都加'th'。记住'fiveth'变'fifth'，'nineth'变'ninth'。",
+          "related": {
+            "prerequisite": "数字0-100",
+            "next": "日期的完整表达"
+          }
+        },
+        {
+          "card_id": "08-02",
+          "full_id": "英语-七上-08-02",
+          "title": "语法：介词 on/in (表示时间)",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "on 和 in 除了表示地点，还可以用来表示时间，但用法有所不同。",
+          "core_points": [
+            "**on** /ɑːn/: 用于具体的某一天或某个特定的上午/下午/晚上。",
+            "  - **日期**：on + 月份 + 日期 (序数词)。",
+            "    - 例：**on** May **1st** (在五月一日)",
+            "  - **星期几**：on + 星期几。",
+            "    - 例：**on** Sunday (在星期天)",
+            "  - **特定的一天内的某个部分**：on + 某一天 + morning/afternoon/evening。",
+            "    - 例：**on** Monday morning (在周一早上)",
+            "**in** /ɪn/: 用于较长的时间段，如月份、季节、年份，或一天内的某个部分（不特指某一天）。",
+            "  - **月份**：in + 月份。",
+            "    - 例：**in** June (在六月)",
+            "  - **季节**：in + 季节。",
+            "    - 例：**in** summer (在夏天)",
+            "  - **年份**：in + 年份。",
+            "    - 例：**in** 2023 (在2023年)",
+            "  - **一天内的某个部分**：in the morning/afternoon/evening。",
+            "    - 例：**in** the morning (在早上)",
+            "**特殊情况**：at night (在晚上)，at noon (在中午)，at midnight (在午夜)。"
+          ],
+          "why_explanation": "介词在英语中具有多重含义，'on'和'in'在表示时间时，区分了时间段的长度和具体性。'on'强调具体的一天，'in'强调一个时间段的内部。这是英语时间表达的逻辑。",
+          "example": {
+            "question": "用 on 或 in 填空：1. My birthday is ____ July 5th. 2. We often go out ____ summer. 3. I usually read books ____ the evening. 4. School starts ____ September.",
+            "steps": [
+              "1. 'July 5th'是具体日期，用'on'。",
+              "2. 'summer'是季节，用'in'。",
+              "3. 'the evening'是泛指一天中的某个部分，用'in'。",
+              "4. 'September'是月份，用'in'。",
+              "检查：1. My birthday is on July 5th. 2. We often go out in summer. 3. I usually read books in the evening. 4. School starts in September."
+            ],
+            "answer": "1. on 2. in 3. in 4. in"
+          },
+          "mistakes": [
+            {
+              "wrong": "My birthday is in Sunday.",
+              "correct": "My birthday is on Sunday.",
+              "reason": "星期几前使用介词'on'。"
+            },
+            {
+              "wrong": "School starts on September.",
+              "correct": "School starts in September.",
+              "reason": "月份前使用介词'in'。"
+            },
+            {
+              "wrong": "I watch TV on the evening.",
+              "correct": "I watch TV in the evening.",
+              "reason": "泛指一天中的'in the morning/afternoon/evening'，特指某天的某个部分才用'on'。"
+            }
+          ],
+          "memory_tip": "'on'像个'点'，用在具体的日期和星期。'in'像个'圈'，用在月份、季节、年份等长时段。记住'at night'是特例。",
+          "related": {
+            "prerequisite": "月份，序数词，星期词汇",
+            "next": "介词 at (表示时间)"
+          }
+        },
+        {
+          "card_id": "08-03",
+          "full_id": "英语-七上-08-03",
+          "title": "句型：询问与表达日期/生日",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习如何询问他人的生日或特定日期，并进行回答。",
+          "core_points": [
+            "**询问生日**：",
+            "  - When is your birthday? (你的生日是什么时候？)",
+            "  - When is his/her birthday? (他/她的生日是什么时候？)",
+            "**回答生日**：",
+            "  - My birthday is on + 月份 + 日期 (序数词). (我的生日在...月...日。)",
+            "    - 例：My birthday is **on** July **5th**. (我的生日在7月5日。)",
+            "  - It's on + 月份 + 日期 (序数词). (在...月...日。)",
+            "    - 例：It's **on** August **12th**. (在8月12日。)",
+            "**询问特定日期**：",
+            "  - When is + 事件? (……是什么时候？)",
+            "    - 例：When is Christmas? (圣诞节是什么时候？)",
+            "**回答特定日期**：",
+            "  - It's on + 月份 + 日期 (序数词). (在...月...日。)",
+            "    - 例：It's **on** December **25th**. (在12月25日。)",
+            "**日期写法与读法**：",
+            "  - 写法：Month + day (序数词) 或 day (序数词) + of + Month。",
+            "    - 例：October 22nd / the 22nd of October",
+            "  - 读法：October the twenty-second / the twenty-second of October"
+          ],
+          "why_explanation": "'When'是专门询问时间的疑问词。结合介词'on'和月份、序数词，可以准确地表达日期。掌握不同的日期表达方式能提高语言的灵活性。",
+          "example": {
+            "question": "补全对话：A: ____ is your birthday? B: My birthday ____ ____ November ____ (11). A: When ____ your mother's birthday? B: ____ ____ ____ January ____ (1st).",
+            "steps": [
+              "A询问生日，用'When'。",
+              "B回答生日，主语'My birthday'，be动词'is'，介词'on'，11的序数词'eleventh'。",
+              "A询问母亲生日，主语'your mother's birthday'，be动词'is'。",
+              "B回答，用'It's'，介词'on'，1的序数词'first'。",
+              "检查：A: When is your birthday? B: My birthday is on November eleventh. A: When is your mother's birthday? B: It's on January first."
+            ],
+            "answer": "A: When is your birthday? B: My birthday is on November eleventh. A: When is your mother's birthday? B: It's on January first."
+          },
+          "mistakes": [
+            {
+              "wrong": "My birthday is in November 11.",
+              "correct": "My birthday is on November 11th. / My birthday is in November.",
+              "reason": "具体日期前用'on'，日期要用序数词。如果只说月份，用'in'。"
+            },
+            {
+              "wrong": "When your birthday?",
+              "correct": "When is your birthday?",
+              "reason": "疑问句中缺少be动词。"
+            }
+          ],
+          "memory_tip": "'When is...?'是问日期的'时间机器'。回答时，'on'是日期的小伙伴，月份和序数词要手拉手。",
+          "related": {
+            "prerequisite": "月份，序数词，介词 on/in",
+            "next": "询问时间"
+          }
+        },
+        {
+          "card_id": "08-04",
+          "full_id": "英语-七上-08-04",
+          "title": "易混词卡：基数词 vs 序数词",
+          "type": "易混词卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "区分基数词（表示数量）和序数词（表示顺序）。",
+          "core_points": [
+            "**基数词 (Cardinal Numbers)**：",
+            "  - 表示事物的数量，回答'How many?'的问题。",
+            "  - 例：one, two, three, four, five, ten, twenty, one hundred",
+            "  - 用法：常用于修饰名词，表示数量。",
+            "    - 例：I have **two** books. (我有两本书。)",
+            "    - 例：There are **five** apples. (有五个苹果。)",
+            "**序数词 (Ordinal Numbers)**：",
+            "  - 表示事物的顺序或排行，回答'Which one?'或'What number?'的问题。",
+            "  - 例：first (1st), second (2nd), third (3rd), fourth (4th), tenth (10th), twentieth (20th)",
+            "  - 用法：常用于日期、楼层、比赛名次等，前面常加定冠词'the'。",
+            "    - 例：Today is **the first** of May. (今天是五月一日。)",
+            "    - 例：He is **the second** student in line. (他是排队中的第二个学生。)",
+            "**核心区别**：基数词是“多少个”，序数词是“第几个”。"
+          ],
+          "why_explanation": "基数词和序数词在功能上是互补的，一个表达数量，一个表达顺序。这种区分是英语中计数和排序逻辑的基础，能避免数字表达的歧义。",
+          "example": {
+            "question": "选择正确的词填空：1. There are ____ (2) apples on the table. 2. My birthday is on May ____ (5). 3. She won the ____ (1) prize in the competition.",
+            "steps": [
+              "1. 表达苹果的数量，用基数词'two'。",
+              "2. 表达日期中的“第五”，用序数词'fifth'。",
+              "3. 表达“第一名”，用序数词'first'。",
+              "检查：1. There are two apples on the table. 2. My birthday is on May fifth. 3. She won the first prize in the competition."
+            ],
+            "answer": "1. two 2. fifth 3. first"
+          },
+          "mistakes": [
+            {
+              "wrong": "My birthday is on May five.",
+              "correct": "My birthday is on May fifth.",
+              "reason": "日期中的数字需要用序数词。"
+            },
+            {
+              "wrong": "I have first book.",
+              "correct": "I have one book. / I have the first book.",
+              "reason": "如果表达数量，用基数词'one'。如果表达“第一本”，则需要'the first book'。"
+            }
+          ],
+          "memory_tip": "基数词像'数数'，1, 2, 3... 序数词像'排队'，第1, 第2, 第3... 记住'th'是序数词的'勋章'。",
+          "related": {
+            "prerequisite": "数字0-100",
+            "next": "分数的表达"
+          }
+        },
+        {
+          "card_id": "08-05",
+          "full_id": "英语-七上-08-05",
+          "title": "语音卡：字母组合 Ar, Ir, Ur 的发音",
+          "type": "语音卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "学习字母组合 ar, ir, ur 在重读音节中的发音，它们通常发卷舌长元音 /ɜːr/ (美式 /ər/) 或 /ɑːr/。",
+          "core_points": [
+            "**ar** /ɑːr/ (美式)：发音时舌头后部抬高，舌尖微卷，像中文的“啊”加卷舌。例词：f**ar**ther, m**ar**ch, c**ar**d, p**ar**ty",
+            "**ir** /ɜːr/ (美式 /ər/): 发音时舌头中部抬高，舌尖卷起，像中文的“呃”加卷舌。例词：b**ir**thday, g**ir**l, sk**ir**t, th**ir**teen",
+            "**ur** /ɜːr/ (美式 /ər/): 发音同'ir'。例词：p**ur**ple, t**ur**n, b**ur**n",
+            "**er** /ɜːr/ (美式 /ər/): 发音同'ir'。例词：t**ea**ch**er**, sist**er**, moth**er**, dress**er**",
+            "**or** /ɔːr/ 或 /ɜːr/:",
+            "  - /ɔːr/：在重读音节中。例词：f**or**, m**or**ning, sh**or**ts",
+            "  - /ɜːr/：在非重读音节或某些特殊词中。例词：doct**or**",
+            "**注意**：美式英语中，这些带'r'的元音组合常伴有卷舌音。"
+          ],
+          "why_explanation": "这些是带有'r'的元音组合，它们的发音具有很强的规律性，特别是它们常常发卷舌音。掌握这些组合能帮助学生正确拼读和记忆单词，提高发音的自然度。",
+          "example": {
+            "question": "指出下列单词中划线字母组合的正确发音：1. f**ar**ther 2. b**ir**thday 3. p**ur**ple 4. t**ea**ch**er** 5. m**or**ning",
+            "steps": [
+              "1. farther: 'ar'发/ɑːr/音。",
+              "2. birthday: 'ir'发/ɜːr/音。",
+              "3. purple: 'ur'发/ɜːr/音。",
+              "4. teacher: 'er'发/ɜːr/音。",
+              "5. morning: 'or'发/ɔːr/音。",
+              "检查：1. /ɑːr/ 2. /ɜːr/ 3. /ɜːr/ 4. /ɜːr/ 5. /ɔːr/"
+            ],
+            "answer": "1. /ɑːr/ 2. /ɜːr/ 3. /ɜːr/ 4. /ɜːr/ 5. /ɔːr/"
+          },
+          "mistakes": [
+            {
+              "wrong": "将'girl'中的'ir'发成/iː/音。",
+              "correct": "/ɡɜːrl/",
+              "reason": "'ir'在重读音节中通常发卷舌元音/ɜːr/，而不是长音/iː/。"
+            },
+            {
+              "wrong": "将'march'中的'ar'发成/ɜːr/音。",
+              "correct": "/mɑːrtʃ/",
+              "reason": "'ar'通常发/ɑːr/音，与'ir/ur/er'不同。"
+            }
+          ],
+          "memory_tip": "'ar'像汽车'啊'声带卷舌，'ir/ur/er'像小猪'呃'声带卷舌。'or'像'哦'声带卷舌。记住这些'卷舌音'的特点。",
+          "related": {
+            "prerequisite": "元音发音，卷舌音概念",
+            "next": "双元音发音"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "09",
+      "unit_name": "My favorite subject is science.",
+      "cards": [
+        {
+          "card_id": "09-01",
+          "full_id": "英语-七上-09-01",
+          "title": "词汇：科目与形容词",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "本单元学习各种学校科目名称以及一些描述性的形容词。",
+          "core_points": [
+            "favorite /ˈfeɪvərɪt/: (adj.) 最喜爱的 (n.) 最喜爱的人/物",
+            "subject /ˈsʌbdʒɪkt/: (n.) 科目",
+            "science /ˈsaɪəns/: (n.) 科学",
+            "math /mæθ/: (n.) 数学 (mathematics 的缩写)",
+            "Chinese /tʃaɪˈniːz/: (n./adj.) 语文，中国人，中国的",
+            "history /ˈhɪstri/: (n.) 历史",
+            "geography /dʒiˈɑːɡrəfi/: (n.) 地理",
+            "music /ˈmjuːzɪk/: (n.) 音乐",
+            "art /ɑːrt/: (n.) 美术，艺术",
+            "P.E. /ˌpiː ˈiː/: (n.) 体育 (physical education 的缩写)",
+            "English /ˈɪŋɡlɪʃ/: (n./adj.) 英语，英国人，英国的",
+            "boring /ˈbɔːrɪŋ/: (adj.) 无聊的，乏味的",
+            "fun /fʌn/: (adj.) 有趣的，好玩的 (n.) 乐趣)",
+            "interesting /ˈɪntrəstɪŋ/: (adj.) 有趣的，引人入胜的",
+            "relaxing /rɪˈlæksɪŋ/: (adj.) 令人放松的",
+            "difficult /ˈdɪfɪkəlt/: (adj.) 困难的"
+          ],
+          "why_explanation": "科目词汇是学校生活的核心，形容词则用于表达对事物的感受和评价。掌握这些词汇能帮助学生谈论学习，表达个人观点和感受。",
+          "example": {
+            "question": "用所学词汇填空：1. My ____ subject is ____. (假设最喜欢英语) 2. I think history is ____ (有趣). 3. Math is a little bit ____ (困难).",
+            "steps": [
+              "1. 最喜欢的科目是英语，填'favorite'和'English'。",
+              "2. 历史是'interesting'（有趣的）。",
+              "3. 数学是'difficult'（困难的）。",
+              "检查：1. My favorite subject is English. 2. I think history is interesting. 3. Math is a little bit difficult."
+            ],
+            "answer": "1. My favorite subject is English. 2. I think history is interesting. 3. Math is a little bit difficult."
+          },
+          "mistakes": [
+            {
+              "wrong": "My favorite is English subject.",
+              "correct": "My favorite subject is English.",
+              "reason": "'favorite'是形容词，修饰'subject'。正确的语序是'My favorite subject'。"
+            },
+            {
+              "wrong": "I think math is fun.",
+              "correct": "I think math is fun. / I think math is funny. (funny指滑稽)",
+              "reason": "'fun'作形容词表示“有趣的，好玩的”，'funny'表示“滑稽的，可笑的”。这里指有趣，用'fun'。"
+            }
+          ],
+          "memory_tip": "subject是'科目'，favorite是'最爱'。形容词像给科目贴上'标签'：boring是'无聊'，fun是'开心'，interesting是'好奇'。",
+          "related": {
+            "prerequisite": "形容词的基本用法",
+            "next": "表达观点和感受的句型"
+          }
+        },
+        {
+          "card_id": "09-02",
+          "full_id": "英语-七上-09-02",
+          "title": "语法：特殊疑问句 What (询问事物/信息)",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "What 是最常用的特殊疑问词之一，用于询问事物的名称、身份、性质或信息。",
+          "core_points": [
+            "**询问名称/身份**：",
+            "  - What's your name? (你叫什么名字？)",
+            "  - What's this? (这是什么？)",
+            "  - What's his job? (他的工作是什么？)",
+            "**询问事物的性质/类别**：",
+            "  - What is your favorite subject? (你最喜欢的科目是什么？)",
+            "  - What color is your T-shirt? (你的T恤是什么颜色？)",
+            "**询问正在进行的活动 (结合现在进行时，后续学习)**：",
+            "  - What are you doing? (你在做什么？)",
+            "**询问信息/情况**：",
+            "  - What's the matter? (怎么了？)",
+            "  - What's up? (怎么了？——非正式)",
+            "**句型结构**：",
+            "  - **疑问词作表语**：What + be动词 + 主语？",
+            "    - 例：What is your name? (My name is Tom.)",
+            "    - 例：What is her favorite subject? (Her favorite subject is art.)",
+            "  - **疑问词作定语**：What + 名词 + be动词 + 主语？",
+            "    - 例：What color is your pen? (It's black.)",
+            "    - 例：What time is it? (It's six o'clock.)"
+          ],
+          "why_explanation": "'What'作为疑问词，是获取信息的核心工具。它的灵活性在于可以单独使用，也可以与名词结合构成疑问词组，以询问更具体的信息。理解它在句中充当的不同成分（表语或定语）是关键。",
+          "example": {
+            "question": "补全对话：A: ____ is your favorite subject? B: My favorite subject ____ math. A: ____ do you think of math? B: I think ____ is interesting.",
+            "steps": [
+              "A询问“最喜欢的科目是什么”，用'What'。",
+              "B回答，主语是'My favorite subject'，be动词'is'。",
+              "A询问“你觉得数学怎么样”，用'What'引导对事物的评价。",
+              "B回答，指代数学，用'it'。",
+              "检查：A: What is your favorite subject? B: My favorite subject is math. A: What do you think of math? B: I think it is interesting."
+            ],
+            "answer": "A: What is your favorite subject? B: My favorite subject is math. A: What do you think of math? B: I think it is interesting."
+          },
+          "mistakes": [
+            {
+              "wrong": "What your favorite subject?",
+              "correct": "What is your favorite subject?",
+              "reason": "特殊疑问句中，除了主语疑问词外，通常需要be动词或助动词。"
+            },
+            {
+              "wrong": "What you like?",
+              "correct": "What do you like?",
+              "reason": "当'what'作宾语时，需要助动词'do'或'does'。"
+            }
+          ],
+          "memory_tip": "'What'像个'万能钥匙'，能问各种信息。记住它能单独站立（What's this?），也能拉着名词做伴（What color...）。",
+          "related": {
+            "prerequisite": "be动词，一般现在时（实义动词），形容词",
+            "next": "特殊疑问句 Which, Who"
+          }
+        },
+        {
+          "card_id": "09-03",
+          "full_id": "英语-七上-09-03",
+          "title": "句型：询问与表达对科目的喜好与评价",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习如何询问他人最喜欢的科目以及对科目的看法，并进行回答。",
+          "core_points": [
+            "**询问最喜欢的科目**：",
+            "  - What's your favorite subject? (你最喜欢的科目是什么？)",
+            "  - What's his/her favorite subject? (他/她最喜欢的科目是什么？)",
+            "**回答最喜欢的科目**：",
+            "  - My favorite subject is + 科目. (我最喜欢的科目是...)",
+            "    - 例：My favorite subject is science. (我最喜欢的科目是科学。)",
+            "  - His/Her favorite subject is + 科目. (他/她最喜欢的科目是...)",
+            "**询问对科目的看法**：",
+            "  - What do you think of + 科目? (你觉得...怎么样？)",
+            "    - 例：What do you think of P.E.? (你觉得体育怎么样？)",
+            "  - What does he/she think of + 科目? (他/她觉得...怎么样？)",
+            "**回答对科目的看法**：",
+            "  - I think it's + 形容词. (我觉得它很...)",
+            "    - 例：I think it's fun. (我觉得它很有趣。)",
+            "  - I think it's + 形容词 + and + 形容词. (我觉得它...又...)",
+            "    - 例：I think it's interesting and relaxing. (我觉得它既有趣又放松。)"
+          ],
+          "why_explanation": "这些句型是关于学校生活和个人偏好的核心表达。'What's your favorite...?'是询问偏好的标准句型，而'What do you think of...?'则用于询问对事物的评价，体现了观点的表达。",
+          "example": {
+            "question": "补全对话：A: ____ is your ____ subject? B: My favorite subject ____ art. A: ____ do you ____ of art? B: I think ____ ____ interesting.",
+            "steps": [
+              "A询问最喜欢的科目，用'What'和'favorite'。",
+              "B回答，主语'My favorite subject'，be动词'is'。",
+              "A询问对艺术的看法，用'What'和'think'。",
+              "B回答，指代艺术用'it'，be动词'is'。",
+              "检查：A: What is your favorite subject? B: My favorite subject is art. A: What do you think of art? B: I think it is interesting."
+            ],
+            "answer": "A: What is your favorite subject? B: My favorite subject is art. A: What do you think of art? B: I think it is interesting."
+          },
+          "mistakes": [
+            {
+              "wrong": "What your favorite subject is?",
+              "correct": "What is your favorite subject?",
+              "reason": "特殊疑问句的语序是'疑问词 + be动词 + 主语'。"
+            },
+            {
+              "wrong": "I think it boring.",
+              "correct": "I think it is boring.",
+              "reason": "主语'it'和形容词'boring'之间缺少be动词。"
+            }
+          ],
+          "memory_tip": "'favorite'是'最爱'的标签，'think of'是'看法'的表达。回答时，用'it'指代科目，用'is'连接形容词。",
+          "related": {
+            "prerequisite": "科目词汇，形容词，特殊疑问句 What",
+            "next": "表达喜欢/不喜欢的原因"
+          }
+        },
+        {
+          "card_id": "09-04",
+          "full_id": "英语-七上-09-04",
+          "title": "易混词卡：fun vs funny",
+          "type": "易混词卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "区分'fun'（有趣的，好玩的）和'funny'（滑稽的，可笑的）。",
+          "core_points": [
+            "**fun** /fʌn/:",
+            "  - **作形容词**：表示“有趣的，好玩的，令人愉快的”，强调带来快乐或享受的体验。",
+            "    - 例：P.E. is **fun**. (体育很有趣。)",
+            "    - 例：It was a **fun** party. (那是一个有趣的派对。)",
+            "  - **作名词**：表示“乐趣，娱乐”。",
+            "    - 例：We had a lot of **fun**. (我们玩得很开心。)",
+            "**funny** /ˈfʌni/:",
+            "  - **作形容词**：表示“滑稽的，可笑的，引人发笑的”，强调幽默感或奇怪的、不寻常的。",
+            "    - 例：The clown is very **funny**. (那个小丑很滑稽。)",
+            "    - 例：He told a **funny** joke. (他讲了一个好笑的笑话。)",
+            "    - 例：I feel a bit **funny**. (我感觉有点不舒服/奇怪。)"
+          ],
+          "why_explanation": "这两个词虽然都与“有趣”相关，但侧重点不同。'fun'强调体验的愉快性，而'funny'强调引发笑声或感到奇怪。区分它们能更精确地表达情感和感受。",
+          "example": {
+            "question": "选择正确的词填空：1. This book is very ____. It makes me laugh. 2. Playing basketball is ____. I enjoy it. 3. He made a ____ face.",
+            "steps": [
+              "1. 书让我发笑，说明它很“滑稽/好笑”，用'funny'。",
+              "2. 打篮球让我享受，说明它很“有趣/好玩”，用'fun'。",
+              "3. 他做了个“滑稽的”表情，用'funny'。",
+              "检查：1. This book is very funny. 2. Playing basketball is fun. 3. He made a funny face."
+            ],
+            "answer": "1. funny 2. fun 3. funny"
+          },
+          "mistakes": [
+            {
+              "wrong": "The movie was very funny. (指电影很精彩，令人愉快)",
+              "correct": "The movie was very fun. / The movie was very enjoyable.",
+              "reason": "如果想表达电影很精彩、令人愉快，应该用'fun'或'enjoyable'。'funny'指电影很滑稽、搞笑。"
+            },
+            {
+              "wrong": "I had a funny time at the party.",
+              "correct": "I had a fun time at the party. / I had fun at the party.",
+              "reason": "派对的体验是愉快的，应使用'fun'。"
+            }
+          ],
+          "memory_tip": "fun是'乐趣'，funny是'好笑'。fun像'游乐场'，funny像'喜剧演员'。",
+          "related": {
+            "prerequisite": "形容词的基本用法",
+            "next": "其他近义形容词辨析"
+          }
+        },
+        {
+          "card_id": "09-05",
+          "full_id": "英语-七上-09-05",
+          "title": "语音卡：字母组合 kn, wr, ph 的发音",
+          "type": "语音卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "学习字母组合 kn, wr, ph 在单词中的特殊发音规律。",
+          "core_points": [
+            "**kn** /n/: 在单词开头，'k'不发音，只发'n'的音。",
+            "  - 例词：**kn**ife /naɪf/, **kn**ow /noʊ/, **kn**ee /niː/",
+            "**wr** /r/: 在单词开头，'w'不发音，只发'r'的音。",
+            "  - 例词：**wr**ite /raɪt/, **wr**ong /rɔːŋ/, **wr**ist /rɪst/",
+            "**ph** /f/: 这个字母组合通常发 /f/ 的音。",
+            "  - 例词：tele**ph**one /ˈtelɪfoʊn/, photo**ph**y /fəˈtɑːɡrəfi/, gra**ph**ic /ˈɡræfɪk/"
+          ],
+          "why_explanation": "这些是英语中常见的特殊字母组合，它们的拼写和发音不完全对应（如哑音字母）。掌握这些特殊规则能帮助学生正确拼读和记忆单词，避免因拼写误导而发错音。",
+          "example": {
+            "question": "指出下列单词中划线字母组合的正确发音：1. **kn**ife 2. **wr**ite 3. tele**ph**one",
+            "steps": [
+              "1. knife: 'kn'组合中'k'不发音，发/n/音。",
+              "2. write: 'wr'组合中'w'不发音，发/r/音。",
+              "3. telephone: 'ph'组合发/f/音。",
+              "检查：1. /n/ 2. /r/ 3. /f/"
+            ],
+            "answer": "1. /n/ 2. /r/ 3. /f/"
+          },
+          "mistakes": [
+            {
+              "wrong": "将'knife'中的'k'发音。",
+              "correct": "/naɪf/",
+              "reason": "'kn'在词首时，'k'是哑音，不发音。"
+            },
+            {
+              "wrong": "将'write'中的'w'发音。",
+              "correct": "/raɪt/",
+              "reason": "'wr'在词首时，'w'是哑音，不发音。"
+            },
+            {
+              "wrong": "将'telephone'中的'ph'发成/p/或/h/的组合音。",
+              "correct": "/f/",
+              "reason": "'ph'是一个特殊的字母组合，固定发/f/音。"
+            }
+          ],
+          "memory_tip": "kn是'哑巴k'，wr是'哑巴w'，它们都把声音让给后面的字母。ph是'变身f'，总是发/f/音。",
+          "related": {
+            "prerequisite": "元音辅音，音标",
+            "next": "更多哑音字母规则"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "10",
+      "unit_name": "I have a happy family.",
+      "cards": [
+        {
+          "card_id": "10-01",
+          "full_id": "英语-七上-10-01",
+          "title": "词汇：形容词与人物特征",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "本单元学习描述人物特征、情感和状态的形容词。",
+          "core_points": [
+            "happy /ˈhæpi/: (adj.) 快乐的，幸福的",
+            "sad /sæd/: (adj.) 悲伤的",
+            "tired /ˈtaɪərd/: (adj.) 疲劳的，累的",
+            "angry /ˈæŋɡri/: (adj.) 生气的",
+            "hungry /ˈhʌŋɡri/: (adj.) 饥饿的",
+            "thirsty /ˈθɜːrsti/: (adj.) 口渴的",
+            "old /oʊld/: (adj.) 年老的，旧的",
+            "young /jʌŋ/: (adj.) 年轻的",
+            "tall /tɔːl/: (adj.) 高的 (指人或高大的树)",
+            "short /ʃɔːrt/: (adj.) 矮的 (指人)，短的",
+            "long /lɔːŋ/: (adj.) 长的",
+            "big /bɪɡ/: (adj.) 大的",
+            "small /smɔːl/: (adj.) 小的",
+            "thin /θɪn/: (adj.) 瘦的，薄的",
+            "heavy /ˈhevi/: (adj.) 沉重的，胖的",
+            "smart /smɑːrt/: (adj.) 聪明的，时髦的",
+            "kind /kaɪnd/: (adj.) 友善的，和蔼的",
+            "quiet /ˈkwaɪət/: (adj.) 安静的"
+          ],
+          "why_explanation": "形容词是描述人、事、物特征的核心词汇，掌握它们能使语言表达更生动具体，帮助学生表达个人感受和描述他人。",
+          "example": {
+            "question": "用所学形容词填空：1. She is very ____ (开心). 2. My grandfather is ____ (年老). 3. He has ____ (长) hair. 4. I am so ____ (口渴).",
+            "steps": [
+              "1. 开心是'happy'。",
+              "2. 年老是'old'。",
+              "3. 长的头发是'long hair'。",
+              "4. 口渴是'thirsty'。",
+              "检查：1. She is very happy. 2. My grandfather is old. 3. He has long hair. 4. I am so thirsty."
+            ],
+            "answer": "1. She is very happy. 2. My grandfather is old. 3. He has long hair. 4. I am so thirsty."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is a tall boy. He is short.",
+              "correct": "He is a tall boy. He is not short.",
+              "reason": "前后矛盾，'tall'和'short'是反义词。"
+            },
+            {
+              "wrong": "I feel hungry. I am thirsty.",
+              "correct": "I feel hungry. I want some food. / I am thirsty. I want some water.",
+              "reason": "虽然都是状态，但'hungry'指饥饿，'thirsty'指口渴，不能混淆。"
+            }
+          ],
+          "memory_tip": "形容词像给名词穿'衣服'，happy是'笑脸'，sad是'哭脸'，tall是'高个子'，short是'矮个子'。记住反义词对子。",
+          "related": {
+            "prerequisite": "be动词，have动词",
+            "next": "形容词的比较级和最高级"
+          }
+        },
+        {
+          "card_id": "10-02",
+          "full_id": "英语-七上-10-02",
+          "title": "语法：形容词作表语和定语",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "形容词在句中主要作表语或定语，修饰名词或说明主语的性质/状态。",
+          "core_points": [
+            "**作表语 (Predicative Adjective)**：",
+            "  - 位于系动词 (如be动词) 之后，说明主语的性质、特征或状态。",
+            "  - 结构：主语 + 系动词 + 形容词。",
+            "  - 例：She **is happy**. (她很高兴。)",
+            "  - 例：The book **is interesting**. (这本书很有趣。)",
+            "  - 例：I **feel tired**. (我感到疲劳。)",
+            "**作定语 (Attributive Adjective)**：",
+            "  - 位于名词之前，修饰名词，说明名词的性质或特征。",
+            "  - 结构：形容词 + 名词。",
+            "  - 例：a **happy** girl (一个快乐的女孩)",
+            "  - 例：a **tall** boy (一个高个子男孩)",
+            "  - 例：**long** hair (长头发)",
+            "**注意**：",
+            "  - 有些形容词只能作表语 (如 afraid, alive, asleep)，不能作定语 (后续学习)。",
+            "  - 形容词修饰名词时，通常放在名词前。但如果是复合形容词或形容词短语，则放在名词后 (后续学习)。"
+          ],
+          "why_explanation": "形容词的功能是描述。作表语是补充说明主语，作定语是限定修饰名词。理解这两种基本用法是正确使用形容词的关键，反映了英语句子成分的构成逻辑。",
+          "example": {
+            "question": "将'a happy girl'改为作表语的句子，将'She is smart.'改为作定语的短语。",
+            "steps": [
+              "**'a happy girl'改为作表语的句子**：",
+              "  - 'girl'是主语，'happy'作表语。→ The girl is happy.",
+              "**'She is smart.'改为作定语的短语**：",
+              "  - 'smart'作定语修饰'girl'。→ a smart girl.",
+              "检查：作表语的句子: The girl is happy. 作定语的短语: a smart girl."
+            ],
+            "answer": "作表语的句子: The girl is happy.\n作定语的短语: a smart girl."
+          },
+          "mistakes": [
+            {
+              "wrong": "A girl happy.",
+              "correct": "A happy girl. / The girl is happy.",
+              "reason": "形容词作定语通常放在名词前。如果放在名词后，则需要作表语。"
+            },
+            {
+              "wrong": "He looks smart.",
+              "correct": "He looks smart. (He is smart.)",
+              "reason": "这里'looks'是系动词，后面跟形容词作表语。如果想表达'他看起来很聪明'，'smart'作表语是正确的。但如果想表达'他是一个聪明的男孩'，则需要'He is a smart boy'。"
+            },
+            {
+              "wrong": "I am a hungry.",
+              "correct": "I am hungry. / I am a hungry person.",
+              "reason": "'hungry'是形容词，不能用不定冠词'a'修饰。如果要用'a'，后面必须跟名词。"
+            }
+          ],
+          "memory_tip": "形容词像'变色龙'，作定语时跑到名词前，作表语时躲在be动词后。记住'形容词+名词'和'主语+be+形容词'。",
+          "related": {
+            "prerequisite": "be动词，名词",
+            "next": "形容词的比较级和最高级"
+          }
+        },
+        {
+          "card_id": "10-03",
+          "full_id": "英语-七上-10-03",
+          "title": "句型：描述人物外貌与特征",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习如何描述人物的外貌特征和性格特点。",
+          "core_points": [
+            "**描述外貌 (be动词)**：",
+            "  - 主语 + be动词 + 形容词. (描述整体特征)",
+            "    - 例：He is **tall**. (他很高。)",
+            "    - 例：She is **young**. (她很年轻。)",
+            "**描述外貌 (have/has动词)**：",
+            "  - 主语 + have/has + 形容词 + 名词. (描述具体部位)",
+            "    - 例：He **has short hair**. (他有短发。)",
+            "    - 例：She **has big eyes**. (她有大眼睛。)",
+            "**描述性格/情感**：",
+            "  - 主语 + be动词 + 形容词. (描述性格或当前情绪)",
+            "    - 例：He is **kind**. (他很友善。)",
+            "    - 例：She is **happy**. (她很高兴。)",
+            "**询问人物特征**：",
+            "  - What does he/she look like? (他/她长什么样？——询问外貌)",
+            "  - What is he/she like? (他/她为人怎么样？——询问性格)",
+            "  - Is he/she + 形容词? (他/她...吗？)",
+            "    - 例：Is he tall? (他高吗？)"
+          ],
+          "why_explanation": "描述人物是日常交流的重要组成部分。通过结合be动词和have/has动词，可以全面地描述一个人的外貌和性格。'What...like?'是询问特征的常用句型。",
+          "example": {
+            "question": "补全对话：A: Who's that girl? B: ____ my sister. ____ is ____ (高) and ____ (瘦). She ____ ____ (长) hair and ____ (大) eyes.",
+            "steps": [
+              "B介绍妹妹，用'She's'。",
+              "描述身高和体型，用'She is tall and thin'。",
+              "描述头发和眼睛，用'She has long hair and big eyes'。",
+              "检查：A: Who's that girl? B: She's my sister. She is tall and thin. She has long hair and big eyes."
+            ],
+            "answer": "A: Who's that girl? B: She's my sister. She is tall and thin. She has long hair and big eyes."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is big eyes.",
+              "correct": "He has big eyes.",
+              "reason": "描述身体部位的特征，应使用'have/has'，而不是'be'动词。"
+            },
+            {
+              "wrong": "She has tall.",
+              "correct": "She is tall.",
+              "reason": "'tall'是形容词，描述整体身高，应与be动词连用。如果描述具体部位，如'She has a tall figure.'。"
+            }
+          ],
+          "memory_tip": "be动词是'整体描述'的画笔，have/has是'细节描绘'的画笔。'What...like?'是问'长什么样/为人怎样'的魔镜。",
+          "related": {
+            "prerequisite": "形容词，be动词，have/has动词",
+            "next": "比较级描述"
+          }
+        },
+        {
+          "card_id": "10-04",
+          "full_id": "英语-七上-10-04",
+          "title": "写作卡：人物描述",
+          "type": "写作卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何撰写一段简短的文字来描述一个人的外貌和性格特征。",
+          "core_points": [
+            "**基本结构**：",
+            "  - 介绍人物：This is my + 称谓 + [姓名].",
+            "  - 描述外貌 (整体)：He/She is + [形容词] (如 tall, young).",
+            "  - 描述外貌 (细节)：He/She has + [形容词] + [名词] (如 long hair, big eyes).",
+            "  - 描述性格：He/She is + [形容词] (如 kind, smart).",
+            "  - 表达感受：I think he/she is very nice.",
+            "**常用句型**：",
+            "  - This is my brother, Tom.",
+            "  - He is tall and strong.",
+            "  - He has short black hair and big eyes.",
+            "  - He is very kind and smart.",
+            "  - I love him very much.",
+            "**写作步骤**：",
+            "  1. 确定要描述的人物。",
+            "  2. 用'This is...'或直接介绍人物。",
+            "  3. 描述其整体外貌 (用be动词+形容词)。",
+            "  4. 描述其具体外貌细节 (用have/has+形容词+名词)。",
+            "  5. 描述其性格特点 (用be动词+形容词)。",
+            "  6. 最后可以加上一句对人物的感情或评价。"
+          ],
+          "why_explanation": "人物描述是初级写作的重要练习，它要求学生综合运用形容词、be动词和have/has动词，有条理地组织信息。这种练习能提高学生的词汇运用能力和句子构建能力。",
+          "example": {
+            "question": "请描述你的一个家庭成员，包括外貌和性格。",
+            "steps": [
+              "选择人物：我的妈妈。",
+              "介绍：This is my mother, Lily.",
+              "整体外貌：She is not very tall, but she is very beautiful and young.",
+              "细节外貌：She has long black hair and big bright eyes.",
+              "性格：She is very kind and smart. She is also very busy.",
+              "感受：I love her very much.",
+              "组合成文：This is my mother, Lily. She is not very tall, but she is very beautiful and young. She has long black hair and big bright eyes. She is very kind and smart. She is also very busy. I love her very much."
+            ],
+            "answer": "This is my mother, Lily. She is not very tall, but she is very beautiful and young. She has long black hair and big bright eyes. She is very kind and smart. She is also very busy. I love her very much."
+          },
+          "mistakes": [
+            {
+              "wrong": "My father is a short and old.",
+              "correct": "My father is short and old.",
+              "reason": "'short'和'old'都是形容词，作表语时直接跟在be动词后，不加'a'。"
+            },
+            {
+              "wrong": "He has long. He is a hair.",
+              "correct": "He has long hair. He is a boy.",
+              "reason": "'long'是形容词，不能单独作宾语。'hair'是不可数名词，不能用'a'修饰。句子结构混乱。"
+            }
+          ],
+          "memory_tip": "人物描述像给人物画'肖像画'：先画轮廓，再描细节，然后刻画神韵，最后签上你的名字。",
+          "related": {
+            "prerequisite": "形容词，be动词，have/has动词，家庭成员词汇",
+            "next": "描述地点，描述事件"
+          }
+        },
+        {
+          "card_id": "10-05",
+          "full_id": "英语-七上-10-05",
+          "title": "语音卡：字母组合 sh, ch, tch, ng 的发音",
+          "type": "语音卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "学习字母组合 sh, ch, tch, ng 在单词中的发音规律。",
+          "core_points": [
+            "**sh** /ʃ/: 发音时舌尖抬起靠近硬腭，气流从舌尖与硬腭之间摩擦而出，声带不振动。像中文的“嘘”。",
+            "  - 例词：**sh**ort, **sh**e, fi**sh**",
+            "**ch** /tʃ/: 发音时舌尖抵住上齿龈后部，气流冲出，声带不振动。像中文的“吃”。",
+            "  - 例词：**ch**inese, **ch**icken, tea**ch**er",
+            "**tch** /tʃ/: 通常在短元音后发 /tʃ/ 音。",
+            "  - 例词：wa**tch**, ca**tch**, ki**tch**en",
+            "**ng** /ŋ/: 发音时舌根抬起抵住软腭，气流从鼻腔发出，声带振动。像中文的“eng”或“ang”的鼻音部分。",
+            "  - 例词：lo**ng**, si**ng**, morni**ng**, Engli**sh** (注意，'ng'在'English'中发/ŋɡ/，但初中阶段主要学/ŋ/)"
+          ],
+          "why_explanation": "这些字母组合的发音是英语中常见的辅音组合，掌握它们能帮助学生正确拼读和记忆单词。特别是'sh'和'ch/tch'，以及'ng'的鼻音，是区分发音的关键。",
+          "example": {
+            "question": "指出下列单词中划线字母组合的正确发音：1. **sh**ort 2. **ch**inese 3. wa**tch** 4. lo**ng**",
+            "steps": [
+              "1. short: 'sh'发/ʃ/音。",
+              "2. chinese: 'ch'发/tʃ/音。",
+              "3. watch: 'tch'发/tʃ/音。",
+              "4. long: 'ng'发/ŋ/音。",
+              "检查：1. /ʃ/ 2. /tʃ/ 3. /tʃ/ 4. /ŋ/"
+            ],
+            "answer": "1. /ʃ/ 2. /tʃ/ 3. /tʃ/ 4. /ŋ/"
+          },
+          "mistakes": [
+            {
+              "wrong": "将'long'中的'ng'发成/nɡ/的组合音。",
+              "correct": "/lɔːŋ/",
+              "reason": "在词末或辅音前，'ng'通常发鼻音/ŋ/，而不是/n/和/ɡ/的组合音。"
+            },
+            {
+              "wrong": "将'watch'中的'tch'发成/t/和/ʃ/的组合音。",
+              "correct": "/wɑːtʃ/",
+              "reason": "'tch'组合固定发/tʃ/音。"
+            }
+          ],
+          "memory_tip": "sh像嘘声，ch/tch像打喷嚏（发音部位相同）。ng像鼻音，舌头抵住后面，声音从鼻子里出来。",
+          "related": {
+            "prerequisite": "辅音发音",
+            "next": "更多鼻音和塞擦音"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "11",
+      "unit_name": "What time do you go to school?",
+      "cards": [
+        {
+          "card_id": "11-01",
+          "full_id": "英语-七上-11-01",
+          "title": "词汇：时间与日常活动",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "本单元学习如何表达时间以及各种日常活动相关的词汇。",
+          "core_points": [
+            "time /taɪm/: (n.) 时间",
+            "o'clock /əˈklɑːk/: (adv.) ……点钟",
+            "past /pæst/: (prep.) 过了……",
+            "to /tuː/: (prep.) 差……到……",
+            "half /hæf/: (n.) 一半 (adj.) 一半的",
+            "quarter /ˈkwɔːrtər/: (n.) 四分之一，一刻钟",
+            "get up /ɡet ʌp/: (phr. v.) 起床",
+            "go to school /ɡoʊ tə skuːl/: (phr.) 去上学",
+            "eat breakfast /iːt ˈbrekfəst/: (phr.) 吃早饭",
+            "eat lunch /iːt lʌntʃ/: (phr.) 吃午饭",
+            "eat dinner /iːt ˈdɪnər/: (phr.) 吃晚饭",
+            "go home /ɡoʊ hoʊm/: (phr.) 回家",
+            "do homework /duː ˈhoʊmwɜːrk/: (phr.) 做作业",
+            "watch TV /wɑːtʃ ˌtiː ˈviː/: (phr.) 看电视",
+            "go to bed /ɡoʊ tə bed/: (phr.) 睡觉",
+            "shower /ˈʃaʊər/: (n.) 淋浴 (v.) 洗淋浴",
+            "brush /brʌʃ/: (v.) 刷 (n.) 刷子",
+            "morning /ˈmɔːrnɪŋ/: (n.) 早晨",
+            "afternoon /ˌæftərˈnuːn/: (n.) 下午",
+            "evening /ˈiːvnɪŋ/: (n.) 晚上",
+            "night /naɪt/: (n.) 夜晚"
+          ],
+          "why_explanation": "时间是日常生活的核心，日常活动词汇则构成了我们一天生活的描述。掌握这些词汇能帮助学生有效地安排时间，描述自己的作息，进行时间相关的交流。",
+          "example": {
+            "question": "用所学词汇填空：1. I usually ____ ____ at six in the morning. 2. After school, I ____ ____. 3. My father likes to ____ ____ in the evening. 4. I ____ ____ at ten o'clock.",
+            "steps": [
+              "1. 早上六点通常是'起床'，填'get up'。",
+              "2. 放学后是'做作业'，填'do homework'。",
+              "3. 晚上喜欢'看电视'，填'watch TV'。",
+              "4. 十点钟是'睡觉'，填'go to bed'。",
+              "检查：1. I usually get up at six in the morning. 2. After school, I do homework. 3. My father likes to watch TV in the evening. 4. I go to bed at ten o'clock."
+            ],
+            "answer": "1. I usually get up at six in the morning. 2. After school, I do homework. 3. My father likes to watch TV in the evening. 4. I go to bed at ten o'clock."
+          },
+          "mistakes": [
+            {
+              "wrong": "I go to home.",
+              "correct": "I go home.",
+              "reason": "'go home'是一个固定短语，'home'在这里作副词，前面不加'to'。但'go to school/bed'需要'to'。"
+            },
+            {
+              "wrong": "I watch TV in the night.",
+              "correct": "I watch TV at night.",
+              "reason": "'at night'是固定搭配，表示“在晚上”。'in the morning/afternoon/evening'则用'in'。"
+            }
+          ],
+          "memory_tip": "日常活动像个'时间轴'，每个时间点都有对应的动作。记住'go home'是特例，'at night'是特例。",
+          "related": {
+            "prerequisite": "动词，介词 at/in",
+            "next": "时态：一般现在时"
+          }
+        },
+        {
+          "card_id": "11-02",
+          "full_id": "英语-七上-11-02",
+          "title": "语法：时间表达 (整点，半点，刻，分钟)",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习如何用英语准确表达时间，包括整点、半点、刻以及具体的分钟数。",
+          "core_points": [
+            "**整点**：数字 + o'clock。",
+            "  - 例：6:00 → six o'clock",
+            "**分钟表达 (顺读法)**：数字 + 数字 (hour + minute)。",
+            "  - 例：6:15 → six fifteen",
+            "  - 例：6:30 → six thirty",
+            "**分钟表达 (逆读法)**：",
+            "  - **分钟数在30分钟以内**：分钟数 + past + 小时数。",
+            "    - 例：6:15 → fifteen past six (六点过一刻)",
+            "    - 例：6:05 → five past six (六点过五分)",
+            "  - **分钟数在30分钟以上**： (60 - 分钟数) + to + (下一)小时数。",
+            "    - 例：6:45 → fifteen to seven (差一刻七点)",
+            "    - 例：6:50 → ten to seven (差十分七点)",
+            "**半点**：half past + 小时数。",
+            "  - 例：6:30 → half past six",
+            "**刻**：a quarter past + 小时数 (过一刻) / a quarter to + (下一)小时数 (差一刻)。",
+            "  - 例：6:15 → a quarter past six",
+            "  - 例：6:45 → a quarter to seven",
+            "**上午/下午**：在时间后加 a.m. (上午) 或 p.m. (下午)。",
+            "  - 例：6:00 a.m. (早上六点), 6:00 p.m. (下午六点)"
+          ],
+          "why_explanation": "时间表达是日常生活的关键。英语有两种主要的时间表达方式（顺读和逆读），这反映了不同的思维习惯。掌握这些能让学生在不同语境下灵活准确地表达时间。",
+          "example": {
+            "question": "用两种方式表达下列时间：1. 8:00 2. 7:15 3. 9:30 4. 10:45",
+            "steps": [
+              "1. 8:00 → eight o'clock (整点) / eight zero (顺读法)。",
+              "2. 7:15 → seven fifteen (顺读法) / a quarter past seven (逆读法)。",
+              "3. 9:30 → nine thirty (顺读法) / half past nine (逆读法)。",
+              "4. 10:45 → ten forty-five (顺读法) / a quarter to eleven (逆读法)。",
+              "检查：1. eight o'clock / eight zero 2. seven fifteen / a quarter past seven 3. nine thirty / half past nine 4. ten forty-five / a quarter to eleven"
+            ],
+            "answer": "1. eight o'clock / eight zero\n2. seven fifteen / a quarter past seven\n3. nine thirty / half past nine\n4. ten forty-five / a quarter to eleven"
+          },
+          "mistakes": [
+            {
+              "wrong": "It's quarter past six.",
+              "correct": "It's a quarter past six.",
+              "reason": "'quarter'作为“一刻钟”时，前面通常需要加不定冠词'a'。"
+            },
+            {
+              "wrong": "It's half past seven o'clock.",
+              "correct": "It's half past seven. / It's seven thirty.",
+              "reason": "'o'clock'只用于整点，不能与'half past'连用。"
+            },
+            {
+              "wrong": "It's ten to eight. (指7:50)",
+              "correct": "It's ten to eight. (指7:50) / It's seven fifty.",
+              "reason": "逆读法中，'to'表示“差”，后面跟下一小时数。"
+            }
+          ],
+          "memory_tip": "整点是'o'clock'，半点是'half past'，一刻是'a quarter'。'past'是'过'，'to'是'差'。顺读法简单直接，逆读法更优雅。",
+          "related": {
+            "prerequisite": "数字0-60，介词 past/to",
+            "next": "时间介词 at"
+          }
+        },
+        {
+          "card_id": "11-03",
+          "full_id": "英语-七上-11-03",
+          "title": "语法：介词 at (表示时间)",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "at 作为时间介词，通常用于表示具体的时刻，或与某些固定时间短语搭配。",
+          "core_points": [
+            "**用于具体时刻**：at + 具体时间。",
+            "  - 例：I get up **at six o'clock**. (我六点起床。)",
+            "  - 例：The class starts **at 8:30**. (课八点半开始。)",
+            "**用于特定时间点**：",
+            "  - **at noon** (在中午)",
+            "  - **at midnight** (在午夜)",
+            "  - **at night** (在晚上) (与 'in the morning/afternoon/evening' 区别)",
+            "  - **at dawn** (在黎明)",
+            "  - **at sunrise/sunset** (在日出/日落时)",
+            "**注意**：与 in (月份/季节/年份/一天中的泛指时段) 和 on (具体日期/星期几) 区分。"
+          ],
+          "why_explanation": "'at'作为时间介词，强调的是一个精确的时间点，而不是一个时间段。这与它的地点用法（at a specific point）有异曲同工之妙，体现了英语介词的精确性。",
+          "example": {
+            "question": "用 at, in 或 on 填空：1. I go to school ____ 7:00 a.m. 2. We have dinner ____ the evening. 3. My birthday is ____ May 1st. 4. I often read books ____ night.",
+            "steps": [
+              "1. '7:00 a.m.'是具体时刻，用'at'。",
+              "2. 'the evening'是泛指一天中的某个时段，用'in'。",
+              "3. 'May 1st'是具体日期，用'on'。",
+              "4. 'night'是固定搭配，用'at'。",
+              "检查：1. I go to school at 7:00 a.m. 2. We have dinner in the evening. 3. My birthday is on May 1st. 4. I often read books at night."
+            ],
+            "answer": "1. at 2. in 3. on 4. at"
+          },
+          "mistakes": [
+            {
+              "wrong": "I watch TV in night.",
+              "correct": "I watch TV at night.",
+              "reason": "'at night'是固定搭配。"
+            },
+            {
+              "wrong": "The party is on six o'clock.",
+              "correct": "The party is at six o'clock.",
+              "reason": "具体时刻前使用介词'at'。"
+            },
+            {
+              "wrong": "I get up in 6:30.",
+              "correct": "I get up at 6:30.",
+              "reason": "具体时刻前使用介词'at'。"
+            }
+          ],
+          "memory_tip": "'at'像个'瞄准镜'，指向精确的时间点。记住'at'是具体时刻和几个固定短语的专属介词。",
+          "related": {
+            "prerequisite": "时间表达，介词 on/in (表示时间)",
+            "next": "时间状语从句"
+          }
+        },
+        {
+          "card_id": "11-04",
+          "full_id": "英语-七上-11-04",
+          "title": "句型：询问与表达日常作息",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "学习如何询问他人的日常作息时间，并进行回答。",
+          "core_points": [
+            "**询问日常作息 (一般疑问句)**：",
+            "  - What time do you + 动词短语? (你几点...？)",
+            "    - 例：What time do you go to school? (你几点去上学？)",
+            "  - What time does he/she + 动词短语? (他/她几点...？)",
+            "    - 例：What time does she eat lunch? (她几点吃午饭？)",
+            "**回答日常作息**：",
+            "  - I + 动词短语 + at + 时间. (我...在...时间。)",
+            "    - 例：I go to school **at seven o'clock**. (我七点去上学。)",
+            "  - He/She + 动词三单形式 + at + 时间. (他/她...在...时间。)",
+            "    - 例：He eats lunch **at twelve thirty**. (他十二点半吃午饭。)",
+            "**其他询问**：",
+            "  - When do you + 动词短语? (你什么时候...？)",
+            "    - 例：When do you do your homework? (你什么时候做作业？)",
+            "  - What do you do + at + 时间? (你...时间做什么？)",
+            "    - 例：What do you do at night? (你晚上做什么？)"
+          ],
+          "why_explanation": "'What time'和'When'是询问时间的疑问词。结合一般现在时和时间介词'at'，可以清晰地表达日常作息和习惯性动作。这对于描述个人生活和安排活动至关重要。",
+          "example": {
+            "question": "补全对话：A: ____ ____ do you ____ ____? B: I get up ____ six o'clock. A: ____ ____ he ____ ____? B: He watches TV ____ eight thirty.",
+            "steps": [
+              "A询问起床时间，用'What time'和'get up'。",
+              "B回答起床时间，用'at'。",
+              "A询问看电视时间，主语'he'，用'What time'和'watch TV'（注意三单动词）。",
+              "B回答看电视时间，用'at'。",
+              "检查：A: What time do you get up? B: I get up at six o'clock. A: What time does he watch TV? B: He watches TV at eight thirty."
+            ],
+            "answer": "A: What time do you get up? B: I get up at six o'clock. A: What time does he watch TV? B: He watches TV at eight thirty."
+          },
+          "mistakes": [
+            {
+              "wrong": "What time does you go to school?",
+              "correct": "What time do you go to school?",
+              "reason": "主语'you'是第二人称，助动词应使用'do'。"
+            },
+            {
+              "wrong": "He goes to school at seven.",
+              "correct": "He goes to school at seven o'clock. / He goes to school at 7:00.",
+              "reason": "时间表达不完整，'seven'可以是七点、七分、七天等，需要明确是'七点钟'。"
+            }
+          ],
+          "memory_tip": "'What time'是问'几点'的'闹钟'，'do/does'是它的'小帮手'。回答时，'at'是时间的'定位器'。",
+          "related": {
+            "prerequisite": "时间表达，日常活动词汇，一般现在时（实义动词），介词 at",
+            "next": "描述周末活动"
+          }
+        },
+        {
+          "card_id": "11-05",
+          "full_id": "英语-七上-11-05",
+          "title": "写作卡：一日作息描述",
+          "type": "写作卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何用清晰的语言描述自己或他人一天的日常作息安排。",
+          "core_points": [
+            "**基本结构**：",
+            "  - 开头：介绍人物和主题 (e.g., Let me tell you about my day.)",
+            "  - 时间顺序：按时间先后顺序描述活动。",
+            "  - 常用连接词：then, after that, and, but, first, next, finally.",
+            "  - 句型：主语 + 动词短语 + at + 时间. / 主语 + 动词短语 + in the morning/afternoon/evening.",
+            "  - 结尾：总结或表达感受 (e.g., I have a busy/happy day.)",
+            "**常用句型**：",
+            "  - I get up at six o'clock.",
+            "  - Then I eat breakfast.",
+            "  - I go to school at seven thirty.",
+            "  - In the afternoon, I do my homework.",
+            "  - I go to bed at ten p.m.",
+            "**写作步骤**：",
+            "  1. 列出一天中重要的几个时间点和对应的活动。",
+            "  2. 从早上开始，按时间顺序写出每个活动和时间。",
+            "  3. 使用恰当的动词短语和时间介词。",
+            "  4. 使用连接词使句子之间衔接流畅。",
+            "  5. 在结尾处可以简单总结一天或表达感受。"
+          ],
+          "why_explanation": "一日作息描述是初级写作的典型任务，它要求学生综合运用时间表达、日常活动词汇和一般现在时，有逻辑地组织信息。这种练习能提高学生的叙事能力和连贯性。",
+          "example": {
+            "question": "请描述你一天的作息，至少包含5个活动和对应的时间。",
+            "steps": [
+              "列出活动和时间：6:00 起床，6:30 吃早饭，7:00 去上学，12:00 吃午饭，17:00 回家，19:00 做作业，21:30 睡觉。",
+              "开头：Let me tell you about my day.",
+              "描述：I get up at six o'clock in the morning. Then I eat breakfast at six thirty. I go to school at seven o'clock. At twelve o'clock, I eat lunch. In the afternoon, I go home at five o'clock. After that, I do my homework at seven p.m. Finally, I go to bed at nine thirty.",
+              "检查：句型和时态是否正确，时间表达是否准确，连接词是否使用得当。"
+            ],
+            "answer": "Let me tell you about my day.\nI get up at six o'clock in the morning. Then I eat breakfast at six thirty. I go to school at seven o'clock. At twelve o'clock, I eat lunch. In the afternoon, I go home at five o'clock. After that, I do my homework at seven p.m. Finally, I go to bed at nine thirty."
+          },
+          "mistakes": [
+            {
+              "wrong": "I get up 6:00. Eat breakfast 6:30. Go to school 7:00.",
+              "correct": "I get up at 6:00. I eat breakfast at 6:30. I go to school at 7:00.",
+              "reason": "句子缺少主语和介词'at'，显得不完整和不连贯。"
+            },
+            {
+              "wrong": "I go home at night. Then I watch TV.",
+              "correct": "I go home in the afternoon. Then I watch TV at night.",
+              "reason": "时间顺序可能不合理，回家通常在下午，看电视在晚上。介词使用也要注意。"
+            }
+          ],
+          "memory_tip": "一日作息像个'时间表'，每个活动都有固定的'站牌'（at + 时间）。用'first, then, next, finally'把它们串起来。",
+          "related": {
+            "prerequisite": "时间表达，日常活动词汇，一般现在时（实义动词），介词 at/in",
+            "next": "描述周末活动"
+          }
+        },
+        {
+          "card_id": "11-06",
+          "full_id": "英语-七上-11-06",
+          "title": "语音卡：连读 (Linking)",
+          "type": "语音卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "连读是英语口语中常见的语音现象，指一个单词以辅音结尾，紧接着下一个单词以元音开头时，两个音会自然地连接起来。",
+          "core_points": [
+            "**辅音 + 元音连读**：这是最常见的连读形式。",
+            "  - 例：get_up /ɡet ʌp/ → /ɡeˈtʌp/",
+            "  - 例：go_to_school /ɡoʊ tu skuːl/ → /ɡoʊtəˈskuːl/",
+            "  - 例：eat_apples /iːt ˈæplz/ → /iːˈtæplz/",
+            "  - 例：What_is_it? /wɑːt ɪz ɪt/ → /wɑːˈtɪzɪt/",
+            "  - 例：half_an_hour /hæf ən ˈaʊər/ → /hæˈfənˈaʊər/",
+            "**辅音 + 相同辅音连读 (同化)**：两个相同的辅音相邻时，通常只发一个长音。",
+            "  - 例：good day /ɡʊd deɪ/ → /ɡʊːdeɪ/",
+            "**辅音 + 相似辅音连读 (失爆/不完全爆破)**：某些辅音（如/p/, /t/, /k/, /b/, /d/, /ɡ/）后面紧跟另一个辅音时，第一个辅音只作口型，不完全发音。",
+            "  - 例：hot dog /hɑːt dɔːɡ/ → /hɑːdɔːɡ/ (t不完全爆破)",
+            "**注意**：连读是自然发生的，不是刻意去做的。多听多模仿是掌握连读的最佳方法。"
+          ],
+          "why_explanation": "连读是英语口语流畅性的体现，它使得单词之间衔接自然，避免了生硬的停顿。理解连读能帮助学生更好地听懂英语，也能使自己的口语更接近母语者。",
+          "example": {
+            "question": "指出下列短语中可能发生连读的地方，并尝试读出来：1. get up 2. go to school 3. what is it 4. an apple",
+            "steps": [
+              "1. get_up: 't'和'u'连读，发/tʌ/。",
+              "2. go_to_school: 'go'和'to'连读，'to'和'school'不连读（辅音+辅音）。但'to'本身常弱读成/tə/。",
+              "3. what_is_it: 't'和'i'连读，'s'和'i'连读，发/tɪzɪt/。",
+              "4. an_apple: 'n'和'a'连读，发/nə/。",
+              "检查：1. get_up 2. go_to school 3. what_is_it 4. an_apple"
+            ],
+            "answer": "1. get_up (/ɡeˈtʌp/)\n2. go_to school (/ɡoʊtəˈskuːl/)\n3. what_is_it (/wɑːˈtɪzɪt/)\n4. an_apple (/əˈnæpl/)"
+          },
+          "mistakes": [
+            {
+              "wrong": "在读'What is it?'时，每个词之间都有明显停顿。",
+              "correct": "What_is_it? (连读)",
+              "reason": "辅音结尾接元音开头的词应自然连读，停顿会使口语不自然。"
+            },
+            {
+              "wrong": "将'go to'的'to'读成重读音。",
+              "correct": "go tə (弱读)",
+              "reason": "介词'to'在口语中常弱读为/tə/，而不是重读音。"
+            }
+          ],
+          "memory_tip": "连读像'手拉手'，辅音拉元音。让嘴巴'偷懒'，读起来更顺畅。",
+          "related": {
+            "prerequisite": "元音辅音，单词发音",
+            "next": "弱读，节奏与语调"
+          }
+        }
+      ]
+    }
+  ]
+}

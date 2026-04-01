@@ -3387,10 +3387,18 @@ def _parse_text_manifest(text):
 
 
 def _fix_english_card_title_manifest(manifest, card, subject):
-    """英语卡标题优化: 如果 TITLE 是纯中文泛化标题，自动拼入英文关键短语"""
+    """英语卡标题优化: 如果 TITLE 是纯中文泛化标题，自动拼入英文关键短语
+
+    v10.13 优化提取优先级:
+      1. card['title'] 中括号内的英文 (Where is...?) → 最佳
+      2. card['title'] 中任意英文短语
+      3. card['core_points'] 第一条中的英文短语
+      4. card['definition'] 中的英文短语
+    避免从 definition 中取到无关的 "under the" 等片段。
+    """
     if subject != '英语' and subject != 'english':
         return manifest
-    
+
     title_key = None
     title_val = None
     for k, v in manifest.items():
@@ -3398,39 +3406,87 @@ def _fix_english_card_title_manifest(manifest, card, subject):
             title_key = k
             title_val = v
             break
-    
+
     if not title_key or not title_val:
         return manifest
-    
-    # 检查: TITLE 是否有英文
+
+    # 检查: TITLE 是否已有英文
     has_eng = bool(re.search(r'[a-zA-Z]', title_val))
     if has_eng:
         return manifest  # 已经有英文了，不动
-    
-    # 从 definition 中提取英文关键短语
-    definition = card.get('definition', '')
-    eng_phrase = ''
-    # 尝试提取完整短语 (如 "pay attention to")
-    eng_words = re.findall(r'[a-zA-Z][a-zA-Z\s]{2,}', definition)
-    if eng_words:
-        # 取最长的英文片段
-        eng_phrase = max(eng_words, key=len).strip()[:25]
-    
-    if not eng_phrase:
-        # 从 title 尝试
-        title_full = card.get('title', '')
-        eng_words = re.findall(r'[a-zA-Z][a-zA-Z\s]{2,}', title_full)
-        if eng_words:
-            eng_phrase = max(eng_words, key=len).strip()[:25]
-    
+
+    eng_phrase = _extract_best_english_phrase(card)
+
     if eng_phrase:
         # 中文标题保留前2字 + 英文关键词
         cn_chars = re.findall(r'[\u4e00-\u9fff]', title_val)
         cn_prefix = ''.join(cn_chars[:2]) if cn_chars else title_val[:2]
         manifest[title_key] = f'{cn_prefix}{eng_phrase}'
         print(f'      [title fix] "{title_val}" → "{manifest[title_key]}"')
-    
+
     return manifest
+
+
+def _extract_best_english_phrase(card):
+    """从卡片数据中提取最能代表卡片核心内容的英文短语。
+
+    优先级:
+      1. title 括号内英文 (Where is...?) → 这是作者显式标注的表达
+      2. title 中的英文短语
+      3. core_points[0] 中的英文短语 (通常是最核心的句型)
+      4. definition 中的英文短语 (补底)
+    """
+    title_full = card.get('title', '')
+
+    # 策略1: 从 title 括号内提取 (e.g., "(句型卡：... (Where is...?)")
+    paren_matches = re.findall(r'[\(\uff08]([^\)\uff09]*?[a-zA-Z][^\)\uff09]*?)[\)\uff09]', title_full)
+    for pm in paren_matches:
+        eng_in_paren = re.findall(r"[a-zA-Z][a-zA-Z'\s\.\?!]{1,}", pm)
+        if eng_in_paren:
+            phrase = max(eng_in_paren, key=len).strip().rstrip('.').strip()[:30]
+            if len(phrase) >= 3:
+                print(f'      [eng phrase] 从title括号提取: "{phrase}"')
+                return phrase
+
+    # 策略2: 从 title 中提取任意英文
+    eng_words = re.findall(r"[a-zA-Z][a-zA-Z'\s\.\?!]{2,}", title_full)
+    if eng_words:
+        phrase = max(eng_words, key=len).strip().rstrip('.').strip()[:30]
+        if len(phrase) >= 3:
+            print(f'      [eng phrase] 从title提取: "{phrase}"')
+            return phrase
+
+    # 策略3: 从 core_points 第一条提取英文
+    core_points = card.get('core_points', [])
+    if core_points:
+        cp0 = core_points[0] if isinstance(core_points[0], str) else str(core_points[0])
+        eng_words = re.findall(r"[a-zA-Z][a-zA-Z'\s\.\?!]{2,}", cp0)
+        if eng_words:
+            phrase = max(eng_words, key=len).strip().rstrip('.').strip()[:30]
+            if len(phrase) >= 3:
+                print(f'      [eng phrase] 从core_points提取: "{phrase}"')
+                return phrase
+
+    # 策略4: 从 definition 提取英文
+    definition = card.get('definition', '')
+    # 优先提取引号内的英文 (如 用 'Where is...?' 询问)
+    quoted = re.findall(r"['‘’“”]([^'‘’“”]*?[a-zA-Z][^'‘’“”]*?)['‘’“”]", definition)
+    for q in quoted:
+        eng_in_q = re.findall(r"[a-zA-Z][a-zA-Z'\s\.\?!]{1,}", q)
+        if eng_in_q:
+            phrase = max(eng_in_q, key=len).strip().rstrip('.').strip()[:30]
+            if len(phrase) >= 3:
+                print(f'      [eng phrase] 仍efinition引号提取: "{phrase}"')
+                return phrase
+    # 补底: definition 中最长英文
+    eng_words = re.findall(r"[a-zA-Z][a-zA-Z'\s\.\?!]{2,}", definition)
+    if eng_words:
+        phrase = max(eng_words, key=len).strip().rstrip('.').strip()[:30]
+        if len(phrase) >= 3:
+            print(f'      [eng phrase] 仍efinition提取: "{phrase}"')
+            return phrase
+
+    return ''
 
 
 def _inject_grammar_terms_to_manifest(manifest, card, subject):
@@ -4440,7 +4496,70 @@ def _programmatic_text_check(ocr_result, expected_manifest):
         ocr_result['errors'] = errors
         ocr_result['overall_score'] = score
         ocr_result['summary'] = (ocr_result.get('summary', '') + f' [+{added}处程序化补检]').strip()
-    
+
+    # v10.13: 英文卡核心短语校验
+    ocr_result = _programmatic_english_phrase_check(ocr_result, expected_manifest)
+
+    return ocr_result
+
+
+def _programmatic_english_phrase_check(ocr_result, expected_manifest):
+    """v10.13: 程序化英文核心短语校验。
+
+    解决的问题:
+    - manifest TITLE 被错误提取为 "under the" 而非 "Where is"
+    - OCR 对着错误的 manifest 打100分
+    - 需要校验图片中的英文内容是否合理
+
+    检查逻辑:
+    1. 提取 manifest 中所有含英文的值
+    2. 检查 found_texts 中是否存在对应的英文短语
+    3. 如果英文内容完全缺失，报 eng_missing 错误并降分
+    """
+    found_texts = ocr_result.get('found_texts', [])
+    if not found_texts or not expected_manifest:
+        return ocr_result
+
+    all_found = ' '.join(found_texts).lower()
+    errors = ocr_result.get('errors', [])
+    existing_types = {(e.get('expected', ''), e.get('type', '')) for e in errors}
+    score = ocr_result.get('overall_score', 100)
+    added = 0
+
+    for mk, mv in expected_manifest.items():
+        # 只检查含英文的 manifest 行
+        eng_parts = re.findall(r"[a-zA-Z][a-zA-Z'\s]{2,}", mv)
+        if not eng_parts:
+            continue
+
+        for ep in eng_parts:
+            ep_clean = ep.strip().lower()
+            if len(ep_clean) < 3:
+                continue
+            # 检查核心英文词是否在 found_texts 中出现
+            # 允许小量差异：拆分为单词检查，至少 50% 的单词匹配
+            words = [w for w in ep_clean.split() if len(w) >= 2]
+            if not words:
+                continue
+            matched = sum(1 for w in words if w in all_found)
+            ratio = matched / len(words) if words else 0
+
+            if ratio < 0.5 and (mv, 'eng_missing') not in existing_types:
+                errors.append({
+                    'expected': mv,
+                    'actual': f'英文"{ep_clean}"未在图片中找到',
+                    'type': 'eng_missing',
+                    'severity': 'medium'
+                })
+                score = max(0, score - 8)
+                added += 1
+                print(f'      [英文补检] 缺失: "{ep_clean}" ← {mk}="{mv}"')
+
+    if added > 0:
+        ocr_result['errors'] = errors
+        ocr_result['overall_score'] = score
+        ocr_result['summary'] = (ocr_result.get('summary', '') + f' [+{added}处英文补检]').strip()
+
     return ocr_result
 
 

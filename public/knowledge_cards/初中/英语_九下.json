@@ -1,0 +1,2792 @@
+{
+  "subject": "英语",
+  "grade": "九年级",
+  "semester": "下册",
+  "textbook": "人教版",
+  "grade_short": "九下",
+  "units": [
+    {
+      "unit_id": "01",
+      "unit_name": "How do you study for a test?",
+      "cards": [
+        {
+          "card_id": "01-01",
+          "full_id": "英语-九下-01-01",
+          "title": "词汇：学习方法与学术活动",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "本单元与学习、考试及学术活动相关的核心词汇和短语。",
+          "core_points": [
+            "study /'stʌdi/ v. 学习；n. 学习，研究 (He studies hard for exams.)",
+            "test /test/ n. 考试；v. 测验 (We have a math test tomorrow.)",
+            "improve /ɪm'pruːv/ v. 提高，改善 (You need to improve your English.)",
+            "score /skɔːr/ n. 分数；v. 得分 (She got a high score on the test.)",
+            "memorize /'meməraɪz/ v. 记忆，记住 (Memorizing new words is important.)",
+            "review /rɪ'vjuː/ v.&n. 复习 (Let's review Unit 1 before the test.)",
+            "aloud /ə'laʊd/ adv. 出声地，大声地 (Read the text aloud.)",
+            "flashcard /'flæʃkɑːrd/ n. 抽认卡 (Flashcards help with vocabulary.)",
+            "grammar /'ɡræmər/ n. 语法 (Grammar is a key part of language learning.)",
+            "pattern /'pætərn/ n. 模式，方式 (Look for sentence patterns.)",
+            "pronunciation /prəˌnʌnsi'eɪʃn/ n. 发音 (Practice your pronunciation.)",
+            "discover /dɪ'skʌvər/ v. 发现 (Did you discover anything new?)",
+            "secret /'siːkrɪt/ n. 秘密 (What's your secret to success?)",
+            "succeed /sək'siːd/ v. 成功 (If you work hard, you will succeed.)",
+            "success /sək'ses/ n. 成功 (Success comes from effort.)",
+            "successful /sək'sesfl/ adj. 成功的 (He is a successful businessman.)",
+            "afraid /ə'freɪd/ adj. 害怕的，担心的 (Don't be afraid to make mistakes.)",
+            "deal with 处理，应付 (How do you deal with stress?)",
+            "instead of 代替 (Let's walk instead of taking a bus.)",
+            "by doing 通过做… (You can learn English by listening to music.)",
+            "make a list 列清单 (Make a list of things to do.)",
+            "take notes 做笔记 (It's good to take notes during class.)",
+            "pay attention to 注意 (Pay attention to the teacher.)",
+            "what about 怎么样 (What about going to the park?)"
+          ],
+          "why_explanation": "这些词汇是描述学习过程、方法和结果的基础，掌握它们能帮助我们准确表达学习经验和建议。",
+          "example": {
+            "question": "请用本单元词汇填空：To _____ your English, you should _____ new words and _____ your lessons regularly. Don't be _____ to speak _____.",
+            "steps": [
+              "分析句意，理解每个空所需词性及语境。",
+              "第一个空需要动词，表示提高，选择 'improve'。",
+              "第二个空需要动词，表示记忆，选择 'memorize'。",
+              "第三个空需要动词，表示复习，选择 'review'。",
+              "第四个空需要形容词，表示害怕，选择 'afraid'。",
+              "第五个空需要副词，表示出声地，选择 'aloud'。"
+            ],
+            "answer": "To improve your English, you should memorize new words and review your lessons regularly. Don't be afraid to speak aloud."
+          },
+          "mistakes": [
+            {
+              "wrong": "She is success in her career.",
+              "correct": "She is successful in her career.",
+              "reason": "success是名词，表示成功；successful是形容词，表示成功的。be动词后应跟形容词作表语。"
+            },
+            {
+              "wrong": "I study by listen to music.",
+              "correct": "I study by listening to music.",
+              "reason": "介词 'by' 后跟动词时，动词应使用动名词形式（-ing）。"
+            }
+          ],
+          "memory_tip": "将相关词汇编成小故事或情境对话，如“为了在test上得高score，我decide要improve我的study methods，比如memorize words with flashcards and review grammar patterns aloud。”",
+          "related": {
+            "prerequisite": "小学阶段基础词汇、动词ing形式",
+            "next": "更多关于学习策略和建议的表达"
+          }
+        },
+        {
+          "card_id": "01-02",
+          "full_id": "英语-九下-01-02",
+          "title": "语法：动名词作主语、宾语和介词宾语",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "动名词（Gerunds），即动词-ing形式，在句中可作主语、宾语或介词宾语，具有名词的性质。",
+          "core_points": [
+            "**作主语**：表示一种行为或活动。动名词作主语时，谓语动词用单数形式。",
+            "  *结构*: V-ing + (谓语动词单数) + ...",
+            "  *例句*: Learning English is fun. (学习英语很有趣。)",
+            "**作宾语**：常跟在某些动词（如enjoy, finish, mind, practice, keep, suggest, consider等）之后作宾语。",
+            "  *结构*: 主语 + 动词 + V-ing + ...",
+            "  *例句*: I enjoy reading novels. (我喜欢读小说。)",
+            "**作介词宾语**：介词（如in, on, at, by, for, without, before, after等）后面必须跟名词、代词或动名词。",
+            "  *结构*: 介词 + V-ing + ...",
+            "  *例句*: He learns English by listening to music. (他通过听音乐学习英语。)",
+            "**否定形式**：在动名词前加 not。",
+            "  *例句*: Not eating breakfast is bad for your health. (不吃早餐对你的健康有害。)"
+          ],
+          "why_explanation": "英语中，动词本身不能直接充当名词的成分（如主语、宾语）。为了让动词能像名词一样使用，英语创造了动名词V-ing形式。它保留了动词的'动作'含义，同时获得了名词的'实体'功能，从而可以在句中灵活地扮演主语、宾语等角色，使得表达更简洁、自然。介词后只能跟名词性成分，所以动词作介词宾语时也必须转化为动名词形式。",
+          "example": {
+            "question": "将以下句子中的动词转换为动名词并填入空白处：\n1. _____ (Read) books helps you gain knowledge.\n2. My brother is good at _____ (play) basketball.\n3. They suggested _____ (go) to the park.",
+            "steps": [
+              "1. 'Read' 在句首作主语，应变为动名词 'Reading'。",
+              "2. 'play' 在介词 'at' 之后作宾语，应变为动名词 'playing'。",
+              "3. 'go' 在动词 'suggested' 之后作宾语，应变为动名词 'going'。"
+            ],
+            "answer": "1. Reading books helps you gain knowledge.\n2. My brother is good at playing basketball.\n3. They suggested going to the park."
+          },
+          "mistakes": [
+            {
+              "wrong": "To learn English is interesting.",
+              "correct": "Learning English is interesting.",
+              "reason": "虽然不定式作主语语法上没错，但在口语和非正式书面语中，动名词作主语更常见，尤其当表达一种泛指的行为时。本单元侧重动名词作主语。"
+            },
+            {
+              "wrong": "I enjoy to listen to music.",
+              "correct": "I enjoy listening to music.",
+              "reason": "动词 'enjoy' 后面必须跟动名词作宾语，不能跟不定式。"
+            },
+            {
+              "wrong": "He succeeded in pass the exam.",
+              "correct": "He succeeded in passing the exam.",
+              "reason": "介词 'in' 后面必须跟动名词作宾语，不能跟动词原形。"
+            }
+          ],
+          "memory_tip": "口诀：'动名ing，作主宾，介词后面它最行。' 记下常跟动名词的动词：'Enjoy finish mind, practice keep suggest, avoid consider miss, admit deny escape。'",
+          "related": {
+            "prerequisite": "动词-ing形式的构成，介词的用法",
+            "next": "不定式与动名词的区别，动名词的复合结构"
+          }
+        },
+        {
+          "card_id": "01-03",
+          "full_id": "英语-九下-01-03",
+          "title": "语法：直接引语和间接引语（陈述句）",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "直接引语是引用他人原话，间接引语是将他人原话转述出来，陈述句的间接引语主要涉及人称、时态和时间状语等的变化。",
+          "core_points": [
+            "**直接引语**：用引号引出原话，如：He said, 'I am busy.'",
+            "**间接引语**：将原话转述，通常用 'that' 连接主句和从句，'that' 可省略。",
+            "  *结构*: 主语 + say/tell (sb) + (that) + 从句",
+            "  *例句*: He said (that) he was busy.",
+            "**变化规则**：",
+            "  1. **人称变化**：根据语境，将原话中的第一、二人称改为第三人称。",
+            "     *例*: Tom said, 'I like apples.' → Tom said he liked apples.",
+            "  2. **时态变化**：如果主句是过去时，从句时态通常向后推移一格（时态呼应）。",
+            "     *一般现在时 → 一般过去时*: She said, 'I am happy.' → She said she was happy.",
+            "     *现在进行时 → 过去进行时*: He said, 'I am studying.' → He said he was studying.",
+            "     *一般将来时 → 过去将来时*: They said, 'We will come.' → They said they would come.",
+            "     *现在完成时 → 过去完成时*: Mary said, 'I have finished.' → Mary said she had finished.",
+            "     *一般过去时 → 过去完成时*: He said, 'I went there.' → He said he had gone there.",
+            "     *注意*: 如果直接引语是客观事实、真理或主句为现在时，从句时态不变。",
+            "     *例*: The teacher said, 'The earth is round.' → The teacher said the earth is round.",
+            "  3. **时间/地点状语和指示代词变化**：",
+            "     *now → then*, *today → that day*, *tomorrow → the next day/the following day*",
+            "     *yesterday → the day before/the previous day*, *this → that*, *these → those*",
+            "     *here → there*, *come → go* (根据语境)"
+          ],
+          "why_explanation": "直接引语是'原封不动'地引用，而间接引语是'转述'。转述时，说话的'时间'和'视角'都发生了变化。例如，'我'变成了'他'，'现在'变成了'当时'。因此，为了保持逻辑一致性，人称、时态和时间状语等都需要相应地调整，以反映转述时的实际情况。'that'作为连接词，起到了引导宾语从句的作用，明确了转述的内容。",
+          "example": {
+            "question": "将以下直接引语改为间接引语：\n1. She said, 'I am going to the library now.'\n2. He said, 'I finished my homework yesterday.'",
+            "steps": [
+              "1. 主句是过去时，从句人称 'I' 变为 'she'，时态 'am going' 变为 'was going'，时间状语 'now' 变为 'then'。",
+              "2. 主句是过去时，从句人称 'I' 变为 'he'，时态 'finished' (一般过去时) 变为 'had finished' (过去完成时)，时间状语 'yesterday' 变为 'the day before' 或 'the previous day'。"
+            ],
+            "answer": "1. She said (that) she was going to the library then.\n2. He said (that) he had finished his homework the day before."
+          },
+          "mistakes": [
+            {
+              "wrong": "He said that I am busy.",
+              "correct": "He said that he was busy.",
+              "reason": "转述时，原话中的 'I' 应根据主句主语变为 'he'，且主句是过去时，从句时态 'am' 应变为 'was'。"
+            },
+            {
+              "wrong": "They told me they will come tomorrow.",
+              "correct": "They told me they would come the next day.",
+              "reason": "主句是过去时，从句时态 'will' 应变为 'would'，时间状语 'tomorrow' 应变为 'the next day'。"
+            }
+          ],
+          "memory_tip": "记住'一变二推三改'：一变人称，二推时态，三改状语。像'变魔术'一样，把别人的话变成自己的话讲出来，时间、地点、人物都要跟着变。",
+          "related": {
+            "prerequisite": "各种基本时态的构成，人称代词的用法",
+            "next": "疑问句的间接引语，祈使句的间接引语"
+          }
+        },
+        {
+          "card_id": "01-04",
+          "full_id": "英语-九下-01-04",
+          "title": "语法：直接引语和间接引语（疑问句）",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "疑问句的间接引语将原问句转述为宾语从句，语序变为陈述句语序，并根据疑问词类型选择连接词。",
+          "core_points": [
+            "**一般疑问句的间接引语**：",
+            "  *连接词*: 用 'if' 或 'whether' (是否) 连接主句和从句。",
+            "  *语序*: 从句语序变为陈述句语序 (主语 + 谓语)。",
+            "  *例*: He asked, 'Are you happy?' → He asked if/whether I was happy.",
+            "  *变化*: 人称、时态、时间状语等变化规则同陈述句。",
+            "**特殊疑问句的间接引语**：",
+            "  *连接词*: 用原疑问词 (what, when, where, why, how, who, which等) 作连接词。",
+            "  *语序*: 从句语序变为陈述句语序 (疑问词 + 主语 + 谓语)。",
+            "  *例*: She asked, 'Where do you live?' → She asked where I lived.",
+            "  *变化*: 人称、时态、时间状语等变化规则同陈述句。",
+            "**主句动词**：常用 ask, wonder, want to know 等。"
+          ],
+          "why_explanation": "疑问句转为间接引语时，它不再是一个'发问'的动作，而是作为主句动词（如ask）的'宾语'。宾语从句在英语中必须是陈述句语序，即主语在前，谓语在后。因此，即使是疑问句，转述后也要'还原'为陈述句的语序。'if/whether'和疑问词起到了指明疑问内容的作用，同时充当了从句的连接词。",
+          "example": {
+            "question": "将以下直接引语改为间接引语：\n1. My mother asked me, 'Do you want some juice?'\n2. The teacher asked, 'What are you doing here, Tom?'",
+            "steps": [
+              "1. 这是一般疑问句，主句是过去时，用 'if' 或 'whether' 连接。原问句 'Do you want' 变为陈述句语序 'you want'，人称 'you' 变为 'I'，时态 'want' 变为 'wanted'。",
+              "2. 这是特殊疑问句，主句是过去时，用疑问词 'what' 连接。原问句 'are you doing' 变为陈述句语序 'you are doing'，人称 'you' 变为 'he' (指Tom)，时态 'are doing' 变为 'was doing'，地点状语 'here' 变为 'there'。"
+            ],
+            "answer": "1. My mother asked me if/whether I wanted some juice.\n2. The teacher asked what Tom was doing there."
+          },
+          "mistakes": [
+            {
+              "wrong": "He asked me what did I do.",
+              "correct": "He asked me what I did.",
+              "reason": "间接引语从句必须是陈述句语序，即 '疑问词 + 主语 + 谓语'，不能保留疑问句的倒装语序或助动词提前。"
+            },
+            {
+              "wrong": "She asked if was I ready.",
+              "correct": "She asked if I was ready.",
+              "reason": "同上，宾语从句语序为 'if/whether + 主语 + 谓语'，不能是 'if/whether + 谓语 + 主语'。"
+            }
+          ],
+          "memory_tip": "疑问句变间接，'if/whether'或疑问词。语序'变'陈述，时态'要'推移。就像把问句藏进一个大句子里面，它就变成了一个'乖乖'的从句了。",
+          "related": {
+            "prerequisite": "陈述句的间接引语，一般疑问句和特殊疑问句的结构",
+            "next": "祈使句的间接引语，宾语从句的更多类型"
+          }
+        },
+        {
+          "card_id": "01-05",
+          "full_id": "英语-九下-01-05",
+          "title": "句型：询问和表达学习方法",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元学习如何询问他人学习方法以及如何描述自己的学习策略。",
+          "core_points": [
+            "**询问学习方法**：",
+            "  *How do you study for a test?* (你如何备考？)",
+            "  *What do you do to improve your English?* (你做些什么来提高英语？)",
+            "  *What about...?* (……怎么样？)",
+            "  *Have you ever tried...?* (你尝试过……吗？)",
+            "**表达学习方法**：",
+            "  *I study by... (V-ing)* (我通过……学习。)",
+            "  *I improve my English by... (V-ing)* (我通过……提高英语。)",
+            "  *It's helpful to... (do sth)* (做……很有帮助。)",
+            "  *I find it difficult to... (do sth)* (我发现做……很难。)",
+            "  *I think... is a good way to...* (我认为……是……的好方法。)"
+          ],
+          "why_explanation": "这些句型是日常交流中非常实用的功能性语言。'How do you...?'直接询问方式，'by V-ing'是标准的回应方式，表示'通过做某事'。'What about...?'和'Have you ever tried...?'用于提出建议或询问经验。'It's helpful to...'和'I find it difficult to...'则用于表达个人感受和评价，使交流更具深度和个性。",
+          "example": {
+            "question": "请根据情境完成对话：\nA: How do you study for English tests? I always forget new words.\nB: Well, I find it helpful to ____ (make) flashcards. And I improve my listening by ____ (listen) to English songs.",
+            "steps": [
+              "分析第一个空，'helpful to' 后接动词不定式，所以 'make' 不变。",
+              "分析第二个空，'by' 后接动名词，所以 'listen' 变为 'listening'。"
+            ],
+            "answer": "A: How do you study for English tests? I always forget new words.\nB: Well, I find it helpful to make flashcards. And I improve my listening by listening to English songs."
+          },
+          "mistakes": [
+            {
+              "wrong": "I study by read aloud.",
+              "correct": "I study by reading aloud.",
+              "reason": "'by' 是介词，后面应跟动名词（V-ing）形式。"
+            },
+            {
+              "wrong": "It's helpful make a list.",
+              "correct": "It's helpful to make a list.",
+              "reason": "表示'做某事有帮助'，常用 'It's helpful to do sth' 的句型。"
+            }
+          ],
+          "memory_tip": "记住核心句型 'How do you...? I study by V-ing.' 就像一对问答口诀。再扩展'helpful to do'和'find it difficult to do'，表达感受更全面。",
+          "related": {
+            "prerequisite": "动名词作介词宾语，不定式作状语",
+            "next": "更复杂的建议和解决方案表达"
+          }
+        },
+        {
+          "card_id": "01-06",
+          "full_id": "英语-九下-01-06",
+          "title": "词法：词性转换 - succeed, success, successful",
+          "type": "词法卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "掌握动词succeed、名词success和形容词successful之间的词性转换及用法。",
+          "core_points": [
+            "**succeed** /sək'siːd/ v. 成功，达到目的",
+            "  *例句*: If you work hard, you will succeed. (如果你努力，你会成功的。)",
+            "  *搭配*: succeed in doing sth (成功做某事)",
+            "**success** /sək'ses/ n. 成功，成就",
+            "  *例句*: Hard work is the key to success. (努力工作是成功的关键。)",
+            "  *搭配*: achieve success (取得成功), meet with success (获得成功)",
+            "**successful** /sək'sesfl/ adj. 成功的，有成就的",
+            "  *例句*: He is a successful businessman. (他是一位成功的商人。)",
+            "  *搭配*: be successful in sth/doing sth (在某事/做某事上成功)"
+          ],
+          "why_explanation": "英语中许多词汇具有词族（word family）的概念，通过添加不同的后缀或改变词形来转换词性，从而在句中扮演不同的语法角色。了解这些变化能帮助我们更灵活地运用词汇，并理解词义的细微差别。例如，动词表示'动作'，名词表示'结果/概念'，形容词表示'性质'。",
+          "example": {
+            "question": "用succeed, success, successful的正确形式填空：\n1. Her new book was a great _____. (名词)\n2. We hope you will _____ in your new job. (动词)\n3. He became a very _____ writer. (形容词)",
+            "steps": [
+              "1. 根据句意 'her new book was a great...'，需要一个名词来修饰，所以用 'success'。",
+              "2. 根据句意 'you will _____ in your new job'，'will' 后面需要动词原形，所以用 'succeed'。",
+              "3. 根据句意 'became a very _____ writer'，'writer' 是名词，前面需要形容词来修饰，所以用 'successful'。"
+            ],
+            "answer": "1. success\n2. succeed\n3. successful"
+          },
+          "mistakes": [
+            {
+              "wrong": "She wants to success in her career.",
+              "correct": "She wants to succeed in her career.",
+              "reason": "want to 后接动词原形，'success' 是名词，应改为动词 'succeed'。"
+            },
+            {
+              "wrong": "He is a success man.",
+              "correct": "He is a successful man.",
+              "reason": "修饰名词 'man' 需要形容词 'successful'，'success' 是名词。"
+            }
+          ],
+          "memory_tip": "记住 'succeed' 是动词，'success' 是名词，'successful' 是形容词。动词是 '行动' (succeed)，名词是 '结果' (success)，形容词是 '状态' (successful)。就像 'do' (动词), 'deed' (名词), 'done' (形容词) 一样。",
+          "related": {
+            "prerequisite": "词性（动词、名词、形容词）的基本概念",
+            "next": "其他词族（如 ability, able, enable）的词性转换"
+          }
+        },
+        {
+          "card_id": "01-07",
+          "full_id": "英语-九下-01-07",
+          "title": "易混词：deal with vs handle",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "deal with 和 handle 都表示“处理，应付”，但在使用语境和侧重点上略有不同。",
+          "core_points": [
+            "**deal with**：",
+            "  *含义*: 1. 处理，解决（问题、情况）。2. 对付，与（人）打交道。3. 论及，关于（话题）。",
+            "  *侧重*: 强调处理过程中的应对、解决策略或与某事物的互动。",
+            "  *例句*: How do you deal with stress? (你如何应对压力？)",
+            "  *例句*: The book deals with the history of China. (这本书论述了中国的历史。)",
+            "**handle**：",
+            "  *含义*: 1. 处理，操作，管理（任务、工具、情况）。2. 应对，控制（情绪、局面）。",
+            "  *侧重*: 强调对某事物的控制能力、操作技巧或熟练管理。更偏向于实际操作和掌控。",
+            "  *例句*: She can handle difficult customers very well. (她能很好地应对难缠的顾客。)",
+            "  *例句*: He knows how to handle the machine. (他知道如何操作这台机器。)"
+          ],
+          "why_explanation": "这两个词的差异在于其语义的侧重点。'deal with' 更强调'应对'和'解决'，过程中可能包含协商、讨论或采取一系列措施来处理复杂情况，有时带有'与…打交道'的意味。而'handle' 则更强调'掌控'和'操作'，意味着有能力或技巧去管理、操作某物或某情况，使其处于控制之下。理解这种细微差别有助于更准确地表达。",
+          "example": {
+            "question": "选择正确的词填空：\n1. It's important to learn how to _____ (deal with / handle) your emotions.\n2. The manager needs to _____ (deal with / handle) the complaint from the customer.",
+            "steps": [
+              "1. 'emotions' 指情绪，强调的是控制和管理情绪的能力，所以 'handle' 更合适。",
+              "2. 'complaint' 指投诉，强调的是处理并解决问题，'deal with' 更侧重应对和解决过程，所以 'deal with' 更合适。"
+            ],
+            "answer": "1. handle\n2. deal with"
+          },
+          "mistakes": [
+            {
+              "wrong": "This problem handles the pollution.",
+              "correct": "This problem deals with the pollution.",
+              "reason": "问题本身是'关于'或'涉及'污染，用 'deal with' 更准确。'handle' 更侧重于人去操作或管理某个问题。"
+            },
+            {
+              "wrong": "He can deal with the camera very well.",
+              "correct": "He can handle the camera very well.",
+              "reason": "操作相机强调的是操作技巧和熟练度，用 'handle' 更准确。"
+            }
+          ],
+          "memory_tip": "记住 'deal with' = '应对/解决问题' (像'谈判'一样)，'handle' = '掌控/操作某物' (像'驾驶'一样)。",
+          "related": {
+            "prerequisite": "动词短语的理解，介词的搭配",
+            "next": "manage, cope with 等类似含义的词汇辨析"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "02",
+      "unit_name": "I'll help clean up the city parks.",
+      "cards": [
+        {
+          "card_id": "02-01",
+          "full_id": "英语-九下-02-01",
+          "title": "词汇：社区服务与环保",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "本单元涉及社区服务、环境保护和志愿活动的核心词汇和短语。",
+          "core_points": [
+            "volunteer /ˌvɒlən'tɪər/ n. 志愿者；v. 自愿 (He volunteers at the local hospital.)",
+            "clean up 清理 (Let's clean up the park.)",
+            "city park 城市公园",
+            "project /'prɒdʒekt/ n. 项目，工程 (We are working on a school project.)",
+            "charity /'tʃærəti/ n. 慈善机构；慈善 (He donated money to charity.)",
+            "homeless /'həʊmləs/ adj. 无家可归的 (The homeless people need help.)",
+            "organize /'ɔːrɡənaɪz/ v. 组织 (They organized a concert.)",
+            "raise /reɪz/ v. 募集，筹集；举起 (We need to raise money for the poor.)",
+            "donation /dəʊ'neɪʃn/ n. 捐赠，捐款 (Thank you for your generous donation.)",
+            "elderly /'eldərli/ adj. 年老的 (The elderly need our care.)",
+            "care for 照顾，照料 (We should care for the elderly.)",
+            "disabled /dɪs'eɪbld/ adj. 残疾的 (Disabled people also contribute to society.)",
+            "collect /kə'lekt/ v. 收集 (We collected old clothes for charity.)",
+            "rubbish /'rʌbɪʃ/ n. 垃圾 (Don't throw rubbish on the street.)",
+            "plant /plænt/ v. 种植；n. 植物 (They planted trees in the park.)",
+            "environment /ɪn'vaɪrənmənt/ n. 环境 (Protecting the environment is everyone's duty.)",
+            "protect /prə'tekt/ v. 保护 (We must protect endangered animals.)",
+            "protect from 保护……免受…… (Wear a hat to protect yourself from the sun.)",
+            "make a difference 产生影响，有所作为 (Every small effort can make a difference.)",
+            "give out 分发 (They gave out free food to the homeless.)",
+            "call up 给……打电话",
+            "put off 推迟 (Don't put off what you can do today.)"
+          ],
+          "why_explanation": "这些词汇是描述社会责任、公民参与和环保行动的基础。掌握它们能够帮助我们讨论社区问题，表达对弱势群体的关爱，以及呼吁环境保护。很多词汇都是动词或名词，理解其搭配和用法至关重要。",
+          "example": {
+            "question": "请用本单元词汇填空：Many people like to _____ their time to help the _____ or _____ people. They might _____ clothes or food and make a _____ to the _____.",
+            "steps": [
+              "分析句意，第一个空需要动词，表示自愿付出，选择 'volunteer'。",
+              "第二个空需要形容词，修饰人，表示无家可归，选择 'homeless'。",
+              "第三个空需要形容词，修饰人，表示残疾，选择 'disabled'。",
+              "第四个空需要动词，表示收集，选择 'collect'。",
+              "第五个空需要名词，表示捐款，选择 'donation'。",
+              "第六个空需要名词，表示慈善，选择 'charity'。"
+            ],
+            "answer": "Many people like to volunteer their time to help the homeless or disabled people. They might collect clothes or food and make a donation to the charity."
+          },
+          "mistakes": [
+            {
+              "wrong": "We need to rise money for the poor.",
+              "correct": "We need to raise money for the poor.",
+              "reason": "'raise' 是及物动词，意为“筹集，举起”，后跟宾语；'rise' 是不及物动词，意为“上升”。"
+            },
+            {
+              "wrong": "He is a volunteer to help.",
+              "correct": "He is a volunteer who helps.",
+              "reason": "'volunteer' 作名词是志愿者。如果想表达'自愿做某事'，应说 'He volunteers to help' 或 'He is a volunteer to help others'。"
+            }
+          ],
+          "memory_tip": "将 'volunteer', 'charity', 'homeless', 'elderly', 'disabled' 联想成一组需要帮助的人。将 'clean up', 'plant', 'protect environment', 'collect rubbish', 'make a difference' 联想成一组环保行动。",
+          "related": {
+            "prerequisite": "基本动词、名词、形容词",
+            "next": "社会议题相关词汇，动词短语的扩展"
+          }
+        },
+        {
+          "card_id": "02-02",
+          "full_id": "英语-九下-02-02",
+          "title": "语法：目的状语（不定式和so that从句）",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "目的状语用于说明动作的目的，常用不定式短语或 'so that' 引导的从句。",
+          "core_points": [
+            "**不定式作目的状语**：",
+            "  *结构*: (in order) to do / so as to do (为了做某事)",
+            "  *特点*: 最常见的表达方式，通常放在句末，也可放在句首。",
+            "  *例句*: He works hard to support his family. (他努力工作是为了养家。)",
+            "  *例句*: To pass the exam, you need to study harder. (为了通过考试，你需要更努力学习。)",
+            "  *否定式*: in order not to do / so as not to do (为了不做某事)",
+            "  *例句*: She spoke quietly so as not to wake the baby. (她轻声说话以免吵醒婴儿。)",
+            "**'so that' 引导的目的状语从句**：",
+            "  *结构*: 主句 + so that + 从句 (主语 + can/could/may/might/will/would + 动词原形)",
+            "  *特点*: 强调目的或结果，从句中通常含有情态动词。",
+            "  *例句*: We eat so that we can live. (我们吃东西是为了能活着。)",
+            "  *例句*: He studied hard so that he would pass the exam. (他努力学习是为了能通过考试。)",
+            "  *注意*: 'so that' 也可以引导结果状语从句，此时 'so' 和 'that' 之间通常有逗号，且 'that' 不可省略。目的状语从句中 'so that' 常可省略 'that'，且无逗号。"
+          ],
+          "why_explanation": "人类行为通常有明确的目的性，英语需要方式来表达这种目的。不定式 'to do' 是动词的名词化形式，可以表示'去做某事'这个目的。而 'so that' 从句则提供了一个更完整的句子结构来阐明目的，特别是当目的涉及到从句中的主语可以或能够做某事时，通过情态动词 'can/could' 等来体现可能性。这两种方式提供了不同的句式选择，以适应不同的表达需求和强调重点。",
+          "example": {
+            "question": "将以下句子合并或改写，用目的状语：\n1. He got up early. He wanted to catch the first bus. (用不定式)\n2. We saved money. We could buy a new car. (用so that从句)",
+            "steps": [
+              "1. 第一个句子是行为，第二个句子是目的。用 'to' 连接，将 'He wanted to catch' 简化为 'to catch'。",
+              "2. 第一个句子是行为，第二个句子是目的。用 'so that' 连接，并保留情态动词 'could'。"
+            ],
+            "answer": "1. He got up early to catch the first bus. (或 In order to catch the first bus, he got up early.)\n2. We saved money so that we could buy a new car."
+          },
+          "mistakes": [
+            {
+              "wrong": "He works hard for support his family.",
+              "correct": "He works hard to support his family.",
+              "reason": "表示目的，动词前应加 'to' 构成不定式，而不是介词 'for' 后直接跟动词原形。"
+            },
+            {
+              "wrong": "She ran fast so that she caught the bus.",
+              "correct": "She ran fast so that she could catch the bus.",
+              "reason": "'so that' 引导目的状语从句时，从句中通常需要情态动词 (can/could/may/might/will/would) 来表达目的性。"
+            }
+          ],
+          "memory_tip": "目的状语，'to do' 最简便，'so that' 要加情态词。'为了' 某事，就用这两个！",
+          "related": {
+            "prerequisite": "不定式作状语，情态动词的用法，复合句结构",
+            "next": "结果状语从句与目的状语从句的区别"
+          }
+        },
+        {
+          "card_id": "02-03",
+          "full_id": "英语-九下-02-03",
+          "title": "句型：表达意愿和提供帮助",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元学习如何表达做某事的意愿以及主动提供帮助。",
+          "core_points": [
+            "**表达意愿**：",
+            "  *I'll help...* (我将帮助……)",
+            "  *I'd like to...* (我乐意……)",
+            "  *I want to...* (我想……)",
+            "  *I'm going to...* (我打算……)",
+            "**提供帮助**：",
+            "  *Can I help you...?* (我能帮你……吗？)",
+            "  *Would you like me to...?* (你希望我……吗？)",
+            "  *Let me help you with...* (让我帮你……)",
+            "  *How about...?* (……怎么样？)",
+            "  *Why don't we...?* (我们为什么不……呢？)",
+            "  *What can I do for you?* (我能为你做些什么？)"
+          ],
+          "why_explanation": "这些句型是日常生活中进行社交互动、表达合作意愿的关键。'I'll help...' 和 'I'd like to...' 直接表达了主观愿望和提供帮助的意图。而疑问句形式的 'Can I help you...?' 或 'Would you like me to...?' 更具礼貌性，给予对方选择权。掌握这些句型能使交流更流畅、更具人情味。",
+          "example": {
+            "question": "请根据情境完成对话：\nA: This box is too heavy for me.\nB: ____ (I/help/carry) it for you. ____ (How about/we/put) it over there?",
+            "steps": [
+              "分析第一个空，表达主动提供帮助，用 'I'll help (you) carry' 结构。",
+              "分析第二个空，提出建议，用 'How about' 后接动名词或 'Why don't we' 后接动词原形，这里选择 'How about we put' (口语中也常说 How about putting it...) 或 'Why don't we put'。"
+            ],
+            "answer": "A: This box is too heavy for me.\nB: I'll help you carry it for you. How about we put it over there?"
+          },
+          "mistakes": [
+            {
+              "wrong": "I'll help to clean the park.",
+              "correct": "I'll help clean the park. (或 I'll help you to clean the park.)",
+              "reason": "help 后接动词原形作宾语补足语时，to 可省略；如果 help 后直接跟动词，to 也可以省略。但如果后面有宾语，如 help sb (to) do sth，to 通常可以省略。"
+            },
+            {
+              "wrong": "How about to go to the park?",
+              "correct": "How about going to the park?",
+              "reason": "'How about' 后接动名词形式。"
+            }
+          ],
+          "memory_tip": "提供帮助：'I'll help' (直接)，'Would you like me to?' (礼貌)。提出建议：'How about V-ing?' 或 'Why don't we do?' 像一套'服务'和'建议'的组合拳。",
+          "related": {
+            "prerequisite": "情态动词 'will', 'would', 'can' 的用法，动名词作介词宾语",
+            "next": "更复杂的建议和请求表达"
+          }
+        },
+        {
+          "card_id": "02-04",
+          "full_id": "英语-九下-02-04",
+          "title": "易混词：raise vs rise",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "raise 和 rise 都有“上升”或“提高”的含义，但 raise 是及物动词，rise 是不及物动词。",
+          "core_points": [
+            "**raise** /reɪz/ (及物动词)：",
+            "  *含义*: 举起，提升，饲养，募集，提高（价格、工资等）。后面必须跟宾语。",
+            "  *过去式/过去分词*: raised / raised",
+            "  *例句*: Please raise your hand if you have a question. (如果你有问题请举手。)",
+            "  *例句*: They are trying to raise money for charity. (他们正在努力为慈善机构募集资金。)",
+            "  *例句*: Farmers raise cattle. (农民饲养牛。)",
+            "**rise** /raɪz/ (不及物动词)：",
+            "  *含义*: 上升，升起，起床，提高（自身）。后面不能跟宾语。",
+            "  *过去式/过去分词*: rose / risen",
+            "  *例句*: The sun rises in the east. (太阳从东方升起。)",
+            "  *例句*: The prices of vegetables are rising. (蔬菜价格正在上涨。)",
+            "  *例句*: He rose from his seat. (他从座位上站起来。)"
+          ],
+          "why_explanation": "英语动词的及物与不及物性质是其核心语法特征之一。'raise' 作为及物动词，其动作需要一个承受者（宾语），表示'使某物上升'或'提升某物'。而 'rise' 作为不及物动词，其动作由主语自身完成，表示'主语自身上升'。理解这一区别是正确使用这两个词的关键，因为它们在词形上相似，但语法功能完全不同。",
+          "example": {
+            "question": "选择正确的词填空：\n1. The hot air balloon began to _____ (raise / rise) slowly.\n2. We need to _____ (raise / rise) public awareness of environmental protection.",
+            "steps": [
+              "1. 'hot air balloon' 是主语，它自身开始上升，所以用不及物动词 'rise'。",
+              "2. 'public awareness' 是宾语，我们需要'提高'它，所以用及物动词 'raise'。"
+            ],
+            "answer": "1. rise\n2. raise"
+          },
+          "mistakes": [
+            {
+              "wrong": "The government is trying to rise the tax.",
+              "correct": "The government is trying to raise the tax.",
+              "reason": "税收是宾语，需要一个及物动词来作用于它，所以用 'raise'。"
+            },
+            {
+              "wrong": "He raised from his bed early.",
+              "correct": "He rose from his bed early.",
+              "reason": "他自身从床上起来，没有宾语承受动作，所以用不及物动词 'rise' 的过去式 'rose'。"
+            }
+          ],
+          "memory_tip": "记住 'raise' 有 'a'，像 'action' (动作) 一样需要宾语。'rise' 没有 'a'，像 'alone' (独自) 一样自己上升。'raise' 像'举起'，'rise' 像'升起'。",
+          "related": {
+            "prerequisite": "及物动词与不及物动词的概念",
+            "next": "lay vs lie, set vs sit 等易混动词辨析"
+          }
+        },
+        {
+          "card_id": "02-05",
+          "full_id": "英语-九下-02-05",
+          "title": "词法：动词短语 put off, give out, call up",
+          "type": "词法卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元出现的常用动词短语，理解其含义和用法。",
+          "core_points": [
+            "**put off**：",
+            "  *含义*: 1. 推迟，延期。2. 使……不快，使厌恶。",
+            "  *例句*: Don't put off what you can do today until tomorrow. (不要把今天能做的事推到明天。)",
+            "  *例句*: Her rude behavior put me off. (她粗鲁的行为让我很反感。)",
+            "  *特点*: 动词和介词构成短语，宾语可以是名词或代词。如果宾语是代词，必须放在 'put' 和 'off' 之间。",
+            "**give out**：",
+            "  *含义*: 1. 分发，散发。2. 用完，耗尽（指供应、能量等）。",
+            "  *例句*: The teacher gave out the test papers. (老师分发了试卷。)",
+            "  *例句*: My car's engine gave out on the highway. (我的汽车发动机在高速公路上抛锚了/耗尽了动力。)",
+            "  *特点*: 动词和副词构成短语，宾语可以是名词或代词。如果宾语是代词，必须放在 'give' 和 'out' 之间。",
+            "**call up**：",
+            "  *含义*: 1. 给……打电话。2. 征召入伍。3. 唤起（记忆等）。",
+            "  *例句*: I'll call you up later. (我稍后给你打电话。)",
+            "  *例句*: He was called up for military service. (他被征召入伍。)",
+            "  *特点*: 动词和副词构成短语，宾语可以是名词或代词。如果宾语是代词，必须放在 'call' 和 'up' 之间。"
+          ],
+          "why_explanation": "动词短语（phrasal verbs）是英语的特色之一，它们由动词和介词/副词组成，其含义往往与原动词的字面意思大相径庭。掌握这些短语能极大地丰富表达，使口语和书面语更地道。理解它们的可分性（transitive separable phrasal verbs）对于正确放置宾语至关重要。",
+          "example": {
+            "question": "选择正确的动词短语填空，并注意宾语位置：\n1. The event was _____ until next week. (推迟)\n2. The volunteers _____ free food to the homeless. (分发)\n3. Can you _____ him _____ and ask about the meeting? (给他打电话)",
+            "steps": [
+              "1. '推迟' 用 'put off'，宾语 'the event' 放在短语后。",
+              "2. '分发' 用 'gave out'，宾语 'free food' 放在短语后。",
+              "3. '给他打电话' 用 'call up'，宾语 'him' 是代词，必须放在 'call' 和 'up' 之间。"
+            ],
+            "answer": "1. put off\n2. gave out\n3. call him up"
+          },
+          "mistakes": [
+            {
+              "wrong": "I'll call up him later.",
+              "correct": "I'll call him up later.",
+              "reason": "当动词短语的宾语是代词时，必须放在动词和副词之间，不能放在副词之后。"
+            },
+            {
+              "wrong": "We must not put off it.",
+              "correct": "We must not put it off.",
+              "reason": "同上，宾语 'it' 是代词，必须放在动词和副词之间。"
+            }
+          ],
+          "memory_tip": "记住'put off'是'推迟'，'give out'是'分发'，'call up'是'打电话'。短语动词带代词，代词要往中间跑！",
+          "related": {
+            "prerequisite": "动词与介词/副词的搭配，代词的用法",
+            "next": "其他常用动词短语，动词短语的不可分性"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "03",
+      "unit_name": "Could you please tell me where the restrooms are?",
+      "cards": [
+        {
+          "card_id": "03-01",
+          "full_id": "英语-九下-03-01",
+          "title": "词汇：地点与指路",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "本单元与地点、场所、设施以及指路相关的核心词汇和短语。",
+          "core_points": [
+            "restroom /'restruːm/ n. 卫生间 (Where are the restrooms?)",
+            "post office 邮局",
+            "library /'laɪbrəri/ n. 图书馆 (I often go to the library to read books.)",
+            "supermarket /'suːpərmɑːrkɪt/ n. 超市 (Let's buy some food at the supermarket.)",
+            "bank /bæŋk/ n. 银行 (I need to go to the bank to withdraw money.)",
+            "hospital /'hɒspɪtl/ n. 医院 (He went to the hospital for a check-up.)",
+            "museum /mjuː'ziːəm/ n. 博物馆 (The museum has many ancient artifacts.)",
+            "turn left/right 向左/右转 (Turn left at the next corner.)",
+            "go straight (on) 直走 (Go straight for about 200 meters.)",
+            "go past 经过 (Go past the church, and you'll see it.)",
+            "cross /krɒs/ v. 穿过，横过 (Cross the road carefully.)",
+            "along /ə'lɒŋ/ prep. 沿着 (Walk along the river bank.)",
+            "across /ə'krɒs/ prep. 横过，穿过 (There's a bridge across the river.)",
+            "around /ə'raʊnd/ prep. 在……周围，大约 (Walk around the block.)",
+            "corner /'kɔːrnər/ n. 角落，街角 (The shop is on the corner of the street.)",
+            "block /blɒk/ n. 街区 (It's two blocks away.)",
+            "opposite /'ɒpəzɪt/ prep. 在……对面；adj. 对面的 (The park is opposite the school.)",
+            "between /bɪ'twiːn/ prep. 在……之间 (The bank is between the post office and the library.)",
+            "next to 旁边 (The cafe is next to the bookstore.)",
+            "behind /bɪ'haɪnd/ prep. 在……后面 (The cat is hiding behind the sofa.)",
+            "in front of 在……前面 (The car is in front of the house.)",
+            "on the right/left 在右边/左边 (The building is on your right.)",
+            "excuse me 打扰一下，劳驾 (Excuse me, could you tell me the way to...?)"
+          ],
+          "why_explanation": "这些词汇是构成指路场景的基础元素。地点名词提供了目的地，方位介词和动词短语描述了路线和方向。掌握这些词汇能够帮助学习者在陌生环境中进行有效的问路和指路，是生存英语的重要组成部分。",
+          "example": {
+            "question": "请用本单元词汇填空：\nExcuse me, where is the nearest _____ (邮局)? Go _____ (直走) and then turn _____ (左转) at the first _____. It's _____ (在……对面) the _____ (超市).",
+            "steps": [
+              "第一个空需要名词，表示邮局，选择 'post office'。",
+              "第二个空需要动词短语，表示直走，选择 'go straight'。",
+              "第三个空需要动词短语，表示左转，选择 'turn left'。",
+              "第四个空需要名词，表示街角，选择 'corner'。",
+              "第五个空需要介词短语，表示在对面，选择 'opposite'。",
+              "第六个空需要名词，表示超市，选择 'supermarket'。"
+            ],
+            "answer": "Excuse me, where is the nearest post office? Go straight and then turn left at the first corner. It's opposite the supermarket."
+          },
+          "mistakes": [
+            {
+              "wrong": "Go along the road and then turn in left.",
+              "correct": "Go along the road and then turn left.",
+              "reason": "turn left/right 是固定搭配，中间不加介词 'in'。"
+            },
+            {
+              "wrong": "The bank is between the post office and the library.",
+              "correct": "The bank is between the post office and the library.",
+              "reason": "'between' 必须用于两者之间，且通常用 'A and B' 结构。"
+            }
+          ],
+          "memory_tip": "将地点名词分组记忆（公共场所），将方向词分组记忆（动词+方向，介词+位置）。想象自己在地图上指路，边走边说。",
+          "related": {
+            "prerequisite": "方位介词，地点名词",
+            "next": "更复杂的指路表达，地图阅读"
+          }
+        },
+        {
+          "card_id": "03-02",
+          "full_id": "英语-九下-03-02",
+          "title": "从句：宾语从句（疑问词和 whether/if 引导）",
+          "type": "从句卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "宾语从句在复合句中作主句的宾语，本单元主要学习由疑问词和 whether/if 引导的宾语从句。",
+          "core_points": [
+            "**基本结构**：主句 + 宾语从句",
+            "  *特点*: 宾语从句的语序必须是陈述句语序 (主语 + 谓语)。",
+            "  *时态呼应*: 如果主句是过去时，宾语从句的时态通常需要向后推移一格（同间接引语）。",
+            "**疑问词引导的宾语从句**：",
+            "  *引导词*: what, when, where, why, who, which, how 等疑问词。",
+            "  *结构*: 主句 + 疑问词 + 主语 + 谓语 (+ 其他成分)",
+            "  *例句*: Could you please tell me where the restrooms are? (请你告诉我洗手间在哪里好吗？)",
+            "  *例句*: I don't know what he wants. (我不知道他想要什么。)",
+            "**whether / if 引导的宾语从句** (表示“是否”)：",
+            "  *引导词*: whether 或 if。",
+            "  *结构*: 主句 + whether/if + 主语 + 谓语 (+ 其他成分)",
+            "  *例句*: I want to know if he will come. (我想知道他是否会来。)",
+            "  *例句*: He asked me whether I was free. (他问我是否有空。)",
+            "  *注意*: 'whether' 后可接 'or not'，但 'if' 通常不直接接 'or not'。在介词后或不定式前，只能用 'whether'。",
+            "  *例句*: I haven't decided whether to go or not. (我还没决定是否要去。)"
+          ],
+          "why_explanation": "宾语从句是为了将一个完整的句子作为另一个动词或介词的'宾语'。由于它不再是独立的句子，而是主句的一部分，所以其语序必须服从复合句的规则，即变为陈述句语序，以避免与独立疑问句混淆。疑问词和 'whether/if' 在这里不仅是连接词，也指明了从句所表达的具体疑问内容，使得复杂信息能够在一个句子中清晰表达。",
+          "example": {
+            "question": "将以下问句改为宾语从句：\n1. Where does he live? (I want to know...)\n2. Is she a teacher? (Could you tell me...)",
+            "steps": [
+              "1. 原句是特殊疑问句。将其改为宾语从句，连接词用 'where'，语序变为陈述句语序 'he lives'。",
+              "2. 原句是一般疑问句。将其改为宾语从句，连接词用 'if' 或 'whether'，语序变为陈述句语序 'she is a teacher'。"
+            ],
+            "answer": "1. I want to know where he lives.\n2. Could you tell me if/whether she is a teacher?"
+          },
+          "mistakes": [
+            {
+              "wrong": "Could you please tell me where are the restrooms?",
+              "correct": "Could you please tell me where the restrooms are?",
+              "reason": "宾语从句的语序必须是陈述句语序，即 '疑问词 + 主语 + 谓语'，不能保留疑问句的倒装语序。"
+            },
+            {
+              "wrong": "I wonder if is he coming.",
+              "correct": "I wonder if he is coming.",
+              "reason": "同上，宾语从句语序为 'if + 主语 + 谓语'。"
+            }
+          ],
+          "memory_tip": "宾语从句，语序要陈述。疑问词在前，'if/whether' 来引路。就像把问句'藏'进另一个句子，它就变得'听话'了。",
+          "related": {
+            "prerequisite": "直接引语和间接引语（疑问句），复合句的基本概念",
+            "next": "名词性从句的其他类型，主语从句，表语从句"
+          }
+        },
+        {
+          "card_id": "03-03",
+          "full_id": "英语-九下-03-03",
+          "title": "句型：礼貌询问和指路",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "本单元学习如何礼貌地询问方向以及清晰地给出指引。",
+          "core_points": [
+            "**礼貌询问方向**：",
+            "  *Excuse me, could you please tell me...?* (劳驾，您能告诉我……吗？)",
+            "  *Excuse me, do you know...?* (劳驾，您知道……吗？)",
+            "  *Excuse me, I'm looking for...* (劳驾，我正在找……)",
+            "  *Would you mind telling me...?* (您介意告诉我……吗？)",
+            "**指路表达**：",
+            "  *Go straight (on) for...* (直走……)",
+            "  *Turn left/right at the first/second corner.* (在第一个/第二个街角左/右转。)",
+            "  *Go past the...* (经过……)",
+            "  *It's on your left/right.* (它在你的左/右边。)",
+            "  *It's next to/opposite/between... and...* (它在……旁边/对面/在……和……之间。)",
+            "  *You can't miss it.* (你不会错过的。)"
+          ],
+          "why_explanation": "在社交场合，礼貌是沟通的基础。使用 'Could you please...?' 或 'Would you mind...?' 这样的句型，能使请求听起来更客气，更容易得到帮助。指路时，清晰、简洁的指令（如 'Go straight', 'Turn left'）和精确的方位词（如 'next to', 'opposite'）是确保对方理解的关键，避免歧义，提高沟通效率。",
+          "example": {
+            "question": "根据情境完成对话：\nA: ____ (Excuse me/tell/way/library)?\nB: Sure. ____ (Go straight/two blocks) and ____ (turn right/corner). It's ____ (on/your left), ____ (opposite/park).",
+            "steps": [
+              "A处是礼貌询问，使用 'Excuse me, could you tell me the way to the library?'。",
+              "B处是指路。先是直走，用 'Go straight for two blocks'。然后右转，用 'turn right at the corner'。描述位置，用 'It's on your left'，再用 'opposite the park' 进一步说明。"
+            ],
+            "answer": "A: Excuse me, could you tell me the way to the library?\nB: Sure. Go straight for two blocks and turn right at the corner. It's on your left, opposite the park."
+          },
+          "mistakes": [
+            {
+              "wrong": "Tell me where is the bank.",
+              "correct": "Could you please tell me where the bank is?",
+              "reason": "直接命令不礼貌，且宾语从句语序错误。应使用礼貌问句并保持宾语从句的陈述语序。"
+            },
+            {
+              "wrong": "Turn right in the corner.",
+              "correct": "Turn right at the corner.",
+              "reason": "在街角用介词 'at'。"
+            }
+          ],
+          "memory_tip": "问路：'Excuse me, could you tell me...?' (最常用)。指路：'直走、转弯、经过、在左/右、在……旁边/对面'，像画地图一样一步步描述。",
+          "related": {
+            "prerequisite": "疑问句的间接引语，方位介词",
+            "next": "更复杂的地点描述，公共交通指引"
+          }
+        },
+        {
+          "card_id": "03-04",
+          "full_id": "英语-九下-03-04",
+          "title": "易混词：opposite vs in front of",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "opposite 和 in front of 都表示“在……前面”，但含义和相对位置有所不同。",
+          "core_points": [
+            "**opposite** /'ɒpəzɪt/：",
+            "  *含义*: 在……对面，面对面。指两个事物隔着一条路、一个空间或一个平面相互面对。",
+            "  *例句*: The bank is opposite the post office. (银行在邮局对面。)",
+            "  *例句*: They sat opposite each other. (他们面对面坐着。)",
+            "**in front of**：",
+            "  *含义*: 在……前面。指在某物的前方，但可能不是面对面，也可能是在同一方向上的前方。",
+            "  *例句*: There is a car in front of the house. (房子前面有一辆车。)",
+            "  *例句*: He stood in front of the mirror. (他站在镜子前面。)",
+            "  *注意*: 'in front of' 不强调“面对面”，而 'opposite' 强调“面对面”且通常有间隔。"
+          ],
+          "why_explanation": "这两个短语的区别在于它们描述的相对位置关系。'opposite' 源自' oppose'（对抗，相对），因此它强调的是两个物体之间存在一个中间物（如街道、广场）并且它们是相互面对的。而 'in front of' 只是简单地指一个物体在另一个物体的前方，它们可能朝向相同方向，也可能一个在另一个的阻挡位置，但不一定是面对面的。理解这种空间关系有助于准确描述位置。",
+          "example": {
+            "question": "选择正确的词填空：\n1. The teacher stood _____ (opposite / in front of) the blackboard.\n2. My house is _____ (opposite / in front of) the park, so I can see the trees from my window.",
+            "steps": [
+              "1. 老师站在黑板前面，通常是面向黑板的，但并不强调与黑板面对面隔着什么，只是在它的前方，所以 'in front of' 更合适。",
+              "2. 房子和公园隔着一条路，相互面对，所以 'opposite' 更合适。"
+            ],
+            "answer": "1. in front of\n2. opposite"
+          },
+          "mistakes": [
+            {
+              "wrong": "He parked his car opposite the garage.",
+              "correct": "He parked his car in front of the garage.",
+              "reason": "通常是停在车库门前，而不是面对面隔着什么。如果特指停在马路对面，则可以用 'opposite'。"
+            },
+            {
+              "wrong": "The stage is in front of the audience.",
+              "correct": "The stage is in front of the audience.",
+              "reason": "舞台在观众的前方，观众面向舞台。这里不是面对面，而是位置关系。如果说 'The audience sat opposite the stage' (观众坐在舞台对面)，也是可以的，但 'in front of' 更常见。"
+            }
+          ],
+          "memory_tip": "记住 'opposite' 有 'O' 像两个圆圈面对面，'in front of' 像一个箭头指向前。'opposite' 是'对面'，'in front of' 是'前面'。",
+          "related": {
+            "prerequisite": "基本方位介词",
+            "next": "behind, beside 等其他方位介词的辨析"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "04",
+      "unit_name": "What would you do?",
+      "cards": [
+        {
+          "card_id": "04-01",
+          "full_id": "英语-九下-04-01",
+          "title": "词汇：假设情境与建议",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "本单元与假设情境、问题和提供建议相关的核心词汇。",
+          "core_points": [
+            "would /wʊd/ modal verb 将会，会（表示假设）",
+            "if /ɪf/ conj. 如果 (If it rains, I won't go out.)",
+            "imagination /ɪˌmædʒɪ'neɪʃn/ n. 想象力 (Children have rich imaginations.)",
+            "imagine /ɪ'mædʒɪn/ v. 想象 (Imagine you are on a desert island.)",
+            "advice /əd'vaɪs/ n. 建议，忠告 (Can you give me some advice?)",
+            "advise /əd'vaɪz/ v. 建议，忠告 (I advise you to study hard.)",
+            "problem /'prɒbləm/ n. 问题，难题 (We need to solve this problem.)",
+            "stressed out 压力过大的，紧张的 (I feel stressed out about the exam.)",
+            "worried /'wʌrid/ adj. 担心的 (Don't be worried about it.)",
+            "nervous /'nɜːrvəs/ adj. 紧张的，不安的 (She felt nervous before the interview.)",
+            "embarrassed /ɪm'bærəst/ adj. 尴尬的，窘迫的 (I was embarrassed when I fell.)",
+            "confused /kən'fjuːzd/ adj. 困惑的，糊涂的 (I'm confused about the instructions.)",
+            "frustrated /frʌ'streɪtɪd/ adj. 沮丧的，挫败的 (He felt frustrated after failing the test.)",
+            "lonely /'ləʊnli/ adj. 孤独的，寂寞的 (She felt lonely when her friends left.)",
+            "upset /ʌp'set/ adj. 难过的，心烦的 (Don't get upset over small things.)",
+            "calm down 冷静下来 (Try to calm down and think clearly.)",
+            "take it easy 放轻松 (Take it easy, everything will be fine.)",
+            "relax /rɪ'læks/ v. 放松 (You should relax more.)",
+            "chat /tʃæt/ v.&n. 聊天 (Let's chat online.)",
+            "solution /sə'luːʃn/ n. 解决方案 (We need to find a solution.)",
+            "share /ʃeər/ v. 分享 (Share your feelings with me.)"
+          ],
+          "why_explanation": "本单元的核心在于讨论假设情境下的感受和应对策略。这些词汇提供了描述情绪、表达建议和寻求解决方案的工具。掌握它们能帮助我们更好地理解和参与关于个人困境及提供支持的对话。",
+          "example": {
+            "question": "请用本单元词汇填空：\nIf you feel _____ (压力过大), you should try to _____ (放松) and talk to someone. Don't be _____ (担心) about your problems; maybe they can give you some good _____ (建议).",
+            "steps": [
+              "第一个空需要形容词，表示压力过大，选择 'stressed out'。",
+              "第二个空需要动词，表示放松，选择 'relax'。",
+              "第三个空需要形容词，表示担心，选择 'worried'。",
+              "第四个空需要名词，表示建议，选择 'advice'。"
+            ],
+            "answer": "If you feel stressed out, you should try to relax and talk to someone. Don't be worried about your problems; maybe they can give you some good advice."
+          },
+          "mistakes": [
+            {
+              "wrong": "He gave me an advise.",
+              "correct": "He gave me some advice.",
+              "reason": "'advice' 是不可数名词，不能用 'an' 修饰，通常用 'some advice' 或 'a piece of advice'。"
+            },
+            {
+              "wrong": "I feel relax.",
+              "correct": "I feel relaxed.",
+              "reason": "feel 后接形容词，表示感受，'relaxed' 是形容词，表示'感到放松的'；'relax' 是动词，表示'放松'。"
+            }
+          ],
+          "memory_tip": "情绪词组：stressed out, worried, nervous, embarrassed, confused, frustrated, lonely, upset。记住 'advice' 不可数，'advise' 是动词。想象一个情境：你 stressed out，需要 advice，然后 relax。",
+          "related": {
+            "prerequisite": "形容词表示情绪，动词与名词的词性转换",
+            "next": "更深层次的心理健康词汇"
+          }
+        },
+        {
+          "card_id": "04-02",
+          "full_id": "英语-九下-04-02",
+          "title": "语法：虚拟语气（与现在或将来事实相反的条件句 - Type 2）",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "虚拟语气用于表达与现在或将来事实相反的假设，或提出建议。",
+          "core_points": [
+            "**基本结构**：If + 主语 + 动词过去式 (be动词用 were), 主语 + would/could/might + 动词原形",
+            "  *从句时态*: 动词过去式 (be动词不论主语单复数一律用 were)",
+            "  *主句时态*: would/could/might + 动词原形",
+            "  *例句*: If I were you, I would take a taxi. (如果我是你，我会打的。——事实是我不是你)",
+            "  *例句*: If I had time, I would go with you. (如果我有时间，我就会和你一起去。——事实是我没时间)",
+            "  *例句*: If it rained tomorrow, we might stay at home. (如果明天会下雨，我们可能会待在家里。——事实是明天可能不下雨)",
+            "**否定句**：",
+            "  *从句*: If + 主语 + didn't + 动词原形 / If + 主语 + weren't + ...",
+            "  *主句*: 主语 + wouldn't/couldn't/mightn't + 动词原形",
+            "  *例句*: If I didn't have to work, I would travel more. (如果我不用工作，我会旅行更多。)",
+            "**疑问句**：",
+            "  *主句疑问*: What would you do if you were me? (如果你是我，你会怎么做？)",
+            "  *从句疑问*: 不常见，通常只在主句提出疑问。"
+          ],
+          "why_explanation": "虚拟语气用于表达不真实、假设或愿望。与现在或将来事实相反的条件句，从句使用过去式是为了在时间上'退后一步'，表示与现实的距离感和非真实性。be动词统一用 'were' 进一步强调了这种非真实性，因为它打破了常规的单复数一致原则。主句使用 'would/could/might' + 动词原形，则表示在假设情境下可能发生的动作或结果。",
+          "example": {
+            "question": "将以下句子改为虚拟语气（与现在事实相反）：\n1. I don't have enough money, so I can't buy the house. (如果我有足够的钱，我就会买那栋房子。)\n2. He is not here, so he can't help us. (如果他在这里，他就能帮助我们。)",
+            "steps": [
+              "1. 将现在事实的否定改为虚拟条件句的肯定：'If I had enough money'。将结果的否定改为虚拟结果的肯定：'I would buy the house'。",
+              "2. 将现在事实的否定改为虚拟条件句的肯定：'If he were here' (be动词用 were)。将结果的否定改为虚拟结果的肯定：'he could help us'。"
+            ],
+            "answer": "1. If I had enough money, I would buy the house.\n2. If he were here, he could help us."
+          },
+          "mistakes": [
+            {
+              "wrong": "If I was you, I would go.",
+              "correct": "If I were you, I would go.",
+              "reason": "在虚拟语气中，be动词在条件从句中通常用 'were'，不论主语是单数还是复数，以强调非真实性。"
+            },
+            {
+              "wrong": "If I had time, I will go with you.",
+              "correct": "If I had time, I would go with you.",
+              "reason": "主句的情态动词应与从句时态呼应，从句是过去式，主句应使用 'would/could/might' + 动词原形。"
+            }
+          ],
+          "memory_tip": "虚拟二型：'If' 后面 '过去式' (be用were)，主句 'would/could/might' 动原。记住 'If I were you' 这个经典句型。",
+          "related": {
+            "prerequisite": "一般过去时，情态动词 'would/could/might' 的基本用法",
+            "next": "虚拟语气（与过去事实相反），虚拟语气（与将来事实可能相反）"
+          }
+        },
+        {
+          "card_id": "04-03",
+          "full_id": "英语-九下-04-03",
+          "title": "句型：提出建议和表达假设",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元学习如何提出建议和在假设情境下表达自己的看法。",
+          "core_points": [
+            "**提出建议**：",
+            "  *What would you do if...?* (如果你……你会怎么做？)",
+            "  *If I were you, I would...* (如果我是你，我会……)",
+            "  *You should/could/might...* (你应该/可以/可能会……)",
+            "  *Why don't you...?* (你为什么不……呢？)",
+            "  *How about...?* (……怎么样？)",
+            "  *It's a good idea to...* (做……是个好主意。)",
+            "**表达假设**：",
+            "  *If I had/were..., I would/could...* (如果我拥有/是……，我就会/能……)",
+            "  *Imagine if...* (想象一下，如果……)",
+            "  *What if...?* (如果……怎么办？)"
+          ],
+          "why_explanation": "这些句型是进行问题解决和决策讨论的基础。'What would you do if...?' 引导听者进入假设情境，刺激思考。'If I were you, I would...' 是典型的给出建议的委婉方式，通过站在对方角度来提供参考。其他建议句型则提供了不同程度的强制性或开放性。表达假设的句型则用于构建情境，为后续讨论奠定基础。",
+          "example": {
+            "question": "根据情境完成对话：\nA: I lost my wallet. What ____ (you/do/if/you/be) me?\nB: ____ (If I/be/you), ____ (I/go) to the police station immediately. Or ____ (you/could/call) the bank to freeze your cards.",
+            "steps": [
+              "A处是询问假设情境下的做法，用虚拟语气 'What would you do if you were me?'。",
+              "B处是给出建议，用虚拟语气 'If I were you, I would go...'。第二个建议用情态动词 'could'。"
+            ],
+            "answer": "A: I lost my wallet. What would you do if you were me?\nB: If I were you, I would go to the police station immediately. Or you could call the bank to freeze your cards."
+          },
+          "mistakes": [
+            {
+              "wrong": "If I was you, I will call him.",
+              "correct": "If I were you, I would call him.",
+              "reason": "虚拟语气条件从句用 'were'，主句用 'would' + 动词原形。"
+            },
+            {
+              "wrong": "You should to study harder.",
+              "correct": "You should study harder.",
+              "reason": "情态动词 'should' 后直接跟动词原形，不加 'to'。"
+            }
+          ],
+          "memory_tip": "建议句型：'If I were you, I would...' 是金句。疑问句 'What would you do if...?'。记住'should/could/might' 后跟动原。",
+          "related": {
+            "prerequisite": "虚拟语气 Type 2，情态动词的用法",
+            "next": "更复杂的建议和劝告句型"
+          }
+        },
+        {
+          "card_id": "04-04",
+          "full_id": "英语-九下-04-04",
+          "title": "易混词：advice vs advise",
+          "type": "易混词卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "advice 和 advise 词形相似，但一个是名词，一个动词，且名词 advice 是不可数的。",
+          "core_points": [
+            "**advice** /əd'vaɪs/ (名词)：",
+            "  *含义*: 建议，忠告（不可数名词）。",
+            "  *例句*: Can you give me some advice? (你能给我一些建议吗？)",
+            "  *例句*: He gave me a piece of good advice. (他给了我一条好建议。)",
+            "  *注意*: 不能说 'an advice' 或 'advices'。",
+            "**advise** /əd'vaɪz/ (动词)：",
+            "  *含义*: 建议，劝告。",
+            "  *例句*: I advise you to study harder. (我建议你更努力学习。)",
+            "  *搭配*: advise sb to do sth (建议某人做某事)",
+            "  *搭配*: advise doing sth (建议做某事)",
+            "  *搭配*: advise that + 从句 (建议……，从句常用虚拟语气或陈述语气)"
+          ],
+          "why_explanation": "英语中，有些词汇存在动词和名词的对应形式，但词形变化不规则或有细微差异，如 'practice' (动词/名词) 和 'practise' (动词英式)。'advice' 和 'advise' 就是典型的例子。'advice' 以 'ce' 结尾，常是名词（如 peace, piece），表示'建议'这个概念。'advise' 以 'se' 结尾，常是动词（如 realise, surprise），表示'提出建议'这个动作。理解这种词性差异是正确使用的关键。",
+          "example": {
+            "question": "选择正确的词填空：\n1. My teacher always gives me good _____ (advice / advise).\n2. I _____ (advice / advise) you to take a break.",
+            "steps": [
+              "1. 'good' 后需要名词，且 'advice' 是不可数名词，所以用 'advice'。",
+              "2. 'I' 后需要动词，所以用 'advise'。"
+            ],
+            "answer": "1. advice\n2. advise"
+          },
+          "mistakes": [
+            {
+              "wrong": "He advised me some good advice.",
+              "correct": "He gave me some good advice. (或 He advised me to take his advice.)",
+              "reason": "动词 'advise' 后面不直接跟名词 'advice' 作宾语，而是跟 'sb to do sth' 或 'that从句'。如果想表达'给建议'，常用 'give advice'。"
+            },
+            {
+              "wrong": "I need a advise on this matter.",
+              "correct": "I need some advice on this matter. (或 I need a piece of advice on this matter.)",
+              "reason": "'advice' 是不可数名词，不能用 'a' 修饰。"
+            }
+          ],
+          "memory_tip": "记住 'advice' (ce结尾) 是名词，'advise' (se结尾) 是动词。'ce' 像 'piece'，是名词。'se' 像 'use'，是动词。",
+          "related": {
+            "prerequisite": "名词的数，动词与名词的词性",
+            "next": "practice vs practise, device vs devise 等易混词辨析"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "05",
+      "unit_name": "I've got too much homework.",
+      "cards": [
+        {
+          "card_id": "05-01",
+          "full_id": "英语-九下-05-01",
+          "title": "词汇：学校生活与抱怨",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "本单元与学校生活、学习压力及抱怨相关的核心词汇和短语。",
+          "core_points": [
+            "homework /'həʊmwɜːrk/ n. 家庭作业 (不可数) (I've got too much homework.)",
+            "tired /'taɪərd/ adj. 疲倦的 (I'm so tired after school.)",
+            "boring /'bɔːrɪŋ/ adj. 无聊的，令人厌烦的 (The movie was boring.)",
+            "bored /bɔːrd/ adj. 感到无聊的 (I'm bored with this game.)",
+            "stress /stres/ n. 压力；v. 强调 (Studying for exams can cause stress.)",
+            "complain /kəm'pleɪn/ v. 抱怨 (He always complains about his food.)",
+            "complaint /kəm'pleɪnt/ n. 抱怨，投诉 (She made a complaint to the manager.)",
+            "pressure /'preʃər/ n. 压力 (There's a lot of pressure to do well in school.)",
+            "relaxed /rɪ'lækst/ adj. 放松的，轻松的 (I feel relaxed after a long walk.)",
+            "relaxing /rɪ'læksɪŋ/ adj. 令人放松的 (Listening to music is relaxing.)",
+            "spend /spend/ v. 花费 (时间/金钱) (I spend two hours on homework every day.)",
+            "suggest /sə'dʒest/ v. 建议 (I suggest taking a break.)",
+            "permission /pər'mɪʃn/ n. 允许，许可 (You need permission to leave early.)",
+            "allow /ə'laʊ/ v. 允许 (My parents don't allow me to play games late.)",
+            "agree /ə'ɡriː/ v. 同意 (I agree with you.)",
+            "disagree /ˌdɪsə'ɡriː/ v. 不同意 (I disagree with his opinion.)",
+            "get enough sleep 获得充足睡眠",
+            "take a break 休息一下",
+            "instead /ɪn'sted/ adv. 代替 (We played cards instead of watching TV.)",
+            "however /haʊ'evər/ adv. 然而，但是 (It's a difficult task; however, we will try.)"
+          ],
+          "why_explanation": "这些词汇是描述青少年学校生活、学习压力和人际互动中常见情绪及行为的。掌握它们能帮助学生表达自己的感受、提出抱怨或建议，并理解他人观点。'boring/bored' 和 'relaxing/relaxed' 等形容词的-ing/-ed形式尤其重要，用于区分事物的性质和人的感受。",
+          "example": {
+            "question": "请用本单元词汇填空：\nI feel so _____ (疲倦) because I have too much _____ (家庭作业). My parents don't _____ (允许) me to play outside, so I feel very _____ (感到无聊). I should _____ (休息一下).",
+            "steps": [
+              "第一个空需要形容词，表示疲倦，选择 'tired'。",
+              "第二个空需要名词，表示家庭作业，选择 'homework'。",
+              "第三个空需要动词，表示允许，选择 'allow'。",
+              "第四个空需要形容词，表示感到无聊，选择 'bored'。",
+              "第五个空需要动词短语，表示休息一下，选择 'take a break'。"
+            ],
+            "answer": "I feel so tired because I have too much homework. My parents don't allow me to play outside, so I feel very bored. I should take a break."
+          },
+          "mistakes": [
+            {
+              "wrong": "The lesson is bored.",
+              "correct": "The lesson is boring.",
+              "reason": "事物本身是 'boring' (令人无聊的)，人感到 'bored' (感到无聊的)。"
+            },
+            {
+              "wrong": "I have many homeworks.",
+              "correct": "I have much homework. (或 I have a lot of homework.)",
+              "reason": "'homework' 是不可数名词，不能用 'many' 修饰，也不能加 's'。"
+            }
+          ],
+          "memory_tip": "记住 -ing 形容词描述事物的性质（令人……的），-ed 形容词描述人的感受（感到……的）。'homework' 不可数，像 'water' 一样。'complain' 是动词，'complaint' 是名词。",
+          "related": {
+            "prerequisite": "形容词的-ing/-ed形式，可数与不可数名词",
+            "next": "学校教育体系词汇，情绪管理表达"
+          }
+        },
+        {
+          "card_id": "05-02",
+          "full_id": "英语-九下-05-02",
+          "title": "时态：现在完成时（复习与强调经历）",
+          "type": "时态卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "现在完成时表示过去发生的动作对现在造成的影响或结果，或从过去某个时间开始一直持续到现在的动作或状态。",
+          "core_points": [
+            "**构成**：have/has + 动词过去分词 (V-ed/V3)",
+            "  *肯定句*: I have finished my homework. (我已经完成作业了。)",
+            "  *否定句*: I haven't finished my homework yet. (我还没完成作业。)",
+            "  *疑问句*: Have you finished your homework yet? (你完成作业了吗？)",
+            "  *特殊疑问句*: What have you done? (你做了什么？)",
+            "**主要用法**：",
+            "  1. **表示过去发生的动作对现在造成的影响或结果**。",
+            "     *例句*: He has lost his key. (他钥匙丢了——现在没有钥匙。)",
+            "  2. **表示从过去某一时刻开始，一直持续到现在或可能继续下去的动作或状态**。",
+            "     *常与 for + 时间段 (持续多久) 或 since + 时间点 (从何时起) 连用*。",
+            "     *例句*: I have lived here for five years. (我在这里住了五年了。)",
+            "     *例句*: She has worked there since 2010. (她从2010年起就在那里工作了。)",
+            "  3. **表示过去发生、现在仍在继续或可能重复的动作，强调“经历”**。",
+            "     *常与 ever, never, before, once, twice, many times, just, already, yet 等词连用*。",
+            "     *例句*: Have you ever been to Beijing? (你曾经去过北京吗？)",
+            "     *例句*: I have never seen such a beautiful sight before. (我以前从未见过如此美丽的景色。)",
+            "**标志词**：for, since, ever, never, just, already, yet, before, recently, lately, so far, up to now。"
+          ],
+          "why_explanation": "现在完成时是英语中一个非常重要的时态，因为它连接了过去和现在。它不是简单地描述过去发生的事情，而是强调这些过去事件与现在的关联。'have/has + V3' 的结构，'have/has' 表示与现在有关联，'V3' 表示动作的完成。理解这种'现在完成'的内在逻辑，有助于区分它与一般过去时（只描述过去发生的事，不强调与现在的联系）。",
+          "example": {
+            "question": "用现在完成时填空：\n1. I _____ (finish) my homework. Now I can play.\n2. She _____ (live) in Shanghai since 2018.\n3. _____ you ever _____ (be) to the Great Wall?",
+            "steps": [
+              "1. 动作已完成，对现在有影响（可以玩了），用现在完成时，主语 'I' 对应 'have finished'。",
+              "2. 动作从过去开始持续到现在，有时间点 'since 2018'，用现在完成时，主语 'She' 对应 'has lived'。",
+              "3. 询问经历，有 'ever'，用现在完成时疑问句，主语 'you' 对应 'Have ... been'。"
+            ],
+            "answer": "1. have finished\n2. has lived\n3. Have you ever been"
+          },
+          "mistakes": [
+            {
+              "wrong": "I lost my key yesterday.",
+              "correct": "I have lost my key. (如果强调现在钥匙不在手边)",
+              "reason": "如果只是描述昨天丢钥匙这个动作，用一般过去时没错。但如果想表达'钥匙丢了，所以现在没有'这个结果，则用现在完成时更准确。现在完成时不能和明确的过去时间状语（如 'yesterday'）连用。"
+            },
+            {
+              "wrong": "He has been to Beijing last year.",
+              "correct": "He went to Beijing last year. (或 He has been to Beijing many times.)",
+              "reason": "现在完成时不能与明确的过去时间状语 'last year' 连用。如果强调去过北京的经历，可以不说具体时间。如果说具体时间，则用一般过去时。"
+            }
+          ],
+          "memory_tip": "现在完成时：'have/has + V3'，像一座桥连接'过去'和'现在'。记住它强调'结果'或'经历'，不能和'昨天、去年'等明确过去时间一起用。",
+          "related": {
+            "prerequisite": "动词过去分词，一般过去时",
+            "next": "现在完成进行时，过去完成时"
+          }
+        },
+        {
+          "card_id": "05-03",
+          "full_id": "英语-九下-05-03",
+          "title": "语法：too...to... 和 enough to",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "too...to... 表示“太……而不能……”，enough to 表示“足够……做某事”。",
+          "core_points": [
+            "**too...to...**：",
+            "  *结构*: too + 形容词/副词 + to do sth (太……以至于不能做某事)",
+            "  *含义*: 强调程度过高，导致无法完成某个动作，含义为否定。",
+            "  *例句*: He is too young to go to school. (他太小了不能上学。)",
+            "  *例句*: The box is too heavy for me to carry. (这个箱子太重了，我搬不动。)",
+            "  *注意*: 'too' 后面的形容词/副词是修饰主语或动作的程度，'to do' 表示结果。",
+            "**enough to**：",
+            "  *结构*: 形容词/副词 + enough + to do sth (足够……以至于能做某事)",
+            "  *结构*: enough + 名词 + to do sth (足够的……以至于能做某事)",
+            "  *含义*: 强调程度达到要求，能够完成某个动作，含义为肯定。",
+            "  *例句*: He is old enough to go to school. (他年龄够大了，可以上学。)",
+            "  *例句*: I have enough money to buy the book. (我有足够的钱买这本书。)",
+            "  *注意*: 'enough' 作形容词时，修饰名词放名词前；作副词时，修饰形容词/副词放形容词/副词后。"
+          ],
+          "why_explanation": "这两个结构都用于表达程度和结果，但方向相反。'too' 表达'过度'，暗示负面结果或能力不足，所以 'too...to...' 隐含否定意义。而 'enough' 表达'足够'，暗示正面结果或能力具备。理解其内在的肯定与否定含义，有助于正确选择和运用。它们都是不定式作状语的特殊形式，用来修饰前面的形容词、副词或名词。",
+          "example": {
+            "question": "用 too...to... 或 enough to 改写句子：\n1. He is so weak that he can't lift the box. (他太虚弱了，不能搬起箱子。)\n2. She is very clever, so she can solve the problem. (她很聪明，所以能解决问题。)",
+            "steps": [
+              "1. 原句表示“太……而不能……”，用 'too...to...' 结构。主语是 'he'，形容词是 'weak'，动作是 'lift the box'。",
+              "2. 原句表示“足够……以至于能……”，用 'enough to' 结构。主语是 'she'，形容词是 'clever'，动作是 'solve the problem'。"
+            ],
+            "answer": "1. He is too weak to lift the box.\n2. She is clever enough to solve the problem."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is enough strong to move it.",
+              "correct": "He is strong enough to move it.",
+              "reason": "'enough' 作副词修饰形容词时，应放在形容词之后。"
+            },
+            {
+              "wrong": "The coffee is too hot for drink.",
+              "correct": "The coffee is too hot to drink. (或 The coffee is too hot for me to drink.)",
+              "reason": "'too...to...' 结构中，to 后跟动词原形。如果动作的执行者不是主语，需要用 'for sb' 结构。"
+            }
+          ],
+          "memory_tip": "too...to... 是 '负面'，太……不能……。形容词/副词在前。enough to 是 '正面'，足够……能……。形容词/副词在后，名词在前。记住 'too' 前 'to' 后，'enough' 前后都有可能。",
+          "related": {
+            "prerequisite": "不定式作状语，形容词和副词的用法",
+            "next": "so...that... 结构"
+          }
+        },
+        {
+          "card_id": "05-04",
+          "full_id": "英语-九下-05-04",
+          "title": "句型：表达抱怨和提出建议",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元学习如何表达不满和抱怨，以及如何给出建设性的建议。",
+          "core_points": [
+            "**表达抱怨**：",
+            "  *I've got too much homework.* (我作业太多了。)",
+            "  *I'm tired of...* (我厌倦了……)",
+            "  *I'm bored with...* (我对……感到厌烦。)",
+            "  *I don't think it's fair that...* (我认为……不公平。)",
+            "  *I wish I could...* (我希望我能……)",
+            "**提出建议**：",
+            "  *Why don't you...?* (你为什么不……呢？)",
+            "  *How about...?* (……怎么样？)",
+            "  *What about...?* (……怎么样？)",
+            "  *I suggest (that) you (should) do sth.* (我建议你做某事。)",
+            "  *You could/should...* (你可以/应该……)",
+            "  *It might be a good idea to...* (做……可能是一个好主意。)"
+          ],
+          "why_explanation": "在人际交往中，抱怨和提出建议是常见的沟通方式。抱怨句型提供了表达负面情绪和不满的途径，而建议句型则旨在提供解决方案或替代方案。掌握这些句型能帮助学生有效地表达自己的需求，并以建设性的方式参与讨论，促进问题的解决。",
+          "example": {
+            "question": "根据情境完成对话：\nA: I'm so _____ (疲倦) of studying! And I have _____ (太多) homework.\nB: ____ (Why don't/you/take) a break? I _____ (suggest/we/go) for a walk.",
+            "steps": [
+              "A处表达抱怨，用 'tired of' 和 'too much homework'。",
+              "B处提出建议，用 'Why don't you take a break?'。然后用 'I suggest that we go for a walk' (suggest后接从句，谓语动词用原形或should+原形)。"
+            ],
+            "answer": "A: I'm so tired of studying! And I have too much homework.\nB: Why don't you take a break? I suggest that we go for a walk."
+          },
+          "mistakes": [
+            {
+              "wrong": "I suggest you to go home.",
+              "correct": "I suggest you go home. (或 I suggest that you should go home.)",
+              "reason": "'suggest' 后接宾语从句时，从句谓语动词常用动词原形或 'should + 动词原形'，不接 'to do' 不定式。"
+            },
+            {
+              "wrong": "I'm boring with this class.",
+              "correct": "I'm bored with this class.",
+              "reason": "人感到无聊用 'bored'，事物令人无聊用 'boring'。"
+            }
+          ],
+          "memory_tip": "抱怨用 'tired of/bored with'，加上 'too much'。建议用 'Why don't you' 和 'How about V-ing'，'I suggest' 后跟 'should do' 或直接 'do'。记住抱怨和建议是对话的'一问一答'。",
+          "related": {
+            "prerequisite": "形容词-ing/-ed形式，动名词作介词宾语，情态动词",
+            "next": "更复杂的抱怨和建议策略，谈判技巧"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "06",
+      "unit_name": "An old man tried to move the mountains.",
+      "cards": [
+        {
+          "card_id": "06-01",
+          "full_id": "英语-九下-06-01",
+          "title": "词汇：故事与品质",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "本单元与民间故事、寓言及描述人物品质相关的核心词汇。",
+          "core_points": [
+            "story /'stɔːri/ n. 故事 (Tell me a story.)",
+            "legend /'ledʒənd/ n. 传说，传奇 (The legend of Mulan is famous.)",
+            "fable /'feɪbl/ n. 寓言 (Aesop's Fables are well-known.)",
+            "wise /waɪz/ adj. 聪明的，明智的 (He is a wise old man.)",
+            "foolish /'fuːlɪʃ/ adj. 愚蠢的 (It was foolish of him to trust a stranger.)",
+            "proud /praʊd/ adj. 骄傲的，自豪的 (She is proud of her son.)",
+            "proud of 为……感到骄傲",
+            "brave /breɪv/ adj. 勇敢的 (The brave soldier saved the child.)",
+            "courage /'kʌrɪdʒ/ n. 勇气 (It takes courage to speak in public.)",
+            "patient /'peɪʃnt/ adj. 有耐心的；n. 病人 (Be patient with beginners.)",
+            "patience /'peɪʃns/ n. 耐心 (Learning a language requires patience.)",
+            "determine /dɪ'tɜːrmɪn/ v. 决定，下决心 (He determined to finish the task.)",
+            "determined /dɪ'tɜːrmɪnd/ adj. 有决心的 (She is a determined person.)",
+            "determination /dɪˌtɜːrmɪ'neɪʃn/ n. 决心，坚定 (His determination led to success.)",
+            "spirit /'spɪrɪt/ n. 精神，灵魂 (He has a strong fighting spirit.)",
+            "move /muːv/ v. 移动，搬家 (Can you help me move this table?)",
+            "mountain /'maʊntɪn/ n. 山 (Mount Everest is the highest mountain.)",
+            "dig /dɪɡ/ v. 挖，掘 (They dug a hole in the garden.)",
+            "carry /'kæri/ v. 搬运，携带 (She carried a heavy bag.)",
+            "praise /preɪz/ v.&n. 赞扬，表扬 (The teacher praised him for his hard work.)",
+            "god /ɡɒd/ n. 神 (The ancient Greeks believed in many gods.)",
+            "sincerely /sɪn'sɪrli/ adv. 真诚地 (I sincerely hope you will come.)",
+            "firmly /'fɜːrmli/ adv. 坚定地，牢固地 (He held the rope firmly.)"
+          ],
+          "why_explanation": "这些词汇是讲述故事、描述人物性格和品质的基础。通过这些词汇，学生可以理解故事的主题、人物的动机，并学习如何用英语表达积极或消极的品质。词族（如 determine, determined, determination）的掌握有助于扩展词汇量和提高表达的准确性。",
+          "example": {
+            "question": "请用本单元词汇填空：\nThe old man was very _____ (有决心). He showed great _____ (勇气) and _____ (耐心) to _____ (移动) the mountains. His _____ (精神) inspired everyone.",
+            "steps": [
+              "第一个空需要形容词，表示有决心，选择 'determined'。",
+              "第二个空需要名词，表示勇气，选择 'courage'。",
+              "第三个空需要名词，表示耐心，选择 'patience'。",
+              "第四个空需要动词，表示移动，选择 'move'。",
+              "第五个空需要名词，表示精神，选择 'spirit'。"
+            ],
+            "answer": "The old man was very determined. He showed great courage and patience to move the mountains. His spirit inspired everyone."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is full of patient.",
+              "correct": "He is full of patience.",
+              "reason": "'patient' 是形容词，意为有耐心的；'patience' 是名词，意为耐心。'full of' 后接名词。"
+            },
+            {
+              "wrong": "He is determination to finish the work.",
+              "correct": "He is determined to finish the work.",
+              "reason": "be动词后接形容词作表语，'determined' 是形容词；'determination' 是名词。"
+            }
+          ],
+          "memory_tip": "记住形容词和名词的转化：wise/wisdom, patient/patience, brave/bravery, determine/determination。将 '愚公移山' 的故事联想起来，用这些词描述老人的品质和行动。",
+          "related": {
+            "prerequisite": "基础形容词和名词，词性转换",
+            "next": "更多描述人物性格和品质的形容词"
+          }
+        },
+        {
+          "card_id": "06-02",
+          "full_id": "英语-九下-06-02",
+          "title": "时态：过去完成时",
+          "type": "时态卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "过去完成时表示在过去某一时间点或某一动作之前已经完成的动作。",
+          "core_points": [
+            "**构成**：had + 动词过去分词 (V-ed/V3)",
+            "  *肯定句*: I had finished my homework before my mother came home. (在我妈妈回家之前，我已经完成作业了。)",
+            "  *否定句*: I hadn't finished my homework when he arrived. (他到达时，我还没完成作业。)",
+            "  *疑问句*: Had you finished your homework before your mother came home? (在你妈妈回家之前，你完成作业了吗？)",
+            "  *特殊疑问句*: What had you done before you left? (在你离开前你做了什么？)",
+            "**主要用法**：",
+            "  1. **表示在过去某一时间点或某一动作之前已经完成的动作**。",
+            "     *例句*: When I got to the station, the train had already left. (我到车站时，火车已经开走了。)",
+            "     *例句*: He said that he had seen the movie before. (他说他以前看过那部电影。)",
+            "  2. **在时间状语从句中，表示'先发生的动作'，主句用一般过去时**。",
+            "     *常与 before, after, by the time, when, as soon as 等连用*。",
+            "     *例句*: After she had finished her work, she went home. (她完成工作后就回家了。)",
+            "     *例句*: By the time I arrived, they had already started the meeting. (我到达时，他们已经开始会议了。)",
+            "  3. **在宾语从句或间接引语中，主句为一般过去时，从句动作发生在主句动作之前**。",
+            "     *例句*: He told me that he had never been to Beijing. (他告诉我他以前从未去过北京。)",
+            "**标志词**：before, after, by the time, when, as soon as, already, never, just, for, since (当主句是过去时，表示从过去某点持续到过去的某个时间点)。"
+          ],
+          "why_explanation": "过去完成时是英语中'时态的相对性'的体现。它不是简单地描述一个发生在过去的动作，而是强调这个动作发生在'过去的过去'，即在另一个过去的动作或时间点之前。'had + V3' 的结构中的 'had' 是 'have' 的过去式，所以它将 '完成' 的概念放在了过去的时间框架内。理解它在时间轴上的'超前性'是关键，它帮助我们理清过去事件发生的先后顺序。",
+          "example": {
+            "question": "用过去完成时填空：\n1. By the time I arrived, the meeting _____ (start) already.\n2. She said that she _____ (visit) the museum last week.",
+            "steps": [
+              "1. 'By the time I arrived' 是过去的一个时间点，'the meeting start already' 发生在这个时间点之前，所以用过去完成时 'had started'。",
+              "2. 'She said' 是过去时，宾语从句中 'visit the museum last week' 发生在 'said' 之前（即使 'last week' 是过去时间点，但相对于 'said' 而言，'visit' 动作更早），所以用过去完成时 'had visited'。"
+            ],
+            "answer": "1. had started\n2. had visited"
+          },
+          "mistakes": [
+            {
+              "wrong": "When I got home, my mother cooked dinner.",
+              "correct": "When I got home, my mother had cooked dinner. (如果强调妈妈在我回家前就做完了饭)",
+              "reason": "如果两个过去动作有先后顺序，且先发生的动作对后发生的动作有影响，先发生的动作通常用过去完成时。如果两个动作是相继发生，则都用一般过去时。"
+            },
+            {
+              "wrong": "He had gone to Shanghai yesterday.",
+              "correct": "He went to Shanghai yesterday.",
+              "reason": "过去完成时不能单独与明确的过去时间状语（如 'yesterday'）连用，它必须有一个'过去的过去'的参照点。如果只是描述昨天发生的事，用一般过去时。"
+            }
+          ],
+          "memory_tip": "过去完成时：'had + V3'，是'过去的过去'。记住它像时间轴上的'更早'按钮，必须有一个过去的时间点或动作作参照。",
+          "related": {
+            "prerequisite": "一般过去时，动词过去分词，复合句结构",
+            "next": "现在完成时与过去完成时的区别，过去完成进行时"
+          }
+        },
+        {
+          "card_id": "06-03",
+          "full_id": "英语-九下-06-03",
+          "title": "句型：讲述故事与表达决心",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元学习如何讲述故事并表达人物的决心和毅力。",
+          "core_points": [
+            "**讲述故事**：",
+            "  *Once upon a time,...* (很久很久以前……)",
+            "  *The story is about...* (这个故事是关于……的。)",
+            "  *It tells us that...* (它告诉我们……)",
+            "  *In the end,...* (最后……)",
+            "  *What's the moral of the story?* (这个故事的寓意是什么？)",
+            "**表达决心**：",
+            "  *He was determined to do sth.* (他下决心做某事。)",
+            "  *He made up his mind to do sth.* (他下定决心做某事。)",
+            "  *He had the spirit of...* (他有……的精神。)",
+            "  *He never gave up.* (他从不放弃。)",
+            "  *Nothing could stop him from doing sth.* (没有什么能阻止他做某事。)"
+          ],
+          "why_explanation": "讲述故事需要特定的引语和过渡词来组织叙事，如 'Once upon a time' 和 'In the end'。而表达决心和毅力则需要使用强调坚定意志的句型，如 'determined to' 和 'made up his mind'。这些句型帮助我们清晰地传达故事的结构和人物的核心品质，使听者更容易理解和共鸣。",
+          "example": {
+            "question": "根据情境完成句子：\n1. The old man _____ (下决心/move) the mountains.\n2. This story _____ (告诉我们/never give up).",
+            "steps": [
+              "1. 表达决心，用 'was determined to do sth' 结构。",
+              "2. 讲述故事寓意，用 'It tells us that' 结构，后接宾语从句。"
+            ],
+            "answer": "1. The old man was determined to move the mountains.\n2. This story tells us that we should never give up."
+          },
+          "mistakes": [
+            {
+              "wrong": "He determined moving the mountains.",
+              "correct": "He determined to move the mountains. (或 He was determined to move the mountains.)",
+              "reason": "'determine' 后接不定式表示'决定做某事'。如果用形容词 'determined'，则用 'be determined to do sth'。"
+            },
+            {
+              "wrong": "The story tells us never give up.",
+              "correct": "The story tells us to never give up. (或 The story tells us that we should never give up.)",
+              "reason": "'tell sb to do sth' 或 'tell sb that从句' 是常见用法，直接跟动词原形不符合语法。"
+            }
+          ],
+          "memory_tip": "故事开头 'Once upon a time...'，结尾 'In the end...'。决心句型 'be determined to do' 或 'make up one's mind to do'。记住'愚公移山'的精神，用这些句型来表达。",
+          "related": {
+            "prerequisite": "不定式作宾语，宾语从句",
+            "next": "更复杂的叙事技巧，修辞手法"
+          }
+        },
+        {
+          "card_id": "06-04",
+          "full_id": "英语-九下-06-04",
+          "title": "词法：词性转换 - determine, determined, determination",
+          "type": "词法卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "掌握动词determine、形容词determined和名词determination之间的词性转换及用法。",
+          "core_points": [
+            "**determine** /dɪ'tɜːrmɪn/ v. 决定，下决心；查明，测定",
+            "  *例句*: He determined to finish the task by himself. (他下决心独自完成这项任务。)",
+            "  *搭配*: determine to do sth (决定做某事)",
+            "  *搭配*: determine that + 从句 (决定……)",
+            "**determined** /dɪ'tɜːrmɪnd/ adj. 有决心的，坚决的",
+            "  *例句*: She is a determined student. (她是一个有决心的学生。)",
+            "  *搭配*: be determined to do sth (下决心做某事)",
+            "**determination** /dɪˌtɜːrmɪ'neɪʃn/ n. 决心，坚定",
+            "  *例句*: His determination to succeed was inspiring. (他成功的决心令人鼓舞。)",
+            "  *搭配*: with determination (坚定地)，show determination (表现出决心)"
+          ],
+          "why_explanation": "与 'succeed' 词族类似，'determine' 词族也展示了英语中通过后缀进行词性转换的规律。动词 'determine' 表示'做决定'的动作；形容词 'determined' 描述'有决心的'状态或性质；名词 'determination' 则表示'决心'这个抽象概念。理解这些变化有助于在不同语境中选择最恰当的词汇形式。",
+          "example": {
+            "question": "用determine, determined, determination的正确形式填空：\n1. He showed great _____ in pursuing his dream. (名词)\n2. We must _____ to protect our environment. (动词)\n3. She is _____ to win the competition. (形容词)",
+            "steps": [
+              "1. 'showed great' 后需要名词，所以用 'determination'。",
+              "2. 'must' 后需要动词原形，所以用 'determine'。",
+              "3. 'is' 后需要形容词作表语，所以用 'determined'。"
+            ],
+            "answer": "1. determination\n2. determine\n3. determined"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is determination to win.",
+              "correct": "He is determined to win.",
+              "reason": "be动词后应跟形容词作表语，'determination' 是名词。"
+            },
+            {
+              "wrong": "He made a determine to study harder.",
+              "correct": "He made a determination to study harder. (或 He determined to study harder.)",
+              "reason": "'determine' 是动词，不能直接作名词。如果用名词，应是 'determination'。"
+            }
+          ],
+          "memory_tip": "记住 'determine' 是动词，'determined' 是形容词，'determination' 是名词。就像 '动' (determine), '定' (determined), '定力' (determination)。",
+          "related": {
+            "prerequisite": "词性（动词、名词、形容词）的基本概念",
+            "next": "其他词族（如 imagine, imagination, imaginative）的词性转换"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "07",
+      "unit_name": "We're trying to save the earth.",
+      "cards": [
+        {
+          "card_id": "07-01",
+          "full_id": "英语-九下-07-01",
+          "title": "词汇：环境问题与保护",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "本单元与环境污染、资源保护和可持续发展相关的核心词汇。",
+          "core_points": [
+            "earth /ɜːrθ/ n. 地球；泥土 (We're trying to save the earth.)",
+            "environment /ɪn'vaɪrənmənt/ n. 环境 (Protecting the environment is our duty.)",
+            "environmental /ɪnˌvaɪrən'mentl/ adj. 环境的 (Environmental protection is important.)",
+            "pollute /pə'luːt/ v. 污染 (Factories pollute the air.)",
+            "pollution /pə'luːʃn/ n. 污染 (Air pollution is a serious problem.)",
+            "protect /prə'tekt/ v. 保护 (We must protect endangered animals.)",
+            "protection /prə'tekʃn/ n. 保护 (Wildlife protection is crucial.)",
+            "waste /weɪst/ n. 浪费；废弃物；v. 浪费 (Don't waste water. / Industrial waste.)",
+            "reduce /rɪ'duːs/ v. 减少 (Reduce waste and recycle.)",
+            "reuse /ˌriː'juːz/ v. 重复利用 (Reuse plastic bags.)",
+            "recycle /ˌriː'saɪkl/ v. 回收利用 (Recycle paper, plastic, and glass.)",
+            "disappear /ˌdɪsə'pɪər/ v. 消失 (Many animals are disappearing.)",
+            "damage /'dæmɪdʒ/ v.&n. 损害，破坏 (Pollution damages the environment.)",
+            "destroy /dɪ'strɔɪ/ v. 破坏，毁灭 (The fire destroyed the forest.)",
+            "harm /hɑːrm/ v.&n. 伤害 (Smoking can harm your health.)",
+            "harmful /'hɑːrmfl/ adj. 有害的 (Smoking is harmful to health.)",
+            "resource /'riːsɔːrs/ n. 资源 (Water is a precious resource.)",
+            "energy /'enərdʒi/ n. 能源，能量 (Save energy by turning off lights.)",
+            "natural /'nætʃərəl/ adj. 自然的 (Natural resources are limited.)",
+            "global warming 全球变暖",
+            "plastic /'plæstɪk/ n. 塑料；adj. 塑料的 (Plastic bags cause pollution.)",
+            "rubbish /'rʌbɪʃ/ n. 垃圾 (Don't litter rubbish.)",
+            "litter /'lɪtər/ v. 乱扔垃圾；n. 垃圾 (Don't litter in public places.)"
+          ],
+          "why_explanation": "这些词汇是讨论环境议题、倡导环保行动的基础。它们涵盖了从环境问题（如 pollution, global warming）到应对措施（如 reduce, reuse, recycle, protect）的各个方面。掌握这些词汇能帮助学生理解和参与关于环境保护的全球性对话，并表达自己的环保理念。",
+          "example": {
+            "question": "请用本单元词汇填空：\nWe must _____ (保护) our _____ (环境) from _____ (污染). We should _____ (减少) waste, _____ (重复利用) items, and _____ (回收利用) materials to fight _____ (全球变暖).",
+            "steps": [
+              "第一个空需要动词，表示保护，选择 'protect'。",
+              "第二个空需要名词，表示环境，选择 'environment'。",
+              "第三个空需要名词，表示污染，选择 'pollution'。",
+              "第四个空需要动词，表示减少，选择 'reduce'。",
+              "第五个空需要动词，表示重复利用，选择 'reuse'。",
+              "第六个空需要动词，表示回收利用，选择 'recycle'。",
+              "第七个空需要名词短语，表示全球变暖，选择 'global warming'。"
+            ],
+            "answer": "We must protect our environment from pollution. We should reduce waste, reuse items, and recycle materials to fight global warming."
+          },
+          "mistakes": [
+            {
+              "wrong": "We need to environmental protection.",
+              "correct": "We need environmental protection. (或 We need to protect the environment.)",
+              "reason": "'environmental' 是形容词，不能直接作动词或名词。应使用名词短语 'environmental protection' 或动词 'protect'。"
+            },
+            {
+              "wrong": "He is damaging the trees.",
+              "correct": "He is damaging the trees. (或 He is destroying the trees.)",
+              "reason": "'damage' 和 'destroy' 都表示破坏，但 'destroy' 程度更深，是完全毁灭。这里两者都可行，但要区分程度。"
+            }
+          ],
+          "memory_tip": "记住'3R'原则：Reduce, Reuse, Recycle。将 'pollute/pollution', 'protect/protection', 'harm/harmful' 这样的词族一起记忆。想象地球妈妈在哭泣，我们如何去拯救她。",
+          "related": {
+            "prerequisite": "基础动词、名词、形容词，词性转换",
+            "next": "气候变化相关词汇，可持续发展概念"
+          }
+        },
+        {
+          "card_id": "07-02",
+          "full_id": "英语-九下-07-02",
+          "title": "语法：被动语态（一般现在时、一般过去时、一般将来时）",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "被动语态表示主语是动作的承受者，而不是执行者。它强调动作或动作的结果，而不是谁执行了动作。",
+          "core_points": [
+            "**基本结构**：be + 动词过去分词 (V-ed/V3)",
+            "  *施动者*: 如果需要指出施动者，用 'by + 施动者'。",
+            "**一般现在时的被动语态**：",
+            "  *结构*: am/is/are + V3",
+            "  *肯定句*: English is spoken all over the world. (英语在全世界被说。)",
+            "  *否定句*: English is not spoken in every country. (英语并非在每个国家都被说。)",
+            "  *疑问句*: Is English spoken all over the world? (英语在全世界都被说吗？)",
+            "**一般过去时的被动语态**：",
+            "  *结构*: was/were + V3",
+            "  *肯定句*: The window was broken yesterday. (窗户昨天被打破了。)",
+            "  *否定句*: The window was not broken by me. (窗户不是我打破的。)",
+            "  *疑问句*: Was the window broken by him? (窗户是他打破的吗？)",
+            "**一般将来时的被动语态**：",
+            "  *结构*: will be + V3",
+            "  *肯定句*: The problem will be solved soon. (问题很快就会被解决。)",
+            "  *否定句*: The problem will not be solved easily. (问题不会轻易被解决。)",
+            "  *疑问句*: Will the problem be solved soon? (问题很快就会被解决吗？)",
+            "**使用场景**：",
+            "  1. 不知道或不重要谁是施动者。",
+            "  2. 强调动作的承受者或动作本身。",
+            "  3. 避免指明施动者，使语气更客观。"
+          ],
+          "why_explanation": "被动语态的产生是为了适应语言表达的需要，即当动作的执行者不重要、不明确或需要刻意回避时，或者当强调动作的承受者时。通过将宾语变为句子主语，并使用 'be + V3' 结构，英语能将关注点从'谁做'转移到'什么被做'或'发生了什么'。这种结构增强了语言的灵活性和表达的侧重点。",
+          "example": {
+            "question": "将以下主动语态句子改为被动语态：\n1. People speak English all over the world. (一般现在时)\n2. Someone broke the window last night. (一般过去时)\n3. They will build a new school next year. (一般将来时)",
+            "steps": [
+              "1. 将宾语 'English' 变为主语，谓语动词 'speak' 改为 'is spoken'。",
+              "2. 将宾语 'the window' 变为主语，谓语动词 'broke' 改为 'was broken'，施动者 'someone' 可省略。",
+              "3. 将宾语 'a new school' 变为主语，谓语动词 'will build' 改为 'will be built'。"
+            ],
+            "answer": "1. English is spoken all over the world.\n2. The window was broken last night.\n3. A new school will be built next year."
+          },
+          "mistakes": [
+            {
+              "wrong": "The book is wrote by him.",
+              "correct": "The book is written by him.",
+              "reason": "被动语态中 'be' 动词后必须跟动词的过去分词形式，'wrote' 是过去式，'written' 是过去分词。"
+            },
+            {
+              "wrong": "The city will be build.",
+              "correct": "The city will be built.",
+              "reason": "同上，'build' 的过去分词是 'built'。"
+            }
+          ],
+          "memory_tip": "被动语态：'be + V3'，就像'主语被动挨打'。记住'be'动词要根据时态和主语变，'V3'永远不变。主动变被动，宾语变主语，动词变 'be V3'。",
+          "related": {
+            "prerequisite": "各种时态的构成，动词过去分词",
+            "next": "被动语态（现在进行时、现在完成时、情态动词）"
+          }
+        },
+        {
+          "card_id": "07-03",
+          "full_id": "英语-九下-07-03",
+          "title": "句型：讨论环境问题与倡导环保行动",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元学习如何讨论环境问题，表达对环境的关注，并提出环保行动建议。",
+          "core_points": [
+            "**讨论环境问题**：",
+            "  *The earth is being polluted/damaged.* (地球正在被污染/破坏。)",
+            "  *Global warming is a serious problem.* (全球变暖是一个严重的问题。)",
+            "  *Many animals are disappearing.* (许多动物正在消失。)",
+            "  *What can we do to save the earth?* (我们能做些什么来拯救地球？)",
+            "**倡导环保行动**：",
+            "  *We should reduce, reuse, and recycle.* (我们应该减少、重复利用和回收。)",
+            "  *It's important to protect our environment.* (保护环境很重要。)",
+            "  *Everyone should do their part to...* (每个人都应该尽自己的一份力去……)",
+            "  *Let's stop wasting water/electricity.* (让我们停止浪费水/电。)",
+            "  *We need to plant more trees.* (我们需要种植更多的树。)"
+          ],
+          "why_explanation": "这些句型是进行环境教育和倡导行动的语言工具。被动语态的使用强调了环境'被'污染和'被'破坏的现状。而呼吁行动的句型则直接表达了责任和建议，如 'We should...' 和 'It's important to...'。掌握这些句型能帮助学生清晰地表达对环境的关注，并鼓励他人采取积极的环保措施。",
+          "example": {
+            "question": "根据情境完成对话：\nA: _____ (地球正在被污染). What can we do?\nB: We _____ (应该减少/垃圾) and _____ (回收利用/塑料). It's important _____ (保护/自然资源).",
+            "steps": [
+              "A处描述环境问题，用被动语态的现在进行时 'The earth is being polluted'。",
+              "B处提出环保行动，用 'should reduce rubbish' 和 'recycle plastic'。然后用 'It's important to protect natural resources'。"
+            ],
+            "answer": "A: The earth is being polluted. What can we do?\nB: We should reduce rubbish and recycle plastic. It's important to protect natural resources."
+          },
+          "mistakes": [
+            {
+              "wrong": "The environment is polluted by us.",
+              "correct": "The environment is polluted by us. (或 We pollute the environment.)",
+              "reason": "语法上正确，但口语中如果强调'我们'是施动者，主动语态可能更直接。被动语态通常用于施动者不明确或不重要时。"
+            },
+            {
+              "wrong": "We should reduce to waste.",
+              "correct": "We should reduce waste.",
+              "reason": "'reduce' 后直接跟名词 'waste' (浪费物) 或动名词 'wasting' (浪费的动作)，而不是 'to waste'。"
+            }
+          ],
+          "memory_tip": "环境问题用被动语态 'is/are being V3'。环保行动用 'reduce, reuse, recycle' 三个词，加上 'should' 和 'important to do'。",
+          "related": {
+            "prerequisite": "被动语态，情态动词，不定式作主语/表语",
+            "next": "环保宣传口号，报告写作"
+          }
+        },
+        {
+          "card_id": "07-04",
+          "full_id": "英语-九下-07-04",
+          "title": "词法：词性转换 - pollute, pollution, environmental",
+          "type": "词法卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握动词pollute、名词pollution和形容词environmental之间的词性转换及用法。",
+          "core_points": [
+            "**pollute** /pə'luːt/ v. 污染",
+            "  *例句*: Factories often pollute the air and water. (工厂经常污染空气和水。)",
+            "  *搭配*: pollute the environment (污染环境)",
+            "**pollution** /pə'luːʃn/ n. 污染（不可数名词）",
+            "  *例句*: Air pollution is a serious problem in big cities. (空气污染在大城市是一个严重的问题。)",
+            "  *搭配*: air/water/noise pollution (空气/水/噪音污染)",
+            "**environment** /ɪn'vaɪrənmənt/ n. 环境",
+            "  *例句*: We live in a beautiful environment. (我们生活在一个美丽的环境中。)",
+            "**environmental** /ɪnˌvaɪrən'mentl/ adj. 环境的",
+            "  *例句*: Environmental protection is everyone's duty. (环境保护是每个人的职责。)",
+            "  *搭配*: environmental protection (环境保护), environmental problems (环境问题)"
+          ],
+          "why_explanation": "这组词汇展示了通过后缀形成不同词性并表达相关概念的规律。动词 'pollute' 表示动作；名词 'pollution' 表示污染这个抽象概念或结果。名词 'environment' 指代'环境'本身；而形容词 'environmental' 则用于修饰与环境相关的名词，如 'environmental protection'。理解这种词性变化对于准确表达环境议题至关重要。",
+          "example": {
+            "question": "用pollute, pollution, environmental的正确形式填空：\n1. The factory causes serious air _____. (名词)\n2. We should try our best to stop factories from _____ the river. (动词)\n3. There are many _____ problems in the world today. (形容词)",
+            "steps": [
+              "1. 'air' 后需要名词，表示'污染'，所以用 'pollution'。",
+              "2. 'from' 是介词，后接动名词，所以用 'polluting'。",
+              "3. 'problems' 是名词，前面需要形容词来修饰，所以用 'environmental'。"
+            ],
+            "answer": "1. pollution\n2. polluting\n3. environmental"
+          },
+          "mistakes": [
+            {
+              "wrong": "We must solve the environment problems.",
+              "correct": "We must solve the environmental problems.",
+              "reason": "'environment' 是名词，不能直接修饰名词 'problems'。需要用形容词 'environmental'。"
+            },
+            {
+              "wrong": "The air is pollution.",
+              "correct": "The air is polluted. (或 There is air pollution.)",
+              "reason": "'pollution' 是名词，不能作表语直接描述空气的状态。如果用形容词，应是 'polluted' (被污染的)。"
+            }
+          ],
+          "memory_tip": "记住动词 'pollute'，名词 'pollution'。'environment' 是名词，'environmental' 是形容词。'-tion' 结尾多是名词，'-al' 结尾多是形容词。",
+          "related": {
+            "prerequisite": "词性（动词、名词、形容词）的基本概念，后缀知识",
+            "next": "其他环境相关词族（如 develop, development, developing）"
+          }
+        },
+        {
+          "card_id": "07-05",
+          "full_id": "英语-九下-07-05",
+          "title": "易混词：waste vs rubbish vs litter",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "waste, rubbish 和 litter 都指“废弃物”或“垃圾”，但在具体用法和语境上有所区别。",
+          "core_points": [
+            "**waste** /weɪst/：",
+            "  *含义*: n. 浪费；废弃物，废物 (尤指生产或使用过程中产生的无用物质)。v. 浪费。",
+            "  *侧重*: 强调“无用”和“浪费”的概念，可指固体、液体、气体废物，也可指抽象的浪费（时间、金钱）。",
+            "  *例句*: Industrial waste can be very harmful. (工业废弃物可能非常有害。)",
+            "  *例句*: Don't waste your money. (不要浪费你的钱。)",
+            "**rubbish** /'rʌbɪʃ/ (英式英语) 或 **garbage** /'ɡɑːrbɪdʒ/ (美式英语)：",
+            "  *含义*: n. 垃圾，废弃物（尤指家庭生活垃圾）。",
+            "  *侧重*: 指日常生活中丢弃的、无用的东西，如食物残渣、包装纸等。",
+            "  *例句*: Please take out the rubbish. (请倒垃圾。)",
+            "  *例句*: This film is rubbish. (这部电影是垃圾/很糟糕。)",
+            "**litter** /'lɪtər/：",
+            "  *含义*: n. 散落在公共场所的垃圾（如纸屑、果皮等）。v. 乱扔垃圾。",
+            "  *侧重*: 强调“乱扔”的行为和“散落”的状态，通常指小件的、随意丢弃的垃圾。",
+            "  *例句*: Don't drop litter in the park. (不要在公园里乱扔垃圾。)",
+            "  *例句*: The street was littered with paper. (街道上散落着纸屑。)"
+          ],
+          "why_explanation": "这些词汇都与废弃物有关，但其语义范围和使用场景不同。'waste' 是最广义的，强调'无用'和'浪费'，涵盖了所有不再需要或无法使用的物质，以及抽象的浪费行为。'rubbish/garbage' 更具体，指家庭产生的日常垃圾。而 'litter' 则特指在公共场所随意丢弃的小件垃圾，并常与'乱扔'的行为相关联。理解这些细微差别能帮助我们选择最准确的词汇。",
+          "example": {
+            "question": "选择正确的词填空：\n1. There is a lot of _____ (waste / rubbish / litter) on the street after the parade.\n2. We need to reduce household _____ (waste / rubbish / litter).\n3. Don't _____ (waste / rubbish / litter) your food.",
+            "steps": [
+              "1. 游行后街上散落的通常是小件垃圾，所以用 'litter'。",
+              "2. 'household' (家庭) 产生的通常是日常垃圾，所以用 'rubbish' (或 garbage)。'waste' 也可以，但 'rubbish' 更具体。",
+              "3. 'food' 是可浪费的对象，强调浪费行为，所以用动词 'waste'。"
+            ],
+            "answer": "1. litter\n2. rubbish\n3. waste"
+          },
+          "mistakes": [
+            {
+              "wrong": "Please don't throw your litter into the bin.",
+              "correct": "Please don't throw your rubbish/waste into the bin. (或 Please put your litter into the bin.)",
+              "reason": "'litter' 强调散落在地上的垃圾，通常是乱扔的行为。如果已经要扔进垃圾桶，一般用 'rubbish' 或 'waste'。或者可以说 'Don't drop litter; put it into the bin.'。"
+            },
+            {
+              "wrong": "There is too much litter from the factory.",
+              "correct": "There is too much waste from the factory.",
+              "reason": "工厂产生的通常是工业废弃物，用 'waste' 更合适，而不是 'litter' (指公共场所的散落小垃圾)。"
+            }
+          ],
+          "memory_tip": "waste (广义，浪费行为+一切废物)；rubbish/garbage (家庭垃圾)；litter (乱扔的公共场所小垃圾)。记住'垃圾桶'里是 rubbish/garbage，'地上'是 litter。",
+          "related": {
+            "prerequisite": "可数与不可数名词，动词与名词的词性",
+            "next": "refuse, debris 等其他废弃物相关词汇"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "08",
+      "unit_name": "It must belong to Carla.",
+      "cards": [
+        {
+          "card_id": "08-01",
+          "full_id": "英语-九下-08-01",
+          "title": "词汇：推测与物品描述",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "本单元与推测、可能性以及物品描述相关的核心词汇。",
+          "core_points": [
+            "belong /bɪ'lɒŋ/ v. 属于 (This book belongs to me.)",
+            "belong to 属于",
+            "must /mʌst/ modal verb 必须；一定 (It must be true.)",
+            "might /maɪt/ modal verb 可能，也许 (He might come tomorrow.)",
+            "could /kʊd/ modal verb 可以；可能 (It could be a good idea.)",
+            "can't /kænt/ modal verb 不能；不可能 (It can't be true.)",
+            "certainly /'sɜːrtnli/ adv. 当然，肯定地 (He will certainly help you.)",
+            "possibly /'pɒsəbli/ adv. 可能地 (She could possibly be at home.)",
+            "likely /'laɪkli/ adj. 可能的 (It's likely to rain.)",
+            "unlikely /ʌn'laɪkli/ adj. 不可能的 (It's unlikely to happen.)",
+            "probably /'prɒbəbli/ adv. 大概，可能 (He's probably at home.)",
+            "owner /'əʊnər/ n. 物主，主人 (Who is the owner of this car?)",
+            "picnic /'pɪknɪk/ n. 野餐 (Let's go for a picnic.)",
+            "basket /'bæskɪt/ n. 篮子 (A picnic basket.)",
+            "camera /'kæmərə/ n. 照相机 (He bought a new camera.)",
+            "magazine /ˌmæɡə'ziːn/ n. 杂志 (I like reading fashion magazines.)",
+            "wallet /'wɒlɪt/ n. 钱包 (He lost his wallet.)",
+            "keys /kiːz/ n. 钥匙 (pl.) (Where are my keys?)",
+            "ticket /'tɪkɪt/ n. 票 (I bought a movie ticket.)",
+            "umbrella /ʌm'brelə/ n. 雨伞 (Don't forget your umbrella.)",
+            "hair band 发带",
+            "soccer ball 足球",
+            "CD /ˌsiː 'diː/ n. 光盘",
+            "noise /nɔɪz/ n. 噪音 (Please don't make any noise.)",
+            "loud /laʊd/ adj. 大声的 (The music is too loud.)"
+          ],
+          "why_explanation": "这些词汇是进行推测和描述物品的基础。情态动词 'must, might, could, can't' 提供了表达不同程度确定性的工具。而物品词汇则为推测提供了具体的对象。掌握它们能帮助学生在日常生活中对事物进行推理和描述。",
+          "example": {
+            "question": "请用本单元词汇填空：\nThis _____ (钱包) _____ (一定/属于) Tom. But this _____ (照相机) _____ (可能/属于) Mary. I heard some _____ (噪音) in the kitchen; it _____ (不可能/是) the cat.",
+            "steps": [
+              "第一个空需要名词，表示钱包，选择 'wallet'。",
+              "第二个空需要情态动词和动词，表示一定属于，选择 'must belong to'。",
+              "第三个空需要名词，表示照相机，选择 'camera'。",
+              "第四个空需要情态动词和动词，表示可能属于，选择 'might belong to'。",
+              "第五个空需要名词，表示噪音，选择 'noise'。",
+              "第六个空需要情态动词和动词，表示不可能，选择 'can't be'。"
+            ],
+            "answer": "This wallet must belong to Tom. But this camera might belong to Mary. I heard some noise in the kitchen; it can't be the cat."
+          },
+          "mistakes": [
+            {
+              "wrong": "It must be true.",
+              "correct": "It must be true.",
+              "reason": "情态动词后跟动词原形，这里 'be' 是动词原形。注意 'must' 表示肯定推测，'can't' 表示否定推测。"
+            },
+            {
+              "wrong": "This book belongs my brother.",
+              "correct": "This book belongs to my brother.",
+              "reason": "'belong' 是不及物动词，表示'属于'时必须跟介词 'to'。"
+            }
+          ],
+          "memory_tip": "记住情态动词推测的强弱：must (一定) > could/might (可能) > can't (不可能)。'belong to' 是一对好朋友。将物品词汇与日常场景联系起来，如'野餐篮子里有相机和杂志'。",
+          "related": {
+            "prerequisite": "情态动词的基本用法，介词 'to' 的用法",
+            "next": "情态动词推测过去，情态动词完成时"
+          }
+        },
+        {
+          "card_id": "08-02",
+          "full_id": "英语-九下-08-02",
+          "title": "语法：情态动词表推测（must, can't, might, could, may）",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "情态动词除了表示能力、许可、义务等，还可以用于对事物的可能性进行推测，表达不同程度的确定性。",
+          "core_points": [
+            "**基本结构**：情态动词 + 动词原形 (be动词用 be)",
+            "**must**：",
+            "  *含义*: 表示非常肯定的推测，'一定，必定'。",
+            "  *例句*: He must be tired. He has been working all day. (他一定累了。他工作一整天了。)",
+            "**can't**：",
+            "  *含义*: 表示否定推测，'不可能'。",
+            "  *例句*: He can't be at home. I saw him at the library. (他不可能在家。我在图书馆看到他了。)",
+            "**might / could / may**：",
+            "  *含义*: 表示不确定的推测，'可能，也许'。might 和 could 语气比 may 更委婉，可能性更小。",
+            "  *例句*: She might be busy now. (她现在可能很忙。)",
+            "  *例句*: It could be true. (这可能是真的。)",
+            "  *例句*: He may come tomorrow. (他明天可能会来。)",
+            "**注意事项**：",
+            "  1. 'must' 用于肯定推测，其否定推测用 'can't'。",
+            "  2. 'may not' 表示'可能不'，与 'can't' (不可能) 程度不同。",
+            "     *例*: He may not be at home. (他可能不在家。)",
+            "  3. 情态动词推测现在或将来的情况，后接动词原形。",
+            "  4. 情态动词推测过去发生的事情，后接 'have + V3' (情态动词的完成时态)。"
+          ],
+          "why_explanation": "人类在面对不确定性时，需要表达不同程度的判断。情态动词的推测功能正是满足这一需求。它们通过在动词原形前加入不同的情态动词，来传达说话者对事件真实性的主观判断。'must' 的确定性源于其'必须'的原始含义，引申为'必定如此'；'can't' 的否定推测源于其'不能'的限制含义，引申为'不可能如此'；'may/might/could' 的不确定性则源于其'许可/能力'的原始含义，引申为'有此可能性'。这种语义的引申使得情态动词在表达推测时非常高效。",
+          "example": {
+            "question": "选择合适的情态动词填空：\n1. It's very dark outside. It _____ (肯定) be late.\n2. That _____ (不可能) be Tom. He's in another city.\n3. She _____ (可能) be sleeping. Let's not disturb her.",
+            "steps": [
+              "1. 根据 'very dark'，推测 'late' 是非常肯定的，所以用 'must'。",
+              "2. 根据 'He's in another city'，推测 'be Tom' 是不可能的，所以用 'can't'。",
+              "3. 推测 'be sleeping' 是可能性，但不太确定，所以用 'might' 或 'may' 或 'could'。"
+            ],
+            "answer": "1. must\n2. can't\n3. might/may/could"
+          },
+          "mistakes": [
+            {
+              "wrong": "He must not be a student.",
+              "correct": "He can't be a student. (如果表示'不可能'是学生)",
+              "reason": "表示否定推测'不可能'时，用 'can't'。'must not' 表示'禁止，不许'，而非推测。"
+            },
+            {
+              "wrong": "She may be busy now, but she might not be busy yesterday.",
+              "correct": "She may be busy now, but she might not have been busy yesterday.",
+              "reason": "推测过去发生的事情，情态动词后要用 'have + 过去分词'。"
+            }
+          ],
+          "memory_tip": "情态动词推测：'must' (最强肯定)，'can't' (最强否定)，'may/might/could' (不确定，可能性)。记住'肯定推测用must，否定推测用can't'，这俩是'死对头'。",
+          "related": {
+            "prerequisite": "情态动词的基本用法，动词原形，动词过去分词",
+            "next": "情态动词推测的完成时态，虚拟语气中的情态动词"
+          }
+        },
+        {
+          "card_id": "08-03",
+          "full_id": "英语-九下-08-03",
+          "title": "句型：进行推测和询问可能性",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元学习如何使用情态动词进行推测，并询问事物的可能性。",
+          "core_points": [
+            "**进行推测**：",
+            "  *It must be...* (它一定/必定是……)",
+            "  *It can't be...* (它不可能是……)",
+            "  *It might/could/may be...* (它可能是……)",
+            "  *That certainly/probably/possibly belongs to...* (那肯定/大概/可能属于……)",
+            "  *He must have left his keys at home.* (他一定把钥匙忘在家里了。)",
+            "**询问可能性**：",
+            "  *Whose... could it be?* (这……会是谁的？)",
+            "  *What could it be?* (它会是什么？)",
+            "  *Do you think it might be...?* (你认为它可能是……吗？)",
+            "  *Could it be...?* (它可能是……吗？)",
+            "  *Is it likely that...?* (……可能吗？)"
+          ],
+          "why_explanation": "这些句型是日常生活中进行逻辑推理和信息交流的工具。通过使用不同强度的情态动词，我们能够清晰地表达自己的推测，从肯定到否定，再到不确定。疑问句型则用于引发对方的思考，共同探讨可能性。掌握这些句型能帮助学生更有效地进行推理和讨论。",
+          "example": {
+            "question": "根据情境完成对话：\nA: Look! There's a wallet on the ground. ____ (Whose/it/be)?\nB: It ____ (must/belong) to the man who just left. But it ____ (could/be) a child's wallet too. It ____ (can't/be) Mary's; her wallet is blue.",
+            "steps": [
+              "A处询问所属，用 'Whose wallet could it be?'。",
+              "B处进行推测，先是肯定推测，用 'must belong to'。接着提出另一种可能性，用 'could be'。最后否定推测，用 'can't be'。"
+            ],
+            "answer": "A: Look! There's a wallet on the ground. Whose could it be?\nB: It must belong to the man who just left. But it could be a child's wallet too. It can't be Mary's; her wallet is blue."
+          },
+          "mistakes": [
+            {
+              "wrong": "It must belongs to him.",
+              "correct": "It must belong to him.",
+              "reason": "情态动词后跟动词原形，'belong' 不加 's'。"
+            },
+            {
+              "wrong": "Whose is it be?",
+              "correct": "Whose could it be?",
+              "reason": "询问可能性，常用情态动词 'could'，且语序为 'Whose + 情态动词 + 主语 + be'。"
+            }
+          ],
+          "memory_tip": "推测句型：'must be' (最肯定)，'can't be' (最否定)，'might/could/may be' (可能性)。询问用 'Whose/What could it be?'。记住推测是'猜'，语气要准确。",
+          "related": {
+            "prerequisite": "情态动词推测用法，疑问词的用法",
+            "next": "更复杂的推理和辩论句型"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "09",
+      "unit_name": "When was it invented?",
+      "cards": [
+        {
+          "card_id": "09-01",
+          "full_id": "英语-九下-09-01",
+          "title": "词汇：发明与科技",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "本单元与发明、发现、技术进步及相关物品的核心词汇。",
+          "core_points": [
+            "invent /ɪn'vent/ v. 发明 (Who invented the telephone?)",
+            "invention /ɪn'venʃn/ n. 发明，创造 (The light bulb was a great invention.)",
+            "inventor /ɪn'ventər/ n. 发明家 (Thomas Edison was a famous inventor.)",
+            "discover /dɪ'skʌvər/ v. 发现 (Columbus discovered America.)",
+            "discovery /dɪ'skʌvəri/ n. 发现 (The discovery of penicillin saved many lives.)",
+            "technology /tek'nɒlədʒi/ n. 科技 (Modern technology makes our lives easier.)",
+            "technological /ˌteknə'lɒdʒɪkl/ adj. 科技的 (technological advances)",
+            "develop /dɪ'veləp/ v. 发展，开发 (Scientists are developing new medicines.)",
+            "development /dɪ'veləpmənt/ n. 发展，开发 (The development of AI is rapid.)",
+            "produce /prə'duːs/ v. 生产，制造 (This factory produces cars.)",
+            "product /'prɒdʌkt/ n. 产品 (They sell various products.)",
+            "create /kri'eɪt/ v. 创造 (Artists create beautiful paintings.)",
+            "creation /kri'eɪʃn/ n. 创造，创作 (The universe is a divine creation.)",
+            "machine /mə'ʃiːn/ n. 机器 (Washing machine, sewing machine.)",
+            "engine /'endʒɪn/ n. 发动机 (The car's engine broke down.)",
+            "device /dɪ'vaɪs/ n. 设备，装置 (A mobile phone is a communication device.)",
+            "tool /tuːl/ n. 工具 (Hammers and saws are tools.)",
+            "wheel /wiːl/ n. 轮子 (The invention of the wheel was important.)",
+            "electricity /ɪˌlek'trɪsəti/ n. 电，电力 (Electricity powers our homes.)",
+            "electric /ɪ'lektrɪk/ adj. 电的 (electric car, electric light)",
+            "successful /sək'sesfl/ adj. 成功的 (A successful invention.)",
+            "common /'kɒmən/ adj. 常见的，普通的 (It's a common problem.)",
+            "convenient /kən'viːniənt/ adj. 方便的 (It's convenient to shop online.)",
+            "convenience /kən'viːniəns/ n. 方便 (For your convenience.)"
+          ],
+          "why_explanation": "这些词汇是讨论科学技术进步和人类创造力的基础。它们涵盖了从概念（如 invention, discovery, technology）到具体行动（如 invent, discover, develop, produce, create）以及相关物品和性质（如 machine, device, electric, convenient）的各个方面。掌握它们能帮助学生理解科技发展对人类社会的影响。",
+          "example": {
+            "question": "请用本单元词汇填空：\nThe _____ (发明) of the _____ (轮子) was a great _____ (发现). With the _____ (发展) of _____ (科技), many new _____ (产品) are now _____ (生产) every day.",
+            "steps": [
+              "第一个空需要名词，表示发明，选择 'invention'。",
+              "第二个空需要名词，表示轮子，选择 'wheel'。",
+              "第三个空需要名词，表示发现，选择 'discovery'。",
+              "第四个空需要名词，表示发展，选择 'development'。",
+              "第五个空需要名词，表示科技，选择 'technology'。",
+              "第六个空需要名词，表示产品，选择 'products'。",
+              "第七个空需要动词，表示生产，选择 'produced' (此处应是被动语态)。"
+            ],
+            "answer": "The invention of the wheel was a great discovery. With the development of technology, many new products are now produced every day."
+          },
+          "mistakes": [
+            {
+              "wrong": "Who discovered the telephone?",
+              "correct": "Who invented the telephone?",
+              "reason": "'invent' 指发明创造前所未有的东西，'discover' 指发现已经存在但未被知晓的东西。电话是发明，不是发现。"
+            },
+            {
+              "wrong": "The new product is development.",
+              "correct": "The new product is in development. (或 The new product is being developed.)",
+              "reason": "'development' 是名词，不能直接作表语。应说 'in development' (在开发中) 或用被动语态 'is being developed'。"
+            }
+          ],
+          "memory_tip": "记住 'invent' (发明新事物) vs 'discover' (发现已知事物)。词族记忆：invent/invention/inventor, develop/development, produce/product, create/creation。想象一个发明家在实验室里创造新产品。",
+          "related": {
+            "prerequisite": "基础动词、名词、形容词，词性转换",
+            "next": "科学研究方法词汇，未来科技展望"
+          }
+        },
+        {
+          "card_id": "09-02",
+          "full_id": "英语-九下-09-02",
+          "title": "语法：被动语态（情态动词、现在完成时）",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "本单元扩展被动语态的用法，包括情态动词和现在完成时的被动语态。",
+          "core_points": [
+            "**情态动词的被动语态**：",
+            "  *结构*: 情态动词 + be + V3",
+            "  *含义*: 强调某事'可以/应该/必须被做'。",
+            "  *例句*: English can be spoken all over the world. (英语可以在全世界被说。)",
+            "  *例句*: The homework must be finished by tomorrow. (作业必须在明天前完成。)",
+            "  *例句*: The problem should be solved soon. (问题应该很快被解决。)",
+            "  *否定句*: 情态动词 + not + be + V3",
+            "  *疑问句*: 情态动词 + 主语 + be + V3?",
+            "**现在完成时的被动语态**：",
+            "  *结构*: have/has + been + V3",
+            "  *含义*: 强调某动作从过去开始，到现在已经完成，且主语是动作的承受者。",
+            "  *例句*: The bridge has been built. (这座桥已经被建成了。)",
+            "  *例句*: My bike has been repaired. (我的自行车已经被修好了。)",
+            "  *否定句*: have/has + not + been + V3",
+            "  *疑问句*: Have/Has + 主语 + been + V3?",
+            "**特殊疑问句的被动语态**：",
+            "  *结构*: 疑问词 + be动词 + 主语 + V3 + (by 施动者)?",
+            "  *例句*: When was it invented? (它是什么时候被发明的？)",
+            "  *例句*: Who was the computer invented by? (电脑是谁发明的？)"
+          ],
+          "why_explanation": "被动语态与情态动词结合，是为了表达'被动'的'可能性、必要性、义务'等。'情态动词 + be + V3' 结构将情态的含义与被动的动作结合起来。现在完成时被动语态 'have/has + been + V3' 则将'完成'和'被动'两个概念融合，强调动作完成且对现在有影响，同时主语是承受者。这些结构扩展了被动语态的表达能力，使其能够处理更复杂的语义。",
+          "example": {
+            "question": "将以下主动语态句子改为被动语态：\n1. People can solve this problem. (情态动词)\n2. Someone has repaired my computer. (现在完成时)\n3. When did they invent the light bulb? (特殊疑问句)",
+            "steps": [
+              "1. 将宾语 'this problem' 变为主语，谓语动词 'can solve' 改为 'can be solved'。",
+              "2. 将宾语 'my computer' 变为主语，谓语动词 'has repaired' 改为 'has been repaired'，施动者 'someone' 可省略。",
+              "3. 疑问词 'When' 保留，宾语 'the light bulb' 变为主语，谓语动词 'did invent' 改为 'was invented'。"
+            ],
+            "answer": "1. This problem can be solved.\n2. My computer has been repaired.\n3. When was the light bulb invented?"
+          },
+          "mistakes": [
+            {
+              "wrong": "The car must repaired.",
+              "correct": "The car must be repaired.",
+              "reason": "情态动词的被动语态结构是 '情态动词 + be + V3'，不能省略 'be'。"
+            },
+            {
+              "wrong": "The work has been finish.",
+              "correct": "The work has been finished.",
+              "reason": "现在完成时的被动语态结构是 'have/has + been + V3'，必须使用动词过去分词。"
+            }
+          ],
+          "memory_tip": "被动语态：情态动词后加'be V3'，完成时后加'been V3'。就像给被动语态'穿上'情态或完成的外衣。",
+          "related": {
+            "prerequisite": "基本被动语态，情态动词，现在完成时",
+            "next": "被动语态的更多时态，被动语态与不定式/动名词的结合"
+          }
+        },
+        {
+          "card_id": "09-03",
+          "full_id": "英语-九下-09-03",
+          "title": "句型：询问和讨论发明与历史",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元学习如何询问发明的历史，以及讨论其重要性和影响。",
+          "core_points": [
+            "**询问发明与历史**：",
+            "  *When was it invented?* (它是什么时候被发明的？)",
+            "  *Who was it invented by?* (它是由谁发明的？)",
+            "  *What was invented in...?* (在……发明了什么？)",
+            "  *How long has it been used?* (它已经被使用了多久了？)",
+            "**讨论重要性与影响**：",
+            "  *The invention of... was very important.* (……的发明非常重要。)",
+            "  *It has changed our lives greatly.* (它极大地改变了我们的生活。)",
+            "  *It made our lives more convenient/easier.* (它使我们的生活更方便/容易了。)",
+            "  *It has brought a lot of convenience to us.* (它给我们带来了很多便利。)",
+            "  *We can't imagine life without it.* (我们无法想象没有它的生活。)"
+          ],
+          "why_explanation": "这些句型是讨论科技历史和评估发明价值的语言工具。被动语态的疑问句是询问发明历史的常用方式，因为我们通常更关注'什么被发明'而不是'谁发明'。而表达重要性与影响的句型则侧重于强调发明的积极作用，如 'changed our lives' 和 'brought convenience'。掌握这些句型能帮助学生进行历史回顾和科技评论。",
+          "example": {
+            "question": "根据情境完成对话：\nA: ____ (When/telephone/invent)?\nB: It ____ (invent/by/Bell) in 1876. It ____ (改变/我们/生活) greatly.",
+            "steps": [
+              "A处询问发明时间，用特殊疑问句的被动语态 'When was the telephone invented?'。",
+              "B处回答发明者和时间，用被动语态 'It was invented by Bell'。然后描述影响，用 'It has changed our lives'。"
+            ],
+            "answer": "A: When was the telephone invented?\nB: It was invented by Bell in 1876. It has changed our lives greatly."
+          },
+          "mistakes": [
+            {
+              "wrong": "Who invented the light bulb by?",
+              "correct": "Who was the light bulb invented by?",
+              "reason": "询问发明者，用 'Who was ... invented by?' 的被动语态结构。"
+            },
+            {
+              "wrong": "It made our life more convenient.",
+              "correct": "It made our lives more convenient.",
+              "reason": "'life' 的复数形式是 'lives'，表示'我们的生活'，通常用复数。"
+            }
+          ],
+          "memory_tip": "历史发明用被动疑问句 'When/Who was it invented (by)?'。影响用 'It has changed/made our lives...'。记住 'made sb/sth + adj' 句型。",
+          "related": {
+            "prerequisite": "被动语态，现在完成时，使役动词 'make' 的用法",
+            "next": "科技发展报告，发明创造的评价"
+          }
+        },
+        {
+          "card_id": "09-04",
+          "full_id": "英语-九下-09-04",
+          "title": "易混词：invent vs discover",
+          "type": "易混词卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "invent 和 discover 都指“创造”或“发现”，但含义和使用语境截然不同。",
+          "core_points": [
+            "**invent** /ɪn'vent/：",
+            "  *含义*: 发明，创造（指以前不存在的事物，通过思考、设计、制造首次创造出来）。",
+            "  *例句*: Who invented the telephone? (谁发明了电话？)",
+            "  *例句*: He invented a new game. (他发明了一种新游戏。)",
+            "  *名词*: invention (发明)",
+            "**discover** /dɪ'skʌvər/：",
+            "  *含义*: 发现（指已经存在但未被知晓的事物，通过探索、研究首次被找到或认识）。",
+            "  *例句*: Columbus discovered America. (哥伦布发现了美洲。)",
+            "  *例句*: Scientists discovered a new planet. (科学家们发现了一颗新行星。)",
+            "  *名词*: discovery (发现)"
+          ],
+          "why_explanation": "这两个词的区别在于其动作的对象。'invent' 的对象是'无中生有'，是人类创造力的体现，如电话、电脑。而 'discover' 的对象是'已经存在'，但尚未被人认知的事物，如新大陆、新物种、科学定律。理解这种根本差异是正确区分和使用这两个词的关键，反映了人类与世界互动两种不同的方式。",
+          "example": {
+            "question": "选择正确的词填空：\n1. Penicillin was _____ (invented / discovered) by Alexander Fleming.\n2. The wheel was _____ (invented / discovered) thousands of years ago.",
+            "steps": [
+              "1. 青霉素是自然界中存在的物质，被弗莱明'发现'其药用价值，所以用 'discovered'。",
+              "2. 轮子是人类创造的工具，所以用 'invented'。"
+            ],
+            "answer": "1. discovered\n2. invented"
+          },
+          "mistakes": [
+            {
+              "wrong": "Scientists invented gravity.",
+              "correct": "Scientists discovered gravity.",
+              "reason": "万有引力是自然法则，是客观存在的，科学家是'发现'了它，而不是'发明'了它。"
+            },
+            {
+              "wrong": "He discovered a new machine.",
+              "correct": "He invented a new machine.",
+              "reason": "机器是人造物，是'发明'出来的，而不是'发现'的。"
+            }
+          ],
+          "memory_tip": "记住 'invent' 是创造 'new' 的东西，'discover' 是找到 'existing' 的东西。'i' 像 'idea' (发明需要创意)，'d' 像 'dig' (发现需要挖掘)。",
+          "related": {
+            "prerequisite": "动词的基本含义",
+            "next": "create, explore 等相关词汇辨析"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "10",
+      "unit_name": "You're supposed to shake hands.",
+      "cards": [
+        {
+          "card_id": "10-01",
+          "full_id": "英语-九下-10-01",
+          "title": "词汇：风俗与礼仪",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "本单元与不同文化背景下的风俗、习惯和礼仪相关的核心词汇。",
+          "core_points": [
+            "supposed to 应该，被期望 (You're supposed to shake hands.)",
+            "shake hands 握手",
+            "custom /'kʌstəm/ n. 风俗，习惯 (It's a local custom.)",
+            "tradition /trə'dɪʃn/ n. 传统 (Chinese New Year is an important tradition.)",
+            "traditional /trə'dɪʃənl/ adj. 传统的 (traditional clothes)",
+            "culture /'kʌltʃər/ n. 文化 (Different countries have different cultures.)",
+            "cultural /'kʌltʃərəl/ adj. 文化的 (cultural differences)",
+            "manners /'mænərz/ n. 礼仪，举止 (pl.) (Good manners are important.)",
+            "polite /pə'laɪt/ adj. 有礼貌的 (It's polite to say 'thank you'.)",
+            "impolite /ˌɪmpə'laɪt/ adj. 不礼貌的 (It's impolite to interrupt others.)",
+            "rude /ruːd/ adj. 粗鲁的 (Don't be rude to strangers.)",
+            "bow /baʊ/ v.&n. 鞠躬 (In Japan, people bow to show respect.)",
+            "kiss /kɪs/ v.&n. 亲吻 (They kissed each other on the cheek.)",
+            "hug /hʌɡ/ v.&n. 拥抱 (They hugged goodbye.)",
+            "host /həʊst/ n. 主人 (The host welcomed his guests.)",
+            "guest /ɡest/ n. 客人 (The guests enjoyed the party.)",
+            "greet /ɡriːt/ v. 问候，打招呼 (He greeted me with a smile.)",
+            "greeting /'ɡriːtɪŋ/ n. 问候，招呼 (Send your best greetings.)",
+            "introduce /ˌɪntrə'duːs/ v. 介绍 (Let me introduce myself.)",
+            "introduction /ˌɪntrə'dʌkʃn/ n. 介绍 (a brief introduction)",
+            "foreigner /'fɒrənər/ n. 外国人 (Many foreigners visit China.)",
+            "avoid /ə'vɔɪd/ v. 避免 (Avoid making eye contact.)",
+            "eye contact 眼神交流"
+          ],
+          "why_explanation": "这些词汇是跨文化交流和理解不同社会规范的基础。掌握它们能帮助学生更好地理解不同国家和地区的风俗习惯，避免文化冲突，并以恰当的礼仪与他人互动。词族（如 custom/customary, tradition/traditional, culture/cultural, polite/impolite）的掌握有助于扩展词汇量和提高表达的准确性。",
+          "example": {
+            "question": "请用本单元词汇填空：\nIn many Western _____ (文化), people usually _____ (握手) when they meet. It's considered _____ (有礼貌的). But in some Asian countries, people often _____ (鞠躬) instead. Understanding these _____ (风俗) is very important.",
+            "steps": [
+              "第一个空需要名词，表示文化，选择 'cultures'。",
+              "第二个空需要动词短语，表示握手，选择 'shake hands'。",
+              "第三个空需要形容词，表示有礼貌的，选择 'polite'。",
+              "第四个空需要动词，表示鞠躬，选择 'bow'。",
+              "第五个空需要名词，表示风俗，选择 'customs'。"
+            ],
+            "answer": "In many Western cultures, people usually shake hands when they meet. It's considered polite. But in some Asian countries, people often bow instead. Understanding these customs is very important."
+          },
+          "mistakes": [
+            {
+              "wrong": "It's impoliteness to talk loudly.",
+              "correct": "It's impolite to talk loudly.",
+              "reason": "'impolite' 是形容词，作表语。'impoliteness' 是名词，表示不礼貌的行为或品质。"
+            },
+            {
+              "wrong": "We must respect others' traditions.",
+              "correct": "We must respect others' traditions.",
+              "reason": "'tradition' 是名词，表示传统。这里用复数形式表示多种传统。"
+            }
+          ],
+          "memory_tip": "记住 'shake hands, bow, kiss, hug' 是不同的见面礼仪。'polite/impolite/rude' 是描述礼貌程度。记住 'custom' 是风俗，'tradition' 是传统，'culture' 是文化，'manners' 是礼仪。",
+          "related": {
+            "prerequisite": "基础形容词和名词，词性转换",
+            "next": "跨文化交流策略，社交礼仪指南"
+          }
+        },
+        {
+          "card_id": "10-02",
+          "full_id": "英语-九下-10-02",
+          "title": "语法：be supposed to",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "be supposed to 用于表达义务、职责、期望、约定或普遍认为的观点。",
+          "core_points": [
+            "**结构**：be + supposed + to do sth",
+            "**含义**：",
+            "  1. **应该，理应，被期望**：表示根据规则、法律、约定或普遍期望，某事应该发生或某人应该做某事。",
+            "     *例句*: You're supposed to shake hands when you meet someone for the first time. (你初次见面时应该握手。)",
+            "     *例句*: We are supposed to hand in our homework by Friday. (我们应该在周五前交作业。)",
+            "  2. **普遍认为，传说**：表示某事被普遍认为是真的或被认为是某种情况。",
+            "     *例句*: He is supposed to be a good doctor. (他被认为是位好医生。)",
+            "  3. **本应，本该（但未发生或未做到）**：用于指过去本应发生但未发生或未做到的事，常带有责备或遗憾的语气。",
+            "     *结构*: be supposed to have done sth (表示过去本应做而未做)",
+            "     *例句*: You were supposed to call me. (你本该给我打电话的。)",
+            "     *例句*: The train was supposed to arrive at 10. (火车本应10点到。)",
+            "**否定句**：be + not + supposed + to do sth (不应该，不被允许)",
+            "  *例句*: You're not supposed to talk loudly in the library. (你不应该在图书馆大声说话。)",
+            "**疑问句**：Are you supposed to...? (你是不是应该……？)"
+          ],
+          "why_explanation": "'be supposed to' 是一种非常地道的表达方式，它比 'should' 更强调外部的期望、规定或约定。'supposed' 来源于 'suppose' (假定，认为)，所以 'be supposed to' 的字面意思就是 '被假定/认为去做某事'，从而引申出'应该做某事'的含义。它的被动语态形式 'be + V3' 强调了这种'被期望'的性质。理解其'外部期望'的底层逻辑，有助于区分它与 'should' 等情态动词。",
+          "example": {
+            "question": "用 be supposed to 填空：\n1. You _____ (应该/wear) a uniform at school.\n2. We _____ (不应该/use) phones in class.\n3. The meeting _____ (本该/start) at 9, but it was delayed.",
+            "steps": [
+              "1. 表达学校规定或期望，用 'are supposed to wear'。",
+              "2. 表达不被允许，用 'are not supposed to use'。",
+              "3. 表达过去本应发生但未发生，用 'was supposed to start'。"
+            ],
+            "answer": "1. are supposed to wear\n2. are not supposed to use\n3. was supposed to start"
+          },
+          "mistakes": [
+            {
+              "wrong": "You supposed to do your homework.",
+              "correct": "You are supposed to do your homework.",
+              "reason": "'be supposed to' 是一个固定短语，不能省略 'be' 动词。"
+            },
+            {
+              "wrong": "He was supposed to went there.",
+              "correct": "He was supposed to go there.",
+              "reason": "'to' 后跟动词原形，而不是动词过去式。"
+            }
+          ],
+          "memory_tip": "be supposed to：'被期望去做'，像个'隐形规定'。记住 'be' 动词不能丢，'to' 后跟原形。过去未做就用 'was/were supposed to'。",
+          "related": {
+            "prerequisite": "不定式作表语，情态动词 'should/ought to'",
+            "next": "其他表达义务和期望的句型，虚拟语气"
+          }
+        },
+        {
+          "card_id": "10-03",
+          "full_id": "英语-九下-10-03",
+          "title": "句型：讨论文化差异与社交礼仪",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元学习如何讨论不同文化背景下的风俗习惯和社交礼仪，并给出相关建议。",
+          "core_points": [
+            "**讨论文化差异**：",
+            "  *In some countries, people are supposed to...* (在一些国家，人们应该……)",
+            "  *It's a common custom to...* (……是一种常见的风俗。)",
+            "  *People usually/often...* (人们通常/经常……)",
+            "  *It's considered polite/impolite to...* (做……被认为是礼貌/不礼貌的。)",
+            "  *There are many cultural differences about...* (关于……有很多文化差异。)",
+            "**给出社交礼仪建议**：",
+            "  *You should/shouldn't...* (你应该/不应该……)",
+            "  *It's important/rude to...* (做……很重要/粗鲁。)",
+            "  *Try to avoid... (V-ing)* (尽量避免……)",
+            "  *Make sure you...* (确保你……)",
+            "  *It's a good idea to...* (做……是个好主意。)"
+          ],
+          "why_explanation": "这些句型是进行跨文化交流和理解不同社会规范的工具。'be supposed to' 和 'It's considered polite/impolite to...' 强调了社会约定和普遍认知。而建议句型则旨在帮助学习者在不同文化环境中表现得体。掌握这些句型能帮助学生更好地适应不同文化情境，并有效地进行社交互动。",
+          "example": {
+            "question": "根据情境完成对话：\nA: I'm going to Japan. What _____ (I/supposed/do) when I meet someone?\nB: You _____ (supposed/bow). It's _____ (consider/polite) there. And you _____ (should/avoid/talk) loudly in public.",
+            "steps": [
+              "A处询问期望和习惯，用 'What am I supposed to do?'。",
+              "B处给出建议，用 'You are supposed to bow'。然后说明原因 'It's considered polite'。再给出另一个建议，用 'should avoid talking'。"
+            ],
+            "answer": "A: I'm going to Japan. What am I supposed to do when I meet someone?\nB: You are supposed to bow. It's considered polite there. And you should avoid talking loudly in public."
+          },
+          "mistakes": [
+            {
+              "wrong": "It's considered politely to bow.",
+              "correct": "It's considered polite to bow.",
+              "reason": "'consider' 后接形容词作宾语补足语，表示'被认为是……'，而不是副词。"
+            },
+            {
+              "wrong": "Try to avoid to make eye contact.",
+              "correct": "Try to avoid making eye contact.",
+              "reason": "'avoid' 后接动名词作宾语，不接不定式。"
+            }
+          ],
+          "memory_tip": "文化差异用 'be supposed to' 和 'It's considered polite/impolite'。建议用 'should' 和 'avoid V-ing'。记住'入乡随俗'，用这些句型来表达。",
+          "related": {
+            "prerequisite": "be supposed to 的用法，动名词作宾语，情态动词",
+            "next": "跨文化交际中的非语言行为，文化冲击应对"
+          }
+        },
+        {
+          "card_id": "10-04",
+          "full_id": "英语-九下-10-04",
+          "title": "易混词：custom vs tradition",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "custom 和 tradition 都指“习惯”或“传统”，但侧重点和范围有所不同。",
+          "core_points": [
+            "**custom** /'kʌstəm/：",
+            "  *含义*: n. 风俗，习惯（指一个社会、群体或个人长期养成的行为方式，可以是日常的，也可以是特定的）。",
+            "  *侧重*: 强调约定俗成的行为模式，可以是具体的，也可以是普遍的。范围相对较广，可以指个人习惯，也可以指社会风俗。",
+            "  *例句*: It's a local custom to have tea in the afternoon. (下午喝茶是当地的习俗。)",
+            "  *例句*: He has a custom of reading before bed. (他有睡前阅读的习惯。)",
+            "**tradition** /trə'dɪʃn/：",
+            "  *含义*: n. 传统（指代代相传的信仰、习俗、价值观、知识等，具有历史性和文化传承性）。",
+            "  *侧重*: 强调历史悠久、代代相传、具有文化意义和价值的习俗或信仰体系。范围更宏大，更具文化深度。",
+            "  *例句*: Celebrating Chinese New Year is a long-standing tradition. (庆祝中国新年是一个悠久的传统。)",
+            "  *例句*: This ceremony is an ancient tradition. (这个仪式是一个古老的传统。)"
+          ],
+          "why_explanation": "这两个词都描述了重复的行为模式，但区别在于其'深度'和'广度'。'custom' 更侧重于'约定俗成'的日常行为或群体行为，可以是短期的，也可以是长期的。而 'tradition' 则强调了'历史传承'和'文化价值'，通常指那些经过时间沉淀、具有深远意义的习俗。理解这种'日常'与'传承'的差异，有助于更准确地描述文化现象。",
+          "example": {
+            "question": "选择正确的词填空：\n1. It's a _____ (custom / tradition) for people to exchange gifts at Christmas.\n2. The company has a _____ (custom / tradition) of holding a party for its employees every year.",
+            "steps": [
+              "1. 圣诞节交换礼物是具有历史和文化意义的，所以用 'tradition'。",
+              "2. 公司每年举办派对是其内部长期养成的行为方式，所以用 'custom'。"
+            ],
+            "answer": "1. tradition\n2. custom"
+          },
+          "mistakes": [
+            {
+              "wrong": "Eating three meals a day is a tradition.",
+              "correct": "Eating three meals a day is a custom.",
+              "reason": "一日三餐是普遍的生活习惯，是社会风俗，而非具有深厚文化历史意义的传统。"
+            },
+            {
+              "wrong": "The Spring Festival is a Chinese custom.",
+              "correct": "The Spring Festival is a Chinese tradition.",
+              "reason": "春节是中国具有悠久历史和文化内涵的传统节日，用 'tradition' 更合适。"
+            }
+          ],
+          "memory_tip": "记住 'tradition' 有 'long' 的历史，'custom' 是日常的 'common' 习惯。'tradition' 像'传家宝'，'custom' 像'日常规矩'。",
+          "related": {
+            "prerequisite": "名词的基本含义",
+            "next": "habit, practice 等相关词汇辨析"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "11",
+      "unit_name": "Sad movies make me cry.",
+      "cards": [
+        {
+          "card_id": "11-01",
+          "full_id": "英语-九下-11-01",
+          "title": "词汇：情感与感受",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "本单元与情感、情绪以及描述感受相关的核心词汇。",
+          "core_points": [
+            "sad /sæd/ adj. 悲伤的 (Sad movies make me cry.)",
+            "happy /'hæpi/ adj. 快乐的 (I feel happy today.)",
+            "angry /'æŋɡri/ adj. 生气的 (He was angry at the news.)",
+            "excited /ɪk'saɪtɪd/ adj. 兴奋的 (I'm excited about the trip.)",
+            "exciting /ɪk'saɪtɪŋ/ adj. 令人兴奋的 (It was an exciting game.)",
+            "relaxed /rɪ'lækst/ adj. 放松的 (I feel relaxed after the massage.)",
+            "relaxing /rɪ'lækʃɪŋ/ adj. 令人放松的 (Listening to music is relaxing.)",
+            "stressed out 压力过大的 (I feel stressed out before exams.)",
+            "uncomfortable /ʌn'kʌmfərtəbl/ adj. 不舒服的 (I feel uncomfortable in this chair.)",
+            "annoyed /ə'nɔɪd/ adj. 恼怒的，烦恼的 (I was annoyed by the noise.)",
+            "annoying /ə'nɔɪɪŋ/ adj. 令人恼怒的，烦人的 (His habit is annoying.)",
+            "confused /kən'fjuːzd/ adj. 困惑的 (I'm confused about the instructions.)",
+            "confusing /kən'fjuːzɪŋ/ adj. 令人困惑的 (The instructions are confusing.)",
+            "embarrassed /ɪm'bærəst/ adj. 尴尬的 (I was embarrassed when I fell.)",
+            "embarrassing /ɪm'bærəsɪŋ/ adj. 令人尴尬的 (It was an embarrassing moment.)",
+            "frustrated /frʌ'streɪtɪd/ adj. 沮丧的 (He felt frustrated after failing.)",
+            "frustrating /frʌ'streɪtɪŋ/ adj. 令人沮丧的 (The situation is frustrating.)",
+            "inspired /ɪn'spaɪərd/ adj. 受到启发的 (I felt inspired by her speech.)",
+            "inspiring /ɪn'spaɪərɪŋ/ adj. 鼓舞人心的 (It was an inspiring story.)",
+            "scared /skeərd/ adj. 害怕的 (I'm scared of spiders.)",
+            "scary /'skeəri/ adj. 恐怖的 (That was a scary movie.)",
+            "make /meɪk/ v. 使，让 (Sad movies make me cry.)",
+            "cry /kraɪ/ v. 哭 (She started to cry.)",
+            "laugh /lɑːf/ v. 笑 (They laughed at his joke.)"
+          ],
+          "why_explanation": "这些词汇是描述人类情感和感受的基础，尤其强调了-ing和-ed形容词的区别。掌握它们能帮助学生准确表达自己和他人的情绪，并理解不同事物对情绪的影响。动词 'make' 的使役用法是本单元的重点，它连接了原因和结果，使表达更生动。",
+          "example": {
+            "question": "请用本单元词汇填空：\nThe _____ (令人兴奋的) news made everyone feel very _____ (兴奋的). But the long wait was very _____ (令人沮丧的), and some people became _____ (沮丧的).",
+            "steps": [
+              "第一个空修饰 'news'，表示令人兴奋的，选择 'exciting'。",
+              "第二个空修饰 'everyone' 的感受，表示感到兴奋的，选择 'excited'。",
+              "第三个空修饰 'wait'，表示令人沮丧的，选择 'frustrating'。",
+              "第四个空修饰 'people' 的感受，表示感到沮丧的，选择 'frustrated'。"
+            ],
+            "answer": "The exciting news made everyone feel very excited. But the long wait was very frustrating, and some people became frustrated."
+          },
+          "mistakes": [
+            {
+              "wrong": "I feel exciting about the party.",
+              "correct": "I feel excited about the party.",
+              "reason": "人感到兴奋用 'excited'，事物令人兴奋用 'exciting'。"
+            },
+            {
+              "wrong": "The movie is bored.",
+              "correct": "The movie is boring.",
+              "reason": "事物本身是 'boring' (令人无聊的)，人感到 'bored' (感到无聊的)。"
+            }
+          ],
+          "memory_tip": "记住 -ing 形容词修饰事物（令人……的），-ed 形容词修饰人（感到……的）。动词 'make' 像一个'魔法师'，让某人做某事或产生某种感觉。",
+          "related": {
+            "prerequisite": "形容词的-ing/-ed形式，基础动词",
+            "next": "情绪管理词汇，心理学相关表达"
+          }
+        },
+        {
+          "card_id": "11-02",
+          "full_id": "英语-九下-11-02",
+          "title": "语法：使役动词 make, let, have, help, get",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "使役动词表示“使役”或“让”某人做某事，或使某事发生。不同的使役动词有不同的用法和含义。",
+          "core_points": [
+            "**make** (强迫或导致)：",
+            "  *结构*: make + 宾语 + 动词原形 (使/让某人做某事)",
+            "  *例句*: Sad movies make me cry. (悲伤的电影让我哭泣。)",
+            "  *结构*: make + 宾语 + 形容词 (使某人/某物处于某种状态)",
+            "  *例句*: The news made him happy. (这个消息让他高兴。)",
+            "  *被动语态*: be made to do sth (被迫做某事)",
+            "  *例句*: He was made to work overtime. (他被迫加班。)",
+            "**let** (允许或不阻止)：",
+            "  *结构*: let + 宾语 + 动词原形 (让/允许某人做某事)",
+            "  *例句*: Let me help you. (让我帮你。)",
+            "  *例句*: My parents let me go out. (我父母让我出去。)",
+            "  *注意*: let 没有被动语态 'be let to do'，通常用 'be allowed to do' 替代。",
+            "**have** (安排或要求)：",
+            "  *结构*: have + 宾语 + 动词原形 (让/吩咐某人做某事)",
+            "  *例句*: I'll have my secretary call you. (我会让我的秘书给你打电话。)",
+            "  *结构*: have + 宾语 + 过去分词 (让某事被做)",
+            "  *例句*: I had my hair cut yesterday. (我昨天理发了。)",
+            "**help** (帮助)：",
+            "  *结构*: help + 宾语 + (to) do sth (帮助某人做某事，to 可省略)",
+            "  *例句*: I helped him (to) clean the room. (我帮他打扫了房间。)",
+            "  *结构*: help to do sth (有助于做某事)",
+            "  *例句*: Exercise helps to keep you healthy. (锻炼有助于你保持健康。)",
+            "**get** (说服或促使)：",
+            "  *结构*: get + 宾语 + to do sth (设法使/劝服某人做某事)",
+            "  *例句*: I got him to agree with my plan. (我说服他同意了我的计划。)",
+            "  *结构*: get + 宾语 + 过去分词 (让某事被做)",
+            "  *例句*: I need to get my car repaired. (我需要把我的车修好。)"
+          ],
+          "why_explanation": "使役动词是英语中表达因果关系和控制力的重要工具。它们不是简单的动词，而是通过其后接的宾语和宾语补足语（动词原形、不定式或过去分词）来表达'使役'的语义。不同的使役动词反映了不同的因果强度和方式：'make' 强调强制或直接导致；'let' 强调允许；'have' 强调安排或委托；'help' 强调辅助；'get' 强调说服或促成。理解这些词的语义差异和结构变化是掌握它们的关键。",
+          "example": {
+            "question": "用合适的使役动词填空：\n1. The teacher _____ (让/我们/读) the text aloud.\n2. She _____ (使/我/快乐) with her gift.\n3. I need to _____ (让/我的自行车/修理).\n4. Can you _____ (帮助/我/搬) this box?",
+            "steps": [
+              "1. 老师让学生读，用 'made us read' (make + 宾语 + 动词原形)。",
+              "2. 礼物使她高兴，用 'made me happy' (make + 宾语 + 形容词)。",
+              "3. 让自行车被修理，用 'get my bike repaired' (get + 宾语 + 过去分词)。",
+              "4. 帮助搬箱子，用 'help me carry' (help + 宾语 + 动词原形，to 可省略)。"
+            ],
+            "answer": "1. made us read\n2. made me happy\n3. get my bike repaired\n4. help me carry"
+          },
+          "mistakes": [
+            {
+              "wrong": "My mother makes me to clean my room.",
+              "correct": "My mother makes me clean my room.",
+              "reason": "'make' 后接宾语补足语动词原形，不带 'to'。"
+            },
+            {
+              "wrong": "He let us to go out.",
+              "correct": "He let us go out.",
+              "reason": "'let' 后接宾语补足语动词原形，不带 'to'。"
+            },
+            {
+              "wrong": "I had my car to wash.",
+              "correct": "I had my car washed.",
+              "reason": "'have + 宾语 + 过去分词' 表示让某事被做，不是让宾语去做某事。"
+            },
+            {
+              "wrong": "I got him agree with me.",
+              "correct": "I got him to agree with me.",
+              "reason": "'get' 后接宾语补足语动词不定式，需要带 'to'。"
+            }
+          ],
+          "memory_tip": "使役动词：'make, let, have' 后跟动原，'get' 后跟 'to do'。'help' 随意带 'to'。记住 'make' 和 'let' 是'光杆司令'，'get' 是'带to小弟'。",
+          "related": {
+            "prerequisite": "动词不定式，动词原形，动词过去分词，被动语态",
+            "next": "感官动词，系动词"
+          }
+        },
+        {
+          "card_id": "11-03",
+          "full_id": "英语-九下-11-03",
+          "title": "句型：表达感受与影响",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元学习如何表达自己的感受，以及事物或行为对人的情绪产生的影响。",
+          "core_points": [
+            "**表达感受**：",
+            "  *I feel happy/sad/excited/relaxed/stressed out...* (我感到快乐/悲伤/兴奋/放松/压力大……)",
+            "  *I'm bored with...* (我对……感到厌烦。)",
+            "  *I'm annoyed by...* (我被……惹恼了。)",
+            "  *I'm confused about...* (我对……感到困惑。)",
+            "**表达影响**：",
+            "  *Sad movies make me cry.* (悲伤的电影让我哭。)",
+            "  *Exciting games make me feel excited.* (令人兴奋的游戏让我感到兴奋。)",
+            "  *Loud noise makes me annoyed.* (大声的噪音让我烦恼。)",
+            "  *It makes me want to...* (它让我想……)",
+            "  *What makes you feel...?* (什么让你感到……？)"
+          ],
+          "why_explanation": "这些句型是日常生活中表达情感和分析因果关系的关键。'I feel...' 结构直接表达主观感受。而使役动词 'make' 的句型则用于描述外部事物如何引发这些感受或行为，清晰地建立了因果关系。掌握这些句型能帮助学生更准确、生动地表达自己的内心世界和对外部世界的反应。",
+          "example": {
+            "question": "根据情境完成对话：\nA: Why do you like to listen to music?\nB: Because it _____ (使/我/放松). When I feel _____ (压力过大), music always _____ (使/我/快乐) and helps me to _____ (冷静下来).",
+            "steps": [
+              "B处第一个空表达音乐使人放松，用 'makes me relaxed'。",
+              "B处第二个空表达感到压力大，用 'stressed out'。",
+              "B处第三个空表达音乐使人快乐，用 'makes me happy'。",
+              "B处第四个空表达帮助冷静下来，用 'calm down'。"
+            ],
+            "answer": "A: Why do you like to listen to music?\nB: Because it makes me relaxed. When I feel stressed out, music always makes me happy and helps me to calm down."
+          },
+          "mistakes": [
+            {
+              "wrong": "The news made him exciting.",
+              "correct": "The news made him excited.",
+              "reason": "'make sb + adj' 结构中，形容词描述人的感受，用-ed形式形容词。"
+            },
+            {
+              "wrong": "What make you angry?",
+              "correct": "What makes you angry?",
+              "reason": "疑问词 'What' 作主语时，谓语动词用单三形式 'makes'。"
+            }
+          ],
+          "memory_tip": "感受用 'I feel + -ed形容词'。影响用 'sth makes me + 动原/形容词'。记住 'make' 是个'神奇动词'，能让事情发生或改变感觉。",
+          "related": {
+            "prerequisite": "形容词-ing/-ed形式，使役动词 'make' 的用法",
+            "next": "更复杂的因果关系表达，情绪调节策略"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "12",
+      "unit_name": "Life on the farm.",
+      "cards": [
+        {
+          "card_id": "12-01",
+          "full_id": "英语-九下-12-01",
+          "title": "词汇：农场生活与乡村",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "本单元与农场生活、乡村环境、动植物以及日常生活相关的核心词汇。",
+          "core_points": [
+            "farm /fɑːrm/ n. 农场 (Life on the farm is peaceful.)",
+            "farmer /'fɑːrmər/ n. 农民 (Farmers work hard in the fields.)",
+            "countryside /'kʌntrisaɪd/ n. 乡村，农村 (I love the quiet countryside.)",
+            "city /'sɪti/ n. 城市 (Life in the city is busy.)",
+            "village /'vɪlɪdʒ/ n. 村庄 (He lives in a small village.)",
+            "animal /'ænɪml/ n. 动物 (Many animals live on the farm.)",
+            "plant /plænt/ n. 植物；v. 种植 (Farmers plant crops.)",
+            "crop /krɒp/ n. 农作物 (Wheat is a common crop.)",
+            "field /fiːld/ n. 田地，田野 (The cows are in the field.)",
+            "cow /kaʊ/ n. 奶牛 (Cows produce milk.)",
+            "sheep /ʃiːp/ n. 绵羊 (单复数同形) (There are many sheep in the pasture.)",
+            "horse /hɔːrs/ n. 马 (Horses are used for riding.)",
+            "chicken /'tʃɪkɪn/ n. 鸡 (Chickens lay eggs.)",
+            "duck /dʌk/ n. 鸭子 (Ducks swim in the pond.)",
+            "pig /pɪɡ/ n. 猪 (Pigs are raised for meat.)",
+            "goat /ɡəʊt/ n. 山羊 (Goats eat grass.)",
+            "fresh /freʃ/ adj. 新鲜的 (fresh air, fresh vegetables)",
+            "healthy /'helθi/ adj. 健康的 (A healthy diet is important.)",
+            "peaceful /'piːsfl/ adj. 宁静的，和平的 (The village is very peaceful.)",
+            "noisy /'nɔɪzi/ adj. 吵闹的 (The city is noisy.)",
+            "busy /'bɪzi/ adj. 忙碌的 (Farmers are always busy.)",
+            "simple /'sɪmpl/ adj. 简单的 (They live a simple life.)",
+            "complicated /'kɒmplɪkeɪtɪd/ adj. 复杂的 (City life can be complicated.)",
+            "compared with 与……相比 (Compared with the city, the countryside is quieter.)"
+          ],
+          "why_explanation": "这些词汇是描述农场和乡村生活场景的基础。它们涵盖了地理环境、动植物种类、以及乡村与城市生活的对比形容词。掌握这些词汇能帮助学生讨论不同的生活方式，表达对乡村或城市生活的偏好。",
+          "example": {
+            "question": "请用本单元词汇填空：\nLife in the _____ (乡村) is usually more _____ (宁静的) than in the _____ (城市). Farmers raise many _____ (动物) like _____ (奶牛) and _____ (鸡), and they plant various _____ (农作物) in the _____ (田地).",
+            "steps": [
+              "第一个空需要名词，表示乡村，选择 'countryside'。",
+              "第二个空需要形容词，表示宁静的，选择 'peaceful'。",
+              "第三个空需要名词，表示城市，选择 'city'。",
+              "第四个空需要名词，表示动物，选择 'animals'。",
+              "第五个空需要名词，表示奶牛，选择 'cows'。",
+              "第六个空需要名词，表示鸡，选择 'chickens'。",
+              "第七个空需要名词，表示农作物，选择 'crops'。",
+              "第八个空需要名词，表示田地，选择 'fields'。"
+            ],
+            "answer": "Life in the countryside is usually more peaceful than in the city. Farmers raise many animals like cows and chickens, and they plant various crops in the fields."
+          },
+          "mistakes": [
+            {
+              "wrong": "The sheep are grazing in the field.",
+              "correct": "The sheep are grazing in the field.",
+              "reason": "'sheep' 的单复数同形，谓语动词根据实际数量来决定。"
+            },
+            {
+              "wrong": "The country is quiet.",
+              "correct": "The countryside is quiet. (或 The country is quiet.)",
+              "reason": "'country' 可指国家，也可指乡村。指乡村时，'countryside' 更常用且明确。说 'The country is quiet' 在语境明确时也对。"
+            }
+          ],
+          "memory_tip": "将动物词汇 'cow, sheep, horse, chicken, duck, pig, goat' 联想成一个农场场景。将 'countryside, peaceful, fresh, simple' 与 'city, noisy, busy, complicated' 进行对比记忆。记住 'sheep' 单复数一样。",
+          "related": {
+            "prerequisite": "基础名词和形容词，比较级和最高级",
+            "next": "农业生产词汇，生态环境词汇"
+          }
+        },
+        {
+          "card_id": "12-02",
+          "full_id": "英语-九下-12-02",
+          "title": "语法：形容词和副词的比较级与最高级（复习与扩展）",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "形容词和副词的比较级用于比较两者，最高级用于比较三者或三者以上。",
+          "core_points": [
+            "**比较级**：",
+            "  *构成*: 单音节词或部分双音节词 + -er (如 taller, faster)；多音节词或部分双音节词前加 more (如 more beautiful, more carefully)。",
+            "  *句型*: A + be/V + 比较级 + than + B (A比B更……)",
+            "  *例句*: The city is noisier than the countryside. (城市比乡村更吵闹。)",
+            "  *例句*: He runs faster than me. (他跑得比我快。)",
+            "  *特殊变化*: good/well → better, bad/badly → worse, many/much → more, little → less, far → farther/further。",
+            "**最高级**：",
+            "  *构成*: 单音节词或部分双音节词 + -est (如 the tallest, the fastest)；多音节词或部分双音节词前加 most (如 the most beautiful, the most carefully)。",
+            "  *句型*: A + be/V + the + 最高级 + (in/of...) (A是……中最……的)",
+            "  *例句*: This is the most interesting book I've ever read. (这是我读过的最有趣的书。)",
+            "  *例句*: He is the tallest student in our class. (他是我们班最高的学生。)",
+            "**'the more...the more...' 结构**：",
+            "  *含义*: 越……就越……。",
+            "  *结构*: The + 比较级 + (主谓), the + 比较级 + (主谓)",
+            "  *例句*: The harder you work, the more progress you will make. (你越努力，进步就越大。)",
+            "  *例句*: The more you read, the more you learn. (你读得越多，学得越多。)"
+          ],
+          "why_explanation": "比较级和最高级是英语中表达数量、程度差异和最高等级的基础。它们通过词形变化或添加 'more/most' 来实现。'than' 作为比较级连接词，明确了比较的对象。'the' 在最高级前，强调了其独一无二的最高地位。'the more...the more...' 结构则通过两个比较级并列，表达了事物之间相互促进或相互影响的递进关系，体现了英语表达的严谨和逻辑性。",
+          "example": {
+            "question": "用比较级或最高级填空：\n1. My sister is _____ (tall) than me.\n2. This is _____ (interesting) book in the library.\n3. _____ (early) you start, _____ (good) it will be.",
+            "steps": [
+              "1. 比较两者，用 'tall' 的比较级 'taller'。",
+              "2. 比较三者或以上，用 'interesting' 的最高级 'most interesting'，前面加 'the'。",
+              "3. 越早越好，用 'the...the...' 结构，'early' 比较级 'earlier'，'good' 比较级 'better'。"
+            ],
+            "answer": "1. taller\n2. the most interesting\n3. The earlier you start, the better it will be."
+          },
+          "mistakes": [
+            {
+              "wrong": "He runs more fast than me.",
+              "correct": "He runs faster than me.",
+              "reason": "'fast' 是单音节副词，比较级是 'faster'，而不是 'more fast'。"
+            },
+            {
+              "wrong": "This is a most beautiful flower.",
+              "correct": "This is the most beautiful flower.",
+              "reason": "最高级前通常要加定冠词 'the'。"
+            },
+            {
+              "wrong": "More you learn, more you know.",
+              "correct": "The more you learn, the more you know.",
+              "reason": "'the more...the more...' 结构中，两个比较级前都要加 'the'。"
+            }
+          ],
+          "memory_tip": "比较级 '-er/more...than' (两人/物)，最高级 'the -est/most...in/of...' (三或多)。'the more...the more...' 像跷跷板，一边高另一边也高。",
+          "related": {
+            "prerequisite": "形容词和副词的基本形式，数词",
+            "next": "as...as..., not as...as... 结构，比较级的修饰语"
+          }
+        },
+        {
+          "card_id": "12-03",
+          "full_id": "英语-九下-12-03",
+          "title": "句型：比较不同生活方式",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元学习如何比较乡村和城市生活，表达两者的异同和个人偏好。",
+          "core_points": [
+            "**比较异同**：",
+            "  *Life in the countryside is more peaceful than in the city.* (乡村生活比城市更宁静。)",
+            "  *The city is noisier than the village.* (城市比村庄更吵闹。)",
+            "  *Compared with the city, the countryside is quieter/healthier.* (与城市相比，乡村更安静/健康。)",
+            "  *Both city life and farm life have their advantages and disadvantages.* (城市生活和农场生活都有各自的优缺点。)",
+            "  *There are more opportunities in the city than in the countryside.* (城市的机会比乡村多。)",
+            "**表达偏好**：",
+            "  *I prefer living in the countryside to living in the city.* (我更喜欢乡村生活而不是城市生活。)",
+            "  *I like... better than...* (我喜欢……胜过……)",
+            "  *I think... is the best choice for me.* (我认为……是我最好的选择。)",
+            "  *I find... more interesting/relaxing.* (我发现……更有趣/放松。)"
+          ],
+          "why_explanation": "这些句型是进行对比分析和表达个人观点的基础。比较级和最高级结构直接用于指出差异和最高等级。'Compared with...' 是一个常用的引入比较的短语。而 'prefer...to...' 和 'like...better than...' 则提供了表达个人偏好的直接方式。掌握这些句型能帮助学生清晰地阐述不同生活方式的特点，并合理地表达自己的选择。",
+          "example": {
+            "question": "根据情境完成对话：\nA: Do you prefer living in the city or the countryside?\nB: I prefer living in the countryside ____ (to/living) in the city. Because the air there is _____ (fresh) and the life is _____ (peaceful).",
+            "steps": [
+              "B处表达偏好，用 'prefer...to...' 结构。",
+              "B处描述原因，用形容词 'fresher' 和 'more peaceful' (如果只比较两者，用比较级；如果只是描述，用原级亦可，但这里是比较，所以用比较级)。"
+            ],
+            "answer": "A: Do you prefer living in the city or the countryside?\nB: I prefer living in the countryside to living in the city. Because the air there is fresher and the life is more peaceful."
+          },
+          "mistakes": [
+            {
+              "wrong": "I prefer to live in the city than in the countryside.",
+              "correct": "I prefer living in the city to living in the countryside. (或 I prefer to live in the city rather than in the countryside.)",
+              "reason": "'prefer...to...' 结构中，'to' 是介词，后接名词或动名词。如果接不定式，则用 'prefer to do... rather than do...'。"
+            },
+            {
+              "wrong": "The city has more opportunities than countryside.",
+              "correct": "The city has more opportunities than the countryside.",
+              "reason": "特指'乡村'时，通常前面加定冠词 'the'。"
+            }
+          ],
+          "memory_tip": "比较用 'more/less...than'，或 'the most/least...'。偏好用 'prefer...to...' 或 'like...better than...'。记住 '乡村是peaceful，城市是noisy'。",
+          "related": {
+            "prerequisite": "形容词和副词的比较级和最高级，介词 'to' 的用法",
+            "next": "议论文写作，观点论证"
+          }
+        }
+      ]
+    }
+  ]
+}

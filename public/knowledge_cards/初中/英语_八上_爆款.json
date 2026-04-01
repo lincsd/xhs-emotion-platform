@@ -1,0 +1,1577 @@
+{
+  "subject": "英语",
+  "grade": "八年级",
+  "semester": "上册",
+  "textbook": "人教版",
+  "grade_short": "八上",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片（八年级上册全知识点覆盖版）",
+  "units": [
+    {
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [
+        {
+          "card_id": "T1-01",
+          "full_id": "英语-八上-T1-01",
+          "title": "🆘太容易混淆了！too vs either，一卡搞定！",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "too和either都表示“也”，但too用于肯定句，either用于否定句。",
+          "core_points": [
+            "too 放在肯定句句末，表示“也，又”，前面常有逗号。",
+            "either 放在否定句句末，表示“也（不）”，前面常有逗号。",
+            "两者都不能用于疑问句中表示“也”。",
+            "记忆关键：否定句用either，肯定句用too。"
+          ],
+          "why_explanation": "中文的“也”不分肯定否定，导致学生容易直接用too来表达否定句中的“也”。",
+          "example": {
+            "question": "选词填空：I like English. My brother likes it, ______. I don't like math. My sister doesn't like it, ______.",
+            "steps": [
+              "第一句是肯定句，所以用too。",
+              "第二句是否定句（doesn't like），所以用either。"
+            ],
+            "answer": "too; either"
+          },
+          "mistakes": [
+            {
+              "wrong": "I don't like apples, too.",
+              "correct": "I don't like apples, either.",
+              "reason": "否定句中表示“也（不）”应使用either。"
+            },
+            {
+              "wrong": "She can sing, either.",
+              "correct": "She can sing, too.",
+              "reason": "肯定句中表示“也”应使用too。"
+            }
+          ],
+          "memory_tip": "肯定too，否定either，记住口诀不纠结！",
+          "emotion_hook": "每次都错？别再让too和either把你绕晕了！"
+        },
+        {
+          "card_id": "T1-02",
+          "full_id": "英语-八上-T1-02",
+          "title": "🤯make vs do？做饭是make还是do？一秒辨清！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "make通常指从无到有地“制作、创造”，do通常指“做、进行”一个动作或活动。",
+          "core_points": [
+            "make：强调创造、制作、建造或引起某种结果（如 make a cake, make a noise, make friends）。",
+            "do：强调进行某项活动、任务或工作（如 do homework, do chores, do exercise）。",
+            "对于“做饭”，通常用 make a meal/dinner 或 cook。",
+            "固定搭配是记忆重点。"
+          ],
+          "why_explanation": "中文的“做”涵盖范围太广，学生容易混淆make和do在具体语境中的选择。",
+          "example": {
+            "question": "选词填空：Let's go ______ some shopping. Can you ______ a cup of tea for me?",
+            "steps": [
+              "shopping是活动，所以用do。",
+              "cup of tea是制作饮品，所以用make。"
+            ],
+            "answer": "do; make"
+          },
+          "mistakes": [
+            {
+              "wrong": "I need to make my homework.",
+              "correct": "I need to do my homework.",
+              "reason": "homework是任务，用do。"
+            },
+            {
+              "wrong": "She does a beautiful dress.",
+              "correct": "She makes a beautiful dress.",
+              "reason": "dress是制作出来的物品，用make。"
+            }
+          ],
+          "memory_tip": "造物用make，活动用do，固定搭配是王道！",
+          "emotion_hook": "是不是每次都傻傻分不清make和do？今天彻底搞明白！"
+        },
+        {
+          "card_id": "T1-03",
+          "full_id": "英语-八上-T1-03",
+          "title": "😨sick vs ill vs sore，身体不适怎么说才地道？",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "sick, ill, sore都表示身体不适，但侧重点和用法不同。",
+          "core_points": [
+            "sick：常指“恶心，想吐”，也可泛指“生病”，美国英语中更常用作“生病的”。",
+            "ill：主要指“生病的，不健康的”，英国英语中更常用，比sick更正式。",
+            "sore：特指身体某部位因炎症、劳损等引起的“疼痛的，酸痛的”，常与身体部位连用 (e.g., sore throat, sore arm)。",
+            "feel sick 表示“想吐”。"
+          ],
+          "why_explanation": "中文的“疼、不舒服”可以通用，但在英语中需要区分具体症状和语境。",
+          "example": {
+            "question": "选词填空：I have a ______ throat. She felt ______ after eating too much. My grandma is seriously ______ in hospital.",
+            "steps": [
+              "throat是身体部位，所以用sore。",
+              "吃太多想吐，用sick。",
+              "在医院生病，ill更正式。"
+            ],
+            "answer": "sore; sick; ill"
+          },
+          "mistakes": [
+            {
+              "wrong": "I have a ill throat.",
+              "correct": "I have a sore throat.",
+              "reason": "特指喉咙痛用sore。"
+            },
+            {
+              "wrong": "He is sore today.",
+              "correct": "He is sick/ill today.",
+              "reason": "泛指生病用sick/ill。"
+            }
+          ],
+          "memory_tip": "想吐用sick，生病ill，部位疼痛sore记牢！",
+          "emotion_hook": "别再把生病说错了！学会这三词，你的英语瞬间高级！"
+        },
+        {
+          "card_id": "T1-04",
+          "full_id": "英语-八上-T1-04",
+          "title": "⏰for vs since？现在完成时绝配，但你用对了吗？",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "for和since都用于现在完成时，表示动作持续的时间，但用法不同。",
+          "core_points": [
+            "for + 一段时间（period of time），表示“……达多久之久”。",
+            "since + 一个时间点（point of time），表示“自……以来”。",
+            "for回答how long的问题，since回答when did it start的问题。",
+            "since后面也可以接从句，表示“自从……（发生）以来”。"
+          ],
+          "why_explanation": "中文里“持续了三年”和“从2020年开始”都能表达时间，但英语必须区分是时间段还是时间点。",
+          "example": {
+            "question": "选词填空：I have lived here ______ 2010. She has been a teacher ______ ten years.",
+            "steps": [
+              "2010是一个时间点，用since。",
+              "ten years是一段时间，用for。"
+            ],
+            "answer": "since; for"
+          },
+          "mistakes": [
+            {
+              "wrong": "He has studied English since three years.",
+              "correct": "He has studied English for three years.",
+              "reason": "three years是时间段，用for。"
+            },
+            {
+              "wrong": "They have been friends for they were kids.",
+              "correct": "They have been friends since they were kids.",
+              "reason": "they were kids是一个时间点（从那时起），用since。"
+            }
+          ],
+          "memory_tip": "时间段用for，时间点用since，现在完成时是标配！",
+          "emotion_hook": "现在完成时最爱考的for和since，你真的搞懂了吗？"
+        },
+        {
+          "card_id": "T1-05",
+          "full_id": "英语-八上-T1-05",
+          "title": "🧐invent vs discover？发明和发现，区别大着呢！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "invent指“发明”前所未有的新事物，discover指“发现”本来就存在但未被知晓的事物。",
+          "core_points": [
+            "invent：创造出以前没有的东西（如 telephone, light bulb）。",
+            "discover：找到已经存在但人们不知道的东西（如 America, gravity）。",
+            "发明是创造，发现是找到。",
+            "两者常用于被动语态。"
+          ],
+          "why_explanation": "中文里“发明了新大陆”和“发现了新手机”听起来都像“找到”，容易混淆其本质差异。",
+          "example": {
+            "question": "选词填空：Who ______ the telephone? Columbus ______ America in 1492.",
+            "steps": [
+              "电话是前所未有的新事物，用invent。",
+              "美洲大陆是本来就存在的，用discover。"
+            ],
+            "answer": "invented; discovered"
+          },
+          "mistakes": [
+            {
+              "wrong": "Penicillin was invented by Alexander Fleming.",
+              "correct": "Penicillin was discovered by Alexander Fleming.",
+              "reason": "青霉素是自然存在的，是被“发现”的，而非“发明”的。"
+            },
+            {
+              "wrong": "The wheel was discovered thousands of years ago.",
+              "correct": "The wheel was invented thousands of years ago.",
+              "reason": "轮子是人类“发明”的工具。"
+            }
+          ],
+          "memory_tip": "无中生有invent，有物发现discover！",
+          "emotion_hook": "历史事件总是考invent/discover？别再搞混了，一句话帮你理清！"
+        },
+        {
+          "card_id": "T1-06",
+          "full_id": "英语-八上-T1-06",
+          "title": "🤔many vs much？可数不可数，别再傻傻分不清！",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "many用于修饰可数名词复数，much用于修饰不可数名词，都表示“很多”。",
+          "core_points": [
+            "many + 可数名词复数 (e.g., many books, many friends)。",
+            "much + 不可数名词 (e.g., much water, much money)。",
+            "两者常用于疑问句和否定句中，肯定句中更常用a lot of/lots of。",
+            "how many/how much 分别提问可数/不可数名词的数量。"
+          ],
+          "why_explanation": "中文的“很多”不区分可数不可数，导致学生在英语中直接套用。",
+          "example": {
+            "question": "选词填空：How ______ students are there in your class? I don't have ______ time.",
+            "steps": [
+              "students是可数名词复数，用many。",
+              "time是不可数名词，用much。"
+            ],
+            "answer": "many; much"
+          },
+          "mistakes": [
+            {
+              "wrong": "There isn't many water in the bottle.",
+              "correct": "There isn't much water in the bottle.",
+              "reason": "water是不可数名词，用much。"
+            },
+            {
+              "wrong": "How much apples do you want?",
+              "correct": "How many apples do you want?",
+              "reason": "apples是可数名词复数，用many。"
+            }
+          ],
+          "memory_tip": "可数many，不可数much，量词搭配要记住！",
+          "emotion_hook": "别让“多”变成你的英语痛点！many和much的终极区分法！"
+        },
+        {
+          "card_id": "T1-07",
+          "full_id": "英语-八上-T1-07",
+          "title": "🚦a few vs a little？“一些”也有可数不可数！",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "a few用于修饰可数名词复数，a little用于修饰不可数名词，都表示“一些，少量”。",
+          "core_points": [
+            "a few + 可数名词复数 (e.g., a few friends, a few books)。",
+            "a little + 不可数名词 (e.g., a little milk, a little money)。",
+            "few/little（不带a）表示“几乎没有”，带有否定含义。",
+            "区分a few/a little和few/little的肯定/否定语气。"
+          ],
+          "why_explanation": "中文的“一些”不区分可数不可数，导致学生在英语中直接套用。同时，a的有无会改变含义。",
+          "example": {
+            "question": "选词填空：I have ______ close friends. Can I have ______ water, please?",
+            "steps": [
+              "friends是可数名词复数，用a few。",
+              "water是不可数名词，用a little。"
+            ],
+            "answer": "a few; a little"
+          },
+          "mistakes": [
+            {
+              "wrong": "There is a few milk in the fridge.",
+              "correct": "There is a little milk in the fridge.",
+              "reason": "milk是不可数名词，用a little。"
+            },
+            {
+              "wrong": "I have little questions for you. (表示有一些问题)",
+              "correct": "I have a few questions for you.",
+              "reason": "little questions表示“几乎没有问题”，a few questions表示“有一些问题”。"
+            }
+          ],
+          "memory_tip": "可数a few，不可数a little，带a表肯定，不带a表否定！",
+          "emotion_hook": "“一点点”英语怎么说？a few和a little的秘密，你敢挑战吗？"
+        },
+        {
+          "card_id": "T1-08",
+          "full_id": "英语-八上-T1-08",
+          "title": "🤯should vs must vs have to，哪个才是“必须”？",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "should, must, have to都表示“应该”或“必须”，但语气和强制性不同。",
+          "core_points": [
+            "should：表示“应该”，语气较弱，是建议或义务，不带强制性。",
+            "must：表示“必须”，语气最强，是命令、规定或主观上的强烈要求。",
+            "have to：表示“不得不”，语气强，是客观环境造成的义务或必要性。",
+            "must和have to在否定句中含义不同：mustn't (禁止)，don't have to (不必)。"
+          ],
+          "why_explanation": "中文的“应该”和“必须”有时可以互换，但在英语中这三个词的强制程度和主客观性有明显差异。",
+          "example": {
+            "question": "选词填空：You ______ finish your homework before watching TV. You ______ wear a uniform at school. You ______ eat more vegetables to be healthy.",
+            "steps": [
+              "作业必须完成，是规定或强制，用must。",
+              "校服是学校规定，客观义务，用have to。",
+              "多吃蔬菜是建议，用should。"
+            ],
+            "answer": "must; have to; should"
+          },
+          "mistakes": [
+            {
+              "wrong": "You mustn't come to school tomorrow. (表示不必来)",
+              "correct": "You don't have to come to school tomorrow.",
+              "reason": "mustn't表示禁止，don't have to表示不必。"
+            },
+            {
+              "wrong": "I have to get up early every day, but I don't want to.",
+              "correct": "I must get up early every day, but I don't want to.",
+              "reason": "此处表达主观上的“必须”，用must更合适，但have to也可以表示客观条件下的“不得不”。"
+            }
+          ],
+          "memory_tip": "建议should，主观must，客观have to，否定更不同！",
+          "emotion_hook": "“应该”和“必须”傻傻分不清？一卡帮你分清should, must, have to！"
+        },
+        {
+          "card_id": "T1-09",
+          "full_id": "英语-八上-T1-09",
+          "title": "🚨will vs be going to？未来时态，用法大不同！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "will和be going to都表示将来，但will侧重主观意愿、预测和临时决定，be going to侧重计划、意图和有迹象的预测。",
+          "core_points": [
+            "will：表示临时决定、意愿、对未来的预测（无证据）、提议、请求。",
+            "be going to：表示事先计划好的事情、意图、有明显迹象的预测。",
+            "当强调“将要发生”且有明显证据时，用be going to。",
+            "当强调“愿意做某事”或“临时决定”时，用will。",
+            "present continuous for future：表示近期已安排好的具体计划（常用在U3）。"
+          ],
+          "why_explanation": "中文“将要”不区分主观意愿和客观计划，导致学生混淆will和be going to。",
+          "example": {
+            "question": "选词填空：Look at those dark clouds! It ______ rain. I think I ______ buy a new phone tomorrow.",
+            "steps": [
+              "有乌云是下雨的迹象，用be going to。",
+              "买手机是个人计划，但更侧重意图，用be going to。若强调临时决定，用will也可。"
+            ],
+            "answer": "is going to; am going to (or will)"
+          },
+          "mistakes": [
+            {
+              "wrong": "I'm hungry. I'm going to make a sandwich. (临时决定)",
+              "correct": "I'm hungry. I'll make a sandwich.",
+              "reason": "临时决定用will。"
+            },
+            {
+              "wrong": "My sister will have a baby in May. (已有计划)",
+              "correct": "My sister is going to have a baby in May.",
+              "reason": "怀孕生子是确定计划，用be going to。"
+            }
+          ],
+          "memory_tip": "临时will，计划going to，迹象going to，意愿will！",
+          "emotion_hook": "未来时态老是错？will和be going to的秘密，你掌握了吗？"
+        },
+        {
+          "card_id": "T1-10",
+          "full_id": "英语-八上-T1-10",
+          "title": "🤫say vs tell？说和告诉，用法天差地别！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "say和tell都表示“说”，但say侧重于说话内容本身，tell侧重于“告诉某人某事”。",
+          "core_points": [
+            "say：后面直接接说话内容，或用to sb引导听话人 (e.g., say 'Hello', say to me)。",
+            "tell：后面通常直接接听话人，再接说话内容或宾语从句 (e.g., tell me a story, tell him that...)。",
+            "tell可以用于固定搭配如 tell a lie, tell the truth, tell a story。",
+            "say不能直接接双宾语，tell可以。"
+          ],
+          "why_explanation": "中文里“说”和“告诉”可以互换，但在英语中say和tell的句式结构和侧重点完全不同。",
+          "example": {
+            "question": "选词填空：He ______ that he was tired. Please ______ me your name.",
+            "steps": [
+              "后面是说话内容，用say。",
+              "后面直接接听话人me，用tell。"
+            ],
+            "answer": "said; tell"
+          },
+          "mistakes": [
+            {
+              "wrong": "She said me a secret.",
+              "correct": "She told me a secret. / She said a secret to me.",
+              "reason": "say不能直接接双宾语，tell可以。"
+            },
+            {
+              "wrong": "He told 'Good morning'.",
+              "correct": "He said 'Good morning'.",
+              "reason": "强调说话内容用say。"
+            }
+          ],
+          "memory_tip": "说内容用say，告诉人tell，固定搭配要背熟！",
+          "emotion_hook": "“说”和“告诉”总是分不清？say和tell的终极秘诀，让你瞬间变学霸！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T2",
+      "unit_name": "发音挑战卡",
+      "cards": [
+        {
+          "card_id": "T2-01",
+          "full_id": "英语-八上-T2-01",
+          "title": "🗣️-ed 过去式发音挑战：/t/, /d/, /ɪd/，你分对了吗？",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "规则动词过去式和过去分词的-ed结尾有三种发音：/t/, /d/, /ɪd/。",
+          "core_points": [
+            "发音为 /t/：动词原形以清辅音（/p/, /k/, /f/, /s/, /ʃ/, /tʃ/）结尾。",
+            "发音为 /d/：动词原形以浊辅音（/b/, /g/, /v/, /z/, /ʒ/, /dʒ/, /m/, /n/, /ŋ/, /l/, /r/）或元音结尾。",
+            "发音为 /ɪd/：动词原形以 /t/ 或 /d/ 结尾。",
+            "记忆诀窍：清清浊浊，t/d变id。"
+          ],
+          "why_explanation": "中文没有类似的音变规则，学生容易忽视-ed发音的多样性。",
+          "example": {
+            "question": "判断以下单词-ed的发音：worked, played, wanted",
+            "steps": [
+              "worked: 原形work以/k/结尾（清辅音），发/t/。",
+              "played: 原形play以/eɪ/结尾（元音），发/d/。",
+              "wanted: 原形want以/t/结尾，发/ɪd/。"
+            ],
+            "answer": "worked /t/, played /d/, wanted /ɪd/"
+          },
+          "pronunciation_tip": "多听多模仿，特别注意清浊辅音的区分，以及/t/, /d/结尾的特殊情况。",
+          "emotion_hook": "你的-ed发音是不是总被嘲笑？这卡片帮你告别“中式英语”！"
+        },
+        {
+          "card_id": "T2-02",
+          "full_id": "英语-八上-T2-02",
+          "title": "🤫这些单词有“无声”的秘密！发音挑战：silent letters",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "英语中有些单词含有不发音的字母（silent letters），掌握它们能让发音更地道。",
+          "core_points": [
+            "silent k: 在kn-组合中，k不发音 (e.g., know, knife, knock)。",
+            "silent w: 在wr-组合中，w不发音 (e.g., write, wrong, answer)。",
+            "silent l: 在-alf, -alk, -ould组合中，l不发音 (e.g., half, walk, talk, should, could)。",
+            "silent b: 在mb-组合中，b不发音 (e.g., comb, climb, thumb)。",
+            "silent h: 在一些单词中h不发音 (e.g., hour, honest, ghost)。",
+            "silent t: 在一些单词中t不发音 (e.g., listen, often, castle)。"
+          ],
+          "why_explanation": "英语拼写和发音不完全对应，学生容易按照拼写来发音，导致错误。",
+          "example": {
+            "question": "指出以下单词中的不发音字母：know, climb, should, listen, honest",
+            "steps": [
+              "know: k不发音。",
+              "climb: b不发音。",
+              "should: l不发音。",
+              "listen: t不发音。",
+              "honest: h不发音。"
+            ],
+            "answer": "know (k), climb (b), should (l), listen (t), honest (h)"
+          },
+          "pronunciation_tip": "遇到不熟悉的单词，多查字典听发音，特别留意词首和词尾的特殊字母组合。",
+          "emotion_hook": "发音总是不准？原来是这些“隐形字母”在捣鬼！"
+        },
+        {
+          "card_id": "T2-03",
+          "full_id": "英语-八上-T2-03",
+          "title": "👂th-音挑战：/θ/ vs /ð/，到底哪个是清音？",
+          "type": "发音挑战卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "th有两个不同的发音：清辅音/θ/和浊辅音/ð/。",
+          "core_points": [
+            "/θ/：发音时舌尖轻触上齿，气流从舌齿间流出，声带不振动（清音）。例如：think, three, both, math。",
+            "/ð/：发音时舌尖轻触上齿，气流从舌齿间流出，声带振动（浊音）。例如：this, that, mother, with。",
+            "通常，词首的th多为/ð/（冠词、代词），词尾的th多为/θ/。",
+            "练习时用手摸喉咙感受声带是否振动。"
+          ],
+          "why_explanation": "中文没有th这个发音，学生容易把两者混淆或发成/s/、/z/、/f/、/v/。",
+          "example": {
+            "question": "判断以下单词中th的发音是/θ/还是/ð/：this, thank, with, clothes",
+            "steps": [
+              "this: 常用词，浊辅音/ð/。",
+              "thank: 词首，清辅音/θ/。",
+              "with: 词尾，根据语境可清可浊，但常用浊辅音/ð/。",
+              "clothes: 词尾，浊辅音/ð/。"
+            ],
+            "answer": "this /ð/, thank /θ/, with /ð/, clothes /ð/"
+          },
+          "pronunciation_tip": "对着镜子练习，观察舌头位置。用手指放在喉咙上，感受声带的振动。多听native speaker的发音。",
+          "emotion_hook": "th音总是发不对？别怕，这卡片帮你练出地道发音！"
+        },
+        {
+          "card_id": "T2-04",
+          "full_id": "英语-八上-T2-04",
+          "title": "🔗连读挑战：Can you take it easy? 听起来像take-i-teasy？",
+          "type": "发音挑战卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "英语口语中，当一个单词以辅音结尾，下一个单词以元音开头时，常发生连读现象。",
+          "core_points": [
+            "辅音+元音：前一个单词的末尾辅音和后一个单词的开头元音连读 (e.g., take_it, turn_on)。",
+            "r/re+元音：当r或re结尾的单词后接元音开头的单词时，r音常会连读 (e.g., for_example, here_is)。",
+            "意群内连读：连读通常发生在同一个意群内部，而不是任意两个单词之间。",
+            "连读能使口语更流畅，更自然。"
+          ],
+          "why_explanation": "中文发音习惯字正腔圆，学生容易每个单词独立发音，导致口语不流畅。",
+          "example": {
+            "question": "标出以下短语中可能发生连读的地方：put on, pick it up, wait a minute",
+            "steps": [
+              "put on: t和o连读。",
+              "pick it up: k和i连读，t和u连读。",
+              "wait a minute: t和a连读。"
+            ],
+            "answer": "pu-ton, pick-i-tup, wai-ta-minute"
+          },
+          "pronunciation_tip": "听英文歌曲、电影、播客，模仿他们的连读。从短语开始练习，再扩展到句子。",
+          "emotion_hook": "想让你的口语更像老外？学会连读，你就是下一个发音达人！"
+        },
+        {
+          "card_id": "T2-05",
+          "full_id": "英语-八上-T2-05",
+          "title": "💥重音挑战：这些八上重点词，你读对重音了吗？",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "多音节单词有主重音，正确发音重音是提升口语清晰度和地道性的关键。",
+          "core_points": [
+            "名词和形容词通常重音在前 (e.g., 'teacher, 'happy)。",
+            "动词通常重音在后 (e.g., im'prove, de'cide)。",
+            "以-tion, -sion, -ic, -ity结尾的词，重音常在这些后缀的前一个音节 (e.g., inven'tion, com'puter, im'portant)。",
+            "注意区分重音不同导致词性或含义不同的词 (如 'present n. vs pre'sent v.)。",
+            "八上重点词汇：comfortable, volunteer, interview, delicious, invention, important, computer."
+          ],
+          "why_explanation": "中文是声调语言，没有英语的重音概念，学生容易平读所有音节。",
+          "example": {
+            "question": "标出以下单词的重音：comfortable, volunteer, invention, delicious",
+            "steps": [
+              "comfortable: 重音在第一音节。",
+              "volunteer: 重音在第三音节。",
+              "invention: 重音在第二音节。",
+              "delicious: 重音在第二音节。"
+            ],
+            "answer": "ˈcomfortable, ˌvolunˈteer, inˈvention, deˈlicious"
+          },
+          "pronunciation_tip": "查字典时留意单词前的重音符号（ˈ）。大声朗读，夸张地读出重音，形成肌肉记忆。",
+          "emotion_hook": "发音不准重音是硬伤！学会这些词的重音，你的英语听起来更专业！"
+        },
+        {
+          "card_id": "T2-06",
+          "full_id": "英语-八上-T2-06",
+          "title": "🤔八上易错词发音：stomachache, recipe, yogurt，你中招了吗？",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "一些常见词汇，由于拼写或音节组合特点，学生容易发错音。",
+          "core_points": [
+            "stomachache: /'stʌməkˌeɪk/，注意'ch'发/k/音，不要发/tʃ/。",
+            "recipe: /'resəpi/，重音在第一音节，不要读成/rɪ'saɪp/。",
+            "yogurt: /'joʊɡərt/，注意'g'发/ɡ/音，不要发/dʒ/。",
+            "comfortable: /'kʌmfərtəbəl/，注意中间的'or'常被弱读或省略。",
+            "develop: /dɪ'veləp/，重音在第二音节。",
+            "specific: /spɪ'sɪfɪk/，重音在第二音节。"
+          ],
+          "why_explanation": "不规则发音、重音位置、或受中文拼音影响，导致学生发音偏差。",
+          "example": {
+            "question": "正确发音并写出以下单词的音标：stomachache, recipe, yogurt",
+            "steps": [
+              "stomachache: /'stʌməkˌeɪk/",
+              "recipe: /'resəpi/",
+              "yogurt: /'joʊɡərt/"
+            ],
+            "answer": "stomachache /'stʌməkˌeɪk/, recipe /'resəpi/, yogurt /'joʊɡərt/"
+          },
+          "pronunciation_tip": "将这些单词的正确音标和发音录下来，反复跟读模仿，直到形成习惯。",
+          "emotion_hook": "这些八上必考词，你是不是也读错过？快来纠正你的发音！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T3",
+      "unit_name": "情景闯关卡",
+      "cards": [
+        {
+          "card_id": "T3-01",
+          "full_id": "英语-八上-T3-01",
+          "title": "🏥生病了怎么求助？情景闯关：描述症状和给出建议！",
+          "type": "情景闯关卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "掌握描述身体不适的常用表达和给出健康建议的句型。",
+          "core_points": [
+            "描述症状：I have a headache/stomachache/sore throat/fever. I feel tired/sick.",
+            "询问症状：What's the matter? What's wrong?",
+            "给出建议：You should/shouldn't + 动词原形。Why don't you...? How about...?",
+            "常用词汇：doctor, rest, medicine, drink more water, eat healthy food。",
+            "注意语气：建议要礼貌，询问要关心。"
+          ],
+          "why_explanation": "缺乏实际情景对话练习，导致学生在真实语境中无法灵活运用所学知识。",
+          "example": {
+            "question": "你的朋友看起来不舒服，他捂着肚子。你该如何询问并给出建议？",
+            "steps": [
+              "询问：What's the matter? / What's wrong?",
+              "朋友回答：I have a stomachache.",
+              "给出建议：You should see a doctor. You shouldn't eat too much junk food. Why don't you drink some warm water?",
+              "朋友回应：That's a good idea. / Thanks for your advice."
+            ],
+            "answer": "对话练习：\nA: What's the matter? You look unwell.\nB: I have a stomachache.\nA: Oh dear. You should see a doctor. And you shouldn't eat too much junk food. Why don't you drink some warm water?\nB: That's a good idea. Thanks for your advice."
+          },
+          "scene_dialogue": "A: Hi, Lisa. You look a little pale. What's the matter?\nB: Oh, I have a terrible headache. And I feel a bit tired.\nA: I'm sorry to hear that. You should go home and get some rest. And you shouldn't watch TV too much. Why don't you drink some hot tea?\nB: That sounds good. Thanks for your advice, Tom.",
+          "emotion_hook": "朋友生病了，你只会说“Oh, no”？学会这几句，你就是最贴心的朋友！"
+        },
+        {
+          "card_id": "T3-02",
+          "full_id": "英语-八上-T3-02",
+          "title": "🌳环保小卫士！情景闯关：提出建议和提供帮助！",
+          "type": "情景闯关卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "学习在环保活动中提出建议、表达意愿和提供帮助的口语表达。",
+          "core_points": [
+            "提出建议：Let's..., Why don't you/we...? How about/What about + V-ing?",
+            "表达意愿/提供帮助：I'd like to... I will/I'm going to... I can help to...",
+            "环保词汇：clean up, plant trees, collect rubbish, protect the environment, make a difference。",
+            "未来时态：will / be going to 的灵活运用。"
+          ],
+          "why_explanation": "学生对环保话题有热情，但缺乏用英语组织语言进行讨论和行动的能力。",
+          "example": {
+            "question": "学校要组织一次环保活动，你和同学讨论如何参与。请设计对话。",
+            "steps": [
+              "提出建议：How about cleaning up the school garden?",
+              "表示同意并补充：That's a good idea! I'll help to plant some flowers.",
+              "再次建议：Why don't we make some posters to call for more volunteers?",
+              "回应：Great! I'm going to collect some waste paper for recycling."
+            ],
+            "answer": "对话练习：\nA: Hey, let's talk about the school's environmental project.\nB: Good idea! How about cleaning up the school garden?\nA: That's a good idea! I'll help to plant some flowers.\nB: And why don't we make some posters to call for more volunteers?\nA: Great! I'm going to collect some waste paper for recycling."
+          },
+          "scene_dialogue": "A: The city park is so dirty. We should do something.\nB: I agree. Let's organize a clean-up activity next Saturday.\nA: That sounds great! I'll help to put up posters to let more people know.\nB: And I'm going to collect some plastic bottles. We can recycle them.\nA: Excellent! Together, we can make a difference.",
+          "emotion_hook": "想成为环保小达人？这些英语口语，让你在行动中闪闪发光！"
+        },
+        {
+          "card_id": "T3-03",
+          "full_id": "英语-八上-T3-03",
+          "title": "✈️暑假计划大揭秘！情景闯关：谈论未来计划！",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习用will, be going to, present continuous for future谈论假期计划和未来打算。",
+          "core_points": [
+            "询问计划：What are you doing for vacation? What are your plans for...?",
+            "表达计划（be going to）：I'm going to visit my grandparents / travel abroad.",
+            "表达计划（present continuous）：I'm meeting my friends on Friday. (已安排好的具体活动)",
+            "表达预测/临时决定（will）：I think I'll relax at home. Maybe I'll read some books.",
+            "常用词汇：vacation, plan, relax, visit, study, travel, museum, beach。",
+            "注意区分will和be going to的语境。"
+          ],
+          "why_explanation": "学生对未来充满期待，但不知道如何用不同时态表达不同类型的未来计划。",
+          "example": {
+            "question": "暑假快到了，你和同学互相询问对方的假期计划。请设计对话。",
+            "steps": [
+              "询问：What are you doing for your summer vacation?",
+              "回答计划：I'm going to visit my aunt in Beijing.",
+              "询问对方：How about you?",
+              "回答：I'm not sure yet, but I think I'll travel to the beach with my family. We're leaving next Monday."
+            ],
+            "answer": "对话练习：\nA: Summer vacation is coming soon! What are you doing for your summer vacation, Li Ming?\nB: I'm going to visit my aunt in Beijing. I'm really looking forward to it! How about you?\nA: I'm not sure yet, but I think I'll travel to the beach with my family. We're leaving next Monday. I've already booked the tickets!"
+          },
+          "scene_dialogue": "A: What are your plans for the upcoming National Day holiday?\nB: I'm going to visit the Great Wall with my family. We've already bought the tickets. And I'm meeting my friends for dinner on the evening of the first day.\nA: Wow, sounds exciting! I think I'll just relax at home. Maybe I'll read some books and watch movies. I haven't decided anything specific yet.",
+          "emotion_hook": "你的暑假计划是什么？用英语流利表达，让你的朋友惊呆！"
+        },
+        {
+          "card_id": "T3-04",
+          "full_id": "英语-八上-T3-04",
+          "title": "👩‍⚕️我的梦想职业！情景闯关：谈论职业与兴趣！",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习谈论职业、理想和个人兴趣，并运用相关词汇和句型。",
+          "core_points": [
+            "询问职业：What do you want to be? What's your dream job?",
+            "表达职业：I want to be an actor/engineer/teacher.",
+            "谈论兴趣：I like acting/singing/playing sports. I'm interested in...",
+            "描述职业：It's an interesting/difficult/exciting job.",
+            "常用词汇：actor, engineer, scientist, artist, musician, reporter, photographer。",
+            "动词后接doing或to do的灵活运用。"
+          ],
+          "why_explanation": "学生对未来充满憧憬，但缺乏用英语表达职业理想和兴趣的词汇和句式。",
+          "example": {
+            "question": "你和同学讨论长大后的梦想职业。请设计对话。",
+            "steps": [
+              "询问：What do you want to be when you grow up?",
+              "回答：I want to be a scientist. I like doing experiments.",
+              "询问对方：How about you?",
+              "回答：I want to be an artist. I like drawing and painting. It's an interesting job."
+            ],
+            "answer": "对话练习：\nA: What do you want to be when you grow up, Xiao Li?\nB: I want to be a scientist. I like doing experiments and discovering new things. How about you, Xiao Wang?\nA: I want to be an artist. I like drawing and painting. It's an interesting job, and I think I'll enjoy it."
+          },
+          "scene_dialogue": "A: What's your dream job, Mike?\nB: I want to be a pilot. I think it's exciting to fly around the world. What about you, Sarah?\nA: I want to be a teacher. I like helping students learn and grow. It's a challenging but rewarding job. I'm also interested in writing stories.",
+          "emotion_hook": "你的梦想职业是什么？用英语大胆说出来，让你的未来更加清晰！"
+        },
+        {
+          "card_id": "T3-05",
+          "full_id": "英语-八上-T3-05",
+          "title": "📖英语学渣逆袭！情景闯关：给出学习建议！",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习如何用条件状语从句（If...will...）给出学习建议和提供帮助。",
+          "core_points": [
+            "条件句：If you want to improve your English, you should/will...",
+            "建议句型：You should..., Why don't you..., How about V-ing...",
+            "学习方法词汇：read English books, listen to English songs, practice speaking, watch English movies, use a dictionary, make mistakes, learn new words。",
+            "注意条件句的时态搭配：If从句用一般现在时，主句用一般将来时或情态动词。"
+          ],
+          "why_explanation": "学生在学习过程中常遇到困难，但不知道如何用英语表达学习建议和解决方案。",
+          "example": {
+            "question": "你的朋友英语成绩不好，向你求助。你如何给他/她一些建议？",
+            "steps": [
+              "询问：What's wrong? Why is your English not so good?",
+              "朋友回答：I don't know many words and I'm afraid to speak.",
+              "给出建议：If you want to improve your English, you should read more English books. If you practice speaking every day, you will make great progress. Why don't you try watching some English cartoons?",
+              "朋友回应：That's really helpful! Thanks!"
+            ],
+            "answer": "对话练习：\nA: What's wrong, Tom? You look worried.\nB: My English is not so good. I don't know many words and I'm afraid to speak.\nA: Don't worry! If you want to improve your English, you should read more English books. If you practice speaking every day, you will make great progress. Why don't you try watching some English cartoons? That's really helpful!\nB: That's a good idea! Thanks for your advice!"
+          },
+          "scene_dialogue": "A: I really want to learn English well, but I don't know how.\nB: Well, if you want to improve your listening, you should listen to English songs and watch English movies. If you want to speak better, you should try to speak English as much as possible, even if you make mistakes. Why don't you join an English club?\nA: Those are great suggestions! I'll try them. Thanks!",
+          "emotion_hook": "英语不好怎么办？这卡片教你用英语给朋友支招，瞬间变学霸！"
+        },
+        {
+          "card_id": "T3-06",
+          "full_id": "英语-八上-T3-06",
+          "title": "🍹厨房小白变大厨！情景闯关：给出制作说明！",
+          "type": "情景闯关卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "学习如何用祈使句和顺序词（first, next, then, finally）给出制作食物的步骤。",
+          "core_points": [
+            "祈使句：Cut the bananas. Pour the milk. Mix them up.",
+            "顺序词：First, Next, Then, Finally。",
+            "数量词：how much/many, a few/a little, some/any。",
+            "食材词汇：banana, milk, yogurt, watermelon, ingredient。",
+            "动词词汇：cut, peel, pour, mix, turn on/off。"
+          ],
+          "why_explanation": "学生对烹饪有兴趣，但缺乏用英语描述制作过程的结构和词汇。",
+          "example": {
+            "question": "请你用英语向朋友介绍如何制作一杯香蕉奶昔。",
+            "steps": [
+              "介绍食材：You need some bananas, some milk, and a little yogurt.",
+              "第一步：First, peel the bananas and cut them into small pieces.",
+              "第二步：Next, put the banana pieces into a blender.",
+              "第三步：Then, pour some milk and a little yogurt into the blender.",
+              "最后一步：Finally, turn on the blender and mix them up. Enjoy your banana milk shake!"
+            ],
+            "answer": "对话练习：\nA: Wow, this banana milk shake is delicious! How do you make it?\nB: It's easy! First, you need some bananas, some milk, and a little yogurt. Then, peel the bananas and cut them into small pieces. Next, put the banana pieces into a blender. After that, pour some milk and a little yogurt into the blender. Finally, turn on the blender and mix them up. Enjoy!\nA: Sounds simple! I'll try it tonight."
+          },
+          "scene_dialogue": "A: Could you tell me how to make an egg sandwich?\nB: Sure! First, get two slices of bread and an egg. Next, fry the egg. Then, put the fried egg between the two slices of bread. Finally, you can add some vegetables and sauce. Enjoy your sandwich!",
+          "emotion_hook": "想在厨房秀一手？用英语教你做美食，瞬间变身国际大厨！"
+        },
+        {
+          "card_id": "T3-07",
+          "full_id": "英语-八上-T3-07",
+          "title": "🎁送礼难题终结者！情景闯关：建议送什么礼物！",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "学习如何用多种句型提出送礼建议，并描述礼物的特点。",
+          "core_points": [
+            "提出建议：Why don't you get her a scarf? How about a book? What about buying some flowers? Let's get him a new watch.",
+            "描述礼物：It's warm/cool/lovely/special/creative/useful/fun/expensive/cheap。",
+            "询问偏好：What does she like? What kind of gifts does he prefer?",
+            "常用词汇：gift, present, scarf, book, watch, flowers, chocolate, CD。",
+            "注意形容词的准确使用和语气。"
+          ],
+          "why_explanation": "学生在为朋友选择礼物时常感到困惑，缺乏用英语讨论和建议礼物的能力。",
+          "example": {
+            "question": "你朋友的妈妈生日快到了，你和朋友讨论送什么礼物。请设计对话。",
+            "steps": [
+              "询问：What should we get for your mom's birthday?",
+              "提出建议：Why don't we get her a scarf? It's warm and useful.",
+              "考虑其他：How about a nice book? She likes reading.",
+              "决定：That's a good idea! Or maybe we can buy her some flowers and a small cake. That would be special!"
+            ],
+            "answer": "对话练习：\nA: Your mom's birthday is coming soon! What should we get for her?\nB: Hmm, that's a good question. Why don't we get her a scarf? It's warm and useful.\nA: That's a nice idea. How about a nice book? She likes reading, right?\nB: Yes, she does. Or maybe we can buy her some beautiful flowers and a small cake. That would be special!\nA: Great! Let's do that."
+          },
+          "scene_dialogue": "A: My sister's birthday is next week. What should I get her?\nB: What does she like? Maybe you can get her a new CD. She loves music.\nA: That's a good idea! Or how about a lovely necklace? She likes pretty things.\nB: A necklace sounds great! It's special and she can wear it every day.",
+          "emotion_hook": "送礼送到心坎里！学会这些建议句型，你就是送礼小能手！"
+        },
+        {
+          "card_id": "T3-08",
+          "full_id": "英语-八上-T3-08",
+          "title": "💡发明小百科！情景闯关：谈论发明创造！",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习用被动语态谈论发明创造及其历史，询问和回答相关信息。",
+          "core_points": [
+            "询问发明：When was it invented? Who was it invented by? What was invented in...?",
+            "回答发明：It was invented in... by...",
+            "描述发明：It's a useful/important/amazing invention. It changed our lives.",
+            "常用词汇：invent, invention, discover, discovery, telephone, computer, light bulb, paper, printing。",
+            "被动语态的准确使用：was/were + 动词过去分词。"
+          ],
+          "why_explanation": "学生对科技发展和历史事件有好奇心，但缺乏用英语进行相关讨论的语言工具。",
+          "example": {
+            "question": "你和同学在博物馆看到一个古老的电话，讨论它的发明。",
+            "steps": [
+              "询问：Look at this old telephone! When was it invented?",
+              "回答：It was invented in 1876.",
+              "询问发明者：Who was it invented by?",
+              "回答：It was invented by Alexander Graham Bell."
+            ],
+            "answer": "对话练习：\nA: Look at this old telephone! It's so interesting. When was it invented?\nB: Hmm, let me see. It was invented in 1876.\nA: Wow, that's a long time ago! Who was it invented by?\nB: It was invented by Alexander Graham Bell. It's an amazing invention that changed our lives!"
+          },
+          "scene_dialogue": "A: Do you know when the computer was invented?\nB: I think the first modern computer was invented in the 1940s. It was invented by John Atanasoff and Clifford Berry.\nA: That's amazing! And when was paper invented?\nB: Paper was invented in China, by Cai Lun, around 105 AD. It's one of the greatest inventions in human history.",
+          "emotion_hook": "想成为历史小达人？用英语聊发明，让你的知识储备瞬间升级！"
+        },
+        {
+          "card_id": "T3-09",
+          "full_id": "英语-八上-T3-09",
+          "title": "🌍我的独特经历！情景闯关：谈论个人经验和持续时间！",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习用现在完成时（have/has + P.P.）谈论个人经历和动作持续时间。",
+          "core_points": [
+            "询问经历：Have you ever...? Have you been to...?",
+            "回答经历：Yes, I have. / No, I haven't. I've been to... / I've never...",
+            "询问持续时间：How long have you...?",
+            "回答持续时间：I've done... for three years / since 2020。",
+            "常用词汇：travel, climb, visit, learn, volunteer, experience。",
+            "for和since的准确使用。"
+          ],
+          "why_explanation": "学生有丰富的个人经历，但缺乏用英语分享和表达这些经历的句型和词汇。",
+          "example": {
+            "question": "你和朋友互相分享各自的旅行经历。",
+            "steps": [
+              "询问：Have you ever traveled abroad?",
+              "回答：Yes, I have. I've been to Japan.",
+              "询问持续时间（如果适用）：How long have you lived there? (如果是在日本居住过)",
+              "回答：I lived there for two years. (用一般过去时) 或者 I've studied Japanese for three years."
+            ],
+            "answer": "对话练习：\nA: Hey, have you ever traveled abroad, Lucy?\nB: Yes, I have. I've been to Japan. It was amazing!\nA: Wow, that's cool! How long have you been learning Japanese?\nB: I've learned Japanese for three years since I was in middle school. How about you? Have you ever climbed a mountain?\nA: No, I haven't. But I've always wanted to!"
+          },
+          "scene_dialogue": "A: Have you ever tried sushi?\nB: Yes, I have. I've eaten sushi many times. I've loved it since I was a child.\nA: That's great! How long have you had this bike?\nB: I've had this bike for five years. It's still in good condition.",
+          "emotion_hook": "你的精彩人生，用英语怎么说？现在完成时让你成为故事大王！"
+        },
+        {
+          "card_id": "T3-10",
+          "full_id": "英语-八上-T3-10",
+          "title": "🙏礼貌达人养成记！情景闯关：提出礼貌请求！",
+          "type": "情景闯关卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习用Could you please...? 和 Would you mind...? 提出礼貌请求。",
+          "core_points": [
+            "Could you please + 动词原形...?：表示“请你……好吗？”，语气委婉。",
+            "Would you mind + 动词-ing...?：表示“你介意……吗？”，更委婉，回答时要注意。",
+            "肯定回答：Certainly. / Of course. / No problem. / Not at all.",
+            "否定回答：I'm sorry, but I can't. (说明原因)",
+            "常用词汇：clean, wash, make, take out, sweep, help。",
+            "注意Would you mind 的回答：不介意用No..., 介意用Yes, I do mind..."
+          ],
+          "why_explanation": "学生在请求别人帮助时，常直接使用命令句，缺乏礼貌请求的表达。",
+          "example": {
+            "question": "你想让朋友帮你打扫房间，如何礼貌地提出请求？",
+            "steps": [
+              "使用Could you please...?：Could you please clean your room?",
+              "使用Would you mind...?：Would you mind cleaning your room?",
+              "朋友同意：Certainly. / No problem.",
+              "朋友拒绝：I'm sorry, but I'm busy right now."
+            ],
+            "answer": "对话练习：\nA: Hey, could you please help me clean my room? It's a mess.\nB: Certainly! No problem.\nA: Thank you so much! And would you mind taking out the trash too?\nB: Not at all. I'll do it right away."
+          },
+          "scene_dialogue": "A: Excuse me, could you please tell me the way to the library?\nB: Sure, go straight and turn right at the first crossing.\nA: Thank you! And would you mind speaking a little slower? I'm learning English.\nB: Oh, not at all! I'm happy to help.",
+          "emotion_hook": "只会说“Help me!”？学会这几句，你就是最懂礼貌的英语达人！"
+        },
+        {
+          "card_id": "T3-11",
+          "full_id": "英语-八上-T3-11",
+          "title": "🌍文化小百科！情景闯关：讨论不同国家的习俗！",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习用“be supposed to”谈论不同国家的规则、习俗和期望。",
+          "core_points": [
+            "询问习俗：What are you supposed to do...? What's the custom in...?",
+            "描述习俗：You're supposed to shake hands / bow / kiss. You're not supposed to...",
+            "比较文化：It's different from... In China, we...",
+            "常用词汇：custom, rule, tradition, polite, rude, table manners, shake hands, bow, kiss。",
+            "be supposed to 表示“应该，被期望做某事”。"
+          ],
+          "why_explanation": "学生对世界文化充满好奇，但缺乏用英语讨论和比较不同文化习俗的能力。",
+          "example": {
+            "question": "你和朋友讨论去日本旅游时应该注意的习俗。",
+            "steps": [
+              "询问：What are we supposed to do when we meet people in Japan?",
+              "回答：You're supposed to bow. You're not supposed to shake hands with everyone.",
+              "询问其他：And what about eating? Are we supposed to use chopsticks?",
+              "回答：Yes, you're supposed to use chopsticks. And you're not supposed to leave food on your plate."
+            ],
+            "answer": "对话练习：\nA: We're going to Japan next month! What are we supposed to do when we meet people there?\nB: You're supposed to bow. You're not supposed to shake hands with everyone, especially older people.\nA: Interesting! And what about eating? Are we supposed to use chopsticks?\nB: Yes, you're supposed to use chopsticks. And you're not supposed to leave food on your plate – it's considered rude."
+          },
+          "scene_dialogue": "A: In some Western countries, when you meet someone for the first time, you're supposed to shake hands.\nB: That's interesting! In China, we usually just nod or say hello. What about tipping? Are you supposed to tip in restaurants?\nA: Yes, in many Western countries, you're supposed to leave a tip for good service. But in China, you're not supposed to tip.",
+          "emotion_hook": "出国旅行不踩雷！学会这些习俗口语，让你成为“文化通”！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T4",
+      "unit_name": "语法纠错卡",
+      "cards": [
+        {
+          "card_id": "T4-01",
+          "full_id": "英语-八上-T4-01",
+          "title": "❌情态动词should/shouldn't，你用对了吗？",
+          "type": "语法纠错卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "情态动词should/shouldn't表示“应该/不应该”，后接动词原形，用于给出建议或表达义务。",
+          "core_points": [
+            "should/shouldn't + 动词原形。",
+            "should表示建议、劝告、责任或义务。",
+            "shouldn't表示不应该做某事。",
+            "常用于健康、学习、行为规范等情景。",
+            "疑问句：Should I...?"
+          ],
+          "why_explanation": "学生常忘记后接动词原形，或在肯定句和否定句中混淆should和shouldn't。",
+          "example": {
+            "question": "纠正错误：You should to go to bed early.",
+            "steps": [
+              "情态动词should后应直接接动词原形。",
+              "去掉to。"
+            ],
+            "answer": "You should go to bed early."
+          },
+          "mistakes": [
+            {
+              "wrong": "She shouldn't eats too much.",
+              "correct": "She shouldn't eat too much.",
+              "reason": "shouldn't后接动词原形，eat不加s。"
+            },
+            {
+              "wrong": "You should not to play computer games all day.",
+              "correct": "You shouldn't play computer games all day.",
+              "reason": "shouldn't是should not的缩写，后接动词原形，不加to。"
+            }
+          ],
+          "grammar_fix": "情态动词后动原形，这是铁律要记清！",
+          "emotion_hook": "“你应该……”用英语怎么说才地道？别再犯这些低级错误了！"
+        },
+        {
+          "card_id": "T4-02",
+          "full_id": "英语-八上-T4-02",
+          "title": "⛔未来时态大坑！will vs be going to 区分不清？",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "will表示临时决定、意愿、无根据的预测；be going to表示事先计划、意图、有根据的预测。",
+          "core_points": [
+            "will：用于当场决定、主观预测、意愿、提议。",
+            "be going to：用于事先计划、有迹象的预测。",
+            "be going to 结构：主语 + be (am/is/are) + going to + 动词原形。",
+            "will 结构：主语 + will + 动词原形。",
+            "否定句和疑问句形式。"
+          ],
+          "why_explanation": "学生常将两者混用，未能区分其在语境中的细微差别和强调点。",
+          "example": {
+            "question": "纠正错误：I'm thirsty. I'm going to get some water. (临时决定)",
+            "steps": [
+              "“我渴了”是一个突发情况，喝水是临时决定。",
+              "临时决定应使用will。"
+            ],
+            "answer": "I'm thirsty. I'll get some water."
+          },
+          "mistakes": [
+            {
+              "wrong": "Look at the dark clouds. It will rain soon. (有迹象的预测)",
+              "correct": "Look at the dark clouds. It is going to rain soon.",
+              "reason": "有乌云是下雨的迹象，属于有根据的预测，用be going to。"
+            },
+            {
+              "wrong": "My family will visit Beijing next month. (已计划)",
+              "correct": "My family is going to visit Beijing next month.",
+              "reason": "下个月的拜访通常是事先计划好的，用be going to。"
+            }
+          ],
+          "grammar_fix": "临时will，计划going to，证据going to，意愿will！",
+          "emotion_hook": "未来时态总出错？will和be going to的纠错秘籍，让你不再迷茫！"
+        },
+        {
+          "card_id": "T4-03",
+          "full_id": "英语-八上-T4-03",
+          "title": "⚠️条件状语从句：If从句时态，你真的懂吗？",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "条件状语从句（if从句）通常遵循“主将从现”原则，即主句用将来时态，if从句用一般现在时。",
+          "core_points": [
+            "If从句表示条件，主句表示结果。",
+            "If从句：If + 主语 + 动词一般现在时。",
+            "主句：主语 + will/can/should + 动词原形。",
+            "If从句中不能使用will，即使表示将来。",
+            "If从句和主句的顺序可调换，但if从句在前时，中间用逗号。"
+          ],
+          "why_explanation": "学生容易受中文思维影响，认为if从句也应该用将来时。",
+          "example": {
+            "question": "纠正错误：If it will rain tomorrow, we will stay at home.",
+            "steps": [
+              "if从句中不能使用will。",
+              "将will rain改为一般现在时rains。"
+            ],
+            "answer": "If it rains tomorrow, we will stay at home."
+          },
+          "mistakes": [
+            {
+              "wrong": "If he comes, I will tell him the news.",
+              "correct": "If he comes, I will tell him the news.",
+              "reason": "if从句用一般现在时，he是第三人称单数，动词加s。"
+            },
+            {
+              "wrong": "If you don't study hard, you won't pass the exam.",
+              "correct": "If you don't study hard, you won't pass the exam.",
+              "reason": "if从句的否定形式用don't/doesn't + 动词原形。"
+            }
+          ],
+          "grammar_fix": "主将从现记心间，If从句莫用will！",
+          "emotion_hook": "条件从句老是错？“主将从现”口诀，让你语法瞬间开挂！"
+        },
+        {
+          "card_id": "T4-04",
+          "full_id": "英语-八上-T4-04",
+          "title": "🔨被动语态陷阱！was/were + P.P.，你真的掌握了吗？",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "一般过去时被动语态的结构是：主语 + was/were + 动词过去分词 (P.P.) (+ by 动作执行者)。",
+          "core_points": [
+            "被动语态表示主语是动作的承受者。",
+            "一般过去时被动语态：was (单数主语) / were (复数主语) + 动词过去分词。",
+            "by + 动作执行者，可省略。",
+            "常用于不知道或不强调动作执行者，或强调动作本身的情况。",
+            "动词的过去分词形式是关键。"
+          ],
+          "why_explanation": "学生容易混淆主动语态和被动语态，或忘记使用be动词，或过去分词形式错误。",
+          "example": {
+            "question": "纠正错误：The light bulb invented by Edison.",
+            "steps": [
+              "light bulb是动作的承受者，句子应为被动语态。",
+              "缺少be动词was。"
+            ],
+            "answer": "The light bulb was invented by Edison."
+          },
+          "mistakes": [
+            {
+              "wrong": "America discovered by Columbus in 1492.",
+              "correct": "America was discovered by Columbus in 1492.",
+              "reason": "缺少be动词was。"
+            },
+            {
+              "wrong": "The books were took by the students.",
+              "correct": "The books were taken by the students.",
+              "reason": "take的过去分词是taken，而不是took。"
+            }
+          ],
+          "grammar_fix": "被动语态was/were，动词三态P.P.别忘记！",
+          "emotion_hook": "被动语态总是搞错？学会这个万能公式，让你秒变语法高手！"
+        },
+        {
+          "card_id": "T4-05",
+          "full_id": "英语-八上-T4-05",
+          "title": "⏳现在完成时：for/since，你真的用对了吗？",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "现在完成时表示过去发生的动作对现在造成影响或从过去开始持续到现在。for接时间段，since接时间点。",
+          "core_points": [
+            "现在完成时结构：主语 + have/has + 动词过去分词。",
+            "for + 一段时间 (e.g., for three years, for a long time)。",
+            "since + 一个时间点 (e.g., since 2010, since last month, since I was a child)。",
+            "现在完成时不能和ago, yesterday等表示过去特定时间点的词连用。",
+            "疑问句：How long have you...?"
+          ],
+          "why_explanation": "学生容易混淆for和since，或将现在完成时与一般过去时混用。",
+          "example": {
+            "question": "纠正错误：I have lived here since three years.",
+            "steps": [
+              "three years是时间段，不是时间点。",
+              "应将since改为for。"
+            ],
+            "answer": "I have lived here for three years."
+          },
+          "mistakes": [
+            {
+              "wrong": "She has been a teacher for she graduated.",
+              "correct": "She has been a teacher since she graduated.",
+              "reason": "she graduated是一个时间点（从她毕业时起），用since。"
+            },
+            {
+              "wrong": "I have seen him yesterday.",
+              "correct": "I saw him yesterday.",
+              "reason": "yesterday是明确的过去时间点，应使用一般过去时。"
+            }
+          ],
+          "grammar_fix": "时间段for，时间点since，现在完成时是绝配！",
+          "emotion_hook": "现在完成时终极考点：for和since，你真的搞懂了吗？！"
+        },
+        {
+          "card_id": "T4-06",
+          "full_id": "英语-八上-T4-06",
+          "title": "🗣️祈使句的秘密：别再直接命令了，你知道怎么否定吗？",
+          "type": "语法纠错卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "祈使句用于发出命令、请求、建议等，主语通常省略，动词用原形。",
+          "core_points": [
+            "肯定形式：动词原形开头 (e.g., Open the door. Come in.)。",
+            "否定形式：Don't + 动词原形开头 (e.g., Don't talk. Don't be late.)。",
+            "加强语气：用please放在句首或句末。",
+            "常用于指示、建议、警告等情景。"
+          ],
+          "why_explanation": "学生容易在祈使句前加上主语，或在否定时用not而非don't。",
+          "example": {
+            "question": "纠正错误：You open the door. (命令)",
+            "steps": [
+              "祈使句主语通常省略。",
+              "直接用动词原形开头。"
+            ],
+            "answer": "Open the door."
+          },
+          "mistakes": [
+            {
+              "wrong": "Not talk in class!",
+              "correct": "Don't talk in class!",
+              "reason": "祈使句的否定形式用Don't开头。"
+            },
+            {
+              "wrong": "Be not late for school!",
+              "correct": "Don't be late for school!",
+              "reason": "be动词的祈使句否定形式也是Don't be开头。"
+            }
+          ],
+          "grammar_fix": "祈使句动原形，否定Don't开头记分明！",
+          "emotion_hook": "祈使句只会“Open the door”？学会这些，你的指令更清晰！"
+        },
+        {
+          "card_id": "T4-07",
+          "full_id": "英语-八上-T4-07",
+          "title": "🔢数量词陷阱：how much/many，可数不可数别再错！",
+          "type": "语法纠错卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "how much用于询问不可数名词的数量，how many用于询问可数名词复数的数量。",
+          "core_points": [
+            "how much + 不可数名词 (e.g., How much water do you need?)。",
+            "how many + 可数名词复数 (e.g., How many books do you have?)。",
+            "不可数名词没有复数形式。",
+            "一些名词在不同语境下可数不可数 (e.g., time, paper)。"
+          ],
+          "why_explanation": "中文的“多少”不区分可数不可数，学生容易直接套用。",
+          "example": {
+            "question": "纠正错误：How many money do you have?",
+            "steps": [
+              "money是不可数名词。",
+              "询问不可数名词的数量用how much。"
+            ],
+            "answer": "How much money do you have?"
+          },
+          "mistakes": [
+            {
+              "wrong": "How much apples do you want?",
+              "correct": "How many apples do you want?",
+              "reason": "apples是可数名词复数，用how many。"
+            },
+            {
+              "wrong": "There is much students in the classroom.",
+              "correct": "There are many students in the classroom.",
+              "reason": "students是可数名词复数，用many，且谓语动词用are。"
+            }
+          ],
+          "grammar_fix": "可数many，不可数much，数量提问不犯怵！",
+          "emotion_hook": "“多少”英语怎么说？how much/many的终极区分法，让你不再犯低级错误！"
+        },
+        {
+          "card_id": "T4-08",
+          "full_id": "英语-八上-T4-08",
+          "title": "💬礼貌请求：Would you mind...? 别答错！",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "Would you mind + 动词-ing...? 用于提出非常礼貌的请求，意为“你介意……吗？”。",
+          "core_points": [
+            "结构：Would you mind + 动词-ing形式 + 其他成分？",
+            "肯定回答：No, not at all. / Of course not. / Certainly not. / No problem. (表示不介意，即同意)。",
+            "否定回答：Yes, I do mind. / I'm sorry, but I can't. (表示介意，即拒绝)。",
+            "注意：回答时要根据实际意图选择肯定或否定。"
+          ],
+          "why_explanation": "学生容易按照中文习惯直接回答Yes/No，导致误解，或忘记动词要用-ing形式。",
+          "example": {
+            "question": "纠正错误：Would you mind to open the window? (动词形式错误)",
+            "steps": [
+              "mind后接动词应使用-ing形式。",
+              "将to open改为opening。"
+            ],
+            "answer": "Would you mind opening the window?"
+          },
+          "mistakes": [
+            {
+              "wrong": "Would you mind closing the door? Yes, I'd love to. (回答错误)",
+              "correct": "Would you mind closing the door? No, not at all. (表示不介意，即愿意关门)",
+              "reason": "Yes, I'd love to是肯定回答，但这里是问“介意吗”，回答Yes表示介意，前后矛盾。"
+            },
+            {
+              "wrong": "Would you mind help me?",
+              "correct": "Would you mind helping me?",
+              "reason": "mind后接动词-ing形式。"
+            }
+          ],
+          "grammar_fix": "Would you mind + V-ing，不介意No, not at all！",
+          "emotion_hook": "礼貌请求总是被误解？Would you mind的回答，让你告别尴尬！"
+        },
+        {
+          "card_id": "T4-09",
+          "full_id": "英语-八上-T4-09",
+          "title": "📍be supposed to：这个“应该”和should有啥不同？",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "be supposed to表示“应该，被期望做某事”，常指根据规则、习惯、安排或期望所做的事情。",
+          "core_points": [
+            "结构：主语 + be (am/is/are) + supposed to + 动词原形。",
+            "表示约定俗成、规定、义务或职责。",
+            "与should相比，be supposed to更强调客观的规定或期望，should更强调主观的建议。",
+            "否定形式：主语 + be + not + supposed to + 动词原形。",
+            "过去式：was/were supposed to。"
+          ],
+          "why_explanation": "学生容易混淆be supposed to和should的用法，或忘记be动词和to。",
+          "example": {
+            "question": "纠正错误：We supposed to wear school uniforms.",
+            "steps": [
+              "be supposed to是一个固定短语，缺少be动词。",
+              "We对应are。"
+            ],
+            "answer": "We are supposed to wear school uniforms."
+          },
+          "mistakes": [
+            {
+              "wrong": "You shouldn't supposed to talk loudly in the library.",
+              "correct": "You are not supposed to talk loudly in the library.",
+              "reason": "be supposed to是整体，不能与should叠加；否定时将not放在be动词后。"
+            },
+            {
+              "wrong": "He is supposed doing his homework now.",
+              "correct": "He is supposed to do his homework now.",
+              "reason": "be supposed to后接动词原形，而不是-ing形式。"
+            }
+          ],
+          "grammar_fix": "be supposed to V原形，规章制度它最行！",
+          "emotion_hook": "这个“应该”不简单！be supposed to的正确用法，你敢挑战吗？"
+        }
+      ]
+    },
+    {
+      "unit_id": "T5",
+      "unit_name": "PK挑战卡",
+      "cards": [
+        {
+          "card_id": "T5-01",
+          "full_id": "英语-八上-T5-01",
+          "title": "🔥八上语法大乱斗！PK挑战：选择题终极对决！",
+          "type": "PK挑战卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "综合考察八年级上册主要语法点：情态动词、未来时态、条件句、被动语态、现在完成时等。",
+          "core_points": [
+            "will / be going to 的辨析。",
+            "should / shouldn't 的正确使用。",
+            "if从句时态（主将从现）。",
+            "一般过去时被动语态的结构和应用。",
+            "现在完成时 for / since 的搭配。",
+            "可数/不可数名词的数量词选择 (many/much, a few/a little)。",
+            "祈使句的肯定和否定形式。"
+          ],
+          "why_explanation": "学生在单一知识点练习中表现良好，但在综合选择题中容易混淆。",
+          "example": {
+            "question": "Choose the best answer.\n1. You look tired. You ______ go to bed early. (should / must)\n2. Look at the clouds. It ______ rain. (will / is going to)\n3. If it ______ tomorrow, we'll go hiking. (doesn't rain / won't rain)\n4. The first computer ______ in the 1940s. (invented / was invented)\n5. I've lived in Beijing ______ ten years. (for / since)",
+            "steps": [
+              "1. 给出建议，用should。",
+              "2. 有迹象的预测，用is going to。",
+              "3. if从句用一般现在时，否定用doesn't rain。",
+              "4. 电脑是被发明，用被动语态was invented。",
+              "5. ten years是时间段，用for。"
+            ],
+            "answer": "1. should; 2. is going to; 3. doesn't rain; 4. was invented; 5. for"
+          },
+          "battle_rule": "每题限时15秒，答对得分，答错扣分。挑战你的语法盲区，看谁是语法王者！",
+          "emotion_hook": "八上英语语法大挑战！敢来PK，测测你的真实水平吗？"
+        },
+        {
+          "card_id": "T5-02",
+          "full_id": "英语-八上-T5-02",
+          "title": "✍️句型转换高手！PK挑战：被动语态专场！",
+          "type": "PK挑战卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "考察主动语态和被动语态之间的转换，特别是过去时的被动语态。",
+          "core_points": [
+            "主动语态：主语 + 谓语 + 宾语。",
+            "被动语态：宾语变主语 + be动词 (与新主语和时态一致) + 动词过去分词 (+ by + 原主语)。",
+            "一般过去时被动语态：was/were + P.P.。",
+            "注意动词的过去分词形式，以及be动词的单复数和时态。",
+            "by + 动作执行者可省略。"
+          ],
+          "why_explanation": "学生在进行句型转换时，容易忘记be动词、过去分词形式或主宾语颠倒的规则。",
+          "example": {
+            "question": "将以下句子改为被动语态：\n1. Bell invented the telephone in 1876.\n2. People built the bridge last year.",
+            "steps": [
+              "1. 宾语the telephone作新主语，谓语invented是一般过去时，所以用was invented，by Bell可加可不加。",
+              "2. 宾语the bridge作新主语，谓语built是一般过去时，所以用was built，by people可省略。"
+            ],
+            "answer": "1. The telephone was invented by Bell in 1876.\n2. The bridge was built last year."
+          },
+          "battle_rule": "每题限时20秒，看谁能又快又准地完成转换！",
+          "emotion_hook": "被动语态是你的痛点？来挑战这套题，让你瞬间掌握句型转换！"
+        },
+        {
+          "card_id": "T5-03",
+          "full_id": "英语-八上-T5-03",
+          "title": "🔍火眼金睛！PK挑战：找出句子中的错误并改正！",
+          "type": "PK挑战卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "综合考察八年级上册词汇、语法、句型等常见错误。",
+          "core_points": [
+            "时态错误：一般现在时、一般过去时、现在完成时、将来时态。",
+            "词性错误：形容词/副词，名词/动词。",
+            "主谓一致错误。",
+            "情态动词用法错误。",
+            "介词搭配错误。",
+            "可数/不可数名词错误。",
+            "易混词辨析错误。"
+          ],
+          "why_explanation": "学生在写作或口语中容易出现各种综合性错误，需要训练纠错能力。",
+          "example": {
+            "question": "找出以下句子中的错误并改正：\n1. He enjoys to play basketball.\n2. My father have lived here for five years.\n3. The book was write by a famous writer.",
+            "steps": [
+              "1. enjoy后接动词-ing形式。",
+              "2. My father是第三人称单数，have应改为has。",
+              "3. write的过去分词是written。"
+            ],
+            "answer": "1. He enjoys playing basketball.\n2. My father has lived here for five years.\n3. The book was written by a famous writer."
+          },
+          "battle_rule": "每题限时30秒，找出所有错误并改正。看谁的语法知识最扎实！",
+          "emotion_hook": "别让小错误拉低你的分数！来挑战纠错，成为英语语法侦探！"
+        },
+        {
+          "card_id": "T5-04",
+          "full_id": "英语-八上-T5-04",
+          "title": "💬情景对话填空！PK挑战：生活场景应用！",
+          "type": "PK挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "考察学生在真实情景中运用所学词汇和句型进行对话的能力。",
+          "core_points": [
+            "健康建议 (Unit 1): should/shouldn't, What's the matter?",
+            "未来计划 (Unit 2, 3): will/be going to, present continuous for future。",
+            "学习建议 (Unit 5): If..., suggestions。",
+            "制作说明 (Unit 7): Imperatives, sequence words。",
+            "礼貌请求 (Unit 11): Could you please...?, Would you mind...?",
+            "习俗讨论 (Unit 12): be supposed to。",
+            "词汇和固定搭配的运用。"
+          ],
+          "why_explanation": "学生可能掌握了单个知识点，但缺乏在连贯对话中灵活运用的能力。",
+          "example": {
+            "question": "完成以下对话：\nA: You look tired. What's the ______ with you?\nB: I have a headache. I didn't sleep well.\nA: Oh, you ______ go to bed early tonight. And you ______ drink more water.\nB: That's a good idea. Thanks for your advice.",
+            "steps": [
+              "第一空询问哪里不舒服，用matter。",
+              "第二空给出建议，用should。",
+              "第三空继续给出建议，用should。"
+            ],
+            "answer": "A: You look tired. What's the **matter** with you?\nB: I have a headache. I didn't sleep well.\nA: Oh, you **should** go to bed early tonight. And you **should** drink more water.\nB: That's a good idea. Thanks for your advice."
+          },
+          "battle_rule": "每空限时10秒，快速填空，看谁的口语更流利！",
+          "emotion_hook": "对话总是卡壳？这个挑战让你在实战中提升口语！"
+        },
+        {
+          "card_id": "T5-05",
+          "full_id": "英语-八上-T5-05",
+          "title": "📚词汇辨析大考验！PK挑战：易混词语填空！",
+          "type": "PK挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "考察八年级上册常见易混词（如too/either, make/do, for/since, invent/discover, many/much等）的辨析和应用。",
+          "core_points": [
+            "too/either：肯定句vs否定句。",
+            "make/do：创造vs活动。",
+            "for/since：时间段vs时间点。",
+            "invent/discover：发明vs发现。",
+            "many/much：可数vs不可数。",
+            "a few/a little：可数少量vs不可数少量。",
+            "say/tell：强调内容vs强调对象。"
+          ],
+          "why_explanation": "这些词汇在中文中含义相似，但在英语中用法有严格区别，容易成为学生的失分点。",
+          "example": {
+            "question": "选词填空：\n1. I don't like math. My brother doesn't like it, _______. (too / either)\n2. We need to _______ a decision. (make / do)\n3. The telephone was _______ by Bell. (invented / discovered)\n4. How _______ water do you need? (many / much)",
+            "steps": [
+              "1. 否定句，用either。",
+              "2. make a decision是固定搭配。",
+              "3. 电话是发明，用invented。",
+              "4. water是不可数名词，用much。"
+            ],
+            "answer": "1. either; 2. make; 3. invented; 4. much"
+          },
+          "battle_rule": "每题限时10秒，快速选择正确词语，看谁是词汇王！",
+          "emotion_hook": "易混词总是让你头疼？来PK，彻底征服这些“拦路虎”！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T6",
+      "unit_name": "速记卡",
+      "cards": [
+        {
+          "card_id": "T6-01",
+          "full_id": "英语-八上-T6-01",
+          "title": "🚀不规则动词速记法：八上必背，三态变化不再愁！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "八年级上册常见不规则动词的过去式和过去分词。",
+          "core_points": [
+            "A-A-A型 (三态同形): cut-cut-cut, put-put-put, read-read-read (发音不同)。",
+            "A-B-A型 (过去分词与原形同形): come-came-come, run-ran-run。",
+            "A-B-B型 (过去式和过去分词同形): bring-brought-brought, build-built-built, buy-bought-bought, have-had-had, make-made-made, say-said-said, tell-told-told。",
+            "A-B-C型 (三态不同形): do-did-done, eat-ate-eaten, go-went-gone, see-saw-seen, take-took-taken, write-wrote-written。",
+            "分类记忆，找出规律，事半功倍。"
+          ],
+          "why_explanation": "不规则动词是语法基础，但记忆枯燥，学生容易混淆或记不住。",
+          "example": {
+            "question": "请写出以下不规则动词的过去式和过去分词：eat, make, see, write, cut",
+            "steps": [
+              "eat-ate-eaten (A-B-C型)",
+              "make-made-made (A-B-B型)",
+              "see-saw-seen (A-B-C型)",
+              "write-wrote-written (A-B-C型)",
+              "cut-cut-cut (A-A-A型)"
+            ],
+            "answer": "eat - ate - eaten; make - made - made; see - saw - seen; write - wrote - written; cut - cut - cut"
+          },
+          "speed_method": "分类记忆法：将三态变化规律相似的动词归为一类，集中记忆。每天背诵一类，并结合造句练习。",
+          "memory_tip": "三态变化多，分类记忆效果好！",
+          "emotion_hook": "不规则动词是噩梦？这套速记法，让你轻松搞定！"
+        },
+        {
+          "card_id": "T6-02",
+          "full_id": "英语-八上-T6-02",
+          "title": "💡八上核心句型速记：万能模板，开口就是地道英语！",
+          "type": "速记卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "八年级上册高频使用的核心句型，掌握它们能有效提升口语和写作能力。",
+          "core_points": [
+            "询问健康/问题：What's the matter/wrong (with you)?",
+            "给出建议：You should/shouldn't + V. Why don't you + V? How about + V-ing?",
+            "未来计划：I'm going to + V. / I'll + V. / I'm + V-ing (for future).",
+            "条件句：If + S + V(一般现在时), S + will/can/should + V.",
+            "被动语态：S + was/were + P.P. (+ by O).",
+            "现在完成时：S + have/has + P.P. + for/since...",
+            "礼貌请求：Could you please + V...? / Would you mind + V-ing...?",
+            "习俗/规定：You're supposed to + V."
+          ],
+          "why_explanation": "学生常会单个词汇，但不知道如何组织成地道的句子，导致表达不流畅。",
+          "example": {
+            "question": "用所给句型完成句子：\n1. (建议) 你应该多喝水。 -> You ______.\n2. (计划) 我打算下周去看电影。 -> I ______.",
+            "steps": [
+              "1. 运用You should + V. 句型。",
+              "2. 运用I'm going to + V. 句型。"
+            ],
+            "answer": "1. You should drink more water. \n2. I'm going to see a movie next week."
+          },
+          "speed_method": "仿写造句法：针对每个句型，替换关键词，造出3-5个新句子。每天练习，形成语感。",
+          "memory_tip": "句型模板背熟透，模仿替换开口溜！",
+          "emotion_hook": "只会说单词？这些八上核心句型，让你开口就是流利英语！"
+        },
+        {
+          "card_id": "T6-03",
+          "full_id": "英语-八上-T6-03",
+          "title": "📚八上词汇速记：分类记忆，单词不再是老大难！",
+          "type": "速记卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "八年级上册重点词汇，按主题分类记忆，高效提升词汇量。",
+          "core_points": [
+            "健康与疾病：headache, stomachache, sore throat, fever, cough, tired, comfortable, doctor, nurse, medicine, advice。",
+            "环保与志愿：clean up, volunteer, plant, rubbish, protect, environment, make a difference。",
+            "职业与兴趣：actor, engineer, scientist, artist, musician, reporter, photographer, practice, dream, interesting, difficult。",
+            "旅行与计划：vacation, plan, relax, visit, travel, abroad, museum, beach。",
+            "发明与历史：invent, invention, discover, discovery, telephone, computer, light bulb, paper。",
+            "烹饪与食物：banana, milk, shake, yogurt, ingredient, cut, peel, pour, mix, delicious。",
+            "习俗与礼仪：shake hands, bow, kiss, custom, rule, tradition, polite, rude。",
+            "记忆方法：词根词缀、联想、同义反义词、搭配记忆。"
+          ],
+          "why_explanation": "词汇量是学习英语的基础，但死记硬背效率低下，容易遗忘。",
+          "example": {
+            "question": "请写出与“健康”相关的5个单词。",
+            "steps": [
+              "回忆Unit 1学过的词汇。",
+              "列出：headache, stomachache, fever, cough, medicine。"
+            ],
+            "answer": "headache, stomachache, fever, cough, medicine"
+          },
+          "speed_method": "主题联想法：将相关词汇串联成小故事或思维导图。每天一个小主题，巩固记忆。",
+          "memory_tip": "单词分类背，主题联想更高效！",
+          "emotion_hook": "单词背了就忘？这套分类速记法，让你单词量蹭蹭涨！"
+        },
+        {
+          "card_id": "T6-04",
+          "full_id": "英语-八上-T6-04",
+          "title": "🔄动词短语速记：八上必会，一词多义不再愁！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "八年级上册常见的动词短语（phrasal verbs），它们通常由动词和介词/副词组成，含义多变。",
+          "core_points": [
+            "clean up: 清理 (e.g., clean up the park)。",
+            "turn on/off: 打开/关闭 (e.g., turn on the light)。",
+            "look for: 寻找 (e.g., look for my keys)。",
+            "put up: 张贴 (e.g., put up posters)。",
+            "take out: 取出，拿出 (e.g., take out the trash)。",
+            "ask for: 请求 (e.g., ask for help)。",
+            "make a difference: 产生影响，有所作为。",
+            "make a decision: 做决定。",
+            "pay attention to: 注意。",
+            "go on: 继续。"
+          ],
+          "why_explanation": "动词短语的含义往往不能从字面意义推断，学生容易混淆或误用。",
+          "example": {
+            "question": "用所给动词短语填空：\n1. Let's ______ the park. (clean up)\n2. Please ______ the light when you leave. (turn off)",
+            "steps": [
+              "1. 根据语境，清理公园用clean up。",
+              "2. 离开时关灯，用turn off。"
+            ],
+            "answer": "1. clean up; 2. turn off"
+          },
+          "speed_method": "情景造句法：每个动词短语至少造一个句子，并想象使用该短语的情景，加深记忆。",
+          "memory_tip": "动词短语一串串，情景造句记牢它！",
+          "emotion_hook": "动词短语总是记不住？这套速记法，让你轻松掌握一词多义！"
+        },
+        {
+          "card_id": "T6-05",
+          "full_id": "英语-八上-T6-05",
+          "title": "📝八上写作金句速记：高分作文必备，拿捏考官！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "八年级上册可用于写作的万能金句和高级表达，提升文章质量。",
+          "core_points": [
+            "开头句：It is important to... / As we all know... / With the development of...",
+            "建议句：I think we should... / It's a good idea to... / Why don't we...?",
+            "原因结果：because of..., lead to..., result in...",
+            "过渡句：First, Next, Then, Finally. / In addition, / However, / Therefore,",
+            "表达观点：In my opinion, / I believe that... / I agree with...",
+            "结尾句：In conclusion, / All in all, / Let's work together to...",
+            "情感表达：I'm sorry to hear that. / I'm looking forward to..."
+          ],
+          "why_explanation": "学生在写作时常词不达意，句式单一，缺乏高级表达。",
+          "example": {
+            "question": "用金句表达“我认为我们应该保护环境”。",
+            "steps": [
+              "选择表达观点的金句：I think we should...",
+              "加上核心内容：protect the environment。"
+            ],
+            "answer": "I think we should protect the environment. / In my opinion, it's very important to protect our environment."
+          },
+          "speed_method": "模板套用法：选择一个写作主题，尝试将所有金句套用进去，练习不同句式的组合。",
+          "memory_tip": "金句模板背得熟，写作高分不用愁！",
+          "emotion_hook": "作文只会写大白话？这些写作金句，让你轻松拿高分！"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,790 @@
+{
+  "subject": "英语",
+  "grade": "高二",
+  "semester": "下册",
+  "textbook": "人教版",
+  "grade_short": "高二下",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片（全知识点覆盖版），涵盖人教版高二下学期所有重要知识点。",
+  "units": [
+    {
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [
+        {
+          "card_id": "T1-01",
+          "full_id": "英语-高二下-T1-01",
+          "title": "⚡️高二必刷！affect vs effect 终极辨析！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "affect (v.) 影响；effect (n.) 影响，效果；(v.) 促成，实现",
+          "core_points": [
+            "affect 主要是动词，表示“影响，感动”。",
+            "effect 主要是名词，表示“影响，效果，作用”。",
+            "effect 也可以作动词，意为“实现，促成”，但较少见。",
+            "记忆：A是动词首字母，E是名词首字母（多用于名词）。"
+          ],
+          "why_explanation": "发音相似，意义关联，但词性不同是主要混淆原因。effect作动词时意为“促成”，与affect的“影响”有所区别。",
+          "example": {
+            "question": "Choose the best word: The new policy will ______ (affect/effect) significant changes.",
+            "steps": [
+              "分析句子结构：'will' 后面需要动词。",
+              "辨析词性：affect是动词，effect通常是名词，但此处可作动词。",
+              "辨析词义：affect意为“影响”，effect意为“促成，实现”。此处是“促成变化”。"
+            ],
+            "answer": "effect"
+          },
+          "mistakes": [
+            {
+              "wrong": "The bad weather had a serious affect on crops.",
+              "correct": "The bad weather had a serious effect on crops.",
+              "reason": "此处需要名词'影响'，应使用effect。"
+            },
+            {
+              "wrong": "His speech had a great affect on the audience.",
+              "correct": "His speech had a great effect on the audience.",
+              "reason": "此处“产生影响”应是名词effect，或用动词affect: 'His speech greatly affected the audience.'"
+            }
+          ],
+          "memory_tip": "A是动词，E是名词，记住AE顺序，词性不乱！",
+          "emotion_hook": "每次都错？别再让affect和effect成为你的扣分点！"
+        },
+        {
+          "card_id": "T1-02",
+          "full_id": "英语-高二下-T1-02",
+          "title": "🔥高分必备！lie vs lay 躺下还是放置？",
+          "type": "易混词陷阱卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "lie (v.) 躺，平放 (不及物动词)；lie (v.) 说谎 (不及物动词)；lay (v.) 放置，产卵 (及物动词)",
+          "core_points": [
+            "lie (躺)：原型lie, 过去式lay, 过去分词lain, 现在分词lying。",
+            "lie (说谎)：原型lie, 过去式lied, 过去分词lied, 现在分词lying。",
+            "lay (放置/产卵)：原型lay, 过去式laid, 过去分词laid, 现在分词laying。",
+            "主要混淆点在于 'lie (躺)' 的过去式是 'lay'，与 'lay (放置)' 的原型相同。"
+          ],
+          "why_explanation": "lie和lay的动词原形、过去式和过去分词形式高度重叠，且词义相近（一个“躺”，一个“放”），导致极易混淆。",
+          "example": {
+            "question": "Fill in the blank: He ______ (lie/lay) the book on the table and then ______ (lie/lay) down for a rest.",
+            "steps": [
+              "分析第一个空：'the book on the table' 有宾语，需要及物动词 '放置'。",
+              "分析第二个空：'down for a rest' 无宾语，需要不及物动词 '躺下'。",
+              "选择正确的词形：放置用 lay，躺下用 lie。"
+            ],
+            "answer": "lay; lay"
+          },
+          "mistakes": [
+            {
+              "wrong": "The hen laid an egg and then lay down.",
+              "correct": "The hen laid an egg and then lay down.",
+              "reason": "第一个laid是lay的过去式“产卵”，第二个lay是lie的过去式“躺下”，此处正确。"
+            },
+            {
+              "wrong": "He laid in bed all morning.",
+              "correct": "He lay in bed all morning.",
+              "reason": "“躺在床上”是不及物动词lie的过去式lay，而不是及物动词lay的过去式laid。"
+            }
+          ],
+          "memory_tip": "躺下是lie-lay-lain，放东西是lay-laid-laid，记住'躺'的过去式就是'放'的原形！",
+          "emotion_hook": "躺下躺错词，考试直接扣分！告别lie/lay的世纪难题！"
+        },
+        {
+          "card_id": "T1-03",
+          "full_id": "英语-高二下-T1-03",
+          "title": "⚠️高二必刷！rise vs raise 自动上升还是手动提高？",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "rise (v.) 上升，上涨 (不及物动词)；raise (v.) 举起，提高，抚养 (及物动词)",
+          "core_points": [
+            "rise 是不及物动词，表示主语自己上升，后面不能接宾语。过去式rose, 过去分词risen。",
+            "raise 是及物动词，表示使某物上升，后面必须接宾语。过去式raised, 过去分词raised。",
+            "常见搭配：rise in temperature/prices (气温/物价上涨), raise one's hand (举手), raise funds (筹款), raise children (抚养孩子)。"
+          ],
+          "why_explanation": "两者都有“上升”或“提高”的含义，但一个是主动上升（不及物），一个是被动上升或使…上升（及物），词性差异是关键。",
+          "example": {
+            "question": "Choose the correct word: The sun will ______ (rise/raise) in the east. We need to ______ (rise/raise) awareness of environmental protection.",
+            "steps": [
+              "分析第一个空：太阳自己升起，没有宾语，用不及物动词。",
+              "分析第二个空：'awareness' 是宾语，需要及物动词 '提高'。",
+              "选择正确的词：rise; raise。"
+            ],
+            "answer": "rise; raise"
+          },
+          "mistakes": [
+            {
+              "wrong": "The company decided to rise salaries.",
+              "correct": "The company decided to raise salaries.",
+              "reason": "“提高工资”需要及物动词raise，后面接宾语salaries。"
+            },
+            {
+              "wrong": "Prices raised sharply last month.",
+              "correct": "Prices rose sharply last month.",
+              "reason": "“物价上涨”是物价自己上升，用不及物动词rise的过去式rose。"
+            }
+          ],
+          "memory_tip": "Rise自己起，Raise抬起物。一个自发，一个施力。",
+          "emotion_hook": "别再被rise和raise搞晕了！一招教你分清及物不及物！"
+        },
+        {
+          "card_id": "T1-04",
+          "full_id": "英语-高二下-T1-04",
+          "title": "🤯高二难题！economic vs economical 经济的还是节俭的？",
+          "type": "易混词陷阱卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "economic (adj.) 经济的，经济学的；economical (adj.) 节约的，经济实惠的",
+          "core_points": [
+            "economic 强调与“经济”这个学科、体系或国家财富相关的概念，如 economic growth (经济增长), economic policy (经济政策)。",
+            "economical 强调“节约，省钱，实惠”，通常指在使用或消费方面避免浪费，如 an economical car (省油的车), economical use of resources (节约使用资源)。",
+            "记忆：eco**nom**ic 强调 **nom**y (经济学)，eco**nom**ical 强调 **m**oney (钱) and less waste."
+          ],
+          "why_explanation": "两者都源于'economy'，但侧重点不同。economic是宏观的、理论性的，economical是微观的、实践性的。",
+          "example": {
+            "question": "Which word is correct? The government is concerned about the country's ______ (economic/economical) situation. Buying in bulk can be more ______ (economic/economical).",
+            "steps": [
+              "分析第一个空：'country's situation' 涉及国家整体的财政状况，是宏观的经济问题。",
+              "分析第二个空：'buying in bulk' 指批量购买可以省钱，是关于节约和实惠。",
+              "选择正确的词：economic; economical。"
+            ],
+            "answer": "economic; economical"
+          },
+          "mistakes": [
+            {
+              "wrong": "We need to find a more economic way to travel.",
+              "correct": "We need to find a more economical way to travel.",
+              "reason": "“节约的旅行方式”是关于省钱和实惠，用economical。"
+            },
+            {
+              "wrong": "The company faced serious economical problems.",
+              "correct": "The company faced serious economic problems.",
+              "reason": "“经济问题”指公司整体的财务状况，用economic。"
+            }
+          ],
+          "memory_tip": "Economic讲经济，Economical是省钱。一个大方向，一个小花销。",
+          "emotion_hook": "高二高频考点！economic和economical，你还分不清吗？"
+        },
+        {
+          "card_id": "T1-05",
+          "full_id": "英语-高二下-T1-05",
+          "title": "💡高二高频！deny vs refuse 否认还是拒绝？",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "deny (v.) 否认，拒绝给予 (后接动名词/名词/that从句)；refuse (v.) 拒绝 (后接to do/名词)",
+          "core_points": [
+            "deny 侧重“否认事实或指控”，或“拒绝承认/给予”。常用于 deny doing sth., deny that..., deny sb. sth. (拒绝给予某人某物)。",
+            "refuse 侧重“拒绝做某事或拒绝接受某物/提议”。常用于 refuse to do sth., refuse sth./sb.。",
+            "记忆：deny是“否认，不承认”，refuse是“拒绝，不去做”。"
+          ],
+          "why_explanation": "两者都有“拒绝”的含义，但deny的“拒绝”更偏向于“不承认”或“不给予”，而refuse的“拒绝”更偏向于“不去做”或“不接受”。",
+          "example": {
+            "question": "Choose the best word: He ______ (denied/refused) taking the money. She ______ (denied/refused) to help me.",
+            "steps": [
+              "分析第一个空：'taking the money' 是一个动作，表示“否认做过某事”。",
+              "分析第二个空：'to help me' 是一个不定式，表示“拒绝做某事”。",
+              "选择正确的词：denied; refused。"
+            ],
+            "answer": "denied; refused"
+          },
+          "mistakes": [
+            {
+              "wrong": "He refused having broken the window.",
+              "correct": "He denied having broken the window.",
+              "reason": "“否认做过某事”用deny doing sth。"
+            },
+            {
+              "wrong": "The government denied to meet their demands.",
+              "correct": "The government refused to meet their demands.",
+              "reason": "“拒绝做某事”用refuse to do sth。"
+            }
+          ],
+          "memory_tip": "Deny是否认事实，Refuse是拒绝行动。",
+          "emotion_hook": "高二英语辨析：deny和refuse，一秒搞定，不再纠结！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T2",
+      "unit_name": "发音挑战",
+      "cards": [
+        {
+          "card_id": "T2-01",
+          "full_id": "英语-高二下-T2-01",
+          "title": "👂高二易错！-ough 到底怎么读？",
+          "type": "发音挑战卡",
+          "difficulty": 4,
+          "importance": 3,
+          "definition": "英语中-ough组合发音多变，无固定规律，需逐个记忆。",
+          "core_points": [
+            "thorough: /ˈθʌrə/ (o发/ʌ/)",
+            "though: /ðoʊ/ (ou发/oʊ/)",
+            "through: /θruː/ (ou发/uː/)",
+            "tough: /tʌf/ (ou发/ʌf/)",
+            "cough: /kɔːf/ (ou发/ɔːf/)",
+            "plough (美式 plow): /plaʊ/ (ou发/aʊ/)",
+            "enough: /ɪˈnʌf/ (ou发/ʌf/)"
+          ],
+          "why_explanation": "英语发音不规则的典型代表，历史演变导致拼写与发音严重脱节。没有底层逻辑，只能记忆。",
+          "example": {
+            "question": "Which word contains the /ʌ/ sound?",
+            "steps": [
+              "读出每个单词的发音。",
+              "thorough: /ˈθʌrə/",
+              "though: /ðoʊ/",
+              "through: /θruː/",
+              "tough: /tʌf/",
+              "cough: /kɔːf/",
+              "plough: /plaʊ/",
+              "enough: /ɪˈnʌf/"
+            ],
+            "answer": "thorough, tough, enough"
+          },
+          "mistakes": [
+            {
+              "wrong": "thorough 读成 /θroʊ/",
+              "correct": "thorough 读成 /ˈθʌrə/",
+              "reason": "误将thorough中的ough与though混淆，忽略了重音和元音差异。"
+            },
+            {
+              "wrong": "tough 读成 /tuːf/",
+              "correct": "tough 读成 /tʌf/",
+              "reason": "误将tough中的ough与through混淆。"
+            }
+          ],
+          "memory_tip": "ough发音变变变，字典查查是关键！",
+          "emotion_hook": "高二生必看！-ough家族发音魔咒，你中招了吗？"
+        },
+        {
+          "card_id": "T2-02",
+          "full_id": "英语-高二下-T2-02",
+          "title": "🗣️高二口语！连读技巧让你秒变native speaker！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "连读 (Liaison) 指在一个词的末尾和下一个词的开头音素连接起来发音的现象，使语流更流畅自然。",
+          "core_points": [
+            "辅音+元音连读：前一词以辅音结尾，后一词以元音开头，辅音与元音连读。",
+            "元音+元音连读：若前一词以元音结尾，后一词以元音开头，中间常插入/j/或/w/音。",
+            "相同辅音连读：两个相邻的相同辅音，只发一次，但时值稍长。",
+            "失去爆破：爆破音(p, b, t, d, k, g)后跟另一个爆破音或摩擦音时，前一个爆破音只作口型，不发音。",
+            "节奏与语调：连读是为了语流的自然，而非单纯技巧。"
+          ],
+          "why_explanation": "汉语发音多为单音节或双音节，词与词之间界限清晰。英语语流中，为了发音省力，词与词之间会发生音变，形成连读，这是英语的自然发音规律。",
+          "example": {
+            "question": "Read the sentence naturally: 'What an interesting idea!'",
+            "steps": [
+              "识别连读点：What (t) + an (a) -> Wha-tan",
+              "an (n) + interesting (i) -> a-ninteresting",
+              "interesting (g) + idea (i) -> interestin-gidea (g与i之间插入/dʒ/音)",
+              "尝试连贯读出：/ˈwɒtən ˈɪntrəstɪŋ aɪˈdɪə/"
+            ],
+            "answer": "Wha-tan interesting-idea! (注意t和a，n和i，g和i的连读)"
+          },
+          "mistakes": [
+            {
+              "wrong": "I want to eat an apple. (每个词独立发音，生硬)",
+              "correct": "I wan-ta-neat-napple. (want to -> wanna, an apple -> a-napple)",
+              "reason": "忽略了辅音+元音的连读，导致语流不自然。"
+            },
+            {
+              "wrong": "He is a good boy. (good boy中的d发音清晰)",
+              "correct": "He is a goo(d) boy. (d音失去爆破)",
+              "reason": "good和boy相邻，d是爆破音，b也是爆破音，d应失去爆破。"
+            }
+          ],
+          "memory_tip": "辅元手拉手，同音只一口，爆破别出声，语流自然走！",
+          "emotion_hook": "高二口语想拿高分？学会这几个连读，秒杀考官！"
+        },
+        {
+          "card_id": "T2-03",
+          "full_id": "英语-高二下-T2-03",
+          "title": "🤫高二隐藏发音！silent letters 让你瞬间露馅？",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "英语中有些字母在特定词汇或组合中不发音，即“哑音字母”，是发音陷阱。",
+          "core_points": [
+            "K在N前不发音：know, knife, knock, knee",
+            "W在R前不发音：write, wrong, wrist, wrap",
+            "B在M后不发音：climb, comb, lamb, thumb",
+            "L在某些词中不发音：walk, talk, calm, half, would, should, could",
+            "T在-sten, -stle组合中不发音：listen, castle, whistle, often (可发可不发)",
+            "G在N前不发音：design, foreign, sign, champagne"
+          ],
+          "why_explanation": "哑音字母是英语历史演变的结果，很多词汇在古英语中发音，但随着语音变化，这些字母逐渐失去了发音，但拼写保留了下来。",
+          "example": {
+            "question": "Which letter is silent in the word 'knowledge'?",
+            "steps": [
+              "读出单词 'knowledge'。",
+              "分析发音：/ˈnɒlɪdʒ/",
+              "对比拼写：KNOWLEDGE。",
+              "发现K没有发音。"
+            ],
+            "answer": "K"
+          },
+          "mistakes": [
+            {
+              "wrong": "listen 读成 /lɪˈstɛn/",
+              "correct": "listen 读成 /ˈlɪsən/",
+              "reason": "T在-sten中不发音。"
+            },
+            {
+              "wrong": "climb 读成 /klaɪmb/",
+              "correct": "climb 读成 /klaɪm/",
+              "reason": "B在M后不发音。"
+            }
+          ],
+          "memory_tip": "K+N不发K，W+R不发W，M+B不发B，L有时不发L，T有时不发T！",
+          "emotion_hook": "高二发音盲区！这些单词有“哑巴字母”，你读对了吗？"
+        }
+      ]
+    },
+    {
+      "unit_id": "T3",
+      "unit_name": "情景闯关",
+      "cards": [
+        {
+          "card_id": "T3-01",
+          "full_id": "英语-高二下-T3-01",
+          "title": "🌍高二必练！环保辩论赛，你准备好了吗？",
+          "type": "情景闯关卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "在环保主题辩论中，运用高级词汇和复杂句式清晰表达观点，反驳对方。",
+          "core_points": [
+            "熟悉环保词汇：sustainable development, carbon footprint, renewable energy, deforestation, climate change, conservation.",
+            "掌握辩论句式：I strongly believe that..., My opponent argues that..., However, I must point out..., We cannot overlook the fact that...",
+            "组织论点：提出论点(thesis statement)，提供证据(evidence)，进行解释(explanation)，得出结论(conclusion)。",
+            "礼貌反驳：While I understand your point, I disagree because...",
+            "逻辑清晰：使用连接词 (therefore, consequently, in addition, on the other hand) 确保论证连贯。"
+          ],
+          "why_explanation": "高二下学期常涉及社会热点话题，环保是其中之一。辩论不仅考察词汇语法，更考察逻辑思维和口语表达的综合能力。",
+          "example": {
+            "question": "Imagine you are arguing for stricter government regulations on plastic use. How would you start your argument and present one key point?",
+            "steps": [
+              "表明立场：明确支持政府对塑料使用的更严格规定。",
+              "提出论点：选择一个关键点，如“塑料污染对生态系统的毁灭性影响”。",
+              "展开论证：提供具体例子或数据，如海洋生物误食塑料、土壤污染等。",
+              "提出措施：指出政府可以如何实施更严格的规定。",
+              "使用高级词汇和句式。",
+              "示例回答：'Good morning, everyone. I stand here today to advocate for urgent governmental intervention to curb the pervasive issue of plastic pollution. My primary contention is the catastrophic impact plastic waste has on our fragile ecosystems. For instance, countless marine species ingest microplastics, leading to severe health issues and even death, disrupting the delicate balance of aquatic life. Therefore, robust regulations are not merely an option, but an ecological imperative.'"
+            ],
+            "answer": "见步骤中的示例回答。"
+          },
+          "mistakes": [
+            {
+              "wrong": "I think plastic is bad. Government should stop it.",
+              "correct": "I strongly believe that the government must implement stringent regulations on plastic usage due to its detrimental effects on our environment.",
+              "reason": "表达过于口语化，缺乏正式和学术性词汇及复杂的句式结构。"
+            }
+          ],
+          "memory_tip": "论点+证据+解释，高级词汇不离口，句式多变显水平。",
+          "emotion_hook": "高二英语辩论赛，想赢就看这卡片！"
+        },
+        {
+          "card_id": "T3-02",
+          "full_id": "英语-高二下-T3-02",
+          "title": "✈️高二旅行！和老外交流，你敢开口吗？",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在旅行场景中，自信地与外国人进行日常交流，解决问题。",
+          "core_points": [
+            "问路指路：Excuse me, could you tell me how to get to...? Go straight, turn left/right at the second crossing.",
+            "点餐购物：I'd like to order..., How much is this?, Do you have this in a larger size?",
+            "寻求帮助：I need some help, please. Could you assist me with...?",
+            "表达感谢与歉意：Thank you so much! I'm so sorry for the inconvenience.",
+            "常用短语：Where is the nearest...? How far is it? What time does it open/close?",
+            "文化礼仪：注意眼神交流，微笑，适当的肢体语言。"
+          ],
+          "why_explanation": "高二学生应具备基本的跨文化交流能力，旅行场景是检验和提升口语实用性的绝佳机会。",
+          "example": {
+            "question": "You are lost in a foreign city and need to find the nearest subway station. What would you say to a local passerby?",
+            "steps": [
+              "礼貌地引起注意：Excuse me...",
+              "说明情况：I'm a bit lost.",
+              "提出请求：Could you tell me how to get to the nearest subway station?",
+              "补充信息（如果需要）：Is it far from here? Which direction should I go?",
+              "表达感谢：Thank you for your help!",
+              "示例回答：'Excuse me, I'm a bit lost. Could you please tell me how to get to the nearest subway station? Is it far from here? Thank you so much!'"
+            ],
+            "answer": "见步骤中的示例回答。"
+          },
+          "mistakes": [
+            {
+              "wrong": "Where subway?",
+              "correct": "Excuse me, could you tell me where the nearest subway station is?",
+              "reason": "语句不完整，不礼貌，缺乏疑问句的正确结构。"
+            }
+          ],
+          "memory_tip": "问路礼貌先，点餐清楚说，寻求帮助不慌乱，感谢道歉常用语。",
+          "emotion_hook": "高二想出国玩？这些旅行英语口语，让你秒变“老司机”！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T4",
+      "unit_name": "语法纠错",
+      "cards": [
+        {
+          "card_id": "T4-01",
+          "full_id": "英语-高二下-T4-01",
+          "title": "❌高二必改！虚拟语气，你真的会用吗？",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "虚拟语气 (Subjunctive Mood) 用于表达假设、愿望、命令、建议等非真实或未发生的情况。",
+          "core_points": [
+            "If条件句虚拟：与现在相反用if + did/were, 主句 would/could/might + do；与过去相反用if + had done, 主句 would/could/might + have done。",
+            "表示“建议、命令、要求”的动词后：接that从句，从句谓语用(should) + do。 (如suggest, advise, demand, order, insist, propose, require, request)",
+            "It is important/necessary/suggested/recommended that...：后接that从句，从句谓语用(should) + do。",
+            "wish/if only：表示愿望，与现在相反用did/were，与过去相反用had done，与将来相反用would/could + do。",
+            "as if/as though：表示“好像”，从句谓语用过去式或过去完成时。"
+          ],
+          "why_explanation": "虚拟语气是高二语法难点，其时态变化与真实语气的时态变化不同，且在不同情境下有特定用法，容易混淆。",
+          "example": {
+            "question": "Correct the mistake: If I was a bird, I would fly to you.",
+            "steps": [
+              "识别句子类型：这是一个与现在事实相反的虚拟条件句。",
+              "回顾虚拟语气规则：与现在事实相反的条件句，从句谓语动词用一般过去时，be动词一律用were。",
+              "应用规则进行修正。"
+            ],
+            "answer": "If I were a bird, I would fly to you.",
+            "grammar_fix": "虚拟语气中，与现在事实相反的条件句，be动词无论主语单复数都用were。"
+          },
+          "mistakes": [
+            {
+              "wrong": "He suggested that we should started at once.",
+              "correct": "He suggested that we (should) start at once.",
+              "reason": "suggest后that从句谓语用(should) +动词原形，而不是过去式。"
+            },
+            {
+              "wrong": "I wish I had enough money now.",
+              "correct": "I wish I had enough money now.",
+              "reason": "wish后跟从句表示与现在事实相反的愿望时，从句动词用一般过去时，此处had是正确的。"
+            },
+            {
+              "wrong": "If I had known it yesterday, I would tell you.",
+              "correct": "If I had known it yesterday, I would have told you.",
+              "reason": "与过去事实相反的虚拟条件句，主句谓语用would/could/might + have done。"
+            }
+          ],
+          "memory_tip": "现在were，过去had done，将来would do，命令建议should do。",
+          "emotion_hook": "高二虚拟语气老是错？这份纠错卡片帮你彻底搞定！"
+        },
+        {
+          "card_id": "T4-02",
+          "full_id": "英语-高二下-T4-02",
+          "title": "🤯高二烧脑！倒装句你用对了吗？",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "倒装句 (Inversion) 指将谓语动词或部分谓语（助动词、情态动词）置于主语之前的句型。",
+          "core_points": [
+            "完全倒装：谓语动词全部置于主语之前。常用于here, there, in/on/at等地点状语开头的句子，或only+状语/状语从句。",
+            "部分倒装：只将助动词、情态动词或be动词置于主语之前。常用于否定词或半否定词 (never, seldom, hardly, scarcely, little, not until, no sooner than) 开头的句子。",
+            "so/such...that... 引导的倒装：So + adj./adv. + 助动词/be动词 + 主语 + that...; Such + be动词 + n. + that...",
+            "only + 状语/状语从句：Only after/when/then/in this way + 助动词/情态动词 + 主语 + 谓语。",
+            "as/though 引导的让步状语从句：adj./adv./n. + as/though + 主语 + 谓语。"
+          ],
+          "why_explanation": "倒装句是英语修辞和强调的手段，但其规则复杂，尤其涉及助动词和主谓搭配，容易出错。",
+          "example": {
+            "question": "Correct the mistake: Not until yesterday I realized my mistake.",
+            "steps": [
+              "识别句子结构：以否定词组 'Not until' 开头。",
+              "回顾倒装句规则：否定词组置于句首时，句子需用部分倒装，即助动词提到主语前。",
+              "将一般过去时态的助动词did提到主语I前。"
+            ],
+            "answer": "Not until yesterday did I realize my mistake.",
+            "grammar_fix": "当'not until'引导的状语从句或状语置于句首时，主句要用部分倒装。"
+          },
+          "mistakes": [
+            {
+              "wrong": "Hardly he had arrived when it started to rain.",
+              "correct": "Hardly had he arrived when it started to rain.",
+              "reason": "否定词hardly置于句首，主句需用部分倒装，将助动词had提到主语he前。"
+            },
+            {
+              "wrong": "In the room sat a boy.",
+              "correct": "In the room sat a boy.",
+              "reason": "地点状语In the room置于句首，且主语a boy是非代词，可以构成完全倒装，此句正确。"
+            }
+          ],
+          "memory_tip": "否定词在前，助动词紧跟。地点状语非代词，谓语全倒装！",
+          "emotion_hook": "高二倒装句，你还在傻傻分不清？这份纠错卡片帮你理清思路！"
+        },
+        {
+          "card_id": "T4-03",
+          "full_id": "英语-高二下-T4-03",
+          "title": "🚫高二致命伤！非谓语动词辨析，你踩雷了吗？",
+          "type": "语法纠错卡",
+          "difficulty": 5,
+          "importance": 5,
+          "definition": "非谓语动词包括不定式 (to do)、动名词 (doing) 和分词 (doing/done)，它们在句中充当除谓语外的其他成分。",
+          "core_points": [
+            "不定式：作主语、宾语、表语、定语、状语。表示目的、将来、未发生或一次性动作。",
+            "动名词：作主语、宾语、表语、定语。表示习惯性、已发生或抽象的动作。",
+            "现在分词 (doing)：作定语、状语、表语。表示主动、进行。",
+            "过去分词 (done)：作定语、状语、表语。表示被动、完成。",
+            "动词后接不定式还是动名词：取决于动词本身 (如 advise doing vs advise sb to do, remember to do vs remember doing)。",
+            "分词作状语：注意逻辑主语与句子的主语一致性，否则需要独立主格结构。"
+          ],
+          "why_explanation": "非谓语动词形式多样，功能复杂，尤其在主动被动、进行完成、以及与特定动词搭配时，极易混淆出错。",
+          "example": {
+            "question": "Correct the mistake: The boy stood there, deeply moved.",
+            "steps": [
+              "识别非谓语动词：'moved' 是过去分词。",
+              "分析逻辑主语：'The boy' 是主语。",
+              "判断分词与主语的关系：男孩是“被感动”，所以用过去分词表示被动。",
+              "结论：此句正确。"
+            ],
+            "answer": "The boy stood there, deeply moved. (此句正确)",
+            "grammar_fix": "过去分词作状语表示被动或完成，其逻辑主语与句子的主语一致。"
+          },
+          "mistakes": [
+            {
+              "wrong": "I remember to meet him before.",
+              "correct": "I remember meeting him before.",
+              "reason": "remember doing sth. 表示“记得做过某事”，remember to do sth. 表示“记得去做某事（还没做）”。"
+            },
+            {
+              "wrong": "Seeing from the top of the hill, the city looks beautiful.",
+              "correct": "Seen from the top of the hill, the city looks beautiful.",
+              "reason": "“城市是被看”，所以应用过去分词seen表示被动。"
+            },
+            {
+              "wrong": "The excited news made us cheer.",
+              "correct": "The exciting news made us cheer.",
+              "reason": "“消息是令人兴奋的”，用现在分词exciting表示主动、使人兴奋；excited表示“感到兴奋的”。"
+            }
+          ],
+          "memory_tip": "不定式表将来，动名词表过去。ing主动进行，ed被动完成！",
+          "emotion_hook": "高二非谓语动词，你的语法噩梦？这份卡片让你彻底清醒！"
+        },
+        {
+          "card_id": "T4-04",
+          "full_id": "英语-高二下-T4-04",
+          "title": "🧐高二必刷！独立主格结构，你真的懂吗？",
+          "type": "语法纠错卡",
+          "difficulty": 5,
+          "importance": 4,
+          "definition": "独立主格结构 (Absolute Phrase) 是一个独立于主句的结构，通常由“名词/代词 + 非谓语动词/形容词/副词/介词短语”构成，表示时间、原因、条件、伴随等。",
+          "core_points": [
+            "结构形式：名词/代词（作逻辑主语）+ 现在分词/过去分词/不定式/形容词/副词/介词短语。",
+            "特点：有自己的逻辑主语，与主句主语不同，但意义上与主句紧密关联。",
+            "功能：作状语，表示伴随情况、原因、时间、条件等。",
+            "常见误区：将独立主格的逻辑主语与主句主语混淆，导致主谓不一致。"
+          ],
+          "why_explanation": "独立主格结构是高级句型，其独立性与主句的关联性容易让人困惑，尤其在判断逻辑主语时。",
+          "example": {
+            "question": "Correct the mistake: The weather permitting, we will go for a picnic.",
+            "steps": [
+              "识别结构：'The weather permitting' 是独立主格结构。",
+              "分析逻辑主语：'weather' 是 permitting 的主语。",
+              "判断形式：'weather' 和 'permit' 是主动关系，所以用现在分词permitting。",
+              "结论：此句正确。"
+            ],
+            "answer": "The weather permitting, we will go for a picnic. (此句正确)",
+            "grammar_fix": "独立主格结构表示伴随情况，其逻辑主语与主句主语不同，但意义上紧密关联。"
+          },
+          "mistakes": [
+            {
+              "wrong": "The sun rising, we set off.",
+              "correct": "The sun having risen, we set off.",
+              "reason": "“太阳升起”是发生在“我们出发”之前，表示动作的完成，应使用现在分词的完成式having risen。"
+            },
+            {
+              "wrong": "The meeting finished, we went home.",
+              "correct": "The meeting being finished, we went home.",
+              "reason": "虽然'finished'是过去分词，但'meeting'与'finished'之间需要be动词，表示“会议结束了”，更完整的表达是'The meeting being finished'或'The meeting over'。"
+            },
+            {
+              "wrong": "With his homework doing, he couldn't play.",
+              "correct": "With his homework done, he couldn't play.",
+              "reason": "'homework'与'do'之间是被动关系，应使用过去分词done。"
+            }
+          ],
+          "memory_tip": "独立主格逻辑主语不一致，动词ing/ed来搭配！",
+          "emotion_hook": "高二进阶语法！独立主格结构，考场拿分的秘密武器！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T5",
+      "unit_name": "PK挑战",
+      "cards": [
+        {
+          "card_id": "T5-01",
+          "full_id": "英语-高二下-T5-01",
+          "title": "🏆高二PK！谁是虚拟语气王者？",
+          "type": "PK挑战卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "通过多题PK，检验对高二虚拟语气各种场景的掌握程度。",
+          "core_points": [
+            "掌握If条件句三种虚拟情况。",
+            "记住wish/if only后的虚拟时态。",
+            "熟悉suggest/demand等动词后的that从句虚拟。",
+            "辨析as if/as though的虚拟用法。",
+            "区分It is important/necessary等句型后的虚拟。"
+          ],
+          "why_explanation": "虚拟语气是高二的重中之重，通过PK形式能有效激发学习兴趣，巩固易错点。",
+          "example": {
+            "question": "Choose the best option to complete the sentences:\n1. If I ______ (know) his address, I would write to him.\n2. He wished he ______ (not waste) so much time yesterday.\n3. It's high time that we ______ (do) something about the pollution.",
+            "steps": [
+              "分析第1句：would write是主句，与现在事实相反，从句用一般过去时。",
+              "分析第2句：wished是过去式，表示对过去事实的遗憾，从句用过去完成时。",
+              "分析第3句：It's high time that... 后面用一般过去时或should do。"
+            ],
+            "answer": "1. knew; 2. hadn't wasted; 3. did/should do"
+          },
+          "mistakes": [],
+          "memory_tip": "虚拟不真实，时态要倒退，命令建议should do。",
+          "emotion_hook": "高二虚拟语气PK赛！敢来挑战吗？看看谁才是真正的语法高手！"
+        },
+        {
+          "card_id": "T5-02",
+          "full_id": "英语-高二下-T5-02",
+          "title": "🧠高二词汇PK！谁是同义词辨析王？",
+          "type": "PK挑战卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "通过选择题PK，检验对高二常考同义词、近义词的精确辨析能力。",
+          "core_points": [
+            "积累高频同义词和近义词。",
+            "理解词语的细微差别和语境。",
+            "掌握词语的固定搭配和习惯用法。",
+            "注意词性、褒贬色彩和正式程度。"
+          ],
+          "why_explanation": "高二词汇量和深度要求提升，同义词辨析是阅读理解和写作高分的基础。",
+          "example": {
+            "question": "Choose the best word to complete the sentence:\nThe factory has been accused of ______ toxic waste into the river.\nA. discharging B. emitting C. releasing D. all of the above",
+            "steps": [
+              "分析句子含义：工厂被指控向河流排放有毒废物。",
+              "辨析选项：discharging (排放，尤指液体), emitting (散发，放射，尤指气体、光、热), releasing (释放，放出)。",
+              "结合语境：toxic waste (有毒废物，通常指液体或固体废物) 排放到河流中，discharging最为贴切，但其他词在某些语境下也可能适用。",
+              "在此题中，D选项“all of the above”是迷惑项，因为虽然它们都表示“放出”，但discharging更侧重于有组织地排放废弃物。"
+            ],
+            "answer": "A. discharging",
+            "battle_rule": "选择最准确的词语，并解释你的选择。如果你的解释比对手更精准，则获胜！"
+          },
+          "mistakes": [],
+          "memory_tip": "辨析同义词，抓住关键词，语境是王道，搭配要记牢。",
+          "emotion_hook": "高二词汇大PK！敢不敢来挑战你的词汇极限？"
+        }
+      ]
+    },
+    {
+      "unit_id": "T6",
+      "unit_name": "速记卡",
+      "cards": [
+        {
+          "card_id": "T6-01",
+          "full_id": "英语-高二下-T6-01",
+          "title": "🚀高二提速！30个高频短语动词速记法！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "短语动词 (Phrasal Verbs) 由动词和介词/副词组成，意义通常与原动词不同，是高二词汇难点和考点。",
+          "core_points": [
+            "分类记忆：按介词/副词分类，如带'up'的短语 (give up, pick up, set up)。",
+            "场景记忆：将短语动词放入具体语境中记忆。",
+            "联想记忆：通过词根、词缀或形象联想。",
+            "造句记忆：自己用短语动词造句，加深理解和记忆。",
+            "滚雪球记忆：每天复习前一天的，再学习新的。"
+          ],
+          "why_explanation": "短语动词的含义不规则，数量庞大，死记硬背效率低下，需要系统高效的方法。",
+          "example": {
+            "question": "Memorize the phrasal verbs with 'take'.",
+            "steps": [
+              "take off (起飞；脱掉)",
+              "take up (开始从事；占据)",
+              "take over (接管)",
+              "take down (记下；拆除)",
+              "take in (理解；欺骗；收留)",
+              "take out (取出；带...出去)"
+            ],
+            "answer": "通过联想和造句来记忆。",
+            "speed_method": "【介词联想记忆法】\n*   **up (向上/完成):** give up (放弃), pick up (捡起/学会), set up (建立), take up (占据/开始从事)。\n*   **down (向下/减少):** calm down (冷静), take down (记下/拆除), turn down (拒绝/调低)。\n*   **off (离开/脱离):** take off (起飞/脱掉), put off (推迟), call off (取消)。\n*   **on (连接/继续):** carry on (继续), put on (穿上), turn on (打开)。\n*   **out (向外/显现):** find out (查明), give out (分发), point out (指出), try out (试验)。"
+          },
+          "mistakes": [],
+          "memory_tip": "短语动词成组记，介词副词是线索，造句巩固效果好！",
+          "emotion_hook": "高二短语动词背到哭？这份速记卡片，让你告别死记硬背！"
+        },
+        {
+          "card_id": "T6-02",
+          "full_id": "英语-高二下-T6-02",
+          "title": "💡高二必背！高频形容词词缀速记，秒扩词汇量！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "通过掌握常见的形容词词缀（前缀和后缀），快速推断词义，扩大词汇量。",
+          "core_points": [
+            "前缀：改变词义，如否定前缀 (un-, in-, dis-, non-, ir-, il-)。",
+            "后缀：改变词性，如形容词后缀 (-able, -ible, -ful, -less, -ous, -y, -al, -ic, -ive, -ent, -ant)。",
+            "记忆前缀和后缀的含义。",
+            "通过实例进行练习，举一反三。",
+            "注意词根的变化和拼写规则。"
+          ],
+          "why_explanation": "词缀是构词法的重要部分，掌握后能大大提高词汇记忆效率和理解能力。",
+          "example": {
+            "question": "Memorize common adjective suffixes and their meanings.",
+            "steps": [
+              "-able/-ible (能够...的, 适合...的): capable, visible",
+              "-ful (充满...的): careful, beautiful",
+              "-less (无...的): careless, jobless",
+              "-ous (多...的, 充满...的): famous, dangerous",
+              "-y (有...的, 像...的): rainy, sunny",
+              "-al (有...性质的): national, natural",
+              "-ic (有...性质的): scientific, historic",
+              "-ive (有...倾向的): active, creative",
+              "-ent/-ant (有...性质的): different, important"
+            ],
+            "answer": "通过词缀联想和归类记忆。",
+            "speed_method": "【后缀联想记忆法】\n*   **-able/-ible: 能干又可见！** (capable, visible)\n*   **-ful/-less: 有和没有，一对好朋友！** (careful, careless)\n*   **-ous: 危险又著名！** (dangerous, famous)\n*   **-y: 像雨像晴，天气变化多！** (rainy, sunny)\n*   **-al/-ic: 国家自然，科学历史！** (national, natural, scientific, historic)\n*   **-ive: 活跃有创意！** (active, creative)\n*   **-ent/-ant: 重要又不同！** (important, different)"
+          },
+          "mistakes": [],
+          "memory_tip": "前缀改意思，后缀改词性。记住含义，秒猜生词！",
+          "emotion_hook": "高二词汇量暴增秘籍！学会这些词缀，生词不再怕！"
+        },
+        {
+          "card_id": "T6-03",
+          "full_id": "英语-高二下-T6-03",
+          "title": "📝高二写作！高级句型速记，作文秒变高分！",
+          "type": "速记卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "掌握和运用高二阶段常用的一些高级句型，提升写作的表达力和多样性。",
+          "core_points": [
+            "倒装句：强调句型，如 'Not only... but also...', 'Hardly...when...'",
+            "非谓语动词作状语：如 'Having finished his homework, he went out to play.'",
+            "独立主格结构：简洁表达伴随、原因等，如 'The meeting being over, we went home.'",
+            "强调句：'It is... that...' 强调主语、宾语、状语。",
+            "虚拟语气：表达假设、建议等，如 'It is suggested that we (should) take action.'",
+            "同位语从句：对名词进行解释说明，如 'The fact that he succeeded surprised us all.'",
+            "复合句的灵活运用：状语从句、定语从句、名词性从句的嵌套使用。"
+          ],
+          "why_explanation": "高二写作要求句式多样、结构复杂，这些高级句型是提升文章质量的关键。",
+          "example": {
+            "question": "Memorize and practice using the following advanced sentence patterns.",
+            "steps": [
+              "倒装句：Never before have I seen such a beautiful sight.",
+              "非谓语动词作状语：Inspired by her teacher, she decided to become a volunteer.",
+              "独立主格结构：All things considered, it was a successful event.",
+              "强调句：It was in the park that I met my old friend.",
+              "虚拟语气：I would rather you didn't tell him the truth.",
+              "同位语从句：The news that the company went bankrupt shocked everyone."
+            ],
+            "answer": "通过模仿和改写练习，将这些句型融入自己的写作。",
+            "speed_method": "【分类+关键词记忆法】\n*   **强调类：** 'It is...that...' 最万能！否定词提前助动词跟！\n*   **简洁类：** 'ing/ed' 作状语，主语不一致独立格！\n*   **假设类：** 虚拟语气，If从句倒退时态，wish/suggest后要熟记！\n*   **解释类：** 同位语从句，'that' 后解释名词。"
+          },
+          "mistakes": [],
+          "memory_tip": "倒装强调，非谓语简洁，虚拟假设，复杂句高分！",
+          "emotion_hook": "高二作文想冲刺满分？这几个高级句型让你秒杀同龄人！"
+        }
+      ]
+    }
+  ]
+}

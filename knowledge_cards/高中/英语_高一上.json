@@ -1,0 +1,1628 @@
+{
+  "subject": "英语",
+  "grade": "高一",
+  "semester": "上册",
+  "textbook": "人教版",
+  "grade_short": "高一上",
+  "units": [
+    {
+      "unit_id": "01",
+      "unit_name": "Unit 1 Friends",
+      "cards": [
+        {
+          "card_id": "01-01",
+          "full_id": "英语-高一上-01-01",
+          "title": "词汇：人物与性格描述",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元用于描述人物外貌、性格及人际关系的核心词汇。",
+          "core_points": [
+            "outgoing /ˌaʊtˈɡoʊɪŋ/: (adj.) 友好的，外向的。例句：She's very outgoing and loves meeting new people.",
+            "generous /ˈdʒɛnərəs/: (adj.) 慷慨的，大方的。例句：He is always generous with his time and money.",
+            "modest /ˈmɒdɪst/: (adj.) 谦虚的， modest about one's achievements。例句：Despite his success, he remained modest.",
+            "loyal /ˈlɔɪəl/: (adj.) 忠诚的，忠实的。例句：A loyal friend will always stand by you.",
+            "caring /ˈkɛərɪŋ/: (adj.) 关心的，体贴的。例句：She's a very caring person who always thinks of others.",
+            "sense of humor: (n. phrase) 幽默感。例句：He has a great sense of humor and always makes us laugh.",
+            "get along with: (phr. v.) 与…相处融洽。例句：I get along well with my classmates."
+          ],
+          "why_explanation": "这些词汇是构建人物形象、描述人际关系的基础。形容词用于修饰名词，短语动词用于表达动作或状态。",
+          "example": {
+            "question": "用所学词汇描述一位你最好的朋友的性格特点。",
+            "steps": [
+              "选择至少三个形容词和一个人际关系短语。",
+              "用例句的形式将它们组合成描述。",
+              "思考如何用这些词汇来表达朋友的积极品质。"
+            ],
+            "answer": "My best friend is very **outgoing** and always makes new friends easily. She's also incredibly **generous** with her time, often helping me with my studies. What I appreciate most is her great **sense of humor**; she can always cheer me up. We really **get along with** each other."
+          },
+          "mistakes": [
+            {
+              "wrong": "She is very outgoing person.",
+              "correct": "She is a very outgoing person.",
+              "reason": "形容词修饰名词时，单数可数名词前需要冠词a/an。"
+            },
+            {
+              "wrong": "He has a strong humor sense.",
+              "correct": "He has a strong sense of humor.",
+              "reason": "固定搭配为 'sense of humor'，表示幽默感，不可随意改变词序。"
+            }
+          ],
+          "memory_tip": "想象你最好的朋友，把这些词汇贴在TA的画像上：'O'utgoing (活泼), 'G'enerous (大方), 'M'odest (谦虚), 'L'oyal (忠诚), 'C'aring (体贴) - OGM LC，像一个缩写口号！"
+        },
+        {
+          "card_id": "01-02",
+          "full_id": "英语-高一上-01-02",
+          "title": "词汇：日常活动与学习",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "本单元涉及高中日常学习生活及休闲活动的相关词汇。",
+          "core_points": [
+            "participate /pɑːrˈtɪsɪpeɪt/: (v.) 参与，参加。例句：He likes to participate in school activities.",
+            "attend /əˈtɛnd/: (v.) 出席，参加（会议、学校等）。例句：She attends a boarding school.",
+            "concentrate /ˈkɒnsəntreɪt/: (v.) 集中（注意力）。例句：It's hard to concentrate with all this noise.",
+            "achieve /əˈtʃiːv/: (v.) 取得，完成。例句：You can achieve anything if you work hard.",
+            "challenge /ˈtʃælɪndʒ/: (n./v.) 挑战；向…挑战。例句：Learning a new language is a big challenge.",
+            "encourage /ɪnˈkʌrɪdʒ/: (v.) 鼓励。例句：My teacher encouraged me to speak more English.",
+            "make progress: (phr. v.) 取得进步。例句：He has made great progress in his studies."
+          ],
+          "why_explanation": "这些词汇描述了学生在学习过程中可能遇到的行为、状态和目标。动词是表达动作的核心，动词短语则让表达更具体。",
+          "example": {
+            "question": "描述你在高中学习中如何努力取得进步。",
+            "steps": [
+              "使用动词如 'concentrate', 'participate', 'achieve'。",
+              "结合短语 'make progress'。",
+              "说明你如何面对 'challenge'。"
+            ],
+            "answer": "In senior high, I try to **concentrate** more on my lessons. I also actively **participate** in class discussions to understand better. Learning new subjects can be a **challenge**, but I am determined to **achieve** my goals and **make progress** every day."
+          },
+          "mistakes": [
+            {
+              "wrong": "He encouraged me to speak English more.",
+              "correct": "He encouraged me to speak more English.",
+              "reason": "'more' 修饰动词 'speak' 时，应放在动词之后，或者修饰整个动词短语。"
+            },
+            {
+              "wrong": "I made a big progress in math.",
+              "correct": "I made great progress in math.",
+              "reason": "'progress' 是不可数名词，不能用 'a' 修饰，常用 'great' 或 'much' 等形容。"
+            }
+          ],
+          "memory_tip": "联想学习的流程：先 'participate' (参与) 并 'attend' (出席)，然后 'concentrate' (集中)，才能 'achieve' (达成) 目标，面对 'challenge' (挑战) 时，要互相 'encourage' (鼓励)，最终 'make progress' (取得进步)。"
+        },
+        {
+          "card_id": "01-03",
+          "full_id": "英语-高一上-01-03",
+          "title": "语法：一般现在时与现在进行时（复习与辨析）",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "复习一般现在时和现在进行时，并辨析它们在表达习惯性动作、客观事实和正在发生的动作时的区别。",
+          "core_points": [
+            "**一般现在时 (Present Simple)**",
+            "  - **构成**: 主语 + 动词原形 (第三人称单数加-s/-es)。",
+            "  - **用法**: 1. 表达习惯性动作或重复发生的事件 (I usually get up at 6 am.)； 2. 表达客观事实或普遍真理 (The sun rises in the east.)； 3. 表达个人爱好、能力等 (She likes reading.)。",
+            "  - **标志词**: always, usually, often, sometimes, seldom, every day/week/year。",
+            "  - **肯定句**: He studies hard. / I like music.",
+            "  - **否定句**: He doesn't study hard. / I don't like music. (借助助动词do/does)",
+            "  - **疑问句**: Does he study hard? / Do you like music? (助动词do/does提前)",
+            "  - **特殊疑问句**: What does he study? / When do you usually get up?",
+            "**现在进行时 (Present Continuous)**",
+            "  - **构成**: 主语 + be动词 (am/is/are) + 动词-ing。",
+            "  - **用法**: 1. 表达正在进行或发生的动作 (She is reading a book now.)； 2. 表达现阶段或一段时间内正在进行的动作 (I'm studying for my exams this week.)； 3. 表达将来计划 (The train is leaving at 8 tomorrow morning. - 较少用，但表示确定计划)。",
+            "  - **标志词**: now, at the moment, look!, listen!, this week/month。",
+            "  - **肯定句**: He is studying now. / They are playing basketball.",
+            "  - **否定句**: He isn't studying now. / They aren't playing basketball. (be动词后加not)",
+            "  - **疑问句**: Is he studying now? / Are they playing basketball? (be动词提前)",
+            "  - **特殊疑问句**: What is he studying? / Who are they playing with?"
+          ],
+          "why_explanation": "英语时态的运用是为了精确表达动作发生的时间和状态。一般现在时强调'常规性'和'事实性'，而现在进行时则强调'临时性'和'进行性'。理解这两种'时间视角'是正确使用它们的关键。",
+          "example": {
+            "question": "将下列句子改写成否定句、疑问句和特殊疑问句（针对划线部分）：'My sister often **reads** English novels in her free time.'",
+            "steps": [
+              "判断时态：'often reads' 表明是一般现在时。",
+              "否定句：一般现在时否定句用 'do/does + not + 动词原形'。",
+              "疑问句：一般现在时疑问句用 'Do/Does + 主语 + 动词原形...?'。",
+              "特殊疑问句：针对 'reads English novels' 可问 'What does she often do...?' 或 'What does she often read...?'；针对 'in her free time' 可问 'When does she often read English novels?'。"
+            ],
+            "answer": {
+              "negative": "My sister doesn't often read English novels in her free time.",
+              "interrogative": "Does your sister often read English novels in her free time?",
+              "wh_question_1": "What does your sister often read in her free time? (针对 English novels)",
+              "wh_question_2": "When does your sister often read English novels? (针对 in her free time)"
+            }
+          },
+          "mistakes": [
+            {
+              "wrong": "He is often playing football.",
+              "correct": "He often plays football.",
+              "reason": "'often' 表示习惯性动作，应使用一般现在时，而不是现在进行时。"
+            },
+            {
+              "wrong": "Look! The boy read a book.",
+              "correct": "Look! The boy is reading a book.",
+              "reason": "'Look!' 表示提醒注意正在发生的动作，应使用现在进行时。"
+            }
+          ],
+          "memory_tip": "一般现在时：'常'规、'真'理、'喜'好；现在进行时：'正'在、'临'时。记住动词ing是'ing'动状态，be动词是'be'在进行。"
+        },
+        {
+          "card_id": "01-04",
+          "full_id": "英语-高一上-01-04",
+          "title": "语法：现在完成时（基本用法与结构）",
+          "type": "时态卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习现在完成时，用于表示过去发生但对现在有影响的动作，或从过去某个时间点开始一直持续到现在的动作。",
+          "core_points": [
+            "**构成**: 主语 + have/has + 动词的过去分词 (V-ed/V3)。",
+            "**用法一：表示过去发生的动作对现在造成的影响或结果。**",
+            "  - 例句：I have lost my key. (我现在没有钥匙了)",
+            "  - 标志词：just, already, yet, ever, never, before, recently, lately。",
+            "**用法二：表示从过去某一时刻开始，一直持续到现在的动作或状态。**",
+            "  - 例句：She has lived here for ten years. (她在这里住了十年，现在还住着)",
+            "  - 标志词：for (接一段时间), since (接时间点或从句)。",
+            "**肯定句**: I have finished my homework. / She has gone to Beijing.",
+            "**否定句**: I haven't finished my homework. / She hasn't gone to Beijing. (have/has后加not)",
+            "**疑问句**: Have you finished your homework? / Has she gone to Beijing? (have/has提前)",
+            "**特殊疑问句**: What have you done? / Where has she gone?",
+            "**注意事项**: 现在完成时通常不与表示过去具体时间点的状语连用 (如 yesterday, last week, in 2020)。"
+          ],
+          "why_explanation": "现在完成时是连接'过去'和'现在'的桥梁。它强调的是动作的'完成'或'持续'对'现在'的影响，而不是动作发生'具体时间'。理解这种'现在关联性'是掌握它的核心。",
+          "example": {
+            "question": "用现在完成时填空或改写句子：1. I (not see) him since last month. 2. He (finish) his project already.",
+            "steps": [
+              "分析句子结构和标志词：'since last month' 表示持续到现在，用现在完成时；'already' 表示已经完成，对现在有影响，用现在完成时。",
+              "确定主语和have/has的搭配。",
+              "将动词变为过去分词。"
+            ],
+            "answer": "1. I **haven't seen** him since last month. 2. He **has finished** his project already."
+          },
+          "mistakes": [
+            {
+              "wrong": "I have been to Shanghai yesterday.",
+              "correct": "I went to Shanghai yesterday. / I have been to Shanghai before.",
+              "reason": "现在完成时不能与表示过去具体时间点的状语 (yesterday) 连用。若强调过去具体时间，用一般过去时；若强调经历，则不带具体时间。"
+            },
+            {
+              "wrong": "He has left for two hours.",
+              "correct": "He left two hours ago. / He has been away for two hours.",
+              "reason": "'leave' 是瞬间动词，不能与表示持续时间的 'for' 连用。若要表达离开后持续的状态，应使用 'be away' 或 'be gone'。"
+            }
+          ],
+          "memory_tip": "完成时就像'完成'了'现在'的任务，或者从'过去'一直'持续'到'现在'。'have/has + V3'，V3是过去分词，表示动作的'完成态'。"
+        },
+        {
+          "card_id": "01-05",
+          "full_id": "英语-高一上-01-05",
+          "title": "句型：自我介绍与描述他人",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习如何进行清晰、流畅的自我介绍以及描述他人的基本句型结构。",
+          "core_points": [
+            "**自我介绍**",
+            "  - My name is... / I'm... (姓名)",
+            "  - I'm from... / I come from... (来自哪里)",
+            "  - I'm a student at... (身份与学校)",
+            "  - I'm interested in... / I enjoy... (兴趣爱好)",
+            "  - I hope to... / My goal is to... (未来期望)",
+            "  - 例句模板：'Hello everyone, my name is Li Hua. I'm from Beijing and I'm a new student at this school. I enjoy playing basketball and reading. I hope to make many new friends here.'",
+            "**描述他人**",
+            "  - He/She is... (介绍名字、身份)",
+            "  - He/She is very... (描述性格特点，如outgoing, modest, generous)",
+            "  - He/She has a good sense of humor. (描述特殊品质)",
+            "  - He/She likes to... / He/She is good at... (描述爱好或擅长)",
+            "  - We often... together. / We get along well. (描述关系)",
+            "  - 例句模板：'This is my friend, Wang Wei. He is a very loyal and caring person. He always helps others and has a great sense of humor. He likes playing computer games. We often study together and get along very well.'"
+          ],
+          "why_explanation": "这些句型提供了一个结构化的框架，帮助我们组织思绪，清晰地表达个人信息或对他人特征的描述。掌握这些模板能有效提升口语和写作的流畅度。",
+          "example": {
+            "question": "请根据模板，用英语介绍你自己。",
+            "steps": [
+              "从姓名、家乡、身份开始。",
+              "添加一到两个爱好或兴趣。",
+              "表达对新环境的期望或目标。"
+            ],
+            "answer": "My name is Chen Yang. I'm from Guangzhou and I'm a senior high student. I'm interested in science fiction novels and playing table tennis. I hope to learn a lot and make progress in all my subjects this semester."
+          },
+          "mistakes": [
+            {
+              "wrong": "I am interesting in reading books.",
+              "correct": "I am interested in reading books.",
+              "reason": "'interested' 形容人对某事感兴趣，'interesting' 形容事物有趣。"
+            },
+            {
+              "wrong": "He is a good at drawing.",
+              "correct": "He is good at drawing.",
+              "reason": "短语 'be good at' 表示擅长做某事，中间不需要冠词 'a'。"
+            }
+          ],
+          "memory_tip": "自我介绍：'我叫我从我学我爱我愿'；描述他人：'他是他很他有他爱我们'。像填空游戏一样记住框架。"
+        },
+        {
+          "card_id": "01-06",
+          "full_id": "英语-高一上-01-06",
+          "title": "易混词卡：fun vs funny",
+          "type": "易混词卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "辨析 'fun' 和 'funny' 这两个常用词的含义和用法，避免混淆。",
+          "core_points": [
+            "**fun**: (n.) 乐趣，娱乐；(adj.) 有趣的，好玩的。",
+            "  - 作为名词，表示令人愉快的活动或经历。例句：We had a lot of fun at the party. (我们在聚会上玩得很开心。)",
+            "  - 作为形容词，描述某事或某人是令人愉快的或好玩的。例句：It was a fun game. (那是一个好玩的游戏。)",
+            "  - 强调'令人享受的'、'带来快乐的'。",
+            "**funny**: (adj.) 滑稽的，好笑的；奇怪的，不寻常的。",
+            "  - 强调'引人发笑的'，有幽默感的。例句：The comedian was very funny. (那位喜剧演员非常滑稽。)",
+            "  - 也可以表示'奇怪的'、'不寻常的'。例句：That's a funny smell. (那是一种奇怪的味道。)",
+            "  - 强调'引人发笑的'或'不寻常的'。"
+          ],
+          "why_explanation": "这两个词都与'乐趣'或'幽默'有关，但侧重点不同。'fun'强调体验的愉悦感，而 'funny' 强调事物引发的笑声或其不寻常性。理解这种细微的语义差别能帮助我们更准确地表达。",
+          "example": {
+            "question": "选择合适的词填空：1. The movie was so ____ that I couldn't stop laughing. 2. We had a really ____ time at the beach.",
+            "steps": [
+              "分析第一个句子：'couldn't stop laughing' 表明电影是引人发笑的。",
+              "分析第二个句子：'had a really ____ time' 表明在海滩的经历是愉快的。",
+              "根据 'fun' 和 'funny' 的含义进行选择。"
+            ],
+            "answer": "1. funny 2. fun"
+          },
+          "mistakes": [
+            {
+              "wrong": "It was a funny party.",
+              "correct": "It was a fun party.",
+              "reason": "'funny party' 指聚会很滑稽可笑，可能带有贬义；'fun party' 指聚会很好玩，很愉快。"
+            },
+            {
+              "wrong": "He is a fun man.",
+              "correct": "He is a funny man. / He is a fun person to be with.",
+              "reason": "形容人时，'funny man' 更常见，指这个人幽默；若要说他有趣、好相处，可以说 'a fun person to be with'。"
+            }
+          ],
+          "memory_tip": "'Funny' 让你 '哈哈' 大笑 (谐音 '发你')，而 'fun' 让你感到 '爽' (谐音 '饭')。一个引人发笑，一个带来愉悦。"
+        },
+        {
+          "card_id": "01-07",
+          "full_id": "英语-高一上-01-07",
+          "title": "词汇深度卡：动词 'make' 和 'do' 的高频搭配",
+          "type": "词汇深度卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "区分并掌握动词 'make' 和 'do' 在不同语境下的高频搭配，理解其习惯用法。",
+          "core_points": [
+            "**Do (做，履行，完成)**",
+            "  - 通常用于指代工作、任务、活动或一般性的行为。",
+            "  - `do homework` (做作业)",
+            "  - `do housework` (做家务)",
+            "  - `do business` (做生意)",
+            "  - `do a favor` (帮个忙)",
+            "  - `do an experiment` (做实验)",
+            "  - `do one's best` (尽力)",
+            "  - `do well` (做得好)",
+            "**Make (制造，创造，形成)**",
+            "  - 通常用于指代创造、生产、产生或引起某种结果。",
+            "  - `make a mistake` (犯错误)",
+            "  - `make a decision` (做决定)",
+            "  - `make a plan` (制定计划)",
+            "  - `make a phone call` (打电话)",
+            "  - `make friends` (交朋友)",
+            "  - `make a noise` (发出噪音)",
+            "  - `make an effort` (努力)",
+            "  - `make progress` (取得进步)"
+          ],
+          "why_explanation": "'Make' 和 'do' 是英语中最基础也最容易混淆的动词。它们的区别在于 'do' 侧重于'执行'一个已有的动作或任务，而 'make' 侧重于'创造'或'产生'一个新的事物或结果。这些搭配是语言习惯，需通过积累掌握。",
+          "example": {
+            "question": "选择 'make' 或 'do' 填空：1. We need to ____ a decision soon. 2. Have you ____ your homework yet? 3. Please don't ____ too much noise.",
+            "steps": [
+              "分析第一个句子：'decision' 是一个被'做出'的结果。",
+              "分析第二个句子：'homework' 是一个需要被'执行'的任务。",
+              "分析第三个句子：'noise' 是一个被'产生'的结果。",
+              "根据 'make' 和 'do' 的核心含义进行选择。"
+            ],
+            "answer": "1. make 2. done 3. make"
+          },
+          "mistakes": [
+            {
+              "wrong": "I must make my homework.",
+              "correct": "I must do my homework.",
+              "reason": "'homework' 是一个需要执行的任务，应用 'do'。"
+            },
+            {
+              "wrong": "He did a mistake.",
+              "correct": "He made a mistake.",
+              "reason": "'mistake' 是一个被'犯'下的结果，应用 'make'。"
+            }
+          ],
+          "memory_tip": "记住口诀：'Make' 创造新事物，'Do' 执行旧任务。Make a cake (创造蛋糕)，Do the dishes (执行洗碗)。"
+        },
+        {
+          "card_id": "01-08",
+          "full_id": "英语-高一上-01-08",
+          "title": "阅读技巧卡：主旨大意与段落主题句",
+          "type": "阅读技巧卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何识别文章或段落的主旨大意，并理解主题句在传达主旨中的作用。",
+          "core_points": [
+            "**主旨大意 (Main Idea)**: 指文章或段落的核心思想、作者想要表达的主要观点。它通常是概括性的，而非具体的细节。",
+            "**段落主题句 (Topic Sentence)**: 通常是段落的第一句或第二句，有时也可能在段落末尾，明确指出该段落讨论的核心内容。主题句是主旨大意的具体体现。",
+            "**识别主旨大意的方法**:",
+            "  1. **看标题**: 标题往往直接或间接点明文章主旨。",
+            "  2. **找主题句**: 仔细阅读每段的首句、末句，或转折词后面的句子。",
+            "  3. **关注高频词汇**: 重复出现的关键词或短语常与主旨相关。",
+            "  4. **概括细节**: 读完段落后，思考所有细节都在围绕什么展开。",
+            "  5. **排除细节**: 排除例子、数据、描述等具体信息，找到其背后的抽象概念。",
+            "**作用**: 掌握主旨大意能帮助理解文章整体结构和作者意图，提高阅读效率和准确性。"
+          ],
+          "why_explanation": "阅读理解的核心在于抓住信息的主次。主旨大意是文章的骨架，细节是血肉。先抓住骨架，再填充血肉，才能高效理解。主题句是作者为了让读者快速理解段落内容而设置的导航。",
+          "example": {
+            "question": "阅读以下段落，找出其主题句并概括主旨大意：'Friendship is important for everyone. Good friends offer support during difficult times and celebrate successes with you. They provide a sense of belonging and can help reduce stress. Moreover, friends often introduce you to new ideas and experiences, enriching your life in many ways.'",
+            "steps": [
+              "阅读段落，寻找最能概括全段内容的句子。",
+              "观察段落开头句：'Friendship is important for everyone.' 这句话直接点明了主题。",
+              "验证：段落后续内容都在解释为什么友谊重要，提供了具体支持的理由。",
+              "概括主旨：友谊对每个人都非常重要，因为它提供了支持、归属感，并丰富生活。"
+            ],
+            "answer": {
+              "topic_sentence": "Friendship is important for everyone.",
+              "main_idea": "The main idea is that friendship plays a crucial role in people's lives by offering support, a sense of belonging, and enriching experiences."
+            }
+          },
+          "mistakes": [
+            {
+              "wrong": "把段落中的某个具体例子当作主题句。",
+              "correct": "主题句是概括性的，涵盖了段落的所有内容，而例子只是支持主题的细节。",
+              "reason": "未能区分细节信息和核心观点。主题句是统领性的，例子是说明性的。"
+            }
+          ],
+          "memory_tip": "主题句是'领头羊'，主旨大意是'羊群的走向'。先找到领头羊，再看羊群往哪走。"
+        },
+        {
+          "card_id": "01-09",
+          "full_id": "英语-高一上-01-09",
+          "title": "写作进阶卡：个人叙述开篇技巧",
+          "type": "写作进阶卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何在个人叙述（如记叙文、个人陈述）中写出引人入胜的开头，吸引读者。",
+          "core_points": [
+            "**开篇的重要性**: 开头是文章的'门面'，决定读者是否愿意继续阅读。一个好的开头能迅速吸引读者，引出下文。",
+            "**常用开篇技巧**:",
+            "  1. **悬念式**: 提出一个问题或描述一个不寻常的场景，引发读者好奇心。例：'I never thought a simple walk in the park could change my life forever.'",
+            "  2. **情景设置式**: 描绘一个具体的场景、时间或地点，让读者身临其境。例：'The old clock in the hallway struck midnight, echoing through the silent house.'",
+            "  3. **引人深思式**: 引用名言、谚语或提出一个哲学问题，引发读者思考。例：'They say first impressions last a lifetime, and for me, that certainly proved true on my first day of senior high.'",
+            "  4. **直接点题式**: 直接交代事件的背景或核心人物，简洁明了。例：'My journey to becoming a confident English speaker began with a terrifying presentation in front of my class.'",
+            "  5. **对话式**: 以人物对话开篇，增加生动性和代入感。例：''Are you sure about this?' my friend whispered, his eyes wide with a mixture of excitement and fear.'",
+            "**避免**: 过于平淡、老套的开头，如 'Today I want to talk about...' 或 'I had a dream last night...'"
+          ],
+          "why_explanation": "写作不仅是信息的传递，更是与读者的沟通。一个富有吸引力的开头能迅速建立这种沟通，激发读者阅读兴趣，为后续内容的展开打下基础。不同的开头方式能适应不同的叙述目的和情感基调。",
+          "example": {
+            "question": "为一篇关于'我的高中新生活'的个人叙述，尝试用两种不同的开篇技巧写出开头。",
+            "steps": [
+              "选择两种不同的开篇技巧，例如：悬念式和情景设置式。",
+              "构思与高中新生活相关的具体情境或感受。",
+              "运用所选技巧，撰写简短的开篇段落。"
+            ],
+            "answer": {
+              "suspense_opening": "I stood at the school gate, a knot of anxiety twisting in my stomach. Little did I know, this seemingly ordinary morning would mark the beginning of the most transformative chapter of my life.",
+              "scene_setting_opening": "The buzzing sound of the morning alarm usually filled me with dread, but on this particular Monday, a strange mix of excitement and apprehension bubbled within me. It was the first day of senior high, a new adventure waiting to unfold."
+            }
+          },
+          "mistakes": [
+            {
+              "wrong": "Today I will tell you about my first day at senior high.",
+              "correct": "The first day of senior high felt like stepping into an entirely new world, filled with unfamiliar faces and exciting possibilities.",
+              "reason": "直接点题式开头过于口语化且平淡，缺乏吸引力。应尝试更具画面感或情感色彩的表达。"
+            }
+          ],
+          "memory_tip": "开头像'钓鱼'，用'悬念'做饵，用'情景'做背景，用'思考'做鱼线，用'对话'做涟漪，总要'勾'住读者。"
+        }
+      ]
+    },
+    {
+      "unit_id": "02",
+      "unit_name": "Unit 2 Travel",
+      "cards": [
+        {
+          "card_id": "02-01",
+          "full_id": "英语-高一上-02-01",
+          "title": "词汇：旅行与地点描述",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元涉及旅行相关的名词、动词及描述地点的形容词。",
+          "core_points": [
+            "destination /ˌdɛstɪˈneɪʃən/: (n.) 目的地。例句：Our final destination is Paris.",
+            "attraction /əˈtrækʃən/: (n.) 吸引力；景点。例句：The Great Wall is a famous tourist attraction.",
+            "explore /ɪkˈsplɔːr/: (v.) 探索，考察。例句：We spent the afternoon exploring the old town.",
+            "scenery /ˈsiːnəri/: (n.) 风景，景色（不可数）。例句：The scenery along the coast was breathtaking.",
+            "historic /hɪˈstɒrɪk/: (adj.) 历史性的，具有历史意义的。例句：This is a historic moment for our country.",
+            "ancient /ˈeɪnʃənt/: (adj.) 古代的，古老的。例句：We visited an ancient temple.",
+            "package tour: (n. phrase) 包价旅游，旅行团。例句：Many people prefer to go on a package tour for convenience."
+          ],
+          "why_explanation": "这些词汇是描述旅行经历和地点的基础。名词用于指代事物，动词用于表达行为，形容词用于修饰名词，让描述更加生动具体。",
+          "example": {
+            "question": "用所学词汇描述一次你印象深刻的旅行经历。",
+            "steps": [
+              "选择一个旅行目的地和一些相关景点。",
+              "使用动词如 'explore' 和形容词如 'historic', 'ancient' 来描述。",
+              "加入 'scenery' 或 'attraction' 等名词。",
+              "组织成连贯的描述。"
+            ],
+            "answer": "Last summer, my family and I went on a **package tour** to Xi'an. Our main **destination** was the Terracotta Warriors, a truly **historic** and **ancient** site. We also had time to **explore** the city walls. The **scenery** there, though not natural, was profoundly cultural and every **attraction** told a story."
+          },
+          "mistakes": [
+            {
+              "wrong": "The scenerys are beautiful.",
+              "correct": "The scenery is beautiful.",
+              "reason": "'scenery' 是不可数名词，没有复数形式，谓语动词用单数。"
+            },
+            {
+              "wrong": "We visited a history museum.",
+              "correct": "We visited a historic museum.",
+              "reason": "'historic' 指具有历史意义的，而 'history' 是历史这门学科或过去事件的总称。此处指有历史意义的博物馆。"
+            }
+          ],
+          "memory_tip": "旅行词汇联想：去 'destination' (目的地)，看 'scenery' (风景)，'explore' (探索) 'ancient' (古老的) 'historic' (历史的) 'attraction' (景点)。"
+        },
+        {
+          "card_id": "02-02",
+          "full_id": "英语-高一上-02-02",
+          "title": "词汇：交通与住宿",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "本单元关于交通方式和住宿选择的词汇。",
+          "core_points": [
+            "transportation /ˌtrænspɔːrˈteɪʃən/: (n.) 交通，运输（不可数）。例句：Public transportation in the city is very convenient.",
+            "accommodation /əˌkɒməˈdeɪʃən/: (n.) 住宿，膳宿（不可数）。例句：We booked our accommodation online.",
+            "lodge /lɒdʒ/: (n./v.) 小屋；住宿；寄宿。例句：We stayed in a mountain lodge. / The students lodged with local families.",
+            "hostel /ˈhɒstəl/: (n.) 青年旅社。例句：Hostels are popular among backpackers.",
+            "ferry /ˈfɛri/: (n./v.) 渡船；渡运。例句：We took a ferry across the river.",
+            "cruise /kruːz/: (n./v.) 乘船游览；巡航。例句：They went on a cruise to the Caribbean.",
+            "on board: (phr.) 在船/飞机/火车上。例句：All passengers are now on board."
+          ],
+          "why_explanation": "这些词汇是规划和描述旅行中交通和住宿细节所必需的。理解它们的含义和用法能帮助更准确地表达旅行经历。",
+          "example": {
+            "question": "如果你计划一次经济型旅行，你会选择怎样的交通和住宿方式？",
+            "steps": [
+              "考虑经济型旅行的特点。",
+              "选择合适的交通方式（如公共交通）。",
+              "选择合适的住宿方式（如青年旅社）。",
+              "用所学词汇进行描述。"
+            ],
+            "answer": "For an economical trip, I would definitely rely on public **transportation** to save money. As for **accommodation**, a **hostel** would be my first choice, as it's much cheaper than hotels and a great way to meet other travelers. Maybe I'd even take a **ferry** if it's cheaper than flying."
+          },
+          "mistakes": [
+            {
+              "wrong": "I'm looking for a cheap accommodations.",
+              "correct": "I'm looking for cheap accommodation.",
+              "reason": "'accommodation' 是不可数名词，没有复数形式，也不能用 'a' 修饰。"
+            },
+            {
+              "wrong": "We went a cruise.",
+              "correct": "We went on a cruise.",
+              "reason": "进行某项活动或旅程常用 'go on a/an...' 的结构，如 'go on a trip', 'go on a cruise'。"
+            }
+          ],
+          "memory_tip": "交通：'Trans' (across) + 'port' (carry) = transportation。住宿：'accommodate' (容纳) + '-ation' = accommodation。Hostel (好省钱的旅社)；Ferry (渡船像渡'费'力)。"
+        },
+        {
+          "card_id": "02-03",
+          "full_id": "英语-高一上-02-03",
+          "title": "语法：一般过去时与过去进行时（辨析与应用）",
+          "type": "时态卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习一般过去时和过去进行时，并辨析它们在描述过去发生动作时的区别和联系。",
+          "core_points": [
+            "**一般过去时 (Past Simple)**",
+            "  - **构成**: 主语 + 动词过去式 (V-ed/V2)。",
+            "  - **用法**: 1. 表达在过去某个具体时间点发生并结束的动作 (I saw him yesterday.)； 2. 表达过去习惯性动作 (He often visited his grandparents when he was young.)； 3. 表达过去一系列连续发生的动作 (She woke up, had breakfast, and went to school.)。",
+            "  - **标志词**: yesterday, last week/month/year, ago, in 2020, just now。",
+            "  - **肯定句**: He played football yesterday.",
+            "  - **否定句**: He didn't play football yesterday. (助动词did + not + 动词原形)",
+            "  - **疑问句**: Did he play football yesterday? (助动词did提前)",
+            "  - **特殊疑问句**: When did he play football?",
+            "**过去进行时 (Past Continuous)**",
+            "  - **构成**: 主语 + was/were + 动词-ing。",
+            "  - **用法**: 1. 表达在过去某个时间点或时间段内正在进行的动作 (I was reading a book at 8 pm last night.)； 2. 描述过去背景，通常与一般过去时连用，表示一个动作正在进行时，另一个动作发生 (While I was sleeping, the phone rang.)。",
+            "  - **标志词**: at that time, at 8 o'clock last night, while, when。",
+            "  - **肯定句**: He was playing football when I called him.",
+            "  - **否定句**: He wasn't playing football when I called him. (was/were后加not)",
+            "  - **疑问句**: Was he playing football when you called him? (was/were提前)",
+            "  - **特殊疑问句**: What was he doing when you called him?"
+          ],
+          "why_explanation": "一般过去时描述的是过去'已完成'的动作，强调动作的终结性。过去进行时描述的是过去'正在进行'的动作，强调动作的持续性。当两者结合时，过去进行时常作背景，一般过去时则表示背景中发生的'瞬间'事件。",
+          "example": {
+            "question": "选择合适的时态填空：1. While I (walk) home, I (see) an old friend. 2. What you (do) at 9 o'clock last night?",
+            "steps": [
+              "分析第一个句子：'while' 引导的从句通常用进行时表示背景，主句是发生在这个背景中的动作，用一般过去时。",
+              "分析第二个句子：'at 9 o'clock last night' 表示过去某个具体时间点正在发生的动作，用过去进行时。",
+              "根据主语选择was/were或动词过去式。"
+            ],
+            "answer": "1. While I **was walking** home, I **saw** an old friend. 2. What **were you doing** at 9 o'clock last night?"
+          },
+          "mistakes": [
+            {
+              "wrong": "When I was entering the room, he read a book.",
+              "correct": "When I entered the room, he was reading a book.",
+              "reason": "通常是正在进行的动作作背景，短暂发生的动作打断或发生在这个背景中。'我进入房间'是瞬间动作，'他正在读书'是持续动作。"
+            },
+            {
+              "wrong": "He often played basketball when he is young.",
+              "correct": "He often played basketball when he was young.",
+              "reason": "主从句时态一致，'was young' 是一般过去时，主句也应为一般过去时。"
+            }
+          ],
+          "memory_tip": "一般过去时是'点' (一个点，动作结束)；过去进行时是'线' (一段时间，动作在进行)。点在背景的线上发生。"
+        },
+        {
+          "card_id": "02-04",
+          "full_id": "英语-高一上-02-04",
+          "title": "语法：Used to do sth. (过去常常做某事)",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习 'used to do sth.' 句型，表示过去经常发生而现在不再发生的动作或存在的状态。",
+          "core_points": [
+            "**结构**: 主语 + used to + 动词原形。",
+            "**用法**: 表达过去经常发生但现在已经停止的习惯性动作，或过去存在但现在已不存在的状态。",
+            "  - 例句 (动作): I used to play football every weekend, but now I don't. (我过去常常踢足球，但现在不踢了。)",
+            "  - 例句 (状态): There used to be a cinema here, but it's gone now. (这里以前有家电影院，但现在没有了。)",
+            "**否定句**: 主语 + didn't use to + 动词原形。或 主语 + used not to + 动词原形 (较正式)。",
+            "  - 例句：He didn't use to like vegetables. / He used not to like vegetables.",
+            "**疑问句**: Did + 主语 + use to + 动词原形...?",
+            "  - 例句：Did you use to live in the countryside?",
+            "**注意事项**: 'used to' 强调过去和现在的对比，不能用于表示现在或将来的习惯。与 'be used to doing sth.' (习惯于做某事) 和 'be used to do sth.' (被用来做某事) 区分开来。"
+          ],
+          "why_explanation": "'Used to' 表达的是一种'过去常态'，它本身就包含了'现在不再如此'的对比含义。这种结构能简洁地表达过去与现在的变化，避免冗长的解释。它是一种固定的情态动词短语。",
+          "example": {
+            "question": "将下列句子改写为 'used to' 句型：1. He often went swimming when he was a child. 2. There was a small shop on this street.",
+            "steps": [
+              "判断句子是否表达过去习惯性动作或过去状态。",
+              "将 'often went' 替换为 'used to go'。",
+              "将 'there was' 替换为 'there used to be'。",
+              "注意动词要用原形。"
+            ],
+            "answer": "1. He **used to go** swimming when he was a child. 2. There **used to be** a small shop on this street."
+          },
+          "mistakes": [
+            {
+              "wrong": "I am used to play tennis.",
+              "correct": "I used to play tennis. (过去常常) / I am used to playing tennis. (现在习惯于)",
+              "reason": "混淆了 'used to do' 和 'be used to doing' 的用法。前者指过去习惯，后者指现在习惯。"
+            },
+            {
+              "wrong": "He used to not smoke.",
+              "correct": "He didn't use to smoke. / He used not to smoke.",
+              "reason": "'used to' 的否定形式是 'didn't use to' 或 'used not to'。"
+            }
+          ],
+          "memory_tip": "'Used to' 像一个'老照片'，记录过去，但现在已经'变样'了。记住'used to'后面跟动词原形，'to'是动词不定式符号。"
+        },
+        {
+          "card_id": "02-05",
+          "full_id": "英语-高一上-02-05",
+          "title": "句型：描述过去事件与表达感受",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "学习如何用清晰的句型描述过去的旅行经历，并表达对这些经历的感受。",
+          "core_points": [
+            "**描述过去事件**",
+            "  - We traveled to... by... (交通方式)。例：'We traveled to Yunnan by train last summer.'",
+            "  - We visited... and explored... (参观和探索的地点)。例：'We visited the Stone Forest and explored the ancient town.'",
+            "  - While we were doing..., something happened. (过去进行时作背景)。例：'While we were hiking in the mountains, it suddenly started to rain.'",
+            "  - It took us... to do sth. (耗时)。例：'It took us three hours to reach the summit.'",
+            "**表达感受**",
+            "  - It was an amazing/unforgettable/disappointing trip. (整体评价)。例：'Overall, it was an unforgettable trip.'",
+            "  - I was impressed by/with... (对某事印象深刻)。例：'I was deeply impressed by the hospitality of the local people.'",
+            "  - What impressed me most was... (最印象深刻的是)。例：'What impressed me most was the breathtaking scenery.'",
+            "  - I really enjoyed/didn't enjoy... (喜欢/不喜欢)。例：'I really enjoyed trying the local food.'",
+            "  - I would highly recommend... (强烈推荐)。例：'I would highly recommend visiting this place.'"
+          ],
+          "why_explanation": "这些句型提供了描述过去事件和表达个人感受的框架。它们帮助我们组织叙述，使描述更具条理性和感染力。特别是结合过去时态，能准确还原事件发生的过程。",
+          "example": {
+            "question": "描述一次你最近的旅行，包括去哪里、做了什么以及你的感受。",
+            "steps": [
+              "使用 'traveled to... by...' 介绍旅行。",
+              "使用 'visited... and explored...' 描述活动。",
+              "使用 'It was an amazing/unforgettable trip' 或 'I was impressed by...' 表达感受。",
+              "组织句子，形成一段连贯的描述。"
+            ],
+            "answer": "Last winter, my family and I **traveled to** Harbin **by** plane. We **visited** the Ice and Snow World and **explored** the Central Street. It **was an amazing trip**, and **what impressed me most was** the magnificent ice sculptures. I **really enjoyed** the local food too. I **would highly recommend** visiting Harbin in winter."
+          },
+          "mistakes": [
+            {
+              "wrong": "I was impressive by the view.",
+              "correct": "I was impressed by the view.",
+              "reason": "'impressed' 形容人感到印象深刻，'impressive' 形容事物令人印象深刻。"
+            },
+            {
+              "wrong": "We took a bus to there.",
+              "correct": "We took a bus there.",
+              "reason": "副词 'there' 前不需要介词 'to'。"
+            }
+          ],
+          "memory_tip": "描述过去：'去哪坐啥，看啥玩啥，那时发生啥'。表达感受：'感觉好坏，印象深刻，推荐不推'。"
+        },
+        {
+          "card_id": "02-06",
+          "full_id": "英语-高一上-02-06",
+          "title": "易混词卡：trip, travel, journey, voyage",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "辨析 'trip', 'travel', 'journey', 'voyage' 这四个与旅行相关的词语，理解它们的区别和适用语境。",
+          "core_points": [
+            "**trip**: (n.) 短途旅行，出差，通常指有明确目的地的来回行程。",
+            "  - 强调'往返'和'目的地'。例句：a business trip (出差), a day trip (一日游), a school trip (学校旅行)。",
+            "  - 动词搭配：take/make a trip。",
+            "**travel**: (v.) 旅行，旅游（通常指长途或普遍的旅行行为，不可数名词）。",
+            "  - 作为动词，泛指从一个地方到另一个地方。例句：I love to travel. (我喜欢旅行。)",
+            "  - 作为名词，通常是不可数名词，指旅行的行为或过程。例句：Air travel is fast. (航空旅行很快。)",
+            "**journey**: (n.) 旅行，行程，尤指长途陆路旅行，强调从一个地方到另一个地方的过程。",
+            "  - 强调'路途'和'过程'，可能是一段艰辛或漫长的旅程。例句：a long journey (漫长的旅程), a difficult journey (艰难的旅程)。",
+            "  - 动词搭配：make a journey。",
+            "**voyage**: (n.) 航行，航海，特指乘船或宇宙飞船的长途旅行。",
+            "  - 强调'水路'或'太空'旅行。例句：a sea voyage (航海), a space voyage (太空旅行)。",
+            "  - 动词搭配：make a voyage。"
+          ],
+          "why_explanation": "这些词都与'移动'和'旅行'有关，但它们各自有特定的侧重和使用场景。'trip' 侧重目的和往返；'travel' 侧重行为本身；'journey' 侧重过程和路程；'voyage' 侧重交通工具和介质。区分这些能使表达更精确。",
+          "example": {
+            "question": "选择合适的词填空：1. We took a ____ to the mountains for the weekend. 2. He loves ____ around the world. 3. The old sailor had many exciting ____s across the ocean. 4. It was a long and tiring ____ from Beijing to Lhasa.",
+            "steps": [
+              "分析1：'weekend' 表明是短途旅行，有明确目的。",
+              "分析2：'around the world' 表明是泛指的旅行行为。",
+              "分析3：'across the ocean' 表明是海上长途旅行。",
+              "分析4：'long and tiring' 强调路途和过程。",
+              "根据每个词的含义选择。"
+            ],
+            "answer": "1. trip 2. traveling 3. voyages 4. journey"
+          },
+          "mistakes": [
+            {
+              "wrong": "I went on a long travel.",
+              "correct": "I went on a long journey. / I had a long trip.",
+              "reason": "'travel' 作名词时通常不可数，且不强调具体行程；'journey' 或 'trip' 更适合描述具体的长途行程。"
+            },
+            {
+              "wrong": "They made a journey to Europe for a week.",
+              "correct": "They made a trip to Europe for a week.",
+              "reason": "'for a week' 强调时间长度，且通常指有目的的往返，用 'trip' 更合适。'journey' 更强调旅途本身的漫长或艰辛。"
+            }
+          ],
+          "memory_tip": "Trip: 'T'wo-way (来回), 'T'arget (目标)。Travel: 'T'o wander (漫游), 'T'he act of (行为)。Journey: 'J'ust the road (路途), 'J'ust the process (过程)。Voyage: 'V'essel (船), 'V'ast (广阔的海洋/太空)。"
+        },
+        {
+          "card_id": "02-07",
+          "full_id": "英语-高一上-02-07",
+          "title": "从句进阶卡：时间状语从句 (when, while, as soon as)",
+          "type": "从句进阶卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习并掌握由 'when', 'while', 'as soon as' 引导的时间状语从句的用法，尤其注意主从句的时态配合。",
+          "core_points": [
+            "**时间状语从句**：修饰主句谓语动词，说明主句动作发生的时间。",
+            "**1. when (当…时候)**",
+            "  - 引导的从句可以表示主句动作发生时的时间点，也可以表示与主句动作同时发生或紧接着发生的动作。",
+            "  - 从句和主句的动作可以是同时发生或一先一后。",
+            "  - 例句：**When** I arrived, he was cooking. (我到时，他正在做饭。- 动作同时进行)",
+            "  - 例句：**When** I finished my homework, I went to bed. (我做完作业后就去睡觉了。- 动作一先一后)",
+            "**2. while (当…时候；和…同时)**",
+            "  - 引导的从句通常表示一个持续的动作，主句的动作可能同时进行或在从句动作进行过程中发生。",
+            "  - 从句常用进行时态，主句可用进行时或一般时态。",
+            "  - 例句：**While** I was reading, my sister was watching TV. (我读书时，我妹妹在看电视。- 动作同时进行)",
+            "  - 例句：**While** I was walking in the park, I met an old friend. (我正在公园散步时，遇到了一个老朋友。- 持续动作被瞬间动作打断)",
+            "**3. as soon as (一…就)**",
+            "  - 引导的从句表示动作紧接着主句动作发生，强调'立即'。从句和主句的动作发生时间非常接近。",
+            "  - 例句：**As soon as** he arrived, he called me. (他一到就给我打电话了。)",
+            "  - **时态呼应**: 当主句为将来时态时，'as soon as' 引导的时间状语从句要用一般现在时态表示将来。",
+            "  - 例句：I will tell him **as soon as** he comes back. (他一回来我就会告诉他。)"
+          ],
+          "why_explanation": "时间状语从句是连接两个相关动作或事件的工具，它通过不同的连词精确表达动作之间的时间关系。理解这些连词的细微差别和时态呼应规则，能使我们的表达更准确、逻辑更清晰。",
+          "example": {
+            "question": "用 'when', 'while', 'as soon as' 填空，并注意时态：1. ____ the bell rang, the students rushed out. 2. ____ she was cooking, she listened to music. 3. I will call you ____ I arrive at the station.",
+            "steps": [
+              "分析1：'bell rang' 和 'students rushed out' 是紧接着发生的动作，用 'as soon as'。",
+              "分析2：'cooking' 和 'listened to music' 是同时进行的动作，用 'while'。",
+              "分析3：主句是将来时 'will call'，从句表示将来发生，用一般现在时，且强调'一...就...'，用 'as soon as'。",
+              "根据时态和语义选择合适的连词。"
+            ],
+            "answer": "1. **As soon as** the bell rang, the students rushed out. 2. **While** she was cooking, she listened to music. 3. I will call you **as soon as** I arrive at the station."
+          },
+          "mistakes": [
+            {
+              "wrong": "I will go home as soon as I will finish my work.",
+              "correct": "I will go home as soon as I finish my work.",
+              "reason": "时间状语从句中，主句用将来时，从句用一般现在时表示将来。"
+            },
+            {
+              "wrong": "When he was reading, the door knocked.",
+              "correct": "When he was reading, the door knocked. / While he was reading, the door knocked.",
+              "reason": "当一个持续动作被一个瞬间动作打断时，持续动作通常用过去进行时，瞬间动作用一般过去时。'knock' 瞬间动词，'read' 持续动词。此处两个都对，但 'while' 更强调持续性。"
+            }
+          ],
+          "memory_tip": "When: '点'与'点'或'点'与'线'。While: '线'与'线'或'线'被'点'打断。As soon as: '点'立刻接'点'，主将从现。"
+        },
+        {
+          "card_id": "02-08",
+          "full_id": "英语-高一上-02-08",
+          "title": "词汇深度卡：Phrasal verbs related to travel (set off, get on/off)",
+          "type": "词汇深度卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习并掌握与旅行相关的常用短语动词，理解其含义和用法。",
+          "core_points": [
+            "**set off**: (phr. v.) 出发，启程。",
+            "  - 例句：We **set off** early in the morning to avoid the traffic.",
+            "  - 强调开始一段旅程。",
+            "**get on**: (phr. v.) 上（车、船、飞机等大型交通工具）。",
+            "  - 例句：We need to **get on** the bus quickly.",
+            "  - 强调进入交通工具内部。",
+            "**get off**: (phr. v.) 下（车、船、飞机等大型交通工具）。",
+            "  - 例句：She **got off** the train at the next station.",
+            "  - 强调离开交通工具。",
+            "**take off**: (phr. v.) （飞机）起飞。",
+            "  - 例句：The plane **took off** on time.",
+            "  - 特指飞机的起飞。",
+            "**check in**: (phr. v.) 办理登机/入住手续。",
+            "  - 例句：We have to **check in** two hours before the flight.",
+            "  - 办理手续，登记。",
+            "**check out**: (phr. v.) 办理退房手续。",
+            "  - 例句：We need to **check out** of the hotel by noon."
+          ],
+          "why_explanation": "短语动词在英语中非常常见，尤其是在日常口语和非正式写作中。它们往往由一个动词和一个或多个介词/副词组成，形成新的含义。掌握这些短语动词能使表达更地道、自然。",
+          "example": {
+            "question": "选择合适的短语动词填空：1. We plan to ____ for the coast at dawn. 2. Please wait until all passengers ____ the plane before you enter. 3. Remember to ____ at the hotel before 12 pm.",
+            "steps": [
+              "分析1：'for the coast at dawn' 表明是出发。",
+              "分析2：'all passengers' 和 'enter' 表明是下飞机。",
+              "分析3：'hotel before 12 pm' 表明是退房。",
+              "根据短语动词的含义进行选择。"
+            ],
+            "answer": "1. **set off** 2. **get off** 3. **check out**"
+          },
+          "mistakes": [
+            {
+              "wrong": "We got on the car.",
+              "correct": "We got in the car.",
+              "reason": "'get on' 用于大型交通工具 (bus, train, plane)；'get in' 用于小型交通工具 (car, taxi)。"
+            },
+            {
+              "wrong": "The plane checked in at 8 am.",
+              "correct": "The plane took off at 8 am. / We checked in at 8 am.",
+              "reason": "'check in' 是人办理手续，飞机是 'take off' 起飞。"
+            }
+          ],
+          "memory_tip": "Set off (出发，像设置闹钟然后出发)。Get on/off (上下车，像动作)。Take off (起飞，像脱掉)。Check in/out (入住/退房，像检查登记)。"
+        },
+        {
+          "card_id": "02-09",
+          "full_id": "英语-高一上-02-09",
+          "title": "阅读技巧卡：扫描与寻找特定信息",
+          "type": "阅读技巧卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习 '扫描' (scanning) 这一阅读技巧，用于快速定位文章中的特定信息，提高查找效率。",
+          "core_points": [
+            "**扫描 (Scanning)**: 是一种快速阅读策略，目的不是为了理解文章的全部内容，而是为了在文章中快速找到某个具体信息（如日期、人名、地点、数字、定义等）。",
+            "**步骤**:",
+            "  1. **明确目标**: 在阅读前，清楚知道要寻找什么信息（例如，问题中问到的关键词）。",
+            "  2. **快速浏览**: 眼睛像扫描仪一样在文章中快速移动，寻找关键词或与目标信息相关的词汇。",
+            "  3. **定位信息**: 当眼睛捕捉到关键词或相关信息时，放慢速度，仔细阅读该部分，确认是否是所需信息。",
+            "  4. **跳过不相关**: 跳过与目标信息无关的段落或句子，节省时间。",
+            "**适用场景**: 查找电话号码、日期、价格、特定事实、定义、列表中的项目等。",
+            "**与 'Skimming' 的区别**: Skimming (跳读) 是为了获取文章大意，Scanning 是为了查找特定细节信息。"
+          ],
+          "why_explanation": "在信息爆炸的时代，高效获取特定信息的能力至关重要。Scanning 训练我们有目的地筛选信息，避免陷入细节而忽略目标，尤其在考试中能节省大量时间。",
+          "example": {
+            "question": "阅读以下段落，快速找到 'Great Barrier Reef' 的位置和主要特点：'Australia is a vast country with diverse landscapes. From the red deserts of the Outback to the vibrant cities like Sydney and Melbourne, there is something for everyone. One of its most famous natural wonders is the Great Barrier Reef, located off the coast of Queensland. It is the world's largest coral reef system, home to an incredible array of marine life, including colorful fish, sharks, and turtles. Visitors can explore this wonder through snorkeling or diving, making it a top destination for nature lovers.'",
+            "steps": [
+              "明确目标：查找 'Great Barrier Reef' 的位置和主要特点。",
+              "快速浏览段落，寻找 'Great Barrier Reef' 这个关键词。",
+              "找到关键词后，仔细阅读其附近的句子。",
+              "提取位置信息 ('off the coast of Queensland') 和主要特点 ('world's largest coral reef system', 'incredible array of marine life')。"
+            ],
+            "answer": {
+              "location": "off the coast of Queensland",
+              "main_features": "It is the world's largest coral reef system, home to an incredible array of marine life, including colorful fish, sharks, and turtles."
+            }
+          },
+          "mistakes": [
+            {
+              "wrong": "在扫描时逐字阅读，试图理解每个词的含义。",
+              "correct": "扫描时应快速移动视线，只关注关键词和数字，跳过不相关内容。",
+              "reason": "混淆了扫描与精读。扫描的目的是效率，精读的目的是理解。"
+            }
+          ],
+          "memory_tip": "Scanning 就像'侦探找线索'，带着明确的目标，快速搜寻关键证据。Skimming 就像'看电影预告片'，快速了解大概内容。"
+        },
+        {
+          "card_id": "02-10",
+          "full_id": "英语-高一上-02-10",
+          "title": "写作进阶卡：描述性写作技巧 (感官细节)",
+          "type": "写作进阶卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习如何在描述性写作中运用感官细节（视觉、听觉、嗅觉、味觉、触觉），使描写更加生动具体，引人入胜。",
+          "core_points": [
+            "**感官细节的重要性**: 好的描述性写作不仅仅是告诉读者发生了什么，更是让读者感受到、体验到。感官细节能直接激发读者的想象力，使其身临其境。",
+            "**五种感官的运用**:",
+            "  1. **视觉 (Sight)**: 颜色、形状、大小、明暗、光影。例：'The ancient temple stood majestically, its weathered grey stones catching the golden rays of the setting sun.'",
+            "  2. **听觉 (Sound)**: 声音的种类、强度、节奏。例：'The gentle murmur of the river accompanied the distant chirping of crickets.'",
+            "  3. **嗅觉 (Smell)**: 气味、香气、臭味。例：'A faint scent of pine needles and damp earth filled the air.'",
+            "  4. **味觉 (Taste)**: 味道、口感。例：'The freshly baked bread had a crisp crust and a soft, slightly sweet interior.'",
+            "  5. **触觉 (Touch)**: 温度、质地、湿度、疼痛。例：'The cool, smooth surface of the marble statue felt comforting beneath my fingertips.'",
+            "**技巧**: 不仅要写出看到了什么，更要写出'如何看'；不仅仅是听到了什么，更要写出'如何听'。运用生动的形容词、副词和比喻。"
+          ],
+          "why_explanation": "描述性写作的目的是创造画面感。通过调动读者的多重感官，作者能够构建一个更完整、更立体的世界，让读者沉浸其中，增强文章的感染力和说服力。这是从'说'到'展示'的转变。",
+          "example": {
+            "question": "用感官细节描述一个你参观过的市场。",
+            "steps": [
+              "思考市场的视觉：颜色、人流。",
+              "思考市场的听觉：叫卖声、交谈声。",
+              "思考市场的嗅觉：食物、香料的味道。",
+              "思考市场的触觉：商品的质地。",
+              "将这些细节组织成段落。"
+            ],
+            "answer": "As I stepped into the market, a riot of colors assaulted my eyes: vibrant red chilies, emerald green vegetables, and golden fruits piled high. The air was thick with the cacophony of vendors shouting their prices and shoppers haggling, a joyful, bustling symphony. A rich, earthy scent of spices mingled with the sweet aroma of freshly baked pastries. My fingers grazed over the rough texture of handmade pottery and the smooth skin of ripe mangoes, a truly immersive experience for all senses."
+          },
+          "mistakes": [
+            {
+              "wrong": "The market was crowded and noisy.",
+              "correct": "The market was a bustling labyrinth of people, their voices rising in a joyful clamor that echoed between the stalls.",
+              "reason": "过于笼统的描述，未能运用具体的感官词汇来展现'crowded'和'noisy'的细节。应将抽象概念具体化。"
+            }
+          ],
+          "memory_tip": "写作像'电影导演'，用你的文字为读者打造一场'五感盛宴'。记住'视听嗅味触'，让文字活起来。"
+        }
+      ]
+    },
+    {
+      "unit_id": "03",
+      "unit_name": "Unit 3 Sports and Health",
+      "cards": [
+        {
+          "card_id": "03-01",
+          "full_id": "英语-高一上-03-01",
+          "title": "词汇：体育运动与健身",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元涉及各种体育运动、健身方式及相关名词。",
+          "core_points": [
+            "athletics /æθˈlɛtɪks/: (n.) 田径运动（集合名词，作单数）。例句：She is good at athletics.",
+            "gymnastics /dʒɪmˈnæstɪks/: (n.) 体操（集合名词，作单数）。例句：Gymnastics requires great strength and flexibility.",
+            "opponent /əˈpoʊnənt/: (n.) 对手，敌手。例句：He defeated his opponent in the final.",
+            "stadium /ˈsteɪdiəm/: (n.) 体育场。例句：The concert was held in a large stadium.",
+            "endurance /ɪnˈdjʊərəns/: (n.) 耐力，持久力。例句：Running a marathon tests your endurance.",
+            "discipline /ˈdɪsɪplɪn/: (n.) 纪律；训练；(v.) 训练，惩罚。例句：Self-discipline is key to success in sports.",
+            "warm up: (phr. v.) 热身。例句：Always warm up before you exercise."
+          ],
+          "why_explanation": "这些词汇是描述体育活动、比赛和运动员素质的基础。名词指代具体事物，动词短语指代具体动作。掌握它们能帮助我们更准确地讨论体育话题。",
+          "example": {
+            "question": "描述一项你喜欢的运动，并说明它需要哪些素质。",
+            "steps": [
+              "选择一项运动（如跑步，篮球）。",
+              "使用相关名词（如 'athletics', 'opponent', 'stadium'）。",
+              "使用相关形容词或名词（如 'endurance', 'discipline'）。",
+              "描述运动过程中的活动（如 'warm up'）。"
+            ],
+            "answer": "I really enjoy long-distance running, which is a part of **athletics**. It's not about defeating an **opponent** directly, but about challenging myself. To run a marathon in a **stadium**, you need incredible **endurance** and **discipline**. I always **warm up** properly before a long run."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is good at athletic.",
+              "correct": "He is good at athletics.",
+              "reason": "'athletics' 是指田径运动这个整体概念，作单数，但词形以-s结尾。"
+            },
+            {
+              "wrong": "We play a gymnastics.",
+              "correct": "We do gymnastics.",
+              "reason": "体操通常用 'do gymnastics'，而不是 'play gymnastics'。"
+            }
+          ],
+          "memory_tip": "运动词汇联想：'Athletics' (田径) 考验 'endurance' (耐力)，需要 'discipline' (纪律)，在 'stadium' (体育场) 与 'opponent' (对手) 竞争，前要 'warm up' (热身)。"
+        },
+        {
+          "card_id": "03-02",
+          "full_id": "英语-高一上-03-02",
+          "title": "词汇：健康与生活方式",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "本单元关于健康状况、生活习惯及保持健康的相关词汇。",
+          "core_points": [
+            "nutrition /njuːˈtrɪʃən/: (n.) 营养。例句：Good nutrition is essential for a healthy life.",
+            "diet /ˈdaɪət/: (n.) 饮食；节食。例句：He eats a balanced diet. / She is on a diet.",
+            "stress /strɛs/: (n./v.) 压力；强调。例句：Too much stress can lead to health problems.",
+            "mental /ˈmɛntəl/: (adj.) 精神的，心理的。例句：Regular exercise is good for both physical and mental health.",
+            "physical /ˈfɪzɪkəl/: (adj.) 身体的，物质的。例句：Physical activity helps maintain a healthy weight.",
+            "maintain /meɪnˈteɪn/: (v.) 保持，维持。例句：It's important to maintain a healthy lifestyle.",
+            "benefit /ˈbɛnɪfɪt/: (n./v.) 益处；有益于。例句：Regular exercise has many health benefits."
+          ],
+          "why_explanation": "这些词汇是讨论健康话题的核心。名词用于指代健康要素，动词用于表达保持健康的行为。理解这些词汇能帮助我们更好地表达对健康生活的看法。",
+          "example": {
+            "question": "如何通过饮食和运动来维持身心健康？",
+            "steps": [
+              "使用 'nutrition', 'diet' 描述饮食方面。",
+              "使用 'physical', 'mental', 'exercise' 描述运动方面。",
+              "使用 'maintain', 'benefit', 'stress' 等词汇。",
+              "组织成连贯的描述。"
+            ],
+            "answer": "To **maintain** good health, a balanced **diet** with proper **nutrition** is crucial. This means eating plenty of fruits and vegetables. Regular **physical** exercise, like running or swimming, has numerous **benefits** for both our bodies and our **mental** well-being. It can also help reduce **stress** effectively."
+          },
+          "mistakes": [
+            {
+              "wrong": "She has a healthy mental.",
+              "correct": "She has good mental health. / She is mentally healthy.",
+              "reason": "'mental' 是形容词，不能直接作名词。应搭配名词 'health' 或使用副词 'mentally'。"
+            },
+            {
+              "wrong": "Exercise benefits to our health.",
+              "correct": "Exercise benefits our health. / Exercise is beneficial to our health.",
+              "reason": "'benefit' 作动词时是及物动词，直接跟宾语；作名词时，'be beneficial to' 表示对...有益。"
+            }
+          ],
+          "memory_tip": "健康联想：'Nutrition' (营养) 的 'diet' (饮食) 减少 'stress' (压力)，对 'physical' (身体) 和 'mental' (精神) 都有 'benefit' (益处)，从而 'maintain' (维持) 健康。"
+        },
+        {
+          "card_id": "03-03",
+          "full_id": "英语-高一上-03-03",
+          "title": "语法：情态动词 (can, could, may, might, must, should, have to)",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习情态动词 'can, could, may, might, must, should, have to' 的基本用法，表示能力、可能性、许可、义务、建议等。",
+          "core_points": [
+            "**情态动词的特点**: 1. 不能单独作谓语；2. 后面跟动词原形；3. 没有人称和数的变化；4. 构成否定和疑问句时，自身变化。",
+            "**1. can/could (能力，可能性，许可)**",
+            "  - `can`: 表示现在或将来的能力 ('I can swim.')；表示可能性 ('It can be true.')；表示许可 ('You can go now.')。",
+            "  - `could`: `can` 的过去式 ('He could swim when he was five.')；更委婉的请求/许可 ('Could I use your pen?')；表示推测，比 `can` 可能性小 ('It could be true.')。",
+            "**2. may/might (可能性，许可)**",
+            "  - `may`: 表示许可 ('You may leave now.')；表示可能性，不确定性 ('It may rain tomorrow.')。",
+            "  - `might`: `may` 的过去式；比 `may` 可能性更小 ('It might rain tomorrow.')；更委婉的请求 ('Might I ask a question?')。",
+            "**3. must/have to (义务，必要性)**",
+            "  - `must`: 表示主观上的义务或必要性 ('I must finish my homework.')；表示非常肯定的推测 ('He must be ill.')。",
+            "  - `have to`: 表示客观上的义务或必要性 ('I have to wear a uniform at school.')；`must` 没有过去式，用 `had to` 代替 ('I had to go to the dentist yesterday.')。",
+            "**4. should (建议，义务，推测)**",
+            "  - 表示建议或忠告 ('You should study hard.')；表示义务 ('You should obey the law.')；表示推测 ('He should be here by now.')。",
+            "**否定句**: 情态动词后加 not (can't, couldn't, may not, might not, mustn't, shouldn't)。`have to` 的否定是 `don't/doesn't/didn't have to`。",
+            "**疑问句**: 情态动词提前 (Can you...?, May I...?, Should we...? )。`have to` 的疑问句是 `Do/Does/Did + 主语 + have to...?`。"
+          ],
+          "why_explanation": "情态动词是英语中表达说话人态度（如肯定、怀疑、义务、能力等）的重要工具。它们不表示具体的动作，而是修饰谓语动词，赋予其一层'情态'色彩。理解它们的不同含义和语境是精确表达的关键。",
+          "example": {
+            "question": "选择合适的情态动词填空，并解释理由：1. You ____ be tired after such a long journey. (推测) 2. We ____ finish this project by Friday. (客观要求) 3. You ____ eat more vegetables. (建议)",
+            "steps": [
+              "分析1：'be tired' 是一个推测，且可能性较大，用 'must'。",
+              "分析2：'finish this project by Friday' 是一个客观上的要求或期限，用 'have to'。",
+              "分析3：'eat more vegetables' 是一个建议，用 'should'。",
+              "根据情态动词的含义和语境进行选择。"
+            ],
+            "answer": "1. You **must** be tired after such a long journey. (表示非常肯定的推测) 2. We **have to** finish this project by Friday. (表示客观上的必要性/义务) 3. You **should** eat more vegetables. (表示建议/忠告)"
+          },
+          "mistakes": [
+            {
+              "wrong": "He must to go now.",
+              "correct": "He must go now.",
+              "reason": "情态动词后直接跟动词原形，中间不能加 'to'。"
+            },
+            {
+              "wrong": "You needn't to worry.",
+              "correct": "You needn't worry. / You don't need to worry.",
+              "reason": "'need' 作情态动词时，后面直接跟动词原形，否定句是 'needn't'；作实义动词时，否定句是 'don't need to'。"
+            },
+            {
+              "wrong": "I must went to the hospital yesterday.",
+              "correct": "I had to go to the hospital yesterday.",
+              "reason": "'must' 没有过去式，过去时态的义务或必要性用 'had to' 表示。"
+            }
+          ],
+          "memory_tip": "情态动词像'调味剂'，给动词加点'味道'。Can/could (能力/委婉)，May/might (可能/许可)，Must/have to (必须/不得不)，Should (应该)。"
+        },
+        {
+          "card_id": "03-04",
+          "full_id": "英语-高一上-03-04",
+          "title": "语法：动名词作主语和宾语",
+          "type": "高级语法卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习动名词 (-ing 形式) 在句中作主语、宾语（尤其在特定动词后）的用法。",
+          "core_points": [
+            "**动名词 (Gerund)**: 动词的-ing形式，在句中具有名词的性质，可以作主语、宾语、表语和介词宾语。",
+            "**1. 作主语**: 放在句首，表示做某事的行为。",
+            "  - 例句：**Swimming** is good for your health. (游泳对你的健康有益。)",
+            "  - 例句：**Learning** English is challenging but rewarding. (学英语有挑战但有回报。)",
+            "**2. 作宾语**: 放在及物动词或介词后面作宾语。",
+            "  - **作及物动词宾语**: 某些动词后只能跟动名词作宾语，如：enjoy, finish, mind, avoid, practice, suggest, imagine, consider, admit, deny, risk, keep, give up, put off。",
+            "    - 例句：I **enjoy reading** novels. (我喜欢读小说。)",
+            "    - 例句：He **finished doing** his homework. (他做完了作业。)",
+            "  - **作介词宾语**: 介词后通常跟动名词。",
+            "    - 例句：He is good **at drawing**. (他擅长画画。)",
+            "    - 例句：Thank you **for helping** me. (谢谢你帮助我。)",
+            "**注意事项**: 区分动名词和现在分词。动名词作名词成分，现在分词作形容词或副词成分。"
+          ],
+          "why_explanation": "动名词的引入是为了让动词能够以名词的身份出现在句子的不同位置，从而扩展了句子的表达能力。它将一个动作抽象化为'做某事'这个概念，使其能够作主语或宾语，使语言更加灵活和精炼。",
+          "example": {
+            "question": "用动名词形式填空：1. ____ (play) sports helps you stay fit. 2. I avoid ____ (eat) too much junk food. 3. She is interested in ____ (learn) new languages.",
+            "steps": [
+              "分析1：句子需要一个主语，且表示一种行为，用动名词作主语。",
+              "分析2：动词 'avoid' 后接动名词作宾语。",
+              "分析3：介词 'in' 后接动名词作宾语。",
+              "将动词变为-ing形式。"
+            ],
+            "answer": "1. **Playing** sports helps you stay fit. 2. I avoid **eating** too much junk food. 3. She is interested in **learning** new languages."
+          },
+          "mistakes": [
+            {
+              "wrong": "He suggested to go out for dinner.",
+              "correct": "He suggested going out for dinner.",
+              "reason": "动词 'suggest' 后只能跟动名词作宾语，不能跟动词不定式。"
+            },
+            {
+              "wrong": "For to keep healthy, you should exercise.",
+              "correct": "For keeping healthy, you should exercise. / To keep healthy, you should exercise.",
+              "reason": "介词 'for' 后接动名词，不能接动词不定式。如果用不定式，'for' 需省略。"
+            }
+          ],
+          "memory_tip": "动名词是'动'作变'名'词，像把动词穿上名词的衣服。主语宾语介宾定，-ing形式是核心。记住'enjoy' 'finish' 'mind' 后跟 '-ing'。"
+        },
+        {
+          "card_id": "03-05",
+          "full_id": "英语-高一上-03-05",
+          "title": "句型：表达建议与偏好",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "学习如何使用各种句型来给出建议、提出看法以及表达个人偏好。",
+          "core_points": [
+            "**表达建议**",
+            "  - You should/ought to do sth. (你应该做某事)。例：'You should get more sleep.'",
+            "  - Why don't you do sth.? (你为什么不…呢？)。例：'Why don't you join a sports club?'",
+            "  - How about doing sth.? / What about doing sth.? (做…怎么样？)。例：'How about going for a walk?'",
+            "  - I suggest (that) you (should) do sth. (我建议你做某事)。例：'I suggest you try yoga.'",
+            "  - It's a good idea to do sth. (做某事是个好主意)。例：'It's a good idea to drink plenty of water.'",
+            "**表达偏好**",
+            "  - I prefer A to B. (我喜欢A胜过B)。例：'I prefer playing basketball to running.'",
+            "  - I'd rather do A than do B. (我宁愿做A也不愿做B)。例：'I'd rather stay at home than go out tonight.'",
+            "  - I enjoy doing sth. (我喜欢做某事)。例：'I enjoy swimming in the sea.'",
+            "  - My favorite sport/activity is... (我最喜欢的运动/活动是)。例：'My favorite sport is table tennis.'",
+            "  - I'm keen on / fond of doing sth. (我热衷于/喜欢做某事)。例：'I'm keen on learning new skills.'"
+          ],
+          "why_explanation": "这些句型是日常交流中非常实用的工具，能帮助我们清晰、礼貌地表达自己的观点和选择。掌握它们能提升口语和写作的流畅性，并使表达更具多样性。",
+          "example": {
+            "question": "你如何建议朋友保持健康，并表达你对运动的偏好？",
+            "steps": [
+              "使用建议句型给出健康建议。",
+              "使用偏好句型表达自己喜欢的运动。",
+              "注意句型后的动词形式 (to do, doing)。"
+            ],
+            "answer": "To stay healthy, **you should** exercise regularly. **Why don't you** try joining a gym? **How about going** for a run with me this weekend? Personally, **I prefer playing** badminton **to** doing yoga, but **I enjoy** all kinds of physical activities."
+          },
+          "mistakes": [
+            {
+              "wrong": "How about to go swimming?",
+              "correct": "How about going swimming?",
+              "reason": "'How about' 后接动名词，而不是动词不定式。"
+            },
+            {
+              "wrong": "I'd rather to read than watch TV.",
+              "correct": "I'd rather read than watch TV.",
+              "reason": "'would rather do A than do B' 结构中，'than' 后面也接动词原形，不需要 'to'。"
+            }
+          ],
+          "memory_tip": "建议：'Should'是忠告，'Why not'是提问，'How about'是商量，'Suggest'是提议。偏好：'Prefer A to B'，'Rather A than B'，'Enjoy -ing'，'Keen on -ing'。记住介词后跟-ing。"
+        },
+        {
+          "card_id": "03-06",
+          "full_id": "英语-高一上-03-06",
+          "title": "易混词卡：healthy vs healthful",
+          "type": "易混词卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "辨析 'healthy' 和 'healthful' 这两个形容词，理解它们在描述健康时的细微差别。",
+          "core_points": [
+            "**healthy**: (adj.) 健康的，健壮的；有益健康的。",
+            "  - 主要指'人或动物身体健康'的状态。例句：He is a healthy man. (他是一个健康的人。)",
+            "  - 也可以指'有益健康的'，但不如 'healthful' 常用。例句：Eating vegetables is healthy. (吃蔬菜是健康的/有益健康的。)",
+            "  - 强调'健康的状态'或'使人健康'。",
+            "**healthful**: (adj.) 有益健康的，促进健康的。",
+            "  - 专门指'对健康有益的'事物或活动。例句：A healthful diet is important. (有益健康的饮食很重要。)",
+            "  - 例句：Fresh air and exercise are healthful. (新鲜空气和运动有益健康。)",
+            "  - 强调'带来健康'或'促进健康'的性质。"
+          ],
+          "why_explanation": "这两个词都与'健康'相关，但侧重点不同。'healthy' 既能形容人或物处于健康状态，也能形容事物有益健康；而 'healthful' 则专门用于形容事物'对健康有益'。在现代英语中，'healthy' 几乎可以替代 'healthful'，但 'healthful' 仍然存在，并且在强调'促进健康'时更精确。",
+          "example": {
+            "question": "选择合适的词填空：1. Eating a lot of fruit is very ____. 2. He looks very ____ after his vacation.",
+            "steps": [
+              "分析1：'Eating a lot of fruit' 指的是一种对健康有益的行为或食物。",
+              "分析2：'He looks very ____' 指的是人的健康状态。",
+              "根据 'healthy' 和 'healthful' 的含义进行选择。"
+            ],
+            "answer": "1. **healthful** (或 **healthy**) 2. **healthy**"
+          },
+          "mistakes": [
+            {
+              "wrong": "This food is very healthy for you.",
+              "correct": "This food is very healthful for you. / This food is very healthy.",
+              "reason": "虽然 'healthy' 也可以，但 'healthful' 在描述食物对健康有益时更精确。现代英语中 'healthy food' 也很常见。"
+            }
+          ],
+          "memory_tip": "'Healthy' 像 'happy'，形容人或事物状态良好。'Healthful' 像 'helpful'，形容事物对健康有帮助。"
+        },
+        {
+          "card_id": "03-07",
+          "full_id": "英语-高一上-03-07",
+          "title": "从句进阶卡：目的状语从句 (so that, in order that)",
+          "type": "从句进阶卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习并掌握由 'so that' 和 'in order that' 引导的目的状语从句，表示主句动作的目的。",
+          "core_points": [
+            "**目的状语从句**：表示主句动作的目的或结果。",
+            "**1. so that (以便；为了)**",
+            "  - 引导从句，说明主句动作的目的。",
+            "  - 从句中常含有 `can/could/may/might/will/would` 等情态动词。",
+            "  - 例句：He studies hard **so that** he can pass the exam. (他努力学习，以便通过考试。)",
+            "  - 例句：She spoke quietly **so that** she wouldn't wake the baby. (她轻声说话，以免吵醒婴儿。)",
+            "**2. in order that (为了)**",
+            "  - 语气比 'so that' 更正式，含义相同。",
+            "  - 从句中也常含有 `may/might/should/would` 等情态动词。",
+            "  - 例句：He worked overtime **in order that** he might finish the report on time. (他加班工作，以便按时完成报告。)",
+            "**注意**: 当主句和从句主语一致时，也可以使用不定式短语 `in order to do sth.` 或 `so as to do sth.` 来表示目的，更加简洁。",
+            "  - 例句：He studies hard **in order to pass** the exam. (他努力学习，为了通过考试。)"
+          ],
+          "why_explanation": "目的状语从句为我们提供了表达'为什么做某事'的语言工具。通过连接词 'so that' 和 'in order that'，我们可以清晰地阐明动作背后的意图，使句子逻辑更完整。情态动词的配合则进一步强调了目的的'可能性'或'必要性'。",
+          "example": {
+            "question": "用 'so that' 或 'in order that' 连接下列句子，表达目的：1. She saved money. She wanted to buy a new car. 2. He wore a heavy coat. He wouldn't catch a cold.",
+            "steps": [
+              "分析1：'saved money' 的目的是 'buy a new car'。",
+              "分析2：'wore a heavy coat' 的目的是 'wouldn't catch a cold'。",
+              "选择 'so that' 或 'in order that'，并注意从句中的情态动词（此处可自行添加 'could/would'）。"
+            ],
+            "answer": "1. She saved money **so that** she could buy a new car. / She saved money **in order that** she might buy a new car. 2. He wore a heavy coat **so that** he wouldn't catch a cold. / He wore a heavy coat **in order that** he might not catch a cold."
+          },
+          "mistakes": [
+            {
+              "wrong": "He studies hard so that he pass the exam.",
+              "correct": "He studies hard so that he can pass the exam.",
+              "reason": "'so that' 引导的目的状语从句中，通常需要情态动词 (can, could, may, might, will, would) 来表达目的性。"
+            },
+            {
+              "wrong": "In order that to improve his English, he practiced daily.",
+              "correct": "In order that he could improve his English, he practiced daily. / In order to improve his English, he practiced daily.",
+              "reason": "'in order that' 后跟从句，不能直接跟不定式；若要用不定式，则用 'in order to'。"
+            }
+          ],
+          "memory_tip": "So that / In order that：'为了'，后面跟'能/会'。记住 'that' 后面要接完整句子，且常有情态动词。"
+        },
+        {
+          "card_id": "03-08",
+          "full_id": "英语-高一上-03-08",
+          "title": "写作进阶卡：议论文结构 (简单)",
+          "type": "写作进阶卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习议论文的基本结构，包括引言、主体段落和结论，以便清晰地表达观点并进行论证。",
+          "core_points": [
+            "**议论文目的**: 表达作者对某一话题的观点或立场，并通过证据和推理说服读者。",
+            "**基本结构**:",
+            "  1. **引言 (Introduction)**: (1-2段)",
+            "    - **背景信息**: 简要介绍话题背景，引起读者兴趣。",
+            "    - **提出论点 (Thesis Statement)**: 明确表达作者的观点或立场，通常放在引言末尾，是整篇文章的核心。",
+            "  2. **主体段落 (Body Paragraphs)**: (2-3段或更多)",
+            "    - **主题句 (Topic Sentence)**: 每段开头提出该段的中心论点或分论点。",
+            "    - **论证与支持 (Support and Evidence)**: 用事实、数据、例子、个人经历、逻辑推理等来支持主题句。",
+            "    - **解释与分析**: 解释证据如何支持论点，深入分析其含义。",
+            "    - **过渡**: 段落之间使用过渡词或短语 (e.g., Firstly, Secondly, Moreover, Furthermore, In addition, However, On the other hand) 保持连贯。",
+            "  3. **结论 (Conclusion)**: (1段)",
+            "    - **重申论点**: 用不同措辞再次强调引言中的论点，但避免重复。",
+            "    - **总结主要论据**: 简要回顾主体段落的主要观点。",
+            "    - **展望或建议**: 提出未来的展望、建议或呼吁，使文章更有深度和影响力。",
+            "**核心原则**: 观点明确，论据充分，逻辑清晰，结构严谨。"
+          ],
+          "why_explanation": "议论文结构是逻辑思维在写作中的体现。一个清晰的结构能帮助作者组织思想，确保论证过程严谨有效，同时也能帮助读者更好地理解和接受作者的观点。这是高中写作的必备技能。",
+          "example": {
+            "question": "就'中学生是否应该使用智能手机上学'这一话题，写一篇简短议论文的引言和一段主体段落。",
+            "steps": [
+              "引言：先引入话题背景（智能手机普及），然后明确提出论点（例如：赞成或反对）。",
+              "主体段落：提出一个分论点（例如：手机的弊端或益处），然后提供具体理由或例子来支持。",
+              "确保引言的论点与主体段落的分论点一致。"
+            ],
+            "answer": {
+              "introduction": "In today's digital age, smartphones have become an indispensable part of daily life for many, including teenagers. However, the question of whether senior high students should be allowed to bring smartphones to school remains a contentious issue. While some argue for their educational benefits, I firmly believe that **smartphones should be prohibited in schools due to their significant distractions and potential negative impacts on academic performance.**",
+              "body_paragraph": "Firstly, the most pressing concern regarding smartphones in schools is their potential as a major source of distraction. During lessons, students can easily be tempted to check social media, play games, or text friends, diverting their attention from the teacher and course material. This constant temptation can severely hinder their ability to concentrate and absorb information, ultimately leading to poorer academic results. For instance, a recent study showed that students who frequently used their phones in class performed significantly worse on exams compared to those who did not."
+            }
+          },
+          "mistakes": [
+            {
+              "wrong": "引言中没有明确提出论点，或者论点模糊不清。",
+              "correct": "引言的结尾必须清晰地陈述作者的中心论点，这是文章的灵魂。",
+              "reason": "未能理解论点在议论文中的核心地位，导致文章缺乏方向性。"
+            },
+            {
+              "wrong": "主体段落中只有观点，没有具体论据支持。",
+              "correct": "每个主体段落不仅要有主题句，更要有具体的事实、例子、数据或逻辑推理来支撑。",
+              "reason": "未能理解论证的重要性，导致论点苍白无力。"
+            }
+          ],
+          "memory_tip": "议论文像'三明治'：上面包 (引言+论点)，中间馅 (主体段落+论据)，下面包 (结论+重申)。每层都要有料，层层递进。"
+        }
+      ]
+    },
+    {
+      "unit_id": "04",
+      "unit_name": "Unit 4 Food and Culture",
+      "cards": [
+        {
+          "card_id": "04-01",
+          "full_id": "英语-高一上-04-01",
+          "title": "词汇：食物与烹饪",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元涉及各种食物种类、烹饪方式及相关词汇。",
+          "core_points": [
+            "ingredient /ɪnˈɡriːdiənt/: (n.) 食材，配料。例句：Flour is a key ingredient in bread.",
+            "recipe /ˈrɛsɪpi/: (n.) 食谱，烹饪法。例句：Can you share your recipe for this cake?",
+            "cuisine /kwɪˈziːn/: (n.) 菜肴，烹饪（风格）。例句：Chinese cuisine is famous worldwide.",
+            "flavor /ˈfleɪvər/: (n.) 风味，味道；(v.) 给…调味。例句：This soup has a rich flavor. / She flavored the sauce with herbs.",
+            "spicy /ˈspaɪsi/: (adj.) 辛辣的。例句：I like spicy food, especially Sichuan cuisine.",
+            "delicious /dɪˈlɪʃəs/: (adj.) 美味的，可口的。例句：The meal was absolutely delicious.",
+            "steam /stiːm/: (v.) 蒸。例句：We often steam fish in China."
+          ],
+          "why_explanation": "这些词汇是描述食物、烹饪过程和菜肴特点的基础。名词用于指代事物，形容词用于修饰味道，动词用于表达烹饪动作。掌握它们能帮助我们更好地讨论美食文化。",
+          "example": {
+            "question": "描述一道你最喜欢的菜肴，包括它的主要食材、味道和烹饪方式。",
+            "steps": [
+              "说出菜肴名称。",
+              "使用 'ingredient' 描述主要食材。",
+              "使用 'flavor', 'spicy', 'delicious' 描述味道。",
+              "使用 'steam', 'fry', 'boil' 等描述烹饪方式。"
+            ],
+            "answer": "My favorite dish is steamed fish. The main **ingredient** is fresh fish, along with ginger, green onions, and soy sauce. The **recipe** is quite simple: you just **steam** the fish until it's cooked. It has a delicate, savory **flavor** and is incredibly **delicious**. It's a classic in Chinese **cuisine**."
+          },
+          "mistakes": [
+            {
+              "wrong": "This dish is very delicious taste.",
+              "correct": "This dish tastes very delicious. / This dish has a delicious taste.",
+              "reason": "'delicious' 本身就是形容词，不能再与 'taste' （名词）连用。动词 'taste' 后直接跟形容词。"
+            },
+            {
+              "wrong": "I like spicier food.",
+              "correct": "I like spicy food. / I like spicier food (比较级).",
+              "reason": "原句没有比较对象，直接用 'spicy' 即可。如果想表达更辣的，才用比较级。"
+            }
+          ],
+          "memory_tip": "食物联想：'Ingredient' (食材) 按 'recipe' (食谱) 制作成 'cuisine' (菜肴)，有独特的 'flavor' (风味)，可能是 'spicy' (辣的) 或 'delicious' (美味的)，烹饪方式有 'steam' (蒸)。"
+        },
+        {
+          "card_id": "04-02",
+          "full_id": "英语-高一上-04-02",
+          "title": "词汇：文化与习俗",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "本单元涉及与文化、传统、习俗相关的词汇。",
+          "core_points": [
+            "tradition /trəˈdɪʃən/: (n.) 传统。例句：It's a family tradition to have a big dinner on New Year's Eve.",
+            "custom /ˈkʌstəm/: (n.) 习俗，风俗。例句：It's a local custom to greet strangers.",
+            "festival /ˈfɛstɪvəl/: (n.) 节日。例句：The Spring Festival is the most important traditional festival in China.",
+            "celebrate /ˈsɛlɪbreɪt/: (v.) 庆祝。例句：We celebrate my birthday with a party.",
+            "symbolize /ˈsɪmbəlaɪz/: (v.) 象征。例句：The dove symbolizes peace.",
+            "diverse /daɪˈvɜːrs/: (adj.) 多样的，不同的。例句：The city has a diverse cultural background.",
+            "heritage /ˈhɛrɪtɪdʒ/: (n.) 遗产（文化遗产、自然遗产等）。例句：Protecting cultural heritage is important."
+          ],
+          "why_explanation": "这些词汇是理解和描述不同文化现象、传统节日和风俗习惯的关键。名词用于指代文化元素，动词用于表达与文化相关的行为。掌握它们能帮助我们更好地进行跨文化交流。",
+          "example": {
+            "question": "描述一个你熟悉的传统节日，包括它的名称、如何庆祝以及它可能象征的意义。",
+            "steps": [
+              "说出节日名称。",
+              "使用 'tradition', 'custom', 'celebrate' 描述庆祝方式。",
+              "使用 'symbolize' 描述其象征意义。",
+              "组织成连贯的描述。"
+            ],
+            "answer": "The Spring **Festival** is a very important **tradition** in China. It's a time when families gather to **celebrate** the New Year. One common **custom** is to eat dumplings. The red color often used during the festival **symbolizes** good luck and happiness. It's part of our rich cultural **heritage**."
+          },
+          "mistakes": [
+            {
+              "wrong": "China has many diverse culture.",
+              "correct": "China has a diverse culture. / China has many diverse cultures.",
+              "reason": "'culture' 作可数名词时指'一种文化'，作不可数名词时指'文化'这个概念。'diverse' 形容词修饰名词，需注意名词的单复数。"
+            },
+            {
+              "wrong": "We celebrate to the festival.",
+              "correct": "We celebrate the festival.",
+              "reason": "'celebrate' 作动词时是及物动词，直接跟宾语，不需要介词 'to'。"
+            }
+          ],
+          "memory_tip": "文化联想：'Festival' (节日) 有 'tradition' (传统) 和 'custom' (习俗)，人们 'celebrate' (庆祝) 它，它可能 'symbolize' (象征) 某种意义，是我们 'diverse' (多样的) 'heritage' (遗产)。"
+        },
+        {
+          "card_id": "04-03",
+          "full_id": "英语-高一上-04-03",
+          "title": "语法：可数名词与不可数名词",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "学习可数名词和不可数名词的定义、特点及在句中的用法，尤其注意量词的搭配。",
+          "core_points": [
+            "**可数名词 (Countable Nouns)**: 指可以被计数，有单数和复数形式的名词。",
+            "  - **单数**: 前面可用 `a/an` 或 `one`。例句：a book, an apple。",
+            "  - **复数**: 通常在词尾加 `s/es`，或有不规则变化。例句：two books, many apples, children, teeth。",
+            "  - 可以与 `many, a few, few` 等修饰词连用。例句：many students, a few questions。",
+            "**不可数名词 (Uncountable Nouns)**: 指不能被计数，没有复数形式的名词，通常表示抽象概念、物质、液体、气体等。",
+            "  - **没有复数**: 始终作单数看待，谓语动词用单数。例句：water is, information is。",
+            "  - **不能用 `a/an` 修饰**: 但可以用 `some, any, much, a little, little` 等修饰。例句：some water, much information。",
+            "  - **需要量词**: 如需表示数量，需借助量词。例句：a glass of water, a piece of advice, a slice of bread。",
+            "**常见不可数名词**: water, milk, bread, rice, money, information, advice, furniture, news, progress, work, homework, traffic, weather, knowledge, equipment, luggage/baggage, hair, fruit (作种类时可数)。",
+            "**注意事项**: 有些名词在不同语境下既可数又不可数 (如 'chicken' 作动物时可数，作食物时不可数；'time' 作时间概念时不可数，作次数时可数)。"
+          ],
+          "why_explanation": "可数与不可数名词是英语名词最基本的分类，它直接影响冠词、数词、量词和谓语动词的使用。理解其核心区别在于能否'单个计数'，有助于我们准确表达数量和避免语法错误。",
+          "example": {
+            "question": "判断下列名词是可数还是不可数，并用合适的量词或修饰词填空：1. ____ (much/many) advice 2. ____ (a/an) orange 3. ____ (some/a piece of) bread 4. ____ (a few/a little) money",
+            "steps": [
+              "分析 'advice'：不可数名词，用 'much'。",
+              "分析 'orange'：可数名词，单数，以元音开头，用 'an'。",
+              "分析 'bread'：不可数名词，若指一份，用 'a piece of'；若泛指一些，用 'some'。",
+              "分析 'money'：不可数名词，表示少量用 'a little'。",
+              "根据可数/不可数名词的特点进行选择。"
+            ],
+            "answer": "1. **much** advice 2. **an** orange 3. **a piece of** bread (或 **some** bread) 4. **a little** money"
+          },
+          "mistakes": [
+            {
+              "wrong": "I have many informations.",
+              "correct": "I have much information. / I have a lot of information. / I have many pieces of information.",
+              "reason": "'information' 是不可数名词，不能用 'many' 修饰，也不能加复数-s。"
+            },
+            {
+              "wrong": "Could you give me an advice?",
+              "correct": "Could you give me some advice? / Could you give me a piece of advice?",
+              "reason": "'advice' 是不可数名词，不能用 'an' 修饰。"
+            }
+          ],
+          "memory_tip": "可数名词'能数'，有'单复'。不可数名词'不能数'，是'一团'，要用'量词'来切分。记住'水、米、钱、消息、建议'等是不可数。"
+        },
+        {
+          "card_id": "04-04",
+          "full_id": "英语-高一上-04-04",
+          "title": "语法：形容词与副词的比较级和最高级",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "学习形容词和副词的比较级和最高级形式，以及如何在句子中正确使用它们进行比较。",
+          "core_points": [
+            "**1. 规则变化**",
+            "  - **单音节词和部分双音节词**: 比较级加 `-er`，最高级加 `-est`。例：tall - taller - tallest; quick - quicker - quickest。",
+            "  - **以 `-e` 结尾的词**: 比较级加 `-r`，最高级加 `-st`。例：nice - nicer - nicest; late - later - latest。",
+            "  - **以辅音字母 + `y` 结尾的词**: 变 `y` 为 `i` 再加 `-er/-est`。例：happy - happier - happiest; easy - easier - easiest。",
+            "  - **重读闭音节单音节词**: 双写词尾辅音字母再加 `-er/-est`。例：big - bigger - biggest; hot - hotter - hottest。",
+            "  - **多音节词和部分双音节词**: 比较级前加 `more`，最高级前加 `most`。例：beautiful - more beautiful - most beautiful; quickly - more quickly - most quickly。",
+            "**2. 不规则变化**",
+            "  - good/well - better - best",
+            "  - bad/badly - worse - worst",
+            "  - much/many - more - most",
+            "  - little - less - least",
+            "  - far - farther/further - farthest/furthest",
+            "**3. 比较级用法**: 'A is ...er/more... than B' (A比B更...)。例：'He is taller than his brother.'",
+            "**4. 最高级用法**: 'A is the ...est/most... in/of...' (A是...中最...的)。例：'She is the tallest in her class.' 最高级前常加定冠词 `the`。",
+            "**注意事项**: 比较级后不能用 'the'。最高级前必须用 'the' (除非是副词最高级且不修饰名词)。"
+          ],
+          "why_explanation": "比较级和最高级是表达事物之间差异和程度的工具。它们允许我们对人、事、物进行对比和排行，是日常交流和书面表达中不可或缺的语法点。理解其变化规则和使用场景能使表达更精确。",
+          "example": {
+            "question": "用正确的比较级或最高级形式填空：1. This is ____ (interesting) book I've ever read. 2. He runs ____ (fast) than anyone else in the team. 3. My new apartment is ____ (big) than my old one.",
+            "steps": [
+              "分析1：'I've ever read' 表明是最高级，且 'interesting' 是多音节词，用 'most'。",
+              "分析2：'than anyone else' 表明是比较级，'fast' 是单音节词，用 '-er'。",
+              "分析3：'than my old one' 表明是比较级，'big' 是重读闭音节单音节词，双写辅音加 '-er'。",
+              "注意最高级前加 'the'。"
+            ],
+            "answer": "1. This is **the most interesting** book I've ever read. 2. He runs **faster** than anyone else in the team. 3. My new apartment is **bigger** than my old one."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is more taller than me.",
+              "correct": "He is taller than me.",
+              "reason": "单音节形容词变比较级直接加 '-er'，不能再加 'more'。"
+            },
+            {
+              "wrong": "This is a most beautiful painting.",
+              "correct": "This is the most beautiful painting.",
+              "reason": "形容词最高级前必须加定冠词 'the'。"
+            },
+            {
+              "wrong": "She speaks English more good than I do.",
+              "correct": "She speaks English better than I do.",
+              "reason": "'good' (形容词) 和 'well' (副词) 的比较级都是 'better'。"
+            }
+          ],
+          "memory_tip": "比高低，分三级：原级'一样'，比较级'比一比' (er/more...than)，最高级'最棒的' (the...est/most...in/of)。"
+        },
+        {
+          "card_id": "04-05",
+          "full_id": "英语-高一上-04-05",
+          "title": "句型：表达数量与比较",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "学习如何使用各种句型来表达事物的数量多少以及进行不同程度的比较。",
+          "core_points": [
+            "**表达数量**",
+            "  - There is/are (some/many/much/a lot of)... (存在...多少)。例：'There is a lot of milk in the fridge.'",
+            "  - How much/many...? (多少？)。例：'How much water do you need?' / 'How many apples are there?'",
+            "  - A great deal of / A large amount of (不可数名词)。例：'A great deal of effort was put into the project.'",
+            "  - A large number of (可数名词复数)。例：'A large number of students attended the lecture.'",
+            "**进行比较**",
+            "  - A is as ... as B. (A和B一样...)。例：'This dish is as delicious as that one.'",
+            "  - A is not as/so ... as B. (A不如B...)。例：'He is not as tall as his brother.'",
+            "  - A is ...er/more... than B. (A比B更...)。例：'Chinese food is more popular than French food in this city.'",
+            "  - A is the ...est/most... in/of... (A是...中最...的)。例：'This is the most ancient temple in the region.'",
+            "  - The + 比较级, the + 比较级 (越...越...)。例：'The more you practice, the better you become.'"
+          ],
+          "why_explanation": "这些句型是我们在描述世界、进行交流时不可或缺的工具。它们提供了表达数量概念和进行各种比较的标准化模式，使我们的语言更精确、更有层次感。掌握这些句型能有效提升表达的准确性和丰富性。",
+          "example": {
+            "question": "用不同的句型描述你的城市和另一个城市的食物和人口，并进行比较。",
+            "steps": [
+              "先用数量句型描述两个城市的人口或食物种类。",
+              "再用比较句型进行对比，例如哪个城市食物更辣、人口更多。",
+              "注意可数/不可数名词和比较级的搭配。"
+            ],
+            "answer": "My city has **a large number of** restaurants, offering **a diverse range of** cuisines. Compared to a smaller town, there is **much more** variety here. For example, Sichuan food is **spicier than** Cantonese food, and many people here enjoy it. Our city's population is **as large as** that of some European countries, making it **one of the most populous** cities in the region."
+          },
+          "mistakes": [
+            {
+              "wrong": "There are much water in the bottle.",
+              "correct": "There is much water in the bottle.",
+              "reason": "'water' 是不可数名词，谓语动词用单数 'is'。"
+            },
+            {
+              "wrong": "He is more taller than me.",
+              "correct": "He is taller than me.",
+              "reason": "单音节形容词变比较级直接加 '-er'，不能再加 'more'。"
+            }
+          ],
+          "memory_tip": "数量：'How much/many'是问数量，'much/little'是不可数，'many/few'是可数。比较：'as...as'是相同，'-er/more...than'是不同，'the...est/most'是极致。"
+        },
+        {
+          "card_id": "04-06",
+          "full_id": "英语-高一上-04-06",
+          "title": "易混词卡：affect vs effect",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "辨析 'affect' 和 'effect' 这两个常用词，理解它们作为动词和名词的不同用法。",
+          "core_points": [
+            "**affect**: (v.) 影响，感动。",
+            "  - 主要作动词，表示'对…产生影响'或'使…受感动'。例句：The weather can seriously affect your mood. (天气会严重影响你的情绪。)",
+            "  - 例句：His speech deeply affected the audience. (他的演讲深深地感动了听众。)",
+            "  - 强调'施加影响'的动作。",
+            "**effect**: (n.) 影响，效果，作用；(v.) 实施，实现（较正式）。",
+            "  - 主要作名词，表示'影响'或'结果'。常与介词 `on` 连用。例句：The new policy had a positive effect on the economy. (新政策对经济产生了积极影响。)",
+            "  - 动词用法较少，通常指'实现'、'促成'。例句：The government effected a change in the law. (政府促成了法律的改变。)",
+            "  - 强调'产生的结果'或'被施加的影响'。"
+          ],
+          "why_explanation": "'Affect' 和 'effect' 的混淆是由于它们在含义上的关联性和发音的相似性。核心区别在于词性：'affect' 主要是动词，'effect' 主要是名词。理解这一根本区别是正确使用的关键。",
+          "example": {
+            "question": "选择合适的词填空：1. The new law will ____ everyone. 2. What ____ did the new policy have on the public? 3. The change will ____ a significant improvement.",
+            "steps": [
+              "分析1：句子需要一个动词，表示'影响'。",
+              "分析2：句子需要一个名词，表示'影响/效果'，且有冠词 'What' 和介词 'on'。",
+              "分析3：句子需要一个动词，表示'实现/促成'。",
+              "根据词性及语境进行选择。"
+            ],
+            "answer": "1. **affect** 2. **effect** 3. **effect**"
+          },
+          "mistakes": [
+            {
+              "wrong": "The bad weather had a negative affect on our trip.",
+              "correct": "The bad weather had a negative effect on our trip.",
+              "reason": "此处需要名词 'effect' 表示'影响'，而不是动词 'affect'。"
+            },
+            {
+              "wrong": "How does this effect you?",
+              "correct": "How does this affect you?",
+              "reason": "此处需要动词 'affect' 表示'影响'，而不是名词 'effect'。"
+            }
+          ],
+          "memory_tip": "记住：'A'ffect 是 'A'ction (动作)，'E'ffect 是 'E'nd result (结果)。或者用 'RAVEN' 口诀：'R'emember 'A'ffect is a 'V'erb, 'E'ffect is a 'N'oun。'"
+        },
+        {
+          "card_id": "04-07",
+          "full_id": "英语-高一上-04-07",
+          "title": "词汇深度卡：前缀/后缀规则 (in-, un-, -less)",
+          "type": "词汇深度卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习常见的否定前缀 'in-', 'un-' 和否定后缀 '-less'，理解它们如何改变词义，并掌握相关词汇。",
+          "core_points": [
+            "**前缀 (Prefix)**: 加在词根前，改变词义。",
+            "**1. in-**: 表示'不'，'无'，'非'。常用于形容词和名词。在某些情况下，`in-` 会根据其后的字母变为 `il-` (l前), `im-` (m/p前), `ir-` (r前)。",
+            "  - `in-`: incorrect (不正确的), incomplete (不完整的), invisible (看不见的)",
+            "  - `il-`: illegal (非法的), illogical (不合逻辑的)",
+            "  - `im-`: impossible (不可能的), impatient (不耐烦的), immoral (不道德的)",
+            "  - `ir-`: irregular (不规则的), irresponsible (不负责任的)",
+            "**2. un-**: 表示'不'，'非'，'反'。最常用的否定前缀，可用于形容词、动词和副词。",
+            "  - `un-`: unhappy (不快乐的), unhealthy (不健康的), unfair (不公平的), undo (撤销), unpack (打开包裹)",
+            "**后缀 (Suffix)**: 加在词根后，改变词性或词义。",
+            "**3. -less**: 表示'无…的'，'缺乏…的'。通常加在名词后构成形容词。",
+            "  - `worthless` (无价值的), `careless` (粗心的), `hopeless` (绝望的), `homeless` (无家可归的), `sleepless` (不眠的)"
+          ],
+          "why_explanation": "词根词缀是英语词汇学习的重要方法，它揭示了词汇的构成规律。掌握常见词缀能帮助我们推断出生词的含义，扩大词汇量，并更深入地理解词义，从而提高阅读和写作能力。",
+          "example": {
+            "question": "用合适的前缀或后缀填空，使词义变为否定：1. ____ (happy) 2. ____ (correct) 3. ____ (hope) 4. ____ (responsible)",
+            "steps": [
+              "分析1：'happy' 常用 'un-' 否定。",
+              "分析2：'correct' 常用 'in-' 否定。",
+              "分析3：'hope' 常用 '-less' 否定。",
+              "分析4：'responsible' 以 'r' 开头，用 'ir-' 否定。",
+              "根据词缀规则进行填空。"
+            ],
+            "answer": "1. **unhappy** 2. **incorrect** 3. **hopeless** 4. **irresponsible**"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is inresponsible.",
+              "correct": "He is irresponsible.",
+              "reason": "以 'r' 开头的词前缀 'in-' 变为 'ir-'。"
+            },
+            {
+              "wrong": "The plan was successless.",
+              "correct": "The plan was unsuccessful. / The plan failed.",
+              "reason": "'success' 常用 'un-' 否定其形容词形式 'successful'，或直接用动词 'fail'。'-less' 并非适用于所有词。"
+            }
+          ],
+          "memory_tip": "否定前缀像'开关'：'un-'是通用开关，'in-'是特定开关 (in-il-im-ir)。后缀'-less'是'缺'少，像'less is more'，表示'没有'。"
+        },
+        {
+          "card_id": "04-08",
+          "full_id": "英语-高一上-04-08",
+          "title": "阅读技巧卡：识别作者态度与语气",
+          "type": "阅读技巧卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "学习如何在阅读中通过作者的用词、句式和论证方式，识别其对某一话题的态度（肯定、否定、中立等）和语气（幽默、讽刺、严肃等）。",
+          "core_points": [
+            "**作者态度 (Author's Attitude)**: 指作者对所讨论话题或人物的情感立场，是积极的、消极的还是中立的。",
+            "**作者语气 (Author's Tone)**: 指作者在表达态度时所用的语言风格，是幽默、讽刺、严肃、客观、批判、赞扬等。",
+            "**识别方法**:",
+            "  1. **关注形容词和副词**: 带有褒贬色彩的词汇直接反映作者情感。例：'brilliant', 'disastrous', 'crucial', 'merely'。",
+            "  2. **动词选择**: 强烈的动词或带有情感色彩的动词。例：'condemn', 'advocate', 'lament'。",
+            "  3. **修辞手法**: 反问、讽刺、比喻等修辞手法能暗示作者的真实意图。例：'What a brilliant idea! (反语，实则讽刺)'。",
+            "  4. **句式结构**: 复杂句式可能显得正式和严肃，疑问句可能表达怀疑或反思。",
+            "  5. **论证方式**: 如果作者大量使用事实和数据，语气可能更客观；如果更多是个人观点和情感，语气可能更主观。",
+            "  6. **排除法**: 排除明显不符的选项，缩小范围。",
+            "**常见态度词**: positive (积极), negative (消极), neutral (中立), objective (客观), subjective (主观), critical (批判), approving (赞同), skeptical (怀疑), humorous (幽默), sarcastic (讽刺)。"
+          ],
+          "why_explanation": "识别作者的态度和语气是深层理解文章的关键。它不仅帮助我们抓住作者的真实意图，避免误解，还能提升我们对文本情感和说服力的感知，是高级阅读理解的必备能力。",
+          "example": {
+            "question": "阅读以下段落，判断作者对 'fast food' 的态度和语气：'Fast food, with its deceptive convenience and alluring advertisements, has tragically become a staple in modern diets. It offers little nutritional value, instead packing calories and unhealthy fats into every bite. The long-term consequences are alarming: rising obesity rates and chronic health issues. It is a lamentable testament to our society's prioritizing speed over health.'",
+            "steps": [
+              "关注形容词和副词：'deceptive', 'alluring', 'tragically', 'little nutritional value', 'unhealthy', 'alarming', 'lamentable'。",
+              "关注动词：'become a staple', 'packing', 'prioritizing'。",
+              "总结这些词汇的情感倾向：明显是负面的、批判性的。",
+              "判断作者态度：否定、批判。判断语气：严肃、担忧、批判。",
+              "综合判断。"
+            ],
+            "answer": {
+              "attitude": "Negative and critical.",
+              "tone": "Serious, concerned, and critical. The author uses strong negative words to express disapproval of fast food and its impact on health."
+            }
+          },
+          "mistakes": [
+            {
+              "wrong": "将作者引用的观点误认为是作者自己的观点。",
+              "correct": "注意区分直接引语、间接引语以及作者的评论。作者可能引用他人的观点来支持或反驳自己的论点。",
+              "reason": "未能区分文章中不同声音的来源，导致对作者立场的误判。"
+            }
+          ],
+          "memory_tip": "作者态度像'表情包'，是喜是怒是哀是乐？语气像'说话腔调'，是轻声细语还是大声疾呼？关注'词语的颜色'和'句子的味道'。"
+        }
+      ]
+    }
+  ]
+}

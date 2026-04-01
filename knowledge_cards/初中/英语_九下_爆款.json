@@ -1,0 +1,1524 @@
+{
+  "subject": "英语",
+  "grade": "九年级",
+  "semester": "下册",
+  "textbook": "人教版",
+  "grade_short": "九下",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片（全知识点覆盖版）",
+  "units": [
+    {
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [
+        {
+          "card_id": "T1-01",
+          "full_id": "英语-九下-T1-01",
+          "title": "😱易混词大陷阱！affect vs effect你分清了吗？",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "affect是动词，意为“影响，感动”；effect是名词，意为“影响，效果，作用”。",
+          "core_points": [
+            "affect (v.): 影响，感动，假装",
+            "effect (n.): 影响，效果，作用",
+            "effect (v.): 引起，实现 (初中较少考)",
+            "记忆：动词A(affect)，名词E(effect)。"
+          ],
+          "why_explanation": "词形相似，发音相近，且含义都与“影响”有关，导致学生在使用时混淆词性。",
+          "example": {
+            "question": "Smoking can seriously ___ your health. The ___ of the new policy is still unknown.",
+            "steps": [
+              "第一空需要动词，填affect。",
+              "第二空需要名词，填effect。"
+            ],
+            "answer": "affect; effect"
+          },
+          "mistakes": [
+            {
+              "wrong": "The new policy will effect many changes.",
+              "correct": "The new policy will affect many changes.",
+              "reason": "effect作动词意为“实现”，此处应为“影响”，需用affect。"
+            },
+            {
+              "wrong": "The noise had a bad affect on me.",
+              "correct": "The noise had a bad effect on me.",
+              "reason": "affect是动词，此处需要名词“影响”。"
+            }
+          ],
+          "memory_tip": "动词A，名词E，词性牢记不纠结！",
+          "emotion_hook": "每次都错？别再让affect和effect搞懵你啦！"
+        },
+        {
+          "card_id": "T1-02",
+          "full_id": "英语-九下-T1-02",
+          "title": "借和贷分不清？borrow vs lend 彻底搞懂！",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "borrow表示“借入”，lend表示“借出”。",
+          "core_points": [
+            "borrow (v.): 从某人处借入某物 (borrow sth. from sb.)",
+            "lend (v.): 把某物借给某人 (lend sth. to sb. / lend sb. sth.)",
+            "borrow的主语是借入方，lend的主语是借出方。",
+            "例句：I borrowed a book from him. He lent me a book."
+          ],
+          "why_explanation": "汉语中的“借”既可以表示借入也可以表示借出，导致学生在区分英语中的borrow和lend时感到困惑。",
+          "example": {
+            "question": "Can I ___ your pen? (借入) / Could you ___ me your pen? (借出)",
+            "steps": [
+              "第一句主语是我(I)，我需要借入，所以用borrow。",
+              "第二句主语是你(You)，你需要借出，所以用lend。"
+            ],
+            "answer": "borrow; lend"
+          },
+          "mistakes": [
+            {
+              "wrong": "Could you borrow me your dictionary?",
+              "correct": "Could you lend me your dictionary?",
+              "reason": "主语是你(You)，表示你借出，所以用lend。"
+            },
+            {
+              "wrong": "I lent a book from the library.",
+              "correct": "I borrowed a book from the library.",
+              "reason": "主语是我(I)，表示我从图书馆借入，所以用borrow。"
+            }
+          ],
+          "memory_tip": "B是“入”，L是“出”，方向搞清不迷糊！",
+          "emotion_hook": "每次都说错？学会这招，借东西再也不尴尬！"
+        },
+        {
+          "card_id": "T1-03",
+          "full_id": "英语-九下-T1-03",
+          "title": "躺下/放置分不清？lie vs lay 终极解析！",
+          "type": "易混词陷阱卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "lie (vi.) 躺，平放，位于 (不带宾语)；lay (vt.) 放置，产卵 (带宾语)。",
+          "core_points": [
+            "lie (vi.): 躺，平放，位于 (现在分词lying，过去式lay，过去分词lain)",
+            "lay (vt.): 放置，产卵 (现在分词laying，过去式laid，过去分词laid)",
+            "lie (vi.): 撒谎 (现在分词lying，过去式lied，过去分词lied) - 此义不与lay混淆",
+            "lie是不及物动词，后不接宾语；lay是及物动词，后需接宾语。"
+          ],
+          "why_explanation": "两个词的过去式和原形互相混淆，且词义相近，导致使用混乱。",
+          "example": {
+            "question": "The book is ___ on the table. (躺着) / Please ___ the book on the table. (放置)",
+            "steps": [
+              "第一空表示书自己躺着，是不及物动词，用lie的现在分词lying。",
+              "第二空表示“放置”书本，是及物动词，用lay原形，后接宾语the book。"
+            ],
+            "answer": "lying; lay"
+          },
+          "mistakes": [
+            {
+              "wrong": "He laid in bed all morning.",
+              "correct": "He lay in bed all morning.",
+              "reason": "laid是lay的过去式，是及物动词，此处表示“躺着”，应使用lie的过去式lay。"
+            },
+            {
+              "wrong": "Please lie your clothes on the bed.",
+              "correct": "Please lay your clothes on the bed.",
+              "reason": "lie是不及物动词，不能接宾语。此处表示“放置”衣服，应使用及物动词lay。"
+            }
+          ],
+          "memory_tip": "躺下lie，过去lay，过去分词lain；放置lay，过去laid，过去分词laid。躺下自身躺，放置需放物。",
+          "emotion_hook": "😱高考常考！lie和lay这对“孪生兄弟”你还没搞懂？"
+        },
+        {
+          "card_id": "T1-04",
+          "full_id": "英语-九下-T1-04",
+          "title": "搞不清“花费”？cost/spend/pay/take 一次全明白！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "四个词都表示“花费”，但用法和主语不同。",
+          "core_points": [
+            "cost (v.): 物作主语，花费(金钱/时间/精力)。(sth. costs sb. money/time)",
+            "spend (v.): 人作主语，花费(金钱/时间)。(sb. spends money/time on sth./doing sth.)",
+            "pay (v.): 人作主语，支付(金钱)。(sb. pays (money) for sth./sb. pays sb. (money))",
+            "take (v.): 事/物作主语，花费(时间)。(It takes sb. some time to do sth.)"
+          ],
+          "why_explanation": "中文都是“花费”，但英文根据主语和宾语的不同有严格区分，学生易混淆。",
+          "example": {
+            "question": "The book ___ me 50 yuan. I ___ 50 yuan on the book. I ___ 50 yuan for the book. It ___ me 2 hours to finish it.",
+            "steps": [
+              "第一空主语是the book (物)，用cost。",
+              "第二空主语是I (人)，后面是on sth.，用spend。",
+              "第三空主语是I (人)，后面是for sth.，用pay。",
+              "第四空主语是It (指代事情)，后面是to do sth.，用take。"
+            ],
+            "answer": "cost; spent; paid; took"
+          },
+          "mistakes": [
+            {
+              "wrong": "I cost 100 yuan on the meal.",
+              "correct": "I spent 100 yuan on the meal.",
+              "reason": "cost主语是物，spend主语是人。"
+            },
+            {
+              "wrong": "The journey spent me three hours.",
+              "correct": "The journey took me three hours.",
+              "reason": "journey是物，表示花费时间，用take。"
+            }
+          ],
+          "memory_tip": "物cost，人spend/pay；时间take，人spend。记住主语是关键！",
+          "emotion_hook": "考试必考！“花费”四兄弟，你真的会用吗？"
+        },
+        {
+          "card_id": "T1-05",
+          "full_id": "英语-九下-T1-05",
+          "title": "主动or被动？raise vs rise 傻傻分不清？",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "raise是及物动词，意为“举起，提高，抚养”；rise是不及物动词，意为“上升，升起”。",
+          "core_points": [
+            "raise (vt.): 举起，提高，抚养 (后接宾语)",
+            "rise (vi.): 上升，升起，起床 (不接宾语)",
+            "raise的过去式和过去分词是raised；rise的过去式是rose，过去分词是risen。",
+            "记忆：raise有a，要“抬”起来，及物；rise有i，自己“升”起，不及物。"
+          ],
+          "why_explanation": "词形和发音相似，且都与“升高”有关，但一个及物一个不及物，容易混淆。",
+          "example": {
+            "question": "The sun will ___ in the east. Please ___ your hand if you have a question.",
+            "steps": [
+              "第一空表示太阳自己升起，是不及物动词，用rise。",
+              "第二空表示举起手，是及物动词，后接宾语your hand，用raise。"
+            ],
+            "answer": "rise; raise"
+          },
+          "mistakes": [
+            {
+              "wrong": "The government is trying to rise people's living standards.",
+              "correct": "The government is trying to raise people's living standards.",
+              "reason": "“提高生活水平”是及物动词，需要raise。"
+            },
+            {
+              "wrong": "He raised from his seat and walked away.",
+              "correct": "He rose from his seat and walked away.",
+              "reason": "“从座位上起身”是不及物动词，需要rise的过去式rose。"
+            }
+          ],
+          "memory_tip": "raise举起要宾语，rise升起不带宾。一个及物一个不及，分清主动被动定乾坤。",
+          "emotion_hook": "老师：这是送分题！你：我又错了！速看raise vs rise！"
+        },
+        {
+          "card_id": "T1-06",
+          "full_id": "英语-九下-T1-06",
+          "title": "说、讲、告诉？say/speak/tell/talk 终极辨析！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "四个词都与“说话”有关，但侧重点和用法不同。",
+          "core_points": [
+            "say (v.): 说(出)某事，内容是重点。say sth. (to sb.)",
+            "speak (v.): 讲话，发言，侧重说话的能力或方式。speak (to sb.) (about sth.)",
+            "tell (v.): 告诉某人某事，侧重传递信息。tell sb. sth. / tell sb. to do sth.",
+            "talk (v.): 谈话，交谈，侧重交流过程。talk to/with sb. (about sth.)"
+          ],
+          "why_explanation": "中文都可译为“说”，但英文语境下有细微差别，尤其是及物不及物和固定搭配。",
+          "example": {
+            "question": "He ___ 'hello' to me. Can you ___ English? Please ___ me the truth. We often ___ about our dreams.",
+            "steps": [
+              "第一空侧重说出内容，用say。",
+              "第二空侧重说话能力，用speak。",
+              "第三空侧重告诉某人某事，用tell。",
+              "第四空侧重交谈过程，用talk。"
+            ],
+            "answer": "said; speak; tell; talk"
+          },
+          "mistakes": [
+            {
+              "wrong": "He said me a story.",
+              "correct": "He told me a story.",
+              "reason": "say不能直接接双宾语，表示“告诉某人某事”用tell。"
+            },
+            {
+              "wrong": "I can't talk French.",
+              "correct": "I can't speak French.",
+              "reason": "表示“会说某种语言”用speak。"
+            }
+          ],
+          "memory_tip": "say内容，speak能力；tell信息，talk交流。记住搭配和宾语，轻松搞定！",
+          "emotion_hook": "“说”的N种表达，你还在只用say吗？快来升级你的词汇库！"
+        },
+        {
+          "card_id": "T1-07",
+          "full_id": "英语-九下-T1-07",
+          "title": "允许/让/使？allow/let/make 用法大PK！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "这三个词都表示“允许、让、使”，但用法和语气强度不同。",
+          "core_points": [
+            "allow (v.): 允许，准许 (常接to do，语气较正式)。allow sb. to do sth.",
+            "let (v.): 让，允许 (常接动词原形，语气较口语化)。let sb. do sth.",
+            "make (v.): 使，强迫 (常接动词原形，表示强制)。make sb. do sth.",
+            "被动语态：allow sb. to do sth. -> sb. be allowed to do sth.；let/make sb. do sth. -> sb. be made/allowed to do sth. (let无被动语态或用allow代替)"
+          ],
+          "why_explanation": "中文意思相近，但英文在搭配动词形式和被动语态时有严格差异。",
+          "example": {
+            "question": "My parents ___ me to watch TV. My teacher ___ me clean the blackboard. Don't ___ him go!",
+            "steps": [
+              "第一空接to watch TV，用allow。",
+              "第二空表示“使我做某事”，且接动词原形，用make。",
+              "第三空表示“让某人做某事”，接动词原形，用let。"
+            ],
+            "answer": "allow; made; let"
+          },
+          "mistakes": [
+            {
+              "wrong": "He was let go.",
+              "correct": "He was allowed to go.",
+              "reason": "let通常不用于被动语态，或用allow代替。"
+            },
+            {
+              "wrong": "My mother makes me to study hard.",
+              "correct": "My mother makes me study hard.",
+              "reason": "make sb. do sth. 后接动词原形，不加to。"
+            }
+          ],
+          "memory_tip": "allow带to，let/make不带to。make是强迫，allow/let是允许。",
+          "emotion_hook": "😱这三个词，你是不是一用就错？快来补救！"
+        },
+        {
+          "card_id": "T1-08",
+          "full_id": "英语-九下-T1-08",
+          "title": "看、瞧、观？look/see/watch 视觉三兄弟！",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "三个词都与“看”有关，但表示的动作状态不同。",
+          "core_points": [
+            "look (v.): 看，瞧 (侧重“看”这个动作，有目的性)。look at...",
+            "see (v.): 看见 (侧重“看”的结果，非主动)。see sth./sb.",
+            "watch (v.): 观看，注视 (侧重持续、动态地观看)。watch TV/a game"
+          ],
+          "why_explanation": "中文都可译为“看”，但英文根据是否有目的、是否持续、是否动态有区分。",
+          "example": {
+            "question": "___ at the picture! I ___ him crossing the street. We ___ a football match last night.",
+            "steps": [
+              "第一空表示有目的地看，用look。",
+              "第二空表示偶然看见，用see。",
+              "第三空表示持续观看动态的比赛，用watch。"
+            ],
+            "answer": "Look; saw; watched"
+          },
+          "mistakes": [
+            {
+              "wrong": "I like to see TV.",
+              "correct": "I like to watch TV.",
+              "reason": "看电视是持续、动态的动作，用watch。"
+            },
+            {
+              "wrong": "Did you watch him just now?",
+              "correct": "Did you see him just now?",
+              "reason": "这里强调是否“看见”，而非持续观看，用see。"
+            }
+          ],
+          "memory_tip": "look是瞧，see是见，watch是看动静。目的看用look，结果看用see，动态看用watch。",
+          "emotion_hook": "👀“看”的表达总是用错？这份秘籍让你秒懂！"
+        },
+        {
+          "card_id": "T1-09",
+          "full_id": "英语-九下-T1-09",
+          "title": "听觉两兄弟：hear vs listen 区别大揭秘！",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "hear表示“听到”(非主动)，listen表示“听，倾听”(主动)。",
+          "core_points": [
+            "hear (v.): 听到 (侧重结果，无意识的听觉行为)。",
+            "listen (v.): 听，倾听 (侧重动作，有意识地听)。listen to...",
+            "hear可接感官动词+宾语+doing/do，表示听到某人做某事。",
+            "listen常与to连用，表示“听…”"
+          ],
+          "why_explanation": "中文都可译为“听”，但英文根据是否主动、是否有意识有区分。",
+          "example": {
+            "question": "Did you ___ the bell ring? Please ___ to me carefully.",
+            "steps": [
+              "第一空表示是否“听到”铃声响起，是无意识的结果，用hear。",
+              "第二空表示“仔细听”我说话，是有意识的动作，用listen to。"
+            ],
+            "answer": "hear; listen"
+          },
+          "mistakes": [
+            {
+              "wrong": "I often hear to music.",
+              "correct": "I often listen to music.",
+              "reason": "听音乐是有意识的行为，用listen to。"
+            },
+            {
+              "wrong": "I listened a strange noise.",
+              "correct": "I heard a strange noise.",
+              "reason": "听到奇怪的声音是无意识的结果，用hear。"
+            }
+          ],
+          "memory_tip": "hear是听见，listen是听。一个结果一个过程，搭配to是listen。",
+          "emotion_hook": "👂还在hear music吗？快来纠正你的“听”力错误！"
+        },
+        {
+          "card_id": "T1-10",
+          "full_id": "英语-九下-T1-10",
+          "title": "条件句终极辨析：unless vs if not 到底怎么用？",
+          "type": "易混词陷阱卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "unless意为“除非，如果不”，相当于if not。",
+          "core_points": [
+            "unless = if not，引导条件状语从句。",
+            "unless从句本身已含否定意义，主句通常为肯定句或否定句。",
+            "if not是if引导的否定条件句。",
+            "两者在大多数情况下可以互换，但unless语气更强，且不用于虚拟语气或疑问句中。"
+          ],
+          "why_explanation": "两者含义相似，但用法和语境有细微差别，尤其在否定、虚拟语气和疑问句中的使用。",
+          "example": {
+            "question": "We can't go out ___ it stops raining. (除非)",
+            "steps": [
+              "句意是“除非雨停，否则我们不能出去”，所以用unless。",
+              "也可以替换为if it doesn't stop raining。"
+            ],
+            "answer": "unless"
+          },
+          "mistakes": [
+            {
+              "wrong": "Unless you don't work hard, you will fail.",
+              "correct": "Unless you work hard, you will fail.",
+              "reason": "unless本身已含否定，从句中不再用否定词。"
+            },
+            {
+              "wrong": "If it rains, I won't go out.",
+              "correct": "Unless it stops raining, I won't go out. / If it doesn't rain, I will go out.",
+              "reason": "这里是unless和if not的语义转换，根据语境选择。"
+            }
+          ],
+          "memory_tip": "unless自带否，从句莫再否。if not更灵活，虚拟疑问皆可。",
+          "emotion_hook": "🔥高分必备！unless和if not，你真的分清了吗？"
+        },
+        {
+          "card_id": "T1-11",
+          "full_id": "英语-九下-T1-11",
+          "title": "因果关系词：because/so/as/since 别再混淆啦！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "这些词都表示因果关系，但用法和强调重点不同。",
+          "core_points": [
+            "because (conj.): 因为，强调原因，语气最强，可回答why。",
+            "so (conj.): 所以，强调结果，不可与because连用。",
+            "as (conj.): 既然，由于，语气较弱，常放句首，表示双方都已知的原因。",
+            "since (conj.): 既然，由于，语气比as稍强，也常放句首，表示显而易见的原因。"
+          ],
+          "why_explanation": "中文都可译为“因为”或“所以”，但英文中它们是不同的连词，不能随意互换或连用。",
+          "example": {
+            "question": "___ he was ill, he didn't go to school. He was ill, ___ he didn't go to school.",
+            "steps": [
+              "第一空引导原因状语从句，且可放句首，用Because/As/Since。",
+              "第二空引导结果状语从句，用so。"
+            ],
+            "answer": "Because/As/Since; so"
+          },
+          "mistakes": [
+            {
+              "wrong": "Because he was ill, so he didn't go to school.",
+              "correct": "Because he was ill, he didn't go to school. / He was ill, so he didn't go to school.",
+              "reason": "because和so不能在同一句中连用。"
+            }
+          ],
+          "memory_tip": "because表原因，so表结果，两者不可一起用。as/since放句首，原因已周知。",
+          "emotion_hook": "❌再错就扣分！because和so的连用陷阱你踩了吗？"
+        },
+        {
+          "card_id": "T1-12",
+          "full_id": "英语-九下-T1-12",
+          "title": "“由什么制成”？be made of/from/in/by 彻底搞懂！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "be made of/from/in/by都表示“由...制成”，但侧重点和用法不同。",
+          "core_points": [
+            "be made of: 由...制成 (物理变化，原材料性质不变，看得出原料)。e.g., The table is made of wood.",
+            "be made from: 由...制成 (化学变化，原材料性质改变，看不出原料)。e.g., Paper is made from wood.",
+            "be made in: 在某地制造。e.g., This car is made in China.",
+            "be made by: 由某人/某公司制造。e.g., This cake was made by my mother."
+          ],
+          "why_explanation": "中文都是“由...制成”，但英文根据原材料是否发生化学变化、强调地点或制造者有不同介词搭配。",
+          "example": {
+            "question": "The wine is ___ grapes. This dress is ___ cotton. The shoes were ___ Italy. The painting was ___ a famous artist.",
+            "steps": [
+              "第一空，葡萄变成酒是化学变化，用from。",
+              "第二空，棉花制成裙子是物理变化，用of。",
+              "第三空，在意大利制造，用in。",
+              "第四空，由艺术家制造，用by。"
+            ],
+            "answer": "from; of; in; by"
+          },
+          "mistakes": [
+            {
+              "wrong": "Glass is made of sand.",
+              "correct": "Glass is made from sand.",
+              "reason": "沙子变成玻璃是化学变化，用from。"
+            },
+            {
+              "wrong": "This chair is made from wood.",
+              "correct": "This chair is made of wood.",
+              "reason": "木头变成椅子是物理变化，仍然看得出木头，用of。"
+            }
+          ],
+          "memory_tip": "of看清原料，from面目全非；in表地点，by表作者。物理of，化学from。",
+          "emotion_hook": "🤯被动语态的坑！made of/from/in/by，你还在盲猜吗？"
+        }
+      ]
+    },
+    {
+      "unit_id": "T2",
+      "unit_name": "发音挑战",
+      "cards": [
+        {
+          "card_id": "T2-01",
+          "full_id": "英语-九下-T2-01",
+          "title": "🤫这些单词有“哑巴字母”！你读对了吗？",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "英语中有些字母在特定词汇中不发音，被称为“哑巴字母”或“静音字母”。",
+          "core_points": [
+            "silent k: 如 knife /naɪf/, know /nəʊ/",
+            "silent b: 如 debt /det/, doubt /daʊt/",
+            "silent t: 如 listen /ˈlɪsn/, castle /ˈkɑːsl/",
+            "silent l: 如 calm /kɑːm/, talk /tɔːk/",
+            "silent w: 如 write /raɪt/, answer /ˈɑːnsə(r)/",
+            "silent h: 如 hour /ˈaʊə(r)/, honest /ˈɒnɪst/"
+          ],
+          "why_explanation": "英语发音不完全遵循“见词发音”规则，很多单词保留了历史拼写，导致部分字母不发音，容易造成误读。",
+          "example": {
+            "question": "请读出以下单词并标出静音字母：knife, doubt, listen, calm, write, honest",
+            "steps": [
+              "knife: k不发音",
+              "doubt: b不发音",
+              "listen: t不发音",
+              "calm: l不发音",
+              "write: w不发音",
+              "honest: h不发音"
+            ],
+            "answer": "/naɪf/, /daʊt/, /ˈlɪsn/, /kɑːm/, /raɪt/, /ˈɒnɪst/"
+          },
+          "pronunciation_tip": "遇到kn-组合，k不发音；-mb结尾，b不发音；-stle结尾，t不发音；al/alk/alm，l常不发音。",
+          "emotion_hook": "😱你是不是把这些单词都读错了？揭秘英语中的“哑巴字母”！"
+        },
+        {
+          "card_id": "T2-02",
+          "full_id": "英语-九下-T2-02",
+          "title": "th的魔咒！/θ/ vs /ð/ 你真的分清了吗？",
+          "type": "发音挑战卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "字母组合'th'有两种主要发音：清辅音/θ/ (无声) 和浊辅音/ð/ (有声)。",
+          "core_points": [
+            "/θ/ (清辅音): 发音时舌尖轻触上齿，气流通过舌齿间缝隙，声带不振动。如: think, three, both, health",
+            "/ð/ (浊辅音): 发音时舌尖轻触上齿，气流通过舌齿间缝隙，声带振动。如: this, that, mother, breathe",
+            "清辅音/θ/多出现在词首、词尾，或位于元音和辅音之间。",
+            "浊辅音/ð/多出现在代词、介词、连词中，或位于两个元音之间。"
+          ],
+          "why_explanation": "中文没有对应的发音，学生在模仿时容易混淆清浊音，导致发音不准确。",
+          "example": {
+            "question": "请判断以下单词'th'的发音是/θ/还是/ð/：think, this, brother, health, though",
+            "steps": [
+              "think: /θɪŋk/ (/θ/)",
+              "this: /ðɪs/ (/ð/)",
+              "brother: /ˈbrʌðər/ (/ð/)",
+              "health: /helθ/ (/θ/)",
+              "though: /ðəʊ/ (/ð/)"
+            ],
+            "answer": "think (/θ/), this (/ð/), brother (/ð/), health (/θ/), though (/ð/)"
+          },
+          "pronunciation_tip": "发/θ/时，用手摸喉咙不震动；发/ð/时，喉咙会震动。多练习绕口令。",
+          "emotion_hook": "🔥中考必考！“th”发音魔鬼训练，告别英式口音！"
+        },
+        {
+          "card_id": "T2-03",
+          "full_id": "英语-九下-T2-03",
+          "title": "长短元音分不清？sheep vs ship 一秒辨别！",
+          "type": "发音挑战卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "英语元音有长短之分，如长音/iː/和短音/ɪ/，长音/uː/和短音/ʊ/。",
+          "core_points": [
+            "长元音/iː/: 舌位高而靠前，嘴角向两边咧开，发音持续时间长。如: sheep, sleep, feel",
+            "短元音/ɪ/: 舌位比/iː/低，嘴形放松，发音短促有力。如: ship, slip, fill",
+            "长元音/uː/: 舌位高而靠后，嘴唇收圆向前突出，发音持续时间长。如: food, moon, pool",
+            "短元音/ʊ/: 舌位比/uː/低，嘴形放松，发音短促有力。如: good, book, foot"
+          ],
+          "why_explanation": "汉语元音没有严格的长短区分，学生容易将长元音发成短元音，导致词义混淆。",
+          "example": {
+            "question": "请正确读出以下单词并区分长短元音：sheep, ship, leave, live, fool, full",
+            "steps": [
+              "sheep /ʃiːp/ (长/iː/)",
+              "ship /ʃɪp/ (短/ɪ/)",
+              "leave /liːv/ (长/iː/)",
+              "live /lɪv/ (短/ɪ/)",
+              "fool /fuːl/ (长/uː/)",
+              "full /fʊl/ (短/ʊ/)"
+            ],
+            "answer": "sheep (长), ship (短), leave (长), live (短), fool (长), full (短)"
+          },
+          "pronunciation_tip": "长音拉长嘴巴咧，短音短促嘴放松。多听多模仿，感受发音长度。",
+          "emotion_hook": "😱别再把“羊”读成“船”了！长短元音是发音的灵魂！"
+        },
+        {
+          "card_id": "T2-04",
+          "full_id": "英语-九下-T2-04",
+          "title": "重音决定一切！'present'作名词动词怎么读？",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "英语中有些词，拼写相同，但词性不同时，重音位置也不同，导致发音变化。",
+          "core_points": [
+            "名词重音在前：如 present (礼物/现在) /ˈpreznt/",
+            "动词重音在后：如 present (赠送/呈现) /prɪˈzent/",
+            "常见的此类词汇：record (n./v.), object (n./v.), desert (n./v.), project (n./v.), increase (n./v.)",
+            "重音位置影响单词的节奏和含义。"
+          ],
+          "why_explanation": "学生不熟悉英语重音规则，容易按照中文习惯平读或重音位置错误，导致理解障碍。",
+          "example": {
+            "question": "请正确读出以下单词并区分词性：present (礼物), present (呈现), record (记录-n), record (记录-v)",
+            "steps": [
+              "present (礼物): /ˈpreznt/ (重音在前)",
+              "present (呈现): /prɪˈzent/ (重音在后)",
+              "record (记录-n): /ˈrekɔːd/ (重音在前)",
+              "record (记录-v): /rɪˈkɔːd/ (重音在后)"
+            ],
+            "answer": "present (n.) /ˈpreznt/, present (v.) /prɪˈzent/, record (n.) /ˈrekɔːd/, record (v.) /rɪˈkɔːd/"
+          },
+          "pronunciation_tip": "“名”在前，“动”在后，重音位置要记牢！",
+          "emotion_hook": "🤯一个单词两种读法？重音错了，意思全变！"
+        },
+        {
+          "card_id": "T2-05",
+          "full_id": "英语-九下-T2-05",
+          "title": "连读秘籍！听力提速，口语更地道！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "连读是英语中常见的发音现象，指相邻单词之间，前一个词的词尾音与后一个词的词首音连在一起发音。",
+          "core_points": [
+            "辅音+元音：前词辅音与后词元音连读。如: pick it up /pɪkɪtʌp/",
+            "R音连读：前词以-r或-re结尾，后词以元音开头。如: for ever /fɔːˈrevə(r)/",
+            "相同辅音：两个相邻的相同辅音只发一次。如: black coffee /blæk ˈkɒfi/",
+            "爆破音失爆：爆破音/p, b, t, d, k, g/后接另一个爆破音时，前一个爆破音只作口型不发音。如: good morning /ɡʊdmɔːnɪŋ/",
+            "t/d后接y音：t+y → /tʃ/；d+y → /dʒ/。如: don't you /dəʊntʃuː/, did you /dɪdʒuː/"
+          ],
+          "why_explanation": "连读是英语口语流畅性的关键，不掌握会使口语生硬，听力理解困难。",
+          "example": {
+            "question": "请尝试连读以下短语：an apple, first of all, tell her, good idea, what do you do",
+            "steps": [
+              "an apple /ənˈæpl/ (辅音+元音)",
+              "first of all /fɜːstəvɔːl/ (辅音+元音)",
+              "tell her /telər/ (辅音+元音)",
+              "good idea /ɡʊd aɪˈdɪə/ (辅音+元音)",
+              "what do you do /wɒdʒuː duː/ (d+y连读)"
+            ],
+            "answer": "连读示例发音"
+          },
+          "pronunciation_tip": "多听母语者发音，模仿他们的连读。从简单的辅音+元音开始练习。",
+          "emotion_hook": "🚀听不懂老外说话？因为你没掌握这个连读秘籍！"
+        },
+        {
+          "card_id": "T2-06",
+          "full_id": "英语-九下-T2-06",
+          "title": "这些词超容易读错！你的口语“硬伤”在这儿！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "总结九下教材中学生常读错的词汇，纠正错误发音。",
+          "core_points": [
+            "specific /spəˈsɪfɪk/ (不是/ˈspeɪsɪfɪk/)",
+            "develop /dɪˈveləp/ (不是/ˈdevələp/)",
+            "comfortable /ˈkʌmfətəbl/ (不是/ˈkɒmfərtəbl/)",
+            "schedule /ˈʃedjuːl/ (英) / /ˈskedʒuːl/ (美) (注意/ʃ/或/sk/)",
+            "clothes /kləʊðz/ (注意th的浊辅音/ð/和z音)",
+            "vegetable /ˈvedʒtəbl/ (中间元音不发音)",
+            "through /θruː/ (不是/θrɔː/)",
+            "though /ðəʊ/ (不是/θəʊ/)"
+          ],
+          "why_explanation": "受母语发音习惯、字母组合规则不熟悉、重音位置不准等多种因素影响，导致这些词发音错误。",
+          "example": {
+            "question": "请正确读出以下单词：specific, develop, comfortable, clothes",
+            "steps": [
+              "specific: 重音在第二音节，/spəˈsɪfɪk/",
+              "develop: 重音在第二音节，/dɪˈveləp/",
+              "comfortable: 重音在第一音节，/ˈkʌmfətəbl/",
+              "clothes: 注意/ðz/的发音，/kləʊðz/"
+            ],
+            "answer": "正确发音示例"
+          },
+          "pronunciation_tip": "多查字典，听标准发音；录音对比，找出自己错误；多加练习，形成肌肉记忆。",
+          "emotion_hook": "😱你的口语“硬伤”在这儿！这些单词90%的人都读错了！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T3",
+      "unit_name": "情景闯关",
+      "cards": [
+        {
+          "card_id": "T3-01",
+          "full_id": "英语-九下-T3-01",
+          "title": "健康生活挑战！你会给朋友什么建议？",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在日常生活中，如何给出关于健康生活方式的建议。",
+          "core_points": [
+            "使用情态动词：should, shouldn't, ought to, had better (not)",
+            "常用句型：If you want to..., you should...",
+            "词汇：balanced diet, exercise regularly, get enough sleep, avoid stress, drink more water, eat less junk food",
+            "语气要友好，提供具体建议。"
+          ],
+          "why_explanation": "九下Unit 1主题，考察学生在实际语境中运用情态动词和健康生活词汇的能力。",
+          "example": {
+            "question": "你的朋友总是熬夜玩手机，白天精神不振，你该如何给他提供健康建议？",
+            "steps": [
+              "首先，表达关心：You look tired. / Are you feeling well?",
+              "然后，给出建议：You really should try to go to bed earlier.",
+              "提供具体做法：You'd better not play on your phone too late. Maybe you could read a book instead.",
+              "强调重要性：Getting enough sleep is very important for your health."
+            ],
+            "answer": "Oh, you look so tired. Are you feeling well? You really should try to go to bed earlier. You'd better not play on your phone too late. Maybe you could read a book instead. Getting enough sleep is very important for your health."
+          },
+          "scene_dialogue": "A: I'm so tired these days. I often stay up late playing games.\nB: Oh, that's not good for your health. You should really get to bed earlier. Maybe you could try to turn off your phone an hour before you sleep.\nA: Yeah, I know, but it's hard.\nB: I know, but if you want to live a healthy life, you'd better make some changes. And don't forget to exercise regularly too!",
+          "emotion_hook": "💖朋友健康亮红灯？你的英语建议能帮到TA吗？"
+        },
+        {
+          "card_id": "T3-02",
+          "full_id": "英语-九下-T3-02",
+          "title": "环保小卫士！如何号召大家一起保护环境？",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在环保话题中，如何表达观点、号召行动。",
+          "core_points": [
+            "使用被动语态：Our environment is being polluted. / Trees should be planted.",
+            "呼吁行动：We should all do our part. / Let's make a difference.",
+            "词汇：protect the environment, reduce waste, recycle, save energy, plant trees, pick up litter",
+            "表达重要性：It's important for us to..."
+          ],
+          "why_explanation": "九下Unit 2主题，考察学生在环保语境中运用被动语态、表达环保意识的能力。",
+          "example": {
+            "question": "学校组织环保活动，让你写一段话号召同学们参与，你会怎么说？",
+            "steps": [
+              "开场白：Our environment is facing serious problems.",
+              "指出问题：Too much waste is produced every day. / Our rivers are polluted.",
+              "呼吁行动：We can all do something to help. Let's pick up litter, recycle old things, and save water.",
+              "展望未来：Together, we can make a difference!"
+            ],
+            "answer": "Hi everyone! Our environment is facing serious problems. Too much waste is produced every day, and our rivers are polluted. But we can all do something to help! Let's join the school's environmental protection campaign. We can pick up litter, recycle old things, and save water and electricity. Together, we can make a difference and build a greener future!"
+          },
+          "scene_dialogue": "A: The park looks so dirty today. So much rubbish is thrown everywhere.\nB: You're right. Our environment is being seriously polluted. We should do something about it.\nA: Absolutely! Maybe we can organize a clean-up activity next weekend.\nB: That's a great idea! I'll help to make a difference. Let's ask more classmates to join us. We can make posters to encourage everyone to protect our planet.",
+          "emotion_hook": "🌍地球妈妈在哭泣！你的英语口号能唤醒大家吗？"
+        },
+        {
+          "card_id": "T3-03",
+          "full_id": "英语-九下-T3-03",
+          "title": "迷路别慌！礼貌问路/请求大挑战！",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在陌生环境中，如何礼貌地询问路线或提出请求。",
+          "core_points": [
+            "使用间接疑问句：Could you please tell me...?, Do you know...?",
+            "礼貌用语：Excuse me, please, thank you.",
+            "词汇：turn left/right, go straight, cross the street, next to, opposite, far from, restroom, post office, bank",
+            "回答时清晰指路。"
+          ],
+          "why_explanation": "九下Unit 3主题，考察学生在实际场景中运用间接疑问句和礼貌表达的能力。",
+          "example": {
+            "question": "你在一个陌生的城市迷路了，想找最近的图书馆。你会怎么向路人求助？",
+            "steps": [
+              "礼貌开场：Excuse me, sir/madam.",
+              "提出请求：Could you please tell me where the nearest library is?",
+              "如果听不懂，可以请求重复：Could you please say that again?",
+              "表示感谢：Thank you very much."
+            ],
+            "answer": "Excuse me, sir. Could you please tell me where the nearest library is? I'm a bit lost. (如果路人指路后) Oh, I see. Thank you very much for your help!"
+          },
+          "scene_dialogue": "A: Excuse me, could you please tell me where the nearest post office is?\nB: Sure. Go straight ahead for two blocks, then turn left at the traffic lights. It's on your right, next to a big supermarket.\nA: Go straight for two blocks, then turn left. Got it. Is it far from here?\nB: Not really, about a 10-minute walk.\nA: Thank you so much for your help!\nB: You're welcome.",
+          "emotion_hook": "🗺️迷路不求人！掌握这些句型，走到哪里都不怕！"
+        },
+        {
+          "card_id": "T3-04",
+          "full_id": "英语-九下-T3-04",
+          "title": "假如我是…？虚拟情景大考验！",
+          "type": "情景闯关卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "在假设的非真实情景中，如何表达自己的行为和想法。",
+          "core_points": [
+            "使用虚拟语气条件句：If I were/had..., I would/could/might...",
+            "词汇：hypothetical, imagine, advise, suggest, solution, problem",
+            "表达自己的选择和理由。"
+          ],
+          "why_explanation": "九下Unit 4主题，考察学生在虚拟语境中运用虚拟语气条件句的能力。",
+          "example": {
+            "question": "如果你突然成为了一百万富翁，你会做什么？",
+            "steps": [
+              "使用虚拟语气：If I were a millionaire...",
+              "表达具体行动：I would buy a big house for my parents. / I would donate some money to charity.",
+              "说明理由：Because I want to make them happy. / To help those in need."
+            ],
+            "answer": "If I were a millionaire, I would first buy a big house for my parents, so they could live comfortably. Then, I would donate a large sum of money to help poor children go to school, because I believe education can change their lives. I would also travel around the world to experience different cultures."
+          },
+          "scene_dialogue": "A: What would you do if you found a wallet full of money?\nB: If I found a wallet full of money, I would definitely try to find the owner. I would take it to the police station.\nA: That's very honest of you. What if you couldn't find the owner?\nB: If I couldn't find the owner, I might donate the money to a charity. I think that would be the best thing to do.",
+          "emotion_hook": "🤯脑洞大开！如果你是超人，你会怎么拯救世界？"
+        },
+        {
+          "card_id": "T3-05",
+          "full_id": "英语-九下-T3-05",
+          "title": "朋友不开心怎么办？学会安慰和鼓励！",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "当朋友情绪低落时，如何用英语安慰、鼓励和提供帮助。",
+          "core_points": [
+            "表达同情：I'm sorry to hear that. / That's too bad.",
+            "给予鼓励：Don't worry. / Cheer up! / Things will get better.",
+            "提供帮助：Is there anything I can do for you? / Let me help you.",
+            "词汇：upset, lonely, stressed, cheer up, grateful, thanks to, instead of"
+          ],
+          "why_explanation": "九下Unit 5主题，考察学生在情感交流中运用恰当表达的能力。",
+          "example": {
+            "question": "你的朋友因为考试失利而非常沮丧，你该如何安慰他？",
+            "steps": [
+              "表达理解：I know you're feeling upset about the exam.",
+              "给予安慰：It's just one exam. Don't worry too much.",
+              "提供鼓励：You've always been a hard worker. I'm sure you'll do better next time.",
+              "转移注意力/提供帮助：How about we go for a walk? / Let's study together next time."
+            ],
+            "answer": "Hey, I'm so sorry to hear about your exam. I know you're feeling upset, but it's just one exam. Don't worry too much about it. You've always been a hard worker, and I'm sure you'll do much better next time. Cheer up! How about we go for a walk to clear your mind?"
+          },
+          "scene_dialogue": "A: I'm having a really bad day. I failed my math test and lost my wallet.\nB: Oh no, I'm so sorry to hear that. Don't worry, things will get better. We all have bad days sometimes.\nA: But I'm so upset and feel so unlucky.\nB: I understand. But you shouldn't let it get you down. How about we go get some ice cream? And we can try to find your wallet together later. You're not alone.",
+          "emotion_hook": "💔朋友emo了？你的英语安慰能温暖TA的心吗？"
+        },
+        {
+          "card_id": "T3-06",
+          "full_id": "英语-九下-T3-06",
+          "title": "未来规划师！用英语畅谈你的梦想和职业！",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "如何用英语谈论未来的计划、梦想和职业选择。",
+          "core_points": [
+            "使用将来时态：I'm going to..., I will...",
+            "使用reported speech转述他人观点：He said he was going to...",
+            "词汇：career, ambition, dream, university, study, computer science, engineer, doctor, artist",
+            "表达自己的理由和目标。"
+          ],
+          "why_explanation": "九下Unit 6主题，考察学生在未来规划语境中运用将来时态和转述句的能力。",
+          "example": {
+            "question": "你的老师问你将来想做什么，你会怎么回答？",
+            "steps": [
+              "表达意向：I'm going to study...",
+              "说明具体职业：I want to be a/an...",
+              "给出理由：Because I'm interested in... / I want to help people.",
+              "可以提及学习计划：I will work hard at school."
+            ],
+            "answer": "I'm going to study computer science in university. I want to be a software engineer in the future because I'm really interested in technology and creating new things. I think it would be cool to design apps that can help people. I will work hard at school to achieve my dream."
+          },
+          "scene_dialogue": "A: What are you going to do after you graduate from high school?\nB: I'm planning to study medicine at university. I want to be a doctor.\nA: Wow, that's a great ambition! Why do you want to be a doctor?\nB: My grandpa told me that doctors can save lives and help people. So I want to make a difference too. What about you?\nA: I haven't decided yet, but I'm thinking about studying art. I love drawing and painting.",
+          "emotion_hook": "🚀未来已来！你的梦想用英语怎么说？"
+        },
+        {
+          "card_id": "T3-07",
+          "full_id": "英语-九下-T3-07",
+          "title": "观点大碰撞！青少年该不该有更多自由？",
+          "type": "情景闯关卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "在社会话题中，如何表达自己的观点、支持或反驳他人的观点。",
+          "core_points": [
+            "使用被动语态与情态动词：Teenagers should be allowed to choose their own clothes. / Rules must be followed.",
+            "使用相对从句：People who... / Things that...",
+            "表达个人观点：I think that... / In my opinion...",
+            "词汇：freedom, responsibility, allow, forbid, argue, agree, disagree, independent"
+          ],
+          "why_explanation": "九下Unit 7主题，考察学生在讨论社会热点时运用被动语态、相对从句和表达观点的能力。",
+          "example": {
+            "question": "你认为青少年是否应该被允许拥有自己的手机？请阐述你的观点。",
+            "steps": [
+              "表明立场：I think teenagers should/should not be allowed to have their own cell phones.",
+              "给出支持理由 (正面)：They can contact their parents easily. / It helps them learn new things.",
+              "给出反驳理由 (反面)：It might distract them from studying. / They might spend too much time on it.",
+              "总结：It depends on how they use it."
+            ],
+            "answer": "I think teenagers should be allowed to have their own cell phones, but with some rules. On one hand, phones allow them to contact their parents easily in emergencies. Also, they can use phones to look up information and learn new things, which is very helpful. On the other hand, if they spend too much time on games or social media, it might distract them from studying. So, parents should guide them to use phones wisely."
+          },
+          "scene_dialogue": "A: I believe teenagers should be allowed to choose their own clothes. It's a way for them to express themselves.\nB: I agree to some extent. But I also think there should be some limits. Some clothes might not be suitable for school.\nA: Those who think teenagers should wear school uniforms are too strict. We need more freedom.\nB: Freedom comes with responsibility. What if everyone wore whatever they wanted? The school environment might become messy.",
+          "emotion_hook": "🔥辩论赛开场！青少年自由边界在哪？你的观点够犀利吗？"
+        },
+        {
+          "card_id": "T3-08",
+          "full_id": "英语-九下-T3-08",
+          "title": "做自己还是随大流？你的选择是什么？",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在面对群体压力或流行趋势时，如何表达自己的选择和理由。",
+          "core_points": [
+            "表达个人选择：I prefer to... / I choose to...",
+            "对比两种情况：following the crowd vs being unique/independent",
+            "词汇：individuality, conformity, unique, fashion, trend, crowd, pressure, confident, make up one's mind",
+            "给出理由和价值观。"
+          ],
+          "why_explanation": "九下Unit 8主题，考察学生在价值观和个人选择方面进行表达的能力。",
+          "example": {
+            "question": "当大家都追捧某个潮流时，你会选择随大流还是坚持自己的风格？",
+            "steps": [
+              "表明立场：I would rather be myself / follow the crowd.",
+              "阐述理由 (坚持自己)：Because I believe in individuality. / I want to be unique.",
+              "阐述理由 (随大流)：To fit in. / It's fun to try new things.",
+              "强调平衡：It's important to find a balance."
+            ],
+            "answer": "When everyone is following a trend, I would rather stick to my own style. I believe that individuality is very important. It's good to be unique and confident in who you are, instead of just following what everyone else does. Of course, it's also fun to try new things sometimes, but I won't just follow the crowd blindly."
+          },
+          "scene_dialogue": "A: Look at those new shoes! Everyone is wearing them now.\nB: Yeah, they're popular, but I prefer my old ones. I don't like to just follow the crowd.\nA: But it's cool to be part of the trend, isn't it? Don't you want to fit in?\nB: I think it's more important to be yourself. People who always follow the crowd might lose their own personality. What do you think?",
+          "emotion_hook": "😎你是酷盖还是盲从者？用英语表达你的“个性宣言”！"
+        },
+        {
+          "card_id": "T3-09",
+          "full_id": "英语-九下-T3-09",
+          "title": "旅行体验分享！你曾去过哪里？",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "如何用英语分享过去的旅行经历或参观体验。",
+          "core_points": [
+            "使用现在完成时态：Have you ever been to...? / I have visited...",
+            "描述地点和活动：museum, exhibition, historical site, try local food, take photos",
+            "表达感受：It was amazing/interesting/boring.",
+            "词汇：experience, travel, explore, culture, history, invention"
+          ],
+          "why_explanation": "九下Unit 9主题，考察学生运用现在完成时态描述经历的能力。",
+          "example": {
+            "question": "你的朋友问你暑假去哪里玩了，你如何分享你去科技馆的经历？",
+            "steps": [
+              "提及去过的地方：I've been to the Science Museum.",
+              "描述具体内容：I saw many amazing inventions and experiments.",
+              "表达感受：It was really interesting and I learned a lot.",
+              "推荐给朋友：You should go there sometime!"
+            ],
+            "answer": "This summer, I've been to the Science Museum with my family. It was really amazing! I saw many cool robots and learned about space travel. There was also an interactive exhibition about electricity, which was super interesting. I learned a lot about how science works in our daily lives. You should go there sometime, it's worth a visit!"
+          },
+          "scene_dialogue": "A: Have you ever been to a science museum?\nB: Yes, I have! I went to the Shanghai Science and Technology Museum last year. It was fantastic!\nA: Really? What did you see there?\nB: I saw a lot of amazing inventions and even experienced a simulated space journey. It was so cool!\nA: Sounds great! I've never been to one. I really want to go now.",
+          "emotion_hook": "✈️你的“诗和远方”用英语怎么说？快来分享你的旅行故事！"
+        },
+        {
+          "card_id": "T3-10",
+          "full_id": "英语-九下-T3-10",
+          "title": "文化差异大考验！你会怎么做？",
+          "type": "情景闯关卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "在面对不同文化习俗时，如何理解、尊重并恰当应对。",
+          "core_points": [
+            "使用be supposed to do sth.：You're supposed to shake hands.",
+            "描述文化习俗：In some countries, people bow to greet each other.",
+            "表达理解和尊重：It's important to respect local customs.",
+            "词汇：custom, tradition, culture, manners, polite, rude, greet, shake hands, bow, kiss"
+          ],
+          "why_explanation": "九下Unit 10主题，考察学生在跨文化交流中运用be supposed to和描述文化习俗的能力。",
+          "example": {
+            "question": "如果你去一个西方国家，第一次见到新朋友，你该怎么做？",
+            "steps": [
+              "提及常见习俗：In Western countries, people are usually supposed to shake hands when they meet for the first time.",
+              "表达自己的做法：So I would offer my hand and say 'Nice to meet you'.",
+              "强调尊重：It's important to be polite and respect their customs."
+            ],
+            "answer": "If I go to a Western country and meet a new friend for the first time, I would definitely offer my hand to shake hands. I know that in many Western cultures, people are supposed to shake hands as a greeting. And I would say 'Nice to meet you!' with a friendly smile. It's important to be polite and respect their local customs."
+          },
+          "scene_dialogue": "A: When you meet someone new in China, what are you supposed to do?\nB: Well, usually you just nod or say hello. Shaking hands is also common, especially in business situations.\nA: I see. In some Western countries, people often hug or even kiss on the cheek when they meet. It's quite different.\nB: Yes, cultural differences are interesting. It's important to know about them so we can avoid being rude unintentionally.",
+          "emotion_hook": "🌍出国不踩雷！这些文化礼仪，你必须知道！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T4",
+      "unit_name": "语法纠错",
+      "cards": [
+        {
+          "card_id": "T4-01",
+          "full_id": "英语-九下-T4-01",
+          "title": "❌被动语态的坑！你是不是又忘了“be”动词？",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "被动语态的基本结构是“be动词 + 动词的过去分词 (V-ed)”。常见错误是漏掉be动词或be动词形式错误。",
+          "core_points": [
+            "结构：主语 + be (am/is/are/was/were/will be...) + V-ed (过去分词)",
+            "be动词形式要与主语人称和时态保持一致。",
+            "常见错误：漏掉be动词；be动词与主语不一致；过去分词用错。",
+            "被动语态常用于强调动作承受者或不知/不强调动作发出者。"
+          ],
+          "why_explanation": "学生在构建被动语态时，习惯性地只记住“过去分词”，而忽略了其前必须有的be动词，或对be动词的时态和人称变化掌握不牢。",
+          "example": {
+            "question": "纠正错误：The car repaired yesterday.",
+            "steps": [
+              "判断句子需要被动语态：车是被修理的。",
+              "确定时态：yesterday表示过去时。",
+              "补充be动词：was。",
+              "正确结构：The car was repaired yesterday."
+            ],
+            "answer": "The car was repaired yesterday."
+          },
+          "mistakes": [
+            {
+              "wrong": "Many trees planted last year.",
+              "correct": "Many trees were planted last year.",
+              "reason": "被动语态缺少be动词，且主语many trees是复数，过去时用were。"
+            },
+            {
+              "wrong": "English is speak all over the world.",
+              "correct": "English is spoken all over the world.",
+              "reason": "speak是原形，被动语态需要过去分词spoken。"
+            }
+          ],
+          "grammar_fix": "被动语态口诀：be加V-ed，时态人称要一致。",
+          "emotion_hook": "😱中考必考！被动语态的“灵魂”你是不是又忘了？"
+        },
+        {
+          "card_id": "T4-02",
+          "full_id": "英语-九下-T4-02",
+          "title": "❌虚拟语气条件句：If I was...？错啦！",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "与现在或将来事实相反的虚拟语气条件句，从句动词用一般过去时(be动词一律用were)，主句用would/could/might + 动词原形。",
+          "core_points": [
+            "结构：If + 主语 + 动词过去式 (be动词用were), 主语 + would/could/might + 动词原形。",
+            "be动词无论主语是单数还是复数，一律用were。",
+            "主句情态动词必须是would/could/might，不能用will/can/may。",
+            "表示与现在事实相反的假设。"
+          ],
+          "why_explanation": "学生习惯性地将be动词与主语保持人称一致，导致在虚拟语气中将were误用为was；同时，对主句情态动词的选择也易混淆。",
+          "example": {
+            "question": "纠正错误：If I was a bird, I would fly to the sky.",
+            "steps": [
+              "判断句子是与现在事实相反的虚拟语气。",
+              "虚拟语气中，be动词一律用were。",
+              "If I were a bird, I would fly to the sky."
+            ],
+            "answer": "If I were a bird, I would fly to the sky."
+          },
+          "mistakes": [
+            {
+              "wrong": "If he was here, he will help us.",
+              "correct": "If he were here, he would help us.",
+              "reason": "虚拟语气中be动词用were，主句用would。"
+            },
+            {
+              "wrong": "If I had time, I can go with you.",
+              "correct": "If I had time, I could go with you.",
+              "reason": "虚拟语气主句情态动词用could/would/might。"
+            }
+          ],
+          "grammar_fix": "虚拟语气口诀：be动词一律were，主句would/could/might。",
+          "emotion_hook": "🔥中考常考！虚拟语气“If I was”？别再犯这种低级错误！"
+        },
+        {
+          "card_id": "T4-03",
+          "full_id": "英语-九下-T4-03",
+          "title": "❌报告错了！reported speech 时态变化你忘了吗？",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "直接引语变为间接引语时，主句动词是过去时，从句时态通常要“降一级”。",
+          "core_points": [
+            "一般现在时 → 一般过去时",
+            "现在进行时 → 过去进行时",
+            "现在完成时 → 过去完成时",
+            "一般将来时 → 过去将来时 (will → would)",
+            "情态动词变化：can → could, may → might, must → had to (但should, could, would, might不变)",
+            "人称代词、时间状语、地点状语、指示代词也要相应变化。"
+          ],
+          "why_explanation": "学生在转换时容易忽略时态、人称和状语的变化，特别是时态的“降一级”规则。",
+          "example": {
+            "question": "纠正错误：He said, 'I am busy now.' → He said that he is busy then.",
+            "steps": [
+              "主句said是过去时，从句时态要降一级。",
+              "am busy (现在进行时) → was busy (过去进行时)。",
+              "now (现在) → then (那时)。",
+              "正确结构：He said that he was busy then."
+            ],
+            "answer": "He said that he was busy then."
+          },
+          "mistakes": [
+            {
+              "wrong": "She asked me if I can help her.",
+              "correct": "She asked me if I could help her.",
+              "reason": "主句asked是过去时，can需要变为could。"
+            },
+            {
+              "wrong": "He told me that he will come tomorrow.",
+              "correct": "He told me that he would come the next day.",
+              "reason": "主句told是过去时，will变为would，tomorrow变为the next day。"
+            }
+          ],
+          "grammar_fix": "降级口诀：一降时态二降人，三降时间地点词，指示代词也要变。",
+          "emotion_hook": "🤯转述句总是错？时态变化这步你漏了！"
+        },
+        {
+          "card_id": "T4-04",
+          "full_id": "英语-九下-T4-04",
+          "title": "❌定语从句用错词？who/which/that/whose 易错点！",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "定语从句修饰先行词，使用关系代词(who, whom, whose, which, that)或关系副词(when, where, why)引导。",
+          "core_points": [
+            "who/whom：指人，who作主语，whom作宾语 (口语常用who)。",
+            "whose：指人或物，作定语，表示“...的”。",
+            "which：指物，作主语或宾语。",
+            "that：指人或物，作主语或宾语，在非限制性定语从句中不能用。",
+            "介词+关系代词：介词放关系代词前时，只能用whom (人) 或which (物)。",
+            "先行词是somebody, anything等不定代词时，只能用that。"
+          ],
+          "why_explanation": "学生对关系代词的指代对象、在从句中作何成分以及在限制性/非限制性从句中的使用规则掌握不牢。",
+          "example": {
+            "question": "纠正错误：This is the book which I told you about it.",
+            "steps": [
+              "定语从句中，关系代词代替先行词，不能再出现it。",
+              "which代替the book作介词about的宾语。",
+              "正确结构：This is the book which I told you about. / This is the book about which I told you."
+            ],
+            "answer": "This is the book which I told you about."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is the boy that helped me, he is very kind.",
+              "correct": "He is the boy who helped me, and he is very kind. / He is the boy who helped me, who is very kind.",
+              "reason": "非限制性定语从句不能用that，且不能用逗号隔开后直接加he。"
+            },
+            {
+              "wrong": "The house which roof is red is mine.",
+              "correct": "The house whose roof is red is mine.",
+              "reason": "表示“房子的屋顶”，需要用whose引导定语，表示所属关系。"
+            }
+          ],
+          "grammar_fix": "关系代词口诀：人who物which，that人物都可替；whose表示谁的，介词在前只whom/which。",
+          "emotion_hook": "😱定语从句的“坑”！你是不是又踩了？"
+        },
+        {
+          "card_id": "T4-05",
+          "full_id": "英语-九下-T4-05",
+          "title": "❌间接疑问句：语序倒装？错！",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "间接疑问句是由疑问词(when, where, what, how, if, whether)引导的从句，语序必须是陈述句语序（主谓一致）。",
+          "core_points": [
+            "结构：主句 + 疑问词 + 主语 + 谓语 + 其他。",
+            "疑问词可以是特殊疑问词 (what, where, when, how等) 或if/whether (一般疑问句)。",
+            "从句部分不能使用疑问语序，即不能出现助动词do/does/did在主语前。",
+            "从句时态要根据主句时态进行相应变化 (reported speech规则)。"
+          ],
+          "why_explanation": "学生习惯了直接疑问句的倒装语序，在构成间接疑问句时，容易忘记将其变回陈述句语序。",
+          "example": {
+            "question": "纠正错误：Could you please tell me where is the library?",
+            "steps": [
+              "判断句子是间接疑问句。",
+              "间接疑问句从句部分需要用陈述句语序。",
+              "is the library → the library is。",
+              "正确结构：Could you please tell me where the library is?"
+            ],
+            "answer": "Could you please tell me where the library is?"
+          },
+          "mistakes": [
+            {
+              "wrong": "Do you know what time is it now?",
+              "correct": "Do you know what time it is now?",
+              "reason": "间接疑问句语序是主谓一致，不是疑问语序。"
+            },
+            {
+              "wrong": "He asked me if did I like the movie.",
+              "correct": "He asked me if I liked the movie.",
+              "reason": "间接疑问句从句部分不能使用助动词do/does/did。"
+            }
+          ],
+          "grammar_fix": "间接疑问句：疑问词后主谓顺，时态人称跟着变。",
+          "emotion_hook": "🤯问路总被纠正？间接疑问句的语序你搞懂了吗？"
+        },
+        {
+          "card_id": "T4-06",
+          "full_id": "英语-九下-T4-06",
+          "title": "❌动名词不定式：to do vs doing 常见错误！",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "有些动词后只能接动名词(doing)，有些只能接不定式(to do)，有些两者皆可但意义不同。",
+          "core_points": [
+            "只接doing的动词：enjoy, finish, mind, practice, suggest, imagine, avoid, keep, allow, consider等。",
+            "只接to do的动词：want, hope, wish, agree, decide, plan, promise, learn, ask, tell, allow等。",
+            "两者皆可但意义不同：remember (to do: 记得去做; doing: 记得做过), forget (to do: 忘记去做; doing: 忘记做过), stop (to do: 停下来去做; doing: 停止做某事)。",
+            "介词后通常接动名词(doing)。"
+          ],
+          "why_explanation": "学生记忆不牢动词与动名词/不定式的搭配，导致混淆使用。",
+          "example": {
+            "question": "纠正错误：I enjoy to play basketball. / He stopped smoking to talk to me.",
+            "steps": [
+              "enjoy后接动名词。",
+              "stop smoking表示停止吸烟这个动作，stop to talk表示停下来为了说话。",
+              "正确结构：I enjoy playing basketball. / He stopped to talk to me."
+            ],
+            "answer": "I enjoy playing basketball. / He stopped to talk to me."
+          },
+          "mistakes": [
+            {
+              "wrong": "He suggested to go to the park.",
+              "correct": "He suggested going to the park.",
+              "reason": "suggest后接动名词。"
+            },
+            {
+              "wrong": "Don't forget taking your keys.",
+              "correct": "Don't forget to take your keys.",
+              "reason": "forget to do表示“忘记去做某事”，强调动作未发生。"
+            }
+          ],
+          "grammar_fix": "动名词不定式口诀：enjoy doing，want to do。介词后接ing，stop to do表目的，stop doing表停止。",
+          "emotion_hook": "😭动名词不定式又用错？这个万能口诀救你命！"
+        },
+        {
+          "card_id": "T4-07",
+          "full_id": "英语-九下-T4-07",
+          "title": "❌情态动词误用：can't vs mustn't 别再混淆了！",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "情态动词表示可能性、能力、义务、允许等，不同情态动词表达不同语气和含义。",
+          "core_points": [
+            "can't：不可能，不允许 (表示能力或客观可能性)。",
+            "mustn't：禁止，不准 (表示强制性禁止)。",
+            "shouldn't：不应该 (表示建议或义务)。",
+            "needn't：不必 (表示没有必要)。",
+            "may/might：可能，也许 (表示推测，might可能性更小)。",
+            "can/could：能，可以 (表示能力或请求，could更委婉)。"
+          ],
+          "why_explanation": "学生对情态动词的语气强度和具体含义区分不清楚，导致在表达时用错词。",
+          "example": {
+            "question": "纠正错误：You mustn't be serious. / You can't smoke here.",
+            "steps": [
+              "You mustn't be serious：表示“你不可能认真”，应为can't。",
+              "You can't smoke here：表示“你不允许在这里吸烟”，应用mustn't。",
+              "正确结构：You can't be serious. / You mustn't smoke here."
+            ],
+            "answer": "You can't be serious. / You mustn't smoke here."
+          },
+          "mistakes": [
+            {
+              "wrong": "He may not be in the office. He mustn't be there.",
+              "correct": "He may not be in the office. He can't be there.",
+              "reason": "表示“不可能”用can't，mustn't是“禁止”。"
+            },
+            {
+              "wrong": "You shouldn't worry about it.",
+              "correct": "You needn't worry about it.",
+              "reason": "表示“没必要担心”用needn't，shouldn't是“不应该”。"
+            }
+          ],
+          "grammar_fix": "情态动词口诀：mustn't禁，can't不可能；shouldn't不该，needn't没必要。",
+          "emotion_hook": "⚠️情态动词“踩雷区”！这些错误你还在犯吗？"
+        }
+      ]
+    },
+    {
+      "unit_id": "T5",
+      "unit_name": "PK挑战",
+      "cards": [
+        {
+          "card_id": "T5-01",
+          "full_id": "英语-九下-T5-01",
+          "title": "🏆中考真题PK！被动语态专项挑战！",
+          "type": "PK挑战卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "考察学生对九年级下册被动语态的掌握情况，包括不同时态的被动语态及含情态动词的被动语态。",
+          "core_points": [
+            "被动语态结构：be + 过去分词",
+            "时态变化：一般现在、一般过去、一般将来、现在完成时被动语态",
+            "情态动词的被动语态：情态动词 + be + 过去分词",
+            "主动语态和被动语态的转换。"
+          ],
+          "why_explanation": "被动语态是初中英语的重点和难点，也是中考必考内容。通过真题挑战，巩固知识点，提高应试能力。",
+          "example": {
+            "question": "选择最佳答案：The Great Wall ____ (build) by millions of people over many years.",
+            "steps": [
+              "分析句子结构，主语The Great Wall与动词build之间是被动关系。",
+              "判断时态，Great Wall是已经建好的，用一般过去时。",
+              "被动语态结构：was/were + 过去分词。",
+              "The Great Wall是单数，所以用was built。"
+            ],
+            "answer": "was built"
+          },
+          "battle_rule": "限时3分钟，完成5道题。每题20分，答对即可得分，答错扣5分。最终得分越高者胜出！",
+          "emotion_hook": "🔥中考必刷题！被动语态你能全对吗？不服来战！"
+        },
+        {
+          "card_id": "T5-02",
+          "full_id": "英语-九下-T5-02",
+          "title": "🏆虚拟语气条件句PK！你敢来挑战吗？",
+          "type": "PK挑战卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "考察学生对九年级下册虚拟语气条件句的掌握，特别是与现在或将来事实相反的条件句。",
+          "core_points": [
+            "结构：If + 主语 + 动词过去式 (be动词用were), 主语 + would/could/might + 动词原形。",
+            "be动词无论主语单复数，一律用were。",
+            "主句情态动词选择。",
+            "理解虚拟语气表达的含义。"
+          ],
+          "why_explanation": "虚拟语气是初中英语的难点，学生容易混淆时态和be动词形式。通过PK挑战，加深理解和记忆。",
+          "example": {
+            "question": "完成句子：If I ____ (be) you, I ____ (not miss) this chance.",
+            "steps": [
+              "判断句子是与现在事实相反的虚拟语气。",
+              "从句be动词一律用were。",
+              "主句情态动词用would，否定用would not + 动词原形。",
+              "所以是If I were you, I would not miss this chance."
+            ],
+            "answer": "were; wouldn't miss"
+          },
+          "battle_rule": "限时3分钟，完成5道题。每题20分，答对即可得分，答错扣5分。最终得分越高者胜出！",
+          "emotion_hook": "🤯学霸挑战赛！虚拟语气你能完美驾驭吗？"
+        },
+        {
+          "card_id": "T5-03",
+          "full_id": "英语-九下-T5-03",
+          "title": "🏆转述句PK！reported speech 变身高手就是你！",
+          "type": "PK挑战卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "考察学生将直接引语转换为间接引语的能力，包括陈述句、疑问句和祈使句的转换。",
+          "core_points": [
+            "时态“降一级”规则。",
+            "人称代词变化。",
+            "时间、地点状语和指示代词变化。",
+            "疑问句的转换 (if/whether或疑问词引导，语序变陈述句)。",
+            "祈使句的转换 (tell/ask sb. to do/not to do sth.)。"
+          ],
+          "why_explanation": "转述句涉及多方面语法知识的综合运用，是中考常考题型。通过PK挑战，全面检验和提升转换能力。",
+          "example": {
+            "question": "将下列直接引语转换为间接引语：He said, 'I finished my homework yesterday.'",
+            "steps": [
+              "主句是过去时，从句时态要降一级：finished (一般过去时) → had finished (过去完成时)。",
+              "人称代词I → he。",
+              "时间状语yesterday → the day before。",
+              "所以是He said that he had finished his homework the day before."
+            ],
+            "answer": "He said that he had finished his homework the day before."
+          },
+          "battle_rule": "限时5分钟，完成5道题。每题20分，答对即可得分，答错扣5分。最终得分越高者胜出！",
+          "emotion_hook": "🚀中考高频考点！转述句高手挑战，你敢来吗？"
+        },
+        {
+          "card_id": "T5-04",
+          "full_id": "英语-九下-T5-04",
+          "title": "🏆定语从句PK！关系词选对了吗？",
+          "type": "PK挑战卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "考察学生对定语从句关系代词和关系副词的正确选择与运用。",
+          "core_points": [
+            "关系代词who, whom, whose, which, that的指代和在从句中作成分。",
+            "关系副词when, where, why的指代和在从句中作成分。",
+            "限制性定语从句与非限制性定语从句的区别。",
+            "介词与关系代词的搭配。"
+          ],
+          "why_explanation": "定语从句是复杂句型的重要组成部分，关系词的选择是难点。通过PK挑战，训练学生准确选择关系词的能力。",
+          "example": {
+            "question": "选择最佳答案：This is the student ____ won the first prize in the speech contest.",
+            "steps": [
+              "先行词是the student，指人。",
+              "从句中，关系词作won的主语。",
+              "指人作主语，用who。",
+              "所以是This is the student who won the first prize in the speech contest."
+            ],
+            "answer": "who"
+          },
+          "battle_rule": "限时3分钟，完成5道题。每题20分，答对即可得分，答错扣5分。最终得分越高者胜出！",
+          "emotion_hook": "🎯定语从句终极考验！你的关系词选对了吗？"
+        },
+        {
+          "card_id": "T5-05",
+          "full_id": "英语-九下-T5-05",
+          "title": "🏆词汇辨析PK！易混词终极挑战！",
+          "type": "PK挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "考察学生对九年级下册常见易混词（如affect/effect, borrow/lend, rise/raise, say/tell/speak/talk等）的辨析能力。",
+          "core_points": [
+            "区分词性（动词/名词）",
+            "区分及物/不及物动词",
+            "区分词义侧重点和固定搭配",
+            "理解语境选择最恰当的词汇"
+          ],
+          "why_explanation": "易混词是词汇学习的难点，也是中考常考的词汇辨析题。通过PK挑战，提高词汇运用准确性。",
+          "example": {
+            "question": "选择最佳答案：My teacher often ____ (advise/advice) us to read more English books.",
+            "steps": [
+              "分析句子结构，often ____ us to read more English books，此处需要一个动词。",
+              "advise是动词，advice是名词。",
+              "所以选择advise。"
+            ],
+            "answer": "advises"
+          },
+          "battle_rule": "限时3分钟，完成5道题。每题20分，答对即可得分，答错扣5分。最终得分越高者胜出！",
+          "emotion_hook": "🤯词汇陷阱大揭秘！这些易混词你能全部分清吗？"
+        }
+      ]
+    },
+    {
+      "unit_id": "T6",
+      "unit_name": "速记卡",
+      "cards": [
+        {
+          "card_id": "T6-01",
+          "full_id": "英语-九下-T6-01",
+          "title": "⚡️被动语态速记法！公式+口诀，秒杀考点！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "被动语态的核心结构和常见时态变化。",
+          "core_points": [
+            "基本公式：be + V-ed (过去分词)",
+            "现在时：am/is/are + V-ed",
+            "过去时：was/were + V-ed",
+            "将来时：will be + V-ed",
+            "现在完成时：have/has been + V-ed",
+            "情态动词：情态动词 + be + V-ed"
+          ],
+          "why_explanation": "被动语态变化多，学生容易混淆。提供清晰公式和口诀，帮助快速记忆和应用。",
+          "speed_method": "记忆口诀：被动语态be加ed，人称时态要一致。现在am is are，过去was were来帮忙。将来will be，完成have has been，情态动词跟be走。",
+          "memory_tip": "be + V-ed，被动语态的灵魂！",
+          "emotion_hook": "🔥中考必考！被动语态公式口诀，让你一秒变学霸！"
+        },
+        {
+          "card_id": "T6-02",
+          "full_id": "英语-九下-T6-02",
+          "title": "⚡️虚拟语气条件句速记！be动词“一律were”！",
+          "type": "速记卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "与现在或将来事实相反的虚拟语气条件句的结构。",
+          "core_points": [
+            "从句：If + 主语 + 动词过去式 (be动词用were)",
+            "主句：主语 + would/could/might + 动词原形",
+            "强调：be动词无论主语单复数，都用were。",
+            "表示对现在或将来情况的假设。"
+          ],
+          "why_explanation": "虚拟语气是难点，特别是be动词的特殊用法。通过强调核心规则，帮助学生快速掌握。",
+          "speed_method": "记忆口诀：if从句动过去，be动词一律were；主句would/could/might，后面动词是原形。",
+          "memory_tip": "If I were... 记住这个万能句！",
+          "emotion_hook": "🤯虚拟语气不再怕！一招搞定“If I were”！"
+        },
+        {
+          "card_id": "T6-03",
+          "full_id": "英语-九下-T6-03",
+          "title": "⚡️转述句时态速记！“降级”口诀，告别混乱！",
+          "type": "速记卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "直接引语变为间接引语时，时态、人称、时间/地点状语的变化规则。",
+          "core_points": [
+            "时态：一般现在→一般过去，现在进行→过去进行，现在完成→过去完成，一般将来→过去将来。",
+            "情态动词：can→could, may→might, must→had to。",
+            "人称：第一人称随主句主语，第二人称随主句宾语，第三人称不变。",
+            "时间状语：now→then, today→that day, tomorrow→the next day, yesterday→the day before。",
+            "地点状语：here→there；指示代词：this→that, these→those。"
+          ],
+          "why_explanation": "转述句变化繁多，学生容易遗漏。通过分类总结和口诀，提高记忆效率。",
+          "speed_method": "记忆口诀：一降时态二降人，三降时间地点词，指示代词也要变，祈使句用to不定。",
+          "memory_tip": "时态降级是核心，人称状语也别忘！",
+          "emotion_hook": "🚀转述句总是错？这个“降级”口诀让你永不翻车！"
+        },
+        {
+          "card_id": "T6-04",
+          "full_id": "英语-九下-T6-04",
+          "title": "⚡️定语从句关系词速记！人who物which，that万能！",
+          "type": "速记卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "定语从句中关系代词和关系副词的选择规则。",
+          "core_points": [
+            "指人：who (主格), whom (宾格), whose (所有格)",
+            "指物：which (主宾格)",
+            "指人/物：that (主宾格，非限制性从句不能用)",
+            "关系副词：when (时间), where (地点), why (原因)",
+            "介词+关系代词：介词后只用whom或which。",
+            "先行词是somebody, anything等不定代词时，只能用that。"
+          ],
+          "why_explanation": "关系词选择是定语从句的难点，容易混淆。通过分类和口诀，帮助学生快速辨析。",
+          "speed_method": "记忆口诀：人who物which，that人物都可替；whose表示谁的，介词在前只whom/which。时间when，地点where，原因why。",
+          "memory_tip": "人who物which，that能替不能带逗号！",
+          "emotion_hook": "🎯定语从句搞不清？关系词速记口诀，高分必备！"
+        },
+        {
+          "card_id": "T6-05",
+          "full_id": "英语-九下-T6-05",
+          "title": "⚡️九下核心词汇速记！主题分类+联想记忆！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "九年级下册各单元核心词汇的高效记忆方法。",
+          "core_points": [
+            "健康生活 (Unit 1): balanced diet, exercise, stress, sleep, advice, habit",
+            "环境保护 (Unit 2): environment, pollution, protect, volunteer, recycle, waste, make a difference",
+            "问路求助 (Unit 3): direction, polite, request, museum, library, post office",
+            "未来规划 (Unit 6): career, ambition, dream, university, computer science, engineer",
+            "文化习俗 (Unit 10): custom, tradition, culture, manners, polite, rude, greet, shake hands"
+          ],
+          "why_explanation": "词汇量大，记忆枯燥。通过主题分类和联想记忆，提升记忆效率和兴趣。",
+          "speed_method": "联想记忆法：\n1. 主题串联：把同一主题的词汇放在一起记忆，形成语境。\n2. 词根词缀：如 'en-' (使...) -> enable, enrich, enlarge；'-ment' (名词后缀) -> environment, development。\n3. 形近词对比：如 advise (v.) vs advice (n.)，通过辨析加深记忆。\n4. 场景模拟：将词汇放入实际对话中，边说边记。",
+          "memory_tip": "分类联想，场景应用，词汇记忆不再难！",
+          "emotion_hook": "📚告别死记硬背！九下核心词汇，这样记才高效！"
+        },
+        {
+          "card_id": "T6-06",
+          "full_id": "英语-九下-T6-06",
+          "title": "⚡️九下不规则动词速记！分类记忆，事半功倍！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "九年级下册常见不规则动词的过去式和过去分词。",
+          "core_points": [
+            "AAA型：cut-cut-cut, put-put-put, read-read-read",
+            "ABA型：become-became-become, come-came-come, run-ran-run",
+            "ABB型：buy-bought-bought, bring-brought-brought, build-built-built, feel-felt-felt, find-found-found, keep-kept-kept, leave-left-left, make-made-made, meet-met-met, say-said-said, sell-sold-sold, tell-told-told, think-thought-thought",
+            "ABC型：begin-began-begun, drink-drank-drunk, sing-sang-sung, speak-spoke-spoken, take-took-taken, write-wrote-written, see-saw-seen"
+          ],
+          "why_explanation": "不规则动词变化无规律，学生容易混淆。通过分类和口诀，帮助快速记忆。",
+          "speed_method": "记忆口诀：\n1. 三同型：cut cut cut，读音不同read read read。\n2. A变B型：swim swam swum，i变a再变u。\n3. 变t/d型：build built built，feel felt felt。\n4. 谐音或联想：go went gone (走着走着就走了)。",
+          "memory_tip": "分类记忆，找到规律，不规则动词也变乖！",
+          "emotion_hook": "🤯不规则动词背到崩溃？这份速记秘籍让你轻松搞定！"
+        },
+        {
+          "card_id": "T6-07",
+          "full_id": "英语-九下-T6-07",
+          "title": "⚡️动名词/不定式速记！口诀搭配，不再犯错！",
+          "type": "速记卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "某些动词后接动名词(doing)或不定式(to do)的固定搭配。",
+          "core_points": [
+            "后接doing：enjoy, finish, mind, practice, suggest, imagine, avoid, keep, look forward to...",
+            "后接to do：want, hope, wish, agree, decide, plan, promise, learn, ask, tell, pretend...",
+            "两者皆可，意义不同：remember (to do/doing), forget (to do/doing), stop (to do/doing), try (to do/doing)。",
+            "介词后接动名词。"
+          ],
+          "why_explanation": "动名词和不定式搭配是初中语法重点，容易混淆。通过口诀和分类，帮助学生快速记忆和应用。",
+          "speed_method": "记忆口诀：\n1. 介词后，必跟ing (except but/except for)。\n2. Enjoy finish mind，suggest practice keep doing。\n3. Want hope wish，agree decide plan to do。\n4. Stop to do是目的，stop doing是停止。\n5. Remember/forget to do未发生，doing已发生。",
+          "memory_tip": "动名词不定式，口诀搭配是王道！",
+          "emotion_hook": "🔥中考常考！动名词不定式，一招让你不再失分！"
+        }
+      ]
+    }
+  ]
+}

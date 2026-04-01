@@ -1,0 +1,1322 @@
+{
+  "subject": "英语",
+  "grade": "高一",
+  "semester": "下册",
+  "textbook": "人教版",
+  "grade_short": "高一下",
+  "units": [
+    {
+      "unit_id": "03",
+      "unit_name": "Module 3 The world of colours",
+      "cards": [
+        {
+          "card_id": "03-01",
+          "full_id": "英语-高一下-03-01",
+          "title": "词汇：颜色与情感类形容词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元核心词汇，主要涉及颜色、情感及其相关描述性形容词。",
+          "core_points": [
+            "blue /bluː/ (adj.) 蓝色的；忧郁的",
+            "red /red/ (adj.) 红色的；愤怒的",
+            "green /ɡriːn/ (adj.) 绿色的；生气的；嫉妒的",
+            "yellow /ˈjeləʊ/ (adj.) 黄色的；胆怯的",
+            "purple /ˈpɜːpl/ (adj.) 紫色的；高贵的",
+            "grey /ɡreɪ/ (adj.) 灰色的；阴沉的；沮丧的",
+            "bright /braɪt/ (adj.) 明亮的；鲜艳的；聪明的",
+            "dark /dɑːk/ (adj.) 黑暗的；深色的；阴沉的"
+          ],
+          "why_explanation": "颜色不仅是视觉感知，在英语文化中也常与特定情感、状态或象征意义关联，例如'feeling blue'表示忧郁，'see red'表示愤怒。",
+          "example": {
+            "question": "请用'blue'表示忧郁，'red'表示愤怒，'green'表示嫉妒，'yellow'表示胆怯，'bright'表示鲜艳，'dark'表示深色，完成以下句子。",
+            "steps": [
+              "Identify the emotion/description required for each blank.",
+              "Recall the corresponding color adjective.",
+              "Fill in the blanks with the correct word."
+            ],
+            "answer": "1. She was feeling **blue** after failing the exam. (她考试没通过后感到很忧郁。) \n2. His face turned **red** with anger. (他气得脸都红了。) \n3. He was **green** with envy when he saw her new car. (他看到她的新车时嫉妒得要命。) \n4. The **yellow** light means 'caution'. (黄灯表示‘小心’。) \n5. She wore a **bright** red dress to the party. (她穿着一件鲜红的裙子去参加派对。) \n6. The room was painted in a **dark** grey. (房间被漆成了深灰色。)"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is blue.",
+              "correct": "He is feeling blue.",
+              "reason": "'Blue'作形容词表示忧郁时，通常与'feel'或'be'动词连用，强调一种情绪状态，直接说'He is blue'在口语中可能被理解为他就是蓝色，而非情绪。"
+            },
+            {
+              "wrong": "She has a bright idea.",
+              "correct": "She has a brilliant idea.",
+              "reason": "'Bright'虽然有聪明的含义，但在描述想法时，'brilliant'更常用于表示“绝妙的，非常棒的”想法，'bright'多用于形容人或物。"
+            }
+          ],
+          "memory_tip": "联想记忆：Blues音乐是忧郁的（blue）。看见红色停车，易发怒（red）。嫉妒别人眼红，但西方用'green with envy'（green）。胆小鬼常被称为'yellow belly'（yellow）。",
+          "related": {
+            "prerequisite": "小学阶段颜色词汇，初中阶段情感形容词",
+            "next": "词汇深度：颜色词的文化内涵"
+          }
+        },
+        {
+          "card_id": "03-02",
+          "full_id": "英语-高一下-03-02",
+          "title": "词汇：艺术与表达类名词/动词",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元涉及艺术形式、创作过程以及情感表达相关的词汇。",
+          "core_points": [
+            "art /ɑːt/ (n.) 艺术；美术",
+            "artist /ˈɑːtɪst/ (n.) 艺术家",
+            "painting /ˈpeɪntɪŋ/ (n.) 油画；绘画",
+            "sculpture /ˈskʌlptʃə(r)/ (n.) 雕塑",
+            "express /ɪkˈspres/ (v.) 表达；表示",
+            "expression /ɪkˈspreʃn/ (n.) 表达；表情",
+            "represent /ˌreprɪˈzent/ (v.) 代表；象征",
+            "symbol /ˈsɪmbl/ (n.) 象征；符号",
+            "mood /muːd/ (n.) 心情；情绪"
+          ],
+          "why_explanation": "艺术是人类表达情感和思想的重要方式，这些词汇帮助我们理解和描述艺术作品及其传达的意义。",
+          "example": {
+            "question": "请用'art', 'artist', 'express', 'represent', 'mood'填空。",
+            "steps": [
+              "Analyze the grammatical role required for each blank (noun, verb).",
+              "Consider the context of the sentence to choose the most appropriate word.",
+              "Fill in the blanks."
+            ],
+            "answer": "1. Modern **art** is sometimes difficult to understand. (现代艺术有时很难理解。) \n2. The **artist** used bright colours in his latest work. (这位艺术家在他的最新作品中使用了鲜艳的颜色。) \n3. It's difficult to **express** my feelings in words. (我很难用言语表达我的感受。) \n4. The dove often **represents** peace. (鸽子常象征和平。) \n5. Her **mood** changed quickly from happy to sad. (她的情绪很快从高兴变为悲伤。)"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is an art.",
+              "correct": "He is an artist.",
+              "reason": "'Art'是艺术这个概念，而'artist'是从事艺术创作的人，两者词义不同。"
+            },
+            {
+              "wrong": "She has good expression.",
+              "correct": "She has good expression of emotions. / She has good facial expressions.",
+              "reason": "'Expression'作“表达”讲时，常指表达某个具体内容（如情感），或指面部表情。单独说'good expression'不够具体。"
+            }
+          ],
+          "memory_tip": "art（艺术）+ ist（人）= artist（艺术家）。express（表达）= ex（向外）+ press（压），把想法“压”出来“表达”出去。represent（代表）= re（再次）+ present（呈现），再次呈现以“代表”。",
+          "related": {
+            "prerequisite": "初中阶段的名词动词辨析",
+            "next": "词法卡：名词与动词的相互转化"
+          }
+        },
+        {
+          "card_id": "03-03",
+          "full_id": "英语-高一下-03-03",
+          "title": "语法：形容词的顺序",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "当多个形容词修饰同一个名词时，它们通常遵循特定的顺序：限定词 + 观点/评价 + 大小 + 形状 + 年龄 + 颜色 + 国籍/来源 + 材料 + 目的/用途 + 名词。",
+          "core_points": [
+            "限定词 (Determiners): a, an, the, my, this, some, etc.",
+            "观点/评价 (Opinion): beautiful, ugly, lovely, wonderful, terrible, interesting, boring, etc.",
+            "大小 (Size): big, small, tiny, huge, long, short, tall, fat, thin, etc.",
+            "形状 (Shape): round, square, triangular, oval, etc.",
+            "年龄 (Age): old, new, young, ancient, modern, etc.",
+            "颜色 (Color): red, blue, green, black, white, dark, bright, etc.",
+            "国籍/来源 (Origin): Chinese, American, French, wooden, metal, etc.",
+            "材料 (Material): cotton, silk, plastic, glass, etc.",
+            "目的/用途 (Purpose): sleeping (bag), writing (desk), running (shoes), etc.",
+            "助记口诀: '美小圆旧黄，中国木书房' (Opinion, Size, Shape, Age, Color, Origin, Material, Purpose)"
+          ],
+          "why_explanation": "这种顺序并非绝对语法规则，而是约定俗成的语用习惯。人们倾向于先表达主观意见，再描述客观属性，从整体到局部，从一般到具体。这种顺序使得句子更自然流畅，信息传递更清晰。",
+          "example": {
+            "question": "请将括号内的形容词按正确顺序排列，修饰名词'car'：(old, a, beautiful, red, Italian) car",
+            "steps": [
+              "Identify the noun being modified: 'car'.",
+              "Identify each adjective and its category: 'a' (determiner), 'beautiful' (opinion), 'old' (age), 'red' (color), 'Italian' (origin).",
+              "Apply the adjective order rule: Determiner -> Opinion -> Age -> Color -> Origin -> Noun.",
+              "Construct the phrase with the correct order."
+            ],
+            "answer": "a beautiful old red Italian car"
+          },
+          "mistakes": [
+            {
+              "wrong": "She bought a red big new car.",
+              "correct": "She bought a big new red car.",
+              "reason": "大小 (big) 应排在年龄 (new) 之前，颜色 (red) 排在最后。"
+            },
+            {
+              "wrong": "I saw an interesting old Chinese man.",
+              "correct": "I saw an interesting old Chinese man.",
+              "reason": "该句顺序正确。Opinion (interesting) -> Age (old) -> Origin (Chinese)。"
+            }
+          ],
+          "memory_tip": "想象你描述一个物品：先说它好不好看（观点），有多大（大小），什么形状（形状），多旧（年龄），什么颜色（颜色），哪儿产的（国籍/来源），什么材料（材料），干什么用（目的）。",
+          "related": {
+            "prerequisite": "初中阶段形容词的基本用法",
+            "next": "高级语法卡：副词的顺序"
+          }
+        },
+        {
+          "card_id": "03-04",
+          "full_id": "英语-高一下-03-04",
+          "title": "语法：现在完成时 (Present Perfect Tense) 的进阶用法",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "现在完成时表示过去发生的动作对现在造成的影响或结果，或从过去某个时间点开始一直持续到现在并可能继续的动作或状态。",
+          "core_points": [
+            "构成: have/has + 动词的过去分词 (V-ed/V3)",
+            "肯定句: 主语 + have/has + V-ed/V3 + 其他。",
+            "否定句: 主语 + haven't/hasn't + V-ed/V3 + 其他。",
+            "疑问句: Have/Has + 主语 + V-ed/V3 + 其他？ (Yes/No questions)",
+            "特殊疑问句: 疑问词 + have/has + 主语 + V-ed/V3 + 其他？",
+            "用法一：表示动作或状态从过去某一时刻开始，一直持续到现在，并可能继续下去。常与for (一段时间) 或 since (某个时间点) 连用。",
+            "用法二：表示过去发生的动作对现在造成的影响或结果。通常不与具体过去时间状语连用。",
+            "用法三：表示过去发生过的经历，强调有过或没有过某种经验。常与ever, never, before, once, twice, many times等连用。",
+            "易混淆点：与一般过去时的区别在于，现在完成时强调与现在的联系，一般过去时只描述过去发生的动作。"
+          ],
+          "why_explanation": "英语中的时态并非简单对应时间，而是反映说话者对动作发生时间的视角和强调点。现在完成时通过连接过去与现在，使得我们能够表达过去事件的当前意义或持续性，这是其他时态无法做到的。",
+          "example": {
+            "question": "将以下句子改为现在完成时，并判断其是哪种用法：1. I (study) English for five years. 2. He (break) his leg. (现在腿还伤着) 3. She (never / visit) Beijing before.",
+            "steps": [
+              "Identify the subject and choose 'have' or 'has'.",
+              "Convert the main verb to its past participle form.",
+              "For sentence 1, 'for five years' indicates duration, so it's Usage 1.",
+              "For sentence 2, the implication '现在腿还伤着' indicates an impact on the present, so it's Usage 2.",
+              "For sentence 3, 'never' and 'before' indicate experience, so it's Usage 3.",
+              "Formulate the complete sentences."
+            ],
+            "answer": "1. I **have studied** English for five years. (用法一：持续性动作) \n2. He **has broken** his leg. (用法二：对现在的影响) \n3. She **has never visited** Beijing before. (用法三：过去的经历)"
+          },
+          "mistakes": [
+            {
+              "wrong": "I have gone to Shanghai last year.",
+              "correct": "I went to Shanghai last year. / I have been to Shanghai.",
+              "reason": "现在完成时不能与明确的过去时间状语（如'last year'）连用，因为它强调与现在的联系。若要表达过去发生的事实，用一般过去时。若要表达去过某地的经历，用'have been to'。"
+            },
+            {
+              "wrong": "He has lived here since 2000, but he is dead now.",
+              "correct": "He lived here since 2000. (如果他已去世，动作已结束) / He has lived here since 2000. (如果他仍然活着)",
+              "reason": "现在完成时表示动作持续到现在。如果动作的主体已经不存在（如'dead'），则动作无法持续到说话的现在，应使用一般过去时。"
+            }
+          ],
+          "memory_tip": "“现完时”：现在有结果，过去已完成；持续到如今，经历说一遍。关键词：for, since, just, already, yet, ever, never, before。",
+          "related": {
+            "prerequisite": "初中阶段一般过去时、现在完成时的基本概念",
+            "next": "高中增加：现在完成进行时，过去完成时"
+          }
+        },
+        {
+          "card_id": "03-05",
+          "full_id": "英语-高一下-03-05",
+          "title": "语法：被动语态 (The Passive Voice) 的进阶用法",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "被动语态表示句子的主语是动作的承受者，而不是动作的发出者。它强调动作本身或动作的承受者。",
+          "core_points": [
+            "基本构成: be + 动词的过去分词 (V-ed/V3)",
+            "时态变化: 根据be动词的时态变化，如：is/am/are done (一般现在时), was/were done (一般过去时), will be done (一般将来时), has/have been done (现在完成时), is/am/are being done (现在进行时)。",
+            "肯定句: 主语 + be + V-ed/V3 (+ by + 动作发出者)。",
+            "否定句: 主语 + be not + V-ed/V3 (+ by + 动作发出者)。",
+            "疑问句: Be + 主语 + V-ed/V3 (+ by + 动作发出者)？",
+            "特殊疑问句: 疑问词 + be + 主语 + V-ed/V3 (+ by + 动作发出者)？",
+            "带情态动词的被动语态: 情态动词 + be + V-ed/V3 (e.g., must be done, should be done)。",
+            "某些动词短语的被动语态: 需将动词短语视为一个整体，如：look after → be looked after, take care of → be taken care of。",
+            "使用场景: 当动作的发出者不重要、不明确或不希望提及时；当强调动作或动作的承受者时。"
+          ],
+          "why_explanation": "被动语态提供了一种改变句子焦点的机制。在英语中，句子通常以主语为中心，但当主语不是动作的执行者时，或者我们更关心动作本身及其结果而非执行者时，被动语态就变得非常有用。它使语言表达更加灵活和多样。",
+          "example": {
+            "question": "将以下主动语态的句子改为被动语态：1. People often say that he is a genius. 2. We must protect the environment. 3. They are building a new hospital.",
+            "steps": [
+              "Identify the object of the active sentence, which will become the subject of the passive sentence.",
+              "Determine the tense of the active verb and choose the correct form of 'be' accordingly.",
+              "Change the main verb to its past participle form.",
+              "If necessary, add 'by + agent' (但通常可省略)。",
+              "For sentence 1, 'People often say that...'常转换为'It is often said that...'或'He is often said to be...'"
+            ],
+            "answer": "1. **It is often said that** he is a genius. / He **is often said to be** a genius. (人们常说他是个天才。) \n2. The environment **must be protected**. (环境必须被保护。) \n3. A new hospital **is being built**. (一座新医院正在建设中。)"
+          },
+          "mistakes": [
+            {
+              "wrong": "The book was written by a famous writer.",
+              "correct": "The book was written by a famous writer.",
+              "reason": "该句是正确的被动语态，'by + agent'表示动作发出者。"
+            },
+            {
+              "wrong": "The door is opening.",
+              "correct": "The door is open. / The door is being opened.",
+              "reason": "'is opening'是现在进行时的主动语态，表示门正在自己打开（拟人化）。如果想表达门处于打开状态，用'is open'。如果想表达门正在被人打开，用被动语态'is being opened'。"
+            },
+            {
+              "wrong": "He was injured in the accident last week.",
+              "correct": "He was injured in the accident last week.",
+              "reason": "该句是正确的被动语态。'injure'是及物动词，表示受伤通常用被动语态，因为人是被伤的承受者。"
+            }
+          ],
+          "memory_tip": "被动语态：'be'加'V3'，动作承受者是主语。情态动词跟着'be V3'，动词短语不分离。重点在结果，施动者可不提。",
+          "related": {
+            "prerequisite": "初中阶段被动语态的基本概念",
+            "next": "高级语法卡：非谓语动词作表语的被动含义"
+          }
+        },
+        {
+          "card_id": "03-06",
+          "full_id": "英语-高一下-03-06",
+          "title": "句型：It is said/reported/believed that...",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "这是一个常用的非人称被动句型，表示“据说/据报道/据信……”，用于转述信息或观点，而不明确指出信息来源。",
+          "core_points": [
+            "结构一: It is said/reported/believed/thought/known that + 从句 (完整句子)",
+            "结构二: 主语 (指人) + is/are said/reported/believed/thought/known + to do/to be doing/to have done...",
+            "结构三: 主语 (指物) + is/are said/reported/believed/thought/known + to be + 形容词/名词...",
+            "此句型常用于新闻报道、学术论文或日常交流中，以保持客观性或避免指明具体信息来源。",
+            "said, reported, believed, thought, known, expected, understood 等动词常用于此句型。"
+          ],
+          "why_explanation": "在英语中，为了避免重复主语、保持客观性或当动作的执行者不重要时，常使用被动语态。'It is said that...' 句型是这种思想的体现，它将句子的重点放在了被转述的信息上，而非转述者。",
+          "example": {
+            "question": "将以下句子用'It is said that...'或'主语 + is said to do...'句型改写：1. People say that he is a great singer. 2. People believe that the earth is round. 3. People reported that the building was damaged in the earthquake.",
+            "steps": [
+              "For sentence 1, identify the subject of 'say' (people) and the content of what is said (he is a great singer). Choose either 'It is said that...' or 'He is said to be...'.",
+              "For sentence 2, the content is a general truth. Use 'It is believed that...'.",
+              "For sentence 3, the action (reported) happened in the past, and the content (building was damaged) also refers to the past. Use 'It was reported that...' or 'The building was reported to have been damaged...'.",
+              "Construct the sentences using the appropriate structure."
+            ],
+            "answer": "1. **It is said that** he is a great singer. / He **is said to be** a great singer. \n2. **It is believed that** the earth is round. \n3. **It was reported that** the building was damaged in the earthquake. / The building **was reported to have been damaged** in the earthquake."
+          },
+          "mistakes": [
+            {
+              "wrong": "It is said he is a teacher.",
+              "correct": "It is said that he is a teacher.",
+              "reason": "'that'引导的从句通常不能省略，尤其是在正式语体或避免歧义时。"
+            },
+            {
+              "wrong": "He is said that he is a teacher.",
+              "correct": "He is said to be a teacher.",
+              "reason": "当主语是人时，后面接的是不定式（to do/to be），而不是'that'从句。"
+            }
+          ],
+          "memory_tip": "“据说”句型：'It is said that'，后面跟个完整句。要是人作主语，'is said to do'。",
+          "related": {
+            "prerequisite": "初中阶段被动语态、宾语从句",
+            "next": "高级语法卡：复杂句的简化，如非谓语动词在被动语态中的应用"
+          }
+        },
+        {
+          "card_id": "03-07",
+          "full_id": "英语-高一下-03-07",
+          "title": "易混词：affect vs effect",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "affect 和 effect 是一对形近易混词，前者主要作动词，意为“影响”；后者主要作名词，意为“影响，效果”。",
+          "core_points": [
+            "**affect** /əˈfekt/ (v.): 影响；感动；假装。强调施加影响的动作。",
+            "例句: The bad weather **affected** our travel plans. (恶劣天气影响了我们的旅行计划。)",
+            "**effect** /ɪˈfekt/ (n.): 影响；效果；作用。强调影响的结果。",
+            "例句: The new policy will have a positive **effect** on the economy. (新政策将对经济产生积极影响。)",
+            "**effect** (v.): 实现，造成（较少见，多用于正式语体）。",
+            "例句: The doctor tried to **effect** a cure. (医生试图实现治愈。)",
+            "固定搭配: have an effect on (对……有影响), take effect (生效), come into effect (开始生效), to no effect (无效地)。"
+          ],
+          "why_explanation": "英语中许多词汇因词性不同而有细微差别。'affect'作为动词，强调的是行为过程；'effect'作为名词，强调的是行为的结果。理解其词性是区分它们的根本。",
+          "example": {
+            "question": "选择正确的词填空：1. The medicine had no (affect/effect) on his pain. 2. His words deeply (affected/effected) me. 3. The change will (affect/effect) everyone.",
+            "steps": [
+              "Analyze the grammatical role required for each blank. Is it a verb or a noun?",
+              "For sentence 1, 'had no...'后面需要一个名词，所以选'effect'。",
+              "For sentence 2, 'deeply...'后面需要一个动词，所以选'affected'。",
+              "For sentence 3, 'will...'后面需要一个动词原形，所以选'affect'。",
+              "Fill in the blanks."
+            ],
+            "answer": "1. The medicine had no **effect** on his pain. \n2. His words deeply **affected** me. \n3. The change will **affect** everyone."
+          },
+          "mistakes": [
+            {
+              "wrong": "The economy will have a big affect.",
+              "correct": "The economy will have a big effect.",
+              "reason": "'affect'是动词，不能直接作名词使用。'effect'是名词，可以被形容词修饰。"
+            },
+            {
+              "wrong": "It effected his mood.",
+              "correct": "It affected his mood.",
+              "reason": "这里需要一个动词表示“影响”，应使用动词'affect'，而不是名词'effect'或其动词形式（意为“实现”）。"
+            }
+          ],
+          "memory_tip": "动词是AFFECT (影响)，名词是EFFECT (效果)。A是动词，E是名词。记住'A'ction (动作) 用'A'ffect，'E'nd result (结果) 用'E'ffect。或者：'affect'像'action'一样以'A'开头，表示动作；'effect'像'end'一样以'E'开头，表示结果。",
+          "related": {
+            "prerequisite": "初中阶段词性辨析",
+            "next": "易混词卡：adverse vs averse"
+          }
+        },
+        {
+          "card_id": "03-08",
+          "full_id": "英语-高一下-03-08",
+          "title": "词汇深度：动词'mean'的一词多义与搭配",
+          "type": "词汇深度卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "动词'mean'是一个多义词，其含义包括“意指，意味着”、“打算，意欲”等，并有多种固定搭配。",
+          "core_points": [
+            "**mean /miːn/ (v.)**",
+            "1. 意指，意味着；表示：What does this word **mean**? (这个词是什么意思？)",
+            "   It **means** that he agrees. (这意味着他同意了。)",
+            "2. 打算，意欲 (mean to do sth)：I didn't **mean to hurt** your feelings. (我不是故意要伤害你的感情。)",
+            "3. 目的在于，导致 (mean doing sth)：Winning the lottery **means** never having to work again. (中彩票意味着再也不用工作了。)",
+            "4. 对……很重要，有意义：You **mean** a lot to me. (你对我意义重大。)",
+            "**mean (adj.)**",
+            "1. 吝啬的，刻薄的：Don't be so **mean** to your little brother. (别对你弟弟那么刻薄。)",
+            "2. 卑鄙的，不友善的：That was a **mean** trick. (那是个卑鄙的把戏。)",
+            "**mean (n.)**",
+            "1. (pl.) 手段，方法：by **means** of (借助于)",
+            "2. 平均值：the **mean** temperature (平均温度)"
+          ],
+          "why_explanation": "英语中常见的一词多义现象反映了语言的经济性。一个词在不同语境下承担不同的意义，通过上下文和搭配来区分。理解这些多义词的深层逻辑和常用搭配，是掌握英语词汇的关键。",
+          "example": {
+            "question": "根据句意，选择'mean'的合适含义或形式填空：1. What do you (mean) by saying that? 2. I didn't (mean) to offend you. 3. This job will (mean) working late. 4. She is too (mean) to share her toys.",
+            "steps": [
+              "Analyze the context of each sentence to determine the intended meaning of 'mean'.",
+              "For sentence 1, 'by saying that'暗示询问言语的含义，所以是“意指”。",
+              "For sentence 2, 'to offend you'暗示“打算做某事”，所以是'mean to do'。",
+              "For sentence 3, 'working late'暗示“导致”或“意味着”某种结果，所以是'mean doing'。",
+              "For sentence 4, 'to share her toys'暗示性格特征，所以是形容词“吝啬的”。",
+              "Fill in the blanks with the correct form/meaning."
+            ],
+            "answer": "1. What do you **mean** by saying that? (你那样说是什么意思？) \n2. I didn't **mean** to offend you. (我不是故意要冒犯你。) \n3. This job will **mean** working late. (这份工作意味着要加班。) \n4. She is too **mean** to share her toys. (她太吝啬了，不肯分享她的玩具。)"
+          },
+          "mistakes": [
+            {
+              "wrong": "He means to give up smoking.",
+              "correct": "He means to give up smoking.",
+              "reason": "该句正确，表示“他打算戒烟”。"
+            },
+            {
+              "wrong": "This means to success.",
+              "correct": "This means success. / This is a means to success.",
+              "reason": "如果表示“这意味着成功”，'mean'后面直接跟名词。如果表示“这是通往成功的方法”，则用名词'means'，且需搭配'a means to'。"
+            }
+          ],
+          "memory_tip": "动词'mean'：想到'meaning'（意思），想到'intention'（意图，to do），想到'result'（结果，doing）。形容词'mean'：联想“小气”的人很“mean”。",
+          "related": {
+            "prerequisite": "初中阶段常见动词的多义现象",
+            "next": "词汇深度：熟词生义与高频搭配"
+          }
+        },
+        {
+          "card_id": "03-09",
+          "full_id": "英语-高一下-03-09",
+          "title": "写作进阶：描述情感和态度的表达",
+          "type": "写作进阶卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在写作中，准确、生动地描述情感和态度能使文章更具感染力。本卡片提供一些高级表达。",
+          "core_points": [
+            "表达快乐/乐观：be thrilled/delighted/overjoyed to do sth; beam with joy; radiate happiness; be in high spirits; look on the bright side.",
+            "表达悲伤/沮丧：be down in the dumps; feel blue; be heartbroken; shed tears; be filled with sorrow; a sense of despair.",
+            "表达愤怒/不满：be furious with/at sb/sth; see red; lose one's temper; vent one's frustration; express strong disapproval.",
+            "表达惊讶/震惊：be taken aback by; be astonished/astounded at/by; gasp in surprise; be dumbfounded.",
+            "表达担忧/焦虑：be concerned about; fret over; be on edge; be filled with apprehension; have butterflies in one's stomach.",
+            "表达赞同/支持：be in favour of; lend support to; speak highly of; endorse the idea.",
+            "表达反对/批评：object to; voice one's opposition; criticize severely; cast doubt on."
+          ],
+          "why_explanation": "高级表达能够帮助写作者摆脱平庸的'happy', 'sad', 'angry'等词汇，使文章更具表现力和说服力。这些短语和习语往往蕴含更深层次的情感色彩和文化背景。",
+          "example": {
+            "question": "将以下句子中的简单表达替换为更高级的表达：1. She was very happy when she heard the news. 2. He was very angry about the decision. 3. I am worried about the future.",
+            "steps": [
+              "Identify the simple emotion words: 'very happy', 'very angry', 'worried'.",
+              "Recall more advanced phrases that convey similar or stronger emotions.",
+              "Replace the simple expressions with the advanced ones, ensuring grammatical correctness.",
+              "For sentence 1, 'very happy' can be replaced by 'thrilled', 'overjoyed', or 'beaming with joy'.",
+              "For sentence 2, 'very angry' can be replaced by 'furious', 'see red', or 'lose one's temper'.",
+              "For sentence 3, 'worried' can be replaced by 'concerned', 'fret over', or 'on edge'."
+            ],
+            "answer": "1. She **was thrilled/overjoyed** when she heard the news. / She **beamed with joy** when she heard the news. \n2. He **was furious about** the decision. / He **saw red** about the decision. / He **lost his temper** over the decision. \n3. I **am concerned about** the future. / I **fret over** the future. / I **am on edge** about the future."
+          },
+          "mistakes": [
+            {
+              "wrong": "He was very angry with the decision.",
+              "correct": "He was furious at/about the decision. / He was very angry about the decision.",
+              "reason": "'furious'常与'at/about'搭配，'angry'可与'with (人)'或'at/about (事)'搭配。避免混用介词。"
+            },
+            {
+              "wrong": "I have butterflies in my stomach for the exam.",
+              "correct": "I have butterflies in my stomach before the exam.",
+              "reason": "'have butterflies in one's stomach'表示紧张，常与'before'或'for'（表示原因）搭配，但'before'更自然地表达在考试前紧张的心情。"
+            }
+          ],
+          "memory_tip": "情感情绪：开心用'thrilled'，生气用'furious'，担心用'concerned'。记住几个形象的习语：'blue'（忧郁），'see red'（发怒），'butterflies in stomach'（紧张）。",
+          "related": {
+            "prerequisite": "初中阶段基本情感词汇",
+            "next": "写作进阶卡：议论文观点论证"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "04",
+      "unit_name": "Module 4 Global warming",
+      "cards": [
+        {
+          "card_id": "04-01",
+          "full_id": "英语-高一下-04-01",
+          "title": "词汇：环境与气候变化类名词",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "本单元核心词汇，主要涉及环境、气候变化现象及其相关概念。",
+          "core_points": [
+            "environment /ɪnˈvaɪrənmənt/ (n.) 环境",
+            "global warming /ˈɡləʊbl ˈwɔːmɪŋ/ (n.phr.) 全球变暖",
+            "climate /ˈklaɪmət/ (n.) 气候",
+            "greenhouse effect /ˈɡriːnhaʊs ɪˌfekt/ (n.phr.) 温室效应",
+            "pollution /pəˈluːʃn/ (n.) 污染",
+            "carbon dioxide /ˈkɑːbən daɪˈɒksaɪd/ (n.phr.) 二氧化碳",
+            "fossil fuels /ˈfɒsl fjʊəlz/ (n.phr.) 化石燃料",
+            "emission /ɪˈmɪʃn/ (n.) 排放（物）",
+            "sea level /ˈsiː levl/ (n.phr.) 海平面",
+            "drought /draʊt/ (n.) 干旱",
+            "flood /flʌd/ (n.) 洪水"
+          ],
+          "why_explanation": "这些词汇是讨论全球环境问题的基础。理解它们能帮助我们准确描述环境现象、原因和后果，是构建相关知识体系的关键。",
+          "example": {
+            "question": "请用'environment', 'global warming', 'pollution', 'carbon dioxide', 'drought'填空。",
+            "steps": [
+              "Analyze the context of each sentence to determine the most fitting environmental term.",
+              "For sentence 1, the protection of natural surroundings points to 'environment'.",
+              "For sentence 2, the rising temperature worldwide refers to 'global warming'.",
+              "For sentence 3, dirty air and water are forms of 'pollution'.",
+              "For sentence 4, the gas from burning fossil fuels is 'carbon dioxide'.",
+              "For sentence 5, a long period without rain is a 'drought'.",
+              "Fill in the blanks."
+            ],
+            "answer": "1. We should protect our natural **environment**. (我们应该保护我们的自然环境。) \n2. **Global warming** is a serious threat to our planet. (全球变暖是对我们星球的严重威胁。) \n3. Air and water **pollution** are major problems in big cities. (空气和水污染是大城市的主要问题。) \n4. Plants absorb **carbon dioxide** and release oxygen. (植物吸收二氧化碳并释放氧气。) \n5. The long **drought** caused serious water shortages. (长期干旱导致了严重的水资源短缺。)"
+          },
+          "mistakes": [
+            {
+              "wrong": "The global warming is a problem.",
+              "correct": "Global warming is a problem.",
+              "reason": "'Global warming'是一个专有名词短语，通常不加定冠词'the'。"
+            },
+            {
+              "wrong": "We need to reduce the pollutions.",
+              "correct": "We need to reduce pollution.",
+              "reason": "'Pollution'通常是不可数名词，表示“污染”这一概念，因此没有复数形式。"
+            }
+          ],
+          "memory_tip": "environment（环境）：想象你身边的'iron'（铁）和'ment'（门），周围的一切是环境。global warming（全球变暖）：global（全球的）+ warming（变暖）。greenhouse effect（温室效应）：greenhouse（温室）+ effect（效应）。",
+          "related": {
+            "prerequisite": "初中阶段环境相关词汇",
+            "next": "词汇：环境与气候变化类动词/形容词"
+          }
+        },
+        {
+          "card_id": "04-02",
+          "full_id": "英语-高一下-04-02",
+          "title": "词汇：环境与气候变化类动词/形容词",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "本单元核心词汇，主要涉及描述环境问题的动词、形容词以及应对措施。",
+          "core_points": [
+            "protect /prəˈtekt/ (v.) 保护",
+            "reduce /rɪˈdjuːs/ (v.) 减少",
+            "cause /kɔːz/ (v.) 引起；造成 (n.) 原因",
+            "contribute /kənˈtrɪbjuːt/ (v.) 贡献；促成 (to)",
+            "suffer /ˈsʌfə(r)/ (v.) 遭受；受苦",
+            "harmful /ˈhɑːmfʊl/ (adj.) 有害的",
+            "severe /sɪˈvɪə(r)/ (adj.) 严重的；严峻的",
+            "sustainable /səˈsteɪnəbl/ (adj.) 可持续的",
+            "conserve /kənˈsɜːv/ (v.) 节约；保护"
+          ],
+          "why_explanation": "这些动词和形容词是分析、讨论环境问题及其解决方案的工具。它们能帮助我们更精确地表达原因、后果和行动，是环境议题表述的关键组成部分。",
+          "example": {
+            "question": "请用'protect', 'reduce', 'cause', 'harmful', 'sustainable'填空。",
+            "steps": [
+              "Analyze the context and required word type (verb/adjective).",
+              "For sentence 1, 'our planet' requires a verb like 'protect'.",
+              "For sentence 2, 'waste' suggests a verb like 'reduce'.",
+              "For sentence 3, 'serious damage' suggests a verb like 'cause'.",
+              "For sentence 4, 'chemicals' often have a negative quality, so 'harmful' fits.",
+              "For sentence 5, 'development' that can continue indefinitely is 'sustainable'.",
+              "Fill in the blanks."
+            ],
+            "answer": "1. We must **protect** our planet for future generations. (我们必须为子孙后代保护我们的星球。) \n2. We should **reduce** waste and reuse materials. (我们应该减少浪费，重复利用材料。) \n3. Smoking can **cause** serious health problems. (吸烟会导致严重的健康问题。) \n4. These chemicals are **harmful** to the environment. (这些化学物质对环境有害。) \n5. The company is committed to **sustainable** development. (该公司致力于可持续发展。)"
+          },
+          "mistakes": [
+            {
+              "wrong": "The severe pollution cause health problems.",
+              "correct": "The severe pollution causes health problems.",
+              "reason": "主语'pollution'是单数，动词'cause'应使用第三人称单数形式'causes'。"
+            },
+            {
+              "wrong": "We should reduce to use plastic bags.",
+              "correct": "We should reduce using plastic bags. / We should reduce the use of plastic bags.",
+              "reason": "'reduce'后跟动名词（gerund）表示减少做某事，或者跟名词表示减少某种事物。"
+            }
+          ],
+          "memory_tip": "protect（保护）：pre（前）+ tect（盖），提前盖好就是保护。reduce（减少）：re（重新）+ duce（引导），重新引导到更小的量。cause（引起）：记住动词和名词双重含义。harmful（有害的）：harm（伤害）+ ful（充满的）。",
+          "related": {
+            "prerequisite": "初中阶段动词和形容词的基本用法",
+            "next": "词汇深度：同义词辨析 (reduce, decrease, cut down)"
+          }
+        },
+        {
+          "card_id": "04-03",
+          "full_id": "英语-高一下-04-03",
+          "title": "语法：条件状语从句 (If-clauses) - 零、一、二、三类",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "条件状语从句用来描述在特定条件下可能发生或不可能发生的事情，通常由'if'引导。",
+          "core_points": [
+            "**零类条件句 (Zero Conditional):** 表达事实、真理或习惯。 (主句和从句都用一般现在时)",
+            "   结构: If + 一般现在时, + 一般现在时。",
+            "   例句: If you heat water to 100°C, it boils. (如果你把水加热到100摄氏度，它就会沸腾。)",
+            "**一类条件句 (First Conditional):** 表达将来可能发生的事情。 (从句用一般现在时，主句用一般将来时/情态动词)",
+            "   结构: If + 一般现在时, + will/can/may/might + 动词原形。",
+            "   例句: If it rains tomorrow, we will stay at home. (如果明天下雨，我们就会待在家里。)",
+            "**二类条件句 (Second Conditional):** 表达与现在或将来事实相反的假设。 (从句用一般过去时/were，主句用would/could/might + 动词原形)",
+            "   结构: If + 一般过去时/were, + would/could/might + 动词原形。",
+            "   例句: If I were a bird, I would fly to you. (如果我是一只鸟，我就会飞向你。)",
+            "**三类条件句 (Third Conditional):** 表达与过去事实相反的假设。 (从句用过去完成时，主句用would/could/might + have + 过去分词)",
+            "   结构: If + 过去完成时, + would/could/might + have + 过去分词。",
+            "   例句: If you had studied harder, you would have passed the exam. (如果你当时学习更努力，你就会通过考试了。)",
+            "**注意:** 'if'从句中不能使用'will'或'would' (除了极少数特殊情况如表示意愿)。"
+          ],
+          "why_explanation": "条件句是英语中表达因果关系和假设的重要结构。不同类型的条件句反映了说话者对假设发生可能性（事实、可能、不可能、与过去相反）的判断，这使得语言能够精确地描述各种情境。",
+          "example": {
+            "question": "根据句意，将括号中的动词填入正确的时态，并判断是哪类条件句：1. If she (come), I (tell) her the news. 2. If I (be) you, I (accept) the offer. 3. If they (not waste) water, they (not suffer) from drought last year. 4. If you (mix) red and blue, you (get) purple.",
+            "steps": [
+              "Analyze the time reference (general truth, future, present unreal, past unreal) and the possibility of the condition.",
+              "For sentence 1, 'come'和'tell'暗示将来可能发生，所以是一类条件句。",
+              "For sentence 2, 'If I were you'是典型的与现在事实相反的假设，所以是二类条件句。",
+              "For sentence 3, 'last year'暗示与过去事实相反的假设，所以是三类条件句。",
+              "For sentence 4, 'mix red and blue'是科学事实，所以是零类条件句。",
+              "Apply the corresponding conditional sentence structure for each type."
+            ],
+            "answer": "1. If she **comes**, I **will tell** her the news. (一类条件句) \n2. If I **were** you, I **would accept** the offer. (二类条件句) \n3. If they **had not wasted** water, they **would not have suffered** from drought last year. (三类条件句) \n4. If you **mix** red and blue, you **get** purple. (零类条件句)"
+          },
+          "mistakes": [
+            {
+              "wrong": "If it will rain tomorrow, we will stay at home.",
+              "correct": "If it rains tomorrow, we will stay at home.",
+              "reason": "在'if'引导的条件状语从句中，不能使用'will'来表示将来，而应使用一般现在时。"
+            },
+            {
+              "wrong": "If I was rich, I would buy a big house.",
+              "correct": "If I were rich, I would buy a big house.",
+              "reason": "在与现在事实相反的虚拟语气中，'be'动词无论主语是单数还是复数，都统一用'were'。"
+            }
+          ],
+          "memory_tip": "条件句口诀：零真理，一将来，二与现在相违背，三与过去说拜拜。记住'if'从句不能带'will'/'would'，除非特殊含义。",
+          "related": {
+            "prerequisite": "初中阶段if引导的简单条件句",
+            "next": "高级语法卡：混合条件句，省略if的条件句，虚拟语气在其他从句中的应用"
+          }
+        },
+        {
+          "card_id": "04-04",
+          "full_id": "英语-高一下-04-04",
+          "title": "语法：非谓语动词作状语 (Gerunds, Infinitives, Participles)",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "非谓语动词（动名词、不定式、分词）可以在句中作状语，表示时间、原因、目的、结果、条件、让步、伴随等。",
+          "core_points": [
+            "**动名词作状语 (Gerund as adverbial):** 较少见，通常在介词后构成介词短语作状语。",
+            "   例句: On **hearing** the news, she burst into tears. (一听到消息，她就哭了。)(时间)",
+            "   He succeeded by **working** hard. (他通过努力工作成功了。)(方式)",
+            "**不定式作状语 (Infinitive as adverbial):**",
+            "   1. 表示目的: to do (为了做某事)。例句: He works hard **to support** his family. (他努力工作为了养家。)",
+            "   2. 表示结果: to do (结果是...), only to do (结果却...). 例句: He came home **to find** his house empty. (他回到家发现房子空了。)",
+            "   3. 表示原因: to be + adj. (感到...) 例句: I'm glad **to see** you. (见到你我很高兴。)",
+            "   4. 表示条件: to do (如果...就...，常与'would'连用)。例句: **To hear** him speak, you would think he was a native speaker. (听他说话，你会以为他是本地人。)",
+            "**分词作状语 (Participle as adverbial):** (现在分词V-ing/过去分词V-ed)",
+            "   1. 表示时间: (when/while) doing/done。例句: **Walking** along the street, I met an old friend. (沿着街走的时候，我遇到了一个老朋友。)",
+            "   2. 表示原因: (because) doing/done。例句: **Having finished** his work, he went home. (因为完成了工作，他回家了。)",
+            "   3. 表示结果: doing。例句: The train was delayed, **causing** many passengers to miss their connections. (火车晚点了，导致许多乘客错过了转车。)",
+            "   4. 表示条件: (if) doing/done。例句: **Given** more time, we could do it better. (如果再多给点时间，我们可以做得更好。)",
+            "   5. 表示让步: (though) doing/done。例句: **Though knowing** the danger, he still went ahead. (尽管知道危险，他还是继续前进了。)",
+            "   6. 表示伴随状态: doing/done。例句: He sat there, **reading** a book. (他坐在那里，读着一本书。)",
+            "   **注意:** 非谓语动词作状语时，其逻辑主语通常与主句主语一致。不一致时需用独立主格结构。"
+          ],
+          "why_explanation": "非谓语动词作状语是英语中一种高效简洁的表达方式，它能将复杂的信息压缩到更短的结构中，避免冗余的从句，使句子更紧凑、更具文采。理解其逻辑主语是正确使用的关键。",
+          "example": {
+            "question": "将以下句子中的从句或并列句改为非谓语动词作状语：1. Because he was tired, he went to bed early. 2. He opened the door and found his dog waiting. 3. She studies hard so that she can pass the exam. 4. When I walked along the river, I saw a beautiful bird.",
+            "steps": [
+              "Identify the relationship between the two clauses (cause, result, purpose, time).",
+              "Determine if the subjects are the same. (In these examples, they are).",
+              "Choose the appropriate non-finite verb form (present participle for active, past participle for passive, infinitive for purpose).",
+              "For sentence 1 (cause), use a present participle: 'Being tired...'.",
+              "For sentence 2 (result/accompanying action), use a present participle: 'finding...'.",
+              "For sentence 3 (purpose), use an infinitive: 'to pass...'.",
+              "For sentence 4 (time), use a present participle: 'Walking along...'.",
+              "Formulate the new sentences."
+            ],
+            "answer": "1. **Being** tired, he went to bed early. \n2. He opened the door, **finding** his dog waiting. \n3. She studies hard **to pass** the exam. \n4. **Walking** along the river, I saw a beautiful bird."
+          },
+          "mistakes": [
+            {
+              "wrong": "Walking in the street, a car hit him.",
+              "correct": "Walking in the street, he was hit by a car. / While he was walking in the street, a car hit him.",
+              "reason": "非谓语动词作状语时，其逻辑主语必须与主句主语一致。原句中'Walking'的逻辑主语是'a car'，语意不通，造成悬垂分词 (dangling participle)。"
+            },
+            {
+              "wrong": "He went to school to study hard.",
+              "correct": "He went to school to study. / He went to school to study hard.",
+              "reason": "该句是正确的。'to study'表示目的，'hard'是副词修饰'study'。"
+            }
+          ],
+          "memory_tip": "V-ing：主动、进行、原因、时间、伴随。V-ed：被动、完成。To do：目的、结果、原因、条件。逻辑主语要一致，否则就用独立主格。",
+          "related": {
+            "prerequisite": "初中阶段动名词、不定式、分词的基本用法",
+            "next": "高级语法卡：独立主格结构"
+          }
+        },
+        {
+          "card_id": "04-05",
+          "full_id": "英语-高一下-04-05",
+          "title": "句型：There is no doubt that...",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "此句型意为“毫无疑问……”，用于强调某事是确定无疑的。",
+          "core_points": [
+            "结构: There is no doubt that + 从句 (完整句子)",
+            "强调句中从句内容的确定性。",
+            "与'It is certain that...'，'Undoubtedly,...' 含义相近，但语气更强。",
+            "例句: There is no doubt that exercise is good for health. (毫无疑问，锻炼有益健康。)",
+            "变体: There is little/some/much doubt whether/that... (对……有/没有/很多疑问)",
+            "   There is no doubt about + 名词/动名词。 (对……毫无疑问)",
+            "   例句: There is no doubt about his honesty. (对他的诚实毫无疑问。)"
+          ],
+          "why_explanation": "英语中存在多种表达确定性的方式，'There is no doubt that...' 是一种非常直接且有力的表达。它通过否定'doubt'（怀疑）来肯定从句内容的真实性，从而增强了语气的坚定性。",
+          "example": {
+            "question": "用'There is no doubt that...'改写以下句子：1. He will succeed. (他会成功。) 2. Learning English is important. (学英语很重要。)",
+            "steps": [
+              "Identify the main idea to be emphasized as certain.",
+              "Place this idea into a 'that' clause.",
+              "Combine with 'There is no doubt that...'.",
+              "For sentence 1, the certainty is 'he will succeed'.",
+              "For sentence 2, the certainty is 'learning English is important'.",
+              "Formulate the new sentences."
+            ],
+            "answer": "1. **There is no doubt that** he will succeed. \n2. **There is no doubt that** learning English is important."
+          },
+          "mistakes": [
+            {
+              "wrong": "There is no doubt if he will come.",
+              "correct": "There is no doubt that he will come.",
+              "reason": "当表示“毫无疑问”时，从句通常用'that'引导，表示确定无疑的事实。'if'引导的从句表示不确定性，与'no doubt'矛盾。"
+            },
+            {
+              "wrong": "There is no doubt to his success.",
+              "correct": "There is no doubt about his success.",
+              "reason": "当'doubt'后面接名词时，通常搭配介词'about'，构成'no doubt about sth'。"
+            }
+          ],
+          "memory_tip": "无疑问，用'no doubt that'。有疑问，用'doubt whether'。记住'doubt'和'whether'常搭配，'no doubt'和'that'常搭配。",
+          "related": {
+            "prerequisite": "初中阶段宾语从句、主语从句",
+            "next": "写作进阶卡：表示观点和论证的句型"
+          }
+        },
+        {
+          "card_id": "04-06",
+          "full_id": "英语-高一下-04-06",
+          "title": "易混词：rise vs raise",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "rise 和 raise 是一对形近易混词，都与“上升”有关，但词性、及物不及物性质和用法不同。",
+          "core_points": [
+            "**rise /raɪz/ (v.)**: 不及物动词，意为“上升，升起，提高”。主语自己向上移动，不需宾语。",
+            "   过去式: rose, 过去分词: risen。",
+            "   例句: The sun **rises** in the east. (太阳从东方升起。) \n   Prices are **rising** rapidly. (物价正在快速上涨。)",
+            "**raise /reɪz/ (v.)**: 及物动词，意为“举起，提高，抚养，募集”。主语使某物向上移动，必须有宾语。",
+            "   过去式: raised, 过去分词: raised。",
+            "   例句: Please **raise** your hand if you have a question. (如果你有问题，请举手。) \n   The company decided to **raise** salaries. (公司决定提高工资。)",
+            "   **raise (n.)**: 加薪 (美式英语)。"
+          ],
+          "why_explanation": "及物动词和不及物动词是英语动词的重要分类。'rise'是不及物动词，动作由主语自身完成，不作用于其他事物；'raise'是及物动词，动作由主语发出，作用于宾语。理解这一核心差异是正确使用的关键。",
+          "example": {
+            "question": "选择正确的词填空：1. The temperature will (rise/raise) tomorrow. 2. We need to (rise/raise) money for charity. 3. He (rose/raised) from his seat to speak. 4. The government plans to (rise/raise) taxes.",
+            "steps": [
+              "Determine if the verb needs an object (及物) or not (不及物).",
+              "For sentence 1, 'temperature'自己上升，不需要宾语，所以选'rise'。",
+              "For sentence 2, 'money'是宾语，需要一个及物动词，所以选'raise'。",
+              "For sentence 3, 'he'自己从座位上起来，不需要宾语，所以选'rose'。",
+              "For sentence 4, 'taxes'是宾语，需要一个及物动词，所以选'raise'。",
+              "Fill in the blanks."
+            ],
+            "answer": "1. The temperature will **rise** tomorrow. \n2. We need to **raise** money for charity. \n3. He **rose** from his seat to speak. \n4. The government plans to **raise** taxes."
+          },
+          "mistakes": [
+            {
+              "wrong": "He raised up early this morning.",
+              "correct": "He rose up early this morning. / He got up early this morning.",
+              "reason": "'raise'是及物动词，不能直接跟'up'表示自己起床。'rise'或'get up'才表示起床。"
+            },
+            {
+              "wrong": "The company has risen prices.",
+              "correct": "The company has raised prices.",
+              "reason": "公司使物价上涨，'prices'是宾语，需要及物动词'raise'。"
+            }
+          ],
+          "memory_tip": "Rise（不及物）自己升，Raise（及物）举起它。记住'sun rises'（太阳升起），'raise your hand'（举手）。",
+          "related": {
+            "prerequisite": "初中阶段及物动词与不及物动词",
+            "next": "易混词卡：lie vs lay"
+          }
+        },
+        {
+          "card_id": "04-07",
+          "full_id": "英语-高一下-04-07",
+          "title": "词汇深度：动词'reduce', 'decrease', 'cut down'辨析",
+          "type": "词汇深度卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "这三个动词都表示“减少”，但在语境和用法上有所侧重。",
+          "core_points": [
+            "**reduce /rɪˈdjuːs/ (v.)**: 减少，降低，使缩小。最通用，可用于数量、大小、程度等，既可及物也可不及物。",
+            "   例句: We need to **reduce** carbon emissions. (我们需要减少碳排放。)",
+            "   The number of accidents has **reduced** significantly. (事故数量显著减少了。)",
+            "**decrease /dɪˈkriːs/ (v.)**: 减少，减小。多用于数量、强度、程度等，强调逐渐或自然地减少，也可及物或不及物。",
+            "   例句: The population of the city is **decreasing**. (城市人口正在减少。)",
+            "   They decided to **decrease** their expenses. (他们决定减少开支。)",
+            "**cut down /kʌt daʊn/ (phr.v.)**: 砍倒，削减，减少。常用于砍伐树木，或主动地削减（尤指消耗量、开支等）。",
+            "   例句: We should **cut down** on sugar. (我们应该减少糖的摄入。)",
+            "   Many trees were **cut down** to build the road. (许多树被砍倒来修路。)",
+            "   注意: 'cut down on sth' 是固定搭配，表示“减少……的量或消费”。"
+          ],
+          "why_explanation": "同义词辨析是词汇学习的难点。虽然这些词都表示“减少”，但它们各自的语用范围、搭配习惯和隐含意义不同。掌握这些细微差别能让表达更精准、地道。",
+          "example": {
+            "question": "选择最合适的词填空：1. We must (reduce/decrease/cut down) our energy consumption. 2. The forest was (reduced/decreased/cut down) to make way for farming. 3. The noise level (reduced/decreased/cut down) gradually after midnight. 4. You should (reduce/decrease/cut down) on fast food.",
+            "steps": [
+              "Analyze the specific context of each sentence.",
+              "For sentence 1, 'energy consumption'是普遍性的减少，'reduce'最通用。",
+              "For sentence 2, 'forest'被砍伐，用'cut down'。",
+              "For sentence 3, 'noise level'自然地逐渐降低，'decrease'更合适。",
+              "For sentence 4, 'on fast food'是固定搭配，用'cut down on'。",
+              "Fill in the blanks."
+            ],
+            "answer": "1. We must **reduce** our energy consumption. \n2. The forest was **cut down** to make way for farming. \n3. The noise level **decreased** gradually after midnight. \n4. You should **cut down** on fast food."
+          },
+          "mistakes": [
+            {
+              "wrong": "The price of oil cut down.",
+              "correct": "The price of oil decreased. / The price of oil was reduced.",
+              "reason": "'cut down'通常指人为的削减或砍伐，或与'on'搭配表示减少消耗。价格自然下降更常用'decrease'或'reduce'。"
+            },
+            {
+              "wrong": "We need to decrease pollution.",
+              "correct": "We need to reduce pollution.",
+              "reason": "'reduce'在“减少污染”这种泛指的语境中更常用，'decrease'更强调数量或程度的逐渐减小。"
+            }
+          ],
+          "memory_tip": "Reduce：最通用，什么都能减。Decrease：渐减少，自然降。Cut down：砍倒，削减（特指消耗）。记住'cut down on sugar'。",
+          "related": {
+            "prerequisite": "初中阶段同义词辨析",
+            "next": "词汇深度：其他动词的同义词辨析"
+          }
+        },
+        {
+          "card_id": "04-08",
+          "full_id": "英语-高一下-04-08",
+          "title": "写作进阶：环境议题的观点论证模板",
+          "type": "写作进阶卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "针对环境议题的议论文写作，提供一套结构化的观点论证模板，帮助学生清晰表达立场、提供证据并提出解决方案。",
+          "core_points": [
+            "**引言 (Introduction):**",
+            "   - 引入背景：Global warming is undoubtedly one of the most pressing issues facing humanity today.",
+            "   - 提出论点：It is imperative that we take immediate and collective action to mitigate its devastating effects.",
+            "**主体段落一：问题阐述与原因分析 (Problem & Causes):**",
+            "   - 主题句：The primary cause of this environmental crisis lies in human activities.",
+            "   - 论据/细节：Specifically, the burning of fossil fuels, deforestation, and industrial emissions have led to an alarming increase in greenhouse gases.",
+            "   - 举例/数据：For instance, carbon dioxide levels have reached unprecedented highs, trapping heat and warming the planet.",
+            "**主体段落二：后果与影响 (Consequences):**",
+            "   - 主题句：The repercussions of global warming are far-reaching and pose significant threats to ecosystems and human societies.",
+            "   - 论据/细节：Rising sea levels threaten coastal communities, extreme weather events become more frequent, and biodiversity is rapidly diminishing.",
+            "   - 举例/数据：We have witnessed more severe droughts, floods, and heatwaves globally.",
+            "**主体段落三：解决方案 (Solutions):**",
+            "   - 主题句：Addressing global warming requires a multi-faceted approach involving governments, industries, and individuals.",
+            "   - 论据/细节：Governments must implement stricter environmental policies, invest in renewable energy, and promote sustainable practices. Industries should adopt greener technologies and reduce their carbon footprint. Individuals can contribute by reducing energy consumption, recycling, and advocating for change.",
+            "   - 举例/数据：Transitioning to solar and wind power, promoting public transportation, and planting more trees are viable solutions.",
+            "**结论 (Conclusion):**",
+            "   - 总结观点：In conclusion, global warming demands urgent attention and concerted efforts from all sectors of society.",
+            "   - 展望未来/呼吁：By embracing sustainable development and fostering a sense of shared responsibility, we can hope to safeguard our planet for future generations."
+          ],
+          "why_explanation": "议论文写作不仅要求有观点，更要求有严谨的逻辑和充分的论证。模板提供了一个清晰的框架，帮助学生组织思想，确保文章结构完整、论证有力，并使用恰当的连接词和高级表达。",
+          "example": {
+            "question": "请根据模板，以“如何应对塑料污染”为题，撰写一个主体段落（解决方案）。",
+            "steps": [
+              "Recall the structure of a solution paragraph: topic sentence, specific actions, examples.",
+              "Formulate a topic sentence about addressing plastic pollution.",
+              "List concrete actions that governments, industries, and individuals can take (e.g., ban single-use plastics, develop alternatives, recycle, reuse).",
+              "Provide examples for each action.",
+              "Combine these into a coherent paragraph using transition words."
+            ],
+            "answer": "Addressing plastic pollution necessitates a concerted effort from all stakeholders. Governments must enact stricter regulations, such as banning single-use plastics and promoting circular economy models. Industries should invest in biodegradable alternatives and enhance recycling technologies. Concurrently, individuals play a crucial role by reducing plastic consumption, actively participating in recycling programs, and opting for reusable products like bags and bottles. Only through these collective actions can we effectively combat this pervasive environmental threat."
+          },
+          "mistakes": [
+            {
+              "wrong": "Plastic pollution is bad. We need to stop it. It is important.",
+              "correct": "Plastic pollution poses a significant threat to our ecosystems. It is imperative that we take decisive action to curb its spread, as its environmental impact is undeniable and far-reaching.",
+              "reason": "过于口语化，缺乏正式的议论文语体和高级表达。应使用更准确、有力的词汇和句式来表达观点和重要性。"
+            },
+            {
+              "wrong": "We should recycle. Governments should make laws. Companies should make new things.",
+              "correct": "To effectively combat plastic pollution, a multi-pronged approach is essential. Individuals are encouraged to prioritize recycling and reduce consumption, while governments must implement stringent policies and companies ought to innovate sustainable alternatives.",
+              "reason": "句子之间缺乏逻辑连接和过渡，显得零散。应使用连接词和更复杂的句式来展现论证的连贯性。"
+            }
+          ],
+          "memory_tip": "环境写作：引言（背景+论点），主体（问题+原因，后果，解决方案），结论（总结+呼吁）。记住每个部分的关键句型和连接词。",
+          "related": {
+            "prerequisite": "初中阶段议论文基本结构",
+            "next": "写作进阶卡：高级句式替换，衔接过渡词"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "05",
+      "unit_name": "Module 5 The power of nature",
+      "cards": [
+        {
+          "card_id": "05-01",
+          "full_id": "英语-高一下-05-01",
+          "title": "词汇：自然灾害与紧急情况类名词",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "本单元核心词汇，主要涉及自然灾害的种类、紧急情况及其相关概念。",
+          "core_points": [
+            "earthquake /ˈɜːθkweɪk/ (n.) 地震",
+            "tsunami /tsuːˈnɑːmi/ (n.) 海啸",
+            "volcano /vɒlˈkeɪnəʊ/ (n.) 火山",
+            "hurricane /ˈhʌrɪkən/ (n.) 飓风 (大西洋)",
+            "typhoon /taɪˈfuːn/ (n.) 台风 (太平洋)",
+            "tornado /tɔːˈneɪdəʊ/ (n.) 龙卷风",
+            "drought /draʊt/ (n.) 干旱 (复习)",
+            "flood /flʌd/ (n.) 洪水 (复习)",
+            "disaster /dɪˈzɑːstə(r)/ (n.) 灾难",
+            "emergency /ɪˈmɜːdʒənsi/ (n.) 紧急情况",
+            "shelter /ˈʃeltə(r)/ (n.) 避难所；庇护"
+          ],
+          "why_explanation": "这些词汇是描述和讨论自然灾害及其影响的基础。准确掌握它们能帮助我们理解相关新闻报道、科普文章，并进行有效的沟通和应急准备。",
+          "example": {
+            "question": "请用'earthquake', 'tsunami', 'hurricane', 'disaster', 'emergency'填空。",
+            "steps": [
+              "Analyze the description in each sentence to match with the correct natural phenomenon or situation.",
+              "For sentence 1, 'shaking of the ground' points to 'earthquake'.",
+              "For sentence 2, 'giant wave' caused by an earthquake points to 'tsunami'.",
+              "For sentence 3, 'strong storm' in the Atlantic is a 'hurricane'.",
+              "For sentence 4, a 'terrible event' is a 'disaster'.",
+              "For sentence 5, a 'sudden serious situation' is an 'emergency'.",
+              "Fill in the blanks."
+            ],
+            "answer": "1. The city was hit by a severe **earthquake** last night. (昨晚这座城市遭受了一场大地震。) \n2. After the earthquake, a **tsunami** warning was issued. (地震后发布了海啸警报。) \n3. A powerful **hurricane** swept across the coast. (一场强劲的飓风横扫海岸。) \n4. The flood was a terrible **disaster** for the local community. (洪水对当地社区来说是一场可怕的灾难。) \n5. In case of an **emergency**, please dial 110. (遇到紧急情况，请拨打110。)"
+          },
+          "mistakes": [
+            {
+              "wrong": "Many people were died in the earthquake.",
+              "correct": "Many people died in the earthquake. / Many people were killed in the earthquake.",
+              "reason": "'die'是不及物动词，表示死亡。'kill'是及物动词，表示杀死，其被动语态'be killed'表示被杀害或死亡。"
+            },
+            {
+              "wrong": "The city had a big disaster.",
+              "correct": "The city suffered a big disaster. / A big disaster hit the city.",
+              "reason": "'have a disaster'不常用，通常用'suffer a disaster'（遭受灾难）或'a disaster hits/strikes'（灾难袭击）。"
+            }
+          ],
+          "memory_tip": "earthquake（地震）：earth（地球）+ quake（震动）。tsunami（海啸）：日语音译。hurricane（飓风）：大西洋的。typhoon（台风）：太平洋的。tornado（龙卷风）：像'turn'一样旋转。",
+          "related": {
+            "prerequisite": "初中阶段自然现象词汇",
+            "next": "词汇：救援与生存类动词/名词"
+          }
+        },
+        {
+          "card_id": "05-02",
+          "full_id": "英语-高一下-05-02",
+          "title": "词汇：救援与生存类动词/名词",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元核心词汇，主要涉及在灾害或紧急情况下的救援行动、生存方式及其相关词汇。",
+          "core_points": [
+            "rescue /ˈreskjuː/ (v./n.) 营救；救援",
+            "survive /səˈvaɪv/ (v.) 幸存；活下来",
+            "survival /səˈvaɪvl/ (n.) 幸存；生存",
+            "victim /ˈvɪktɪm/ (n.) 受害者",
+            "injure /ˈɪndʒə(r)/ (v.) 伤害；使受伤",
+            "wound /wuːnd/ (v./n.) 伤口；受伤 (通常指外部创伤)",
+            "first aid /ˌfɜːst ˈeɪd/ (n.phr.) 急救",
+            "supply /səˈplaɪ/ (n./v.) 供给物；供应",
+            "evacuate /ɪˈvækjueɪt/ (v.) 疏散；撤离",
+            "recover /rɪˈkʌvə(r)/ (v.) 恢复；康复"
+          ],
+          "why_explanation": "这些词汇是描述和讨论灾害响应、救援工作和个人生存的关键。它们帮助我们理解如何在危机中行动，以及如何从灾难中恢复。",
+          "example": {
+            "question": "请用'rescue', 'survive', 'victim', 'injure', 'first aid'填空。",
+            "steps": [
+              "Analyze the context of each sentence to match with the correct word.",
+              "For sentence 1, 'seek help' and 'trapped' suggest 'rescue'.",
+              "For sentence 2, 'difficult conditions' and 'alive' suggest 'survive'.",
+              "For sentence 3, 'affected by the disaster' points to 'victim'.",
+              "For sentence 4, 'accident' and 'hurt' suggest 'injure'.",
+              "For sentence 5, 'immediate help' for a small cut suggests 'first aid'.",
+              "Fill in the blanks."
+            ],
+            "answer": "1. The firefighters rushed to **rescue** the people trapped in the building. (消防员冲过去营救被困在建筑物里的人。) \n2. Few people managed to **survive** the plane crash. (很少人能在空难中幸存下来。) \n3. The earthquake **victims** received help from all over the world. (地震受害者得到了来自世界各地的帮助。) \n4. He was seriously **injured** in the car accident. (他在车祸中受了重伤。) \n5. You should apply **first aid** to the small cut immediately. (你应该立即对小伤口进行急救。)"
+          },
+          "mistakes": [
+            {
+              "wrong": "He wounded his leg.",
+              "correct": "He injured his leg. / He wounded himself (in the leg).",
+              "reason": "'injure'通常指意外导致的身体伤害。'wound'通常指由武器造成的、通常是外部的伤口，或指精神上的创伤。"
+            },
+            {
+              "wrong": "The survival of people is important.",
+              "correct": "The survival of the people is important. / People's survival is important.",
+              "reason": "'survival'是抽象名词，当特指“这些人的生存”时，需加定冠词或所有格。"
+            }
+          ],
+          "memory_tip": "rescue（救援）：r-e-s-c-u-e，像'rest'（休息）后'cue'（提示）行动。survive（幸存）：super（超）+ live（活），超常地活下来。victim（受害者）：v-i-c-t-i-m，像'victory'（胜利）的反面。",
+          "related": {
+            "prerequisite": "初中阶段动词和名词的辨析",
+            "next": "词汇深度：同义词辨析 (injure, wound, hurt)"
+          }
+        },
+        {
+          "card_id": "05-03",
+          "full_id": "英语-高一下-05-03",
+          "title": "语法：定语从句 (Relative Clauses) - 限制性与非限制性",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "定语从句修饰先行词，提供额外信息。根据其与先行词的关系，分为限制性定语从句和非限制性定语从句。",
+          "core_points": [
+            "**限制性定语从句 (Restrictive Relative Clause):**",
+            "   - 对先行词进行限定或修饰，使其意义完整。若省略，主句意义不完整或发生改变。",
+            "   - 不用逗号与主句隔开。",
+            "   - 关系代词: who (指人, 主格), whom (指人, 宾格), whose (指人/物, 定语), which (指物, 主格/宾格), that (指人/物, 主格/宾格)。",
+            "   - 关系副词: when (时间), where (地点), why (原因)。",
+            "   - **that** 可以指人也可以指物，在限制性定语从句中常常可以替代'who'/'whom'/'which'，且作宾语时可以省略。",
+            "   - 例句: This is the student **who won the prize**. (这是赢得奖品的学生。) (限定了是哪个学生)",
+            "**非限制性定语从句 (Non-restrictive Relative Clause):**",
+            "   - 对先行词进行补充说明，提供附加信息。若省略，主句意义仍完整。",
+            "   - 必须用逗号 (或破折号) 与主句隔开。",
+            "   - 关系代词: who (指人), whom (指人), whose (指人/物), which (指物)。",
+            "   - 关系副词: when (时间), where (地点)。",
+            "   - **that** 不能用于引导非限制性定语从句。",
+            "   - **which** 可以指代前面整个主句的内容。",
+            "   - 例句: My brother, **who lives in Beijing**, is coming to visit. (我哥哥，他住在北京，要来探望我。) (即使去掉'who lives in Beijing'，'My brother is coming to visit'也完整)",
+            "   - 例句: He passed the exam, **which made his parents very happy**. (他通过了考试，这让他的父母非常高兴。) (which指代前面整个句子)"
+          ],
+          "why_explanation": "定语从句的本质是简化了的并列句或状语从句。通过关系词，它将两个句子连接起来，使信息表达更紧凑。限制性和非限制性的区分，反映了信息在句子中的重要性和修饰范围，是英语逻辑思维的体现。",
+          "example": {
+            "question": "判断以下定语从句是限制性还是非限制性，并选择合适的关系词填空：1. This is the book ( ) I bought yesterday. 2. My uncle, ( ) is a doctor, lives in London. 3. He made a promise, ( ) he failed to keep. 4. I still remember the day ( ) we first met.",
+            "steps": [
+              "Analyze if the information in the clause is essential or supplementary.",
+              "For sentence 1, 'I bought yesterday'限定了是哪本书，且先行词是物，所以是限制性，可用'which'或'that'，且可省略。",
+              "For sentence 2, 'My uncle'是特指，后面是补充信息，有逗号，所以是非限制性，指人，用'who'。",
+              "For sentence 3, 'he failed to keep'补充说明了promise，有逗号，且指物，所以是非限制性，用'which'。",
+              "For sentence 4, 'the day'是时间先行词，后面是时间状语从句，用'when'。",
+              "Fill in the blanks and identify the type."
+            ],
+            "answer": "1. This is the book **(which/that)** I bought yesterday. (限制性定语从句，关系词可省略) \n2. My uncle, **who** is a doctor, lives in London. (非限制性定语从句) \n3. He made a promise, **which** he failed to keep. (非限制性定语从句) \n4. I still remember the day **when** we first met. (限制性定语从句)"
+          },
+          "mistakes": [
+            {
+              "wrong": "This is my brother, that lives in London.",
+              "correct": "This is my brother, who lives in London.",
+              "reason": "'that'不能引导非限制性定语从句，非限制性从句指人时用'who'。"
+            },
+            {
+              "wrong": "He said something that made me angry.",
+              "correct": "He said something that made me angry.",
+              "reason": "该句正确。'that'引导限制性定语从句，修饰'something'，且作主语。"
+            }
+          ],
+          "memory_tip": "限制性：不加逗号，限定先行词，'that'万能（除了介词后），宾格可省。非限制性：加逗号，补充说明，'that'不能用，'which'可指代前句。",
+          "related": {
+            "prerequisite": "初中阶段定语从句基础",
+            "next": "高级语法卡：定语从句中的介词前置，as引导的定语从句"
+          }
+        },
+        {
+          "card_id": "05-04",
+          "full_id": "英语-高一下-05-04",
+          "title": "高级语法：倒装句 (Inversion) - 局部倒装与完全倒装",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "倒装句指语序不同于正常主谓语序的句子。分为局部倒装（只倒装谓语的一部分，如助动词）和完全倒装（谓语动词全部置于主语之前）。",
+          "core_points": [
+            "**局部倒装 (Partial Inversion):**",
+            "   - 结构: 助动词/情态动词/be动词 + 主语 + 谓语动词的其余部分。",
+            "   - 常见情况:",
+            "     1. 否定词或半否定词 (never, hardly, seldom, rarely, little, few, no sooner...than, not until..., only when/if/after/by...) 置于句首时。",
+            "        例句: **Never before have I seen** such a beautiful sight. (我从未见过如此美丽的景象。)",
+            "        **Not until** he came back **did I know** the truth. (直到他回来我才知道真相。)",
+            "     2. 'So...that...' 中的 'so' 或 'such...that...' 中的 'such' 置于句首时。",
+            "        例句: **So exciting was the game that** we forgot to eat. (比赛太精彩了，我们都忘了吃饭。)",
+            "     3. 'only + 状语' 置于句首时。",
+            "        例句: **Only in this way can we solve** the problem. (只有这样我们才能解决问题。)",
+            "     4. 'no matter how/what/where/when...' 引导的让步状语从句 (或省略)。",
+            "        例句: **No matter how difficult the task is**, we will finish it. (无论任务多困难，我们都会完成。)",
+            "     5. 虚拟语气中省略'if'时 (Were I..., Had I..., Should I...)。",
+            "        例句: **Were I you**, I would accept the offer. (如果我是你，我就会接受这个提议。)",
+            "**完全倒装 (Full Inversion):**",
+            "   - 结构: 谓语动词 + 主语 (通常是be动词或表示位置、方向的不及物动词)。",
+            "   - 常见情况:",
+            "     1. 以地点状语、方向状语 (here, there, in the room, out, down, up...) 开头，谓语动词是be, come, go, lie, stand, run等不及物动词，且主语是名词时。",
+            "        例句: **Here comes the bus**. (公共汽车来了。) \n        **In front of the house stood a tall tree**. (房子前面立着一棵高大的树。)",
+            "     2. 某些表语置于句首时 (如'lucky', 'happy')，主语是名词。",
+            "        例句: **Lucky are those who have a good education**. (那些受过良好教育的人是幸运的。)",
+            "   - **注意:** 当主语是代词时，通常不完全倒装，保持正常语序。例句: Here it comes. (它来了。)"
+          ],
+          "why_explanation": "倒装是英语中一种重要的修辞手法和语法现象，它能起到强调、突出、使句式富于变化等作用。通过改变语序，可以吸引读者的注意力，增强表达的生动性和感染力。理解倒装的底层逻辑（如否定词前置导致强调）有助于掌握其用法。",
+          "example": {
+            "question": "将以下句子改为倒装句：1. I have never seen such a beautiful garden. 2. The little girl ran out of the room. 3. He didn't realize the importance of time until he failed. 4. If I had known the truth, I would have told you.",
+            "steps": [
+              "For sentence 1, 'never'是否定词，前置，所以用局部倒装。",
+              "For sentence 2, 'out of the room'是方向状语，主语是名词，所以用完全倒装。",
+              "For sentence 3, 'not until...'是否定词组，前置，所以用局部倒装。",
+              "For sentence 4,是虚拟语气省略'if'的情况，用局部倒装。",
+              "应用相应的倒装规则，重构句子。"
+            ],
+            "answer": "1. **Never have I seen** such a beautiful garden. \n2. **Out of the room ran the little girl**. \n3. **Not until he failed did he realize** the importance of time. \n4. **Had I known** the truth, I would have told you."
+          },
+          "mistakes": [
+            {
+              "wrong": "Hardly he had finished his work when he went out.",
+              "correct": "Hardly had he finished his work when he went out.",
+              "reason": "否定副词'hardly'置于句首时，主句要用局部倒装，即将助动词'had'提前到主语'he'之前。"
+            },
+            {
+              "wrong": "Here comes it.",
+              "correct": "Here it comes.",
+              "reason": "当完全倒装句的主语是代词时，不发生倒装，保持正常语序。"
+            }
+          ],
+          "memory_tip": "倒装：否定词、only状语放句首，助动词/情态词往前走（局部倒装）。地点、方向状语放句首，主语是名词，动词紧随其后（完全倒装）。主语是代词，不完全倒装！",
+          "related": {
+            "prerequisite": "初中阶段疑问句的语序，虚拟语气",
+            "next": "高级语法卡：强调句的特殊倒装，as引导的倒装"
+          }
+        },
+        {
+          "card_id": "05-05",
+          "full_id": "英语-高一下-05-05",
+          "title": "高级语法：虚拟语气 (Subjunctive Mood) - 表示愿望、建议、命令",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "虚拟语气用于表达与事实相反的假设、愿望、建议、命令、要求等，表示一种非真实或未发生的状况。",
+          "core_points": [
+            "**1. 表示愿望 (Wish):**",
+            "   - wish + 过去式 (与现在事实相反的愿望)",
+            "     例句: I **wish I were** a bird. (我希望我是一只鸟。)",
+            "   - wish + 过去完成时 (与过去事实相反的愿望)",
+            "     例句: I **wish I hadn't said** that. (我希望我当时没说那句话。)",
+            "   - wish + would/could + 动词原形 (表示对将来或现在无法实现愿望的抱怨/遗憾)",
+            "     例句: I **wish you would stop** making so much noise. (我希望你别再制造这么多噪音了。)",
+            "**2. 表示建议、命令、要求 (Suggest, Order, Demand, Request, Advise, Insist等动词):**",
+            "   - 结构: 主语 + suggest/order/demand... + that + (should) + 动词原形。",
+            "     例句: I **suggest that he (should) go** to the doctor. (我建议他去看医生。)",
+            "     例句: The teacher **ordered that the students (should) hand in** their homework. (老师命令学生交作业。)",
+            "   - 动词后的名词性从句也用虚拟语气。",
+            "     例句: It is suggested/ordered/demanded that + (should) + 动词原形。",
+            "     例句: It is **suggested that** the meeting **(should) be** postponed. (建议会议延期。)",
+            "**3. 表示“好像，仿佛” (As if/As though):**",
+            "   - as if/as though + 过去式 (与现在事实相反)",
+            "     例句: He talks **as if he knew** everything. (他说话好像他什么都知道。)",
+            "   - as if/as though + 过去完成时 (与过去事实相反)",
+            "     例句: She looked **as if she had seen** a ghost. (她看起来好像看到了鬼。)",
+            "**4. 用于It's (high/about) time... 句型:**",
+            "   - It's (high/about) time + 主语 + 过去式 (表示“是时候做某事了”)",
+            "     例句: It's high time **we went** home. (我们该回家了。)"
+          ],
+          "why_explanation": "虚拟语气是英语中表达非真实情态的核心机制。它通过改变动词形式，明确地区分了事实与假设、愿望与现实。这种语法结构反映了说话者对事件真实性的主观判断，是英语精确表达不可或缺的一部分。",
+          "example": {
+            "question": "根据句意，用虚拟语气完成句子：1. I wish I (have) a longer vacation now. 2. He suggested that we (start) early. 3. She behaves as if she (be) a queen. 4. It's time we (leave).",
+            "steps": [
+              "For sentence 1, 'now'表示与现在事实相反的愿望，用过去式。",
+              "For sentence 2, 'suggested that'引导的从句用'(should) + 动词原形'。",
+              "For sentence 3, 'as if'表示与现在事实相反的假设，用过去式（be动词用were）。",
+              "For sentence 4, 'It's time'句型后用过去式。",
+              "填入正确的动词形式。"
+            ],
+            "answer": "1. I wish I **had** a longer vacation now. \n2. He suggested that we **(should) start** early. \n3. She behaves as if she **were** a queen. \n4. It's time we **left**."
+          },
+          "mistakes": [
+            {
+              "wrong": "I wish I am a bird.",
+              "correct": "I wish I were a bird.",
+              "reason": "在'wish'引导的与现在事实相反的虚拟语气中，'be'动词统一用'were'，无论主语是单数还是复数。"
+            },
+            {
+              "wrong": "He suggested that he goes to the party.",
+              "correct": "He suggested that he (should) go to the party.",
+              "reason": "在'suggest'等表示建议的动词后的'that'从句中，谓语动词用动词原形（可加'should'）。"
+            }
+          ],
+          "memory_tip": "虚拟语气：'wish'后跟过去时（与现在反），过去完成时（与过去反）。建议命令：'that'后'should'加原形，'should'可省略。'as if'/'as though'后也跟过去式。'It's time'后跟过去时。",
+          "related": {
+            "prerequisite": "初中阶段条件状语从句的虚拟语气",
+            "next": "高级语法卡：虚拟语气在名词性从句中的特殊应用"
+          }
+        },
+        {
+          "card_id": "05-06",
+          "full_id": "英语-高一下-05-06",
+          "title": "句型：It was not until... that...",
+          "type": "句型卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "这是一个强调句型，意为“直到……才……”，用来强调时间状语。",
+          "core_points": [
+            "结构: It was not until + 时间状语/从句 + that + 主句 (通常为肯定形式)。",
+            "强调句的主语'It'没有实际意义，谓语动词通常是'was' (因为强调过去的时间点)。",
+            "强调部分是'not until...'，表示在某个时间点之前，主句的动作都没有发生。",
+            "例句: **It was not until** midnight **that** he finished his work. (直到午夜他才完成工作。)",
+            "变体（倒装）: 当'not until'结构置于句首时，主句需要进行部分倒装。",
+            "   结构: Not until + 时间状语/从句 + 助动词/情态动词/be动词 + 主语 + 谓语动词的其余部分。",
+            "   例句: **Not until** midnight **did he finish** his work. (直到午夜他才完成工作。)",
+            "   注意: 'not until'引导的是一个状语从句，主句的动词形式要根据具体语境确定，但通常是过去时。"
+          ],
+          "why_explanation": "强调句是英语中一种重要的修辞手段，通过改变语序或添加结构来突出句子中的某一成分。'It was not until... that...' 句型通过将'not until'置于'It was...that...'的强调结构中，有力地突出了动作发生的时间点，使表达更具强调性。",
+          "example": {
+            "question": "用'It was not until... that...'或'Not until...倒装'改写以下句子：1. He learned to swim when he was ten. 2. I didn't realize my mistake until you told me. 3. She didn't come back until it got dark.",
+            "steps": [
+              "Identify the time point or time clause after 'until'.",
+              "For 'It was not until... that...' structure, place the time phrase after 'until', and the main clause (in affirmative) after 'that'.",
+              "For 'Not until...倒装' structure, place 'Not until' at the beginning, then the time phrase, then apply partial inversion to the main clause (e.g., 'did he learn', 'did I realize', 'did she come back').",
+              "Construct the sentences."
+            ],
+            "answer": "1. **It was not until** he was ten **that** he learned to swim. / **Not until** he was ten **did he learn** to swim. \n2. **It was not until** you told me **that** I realized my mistake. / **Not until** you told me **did I realize** my mistake. \n3. **It was not until** it got dark **that** she came back. / **Not until** it got dark **did she come back**."
+          },
+          "mistakes": [
+            {
+              "wrong": "It was not until he came back I knew the truth.",
+              "correct": "It was not until he came back that I knew the truth.",
+              "reason": "强调句型'It was...that...'中的'that'不能省略。"
+            },
+            {
+              "wrong": "Not until he came back I knew the truth.",
+              "correct": "Not until he came back did I know the truth.",
+              "reason": "'Not until'置于句首时，主句需要进行部分倒装，即助动词'did'提前到主语'I'之前。"
+            }
+          ],
+          "memory_tip": "强调时间“直到才”：'It was not until...that...'，'that'不能省。'Not until...'放句首，主句倒装别忘记。",
+          "related": {
+            "prerequisite": "初中阶段强调句型，倒装句",
+            "next": "高级语法卡：其他强调句型"
+          }
+        },
+        {
+          "card_id": "05-07",
+          "full_id": "英语-高一下-05-07",
+          "title": "易混词：lie vs lay",
+          "type": "易混词卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "lie 和 lay 是一对形近易混词，它们在词性、及物不及物性质和过去式/过去分词形式上都有所不同。",
+          "core_points": [
+            "**lie (不及物动词)**: 躺；位于；平放；说谎。",
+            "   1. '躺；位于；平放' (不及物): 过去式 **lay**, 过去分词 **lain**。",
+            "      例句: The book **is lying** on the table. (书躺在桌子上。) \n      He **lay** in bed all morning. (他上午一直躺在床上。) \n      The city **lies** on the coast. (这座城市位于海岸边。)",
+            "   2. '说谎' (不及物): 过去式 **lied**, 过去分词 **lied**。",
+            "      例句: Don't **lie** to me. (别对我撒谎。)",
+            "**lay (及物动词)**: 放置；产卵；铺设。",
+            "   1. '放置' (及物): 过去式 **laid**, 过去分词 **laid**。",
+            "      例句: Please **lay** the book on the table. (请把书放在桌子上。) \n      She **laid** the baby in the crib. (她把婴儿放在摇篮里。)",
+            "   2. '产卵' (及物): 过去式 **laid**, 过去分词 **laid**。",
+            "      例句: Hens **lay** eggs. (母鸡下蛋。)"
+          ],
+          "why_explanation": "这组词是英语中典型的“不规则动词”和“及物/不及物”动词辨析难点。它们的形态变化和词性差异是区分的关键。理解动词是否需要宾语，是判断其及物不及物性质的根本。",
+          "example": {
+            "question": "选择正确的动词形式填空：1. The cat likes to (lie/lay) in the sun. 2. Please (lie/lay) your coat on the chair. 3. He (lay/laid) down for a nap after lunch. 4. She felt terrible because she had (lied/laid) to her friend.",
+            "steps": [
+              "Determine if the action requires an object (及物) or if the subject performs the action on itself (不及物).",
+              "For sentence 1, 'cat'自己躺，不及物，用'lie'。",
+              "For sentence 2, 'coat'是宾语，需要及物动词，用'lay'。",
+              "For sentence 3, 'he'自己躺下，不及物，用'lie'的过去式'lay'。",
+              "For sentence 4, 'to her friend'暗示“说谎”，不及物，用'lie'的过去分词'lied'。",
+              "填入正确的动词形式。"
+            ],
+            "answer": "1. The cat likes to **lie** in the sun. \n2. Please **lay** your coat on the chair. \n3. He **lay** down for a nap after lunch. \n4. She felt terrible because she had **lied** to her friend."
+          },
+          "mistakes": [
+            {
+              "wrong": "The book lays on the table.",
+              "correct": "The book lies on the table.",
+              "reason": "书自己“位于/平放”在桌子上，是不及物动作，应使用'lie'的第三人称单数形式'lies'。"
+            },
+            {
+              "wrong": "He laid in bed all morning.",
+              "correct": "He lay in bed all morning.",
+              "reason": "他自己“躺在”床上，是不及物动作，应使用'lie'的过去式'lay'。"
+            }
+          ],
+          "memory_tip": "lie（躺/位于）- lay - lain，自己躺下，不需宾语。lie（说谎）- lied - lied，说谎是特例。lay（放置/产卵）- laid - laid，放东西需要宾语。记住：'lay'的现在时是'lie'的过去式。",
+          "related": {
+            "prerequisite": "初中阶段不规则动词，及物动词与不及物动词",
+            "next": "易混词卡：sit vs set"
+          }
+        },
+        {
+          "card_id": "05-08",
+          "full_id": "英语-高一下-05-08",
+          "title": "词汇深度：动词'destroy', 'damage', 'ruin'辨析",
+          "type": "词汇深度卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "这三个动词都表示“破坏”，但程度、对象和语境有所不同。",
+          "core_points": [
+            "**destroy /dɪˈstrɔɪ/ (v.)**: 彻底摧毁，毁灭。指将某物完全破坏，使其不复存在或无法修复。",
+            "   例句: The earthquake **destroyed** the entire city. (地震摧毁了整个城市。)",
+            "   War can **destroy** people's lives. (战争能毁掉人们的生活。)",
+            "**damage /ˈdæmɪdʒ/ (v.)**: 损害，破坏。指对某物造成部分损坏，使其价值、功能或外观受损，但通常仍可修复或部分使用。",
+            "   例句: The fire **damaged** the roof, but the house is still standing. (火灾损坏了屋顶，但房子还在。)",
+            "   Smoking can **damage** your health. (吸烟会损害你的健康。)",
+            "**ruin /ˈruːɪn/ (v.)**: 毁坏，使破产，使堕落。指彻底破坏某物的价值、功能或前途，使其变得毫无用处，常用于抽象事物或导致破败。",
+            "   例句: The scandal **ruined** his career. (丑闻毁了他的事业。)",
+            "   The heavy rain **ruined** our picnic. (大雨毁了我们的野餐。)",
+            "   **ruin (n.)**: 废墟；毁灭。"
+          ],
+          "why_explanation": "理解同义词的细微差别是提高词汇精准度的关键。这些词虽然都表示“破坏”，但各自侧重于破坏的程度（彻底性 vs 部分性）、对象（物质 vs 抽象）和后果，反映了英语表达的精确性。",
+          "example": {
+            "question": "选择最合适的词填空：1. The flood (destroyed/damaged/ruined) the crops. 2. A small fire (destroyed/damaged/ruined) part of the building. 3. His reputation was completely (destroyed/damaged/ruined) by the false accusations. 4. The storm (destroyed/damaged/ruined) the old bridge beyond repair.",
+            "steps": [
+              "Analyze the extent and nature of the destruction described in each sentence.",
+              "For sentence 1, 'crops'被毁坏，使其无法使用，用'ruined'或'destroyed'，'ruined'更强调价值丧失。",
+              "For sentence 2, 'part of the building'被破坏，但建筑还在，是部分受损，用'damaged'。",
+              "For sentence 3, 'reputation'被彻底破坏，使其无法恢复，用'ruined'或'destroyed'，'ruined'更强调声誉的丧失。",
+              "For sentence 4, 'beyond repair'强调彻底性，用'destroyed'。",
+              "填入最合适的词。"
+            ],
+            "answer": "1. The flood **ruined/destroyed** the crops. \n2. A small fire **damaged** part of the building. \n3. His reputation was completely **ruined** by the false accusations. \n4. The storm **destroyed** the old bridge beyond repair."
+          },
+          "mistakes": [
+            {
+              "wrong": "The earthquake damaged the city.",
+              "correct": "The earthquake destroyed the city.",
+              "reason": "地震通常是彻底性的破坏，使城市不复存在或无法居住，用'destroy'更合适。'damage'通常指部分损坏，可修复。"
+            },
+            {
+              "wrong": "He destroyed his career by making bad decisions.",
+              "correct": "He ruined his career by making bad decisions.",
+              "reason": "通常用'ruin one's career'表示毁掉某人的事业前途，强调事业的价值和未来被破坏，'destroy'则更强调物理上的毁灭。"
+            }
+          ],
+          "memory_tip": "Destroy：彻底毁灭，无法修复。Damage：部分损害，仍可修复。Ruin：毁坏价值/前途，使破败。记住：'destroy'是物理上的彻底，'ruin'是价值上的彻底。",
+          "related": {
+            "prerequisite": "初中阶段同义词辨析",
+            "next": "词汇深度：其他动词的同义词辨析"
+          }
+        }
+      ]
+    }
+  ]
+}

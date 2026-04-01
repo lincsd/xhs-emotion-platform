@@ -1,0 +1,1233 @@
+{
+  "subject": "英语",
+  "grade": "九年级",
+  "semester": "上册",
+  "textbook": "人教版",
+  "grade_short": "九上",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片（全知识点覆盖版）",
+  "units": [
+    {
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [
+        {
+          "card_id": "T1-01",
+          "full_id": "英语-九上-T1-01",
+          "title": "Spend/Cost/Take/Pay，傻傻分不清？",
+          "type": "易混词陷阱",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "这组动词都与“花费”有关，但用法和主语大相径庭。",
+          "core_points": [
+            "Spend (人+spend+时间/金钱+on sth/doing sth): 主语是人，花费时间或金钱。",
+            "Cost (物/事+cost+人+金钱): 主语是物或事，表示花费金钱。",
+            "Take (物/事+take+人+时间+to do sth): 主语是物或事，表示花费时间。",
+            "Pay (人+pay+金钱+for sth): 主语是人，支付金钱购买某物。"
+          ],
+          "why_explanation": "中文里一个“花”字涵盖了所有，但英语必须区分“谁花”、“花什么”、“花在什么上”。",
+          "example": {
+            "question": "选词填空：It ____ me two hours to finish the homework. I ____ 50 yuan ____ the book. She ____ a lot of time ____ reading.",
+            "steps": [
+              "分析句子主语和宾语类型：第一个句子主语是'it'，宾语是'me'和'two hours'，表示花费时间，用take。",
+              "第二个句子主语是'I'，宾语是'50 yuan'和'the book'，表示支付金钱购买，用pay...for。",
+              "第三个句子主语是'She'，宾语是'a lot of time'和'reading'，表示花费时间做某事，用spend...doing。"
+            ],
+            "answer": "It took me two hours to finish the homework. I paid 50 yuan for the book. She spent a lot of time reading."
+          },
+          "mistakes": [
+            {
+              "wrong": "The book spent me 50 yuan.",
+              "correct": "The book cost me 50 yuan.",
+              "reason": "Cost的主语是物，spend的主语是人。"
+            },
+            {
+              "wrong": "I took 50 yuan for the book.",
+              "correct": "I paid 50 yuan for the book.",
+              "reason": "Take表示花费时间，pay表示支付金钱。"
+            }
+          ],
+          "memory_tip": "人spend钱和时间，物cost人钱，物take人时间，人pay钱for物。",
+          "emotion_hook": "每次写“花费”都卡壳？别让这些词再给你挖坑了！"
+        },
+        {
+          "card_id": "T1-02",
+          "full_id": "英语-九上-T1-02",
+          "title": "Borrow vs Lend：借进借出，一字之差大不同！",
+          "type": "易混词陷阱",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "`borrow` 表示“借入”，`lend` 表示“借出”。方向相反。",
+          "core_points": [
+            "Borrow (from sb): 从某人那里借入，强调“拿进来”。",
+            "Lend (to sb): 借给某人，强调“给出去”。",
+            "主语不同：borrow的主语是借入者，lend的主语是借出者。",
+            "常考句型：Can I borrow...? / Will you lend me...?"
+          ],
+          "why_explanation": "中文里“借”可以指借入也可以指借出，但英语必须明确动作的方向。",
+          "example": {
+            "question": "选词填空：Can I ____ your pen? (借你的笔) / My friend ____ me a book. (我的朋友借给我一本书)",
+            "steps": [
+              "第一个句子是“我”向你借，是借入，用borrow。",
+              "第二个句子是“我的朋友”借给我，是借出，用lend。"
+            ],
+            "answer": "Can I borrow your pen? / My friend lent me a book."
+          },
+          "mistakes": [
+            {
+              "wrong": "Could you borrow me some money?",
+              "correct": "Could you lend me some money?",
+              "reason": "主语'you'是借出者，应使用lend。"
+            },
+            {
+              "wrong": "I lent a book from the library.",
+              "correct": "I borrowed a book from the library.",
+              "reason": "主语'I'是借入者，应使用borrow。"
+            }
+          ],
+          "memory_tip": "Borrow in, Lend out!",
+          "emotion_hook": "一个单词用错，意思完全反了！你中招了吗？"
+        },
+        {
+          "card_id": "T1-03",
+          "full_id": "英语-九上-T1-03",
+          "title": "Say/Speak/Talk/Tell：说话的艺术，你掌握了吗？",
+          "type": "易混词陷阱",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "这四个词都表示“说”，但侧重点、搭配和用法各不相同。",
+          "core_points": [
+            "Say (said sth to sb): 强调“说出”具体内容，常接宾语从句或直接引语，不直接跟人。",
+            "Speak (to/with sb, speak about sth, speak a language): 强调“说话”的动作本身，或指“说某种语言”，或正式场合讲话。",
+            "Talk (to/with sb, talk about sth): 强调“交谈”，有互动性，非正式。",
+            "Tell (tell sb sth, tell sb to do sth): 强调“告知”信息，常接双宾语（人+事），或“吩咐/命令”。"
+          ],
+          "why_explanation": "中文一个“说”字解决，英语则根据语境、宾语类型和强调的侧重点选择不同动词。",
+          "example": {
+            "question": "选词填空：He ____ me a funny story. / Please ____ hello to your parents. / They often ____ about their hobbies. / Can you ____ English?",
+            "steps": [
+              "第一个句子有双宾语'me'和'a funny story'，是“告诉”某人某事，用tell。",
+              "第二个句子是“说出”具体内容'hello'，用say。",
+              "第三个句子是“谈论”某事，有互动性，用talk。",
+              "第四个句子是“说某种语言”，用speak。"
+            ],
+            "answer": "He told me a funny story. / Please say hello to your parents. / They often talk about their hobbies. / Can you speak English?"
+          },
+          "mistakes": [
+            {
+              "wrong": "He said me a secret.",
+              "correct": "He told me a secret.",
+              "reason": "Say不能直接接双宾语，表示“告诉某人某事”要用tell。"
+            },
+            {
+              "wrong": "I talked English well.",
+              "correct": "I speak English well.",
+              "reason": "表示说某种语言用speak。"
+            }
+          ],
+          "memory_tip": "Say内容，Tell人话，Speak语言和演讲，Talk唠嗑。",
+          "emotion_hook": "别再“说”错了！这四个词让你在口语和写作中更地道！"
+        },
+        {
+          "card_id": "T1-04",
+          "full_id": "英语-九上-T1-04",
+          "title": "Fun vs Funny：有趣和好笑，可不是一回事！",
+          "type": "易混词陷阱",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "`fun` 指“乐趣、好玩”，是名词或形容词；`funny` 指“滑稽的、好笑的”，是形容词。",
+          "core_points": [
+            "Fun (n.): 乐趣，可数或不可数名词。e.g., have fun, for fun.",
+            "Fun (adj.): 有趣的，好玩的。e.g., a fun game, It's fun to play.",
+            "Funny (adj.): 滑稽的，好笑的，令人发笑的。e.g., a funny joke, he is a funny man.",
+            "区别：fun强调愉快、享受；funny强调引人发笑。"
+          ],
+          "why_explanation": "中文都叫“有趣”，但英语区分了“令人愉快的”和“令人发笑的”。",
+          "example": {
+            "question": "选词填空：The clown was very ____. We had a lot of ____ at the party. It's ____ to learn English.",
+            "steps": [
+              "第一个句子描述小丑的特性，是“滑稽的”，用funny。",
+              "第二个句子表示“有很多乐趣”，用fun。",
+              "第三个句子表示“学习英语是件愉快的事”，用fun作形容词。"
+            ],
+            "answer": "The clown was very funny. We had a lot of fun at the party. It's fun to learn English."
+          },
+          "mistakes": [
+            {
+              "wrong": "The movie was very funny. (指电影很好看，让人享受)",
+              "correct": "The movie was very fun. / The movie was a lot of fun.",
+              "reason": "如果想表达“电影很有趣，令人享受”，用fun；如果指“电影很搞笑”，才用funny。"
+            },
+            {
+              "wrong": "He told a fun story.",
+              "correct": "He told a funny story.",
+              "reason": "故事让人发笑，用funny。"
+            }
+          ],
+          "memory_tip": "Fun是享受，Funny是笑点。",
+          "emotion_hook": "别再用错“有趣”了！一秒区分fun和funny，告别尴尬！"
+        },
+        {
+          "card_id": "T1-05",
+          "full_id": "英语-九上-T1-05",
+          "title": "Hear vs Listen to：耳朵的秘密，你听懂了吗？",
+          "type": "易混词陷阱",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "`hear` 指“听到”，强调无意中接收到声音；`listen to` 指“听”，强调有意识、主动地去听。",
+          "core_points": [
+            "Hear (v.): 听到，是感官动词，表示听觉能力或偶然听到。",
+            "Listen to (v. phrase): 听，强调主动、集中注意力去听。to是介词，不可省略。",
+            "区别：hear是被动的，listen to是主动的。",
+            "常见搭配：hear a noise, hear sb doing sth; listen to music, listen to a speech."
+          ],
+          "why_explanation": "中文里“听”可以指听到也可以指倾听，英语则区分了听觉的被动接收和主动行为。",
+          "example": {
+            "question": "选词填空：I ____ a strange noise outside. / We often ____ music after dinner. / Can you ____ what he is ____?",
+            "steps": [
+              "第一个句子是“听到”一个噪音，是无意中接收，用hear。",
+              "第二个句子是“听音乐”，是主动行为，用listen to。",
+              "第三个句子是“你能听到他正在说什么吗？”第一个空是听到，第二个空是主动听。"
+            ],
+            "answer": "I heard a strange noise outside. / We often listen to music after dinner. / Can you hear what he is saying?"
+          },
+          "mistakes": [
+            {
+              "wrong": "I often hear to music.",
+              "correct": "I often listen to music.",
+              "reason": "听音乐是主动行为，用listen to。"
+            },
+            {
+              "wrong": "He listened a dog barking.",
+              "correct": "He heard a dog barking.",
+              "reason": "偶然听到狗叫，是被动接收，用hear。"
+            }
+          ],
+          "memory_tip": "Hear是被动，Listen to是主动。",
+          "emotion_hook": "耳朵接收信息，可不只是一个“听”字这么简单！"
+        },
+        {
+          "card_id": "T1-06",
+          "full_id": "英语-九上-T1-06",
+          "title": "Look for vs Find：寻找与发现，结果是关键！",
+          "type": "易混词陷阱",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "`look for` 指“寻找”，强调过程；`find` 指“找到，发现”，强调结果。",
+          "core_points": [
+            "Look for (v. phrase): 寻找，是一个动作过程，不一定有结果。",
+            "Find (v.): 找到，发现，是一个动作的结果，通常指找到了。",
+            "区别：look for是动作，find是结果。",
+            "常见搭配：look for a job, look for keys; find a solution, find a lost item."
+          ],
+          "why_explanation": "中文里“找”可以指寻找也可以指找到，但英语明确区分了“在找”和“找到了”。",
+          "example": {
+            "question": "选词填空：I'm ____ my lost keys. Have you ____ them? / Scientists are still ____ a cure for the disease.",
+            "steps": [
+              "第一个句子前半句是“我正在寻找”，强调过程，用looking for。",
+              "第一个句子后半句是“你找到它们了吗？”，强调结果，用found。",
+              "第二个句子是“科学家们仍在寻找”，强调过程，用looking for。"
+            ],
+            "answer": "I'm looking for my lost keys. Have you found them? / Scientists are still looking for a cure for the disease."
+          },
+          "mistakes": [
+            {
+              "wrong": "I found my keys for an hour.",
+              "correct": "I looked for my keys for an hour.",
+              "reason": "for an hour表示持续时间，强调过程，应使用look for。"
+            },
+            {
+              "wrong": "After a long time, I looked for my wallet.",
+              "correct": "After a long time, I found my wallet.",
+              "reason": "“After a long time”表示最终有了结果，应使用find。"
+            }
+          ],
+          "memory_tip": "Look for过程，Find结果。",
+          "emotion_hook": "还在为“找东西”纠结？分清look for和find，你的英语更精准！"
+        },
+        {
+          "card_id": "T1-07",
+          "full_id": "英语-九上-T1-07",
+          "title": "Arrive in/at：到达，介词选择有门道！",
+          "type": "易混词陷阱",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "`arrive in` 用于到达较大的地方（国家、城市）；`arrive at` 用于到达较小的地方（车站、机场、学校、具体地点）。",
+          "core_points": [
+            "Arrive in + 大地点: 国家、城市等。",
+            "Arrive at + 小地点: 机场、车站、学校、商店、具体地址等。",
+            "区别：地点的“大小”是相对的，通常城市以上用in，具体建筑物用at。",
+            "注意：arrive后不直接跟home。"
+          ],
+          "why_explanation": "英语介词精确表达方位，地点大小是区分in和at的关键。",
+          "example": {
+            "question": "选词填空：We arrived ____ Beijing yesterday. / What time did you arrive ____ the airport? / He finally arrived ____ home.",
+            "steps": [
+              "第一个句子是“北京”，大城市，用in。",
+              "第二个句子是“机场”，具体地点，用at。",
+              "第三个句子“home”前不加介词。"
+            ],
+            "answer": "We arrived in Beijing yesterday. / What time did you arrive at the airport? / He finally arrived home."
+          },
+          "mistakes": [
+            {
+              "wrong": "They arrived at China last week.",
+              "correct": "They arrived in China last week.",
+              "reason": "China是国家，属于大地点，用in。"
+            },
+            {
+              "wrong": "She arrived in the station late.",
+              "correct": "She arrived at the station late.",
+              "reason": "The station是具体地点，用at。"
+            }
+          ],
+          "memory_tip": "大in小at，home不加。",
+          "emotion_hook": "你是不是也经常搞错？一个小介词，区分大小地点！"
+        },
+        {
+          "card_id": "T1-08",
+          "full_id": "英语-九上-T1-08",
+          "title": "On time vs In time：准时和及时，一词之差！",
+          "type": "易混词陷阱",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "`on time` 指“准时，按时”，强调时间准确；`in time` 指“及时，来得及”，强调在某个时间点之前。",
+          "core_points": [
+            "On time: 准时，不早不晚，符合预定时间表。",
+            "In time (for sth/to do sth): 及时，在某事发生前或某行动开始前，通常有充足的时间。",
+            "区别：on time是精确点，in time是时间段。",
+            "To be in time for the bus (及时赶上公交) vs The bus arrived on time (公交准时到达)。"
+          ],
+          "why_explanation": "中文“及时”和“准时”含义相近，但英语通过介词区分了时间点的精确性和时间段的提前量。",
+          "example": {
+            "question": "选词填空：The train left exactly ____. / We arrived at the airport just ____ for our flight. / Don't be late, please be ____.",
+            "steps": [
+              "第一个句子是“火车准时离开”，强调精确时间，用on time。",
+              "第二个句子是“及时赶上航班”，强调在某个时间点之前，用in time。",
+              "第三个句子是“请准时”，强调精确时间，用on time。"
+            ],
+            "answer": "The train left exactly on time. / We arrived at the airport just in time for our flight. / Don't be late, please be on time."
+          },
+          "mistakes": [
+            {
+              "wrong": "We got there on time for the meeting.",
+              "correct": "We got there in time for the meeting.",
+              "reason": "“for the meeting”强调及时赶上，用in time。"
+            },
+            {
+              "wrong": "The show started in time.",
+              "correct": "The show started on time.",
+              "reason": "“演出开始”强调准时，用on time。"
+            }
+          ],
+          "memory_tip": "On是点，in是段。",
+          "emotion_hook": "迟到和准时，差的可能不只一点点！"
+        },
+        {
+          "card_id": "T1-09",
+          "full_id": "英语-九上-T1-09",
+          "title": "Too vs Either：否定句中的“也”，你选对了吗？",
+          "type": "易混词陷阱",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "`too` 用于肯定句和疑问句中表示“也”；`either` 用于否定句中表示“也（不）”。",
+          "core_points": [
+            "Too: 用于肯定句句末，表示“也，同样”。e.g., I like apples, too.",
+            "Either: 用于否定句句末，表示“也（不）”。e.g., I don't like apples, either.",
+            "区别：too是肯定，either是否定。",
+            "注意：neither用于句首，表示“也不”，后面接倒装句。"
+          ],
+          "why_explanation": "中文“也”不区分肯定否定，英语则有明确的词形变化。",
+          "example": {
+            "question": "选词填空：He can speak English, and I can ____. / She doesn't like vegetables, and I don't ____. / If you don't go, I won't go ____.",
+            "steps": [
+              "第一个句子是肯定句，用too。",
+              "第二个句子是否定句，用either。",
+              "第三个句子是否定句，用either。"
+            ],
+            "answer": "He can speak English, and I can too. / She doesn't like vegetables, and I don't either. / If you don't go, I won't go either."
+          },
+          "mistakes": [
+            {
+              "wrong": "I don't know him, too.",
+              "correct": "I don't know him, either.",
+              "reason": "否定句中表示“也（不）”用either。"
+            },
+            {
+              "wrong": "He likes sports, either.",
+              "correct": "He likes sports, too.",
+              "reason": "肯定句中表示“也”用too。"
+            }
+          ],
+          "memory_tip": "肯定too，否定either。",
+          "emotion_hook": "一个小词暴露你的英语水平！“也”的用法，你真的会吗？"
+        },
+        {
+          "card_id": "T1-10",
+          "full_id": "英语-九上-T1-10",
+          "title": "Since vs For：现在完成时的时间状语，别再混淆！",
+          "type": "易混词陷阱",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "`since` 表示“自从某个时间点以来”，后面接时间点；`for` 表示“持续多久”，后面接时间段。",
+          "core_points": [
+            "Since + 时间点: e.g., since 2008, since last Monday, since I was a child.",
+            "For + 时间段: e.g., for three years, for a long time, for ages.",
+            "两者都用于现在完成时，表示动作从过去某一时刻开始，一直持续到现在。",
+            "区别：since是起点，for是长度。"
+          ],
+          "why_explanation": "中文“已经...了”不区分时间点和时间段，英语通过介词明确了时间参照。",
+          "example": {
+            "question": "选词填空：I have lived here ____ five years. / She hasn't seen him ____ last year. / They have been friends ____ childhood.",
+            "steps": [
+              "第一个句子是“五年”，时间段，用for。",
+              "第二个句子是“去年”，时间点，用since。",
+              "第三个句子是“童年”，时间点，用since。"
+            ],
+            "answer": "I have lived here for five years. / She hasn't seen him since last year. / They have been friends since childhood."
+          },
+          "mistakes": [
+            {
+              "wrong": "He has worked here since three months.",
+              "correct": "He has worked here for three months.",
+              "reason": "three months是时间段，用for。"
+            },
+            {
+              "wrong": "I haven't eaten anything for yesterday.",
+              "correct": "I haven't eaten anything since yesterday.",
+              "reason": "yesterday是时间点，用since。"
+            }
+          ],
+          "memory_tip": "Since点，For段。",
+          "emotion_hook": "现在完成时大魔王！搞定since和for，轻松拿捏时间状语！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T2",
+      "unit_name": "发音挑战卡",
+      "cards": [
+        {
+          "card_id": "T2-01",
+          "full_id": "英语-九上-T2-01",
+          "title": "沉默的字母：这些单词你读对了吗？",
+          "type": "发音挑战",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "英语中有些字母在特定单词里不发音，被称为“沉默字母”，容易造成发音错误。",
+          "core_points": [
+            "K在N前不发音: `know`, `knife`, `knee`",
+            "W在R前不发音: `write`, `wrong`, `answer`",
+            "B在M后或T前不发音: `comb`, `doubt`, `debt`",
+            "L在某些元音后不发音: `walk`, `talk`, `half`",
+            "H在某些词中不发音: `honest`, `hour`, `ghost`",
+            "G在N前不发音: `design`, `sign`, `foreign`"
+          ],
+          "why_explanation": "英语发音规则复杂，历史演变导致许多字母保留了拼写，但不再发音。",
+          "example": {
+            "question": "请读出以下单词，并指出沉默字母：knowledge, honest, doubt, island, calm, listen",
+            "steps": [
+              "knowledge: /'nɒlɪdʒ/, k不发音。",
+              "honest: /'ɒnɪst/, h不发音。",
+              "doubt: /daʊt/, b不发音。",
+              "island: /'aɪlənd/, s不发音。",
+              "calm: /kɑːm/, l不发音。",
+              "listen: /'lɪsn/, t不发音。"
+            ],
+            "answer": "知识点：k(knowledge), h(honest), b(doubt), s(island), l(calm), t(listen) 都是沉默字母。"
+          },
+          "mistakes": [],
+          "memory_tip": "K/W/B/L/H/G，碰到特定字母就消音！",
+          "emotion_hook": "别再把'knowledge'读成'k-nowledge'了！你的英语发音，是时候升级了！",
+          "pronunciation_tip": "遇到不熟悉的单词，先查音标，尤其注意是否有沉默字母。"
+        },
+        {
+          "card_id": "T2-02",
+          "full_id": "英语-九上-T2-02",
+          "title": "Live/Read：一词多音，小心踩坑！",
+          "type": "发音挑战",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "有些单词拼写相同，但词性或时态不同时发音也不同，需要结合语境判断。",
+          "core_points": [
+            "Live (v.): /lɪv/ 居住，活着。e.g., I live in Beijing.",
+            "Live (adj./adv.): /laɪv/ 活着的，现场的。e.g., a live concert, go live.",
+            "Read (v. present): /riːd/ 阅读。e.g., I read books every day.",
+            "Read (v. past/p.p.): /red/ 阅读（过去式/过去分词）。e.g., I read a book yesterday. (发音同'red')",
+            "Wind (n.): /wɪnd/ 风。e.g., The wind is strong.",
+            "Wind (v.): /waɪnd/ 缠绕，上发条。e.g., wind up the clock."
+          ],
+          "why_explanation": "英语词汇的复杂性，部分同形异义词在发音上也做出了区分，以避免混淆。",
+          "example": {
+            "question": "请读出以下句子中划线部分的单词：I ____ in a small town. / Did you watch the ____ show? / I ____ a lot of books when I was young. / I ____ the newspaper every morning.",
+            "steps": [
+              "I live /lɪv/ in a small town. (动词，居住)",
+              "Did you watch the live /laɪv/ show? (形容词，现场的)",
+              "I read /red/ a lot of books when I was young. (过去式，发音同'red')",
+              "I read /riːd/ the newspaper every morning. (现在式，发音同'read')"
+            ],
+            "answer": "注意live的动词和形容词发音，以及read的现在式和过去式发音差异。"
+          },
+          "mistakes": [],
+          "memory_tip": "词性变，发音变，多查字典不吃亏。",
+          "emotion_hook": "一个单词两种读法，你敢说你没读错过？",
+          "pronunciation_tip": "遇到这些词，一定要结合语境判断词性或时态，再确定发音。"
+        },
+        {
+          "card_id": "T2-03",
+          "full_id": "英语-九上-T2-03",
+          "title": "挑战你的舌头：TH音，你是/θ/还是/ð/？",
+          "type": "发音挑战",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "英语中`th`有两种发音：清辅音/θ/（无声）和浊辅音/ð/（有声），发音时舌头位置相似但声带振动不同。",
+          "core_points": [
+            "清辅音/θ/: 舌尖轻抵上齿，气流从舌齿间冲出，声带不振动。e.g., `think`, `three`, `bath`, `truth`。",
+            "浊辅音/ð/: 舌尖轻抵上齿，气流从舌齿间冲出，声带振动。e.g., `this`, `that`, `they`, `mother`, `breathe`。",
+            "区别：/θ/是无声摩擦，/ð/是有声摩擦。",
+            "练习方法：用手摸喉咙，感受声带是否振动。"
+          ],
+          "why_explanation": "中文没有/θ/和/ð/这两个音，所以对中国学生来说是难点，需要刻意练习。",
+          "example": {
+            "question": "请读出以下单词，并区分是/θ/还是/ð/：think, this, brother, bath, healthy, weather",
+            "steps": [
+              "think /θɪŋk/: 清辅音 /θ/",
+              "this /ðɪs/: 浊辅音 /ð/",
+              "brother /'brʌðər/: 浊辅音 /ð/",
+              "bath /bæθ/: 清辅音 /θ/",
+              "healthy /'helθi/: 清辅音 /θ/",
+              "weather /'weðər/: 浊辅音 /ð/"
+            ],
+            "answer": "注意声带振动与否是区分关键。"
+          },
+          "mistakes": [],
+          "memory_tip": "摸喉咙，不振动/θ/，振动/ð/。",
+          "emotion_hook": "别让你的'three'听起来像'tree'！TH音是英语口语的灵魂！",
+          "pronunciation_tip": "多跟读，多模仿，尤其是包含这两个音的常用词，形成肌肉记忆。"
+        },
+        {
+          "card_id": "T2-04",
+          "full_id": "英语-九上-T2-04",
+          "title": "连读：让你的英语听起来更流畅！",
+          "type": "发音挑战",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "连读是英语口语中词与词之间自然衔接的现象，能让语速更快，听起来更地道。",
+          "core_points": [
+            "辅音+元音连读: 前一个词以辅音结尾，后一个词以元音开头，辅音与元音连读。e.g., `pick it up` -> /pɪkɪtʌp/, `an apple` -> /ənæpl/。",
+            "元音+元音连读（滑音）: 前一个词以元音结尾，后一个词以元音开头，中间加入/j/或/w/音。e.g., `go out` -> /gəʊwaʊt/, `he is` -> /hiːjɪz/。",
+            "相同辅音连读: 两个相同的辅音在一起，只发一个长音。e.g., `good day` -> /gʊdeɪ/, `black coffee` -> /blækɒfi/。",
+            "失去爆破: 爆破音（p, b, t, d, k, g）后接另一个辅音时，只做发音口型，不发出声音。e.g., `sit down` -> /sɪt̚daʊn/, `good morning` -> /gʊd̚mɔːrnɪŋ/。",
+            "注意：连读是为了流畅，不是为了模糊发音。"
+          ],
+          "why_explanation": "连读是英语的自然语流现象，掌握它能提高听力理解和口语流畅度。",
+          "example": {
+            "question": "请尝试连读以下句子：I want to eat an apple. / Could you help him out? / What do you think about it?",
+            "steps": [
+              "I wan(t) to eat an apple. -> I wanna eat an apple. (t失去爆破，want to弱读)",
+              "Could you help him out? -> Could you hel(p) him (m)out? (p失去爆破，him out连读)",
+              "What do you think about it? -> Wha(t) do you thin(k) about it? (t, k失去爆破，about it连读)"
+            ],
+            "answer": "重点练习辅音+元音、失去爆破和弱读。"
+          },
+          "mistakes": [],
+          "memory_tip": "辅元连，同辅并，爆破不发，元元滑。",
+          "emotion_hook": "你的英语听起来像机器人？掌握连读，瞬间变身Native Speaker！",
+          "pronunciation_tip": "多听原版音频，模仿朗读，从短语和简单句开始练习。"
+        },
+        {
+          "card_id": "T2-05",
+          "full_id": "英语-九上-T2-05",
+          "title": "重音，单词的灵魂！",
+          "type": "发音挑战",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "单词重音是指单词中某个音节读得更响、更长、音调更高，它是单词发音的骨架。",
+          "core_points": [
+            "双音节名词和形容词通常重音在第一音节。e.g., `present` (礼物), `happy`。",
+            "双音节动词通常重音在第二音节。e.g., `present` (赠送), `begin`。",
+            "以-tion, -sion结尾的单词，重音在倒数第二音节。e.g., `information`, `decision`。",
+            "以-ic, -ical结尾的单词，重音在-ic/-ical前的音节。e.g., `scientific`, `historical`。",
+            "复合词重音通常在第一部分。e.g., `blackbird`, `greenhouse`。",
+            "注意：重音位置错误可能导致听者理解困难甚至误解词义。"
+          ],
+          "why_explanation": "英语是重音语言，重音位置决定了单词的节奏和辨识度，与中文的声调有异曲同工之妙。",
+          "example": {
+            "question": "请读出以下单词，并标出重音：photograph, photographer, comfortable, interesting, develop, development",
+            "steps": [
+              "pho-to-graph /'foʊtəɡrɑːf/ (重音在第一音节)",
+              "pho-tog-ra-pher /fə'tɒɡrəfər/ (重音在第二音节)",
+              "com-fort-a-ble /'kʌmfərtəbl/ (重音在第一音节)",
+              "in-ter-est-ing /'ɪntrəstɪŋ/ (重音在第一音节)",
+              "de-vel-op /dɪ'veləp/ (重音在第二音节)",
+              "de-vel-op-ment /dɪ'veləpmənt/ (重音在第二音节)"
+            ],
+            "answer": "注意同源词重音可能发生转移，如photograph与photographer。"
+          },
+          "mistakes": [],
+          "memory_tip": "名形一，动二；tion、sion倒二；ic、ical前。",
+          "emotion_hook": "一个单词，重音错了，意思就变了！你的英语发音精准吗？",
+          "pronunciation_tip": "学习新单词时，务必同时记忆其重音位置，多听多模仿。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T3",
+      "unit_name": "情景闯关卡",
+      "cards": [
+        {
+          "card_id": "T3-01",
+          "full_id": "英语-九上-T3-01",
+          "title": "如何地道地给出建议？",
+          "type": "情景闯关",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在日常生活中，我们经常需要给别人提建议。掌握地道的表达方式能让交流更顺畅。",
+          "core_points": [
+            "Should / Ought to: 最常见的建议表达，语气中性。e.g., You should study harder.",
+            "Had better (not): 最好（不），语气较强，带有一点警告意味。e.g., You'd better not be late.",
+            "Why not...? / How about...? / What about...?: 提出建议的疑问句形式，更委婉。e.g., Why not go for a walk? How about going to the library?",
+            "If I were you, I would...: 虚拟语气，表示“如果我是你，我会...”，非常礼貌。e.g., If I were you, I would apologize.",
+            "I suggest that...: 我建议...，后面接从句，从句中谓语动词常用动词原形或should+动词原形。e.g., I suggest that he (should) try again."
+          ],
+          "why_explanation": "中文“你应该”、“你最好”等表达在英语中有多种语气和场合的对应，选择合适的表达能体现语感。",
+          "example": {
+            "question": "你的朋友考试没考好，情绪低落，你该怎么安慰并给出学习建议？",
+            "steps": [
+              "先表达理解和安慰：'Don't worry too much. Everyone has ups and downs.'",
+              "提出积极建议，用should：'You should try to find out where you made mistakes.'",
+              "提出具体学习方法，用How about：'How about asking your teacher for help?'",
+              "给出鼓励：'I'm sure you'll do better next time.'",
+              "使用had better提醒：'You'd better review your notes more carefully next time.'"
+            ],
+            "answer": "A: Hey, you look a bit down. What's wrong?\nB: I failed my math test again. I feel so bad.\nA: Oh, I'm sorry to hear that. Don't worry too much. Everyone has ups and downs. You should try to find out where you made mistakes. How about asking your teacher for help after class? Or maybe you could join our study group. I'm sure you'll do better next time. But you'd better review your notes more carefully next time."
+          },
+          "mistakes": [],
+          "memory_tip": "建议Should，最好Had better，疑问Why/How，If我是你，I suggest。",
+          "emotion_hook": "朋友求助，你只会说'You should...'？这些建议句型让你瞬间高情商！",
+          "scene_dialogue": "A: I'm really worried about my English exam next week. \nB: Don't stress too much! If I were you, I would make a study plan and stick to it. Why not review the grammar points we learned last unit? And you'd better practice listening every day. I suggest that you (should) listen to some English podcasts."
+        },
+        {
+          "card_id": "T3-02",
+          "full_id": "英语-九上-T3-02",
+          "title": "礼貌请求，间接疑问句让你更得体！",
+          "type": "情景闯关",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "间接疑问句常用于礼貌地询问或请求信息，句式是“连接词+主语+谓语”。",
+          "core_points": [
+            "常见引导词：Could you please tell me...? / Do you know...? / I wonder...? / Would you mind telling me...?",
+            "语序：连接词（if/whether/what/when/where/how等）+主语+谓语动词。",
+            "时态：间接疑问句的时态通常与主句保持一致，或根据实际情况调整。",
+            "注意：间接疑问句是陈述句语序，句末用句号或问号取决于主句。"
+          ],
+          "why_explanation": "直接问句有时显得过于唐突，间接疑问句通过嵌入式结构，增加了委婉和礼貌的语气。",
+          "example": {
+            "question": "你迷路了，想问一位路人图书馆在哪里，以及几点开门。如何礼貌地询问？",
+            "steps": [
+              "礼貌开头：'Excuse me, sir/madam.'",
+              "询问地点：'Could you please tell me where the library is?' (where+主语+谓语)",
+              "询问时间：'Do you know what time it opens?' (what time+主语+谓语)",
+              "表达感谢：'Thank you very much.'"
+            ],
+            "answer": "Excuse me, sir. Could you please tell me where the library is? And do you know what time it opens? Thank you very much."
+          },
+          "mistakes": [],
+          "memory_tip": "间接疑问句，连接词后主谓顺。",
+          "emotion_hook": "路痴福音！这些句型让你问路不再尴尬，秒变礼貌小达人！",
+          "scene_dialogue": "A: Excuse me, I'm new here. Could you please tell me where the nearest supermarket is?\nB: Sure, it's just around the corner. Do you know if it's open now? \nA: Yes, I think so. I wonder what time it closes today. \nB: I'm not sure, but you could check online. "
+        },
+        {
+          "card_id": "T3-03",
+          "full_id": "英语-九上-T3-03",
+          "title": "谈论过去经历：现在完成时，你的故事更生动！",
+          "type": "情景闯关",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "现在完成时用于描述从过去开始，持续到现在，或对现在仍有影响的动作或状态。",
+          "core_points": [
+            "结构：have/has + 动词过去分词。",
+            "常见时间状语：for (时间段), since (时间点), ever, never, already, yet, just, before。",
+            "用途一：表示过去发生的动作对现在造成的影响。e.g., I have lost my key. (我现在没有钥匙)",
+            "用途二：表示从过去到现在一直持续的动作或状态。e.g., I have lived here for five years.",
+            "用途三：表示过去发生但时间不确定的经历。e.g., Have you ever been to Beijing?"
+          ],
+          "why_explanation": "中文强调“做了什么”，英语则更关注“做这事造成了什么影响”或“持续了多久”。",
+          "example": {
+            "question": "你和朋友聊天，想分享你最近去过的有趣地方，以及你做过的一件特别的事情。如何用现在完成时表达？",
+            "steps": [
+              "询问对方经历：'Have you ever been to ...?'",
+              "分享自己经历：'Yes, I have. I've been to ... (for/since...)'.",
+              "描述特别事件：'I've also tried ... before. It was amazing!'",
+              "使用just/already/yet：'I've just finished reading a really good book.'"
+            ],
+            "answer": "A: Hey, have you ever been to Hangzhou? It's a beautiful city.\nB: Yes, I have! I've been there twice. I've always wanted to visit West Lake. And I've tried paragliding there before, it was an amazing experience! What about you? Have you done anything special recently?\nA: Well, I haven't traveled much this year, but I've just learned how to play the guitar. It's been a lot of fun for me."
+          },
+          "mistakes": [],
+          "memory_tip": "完成时，have+过分，经历影响持续，for/since不离身。",
+          "emotion_hook": "你的过去，如何影响现在？现在完成时，让你的故事更有深度！",
+          "scene_dialogue": "A: Wow, your English is so good! How long have you been learning it?\nB: Thanks! I've been learning English since primary school, so for about nine years now. \nA: That's impressive! Have you ever lived abroad?\nB: No, I haven't. But I've always dreamed of traveling to an English-speaking country. I've already watched a lot of English movies to practice my listening."
+        },
+        {
+          "card_id": "T3-04",
+          "full_id": "英语-九上-T3-04",
+          "title": "未来计划，你打算怎么说？",
+          "type": "情景闯关",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "表达未来计划、意图或预测时，我们常使用`be going to`和`will`。",
+          "core_points": [
+            "Be going to + 动词原形: 表示事先计划好的、有准备的行动，或根据现有迹象判断即将发生的事情。e.g., I'm going to visit my grandparents next weekend. Look at the dark clouds, it's going to rain.",
+            "Will + 动词原形: 表示临时决定、主观意愿、承诺、预测（无明显根据）。e.g., I'll help you with your homework. I think it will be sunny tomorrow.",
+            "现在进行时表示将来：用于表示按计划或安排即将发生的动作，通常与时间状语连用。e.g., We are having a party tonight.",
+            "一般现在时表示将来：用于表示按时间表、日程表发生的动作。e.g., The train leaves at 8:00 tomorrow morning."
+          ],
+          "why_explanation": "中文“明天我要...”简单直接，英语则根据计划的性质、是否有迹象、是否为临时决定等，区分了多种未来时态。",
+          "example": {
+            "question": "你和朋友讨论暑假计划，以及对未来的展望。如何表达？",
+            "steps": [
+              "分享个人暑假计划（已定）：'I'm going to...'",
+              "分享临时决定（如朋友邀请）：'Oh, really? I'll join you then.'",
+              "预测未来：'I think in the future, AI will...' ",
+              "用现在进行时表示近期安排：'We are meeting at 3 p.m. tomorrow.'"
+            ],
+            "answer": "A: What are you going to do this summer holiday?\nB: I'm going to volunteer at the local animal shelter for a month. I've already made the arrangements. What about you?\nA: I haven't decided yet, but I think I'll probably stay home and read more books. Maybe I'll also learn to cook some new dishes. Oh, by the way, we are meeting at the library at 3 p.m. tomorrow. Are you coming?\nB: Sure, I'll be there!"
+          },
+          "mistakes": [],
+          "memory_tip": "计划be going to，临时will，安排ing，日程现在时。",
+          "emotion_hook": "你的未来，由你来“说”！这些句型，让你自信规划！",
+          "scene_dialogue": "A: What are your plans for the weekend?\nB: I'm going to visit my grandparents in the countryside. They've been asking me to come for a while. \nA: Sounds nice! I'll probably just relax at home. Oh, I'm meeting Sarah for coffee on Sunday morning. Would you like to join us?\nB: That sounds great! I'll definitely be there!"
+        },
+        {
+          "card_id": "T3-05",
+          "full_id": "英语-九上-T3-05",
+          "title": "描述过程：被动语态，让说明更客观！",
+          "type": "情景闯关",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "被动语态用于描述动作的承受者，而不是动作的发出者。在描述制作过程、发明创造等时，常使用被动语态，使表达更客观。",
+          "core_points": [
+            "结构：be + 动词过去分词 (by + 动作发出者，可选)。",
+            "常见时态：一般现在时被动 (am/is/are + p.p.), 一般过去时被动 (was/were + p.p.), 一般将来时被动 (will be + p.p.), 现在完成时被动 (have/has been + p.p.)。",
+            "用途：当动作的发出者不重要、不明确或显而易见时；强调动作的承受者或动作本身时。",
+            "在描述制作方法、科学实验、历史事件等场景中非常实用。"
+          ],
+          "why_explanation": "中文更倾向于使用主动语态，但在英语中，为了强调物品或过程本身，被动语态是更合适的选择。",
+          "example": {
+            "question": "请描述制作一杯香蕉奶昔的过程，使用被动语态。",
+            "steps": [
+              "准备材料：'First, a banana and some milk are prepared.'",
+              "切香蕉：'Then, the banana is peeled and cut into small pieces.'",
+              "混合：'Next, the banana pieces and milk are put into a blender.'",
+              "搅拌：'After that, they are blended until smooth.'",
+              "享用：'Finally, the banana milkshake is poured into a glass and can be enjoyed.'"
+            ],
+            "answer": "First, a banana and some milk are prepared. Then, the banana is peeled and cut into small pieces. Next, the banana pieces and milk are put into a blender. After that, they are blended until smooth. Finally, the banana milkshake is poured into a glass and can be enjoyed."
+          },
+          "mistakes": [],
+          "memory_tip": "被动语态be+过分，过程描述最常用。",
+          "emotion_hook": "你只会说'我做了什么'？学会被动语态，让你的描述更专业！",
+          "scene_dialogue": "A: How is this delicious cake made?\nB: Well, first, all the ingredients are carefully weighed. Then, the flour and sugar are mixed together. After that, eggs are added and the mixture is stirred until smooth. Finally, it's baked in the oven for about 30 minutes, and then it's decorated with cream. It's really a work of art!"
+        }
+      ]
+    },
+    {
+      "unit_id": "T4",
+      "unit_name": "语法纠错卡",
+      "cards": [
+        {
+          "card_id": "T4-01",
+          "full_id": "英语-九上-T4-01",
+          "title": "现在完成时：时间状语的致命伤！",
+          "type": "语法纠错",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "现在完成时表示动作持续到现在或对现在有影响，不能与明确的过去时间点状语连用。",
+          "core_points": [
+            "错误点：现在完成时不能和yesterday, last week, two days ago, just now, when等过去时间点状语连用。",
+            "正确用法：应使用一般过去时。e.g., I saw him yesterday. (而不是I have seen him yesterday.)",
+            "例外：`since` 后接过去时间点，表示“自从...以来”，此时主句用现在完成时。e.g., I haven't seen him since yesterday.",
+            "注意：`just` 可用于现在完成时，表示“刚刚”，但`just now`是过去时间点，用于一般过去时。"
+          ],
+          "why_explanation": "现在完成时强调与“现在”的关联，而过去时间点状语则将动作完全限定在“过去”，二者在时间逻辑上冲突。",
+          "example": {
+            "question": "找出并改正句子中的错误：I have finished my homework just now.",
+            "steps": [
+              "识别时态：have finished 是现在完成时。",
+              "识别时间状语：just now 是明确的过去时间点状语，表示“刚才”。",
+              "判断冲突：现在完成时不能与just now连用。",
+              "改正：将现在完成时改为一般过去时。"
+            ],
+            "answer": "I finished my homework just now."
+          },
+          "mistakes": [
+            {
+              "wrong": "She has been to Shanghai last year.",
+              "correct": "She went to Shanghai last year.",
+              "reason": "last year是明确的过去时间点，应使用一般过去时。"
+            },
+            {
+              "wrong": "When have you arrived?",
+              "correct": "When did you arrive?",
+              "reason": "When引导的问句通常询问过去具体时间，用一般过去时。"
+            }
+          ],
+          "memory_tip": "完成时，不跟过去明确点，unless since来作伴。",
+          "emotion_hook": "现在完成时，时间状语是它的“死穴”！你踩雷了吗？"
+        },
+        {
+          "card_id": "T4-02",
+          "full_id": "英语-九上-T4-02",
+          "title": "被动语态：be动词和过去分词，你配对了吗？",
+          "type": "语法纠错",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "被动语态的核心是“be动词 + 动词过去分词”，be动词要与主语保持人称和数的一致，并根据时态变化。",
+          "core_points": [
+            "错误点：be动词形式错误（人称、数、时态），或缺少be动词，或过去分词形式错误。",
+            "正确用法：确保be动词与主语主谓一致，并与句子时态匹配；动词必须使用过去分词形式。",
+            "常见错误：`The book written by him.` (缺少be动词) -> `The book was written by him.`",
+            "`These questions is too difficult.` (is与questions不一致) -> `These questions are too difficult.`",
+            "`The window was broken yesterday.` (过去分词错误) -> `The window was broken yesterday.`"
+          ],
+          "why_explanation": "中文没有严格的被动语态形式，学生容易忽视be动词和过去分词的搭配，以及be动词的各种变化。",
+          "example": {
+            "question": "找出并改正句子中的错误：English speaks by many people.",
+            "steps": [
+              "识别语态：句子意为“英语被说”，是被动语态。",
+              "检查结构：被动语态是“be + p.p.”。",
+              "检查be动词：`English`是第三人称单数，一般现在时应是`is`。",
+              "检查过去分词：`speak`的过去分词是`spoken`。"
+            ],
+            "answer": "English is spoken by many people."
+          },
+          "mistakes": [
+            {
+              "wrong": "The letter sent to him yesterday.",
+              "correct": "The letter was sent to him yesterday.",
+              "reason": "缺少be动词，且时态应为一般过去时。"
+            },
+            {
+              "wrong": "These trees is planted by them.",
+              "correct": "These trees are planted by them.",
+              "reason": "主语`These trees`是复数，be动词应为`are`。"
+            }
+          ],
+          "memory_tip": "被动语态be+过分，be随主语时态变。",
+          "emotion_hook": "被动语态，你的“be”动词用对了吗？小红书英语语法避坑指南！"
+        },
+        {
+          "card_id": "T4-03",
+          "full_id": "英语-九上-T4-03",
+          "title": "间接引语：时态、代词、状语，三步走！",
+          "type": "语法纠错",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "将直接引语转换为间接引语时，需要进行时态、代词和时间/地点状语的相应调整（即“退一步”原则）。",
+          "core_points": [
+            "错误点：时态未退后，代词未转换，时间/地点状语未改变。",
+            "时态变化：一般现在时 -> 一般过去时；现在进行时 -> 过去进行时；一般将来时 -> 过去将来时；现在完成时 -> 过去完成时。",
+            "代词变化：第一、二人称代词根据主句主语和宾语进行转换。",
+            "时间/地点状语变化：today -> that day, tomorrow -> the next day, here -> there, this -> that等。",
+            "注意：主句谓语动词是现在时，则从句时态不变。"
+          ],
+          "why_explanation": "中文转述时通常不需要时态和代词的复杂变化，英语则要求严格保持时间逻辑和指代清晰。",
+          "example": {
+            "question": "找出并改正句子中的错误：He said that he is going to the park tomorrow.",
+            "steps": [
+              "识别主句谓语：`said` 是过去式。",
+              "检查从句时态：`is going` 是现在进行时，应退后为过去进行时`was going`。",
+              "检查时间状语：`tomorrow` 应改为`the next day`。",
+              "检查代词：`he` 已经正确转换。"
+            ],
+            "answer": "He said that he was going to the park the next day."
+          },
+          "mistakes": [
+            {
+              "wrong": "She told me that I can borrow her book.",
+              "correct": "She told me that I could borrow her book.",
+              "reason": "主句谓语`told`是过去式，从句`can`应退后为`could`。"
+            },
+            {
+              "wrong": "They asked me where did I live.",
+              "correct": "They asked me where I lived.",
+              "reason": "间接疑问句从句语序是“连接词+主语+谓语”，不能用疑问句语序。"
+            }
+          ],
+          "memory_tip": "间接引语三步走：时态退，代词变，状语改。",
+          "emotion_hook": "考试必考！间接引语的“退一步”原则，你真的掌握了吗？"
+        },
+        {
+          "card_id": "T4-04",
+          "full_id": "英语-九上-T4-04",
+          "title": "定语从句：关系代词，你选对“媒人”了吗？",
+          "type": "语法纠错",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "定语从句修饰先行词，关系代词（who, whom, whose, which, that）在从句中充当成分并连接主句。",
+          "core_points": [
+            "错误点：关系代词选择错误，或不该省略时省略。",
+            "Who/Whom/Whose: 修饰人。Who在从句中作主语，Whom作宾语，Whose作定语（表示所属）。",
+            "Which: 修饰物。",
+            "That: 既可修饰人也可修饰物，在从句中作主语或宾语，但不能指代整个句子或放在介词后。",
+            "省略：当关系代词在从句中作宾语时，可以省略。e.g., The book (which/that) I read was interesting."
+          ],
+          "why_explanation": "中文没有关系代词的概念，学生容易混淆不同关系代词的用法和指代对象。",
+          "example": {
+            "question": "找出并改正句子中的错误：I like the girl which is wearing a red dress.",
+            "steps": [
+              "识别先行词：`the girl` 是人。",
+              "检查关系代词：`which` 用于修饰物，不能修饰人。",
+              "改正：应使用修饰人的关系代词`who`或`that`。"
+            ],
+            "answer": "I like the girl who/that is wearing a red dress."
+          },
+          "mistakes": [
+            {
+              "wrong": "This is the house who I bought last year.",
+              "correct": "This is the house which/that I bought last year.",
+              "reason": "先行词`house`是物，应使用`which`或`that`。"
+            },
+            {
+              "wrong": "He is the man I met him yesterday.",
+              "correct": "He is the man whom/who/that I met yesterday. / He is the man I met yesterday.",
+              "reason": "关系代词在从句中作宾语，应省略宾语代词him，或用关系代词代替。"
+            }
+          ],
+          "memory_tip": "人who物which，that都能用，作宾可省略，介词后别that。",
+          "emotion_hook": "定语从句的关系代词，你是不是每次都选错？"
+        },
+        {
+          "card_id": "T4-05",
+          "full_id": "英语-九上-T4-05",
+          "title": "动名词与不定式：动词的身份危机！",
+          "type": "语法纠错",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "有些动词后只能接动名词（-ing），有些只能接不定式（to do），有些两者都可但意义不同。",
+          "core_points": [
+            "错误点：动词后跟错动名词或不定式形式。",
+            "只接动名词的动词：enjoy, finish, mind, keep, practice, suggest, advise, avoid, imagine, risk等。",
+            "只接不定式的动词：want, hope, wish, agree, decide, plan, learn, promise, refuse, pretend等。",
+            "两者都可，意义不同：remember to do (记得去做)/remember doing (记得做过)；forget to do (忘记去做)/forget doing (忘记做过)；stop to do (停下来去做)/stop doing (停止做某事)；try to do (努力做)/try doing (尝试做)。",
+            "介词后必须接动名词。e.g., be good at doing sth."
+          ],
+          "why_explanation": "动名词和不定式在意义和功能上有所区别，不同的动词有其固定的搭配习惯，需要记忆。",
+          "example": {
+            "question": "找出并改正句子中的错误：I enjoy to play basketball.",
+            "steps": [
+              "识别动词：`enjoy`。",
+              "检查其后搭配：`enjoy` 后面必须接动名词。",
+              "改正：将`to play`改为`playing`。"
+            ],
+            "answer": "I enjoy playing basketball."
+          },
+          "mistakes": [
+            {
+              "wrong": "He decided going to Beijing.",
+              "correct": "He decided to go to Beijing.",
+              "reason": "`decide` 后面接不定式。"
+            },
+            {
+              "wrong": "Don't forget buying some milk.",
+              "correct": "Don't forget to buy some milk.",
+              "reason": "`forget to do` 表示“忘记去做某事”，`forget doing` 表示“忘记做过某事”。此处是提醒，应用`to buy`。"
+            }
+          ],
+          "memory_tip": "介词后ing，enjoy/finish ing；want/hope to do；stop/remember/forget to/ing意义变。",
+          "emotion_hook": "动词后是to do还是doing？这个坑你跳过多少次？"
+        }
+      ]
+    },
+    {
+      "unit_id": "T5",
+      "unit_name": "PK挑战卡",
+      "cards": [
+        {
+          "card_id": "T5-01",
+          "full_id": "英语-九上-T5-01",
+          "title": "语法变形金刚：主动被动互换！",
+          "type": "PK挑战",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "将主动语态句子转换为被动语态，或将已经被动语态转换为主动语态。",
+          "core_points": [
+            "主动变被动：主语变宾语（by+宾格），宾语变主语，谓语动词变为“be+过去分词”。",
+            "被动变主动：by后的宾语变主语，原被动句主语变宾语，谓语动词还原为原时态主动形式。",
+            "注意：be动词要与新主语保持人称、数、时态一致。",
+            "挑战点：准确判断原句时态，并正确转换动词形式。"
+          ],
+          "why_explanation": "考查对主动被动语态转换规则的熟练掌握，是基础语法的重要组成部分。",
+          "example": {
+            "question": "将下列句子转换语态：1. People speak English all over the world. 2. The window was broken by Tom yesterday.",
+            "steps": [
+              "句子1 (主动变被动)：宾语English变主语，谓语speak变为is spoken，主语People变宾语（可省略），时间状语不变。 -> English is spoken all over the world (by people).",
+              "句子2 (被动变主动)：by后的Tom变主语，原主语The window变宾语，谓语was broken还原为一般过去时主动形式broke。 -> Tom broke the window yesterday."
+            ],
+            "answer": "1. English is spoken all over the world. 2. Tom broke the window yesterday."
+          },
+          "mistakes": [],
+          "memory_tip": "主被互换，主宾对调，be+过分，时态不变。",
+          "emotion_hook": "语法变形金刚！你敢挑战主动被动语态的极限转换吗？",
+          "battle_rule": "限时30秒，看谁转换得又快又准！"
+        },
+        {
+          "card_id": "T5-02",
+          "full_id": "英语-九上-T5-02",
+          "title": "词汇大乱斗：选词填空，考验你的词汇量和语感！",
+          "type": "PK挑战",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在给定词汇中选择最合适的词填入空白，考查词义辨析、词性搭配和语境理解。",
+          "core_points": [
+            "挑战点：区分近义词，选择正确词性，理解句子含义。",
+            "策略：先通读全文理解大意；根据空格前后判断所需词性（名词、动词、形容词、副词）；结合词义进行筛选；将选出的词带入句子再次检查是否通顺。"
+          ],
+          "why_explanation": "词汇量和语感是英语学习的基础，通过选词填空能全面检验学生的词汇运用能力。",
+          "example": {
+            "question": "从方框中选择合适的词填空，每个词只能用一次：(famous, polite, instead, difficult, experience, successful)\n1. It's very ____ to learn a new language.\n2. She is a ____ singer in our country.\n3. He didn't go to the party; ____, he stayed at home.\n4. I have never had such a wonderful ____ before.\n5. Being ____ is important when you talk to elders.\n6. With hard work, he finally became a ____ businessman.",
+            "steps": [
+              "1. `difficult` (形容词，修饰语言学习)",
+              "2. `famous` (形容词，修饰歌手)",
+              "3. `instead` (副词，表示“代替”)",
+              "4. `experience` (名词，表示“经历”)",
+              "5. `polite` (形容词，表示“有礼貌的”)",
+              "6. `successful` (形容词，修饰商人)"
+            ],
+            "answer": "1. difficult 2. famous 3. instead 4. experience 5. polite 6. successful"
+          },
+          "mistakes": [],
+          "memory_tip": "先看词性，再辨词义，代入检查，语感是王道。",
+          "emotion_hook": "词汇量是硬伤？这场大乱斗，让你告别“词穷”！",
+          "battle_rule": "限时2分钟，看谁填得又快又准，错误率最低！"
+        },
+        {
+          "card_id": "T5-03",
+          "full_id": "英语-九上-T5-03",
+          "title": "火眼金睛找茬：句子改错，挑战你的语法极限！",
+          "type": "PK挑战",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "找出并改正句子中的语法错误，考查对各种语法点的综合运用能力。",
+          "core_points": [
+            "挑战点：错误可能涉及主谓一致、时态、语态、非谓语动词、情态动词、代词、介词、连词、冠词等。",
+            "策略：仔细阅读每个单词，逐个检查；分析句子结构，判断主谓宾；检查动词形式、时态、语态；检查代词指代、冠词使用；检查介词搭配、连词连接。"
+          ],
+          "why_explanation": "改错题是检验学生语法知识掌握程度最直接有效的方式，能暴露薄弱环节。",
+          "example": {
+            "question": "找出并改正句子中的错误：1. My brother is good at play basketball. 2. He asked me what did I do yesterday.",
+            "steps": [
+              "句子1：`be good at` 后接动名词，`play` 应改为`playing`。",
+              "句子2：间接疑问句语序应为“连接词+主语+谓语”，`what did I do` 应改为`what I did`。"
+            ],
+            "answer": "1. My brother is good at playing basketball. 2. He asked me what I did yesterday."
+          },
+          "mistakes": [],
+          "memory_tip": "主谓动代介连冠，逐一排查不遗漏。",
+          "emotion_hook": "语法盲点大曝光！找出这些句子里的“捣蛋鬼”！",
+          "battle_rule": "限时1分钟，找出所有错误并改正，每错一处扣10分！"
+        },
+        {
+          "card_id": "T5-04",
+          "full_id": "英语-九上-T5-04",
+          "title": "翻译大挑战：中英互译，精准表达！",
+          "type": "PK挑战",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "将中文句子翻译成英文，或将英文句子翻译成中文，考查词汇、语法和文化背景知识。",
+          "core_points": [
+            "挑战点：准确理解原文，选择恰当词汇，运用正确语法结构，注意地道表达。",
+            "策略：分清主谓宾，确定时态语态；选择合适的词汇和短语；注意介词、冠词、连词的运用；避免中式英语，力求自然流畅。"
+          ],
+          "why_explanation": "翻译是综合能力的体现，能检验学生将所学知识灵活运用于实际表达的能力。",
+          "example": {
+            "question": "将下列句子翻译成英文：1. 他告诉我他已经在北京住了三年了。 2. 你能告诉我最近的银行在哪里吗？",
+            "steps": [
+              "句子1：主句`He told me`，从句用现在完成时`he had lived in Beijing for three years` (间接引语时态退后)。",
+              "句子2：礼貌问句用间接疑问句`Could you please tell me where the nearest bank is?` (连接词+主语+谓语)。"
+            ],
+            "answer": "1. He told me that he had lived in Beijing for three years. 2. Could you please tell me where the nearest bank is?"
+          },
+          "mistakes": [],
+          "memory_tip": "中翻英：抓主干，定语态，选词汇，防中式。",
+          "emotion_hook": "翻译是硬实力！别再让你的中式英语暴露啦！",
+          "battle_rule": "限时2分钟，看谁的翻译更准确、更地道！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T6",
+      "unit_name": "速记卡",
+      "cards": [
+        {
+          "card_id": "T6-01",
+          "full_id": "英语-九上-T6-01",
+          "title": "不规则动词变身秘籍：分类记忆法！",
+          "type": "速记卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "不规则动词的过去式和过去分词没有规律，但可以通过分类归纳，高效记忆。",
+          "core_points": [
+            "三式同形：put-put-put, cut-cut-cut, read-read-read (发音变)。",
+            "A-B-B型：meet-met-met, keep-kept-kept, build-built-built。",
+            "A-B-C型：begin-began-begun, drink-drank-drunk, sing-sang-sung。",
+            "A-A-B型：beat-beat-beaten。",
+            "A-B-A型：run-ran-run, come-came-come。",
+            "以-en结尾的过去分词：break-broke-broken, speak-spoke-spoken, write-wrote-written。",
+            "以-ought/-aught结尾：bring-brought-brought, catch-caught-caught, teach-taught-taught。"
+          ],
+          "why_explanation": "死记硬背效率低下，分类记忆能发现潜在规律，减轻记忆负担。",
+          "example": {
+            "question": "请尝试用分类法记忆以下动词：go, eat, take, make, see, give, get, know, find, think",
+            "steps": [
+              "Go-went-gone (A-B-C)",
+              "Eat-ate-eaten (A-B-C)",
+              "Take-took-taken (A-B-C)",
+              "Make-made-made (A-B-B)",
+              "See-saw-seen (A-B-C)",
+              "Give-gave-given (A-B-C)",
+              "Get-got-got/gotten (A-B-B/C)",
+              "Know-knew-known (A-B-C)",
+              "Find-found-found (A-B-B)",
+              "Think-thought-thought (A-B-B)"
+            ],
+            "answer": "通过归类，可以发现很多动词的变化规律。"
+          },
+          "mistakes": [],
+          "memory_tip": "三同AAB，ABB，ABC，多读多写自然记。",
+          "emotion_hook": "不规则动词，你的噩梦？有了这个秘籍，轻松搞定！",
+          "speed_method": "制作小卡片，正面写原形，背面写过去式和过去分词。每天翻看，并大声朗读。将同类变化动词写在一起，形成组块记忆。"
+        },
+        {
+          "card_id": "T6-02",
+          "full_id": "英语-九上-T6-02",
+          "title": "动名词与不定式：搭配口诀速记！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "记忆哪些动词后接动名词，哪些后接不定式，是语法中的一大难点。",
+          "core_points": [
+            "只接动名词的动词口诀：'MFEVSAP' - mind, finish, enjoy, suggest, advise, practice。 (还有keep, imagine, avoid, risk等)",
+            "只接不定式的动词口诀：'WHPADR' - want, hope, plan, agree, decide, refuse。 (还有wish, learn, promise, pretend等)",
+            "介词后一律接动名词：in, on, at, for, about, with, without等后接动名词。",
+            "两者皆可，意义不同：remember, forget, stop, try。 (见T4-05)"
+          ],
+          "why_explanation": "这些搭配没有明显规律，口诀能帮助学生快速记忆常见的动词搭配。",
+          "example": {
+            "question": "用口诀判断以下动词后接ing还是to do：finish, want, suggest, decide, enjoy, learn",
+            "steps": [
+              "finish -> MFEVSAP中的F，接ing。",
+              "want -> WHPADR中的W，接to do。",
+              "suggest -> MFEVSAP中的S，接ing。",
+              "decide -> WHPADR中的D，接to do。",
+              "enjoy -> MFEVSAP中的E，接ing。",
+              "learn -> WHPADR中的L（不在口诀中，但属于to do类），接to do。"
+            ],
+            "answer": "finish (doing), want (to do), suggest (doing), decide (to do), enjoy (doing), learn (to do)."
+          },
+          "mistakes": [],
+          "memory_tip": "MFEVSAP后ing，WHPADR后to do，介词后面ing。",
+          "emotion_hook": "动名词/不定式，你的“选择困难症”？这个口诀秒杀一切！",
+          "speed_method": "将口诀写在便利贴上，贴在书桌前。每天复习，并造句练习。将意义不同的动词对子（如stop to do/doing）单独列出，通过例句对比记忆。"
+        },
+        {
+          "card_id": "T6-03",
+          "full_id": "英语-九上-T6-03",
+          "title": "被动语态速记法：核心公式和时态变化！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "被动语态的核心结构和不同时态下的变化规律，是语法重点。",
+          "core_points": [
+            "核心公式：be + 动词过去分词 (p.p.)。",
+            "一般现在时：am/is/are + p.p. (e.g., is made)",
+            "一般过去时：was/were + p.p. (e.g., was built)",
+            "一般将来时：will be + p.p. (e.g., will be repaired)",
+            "现在进行时：am/is/are being + p.p. (e.g., is being cleaned)",
+            "过去进行时：was/were being + p.p. (e.g., was being watched)",
+            "现在完成时：have/has been + p.p. (e.g., has been finished)",
+            "情态动词：情态动词 + be + p.p. (e.g., can be done, should be protected)"
+          ],
+          "why_explanation": "被动语态的be动词形式多样，死记硬背容易混淆，掌握变化规律能事半功倍。",
+          "example": {
+            "question": "请将下列主动语态句子转换为被动语态，并注意时态：\n1. She cleans the room every day. \n2. They built the bridge last year. \n3. We will finish the project next month. \n4. Someone has stolen my bike.",
+            "steps": [
+              "1. The room is cleaned every day. (一般现在时)",
+              "2. The bridge was built last year. (一般过去时)",
+              "3. The project will be finished next month. (一般将来时)",
+              "4. My bike has been stolen. (现在完成时)"
+            ],
+            "answer": "通过练习，熟悉不同时态下be动词的变化。"
+          },
+          "mistakes": [],
+          "memory_tip": "被动公式be+过分，be动词随主语时态变。",
+          "emotion_hook": "被动语态，你的“be”动词还在乱变吗？一张图搞定所有变化！",
+          "speed_method": "画一个表格，列出所有时态，对应写出主动语态和被动语态的结构，对比记忆。多做填空和转换练习。"
+        },
+        {
+          "card_id": "T6-04",
+          "full_id": "英语-九上-T6-04",
+          "title": "报告句大揭秘：间接引语速记口诀！",
+          "type": "速记卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "间接引语的转换规则复杂，涉及主从句时态、代词、时间/地点状语等多方面变化。",
+          "core_points": [
+            "核心口诀：主过从退一，人称地点时间变。",
+            "主过从退一：主句谓语是过去时，从句时态往后退一格。 (现在->过去，现在进行->过去进行，将来->过去将来，现在完成->过去完成)",
+            "人称变：第一、二人称代词根据主句主语、宾语变。",
+            "地点变：here->there, this->that, these->those。",
+            "时间变：today->that day, tomorrow->the next day, yesterday->the day before, now->then, ago->before。",
+            "注意：主句谓语是现在时，从句时态不变；客观真理时态不变。"
+          ],
+          "why_explanation": "间接引语规则多且易混淆，口诀能将复杂规则精炼，便于记忆和应用。",
+          "example": {
+            "question": "将下列直接引语转换为间接引语：\n1. He said, 'I am busy now.' \n2. She asked me, 'Are you going there tomorrow?'",
+            "steps": [
+              "1. He said that he was busy then. (时态退后，时间状语变)",
+              "2. She asked me if I was going there the next day. (疑问句变陈述句语序，时态退后，地点/时间状语变)"
+            ],
+            "answer": "1. He said that he was busy then. 2. She asked me if I was going there the next day."
+          },
+          "mistakes": [],
+          "memory_tip": "主过从退一，人称地点时间变。",
+          "emotion_hook": "间接引语，你的“魔鬼”语法？这个口诀，让你瞬间变身高手！",
+          "speed_method": "制作一张表格，列出直接引语和间接引语的对应变化（时态、代词、状语），对比记忆。多做改写练习，熟能生巧。"
+        },
+        {
+          "card_id": "T6-05",
+          "full_id": "英语-九上-T6-05",
+          "title": "短语动词（Phrasal Verbs）：联想记忆，告别死记硬背！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "短语动词由动词和介词/副词组成，意义常与原动词不同，是词汇记忆的难点。",
+          "core_points": [
+            "联想记忆：通过介词/副词的本义进行联想。",
+            "Up (向上/完成): give up (放弃), grow up (长大), set up (建立), clean up (打扫干净)。",
+            "Down (向下/减少): put down (放下/写下), calm down (平静下来), turn down (调低/拒绝)。",
+            "Out (向外/完成/消除): find out (查明), give out (分发), put out (熄灭), carry out (执行)。",
+            "On (在上面/继续): put on (穿上), turn on (打开), go on (继续)。",
+            "Off (离开/断开): take off (脱下/起飞), turn off (关闭), put off (推迟)。",
+            "Over (结束/翻转): look over (仔细检查), get over (克服/恢复)。"
+          ],
+          "why_explanation": "短语动词是英语的特色，意义灵活，联想记忆能帮助理解其内在逻辑，而非机械记忆。",
+          "example": {
+            "question": "请尝试用联想记忆法解释并记住以下短语动词：look up, put off, give up, take off",
+            "steps": [
+              "look up: look (看) + up (向上) -> 向上看，引申为“查阅”（查字典等）。",
+              "put off: put (放) + off (离开/推迟) -> 放到一边，引申为“推迟”。",
+              "give up: give (给) + up (向上/完成) -> 放弃（把手举起来，表示投降）。",
+              "take off: take (拿) + off (离开/脱离) -> 拿掉（衣服），引申为“脱掉”；飞机离开地面，引申为“起飞”。"
+            ],
+            "answer": "通过介词/副词的本义和引申义，理解短语动词的含义。"
+          },
+          "mistakes": [],
+          "memory_tip": "介词副词有本义，联想引申记短语。",
+          "emotion_hook": "短语动词，你的“死穴”？用这个方法，告别死记硬背！",
+          "speed_method": "制作思维导图，以核心动词或介词/副词为中心，发散出相关短语动词。结合例句，在语境中记忆。"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,929 @@
+{
+  "subject": "英语",
+  "grade": "高三总复习",
+  "semester": "全册",
+  "textbook": "人教版",
+  "grade_short": "高三",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片（全知识点覆盖版），助力高三英语总复习，直击考点，冲刺高分！",
+  "units": [
+    {
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [
+        {
+          "card_id": "T1-01",
+          "full_id": "英语-高三-T1-01",
+          "title": "救命！Affect vs Effect 傻傻分不清？考场扣分重灾区！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "区分动词 affect (影响) 和名词 effect (影响/结果)。",
+          "core_points": [
+            "Affect 是动词，意为“影响，感动”。",
+            "Effect 通常是名词，意为“影响，效果，结果”。",
+            "Effect 也可以作动词，意为“实现，产生”，但较少见。",
+            "记忆：A是动词开头，E是名词开头。"
+          ],
+          "why_explanation": "两者发音相似，词形接近，且都与“影响”相关，导致学生在使用中混淆词性。",
+          "example": {
+            "question": "Choose the correct word: The bad weather will greatly _____ (affect/effect) our travel plans. What _____ (affect/effect) will it have?",
+            "steps": [
+              "分析第一个空，修饰 'travel plans'，需要一个动词。",
+              "分析第二个空，'What' 引导的宾语从句，'will it have' 后面缺少名词作宾语。"
+            ],
+            "answer": "affect; effect"
+          },
+          "mistakes": [
+            {
+              "wrong": "The new policy had a good affect on the economy.",
+              "correct": "The new policy had a good effect on the economy.",
+              "reason": "Affect 是动词，此处需要名词 'effect'。"
+            },
+            {
+              "wrong": "How does pollution effect human health?",
+              "correct": "How does pollution affect human health?",
+              "reason": "Effect 作动词意为“实现”，此处应是“影响”，用动词 'affect'。"
+            }
+          ],
+          "memory_tip": "AFFECT是动词A打头，EFFECT是名词E开头，记住词性不犯愁！",
+          "emotion_hook": "再错就亏大了！考前必刷，避开送分陷阱，英语高分不是梦！",
+          "trap_point": "Effect 作动词时，通常与 'bring about' 或 'cause' 类似，表示“造成，实现”，如 'effect a change'，但这在高三考试中出现频率较低，主要考查名词 effect 和动词 affect 的区分。"
+        },
+        {
+          "card_id": "T1-02",
+          "full_id": "英语-高三-T1-02",
+          "title": "躺 vs 放置？Lie vs Lay 终极辨析，从此不再“躺枪”！",
+          "type": "易混词陷阱卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "区分不规则动词 lie (躺/位于) 和 lay (放置/下蛋)。",
+          "core_points": [
+            "Lie (躺，位于) 是不及物动词 (vi.)，无需宾语。过去式 lay，过去分词 lain。",
+            "Lay (放置，下蛋) 是及物动词 (vt.)，需要宾语。过去式 laid，过去分词 laid。",
+            "Lie (说谎) 也是不及物动词 (vi.)，过去式 lied，过去分词 lied。",
+            "记忆：Lay 的过去式和 Lie 的现在时形式相同，是最大混淆点。"
+          ],
+          "why_explanation": "lie 和 lay 的词形和过去式变化复杂，尤其是 lie 的过去式与 lay 的原形相同，导致学生极易混淆其词性和用法。",
+          "example": {
+            "question": "Fill in the blanks: 1. He _____ (lie/lay) on the sofa yesterday. 2. Please _____ (lie/lay) the book on the table.",
+            "steps": [
+              "1. 'on the sofa' 是地点状语，动词后没有宾语，应选择不及物动词 'lie' 的过去式。",
+              "2. 'the book' 是宾语，动词后有宾语，应选择及物动词 'lay'。"
+            ],
+            "answer": "1. lay; 2. lay"
+          },
+          "mistakes": [
+            {
+              "wrong": "I often lay in bed reading.",
+              "correct": "I often lie in bed reading.",
+              "reason": "'lay' 是及物动词，需要宾语。此处表示“躺”，应用不及物动词 'lie'。"
+            },
+            {
+              "wrong": "The chickens lie eggs every day.",
+              "correct": "The chickens lay eggs every day.",
+              "reason": "'下蛋' 是及物动词 'lay'。"
+            }
+          ],
+          "memory_tip": "Lie-lay-lain (躺下没外力), Lay-laid-laid (放下要用力！)",
+          "emotion_hook": "高三党速看！这个词组是完形填空和语法填空的常客，搞定它，再也不怕被扣分！",
+          "trap_point": "Lie (说谎) 的过去式和过去分词都是 lied，与“躺”的过去式 lay 完全不同，需注意区分。"
+        },
+        {
+          "card_id": "T1-03",
+          "full_id": "英语-高三-T1-03",
+          "title": "经济 vs 节约？Economic & Economical 一字之差，意思大不同！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "区分形容词 economic (经济的) 和 economical (节约的)。",
+          "core_points": [
+            "Economic (adj.): 经济上的，与经济学相关的。",
+            "Economical (adj.): 节约的，节省的，经济实惠的。",
+            "记忆：Economical 里面有 'cal'，可以联想 'calculate' (计算)，计算着花钱就是节约。"
+          ],
+          "why_explanation": "词形相似，都与“经济”概念相关，但侧重点不同，导致学生在描述“经济发展”和“节约开支”时容易混淆。",
+          "example": {
+            "question": "Choose the correct word: 1. China's _____ (economic/economical) development is impressive. 2. Buying in bulk is more _____ (economic/economical).",
+            "steps": [
+              "1. 描述国家的发展，应是与宏观经济相关的。",
+              "2. 描述购物方式，强调“省钱，划算”。"
+            ],
+            "answer": "1. economic; 2. economical"
+          },
+          "mistakes": [
+            {
+              "wrong": "We need to adopt more economic measures to save money.",
+              "correct": "We need to adopt more economical measures to save money.",
+              "reason": "此处指“节约的措施”，而非“经济学上的措施”。"
+            },
+            {
+              "wrong": "The government is focusing on economical growth.",
+              "correct": "The government is focusing on economic growth.",
+              "reason": "此处指“经济增长”，而非“节约的增长”。"
+            }
+          ],
+          "memory_tip": "EcoNOMic 讲宏观经济，EcoNOMical 说省钱！",
+          "emotion_hook": "高考阅读常考词，辨析不清会理解错文章主旨！赶紧收藏，精准拿分！",
+          "trap_point": "与 'economy' (经济) 和 'economics' (经济学) 等名词也需一并区分记忆。"
+        },
+        {
+          "card_id": "T1-04",
+          "full_id": "英语-高三-T1-04",
+          "title": "建议动词后加to还是ing？Suggest/Advise/Recommend 终极用法揭秘！",
+          "type": "易混词陷阱卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "区分 suggest, advise, recommend 后接动词的不同形式。",
+          "core_points": [
+            "Suggest + doing sth. 或 Suggest + that 从句 (从句用虚拟语气动词原形或 should + 动词原形)。",
+            "Advise + doing sth. 或 Advise + sb. to do sth. 或 Advise + that 从句 (从句用虚拟语气动词原形或 should + 动词原形)。",
+            "Recommend + doing sth. 或 Recommend + that 从句 (从句用虚拟语气动词原形或 should + 动词原形)。",
+            "记忆：Suggest 和 Recommend 后面不直接接不定式 to do，advise 可以接 sb. to do。"
+          ],
+          "why_explanation": "这些动词都表示“建议”，但其后接动词形式不同，尤其在虚拟语气从句中，容易混淆。",
+          "example": {
+            "question": "Correct the sentences: 1. I suggested him to go home. 2. He advised me studying harder.",
+            "steps": [
+              "1. 'suggest' 后不能接 'sb. to do sth.'，应改为 'suggested that he go home' 或 'suggested going home'。",
+              "2. 'advise' 后接 'sb. doing sth.' 是可以的，但更常见的是 'advise sb. to do sth.'。若无宾语，则 'advise doing sth.'。"
+            ],
+            "answer": "1. I suggested that he go home. / I suggested going home. 2. He advised me to study harder. / He advised studying harder."
+          },
+          "mistakes": [
+            {
+              "wrong": "The doctor suggested her to take a rest.",
+              "correct": "The doctor suggested that she take a rest. / The doctor suggested taking a rest.",
+              "reason": "Suggest 后不能接 sb. to do。"
+            },
+            {
+              "wrong": "My teacher recommended me to read this book.",
+              "correct": "My teacher recommended that I read this book. / My teacher recommended reading this book.",
+              "reason": "Recommend 后不能接 sb. to do。"
+            }
+          ],
+          "memory_tip": "建议三剑客：Suggest/Recommend 后跟doing或that从句，Advise可后跟sb. to do！",
+          "emotion_hook": "高考语法填空常考点！掌握这些，你的书面表达直接上升一个档次！",
+          "trap_point": "在虚拟语气从句中，无论主语是单数还是复数，谓语动词都用原形或 'should + 动词原形'，'should' 可以省略。"
+        },
+        {
+          "card_id": "T1-05",
+          "full_id": "英语-高三-T1-05",
+          "title": "“除了”到底用Except for还是Besides？细节决定成败！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "区分 'except for' 和 'besides' 表达“除了”的含义。",
+          "core_points": [
+            "Except for: 表示“除了…之外（其余都包括）”，强调排除异类或细微的例外，通常用于句首或句中。",
+            "Besides: 表示“除了…之外（还包括）”，强调附加，相当于 'in addition to'。",
+            "Except: 强调从整体中排除某一部分，表示“除了…之外（不包括）”。",
+            "记忆：Besides = 加法 (in addition to)；Except for = 减法 (but for)。"
+          ],
+          "why_explanation": "两者都含有“除了”的意思，但表达的是完全相反的逻辑关系，学生容易混淆何时是“排除”何时是“添加”。",
+          "example": {
+            "question": "Choose the correct phrase: 1. Everyone went to the party _____ (except for/besides) Tom. 2. _____ (Except for/Besides) English, I also study French.",
+            "steps": [
+              "1. 强调 Tom 没有去，将他排除在外。",
+              "2. 强调除了英语之外，还学法语，是附加关系。"
+            ],
+            "answer": "1. except for; 2. Besides"
+          },
+          "mistakes": [
+            {
+              "wrong": "Besides the bad weather, the trip was perfect.",
+              "correct": "Except for the bad weather, the trip was perfect.",
+              "reason": "此处表达的是“除了天气不好，其他都完美”，是排除一个不好的因素，用 'except for'。"
+            },
+            {
+              "wrong": "I have many hobbies except playing basketball.",
+              "correct": "I have many hobbies besides playing basketball.",
+              "reason": "此处表达的是“除了打篮球，还有其他爱好”，是附加关系，用 'besides'。"
+            }
+          ],
+          "memory_tip": "Besides是加法，Except for是减法，一个包进去一个踢出去！",
+          "emotion_hook": "阅读理解和完形填空的高频考点！选错一个词，意思全反！快来拯救你的理解分！",
+          "trap_point": "Except (介词) 后面可以直接跟名词或代词，但如果句子主语或谓语动词与 except 后的内容不一致时，通常用 'except for'。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T2",
+      "unit_name": "发音挑战",
+      "cards": [
+        {
+          "card_id": "T2-01",
+          "full_id": "英语-高三-T2-01",
+          "title": "90%的人都读错！'Comfortable' 到底怎么读？别再尴尬了！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "单词 'comfortable' 的正确发音及常见错误。",
+          "core_points": [
+            "正确音标: /ˈkʌmfətəbl/ (英式) 或 /ˈkʌmfərtəbl/ (美式)。",
+            "常见错误：将中间的 'o' 和 'r' 读出来，读成 /kʌmˈfɔːrtəbl/。",
+            "发音秘诀：中间的 'for' 音节弱化甚至省略，只读 'com-f-t-able'。",
+            "重音在第一个音节 'com' 上。"
+          ],
+          "why_explanation": "受拼写影响，学生倾向于把所有字母都读出来，忽略了英语中常见的弱读和音节省略现象。",
+          "example": {
+            "question": "Listen and repeat: 'This sofa is very comfortable.'",
+            "steps": [
+              "注意 'com' /kʌm/ 的发音。",
+              "注意 'for' /fər/ 弱化为 /fə/ 甚至 /f/ 的音。",
+              "注意 'ta' /tə/ 的弱读。",
+              "注意 'ble' /bl/ 的发音。"
+            ],
+            "answer": "正确发音: /ˈkʌmfətəbl/"
+          },
+          "mistakes": [
+            {
+              "wrong": "/kʌmˈfɔːr.tə.bəl/",
+              "correct": "/ˈkʌm.fər.tə.bəl/",
+              "reason": "中间的 'for' 音节弱读或省略，重音在第一个音节。"
+            }
+          ],
+          "memory_tip": "Comfortable：com-f-table，中间for直接跳过！",
+          "emotion_hook": "口语考试高频词！读错了瞬间暴露你的“中式英语”！快来纠正，自信开口说！",
+          "pronunciation_tip": "遇到多音节词，尤其是一些常见的形容词，要注意其音节的弱读和重音位置。很多时候，拼写中的字母不一定都会被清晰地读出来。"
+        },
+        {
+          "card_id": "T2-02",
+          "full_id": "英语-高三-T2-02",
+          "title": "“债务”的B是哑巴？Debt/Doubt/Subtle 沉默字母大揭秘！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "含有不发音字母 'b' 的常见单词发音。",
+          "core_points": [
+            "Debt /det/：'b' 不发音。",
+            "Doubt /daʊt/：'b' 不发音。",
+            "Subtle /ˈsʌtl/：'b' 不发音。",
+            "记忆规则：当 'b' 在 't' 之前时，通常不发音。"
+          ],
+          "why_explanation": "英语中存在大量不发音字母，学生习惯根据拼写逐个发音，导致错误。这些词是典型的例子。",
+          "example": {
+            "question": "Practice saying: 'He is in debt.' 'I doubt it.' 'A subtle change.'",
+            "steps": [
+              "注意 'debt' 中 'b' 的沉默。",
+              "注意 'doubt' 中 'b' 的沉默。",
+              "注意 'subtle' 中 'b' 的沉默。"
+            ],
+            "answer": "正确发音: /det/, /daʊt/, /ˈsʌtl/"
+          },
+          "mistakes": [
+            {
+              "wrong": "/deb.t/",
+              "correct": "/det/",
+              "reason": "'b' 在 't' 前不发音。"
+            },
+            {
+              "wrong": "/daʊb.t/",
+              "correct": "/daʊt/",
+              "reason": "'b' 在 't' 前不发音。"
+            }
+          ],
+          "memory_tip": "B在T前，B就哑巴！Debt, Doubt, Subtle，发音要记住！",
+          "emotion_hook": "雅思托福听力、口语高频词！读对了，秒变native speaker！",
+          "pronunciation_tip": "英语中有很多不发音字母的规则（如 'k' 在 'n' 前，'w' 在 'r' 前等），掌握这些规则能有效提高发音准确性。"
+        },
+        {
+          "card_id": "T2-03",
+          "full_id": "英语-高三-T2-03",
+          "title": "连读秘籍！Get it/Take off/Pick up 让你口语瞬间流畅！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "英语连读规则：辅音 + 元音 的连读。",
+          "core_points": [
+            "当一个单词以辅音结尾，下一个单词以元音开头时，会将辅音和元音连接起来一起读。",
+            "Get it → /ge.tɪt/",
+            "Take off → /teɪ.kɒf/",
+            "Pick up → /pɪ.kʌp/",
+            "连读能让口语更自然、流畅，是听懂地道英语的关键。"
+          ],
+          "why_explanation": "中文发音习惯每个字独立发音，导致学生在说英语时也逐词发音，缺乏连贯性，听起来生硬。",
+          "example": {
+            "question": "Practice the following phrases with连读: 'An apple', 'turn on', 'come in'.",
+            "steps": [
+              "An apple → /ə.nˈæ.pl/",
+              "Turn on → /tɜː.nɒn/",
+              "Come in → /kʌ.mɪn/"
+            ],
+            "answer": "注意辅音和元音的自然连接，不要停顿。"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is /hiː ɪz/ a good boy.",
+              "correct": "He is /hiː.z/ a good boy.",
+              "reason": "辅音 /z/ 和元音 /ə/ 连读。"
+            },
+            {
+              "wrong": "What /wɒt/ about /əˈbaʊt/ it /ɪt/?",
+              "correct": "What about /wɒ.tə.baʊ.tɪt/ it?",
+              "reason": "多个词之间连续连读。"
+            }
+          ],
+          "memory_tip": "辅音结尾元音头，连在一起说溜溜！",
+          "emotion_hook": "听力考试的救星！听不懂连读？那可就大错特错了！掌握它，听力理解能力飙升！",
+          "pronunciation_tip": "连读是英语口语和听力中非常重要的一环。除了辅音+元音，还有元音+元音 (加半元音 /j/ 或 /w/)，以及爆破音的失爆等，都值得学习。"
+        },
+        {
+          "card_id": "T2-04",
+          "full_id": "英语-高三-T2-04",
+          "title": "Stress 大作战！'Present' 名动重音大不同，你读对了吗？",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "名词和动词重音位置不同的常见单词。",
+          "core_points": [
+            "Present (n.) 礼物/现在：重音在第一音节 /ˈpreznt/。",
+            "Present (v.) 呈现/赠送：重音在第二音节 /prɪˈzent/。",
+            "这类词通常是双音节词，名词重音在前，动词重音在后。",
+            "其他例子：'record' (n./v.), 'object' (n./v.), 'rebel' (n./v.)。"
+          ],
+          "why_explanation": "学生不了解英语单词重音与词性相关的变化规则，导致发音错误，有时甚至影响理解。",
+          "example": {
+            "question": "Practice the following sentences: 1. I bought her a present. 2. He will present his project.",
+            "steps": [
+              "1. 'present' 作名词，重音在第一个音节。",
+              "2. 'present' 作动词，重音在第二个音节。"
+            ],
+            "answer": "1. /ˈpreznt/; 2. /prɪˈzent/"
+          },
+          "mistakes": [
+            {
+              "wrong": "I will /prɪˈzent/ you a gift.",
+              "correct": "I will /ˈpreznt/ you a gift.",
+              "reason": "此处 'present' 作名词 '礼物'，重音在前。"
+            },
+            {
+              "wrong": "The /ˈre.kɔːrd/ player is broken.",
+              "correct": "The /rɪˈkɔːrd/ player is broken.",
+              "reason": "此处 'record' 作动词 '记录'，重音在后。"
+            }
+          ],
+          "memory_tip": "名重前，动重后，双音节词重音是关键！",
+          "emotion_hook": "口语考试、听力辨析必备技能！区分词性，避免误解，让你的英语更专业！",
+          "pronunciation_tip": "掌握常见双音节词的名动重音规律，可以大大提高发音的准确性。同时，要注意上下文语境来判断词性。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T3",
+      "unit_name": "情景闯关",
+      "cards": [
+        {
+          "card_id": "T3-01",
+          "full_id": "英语-高三-T3-01",
+          "title": "模拟面试！外企HR最爱问的5个问题，如何完美作答？",
+          "type": "情景闯关卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "模拟求职面试场景，掌握常见面试问题的英语表达和应对策略。",
+          "core_points": [
+            "自我介绍 (Tell me about yourself)。",
+            "为什么选择我们公司/这个职位 (Why do you want to work here/for this position?)。",
+            "你的优点和缺点 (What are your strengths and weaknesses?)。",
+            "你对未来五年的规划 (Where do you see yourself in five years?)。",
+            "你有什么问题想问我们吗 (Do you have any questions for us?)。",
+            "关键词：passion, teamwork, problem-solving, quick learner, dedicated, adaptable。"
+          ],
+          "why_explanation": "高三学生面临未来选择，求职面试是重要场景。提前练习能让他们熟悉英语面试流程，提升自信和表达能力。",
+          "example": {
+            "question": "Imagine you are interviewing for an entry-level position at a tech company. How would you answer 'What are your strengths and weaknesses?'",
+            "steps": [
+              "描述1-2个与职位相关的优点，并用具体例子支撑。",
+              "描述1个“可改进”的缺点，并说明你正在如何努力克服它。",
+              "避免说无关紧要或过于负面的缺点。"
+            ],
+            "answer": "“My greatest strength is my problem-solving ability. For instance, in a school project, I successfully debugged a complex program that stumped my teammates. As for weaknesses, I sometimes tend to overthink details, but I'm actively working on improving my time management and trusting my initial judgment more.”"
+          },
+          "mistakes": [
+            {
+              "wrong": "My weakness is that I'm lazy.",
+              "correct": "My weakness is that I sometimes take on too many tasks, which can lead to feeling overwhelmed. I'm learning to prioritize and delegate effectively.",
+              "reason": "避免直接说负面且难以改进的缺点，要体现自我认知和改进意愿。"
+            }
+          ],
+          "memory_tip": "面试黄金法则：优点具体化，缺点“可改进”，问题要提问！",
+          "emotion_hook": "人生第一次英语面试？别慌！这份卡片让你从容应对，赢在起跑线！",
+          "scene_dialogue": "Interviewer: \"Good morning, [Your Name]. Please tell me about yourself.\" \n You: \"Good morning. I'm a highly motivated and detail-oriented individual with a strong passion for technology...\""
+        },
+        {
+          "card_id": "T3-02",
+          "full_id": "英语-高三-T3-02",
+          "title": "留学生活必备！在寄宿家庭如何优雅地表达需求和感谢？",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握在寄宿家庭中表达需求、请求帮助、表示感谢和道歉的常用英语口语。",
+          "core_points": [
+            "请求帮助：Could you please...? Would you mind...? I was wondering if you could...",
+            "表达需求：I need..., I'm looking for..., Is it possible to get...?",
+            "表示感谢：Thank you for..., I really appreciate..., That's very kind of you.",
+            "表示歉意：I'm sorry for..., My apologies for..., I didn't mean to...",
+            "关键词：polite, respectful, clear, grateful."
+          ],
+          "why_explanation": "高三后很多学生可能选择出国留学，寄宿家庭是常见的住宿形式。掌握日常交流能帮助他们更快适应新环境。",
+          "example": {
+            "question": "You need to ask your host parent if you can use the washing machine. How would you phrase it politely?",
+            "steps": [
+              "先问候，再提出请求。",
+              "使用礼貌的问句，如 'Would it be alright if...?' 或 'I was wondering if I could...?'。",
+              "说明你的需求。"
+            ],
+            "answer": "“Hi [Host Parent's Name], I hope you're having a good day. I was wondering if it would be alright for me to use the washing machine this evening? I have a few clothes that need washing.”"
+          },
+          "mistakes": [
+            {
+              "wrong": "Give me water.",
+              "correct": "Could I please have some water?",
+              "reason": "直接命令语气不礼貌，应使用疑问句或请求句式。"
+            }
+          ],
+          "memory_tip": "请求多用情态动词，感谢具体又真诚，道歉及时表歉意！",
+          "emotion_hook": "出国留学第一步！搞定寄宿家庭沟通，让你轻松融入当地生活，不再社恐！",
+          "scene_dialogue": "You: \"Excuse me, Mrs. Smith, I was wondering if I could borrow your iron for a moment? My shirt is quite wrinkled.\" \n Host Parent: \"Of course, dear. It's in the laundry room, next to the washing machine.\""
+        },
+        {
+          "card_id": "T3-03",
+          "full_id": "英语-高三-T3-03",
+          "title": "校园辩论赛！如何用英语有力地表达同意和反对意见？",
+          "type": "情景闯关卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "掌握在辩论或讨论中表达同意、反对、支持和反驳的常用英语句型。",
+          "core_points": [
+            "表达同意：I completely agree with..., That's a valid point, I couldn't agree more.",
+            "表达反对：I respectfully disagree..., I see your point, but..., I'm afraid I don't share that view.",
+            "支持观点：My point is further supported by..., This is evident in...",
+            "反驳观点：With all due respect, I think you've overlooked..., That's not entirely accurate because...",
+            "关键词：logical, evidence, respectful, articulate, persuasive."
+          ],
+          "why_explanation": "高三英语阅读和写作中常涉及议论性文章，口语表达能力在小组讨论、社团活动中也至关重要。",
+          "example": {
+            "question": "In a debate about whether AI will replace human jobs, how would you express strong agreement with the statement 'AI will create more new jobs than it eliminates'?",
+            "steps": [
+              "明确表达同意。",
+              "给出支持的理由或例子。",
+              "使用强调性词语。"
+            ],
+            "answer": "“I couldn't agree more with the statement that AI will create more new jobs than it eliminates. Historically, every major technological revolution has led to new industries and roles. For example, the rise of the internet created countless jobs that didn't exist before.”"
+          },
+          "mistakes": [
+            {
+              "wrong": "You are wrong.",
+              "correct": "I respectfully disagree with your point.",
+              "reason": "直接说“你错了”过于生硬和不礼貌，应使用更委婉和尊重的表达。"
+            }
+          ],
+          "memory_tip": "同意要有力，反对要委婉，论据要充分，表达要清晰！",
+          "emotion_hook": "英语演讲、小组讨论再也不怕！成为课堂焦点，让老师对你刮目相看！",
+          "scene_dialogue": "Speaker A: \"I believe social media has a detrimental effect on teenagers' mental health.\" \n Speaker B: \"I understand your concern, but I'd like to offer a different perspective. While there are risks, social media also provides platforms for connection and support, especially for those feeling isolated.\""
+        }
+      ]
+    },
+    {
+      "unit_id": "T4",
+      "unit_name": "语法纠错",
+      "cards": [
+        {
+          "card_id": "T4-01",
+          "full_id": "英语-高三-T4-01",
+          "title": "虚拟语气大魔王！If I was/were you 哪个才是对的？考前必刷！",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "条件状语从句中虚拟语气的常见错误，特别是 'be' 动词的使用。",
+          "core_points": [
+            "与现在事实相反的虚拟语气：If + 主语 + 动词过去式 (be动词用 were)，主句主语 + would/could/might/should + 动词原形。",
+            "常见错误：在 'If I/he/she/it' 后使用 'was'。",
+            "无论主语单复数，be动词在虚拟语气中一般用 'were'。",
+            "记忆：虚拟语气里，be动词永远是 'were'，表示一种“假设”而非“事实”。"
+          ],
+          "why_explanation": "学生习惯性地根据主语单复数选择 'was' 或 'were'，而忽略了虚拟语气中 'were' 的特殊用法。",
+          "example": {
+            "question": "Correct the sentence: 'If I was a bird, I would fly to you.'",
+            "steps": [
+              "识别这是一个与现在事实相反的虚拟语气条件句。",
+              "在虚拟语气中，无论主语是谁，be动词都用 'were'。"
+            ],
+            "answer": "If I were a bird, I would fly to you.",
+            "grammar_fix": "虚拟语气中，与现在事实相反的条件句，'be' 动词一律用 'were'，不分人称和单复数。"
+          },
+          "mistakes": [
+            {
+              "wrong": "If he was here, he would help us.",
+              "correct": "If he were here, he would help us.",
+              "reason": "虚拟语气中 'be' 动词用 'were'。"
+            },
+            {
+              "wrong": "I wish I was taller.",
+              "correct": "I wish I were taller.",
+              "reason": "'wish' 后接的宾语从句也用虚拟语气，与现在事实相反。"
+            }
+          ],
+          "memory_tip": "虚拟语气里，be动词变Were，不分你我他，都是ta！",
+          "emotion_hook": "高考语法填空、改错必考点！一个Were让你轻松拿分，告别低级错误！",
+          "trap_point": "在口语中，'If I was' 有时会被接受，但在书面语和标准化考试中，'If I were' 才是标准用法。"
+        },
+        {
+          "card_id": "T4-02",
+          "full_id": "英语-高三-T4-02",
+          "title": "非谓语动词杀手！主动还是被动？doing/to do/done 彻底搞清！",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "非谓语动词 (ing, to do, done) 在句中作状语、定语时的主动/被动关系及时间关系。",
+          "core_points": [
+            "现在分词 (doing)：表示主动和正在进行。",
+            "过去分词 (done)：表示被动和已经完成。",
+            "不定式 (to do)：表示目的、将要发生或某种倾向。",
+            "不定式完成式 (to have done)：表示动作在谓语动词之前发生。",
+            "分词作状语时，其逻辑主语与句子主语一致。",
+            "分词作定语时，修饰名词，表示主动/被动关系。"
+          ],
+          "why_explanation": "学生在选择非谓语动词形式时，常忽略其与逻辑主语之间的主动/被动关系和时间先后关系。",
+          "example": {
+            "question": "Correct the sentence: 'The book writing in English is very popular.'",
+            "steps": [
+              "分析 'writing' 和 'book' 的关系。书是被写，所以是被动。",
+              "被动且表示完成或状态，应使用过去分词 'written'。"
+            ],
+            "answer": "The book written in English is very popular.",
+            "grammar_fix": "分词作定语或状语时，需判断其与逻辑主语的主动或被动关系。主动用现在分词 (doing)，被动用过去分词 (done)。"
+          },
+          "mistakes": [
+            {
+              "wrong": "Seeing from the top of the mountain, the city looks beautiful.",
+              "correct": "Seen from the top of the mountain, the city looks beautiful.",
+              "reason": "城市是被看，是被动关系，应用过去分词 'seen'。"
+            },
+            {
+              "wrong": "He pretended not knowing about the accident.",
+              "correct": "He pretended not to know about the accident.",
+              "reason": "pretend 后接不定式 'to do'。"
+            }
+          ],
+          "memory_tip": "主动ing，被动done，目的to do，时间看主语！",
+          "emotion_hook": "完形填空、语法填空、改错题的“三杀”大魔王！搞定它，语法题不再失分！",
+          "trap_point": "如果非谓语动词的逻辑主语与句子主语不一致，且没有连接词，则需要使用独立主格结构。"
+        },
+        {
+          "card_id": "T4-03",
+          "full_id": "英语-高三-T4-03",
+          "title": "倒装句太烧脑？否定词开头的倒装，你真的会用吗？",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "掌握以否定词开头的句子倒装规则及常见错误。",
+          "core_points": [
+            "当 hardly, scarcely, barely, seldom, rarely, never, little, not only, no sooner than 等否定词或否定意义的短语置于句首时，句子需要进行部分倒装。",
+            "部分倒装：将助动词 (do/does/did), 情态动词 (can/may/must), 或 be 动词提前到主语之前。",
+            "例如：Never have I seen such a beautiful sight.",
+            "常见错误：将否定词提前，但句子不倒装；或将谓语动词全部提前。"
+          ],
+          "why_explanation": "学生不熟悉倒装的语法规则，尤其是在否定词置于句首时，容易忘记进行部分倒装。",
+          "example": {
+            "question": "Correct the sentence: 'Hardly he had arrived when it began to rain.'",
+            "steps": [
+              "识别 'Hardly' 是否定词，置于句首。",
+              "判断需要部分倒装，将助动词 'had' 提前。",
+              "主语 'he' 放在 'had' 和 'arrived' 之间。"
+            ],
+            "answer": "Hardly had he arrived when it began to rain.",
+            "grammar_fix": "否定词置于句首时，句子需要部分倒装，即将助动词、情态动词或be动词提前到主语之前。"
+          },
+          "mistakes": [
+            {
+              "wrong": "Not until he came back I realized the truth.",
+              "correct": "Not until he came back did I realize the truth.",
+              "reason": "'Not until' 短语置于句首时，主句需要部分倒装，用助动词 'did'。"
+            },
+            {
+              "wrong": "Little we knew about the plan.",
+              "correct": "Little did we know about the plan.",
+              "reason": "'Little' (几乎没有) 具否定意义，置于句首时主句部分倒装。"
+            }
+          ],
+          "memory_tip": "否定词一开头，助动词要先行！",
+          "emotion_hook": "高考书面表达高分句型！用对倒装句，让你的作文瞬间高大上，阅卷老师一眼爱上！",
+          "trap_point": "如果否定词修饰主语，则不倒装，如 'No student knows the answer.'。倒装只发生在否定词修饰谓语或状语时。"
+        },
+        {
+          "card_id": "T4-04",
+          "full_id": "英语-高三-T4-04",
+          "title": "主谓一致陷阱！集体名词、不定代词，你还傻傻分不清？",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "主谓一致的常见错误，特别是针对集体名词和不定代词。",
+          "core_points": [
+            "集体名词 (如 family, team, class, committee, government)：若强调整体，谓语动词用单数；若强调成员个体，谓语动词用复数。",
+            "不定代词 (如 everybody, everyone, nobody, no one, anybody, anyone, something, nothing)：谓语动词永远用单数。",
+            "由 'neither...nor...' 或 'either...or...' 连接的并列主语：谓语动词与靠近的那个主语保持一致。",
+            "由 'as well as', 'with', 'together with', 'but', 'except' 等连接的并列主语：谓语动词与第一个主语保持一致。"
+          ],
+          "why_explanation": "学生对这些特殊主语的单复数判断不清，或受到就近原则干扰，导致主谓不一致。",
+          "example": {
+            "question": "Correct the sentence: 'The family are having dinner at home.'",
+            "steps": [
+              "分析 'family'。如果强调家庭整体作为一个单位，谓语动词用单数。",
+              "如果强调家庭成员各自在吃饭，谓语动词用复数。此处可理解为成员各自吃饭，所以用复数也对。",
+              "但如果强调“家庭”这个集体，更倾向于单数。"
+            ],
+            "answer": "The family is having dinner at home. (强调整体)",
+            "grammar_fix": "集体名词的主谓一致需根据语境判断是强调整体还是个体。不定代词一律用单数。"
+          },
+          "mistakes": [
+            {
+              "wrong": "Everybody are happy with the result.",
+              "correct": "Everybody is happy with the result.",
+              "reason": "不定代词 'everybody' 谓语动词用单数。"
+            },
+            {
+              "wrong": "Neither he nor I is responsible for this.",
+              "correct": "Neither he nor I am responsible for this.",
+              "reason": "谓语动词与靠近的主语 'I' 保持一致。"
+            }
+          ],
+          "memory_tip": "集体名词看整体，不定代词是单数，就近原则不糊涂！",
+          "emotion_hook": "高考选择题送分题！一眼看穿主谓一致陷阱，轻松避雷，稳稳拿分！",
+          "trap_point": "一些名词如 'police', 'people' 总是用复数谓语动词，而 'news', 'mathematics' 等形式为复数但意义为单数的词，则用单数谓语动词。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T5",
+      "unit_name": "PK挑战",
+      "cards": [
+        {
+          "card_id": "T5-01",
+          "full_id": "英语-高三-T5-01",
+          "title": "高考真题PK！完形填空动词辨析，你敢来挑战吗？",
+          "type": "PK挑战卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "通过高考真题片段，挑战高频动词辨析，提升完形填空准确率。",
+          "core_points": [
+            "理解上下文语境，把握文章主旨。",
+            "分析选项中动词的词义、搭配和用法。",
+            "注意动词的时态、语态和非谓语形式。",
+            "排除法：通过词义不符、搭配错误或语法错误排除选项。"
+          ],
+          "why_explanation": "完形填空是高考的难点，动词辨析又是其中关键。通过真题训练，学生能熟悉考点，提升实战能力。",
+          "example": {
+            "question": "（2023年全国甲卷 完形填空节选）...He was not a great student, but he always ______ (A. managed B. succeeded C. achieved D. performed) to make people laugh...",
+            "steps": [
+              "分析句意：他不是一个好学生，但他总能让人们发笑。",
+              "A. manage to do sth. 意为“设法做成某事”，符合语境。",
+              "B. succeed (in doing sth./sth.) 意为“成功”，通常不直接接 to do。",
+              "C. achieve (sth.) 意为“取得，达到”，后面接成就。",
+              "D. perform (sth.) 意为“表演，执行”，不符合语境。"
+            ],
+            "answer": "A. managed",
+            "battle_rule": "限时30秒，选择最符合语境和语法的动词。答错一次，惩罚做10个单词听写！"
+          },
+          "mistakes": [
+            {
+              "wrong": "He succeeded to make people laugh.",
+              "correct": "He managed to make people laugh.",
+              "reason": "succeed 后面通常接 in doing sth. 或名词，manage to do sth. 更符合“设法做成”的语境。"
+            }
+          ],
+          "memory_tip": "完形填空三步走：通读全文知大意，逐词辨析细推敲，复核语境保无遗！",
+          "emotion_hook": "和学霸同学PK，看谁能抢到高分！高考完形填空提分秘籍，等你来战！"
+        },
+        {
+          "card_id": "T5-02",
+          "full_id": "英语-高三-T5-02",
+          "title": "语法填空大挑战！关系词辨析，一秒锁定正确答案！",
+          "type": "PK挑战卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "通过高考语法填空题，挑战关系代词、关系副词的辨析和使用。",
+          "core_points": [
+            "关系代词 (who, whom, whose, which, that)：在从句中作主语、宾语、定语，指代人或物。",
+            "关系副词 (when, where, why)：在从句中作时间、地点、原因状语，指代时间、地点、原因。",
+            "区分限制性定语从句和非限制性定语从句 (逗号)。",
+            "注意介词+关系代词的用法。"
+          ],
+          "why_explanation": "关系词是高中英语语法中的重点和难点，学生容易混淆其指代对象、在从句中的成分以及与介词的搭配。",
+          "example": {
+            "question": "（2022年全国乙卷 语法填空节选）...He told me about the day _______ (he was born)...",
+            "steps": [
+              "分析先行词 'the day' 是时间。",
+              "分析从句 'he was born' 缺少时间状语。",
+              "因此需要一个关系副词来引导时间状语从句。",
+              "选择 'when'。"
+            ],
+            "answer": "when",
+            "battle_rule": "限时20秒，选择最合适的词填空。答错一次，抄写该语法点例句5遍！"
+          },
+          "mistakes": [
+            {
+              "wrong": "This is the reason which he left.",
+              "correct": "This is the reason why he left.",
+              "reason": "reason 引导原因状语从句用 why，或 'for which'。"
+            },
+            {
+              "wrong": "The house, where he lived, was destroyed.",
+              "correct": "The house, in which he lived, was destroyed.",
+              "reason": "非限制性定语从句中，如果谓语动词是 live，需要介词 'in'。或者直接用 'where'。"
+            }
+          ],
+          "memory_tip": "先行词定属性，从句成分定关系，介词搭配要注意，逗号前后是关键！",
+          "emotion_hook": "语法填空必考题型！和你的同桌PK，看谁能零失误搞定关系词！",
+          "trap_point": "在限制性定语从句中，'that' 可以替代 'who/whom/which' 作主语或宾语，但在非限制性定语从句中不能用 'that'。"
+        },
+        {
+          "card_id": "T5-03",
+          "full_id": "英语-高三-T5-03",
+          "title": "书面表达高分挑战！高级句型转换，让你的作文脱颖而出！",
+          "type": "PK挑战卡",
+          "difficulty": 5,
+          "importance": 5,
+          "definition": "挑战将简单句转换为高级复杂句，提升书面表达的句子多样性和复杂性。",
+          "core_points": [
+            "使用非谓语动词 (分词、不定式、动名词) 简化句子。",
+            "运用各种从句 (名词性从句、定语从句、状语从句) 增加信息量。",
+            "使用倒装、强调句、独立主格等特殊句型。",
+            "将并列句改为复合句或主从复合句。",
+            "关键词：多样性、复杂性、准确性、连贯性。"
+          ],
+          "why_explanation": "高考书面表达对句子的多样性和高级性有要求。通过句型转换练习，学生能掌握更多表达方式，提高作文分数。",
+          "example": {
+            "question": "Rewrite the following sentences into one complex sentence, using advanced structures: 'He worked hard. He wanted to pass the exam. He finally succeeded.'",
+            "steps": [
+              "识别三个简单句的核心信息。",
+              "将 'wanted to pass the exam' 改为目的状语或不定式作状语。",
+              "将 'He worked hard' 和 'He finally succeeded' 连接起来，体现因果或结果。",
+              "尝试使用分词短语或倒装句。"
+            ],
+            "answer": "Working hard with the aim of passing the exam, he finally succeeded. / So hard did he work that he finally succeeded in passing the exam.",
+            "battle_rule": "限时1分钟，将给出的简单句转换为一个包含至少一个从句或非谓语结构的高级句型。评分标准：语法准确性、句型复杂性、表达流畅性。输者请吃饭！"
+          },
+          "mistakes": [
+            {
+              "wrong": "Because he worked hard, so he passed the exam.",
+              "correct": "Because he worked hard, he passed the exam. / He worked hard, so he passed the exam.",
+              "reason": "'because' 和 'so' 不能同时使用。"
+            }
+          ],
+          "memory_tip": "简单句变复杂，从句分词和倒装，句型多样是王道，高分作文轻松造！",
+          "emotion_hook": "高考英语作文想拿高分？这套高级句型转换卡片，让你轻松甩开同龄人，成为作文大神！",
+          "trap_point": "在追求句型复杂性的同时，务必保证语法准确无误。过度堆砌复杂句型而出现语法错误反而会扣分。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T6",
+      "unit_name": "速记卡",
+      "cards": [
+        {
+          "card_id": "T6-01",
+          "full_id": "英语-高三-T6-01",
+          "title": "动词+介词？10组超高频短语搭配，口诀秒杀！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "高效记忆高频动词短语 (phrasal verbs) 及其含义。",
+          "core_points": [
+            "Look for (寻找), look after (照顾), look up (查阅), look forward to (期待)。",
+            "Put on (穿上), put off (推迟), put out (扑灭), put up with (忍受)。",
+            "Get on (上车/进展), get off (下车), get along with (相处融洽), get over (克服/康复)。",
+            "Take off (脱掉/起飞), take up (从事/占据), take part in (参加), take over (接管)。",
+            "Run out of (用完), run into (偶然遇见)。"
+          ],
+          "why_explanation": "动词短语是英语中的特色，含义多变且不易猜测，是高考词汇填空和阅读理解的常考点。通过分类和口诀能提高记忆效率。",
+          "example": {
+            "question": "Choose the correct phrasal verb: My car has run _____ gas. (out of/into)",
+            "steps": [
+              "分析句意：我的车没油了。",
+              "run out of 意为“用完”，符合语境。",
+              "run into 意为“偶然遇见”，不符合语境。"
+            ],
+            "answer": "out of"
+          },
+          "mistakes": [
+            {
+              "wrong": "I'm looking for to hearing from you.",
+              "correct": "I'm looking forward to hearing from you.",
+              "reason": "look forward to 后接动名词 (doing)，表示“期待做某事”。"
+            }
+          ],
+          "memory_tip": "Look：找查照看期待！Put：穿脱灭忍推迟！Get：上下进展相处克！Take：脱飞从事参加接！",
+          "emotion_hook": "完形填空、阅读理解的得分利器！这些动词短语背会了，英语成绩蹭蹭涨！",
+          "speed_method": "联想记忆法：将同一个动词与不同介词组合，形成一个“家族”，通过介词的方位含义（如 up 向上，down 向下，off 离开）联想其引申义。"
+        },
+        {
+          "card_id": "T6-02",
+          "full_id": "英语-高三-T6-02",
+          "title": "不规则动词变身咒！三单变身，过去式、过去分词不再愁！",
+          "type": "速记卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "高效记忆常见不规则动词的过去式和过去分词。",
+          "core_points": [
+            "A-A-A 型：put-put-put, cut-cut-cut, read-read-read (发音不同)。",
+            "A-B-A 型：come-came-come, run-ran-run, become-became-become。",
+            "A-B-B 型：buy-bought-bought, bring-brought-brought, build-built-built, keep-kept-kept。",
+            "A-B-C 型：begin-began-begun, drink-drank-drunk, sing-sang-sung。",
+            "其他特殊变化：go-went-gone, be-was/were-been。"
+          ],
+          "why_explanation": "不规则动词是英语动词变化的基础，但其不规律性让学生难以记忆，导致时态和语态错误。",
+          "example": {
+            "question": "Fill in the blanks: 1. I _____ (write) a letter yesterday. 2. This book was _____ (write) by Shakespeare.",
+            "steps": [
+              "1. 'yesterday' 表过去，用过去式。",
+              "2. 'was' 后接过去分词构成被动语态。"
+            ],
+            "answer": "1. wrote; 2. written"
+          },
+          "mistakes": [
+            {
+              "wrong": "He begun his work an hour ago.",
+              "correct": "He began his work an hour ago.",
+              "reason": "begin 的过去式是 began。"
+            }
+          ],
+          "memory_tip": "三段变身记口诀：A-A-A, A-B-A, A-B-B, A-B-C，分类记忆事半功倍！",
+          "emotion_hook": "语法填空、改错、作文的基石！背熟这些，英语动词不再是你的噩梦！",
+          "speed_method": "分类记忆法：将不规则动词按照其过去式和过去分词的变化规律进行分类，集中记忆同一类型的词。同时，结合例句和语境进行练习，加深印象。"
+        },
+        {
+          "card_id": "T6-03",
+          "full_id": "英语-高三-T6-03",
+          "title": "写作高级句型速成！倒装、从句、分词，三招让你作文瞬间提分！",
+          "type": "速记卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "高效记忆并运用高考写作中的高级句型，提升作文质量。",
+          "core_points": [
+            "倒装句：Not only... but also..., Hardly had... when..., So/Such... that...。",
+            "强调句：It is/was... that/who...。",
+            "非谓语动词作状语：Using/Having used..., Filled with..., To solve the problem...",
+            "独立主格：The weather permitting, ..., With all factors considered, ...。",
+            "高级从句：同位语从句 (The fact that...), 主语从句 (What matters most is...), 宾语从句 (I suggest that...), 状语从句的多样化表达。"
+          ],
+          "why_explanation": "高考作文需要展示句型多样性。学生如果只用简单句，分数难以提高。掌握高级句型能让表达更精准、丰富。",
+          "example": {
+            "question": "Transform 'He worked hard and succeeded.' into a more advanced sentence.",
+            "steps": [
+              "考虑使用分词作状语：Working hard, he succeeded.",
+              "考虑使用强调句：It was because he worked hard that he succeeded.",
+              "考虑使用倒装句：So hard did he work that he succeeded."
+            ],
+            "answer": "Working hard, he eventually succeeded. / It was because he worked hard that he eventually succeeded.",
+            "speed_method": "模板套用+替换法：记住几个核心句型模板，然后根据具体语境替换关键词和短语。如 'It is + 形容词 + for sb. to do sth.' (It is important for us to protect the environment.)"
+          },
+          "mistakes": [
+            {
+              "wrong": "What we should do is to protect environment.",
+              "correct": "What we should do is to protect the environment.",
+              "reason": "environment 前通常加定冠词 the。"
+            }
+          ],
+          "memory_tip": "倒装强调非谓语，独立主格从句奇，写作高分靠多样！",
+          "emotion_hook": "高考作文冲刺满分必备！这份高级句型速记卡，让你的作文瞬间惊艳阅卷老师！",
+          "trap_point": "在运用高级句型时，切忌生搬硬套或出现语法错误。应在理解句型结构和语境的基础上灵活运用。"
+        },
+        {
+          "card_id": "T6-04",
+          "full_id": "英语-高三-T6-04",
+          "title": "词根词缀魔法！20个高频词根词缀，帮你词汇量暴涨！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "通过词根词缀法高效记忆和推测词义，迅速扩大词汇量。",
+          "core_points": [
+            "常见前缀：un- (不), re- (再), pre- (前), dis- (不), in-/im- (不/内)。",
+            "常见后缀：-able/-ible (能…的), -tion/-sion (名词后缀), -er/-or (人/物), -ment (名词后缀), -ly (副词后缀)。",
+            "常见词根：-port- (拿/运), -ject- (投/掷), -vis-/-vid- (看), -dict- (说), -auto- (自己)。",
+            "记忆方法：理解词根词缀的含义，然后通过组合推导新词。"
+          ],
+          "why_explanation": "死记硬背单词效率低，且容易遗忘。词根词缀法能帮助学生理解单词构成，掌握规律，从而举一反三，高效扩充词汇。",
+          "example": {
+            "question": "Use词根词缀法 to explain 'invisible' and 'export'.",
+            "steps": [
+              "Invisible: in- (不) + vis (看) + -ible (能...的) → 看不见的。",
+              "Export: ex- (向外) + port (运) → 出口。"
+            ],
+            "answer": "Invisible: 'in-' (not) + 'vis' (see) + '-ible' (able to) = unable to be seen. \n Export: 'ex-' (out) + 'port' (carry) = to carry out (goods)."
+          },
+          "mistakes": [
+            {
+              "wrong": "误将 'import' 理解为“重要的”。",
+              "correct": "Import: im- (向内) + port (运) → 进口。",
+              "reason": "混淆了词根词缀的含义，'important' 是另一个词。"
+            }
+          ],
+          "memory_tip": "前缀词根后缀，三者组合变新词，举一反三，词汇量暴涨！",
+          "emotion_hook": "告别死记硬背！这份词根词缀魔法卡，让你轻松拿下阅读理解生词，词汇量飙升！",
+          "speed_method": "联想归类法：将具有相同词根或词缀的单词归类记忆。例如，所有含 '-port-' 的词 (import, export, transport, support) 一起记忆，加深对词根含义的理解。"
+        }
+      ]
+    }
+  ]
+}

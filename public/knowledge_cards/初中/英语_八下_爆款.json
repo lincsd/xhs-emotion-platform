@@ -1,0 +1,702 @@
+{
+  "subject": "英语",
+  "grade": "八年级",
+  "semester": "下册",
+  "textbook": "人教版",
+  "grade_short": "八下",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片（八年级下册全知识点覆盖版）",
+  "units": [
+    {
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [
+        {
+          "card_id": "T1-01",
+          "full_id": "英语-八下-T1-01",
+          "title": "🤯spend/take/cost/pay：傻傻分不清？一卡帮你全搞定！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "这四个动词都与“花费”有关，但在主语、宾语和句式上各有侧重，极易混淆。",
+          "core_points": [
+            "spend: 主语是人，宾语是钱或时间，常接 on sth / (in) doing sth。",
+            "take: 主语是物或形式主语it，宾语是时间，常接 sb some time to do sth。",
+            "cost: 主语是物，宾语是钱，常接 sb some money。",
+            "pay: 主语是人，宾语是钱，常接 for sth / to sb。"
+          ],
+          "why_explanation": "中文里“花钱/花时间”表达多样，而英文中这四个词对主语、宾语和介词有严格限定，稍不注意就会用错。",
+          "example": {
+            "question": "选词填空：It ____ me two hours to finish the homework. I ____ 50 yuan for the book.",
+            "steps": [
+              "分析第一个空：主语是 It，宾语是时间 two hours，且后接 to do sth，符合 take 的用法。",
+              "分析第二个空：主语是 I (人)，宾语是 50 yuan (钱)，后接 for the book，符合 pay 的用法。"
+            ],
+            "answer": "took, paid"
+          },
+          "trap_point": "混淆主语（人/物/It）和宾语（时间/金钱），以及搭配的介词和动词形式。",
+          "memory_tip": "人spend钱/时间on事，It takes人时间to事，物cost人钱，人pay钱for物。",
+          "emotion_hook": "每次写作文都卡壳？别让这些小词毁了你的高分句！"
+        },
+        {
+          "card_id": "T1-02",
+          "full_id": "英语-八下-T1-02",
+          "title": "🤯borrow/lend：借进借出分不清？一招搞定！",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "borrow意为“借入”，lend意为“借出”，方向相反。",
+          "core_points": [
+            "borrow (from sb): 从某人那里借入。",
+            "lend (to sb): 借出给某人。",
+            "记住动作方向：borrow是把东西拿进来，lend是把东西送出去。",
+            "常考搭配：borrow sth from sb / lend sth to sb。"
+          ],
+          "why_explanation": "中文里“借”这个字既可以指借入也可以指借出，导致学生在翻译时容易混淆英文的borrow和lend。",
+          "example": {
+            "question": "选词填空：Can I ____ your pen? (我可以借你的笔吗？) Please ____ me your pen. (请把你的笔借给我。)",
+            "steps": [
+              "第一个句子是“我”向“你”借，是借入，所以用 borrow。",
+              "第二个句子是“你”把笔借给“我”，是借出，所以用 lend。"
+            ],
+            "answer": "borrow, lend"
+          },
+          "trap_point": "中文语境下“借”的歧义，导致英文使用时搞错动作方向。",
+          "memory_tip": "borrow像“抱入”，lend像“扔出”！",
+          "emotion_hook": "考试遇到“借”的题就懵？别慌，这个卡片让你瞬间变清晰！"
+        },
+        {
+          "card_id": "T1-03",
+          "full_id": "英语-八下-T1-03",
+          "title": "🤯used to do / be used to doing / be used to do：天呐！这仨到底怎么用？！",
+          "type": "易混词陷阱卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "这三个短语因形式相似但含义和用法迥异，成为常考易错点。",
+          "core_points": [
+            "used to do sth: 过去常常做某事（现在不做了），表示过去习惯或状态。",
+            "be used to doing sth: 习惯于做某事，be动词可变，to是介词，doing是动名词。",
+            "be used to do sth: 被用来做某事，be动词可变，to是动词不定式，表示目的，used是动词use的过去分词作表语。",
+            "区分to的词性：前两个to是介词，第三个to是动词不定式符号。"
+          ],
+          "why_explanation": "核心在于第二个和第三个短语中的“to”词性不同，一个作介词后接动名词，一个作不定式符号后接动词原形。而第一个短语是固定搭配，表示过去习惯。",
+          "example": {
+            "question": "选词填空：He ____ (live) in Beijing. I ____ (get up) early. The knife ____ (cut) bread.",
+            "steps": [
+              "第一个空：表示过去常住，用 used to do。",
+              "第二个空：表示现在习惯于早起，用 be used to doing。",
+              "第三个空：表示刀被用来切面包，用 be used to do。"
+            ],
+            "answer": "used to live, am used to getting up, is used to cut"
+          },
+          "trap_point": "混淆to的介词和不定式属性，以及be动词的有无对含义的影响。",
+          "memory_tip": "used to老习惯，be used to doing新习惯，be used to do被利用！",
+          "emotion_hook": "每次都错！这个万年大坑，今天我帮你彻底填平！"
+        },
+        {
+          "card_id": "T1-04",
+          "full_id": "英语-八下-T1-04",
+          "title": "🤯hard / hardly：一字之差，天壤之别！别再搞混啦！",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "hard既可作形容词（努力的，困难的）也可作副词（努力地），而hardly是副词，意为“几乎不”。",
+          "core_points": [
+            "hard (adj.): 困难的，坚硬的，努力的 (e.g., hard work, a hard question)。",
+            "hard (adv.): 努力地，辛苦地 (e.g., study hard, work hard)。",
+            "hardly (adv.): 几乎不，简直不 (e.g., hardly ever, hardly know)。",
+            "hardly带有否定意义，常与any, ever, when等词连用。"
+          ],
+          "why_explanation": "hard既是形容词又是副词，而hardly是其后缀变形后完全不同的副词，语义上从“努力地”变成了“几乎不”，这种巨大的反差是混淆的主要原因。",
+          "example": {
+            "question": "选词填空：He works very ____. He ____ has time to rest.",
+            "steps": [
+              "第一个空：修饰动词 works，表示“努力地工作”，用 hard。",
+              "第二个空：表示“几乎没有时间休息”，强调否定，用 hardly。"
+            ],
+            "answer": "hard, hardly"
+          },
+          "trap_point": "以为hardly是hard的副词形式，但语义完全不同。",
+          "memory_tip": "hard是“努力”，hardly是“不努力”（几乎不），差一个ly，意思差千里！",
+          "emotion_hook": "别再让你的努力白费！一分钟搞懂hard和hardly！"
+        },
+        {
+          "card_id": "T1-05",
+          "full_id": "英语-八下-T1-05",
+          "title": "🤯if / whether：条件状语从句和宾语从句的“如果”之战！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "if和whether都可表示“是否”，但if在条件状语从句中意为“如果”，在宾语从句中可与whether互换，但whether适用范围更广。",
+          "core_points": [
+            "if (条件状语从句): 如果…，从句用一般现在时表将来。",
+            "if (宾语从句): 是否，可与whether互换。",
+            "whether (宾语从句): 是否，用法更广，可接or not，可引导主语/表语/同位语从句，也可接不定式。",
+            "在介词后、不定式前、或有or not时，只能用whether。"
+          ],
+          "why_explanation": "if既可以引导条件状语从句，又可以引导宾语从句，导致学生混淆其在不同语境下的含义和用法。而whether虽然主要引导宾语从句，但其适用范围比if更广。",
+          "example": {
+            "question": "选词填空：I don't know ____ he will come or not. ____ it rains tomorrow, we won't go out.",
+            "steps": [
+              "第一个空：后面有 or not，只能用 whether。",
+              "第二个空：表示“如果下雨”，是条件状语从句，用 if。"
+            ],
+            "answer": "whether, If"
+          },
+          "trap_point": "混淆if的条件和宾语从句用法，以及忽略whether的特殊用法（如 with or not）。",
+          "memory_tip": "if是“如果”和“是否”，whether是“是否”的全能王！",
+          "emotion_hook": "每次考试都被“如果”和“是否”绕晕？这卡片让你秒懂！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T2",
+      "unit_name": "发音挑战卡",
+      "cards": [
+        {
+          "card_id": "T2-01",
+          "full_id": "英语-八下-T2-01",
+          "title": "🤫Silent Letters 偷偷溜走？这些词别再读错了！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "英语中有些字母在特定词汇中不发音，被称为“哑音字母”，是发音的常见陷阱。",
+          "core_points": [
+            "Silent 'k' before 'n': know, knife, knock。",
+            "Silent 'w' before 'r': write, wrong, answer。",
+            "Silent 'b' after 'm': climb, lamb, comb。",
+            "Silent 'l' before 'k' or 'm': walk, talk, calm。",
+            "Silent 'g' before 'n' (sometimes): sign, foreign。",
+            "Silent 't' in some words: listen, castle, often。",
+            "Silent 'h' in some words: hour, honest, ghost。"
+          ],
+          "why_explanation": "英语词汇来源复杂，保留了许多历史发音的痕迹，导致一些字母在现代英语中不再发音。",
+          "example": {
+            "question": "以下单词哪个字母不发音？a. knife b. walk c. honest",
+            "steps": [
+              "knife: 'k' 不发音。",
+              "walk: 'l' 不发音。",
+              "honest: 'h' 不发音。"
+            ],
+            "answer": "a. k, b. l, c. h"
+          },
+          "pronunciation_tip": "遇到这些词，记住“眼不见为净”，大胆省略哑音字母，发音会更地道。",
+          "memory_tip": "KN不发K，WR不发W，MB不发B，LK/LM不发L，GN不发G，ST不发T，HO不发H。",
+          "emotion_hook": "发音总被嘲笑？学会这些，你的口语瞬间高大上！"
+        },
+        {
+          "card_id": "T2-02",
+          "full_id": "英语-八下-T2-02",
+          "title": "🤬-ed 过去式发音：你真的读对了吗？！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "规则动词的过去式和过去分词-ed的结尾有三种发音：/t/, /d/, /ɪd/。",
+          "core_points": [
+            "发 /t/：动词原形以清辅音结尾 (p, k, f, s, sh, ch, x) (except t)。",
+            "发 /d/：动词原形以浊辅音或元音结尾 (except d)。",
+            "发 /ɪd/：动词原形以 /t/ 或 /d/ 结尾。"
+          ],
+          "why_explanation": "这是为了发音的顺畅性。清辅音后接清辅音，浊辅音后接浊辅音。如果动词原形末尾音与-ed发音相同，则需要加一个音节以区分。",
+          "example": {
+            "question": "请判断以下单词-ed的正确发音：a. watched b. played c. wanted",
+            "steps": [
+              "watched: watch以清辅音 /tʃ/ 结尾，所以发 /t/。",
+              "played: play以元音 /eɪ/ 结尾，所以发 /d/。",
+              "wanted: want以 /t/ 结尾，所以发 /ɪd/。"
+            ],
+            "answer": "a. /t/, b. /d/, c. /ɪd/"
+          },
+          "pronunciation_tip": "记住口诀：清清浊浊，t/d加/ɪd/。多听多模仿，形成语感。",
+          "memory_tip": "清辅音后 /t/，浊元音后 /d/，t或d后 /ɪd/。",
+          "emotion_hook": "别让你的英语听起来像“中式英语”！一个小细节，瞬间提升你的口语！"
+        },
+        {
+          "card_id": "T2-03",
+          "full_id": "英语-八下-T2-03",
+          "title": "🗣️连读技巧：An apple？No，An_apple！瞬间变身Native Speaker！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "连读是英语口语中常见的现象，指相邻单词之间，前一个词的词尾音与后一个词的词首音连在一起读。",
+          "core_points": [
+            "辅音 + 元音：前词以辅音结尾，后词以元音开头，辅音与元音连读 (e.g., an_apple, turn_on)。",
+            "r + 元音：以-r或-re结尾的词，后接元音开头的词时，r发音并与元音连读 (e.g., for_example, here_is)。",
+            "t/d + y：当t/d后接以y开头的词时，t/d会与y连读成 /tʃ/ 或 /dʒ/ (e.g., don't you -> don't_chu)。",
+            "相同辅音：两个相同的辅音相邻时，只发一次音，但延长 (e.g., black_coffee)。"
+          ],
+          "why_explanation": "连读是为了让说话更流畅，减少发音的停顿，是英语的自然语流现象。",
+          "example": {
+            "question": "请尝试连读以下短语：a. get up b. What about it? c. Did you?",
+            "steps": [
+              "get up: /get_ʌp/ -> /geɾʌp/ (t弱读成 flap T)。",
+              "What about it?: /wɒt_əˈbaʊt_ɪt/ -> /wɒtəˈbaʊtɪt/。",
+              "Did you?: /dɪd_juː/ -> /dɪdʒuː/ (d+y 连读)。"
+            ],
+            "answer": "a. /geɾʌp/, b. /wɒtəˈbaʊtɪt/, c. /dɪdʒuː/"
+          },
+          "pronunciation_tip": "多听英美剧和英文歌，模仿他们的语速和连读习惯。刻意练习，你会发现口语进步神速。",
+          "memory_tip": "辅元连，r元连，t/d遇y变，同辅音就延长！",
+          "emotion_hook": "想让你的口语听起来更地道？连读是关键！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T3",
+      "unit_name": "情景闯关卡",
+      "cards": [
+        {
+          "card_id": "T3-01",
+          "full_id": "英语-八下-T3-01",
+          "title": "🍽️餐厅点餐挑战：如何优雅地表达喜好和忌口？",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在餐厅点餐时，除了点菜，还需要表达个人喜好、忌口或特殊要求，这需要灵活运用表达偏好和征求意见的句型。",
+          "core_points": [
+            "表达喜好：I'd prefer... / I'd like... / I love... / My favorite is...",
+            "征求意见：What about...? / How about...? / What do you think of...?",
+            "提出要求：Could I have...? / I'd like to order... / I'll take...",
+            "表达忌口/特殊要求：I don't like... / I'm allergic to... / Could you please make it without...?",
+            "推荐菜品：I recommend... / You should try..."
+          ],
+          "why_explanation": "点餐场景是日常生活中常见的交际情境，涉及表达个人意愿和与服务员交流，是检验语言应用能力的重要环节。",
+          "example": {
+            "question": "你和朋友在餐厅，你对辣过敏，朋友想吃披萨但拿不定主意。请完成对话。",
+            "steps": [
+              "你：表达对辣过敏 (I'm allergic to spicy food. Could I have something mild?)。",
+              "朋友：表达想吃披萨 (I'm thinking about having pizza.)。",
+              "你：询问朋友对披萨的偏好 (What kind of pizza would you prefer?)。",
+              "朋友：拿不定主意，请你推荐 (I'm not sure. What do you recommend?)。",
+              "你：推荐一个不辣的披萨 (I recommend the Margherita pizza. It's not spicy.)。"
+            ],
+            "answer": "A: Excuse me, I'm allergic to spicy food. Could I have something mild? \nB: I'm thinking about having pizza. \nA: What kind of pizza would you prefer? \nB: I'm not sure. What do you recommend? \nA: I recommend the Margherita pizza. It's not spicy."
+          },
+          "scene_dialogue": "Waiter: What would you like to order? \nYou: I'd prefer the chicken salad, but I'm allergic to nuts. Could you please make it without any nuts? \nWaiter: No problem. And for you, sir? \nFriend: What about the spaghetti? Is it spicy? \nWaiter: No, it's not. \nFriend: Great! I'll take that.",
+          "memory_tip": "Prefer/like/love表达喜好，What/How about征求意见，Allergic to忌口，Recommend推荐！",
+          "emotion_hook": "出门点餐再也不怕！轻松成为餐厅社交达人！"
+        },
+        {
+          "card_id": "T3-02",
+          "full_id": "英语-八下-T3-02",
+          "title": "🗺️问路指路挑战：迷路星人必备生存指南！",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "问路和指路是日常生活中非常实用的交流场景，需要掌握清晰的方位词、介词和指路短语。",
+          "core_points": [
+            "问路句型：Excuse me, could you please tell me how to get to...? / Where is...? / Is this the way to...?",
+            "指路短语：Go straight ahead / Turn left/right at... / Cross the road / It's on your left/right / Next to... / Opposite...",
+            "方位介词：in front of, behind, between, near, around the corner.",
+            "确认理解：Do you understand? / Is that clear?"
+          ],
+          "why_explanation": "问路指路需要清晰的逻辑和准确的表达，一旦信息传递有误，可能导致更大的麻烦。",
+          "example": {
+            "question": "你在一个陌生城市，想去最近的图书馆。请向路人问路。",
+            "steps": [
+              "礼貌地打招呼并提问：Excuse me, could you please tell me how to get to the nearest library?",
+              "路人指路：Go straight ahead for about 200 meters, then turn left at the traffic lights. The library is on your right, next to the post office.",
+              "你确认理解并感谢：Oh, I see. Go straight, turn left at the lights, and it's on my right. Thank you very much!",
+              "路人回应：You're welcome."
+            ],
+            "answer": "You: Excuse me, could you please tell me how to get to the nearest library? \nPasserby: Sure. Go straight ahead for about 200 meters, then turn left at the traffic lights. The library is on your right, next to the post office. \nYou: Oh, I see. Go straight, turn left at the lights, and it's on my right. Thank you very much! \nPasserby: You're welcome."
+          },
+          "scene_dialogue": "You: Excuse me, I'm trying to find the City Museum. Could you help me? \nPasserby: Of course. Go straight down this street for two blocks. You'll see a big park on your left. Turn right after the park. The museum will be on your left side, opposite the bank. \nYou: So, straight for two blocks, right after the park, and it's on my left. Got it. Thanks a lot! \nPasserby: No problem.",
+          "memory_tip": "问路：How to get to? 指路：Go straight, turn left/right, on your left/right！",
+          "emotion_hook": "方向感为零？没关系！学会这招，走遍天下都不怕！"
+        },
+        {
+          "card_id": "T3-03",
+          "full_id": "英语-八下-T3-03",
+          "title": "🤝提供帮助与感谢挑战：做个温暖又会表达的人！",
+          "type": "情景闯关卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "在日常交流中，主动提供帮助和真诚地表达感谢是维系良好人际关系的重要组成部分。",
+          "core_points": [
+            "提供帮助：Can I help you? / What can I do for you? / Do you need any help? / Let me help you with...",
+            "接受帮助：That would be great! / Yes, please. / Thank you so much!",
+            "婉拒帮助：No, thanks. I can manage. / That's very kind of you, but...",
+            "表达感谢：Thank you for... / I really appreciate your help. / I'm so grateful for...",
+            "回应感谢：You're welcome. / My pleasure. / Don't mention it. / No problem."
+          ],
+          "why_explanation": "提供和接受帮助是社交互动的基础，掌握相关句型能让人更好地参与到日常交流中，展现礼貌和关怀。",
+          "example": {
+            "question": "你的朋友搬家，你看到他拿着很重的箱子。你主动提供帮助，他接受了并表达感谢。",
+            "steps": [
+              "你：主动提供帮助 (Hey, you look like you need a hand. Can I help you with that box?)。",
+              "朋友：接受帮助 (Oh, that would be great! It's really heavy. Thank you!)。",
+              "你：回应朋友的感谢 (No problem! That's what friends are for.)。"
+            ],
+            "answer": "You: Hey, you look like you need a hand. Can I help you with that box? \nFriend: Oh, that would be great! It's really heavy. Thank you! \nYou: No problem! That's what friends are for."
+          },
+          "scene_dialogue": "A: You look worried. What's wrong? \nB: I can't find my keys. I've looked everywhere! \nA: Oh dear. Let me help you look for them. \nB: That's very kind of you, thank you so much! \nA: Don't mention it. We'll find them.",
+          "memory_tip": "Need a hand？Can I help？感谢Thank you for，回应You're welcome！",
+          "emotion_hook": "想做个高情商的人？学会这些，让你的朋友圈充满正能量！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T4",
+      "unit_name": "语法纠错卡",
+      "cards": [
+        {
+          "card_id": "T4-01",
+          "full_id": "英语-八下-T4-01",
+          "title": "❌Would you mind...? 别再错用to do了！",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "Would you mind...? 是一个礼貌的请求句型，后面必须接动名词（doing）。",
+          "core_points": [
+            "句型结构：Would you mind + doing sth?",
+            "含义：你介意做某事吗？",
+            "回答：如果同意，通常说 No, not at all. / Certainly not. / Of course not. / Go ahead. 如果不同意，可以说 Yes, I would. / I'm afraid I do. (较少用)。",
+            "常考易错点：后面误用动词原形或带to的不定式。"
+          ],
+          "why_explanation": "mind本身是动词，意为“介意”，后面习惯接动名词作宾语。这是英语动词搭配的固定用法。",
+          "example": {
+            "question": "请纠正以下句子中的错误：Would you mind to open the window?",
+            "steps": [
+              "识别核心句型：Would you mind...",
+              "回忆 mind 后面的动词形式：mind 后接动名词 doing。",
+              "将 to open 改为 opening。"
+            ],
+            "answer": "Would you mind opening the window?"
+          },
+          "mistakes": [
+            {
+              "wrong": "Would you mind to close the door?",
+              "correct": "Would you mind closing the door?",
+              "reason": "mind 后应接动名词 doing，而非不定式 to do。"
+            },
+            {
+              "wrong": "Would you mind close the door?",
+              "correct": "Would you mind closing the door?",
+              "reason": "mind 后应接动名词 doing，而非动词原形。"
+            }
+          ],
+          "grammar_fix": "mind + doing 是铁律！记住了吗？",
+          "memory_tip": "Mind后doing，介意就doing！",
+          "emotion_hook": "礼貌请求总出错？一卡让你秒变英语高手！"
+        },
+        {
+          "card_id": "T4-02",
+          "full_id": "英语-八下-T4-02",
+          "title": "❌If 从句时态大揭秘：主将从现，别再搞混了！",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "在条件状语从句中（if引导），主句通常用将来时，从句用一般现在时表示将来（主将从现）。",
+          "core_points": [
+            "主句：一般将来时 (will do) / 含有情态动词的句子 (can/may/must do) / 祈使句。",
+            "从句：一般现在时 (do/does)。",
+            "例外：如果从句表示事实或习惯，则主从句都用一般现在时。",
+            "注意：时间状语从句 (when, as soon as, until等) 也遵循“主将从现”原则。"
+          ],
+          "why_explanation": "英语语法中，表示未来的条件或时间，从句往往用现在时来替代将来时，这是一种约定俗成的习惯用法，避免了重复使用将来时。",
+          "example": {
+            "question": "请纠正以下句子中的错误：If it will rain tomorrow, we won't go out.",
+            "steps": [
+              "识别 If 引导的条件状语从句。",
+              "回忆“主将从现”原则，从句应使用一般现在时。",
+              "将 will rain 改为 rains。"
+            ],
+            "answer": "If it rains tomorrow, we won't go out."
+          },
+          "mistakes": [
+            {
+              "wrong": "If he will come, I will tell him the news.",
+              "correct": "If he comes, I will tell him the news.",
+              "reason": "条件状语从句中用一般现在时表示将来。"
+            },
+            {
+              "wrong": "I'll wait until he will finish his work.",
+              "correct": "I'll wait until he finishes his work.",
+              "reason": "时间状语从句中也用一般现在时表示将来。"
+            }
+          ],
+          "grammar_fix": "If 句子，主句will，从句现在时！",
+          "memory_tip": "主将从现，if里不带will！",
+          "emotion_hook": "If 从句总扣分？掌握这个口诀，告别低级错误！"
+        },
+        {
+          "card_id": "T4-03",
+          "full_id": "英语-八下-T4-03",
+          "title": "❌被动语态：主语“被”动作，别再主动了！",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "被动语态表示主语是动作的承受者，而不是动作的发出者。基本结构是“be + 动词的过去分词”。",
+          "core_points": [
+            "结构：助动词 be (根据时态和主语变化) + 动词的过去分词 (V-ed)。",
+            "使用场景：当动作的发出者不重要、不清楚或显而易见时；强调动作的承受者。",
+            "时态变化：be动词随主语和时态变化，如 is/am/are done (一般现在时), was/were done (一般过去时)。",
+            "by + 动作发出者：如果需要指出动作发出者，可在句末加 by + 动作发出者。"
+          ],
+          "why_explanation": "汉语中被动语态的使用频率相对较低，且表达方式多样（如“被”、“让”、“给”），导致学生在英语中容易忽略或错用被动语态，直接套用主动语态。",
+          "example": {
+            "question": "请纠正以下句子中的错误：Many trees plant every year.",
+            "steps": [
+              "分析句意：树是“被”种植，而不是“主动”种植。",
+              "识别主语 Many trees 和动词 plant。",
+              "将主动语态改为被动语态：be + 过去分词。",
+              "Many trees 是复数，且表示一般情况，所以 be 用 are，plant 的过去分词是 planted。"
+            ],
+            "answer": "Many trees are planted every year."
+          },
+          "mistakes": [
+            {
+              "wrong": "The book writes by a famous author.",
+              "correct": "The book is written by a famous author.",
+              "reason": "书是“被”写，应使用被动语态，且 be 动词应与主语和时态一致。"
+            },
+            {
+              "wrong": "This building built in 1990.",
+              "correct": "This building was built in 1990.",
+              "reason": "建筑是“被”建造，且发生在过去，应使用一般过去时被动语态。"
+            }
+          ],
+          "grammar_fix": "主语“被”动作，be + 过去分词！",
+          "memory_tip": "主语被动，be V-ed，时态看be，主语看be！",
+          "emotion_hook": "作文总是扣分？被动语态不会用，你的英语表达力大打折扣！"
+        },
+        {
+          "card_id": "T4-04",
+          "full_id": "英语-八下-T4-04",
+          "title": "❌定语从句：who/which/that 傻傻分不清？",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "定语从句修饰先行词，关系代词 who/which/that 在从句中作主语或宾语，选择哪一个取决于先行词是人还是物。",
+          "core_points": [
+            "先行词是人：用 who (作主语/宾语), whom (作宾语), that (作主语/宾语)。",
+            "先行词是物：用 which (作主语/宾语), that (作主语/宾语)。",
+            "that 的特殊用法：既可指人也可指物，但在介词后、非限制性定语从句中不能用 that。",
+            "关系代词作宾语时可省略。",
+            "八下主要考察 who/which/that 作为主语或宾语的基本用法。"
+          ],
+          "why_explanation": "选择正确的关系代词需要同时考虑先行词的性质（人/物）和关系代词在从句中的成分（主语/宾语），容易混淆。",
+          "example": {
+            "question": "请纠正以下句子中的错误：I like the girl which sings well.",
+            "steps": [
+              "识别先行词：the girl (指人)。",
+              "识别关系代词在从句中的成分：sings well (关系代词作主语)。",
+              "回忆指人的关系代词：who 或 that。",
+              "将 which 改为 who 或 that。"
+            ],
+            "answer": "I like the girl who/that sings well."
+          },
+          "mistakes": [
+            {
+              "wrong": "This is the book who I bought yesterday.",
+              "correct": "This is the book which/that I bought yesterday.",
+              "reason": "先行词是物 (book)，应使用 which 或 that。"
+            },
+            {
+              "wrong": "He is the boy that I talked to him.",
+              "correct": "He is the boy that I talked to.",
+              "reason": "关系代词在从句中作宾语，且 him 重复，应省略 him。"
+            }
+          ],
+          "grammar_fix": "人用who/that，物用which/that！宾语可省略！",
+          "memory_tip": "先行人，who/that；先行物，which/that！",
+          "emotion_hook": "定语从句总是错？一卡带你突破语法难关！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T5",
+      "unit_name": "PK挑战卡",
+      "cards": [
+        {
+          "card_id": "T5-01",
+          "full_id": "英语-八下-T5-01",
+          "title": "🔥中考真题PK：完形填空，谁是细节捕手？",
+          "type": "PK挑战卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "完形填空是综合考察词汇、语法、语境理解和逻辑推理能力的题型，是中考必考重难点。",
+          "core_points": [
+            "通读全文，理解大意：不急于填空，先把握文章主题和脉络。",
+            "词汇辨析：区分形近词、近义词、动词短语等，结合语境选择最佳。",
+            "语法结构：检查时态、语态、主谓一致、非谓语动词等语法点。",
+            "逻辑推理：根据上下文的衔接、转折、因果关系进行推断。",
+            "复读检查：填完后再次通读，检查是否通顺、语法是否正确。"
+          ],
+          "why_explanation": "完形填空是初中英语的“硬骨头”，它不仅仅是单纯的词汇或语法测试，更考验学生的综合语感和快速信息处理能力。",
+          "example": {
+            "question": "（节选自某年中考真题）\nMike was a shy boy. He hardly ever spoke in class. One day, his teacher asked him to ________ (1) a story. Mike was very nervous. He ________ (2) to say no, but then he thought about his parents. They always told him to be brave. So, he decided to ________ (3) it a try.",
+            "steps": [
+              "(1) 根据上下文，老师让Mike“讲故事”，所以用 tell。",
+              "(2) 根据 Mike nervous 和后面的 but then he thought about his parents，Mike一开始想“拒绝”，所以用 wanted。",
+              "(3) 根据 decided to 后面，Mike决定“尝试一下”，所以用 give。"
+            ],
+            "answer": "(1) tell (2) wanted (3) give"
+          },
+          "battle_rule": "限时5分钟，完成一篇完形填空（约10空），错误率最低者胜出！",
+          "memory_tip": "看上下文，词法语法逻辑推，填完再读顺不顺！",
+          "emotion_hook": "中考完形填空老失分？和同学PK，看谁能成为“填空王”！"
+        },
+        {
+          "card_id": "T5-02",
+          "full_id": "英语-八下-T5-02",
+          "title": "🔥词汇大比拼：八下重点词，你能秒杀几个？",
+          "type": "PK挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "掌握八年级下册核心词汇是学好英语的基础，本挑战旨在考察词汇的拼写、词义和用法。",
+          "core_points": [
+            "熟记单词拼写：确保每个字母都准确无误。",
+            "理解词义：掌握单词的常用释义和引申义。",
+            "掌握词性：区分名词、动词、形容词、副词等。",
+            "搭配记忆：记住单词常与哪些介词、动词或名词搭配使用。",
+            "同义词/反义词：拓展词汇量，理解词汇的细微差别。"
+          ],
+          "why_explanation": "词汇是语言的基石，词汇量不足会严重影响阅读理解、写作和听力。通过PK形式，激发学习兴趣，巩固记忆。",
+          "example": {
+            "question": "请写出以下中文对应的英文单词：1. 建议 2. 过敏的 3. 志愿者 4. 宁愿",
+            "steps": [
+              "1. 建议 -> suggest / advice",
+              "2. 过敏的 -> allergic",
+              "3. 志愿者 -> volunteer",
+              "4. 宁愿 -> prefer / would rather"
+            ],
+            "answer": "1. suggest / advice, 2. allergic, 3. volunteer, 4. prefer / would rather"
+          },
+          "battle_rule": "两人一组，轮流说出对方给出中文词语的英文。规定时间内，说出更多正确单词者胜出。错误或超时则换人。",
+          "memory_tip": "分类记，联想记，例句记，反复记！",
+          "emotion_hook": "词汇量不够用？和同学一起PK，看谁才是真正的单词达人！"
+        },
+        {
+          "card_id": "T5-03",
+          "full_id": "英语-八下-T5-03",
+          "title": "🔥句型转换挑战：你能完美变身“魔术师”吗？",
+          "type": "PK挑战卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "句型转换是考察学生对语法结构理解和灵活运用能力的题型，涵盖语态、时态、句式等多种变化。",
+          "core_points": [
+            "掌握基本句型：陈述句、疑问句、祈使句、感叹句的互转。",
+            "熟悉语态转换：主动语态与被动语态的互转。",
+            "理解时态转换：直接引语与间接引语的时态变化。",
+            "掌握特殊句式：强调句、倒装句、非谓语动词的运用。",
+            "注意细节：标点符号、大小写、动词形式的变化。"
+          ],
+          "why_explanation": "句型转换能够全面检验学生对各种语法知识点的掌握程度，是中考的常考题型，也是提升语言表达灵活性的关键。",
+          "example": {
+            "question": "请将以下句子改为被动语态：They built this bridge last year.",
+            "steps": [
+              "确定宾语：this bridge。",
+              "确定时态：last year 表一般过去时。",
+              "确定谓语动词：built。",
+              "将被动语态结构套入：be + 过去分词。",
+              "主语 this bridge 是单数，过去时 be 动词用 was，build 的过去分词是 built。",
+              "添加动作发出者 (可选)：by them。"
+            ],
+            "answer": "This bridge was built last year (by them)."
+          },
+          "battle_rule": "每人轮流抽取一张卡片上的句子，进行指定的句型转换。在规定时间内完成并确保语法正确。错误或超时则对方得分。",
+          "memory_tip": "看主宾，定语态；看时间，定动词；看句式，巧变换！",
+          "emotion_hook": "句型转换总是卡壳？和学霸PK，挑战你的语法极限！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T6",
+      "unit_name": "速记卡",
+      "cards": [
+        {
+          "card_id": "T6-01",
+          "full_id": "英语-八下-T6-01",
+          "title": "🚀不规则动词速记：三段式口诀，告别死记硬背！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "不规则动词的过去式和过去分词没有规律可循，是词汇记忆的难点，但可以通过分类和口诀高效记忆。",
+          "core_points": [
+            "AAA型：原形、过去式、过去分词同形 (e.g., cut-cut-cut, put-put-put)。",
+            "ABA型：原形和过去分词同形 (e.g., come-came-come, run-ran-run)。",
+            "ABB型：过去式和过去分词同形 (e.g., build-built-built, find-found-found)。",
+            "ABC型：三者都不同形 (e.g., begin-began-begun, go-went-gone)。",
+            "通过发音变化分类：如 i-a-u 变化 (sing-sang-sung)；ee-e-e 变化 (meet-met-met)。"
+          ],
+          "why_explanation": "不规则动词是英语动词变化的核心，掌握它们是正确使用各种时态和语态的基础。死记硬背效率低下，分类记忆能有效减轻负担。",
+          "example": {
+            "question": "请写出以下动词的过去式和过去分词：buy, eat, speak, hit",
+            "steps": [
+              "buy (ABB型): bought-bought",
+              "eat (ABC型): ate-eaten",
+              "speak (ABC型): spoke-spoken",
+              "hit (AAA型): hit-hit"
+            ],
+            "answer": "buy-bought-bought, eat-ate-eaten, speak-spoke-spoken, hit-hit-hit"
+          },
+          "speed_method": "1. 分类记忆：将不规则动词按AAA, ABA, ABB, ABC型进行分组。2. 语音联想：对有发音规律变化的进行归纳（如 i-a-u）。3. 编顺口溜：将一组词编成押韵的句子。4. 制作卡片：正反面写原形和变化形式，反复练习。",
+          "memory_tip": "AAA三同形，ABA首尾同，ABB二三同，ABC全不同！",
+          "emotion_hook": "不规则动词总是背了忘？这个方法让你永不遗忘！"
+        },
+        {
+          "card_id": "T6-02",
+          "full_id": "英语-八下-T6-02",
+          "title": "🚀八下核心词组速记：场景联想+搭配记忆，告别零散！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "八年级下册的动词短语和固定搭配数量多、用法活，是听力、阅读和写作的常考点。",
+          "core_points": [
+            "按单元主题记忆：将词组与单元主题（如学习方法、帮助他人、问路等）结合。",
+            "动词核心：抓住动词的核心含义，再理解介词/副词带来的变化。",
+            "例句记忆：结合例句理解词组在实际语境中的用法。",
+            "归纳总结：对同义或反义词组进行比较记忆。",
+            "高频词组：would you mind doing, used to do, be used to doing, look for, turn on, put on, thanks for, make a difference, agree with, feel like doing, take notes, pay attention to, come up with, get along with。"
+          ],
+          "why_explanation": "词组的含义往往不能从字面意思直接推断，需要结合语境和固定搭配来理解。死记硬背容易混淆，场景联想和搭配记忆能够提高效率。",
+          "example": {
+            "question": "请用以下词组造句：1. look for 2. make a difference 3. pay attention to",
+            "steps": [
+              "look for: 寻找。I am looking for my lost dog.",
+              "make a difference: 产生影响/改变。Even a small act of kindness can make a difference.",
+              "pay attention to: 注意。Please pay attention to the teacher."
+            ],
+            "answer": "1. I am looking for my lost dog. 2. Even a small act of kindness can make a difference. 3. Please pay attention to the teacher."
+          },
+          "speed_method": "1. 制作思维导图：将相关词组归纳到同一主题下。2. 词组卡片：一面写词组，另一面写释义和例句。3. 语境造句：尝试用每个词组造3-5个不同情境的句子。4. 听力辨识：在听力材料中辨别这些词组的用法。",
+          "memory_tip": "核心动词不变，介词副词添新意，场景串联是王道！",
+          "emotion_hook": "作文总是词不达意？这些高频词组让你瞬间提升表达力！"
+        },
+        {
+          "card_id": "T6-03",
+          "full_id": "英语-八下-T6-03",
+          "title": "🚀核心句型速记：万能模板，告别写作无从下笔！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "八年级下册的核心句型是写作和口语表达的骨架，掌握它们能够帮助学生搭建复杂的句子结构。",
+          "core_points": [
+            "It takes sb some time to do sth (做某事花费某人多少时间)。",
+            "Would you mind doing sth? (你介意做某事吗？)。",
+            "so...that... (如此...以至于...)。",
+            "too...to... (太...而不能...)。",
+            "prefer to do...rather than do... (宁愿做...也不愿做...)。",
+            "If... (条件状语从句)。",
+            "定语从句 (who/which/that)。",
+            "被动语态 (be + V-ed)。"
+          ],
+          "why_explanation": "这些句型是英语表达中常用的高级结构，能够使语言更加地道和丰富。掌握它们可以避免句式单一，提高表达的准确性和流畅性。",
+          "example": {
+            "question": "用“so...that...”和“too...to...”分别翻译：他太累了，以至于不能继续工作。",
+            "steps": [
+              "so...that...：He was so tired that he couldn't go on working.",
+              "too...to...：He was too tired to go on working."
+            ],
+            "answer": "He was so tired that he couldn't go on working. / He was too tired to go on working."
+          },
+          "speed_method": "1. 句型模板：将每个句型写成一个空缺的模板，反复填空练习。2. 替换练习：在原有句型中替换主语、谓语、宾语等，创造新句子。3. 写作应用：在日常写作中刻意使用这些句型。4. 模仿造句：模仿教材中的例句，再用自己的话造句。",
+          "memory_tip": "It takes时间to做，Mind doing介意做，so that太以致，too to不能做！",
+          "emotion_hook": "作文总是拿不到高分？核心句型是你的秘密武器！"
+        }
+      ]
+    }
+  ]
+}

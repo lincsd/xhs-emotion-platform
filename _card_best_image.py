@@ -37,6 +37,7 @@ import json
 import hashlib
 import sqlite3
 import time
+import re
 
 _DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'optimizer.db')
 _IMG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'card_best_images')
@@ -216,18 +217,64 @@ def get_best_cache(card_id):
 get_best_image = get_best_cache
 
 
+def _check_title_consistency(card_id, manifest, subject):
+    """v10.13: 标题一致性校验 — 检查 manifest TITLE 是否包含卡片核心英文关键词。
+
+    解决的问题: TITLE 被错误提取为 "under the" 而非 "Where is"，
+    导致生成的图片标题误导，却因审计分高而被缓存。
+
+    Returns:
+        (ok: bool, reason: str)
+    """
+    if subject not in ('英语', 'english') or not manifest:
+        return True, ''
+
+    # 找 manifest 中的 TITLE
+    title_val = None
+    for k, v in (manifest or {}).items():
+        if 'TITLE' in k.upper():
+            title_val = v
+            break
+    if not title_val:
+        return True, ''
+
+    # 提取 TITLE 中的英文短语
+    title_eng = re.findall(r"[a-zA-Z][a-zA-Z'\s]{1,}", title_val)
+    title_eng_text = ' '.join(e.strip().lower() for e in title_eng)
+
+    # 已知的低价值标题片段 — 这些通常是从 definition 中错误提取的补充短语
+    LOW_VALUE_TITLES = [
+        'under the', 'on the', 'in the', 'at the', 'to the', 'of the',
+        'is a', 'is an', 'is the', 'are the', 'was the', 'were the',
+        'it is', 'they are', 'he is', 'she is',
+    ]
+    for lv in LOW_VALUE_TITLES:
+        if title_eng_text.strip() == lv:
+            return False, f'TITLE英文“{title_eng_text}”是低价值片段，疑似提取错误'
+
+    return True, ''
+
+
 def save_best_cache(card_id, image_data, ext, audit_score, quality_score,
                     prompt_text='', model='', manifest=None, subject='', grade='',
                     source_hash=''):
     """
     保存/更新某卡片的最优图 + 最优 prompt。
     v10.9.9a: 始终保护高分 — 只有新图更优时才替换图片。
+    v10.13: 增加标题一致性校验 — 英语卡 TITLE 英文不合理时拒绝缓存。
     source_hash 用于检测卡片源内容变化 (由 card_source_hash 生成)。
 
     Returns:
         (saved: bool, reason: str)
     """
     _ensure_dir()
+
+    # v10.13: 标题一致性校验
+    title_ok, title_reason = _check_title_consistency(card_id, manifest, subject)
+    if not title_ok:
+        print(f'[warm-start] ⚠️ 拒绝缓存 {card_id}: {title_reason}', flush=True)
+        return False, f'标题校验失败: {title_reason}'
+
     combined = (audit_score + quality_score) / 2 if quality_score > 0 else float(audit_score)
     # 优先使用 source_hash, 降级到 manifest_hash
     m_hash = source_hash if source_hash else manifest_hash(manifest)

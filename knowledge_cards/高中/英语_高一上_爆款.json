@@ -1,0 +1,666 @@
+{
+  "subject": "英语",
+  "grade": "高一",
+  "semester": "上册",
+  "textbook": "人教版",
+  "grade_short": "高一上",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片（高一上学期知识点全覆盖版）",
+  "units": [
+    {
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [
+        {
+          "card_id": "T1-01",
+          "full_id": "英语-高一上-T1-01",
+          "title": "💔lose vs. loose💔 分不清？你的英语白学了！",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "lose (v.) 失去，输掉；loose (adj.) 松的，宽松的；(v.) 放松，解开",
+          "core_points": [
+            "lose是动词，发音 /luːz/",
+            "loose是形容词，发音 /luːs/",
+            "loose也可作动词，意为“放松，解开”",
+            "词性不同，用法大不同"
+          ],
+          "why_explanation": "两者拼写相似，发音也容易混淆，但词性与含义截然不同，导致学生在使用时经常误用。",
+          "example": {
+            "question": "选词填空：I always ____ my keys. My shoes are too ____.",
+            "steps": [
+              "分析第一个空，需要一个动词，表示“失去”。",
+              "分析第二个空，需要一个形容词，修饰“鞋子”，表示“松的”。",
+              "根据词义和词性选择。",
+              "lose (v.) 失去；loose (adj.) 松的"
+            ],
+            "answer": "lose, loose"
+          },
+          "mistakes": [
+            {
+              "wrong": "I always loose my keys.",
+              "correct": "I always lose my keys.",
+              "reason": "loose是形容词或动词“放松”，不能作“失去”讲。"
+            },
+            {
+              "wrong": "My shoes are too lose.",
+              "correct": "My shoes are too loose.",
+              "reason": "lose是动词，不能作形容词修饰名词。"
+            }
+          ],
+          "memory_tip": "lose少个o，表示“失去”；loose多个o，表示“松松垮垮”。",
+          "emotion_hook": "😱别再因为分不清lose和loose，让你的英语扣分了！这可是高中英语最基础的易混词！",
+          "trap_point": "lose是动词，loose是形容词，发音尾部不同，一个是/z/一个是/s/。"
+        },
+        {
+          "card_id": "T1-02",
+          "full_id": "英语-高一上-T1-02",
+          "title": "🤯affect vs. effect🤯 考场杀手！90%的人都踩坑！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "affect (v.) 影响；effect (n.) 影响，效果；(v.) 实现，造成",
+          "core_points": [
+            "affect 主要是动词，意为“影响”，侧重动作。",
+            "effect 主要是名词，意为“影响，效果”，侧重结果。",
+            "effect 作动词时，意为“实现，造成”，较少见。",
+            "记忆词性是关键。"
+          ],
+          "why_explanation": "两者发音相似，都与“影响”相关，但词性不同是主要区别。学生常混淆动词和名词的用法。",
+          "example": {
+            "question": "选词填空：Smoking will ____ your health. The drug had a strong ____ on him.",
+            "steps": [
+              "第一个空前有will，后接动词原形。",
+              "第二个空前有a strong，后接名词。",
+              "根据词性选择：affect (v.)，effect (n.)。"
+            ],
+            "answer": "affect, effect"
+          },
+          "mistakes": [
+            {
+              "wrong": "The bad weather had a negative affect on the game.",
+              "correct": "The bad weather had a negative effect on the game.",
+              "reason": "此处需要名词“影响”，应使用effect。"
+            },
+            {
+              "wrong": "The new policy will effect many people.",
+              "correct": "The new policy will affect many people.",
+              "reason": "此处需要动词“影响”，应使用affect。"
+            }
+          ],
+          "memory_tip": "A是动词，E是名词！Affect是动作，Effect是结果！",
+          "emotion_hook": "😱每次遇到affect和effect就头大？别怕，这篇卡片让你彻底搞懂，考场不再失分！",
+          "trap_point": "affect是动词，effect是名词。记住A是动词首字母，E是名词首字母。"
+        },
+        {
+          "card_id": "T1-03",
+          "full_id": "英语-高一上-T1-03",
+          "title": "🚧borrow vs. lend🚧 借来借去傻傻分不清？",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "borrow (v.) 借入，向…借；lend (v.) 借出，借给…",
+          "core_points": [
+            "borrow是“借入”，主语是“借东西的人”。",
+            "lend是“借出”，主语是“出借东西的人”。",
+            "记住方向性：borrow (from sb.)，lend (to sb.)。",
+            "两者意思相反。"
+          ],
+          "why_explanation": "中文“借”字有借入和借出两种含义，而英文中borrow和lend严格区分方向，导致学生混淆。",
+          "example": {
+            "question": "选词填空：Can I ____ your pen? I can ____ you my umbrella.",
+            "steps": [
+              "第一个空，主语是I，表示“我能借你的钢笔吗”，是借入。",
+              "第二个空，主语是I，表示“我能借给你我的雨伞”，是借出。",
+              "根据方向性选择：borrow (借入)，lend (借出)。"
+            ],
+            "answer": "borrow, lend"
+          },
+          "mistakes": [
+            {
+              "wrong": "Can you borrow me some money?",
+              "correct": "Can you lend me some money? / Can I borrow some money from you?",
+              "reason": "borrow是借入，不能用于“借给某人”。"
+            },
+            {
+              "wrong": "She lent a book from the library.",
+              "correct": "She borrowed a book from the library.",
+              "reason": "从图书馆是借入，应使用borrow。"
+            }
+          ],
+          "memory_tip": "B是“拿进来”，L是“送出去”！",
+          "emotion_hook": "😭借东西总是说错？borrow和lend的坑，今天让你一次性跳出来！",
+          "trap_point": "borrow的主语是借方，lend的主语是贷方。"
+        },
+        {
+          "card_id": "T1-04",
+          "full_id": "英语-高一上-T1-04",
+          "title": "🧐say vs. tell vs. speak vs. talk🧐 说话动词大乱斗！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "say (v.) 说，表达内容；tell (v.) 告诉，讲述，强调信息传递；speak (v.) 讲话，演说，强调发声动作；talk (v.) 谈话，交谈，强调互动。",
+          "core_points": [
+            "say后常接宾语从句或直接引语，不接to sb.。",
+            "tell后常接双宾语 (tell sb. sth.) 或直接接宾语 (tell a story)。",
+            "speak强调说这个动作，或指说某种语言 (speak English)。",
+            "talk强调对话、交流 (talk to/with sb. about sth.)。",
+            "掌握固定搭配。"
+          ],
+          "why_explanation": "这四个词都与“说”有关，但在语境、搭配和强调点上存在细微差别，学生容易混淆其具体用法和搭配。",
+          "example": {
+            "question": "选词填空：She ____ 'hello'. He ____ me a secret. Can you ____ louder? Let's ____ about it.",
+            "steps": [
+              "第一个空，直接引语，用say。",
+              "第二个空，tell sb. sth. 结构，用tell。",
+              "第三个空，强调发声动作，用speak。",
+              "第四个空，强调交谈，用talk。"
+            ],
+            "answer": "said, told, speak, talk"
+          },
+          "mistakes": [
+            {
+              "wrong": "He said to me a story.",
+              "correct": "He told me a story. / He said 'Hello' to me.",
+              "reason": "say不直接接sb.作为宾语，tell可以。"
+            },
+            {
+              "wrong": "I need to speak to you something.",
+              "correct": "I need to tell you something. / I need to talk to you about something.",
+              "reason": "speak不直接接具体内容，tell强调传递信息。"
+            }
+          ],
+          "memory_tip": "Say内容，Tell对象，Speak发声，Talk交流。",
+          "emotion_hook": "🤯高中英语最绕的“说”系列动词！say/tell/speak/talk，你真的用对了吗？",
+          "trap_point": "say (sth.)，tell (sb. sth.)，speak (to sb.)，talk (to/with sb. about sth.)"
+        }
+      ]
+    },
+    {
+      "unit_id": "T2",
+      "unit_name": "发音挑战",
+      "cards": [
+        {
+          "card_id": "T2-01",
+          "full_id": "英语-高一上-T2-01",
+          "title": "🗣️发音陷阱！comfortable的隐藏秘密！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "单词 'comfortable' 的正确发音及其常见错误。",
+          "core_points": [
+            "正确发音：/ˈkʌmftəbl/ 或 /ˈkʌmfərtəbl/",
+            "最常见的错误是把中间的 'or' 读成清晰的 /ɔːr/ 音。",
+            "实际发音中，'or' 部分经常弱读甚至省略。",
+            "重音在第一个音节 'com-' 上。"
+          ],
+          "why_explanation": "英语中很多长单词在口语中会有弱读或音节省略现象，'comfortable' 中的 'or' 恰是典型，导致学生按拼写直读而错误。",
+          "example": {
+            "question": "请读出单词 'comfortable' 并录音。",
+            "steps": [
+              "先读重音 /ˈkʌm/",
+              "再读弱读的 /ftə/",
+              "最后读 /bl/",
+              "连起来：/ˈkʌmftəbl/"
+            ],
+            "answer": "正确发音示范：/ˈkʌmftəbl/"
+          },
+          "mistakes": [
+            {
+              "wrong": "/ˈkʌmfɔːrteɪbl/",
+              "correct": "/ˈkʌmftəbl/",
+              "reason": "中间的 'or' 音节被错误地清晰发音，且末尾音节发音不准。"
+            }
+          ],
+          "memory_tip": "舒服的“饭桌”：comf-ta-ble，中间的“or”悄悄溜走啦！",
+          "emotion_hook": "😱你是不是也把comfortable读成了“康福特波”？别再暴露你的中式英语了！",
+          "pronunciation_tip": "记住 'comfortable' 的中间音节 'or' 常常被弱化甚至省略，不要每个字母都读出来。"
+        },
+        {
+          "card_id": "T2-02",
+          "full_id": "英语-高一上-T2-02",
+          "title": "👂clothes vs. cloths👂 读错瞬间社死！",
+          "type": "发音挑战卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "单词 'clothes' 和 'cloths' 的正确发音及其区别。",
+          "core_points": [
+            "clothes (n.) 衣服，发音 /kloʊðz/，注意 /ðz/ 尾音。",
+            "cloths (n.) 布料（复数），发音 /klɒθs/ 或 /klɔːθs/，注意 /θs/ 尾音。",
+            "主要区别在于结尾的摩擦音：/ð/ (浊辅音) vs. /θ/ (清辅音)。",
+            "发音时舌头位置和气流方式不同。"
+          ],
+          "why_explanation": "英语中 /ð/ 和 /θ/ 这对清浊辅音对于非母语者来说很难区分，加上末尾的 /z/ 或 /s/，使得这两个词的发音成为一大挑战。",
+          "example": {
+            "question": "请区分并读出 'clothes' 和 'cloths'。",
+            "steps": [
+              "读 'clothes' 时，舌尖轻触上齿，气流振动声带，发出 /ð/，再接 /z/。",
+              "读 'cloths' 时，舌尖轻触上齿，气流不振动声带，发出 /θ/，再接 /s/。",
+              "感受喉咙的震动（clothes有，cloths没有）。"
+            ],
+            "answer": "正确发音示范：clothes /kloʊðz/, cloths /klɒθs/"
+          },
+          "mistakes": [
+            {
+              "wrong": "把 'clothes' 读成 /klɒθs/",
+              "correct": "/kloʊðz/",
+              "reason": "误将浊辅音 /ð/ 读成清辅音 /θ/。"
+            },
+            {
+              "wrong": "把 'cloths' 读成 /kloʊðz/",
+              "correct": "/klɒθs/",
+              "reason": "误将清辅音 /θ/ 读成浊辅音 /ð/。"
+            }
+          ],
+          "memory_tip": "衣服(clothes)穿身上，暖暖的，有震动 /ðz/；布料(cloths)是清的，没震动 /θs/。",
+          "emotion_hook": "😳发音错了真的会闹笑话！clothes和cloths，你敢说你读对了？",
+          "pronunciation_tip": "区分 /ð/ (浊辅音，声带振动) 和 /θ/ (清辅音，声带不振动) 是关键。练习时把手放在喉咙上感受振动。"
+        },
+        {
+          "card_id": "T2-03",
+          "full_id": "英语-高一上-T2-03",
+          "title": "🔥连读大挑战！Get up vs. Get out！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "英语中常见的连读现象，特别是辅音+元音的连读。",
+          "core_points": [
+            "当一个单词以辅音结尾，下一个单词以元音开头时，往往会发生连读。",
+            "'Get up' 读作 /ɡet ʌp/ → /ɡe tʌp/。",
+            "'Get out' 读作 /ɡet aʊt/ → /ɡe taʊt/。",
+            "连读能让口语更流畅自然，但有时也可能导致听力障碍。"
+          ],
+          "why_explanation": "母语者为了提高语速和流畅度，会自然地进行连读。学生不熟悉连读规则，会导致听不懂，说不地道。",
+          "example": {
+            "question": "请尝试连读 'Get up' 和 'Get out'。",
+            "steps": [
+              "先单独读 'get' 和 'up'/'out'。",
+              "尝试将 't' 的音与 'up'/'out' 的元音连接起来。",
+              "注意 't' 在连读时可能会弱化或变音 (如变为 /d/ 或不完全爆破)。"
+            ],
+            "answer": "正确连读示范：Get up /ɡeˈtʌp/, Get out /ɡeˈtaʊt/"
+          },
+          "mistakes": [
+            {
+              "wrong": "将 'Get up' 读成 /ɡet/ /ʌp/，中间有停顿。",
+              "correct": "/ɡeˈtʌp/",
+              "reason": "没有进行辅音+元音的连读，听起来不自然。"
+            }
+          ],
+          "memory_tip": "辅元相连，读如一体！",
+          "emotion_hook": "🤩想让你的英语口语瞬间高级？连读是秘诀！今天教你搞定'Get up'和'Get out'！",
+          "pronunciation_tip": "多听多模仿，感受母语者在辅音结尾+元音开头时的自然连接。尝试将前一个词的辅音“送”到下一个词的元音上。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T3",
+      "unit_name": "情景闯关",
+      "cards": [
+        {
+          "card_id": "T3-01",
+          "full_id": "英语-高一上-T3-01",
+          "title": "🤝初次见面，如何用英语惊艳全场？",
+          "type": "情景闯关卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "在初次见面时，用英语进行自我介绍和简单交流的实用表达。",
+          "core_points": [
+            "Greeting: Hi/Hello, Nice to meet you.",
+            "Introducing yourself: My name is... / I'm from...",
+            "Asking about others: What's your name? Where are you from? What do you do?",
+            "Sharing basic info: hobbies, interests, school/major.",
+            "Polite closing: It was great meeting you."
+          ],
+          "why_explanation": "自我介绍是社交的第一步，也是高一英语教材中常见的话题。掌握这些基本表达能帮助学生自信地开始英语交流。",
+          "example": {
+            "question": "你第一次见到一位来自英国的交换生，请用英语进行自我介绍并进行简单交流。",
+            "steps": [
+              "主动打招呼：Hi, Nice to meet you.",
+              "介绍自己的姓名和学校：My name is [Your Name]. I'm a student at [Your School].",
+              "询问对方：What about you? Where are you from?",
+              "可以分享一个兴趣：I enjoy reading/playing basketball in my free time.",
+              "结束时表达愉快：It was great talking to you."
+            ],
+            "answer": "A: Hi, nice to meet you! My name is Li Hua. I'm a student at No.1 Middle School. \nB: Nice to meet you too, Li Hua. I'm Tom, from London. \nA: Welcome to our school, Tom! Do you have any hobbies? \nB: Yes, I like playing football. What about you? \nA: I enjoy reading novels. Maybe we can read together sometime. \nB: Sounds great!"
+          },
+          "mistakes": [],
+          "memory_tip": "GSIA: Greeting, Self-intro, Inquire, Acknowledge.",
+          "emotion_hook": "✨想在国际交流中脱颖而出？这套初次见面英语口语卡片，让你秒变社交达人！",
+          "scene_dialogue": "A: Hi there! My name's Li Ming. I'm a student here. Nice to meet you! \nB: Nice to meet you too, Li Ming. I'm Sarah, an exchange student from Canada. \nA: Welcome to our school, Sarah! How do you like China so far? \nB: It's amazing! Everyone is so friendly. \nA: That's great to hear! If you need any help, just let me know. \nB: Thank you, I appreciate that!"
+        },
+        {
+          "card_id": "T3-02",
+          "full_id": "英语-高一上-T3-02",
+          "title": "🗺️迷路不慌！英语问路指路超实用！",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "用英语询问路线和指引方向的常用表达和句型。",
+          "core_points": [
+            "Asking for directions: Excuse me, could you tell me how to get to...? / Where is...?",
+            "Giving directions: Go straight, Turn left/right, It's on your left/right.",
+            "Landmarks: next to, opposite, behind, in front of, at the corner.",
+            "Distance/Time: It's about a 5-minute walk. / It's not far from here.",
+            "Polite phrases: Thank you very much! You're welcome."
+          ],
+          "why_explanation": "问路指路是日常生活中非常实用的技能，也是高一教材中常见的应用场景。掌握这些表达能帮助学生在旅行或日常生活中应对实际问题。",
+          "example": {
+            "question": "你在一个陌生城市迷路了，想去最近的博物馆，请向路人询问。",
+            "steps": [
+              "礼貌地开始：Excuse me, sir/madam.",
+              "说明目的：I'm a bit lost. Could you tell me how to get to the nearest museum?",
+              "听取指示，并确认：So, I go straight and turn right at the traffic lights?",
+              "感谢：Thank you so much for your help!"
+            ],
+            "answer": "A: Excuse me, sir. I'm a bit lost. Could you tell me how to get to the nearest museum? \nB: Sure. Go straight ahead for about two blocks, then turn left at the traffic lights. You'll see the museum on your right, next to a big park. \nA: Go straight for two blocks, then turn left at the traffic lights, and it's on my right. Did I get that right? \nB: Yes, that's right. It's about a 10-minute walk. \nA: Thank you so much! You've been a great help! \nB: You're welcome. Have a good day!"
+          },
+          "mistakes": [],
+          "memory_tip": "问路三步曲：Excuse me + 问路句 + Thank you。",
+          "emotion_hook": "🆘迷路了怎么办？别慌！这份英语问路指路卡片，让你秒变行走的“活地图”！",
+          "scene_dialogue": "A: Excuse me, I'm looking for the library. Is it far from here? \nB: Not at all. Go straight ahead, pass two crossroads. Then turn right at the third traffic light. The library is on your left, opposite the post office. \nA: So, straight, two crossroads, then right at the third light, and it's on my left. Got it! Thanks a lot! \nB: My pleasure."
+        }
+      ]
+    },
+    {
+      "unit_id": "T4",
+      "unit_name": "语法纠错",
+      "cards": [
+        {
+          "card_id": "T4-01",
+          "full_id": "英语-高一上-T4-01",
+          "title": "❌主谓不一致❌ 你的英语不及格，可能就差这一点！",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "主谓一致是指谓语动词的人称和数必须与主语保持一致。",
+          "core_points": [
+            "单数主语配单数谓语动词 (he/she/it/单数名词 + V-s/es)。",
+            "复数主语配复数谓语动词 (I/you/we/they/复数名词 + V原形)。",
+            "集合名词 (family, class, team) 既可作单数也可作复数，取决于强调整体还是个体。",
+            "由and连接的并列主语通常用复数谓语，但若指同一人/物/概念，则用单数。",
+            "由or, nor, not only...but also...连接的主语，谓语动词与最近的主语保持一致。"
+          ],
+          "why_explanation": "主谓一致是英语最基础的语法规则之一，但由于中文没有类似概念，学生在遇到复杂主语或倒装句时极易出错。",
+          "example": {
+            "question": "找出并改正下列句子中的错误：The boy with his two friends are playing basketball.",
+            "steps": [
+              "识别主语：'The boy' 是句子的核心主语。",
+              "'with his two friends' 是介词短语，作伴随状语，不影响主语的单复数。",
+              "核心主语 'The boy' 是单数。",
+              "谓语动词 'are' 是复数形式，与单数主语不一致。"
+            ],
+            "answer": {
+              "question": "The boy with his two friends are playing basketball.",
+              "steps": [],
+              "answer": "错误：are -> is"
+            }
+          },
+          "mistakes": [
+            {
+              "wrong": "Everyone here like the new teacher.",
+              "correct": "Everyone here likes the new teacher.",
+              "reason": "Everyone是单数不定代词，谓语动词应使用单数形式。"
+            },
+            {
+              "wrong": "Neither he nor I is interested in the game.",
+              "correct": "Neither he nor I am interested in the game.",
+              "reason": "nor连接的主语，谓语动词与最近的主语(I)保持一致。"
+            }
+          ],
+          "memory_tip": "主单谓单，主复谓复，就近原则别忘了！",
+          "emotion_hook": "🤯主谓不一致是你的语法硬伤吗？这篇卡片帮你彻底攻克，告别低级错误！",
+          "grammar_fix": "检查句子的真正主语是什么，特别是当主语后跟有介词短语、从句或并列结构时，很容易被迷惑。注意不定代词 (everybody, nobody, something) 总是作单数。"
+        },
+        {
+          "card_id": "T4-02",
+          "full_id": "英语-高一上-T4-02",
+          "title": "⏰时态混淆大作战！现在进行时 vs. 一般现在时！",
+          "type": "语法纠错卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "区分一般现在时和现在进行时在用法和标志词上的常见错误。",
+          "core_points": [
+            "一般现在时：表示经常性、习惯性动作，客观事实，真理，或主语的特征。",
+            "现在进行时：表示正在发生或进行中的动作，或现阶段正在进行的动作。",
+            "标志词：一般现在时 (often, always, every day, usually)；现在进行时 (now, at the moment, look, listen)。",
+            "状态动词 (know, like, believe, own) 通常不用于进行时。"
+          ],
+          "why_explanation": "这两种时态都是高一上学期重点，但中文没有严格的时态区分，学生容易混淆“正在做”和“经常做”的区别。",
+          "example": {
+            "question": "找出并改正下列句子中的错误：Look! The boy plays football now.",
+            "steps": [
+              "句首有 'Look!' 和句尾有 'now'，这些是现在进行时的典型标志。",
+              "句子描述的是一个“正在发生”的动作。",
+              "谓语动词 'plays' 是一般现在时，与语境不符。"
+            ],
+            "answer": {
+              "question": "Look! The boy plays football now.",
+              "steps": [],
+              "answer": "错误：plays -> is playing"
+            }
+          },
+          "mistakes": [
+            {
+              "wrong": "She is usually going to school by bus.",
+              "correct": "She usually goes to school by bus.",
+              "reason": "usually表示习惯性动作，应用一般现在时。"
+            },
+            {
+              "wrong": "I am knowing his name.",
+              "correct": "I know his name.",
+              "reason": "know是状态动词，通常不用于进行时。"
+            }
+          ],
+          "memory_tip": "一般现在表习惯，进行正在进行中！",
+          "emotion_hook": "😱时态总是搞不清？一般现在时和现在进行时，你真的掌握了吗？",
+          "grammar_fix": "看清时间状语和语境！一般现在时强调“规律性”，现在进行时强调“暂时性”或“此刻性”。"
+        },
+        {
+          "card_id": "T4-03",
+          "full_id": "英语-高一上-T4-03",
+          "title": "🚨介词误用警报🚨 高一最常犯的低级错误！",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "介词在表达时间、地点、方式等方面的常见错误。",
+          "core_points": [
+            "时间介词：in (年/月/季节/长时段), on (具体日期/某一天), at (具体时间点/节日)。",
+            "地点介词：in (大范围/内部), on (表面/线上), at (小地点/某一点)。",
+            "固定搭配中的介词：be good at, be interested in, listen to, talk about。",
+            "介词后接名词、代词宾格、动名词。"
+          ],
+          "why_explanation": "介词用法复杂且缺乏明确规律，很多时候需要靠语感和积累。学生常受中文思维影响，或不熟悉固定搭配而误用。",
+          "example": {
+            "question": "找出并改正下列句子中的错误：I often watch TV in Sunday evening.",
+            "steps": [
+              "分析时间表达：'Sunday evening' 指的是“周日晚上”，是一个具体的日期的一部分。",
+              "表示“在某一天”或“在某一天的一部分”时，应使用介词 'on'。",
+              "介词 'in' 用于表示“在…的晚上”，如 'in the evening'，但不能用于具体某一天。"
+            ],
+            "answer": {
+              "question": "I often watch TV in Sunday evening.",
+              "steps": [],
+              "answer": "错误：in -> on"
+            }
+          },
+          "mistakes": [
+            {
+              "wrong": "He is good for math.",
+              "correct": "He is good at math.",
+              "reason": "be good at是固定搭配，意为“擅长…”。"
+            },
+            {
+              "wrong": "They talked about the weather for the party.",
+              "correct": "They talked about the weather at the party.",
+              "reason": "表示“在聚会上”，应用介词at。"
+            }
+          ],
+          "memory_tip": "大in小at，日期用on，固定搭配多积累！",
+          "emotion_hook": "🤯介词总是踩坑？in/on/at傻傻分不清？这份纠错卡片帮你彻底搞定！",
+          "grammar_fix": "多积累介词的固定搭配和常用语境，不要死记硬背。区分介词在表示时间、地点时的不同侧重。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T5",
+      "unit_name": "PK挑战",
+      "cards": [
+        {
+          "card_id": "T5-01",
+          "full_id": "英语-高一上-T5-01",
+          "title": "⚔️词汇语法大PK！看谁是高一英语学霸！",
+          "type": "PK挑战卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "综合考察高一上学期核心词汇和语法点。",
+          "core_points": [
+            "涵盖时态、主谓一致、介词、词义辨析等高频考点。",
+            "挑战形式为选择题，考察准确性和速度。",
+            "每题都有明确的考点和陷阱。"
+          ],
+          "why_explanation": "通过模拟考试题型进行PK，能有效检验学生对知识点的掌握程度，激发学习积极性，并找出薄弱环节。",
+          "example": {
+            "question": "Choose the best answer: My brother ____ (go) to the gym three times a week.",
+            "steps": [
+              "分析句子，'three times a week' 表示经常性、习惯性的动作。",
+              "判断应使用一般现在时。",
+              "主语 'My brother' 是第三人称单数。",
+              "因此，谓语动词应为 'goes'。"
+            ],
+            "answer": "goes"
+          },
+          "mistakes": [],
+          "memory_tip": "刷题如打怪，多练才能赢！",
+          "emotion_hook": "🔥高一英语学霸挑战赛！敢不敢来PK，看看谁才是真正的单词语法王！",
+          "battle_rule": "两人一组，轮流答题。答对得10分，答错扣5分，限时15秒。最终得分高者胜出。"
+        },
+        {
+          "card_id": "T5-02",
+          "full_id": "英语-高一上-T5-02",
+          "title": "🏆完形填空生死战！高分秘籍大揭秘！",
+          "type": "PK挑战卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "针对高一上学期完形填空题型，考察语篇理解、词汇辨析、语法运用。",
+          "core_points": [
+            "通读全文，理解大意。",
+            "注意上下文语境，词汇的搭配和辨析。",
+            "利用语法知识排除错误选项。",
+            "复查，确保逻辑通顺。"
+          ],
+          "why_explanation": "完形填空是高中英语的常考题型，综合性强。PK形式能模拟考试压力，提升学生在语境中运用知识的能力。",
+          "example": {
+            "question": "阅读短文，选择最佳答案填空：\nMy best friend, Lily, is a very kind girl. She always ____ (help / helps / helping) others. Yesterday, I saw her ____ (to give / give / gave) a homeless man some food. She is truly a good person. ",
+            "steps": [
+              "第一空：'always' 表示习惯性动作，主语'She'是第三人称单数，所以用一般现在时动词单数形式 'helps'。",
+              "第二空：'saw sb. do sth.' 是固定结构，表示“看见某人做某事”，所以用动词原形 'give'。"
+            ],
+            "answer": "helps, give"
+          },
+          "mistakes": [],
+          "memory_tip": "大意为王，细节为辅，语境决定一切！",
+          "emotion_hook": "🤯完形填空总是错一堆？别怕！这份PK挑战卡，让你摸清出题套路，轻松拿高分！",
+          "battle_rule": "两人一组，同时完成一篇完形填空。规定时间内完成，正确率高者胜出。可以互相解释答案。"
+        }
+      ]
+    },
+    {
+      "unit_id": "T6",
+      "unit_name": "速记卡",
+      "cards": [
+        {
+          "card_id": "T6-01",
+          "full_id": "英语-高一上-T6-01",
+          "title": "🚀不规则动词速记！告别死记硬背！",
+          "type": "速记卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "高效记忆高一上学期常见的不规则动词过去式和过去分词。",
+          "core_points": [
+            "分类记忆法：按变化规律分类 (如AAA, ABA, ABB, ABC)。",
+            "场景联想法：将动词与具体场景联系起来。",
+            "口诀记忆法：编顺口溜或谐音。",
+            "高频优先：优先记忆高频使用的不规则动词。"
+          ],
+          "why_explanation": "不规则动词是语法学习的难点和重点，直接影响时态和语态的正确使用。高效的记忆方法能减轻学生负担，提高学习效率。",
+          "example": {
+            "question": "请记忆以下不规则动词：begin, drink, sing, swim",
+            "steps": [
+              "观察规律：这些词都属于 i-a-u 变化规律。",
+              "begin - began - begun",
+              "drink - drank - drunk",
+              "sing - sang - sung",
+              "swim - swam - swum"
+            ],
+            "answer": "begin-began-begun; drink-drank-drunk; sing-sang-sung; swim-swam-swum"
+          },
+          "mistakes": [],
+          "memory_tip": "I-A-U变，begin-began-begun，drink-drank-drunk，sing-sang-sung，swim-swam-swum，同类词一起记，效率翻倍！",
+          "emotion_hook": "🤯不规则动词总是背不下来？别慌！这个速记秘籍，让你3分钟搞定一串！",
+          "speed_method": "【分类记忆法 - i-a-u型】把所有原形中含 'i'，过去式变 'a'，过去分词变 'u' 的动词归为一类，如：begin-began-begun, drink-drank-drunk, ring-rang-rung, sing-sang-sung, swim-swam-swum。集中记忆这类规律，事半功倍！"
+        },
+        {
+          "card_id": "T6-02",
+          "full_id": "英语-高一上-T6-02",
+          "title": "💡词汇拓展速记：形容词反义词巧搭配！",
+          "type": "速记卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "通过记忆形容词的反义词，高效拓展词汇量。",
+          "core_points": [
+            "将高一上学期出现的形容词进行正反义配对记忆。",
+            "通过对比加深理解，不易混淆。",
+            "记忆一对词，相当于同时记忆两个词。",
+            "常用反义词前缀 (un-, dis-, in-, im-, ir-)。"
+          ],
+          "why_explanation": "反义词记忆法是一种高效的词汇扩展策略，能帮助学生建立词汇网络，提高记忆效率和准确性。",
+          "example": {
+            "question": "请记忆以下形容词及其反义词：happy, friendly, important, possible",
+            "steps": [
+              "happy (快乐的) - unhappy (不快乐的)",
+              "friendly (友好的) - unfriendly (不友好的)",
+              "important (重要的) - unimportant (不重要的)",
+              "possible (可能的) - impossible (不可能的)"
+            ],
+            "answer": "happy - unhappy; friendly - unfriendly; important - unimportant; possible - impossible"
+          },
+          "mistakes": [],
+          "memory_tip": "正反配对，一箭双雕！",
+          "emotion_hook": "🤩词汇量小得可怜？这份形容词反义词速记卡，让你词汇量蹭蹭涨！",
+          "speed_method": "【反义词配对 + 前缀法】将词汇按反义词对记忆，同时注意常见的反义词前缀。例如：'happy' (快乐的) → 'unhappy' (不快乐的)；'possible' (可能的) → 'impossible' (不可能的)。记住一个词，顺带记住它的反义词，并熟悉前缀的用法。"
+        },
+        {
+          "card_id": "T6-03",
+          "full_id": "英语-高一上-T6-03",
+          "title": "📚固定搭配速记：动词+介词，一眼秒杀！",
+          "type": "速记卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "高效记忆高一上学期常见的动词与介词的固定搭配。",
+          "core_points": [
+            "将动词与常用介词 (in, on, at, for, to, with) 组合记忆。",
+            "通过例句理解搭配的语境和含义。",
+            "归类记忆：按动词或介词分类，或按语义分类。",
+            "多读多用，形成语感。"
+          ],
+          "why_explanation": "固定搭配是英语学习的重点和难点，没有规律可循，只能靠积累。高效记忆方法能帮助学生快速掌握，提高表达的准确性。",
+          "example": {
+            "question": "请记忆以下动词与介词的搭配：listen, look, talk, wait",
+            "steps": [
+              "listen to (听…)",
+              "look at (看…), look for (寻找…), look after (照顾…)",
+              "talk about (谈论…), talk to/with (和…交谈)",
+              "wait for (等待…)"
+            ],
+            "answer": "listen to; look at/for/after; talk about/to/with; wait for"
+          },
+          "mistakes": [],
+          "memory_tip": "动介连连看，语境是关键！",
+          "emotion_hook": "😭固定搭配总是记不住？这份速记卡，让你瞬间掌握高一必考动介组合！",
+          "speed_method": "【情景联想 + 归类记忆】将动词与介词的搭配放入具体情景中记忆，并尝试归类。例如：\n- 听/看：listen to music (听音乐), look at the picture (看图片)\n- 讨论/交谈：talk about a topic (谈论话题), talk to friends (和朋友交谈)\n- 寻找/等待：look for keys (找钥匙), wait for the bus (等公交)\n通过将相似语义或常用介词的搭配集中记忆，能形成更强的记忆链。"
+        }
+      ]
+    }
+  ]
+}

@@ -35,7 +35,7 @@ def load_keys():
         print("❌ api_key.txt 中无有效 Gemini Key"); sys.exit(1)
     return keys
 
-def call_gemini(prompt, keys, model="gemini-2.5-flash", temperature=0.7, max_retries=3):
+def call_gemini(prompt, keys, model="gemini-2.5-flash", temperature=0.7, max_retries=5):
     """调用 Gemini API，返回文本结果"""
     import urllib.request, urllib.error, ssl
     ctx = ssl.create_default_context()
@@ -51,7 +51,7 @@ def call_gemini(prompt, keys, model="gemini-2.5-flash", temperature=0.7, max_ret
         }).encode('utf-8')
         req = urllib.request.Request(url, data=body, headers={"Content-Type": "application/json"}, method="POST")
         try:
-            resp = urllib.request.urlopen(req, timeout=120, context=ctx)
+            resp = urllib.request.urlopen(req, timeout=300, context=ctx)
             data = json.loads(resp.read().decode('utf-8'))
             text = data['candidates'][0]['content']['parts'][0]['text']
             return text
@@ -209,56 +209,73 @@ CARD_GEN_PROMPT_YUWEN = """你是一位资深的中国{stage}语文教研员，�
 CARD_GEN_PROMPT = CARD_GEN_PROMPT_MATH
 
 # --- 英语 标准卡 ---
-CARD_GEN_PROMPT_ENGLISH = """你是一位资深的中国{stage}英语教研员，精通人教版(PEP)英语教材。
-请为 **人教版(PEP)英语 {grade_full}** 生成一套完整的知识卡片（JSON格式）。
+CARD_GEN_PROMPT_ENGLISH = """你是一位资深的中国{stage}英语教研员，精通人教版英语教材体系（小学PEP/初中Go for it!/高中人教版新课标）。
+请为 **{grade_full} 英语** 生成一套【知识点全覆盖】的知识卡片（JSON格式）。
+
+⚠️ 核心原则：知识点必须穷举，宁多勿少！
+- 每个单元的【所有词汇、所有语法点、所有句型、所有语音规则】都必须有对应卡片
+- 不限数量，一个单元如果有10个知识点就出10张卡，有20个就出20张
+- 绝对不能为了控制数量而遗漏任何教材涉及的知识点
 
 要求：
-1. 按教材单元编排，每个单元3-6张卡片
-2. 卡片类型包括（根据年级灵活选用）：
-   - **词汇卡**: 本单元重点单词/短语，含音标、词性、例句、记忆方法
-   - **语法卡**: 核心语法点（如be动词/一般现在时/there be句型等），含结构规则和变化
-   - **句型卡**: 重点句型结构，含模板句和变形练习
-   - **自然拼读卡**: 字母/字母组合发音规则（低年级侧重）
-   - **易混词卡**: 易混淆的词汇辨析（如this/that, some/any等）
-   - **情景对话卡**: 实用对话场景（购物/问路/自我介绍等）
-   - **不规则动词卡**: 不规则动词过去式/过去分词变化（高年级）
+1. 按教材单元编排，每个单元不限卡片数量（务必覆盖单元所有知识点，通常需要8-15张甚至更多）
+2. 卡片类型（根据学段和年级灵活选用）：
+
+   ### 基础类（所有学段必须覆盖）:
+   - **词汇卡**: 本单元【全部】重点单词/短语（不是挑几个，是全部！），按主题分组（食物类/动物类/动作类等），每组一张卡。含音标、词性、例句、记忆方法
+   - **语法卡**: 本单元涉及的【每一个】语法点都要单独出卡。含结构规则、变化规律、肯/否/疑/特殊疑问句变形
+   - **句型卡**: 本单元【所有】重要句型结构，含模板句、替换词练习、实际运用
+   - **易混词卡**: 本单元出现的所有容易混淆的词汇/用法对比
+
+   ### 小学侧重（三~六年级额外增加）:
+   - **自然拼读卡**: 每个单元涉及的字母/字母组合发音规则（三四年级侧重）
+   - **情景对话卡**: 本单元话题相关的实用对话场景
+   - **不规则动词卡**: 不规则动词过去式/过去分词变化（五六年级）
+
+   ### 初中增加（七~九年级额外增加）:
+   - **时态卡**: 一般现在/过去/将来、现在/过去进行、现在/过去完成、过去将来时——每种时态的构成、标志词、用法区分
+   - **从句卡**: 宾语从句、定语从句、状语从句的引导词、语序、时态呼应
+   - **词法卡**: 词性转换（名→形→副）、前后缀规则、合成词
+   - **写作卡**: 书面表达常用句型、连接词、篇章结构
+   - **不规则动词卡**: 按变化规律分组（AAA/ABB/ABC/ABA型）
+
+   ### 高中增加（高一~高三额外增加）:
+   - **高级语法卡**: 虚拟语气、倒装句、强调句、省略句、独立主格
+   - **从句进阶卡**: 非限制性定语从句、名词性从句、让步/条件/目的状语从句
+   - **词汇深度卡**: 一词多义、熟词生义、高频搭配、词根词缀
+   - **阅读技巧卡**: 主旨大意、推理判断、词义猜测、篇章结构
+   - **写作进阶卡**: 高级句式替换、衔接过渡、观点论证模板
 
 3. 每张卡片必须包含以下字段：
    - card_id: 格式 "单元号-序号" 如 "01-01"
    - full_id: 格式 "英语-{grade_short}-01-01"
-   - title: 知识点名称（如"词汇：school用品"、"语法：一般现在时"）
-   - type: 卡片类型（词汇卡/语法卡/句型卡/自然拼读卡/易混词卡/情景对话卡/不规则动词卡）
+   - title: 知识点名称（如"词汇：食物类单词"、"语法：一般过去时的构成与用法"）
+   - type: 卡片类型
    - difficulty: 难度 1-5
    - importance: 重要性 1-5
    - definition: 核心知识点（一句话概括）
-   - core_points: 要点列表（3-5条）
-   - why_explanation: 本质原因/底层逻辑（用通俗语言解释语法/用法"为什么是这样"，如：为什么现在进行时要加ing？因为ing像一个"正在发生"的动作画面，提醒听者"此刻正在做"）
-   - example: {{question, steps[], answer}}（示例题目或练习）
-   - mistakes: [{{wrong: "常见错误", correct: "正确用法", reason: "为什么这样是错的（根本原因，不只是标注对错）"}}]（1-2个常见错误）
-   - memory_tip: 记忆口诀/助记方法
+   - core_points: 要点列表（3-8条，知识点多的卡可以更多）
+   - why_explanation: 底层逻辑（解释"为什么英语这样说/这样变化"，不能只说"规则如此"）
+   - example: {{question, steps[], answer}}
+   - mistakes: [{{wrong, correct, reason: "根本原因"}}]（1-3个常见错误，必须是完整句子对比）
+   - memory_tip: 记忆口诀/助记（禁止"搭配固定""多练就会"这类废话，必须有巧妙联想）
    - related: {{prerequisite, next}}
 
-4. 知识点要覆盖该册教材的所有主要单元
-5. 小学三年级起开设英语课，三四年级侧重自然拼读卡、词汇卡、情景对话卡；五六年级增加语法卡、句型卡、易混词卡
-6. 例题要贴合课文内容，步骤清晰
-7. 记忆技巧要生动有趣，适合小学生
-8. ⚠️ 深度教学原则（非常重要！）：
-   - 语法卡/句型卡必须解释"为什么英语要这样说"，不能只给规则
-   - why_explanation 要解释语法规则的底层逻辑（如：为什么if条件句不用will？因为if本身已经表达了"假设/未来"的含义，再加will就重复了，英语中避免语义重复）
-   - mistakes的reason必须解释为什么这个错法是错的（如：不是只标❌"If it will rain"→✓"If it rains"，而要解释"if引导的条件从句用一般现在时表将来，因为if已经暗示了将来的可能性"）
-   - 步骤中至少一步解释"为什么这样选/填"而非只说"按规则填xxx"
-   - 记忆口诀不能过度简化导致错误（如"将来will"这种口诀会让学生在if从句中也用will，必须标注例外）9. 🔒 英语卡片质量铁律（踩坑经验沉淀，必须遵守！）：
-   a) 知识点准确性第一：不能把正确用法标为错误！如"close attention"和"pay close attention to"都是正确的，不能标❌。每个正误标注必须反复检查是否符合权威语法参考。
-   b) 必须包含真实例句对比：mistakes中的wrong/correct必须是完整句子（不是孤立短语），如 wrong:"I pay attention the teacher" correct:"I pay attention to the teacher" reason:"因为pay attention是不及物词组，接宾语必须用介词to"
-   c) 口诀必须有记忆粘性：禁止“搭配固定”“多练就会”“记住就好”这类废话口诀。必须是有巧妙联想的句子，如“注意力要‘付to’（付出）”“看见look加at（看准目标）”
-   d) 视觉逻辑必须与内容逻辑匹配：不能用阶梯图表示非递进关系、不能用流程图表示并列关系。如"pay attention" vs "pay attention to"不是阶梯递进，而是及物性对比。
-   e) 信息密度要高：学生看完必须能答出“为什么这样用”，而不只是“知道这样用”。如果pay attention to卡片看完后学生只知道“搭配固定”但不知道“因为是不及物词组/to引导宾语”，说明卡片失败。
+4. 【全覆盖检查清单】每个单元生成完后，自查是否遗漏了：
+   □ 该单元的全部新词汇（每个单词都要出现在某张卡里）
+   □ 该单元涉及的每一个语法点
+   □ 该单元的核心句型和变换
+   □ 该单元容易混淆/出错的知识点
+   □ 该单元的语音/发音规则（小学适用）
+5. 知识点准确性第一：不能把正确用法标为错误！每个正误标注必须反复检查
+6. why_explanation必须解释底层逻辑，每个语法卡必须包含肯定句、否定句、疑问句的完整变形示例
+7. 例题要典型实用，步骤中至少一步解释"为什么这样做"
 请直接输出完整JSON（不要markdown代码块），格式如下：
 {{
   "subject": "英语",
   "grade": "{grade_name}",
   "semester": "{semester}",
-  "textbook": "人教版(PEP)",
+  "textbook": "人教版",
   "grade_short": "{grade_short}",
   "units": [
     {{
@@ -388,50 +405,47 @@ BOOM_CARD_PROMPT_YUWEN = """你是一位小红书教育类爆款内容策划专�
 BOOM_CARD_PROMPT = BOOM_CARD_PROMPT_MATH
 
 # --- 英语 爆款卡 ---
-BOOM_CARD_PROMPT_ENGLISH = """你是一位小红书教育类爆款内容策划专家，同时精通人教版(PEP){stage}英语教材。
-请为 **人教版(PEP)英语 {grade_full}** 设计一套爆款知识卡片（JSON格式），用于生成高传播力的小红书笔记。
+BOOM_CARD_PROMPT_ENGLISH = """你是一位小红书教育类爆款内容策划专家，同时精通人教版{stage}英语教材体系。
+请为 **{grade_full} 英语** 设计一套【知识点全覆盖】的爆款知识卡片（JSON格式），用于生成高传播力的小红书笔记。
 
-爆款卡类型（共6种）：
-1. **易混词陷阱卡** (T1): 最容易混淆的单词/用法，制造"这两个词你一直用错了！"的冲突感。如this/that, I/my, is/are等。
-2. **发音挑战卡** (T2): 最容易读错的单词/字母组合，"这个单词你确定会读吗？"。展示常见发音错误vs正确发音。
-3. **情景闯关卡** (T3): 实际场景英语挑战，"去麦当劳点餐，你会用英语说吗？"。设计趣味情景题。
-4. **语法纠错卡** (T4): 常见语法错误，"这句话10个人9个说错！"。展示错误句子→正确句子的对比。
-5. **亲子英语PK卡** (T5): 家长vs孩子的英语PK题，"妈妈的英语居然不如三年级的娃！"。设计趣味英语抢答。
-6. **速记卡** (T6): 单词/语法速记技巧，"背单词原来可以这么简单！"。分享高效记忆方法。
+⚠️ 核心原则：知识点必须穷举，覆盖该年级该学期的所有重要知识点！
+- 每种爆款类型下，要把该学期涉及的所有相应知识点都做成卡片
+- 不限数量，宁多勿少
 
-注意：三四年级侧重T1(易混词)/T2(发音)/T3(情景)/T5(亲子PK)/T6(速记)，T4语法纠错可简化为简单句式纠错。五六年级可涉及更复杂的语法纠错。
+爆款卡类型（共6种，根据学段灵活调整内容深度）：
+1. **易混词陷阱卡** (T1): 该学期所有容易混淆的单词/用法/语法结构，每对易混内容一张卡
+2. **发音挑战卡** (T2): 该学期所有容易读错的单词/音标/连读规则
+3. **情景闯关卡** (T3): 该学期涉及的所有话题场景的实际运用挑战
+4. **语法纠错卡** (T4): 该学期所有语法点的常见错误（初高中覆盖每个时态/从句/特殊句式的典型错误）
+5. **PK挑战卡** (T5): 小学为亲子PK，初高中为同学PK/考试真题挑战
+6. **速记卡** (T6): 该学期所有需要记忆的内容的高效记忆法（词汇/语法/句型/不规则动词等）
 
-每种类型2-3张卡片。每张卡片需包含：
+每种类型不限数量（覆盖该学期所有对应知识点）。每张卡片需包含：
 - card_id: "T类型号-序号" 如 "T1-01"
 - full_id: "英语-{grade_short}-T1-01"
-- title: 简短有冲击力的标题（如"this和that分不清？一张图搞定！"）
-- type: 具体类型名（易混词陷阱卡/发音挑战卡/情景闯关卡/语法纠错卡/亲子英语PK卡/速记卡）
+- title: 简短有冲击力的标题
+- type: 具体类型名
 - difficulty: 1-5
 - importance: 1-5
 - definition: 核心知识点
-- core_points: 要点3-5条
-- why_explanation: 本质原因/底层逻辑（解释"为什么会混/为什么要这样用"，如：this/that为什么混？因为中文里"这个/那个"不区分距离，但英文要区分远近）
+- core_points: 要点3-8条
+- why_explanation: 底层逻辑（解释"为什么会混/为什么容易错"）
 - example: {{question, steps[], answer}}
-- mistakes: [{{wrong, correct, reason: "为什么这样是错的（根本原因）"}}]（1-2个常见错误）
-- memory_tip: 口诀/顺口溜
-- emotion_hook: 情绪钩子（一句话引发好奇或共鸣）
+- mistakes: [{{wrong, correct, reason: "根本原因"}}]（完整句子对比）
+- memory_tip: 口诀/顺口溜（禁止废话口诀）
+- emotion_hook: 情绪钩子
 - trap_point / pronunciation_tip / scene_dialogue / grammar_fix / battle_rule / speed_method: 对应类型的特有字段
 
-知识点必须准确，符合该年级PEP教材范围！不要超纲！小学英语从三年级开始。
-⚠️ 深度教学：每张卡片的why_explanation和mistakes.reason必须解释根本原因，不能只标注对错！语法纠错卡要解释"为什么这个语法点容易错，背后的中英思维差异是什么"。🔒 英语卡片质量铁律（必须遵守）：
-   a) 知识点准确性第一：不能把正确用法标为❌！如"close attention"、"pay close attention to"都是正确的。每个正误标注必须反复检查。
-   b) mistakes的wrong/correct必须是完整句子（不是孤立短语），让学生看到语境中的对比
-   c) memory_tip禁止“搭配固定”“多练就会”“记住就好”这类废话口诀，必须有巧妙联想
-   d) 学生看完必须能答出“为什么这样用”，不能只停留在“知道这样用”的层面
+知识点必须准确，符合该年级教材范围！
 请直接输出JSON（不要markdown代码块），格式如下：
 {{
   "subject": "英语",
   "grade": "{grade_name}",
   "semester": "{semester}",
-  "textbook": "人教版(PEP)",
+  "textbook": "人教版",
   "grade_short": "{grade_short}",
   "card_pack": "爆款卡片",
-  "description": "面向小红书传播优化的6种英语爆款题型卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片（全知识点覆盖版）",
   "units": [
     {{
       "unit_id": "T1",
@@ -451,17 +465,59 @@ BOOM_CARD_PROMPTS = {
 }
 
 def extract_json(text):
-    """从API返回文本中提取JSON"""
+    """从API返回文本中提取JSON，支持修复截断/尾逗号等常见问题"""
     # 去掉可能的 markdown 代码块
     text = re.sub(r'^```json\s*', '', text.strip())
     text = re.sub(r'^```\s*', '', text.strip())
     text = re.sub(r'\s*```$', '', text.strip())
-    # 找到第一个 { 和最后一个 }
+    # 找到第一个 {
     start = text.find('{')
-    end = text.rfind('}')
-    if start >= 0 and end > start:
-        text = text[start:end+1]
-    return json.loads(text)
+    if start < 0:
+        raise json.JSONDecodeError("No JSON object found", text, 0)
+    text = text[start:]
+
+    # 修复1: 去除尾逗号 (trailing comma before } or ])
+    cleaned = re.sub(r',(\s*[}\]])', r'\1', text)
+
+    # 尝试直接解析
+    try:
+        return json.loads(cleaned)
+    except json.JSONDecodeError:
+        pass
+
+    # 修复2: 处理截断的JSON（API输出被截断导致JSON不完整）
+    # 策略: 找到最后一个完整的unit对象 }]} 然后关闭外层 ]}
+    import re as _re
+    unit_ends = [m.end() for m in _re.finditer(r'\}\s*\]\s*\}', cleaned)]
+    
+    for end_pos in reversed(unit_ends):
+        candidate = cleaned[:end_pos] + '\n  ]\n}'
+        candidate = re.sub(r',(\s*[}\]])', r'\1', candidate)
+        try:
+            data = json.loads(candidate)
+            n_units = len(data.get('units', []))
+            n_cards = sum(len(u.get('cards', [])) for u in data.get('units', []))
+            print(f"  ⚠️ JSON被截断，已自动修复（保留 {n_units} 个完整单元, {n_cards} 张卡片）")
+            return data
+        except json.JSONDecodeError:
+            continue
+    
+    # 修复3: 更暴力的方法 - 逐步缩短直到解析成功
+    truncated = cleaned.rstrip()
+    last_close = max(truncated.rfind('}'), truncated.rfind(']'))
+    if last_close > 0:
+        truncated = truncated[:last_close + 1]
+    ob = truncated.count('{') - truncated.count('}')
+    oq = truncated.count('[') - truncated.count(']')
+    truncated += ']' * max(0, oq) + '}' * max(0, ob)
+    truncated = re.sub(r',(\s*[}\]])', r'\1', truncated)
+    
+    try:
+        data = json.loads(truncated)
+        print(f"  ⚠️ JSON已自动修复截断问题（补齐括号）")
+        return data
+    except json.JSONDecodeError as e:
+        raise e
 
 def get_grade_info(stage_name, grade_short, subject):
     """获取年级的完整信息"""

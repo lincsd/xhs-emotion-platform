@@ -1,0 +1,2719 @@
+{
+  "subject": "英语",
+  "grade": "七年级",
+  "semester": "下册",
+  "textbook": "人教版",
+  "grade_short": "七下",
+  "units": [
+    {
+      "unit_id": "01",
+      "unit_name": "How do you make a fruit salad?",
+      "cards": [
+        {
+          "card_id": "01-01",
+          "full_id": "英语-七下-01-01",
+          "title": "词汇卡：食物类单词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元涉及的常见食物名词，主要为水果。",
+          "core_points": [
+            "banana /bəˈnɑːnə/ n. 香蕉 (可数)",
+            "apple /ˈæpl/ n. 苹果 (可数)",
+            "orange /ˈɒrɪndʒ/ n. 橙子 (可数)",
+            "strawberry /ˈstrɔːbəri/ n. 草莓 (可数)",
+            "pear /peə(r)/ n. 梨 (可数)",
+            "watermelon /ˈwɔːtəmelən/ n. 西瓜 (可数)",
+            "yogurt /ˈjɒɡət/ n. 酸奶 (不可数)",
+            "salad /ˈsæləd/ n. 沙拉 (可数/不可数，取决于指代具体一份沙拉还是沙拉这种食物)",
+            "fruit /fruːt/ n. 水果 (集合名词，通常不可数，表示种类时可数)"
+          ],
+          "why_explanation": "这些词汇是日常生活中描述食物的基础，掌握它们有助于进行相关话题的交流。区分可数和不可数有助于正确使用量词和动词形式。",
+          "example": {
+            "question": "请用本单元学过的食物词汇描述你喜欢的水果沙拉。",
+            "steps": [
+              "选择你喜欢的水果，如苹果、香蕉、草莓。",
+              "用'I like...'句型表达。",
+              "可以加上酸奶作为配料。"
+            ],
+            "answer": "I like fruit salad with apples, bananas, and strawberries. I also like to add some yogurt."
+          },
+          "mistakes": [
+            {
+              "wrong": "I like fruits.",
+              "correct": "I like fruit. / I like different kinds of fruit.",
+              "reason": "当'fruit'表示水果总称时通常用作不可数名词；表示种类时才用复数'fruits'。"
+            }
+          ],
+          "memory_tip": "将同类食物（如水果）一起记忆，可以联想颜色、形状或味道，如：红色的strawberry，黄色的banana。",
+          "related": {
+            "prerequisite": "小学阶段的食物词汇，如bread, milk。",
+            "next": "更多食物词汇，如vegetables, meat。"
+          }
+        },
+        {
+          "card_id": "01-02",
+          "full_id": "英语-七下-01-02",
+          "title": "词汇卡：动词及其他词汇",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元涉及的与制作食物相关的动词和常用的量词、副词等。",
+          "core_points": [
+            "make /meɪk/ v. 制作，做",
+            "peel /piːl/ v. 剥皮，削皮",
+            "cut /kʌt/ v. 切，剪",
+            "add /æd/ v. 添加",
+            "mix /mɪks/ v. 混合",
+            "put /pʊt/ v. 放置",
+            "first /fɜːst/ adv. 首先",
+            "next /nekst/ adv. 其次，接着",
+            "then /ðen/ adv. 然后",
+            "finally /ˈfaɪnəli/ adv. 最后",
+            "how much 多少 (用于不可数名词)",
+            "how many 多少 (用于可数名词)",
+            "some 一些 (用于肯定句的可数/不可数名词)",
+            "any 任何，一些 (用于否定句/疑问句的可数/不可数名词)",
+            "a lot of 许多 (用于肯定句的可数/不可数名词)"
+          ],
+          "why_explanation": "这些动词是描述制作过程的关键，而'first, next, then, finally'是组织步骤的逻辑连接词。量词和限定词（how much/many, some/any, a lot of）用于表达数量，是英语中不可或缺的部分。",
+          "example": {
+            "question": "请用本单元学过的动词和连接词描述制作一杯果汁的步骤。",
+            "steps": [
+              "先选择水果并剥皮（peel）。",
+              "然后切开（cut）。",
+              "接着混合（mix）。",
+              "最后加入（add）一些水或糖。"
+            ],
+            "answer": "First, peel the oranges. Next, cut them up. Then, mix them in a blender. Finally, add some water and enjoy!"
+          },
+          "mistakes": [
+            {
+              "wrong": "How much apples do you want?",
+              "correct": "How many apples do you want?",
+              "reason": "'apples'是可数名词复数，应使用'how many'询问数量。"
+            }
+          ],
+          "memory_tip": "将动作动词（peel, cut, add, mix）与制作食物的流程联系起来记忆。将序数词/副词（first, next, then, finally）串联成一个故事或口诀。",
+          "related": {
+            "prerequisite": "小学阶段的基础动词，如eat, drink。",
+            "next": "更多描述过程的动词和连接词。"
+          }
+        },
+        {
+          "card_id": "01-03",
+          "full_id": "英语-七下-01-03",
+          "title": "语法卡：祈使句 (Imperatives)",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "祈使句用于发出命令、请求、建议或指示。",
+          "core_points": [
+            "基本结构：动词原形 + (宾语) + (其他成分)。主语'you'通常省略。",
+            "肯定句：动词原形开头。例：Peel the bananas. (剥香蕉。)",
+            "否定句：Don't + 动词原形开头。例：Don't cut the apple. (不要切苹果。)",
+            "加强语气：可在句首加'Please'或'Always/Never'。例：Please mix the fruit. (请混合水果。) Always remember to wash your hands. (务必记住洗手。)",
+            "呼语：可在句首或句末加称呼语，用逗号隔开。例：Tom, open the door. (汤姆，开门。)",
+            "Let's句型：表示'让我们做...'，是第一人称复数的祈使句，后面接动词原形。例：Let's make a fruit salad. (我们来做个水果沙拉吧。)",
+            "Let's否定句：Let's not + 动词原形。例：Let's not go there. (我们不要去那里。)"
+          ],
+          "why_explanation": "祈使句是一种直接表达意愿的句式。由于说话者直接对听者发出指令，所以默认主语是'you'，无需明确说出。动词使用原形是因为它表达的是未发生的、需要执行的动作，没有时态变化。",
+          "example": {
+            "question": "将以下句子转换为祈使句：You should mix the yogurt and fruit. (你应混合酸奶和水果。)",
+            "steps": [
+              "祈使句的主语'you'通常省略。",
+              "将'should'省略，只保留动词原形。",
+              "写出动词原形和宾语。"
+            ],
+            "answer": "Mix the yogurt and fruit."
+          },
+          "mistakes": [
+            {
+              "wrong": "You mix the fruit.",
+              "correct": "Mix the fruit.",
+              "reason": "祈使句通常省略主语'you'。"
+            },
+            {
+              "wrong": "Don't to cut the fruit.",
+              "correct": "Don't cut the fruit.",
+              "reason": "否定祈使句'Don't'后直接跟动词原形，不加'to'。"
+            }
+          ],
+          "memory_tip": "祈使句就像在给别人下指令：动词原形打头阵，Don't是它的否定兵。Let's一起做，Let's not别做。",
+          "related": {
+            "prerequisite": "动词原形的概念。",
+            "next": "间接引语中祈使句的转换。"
+          }
+        },
+        {
+          "card_id": "01-04",
+          "full_id": "英语-七下-01-04",
+          "title": "语法卡：可数名词与不可数名词",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "名词根据是否能被计数分为可数名词 (countable nouns) 和不可数名词 (uncountable nouns)。",
+          "core_points": [
+            "可数名词：指可以数清的事物，有单数和复数形式。单数前可用a/an，复数末尾通常加-s/-es。例：an apple, two apples; a banana, three bananas。",
+            "不可数名词：指不能数清的事物（如液体、气体、抽象概念、集合名词等），没有复数形式，不能直接与a/an连用。例：water, milk, bread, information, fruit (作为总称)。",
+            "量词：不可数名词可以通过量词来表示数量。例：a glass of water, a slice of bread, a piece of fruit。",
+            "动词一致：可数名词单数和不可数名词作主语时，谓语动词用单数形式 (is/has/V-s)；可数名词复数作主语时，谓语动词用复数形式 (are/have/V原形)。",
+            "特殊情况：有些词既可作可数名词也可作不可数名词，意义不同。例：'chicken'作'鸡肉'时是不可数，作'活鸡'时是可数。'fruit'作'水果总称'时是不可数，作'水果种类'时是可数 (fruits)。"
+          ],
+          "why_explanation": "英语中名词的'可数'与'不可数'区分是基于事物本身的性质和文化习惯。能清晰划分个体边界的通常是可数，而视为整体、无法分割计数的（如物质、抽象概念）则为不可数。这种区分影响了量词、冠词和动词的使用，是英语语法体系的重要组成部分。",
+          "example": {
+            "question": "指出下列句子中名词的错误并改正：There are some milk in the bottle. How much carrots do you need?",
+            "steps": [
+              "判断'milk'是可数还是不可数。'milk'是液体，不可数。",
+              "不可数名词作主语，谓语动词应为单数。",
+              "判断'carrots'是可数还是不可数。'carrot'是蔬菜，可数。",
+              "可数名词复数应使用'how many'询问数量。"
+            ],
+            "answer": "There is some milk in the bottle. How many carrots do you need?"
+          },
+          "mistakes": [
+            {
+              "wrong": "I want a water.",
+              "correct": "I want some water. / I want a bottle of water.",
+              "reason": "'water'是不可数名词，不能直接用'a'修饰。"
+            },
+            {
+              "wrong": "There is many apples.",
+              "correct": "There are many apples.",
+              "reason": "'apples'是可数名词复数，谓语动词应使用'are'。"
+            }
+          ],
+          "memory_tip": "看形状：有明确形状、能分开数的是可数（苹果、香蕉）。看性质：液体、粉末、抽象概念是不可数（水、米饭、爱）。量词帮忙数不可数，a/an只配可数单。",
+          "related": {
+            "prerequisite": "名词的概念，单复数变化。",
+            "next": "更复杂的量词用法，名词与冠词的搭配。"
+          }
+        },
+        {
+          "card_id": "01-05",
+          "full_id": "英语-七下-01-05",
+          "title": "语法卡：How much / How many 的用法",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "How much 和 How many 都用于询问数量，但分别用于不可数名词和可数名词。",
+          "core_points": [
+            "How much + 不可数名词 (单数形式)？用于询问不可数名词的数量或价格。例：How much milk do you need? (你需要多少牛奶？) How much is this apple? (这个苹果多少钱？)",
+            "How many + 可数名词复数？用于询问可数名词的数量。例：How many apples do you want? (你想要多少苹果？)",
+            "回答：可使用具体数字、量词短语或表示数量的词（如a lot of, some, little/few等）。例：I need a lot of milk. I want three apples.",
+            "注意：询问价格时，'How much'后不接名词，直接跟be动词。例：How much is it? (多少钱？)"
+          ],
+          "why_explanation": "这两种问法是英语中量化事物的核心工具。'much'和'many'本身就带有'大量'的含义，分别对应不可数和可数名词，因此在疑问句中也沿用了这种搭配，以确保语法一致性和表达的准确性。",
+          "example": {
+            "question": "用'How much'或'How many'完成句子：___ water do you drink every day? ___ bananas are there in the basket?",
+            "steps": [
+              "'water'是不可数名词，应使用'How much'。",
+              "'bananas'是可数名词复数，应使用'How many'。"
+            ],
+            "answer": "How much water do you drink every day? How many bananas are there in the basket?"
+          },
+          "mistakes": [
+            {
+              "wrong": "How many water do you want?",
+              "correct": "How much water do you want?",
+              "reason": "'water'是不可数名词，应使用'how much'。"
+            },
+            {
+              "wrong": "How much books do you have?",
+              "correct": "How many books do you have?",
+              "reason": "'books'是可数名词复数，应使用'how many'。"
+            }
+          ],
+          "memory_tip": "Much配'无法数'（不可数），Many配'能计数'（可数）。记住'water'是不可数，'apple'是可数。",
+          "related": {
+            "prerequisite": "可数名词与不可数名词的概念。",
+            "next": "量词的更深入学习，如a few/a little。"
+          }
+        },
+        {
+          "card_id": "01-06",
+          "full_id": "英语-七下-01-06",
+          "title": "语法卡：some 与 any 的用法",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "some 和 any 都表示“一些，任何”，但主要用于不同类型的句子。",
+          "core_points": [
+            "some：主要用于肯定句中，修饰可数名词复数或不可数名词。例：I have some friends. (我有一些朋友。) There is some milk in the fridge. (冰箱里有一些牛奶。)",
+            "some的特殊用法：在疑问句中，当表示请求、邀请或期望得到肯定回答时，也可以用some。例：Would you like some tea? (你想喝点茶吗？——邀请) Can I have some water? (我能喝点水吗？——请求)",
+            "any：主要用于否定句和疑问句中，修饰可数名词复数或不可数名词。例：I don't have any money. (我没有任何钱。) Do you have any questions? (你有什么问题吗？)",
+            "any的特殊用法：在肯定句中，any可以表示“任何一个/一些”，通常与if连用，或表示不确定、随意。例：You can choose any book you like. (你可以选择任何你喜欢的书。) If you have any problems, let me know. (如果你有任何问题，告诉我。)",
+            "some和any不能单独作主语，必须修饰名词或代词。",
+            "注意：在口语中，有时'some'也可用于疑问句，但通常带有期待肯定回答的语气。"
+          ],
+          "why_explanation": "some 和 any 的区别反映了英语中肯定、否定和疑问句的语义倾向。some 带有肯定的预期或陈述，而 any 则表达不确定性、普遍性或否定的存在。这种区分有助于清晰表达说话者的意图和语境。",
+          "example": {
+            "question": "用'some'或'any'填空：1. Do you have ___ brothers or sisters? 2. I need ___ help with my homework. 3. There isn't ___ food left.",
+            "steps": [
+              "1. 疑问句，通常用'any'。",
+              "2. 肯定句，用'some'。",
+              "3. 否定句，用'any'。"
+            ],
+            "answer": "1. any 2. some 3. any"
+          },
+          "mistakes": [
+            {
+              "wrong": "I don't have some money.",
+              "correct": "I don't have any money.",
+              "reason": "否定句中通常用'any'而不是'some'。"
+            },
+            {
+              "wrong": "Do you want any coffee? (表示提供)",
+              "correct": "Do you want some coffee? (表示提供/邀请时，用'some'更自然)",
+              "reason": "在表示提供或邀请的疑问句中，用'some'更礼貌、更常见，期待对方接受。"
+            }
+          ],
+          "memory_tip": "肯定用some，否定疑问用any。请求邀请用some，特殊肯定也用any（任何一个）。",
+          "related": {
+            "prerequisite": "肯定句、否定句、疑问句的基本结构。",
+            "next": "复合不定代词something/anything, somebody/anybody等的用法。"
+          }
+        },
+        {
+          "card_id": "01-07",
+          "full_id": "英语-七下-01-07",
+          "title": "句型卡：询问制作方法 (How do you make...?)",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "使用'How do you make...?'来询问制作某种食物或物品的方法和步骤。",
+          "core_points": [
+            "句型结构：How do you make + [可数名词单数/不可数名词]?",
+            "例句：How do you make a fruit salad? (你如何制作水果沙拉？)",
+            "回答方式：通常以'First, ... Next, ... Then, ... Finally, ...'的顺序，使用祈使句来描述步骤。",
+            "模板句：How do you make a [食物名称]? / How do you make [不可数食物名称]?",
+            "替换词练习：",
+            "  - How do you make a **sandwich**?",
+            "  - How do you make **dumplings**?",
+            "  - How do you make **tea**?"
+          ],
+          "why_explanation": "'How'是询问方式和方法的疑问词，'do you make'则是一般现在时态的疑问形式，表示“你通常如何制作”。这个句型直接、清晰地表达了对制作过程的好奇和询问。",
+          "example": {
+            "question": "请根据以下步骤，用'How do you make...?'提问，并用英文回答：1. Boil water. 2. Add tea leaves. 3. Wait for 3 minutes. 4. Pour into a cup.",
+            "steps": [
+              "根据要制作的物品'tea'，构建疑问句。",
+              "根据提供的步骤，按顺序用祈使句回答。"
+            ],
+            "answer": "Q: How do you make tea?\nA: First, boil water. Next, add tea leaves. Then, wait for 3 minutes. Finally, pour it into a cup."
+          },
+          "mistakes": [
+            {
+              "wrong": "How do you to make a fruit salad?",
+              "correct": "How do you make a fruit salad?",
+              "reason": "助动词'do'后直接跟动词原形，不需要'to'。"
+            }
+          ],
+          "memory_tip": "询问'怎么做'，就用'How do you make'，后面直接跟你要做的东西。",
+          "related": {
+            "prerequisite": "一般疑问句的结构，祈使句的用法。",
+            "next": "询问其他方式的句型，如How do you go to school?"
+          }
+        },
+        {
+          "card_id": "01-08",
+          "full_id": "英语-七下-01-08",
+          "title": "句型卡：表达数量 (There is/are..., a lot of/many/much)",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "使用'There is/are...'句型来表达某地存在某物，并结合量词来表示数量。",
+          "core_points": [
+            "句型结构：",
+            "  - There is + [单数可数名词/不可数名词] + [地点状语]. (表示存在一个或一些不可数名词)",
+            "  - There are + [复数可数名词] + [地点状语]. (表示存在多个可数名词)",
+            "例句：There is some yogurt in the bowl. (碗里有一些酸奶。) There are two bananas on the table. (桌上有两根香蕉。)",
+            "与量词搭配：",
+            "  - a lot of / lots of (许多)：可修饰可数名词复数和不可数名词。例：There are a lot of apples. There is a lot of milk.",
+            "  - many (许多)：修饰可数名词复数，常用于否定句和疑问句。例：Are there many pears? There aren't many pears.",
+            "  - much (许多)：修饰不可数名词，常用于否定句和疑问句。例：Is there much water? There isn't much water.",
+            "模板句：",
+            "  - There is a lot of [不可数名词] in the [地点].",
+            "  - There are many [可数名词复数] in the [地点]."
+          ],
+          "why_explanation": "'There be'句型是英语中表达存在关系的基础句式，其核心是'be'动词与后面名词的数保持一致。与量词结合，能精确表达事物的数量，反映了英语对事物量化表达的重视。",
+          "example": {
+            "question": "用'There is/are'和合适的量词描述冰箱里的食物：牛奶、鸡蛋、面包。",
+            "steps": [
+              "判断'牛奶'是不可数，用'There is'和'a lot of'。",
+              "判断'鸡蛋'是可数复数，用'There are'和具体数量或'many'。",
+              "判断'面包'是不可数，用'There is'和'some'或'a loaf of'。"
+            ],
+            "answer": "There is a lot of milk in the fridge. There are six eggs in the fridge. There is some bread in the fridge."
+          },
+          "mistakes": [
+            {
+              "wrong": "There is many books on the shelf.",
+              "correct": "There are many books on the shelf.",
+              "reason": "'books'是可数名词复数，'There be'句型中谓语动词应与紧随其后的名词保持数的一致。"
+            },
+            {
+              "wrong": "There are much water in the bottle.",
+              "correct": "There is much water in the bottle.",
+              "reason": "'water'是不可数名词，谓语动词应为单数'is'。"
+            }
+          ],
+          "memory_tip": "There is配单数和不可数，There are配复数。Many配可数，Much配不可数，A lot of/lots of通吃！",
+          "related": {
+            "prerequisite": "可数名词与不可数名词，be动词的单复数形式。",
+            "next": "复合不定代词的用法，如something, anything。"
+          }
+        },
+        {
+          "card_id": "01-09",
+          "full_id": "英语-七下-01-09",
+          "title": "易混词卡：many vs much",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "many 和 much 都表示“许多”，但分别用于修饰可数名词和不可数名词。",
+          "core_points": [
+            "many：修饰可数名词复数。例：many books, many students, many apples。",
+            "much：修饰不可数名词。例：much water, much money, much time。",
+            "用法倾向：",
+            "  - many 和 much 在肯定句中较少单独使用，常与'too' (太多), 'so' (那么多), 'as...as' (和...一样多) 连用，或用 'a lot of / lots of' 替代。",
+            "  - 在疑问句和否定句中，many 和 much 更常用。例：Do you have many friends? I don't have much time.",
+            "a lot of / lots of：可以修饰可数名词复数和不可数名词，主要用于肯定句。例：I have a lot of friends. I have a lot of time。",
+            "口语中，'a lot of' 更常用，尤其在肯定句中，比单独使用 'many' 或 'much' 更自然。"
+          ],
+          "why_explanation": "英语对可数和不可数名词的区分是其语法结构的基础之一。'many'和'much'作为量词，延续了这一区分，确保了表达的精确性。理解它们的区别有助于避免常见的语法错误，并使表达更符合英语母语者的习惯。",
+          "example": {
+            "question": "选择正确的词填空：1. How (many/much) milk do you drink? 2. I don't have (many/much) friends here. 3. There are (many/much) students in the classroom.",
+            "steps": [
+              "1. 'milk'是不可数名词，选择'much'。",
+              "2. 'friends'是可数名词复数，选择'many'。",
+              "3. 'students'是可数名词复数，选择'many'。"
+            ],
+            "answer": "1. much 2. many 3. many"
+          },
+          "mistakes": [
+            {
+              "wrong": "I have much books.",
+              "correct": "I have many books. / I have a lot of books.",
+              "reason": "'books'是可数名词复数，应用'many'或'a lot of'。"
+            },
+            {
+              "wrong": "She doesn't have many money.",
+              "correct": "She doesn't have much money.",
+              "reason": "'money'是不可数名词，应用'much'。"
+            }
+          ],
+          "memory_tip": "Many数得清（可数），much数不清（不可数）。记住'M'字头，一个配可数，一个配不可数。",
+          "related": {
+            "prerequisite": "可数名词与不可数名词。",
+            "next": "a few/few, a little/little 的用法区分。"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "02",
+      "unit_name": "Where's the post office?",
+      "cards": [
+        {
+          "card_id": "02-01",
+          "full_id": "英语-七下-02-01",
+          "title": "词汇卡：地点名词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元涉及的常见公共场所和地点名词。",
+          "core_points": [
+            "post office /ˈpəʊst ˌɒfɪs/ n. 邮局",
+            "bank /bæŋk/ n. 银行",
+            "hotel /həʊˈtel/ n. 旅馆，饭店",
+            "restaurant /ˈrestərɒnt/ n. 饭店，餐馆",
+            "library /ˈlaɪbrəri/ n. 图书馆",
+            "park /pɑːk/ n. 公园",
+            "supermarket /ˈsuːpəmɑːkɪt/ n. 超市",
+            "pay phone 公用电话 (pay-phone)",
+            "station /ˈsteɪʃn/ n. 车站 (如bus station 公交车站)",
+            "street /striːt/ n. 街道",
+            "road /rəʊd/ n. 路，公路"
+          ],
+          "why_explanation": "这些词汇是日常生活中问路、指路、描述位置的基础。掌握它们能够帮助学生在不同场景下进行有效的交流。",
+          "example": {
+            "question": "请用本单元学过的地点名词描述你家附近有哪些公共设施。",
+            "steps": [
+              "选择你家附近的地点，如超市、公园、银行。",
+              "用'There is/are...'句型表达。"
+            ],
+            "answer": "There is a supermarket and a park near my home. There is also a bank on this street."
+          },
+          "mistakes": [
+            {
+              "wrong": "I want to go to the post office and bank.",
+              "correct": "I want to go to the post office and the bank.",
+              "reason": "特指的地点名词前通常需要加定冠词'the'。"
+            }
+          ],
+          "memory_tip": "将地点名词与实际场景联系起来记忆，如：post office寄信，bank存钱，restaurant吃饭。",
+          "related": {
+            "prerequisite": "小学阶段的基础地点词，如home, school。",
+            "next": "更多地点词，如museum, hospital。"
+          }
+        },
+        {
+          "card_id": "02-02",
+          "full_id": "英语-七下-02-02",
+          "title": "词汇卡：方位介词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "本单元涉及的用于描述物体或地点相对位置的介词。",
+          "core_points": [
+            "in /ɪn/ prep. 在...里面",
+            "on /ɒn/ prep. 在...上面",
+            "under /ˈʌndə(r)/ prep. 在...下面",
+            "behind /bɪˈhaɪnd/ prep. 在...后面",
+            "in front of /ɪn frʌnt əv/ prep. 在...前面",
+            "next to /nekst tuː/ prep. 在...旁边",
+            "between /bɪˈtwiːn/ prep. 在(两者)之间",
+            "across from /əˈkrɒs frɒm/ prep. 在...对面",
+            "turn left 向左转",
+            "turn right 向右转",
+            "go straight on 一直走",
+            "walk along 沿着...走",
+            "on the left / right 在左/右边"
+          ],
+          "why_explanation": "方位介词是英语中描述空间关系的核心，它们帮助我们精确地定位事物。掌握这些介词能让学生准确地理解和给出方向指令。",
+          "example": {
+            "question": "用方位介词描述书包里、书桌上、椅子后面各有什么。",
+            "steps": [
+              "选择合适的介词'in', 'on', 'behind'。",
+              "用'There is/are...'句型结合介词短语进行描述。"
+            ],
+            "answer": "There is a pen in my bag. There are some books on my desk. My cat is behind the chair."
+          },
+          "mistakes": [
+            {
+              "wrong": "The post office is in front the bank.",
+              "correct": "The post office is in front of the bank.",
+              "reason": "'in front of'是固定短语，表示“在...前面”。"
+            },
+            {
+              "wrong": "Go straight.",
+              "correct": "Go straight on / Go straight ahead.",
+              "reason": "'go straight'通常后面需要加'on'或'ahead'来强调“一直往前走”的动作。"
+            }
+          ],
+          "memory_tip": "画图记忆：把物体放在不同位置，然后写上对应的介词。in（里），on（上），under（下），behind（后），in front of（前），next to（旁），between（中间），across from（对面）。",
+          "related": {
+            "prerequisite": "小学阶段的基础介词，如in, on, under。",
+            "next": "更复杂的介词短语，如at the corner of。"
+          }
+        },
+        {
+          "card_id": "02-03",
+          "full_id": "英语-七下-02-03",
+          "title": "句型卡：询问地点 (Where's...?)",
+          "type": "句型卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "使用'Where's...?'句型来询问某个地点或物品的位置。",
+          "core_points": [
+            "句型结构：Where's + [名词]? (Where is...?)",
+            "例句：Where's the post office? (邮局在哪里？) Where's my book? (我的书在哪里？)",
+            "回答方式：使用'It's...'或'They're...'结合方位介词和地点名词来描述位置。",
+            "模板句：Where's the [地点名词]?",
+            "替换词练习：",
+            "  - Where's the **bank**?",
+            "  - Where's the **supermarket**?",
+            "  - Where's my **phone**?"
+          ],
+          "why_explanation": "'Where'是询问地点的疑问词，'is'是be动词的单数形式，与单数名词搭配。这个句型是日常生活中最常用的询问位置的方式，简洁明了。",
+          "example": {
+            "question": "请询问公园在哪里，并用“它在银行对面”来回答。",
+            "steps": [
+              "用'Where's the park?'提问。",
+              "用'It's across from the bank.'回答。"
+            ],
+            "answer": "Q: Where's the park?\nA: It's across from the bank."
+          },
+          "mistakes": [
+            {
+              "wrong": "Where is the post office?",
+              "correct": "Where's the post office?",
+              "reason": "'Where's'是'Where is'的缩写形式，更常用、自然。"
+            }
+          ],
+          "memory_tip": "找东西、问地点，就用'Where's'开头，简单又明了。",
+          "related": {
+            "prerequisite": "be动词的用法，疑问词'where'。",
+            "next": "询问路线的句型，如How can I get to...?"
+          }
+        },
+        {
+          "card_id": "02-04",
+          "full_id": "英语-七下-02-04",
+          "title": "句型卡：指路问路 (How can I get to...?)",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "使用'How can I get to...?'或'Excuse me, is there a...?'句型来询问去某地的路线，并用方位词和祈使句指路。",
+          "core_points": [
+            "问路句型：",
+            "  - Excuse me, how can I get to the [地点名词]? (打扰一下，我怎么去...？)",
+            "  - Excuse me, is there a [地点名词] near here? (打扰一下，这附近有...吗？)",
+            "  - Which is the way to the [地点名词]? (去...怎么走？)",
+            "指路常用表达：",
+            "  - Go straight on. (一直往前走。)",
+            "  - Turn left/right at the [crossroad/first turning]. (在十字路口/第一个路口左/右转。)",
+            "  - It's on the left/right. (它在左/右边。)",
+            "  - It's next to/across from/between... (它在...旁边/对面/之间。)",
+            "  - Walk along the street. (沿着这条街走。)",
+            "模板句：",
+            "  - A: Excuse me, how can I get to the [地点名词]?",
+            "  - B: Go straight on. Then turn left at the [landmark]. It's on your right."
+          ],
+          "why_explanation": "这些句型和短语是构建完整问路和指路对话的关键。'How can I get to...?'使用了情态动词'can'来表示能力和可能性，是礼貌的询问方式。指路时，祈使句能直接给出行动指令，而方位介词则提供了精确的空间信息。",
+          "example": {
+            "question": "请根据以下场景进行问路和指路对话：你问去图书馆的路，对方告诉你一直走，然后在第一个路口右转，图书馆在你的左边。",
+            "steps": [
+              "使用'Excuse me, how can I get to the library?'提问。",
+              "回答时使用'Go straight on.'，然后'Turn right at the first turning.'，最后'It's on your left.'。"
+            ],
+            "answer": "A: Excuse me, how can I get to the library?\nB: Go straight on. Then turn right at the first turning. It's on your left."
+          },
+          "mistakes": [
+            {
+              "wrong": "How I can get to the bank?",
+              "correct": "How can I get to the bank?",
+              "reason": "疑问句中，情态动词'can'应放在主语'I'之前。"
+            },
+            {
+              "wrong": "Turn left, then is the bank.",
+              "correct": "Turn left, then the bank is there. / Turn left, it's the bank.",
+              "reason": "指路时，描述地点存在通常用'It's...'或'There is...'句型，而不是简单地将地点名词放在句末。"
+            }
+          ],
+          "memory_tip": "问路用How can I get to，指路用Go straight on, turn left/right, It's on the left/right。",
+          "related": {
+            "prerequisite": "祈使句，方位介词，情态动词'can'。",
+            "next": "更详细的地图阅读和描述。"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "03",
+      "unit_name": "I'm watching TV.",
+      "cards": [
+        {
+          "card_id": "03-01",
+          "full_id": "英语-七下-03-01",
+          "title": "词汇卡：动词及活动名词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元涉及的与日常活动和动作相关的动词及名词。",
+          "core_points": [
+            "watch /wɒtʃ/ v. 观看 (watch TV, watch a movie)",
+            "read /riːd/ v. 阅读 (read a book, read a newspaper)",
+            "do /duː/ v. 做 (do homework, do the dishes)",
+            "eat /iːt/ v. 吃 (eat dinner, eat snacks)",
+            "sleep /sliːp/ v. 睡觉",
+            "study /ˈstʌdi/ v. 学习",
+            "listen to /ˌlɪsn ˈtuː/ 听 (listen to music, listen to the radio)",
+            "talk /tɔːk/ v. 说话，交谈 (talk on the phone)",
+            "play /pleɪ/ v. 玩，演奏 (play games, play the piano)",
+            "sing /sɪŋ/ v. 唱歌",
+            "dance /dɑːns/ v. 跳舞",
+            "write /raɪt/ v. 写 (write a letter, write an email)",
+            "clean /kliːn/ v. 打扫 (clean the room)",
+            "cook /kʊk/ v. 烹饪",
+            "run /rʌn/ v. 跑步",
+            "swim /swɪm/ v. 游泳"
+          ],
+          "why_explanation": "这些是描述人们正在进行或经常进行的活动的核心动词，是构建现在进行时和一般现在时句子的基础。",
+          "example": {
+            "question": "请用本单元学过的动词描述你周末常做的一些活动。",
+            "steps": [
+              "选择几个你常做的活动，如看书、听音乐、做作业。",
+              "用'I often...'或'I like to...'句型结合动词描述。"
+            ],
+            "answer": "On weekends, I often read books and listen to music. Sometimes I also do my homework."
+          },
+          "mistakes": [
+            {
+              "wrong": "I'm listen music.",
+              "correct": "I'm listening to music.",
+              "reason": "'listen'是不及物动词，后接宾语时需要加介词'to'。"
+            }
+          ],
+          "memory_tip": "将动词与具体的活动场景联系起来，如：看电视用watch TV，听音乐用listen to music。",
+          "related": {
+            "prerequisite": "小学阶段的基础动词，如go, come。",
+            "next": "更多描述爱好和日常活动的动词。"
+          }
+        },
+        {
+          "card_id": "03-02",
+          "full_id": "英语-七下-03-02",
+          "title": "时态卡：现在进行时 (Present Continuous)",
+          "type": "时态卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "现在进行时表示说话时正在发生或进行中的动作，也可表示现阶段正在进行但说话时不一定发生的动作。",
+          "core_points": [
+            "构成：主语 + be动词 (am/is/are) + 动词的-ing形式。",
+            "肯定句：主语 + am/is/are + 动词-ing + (其他成分)。例：I'm watching TV. (我正在看电视。)",
+            "否定句：主语 + am/is/are + not + 动词-ing + (其他成分)。例：He isn't sleeping. (他没有在睡觉。)",
+            "一般疑问句：Am/Is/Are + 主语 + 动词-ing + (其他成分)? 简略回答：Yes, 主语 + am/is/are. / No, 主语 + am/is/are + not. 例：Are you doing your homework? Yes, I am. / No, I'm not.",
+            "特殊疑问句：疑问词 + am/is/are + 主语 + 动词-ing + (其他成分)? 例：What are you doing? (你正在做什么？)",
+            "标志词：now, right now, at the moment, look, listen等。",
+            "动词-ing变化规则：",
+            "  - 一般情况：直接加-ing。例：play → playing, read → reading。",
+            "  - 以不发音的-e结尾：去e加-ing。例：make → making, dance → dancing。",
+            "  - 重读闭音节，末尾只有一个辅音字母：双写末尾辅音字母再加-ing。例：run → running, sit → sitting。",
+            "  - 以-ie结尾：变ie为y再加-ing。例：lie → lying, die → dying。"
+          ],
+          "why_explanation": "现在进行时反映了英语对动作“正在发生”这一状态的强调。通过be动词表示时态（现在）和主谓一致，-ing形式则表示动作的“进行性”。这种结构清晰地表达了动作的动态和持续性，与一般现在时强调的习惯性、事实形成对比。",
+          "example": {
+            "question": "将句子'She reads a book.'改为现在进行时，并写出否定句和一般疑问句。",
+            "steps": [
+              "肯定句：根据主语'She'选择'is'，动词'read'变为-ing形式'reading'。",
+              "否定句：在'is'后加'not'。",
+              "一般疑问句：将'Is'提到句首。"
+            ],
+            "answer": "肯定句：She is reading a book.\n否定句：She isn't reading a book.\n一般疑问句：Is she reading a book?"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is play basketball.",
+              "correct": "He is playing basketball.",
+              "reason": "现在进行时必须使用动词的-ing形式。"
+            },
+            {
+              "wrong": "What you are doing?",
+              "correct": "What are you doing?",
+              "reason": "特殊疑问句中，疑问词后是be动词，然后是主语，即'疑问词 + be动词 + 主语 + 动词-ing'的语序。"
+            }
+          ],
+          "memory_tip": "现在进行时，口诀记牢：be动词（am/is/are）领头跑，动词ing紧跟到。正在发生，别忘掉！",
+          "related": {
+            "prerequisite": "be动词的用法，一般现在时。",
+            "next": "过去进行时，将来进行时。"
+          }
+        },
+        {
+          "card_id": "03-03",
+          "full_id": "英语-七下-03-03",
+          "title": "句型卡：询问和描述正在进行的活动 (What are you doing?)",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "使用'What are you doing?'句型询问他人正在进行的活动，并用现在进行时回答。",
+          "core_points": [
+            "询问句型：",
+            "  - What are you doing? (你正在做什么？)",
+            "  - What is he/she doing? (他/她正在做什么？)",
+            "  - What are they doing? (他们正在做什么？)",
+            "回答句型：",
+            "  - I'm + 动词-ing + (其他成分).",
+            "  - He/She's + 动词-ing + (其他成分).",
+            "  - They're + 动词-ing + (其他成分).",
+            "例句：",
+            "  - A: What are you doing?",
+            "  - B: I'm watching TV.",
+            "  - A: What is he doing?",
+            "  - B: He's playing computer games.",
+            "模板句：",
+            "  - A: What are [主语] doing?",
+            "  - B: [主语] [be动词] [动词-ing]."
+          ],
+          "why_explanation": "这个句型是现在进行时最直接的应用，'What'询问内容，'are you doing'则准确地捕捉了动作的进行性。通过这个句型，学生可以轻松地进行关于即时活动的交流。",
+          "example": {
+            "question": "请根据图片内容（一个人正在听音乐）进行对话。",
+            "steps": [
+              "使用'What is he doing?'提问。",
+              "回答时，用现在进行时描述'听音乐'的动作。"
+            ],
+            "answer": "A: What is he doing?\nB: He's listening to music."
+          },
+          "mistakes": [
+            {
+              "wrong": "What do you do?",
+              "correct": "What are you doing?",
+              "reason": "'What do you do?'询问的是职业或习惯性活动，而'What are you doing?'询问的是此刻正在进行的活动。"
+            }
+          ],
+          "memory_tip": "此刻正在做什么，'What are you doing?'，回答就是'I'm doing...'。",
+          "related": {
+            "prerequisite": "现在进行时构成，疑问词'what'。",
+            "next": "询问职业的句型'What do you do?'。"
+          }
+        },
+        {
+          "card_id": "03-04",
+          "full_id": "英语-七下-03-04",
+          "title": "词法卡：动词-ing形式变化规则",
+          "type": "词法卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "动词-ing形式的构成规则，用于构成现在进行时、动名词等。",
+          "core_points": [
+            "一般情况：直接在动词原形后加-ing。",
+            "  - play → playing, read → reading, go → going, watch → watching",
+            "以不发音的-e结尾的动词：去掉-e再加-ing。",
+            "  - make → making, dance → dancing, write → writing, come → coming",
+            "  - (例外：see → seeing, agree → agreeing, dye → dyeing)",
+            "重读闭音节，末尾只有一个辅音字母的动词：双写末尾辅音字母再加-ing。",
+            "  - run → running, sit → sitting, swim → swimming, begin → beginning",
+            "  - (注意：辅音字母前是两个元音字母的词不双写，如look → looking)",
+            "以-ie结尾的动词：将-ie改为-y再加-ing。",
+            "  - lie → lying, die → dying, tie → tying",
+            "以-l结尾的动词（英式英语）：双写-l再加-ing。美式英语通常不双写。",
+            "  - travel (英式) → travelling, (美式) → traveling"
+          ],
+          "why_explanation": "动词-ing形式的变化规则是为了保持发音的规律性、避免歧义和维持书写习惯。例如，去e是为了避免-e与-ing连读时发音不自然；双写辅音是为了保持元音的短音，因为如果只加-ing，元音可能会变成长音。",
+          "example": {
+            "question": "将下列动词变为-ing形式：stop, have, eat, lie。",
+            "steps": [
+              "stop：重读闭音节，双写p加-ing。",
+              "have：以不发音的-e结尾，去e加-ing。",
+              "eat：一般情况，直接加-ing。",
+              "lie：以-ie结尾，变ie为y加-ing。"
+            ],
+            "answer": "stopping, having, eating, lying"
+          },
+          "mistakes": [
+            {
+              "wrong": "makeing",
+              "correct": "making",
+              "reason": "以不发音的-e结尾的动词，去e加-ing。"
+            },
+            {
+              "wrong": "sitng",
+              "correct": "sitting",
+              "reason": "重读闭音节，末尾只有一个辅音字母，双写末尾辅音字母再加-ing。"
+            }
+          ],
+          "memory_tip": "ing变化歌：直接加ing是常规，发音e不发e要去掉，重读闭音节双写末尾辅音字母，ie结尾变y再加ing。",
+          "related": {
+            "prerequisite": "动词原形的概念，元音和辅音。",
+            "next": "动名词作主语/宾语，现在分词作定语/状语。"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "04",
+      "unit_name": "I love sports.",
+      "cards": [
+        {
+          "card_id": "04-01",
+          "full_id": "英语-七下-04-01",
+          "title": "词汇卡：体育运动类名词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元涉及的各种体育运动和爱好名词。",
+          "core_points": [
+            "sport /spɔːt/ n. 体育运动 (总称)",
+            "basketball /ˈbɑːskɪtbɔːl/ n. 篮球",
+            "football /ˈfʊtbɔːl/ n. 足球 (英式), 橄榄球 (美式)",
+            "soccer /ˈsɒkə(r)/ n. 足球 (美式)",
+            "volleyball /ˈvɒlibɔːl/ n. 排球",
+            "tennis /ˈtenɪs/ n. 网球",
+            "ping-pong /ˈpɪŋ pɒŋ/ n. 乒乓球 (table tennis /ˈteɪbl tenɪs/ 更正式)",
+            "swimming /ˈswɪmɪŋ/ n. 游泳",
+            "running /ˈrʌnɪŋ/ n. 跑步",
+            "skating /ˈskeɪtɪŋ/ n. 滑冰",
+            "dancing /ˈdɑːnsɪŋ/ n. 跳舞",
+            "singing /ˈsɪŋɪŋ/ n. 唱歌",
+            "drawing /ˈdrɔːɪŋ/ n. 绘画",
+            "chess /tʃes/ n. 国际象棋",
+            "baseball /ˈbeɪsbɔːl/ n. 棒球",
+            "exercise /ˈeksəsaɪz/ n. 锻炼，运动"
+          ],
+          "why_explanation": "这些词汇是描述爱好和日常娱乐活动的基础，是学生进行自我介绍和与他人交流兴趣的关键。",
+          "example": {
+            "question": "请用本单元学过的运动词汇描述你最喜欢的运动。",
+            "steps": [
+              "选择一项你最喜欢的运动，如篮球或游泳。",
+              "用'My favorite sport is...'或'I love...'句型表达。"
+            ],
+            "answer": "My favorite sport is basketball. I also love swimming."
+          },
+          "mistakes": [
+            {
+              "wrong": "I like play basketball.",
+              "correct": "I like playing basketball. / I like to play basketball.",
+              "reason": "'like'后面接动词时，通常用动名词-ing形式或带to的不定式。"
+            }
+          ],
+          "memory_tip": "将球类运动（basketball, football, volleyball, tennis, ping-pong, baseball）归类记忆。将动名词形式的活动（swimming, running, skating, dancing, singing, drawing）一起记忆。",
+          "related": {
+            "prerequisite": "小学阶段的活动词汇，如play games。",
+            "next": "更多描述爱好和技能的词汇。"
+          }
+        },
+        {
+          "card_id": "04-02",
+          "full_id": "英语-七下-04-02",
+          "title": "词汇卡：其他动词、形容词及副词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "本单元涉及的与能力、喜好相关的动词、形容词和副词。",
+          "core_points": [
+            "can /kæn/ aux.v. 能，会 (情态动词)",
+            "love /lʌv/ v. 爱，热爱",
+            "like /laɪk/ v. 喜欢",
+            "hate /heɪt/ v. 憎恨，讨厌",
+            "favorite /ˈfeɪvərɪt/ adj. 最喜欢的",
+            "well /wel/ adv. 好地，熟练地",
+            "too /tuː/ adv. 也，又",
+            "join /dʒɔɪn/ v. 加入",
+            "club /klʌb/ n. 俱乐部",
+            "team /tiːm/ n. 队伍，团队",
+            "player /ˈpleɪə(r)/ n. 运动员，选手",
+            "relax /rɪˈlæks/ v. 放松"
+          ],
+          "why_explanation": "这些词汇是表达能力、喜好和加入团体等概念的关键。情态动词'can'是英语中表达能力的基础，而表示喜好程度的动词（love, like, hate）则能丰富情感表达。",
+          "example": {
+            "question": "请用本单元学过的词汇描述你擅长做的事情和喜欢的俱乐部。",
+            "steps": [
+              "用'I can...'表达能力，用'well'修饰。",
+              "用'I like/love...'表达喜好。",
+              "用'join a club'表达加入俱乐部。"
+            ],
+            "answer": "I can play basketball well. I love sports and I want to join the basketball club."
+          },
+          "mistakes": [
+            {
+              "wrong": "I can to swim.",
+              "correct": "I can swim.",
+              "reason": "情态动词'can'后直接跟动词原形，不需要加'to'。"
+            }
+          ],
+          "memory_tip": "情态动词can，后接动词原形，表示“能、会”。喜好程度：love > like > hate。",
+          "related": {
+            "prerequisite": "基础动词，形容词。",
+            "next": "其他情态动词，如may, must。"
+          }
+        },
+        {
+          "card_id": "04-03",
+          "full_id": "英语-七下-04-03",
+          "title": "语法卡：情态动词 can",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "情态动词'can'表示能力（能，会），可能性（可能），允许（可以）。",
+          "core_points": [
+            "基本结构：主语 + can + 动词原形。",
+            "肯定句：I can play basketball. (我会打篮球。)",
+            "否定句：主语 + cannot / can't + 动词原形。例：She can't swim. (她不会游泳。)",
+            "一般疑问句：Can + 主语 + 动词原形? 简略回答：Yes, 主语 + can. / No, 主语 + can't. 例：Can you sing? Yes, I can. / No, I can't.",
+            "特殊疑问句：疑问词 + can + 主语 + 动词原形? 例：What can you do? (你会做什么？)",
+            "特点：",
+            "  - can没有人称和数的变化，即主语是第三人称单数时，can不加-s。",
+            "  - can后必须接动词原形，中间不能加'to'。",
+            "  - can本身就是助动词，否定和疑问句无需借助do/does/did。",
+            "  - can表示能力时，常与'be able to'互换，但'be able to'有更多时态形式。"
+          ],
+          "why_explanation": "情态动词在英语中是独立的助动词，它们为主要动词添加了“情态”或“语气”信息，如能力、可能性、义务等。'can'的特殊之处在于它不随主语变化，且直接与动词原形结合，这种简洁性体现了其作为辅助动词的性质，不承担主谓一致或时态变化的功能。",
+          "example": {
+            "question": "将句子'He plays tennis.'改为使用'can'的肯定句、否定句和一般疑问句。",
+            "steps": [
+              "肯定句：在主语后加'can'，'plays'变为原形'play'。",
+              "否定句：在'can'后加'not'。",
+              "一般疑问句：将'can'提到句首。"
+            ],
+            "answer": "肯定句：He can play tennis.\n否定句：He can't play tennis.\n一般疑问句：Can he play tennis?"
+          },
+          "mistakes": [
+            {
+              "wrong": "She cans play football.",
+              "correct": "She can play football.",
+              "reason": "情态动词'can'没有人称和数的变化，不加-s。"
+            },
+            {
+              "wrong": "I can to run fast.",
+              "correct": "I can run fast.",
+              "reason": "'can'后直接跟动词原形，不加'to'。"
+            }
+          ],
+          "memory_tip": "情态动词can，能力可能又允许。三不变：人称数不变，后面动词是原形，否定疑问不借do。",
+          "related": {
+            "prerequisite": "动词原形的概念，be动词的用法。",
+            "next": "其他情态动词如may, must, should。"
+          }
+        },
+        {
+          "card_id": "04-04",
+          "full_id": "英语-七下-04-04",
+          "title": "句型卡：询问和表达能力 (Can you...?)",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "使用'Can you...?'句型询问他人是否会做某事，并用'Yes, I can.'或'No, I can't.'回答。",
+          "core_points": [
+            "询问能力句型：",
+            "  - Can you + 动词原形 + (其他成分)? (你会...吗？)",
+            "  - Can he/she + 动词原形 + (其他成分)? (他/她会...吗？)",
+            "  - Can they + 动词原形 + (其他成分)? (他们会...吗？)",
+            "回答句型：",
+            "  - Yes, I/he/she/they can. (是的，我会/他会/他们会。)",
+            "  - No, I/he/she/they can't. (不，我不会/他不会/他们不会。)",
+            "例句：",
+            "  - A: Can you play basketball?",
+            "  - B: Yes, I can. / No, I can't.",
+            "  - A: Can she sing well?",
+            "  - B: Yes, she can. / No, she can't.",
+            "模板句：",
+            "  - A: Can [主语] [动词原形]?",
+            "  - B: Yes, [主语] can. / No, [主语] can't."
+          ],
+          "why_explanation": "这个句型是情态动词'can'作为一般疑问句的直接应用，简洁高效地实现了对能力和技能的询问与回答。简略回答中的'can'避免了重复动词，体现了英语的简洁性。",
+          "example": {
+            "question": "请询问你的朋友是否会游泳，并假设他会，进行回答。",
+            "steps": [
+              "使用'Can you swim?'提问。",
+              "回答时，用肯定简略回答'Yes, I can.'。"
+            ],
+            "answer": "A: Can you swim?\nB: Yes, I can."
+          },
+          "mistakes": [
+            {
+              "wrong": "Yes, I can do.",
+              "correct": "Yes, I can.",
+              "reason": "简略回答中，'can'后不再重复动词原形。"
+            },
+            {
+              "wrong": "Can you to play football?",
+              "correct": "Can you play football?",
+              "reason": "'can'后直接跟动词原形，不加'to'。"
+            }
+          ],
+          "memory_tip": "问'会不会'，Can开头，Yes, I can，No, I can't。",
+          "related": {
+            "prerequisite": "情态动词'can'的用法，一般疑问句。",
+            "next": "询问其他情态的句型，如May I come in?"
+          }
+        },
+        {
+          "card_id": "04-05",
+          "full_id": "英语-七下-04-05",
+          "title": "句型卡：表达喜好 (I love/like/hate...)",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "使用'love/like/hate'等动词表达对某事物的喜好程度，后接名词或动名词。",
+          "core_points": [
+            "句型结构：主语 + love/like/hate + [名词/动名词]。",
+            "例句：",
+            "  - I love sports. (我热爱运动。)",
+            "  - He likes playing basketball. (他喜欢打篮球。)",
+            "  - She hates doing homework. (她讨厌做作业。)",
+            "  - We like to listen to music. (我们喜欢听音乐。)",
+            "动词后接动名词或不定式：",
+            "  - love, like, hate 后接动名词(-ing)和不定式(to do)通常都可以，意义差别不大，但动名词更侧重于活动本身，不定式更侧重于一次性或未来的动作。",
+            "  - 在本单元中，主要学习接动名词来表达爱好。",
+            "模板句：",
+            "  - I love [名词/动名词].",
+            "  - He likes [名词/动名词]."
+          ],
+          "why_explanation": "这些表达喜好的动词是英语中表达情感和态度的基本工具。它们通常后接名词或动名词，因为动名词代表了某种活动或行为，符合表达喜好对象的语义需求。",
+          "example": {
+            "question": "请用'like'和'hate'表达你喜欢看电影和讨厌洗碗。",
+            "steps": [
+              "使用'I like...'，后接动名词'watching movies'。",
+              "使用'I hate...'，后接动名词'doing the dishes'。"
+            ],
+            "answer": "I like watching movies, but I hate doing the dishes."
+          },
+          "mistakes": [
+            {
+              "wrong": "I like read books.",
+              "correct": "I like reading books. / I like to read books.",
+              "reason": "'like'后接动词时，需用动名词或不定式形式。"
+            }
+          ],
+          "memory_tip": "喜好动词（love/like/hate），后面跟着名词或ing。记住'I like playing football'。",
+          "related": {
+            "prerequisite": "动名词的概念，基础动词。",
+            "next": "表示喜好程度的副词，如really, very much。"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "05",
+      "unit_name": "Why do you like pandas?",
+      "cards": [
+        {
+          "card_id": "05-01",
+          "full_id": "英语-七下-05-01",
+          "title": "词汇卡：动物名词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元涉及的常见动物名称。",
+          "core_points": [
+            "panda /ˈpændə/ n. 熊猫",
+            "tiger /ˈtaɪɡə(r)/ n. 老虎",
+            "lion /ˈlaɪən/ n. 狮子",
+            "elephant /ˈelɪfənt/ n. 大象",
+            "koala /kəʊˈɑːlə/ n. 考拉，树袋熊",
+            "giraffe /dʒɪˈrɑːf/ n. 长颈鹿",
+            "bear /beə(r)/ n. 熊",
+            "cat /kæt/ n. 猫",
+            "dog /dɒɡ/ n. 狗",
+            "bird /bɜːd/ n. 鸟",
+            "snake /sneɪk/ n. 蛇",
+            "dolphin /ˈdɒlfɪn/ n. 海豚",
+            "monkey /ˈmʌŋki/ n. 猴子"
+          ],
+          "why_explanation": "这些词汇是描述动物和讨论动物话题的基础。掌握它们有助于学生进行动物相关的信息交流。",
+          "example": {
+            "question": "请用本单元学过的动物词汇描述你最喜欢的动物。",
+            "steps": [
+              "选择你最喜欢的动物，如熊猫或海豚。",
+              "用'My favorite animal is...'句型表达。"
+            ],
+            "answer": "My favorite animal is the panda. I also like dolphins."
+          },
+          "mistakes": [
+            {
+              "wrong": "I like a panda.",
+              "correct": "I like pandas. / I like the panda.",
+              "reason": "泛指一类动物时，通常用复数名词或单数名词加定冠词'the'。"
+            }
+          ],
+          "memory_tip": "将动物与它们的外形特征或栖息地联系起来记忆，如：黑白色的panda，长脖子的giraffe。",
+          "related": {
+            "prerequisite": "小学阶段的基础动物词汇，如cat, dog。",
+            "next": "更多野生动物词汇，动物的习性描述。"
+          }
+        },
+        {
+          "card_id": "05-02",
+          "full_id": "英语-七下-05-02",
+          "title": "词汇卡：形容词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元涉及的用于描述动物或事物特征的形容词。",
+          "core_points": [
+            "cute /kjuːt/ adj. 可爱的",
+            "smart /smɑːt/ adj. 聪明的",
+            "friendly /ˈfrendli/ adj. 友好的",
+            "beautiful /ˈbjuːtɪfl/ adj. 美丽的",
+            "clever /ˈklevə(r)/ adj. 聪明的，灵巧的",
+            "lazy /ˈleɪzi/ adj. 懒惰的",
+            "shy /ʃaɪ/ adj. 害羞的",
+            "small /smɔːl/ adj. 小的",
+            "big /bɪɡ/ adj. 大的",
+            "long /lɒŋ/ adj. 长的",
+            "tall /tɔːl/ adj. 高的",
+            "fat /fæt/ adj. 肥胖的",
+            "thin /θɪn/ adj. 瘦的",
+            "quiet /ˈkwaɪət/ adj. 安静的",
+            "kind /kaɪnd/ adj. 友善的"
+          ],
+          "why_explanation": "形容词是描述事物特征的重要词类，它们能使语言更生动、具体。掌握这些形容词有助于学生更准确地表达对动物的看法和感受。",
+          "example": {
+            "question": "请用本单元学过的形容词描述你对熊猫的印象。",
+            "steps": [
+              "选择合适的形容词，如可爱、聪明。",
+              "用'Pandas are...'句型表达。"
+            ],
+            "answer": "Pandas are very cute and a little bit lazy."
+          },
+          "mistakes": [
+            {
+              "wrong": "The panda is very cutely.",
+              "correct": "The panda is very cute.",
+              "reason": "形容词修饰名词，副词修饰动词、形容词或副词。这里'cute'修饰'panda'，应为形容词。"
+            }
+          ],
+          "memory_tip": "将形容词与反义词或同义词一起记忆，如：big vs small, smart vs lazy。将形容词与具体动物联系起来，如：cute panda, smart monkey。",
+          "related": {
+            "prerequisite": "小学阶段的基础形容词，如good, bad。",
+            "next": "形容词的比较级和最高级。"
+          }
+        },
+        {
+          "card_id": "05-03",
+          "full_id": "英语-七下-05-03",
+          "title": "语法卡：Why...because...句型",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "使用'Why...?'句型询问原因，并用'Because...'句型回答。",
+          "core_points": [
+            "询问原因句型：",
+            "  - Why + 一般现在时态的疑问句? (Why do you like pandas?)",
+            "  - Why + 现在进行时态的疑问句? (Why are you crying?)",
+            "  - Why + be动词句型? (Why is she happy?)",
+            "回答原因句型：",
+            "  - Because + 句子. (因为...)",
+            "  - Because + 短语 (口语中常用)。",
+            "例句：",
+            "  - A: Why do you like pandas? (你为什么喜欢熊猫？)",
+            "  - B: Because they're cute. (因为它们很可爱。)",
+            "  - A: Why is he sad? (他为什么伤心？)",
+            "  - B: Because he lost his pen. (因为他丢了钢笔。)",
+            "模板句：",
+            "  - A: Why do you like [动物/事物]?",
+            "  - B: Because [原因句]."
+          ],
+          "why_explanation": "'Why'是询问原因的疑问词，它引导的疑问句旨在探究事情的根本理由。'Because'则是一个从属连词，引导原因状语从句，直接给出原因。这种问答模式是英语中表达因果关系最基本和最直接的方式。",
+          "example": {
+            "question": "请询问你的朋友为什么喜欢长颈鹿，并假设他喜欢长颈鹿因为它们很高。",
+            "steps": [
+              "使用'Why do you like giraffes?'提问。",
+              "回答时，用'Because they're tall.'。"
+            ],
+            "answer": "A: Why do you like giraffes?\nB: Because they're tall."
+          },
+          "mistakes": [
+            {
+              "wrong": "Why you like pandas?",
+              "correct": "Why do you like pandas?",
+              "reason": "一般现在时态的疑问句，除了be动词和情态动词，需要借助助动词'do/does'。"
+            },
+            {
+              "wrong": "Because they are cute.",
+              "correct": "Because they're cute.",
+              "reason": "口语中常用缩写形式，更自然。"
+            }
+          ],
+          "memory_tip": "问原因，用Why开头，答原因，用Because开头。为什么？因为！",
+          "related": {
+            "prerequisite": "一般现在时疑问句，be动词疑问句。",
+            "next": "原因状语从句的更多引导词，如as, since。"
+          }
+        },
+        {
+          "card_id": "05-04",
+          "full_id": "英语-七下-05-04",
+          "title": "词法卡：形容词的构成与词性转换（-y结尾形容词）",
+          "type": "词法卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "本单元涉及的以-y结尾的形容词及其相关词性。",
+          "core_points": [
+            "以名词/动词 + -y 构成形容词：",
+            "  - fun (n. 乐趣) → funny (adj. 有趣的)",
+            "  - sleep (v. 睡觉) → sleepy (adj. 困倦的)",
+            "  - rain (n. 雨) → rainy (adj. 下雨的)",
+            "  - sun (n. 太阳) → sunny (adj. 晴朗的)",
+            "  - cloud (n. 云) → cloudy (adj. 多云的)",
+            "  - wind (n. 风) → windy (adj. 有风的)",
+            "  - health (n. 健康) → healthy (adj. 健康的)",
+            "词性转换：",
+            "  - friend (n. 朋友) → friendly (adj. 友好的) (注意：friendly是形容词，不是副词)",
+            "  - smart (adj. 聪明的) → smartly (adv. 聪明地)",
+            "  - quiet (adj. 安静的) → quietly (adv. 安静地)",
+            "  - kind (adj. 友善的) → kindly (adv. 友善地)"
+          ],
+          "why_explanation": "英语中通过添加后缀来改变词性是一种常见的构词方式。添加'-y'是一种常见的形容词后缀，通常表示“充满...的”、“有...特性的”。理解这些规则有助于学生推断词义和正确使用词性。",
+          "example": {
+            "question": "将名词'cloud'和'health'转换为形容词，并用它们造句。",
+            "steps": [
+              "'cloud'加-y变为'cloudy'。",
+              "'health'加-y变为'healthy'。",
+              "用这两个形容词分别造句。"
+            ],
+            "answer": "cloud → cloudy: It's a cloudy day today. (今天是个多云天。)\nhealth → healthy: Eating vegetables is healthy. (吃蔬菜是健康的。)"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is a friendly boy.",
+              "correct": "He is a friendly boy.",
+              "reason": "'friendly'虽然以-ly结尾，但它是形容词，表示“友好的”，不能作副词。"
+            }
+          ],
+          "memory_tip": "名词加y变形容词，如：云（cloud）变多云（cloudy）。记住friendly是形容词，不是副词！",
+          "related": {
+            "prerequisite": "名词、动词、形容词的概念。",
+            "next": "更多构词法，如前缀、其他后缀。"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "06",
+      "unit_name": "It's raining!",
+      "cards": [
+        {
+          "card_id": "06-01",
+          "full_id": "英语-七下-06-01",
+          "title": "词汇卡：天气类词汇",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元涉及的描述天气的名词和形容词。",
+          "core_points": [
+            "rain /reɪn/ n. 雨；v. 下雨",
+            "raining /ˈreɪnɪŋ/ adj. 下雨的",
+            "snow /snəʊ/ n. 雪；v. 下雪",
+            "snowing /ˈsnəʊɪŋ/ adj. 下雪的",
+            "wind /wɪnd/ n. 风",
+            "windy /ˈwɪndi/ adj. 有风的",
+            "cloud /klaʊd/ n. 云",
+            "cloudy /ˈklaʊdi/ adj. 多云的",
+            "sun /sʌn/ n. 太阳",
+            "sunny /ˈsʌni/ adj. 晴朗的",
+            "weather /ˈweðə(r)/ n. 天气",
+            "hot /hɒt/ adj. 热的",
+            "cold /kəʊld/ adj. 冷的",
+            "warm /wɔːm/ adj. 温暖的",
+            "cool /kuːl/ adj. 凉爽的",
+            "fog /fɒɡ/ n. 雾",
+            "foggy /ˈfɒɡi/ adj. 有雾的"
+          ],
+          "why_explanation": "这些词汇是描述天气状况的基础，是日常对话中常见的话题。掌握名词和其对应的形容词形式，能够更灵活地表达天气。",
+          "example": {
+            "question": "请用本单元学过的天气词汇描述一个寒冷有风的下雪天。",
+            "steps": [
+              "选择形容词'cold'和'windy'。",
+              "用'It's snowing.'描述下雪。",
+              "用'It's a cold, windy, snowy day.'或'It's cold and windy, and it's snowing.'表达。"
+            ],
+            "answer": "It's a cold and windy day, and it's snowing heavily."
+          },
+          "mistakes": [
+            {
+              "wrong": "It's wind.",
+              "correct": "It's windy. / There is wind.",
+              "reason": "描述天气状况时，通常用形容词'windy'，或使用'There is'句型加名词'wind'。"
+            },
+            {
+              "wrong": "It's rain.",
+              "correct": "It's raining. / It's rainy. / It's a rainy day.",
+              "reason": "描述正在下雨用'It's raining'（现在进行时），描述天气是雨天用'It's rainy'（形容词）。"
+            }
+          ],
+          "memory_tip": "记住名词（rain, snow, wind, cloud, sun, fog）和对应的形容词（raining, snowing, windy, cloudy, sunny, foggy），以-y结尾的形容词居多。",
+          "related": {
+            "prerequisite": "名词、形容词的概念。",
+            "next": "更多天气预报词汇，如thunder, lightning。"
+          }
+        },
+        {
+          "card_id": "06-02",
+          "full_id": "英语-七下-06-02",
+          "title": "词汇卡：衣物及其他词汇",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "本单元涉及的衣物名词以及其他相关词汇。",
+          "core_points": [
+            "coat /kəʊt/ n. 外套",
+            "jacket /ˈdʒækɪt/ n. 夹克",
+            "sweater /ˈswetə(r)/ n. 毛衣",
+            "shirt /ʃɜːt/ n. 衬衫",
+            "T-shirt /ˈtiː ʃɜːt/ n. T恤衫",
+            "pants /pænts/ n. 裤子 (美式，复数形式)",
+            "trousers /ˈtraʊzəz/ n. 裤子 (英式，复数形式)",
+            "shorts /ʃɔːts/ n. 短裤 (复数形式)",
+            "skirt /skɜːt/ n. 裙子",
+            "dress /dres/ n. 连衣裙",
+            "shoes /ʃuːz/ n. 鞋子 (复数形式)",
+            "socks /sɒks/ n. 袜子 (复数形式)",
+            "hat /hæt/ n. 帽子",
+            "umbrella /ʌmˈbrelə/ n. 雨伞",
+            "take off 脱掉 (衣服)",
+            "put on 穿上 (衣服)",
+            "wear /weə(r)/ v. 穿着 (状态动词)"
+          ],
+          "why_explanation": "这些词汇是描述衣着和日常穿着行为的基础。掌握它们有助于学生进行购物、描述穿着以及讨论天气与衣着搭配等话题。",
+          "example": {
+            "question": "请用本单元学过的衣物词汇描述你今天穿的衣服。",
+            "steps": [
+              "选择你今天穿的衣物，如T恤、裤子。",
+              "用'I'm wearing...'句型表达。"
+            ],
+            "answer": "I'm wearing a T-shirt and pants today."
+          },
+          "mistakes": [
+            {
+              "wrong": "I wear a pants.",
+              "correct": "I'm wearing pants. / I wear pants.",
+              "reason": "'pants'是复数名词，不能用'a'修饰。'wear'是状态动词，常用现在进行时表示“正穿着”。"
+            }
+          ],
+          "memory_tip": "将衣物按类别记忆，如上衣（coat, jacket, sweater, shirt, T-shirt），下装（pants, trousers, shorts, skirt, dress），鞋袜（shoes, socks）。记住'put on'是动作，'wear'是状态。",
+          "related": {
+            "prerequisite": "小学阶段的基础衣物词汇，如hat。",
+            "next": "更多衣物词汇，描述衣物颜色、材质、款式。"
+          }
+        },
+        {
+          "card_id": "06-03",
+          "full_id": "英语-七下-06-03",
+          "title": "句型卡：询问和描述天气 (What's the weather like?)",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "使用'What's the weather like?'句型询问天气情况，并用'It's...'句型回答。",
+          "core_points": [
+            "询问天气句型：",
+            "  - What's the weather like? (天气怎么样？)",
+            "  - How's the weather? (天气怎么样？)",
+            "回答天气句型：",
+            "  - It's + [天气形容词]. (It's sunny/cloudy/windy/rainy/snowy.)",
+            "  - It's + [be动词] + [天气动名词]. (It's raining/snowing.)",
+            "  - It's + [温度形容词]. (It's hot/cold/warm/cool.)",
+            "例句：",
+            "  - A: What's the weather like today?",
+            "  - B: It's sunny and warm.",
+            "  - A: How's the weather in Beijing?",
+            "  - B: It's snowing and very cold.",
+            "模板句：",
+            "  - A: What's the weather like [地点/时间]?",
+            "  - B: It's [天气形容词/动名词] and [温度形容词]."
+          ],
+          "why_explanation": "'What's...like?'是询问某事物特征或情况的常用句型，'like'在这里是介词，表示“像...一样”。这个句型直接询问天气的“样子”或“状况”。'It's...'句型中的'It'是无人称代词，常用于描述天气、时间、距离等，体现了英语的简洁性。",
+          "example": {
+            "question": "请询问今天天气，并回答“多云且凉爽”。",
+            "steps": [
+              "使用'What's the weather like today?'提问。",
+              "回答时，用'It's cloudy and cool.'。"
+            ],
+            "answer": "A: What's the weather like today?\nB: It's cloudy and cool."
+          },
+          "mistakes": [
+            {
+              "wrong": "How is the weather like?",
+              "correct": "How's the weather? / What's the weather like?",
+              "reason": "'How'和'What...like'不能同时使用，因为它们都用于询问方式或情况。"
+            },
+            {
+              "wrong": "It's rain.",
+              "correct": "It's raining. / It's rainy.",
+              "reason": "描述正在下雨用现在进行时'It's raining'，描述天气是雨天用形容词'It's rainy'。"
+            }
+          ],
+          "memory_tip": "问天气，'What's the weather like?'或'How's the weather?'，回答'It's...'。",
+          "related": {
+            "prerequisite": "现在进行时，形容词，无人称代词'it'。",
+            "next": "天气预报的句型，如It will be sunny tomorrow."
+          }
+        },
+        {
+          "card_id": "06-04",
+          "full_id": "英语-七下-06-04",
+          "title": "句型卡：建议穿着 (You should put on/take off...)",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "使用情态动词'should'来给出关于穿着的建议。",
+          "core_points": [
+            "句型结构：主语 + should + 动词原形 + [衣物名词].",
+            "  - You should put on your coat. (你应该穿上你的外套。)",
+            "  - You should take off your sweater. (你应该脱掉你的毛衣。)",
+            "  - You should wear a hat. (你应该戴帽子。)",
+            "情态动词'should'：表示“应该”，通常用于给出建议或劝告。",
+            "  - 否定句：should not / shouldn't + 动词原形。例：You shouldn't go out without an umbrella. (你不应该不带伞出门。)",
+            "  - 疑问句：Should + 主语 + 动词原形...? 例：Should I wear a jacket? (我应该穿夹克吗？)",
+            "动词短语：",
+            "  - put on: 穿上 (强调动作)",
+            "  - take off: 脱掉 (强调动作)",
+            "  - wear: 穿着 (强调状态)",
+            "模板句：",
+            "  - It's [天气状况]. You should [put on/wear/take off] [衣物]."
+          ],
+          "why_explanation": "情态动词'should'表达了温和的建议或义务，是日常交流中常见的表达方式。与'put on'和'take off'（强调动作）以及'wear'（强调状态）结合，能准确地给出关于衣着的建议。",
+          "example": {
+            "question": "请根据天气情况给出建议：外面很冷，你应该穿上外套。",
+            "steps": [
+              "描述天气情况'It's cold outside.'。",
+              "给出建议，用'You should put on your coat.'。"
+            ],
+            "answer": "It's cold outside. You should put on your coat."
+          },
+          "mistakes": [
+            {
+              "wrong": "You should to wear a coat.",
+              "correct": "You should wear a coat.",
+              "reason": "情态动词'should'后直接跟动词原形，不加'to'。"
+            },
+            {
+              "wrong": "You should wearing a coat.",
+              "correct": "You should wear a coat.",
+              "reason": "情态动词后跟动词原形，而不是-ing形式。"
+            }
+          ],
+          "memory_tip": "建议用should，后面动词是原形。穿上用put on，脱掉用take off，穿着就用wear。",
+          "related": {
+            "prerequisite": "情态动词'can'的用法，动词原形。",
+            "next": "其他情态动词，如must, may。"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "07",
+      "unit_name": "How much are these pants?",
+      "cards": [
+        {
+          "card_id": "07-01",
+          "full_id": "英语-七下-07-01",
+          "title": "词汇卡：衣物及相关名词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元涉及的衣物名词及其相关词汇。",
+          "core_points": [
+            "pants /pænts/ n. 裤子 (美式，复数)",
+            "shorts /ʃɔːts/ n. 短裤 (复数)",
+            "socks /sɒks/ n. 袜子 (复数)",
+            "shoes /ʃuːz/ n. 鞋子 (复数)",
+            "skirt /skɜːt/ n. 裙子",
+            "T-shirt /ˈtiː ʃɜːt/ n. T恤衫",
+            "sweater /ˈswetə(r)/ n. 毛衣",
+            "dress /dres/ n. 连衣裙",
+            "bag /bæɡ/ n. 包",
+            "hat /hæt/ n. 帽子",
+            "dollar /ˈdɒlə(r)/ n. 美元",
+            "yuan /juˈɑːn/ n. 元 (人民币)",
+            "price /praɪs/ n. 价格",
+            "store /stɔː(r)/ n. 商店",
+            "shop /ʃɒp/ n. 商店",
+            "sale /seɪl/ n. 销售，特卖"
+          ],
+          "why_explanation": "这些词汇是购物场景中的核心词汇。掌握各种衣物名称和货币单位，是进行购物对话的基础。",
+          "example": {
+            "question": "请用本单元学过的词汇描述你今天想买的一些衣物。",
+            "steps": [
+              "选择你想买的衣物，如T恤、裤子。",
+              "用'I want to buy...'句型表达。"
+            ],
+            "answer": "I want to buy a new T-shirt and some pants."
+          },
+          "mistakes": [
+            {
+              "wrong": "I like this pant.",
+              "correct": "I like these pants.",
+              "reason": "'pants'是复数名词，应与复数指示代词'these'搭配。"
+            }
+          ],
+          "memory_tip": "将衣物词汇与图片或实物联系起来记忆。记住'pants, shorts, socks, shoes'这些词总是复数形式。",
+          "related": {
+            "prerequisite": "小学阶段的基础衣物词汇。",
+            "next": "更多衣物种类、材质和尺寸的词汇。"
+          }
+        },
+        {
+          "card_id": "07-02",
+          "full_id": "英语-七下-07-02",
+          "title": "词汇卡：数字及颜色",
+          "type": "词汇卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "本单元涉及的数字和颜色词汇。",
+          "core_points": [
+            "数字 (Number)：",
+            "  - 1-100的基数词 (one, two, ... ninety-nine, one hundred)",
+            "  - hundred /ˈhʌndrəd/ n. 百",
+            "颜色 (Color)：",
+            "  - red /red/ adj. 红色的",
+            "  - blue /bluː/ adj. 蓝色的",
+            "  - green /ɡriːn/ adj. 绿色的",
+            "  - yellow /ˈjeləʊ/ adj. 黄色的",
+            "  - black /blæk/ adj. 黑色的",
+            "  - white /waɪt/ adj. 白色的",
+            "  - orange /ˈɒrɪndʒ/ adj. 橙色的",
+            "  - purple /ˈpɜːpl/ adj. 紫色的",
+            "  - brown /braʊn/ adj. 棕色的",
+            "  - pink /pɪŋk/ adj. 粉色的"
+          ],
+          "why_explanation": "数字和颜色是描述物品、询问价格和进行日常交流的基础。掌握它们能够帮助学生在购物、描述事物等场景下进行有效沟通。",
+          "example": {
+            "question": "请用数字和颜色描述你最喜欢的一件衣服。",
+            "steps": [
+              "选择一件衣服，如一件蓝色的T恤。",
+              "用'My favorite T-shirt is blue.'表达颜色。"
+            ],
+            "answer": "My favorite T-shirt is blue. It costs 50 yuan."
+          },
+          "mistakes": [
+            {
+              "wrong": "The shirt is blue color.",
+              "correct": "The shirt is blue. / The shirt is blue in color.",
+              "reason": "'blue'本身就是形容词，可以直接作表语。'color'是名词，不能直接跟在形容词后面作表语。"
+            }
+          ],
+          "memory_tip": "数字从1到100，反复练习，尤其注意十几和几十的发音。颜色词与彩虹或常见物品联系记忆。",
+          "related": {
+            "prerequisite": "小学阶段的基础数字和颜色词汇。",
+            "next": "序数词，更大的数字，更细致的颜色描述。"
+          }
+        },
+        {
+          "card_id": "07-03",
+          "full_id": "英语-七下-07-03",
+          "title": "语法卡：指示代词 this/that/these/those",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "指示代词用于指代特定的人或事物，并根据远近和单复数进行区分。",
+          "core_points": [
+            "this：指代近处的单数人或物。例：This is my book. (这是我的书。)",
+            "that：指代远处的单数人或物。例：That is your bag. (那是你的包。)",
+            "these：指代近处的复数人或物。例：These are my shoes. (这些是我的鞋。)",
+            "those：指代远处的复数人或物。例：Those are her friends. (那些是她的朋友。)",
+            "用法：",
+            "  - 可单独作主语、宾语等。例：This is an apple. I like that.",
+            "  - 可作定语，修饰名词。例：This book is mine. These pants are too big.",
+            "  - 与be动词连用时，be动词的单复数要与指示代词保持一致 (this/that + is, these/those + are)。",
+            "  - 询问价格时：How much is this/that? How much are these/those?"
+          ],
+          "why_explanation": "指示代词是英语中表达空间和数量关系的基础工具。通过区分单复数和远近，它们能够帮助说话者精确地指明所讨论的对象，是日常交流中不可或缺的组成部分。",
+          "example": {
+            "question": "用适当的指示代词填空：1. ___ is my pen. (指近处单数) 2. ___ are your books. (指近处复数) 3. Look at ___ bird. (指远处单数) 4. ___ are my friends. (指远处复数)",
+            "steps": [
+              "1. 近处单数用'this'。",
+              "2. 近处复数用'these'。",
+              "3. 远处单数用'that'。",
+              "4. 远处复数用'those'。"
+            ],
+            "answer": "1. This 2. These 3. that 4. Those"
+          },
+          "mistakes": [
+            {
+              "wrong": "This are my friends.",
+              "correct": "These are my friends.",
+              "reason": "指代复数时，应用'these'和'are'。"
+            },
+            {
+              "wrong": "How much is these pants?",
+              "correct": "How much are these pants?",
+              "reason": "'pants'是复数名词，指示代词'these'和be动词'are'应保持一致。"
+            }
+          ],
+          "memory_tip": "近单this，远单that；近复these，远复those。单数配is，复数配are。",
+          "related": {
+            "prerequisite": "be动词的用法，可数名词与不可数名词。",
+            "next": "物主代词与指示代词的区别。"
+          }
+        },
+        {
+          "card_id": "07-04",
+          "full_id": "英语-七下-07-04",
+          "title": "句型卡：询问和表达价格 (How much is/are...?)",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "使用'How much is/are...?'句型询问物品价格，并用'It's...'或'They're...'回答。",
+          "core_points": [
+            "询问价格句型：",
+            "  - How much is + [单数名词/不可数名词]? (这个...多少钱？)",
+            "  - How much are + [复数名词]? (这些...多少钱？)",
+            "  - (简略形式，指代明确时) How much is it? / How much are they?",
+            "回答价格句型：",
+            "  - It's + [数字] + yuan/dollar(s). (单数/不可数)",
+            "  - They're + [数字] + yuan/dollar(s). (复数)",
+            "例句：",
+            "  - A: How much is this T-shirt?",
+            "  - B: It's 50 yuan.",
+            "  - A: How much are these shoes?",
+            "  - B: They're 120 dollars.",
+            "模板句：",
+            "  - A: How much is/are [物品]?",
+            "  - B: It's/They're [价格]."
+          ],
+          "why_explanation": "'How much'是询问数量和价格的疑问短语，'is/are'的单复数形式与所询问的物品保持一致。这种句型是购物场景中最核心的交流方式，体现了英语在量化信息方面的精确性。",
+          "example": {
+            "question": "请询问这件裙子的价格，并回答“100元”。",
+            "steps": [
+              "裙子是单数，用'How much is this dress?'提问。",
+              "回答时，用'It's 100 yuan.'。"
+            ],
+            "answer": "A: How much is this dress?\nB: It's 100 yuan."
+          },
+          "mistakes": [
+            {
+              "wrong": "How many is this T-shirt?",
+              "correct": "How much is this T-shirt?",
+              "reason": "'How much'用于询问价格，'How many'用于询问可数名词的数量。"
+            },
+            {
+              "wrong": "It's 50 dollar.",
+              "correct": "It's 50 dollars.",
+              "reason": "当数字大于1时，货币单位'dollar'应使用复数形式。"
+            }
+          ],
+          "memory_tip": "问价格，How much开头，单数is，复数are。回答It's/They're加数字和货币。",
+          "related": {
+            "prerequisite": "数字和货币单位，指示代词，be动词的用法。",
+            "next": "更复杂的购物对话，如打折、付款方式。"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "08",
+      "unit_name": "When is your birthday?",
+      "cards": [
+        {
+          "card_id": "08-01",
+          "full_id": "英语-七下-08-01",
+          "title": "词汇卡：月份与序数词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "本单元涉及的月份名词和表示顺序的序数词。",
+          "core_points": [
+            "月份 (Months)：",
+            "  - January /ˈdʒænjuəri/ n. 一月",
+            "  - February /ˈfebruəri/ n. 二月",
+            "  - March /mɑːtʃ/ n. 三月",
+            "  - April /ˈeɪprəl/ n. 四月",
+            "  - May /meɪ/ n. 五月",
+            "  - June /dʒuːn/ n. 六月",
+            "  - July /dʒuˈlaɪ/ n. 七月",
+            "  - August /ˈɔːɡəst/ n. 八月",
+            "  - September /sepˈtembə(r)/ n. 九月",
+            "  - October /ɒkˈtəʊbə(r)/ n. 十月",
+            "  - November /nəʊˈvembə(r)/ n. 十一月",
+            "  - December /dɪˈsembə(r)/ n. 十二月",
+            "序数词 (Ordinal Numbers)：",
+            "  - first (1st) 第一",
+            "  - second (2nd) 第二",
+            "  - third (3rd) 第三",
+            "  - fourth (4th) 第四",
+            "  - fifth (5th) 第五",
+            "  - sixth (6th) 第六",
+            "  - seventh (7th) 第七",
+            "  - eighth (8th) 第八",
+            "  - ninth (9th) 第九",
+            "  - tenth (10th) 第十",
+            "  - eleventh (11th) 第十一",
+            "  - twelfth (12th) 第十二",
+            "  - thirteenth (13th) 第十三",
+            "  - twentieth (20th) 第二十",
+            "  - twenty-first (21st) 第二十一",
+            "  - thirty-first (31st) 第三十一",
+            "  - 其他序数词：通常在基数词后加-th，但有特殊变化。"
+          ],
+          "why_explanation": "月份和序数词是表达日期和时间的基础。月份是固定的时间单位，序数词则用于表示日子的顺序。掌握它们对于询问和回答生日、纪念日等个人信息至关重要。",
+          "example": {
+            "question": "请写出七月和第21天的英文。",
+            "steps": [
+              "写出'七月'的英文单词。",
+              "写出'第21天'的序数词形式。"
+            ],
+            "answer": "July, twenty-first (21st)"
+          },
+          "mistakes": [
+            {
+              "wrong": "My birthday is in January one.",
+              "correct": "My birthday is on January first. / My birthday is on the first of January.",
+              "reason": "日期要用序数词，且日期前介词用'on'。"
+            },
+            {
+              "wrong": "September.",
+              "correct": "September.",
+              "reason": "月份单词首字母必须大写。"
+            }
+          ],
+          "memory_tip": "月份单词首字母大写，可以按季节或谐音记忆。序数词记住'first, second, third'的特殊形式，其余大部分加-th，整十的Y变ie加th。",
+          "related": {
+            "prerequisite": "基数词1-31。",
+            "next": "年份的表达，更复杂的日期表达。"
+          }
+        },
+        {
+          "card_id": "08-02",
+          "full_id": "英语-七下-08-02",
+          "title": "词汇卡：节日及其他词汇",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "本单元涉及的常见节日名词及相关词汇。",
+          "core_points": [
+            "birthday /ˈbɜːθdeɪ/ n. 生日",
+            "party /ˈpɑːti/ n. 聚会，派对",
+            "holiday /ˈhɒlədeɪ/ n. 假日，节日",
+            "festival /ˈfestɪvl/ n. 节日",
+            "Christmas /ˈkrɪsməs/ n. 圣诞节",
+            "New Year's Day 新年",
+            "Children's Day 儿童节",
+            "Teacher's Day 教师节",
+            "happy /ˈhæpi/ adj. 快乐的",
+            "fun /fʌn/ n. 乐趣，娱乐",
+            "gift /ɡɪft/ n. 礼物",
+            "present /ˈpreznt/ n. 礼物"
+          ],
+          "why_explanation": "这些词汇是关于节日、庆祝和礼物的核心词汇。掌握它们有助于学生进行节日话题的交流，并了解不同文化背景下的庆祝活动。",
+          "example": {
+            "question": "请用本单元学过的词汇描述你最喜欢的节日以及你会收到什么。",
+            "steps": [
+              "选择你最喜欢的节日，如生日或圣诞节。",
+              "用'My favorite holiday is...'表达。",
+              "用'I usually get...'表达礼物。"
+            ],
+            "answer": "My favorite holiday is my birthday. I usually get many gifts from my family and friends."
+          },
+          "mistakes": [
+            {
+              "wrong": "Happy birthday to you!",
+              "correct": "Happy birthday to you!",
+              "reason": "这是一个固定搭配，通常这样说。"
+            }
+          ],
+          "memory_tip": "将节日与特定的日期或庆祝活动联系起来记忆，如：birthday吃蛋糕，Christmas有礼物。",
+          "related": {
+            "prerequisite": "小学阶段的基础节日词汇，如New Year。",
+            "next": "更多世界各地的节日，节日习俗的描述。"
+          }
+        },
+        {
+          "card_id": "08-03",
+          "full_id": "英语-七下-08-03",
+          "title": "句型卡：询问和表达日期 (When is...?)",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "使用'When is...?'句型询问日期或时间，并用'It's on...'回答。",
+          "core_points": [
+            "询问日期句型：",
+            "  - When is + [节日/事件]? (什么时候是...？)",
+            "  - When is your birthday? (你的生日是什么时候？)",
+            "回答日期句型：",
+            "  - It's on + [月份] + [序数词]. (日期前介词用'on')",
+            "  - It's on + the + [序数词] + of + [月份]. (更正式)",
+            "  - It's in + [月份]. (只说月份时介词用'in')",
+            "例句：",
+            "  - A: When is Christmas?",
+            "  - B: It's on December twenty-fifth. / It's on the twenty-fifth of December.",
+            "  - A: When is your English class?",
+            "  - B: It's on Monday.",
+            "模板句：",
+            "  - A: When is [事件]?",
+            "  - B: It's on [月份] [序数词]."
+          ],
+          "why_explanation": "'When'是询问时间的疑问词，与'is'结合构成询问句。日期前的介词'on'表示在某一天，而'in'表示在某个更大的时间段（月份、年份、季节）。这种介词的精确使用体现了英语对时间表达的严谨性。",
+          "example": {
+            "question": "请询问教师节是什么时候，并回答“九月十日”。",
+            "steps": [
+              "使用'When is Teacher's Day?'提问。",
+              "回答时，用'It's on September tenth.'或'It's on the tenth of September.'。"
+            ],
+            "answer": "A: When is Teacher's Day?\nB: It's on September tenth."
+          },
+          "mistakes": [
+            {
+              "wrong": "My birthday is in May 10.",
+              "correct": "My birthday is on May tenth.",
+              "reason": "具体日期前介词用'on'，日期要用序数词。"
+            },
+            {
+              "wrong": "When your birthday is?",
+              "correct": "When is your birthday?",
+              "reason": "特殊疑问句中，疑问词后是be动词，然后是主语。"
+            }
+          ],
+          "memory_tip": "问时间，用When开头。具体日期用on，只说月份用in。记住'on May 10th'。",
+          "related": {
+            "prerequisite": "月份和序数词，be动词疑问句，介词in/on的初步用法。",
+            "next": "时间介词at的用法，年份的表达。"
+          }
+        },
+        {
+          "card_id": "08-04",
+          "full_id": "英语-七下-08-04",
+          "title": "易混词卡：in/on/at (时间介词)",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "in, on, at 作为时间介词，分别用于不同的时间段，表示“在...时间”。",
+          "core_points": [
+            "in：用于较长的时间段，如年、月、季节、世纪、一天中的某段时间（morning/afternoon/evening）。",
+            "  - 例：in 2023 (在2023年), in July (在七月), in summer (在夏天), in the morning (在早上)。",
+            "on：用于具体的某一天或某天的一部分，如日期、星期几、特定的节日。",
+            "  - 例：on Monday (在星期一), on July 1st (在七月一日), on my birthday (在我的生日), on Christmas Day (在圣诞节那天)。",
+            "at：用于具体的时间点或特定的节日期间。",
+            "  - 例：at 8 o'clock (在八点), at night (在晚上), at noon (在中午), at Christmas (在圣诞节期间)。",
+            "特殊情况：",
+            "  - in the morning/afternoon/evening，但at night/noon/midnight。",
+            "  - at Christmas (期间) vs on Christmas Day (当天)。"
+          ],
+          "why_explanation": "英语中时间介词的使用反映了时间的“大小”和“精确度”。'in'用于大的时间范围，'on'用于具体的日子或表面，'at'用于精确的时间点。这种区分是语言逻辑的一部分，帮助说话者和听者准确理解时间信息。",
+          "example": {
+            "question": "用'in, on, at'填空：1. My birthday is ___ July. 2. We have a party ___ Sunday. 3. I get up ___ 6:00.",
+            "steps": [
+              "1. 'July'是月份，用'in'。",
+              "2. 'Sunday'是星期几，用'on'。",
+              "3. '6:00'是具体时间点，用'at'。"
+            ],
+            "answer": "1. in 2. on 3. at"
+          },
+          "mistakes": [
+            {
+              "wrong": "I go to school on morning.",
+              "correct": "I go to school in the morning.",
+              "reason": "'morning'作为一天中的一部分，用'in the morning'。"
+            },
+            {
+              "wrong": "The party is in Christmas Day.",
+              "correct": "The party is on Christmas Day.",
+              "reason": "'Christmas Day'是具体的一天，用'on'。"
+            }
+          ],
+          "memory_tip": "大时间（年/月/季）用in，具体日（日/周/节）用on，精确点（钟点/夜/午）用at。",
+          "related": {
+            "prerequisite": "名词、动词、形容词的概念。",
+            "next": "时间状语从句，其他介词的用法。"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "09",
+      "unit_name": "What does he look like?",
+      "cards": [
+        {
+          "card_id": "09-01",
+          "full_id": "英语-七下-09-01",
+          "title": "词汇卡：描述外貌的形容词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元涉及的用于描述人物外貌特征的形容词。",
+          "core_points": [
+            "tall /tɔːl/ adj. 高的",
+            "short /ʃɔːt/ adj. 矮的",
+            "heavy /ˈhevi/ adj. 重的，胖的",
+            "thin /θɪn/ adj. 瘦的",
+            "medium /ˈmiːdiəm/ adj. 中等的 (medium height 中等身高, medium build 中等身材)",
+            "long /lɒŋ/ adj. 长的",
+            "short /ʃɔːt/ adj. 短的",
+            "curly /ˈkɜːli/ adj. 卷曲的",
+            "straight /streɪt/ adj. 直的",
+            "beautiful /ˈbjuːtɪfl/ adj. 美丽的",
+            "handsome /ˈhænsəm/ adj. 英俊的",
+            "pretty /ˈprɪti/ adj. 漂亮的",
+            "old /əʊld/ adj. 年老的",
+            "young /jʌŋ/ adj. 年轻的"
+          ],
+          "why_explanation": "这些形容词是描述人物外貌的基础。掌握它们能够帮助学生进行人物描述，并区分不同的人。",
+          "example": {
+            "question": "请用本单元学过的形容词描述一个高个子、长直发、长得很漂亮的女孩。",
+            "steps": [
+              "选择形容词'tall', 'long', 'straight', 'beautiful'。",
+              "用'She is...'和'She has...'句型表达。"
+            ],
+            "answer": "She is tall. She has long, straight hair. She is beautiful."
+          },
+          "mistakes": [
+            {
+              "wrong": "She has a long and straight hair.",
+              "correct": "She has long, straight hair.",
+              "reason": "'hair'是不可数名词，不能用'a'修饰。多个形容词修饰一个名词时，用逗号隔开，最后一个前加and（有时也可省略and）。"
+            }
+          ],
+          "memory_tip": "将形容词按类别记忆，如身高（tall, short, medium height），体型（heavy, thin, medium build），头发（long, short, curly, straight），长相（beautiful, handsome, pretty）。",
+          "related": {
+            "prerequisite": "小学阶段的基础形容词，如big, small。",
+            "next": "形容词的比较级和最高级，更详细的外貌描述词汇。"
+          }
+        },
+        {
+          "card_id": "09-02",
+          "full_id": "英语-七下-09-02",
+          "title": "词汇卡：身体部位及其他词汇",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "本单元涉及的身体部位名词及其他相关词汇。",
+          "core_points": [
+            "hair /heə(r)/ n. 头发 (不可数)",
+            "eye /aɪ/ n. 眼睛 (常用复数eyes)",
+            "face /feɪs/ n. 脸",
+            "mouth /maʊθ/ n. 嘴巴",
+            "nose /nəʊz/ n. 鼻子",
+            "ear /ɪə(r)/ n. 耳朵 (常用复数ears)",
+            "arm /ɑːm/ n. 手臂",
+            "leg /leɡ/ n. 腿",
+            "hand /hænd/ n. 手",
+            "foot /fʊt/ n. 脚 (复数feet)",
+            "body /ˈbɒdi/ n. 身体",
+            "wear /weə(r)/ v. 穿着 (状态)",
+            "glasses /ˈɡlɑːsɪz/ n. 眼镜 (复数)",
+            "match /mætʃ/ v. 相配，匹配",
+            "look like 看起来像"
+          ],
+          "why_explanation": "这些词汇是描述人物外貌和身体特征的基础。掌握它们能够帮助学生更具体、细致地进行人物描述。",
+          "example": {
+            "question": "请用本单元学过的词汇描述一个人有大眼睛、小鼻子和短发。",
+            "steps": [
+              "选择身体部位词汇'eyes', 'nose', 'hair'。",
+              "选择形容词'big', 'small', 'short'。",
+              "用'She has...'句型表达。"
+            ],
+            "answer": "She has big eyes, a small nose, and short hair."
+          },
+          "mistakes": [
+            {
+              "wrong": "He has a short hair.",
+              "correct": "He has short hair.",
+              "reason": "'hair'是不可数名词，不能用'a'修饰。"
+            },
+            {
+              "wrong": "She wear glasses.",
+              "correct": "She wears glasses.",
+              "reason": "主语是第三人称单数时，动词'wear'应加-s。"
+            }
+          ],
+          "memory_tip": "将身体部位词汇与自己的身体部位联系起来记忆。记住'foot'的复数是'feet'，'glasses'是复数名词。",
+          "related": {
+            "prerequisite": "小学阶段的基础身体部位词汇。",
+            "next": "更详细的身体部位词汇，描述衣着搭配。"
+          }
+        },
+        {
+          "card_id": "09-03",
+          "full_id": "英语-七下-09-03",
+          "title": "句型卡：询问和描述外貌 (What does...look like?)",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "使用'What does/do...look like?'句型询问人物的外貌，并用'He/She/They look/has/have...'回答。",
+          "core_points": [
+            "询问外貌句型：",
+            "  - What does he/she look like? (他/她长什么样？)",
+            "  - What do you/they look like? (你/他们长什么样？)",
+            "回答外貌句型 (常用两种方式)：",
+            "  - 使用be动词 + 形容词：He/She is tall/short/heavy/thin. They are tall and thin.",
+            "  - 使用have/has + 名词：He/She has long/short/curly/straight hair. They have big eyes and small noses.",
+            "例句：",
+            "  - A: What does your new teacher look like?",
+            "  - B: She is tall and has long, black hair. She often wears glasses.",
+            "模板句：",
+            "  - A: What does [人称代词/人名] look like?",
+            "  - B: [人称代词] is [身高/体型形容词] and has [头发/眼睛描述]. (可选：She often wears [衣物/饰品].)"
+          ],
+          "why_explanation": "'What...look like?'是询问外貌特征的固定句型，其中的'like'是介词，表示“像...一样”。'look like'的意思是“看起来像什么”，用于询问外表特征。回答时，'be'动词用于描述整体特征，'have/has'用于描述身体部位的具体特征，体现了英语描述的逻辑性。",
+          "example": {
+            "question": "请询问你的朋友的妹妹长什么样，并描述她矮小，有短发。",
+            "steps": [
+              "使用'What does your sister look like?'提问。",
+              "回答时，用'She is short and has short hair.'。"
+            ],
+            "answer": "A: What does your sister look like?\nB: She is short and has short hair."
+          },
+          "mistakes": [
+            {
+              "wrong": "What is he like?",
+              "correct": "What does he look like?",
+              "reason": "'What is he like?'询问的是性格或为人，而'What does he look like?'询问的是外貌。"
+            },
+            {
+              "wrong": "She has a short hair.",
+              "correct": "She has short hair.",
+              "reason": "'hair'是不可数名词，不能用'a'修饰。"
+            }
+          ],
+          "memory_tip": "问外貌，'What does...look like?'；问性格，'What is...like?'。记住'look like'是看长相。",
+          "related": {
+            "prerequisite": "一般现在时疑问句，be动词和have/has的用法，形容词。",
+            "next": "更详细的人物肖像描述，如描述穿着、表情等。"
+          }
+        },
+        {
+          "card_id": "09-04",
+          "full_id": "英语-七下-09-04",
+          "title": "易混词卡：like (介词 vs 动词)",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "like既可以作动词表示“喜欢”，也可以作介词表示“像...一样”。",
+          "core_points": [
+            "作动词：表示“喜欢，喜爱”，后面可接名词、代词、动名词或不定式。",
+            "  - 例：I like apples. (我喜欢苹果。) He likes swimming. (他喜欢游泳。)",
+            "作介词：表示“像...一样”，用于比较或询问特征。",
+            "  - 例：She looks like her mother. (她长得像她妈妈。)",
+            "  - 询问外貌：What does he look like? (他长什么样？)",
+            "  - 询问性格/特征：What is she like? (她是什么样的人？)",
+            "  - 询问天气：What's the weather like? (天气怎么样？)",
+            "区别：",
+            "  - 作动词时，前面通常有主语，后面直接跟宾语。",
+            "  - 作介词时，前面通常是be动词、look、smell、sound、feel等感官动词，后面跟名词或代词作宾语。"
+          ],
+          "why_explanation": "英语中一词多义是常见现象，'like'的动词和介词用法是其核心。理解其词性变化和语境差异是避免误解和正确表达的关键。动词'like'表达的是主观偏好，而介词'like'则表达客观的相似性或属性。",
+          "example": {
+            "question": "判断句中'like'的词性并解释含义：1. I like ice cream. 2. He looks like a movie star. 3. What is your new friend like?",
+            "steps": [
+              "1. 'I like'表示“我喜欢”，'like'是动词。",
+              "2. 'looks like'表示“看起来像”，'like'是介词。",
+              "3. 'What is...like?'询问性格，'like'是介词。"
+            ],
+            "answer": "1. like是动词，表示“喜欢”。\n2. like是介词，表示“像...一样”。\n3. like是介词，表示“...是什么样的”。"
+          },
+          "mistakes": [
+            {
+              "wrong": "What does he like?",
+              "correct": "What does he like? (问他喜欢什么) / What does he look like? (问他长相)",
+              "reason": "'What does he like?'询问的是喜好，而不是外貌。要问外貌必须加'look'。"
+            },
+            {
+              "wrong": "He is like playing basketball.",
+              "correct": "He likes playing basketball.",
+              "reason": "表达喜好用动词'like'，而不是'be like'。"
+            }
+          ],
+          "memory_tip": "喜欢是动词like，像什么就介词like。'What do you like?'问喜欢啥，'What do you look like?'问长相。",
+          "related": {
+            "prerequisite": "动词和介词的概念，句型'What is...like?'。",
+            "next": "其他一词多义的词汇。"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "10",
+      "unit_name": "I'd like some noodles.",
+      "cards": [
+        {
+          "card_id": "10-01",
+          "full_id": "英语-七下-10-01",
+          "title": "词汇卡：食物及饮品名词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元涉及的常见食物和饮品名词。",
+          "core_points": [
+            "noodles /ˈnuːdlz/ n. 面条 (复数)",
+            "dumplings /ˈdʌmplɪŋz/ n. 饺子 (复数)",
+            "soup /suːp/ n. 汤 (不可数)",
+            "rice /raɪs/ n. 米饭 (不可数)",
+            "bread /bred/ n. 面包 (不可数)",
+            "hamburger /ˈhæmbɜːɡə(r)/ n. 汉堡包",
+            "sandwich /ˈsænwɪdʒ/ n. 三明治",
+            "pizza /ˈpiːtsə/ n. 披萨",
+            "coke /kəʊk/ n. 可乐 (不可数)",
+            "tea /tiː/ n. 茶 (不可数)",
+            "coffee /ˈkɒfi/ n. 咖啡 (不可数)",
+            "milk /mɪlk/ n. 牛奶 (不可数)",
+            "juice /dʒuːs/ n. 果汁 (不可数)",
+            "water /ˈwɔːtə(r)/ n. 水 (不可数)",
+            "fruit /fruːt/ n. 水果 (总称不可数)",
+            "meat /miːt/ n. 肉 (不可数)"
+          ],
+          "why_explanation": "这些词汇是日常饮食和点餐的基础。掌握食物和饮品的名称，并区分可数与不可数，对于进行相关对话至关重要。",
+          "example": {
+            "question": "请用本单元学过的词汇描述你午餐想吃什么喝什么。",
+            "steps": [
+              "选择你想吃的食物，如面条或饺子。",
+              "选择你想喝的饮品，如茶或果汁。",
+              "用'I'd like...'句型表达。"
+            ],
+            "answer": "I'd like some noodles and some juice for lunch."
+          },
+          "mistakes": [
+            {
+              "wrong": "I'd like a noodles.",
+              "correct": "I'd like some noodles.",
+              "reason": "'noodles'是复数名词，不能用'a'修饰，应用'some'。"
+            },
+            {
+              "wrong": "I want a rice.",
+              "correct": "I want some rice. / I want a bowl of rice.",
+              "reason": "'rice'是不可数名词，不能用'a'修饰。"
+            }
+          ],
+          "memory_tip": "将食物按类别记忆，如主食（noodles, dumplings, rice, bread），快餐（hamburger, sandwich, pizza），饮品（coke, tea, coffee, milk, juice, water）。注意复数形式和不可数名词。",
+          "related": {
+            "prerequisite": "小学阶段的食物词汇，可数名词与不可数名词。",
+            "next": "更多烹饪方式和配料的词汇。"
+          }
+        },
+        {
+          "card_id": "10-02",
+          "full_id": "英语-七下-10-02",
+          "title": "词汇卡：量词及其他词汇",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "本单元涉及的用于量化食物的量词和其他相关词汇。",
+          "core_points": [
+            "bowl /bəʊl/ n. 碗 (a bowl of noodles/soup)",
+            "cup /kʌp/ n. 杯子 (a cup of tea/coffee)",
+            "glass /ɡlɑːs/ n. 玻璃杯 (a glass of water/juice)",
+            "bottle /ˈbɒtl/ n. 瓶子 (a bottle of milk/coke)",
+            "plate /pleɪt/ n. 盘子 (a plate of dumplings)",
+            "kilo /ˈkiːləʊ/ n. 千克，公斤 (a kilo of apples)",
+            "menu /ˈmenjuː/ n. 菜单",
+            "order /ˈɔːdə(r)/ v./n. 点餐，订单",
+            "hungry /ˈhʌŋɡri/ adj. 饥饿的",
+            "thirsty /ˈθɜːsti/ adj. 口渴的",
+            "delicious /dɪˈlɪʃəs/ adj. 美味的",
+            "healthy /ˈhelθi/ adj. 健康的"
+          ],
+          "why_explanation": "量词是不可数名词的'计数'工具，它们让抽象的量变得具体。掌握这些量词对于在餐厅点餐、描述食物分量等场景至关重要。其他词汇则丰富了点餐和评价食物的表达。",
+          "example": {
+            "question": "请用本单元学过的词汇描述你点了一碗面条和一杯果汁。",
+            "steps": [
+              "用'I'd like...'句型表达点餐。",
+              "使用量词'a bowl of'和'a glass of'。"
+            ],
+            "answer": "I'd like a bowl of noodles and a glass of juice."
+          },
+          "mistakes": [
+            {
+              "wrong": "a bowl noodles",
+              "correct": "a bowl of noodles",
+              "reason": "量词短语中，量词与名词之间需要用介词'of'连接。"
+            },
+            {
+              "wrong": "I am very delicious.",
+              "correct": "The food is very delicious. / I am very hungry.",
+              "reason": "'delicious'是形容食物美味，不能形容人。形容人饥饿用'hungry'。"
+            }
+          ],
+          "memory_tip": "量词与容器形状联系记忆：碗（bowl），杯子（cup），玻璃杯（glass），瓶子（bottle），盘子（plate）。记住'a bowl of'是固定搭配。",
+          "related": {
+            "prerequisite": "可数名词与不可数名词，形容词。",
+            "next": "更多量词，如a slice of, a piece of。"
+          }
+        },
+        {
+          "card_id": "10-03",
+          "full_id": "英语-七下-10-03",
+          "title": "语法卡：would like to do sth. / would like sth.",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "'would like'是“想要”的礼貌表达，后面可接名词或不定式。",
+          "core_points": [
+            "基本结构：",
+            "  - 主语 + would like + 名词 (想要某物)。例：I'd like some noodles. (我想要一些面条。)",
+            "  - 主语 + would like to + 动词原形 (想要做某事)。例：She'd like to play basketball. (她想打篮球。)",
+            "缩写形式：'would'常缩写为'd。例：I'd like, He'd like。",
+            "否定句：主语 + would not like + 名词/to do sth.。例：I wouldn't like any coffee. (我不想喝咖啡。)",
+            "疑问句：Would + 主语 + like + 名词/to do sth.? 简略回答：Yes, 主语 + would. / No, 主语 + wouldn't. 例：Would you like some tea? Yes, I would. / No, I wouldn't.",
+            "与'want'的区别：'would like'比'want'更礼貌、客气。",
+            "与'like'的区别：'would like'表示此刻的愿望或需求，'like'表示习惯性的喜好。"
+          ],
+          "why_explanation": "'would like'是情态动词'would'与动词'like'的组合，形成了一个表达礼貌愿望的固定结构。'would'本身带有“意愿”的含义，与'like'结合后，语气变得更加委婉和客气，符合英语注重礼貌的文化习惯。",
+          "example": {
+            "question": "将句子'He wants to drink some juice.'改为使用'would like'的礼貌表达，并写出否定句和一般疑问句。",
+            "steps": [
+              "肯定句：将'wants'改为'would like to'。",
+              "否定句：在'would'后加'not'。",
+              "一般疑问句：将'Would'提到句首。"
+            ],
+            "answer": "肯定句：He would like to drink some juice.\n否定句：He wouldn't like to drink any juice.\n一般疑问句：Would he like to drink some juice?"
+          },
+          "mistakes": [
+            {
+              "wrong": "I would like to some noodles.",
+              "correct": "I would like some noodles.",
+              "reason": "'would like'后接名词时，不能加'to'。'to'只在后面接动词原形时使用。"
+            },
+            {
+              "wrong": "Would you like drinking tea?",
+              "correct": "Would you like to drink tea? / Would you like some tea?",
+              "reason": "'would like'后接动词时，应使用不定式'to do'形式，而非动名词'doing'。"
+            }
+          ],
+          "memory_tip": "想吃想喝用'd like，后面接名词。想做某事用'd like to do。比'want'更客气。",
+          "related": {
+            "prerequisite": "动词原形，不定式，情态动词'would'。",
+            "next": "其他表示意愿和偏好的句型。"
+          }
+        },
+        {
+          "card_id": "10-04",
+          "full_id": "英语-七下-10-04",
+          "title": "句型卡：点餐对话 (What kind of...would you like?)",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "使用'What kind of...would you like?'句型询问顾客想要的食物种类，并用'I'd like...'句型回答。",
+          "core_points": [
+            "询问种类句型：",
+            "  - What kind of + [名词] + would you like? (你想要什么种类的...？)",
+            "  - 例：What kind of noodles would you like? (你想要什么面条？)",
+            "  - What about + [食物]? (那...呢？) (询问其他食物)",
+            "回答点餐句型：",
+            "  - I'd like + [数量/量词] + [食物名词]. (我想要...)",
+            "  - I'd like to have + [数量/量词] + [食物名词]. (我想要吃...)",
+            "例句：",
+            "  - A: What kind of noodles would you like?",
+            "  - B: I'd like beef noodles.",
+            "  - A: What about a drink?",
+            "  - B: I'd like a cup of tea.",
+            "模板句：",
+            "  - A: What kind of [食物大类] would you like?",
+            "  - B: I'd like [具体食物种类]."
+          ],
+          "why_explanation": "'What kind of...'用于询问事物的种类，体现了对具体选择的关注。结合'would you like'的礼貌表达，构成了完整的点餐询问。回答时，'I'd like'直接表达意愿，是餐厅服务场景的核心对话模式。",
+          "example": {
+            "question": "请根据以下场景进行点餐对话：服务员问你想要什么披萨，你回答“蔬菜披萨”。服务员又问你喝什么，你回答“一杯可乐”。",
+            "steps": [
+              "服务员使用'What kind of pizza would you like?'提问。",
+              "顾客回答'I'd like vegetable pizza.'。",
+              "服务员使用'What about a drink?'提问。",
+              "顾客回答'I'd like a cup of coke.'。"
+            ],
+            "answer": "A: What kind of pizza would you like?\nB: I'd like vegetable pizza.\nA: What about a drink?\nB: I'd like a cup of coke."
+          },
+          "mistakes": [
+            {
+              "wrong": "What kind of noodles you would like?",
+              "correct": "What kind of noodles would you like?",
+              "reason": "疑问句中，情态动词'would'应放在主语'you'之前。"
+            },
+            {
+              "wrong": "I like some dumplings.",
+              "correct": "I'd like some dumplings.",
+              "reason": "在点餐场景中，表达当前需求时，用'I'd like'比'I like'更礼貌和准确。"
+            }
+          ],
+          "memory_tip": "点餐问'什么种类'，'What kind of...would you like?'。回答'I'd like...'，后面加食物和量词。",
+          "related": {
+            "prerequisite": "食物名词，量词，'would like'用法。",
+            "next": "更复杂的餐厅对话，如询问推荐、支付账单。"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "11",
+      "unit_name": "What do you think of game shows?",
+      "cards": [
+        {
+          "card_id": "11-01",
+          "full_id": "英语-七下-11-01",
+          "title": "词汇卡：电视节目及电影类型",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元涉及的各种电视节目和电影类型名词。",
+          "core_points": [
+            "game show 游戏节目",
+            "talk show 访谈节目",
+            "soap opera 肥皂剧",
+            "sports show 体育节目",
+            "news /njuːz/ n. 新闻 (不可数)",
+            "cartoon /kɑːˈtuːn/ n. 卡通片，动画片",
+            "movie /ˈmuːvi/ n. 电影",
+            "TV series 电视剧",
+            "documentary /ˌdɒkjuˈmentri/ n. 纪录片",
+            "comedy /ˈkɒmədi/ n. 喜剧",
+            "action movie 动作片",
+            "thriller /ˈθrɪlə(r)/ n. 惊悚片",
+            "horror movie 恐怖片",
+            "science fiction movie (sci-fi movie) 科幻片"
+          ],
+          "why_explanation": "这些词汇是讨论娱乐、媒体和个人兴趣的基础。掌握不同类型的节目和电影名称，有助于学生表达自己的喜好和评论。",
+          "example": {
+            "question": "请用本单元学过的词汇描述你最喜欢的一种电视节目或电影类型。",
+            "steps": [
+              "选择你最喜欢的一种节目或电影类型，如卡通片或动作片。",
+              "用'My favorite TV show/movie type is...'或'I like watching...'句型表达。"
+            ],
+            "answer": "My favorite TV show is a cartoon. I also like watching action movies."
+          },
+          "mistakes": [
+            {
+              "wrong": "I like watch cartoons.",
+              "correct": "I like watching cartoons. / I like to watch cartoons.",
+              "reason": "'like'后接动词时，通常用动名词-ing形式或带to的不定式。"
+            }
+          ],
+          "memory_tip": "将节目和电影类型按特点分组记忆，如：有剧情的（soap opera, TV series），娱乐的（game show, talk show），信息类的（news, documentary）。",
+          "related": {
+            "prerequisite": "小学阶段的娱乐词汇，如play games。",
+            "next": "更多媒体形式，如podcast, live show。"
+          }
+        },
+        {
+          "card_id": "11-02",
+          "full_id": "英语-七下-11-02",
+          "title": "词汇卡：形容词及副词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "本单元涉及的用于评价事物和表达频率的形容词和副词。",
+          "core_points": [
+            "boring /ˈbɔːrɪŋ/ adj. 无聊的",
+            "interesting /ˈɪntrəstɪŋ/ adj. 有趣的",
+            "exciting /ɪkˈsaɪtɪŋ/ adj. 令人兴奋的",
+            "relaxing /rɪˈlæksɪŋ/ adj. 令人放松的",
+            "funny /ˈfʌni/ adj. 滑稽的，有趣的",
+            "difficult /ˈdɪfɪkəlt/ adj. 困难的",
+            "easy /ˈiːzi/ adj. 容易的",
+            "never /ˈnevə(r)/ adv. 从不",
+            "hardly ever 几乎从不",
+            "sometimes /ˈsʌmtaɪmz/ adv. 有时",
+            "often /ˈɒfn/ adv. 经常",
+            "usually /ˈjuːʒuəli/ adv. 通常",
+            "always /ˈɔːlweɪz/ adv. 总是",
+            "every day 每天 (时间状语)",
+            "opinion /əˈpɪnjən/ n. 观点，看法"
+          ],
+          "why_explanation": "这些形容词是评价事物（如电视节目）的基础，能够帮助学生表达自己的看法。频率副词则用于描述动作发生的频率，是表达习惯性行为的重要工具。",
+          "example": {
+            "question": "请用本单元学过的词汇描述你对新闻节目的看法，以及你多久看一次。",
+            "steps": [
+              "选择形容词评价新闻节目，如'interesting'。",
+              "选择频率副词描述观看频率，如'sometimes'或'often'。",
+              "用'I think...'和'I watch it...'句型表达。"
+            ],
+            "answer": "I think news is interesting. I often watch it."
+          },
+          "mistakes": [
+            {
+              "wrong": "I watch news always.",
+              "correct": "I always watch news.",
+              "reason": "频率副词通常放在实义动词之前，be动词、情态动词、助动词之后。"
+            }
+          ],
+          "memory_tip": "形容词记住反义词对：boring vs interesting, exciting vs relaxing, difficult vs easy。频率副词按频率高低排序：never < hardly ever < sometimes < often < usually < always。",
+          "related": {
+            "prerequisite": "小学阶段的基础形容词，副词的概念。",
+            "next": "形容词的比较级和最高级，更多频率副词。"
+          }
+        },
+        {
+          "card_id": "11-03",
+          "full_id": "英语-七下-11-03",
+          "title": "语法卡：频率副词 (Adverbs of Frequency)",
+          "type": "语法卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "频率副词用于描述动作发生的频率，如always, usually, often, sometimes, hardly ever, never。",
+          "core_points": [
+            "主要频率副词：",
+            "  - always (总是) 100%",
+            "  - usually (通常) 80-90%",
+            "  - often (经常) 60-70%",
+            "  - sometimes (有时) 30-50%",
+            "  - hardly ever (几乎从不) 5-10%",
+            "  - never (从不) 0%",
+            "位置：",
+            "  - 通常放在实义动词之前。例：I always go to school by bus. (我总是乘公交车上学。)",
+            "  - 放在be动词、情态动词或助动词之后。例：She is always happy. (她总是很高兴。) He can never swim. (他从不会游泳。)",
+            "  - 'sometimes' 比较灵活，可以放在句首、句中或句末。例：Sometimes I read books. I sometimes read books. I read books sometimes.",
+            "  - 'hardly ever' 和 'never' 本身带有否定意义，句子中不再用其他否定词。例：I hardly ever watch TV. (我几乎不看电视。)"
+          ],
+          "why_explanation": "频率副词是英语中表达习惯和规律性行为的关键。它们的位置规则是为了保持句子的流畅性和强调的重点。例如，将频率副词放在实义动词前，是为了让动词的频率信息更早地被接收，而放在助动词后，则是因为助动词承载了更多的语法功能。",
+          "example": {
+            "question": "将句子'He watches TV.'改为使用'often'的肯定句、否定句和一般疑问句。",
+            "steps": [
+              "肯定句：将'often'放在实义动词'watches'之前。",
+              "否定句：将'often'放在助动词'doesn't'之后，实义动词'watch'之前。",
+              "一般疑问句：将'often'放在主语'he'之后，实义动词'watch'之前。"
+            ],
+            "answer": "肯定句：He often watches TV.\n否定句：He doesn't often watch TV.\n一般疑问句：Does he often watch TV?"
+          },
+          "mistakes": [
+            {
+              "wrong": "I go always to school.",
+              "correct": "I always go to school.",
+              "reason": "频率副词'always'应放在实义动词'go'之前。"
+            },
+            {
+              "wrong": "She doesn't never watch TV.",
+              "correct": "She never watches TV. / She doesn't ever watch TV.",
+              "reason": "'never'本身有否定意义，不能与'doesn't'双重否定。"
+            }
+          ],
+          "memory_tip": "频率副词位置歌：实义动词前，be助情后边。Sometimes最自由，句首句中句末都行。",
+          "related": {
+            "prerequisite": "一般现在时，be动词和助动词的用法。",
+            "next": "其他副词的用法，副词的位置变化。"
+          }
+        },
+        {
+          "card_id": "11-04",
+          "full_id": "英语-七下-11-04",
+          "title": "句型卡：询问和表达观点 (What do you think of...?)",
+          "type": "句型卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "使用'What do you think of...?'句型询问对某事物的看法，并用'I think...'句型表达观点。",
+          "core_points": [
+            "询问观点句型：",
+            "  - What do you think of + [名词/动名词]? (你觉得...怎么样？)",
+            "  - How do you like + [名词/动名词]? (你觉得...怎么样？——更侧重喜好)",
+            "回答观点句型：",
+            "  - I think + 句子. (我认为...)",
+            "  - I don't think + 句子. (我认为不...)",
+            "  - It's + [形容词]. (它很...)",
+            "例句：",
+            "  - A: What do you think of game shows?",
+            "  - B: I think they're boring. / I don't think they're interesting.",
+            "  - A: How do you like the new movie?",
+            "  - B: I like it very much. It's exciting.",
+            "模板句：",
+            "  - A: What do you think of [电视节目/电影]?",
+            "  - B: I think [它/它们] [be动词] [形容词]."
+          ],
+          "why_explanation": "'What do you think of...?'是询问他人主观感受和评价的常用句型，'think of'表示“对...有看法”。回答时，'I think'直接引出主观判断，体现了英语中表达个人意见的直接性。",
+          "example": {
+            "question": "请询问你的朋友对肥皂剧的看法，并假设他觉得肥皂剧很有趣。",
+            "steps": [
+              "使用'What do you think of soap operas?'提问。",
+              "回答时，用'I think they're interesting.'。"
+            ],
+            "answer": "A: What do you think of soap operas?\nB: I think they're interesting."
+          },
+          "mistakes": [
+            {
+              "wrong": "What do you think about game shows?",
+              "correct": "What do you think of game shows? / What do you think about game shows?",
+              "reason": "'think of'和'think about'都可以表示“认为，考虑”，在本语境下都可以，但教材主要学习'think of'。"
+            },
+            {
+              "wrong": "I think is boring.",
+              "correct": "I think it is boring. / I think it's boring.",
+              "reason": "'I think'后应跟一个完整的句子，不能省略主语和谓语。"
+            }
+          ],
+          "memory_tip": "问看法，'What do you think of?'，回答'I think...'。记住'think of'是固定搭配。",
+          "related": {
+            "prerequisite": "一般现在时疑问句，形容词。",
+            "next": "表达同意或不同意的句型，更复杂的观点论证。"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "12",
+      "unit_name": "I've got a new pen pal.",
+      "cards": [
+        {
+          "card_id": "12-01",
+          "full_id": "英语-七下-12-01",
+          "title": "词汇卡：人物及地点名词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元涉及的人物和地点名词，尤其是与交友和旅行相关的。",
+          "core_points": [
+            "pen pal 笔友",
+            "friend /frend/ n. 朋友",
+            "family /ˈfæməli/ n. 家庭",
+            "sister /ˈsɪstə(r)/ n. 姐妹",
+            "brother /ˈbrʌðə(r)/ n. 兄弟",
+            "parent /ˈpeərənt/ n. 父母 (常用复数parents)",
+            "grandparent /ˈɡrænpeərənt/ n. 祖父母 (常用复数grandparents)",
+            "city /ˈsɪti/ n. 城市",
+            "country /ˈkʌntri/ n. 国家，乡村",
+            "town /taʊn/ n. 城镇",
+            "America /əˈmerɪkə/ n. 美国",
+            "China /ˈtʃaɪnə/ n. 中国",
+            "Japan /dʒəˈpæn/ n. 日本",
+            "Australia /ɒˈstreɪliə/ n. 澳大利亚",
+            "Canada /ˈkænədə/ n. 加拿大",
+            "visit /ˈvɪzɪt/ v./n. 拜访，参观"
+          ],
+          "why_explanation": "这些词汇是介绍个人信息、家庭成员以及描述国家和城市的基础。掌握它们有助于学生进行自我介绍和跨文化交流。",
+          "example": {
+            "question": "请用本单元学过的词汇介绍你的笔友来自哪个国家，并描述他/她的家庭。",
+            "steps": [
+              "用'My pen pal is from...'表达国家。",
+              "用'He/She has...'描述家庭成员。"
+            ],
+            "answer": "My pen pal is from America. He has a brother and his parents are teachers."
+          },
+          "mistakes": [
+            {
+              "wrong": "My pen pal is a American.",
+              "correct": "My pen pal is an American. / My pen pal is from America.",
+              "reason": "以元音音素开头的名词'American'前用'an'。'America'是国家名称，不能直接作人。"
+            }
+          ],
+          "memory_tip": "将国家名称与对应的大洲或文化特征联系起来记忆。将家庭成员词汇与家庭树联系起来记忆。",
+          "related": {
+            "prerequisite": "小学阶段的基础家庭成员词汇，国家名称。",
+            "next": "更多国家、城市名称，介绍文化习俗。"
+          }
+        },
+        {
+          "card_id": "12-02",
+          "full_id": "英语-七下-12-02",
+          "title": "词汇卡：动词及形容词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 3,
+          "definition": "本单元涉及的动词和形容词，主要用于描述过去发生的事情和个人特征。",
+          "core_points": [
+            "get /ɡet/ v. 得到，获得 (过去式got)",
+            "have /hæv/ v. 有 (过去式had)",
+            "be /biː/ v. 是 (过去式was/were)",
+            "meet /miːt/ v. 遇见 (过去式met)",
+            "go /ɡəʊ/ v. 去 (过去式went)",
+            "write /raɪt/ v. 写 (过去式wrote)",
+            "eat /iːt/ v. 吃 (过去式ate)",
+            "drink /drɪŋk/ v. 喝 (过去式drank)",
+            "see /siː/ v. 看见 (过去式saw)",
+            "do /duː/ v. 做 (过去式did)",
+            "busy /ˈbɪzi/ adj. 忙碌的",
+            "different /ˈdɪfrənt/ adj. 不同的",
+            "same /seɪm/ adj. 相同的",
+            "interesting /ˈɪntrəstɪŋ/ adj. 有趣的",
+            "nice /naɪs/ adj. 好的，友善的"
+          ],
+          "why_explanation": "这些动词是构建一般过去时句子的核心，其中许多是不规则动词，需要特别记忆。形容词则用于丰富对人物和事物的描述，使其更具体。",
+          "example": {
+            "question": "请用本单元学过的动词和形容词描述你昨天做了什么，以及你的感受。",
+            "steps": [
+              "选择过去式动词描述你做的事情，如'went to school', 'met friends'。",
+              "选择形容词描述感受，如'busy'或'happy'。",
+              "用一般过去时态表达。"
+            ],
+            "answer": "Yesterday, I went to school and met my friends. I was a little busy but very happy."
+          },
+          "mistakes": [
+            {
+              "wrong": "I go to the park yesterday.",
+              "correct": "I went to the park yesterday.",
+              "reason": "有明确的过去时间状语'yesterday'，动词应使用过去式。"
+            }
+          ],
+          "memory_tip": "不规则动词过去式要反复朗读和记忆，可以分组记忆。形容词记住反义词对，如different vs same。",
+          "related": {
+            "prerequisite": "动词原形，形容词。",
+            "next": "更多不规则动词，过去分词。"
+          }
+        },
+        {
+          "card_id": "12-03",
+          "full_id": "英语-七下-12-03",
+          "title": "时态卡：一般过去时 (Simple Past Tense)",
+          "type": "时态卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "一般过去时表示过去某个时间发生或存在的动作或状态，与现在没有直接联系。",
+          "core_points": [
+            "构成：主语 + 动词过去式 + (其他成分)。",
+            "肯定句：",
+            "  - 规则动词：动词原形 + -ed。例：play → played, watch → watched。",
+            "  - 不规则动词：有特殊过去式形式。例：go → went, have → had, be → was/were。",
+            "  - 例：I played basketball yesterday. (我昨天打篮球。) She was happy. (她过去很高兴。)",
+            "否定句：主语 + didn't + 动词原形 + (其他成分)。",
+            "  - be动词的否定：主语 + wasn't/weren't + (其他成分)。",
+            "  - 例：He didn't go to school. (他没去上学。) They weren't at home. (他们当时不在家。)",
+            "一般疑问句：Did + 主语 + 动词原形 + (其他成分)? 简略回答：Yes, 主语 + did. / No, 主语 + didn't.",
+            "  - be动词的疑问：Was/Were + 主语 + (其他成分)? 简略回答：Yes, 主语 + was/were. / No, 主语 + wasn't/weren't.",
+            "  - 例：Did you watch TV? Yes, I did. / No, I didn't. Was she busy? Yes, she was. / No, she wasn't.",
+            "特殊疑问句：疑问词 + did + 主语 + 动词原形 + (其他成分)? / 疑问词 + was/were + 主语 + (其他成分)?",
+            "  - 例：What did you do yesterday? (你昨天做了什么？) Where were you? (你当时在哪里？)",
+            "标志词：yesterday, last night/week/month/year, two days ago, in 1990等明确的过去时间状语。",
+            "动词过去式规则变化：",
+            "  - 一般情况：直接加-ed。例：play → played。",
+            "  - 以不发音的-e结尾：直接加-d。例：live → lived。",
+            "  - 以辅音字母+y结尾：变y为i再加-ed。例：study → studied。",
+            "  - 重读闭音节，末尾只有一个辅音字母：双写末尾辅音字母再加-ed。例：stop → stopped。"
+          ],
+          "why_explanation": "一般过去时是英语中最基础的时态之一，它强调动作或状态在过去某个特定时间点发生并结束，与现在没有关联。通过动词过去式（无论是规则还是不规则）和助动词'did'的引入，英语能够清晰地表达过去事件，是叙事和回忆的基础。",
+          "example": {
+            "question": "将句子'She goes to the park.'改为一般过去时，并写出否定句和一般疑问句。",
+            "steps": [
+              "肯定句：将'goes'改为不规则过去式'went'。",
+              "否定句：用'didn't'加动词原形'go'。",
+              "一般疑问句：用'Did'加主语和动词原形'go'。"
+            ],
+            "answer": "肯定句：She went to the park yesterday.\n否定句：She didn't go to the park yesterday.\n一般疑问句：Did she go to the park yesterday?"
+          },
+          "mistakes": [
+            {
+              "wrong": "I didn't went to school.",
+              "correct": "I didn't go to school.",
+              "reason": "助动词'did'后，实义动词必须用原形。"
+            },
+            {
+              "wrong": "He was play football.",
+              "correct": "He played football. / He was playing football.",
+              "reason": "be动词后如果跟动词，应是-ing形式（过去进行时）或过去分词（被动语态）。一般过去时直接用动词过去式。"
+            }
+          ],
+          "memory_tip": "一般过去时，口诀记：过去时态动词变，规则-ed不规则记。否定疑问借did，did后动词用原形。",
+          "related": {
+            "prerequisite": "动词原形，be动词的用法，现在进行时。",
+            "next": "过去进行时，现在完成时。"
+          }
+        },
+        {
+          "card_id": "12-04",
+          "full_id": "英语-七下-12-04",
+          "title": "不规则动词卡：一般过去式 (常见动词)",
+          "type": "不规则动词卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "本单元涉及的常见不规则动词的原形和过去式。",
+          "core_points": [
+            "AAA型 (原形、过去式、过去分词相同)：",
+            "  - cut - cut - cut (切)",
+            "  - put - put - put (放)",
+            "  - read - read - read (读)",
+            "ABB型 (过去式和过去分词相同)：",
+            "  - get - got - got (得到)",
+            "  - have - had - had (有)",
+            "  - meet - met - met (遇见)",
+            "  - make - made - made (制作)",
+            "  - say - said - said (说)",
+            "  - tell - told - told (告诉)",
+            "  - buy - bought - bought (买)",
+            "  - bring - brought - brought (带来)",
+            "  - think - thought - thought (想)",
+            "  - teach - taught - taught (教)",
+            "  - catch - caught - caught (抓住)",
+            "  - find - found - found (找到)",
+            "  - sit - sat - sat (坐)",
+            "  - stand - stood - stood (站)",
+            "  - sell - sold - sold (卖)",
+            "  - hear - heard - heard (听见)",
+            "  - sleep - slept - slept (睡觉)",
+            "ABC型 (原形、过去式、过去分词都不同)：",
+            "  - be - was/were - been (是)",
+            "  - go - went - gone (去)",
+            "  - do - did - done (做)",
+            "  - eat - ate - eaten (吃)",
+            "  - drink - drank - drunk (喝)",
+            "  - see - saw - seen (看见)",
+            "  - write - wrote - written (写)",
+            "  - come - came - come (来)",
+            "  - run - ran - run (跑)",
+            "  - sing - sang - sung (唱)",
+            "  - give - gave - given (给)"
+          ],
+          "why_explanation": "不规则动词的过去式形式是英语历史演变的结果，它们不遵循统一的规则。死记硬背是学习这些动词的唯一有效方法。掌握它们是正确使用一般过去时的基础，也是英语学习中的一个难点。",
+          "example": {
+            "question": "写出以下动词的过去式：go, have, see, make。",
+            "steps": [
+              "go的过去式是went。",
+              "have的过去式是had。",
+              "see的过去式是saw。",
+              "make的过去式是made。"
+            ],
+            "answer": "went, had, saw, made"
+          },
+          "mistakes": [
+            {
+              "wrong": "I goed to school yesterday.",
+              "correct": "I went to school yesterday.",
+              "reason": "'go'是不规则动词，过去式是'went'，而不是加-ed。"
+            },
+            {
+              "wrong": "She has a pen pal last year.",
+              "correct": "She had a pen pal last year.",
+              "reason": "句中有过去时间状语'last year'，动词'have'应使用过去式'had'。"
+            }
+          ],
+          "memory_tip": "将不规则动词按变化规律分组记忆，如元音变化的(sing-sang-sung)，结尾变化的(make-made-made)。制作小卡片反复朗读和默写。",
+          "related": {
+            "prerequisite": "动词原形的概念。",
+            "next": "过去分词的用法，现在完成时。"
+          }
+        }
+      ]
+    }
+  ]
+}

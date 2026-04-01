@@ -1,0 +1,624 @@
+{
+  "subject": "英语",
+  "grade": "高三总复习",
+  "semester": "全册",
+  "textbook": "人教版",
+  "grade_short": "高三",
+  "units": [
+    {
+      "unit_id": "01",
+      "unit_name": "Unit 1: Sharing Personal Experiences (分享个人经历)",
+      "cards": [
+        {
+          "card_id": "01-01",
+          "full_id": "英语-高三-01-01",
+          "title": "词汇：个人经历与情感名词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本卡片涵盖描述个人经历、感受和相关概念的核心名词，是构建个人叙事的基础。",
+          "core_points": [
+            "**experience** /ɪkˈspɪəriəns/ (n.) 经历；经验 (可数/不可数)",
+            "**memory** /ˈmeməri/ (n.) 记忆；回忆 (常作可数)",
+            "**emotion** /ɪˈməʊʃn/ (n.) 情感；情绪",
+            "**challenge** /ˈtʃælɪndʒ/ (n.) 挑战",
+            "**success** /səkˈses/ (n.) 成功",
+            "**failure** /ˈfeɪljər/ (n.) 失败",
+            "**opportunity** /ˌɒpərˈtjuːnəti/ (n.) 机会",
+            "**regret** /rɪˈɡret/ (n.) 遗憾；懊悔"
+          ],
+          "why_explanation": "这些名词是描述个人生活事件、从中获得的感悟以及随之而来的情绪变化的关键。区分可数和不可数用法（如 experience）对于准确表达至关重要。",
+          "example": {
+            "question": "请用 'experience', 'challenge', 'success' 描述一次难忘的经历。",
+            "steps": [
+              "选择一个具体的事件作为核心。",
+              "用 'experience' 概括事件的性质，注意其可数或不可数用法。",
+              "用 'challenge' 描述事件中的困难。",
+              "用 'success' 表达克服困难后的结果。"
+            ],
+            "answer": "My first marathon was an unforgettable **experience**. It presented a huge physical and mental **challenge**, but crossing the finish line felt like a great **success**."
+          },
+          "mistakes": [
+            {
+              "wrong": "I have many experiences in my life.",
+              "correct": "I have had many experiences in my life. / I have much experience in teaching.",
+              "reason": "'Experience' 作“经历”讲时是可数名词，指具体的事件，常与 have 连用；作“经验”讲时是不可数名词，指积累的知识技能，常与 much 连用。"
+            }
+          ],
+          "memory_tip": "将这些词与自己的真实经历联系起来，例如：'My most memorable experience was overcoming a big challenge, which led to great success.' 想象每个词都是你日记本上的一个标签。",
+          "related": {
+            "prerequisite": "基础名词认知，可数与不可数名词概念",
+            "next": "词汇：动词：描述行动与变化"
+          }
+        },
+        {
+          "card_id": "01-02",
+          "full_id": "英语-高三-01-02",
+          "title": "词汇：分享与行动动词",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本卡片涵盖描述个人分享、行动、处理问题和学习的动词，是表达动态过程和行为的关键。",
+          "core_points": [
+            "**share** /ʃeər/ (v.) 分享 (常与 with 连用)",
+            "**describe** /dɪˈskraɪb/ (v.) 描述",
+            "**recall** /rɪˈkɔːl/ (v.) 回忆；回想",
+            "**reflect** /rɪˈflekt/ (v.) 反思；反映",
+            "**overcome** /ˌəʊvərˈkʌm/ (v.) 克服 (过去式 overcame, 过去分词 overcome)",
+            "**achieve** /əˈtʃiːv/ (v.) 取得；实现",
+            "**learn** /lɜːrn/ (v.) 学习；得知",
+            "**inspire** /ɪnˈspaɪər/ (v.) 激励；启发"
+          ],
+          "why_explanation": "这些动词帮助我们阐述如何经历事件、如何从中学习以及如何影响他人。它们是叙述故事和表达个人成长轨迹的核心词汇。",
+          "example": {
+            "question": "请用 'share', 'describe', 'overcome' 讲述一个你和朋友分享克服困难的经历。",
+            "steps": [
+              "先设定一个困难情境。",
+              "用 'overcome' 表达你如何应对和解决困难。",
+              "用 'share' 表达你与朋友分享这个经历，并注意介词搭配。",
+              "用 'describe' 详细讲述克服过程。"
+            ],
+            "answer": "I wanted to **share** with my best friend how I managed to **overcome** my fear of public speaking. I **described** every step, from my initial anxiety to finally delivering a confident presentation."
+          },
+          "mistakes": [
+            {
+              "wrong": "He shares his experience to me.",
+              "correct": "He shares his experience with me.",
+              "reason": "'Share' 表示与某人分享时，介词通常用 'with'，而不是 'to'。"
+            }
+          ],
+          "memory_tip": "联想记忆：'Share' (分享) 故事，'describe' (描述) 细节，'overcome' (克服) 困难，'achieve' (实现) 目标，'reflect' (反思) 过去，'learn' (学习) 经验，'inspire' (激励) 他人。这些词像一组连贯的动作。",
+          "related": {
+            "prerequisite": "基础动词认知",
+            "next": "词汇：描述性形容词与副词"
+          }
+        },
+        {
+          "card_id": "01-03",
+          "full_id": "英语-高三-01-03",
+          "title": "词汇：描述性形容词与副词",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本卡片涵盖描述事物、感受、态度和程度的形容词与副词，能丰富表达、增添细节和情感色彩。",
+          "core_points": [
+            "**memorable** /ˈmemərəbl/ (adj.) 难忘的",
+            "**challenging** /ˈtʃælɪndʒɪŋ/ (adj.) 具有挑战性的",
+            "**rewarding** /rɪˈwɔːrdɪŋ/ (adj.) 有益的；值得的",
+            "**inspiring** /ɪnˈspaɪərɪŋ/ (adj.) 鼓舞人心的",
+            "**grateful** /ˈɡreɪtfl/ (adj.) 感激的 (常与 be/feel 连用)",
+            "**deeply** /ˈdiːpli/ (adv.) 深刻地；深深地",
+            "**truly** /ˈtruːli/ (adv.) 真正地；确实地",
+            "**personally** /ˈpɜːrsənəli/ (adv.) 个人地；就个人而言"
+          ],
+          "why_explanation": "形容词和副词是语言的“调味品”，使表达更生动具体。形容词修饰名词，提供性质和特征；副词修饰动词、形容词或其他副词，说明方式、程度、时间等。",
+          "example": {
+            "question": "用 'memorable', 'challenging', 'deeply' 描述一次让你印象深刻的经历。",
+            "steps": [
+              "选择一个具体的经历。",
+              "用 'memorable' 描述经历的性质。",
+              "用 'challenging' 描述经历中的困难。",
+              "用 'deeply' 强调经历对你的影响程度。"
+            ],
+            "answer": "It was a truly **memorable** journey, full of **challenging** moments that **deeply** tested my resilience."
+          },
+          "mistakes": [
+            {
+              "wrong": "I feel deeply grateful for your help.",
+              "correct": "I am deeply grateful for your help. / I feel deeply grateful for your help.",
+              "reason": "'Grateful' 是形容词，通常与系动词 'be' 连用表示状态 'be grateful'。虽然 'feel grateful' 也常用，但 'be grateful' 更强调一种持续性的感受或品质。"
+            }
+          ],
+          "memory_tip": "形容词描述'怎么样'（如 memorable day），副词描述'如何地'（如 deeply moved）。想象形容词给名词“穿衣服”，副词给动词“戴帽子”。",
+          "related": {
+            "prerequisite": "基础形容词和副词认知",
+            "next": "词汇：高频动词短语"
+          }
+        },
+        {
+          "card_id": "01-04",
+          "full_id": "英语-高三-01-04",
+          "title": "词汇：高频动词短语",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "本卡片涵盖本单元中表达动作、状态和关系的常用动词短语（phrasal verbs），是地道英语表达的重要组成部分。",
+          "core_points": [
+            "**look back on** (回顾；回想)",
+            "**deal with** (处理；应对)",
+            "**come across** (偶然遇到；碰见)",
+            "**take part in** (参加；参与)",
+            "**make a difference** (有所作为；产生影响)",
+            "**learn from** (向...学习；从...中吸取教训)",
+            "**get through** (度过难关；完成；通过)",
+            "**open up** (敞开心扉；开启)"
+          ],
+          "why_explanation": "动词短语往往比单个动词更地道、更具体，且含义常常不能从字面意思简单推断。掌握这些短语能大大提升口语和写作的自然度和准确性。",
+          "example": {
+            "question": "请用 'look back on', 'deal with', 'make a difference' 描述一次志愿活动。",
+            "steps": [
+              "设定一个志愿活动场景。",
+              "用 'deal with' 描述活动中遇到的问题。",
+              "用 'make a difference' 表达活动的影响。",
+              "用 'look back on' 总结回顾。"
+            ],
+            "answer": "When I **look back on** my volunteer experience, I remember how we had to **deal with** unexpected challenges. But in the end, we truly managed to **make a difference** in the community."
+          },
+          "mistakes": [
+            {
+              "wrong": "We took part the game.",
+              "correct": "We took part in the game.",
+              "reason": "'Take part in' 是固定搭配，表示“参加”，不能省略介词 'in'。"
+            }
+          ],
+          "memory_tip": "联想记忆：'look back on' (回头看，回顾), 'deal with' (处理，用手处理), 'come across' (偶然碰上，跨过遇到), 'take part in' (加入一部分，参加), 'make a difference' (制造不同，产生影响)。想象短语的动作画面。",
+          "related": {
+            "prerequisite": "基础动词和介词认知",
+            "next": "易混词：动词辨析 (say/tell/speak/talk)"
+          }
+        },
+        {
+          "card_id": "01-05",
+          "full_id": "英语-高三-01-05",
+          "title": "易混词：say / tell / speak / talk",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "辨析 'say', 'tell', 'speak', 'talk' 这四个表示“说”的动词的用法差异，它们在语境、宾语搭配和强调侧重点上有所不同。",
+          "core_points": [
+            "**say**: 强调“说”的内容，后面常接宾语从句或直接引语，不直接接人作宾语 (say something to somebody)。",
+            "**tell**: 强调“告诉”某人某事，后面常接双宾语（人+事），或接不定式、宾语从句 (tell somebody something)。",
+            "**speak**: 强调“说话”这一动作本身或说话的能力，常用于正式场合，或指讲某种语言。",
+            "**talk**: 强调“交谈”的过程，常指两人或多人之间非正式的交流，常与 'to' 或 'with' 连用 (talk to/with somebody about something)。"
+          ],
+          "why_explanation": "虽然都表示“说”，但它们的侧重点和句法结构不同。理解这些差异有助于更准确地表达，避免使用中国式英语。",
+          "example": {
+            "question": "选择合适的词填空：1. She ____ me a secret. 2. He ____ that he was tired. 3. Can you ____ English? 4. We ____ about our plans.",
+            "steps": [
+              "分析第一个句子：有双宾语 'me' 和 'a secret'，强调告诉某人某事，用 'tell'。",
+              "分析第二个句子：强调说的内容 'that he was tired'，用 'say'。",
+              "分析第三个句子：强调讲某种语言的能力，用 'speak'。",
+              "分析第四个句子：强调两人之间的交流过程，用 'talk'。"
+            ],
+            "answer": "1. She **told** me a secret. 2. He **said** that he was tired. 3. Can you **speak** English? 4. We **talked** about our plans."
+          },
+          "mistakes": [
+            {
+              "wrong": "He said me a story.",
+              "correct": "He told me a story. / He said a story to me.",
+              "reason": "'Say' 后不能直接跟人作宾语，要说 'say something to sb.'；而 'tell' 可以直接接人作宾语，表示“告诉某人某事”。"
+            },
+            {
+              "wrong": "I often speak with my friends about everything.",
+              "correct": "I often talk with my friends about everything.",
+              "reason": "'Speak' 强调说话的动作或能力，常用于正式场合；'talk' 强调非正式的交谈过程，更适合朋友间的交流。"
+            }
+          ],
+          "memory_tip": "Say (内容)，Tell (告诉谁)，Speak (能力/正式)，Talk (交流)。记住 'tell' 后面跟双宾语，'say' 后面跟内容，'speak' 像演讲，'talk' 像聊天。",
+          "related": {
+            "prerequisite": "基础动词词义",
+            "next": "易混词：experience (可数/不可数)"
+          }
+        },
+        {
+          "card_id": "01-06",
+          "full_id": "英语-高三-01-06",
+          "title": "易混词：experience (可数与不可数)",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "辨析名词 'experience' 在可数和不可数情况下的不同含义和用法，是英语中多义词的典型。",
+          "core_points": [
+            "**experience (不可数)**: 指“经验”、“阅历”，强调通过实践获得的知识和技能。常与 'much', 'little', 'some', 'no' 连用。",
+            "**experience (可数)**: 指“经历”、“体验”，强调具体的事件或感受。常与 'a', 'many', 'few', 'several' 连用，有复数形式 'experiences'。"
+          ],
+          "why_explanation": "英语中许多名词在不同语境下有可数和不可数两种用法，含义也随之变化。理解这种变化有助于准确表达，避免语法错误，体现对词汇深层理解。",
+          "example": {
+            "question": "选择合适的词形填空：1. He has much ____ in teaching. 2. Traveling abroad was a wonderful ____ for me. 3. I've had many interesting ____ in my life.",
+            "steps": [
+              "分析第一个句子：'much' 修饰，强调通过实践获得的“经验”，用不可数形式 'experience'。",
+              "分析第二个句子：'a wonderful' 修饰，强调一次具体的“经历”，用可数形式 'experience'。",
+              "分析第三个句子：'many interesting' 修饰，强调很多具体的“经历”，用可数复数形式 'experiences'。"
+            ],
+            "answer": "1. He has much **experience** in teaching. 2. Traveling abroad was a wonderful **experience** for me. 3. I've had many interesting **experiences** in my life."
+          },
+          "mistakes": [
+            {
+              "wrong": "I have many experience in my job.",
+              "correct": "I have much experience in my job. / I have many experiences in my job.",
+              "reason": "如果指“经验”，则为不可数名词，应使用 'much'；如果指“经历”，则为可数名词，应使用 'many experiences'。"
+            }
+          ],
+          "memory_tip": "不可数 'experience' 就像“水”一样，整体的“经验”；可数 'experience' 就像“杯子”一样，一次次的具体“经历”。",
+          "related": {
+            "prerequisite": "可数与不可数名词概念",
+            "next": "词汇深度：一词多义 'reflect'"
+          }
+        },
+        {
+          "card_id": "01-07",
+          "full_id": "英语-高三-01-07",
+          "title": "词汇深度：一词多义 'reflect'",
+          "type": "词汇深度卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "深入探讨动词 'reflect' 的多重含义和用法，掌握其在不同语境下的精确表达。",
+          "core_points": [
+            "**reflect (v.) 1. 反射；映出 (光、影、像)**: The mirror reflected her image.",
+            "**reflect (v.) 2. 反思；深思 (考虑)**: She reflected on her past mistakes.",
+            "**reflect (v.) 3. 反映；表明 (情况、特点)**: His actions reflect his true character.",
+            "**reflect (v.) 4. 招致；带来 (尤指坏结果)**: His behavior reflected badly on his family."
+          ],
+          "why_explanation": "'Reflect' 的核心含义是“折射”或“回射”。无论是光线、影像的回射，还是思想的回射（反思），或是事物的本质通过现象的回射（反映），都体现了这一核心概念的延伸。理解这种深层联系有助于记忆和运用。",
+          "example": {
+            "question": "请用 'reflect' 的不同含义完成句子：1. The calm lake ____ the blue sky. 2. He took some time to ____ on his decision. 3. Her grades ____ her hard work.",
+            "steps": [
+              "分析第一个句子：湖面映出天空，表示“反射”，用含义1。",
+              "分析第二个句子：花时间思考决定，表示“反思”，用含义2。",
+              "分析第三个句子：成绩表明努力，表示“反映”，用含义3。"
+            ],
+            "answer": "1. The calm lake **reflected** the blue sky. 2. He took some time to **reflect** on his decision. 3. Her grades **reflect** her hard work."
+          },
+          "mistakes": [
+            {
+              "wrong": "His behavior reflected his family.",
+              "correct": "His behavior reflected badly on his family.",
+              "reason": "当 'reflect' 表示“给...带来（不好的）影响”时，常与 'on' 连用，且常伴有副词 'badly/well' 等，表示对某人或某事的影响。"
+            }
+          ],
+          "memory_tip": "联想记忆：'reflect' 就像一面镜子，可以 'reflect light' (反射光)，也可以 'reflect on' (反思) 自己，还能 'reflect' (反映) 真实情况。一面镜子映照出多重含义。",
+          "related": {
+            "prerequisite": "基础词汇 'reflect'",
+            "next": "语法：过去完成时"
+          }
+        },
+        {
+          "card_id": "01-08",
+          "full_id": "英语-高三-01-08",
+          "title": "语法：过去完成时 (Past Perfect Tense)",
+          "type": "语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "过去完成时表示在过去某一时间或动作之前已经完成的动作，强调“过去的过去”。",
+          "core_points": [
+            "**构成**: Had + 动词过去分词 (V-ed)",
+            "**用法**: 表示在过去某个时间点或动作之前发生的动作。",
+            "**标志词**: by..., before, after, when, until, as soon as, already, never...",
+            "**肯定句**: Subject + had + V-ed + ... 例如: She had finished her work.",
+            "**否定句**: Subject + had not (hadn't) + V-ed + ... 例如: She hadn't finished her work.",
+            "**疑问句**: Had + Subject + V-ed + ...? 例如: Had she finished her work? (Yes, S + had. / No, S + hadn't.)"
+          ],
+          "why_explanation": "过去完成时是为了更精确地描述过去事件的先后顺序。当叙述中涉及两个过去的动作，且一个动作发生在另一个动作之前时，我们需要用过去完成时来明确“更早”的那个动作，避免时间上的混淆，使得时间线索更加清晰。",
+          "example": {
+            "question": "用过去完成时完成句子：When I arrived at the station, the train ____ (leave).",
+            "steps": [
+              "分析句子结构：'When I arrived at the station' 是一个过去时间点。",
+              "分析动作关系：火车离开发生在“我到达车站”之前，即是“过去的过去”。",
+              "根据过去完成时构成：had + 动词过去分词 'leave' -> 'left'。",
+              "组合句子。"
+            ],
+            "answer": "When I arrived at the station, the train **had left**."
+          },
+          "mistakes": [
+            {
+              "wrong": "He said he went to Beijing last year.",
+              "correct": "He said he had gone to Beijing the year before.",
+              "reason": "主句 'said' 是过去时，宾语从句中动作 'went'（去北京）发生在 'said'（说）之前，应使用过去完成时。同时注意时间状语的对应变化 ('last year' -> 'the year before')。"
+            }
+          ],
+          "memory_tip": "过去完成时 = 过去的过去。记住公式 'had + V-ed'，想象时间轴上，过去完成时是过去某个点之前的“前奏”。",
+          "related": {
+            "prerequisite": "一般过去时，过去分词概念",
+            "next": "语法：现在完成时与过去完成时对比"
+          }
+        },
+        {
+          "card_id": "01-09",
+          "full_id": "英语-高三-01-09",
+          "title": "语法：现在完成时 vs. 过去完成时",
+          "type": "语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "对比现在完成时和过去完成时，明确它们在时间参照点和用法上的区别，这是高三总复习的重点。",
+          "core_points": [
+            "**现在完成时**: (have/has + V-ed) 动作发生在过去，但对现在有影响；或从过去持续到现在。",
+            "**过去完成时**: (had + V-ed) 动作发生在过去的某个时间点或动作之前，是“过去的过去”。",
+            "**时间参照点**: 现在完成时以“现在”为参照；过去完成时以“过去某个时间”为参照。",
+            "**例句对比**: I **have finished** my homework. (现在完成时，现在作业已完成，强调对现在的影响) vs. I **had finished** my homework before my mom came back. (过去完成时，妈妈回来前作业已完成，强调在过去某点之前完成)"
+          ],
+          "why_explanation": "这两种时态都涉及“完成”的概念，但它们的时间立足点不同。现在完成时强调与“现在”的关联，而过去完成时则是在“过去”的时间线中，进一步区分出更早发生的动作，从而在复杂的语境中准确表达时间关系。",
+          "example": {
+            "question": "选择合适的时态填空：1. By the end of last year, I ____ (read) ten books. 2. I ____ (not see) him since 2010. 3. She told me she ____ (never visit) Beijing before.",
+            "steps": [
+              "分析第一个句子：'By the end of last year' 是一个过去的截止点，强调截止到那时完成的动作，用过去完成时 'had read'。",
+              "分析第二个句子：'since 2010' 表示从过去到现在，强调动作的持续性，用现在完成时 'have not seen'。",
+              "分析第三个句子：主句 'told' 是过去时，宾语从句中 'never visit Beijing before' 发生在 'told' 之前，用过去完成时 'had never visited'。"
+            ],
+            "answer": "1. By the end of last year, I **had read** ten books. 2. I **have not seen** him since 2010. 3. She told me she **had never visited** Beijing before."
+          },
+          "mistakes": [
+            {
+              "wrong": "He has finished his work when I arrived.",
+              "correct": "He had finished his work when I arrived.",
+              "reason": "'When I arrived' 是过去时，表示“我到达”这个过去动作。如果“他完成工作”发生在我到达之前，应使用过去完成时，而非现在完成时。"
+            },
+            {
+              "wrong": "I didn't see him for five years now.",
+              "correct": "I haven't seen him for five years now.",
+              "reason": "'For five years now' 表示从过去持续到现在，应使用现在完成时，而不是一般过去时。"
+            }
+          ],
+          "memory_tip": "现在完成时 = 从过去到现在；过去完成时 = 过去的过去。想象时间轴，现在完成时是连接过去与现在，过去完成时是过去事件中的“插叙”。",
+          "related": {
+            "prerequisite": "现在完成时，过去完成时",
+            "next": "从句进阶：非限制性定语从句"
+          }
+        },
+        {
+          "card_id": "01-10",
+          "full_id": "英语-高三-01-10",
+          "title": "从句进阶：非限制性定语从句",
+          "type": "从句进阶卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "非限制性定语从句对先行词进行补充说明，与主句之间用逗号隔开，即使省略主句意义仍完整，提供额外信息。",
+          "core_points": [
+            "**特点**: 用逗号与主句隔开，提供额外信息，不是限制性修饰。",
+            "**引导词**: **which** (指物或整句), **who** (指人), **whom** (指人，作宾语), **whose** (指人或物，作定语), **where** (指地点), **when** (指时间)。",
+            "**不可用that/why/how**: 非限制性定语从句中不能用 'that' 或 'why/how'。",
+            "**先行词**: 可以是名词、代词，也可以是前面整个主句。",
+            "**语序**: 引导词+陈述句语序 (主语+谓语+...)。若引导词作主语，则引导词+谓语+..."
+          ],
+          "why_explanation": "限制性定语从句是不可或缺的，它限制了先行词的范围；非限制性定语从句则提供附加信息，是可有可无的。它的存在是为了让表达更丰富，而不是为了明确指代，这体现了英语表达的灵活性和精确性。",
+          "example": {
+            "question": "将以下两句话合并成一个非限制性定语从句：My brother is a doctor. He lives in Shanghai.",
+            "steps": [
+              "确定先行词：'My brother'。",
+              "确定引导词：指人，用 'who'。",
+              "将 'who' 放在先行词后，并用逗号隔开。",
+              "将第二句剩余部分接在 'who' 后面，保持陈述语序。"
+            ],
+            "answer": "My brother, **who** lives in Shanghai, is a doctor."
+          },
+          "mistakes": [
+            {
+              "wrong": "He showed me his new car, that he bought last week.",
+              "correct": "He showed me his new car, which he bought last week.",
+              "reason": "非限制性定语从句不能用 'that' 作引导词，应使用 'which'。"
+            },
+            {
+              "wrong": "He is my best friend, whom I trust him completely.",
+              "correct": "He is my best friend, whom I trust completely.",
+              "reason": "引导词 'whom' 在从句中作宾语，因此从句中不需要重复宾语代词 'him'。"
+            }
+          ],
+          "memory_tip": "非限制性从句像“插入语”，用逗号隔开，提供额外信息，像一个补充说明的“旁白”。记住 'that' 禁区，像一道红线，非限制性从句不越界。",
+          "related": {
+            "prerequisite": "限制性定语从句",
+            "next": "从句进阶：名词性从句 (主语从句)"
+          }
+        },
+        {
+          "card_id": "01-11",
+          "full_id": "英语-高三-01-11",
+          "title": "从句进阶：名词性从句 (主语从句)",
+          "type": "从句进阶卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "名词性从句在句中充当名词的成分，如主语、宾语、表语、同位语。本卡片聚焦主语从句。",
+          "core_points": [
+            "**定义**: 在句中充当主语的从句，整个从句被视为一个名词。",
+            "**引导词**: that (不作成分，无意义), whether (是否), if (是否，口语中较少), what (什么；所...的), who/whom (谁), whose (谁的), which (哪一个), when (何时), where (何地), why (为何), how (如何)。",
+            "**语序**: 引导词 + 陈述句语序 (主语 + 谓语 + ...)。",
+            "**形式主语**: 当主语从句较长时，常用 'It' 作形式主语，将主语从句后置。如：It is important that we protect the environment。",
+            "**例句**: **What he said** is true. / **That he passed the exam** made us happy."
+          ],
+          "why_explanation": "主语从句的引入是为了让复杂、抽象的“事实”、“想法”或“疑问”能够作为句子的主语出现，使表达更灵活、更精确。使用形式主语 'It' 则是为了保持句子平衡和阅读流畅性，符合英语“头轻脚重”的习惯。",
+          "example": {
+            "question": "将 'He will come tomorrow' 改写为主语从句，并使用形式主语。",
+            "steps": [
+              "将原句变成 'that' 引导的主语从句：'That he will come tomorrow'。",
+              "将主语从句后置，用 'It' 作形式主语。",
+              "连接谓语动词和主语从句。"
+            ],
+            "answer": "**It is clear that he will come tomorrow.** (原句可作主语：That he will come tomorrow is clear.)"
+          },
+          "mistakes": [
+            {
+              "wrong": "It is true he is a good student.",
+              "correct": "It is true that he is a good student.",
+              "reason": "当主语从句由 'that' 引导时，通常不能省略 'that'，尤其是在作形式主语 'It' 的真主语时，以避免歧义。"
+            },
+            {
+              "wrong": "What is important is we should learn from mistakes.",
+              "correct": "What is important is that we should learn from mistakes.",
+              "reason": "表语从句中，'that' 引导的从句如果作表语，通常不能省略 'that'。"
+            }
+          ],
+          "memory_tip": "名词性从句 = 名词 + 从句。主语从句就像一个“大主语”，可以被 'It' 替换。记住 'what' 引导词既作引导词又作成分，是“身兼二职”的特殊引导词。",
+          "related": {
+            "prerequisite": "基础从句概念，主谓宾结构",
+            "next": "从句进阶：名词性从句 (宾语/表语/同位语从句)"
+          }
+        },
+        {
+          "card_id": "01-12",
+          "full_id": "英语-高三-01-12",
+          "title": "句型：强调句型 It is/was...that/who...",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "强调句型用于强调句子的某个成分（主语、宾语、状语等），使表达更具感染力，突出重要信息。",
+          "core_points": [
+            "**结构**: It is/was + 被强调部分 + that/who + 句子的其余部分。",
+            "**强调对象**: 可以强调主语、宾语、状语（时间、地点、方式、原因）。",
+            "**连接词**: 强调人时可用 'who' 或 'that'；强调物或地点、时间、原因时只能用 'that'。",
+            "**谓语动词**: 'is' 用于现在时或将来时，'was' 用于过去时。",
+            "**还原法**: 去掉 'It is/was' 和 'that/who'，句子仍能还原成一个完整的、语法正确的句子。"
+          ],
+          "why_explanation": "强调句型的存在是为了在口语和书面语中突出某个信息点，吸引听者/读者的注意力，强化表达效果。通过将需要强调的部分置于 'It is/was...that/who...' 结构中，使其在句子中占据更重要的位置，从而实现强调。",
+          "example": {
+            "question": "用强调句型强调以下句子中的不同成分：1. Tom met Mary at the library yesterday. (强调Tom) 2. Tom met Mary at the library yesterday. (强调at the library)",
+            "steps": [
+              "强调 'Tom' (人)：将 'Tom' 放在 'It was' 之后，用 'who/that' 连接剩余部分。",
+              "强调 'at the library' (地点状语)：将 'at the library' 放在 'It was' 之后，用 'that' 连接剩余部分。",
+              "注意连接词的选择，人优先用 'who' 或 'that'，地点只能用 'that'。"
+            ],
+            "answer": "1. **It was Tom who/that met Mary at the library yesterday.** 2. **It was at the library that Tom met Mary yesterday.**"
+          },
+          "mistakes": [
+            {
+              "wrong": "It was in 2008 when he came to China.",
+              "correct": "It was in 2008 that he came to China.",
+              "reason": "强调句型中，无论强调时间、地点、原因，连接词一律用 'that'，不能用 'when', 'where', 'why' 等引导词。"
+            }
+          ],
+          "memory_tip": "强调句型像一个“聚光灯”，把想强调的部分放在 'It is/was' 和 'that/who' 之间。记住 'that' 是万能连接词，除了强调人时可以用 'who'。",
+          "related": {
+            "prerequisite": "基础句型结构，主谓宾状语概念",
+            "next": "高级语法：虚拟语气 (I wish/If only)"
+          }
+        },
+        {
+          "card_id": "01-13",
+          "full_id": "英语-高三-01-13",
+          "title": "高级语法：虚拟语气 (I wish / If only)",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "虚拟语气表示主观愿望、假想或与事实相反的情况，常用于表达遗憾、愿望、建议等，是高中英语的重点和难点。",
+          "core_points": [
+            "**I wish / If only + 从句 (与现在事实相反)**: 从句动词用一般过去时 (were/V-ed)。",
+            "**I wish / If only + 从句 (与过去事实相反)**: 从句动词用过去完成时 (had V-ed)。",
+            "**I wish / If only + 从句 (与将来事实相反)**: 从句动词用 would/could/might + 动词原形。",
+            "**例句**: I wish I **were** taller. (现在) / If only I **had studied** harder. (过去) / I wish it **would stop** raining. (将来)"
+          ],
+          "why_explanation": "虚拟语气是英语表达主观情感的重要方式。它通过动词形式的变化，明确地告诉听者/读者，所说的内容不是事实，而是一种愿望、假设或遗憾，从而增强了表达的准确性和情感色彩。这种“反事实”的表达需要特殊的动词形式。",
+          "example": {
+            "question": "用 'I wish' 表达对以下情况的遗憾：1. 我现在不是医生。2. 我昨天没去参加派对。",
+            "steps": [
+              "分析第一个句子：与现在事实相反，动词用一般过去时，'be' 动词用 'were'。",
+              "分析第二个句子：与过去事实相反，动词用过去完成时。"
+            ],
+            "answer": "1. **I wish I were a doctor now.** 2. **I wish I had gone to the party yesterday.**"
+          },
+          "mistakes": [
+            {
+              "wrong": "I wish I am rich.",
+              "correct": "I wish I were rich.",
+              "reason": "表示与现在事实相反的愿望时，从句动词用一般过去时，'be' 动词通常用 'were'，不论主语人称。"
+            },
+            {
+              "wrong": "If only I didn't say that yesterday!",
+              "correct": "If only I hadn't said that yesterday!",
+              "reason": "表示与过去事实相反的遗憾时，从句动词用过去完成时，而不是一般过去时。"
+            }
+          ],
+          "memory_tip": "虚拟语气就像一个“时光机”，'wish' 现在用过去时，'wish' 过去用过去完成时。记住 'if only' 也是一样，它们表达的都是一种“不可能”或“未发生”的愿望。",
+          "related": {
+            "prerequisite": "基础时态，条件状语从句",
+            "next": "高级语法：倒装句"
+          }
+        },
+        {
+          "card_id": "01-14",
+          "full_id": "英语-高三-01-14",
+          "title": "阅读技巧：主旨大意 (Main Idea)",
+          "type": "阅读技巧卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "主旨大意是指文章或段落的核心思想、主要内容或作者的写作意图。准确把握主旨是阅读理解的基础。",
+          "core_points": [
+            "**识别主题句**: 大多数文章或段落都有一个主题句（Topic Sentence），通常在开头或结尾，直接点明主旨。",
+            "**关注高频词**: 重复出现的关键词、关键短语或其同义词往往是主旨的重要线索。",
+            "**排除细节**: 主旨大意不是细节的罗列，而是对全文或全段的概括和抽象。",
+            "**分析结构**: 了解文章的段落组织方式（总-分、分-总、并列等）有助于把握主旨。",
+            "**作者意图**: 思考作者写这篇文章的目的是什么（告知、说服、娱乐、描述），这通常与主旨紧密相关。"
+          ],
+          "why_explanation": "把握主旨大意是理解文章的基础，它能帮助读者迅速抓住文章的核心信息，过滤掉不重要的细节，并为后续的细节理解、推理判断打下基础。如果连主旨都抓不住，细节理解也容易偏离。",
+          "example": {
+            "question": "阅读以下段落，选择最能概括其主旨的选项：\n'Learning a new language is not just about memorizing vocabulary and grammar rules. It's about understanding a new culture, connecting with different people, and broadening your perspective on the world. The process can be challenging, but the rewards, such as increased empathy and cognitive benefits, are immense.'",
+            "steps": [
+              "识别关键词和中心思想：'learning a new language', 'not just about...', 'It's about...', 'rewards...are immense'。",
+              "排除细节：具体的好处（increased empathy and cognitive benefits）是支持细节，而非主旨。",
+              "概括核心：学习新语言不仅是语言本身，更在于其带来的文化和个人成长方面的巨大益处。",
+              "选择最符合概括的选项。"
+            ],
+            "answer": "The main idea is that learning a new language offers significant cultural and personal growth benefits beyond mere linguistic acquisition."
+          },
+          "mistakes": [
+            {
+              "wrong": "主旨是 '学习新语言很难'。",
+              "correct": "主旨是 '学习新语言的益处/价值'。",
+              "reason": "原文虽然提到 'challenging'，但其重点在于 'rewards' 和 'benefits'，即学习新语言的积极方面，而非强调其难度。"
+            }
+          ],
+          "memory_tip": "主旨大意 = 文章的“中心思想”。就像一棵树的主干，其他都是枝叶。找主题句，看首尾，抓高频词。记住：主旨是概括，不是细节。",
+          "related": {
+            "prerequisite": "基础阅读理解能力",
+            "next": "阅读技巧：推理判断"
+          }
+        },
+        {
+          "card_id": "01-15",
+          "full_id": "英语-高三-01-15",
+          "title": "写作进阶：观点论证模板",
+          "type": "写作进阶卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "提供一套结构化的模板，帮助学生清晰、有效地阐述和论证自己的观点，是议论文写作的核心。",
+          "core_points": [
+            "**提出观点 (Topic Sentence)**: 段落开头明确提出本段要论证的观点，起到总领作用。",
+            "**提供支持 (Supporting Details)**: 用事实、数据、例子、个人经历、引用等来支持观点，增加说服力。",
+            "**解释说明 (Explanation)**: 解释支持性细节如何证明观点，深入分析其内在逻辑和意义。",
+            "**逻辑连接 (Transition Words)**: 使用连接词（e.g., Firstly, Moreover, Therefore, For example, In addition, Consequently）使论证流畅，上下文衔接自然。",
+            "**总结升华 (Concluding Sentence)**: 重申或总结本段观点，或引出下一段，做到首尾呼应。"
+          ],
+          "why_explanation": "结构化的论证模板能帮助学生在写作时保持逻辑清晰，避免跑题或论证不足。它提供了一个思考框架，确保每个观点都有充分的证据和解释支持，从而提升文章的条理性和说服力。",
+          "example": {
+            "question": "请用模板论证 'Teamwork is crucial for success.' (团队合作对成功至关重要)",
+            "steps": [
+              "提出观点：明确指出团队合作的重要性。",
+              "提供支持：举例说明团队合作如何在复杂项目中发挥作用。",
+              "解释说明：阐述团队成员如何结合优势、弥补不足，以及带来的结果。",
+              "总结升华：强调团队合作创造的协同效应及其对成功的推动作用。"
+            ],
+            "answer": "Teamwork is indeed a cornerstone of success in various aspects of life. **For instance**, in complex projects, individuals often possess specialized skills. **By collaborating**, team members can combine their strengths, compensate for weaknesses, and share the workload, leading to more innovative solutions and efficient completion. **Ultimately**, the synergy created through effective teamwork propels endeavors towards greater achievements than individual efforts alone."
+          },
+          "mistakes": [
+            {
+              "wrong": "Teamwork is good. People work together. They do well.",
+              "correct": "Teamwork is crucial for success. For example, when people collaborate, they combine diverse skills, which leads to more comprehensive solutions and better outcomes.",
+              "reason": "错误的论证过于简单，缺乏细节、解释和逻辑连接，只是简单罗列了事实。正确的论证提供了具体例子，并解释了团队合作如何带来成功，使用了连接词使论证更严谨。"
+            }
+          ],
+          "memory_tip": "论证模板 = 点-线-面。点是观点 (Topic Sentence)，线是支持 (Supporting Details) 和解释 (Explanation)，面是逻辑连接 (Transition Words) 和总结 (Concluding Sentence)。记住：观点要立得住，论证要撑得开。",
+          "related": {
+            "prerequisite": "基础写作，段落结构，逻辑思维能力",
+            "next": "写作进阶：高级句式替换"
+          }
+        }
+      ]
+    }
+  ]
+}

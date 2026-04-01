@@ -1,0 +1,973 @@
+{
+  "subject": "英语",
+  "grade": "七年级",
+  "semester": "上册",
+  "textbook": "人教版",
+  "grade_short": "七上",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片（七年级上册，全知识点覆盖版）",
+  "units": [
+    {
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [
+        {
+          "card_id": "T1-01",
+          "full_id": "英语-七上-T1-01",
+          "title": "be动词大揭秘：am/is/are 怎么选？",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "be动词是英语中最基础也是最重要的动词，表示“是”或“存在”。它的三种形式am, is, are需要根据主语的人称和数来选择。",
+          "core_points": [
+            "am 用于第一人称单数主语 I。",
+            "is 用于第三人称单数主语 He/She/It 或单数名词。",
+            "are 用于第二人称主语 You 和所有复数主语 We/They 或复数名词。",
+            "be动词是构成简单现在时、进行时等多种时态的基础。"
+          ],
+          "why_explanation": "初学者常混淆am/is/are，忘记根据主语变化，导致主谓不一致的语法错误，这是英语句子的基石。",
+          "example": {
+            "question": "选择正确的be动词填空：\n1. I ___ a student.\n2. She ___ my sister.\n3. They ___ good friends.",
+            "steps": [
+              "分析主语：1. I (第一人称单数)",
+              "分析主语：2. She (第三人称单数)",
+              "分析主语：3. They (第三人称复数)",
+              "根据主语匹配对应的be动词形式。"
+            ],
+            "answer": "1. am\n2. is\n3. are"
+          },
+          "trap_point": "主语是单数还是复数？是I, You, 还是He/She/It/They？",
+          "memory_tip": "I跟am，你我他她它，单数is，复数are，牢记搭配不犯错！",
+          "emotion_hook": "💔be动词选错，英语基础摇摇欲坠！一招教你告别低级错误，秒变语法小达人！"
+        },
+        {
+          "card_id": "T1-02",
+          "full_id": "英语-七上-T1-02",
+          "title": "代词地狱：he/him, she/her, they/them 傻傻分不清？",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "人称代词分为主格和宾格。主格代词作主语，宾格代词作宾语，两者不能混用。",
+          "core_points": [
+            "主格代词：I, you, he, she, it, we, they (在句中作主语)",
+            "宾格代词：me, you, him, her, it, us, them (在句中作宾语或介词宾语)",
+            "主格代词通常在动词前，宾格代词通常在动词后或介词后。",
+            "七上常考主格和宾格的基础区分。"
+          ],
+          "why_explanation": "中文没有严格的主宾格区分，导致学生在英语中随意替换，造成语法错误。例如'He likes I'是常见错误。",
+          "example": {
+            "question": "选择正确的代词填空：\n1. ___ is my friend. (He/Him)\n2. I like ___. (she/her)\n3. Give the book to ___. (they/them)",
+            "steps": [
+              "分析句子结构：1. 动词'is'前是主语位置。",
+              "分析句子结构：2. 动词'like'后是宾语位置。",
+              "分析句子结构：3. 介词'to'后是宾语位置。",
+              "根据主宾语位置选择对应代词。"
+            ],
+            "answer": "1. He\n2. her\n3. them"
+          },
+          "trap_point": "代词是作主语还是作宾语？记住动词前用主格，动词后、介词后用宾格！",
+          "memory_tip": "主格站前宾格后，介词后面也是宾！",
+          "emotion_hook": "💥代词用错被扣分？主格宾格不再懵！这个口诀让你秒懂代词变身术！"
+        },
+        {
+          "card_id": "T1-03",
+          "full_id": "英语-七上-T1-03",
+          "title": "a/an/the 冠词三兄弟：什么时候用？",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "冠词用于名词前，分为不定冠词(a/an)和定冠词(the)。",
+          "core_points": [
+            "a 用于以辅音音素开头的单数可数名词前。",
+            "an 用于以元音音素开头的单数可数名词前。",
+            "the 用于特指的人或物，或上文已提及的人或物，或独一无二的事物前。",
+            "七上主要掌握a/an的用法，the的初步概念。"
+          ],
+          "why_explanation": "中文没有冠词概念，学生容易忽略或滥用。特别是a/an的区分，是看发音而非字母本身。",
+          "example": {
+            "question": "选择正确的冠词填空：\n1. This is ___ apple. (a/an/the)\n2. I have ___ book. ___ book is red. (a/an/the)\n3. He is ___ English teacher. (a/an/the)",
+            "steps": [
+              "1. 'apple'以元音音素开头，且是单数可数名词。",
+              "2. 'book'首次提及用不定冠词，第二次提及特指用定冠词。",
+              "3. 'English'以元音音素开头，且是单数可数名词。",
+              "根据发音和特指情况选择。"
+            ],
+            "answer": "1. an\n2. a, The\n3. an"
+          },
+          "trap_point": "a/an的区分是看单词的**发音**，而不是首字母！例如'an hour'。",
+          "memory_tip": "辅音a，元音an，特指唯一都用the！",
+          "emotion_hook": "🤯冠词小坑无数！一个细节秒杀a/an，让你的英语更地道！"
+        },
+        {
+          "card_id": "T1-04",
+          "full_id": "英语-七上-T1-04",
+          "title": "this/that/these/those 指示代词：远近单复分清楚！",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "指示代词用于指代人或物，根据远近和单复数进行区分。",
+          "core_points": [
+            "this：指代近处的单数人或物（这是/这个）。",
+            "that：指代远处的单数人或物（那是/那个）。",
+            "these：指代近处的复数人或物（这些是/这些）。",
+            "those：指代远处的复数人或物（那些是/那些）。"
+          ],
+          "why_explanation": "学生容易混淆单复数，或不理解远近的区别，导致指代不清。",
+          "example": {
+            "question": "选择正确的指示代词填空：\n1. Look at ___ apple on the table. (近处单数)\n2. ___ are my friends over there. (远处复数)\n3. ___ is my pen in my hand. (近处单数)",
+            "steps": [
+              "1. 提示'近处单数'，选择this。",
+              "2. 提示'远处复数'，选择those。",
+              "3. 提示'近处单数'，选择this。",
+              "根据远近和单复数匹配。"
+            ],
+            "answer": "1. this\n2. Those\n3. This"
+          },
+          "trap_point": "记住：this/that是单数，these/those是复数！this/these是近，that/those是远！",
+          "memory_tip": "近单this，远单that；近复these，远复those！",
+          "emotion_hook": "👀指示代词用不对，指鹿为马闹笑话？这个口诀帮你一眼辨别！"
+        },
+        {
+          "card_id": "T1-05",
+          "full_id": "英语-七上-T1-05",
+          "title": "have/has 动词迷局：谁跟谁走？",
+          "type": "易混词陷阱卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "动词have/has表示“拥有”或“有”。它们是简单现在时中重要的动词。",
+          "core_points": [
+            "have 用于第一、第二人称单数主语(I, you)和所有复数主语(we, they)。",
+            "has 用于第三人称单数主语(he, she, it)或单数名词。",
+            "其否定形式为 don't have / doesn't have。",
+            "其疑问形式为 Do/Does ... have?"
+          ],
+          "why_explanation": "与be动词类似，学生容易忘记根据主语进行have/has的变位，特别是第三人称单数。",
+          "example": {
+            "question": "选择正确的have/has填空：\n1. I ___ a new book.\n2. She ___ a pet cat.\n3. We ___ many friends.",
+            "steps": [
+              "分析主语：1. I (第一人称单数)",
+              "分析主语：2. She (第三人称单数)",
+              "分析主语：3. We (第一人称复数)",
+              "根据主语匹配对应的have/has形式。"
+            ],
+            "answer": "1. have\n2. has\n3. have"
+          },
+          "trap_point": "记住，只有第三人称单数主语才用has，其他都用have！",
+          "memory_tip": "他她它，单数名词，统统has！其余have，记住了吗？",
+          "emotion_hook": "🤯have/has老是错？别急，这个小技巧让你从此不再纠结！"
+        },
+        {
+          "card_id": "T1-06",
+          "full_id": "英语-七上-T1-06",
+          "title": "some/any 模糊不清？肯定否定疑问看仔细！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "some和any都表示“一些，任何”，但用法有区别，主要与句子的肯定、否定和疑问形式有关。",
+          "core_points": [
+            "some 一般用于肯定句，表示“一些”。",
+            "any 一般用于否定句和疑问句，表示“任何”或“一些”。",
+            "疑问句中当提出请求或建议，或期待得到肯定回答时，也可使用some。",
+            "some和any既可修饰可数名词复数，也可修饰不可数名词。"
+          ],
+          "why_explanation": "学生容易机械记忆“肯定用some，否定疑问用any”，而忽略了特殊情况（如请求/建议的疑问句），导致用错。",
+          "example": {
+            "question": "选择正确的some/any填空：\n1. I have ___ books. (肯定)\n2. Do you have ___ questions? (疑问)\n3. I don't have ___ money. (否定)\n4. Would you like ___ tea? (请求/建议的疑问)",
+            "steps": [
+              "1. 肯定句用some。",
+              "2. 疑问句用any。",
+              "3. 否定句用any。",
+              "4. 疑问句表示请求，用some。"
+            ],
+            "answer": "1. some\n2. any\n3. any\n4. some"
+          },
+          "trap_point": "记住特殊情况：疑问句中表示请求或建议时，用some！",
+          "memory_tip": "肯定some，否定any；疑问any，请求some！",
+          "emotion_hook": "😱some/any傻傻分不清？别慌！一句口诀帮你搞定所有场景！"
+        },
+        {
+          "card_id": "T1-07",
+          "full_id": "英语-七上-T1-07",
+          "title": "in/on/at 地点介词：小到大，点线面！",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "in, on, at是常用的地点介词，表示物体的位置，但侧重点不同。",
+          "core_points": [
+            "in：表示在…里面，用于大的区域或空间（国家、城市、房间等）。",
+            "on：表示在…上面，接触表面（在桌子上、在墙上等）。",
+            "at：表示在…某一点或某场所（在学校、在车站、在门口等）。",
+            "七上主要学习其基本地点用法。"
+          ],
+          "why_explanation": "学生容易将中文的“在”一概而论，不区分英语介词的细微差别，尤其是at和in/on的边界。",
+          "example": {
+            "question": "选择正确的介词填空：\n1. The book is ___ the desk.\n2. I live ___ China.\n3. He is waiting ___ the bus stop.",
+            "steps": [
+              "1. 'desk'是表面，用on。",
+              "2. 'China'是大区域，用in。",
+              "3. 'bus stop'是一个具体地点/点，用at。",
+              "根据空间大小、表面接触或具体地点选择。"
+            ],
+            "answer": "1. on\n2. in\n3. at"
+          },
+          "trap_point": "in (大空间/内部), on (表面), at (点/小场所)！",
+          "memory_tip": "大in小at，on在表面，记住口诀不翻车！",
+          "emotion_hook": "📍地点介词老是错？in/on/at 三姐妹让你头大？这个方法让你秒变空间达人！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T2",
+      "unit_name": "发音挑战卡",
+      "cards": [
+        {
+          "card_id": "T2-01",
+          "full_id": "英语-七上-T2-01",
+          "title": "单词复数/三单-s/-es：发音魔鬼细节！",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "以-s/-es结尾的单词，如名词复数和动词第三人称单数，其发音有三种规则。",
+          "core_points": [
+            "清辅音后发 /s/ (如: books, sits)",
+            "浊辅音和元音后发 /z/ (如: pens, reads)",
+            "以 /s/, /z/, /ʃ/, /ʒ/, /tʃ/, /dʒ/ 结尾的单词后，加-es发 /ɪz/ (如: watches, buses)",
+            "七上主要掌握这三种基本发音规则。"
+          ],
+          "why_explanation": "中文没有音素清浊和连读的概念，学生易将所有-s/-es发成一个音，导致发音不自然或错误。",
+          "example": {
+            "question": "判断下列单词-s/-es的发音：\n1. stops\n2. plays\n3. teaches",
+            "steps": [
+              "1. 'stop'以清辅音/p/结尾，-s发/s/。",
+              "2. 'play'以元音/eɪ/结尾，-s发/z/。",
+              "3. 'teach'以/tʃ/结尾，-es发/ɪz/。",
+              "根据前一个音的清浊和音标结尾判断。"
+            ],
+            "answer": "1. /s/\n2. /z/\n3. /ɪz/"
+          },
+          "pronunciation_tip": "记住清浊辅音和元音的区别，以及加-es的特殊发音！",
+          "memory_tip": "清s浊z，特殊ɪz，发音规则要牢记！",
+          "emotion_hook": "😱你的-s/-es发音对吗？别让小细节暴露你的英语水平！"
+        },
+        {
+          "card_id": "T2-02",
+          "full_id": "英语-七上-T2-02",
+          "title": "th音挑战：咬舌音你发对了吗？",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "th有两个重要的发音：清辅音/θ/（如thanks）和浊辅音/ð/（如this）。",
+          "core_points": [
+            "发/θ/时，舌尖轻触上齿，气流从舌齿间摩擦而出，声带不振动（清音）。",
+            "发/ð/时，舌尖轻触上齿，气流从舌齿间摩擦而出，声带振动（浊音）。",
+            "这是英语中特有的音，需要刻意练习。",
+            "七上常出现在`this, that, these, those, thanks`等词中。"
+          ],
+          "why_explanation": "中文没有类似的音，学生容易发成/s/, /f/, /d/, /z/等音，导致发音不准确。",
+          "example": {
+            "question": "听力练习：区分 /θ/ 和 /ð/ 的发音。\n1. thanks\n2. this\n3. three",
+            "steps": [
+              "1. 听'thanks'，确认是清辅音/θ/。",
+              "2. 听'this'，确认是浊辅音/ð/。",
+              "3. 听'three'，确认是清辅音/θ/。",
+              "模仿发音，感受舌头和声带的变化。"
+            ],
+            "answer": "1. /θ/\n2. /ð/\n3. /θ/"
+          },
+          "pronunciation_tip": "舌尖要伸出一点点，轻触上齿！清音不振动，浊音喉咙振动！",
+          "memory_tip": "舌尖齿间轻轻咬，清θ浊ð要分清！",
+          "emotion_hook": "🗣️th音发不对，老外听不懂？这个技巧让你轻松掌握地道发音！"
+        },
+        {
+          "card_id": "T2-03",
+          "full_id": "英语-七上-T2-03",
+          "title": "易错词发音：Wednesday, comfortable, clothes",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "有些常用词的拼写和发音不完全对应，容易读错，需要特别注意。",
+          "core_points": [
+            "Wednesday: /'wɛnzdeɪ/ (中间的'd'不发音)。",
+            "comfortable: /'kʌmfərtəbl/ (中间的'or'弱读或不读)。",
+            "clothes: /kloʊðz/ (发音像'close'，'th'是浊辅音)。",
+            "七上教材中可能出现的其他易错词，如'knife' (k不发音)。"
+          ],
+          "why_explanation": "学生习惯按字母拼读，而英语中存在大量不规则发音和弱读、吞音现象，导致读错。",
+          "example": {
+            "question": "尝试正确读出以下单词：\n1. Wednesday\n2. comfortable\n3. clothes",
+            "steps": [
+              "1. 记住'Wednesday'中的'd'是哑音。",
+              "2. 'comfortable'是三音节词，重音在第一个音节，中间'or'弱读。",
+              "3. 'clothes'的'th'是浊辅音/ð/，结尾是/z/。",
+              "多听录音，反复模仿。"
+            ],
+            "answer": "1. /'wɛnzdeɪ/\n2. /'kʌmfərtəbl/\n3. /kloʊðz/"
+          },
+          "pronunciation_tip": "遇到不熟悉的单词，查字典看音标！不要盲目按字母拼读！",
+          "memory_tip": "Wednesday的d，comfortable的or，clothes的th，都是发音小陷阱！",
+          "emotion_hook": "🤯这些单词你读对了吗？别让发音错误暴露你的“中式英语”！"
+        },
+        {
+          "card_id": "T2-04",
+          "full_id": "英语-七上-T2-04",
+          "title": "元音音标挑战：/ɪ/ vs /iː/，短长音分清了吗？",
+          "type": "发音挑战卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "英语元音有长短之分，如短音/ɪ/ (sit) 和长音/iː/ (seat)，区分它们是发音准确的关键。",
+          "core_points": [
+            "短音/ɪ/：舌头放松，位置较低，发音短促有力，如sit, fill, hit。",
+            "长音/iː/：舌头紧张，位置较高，发音绵长，如seat, feel, heat。",
+            "七上经常遇到的单词：sit/seat, ship/sheep, live/leave。",
+            "区分长短音有助于理解单词含义，避免歧义。"
+          ],
+          "why_explanation": "中文元音没有严格的长短区分，学生容易将所有元音发成相似的长度，导致发音不清晰，甚至改变词义。",
+          "example": {
+            "question": "判断以下单词的元音是长音还是短音：\n1. ship\n2. sheep\n3. live (居住)\n4. leave (离开)",
+            "steps": [
+              "1. 'ship'是短音/ɪ/。",
+              "2. 'sheep'是长音/iː/。",
+              "3. 'live'是短音/ɪ/。",
+              "4. 'leave'是长音/iː/。",
+              "注意感受发音时嘴型和舌头的紧张程度及发音长度。"
+            ],
+            "answer": "1. /ɪ/ (短音)\n2. /iː/ (长音)\n3. /ɪ/ (短音)\n4. /iː/ (长音)"
+          },
+          "pronunciation_tip": "短音干脆利落，长音绵延不绝！多听多模仿，感受发音的细微差别。",
+          "memory_tip": "短ɪ快，长i慢，嘴型紧张不放松！",
+          "emotion_hook": "👂发音细节决定成败！/ɪ/和/iː/你真的会发吗？别再ship/sheep不分啦！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T3",
+      "unit_name": "情景闯关卡",
+      "cards": [
+        {
+          "card_id": "T3-01",
+          "full_id": "英语-七上-T3-01",
+          "title": "初次见面：自信介绍自己和朋友！",
+          "type": "情景闯关卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "在初次见面时，能够用英语进行自我介绍，并向他人介绍自己的朋友。",
+          "core_points": [
+            "自我介绍：My name is... / I'm... Nice to meet you.",
+            "询问姓名：What's your name?",
+            "介绍他人：This is my friend, [Name].",
+            "打招呼：Hi/Hello. Good morning/afternoon/evening.",
+            "回应：Nice to meet you, too."
+          ],
+          "why_explanation": "这是最基础的社交场景，掌握它能让学生开口说英语，建立自信。",
+          "example": {
+            "question": "你和朋友Tom遇到新同学Lily，请你介绍Tom给Lily，并和Lily打招呼。",
+            "steps": [
+              "向Lily打招呼：Hi, Lily!",
+              "向Lily介绍Tom：This is my friend, Tom.",
+              "Tom回应：Hi, Lily. Nice to meet you.",
+              "Lily回应：Nice to meet you, too, Tom and [你的名字]!"
+            ],
+            "answer": "You: Hi, Lily! This is my friend, Tom.\nTom: Hi, Lily. Nice to meet you.\nLily: Nice to meet you, too, Tom and [你的名字]!"
+          },
+          "scene_dialogue": "A: Hi, my name is Linda. Nice to meet you!\nB: Nice to meet you, too, Linda. I'm Mike.\nA: Mike, this is my brother, David.\nC: Hello, Mike. Glad to meet you.\nB: Glad to meet you, too, David.",
+          "emotion_hook": "🥳第一次见面不再尴尬！学会这些万能句，轻松hold住社交场！"
+        },
+        {
+          "card_id": "T3-02",
+          "full_id": "英语-七上-T3-02",
+          "title": "寻找物品：我的背包去哪儿了？！",
+          "type": "情景闯关卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "在日常生活中，询问物品的位置，并描述物品在何处。",
+          "core_points": [
+            "询问位置：Where's my...? / Where are my...?",
+            "描述位置：It's on/in/under the... / They're on/in/under the...",
+            "使用there be句型：There is/are...",
+            "物品词汇：backpack, book, pencil, ruler, eraser, key, watch, ID card等。"
+          ],
+          "why_explanation": "这是课堂和家庭中高频出现的场景，掌握后能解决实际问题，增强语言的实用性。",
+          "example": {
+            "question": "你的铅笔找不到了，问妈妈在哪里，妈妈告诉你它在书包里。",
+            "steps": [
+              "你问：Mom, where's my pencil?",
+              "妈妈回答：It's in your backpack.",
+              "你确认：Oh, thank you!",
+              "完成对话。"
+            ],
+            "answer": "You: Mom, where's my pencil?\nMom: It's in your backpack.\nYou: Oh, thank you!"
+          },
+          "scene_dialogue": "A: Excuse me, where's my ruler?\nB: Is it on the desk?\nA: No, it isn't. And my eraser?\nB: Oh, your eraser is under the chair.\nA: Thank you! And my ruler?\nB: Look! It's in your pencil case!",
+          "emotion_hook": "🔍丢三落四星人看过来！用英语找东西，分分钟变身“寻物侦探”！"
+        },
+        {
+          "card_id": "T3-03",
+          "full_id": "英语-七上-T3-03",
+          "title": "询问拥有：你有篮球吗？",
+          "type": "情景闯关卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "询问他人是否拥有某物，并能进行肯定或否定回答。",
+          "core_points": [
+            "询问：Do you have a...? / Do you have any...?",
+            "肯定回答：Yes, I do. I have a... / Yes, I do. I have some...",
+            "否定回答：No, I don't. I don't have a... / No, I don't. I don't have any...",
+            "体育用品词汇：soccer ball, basketball, tennis racket, volleyball, ping-pong bat等。"
+          ],
+          "why_explanation": "这是初中生日常交流中常用的句型，用于借用物品、了解同学兴趣等。",
+          "example": {
+            "question": "你问同学Tom是否有足球，Tom说他没有，但他有一个篮球。",
+            "steps": [
+              "你问：Tom, do you have a soccer ball?",
+              "Tom回答没有足球：No, I don't.",
+              "Tom补充他有篮球：But I have a basketball.",
+              "你回应：Oh, great!"
+            ],
+            "answer": "You: Tom, do you have a soccer ball?\nTom: No, I don't. But I have a basketball.\nYou: Oh, great!"
+          },
+          "scene_dialogue": "A: Do you have a ping-pong bat?\nB: Yes, I do. I have two ping-pong bats.\nA: Wow, that's cool! Do you have a tennis racket?\nB: No, I don't. I don't have any tennis rackets.",
+          "emotion_hook": "🏀想和外国朋友一起玩？先学会用英语问“你有没有”！"
+        },
+        {
+          "card_id": "T3-04",
+          "full_id": "英语-七上-T3-04",
+          "title": "点餐购物：我要一个汉堡和一些薯条！",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在餐厅点餐或商店购物时，能够表达自己的需求，并询问价格。",
+          "core_points": [
+            "点餐：I'd like a... / I'd like some... / Can I have a/some...?",
+            "询问价格：How much is it? / How much are they?",
+            "回应：Here you are. / That's [price].",
+            "食物词汇：hamburger, French fries, salad, juice, milk, banana, apple等。",
+            "购物词汇：T-shirt, pants, socks, shoes等。"
+          ],
+          "why_explanation": "实用的生活场景，帮助学生在真实语境中运用所学词汇和句型。",
+          "example": {
+            "question": "你在快餐店点一个汉堡和一杯果汁，并询问总价。",
+            "steps": [
+              "你点餐：I'd like a hamburger and a glass of juice, please.",
+              "服务员问：Anything else?",
+              "你回答：No, thank you. How much is it?",
+              "服务员回答价格：It's 15 dollars.",
+              "你付款并说：Here you are."
+            ],
+            "answer": "You: I'd like a hamburger and a glass of juice, please.\nWaiter: Anything else?\nYou: No, thank you. How much is it?\nWaiter: It's 15 dollars.\nYou: Here you are."
+          },
+          "scene_dialogue": "A: Can I help you?\nB: Yes, I'd like a T-shirt and a pair of shorts.\nA: What color do you want?\nB: A blue T-shirt and white shorts, please.\nA: Here you are. How much are they?\nB: They're 25 dollars. Thank you!\nB: You're welcome.",
+          "emotion_hook": "🛍️出国点餐购物不再是难题！这些英语句型让你吃喝玩乐无障碍！"
+        },
+        {
+          "card_id": "T3-05",
+          "full_id": "英语-七上-T3-05",
+          "title": "描述日常：你几点起床？",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "描述自己的日常活动，并询问他人的日常安排。",
+          "core_points": [
+            "询问时间：What time is it? / What time do you...?",
+            "描述日常活动：I get up at 6:30. / I go to school at 7:00.",
+            "时间表达：o'clock, half past, quarter past/to, a.m./p.m.",
+            "日常动词：get up, eat breakfast/lunch/dinner, go to school/home/bed, do homework, watch TV等。"
+          ],
+          "why_explanation": "日常生活的描述是语言学习的重要组成部分，有助于学生掌握时间表达和动词的使用。",
+          "example": {
+            "question": "你问朋友Tom几点吃早饭，Tom说他7点吃早饭。",
+            "steps": [
+              "你问：Tom, what time do you have breakfast?",
+              "Tom回答：I have breakfast at seven o'clock.",
+              "你回应：Oh, that's early!",
+              "完成对话。"
+            ],
+            "answer": "You: Tom, what time do you have breakfast?\nTom: I have breakfast at seven o'clock.\nYou: Oh, that's early!"
+          },
+          "scene_dialogue": "A: What time do you get up, Mike?\nB: I get up at six o'clock.\nA: Wow, that's early! And what time do you go to school?\nB: I go to school at seven thirty.\nA: Me too!",
+          "emotion_hook": "⏰时间管理大师是你吗？用英语聊聊你的作息，让老外刮目相看！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T4",
+      "unit_name": "语法纠错卡",
+      "cards": [
+        {
+          "card_id": "T4-01",
+          "full_id": "英语-七上-T4-01",
+          "title": "be动词主谓不一致：你的am/is/are用对了吗？",
+          "type": "语法纠错卡",
+          "difficulty": 2,
+          "importance": 5,
+          "definition": "be动词的主谓一致是英语最基础的语法点，要求be动词的形式与主语的人称和数保持一致。",
+          "core_points": [
+            "I + am",
+            "You/We/They + are",
+            "He/She/It/单数名词 + is",
+            "这是构成简单句的基础，也是最常见的语法错误之一。"
+          ],
+          "why_explanation": "中文没有动词变位，学生不习惯根据主语改变动词形式，导致be动词滥用。",
+          "example": {
+            "question": "找出并改正句子中的错误：\n1. My name are Gina.\n2. We is students.\n3. He am a teacher.",
+            "steps": [
+              "1. 主语'My name'是单数，be动词应为is。",
+              "2. 主语'We'是复数，be动词应为are。",
+              "3. 主语'He'是第三人称单数，be动词应为is。",
+              "根据主谓一致原则进行纠正。"
+            ],
+            "answer": "1. Wrong: My name are Gina. Correct: My name is Gina.\n2. Wrong: We is students. Correct: We are students.\n3. Wrong: He am a teacher. Correct: He is a teacher."
+          },
+          "mistakes": [
+            {
+              "wrong": "My name are Gina.",
+              "correct": "My name is Gina.",
+              "reason": "主语'My name'是单数，be动词应为is。"
+            },
+            {
+              "wrong": "We is students.",
+              "correct": "We are students.",
+              "reason": "主语'We'是复数，be动词应为are。"
+            },
+            {
+              "wrong": "He am a teacher.",
+              "correct": "He is a teacher.",
+              "reason": "主语'He'是第三人称单数，be动词应为is。"
+            }
+          ],
+          "grammar_fix": "牢记be动词变形口诀：I用am，你我他她它，单数is，复数are！",
+          "emotion_hook": "❌be动词再错就太可惜了！这3个常见错误，你中招了吗？"
+        },
+        {
+          "card_id": "T4-02",
+          "full_id": "英语-七上-T4-02",
+          "title": "名词复数：-s/-es加错扣分！",
+          "type": "语法纠错卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "英语名词的复数形式通常通过加-s或-es构成，但有特定规则和不规则变化。",
+          "core_points": [
+            "一般名词加-s：book -> books。",
+            "以s, x, ch, sh结尾的名词加-es：watch -> watches。",
+            "以辅音字母+y结尾的名词，变y为i再加-es：family -> families。",
+            "以f或fe结尾的名词，变f/fe为v再加-es：knife -> knives (七上可能仅初步涉及)。",
+            "不规则复数：man -> men, child -> children (七上会提及)。"
+          ],
+          "why_explanation": "学生容易忽略名词的单复数变化，或对不同的加-s/-es规则感到困惑，特别是发音相似的词。",
+          "example": {
+            "question": "找出并改正句子中的错误：\n1. I have two book.\n2. She has three watch.\n3. There are many child in the park.",
+            "steps": [
+              "1. 'two'表示复数，'book'应变为books。",
+              "2. 'three'表示复数，'watch'应变为watches (以ch结尾加-es)。",
+              "3. 'many'表示复数，'child'的不规则复数是children。",
+              "根据名词复数规则进行纠正。"
+            ],
+            "answer": "1. Wrong: I have two book. Correct: I have two books.\n2. Wrong: She has three watch. Correct: She has three watches.\n3. Wrong: There are many child in the park. Correct: There are many children in the park."
+          },
+          "mistakes": [
+            {
+              "wrong": "I have two book.",
+              "correct": "I have two books.",
+              "reason": "数词'two'后接名词复数。"
+            },
+            {
+              "wrong": "She has three watch.",
+              "correct": "She has three watches.",
+              "reason": "以-ch结尾的名词变复数加-es。"
+            },
+            {
+              "wrong": "There are many child in the park.",
+              "correct": "There are many children in the park.",
+              "reason": "'child'的复数形式是'children'，是不规则变化。"
+            }
+          ],
+          "grammar_fix": "名词复数规则多，分类记忆效果好！",
+          "emotion_hook": "🤯名词复数老是忘？这些易错点帮你一次搞定！"
+        },
+        {
+          "card_id": "T4-03",
+          "full_id": "英语-七上-T4-03",
+          "title": "所有格's 和复数-s：它们不是一回事！",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "所有格's表示“的”，用于名词后，表示所属关系。它与名词复数加-s是不同的语法现象。",
+          "core_points": [
+            "名词单数+ 's：表示单数名词的所有格 (e.g., Tom's book)。",
+            "名词复数+ '：如果复数名词本身以-s结尾，只加撇号 (e.g., my parents' room)。",
+            "不规则复数名词+ 's： (e.g., children's toys)。",
+            "名词复数只加-s，不加撇号，表示多个事物 (e.g., two books)。"
+          ],
+          "why_explanation": "学生容易混淆表示所属的's和表示复数的-s，特别是在听写或写作时，忘记撇号或错用。",
+          "example": {
+            "question": "找出并改正句子中的错误：\n1. This is my sister book.\n2. These are my friends pens.\n3. The boys room is clean.",
+            "steps": [
+              "1. 'sister'是单数，表示所属应为sister's。",
+              "2. 'friends'是复数，表示所属应为friends'。",
+              "3. 'boys'是复数名词，表示所属应为boys'。",
+              "根据所有格规则进行纠正。"
+            ],
+            "answer": "1. Wrong: This is my sister book. Correct: This is my sister's book.\n2. Wrong: These are my friends pens. Correct: These are my friends' pens.\n3. Wrong: The boys room is clean. Correct: The boys' room is clean."
+          },
+          "mistakes": [
+            {
+              "wrong": "This is my sister book.",
+              "correct": "This is my sister's book.",
+              "reason": "表示所属关系，单数名词后加's。"
+            },
+            {
+              "wrong": "These are my friends pens.",
+              "correct": "These are my friends' pens.",
+              "reason": "表示所属关系，复数名词以-s结尾的只加'。"
+            },
+            {
+              "wrong": "The boys room is clean.",
+              "correct": "The boys' room is clean.",
+              "reason": "表示所属关系，复数名词以-s结尾的只加'。"
+            }
+          ],
+          "grammar_fix": "所有格's是“的”，复数s是“们”，别把它们搞混了！",
+          "emotion_hook": "⚠️一个撇号定乾坤！所有格's和复数-s，你真的分清了吗？"
+        },
+        {
+          "card_id": "T4-04",
+          "full_id": "英语-七上-T4-04",
+          "title": "Wh-疑问句：语序颠倒大错误！",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "Wh-疑问句（特殊疑问句）以疑问词开头，通常采用“疑问词 + be动词/助动词 + 主语 + 动词原形/其他”的语序。",
+          "core_points": [
+            "当疑问词作主语时：疑问词 + 谓语动词 + 其他 (e.g., Who is she?)",
+            "当疑问词作宾语或状语时：疑问词 + be动词/助动词 + 主语 + 谓语动词 + 其他 (e.g., What is your name? Where do you live?)",
+            "七上主要学习Who, What, Where, When, How much/many, Why等疑问词。",
+            "初中阶段最常见的错误是疑问词后直接跟陈述句语序。"
+          ],
+          "why_explanation": "学生受中文语序影响，容易在疑问词后直接跟陈述句语序，忘记倒装或助动词的使用。",
+          "example": {
+            "question": "找出并改正句子中的错误：\n1. What your name is?\n2. Where she lives?\n3. How many books you have?",
+            "steps": [
+              "1. 'What'作宾语，应是疑问词+be动词+主语，即What is your name?",
+              "2. 'Where'作状语，应是疑问词+助动词+主语+动词原形，即Where does she live?",
+              "3. 'How many'作限定词，应是疑问词+助动词+主语+动词原形，即How many books do you have?",
+              "根据Wh-疑问句的正确语序进行纠正。"
+            ],
+            "answer": "1. Wrong: What your name is? Correct: What is your name?\n2. Wrong: Where she lives? Correct: Where does she live?\n3. Wrong: How many books you have? Correct: How many books do you have?"
+          },
+          "mistakes": [
+            {
+              "wrong": "What your name is?",
+              "correct": "What is your name?",
+              "reason": "特殊疑问句语序为“疑问词+be动词+主语”。"
+            },
+            {
+              "wrong": "Where she lives?",
+              "correct": "Where does she live?",
+              "reason": "特殊疑问句语序为“疑问词+助动词+主语+动词原形”。"
+            },
+            {
+              "wrong": "How many books you have?",
+              "correct": "How many books do you have?",
+              "reason": "特殊疑问句语序为“疑问词+助动词+主语+动词原形”。"
+            }
+          ],
+          "grammar_fix": "疑问词后要倒装，助动词be不能忘！",
+          "emotion_hook": "😱Wh-问句老是错？语序颠倒太要命！这招让你告别“中式英语”！"
+        },
+        {
+          "card_id": "T4-05",
+          "full_id": "英语-七上-T4-05",
+          "title": "简单现在时：三单动词变身记！",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "简单现在时用于表示习惯、事实或普遍真理。当主语是第三人称单数时，动词要加-s或-es。",
+          "core_points": [
+            "一般动词加-s：play -> plays。",
+            "以s, x, ch, sh, o结尾的动词加-es：watch -> watches, go -> goes。",
+            "以辅音字母+y结尾的动词，变y为i再加-es：study -> studies。",
+            "否定句用don't/doesn't + 动词原形。",
+            "疑问句用Do/Does + 主语 + 动词原形。"
+          ],
+          "why_explanation": "这是七上英语的重中之重，学生常忘记第三人称单数动词变位，或在否定疑问句中错误地保留-s/-es。",
+          "example": {
+            "question": "找出并改正句子中的错误：\n1. She like apples.\n2. He don't play basketball.\n3. Does she likes music?",
+            "steps": [
+              "1. 主语'She'是第三人称单数，动词'like'应加-s。",
+              "2. 主语'He'是第三人称单数，否定应使用doesn't，且后接动词原形。",
+              "3. 疑问句中已用助动词'Does'，主语后的动词应为原形，不加-s。",
+              "根据简单现在时第三人称单数规则进行纠正。"
+            ],
+            "answer": "1. Wrong: She like apples. Correct: She likes apples.\n2. Wrong: He don't play basketball. Correct: He doesn't play basketball.\n3. Wrong: Does she likes music? Correct: Does she like music?"
+          },
+          "mistakes": [
+            {
+              "wrong": "She like apples.",
+              "correct": "She likes apples.",
+              "reason": "主语为第三人称单数时，谓语动词加-s。"
+            },
+            {
+              "wrong": "He don't play basketball.",
+              "correct": "He doesn't play basketball.",
+              "reason": "主语为第三人称单数时，否定句用doesn't。"
+            },
+            {
+              "wrong": "Does she likes music?",
+              "correct": "Does she like music?",
+              "reason": "疑问句中有助动词Does时，谓语动词用原形。"
+            }
+          ],
+          "grammar_fix": "三单动词要变身，否定疑问用原形！",
+          "emotion_hook": "🚨简单现在时大翻车？三单动词变形口诀，让你语法瞬间开挂！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T5",
+      "unit_name": "PK挑战卡",
+      "cards": [
+        {
+          "card_id": "T5-01",
+          "full_id": "英语-七上-T5-01",
+          "title": "词汇大闯关：谁是单词王？",
+          "type": "PK挑战卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "考察七年级上册核心词汇的掌握程度，包括名词、动词和形容词。",
+          "core_points": [
+            "涵盖Unit 1-12的重点词汇。",
+            "包括名词（如family members, school subjects, daily objects, food, sports），动词（如be, have, like, play, read, write），形容词（如good, bad, interesting）。",
+            "挑战形式：看图片猜单词，听发音写单词，中英文互译。",
+            "快速反应和准确拼写是关键。"
+          ],
+          "why_explanation": "词汇是语言学习的基础，通过PK形式，激发学生记忆词汇的兴趣和积极性。",
+          "example": {
+            "question": "PK挑战：请在30秒内，写出以下中文对应的英文单词。\n1. 铅笔\n2. 足球\n3. 星期三\n4. 科学\n5. 舒服的",
+            "steps": [
+              "1. pencil",
+              "2. soccer",
+              "3. Wednesday",
+              "4. science",
+              "5. comfortable"
+            ],
+            "answer": "1. pencil\n2. soccer\n3. Wednesday\n4. science\n5. comfortable"
+          },
+          "battle_rule": "两人一组，一人读中文，一人快速写出英文。规定时间，看谁正确率高！或看图片说出英文，比拼反应速度。",
+          "emotion_hook": "🔥单词PK赛！七上核心词汇大盘点，敢来挑战你的词汇量吗？"
+        },
+        {
+          "card_id": "T5-02",
+          "full_id": "英语-七上-T5-02",
+          "title": "语法填空大乱斗：谁能零失误？",
+          "type": "PK挑战卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "考察七年级上册核心语法点的综合运用，包括be动词、人称代词、名词复数、所有格、简单现在时等。",
+          "core_points": [
+            "填空题形式，涉及be动词、have/has、主宾格代词、指示代词、名词复数、所有格、介词、冠词、动词三单等。",
+            "句子设计贴近教材和生活场景。",
+            "需要学生细致审题，综合运用所学语法知识。",
+            "高准确率是获胜关键。"
+          ],
+          "why_explanation": "语法是英语的骨架，通过PK形式，让学生在竞争中巩固语法知识，提升解题能力。",
+          "example": {
+            "question": "PK挑战：选择或填空，改正句子中的错误。\n1. This ___ my book. (be)\n2. I like ___ very much. (he)\n3. Tom ___ a brother. (have)\n4. Where ___ your keys? (be)\n5. She ___ TV every evening. (watch)",
+            "steps": [
+              "1. This is (be动词与主语this一致)",
+              "2. him (动词like后用宾格)",
+              "3. has (主语Tom是三单，have变has)",
+              "4. are (主语keys是复数，be动词用are)",
+              "5. watches (主语She是三单，watch变watches)"
+            ],
+            "answer": "1. is\n2. him\n3. has\n4. are\n5. watches"
+          },
+          "battle_rule": "每人发一张语法填空卷，规定时间内完成。比拼谁的正确率更高，用时更短者胜出！",
+          "emotion_hook": "🏆语法小能手是你吗？七上语法点大集合，敢不敢来一场速度与准确的PK？"
+        },
+        {
+          "card_id": "T5-03",
+          "full_id": "英语-七上-T5-03",
+          "title": "情景对话大挑战：谁的口语更流畅？",
+          "type": "PK挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "考察学生在七年级上册所学情景对话中的实际运用能力，包括自我介绍、询问物品、点餐购物等。",
+          "core_points": [
+            "提供一个情景，要求学生进行角色扮演，完成对话。",
+            "评估标准：发音准确度、流利度、语法正确性、词汇运用、是否符合情景。",
+            "情景涵盖Unit 1-12的对话主题。",
+            "鼓励学生发挥创造力，但要保持语言的准确性。"
+          ],
+          "why_explanation": "口语是语言学习的最终目的之一，PK形式能促使学生大胆开口，提高口语表达能力。",
+          "example": {
+            "question": "情景：你和同学一起去商店买衣服。请你扮演顾客，同学扮演售货员，进行一段购物对话。",
+            "steps": [
+              "顾客：打招呼，表达购物需求 (I'd like a T-shirt)。",
+              "售货员：询问颜色/尺码 (What color? What size?)。",
+              "顾客：选择颜色/尺码。",
+              "售货员：报价格 (It's... dollars)。",
+              "顾客：付款，感谢。",
+              "售货员：回应。"
+            ],
+            "answer": "A: Excuse me. I'd like a T-shirt.\nB: What color do you want?\nA: A red one, please.\nB: Here you are. How much is it?\nA: It's 20 dollars. Here's the money. Thank you!\nB: You're welcome."
+          },
+          "battle_rule": "两人一组，抽签决定情景和角色。在规定时间内完成对话，由老师或同学评分，选出最佳表演者。",
+          "emotion_hook": "🗣️口语渣渣变大神！情景对话PK，让你自信开口，秒杀老外！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T6",
+      "unit_name": "速记卡",
+      "cards": [
+        {
+          "card_id": "T6-01",
+          "full_id": "英语-七上-T6-01",
+          "title": "数字1-100：顺口溜助你快速掌握！",
+          "type": "速记卡",
+          "difficulty": 1,
+          "importance": 5,
+          "definition": "掌握英语数字1-100的表达，是日常交流和学习的基础。",
+          "core_points": [
+            "1-12是基础，需单独记忆。",
+            "13-19以-teen结尾，重音在-teen。",
+            "20-90的整十数以-ty结尾，重音在第一个音节。",
+            "两位数写法：整十数 + 连字符 (-) + 个位数 (如twenty-one)。",
+            "掌握数字规律，是快速记忆的关键。"
+          ],
+          "why_explanation": "数字是高频词汇，但容易混淆teen和ty的读音和拼写，或漏掉连字符。",
+          "example": {
+            "question": "快速写出以下数字的英文：\n1. 15\n2. 50\n3. 78\n4. 100",
+            "steps": [
+              "1. fifteen (teen结尾)",
+              "2. fifty (ty结尾)",
+              "3. seventy-eight (整十数加个位数)",
+              "4. one hundred"
+            ],
+            "answer": "1. fifteen\n2. fifty\n3. seventy-eight\n4. one hundred"
+          },
+          "speed_method": "【teen vs ty 口诀】\n十几teen，几十ty，\n三五八九要变体。\n（three-thir, five-fif, eight-eigh, nine-nin）\n中间连线是杠杠(-)，\n百位前面加a/one！",
+          "emotion_hook": "🔢数字老是记不住？这个顺口溜让你秒变数字记忆小天才！"
+        },
+        {
+          "card_id": "T6-02",
+          "full_id": "英语-七上-T6-02",
+          "title": "家庭成员：思维导图帮你理清关系！",
+          "type": "速记卡",
+          "difficulty": 1,
+          "importance": 4,
+          "definition": "学习和记忆七年级上册中涉及的家庭成员词汇。",
+          "core_points": [
+            "核心家庭成员：father, mother, brother, sister, son, daughter。",
+            "祖辈：grandfather, grandmother, grandparents。",
+            "亲戚：uncle, aunt, cousin。",
+            "通过分类和联想记忆，建立词汇网络。",
+            "注意单复数和所有格的运用。"
+          ],
+          "why_explanation": "家庭成员词汇多，容易混淆，特别是son/daughter，uncle/aunt。",
+          "example": {
+            "question": "根据思维导图，写出所有家庭成员的英文。",
+            "steps": [
+              "绘制以“我”为中心的思维导图。",
+              "向上延伸：父母、祖父母。",
+              "向旁延伸：兄弟姐妹、叔叔阿姨、表/堂兄弟姐妹。",
+              "填写对应英文单词。"
+            ],
+            "answer": "father, mother, brother, sister, grandfather, grandmother, uncle, aunt, cousin, son, daughter, parents, grandparents."
+          },
+          "speed_method": "【家庭成员思维导图】\n- 我 (Me)\n  - 父母 (Parents): father, mother\n    - 祖父母 (Grandparents): grandfather, grandmother\n  - 兄弟姐妹 (Siblings): brother, sister\n  - 叔叔阿姨 (Aunt & Uncle): uncle, aunt\n    - 表/堂兄弟姐妹 (Cousin): cousin",
+          "emotion_hook": "👨‍👩‍👧‍👦家庭成员词汇记不住？一张思维导图，让你家族关系全掌握！"
+        },
+        {
+          "card_id": "T6-03",
+          "full_id": "英语-七上-T6-03",
+          "title": "学校科目：分类记忆，轻松搞定！",
+          "type": "速记卡",
+          "difficulty": 1,
+          "importance": 3,
+          "definition": "记忆七年级上册中常见的学校科目词汇。",
+          "core_points": [
+            "主科：Chinese, Math, English, Science。",
+            "艺体科目：Music, Art, PE (Physical Education)。",
+            "其他科目：History, Geography, Computer Science。",
+            "注意首字母大写。",
+            "通过联想自己的课程表进行记忆。"
+          ],
+          "why_explanation": "科目词汇多，容易混淆，特别是Science和Social Studies（七上可能不涉及）。",
+          "example": {
+            "question": "写出以下中文对应的英文科目名称：\n1. 语文\n2. 数学\n3. 英语\n4. 体育\n5. 科学",
+            "steps": [
+              "1. Chinese",
+              "2. Math",
+              "3. English",
+              "4. PE",
+              "5. Science"
+            ],
+            "answer": "1. Chinese\n2. Math\n3. English\n4. PE\n5. Science"
+          },
+          "speed_method": "【科目分类记忆法】\n- 语言类：Chinese, English\n- 理科类：Math, Science\n- 文科类：History, Geography\n- 艺术体育类：Music, Art, PE",
+          "emotion_hook": "📚科目单词总是背不牢？这个分类记忆法，让你的课表瞬间清晰！"
+        },
+        {
+          "card_id": "T6-04",
+          "full_id": "英语-七上-T6-04",
+          "title": "方位介词：小房子口诀，位置秒get！",
+          "type": "速记卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "记忆七年级上册中常用的方位介词，用于描述物品位置。",
+          "core_points": [
+            "in (在…里面), on (在…上面), under (在…下面)。",
+            "behind (在…后面), in front of (在…前面)。",
+            "next to (在…旁边), near (在…附近)。",
+            "通过视觉化想象和动作辅助记忆。",
+            "注意搭配be动词使用。"
+          ],
+          "why_explanation": "方位介词多，容易混淆，特别是in/on/under和behind/in front of。",
+          "example": {
+            "question": "用方位介词描述小猫的位置：\n1. 猫在盒子里。\n2. 猫在桌子下面。\n3. 猫在椅子旁边。",
+            "steps": [
+              "1. The cat is in the box.",
+              "2. The cat is under the table.",
+              "3. The cat is next to the chair."
+            ],
+            "answer": "1. The cat is in the box.\n2. The cat is under the table.\n3. The cat is next to the chair."
+          },
+          "speed_method": "【小房子方位口诀】\nin在里面，on在上，under在下不迷茫。\nbehind在后，in front of前，next to旁边手拉手！",
+          "emotion_hook": "🏡方位介词记不住？小房子口诀，让你瞬间定位，再也不迷路！"
+        },
+        {
+          "card_id": "T6-05",
+          "full_id": "英语-七上-T6-05",
+          "title": "Wh-疑问词：功能分类，一目了然！",
+          "type": "速记卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "记忆七年级上册中常见的Wh-疑问词及其功能。",
+          "core_points": [
+            "who (谁，指人)",
+            "what (什么，指物/事)",
+            "where (哪里，指地点)",
+            "when (何时，指时间)",
+            "why (为什么，指原因)",
+            "how (怎样/如何，指方式/程度)",
+            "how much/many (多少，指数量/价格)。",
+            "通过疑问词的功能进行分类记忆。"
+          ],
+          "why_explanation": "疑问词是构成疑问句的基础，但功能多，容易混淆，特别是what和who，或how much/many。",
+          "example": {
+            "question": "用正确的Wh-疑问词提问：\n1. ___ is your name? (询问姓名)\n2. ___ is your father? (询问职业)\n3. ___ are you from? (询问地点)\n4. ___ do you like this book? (询问原因)",
+            "steps": [
+              "1. 询问姓名用what。",
+              "2. 询问职业用what。",
+              "3. 询问地点用where。",
+              "4. 询问原因用why。"
+            ],
+            "answer": "1. What\n2. What\n3. Where\n4. Why"
+          },
+          "speed_method": "【Wh-疑问词功能歌】\n问人who，问物what，\n问地where，问时when。\n问因why，问方式how，\n多少how much/many，清清楚楚记得牢！",
+          "emotion_hook": "❓Wh-问句总是错？这个口诀让你秒懂疑问词功能，再也不怕提问！"
+        }
+      ]
+    }
+  ]
+}

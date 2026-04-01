@@ -1,0 +1,495 @@
+{
+  "subject": "英语",
+  "grade": "高二",
+  "semester": "上册",
+  "textbook": "人教版",
+  "grade_short": "高二上",
+  "card_pack": "爆款卡片",
+  "description": "面向小红书传播优化的6种英语爆款题型卡片（全知识点覆盖版）",
+  "units": [
+    {
+      "unit_id": "T1",
+      "unit_name": "易混词陷阱",
+      "cards": [
+        {
+          "card_id": "T1-01",
+          "full_id": "英语-高二上-T1-01",
+          "title": "affect vs. effect：一字之差，天壤之别！😱",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "affect (v.) 影响；effect (n.) 影响，效果 / (v.) 引起，实现",
+          "core_points": [
+            "affect 动词，表示“影响”",
+            "effect 名词，表示“影响，效果”",
+            "effect 偶尔作动词，意为“引起，实现”，常用于 formal context",
+            "记忆技巧：A是动词首字母，E是名词首字母"
+          ],
+          "why_explanation": "发音和拼写相似，且中文释义都有“影响”，导致混淆。",
+          "example": {
+            "question": "Choose the best word: The new policy will ( ) significant changes. What ( ) will it have on the economy?",
+            "steps": [
+              "第一空：需要一个动词，表示“引起/带来变化”。",
+              "第二空：需要一个名词，表示“影响/效果”。"
+            ],
+            "answer": "affect; effect"
+          },
+          "mistakes": [
+            {
+              "wrong": "The medicine had no affect on his health.",
+              "correct": "The medicine had no effect on his health.",
+              "reason": "此处需要名词“影响”，应使用 effect。"
+            },
+            {
+              "wrong": "His words didn't effect me at all.",
+              "correct": "His words didn't affect me at all.",
+              "reason": "此处需要动词“影响”，应使用 affect。"
+            }
+          ],
+          "memory_tip": "Affect是动词，Effect是名词，Affect是施动，Effect是结果。",
+          "emotion_hook": "每次都分不清？别再踩坑了！这组词是考试高频易错点！"
+        },
+        {
+          "card_id": "T1-02",
+          "full_id": "英语-高二上-T1-02",
+          "title": "lie vs. lay：躺下还是放置？一秒破局！🔑",
+          "type": "易混词陷阱卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "lie (v.) 躺，平放 (不及物动词) / lie (v.) 说谎；lay (v.) 放置，产卵 (及物动词)",
+          "core_points": [
+            "lie (不及物动词): 躺下，位于。过去式：lay，过去分词：lain",
+            "lie (不及物动词): 说谎。过去式：lied，过去分词：lied",
+            "lay (及物动词): 放置，产卵。过去式：laid，过去分词：laid",
+            "区分关键：lie是自己躺下，lay是放置某物"
+          ],
+          "why_explanation": "lie 的过去式和 lay 的原形相同，且中文意思都与“放置”相关，极易混淆。",
+          "example": {
+            "question": "Fill in the blanks: 1. He ( ) on the bed for an hour. 2. Please ( ) the book on the table.",
+            "steps": [
+              "第一空：主语“He”自己躺下，需要不及物动词 lie 的过去式。",
+              "第二空：动词后有宾语“the book”，需要及物动词 lay 的原形。"
+            ],
+            "answer": "lay; lay"
+          },
+          "mistakes": [
+            {
+              "wrong": "He laid on the sofa all afternoon.",
+              "correct": "He lay on the sofa all afternoon.",
+              "reason": "“他躺下”是自身动作，用lie的过去式 lay。"
+            },
+            {
+              "wrong": "The hen has lied an egg.",
+              "correct": "The hen has laid an egg.",
+              "reason": "“下蛋”是及物动词 lay 的过去分词。"
+            }
+          ],
+          "memory_tip": "Lie是自己躺，Lay是放东西，躺下就用lie，放东西就用lay。",
+          "emotion_hook": "高中英语必考！搞不清lie/lay，考场上直接丢分！"
+        },
+        {
+          "card_id": "T1-03",
+          "full_id": "英语-高二上-T1-03",
+          "title": "historic vs. historical：文化遗产的守护者必看！🏛️",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "historic (adj.) 历史性的，有历史意义的；historical (adj.) 历史的，有关历史的",
+          "core_points": [
+            "historic 强调“重要性”，指在历史上具有重大意义的事件、地点或人物。",
+            "historical 强调“相关性”，指与历史有关的、属于历史范畴的事物。",
+            "例：historic moment (历史性时刻)，historical novel (历史小说)",
+            "记住：重要的用historic，一般的历史相关用historical"
+          ],
+          "why_explanation": "两者都与“历史”相关，但侧重点不同，容易混淆其修饰对象。",
+          "example": {
+            "question": "Choose the correct word: The signing of the treaty was a ( ) event. She is studying ( ) linguistics.",
+            "steps": [
+              "第一空：条约的签署是具有重大意义的事件，强调“重要性”。",
+              "第二空：研究的是语言学在历史上的发展，强调“相关性”。"
+            ],
+            "answer": "historic; historical"
+          },
+          "mistakes": [
+            {
+              "wrong": "Many historic buildings in the city are preserved.",
+              "correct": "Many historical buildings in the city are preserved.",
+              "reason": "此处指“历史上的”建筑，不一定都具有重大历史意义，用 historical 更合适。"
+            },
+            {
+              "wrong": "The historical moment was captured on film.",
+              "correct": "The historic moment was captured on film.",
+              "reason": "此处指“具有重大历史意义的时刻”，用 historic 更准确。"
+            }
+          ],
+          "memory_tip": "Historic是重大，Historical是相关，记住区别，不再犯难。",
+          "emotion_hook": "别再用错词了！文化遗产主题作文高分秘籍就在这里！"
+        },
+        {
+          "card_id": "T1-04",
+          "full_id": "英语-高二上-T1-04",
+          "title": "appreciate vs. value：高二生必知！感谢与珍视的区别！🌟",
+          "type": "易混词陷阱卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "appreciate (v.) 欣赏，感激，领会；value (v.) 珍视，重视 (n.) 价值",
+          "core_points": [
+            "appreciate 强调对某事的理解、欣赏或感激，后面常接动名词或名词。",
+            "value 强调对某物或某人内在价值的认可和珍视。",
+            "appreciate 后不能直接接人做宾语，要说 appreciate one's help/kindness。",
+            "value 可以直接接人或物做宾语。"
+          ],
+          "why_explanation": "两者都含有“重视”的意味，但在具体语境和用法上有所不同。",
+          "example": {
+            "question": "Choose the best word: I really ( ) your help. We should ( ) our cultural heritage.",
+            "steps": [
+              "第一空：表示“感激你的帮助”，用 appreciate。",
+              "第二空：表示“珍视我们的文化遗产”，用 value。"
+            ],
+            "answer": "appreciate; value"
+          },
+          "mistakes": [
+            {
+              "wrong": "I appreciate you very much.",
+              "correct": "I appreciate your help/kindness very much.",
+              "reason": "appreciate 后不能直接接人做宾语。"
+            },
+            {
+              "wrong": "He appreciates money more than anything.",
+              "correct": "He values money more than anything.",
+              "reason": "此处指“看重金钱的价值”，用 value 更恰当。"
+            }
+          ],
+          "memory_tip": "Appreciate是感激和欣赏，Value是看重和珍藏。",
+          "emotion_hook": "想让你的英文表达更地道？这两个词的用法必须掌握！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T2",
+      "unit_name": "发音挑战",
+      "cards": [
+        {
+          "card_id": "T2-01",
+          "full_id": "英语-高二上-T2-01",
+          "title": "高二生必克！'chaos' 陷阱发音，你中招了吗？⚠️",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "chaos /'keɪɒs/ (n.) 混乱，紊乱",
+          "core_points": [
+            "字母 'ch' 在此发 /k/ 的音，而非 /tʃ/ 或 /ʃ/。",
+            "字母 'ao' 发 /eɪɒ/ 或 /eɪɑː/ 的音，类似 'kay-oss'。",
+            "重音在第一个音节 /keɪ/。",
+            "与 'chocolate' 中的 'ch' 发音不同。"
+          ],
+          "why_explanation": "受常见单词如 'chocolate', 'church' 中 'ch' 发音的影响，容易误读为 /tʃaʊs/。",
+          "example": {
+            "question": "Listen and pronounce: 'chaos'",
+            "steps": [
+              "Step 1: 记住 'ch' 发 /k/。",
+              "Step 2: 记住 'ao' 发 /eɪɒ/。",
+              "Step 3: 整体拼读 /'keɪɒs/。"
+            ],
+            "answer": "/'keɪɒs/"
+          },
+          "pronunciation_tip": "Ch发k，ao是/eɪɒ/，记住音标，告别错误！",
+          "emotion_hook": "这个词的发音太容易错了！学会它，你的口语瞬间高大上！"
+        },
+        {
+          "card_id": "T2-02",
+          "full_id": "英语-高二上-T2-02",
+          "title": "沉默的字母！'subtle' 发音挑战，别再读错啦！🤫",
+          "type": "发音挑战卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "subtle /'sʌtl/ (adj.) 微妙的，细微的，不明显的",
+          "core_points": [
+            "字母 'b' 在此是**不发音**的，是 silent 'b'。",
+            "重音在第一个音节 /sʌ/。",
+            "发音为 'sut-l'，而不是 'sub-tl'。",
+            "类似单词还有 'debt' (b不发音)。"
+          ],
+          "why_explanation": "看到字母 'b' 自然会想发音，但 'b' 在 'bt' 组合中常不发音。",
+          "example": {
+            "question": "Listen and pronounce: 'subtle'",
+            "steps": [
+              "Step 1: 忽略 'b' 的发音。",
+              "Step 2: 集中在 'sut' 和 'le'。",
+              "Step 3: 整体拼读 /'sʌtl/。"
+            ],
+            "answer": "/'sʌtl/"
+          },
+          "pronunciation_tip": "Subtle的b不开口，Debt的b也沉默，记住规律不犯错。",
+          "emotion_hook": "发音小细节，决定你的口语水平！这个词你读对了吗？"
+        },
+        {
+          "card_id": "T2-03",
+          "full_id": "英语-高二上-T2-03",
+          "title": "高二英语必考！'genre' 发音，文艺青年看过来！🎨",
+          "type": "发音挑战卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "genre /'ʒɒnrə/ (n.) 类型，风格 (尤指艺术、文学、音乐等)",
+          "core_points": [
+            "字母 'g' 在此发 /ʒ/ 的音，与 'measure' 中的 's' 类似。",
+            "字母 'e' 在此发 /ɒ/ 的音，类似 'on' 中的 'o'。",
+            "字母 're' 发 /rə/ 的音，类似 'teacher' 中的 'er'。",
+            "重音在第一个音节 /ʒɒn/。"
+          ],
+          "why_explanation": "这是一个法语外来词，发音不符合英语的常规拼读规则，容易误读为 /dʒɛnər/。",
+          "example": {
+            "question": "Listen and pronounce: 'genre'",
+            "steps": [
+              "Step 1: 'g' 发 /ʒ/。",
+              "Step 2: 'en' 发 /ɒn/。",
+              "Step 3: 're' 发 /rə/。",
+              "Step 4: 整体拼读 /'ʒɒnrə/。"
+            ],
+            "answer": "/'ʒɒnrə/"
+          },
+          "pronunciation_tip": "Genre法语词，ʒɒnrə要记住，艺术分类不迷路。",
+          "emotion_hook": "文艺范儿的你，这个词的发音绝不能错！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T3",
+      "unit_name": "情景闯关",
+      "cards": [
+        {
+          "card_id": "T3-01",
+          "full_id": "英语-高二上-T3-01",
+          "title": "文化遗产交流大使：如何介绍中国传统节日？🏮",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "在国际交流场合，用英语介绍中国传统节日及其文化内涵。",
+          "core_points": [
+            "介绍节日名称及日期 (Lunar Calendar)。",
+            "描述节日起源和主要习俗。",
+            "解释节日背后蕴含的文化意义或价值观。",
+            "使用恰当的词汇：celebrate, commemorate, reunion, blessing, tradition, custom。",
+            "使用连接词使表达流畅。"
+          ],
+          "why_explanation": "缺乏系统性的表达框架和文化背景词汇，导致介绍不全面或不地道。",
+          "example": {
+            "question": "请你向一位外国朋友介绍中秋节 (Mid-Autumn Festival)。",
+            "steps": [
+              "Step 1: 介绍日期和别称 (e.g., 'falls on the 15th day of the 8th month of the Chinese lunar calendar', 'also known as the Moon Festival').",
+              "Step 2: 描述主要习俗 (e.g., 'family reunion', 'eating mooncakes', 'admiring the full moon', 'lighting lanterns').",
+              "Step 3: 解释文化意义 (e.g., 'symbolizes reunion and harmony', 'expresses people's longing for a better life').",
+              "Step 4: 尝试用一到两句话总结感受或祝福。"
+            ],
+            "answer": "The Mid-Autumn Festival, also known as the Moon Festival, usually falls on the 15th day of the 8th month of the Chinese lunar calendar. It's a significant traditional festival for family reunion. On this day, families gather together, enjoy delicious mooncakes, admire the full moon, and light colourful lanterns. It symbolizes reunion and harmony, expressing people's longing for a better life. It's truly a beautiful time to appreciate family and tradition."
+          },
+          "scene_dialogue": [
+            "A: What's your favorite Chinese festival?",
+            "B: Definitely the Mid-Autumn Festival! It's all about family and delicious mooncakes.",
+            "A: Oh, I've heard of mooncakes! What else do you usually do?",
+            "B: We gather to admire the full moon, which symbolizes reunion. It's a wonderful tradition."
+          ],
+          "emotion_hook": "想成为文化交流小达人？掌握这个情景，外国人对你刮目相看！"
+        },
+        {
+          "card_id": "T3-02",
+          "full_id": "英语-高二上-T3-02",
+          "title": "科学探索者：如何向公众解释一项科学发现？🔬",
+          "type": "情景闯关卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "用清晰、简洁的语言向非专业人士解释一项科学发现或技术进步。",
+          "core_points": [
+            "用通俗易懂的语言介绍发现的名称和背景。",
+            "解释其核心原理或工作方式。",
+            "阐述其重要性或潜在影响 (benefits/applications)。",
+            "避免使用过多专业术语，或进行简单解释。",
+            "使用逻辑连接词 (e.g., 'firstly', 'then', 'as a result', 'in conclusion')。"
+          ],
+          "why_explanation": "科学概念抽象，词汇专业，难以用日常语言有效传达。",
+          "example": {
+            "question": "请你向一位对科学不太了解的朋友解释“人工智能” (Artificial Intelligence, AI)。",
+            "steps": [
+              "Step 1: 给出AI的简单定义 (e.g., 'machines that can think and learn like humans').",
+              "Step 2: 举例说明AI的常见应用 (e.g., 'smartphones', 'self-driving cars', 'online recommendations').",
+              "Step 3: 解释AI的核心思想 (e.g., 'collecting data', 'identifying patterns', 'making decisions').",
+              "Step 4: 展望AI的未来影响 (e.g., 'improving efficiency', 'solving complex problems')."
+            ],
+            "answer": "Artificial Intelligence, or AI, basically means making computers smart enough to think and learn almost like people do. Think about your smartphone's voice assistant or how online shopping sites recommend products you might like – that's AI at work! It works by collecting huge amounts of data, finding patterns in it, and then using those patterns to make decisions or predictions. AI is changing many aspects of our lives, from making daily tasks easier to helping us solve really complex scientific problems in the future."
+          },
+          "scene_dialogue": [
+            "A: I keep hearing about AI, but I don't really get it.",
+            "B: No worries! Imagine computers that can learn and solve problems just like us. That's AI.",
+            "A: So, like robots?",
+            "B: Kind of! But it's also in your phone, suggesting music, or in self-driving cars. It's about smart systems."
+          ],
+          "emotion_hook": "想成为科技潮人？这个技能让你在朋友圈C位出道！"
+        },
+        {
+          "card_id": "T3-03",
+          "full_id": "英语-高二上-T3-03",
+          "title": "旅行规划师：如何向朋友推荐一个旅游目的地？✈️",
+          "type": "情景闯关卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "用生动有趣的语言向朋友推荐一个你认为值得去的旅游目的地。",
+          "core_points": [
+            "描述目的地名称、地理位置及特色。",
+            "推荐具体景点或活动。",
+            "说明其吸引人的原因 (e.g., beautiful scenery, unique culture, delicious food, relaxing atmosphere)。",
+            "运用感叹句和形容词增强感染力。",
+            "考虑听众兴趣，给出个性化建议。"
+          ],
+          "why_explanation": "表达平淡，缺乏吸引力，不能有效激发对方的兴趣。",
+          "example": {
+            "question": "向你的朋友推荐一个国内旅游目的地，例如桂林。",
+            "steps": [
+              "Step 1: 介绍桂林及其著名景观 (e.g., 'Guilin, famous for its breathtaking landscapes').",
+              "Step 2: 描述漓江游船体验 (e.g., 'Li River cruise', 'karst mountains', 'crystal-clear water').",
+              "Step 3: 提及其他活动或美食 (e.g., 'exploring caves', 'Yangshuo West Street', 'Guilin rice noodles').",
+              "Step 4: 总结推荐理由 (e.g., 'unforgettable experience', 'perfect for nature lovers')."
+            ],
+            "answer": "You absolutely *must* visit Guilin! It's famous for its breathtaking landscapes, often described as 'the most beautiful under heaven.' The highlight is definitely taking a Li River cruise, where you'll see stunning karst mountains reflecting in the crystal-clear water – it's like a painting come to life! Besides that, you can explore ancient caves, wander around Yangshuo West Street, and try the delicious Guilin rice noodles. It's an unforgettable experience, especially if you're a nature lover!"
+          },
+          "scene_dialogue": [
+            "A: I'm planning a trip, any recommendations?",
+            "B: Oh, you HAVE to go to Guilin! The scenery is out of this world.",
+            "A: Really? What's so special about it?",
+            "B: The Li River cruise is a must-do! You'll see incredible mountains and clear water. And the rice noodles are amazing!"
+          ],
+          "emotion_hook": "你的旅行推荐平平无奇？学会这招，朋友立刻想跟你走！"
+        }
+      ]
+    },
+    {
+      "unit_id": "T4",
+      "unit_name": "语法纠错",
+      "cards": [
+        {
+          "card_id": "T4-01",
+          "full_id": "英语-高二上-T4-01",
+          "title": "高二语法必考！虚拟语气陷阱，你中招了吗？❌",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "虚拟语气在 'It is important/necessary/suggested that...' 句型中的应用。",
+          "core_points": [
+            "在 'It is + 形容词/过去分词 + that...' 句型中，如果形容词或过去分词表示“重要、必要、建议、命令”等，that 从句谓语动词用“should + 动词原形”或直接用“动词原形”。",
+            "常见的形容词有: important, necessary, essential, vital, advisable, desirable, appropriate。",
+            "常见的过去分词有: suggested, recommended, proposed, ordered, demanded, required。",
+            "should 可以省略。"
+          ],
+          "why_explanation": "受陈述语气影响，容易将从句谓语动词误用为一般现在时或与主句时态保持一致。",
+          "example": {
+            "question": "纠正以下句子：It is important that he comes to the meeting on time.",
+            "steps": [
+              "Step 1: 识别主句结构 'It is important that...'。",
+              "Step 2: 确定 'important' 触发虚拟语气。",
+              "Step 3: 将从句谓语动词 'comes' 改为动词原形 'come' 或 'should come'。"
+            ],
+            "answer": "It is important that he **come** to the meeting on time. (或 It is important that he **should come** to the meeting on time.)"
+          },
+          "mistakes": [
+            {
+              "wrong": "It is suggested that she finishes the task by tomorrow.",
+              "correct": "It is suggested that she finish the task by tomorrow.",
+              "reason": "suggested 触发虚拟语气，从句谓语动词用原形。"
+            },
+            {
+              "wrong": "The doctor demanded that he took the medicine immediately.",
+              "correct": "The doctor demanded that he take the medicine immediately.",
+              "reason": "demanded 触发虚拟语气，从句谓语动词用原形。"
+            }
+          ],
+          "grammar_fix": "虚拟语气：that从句用动词原形，should可省略，重要建议必须听！",
+          "emotion_hook": "虚拟语气是高中语法重灾区！掌握这个句型，轻松避开扣分点！"
+        },
+        {
+          "card_id": "T4-02",
+          "full_id": "英语-高二上-T4-02",
+          "title": "倒装句大揭秘！Negative Adverbial 倒装，你写对了吗？🔍",
+          "type": "语法纠错卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "当否定副词或否定意义的副词短语置于句首时，句子需要部分倒装。",
+          "core_points": [
+            "常见的否定副词/短语：never, seldom, hardly, scarcely, rarely, little, no sooner...than, hardly...when, not until, only when/after/if/by。",
+            "倒装规则：否定词/短语 + 助动词/情态动词/be动词 + 主语 + 谓语动词（或剩余部分）。",
+            "如果句中没有助动词，则根据时态添加 do/does/did。",
+            "注意 'not until' 引导的时间状语从句倒装的是主句。"
+          ],
+          "why_explanation": "中文表达习惯导致不倒装，或倒装不彻底 (只倒装了谓语动词)。",
+          "example": {
+            "question": "纠正以下句子：He hardly finished his homework when his mother came back.",
+            "steps": [
+              "Step 1: 识别否定副词 'hardly...when'。",
+              "Step 2: 将 'hardly' 移到句首。",
+              "Step 3: 对主句进行部分倒装，添加助动词 'had'。",
+              "Step 4: 确保主谓语顺序正确。"
+            ],
+            "answer": "**Hardly had** he finished his homework when his mother came back."
+          },
+          "mistakes": [
+            {
+              "wrong": "Not until he arrived did I know the truth.",
+              "correct": "Not until he arrived **did I know** the truth.",
+              "reason": "Not until 引导状语从句时，倒装的是主句，而不是从句。"
+            },
+            {
+              "wrong": "Never I have seen such a beautiful sunset.",
+              "correct": "Never have I seen such a beautiful sunset.",
+              "reason": "否定副词 'Never' 置于句首，应进行部分倒装，将助动词 'have' 提到主语 'I' 之前。"
+            }
+          ],
+          "grammar_fix": "否定副词一开头，助动主语往前走，倒装句型要牢记，高分轻松到手！",
+          "emotion_hook": "倒装句是作文提分利器！搞定它，你的英语瞬间高级感爆棚！"
+        },
+        {
+          "card_id": "T4-03",
+          "full_id": "英语-高二上-T4-03",
+          "title": "非谓语动词：作状语的V-ing/V-ed，你用对了吗？🤔",
+          "type": "语法纠错卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "现在分词 (V-ing) 和过去分词 (V-ed) 在句中作状语，表示伴随、原因、时间等。",
+          "core_points": [
+            "现在分词作状语：表示主语主动发出或正在进行的动作，或与主句谓语动词同时发生。",
+            "过去分词作状语：表示主语被动接受的动作，或动作已完成。",
+            "分词作状语时，其逻辑主语必须与主句主语一致。",
+            "如果分词有自己的逻辑主语，且与主句主语不同，则需使用独立主格结构。"
+          ],
+          "why_explanation": "忽略分词的逻辑主语与主句主语的一致性，或混淆主动与被动。",
+          "example": {
+            "question": "纠正以下句子：Walking along the street, a beautiful flower was seen by me.",
+            "steps": [
+              "Step 1: 识别分词短语 'Walking along the street'。",
+              "Step 2: 判断其逻辑主语应是 'I' (我走路)。",
+              "Step 3: 检查主句主语是否是 'I'。发现主句主语是 'a beautiful flower'。",
+              "Step 4: 纠正为逻辑主语一致的句子，或使用独立主格。"
+            ],
+            "answer": "Walking along the street, **I saw** a beautiful flower. (或 As I was walking along the street, I saw a beautiful flower.)"
+          },
+          "mistakes": [
+            {
+              "wrong": "Having finished the work, he went home.",
+              "correct": "Having finished the work, he went home.",
+              "reason": "此句正确，'Having finished' 表示完成的动作，逻辑主语 'he' 与主句主语一致，且表示主动。"
+            },
+            {
+              "wrong": "Seen from the top of the mountain, the city looks beautiful.",
+              "correct": "Seen from the top of the mountain, the city looks beautiful.",
+              "reason": "此句正确，'Seen' (被看见) 逻辑主语是 'the city' (城市被看见)，与主句主语一致。"
+            },
+            {
+              "wrong": "The weather permitting, we will go hiking.",
+              "correct": "**The weather permitting**, we will go hiking.",
+              "reason": "此句正确，是独立主格结构，'weather' 是 'permitting' 的逻辑主语，与主句主语 'we' 不同。"
+            }
+          ],
+          "grammar_fix": "分词作状语，主语要一致，主动用V-ing，被动用V-ed，独立主格别忘记！",
+          "emotion_hook": "非谓语动词是提升句式复杂度的关键！别让小错误拉低你的分数！"
+        }
+      ]
+    }
+  ]
+}

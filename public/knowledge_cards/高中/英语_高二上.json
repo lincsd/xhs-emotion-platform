@@ -1,0 +1,2814 @@
+{
+  "subject": "英语",
+  "grade": "高二",
+  "semester": "上册",
+  "textbook": "人教版新课标",
+  "grade_short": "高二上",
+  "units": [
+    {
+      "unit_id": "01",
+      "unit_name": "English Around the World",
+      "cards": [
+        {
+          "card_id": "01-01",
+          "full_id": "英语-高二上-01-01",
+          "title": "词汇：全球语言与交流",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元涉及的关于全球语言、交流方式及语言特点的核心词汇。",
+          "core_points": [
+            "global [ˈɡləʊbl] adj. 全球的，全世界的",
+            "communicate [kəˈmjuːnɪkeɪt] v. 交流，沟通；传达",
+            "native [ˈneɪtɪv] adj. 本国的，本地的 n. 本地人",
+            "official [əˈfɪʃl] adj. 官方的，正式的 n. 官员",
+            "dialect [ˈdaɪəlekt] n. 方言",
+            "acquire [əˈkwaɪər] v. 获得，习得",
+            "fluent [ˈfluːənt] adj. 流利的，流畅的",
+            "master [ˈmɑːstər] v. 掌握，精通 n. 大师",
+            "recognize [ˈrekəɡnaɪz] v. 认出，识别；承认",
+            "pronounce [prəˈnaʊns] v. 发音",
+            "variety [vəˈraɪəti] n. 种类，多样性",
+            "influence [ˈɪnfluəns] n./v. 影响",
+            "dominant [ˈdɒmɪnənt] adj. 占主导地位的，优势的",
+            "expansion [ɪkˈspænʃn] n. 扩张，膨胀",
+            "preserve [prɪˈzɜːrv] v. 保护，保存",
+            "unique [juˈniːk] adj. 独一无二的，独特的",
+            "status [ˈsteɪtəs] n. 地位，身份"
+          ],
+          "why_explanation": "这些词汇是理解英语作为全球语言的地位、发展历程及其多样性的基础，掌握它们有助于更好地理解单元主题文章和进行相关讨论。",
+          "example": {
+            "question": "请用 'acquire' 和 'fluent' 描述学习一门新语言的过程。",
+            "steps": [
+              "首先，我们需要通过学习和练习来'acquire'（习得）这门语言的基本知识。",
+              "接着，通过持续的练习和沉浸式学习，我们可以变得'fluent'（流利）。"
+            ],
+            "answer": "It takes time and effort to acquire a new language, but with practice, one can become fluent."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is very fluent in speak English.",
+              "correct": "He is very fluent in speaking English. / He speaks English very fluently.",
+              "reason": "'fluent' 是形容词，修饰动词时需要用副词 'fluently' 或与介词 'in' 搭配后接动名词。"
+            }
+          ],
+          "memory_tip": "'acquire' 联想 'a quire of knowledge' (一大叠知识)，表示获得知识。'fluent' 联想 'flow' (流动)，表示语言像水一样流畅。",
+          "related": {
+            "prerequisite": "初中阶段词汇积累",
+            "next": "理解语言学相关概念的阅读材料"
+          }
+        },
+        {
+          "card_id": "01-02",
+          "full_id": "英语-高二上-01-02",
+          "title": "词汇：社会文化与语言运用",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元出现的与社会文化背景、语言实际运用相关的词汇和短语。",
+          "core_points": [
+            "identity [aɪˈdentəti] n. 身份，特性",
+            "access [ˈækses] n./v. 接近，进入；使用权",
+            "barrier [ˈbæriər] n. 障碍，屏障",
+            "challenge [ˈtʃælɪndʒ] n./v. 挑战",
+            "overcome [ˌəʊvərˈkʌm] v. 克服，战胜",
+            "enrich [ɪnˈrɪtʃ] v. 丰富，充实",
+            "cultural [ˈkʌltʃərəl] adj. 文化的",
+            "linguistic [lɪŋˈɡwɪstɪk] adj. 语言的，语言学的",
+            "diverse [daɪˈvɜːrs] adj. 不同的，多样化的",
+            "interact [ˌɪntərˈækt] v. 互动，互相影响",
+            "international [ˌɪntərˈnæʃnəl] adj. 国际的",
+            "standard [ˈstændərd] n. 标准 adj. 标准的",
+            "simplified [ˈsɪmplɪfaɪd] adj. 简化的",
+            "gradually [ˈɡrædʒuəli] adv. 逐渐地",
+            "eventually [ɪˈventʃuəli] adv. 最终，终于",
+            "widespread [ˈwaɪdspred] adj. 广泛传播的",
+            "significant [sɪɡˈnɪfɪkənt] adj. 重要的，显著的"
+          ],
+          "why_explanation": "这些词汇帮助我们探讨语言与个人身份、文化多样性、社会发展之间的复杂关系，以及语言在国际交流中的作用。",
+          "example": {
+            "question": "请用 'overcome' 和 'barrier' 描述学习外语可能遇到的困难。",
+            "steps": [
+              "学习外语时，我们可能会遇到语言'barrier'（障碍）。",
+              "通过努力，我们可以'overcome'（克服）这些障碍。"
+            ],
+            "answer": "Language barriers are common when learning a foreign language, but they can be overcome with consistent effort."
+          },
+          "mistakes": [
+            {
+              "wrong": "We need to access to more information.",
+              "correct": "We need to access more information. / We need to have access to more information.",
+              "reason": "'access' 作动词时是及物动词，直接接宾语；作名词时常与 'to' 搭配表示“对……的访问/使用权”。"
+            }
+          ],
+          "memory_tip": "'diverse' 联想 'different' (不同的) 和 'verse' (诗歌)，表示不同类型的诗歌，引申为多样性。'gradually' 联想 'grade' (等级)，一级一级地，表示逐渐。",
+          "related": {
+            "prerequisite": "理解文化差异和全球化概念",
+            "next": "分析语言现象背后的社会文化因素"
+          }
+        },
+        {
+          "card_id": "01-03",
+          "full_id": "英语-高二上-01-03",
+          "title": "词汇：常用短语与搭配",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "本单元出现的日常交流和书面表达中高频使用的动词短语和介词短语。",
+          "core_points": [
+            "come up with: 想出，提出 (主意、计划等)",
+            "get rid of: 摆脱，除去",
+            "in common: 共同的，共有",
+            "settle down: 安顿下来；平静下来",
+            "make a difference: 产生影响，有作用",
+            "refer to: 指的是；参考；提及",
+            "break down: 瓦解，崩溃；出故障",
+            "thanks to: 幸亏，由于",
+            "in addition: 此外，另外",
+            "what's more: 而且，更重要的是",
+            "believe it or not: 信不信由你",
+            "depend on: 依赖，取决于",
+            "look up: 查阅；仰望；好转",
+            "take part in: 参加"
+          ],
+          "why_explanation": "这些短语是英语表达的精髓，掌握它们能让你的语言更地道、更丰富。它们往往具有固定的搭配和含义，不可随意拆分或替换。",
+          "example": {
+            "question": "请用 'come up with' 和 'make a difference' 造句。",
+            "steps": [
+              "首先，想出（come up with）一个新主意。",
+              "然后，这个主意要能产生影响（make a difference）。"
+            ],
+            "answer": "We need to come up with a creative solution that can really make a difference to the problem."
+          },
+          "mistakes": [
+            {
+              "wrong": "I want to get rid the bad habit.",
+              "correct": "I want to get rid of the bad habit.",
+              "reason": "'get rid of' 是固定短语， 'of' 不可省略。"
+            }
+          ],
+          "memory_tip": "'come up with' 联想“想法浮上来”；'get rid of' 联想“把……丢掉”；'make a difference' 联想“制造一个不同”，即产生影响。",
+          "related": {
+            "prerequisite": "对动词和介词的基础理解",
+            "next": "在写作和口语中灵活运用短语"
+          }
+        },
+        {
+          "card_id": "01-04",
+          "full_id": "英语-高二上-01-04",
+          "title": "语法：被动语态进阶",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "本单元重点复习和拓展被动语态在复合句、带情态动词、非谓语动词等复杂语境中的运用。",
+          "core_points": [
+            "**基本结构回顾**：be + 动词过去分词 (V-ed)",
+            "**情态动词的被动语态**：情态动词 + be + V-ed (e.g., must be done, should be written)",
+            "**含双宾语动词的被动语态**：两种变法 (e.g., give sb sth -> sb be given sth / sth be given to sb)",
+            "**动词短语的被动语态**：将动词短语作为一个整体进行被动转换 (e.g., look after -> be looked after)",
+            "**非谓语动词的被动形式**：",
+            "  - 不定式：to be V-ed (e.g., He wants to be invited.)",
+            "  - 动名词：being V-ed (e.g., He hates being laughed at.)",
+            "  - 分词：having been V-ed (完成被动，e.g., Having been told the news, she cried.)",
+            "**复合句中的被动语态**：主句或从句可使用被动语态，尤其注意宾语从句的被动转换 (e.g., It is believed that...)",
+            "**肯定句**：The project should be completed by next week.",
+            "**否定句**：The project should not be completed by next week.",
+            "**疑问句**：Should the project be completed by next week?"
+          ],
+          "why_explanation": "被动语态用于强调动作的承受者而非执行者，或当动作执行者不重要/未知时。在高级英语中，掌握其复杂用法能使表达更精确、更符合语境。特别是动词短语被动语态中，介词或副词是动词的一部分，不能省略。",
+          "example": {
+            "question": "将 'People often mistake me for my sister.' 改为被动语态。",
+            "steps": [
+              "确定主语 'People'，谓语 'mistake...for...'，宾语 'me'。",
+              "将被语 'me' 变为被动语态的主语 'I'。",
+              "谓语动词 'mistake' 变为被动形式 'am mistaken'。",
+              "短语 'mistake...for...' 的 'for' 必须保留，所以是 'am mistaken for'。",
+              "原主语 'People' 可省略，或用 'by people'。"
+            ],
+            "answer": "I am often mistaken for my sister."
+          },
+          "mistakes": [
+            {
+              "wrong": "The child was looked after well.",
+              "correct": "The child was looked after well.",
+              "reason": "'look after' 是一个动词短语，在被动语态中，介词 'after' 必须保留。"
+            },
+            {
+              "wrong": "It is said that he is a good student.",
+              "correct": "He is said to be a good student.",
+              "reason": "当宾语从句的主语与 'it is said/thought/believed' 等结构的主语一致时，常将宾语从句的主语提前作主句主语，从句谓语用不定式被动形式。"
+            }
+          ],
+          "memory_tip": "被动语态是“受者为王”。记住动词短语变被动时，短语中的介词/副词是“小尾巴”，不能丢。非谓语动词变被动，核心是 'be' 的不同形式加过去分词。",
+          "related": {
+            "prerequisite": "初中被动语态基础，各种时态的构成",
+            "next": "非谓语动词的独立主格结构"
+          }
+        },
+        {
+          "card_id": "01-05",
+          "full_id": "英语-高二上-01-05",
+          "title": "语法：非谓语动词 (不定式与动名词)",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "本单元深入探讨不定式 (to do) 和动名词 (doing) 作为句子的不同成分以及其在复杂句中的运用。",
+          "core_points": [
+            "**不定式 (to do)**：",
+            "  - 作主语：To learn English well is not easy.",
+            "  - 作宾语：He decided to go abroad.",
+            "  - 作表语：My dream is to travel around the world.",
+            "  - 作定语：He has a lot of work to do.",
+            "  - 作状语 (目的、结果、原因等)：He studies hard to pass the exam.",
+            "  - 复合结构：'too...to...' (太...而不能), 'enough to...' (足够...能), 'It takes/costs sb some time to do sth'",
+            "**动名词 (doing)**：",
+            "  - 作主语：Reading is my favorite hobby.",
+            "  - 作宾语 (后接动名词的动词，如 enjoy, finish, mind, avoid, suggest, practice, consider等)：I enjoy reading novels.",
+            "  - 作表语：Her job is teaching English.",
+            "  - 作定语 (表示用途、功能)：a sleeping bag (睡袋)",
+            "  - 作介词宾语：He is good at drawing.",
+            "  - 复合结构：'It's no use/good doing sth', 'There is no doing sth', 'spend time/money doing sth'",
+            "**不定式与动名词的被动形式**：不定式 'to be done'，动名词 'being done' (见01-04卡片)",
+            "**不定式与动名词的完成形式**：不定式 'to have done'，动名词 'having done' (表示动作发生在谓语动词之前)",
+            "**不定式与动名词作主语**：",
+            "  - 肯定句：To learn/Learning a new skill requires patience.",
+            "  - 否定句：Not to learn/Not learning a new skill is a mistake."
+          ],
+          "why_explanation": "非谓语动词能够使句子结构更紧凑、表达更丰富，避免重复。理解它们作不同成分时的功能和特定动词后的用法，是提升句子复杂度的关键。",
+          "example": {
+            "question": "将 'He suggested that we should go out for a walk.' 改写为使用动名词的句子。",
+            "steps": [
+              "识别谓语动词 'suggest'，它后面常接动名词作宾语。",
+              "将从句 'that we should go out for a walk' 转换为动名词短语。",
+              "主语 'we' 转换为动名词的逻辑主语 'our' 或省略（如果语境清晰）。"
+            ],
+            "answer": "He suggested going out for a walk. / He suggested our going out for a walk."
+          },
+          "mistakes": [
+            {
+              "wrong": "He stopped to smoke.",
+              "correct": "He stopped smoking. (他戒烟了) / He stopped to smoke. (他停下来抽烟)",
+              "reason": "动词 'stop' 后接动名词表示“停止做某事”，接不定式表示“停下来去做某事”，含义完全不同。"
+            },
+            {
+              "wrong": "I'm looking forward to see you.",
+              "correct": "I'm looking forward to seeing you.",
+              "reason": "短语 'look forward to' 中的 'to' 是介词，后面必须接动名词，而不是动词原形。"
+            }
+          ],
+          "memory_tip": "记住动名词是“-ing”形式，常作名词用，尤其在介词后。不定式是“to do”，更偏向于动词性，常表示目的或将来。'to' 后面是动词原形还是动名词？看 'to' 是不定式符号还是介词。",
+          "related": {
+            "prerequisite": "动词基本形式，词性概念",
+            "next": "非谓语动词作独立主格，分词作状语"
+          }
+        },
+        {
+          "card_id": "01-06",
+          "full_id": "英语-高二上-01-06",
+          "title": "语法：非谓语动词 (分词)",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "本单元深入探讨现在分词 (doing) 和过去分词 (done) 作为形容词、状语、以及在分词短语和独立主格中的运用。",
+          "core_points": [
+            "**现在分词 (doing)**：",
+            "  - 作定语 (表示主动、正在进行)：a developing country (发展中国家), a sleeping baby (熟睡的婴儿)",
+            "  - 作表语 (表示主语的特征)：The story is exciting. (故事令人兴奋)",
+            "  - 作状语 (时间、原因、方式、结果等)：Walking down the street, I met an old friend. (时间)",
+            "  - 在复合宾语中：I saw him playing basketball. (看见他正在打)",
+            "**过去分词 (done)**：",
+            "  - 作定语 (表示被动、完成)：a developed country (发达国家), a broken window (破窗户)",
+            "  - 作表语 (表示主语的状态)：I am interested in English. (我对英语感兴趣)",
+            "  - 作状语 (时间、原因、条件、让步等)：Given more time, we could do it better. (条件)",
+            "  - 在复合宾语中：I heard my name called. (听到我的名字被叫)",
+            "**分词短语作状语**：",
+            "  - 逻辑主语与主句主语一致：Opening the door, he saw a dog. (他打开门)",
+            "  - 逻辑主语不一致时，需独立主格 (见01-09卡片)",
+            "**分词的完成式**：Having done (表示动作发生在主句谓语动词之前)：Having finished his homework, he went out to play."
+          ],
+          "why_explanation": "分词能够将两个句子或一个句子中的动词和名词更紧密地结合，使表达更精炼。理解现在分词和过去分词在主动/被动、进行/完成上的区别是关键。",
+          "example": {
+            "question": "将 'He was tired. He fell asleep.' 用分词短语合并成一个句子。",
+            "steps": [
+              "识别两个句子的主语一致，且第一个句子描述原因/状态。",
+              "将第一个句子的谓语动词 'was' 变为现在分词 'being' (虽然 'being tired' 常用，但更简洁可直接用 'Tired')。",
+              "将分词短语放在主句之前或之后作状语。"
+            ],
+            "answer": "Tired, he fell asleep. / Being tired, he fell asleep."
+          },
+          "mistakes": [
+            {
+              "wrong": "The exciting boy ran into the classroom.",
+              "correct": "The excited boy ran into the classroom. (兴奋的男孩) / The exciting game attracted many people. (令人兴奋的比赛)",
+              "reason": "现在分词 (-ing) 表示“令人……的”，过去分词 (-ed) 表示“感到……的”。'boy' 感到兴奋，所以用 'excited'。"
+            },
+            {
+              "wrong": "Walking in the street, a car hit him.",
+              "correct": "While he was walking in the street, a car hit him. / Walking in the street, he was hit by a car.",
+              "reason": "分词作状语时，其逻辑主语必须与主句主语一致。原句中 'walking' 的逻辑主语是 'he'，但主句主语是 'a car'，造成悬垂分词错误。"
+            }
+          ],
+          "memory_tip": "现在分词 'doing' 是“主动进行时”，过去分词 'done' 是“被动完成时”。记不住就想：'exciting' 是让人兴奋的，'excited' 是自己感到兴奋的。",
+          "related": {
+            "prerequisite": "动词基本形式，形容词作定语/表语",
+            "next": "独立主格结构，分词在虚拟语气中的应用"
+          }
+        },
+        {
+          "card_id": "01-07",
+          "full_id": "英语-高二上-01-07",
+          "title": "语法：强调句型 (It is...that...)",
+          "type": "高级语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "用于强调句子的某个成分（主语、宾语、状语）的特殊句型结构。",
+          "core_points": [
+            "**基本结构**：It is/was + 被强调部分 + that/who + 句子的其余部分。",
+            "**强调主语**：",
+            "  - 原句：Tom bought the book yesterday.",
+            "  - 强调主语：It was Tom that/who bought the book yesterday.",
+            "**强调宾语**：",
+            "  - 原句：Tom bought the book yesterday.",
+            "  - 强调宾语：It was the book that/which Tom bought yesterday.",
+            "**强调状语** (时间状语、地点状语、方式状语等)：",
+            "  - 原句：Tom bought the book yesterday.",
+            "  - 强调时间状语：It was yesterday that Tom bought the book.",
+            "  - 强调地点状语：It was in the library that I met him.",
+            "**注意事项**：",
+            "  - 'that' 不能省略，且在强调人时可用 'who'/'whom'。",
+            "  - 强调动词时，需用 'do/does/did' 助动词来强调。",
+            "  - 强调句型中的 'It' 是形式主语，没有实际意义。",
+            "  - 强调句型通常用于陈述句，但也可用于疑问句：Was it you that broke the window?",
+            "**肯定句**：It was I that saw her yesterday.",
+            "**否定句**：It was not I that saw her yesterday.",
+            "**疑问句**：Was it I that saw her yesterday?"
+          ],
+          "why_explanation": "强调句型通过将某个成分置于 'It is/was...that...' 结构中，来突出该成分，吸引听者/读者的注意力，表达说话者想要强调的重点。",
+          "example": {
+            "question": "将 'I met him in the park last Sunday.' 强调 'in the park'。",
+            "steps": [
+              "识别被强调部分 'in the park' 是地点状语。",
+              "套用强调句型：It was + 被强调部分 + that + 句子的其余部分。",
+              "将 'in the park' 放入 'It was...that...' 结构中，其余部分 'I met him last Sunday' 放在 'that' 之后。"
+            ],
+            "answer": "It was in the park that I met him last Sunday."
+          },
+          "mistakes": [
+            {
+              "wrong": "It was in the park which I met him.",
+              "correct": "It was in the park that I met him.",
+              "reason": "强调句型中，连接词通常用 'that'，不能用 'which' 或 'where' 等，即使强调的是地点或时间。只有强调人时 'that' 可换成 'who'/'whom'。"
+            },
+            {
+              "wrong": "It is John who broken the window.",
+              "correct": "It is John who broke the window.",
+              "reason": "强调句型中 'that'/'who' 后的谓语动词要根据原句的时态和主谓一致原则来确定。原句 'John broke the window.' 是过去式，所以强调后仍为过去式。"
+            }
+          ],
+          "memory_tip": "强调句型是“铁三角”：'It' + 'is/was' + 被强调成分 + 'that'。记住 'that' 是万能连接词，只在强调人时可选 'who'。",
+          "related": {
+            "prerequisite": "主谓宾状补等句子成分的识别",
+            "next": "倒装句，省略句"
+          }
+        },
+        {
+          "card_id": "01-08",
+          "full_id": "英语-高二上-01-08",
+          "title": "语法：倒装句 (部分倒装与完全倒装)",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "将句子中的谓语动词或助动词置于主语之前，或将谓语动词全部置于主语之前的一种特殊语序。",
+          "core_points": [
+            "**部分倒装 (Inversion)**：谓语动词的一部分（助动词、情态动词或be动词）放在主语之前，结构类似疑问句。",
+            "  - **否定词或半否定词置于句首**：Hardly, scarcely, seldom, rarely, little, never, no sooner...than..., not until, nowhere, by no means, in no way, under no circumstances 等。",
+            "    - e.g., Never have I seen such a beautiful sight.",
+            "    - e.g., Not until he came back did I know the truth.",
+            "  - **'Only' + 状语/状语从句置于句首**：",
+            "    - e.g., Only in this way can we solve the problem.",
+            "    - e.g., Only when he told me did I realize my mistake.",
+            "  - **'So/Such' + 形容词/副词置于句首** (表示“如此……以至于……”时)：",
+            "    - e.g., So fast did he run that he broke the world record.",
+            "  - **表语置于句首** (常用于文学描写)：",
+            "    - e.g., Happy are those who are content.",
+            "  - **让步状语从句中的倒装** (as/though 引导)：",
+            "    - e.g., Rich as he is, he is not happy. (形容词/副词/名词/动词原形 + as/though + 主语 + 谓语)",
+            "**完全倒装 (Full Inversion)**：谓语动词的全部放在主语之前。",
+            "  - **here, there, now, then, out, in, up, down, away 等副词置于句首**，且主语是名词时：",
+            "    - e.g., Here comes the bus. / There goes the bell.",
+            "  - **地点状语或方向性副词置于句首**，且主语是名词时：",
+            "    - e.g., On the wall hung a picture. / In front of the house stood a tall tree.",
+            "**注意事项**：",
+            "  - 当主语是代词时，'here/there' 引导的句子通常不倒装：Here he comes. (不倒装)",
+            "  - 倒装并非用于强调，而是为了修辞效果、句式平衡或语法要求。",
+            "**肯定句示例**：Never have I seen such a big house.",
+            "**否定句示例**：Not until yesterday did I know the news."
+          ],
+          "why_explanation": "倒装语序能够使语言更具表现力，常用于文学作品、强调语气或保持句式平衡。它打破了SVO的基本语序，通过改变焦点来突出某些信息。部分倒装与疑问句的语序相似，但其目的是陈述而非提问。",
+          "example": {
+            "question": "将 'I had hardly arrived home when it began to rain.' 改写为倒装句。",
+            "steps": [
+              "识别句子中的半否定词 'hardly...when...'。",
+              "将 'hardly' 移至句首。",
+              "主句 'I had arrived home' 进行部分倒装，变为 'had I arrived home'。",
+              "从句 'when it began to rain' 保持不变。"
+            ],
+            "answer": "Hardly had I arrived home when it began to rain."
+          },
+          "mistakes": [
+            {
+              "wrong": "Only by working hard he can succeed.",
+              "correct": "Only by working hard can he succeed.",
+              "reason": "'Only' + 状语置于句首时，主句要用部分倒装，即助动词 'can' 提前。"
+            },
+            {
+              "wrong": "There is a book on the desk.",
+              "correct": "There is a book on the desk. (此句本身正确，是存在句，不视为倒装) / On the desk is a book. (完全倒装)",
+              "reason": "'There be' 句型是固定结构，主谓一致由 'be' 后的名词决定。真正的完全倒装是当地点状语置于句首且主语是名词时，谓语动词 'be' 或其他不及物动词提前。"
+            }
+          ],
+          "memory_tip": "部分倒装像“问句”，把助动词/情态动词挪到主语前面。完全倒装像“站队”，把整个谓语动词都挪到主语前面。口诀：否定副词、only状语、so/such、here/there/地点词，这些放句首就倒装！",
+          "related": {
+            "prerequisite": "疑问句语序，助动词/情态动词的用法",
+            "next": "省略句，高级句式分析"
+          }
+        },
+        {
+          "card_id": "01-09",
+          "full_id": "英语-高二上-01-09",
+          "title": "语法：独立主格结构",
+          "type": "高级语法卡",
+          "difficulty": 5,
+          "importance": 4,
+          "definition": "一种独立于主句之外的结构，通常由“名词/代词 + 非谓语动词/形容词/副词/介词短语”构成，在句中作状语，表示时间、原因、条件、伴随等。",
+          "core_points": [
+            "**基本结构**：名词/代词所有格 + 非谓语动词 (分词、不定式) / 形容词 / 副词 / 介词短语",
+            "**常见形式**：",
+            "  1. **名词/代词 + 现在分词 (doing)**：表示主动或正在进行的动作。",
+            "     - e.g., The sun rising, we set off. (太阳升起，我们出发了)",
+            "  2. **名词/代词 + 过去分词 (done)**：表示被动或已完成的动作。",
+            "     - e.g., The work done, we went home. (工作完成，我们回家了)",
+            "  3. **名词/代词 + 不定式 (to do)**：较少见，常表示目的或将来。",
+            "     - e.g., He sat there, his eyes to watch the door. (他坐在那里，眼睛盯着门)",
+            "  4. **名词/代词 + 形容词/副词**：",
+            "     - e.g., The meeting over, everyone left. (会议结束，大家离开了)",
+            "     - e.g., He lay on the grass, his eyes closed. (他躺在草地上，双眼紧闭)",
+            "  5. **名词/代词 + 介词短语**：",
+            "     - e.g., She stood there, a book in her hand. (她站在那里，手里拿着一本书)",
+            "  6. **with + 宾语 + 宾补** (特殊的独立主格结构)：",
+            "     - e.g., With the lights on, he began to read. (灯亮着，他开始读书)",
+            "**功能**：在句中作时间、原因、条件、伴随、结果等状语。",
+            "**核心特征**：它有自己的逻辑主语，且这个逻辑主语与主句主语不一致，因此不能用普通的分词短语作状语。",
+            "**肯定句**：The weather permitting, we will go hiking.",
+            "**否定句**：The weather not permitting, we will not go hiking."
+          ],
+          "why_explanation": "独立主格结构能够在一个句子中表达两个独立但相关的动作或状态，且这两个动作/状态的主语不同。它避免了使用复杂的并列句或从句，使行文更简洁、更富有表现力。其核心是“独立”，即它有自己的主语，不依赖于主句的主语。",
+          "example": {
+            "question": "将 'The teacher came in. We stopped talking.' 合并成一个独立主格结构。",
+            "steps": [
+              "识别两个句子的主语 'the teacher' 和 'we' 不一致。",
+              "确定第一个动作 'The teacher came in' 作为伴随或时间状语。",
+              "将 'the teacher' 作为独立主格的主语，将 'came' 变为现在分词 'coming'。",
+              "将独立主格结构置于主句之前或之后。"
+            ],
+            "answer": "The teacher coming in, we stopped talking."
+          },
+          "mistakes": [
+            {
+              "wrong": "The game finished, we went home.",
+              "correct": "The game finished, we went home. (此句正确)",
+              "reason": "这是正确的独立主格结构，'the game' 是 'finished' 的逻辑主语，表示“比赛结束了”。"
+            },
+            {
+              "wrong": "Walking in the street, a dog followed him.",
+              "correct": "While he was walking in the street, a dog followed him. / He walking in the street, a dog followed him. (用独立主格)",
+              "reason": "原句中 'walking' 的逻辑主语是 'he'，但主句主语是 'a dog'，造成悬垂分词。若要用独立主格，应为 'He walking in the street, a dog followed him.' (但这种形式不常见，不如用从句)。"
+            }
+          ],
+          "memory_tip": "独立主格是“自带主语的分词短语”，就像一个迷你小句，不跟主句抢主语。记住 'with' 结构也是一种常见的独立主格。",
+          "related": {
+            "prerequisite": "分词作状语，主谓一致",
+            "next": "高级写作中的句式多样性"
+          }
+        },
+        {
+          "card_id": "01-10",
+          "full_id": "英语-高二上-01-10",
+          "title": "句型卡：高级表达与衔接",
+          "type": "写作进阶卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "本单元涉及的用于连接句子、表达复杂思想和观点的常用高级句型和连接词。",
+          "core_points": [
+            "**强调句型**：It is/was + 被强调部分 + that/who + ... (见01-07卡片)",
+            "**倒装句型**：Never have I seen... / Only in this way can we... (见01-08卡片)",
+            "**独立主格结构**：The weather permitting, ... / With the lights on, ... (见01-09卡片)",
+            "**非限制性定语从句**：",
+            "  - e.g., English, which is spoken by many people, is a global language.",
+            "**名词性从句作主语、宾语、表语、同位语**：",
+            "  - e.g., What he said is true. (主语从句)",
+            "  - e.g., The fact that he succeeded surprised us. (同位语从句)",
+            "**高级状语从句**：",
+            "  - **让步状语从句**：Though/Although/Even if/While + 从句 (e.g., Although he is rich, he is not happy.)",
+            "  - **条件状语从句**：As long as/Provided that/Unless + 从句 (e.g., You can go out as long as you finish your homework.)",
+            "  - **目的状语从句**：So that/in order that + 从句 (e.g., He works hard so that he can support his family.)",
+            "**表示因果关系**：",
+            "  - as a result, consequently, therefore, thus, hence, owing to, due to, because of",
+            "**表示转折对比**：",
+            "  - however, nevertheless, on the contrary, in contrast, while, whereas",
+            "**表示递进补充**：",
+            "  - furthermore, moreover, in addition, what's more, besides"
+          ],
+          "why_explanation": "高级句型和连接词是构建复杂、连贯文章的关键。它们帮助作者清晰地表达逻辑关系，使文章更具说服力和可读性，是高分写作和口语的必备技能。",
+          "example": {
+            "question": "将 'He failed the exam. He didn't study hard.' 合并成一个包含原因状语从句的句子，并用 'consequently' 表达结果。",
+            "steps": [
+              "识别原因 'He didn't study hard' 和结果 'He failed the exam'。",
+              "用 'because' 引导原因状语从句。",
+              "用 'consequently' 连接结果。"
+            ],
+            "answer": "He failed the exam because he didn't study hard; consequently, he felt very disappointed."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is rich, but he is not happy, however.",
+              "correct": "He is rich, but he is not happy. / He is rich; however, he is not happy.",
+              "reason": "'but' 和 'however' 不能在同一个句子中同时使用来表示转折，因为它们功能重复。'however' 作副词时，通常用分号或句号与前句隔开。"
+            }
+          ],
+          "memory_tip": "记住不同类型的连接词对应不同的逻辑关系。强调句、倒装句、独立主格是“句式三宝”，让你的文章瞬间高大上。",
+          "related": {
+            "prerequisite": "基础句型，简单从句",
+            "next": "高级议论文写作，复杂长难句分析"
+          }
+        },
+        {
+          "card_id": "01-11",
+          "full_id": "英语-高二上-01-11",
+          "title": "易混词卡：acquire / learn / master",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "这三个词都与“学习”或“获得”知识技能有关，但侧重点和语境有所不同。",
+          "core_points": [
+            "**acquire [əˈkwaɪər] v. 习得，获得**：",
+            "  - 强调通过努力或非刻意的方式逐渐获得技能、知识或习惯。",
+            "  - 语境：常用于语言、技能、知识的习得，也指获得财产或地位。",
+            "  - 例句：Children acquire their native language naturally. (孩子自然习得母语。)",
+            "**learn [lɜːrn] v. 学习，学会**：",
+            "  - 最普通、最广泛的词，指通过学习、指导或经验获得知识或技能。",
+            "  - 语境：可以是刻意的学习，也可以是经验教训。",
+            "  - 例句：I am learning to play the piano. (我正在学弹钢琴。)",
+            "**master [ˈmɑːstər] v. 掌握，精通**：",
+            "  - 强调完全掌握、熟练运用某项技能或知识，达到专家水平。",
+            "  - 语境：通常指在某个领域达到高超的水平，需要长期努力。",
+            "  - 例句：It takes years to master a foreign language. (精通一门外语需要数年时间。)"
+          ],
+          "why_explanation": "这些词的区别在于学习的程度和方式。'acquire' 偏向于自然、潜移默化的习得；'learn' 是泛指的学习过程；'master' 则是学习的最高境界，表示达到精通。",
+          "example": {
+            "question": "请用 'acquire', 'learn', 'master' 填空：It's easier for children to ______ a language, but it takes great effort to ______ it. Many people try to ______ a second language, but few actually ______ it.",
+            "steps": [
+              "第一空，儿童学习语言通常是自然发生的，所以用 'acquire'。",
+              "第二空，精通一门语言需要大量努力，所以用 'master'。",
+              "第三空，人们尝试学习第二语言，泛指学习，所以用 'learn'。",
+              "第四空，很少有人能达到精通的水平，所以再次用 'master'。"
+            ],
+            "answer": "It's easier for children to acquire a language, but it takes great effort to master it. Many people try to learn a second language, but few actually master it."
+          },
+          "mistakes": [
+            {
+              "wrong": "He mastered English in just one year.",
+              "correct": "He learned English in just one year. / He became proficient in English in just one year.",
+              "reason": "'master' 强调精通，一年内精通一门语言不太现实，除非是天才。通常用 'learn' 或 'become proficient' 更合适。"
+            }
+          ],
+          "memory_tip": "'acquire' 联想“悄悄获得”；'learn' 联想“课堂学习”；'master' 联想“成为大师”。",
+          "related": {
+            "prerequisite": "动词词义辨析基础",
+            "next": "同义词辨析，语境理解"
+          }
+        },
+        {
+          "card_id": "01-12",
+          "full_id": "英语-高二上-01-12",
+          "title": "易混词卡：dialect / accent",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "这两个词都与语言的发音和地域差异有关，但指代的概念不同。",
+          "core_points": [
+            "**dialect [ˈdaɪəlekt] n. 方言**：",
+            "  - 指一种语言在特定地域或社会群体中的变体，它在词汇、语法和发音上都与标准语或其他方言有所不同。",
+            "  - 语境：通常可以被视为一种独立的语言形式，与标准语有显著差异。",
+            "  - 例句：Cantonese is a dialect of Chinese, not just an accent. (粤语是汉语的一种方言，而不仅仅是一种口音。)",
+            "**accent [ˈæksent] n. 口音，腔调**：",
+            "  - 指一个人或一群人在说某种语言时特有的发音方式，主要体现在语音语调上，不涉及词汇和语法的显著变化。",
+            "  - 语境：一个人说同一种语言，但由于地域或母语影响，发音不同。",
+            "  - 例句：She speaks English with a strong French accent. (她讲英语带浓重的法国口音。)"
+          ],
+          "why_explanation": "区别在于差异的层面。'dialect' 涵盖了词汇、语法和语音的全面差异，可以理解为一种“次级语言”；而 'accent' 仅仅指语音上的差异，不改变语言的词汇和语法结构。",
+          "example": {
+            "question": "判断下列句子中应使用 'dialect' 还是 'accent'：1. He speaks English with a Scottish ______. 2. The local ______ is quite different from Mandarin. 3. My grandmother speaks a ______ that is hard for me to understand.",
+            "steps": [
+              "1. 'Scottish' 修饰的是发音方式，所以是 'accent'。",
+              "2. 'local' 与 'Mandarin' 对比，且通常指在词汇、语法上都有差异的语言变体，所以是 'dialect'。",
+              "3. 'hard for me to understand' 暗示了语言差异不仅仅是发音，可能涉及词汇和语法，所以是 'dialect'。"
+            ],
+            "answer": "1. accent 2. dialect 3. dialect"
+          },
+          "mistakes": [
+            {
+              "wrong": "I can't understand his dialect because of his heavy accent.",
+              "correct": "I can't understand his accent because it's too heavy. / I can't understand his dialect because it's so different.",
+              "reason": "'dialect' 指语言本身的不同，'accent' 指发音的不同。不能用 'heavy accent' 来解释 'dialect' 的难以理解，除非这个 'dialect' 只是指其发音特点。"
+            }
+          ],
+          "memory_tip": "'dialect' 是“大不同”（词汇语法都不同），'accent' 是“小不同”（只是发音不同）。",
+          "related": {
+            "prerequisite": "语言学基础概念",
+            "next": "语言变体与社会语言学"
+          }
+        },
+        {
+          "card_id": "01-13",
+          "full_id": "英语-高二上-01-13",
+          "title": "词汇深度卡：influence 的多义与搭配",
+          "type": "词汇深度卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "深入理解 'influence' 作为名词和动词的不同含义及其常见搭配。",
+          "core_points": [
+            "**influence [ˈɪnfluəns] n. 影响；影响力；有影响的人/事**",
+            "  - **含义1：影响，作用 (不可数名词)**：the power to have an effect on people or things.",
+            "    - 例句：His parents had a strong influence on his choice of career.",
+            "  - **含义2：影响力，势力 (可数或不可数名词)**：the power to affect people or events, especially in an indirect or subtle way.",
+            "    - 例句：He has a lot of influence with the local council.",
+            "  - **含义3：有影响力的人/事 (可数名词)**：a person or thing that affects someone or something.",
+            "    - 例句：She was a major influence in his life.",
+            "**常用搭配 (名词)**：",
+            "  - have an influence on / over sth/sb (对…有影响)",
+            "  - under the influence of (在…的影响下)",
+            "  - exert influence (施加影响)",
+            "  - gain influence (获得影响力)",
+            "**influence [ˈɪnfluəns] v. 影响**",
+            "  - **含义：对…产生影响，左右**：to affect or change how someone or something develops, behaves, or thinks.",
+            "  - 例句：His decision was influenced by his family. (他的决定受到了家庭的影响。)",
+            "**常用搭配 (动词)**：",
+            "  - influence sb/sth (影响某人/某事)",
+            "  - greatly/strongly influence (极大地/强烈地影响)",
+            "  - be influenced by (受…影响)"
+          ],
+          "why_explanation": "'influence' 是一个高频词汇，其名词和动词形式均常用，并具有多重含义和丰富的搭配。掌握这些能帮助你更精准地表达“影响”这一概念，避免使用单一词汇。",
+          "example": {
+            "question": "用 'influence' 的不同形式和搭配填空：1. The moon has an ______ on the tides. 2. He was deeply ______ by his mentor. 3. She is a powerful ______ in the fashion industry.",
+            "steps": [
+              "1. 'on the tides' 表明是名词形式，'an' 修饰，所以用名词 'influence'。",
+              "2. 'was deeply' 后接动词过去分词作表语，表示被影响，所以用 'influenced'。",
+              "3. 'a powerful' 修饰人，表示有影响力的人，所以用名词 'influence'。"
+            ],
+            "answer": "1. influence 2. influenced 3. influence"
+          },
+          "mistakes": [
+            {
+              "wrong": "His music affects a lot of people's emotions.",
+              "correct": "His music influences a lot of people's emotions. / His music has a great effect on a lot of people's emotions.",
+              "reason": "'affect' 侧重于产生具体、直接的改变或冲击，而 'influence' 更侧重于潜移默化、持续性的影响。在此语境下 'influence' 更贴切，或用 'effect' 的名词形式。"
+            }
+          ],
+          "memory_tip": "名词 'influence' 像“一股无形的力量”，动词 'influence' 像“施加这股力量”。记住 'on' 或 'over' 常与名词 'influence' 搭配，而动词 'influence' 直接接宾语。",
+          "related": {
+            "prerequisite": "基础词性辨析，动词名词转换",
+            "next": "'effect' 与 'affect' 的辨析"
+          }
+        },
+        {
+          "card_id": "01-14",
+          "full_id": "英语-高二上-01-14",
+          "title": "阅读技巧卡：识别主旨大意",
+          "type": "阅读技巧卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "通过分析文章的结构、主题句和关键词，准确把握文章的核心内容和作者的写作意图。",
+          "core_points": [
+            "**主旨大意定义**：文章或段落的核心思想、作者的主要观点或写作目的。",
+            "**识别方法**：",
+            "  1. **关注标题和副标题**：它们通常直接点明文章主题。",
+            "  2. **定位主题句**：",
+            "     - 通常出现在段落的开头或结尾，概括该段的核心内容。",
+            "     - 有时也会出现在段落中间或需要自己归纳。",
+            "  3. **分析文章结构**：",
+            "     - **总分结构**：开头提出主旨，后面展开论述。",
+            "     - **分总结构**：先列举事实，最后总结主旨。",
+            "     - **总分总结构**：开头提出，中间论述，结尾重申。",
+            "  4. **留意高频词汇和重复概念**：反复出现的词语或概念往往与文章主旨密切相关。",
+            "  5. **关注转折词**：but, however, yet, on the contrary 等词后常引出作者的真正观点。",
+            "  6. **排除干扰项**：",
+            "     - **细节信息**：过于具体，不能代表全文。",
+            "     - **以偏概全**：只涉及文章某一部分，不能涵盖整体。",
+            "     - **无中生有/过度推断**：文章中未提及或超出文章范围。",
+            "     - **混淆概念**：与文章主旨相似但有本质区别。",
+            "**主旨大意题的常见提问方式**：",
+            "  - What is the main idea of the passage?",
+            "  - The passage is mainly about...",
+            "  - Which of the following best summarizes the passage?",
+            "  - The author's primary purpose in writing this passage is to..."
+          ],
+          "why_explanation": "识别主旨大意是阅读理解的基础，它能帮助读者从宏观上把握文章，理解作者的意图，从而更好地理解细节信息和进行推理判断。如果连主旨都抓不住，阅读就失去了方向。",
+          "example": {
+            "question": "阅读以下段落，选择最能概括主旨的选项：'Learning a new language offers numerous benefits. It not only enhances cognitive abilities, such as problem-solving skills and critical thinking, but also opens up new cultural perspectives. Moreover, bilingual individuals often have better job prospects in a globalized world. Therefore, investing time in language acquisition is a truly rewarding endeavor.'",
+            "steps": [
+              "1. 快速浏览段落，找出重复出现的关键词：'new language', 'benefits', 'language acquisition'。",
+              "2. 识别段落开头或结尾的主题句：'Learning a new language offers numerous benefits.' 和 'Therefore, investing time in language acquisition is a truly rewarding endeavor.' 都强调了学习语言的好处。",
+              "3. 综合主题句和关键词，提炼核心思想。",
+              "4. 选项A: Learning a new language improves cognitive abilities. (细节，不全面)",
+              "5. 选项B: Bilingual people have better job prospects. (细节，不全面)",
+              "6. 选项C: The benefits of learning a new language. (全面且准确)",
+              "7. 选项D: How to learn a new language effectively. (与内容不符)"
+            ],
+            "answer": "C. The benefits of learning a new language."
+          },
+          "mistakes": [
+            {
+              "wrong": "将文章中的某个具体例子或论据当作主旨。",
+              "correct": "主旨是概括性的，应能涵盖文章的所有主要内容，而非某个具体细节。",
+              "reason": "细节是支持主旨的，不是主旨本身。主旨应是“一览众山小”的宏观概括。"
+            }
+          ],
+          "memory_tip": "主旨大意是文章的“灵魂”，标题、首尾句是“指路牌”，高频词是“线索”，转折词是“提示”。",
+          "related": {
+            "prerequisite": "基础词汇量，长难句理解",
+            "next": "细节理解，推理判断"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "02",
+      "unit_name": "The World of Laughter",
+      "cards": [
+        {
+          "card_id": "02-01",
+          "full_id": "英语-高二上-02-01",
+          "title": "词汇：幽默与情感表达",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元涉及的关于幽默、喜剧、情感以及描述人物特点的核心词汇。",
+          "core_points": [
+            "humor [ˈhjuːmər] n. 幽默",
+            "amuse [əˈmjuːz] v. 逗乐，使发笑",
+            "entertain [ˌentərˈteɪn] v. 娱乐，使快乐",
+            "laughter [ˈlæftər] n. 笑声",
+            "joke [dʒəʊk] n. 笑话 v. 开玩笑",
+            "comedian [kəˈmiːdiən] n. 喜剧演员",
+            "performance [pərˈfɔːrməns] n. 表演，演出",
+            "audience [ˈɔːdiəns] n. 观众，听众",
+            "clown [klaʊn] n. 小丑",
+            "ridiculous [rɪˈdɪkjələs] adj. 可笑的，荒谬的",
+            "delight [dɪˈlaɪt] n./v. 高兴，愉快",
+            "cheer [tʃɪər] v. 欢呼，喝彩 n. 欢呼声",
+            "stress [stres] n. 压力；重音 v. 强调",
+            "release [rɪˈliːs] v./n. 释放，发布",
+            "emotion [ɪˈməʊʃn] n. 情感，情绪",
+            "embarrass [ɪmˈbærəs] v. 使尴尬",
+            "nervous [ˈnɜːrvəs] adj. 紧张的，不安的",
+            "anxious [ˈæŋkʃəs] adj. 焦虑的，担忧的"
+          ],
+          "why_explanation": "这些词汇是理解幽默的本质、喜剧表演以及人们如何通过笑声表达和处理情绪的基础。掌握它们有助于讨论幽默对生活的影响。",
+          "example": {
+            "question": "请用 'amuse' 和 'laughter' 描述一个有趣的场景。",
+            "steps": [
+              "一个有趣的表演可以'amuse'（逗乐）观众。",
+              "观众会发出'laughter'（笑声）。"
+            ],
+            "answer": "The comedian's jokes greatly amused the audience, and their loud laughter filled the hall."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is a very humor person.",
+              "correct": "He is a very humorous person. / He has a great sense of humor.",
+              "reason": "'humor' 是名词，意为“幽默”，其形容词形式为 'humorous'。或者用 'sense of humor'。"
+            }
+          ],
+          "memory_tip": "'amuse' 联想 'a muse' (一位缪斯女神)，带来乐趣。'ridiculous' 联想 'ridicule' (嘲笑)，引申为可笑的。",
+          "related": {
+            "prerequisite": "描述情感的基础词汇",
+            "next": "分析不同文化背景下的幽默形式"
+          }
+        },
+        {
+          "card_id": "02-02",
+          "full_id": "英语-高二上-02-02",
+          "title": "词汇：形容人物与行为",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元出现的描述人物性格、行为特征以及与幽默相关状态的词汇。",
+          "core_points": [
+            "awkward [ˈɔːkwərd] adj. 尴尬的，笨拙的",
+            "charming [ˈtʃɑːrmɪŋ] adj. 迷人的，有魅力的",
+            "modest [ˈmɒdɪst] adj. 谦虚的",
+            "generous [ˈdʒenərəs] adj. 慷慨的，大方的",
+            "optimistic [ˌɒptɪˈmɪstɪk] adj. 乐观的",
+            "pessimistic [ˌpesɪˈmɪstɪk] adj. 悲观的",
+            "sensitive [ˈsensətɪv] adj. 敏感的",
+            "sensible [ˈsensəbl] adj. 明智的，理智的",
+            "curious [ˈkjʊəriəs] adj. 好奇的",
+            "energetic [ˌenərˈdʒetɪk] adj. 精力充沛的",
+            "patient [ˈpeɪʃnt] adj. 耐心的 n. 病人",
+            "stubborn [ˈstʌbərn] adj. 固执的",
+            "courageous [kəˈreɪdʒəs] adj. 勇敢的",
+            "imaginative [ɪˈmædʒɪnətɪv] adj. 富有想象力的",
+            "creative [kriˈeɪtɪv] adj. 有创造力的",
+            "enthusiastic [ɪnˌθuːziˈæstɪk] adj. 热情的"
+          ],
+          "why_explanation": "这些形容词是描述人物形象和性格的重要工具，有助于分析文本中的角色特点，并能在写作中丰富人物描写。",
+          "example": {
+            "question": "请用 'optimistic' 和 'pessimistic' 描述两种不同的人生态度。",
+            "steps": [
+              "一种人总是看到光明面，是'optimistic'（乐观的）。",
+              "另一种人总是看到黑暗面，是'pessimistic'（悲观的）。"
+            ],
+            "answer": "An optimistic person always looks on the bright side, while a pessimistic person tends to focus on the negative."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is a very sensible person, he always cries easily.",
+              "correct": "He is a very sensitive person, he always cries easily.",
+              "reason": "'sensible' 意为“明智的，理智的”，而“容易哭泣”是敏感的表现，应使用 'sensitive'。"
+            }
+          ],
+          "memory_tip": "'optimistic' 联想 'option' (选择)，选择积极的一面；'pessimistic' 联想 'pass' (通过)，但总是觉得过不去。'sensitive' 联想 'sensor' (传感器)，容易感知；'sensible' 联想 'sense' (理智)，有判断力。",
+          "related": {
+            "prerequisite": "基础形容词，描述人物的基础词汇",
+            "next": "人物心理描写，文本分析"
+          }
+        },
+        {
+          "card_id": "02-03",
+          "full_id": "英语-高二上-02-03",
+          "title": "词汇：短语与固定搭配 (二)",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元出现的与情感、态度、行为相关的常用短语和固定搭配。",
+          "core_points": [
+            "burst into laughter / tears: 突然大笑/大哭",
+            "make fun of: 取笑，嘲弄",
+            "be serious about: 认真对待",
+            "take...for granted: 认为…是理所当然的",
+            "come across: 偶然遇到；给人…印象",
+            "cope with: 处理，应对",
+            "be fed up with: 对…感到厌烦",
+            "lose one's temper: 发脾气",
+            "keep one's word: 守信用",
+            "break one's word: 食言",
+            "be aware of: 意识到",
+            "deal with: 处理，解决",
+            "give up: 放弃",
+            "stand out: 突出，杰出"
+          ],
+          "why_explanation": "这些短语是描述人物行为和情感反应的常用表达，能让你的语言更生动、更地道。它们通常是不可拆分的整体，理解其固定含义很重要。",
+          "example": {
+            "question": "请用 'burst into laughter' 和 'make fun of' 描述一个场景。",
+            "steps": [
+              "一个人被取笑（make fun of）了。",
+              "另一个人因此突然大笑（burst into laughter）。"
+            ],
+            "answer": "When she saw him stumble, she couldn't help but burst into laughter, even though it was wrong to make fun of him."
+          },
+          "mistakes": [
+            {
+              "wrong": "He burst into crying.",
+              "correct": "He burst into tears. / He burst out crying.",
+              "reason": "'burst into' 后接名词 'laughter' 或 'tears'。如果接动词，通常是 'burst out doing sth'。"
+            }
+          ],
+          "memory_tip": "'burst into' 像“突然冲进”，后面是结果（笑声或眼泪）。'make fun of' 联想“制造乐趣在别人身上”，即取笑。",
+          "related": {
+            "prerequisite": "动词短语基础，介词搭配",
+            "next": "情感描写的写作技巧"
+          }
+        },
+        {
+          "card_id": "02-04",
+          "full_id": "英语-高二上-02-04",
+          "title": "语法：非限制性定语从句",
+          "type": "从句进阶卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "对先行词进行补充说明，与先行词之间用逗号隔开，即使省略也不会影响主句的完整性，只是信息有所减少。",
+          "core_points": [
+            "**引导词**：which, who, whom, whose, when, where。",
+            "**特点**：",
+            "  - **逗号分隔**：非限制性定语从句总是用逗号与主句隔开。",
+            "  - **不能用that**：不能用 'that' 引导非限制性定语从句。",
+            "  - **不能省略引导词**：即使引导词在从句中作宾语也不能省略。",
+            "  - **先行词**：可以是名词、代词，也可以是整个句子。",
+            "**引导词的选择**：",
+            "  - **which**：指代事物或整个主句，在从句中作主语或宾语。",
+            "    - e.g., He failed the exam, which made his parents sad. (which 指代前句)",
+            "  - **who/whom**：指代人，who 作主语，whom 作宾语。",
+            "    - e.g., My brother, who lives in London, is a doctor.",
+            "  - **whose**：指代人或物，作定语，表示“……的”。",
+            "    - e.g., I have a friend, whose father is a famous writer.",
+            "  - **when**：指代时间，在从句中作时间状语。",
+            "    - e.g., I'll never forget the day, when we first met.",
+            "  - **where**：指代地点，在从句中作地点状语。",
+            "    - e.g., We went to Beijing, where my uncle lives.",
+            "**肯定句**：He gave me a book, which was very interesting.",
+            "**否定句**：He gave me a book, which was not very interesting.",
+            "**疑问句**：He gave me a book, which was very interesting, wasn't it?"
+          ],
+          "why_explanation": "非限制性定语从句提供额外信息，其作用类似于插入语，使句子更丰富但不会改变核心意义。它强调了信息的补充性，与限制性定语从句的“限定”作用形成对比。",
+          "example": {
+            "question": "将 'My hometown is a small village. It is famous for its beautiful scenery.' 合并成一个包含非限制性定语从句的句子。",
+            "steps": [
+              "识别共同部分 'a small village' 和 'It'。",
+              "由于是对 'a small village' 进行补充说明，且 'it' 指代村庄，所以用 'which' 引导。",
+              "用逗号将从句与主句隔开，'which' 在从句中作主语。"
+            ],
+            "answer": "My hometown is a small village, which is famous for its beautiful scenery."
+          },
+          "mistakes": [
+            {
+              "wrong": "This is my brother, that works in a bank.",
+              "correct": "This is my brother, who works in a bank.",
+              "reason": "非限制性定语从句不能用 'that' 引导。"
+            },
+            {
+              "wrong": "I visited London, where I met my old friend there.",
+              "correct": "I visited London, where I met my old friend.",
+              "reason": "'where' 在从句中作地点状语，相当于 'in which' 或 'in the place where'，所以从句中不能再出现 'there' 等地点副词。"
+            }
+          ],
+          "memory_tip": "非限制性定语从句是“逗号从句”，不能用 'that'，不能省略引导词。它像一个“小八卦”，不影响主句的“大事实”。",
+          "related": {
+            "prerequisite": "限制性定语从句，标点符号用法",
+            "next": "名词性从句，状语从句"
+          }
+        },
+        {
+          "card_id": "02-05",
+          "full_id": "英语-高二上-02-05",
+          "title": "语法：让步状语从句",
+          "type": "从句进阶卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "表示主句中发生的行为或状态与从句中提到的条件形成对比或出乎意料，常用 'although, though, even though, even if, while, as, no matter what/who/how' 等引导。",
+          "core_points": [
+            "**引导词及用法**：",
+            "  - **although / though / even though**：尽管，虽然。它们通常不能与 'but' 连用。",
+            "    - e.g., Although it was raining, we went out for a walk.",
+            "  - **even if**：即使，纵然。表示与事实相反的假设或不太可能的情况。",
+            "    - e.g., Even if he apologizes, I won't forgive him.",
+            "  - **while**：虽然，尽管。常用于表示对比或转折，通常放句首。",
+            "    - e.g., While I understand your point, I don't agree.",
+            "  - **as** (倒装)：尽管。常与形容词、副词、名词、动词原形等一起构成倒装句。",
+            "    - e.g., Rich as he is, he is not happy. (形容词 + as + 主语 + 谓语)",
+            "    - e.g., Child as he is, he knows a lot. (名词 + as + 主语 + 谓语)",
+            "  - **no matter what/who/how (等)**：无论什么/谁/怎样。相当于 'whatever/whoever/however' 等。",
+            "    - e.g., No matter how hard it is, I will try my best.",
+            "**注意事项**：",
+            "  - **'though' 可作副词**：放在句末，表示“不过，然而”。(e.g., It's tough, though.)",
+            "  - **'but' 与让步状语从句**：'though/although/even though' 不能与 'but' 连用，但可以与 'yet' 连用 (较正式)。",
+            "**肯定句**：Although he was tired, he kept working.",
+            "**否定句**：Although he was not tired, he still took a rest."
+          ],
+          "why_explanation": "让步状语从句表达了“尽管有A情况，但B情况仍然发生”的逻辑，强调了主句内容的意外性或不受从句条件影响。掌握不同引导词的细微差别，能使表达更精确。",
+          "example": {
+            "question": "将 'He is poor. He is happy.' 合并成一个让步状语从句的句子。",
+            "steps": [
+              "识别两句话的对比关系：贫穷但快乐。",
+              "选择引导词 'although'。",
+              "将 'He is poor' 作为从句，'He is happy' 作为主句。"
+            ],
+            "answer": "Although he is poor, he is happy."
+          },
+          "mistakes": [
+            {
+              "wrong": "Although he is rich, but he is not happy.",
+              "correct": "Although he is rich, he is not happy. / He is rich, but he is not happy.",
+              "reason": "'although' 和 'but' 不能在同一个句子中同时使用来表示转折。"
+            },
+            {
+              "wrong": "Hard as he worked, he failed.",
+              "correct": "Hard as he worked, he failed. (此句正确)",
+              "reason": "这是 'as' 引导的让步状语从句的倒装结构，形容词 'hard' 提前。"
+            }
+          ],
+          "memory_tip": "让步从句是“虽然…但是不连用”。'as' 倒装是“把形容词/名词/动词原形提前”。'no matter' 系列是“无论如何”。",
+          "related": {
+            "prerequisite": "复合句基础，连词用法",
+            "next": "条件状语从句，目的状语从句"
+          }
+        },
+        {
+          "card_id": "02-06",
+          "full_id": "英语-高二上-02-06",
+          "title": "语法：条件状语从句进阶",
+          "type": "从句进阶卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "表示主句动作发生的条件，除了 'if' 之外，还有 'unless, as long as, so long as, provided (that), supposing (that), on condition that, in case' 等引导词。",
+          "core_points": [
+            "**引导词及用法**：",
+            "  - **unless**：除非，如果不。相当于 'if...not...'。",
+            "    - e.g., You won't succeed unless you work hard. (= You won't succeed if you don't work hard.)",
+            "  - **as long as / so long as**：只要。强调条件是时间或程度。",
+            "    - e.g., You can use my car as long as you drive carefully.",
+            "  - **provided (that) / providing (that)**：假如，如果。常用于正式语体。",
+            "    - e.g., Provided that it doesn't rain, we'll go for a picnic.",
+            "  - **supposing (that) / suppose (that)**：假设，如果。常用于提出假设。",
+            "    - e.g., Supposing you win the lottery, what would you do?",
+            "  - **on condition that**：条件是，以…为条件。",
+            "    - e.g., I'll lend you the money on condition that you pay me back next month.",
+            "  - **in case**：以防，万一。从句内容是预防措施。",
+            "    - e.g., Take an umbrella in case it rains.",
+            "**主将从现**：在条件状语从句中，如果主句是将来时，从句通常用一般现在时态表示将来。",
+            "  - e.g., If it rains tomorrow, we will stay at home.",
+            "**虚拟语气**：条件状语从句也可以用于虚拟语气，表示与事实相反的假设 (见后续虚拟语气卡片)。",
+            "**肯定句**：If you study hard, you will pass the exam.",
+            "**否定句**：Unless you study hard, you will not pass the exam."
+          ],
+          "why_explanation": "多样化的条件状语从句引导词能更精确地表达不同类型的条件，如排他性条件 ('unless')、充分条件 ('as long as')、或预防性条件 ('in case')。掌握这些能让你的表达更具 nuance。",
+          "example": {
+            "question": "将 'You must work hard. Otherwise, you will fail.' 合并成一个包含 'unless' 的句子。",
+            "steps": [
+              "识别 'Otherwise' 表示如果不努力就会失败，符合 'unless' 的含义。",
+              "将 'You must work hard' 转换为 'unless' 引导的从句。",
+              "主句是 'you will fail'。"
+            ],
+            "answer": "You will fail unless you work hard."
+          },
+          "mistakes": [
+            {
+              "wrong": "If it will rain tomorrow, we'll stay at home.",
+              "correct": "If it rains tomorrow, we'll stay at home.",
+              "reason": "在时间状语从句和条件状语从句中，主句用将来时，从句用一般现在时表示将来，即“主将从现”原则。"
+            },
+            {
+              "wrong": "You can go out, unless you finish your homework first.",
+              "correct": "You can go out, as long as you finish your homework first. / You can't go out unless you finish your homework first.",
+              "reason": "'unless' 意为“除非”，表示否定条件，所以原句的逻辑不通。如果想表达“只要...就...”，应使用 'as long as'。"
+            }
+          ],
+          "memory_tip": "'unless' 是 'if not' 的缩写，记住“除非你…否则不…”。'as long as' 是“只要…就…”，'in case' 是“万一…（所以要提前做）”。",
+          "related": {
+            "prerequisite": "一般现在时，一般将来时，复合句基础",
+            "next": "虚拟语气，高级写作中的逻辑连接"
+          }
+        },
+        {
+          "card_id": "02-07",
+          "full_id": "英语-高二上-02-07",
+          "title": "语法：目的状语从句",
+          "type": "从句进阶卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "表示主句动作的目的，常用 'so that, in order that, in case, for fear that, lest' 等引导，从句中常包含情态动词 'can, may, should, might, would'。",
+          "core_points": [
+            "**引导词及用法**：",
+            "  - **so that / in order that**：为了，以便。最常见的引导词，从句中常接 'can/could, may/might, will/would, should'。",
+            "    - e.g., He worked hard so that he could buy a house.",
+            "    - e.g., She spoke slowly in order that everyone might understand her.",
+            "  - **in case**：以防，万一。表示提前采取措施以避免某种情况发生。 (也可作条件状语从句，表示预防性条件)",
+            "    - e.g., Take some money with you in case you need it.",
+            "  - **for fear that / lest**：唯恐，以免。语气较强，表示担心某种不好的情况发生而采取预防措施。从句中常接 'should + 动词原形' 或直接用动词原形 (虚拟语气)。",
+            "    - e.g., He hurried on for fear that he should be late. / He hurried on lest he be late.",
+            "**非谓语动词表示目的**：",
+            "  - **to do**：最简单的表示目的的方法。",
+            "    - e.g., He studies hard to pass the exam.",
+            "  - **in order to do / so as to do**：为了… (更正式，常用于句首或句中)。",
+            "    - e.g., In order to pass the exam, he studied hard.",
+            "**肯定句**：He studies hard so that he can get a good grade.",
+            "**否定句**：He studies hard so that he will not fail the exam."
+          ],
+          "why_explanation": "目的状语从句明确地解释了主句动作的原因，使逻辑链条清晰。理解不同引导词的细微差别和语气强度，能让表达更丰富和准确。",
+          "example": {
+            "question": "将 'She lowered her voice. No one would hear her.' 合并成一个目的状语从句的句子。",
+            "steps": [
+              "识别主句动作 'lowered her voice' 的目的，是为了 'no one would hear her'。",
+              "选择引导词 'so that'。",
+              "将 'no one would hear her' 作为从句，保持 'would' 表示目的。"
+            ],
+            "answer": "She lowered her voice so that no one would hear her."
+          },
+          "mistakes": [
+            {
+              "wrong": "He took an umbrella lest it rained.",
+              "correct": "He took an umbrella lest it should rain. / He took an umbrella lest it rain.",
+              "reason": "'lest' 引导的目的状语从句中，谓语动词常用虚拟语气，即 'should + 动词原形' 或直接用动词原形。"
+            }
+          ],
+          "memory_tip": "'so that' 是“为了”最常用的，'in case' 是“以防万一”，'lest' 是“唯恐”语气强。",
+          "related": {
+            "prerequisite": "复合句基础，情态动词用法",
+            "next": "写作中连接词的灵活运用"
+          }
+        },
+        {
+          "card_id": "02-08",
+          "full_id": "英语-高二上-02-08",
+          "title": "句型卡：描述情感与反应",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元涉及的用于描述人物情感、心理状态以及对事件的反应的常用句型。",
+          "core_points": [
+            "**表达感到…**：",
+            "  - Sb feels/is + adj. (e.g., He feels anxious. She is delighted.)",
+            "  - Sb feels/is + V-ed (e.g., I'm embarrassed. They are amused.)",
+            "  - Sb feels like doing sth. (e.g., I feel like laughing.)",
+            "**表达使人感到…**：",
+            "  - Sth is + V-ing (e.g., The joke is amusing. The situation is embarrassing.)",
+            "  - Sth makes sb + adj./V-ed (e.g., The news made him sad. The story made her interested.)",
+            "**表达对…的反应**：",
+            "  - Sb burst into laughter/tears. (突然大笑/大哭)",
+            "  - Sb couldn't help but do sth. (情不自禁做某事)",
+            "  - Sb can't help doing sth. (禁不住做某事)",
+            "  - Sb was so...that... (如此…以至于…)",
+            "  - Sb reacted to sth by doing sth. (通过做某事对…作出反应)",
+            "**模板句**：",
+            "  - The unexpected twist in the story made the audience burst into laughter.",
+            "  - She was so nervous that she couldn't say a word.",
+            "  - He couldn't help feeling a little awkward in front of so many people."
+          ],
+          "why_explanation": "掌握这些句型能让你在描述人物情感和反应时更生动、更准确，避免单一的表达方式，提升写作和口语的表现力。",
+          "example": {
+            "question": "将 'The situation was very funny. Everyone laughed.' 改写为使用 'so...that...' 句型和 'burst into laughter' 的句子。",
+            "steps": [
+              "将 'very funny' 转换为 'so funny'。",
+              "连接 'that' 从句 'everyone burst into laughter'。"
+            ],
+            "answer": "The situation was so funny that everyone burst into laughter."
+          },
+          "mistakes": [
+            {
+              "wrong": "The movie was bored.",
+              "correct": "The movie was boring. (电影令人感到无聊) / I was bored by the movie. (我感到无聊)",
+              "reason": "形容词 '-ing' 形式表示“令人感到…的”，'-ed' 形式表示“感到…的”。电影是“令人无聊的”，所以用 'boring'。"
+            }
+          ],
+          "memory_tip": "记住 '-ing' 是“令人…”，'-ed' 是“感到…”。'burst into' 是突然爆发，'so...that...' 是因果关系。",
+          "related": {
+            "prerequisite": "形容词、动名词作表语，基础情态动词",
+            "next": "人物心理描写，高级写作技巧"
+          }
+        },
+        {
+          "card_id": "02-09",
+          "full_id": "英语-高二上-02-09",
+          "title": "易混词卡：sensitive / sensible",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "这两个词形近义异，都与“感觉”或“判断”有关，但含义截然不同。",
+          "core_points": [
+            "**sensitive [ˈsensətɪv] adj. 敏感的；易受影响的；体贴的**：",
+            "  - 含义1：容易受到外部刺激或情感影响的。",
+            "    - 例句：She is very sensitive to criticism. (她对批评很敏感。)",
+            "  - 含义2：体贴的，善解人意的，能察觉他人感受的。",
+            "    - 例句：He is a sensitive and caring person. (他是一个体贴关怀的人。)",
+            "  - 含义3：灵敏的 (仪器等)。",
+            "    - 例句：This equipment is highly sensitive to light. (这个设备对光线高度灵敏。)",
+            "**sensible [ˈsensəbl] adj. 明智的；理智的；合情合理的**：",
+            "  - 含义：基于良好的判断力或常识的；有道理的。",
+            "    - 例句：It was a sensible decision to save money. (存钱是个明智的决定。)",
+            "  - 搭配：make a sensible choice/decision/suggestion。",
+            "  - 例句：She is a very sensible person, always thinking things through. (她是个很理智的人，总是深思熟虑。)"
+          ],
+          "why_explanation": "'sensitive' 强调的是“感受能力”或“易受影响”，可以是生理上的，也可以是心理上的。而 'sensible' 强调的是“判断能力”或“理智”，与智慧和常识有关。两者不能混淆使用。",
+          "example": {
+            "question": "请用 'sensitive' 和 'sensible' 填空：1. He is too ______ to wear a coat in cold weather. 2. You should make a ______ choice about your future career. 3. My skin is very ______ to sunlight.",
+            "steps": [
+              "1. 'too...to wear a coat' 表明是对寒冷天气“敏感”或“不耐受”，所以用 'sensitive'。",
+              "2. 'choice about your future career' 需要“明智的”判断，所以用 'sensible'。",
+              "3. 'skin...to sunlight' 表明皮肤对阳光“敏感”，所以用 'sensitive'。"
+            ],
+            "answer": "1. sensitive 2. sensible 3. sensitive"
+          },
+          "mistakes": [
+            {
+              "wrong": "It was a sensitive idea to go out in the rain.",
+              "correct": "It was not a sensible idea to go out in the rain. / It was a foolish idea to go out in the rain.",
+              "reason": "在雨中出去不是“敏感的”主意，而是“不明智的”主意，应使用 'sensible' 的反义词或否定形式。"
+            }
+          ],
+          "memory_tip": "'sensitive' 联想 'sensor' (传感器)，容易感知。'sensible' 联想 'sense' (常识，理智)，有常识的。",
+          "related": {
+            "prerequisite": "形容词词义辨析",
+            "next": "近义词辨析，语境理解"
+          }
+        },
+        {
+          "card_id": "02-10",
+          "full_id": "英语-高二上-02-10",
+          "title": "词汇深度卡：stress 的多义与搭配",
+          "type": "词汇深度卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "深入理解 'stress' 作为名词和动词的不同含义及其常见搭配。",
+          "core_points": [
+            "**stress [stres] n. 压力；重音；强调**",
+            "  - **含义1：压力，精神紧张 (不可数名词)**：a state of mental or emotional strain or tension resulting from adverse or demanding circumstances.",
+            "    - 例句：He's been under a lot of stress lately. (他最近压力很大。)",
+            "  - **含义2：重音 (可数名词)**：the emphasis given to a particular syllable or word in speech.",
+            "    - 例句：The stress is on the first syllable of 'beautiful'. ('beautiful' 的重音在第一个音节。)",
+            "  - **含义3：强调，重要性 (不可数名词)**：special importance, value, or emphasis given to something.",
+            "    - 例句：The report lays stress on the need for reform. (报告强调了改革的必要性。)",
+            "**常用搭配 (名词)**：",
+            "  - suffer from stress (承受压力)",
+            "  - relieve stress (缓解压力)",
+            "  - put/lay stress on (强调)",
+            "  - manage stress (管理压力)",
+            "**stress [stres] v. 强调；重读；使紧张**",
+            "  - **含义1：强调，着重**：to give particular importance or attention to something.",
+            "    - 例句：He stressed the importance of teamwork. (他强调了团队合作的重要性。)",
+            "  - **含义2：重读**：to pronounce a syllable or word with greater emphasis.",
+            "    - 例句：In 'present', we stress the first syllable for the noun and the second for the verb.",
+            "  - **含义3：使紧张，使有压力**：to make someone feel anxious or worried.",
+            "    - 例句：The exam really stressed me out. (考试真的让我压力很大。)",
+            "**常用搭配 (动词)**：",
+            "  - stress the fact that... (强调…这一事实)",
+            "  - be stressed out (感到压力很大)"
+          ],
+          "why_explanation": "'stress' 是一个多义词，其核心概念是“强调”或“施加压力”。理解其在不同语境下的具体含义以及词性转换，对于准确理解和使用该词至关重要。",
+          "example": {
+            "question": "用 'stress' 的不同形式和搭配填空：1. The teacher ______ the main points of the lesson. 2. Many students are under great ______ before exams. 3. In the word 'record', the ______ is on the first syllable when it's a noun.",
+            "steps": [
+              "1. 老师对重点进行“强调”，所以用动词 'stressed'。",
+              "2. 考试前学生承受“压力”，所以用名词 'stress'。",
+              "3. 'record' 作为名词时“重音”在第一音节，所以用名词 'stress'。"
+            ],
+            "answer": "1. stressed 2. stress 3. stress"
+          },
+          "mistakes": [
+            {
+              "wrong": "He is very stress about his work.",
+              "correct": "He is very stressed about his work. / He is under a lot of stress about his work.",
+              "reason": "'stress' 作名词时不能直接作表语形容词。形容词形式是 'stressed' (感到有压力的) 或用介词短语 'under stress'。"
+            }
+          ],
+          "memory_tip": "'stress' 像“重力”，可以是心理重压，也可以是发音重音，还可以是强调重点。动词就是“施加重力”。",
+          "related": {
+            "prerequisite": "基础词性辨析，多义词概念",
+            "next": "同义词辨析，语境理解"
+          }
+        },
+        {
+          "card_id": "02-11",
+          "full_id": "英语-高二上-02-11",
+          "title": "写作进阶卡：幽默描写与情感渲染",
+          "type": "写作进阶卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "学习如何在写作中运用幽默元素，以及如何有效地渲染人物情感，使文章更生动有趣。",
+          "core_points": [
+            "**幽默描写技巧**：",
+            "  1. **夸张 (Exaggeration)**：通过夸大事实来制造喜剧效果。",
+            "     - e.g., He was so hungry he could eat a horse.",
+            "  2. **讽刺 (Irony)**：言语的表面意义与实际意义相反，或事件发展与预期相反。",
+            "     - e.g., A fire station burning down.",
+            "  3. **双关语 (Puns)**：利用词语的多义性或同音异义词来制造幽默。",
+            "     - e.g., Why did the bicycle fall over? Because it was two tired! (two tired / too tired)",
+            "  4. **意外转折 (Surprise/Twist)**：故事发展出乎意料，引人发笑。",
+            "  5. **对比 (Contrast)**：将不协调或矛盾的事物并置，产生滑稽感。",
+            "  6. **人物行为滑稽化**：描写人物笨拙、尴尬或不合时宜的行为。",
+            "**情感渲染技巧**：",
+            "  1. **细节描写 (Sensory Details)**：通过视觉、听觉、嗅觉、味觉、触觉等细节描写，让读者身临其境感受情感。",
+            "     - e.g., His hands trembled, and his voice cracked, betraying the fear he tried to hide.",
+            "  2. **比喻和象征 (Metaphors & Similes)**：用形象的比喻来表达抽象的情感。",
+            "     - e.g., Her anger was a roaring fire, consuming everything in its path.",
+            "  3. **内心独白 (Inner Monologue)**：直接展现人物的内心思想和感受。",
+            "     - e.g., 'This can't be happening,' she thought, 'not again.'",
+            "  4. **环境烘托 (Setting/Atmosphere)**：通过环境描写来衬托人物情感。",
+            "     - e.g., The grey, drizzling rain mirrored the sadness in her heart.",
+            "  5. **动作和表情描写 (Actions & Expressions)**：通过人物的肢体语言和面部表情来展现情感。",
+            "     - e.g., A faint smile touched her lips, a glimmer of hope in her weary eyes."
+          ],
+          "why_explanation": "幽默和情感是文学作品吸引读者的重要元素。掌握这些描写技巧，能让你的文章更富有感染力、更生动，提升读者的阅读体验。",
+          "example": {
+            "question": "尝试用夸张手法描述一个极度疲惫的人，并用细节描写渲染他的疲惫。",
+            "steps": [
+              "选择一个夸张的说法来形容疲惫，比如“累得像一摊泥”。",
+              "添加细节，如身体姿态、面部表情、行动迟缓等。"
+            ],
+            "answer": "He was so exhausted that he felt like a puddle on the floor, his eyelids heavy as lead, and every step he took was a monumental effort, as if dragging an invisible weight."
+          },
+          "mistakes": [
+            {
+              "wrong": "直接告诉读者“他很伤心”而没有具体描写。",
+              "correct": "他的眼眶湿润，低垂着头，肩膀微微颤抖，仿佛整个世界都失去了色彩。",
+              "reason": "写作中应“展示”而非“告知”情感。直接告知过于平淡，缺乏感染力。通过细节描写，让读者自己感受人物的情感。"
+            }
+          ],
+          "memory_tip": "幽默是“意外的火花”，情感是“细节的共鸣”。记住“夸张、讽刺、双关”是幽默三宝，“细节、比喻、内心”是情感三剑客。",
+          "related": {
+            "prerequisite": "基础写作，修辞手法",
+            "next": "文学赏析，高级议论文写作"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "03",
+      "unit_name": "The Million Pound Bank Note",
+      "cards": [
+        {
+          "card_id": "03-01",
+          "full_id": "英语-高二上-03-01",
+          "title": "词汇：金钱与财富",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元涉及的关于金钱、财富、贫穷以及经济状况的核心词汇。",
+          "core_points": [
+            "note [nəʊt] n. 纸币；笔记；便条",
+            "banknote [ˈbæŋknəʊt] n. 钞票，纸币",
+            "currency [ˈkʌrənsi] n. 货币，通货",
+            "fortune [ˈfɔːrtʃuːn] n. 财富；运气",
+            "wealth [welθ] n. 财富，财产",
+            "property [ˈprɒpərti] n. 财产，房地产",
+            "valuable [ˈvæljuəbl] adj. 贵重的，有价值的",
+            "worthless [ˈwɜːrθləs] adj. 没有价值的，无用的",
+            "afford [əˈfɔːrd] v. 买得起，负担得起",
+            "poor [pʊr] adj. 贫穷的",
+            "rich [rɪtʃ] adj. 富有的",
+            "beggar [ˈbeɡər] n. 乞丐",
+            "loan [ləʊn] n./v. 贷款，借款",
+            "debt [det] n. 债务",
+            "income [ˈɪnkʌm] n. 收入",
+            "expenditure [ɪkˈspendɪtʃər] n. 开支，花费",
+            "invest [ɪnˈvest] v. 投资",
+            "profit [ˈprɒfɪt] n. 利润 v. 获益",
+            "lose [luːz] v. 失去，亏损"
+          ],
+          "why_explanation": "这些词汇是理解故事中主人公所面临的经济困境、社会阶层差异以及金钱观念的基础。掌握它们有助于分析故事主题。",
+          "example": {
+            "question": "请用 'afford' 和 'loan' 描述一个经济困难的人如何解决问题。",
+            "steps": [
+              "一个人可能因为买不起（afford）某物而遇到经济困难。",
+              "他可能需要寻求贷款（loan）来解决问题。"
+            ],
+            "answer": "He couldn't afford a new car, so he had to take out a loan from the bank."
+          },
+          "mistakes": [
+            {
+              "wrong": "I can't afford to buy that expensive car.",
+              "correct": "I can't afford to buy that expensive car. (此句正确)",
+              "reason": "'afford' 后接不定式 'to do sth'，表示“负担得起做某事”，或直接接名词 'afford sth'。"
+            }
+          ],
+          "memory_tip": "'afford' 联想 'a ford' (一辆福特汽车)，买得起车。'debt' 记住 'b' 不发音，像被“禁声”的债务。",
+          "related": {
+            "prerequisite": "基础经济词汇",
+            "next": "金融概念，社会经济问题"
+          }
+        },
+        {
+          "card_id": "03-02",
+          "full_id": "英语-高二上-03-02",
+          "title": "词汇：小说情节与人物",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元涉及的与小说情节发展、人物性格以及故事背景相关的核心词汇。",
+          "core_points": [
+            "plot [plɒt] n. 情节；阴谋 v. 密谋",
+            "character [ˈkærəktər] n. 人物；性格；文字",
+            "protagonist [prəˈtæɡənɪst] n. 主人公",
+            "setting [ˈsetɪŋ] n. 背景，环境",
+            "theme [θiːm] n. 主题",
+            "narrate [nəˈreɪt] v. 叙述，讲述",
+            "narrator [nəˈreɪtər] n. 叙述者",
+            "twist [twɪst] n. 转折，扭曲 v. 扭转",
+            "suspense [səˈspens] n. 悬念，悬念感",
+            "dramatic [drəˈmætɪk] adj. 戏剧性的，引人注目的",
+            "irony [ˈaɪrəni] n. 讽刺",
+            "predict [prɪˈdɪkt] v. 预测",
+            "consequence [ˈkɒnsɪkwens] n. 结果，后果",
+            "gentleman [ˈdʒentlmən] n. 绅士",
+            "lady [ˈleɪdi] n. 女士",
+            "respect [rɪˈspekt] n./v. 尊敬，尊重",
+            "humiliate [hjuːˈmɪlieɪt] v. 羞辱"
+          ],
+          "why_explanation": "这些词汇是分析小说《百万英镑》的故事情节、人物塑造和主题思想的工具。掌握它们有助于深入理解文学作品。",
+          "example": {
+            "question": "请用 'plot' 和 'twist' 描述一个引人入胜的故事。",
+            "steps": [
+              "一个引人入胜的故事应该有吸引人的'plot'（情节）。",
+              "其中应该包含'twist'（意想不到的转折）。"
+            ],
+            "answer": "The novel had an exciting plot with an unexpected twist at the end that kept readers on the edge of their seats."
+          },
+          "mistakes": [
+            {
+              "wrong": "The story has a good character.",
+              "correct": "The story has good characters. / The main character in the story is good.",
+              "reason": "'character' 作“人物”讲时，通常指多个角色或特指某个主要角色。如果指“性格”，则为不可数名词。"
+            }
+          ],
+          "memory_tip": "'protagonist' 联想 'pro' (前，主要) + 'agonist' (行动者)，即主要行动者。'suspense' 联想 'suspend' (悬挂)，心被悬起来。",
+          "related": {
+            "prerequisite": "文学体裁基础知识",
+            "next": "文学评论，写作中的叙事技巧"
+          }
+        },
+        {
+          "card_id": "03-03",
+          "full_id": "英语-高二上-03-03",
+          "title": "词汇：短语与固定搭配 (三)",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元出现的与小说故事情节、人物互动以及日常表达相关的常用短语和固定搭配。",
+          "core_points": [
+            "be familiar with: 熟悉",
+            "be (un)aware of: (不)意识到",
+            "make a fortune: 发财",
+            "come into being: 形成，产生",
+            "run out of: 用完，耗尽",
+            "take risks: 冒险",
+            "pay attention to: 注意",
+            "live on: 靠…生活",
+            "look down upon: 看不起",
+            "look up to: 尊敬",
+            "be ashamed of: 为…感到羞愧",
+            "be proud of: 为…感到骄傲",
+            "in fact: 事实上",
+            "on the contrary: 相反地",
+            "by chance: 偶然地"
+          ],
+          "why_explanation": "这些短语在小说叙事和人物对话中频繁出现，掌握它们有助于准确理解文本含义，并能在自己的表达中增加地道性。",
+          "example": {
+            "question": "请用 'make a fortune' 和 'run out of' 描述一个人的经济状况转变。",
+            "steps": [
+              "一个人可能通过某种方式发了财（make a fortune）。",
+              "但如果管理不善，也可能耗尽（run out of）财富。"
+            ],
+            "answer": "He made a fortune in the stock market, but he ran out of money quickly due to poor investments."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is familiar to the city.",
+              "correct": "He is familiar with the city. / The city is familiar to him.",
+              "reason": "'be familiar with sth' 表示“熟悉某事”，'sth is familiar to sb' 表示“某事对某人来说是熟悉的”。"
+            }
+          ],
+          "memory_tip": "'make a fortune' 联想“制造一笔财富”。'run out of' 联想“跑出去，没有了”。",
+          "related": {
+            "prerequisite": "动词短语基础，介词搭配",
+            "next": "情景对话，写作中的短语运用"
+          }
+        },
+        {
+          "card_id": "03-04",
+          "full_id": "英语-高二上-03-04",
+          "title": "语法：虚拟语气 (在条件句中)",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "虚拟语气用于表达与事实相反、不可能或难以实现的假设，或表达建议、命令、要求等。",
+          "core_points": [
+            "**与现在事实相反的假设**：",
+            "  - **If 从句**：If + 主语 + 动词过去式 (be动词用were)",
+            "  - **主句**：主语 + would/could/should/might + 动词原形",
+            "  - 例句：If I were you, I would accept the offer. (如果我是你，我会接受那个提议。)",
+            "**与过去事实相反的假设**：",
+            "  - **If 从句**：If + 主语 + had + 过去分词",
+            "  - **主句**：主语 + would/could/should/might + have + 过去分词",
+            "  - 例句：If he had studied harder, he would have passed the exam. (如果他当时更努力，他就会通过考试。)",
+            "**与将来事实相反的假设** (或表示可能性很小)：",
+            "  - **If 从句**：If + 主语 + should do / were to do / 动词过去式 (be动词用were)",
+            "  - **主句**：主语 + would/could/should/might + 动词原形",
+            "  - 例句：If it should rain tomorrow, the picnic would be cancelled. (如果明天会下雨，野餐就会取消。)",
+            "**混合条件句**：主句和从句的时间不一致。",
+            "  - 例句：If you had listened to me, you would not be in trouble now. (从句与过去事实相反，主句与现在事实相反)",
+            "**省略 If 的条件句** (倒装)：",
+            "  - 将 'were, had, should' 提前，省略 'If'。",
+            "  - 例句：Were I you, I would accept the offer. (= If I were you...)",
+            "  - 例句：Had he studied harder, he would have passed the exam. (= If he had studied harder...)",
+            "**肯定句**：If I had time, I would help you.",
+            "**否定句**：If I didn't have time, I wouldn't help you.",
+            "**疑问句**：If you had time, would you help me?"
+          ],
+          "why_explanation": "虚拟语气是英语表达假设、愿望和非现实情况的重要手段。它通过改变动词形式来传达说话者对事件真实性的判断，区分了事实和假设。",
+          "example": {
+            "question": "将 'He didn't take my advice, so he failed.' 改写为与过去事实相反的虚拟语气条件句。",
+            "steps": [
+              "识别原句是过去发生的事实，要表达相反的假设。",
+              "If 从句用 'had + 过去分词'：If he had taken my advice...",
+              "主句用 'would/could/should/might + have + 过去分词'：...he would not have failed."
+            ],
+            "answer": "If he had taken my advice, he would not have failed."
+          },
+          "mistakes": [
+            {
+              "wrong": "If I was you, I would go.",
+              "correct": "If I were you, I would go.",
+              "reason": "在与现在事实相反的虚拟语气条件句中，be 动词无论主语是单数还是复数，一律用 'were'。"
+            },
+            {
+              "wrong": "If I had time, I will help you.",
+              "correct": "If I had time, I would help you.",
+              "reason": "与现在事实相反的虚拟语气主句中，情态动词要用过去式形式 (would/could/should/might)。"
+            }
+          ],
+          "memory_tip": "虚拟语气是“反着说”，现在反说过去式，过去反说过去完成时。'If I were you' 是金句。",
+          "related": {
+            "prerequisite": "各种时态，情态动词",
+            "next": "虚拟语气在名词性从句中的应用"
+          }
+        },
+        {
+          "card_id": "03-05",
+          "full_id": "英语-高二上-03-05",
+          "title": "语法：虚拟语气 (在名词性从句中)",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "虚拟语气在宾语从句、表语从句、主语从句和同位语从句中，常用于表达建议、命令、要求、坚持、愿望等。",
+          "core_points": [
+            "**宾语从句中的虚拟语气**：",
+            "  - **动词**：suggest, advise, demand, order, command, insist, request, require, propose, recommend, urge 等。",
+            "  - **结构**：主语 + 上述动词 + that 从句 (从句谓语用 'should + 动词原形' 或直接用动词原形)。",
+            "  - 例句：I suggest that he (should) go there at once. (我建议他立刻去那里。)",
+            "  - **注意**：'insist' 如果表示“坚持认为”是事实，则不用虚拟语气。 (e.g., He insisted that he was innocent.)",
+            "**主语从句、表语从句、同位语从句中的虚拟语气**：",
+            "  - **结构**：It is/was + 形容词/名词 + that 从句 (从句谓语用 'should + 动词原形' 或直接用动词原形)。",
+            "  - **形容词**：important, necessary, essential, vital, advisable, desirable, urgent, strange, natural 等。",
+            "  - **名词**：suggestion, advice, demand, order, request, requirement, proposal, recommendation 等。",
+            "  - 例句：It is important that we (should) finish the work on time. (我们按时完成工作很重要。)",
+            "  - 例句：My suggestion is that we (should) start early. (我的建议是我们早点出发。)",
+            "  - 例句：He made a suggestion that we (should) start early. (他提出了我们早点出发的建议。)",
+            "**wish 引导的宾语从句**：",
+            "  - **与现在事实相反**：wish + 主语 + 动词过去式 (be动词用were)。",
+            "    - 例句：I wish I were taller. (我希望我能更高点。)",
+            "  - **与过去事实相反**：wish + 主语 + had + 过去分词。",
+            "    - 例句：I wish I hadn't said that. (我希望我当时没说那话。)",
+            "  - **与将来事实相反**：wish + 主语 + would/could/might + 动词原形。",
+            "    - 例句：I wish you would come with us tomorrow. (我希望你明天能和我们一起来。)",
+            "**肯定句**：I suggest that he (should) apply for the job.",
+            "**否定句**：I suggest that he (should) not apply for the job."
+          ],
+          "why_explanation": "在名词性从句中使用虚拟语气，是为了表达一种非现实的愿望、建议或要求，而非陈述事实。这体现了英语在表达主观意愿时的精确性。",
+          "example": {
+            "question": "将 'I hope he will come tomorrow.' 改写为用 'wish' 表达的虚拟语气，假设他明天不可能来。",
+            "steps": [
+              "识别原句是希望将来发生的事，但假设是不可能发生或不确定。",
+              "用 'wish' 引导宾语从句，从句谓语用 'would/could/might + 动词原形'。"
+            ],
+            "answer": "I wish he would come tomorrow."
+          },
+          "mistakes": [
+            {
+              "wrong": "I suggest that he goes there.",
+              "correct": "I suggest that he (should) go there.",
+              "reason": "'suggest' 表示“建议”时，其宾语从句谓语动词要用虚拟语气，即 'should + 动词原形' 或省略 'should' 用动词原形。"
+            },
+            {
+              "wrong": "It's important that he finished the work.",
+              "correct": "It's important that he (should) finish the work.",
+              "reason": "在 'It is important that...' 结构中，从句谓语动词要用虚拟语气。"
+            }
+          ],
+          "memory_tip": "虚拟语气在名词性从句中是“一坚持、二命令、三建议、四要求” (insist, order, suggest, demand) 动词后，或者 'It is important/necessary' 后，动词用“should do”或“do”。'wish' 后面是“反事实时态”。",
+          "related": {
+            "prerequisite": "虚拟语气在条件句中，名词性从句",
+            "next": "高级写作中主观意愿的表达"
+          }
+        },
+        {
+          "card_id": "03-06",
+          "full_id": "英语-高二上-03-06",
+          "title": "语法：直接引语与间接引语 (进阶)",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "将直接引述的话语转换为间接引述，需要注意时态、人称、指示代词、时间地点状语以及语序的变化。",
+          "core_points": [
+            "**基本转换原则**：",
+            "  1. **时态变化**：主句谓语动词是过去时，从句时态通常向过去推移。",
+            "     - 一般现在时 → 一般过去时",
+            "     - 现在进行时 → 过去进行时",
+            "     - 现在完成时 → 过去完成时",
+            "     - 一般将来时 → 过去将来时 (will → would)",
+            "     - 一般过去时 → 过去完成时 (或不变)",
+            "     - 过去进行时 → 过去完成进行时 (或不变)",
+            "     - 过去完成时 → 不变",
+            "  2. **人称代词变化**：根据语境，将直接引语中的人称代词转换为间接引语中的相应人称。",
+            "  3. **指示代词和时间地点状语变化**：",
+            "     - this → that, these → those",
+            "     - now → then, today → that day, tomorrow → the next day / the following day",
+            "     - yesterday → the day before / the previous day",
+            "     - here → there, come → go, bring → take",
+            "  4. **句型变化**：",
+            "     - **陈述句**：He said (that)...",
+            "     - **疑问句** (一般疑问句)：He asked if/whether...",
+            "     - **疑问句** (特殊疑问句)：He asked wh-word...",
+            "     - **祈使句**：He told sb to do sth / not to do sth.",
+            "  5. **语序变化**：间接引语中，疑问句和祈使句都要变成陈述句语序。",
+            "**注意事项**：",
+            "  - **客观真理/科学事实**：即使主句是过去时，从句时态不变。",
+            "    - e.g., He said that the earth goes around the sun.",
+            "  - **情态动词**：could, would, should, might, ought to, had better, used to 等通常不变。",
+            "**肯定句**：He said, 'I am busy.' → He said that he was busy.",
+            "**否定句**：He said, 'I am not busy.' → He said that he was not busy.",
+            "**疑问句**：He asked, 'Are you busy?' → He asked if I was busy."
+          ],
+          "why_explanation": "直接引语是引用原话，间接引语是转述原话。这种转换是为了将别人的话语融入自己的叙述中，使其符合整体的语境和时态。掌握这些变化规则能确保转述的准确性和流畅性。",
+          "example": {
+            "question": "将 'He said to me, 'I will go there tomorrow.'' 转换为间接引语。",
+            "steps": [
+              "主句谓语 'said to me' 转换为 'told me'。",
+              "直接引语是陈述句，用 'that' 连接。",
+              "人称 'I' 变为 'he'。",
+              "时态 'will go' 变为 'would go'。",
+              "时间状语 'tomorrow' 变为 'the next day'。"
+            ],
+            "answer": "He told me that he would go there the next day."
+          },
+          "mistakes": [
+            {
+              "wrong": "He asked me what was my name.",
+              "correct": "He asked me what my name was.",
+              "reason": "间接疑问句要用陈述句语序，即 '主语 + 谓语'，而不是 '谓语 + 主语'。"
+            },
+            {
+              "wrong": "She said that she can swim.",
+              "correct": "She said that she could swim.",
+              "reason": "主句谓语 'said' 是过去时，从句中的情态动词 'can' 也要变为过去式 'could'。"
+            }
+          ],
+          "memory_tip": "间接引语是“报纸报道”，时态人称时间地点都要变，疑问祈使变陈述。口诀：一变时态，二变人称，三变指示，四变状语，五变语序。",
+          "related": {
+            "prerequisite": "各种时态，疑问句和祈使句结构",
+            "next": "高级写作中的叙事技巧，避免重复引用"
+          }
+        },
+        {
+          "card_id": "03-07",
+          "full_id": "英语-高二上-03-07",
+          "title": "句型卡：叙事与描述",
+          "type": "写作进阶卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "本单元涉及的用于小说叙事、人物描述和情节推进的常用高级句型。",
+          "core_points": [
+            "**开篇引出故事**：",
+            "  - It happened that... (碰巧…)",
+            "  - Once upon a time, ... (很久很久以前…)",
+            "  - The story began when... (故事开始于…)",
+            "**描述人物特点**：",
+            "  - He was a man of great courage/wisdom/humor. (他是一个很有勇气/智慧/幽默的人。)",
+            "  - She was known for her kindness/generosity. (她以善良/慷慨而闻名。)",
+            "  - He appeared to be... / seemed to be... (他看起来是…)",
+            "**推进情节**：",
+            "  - Suddenly, ... / All of a sudden, ... (突然间…)",
+            "  - To his surprise, ... (令他惊讶的是…)",
+            "  - As a result, ... / Consequently, ... (结果是…)",
+            "  - Little did he know that... (他几乎不知道…，倒装句)",
+            "  - It was not long before... (不久之后就…)",
+            "**表达转折与对比**：",
+            "  - However, ... / Nevertheless, ... (然而…)",
+            "  - On the contrary, ... (相反地…)",
+            "  - Despite/In spite of + n./doing (尽管…)",
+            "**结尾总结**：",
+            "  - In the end, ... / Eventually, ... (最终…)",
+            "  - The moral of the story is that... (这个故事的寓意是…)",
+            "  - He learned a valuable lesson that... (他学到了一个宝贵的教训，那就是…)"
+          ],
+          "why_explanation": "这些句型是小说和故事叙事的框架和骨架，它们帮助作者组织情节、塑造人物、表达主题。熟练运用这些句型能使你的叙事更具条理性和吸引力。",
+          "example": {
+            "question": "用 'Suddenly' 和 'Little did he know that' 描述一个故事的转折。",
+            "steps": [
+              "用 'Suddenly' 引出突发事件。",
+              "用 'Little did he know that' 制造悬念，预示接下来会发生意想不到的事情。"
+            ],
+            "answer": "Suddenly, a strange old man appeared out of nowhere. Little did he know that this encounter would change his life forever."
+          },
+          "mistakes": [
+            {
+              "wrong": "He was very smart. So he won the prize.",
+              "correct": "He was very smart, so he won the prize. / He was very smart; consequently, he won the prize.",
+              "reason": "'So' 不能单独作连词引导结果，需要与逗号连用或用分号和副词 'consequently' 等连接。"
+            }
+          ],
+          "memory_tip": "叙事是“讲故事”，要铺垫、转折、高潮、结局。记住 'Suddenly' 制造惊喜，'Little did he know' 制造悬念。",
+          "related": {
+            "prerequisite": "基础写作，复合句",
+            "next": "小说阅读与分析，文学评论"
+          }
+        },
+        {
+          "card_id": "03-08",
+          "full_id": "英语-高二上-03-08",
+          "title": "易混词卡：loan / lend / borrow",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "这三个词都与“借”有关，但词性、含义和使用方向不同。",
+          "core_points": [
+            "**loan [ləʊn] n. 贷款，借款；v. 借出 (常用于正式语体)**：",
+            "  - 作名词时：指借出去或借入的钱或物。",
+            "    - 例句：I took out a bank loan to buy a house. (我向银行申请了贷款买房。)",
+            "  - 作动词时：与 'lend' 意思相近，但 'loan' 更正式，常指借出大笔金钱或重要物品。",
+            "    - 例句：The museum loaned the painting to another gallery. (博物馆将这幅画借给了另一个画廊。)",
+            "**lend [lend] v. 借出 (过去式和过去分词为 lent)**：",
+            "  - 含义：把某物借给某人，强调“给”的动作。",
+            "  - 结构：lend sth to sb / lend sb sth。",
+            "  - 例句：Can you lend me some money? (你能借我点钱吗？)",
+            "  - 搭配：lend a hand (帮忙)。",
+            "**borrow [ˈbɒrəʊ] v. 借入，借来**：",
+            "  - 含义：从某人那里借来某物，强调“拿”的动作。",
+            "  - 结构：borrow sth from sb。",
+            "  - 例句：Can I borrow your pen? (我能借你的笔吗？)",
+            "  - 注意：'borrow' 后面不能接 'to sb'。"
+          ],
+          "why_explanation": "这三个词的核心区别在于“借”的方向和语体。'lend' 和 'loan' 指借出，'borrow' 指借入。'loan' 比 'lend' 更正式。理解这些区别能避免混淆。",
+          "example": {
+            "question": "请用 'loan', 'lend', 'borrow' 填空：1. I need to ______ a book from the library. 2. My friend ______ me his car for the weekend. 3. The government approved a ______ for the new project.",
+            "steps": [
+              "1. 从图书馆“借入”书，所以用 'borrow'。",
+              "2. 朋友“借出”车给我，所以用 'lent' (lend 的过去式)。",
+              "3. 政府批准的是“贷款”，所以用名词 'loan'。"
+            ],
+            "answer": "1. borrow 2. lent 3. loan"
+          },
+          "mistakes": [
+            {
+              "wrong": "Can you borrow me your pen?",
+              "correct": "Can you lend me your pen? / Can I borrow your pen?",
+              "reason": "'borrow' 强调“借入”，不能接“我”作宾语表示“借给我”。应该用 'lend' 表示“借出给某人”，或将主语换成 'I'，用 'borrow'。"
+            },
+            {
+              "wrong": "I loaned money from the bank.",
+              "correct": "I borrowed money from the bank. / I took out a loan from the bank.",
+              "reason": "'loan' 作动词时是“借出”，不能表示“从银行借入”。“从银行借入钱”通常用 'borrow' 或 'take out a loan'。"
+            }
+          ],
+          "memory_tip": "'lend' 是 'L' (给)，'borrow' 是 'B' (拿)。'loan' 是 'L' (正式的借给或贷款)。",
+          "related": {
+            "prerequisite": "动词词义辨析，介词搭配",
+            "next": "金融术语，语体选择"
+          }
+        },
+        {
+          "card_id": "03-09",
+          "full_id": "英语-高二上-03-09",
+          "title": "词汇深度卡：worth 的用法",
+          "type": "词汇深度卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "深入理解 'worth' 作形容词和名词的不同用法及其常见搭配，特别是与 'worthwhile', 'worthy' 的区别。",
+          "core_points": [
+            "**worth [wɜːrθ] adj. 值得…的；价值…的** (只能作表语)",
+            "  - **结构1：be worth + 名词/金钱**：价值…的。",
+            "    - 例句：The painting is worth a million dollars. (这幅画价值一百万美元。)",
+            "  - **结构2：be worth + doing sth**：值得做某事。",
+            "    - 例句：It's worth reading this book. (这本书值得一读。)",
+            "  - **结构3：be worth it**：值得的 (指付出的努力、时间等)。",
+            "    - 例句：After all the hard work, the result was definitely worth it. (所有的努力之后，结果绝对值得。)",
+            "**worth [wɜːrθ] n. 价值；财富** (不可数名词)",
+            "  - 含义：价值，重要性；财产。",
+            "    - 例句：The true worth of a person is not measured by money. (一个人的真正价值不是用金钱衡量的。)",
+            "    - 例句：a man of great worth (一个很有价值的人)",
+            "**与worth相关的词**：",
+            "  - **worthy [ˈwɜːrði] adj. 值得的；有价值的；配得上的** (可作表语和定语)",
+            "    - 结构：be worthy of sth / be worthy to be done / be worthy of being done。",
+            "    - 例句：He is worthy of praise. (他值得表扬。)",
+            "    - 例句：This is a worthy cause. (这是一个有价值的事业。)",
+            "  - **worthwhile [ˈwɜːrθwaɪl] adj. 值得花时间/精力做的** (可作表语和定语)",
+            "    - 例句：It was a worthwhile experience. (那是一次值得的经历。)",
+            "    - 例句：Is it worthwhile to invest in this project? (投资这个项目值得吗？)"
+          ],
+          "why_explanation": "'worth' 强调物品本身的价值或做某事的价值，通常是客观的。'worthy' 强调“配得上”或“有资格”，带有主观评价。'worthwhile' 强调付出时间/精力后会得到回报，更侧重于投资回报。区分这些词能使表达更准确。",
+          "example": {
+            "question": "用 'worth', 'worthy', 'worthwhile' 填空：1. This old coin is ______ a lot of money. 2. He is a ______ candidate for the award. 3. It was a ______ trip, despite the difficulties.",
+            "steps": [
+              "1. “价值很多钱”表示客观价值，所以用 'worth'。",
+              "2. “配得上”奖项的候选人，所以用 'worthy'。",
+              "3. “值得的旅行”表示付出后有回报，所以用 'worthwhile'。"
+            ],
+            "answer": "1. worth 2. worthy 3. worthwhile"
+          },
+          "mistakes": [
+            {
+              "wrong": "This book is worthy reading.",
+              "correct": "This book is worth reading. / This book is worthy of being read.",
+              "reason": "'worthy' 后接介词 'of' 或不定式被动，不能直接接动名词。'worth' 可以直接接动名词 'doing'。"
+            },
+            {
+              "wrong": "It's a very worth book.",
+              "correct": "It's a very worthwhile book. / It's a very valuable book.",
+              "reason": "'worth' 只能作表语，不能作定语修饰名词。作定语时可用 'worthwhile' 或 'valuable'。"
+            }
+          ],
+          "memory_tip": "'worth' (adj) 后面跟钱或 'doing'。'worthy' (adj) 后面跟 'of' 或 'to be done'。'worthwhile' (adj) 既可作表语又可作定语，侧重“付出有回报”。",
+          "related": {
+            "prerequisite": "形容词作表语/定语，动名词用法",
+            "next": "词义辨析，写作中形容词的精确使用"
+          }
+        },
+        {
+          "card_id": "03-10",
+          "full_id": "英语-高二上-03-10",
+          "title": "阅读技巧卡：推理判断",
+          "type": "阅读技巧卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "根据文章提供的细节信息、作者的语气和暗示，推断出文章中未明确说明的隐含信息、作者的观点或事件的可能发展。",
+          "core_points": [
+            "**推理判断的本质**：从已知信息中得出合理结论，而不是凭空想象。结论必须有原文依据。",
+            "**常见推理类型**：",
+            "  1. **推断作者意图/态度**：通过作者的措辞、情感词、褒贬词来判断其立场和倾向。",
+            "     - 关注：形容词、副词、情态动词、修辞手法。",
+            "  2. **推断细节信息**：根据文中线索推断未直接说明的具体信息。",
+            "     - 关注：时间、地点、人物、事件之间的逻辑关系。",
+            "  3. **推断隐含意义**：理解弦外之音，言外之意。",
+            "     - 关注：比喻、反语、双关、讽刺等修辞。",
+            "  4. **推断事件的起因/结果**：根据已发生事件推测其前因后果。",
+            "     - 关注：因果关系词 (because, so, as a result等) 及逻辑链条。",
+            "  5. **推断人物性格/情感**：通过人物的言行举止、心理描写来判断其性格特征和情感状态。",
+            "     - 关注：人物对话、行为描述。",
+            "**解题步骤**：",
+            "  1. **定位原文**：找到与问题相关的关键词句。",
+            "  2. **仔细研读**：理解相关句子的深层含义和上下文联系。",
+            "  3. **排除无关信息**：忽略与推断无关的细节。",
+            "  4. **逻辑推导**：根据原文信息进行合理、严密的逻辑推理。",
+            "  5. **验证选项**：将推断出的结论与选项进行对比，选择最符合原文的选项。",
+            "**常见提问方式**：",
+            "  - It can be inferred from the passage that...",
+            "  - The author implies that...",
+            "  - What can be concluded from the text?",
+            "  - The passage suggests that...",
+            "  - What might happen if...?"
+          ],
+          "why_explanation": "推理判断是阅读理解中的高级能力，它要求读者不仅理解字面意思，还要能够进行深层次的思考和分析。掌握这项技能有助于更全面、深入地理解文章，并应对更复杂的阅读任务。",
+          "example": {
+            "question": "阅读以下段落，推断作者对现代科技的态度：'While smartphones and the internet have undoubtedly brought convenience and instant access to information, one cannot ignore their potential downsides. The constant notifications and endless scrolling often lead to decreased attention spans and a pervasive sense of anxiety. Moreover, the ease of digital communication sometimes replaces genuine human connection, leaving many feeling more isolated than ever.'",
+            "steps": [
+              "1. 识别关键词：'convenience', 'instant access' (积极方面)；'potential downsides', 'decreased attention spans', 'anxiety', 'isolated' (消极方面)。",
+              "2. 关注转折词 'While...one cannot ignore their potential downsides...'，表明作者虽然承认优点，但更侧重缺点。",
+              "3. 总结作者的语气：担忧、批判。",
+              "4. 选项A: He is enthusiastic about modern technology. (不符)",
+              "5. 选项B: He believes modern technology has no benefits. (不符，承认了便利性)",
+              "6. 选项C: He is critical of the negative impacts of modern technology. (符合)",
+              "7. 选项D: He thinks modern technology will eventually destroy human connection. (过度推断，原文未说“摧毁”)"
+            ],
+            "answer": "C. He is critical of the negative impacts of modern technology."
+          },
+          "mistakes": [
+            {
+              "wrong": "根据自己的常识或主观判断进行推理，而非基于原文信息。",
+              "correct": "所有推理都必须在原文中找到依据，即使是间接的。避免加入个人观点。",
+              "reason": "阅读理解是考查对文章的理解能力，而非个人知识储备。脱离原文的推断是无效的。"
+            }
+          ],
+          "memory_tip": "推理判断是“读懂言外之意”，线索在字里行间，结论不离原文。记住“作者态度看褒贬词，事件发展看逻辑链”。",
+          "related": {
+            "prerequisite": "主旨大意，细节理解",
+            "next": "词义猜测，篇章结构"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "04",
+      "unit_name": "The Power of Nature",
+      "cards": [
+        {
+          "card_id": "04-01",
+          "full_id": "英语-高二上-04-01",
+          "title": "词汇：自然现象与灾害",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元涉及的关于自然界现象、自然灾害以及环境变化的核心词汇。",
+          "core_points": [
+            "nature [ˈneɪtʃər] n. 自然，大自然",
+            "environment [ɪnˈvaɪrənmənt] n. 环境",
+            "disaster [dɪˈzɑːstər] n. 灾难，灾害",
+            "earthquake [ˈɜːrθkweɪk] n. 地震",
+            "volcano [vɒlˈkeɪnəʊ] n. 火山",
+            "eruption [ɪˈrʌpʃn] n. 爆发 (火山、疾病等)",
+            "flood [flʌd] n./v. 洪水；淹没",
+            "drought [draʊt] n. 干旱",
+            "storm [stɔːrm] n. 暴风雨",
+            "hurricane [ˈhʌrɪkən] n. 飓风",
+            "tornado [tɔːrˈneɪdəʊ] n. 龙卷风",
+            "tsunami [tsuːˈnɑːmi] n. 海啸",
+            "wildfire [ˈwaɪldfaɪər] n. 野火，森林大火",
+            "pollution [pəˈluːʃn] n. 污染",
+            "global warming [ˌɡləʊbl ˈwɔːrmɪŋ] n. 全球变暖",
+            "climate change [ˈklaɪmət tʃeɪndʒ] n. 气候变化",
+            "survive [sərˈvaɪv] v. 幸存，存活",
+            "rescue [ˈreskjuː] v./n. 营救，救援"
+          ],
+          "why_explanation": "这些词汇是讨论自然界力量、人类与环境关系以及应对自然灾害的基础。掌握它们有助于理解相关新闻报道和科学文章。",
+          "example": {
+            "question": "请用 'drought' 和 'flood' 描述两种极端天气现象。",
+            "steps": [
+              "极端天气可能导致长时间无雨，即'drought'（干旱）。",
+              "也可能导致大量降雨，引发'flood'（洪水）。"
+            ],
+            "answer": "Some regions are suffering from severe drought, while others are experiencing devastating floods caused by heavy rainfall."
+          },
+          "mistakes": [
+            {
+              "wrong": "The earthquake was a terrible natural.",
+              "correct": "The earthquake was a terrible natural disaster.",
+              "reason": "'natural' 是形容词，不能单独作名词。应该用名词 'disaster' 来表示“自然灾害”。"
+            }
+          ],
+          "memory_tip": "'drought' 联想 'dry' (干燥)，没有水。'flood' 联想 'flow' (流动)，水流泛滥。",
+          "related": {
+            "prerequisite": "基础地理词汇",
+            "next": "环境保护，灾害预防与管理"
+          }
+        },
+        {
+          "card_id": "04-02",
+          "full_id": "英语-高二上-04-02",
+          "title": "词汇：科学研究与行动",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元涉及的与科学研究、环境监测、保护行动以及人类应对措施相关的核心词汇。",
+          "core_points": [
+            "monitor [ˈmɒnɪtər] v. 监测 n. 监视器",
+            "predict [prɪˈdɪkt] v. 预测",
+            "warn [wɔːrn] v. 警告",
+            "evacuate [ɪˈvækjueɪt] v. 疏散，撤离",
+            "prevent [prɪˈvent] v. 预防，阻止",
+            "protect [prəˈtekt] v. 保护",
+            "conserve [kənˈsɜːrv] v. 保护，保存 (自然资源)",
+            "preserve [prɪˈzɜːrv] v. 保护，保存 (文化遗产、物种等)",
+            "research [rɪˈsɜːrtʃ] n./v. 研究",
+            "scientist [ˈsaɪəntɪst] n. 科学家",
+            "expert [ˈekspɜːrt] n. 专家 adj. 熟练的",
+            "technology [tekˈnɒlədʒi] n. 科技",
+            "solution [səˈluːʃn] n. 解决方案；溶解",
+            "strategy [ˈstrætədʒi] n. 策略，战略",
+            "cooperate [kəʊˈɒpəreɪt] v. 合作",
+            "sustainable [səˈsteɪnəbl] adj. 可持续的",
+            "renewable [rɪˈnuːəbl] adj. 可再生的"
+          ],
+          "why_explanation": "这些词汇是讨论人类如何理解、应对和减轻自然灾害影响，以及如何实现可持续发展的关键。它们在环境科学和政策讨论中非常重要。",
+          "example": {
+            "question": "请用 'monitor' 和 'predict' 描述科学家在灾害预警方面的工作。",
+            "steps": [
+              "科学家需要'monitor'（监测）自然现象。",
+              "以便'predict'（预测）灾害的发生。"
+            ],
+            "answer": "Scientists continuously monitor seismic activity to predict potential earthquakes and issue warnings."
+          },
+          "mistakes": [
+            {
+              "wrong": "We need to prevent the pollution.",
+              "correct": "We need to prevent pollution. / We need to prevent the pollution from getting worse.",
+              "reason": "'pollution' 作不可数名词时，通常不加定冠词 'the'，除非特指某种污染。或者用动名词表示“阻止污染恶化”。"
+            }
+          ],
+          "memory_tip": "'monitor' 联想“显示器”进行监视。'evacuate' 联想 'empty' (清空)，把人清空出去。",
+          "related": {
+            "prerequisite": "基础科学词汇，环境问题概念",
+            "next": "环境政策，科技发展与社会影响"
+          }
+        },
+        {
+          "card_id": "04-03",
+          "full_id": "英语-高二上-04-03",
+          "title": "词汇：短语与固定搭配 (四)",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元出现的与自然灾害应对、环境保护以及日常行动相关的常用短语和固定搭配。",
+          "core_points": [
+            "deal with: 处理，应对",
+            "cope with: 处理，应对 (常指困难或压力)",
+            "break out: 爆发 (战争、疾病、火灾等)",
+            "in danger: 处于危险之中",
+            "at risk: 处于危险之中",
+            "take action: 采取行动",
+            "make efforts: 努力",
+            "come up with: 想出，提出 (解决方案)",
+            "be faced with: 面对 (困难、问题等)",
+            "play a role in: 在…中发挥作用",
+            "result in: 导致，造成",
+            "contribute to: 贡献于，有助于",
+            "depend on: 依赖，取决于",
+            "take advantage of: 利用"
+          ],
+          "why_explanation": "这些短语在讨论环境问题、灾害管理和解决方案时非常实用，能使表达更准确和丰富。",
+          "example": {
+            "question": "请用 'break out' 和 'take action' 描述应对灾害的情景。",
+            "steps": [
+              "当灾害爆发（break out）时。",
+              "我们需要立即采取行动（take action）。"
+            ],
+            "answer": "When the earthquake broke out, the rescue teams immediately took action to help the victims."
+          },
+          "mistakes": [
+            {
+              "wrong": "We must deal the problem.",
+              "correct": "We must deal with the problem.",
+              "reason": "'deal with' 是固定短语，介词 'with' 不能省略。"
+            }
+          ],
+          "memory_tip": "'break out' 像“突然冲破出来”。'take action' 联想“采取行动”。",
+          "related": {
+            "prerequisite": "动词短语基础，介词搭配",
+            "next": "环保议题写作，口语表达"
+          }
+        },
+        {
+          "card_id": "04-04",
+          "full_id": "英语-高二上-04-04",
+          "title": "语法：倒装句 (Only/So/Such 引导)",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "本单元重点回顾和拓展由 'Only', 'So', 'Such' 引导的倒装句型，强调其特殊语序和修辞效果。",
+          "core_points": [
+            "**'Only' + 状语/状语从句置于句首**：主句要用部分倒装 (助动词/情态动词/be动词 + 主语 + 谓语)。",
+            "  - **Only + 介词短语**：Only in this way can we achieve success. (只有这样我们才能成功。)",
+            "  - **Only + 时间状语**：Only yesterday did I realize my mistake. (直到昨天我才意识到我的错误。)",
+            "  - **Only + 状语从句**：Only when he apologized did I forgive him. (只有当他道歉后我才原谅他。)",
+            "**'So' + 形容词/副词 + that 从句** (强调程度)：",
+            "  - 当 'So + 形容词/副词' 置于句首时，主句要用部分倒装。",
+            "  - **So + adj./adv. + 助动词/be动词 + 主语 + (谓语) + that 从句**",
+            "  - 例句：So quickly did he run that he broke the world record. (他跑得如此之快，以至于打破了世界纪录。)",
+            "  - 例句：So beautiful is the scenery that many tourists come here. (景色如此美丽，以至于许多游客前来。)",
+            "**'Such' + be动词 + 主语 + that 从句** (强调性质)：",
+            "  - 当 'Such + be动词' 置于句首时，主句要用部分倒装。",
+            "  - **Such + be动词 + 主语 + that 从句**",
+            "  - 例句：Such was the force of the wind that the trees were uprooted. (风力如此之大，以至于树都被连根拔起。)",
+            "**注意事项**：",
+            "  - 'Only' 强调句首的状语，而非 'only' 后的主语。",
+            "  - 'So/Such' 倒装句型中的 'that' 从句表示结果，不能省略。",
+            "**肯定句示例**：Only by working hard can we achieve our goals.",
+            "**否定句示例**：Only by not giving up can we overcome difficulties."
+          ],
+          "why_explanation": "这些倒装句型用于强调句子的特定信息，使其更具表达力和修辞效果。它们通过改变正常语序来吸引读者的注意力，常用于正式语体或文学作品中。",
+          "example": {
+            "question": "将 'He spoke so fast that nobody could understand him.' 改写为 'So...' 引导的倒装句。",
+            "steps": [
+              "识别 'so fast' 是被强调的副词短语。",
+              "将 'So fast' 移至句首。",
+              "主句 'He spoke' 进行部分倒装，由于是过去时，需要助动词 'did'：'did he speak'。",
+              "连接 'that' 从句 'nobody could understand him'。"
+            ],
+            "answer": "So fast did he speak that nobody could understand him."
+          },
+          "mistakes": [
+            {
+              "wrong": "Only then he realized his mistake.",
+              "correct": "Only then did he realize his mistake.",
+              "reason": "'Only' + 时间状语 'then' 置于句首时，主句必须用部分倒装，助动词 'did' 提前。"
+            },
+            {
+              "wrong": "So beautiful the girl is that everyone likes her.",
+              "correct": "So beautiful is the girl that everyone likes her.",
+              "reason": "'So + 形容词' 置于句首时，如果谓语是 be 动词，be 动词要提前。"
+            }
+          ],
+          "memory_tip": "'Only' 倒装是“只有…才…”，'So/Such' 倒装是“如此…以至于…”。都是把助动词/be 动词提前。",
+          "related": {
+            "prerequisite": "部分倒装基础，强调句型",
+            "next": "省略句，高级写作句式多样性"
+          }
+        },
+        {
+          "card_id": "04-05",
+          "full_id": "英语-高二上-04-05",
+          "title": "语法：省略句 (在状语从句中)",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "在时间、条件、让步、方式等状语从句中，当从句主语与主句主语一致，且从句谓语包含 be 动词时，可省略从句主语和 be 动词。",
+          "core_points": [
+            "**省略条件**：",
+            "  1. 从句主语与主句主语一致。",
+            "  2. 从句谓语包含 be 动词。",
+            "**常见状语从句类型**：",
+            "  - **时间状语从句** (when, while, as, after, before, until, once)：",
+            "    - e.g., When (he was) a boy, he lived in the countryside.",
+            "    - e.g., While (she was) waiting for the bus, she read a novel.",
+            "  - **条件状语从句** (if, unless)：",
+            "    - e.g., If (it is) possible, I'd like to help you.",
+            "    - e.g., Unless (you are) invited, you shouldn't go there.",
+            "  - **让步状语从句** (though, although, even if/though)：",
+            "    - e.g., Though (he was) tired, he continued to work.",
+            "  - **方式状语从句** (as if, as though)：",
+            "    - e.g., He behaved as if (he were) a king. (注意虚拟语气 'were' 也会被省略)",
+            "  - **地点状语从句** (wherever)：",
+            "    - e.g., Wherever (you are) in China, you can find delicious food.",
+            "**注意事项**：",
+            "  - 省略后，从句只剩下介词短语、形容词、副词或分词短语。",
+            "  - 这种省略是为了使句子更简洁，更符合口语和书面语的习惯。",
+            "**肯定句示例**：When (he was) young, he dreamed of being a pilot.",
+            "**否定句示例**：Unless (it is) necessary, don't disturb him."
+          ],
+          "why_explanation": "省略句的目的是使表达更简洁、避免重复。在符合特定条件时，省略掉从句的主语和 be 动词，可以提高句子的经济性，同时不影响其意义的清晰传达。",
+          "example": {
+            "question": "将 'While she was walking in the park, she met an old friend.' 改写为省略句。",
+            "steps": [
+              "识别从句主语 'she' 与主句主语 'she' 一致。",
+              "从句谓语包含 'was' (be动词)。",
+              "省略 'she was'。"
+            ],
+            "answer": "While walking in the park, she met an old friend."
+          },
+          "mistakes": [
+            {
+              "wrong": "When watching TV, the phone rang.",
+              "correct": "When I was watching TV, the phone rang. / When watching TV, I heard the phone ring.",
+              "reason": "省略句的逻辑主语必须与主句主语一致。原句中 'watching TV' 的逻辑主语是 'I'，但主句主语是 'the phone'，造成悬垂分词。"
+            }
+          ],
+          "memory_tip": "省略句是“主语一致，be 动词就可省”。记住“省主语be，留分词形容介词”，让句子更瘦身。",
+          "related": {
+            "prerequisite": "状语从句，分词作状语",
+            "next": "独立主格，高级写作中的简洁表达"
+          }
+        },
+        {
+          "card_id": "04-06",
+          "full_id": "英语-高二上-04-06",
+          "title": "语法：强调句型 (Cleft Sentences - It is... that...)",
+          "type": "高级语法卡",
+          "difficulty": 3,
+          "importance": 5,
+          "definition": "本单元复习和拓展强调句型的运用，尤其是在复杂句中对不同成分的强调。",
+          "core_points": [
+            "**基本结构**：It is/was + 被强调部分 + that/who + 句子的其余部分。",
+            "**强调主语**：",
+            "  - 原句：The strong wind destroyed the old house.",
+            "  - 强调主语：It was the strong wind that/which destroyed the old house.",
+            "**强调宾语**：",
+            "  - 原句：He bought a new car yesterday.",
+            "  - 强调宾语：It was a new car that he bought yesterday.",
+            "**强调状语** (时间、地点、方式、原因状语)：",
+            "  - 原句：I met her at the party last night.",
+            "  - 强调时间状语：It was last night that I met her at the party.",
+            "  - 强调地点状语：It was at the party that I met her last night.",
+            "  - 强调方式状语：It was by accident that I found the key.",
+            "  - 强调原因状语：It was because he was ill that he didn't come. (注意 'because' 后的从句被强调时，'that' 不能省)",
+            "**强调句型在疑问句中**：",
+            "  - 对陈述句进行强调：Is it you that broke the window?",
+            "  - 对特殊疑问句进行强调：Who was it that broke the window?",
+            "**注意事项**：",
+            "  - 'that' 是连接词，通常不能省略，且在强调人时可用 'who/whom'。",
+            "  - 强调句型只能强调除谓语动词以外的句子成分。强调动词需用 'do/does/did' 助动词。",
+            "  - 'It' 是形式主语，没有实际意义。",
+            "**肯定句**：It was John that helped me.",
+            "**否定句**：It was not John that helped me.",
+            "**疑问句**：Was it John that helped you?"
+          ],
+          "why_explanation": "强调句型通过将某个成分置于 'It is/was...that...' 结构中，来突出该成分，吸引听者/读者的注意力，表达说话者想要强调的重点。它使句子更具表现力。",
+          "example": {
+            "question": "将 'He found the key under the table.' 强调 'under the table'。",
+            "steps": [
+              "识别被强调部分 'under the table' 是地点状语。",
+              "套用强调句型：It was + 被强调部分 + that + 句子的其余部分。",
+              "将 'under the table' 放入 'It was...that...' 结构中，其余部分 'he found the key' 放在 'that' 之后。"
+            ],
+            "answer": "It was under the table that he found the key."
+          },
+          "mistakes": [
+            {
+              "wrong": "It was yesterday when he came.",
+              "correct": "It was yesterday that he came.",
+              "reason": "强调句型中，连接词通常用 'that'，不能用 'when' 或 'where' 等，即使强调的是时间或地点。"
+            },
+            {
+              "wrong": "It is because of the rain that we didn't go out.",
+              "correct": "It is because of the rain that we didn't go out. (此句正确)",
+              "reason": "强调原因时，可强调 'because + 从句' 或 'because of + 短语'。"
+            }
+          ],
+          "memory_tip": "强调句型是“万能强调器”，'that' 是万能连接词。记住“强调谁，谁就放中间，两边是 It is/was 和 that”。",
+          "related": {
+            "prerequisite": "句子成分分析，基础强调句型",
+            "next": "倒装句，高级写作中的句式变换"
+          }
+        },
+        {
+          "card_id": "04-07",
+          "full_id": "英语-高二上-04-07",
+          "title": "句型卡：表达因果与影响",
+          "type": "写作进阶卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "本单元涉及的用于表达事物之间因果关系以及某种现象产生的影响的常用高级句型和连接词。",
+          "core_points": [
+            "**表达原因**：",
+            "  - because / since / as + 从句 (因为…)",
+            "  - because of / due to / owing to / thanks to + 名词/短语 (由于…)",
+            "  - The reason why... is that... (…的原因是…)",
+            "  - attribute A to B (把A归因于B)",
+            "  - result from (由…引起)",
+            "**表达结果**：",
+            "  - so...that... (如此…以至于…)",
+            "  - such...that... (如此…以至于…)",
+            "  - as a result / consequently / therefore / thus / hence + 句 (因此…)",
+            "  - lead to / result in / contribute to / bring about / cause + 结果 (导致…)",
+            "  - so that + 结果从句 (结果是…)",
+            "**表达影响**：",
+            "  - have an effect on / influence on (对…有影响)",
+            "  - play a significant role in (在…中发挥重要作用)",
+            "  - make a difference to (对…产生影响)",
+            "  - impact on (对…产生影响)",
+            "**模板句**：",
+            "  - Due to global warming, many species are faced with the danger of extinction.",
+            "  - The devastating earthquake resulted in countless casualties and severe damage to infrastructure.",
+            "  - Human activities play a significant role in climate change, which consequently leads to more extreme weather events."
+          ],
+          "why_explanation": "因果关系是逻辑思维的基础，也是议论文写作的核心。掌握多种表达因果和影响的句型和连接词，能使你的论证更严密、更具说服力，是高分写作的必备技能。",
+          "example": {
+            "question": "将 'Heavy rain caused the flood. Many houses were destroyed.' 合并成一个包含因果关系和结果的句子。",
+            "steps": [
+              "识别原因 'Heavy rain' 和结果 'the flood'，以及洪水导致的后果 'Many houses were destroyed'。",
+              "用 'cause' 连接原因和结果，再用 'as a result' 引出最终后果。"
+            ],
+            "answer": "Heavy rain caused the flood; as a result, many houses were destroyed."
+          },
+          "mistakes": [
+            {
+              "wrong": "Because of the heavy rain, so the road was blocked.",
+              "correct": "Because of the heavy rain, the road was blocked. / The heavy rain caused the road to be blocked.",
+              "reason": "'because of' 和 'so' 不能在同一个句子中同时使用来表示因果关系，功能重复。"
+            }
+          ],
+          "memory_tip": "因果是“先A后B”，原因词在前，结果词在后。记住 'due to', 'result in', 'lead to' 是因果链条上的重要环节。",
+          "related": {
+            "prerequisite": "基础因果关系表达，复合句",
+            "next": "议论文写作，逻辑论证"
+          }
+        },
+        {
+          "card_id": "04-08",
+          "full_id": "英语-高二上-04-08",
+          "title": "易混词卡：conserve / preserve",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "这两个词都表示“保护”或“保存”，但侧重点和使用语境有所不同。",
+          "core_points": [
+            "**conserve [kənˈsɜːrv] v. 保护 (自然资源)；节约**：",
+            "  - 含义1：特指保护自然资源，防止浪费或过度使用，以供未来使用。",
+            "    - 例句：We must conserve water and energy. (我们必须节约水和能源。)",
+            "  - 含义2：保护环境、野生动物等。",
+            "    - 例句：Efforts are being made to conserve endangered species. (正在努力保护濒危物种。)",
+            "**preserve [prɪˈzɜːrv] v. 保护 (免受损害)；保存 (食品、文化遗产)；维持**：",
+            "  - 含义1：保护某物使其免受损害、腐烂或破坏，保持其原始状态。",
+            "    - 例句：It's important to preserve historical buildings. (保护历史建筑很重要。)",
+            "  - 含义2：通过腌制、冷冻等方式保存食物。",
+            "    - 例句：My grandmother used to preserve fruit in jars. (我奶奶过去常把水果装在罐子里保存。)",
+            "  - 含义3：维持某种状态或权利。",
+            "    - 例句：We need to preserve peace in the region. (我们需要维护该地区的和平。)"
+          ],
+          "why_explanation": "'conserve' 更侧重于“节约使用”和“可持续管理”，常用于自然资源。'preserve' 更侧重于“维持原状”和“防止损害”，常用于文化遗产、食物或抽象概念。区分这些能让表达更精确。",
+          "example": {
+            "question": "请用 'conserve' 和 'preserve' 填空：1. We should try to ______ electricity. 2. It is our duty to ______ our cultural heritage. 3. The national park aims to ______ the natural habitat of wild animals.",
+            "steps": [
+              "1. 节约用电，所以用 'conserve'。",
+              "2. 保护文化遗产，使其不被破坏，所以用 'preserve'。",
+              "3. 保护野生动物的自然栖息地，使其不被破坏，所以用 'preserve' (此处也可理解为 'conserve' 资源)。"
+            ],
+            "answer": "1. conserve 2. preserve 3. preserve"
+          },
+          "mistakes": [
+            {
+              "wrong": "We need to preserve water.",
+              "correct": "We need to conserve water.",
+              "reason": "“节约用水”应使用 'conserve water'。'preserve water' 听起来像把水储存起来不让它变质，不符合日常语境。"
+            }
+          ],
+          "memory_tip": "'conserve' 联想 'control' (控制用量)，即节约。'preserve' 联想 'prevent decay' (防止腐烂)，即保持原样。",
+          "related": {
+            "prerequisite": "动词词义辨析，环境词汇",
+            "next": "环保议题写作"
+          }
+        },
+        {
+          "card_id": "04-09",
+          "full_id": "英语-高二上-04-09",
+          "title": "词汇深度卡：effect / affect 的辨析与搭配",
+          "type": "词汇深度卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "深入理解 'effect' 和 'affect' 这对形近义异词的词性、含义以及常见搭配。",
+          "core_points": [
+            "**affect [əˈfekt] v. 影响；感动；假装**",
+            "  - **含义1：影响，对…产生作用 (最常见)**：to produce a change in someone or something.",
+            "    - 例句：The weather affected our travel plans. (天气影响了我们的旅行计划。)",
+            "  - **含义2：感动，打动**：to make someone feel strong emotions.",
+            "    - 例句：Her sad story deeply affected him. (她的悲伤故事深深地打动了他。)",
+            "  - **含义3：假装，做作 (较少见)**：to pretend to have a feeling or quality.",
+            "    - 例句：He affected an air of indifference. (他装出一副漠不关心的样子。)",
+            "**effect [ɪˈfekt] n. 影响；效果；作用；v. 导致，实现 (较正式)**",
+            "  - **含义1：影响，效果 (最常见，可数或不可数)**：a change that is produced in one person or thing by another; a result.",
+            "    - 例句：The new policy had a positive effect on the economy. (新政策对经济产生了积极影响。)",
+            "    - 搭配：have an effect on sth/sb (对…有影响), take effect (生效), come into effect (开始生效), in effect (实际上)",
+            "  - **含义2：作用，效力**：the power to produce a result.",
+            "    - 例句：The medicine had an immediate effect. (这种药立竿见影。)",
+            "  - **含义3：个人财物 (effects，复数)**：personal belongings.",
+            "    - 例句：Please remove all your personal effects from the locker.",
+            "  - **作动词：导致，实现 (正式)**：to make something happen.",
+            "    - 例句：The committee effected a change in policy. (委员会促成了政策的改变。)"
+          ],
+          "why_explanation": "'affect' 绝大多数情况下作动词，意为“影响”。'effect' 绝大多数情况下作名词，意为“影响、效果”。记住这个核心区别是关键。虽然 'effect' 也有动词用法，但相对不常见且语气正式。",
+          "example": {
+            "question": "用 'affect' 和 'effect' 的正确形式填空：1. The new law will ______ everyone. 2. The new law will have a great ______ on everyone. 3. His speech had a profound ______ on the audience.",
+            "steps": [
+              "1. 句子中需要一个动词表示“影响”，所以用 'affect'。",
+              "2. 'have a great ______ on' 结构中需要一个名词，所以用 'effect'。",
+              "3. 'had a profound ______ on' 结构中需要一个名词，所以用 'effect'。"
+            ],
+            "answer": "1. affect 2. effect 3. effect"
+          },
+          "mistakes": [
+            {
+              "wrong": "The bad weather effected our plans.",
+              "correct": "The bad weather affected our plans.",
+              "reason": "此处需要动词“影响”，应使用 'affect'，而非名词 'effect'。"
+            },
+            {
+              "wrong": "Smoking has many affects on health.",
+              "correct": "Smoking has many effects on health.",
+              "reason": "此处需要名词“影响”，应使用 'effects' (复数)，而非动词 'affects'。"
+            }
+          ],
+          "memory_tip": "'A'ffect 是 'A'ction (动词)，'E'ffect 是 'E'nd result (名词)。",
+          "related": {
+            "prerequisite": "词性辨析，动词名词转换",
+            "next": "'influence' 与 'effect/affect' 的辨析"
+          }
+        },
+        {
+          "card_id": "04-10",
+          "full_id": "英语-高二上-04-10",
+          "title": "阅读技巧卡：词义猜测",
+          "type": "阅读技巧卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "在阅读中遇到生词时，通过上下文语境、构词法知识和逻辑推理来猜测词义，而非依赖字典。",
+          "core_points": [
+            "**猜测词义的重要性**：提高阅读速度和流畅度，避免频繁查字典中断阅读。",
+            "**猜测方法**：",
+            "  1. **利用上下文线索**：",
+            "     - **定义/解释**：生词后直接给出解释或定义 (e.g., 'that is', 'which means', 破折号, 括号)。",
+            "     - **同义/近义词**：通过 and, or, as well as 等连接的已知词推断。",
+            "     - **反义词**：通过 but, however, on the contrary, unlike 等连接的已知词推断。",
+            "     - **例证**：通过 for example, such as, like 等引出的例子推断。",
+            "     - **因果关系**：通过 because, so, as a result 等推断。",
+            "     - **语境常识**：结合生活常识和文章主题推断。",
+            "  2. **利用构词法知识**：",
+            "     - **前缀 (Prefixes)**：dis-, un-, re-, pre-, anti- 等 (e.g., unhappy = not happy)。",
+            "     - **后缀 (Suffixes)**：-able, -tion, -ment, -ist, -ous 等 (e.g., readable = able to be read)。",
+            "     - **词根 (Roots)**：bio (life), geo (earth), tele (far) 等 (e.g., biology = study of life)。",
+            "  3. **利用标点符号**：",
+            "     - 逗号、破折号、括号中可能包含对生词的解释。",
+            "     - 冒号后可能引出对生词的详细说明。",
+            "**解题步骤**：",
+            "  1. **定位生词**：找到不认识的词或短语。",
+            "  2. **扫描上下文**：阅读生词前后的句子，寻找线索。",
+            "  3. **运用猜测方法**：根据上述方法进行推理。",
+            "  4. **代入验证**：将猜测的词义代入原文，看是否通顺合理。",
+            "**常见提问方式**：",
+            "  - The word '...' in paragraph X probably means...",
+            "  - What does the underlined word '...' refer to?",
+            "  - The phrase '...' is closest in meaning to..."
+          ],
+          "why_explanation": "词义猜测是应对陌生词汇的必备技能，尤其在考试和快速阅读中。它培养了读者利用语境解决问题的能力，提高了阅读效率和理解的深度。",
+          "example": {
+            "question": "在以下句子中，猜测 'ubiquitous' 的含义：'In today's digital age, smartphones have become ubiquitous; almost everyone owns one, and they are found everywhere, from bustling city streets to quiet rural homes.'",
+            "steps": [
+              "1. 识别生词 'ubiquitous'。",
+              "2. 寻找上下文线索：'almost everyone owns one', 'they are found everywhere'。",
+              "3. 根据这些线索，推断 'ubiquitous' 意为“无处不在的，普遍存在的”。",
+              "4. 将“无处不在的”代入原文，句子通顺合理。"
+            ],
+            "answer": "'ubiquitous' 意为 'widespread' (普遍存在的) 或 'present everywhere' (无处不在的)。"
+          },
+          "mistakes": [
+            {
+              "wrong": "只看生词本身，不结合上下文，直接凭感觉猜测。",
+              "correct": "任何猜测都必须有原文依据，即使是构词法也需要结合语境判断。",
+              "reason": "脱离上下文的猜测往往不准确。一个词在不同语境下可能有不同含义，只有结合语境才能准确把握。"
+            }
+          ],
+          "memory_tip": "生词是“拦路虎”，上下文是“指路牌”，构词法是“透视镜”。记住“前后找线索，词根词缀帮大忙”。",
+          "related": {
+            "prerequisite": "基础词汇量，语法知识",
+            "next": "细节理解，推理判断"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "05",
+      "unit_name": "The Global Village",
+      "cards": [
+        {
+          "card_id": "05-01",
+          "full_id": "英语-高二上-05-01",
+          "title": "词汇：全球化与科技发展",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元涉及的关于全球化、信息技术、互联网以及科技发展核心词汇。",
+          "core_points": [
+            "globalization [ˌɡləʊbəlaɪˈzeɪʃn] n. 全球化",
+            "internet [ˈɪntərnet] n. 互联网",
+            "network [ˈnetwɜːrk] n. 网络",
+            "communication [kəˌmjuːnɪˈkeɪʃn] n. 交流，通讯",
+            "information [ˌɪnfərˈmeɪʃn] n. 信息",
+            "digital [ˈdɪdʒɪtl] adj. 数字的",
+            "technology [tekˈnɒlədʒi] n. 科技",
+            "innovation [ˌɪnəˈveɪʃn] n. 创新",
+            "advance [ədˈvæns] n./v. 进步，发展",
+            "access [ˈækses] n./v. 接近，进入；使用权",
+            "interact [ˌɪntərˈækt] v. 互动，互相影响",
+            "virtual [ˈvɜːrtʃuəl] adj. 虚拟的，实际上的",
+            "social media [ˌsəʊʃl ˈmiːdiə] n. 社交媒体",
+            "platform [ˈplætfɔːrm] n. 平台",
+            "connect [kəˈnekt] v. 连接",
+            "barrier [ˈbæriər] n. 障碍",
+            "exchange [ɪksˈtʃeɪndʒ] n./v. 交换"
+          ],
+          "why_explanation": "这些词汇是理解全球化进程、信息时代特征以及科技对社会影响的基础。掌握它们有助于讨论现代社会的热点话题。",
+          "example": {
+            "question": "请用 'internet' 和 'communication' 描述现代社会的特点。",
+            "steps": [
+              "现代社会离不开'internet'（互联网）。",
+              "互联网促进了全球'communication'（交流）。"
+            ],
+            "answer": "The internet has revolutionized global communication, making the world feel like a smaller place."
+          },
+          "mistakes": [
+            {
+              "wrong": "He has a lot of information about the topic.",
+              "correct": "He has a lot of information about the topic. (此句正确)",
+              "reason": "'information' 是不可数名词，不能加 's'，也不能用 'a' 修饰，但可以用 'a lot of' 或 'some pieces of' 等。"
+            }
+          ],
+          "memory_tip": "'globalization' 联想 'global' (全球的) + '-ization' (化)，即全球化。'innovation' 联想 'new' (新)，即创新。",
+          "related": {
+            "prerequisite": "基础科技词汇，社会学概念",
+            "next": "网络安全，数字伦理"
+          }
+        },
+        {
+          "card_id": "05-02",
+          "full_id": "英语-高二上-05-02",
+          "title": "词汇：文化与国际关系",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元涉及的关于文化多样性、国际合作与冲突以及全球公民意识的核心词汇。",
+          "core_points": [
+            "culture [ˈkʌltʃər] n. 文化",
+            "diversity [daɪˈvɜːrsəti] n. 多样性",
+            "identity [aɪˈdentəti] n. 身份，特性",
+            "custom [ˈkʌstəm] n. 习俗，惯例",
+            "tradition [trəˈdɪʃn] n. 传统",
+            "global citizen [ˌɡləʊbl ˈsɪtɪzn] n. 全球公民",
+            "cooperation [kəʊˌɒpəˈreɪʃn] n. 合作",
+            "conflict [ˈkɒnflɪkt] n. 冲突 v. 冲突",
+            "harmony [ˈhɑːrməni] n. 和谐",
+            "mutual [ˈmjuːtʃuəl] adj. 相互的，共同的",
+            "respect [rɪˈspekt] n./v. 尊敬，尊重",
+            "tolerance [ˈtɒlərəns] n. 宽容，容忍",
+            "prejudice [ˈpredʒədɪs] n. 偏见",
+            "stereotype [ˈsteriətaɪp] n. 刻板印象",
+            "misunderstanding [ˌmɪsʌndərˈstændɪŋ] n. 误解",
+            "negotiate [nɪˈɡəʊʃieɪt] v. 谈判，协商"
+          ],
+          "why_explanation": "这些词汇是理解不同文化背景、促进国际交流与合作以及解决全球性挑战的基础。它们对于培养全球公民意识至关重要。",
+          "example": {
+            "question": "请用 'diversity' 和 'tolerance' 描述一个理想的全球社区。",
+            "steps": [
+              "一个理想的全球社区应该包含文化'diversity'（多样性）。",
+              "社区成员之间应该互相'tolerance'（宽容）。"
+            ],
+            "answer": "An ideal global community embraces cultural diversity and fosters mutual tolerance among its members."
+          },
+          "mistakes": [
+            {
+              "wrong": "We should respect to other cultures.",
+              "correct": "We should respect other cultures. / We should show respect for other cultures.",
+              "reason": "'respect' 作动词时是及物动词，直接接宾语。作名词时，'respect' 后常接介词 'for'。"
+            }
+          ],
+          "memory_tip": "'diversity' 联想 'diverse' (不同的)，即多样性。'tolerance' 联想 'tolerate' (容忍)，即宽容。",
+          "related": {
+            "prerequisite": "基础社会学词汇，文化差异概念",
+            "next": "跨文化交际，国际关系研究"
+          }
+        },
+        {
+          "card_id": "05-03",
+          "full_id": "英语-高二上-05-03",
+          "title": "词汇：短语与固定搭配 (五)",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元出现的与全球化、科技应用、文化交流以及社会互动相关的常用短语和固定搭配。",
+          "core_points": [
+            "keep pace with: 跟上…的步伐",
+            "break down barriers: 打破障碍",
+            "take part in: 参加",
+            "play a role in: 在…中发挥作用",
+            "be connected with: 与…相连/相关",
+            "be exposed to: 接触到，暴露于",
+            "get access to: 获得…的使用权",
+            "make progress: 取得进步",
+            "come to terms with: 逐渐接受，妥协",
+            "live in harmony with: 与…和谐相处",
+            "benefit from: 从…中获益",
+            "lead to: 导致",
+            "contribute to: 贡献于，有助于",
+            "rely on: 依赖"
+          ],
+          "why_explanation": "这些短语在讨论全球化带来的机遇与挑战、科技的积极与消极影响以及跨文化交流时非常实用，能使表达更地道和精准。",
+          "example": {
+            "question": "请用 'keep pace with' 和 'break down barriers' 描述全球化带来的变化。",
+            "steps": [
+              "全球化使我们必须'keep pace with'（跟上）快速变化。",
+              "同时它也'break down barriers'（打破了障碍）。"
+            ],
+            "answer": "Globalization requires us to keep pace with rapid changes and, at the same time, helps to break down cultural barriers."
+          },
+          "mistakes": [
+            {
+              "wrong": "We need to keep pace the development.",
+              "correct": "We need to keep pace with the development.",
+              "reason": "'keep pace with' 是固定短语，介词 'with' 不能省略。"
+            }
+          ],
+          "memory_tip": "'keep pace with' 联想“保持速度与…一致”。'break down barriers' 联想“把障碍打碎”。",
+          "related": {
+            "prerequisite": "动词短语基础，介词搭配",
+            "next": "全球议题写作，口语表达"
+          }
+        },
+        {
+          "card_id": "05-04",
+          "full_id": "英语-高二上-05-04",
+          "title": "语法：独立主格结构 (进阶)",
+          "type": "高级语法卡",
+          "difficulty": 5,
+          "importance": 4,
+          "definition": "本单元进一步深化独立主格结构，包括其不同形式、与 with 复合结构的区别以及在复杂语境中的应用。",
+          "core_points": [
+            "**基本结构回顾**：名词/代词 + 非谓语动词/形容词/副词/介词短语 (其逻辑主语与主句主语不一致)。",
+            "**常见形式**：",
+            "  1. **名词/代词 + 现在分词 (doing)**：表示主动、进行。",
+            "     - e.g., The sun shining brightly, we went for a picnic.",
+            "  2. **名词/代词 + 过去分词 (done)**：表示被动、完成。",
+            "     - e.g., All the homework finished, he could relax.",
+            "  3. **名词/代词 + 形容词**：",
+            "     - e.g., His eyes wide open, he stared at the screen.",
+            "  4. **名词/代词 + 介词短语**：",
+            "     - e.g., She stood there, a book in her hand.",
+            "**'with' 复合结构作独立主格**：",
+            "  - **结构**：with + 宾语 + 宾语补足语 (补足语可以是现在分词、过去分词、形容词、副词、介词短语)。",
+            "  - 宾语补足语与宾语之间是逻辑上的主谓关系。",
+            "  - e.g., With his hands shaking, he opened the letter. (他手颤抖着)",
+            "  - e.g., With the problem solved, we felt relieved. (问题被解决了)",
+            "  - e.g., With the lights on, the room looked cozy. (灯亮着)",
+            "**独立主格的功能**：作时间、原因、条件、伴随、结果等状语。",
+            "**注意事项**：",
+            "  - 独立主格的逻辑主语与主句主语必须不同。",
+            "  - 'with' 复合结构中的 'with' 不能省略。",
+            "**肯定句示例**：The meeting being over, we all went home.",
+            "**否定句示例**：No one else being present, he had to make the decision himself."
+          ],
+          "why_explanation": "独立主格结构能够在一个句子中表达两个独立但相关的动作或状态，且这两个动作/状态的主语不同。它避免了使用复杂的并列句或从句，使行文更简洁、更富有表现力。'with' 复合结构是其特殊且常用的形式，强调伴随状态。",
+          "example": {
+            "question": "将 'The window was broken. He entered the room.' 合并成一个独立主格结构。",
+            "steps": [
+              "识别两个句子的主语 'the window' 和 'he' 不一致。",
+              "确定第一个动作/状态 'The window was broken' 作为伴随或条件状语。",
+              "将 'the window' 作为独立主格的主语，将 'was broken' 变为过去分词 'broken'。"
+            ],
+            "answer": "The window broken, he entered the room."
+          },
+          "mistakes": [
+            {
+              "wrong": "The game over, we left.",
+              "correct": "The game over, we left. (此句正确)",
+              "reason": "这是正确的独立主格结构，'the game' 是 'over' 的逻辑主语。"
+            },
+            {
+              "wrong": "With the rain falling heavily, he went out.",
+              "correct": "With the rain falling heavily, he went out. (此句正确)",
+              "reason": "'with' 复合结构中，宾语 'the rain' 和宾补 'falling heavily' 构成逻辑上的主谓关系，表示“雨下得很大”。"
+            }
+          ],
+          "memory_tip": "独立主格是“自带主语的小句”，'with' 结构是它的“伴侣”。记住“主语不同，用独立主格”。",
+          "related": {
+            "prerequisite": "分词作状语，非谓语动词",
+            "next": "高级写作中的句式多样性，长难句分析"
+          }
+        },
+        {
+          "card_id": "05-05",
+          "full_id": "英语-高二上-05-05",
+          "title": "语法：'as' 的高级用法 (as if/though, as long as, as far as)",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "本单元深入探讨 'as' 在不同语境中的高级用法，特别是作为连词引导状语从句时。",
+          "core_points": [
+            "**as if / as though**：好像，仿佛 (引导方式状语从句，常用虚拟语气)",
+            "  - **与现在事实相反**：从句谓语用动词过去式 (be动词用were)。",
+            "    - e.g., He acts as if he were a king. (他表现得好像他是个国王。)",
+            "  - **与过去事实相反**：从句谓语用过去完成时 (had done)。",
+            "    - e.g., She talks as though she had known everything. (她说话好像她什么都知道。)",
+            "  - **与将来事实相反** (可能性小)：从句谓语用 would/could/might + 动词原形。",
+            "    - e.g., It looks as if it would rain. (看起来好像要下雨了。)",
+            "  - **表示事实**：如果 'as if/as though' 引导的从句是事实，则用陈述语气。",
+            "    - e.g., He looks as if he is ill. (他看起来好像生病了。——可能他真的病了)",
+            "**as long as / so long as**：只要 (引导条件状语从句)",
+            "  - 含义：表示一个充分条件。",
+            "    - e.g., You can go out as long as you finish your homework. (只要你完成作业，你就可以出去。)",
+            "**as far as**：",
+            "  - **as far as + sb/sth be concerned**：就…而言。",
+            "    - e.g., As far as I'm concerned, it's a good idea. (就我而言，这是个好主意。)",
+            "  - **as far as + 距离/程度**：远到…，达到…程度。",
+            "    - e.g., He ran as far as the river. (他一直跑到河边。)",
+            "  - **as far as + 从句**：据…所知。",
+            "    - e.g., As far as I know, he is honest. (据我所知，他很诚实。)",
+            "**as + 形容词/副词 + as**：和…一样… (比较级)",
+            "  - e.g., He is as tall as his father. (他和他父亲一样高。)",
+            "**as + 介词短语**：作为，像…一样。",
+            "  - e.g., As a teacher, he is responsible. (作为一名老师，他很负责。)",
+            "**肯定句示例**：He behaves as if he were rich.",
+            "**否定句示例**：He talks as though he didn't care."
+          ],
+          "why_explanation": "'as' 是一个多功能词，其含义和用法会随着搭配和语境而变化。掌握其高级用法，特别是引导不同类型状语从句时的规则，能极大地提升语言的精确性和复杂性。",
+          "example": {
+            "question": "将 'He pretends to know everything.' 改写为使用 'as if' 的虚拟语气从句。",
+            "steps": [
+              "识别 'pretends to know everything' 是与事实不符的假设。",
+              "用 'as if' 引导从句，谓语动词用过去式 'knew'。"
+            ],
+            "answer": "He acts as if he knew everything."
+          },
+          "mistakes": [
+            {
+              "wrong": "He acts as if he is a king.",
+              "correct": "He acts as if he were a king. (表示与现在事实相反的虚拟语气)",
+              "reason": "在 'as if/as though' 引导的从句中，如果表示与现在事实相反的假设，be动词要用 'were'。"
+            },
+            {
+              "wrong": "As far as I'm concerned, I don't agree.",
+              "correct": "As far as I'm concerned, I don't agree. (此句正确)",
+              "reason": "'as far as sb be concerned' 是固定搭配，表示“就某人而言”。"
+            }
+          ],
+          "memory_tip": "'as if/though' 是“假装”，后面跟虚拟语气。'as long as' 是“只要”，后面跟条件。'as far as' 是“就…而言”或“据…所知”。",
+          "related": {
+            "prerequisite": "虚拟语气，条件状语从句，比较级",
+            "next": "高级写作中连词的灵活运用"
+          }
+        },
+        {
+          "card_id": "05-06",
+          "full_id": "英语-高二上-05-06",
+          "title": "写作进阶卡：观点论证模板",
+          "type": "写作进阶卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "学习如何在议论文写作中清晰地提出观点，并运用有效的论证方法和模板来支持和发展论点。",
+          "core_points": [
+            "**引言段 (Introduction)**：",
+            "  - **背景介绍**：引入话题，提供必要的背景信息。",
+            "    - e.g., In the era of globalization, the impact of technology on society has become a widely discussed topic.",
+            "  - **提出争议/问题**：引出文章要探讨的核心问题或争议。",
+            "    - e.g., While some argue that..., others maintain that...",
+            "  - **亮明观点 (Thesis Statement)**：清晰地表达自己的立场和主旨。",
+            "    - e.g., This essay aims to demonstrate that... / I firmly believe that...",
+            "**主体段 (Body Paragraphs)**：",
+            "  - **主题句 (Topic Sentence)**：每段开头概括本段中心论点。",
+            "    - e.g., Firstly, the internet has greatly facilitated cross-cultural communication.",
+            "  - **展开论证**：",
+            "    - **举例论证**：提供具体例子、数据、事实来支持观点。",
+            "      - e.g., For instance, social media platforms allow people from different countries to interact easily.",
+            "    - **引用论证**：引用专家观点、名言警句。",
+            "      - e.g., As famously stated by..., '...' ",
+            "    - **对比论证**：通过对比正反两方面来突出自己观点的合理性。",
+            "      - e.g., In contrast to traditional methods, modern technology offers...",
+            "    - **因果论证**：分析现象的原因和结果。",
+            "      - e.g., This increased interaction consequently leads to a better understanding of diverse cultures.",
+            "  - **总结句**：对本段论点进行小结，并承上启下。",
+            "    - e.g., Therefore, it is clear that technological advancements have played a vital role in promoting global understanding.",
+            "**结论段 (Conclusion)**：",
+            "  - **重申观点**：用不同语言再次强调主旨，但避免简单重复。",
+            "    - e.g., In conclusion, it is undeniable that...",
+            "  - **总结论据**：简要概括主要论点。",
+            "    - e.g., The benefits, ranging from improved communication to enhanced cultural exchange, are significant.",
+            "  - **提出展望/建议**：对未来发展提出合理展望或提出建议。",
+            "    - e.g., It is crucial for us to embrace these changes while addressing potential challenges, ensuring a more harmonious global village for all."
+          ],
+          "why_explanation": "议论文的逻辑性和说服力是其成功的关键。掌握观点论证的模板和方法，能够帮助学生结构化思考，清晰表达，使文章论点明确、论据充分、逻辑严密，从而获得高分。",
+          "example": {
+            "question": "请为“科技对全球化的影响”这一主题，撰写一个引言段。",
+            "steps": [
+              "1. 引入背景：全球化和科技是当前热点。",
+              "2. 提出争议：科技是促进全球化还是带来新问题？",
+              "3. 亮明观点：科技是全球化的主要驱动力，带来机遇但也伴随挑战。"
+            ],
+            "answer": "In the contemporary world, few forces have shaped human society as profoundly as globalization and technological advancement. While some express concerns about the loss of local identities and the digital divide, it is undeniable that technology, particularly the internet and social media, has played a pivotal role in accelerating the process of globalization. This essay will explore how technology serves as both a catalyst for global integration and a source of new challenges in building a truly interconnected 'global village'."
+          },
+          "mistakes": [
+            {
+              "wrong": "引言段直接抛出观点，缺乏背景铺垫；或主体段只有观点没有论据。",
+              "correct": "引言段应循序渐进引出观点；主体段应有主题句、论据和分析，形成完整逻辑链。",
+              "reason": "缺乏背景铺垫会使读者感到突兀。没有论据支撑的观点是苍白无力的，无法说服读者。"
+            }
+          ],
+          "memory_tip": "议论文是“讲道理”，引言“搭台”，主体“唱戏”，结论“谢幕”。记住“论点清晰，论据充分，逻辑严密”。",
+          "related": {
+            "prerequisite": "基础写作，逻辑思维，各种从句和句型",
+            "next": "高级议论文写作，批判性思维"
+          }
+        },
+        {
+          "card_id": "05-07",
+          "full_id": "英语-高二上-05-07",
+          "title": "阅读技巧卡：篇章结构",
+          "type": "阅读技巧卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "分析文章的组织方式和段落之间的逻辑关系，理解作者如何安排信息以达到其写作目的。",
+          "core_points": [
+            "**常见篇章结构类型**：",
+            "  1. **总分结构 (General-Specific)**：",
+            "     - 开头提出总论点，随后各段展开具体细节、例子或论据支持总论点。",
+            "     - 常见于议论文。",
+            "  2. **分总结构 (Specific-General)**：",
+            "     - 先列举事实、细节或现象，最后归纳总结出中心思想。",
+            "     - 常见于说明文或新闻报道。",
+            "  3. **并列结构 (Parallel/Listing)**：",
+            "     - 各段或各部分围绕同一主题，从不同方面进行阐述，各部分之间地位平等。",
+            "     - 常见于介绍多种观点、特点或方法。",
+            "  4. **对比/比较结构 (Contrast/Comparison)**：",
+            "     - 对两个或多个事物进行比较，指出它们的异同点。",
+            "     - 常见于分析两种理论、文化或产品。",
+            "  5. **因果结构 (Cause-Effect)**：",
+            "     - 阐述某一现象的原因及其产生的结果。",
+            "     - 常见于分析社会问题或科学现象。",
+            "  6. **问题-解决结构 (Problem-Solution)**：",
+            "     - 先提出一个问题，然后分析其原因，最后提出解决方案。",
+            "     - 常见于政策建议、社会评论。",
+            "  7. **时间/顺序结构 (Chronological/Sequential)**：",
+            "     - 按照时间顺序或事件发展顺序进行叙述。",
+            "     - 常见于记叙文、历史事件描述、说明书。",
+            "**识别篇章结构的线索**：",
+            "  - **连接词和短语**：firstly, secondly, in addition, however, therefore, as a result, for example, in contrast, on the other hand, then, next, finally 等。",
+            "  - **主题句**：每段的主题句往往揭示了该段在整体结构中的作用。",
+            "  - **段落功能**：某段是引言、背景、论证、例子、转折还是结论。",
+            "**解题步骤**：",
+            "  1. **通读全文**：快速阅读，了解文章大意。",
+            "  2. **分析段落**：识别每段的主题句和主要内容。",
+            "  3. **关注连接词**：留意段落间的过渡词和逻辑关系词。",
+            "  4. **归纳总结**：判断整体组织模式。",
+            "**常见提问方式**：",
+            "  - How is the passage organized?",
+            "  - Which of the following best describes the structure of the passage?",
+            "  - The author develops the passage by...",
+            "  - What is the relationship between paragraph X and paragraph Y?"
+          ],
+          "why_explanation": "理解篇章结构有助于读者更好地把握文章的逻辑脉络，预测信息走向，从而更高效地理解文章内容。它不仅是阅读理解的考点，也是写作时组织材料的指导原则。",
+          "example": {
+            "question": "阅读一篇介绍全球变暖原因和影响的文章，其篇章结构最可能是以下哪种？",
+            "steps": [
+              "1. 题目是“全球变暖原因和影响”。",
+              "2. 这种文章通常会先说明“原因”，再说明“影响”。",
+              "3. 这符合因果结构。"
+            ],
+            "answer": "因果结构 (Cause-Effect)。"
+          },
+          "mistakes": [
+            {
+              "wrong": "将文章的某个细节当作结构类型，或混淆不同结构。",
+              "correct": "结构是宏观的组织方式，细节是填充结构的。要从整体上看各部分之间的逻辑联系。",
+              "reason": "对结构理解不深会导致无法准确把握文章的整体逻辑，进而影响对主旨和细节的理解。"
+            }
+          ],
+          "memory_tip": "篇章结构是文章的“骨架”，连接词是“关节”。记住“总分、分总、并列、对比、因果、问题解决、时间顺序”七大结构。",
+          "related": {
+            "prerequisite": "主旨大意，逻辑思维",
+            "next": "写作中的篇章布局，长难句分析"
+          }
+        }
+      ]
+    }
+  ]
+}

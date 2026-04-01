@@ -1,0 +1,1116 @@
+{
+  "subject": "英语",
+  "grade": "高二",
+  "semester": "下册",
+  "textbook": "人教版",
+  "grade_short": "高二下",
+  "units": [
+    {
+      "unit_id": "11",
+      "unit_name": "The World of Art",
+      "cards": [
+        {
+          "card_id": "11-01",
+          "full_id": "英语-高二下-11-01",
+          "title": "词汇：艺术形式与创作者",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元关于不同艺术形式及其创作者的核心词汇。",
+          "core_points": [
+            "art /ɑːrt/ n. 艺术, 美术 (e.g., modern art 现代艺术)",
+            "artist /ˈɑːrtɪst/ n. 艺术家 (e.g., a talented artist 有才华的艺术家)",
+            "painter /ˈpeɪntər/ n. 画家 (e.g., a landscape painter 风景画家)",
+            "sculptor /ˈskʌlptər/ n. 雕塑家 (e.g., a famous sculptor 著名雕塑家)",
+            "writer /ˈraɪtər/ n. 作家 (e.g., a science fiction writer 科幻作家)",
+            "musician /mjuˈzɪʃn/ n. 音乐家 (e.g., a jazz musician 爵士乐音乐家)",
+            "dancer /ˈdænsər/ n. 舞者 (e.g., a professional dancer 职业舞者)",
+            "actor /ˈæktər/ n. 演员 (e.g., a stage actor 舞台演员)",
+            "architect /ˈɑːrkɪtekt/ n. 建筑师 (e.g., a renowned architect 著名建筑师)"
+          ],
+          "why_explanation": "掌握不同艺术门类及其从事者的名称，是理解艺术话题的基础。这些词汇多通过后缀-er/-or/-ist表示“从事某种职业的人”，反映了英语中通过词缀构建新词的常见模式。",
+          "example": {
+            "question": "请用本卡片中的词汇填空：She is a talented ______; her paintings are admired by many. He wants to be an ______ and design beautiful buildings.",
+            "steps": [
+              "第一空描述画画的人，应选择'painter'。",
+              "第二空描述设计建筑的人，应选择'architect'。",
+              "答案是 painter 和 architect。"
+            ],
+            "answer": "She is a talented painter; her paintings are admired by many. He wants to be an architect and design beautiful buildings."
+          },
+          "mistakes": [
+            {
+              "wrong": "He is an art to paint.",
+              "correct": "He is an artist who paints.",
+              "reason": "'Art'是艺术本身，不是从事艺术的人。应使用'artist'或具体职业名称如'painter'，体现出词性与意义的匹配。"
+            }
+          ],
+          "memory_tip": "记住核心词'art'，然后通过后缀-ist（人）、-er（人）、-or（人）来扩展，如 art(ist), paint(er), sculpt(or)。联想这些后缀就像给动词或名词加上“职业标签”。",
+          "related": {
+            "prerequisite": "基础词汇学习，词缀知识",
+            "next": "词汇：艺术作品与特点"
+          }
+        },
+        {
+          "card_id": "11-02",
+          "full_id": "英语-高二下-11-02",
+          "title": "词汇：艺术作品与特点描述",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "描述艺术作品种类、特点和评价的常用词汇。",
+          "core_points": [
+            "masterpiece /ˈmæstərpiːs/ n. 杰作，代表作 (e.g., a literary masterpiece 文学杰作)",
+            "technique /tekˈniːk/ n. 技法，技巧 (e.g., painting technique 绘画技巧)",
+            "style /staɪl/ n. 风格，式样 (e.g., in a modern style 现代风格)",
+            "abstract /ˈæbstrækt/ adj. 抽象的 (e.g., abstract art 抽象艺术)",
+            "realistic /ˌriːəˈlɪstɪk/ adj. 现实的，写实的 (e.g., a realistic portrait 写实肖像)",
+            "vivid /ˈvɪvɪd/ adj. 生动的，鲜明的 (e.g., vivid colors 鲜艳的色彩)",
+            "powerful /ˈpaʊərfl/ adj. 强有力的，有感染力的 (e.g., a powerful performance 震撼人心的表演)",
+            "inspire /ɪnˈspaɪər/ v. 启发，鼓舞 (e.g., inspire creativity 激发创造力)",
+            "interpret /ɪnˈtɜːrprɪt/ v. 诠释，理解 (e.g., interpret a poem 诠释一首诗)",
+            "portray /pɔːrˈtreɪ/ v. 描绘，饰演 (e.g., portray a character 饰演一个角色)",
+            "convey /kənˈveɪ/ v. 传达，表达 (e.g., convey emotions 传达情感)"
+          ],
+          "why_explanation": "这些词汇帮助我们更精准地描述和评价艺术作品，从作品的类型、风格到其给人的感受和传达的意义。它们是艺术评论和鉴赏的基础，体现了英语在表达抽象概念时的丰富性。",
+          "example": {
+            "question": "选择合适的词填空：The artist used ______ colors to make the painting come alive. Her performance was so ______ that it moved the entire audience.",
+            "steps": [
+              "第一空描述颜色，使画作“活起来”，应选择“生动的，鲜明的” vivid。",
+              "第二空描述表演，能“感动所有观众”，应选择“强有力的，有感染力的” powerful。",
+              "答案是 vivid 和 powerful。"
+            ],
+            "answer": "The artist used vivid colors to make the painting come alive. Her performance was so powerful that it moved the entire audience."
+          },
+          "mistakes": [
+            {
+              "wrong": "The painting expressed a deep meaning.",
+              "correct": "The painting conveyed a deep meaning.",
+              "reason": "'Convey'更常用于指艺术作品、语言等传达抽象的意义或情感，强调信息或意义的传递过程；而'express'更多指人主动表达情感或思想，强调主动性。"
+            }
+          ],
+          "memory_tip": "Vivid (活泼的，生动的) 联想 'V' 字形像鲜活的生命，色彩鲜艳。Powerful (有力的) 联想 power (力量)。Convey (传达) 联想 'con-' (共同) + 'vey' (道路)，共同走一条路，信息得以传达。",
+          "related": {
+            "prerequisite": "基础形容词和动词",
+            "next": "易混词卡：表达与传达"
+          }
+        },
+        {
+          "card_id": "11-03",
+          "full_id": "英语-高二下-11-03",
+          "title": "词汇深度：一词多义与熟词生义 'appreciate'",
+          "type": "词汇深度卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "深入理解常用词 'appreciate' 的多重含义和用法。",
+          "core_points": [
+            "1. **欣赏；鉴赏** (to understand and enjoy the good qualities of something): I really appreciate good music. (我真的很欣赏好音乐。)",
+            "2. **感谢** (to be grateful for something): I appreciate your help. (我感谢你的帮助。)",
+            "3. **领会；意识到** (to understand a situation and realize its importance): We appreciate the need for immediate action. (我们意识到立即行动的必要性。)",
+            "4. **增值；上涨** (to increase in value over a period of time): The house has appreciated in value. (这栋房子已经增值了。)",
+            "常见搭配: appreciate sth, appreciate doing sth, appreciate it if..."
+          ],
+          "why_explanation": "'Appreciate' 的核心含义是“认识到价值”，这种价值可以是美学上的（欣赏），可以是情感上的（感激），可以是重要性上的（领会），也可以是经济上的（增值）。英语词汇常通过一个核心意义引申出多种相关含义，理解其核心，有助于掌握其多重含义和灵活运用。",
+          "example": {
+            "question": "选择合适的含义：1. I appreciate your honesty. 2. You need to appreciate the difficulties involved. 3. This painting is difficult to appreciate.",
+            "steps": [
+              "1. 'appreciate your honesty' 指的是对诚实的“感谢”。",
+              "2. 'appreciate the difficulties' 指的是“意识到，领会”困难。",
+              "3. 'difficult to appreciate' 指的是绘画“难以欣赏”。",
+              "答案是：1. 感谢 2. 领会/意识到 3. 欣赏/鉴赏。"
+            ],
+            "answer": "1. 感谢 2. 领会/意识到 3. 欣赏/鉴赏"
+          },
+          "mistakes": [
+            {
+              "wrong": "I appreciate you for your help.",
+              "correct": "I appreciate your help. / I appreciate it if you could help.",
+              "reason": "'Appreciate' 后通常接名词、代词（it）或动名词，不能直接接表示人的代词作宾语。可以说 'appreciate your kindness/help' 或 'appreciate you helping me'，体现了动词的宾语类型限制。"
+            }
+          ],
+          "memory_tip": "联想 'A-P-P-R-E-C-I-A-T-E' 像一个多面体，每一面都代表一种价值：艺术价值（欣赏），人情价值（感谢），现实价值（领会），经济价值（增值）。",
+          "related": {
+            "prerequisite": "基础动词用法",
+            "next": "易混词卡：appreciate vs. evaluate"
+          }
+        },
+        {
+          "card_id": "11-04",
+          "full_id": "英语-高二下-11-04",
+          "title": "语法：非谓语动词作定语和状语",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "非谓语动词（动词不定式、动名词、分词）在句中作定语和状语的用法。",
+          "core_points": [
+            "1. **作定语 (Attributive)**: 修饰名词或代词。",
+            "   - **现在分词 (-ing)**: 表示主动、正在进行，或与被修饰词有主谓关系。e.g., a **walking** stick (能走路的棍子，即拐杖), the boy **playing** football (正在踢足球的男孩)。",
+            "   - **过去分词 (-ed)**: 表示被动、已完成，或与被修饰词有动宾关系。e.g., a **broken** window (被打碎的窗户), the letter **written** yesterday (昨天写的信)。",
+            "   - **动词不定式 (to do)**: 表示将来、目的、尚未发生或动作的性质。e.g., a book **to read** (要读的书), the first person **to arrive** (第一个到达的人)。",
+            "2. **作状语 (Adverbial)**: 修饰动词、形容词、副词或整个句子，表示时间、原因、目的、结果、条件、让步、方式等。",
+            "   - **现在分词 (-ing)**: 表示伴随、时间（when/while）、原因（because/as）、结果（so that）。e.g., **Hearing** the news, she cried. (听到消息后，她哭了。-时间/原因)",
+            "   - **过去分词 (-ed)**: 表示被动、完成、条件、时间。e.g., **Given** more time, we could do it better. (如果再多给点时间，我们会做得更好。-条件)",
+            "   - **动词不定式 (to do)**: 表示目的（in order to/so as to）、结果（too...to, enough to）、原因（to one's surprise）、条件。e.g., He worked hard **to pass** the exam. (他努力学习为了通过考试。-目的)"
+          ],
+          "why_explanation": "非谓语动词的引入是为了简化复合句，使表达更简洁、更富变化。它们虽然不是句子的谓语，但保留了动词的某些特性（如时态、语态、带宾语或状语），同时又具有形容词、副词或名词的功能。理解其主被动、进行完成、将来等语义是关键，体现了英语在句法结构上的灵活性和经济性。",
+          "example": {
+            "question": "用非谓语动词改写句子：1. The man who is sitting over there is my uncle. 2. Because he was injured, he couldn't play. 3. She opened the door and found no one inside.",
+            "steps": [
+              "1. 'who is sitting' 是定语从句，表示主动进行，可用现在分词作定语：The man **sitting** over there is my uncle。",
+              "2. 'Because he was injured' 是原因状语从句，表示被动，可用过去分词作状语：**Injured**, he couldn't play。",
+              "3. 'She opened the door and found' 是伴随动作，可用现在分词作状语：She opened the door, **finding** no one inside。",
+              "答案如上。"
+            ],
+            "answer": "1. The man sitting over there is my uncle. 2. Injured, he couldn't play. 3. She opened the door, finding no one inside."
+          },
+          "mistakes": [
+            {
+              "wrong": "The book writing by him is very popular.",
+              "correct": "The book written by him is very popular.",
+              "reason": "书是被写的，应使用过去分词 'written' 表示被动，因为动词 'write' 与名词 'book' 之间是被动关系。"
+            },
+            {
+              "wrong": "To finish the task, he worked day and night.",
+              "correct": "To finish the task, he worked day and night.",
+              "reason": "这是正确的用法，表示目的。但要注意，如果主语是动作的发出者，才可以使用不定式做状语。如果不是，则需要独立主格或其他结构，体现了非谓语动词逻辑主语的一致性原则。"
+            }
+          ],
+          "memory_tip": "分词定语：-ing是'正在做'或'主动的'，-ed是'已经被做'或'被动的'。分词状语：-ing多表主动伴随、原因，-ed多表被动原因、条件。不定式：'to do' 联想 'towards' (朝向)，表示目的或将来。",
+          "related": {
+            "prerequisite": "动词不定式、动名词、分词的基本概念",
+            "next": "独立主格结构"
+          }
+        },
+        {
+          "card_id": "11-05",
+          "full_id": "英语-高二下-11-05",
+          "title": "语法：倒装句 (Inversion) - 否定词和Only修饰状语",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "当否定词或由 'only' 修饰的状语置于句首时，句子采用部分倒装的结构。",
+          "core_points": [
+            "1. **否定词置于句首的部分倒装**: 当 hardly, scarcely, never, seldom, rarely, little, no, not, by no means, in no way, under no circumstance, on no account, at no time 等否定词或否定短语位于句首时，句子要部分倒装（即谓语动词的一部分移到主语前面，与疑问句语序相似）。",
+            "   - 结构：否定词/短语 + 助动词/情态动词/be动词 + 主语 + 谓语动词的其余部分",
+            "   - 例句：**Never have I seen** such a beautiful painting. (我从未见过如此美丽的画作。)",
+            "   - 例句：**Hardly had he arrived** when it started to rain. (他刚到就下雨了。)",
+            "   - 例句：**Not until I finished** the book did I realize its true value. (直到我读完这本书才意识到它的真正价值。)",
+            "2. **'Only' 修饰状语置于句首的部分倒装**: 当 'only' 修饰时间状语、地点状语、方式状语或状语从句，并将该状语置于句首时，主句要部分倒装。",
+            "   - 结构：Only + 状语 + 助动词/情态动词/be动词 + 主语 + 谓语动词的其余部分",
+            "   - 例句：**Only in this way can we solve** the problem. (只有这样我们才能解决这个问题。)",
+            "   - 例句：**Only after he left did I remember** his name. (只有在他离开后我才想起他的名字。)",
+            "   - 注意：如果 'only' 修饰主语，则不倒装。e.g., Only he knows the truth. (只有他知道真相。)"
+          ],
+          "why_explanation": "倒装句的目的是为了强调句首的否定词或 'only' 修饰的状语，从而突出其所表达的限制性、强调性或特殊性。这种语序变化能吸引听者/读者的注意力，使表达更生动有力。其结构类似于疑问句，因为疑问句本身就带有强调和求证的意味，这是英语句法强调的一种表现。",
+          "example": {
+            "question": "将下列句子改写成倒装句：1. I have never heard such a wonderful piece of music. 2. We can achieve success only through hard work. 3. He realized his mistake only after his father warned him.",
+            "steps": [
+              "1. 'never' 是否定词，置于句首，使用部分倒装：Never have I heard such a wonderful piece of music.",
+              "2. 'only through hard work' 是 'only' 修饰的方式状语，置于句首，部分倒装：Only through hard work can we achieve success.",
+              "3. 'only after his father warned him' 是 'only' 修饰的时间状语从句，置于句首，主句部分倒装：Only after his father warned him did he realize his mistake.",
+              "答案如上。"
+            ],
+            "answer": "1. Never have I heard such a wonderful piece of music. 2. Only through hard work can we achieve success. 3. Only after his father warned him did he realize his mistake."
+          },
+          "mistakes": [
+            {
+              "wrong": "Seldom he goes to the art gallery.",
+              "correct": "Seldom does he go to the art gallery.",
+              "reason": "否定词 'seldom' 置于句首，需要部分倒装，主语前应有助动词 'does'，遵循“助动词提前”的倒装规则。"
+            },
+            {
+              "wrong": "Only then I understood the meaning.",
+              "correct": "Only then did I understand the meaning.",
+              "reason": "'Only then' 是 'only' 修饰的时间状语，置于句首，主句需要部分倒装，应有助动词 'did'，以构成疑问句语序。"
+            }
+          ],
+          "memory_tip": "倒装句口诀：'否定词或Only领头走，疑问句语序跟着走。' （即助动词/be动词提前）。记住'only'修饰主语不倒装的特例，因为强调的是主语本身，而非主语所处的状语。",
+          "related": {
+            "prerequisite": "疑问句语序，助动词用法",
+            "next": "倒装句：So/Such...that 和 As"
+          }
+        },
+        {
+          "card_id": "11-06",
+          "full_id": "英语-高二下-11-06",
+          "title": "从句进阶：非限制性定语从句",
+          "type": "从句进阶卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "非限制性定语从句对先行词进行补充说明，与主句用逗号隔开，去掉不影响主句的完整性。",
+          "core_points": [
+            "1. **作用**: 提供补充信息，而非限定先行词的范围。没有它，主句意义依然完整。",
+            "2. **标点**: 必须用逗号与主句隔开。",
+            "3. **引导词**: ",
+            "   - **which**: 可指代先行词（物）或整个主句（此时 'which' 位于句首，且前面必须有逗号）。",
+            "     e.g., He showed me his new painting, **which** was very impressive. (指代 painting)",
+            "     e.g., He always arrives late, **which** annoys me a lot. (指代 'He always arrives late' 整个情况)",
+            "   - **who/whom**: 指代人。",
+            "     e.g., My brother, **who** is an artist, lives in Paris. (指代 my brother)",
+            "   - **whose**: 指代人或物的所属关系。",
+            "     e.g., This is Mary, **whose** father is a famous sculptor. (指代 Mary 的父亲)",
+            "   - **where**: 指代地点。",
+            "     e.g., We visited the art gallery, **where** we saw many masterpieces. (指代 art gallery)",
+            "   - **when**: 指代时间。",
+            "     e.g., Last summer, **when** I traveled to Italy, I visited many museums. (指代 Last summer)",
+            "4. **不可用 'that' 或省略引导词**。",
+            "5. **先行词**: 可以是专有名词、独一无二的名词、被物主代词/指示代词修饰的名词，或整个主句。"
+          ],
+          "why_explanation": "限制性定语从句是核心信息，限定了先行词的范围；而非限制性定语从句是附加信息，它只是顺便提一句，主句的意义已经明确。用逗号隔开，就像在口语中停顿一下，表示这部分是额外补充。不能用 'that' 是因为 'that' 具有限定性，不符合非限制性从句的补充说明性质，体现了英语句法在信息层级上的区分。",
+          "example": {
+            "question": "用非限制性定语从句连接句子：1. Picasso was a Spanish painter. He created Cubism. 2. He failed the exam. This made his parents very sad.",
+            "steps": [
+              "1. 'Picasso' 是人，且是专有名词，用 'who' 连接。He created Cubism是补充信息。=> Picasso, who created Cubism, was a Spanish painter.",
+              "2. 'He failed the exam' 是一个完整的事实，用 'which' 指代整个主句。=> He failed the exam, which made his parents very sad.",
+              "答案如上。"
+            ],
+            "answer": "1. Picasso, who created Cubism, was a Spanish painter. 2. He failed the exam, which made his parents very sad."
+          },
+          "mistakes": [
+            {
+              "wrong": "He lives in Beijing that is a big city.",
+              "correct": "He lives in Beijing, which is a big city.",
+              "reason": "Beijing 是专有名词，应该用非限制性定语从句，用逗号隔开并用 'which' 引导，不能用 'that'，因为 'that' 通常用于限定性定语从句。"
+            },
+            {
+              "wrong": "She likes the painting, she bought it yesterday.",
+              "correct": "She likes the painting, which she bought yesterday.",
+              "reason": "两个独立句不能直接用逗号连接，构成逗号连句错误（comma splice）。需要用关系代词 'which' 引导非限制性定语从句，指代 'the painting'，使句子结构更紧凑和逻辑清晰。"
+            }
+          ],
+          "memory_tip": "非限制性定语从句：'逗号，which/who，补充说。' 记住 'that' 和省略是禁区，'which' 能指代一句话。想象逗号像一个“暂停符”，提示信息是附加的。",
+          "related": {
+            "prerequisite": "限制性定语从句",
+            "next": "独立主格结构"
+          }
+        },
+        {
+          "card_id": "11-07",
+          "full_id": "英语-高二下-11-07",
+          "title": "句型：表达对艺术的看法和感受",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "用于描述、评价和表达对艺术作品或表演的个人感受和观点的句型。",
+          "core_points": [
+            "1. **描述/评价作品**: ",
+            "   - The painting/sculpture/performance is (adj.) and (adj.). (e.g., The painting is vivid and powerful.)",
+            "   - What strikes me most about this piece is... (e.g., What strikes me most about this piece is its unique use of color.)",
+            "   - It conveys/expresses a sense of... (e.g., It conveys a sense of peace and tranquility.)",
+            "   - I find it to be (adj.). (e.g., I find it to be quite thought-provoking.)",
+            "2. **表达个人感受**: ",
+            "   - I'm deeply impressed by/with... (e.g., I'm deeply impressed by the artist's technique.)",
+            "   - It makes me feel... / It evokes (emotions) in me. (e.g., It makes me feel joyful. / It evokes a sense of wonder in me.)",
+            "   - I can relate to... (e.g., I can relate to the struggles depicted in the artwork.)",
+            "3. **表达喜爱/不喜欢**: ",
+            "   - I'm a big fan of... (e.g., I'm a big fan of abstract art.)",
+            "   - I really enjoy/appreciate... (e.g., I really enjoy classical music.)",
+            "   - I don't quite understand/connect with... (e.g., I don't quite understand modern dance.)"
+          ],
+          "why_explanation": "这些句型提供了表达复杂情感和观点的框架，避免了重复使用简单句。通过使用更高级的动词和短语（如 'strike me most', 'convey a sense of', 'evoke emotions', 'relate to'），能使表达更具深度和准确性，体现了英语在描述主观感受时的丰富性和精确性。",
+          "example": {
+            "question": "请用本卡片中的句型描述你对一部电影的看法：这部电影非常感人，它让我感受到了希望，我非常欣赏导演的叙事手法。",
+            "steps": [
+              "1. '非常感人' 可以用形容词描述：The movie is deeply moving.",
+              "2. '让我感受到了希望' 可以用 'It makes me feel...' 或 'It evokes...'：It makes me feel hopeful. / It evokes a sense of hope in me.",
+              "3. '欣赏导演的叙事手法' 可以用 'I appreciate...'：I deeply appreciate the director's storytelling technique.",
+              "将这些组合起来。"
+            ],
+            "answer": "The movie is deeply moving. It makes me feel hopeful, and I deeply appreciate the director's storytelling technique."
+          },
+          "mistakes": [
+            {
+              "wrong": "I think the painting is beautiful.",
+              "correct": "I find the painting to be beautiful. / What strikes me most about the painting is its beauty.",
+              "reason": "'I think... is...' 过于口语化和简单，用更高级的句型能提升表达水平，使语言更正式、更具表现力。这反映了书面语和口语在表达方式上的差异。"
+            }
+          ],
+          "memory_tip": "记住三个核心表达方向：描述作品（It is.../It conveys...），表达感受（It makes me feel.../I'm impressed by...），表达喜好（I'm a fan of.../I appreciate...）。想象自己在艺术展上，用这些句型与人交流。",
+          "related": {
+            "prerequisite": "基础形容词和情感动词",
+            "next": "写作进阶：观点论证模板"
+          }
+        },
+        {
+          "card_id": "11-08",
+          "full_id": "英语-高二下-11-08",
+          "title": "易混词卡：express vs. convey",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "区分 'express' 和 'convey' 这两个表示“表达、传达”的动词的细微差别。",
+          "core_points": [
+            "**express /ɪkˈspres/ v. 表达；表示**",
+            "   - 强调通过言语、面部表情、行动等方式“主动地”将思想、情感或意见表现出来。",
+            "   - 主语通常是人或有意识的实体。",
+            "   - 搭配：express one's feelings/opinions/thanks, express oneself (表达自己)",
+            "   - 例句：She found it hard to **express** her feelings in words. (她发现很难用语言表达她的感受。)",
+            "**convey /kənˈveɪ/ v. 传达；传递；输送**",
+            "   - 强调将信息、意义、情感从一方“传递”到另一方，可以是主动或被动的传递过程。",
+            "   - 主语可以是人，也可以是艺术作品、文字、符号等无生命实体。",
+            "   - 搭配：convey a message/meaning/idea/impression, convey information",
+            "   - 例句：The painting effectively **conveys** a sense of loneliness. (这幅画有效地传达了一种孤独感。)",
+            "   - 例句：Please **convey** my best wishes to your family. (请向你的家人转达我最美好的祝愿。)"
+          ],
+          "why_explanation": "'Express' 更侧重于“从内到外”的主动展示或发出，强调动作本身。而 'convey' 更侧重于“从源头到接收者”的传递过程和结果，强调信息或意义的流通。在艺术语境中，艺术家 'express' 自己的情感，而艺术作品则 'convey' 某种信息或情感给观众。这种区别反映了英语词汇在语义上的精微之处。",
+          "example": {
+            "question": "选择 'express' 或 'convey' 填空：1. The artist wanted to ______ his anger through his work. 2. The music ______ a strong sense of joy. 3. I couldn't ______ what I truly felt.",
+            "steps": [
+              "1. 艺术家“想要”主动表达愤怒，用 'express'。",
+              "2. 音乐“传达”出一种快乐感，音乐是载体，用 'convey'。",
+              "3. 我“无法”主动表达我的真实感受，用 'express'。",
+              "答案如上。"
+            ],
+            "answer": "1. express 2. conveys 3. express"
+          },
+          "mistakes": [
+            {
+              "wrong": "The poem expressed a deep meaning.",
+              "correct": "The poem conveyed a deep meaning.",
+              "reason": "诗歌是载体，它“传达”意义，而不是主动“表达”意义。诗歌本身没有意识去主动表达，它是信息的载体。"
+            }
+          ],
+          "memory_tip": "Express (主动表露)：'ex-' (向外) + 'press' (压)，像把内心的东西压出来。Convey (传递信息)：'con-' (共同) + 'vey' (道路)，信息在共同的道路上传递。",
+          "related": {
+            "prerequisite": "动词辨析",
+            "next": "易混词卡：appreciate vs. evaluate"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "12",
+      "unit_name": "Environmental Protection",
+      "cards": [
+        {
+          "card_id": "12-01",
+          "full_id": "英语-高二下-12-01",
+          "title": "词汇：环境问题与污染",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元关于环境问题、污染类型及其影响的核心词汇。",
+          "core_points": [
+            "environment /ɪnˈvaɪrənmənt/ n. 环境 (e.g., protect the environment 保护环境)",
+            "pollution /pəˈluːʃn/ n. 污染 (e.g., air pollution 空气污染)",
+            "contaminate /kənˈtæmɪneɪt/ v. 污染，弄脏 (e.g., contaminated water 被污染的水)",
+            "emission /ɪˈmɪʃn/ n. 排放物，散发 (e.g., carbon emissions 碳排放)",
+            "deforestation /ˌdiːˌfɔːrɪˈsteɪʃn/ n. 砍伐森林 (e.g., suffer from deforestation 遭受森林砍伐)",
+            "desertification /dɪˌzɜːrtɪfɪˈkeɪʃn/ n. 荒漠化 (e.g., combat desertification 治理荒漠化)",
+            "extinction /ɪkˈstɪŋkʃn/ n. 灭绝 (e.g., face extinction 面临灭绝)",
+            "global warming /ˌɡloʊbl ˈwɔːrmɪŋ/ n. 全球变暖",
+            "climate change /ˈklaɪmət tʃeɪndʒ/ n. 气候变化",
+            "waste /weɪst/ n./v. 废物；浪费 (e.g., industrial waste 工业废物)"
+          ],
+          "why_explanation": "这些词汇是讨论环境问题的基础，掌握它们有助于准确描述各种环境挑战及其成因。很多词汇通过前缀（如de-表示去除）和后缀（如-tion表示行为或结果）构成，体现了英语词汇构词的系统性。",
+          "example": {
+            "question": "用本卡片中的词汇填空：1. The factory's ______ led to serious water ______. 2. ______ is a major cause of ______ and habitat loss.",
+            "steps": [
+              "1. 工厂会产生“排放物”，导致水“污染”。所以是 emission 和 pollution。",
+              "2. 砍伐森林（deforestation）是“荒漠化”（desertification）和栖息地丧失的主要原因。",
+              "答案如上。"
+            ],
+            "answer": "1. The factory's emissions led to serious water pollution. 2. Deforestation is a major cause of desertification and habitat loss."
+          },
+          "mistakes": [
+            {
+              "wrong": "The air is very pollute.",
+              "correct": "The air is very polluted. / There is serious air pollution.",
+              "reason": "'Pollute' 是动词，表示“污染”的动作；形容空气被污染应使用形容词 'polluted'（被动的）或名词 'pollution'（污染现象），体现了词性与句法功能的匹配。"
+            }
+          ],
+          "memory_tip": "Pollution (污染) 联想 'pull' (拉) + 'solution' (溶液)，把脏东西拉进溶液。Deforestation (砍伐森林) 联想 'de-' (去除) + 'forest' (森林)。",
+          "related": {
+            "prerequisite": "基础环境词汇",
+            "next": "词汇：环境保护措施"
+          }
+        },
+        {
+          "card_id": "12-02",
+          "full_id": "英语-高二下-12-02",
+          "title": "词汇：环境保护措施与可持续发展",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元关于环境保护行动、资源利用和可持续发展策略的核心词汇。",
+          "core_points": [
+            "conserve /kənˈsɜːrv/ v. 保护，节约 (e.g., conserve energy 节约能源)",
+            "preserve /prɪˈzɜːrv/ v. 保护，保存 (e.g., preserve wildlife 保护野生生物)",
+            "recycle /ˌriːˈsaɪkl/ v. 回收利用 (e.g., recycle plastic 回收塑料)",
+            "sustainable /səˈsteɪnəbl/ adj. 可持续的 (e.g., sustainable development 可持续发展)",
+            "renewable /rɪˈnuːəbl/ adj. 可再生的 (e.g., renewable energy 可再生能源)",
+            "alternative /ɔːlˈtɜːrnətɪv/ adj./n. 替代的；替代品 (e.g., alternative fuels 替代燃料)",
+            "initiative /ɪnɪʃətɪv/ n. 倡议，新举措 (e.g., environmental initiative 环保倡议)",
+            "advocate /ˈædvəkeɪt/ v./n. 提倡；倡导者 (e.g., advocate for environmental protection 倡导环境保护)",
+            "habitat /ˈhæbɪtæt/ n. 栖息地 (e.g., protect natural habitats 保护自然栖息地)",
+            "biodiversity /ˌbaɪoʊdaɪˈvɜːrsəti/ n. 生物多样性"
+          ],
+          "why_explanation": "这些词汇是讨论如何应对环境挑战、实现人与自然和谐共处的关键。它们涵盖了从个人行为到国家政策层面的环保行动，反映了英语在描述复杂社会议题时的精确性。",
+          "example": {
+            "question": "选择合适的词填空：1. We should try to use ______ energy sources. 2. The local government launched a new ______ to reduce plastic waste. 3. Protecting ______ is crucial for maintaining ______.",
+            "steps": [
+              "1. 能源应是“可再生的”，所以选择 renewable。",
+              "2. 政府推出的是“倡议，新举措”，选择 initiative。",
+              "3. 保护“栖息地”对维持“生物多样性”至关重要，选择 habitat 和 biodiversity。",
+              "答案如上。"
+            ],
+            "answer": "1. We should try to use renewable energy sources. 2. The local government launched a new initiative to reduce plastic waste. 3. Protecting habitats is crucial for maintaining biodiversity."
+          },
+          "mistakes": [
+            {
+              "wrong": "We must save the environment.",
+              "correct": "We must protect/conserve the environment.",
+              "reason": "'Save' 更多指“拯救”或“储存”，而“保护环境”更常用 'protect'（泛指保护）或 'conserve'（侧重节约利用），体现了动词在具体语境下的最佳选择。"
+            }
+          ],
+          "memory_tip": "Sustainable (可持续的) 联想 'sustain' (维持) + 'able' (能)，能维持下去的。Renewable (可再生的) 联想 're-' (再次) + 'new' (新的) + 'able' (能)，能再次变新的。",
+          "related": {
+            "prerequisite": "基础动词和名词",
+            "next": "词汇深度：词根词缀 - bio, eco"
+          }
+        },
+        {
+          "card_id": "12-03",
+          "full_id": "英语-高二下-12-03",
+          "title": "词汇深度：高频搭配 'take' 的环境相关短语",
+          "type": "词汇深度卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "学习动词 'take' 在环境话题中的高频搭配及其含义。",
+          "core_points": [
+            "1. **take action**: 采取行动 (e.g., We must take action to reduce pollution.)",
+            "2. **take measures**: 采取措施 (e.g., The government took strict measures to protect forests.)",
+            "3. **take responsibility for**: 对...负责 (e.g., Individuals should take responsibility for their impact on the environment.)",
+            "4. **take sth into account/consideration**: 考虑，顾及 (e.g., We need to take environmental factors into account when planning new projects.)",
+            "5. **take advantage of**: 利用 (e.g., We should take advantage of renewable energy sources.)",
+            "6. **take up**: 占用 (空间、时间)；开始从事 (e.g., Landfills take up too much space. He took up environmental studies.)",
+            "7. **take part in**: 参加 (e.g., Many students took part in the tree-planting activity.)"
+          ],
+          "why_explanation": "'Take' 是一个多功能动词，与不同的名词、介词或副词搭配可以形成丰富的短语，表达具体的动作和概念。掌握这些短语有助于更地道、准确地表达环境相关的主题，体现了英语中动词短语的灵活性和表达力。",
+          "example": {
+            "question": "用 'take' 的短语填空：1. It's time to ______ serious ______ against climate change. 2. We should ______ renewable energy. 3. Everyone should ______ their ______ for protecting nature.",
+            "steps": [
+              "1. 针对气候变化应“采取行动”：take serious action。",
+              "2. 应该“利用”可再生能源：take advantage of。",
+              "3. 每个人都应“对...负责”：take their responsibility for。",
+              "答案如上。"
+            ],
+            "answer": "1. It's time to take serious action against climate change. 2. We should take advantage of renewable energy. 3. Everyone should take their responsibility for protecting nature."
+          },
+          "mistakes": [
+            {
+              "wrong": "We need to do actions.",
+              "correct": "We need to take action.",
+              "reason": "'Take action' 是固定搭配，不能用 'do actions'。英语中动词与名词的搭配往往是固定的，需要记忆。"
+            },
+            {
+              "wrong": "We must consider environmental factors.",
+              "correct": "We must take environmental factors into account/consideration.",
+              "reason": "虽然 'consider' 正确，但 'take sth into account/consideration' 是更高级、更正式的表达，尤其在书面语和学术语境中，能提升语言的专业性。"
+            }
+          ],
+          "memory_tip": "联想 'take' 像一只手，可以'抓取'（take action, take measures），'承担'（take responsibility），'纳入'（take into account），'利用'（take advantage）。",
+          "related": {
+            "prerequisite": "基础动词短语",
+            "next": "写作进阶：观点论证模板"
+          }
+        },
+        {
+          "card_id": "12-04",
+          "full_id": "英语-高二下-12-04",
+          "title": "语法：虚拟语气 (Subjunctive Mood) - If条件句",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "虚拟语气用于表示与事实相反或不可能发生的情况、愿望、建议等。本卡片聚焦于 'If' 条件句中的虚拟语气。",
+          "core_points": [
+            "1. **与现在事实相反**: ",
+            "   - **条件从句**: If + 主语 + 动词过去式 (be动词用 were)",
+            "   - **主句**: 主语 + would/could/might/should + 动词原形",
+            "   - 例句：If I **were** you, I **would protect** the environment more. (如果我是你，我会更保护环境。- 事实是我不是你)",
+            "   - 例句：If we **didn't waste** water, there **would be** enough for everyone. (如果我们不浪费水，每个人都会有足够的水。- 事实是我们浪费水)",
+            "2. **与过去事实相反**: ",
+            "   - **条件从句**: If + 主语 + had + 过去分词",
+            "   - **主句**: 主语 + would/could/might/should + have + 过去分词",
+            "   - 例句：If we **had taken** action earlier, the pollution **would not have been** so serious. (如果我们早点采取行动，污染就不会那么严重了。- 事实是我们没有早点行动)",
+            "3. **与将来事实可能相反或难以实现**: ",
+            "   - **条件从句**: If + 主语 + 动词过去式 (be动词用 were) / If + 主语 + should + 动词原形 / If + 主语 + were to + 动词原形",
+            "   - **主句**: 主语 + would/could/might/should + 动词原形",
+            "   - 例句：If it **were to rain** tomorrow, the outdoor activity **would be** cancelled. (如果明天会下雨，户外活动就会取消。- 将来下雨可能性小)",
+            "   - 例句：If you **should change** your mind, please let me know. (如果你改变主意，请告诉我。- 将来改变主意可能性小)"
+          ],
+          "why_explanation": "虚拟语气反映了说话者对某一事件的态度或判断，即认为其不真实、不可能或仅仅是一种设想。通过改变动词的形式，英语能够清晰地表达这种“非现实性”。理解其时态变化是关键，因为虚拟语气中的动词时态通常比实际发生的时间“倒退”一步（现在用过去式，过去用过去完成时），这是一种语法上的“时间位移”来表达假设。",
+          "example": {
+            "question": "用虚拟语气完成句子：1. If I (know) about the environmental conference, I (attend) it yesterday. 2. If we (not recycle) more, the landfill (overflow) in the future. 3. If humans (not protect) wildlife, many species (die out) by now.",
+            "steps": [
+              "1. 'yesterday' 表明是与过去事实相反，从句用 had known，主句用 would have attended。",
+              "2. 'in the future' 表明是与将来事实可能相反，从句用 didn't recycle，主句用 would overflow。",
+              "3. 'by now' 表明是对过去状况的假设对现在结果的影响（混合虚拟），从句用 had not protected，主句用 would have died out。",
+              "答案如上。"
+            ],
+            "answer": "1. If I had known about the environmental conference, I would have attended it yesterday. 2. If we didn't recycle more, the landfill would overflow in the future. 3. If humans had not protected wildlife, many species would have died out by now."
+          },
+          "mistakes": [
+            {
+              "wrong": "If I was rich, I would travel the world.",
+              "correct": "If I were rich, I would travel the world.",
+              "reason": "在虚拟语气中，be动词无论主语人称单复数，一律用 'were'，这是虚拟语气的一个特殊规定，旨在与陈述语气区分开来。"
+            },
+            {
+              "wrong": "If he had studied harder, he would pass the exam.",
+              "correct": "If he had studied harder, he would have passed the exam.",
+              "reason": "与过去事实相反的虚拟语气，主句动词形式应是 'would have + 过去分词'，与从句的过去完成时相呼应，表示对过去结果的假设。"
+            }
+          ],
+          "memory_tip": "虚拟语气口诀：'现在用过去，过去用过完，将来should/were to。主句would/could/might/should，跟着时态变。' (现在跟原形，过去跟have+过分)。",
+          "related": {
+            "prerequisite": "条件句，一般过去时，过去完成时",
+            "next": "虚拟语气：wish, as if, suggestions"
+          }
+        },
+        {
+          "card_id": "12-05",
+          "full_id": "英语-高二下-12-05",
+          "title": "语法：虚拟语气 (Subjunctive Mood) - wish, would rather, as if/though",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "虚拟语气在 'wish', 'would rather' 和 'as if/though' 后面的用法，表示愿望、宁愿或假设。",
+          "core_points": [
+            "1. **wish 后的虚拟语气**: 表示对现在、过去或将来的愿望，但与事实相反或难以实现。",
+            "   - **对现在或将来**: wish + (that) + 主语 + 动词过去式 (be动词用 were)",
+            "     e.g., I **wish I knew** how to solve this environmental problem. (我希望我知道如何解决这个环境问题。- 事实是我不知道)",
+            "     e.g., I **wish it were not** raining tomorrow. (我希望明天不要下雨。- 事实是可能下雨)",
+            "   - **对过去**: wish + (that) + 主语 + had + 过去分词",
+            "     e.g., We **wish we had taken** more measures to prevent pollution. (我们希望我们采取了更多措施来防止污染。- 事实是我们没有)",
+            "2. **would rather 后的虚拟语气**: 表示“宁愿...”，其后的从句动词形式随时间变化。",
+            "   - **对现在或将来**: would rather + (that) + 主语 + 动词过去式",
+            "     e.g., I'd rather you **didn't throw** away plastic bottles. (我宁愿你不要扔塑料瓶。- 强调现在或将来的动作)",
+            "   - **对过去**: would rather + (that) + 主语 + had + 过去分词",
+            "     e.g., I'd rather you **had told** me about the recycling program earlier. (我宁愿你早点告诉我回收计划。- 强调过去的动作)",
+            "3. **as if/though 后的虚拟语气**: 表示“好像，仿佛”，描述与事实相反的假设。",
+            "   - **与现在事实相反**: as if/though + 主语 + 动词过去式 (be动词用 were)",
+            "     e.g., He acts **as if he knew** all about environmental protection. (他表现得好像他什么都懂环保。- 事实是他不懂)",
+            "   - **与过去事实相反**: as if/though + 主语 + had + 过去分词",
+            "     e.g., She talked **as though she had seen** the polar bears herself. (她说话好像她亲眼见过北极熊。- 事实是她没见过)"
+          ],
+          "why_explanation": "这些结构使用虚拟语气是为了表达一种与客观事实不符的愿望、偏好或假设。与条件句类似，通过动词时态的“退后”来表示这种非现实性。理解这些情境下的特定动词形式是掌握虚拟语气的关键，体现了英语在表达假设性、非真实性情境时的独特语法机制。",
+          "example": {
+            "question": "用虚拟语气完成句子：1. I wish I (can fly) to explore the Amazon rainforest. 2. He talks as if he (be) an expert on climate change. 3. I'd rather you (not waste) water yesterday.",
+            "steps": [
+              "1. 对现在的愿望，用过去式：wish I could fly。",
+              "2. 与现在事实相反的假设，用过去式：as if he were。",
+              "3. 对过去动作的偏好，用过去完成时：would rather you had not wasted。",
+              "答案如上。"
+            ],
+            "answer": "1. I wish I could fly to explore the Amazon rainforest. 2. He talks as if he were an expert on climate change. 3. I'd rather you had not wasted water yesterday."
+          },
+          "mistakes": [
+            {
+              "wrong": "I wish I am taller.",
+              "correct": "I wish I were taller.",
+              "reason": "'wish' 后的从句表示对现在的愿望，be动词用 'were'，这是虚拟语气中的固定用法。"
+            },
+            {
+              "wrong": "He behaved as if he knows nothing.",
+              "correct": "He behaved as if he knew nothing.",
+              "reason": "'as if' 引导的从句表示与现在事实相反，动词用过去式，以表达非真实性。"
+            }
+          ],
+          "memory_tip": "Wish/would rather/as if 后，都用“过去式”表示“现在/将来”的非事实，用“过去完成时”表示“过去”的非事实。",
+          "related": {
+            "prerequisite": "虚拟语气-If条件句",
+            "next": "虚拟语气：suggestion, demand, order"
+          }
+        },
+        {
+          "card_id": "12-06",
+          "full_id": "英语-高二下-12-06",
+          "title": "语法：虚拟语气 (Subjunctive Mood) - suggestion, demand, order",
+          "type": "高级语法卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "虚拟语气在表示建议、要求、命令等动词或名词后的从句中，动词使用原形。",
+          "core_points": [
+            "1. **动词后的虚拟语气**: 在表示“建议、要求、命令”的动词 (如 suggest, recommend, advise, insist, demand, order, command, propose, request, require, urge 等) 后的宾语从句中，谓语动词使用“should + 动词原形”或直接使用“动词原形”。",
+            "   - 结构：主句谓语动词 + (that) + 主语 + (should) + 动词原形",
+            "   - 例句：I **suggest that** we (should) **take** immediate action to protect the wetland. (我建议我们立即采取行动保护湿地。)",
+            "   - 例句：He **insisted that** everyone (should) **participate** in the recycling program. (他坚持每个人都应该参与回收计划。)",
+            "   - 注意：当 'insist' 表示“坚持认为”是事实时，则不用虚拟语气。e.g., He insisted that he was right. (他坚持认为他是对的。)",
+            "2. **名词后的虚拟语气**: 在由上述动词派生出的名词 (如 suggestion, recommendation, advice, demand, order, proposal, request, requirement 等) 后的同位语从句或表语从句中，谓语动词也使用“should + 动词原形”或直接使用“动词原形”。",
+            "   - 结构：...the suggestion/demand/order + (that) + 主语 + (should) + 动词原形",
+            "   - 例句：My **suggestion is that** the government (should) **invest** more in renewable energy. (我的建议是政府应该在可再生能源上投入更多。)",
+            "   - 例句：The **demand that** people (should) **reduce** plastic use is reasonable. (人们减少塑料使用的要求是合理的。)"
+          ],
+          "why_explanation": "这种虚拟语气被称为“should-虚拟语气”或“指令性虚拟语气”。它表达了一种非现实的、尚未发生的“应然”状态，即说话者认为某事“应该”发生，而不是描述已经发生或正在发生的事实。'should' 在此并非情态动词的“应该”，而是虚拟语气的标志，常可省略，体现了英语在表达指令、建议时的特殊语法形式。",
+          "example": {
+            "question": "用虚拟语气完成句子：1. The expert suggested that the factory (install) filters. 2. It is important that every citizen (be) aware of environmental issues. 3. His proposal is that we (organize) a clean-up event next month.",
+            "steps": [
+              "1. 'suggested' 后的宾语从句表示建议，动词用原形 install。",
+              "2. 'It is important that...' 后的从句表示重要性，动词用原形 be。",
+              "3. 'proposal is that...' 后的表语从句表示提议，动词用原形 organize。",
+              "答案如上。"
+            ],
+            "answer": "1. The expert suggested that the factory install filters. 2. It is important that every citizen be aware of environmental issues. 3. His proposal is that we organize a clean-up event next month."
+          },
+          "mistakes": [
+            {
+              "wrong": "He suggested that she studies harder.",
+              "correct": "He suggested that she study harder.",
+              "reason": "'suggest' 后的从句用虚拟语气，动词用原形，不随主语变化，这是指令性虚拟语气的核心特征。"
+            },
+            {
+              "wrong": "The requirement is that all waste is sorted.",
+              "correct": "The requirement is that all waste be sorted.",
+              "reason": "名词 'requirement' 后的表语从句用虚拟语气，动词用原形 'be'，而不是陈述语气的 'is'。"
+            }
+          ],
+          "memory_tip": "口诀：'一建议二要求三命令，动词原形不加s。' (suggestion, demand, order)。记住 'insist' 的双重含义，表“坚持认为事实”时不用虚拟。",
+          "related": {
+            "prerequisite": "动词宾语从句，名词性从句",
+            "next": "写作进阶：观点论证模板"
+          }
+        },
+        {
+          "card_id": "12-07",
+          "full_id": "英语-高二下-12-07",
+          "title": "句型：呼吁环保与提出建议",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "用于呼吁人们关注环境问题、采取行动以及提出具体环保建议的常用句型。",
+          "core_points": [
+            "1. **呼吁关注**: ",
+            "   - It's high time we (did something)... (e.g., It's high time we took environmental protection seriously.)",
+            "   - We can no longer afford to ignore... (e.g., We can no longer afford to ignore the urgent issue of climate change.)",
+            "   - It is imperative that we (should) do something... (e.g., It is imperative that we protect our planet.)",
+            "2. **提出建议**: ",
+            "   - I suggest that we (should) + V. (e.g., I suggest that we reduce our carbon footprint.)",
+            "   - It is recommended that... (e.g., It is recommended that everyone participate in recycling programs.)",
+            "   - We ought to/should/must + V. (e.g., We ought to use public transport more often.)",
+            "   - How about/What about + V-ing? (e.g., How about planting more trees in our community?)",
+            "   - One effective way is to... (e.g., One effective way is to develop renewable energy sources.)",
+            "3. **强调责任**: ",
+            "   - Everyone has a role to play in... (e.g., Everyone has a role to play in environmental conservation.)",
+            "   - It is our collective responsibility to... (e.g., It is our collective responsibility to ensure a sustainable future.)"
+          ],
+          "why_explanation": "这些句型不仅提供了表达环保主题的框架，更重要的是它们蕴含了劝说、建议和强调的语气，有助于增强表达的说服力和影响力。例如，'It's high time...' 带有强烈的紧迫感和责备意味，反映了英语在表达语气和情感时的丰富性。",
+          "example": {
+            "question": "请用本卡片中的句型写一段呼吁环保的文字：我们不能再忽视环境问题了。我建议每个人都减少塑料使用。保护我们的地球是我们共同的责任。",
+            "steps": [
+              "1. '不能再忽视'：We can no longer afford to ignore environmental problems.",
+              "2. '建议每个人减少塑料使用'：I suggest that everyone reduce plastic use.",
+              "3. '保护地球是我们共同的责任'：It is our collective responsibility to protect our planet.",
+              "将这些组合起来。"
+            ],
+            "answer": "We can no longer afford to ignore environmental problems. I suggest that everyone reduce plastic use. It is our collective responsibility to protect our planet."
+          },
+          "mistakes": [
+            {
+              "wrong": "We must protect environment.",
+              "correct": "We must protect the environment.",
+              "reason": "特指我们生存的“环境”时，通常需要加定冠词 'the'，因为 'environment' 在此语境下是特指的，而非泛指。"
+            }
+          ],
+          "memory_tip": "记住三个核心功能：'高时机' (It's high time...) 呼吁，'建议' (I suggest.../It is recommended...) 行动，'责任' (It's our responsibility...) 强调。想象自己是一名环保倡导者，用这些话语打动听众。",
+          "related": {
+            "prerequisite": "虚拟语气，情态动词",
+            "next": "写作进阶：议论文写作"
+          }
+        },
+        {
+          "card_id": "12-08",
+          "full_id": "英语-高二下-12-08",
+          "title": "易混词卡：conserve vs. preserve",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "区分 'conserve' 和 'preserve' 这两个表示“保护”的动词的细微差别。",
+          "core_points": [
+            "**conserve /kənˈsɜːrv/ v. 保护；节约**",
+            "   - 强调“节约使用，避免浪费”，以确保长期可用性或维持现状。",
+            "   - 常见于资源管理、能源节约等语境。",
+            "   - 搭配：conserve energy/water/resources, conserve natural beauty",
+            "   - 例句：We must **conserve** water during the drought. (在干旱期间我们必须节约用水。)",
+            "**preserve /prɪˈzɜːrv/ v. 保护；保存；维持**",
+            "   - 强调“使...免受损害、腐烂或破坏”，以保持其原始状态或存在。",
+            "   - 常见于保护濒危物种、历史遗迹、食物等语境。",
+            "   - 搭配：preserve wildlife/historical sites/food, preserve peace",
+            "   - 例句：Efforts are being made to **preserve** endangered species. (正在努力保护濒危物种。)",
+            "   - 例句：This method helps to **preserve** the freshness of food. (这种方法有助于保持食物的新鲜度。)"
+          ],
+          "why_explanation": "'Conserve' 的核心是“明智地使用”以避免耗尽，侧重于资源的“可持续利用”。而 'preserve' 的核心是“保护使其不受伤害或改变”，侧重于“维持其原貌或存在”。两者都涉及保护，但侧重点不同，反映了英语词汇在描述相似概念时通过细微差别来精确表达的特点。",
+          "example": {
+            "question": "选择 'conserve' 或 'preserve' 填空：1. We need to ______ our natural resources for future generations. 2. The museum aims to ______ ancient artifacts. 3. Turning off lights helps to ______ electricity.",
+            "steps": [
+              "1. 保护自然资源供后代使用，强调节约和可持续利用，用 'conserve'。",
+              "2. 博物馆旨在保护古代文物，强调使其免受损害，用 'preserve'。",
+              "3. 关灯有助于节约用电，强调节约，用 'conserve'。",
+              "答案如上。"
+            ],
+            "answer": "1. conserve 2. preserve 3. conserve"
+          },
+          "mistakes": [
+            {
+              "wrong": "We should preserve water.",
+              "correct": "We should conserve water.",
+              "reason": "节约用水应使用 'conserve'，因为强调的是资源的合理利用和避免浪费。'preserve water' 听起来像把水保存起来不让它变质，语义不符。"
+            }
+          ],
+          "memory_tip": "Conserve (节约)：联想 'con-' (共同) + 'serve' (服务)，共同为长久服务而节约。Preserve (保护原貌)：'pre-' (提前) + 'serve' (服务)，提前做好服务（保护），使其不受损害。",
+          "related": {
+            "prerequisite": "动词辨析",
+            "next": "词汇：环境保护措施与可持续发展"
+          }
+        }
+      ]
+    },
+    {
+      "unit_id": "13",
+      "unit_name": "The Internet",
+      "cards": [
+        {
+          "card_id": "13-01",
+          "full_id": "英语-高二下-13-01",
+          "title": "词汇：互联网技术与应用",
+          "type": "词汇卡",
+          "difficulty": 2,
+          "importance": 4,
+          "definition": "本单元关于互联网技术、常用应用和相关行为的核心词汇。",
+          "core_points": [
+            "Internet /ˈɪntərnet/ n. 互联网 (e.g., surf the Internet 上网)",
+            "website /ˈwebsaɪt/ n. 网站 (e.g., browse a website 浏览网站)",
+            "app /æp/ n. 应用程序 (e.g., download an app 下载一个应用)",
+            "online /ˌɒnˈlaɪn/ adj./adv. 在线的；网上 (e.g., online shopping 网上购物)",
+            "offline /ˌɒfˈlaɪn/ adj./adv. 离线的；网下 (e.g., work offline 离线工作)",
+            "digital /ˈdɪdʒɪtl/ adj. 数字的 (e.g., digital devices 数字设备)",
+            "platform /ˈplætfɔːrm/ n. 平台 (e.g., social media platform 社交媒体平台)",
+            "access /ˈækses/ v./n. 访问；获取 (e.g., access information 获取信息)",
+            "upload /ˌʌpˈloʊd/ v. 上传 (e.g., upload photos 上传照片)",
+            "download /ˌdaʊnˈloʊd/ v. 下载 (e.g., download files 下载文件)",
+            "privacy /ˈpraɪvəsi/ n. 隐私 (e.g., online privacy 网上隐私)"
+          ],
+          "why_explanation": "这些词汇是理解和讨论互联网及其对现代生活影响的基础。它们涵盖了从基础设施到用户行为的各个方面，体现了技术发展对语言词汇的丰富和更新。",
+          "example": {
+            "question": "用本卡片中的词汇填空：1. I often ______ information from the Internet. 2. Many people enjoy ______ shopping. 3. We should protect our ______ when using social media ______.",
+            "steps": [
+              "1. 从互联网获取信息是 'download'。",
+              "2. 在线购物是 'online shopping'。",
+              "3. 使用社交媒体“平台”时，应保护“隐私”，所以是 privacy 和 platform。",
+              "答案如上。"
+            ],
+            "answer": "1. I often download information from the Internet. 2. Many people enjoy online shopping. 3. We should protect our privacy when using social media platforms."
+          },
+          "mistakes": [
+            {
+              "wrong": "I spent a lot of time on the network.",
+              "correct": "I spent a lot of time on the Internet.",
+              "reason": "'Network' 是一个更宽泛的词，指任何网络，而特指全球互联网时，常用 'the Internet'，体现了特定语境下词汇的精确选择。"
+            }
+          ],
+          "memory_tip": "Online (在线) 联想 'on' (在上面) + 'line' (线)，在网络线上。Upload (上传) 联想 'up' (向上) + 'load' (载入)，向上传输数据。",
+          "related": {
+            "prerequisite": "基础计算机词汇",
+            "next": "词汇：网络安全与挑战"
+          }
+        },
+        {
+          "card_id": "13-02",
+          "full_id": "英语-高二下-13-02",
+          "title": "词汇：网络安全与挑战",
+          "type": "词汇卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "本单元关于互联网安全问题、潜在风险和应对挑战的核心词汇。",
+          "core_points": [
+            "cybersecurity /ˌsaɪbərsɪˈkjʊrəti/ n. 网络安全",
+            "threat /θret/ n. 威胁 (e.g., security threat 安全威胁)",
+            "vulnerable /ˈvʌlnərəbl/ adj. 易受攻击的，脆弱的 (e.g., vulnerable to attacks 易受攻击)",
+            "hack /hæk/ v. 攻击，入侵 (e.g., hack into a system 侵入系统)",
+            "phishing /ˈfɪʃɪŋ/ n. 网络钓鱼",
+            "malware /ˈmælwer/ n. 恶意软件",
+            "password /ˈpæswɜːrd/ n. 密码 (e.g., strong password 强密码)",
+            "encryption /ɪnˈkrɪpʃn/ n. 加密 (e.g., data encryption 数据加密)",
+            "authenticate /ɔːˈθentɪkeɪt/ v. 认证，验证 (e.g., authenticate a user 验证用户)",
+            "regulate /ˈreɡjuleɪt/ v. 管理，规范 (e.g., regulate online content 规范网络内容)",
+            "misinformation /ˌmɪsɪnfərˈmeɪʃn/ n. 错误信息"
+          ],
+          "why_explanation": "这些词汇是讨论互联网负面影响和如何保障网络安全的关键。掌握它们有助于理解网络犯罪的类型、防御措施以及信息管理的挑战，反映了现代社会对网络安全日益增长的关注。",
+          "example": {
+            "question": "选择合适的词填空：1. Strong ______ is essential for ______ to protect personal data. 2. Be careful not to click on suspicious links to avoid ______ attacks and ______.",
+            "steps": [
+              "1. 保护个人数据需要“加密”和“网络安全”，所以是 encryption 和 cybersecurity。",
+              "2. 避免点击可疑链接是为了避免“网络钓鱼”攻击和“恶意软件”，所以是 phishing 和 malware。",
+              "答案如上。"
+            ],
+            "answer": "1. Strong encryption is essential for cybersecurity to protect personal data. 2. Be careful not to click on suspicious links to avoid phishing attacks and malware."
+          },
+          "mistakes": [
+            {
+              "wrong": "We need to make our information secret.",
+              "correct": "We need to encrypt our information.",
+              "reason": "'Encrypt' 是更专业的术语，指通过编码来保护信息安全，比 'make secret' 更准确，体现了专业术语的精确性。"
+            }
+          ],
+          "memory_tip": "Cybersecurity (网络安全) 联想 'cyber' (网络的) + 'security' (安全)。Phishing (网络钓鱼) 联想 'fishing' (钓鱼)，通过诱骗获取信息。",
+          "related": {
+            "prerequisite": "基础互联网词汇",
+            "next": "词汇深度：词根词缀 - cyber, info"
+          }
+        },
+        {
+          "card_id": "13-03",
+          "full_id": "英语-高二下-13-03",
+          "title": "词汇深度：熟词生义 'address'",
+          "type": "词汇深度卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "深入理解常用词 'address' 的多重含义和用法，尤其是在正式语境中。",
+          "core_points": [
+            "1. **地址；住址** (n. the number of the house, name of the road, and name of the town that a person lives in or where an organization is located): What's your email address?",
+            "2. **在...上写地址** (v. to write a name and address on an envelope, package, etc.): The letter was incorrectly addressed.",
+            "3. **向...讲话；发表演说** (v. to speak or write to someone; to make a formal speech to a group of people): The president addressed the nation.",
+            "4. **处理；解决 (问题)** (v. to deal with a problem or issue): We need to address the issue of online privacy. (本单元重点)",
+            "5. **称呼** (v. to use a particular name or title for someone when you speak to them): How should I address him?",
+            "常见搭配: address a problem/issue/concern, address an audience"
+          ],
+          "why_explanation": "'Address' 的核心含义是“指向某个目标”。这个目标可以是物理位置（地址），可以是听众（演讲），也可以是需要处理的问题（解决）。理解这个核心有助于串联其多重含义，体现了英语词汇通过核心语义进行多义引申的特点。",
+          "example": {
+            "question": "选择合适的含义：1. The company must address the security vulnerabilities. 2. He addressed the crowd for an hour. 3. Please check the address on the package.",
+            "steps": [
+              "1. 'address the security vulnerabilities' 指的是“处理，解决”安全漏洞。",
+              "2. 'addressed the crowd' 指的是“向...讲话，发表演说”。",
+              "3. 'check the address' 指的是“地址”。",
+              "答案如上。"
+            ],
+            "answer": "1. 处理/解决 2. 发表演说 3. 地址"
+          },
+          "mistakes": [
+            {
+              "wrong": "We need to solve the privacy problem.",
+              "correct": "We need to address the privacy problem.",
+              "reason": "'Address' 在处理抽象或复杂问题时，比 'solve' 更正式、更常用，强调的是“着手处理”的过程，而 'solve' 强调“解决”的结果。这反映了词汇在不同语境下表达的侧重点差异。"
+            }
+          ],
+          "memory_tip": "Address (地址、处理、演讲)：联想 'A-D-D' 像一个指向牌，指明方向（地址），指明听众（演讲），指明要处理的问题（处理）。",
+          "related": {
+            "prerequisite": "基础动词用法",
+            "next": "易混词卡：solve vs. address"
+          }
+        },
+        {
+          "card_id": "13-04",
+          "full_id": "英语-高二下-13-04",
+          "title": "语法：名词性从句 (Noun Clauses) - 进阶",
+          "type": "从句进阶卡",
+          "difficulty": 4,
+          "importance": 5,
+          "definition": "名词性从句在句中充当名词成分（主语、宾语、表语、同位语），本卡片侧重其进阶用法，特别是同位语从句和带有形式主语/宾语的用法。",
+          "core_points": [
+            "1. **主语从句**: ",
+            "   - 通常用 'It' 作形式主语，将主语从句后置，使句子结构更平衡。",
+            "   - 结构：It is + adj./n. + that 从句 / It is + V-ed + that 从句",
+            "   - 例句：**It is widely believed that** the Internet has changed our lives. (人们普遍认为互联网改变了我们的生活。)",
+            "   - 例句：**It doesn't matter whether** you are online or offline. (你在线还是离线都无关紧要。)",
+            "2. **宾语从句**: ",
+            "   - 动词后的宾语从句：I believe **that online learning is effective**.",
+            "   - 介词后的宾语从句：We are concerned about **how much time teenagers spend online**.",
+            "   - 带有形式宾语 'it'：当动词 (如 make, find, think, feel, consider, believe) 后接宾语从句时，常使用 'it' 作形式宾语，将宾语从句后置。",
+            "   - 结构：主语 + V + it + adj./n. + that 从句",
+            "   - 例句：Many people **find it difficult to control** their screen time. (很多人发现控制屏幕时间很难。)",
+            "   - 例句：We **consider it important that** students use the Internet responsibly. (我们认为学生负责任地使用互联网很重要。)",
+            "3. **表语从句**: ",
+            "   - 结构：主语 + be + that 从句 / wh- 从句",
+            "   - 例句：The problem is **that many users neglect cybersecurity**. (问题是很多用户忽视网络安全。)",
+            "4. **同位语从句**: ",
+            "   - 修饰名词（如 fact, idea, news, belief, hope, doubt, suggestion, report 等），解释该名词的具体内容。",
+            "   - 结构：名词 + that 从句 (that 在从句中不作成分，只起连接作用，不可省略)",
+            "   - 例句：The news **that a new social media platform was launched** excited young people. (一款新的社交媒体平台发布的消息让年轻人很兴奋。)",
+            "   - 注意与定语从句的区别：同位语从句的 'that' 在从句中不作成分，定语从句的 'that' 在从句中作成分 (主语或宾语)。"
+          ],
+          "why_explanation": "名词性从句使句子结构更复杂、表达更丰富。使用形式主语 'It' 和形式宾语 'it' 是为了保持句子的平衡性和易读性，避免过长的从句放在句首或动词后显得头重脚轻。同位语从句则提供了对先行名词的详细解释，使其意义更明确。这些结构体现了英语在句法层面上追求清晰、简洁和平衡的原则。",
+          "example": {
+            "question": "改写句子或完成句子：1. That he will succeed is certain. 2. We should consider that online education has its advantages important. 3. I have no doubt. He will pass the exam.",
+            "steps": [
+              "1. 将主语从句后置，用 'It' 作形式主语：It is certain that he will succeed.",
+              "2. 使用形式宾语 'it'：We should consider it important that online education has its advantages.",
+              "3. 将第二个句子作为第一个句子的同位语从句：I have no doubt that he will pass the exam.",
+              "答案如上。"
+            ],
+            "answer": "1. It is certain that he will succeed. 2. We should consider it important that online education has its advantages. 3. I have no doubt that he will pass the exam."
+          },
+          "mistakes": [
+            {
+              "wrong": "The fact which he failed surprised us.",
+              "correct": "The fact that he failed surprised us.",
+              "reason": "修饰 'fact' 的是同位语从句，用 'that' 引导，'that' 在从句中不作成分。如果用 'which'，则 'which' 必须在从句中作成分，但此句中 'which' 无法充当从句成分。"
+            },
+            {
+              "wrong": "It is true online learning has advantages.",
+              "correct": "It is true that online learning has advantages.",
+              "reason": "形式主语 'It' 后引导主语从句时，通常需要连接词 'that' 来连接，否则会造成语法错误。"
+            }
+          ],
+          "memory_tip": "名词性从句：'主宾表同' 四大功能。形式主语/宾语 'It' 帮它找位置。同位语从句的 'that' 不作成分，只解释名词。记住 'that' 在同位语从句中是“解释说明符”。",
+          "related": {
+            "prerequisite": "基础从句知识",
+            "next": "状语从句进阶"
+          }
+        },
+        {
+          "card_id": "13-05",
+          "full_id": "英语-高二下-13-05",
+          "title": "语法：状语从句进阶 - 让步、条件、目的",
+          "type": "从句进阶卡",
+          "difficulty": 4,
+          "importance": 4,
+          "definition": "深入学习让步、条件和目的状语从句的引导词、语序及特殊用法，提升复杂句的构建能力。",
+          "core_points": [
+            "1. **让步状语从句 (Concessive Clauses)**: ",
+            "   - 引导词：although, though, even though, even if (即使), as/though (用作倒装句的引导词), no matter what/who/when/where/how (无论...)",
+            "   - 特殊用法：",
+            "     - **as/though 引导倒装句**: 将从句中的表语、状语或动词原形移到 'as/though' 之前，表示“尽管...”。",
+            "       e.g., **Young as he is**, he knows a lot about cybersecurity. (尽管他年轻，他对网络安全了解很多。)",
+            "       e.g., **Try as he might**, he couldn't hack into the system. (尽管他尽力了，他还是无法侵入系统。)",
+            "     - **whether...or...**: 无论...还是...。e.g., **Whether you like it or not**, you have to follow the rules.",
+            "2. **条件状语从句 (Conditional Clauses)**: ",
+            "   - 引导词：if, unless (除非), as long as (只要), so long as, on condition that (条件是), provided (that), supposing (that) (假设), in case (以防万一)。",
+            "   - 注意：在条件状语从句中，主句用将来时，从句用一般现在时表示将来。",
+            "   - 特殊用法：**if only** (要是...就好了 - 虚拟语气), **but for/without** (要不是... - 虚拟语气)。",
+            "     e.g., **Provided that** you follow the rules, you can use the Internet freely. (只要你遵守规则，你就可以自由使用互联网。)",
+            "3. **目的状语从句 (Purpose Clauses)**: ",
+            "   - 引导词：so that, in order that (为了), lest (以免，唯恐 - 从句中用 should + 动词原形), for fear that (生怕，唯恐 - 从句中用 should + 动词原形)。",
+            "   - 例句：He studies hard **so that he can get** a good job in the IT industry. (他努力学习，以便能在IT行业找到一份好工作。)",
+            "   - 例句：They keep their personal information private **lest it should be stolen**. (他们保护个人信息，以免被盗。)"
+          ],
+          "why_explanation": "状语从句是连接复杂概念的重要工具，它清晰地表达了主句与从句之间的逻辑关系（让步、条件、目的等）。掌握这些引导词和特殊用法，能使表达更精确、更高级。尤其是一些特殊结构（如 'as...as' 倒装，'lest' 后接 'should'）是英语表达的亮点，体现了英语在表达复杂逻辑关系时的丰富性。",
+          "example": {
+            "question": "用合适的状语从句引导词或结构连接句子：1. He is poor. He is honest. 2. You obey the rules. You can access the website. 3. She logs out carefully. She is afraid her account will be hacked.",
+            "steps": [
+              "1. '他穷，但他诚实' 是让步关系，用 'poor as he is' 或 'although he is poor'。",
+              "2. '你遵守规则，你就能访问网站' 是条件关系，用 'as long as you obey the rules'。",
+              "3. '她小心退出，生怕账户被盗' 是目的关系，用 'lest her account should be hacked' 或 'for fear that her account would be hacked'。",
+              "答案如上。"
+            ],
+            "answer": "1. Poor as he is, he is honest. / Although he is poor, he is honest. 2. As long as you obey the rules, you can access the website. 3. She logs out carefully lest her account should be hacked. / She logs out carefully for fear that her account would be hacked."
+          },
+          "mistakes": [
+            {
+              "wrong": "Although he is young, but he is very smart.",
+              "correct": "Although he is young, he is very smart. / He is young, but he is very smart.",
+              "reason": "'Although' 和 'but' 不能在同一个句子里连用，二者选其一，因为它们都表示转折关系，同时使用会造成重复和语法错误。"
+            },
+            {
+              "wrong": "If he will come, I will tell him.",
+              "correct": "If he comes, I will tell him.",
+              "reason": "条件状语从句中，主句将来时，从句用一般现在时，遵循“主将从现”的原则。"
+            }
+          ],
+          "memory_tip": "让步：'尽管如此，还是...' (although, even if, as倒装)。条件：'如果，只要，除非...' (if, unless, as long as)。目的：'为了，以免...' (so that, in order that, lest)。",
+          "related": {
+            "prerequisite": "基础状语从句，虚拟语气",
+            "next": "独立主格结构"
+          }
+        },
+        {
+          "card_id": "13-06",
+          "full_id": "英语-高二下-13-06",
+          "title": "句型：讨论互联网的利弊与影响",
+          "type": "句型卡",
+          "difficulty": 3,
+          "importance": 4,
+          "definition": "用于讨论互联网的优势、劣势以及对个人和社会影响的常用句型。",
+          "core_points": [
+            "1. **表达优势**: ",
+            "   - The Internet offers/provides us with numerous benefits/opportunities. (e.g., The Internet offers us with numerous opportunities for learning.)",
+            "   - One of the greatest advantages of the Internet is that... (e.g., One of the greatest advantages of the Internet is that it facilitates communication.)",
+            "   - It enables us to... / It allows users to... (e.g., It enables us to access information instantly.)",
+            "2. **表达劣势/挑战**: ",
+            "   - However, the Internet also brings about some drawbacks/challenges. (e.g., However, the Internet also brings about some challenges like cyberbullying.)",
+            "   - A major concern is that... (e.g., A major concern is that personal privacy might be compromised.)",
+            "   - It can lead to... / It may result in... (e.g., It can lead to addiction and social isolation.)",
+            "3. **表达影响**: ",
+            "   - The Internet has a profound/significant impact on... (e.g., The Internet has a profound impact on modern society.)",
+            "   - It plays a vital/crucial role in... (e.g., It plays a vital role in education and commerce.)",
+            "   - It has revolutionized the way we... (e.g., It has revolutionized the way we work and communicate.)"
+          ],
+          "why_explanation": "这些句型提供了结构化的方式来论证互联网的复杂性，避免了简单地罗列观点。通过使用更高级的动词和短语（如 'offer numerous benefits', 'bring about drawbacks', 'have a profound impact', 'revolutionize'），能使论述更具深度和说服力，体现了议论文写作中语言的严谨性和丰富性。",
+          "example": {
+            "question": "请用本卡片中的句型写一段关于互联网的利弊的文字：互联网给我们带来了很多好处，比如便捷的沟通。然而，它也带来了一些挑战，例如隐私泄露。互联网对我们生活有深远影响。",
+            "steps": [
+              "1. '带来好处'：The Internet offers us numerous benefits, such as convenient communication.",
+              "2. '带来挑战'：However, it also brings about some challenges, for example, privacy leakage.",
+              "3. '深远影响'：The Internet has a profound impact on our lives.",
+              "将这些组合起来。"
+            ],
+            "answer": "The Internet offers us numerous benefits, such as convenient communication. However, it also brings about some challenges, for example, privacy leakage. The Internet has a profound impact on our lives."
+          },
+          "mistakes": [
+            {
+              "wrong": "Internet is good.",
+              "correct": "The Internet is beneficial. / The Internet offers us many benefits.",
+              "reason": "过于简单和口语化，缺乏正式和学术表达的严谨性。特指互联网时，通常加定冠词 'the'，并且使用更精确的形容词或动词短语来表达含义。"
+            }
+          ],
+          "memory_tip": "记住三组核心词：'利' (benefits, advantages, enables)，'弊' (drawbacks, challenges, leads to)，'影响' (impact, role, revolutionize)。",
+          "related": {
+            "prerequisite": "议论文常用词汇",
+            "next": "写作进阶：议论文写作"
+          }
+        },
+        {
+          "card_id": "13-07",
+          "full_id": "英语-高二下-13-07",
+          "title": "易混词卡：access vs. approach",
+          "type": "易混词卡",
+          "difficulty": 3,
+          "importance": 3,
+          "definition": "区分 'access' 和 'approach' 这两个在某些语境下都可表示“接近”或“获取”的词汇。",
+          "core_points": [
+            "**access /ˈækses/ n./v. 访问；获取 (to get information, enter a place, or use something)**",
+            "   - 强调“获得使用或进入的权利或手段”。",
+            "   - 常用作名词或及物动词，后直接接宾语。",
+            "   - 搭配：access information/websites/data, have access to",
+            "   - 例句：Students can **access** online learning resources from home. (学生可以在家访问在线学习资源。)",
+            "   - 例句：Do you have **access** to the company's database? (你有权访问公司数据库吗？)",
+            "**approach /əˈproʊtʃ/ n./v. 接近；方法 (to come near or nearer to someone or something; a way of dealing with something)**",
+            "   - 作动词时强调“物理上或时间上地靠近”，或“着手处理”。",
+            "   - 作名词时强调“方法、途径”。",
+            "   - 搭配：approach a problem/task, a new approach to teaching, approach a person",
+            "   - 例句：The deadline is **approaching** rapidly. (截止日期正在迅速临近。)",
+            "   - 例句：We need a new **approach** to cybersecurity. (我们需要一种新的网络安全方法。)",
+            "   - 例句：He **approached** the topic with caution. (他谨慎地处理这个话题。)"
+          ],
+          "why_explanation": "'Access' 强调的是“权限”或“途径”的获得，通常是指对信息、服务或地点的使用权。而 'approach' 则更广义，可以指“物理上的靠近”，也可以指“处理问题的方式或方法”。在互联网语境中，'access' 更常用于数据和网站的访问。这种区别反映了英语词汇在描述动作和概念时的具体指向性。",
+          "example": {
+            "question": "选择 'access' 或 'approach' 填空：1. We need to find a better ______ to managing online content. 2. Do you have the password to ______ the system? 3. The police ______ the suspect carefully.",
+            "steps": [
+              "1. “管理网络内容”需要“更好的方法”，用 'approach'。",
+              "2. 密码是用来“访问系统”的，用 'access'。",
+              "3. 警察“靠近”嫌疑人，用 'approach'。",
+              "答案如上。"
+            ],
+            "answer": "1. approach 2. access 3. approached"
+          },
+          "mistakes": [
+            {
+              "wrong": "We need an access to the problem.",
+              "correct": "We need an approach to the problem.",
+              "reason": "解决问题需要“方法”，而不是“访问权”。'access' 的名词含义是“访问权”，而 'approach' 的名词含义是“方法”。"
+            },
+            {
+              "wrong": "I cannot approach the website.",
+              "correct": "I cannot access the website.",
+              "reason": "访问网站应使用 'access'，而不是 'approach'。'approach' 在此语境下语义不符。"
+            }
+          ],
+          "memory_tip": "Access (获取)：联想 'access card' (门禁卡)，有卡才能进入或使用。Approach (方法/接近)：联想 'proach' 像 'reach' (到达)，向目标靠近或找到方法达到目标。",
+          "related": {
+            "prerequisite": "动词辨析",
+            "next": "词汇：网络安全与挑战"
+          }
+        }
+      ]
+    }
+  ]
+}
