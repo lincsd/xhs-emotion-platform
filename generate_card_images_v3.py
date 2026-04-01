@@ -575,7 +575,7 @@ TIP: 小提示(可选) → 渲染到区块D
 只输出英文提示词 + TEXT_MANIFEST，不要其他内容。
 
 提示词开头必须写:
-"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the main body with clearly rendered teaching content, (3) a warm colored ACCENT STRIP near the bottom with white slogan text, (4) a small cute mascot in corner. Text must be pixel-perfect: every Chinese character fully formed, every letter correct. ⚠️ Do NOT render any coordinates, percentages, pixel sizes, hex color codes, or layout metadata as visible text in the image! Only render the actual card content text."
+"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the main body with clearly rendered teaching content, (3) a warm colored ACCENT STRIP near the bottom with white slogan text, (4) a small cute OWL mascot with graduation cap in corner (ALWAYS the same owl character — never a bear, pencil, or other animal). Text must be pixel-perfect: every Chinese character fully formed, every letter correct. ⚠️ Do NOT render any coordinates, percentages, pixel sizes, hex color codes, or layout metadata as visible text in the image! Only render the actual card content text."
 
 ⚠️⚠️⚠️ 防重复三次提醒（最后警告）：
 回头检查你写的 TEXT_MANIFEST — TITLE 和 LINE1 是不是写了一样的内容？？？
@@ -650,7 +650,7 @@ SLOGAN: 口诀金句 → 渲染到区块C
 只输出英文提示词 + TEXT_MANIFEST，不要其他内容。
 
 提示词开头必须写:
-"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the middle with teaching content, (3) a warm colored ACCENT STRIP at bottom with white slogan text, (4) a small cute mascot in corner. All Chinese characters must be perfectly formed — no garbled text."
+"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the middle with teaching content, (3) a warm colored ACCENT STRIP at bottom with white slogan text, (4) a small cute OWL mascot with graduation cap in corner (ALWAYS the same owl character — never a bear, pencil, or other animal). All Chinese characters must be perfectly formed — no garbled text."
 
 ══════ ⚠️ 文字质量核心要求 ══════
 
@@ -1949,8 +1949,8 @@ def _build_card_info_grammar(card, subject, grade, semester, canvas=None):
                 if cn_in_paren:
                     _cn_from_core_point = cn_in_paren.group(1).strip()[:8]
                 break
-            # 兜底: 第一个 ≥4字母 英文单词
-            sw = re.findall(r'[a-zA-Z]{4,}', p_str)
+            # v10.21: 兜底: 第一个 ≥6字母 英文单词(避免 were/bought 等短词)
+            sw = re.findall(r'[a-zA-Z]{6,}', p_str)
             if sw:
                 eng_key_phrase = sw[0].strip()
                 cn_in_paren = re.search(r'[（(]\s*([\u4e00-\u9fff/、]+)\s*[）)]', p_str)
@@ -1985,8 +1985,27 @@ def _build_card_info_grammar(card, subject, grade, semester, canvas=None):
         card['title'] = f'{conf_word_a} vs {conf_word_b}'
         print(f'      [prompt title fix] confusion: "{title_raw}" → "{card["title"]}"')
     elif is_tense and tense_name:
-        # 时态卡保留中文时态名作为标题
-        if eng_key_phrase and re.search(r'[a-zA-Z]{3,}', eng_key_phrase):
+        # v10.21: 时态卡标题 — 用时态结构而非单词
+        # 提取时态结构 (如 "was/were + done", "have/has + done")
+        tense_structure = ''
+        for p in card.get('core_points', []):
+            p_str = str(p)
+            # 匹配时态结构: "主语 + was/were + doing" 或 "have/has + p.p."
+            struct = re.findall(r'[a-zA-Z]+(?:\s*/\s*[a-zA-Z]+)?(?:\s*\+\s*[a-zA-Z.]+)+', p_str)
+            if struct:
+                tense_structure = max(struct, key=len).strip()[:25]
+                break
+            # 匹配: "S + V + O" 类
+            struct2 = re.findall(r'[a-zA-Z]+(?:\s+[a-zA-Z/+.]+){1,}', p_str)
+            if struct2:
+                candidate = max(struct2, key=len).strip()[:25]
+                if len(candidate.split()) >= 2:
+                    tense_structure = candidate
+                    break
+        
+        if tense_structure:
+            card['title'] = f'{tense_name} {tense_structure}'
+        elif eng_key_phrase and len(eng_key_phrase.split()) >= 2:
             card['title'] = f'{tense_name} ({eng_key_phrase})'
         else:
             card['title'] = tense_name
@@ -3460,15 +3479,27 @@ def _fix_english_card_title_manifest(manifest, card, subject):
     if not title_key or not title_val:
         return manifest
 
-    # v10.18d: 英语卡一律用最佳英文短语作标题
-    # AI 生成的 TITLE 经常混入低价值介词短语（"under the"）或中文前缀
-    # 直接用 _extract_best_english_phrase 提取的结果更稳定
+    # v10.21: 智能标题优化 — 只在 AI 标题质量差时替换
+    # 如果 AI 已经生成了含英文多词的标题，保留它
     eng_phrase = _extract_best_english_phrase(card)
 
+    # 判断当前标题是否已经足够好
+    has_english = bool(re.search(r'[a-zA-Z]{2,}', title_val))
+    has_multi_word = bool(re.search(r'[a-zA-Z]+\s+[a-zA-Z]+', title_val))
+    is_pure_chinese = not has_english
+
     if eng_phrase:
-        if title_val != eng_phrase:
-            print(f'      [title fix] "{title_val}" → "{eng_phrase}"')
-        manifest[title_key] = eng_phrase
+        if is_pure_chinese:
+            # AI 标题纯中文 → 替换为英文短语
+            print(f'      [title fix] 纯中文标题 "{title_val}" → "{eng_phrase}"')
+            manifest[title_key] = eng_phrase
+        elif not has_multi_word and eng_phrase and ' ' in eng_phrase:
+            # AI 标题只有单词 → 替换为更好的多词短语
+            print(f'      [title fix] 单词标题 "{title_val}" → "{eng_phrase}"')
+            manifest[title_key] = eng_phrase
+        # else: AI 标题已含多词英文，保留
+    elif is_pure_chinese:
+        print(f'      [title fix] ⚠️ 无法提取英文短语，保留原标题: "{title_val}"')
 
     return manifest
 
@@ -3694,7 +3725,10 @@ def _enforce_manifest_limits(manifest, max_total=None, max_per_block=None, card_
     # 实验卡（实验步骤多）、对比卡（双栏文字）、辨析卡 天然需要更多文字
     _HEAVY_TEXT_TYPES = ('实验卡', '实验', '对比卡', '辨析卡', '比较卡')
     _LIGHT_TEXT_TYPES = ('高频活用卡', '搭配卡', '语法辨析卡', '易混词卡', '句型卡', '词汇卡',
-                         '易混词陷阱卡', '语法纠错卡')  # v10.19.1: 英语卡天然英文多中文少
+                         '易混词陷阱卡', '语法纠错卡',
+                         # v10.21: 初中/高中英语卡也收紧
+                         '时态卡', 'PK挑战卡', '知识总结卡', '情景对话卡', '速记卡',
+                         '发音挑战卡', '语法卡', '高频活用卡')
     is_heavy = card_type in _HEAVY_TEXT_TYPES
     is_light = card_type in _LIGHT_TEXT_TYPES
     if max_total is None:
@@ -3706,7 +3740,7 @@ def _enforce_manifest_limits(manifest, max_total=None, max_per_block=None, card_
     
     # 统计当前总中文字数
     total_cn = sum(_count_chinese_chars(v) for v in manifest.values())
-    max_slogan_check = min(max_per_block + 2, 8)  # 口诀允许更宽
+    max_slogan_check = min(max_per_block + 4, 14)  # v10.21: 口诀允许更宽(原8→14)，避免截断造成废尾
     if total_cn <= max_total:
         # 仍需检查每块≤limit (口诀用独立预算)
         trimmed = {}
@@ -3727,7 +3761,7 @@ def _enforce_manifest_limits(manifest, max_total=None, max_per_block=None, card_
     
     result = {}
     budget = max_total
-    max_slogan = min(max_per_block + 2, 8)  # 口诀独立预算，比普通块多2字
+    max_slogan = min(max_per_block + 4, 14)  # v10.21: 口诀独立预算(原8→14)，避免截断废尾
     
     # 优先保留 TITLE
     for k, v in manifest.items():
@@ -4114,7 +4148,7 @@ def _two_step_generate(prompt, chinese_prefix, manifest, keys, card_title, subje
     step2a_prompt += (
         f"\nFor the CONTENT CARD area in the middle, leave it as a BLANK white rounded rectangle.\n"
         f"Do NOT put any text in the content area — it will be added in Step 2.\n"
-        f"Add: dark gradient banner at top, warm accent strip near bottom, soft background, small mascot.\n"
+        f"Add: dark gradient banner at top, warm accent strip near bottom, soft background, small OWL mascot with graduation cap in bottom-right (always the same owl character, never other animals).\n"
         f"Style: Professional Xiaohongshu card. {canvas_en}\n"
         f"⚠️ Chinese characters must have perfect strokes. Only {title_cn} characters total.\n"
         f"⚠️ Do NOT render any coordinates, percentages, or layout metadata as visible text!\n"

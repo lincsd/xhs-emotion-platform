@@ -137,6 +137,83 @@ def build_layout_skeleton(card_type: str, card_data: dict, grade: str = '') -> s
         lines.append('')
 
     lines.append(f'WHITESPACE: ≥25% of total area')
+
+    # ── v10.22: P0 统一吉祥物形象 ──
+    lines.append('')
+    lines.append('=== MASCOT RULES (MANDATORY) ===')
+    lines.append('  🦉 ALWAYS use the SAME mascot: a cute owl wearing a graduation cap (学士帽猫头鹰)')
+    lines.append('  • Place the owl in the bottom-right corner, small size (under 8% of card area)')
+    lines.append('  • The owl may hold props matching the card type:')
+    lines.append('    - 词汇卡/速记卡: owl holds a dictionary or magnifying glass')
+    lines.append('    - 语法卡/时态卡/句型卡: owl holds a ruler or pointer')
+    lines.append('    - 易混词卡/陷阱卡/辨析卡: owl holds a warning sign or balance scale')
+    lines.append('    - 情景对话卡: owl wears a stethoscope or relevant costume')
+    lines.append('    - PK挑战卡: owl holds a trophy or boxing gloves')
+    lines.append('    - 知识总结卡: owl holds a checklist or clipboard')
+    lines.append('    - 发音挑战卡: owl holds a megaphone or microphone')
+    lines.append('  • ❌ NEVER use a bear, pencil, or any other character as mascot')
+    lines.append('  • ❌ NEVER omit the mascot entirely')
+    lines.append('')
+
+    # ── v10.22: P1 视觉层次与排版优化 ──
+    lines.append('=== VISUAL HIERARCHY RULES ===')
+    lines.append('  📐 LINE SPACING: Use generous line spacing (1.5x) between content lines')
+    lines.append('  📐 PARAGRAPH GAP: Leave clear vertical gaps between different sections')
+    lines.append('  🎨 BACKGROUND BLOCKS: Use subtle light-colored background blocks (pale blue, light gray, cream)')
+    lines.append('     to visually separate different knowledge sections within the content card')
+    lines.append('  🎨 For listed items (multiple phrases/rules), alternate background tint per item')
+    lines.append('  📊 COLOR-CODE key terms: use distinct colors for verbs, nouns, and structures')
+    lines.append('  📊 Use thin divider lines or spacing to separate Usage/Example/Error sections')
+    lines.append('')
+
+    # ── v10.22: P2 主题相关插图（强化版）──
+    lines.append('=== ILLUSTRATION REQUIREMENTS ===')
+    lines.append('Every card MUST include at least ONE concept illustration (NOT just the mascot):')
+    lines.append('  • The illustration should directly explain or visualize the knowledge point')
+    lines.append('  • SPECIFIC illustration types by card category:')
+    lines.append('    - 词汇卡: small scene/object illustrating the word meaning')
+    lines.append('    - 语法卡: color-coded sentence diagram, formula box with arrows')
+    lines.append('    - 时态卡: timeline with past/present/future markers and action icons')
+    lines.append('    - 易混词卡/辨析卡: side-by-side contrast illustration (two mini-scenes)')
+    lines.append('    - 情景对话卡: comic-strip style with 2-3 panels and speech bubbles')
+    lines.append('    - PK挑战卡: VS battle layout with two competing answer boxes')
+    lines.append('    - 知识总结卡: mini mind-map or radial diagram')
+    lines.append('    - 发音挑战卡: mouth/tongue position diagram or waveform icon')
+    lines.append('  • Illustrations should occupy 15-25% of card area')
+    lines.append('  • Style: flat design, clean lines, 2-3 colors max per illustration')
+    lines.append('')
+
+    # ── v10.22: P2 互动元素指令 ──
+    lines.append('=== INTERACTIVE ELEMENT (recommended) ===')
+    lines.append('  Include a mini-exercise or thought prompt in the card where appropriate:')
+    lines.append('  • Fill-in-the-blank: "She ___ (go) to school yesterday."')
+    lines.append('  • Quick quiz: "Which is correct? A or B?"')
+    lines.append('  • Think prompt: "💡 Can you make a sentence using this pattern?"')
+    lines.append('  • Place interactive elements in a distinct colored box (e.g., pale yellow background)')
+    lines.append('')
+
+    # ── v10.22: P3 底部区域统一规范 ──
+    lines.append('=== BOTTOM AREA STANDARD ===')
+    lines.append('  The bottom area of every card must follow this exact layout (top to bottom):')
+    lines.append('  1. ACCENT STRIP: warm gradient bar with SLOGAN text (white, bold, centered)')
+    lines.append('  2. TIP LINE: small gray text, always "年级 + 学期 + 卡片类型" format')
+    lines.append('  3. MASCOT: owl in bottom-right corner')
+    lines.append('  • TIP text font size must be consistent across all cards (10-11pt equivalent)')
+    lines.append('  • English encouragement tips (e.g., "Practice daily!") go INSIDE the content card, NOT in the bottom area')
+    lines.append('')
+
+    # ── v10.22: 可视化教学工具 ──
+    lines.append('=== VISUAL TEACHING TOOLS (use at least 2) ===')
+    lines.append('  📊 Color-coded text: highlight key words/structures with distinct colors')
+    lines.append('  🔀 Arrows/flow lines: show transformations, cause-effect, or word order')
+    lines.append('  📐 Structure diagrams: sentence formulas like "S + V + O" in rounded boxes')
+    lines.append('  🕐 Timelines: for tense/sequence topics, show past→present→future')
+    lines.append('  💬 Speech bubbles: for dialogues, show characters speaking')
+    lines.append('  🔲 Comparison tables: 2-column layout for vs/contrast topics')
+    lines.append('  ⭕ Mind maps: for summary/overview cards, radial branch layout')
+    lines.append('  🎨 Background color blocks: group related items with subtle tinted backgrounds')
+    lines.append('')
+
     lines.append(f'=== END SKELETON ===')
 
     return '\n'.join(lines)
