@@ -440,7 +440,7 @@ CARD_TYPE_VISUAL_RULES = {
     '易混词卡': "两词并排对比色块+同一语境换词例句+混淆原因分析(💡图标)+巧妙联想口诀",
     '易混词陷阱卡': "两词并排对比色块+同一语境换词例句+混淆原因分析(💡图标)+巧妙联想口诀",
     '语法纠错卡': "左❌错误句子(划红线)+右✅正确句子(绿色)+中间错因解释气泡(💡为什么错)+底部验证方法",
-    '句型卡': "句型模板大字色块+填空槽样式变形练习+对比说明为什么这样用",
+    '句型卡': "句型模板大字色块+对话场景图解(40%面积)+对比说明为什么这样用+问答箭头流程",
     # v10.9: 理科专属卡片类型 (物理/化学/生物)
     '实验卡': "🧪实验器材图标化+编号色块步骤①→②→③流程图+现象色彩描述+⚠️安全红色提示+对照组虚线框",
     '公式推导卡': "已知条件色块→逐步推导(每步标注物理意义箭头)→最终公式超大展示+各符号含义注释+适用条件⚠️红框",
@@ -518,6 +518,8 @@ PROMPT_SYSTEM_TEMPLATE = """你是小红书爆款知识卡片 AI 图片 Prompt �
 - 必须有❌/✅对错例句对比，错误必须是该短语的真实高频错误
 - ❌/✅的错因标注用英文箭头格式（如 "✗ do → ✓ make"），不要写中文句子
 - 口诀用「英文关键词+≤4中文字」混合格式（如 "progress用make"），减少纯中文
+- 口诀≤10字，绝不能是长句截断（如 "Where is...? 位置 On/in/under 来回" 是错误示范）
+- 好的英语口诀示例: "Where问位置" / "is单数it's答" / "on上in里under下"
 - 🚫严禁混入与该短语无关的词汇/语法点
 - 🚫严禁填空题——学生不能在图片上写字
 - 🚫严禁用卡通人物/"记住哦"气泡替代教学内容
@@ -558,6 +560,10 @@ TIP: 小提示(可选) → 渲染到区块D
 ⚠️ 每个 LINE 的中文字数不超过20字！如果内容过长，拆成多行 LINE1/LINE2/LINE3...
 此清单中的文字必须原封不动地渲染到图片对应区域中！
 
+⚠️ 防重复规则：TITLE(Banner标题) 和 LINE1(内容区第一行) 不能是相同的文字！
+   如果 TITLE 是 "Where is...?"，LINE1 绝不能再写 "Where is...?"，应直接展示用法结构。
+   Banner标题 = 知识点名称，内容区 = 教学细节，两者不能重复！
+
 {color_scheme_block}
 
 ══════ 输出格式 ══════
@@ -565,7 +571,9 @@ TIP: 小提示(可选) → 渲染到区块D
 只输出英文提示词 + TEXT_MANIFEST，不要其他内容。
 
 提示词开头必须写:
-"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the main body with clearly rendered teaching content, (3) a warm colored ACCENT STRIP near the bottom with white slogan text, (4) a small cute mascot in corner. Text must be pixel-perfect: every Chinese character fully formed, every letter correct. ⚠️ Do NOT render any color hex codes, percentage numbers, or layout coordinates as visible text in the image!"
+"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the main body with clearly rendered teaching content, (3) a warm colored ACCENT STRIP near the bottom with white slogan text, (4) a small cute mascot in corner. Text must be pixel-perfect: every Chinese character fully formed, every letter correct. ⚠️ Do NOT render any coordinates, percentages, pixel sizes, hex color codes, or layout metadata as visible text in the image! Only render the actual card content text."
+
+⚠️ 防重复二次提醒：TITLE(Banner) 的文字不能和内容区第一行重复！如果TITLE已经写了知识点名称，内容区应直接展示教学内容（用法结构/例句等），不要再写一遍TITLE的文字。
 
 ══════ ⚠️ 文字质量核心要求 ══════
 
@@ -2021,7 +2029,25 @@ def _build_card_info_grammar(card, subject, grade, semester, canvas=None):
 
     # ── 本质原因 / 口诀 ──
     why_exp = card.get('why_explanation', '')[:120]
-    memory_tip = card.get('memory_tip', '')[:30]
+    # v10.19: 英语句型卡口诀用「英文关键词+≤4中文字」格式，截断更短防乱拼
+    raw_tip = card.get('memory_tip', '')
+    if subject == '英语' and raw_tip:
+        # 尝试提取口诀中最精华的片段（英文+短中文），避免长口诀被截断成乱拼
+        import re as _re_tip
+        # 优先取第一个短句（句号/逗号/感叹号分割）
+        tip_parts = _re_tip.split(r'[。，！!,]', raw_tip)
+        tip_parts = [p.strip() for p in tip_parts if p.strip()]
+        if tip_parts:
+            # 选最短且含英文的片段
+            eng_tips = [p for p in tip_parts if _re_tip.search(r'[a-zA-Z]', p)]
+            if eng_tips:
+                memory_tip = min(eng_tips, key=len)[:20]
+            else:
+                memory_tip = tip_parts[0][:15]
+        else:
+            memory_tip = raw_tip[:15]
+    else:
+        memory_tip = raw_tip[:30]
 
     # ── 构建布局指令（优先级: 易混词 > 时态 > 概念 > 标准）──
     if is_confusion:
@@ -3203,6 +3229,17 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
             solve_block += """
    ⚠️ 方法卡图文融合: 用步骤流程图(编号色块)展示方法，不要只写文字步骤！"""
 
+        # v10.19: 英语句型卡专用视觉策略 — 场景图+位置图解
+        if subject == '英语' and card_type == '句型卡':
+            solve_block += """
+   ⚠️ 英语句型卡图文融合（最重要！）：
+   - 卡片40%面积必须是对话场景简笔画（如两个人物问答 Where is the book?）
+   - 用简笔图解展示介词含义（物品 on/in/under 桌子的位置关系图），不要只写文字！
+   - 问答用箭头气泡展示：A→"Where is...?" B→"It's on/in/under the..."
+   - ❌/✅对比区只需1组：错误（不完整句）vs 正确（完整句），不要纯文字列表
+   - 🚫严禁纯文字排版！图解是教学核心，文字是辅助标注
+   - 🚫严禁把教材内容原封不动搬上卡片"""
+
         system_prompt = PROMPT_SYSTEM_TEMPLATE.format(
             subject=subject,
             solve_strategy_block=solve_block,
@@ -3775,36 +3812,31 @@ def _build_coordinate_manifest(manifest, canvas=None):
     
     parts = []
     parts.append(
-        f"\n=== TEXT RENDERING PLAN (pixel-precise coordinates) ===\n"
-        f"The card has {len(manifest)} text blocks. Render each at its EXACT position:\n"
+        f"\n=== TEXT RENDERING PLAN ===\n"
+        f"The card has {len(manifest)} text blocks. Place each in its designated zone:\n"
     )
     
     line_idx = 0
     for key, val in manifest.items():
         cn_count = _count_chinese_chars(val)
         if key.upper() == 'TITLE':
-            parts.append(f'  {key}: "{val}" → y=5%, font=48px, color=WHITE, align=center, zone=TOP_BANNER')
+            parts.append(f'  {key}: "{val}" → place in TOP BANNER, large bold white text, centered')
         elif key.upper() == 'SLOGAN':
-            parts.append(f'  {key}: "{val}" → y=84%, font=28px, color=WHITE, align=center, zone=ACCENT_STRIP')
+            parts.append(f'  {key}: "{val}" → place in ACCENT STRIP near bottom, medium bold white text, centered')
         elif key.upper().startswith('LINE'):
-            # 动态分配 y 坐标: 内容区 y=18%~75%, 均匀分布
-            if n_lines > 0:
-                y_start, y_end = 18, 75
-                y_step = (y_end - y_start) / max(n_lines, 1)
-                y_pos = int(y_start + line_idx * y_step)
-            else:
-                y_pos = 30
-            font_size = 22 if cn_count > 10 else 26
-            parts.append(f'  {key}: "{val}" → y={y_pos}%, font={font_size}px, color=#333, align=left, x=8%, zone=CONTENT_CARD')
+            order = f'row {line_idx+1} of {n_lines}' if n_lines > 1 else 'main row'
+            font_hint = 'compact' if cn_count > 10 else 'normal'
+            parts.append(f'  {key}: "{val}" → place in CONTENT CARD white area, {order}, dark text, {font_hint} size')
             line_idx += 1
         elif key.upper() == 'TIP':
-            parts.append(f'  {key}: "{val}" → y=93%, font=14px, color=#999, align=left, zone=BOTTOM')
+            parts.append(f'  {key}: "{val}" → place at very bottom, tiny gray text')
         else:
-            parts.append(f'  {key}: "{val}" → zone=CONTENT_CARD')
+            parts.append(f'  {key}: "{val}" → place in CONTENT CARD white area')
     
-    parts.append(f"\n⚠️ Render EVERY text item at its coordinate. NO omissions, NO truncation.")
+    parts.append(f"\n⚠️ Render EVERY text item in its zone. NO omissions, NO truncation.")
     parts.append(f"⚠️ Each Chinese character must have perfect strokes — no garbling!")
     parts.append(f"⚠️ If space is tight, use smaller font — NEVER drop characters!")
+    parts.append(f"⚠️ NEVER render coordinates, percentages, pixel sizes, hex colors, or layout metadata as visible text!")
     parts.append("=== END TEXT PLAN ===\n")
     
     return '\n'.join(parts)
@@ -3843,11 +3875,11 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
         f"1. This is a {subject} educational knowledge card about \"{card_title}\".\n"
         f"2. ✅ You MUST render ALL text directly in the image — text is the core content!\n"
         f"3. Design a STRUCTURED CARD with text integrated into each zone:\n"
-        f"   - TOP BANNER (y=0-12%): Dark gradient strip with WHITE TITLE TEXT centered\n"
-        f"   - CONTENT CARD (y=14-78%): White rounded rectangle with TEACHING CONTENT text\n"
-        f"   - ACCENT STRIP (y=80-92%): Warm gradient bar with WHITE SLOGAN TEXT centered\n"
-        f"   - BOTTOM (y=93-98%): Small tip text if any\n"
-        f"   - Small cute mascot in bottom-right corner (<10% of image)\n"
+        f"   - TOP BANNER at the very top: Dark gradient strip with WHITE TITLE TEXT centered\n"
+        f"   - CONTENT CARD in the middle: White rounded rectangle with TEACHING CONTENT text\n"
+        f"   - ACCENT STRIP near the bottom: Warm gradient bar with WHITE SLOGAN TEXT centered\n"
+        f"   - BOTTOM edge: Small tip text if any\n"
+        f"   - Small cute mascot in bottom-right corner (tiny, under 10 percent of image)\n"
         f"4. ⚠️ TEXT QUALITY IS CRITICAL:\n"
         f"   - Every Chinese character must be perfectly formed (correct strokes, no garbled text)\n"
         f"   - Every English word must be spelled correctly\n"
@@ -3856,7 +3888,7 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
         f"5. Style: Professional Xiaohongshu card template. Use symbols (→/①②③/≈/=) to replace verbose Chinese.\n"
         f"   Main color: choose from coral pink / mint blue / peach orange / lavender.\n"
         f"6. {canvas_en}\n"
-        f"7. ⚠️ Do NOT render any color hex codes, percentage numbers, or layout coordinates as visible text!\n"
+        f"7. ⚠️ Do NOT render any coordinates, percentages, pixel sizes, hex color codes, or layout metadata as visible text in the image!\n"
     )
 
     # v10.17 优化②: 坐标锚定 manifest (替代旧的 zone-only 描述)
@@ -3952,16 +3984,17 @@ def _two_step_generate(prompt, chinese_prefix, manifest, keys, card_title, subje
     )
     for k, v in title_manifest.items():
         if k.upper() == 'TITLE':
-            step2a_prompt += f'  {k}: "{v}" → y=5%, font=48px, WHITE, center, in TOP BANNER\n'
+            step2a_prompt += f'  {k}: "{v}" → place in TOP BANNER, large bold white text, centered\n'
         elif k.upper() == 'SLOGAN':
-            step2a_prompt += f'  {k}: "{v}" → y=84%, font=28px, WHITE, center, in ACCENT STRIP\n'
+            step2a_prompt += f'  {k}: "{v}" → place in ACCENT STRIP near bottom, medium bold white text, centered\n'
     
     step2a_prompt += (
-        f"\nFor the CONTENT CARD area (y=14-78%), leave it as a BLANK white rounded rectangle.\n"
+        f"\nFor the CONTENT CARD area in the middle, leave it as a BLANK white rounded rectangle.\n"
         f"Do NOT put any text in the content area — it will be added in Step 2.\n"
         f"Add: dark gradient banner at top, warm accent strip near bottom, soft background, small mascot.\n"
         f"Style: Professional Xiaohongshu card. {canvas_en}\n"
         f"⚠️ Chinese characters must have perfect strokes. Only {title_cn} characters total.\n"
+        f"⚠️ Do NOT render any coordinates, percentages, or layout metadata as visible text!\n"
     )
     
     # 参考图
@@ -4021,20 +4054,19 @@ def _two_step_generate(prompt, chinese_prefix, manifest, keys, card_title, subje
         f"This is Step 2 of 2 — ADD the teaching content text to the blank white area.\n"
         f"The card frame (banner, accent strip, background, mascot) is already done.\n"
         f"⚠️ DO NOT change the banner, accent strip, background, or mascot!\n"
-        f"⚠️ ONLY add text into the white CONTENT CARD area (y=14%-78%).\n\n"
+        f"⚠️ ONLY add text into the white CONTENT CARD area (the main white rectangle).\n\n"
         f"ADD these {len(content_manifest)} text blocks into the content area:\n"
     )
     
-    # 分配 content 区域的 y 坐标
+    # 分配 content 区域描述 (不使用坐标数值，防止AI渲染)
     line_keys = list(content_manifest.keys())
     n = len(line_keys)
     for i, (k, v) in enumerate(content_manifest.items()):
-        y_pos = int(18 + i * (57 / max(n, 1)))
-        font_size = 22 if _count_chinese_chars(v) > 10 else 26
+        font_hint = 'compact' if _count_chinese_chars(v) > 10 else 'normal'
         if k.upper() == 'TIP':
-            step2b_prompt += f'  {k}: "{v}" → y=93%, font=14px, color=#999\n'
+            step2b_prompt += f'  {k}: "{v}" → place at very bottom, tiny gray text\n'
         else:
-            step2b_prompt += f'  {k}: "{v}" → y={y_pos}%, font={font_size}px, color=#333, align=left, x=8%\n'
+            step2b_prompt += f'  {k}: "{v}" → row {i+1} of {n} in content area, dark text, {font_hint} size\n'
     
     step2b_prompt += (
         f"\n⚠️ Only {content_cn} Chinese characters to add. Render with perfect strokes.\n"
@@ -4120,11 +4152,11 @@ def generate_card_images_parallel(prompt, keys, card_title='', subject='', audit
         f"1. This is a {subject} educational knowledge card about \"{card_title}\".\n"
         f"2. ✅ You MUST render ALL text directly in the image — text is the core content!\n"
         f"3. Design a STRUCTURED CARD with text integrated into each zone:\n"
-        f"   - TOP BANNER (y=0-12%): Dark gradient strip with WHITE TITLE TEXT centered\n"
-        f"   - CONTENT CARD (y=14-78%): White rounded rectangle with TEACHING CONTENT text\n"
-        f"   - ACCENT STRIP (y=80-92%): Warm gradient bar with WHITE SLOGAN TEXT centered\n"
-        f"   - BOTTOM (y=93-98%): Small tip text if any\n"
-        f"   - Small cute mascot in bottom-right corner (<10% of image)\n"
+        f"   - TOP BANNER at the very top: Dark gradient strip with WHITE TITLE TEXT centered\n"
+        f"   - CONTENT CARD in the middle: White rounded rectangle with TEACHING CONTENT text\n"
+        f"   - ACCENT STRIP near the bottom: Warm gradient bar with WHITE SLOGAN TEXT centered\n"
+        f"   - BOTTOM edge: Small tip text if any\n"
+        f"   - Small cute mascot in bottom-right corner (tiny, under 10 percent of image)\n"
         f"4. ⚠️ TEXT QUALITY IS CRITICAL:\n"
         f"   - Every Chinese character must be perfectly formed (correct strokes, no garbled text)\n"
         f"   - Every English word must be spelled correctly\n"
@@ -4132,7 +4164,7 @@ def generate_card_images_parallel(prompt, keys, card_title='', subject='', audit
         f"5. Style: Professional Xiaohongshu card. Use symbols (→/①②③/≈) to replace verbose text.\n"
         f"   Main color: choose from coral pink / mint blue / peach orange / lavender.\n"
         f"6. {canvas_en}\n"
-        f"7. ⚠️ Do NOT render any color hex codes, percentage numbers, or layout coordinates as visible text!\n"
+        f"7. ⚠️ Do NOT render any coordinates, percentages, pixel sizes, hex color codes, or layout metadata as visible text in the image!\n"
     )
     # v10.17: 坐标锚定 manifest
     if manifest:
