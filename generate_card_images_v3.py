@@ -3410,38 +3410,15 @@ def _fix_english_card_title_manifest(manifest, card, subject):
     if not title_key or not title_val:
         return manifest
 
-    # 检查: TITLE 是否已有英文
-    has_eng = bool(re.search(r'[a-zA-Z]', title_val))
-    if has_eng:
-        # v10.18b: 即使已有英文，仍检查是否是低价值片段 (如 "under the")
-        existing_eng = re.findall(r"[a-zA-Z][a-zA-Z'\s]{1,}", title_val)
-        existing_eng_text = ' '.join(e.strip().lower() for e in existing_eng)
-        LOW_VALUE_ENG = [
-            'under the', 'on the', 'in the', 'at the', 'to the', 'of the',
-            'is a', 'is an', 'is the', 'are the', 'was the', 'were the',
-            'it is', 'they are', 'he is', 'she is',
-        ]
-        is_low_value = any(existing_eng_text.strip() == lv for lv in LOW_VALUE_ENG)
-        if not is_low_value:
-            return manifest  # 已有合理英文，不动
-        # 低价值英文 → 下面会提取更好的并替换
-        print(f'      [title fix] 检测到低价值英文 "{existing_eng_text}" → 尝试替换')
-
+    # v10.18d: 英语卡一律用最佳英文短语作标题
+    # AI 生成的 TITLE 经常混入低价值介词短语（"under the"）或中文前缀
+    # 直接用 _extract_best_english_phrase 提取的结果更稳定
     eng_phrase = _extract_best_english_phrase(card)
 
     if eng_phrase:
-        # 中文标题: 先从已有 title_val 取中文，不够则从 card['title'] 取
-        cn_chars = re.findall(r'[\u4e00-\u9fff]', title_val)
-        if not cn_chars:
-            # title_val 纯英文 (如 "under the")，从卡片原始标题提取中文
-            card_title = card.get('title', '')
-            cn_chars = re.findall(r'[\u4e00-\u9fff]', card_title)
-        cn_prefix = ''.join(cn_chars[:4]) if cn_chars else ''
-        # 避免中文前缀过短或为空
-        if len(cn_prefix) < 2:
-            cn_prefix = '词汇'
-        manifest[title_key] = f'{cn_prefix} {eng_phrase}'
-        print(f'      [title fix] "{title_val}" → "{manifest[title_key]}"')
+        if title_val != eng_phrase:
+            print(f'      [title fix] "{title_val}" → "{eng_phrase}"')
+        manifest[title_key] = eng_phrase
 
     return manifest
 
