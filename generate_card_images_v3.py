@@ -190,7 +190,8 @@ def build_content_review_hint(subject: str, card_id: str = '') -> str:
 # ═══════════════════════════════════════════
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta'
 
-TEXT_MODEL      = 'gemini-2.5-flash'            # 提示词生成 + OCR审计
+TEXT_MODEL      = 'gemini-3.1-pro'              # 提示词生成 + OCR审计 (旗舰模型, 深度推理更强)
+TEXT_MODEL_FALLBACK = 'gemini-2.5-flash'         # 文本模型兜底: 3.1-pro失败时自动降级
 IMAGE_MODELS    = [                              # 图片生成（串行: pro优先, flash兜底）
     'gemini-3-pro-image-preview',                 # ★ 最优: audit=100 质量最高
     'gemini-3.1-flash-image-preview',            # 兜底: pro失败时才使用
@@ -242,9 +243,29 @@ def gemini_call(model, contents, api_key, gen_config=None, retries=2, all_keys=N
     """通用 Gemini API 调用。
     
     支持多 key 轮换：当遇到 429/503 时自动切换 API key 重试。
+    支持文本模型自动降级：TEXT_MODEL 失败时自动切换到 TEXT_MODEL_FALLBACK。
     all_keys: 所有可用的 API key 列表，为 None 时只用 api_key。
     总尝试次数 = len(all_keys) * retries（每个key各试retries次）
     """
+    # 文本模型降级链: gemini-3.1-pro → gemini-2.5-flash
+    if model == TEXT_MODEL and TEXT_MODEL_FALLBACK:
+        models_to_try = [TEXT_MODEL, TEXT_MODEL_FALLBACK]
+    else:
+        models_to_try = [model]
+
+    for mi, current_model in enumerate(models_to_try):
+        result = _gemini_call_single(current_model, contents, api_key, gen_config, retries, all_keys)
+        if result is not None:
+            if mi > 0:
+                print(f'      ✅ 降级模型 {current_model} 成功')
+            return result
+        if mi < len(models_to_try) - 1:
+            print(f'      🔄 {current_model} 全部失败, 降级到 {models_to_try[mi+1]}...')
+    return None
+
+
+def _gemini_call_single(model, contents, api_key, gen_config=None, retries=2, all_keys=None):
+    """单模型 Gemini API 调用（内部函数）。支持多 key 轮换。"""
     key_list = all_keys if all_keys else [api_key]
     body = {'contents': contents}
     if gen_config:
@@ -560,6 +581,13 @@ TIP: 小提示(可选) → 渲染到区块D
 ⚠️ 每个 LINE 的中文字数不超过20字！如果内容过长，拆成多行 LINE1/LINE2/LINE3...
 此清单中的文字必须原封不动地渲染到图片对应区域中！
 
+⚠️⚠️⚠️ 标签名禁止渲染（违反=废卡）：
+   "TITLE:", "LINE1:", "LINE2:", "LINE3:", "SLOGAN:", "TIP:" 这些是内部标签名，仅用于标识内容归属！
+   ⛔ 绝对不能把 "LINE1:", "LINE2:", "SLOGAN:" 等标签前缀渲染到卡片画面上！
+   ⛔ 错误示范: 画面上出现 "LINE1: Ask about location" → 废卡！
+   ✅ 正确示范: 画面上只显示 "Ask about location"，不带任何 "LINE1:" 前缀
+   只渲染冒号后面的实际内容文字，不渲染标签名本身！
+
 ⚠️⚠️⚠️ 最重要的防重复规则（违反=废卡）：
    TITLE(Banner标题) 和 LINE1(内容区第一行) 绝对不能是相同或相似的文字！！！
    如果 TITLE="pay attention to"，LINE1 绝不能写 "Pay Attention To (...)"！
@@ -575,7 +603,7 @@ TIP: 小提示(可选) → 渲染到区块D
 只输出英文提示词 + TEXT_MANIFEST，不要其他内容。
 
 提示词开头必须写:
-"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the main body with clearly rendered teaching content, (3) a warm colored ACCENT STRIP near the bottom with white slogan text, (4) a small cute OWL mascot with graduation cap in corner (ALWAYS the same owl character — never a bear, pencil, or other animal). Text must be pixel-perfect: every Chinese character fully formed, every letter correct. ⚠️ Do NOT render any coordinates, percentages, pixel sizes, hex color codes, or layout metadata as visible text in the image! Only render the actual card content text."
+"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the main body with clearly rendered teaching content, (3) a warm colored ACCENT STRIP near the bottom with white slogan text, (4) a small cute OWL mascot with graduation cap in corner (ALWAYS the same owl character — never a bear, pencil, or other animal). Text must be pixel-perfect: every Chinese character fully formed, every letter correct. ⚠️ Do NOT render any coordinates, percentages, pixel sizes, hex color codes, or layout metadata as visible text in the image! ⚠️ Do NOT render label prefixes like 'LINE1:', 'LINE2:', 'LINE3:', 'SLOGAN:', 'TIP:', 'TITLE:' in the image — these are internal tags, only render the content text AFTER the colon! Only render the actual card content text."
 
 ⚠️⚠️⚠️ 防重复三次提醒（最后警告）：
 回头检查你写的 TEXT_MANIFEST — TITLE 和 LINE1 是不是写了一样的内容？？？
@@ -643,6 +671,13 @@ SLOGAN: 口诀金句 → 渲染到区块C
 ⚠️ 每个 LINE 的中文字数不超过20字！内容长就拆成多行。
 此清单中的文字必须原封不动渲染到图片中！
 
+⚠️⚠️⚠️ 标签名禁止渲染（违反=废卡）：
+   "TITLE:", "LINE1:", "LINE2:", "LINE3:", "SLOGAN:", "TIP:" 这些是内部标签名，仅用于标识内容归属！
+   ⛔ 绝对不能把 "LINE1:", "LINE2:", "SLOGAN:" 等标签前缀渲染到卡片画面上！
+   ⛔ 错误示范: 画面上出现 "LINE1: Ask about location" → 废卡！
+   ✅ 正确示范: 画面上只显示 "Ask about location"，不带任何 "LINE1:" 前缀
+   只渲染冒号后面的实际内容文字，不渲染标签名本身！
+
 {color_scheme_block}
 
 ══════ 输出格式 ══════
@@ -650,7 +685,7 @@ SLOGAN: 口诀金句 → 渲染到区块C
 只输出英文提示词 + TEXT_MANIFEST，不要其他内容。
 
 提示词开头必须写:
-"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the middle with teaching content, (3) a warm colored ACCENT STRIP at bottom with white slogan text, (4) a small cute OWL mascot with graduation cap in corner (ALWAYS the same owl character — never a bear, pencil, or other animal). All Chinese characters must be perfectly formed — no garbled text."
+"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the middle with teaching content, (3) a warm colored ACCENT STRIP at bottom with white slogan text, (4) a small cute OWL mascot with graduation cap in corner (ALWAYS the same owl character — never a bear, pencil, or other animal). All Chinese characters must be perfectly formed — no garbled text. ⚠️ Do NOT render label prefixes like 'LINE1:', 'LINE2:', 'LINE3:', 'SLOGAN:', 'TIP:', 'TITLE:' in the image — these are internal tags, only render the content text AFTER the colon!"
 
 ══════ ⚠️ 文字质量核心要求 ══════
 
@@ -897,8 +932,7 @@ def _auto_fix_card_data(card, audit_result, api_key, all_keys=None):
     )
     
     api_base = 'https://generativelanguage.googleapis.com/v1beta'
-    model = 'gemini-2.5-flash'
-    url = f'{api_base}/models/{model}:generateContent?key={api_key}'
+    text_models = [TEXT_MODEL, TEXT_MODEL_FALLBACK] if TEXT_MODEL_FALLBACK else [TEXT_MODEL]
     
     body = {
         'contents': [{'role': 'user', 'parts': [{'text': prompt}]}],
@@ -909,7 +943,10 @@ def _auto_fix_card_data(card, audit_result, api_key, all_keys=None):
         }
     }
     
-    try:
+    data = None
+    for mi, model in enumerate(text_models):
+      url = f'{api_base}/models/{model}:generateContent?key={api_key}'
+      try:
         req = urllib.request.Request(
             url,
             data=json.dumps(body).encode('utf-8'),
@@ -918,6 +955,18 @@ def _auto_fix_card_data(card, audit_result, api_key, all_keys=None):
         )
         resp = urllib.request.urlopen(req, timeout=60)
         data = json.loads(resp.read())
+        if mi > 0:
+            print(f'  │  ✅ 降级模型 {model} 修复成功')
+        break
+      except Exception as e:
+        if mi < len(text_models) - 1:
+            print(f'  │  ⚠️ {model} 失败({e}), 降级到 {text_models[mi+1]}...')
+        else:
+            print(f'  │  ⚠️ 自动修复API调用失败: {e}')
+            return False, card
+
+    if not data:
+        return False, card
         
         candidates = data.get('candidates', [])
         if candidates:
@@ -935,8 +984,6 @@ def _auto_fix_card_data(card, audit_result, api_key, all_keys=None):
                         if meta_key in card and meta_key not in fixed:
                             fixed[meta_key] = card[meta_key]
                     return True, fixed
-    except Exception as e:
-        print(f'  │  ⚠️ 自动修复API调用失败: {e}')
     
     return False, card
 
@@ -4387,12 +4434,13 @@ OCR_AND_QUALITY_PROMPT = """你是一个严格的知识卡片审计员，同时�
 {expected_texts}
 
 ═══ 任务B: 质量评分 ═══
-从5个维度评分(每项0-20分，满分100)：
+从5个维度**独立评分**(每项0-20分，满分100)：
 1. **教学清晰度**(20): 例题清晰? 英语卡:有完整例句+易错对比?
 2. **文字准确性**(20): 中文无乱码? 英文拼写正确? 截断废字扣15分!
 3. **视觉美感**(20): 配色好看? 像小红书爆款? 有吸引力?
 4. **布局合理性**(20): 信息层次清晰? 留白充足? 不拥挤?
 5. **可收藏感**(20): 看到就想截图保存? 有"干货感"?
+⚠️ 每项根据实际观察独立评分，禁止所有维度给相近分数！优秀项18-20，差的项5-10。
 {eng_check_block}
 
 请用以下严格 JSON 格式回复（不要加 markdown 代码块标记）：
@@ -4404,8 +4452,8 @@ OCR_AND_QUALITY_PROMPT = """你是一个严格的知识卡片审计员，同时�
   "overall_score": 85,
   "summary": "一句话总结文字审计",
   "quality": {{
-    "teaching": 16, "text_accuracy": 18, "visual": 17, "layout": 15, "saveable": 16,
-    "total": 82, "comment": "一句话点评质量"
+    "teaching": <0-20>, "text_accuracy": <0-20>, "visual": <0-20>, "layout": <0-20>, "saveable": <0-20>,
+    "total": <五项求和>, "comment": "具体点评，说明扣分理由"
   }}
 }}
 
@@ -5684,7 +5732,7 @@ def _try_pil_text_repair(image_data, audit_result, expected_manifest):
 # ═══════════════════════════════════════════
 # 质量评分
 # ═══════════════════════════════════════════
-QUALITY_PROMPT = """你是知识卡片质量评审员。请从5个维度评分(每项0-20分，满分100)：
+QUALITY_PROMPT = """你是知识卡片质量评审员。请从5个维度**独立评分**(每项0-20分，满分100)：
 
 1. **教学清晰度**(20分): 例题清晰? 解题步骤直观? 一眼就懂? (英语卡: 有完整例句+易错对比+本质原因?)
 2. **文字准确性**(20分): 中文无乱码无错字? 数字公式正确? ⚠️截断废字(如"搭配固定要""注意到")直接扣15分!
@@ -5692,12 +5740,18 @@ QUALITY_PROMPT = """你是知识卡片质量评审员。请从5个维度评分(�
 4. **布局合理性**(20分): 信息层次清晰? 留白充足? 不拥挤?
 5. **可收藏感**(20分): 看到就想截图保存? 有"干货感"? 口诀是否完整有意义(截断废话扣10分)?
 
+⚠️ 评分铁律:
+- 每项依据实际观察独立打分，禁止所有维度给相近分数
+- 优秀项给18-20分，普通项12-15分，有问题的项直接降到5-10分
+- 先在脑中逐项分析优缺点，再给出最终分数
+- comment 必须包含具体扣分理由（如哪处文字截断、哪块布局拥挤）
+
 只输出JSON格式（不要代码块标记）：
-{{"teaching": 16, "text_accuracy": 18, "visual": 17, "layout": 15, "saveable": 16, "total": 82, "comment": "一句话点评"}}"""
+{{"teaching": <0-20的整数>, "text_accuracy": <0-20的整数>, "visual": <0-20的整数>, "layout": <0-20的整数>, "saveable": <0-20的整数>, "total": <五项求和>, "comment": "具体点评，说明扣分理由"}}"""
 
 
 def quality_score(image_data, api_key, card_title='', all_keys=None):
-    """对生成的图片进行质量评分"""
+    """对生成的图片进行质量评分（含重试+fallback）"""
     b64_img = base64.b64encode(image_data).decode('utf-8')
     contents = [
         {'role': 'user', 'parts': [
@@ -5707,42 +5761,57 @@ def quality_score(image_data, api_key, card_title='', all_keys=None):
     ]
     # 禁用 thinking mode 避免解析干扰
     gen_config = {
-        'maxOutputTokens': 1024,
-        'temperature': 0.1,
-        'thinkingConfig': {'thinkingBudget': 0}
+        'maxOutputTokens': 2048,
+        'temperature': 0.5,
+        'thinkingConfig': {'thinkingBudget': 1024}
     }
 
-    resp = gemini_call(TEXT_MODEL, contents, api_key, gen_config=gen_config, all_keys=all_keys)
-    if not resp:
-        return {'total': 0, 'comment': '评分调用失败'}
+    # v10.25: 重试+fallback — 先用TEXT_MODEL, 失败则fallback到TEXT_MODEL_FALLBACK
+    for attempt in range(2):
+        use_model = TEXT_MODEL if attempt == 0 else (TEXT_MODEL_FALLBACK or TEXT_MODEL)
+        if attempt > 0:
+            print(f'      [Quality retry] attempt {attempt+1} with {use_model}')
+        resp = gemini_call(use_model, contents, api_key, gen_config=gen_config, all_keys=all_keys)
+        if not resp:
+            if attempt == 0:
+                continue  # 重试一次
+            return {'total': 0, 'comment': '评分调用失败(含重试)'}
 
-    try:
-        candidates = resp.get('candidates', [])
-        if candidates:
-            parts = candidates[0].get('content', {}).get('parts', [])
-            # 收集所有文字 parts
-            all_text = ''
-            for part in parts:
-                if 'text' in part:
-                    all_text += part['text']
-            if all_text:
-                json_match = re.search(r'\{[\s\S]*?\}', all_text.strip())
-                if json_match:
-                    result = json.loads(json_match.group())
-                    # 确保有 total 字段
-                    if 'total' not in result:
-                        scores = [result.get(k, 0) for k in ('teaching', 'text_accuracy', 'visual', 'layout', 'saveable')]
-                        result['total'] = sum(scores)
-                    return result
-    except Exception as e:
-        print(f'      [Quality parse error] {e}')
-    return {'total': 0, 'comment': '评分解析失败'}
+        try:
+            candidates = resp.get('candidates', [])
+            if candidates:
+                parts = candidates[0].get('content', {}).get('parts', [])
+                # 收集所有文字 parts（跳过 thinking 部分）
+                all_text = ''
+                for part in parts:
+                    if 'text' in part and not part.get('thought'):
+                        all_text += part['text']
+                if all_text:
+                    json_match = re.search(r'\{[\s\S]*?\}', all_text.strip())
+                    if json_match:
+                        result = json.loads(json_match.group())
+                        # 确保有 total 字段
+                        if 'total' not in result:
+                            scores = [result.get(k, 0) for k in ('teaching', 'text_accuracy', 'visual', 'layout', 'saveable')]
+                            result['total'] = sum(scores)
+                        if result['total'] > 0:
+                            return result
+                        # total=0 可能是解析异常, 重试
+                        if attempt == 0:
+                            print(f'      [Quality] total=0, retrying...')
+                            continue
+                        return result
+        except Exception as e:
+            print(f'      [Quality parse error] {e}')
+            if attempt == 0:
+                continue
+    return {'total': 0, 'comment': '评分解析失败(含重试)'}
 
 
 def _typed_quality_score(image_data, api_key, card_title='', card_type='方法卡',
                           subject='', all_keys=None):
     """
-    分类型精准质量评分（Level 3 升级版）。
+    分类型精准质量评分（Level 3 升级版, v10.25含重试+fallback）。
     用 content_quality.py 中按卡片类型定义的评分维度替代通用评分。
     """
     typed_prompt = build_typed_quality_prompt(card_type, subject, card_title)
@@ -5756,35 +5825,50 @@ def _typed_quality_score(image_data, api_key, card_title='', card_type='方法�
     ]
     gen_config = {
         'maxOutputTokens': 2048,
-        'temperature': 0.1,
-        'thinkingConfig': {'thinkingBudget': 0}
+        'temperature': 0.5,
+        'thinkingConfig': {'thinkingBudget': 1024}
     }
 
-    resp = gemini_call(TEXT_MODEL, contents, api_key, gen_config=gen_config, all_keys=all_keys)
-    if not resp:
-        return {'total': 0, 'comment': '评分调用失败'}
+    # v10.25: 重试+fallback
+    for attempt in range(2):
+        use_model = TEXT_MODEL if attempt == 0 else (TEXT_MODEL_FALLBACK or TEXT_MODEL)
+        if attempt > 0:
+            print(f'      [Typed quality retry] attempt {attempt+1} with {use_model}')
+        resp = gemini_call(use_model, contents, api_key, gen_config=gen_config, all_keys=all_keys)
+        if not resp:
+            if attempt == 0:
+                continue
+            # 最终降级到通用评分
+            return quality_score(image_data, api_key, card_title=card_title, all_keys=all_keys)
 
-    try:
-        candidates = resp.get('candidates', [])
-        if candidates:
-            parts = candidates[0].get('content', {}).get('parts', [])
-            all_text = ''
-            for part in parts:
-                if 'text' in part:
-                    all_text += part['text']
-            if all_text:
-                json_match = re.search(r'\{[\s\S]*?\}', all_text.strip())
-                if json_match:
-                    result = json.loads(json_match.group())
-                    # 从 dimensions 计算总分
-                    if 'total' not in result and 'dimensions' in result:
-                        dim_total = 0
-                        for d in result['dimensions'].values():
-                            dim_total += d.get('score', 0) if isinstance(d, dict) else d
-                        result['total'] = dim_total
-                    return result
-    except Exception as e:
-        print(f'      [Typed quality parse error] {e}')
+        try:
+            candidates = resp.get('candidates', [])
+            if candidates:
+                parts = candidates[0].get('content', {}).get('parts', [])
+                all_text = ''
+                for part in parts:
+                    if 'text' in part and not part.get('thought'):
+                        all_text += part['text']
+                if all_text:
+                    json_match = re.search(r'\{[\s\S]*?\}', all_text.strip())
+                    if json_match:
+                        result = json.loads(json_match.group())
+                        # 从 dimensions 计算总分
+                        if 'total' not in result and 'dimensions' in result:
+                            dim_total = 0
+                            for d in result['dimensions'].values():
+                                dim_total += d.get('score', 0) if isinstance(d, dict) else d
+                            result['total'] = dim_total
+                        if result.get('total', 0) > 0:
+                            return result
+                        if attempt == 0:
+                            print(f'      [Typed quality] total=0, retrying...')
+                            continue
+                        return result
+        except Exception as e:
+            print(f'      [Typed quality parse error] {e}')
+            if attempt == 0:
+                continue
 
     # 降级到通用评分
     return quality_score(image_data, api_key, card_title=card_title, all_keys=all_keys)
@@ -6447,7 +6531,7 @@ def main():
     print(f'╔══════════════════════════════════════════════════╗')
     print(f'║  🚀 知识卡片图片生成器 v3 — 终极流水线            ║')
     print(f'╠══════════════════════════════════════════════════╣')
-    print(f'║  文字模型: {TEXT_MODEL}')
+    print(f'║  文字模型: {TEXT_MODEL} (降级: {TEXT_MODEL_FALLBACK})')
     print(f'║  图片模型: {" → ".join(IMAGE_MODELS)}')
     print(f'║  审计: {"关闭" if skip_audit else f"开启 (最多{MAX_AUDIT_ROUNDS}轮, 通过≥{AUDIT_PASS_SCORE}分)"}')
     print(f'║  输入: {len(json_files)} 个JSON文件')

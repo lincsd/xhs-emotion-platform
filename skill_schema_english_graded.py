@@ -324,51 +324,80 @@ _register_graded(SkillSchema(
     color_scheme='复习彩色：多色分支+主题色圆心',
 ), '小学')
 
-# ── 情景对话卡@小学 ──
+# ── v10.25: 情景对话卡@小学 (P4增强版 — 重点修复text_accuracy) ──
 _register_graded(SkillSchema(
     card_type='情景对话卡',
-    teaching_goal='在卡通情景中学会2-3句日常英语对话',
-    core_strategy='漫画分镜 → 2格对话 → 替换词 → 模仿提示',
+    teaching_goal='在贴近小学生日常的卡通情景中，学会2-3句实用英语对话',
+    core_strategy='漫画场景大图(含角色对话气泡) → 句型提炼色块 → 替换练习 → 模仿口诀',
     layout_blocks=[
-        LayoutBlock('漫画分镜区', 'center', min_area_pct=55,
-                    description='2格漫画: 卡通人物+对话泡泡(每句3-5词), 像绘本',
+        LayoutBlock('漫画场景大图', 'center', min_area_pct=50,
+                    description='漫画风格完整场景: 2个可爱卡通角色在具体场景中对话(商店/教室/操场/家里); '
+                                '角色表情生动(大眼睛、夸张表情)，有肢体动作; '
+                                '场景物品丰富有细节(货架/黑板/树木/家具等); '
+                                '对话以圆形气泡直接画在图中，每轮问+答; '
+                                '⚠️ 气泡内英文必须100%正确拼写、完整无截断、字号≥14pt; '
+                                '全英文对话，关键句型用粗体+彩色高亮; '
+                                '每句3-5个英文单词，像绘本故事; '
+                                '⚠️ 气泡文字是教学核心，可读性优先于场景细节',
                     attention_priority=1),
-        LayoutBlock('替换词框', 'lower',
-                    description='1-2个可替换词, 用虚线框标注',
-                    attention_priority=2, required=False),
-        LayoutBlock('模仿提示', 'bottom', max_chars=8,
-                    description='模仿练习口诀',
+        LayoutBlock('句型提炼框', 'lower-left', max_chars=20,
+                    description='从对话中提炼核心句型公式(圆角色块+箭头): 如 "Can I have ___?" + 小字中文提示; '
+                                '⚠️ 句型公式中的英文单词必须完整正确拼写',
+                    attention_priority=2),
+        LayoutBlock('替换练习区', 'lower-right', max_chars=25,
+                    description='关键词替换练习(2-3个变体), 用不同颜色标注可替换部分, '
+                                '如 an apple 🍎 → a banana 🍌 → some water 💧, 配小图标; '
+                                '⚠️ 替换词必须完整拼写，不能截断',
+                    attention_priority=2),
+        LayoutBlock('模仿口诀', 'bottom', max_chars=10,
+                    description='朗朗上口的模仿练习口诀(中文≤8字)',
                     attention_priority=3, required=False),
     ],
     sub_types=[
-        SubType('日常问候型', '固定问答', '2格漫画: A问(泡泡)→B答(泡泡), 简单场景',
+        SubType('日常问候型', '固定问答', '完整场景(校门口/教室): 两个小学生挥手打招呼+对话气泡',
                 '你问我答', '回答不完整', l1_interference='中文问候常省略主语, 英文不能省'),
-        SubType('请求许可型', '请求+回应', '一个角色举手请求+另一个点头回应, 配对话泡泡',
+        SubType('请求许可型', '请求+回应', '完整场景(教室/商店): 一个角色举手请求+另一个微笑回应+对话气泡',
                 '礼貌问答', '忘说please', l1_interference='中文请求不需要情态动词, 英文Can I/May I?'),
+        SubType('购物场景型', '角色扮演', '完整商店场景(货架+商品+价签): 顾客+店员对话气泡',
+                '去超市买东西', '"Can I have..."不是"I want..."',
+                l1_interference='中文"给我一个"直译会很不礼貌'),
+        SubType('问路场景型', '情境导航', '完整街道场景(路牌+建筑): 问路者+指路者对话气泡',
+                '出门找路', '"Where is..."不是"Where has..."',
+                l1_interference='中文"在哪里"和英文"Where is"语序不同'),
     ],
-    visual_rule_summary='漫画分镜型: 2格卡通漫画(55%), 对话在泡泡中, 像绘本故事',
-    visual_language='绘本漫画风: 圆角分镜格+可爱人物+彩色对话泡泡, 像看故事书',
+    visual_rule_summary='漫画场景大图(50%)+角色对话气泡(全英文·正确拼写·大字号·关键词高亮)+句型提炼色块+替换练习(配emoji)+口诀',
+    visual_language='Cartoon comic-strip style: cute characters with big expressive eyes, speech bubbles with LARGE CLEAR TEXT integrated in detailed scene, vibrant colors, HIGH CONTRAST text on bubble background',
     forbidden=[
-        '对话不超过2轮',
+        '对话不超过3轮(小学生记不住)',
         '每句不超过5个英文单词',
-        '不写成人化场景',
-        '中文不超过10字',
+        '不写成人化场景(必须用可爱卡通角色)',
+        '中文不超过12字(极简中文)',
+        '不能缺少完整场景大图只画对话文字',
+        '对话气泡文字不能太小(小学生视力保护, 最小14pt)',
+        '气泡内英文绝对不能有拼写错误或截断',
+        '气泡背景必须是浅色/白色，文字必须是深色，确保清晰可读',
+        '不能把文字画进场景背景中导致难以辨认',
     ],
-    required_elements=['漫画场景', '简短对话泡泡', '替换词'],
-    l1_interference=['中文对话常省主语, 英文每句都要主语'],
-    max_info_chunks=3,
+    required_elements=['漫画场景大图', '角色对话气泡', '句型提炼', '替换练习'],
+    l1_interference=[
+        '中文对话常省主语, 英文每句都要主语',
+        '中文无冠词 → 学生常忘记 a/an/the',
+        '中文语序"我想要苹果" → 英文 "I\'d like an apple"',
+    ],
+    max_info_chunks=4,
     hook_strategy='"学完这组对话, 跟外国小朋友聊天没问题!"',
-    emotion_design='有趣(看漫画) → 简单(才几个词) → 想试试',
+    emotion_design='好奇(看漫画) → 简单(才几个词) → 想试试(替换练习) → 自信(我也会说!)',
     visual_variants=[
-        '绘本漫画风: 2格分镜+可爱角色+彩色泡泡',
-        '手偶剧场风: 手偶角色在幕布前对话',
-        '视频通话风: 手机屏幕里两个角色在视频聊天',
+        'Bright cartoon store: 2 child characters, product shelves, price tags, shopping cart',
+        'Colorful school scene: students chatting near playground, trees, blue sky',
+        'Warm kitchen: parent and child at breakfast table, food items, cozy decor',
+        'Fun street scene: child asking directions from friendly adult, road signs, buildings',
     ],
     color_config=ColorConfig(
-        primary='#FECA57', secondary='#74B9FF', accent='#E17055',
+        primary='#FECA57', secondary='#74B9FF', accent='#FF6B81',
         error='#FF6B6B', success='#2ED573', bg_style='solid',
     ),
-    color_scheme='情景暖色：场景橙#FECA57 + 对话蓝#74B9FF',
+    color_scheme='情景暖色：场景橙#FECA57 + 气泡蓝#74B9FF + 高亮粉#FF6B81',
 ), '小学')
 
 # ── 自然拼读卡@小学 (小学专属) ──

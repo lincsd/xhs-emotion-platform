@@ -610,67 +610,6 @@ _register(SkillSchema(
 ))
 
 
-# ═══════════════════════════════════════════
-# 9 种理科专属 Skill 定义 (v10.9: 物理/化学/生物)
-# ═══════════════════════════════════════════
-
-# ── 实验卡 ──────────────────────────────────
-_register(SkillSchema(
-    card_type='实验卡',
-    teaching_goal='掌握一个完整实验：目的→步骤→现象→结论',
-    core_strategy='实验名 → 器材图示 → 步骤流程 → 现象/结论 → 安全提示',
-    layout_blocks=[
-        LayoutBlock('标题', 'top', max_chars=10, description='🧪 实验名称 + 学科标签'),
-        LayoutBlock('目的与器材', 'upper', min_area_pct=15, description='实验目的(1句) + 主要器材图标化展示'),
-        LayoutBlock('步骤流程', 'middle', min_area_pct=35, description='编号色块步骤 ①→②→③ 流程图，对照组用虚线'),
-        LayoutBlock('现象与结论', 'lower', min_area_pct=20, description='观察到的现象(有色彩描述) + 结论大字'),
-        LayoutBlock('安全/易错', 'bottom', max_chars=15, required=False, description='⚠️ 安全注意事项 / 常见操作失误'),
-    ],
-    sub_types=[
-        SubType('物理实验', '控制变量法', '自变量/因变量表格+数据图', '调音量只转一个旋钮', '忘了控制变量'),
-        SubType('化学实验', '操作规范法', '器材图+操作箭头流程', '做菜按食谱步骤来', '加热前未预热/未检查气密性'),
-        SubType('生物实验', '对照实验法', '实验组vs对照组双栏对比', '双胞胎只改变一个条件', '对照组设置不合理'),
-        SubType('探究实验', '提出假设→验证', '假设→方案→数据→结论四步', '侦探破案四步推理', '变量没有定量化'),
-    ],
-    visual_rule_summary='器材图标化展示+编号色块步骤流程图+现象色彩描述+安全⚠️红色提示',
-    forbidden=[
-        '步骤不超过5步',
-        '不省略实验目的直接讲步骤',
-        '不写没有现象描述的实验',
-        '安全提示不超过2条',
-    ],
-    required_elements=['实验目的', '器材', '步骤流程', '现象', '结论'],
-    color_scheme='实验蓝绿：器材蓝#3498DB + 现象绿#27AE60 + 安全红#E74C3C',
-))
-
-# ── 公式推导卡 ──────────────────────────────────
-_register(SkillSchema(
-    card_type='公式推导卡',
-    teaching_goal='理解公式从哪来、每步为什么成立、何时能用',
-    core_strategy='已知条件 → 逐步推导(标注物理意义) → 最终公式 → 适用条件',
-    layout_blocks=[
-        LayoutBlock('标题', 'top', max_chars=10, description='公式名称 + 学科标签'),
-        LayoutBlock('已知条件', 'upper', description='出发点：基本定律/公理/已知关系'),
-        LayoutBlock('推导过程', 'middle', min_area_pct=40, description='逐步推导：每步标注物理/化学意义，变量用色块'),
-        LayoutBlock('最终公式', 'lower', min_area_pct=15, description='公式超大展示 + 各符号含义注释'),
-        LayoutBlock('适用条件', 'bottom', max_chars=20, description='⚠️ 适用前提 + 常见误用场景'),
-    ],
-    sub_types=[
-        SubType('物理推导', '定律→公式推导', '每步标注物理量单位+因果箭头', '搭积木从底层往上搭', '不标单位/混淆标量矢量'),
-        SubType('化学推导', '守恒→等量关系', '电子转移/质量守恒箭头标注', '天平两边一样重', '忘记考虑系数'),
-        SubType('数学推导', '公理→定理推导', '命题→证明逻辑链', '推理像接力赛传棒', '跳步/循环论证'),
-    ],
-    visual_rule_summary='推导步骤色块递进↓+每步物理意义注释+最终公式超大+适用条件⚠️',
-    forbidden=[
-        '不跳步省略中间过程',
-        '不省略物理意义只写数学变换',
-        '推导步骤不超过5步',
-        '不写没有适用条件的公式',
-    ],
-    required_elements=['已知条件', '逐步推导', '最终公式', '适用条件'],
-    color_scheme='推导蓝紫：条件蓝#5B8DEF + 推导紫#9B59B6 + 公式金#F1C40F',
-))
-
 # ── 过程流卡 ──────────────────────────────────
 _register(SkillSchema(
     card_type='过程流卡',

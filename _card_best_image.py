@@ -21,8 +21,11 @@ Pipeline 集成点:
   ├────────────────────────┼──────────────────────────────────────────────┤
   │ 无缓存                 │ Step1生成prompt → Step2-4从头生成             │
   │ 有缓存 score < 60      │ 复用缓存prompt → Step2-4从头生成, 结束取更优   │
-  │ 有缓存 60 ≤ s < 85     │ 复用缓存prompt → 缩减轮数=1, 结束取更优       │
-  │ 有缓存 score ≥ 85      │ 复用缓存prompt → 跳过从头生成, 直接精修缓存图   │
+  │ 有缓存 60 ≤ s < 90     │ 复用缓存prompt → 缩减轮数=1, 结束取更优       │
+  │ 有缓存 combined≥90     │ 复用缓存prompt → 跳过从头生成, 直接精修缓存图   │
+  │  且 quality≥75         │                                              │
+  │ quality<75 (任何audit) │ 不跳过, 视为中等缓存, 缩减轮数并对比           │
+  │ gen_count每10次         │ 周期性允许全新尝试 (防止局部最优)             │
   │ card内容变化           │ 重新走Step1生成prompt, 图片缓存失效            │
   └────────────────────────┴──────────────────────────────────────────────┘
 
@@ -44,7 +47,11 @@ _IMG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'card_best_i
 
 # ── 阈值配置 ──
 WARM_START_THRESHOLD = 60       # 缓存分 >= 此值时才启用 warm-start
-WARM_START_SKIP_FRESH = 85      # 缓存分 >= 此值时可跳过从头生成, 直接精修
+WARM_START_SKIP_FRESH = 90      # combined_score >= 此值时可跳过从头生成, 直接精修 (v10.23: 85→90, 改用combined)
+WARM_START_QUALITY_FLOOR = 75   # v10.23: quality_score 地板 — 即使audit高, quality<此值也不跳过
+WARM_START_REGEN_EVERY = 10     # v10.23: 每N次生成允许一次全新尝试 (防止陷入局部最优)
+WARM_START_SKIP_ALL = 95        # v10.24: combined >= 此值 且 quality >= 85 → 完全跳过, 直接返回缓存图
+WARM_START_SKIP_ALL_QUALITY = 85  # v10.24: skip-all 要求的最低 quality
 
 
 def _ensure_dir():

@@ -216,6 +216,98 @@ def build_layout_skeleton(card_type: str, card_data: dict, grade: str = '') -> s
 
     lines.append(f'=== END SKELETON ===')
 
+    # ── v10.23: 小学英语通用增强 ──
+    # 判断是否是小学英语（通过 grade 参数）
+    _is_xiaoxue = False
+    if grade:
+        from skill_schema import _normalize_grade_level
+        _gl = _normalize_grade_level(grade)
+        _is_xiaoxue = (_gl == '小学')
+
+    if _is_xiaoxue and card_type in ('词汇卡', '句型卡', '语法卡', '自然拼读卡', '情景对话卡', '易混词卡', '不规则动词卡'):
+        lines.append('')
+        lines.append('=== PRIMARY SCHOOL ENGLISH ENHANCEMENT (小学英语专属) ===')
+        lines.append('  Target audience: 小学生 (age 8-12), must be visually engaging and age-appropriate')
+        lines.append('  📖 FONT SIZE: All English text must be large and clearly readable (minimum 14pt equivalent)')
+        lines.append('  🎨 COLORS: Use bright, cheerful, saturated colors — NOT muted or corporate')
+        lines.append('  😊 CHARACTERS: If drawing people/characters, use cute cartoon style with big eyes and expressive faces')
+        lines.append('  ✨ DECORATION: Add small decorative elements (stars, sparkles, small icons) to fill whitespace attractively')
+        lines.append('  📐 SIMPLICITY: Keep content simple — short sentences, basic vocabulary, clear structure')
+        lines.append('  🔤 BILINGUAL: Important terms should have both English + simple Chinese translation')
+        lines.append('')
+        # v10.24 P2: 布局间距增强
+        lines.append('  === LAYOUT SPACING RULES (v10.24 — 防拥挤) ===')
+        lines.append('  📏 MARGINS: Leave at least 5% blank margin on ALL four sides of the card')
+        lines.append('  📏 SECTION GAP: Between each content section (title, body, footer), leave a visual gap of at least 16px equivalent')
+        lines.append('  📏 TEXT DENSITY: Maximum 60 characters per line for English, 25 characters per line for Chinese')
+        lines.append('  📏 BREATHING ROOM: Each distinct content block (example box, vocabulary list, grammar rule) must have visible padding inside its container')
+        lines.append('  📏 DO NOT cram all content into the card — if content overflows, REDUCE content rather than shrinking fonts')
+        lines.append('')
+        # v10.26 P1: 防留白不均 — 内容均匀分布
+        lines.append('  === EVEN DISTRIBUTION RULES (v10.26 — 防留白不均) ===')
+        lines.append('  📐 DISTRIBUTE content EVENLY across the full height of the white content card area')
+        lines.append('  📐 DO NOT cluster all content in the top half and leave the bottom half empty')
+        lines.append('  📐 The gap between any two adjacent content sections should be ROUGHLY EQUAL — no single gap should be 2x larger than others')
+        lines.append('  📐 If the card has fewer content items, INCREASE the size of illustrations or add more visual elements to fill space — do NOT leave large blank patches')
+        lines.append('  📐 The content area should feel "full but not cramped" — aim for 75-85% content coverage within the white card area')
+        lines.append('')
+        # v10.24 P3: 防截断规则
+        lines.append('  === ANTI-TRUNCATION RULES (v10.24 — 防截断) ===')
+        lines.append('  ✂️ ABSOLUTE RULE: ALL text on the card must be COMPLETE — never cut off mid-word or mid-sentence')
+        lines.append('  ✂️ If a title is too long for one line, WRAP to the next line — do NOT truncate')
+        lines.append('  ✂️ Slogans, mnemonics, and 口诀 must be complete meaningful phrases — no partial phrases like "搭配固定要" or "注意到"')
+        lines.append('  ✂️ English words must be fully spelled out — no partial words like "Grou" instead of "Group"')
+        lines.append('  ✂️ If there is not enough space for all content, REMOVE less important items rather than truncating any text')
+        lines.append('')
+
+    # ── v10.25: 情景对话卡·小学专属增强 (P4 — 重点修复text_accuracy) ──
+    if _is_xiaoxue and card_type == '情景对话卡':
+        lines.append('=== DIALOGUE CARD · PRIMARY SCHOOL SPECIAL INSTRUCTIONS ===')
+        lines.append('  🎬 SCENE ILLUSTRATION (MOST IMPORTANT — 50%+ of card area):')
+        lines.append('    • Draw a COMPLETE cartoon scene (NOT abstract, NOT just text)')
+        lines.append('    • Include SPECIFIC environment details:')
+        lines.append('      - Store scene: shelves with products, shopping cart, price tags')
+        lines.append('      - Classroom: desks, blackboard with writing, school bags')
+        lines.append('      - Park: trees, bench, playground equipment, blue sky')
+        lines.append('      - Home: furniture, kitchen items, family photos on wall')
+        lines.append('    • Draw 2 distinct cartoon characters with:')
+        lines.append('      - Different hair/clothes so they are distinguishable')
+        lines.append('      - Big expressive faces (happy, curious, excited)')
+        lines.append('      - Body language matching the dialogue (pointing, waving, holding items)')
+        lines.append('')
+        lines.append('  💬 SPEECH BUBBLES — TEXT ACCURACY IS #1 PRIORITY:')
+        lines.append('    • Bubbles must be INSIDE the scene illustration, coming from characters\' mouths')
+        lines.append('    • Round/cloud-shaped bubbles with clear tail pointing to speaker')
+        lines.append('    • ⚠️ CRITICAL: Bubble background MUST be WHITE or very light color')
+        lines.append('    • ⚠️ CRITICAL: Text inside bubbles MUST be DARK color (black/dark blue)')
+        lines.append('    • ⚠️ CRITICAL: Font size inside bubbles MUST be ≥14pt — large enough for 小学生')
+        lines.append('    • ⚠️ CRITICAL: Every English word MUST be spelled 100% correctly — NO typos, NO garbled text')
+        lines.append('    • ⚠️ CRITICAL: Every sentence MUST be complete — NO truncation mid-word or mid-sentence')
+        lines.append('    • English text ONLY in bubbles (no Chinese in dialogue)')
+        lines.append('    • KEY phrases in BOLD + colored highlight (e.g., "Can I have" in orange bold)')
+        lines.append('    • Maximum 3 exchanges (6 bubbles total)')
+        lines.append('    • If text doesn\'t fit in bubble, ENLARGE the bubble — never shrink the text')
+        lines.append('')
+        lines.append('  📋 SENTENCE PATTERN BOX (below scene):')
+        lines.append('    • Extract the core pattern: e.g., "Can I have ___?"')
+        lines.append('    • Show in a rounded colored box with arrow pointing to blank')
+        lines.append('    • Add a tiny Chinese hint below: e.g., "(我能要___吗？)"')
+        lines.append('    • ⚠️ Pattern text must be complete and correctly spelled')
+        lines.append('')
+        lines.append('  🔄 SUBSTITUTION PRACTICE:')
+        lines.append('    • Show 2-3 word substitutions with different colors')
+        lines.append('    • Format: "an apple 🍎 → a banana 🍌 → some water 💧"')
+        lines.append('    • Use small icons/emojis next to each word for visual interest')
+        lines.append('    • ⚠️ All substitute words must be fully spelled out')
+        lines.append('')
+        lines.append('  🔤 TEXT RENDERING CHECKLIST (verify before finalizing):')
+        lines.append('    □ All English words in speech bubbles are correctly spelled')
+        lines.append('    □ No word is cut off or garbled (e.g., "Hel" instead of "Hello")')
+        lines.append('    □ Bubble text has high contrast (dark text on light bubble)')
+        lines.append('    □ Text is large enough to read without squinting')
+        lines.append('    □ Sentence pattern formula is complete with blank indicator')
+        lines.append('')
+
     return '\n'.join(lines)
 
 
@@ -357,8 +449,32 @@ def build_content_fill(card_type: str, card_data: dict, subject: str,
             break
 
     # ── 替换练习 (情景对话卡) ──
-    if '替换练习' in block_names and points:
-        lines.append(f'[替换练习] → key phrase variations from core_points')
+    if ('替换练习' in block_names or '替换练习区' in block_names) and points:
+        rep_block = '替换练习区' if '替换练习区' in block_names else '替换练习'
+        lines.append(f'[{rep_block}] → key phrase variations from core_points')
+
+    # ── v10.23: 漫画场景大图 + 句型提炼框 (小学情景对话卡专属区块) ──
+    if '漫画场景大图' in block_names:
+        lines.append(f'[漫画场景大图] → draw a cartoon comic scene for "{title}" with 2 cute characters in dialogue')
+        if definition:
+            lines.append(f'  Scene context: {definition[:80]}')
+        lines.append(f'  Key requirements: detailed background, expressive characters, speech bubbles with English text')
+    if '句型提炼框' in block_names:
+        if definition:
+            lines.append(f'[句型提炼框] → extract pattern from: "{definition[:60]}" → show as colored formula box')
+        elif points:
+            lines.append(f'[句型提炼框] → extract pattern from core dialogue → show as colored formula box')
+
+    # ── 情景大图 + 句型提炼 (备用区块名，兼容) ──
+    if '情景大图' in block_names:
+        lines.append(f'[情景大图] → draw a cartoon scene for "{title}" with 2 characters in dialogue')
+        if definition:
+            lines.append(f'  Scene context: {definition[:80]}')
+    if '句型提炼' in block_names:
+        if definition:
+            lines.append(f'[句型提炼] → extract pattern from: "{definition[:60]}" → show as formula box')
+        elif points:
+            lines.append(f'[句型提炼] → extract pattern from core dialogue → show as formula box')
 
     # ── 真题速记 (知识总结卡) ──
     exam_focus = card_data.get('exam_focus', {})

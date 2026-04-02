@@ -183,6 +183,38 @@ def _build_opener():
 
 _OPENER = _build_opener()
 
+# ============ 文本模型降级配置 ============
+_TEXT_MODEL_PRIMARY = 'gemini-3.1-pro'
+_TEXT_MODEL_FALLBACK = 'gemini-2.5-flash'
+
+def _call_gemini_text(prompt_text, api_key, temperature=0.8, max_tokens=4096, timeout=120, opener=None):
+    """通用文本模型调用，自动降级: gemini-3.1-pro → gemini-2.5-flash"""
+    if opener is None:
+        opener = _OPENER
+    models = [_TEXT_MODEL_PRIMARY, _TEXT_MODEL_FALLBACK]
+    req_payload = json.dumps({
+        "contents": [{"parts": [{"text": prompt_text}]}],
+        "generationConfig": {"temperature": temperature, "maxOutputTokens": max_tokens}
+    }).encode('utf-8')
+    
+    last_err = None
+    for mi, model in enumerate(models):
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
+        try:
+            req = urllib.request.Request(url, data=req_payload, headers={"Content-Type": "application/json"}, method="POST")
+            resp = opener.open(req, timeout=timeout)
+            data = json.loads(resp.read().decode('utf-8'))
+            if mi > 0:
+                print(f'[TextModel] ✅ 降级到 {model} 成功')
+            return data
+        except Exception as e:
+            last_err = e
+            if mi < len(models) - 1:
+                print(f'[TextModel] ⚠️ {model} 失败({e}), 降级到 {models[mi+1]}...')
+            else:
+                print(f'[TextModel] ❌ 所有模型均失败: {e}')
+    raise last_err
+
 # ============ 数据库初始化 ============
 def init_db():
     print(f"[init_db] Starting... DB_PATH={DB_PATH}")
@@ -2937,14 +2969,14 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     def _gemini_proxy(self, body):
         """代理转发 Gemini API 请求，解决浏览器无法直接访问 Google API 的问题"""
         # 所有模型统一使用多 Key 轮询
-        model = body.get('model', 'gemini-2.5-flash')
+        model = body.get('model', 'gemini-3.1-pro')
         is_image_model = 'image' in model or 'banana' in model or 'imagen' in model
         api_key = _get_next_server_key() or body.get('apiKey', '')
         payload = body.get('payload', {})
         action = body.get('action', 'generateContent')  # generateContent or listModels
         feature = body.get('feature', action)  # 用于追踪功能类型
 
-        # 智能模型路由：对高质量需求的功能，自动将 flash-lite 升级为 flash
+        # 智能模型路由：对高质量需求的功能，自动将 flash-lite 升级为 3.1-pro
         # flash-lite 适合简单任务（标签、评分），但内容生成/分析等需要更强能力
         UPGRADE_FEATURES = {
             '内容生成', '内容分析', '内容搜索分析', '品牌定位', '竞品分析',
@@ -2955,8 +2987,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         }
         original_model = model
         if model == 'gemini-2.5-flash-lite' and feature in UPGRADE_FEATURES:
-            model = 'gemini-2.5-flash'
-            print(f'[ModelRoute] {feature}: {original_model} → {model} (auto-upgrade)')
+            model = 'gemini-3.1-pro'
+            print(f'[ModelRoute] {feature}: {original_model} → {model} (auto-upgrade to pro)')
 
 
         # AI 配额检查（传入 feature 以判断所需积分）
@@ -3343,17 +3375,9 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         if not api_key:
             return self._send_json({'error': 'No Gemini API key configured'}, 500)
 
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
-        req_body = json.dumps({
-            "contents": [{"parts": [{"text": note_prompt}]}],
-            "generationConfig": {"temperature": 0.8, "maxOutputTokens": 65536}
-        }).encode('utf-8')
-
         try:
             opener = _build_opener()
-            req = urllib.request.Request(url, data=req_body, headers={"Content-Type": "application/json"}, method="POST")
-            resp = opener.open(req, timeout=120)
-            data = json.loads(resp.read().decode('utf-8'))
+            data = _call_gemini_text(note_prompt, api_key, temperature=0.8, max_tokens=65536, timeout=120, opener=opener)
             candidates = data.get('candidates', [])
             if not candidates:
                 return self._send_json({'error': 'AI返回空结果(可能触发安全过滤)'}, 500)
@@ -3490,15 +3514,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
 例如: 3,15,42,78,99"""
 
                 try:
-                    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
-                    req_body = json.dumps({
-                        "contents": [{"parts": [{"text": prompt}]}],
-                        "generationConfig": {"temperature": 0.2, "maxOutputTokens": 200}
-                    }).encode('utf-8')
                     opener = _build_opener()
-                    req = urllib.request.Request(url, data=req_body, headers={"Content-Type": "application/json"}, method="POST")
-                    resp = opener.open(req, timeout=30)
-                    data = json.loads(resp.read().decode('utf-8'))
+                    data = _call_gemini_text(prompt, api_key, temperature=0.2, max_tokens=200, timeout=30, opener=opener)
                     candidates = data.get('candidates', [])
                     if not candidates:
                         raise ValueError('AI返回空结果')
@@ -3747,26 +3764,31 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             warm_start_ext = 'png'
             warm_start_model = ''
             warm_skip_fresh = False
+            warm_skip_all = False         # v10.24: combined>=95 → 完全跳过, 直接返回缓存
             warm_cached_prompt = ''       # 缓存的最优 prompt
             warm_cached_manifest = None   # 缓存的 manifest
             warm_prompt_reused = False    # 是否复用了缓存 prompt
+            warm_cached_quality = {}      # v10.24: 缓存的质量评分 (skip-all用)
             _card_src_hash = ''  # v10.9.9a: 稳定的卡片源数据哈希
             try:
                 from _card_best_image import (
                     get_best_cache, save_best_cache, card_source_hash as _cs_hash,
-                    WARM_START_THRESHOLD, WARM_START_SKIP_FRESH
+                    WARM_START_THRESHOLD, WARM_START_SKIP_FRESH,
+                    WARM_START_QUALITY_FLOOR, WARM_START_REGEN_EVERY,
+                    WARM_START_SKIP_ALL, WARM_START_SKIP_ALL_QUALITY
                 )
                 _card_src_hash = _cs_hash(card)
                 cached = get_best_cache(card['full_id'])
                 if cached:
                     ws_audit = cached['audit_score']
+                    ws_quality = cached['quality_score']
                     ws_combined = cached['combined_score']
                     ws_gen = cached['generation_count']
                     cached_m_hash = cached['manifest_hash']
                     content_match = (cached_m_hash == _card_src_hash)
                     ws_prompt_len = cached.get('prompt_length', 0)
-                    pipeline_log.append(f'Step1.5: 🔥 发现缓存 audit={ws_audit} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字 content_match={content_match}')
-                    print(f'[v3] Step1.5: warm-start audit={ws_audit} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字 content_match={content_match}', flush=True)
+                    pipeline_log.append(f'Step1.5: 🔥 发现缓存 audit={ws_audit} quality={ws_quality} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字 content_match={content_match}')
+                    print(f'[v3] Step1.5: warm-start audit={ws_audit} quality={ws_quality} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字 content_match={content_match}', flush=True)
 
                     # ── Prompt 复用逻辑 ──
                     # 卡片内容匹配 + 有缓存prompt → 可复用prompt (省1次API调用)
@@ -3778,21 +3800,48 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                         pipeline_log.append(f'Step1.5: ♻️ 复用缓存prompt ({len(prompt)}字), 省去重新生成')
                         print(f'[v3] Step1.5: 复用缓存prompt ({len(prompt)}字)', flush=True)
 
-                    # ── Image warm-start 逻辑 ──
+                    # ── v10.23: 周期性全新尝试 — 每N次允许一次从头生成 ──
+                    _force_regen = (ws_gen > 0 and ws_gen % WARM_START_REGEN_EVERY == 0)
+
+                    # ── Image warm-start 逻辑 (v10.23: combined + quality_floor) ──
                     if not content_match:
                         pipeline_log.append('Step1.5: ⚠️ 卡片内容已变化, 图片缓存失效, 从头生成')
                     elif ws_audit < WARM_START_THRESHOLD:
                         pipeline_log.append(f'Step1.5: ⚠️ 缓存分不够({ws_audit}<{WARM_START_THRESHOLD}), 从头生成')
+                    elif _force_regen:
+                        pipeline_log.append(f'Step1.5: 🔄 周期性重生(gen#{ws_gen}, 每{WARM_START_REGEN_EVERY}次允许全新尝试)')
+                        # 仍然设置baseline但不跳过
+                        warm_start_image = cached['image_data']
+                        warm_start_score = ws_audit
+                        warm_start_ext = cached['ext']
+                        warm_start_model = cached.get('model', '')
                     else:
                         warm_start_image = cached['image_data']
                         warm_start_score = ws_audit
                         warm_start_ext = cached['ext']
                         warm_start_model = cached.get('model', '')
-                        if ws_audit >= WARM_START_SKIP_FRESH:
+                        # v10.24: skip-all — combined极高 → 完全跳过所有步骤, 直接返回缓存
+                        # v10.25: 安全守卫 — 至少经过2轮验证 OR audit>=95才允许skip-all
+                        _skip_all_eligible = (ws_gen >= 2 or ws_audit >= 95)
+                        if ws_combined >= WARM_START_SKIP_ALL and ws_quality >= WARM_START_SKIP_ALL_QUALITY and _skip_all_eligible:
+                            warm_skip_all = True
                             warm_skip_fresh = True
-                            pipeline_log.append(f'Step1.5: ✅ 高分缓存({ws_audit}>={WARM_START_SKIP_FRESH}), 跳过从头生成, 直接精修')
+                            warm_cached_quality = cached.get('quality_detail') or {'total': ws_quality, 'comment': 'skip-all缓存复用'}
+                            pipeline_log.append(f'Step1.5: 🏆 极高分缓存(combined={ws_combined:.0f}>={WARM_START_SKIP_ALL}, quality={ws_quality}>={WARM_START_SKIP_ALL_QUALITY}, gen#{ws_gen}), 完全跳过, 直接返回')
+                            print(f'[v3] Step1.5: 🏆 skip-all! combined={ws_combined:.0f} quality={ws_quality} gen#{ws_gen}', flush=True)
+                        elif ws_combined >= WARM_START_SKIP_ALL and ws_quality >= WARM_START_SKIP_ALL_QUALITY and not _skip_all_eligible:
+                            # 分数够高但轮次不足,走skip-fresh以确保再验证一轮
+                            warm_skip_fresh = True
+                            pipeline_log.append(f'Step1.5: ⚠️ 分数达标但gen#{ws_gen}<2且audit={ws_audit}<95, 需再验证一轮(skip-fresh)')
+                            print(f'[v3] Step1.5: skip-all blocked (gen#{ws_gen}<2, audit={ws_audit}<95), fallback to skip-fresh', flush=True)
+                        # v10.23: skip-fresh 用 combined_score + quality_floor
+                        elif ws_combined >= WARM_START_SKIP_FRESH and ws_quality >= WARM_START_QUALITY_FLOOR:
+                            warm_skip_fresh = True
+                            pipeline_log.append(f'Step1.5: ✅ 高分缓存(combined={ws_combined:.0f}>={WARM_START_SKIP_FRESH}, quality={ws_quality}>={WARM_START_QUALITY_FLOOR}), 跳过从头生成, 直接精修')
+                        elif ws_quality < WARM_START_QUALITY_FLOOR:
+                            pipeline_log.append(f'Step1.5: ⚠️ quality不达标({ws_quality}<{WARM_START_QUALITY_FLOOR}), 不跳过, 缩减轮数并对比')
                         else:
-                            pipeline_log.append(f'Step1.5: ✅ 中等缓存({ws_audit}), 缩减生成轮数并对比')
+                            pipeline_log.append(f'Step1.5: ✅ 中等缓存(combined={ws_combined:.0f}), 缩减生成轮数并对比')
                 else:
                     pipeline_log.append('Step1.5: 无历史缓存, 从头生成')
             except ImportError:
@@ -3819,6 +3868,41 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 rounds_used = 0
                 pipeline_log.append(f'Step2-3: ⏭️ 已跳过(warm-start score={warm_start_score})')
                 print(f'[v3] Step2-3跳过: warm-start score={warm_start_score}', flush=True)
+
+                # v10.24: skip-all → 完全跳过所有后续步骤, 直接返回缓存图
+                if warm_skip_all:
+                    quality = warm_cached_quality if warm_cached_quality else {'total': 0, 'comment': 'skip-all缓存'}
+                    img_b64 = base64.b64encode(best_image).decode('utf-8')
+                    mime = 'image/jpeg' if best_ext == 'jpg' else 'image/png'
+                    pipeline_log.append(f'🏆 skip-all快速返回: audit={best_score} quality={quality.get("total",0)}')
+                    print(f'[v3] 🏆 skip-all快速返回: {card["full_id"]} audit={best_score} quality={quality.get("total",0)}', flush=True)
+
+                    # 更新缓存的 generation_count
+                    try:
+                        save_best_cache(
+                            card_id=card['full_id'],
+                            image_data=best_image, ext=best_ext,
+                            audit_score=best_score,
+                            quality_score=quality.get('total', 0),
+                            model=used_model,
+                            source_hash=_card_src_hash,
+                            prompt_text=prompt if warm_prompt_reused else '',
+                            manifest=manifest if warm_prompt_reused else {}
+                        )
+                    except Exception:
+                        pass
+
+                    return jsonify({
+                        'success': True,
+                        'image': f'data:{mime};base64,{img_b64}',
+                        'audit_score': best_score,
+                        'quality': quality,
+                        'model': used_model,
+                        'rounds': 0,
+                        'pipeline': pipeline_log,
+                        'warm_start': True,
+                        'skip_all': True
+                    })
             elif warm_start_image:
                 # 中等缓存 → 用缓存图作为baseline, 缩减生成轮数
                 best_image = warm_start_image
@@ -4455,24 +4539,29 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 warm_start_ext = 'png'
                 warm_start_model = ''
                 warm_skip_fresh = False
+                warm_skip_all = False         # v10.24: combined>=95 → 完全跳过
                 warm_prompt_reused = False
+                warm_cached_quality = {}      # v10.24: 缓存的质量评分 (skip-all用)
                 _card_src_hash = ''  # v10.9.9a: 稳定的卡片源数据哈希
                 try:
                     from _card_best_image import (
                         get_best_cache, save_best_cache, card_source_hash as _cs_hash,
-                        WARM_START_THRESHOLD, WARM_START_SKIP_FRESH
+                        WARM_START_THRESHOLD, WARM_START_SKIP_FRESH,
+                        WARM_START_QUALITY_FLOOR, WARM_START_REGEN_EVERY,
+                        WARM_START_SKIP_ALL, WARM_START_SKIP_ALL_QUALITY
                     )
                     _card_src_hash = _cs_hash(card)
                     cached = get_best_cache(card.get('full_id', ''))
                     if cached:
                         ws_audit = cached['audit_score']
+                        ws_quality = cached['quality_score']
                         ws_combined = cached['combined_score']
                         ws_gen = cached['generation_count']
                         cached_m_hash = cached['manifest_hash']
                         content_match = (cached_m_hash == _card_src_hash)
                         ws_prompt_len = cached.get('prompt_length', 0)
-                        pipeline_log.append(f'Step1.5: 🔥 发现缓存 audit={ws_audit} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字 content_match={content_match}')
-                        print(f'[v3-async] Step1.5: warm-start audit={ws_audit} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字 content_match={content_match}', flush=True)
+                        pipeline_log.append(f'Step1.5: 🔥 发现缓存 audit={ws_audit} quality={ws_quality} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字 content_match={content_match}')
+                        print(f'[v3-async] Step1.5: warm-start audit={ws_audit} quality={ws_quality} combined={ws_combined:.0f} gen#{ws_gen} prompt={ws_prompt_len}字 content_match={content_match}', flush=True)
 
                         # ── Prompt 复用逻辑 ──
                         if content_match and cached.get('prompt_text'):
@@ -4481,21 +4570,46 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                             pipeline_log.append(f'Step1.5: ♻️ 复用缓存prompt ({len(prompt)}字)')
                             print(f'[v3-async] Step1.5: 复用缓存prompt ({len(prompt)}字)', flush=True)
 
-                        # ── Image warm-start 逻辑 ──
+                        # ── v10.23: 周期性全新尝试 ──
+                        _force_regen = (ws_gen > 0 and ws_gen % WARM_START_REGEN_EVERY == 0)
+
+                        # ── Image warm-start 逻辑 (v10.23: combined + quality_floor) ──
                         if not content_match:
                             pipeline_log.append('Step1.5: ⚠️ 卡片内容已变化, 图片缓存失效')
                         elif ws_audit < WARM_START_THRESHOLD:
                             pipeline_log.append(f'Step1.5: ⚠️ 缓存分不够({ws_audit}<{WARM_START_THRESHOLD})')
+                        elif _force_regen:
+                            pipeline_log.append(f'Step1.5: 🔄 周期性重生(gen#{ws_gen}, 每{WARM_START_REGEN_EVERY}次允许全新尝试)')
+                            warm_start_image = cached['image_data']
+                            warm_start_score = ws_audit
+                            warm_start_ext = cached['ext']
+                            warm_start_model = cached.get('model', '')
                         else:
                             warm_start_image = cached['image_data']
                             warm_start_score = ws_audit
                             warm_start_ext = cached['ext']
                             warm_start_model = cached.get('model', '')
-                            if ws_audit >= WARM_START_SKIP_FRESH:
+                            # v10.24: skip-all — combined极高 → 完全跳过
+                            # v10.25: 安全守卫 — 至少经过2轮验证 OR audit>=95才允许skip-all
+                            _skip_all_eligible = (ws_gen >= 2 or ws_audit >= 95)
+                            if ws_combined >= WARM_START_SKIP_ALL and ws_quality >= WARM_START_SKIP_ALL_QUALITY and _skip_all_eligible:
+                                warm_skip_all = True
                                 warm_skip_fresh = True
-                                pipeline_log.append(f'Step1.5: ✅ 高分缓存({ws_audit}>={WARM_START_SKIP_FRESH}), 跳过从头生成')
+                                warm_cached_quality = cached.get('quality_detail') or {'total': ws_quality, 'comment': 'skip-all缓存复用'}
+                                pipeline_log.append(f'Step1.5: 🏆 极高分缓存(combined={ws_combined:.0f}>={WARM_START_SKIP_ALL}, quality={ws_quality}>={WARM_START_SKIP_ALL_QUALITY}, gen#{ws_gen}), 完全跳过')
+                                print(f'[v3-async] Step1.5: 🏆 skip-all! combined={ws_combined:.0f} quality={ws_quality} gen#{ws_gen}', flush=True)
+                            elif ws_combined >= WARM_START_SKIP_ALL and ws_quality >= WARM_START_SKIP_ALL_QUALITY and not _skip_all_eligible:
+                                warm_skip_fresh = True
+                                pipeline_log.append(f'Step1.5: ⚠️ 分数达标但gen#{ws_gen}<2且audit={ws_audit}<95, 需再验证一轮(skip-fresh)')
+                                print(f'[v3-async] Step1.5: skip-all blocked (gen#{ws_gen}<2, audit={ws_audit}<95), fallback to skip-fresh', flush=True)
+                            # v10.23: skip-fresh 用 combined_score + quality_floor
+                            elif ws_combined >= WARM_START_SKIP_FRESH and ws_quality >= WARM_START_QUALITY_FLOOR:
+                                warm_skip_fresh = True
+                                pipeline_log.append(f'Step1.5: ✅ 高分缓存(combined={ws_combined:.0f}>={WARM_START_SKIP_FRESH}, quality={ws_quality}>={WARM_START_QUALITY_FLOOR}), 跳过从头生成')
+                            elif ws_quality < WARM_START_QUALITY_FLOOR:
+                                pipeline_log.append(f'Step1.5: ⚠️ quality不达标({ws_quality}<{WARM_START_QUALITY_FLOOR}), 不跳过, 缩减轮数并对比')
                             else:
-                                pipeline_log.append(f'Step1.5: ✅ 中等缓存({ws_audit}), 缩减轮数并对比')
+                                pipeline_log.append(f'Step1.5: ✅ 中等缓存(combined={ws_combined:.0f}), 缩减轮数并对比')
                     else:
                         pipeline_log.append('Step1.5: 无历史缓存, 从头生成')
                 except ImportError:
@@ -4522,6 +4636,43 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     rounds_used = 0
                     pipeline_log.append(f'Step2-3: ⏭️ 已跳过(warm-start score={warm_start_score})')
                     print(f'[v3-async] Step2-3跳过: warm-start score={warm_start_score}', flush=True)
+
+                    # v10.24: skip-all → 完全跳过所有后续步骤
+                    if warm_skip_all:
+                        quality = warm_cached_quality if warm_cached_quality else {'total': 0, 'comment': 'skip-all缓存'}
+                        img_b64 = base64.b64encode(best_image).decode('utf-8')
+                        mime = 'image/jpeg' if best_ext == 'jpg' else 'image/png'
+                        total_time = _elapsed()
+                        pipeline_log.append(f'🏆 skip-all快速返回: audit={best_score} quality={quality.get("total",0)} ({total_time:.0f}s)')
+                        print(f'[v3-async] 🏆 skip-all快速返回: {card.get("full_id","")} audit={best_score} quality={quality.get("total",0)}', flush=True)
+                        # 更新缓存 generation_count
+                        try:
+                            save_best_cache(
+                                card_id=card.get('full_id', ''),
+                                image_data=best_image, ext=best_ext,
+                                audit_score=best_score,
+                                quality_score=quality.get('total', 0),
+                                model=used_model,
+                                source_hash=_card_src_hash,
+                                prompt_text=prompt if warm_prompt_reused else '',
+                                manifest=manifest if warm_prompt_reused else {}
+                            )
+                        except Exception:
+                            pass
+                        result = {
+                            'ok': True, 'image': img_b64, 'mimeType': mime,
+                            'size': len(best_image), 'auditScore': best_score,
+                            'qualityScore': quality.get('total', 0), 'qualityDetail': quality,
+                            'model': used_model, 'rounds': 0,
+                            'finalAction': 'skip_all', 'manifest': {},
+                            'pipeline': pipeline_log, 'card_id': card.get('full_id', ''),
+                            'elapsed': round(total_time, 1), 'pedagogical': None,
+                        }
+                        with _async_tasks_lock:
+                            _async_tasks[task_id] = {**_async_tasks[task_id],
+                                'status': 'done', 'result': result, 'updated': time.time(), 'progress': '完成(skip-all)'}
+                        return
+
                 elif warm_start_image:
                     # 中等缓存 → 用缓存图作为baseline
                     best_image = warm_start_image
@@ -5297,19 +5448,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         novel_list = '\n'.join(f'  - {k}: {v}' for k, v in NOVEL_STRATEGIES.items())
 
         def _call_gemini(prompt_text, temperature=0.8):
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
-            req_body = json.dumps({
-                "contents": [{"parts": [{"text": prompt_text}]}],
-                "generationConfig": {"temperature": temperature, "maxOutputTokens": 4096}
-            }).encode('utf-8')
-            req = urllib.request.Request(url, data=req_body, headers={"Content-Type": "application/json"}, method="POST")
-            try:
-                resp = _OPENER.open(req, timeout=60)
-            except urllib.error.HTTPError as he:
-                err_body = he.read().decode('utf-8', errors='replace')[:500]
-                print(f'[Gemini API Error] {he.code}: {err_body}')
-                raise Exception(f'Gemini API {he.code}: {err_body[:200]}')
-            data = json.loads(resp.read().decode('utf-8'))
+            data = _call_gemini_text(prompt_text, api_key, temperature=temperature, max_tokens=4096, timeout=60)
             # 提取文本（跳过 thought 部分）
             text = ''
             for part in data.get('candidates', [{}])[0].get('content', {}).get('parts', []):
