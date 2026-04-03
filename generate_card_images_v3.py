@@ -2234,7 +2234,7 @@ def _build_card_info_grammar(card, subject, grade, semester, canvas=None):
 {f'【口诀参考】(可改进): {memory_tip}' if memory_tip else ''}
 难度: {card.get('difficulty', 3)}/5
 
-⚠️ 视觉风格: {(canvas or _CANVAS_PRESETS['小红书'])['desc_cn']}，鲜明渐变背景，白色圆角卡片区块，标题区用饱和色banner，{(canvas or _CANVAS_PRESETS['小红书'])['breathing']}留白
+⚠️ 视觉风格: {(canvas or _CANVAS_PRESETS['小红书'])['desc_cn']}，鲜明渐变背景，白色圆角卡片区块，{(canvas or _CANVAS_PRESETS['小红书'])['breathing']}留白。🚫禁止顶部标题栏/Banner！卡片直接从教学内容区块开始。
 ⚠️ 卡通角色: 可以有一个极小的角色(≤10%面积)在角落装饰，但绝不能占据区块B/C的位置。区块B/C必须是文字教学内容！"""
 
 
@@ -2656,33 +2656,27 @@ _SUBJECT_COLOR_SCHEMES = {
 # ═══════════════════════════════════════════
 _LAYOUT_VARIANTS = {
     'standard': {
-        'name': '标准四区',
-        'prompt_block': """请设计以下 4 个结构化区块：
+        'name': '标准三区',
+        'prompt_block': """请设计以下 3 个结构化区块（🚫 无顶部标题栏）：
 
-🔹 区块A — 顶部 Banner：
-   深色渐变横幅，带柔和光泽
-   标题文字白色大字，居中显示
-
-🔹 区块B — 中间内容卡（占据卡片主体）：
+🔹 区块A — 主内容区（占据卡片顶部和主体，直接开始，无Banner/标题栏）：
    白色或极浅色圆角矩形卡片，带轻微阴影
    卡片内排版教学内容：例题、步骤、对比等
    文字清晰、字号适当、行距舒适
+   顶部留出安全边距即可，不要放标题栏
 
-🔹 区块C — 底部口诀条：
+🔹 区块B — 底部口诀条：
    暖色渐变横条，带圆角
    口诀/金句白字居中
 
-🔹 区块D — 最底部窄条：
+🔹 区块C — 最底部窄条：
    极浅背景，小提示文字""",
     },
     'comparison': {
         'name': '左右对比式',
-        'prompt_block': """请设计以下结构化区块（对比式布局）：
+        'prompt_block': """请设计以下结构化区块（对比式布局，🚫 无顶部标题栏）：
 
-🔹 区块A — 顶部 Banner：
-   深色渐变横幅，标题白色大字居中
-
-🔹 区块B — 对比内容区（占据卡片主体）：
+🔹 区块A — 对比内容区（直接从卡片顶部开始，无Banner/标题栏）：
    白色圆角矩形卡片，内部分为左右两栏：
    ┌─────────────┬─────────────┐
    │   左栏 ❌    │   右栏 ✅    │
@@ -2694,20 +2688,17 @@ _LAYOUT_VARIANTS = {
    右栏淡绿色底 = 正确/新方法
    对比项目一一对齐，形成强烈视觉反差
 
-🔹 区块C — 底部口诀条：
+🔹 区块B — 底部口诀条：
    暖色渐变横条，口诀白字居中
 
-🔹 区块D — 最底部窄条：
+🔹 区块C — 最底部窄条：
    极浅背景，小提示文字""",
     },
     'flow': {
         'name': '步骤流程式',
-        'prompt_block': """请设计以下结构化区块（流程式布局）：
+        'prompt_block': """请设计以下结构化区块（流程式布局，🚫 无顶部标题栏）：
 
-🔹 区块A — 顶部 Banner：
-   深色渐变横幅，标题白色大字居中
-
-🔹 区块B — 步骤流程区（占据卡片主体）：
+🔹 区块A — 步骤流程区（直接从卡片顶部开始，无Banner/标题栏）：
    白色圆角矩形卡片，内部用编号色块+箭头展示步骤：
    ① → ② → ③ → ④ 从上到下排列
    每步用不同颜色的圆角色块（浅蓝→浅绿→浅橙→浅粉递进）
@@ -2715,20 +2706,17 @@ _LAYOUT_VARIANTS = {
    最后一步（答案/结论）用加粗+大号+⭐标记突出
    若有错误步骤，用红色虚线框+❌标记
 
-🔹 区块C — 底部口诀条：
+🔹 区块B — 底部口诀条：
    暖色渐变横条，口诀白字居中
 
-🔹 区块D — 最底部窄条：
+🔹 区块C — 最底部窄条：
    极浅背景，小提示文字""",
     },
     'concept_map': {
         'name': '思维导图式',
-        'prompt_block': """请设计以下结构化区块（思维导图式布局）：
+        'prompt_block': """请设计以下结构化区块（思维导图式布局，🚫 无顶部标题栏）：
 
-🔹 区块A — 顶部 Banner：
-   深色渐变横幅，标题白色大字居中
-
-🔹 区块B — 思维导图区：
+🔹 区块A — 思维导图区（直接从卡片顶部开始，无Banner/标题栏）：
    白色圆角矩形卡片，内部用思维导图/放射状布局：
    中心：核心概念 — 大圆角矩形（主色填充+白字）
    辐射：3-4 个分支，每个分支用不同浅色圆角矩形
@@ -2737,20 +2725,17 @@ _LAYOUT_VARIANTS = {
    最重要的分支用加粗边框+⭐标记
    整体呈放射状/树状分布，层次清晰
 
-🔹 区块C — 底部口诀条：
+🔹 区块B — 底部口诀条：
    暖色渐变横条，口诀白字居中
 
-🔹 区块D — 最底部：
+🔹 区块C — 最底部：
    极浅背景，小提示文字""",
     },
     'formula_hero': {
         'name': '公式突出式',
-        'prompt_block': """请设计以下结构化区块（公式突出式布局）：
+        'prompt_block': """请设计以下结构化区块（公式突出式布局，🚫 无顶部标题栏）：
 
-🔹 区块A — 顶部 Banner：
-   深色渐变横幅，标题白色大字居中
-
-🔹 区块B — 公式展示区：
+🔹 区块A — 公式展示区（直接从卡片顶部开始，无Banner/标题栏）：
    白色圆角矩形卡片，内部分为上下两部分：
    上半部分：核心公式/定理超大展示
      - 公式字号是正文的 2-3 倍
@@ -2761,20 +2746,17 @@ _LAYOUT_VARIANTS = {
      - 关键步骤用色块高亮
      - 推导箭头连接各步骤
 
-🔹 区块C — 底部口诀条：
+🔹 区块B — 底部口诀条：
    暖色渐变横条，口诀白字居中
 
-🔹 区块D — 最底部：
+🔹 区块C — 最底部：
    极浅背景，小提示文字""",
     },
     'poetry': {
         'name': '诗意水墨式',
-        'prompt_block': """请设计以下结构化区块（诗意水墨式布局）：
+        'prompt_block': """请设计以下结构化区块（诗意水墨式布局，🚫 无顶部标题栏）：
 
-🔹 区块A — 顶部 Banner：
-   深棕/墨色渐变横幅，书法风标题白色大字居中
-
-🔹 区块B — 诗词内容区：
+🔹 区块A — 诗词内容区（直接从卡片顶部开始，无Banner/标题栏）：
    宣纸质感背景（极浅米/淡黄色）
    诗词原文用大号书法风字体居中排列
    每句独占一行，字间距宽松典雅
@@ -2782,21 +2764,18 @@ _LAYOUT_VARIANTS = {
    意境装饰：角落淡墨山水/竹叶/梅花等中国风元素（≤15%面积）
    译文/赏析用小号字体排列在诗词下方
 
-🔹 区块C — 底部口诀条：
+🔹 区块B — 底部口诀条：
    暖杏/朱砂渐变横条，口诀白字居中
 
-🔹 区块D — 最底部：
+🔹 区块C — 最底部：
    极浅背景，小提示文字""",
     },
     # v10.9: 理科专属布局变体
     'experiment': {
         'name': '实验流程式',
-        'prompt_block': """请设计以下结构化区块（实验流程式布局）：
+        'prompt_block': """请设计以下结构化区块（实验流程式布局，🚫 无顶部标题栏）：
 
-🔹 区块A — 顶部 Banner：
-   深蓝/深绿渐变横幅，🧪图标+实验名称白色大字居中
-
-🔹 区块B — 目的与器材区：
+🔹 区块A — 目的与器材区（直接从卡片顶部开始，无Banner/标题栏）：
    白色圆角卡片，左侧实验目的(1句话)，右侧主要器材图标化展示
    器材用简化图标+名称标注
 
@@ -2816,12 +2795,9 @@ _LAYOUT_VARIANTS = {
     },
     'derivation': {
         'name': '公式推导式',
-        'prompt_block': """请设计以下结构化区块（公式推导式布局）：
+        'prompt_block': """请设计以下结构化区块（公式推导式布局，🚫 无顶部标题栏）：
 
-🔹 区块A — 顶部 Banner：
-   深紫/深蓝渐变横幅，公式名称白色大字居中
-
-🔹 区块B — 已知条件区：
+🔹 区块A — 已知条件区（直接从卡片顶部开始，无Banner/标题栏）：
    浅蓝色圆角卡片：列出推导的出发点/基本定律/已知关系
    用公式色块展示，变量用主色标注
 
@@ -2841,12 +2817,9 @@ _LAYOUT_VARIANTS = {
     },
     'microscopic': {
         'name': '微观图解式',
-        'prompt_block': """请设计以下结构化区块（微观图解式布局）：
+        'prompt_block': """请设计以下结构化区块（微观图解式布局，🚫 无顶部标题栏）：
 
-🔹 区块A — 顶部 Banner：
-   深色科技感渐变横幅，标题白色大字居中
-
-🔹 区块B — 宏观现象区：
+🔹 区块A — 宏观现象区（直接从卡片顶部开始，无Banner/标题栏）：
    白色圆角卡片，展示宏观可观察的现象
    用实物/场景图+现象描述文字
    标注"你看到的👁"
@@ -2869,12 +2842,9 @@ _LAYOUT_VARIANTS = {
     },
     'graph_analysis': {
         'name': '图像解读式',
-        'prompt_block': """请设计以下结构化区块（图像解读式布局 — 横屏4:3）：
+        'prompt_block': """请设计以下结构化区块（图像解读式布局 — 横屏4:3，🚫 无顶部标题栏）：
 
-🔹 区块A — 顶部 Banner：
-   深色渐变横幅，图像类型名称白色大字居中
-
-🔹 区块B — 示例图像区：
+🔹 区块A — 示例图像区（直接从卡片顶部开始，无Banner/标题栏）：
    白色卡片内，一张典型坐标图/曲线图：
    - 横轴+纵轴标注物理量名称和单位
    - 曲线用主色粗线绘制
@@ -2892,12 +2862,9 @@ _LAYOUT_VARIANTS = {
     },
     'model': {
         'name': '科学模型式',
-        'prompt_block': """请设计以下结构化区块（科学模型式布局）：
+        'prompt_block': """请设计以下结构化区块（科学模型式布局，🚫 无顶部标题栏）：
 
-🔹 区块A — 顶部 Banner：
-   深灰/深蓝渐变横幅，模型名称白色大字居中
-
-🔹 区块B — 模型示意图区：
+🔹 区块A — 模型示意图区（直接从卡片顶部开始，无Banner/标题栏）：
    白色圆角卡片内，模型的核心简化示意图：
    - 用圆形/矩形/箭头等几何元素构建模型
    - 关键假设用标注气泡指出
@@ -2917,12 +2884,9 @@ _LAYOUT_VARIANTS = {
     },
     'precise_wording': {
         'name': '术语精准式',
-        'prompt_block': """请设计以下结构化区块（术语精准式布局）：
+        'prompt_block': """请设计以下结构化区块（术语精准式布局，🚫 无顶部标题栏）：
 
-🔹 区块A — 顶部 Banner：
-   深色渐变横幅，"⚠️ 高考踩分用词"白色大字居中
-
-🔹 区块B — 对比区：
+🔹 区块A — 对比区（直接从卡片顶部开始，无Banner/标题栏）：
    白色圆角卡片内，逐条对比：
    ┌──────────────────────────────┐
    │ ❌ 错误表述（红色底）           │
@@ -2987,22 +2951,24 @@ def _build_color_scheme_block(subject):
         return f"""══════ 配色 — {cs['name']}（{subject}专属） ══════
 
 {cs['description']}
- Banner 区块: {cs['banner_gradient']}
+ 内容卡顶部: {cs['banner_gradient']}（用于内容区顶部的装饰色带，不是标题栏！）
  内容卡: {cs['content_bg']}，带轻微阴影
  口诀条: {cs['accent_strip']}
  强调色（标注重点）: {cs['highlight']}
  背景: 内容卡底色的更浅版本，有微妙渐变过渡
 
-⚠️ 以上配色仅供你选色参考，不要把颜色名称或色值渲染到卡片图片上！"""
+⚠️ 以上配色仅供你选色参考，不要把颜色名称或色值渲染到卡片图片上！
+🚫 不要在卡片顶部放标题栏/Banner！卡片从教学内容直接开始。"""
     return """══════ 配色 ══════
 
 主色选一: 珊瑚粉 / 薄荷蓝 / 蜜桃橙 / 薰衣草紫
- Banner 区块: 该主色的深色渐变版本
+ 内容卡顶部装饰: 该主色的深色渐变版本（不是标题栏！仅用于背景装饰色带）
  内容卡: 纯白或极浅色，带轻微阴影
  口诀条: 该主色的暖亮渐变版本
  背景: 该主色的极浅淡版本，有微妙渐变过渡
 
-⚠️ 以上配色仅供你选色参考，不要把颜色名称或色值渲染到卡片图片上！"""
+⚠️ 以上配色仅供你选色参考，不要把颜色名称或色值渲染到卡片图片上！
+🚫 不要在卡片顶部放标题栏/Banner！卡片从教学内容直接开始。"""
 
 
 def _get_layout_variant(card_type, subject):
@@ -3026,16 +2992,17 @@ def _build_color_scheme_for_v2(subject):
     if not cs:
         return ''
     return (f"- Subject color scheme: {cs['name']} — {cs['description']}\n"
-            f"- Banner: {cs['banner_gradient']}\n"
+            f"- Content card top decoration: {cs['banner_gradient']} (NOT a title banner! Just a subtle gradient decoration)\n"
             f"- Accent strip: {cs['accent_strip']}\n"
             f"- Content background: {cs['content_bg']}\n"
-            f"- Highlight color: {cs['highlight']}\n")
+            f"- Highlight color: {cs['highlight']}\n"
+            f"- ⚠️ NO title banner/header bar at top! Card starts directly with teaching content.\n")
 
 
 def _build_layout_hint_for_v2(card_type, subject):
     """为 v2 视觉翻译模板构建英文布局提示（v10.7）"""
     layout = _get_layout_variant(card_type, subject)
-    if layout['name'] == '标准四区':
+    if layout['name'] == '标准三区':
         return ''  # 标准布局不需要额外提示
     return f"- Layout variant: {layout['name']} — use this layout structure instead of standard 4-zone\n"
 
@@ -4436,8 +4403,8 @@ def generate_card_images_parallel(prompt, keys, card_title='', subject='', audit
         f"1. This is a {subject} educational knowledge card about \"{card_title}\".\n"
         f"2. ✅ You MUST render ALL text directly in the image — text is the core content!\n"
         f"3. Design a STRUCTURED CARD with text integrated into each zone:\n"
-        f"   - TOP BANNER at the very top: Dark gradient strip with WHITE TITLE TEXT centered\n"
-        f"   - CONTENT CARD in the middle: White rounded rectangle with TEACHING CONTENT text\n"
+        f"   - NO title banner at the top! The card starts directly with the content area.\n"
+        f"   - CONTENT CARD: White rounded rectangle with TEACHING CONTENT text, occupying the main body\n"
         f"   - ACCENT STRIP near the bottom: Warm gradient bar with WHITE SLOGAN TEXT centered\n"
         f"   - BOTTOM edge: Small tip text if any\n"
         f"   - Small cute mascot in bottom-right corner (tiny, under 10 percent of image)\n"
@@ -4449,6 +4416,7 @@ def generate_card_images_parallel(prompt, keys, card_title='', subject='', audit
         f"   Main color: choose from coral pink / mint blue / peach orange / lavender.\n"
         f"6. {canvas_en}\n"
         f"7. ⚠️ Do NOT render any coordinates, percentages, pixel sizes, hex color codes, or layout metadata as visible text in the image!\n"
+        f"8. ⚠️ Do NOT add any dark banner or Chinese title at the top of the card!\n"
     )
     # v10.17: 坐标锚定 manifest
     if manifest:
@@ -5273,13 +5241,14 @@ Layer C — 视觉叙事（满分 25）
 C1. 色彩叙事 (0-9)
   - 配色是否匹配学科专属色系？（数学→理性蓝#1a237e系，语文→古韵棕#4e342e系，英语→活力橙#e65100系，物理→科技银蓝#0d47a1系，化学→实验紫绿#4a148c系，生物→生命绿#1b5e20系，历史→复古金棕#3e2723系，地理→地球蓝绿#004d40系，政治→庄重红蓝#b71c1c系）
   - 是否有1个主色+1个辅色+1个点缀色的配色体系？
-  - Banner 是否使用学科主色的深色渐变？口诀条是否用暖亮色？
+  - 口诀条是否用暖亮色？内容卡背景是否清洁？
   - 文字与背景对比度是否 ≥ 4.5:1？（WCAG AA 标准）
   - 避免：纯黑背景、荧光色、红配绿等不和谐搭配
+  - ⚠️ 如果卡片顶部有深色标题栏/Banner（包含中文标题如"句型卡：XXX""词汇卡：XXX"等），此项直接扣0分！卡片应该直接从教学内容开始。
 
 C2. 空间节奏 (0-9)
   - 四周安全边距 ≥ 5% 画布宽度？
-  - 各区块（Banner/内容卡/口诀条）之间间距是否一致？
+  - 各区块（内容卡/口诀条）之间间距是否一致？
   - 整体留白比例 ≥ 20%？还是信息塞得满满当当？
   - 是否遵循某种网格系统？元素是否对齐到隐形网格线？
 
@@ -5817,22 +5786,30 @@ def _try_pil_text_repair(image_data, audit_result, expected_manifest):
 # ═══════════════════════════════════════════
 # 质量评分
 # ═══════════════════════════════════════════
-QUALITY_PROMPT = """你是知识卡片质量评审员。请从5个维度**独立评分**(每项0-20分，满分100)：
+QUALITY_PROMPT = """你是知识卡片质量评审员。请从7个维度**独立评分**（满分100）：
 
-1. **教学清晰度**(20分): 例题清晰? 解题步骤直观? 一眼就懂? (英语卡: 有完整例句+易错对比+本质原因?)
-2. **文字准确性**(20分): 中文无乱码无错字? 数字公式正确? ⚠️截断废字(如"搭配固定要""注意到")直接扣15分!
-3. **视觉美感**(20分): 配色好看? 像小红书爆款? 有吸引力?
-4. **布局合理性**(20分): 信息层次清晰? 留白充足? 不拥挤?
-5. **可收藏感**(20分): 看到就想截图保存? 有"干货感"? 口诀是否完整有意义(截断废话扣10分)?
+1. **教学清晰度**(15分): 例题清晰? 解题步骤直观? 一眼就懂? (英语卡: 有完整例句+易错对比+本质原因?)
+2. **文字准确性**(15分): 中文无乱码无错字? 数字公式正确? ⚠️截断废字(如"搭配固定要""注意到")直接扣10分!
+3. **视觉美感**(15分): 配色好看? 像小红书爆款? 有吸引力?
+4. **布局合理性**(15分): 信息层次清晰? 留白充足? 不拥挤?
+5. **可收藏感**(15分): 看到就想截图保存? 有"干货感"? 口诀是否完整有意义(截断废话扣10分)?
+6. **无标题栏**(15分): ⚠️卡片顶部是否没有深色标题栏/Banner? 
+   - 如果卡片顶部有深色横幅包含中文标题(如"句型卡：XXX""词汇卡：XXX""自然拼读卡：XXX")→此项0分！
+   - 如果卡片直接从白色内容区开始，没有任何顶部Banner→此项12-15分
+   - 注意：底部的暖色口诀条不算Banner
+7. **英语卡专项**(10分): (非英语卡给8分基准)
+   - 英语例句是否完整(≥6词)? 对错对比是否有真实高频错误?
+   - 英文拼写是否100%正确? 口诀是否精炼(≤10字)?
+   - 卡面中文是否最少化? 是否避免了废话填充("记住哦""来看看")?
 
 ⚠️ 评分铁律:
-- 每项依据实际观察独立打分，禁止所有维度给相近分数
-- 优秀项给18-20分，普通项12-15分，有问题的项直接降到5-10分
+- 每项依据实际观察独立打分，优秀项给满分附近，有问题的项直接降到1-5分
 - 先在脑中逐项分析优缺点，再给出最终分数
-- comment 必须包含具体扣分理由（如哪处文字截断、哪块布局拥挤）
+- comment 必须包含具体扣分理由（如哪处文字截断、哪块布局拥挤、是否有顶部Banner）
+- ⚠️ 第6项"无标题栏"：只要看到顶部有深色横幅+白色中文标题，就给0分！这是最重要的检查项！
 
 只输出JSON格式（不要代码块标记）：
-{{"teaching": <0-20的整数>, "text_accuracy": <0-20的整数>, "visual": <0-20的整数>, "layout": <0-20的整数>, "saveable": <0-20的整数>, "total": <五项求和>, "comment": "具体点评，说明扣分理由"}}"""
+{{"teaching": <0-15>, "text_accuracy": <0-15>, "visual": <0-15>, "layout": <0-15>, "saveable": <0-15>, "no_banner": <0-15>, "english_specific": <0-10>, "total": <七项求和,满分100>, "comment": "具体点评，说明扣分理由，特别标注是否有顶部Banner"}}"""
 
 
 def quality_score(image_data, api_key, card_title='', all_keys=None):
@@ -5877,7 +5854,7 @@ def quality_score(image_data, api_key, card_title='', all_keys=None):
                         result = json.loads(json_match.group())
                         # 确保有 total 字段
                         if 'total' not in result:
-                            scores = [result.get(k, 0) for k in ('teaching', 'text_accuracy', 'visual', 'layout', 'saveable')]
+                            scores = [result.get(k, 0) for k in ('teaching', 'text_accuracy', 'visual', 'layout', 'saveable', 'no_banner', 'english_specific')]
                             result['total'] = sum(scores)
                         if result['total'] > 0:
                             return result
