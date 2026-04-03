@@ -193,9 +193,15 @@ GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta'
 TEXT_MODEL      = 'gemini-3.1-pro'              # 提示词生成 + OCR审计 (旗舰模型, 深度推理更强)
 TEXT_MODEL_FALLBACK = 'gemini-2.5-flash'         # 文本模型兜底: 3.1-pro失败时自动降级
 IMAGE_MODELS    = [                              # 图片生成（串行: pro优先, flash兜底）
-    'gemini-3-pro-image-preview',                 # ★ 最优: audit=100 质量最高
+    'gemini-3-pro-image-preview',                 # ★ Nano Banana Pro: 最优, audit=100 质量最高
     'gemini-3.1-flash-image-preview',            # 兜底: pro失败时才使用
 ]
+# ── 模型优先级策略（v10.28）──
+# 3个 API key 会优先全部用于两个主力模型:
+#   1) gemini-3-pro-image-preview (Nano Banana Pro) — 图片生成主力
+#   2) gemini-3.1-pro — 文本/审计主力
+# 主力模型的3个key全部429后，才降级到备用模型 (flash系列)
+# 主力模型每次调用 retries=3 (3轮×3key=9次尝试)，备用模型 retries=1
 
 MAX_AUDIT_ROUNDS = 3    # OCR审计最大重试轮数
 AUDIT_PASS_SCORE = 80   # OCR审计通过分数 (0-100) — 提高标准以减少乱码
@@ -265,7 +271,12 @@ def gemini_call(model, contents, api_key, gen_config=None, retries=2, all_keys=N
 
 
 def _gemini_call_single(model, contents, api_key, gen_config=None, retries=2, all_keys=None):
-    """单模型 Gemini API 调用（内部函数）。支持多 key 轮换。"""
+    """单模型 Gemini API 调用（内部函数）。支持多 key 轮换（轮次制）。
+
+    retries 表示轮数: 每轮依次尝试所有 API key，全部失败后等待再进入下一轮。
+    总尝试次数 = len(key_list) * retries。
+    确保每个 key 在每一轮都被公平使用，避免只有最后一个 key 享受重试。
+    """
     key_list = all_keys if all_keys else [api_key]
     body = {'contents': contents}
     if gen_config:
@@ -280,44 +291,42 @@ def _gemini_call_single(model, contents, api_key, gen_config=None, retries=2, al
     total_attempts = len(key_list) * retries
     attempt_num = 0
 
-    for ki, current_key in enumerate(key_list):
-        url = f'{GEMINI_API_BASE}/models/{model}:generateContent?key={current_key}'
-        key_label = f'key{ki+1}/{len(key_list)}'
-        for retry in range(retries):
+    for round_num in range(retries):
+        all_429_this_round = True  # 追踪本轮是否全部是配额问题
+        for ki, current_key in enumerate(key_list):
             attempt_num += 1
+            url = f'{GEMINI_API_BASE}/models/{model}:generateContent?key={current_key}'
+            key_label = f'key{ki+1}/{len(key_list)}'
             try:
                 req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'})
                 with urllib.request.urlopen(req, timeout=call_timeout) as resp:
                     return json.loads(resp.read().decode('utf-8'))
             except urllib.error.HTTPError as e:
                 err_body = e.read().decode('utf-8', errors='replace')
-                print(f'\n      [HTTP {e.code}] {key_label} attempt {attempt_num}/{total_attempts}: {err_body[:200]}')
+                print(f'\n      [HTTP {e.code}] {key_label} R{round_num+1} attempt {attempt_num}/{total_attempts}: {err_body[:200]}')
                 if e.code == 404:
                     print(f'      ❌ 模型 {model} 不存在')
                     return None
                 if e.code in (429, 503):
-                    # 429/503: 换下一个 key（跳出内层循环）
-                    # v10.16: 加大退避 — 503高负载时 3s太短，常导致连续失败
+                    # 429/503: 配额受限，快速切换下一个 key
                     if ki < len(key_list) - 1:
                         print(f'      🔄 切换到下一个 API key...')
-                        time.sleep(8)
-                        break  # 跳到下一个key
-                    else:
-                        # 已经是最后一个key，指数退避等待后重试
-                        wait = 10 * (retry + 1)
-                        print(f'      ⏳ 所有key均受限, 等待{wait}秒...')
-                        time.sleep(wait)
-                elif attempt_num < total_attempts:
-                    time.sleep(5 * (retry + 1))
+                        time.sleep(3)
+                    # 否则本轮结束，下面会做轮间等待
+                else:
+                    all_429_this_round = False
+                    if attempt_num < total_attempts:
+                        time.sleep(5)
             except Exception as e:
-                print(f'\n      [Error] {key_label} attempt {attempt_num}/{total_attempts}: {e}')
+                all_429_this_round = False
+                print(f'\n      [Error] {key_label} R{round_num+1} attempt {attempt_num}/{total_attempts}: {e}')
                 if attempt_num < total_attempts:
-                    time.sleep(5 * (retry + 1))
-        else:
-            # 内层for正常结束（没break），说明retries用完，继续下一个key
-            continue
-        # 内层break到这里，继续外层下一个key
-        continue
+                    time.sleep(5)
+        # 本轮所有 key 都尝试完毕，等待后进入下一轮
+        if round_num < retries - 1:
+            wait = 15 * (round_num + 1) if all_429_this_round else 8
+            print(f'      ⏳ R{round_num+1}/{retries} 所有key均失败, 等待{wait}秒后下一轮...', flush=True)
+            time.sleep(wait)
     return None
 
 
@@ -3775,7 +3784,9 @@ def _enforce_manifest_limits(manifest, max_total=None, max_per_block=None, card_
                          '易混词陷阱卡', '语法纠错卡',
                          # v10.21: 初中/高中英语卡也收紧
                          '时态卡', 'PK挑战卡', '知识总结卡', '情景对话卡', '速记卡',
-                         '发音挑战卡', '语法卡', '高频活用卡')
+                         '发音挑战卡', '语法卡', '高频活用卡',
+                         # v10.27 P1b: 不规则动词卡也收紧到35字
+                         '不规则动词卡')
     is_heavy = card_type in _HEAVY_TEXT_TYPES
     is_light = card_type in _LIGHT_TEXT_TYPES
     if max_total is None:
@@ -4135,9 +4146,13 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
         'thinkingConfig': {'thinkingBudget': 1024},
     }
 
-    for model in IMAGE_MODELS:
-        resp = gemini_call(model, contents, keys[0], gen_config=gen_config, retries=1, all_keys=keys)
+    for mi, model in enumerate(IMAGE_MODELS):
+        # 优先模型(Nano Banana Pro)用3轮×3key=9次尝试，充分耗尽配额后才降级
+        retries = 3 if mi == 0 else 1
+        resp = gemini_call(model, contents, keys[0], gen_config=gen_config, retries=retries, all_keys=keys)
         if not resp:
+            if mi == 0:
+                print(f'\n      ⚠️ 主力模型 {model} 配额耗尽, 降级到备用模型...', flush=True)
             continue
         try:
             candidates = resp.get('candidates', [])
@@ -4221,9 +4236,12 @@ def _two_step_generate(prompt, chinese_prefix, manifest, keys, card_title, subje
     base_ext = None
     base_model = None
     
-    for model in IMAGE_MODELS:
-        resp = gemini_call(model, contents_2a, keys[0], gen_config=gen_config_2a, retries=1, all_keys=keys)
+    for mi, model in enumerate(IMAGE_MODELS):
+        retries = 3 if mi == 0 else 1
+        resp = gemini_call(model, contents_2a, keys[0], gen_config=gen_config_2a, retries=retries, all_keys=keys)
         if not resp:
+            if mi == 0:
+                print(f'\n      ⚠️ [2a] 主力模型 {model} 配额耗尽, 降级...', flush=True)
             continue
         try:
             candidates = resp.get('candidates', [])
@@ -4291,9 +4309,12 @@ def _two_step_generate(prompt, chinese_prefix, manifest, keys, card_title, subje
         'thinkingConfig': {'thinkingBudget': 1024},
     }
     
-    for model in IMAGE_MODELS:
-        resp = gemini_call(model, contents_2b, keys[0], gen_config=gen_config_2b, retries=1, all_keys=keys)
+    for mi, model in enumerate(IMAGE_MODELS):
+        retries = 3 if mi == 0 else 1
+        resp = gemini_call(model, contents_2b, keys[0], gen_config=gen_config_2b, retries=retries, all_keys=keys)
         if not resp:
+            if mi == 0:
+                print(f'\n      ⚠️ [2b] 主力模型 {model} 配额耗尽, 降级...', flush=True)
             continue
         try:
             candidates = resp.get('candidates', [])
@@ -4316,10 +4337,10 @@ def _two_step_generate(prompt, chinese_prefix, manifest, keys, card_title, subje
     return base_image, base_ext, base_model
 
 
-def _generate_single_model(model, contents, gen_config, keys):
+def _generate_single_model(model, contents, gen_config, keys, retries=1):
     """单个模型的图片生成（供并行调用）。返回 (image_data, ext, model) 或 (None, None, model)。"""
     try:
-        resp = gemini_call(model, contents, keys[0], gen_config=gen_config, retries=1, all_keys=keys)
+        resp = gemini_call(model, contents, keys[0], gen_config=gen_config, retries=retries, all_keys=keys)
         if not resp:
             return None, None, model
         candidates = resp.get('candidates', [])
@@ -4395,12 +4416,13 @@ def generate_card_images_parallel(prompt, keys, card_title='', subject='', audit
         'thinkingConfig': {'thinkingBudget': 1024},
     }
 
-    # 并行调用所有图片模型
+    # 并行调用所有图片模型 — 主力模型(Nano Banana Pro)更多重试
     results = []
     with ThreadPoolExecutor(max_workers=len(IMAGE_MODELS)) as executor:
         futures = {
-            executor.submit(_generate_single_model, model, contents, gen_config, keys): model
-            for model in IMAGE_MODELS
+            executor.submit(_generate_single_model, model, contents, gen_config, keys,
+                            retries=3 if mi == 0 else 1): model
+            for mi, model in enumerate(IMAGE_MODELS)
         }
         for future in as_completed(futures):
             model_name = futures[future]
@@ -5626,9 +5648,13 @@ def refine_card_image(prev_image_data, refinement_prompt, keys):
         'thinkingConfig': {'thinkingBudget': 1024},
     }
 
-    for model in IMAGE_MODELS:
-        resp = gemini_call(model, contents, keys[0], gen_config=gen_config, retries=1, all_keys=keys)
+    for mi, model in enumerate(IMAGE_MODELS):
+        # 精修也优先用主力模型
+        retries = 3 if mi == 0 else 1
+        resp = gemini_call(model, contents, keys[0], gen_config=gen_config, retries=retries, all_keys=keys)
         if not resp:
+            if mi == 0:
+                print(f'\n      ⚠️ [refine] 主力模型 {model} 配额耗尽, 降级...', flush=True)
             continue
         try:
             candidates = resp.get('candidates', [])

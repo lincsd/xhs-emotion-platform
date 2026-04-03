@@ -210,13 +210,17 @@ _register_graded(SkillSchema(
         SubType('图义区分型', '画面对比', '同一构图两张不同场景图, 差异一目了然',
                 '看图就分清', '翻译记忆导致混淆', l1_interference='中文一词多义靠语境, 英文see/sea靠拼写'),
     ],
-    visual_rule_summary='擂台PK型: 左右分屏对决+中间VS闪电, 图片占主导(55%)',
-    visual_language='擂台对决风: 左蓝右粉+中间VS闪电+拳击手套装饰, 对抗感强烈',
+    # v10.27 P2: 强化对比度 — 左右必须用明显不同色
+    visual_rule_summary='擂台PK型: 左右分屏对决+中间VS闪电, 图片占主导(55%); ⚠️左右区域必须用对比色(蓝#74B9FF vs 粉#FD79A8), 色差TLE≥30',
+    visual_language='擂台对决风: 左蓝#74B9FF右粉#FD79A8+中间VS闪电+拳击手套装饰, 对抗感强烈; '
+                    '⚠️ 左右两侧必须用明显不同的背景色, 绝不能用相同或相近颜色',
     forbidden=[
         '不超过2个词对比',
         '例句不超过5个英文单词',
         '不写复杂词性分析',
         '中文不超过12字',
+        '❌ 左右两侧不能用相同背景色(必须一蓝一粉或一冷一暖)',
+        '❌ 对比区域不能没有视觉分隔(必须有VS闪电/分割线/天平)',
     ],
     required_elements=['左右对比图', '简单例句', '趣味口诀'],
     l1_interference=[
@@ -254,12 +258,16 @@ _register_graded(SkillSchema(
                     attention_priority=3),
     ],
     sub_types=[],
-    visual_rule_summary='翻牌游戏型: 先看题→翻牌揭秘→恍然大悟, 游戏感强',
-    visual_language='翻牌游戏风: 卡牌翻转效果+问号装饰+惊叹号揭秘',
+    # v10.27 P2: 强化对错对比度 — ❌红底 vs ✅绿底
+    visual_rule_summary='翻牌游戏型: 先看题→翻牌揭秘→恍然大悟, 游戏感强; ⚠️ ❌区域用红底(#FF6B6B), ✅区域用绿底(#2ED573), 色差TLE≥30',
+    visual_language='翻牌游戏风: 卡牌翻转效果+问号装饰+惊叹号揭秘; '
+                    '⚠️ 错误选项用红色系背景(#FF6B6B), 正确选项用绿色系背景(#2ED573), 形成强烈视觉反差',
     forbidden=[
         '不写复杂语法分析',
         '中文不超过12字',
         '题目不超过6个英文单词',
+        '❌ ❌区和✅区不能用相同或相近背景色(必须红绿/冷暖强对比)',
+        '❌ 对错选项不能只靠文字区分, 必须有颜色+图标双重区分',
     ],
     required_elements=['趣味陷阱题', '卡通揭秘', '口诀'],
     l1_interference=['中国学生靠中文翻译区分词义, 容易在拼写上犯错'],
@@ -322,6 +330,73 @@ _register_graded(SkillSchema(
         error='#FF6B6B', success='#2ED573', bg_style='pattern',
     ),
     color_scheme='复习彩色：多色分支+主题色圆心',
+), '小学')
+
+# ── v10.27: 不规则动词卡@小学 (P0 — 全新注册) ──
+_register_graded(SkillSchema(
+    card_type='不规则动词卡',
+    teaching_goal='用"魔法变身"效果记住不规则动词的原形→过去式变化,不靠死记硬背',
+    core_strategy='魔法变身大图(原形→过去式) → 3-4组动词变化表(色彩编码) → 分组口诀',
+    layout_blocks=[
+        LayoutBlock('魔法变身大图', 'center', min_area_pct=45,
+                    description='卡通魔法师(戴帽猫头鹰)挥魔法棒,动词"变身"过程: '
+                                '左侧原形(如go)被魔法光包裹→右侧闪亮过去式(went); '
+                                '魔法闪光+星星特效+烟雾过渡; '
+                                '⚠️ 原形和过去式单词必须超大字清晰可读(≥18pt); '
+                                '⚠️ 英文单词拼写必须100%正确',
+                    attention_priority=1),
+        LayoutBlock('动词变化表', 'lower', min_area_pct=30,
+                    description='3-4组动词变化横排展示: '
+                                '每组格式"原形 → 过去式", 用不同颜色区分每组; '
+                                '变化部分(不同字母)用红色/粗体高亮; '
+                                '如: go→went(全变), see→saw(换元音), read→read(不变); '
+                                '⚠️ 所有英文单词完整拼写,不能截断',
+                    attention_priority=2),
+        LayoutBlock('分组口诀', 'bottom', max_chars=12,
+                    description='朗朗上口的分组记忆口诀(中文≤10字)',
+                    attention_priority=3, required=False),
+    ],
+    sub_types=[
+        SubType('全变型', '形态完全改变', '魔法变身最剧烈: go→went, buy→bought, 整个词都变了, '
+                '用爆炸特效表示巨大变化',
+                '大变身', '套用规则加ed', l1_interference='中文动词无变化,"去"永远是"去", 英文go→went完全不同'),
+        SubType('换元音型', '中间元音替换', '温和魔法: swim→swam, sing→sang, 只换中间字母, '
+                '用渐变色过渡标注换掉的字母',
+                '换芯不换壳', '换错元音', l1_interference='中文无元音交替概念, 学生不知道该换哪个字母'),
+        SubType('不变型', '原形=过去式', '魔法无效! read→read, cut→cut, put→put, '
+                '魔法棒打上去没变化+问号特效',
+                '不变也是一种变', '以为都要变', l1_interference='中文动词本来就不变, 学生难以理解"不变也需要记"'),
+    ],
+    visual_rule_summary='魔法变身型: 原形→过去式的视觉变换过程(45%), 配色彩编码变化表(30%), 口诀(10%)',
+    visual_language='魔法变身风: 魔法棒+闪光星星+渐变过渡+烟雾特效, 像卡通动画变身场景',
+    forbidden=[
+        '不超过4组动词变化(认知负荷)',
+        '不写过去分词(小学不需要)',
+        '中文不超过12字',
+        '不列表式堆砌(必须有魔法变身视觉效果)',
+        '不写语法术语(不说"不规则变化"说"魔法变身")',
+        '每个英文单词必须完整正确拼写',
+    ],
+    required_elements=['魔法变身大图', '动词变化表', '分组口诀'],
+    l1_interference=[
+        '中文动词永远不变形: "我去/他去/昨天去" 都是"去", 英文go/goes/went三种',
+        '学生倾向套用-ed规则: goed, eated, drinked 等错误形式',
+        '不规则动词数量有限但高频, 必须逐个记忆',
+    ],
+    max_info_chunks=3,
+    hook_strategy='"这些动词会魔法变身! 你能记住它们的新样子吗?"',
+    emotion_design='好奇(魔法变身!) → 惊讶(变这么多!) → 找规律(有些有窍门) → 记住了',
+    visual_variants=[
+        '魔法变身风: 魔法棒+闪光+渐变, 像变身动画',
+        '进化链风: 像宝可梦进化, 原形→过去式连锁进化',
+        '变装秀风: 动词穿上不同"衣服"(字母外套)',
+        '时光机风: 动词坐时光机从现在飞到过去',
+    ],
+    color_config=ColorConfig(
+        primary='#A29BFE', secondary='#FECA57', accent='#FD79A8',
+        error='#FF6B6B', success='#2ED573', bg_style='gradient',
+    ),
+    color_scheme='魔法紫金：变身紫#A29BFE + 闪光金#FECA57 + 高亮粉#FD79A8',
 ), '小学')
 
 # ── v10.25: 情景对话卡@小学 (P4增强版 — 重点修复text_accuracy) ──
