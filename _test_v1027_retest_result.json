@@ -1,0 +1,349 @@
+[
+  {
+    "card_id": "英语-三上-01-02",
+    "type_name": "情景对话卡",
+    "opt_tag": "P1a",
+    "baseline_audit": 99,
+    "baseline_quality": 99,
+    "results": [
+      {
+        "ok": true,
+        "auditScore": 100,
+        "qualityScore": 99,
+        "qualityDetail": {
+          "total": 99,
+          "comment": "skip-all缓存复用"
+        },
+        "finalAction": "skip_all",
+        "pipeline": [
+          "Step0.5: 内容压缩 387字→324字",
+          "Step0: ⚠️ 深层复审发现45个高严重度问题",
+          "Step1完成: 3021字prompt, 16处文字 (13s)",
+          "Step1.5: 🔥 发现缓存 audit=100 quality=99 combined=100 gen#2 prompt=4089字 content_match=True",
+          "Step1.5: ♻️ 复用缓存prompt (4089字)",
+          "Step1.5: 🏆 极高分缓存(combined=100>=95, quality=99>=85, gen#2), 完全跳过",
+          "Step2-3: ⏭️ 已跳过(warm-start score=100)",
+          "🏆 skip-all快速返回: audit=100 quality=99 (14s)"
+        ],
+        "manifest": {},
+        "model": "gemini-3-pro-image-preview",
+        "elapsed": 26.262737274169922,
+        "has_image": true,
+        "image_size": 489027
+      },
+      {
+        "ok": true,
+        "auditScore": 100,
+        "qualityScore": 99,
+        "qualityDetail": {
+          "total": 99,
+          "comment": "skip-all缓存复用"
+        },
+        "finalAction": "skip_all",
+        "pipeline": [
+          "Step0.5: 内容压缩 387字→324字",
+          "Step0: ⚠️ 深层复审发现45个高严重度问题",
+          "Step1完成: 5264字prompt, 10处文字 (14s)",
+          "Step1.5: 🔥 发现缓存 audit=100 quality=99 combined=100 gen#3 prompt=4089字 content_match=True",
+          "Step1.5: ♻️ 复用缓存prompt (4089字)",
+          "Step1.5: 🏆 极高分缓存(combined=100>=95, quality=99>=85, gen#3), 完全跳过",
+          "Step2-3: ⏭️ 已跳过(warm-start score=100)",
+          "🏆 skip-all快速返回: audit=100 quality=99 (15s)"
+        ],
+        "manifest": {},
+        "model": "gemini-3-pro-image-preview",
+        "elapsed": 26.25956654548645,
+        "has_image": true,
+        "image_size": 489027
+      }
+    ]
+  },
+  {
+    "card_id": "英语-六上-01-05",
+    "type_name": "情景对话卡",
+    "opt_tag": "P1a",
+    "baseline_audit": 99,
+    "baseline_quality": 99,
+    "results": [
+      {
+        "ok": true,
+        "auditScore": 100,
+        "qualityScore": 96,
+        "qualityDetail": {
+          "teaching": 19,
+          "text_accuracy": 20,
+          "visual": 19,
+          "layout": 19,
+          "saveable": 19,
+          "total": 96,
+          "comment": "教学内容非常清晰，例句完整，易错点对比明确，并提供了替换练习和句型总结，教学设计优秀。文字准确性极高，无论是中文还是英文，均无任何错误或乱码。视觉美感出众，配色和谐，卡通形象可爱，整体风格吸引人。布局合理，信息层次分明，留白充足，阅读体验良好。内容实用且全面，具有很强的可收藏价值，是高质量的知识卡片。"
+        },
+        "finalAction": "pass",
+        "pipeline": [
+          "Step0.5: 内容压缩 692字→569字",
+          "Step0: ⚠️ 深层复审发现5个高严重度问题",
+          "Step1完成: 3921字prompt, 11处文字 (15s)",
+          "Step1.5: 无历史缓存, 从头生成",
+          "Step2: 并行生成图片 (round 1)...",
+          "Step2: 2个模型返回候选",
+          "Step2完成: 731KB (model=gemini-3-pro-image-preview) [57s]",
+          "Step3: OCR审计+质量评分...",
+          "Step3完成: 审计=100/100 质量=96/100 (图片中所有中文和英文文字均准确无误，无乱码、错字、缺笔画、变形或无意义的英文乱码词。所有内容与期望文字完全一致。) [71s]",
+          "Step3.5: OCR交叉验证 命中率=0% 校准=100→100 (OCR不可用,使用原始分数) [0ms]",
+          "✅ OCR审计通过 (score=100)",
+          "Step4b: 5层视觉审核...",
+          "Step4b: 视觉审核=50/100  (解析失败) [120s]",
+          "Step4c: image-to-image精修 (round 1)...",
+          "Step4d: 精修后OCR快审...",
+          "Step4d: OCR=92 质量=99 严重错误=1(原0) [172s]",
+          "Step4c: ❌ 精修未采纳: OCR降了(92<100), 新增乱码(1>0), 回退原图",
+          "质量评分(from merged): 96/100",
+          "Step6a: 教学审核=72分(good)",
+          "Step6b: ✅ 深度复审记录已沉淀 (severity=low)",
+          "🧠 自我优化: 已记录",
+          "Step7: 💾 最优缓存已保存: 首次保存(combined=98, prompt=3921字, gen#1)"
+        ],
+        "manifest": {
+          "TITLE": "Excuse me",
+          "LINE1": "Excuse me, how can I get to the library?",
+          "LINE3": "Go straight, then turn right. It's on your left.",
+          "LINE4": "Thank you!",
+          "LINE5": "PATTERN 1: Excuse me, + How can I get to [place]?",
+          "LINE6": "PATTERN 2: Excuse me, + Where is the [place]?",
+          "LINE7": "替换练习: library 📚 → post office ✉️ → supermarket 🛒",
+          "LINE8": "❌ Me, where is the park? (✗ Me → ✓ Excuse me)",
+          "LINE9": "✅ Excuse me, where is the park?",
+          "SLOGAN": "Excuse me, 问路开口礼貌先！",
+          "TIP": "六上 上册 情景对话卡"
+        },
+        "model": "gemini-3-pro-image-preview",
+        "elapsed": 182.70093631744385,
+        "has_image": true,
+        "image_size": 748407
+      },
+      {
+        "ok": true,
+        "auditScore": 100,
+        "qualityScore": 96,
+        "qualityDetail": {
+          "total": 96,
+          "comment": "skip-all缓存复用"
+        },
+        "finalAction": "skip_all",
+        "pipeline": [
+          "Step0.5: 内容压缩 692字→569字",
+          "Step0: ⚠️ 深层复审发现10个高严重度问题",
+          "Step1完成: 5305字prompt, 17处文字 (17s)",
+          "Step1.5: 🔥 发现缓存 audit=100 quality=96 combined=98 gen#1 prompt=3921字 content_match=True",
+          "Step1.5: ♻️ 复用缓存prompt (3921字)",
+          "Step1.5: 🏆 极高分缓存(combined=98>=95, quality=96>=85, gen#1), 完全跳过",
+          "Step2-3: ⏭️ 已跳过(warm-start score=100)",
+          "🏆 skip-all快速返回: audit=100 quality=96 (18s)"
+        ],
+        "manifest": {},
+        "model": "gemini-3-pro-image-preview",
+        "elapsed": 26.288007736206055,
+        "has_image": true,
+        "image_size": 748407
+      }
+    ]
+  },
+  {
+    "card_id": "英语-三上-03-03",
+    "type_name": "易混词卡",
+    "opt_tag": "P2",
+    "baseline_audit": 95,
+    "baseline_quality": 99,
+    "results": [
+      {
+        "ok": true,
+        "auditScore": 100,
+        "qualityScore": 99,
+        "qualityDetail": {
+          "teaching": 20,
+          "text_accuracy": 20,
+          "visual": 19,
+          "layout": 20,
+          "saveable": 20,
+          "total": 99,
+          "comment": "教学内容清晰，例句和易错对比非常到位，配图直观。文字准确性极高，无任何错误。视觉设计美观，配色和谐，具有小红书爆款的潜力。布局合理，信息层次分明，留白充足，阅读体验佳。内容实用且易于理解，非常具有收藏价值。"
+        },
+        "finalAction": "pass",
+        "pipeline": [
+          "Step0.5: 内容压缩 311字→262字",
+          "Step0: ⚠️ 深层复审发现45个高严重度问题",
+          "Step1完成: 3376字prompt, 13处文字 (14s)",
+          "Step1.5: 无历史缓存, 从头生成",
+          "Step2: 并行生成图片 (round 1)...",
+          "Step2: 2个模型返回候选",
+          "Step2完成: 602KB (model=gemini-3.1-flash-image-preview) [45s]",
+          "Step3: OCR审计+质量评分...",
+          "Step3完成: 审计=62/100 质量=85/100 (中文文字完美无误，英文拼写正确，但部分英文解释与期望文本存在差异，且缺少符合要求的长例句。) [68s]",
+          "Step3.5: OCR交叉验证 命中率=0% 校准=62→62 (OCR不可用,使用原始分数) [0ms]",
+          "⚠️ 重新生成...",
+          "Step2: 并行生成图片 (round 2)...",
+          "Step2: 2个模型返回候选",
+          "Step2完成: 615KB (model=gemini-3-pro-image-preview) [98s]",
+          "Step3: OCR审计+质量评分...",
+          "Step3完成: 审计=100/100 质量=98/100 (图片中所有中文文字与期望文字完全一致，无乱码、错字、缺笔画、变形或无意义英文乱码词。) [112s]",
+          "Step3.5: OCR交叉验证 命中率=0% 校准=100→100 (OCR不可用,使用原始分数) [0ms]",
+          "✅ OCR审计通过 (score=100)",
+          "Step4b: 5层视觉审核...",
+          "Step4b: 视觉审核=50/100  (解析失败) [163s]",
+          "Step4c: image-to-image精修 (round 1)...",
+          "Step4d: 精修后OCR快审...",
+          "Step4d: OCR=100 质量=99 严重错误=0(原0) [195s]",
+          "Step4c: ✅ 精修采纳! OCR=100 质量=99",
+          "Step4c: ✅ 综合分优秀(100>=90)，停止精修",
+          "质量评分(from merged): 99/100",
+          "Step6a: 教学审核=73分(good)",
+          "Step6b: ✅ 深度复审记录已沉淀 (severity=low)",
+          "🧠 自我优化: 已记录",
+          "Step7: 💾 最优缓存已保存: 首次保存(combined=100, prompt=3376字, gen#1)"
+        ],
+        "manifest": {
+          "TITLE": "this vs that",
+          "LINE1": "this (近处)",
+          "LINE2": "Refers to something NEAR and singular.",
+          "LINE3": "Usage: This is my pen. (Pen in hand)",
+          "LINE4": "❌ Look at this bird.",
+          "LINE5": "💡 Wrong: Bird is far away.",
+          "LINE6": "that (远处)",
+          "LINE7": "Refers to something FAR and singular.",
+          "LINE8": "Usage: That is your car. (Car across street)",
+          "LINE9": "❌ This is my bag.",
+          "LINE10": "💡 Wrong: Bag is far away.",
+          "SLOGAN": "This近That远，单数指代",
+          "TIP": "Grade 3, Unit 1, Confusing Words"
+        },
+        "model": "gemini-3-pro-image-preview",
+        "elapsed": 206.74305319786072,
+        "has_image": true,
+        "image_size": 642756
+      },
+      {
+        "ok": true,
+        "auditScore": 100,
+        "qualityScore": 99,
+        "qualityDetail": {
+          "total": 99,
+          "comment": "skip-all缓存复用"
+        },
+        "finalAction": "skip_all",
+        "pipeline": [
+          "Step0.5: 内容压缩 311字→262字",
+          "Step0: ⚠️ 深层复审发现45个高严重度问题",
+          "Step1完成: 3490字prompt, 14处文字 (12s)",
+          "Step1.5: 🔥 发现缓存 audit=100 quality=99 combined=100 gen#1 prompt=3376字 content_match=True",
+          "Step1.5: ♻️ 复用缓存prompt (3376字)",
+          "Step1.5: 🏆 极高分缓存(combined=100>=95, quality=99>=85, gen#1), 完全跳过",
+          "Step2-3: ⏭️ 已跳过(warm-start score=100)",
+          "🏆 skip-all快速返回: audit=100 quality=99 (13s)"
+        ],
+        "manifest": {},
+        "model": "gemini-3-pro-image-preview",
+        "elapsed": 26.249499320983887,
+        "has_image": true,
+        "image_size": 642756
+      }
+    ]
+  },
+  {
+    "card_id": "英语-三上-T1-01",
+    "type_name": "易混词陷阱卡",
+    "opt_tag": "P2",
+    "baseline_audit": 90,
+    "baseline_quality": 95,
+    "results": [
+      {
+        "ok": true,
+        "auditScore": 100,
+        "qualityScore": 99,
+        "qualityDetail": {
+          "teaching": 20,
+          "text_accuracy": 20,
+          "visual": 19,
+          "layout": 20,
+          "saveable": 20,
+          "total": 99,
+          "comment": "教学内容清晰，例句完整且有易错对比，并给出理由，非常有助于理解。文字准确无误，无乱码或拼写错误。视觉设计美观，配色和谐，布局合理，信息层次分明，留白充足。整体内容精炼，具有很强的干货感和收藏价值，特别是底部的中文口诀非常实用。"
+        },
+        "finalAction": "pass",
+        "pipeline": [
+          "Step0.5: 内容压缩 300字→267字",
+          "Step0: ⚠️ 深层复审发现4个高严重度问题",
+          "Step1完成: 4318字prompt, 12处文字 (14s)",
+          "Step1.5: 无历史缓存, 从头生成",
+          "Step2: 并行生成图片 (round 1)...",
+          "Step2: 2个模型返回候选",
+          "Step2完成: 651KB (model=gemini-3.1-flash-image-preview) [48s]",
+          "Step3: OCR审计+质量评分...",
+          "Step3完成: 审计=70/100 质量=84/100 (卡片中文文字清晰无乱码，但底部标语存在截断和大小写错误，且缺少符合要求的完整英文例句。) [70s]",
+          "Step3.5: OCR交叉验证 命中率=0% 校准=70→70 (OCR不可用,使用原始分数) [0ms]",
+          "⚠️ 重新生成...",
+          "Step2: 并行生成图片 (round 2)...",
+          "Step2: 2个模型返回候选",
+          "Step2完成: 551KB (model=gemini-3-pro-image-preview) [121s]",
+          "Step3: OCR审计+质量评分...",
+          "Step3完成: 审计=100/100 质量=99/100 (图片中的所有中文和英文文字均准确无误，无乱码、错字或变形，且英文内容符合所有检查要求。) [138s]",
+          "Step3.5: OCR交叉验证 命中率=0% 校准=100→100 (OCR不可用,使用原始分数) [0ms]",
+          "✅ OCR审计通过 (score=100)",
+          "Step4b: 5层视觉审核...",
+          "Step4b: 视觉审核=97/100  (卡片设计精美，内容呈现清晰，但部分文字细节和重复信息可进一步优化。) [163s]",
+          "Step4c: image-to-image精修 (round 1)...",
+          "Step4d: 精修后OCR快审...",
+          "Step4d: OCR=100 质量=95 严重错误=0(原0) [194s]",
+          "Step4c: ❌ 精修未采纳: 质量未提升(95<=99), 回退原图",
+          "质量评分(from merged): 99/100",
+          "Step6a: 教学审核=77分(good)",
+          "Step6b: ✅ 深度复审记录已沉淀 (severity=low)",
+          "🧠 自我优化: 已记录",
+          "Step7: 💾 最优缓存已保存: 首次保存(combined=100, prompt=4318字, gen#1)"
+        ],
+        "manifest": {
+          "TITLE": "this vs that",
+          "LINE1": "This: Points to something near.",
+          "LINE2": "Usage: For singular nouns.",
+          "LINE3": "Example: This is my friend.",
+          "LINE4": "That: Points to something far.",
+          "LINE5": "Usage: For singular nouns.",
+          "LINE6": "Example: That is a tall tree.",
+          "LINE7": "❌ That is my book. (Book in hand)",
+          "LINE8": "✅ This is my book. (Book in hand)",
+          "LINE9": "💡 Reason: ✗ Far → ✓ Near",
+          "SLOGAN": "This近That远单数",
+          "TIP": "三上 上册 易混词"
+        },
+        "model": "gemini-3-pro-image-preview",
+        "elapsed": 206.68174362182617,
+        "has_image": true,
+        "image_size": 564224
+      },
+      {
+        "ok": true,
+        "auditScore": 100,
+        "qualityScore": 99,
+        "qualityDetail": {
+          "total": 99,
+          "comment": "skip-all缓存复用"
+        },
+        "finalAction": "skip_all",
+        "pipeline": [
+          "Step0.5: 内容压缩 300字→267字",
+          "Step0: ⚠️ 深层复审发现8个高严重度问题",
+          "Step1完成: 3994字prompt, 11处文字 (13s)",
+          "Step1.5: 🔥 发现缓存 audit=100 quality=99 combined=100 gen#1 prompt=4318字 content_match=True",
+          "Step1.5: ♻️ 复用缓存prompt (4318字)",
+          "Step1.5: 🏆 极高分缓存(combined=100>=95, quality=99>=85, gen#1), 完全跳过",
+          "Step2-3: ⏭️ 已跳过(warm-start score=100)",
+          "🏆 skip-all快速返回: audit=100 quality=99 (14s)"
+        ],
+        "manifest": {},
+        "model": "gemini-3-pro-image-preview",
+        "elapsed": 26.282584190368652,
+        "has_image": true,
+        "image_size": 564224
+      }
+    ]
+  }
+]
