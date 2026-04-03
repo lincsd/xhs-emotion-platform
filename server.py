@@ -60,7 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
-BUILD_VERSION = '20260401a'  # v10.17: 7大AI优化(字数精简/坐标锚定/两步生图/参考图/Best-of-N/定向精修/温度调优)
+BUILD_VERSION = '20260403a'  # v10.30: 标签泄漏修复(LINE→①/SLOGAN→⑩) + 留白布局优化 + 3级文本模型降级链
 
 # 积分套餐配置
 CREDIT_PACKAGES = [
