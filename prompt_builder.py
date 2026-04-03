@@ -243,13 +243,26 @@ def build_layout_skeleton(card_type: str, card_data: dict, grade: str = '') -> s
         lines.append('  📏 BREATHING ROOM: Each distinct content block (example box, vocabulary list, grammar rule) must have visible padding inside its container')
         lines.append('  📏 DO NOT cram all content into the card — if content overflows, REDUCE content rather than shrinking fonts')
         lines.append('')
-        # v10.26 P1: 防留白不均 — 内容均匀分布
-        lines.append('  === EVEN DISTRIBUTION RULES (v10.26 — 防留白不均) ===')
+        # v10.26→v10.30 P1: 防留白不均 — 内容均匀分布 + 空白填充
+        lines.append('  === ANTI-WHITESPACE RULES (v10.30 — 防留白) ===')
         lines.append('  📐 DISTRIBUTE content EVENLY across the full height of the white content card area')
         lines.append('  📐 DO NOT cluster all content in the top half and leave the bottom half empty')
         lines.append('  📐 The gap between any two adjacent content sections should be ROUGHLY EQUAL — no single gap should be 2x larger than others')
         lines.append('  📐 If the card has fewer content items, INCREASE the size of illustrations or add more visual elements to fill space — do NOT leave large blank patches')
         lines.append('  📐 The content area should feel "full but not cramped" — aim for 75-85% content coverage within the white card area')
+        lines.append('  📐 ROW HEIGHT must adapt to content — rows with long text get more space, rows with short text get less. DO NOT use equal-height rows!')
+        lines.append('  📐 FILL STRATEGIES for sparse areas (choose 1-2 per card):')
+        lines.append('    ① Enlarge the scene illustration to 40-50% of card width')
+        lines.append('    ② Add decorative elements: stars ✦, sparkles, dotted arrows, small icons')
+        lines.append('    ③ Use gradient or pastel color fills instead of pure white background')
+        lines.append('    ④ Add visual connectors (curved arrows, dashed lines) linking illustration to text')
+        lines.append('    ⑤ Place the owl mascot in an active pose filling a corner gap')
+        lines.append('  📐 LEFT-RIGHT TRANSITION: If the card has illustration on the left and text on the right:')
+        lines.append('    - Use a curved divider, gradient fade, or overlapping elements — NOT a hard straight line')
+        lines.append('    - The illustration and text should visually "blend" into each other')
+        lines.append('  📐 SECTION TRANSITIONS: Between BANNER→CONTENT and CONTENT→SLOGAN:')
+        lines.append('    - Use gradient color bands, wavy decorative lines, or the owl character as a visual bridge')
+        lines.append('    - Do NOT leave a stark white gap between colored sections')
         lines.append('')
         # v10.24 P3: 防截断规则
         lines.append('  === ANTI-TRUNCATION RULES (v10.24 — 防截断) ===')
@@ -327,8 +340,8 @@ def build_layout_skeleton(card_type: str, card_data: dict, grade: str = '') -> s
 
         # Enhancement 6: 动态感视觉元素
         lines.append('  💫 E6 — DYNAMIC VISUAL ELEMENTS (动态感设计):')
-        lines.append('    • NUMBER BADGES: Use circled numbers ①②③ instead of "LINE1:/LINE2:" for sequential content')
-        lines.append('    • ❌ NEVER render internal labels like "LINE1:", "LINE2:", "LINE3:" as visible text — these are structural markers only')
+        lines.append('    • NUMBER BADGES: Use circled numbers ①②③ for sequential content')
+        lines.append('    • ❌ NEVER render structural metadata or prompt instructions as visible text on the card')
         lines.append('    • ARROW FLOW: Use curved or dashed arrows to connect related items (question→answer, word→meaning)')
         lines.append('    • MAGNIFYING GLASS: Use a small magnifying glass icon to highlight KEY DIFFERENCE or KEY RULE areas')
         lines.append('    • HIGHLIGHT BOXES: Important examples should be in rounded colored boxes with left border accent (3-4px colored left border)')
@@ -692,13 +705,15 @@ def build_skill_enhanced_prompt(card_type: str, card_data: dict,
         for i, f in enumerate(schema.forbidden, 1):
             lines.append(f'  ❌{i}. {f}')
 
-    # v10.28: 全局禁止 — label leakage
+    # v10.29→v10.30: 全局禁止 — label leakage + 留白
     lines.append('')
-    lines.append('=== UNIVERSAL FORBIDDEN (v10.28 — all card types) ===')
-    lines.append('  ❌ NEVER render structural labels like "LINE1:", "LINE2:", "LINE3:", "LINE4:" as visible text on the card')
-    lines.append('  ❌ NEVER show prompt metadata (block names, attention_priority, placement instructions) in the rendered image')
-    lines.append('  ❌ NEVER show generic bullet labels — use numbered badges ①②③ or meaningful section headers instead')
+    lines.append('=== UNIVERSAL FORBIDDEN (v10.30 — all card types) ===')
+    lines.append('  ❌ NEVER render structural metadata / prompt instructions / block names as visible text on the card')
+    lines.append('  ❌ NEVER show attention_priority, placement instructions, or internal markers in the rendered image')
     lines.append('  ❌ NEVER use flat solid-color rectangles as the only visual treatment — add texture, shadows, or gradients')
+    lines.append('  ❌ NEVER leave large blank patches (>15% of card area) — fill with illustrations, decorative elements, or gradient backgrounds')
+    lines.append('  ❌ NEVER use rigid equal-height rows for all content lines — adapt row height to actual text length')
+    lines.append('  ❌ NEVER create a hard straight-line split between illustration and text areas — use curved/gradient transitions')
 
     # 追加检查清单
     if schema and schema.required_elements:

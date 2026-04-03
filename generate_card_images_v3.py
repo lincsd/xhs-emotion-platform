@@ -190,8 +190,9 @@ def build_content_review_hint(subject: str, card_id: str = '') -> str:
 # ═══════════════════════════════════════════
 GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta'
 
-TEXT_MODEL      = 'gemini-3.1-pro'              # 提示词生成 + OCR审计 (旗舰模型, 深度推理更强)
-TEXT_MODEL_FALLBACK = 'gemini-2.5-flash'         # 文本模型兜底: 3.1-pro失败时自动降级
+TEXT_MODEL      = 'gemini-3.1-pro-preview'      # 提示词生成 + OCR审计 (旗舰模型, 深度推理更强)
+TEXT_MODEL_FALLBACK = 'gemini-2.5-pro'           # 第一兜底: 3.1-pro-preview失败时降级到 2.5-pro
+TEXT_MODEL_FALLBACK_2 = 'gemini-2.5-flash'       # 最终兜底: 2.5-pro也失败时使用 flash
 IMAGE_MODELS    = [                              # 图片生成（串行: pro优先, flash兜底）
     'gemini-3-pro-image-preview',                 # ★ Nano Banana Pro: 最优, audit=100 质量最高
     'gemini-3.1-flash-image-preview',            # 兜底: pro失败时才使用
@@ -199,7 +200,7 @@ IMAGE_MODELS    = [                              # 图片生成（串行: pro优
 # ── 模型优先级策略（v10.28）──
 # 3个 API key 会优先全部用于两个主力模型:
 #   1) gemini-3-pro-image-preview (Nano Banana Pro) — 图片生成主力
-#   2) gemini-3.1-pro — 文本/审计主力
+#   2) gemini-3.1-pro-preview — 文本/审计主力 (降级链: → gemini-2.5-pro → gemini-2.5-flash)
 # 主力模型的3个key全部429后，才降级到备用模型 (flash系列)
 # 主力模型每次调用 retries=3 (3轮×3key=9次尝试)，备用模型 retries=1
 
@@ -253,9 +254,9 @@ def gemini_call(model, contents, api_key, gen_config=None, retries=2, all_keys=N
     all_keys: 所有可用的 API key 列表，为 None 时只用 api_key。
     总尝试次数 = len(all_keys) * retries（每个key各试retries次）
     """
-    # 文本模型降级链: gemini-3.1-pro → gemini-2.5-flash
+    # 文本模型降级链: gemini-3.1-pro-preview → gemini-2.5-pro → gemini-2.5-flash
     if model == TEXT_MODEL and TEXT_MODEL_FALLBACK:
-        models_to_try = [TEXT_MODEL, TEXT_MODEL_FALLBACK]
+        models_to_try = [m for m in [TEXT_MODEL, TEXT_MODEL_FALLBACK, TEXT_MODEL_FALLBACK_2] if m]
     else:
         models_to_try = [model]
 
@@ -264,6 +265,7 @@ def gemini_call(model, contents, api_key, gen_config=None, retries=2, all_keys=N
         if result is not None:
             if mi > 0:
                 print(f'      ✅ 降级模型 {current_model} 成功')
+            result['_actual_model'] = current_model
             return result
         if mi < len(models_to_try) - 1:
             print(f'      🔄 {current_model} 全部失败, 降级到 {models_to_try[mi+1]}...')
@@ -580,30 +582,24 @@ AI 必须直接在图片中渲染所有文字！文字是卡片的核心内容�
 在 prompt 末尾，用 [TEXT_MANIFEST] 列出卡片中要渲染的所有文字：
 [TEXT_MANIFEST]
 TITLE: 标题文字 → 渲染到区块A（Banner白色大字）
-LINE1: 核心内容第一行 → 渲染到区块B（⚠️ 每行不超过20个中文字！）
-LINE2: 核心内容第二行 → 渲染到区块B
-LINE3: 核心内容第三行 → 渲染到区块B
-SLOGAN: 口诀金句 → 渲染到区块C（暖色条白字）
-TIP: 小提示(可选) → 渲染到区块D
+①: 核心内容第一行 → 渲染到区块B（⚠️ 每行不超过20个中文字！）
+②: 核心内容第二行 → 渲染到区块B
+③: 核心内容第三行 → 渲染到区块B
+⑩: 口诀金句 → 渲染到区块C（暖色条白字）
+⑪: 小提示(可选) → 渲染到区块D
 [/TEXT_MANIFEST]
 
-⚠️ 每个 LINE 的中文字数不超过20字！如果内容过长，拆成多行 LINE1/LINE2/LINE3...
+⚠️ 每行中文字数不超过20字！如果内容过长，拆成多行 ①/②/③/④...
 此清单中的文字必须原封不动地渲染到图片对应区域中！
-
-⚠️⚠️⚠️ 标签名禁止渲染（违反=废卡）：
-   "TITLE:", "LINE1:", "LINE2:", "LINE3:", "SLOGAN:", "TIP:" 这些是内部标签名，仅用于标识内容归属！
-   ⛔ 绝对不能把 "LINE1:", "LINE2:", "SLOGAN:" 等标签前缀渲染到卡片画面上！
-   ⛔ 错误示范: 画面上出现 "LINE1: Ask about location" → 废卡！
-   ✅ 正确示范: 画面上只显示 "Ask about location"，不带任何 "LINE1:" 前缀
-   只渲染冒号后面的实际内容文字，不渲染标签名本身！
+⚠️ 图片中只渲染冒号后面的实际内容文字。标签 ①②③⑩⑪ 不能出现在图片可见文字中！它们只是指令编号。
 
 ⚠️⚠️⚠️ 最重要的防重复规则（违反=废卡）：
-   TITLE(Banner标题) 和 LINE1(内容区第一行) 绝对不能是相同或相似的文字！！！
-   如果 TITLE="pay attention to"，LINE1 绝不能写 "Pay Attention To (...)"！
-   LINE1 应该直接写用法结构，如 "to + noun/gerund (prep., NOT infinitive)"
+   TITLE(Banner标题) 和 ①(内容区第一行) 绝对不能是相同或相似的文字！！！
+   如果 TITLE="pay attention to"，① 绝不能写 "Pay Attention To (...)"！
+   ① 应该直接写用法结构，如 "to + noun/gerund (prep., NOT infinitive)"
    Banner标题 = 知识点名称（英文短语），内容区 = 教学细节（用法/例句），两者绝不能重复！
-   ⛔ 典型错误: TITLE="Where is...?" LINE1="Where is...?" → 重复了！
-   ✅ 正确示范: TITLE="Where is...?" LINE1="Ask location: is+单数 / are+复数"
+   ⛔ 典型错误: TITLE="Where is...?" ①="Where is...?" → 重复了！
+   ✅ 正确示范: TITLE="Where is...?" ①="Ask location: is+单数 / are+复数"
 
 {color_scheme_block}
 
@@ -612,13 +608,31 @@ TIP: 小提示(可选) → 渲染到区块D
 只输出英文提示词 + TEXT_MANIFEST，不要其他内容。
 
 提示词开头必须写:
-"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the main body with clearly rendered teaching content, (3) a warm colored ACCENT STRIP near the bottom with white slogan text, (4) a small cute OWL mascot with graduation cap in corner (ALWAYS the same owl character — never a bear, pencil, or other animal). Text must be pixel-perfect: every Chinese character fully formed, every letter correct. ⚠️ Do NOT render any coordinates, percentages, pixel sizes, hex color codes, or layout metadata as visible text in the image! ⚠️ Do NOT render label prefixes like 'LINE1:', 'LINE2:', 'LINE3:', 'SLOGAN:', 'TIP:', 'TITLE:' in the image — these are internal tags, only render the content text AFTER the colon! Only render the actual card content text."
+"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the main body with clearly rendered teaching content, (3) a warm colored ACCENT STRIP near the bottom with white slogan text, (4) a small cute OWL mascot with graduation cap in corner (ALWAYS the same owl character — never a bear, pencil, or other animal). Text must be pixel-perfect: every Chinese character fully formed, every letter correct. ⚠️ Do NOT render any coordinates, percentages, pixel sizes, hex color codes, or layout metadata as visible text in the image! Only render the actual card content text. ⚠️ ZERO large blank patches — if content is sparse, enlarge illustrations, add decorative elements (stars, arrows, icons), or use gradient fills to cover empty areas. The card must look visually FULL and professionally designed, with smooth transitions between all sections."
 
 ⚠️⚠️⚠️ 防重复三次提醒（最后警告）：
-回头检查你写的 TEXT_MANIFEST — TITLE 和 LINE1 是不是写了一样的内容？？？
-如果 TITLE 是一个英文短语（如 "pay attention to"），LINE1 里绝不能再出现这个短语！
-LINE1 应该写：用法结构说明（如 "to + noun/gerund, NOT infinitive"）或者直接是第一个例句。
+回头检查你写的 TEXT_MANIFEST — TITLE 和 ① 是不是写了一样的内容？？？
+如果 TITLE 是一个英文短语（如 "pay attention to"），① 里绝不能再出现这个短语！
+① 应该写：用法结构说明（如 "to + noun/gerund, NOT infinitive"）或者直接是第一个例句。
 这是最常犯的错误，请一定检查！
+
+══════ ⚠️ 留白与排版规则 (v10.30) ══════
+
+- 🚫 禁止出现大面积纯色留白！如果文字内容少，用以下方式填充空白区域：
+  → 放大左侧场景插图至占卡片40-50%宽度
+  → 在空白处添加装饰元素（星星✦、气泡、虚线箭头、小图标）
+  → 使用渐变过渡色块代替纯白背景
+  → 增大行间距让内容均匀分布，而非堆在顶部
+- 📐 内容行高度应该根据实际文本量动态调整：
+  → 内容多的行（如例句）分配更多空间
+  → 内容少的行适当收窄，让整体更紧凑
+  → 行与行之间的间距大致相等，禁止某个间隙是其他间隙的2倍以上
+- 🔗 左图右文之间需要有视觉连接：
+  → 使用弧线分割、渐变过渡、或虚线箭头链接插图与文字
+  → 禁止生硬的直线一刀切分割
+- 🎨 底部口诀区不能与主内容区有明显断层：
+  → 用渐变色带或装饰波浪线过渡到口诀区
+  → 口诀区上方可以放猫头鹰角色作为过渡
 
 ══════ ⚠️ 文字质量核心要求 ══════
 
@@ -671,21 +685,15 @@ AI 必须直接在图片中渲染所有文字！文字是卡片的核心内容�
 在 prompt 末尾，用 [TEXT_MANIFEST] 列出卡片要渲染的所有文字：
 [TEXT_MANIFEST]
 TITLE: 标题文字 → 渲染到区块A
-LINE1: 第一行内容 → 渲染到区块B（⚠️ 每行不超过20个中文字！）
-LINE2: 第二行内容 → 渲染到区块B
+①: 第一行内容 → 渲染到区块B（⚠️ 每行不超过20个中文字！）
+②: 第二行内容 → 渲染到区块B
 ...
-SLOGAN: 口诀金句 → 渲染到区块C
+⑩: 口诀金句 → 渲染到区块C
 [/TEXT_MANIFEST]
 
-⚠️ 每个 LINE 的中文字数不超过20字！内容长就拆成多行。
+⚠️ 每行中文字数不超过20字！内容长就拆成多行。
 此清单中的文字必须原封不动渲染到图片中！
-
-⚠️⚠️⚠️ 标签名禁止渲染（违反=废卡）：
-   "TITLE:", "LINE1:", "LINE2:", "LINE3:", "SLOGAN:", "TIP:" 这些是内部标签名，仅用于标识内容归属！
-   ⛔ 绝对不能把 "LINE1:", "LINE2:", "SLOGAN:" 等标签前缀渲染到卡片画面上！
-   ⛔ 错误示范: 画面上出现 "LINE1: Ask about location" → 废卡！
-   ✅ 正确示范: 画面上只显示 "Ask about location"，不带任何 "LINE1:" 前缀
-   只渲染冒号后面的实际内容文字，不渲染标签名本身！
+⚠️ 图片中只渲染冒号后的实际内容文字。标签 ①②③⑩⑪ 不能出现在图片可见文字中！
 
 {color_scheme_block}
 
@@ -694,7 +702,14 @@ SLOGAN: 口诀金句 → 渲染到区块C
 只输出英文提示词 + TEXT_MANIFEST，不要其他内容。
 
 提示词开头必须写:
-"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the middle with teaching content, (3) a warm colored ACCENT STRIP at bottom with white slogan text, (4) a small cute OWL mascot with graduation cap in corner (ALWAYS the same owl character — never a bear, pencil, or other animal). All Chinese characters must be perfectly formed — no garbled text. ⚠️ Do NOT render label prefixes like 'LINE1:', 'LINE2:', 'LINE3:', 'SLOGAN:', 'TIP:', 'TITLE:' in the image — these are internal tags, only render the content text AFTER the colon!"
+"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the middle with teaching content, (3) a warm colored ACCENT STRIP at bottom with white slogan text, (4) a small cute OWL mascot with graduation cap in corner (ALWAYS the same owl character — never a bear, pencil, or other animal). All Chinese characters must be perfectly formed — no garbled text. Only render the actual card content text. ⚠️ ZERO large blank patches — fill empty areas with enlarged illustrations, decorative elements, or gradient backgrounds."
+
+══════ ⚠️ 留白与排版规则 (v10.30) ══════
+
+- 🚫 禁止大面积纯色留白！内容少时放大插图、添加装饰元素填充
+- 📐 行高根据内容量动态调整，行间距保持大致相等
+- 🔗 各区块之间要有视觉过渡（渐变/弧线/装饰），不能生硬切割
+- 🎨 口诀区与主内容之间用渐变色带或波浪线过渡
 
 ══════ ⚠️ 文字质量核心要求 ══════
 
@@ -941,7 +956,7 @@ def _auto_fix_card_data(card, audit_result, api_key, all_keys=None):
     )
     
     api_base = 'https://generativelanguage.googleapis.com/v1beta'
-    text_models = [TEXT_MODEL, TEXT_MODEL_FALLBACK] if TEXT_MODEL_FALLBACK else [TEXT_MODEL]
+    text_models = [m for m in [TEXT_MODEL, TEXT_MODEL_FALLBACK, TEXT_MODEL_FALLBACK_2] if m]
     
     body = {
         'contents': [{'role': 'user', 'parts': [{'text': prompt}]}],
@@ -1740,7 +1755,7 @@ def _build_standard_card_layout(eng_key_phrase, cn_meaning):
 【区块A — 标题Banner】
   英文短语/词组本身「{eng_key_phrase}」，大号粗体居中
   下方小字中文释义（{cn_meaning}，≤4中文字）
-  ⚠️ LINE1（内容区第一行）不能重复写「{eng_key_phrase}」！应直接写用法结构说明。
+  ⚠️ ①（内容区第一行）不能重复写「{eng_key_phrase}」！应直接写用法结构说明。
 
 【区块B — 用法拓展】(最重要的教学区！占卡片≥40%面积！)
   ⚠️ 这个区块必须是 **纯文字教学内容**，不是卡通/插图/装饰！
@@ -3437,12 +3452,13 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
 
     resp = gemini_call(TEXT_MODEL, contents, api_key, gen_config=gen_config, all_keys=all_keys)
     if not resp:
-        return None, None
+        return None, None, None
+    text_model_used = resp.get('_actual_model', TEXT_MODEL)
 
     try:
         candidates = resp.get('candidates', [])
         if not candidates:
-            return None, None
+            return None, None, None
         parts = candidates[0].get('content', {}).get('parts', [])
         best_text = ''
         for part in parts:
@@ -3458,7 +3474,7 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
                         best_text = txt
 
         if len(best_text) < 50:
-            return None, None
+            return None, None, None
 
         # 解析 TEXT_MANIFEST
         manifest = _parse_text_manifest(best_text)
@@ -3488,15 +3504,26 @@ def generate_image_prompt(card, subject, grade, semester, api_key, all_keys=None
             except Exception as e:
                 print(f'      [skill audit] error: {e}')
 
-        return prompt_clean, manifest
+        return prompt_clean, manifest, text_model_used
 
     except Exception as e:
         print(f'      [Parse error] {e}')
-    return None, None
+    return None, None, None
+
+
+_MANIFEST_KEY_NORMALIZE = {
+    '①': 'LINE1', '②': 'LINE2', '③': 'LINE3',
+    '④': 'LINE4', '⑤': 'LINE5', '⑥': 'LINE6',
+    '⑩': 'SLOGAN', '⑪': 'TIP',
+}
 
 
 def _parse_text_manifest(text):
-    """从 prompt 输出中解析 TEXT_MANIFEST"""
+    """从 prompt 输出中解析 TEXT_MANIFEST
+    
+    v10.29: 模板使用 ①②③ 代替 LINE1/LINE2/LINE3 以防止标签泄漏到图片，
+    解析后自动归一化为 LINE1/LINE2/LINE3 供下游逻辑使用。
+    """
     manifest = {}
     m = re.search(r'\[TEXT_MANIFEST\](.*?)\[/TEXT_MANIFEST\]', text, re.DOTALL)
     if m:
@@ -3507,6 +3534,8 @@ def _parse_text_manifest(text):
                 key = key.strip()
                 val = val.strip().strip('"').strip("'")
                 if val:
+                    # v10.29: 归一化 ①→LINE1, ②→LINE2, ...
+                    key = _MANIFEST_KEY_NORMALIZE.get(key, key)
                     manifest[key] = val
     return manifest
 
@@ -4052,6 +4081,8 @@ def _build_coordinate_manifest(manifest, canvas=None):
     parts.append(f"⚠️ Each Chinese character must have perfect strokes — no garbling!")
     parts.append(f"⚠️ If space is tight, use smaller font — NEVER drop characters!")
     parts.append(f"⚠️ NEVER render coordinates, percentages, pixel sizes, hex colors, or layout metadata as visible text!")
+    parts.append(f"⚠️ ZERO large blank areas — fill empty space with enlarged scene illustrations, decorative elements (stars, arrows, icons), or gradient fills.")
+    parts.append(f"⚠️ Row heights must adapt to content length — short rows shrink, long rows expand. NO equal-height rigid rows!")
     parts.append("=== END TEXT PLAN ===\n")
     
     return '\n'.join(parts)

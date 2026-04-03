@@ -184,14 +184,15 @@ def _build_opener():
 _OPENER = _build_opener()
 
 # ============ 文本模型降级配置 ============
-_TEXT_MODEL_PRIMARY = 'gemini-3.1-pro'
-_TEXT_MODEL_FALLBACK = 'gemini-2.5-flash'
+_TEXT_MODEL_PRIMARY = 'gemini-3.1-pro-preview'
+_TEXT_MODEL_FALLBACK = 'gemini-2.5-pro'
+_TEXT_MODEL_FALLBACK_2 = 'gemini-2.5-flash'
 
 def _call_gemini_text(prompt_text, api_key, temperature=0.8, max_tokens=4096, timeout=120, opener=None):
-    """通用文本模型调用，自动降级: gemini-3.1-pro → gemini-2.5-flash"""
+    """通用文本模型调用，自动降级: gemini-3.1-pro-preview → gemini-2.5-pro → gemini-2.5-flash"""
     if opener is None:
         opener = _OPENER
-    models = [_TEXT_MODEL_PRIMARY, _TEXT_MODEL_FALLBACK]
+    models = [m for m in [_TEXT_MODEL_PRIMARY, _TEXT_MODEL_FALLBACK, _TEXT_MODEL_FALLBACK_2] if m]
     req_payload = json.dumps({
         "contents": [{"parts": [{"text": prompt_text}]}],
         "generationConfig": {"temperature": temperature, "maxOutputTokens": max_tokens}
@@ -2969,7 +2970,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
     def _gemini_proxy(self, body):
         """代理转发 Gemini API 请求，解决浏览器无法直接访问 Google API 的问题"""
         # 所有模型统一使用多 Key 轮询
-        model = body.get('model', 'gemini-3.1-pro')
+        model = body.get('model', 'gemini-3.1-pro-preview')
         is_image_model = 'image' in model or 'banana' in model or 'imagen' in model
         api_key = _get_next_server_key() or body.get('apiKey', '')
         payload = body.get('payload', {})
@@ -2987,7 +2988,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         }
         original_model = model
         if model == 'gemini-2.5-flash-lite' and feature in UPGRADE_FEATURES:
-            model = 'gemini-3.1-pro'
+            model = 'gemini-3.1-pro-preview'
             print(f'[ModelRoute] {feature}: {original_model} → {model} (auto-upgrade to pro)')
 
 
@@ -3722,10 +3723,11 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
             # ── Step 1: 生成提示词 ──
             pipeline_log.append('Step1: 生成Prompt...')
             print(f'[v3] {card["full_id"]} Step1: 生成Prompt...', flush=True)
-            prompt, manifest = generate_image_prompt(card, subject, grade, semester, keys[0], all_keys=keys,
+            prompt, manifest, text_model_used = generate_image_prompt(card, subject, grade, semester, keys[0], all_keys=keys,
                                                       platform=platform, ratio_override=ratio_override)
             if not prompt:
                 return self._send_json({'error': 'Step1失败: 无法生成图片提示词', 'pipeline': pipeline_log}, 500)
+            pipeline_log.append(f'Step1完成: text_model={text_model_used}')
 
             # 如果内容预审有改进建议，注入到 prompt
             if content_audit_result:
@@ -4284,6 +4286,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 'qualityScore': quality.get('total', 0),
                 'qualityDetail': quality,
                 'model': used_model,
+                'textModel': text_model_used if 'text_model_used' in dir() else '',
                 'rounds': rounds_used,
                 'finalAction': final_action,
                 'manifest': manifest,
@@ -4506,7 +4509,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 # Step 1
                 _update_progress('Step1: 生成Prompt...')
                 print(f'[v3-async] {card.get("full_id","")} Step1: 生成Prompt...', flush=True)
-                prompt, manifest = generate_image_prompt(card, subject, grade, semester, keys[0], all_keys=keys,
+                prompt, manifest, text_model_used = generate_image_prompt(card, subject, grade, semester, keys[0], all_keys=keys,
                                                           platform=platform, ratio_override=ratio_override)
                 if not prompt:
                     pipeline_log.append('Step1失败')
@@ -4515,6 +4518,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                         _async_tasks[task_id] = {**_async_tasks[task_id],
                             'status': 'error', 'result': {'error': 'Step1失败: 无法生成图片提示词', 'pipeline': pipeline_log}, 'updated': time.time()}
                     return
+                pipeline_log.append(f'Step1: text_model={text_model_used}')
 
                 # 注入深层复审纠错提示
                 deep_review_issues = card.get('_deep_review_issues', [])
@@ -5097,6 +5101,7 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                     'qualityScore': quality.get('total', 0),
                     'qualityDetail': quality,
                     'model': used_model,
+                    'textModel': text_model_used if 'text_model_used' in dir() else '',
                     'rounds': rounds_used,
                     'finalAction': final_action,
                     'manifest': manifest,
