@@ -260,6 +260,85 @@ def build_layout_skeleton(card_type: str, card_data: dict, grade: str = '') -> s
         lines.append('  ✂️ If there is not enough space for all content, REMOVE less important items rather than truncating any text')
         lines.append('')
 
+        # ── v10.28: 视觉丰富度升级 (6大增强) ──
+        lines.append('  === VISUAL RICHNESS UPGRADE (v10.28 — 6 Enhancements) ===')
+        lines.append('')
+
+        # Enhancement 1: 场景化插图取代孤立配图
+        lines.append('  🖼️ E1 — INTEGRATED SCENE ILLUSTRATIONS (场景化插图):')
+        lines.append('    • DO NOT place isolated clip-art images unrelated to the examples')
+        lines.append('    • Instead, create ONE unified scene that directly illustrates the knowledge point:')
+        lines.append('      - 词汇卡: a rich scene where the vocabulary word is shown in context (e.g., "basket" → a picnic scene with labeled items)')
+        lines.append('      - 句型卡: a room/environment scene with ARROWS or LABELS pointing to objects that match the example sentences')
+        lines.append('      - 语法卡: a visual diagram where grammar rules are shown as a flowchart or color-coded sentence tree')
+        lines.append('      - 易混词卡: a SPLIT scene (left vs right) where each side illustrates one confusable word in its correct context')
+        lines.append('      - 不规则动词卡: a "timeline comic" — 3 small panels showing past/present/future of the verb with the character acting it out')
+        lines.append('    • The illustration and the text examples should feel CONNECTED — arrows, labels, or visual cues should link images to text')
+        lines.append('')
+
+        # Enhancement 2: 语法可视化（色彩语义映射）
+        lines.append('  🌈 E2 — GRAMMAR COLOR-CODING (语法高亮):')
+        lines.append('    • Apply consistent color-coding to grammar elements in ALL example sentences:')
+        lines.append('      - Interrogative words (Where, What, How, When): ORANGE (#FF6348) + bold')
+        lines.append('      - Prepositions (in, on, under, at, to): BLUE (#3742FA) + underline')
+        lines.append('      - Verbs / be-verbs (is, are, was, go, eat): GREEN (#2ED573) + bold')
+        lines.append('      - Key nouns in examples: PURPLE (#8854D0) with subtle highlight background')
+        lines.append('      - Error/wrong forms: RED (#FF4757) + strikethrough')
+        lines.append('    • This color scheme must be consistent across the entire card')
+        lines.append('    • Add a tiny color legend at the bottom of the content area if ≥3 colors are used')
+        lines.append('')
+
+        # Enhancement 3: 视觉质感与层次
+        lines.append('  ✨ E3 — VISUAL TEXTURE & DEPTH (视觉质感):')
+        lines.append('    • CARD FEEL: Add subtle paper texture or very light noise to the white content area — it should feel like a real printed card, not a flat digital rectangle')
+        lines.append('    • SHADOWS: Key content boxes (example boxes, formula boxes) should have a gentle drop shadow (2-3px, 10% opacity) for depth')
+        lines.append('    • ROUNDED CORNERS: All internal boxes, labels, and highlight blocks should use rounded corners (8-12px radius)')
+        lines.append('    • HAND-DRAWN ACCENTS: Add 2-3 small hand-drawn style decorations:')
+        lines.append('      - Stars (⭐), sparkles (✦), small hearts, lightning bolts')
+        lines.append('      - Dotted or dashed underlines beneath key phrases')
+        lines.append('      - Small arrow doodles pointing to important areas')
+        lines.append('      - Wavy divider lines instead of straight dividers between sections')
+        lines.append('    • GRADIENT ACCENT: The top title bar and bottom slogan bar should use a warm gradient (e.g., #FF9A56 → #FF6B6B) instead of flat solid color')
+        lines.append('')
+
+        # Enhancement 4: 角色引导参与教学
+        lines.append('  🦉 E4 — ACTIVE MASCOT PARTICIPATION (角色参与教学):')
+        lines.append('    • The owl mascot should NOT just sit passively in the corner')
+        lines.append('    • Give the owl an ACTIVE role — choose one per card:')
+        lines.append('      a) SPEECH BUBBLE: owl says a short tip like "注意is配单数哦!" (≤8 Chinese chars or ≤5 English words)')
+        lines.append('      b) POINTING: owl points a wing toward the most important content area')
+        lines.append('      c) HOLDING A SIGN: owl holds a small sign with 1-2 key words')
+        lines.append('      d) REACTING: owl shows a surprised/excited expression near an error section or tricky point')
+        lines.append('    • The owl interaction should feel RELEVANT to the content, not generic')
+        lines.append('    • Owl can be slightly larger (up to 12% of card area) when actively participating')
+        lines.append('')
+
+        # Enhancement 5: 记忆锚点可视化
+        lines.append('  🧠 E5 — MNEMONIC VISUAL ANCHORS (记忆锚点图形化):')
+        lines.append('    • If the card has a SLOGAN or memory tip (口诀), do NOT just render it as plain text in a bar')
+        lines.append('    • Instead, create a small VISUAL DIAGRAM that illustrates the mnemonic:')
+        lines.append('      - Preposition slogans (on/in/under): draw a simple box/cube with labeled arrows showing ON=top surface, IN=inside, UNDER=beneath')
+        lines.append('      - Tense slogans: draw a LEFT→RIGHT timeline arrow with past/now/future labeled')
+        lines.append('      - Vocabulary slogans: use small pictogram icons next to each keyword')
+        lines.append('      - Grammar slogans: use a mini flowchart or decision tree')
+        lines.append('    • The mnemonic visual should be compact (10-15% of card area) and placed near the SLOGAN bar')
+        lines.append('    • This is the #1 visual element that helps students REMEMBER — invest visual effort here')
+        lines.append('')
+
+        # Enhancement 6: 动态感视觉元素
+        lines.append('  💫 E6 — DYNAMIC VISUAL ELEMENTS (动态感设计):')
+        lines.append('    • NUMBER BADGES: Use circled numbers ①②③ instead of "LINE1:/LINE2:" for sequential content')
+        lines.append('    • ❌ NEVER render internal labels like "LINE1:", "LINE2:", "LINE3:" as visible text — these are structural markers only')
+        lines.append('    • ARROW FLOW: Use curved or dashed arrows to connect related items (question→answer, word→meaning)')
+        lines.append('    • MAGNIFYING GLASS: Use a small magnifying glass icon to highlight KEY DIFFERENCE or KEY RULE areas')
+        lines.append('    • HIGHLIGHT BOXES: Important examples should be in rounded colored boxes with left border accent (3-4px colored left border)')
+        lines.append('    • STICKER FEEL: Design reusable elements (vocabulary labels, grammar tags) as if they were cute stickers')
+        lines.append('    • CONTRAST PAIRS: For any A vs B comparison, use distinct visual treatment:')
+        lines.append('      - Different background colors (pastel blue vs pastel pink)')
+        lines.append('      - Different border styles (solid vs dashed)')
+        lines.append('      - VS badge or ⚡ icon between them')
+        lines.append('')
+
     # ── v10.25: 情景对话卡·小学专属增强 (P4 — 重点修复text_accuracy) ──
     if _is_xiaoxue and card_type == '情景对话卡':
         lines.append('=== DIALOGUE CARD · PRIMARY SCHOOL SPECIAL INSTRUCTIONS ===')
@@ -612,6 +691,14 @@ def build_skill_enhanced_prompt(card_type: str, card_data: dict,
         lines.append('=== FORBIDDEN (violation = card rejected) ===')
         for i, f in enumerate(schema.forbidden, 1):
             lines.append(f'  ❌{i}. {f}')
+
+    # v10.28: 全局禁止 — label leakage
+    lines.append('')
+    lines.append('=== UNIVERSAL FORBIDDEN (v10.28 — all card types) ===')
+    lines.append('  ❌ NEVER render structural labels like "LINE1:", "LINE2:", "LINE3:", "LINE4:" as visible text on the card')
+    lines.append('  ❌ NEVER show prompt metadata (block names, attention_priority, placement instructions) in the rendered image')
+    lines.append('  ❌ NEVER show generic bullet labels — use numbered badges ①②③ or meaningful section headers instead')
+    lines.append('  ❌ NEVER use flat solid-color rectangles as the only visual treatment — add texture, shadows, or gradients')
 
     # 追加检查清单
     if schema and schema.required_elements:
