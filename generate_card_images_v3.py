@@ -714,6 +714,45 @@ AI 必须直接在图片中渲染所有文字！文字是卡片的核心内容�
 _GRAMMAR_TYPES = {'语法辨析卡', '句型卡', '易混词卡', '易混词陷阱卡', '语法纠错卡',
                   '词汇卡', '高频活用卡', '搭配卡', '词性辨析卡'}
 
+# v10.31: 英文标签映射 — 防止 AI 把中文元数据渲染到卡面上
+_SUBJECT_EN = {
+    '英语': 'English', '数学': 'Math', '语文': 'Chinese',
+    '物理': 'Physics', '化学': 'Chemistry', '生物': 'Biology',
+    '历史': 'History', '地理': 'Geography', '政治': 'Politics',
+    '养生': 'Wellness', '减脂': 'Fitness', '养生减脂': 'Wellness',
+}
+_GRADE_EN = {
+    '三上': 'G3-1', '三下': 'G3-2', '四上': 'G4-1', '四下': 'G4-2',
+    '五上': 'G5-1', '五下': 'G5-2', '六上': 'G6-1', '六下': 'G6-2',
+    '七上': 'G7-1', '七下': 'G7-2', '八上': 'G8-1', '八下': 'G8-2',
+    '九上': 'G9-1', '九下': 'G9-2',
+    '高一上': 'G10-1', '高一下': 'G10-2', '高二上': 'G11-1', '高二下': 'G11-2',
+    '高三上': 'G12-1', '高三下': 'G12-2',
+}
+_CARD_TYPE_EN = {
+    '句型卡': 'Sentence Pattern', '语法辨析卡': 'Grammar',
+    '易混词卡': 'Confusing Words', '易混词陷阱卡': 'Confusing Words',
+    '语法纠错卡': 'Grammar Fix', '词汇卡': 'Vocabulary',
+    '高频活用卡': 'High-Freq Usage', '搭配卡': 'Collocation',
+    '词性辨析卡': 'POS Analysis',
+    '方法卡': 'Method', '公式卡': 'Formula', '陷阱卡': 'Pitfall',
+    '概念卡': 'Concept', '干货卡': 'Tips',
+    '实验卡': 'Experiment', '公式推导卡': 'Derivation',
+    '过程流卡': 'Process', '微观图解卡': 'Micro Diagram',
+    '图像解读卡': 'Graph Reading', '模型卡': 'Model',
+    '解题策略卡': 'Strategy', '知识网络卡': 'Knowledge Map',
+    '术语精准卡': 'Terminology',
+}
+def _en_label(subject, grade, semester, card_type):
+    """v10.31: 将中文元数据转为英文标签，防止 AI 把中文抄到卡面"""
+    s = _SUBJECT_EN.get(subject, subject)
+    g = _GRADE_EN.get(grade, grade)
+    sem = ''
+    if semester and semester not in grade:
+        sem = ' S1' if '上' in semester else ' S2' if '下' in semester else ''
+    t = _CARD_TYPE_EN.get(card_type, card_type)
+    return s, f'{g}{sem}', t
+
 # v10.9: 理科专属卡片类型集合
 _SCIENCE_CARD_TYPES = {'实验卡', '公式推导卡', '过程流卡', '微观图解卡', '图像解读卡',
                        '模型卡', '解题策略卡', '知识网络卡', '术语精准卡'}
@@ -2144,7 +2183,8 @@ def _build_card_info_grammar(card, subject, grade, semester, canvas=None):
     else:
         layout_block = _build_standard_card_layout(eng_key_phrase, cn_meaning)
 
-    return f"""学科: {subject} | {grade} {semester} | 类型: {card_type}
+    _s, _g, _t = _en_label(subject, grade, semester, card_type)
+    return f"""Subject: {_s} | Grade: {_g} | Type: {_t}
 
 ═══════ 🎯 极简用法卡 — 通用设计规范 ═══════
 
@@ -2228,8 +2268,8 @@ def _build_card_info_wellness(card, subject, grade, semester):
     if card.get('emotion_hook'):
         hook = f"\n情绪钩子: {card['emotion_hook'][:100]}"
 
-    return f"""主题: {subject} | 分类: {grade} {semester}
-标题: {card.get('title', '')} | 类型: {card_type}
+    _s, _g, _t = _en_label(subject, grade, semester, card_type)
+    return f"""Subject: {_s} | Grade: {_g} | Type: {_t}
 
 【案例】: {example_info or '根据知识点展示最典型场景'}
 {example_steps}
@@ -2307,8 +2347,8 @@ def _build_card_info_yuwen(card, subject, grade, semester, canvas=None):
 - 对比分析用左右栏或上下排列
 - 术语名称必须100%精确（如"借代"不能写成"借待"）"""
     
-    return f"""学科: 语文 | 年级: {grade}{semester}
-标题: {title} | 类型: {card_type}
+    _s, _g, _t = _en_label('语文', grade, semester, card_type)
+    return f"""Subject: {_s} | Grade: {_g} | Type: {_t}
 
 【典型例句/原文】: {example_info or '选一个最经典的例句或名篇段落'}
 {example_steps}
@@ -3072,8 +3112,8 @@ def _build_card_info_edu(card, subject, grade, semester):
     if is_overloaded:
         text_budget_hint = f'\n⚠️ 文字量偏多({total_chars}字)！请尽量用图标/示意图/箭头表达，减少文字渲染。核心文字≤{_MAX_CARD_CHARS}字。'
 
-    return f"""学科: {subject} | 年级: {grade}{semester}
-标题: {card.get('title', '')} | 类型: {card_type}
+    _s, _g, _t = _en_label(subject, grade, semester, card_type)
+    return f"""Subject: {_s} | Grade: {_g} | Type: {_t}
 
 【例题】: {example_info or '根据知识点构造一道最典型例题'}
 {example_steps}
