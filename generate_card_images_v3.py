@@ -572,8 +572,8 @@ AI 必须直接在图片中渲染所有文字！文字是卡片的核心内容�
 - ✅ 所有中文必须字形完整、清晰可读，绝不能出现乱码/缺笔画/错字
 - ✅ 英文字母和数字必须拼写完全正确
 - ✅ 文字要与背景区块融为一体，像专业设计师排版的效果
-- ✅ 标题区大字白色加粗，内容区黑色/深灰正文，口诀区白色醒目
-- ✅ 文字大小层次分明：标题最大 > 内容正文 > 口诀 > 小提示
+- ✅ 内容区黑色/深灰正文清晰可读，口诀区白色醒目
+- ✅ 文字大小层次分明：核心内容 > 正文 > 口诀 > 小提示
 - ⚠️ 中文字符必须笔画正确——任何乱码都是致命错误！
 - ⚠️ 数学公式/符号必须完全准确
 
@@ -581,25 +581,17 @@ AI 必须直接在图片中渲染所有文字！文字是卡片的核心内容�
 
 在 prompt 末尾，用 [TEXT_MANIFEST] 列出卡片中要渲染的所有文字：
 [TEXT_MANIFEST]
-TITLE: 标题文字 → 渲染到区块A（Banner白色大字）
-①: 核心内容第一行 → 渲染到区块B（⚠️ 每行不超过20个中文字！）
-②: 核心内容第二行 → 渲染到区块B
-③: 核心内容第三行 → 渲染到区块B
-⑩: 口诀金句 → 渲染到区块C（暖色条白字）
-⑪: 小提示(可选) → 渲染到区块D
+①: 核心内容第一行 → 渲染到内容区顶部（⚠️ 每行不超过20个中文字！）
+②: 核心内容第二行 → 渲染到内容区
+③: 核心内容第三行 → 渲染到内容区
+⑩: 口诀金句 → 渲染到底部口诀条（暖色条白字）
+⑪: 小提示(可选) → 渲染到最底部
 [/TEXT_MANIFEST]
 
+⚠️ 不要生成 TITLE 行！卡片没有顶部标题栏/Banner，直接从内容区开始。
 ⚠️ 每行中文字数不超过20字！如果内容过长，拆成多行 ①/②/③/④...
 此清单中的文字必须原封不动地渲染到图片对应区域中！
 ⚠️ 图片中只渲染冒号后面的实际内容文字。标签 ①②③⑩⑪ 不能出现在图片可见文字中！它们只是指令编号。
-
-⚠️⚠️⚠️ 最重要的防重复规则（违反=废卡）：
-   TITLE(Banner标题) 和 ①(内容区第一行) 绝对不能是相同或相似的文字！！！
-   如果 TITLE="pay attention to"，① 绝不能写 "Pay Attention To (...)"！
-   ① 应该直接写用法结构，如 "to + noun/gerund (prep., NOT infinitive)"
-   Banner标题 = 知识点名称（英文短语），内容区 = 教学细节（用法/例句），两者绝不能重复！
-   ⛔ 典型错误: TITLE="Where is...?" ①="Where is...?" → 重复了！
-   ✅ 正确示范: TITLE="Where is...?" ①="Ask location: is+单数 / are+复数"
 
 {color_scheme_block}
 
@@ -608,13 +600,11 @@ TITLE: 标题文字 → 渲染到区块A（Banner白色大字）
 只输出英文提示词 + TEXT_MANIFEST，不要其他内容。
 
 提示词开头必须写:
-"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the main body with clearly rendered teaching content, (3) a warm colored ACCENT STRIP near the bottom with white slogan text, (4) a small cute OWL mascot with graduation cap in corner (ALWAYS the same owl character — never a bear, pencil, or other animal). Text must be pixel-perfect: every Chinese character fully formed, every letter correct. ⚠️ Do NOT render any coordinates, percentages, pixel sizes, hex color codes, or layout metadata as visible text in the image! Only render the actual card content text. ⚠️ ZERO large blank patches — if content is sparse, enlarge illustrations, add decorative elements (stars, arrows, icons), or use gradient fills to cover empty areas. The card must look visually FULL and professionally designed, with smooth transitions between all sections."
+"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a white rounded CONTENT CARD as the main body with clearly rendered teaching content — NO title banner at the top, (2) a warm colored ACCENT STRIP near the bottom with white slogan text, (3) a small cute OWL mascot with graduation cap in corner (ALWAYS the same owl character — never a bear, pencil, or other animal). The card starts directly with the content area — no dark banner, no Chinese title bar. Text must be pixel-perfect: every Chinese character fully formed, every letter correct. ⚠️ Do NOT render any coordinates, percentages, pixel sizes, hex color codes, or layout metadata as visible text in the image! Only render the actual card content text. ⚠️ ZERO large blank patches — if content is sparse, enlarge illustrations, add decorative elements (stars, arrows, icons), or use gradient fills to cover empty areas. The card must look visually FULL and professionally designed, with smooth transitions between all sections."
 
-⚠️⚠️⚠️ 防重复三次提醒（最后警告）：
-回头检查你写的 TEXT_MANIFEST — TITLE 和 ① 是不是写了一样的内容？？？
-如果 TITLE 是一个英文短语（如 "pay attention to"），① 里绝不能再出现这个短语！
-① 应该写：用法结构说明（如 "to + noun/gerund, NOT infinitive"）或者直接是第一个例句。
-这是最常犯的错误，请一定检查！
+⚠️⚠️⚠️ 重要提醒：不要生成顶部标题栏！
+卡片直接从教学内容区开始，不要在顶部加任何 Banner/标题栏/中文标题。
+① 应该是教学内容的第一行（如用法结构说明或第一个例句），不是标题。
 
 ══════ ⚠️ 留白与排版规则 (v10.30) ══════
 
@@ -677,20 +667,20 @@ AI 必须直接在图片中渲染所有文字！文字是卡片的核心内容�
 - ✅ 所有中文必须字形完整、清晰可读，绝不能乱码/缺笔画/错字
 - ✅ 英文和数字拼写100%正确
 - ✅ 文字与背景融为一体，像专业设计师排版
-- ✅ 标题白色大字、内容区深色正文、口诀白色醒目
+- ✅ 内容区深色正文清晰可读、口诀白色醒目
 - ⚠️ 中文字符笔画正确是硬性要求
 
 ══════ 文字清单 ══════
 
 在 prompt 末尾，用 [TEXT_MANIFEST] 列出卡片要渲染的所有文字：
 [TEXT_MANIFEST]
-TITLE: 标题文字 → 渲染到区块A
-①: 第一行内容 → 渲染到区块B（⚠️ 每行不超过20个中文字！）
-②: 第二行内容 → 渲染到区块B
+①: 第一行内容 → 渲染到内容区顶部（⚠️ 每行不超过20个中文字！）
+②: 第二行内容 → 渲染到内容区
 ...
-⑩: 口诀金句 → 渲染到区块C
+⑩: 口诀金句 → 渲染到底部口诀条
 [/TEXT_MANIFEST]
 
+⚠️ 不要生成 TITLE 行！卡片没有顶部标题栏，直接从内容区开始。
 ⚠️ 每行中文字数不超过20字！内容长就拆成多行。
 此清单中的文字必须原封不动渲染到图片中！
 ⚠️ 图片中只渲染冒号后的实际内容文字。标签 ①②③⑩⑪ 不能出现在图片可见文字中！
@@ -702,7 +692,7 @@ TITLE: 标题文字 → 渲染到区块A
 只输出英文提示词 + TEXT_MANIFEST，不要其他内容。
 
 提示词开头必须写:
-"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a dark gradient BANNER at top with white title text, (2) a white rounded CONTENT CARD in the middle with teaching content, (3) a warm colored ACCENT STRIP at bottom with white slogan text, (4) a small cute OWL mascot with graduation cap in corner (ALWAYS the same owl character — never a bear, pencil, or other animal). All Chinese characters must be perfectly formed — no garbled text. Only render the actual card content text. ⚠️ ZERO large blank patches — fill empty areas with enlarged illustrations, decorative elements, or gradient backgrounds."
+"IMPORTANT: Generate a COMPLETE knowledge card with ALL text rendered directly in the image. The card must have: (1) a white rounded CONTENT CARD as the main body with teaching content — NO title banner at the top, (2) a warm colored ACCENT STRIP at bottom with white slogan text, (3) a small cute OWL mascot with graduation cap in corner (ALWAYS the same owl character — never a bear, pencil, or other animal). The card starts directly with the content area — no dark banner, no title bar. All Chinese characters must be perfectly formed — no garbled text. Only render the actual card content text. ⚠️ ZERO large blank patches — fill empty areas with enlarged illustrations, decorative elements, or gradient backgrounds."
 
 ══════ ⚠️ 留白与排版规则 (v10.30) ══════
 
@@ -1749,17 +1739,15 @@ def _build_concept_card_layout(eng_key_phrase, cn_meaning, grammar_terms):
 
 
 def _build_standard_card_layout(eng_key_phrase, cn_meaning):
-    """构建标准英语卡（搭配/易混词/单一语法点）的布局指令 — 线性ABCD"""
-    return f"""📐 卡片严格4个区块，自上而下，不允许其他内容：
+    """构建标准英语卡（搭配/易混词/单一语法点）的布局指令 — 线性BCD (无顶部Banner)"""
+    return f"""📐 卡片严格3个区块，自上而下，不允许其他内容：
 
-【区块A — 标题Banner】
-  英文短语/词组本身「{eng_key_phrase}」，大号粗体居中
-  下方小字中文释义（{cn_meaning}，≤4中文字）
-  ⚠️ ①（内容区第一行）不能重复写「{eng_key_phrase}」！应直接写用法结构说明。
+⚠️ 不要在顶部加标题栏/Banner！卡片直接从内容区开始。
 
-【区块B — 用法拓展】(最重要的教学区！占卡片≥40%面积！)
+【内容区 — 用法拓展】(最重要的教学区！占卡片≥50%面积！)
   ⚠️ 这个区块必须是 **纯文字教学内容**，不是卡通/插图/装饰！
-  展示该知识点的 2-3 种典型搭配/用法结构
+  第一行可以写「{eng_key_phrase}」（{cn_meaning}）作为知识点引入，大号粗体
+  然后展示该知识点的 2-3 种典型搭配/用法结构
   每种结构必须配一个完整英文例句（≥6词），例句必须作为可见文字渲染在卡片上
   例如: 如果知识点是一个搭配短语，展示它接不同词性时的句子
        如果是易混词，展示两个词各自正确的用法句
@@ -1839,9 +1827,8 @@ def _build_confusion_card_layout(word_a, word_b, meaning_a, meaning_b):
 
 本卡特点: 「{word_a}」vs「{word_b}」容易混淆，用双栏对比帮助学生区分。
 
-【顶部标题栏】
-  标题: 「{word_a} vs {word_b}」大号粗体居中
-  副标题: 小字 "易混词辨析"
+⚠️ 不要在顶部加标题栏/Banner！卡片直接从对比内容开始。
+顶部可以用大号粗体写「{word_a} vs {word_b}」作为内容区的第一行。
 
 【双栏对比区 — 占卡片≥50%面积】(最重要的教学区！)
   ┌──────────────────┬──────────────────┐
@@ -1903,9 +1890,8 @@ def _build_tense_card_layout(eng_key_phrase, cn_meaning, tense_name):
 
 本卡特点: 讲解「{tense_name}」时态，使用时间轴直观展示时间关系。
 
-【顶部标题】
-  标题: 「{tense_name}」大号粗体居中
-  副标题: 英文时态名 + 中文释义（{cn_meaning}）
+⚠️ 不要在顶部加标题栏/Banner！卡片直接从内容开始。
+顶部可以用大号粗体写「{tense_name}」（{cn_meaning}）作为内容区的第一行。
 
 【时间轴区 — 占卡片≥45%面积】(核心教学区！)
   画一条水平时间轴线: ←── past ── now ── future ──→
@@ -2180,9 +2166,9 @@ def _build_card_info_grammar(card, subject, grade, semester, canvas=None):
 
 ═══════ ⛔ 6条铁律（违反=废卡）═══════
 
-🔒1. 标题包含「{eng_key_phrase}」（英文！），{'语法概念卡允许混合标题如"连接that"' if is_concept_card else '🚫禁止纯中文泛化标题'}
-🔒2. {'每个分支必须有中文语法术语+完整英文例句，术语文字必须精确（如"同位语从句"不能写成"应语从句"）' if is_concept_card else '区块B必须展示2-3种不同的用法/搭配，每种配完整英文例句。区块B是纯文字教学区，🚫严禁用卡通人物或装饰替代'}
-🔒3. 区块C的❌/✅必须是学生真正会犯的错误，完整句子≥6词，错因用英文标注（不写中文句子）
+🔒1. 🚫禁止顶部标题栏/Banner！卡片直接从教学内容开始，不要在顶部加中文标题
+🔒2. {'每个分支必须有中文语法术语+完整英文例句，术语文字必须精确（如"同位语从句"不能写成"应语从句"）' if is_concept_card else '内容区必须展示2-3种不同的用法/搭配，每种配完整英文例句。内容区是纯文字教学区，🚫严禁用卡通人物或装饰替代'}
+🔒3. ❌/✅对比必须是学生真正会犯的错误，完整句子≥6词，错因用英文标注（不写中文句子）
 🔒4. 全卡所有内容只能涉及「{eng_key_phrase}」这一个知识点，🚫严禁混入无关词汇/语法点
 🔒5. 口诀用「英文+≤4中文字」混合格式，🚫禁止万能废话
 🔒6. 全卡中文≤{_mc}字，英文不限。每个中文字必须粗体清晰，中文越少越好
@@ -2190,12 +2176,12 @@ def _build_card_info_grammar(card, subject, grade, semester, canvas=None):
 🔒8. {'⚠️ 中文语法术语必须100%精确！"同位语从句"不能写成"应语从句"，"宾语从句"不能写成"宝语从句"。如果不确定，用英文标注替代（如 appositive clause）' if is_concept_card else '教学内容不能被卡通角色替代'}
 
 ═══════ 📋 最终检查 ═══════
-□ 标题包含「{eng_key_phrase}」吗？
-{'□ 每个分支的语法术语拼写正确吗？（同位语从句≠应语从句）' if is_concept_card else '□ 区块B有2-3种不同用法+完整例句吗？(不是卡通人物/装饰图案？)'}
+□ 卡片顶部没有中文标题栏/Banner吗？（直接从教学内容开始）
+{'□ 每个分支的语法术语拼写正确吗？（同位语从句≠应语从句）' if is_concept_card else '□ 内容区有2-3种不同用法+完整例句吗？(不是卡通人物/装饰图案？)'}
 □ 英文例句是否作为可见文字渲染在卡面上？
 □ ❌/✅例句只涉及「{eng_key_phrase}」吗？有没有混入无关内容？
 □ 口诀含具体语法知识吗？不是万能废话吗？
-□ 区块C的错因标注是英文吗？（不要写中文句子，防乱码）
+□ 错因标注是英文吗？（不要写中文句子，防乱码）
 □ 卡片中间有没有"记住哦""来看看"等废话？（如果有：删掉，替换为英文例句）
 
 ═══════ 📚 参考数据（仅供理解，以上规范优先）═══════
@@ -4064,7 +4050,8 @@ def _build_coordinate_manifest(manifest, canvas=None):
     for key, val in manifest.items():
         cn_count = _count_chinese_chars(val)
         if key.upper() == 'TITLE':
-            parts.append(f'  {key}: "{val}" → place in TOP BANNER, large bold white text, centered')
+            # v10.31: 不再使用 TOP BANNER，TITLE 如果存在则放入内容区顶部
+            parts.append(f'  {key}: "{val}" → place at top of CONTENT CARD, large bold dark text')
         elif key.upper() == 'SLOGAN':
             parts.append(f'  {key}: "{val}" → place in ACCENT STRIP near bottom, medium bold white text, centered')
         elif key.upper().startswith('LINE'):
@@ -4121,8 +4108,8 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
         f"1. This is a {subject} educational knowledge card about \"{card_title}\".\n"
         f"2. ✅ You MUST render ALL text directly in the image — text is the core content!\n"
         f"3. Design a STRUCTURED CARD with text integrated into each zone:\n"
-        f"   - TOP BANNER at the very top: Dark gradient strip with WHITE TITLE TEXT centered\n"
-        f"   - CONTENT CARD in the middle: White rounded rectangle with TEACHING CONTENT text\n"
+        f"   - NO title banner at the top! The card starts directly with the content area.\n"
+        f"   - CONTENT CARD: White rounded rectangle with TEACHING CONTENT text, occupying the main body\n"
         f"   - ACCENT STRIP near the bottom: Warm gradient bar with WHITE SLOGAN TEXT centered\n"
         f"   - BOTTOM edge: Small tip text if any\n"
         f"   - Small cute mascot in bottom-right corner (tiny, under 10 percent of image)\n"
@@ -4135,6 +4122,7 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
         f"   Main color: choose from coral pink / mint blue / peach orange / lavender.\n"
         f"6. {canvas_en}\n"
         f"7. ⚠️ Do NOT render any coordinates, percentages, pixel sizes, hex color codes, or layout metadata as visible text in the image!\n"
+        f"8. ⚠️ Do NOT add any dark banner or Chinese title at the top of the card!\n"
     )
 
     # v10.17 优化②: 坐标锚定 manifest (替代旧的 zone-only 描述)
@@ -4213,11 +4201,12 @@ def _two_step_generate(prompt, chinese_prefix, manifest, keys, card_title, subje
     
     好处: 每步只需渲染 3-5 个汉字，AI 准确率从 ~60% 提升到 ~90%
     """
-    # 分离 manifest: 标题层 vs 内容层
+    # v10.31: 不再分离 TITLE 到标题层（已移除顶部 Banner）
+    # 只分离 SLOGAN 到第一步，其余内容在第二步渲染
     title_manifest = {}
     content_manifest = {}
     for k, v in manifest.items():
-        if k.upper() in ('TITLE', 'SLOGAN'):
+        if k.upper() == 'SLOGAN':
             title_manifest[k] = v
         else:
             content_manifest[k] = v
@@ -4225,23 +4214,22 @@ def _two_step_generate(prompt, chinese_prefix, manifest, keys, card_title, subje
     if not title_manifest:
         return None, None, None
     
-    # ── Step 2a: 标题 + 装饰底图 ──
+    # ── Step 2a: 口诀条 + 装饰底图 ──
     title_cn = sum(_count_chinese_chars(v) for v in title_manifest.values())
     step2a_prompt = (
         f"Generate a {subject} educational knowledge card layout about \"{card_title}\".\n"
-        f"This is Step 1 of 2 — generate the CARD FRAME with title and decoration ONLY.\n"
+        f"This is Step 1 of 2 — generate the CARD FRAME with decoration ONLY.\n"
         f"⚠️ In this step, ONLY render these {len(title_manifest)} text items:\n"
     )
     for k, v in title_manifest.items():
-        if k.upper() == 'TITLE':
-            step2a_prompt += f'  {k}: "{v}" → place in TOP BANNER, large bold white text, centered\n'
-        elif k.upper() == 'SLOGAN':
+        if k.upper() == 'SLOGAN':
             step2a_prompt += f'  {k}: "{v}" → place in ACCENT STRIP near bottom, medium bold white text, centered\n'
     
     step2a_prompt += (
-        f"\nFor the CONTENT CARD area in the middle, leave it as a BLANK white rounded rectangle.\n"
+        f"\nFor the CONTENT CARD area (the main body), leave it as a BLANK white rounded rectangle.\n"
         f"Do NOT put any text in the content area — it will be added in Step 2.\n"
-        f"Add: dark gradient banner at top, warm accent strip near bottom, soft background, small OWL mascot with graduation cap in bottom-right (always the same owl character, never other animals).\n"
+        f"⚠️ NO dark banner or title bar at the top! The card starts directly with the content area.\n"
+        f"Add: warm accent strip near bottom, soft gradient background, small OWL mascot with graduation cap in bottom-right (always the same owl character, never other animals).\n"
         f"Style: Professional Xiaohongshu card. {canvas_en}\n"
         f"⚠️ Chinese characters must have perfect strokes. Only {title_cn} characters total.\n"
         f"⚠️ Do NOT render any coordinates, percentages, or layout metadata as visible text!\n"

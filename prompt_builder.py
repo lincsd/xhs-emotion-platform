@@ -260,7 +260,7 @@ def build_layout_skeleton(card_type: str, card_data: dict, grade: str = '') -> s
         lines.append('  📐 LEFT-RIGHT TRANSITION: If the card has illustration on the left and text on the right:')
         lines.append('    - Use a curved divider, gradient fade, or overlapping elements — NOT a hard straight line')
         lines.append('    - The illustration and text should visually "blend" into each other')
-        lines.append('  📐 SECTION TRANSITIONS: Between BANNER→CONTENT and CONTENT→SLOGAN:')
+        lines.append('  📐 SECTION TRANSITIONS: Between content sections and CONTENT→SLOGAN:')
         lines.append('    - Use gradient color bands, wavy decorative lines, or the owl character as a visual bridge')
         lines.append('    - Do NOT leave a stark white gap between colored sections')
         lines.append('')
@@ -311,7 +311,7 @@ def build_layout_skeleton(card_type: str, card_data: dict, grade: str = '') -> s
         lines.append('      - Dotted or dashed underlines beneath key phrases')
         lines.append('      - Small arrow doodles pointing to important areas')
         lines.append('      - Wavy divider lines instead of straight dividers between sections')
-        lines.append('    • GRADIENT ACCENT: The top title bar and bottom slogan bar should use a warm gradient (e.g., #FF9A56 → #FF6B6B) instead of flat solid color')
+        lines.append('    • GRADIENT ACCENT: The bottom slogan bar should use a warm gradient (e.g., #FF9A56 → #FF6B6B) instead of flat solid color')
         lines.append('')
 
         # Enhancement 4: 角色引导参与教学
