@@ -591,7 +591,9 @@ AI 必须直接在图片中渲染所有文字！文字是卡片的核心内容�
 ⚠️ 不要生成 TITLE 行！卡片没有顶部标题栏/Banner，直接从内容区开始。
 ⚠️ 每行中文字数不超过20字！如果内容过长，拆成多行 ①/②/③/④...
 此清单中的文字必须原封不动地渲染到图片对应区域中！
-⚠️ 图片中只渲染冒号后面的实际内容文字。标签 ①②③⑩⑪ 不能出现在图片可见文字中！它们只是指令编号。
+⚠️ 图片中只渲染冒号后面的实际内容文字。标签 ①②③④⑤⑥⑦⑧⑨⑩⑪ 绝对不能出现在图片可见文字中！它们只是指令编号。
+⚠️⚠️⚠️ 严禁在图片中渲染任何带圈数字（①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳）！这些是内部结构标记，用户绝不能看到。如果想表达序号，可以用 1. 2. 3. 或 A B C 替代。
+⚠️ 颜色一致性规则：当教学内容提到颜色词（如 red/blue/yellow/green 或 红/蓝/黄/绿），图片中对应的视觉元素（积木、色块、图形、物品）必须使用与文字描述一致的颜色。例如 "It's red" 旁边的物品必须是红色的，不能是绿色或紫色。
 
 {color_scheme_block}
 
@@ -4125,11 +4127,13 @@ def generate_card_image(prompt, keys, card_title='', subject='', audit_hint='', 
         f"   - Every English word must be spelled correctly\n"
         f"   - Numbers and math symbols must be accurate\n"
         f"   - ⚠️ NEVER truncate text! Every phrase must be COMPLETE\n"
-        f"5. Style: Professional Xiaohongshu card template. Use symbols (→/①②③/≈/=) to replace verbose Chinese.\n"
+        f"5. Style: Professional Xiaohongshu card template. Use plain numbering (1. 2. 3. or A B C) for sequences.\n"
         f"   Main color: choose from coral pink / mint blue / peach orange / lavender.\n"
         f"6. {canvas_en}\n"
         f"7. ⚠️ Do NOT render any coordinates, percentages, pixel sizes, hex color codes, or layout metadata as visible text in the image!\n"
         f"8. ⚠️ Do NOT add any dark banner or Chinese title at the top of the card!\n"
+        f"9. ⚠️ NEVER render circled numbers (①②③④⑤⑥⑦⑧⑨⑩⑪) in the image! These are internal markers only. Use 1. 2. 3. or A B C instead.\n"
+        f"10. ⚠️ COLOR CONSISTENCY: When text mentions a color word (red/blue/yellow/green etc.), the corresponding visual element (object, block, shape) MUST be that exact color. Example: 'It's red' → the object must be RED, not green or purple.\n"
     )
 
     # v10.17 优化②: 坐标锚定 manifest (替代旧的 zone-only 描述)
@@ -4412,11 +4416,13 @@ def generate_card_images_parallel(prompt, keys, card_title='', subject='', audit
         f"   - Every Chinese character must be perfectly formed (correct strokes, no garbled text)\n"
         f"   - Every English word must be spelled correctly\n"
         f"   - ⚠️ NEVER truncate text! Every phrase must be COMPLETE\n"
-        f"5. Style: Professional Xiaohongshu card. Use symbols (→/①②③/≈) to replace verbose text.\n"
+        f"5. Style: Professional Xiaohongshu card. Use plain numbering (1. 2. 3. or A B C) for sequences.\n"
         f"   Main color: choose from coral pink / mint blue / peach orange / lavender.\n"
         f"6. {canvas_en}\n"
         f"7. ⚠️ Do NOT render any coordinates, percentages, pixel sizes, hex color codes, or layout metadata as visible text in the image!\n"
         f"8. ⚠️ Do NOT add any dark banner or Chinese title at the top of the card!\n"
+        f"9. ⚠️ NEVER render circled numbers (①②③④⑤⑥⑦⑧⑨⑩⑪) in the image! These are internal markers only. Use 1. 2. 3. or A B C instead.\n"
+        f"10. ⚠️ COLOR CONSISTENCY: When text mentions a color word (red/blue/yellow/green etc.), the corresponding visual element MUST be that exact color.\n"
     )
     # v10.17: 坐标锚定 manifest
     if manifest:
@@ -4534,6 +4540,14 @@ OCR_AND_QUALITY_PROMPT = """你是一个严格的知识卡片审计员，同时�
 - GRAMMAR_TERM_1/2/3 条目必须100%精确，错字=severity:"high"
 - 常见渲染错误: "同位语"→"应语", "宾语"→"宝语", "状语"→"壮语"
 - 每处扣15分
+
+⚠️ 特别检查：带圈数字泄漏
+- 如果图片中出现①②③④⑤⑥⑦⑧⑨⑩⑪等带圈数字 → type:"label_leak", severity:"high", 扣10分
+- 这些是内部结构标记，不应出现在最终图片中
+
+⚠️ 特别检查：颜色不一致
+- 如果教学内容提到颜色词（如red/blue/yellow/green/红/蓝/黄/绿），检查图中对应的视觉元素颜色是否匹配
+- 例如文字说"It's red"但旁边物品是绿色 → type:"color_mismatch", severity:"medium", 扣5分
 
 ⚠️ 特别检查：英文关键短语
 - 如果期望文字中有 ENG_KEY_PHRASE 条目，图片中必须可见该英文短语
@@ -4774,6 +4788,22 @@ def _programmatic_text_check(ocr_result, expected_manifest):
                 added += 1
                 print(f'      [程序化补检] 截断: "{best_found}" → 期望 "{mv}" (缺{missing_count}字)')
     
+    # v10.31: 带圈数字泄漏检测
+    circled_nums = set('①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳')
+    all_found_text = ' '.join(found_texts)
+    leaked_circles = [c for c in all_found_text if c in circled_nums]
+    if leaked_circles and ('label_leak', 'label_leak') not in existing_errors:
+        unique_leaked = sorted(set(leaked_circles))
+        errors.append({
+            'expected': '无带圈数字',
+            'actual': ''.join(unique_leaked),
+            'type': 'label_leak',
+            'severity': 'high'
+        })
+        score = max(0, score - 10)
+        added += 1
+        print(f'      [程序化补检] 带圈数字泄漏: {"".join(unique_leaked)}')
+
     if added > 0:
         ocr_result['errors'] = errors
         ocr_result['overall_score'] = score
@@ -5211,6 +5241,8 @@ Layer A — 致命缺陷排查（一票否决）
   A6. 伪语义文本: 有中文短句虽然每个字都认得，但拼在一起不通顺、不是真正的中文表达吗？
       例如 "实则考试快速概忆" "学会总结要点明" — 每个字没错但读起来不是人话。
       特别关注底部标语/口号/装饰文字区域，这里最常出现AI编造的伪语义文本。
+  A7. 带圈数字泄漏: 图片中是否出现了①②③④⑤⑥⑦⑧⑨⑩⑪等带圈数字？这些是内部结构标记，绝不应该出现在最终图片中。如果出现 → FAIL。
+  A8. 颜色不一致: 当文字内容提到颜色词（如"It's red""They're yellow"），图中对应的视觉元素（积木、物品、色块）是否使用了匹配的颜色？颜色严重不一致（如说red画绿色）→ 扣分。
 
 ═══════════════════════════════════════════
 Layer B — 文字保真度（满分 30）
@@ -5801,6 +5833,8 @@ QUALITY_PROMPT = """你是知识卡片质量评审员。请从7个维度**独立
    - 英语例句是否完整(≥6词)? 对错对比是否有真实高频错误?
    - 英文拼写是否100%正确? 口诀是否精炼(≤10字)?
    - 卡面中文是否最少化? 是否避免了废话填充("记住哦""来看看")?
+   - ⚠️ 带圈数字泄漏：如果图片中出现①②③⑩⑪等带圈数字，直接扣5分！
+   - ⚠️ 颜色一致性：文字提到的颜色（如red/yellow/blue）与图中对应物品/色块颜色是否一致？不一致扣3分。
 
 ⚠️ 评分铁律:
 - 每项依据实际观察独立打分，优秀项给满分附近，有问题的项直接降到1-5分
