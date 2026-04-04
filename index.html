@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260404f';
+      var BUILD='20260404g';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);
@@ -182,6 +182,169 @@
       font-size: 14px;
       color: var(--text-light);
       margin-top: 4px;
+    }
+
+    .dashboard-hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.9fr);
+      gap: 18px;
+      padding: 22px 24px;
+      margin-bottom: 18px;
+      border-radius: 22px;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(245,249,255,0.96) 100%),
+        linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+      border: 1px solid rgba(59,130,246,0.12);
+      box-shadow: 0 10px 30px rgba(59,130,246,0.10);
+    }
+
+    .dashboard-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 85% 18%, rgba(59,130,246,0.12) 0, transparent 18%),
+        radial-gradient(circle at 76% 82%, rgba(16,185,129,0.10) 0, transparent 16%);
+    }
+
+    .dashboard-hero-content,
+    .dashboard-hero-decor {
+      position: relative;
+      z-index: 1;
+    }
+
+    .dashboard-hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(59,130,246,0.10);
+      color: #1d4ed8;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      margin-bottom: 12px;
+    }
+
+    .dashboard-hero-title {
+      font-size: 30px;
+      line-height: 1.25;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
+
+    .dashboard-hero-title .hl {
+      color: #2563eb;
+    }
+
+    .dashboard-hero-desc {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text-light);
+      max-width: 720px;
+      margin-bottom: 16px;
+    }
+
+    .dashboard-hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .dashboard-hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.88);
+      border: 1px solid rgba(59,130,246,0.10);
+      color: #334155;
+      font-size: 13px;
+      box-shadow: 0 6px 18px rgba(59,130,246,0.06);
+    }
+
+    .dashboard-hero-tag b {
+      color: #1d4ed8;
+    }
+
+    .dashboard-hero-decor {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    .dashboard-word-row {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .dashboard-word-chip {
+      min-width: 92px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.88);
+      border: 1px solid rgba(59,130,246,0.10);
+      box-shadow: 0 10px 24px rgba(59,130,246,0.08);
+    }
+
+    .dashboard-word-chip .en {
+      display: block;
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+
+    .dashboard-word-chip .cn {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    .dashboard-alpha-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .dashboard-alpha {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 800;
+      color: #1e40af;
+      background: linear-gradient(135deg, rgba(219,234,254,0.96) 0%, rgba(255,255,255,0.96) 100%);
+      border: 1px solid rgba(59,130,246,0.12);
+      box-shadow: 0 10px 24px rgba(59,130,246,0.08);
+    }
+
+    .dashboard-hero-note {
+      align-self: flex-end;
+      max-width: 260px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.90);
+      border: 1px dashed rgba(59,130,246,0.20);
+      color: #475569;
+      font-size: 13px;
+      line-height: 1.6;
+      box-shadow: 0 8px 22px rgba(59,130,246,0.06);
     }
 
     /* ===== 通用组件 ===== */
@@ -1466,6 +1629,22 @@
         gap: 10px;
       }
       .page-header h2 { font-size: 18px; }
+      .dashboard-hero {
+        grid-template-columns: 1fr;
+        padding: 16px;
+        gap: 14px;
+        border-radius: 18px;
+      }
+      .dashboard-hero-title { font-size: 22px; }
+      .dashboard-hero-desc { font-size: 13px; line-height: 1.7; }
+      .dashboard-hero-tags { gap: 8px; }
+      .dashboard-hero-tag { font-size: 12px; padding: 7px 10px; }
+      .dashboard-word-row,
+      .dashboard-alpha-row { justify-content: flex-start; }
+      .dashboard-word-chip { min-width: 82px; padding: 10px 12px; }
+      .dashboard-word-chip .en { font-size: 16px; }
+      .dashboard-alpha { width: 46px; height: 46px; font-size: 20px; border-radius: 14px; }
+      .dashboard-hero-note { align-self: flex-start; max-width: 100%; }
 
       /* 统计卡片 */
       .stat-grid {
@@ -1578,6 +1757,10 @@
       .sidebar-header h1 { font-size: 16px; }
       .nav-item { font-size: 13px; padding: 8px 10px; }
       .stat-grid { grid-template-columns: repeat(3, 1fr); }
+      .dashboard-hero { grid-template-columns: 1fr; }
+      .dashboard-word-row,
+      .dashboard-alpha-row { justify-content: flex-start; }
+      .dashboard-hero-note { align-self: flex-start; }
     }
   </style>
 </head>
@@ -1773,6 +1956,32 @@
           </div>
           <div class="btn-group">
             <button class="btn btn-primary" onclick="switchPage('knowledge-cards')">✨ 生成卡片</button>
+          </div>
+        </div>
+
+        <div class="dashboard-hero">
+          <div class="dashboard-hero-content">
+            <div class="dashboard-hero-kicker">📘 English Learning Workspace</div>
+            <div class="dashboard-hero-title">让每一张 <span class="hl">英语知识卡</span> 都更像真实课堂里的学习材料</div>
+            <div class="dashboard-hero-desc">围绕单词、句型、语法与易错点，快速生成更适合小学英语教学场景的卡片内容。整体氛围保持清爽、专注、轻学习感。</div>
+            <div class="dashboard-hero-tags">
+              <span class="dashboard-hero-tag">🔤 <b>Words</b> 单词记忆</span>
+              <span class="dashboard-hero-tag">🗣️ <b>Sentences</b> 句型表达</span>
+              <span class="dashboard-hero-tag">✏️ <b>Practice</b> 练习巩固</span>
+            </div>
+          </div>
+          <div class="dashboard-hero-decor" aria-hidden="true">
+            <div class="dashboard-word-row">
+              <div class="dashboard-word-chip"><span class="en">apple</span><span class="cn">苹果</span></div>
+              <div class="dashboard-word-chip"><span class="en">book</span><span class="cn">书本</span></div>
+              <div class="dashboard-word-chip"><span class="en">read</span><span class="cn">阅读</span></div>
+            </div>
+            <div class="dashboard-alpha-row">
+              <span class="dashboard-alpha">A</span>
+              <span class="dashboard-alpha">B</span>
+              <span class="dashboard-alpha">C</span>
+            </div>
+            <div class="dashboard-hero-note">📝 Daily English tip：短句、清晰、可练习，比花哨表达更适合小学生记忆。</div>
           </div>
         </div>
 
@@ -3842,7 +4051,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260404f'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260404g'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
