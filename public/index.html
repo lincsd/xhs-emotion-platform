@@ -150,20 +150,18 @@
 
     .main::before {
       content: '';
-      position: fixed;
-      top: 14px;
+      position: absolute;
+      top: 16px;
       right: 18px;
-      bottom: 14px;
-      left: 258px;
+      bottom: 16px;
+      left: 18px;
+      z-index: 0;
       pointer-events: none;
       border-radius: 24px;
       background:
-        linear-gradient(90deg, rgba(239,68,68,0.10) 0, rgba(239,68,68,0.10) 2px, transparent 2px, transparent 100%),
-        repeating-linear-gradient(180deg, rgba(59,130,246,0.055) 0, rgba(59,130,246,0.055) 1px, transparent 1px, transparent 36px),
-        rgba(255,255,255,0.72);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5);
-      backdrop-filter: blur(2px);
-      -webkit-backdrop-filter: blur(2px);
+        linear-gradient(90deg, rgba(239,68,68,0.08) 0, rgba(239,68,68,0.08) 2px, transparent 2px, transparent 100%),
+        repeating-linear-gradient(180deg, rgba(59,130,246,0.038) 0, rgba(59,130,246,0.038) 1px, transparent 1px, transparent 36px);
+      opacity: 0.68;
     }
 
     .page-header {
@@ -1886,9 +1884,9 @@
     </aside>
 
     <!-- 后端指示器（右下角浮动） -->
-    <div id="backend-indicator" class="backend-indicator-base checking" title="点击重新检测后端" onclick="(async()=>{_backendChecked=false;const b=await _selectBestBackend(true);if(IS_GITHUB_PAGES)API_BASE=b;})()">
+    <div id="backend-indicator" class="backend-indicator-base checking" title="点击重新检测后端连接状态" onclick="(async()=>{_backendChecked=false;const b=await _selectBestBackend(true);if(IS_GITHUB_PAGES)API_BASE=b;})()">
       <div class="bi-dot"></div>
-      <span class="bi-label">⏳ 检测中...</span>
+      <span class="bi-label">后端检测中</span>
       <span class="bi-ver" style="font-size:9px;opacity:0.6;margin-left:4px" id="bi-build-ver"></span>
     </div>
 
@@ -3288,16 +3286,17 @@
         <!-- 后端指示器样式 -->
         <style>
           .backend-indicator-base {
-            position: fixed; bottom: 16px; right: 16px; z-index: 99999;
+            position: fixed; bottom: 14px; right: 16px; z-index: 1200;
             display: flex; align-items: center; gap: 6px;
-            padding: 6px 14px; border-radius: 20px;
-            font-size: 12px; font-weight: 600;
+            padding: 5px 10px; border-radius: 999px;
+            font-size: 11px; font-weight: 600;
             color: #fff; cursor: pointer;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-            transition: all 0.3s ease; opacity: 0.85;
-            backdrop-filter: blur(8px); user-select: none;
+            box-shadow: 0 8px 18px rgba(15,23,42,0.14);
+            transition: all 0.25s ease; opacity: 0.74;
+            backdrop-filter: blur(6px); user-select: none;
+            border: 1px solid rgba(255,255,255,0.18);
           }
-          .backend-indicator-base:hover { opacity: 1; transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.25); }
+          .backend-indicator-base:hover { opacity: 0.94; transform: translateY(-1px); box-shadow: 0 10px 22px rgba(15,23,42,0.18); }
           .backend-indicator-base.tunnel { background: linear-gradient(135deg, #00b894, #00cec9); }
           .backend-indicator-base.render { background: linear-gradient(135deg, #6c5ce7, #a29bfe); }
           .backend-indicator-base.checking { background: linear-gradient(135deg, #636e72, #b2bec3); }
@@ -3310,8 +3309,9 @@
           @keyframes bi-pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
           @keyframes bi-spin { 0%{transform:rotate(0)} 100%{transform:rotate(360deg)} }
           .backend-indicator-base .bi-label { white-space: nowrap; }
+          .backend-indicator-base .bi-ver { opacity: 0.52 !important; }
           @media(max-width:768px) {
-            .backend-indicator-base { bottom: 68px; right: 10px; padding: 5px 10px; font-size: 11px; }
+            .backend-indicator-base { bottom: 72px; right: 10px; padding: 4px 8px; font-size: 10px; }
           }
         </style>
       </section>
@@ -4140,7 +4140,7 @@
       const el = document.getElementById('backend-indicator');
       if (!el) return;
       el.className = 'backend-indicator-base ' + type;
-      const labels = { tunnel: '🚀 Tunnel 直连', render: '☁️ Render 云端', checking: '⏳ 检测中...' };
+      const labels = { tunnel: '后端 · Tunnel', render: '后端 · Render', checking: '后端检测中' };
       const labelEl = el.querySelector('.bi-label');
       if (labelEl) labelEl.textContent = labels[type] || type;
       // 长按/双击显示诊断信息
