@@ -248,6 +248,29 @@
       margin-bottom: 16px;
     }
 
+    .dashboard-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .dashboard-hero-actions .btn {
+      min-height: 44px;
+      justify-content: center;
+    }
+
+    .dashboard-hero-secondary {
+      background: rgba(255,255,255,0.84);
+    }
+
+    .dashboard-hero-tip {
+      margin-top: 14px;
+      font-size: 13px;
+      color: #64748b;
+    }
+
     .dashboard-hero-tags {
       display: flex;
       flex-wrap: wrap;
@@ -1643,6 +1666,9 @@
       }
       .dashboard-hero-title { font-size: 22px; }
       .dashboard-hero-desc { font-size: 13px; line-height: 1.7; }
+      .dashboard-hero-actions { flex-direction: column; align-items: stretch; gap: 10px; }
+      .dashboard-hero-actions .btn { width: 100%; }
+      .dashboard-hero-tip { font-size: 12px; }
       .dashboard-hero-tags { gap: 8px; }
       .dashboard-hero-tag { font-size: 12px; padding: 7px 10px; }
       .dashboard-word-row,
@@ -1957,16 +1983,21 @@
       <section id="page-dashboard" class="page">
         <div class="page-header">
           <div>
-            <h2>📊 英语知识卡片 · 首页</h2>
-            <p class="subtitle">英语知识卡片生成与学习进度总览</p>
+            <h2>📊 英语知识卡片 · 工作台</h2>
+            <p class="subtitle">登录后即可开始生成、查看卡片与跟进进度</p>
           </div>
         </div>
 
         <div class="dashboard-hero">
           <div class="dashboard-hero-content">
-            <div class="dashboard-hero-title">让每一张 <span class="hl">英语知识卡</span> 都更像真实课堂里的学习材料</div>
-            <div class="dashboard-hero-desc">围绕单词、句型、语法与易错点，快速生成更适合小学英语教学场景的卡片内容。整体氛围保持清爽、专注、轻学习感。</div>
-            <button class="btn btn-primary dashboard-hero-cta" onclick="switchPage('knowledge-cards')">✨ 立即生成英语卡片</button>
+            <div class="dashboard-hero-title">登录后，先开始生成你的第一批 <span class="hl">英语知识卡</span></div>
+            <div class="dashboard-hero-desc">首屏保留最常用入口：先生成，再查看卡片库，最后跟进整体进度。这样新用户不会迷路，老用户也能直接开工。</div>
+            <div class="dashboard-hero-actions">
+              <button class="btn btn-primary dashboard-hero-cta" onclick="switchPage('knowledge-cards')">✨ 开始生成卡片</button>
+              <button class="btn btn-outline dashboard-hero-secondary" onclick="switchPage('card-lib')">🎴 查看卡片库</button>
+              <button class="btn btn-outline dashboard-hero-secondary" onclick="document.getElementById('stats-grid').scrollIntoView({ behavior: 'smooth', block: 'start' })">📈 查看进度</button>
+            </div>
+            <div class="dashboard-hero-tip">建议路径：先生成卡片，再去卡片库查看结果。</div>
           </div>
         </div>
 
