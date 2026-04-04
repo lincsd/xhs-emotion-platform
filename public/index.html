@@ -3347,8 +3347,9 @@
             <button class="btn btn-sm btn-primary" onclick="TemplateLibrary.openEditor()">✏️ 新建模板</button>
           </div>
         </div>
-        <div class="card" style="padding:10px 14px;margin-bottom:10px;border:1px dashed rgba(59,130,246,0.22);background:rgba(239,246,255,0.65);">
-          <span style="font-size:12px;color:#475569;">ℹ️ 本页仅用于模板样式管理，不展示英语知识卡片内容；英语卡片请前往「生成卡片」模块。</span>
+        <div class="card" style="padding:10px 14px;margin-bottom:10px;border:1px dashed rgba(59,130,246,0.22);background:rgba(239,246,255,0.65);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+          <span style="font-size:12px;color:#475569;">ℹ️ 本页仅用于模板样式管理，不展示英语知识卡片内容。</span>
+          <button class="btn btn-sm btn-primary" onclick="switchPage('knowledge-cards')">✨ 去生成卡片</button>
         </div>
         <!-- 分类筛选 -->
         <div class="card" style="padding:12px 16px;">
