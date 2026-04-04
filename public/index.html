@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260404h';
+      var BUILD='20260404i';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);
@@ -1952,7 +1952,7 @@
         <div class="page-header">
           <div>
             <h2>📊 英语知识卡片 · 首页</h2>
-            <p class="subtitle">卡片生成数据一览</p>
+            <p class="subtitle">英语知识卡片生成与学习进度总览</p>
           </div>
           <div class="btn-group">
             <button class="btn btn-primary" onclick="switchPage('knowledge-cards')">✨ 开始生成英语卡片</button>
@@ -2010,7 +2010,7 @@
 
         <!-- 年级进度 -->
         <div class="card" style="margin-bottom:16px;">
-          <h3 style="margin-bottom:16px;">📈 各年级生成进度</h3>
+          <h3 style="margin-bottom:16px;">📈 各年级英语卡片生成进度</h3>
           <div id="dash-grade-progress" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
             <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8f9fa;border-radius:10px;">
               <span style="font-weight:600;min-width:36px;">三上</span>
@@ -2065,7 +2065,7 @@
 
         <!-- 最近生成 -->
         <div class="card">
-          <h3 style="margin-bottom:16px;">🕐 最近生成的卡片</h3>
+          <h3 style="margin-bottom:16px;">🕐 最近生成的英语卡片</h3>
           <div id="recent-posts" style="display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;"></div>
         </div>
         <div id="dashboard-festivals" style="margin-top:16px;"></div>
@@ -4051,7 +4051,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260404h'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260404i'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
