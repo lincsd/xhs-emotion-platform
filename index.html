@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260404a';
+      var BUILD='20260404b';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);
@@ -18,17 +18,19 @@
   </script>
   <style>
     :root {
-      --primary: #ff2442;
-      --primary-light: #ffe4e8;
-      --bg: #f5f5f7;
+      --primary: #3b82f6;
+      --primary-light: #dbeafe;
+      --primary-dark: #2563eb;
+      --accent: #f59e0b;
+      --bg: #f0f4ff;
       --card: #ffffff;
-      --text: #333333;
-      --text-light: #888888;
-      --border: #e5e5e5;
-      --success: #52c41a;
-      --warning: #faad14;
-      --info: #1890ff;
-      --shadow: 0 2px 12px rgba(0,0,0,0.08);
+      --text: #1e293b;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+      --shadow: 0 2px 12px rgba(59,130,246,0.08);
       --radius: 12px;
     }
 
@@ -46,7 +48,7 @@
     
     .sidebar {
       width: 240px;
-      background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+      background: linear-gradient(180deg, #1e3a5f 0%, #0f2744 100%);
       color: white;
       padding: 0;
       position: fixed;
@@ -152,7 +154,7 @@
     }
 
     .btn-primary { background: var(--primary); color: white; }
-    .btn-primary:hover { background: #e61e3a; transform: translateY(-1px); }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
     .btn-success { background: var(--success); color: white; }
     .btn-success:hover { background: #45a814; }
     .btn-info { background: var(--info); color: white; }
@@ -188,12 +190,12 @@
       height: 3px;
     }
 
-    .stat-card:nth-child(1)::before { background: var(--primary); }
-    .stat-card:nth-child(2)::before { background: var(--info); }
-    .stat-card:nth-child(3)::before { background: var(--success); }
-    .stat-card:nth-child(4)::before { background: var(--warning); }
-    .stat-card:nth-child(5)::before { background: #722ed1; }
-    .stat-card:nth-child(6)::before { background: #eb2f96; }
+    .stat-card:nth-child(1)::before { background: #3b82f6; }
+    .stat-card:nth-child(2)::before { background: #10b981; }
+    .stat-card:nth-child(3)::before { background: #f59e0b; }
+    .stat-card:nth-child(4)::before { background: #8b5cf6; }
+    .stat-card:nth-child(5)::before { background: #06b6d4; }
+    .stat-card:nth-child(6)::before { background: #ec4899; }
 
     .stat-card .stat-icon { font-size: 28px; margin-bottom: 8px; }
     .stat-card .stat-value { font-size: 28px; font-weight: 700; }
@@ -1116,8 +1118,26 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fdfcfb 100%);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #a8c0ff 70%, #f0f4ff 100%);
       padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* 漂浮英文字母装饰 */
+    .login-page::before {
+      content: 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z';
+      position: absolute;
+      top: -20px; left: -20px; right: -20px; bottom: -20px;
+      font-size: 42px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.06);
+      word-spacing: 30px;
+      line-height: 1.8;
+      letter-spacing: 18px;
+      pointer-events: none;
+      transform: rotate(-12deg) scale(1.2);
+      user-select: none;
+      overflow: hidden;
     }
     .login-box {
       width: 100%;
@@ -1130,7 +1150,7 @@
     .login-box-header {
       text-align: center;
       padding: 36px 24px 20px;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f2744 100%);
       color: white;
     }
     .login-box-header h1 { font-size: 26px; margin-bottom: 4px; }
@@ -1320,7 +1340,7 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       height: 50px;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f2744 100%);
       color: white;
       z-index: 199;
       align-items: center;
@@ -3874,78 +3894,46 @@
     // ============ Skill 系统 — 多账号类型复用 ============
     const SKILL_TEMPLATES = {
       '情感': {
-        id: 'emotion', name: '情感', icon: '📚', color: '#ff2442',
+        id: 'emotion', name: '英语卡片', icon: '📚', color: '#3b82f6',
         title: '英语知识卡片平台',
         sidebarTitle: '📚 英语卡片',
         subtitle: 'AI 自动生成小学英语知识卡片',
-        // monetizationSubtitle 已改为自动生成: `${sk.name}账号系统化变现策略`
-        categoryLabel: '情感分类',
-        categories: ['治愈','成长','爱情','友情','自我','离别','温暖','释怀'],
-        categoryColors: { '治愈':'#FFB6C1','成长':'#90EE90','爱情':'#FF69B4','友情':'#87CEEB','自我':'#FFD700','离别':'#DEB887','温暖':'#FFA500','释怀':'#E6E6FA' },
-        categoryEmojis: { '治愈':'🌸','成长':'🌱','爱情':'💕','友情':'🤝','自我':'✨','离别':'🍂','温暖':'☀️','释怀':'🕊️' },
-        defaultCategory: '治愈',
-        imageStyles: { xiaohongshu:'小红书情感风格', minimalist:'极简文艺风', watercolor:'水彩插画风', gradient:'渐变文字风', photo:'治愈摄影风' },
+        categoryLabel: '年级',
+        categories: ['三年级上','三年级下','四年级上','四年级下','五年级上','五年级下','六年级上','六年级下'],
+        categoryColors: { '三年级上':'#3b82f6','三年级下':'#60a5fa','四年级上':'#10b981','四年级下':'#34d399','五年级上':'#f59e0b','五年级下':'#fbbf24','六年级上':'#8b5cf6','六年级下':'#a78bfa' },
+        categoryEmojis: { '三年级上':'📗','三年级下':'📘','四年级上':'📙','四年级下':'📕','五年级上':'📓','五年级下':'📔','六年级上':'📒','六年级下':'📖' },
+        defaultCategory: '三年级上',
+        imageStyles: { card:'知识卡片风格', minimalist:'极简清新风', watercolor:'水彩插画风', gradient:'渐变文字风', photo:'实景教学风' },
         imageStylePrompts: {
-          xiaohongshu: '小红书风格，柔和的色调，文艺感，适合情感类账号，干净的排版，高级感',
-          minimalist: '极简设计，大面积留白，一两个视觉元素，精致排版，高端感',
-          watercolor: '水彩画风格，柔和渐变，艺术感，手绘质感，唯美梦幻',
-          gradient: '现代渐变背景，霓虹色彩，文字艺术，潮流设计感',
-          photo: '高清摄影风格，自然光线，温暖色调，治愈系场景，生活气息'
+          card: '英语知识卡片风格，教育感，清晰排版，适合小学生学习',
+          minimalist: '极简设计，大面积留白，干净排版，适合教育内容',
+          watercolor: '水彩插画风格，温馨活泼，适合儿童',
+          gradient: '现代渐变背景，明亮色彩，活泼设计感',
+          photo: '实景教学风格，教室场景，真实学习氛围'
         },
         branding: {
-          niche: '小红书情感成长账号', audience: '20-35岁希望被治愈、获得情绪价值和成长启发的女生',
-          persona: '温柔但有边界感，像一个清醒又会共情的朋友', keywords: '治愈,成长,边界感,清醒,温柔坚定',
-          nichePlaceholder: '例如：治愈系情感 / 女性成长 / 清醒恋爱观',
-          audiencePlaceholder: '例如：20-35岁女生、失恋恢复期、想提升内核的人群',
-          personaPlaceholder: '例如：温柔知性、清醒通透、像深夜陪伴型朋友',
-          keywordsPlaceholder: '例如：治愈,清醒,边界感,成长,温柔坚定',
-          tagsPlaceholder: '治愈文字,情感语录,正能量',
-          previewChips: ['治愈语录','清醒成长','关系边界'],
-          avatarFallback: '🌸',
-          nameStyles: ['温柔治愈','高级故事感','简短好记','有记忆点'],
-          promptPrefix: '情感成长类账号',
-          avatarSuffix: '小红书情感成长账号头像，正方形构图，适合女性情感成长赛道，高级、干净、有记忆点，无文字，适合做账号头像。',
-          bannerSuffix: '为小红书个人主页顶部封面生成横版视觉图，宽屏构图，治愈、高级、统一审美，无文字，适合作为情感成长类账号主页封面。',
+          niche: '小学英语知识卡片', audience: '小学3-6年级学生及家长',
+          persona: '专业英语教师，耐心亲切', keywords: '英语,单词,语法,知识卡片,小学',
+          nichePlaceholder: '例如：小学英语知识卡片',
+          audiencePlaceholder: '例如：3-6年级小学生及家长',
+          personaPlaceholder: '例如：专业英语教师风格',
+          keywordsPlaceholder: '例如：英语,单词,语法,卡片',
+          tagsPlaceholder: '英语学习,知识卡片,小学英语',
+          previewChips: ['词汇卡片','语法讲解','考试真题'],
+          avatarFallback: '📚',
+          nameStyles: ['专业教育','趣味活泼','简短好记','有记忆点'],
+          promptPrefix: '小学英语教育类',
+          avatarSuffix: '英语教育平台头像，正方形构图，适合教育类，专业、亲切、有记忆点，无文字。',
+          bannerSuffix: '英语学习主题封面，横版构图，教育感，明亮清新，无文字。',
         },
-        aiRole: '拥有50万粉丝的小红书情感博主，擅长用共情力写出让人破防的治愈文案，深谙小红书情感赛道的爆款规律和算法推荐机制',
-        aiNiche: '情感类',
-        searchKeywords: (cat) => [`小红书 ${cat} 情感文案 爆款 高赞`, `小红书 ${cat} 语录 万赞 治愈`, `小红书 情感博主 ${cat} 涨粉 热门`, `site:xiaohongshu.com ${cat} 情感 点赞收藏`, `小红书 ${cat} 文案 模板 句式`],
-        postingTimeTips: {
-          '治愈': '💡 治愈类内容在深夜和清晨效果最佳，此时用户情感最细腻',
-          '成长': '💡 成长类内容适合早起时段，用户在新的一天开始时更容易受到激励',
-          '爱情': '💡 爱情类内容在晚间 20:00-22:00 互动率最高，这是情侣和单身群体最活跃的时段',
-          '友情': '💡 友情类内容在午休和晚间效果好，此时大家容易想起朋友',
-          '自我': '💡 自我类内容在独处时段（早晨/深夜）更能引发共鸣',
-          '离别': '💡 离别类内容适合深夜发布，夜深人静时情感共鸣更强',
-          '温暖': '💡 温暖类内容在一天开始和结束时效果最好，给人力量',
-          '释怀': '💡 释怀类内容适合傍晚后发布，下班后人们更愿意思考人生',
-        },
-        postingTimeBonus: {
-          '治愈': { '07:00': 2, '22:00': 3, '23:00': 2 },
-          '成长': { '07:00': 3, '08:00': 2, '21:00': 1 },
-          '爱情': { '20:00': 2, '21:00': 3, '22:00': 2 },
-          '友情': { '12:00': 2, '19:00': 2, '20:00': 1 },
-          '自我': { '07:00': 2, '21:00': 2, '22:00': 2 },
-          '离别': { '21:00': 2, '22:00': 3, '23:00': 2 },
-          '温暖': { '07:00': 2, '12:00': 1, '20:00': 2 },
-          '释怀': { '18:00': 1, '21:00': 2, '22:00': 2 },
-        },
+        aiRole: '专业小学英语教师，擅长将知识点转化为生动的卡片内容',
+        aiNiche: '英语教育类',
+        searchKeywords: (cat) => [`小学 ${cat} 英语 单词 卡片`, `小学英语 ${cat} 知识点 总结`],
+        postingTimeTips: {},
+        postingTimeBonus: {},
         monetization: {
-          strategies: [
-            { name:'广告合作', icon:'📢', threshold:'1000粉丝起', income:'200-2000元/条', description:'品牌方找你投放情感类软文，融入产品推荐', tips:['保持内容调性一致','选择与情感相关的品牌','报价参考: 粉丝数×0.1-0.3'] },
-            { name:'蒲公英平台', icon:'🌻', threshold:'1000粉丝+', income:'100-5000元/单', description:'小红书官方创作者平台，接品牌推广单', tips:['完善创作者资料','保持稳定更新频率','专注情感垂类提高报价'] },
-            { name:'付费咨询', icon:'💬', threshold:'5000粉丝+', income:'50-200元/次', description:'提供情感咨询、恋爱建议等付费服务', tips:['需要一定的专业背景','可以从免费问答开始积累口碑','逐步转化为付费'] },
-            { name:'课程/电子书', icon:'📚', threshold:'10000粉丝+', income:'被动收入', description:'出品情感类课程、恋爱指南等知识付费产品', tips:['整理热门内容成体系','定价29-199元','通过笔记引流至付费内容'] },
-            { name:'表情包/壁纸', icon:'🎨', threshold:'3000粉丝+', income:'1-10元/份', description:'设计情感主题壁纸、文字表情包等数字产品', tips:['利用封面文字风格延展','在笔记中自然引流','薄利多销策略'] },
-            { name:'直播打赏', icon:'🎙️', threshold:'1000粉丝+', income:'不定', description:'开设情感电台、深夜谈心等直播', tips:['固定时间直播培养用户习惯','可读粉丝投稿故事','搭配文字背景增强氛围'] },
-            { name:'账号矩阵', icon:'📱', threshold:'积累经验后', income:'倍增收益', description:'用相同模式批量运营多个情感子账号', tips:['每个号定位稍有差异','共享内容库提高效率','本系统支持多账号管理'] },
-          ],
-          roadmap: [
-            { phase:'冷启动期', duration:'1-2个月', followers:'0-1000', tasks:['每天发2-3条优质笔记','选好4-5个核心标签','研究爆款笔记套路','积极互动回复评论'] },
-            { phase:'成长期', duration:'2-4个月', followers:'1000-5000', tasks:['入驻蒲公英平台','开始接广告合作','优化内容形式','建立粉丝社群'] },
-            { phase:'变现期', duration:'4-6个月', followers:'5000-20000', tasks:['稳定广告收入','开发付费产品','尝试直播','考虑账号矩阵'] },
-            { phase:'规模化', duration:'6个月+', followers:'20000+', tasks:['团队化运营','多渠道变现','品牌化发展','IP打造'] },
-          ]
+          strategies: [],
+          roadmap: []
         }
       },
       '美食': {
@@ -4689,9 +4677,9 @@
     function applySkillToUI() {
       const sk = getCurrentSkill();
       // 页面标题
-      document.title = sk.title;
+      document.title = '英语知识卡片平台';
       // 侧边栏标题（桌面 + 手机端抽屉都同步）
-      document.querySelectorAll('.sidebar-header h1').forEach(el => el.textContent = sk.sidebarTitle);
+      document.querySelectorAll('.sidebar-header h1').forEach(el => el.textContent = '📚 英语卡片');
       document.querySelectorAll('.sidebar-header p').forEach(el => el.textContent = '小学英语知识卡片平台');
       // 生成器副标题
       const genSub = document.querySelector('#page-generator .subtitle');
