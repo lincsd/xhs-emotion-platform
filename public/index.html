@@ -10278,16 +10278,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         html += '<div id="pl-gen-result" style="display:none;margin-bottom:16px;border:1px solid #e8e8e8;border-radius:12px;overflow:hidden;text-align:center;background:#fafafa"></div>';
         html += '<div id="pl-gen-prompt" style="display:none;margin-bottom:16px"></div>';
 
-        // 元数据
-        html += '<div style="background:#f0f8ff;border-radius:10px;padding:14px"><div style="font-weight:600;margin-bottom:8px;font-size:14px">📊 元数据</div>';
-        html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px">';
-        html += '<div><strong>card_id:</strong> ' + card.full_id + '</div>';
-        html += '<div><strong>题型:</strong> ' + card.type + '</div>';
-        html += '<div><strong>难度:</strong> ' + card.difficulty + '/5</div>';
-        html += '<div><strong>单元:</strong> 第' + card.unit_id + '单元</div>';
-        html += '<div><strong>Prompt版本:</strong> ' + TEMPLATE_INFO.version + '</div>';
-        html += '<div><strong>模型:</strong> ' + TEMPLATE_INFO.textModel + ' \u2192 ' + TEMPLATE_INFO.imageModel.split(' (')[0] + '</div>';
-        html += '</div></div>';
+
 
         box.innerHTML = html;
         overlay.style.display = '';
@@ -10464,18 +10455,9 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           if (!data) throw new Error('v3\u6d41\u6c34\u7ebf\u8d85\u65f6\uff08>300s\uff09\uff0c\u8bf7\u91cd\u8bd5');
           if (!data.ok) throw new Error(data.error || 'v3\u6d41\u6c34\u7ebf\u5931\u8d25');
 
-          // 显示流水线日志
-          var pipelineHtml = '';
+          // 流水线日志（隐藏，仅console输出）
           if (data.pipeline && data.pipeline.length) {
-            pipelineHtml = '<div style="background:#f0f4ff;border:1px solid rgba(102,126,234,.2);border-radius:10px;padding:14px;margin-bottom:12px">' +
-              '<div style="font-weight:600;font-size:13px;margin-bottom:8px;color:var(--primary)">\ud83d\udee0\ufe0f v3 \u6d41\u6c34\u7ebf\u65e5\u5fd7</div>' +
-              '<div style="font-size:12px;color:#555;line-height:1.8">' +
-              data.pipeline.map(function(l){ return '\u2022 ' + l; }).join('<br>') +
-              '</div></div>';
-          }
-          if (promptDiv) {
-            promptDiv.style.display = '';
-            promptDiv.innerHTML = pipelineHtml;
+            console.log('[v3] pipeline:', data.pipeline);
           }
 
           // 显示结果图片 + 质量信息
