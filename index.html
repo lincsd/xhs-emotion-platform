@@ -3199,7 +3199,6 @@
             <div class="pl-tab" data-tab="prompts" onclick="PromptLib.switchTab('prompts')" style="padding:10px 20px;cursor:pointer;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--text-light);font-size:14px">📝 Prompt 记录</div>
             <div class="pl-tab" data-tab="template" onclick="PromptLib.switchTab('template')" style="padding:10px 20px;cursor:pointer;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--text-light);font-size:14px">📐 当前模板</div>
             <div class="pl-tab" data-tab="changelog" onclick="PromptLib.switchTab('changelog')" style="padding:10px 20px;cursor:pointer;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--text-light);font-size:14px">📋 迭代日志</div>
-            <div class="pl-tab" data-tab="pipeline" onclick="PromptLib.switchTab('pipeline')" style="padding:10px 20px;cursor:pointer;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--text-light);font-size:14px">🤖 五角色流水线</div>
           </div>
 
           <!-- 总览面板 -->
@@ -3210,8 +3209,7 @@
           <div id="pl-panel-template" class="pl-panel" style="display:none"></div>
           <!-- 迭代日志面板 -->
           <div id="pl-panel-changelog" class="pl-panel" style="display:none"></div>
-          <!-- 五角色流水线面板 -->
-          <div id="pl-panel-pipeline" class="pl-panel" style="display:none"></div>
+
         </div>
         <!-- Prompt 详情弹窗 -->
         <div id="pl-detail-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.45);z-index:9999;overflow-y:auto" onclick="if(event.target===this)this.style.display='none'">
@@ -10268,21 +10266,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           html += '</div>';
         }
 
-        // ─── 五角色 Prompt 记录 ───
-        const rec = PROMPT_RECORDS[card.full_id];
-        if (rec && rec.briefs) {
-          const b = rec.briefs;
-          html += _renderPromptRecordHTML(rec);
-        } else {
-          // 没有 Prompt 记录，显示生成按钮
-          html += '<div id="pl-prompt-gen-area" style="margin-bottom:16px;border:2px dashed rgba(102,126,234,.4);border-radius:12px;padding:24px;text-align:center;background:linear-gradient(135deg,rgba(102,126,234,.05),rgba(118,75,162,.05))">';
-          html += '<div style="font-size:32px;margin-bottom:8px">🤖</div>';
-          html += '<div style="font-weight:600;font-size:15px;color:#667eea;margin-bottom:6px">暂无五角色流水线记录</div>';
-          html += '<div style="font-size:12px;color:#999;margin-bottom:16px">点击下方按钮，AI将依次调用 教研专家(R1) → 教学设计师(R2) → 小红书策划(R3) 三个角色<br>为这张知识卡片生成专属的Prompt工程分析</div>';
-          html += '<button id="pl-gen-prompt-btn" onclick="PromptLib.generatePromptRecord(\'' + card.full_id + '\')" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;padding:12px 32px;border-radius:24px;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 4px 16px rgba(102,126,234,.3);transition:all .2s" onmouseenter="this.style.transform=\'scale(1.05)\'" onmouseleave="this.style.transform=\'scale(1)\'">🧪 生成Prompt记录 (R1→R2→R3)</button>';
-          html += '<div id="pl-gen-prompt-status" style="margin-top:12px;font-size:13px;color:#999"></div>';
-          html += '</div>';
-        }
+
 
         // 生成图片 + 生成笔记按钮
         html += '<div style="margin-bottom:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">';
