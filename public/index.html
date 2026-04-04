@@ -1884,8 +1884,8 @@
           <span class="icon">✨</span> 生成卡片
           <span style="margin-left:auto;background:rgba(255,255,255,0.2);padding:2px 8px;border-radius:10px;font-size:11px;">核心</span>
         </div>
-        <div class="nav-item" data-page="card-lib">
-          <span class="icon">🎴</span> 卡片库
+        <div class="nav-item" data-page="card-lib" style="display:none;">
+          <span class="icon">🎴</span> 模板管理
         </div>
         <div class="nav-item" data-page="invite">
           <span class="icon">💰</span> 分享赚钱
@@ -1943,7 +1943,7 @@
       <div class="nav-group">
         <div class="nav-item mob-nav active" data-page="dashboard" onclick="mobileSwitchPage('dashboard')"><span class="icon">📊</span> 首页</div>
         <div class="nav-item mob-nav" data-page="knowledge-cards" onclick="mobileSwitchPage('knowledge-cards')"><span class="icon">✨</span> 生成卡片</div>
-        <div class="nav-item mob-nav" data-page="card-lib" onclick="mobileSwitchPage('card-lib')"><span class="icon">🎴</span> 卡片库</div>
+        <div class="nav-item mob-nav" data-page="card-lib" onclick="mobileSwitchPage('card-lib')" style="display:none;"><span class="icon">🎴</span> 模板管理</div>
         <div class="nav-item mob-nav" data-page="invite" onclick="mobileSwitchPage('invite')"><span class="icon">💰</span> 分享赚钱</div>
         <div class="nav-item mob-nav" data-page="account" onclick="mobileSwitchPage('account')" style="display:none;"><span class="icon">👤</span> 我的账户</div>
         <div class="nav-item mob-nav" onclick="openModal('modal-settings'); toggleMobileDrawer();" style="display:none;"><span class="icon">⚙️</span> API 设置</div>
@@ -1965,8 +1965,8 @@
         <div class="mobile-tab" data-page="knowledge-cards" onclick="mobileSwitchPage('knowledge-cards')">
           <span class="mob-icon">✨</span><span class="mob-label">生成</span>
         </div>
-        <div class="mobile-tab" data-page="card-lib" onclick="mobileSwitchPage('card-lib')">
-          <span class="mob-icon">🎴</span><span class="mob-label">卡片库</span>
+        <div class="mobile-tab" data-page="card-lib" onclick="mobileSwitchPage('card-lib')" style="display:none;">
+          <span class="mob-icon">🎴</span><span class="mob-label">模板</span>
         </div>
         <div class="mobile-tab" data-page="invite" onclick="mobileSwitchPage('invite')">
           <span class="mob-icon">💰</span><span class="mob-label">分享</span>
@@ -1991,13 +1991,12 @@
         <div class="dashboard-hero">
           <div class="dashboard-hero-content">
             <div class="dashboard-hero-title">登录后，先开始生成你的第一批 <span class="hl">英语知识卡</span></div>
-            <div class="dashboard-hero-desc">首屏保留最常用入口：先生成，再查看卡片库，最后跟进整体进度。这样新用户不会迷路，老用户也能直接开工。</div>
+            <div class="dashboard-hero-desc">首屏保留最常用入口：先生成英语卡片，再跟进整体进度。这样新用户不会迷路，老用户也能直接开工。</div>
             <div class="dashboard-hero-actions">
               <button class="btn btn-primary dashboard-hero-cta" onclick="switchPage('knowledge-cards')">✨ 开始生成卡片</button>
-              <button class="btn btn-outline dashboard-hero-secondary" onclick="switchPage('card-lib')">🎴 查看卡片库</button>
               <button class="btn btn-outline dashboard-hero-secondary" onclick="document.getElementById('stats-grid').scrollIntoView({ behavior: 'smooth', block: 'start' })">📈 查看进度</button>
             </div>
-            <div class="dashboard-hero-tip">建议路径：先生成卡片，再去卡片库查看结果。</div>
+            <div class="dashboard-hero-tip">建议路径：先生成卡片，再在英语卡片页查看结果。</div>
           </div>
         </div>
 
@@ -17134,7 +17133,7 @@ Style: ${stylePrompt}
     const PAGE_TITLES = {
       dashboard: '📊 首页',
       'knowledge-cards': '✨ 生成卡片',
-      'card-lib': '🎴 卡片库',
+      'card-lib': '🎴 模板管理',
       invite: '💰 分享赚钱',
       account: '👤 我的账户',
       generator: '✨ 内容生成', posts: '📝 笔记管理',
