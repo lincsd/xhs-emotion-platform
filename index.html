@@ -6,11 +6,11 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>小红书情感账号 · 运营管理平台</title>
+  <title>英语知识卡片平台</title>
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260401a';
+      var BUILD='20260404a';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);
@@ -1580,106 +1580,30 @@
     <!-- ===== 侧边栏 ===== -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <h1>🌸 情感运营台</h1>
-        <p>小红书自动化管理</p>
-        <select id="skill-switcher" class="form-control" onchange="switchSkill(this.value)" style="margin-top:8px; font-size:13px; padding:6px 8px; background:rgba(255,255,255,0.15); color:#fff; border:1px solid rgba(255,255,255,0.25); border-radius:8px; cursor:pointer;">
+        <h1>📚 英语卡片</h1>
+        <p>小学英语知识卡片平台</p>
+        <!-- skill-switcher 保留隐藏，供JS兼容 -->
+        <select id="skill-switcher" class="form-control" onchange="switchSkill(this.value)" style="display:none;">
           <option value="情感">🌸 情感账号</option>
-          <option value="美食">🍜 美食账号</option>
-          <option value="旅行">✈️ 旅行账号</option>
-          <option value="健身">💪 健身账号</option>
-          <option value="穿搭">👗 穿搭账号</option>
-          <option value="科技数码">📱 科技数码账号</option>
-          <option value="电商带货">🛒 电商带货账号</option>
-          <option value="玄学">🔮 玄学账号</option>
-          <option value="招聘">💼 招聘账号</option>
-          <option value="推广">📣 推广账号</option>
         </select>
       </div>
       <div class="nav-group">
-        <div class="nav-group-title">核心功能</div>
         <div class="nav-item active" data-page="dashboard">
-          <span class="icon">📊</span> 数据看板
-        </div>
-        <div class="nav-item" data-page="generator">
-          <span class="icon">✨</span> 内容生成
-        </div>
-        <div class="nav-item" data-page="posts">
-          <span class="icon">📝</span> 笔记管理
-        </div>
-        <div class="nav-item" data-page="calendar">
-          <span class="icon">📅</span> 发布日历
-        </div>
-      </div>
-      <div class="nav-group">
-        <div class="nav-group-title">变现管理</div>
-        <div class="nav-item" data-page="income">
-          <span class="icon">💰</span> 收入追踪
-        </div>
-        <div class="nav-item" data-page="monetization">
-          <span class="icon">🚀</span> 变现方案
-        </div>
-        <div class="nav-item" data-page="purchase">
-          <span class="icon">💎</span> 积分商城
-        </div>
-        <div class="nav-item" data-page="invite">
-          <span class="icon">🎁</span> 邀请赚钱
-        </div>
-      </div>
-      <div class="nav-group">
-        <div class="nav-group-title">智能工具</div>
-        <div class="nav-item" data-page="forbidden">
-          <span class="icon">🚫</span> 违禁词检测
-        </div>
-        <div class="nav-item" data-page="score">
-          <span class="icon">💯</span> 笔记评分
-        </div>
-        <div class="nav-item" data-page="trending">
-          <span class="icon">🔥</span> 热门话题
-        </div>
-        <div class="nav-item" data-page="polish">
-          <span class="icon">🪄</span> 内容优化
-        </div>
-        <div class="nav-item" data-page="content-plan">
-          <span class="icon">📋</span> 内容规划
-        </div>
-        <div class="nav-item" data-page="img-tool">
-          <span class="icon">🖼️</span> 图片优化
-        </div>
-        <div class="nav-item" data-page="card-lib">
-          <span class="icon">🎴</span> 卡片模板库
-        </div>
-        <div class="nav-item" data-page="ai-card">
-          <span class="icon">🃏</span> AI智能卡片
+          <span class="icon">📊</span> 首页
         </div>
         <div class="nav-item" data-page="knowledge-cards">
-          <span class="icon">📚</span> 知识卡片
+          <span class="icon">✨</span> 生成卡片
+          <span style="margin-left:auto;background:rgba(255,255,255,0.2);padding:2px 8px;border-radius:10px;font-size:11px;">核心</span>
         </div>
-        <div class="nav-item" data-page="prompt-lib">
-          <span class="icon">🧪</span> Prompt工程库
+        <div class="nav-item" data-page="card-lib">
+          <span class="icon">🎴</span> 卡片库
         </div>
-        <div class="nav-item" data-page="note-workshop">
-          <span class="icon">📝</span> 笔记工坊
-        </div>
-      </div>
-      <div class="nav-group">
-        <div class="nav-group-title">账号管理</div>
-        <div class="nav-item" data-page="branding">
-          <span class="icon">🎀</span> 账号包装
+        <div class="nav-item" data-page="invite">
+          <span class="icon">💰</span> 分享赚钱
+          <span style="margin-left:auto;background:rgba(245,158,11,0.4);padding:2px 8px;border-radius:10px;font-size:11px;">赚💎</span>
         </div>
         <div class="nav-item" data-page="account">
-          <span class="icon">📈</span> 账号数据
-        </div>
-        <div class="nav-item" data-page="multi-account">
-          <span class="icon">👥</span> 多账号管理
-        </div>
-        <div class="nav-item" data-page="promo" id="sidebar-promo-nav" style="display:none;">
-          <span class="icon">📢</span> 推广物料
-        </div>
-        <div class="nav-item" onclick="openModal('modal-templates')" style="cursor:pointer;">
-          <span class="icon">⭐</span> 模板库
-        </div>
-        <div class="nav-item" onclick="openModal('modal-export')" style="cursor:pointer;">
-          <span class="icon">📥</span> 数据导出
+          <span class="icon">👤</span> 我的账户
         </div>
       </div>
       <div class="nav-group" style="margin-top:auto; border-top:1px solid rgba(255,255,255,0.1); padding-top:12px;">
@@ -1714,18 +1638,9 @@
     <!-- ===== 手机端顶部栏 ===== -->
     <div class="mobile-top-bar" id="mobile-top-bar">
       <button class="mob-hamburger" onclick="toggleMobileDrawer()">☰</button>
-      <div class="mob-title" id="mob-page-title">📊 数据看板</div>
-      <select class="mob-skill-sw" id="mob-skill-switcher" onchange="switchSkill(this.value)">
+      <div class="mob-title" id="mob-page-title">📊 首页</div>
+      <select class="mob-skill-sw" id="mob-skill-switcher" onchange="switchSkill(this.value)" style="display:none;">
         <option value="情感">🌸 情感</option>
-        <option value="美食">🍜 美食</option>
-        <option value="旅行">✈️ 旅行</option>
-        <option value="健身">💪 健身</option>
-        <option value="穿搭">👗 穿搭</option>
-        <option value="科技数码">📱 科技数码</option>
-        <option value="电商带货">🛒 电商带货</option>
-        <option value="玄学">🔮 玄学</option>
-        <option value="招聘">💼 招聘</option>
-        <option value="推广">📣 推广</option>
       </select>
     </div>
 
@@ -1733,41 +1648,15 @@
     <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" onclick="toggleMobileDrawer()"></div>
     <nav class="mobile-drawer" id="mobile-drawer">
       <div class="sidebar-header">
-        <h1>🌸 情感运营台</h1>
-        <p>小红书自动化管理</p>
+        <h1>📚 英语卡片</h1>
+        <p>小学英语知识卡片平台</p>
       </div>
       <div class="nav-group">
-        <div class="nav-group-title">核心功能</div>
-        <div class="nav-item mob-nav active" data-page="dashboard" onclick="mobileSwitchPage('dashboard')"><span class="icon">📊</span> 数据看板</div>
-        <div class="nav-item mob-nav" data-page="generator" onclick="mobileSwitchPage('generator')"><span class="icon">✨</span> 内容生成</div>
-        <div class="nav-item mob-nav" data-page="posts" onclick="mobileSwitchPage('posts')"><span class="icon">📝</span> 笔记管理</div>
-        <div class="nav-item mob-nav" data-page="calendar" onclick="mobileSwitchPage('calendar')"><span class="icon">📅</span> 发布日历</div>
-      </div>
-      <div class="nav-group">
-        <div class="nav-group-title">变现管理</div>
-        <div class="nav-item mob-nav" data-page="income" onclick="mobileSwitchPage('income')"><span class="icon">💰</span> 收入追踪</div>
-        <div class="nav-item mob-nav" data-page="monetization" onclick="mobileSwitchPage('monetization')"><span class="icon">🚀</span> 变现方案</div>
-        <div class="nav-item mob-nav" data-page="purchase" onclick="mobileSwitchPage('purchase')"><span class="icon">💎</span> 积分商城</div>
-        <div class="nav-item mob-nav" data-page="invite" onclick="mobileSwitchPage('invite')"><span class="icon">🎁</span> 邀请赚钱</div>
-      </div>
-      <div class="nav-group">
-        <div class="nav-group-title">智能工具</div>
-        <div class="nav-item mob-nav" data-page="forbidden" onclick="mobileSwitchPage('forbidden')"><span class="icon">🚫</span> 违禁词检测</div>
-        <div class="nav-item mob-nav" data-page="score" onclick="mobileSwitchPage('score')"><span class="icon">💯</span> 笔记评分</div>
-        <div class="nav-item mob-nav" data-page="trending" onclick="mobileSwitchPage('trending')"><span class="icon">🔥</span> 热门话题</div>
-        <div class="nav-item mob-nav" data-page="polish" onclick="mobileSwitchPage('polish')"><span class="icon">🪄</span> 内容优化</div>
-        <div class="nav-item mob-nav" data-page="content-plan" onclick="mobileSwitchPage('content-plan')"><span class="icon">📋</span> 内容规划</div>
-        <div class="nav-item mob-nav" data-page="img-tool" onclick="mobileSwitchPage('img-tool')"><span class="icon">🖼️</span> 图片优化</div>
-        <div class="nav-item mob-nav" data-page="card-lib" onclick="mobileSwitchPage('card-lib')"><span class="icon">🎴</span> 卡片模板库</div>
-        <div class="nav-item mob-nav" data-page="ai-card" onclick="mobileSwitchPage('ai-card')"><span class="icon">🃏</span> AI智能卡片</div>
-        <div class="nav-item mob-nav" data-page="knowledge-cards" onclick="mobileSwitchPage('knowledge-cards')"><span class="icon">📚</span> 知识卡片</div>
-      </div>
-      <div class="nav-group">
-        <div class="nav-group-title">账号管理</div>
-        <div class="nav-item mob-nav" data-page="branding" onclick="mobileSwitchPage('branding')"><span class="icon">🎀</span> 账号包装</div>
-        <div class="nav-item mob-nav" data-page="account" onclick="mobileSwitchPage('account')"><span class="icon">📈</span> 账号数据</div>
-        <div class="nav-item mob-nav" data-page="multi-account" onclick="mobileSwitchPage('multi-account')"><span class="icon">👥</span> 多账号管理</div>
-        <div class="nav-item mob-nav" data-page="promo" onclick="mobileSwitchPage('promo')" id="drawer-promo-nav" style="display:none;"><span class="icon">📢</span> 推广物料</div>
+        <div class="nav-item mob-nav active" data-page="dashboard" onclick="mobileSwitchPage('dashboard')"><span class="icon">📊</span> 首页</div>
+        <div class="nav-item mob-nav" data-page="knowledge-cards" onclick="mobileSwitchPage('knowledge-cards')"><span class="icon">✨</span> 生成卡片</div>
+        <div class="nav-item mob-nav" data-page="card-lib" onclick="mobileSwitchPage('card-lib')"><span class="icon">🎴</span> 卡片库</div>
+        <div class="nav-item mob-nav" data-page="invite" onclick="mobileSwitchPage('invite')"><span class="icon">💰</span> 分享赚钱</div>
+        <div class="nav-item mob-nav" data-page="account" onclick="mobileSwitchPage('account')"><span class="icon">👤</span> 我的账户</div>
         <div class="nav-item mob-nav" onclick="openModal('modal-settings'); toggleMobileDrawer();"><span class="icon">⚙️</span> API 设置</div>
       </div>
       <div class="drawer-credits-line" id="drawer-credits" onclick="openModal('modal-redeem'); toggleMobileDrawer();" style="display:none;">
@@ -1782,19 +1671,19 @@
     <div class="mobile-bottom-nav" id="mobile-bottom-nav">
       <div class="mobile-bottom-nav-inner">
         <div class="mobile-tab active" data-page="dashboard" onclick="mobileSwitchPage('dashboard')">
-          <span class="mob-icon">📊</span><span class="mob-label">看板</span>
+          <span class="mob-icon">📊</span><span class="mob-label">首页</span>
         </div>
-        <div class="mobile-tab" data-page="generator" onclick="mobileSwitchPage('generator')">
+        <div class="mobile-tab" data-page="knowledge-cards" onclick="mobileSwitchPage('knowledge-cards')">
           <span class="mob-icon">✨</span><span class="mob-label">生成</span>
         </div>
-        <div class="mobile-tab" data-page="posts" onclick="mobileSwitchPage('posts')">
-          <span class="mob-icon">📝</span><span class="mob-label">笔记</span>
+        <div class="mobile-tab" data-page="card-lib" onclick="mobileSwitchPage('card-lib')">
+          <span class="mob-icon">🎴</span><span class="mob-label">卡片库</span>
         </div>
-        <div class="mobile-tab" data-page="calendar" onclick="mobileSwitchPage('calendar')">
-          <span class="mob-icon">📅</span><span class="mob-label">日历</span>
+        <div class="mobile-tab" data-page="invite" onclick="mobileSwitchPage('invite')">
+          <span class="mob-icon">💰</span><span class="mob-label">分享</span>
         </div>
-        <div class="mobile-tab" data-page="more" onclick="toggleMobileDrawer()">
-          <span class="mob-icon">☰</span><span class="mob-label">更多</span>
+        <div class="mobile-tab" data-page="account" onclick="mobileSwitchPage('account')">
+          <span class="mob-icon">👤</span><span class="mob-label">账户</span>
         </div>
       </div>
     </div>
@@ -1805,58 +1694,100 @@
       <section id="page-dashboard" class="page">
         <div class="page-header">
           <div>
-            <h2>📊 数据看板</h2>
-            <p class="subtitle">账号运营数据一览</p>
+            <h2>📊 英语知识卡片 · 首页</h2>
+            <p class="subtitle">卡片生成数据一览</p>
           </div>
           <div class="btn-group">
-            <button class="btn btn-primary" onclick="switchPage('generator')">✨ 生成笔记</button>
+            <button class="btn btn-primary" onclick="switchPage('knowledge-cards')">✨ 生成卡片</button>
           </div>
         </div>
 
         <div class="stat-grid" id="stats-grid">
           <div class="stat-card">
-            <div class="stat-icon">📝</div>
+            <div class="stat-icon">🎴</div>
             <div class="stat-value" id="stat-total">0</div>
-            <div class="stat-label">总笔记数</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon">📋</div>
-            <div class="stat-value" id="stat-draft">0</div>
-            <div class="stat-label">草稿</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon">⏰</div>
-            <div class="stat-value" id="stat-scheduled">0</div>
-            <div class="stat-label">已排期</div>
+            <div class="stat-label">已生成卡片</div>
           </div>
           <div class="stat-card">
             <div class="stat-icon">✅</div>
-            <div class="stat-value" id="stat-published">0</div>
-            <div class="stat-label">已发布</div>
+            <div class="stat-value" id="stat-draft" style="color:#52c41a">--%</div>
+            <div class="stat-label">质量达标率</div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">💰</div>
-            <div class="stat-value" id="stat-income">¥0</div>
-            <div class="stat-label">总收入</div>
+            <div class="stat-icon">🚫</div>
+            <div class="stat-value" id="stat-scheduled" style="color:#1890ff">--%</div>
+            <div class="stat-label">去Banner率</div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">📅</div>
-            <div class="stat-value" id="stat-month-income">¥0</div>
-            <div class="stat-label">本月收入</div>
+            <div class="stat-icon">📊</div>
+            <div class="stat-value" id="stat-published">--</div>
+            <div class="stat-label">平均质量分</div>
           </div>
         </div>
 
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
-          <div class="card">
-            <h3 style="margin-bottom:16px;">📌 最近笔记</h3>
-            <div id="recent-posts"></div>
-          </div>
-          <div class="card">
-            <h3 style="margin-bottom:16px;">📊 分类分布</h3>
-            <div id="category-chart"></div>
+        <!-- 年级进度 -->
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="margin-bottom:16px;">📈 各年级生成进度</h3>
+          <div id="dash-grade-progress" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8f9fa;border-radius:10px;">
+              <span style="font-weight:600;min-width:36px;">三上</span>
+              <div style="flex:1;height:8px;background:#e5e5e5;border-radius:4px;overflow:hidden;"><div style="width:0%;height:100%;background:var(--success);border-radius:4px;transition:width 0.6s" class="dash-grade-bar" data-grade="3A"></div></div>
+              <span style="font-size:12px;color:#888;min-width:48px;text-align:right" class="dash-grade-label" data-grade="3A">0%</span>
+              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">开始</button>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8f9fa;border-radius:10px;">
+              <span style="font-weight:600;min-width:36px;">三下</span>
+              <div style="flex:1;height:8px;background:#e5e5e5;border-radius:4px;overflow:hidden;"><div style="width:0%;height:100%;background:var(--success);border-radius:4px;transition:width 0.6s" class="dash-grade-bar" data-grade="3B"></div></div>
+              <span style="font-size:12px;color:#888;min-width:48px;text-align:right" class="dash-grade-label" data-grade="3B">0%</span>
+              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">开始</button>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8f9fa;border-radius:10px;">
+              <span style="font-weight:600;min-width:36px;">四上</span>
+              <div style="flex:1;height:8px;background:#e5e5e5;border-radius:4px;overflow:hidden;"><div style="width:0%;height:100%;background:var(--info);border-radius:4px;transition:width 0.6s" class="dash-grade-bar" data-grade="4A"></div></div>
+              <span style="font-size:12px;color:#888;min-width:48px;text-align:right" class="dash-grade-label" data-grade="4A">0%</span>
+              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">开始</button>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8f9fa;border-radius:10px;">
+              <span style="font-weight:600;min-width:36px;">四下</span>
+              <div style="flex:1;height:8px;background:#e5e5e5;border-radius:4px;overflow:hidden;"><div style="width:0%;height:100%;background:var(--info);border-radius:4px;transition:width 0.6s" class="dash-grade-bar" data-grade="4B"></div></div>
+              <span style="font-size:12px;color:#888;min-width:48px;text-align:right" class="dash-grade-label" data-grade="4B">0%</span>
+              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">开始</button>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8f9fa;border-radius:10px;">
+              <span style="font-weight:600;min-width:36px;">五上</span>
+              <div style="flex:1;height:8px;background:#e5e5e5;border-radius:4px;overflow:hidden;"><div style="width:0%;height:100%;background:var(--warning);border-radius:4px;transition:width 0.6s" class="dash-grade-bar" data-grade="5A"></div></div>
+              <span style="font-size:12px;color:#888;min-width:48px;text-align:right" class="dash-grade-label" data-grade="5A">0%</span>
+              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">开始</button>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8f9fa;border-radius:10px;">
+              <span style="font-weight:600;min-width:36px;">五下</span>
+              <div style="flex:1;height:8px;background:#e5e5e5;border-radius:4px;overflow:hidden;"><div style="width:0%;height:100%;background:var(--warning);border-radius:4px;transition:width 0.6s" class="dash-grade-bar" data-grade="5B"></div></div>
+              <span style="font-size:12px;color:#888;min-width:48px;text-align:right" class="dash-grade-label" data-grade="5B">0%</span>
+              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">开始</button>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8f9fa;border-radius:10px;">
+              <span style="font-weight:600;min-width:36px;">六上</span>
+              <div style="flex:1;height:8px;background:#e5e5e5;border-radius:4px;overflow:hidden;"><div style="width:0%;height:100%;background:#ff4d4f;border-radius:4px;transition:width 0.6s" class="dash-grade-bar" data-grade="6A"></div></div>
+              <span style="font-size:12px;color:#888;min-width:48px;text-align:right" class="dash-grade-label" data-grade="6A">0%</span>
+              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">开始</button>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8f9fa;border-radius:10px;">
+              <span style="font-weight:600;min-width:36px;">六下</span>
+              <div style="flex:1;height:8px;background:#e5e5e5;border-radius:4px;overflow:hidden;"><div style="width:0%;height:100%;background:#ff4d4f;border-radius:4px;transition:width 0.6s" class="dash-grade-bar" data-grade="6B"></div></div>
+              <span style="font-size:12px;color:#888;min-width:48px;text-align:right" class="dash-grade-label" data-grade="6B">0%</span>
+              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">开始</button>
+            </div>
           </div>
         </div>
+
+        <!-- 最近生成 -->
+        <div class="card">
+          <h3 style="margin-bottom:16px;">🕐 最近生成的卡片</h3>
+          <div id="recent-posts" style="display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;"></div>
+        </div>
         <div id="dashboard-festivals" style="margin-top:16px;"></div>
+        <!-- 隐藏原stat兼容 -->
+        <div style="display:none;"><span id="stat-income"></span><span id="stat-month-income"></span></div>
       </section>
 
       <!-- ===== 内容生成 ===== -->
@@ -17202,17 +17133,21 @@ Style: ${stylePrompt}
 
     // ============ 手机端导航逻辑 ============
     const PAGE_TITLES = {
-      dashboard: '📊 数据看板', generator: '✨ 内容生成', posts: '📝 笔记管理',
+      dashboard: '📊 首页',
+      'knowledge-cards': '✨ 生成卡片',
+      'card-lib': '🎴 卡片库',
+      invite: '💰 分享赚钱',
+      account: '👤 我的账户',
+      generator: '✨ 内容生成', posts: '📝 笔记管理',
       calendar: '📅 发布日历', income: '💰 收入追踪', monetization: '🚀 变现方案',
       forbidden: '🚫 违禁词检测', score: '💯 笔记评分', trending: '🔥 热门话题',
       tags: '🏷️ 标签引擎', rewrite: '🔄 笔记改写',
-      branding: '🎀 账号包装', account: '📈 账号数据',
-      'multi-account': '👥 多账号管理', purchase: '💎 积分商城', invite: '🎁 邀请赚钱',
+      branding: '🎀 账号包装',
+      'multi-account': '👥 多账号管理', purchase: '💎 积分商城',
       polish: '🪄 内容优化', 'title-gen': '📰 爆款标题',
       keywords: '🔑 热词分析', 'content-plan': '📋 内容规划',
-      'img-tool': '🖼️ 图片优化', 'card-lib': '🎴 卡片模板库',
+      'img-tool': '🖼️ 图片优化',
       'ai-card': '🃏 AI智能卡片',
-      'knowledge-cards': '📚 知识卡片',
       'prompt-lib': '🧪 Prompt工程库',
       'promo': '📢 推广物料'
     };

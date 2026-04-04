@@ -1,0 +1,1983 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>英语知识卡片平台 — 前端精简方案 Demo</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --primary: #6366f1;
+  --primary-light: #eef2ff;
+  --primary-dark: #4f46e5;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #1e293b;
+  --text-light: #94a3b8;
+  --border: #e2e8f0;
+  --sidebar-bg: linear-gradient(180deg, #1e1b4b 0%, #312e81 100%);
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 220px;
+  background: var(--sidebar-bg);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+}
+.sidebar-brand {
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.sidebar-brand h1 {
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sidebar-brand p {
+  font-size: 12px;
+  opacity: 0.6;
+  margin-top: 4px;
+}
+.sidebar-nav {
+  padding: 16px 12px;
+  flex: 1;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.nav-item:hover {
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+.nav-item.active {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(99,102,241,0.4);
+}
+.nav-item .icon {
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+}
+.nav-item .badge {
+  margin-left: auto;
+  background: rgba(255,255,255,0.2);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+}
+.sidebar-footer {
+  padding: 16px 12px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+}
+.user-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a78bfa, #818cf8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+.user-name { font-size: 13px; font-weight: 600; }
+.user-credits { font-size: 11px; opacity: 0.6; }
+
+/* ── Main ── */
+.main {
+  margin-left: 220px;
+  flex: 1;
+  min-height: 100vh;
+}
+.topbar {
+  height: 64px;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+.topbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.topbar-right .credits-badge {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.page-content {
+  padding: 28px 32px;
+  max-width: 1400px;
+}
+.page { display: none; }
+.page.active { display: block; }
+
+/* ── Cards / Components ── */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.stat-card:nth-child(1)::before { background: var(--primary); }
+.stat-card:nth-child(2)::before { background: var(--success); }
+.stat-card:nth-child(3)::before { background: var(--warning); }
+.stat-card:nth-child(4)::before { background: #8b5cf6; }
+.stat-label {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+}
+.stat-sub {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 6px;
+}
+.stat-sub .up { color: var(--success); }
+.stat-sub .down { color: var(--danger); }
+
+/* ── Section Titles ── */
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Grade Progress ── */
+.grade-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.grade-item {
+  background: white;
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.grade-label {
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 48px;
+}
+.grade-bar {
+  flex: 1;
+  height: 10px;
+  background: #f1f5f9;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.grade-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.6s ease;
+}
+.grade-pct {
+  font-size: 13px;
+  font-weight: 600;
+  min-width: 40px;
+  text-align: right;
+}
+.grade-count {
+  font-size: 12px;
+  color: var(--text-light);
+  min-width: 60px;
+  text-align: right;
+}
+.grade-action {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  background: white;
+  color: var(--primary);
+  transition: all 0.2s;
+}
+.grade-action:hover {
+  background: var(--primary-light);
+}
+
+/* ── Recent Cards ── */
+.recent-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 24px;
+}
+.recent-card {
+  flex-shrink: 0;
+  width: 160px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background: white;
+}
+.recent-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.recent-card-img {
+  width: 160px;
+  height: 213px;
+  background: linear-gradient(135deg, #dbeafe, #ede9fe);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  position: relative;
+}
+.recent-card-img .score-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+}
+.recent-card-img .banner-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  color: white;
+}
+.recent-card-info {
+  padding: 10px 12px;
+}
+.recent-card-info .title {
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.recent-card-info .meta {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 3px;
+}
+
+/* ══════ Page 2: 生成卡片 ══════ */
+.gen-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 24px;
+}
+.gen-sidebar { }
+.gen-main { }
+.step-indicator {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 20px;
+}
+.step {
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 13px;
+  font-weight: 600;
+  background: #f1f5f9;
+  color: var(--text-light);
+  position: relative;
+}
+.step:first-child { border-radius: 8px 0 0 8px; }
+.step:last-child { border-radius: 0 8px 8px 0; }
+.step.active {
+  background: var(--primary);
+  color: white;
+}
+.step.done {
+  background: var(--success);
+  color: white;
+}
+.form-group {
+  margin-bottom: 16px;
+}
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 6px;
+  display: block;
+}
+.form-select, .form-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  background: white;
+  color: var(--text);
+  transition: border 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.form-select:focus, .form-input:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+}
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2394a3b8'%3E%3Cpath d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 36px;
+}
+
+/* Card Type Tags */
+.type-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.type-tag {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s;
+  background: white;
+}
+.type-tag:hover { border-color: var(--primary); color: var(--primary); }
+.type-tag.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* Unit Cards */
+.unit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.unit-item {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.unit-item:hover { border-color: var(--primary); background: var(--primary-light); }
+.unit-item.selected { border-color: var(--primary); background: var(--primary-light); }
+.unit-checkbox {
+  width: 20px; height: 20px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.unit-item.selected .unit-checkbox {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+.unit-name { font-size: 14px; font-weight: 500; }
+.unit-count {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-light);
+}
+.unit-status {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.unit-status.done { background: #d1fae5; color: #059669; }
+.unit-status.partial { background: #fef3c7; color: #d97706; }
+.unit-status.todo { background: #f1f5f9; color: #64748b; }
+
+/* Gen Button */
+.btn-generate {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-generate.primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  box-shadow: 0 4px 14px rgba(99,102,241,0.35);
+}
+.btn-generate.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(99,102,241,0.45);
+}
+.btn-cost {
+  font-size: 12px;
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+/* ── Preview Area ── */
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+.preview-card {
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.2s;
+}
+.preview-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+.preview-img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: linear-gradient(135deg, #dbeafe, #fce7f3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  position: relative;
+}
+.preview-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.preview-card:hover .preview-overlay { opacity: 1; }
+.preview-overlay button {
+  padding: 8px 16px;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.preview-footer {
+  padding: 12px;
+}
+.preview-title {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.preview-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-light);
+}
+.preview-score {
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* ── Radar Chart ── */
+.radar-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 10px;
+  margin-top: 12px;
+}
+
+/* ── Progress Pipeline ── */
+.pipeline-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+.pipeline-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+.pipeline-step.done { color: var(--success); }
+.pipeline-step.active { color: var(--primary); font-weight: 600; background: var(--primary-light); }
+.pipeline-step.waiting { color: var(--text-light); }
+.pipeline-icon { width: 20px; text-align: center; }
+.pipeline-time { margin-left: auto; font-size: 11px; color: var(--text-light); }
+
+/* ══════ Page 3: 卡片库 ══════ */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.filter-select {
+  padding: 8px 32px 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  background: white;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2394a3b8'%3E%3Cpath d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px;
+}
+.filter-search {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  width: 200px;
+}
+.filter-right {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+}
+.btn-sm {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-sm:hover { border-color: var(--primary); color: var(--primary); }
+.btn-sm.primary {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+.gallery-card {
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+.gallery-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+.gallery-card-img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+  position: relative;
+}
+.gallery-card-badges {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+.g-badge {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
+}
+.gallery-card-footer {
+  padding: 12px;
+}
+.gallery-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.gallery-card-sub {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 3px;
+  display: flex;
+  gap: 8px;
+}
+
+/* ── Lightbox Modal ── */
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+.lightbox.active { display: flex; }
+.lightbox-content {
+  background: white;
+  border-radius: 16px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.lightbox-img {
+  background: linear-gradient(135deg, #dbeafe, #fce7f3);
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  border-radius: 16px 0 0 16px;
+}
+.lightbox-info {
+  padding: 28px;
+}
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ══════ Page 4: 账户 ══════ */
+.account-header {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.account-avatar {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+.account-name { font-size: 20px; font-weight: 700; }
+.account-email { font-size: 13px; opacity: 0.7; margin-top: 4px; }
+.account-credits {
+  margin-left: auto;
+  text-align: right;
+}
+.account-credits-value { font-size: 32px; font-weight: 800; }
+.account-credits-label { font-size: 12px; opacity: 0.7; }
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.settings-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+.settings-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.usage-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 13px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.usage-row:last-child { border: none; }
+.usage-date { color: var(--text-light); }
+
+/* ── Page switcher demo controls ── */
+.demo-banner {
+  position: fixed;
+  bottom: 0;
+  left: 220px;
+  right: 0;
+  background: linear-gradient(135deg, #1e1b4b, #312e81);
+  color: white;
+  padding: 12px 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 200;
+  font-size: 13px;
+}
+.demo-banner span {
+  opacity: 0.7;
+}
+.demo-btn {
+  padding: 6px 16px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: transparent;
+  color: white;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.demo-btn:hover, .demo-btn.active {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.5);
+}
+.demo-btn.active { background: var(--primary); border-color: var(--primary); }
+
+/* ── Responsive hint ── */
+@media (max-width: 900px) {
+  .gen-layout { grid-template-columns: 1fr; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .grade-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.page.active { animation: fadeIn 0.3s ease; }
+
+/* ══════ 分享赚钱 Styles ══════ */
+.share-hero {
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+  color: white;
+  border-radius: var(--radius);
+  padding: 32px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.share-hero-text h2 { font-size: 22px; margin-bottom: 8px; }
+.share-hero-text p { font-size: 15px; opacity: 0.95; }
+.share-hero-stats {
+  margin-left: auto;
+  display: flex;
+  gap: 32px;
+}
+.share-hero-stat {
+  text-align: center;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 12px;
+  min-width: 90px;
+}
+.invite-link-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text);
+}
+.invite-link-box span { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.btn-copy {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background: var(--primary);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-copy:hover { background: var(--primary-dark); }
+.invite-code-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #fef3c7, #fffbeb);
+  border: 2px dashed #f59e0b;
+  border-radius: 12px;
+}
+.invite-code {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 6px;
+  color: #b45309;
+  font-family: 'Courier New', monospace;
+}
+.share-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.share-btn.wechat { background: #07c160; color: white; }
+.share-btn.wechat:hover { background: #06ae56; }
+.share-btn.xiaohongshu { background: #ff2442; color: white; }
+.share-btn.xiaohongshu:hover { background: #e61f3a; }
+.share-btn.link { background: var(--primary); color: white; }
+.share-btn.link:hover { background: var(--primary-dark); }
+.reward-steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  justify-content: center;
+  padding: 8px 0;
+}
+.reward-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 16px 20px;
+  background: #f8fafc;
+  border-radius: 12px;
+  min-width: 140px;
+}
+.reward-step-icon { font-size: 20px; margin-bottom: 8px; }
+.reward-step-text strong { font-size: 14px; }
+.reward-step-text p { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+.reward-arrow {
+  font-size: 20px;
+  color: var(--text-light);
+  padding: 0 8px;
+}
+.invite-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.invite-table th {
+  text-align: left;
+  padding: 10px 12px;
+  background: #f8fafc;
+  border-bottom: 2px solid var(--border);
+  font-weight: 600;
+  color: #475569;
+  font-size: 12px;
+}
+.invite-table td {
+  padding: 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.invite-table tr:hover td { background: #fafbfc; }
+.invite-user { font-weight: 500; }
+</style>
+</head>
+<body>
+
+<!-- ══════ SIDEBAR ══════ -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <h1>📚 英语卡片</h1>
+    <p>小学英语知识卡片平台</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-item active" onclick="showPage('dashboard', this)">
+      <span class="icon">📊</span> 首页
+    </div>
+    <div class="nav-item" onclick="showPage('generate', this)">
+      <span class="icon">✨</span> 生成卡片
+      <span class="badge">核心</span>
+    </div>
+    <div class="nav-item" onclick="showPage('gallery', this)">
+      <span class="icon">🎴</span> 卡片库
+      <span class="badge">126</span>
+    </div>
+    <div class="nav-item" onclick="showPage('share', this)">
+      <span class="icon">💰</span> 分享赚钱
+      <span class="badge" style="background:rgba(245,158,11,0.4)">赚💎</span>
+    </div>
+    <div class="nav-item" onclick="showPage('account', this)">
+      <span class="icon">👤</span> 我的账户
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="user-info">
+      <div class="user-avatar">林</div>
+      <div>
+        <div class="user-name">林老师</div>
+        <div class="user-credits">💎 286 积分</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ══════ MAIN ══════ -->
+<div class="main">
+
+  <div class="topbar">
+    <div class="topbar-title" id="topbar-title">📊 首页</div>
+    <div class="topbar-right">
+      <span class="credits-badge">💎 286 积分</span>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- ══════ PAGE 1: Dashboard ══════ -->
+    <div class="page active" id="page-dashboard">
+
+      <!-- 统计卡 -->
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-label">已生成卡片</div>
+          <div class="stat-value">126</div>
+          <div class="stat-sub"><span class="up">↑ 14</span> 本周新增</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">质量达标率</div>
+          <div class="stat-value" style="color: var(--success)">94%</div>
+          <div class="stat-sub">Audit ≥ 80 且 Quality ≥ 60</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">去Banner率</div>
+          <div class="stat-value" style="color: var(--primary)">92%</div>
+          <div class="stat-sub">视觉检测通过</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">平均质量分</div>
+          <div class="stat-value">91.3</div>
+          <div class="stat-sub"><span class="up">↑ 3.2</span> 较上周</div>
+        </div>
+      </div>
+
+      <!-- 年级进度 -->
+      <div class="section-title">📈 各年级生成进度</div>
+      <div class="grade-grid">
+        <div class="grade-item">
+          <div class="grade-label">三上</div>
+          <div class="grade-bar"><div class="grade-fill" style="width:100%;background:var(--success)"></div></div>
+          <div class="grade-pct" style="color:var(--success)">100%</div>
+          <div class="grade-count">24/24</div>
+          <button class="grade-action">查看</button>
+        </div>
+        <div class="grade-item">
+          <div class="grade-label">三下</div>
+          <div class="grade-bar"><div class="grade-fill" style="width:83%;background:var(--success)"></div></div>
+          <div class="grade-pct" style="color:var(--success)">83%</div>
+          <div class="grade-count">20/24</div>
+          <button class="grade-action">继续</button>
+        </div>
+        <div class="grade-item">
+          <div class="grade-label">四上</div>
+          <div class="grade-bar"><div class="grade-fill" style="width:67%;background:var(--primary)"></div></div>
+          <div class="grade-pct" style="color:var(--primary)">67%</div>
+          <div class="grade-count">16/24</div>
+          <button class="grade-action">继续</button>
+        </div>
+        <div class="grade-item">
+          <div class="grade-label">四下</div>
+          <div class="grade-bar"><div class="grade-fill" style="width:42%;background:var(--warning)"></div></div>
+          <div class="grade-pct" style="color:var(--warning)">42%</div>
+          <div class="grade-count">10/24</div>
+          <button class="grade-action">继续</button>
+        </div>
+        <div class="grade-item">
+          <div class="grade-label">五上</div>
+          <div class="grade-bar"><div class="grade-fill" style="width:25%;background:var(--warning)"></div></div>
+          <div class="grade-pct" style="color:var(--warning)">25%</div>
+          <div class="grade-count">6/24</div>
+          <button class="grade-action">继续</button>
+        </div>
+        <div class="grade-item">
+          <div class="grade-label">五下</div>
+          <div class="grade-bar"><div class="grade-fill" style="width:12%;background:var(--danger)"></div></div>
+          <div class="grade-pct" style="color:var(--danger)">12%</div>
+          <div class="grade-count">3/24</div>
+          <button class="grade-action">开始</button>
+        </div>
+        <div class="grade-item">
+          <div class="grade-label">六上</div>
+          <div class="grade-bar"><div class="grade-fill" style="width:8%;background:var(--danger)"></div></div>
+          <div class="grade-pct" style="color:var(--danger)">8%</div>
+          <div class="grade-count">2/24</div>
+          <button class="grade-action">开始</button>
+        </div>
+        <div class="grade-item">
+          <div class="grade-label">六下</div>
+          <div class="grade-bar"><div class="grade-fill" style="width:0%;background:#e2e8f0"></div></div>
+          <div class="grade-pct" style="color:var(--text-light)">0%</div>
+          <div class="grade-count">0/24</div>
+          <button class="grade-action">开始</button>
+        </div>
+      </div>
+
+      <!-- 最近生成 -->
+      <div class="section-title">🕐 最近生成的卡片</div>
+      <div class="recent-scroll">
+        <div class="recent-card">
+          <div class="recent-card-img" style="background:linear-gradient(135deg,#dbeafe,#c7d2fe)">
+            🔤
+            <span class="score-badge" style="background:var(--success)">95</span>
+            <span class="banner-badge" style="background:var(--success)">✅ 无Banner</span>
+          </div>
+          <div class="recent-card-info">
+            <div class="title">Unit 1 词汇卡</div>
+            <div class="meta">三上 · 2分钟前</div>
+          </div>
+        </div>
+        <div class="recent-card">
+          <div class="recent-card-img" style="background:linear-gradient(135deg,#fce7f3,#ede9fe)">
+            📝
+            <span class="score-badge" style="background:var(--success)">92</span>
+            <span class="banner-badge" style="background:var(--success)">✅ 无Banner</span>
+          </div>
+          <div class="recent-card-info">
+            <div class="title">Unit 3 句型卡</div>
+            <div class="meta">三上 · 15分钟前</div>
+          </div>
+        </div>
+        <div class="recent-card">
+          <div class="recent-card-img" style="background:linear-gradient(135deg,#dcfce7,#d1fae5)">
+            📖
+            <span class="score-badge" style="background:var(--success)">97</span>
+            <span class="banner-badge" style="background:var(--success)">✅ 无Banner</span>
+          </div>
+          <div class="recent-card-info">
+            <div class="title">Unit 4 语法卡</div>
+            <div class="meta">三上 · 1小时前</div>
+          </div>
+        </div>
+        <div class="recent-card">
+          <div class="recent-card-img" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">
+            🔠
+            <span class="score-badge" style="background:var(--warning)">78</span>
+            <span class="banner-badge" style="background:var(--danger)">🚫 有Banner</span>
+          </div>
+          <div class="recent-card-info">
+            <div class="title">Unit 1 拼读卡</div>
+            <div class="meta">四上 · 3小时前</div>
+          </div>
+        </div>
+        <div class="recent-card">
+          <div class="recent-card-img" style="background:linear-gradient(135deg,#e0e7ff,#c7d2fe)">
+            🗣️
+            <span class="score-badge" style="background:var(--success)">91</span>
+            <span class="banner-badge" style="background:var(--success)">✅ 无Banner</span>
+          </div>
+          <div class="recent-card-info">
+            <div class="title">Unit 6 对话卡</div>
+            <div class="meta">五上 · 5小时前</div>
+          </div>
+        </div>
+        <div class="recent-card">
+          <div class="recent-card-img" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8)">
+            ⚔️
+            <span class="score-badge" style="background:var(--success)">98</span>
+            <span class="banner-badge" style="background:var(--success)">✅ 无Banner</span>
+          </div>
+          <div class="recent-card-info">
+            <div class="title">Unit 3 易混词卡</div>
+            <div class="meta">五下 · 昨天</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ PAGE 2: 生成卡片 ══════ -->
+    <div class="page" id="page-generate">
+      <div class="gen-layout">
+        <!-- Left: Controls -->
+        <div class="gen-sidebar">
+          <div class="card" style="margin-bottom: 16px;">
+            <!-- Steps -->
+            <div class="step-indicator">
+              <div class="step done">① 年级</div>
+              <div class="step active">② 单元</div>
+              <div class="step">③ 生成</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">年级学期</label>
+              <select class="form-select">
+                <option>三年级上册</option>
+                <option>三年级下册</option>
+                <option selected>四年级上册</option>
+                <option>四年级下册</option>
+                <option>五年级上册</option>
+                <option>五年级下册</option>
+                <option>六年级上册</option>
+                <option>六年级下册</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">卡片类型（可多选）</label>
+              <div class="type-tags">
+                <span class="type-tag active">全部</span>
+                <span class="type-tag">词汇卡</span>
+                <span class="type-tag">句型卡</span>
+                <span class="type-tag">语法卡</span>
+                <span class="type-tag">拼读卡</span>
+                <span class="type-tag">对话卡</span>
+                <span class="type-tag">易混词卡</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">选择单元</label>
+              <div class="unit-list">
+                <div class="unit-item selected">
+                  <div class="unit-checkbox">✓</div>
+                  <div class="unit-name">Unit 1 My classroom</div>
+                  <div class="unit-count">6张</div>
+                  <span class="unit-status done">已完成</span>
+                </div>
+                <div class="unit-item selected">
+                  <div class="unit-checkbox">✓</div>
+                  <div class="unit-name">Unit 2 My schoolbag</div>
+                  <div class="unit-count">6张</div>
+                  <span class="unit-status partial">4/6</span>
+                </div>
+                <div class="unit-item">
+                  <div class="unit-checkbox"></div>
+                  <div class="unit-name">Unit 3 My friends</div>
+                  <div class="unit-count">6张</div>
+                  <span class="unit-status todo">未开始</span>
+                </div>
+                <div class="unit-item">
+                  <div class="unit-checkbox"></div>
+                  <div class="unit-name">Unit 4 My home</div>
+                  <div class="unit-count">6张</div>
+                  <span class="unit-status todo">未开始</span>
+                </div>
+                <div class="unit-item">
+                  <div class="unit-checkbox"></div>
+                  <div class="unit-name">Unit 5 Dinner's ready</div>
+                  <div class="unit-count">6张</div>
+                  <span class="unit-status todo">未开始</span>
+                </div>
+                <div class="unit-item">
+                  <div class="unit-checkbox"></div>
+                  <div class="unit-name">Unit 6 Meet my family</div>
+                  <div class="unit-count">6张</div>
+                  <span class="unit-status todo">未开始</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+              <button class="btn-generate primary">
+                ✨ 生成选中的 8 张卡片
+                <span class="btn-cost">(消耗 ~32 积分)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Progress & Preview -->
+        <div class="gen-main">
+          <!-- 生成中状态 -->
+          <div class="card" style="margin-bottom: 16px;">
+            <div class="section-title">⏳ 正在生成 (2/8)</div>
+            <div class="pipeline-steps">
+              <div class="pipeline-step done">
+                <span class="pipeline-icon">✅</span>
+                <span>Step 0: 内容压缩 & 预审</span>
+                <span class="pipeline-time">3s</span>
+              </div>
+              <div class="pipeline-step done">
+                <span class="pipeline-icon">✅</span>
+                <span>Step 1: Prompt 生成</span>
+                <span class="pipeline-time">8s</span>
+              </div>
+              <div class="pipeline-step active">
+                <span class="pipeline-icon">🔄</span>
+                <span>Step 2: 图片生成（第 1 轮）</span>
+                <span class="pipeline-time">45s...</span>
+              </div>
+              <div class="pipeline-step waiting">
+                <span class="pipeline-icon">⏳</span>
+                <span>Step 3: OCR 审计</span>
+              </div>
+              <div class="pipeline-step waiting">
+                <span class="pipeline-icon">⏳</span>
+                <span>Step 4: 视觉精修</span>
+              </div>
+              <div class="pipeline-step waiting">
+                <span class="pipeline-icon">⏳</span>
+                <span>Step 5: 质量评分</span>
+              </div>
+            </div>
+            <div style="font-size: 12px; color: var(--text-light); padding: 0 4px;">
+              预计还需 ~4 分钟 · 当前: Unit 2 词汇卡 · 模型: gemini-3-pro-image
+            </div>
+          </div>
+
+          <!-- 已完成的卡片 -->
+          <div class="section-title">✅ 已完成 (2 张)</div>
+          <div class="preview-grid">
+            <div class="preview-card">
+              <div class="preview-img" style="background:linear-gradient(135deg,#dbeafe,#c7d2fe)">
+                🔤
+                <div class="preview-overlay"><button>查看详情</button></div>
+              </div>
+              <div class="preview-footer">
+                <div class="preview-title">Unit 1 词汇卡 · classroom</div>
+                <div class="preview-meta">
+                  <span class="preview-score" style="background:#d1fae5;color:#059669">A:100</span>
+                  <span class="preview-score" style="background:#dbeafe;color:#3b82f6">Q:95</span>
+                  <span class="preview-score" style="background:#d1fae5;color:#059669">✅</span>
+                  <span style="color:var(--text-light)">2轮 · 156s</span>
+                </div>
+              </div>
+            </div>
+            <div class="preview-card">
+              <div class="preview-img" style="background:linear-gradient(135deg,#fce7f3,#ede9fe)">
+                📝
+                <div class="preview-overlay"><button>查看详情</button></div>
+              </div>
+              <div class="preview-footer">
+                <div class="preview-title">Unit 1 句型卡 · This is...</div>
+                <div class="preview-meta">
+                  <span class="preview-score" style="background:#d1fae5;color:#059669">A:100</span>
+                  <span class="preview-score" style="background:#dbeafe;color:#3b82f6">Q:92</span>
+                  <span class="preview-score" style="background:#d1fae5;color:#059669">✅</span>
+                  <span style="color:var(--text-light)">1轮 · 98s</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 雷达图展示 -->
+          <div class="card" style="margin-top: 16px;">
+            <div class="section-title">📊 Unit 1 词汇卡 · 质量详情</div>
+            <div class="radar-container">
+              <!-- SVG Radar Chart -->
+              <svg width="200" height="200" viewBox="0 0 200 200" style="flex-shrink:0">
+                <!-- Background rings -->
+                <polygon points="100,20 166,52 166,148 100,180 34,148 34,52" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+                <polygon points="100,40 149,60 149,140 100,160 51,140 51,60" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+                <polygon points="100,60 132,72 132,128 100,140 68,128 68,72" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+                <!-- Data polygon -->
+                <polygon points="100,25 162,55 158,142 100,165 42,130 38,58"
+                  fill="rgba(99,102,241,0.15)" stroke="var(--primary)" stroke-width="2"/>
+                <!-- Data points -->
+                <circle cx="100" cy="25" r="4" fill="var(--primary)"/>
+                <circle cx="162" cy="55" r="4" fill="var(--primary)"/>
+                <circle cx="158" cy="142" r="4" fill="var(--primary)"/>
+                <circle cx="100" cy="165" r="4" fill="var(--primary)"/>
+                <circle cx="42" cy="130" r="4" fill="var(--primary)"/>
+                <circle cx="38" cy="58" r="4" fill="var(--primary)"/>
+                <!-- Labels -->
+                <text x="100" y="12" text-anchor="middle" fill="#475569" font-size="11" font-weight="600">知识准确 25</text>
+                <text x="178" y="52" text-anchor="start" fill="#475569" font-size="11">例句 14</text>
+                <text x="178" y="150" text-anchor="start" fill="#475569" font-size="11">记忆 13</text>
+                <text x="100" y="195" text-anchor="middle" fill="#475569" font-size="11">视觉 14</text>
+                <text x="18" y="150" text-anchor="end" fill="#475569" font-size="11">实用 13</text>
+                <text x="18" y="52" text-anchor="end" fill="#10b981" font-size="11" font-weight="700">无Banner 15 ✅</text>
+              </svg>
+              <div style="flex:1">
+                <div style="font-size:14px;font-weight:600;margin-bottom:12px">总分: 95/100</div>
+                <div style="display:flex;flex-direction:column;gap:6px;font-size:13px">
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="width:80px;color:#64748b">知识准确性</span>
+                    <div style="flex:1;height:6px;background:#f1f5f9;border-radius:3px;overflow:hidden"><div style="width:100%;height:100%;background:var(--primary);border-radius:3px"></div></div>
+                    <span style="font-weight:600;width:32px;text-align:right">25</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="width:80px;color:#64748b">例句质量</span>
+                    <div style="flex:1;height:6px;background:#f1f5f9;border-radius:3px;overflow:hidden"><div style="width:93%;height:100%;background:var(--primary);border-radius:3px"></div></div>
+                    <span style="font-weight:600;width:32px;text-align:right">14</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="width:80px;color:#64748b">记忆技巧</span>
+                    <div style="flex:1;height:6px;background:#f1f5f9;border-radius:3px;overflow:hidden"><div style="width:87%;height:100%;background:var(--primary);border-radius:3px"></div></div>
+                    <span style="font-weight:600;width:32px;text-align:right">13</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="width:80px;color:#64748b">视觉美感</span>
+                    <div style="flex:1;height:6px;background:#f1f5f9;border-radius:3px;overflow:hidden"><div style="width:93%;height:100%;background:var(--primary);border-radius:3px"></div></div>
+                    <span style="font-weight:600;width:32px;text-align:right">14</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="width:80px;color:#64748b">实用价值</span>
+                    <div style="flex:1;height:6px;background:#f1f5f9;border-radius:3px;overflow:hidden"><div style="width:87%;height:100%;background:var(--primary);border-radius:3px"></div></div>
+                    <span style="font-weight:600;width:32px;text-align:right">14</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="width:80px;color:#10b981;font-weight:600">🚫无Banner</span>
+                    <div style="flex:1;height:6px;background:#f1f5f9;border-radius:3px;overflow:hidden"><div style="width:100%;height:100%;background:var(--success);border-radius:3px"></div></div>
+                    <span style="font-weight:600;width:32px;text-align:right;color:var(--success)">15</span>
+                  </div>
+                </div>
+                <div style="margin-top:12px;padding:10px 12px;background:#f0fdf4;border-radius:8px;font-size:12px;color:#166534">
+                  ✅ Banner检测: 无Banner · 顶部为白色内容区 · confidence: high
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ PAGE 3: 卡片库 ══════ -->
+    <div class="page" id="page-gallery">
+      <div class="filter-bar">
+        <select class="filter-select">
+          <option>全部年级</option>
+          <option>三年级</option>
+          <option>四年级</option>
+          <option selected>五年级</option>
+          <option>六年级</option>
+        </select>
+        <select class="filter-select">
+          <option>全部学期</option>
+          <option selected>上册</option>
+          <option>下册</option>
+        </select>
+        <select class="filter-select">
+          <option>全部类型</option>
+          <option>词汇卡</option>
+          <option>句型卡</option>
+          <option>语法卡</option>
+          <option>拼读卡</option>
+          <option>对话卡</option>
+          <option>易混词卡</option>
+          <option>不规则动词卡</option>
+        </select>
+        <select class="filter-select">
+          <option>全部质量</option>
+          <option>⭐ ≥90分</option>
+          <option>⚠️ 60-89分</option>
+          <option>❌ &lt;60分</option>
+        </select>
+        <input class="filter-search" placeholder="🔍 搜索卡片标题...">
+        <div class="filter-right">
+          <button class="btn-sm">📥 批量下载</button>
+          <button class="btn-sm primary">🔄 批量重生成</button>
+        </div>
+      </div>
+
+      <div style="font-size:13px;color:var(--text-light);margin-bottom:16px">
+        共 18 张卡片 · 五年级上册 · 平均质量分 93.2
+      </div>
+
+      <div class="gallery-grid">
+        <!-- Card 1 -->
+        <div class="gallery-card">
+          <div class="gallery-card-img" style="background:linear-gradient(135deg,#dbeafe,#c7d2fe)">
+            🔤
+            <div class="gallery-card-badges">
+              <span class="g-badge" style="background:var(--success)">Q:97</span>
+              <span class="g-badge" style="background:var(--success)">✅</span>
+            </div>
+          </div>
+          <div class="gallery-card-footer">
+            <div class="gallery-card-title">Unit 1 词汇卡 · school</div>
+            <div class="gallery-card-sub">
+              <span>五上</span>
+              <span>A:100</span>
+              <span>2轮</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="gallery-card">
+          <div class="gallery-card-img" style="background:linear-gradient(135deg,#fce7f3,#ede9fe)">
+            📝
+            <div class="gallery-card-badges">
+              <span class="g-badge" style="background:var(--success)">Q:94</span>
+              <span class="g-badge" style="background:var(--success)">✅</span>
+            </div>
+          </div>
+          <div class="gallery-card-footer">
+            <div class="gallery-card-title">Unit 1 句型卡 · What's he like?</div>
+            <div class="gallery-card-sub">
+              <span>五上</span>
+              <span>A:100</span>
+              <span>1轮</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="gallery-card">
+          <div class="gallery-card-img" style="background:linear-gradient(135deg,#dcfce7,#d1fae5)">
+            📖
+            <div class="gallery-card-badges">
+              <span class="g-badge" style="background:var(--success)">Q:91</span>
+              <span class="g-badge" style="background:var(--success)">✅</span>
+            </div>
+          </div>
+          <div class="gallery-card-footer">
+            <div class="gallery-card-title">Unit 2 语法卡 · there be</div>
+            <div class="gallery-card-sub">
+              <span>五上</span>
+              <span>A:95</span>
+              <span>2轮</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card 4 - has banner -->
+        <div class="gallery-card" style="border: 2px solid var(--danger)">
+          <div class="gallery-card-img" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">
+            🔠
+            <div class="gallery-card-badges">
+              <span class="g-badge" style="background:var(--warning)">Q:72</span>
+              <span class="g-badge" style="background:var(--danger)">🚫</span>
+            </div>
+          </div>
+          <div class="gallery-card-footer">
+            <div class="gallery-card-title">Unit 3 拼读卡 · ow/ou</div>
+            <div class="gallery-card-sub">
+              <span>五上</span>
+              <span>A:85</span>
+              <span style="color:var(--danger)">有Banner</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card 5 -->
+        <div class="gallery-card">
+          <div class="gallery-card-img" style="background:linear-gradient(135deg,#e0e7ff,#c7d2fe)">
+            🗣️
+            <div class="gallery-card-badges">
+              <span class="g-badge" style="background:var(--success)">Q:96</span>
+              <span class="g-badge" style="background:var(--success)">✅</span>
+            </div>
+          </div>
+          <div class="gallery-card-footer">
+            <div class="gallery-card-title">Unit 4 对话卡 · shopping</div>
+            <div class="gallery-card-sub">
+              <span>五上</span>
+              <span>A:100</span>
+              <span>1轮</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card 6 -->
+        <div class="gallery-card">
+          <div class="gallery-card-img" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8)">
+            ⚔️
+            <div class="gallery-card-badges">
+              <span class="g-badge" style="background:var(--success)">Q:98</span>
+              <span class="g-badge" style="background:var(--success)">✅</span>
+            </div>
+          </div>
+          <div class="gallery-card-footer">
+            <div class="gallery-card-title">Unit 5 易混词 · much/many</div>
+            <div class="gallery-card-sub">
+              <span>五上</span>
+              <span>A:100</span>
+              <span>1轮</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card 7 -->
+        <div class="gallery-card">
+          <div class="gallery-card-img" style="background:linear-gradient(135deg,#f0fdfa,#ccfbf1)">
+            📊
+            <div class="gallery-card-badges">
+              <span class="g-badge" style="background:var(--success)">Q:93</span>
+              <span class="g-badge" style="background:var(--success)">✅</span>
+            </div>
+          </div>
+          <div class="gallery-card-footer">
+            <div class="gallery-card-title">Unit 6 对话卡 · in the park</div>
+            <div class="gallery-card-sub">
+              <span>五上</span>
+              <span>A:100</span>
+              <span>2轮</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card 8 -->
+        <div class="gallery-card">
+          <div class="gallery-card-img" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)">
+            🔤
+            <div class="gallery-card-badges">
+              <span class="g-badge" style="background:var(--success)">Q:95</span>
+              <span class="g-badge" style="background:var(--success)">✅</span>
+            </div>
+          </div>
+          <div class="gallery-card-footer">
+            <div class="gallery-card-title">Unit 6 词汇卡 · nature</div>
+            <div class="gallery-card-sub">
+              <span>五上</span>
+              <span>A:100</span>
+              <span>1轮</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ PAGE 4: 分享赚钱 ══════ -->
+    <div class="page" id="page-share">
+      <!-- Hero Banner -->
+      <div class="share-hero">
+        <div class="share-hero-text">
+          <h2>邀请好友，一起赚积分 💎</h2>
+          <p>每邀请一位好友注册并生成卡片，你和好友各得 <strong>50 积分</strong></p>
+          <p style="font-size:13px;opacity:0.8;margin-top:4px">好友后续每次消费，你还可获得 <strong>10%</strong> 积分返利</p>
+        </div>
+        <div class="share-hero-stats">
+          <div class="share-hero-stat">
+            <div style="font-size:32px;font-weight:800">12</div>
+            <div style="font-size:12px;opacity:0.8">已邀请人数</div>
+          </div>
+          <div class="share-hero-stat">
+            <div style="font-size:32px;font-weight:800">680</div>
+            <div style="font-size:12px;opacity:0.8">累计获得积分</div>
+          </div>
+          <div class="share-hero-stat">
+            <div style="font-size:32px;font-weight:800">¥136</div>
+            <div style="font-size:12px;opacity:0.8">积分等值</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 邀请方式 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+        <div class="card">
+          <div class="section-title">🔗 我的邀请链接</div>
+          <div class="invite-link-box">
+            <span>https://cards.example.com/r/ABCD1234</span>
+            <button class="btn-copy">复制</button>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <button class="share-btn wechat">微信分享</button>
+            <button class="share-btn xiaohongshu">小红书分享</button>
+            <button class="share-btn link">生成海报</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-title">🎫 邀请码</div>
+          <div class="invite-code-box">
+            <span class="invite-code">ABCD1234</span>
+          </div>
+          <p style="font-size:12px;color:var(--text-light);margin-top:8px">好友注册时填写此邀请码，双方各得 50 积分奖励</p>
+        </div>
+      </div>
+
+      <!-- 奖励规则 -->
+      <div class="card" style="margin-bottom:24px">
+        <div class="section-title">🎁 奖励规则</div>
+        <div class="reward-steps">
+          <div class="reward-step">
+            <div class="reward-step-icon">① 📤</div>
+            <div class="reward-step-text">
+              <strong>分享链接/邀请码</strong>
+              <p>通过微信、小红书等渠道分享给好友</p>
+            </div>
+          </div>
+          <div class="reward-arrow">→</div>
+          <div class="reward-step">
+            <div class="reward-step-icon">② 👤</div>
+            <div class="reward-step-text">
+              <strong>好友注册</strong>
+              <p>好友通过链接注册，双方各得 50 积分</p>
+            </div>
+          </div>
+          <div class="reward-arrow">→</div>
+          <div class="reward-step">
+            <div class="reward-step-icon">③ ✨</div>
+            <div class="reward-step-text">
+              <strong>好友使用</strong>
+              <p>好友每次消费，你获得 10% 积分返利</p>
+            </div>
+          </div>
+          <div class="reward-arrow">→</div>
+          <div class="reward-step">
+            <div class="reward-step-icon">④ 💰</div>
+            <div class="reward-step-text">
+              <strong>持续收益</strong>
+              <p>积分可兑换现金或用于生成更多卡片</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 邀请记录 -->
+      <div class="card">
+        <div class="section-title">📋 邀请记录</div>
+        <table class="invite-table">
+          <thead>
+            <tr>
+              <th>好友</th>
+              <th>注册时间</th>
+              <th>状态</th>
+              <th>注册奖励</th>
+              <th>返利积分</th>
+              <th>累计贡献</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="invite-user">👩 王老师</span></td>
+              <td>2026-04-02</td>
+              <td><span class="unit-status done">活跃</span></td>
+              <td>+50 💎</td>
+              <td>+86 💎</td>
+              <td style="font-weight:700;color:var(--primary)">136 💎</td>
+            </tr>
+            <tr>
+              <td><span class="invite-user">👨 张老师</span></td>
+              <td>2026-03-28</td>
+              <td><span class="unit-status done">活跃</span></td>
+              <td>+50 💎</td>
+              <td>+62 💎</td>
+              <td style="font-weight:700;color:var(--primary)">112 💎</td>
+            </tr>
+            <tr>
+              <td><span class="invite-user">👩 李老师</span></td>
+              <td>2026-03-25</td>
+              <td><span class="unit-status partial">偶尔</span></td>
+              <td>+50 💎</td>
+              <td>+24 💎</td>
+              <td style="font-weight:700;color:var(--primary)">74 💎</td>
+            </tr>
+            <tr>
+              <td><span class="invite-user">👨 刘老师</span></td>
+              <td>2026-04-03</td>
+              <td><span class="unit-status done">活跃</span></td>
+              <td>+50 💎</td>
+              <td>+8 💎</td>
+              <td style="font-weight:700;color:var(--primary)">58 💎</td>
+            </tr>
+            <tr>
+              <td><span class="invite-user">👩 赵老师</span></td>
+              <td>2026-04-04</td>
+              <td><span class="unit-status todo">刚注册</span></td>
+              <td>+50 💎</td>
+              <td>—</td>
+              <td style="font-weight:700;color:var(--primary)">50 💎</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="text-align:center;padding:12px;font-size:13px;color:var(--text-light)">
+          共 12 位好友 · 显示最近 5 位 · <a href="#" style="color:var(--primary)">查看全部</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ PAGE 5: 账户 ══════ -->
+    <div class="page" id="page-account">
+      <div class="account-header">
+        <div class="account-avatar">林</div>
+        <div>
+          <div class="account-name">林老师</div>
+          <div class="account-email">lin@example.com · 已注册 32 天</div>
+        </div>
+        <div class="account-credits">
+          <div class="account-credits-value">286</div>
+          <div class="account-credits-label">💎 剩余积分</div>
+          <button style="margin-top:8px;padding:6px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.3);background:transparent;color:white;font-size:13px;cursor:pointer">充值积分</button>
+        </div>
+      </div>
+
+      <div class="settings-grid">
+        <div class="settings-card">
+          <h3>📊 使用统计</h3>
+          <div class="usage-row">
+            <span>本月生成卡片</span>
+            <span style="font-weight:600">42 张</span>
+          </div>
+          <div class="usage-row">
+            <span>本月消耗积分</span>
+            <span style="font-weight:600">168 积分</span>
+          </div>
+          <div class="usage-row">
+            <span>平均质量分</span>
+            <span style="font-weight:600;color:var(--success)">91.3</span>
+          </div>
+          <div class="usage-row">
+            <span>去Banner率</span>
+            <span style="font-weight:600;color:var(--primary)">92%</span>
+          </div>
+        </div>
+        <div class="settings-card">
+          <h3>💎 积分套餐</h3>
+          <div class="usage-row">
+            <span>基础包 · 50积分</span>
+            <span style="font-weight:600;color:var(--primary)">¥9.9</span>
+          </div>
+          <div class="usage-row">
+            <span>进阶包 · 200积分</span>
+            <span style="font-weight:600;color:var(--primary)">¥29.9</span>
+          </div>
+          <div class="usage-row">
+            <span>专业包 · 500积分</span>
+            <span style="font-weight:600;color:var(--primary)">¥59.9</span>
+          </div>
+          <div class="usage-row">
+            <span>旗舰包 · 2000积分</span>
+            <span style="font-weight:600;color:var(--primary)">¥199</span>
+          </div>
+        </div>
+        <div class="settings-card">
+          <h3>🕐 最近使用记录</h3>
+          <div class="usage-row">
+            <span>生成 英语-五上-01-01 词汇卡</span>
+            <span class="usage-date">2分钟前 · -4积分</span>
+          </div>
+          <div class="usage-row">
+            <span>生成 英语-五上-01-02 句型卡</span>
+            <span class="usage-date">15分钟前 · -4积分</span>
+          </div>
+          <div class="usage-row">
+            <span>生成 英语-四上-06-03 语法卡</span>
+            <span class="usage-date">1小时前 · -4积分</span>
+          </div>
+          <div class="usage-row">
+            <span>重生成 英语-四上-03-02 (Banner)</span>
+            <span class="usage-date">3小时前 · -4积分</span>
+          </div>
+        </div>
+        <div class="settings-card">
+          <h3>⚙️ 设置</h3>
+          <div class="usage-row">
+            <span>生成质量</span>
+            <span style="font-weight:600">高质量 (默认)</span>
+          </div>
+          <div class="usage-row">
+            <span>自动重试低分卡片</span>
+            <span style="font-weight:600;color:var(--success)">开启</span>
+          </div>
+          <div class="usage-row">
+            <span>Banner检测</span>
+            <span style="font-weight:600;color:var(--success)">开启</span>
+          </div>
+          <div class="usage-row">
+            <span>邀请码</span>
+            <span style="font-weight:600;color:var(--primary)">ABCD1234</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- .page-content -->
+</div><!-- .main -->
+
+<!-- ── Demo 底栏 ── -->
+<div class="demo-banner">
+  <span>📐 Demo 页面切换:</span>
+  <button class="demo-btn active" onclick="showPage('dashboard', null, this)">首页</button>
+  <button class="demo-btn" onclick="showPage('generate', null, this)">生成卡片</button>
+  <button class="demo-btn" onclick="showPage('gallery', null, this)">卡片库</button>
+  <button class="demo-btn" onclick="showPage('share', null, this)">分享赚钱</button>
+  <button class="demo-btn" onclick="showPage('account', null, this)">账户</button>
+  <span style="margin-left:auto;opacity:0.5">这是静态 Demo · 仅展示界面效果</span>
+</div>
+
+<script>
+const pageTitles = {
+  dashboard: '📊 首页',
+  generate: '✨ 生成卡片',
+  gallery: '🎴 卡片库',
+  share: '💰 分享赚钱',
+  account: '👤 我的账户',
+};
+
+function showPage(id, navItem, demoBtn) {
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+
+  // Update sidebar
+  if (navItem) {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    navItem.classList.add('active');
+  } else {
+    // Sync sidebar from demo bar
+    const navItems = document.querySelectorAll('.nav-item');
+    const pages = ['dashboard', 'generate', 'gallery', 'share', 'account'];
+    const idx = pages.indexOf(id);
+    navItems.forEach((n, i) => n.classList.toggle('active', i === idx));
+  }
+
+  // Update demo bar
+  if (demoBtn) {
+    document.querySelectorAll('.demo-btn').forEach(b => b.classList.remove('active'));
+    demoBtn.classList.add('active');
+  } else {
+    const pages = ['dashboard', 'generate', 'gallery', 'share', 'account'];
+    const idx = pages.indexOf(id);
+    document.querySelectorAll('.demo-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+  }
+
+  // Update topbar
+  document.getElementById('topbar-title').textContent = pageTitles[id] || '';
+}
+
+// Unit item toggle
+document.querySelectorAll('.unit-item').forEach(item => {
+  item.addEventListener('click', () => item.classList.toggle('selected'));
+});
+
+// Type tag toggle
+document.querySelectorAll('.type-tag').forEach(tag => {
+  tag.addEventListener('click', () => {
+    if (tag.textContent === '全部') {
+      document.querySelectorAll('.type-tag').forEach(t => t.classList.remove('active'));
+      tag.classList.add('active');
+    } else {
+      document.querySelector('.type-tag:first-child').classList.remove('active');
+      tag.classList.toggle('active');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
