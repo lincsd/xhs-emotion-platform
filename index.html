@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260404g';
+      var BUILD='20260404h';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);
@@ -1955,7 +1955,7 @@
             <p class="subtitle">卡片生成数据一览</p>
           </div>
           <div class="btn-group">
-            <button class="btn btn-primary" onclick="switchPage('knowledge-cards')">✨ 生成卡片</button>
+            <button class="btn btn-primary" onclick="switchPage('knowledge-cards')">✨ 开始生成英语卡片</button>
           </div>
         </div>
 
@@ -1987,22 +1987,22 @@
 
         <div class="stat-grid" id="stats-grid">
           <div class="stat-card">
-            <div class="stat-icon">🎴</div>
+            <div class="stat-icon">📚</div>
             <div class="stat-value" id="stat-total">0</div>
-            <div class="stat-label">已生成卡片</div>
+            <div class="stat-label">累计知识卡片</div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">✅</div>
+            <div class="stat-icon">🧠</div>
             <div class="stat-value" id="stat-draft" style="color:#52c41a">--%</div>
-            <div class="stat-label">质量达标率</div>
+            <div class="stat-label">内容达标率</div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">🚫</div>
+            <div class="stat-icon">🏷️</div>
             <div class="stat-value" id="stat-scheduled" style="color:#1890ff">--%</div>
-            <div class="stat-label">去Banner率</div>
+            <div class="stat-label">规范版式率</div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">📊</div>
+            <div class="stat-icon">⭐</div>
             <div class="stat-value" id="stat-published">--</div>
             <div class="stat-label">平均质量分</div>
           </div>
@@ -2016,49 +2016,49 @@
               <span style="font-weight:600;min-width:36px;">三上</span>
               <div style="flex:1;height:8px;background:#e5e5e5;border-radius:4px;overflow:hidden;"><div style="width:0%;height:100%;background:var(--success);border-radius:4px;transition:width 0.6s" class="dash-grade-bar" data-grade="3A"></div></div>
               <span style="font-size:12px;color:#888;min-width:48px;text-align:right" class="dash-grade-label" data-grade="3A">0%</span>
-              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">开始</button>
+              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">去生成</button>
             </div>
             <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8f9fa;border-radius:10px;">
               <span style="font-weight:600;min-width:36px;">三下</span>
               <div style="flex:1;height:8px;background:#e5e5e5;border-radius:4px;overflow:hidden;"><div style="width:0%;height:100%;background:var(--success);border-radius:4px;transition:width 0.6s" class="dash-grade-bar" data-grade="3B"></div></div>
               <span style="font-size:12px;color:#888;min-width:48px;text-align:right" class="dash-grade-label" data-grade="3B">0%</span>
-              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">开始</button>
+              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">去生成</button>
             </div>
             <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8f9fa;border-radius:10px;">
               <span style="font-weight:600;min-width:36px;">四上</span>
               <div style="flex:1;height:8px;background:#e5e5e5;border-radius:4px;overflow:hidden;"><div style="width:0%;height:100%;background:var(--info);border-radius:4px;transition:width 0.6s" class="dash-grade-bar" data-grade="4A"></div></div>
               <span style="font-size:12px;color:#888;min-width:48px;text-align:right" class="dash-grade-label" data-grade="4A">0%</span>
-              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">开始</button>
+              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">去生成</button>
             </div>
             <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8f9fa;border-radius:10px;">
               <span style="font-weight:600;min-width:36px;">四下</span>
               <div style="flex:1;height:8px;background:#e5e5e5;border-radius:4px;overflow:hidden;"><div style="width:0%;height:100%;background:var(--info);border-radius:4px;transition:width 0.6s" class="dash-grade-bar" data-grade="4B"></div></div>
               <span style="font-size:12px;color:#888;min-width:48px;text-align:right" class="dash-grade-label" data-grade="4B">0%</span>
-              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">开始</button>
+              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">去生成</button>
             </div>
             <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8f9fa;border-radius:10px;">
               <span style="font-weight:600;min-width:36px;">五上</span>
               <div style="flex:1;height:8px;background:#e5e5e5;border-radius:4px;overflow:hidden;"><div style="width:0%;height:100%;background:var(--warning);border-radius:4px;transition:width 0.6s" class="dash-grade-bar" data-grade="5A"></div></div>
               <span style="font-size:12px;color:#888;min-width:48px;text-align:right" class="dash-grade-label" data-grade="5A">0%</span>
-              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">开始</button>
+              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">去生成</button>
             </div>
             <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8f9fa;border-radius:10px;">
               <span style="font-weight:600;min-width:36px;">五下</span>
               <div style="flex:1;height:8px;background:#e5e5e5;border-radius:4px;overflow:hidden;"><div style="width:0%;height:100%;background:var(--warning);border-radius:4px;transition:width 0.6s" class="dash-grade-bar" data-grade="5B"></div></div>
               <span style="font-size:12px;color:#888;min-width:48px;text-align:right" class="dash-grade-label" data-grade="5B">0%</span>
-              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">开始</button>
+              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">去生成</button>
             </div>
             <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8f9fa;border-radius:10px;">
               <span style="font-weight:600;min-width:36px;">六上</span>
               <div style="flex:1;height:8px;background:#e5e5e5;border-radius:4px;overflow:hidden;"><div style="width:0%;height:100%;background:#ff4d4f;border-radius:4px;transition:width 0.6s" class="dash-grade-bar" data-grade="6A"></div></div>
               <span style="font-size:12px;color:#888;min-width:48px;text-align:right" class="dash-grade-label" data-grade="6A">0%</span>
-              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">开始</button>
+              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">去生成</button>
             </div>
             <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8f9fa;border-radius:10px;">
               <span style="font-weight:600;min-width:36px;">六下</span>
               <div style="flex:1;height:8px;background:#e5e5e5;border-radius:4px;overflow:hidden;"><div style="width:0%;height:100%;background:#ff4d4f;border-radius:4px;transition:width 0.6s" class="dash-grade-bar" data-grade="6B"></div></div>
               <span style="font-size:12px;color:#888;min-width:48px;text-align:right" class="dash-grade-label" data-grade="6B">0%</span>
-              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">开始</button>
+              <button class="btn" style="padding:4px 10px;font-size:11px;" onclick="switchPage('knowledge-cards')">去生成</button>
             </div>
           </div>
         </div>
@@ -4051,7 +4051,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260404g'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260404h'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
@@ -17297,7 +17297,7 @@ Style: ${stylePrompt}
           </div>
           <span style="color:var(--text-light); font-size:18px;">›</span>
         </div>
-      `).join('') : '<div class="empty-state"><p>暂无笔记，去生成一些吧！</p></div>';
+      `).join('') : '<div class="empty-state"><div class="empty-icon">📘</div><p>还没有最近生成记录</p><p style="font-size:13px;color:var(--text-light);margin-top:-8px;">去创建第一批英语知识卡片吧</p></div>';
       document.getElementById('recent-posts').innerHTML = recentHtml;
 
       const catHtml = data.categoryDist.length ? data.categoryDist.map(c => {
