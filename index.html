@@ -10237,37 +10237,6 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         html += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:16px"><span style="background:' + color + ';color:#fff;padding:4px 12px;border-radius:8px;font-size:13px">' + card.type + '</span><h2 style="margin:0;font-size:20px">' + card.full_id + '</h2></div>';
         html += '<h3 style="margin:0 0 12px;font-size:17px;color:#666">' + card.title + '</h3>';
 
-        // 知识点信息
-        html += '<div style="background:#f8f9fa;border-radius:10px;padding:14px;margin-bottom:16px">';
-        html += '<div style="font-size:13px;margin-bottom:6px"><strong>📖 定义:</strong> ' + (card.definition || '') + '</div>';
-        html += '<div style="font-size:13px;margin-bottom:6px"><strong>🔑 核心要点:</strong></div>';
-        html += '<ul style="margin:4px 0 8px;padding-left:20px;font-size:13px">' + (card.core_points || []).map(function(p) { return '<li>' + p + '</li>'; }).join('') + '</ul>';
-        html += '<div style="font-size:13px"><strong>💡 口诀:</strong> <span style="color:var(--primary);font-weight:500">' + (card.memory_tip || '') + '</span></div>';
-        html += '</div>';
-
-        // 例题
-        if (ex.question) {
-          html += '<div style="background:#fff9e6;border:1px solid #ffd700;border-radius:10px;padding:14px;margin-bottom:16px">';
-          html += '<div style="font-weight:600;margin-bottom:6px;font-size:14px">📝 例题</div>';
-          html += '<div style="font-size:13px;margin-bottom:8px">' + ex.question + '</div>';
-          if (ex.steps) html += '<div style="font-size:12px;color:#666"><strong>解题步骤:</strong><ol style="margin:4px 0;padding-left:18px">' + ex.steps.map(function(s) { return '<li>' + s + '</li>'; }).join('') + '</ol></div>';
-          if (ex.answer) html += '<div style="font-size:13px;font-weight:600;color:#2e7d32">\u2705 ' + ex.answer + '</div>';
-          html += '</div>';
-        }
-
-        // 易错点
-        if (mistakes.length > 0) {
-          html += '<div style="background:#fff1f0;border:1px solid #ffccc7;border-radius:10px;padding:14px;margin-bottom:16px">';
-          html += '<div style="font-weight:600;margin-bottom:6px;font-size:14px">⚠️ 易错点</div>';
-          mistakes.forEach(function(m) {
-            html += '<div style="font-size:13px;margin-bottom:4px">\u274c ' + m.wrong + '</div>';
-            html += '<div style="font-size:13px;color:#2e7d32">\u2705 ' + m.correct + '</div>';
-          });
-          html += '</div>';
-        }
-
-
-
         // 生成图片 + 生成笔记按钮
         html += '<div style="margin-bottom:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">';
         html += '<button id="pl-gen-btn" onclick="PromptLib.generateImage(\'' + card.full_id + '\')" style="background:linear-gradient(135deg,#8B5CF6,#EC4899);color:#fff;border:none;padding:12px 28px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;box-shadow:0 3px 12px rgba(139,92,246,.3)" onmouseenter="this.style.opacity=0.9" onmouseleave="this.style.opacity=1">\ud83c\udfa8 AI\u751f\u6210\u5361\u7247</button>';
