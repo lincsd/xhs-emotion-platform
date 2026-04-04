@@ -4062,6 +4062,26 @@
     // v20260318: 所有搜索已走服务端代理，内嵌浏览器无需降级轻量模式
     const IS_LIGHT_AI_MODE = false;
 
+    function ensurePageBuildVersion() {
+      try {
+        const url = new URL(window.location.href);
+        const current = url.searchParams.get('v');
+        const markerKey = 'xhs_page_build_marker';
+        const marker = sessionStorage.getItem(markerKey);
+        if (current === PAGE_BUILD) {
+          sessionStorage.setItem(markerKey, PAGE_BUILD);
+          return true;
+        }
+        if (marker === PAGE_BUILD) return true;
+        url.searchParams.set('v', PAGE_BUILD);
+        sessionStorage.setItem(markerKey, PAGE_BUILD);
+        window.location.replace(url.toString());
+        return false;
+      } catch (e) {
+        return true;
+      }
+    }
+
     // 智能后端选择：竞速模式（Promise.any）同时探测 Tunnel 和 Render，谁先响应用谁
     // 如果 Render 先赢，额外给 Tunnel 3秒宽限期（优先 Tunnel）
     let _activeBackend = CF_TUNNEL_BACKEND; // 初始指向隧道
@@ -21558,7 +21578,7 @@ Style: ${stylePrompt}
 
       loadDashboard();
     }
-    init();
+    if (ensurePageBuildVersion()) init();
   </script>
 </body>
 </html>
