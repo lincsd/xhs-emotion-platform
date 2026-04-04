@@ -3460,18 +3460,14 @@
           <div id="pl-tabs" style="display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:20px">
             <div class="pl-tab active" data-tab="overview" onclick="PromptLib.switchTab('overview')" style="padding:10px 20px;cursor:pointer;font-weight:600;border-bottom:2px solid var(--primary);margin-bottom:-2px;color:var(--primary);font-size:14px">📊 总览</div>
             <div class="pl-tab" data-tab="prompts" onclick="PromptLib.switchTab('prompts')" style="padding:10px 20px;cursor:pointer;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--text-light);font-size:14px">📝 Prompt 记录</div>
-            <div class="pl-tab" data-tab="template" onclick="PromptLib.switchTab('template')" style="padding:10px 20px;cursor:pointer;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--text-light);font-size:14px">📐 当前模板</div>
-            <div class="pl-tab" data-tab="changelog" onclick="PromptLib.switchTab('changelog')" style="padding:10px 20px;cursor:pointer;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--text-light);font-size:14px">📋 迭代日志</div>
+
           </div>
 
           <!-- 总览面板 -->
           <div id="pl-panel-overview" class="pl-panel"></div>
           <!-- Prompt 记录面板 -->
           <div id="pl-panel-prompts" class="pl-panel" style="display:none"></div>
-          <!-- 当前模板面板 -->
-          <div id="pl-panel-template" class="pl-panel" style="display:none"></div>
-          <!-- 迭代日志面板 -->
-          <div id="pl-panel-changelog" class="pl-panel" style="display:none"></div>
+
 
         </div>
         <!-- Prompt 详情弹窗 -->
@@ -10339,8 +10335,6 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         switch(tab) {
           case 'overview': renderOverview(); break;
           case 'prompts': renderPrompts(); break;
-          case 'template': renderTemplate(); break;
-          case 'changelog': renderChangelog(); break;
           case 'pipeline': renderPipeline(); break;
         }
       }
@@ -10504,79 +10498,6 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
 
         box.innerHTML = html;
         overlay.style.display = '';
-      }
-
-      function renderTemplate() {
-        const el = document.getElementById('pl-panel-template');
-        const T = TEMPLATE_INFO;
-        let html = '<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">';
-        html += '<span style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:6px 16px;border-radius:10px;font-weight:700;font-size:18px">' + T.version + '</span>';
-        html += '<span style="font-size:14px;color:#999">' + T.date + '</span></div>';
-
-        html += '<h3 style="font-size:15px;margin-bottom:12px">🤖 模型配置</h3>';
-        html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">';
-        html += '<div style="background:#f0f8ff;padding:12px;border-radius:10px"><div style="font-size:12px;color:#999">文字模型 (Step 1)</div><div style="font-weight:600;font-size:14px;margin-top:4px">' + T.textModel + '</div><div style="font-size:11px;color:#999;margin-top:2px">thinkingBudget: 2048 | maxOutputTokens: 8192</div></div>';
-        html += '<div style="background:#f0fff4;padding:12px;border-radius:10px"><div style="font-size:12px;color:#999">图片模型 (Step 2)</div><div style="font-weight:600;font-size:14px;margin-top:4px">' + T.imageModel + '</div><div style="font-size:11px;color:#999;margin-top:2px">responseModalities: TEXT + IMAGE</div></div></div>';
-
-        html += '<h3 style="font-size:15px;margin-bottom:12px">📐 卡片布局</h3>';
-        html += '<div style="border:1px solid #e8e8e8;border-radius:12px;overflow:hidden;margin-bottom:20px">';
-        T.layout.forEach(function(l, i) {
-          const bg = i === 2 ? '#fff9e6' : i === 3 ? '#f0f8ff' : '#fff';
-          html += '<div style="display:flex;align-items:center;padding:10px 16px;' + (i > 0 ? 'border-top:1px solid #e8e8e8;' : '') + 'background:' + bg + '">';
-          html += '<code style="background:#e8e8e8;padding:2px 8px;border-radius:4px;font-size:12px;min-width:70px;text-align:center">' + l.zone + '</code>';
-          html += '<span style="font-size:12px;color:#999;min-width:40px;text-align:center;margin:0 10px">' + l.pct + '</span>';
-          html += '<span style="font-size:13px;flex:1">' + l.desc + '</span></div>';
-        });
-        html += '</div>';
-
-        html += '<h3 style="font-size:15px;margin-bottom:12px">🎨 配色方案</h3><div style="margin-bottom:20px">';
-        html += '<div style="font-size:13px;font-weight:500;margin-bottom:8px">背景渐变 (4选1)</div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">';
-        T.colors.forEach(function(c) {
-          html += '<div style="width:140px;height:48px;border-radius:10px;background:linear-gradient(135deg,' + c.from + ',' + c.to + ');display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#555;text-shadow:0 0 3px rgba(255,255,255,.6)">' + c.name + '<br><span style="font-size:10px">' + c.from + '\u2192' + c.to + '</span></div>';
-        });
-        html += '</div>';
-        html += '<div style="font-size:13px;font-weight:500;margin-bottom:8px">标题Banner色</div><div style="display:flex;gap:8px;margin-bottom:14px">';
-        T.bannerColors.forEach(function(c) {
-          html += '<div style="display:flex;align-items:center;gap:6px"><div style="width:28px;height:28px;border-radius:6px;background:' + c + '"></div><code style="font-size:11px">' + c + '</code></div>';
-        });
-        html += '</div>';
-        html += '<div style="display:flex;gap:16px"><div style="display:flex;align-items:center;gap:6px"><div style="width:24px;height:24px;border-radius:6px;background:#2ED573"></div><span style="font-size:12px">\u2713 正确 #2ED573</span></div>';
-        html += '<div style="display:flex;align-items:center;gap:6px"><div style="width:24px;height:24px;border-radius:6px;background:#FF4757"></div><span style="font-size:12px">\u2717 错误 #FF4757</span></div></div></div>';
-
-        html += '<h3 style="font-size:15px;margin-bottom:12px">📝 文字规范</h3>';
-        html += '<table style="width:100%;border-collapse:collapse;margin-bottom:20px;font-size:13px"><thead><tr style="background:#f8f9fa"><th style="padding:8px 12px;text-align:left;border-bottom:2px solid #e8e8e8">元素</th><th style="padding:8px 12px;text-align:left;border-bottom:2px solid #e8e8e8">限制</th></tr></thead><tbody>';
-        T.textRules.forEach(function(r) {
-          html += '<tr><td style="padding:8px 12px;border-bottom:1px solid #f0f0f0">' + r.elem + '</td><td style="padding:8px 12px;border-bottom:1px solid #f0f0f0"><code style="background:#e8f5e9;padding:2px 6px;border-radius:4px">' + r.limit + '</code></td></tr>';
-        });
-        html += '</tbody></table>';
-
-        html += '<h3 style="font-size:15px;margin-bottom:12px">🚫 禁止事项</h3><div style="display:flex;flex-wrap:wrap;gap:8px">';
-        T.dontList.forEach(function(d) { html += '<span style="background:#fff1f0;color:#cf1322;padding:6px 14px;border-radius:20px;font-size:13px">\u274c ' + d + '</span>'; });
-        html += '</div>';
-
-        el.innerHTML = html;
-      }
-
-      function renderChangelog() {
-        const el = document.getElementById('pl-panel-changelog');
-        let html = '<div style="position:relative;padding-left:28px"><div style="position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--primary),#e8e8e8)"></div>';
-        CHANGELOG.forEach(function(log, i) {
-          html += '<div style="position:relative;margin-bottom:24px">';
-          html += '<div style="position:absolute;left:-23px;top:4px;width:12px;height:12px;border-radius:50%;background:' + (i === 0 ? 'var(--primary)' : '#ccc') + ';border:2px solid #fff;box-shadow:0 0 0 2px ' + (i === 0 ? 'var(--primary)' : '#ddd') + '"></div>';
-          html += '<div style="border:1px solid ' + (i === 0 ? 'rgba(102,126,234,.25)' : '#e8e8e8') + ';border-radius:12px;padding:16px;' + (i === 0 ? 'background:linear-gradient(135deg,#f0f4ff,#fff)' : '') + '">';
-          html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">';
-          html += '<span style="background:' + (i === 0 ? 'var(--primary)' : '#999') + ';color:#fff;padding:3px 10px;border-radius:6px;font-weight:700;font-size:13px">' + log.ver + '</span>';
-          html += '<span style="font-size:13px;color:#999">' + log.date + '</span>';
-          if (i === 0) html += '<span style="background:#e8f5e9;color:#2e7d32;padding:2px 8px;border-radius:6px;font-size:11px">当前版本</span>';
-          html += '</div>';
-          html += '<div style="font-weight:600;font-size:15px;margin-bottom:6px">' + log.title + '</div>';
-          html += '<div style="font-size:13px;color:#999;margin-bottom:8px">\ud83d\udcac 问题: ' + log.problem + '</div>';
-          html += '<div style="font-size:13px">';
-          log.changes.forEach(function(c) { html += '<div style="padding:2px 0">\u2705 ' + c + '</div>'; });
-          html += '</div></div></div>';
-        });
-        html += '</div>';
-        el.innerHTML = html;
       }
 
       // ─── AI 生成卡片图片（v3 全自动流水线：AI生图→OCR审计→重试→PIL修补） ───
