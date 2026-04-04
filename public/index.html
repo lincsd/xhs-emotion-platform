@@ -9856,10 +9856,6 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         const trapHtml = card.trap_point ? `<div style="background:#fff8e1;border-radius:12px;padding:16px;margin-bottom:14px">
           <div style="font-size:13px;font-weight:600;color:#f57f17;margin-bottom:6px">🪤 陷阱点</div>
           <div style="font-size:14px;color:#333">${card.trap_point}</div></div>` : '';
-        const canDownloadCardImage = !!(card.title && card.definition);
-        const downloadBtnHtml = canDownloadCardImage
-          ? `<button onclick="KnowledgeCards.downloadCard('${card.full_id}')" style="background:#f8fafc;color:#475569;border:1px solid #cbd5e1;padding:10px 24px;border-radius:24px;font-size:14px;cursor:pointer;box-shadow:none">📥 下载卡片图片</button>`
-          : '';
 
         box.innerHTML = `
           <div style="text-align:right"><button onclick="document.getElementById('kc-detail-overlay').style.display='none'" style="background:none;border:none;font-size:22px;cursor:pointer;color:#999">✕</button></div>
@@ -9873,7 +9869,6 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
           </div>
           
           <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-            ${downloadBtnHtml}
             <button onclick="KnowledgeCards._goNote('${card.full_id}')" style="background:linear-gradient(135deg,#f093fb,#f5576c);color:#fff;border:none;padding:10px 28px;border-radius:24px;font-size:14px;cursor:pointer;box-shadow:0 4px 12px rgba(245,87,108,.3)">📝 生成笔记</button>
             <button onclick="_goToPromptLib('${card.full_id}')" style="background:linear-gradient(135deg,#43e97b,#38f9d7);color:#fff;border:none;padding:10px 28px;border-radius:24px;font-size:14px;cursor:pointer;box-shadow:0 4px 12px rgba(67,233,123,.3)">🧪 查看Prompt</button>
           </div>`;
