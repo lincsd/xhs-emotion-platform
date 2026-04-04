@@ -10,7 +10,7 @@
   <script>
     // 强制绕过缓存：如果URL没有版本参数或版本过旧，自动刷新
     (function(){
-      var BUILD='20260404e';
+      var BUILD='20260404f';
       var u=new URL(location.href);
       var v=u.searchParams.get('_v');
       if(v!==BUILD){u.searchParams.set('_v',BUILD);location.replace(u.href);
@@ -22,7 +22,7 @@
       --primary-light: #dbeafe;
       --primary-dark: #2563eb;
       --accent: #f59e0b;
-      --bg: #f7fbff;
+      --bg: #f8fbff;
       --card: #ffffff;
       --text: #1e293b;
       --text-light: #64748b;
@@ -39,10 +39,10 @@
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
       background:
-        radial-gradient(circle at 14% 16%, rgba(59,130,246,0.14) 0, transparent 18%),
-        radial-gradient(circle at 86% 12%, rgba(16,185,129,0.10) 0, transparent 16%),
-        radial-gradient(circle at 82% 86%, rgba(245,158,11,0.08) 0, transparent 18%),
-        linear-gradient(180deg, #f9fbff 0%, #eef5ff 52%, #f8fbff 100%);
+        radial-gradient(circle at 14% 16%, rgba(59,130,246,0.12) 0, transparent 18%),
+        radial-gradient(circle at 86% 12%, rgba(16,185,129,0.08) 0, transparent 16%),
+        radial-gradient(circle at 82% 86%, rgba(245,158,11,0.06) 0, transparent 18%),
+        linear-gradient(180deg, #fbfdff 0%, #f1f6ff 52%, #f9fbff 100%);
       background-attachment: fixed;
       color: var(--text);
       min-height: 100vh;
@@ -55,13 +55,25 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.28;
+      opacity: 0.22;
       background-image:
-        linear-gradient(rgba(59,130,246,0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
-      background-size: 28px 28px;
+        linear-gradient(rgba(59,130,246,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+      background-size: 30px 30px;
       mask-image: linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.25));
       -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.25));
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.45;
+      background:
+        radial-gradient(circle at 10% 22%, rgba(59,130,246,0.06) 0 2px, transparent 2.5px),
+        radial-gradient(circle at 88% 18%, rgba(245,158,11,0.08) 0 2px, transparent 2.5px),
+        radial-gradient(circle at 84% 78%, rgba(16,185,129,0.07) 0 2px, transparent 2.5px);
     }
 
     /* ===== 布局 ===== */
@@ -132,6 +144,26 @@
       margin-left: 240px;
       padding: 24px;
       max-width: calc(100vw - 240px);
+      position: relative;
+      z-index: 1;
+    }
+
+    .main::before {
+      content: '';
+      position: fixed;
+      top: 14px;
+      right: 18px;
+      bottom: 14px;
+      left: 258px;
+      pointer-events: none;
+      border-radius: 24px;
+      background:
+        linear-gradient(90deg, rgba(239,68,68,0.10) 0, rgba(239,68,68,0.10) 2px, transparent 2px, transparent 100%),
+        repeating-linear-gradient(180deg, rgba(59,130,246,0.055) 0, rgba(59,130,246,0.055) 1px, transparent 1px, transparent 36px),
+        rgba(255,255,255,0.72);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
     }
 
     .page-header {
@@ -157,6 +189,7 @@
       background: var(--card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
+      border: 1px solid rgba(59,130,246,0.08);
       padding: 20px;
       margin-bottom: 16px;
     }
@@ -3809,7 +3842,7 @@
     let _brandingPackMemory = null;
 
     // ============ API 基础地址 ============
-    const PAGE_BUILD = '20260404e'; // 页面构建版本，用于验证缓存
+    const PAGE_BUILD = '20260404f'; // 页面构建版本，用于验证缓存
     // 优先使用 Cloudflare Tunnel（本地服务器+梯子，速度最快）
     // 备用: Render 云端服务器（无需本地运行，但有冷启动延迟）
     const CF_TUNNEL_BACKEND = 'https://xhs.xiaohsai.com';
