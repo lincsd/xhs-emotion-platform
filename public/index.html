@@ -1512,8 +1512,8 @@
   <div id="login-page" class="login-page">
     <div class="login-box">
       <div class="login-box-header">
-        <h1>📝 小红书智能运营台</h1>
-        <p>小红书多技能账号管理平台</p>
+        <h1>� 英语知识卡片平台</h1>
+        <p>小学英语知识卡片 · AI 自动生成</p>
       </div>
       <div class="login-box-body">
         <div class="login-tabs">
@@ -1795,7 +1795,7 @@
         <div class="page-header">
           <div>
             <h2>✨ 内容生成</h2>
-            <p class="subtitle">一键自动生成小红书情感笔记</p>
+            <p class="subtitle">AI 自动生成小学英语知识卡片</p>
           </div>
         </div>
 
@@ -3874,10 +3874,10 @@
     // ============ Skill 系统 — 多账号类型复用 ============
     const SKILL_TEMPLATES = {
       '情感': {
-        id: 'emotion', name: '情感', icon: '🌸', color: '#ff2442',
-        title: '小红书情感账号 · 运营管理平台',
-        sidebarTitle: '🌸 情感运营台',
-        subtitle: '一键自动生成小红书情感笔记',
+        id: 'emotion', name: '情感', icon: '📚', color: '#ff2442',
+        title: '英语知识卡片平台',
+        sidebarTitle: '📚 英语卡片',
+        subtitle: 'AI 自动生成小学英语知识卡片',
         // monetizationSubtitle 已改为自动生成: `${sk.name}账号系统化变现策略`
         categoryLabel: '情感分类',
         categories: ['治愈','成长','爱情','友情','自我','离别','温暖','释怀'],
@@ -4692,7 +4692,7 @@
       document.title = sk.title;
       // 侧边栏标题（桌面 + 手机端抽屉都同步）
       document.querySelectorAll('.sidebar-header h1').forEach(el => el.textContent = sk.sidebarTitle);
-      document.querySelectorAll('.sidebar-header p').forEach(el => el.textContent = `小红书${sk.name}自动化管理`);
+      document.querySelectorAll('.sidebar-header p').forEach(el => el.textContent = '小学英语知识卡片平台');
       // 生成器副标题
       const genSub = document.querySelector('#page-generator .subtitle');
       if (genSub) genSub.textContent = sk.subtitle;
