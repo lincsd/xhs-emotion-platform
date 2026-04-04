@@ -1515,14 +1515,14 @@
       font-size: 10px;
       color: var(--text-light);
       cursor: pointer;
-      transition: color 0.2s;
+      transition: color 0.2s, background-color 0.2s;
       border: none;
       background: none;
       min-width: 0;
       flex: 1;
     }
     .mobile-tab .mob-icon { font-size: 20px; line-height: 1; }
-    .mobile-tab.active { color: var(--primary); }
+    .mobile-tab.active { color: var(--primary); background: rgba(var(--primary-rgb),0.08); border-radius: 10px; }
     .mobile-tab.active .mob-label { font-weight: 600; }
 
     /* 手机端侧边栏抽屉 */
@@ -10162,7 +10162,7 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         { ver: 'v10', date: '2026-03-22', title: '五角色流水线 + 6种爆款新题型',
           problem: '单角色Prompt无法同时兼顾教研准确、教学有效、传播爆款',
           changes: ['5个AI角色分工协作: 教研专家→教学设计师→小红书策划→视觉设计师→质检总监', '新增6种爆款题型: 陷阱卡/速算卡/挑战卡/生活卡/对战卡/思维卡', '5种新奇解题策略: 反转法/类比法/对抗法/动画帧法/一笔改错法', '设计要素系统: IP角色+系列编号+情绪钩子+角标徽章', '5维度质检评分(满分50)+不合格自动改进循环', 'generate_card_images_v2.py 五角色流水线脚本'] },
-        { ver: 'v9', date: '2026-03-21', title: '例题驱动 + 题型 Skill 分化',
+        { ver: 'v9', date: '2026-03-21', title: '例题驱动 + 题型分化',
           problem: '卡片看不出在解什么题，解题过程抽象',
           changes: ['每张卡片必须围绕一道具体例题展开', '题目必须醒目展示在卡面上', '解题用色块分步图示，不画竖式', '答案单独大字展示', '建立 card_prompt_lib/ 目录，按题型归档 Skill'] },
         { ver: 'v8', date: '2026-03-21', title: '渐变配色 + 顿悟教学',
@@ -10344,27 +10344,27 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
         const totalCards = allCards.length || 34;
         const totalSkills = Object.keys(CARD_TYPES).length;
         el.innerHTML = `
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:24px">
-            <div style="background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;padding:20px;border-radius:14px">
-              <div style="font-size:28px;font-weight:700">${totalCards}</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:16px">
+            <div style="background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;padding:16px;border-radius:12px">
+              <div style="font-size:26px;font-weight:700">${totalCards}</div>
               <div style="font-size:13px;opacity:.8">知识点卡片</div>
             </div>
-            <div style="background:linear-gradient(135deg,#43e97b,#38f9d7);color:#fff;padding:20px;border-radius:14px">
-              <div style="font-size:28px;font-weight:700">${totalSkills}</div>
+            <div style="background:linear-gradient(135deg,#43e97b,#38f9d7);color:#fff;padding:16px;border-radius:12px">
+              <div style="font-size:26px;font-weight:700">${totalSkills}</div>
               <div style="font-size:13px;opacity:.8">题型</div>
             </div>
           </div>
-          <h3 style="font-size:16px;margin-bottom:14px">📁 十种题型</h3>
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:24px">
+          <h3 style="font-size:16px;margin-bottom:10px">📁 十种题型</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:18px">
             ${Object.entries(CARD_TYPES).map(([name, t]) => `
-              <div style="border:1px solid ${t.color}22;border-radius:12px;padding:16px;background:${t.color}08">
-                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+              <div style="border:1px solid ${t.color}22;border-radius:12px;padding:14px;background:${t.color}08">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
                   <span style="font-size:24px">${t.icon}</span>
                   <span style="font-weight:700;font-size:16px;color:${t.color}">${name}</span>
                   <span style="background:${t.color};color:#fff;padding:2px 8px;border-radius:10px;font-size:12px;margin-left:auto">${t.count}张</span>
                 </div>
-                <div style="font-size:13px;color:#666;margin-bottom:6px">${t.desc}</div>
-                <div style="font-size:12px;color:#999">📌 ${t.examples}</div>
+                <div style="font-size:13px;color:#666;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.desc}</div>
+                <div style="font-size:12px;color:#999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">📌 ${t.examples}</div>
               </div>
             `).join('')}
           </div>
