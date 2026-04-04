@@ -10342,22 +10342,15 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
       function renderOverview() {
         const el = document.getElementById('pl-panel-overview');
         const totalCards = allCards.length || 34;
+        const totalSkills = Object.keys(CARD_TYPES).length;
         el.innerHTML = `
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:24px">
-            <div style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:20px;border-radius:14px">
-              <div style="font-size:28px;font-weight:700">${TEMPLATE_INFO.version}</div>
-              <div style="font-size:13px;opacity:.8">当前 Prompt 版本</div>
-            </div>
-            <div style="background:linear-gradient(135deg,#f093fb,#f5576c);color:#fff;padding:20px;border-radius:14px">
-              <div style="font-size:28px;font-weight:700">${CHANGELOG.length}</div>
-              <div style="font-size:13px;opacity:.8">迭代次数</div>
-            </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:24px">
             <div style="background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;padding:20px;border-radius:14px">
               <div style="font-size:28px;font-weight:700">${totalCards}</div>
               <div style="font-size:13px;opacity:.8">知识点卡片</div>
             </div>
             <div style="background:linear-gradient(135deg,#43e97b,#38f9d7);color:#fff;padding:20px;border-radius:14px">
-              <div style="font-size:28px;font-weight:700">10</div>
+              <div style="font-size:28px;font-weight:700">${totalSkills}</div>
               <div style="font-size:13px;opacity:.8">题型 Skill</div>
             </div>
           </div>
@@ -10374,31 +10367,6 @@ ${hasPhotos ? '注意：用户上传了配图，所有模板都已支持图片�
                 <div style="font-size:12px;color:#999">📌 ${t.examples}</div>
               </div>
             `).join('')}
-          </div>
-          <h3 style="font-size:16px;margin-bottom:14px">🎨 配色方案</h3>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px">
-            ${TEMPLATE_INFO.colors.map(c => `
-              <div style="display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:10px;background:linear-gradient(135deg,${c.from},${c.to});min-width:160px">
-                <span style="font-size:13px;font-weight:600;color:#333;text-shadow:0 0 4px rgba(255,255,255,.5)">${c.name}</span>
-              </div>
-            `).join('')}
-          </div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px">
-            <span style="font-size:13px;color:#999;margin-right:8px">标题Banner色:</span>
-            ${TEMPLATE_INFO.bannerColors.map(c => `<div style="width:32px;height:32px;border-radius:8px;background:${c}" title="${c}"></div>`).join('')}
-          </div>
-          <h3 style="font-size:16px;margin-bottom:14px">📝 文字规范</h3>
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:24px">
-            ${TEMPLATE_INFO.textRules.map(r => `
-              <div style="background:#f8f9fa;padding:10px 14px;border-radius:8px;display:flex;justify-content:space-between;align-items:center">
-                <span style="font-size:13px;font-weight:500">${r.elem}</span>
-                <span style="font-size:12px;color:var(--primary);background:#e8f0fe;padding:2px 8px;border-radius:6px">${r.limit}</span>
-              </div>
-            `).join('')}
-          </div>
-          <h3 style="font-size:16px;margin-bottom:14px">🚫 禁止事项</h3>
-          <div style="display:flex;flex-wrap:wrap;gap:8px">
-            ${TEMPLATE_INFO.dontList.map(d => `<span style="background:#fff1f0;color:#cf1322;padding:6px 14px;border-radius:20px;font-size:13px">❌ ${d}</span>`).join('')}
           </div>
         `;
       }
