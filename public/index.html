@@ -185,9 +185,9 @@
     .dashboard-hero {
       position: relative;
       display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.9fr);
-      gap: 18px;
-      padding: 22px 24px;
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 28px 32px;
       margin-bottom: 18px;
       border-radius: 22px;
       overflow: hidden;
@@ -343,6 +343,14 @@
       font-size: 13px;
       line-height: 1.6;
       box-shadow: 0 8px 22px rgba(59,130,246,0.06);
+    }
+
+    .dashboard-hero-cta {
+      margin-top: 20px;
+      padding: 12px 32px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 14px;
     }
 
     /* ===== 通用组件 ===== */
@@ -1959,27 +1967,9 @@
 
         <div class="dashboard-hero">
           <div class="dashboard-hero-content">
-            <div class="dashboard-hero-kicker">📘 English Learning Workspace</div>
             <div class="dashboard-hero-title">让每一张 <span class="hl">英语知识卡</span> 都更像真实课堂里的学习材料</div>
             <div class="dashboard-hero-desc">围绕单词、句型、语法与易错点，快速生成更适合小学英语教学场景的卡片内容。整体氛围保持清爽、专注、轻学习感。</div>
-            <div class="dashboard-hero-tags">
-              <span class="dashboard-hero-tag">🔤 <b>Words</b> 单词记忆</span>
-              <span class="dashboard-hero-tag">🗣️ <b>Sentences</b> 句型表达</span>
-              <span class="dashboard-hero-tag">✏️ <b>Practice</b> 练习巩固</span>
-            </div>
-          </div>
-          <div class="dashboard-hero-decor" aria-hidden="true">
-            <div class="dashboard-word-row">
-              <div class="dashboard-word-chip"><span class="en">apple</span><span class="cn">苹果</span></div>
-              <div class="dashboard-word-chip"><span class="en">book</span><span class="cn">书本</span></div>
-              <div class="dashboard-word-chip"><span class="en">read</span><span class="cn">阅读</span></div>
-            </div>
-            <div class="dashboard-alpha-row">
-              <span class="dashboard-alpha">A</span>
-              <span class="dashboard-alpha">B</span>
-              <span class="dashboard-alpha">C</span>
-            </div>
-            <div class="dashboard-hero-note">📝 Daily English tip：短句、清晰、可练习，比花哨表达更适合小学生记忆。</div>
+            <button class="btn btn-primary dashboard-hero-cta" onclick="switchPage('knowledge-cards')">✨ 立即生成英语卡片</button>
           </div>
         </div>
 
