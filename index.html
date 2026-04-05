@@ -1794,6 +1794,232 @@
       .dashboard-alpha-row { justify-content: flex-start; }
       .dashboard-hero-note { align-self: flex-start; }
     }
+
+    /* ===== 词汇卡展示页 ===== */
+    .vocab-showcase { display: flex; flex-direction: column; gap: 20px; }
+    .vc-hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr); gap: 20px; }
+    .vc-hero-panel,
+    .vc-feature-card,
+    .vc-theme-shell,
+    .vc-theme-block,
+    .vc-cta-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+    .vc-hero-panel,
+    .vc-feature-card,
+    .vc-theme-shell,
+    .vc-theme-block { padding: 24px; }
+    .vc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .vc-hero-panel h2 { font-size: 34px; line-height: 1.25; color: var(--text); margin-bottom: 12px; }
+    .vc-hero-desc { color: var(--text-light); font-size: 15px; line-height: 1.8; }
+    .vc-stat-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 20px 0; }
+    .vc-stat-item {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .vc-stat-value { font-size: 24px; font-weight: 800; color: var(--text); }
+    .vc-stat-label { margin-top: 6px; color: var(--text-light); font-size: 12px; }
+    .vc-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .vc-points { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .vc-point {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: var(--text-light);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .vc-feature-card { display: flex; flex-direction: column; gap: 16px; }
+    .vc-feature-card img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 18px;
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+    }
+    .vc-feature-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .vc-feature-title { font-size: 12px; color: var(--text-light); letter-spacing: 0.08em; text-transform: uppercase; }
+    .vc-feature-word { font-size: 28px; font-weight: 800; color: var(--text); }
+    .vc-feature-meta { color: var(--text-light); font-size: 14px; }
+    .vc-score-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(16,185,129,0.12);
+      color: var(--success);
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .vc-toolbar { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .vc-toolbar h3 { font-size: 22px; color: var(--text); margin-bottom: 6px; }
+    .vc-toolbar p { color: var(--text-light); font-size: 14px; }
+    .vc-theme-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .vc-theme-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+    .vc-theme-chip:hover,
+    .vc-theme-chip.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(59,130,246,0.22);
+    }
+    .vc-theme-list { display: flex; flex-direction: column; gap: 18px; }
+    .vc-theme-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+    .vc-theme-title { display: flex; align-items: center; gap: 10px; font-size: 22px; color: var(--text); font-weight: 800; }
+    .vc-theme-count { color: var(--text-light); font-size: 13px; font-weight: 600; }
+    .vc-card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+    .vc-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .vc-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+      box-shadow: 0 14px 30px rgba(59,130,246,0.16);
+    }
+    .vc-card img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      background: #f1f5f9;
+      display: block;
+    }
+    .vc-card-body { padding: 14px; }
+    .vc-word { font-size: 19px; line-height: 1.2; font-weight: 800; color: var(--text); margin-bottom: 10px; }
+    .vc-card-sub { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .vc-card-id { color: var(--text-light); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .vc-loading,
+    .vc-empty {
+      border: 1px dashed var(--border);
+      border-radius: 18px;
+      padding: 28px 20px;
+      background: #f8fbff;
+      color: var(--text-light);
+      text-align: center;
+    }
+    .vc-cta-card {
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .vc-cta-card h3 { font-size: 22px; color: var(--text); margin-bottom: 6px; }
+    .vc-cta-card p { color: var(--text-light); font-size: 14px; }
+    .vc-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      background: rgba(15,23,42,0.86);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .vc-lightbox.active { display: flex; }
+    .vc-lightbox-dialog {
+      width: min(1120px, 100%);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 20px;
+      align-items: center;
+    }
+    .vc-lightbox-stage {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 24px;
+      padding: 18px;
+    }
+    .vc-lightbox-stage img {
+      width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      display: block;
+      border-radius: 18px;
+      background: #fff;
+    }
+    .vc-lightbox-side {
+      background: #fff;
+      border-radius: 24px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .vc-lightbox-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .vc-lightbox-eyebrow { color: var(--text-light); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .vc-lightbox-side h3 { font-size: 28px; color: var(--text); margin-top: 6px; }
+    .vc-lightbox-id { color: var(--text-light); font-size: 13px; }
+    .vc-lightbox-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .vc-lightbox-metrics .vc-stat-item { padding: 14px; }
+    .vc-lightbox-tip { color: var(--text-light); font-size: 13px; line-height: 1.7; }
+    .vc-lightbox-nav { display: flex; gap: 10px; }
+    .vc-lightbox-nav .btn { flex: 1; }
+    @media (max-width: 1024px) {
+      .vc-hero,
+      .vc-lightbox-dialog { grid-template-columns: 1fr; }
+      .vc-feature-card img { max-width: 360px; margin: 0 auto; }
+    }
+    @media (max-width: 768px) {
+      .vc-hero-panel h2 { font-size: 28px; }
+      .vc-stat-grid,
+      .vc-lightbox-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .vc-hero-panel,
+      .vc-feature-card,
+      .vc-theme-shell,
+      .vc-theme-block,
+      .vc-cta-card { padding: 18px; }
+      .vc-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .vc-lightbox { padding: 12px; }
+      .vc-lightbox-stage img { max-height: 58vh; }
+    }
+    @media (max-width: 520px) {
+      .vc-stat-grid { grid-template-columns: 1fr 1fr; }
+      .vc-card-grid { grid-template-columns: 1fr; }
+      .vc-actions,
+      .vc-lightbox-nav { flex-direction: column; }
+      .vc-theme-chip { width: 100%; justify-content: center; }
+    }
   </style>
 </head>
 <body>
@@ -1894,6 +2120,9 @@
         <div class="nav-item" data-page="account" style="display:none;">
           <span class="icon">👤</span> 我的账户
         </div>
+        <div class="nav-item" data-page="vocab-cards">
+          <span class="icon">🔤</span> 词汇卡
+        </div>
       </div>
       <div class="nav-group" style="margin-top:auto; border-top:1px solid rgba(255,255,255,0.1); padding-top:12px; display:none;">
         <div class="nav-item" onclick="openModal('modal-settings')" style="cursor:pointer;">
@@ -1946,6 +2175,7 @@
         <div class="nav-item mob-nav" data-page="card-lib" onclick="mobileSwitchPage('card-lib')" style="display:none;"><span class="icon">🎴</span> 模板管理</div>
         <div class="nav-item mob-nav" data-page="invite" onclick="mobileSwitchPage('invite')"><span class="icon">💰</span> 分享赚钱</div>
         <div class="nav-item mob-nav" data-page="account" onclick="mobileSwitchPage('account')" style="display:none;"><span class="icon">👤</span> 我的账户</div>
+        <div class="nav-item mob-nav" data-page="vocab-cards" onclick="mobileSwitchPage('vocab-cards')"><span class="icon">🔤</span> 词汇卡</div>
         <div class="nav-item mob-nav" onclick="openModal('modal-settings'); toggleMobileDrawer();" style="display:none;"><span class="icon">⚙️</span> API 设置</div>
       </div>
       <div class="drawer-credits-line" id="drawer-credits" onclick="openModal('modal-redeem'); toggleMobileDrawer();" style="display:none;">
@@ -1973,6 +2203,9 @@
         </div>
         <div class="mobile-tab" data-page="account" onclick="mobileSwitchPage('account')" style="display:none;">
           <span class="mob-icon">👤</span><span class="mob-label">账户</span>
+        </div>
+        <div class="mobile-tab" data-page="vocab-cards" onclick="mobileSwitchPage('vocab-cards')">
+          <span class="mob-icon">🔤</span><span class="mob-label">词汇</span>
         </div>
       </div>
     </div>
@@ -3494,6 +3727,91 @@
           <h2 class="section-title">📝 笔记工坊</h2>
           <p class="section-desc">一键生成小红书笔记 · 标题/正文/封面/轮播/标签一站式完成</p>
           <div id="nw-container"></div>
+        </div>
+      </section>
+
+      <!-- ===== 词汇卡展示页 ===== -->
+      <section id="page-vocab-cards" class="page hidden">
+        <div class="vocab-showcase">
+          <div class="vc-hero">
+            <div class="vc-hero-panel">
+              <div class="vc-badge">🔤 小学英语词汇卡</div>
+              <h2>120 张词汇卡，一页完整展示</h2>
+              <p class="vc-hero-desc">按主题浏览、支持点击放大和左右切换，适合商品展示、家长选购、私域预览和社群转化。</p>
+              <div class="vc-stat-grid" id="vc-stats">
+                <div class="vc-stat-item"><div class="vc-stat-value">120</div><div class="vc-stat-label">词汇卡总数</div></div>
+                <div class="vc-stat-item"><div class="vc-stat-value">12</div><div class="vc-stat-label">主题分类</div></div>
+                <div class="vc-stat-item"><div class="vc-stat-value">100</div><div class="vc-stat-label">审核均分</div></div>
+                <div class="vc-stat-item"><div class="vc-stat-value">97+</div><div class="vc-stat-label">质量均分</div></div>
+              </div>
+              <div class="vc-actions">
+                <button class="btn btn-primary" onclick="switchPage('knowledge-cards')">✨ 去生成卡片</button>
+                <button class="btn btn-outline" data-vocab-action="scroll-grid">🖼️ 查看全部</button>
+                <button class="btn btn-outline" onclick="switchPage('purchase')">💎 了解购买</button>
+              </div>
+              <div class="vc-points">
+                <span class="vc-point">✅ 12 个主题</span>
+                <span class="vc-point">✅ 每组 10 张</span>
+                <span class="vc-point">✅ 手机端可看</span>
+                <span class="vc-point">✅ 支持放大预览</span>
+              </div>
+            </div>
+            <div class="vc-feature-card" id="vc-feature-card">
+              <div class="vc-loading">正在加载精选词卡...</div>
+            </div>
+          </div>
+
+          <div class="vc-theme-shell">
+            <div class="vc-toolbar">
+              <div>
+                <h3>📚 主题导航</h3>
+                <p>点击主题快速定位到对应词汇卡分组。</p>
+              </div>
+              <div class="vc-theme-chips" id="vc-theme-chips">
+                <div class="vc-loading" style="padding:12px 18px;">正在加载主题...</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="vc-grid-anchor"></div>
+          <div class="vc-theme-list" id="vc-theme-sections">
+            <div class="vc-loading">正在加载 120 张词汇卡...</div>
+          </div>
+
+          <div class="vc-cta-card">
+            <div>
+              <h3>📦 这页可以直接用于展示和转化</h3>
+              <p>适合朋友圈预览、社群团购、家长选购页，以及前端商品页演示。</p>
+            </div>
+            <div class="vc-actions">
+              <button class="btn btn-primary" onclick="switchPage('knowledge-cards')">🎯 继续生成新卡</button>
+              <button class="btn btn-outline" onclick="switchPage('invite')">💰 去看推广页</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="vc-lightbox" id="vc-lightbox">
+          <div class="vc-lightbox-dialog">
+            <div class="vc-lightbox-stage">
+              <img id="vc-lightbox-image" src="" alt="词汇卡预览">
+            </div>
+            <div class="vc-lightbox-side">
+              <div class="vc-lightbox-top">
+                <div>
+                  <div class="vc-lightbox-eyebrow" id="vc-lightbox-theme">词汇卡</div>
+                  <h3 id="vc-lightbox-word">-</h3>
+                  <div class="vc-lightbox-id" id="vc-lightbox-id">-</div>
+                </div>
+                <button class="btn btn-outline btn-sm" data-vocab-lightbox="close">关闭</button>
+              </div>
+              <div class="vc-lightbox-metrics" id="vc-lightbox-metrics"></div>
+              <p class="vc-lightbox-tip">支持键盘 ← / → 切换，按 Esc 关闭。</p>
+              <div class="vc-lightbox-nav">
+                <button class="btn btn-outline" data-vocab-lightbox="prev">← 上一张</button>
+                <button class="btn btn-primary" data-vocab-lightbox="next">下一张 →</button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -17067,6 +17385,304 @@ Style: ${stylePrompt}
       return `<span class="category-tag" style="background:${categoryColors[c] || '#eee'}33; color:${categoryColors[c] || '#666'}">${categoryEmojis[c] || ''} ${c}</span>`;
     }
 
+    // ============ 🔤 词汇卡展示模块 ============
+    const VocabCards = (() => {
+      const THEME_EMOJIS = {
+        T01: '👋', T02: '🔢', T03: '🎨', T04: '👨‍👩‍👧', T05: '🏫', T06: '🧍',
+        T07: '🐾', T08: '🍎', T09: '🏃', T10: '🌤️', T11: '👕', T12: '🚗'
+      };
+
+      let inited = false;
+      let bound = false;
+      let loadingPromise = null;
+      let themeGroups = [];
+      let flatCards = [];
+      let activeTheme = null;
+      let currentIndex = 0;
+      let updatedAt = '';
+
+      function esc(v) {
+        return String(v == null ? '' : v).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+      }
+
+      function apiUrl(path) {
+        const ver = (typeof PAGE_BUILD !== 'undefined' && PAGE_BUILD) ? PAGE_BUILD : Date.now();
+        return `${path}${path.includes('?') ? '&' : '?'}v=${encodeURIComponent(ver)}`;
+      }
+
+      function fmtTime(v) {
+        if (!v) return '刚刚更新';
+        return String(v).replace('T', ' ').slice(0, 16);
+      }
+
+      function renderLoading() {
+        const statsEl = document.getElementById('vc-stats');
+        const featureEl = document.getElementById('vc-feature-card');
+        const chipsEl = document.getElementById('vc-theme-chips');
+        const listEl = document.getElementById('vc-theme-sections');
+        if (statsEl) {
+          statsEl.innerHTML = `
+            <div class="vc-stat-item"><div class="vc-stat-value">...</div><div class="vc-stat-label">词汇卡总数</div></div>
+            <div class="vc-stat-item"><div class="vc-stat-value">...</div><div class="vc-stat-label">主题分类</div></div>
+            <div class="vc-stat-item"><div class="vc-stat-value">...</div><div class="vc-stat-label">审核均分</div></div>
+            <div class="vc-stat-item"><div class="vc-stat-value">...</div><div class="vc-stat-label">质量均分</div></div>`;
+        }
+        if (featureEl) featureEl.innerHTML = '<div class="vc-loading">正在加载精选词卡...</div>';
+        if (chipsEl) chipsEl.innerHTML = '<div class="vc-loading" style="padding:12px 18px;">正在加载主题...</div>';
+        if (listEl) listEl.innerHTML = '<div class="vc-loading">正在加载 120 张词汇卡...</div>';
+      }
+
+      function renderError(message) {
+        const featureEl = document.getElementById('vc-feature-card');
+        const chipsEl = document.getElementById('vc-theme-chips');
+        const listEl = document.getElementById('vc-theme-sections');
+        if (featureEl) featureEl.innerHTML = `<div class="vc-empty">❌ ${esc(message)}</div>`;
+        if (chipsEl) chipsEl.innerHTML = '';
+        if (listEl) listEl.innerHTML = `<div class="vc-empty">词汇卡数据加载失败：${esc(message)}</div>`;
+      }
+
+      function setActiveTheme(themeKey) {
+        activeTheme = themeKey;
+        document.querySelectorAll('#vc-theme-chips .vc-theme-chip').forEach(el => {
+          el.classList.toggle('active', el.dataset.themeChip === themeKey);
+        });
+      }
+
+      function scrollToTheme(themeKey) {
+        setActiveTheme(themeKey);
+        const el = document.getElementById(`vc-theme-${themeKey}`);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function openLightbox(index) {
+        if (!flatCards.length) return;
+        currentIndex = (index + flatCards.length) % flatCards.length;
+        const card = flatCards[currentIndex];
+        const overlay = document.getElementById('vc-lightbox');
+        const imgEl = document.getElementById('vc-lightbox-image');
+        const themeEl = document.getElementById('vc-lightbox-theme');
+        const wordEl = document.getElementById('vc-lightbox-word');
+        const idEl = document.getElementById('vc-lightbox-id');
+        const metricsEl = document.getElementById('vc-lightbox-metrics');
+        if (!overlay || !imgEl || !themeEl || !wordEl || !idEl || !metricsEl) return;
+
+        imgEl.src = card.image_url;
+        imgEl.alt = `${card.word} 词汇卡`;
+        themeEl.textContent = `${card.theme_emoji} ${card.theme_name}`;
+        wordEl.textContent = card.word;
+        idEl.textContent = `${card.full_id} · ${currentIndex + 1} / ${flatCards.length}`;
+        metricsEl.innerHTML = `
+          <div class="vc-stat-item"><div class="vc-stat-value">${card.audit}</div><div class="vc-stat-label">审核分</div></div>
+          <div class="vc-stat-item"><div class="vc-stat-value">${card.quality}</div><div class="vc-stat-label">质量分</div></div>
+          <div class="vc-stat-item"><div class="vc-stat-value">${esc(card.theme)}</div><div class="vc-stat-label">主题编号</div></div>
+          <div class="vc-stat-item"><div class="vc-stat-value">${esc(card.word)}</div><div class="vc-stat-label">英文单词</div></div>`;
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        const overlay = document.getElementById('vc-lightbox');
+        if (overlay) overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      function moveLightbox(step) {
+        if (!flatCards.length) return;
+        openLightbox(currentIndex + step);
+      }
+
+      function render() {
+        const statsEl = document.getElementById('vc-stats');
+        const featureEl = document.getElementById('vc-feature-card');
+        const chipsEl = document.getElementById('vc-theme-chips');
+        const listEl = document.getElementById('vc-theme-sections');
+        if (!statsEl || !featureEl || !chipsEl || !listEl) return;
+
+        if (!flatCards.length) {
+          featureEl.innerHTML = '<div class="vc-empty">暂无词汇卡数据</div>';
+          chipsEl.innerHTML = '';
+          listEl.innerHTML = '<div class="vc-empty">暂无词汇卡数据</div>';
+          return;
+        }
+
+        const avgAudit = (flatCards.reduce((sum, item) => sum + (Number(item.audit) || 0), 0) / flatCards.length).toFixed(1);
+        const avgQuality = (flatCards.reduce((sum, item) => sum + (Number(item.quality) || 0), 0) / flatCards.length).toFixed(1);
+        const featured = [...flatCards].sort((a, b) => (Number(b.quality) || 0) - (Number(a.quality) || 0) || String(a.full_id).localeCompare(String(b.full_id), 'zh-CN'))[0];
+
+        statsEl.innerHTML = `
+          <div class="vc-stat-item"><div class="vc-stat-value">${flatCards.length}</div><div class="vc-stat-label">词汇卡总数</div></div>
+          <div class="vc-stat-item"><div class="vc-stat-value">${themeGroups.length}</div><div class="vc-stat-label">主题分类</div></div>
+          <div class="vc-stat-item"><div class="vc-stat-value">${avgAudit}</div><div class="vc-stat-label">审核均分</div></div>
+          <div class="vc-stat-item"><div class="vc-stat-value">${avgQuality}</div><div class="vc-stat-label">质量均分</div></div>`;
+
+        featureEl.innerHTML = `
+          <div class="vc-feature-top">
+            <div>
+              <div class="vc-feature-title">精选词卡</div>
+              <div class="vc-feature-word">${esc(featured.word)}</div>
+              <div class="vc-feature-meta">${featured.theme_emoji} ${esc(featured.theme_name)} · 更新于 ${esc(fmtTime(updatedAt))}</div>
+            </div>
+            <span class="vc-score-pill">质量 ${featured.quality}</span>
+          </div>
+          <img src="${featured.image_url}" alt="${esc(featured.word)} 词汇卡" loading="lazy">
+          <div class="vc-actions">
+            <button class="btn btn-primary" data-vocab-action="open-featured">🔍 放大查看</button>
+            <button class="btn btn-outline" data-theme-chip="${esc(featured.theme)}">📚 查看同主题</button>
+          </div>`;
+
+        chipsEl.innerHTML = themeGroups.map(group => `
+          <button class="vc-theme-chip ${group.key === activeTheme ? 'active' : ''}" data-theme-chip="${esc(group.key)}">
+            <span>${group.emoji}</span>
+            <span>${esc(group.name)}</span>
+            <span style="opacity:0.78;">${group.items.length}</span>
+          </button>`).join('');
+
+        listEl.innerHTML = themeGroups.map(group => `
+          <div class="vc-theme-block" id="vc-theme-${esc(group.key)}">
+            <div class="vc-theme-head">
+              <div>
+                <div class="vc-theme-title"><span>${group.emoji}</span><span>${esc(group.name)}</span></div>
+                <div class="vc-theme-count">${group.items.length} 张词汇卡 · 点击卡片可放大</div>
+              </div>
+              <button class="btn btn-outline btn-sm" data-vocab-action="scroll-top">回到顶部</button>
+            </div>
+            <div class="vc-card-grid">
+              ${group.items.map(card => `
+                <div class="vc-card" data-index="${card.index}" title="点击查看 ${esc(card.word)}">
+                  <img src="${card.image_url}" alt="${esc(card.word)} 词汇卡" loading="lazy">
+                  <div class="vc-card-body">
+                    <div class="vc-word">${esc(card.word)}</div>
+                    <div class="vc-card-sub">
+                      <div class="vc-card-id">${esc(card.full_id)}</div>
+                      <span class="vc-score-pill">${esc(String(card.quality))} 分</span>
+                    </div>
+                  </div>
+                </div>`).join('')}
+            </div>
+          </div>`).join('');
+      }
+
+      async function loadData(forceReload) {
+        if (loadingPromise && !forceReload) return loadingPromise;
+        renderLoading();
+        loadingPromise = fetch(apiUrl('/api/vocab-gallery'), { cache: 'no-cache' })
+          .then(async res => {
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return res.json();
+          })
+          .then(payload => {
+            const cards = Array.isArray(payload) ? payload : (payload.cards || []);
+            updatedAt = payload.updated_at || '';
+            const groups = new Map();
+
+            cards.forEach((item, idx) => {
+              if (!item || !item.img_filename) return;
+              const themeKey = item.theme || `T${idx + 1}`;
+              if (!groups.has(themeKey)) {
+                groups.set(themeKey, {
+                  key: themeKey,
+                  name: item.theme_name || themeKey,
+                  emoji: THEME_EMOJIS[themeKey] || '📘',
+                  items: []
+                });
+              }
+              groups.get(themeKey).items.push({
+                ...item,
+                theme: themeKey,
+                theme_name: item.theme_name || themeKey,
+                theme_emoji: THEME_EMOJIS[themeKey] || '📘',
+                audit: Number(item.audit) || 0,
+                quality: Number(item.quality) || 0,
+                image_url: item.image_url || `/api/vocab-images/${encodeURIComponent(item.img_filename)}`
+              });
+            });
+
+            themeGroups = Array.from(groups.values());
+            flatCards = themeGroups.flatMap(group => group.items);
+            flatCards.forEach((card, index) => { card.index = index; });
+            activeTheme = activeTheme || themeGroups[0]?.key || null;
+            render();
+          })
+          .catch(err => {
+            console.error('[VocabCards] load failed:', err);
+            renderError(err.message || '词汇卡数据加载失败');
+            if (typeof toast === 'function') toast('词汇卡数据加载失败', 'error');
+          })
+          .finally(() => {
+            loadingPromise = null;
+          });
+        return loadingPromise;
+      }
+
+      function bindEvents() {
+        if (bound) return;
+        bound = true;
+
+        const pageEl = document.getElementById('page-vocab-cards');
+        if (pageEl) {
+          pageEl.addEventListener('click', (event) => {
+            const overlay = event.target.closest('#vc-lightbox');
+            if (overlay && event.target === overlay) {
+              closeLightbox();
+              return;
+            }
+
+            const lbBtn = event.target.closest('[data-vocab-lightbox]');
+            if (lbBtn) {
+              const action = lbBtn.dataset.vocabLightbox;
+              if (action === 'close') closeLightbox();
+              else if (action === 'prev') moveLightbox(-1);
+              else if (action === 'next') moveLightbox(1);
+              return;
+            }
+
+            const cardEl = event.target.closest('.vc-card[data-index]');
+            if (cardEl) {
+              openLightbox(Number(cardEl.dataset.index || 0));
+              return;
+            }
+
+            const chipEl = event.target.closest('[data-theme-chip]');
+            if (chipEl) {
+              scrollToTheme(chipEl.dataset.themeChip);
+              return;
+            }
+
+            const actionEl = event.target.closest('[data-vocab-action]');
+            if (!actionEl) return;
+            const action = actionEl.dataset.vocabAction;
+            if (action === 'scroll-grid') {
+              document.getElementById('vc-grid-anchor')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else if (action === 'scroll-top') {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (action === 'open-featured' && flatCards.length) {
+              const featured = [...flatCards].sort((a, b) => (Number(b.quality) || 0) - (Number(a.quality) || 0) || String(a.full_id).localeCompare(String(b.full_id), 'zh-CN'))[0];
+              openLightbox(featured.index || 0);
+            }
+          });
+        }
+
+        document.addEventListener('keydown', (event) => {
+          const overlay = document.getElementById('vc-lightbox');
+          if (!overlay || !overlay.classList.contains('active')) return;
+          if (event.key === 'Escape') closeLightbox();
+          else if (event.key === 'ArrowLeft') moveLightbox(-1);
+          else if (event.key === 'ArrowRight') moveLightbox(1);
+        });
+      }
+
+      async function init() {
+        bindEvents();
+        if (!inited) {
+          renderLoading();
+          inited = true;
+        }
+        await loadData(false);
+      }
+
+      return { init };
+    })();
+
     // ============ 页面路由 ============
     function switchPage(page) {
       currentPage = page;
@@ -17116,6 +17732,7 @@ Style: ${stylePrompt}
         case 'card-lib': TemplateLibrary.render(); break;
         case 'ai-card': _updateAICardTmplCount(); break;
         case 'knowledge-cards': KnowledgeCards.init(); break;
+        case 'vocab-cards': VocabCards.init(); break;
         case 'prompt-lib': PromptLib.init(); break;
         case 'note-workshop': NoteWorkshop.init(); break;
         case 'promo':
@@ -17128,6 +17745,7 @@ Style: ${stylePrompt}
     const PAGE_TITLES = {
       dashboard: '📊 首页',
       'knowledge-cards': '✨ 生成卡片',
+      'vocab-cards': '🔤 词汇卡',
       'card-lib': '🎴 模板管理',
       invite: '💰 分享赚钱',
       account: '👤 我的账户',

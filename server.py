@@ -60,6 +60,7 @@ def _resolve_db_path():
 
 DB_PATH = _resolve_db_path()
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
+VOCAB_GALLERY_DIR = os.path.join(BASE_DIR, '_test_120vocab')
 BUILD_VERSION = '20260404i'  # v10.31: 英语知识卡片平台 + 教育蓝主题 + 前端精简5页
 
 # 积分套餐配置
@@ -1860,6 +1861,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
                 'keyCount': len(SERVER_GEMINI_API_KEYS),
                 'hasServerKey': bool(SERVER_GEMINI_API_KEY),
             })
+        elif path == '/api/vocab-gallery':
+            return self._get_vocab_gallery()
         elif path == '/api/warm-start-stats':
             try:
                 from _card_best_image import get_cache_stats, list_cached_cards
@@ -1924,6 +1927,8 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         elif path.startswith('/api/export/'):
             post_id = path.split('/')[-1]
             return self._export_post(post_id)
+        elif path.startswith('/api/vocab-images/'):
+            return self._serve_vocab_image(path)
         elif path.startswith('/api/note-images/'):
             return self._serve_note_image(path)
         elif path == '/api/generated-notes':
@@ -2544,6 +2549,55 @@ class APIHandler(http.server.SimpleHTTPRequestHandler):
         self._send_json({'message': '记录成功'})
 
     # ---- 导出 ----
+    def _get_vocab_gallery(self):
+        results_file = os.path.join(VOCAB_GALLERY_DIR, 'results.json')
+        if not os.path.isfile(results_file):
+            return self._send_json({'error': 'Vocab gallery data not found'}, 404)
+        try:
+            with open(results_file, 'r', encoding='utf-8') as f:
+                cards = json.load(f)
+        except Exception as e:
+            return self._send_json({'error': f'Failed to load vocab gallery: {e}'}, 500)
+
+        for card in cards:
+            img_filename = (card.get('img_filename') or '').strip()
+            if img_filename:
+                card['image_url'] = '/api/vocab-images/' + urllib.parse.quote(img_filename)
+
+        updated_at = datetime.fromtimestamp(os.path.getmtime(results_file)).isoformat(timespec='seconds')
+        return self._send_json({
+            'cards': cards,
+            'count': len(cards),
+            'updated_at': updated_at,
+        })
+
+    def _serve_vocab_image(self, path):
+        """Serve images from _test_120vocab/ directory safely."""
+        import posixpath
+        rel = path[len('/api/vocab-images/'):]
+        rel = urllib.parse.unquote(rel)
+        rel = posixpath.normpath(rel)
+        if not rel or rel in ('.', ''):
+            return self._send_json({'error': 'Invalid path'}, 403)
+        if rel.startswith('..') or rel.startswith('/') or ':' in rel or os.path.basename(rel) != rel:
+            return self._send_json({'error': 'Invalid path'}, 403)
+
+        full_path = os.path.join(VOCAB_GALLERY_DIR, rel)
+        if not os.path.isfile(full_path):
+            return self._send_json({'error': 'Image not found'}, 404)
+
+        ext = os.path.splitext(full_path)[1].lower()
+        mime_map = {'.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.gif': 'image/gif', '.webp': 'image/webp'}
+        content_type = mime_map.get(ext, 'application/octet-stream')
+        with open(full_path, 'rb') as f:
+            data = f.read()
+        self.send_response(200)
+        self.send_header('Content-Type', content_type)
+        self.send_header('Content-Length', str(len(data)))
+        self.send_header('Cache-Control', 'public, max-age=604800')
+        self.end_headers()
+        self.wfile.write(data)
+
     def _serve_note_image(self, path):
         """Serve images from xhs_notes/ directory safely."""
         import posixpath
